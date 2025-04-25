@@ -1,0 +1,8 @@
+{
+    "workbench.editor.autoLockGroups": {
+        "workbench.input.interactive": true
+    },
+    "workbench.editor.tabSizing": "fit",
+    "workbench.editor.titleScrollbarSizing": "large",
+    "workbench.editor.tabSizingFixedMinWidth": 100
+}

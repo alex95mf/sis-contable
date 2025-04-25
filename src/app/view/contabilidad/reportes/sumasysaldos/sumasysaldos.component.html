@@ -1,0 +1,361 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active-new titulo="Balance de Comprobación de Sumas y Saldos" 
+    filtroBoton="btnSalSum" cstyle="bg-gradient-primary text-white" 
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" 
+    icono="fa fa-money">
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+            <div class="row m-0">
+                <!-- <div class="col-sm-3 mt-1">
+                    <div class="input-group input-group-sm ">
+                        <div class="input-group-prepend">
+                            <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Período</span>
+                        </div>
+                        <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Periodo" [(ngModel)]="anioActual"  (keypress)="onlyNumber($event)">
+                    </div>
+                </div> -->
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" appendTo="body" [clearable]="true" [(ngModel)]="periodo"
+                            [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo"
+                            (ngModelChange)="periodoSelected($event,periodo)">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+
+    <!--                <app-cc-input-group-prepend label="Período" styleSpan="size-span-campo font-weight-bold">
+                        <p-calendar
+                        appendTo="body"
+                            (ngModelChange)="periodoSelected($event,periodo)"
+                            [readonlyInput]="true" 
+                            view="year" 
+                            dateFormat="yy" 
+                            [(ngModel)]="periodo" 
+                            [showIcon]="true" 
+                            class="ui-calendar ui-calendar-button"
+                            inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                            [inputStyle]="{'height':'30px','width':'5rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                        </p-calendar>
+                    </app-cc-input-group-prepend>  -->
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                
+                    <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select 
+                        (ngModelChange)="ChangeMesCierrePeriodos($event)"
+                            class="form-control" 
+                            id="elemento_pruebas"
+                            bindLabel="name"
+                            placeholder="-Todos-"
+                            appendTo="body"
+                            [clearable]="false"
+                            [searchable]="true"
+                            [disabled]=disabled
+                            [(ngModel)]="mes_actual">
+                            
+                            <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                {{item.name}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend> 
+                </div>
+                
+                <!--<div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Desde" styleSpan="size-span-campo font-weight-bold">
+                        <p-calendar (change)="FromOrToChange()"  dateFormat="dd/mm/yy"
+                            [readonlyInput]="true" [(ngModel)]="fromDatePicker" [showIcon]="true" inputId="icon">
+                        </p-calendar>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Hasta" styleSpan="size-span-campo font-weight-bold">
+                        <p-calendar (change)="FromOrToChange()"  dateFormat="dd/mm/yy"
+                            [readonlyInput]="true" [(ngModel)]="toDatePicker" [showIcon]="true" inputId="icon">
+                        </p-calendar>
+                    </app-cc-input-group-prepend>
+                </div>-->
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Niveles" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select  class="form-control form-control-sm custom-select"
+                        appendTo="body" [searchable]="true" 
+                        [(ngModel)]="nivelSeleccionado" 
+                        [clearable]="true" 
+                        [disabled]="permisions[0].editar == '0'">
+                        <!-- (ngModelChange)="rerender($event)"  -->
+                            <!--<ng-option value="">Seleccione Nivel</ng-option>-->
+                            <ng-option *ngFor="let d of lstNiveles" [value]="d">{{d}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+
+
+
+
+
+
+                <!--div class="col-sm-3" *ngIf="dataLength != undefined">
+                    <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-otro">
+                        <p-calendar view="year" dateFormat="yy"
+                            [readonlyInput]="true" [(ngModel)]="peridoSelecionado" [showIcon]="false" inputId="icon">
+                        </p-calendar>
+                    </app-cc-input-group-prepend>
+                </div>
+
+                
+                <div class="col-sm-3">
+                    <app-cc-input-group-prepend label="Clase" styleSpan="size-span-otro">
+                        <ng-select  class="form-control form-control-sm custom-select" appendTo="body" [searchable]="true" [(ngModel)]="claseSeleccionado" (ngModelChange)="rerender($event)" [clearable]="false" [disabled]="permisions[0].editar == '0'">
+                            <ng-option value="">SELECCIONAR CLASE</ng-option>
+                            <ng-option value="DEUDORA">DEUDORA</ng-option>
+                            <ng-option value="ACREEDORA">ACREEDORA</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-3">
+                    <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-otro">
+                        <ng-select  class="form-control form-control-sm custom-select" appendTo="body" [searchable]="true" [(ngModel)]="grupoSeleccionado" (ngModelChange)="rerender($event)" [clearable]="false" [disabled]="permisions[0].editar == '0'">
+                            <ng-option value="">SELECCIONAR GRUPO</ng-option>
+                            <ng-option *ngFor="let d of groupAccount" [value]="d.grupo">{{d.grupo}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div-->
+            </div>
+            <div class="row m-0">
+
+
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Gubernamental" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control form-control-sm custom-select" appendTo="body" 
+                        [clearable]="true" [(ngModel)]="gubernamental"
+                        (ngModelChange)="filterTipo($event)"
+                            >
+                            <ng-option aria-selected="true" [value]="SI">SI</ng-option>
+                            <ng-option [value]="NO">NO</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Desde" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control form-control-sm" [(ngModel)]="fecha_desde">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Hasta" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control form-control-sm" [(ngModel)]="fecha_hasta">
+                    </app-cc-input-group-prepend>
+                </div>
+
+
+
+                
+            </div>
+            <!-- <div class="row">
+                <div class="col-sm-3">
+                    <app-cc-input-group-prepend label="Desde" styleSpan="size-span-otro font-weight-bold">
+                        <input type="date"  class="form-control form-control-sm" [(ngModel)]="fromDatePicker" >
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-3">
+                    <app-cc-input-group-prepend label="Hasta" styleSpan="size-span-otro font-weight-bold">
+                        <input type="date" class="form-control form-control-sm" [(ngModel)]="toDatePicker" >
+                    </app-cc-input-group-prepend>
+                </div>
+            </div> -->
+
+            <div class="row m-0">
+                <div class="col">
+                    <div class="table-responsive" style="height:550px;overflow-y:auto;">
+                        <table class="table table-striped table-bordered table-k table-hover">
+                            
+                            <thead style="position: sticky; top: -2px; z-index: 1;">
+                                <tr>
+                                    <th  rowspan="3"  style="width: 130px;">Código</th>
+                                    <th  rowspan="3"  style="width: 160px;">Nombre</th>
+                                    <th  class=" text-center" colspan="2">Saldo Inicial</th>
+                                    <th  class=" text-center" colspan="2">Flujo</th>
+                                    <th  class=" text-center" colspan="2">Sumas</th>
+                                    <th  class=" text-center" colspan="2">Saldos</th>
+                                </tr>
+                                <tr>
+                                    <th style="min-width: 130px;" class=" text-right">Deudor</th>
+                                    <th style="min-width: 130px;" class=" text-right">Acreedor</th>
+                                    <th style="min-width: 130px;" class=" text-right">Deudor</th>
+                                    <th style="min-width: 130px;" class=" text-right">Acreedor</th>
+                                    <th style="min-width: 130px;" class=" text-right">Debe</th>
+                                    <th style="min-width: 130px;" class=" text-right">Haber</th>
+                                    <th style="min-width: 130px; " class=" text-right">Deudor</th>
+                                    <th style="min-width: 130px;" class=" text-right">Acreedor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="dataAccount.length == 0">
+                                    <td colspan="10" class="text-center"><h6 class="my-1">No hay datos registrados</h6></td>
+                                </tr>
+                                <ng-container *ngFor="let data of dataAccount, let i = index">
+                                    <tr>
+                                        <td class="vertical-align-middle m-2 h-2rem" 
+                                        [ngStyle]="{'text-decoration': data.tipo ==  'DETALLE'  ? 'underline' : '','color': data.tipo ==  'DETALLE'  ? '#2b94e2' : '', 'cursor': data.tipo ==  'DETALLE'  ? 'pointer' : '','font-weight': data.tipo ==  'DETALLE' ? 'bold' : ''}"
+                                        (click)=" data.tipo ==  'DETALLE' ? verDetalle(data.cuenta) : undefined">
+                                            <span>{{data.cuenta.replaceAll('.','')}}</span>
+                                        </td>
+                                        
+                                        <td class="vertical-align-middle m-2 h-2rem">{{data.descripcion_cuenta}}</td>
+                                        <td class="vertical-align-middle m-2 h-2rem text-right">$ {{data.saldo_inicial_deudor | number:'1.2-2'}}</td>
+                                        <td class="vertical-align-middle m-2 h-2rem text-right">$ {{data.saldo_inicial_acreedor | number:'1.2-2'}}</td>
+                                        <td class="vertical-align-middle m-2 h-2rem text-right">$ {{data.debe | number:'1.2-2'}}</td>
+                                        <td class="vertical-align-middle m-2 h-2rem text-right">$ {{data.haber | number:'1.2-2'}}</td>
+                                        <td class="vertical-align-middle m-2 h-2rem text-right">$ {{data.flujo_deudor | number:'1.2-2'}}</td>
+                                        <td class="vertical-align-middle m-2 h-2rem text-right">$ {{data.flujo_acreedor | number:'1.2-2'}}</td>
+                                        <td class="vertical-align-middle m-2 h-2rem text-right" [ngClass]="data.saldo_deudor != 0 && (data.clase == 'ACREEDORA' || data.clase == 'ACREDORAS') ? 'text-danger' : '' ">$ {{data.saldo_deudor | number:'1.2-2'}}</td>
+                                        <td class="vertical-align-middle m-2 h-2rem text-right" [ngClass]="data.saldo_acreedor != 0 && data.clase == 'DEUDORA' ? 'text-danger' : '' ">$ {{data.saldo_acreedor | number:'1.2-2'}}</td>
+                                    </tr>                      
+                                </ng-container>
+                                <tr *ngIf="dataAccount.length > 0" style="font-size: 13px;">
+                                        <td colspan="2" class="text-center font-weight-bold" >TOTALES</td>
+                                        <td  class="text-right font-weight-bold">$ {{TotalSumaInicialDebe() | number:'1.2-2'}}</td>
+                                        <td  class="text-right font-weight-bold">$ {{TotalSumaInicialHaber() | number:'1.2-2'}}</td>
+                                        <td  class="text-right font-weight-bold">$ {{TotalSumaDebe() | number:'1.2-2'}}</td>
+                                        <td  class="text-right font-weight-bold">$ {{TotalSumaHaber() | number:'1.2-2'}}</td>
+                                        <td  class="text-right font-weight-bold">$ {{TotalSumaFlujoDeudor() | number:'1.2-2'}}</td>
+                                        <td  class="text-right font-weight-bold">$ {{TotalSumaFlujoAcredor() | number:'1.2-2'}}</td>
+                                        <td  class="text-right font-weight-bold">$ {{TotalSumaSaldoDebe() | number:'1.2-2'}}</td>
+                                        <td  class="text-right font-weight-bold">$ {{TotalSumaSaldoHaber() | number:'1.2-2'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> 
+            <!-- <div class="mt-5">
+                <p-table 
+                    [value]="dataAccount"
+                    [scrollable]="true"
+                    scrollHeight="600px" 
+                    styleClass="p-datatable-gridlines"
+                    [tableStyle]="{'min-width': '50rem'}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th  rowspan="3">Código</th>
+                            <th  rowspan="3">Nombre</th>
+                            <th  class=" text-center" colspan="2">Saldo Inicial</th>
+                            <th  class=" text-center" colspan="2">Flujo</th>
+                            <th  class=" text-center" colspan="2">Sumas</th>
+                            <th  class=" text-center" colspan="2">Saldos</th>
+                        </tr>
+                        <tr>
+                            <th style="min-width: 100px;" class=" text-right">Deudor</th>
+                            <th style="min-width: 190px;" class=" text-right">Acreedor</th>
+                            <th style="min-width: 100px;" class=" text-right">Deudor</th>
+                            <th style="min-width: 100px;" class=" text-right">Acreedor</th>
+                            <th style="min-width: 100px;" class=" text-right">Debe</th>
+                            <th style="min-width: 100px;" class=" text-right">Haber</th>
+                            <th style="min-width: 100px; " class=" text-right">Deudor</th>
+                            <th style="min-width: 100px;" class=" text-right">Saldos</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-data>
+                        <tr>
+                            <td class="vertical-align-middle m-2 h-2rem"><span>{{data.cuenta.replaceAll('.','')}}</span></td>
+                            <td class="vertical-align-middle m-2 h-2rem">{{data.descripcion_cuenta}}</td>
+                            <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.saldo_inicial_deudor)}}</td>
+                            <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.saldo_inicial_acreedor)}}</td>
+                            <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.debe)}}</td>
+                            <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.haber)}}</td>
+                            <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.flujo_deudor)}}</td>
+                            <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.flujo_acreedor)}}</td>
+                            <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.saldo_deudor)}}</td>
+                            <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.saldo_acreedor)}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr>
+                            
+                            <td colspan="2" class="text-right">Totales</td>
+                            <td  class="text-right">$ {{formatNumber(TotalSumaDebe())}}</td>
+                            <td  class="text-right">$ {{formatNumber(TotalSumaHaber())}}</td>
+                            <td  class="text-right">$ {{formatNumber(TotalSumaDebe())}}</td>
+                            <td  class="text-right">$ {{formatNumber(TotalSumaHaber())}}</td>
+                            <td  class="text-right">$ {{formatNumber(TotalSumaFlujoDeudor())}}</td>
+                            <td  class="text-right">$ {{formatNumber(TotalSumaFlujoAcredor())}}</td>
+                            <td  class="text-right">$ {{formatNumber(TotalSumaSaldoDebe())}}</td>
+                            <td  class="text-right">$ {{formatNumber(TotalSumaSaldoHaber())}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                
+            </div> -->
+
+
+
+
+
+
+
+
+
+                <!--<div class="mt-5">
+                    <p-table 
+                        [value]="dataAccount"
+                        [scrollable]="true"
+                        scrollHeight="600px" 
+                        styleClass="p-datatable-gridlines"
+                        [tableStyle]="{'min-width': '50rem'}">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th  rowspan="3">Código</th>
+                                <th  rowspan="3">Nombre</th>
+                                <th  class=" text-center" colspan="2">Saldo Inicial</th>
+                                <th  class=" text-center" colspan="2">Flujo</th>
+                                <th  class=" text-center" colspan="2">Sumas</th>
+                                <th  class=" text-center" colspan="2">Saldos</th>
+                            </tr>
+                            <tr>
+                                <th style="min-width: 100px;" class=" text-right">Deudor</th>
+                                <th style="min-width: 190px;" class=" text-right">Acreedor</th>
+                                <th style="min-width: 100px;" class=" text-right">Deudor</th>
+                                <th style="min-width: 100px;" class=" text-right">Acreedor</th>
+                                <th style="min-width: 100px;" class=" text-right">Debe</th>
+                                <th style="min-width: 100px;" class=" text-right">Haber</th>
+                                <th style="min-width: 100px; " class=" text-right">Deudor</th>
+                                <th style="min-width: 100px;" class=" text-right">Saldos</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-data>
+                            <tr>
+                                <td class="vertical-align-middle m-2 h-2rem"><span>{{data.cuenta.replaceAll('.','')}}</span></td>
+                                <td class="vertical-align-middle m-2 h-2rem">{{data.descripcion_cuenta}}</td>
+                                <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.saldo_inicial_deudor)}}</td>
+                                <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.saldo_inicial_acreedor)}}</td>
+                                <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.debe)}}</td>
+                                <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.haber)}}</td>
+                                <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.flujo_deudor)}}</td>
+                                <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.flujo_acreedor)}}</td>
+                                <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.saldo_deudor)}}</td>
+                                <td class="vertical-align-middle m-2 h-2rem text-right">{{formatNumber(data.saldo_acreedor)}}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <tr>
+                                
+                                <td colspan="2" class="text-right">Totales</td>
+                                <td  class="text-right">$ {{formatNumber(TotalSumaDebe())}}</td>
+                                <td  class="text-right">$ {{formatNumber(TotalSumaHaber())}}</td>
+                                <td  class="text-right">$ {{formatNumber(TotalSumaDebe())}}</td>
+                                <td  class="text-right">$ {{formatNumber(TotalSumaHaber())}}</td>
+                                <td  class="text-right">$ {{formatNumber(TotalSumaFlujoDeudor())}}</td>
+                                <td  class="text-right">$ {{formatNumber(TotalSumaFlujoAcredor())}}</td>
+                                <td  class="text-right">$ {{formatNumber(TotalSumaSaldoDebe())}}</td>
+                                <td  class="text-right">$ {{formatNumber(TotalSumaSaldoHaber())}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    
+                </div>-->
+                </fieldset>
+            </div>
+        </div>
+    </app-button-radio-active-new>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spBalComRep"></cc-spiner-procesar>

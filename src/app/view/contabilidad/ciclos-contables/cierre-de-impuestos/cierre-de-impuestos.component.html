@@ -1,0 +1,77 @@
+<div class="mt-4 mb-5 pb-2">
+    <app-button-radio-active titulo="Cierre de Impuestos" filtroBoton="btnCierreImpuesto"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="far fa-check-square">
+        <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado">
+            <div class="row mt-0 p-2">
+                
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Desde" styleSpan="size-span-campo font-weight-bold">
+                        <p-calendar id="idNominaDatef" dateFormat="dd/mm/yy" [readonlyInput]="true"
+                            [(ngModel)]="fromDatePicker" [showIcon]="true" inputId="icon">
+                        </p-calendar>
+                        <!--ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control" format="yyyy-MM-dd" (ngModelChange)="FromOrToChange()">
+                        </ejs-datepicker-->
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Tipo Cierre" styleSpan="size-span-campo">
+                        <ng-select [clearable]=false  class="form-control form-control-sm custom-select">
+                            <option [value]="0">Todos</option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="mt-0 p-2">
+                <div class="col-12 filters p-0">
+                    
+                    <div class="justify-content-center">
+                        <div class="cmb-2 content-tabla-general content-tabla_editable">
+                            <table class="table">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th style="width: 10%;">Fecha</th>
+                                        <th style="width: 10%;">Cta. Contable</th>
+                                        <th style="width: 20%;">Denominación</th>
+                                        <th style="width: 5%;">A S</th>
+                                        <th style="width: 5%;">T M</th>
+                                        <th style="width: 5%;">Debe</th>
+                                        <th style="width: 5%;">Haber</th>
+                                        <th style="width: 10%;">Partida Cod.</th>
+                                        <th style="width: 20%;">Partida Nombre</th>
+                                        <th style="width: 10%;">Partida Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="w-full">
+                                    <tr *ngIf="cierreSaldos.length == 0">
+                                        <td colspan="10" class="text-center">
+                                            <h6 class="my-1">No hay datos</h6>
+                                        </td>
+                                    </tr>
+                                    <tr  *ngFor="let d of cierreSaldos, let i = index" class="text-center" style="width: 100%;cursor: pointer; " >
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template>
+    </app-button-radio-active>
+    <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCierreSaldos"></cc-spiner-procesar>
+</div>
+

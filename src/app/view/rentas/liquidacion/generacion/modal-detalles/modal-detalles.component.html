@@ -1,0 +1,39 @@
+<!-- <div class="row justify-content-center">
+    <div class="col-12">
+        <div class="mt-4"> -->
+            <app-button-radio-active titulo="Lista de productos" filtroBoton="btnroductFac"
+                cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+                <div class="row mt-2 mb-2">
+                    <div class="col-12 filters">
+                        <div class="table-responsive responsive-table">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="table no-footer table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th style="text-align: left;padding-left: 10px;">Descripción</th>
+                                        <th style="text-align: center;">Valor unitario</th>
+                                        <th style="text-align: center;">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngFor="let dt of dataDT; let i = index">
+                                        <!-- style="cursor:pointer;" -->
+                                        <td style="width: 50%;">{{ dt.nombre_detalle }}</td>
+                                        <td *ngIf="dt.valor == null" style="width: 35%;text-align: right;">No asignado</td>
+                                        <td *ngIf="dt.valor != null" style="width: 35%;text-align: right;">{{ dt.valor }}</td>
+                                        <td style="text-align: center;width: 15%;">
+                                            <input *ngIf="dt.valor == null" disabled type="checkbox" style="cursor: pointer;">
+                                            <input *ngIf="dt.valor != null" [disabled]="dt.estado_tarifa == 'I' || dt.estado == 'I'" type="checkbox" style="cursor: pointer;" [(ngModel)]="dt.action">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        <!-- </div>
+    </div>
+</div> -->
+<cc-spiner-procesar ltexto="Cargando datos" lTipo="spModalDetalles"></cc-spiner-procesar>

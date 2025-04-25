@@ -1,0 +1,354 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Fichero de Bodega" filtroBoton="btnsBodega" icono="fas fa-user-cog" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row justify-content-center">
+            <div class="col " *ngIf="permisions?.length > 0 ">
+                <div>
+                    <div class="tab_container">
+                        <input type="radio" name="tabs" checked class="invisible">
+                        <label class="invisible lab"><br></label>
+
+                        <input id="tab3" type="radio" name="tabs" (click)="dinamicoBotones(1)" checked>
+                        <label for="tab3" class="lab">
+                        <i class="fa fa-stack-exchange" aria-hidden="true"></i>
+                        <span>Bodega</span>
+                </label>
+
+                        <input id="tab4" type="radio" (click)="dinamicoBotones(2)" name="tabs">
+                        <label class="lab" for="tab4">
+                    <i class="fa fa-minus-square" aria-hidden="true"></i>
+                    <span>Estructura</span>
+                </label>
+
+                        <input id="tab1" type="radio" (click)="dinamicoBotones(3)" name="tabs">
+                        <label class="lab" for="tab1">
+                    <i class="fa fa-road" aria-hidden="true"></i>
+                    <span>Stock por bodegas</span>
+                </label>
+
+                        <input type="radio" name="tabs" class="invisible">
+                        <label class="invisible lab "><br></label>
+                        <section id="content1" class="tab-content">
+                            <div class="row mt-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre Producto</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="nameProduct">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Stock producto</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="stokProduct">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fila</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="FilaProduct">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="addressProduct">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Unidad de Medida</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="udmProduct">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Columna</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="columProduct">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ciudad</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="CiudadProduct">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre Bodega</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="bodeganameProduct">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Número de parte</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="numParteProduct">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="telfProduct">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sucursal</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="sucursalProduct">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Código Estructura</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="codigoProduct">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="content3" class="tab-content">
+                            <div class="row mt-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
+                                        </div>
+                                        <input placeholder="Ingrese Nombre" type="text" [(ngModel)]="nombreBodega" class="form-control form-control-sm" [disabled]="permisions[0].editar == '0' || !disabledBodega" id="Idnombre">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Empresa</span>
+                                        </div>
+                                        <select [(ngModel)]="empresaSeleccionado" class="form-control form-control-sm custom-select" [disabled]="permisions[0].editar == '0' || !disabledBodega" (ngModelChange)="obtenerSucursal($event)">
+                                            <option *ngFor="let d of dataEmpresa" [value]="d.id_empresa">
+                                                {{d.nombre_comercial}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ciudad</span>
+                                        </div>
+                                        <select [(ngModel)]="ciudadSeleccionado" class="form-control form-control-sm custom-select" [disabled]="permisions[0].editar == '0' || !disabledBodega">
+                                            <option *ngFor="let d of dataCatalogo['CIUDAD']" [value]="d.valor">
+                                                {{d.valor}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                                        </div>
+                                        <input placeholder="Ingrese Dirección" type="text" [(ngModel)]="direccionBodega" class="form-control form-control-sm" [disabled]="permisions[0].editar == '0' || !disabledBodega" id="IdAddress">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sucursal</span>
+                                        </div>
+                                        <select [(ngModel)]="sucursalSeleccionado" class="form-control form-control-sm custom-select" [disabled]="permisions[0].editar == '0' || !disbledSucursal || !disabledBodega" (ngModelChange)="obtenerUsuario($event)">
+                                            <option *ngFor="let d of dataSucursal" [value]="d.id_sucursal">
+                                                {{d.nombre}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
+                                        </div>
+                                        <select class="form-control form-control-sm custom-select" [(ngModel)]="estadoBodega" [disabled]="permisions[0].editar == '0' || !disabledBodega">
+                                            <option value="A">Activo</option>
+                                            <option value="I">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2  mb-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+                                        </div>
+                                        <input placeholder="Ingrese Teléfono" type="text" [(ngModel)]="telefono" class="form-control form-control-sm" (keypress)="inputNumVal($event)" maxlength="10" [disabled]="permisions[0].editar == '0' || !disabledBodega" id="IdTelefono">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Encargado</span>
+                                        </div>
+                                        <select [(ngModel)]="userSeleccionado" class="form-control form-control-sm custom-select" [disabled]="permisions[0].editar == '0' || !disbledUser|| !disabledBodega">
+                                            <option *ngFor="let d of dataUsers" [value]="d.id_usuario">{{d.nombre}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 switch-container">
+                                    <div class="input-group input-group-sm mt-1  switch-container ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Stock menor 0</span>
+                                        </div>
+                                        <input type="checkbox" [(ngModel)]="senCero" class="form-control form-control-sm" [disabled]="permisions[0].editar == '0' || !disabledBodega">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="content4" class="tab-content  mb-2">
+                            <div class="row mt-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bodega</span>
+                                        </div>
+                                        <select [(ngModel)]="bodegaSelect" class="form-control form-control-sm custom-select" [disabled]="permisions[0].editar == '0' || !disabledEstructura">
+                                            <option *ngFor="let d of dataBodega" [value]="d.id_bodega_cab">
+                                                {{d.nombre}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fila</span>
+                                        </div>
+                                        <input placeholder="Ingrese fila" type="text" [(ngModel)]="filaEstruc" class="form-control form-control-sm" [disabled]="permisions[0].editar == '0' || !disabledEstructura" id="IdFilaEs">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Código</span>
+                                        </div>
+                                        <input placeholder="Ingrese código" type="text" [(ngModel)]="codigoEstruc" class="form-control form-control-sm" [disabled]="permisions[0].editar == '0' || !disabledEstructura" id="IdCodigoEs">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2 mb-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo</span>
+                                        </div>
+                                        <select [(ngModel)]="tipoAlmaSelect" class="form-control form-control-sm custom-select" [disabled]="permisions[0].editar == '0' || !disabledEstructura">
+                                            <option *ngFor="let d of dataCatalogo['TIPO ALMACENAMIENTO']"
+                                                [value]="d.valor">{{d.valor}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Columna</span>
+                                        </div>
+                                        <input placeholder="Ingrese columna" type="text" [(ngModel)]="columnaEstruc" class="form-control form-control-sm" [disabled]="permisions[0].editar == '0' || !disabledEstructura" id="IdColumnaEs">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="content1" class="tab-content cont1 mb-2" style="margin-bottom: 20px;">
+                            <div class="row justify-content-center mb-2">
+                                <div class="col-md-12">
+                                    <div class="table-responsive responsive-table">
+                                        <table datatable [dtOptions]="dtOptions" id="FicheroMover" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                                            <thead class="thead-dark text-center">
+                                                <tr>
+                                                    <!-- <th style="text-align: center;">Id_producto</th> -->
+                                                    <th style="text-align: start;padding-left: 30px;">Nombre producto</th>
+                                                    <th style="text-align: start;padding-left: 30px;">Numero parte</th>
+                                                    <th style="text-align: start;padding-left: 30px;">Nombre sucursal</th>
+                                                    <th style="text-align: start;padding-left: 30px;">Nombre bodega</th>
+                                                    <th style="text-align: start;padding-left: 30px;">Stock</th>
+                                                    <th style="text-align: start;padding-left: 30px;">Dirección</th>
+                                                    <th style="text-align: start;padding-left: 30px;">Teléfono</th>
+                                                    <th style="text-align: start;padding-left: 30px;">Fila</th>
+                                                    <th style="text-align: start;padding-left: 30px;">Columna</th>
+                                                    <th style="text-align: start;padding-left: 30px;">Código Estructura</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="validaDtStock">
+                                                <tr *ngFor="let dt of dataStockBodega" (click)="showInfoStock(dt)" style="cursor:pointer;text-align:center;">
+                                                    <!-- <td style="text-align:center;">{{ dt.id_producto }}</td> -->
+                                                    <td style="text-align:start;padding-left: 30px;">{{ dt.nombre_producto }}</td>
+                                                    <td style="text-align:start;padding-left: 30px;">{{ dt.num_parte }}</td>
+                                                    <td style="text-align:start;padding-left: 30px;">{{ dt.nombre_sucursal }}</td>
+                                                    <td style="text-align:start;padding-left: 30px;">{{ dt.nombre_bodega }}</td>
+                                                    <td style="text-align:start;padding-left: 30px;">{{ dt.cantidad }}</td>
+                                                    <td style="text-align:start;padding-left: 30px;">{{ dt.direccion_bodega }}</td>
+                                                    <td style="text-align:start;padding-left: 30px;">{{ dt.telefono }}</td>
+                                                    <td style="text-align:start;padding-left: 30px;">{{ dt.fila }}</td>
+                                                    <td style="text-align:start;padding-left: 30px;">{{ dt.columna }}</td>
+                                                    <td style="text-align:start;padding-left: 30px;">{{ dt.codigo }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="content3" class="tab-content">
+                            <div class="row justify-content-center" *ngIf="flag">
+                                <div class="col-md-12">
+                                    <app-tabs-bodega>
+                                    </app-tabs-bodega>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="content4" class="tab-content">
+                            <div class="row justify-content-center" *ngIf="flag">
+                                <div class="col-md-12">
+                                    <app-tabs-estructura>
+                                    </app-tabs-estructura>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spFBodega"></cc-spiner-procesar>

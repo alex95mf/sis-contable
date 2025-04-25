@@ -1,0 +1,38 @@
+<app-button-radio-active-new titulo="Edicion - Catalogos bienes" 
+cstyle="bg-gradient-primary text-white" 
+icono="fas fa-tasks" filtroBoton="btnsComprasP" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    
+
+<div class="row m-0">
+    <div class="col-12">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Informacion de Catalogo</legend>
+            <div class="row m-0">
+
+                <div class="col-12 col-md-12 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Codigo bienes" styleSpan="size-span-campo font-weight-bold">
+                        <input class="form-control" [(ngModel)]="catalogo.codigo" type="text"/>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+                <div class="row m-0">
+
+                <div class="col-12 col-md-12 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Descripcion" styleSpan="size-span-campo font-weight-bold">
+                        <input class="form-control" [(ngModel)]="catalogo.descripcion" type="text"/>
+                    </app-cc-input-group-prepend>
+                </div>
+
+            </div>
+
+
+        </fieldset>
+    </div>
+</div>
+
+
+
+
+    
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>

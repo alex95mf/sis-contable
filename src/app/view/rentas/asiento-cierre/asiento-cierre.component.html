@@ -1,0 +1,530 @@
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+
+
+ 
+
+
+
+<app-button-radio-active-new [titulo]="fTitle" 
+cstyle="bg-gradient-primary text-white" icono="fas fa-money-check-edit-alt" 
+filtroBoton="btnsAsiCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+
+<div class="row">
+    <div class="col-12">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Filtros</legend>
+            <div class="row m-0">
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Tipo Cierre" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [clearable]="false" [(ngModel)]="filter.tipo_cierre"
+                            [items]="cmb_tipo_cierre" bindValue="value" bindLabel="label" (change)="handleSelectTipo($event)">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_fecha_desde" type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-3 d-none">
+                    <app-cc-input-group-prepend label="Fecha hasta" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_fecha_hasta" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                    </app-cc-input-group-prepend>
+                </div>
+                 <div class="col-12 col-md-4 pt-0 pb-0">
+                    <div class="col text-right">
+                        <button class="btn btn-primary btn-sm ml-1 text-light" matTooltip="Buscar" (click)="consultar()">
+                            <i class="fas fa-search"></i> Consultar
+                        </button>
+
+                    </div>
+                </div> 
+
+            </div>
+
+             <div class="row m-0" [ngClass]="{'d-none': filter.tipo_cierre != 'CIE' || !existe}">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Cuenta de Ajuste" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" readonly class="form-control" [ngModel]="aggCuenta?.descripcion_original">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-secondary" (click)="expandCuentaAjuste()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-success" (click)="agregarCuenta()" [disabled]="btnAggCuentaAjusteDisabled">
+                                <i class="fas fa-plus"></i> Agregar
+                            </button>
+                        </div>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row m-0" [ngClass]="{'d-none': filter.tipo_cierre != 'NOM' || !existe }">
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Tipo de Asiento" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="tipo_contratos" class="form-control form-control-sm" [(ngModel)]="filter.tipo_asiento" [clearable]="true" (change)="consultaTipoAsiento($event)">
+                            <ng-option disabled [value]="0" disabled>Seleccione un tipo de Asiento</ng-option>
+                            <ng-option *ngFor="let ta of tipoAsientoList" [value]="ta.valor">{{ta.descripcion }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="filter.tipo_asiento != 'PAGADO_TERCEROS' ">
+                    <app-cc-input-group-prepend label="Tipo de Pago" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="tipo_pago" class="form-control form-control-sm" [(ngModel)]="tipoPago" [clearable]="true" [disabled]="filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'"> <!--(change)="getCuentaContableTipoPago()" -->
+                            <ng-option disabled [value]="0" disabled>Seleccione un tipo de Pago</ng-option>
+                            <ng-option *ngFor="let tp of tipoPagoSueldo" [value]="tp.value">{{tp.label }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="filter.tipo_asiento != 'PAGADO_TERCEROS' ">
+                    <app-cc-input-group-prepend label="Tipo de Contrato" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="tipo_contratos" class="form-control form-control-sm" [(ngModel)]="filter.tipo_contrato" [clearable]="true" (change)="geNumControl($event)" [disabled]="filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'">
+                            <ng-option disabled [value]="0" disabled>Seleccione un tipo de Contrato</ng-option>
+                            <ng-option *ngFor="let tc of tipoContratoList" [value]="tc.id_catalogo">{{tc.cat_nombre }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+               
+                <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="filter.tipo_asiento != 'PAGADO_TERCEROS' ">
+                    <app-cc-input-group-prepend label="Codigo cuenta contable" styleSpan="size-span-campo font-weight-bold">
+                        <input class="form-control" [(ngModel)]="codigo_cuenta_contable" type="text" readonly/>
+                        <button class="btn btn-primary btn-sm" 
+                                (click)="modalCuentaContable()" 
+                                [disabled]="validacion || formReadOnly || cuentaDisabled || filter.tipo_asiento == 'PAGADO_NOMINA' ||
+                                 filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'" > 
+                                 Consultar
+                        </button>
+                    </app-cc-input-group-prepend>
+                </div>
+        
+                <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="filter.tipo_asiento != 'PAGADO_TERCEROS' ">
+                    <app-cc-input-group-prepend label="Nombre cuenta contable" styleSpan="size-span-campo font-weight-bold">
+                        <input class="form-control" [(ngModel)]="descripcion_cuenta" type="text" readonly/>
+                        
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="filter.tipo_asiento != 'PAGADO_TERCEROS' ">
+                    <app-cc-input-group-prepend label="Número de Control" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="num_control" class="form-control form-control-sm" [(ngModel)]="filter.id_num_control" [clearable]="true" [disabled]="filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'">
+                            <ng-option disabled [value]="0" disabled>Seleccione un tipo de Contrato</ng-option>
+                            <ng-option *ngFor="let nc of numeros_control" [value]="nc.id">{{nc.num_documento}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+               
+                
+                <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="filter.tipo_asiento == 'PAGADO_TERCEROS' ">
+                    <app-cc-input-group-prepend label="Rubros Pagos a Terceros" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="rubros_pagos_terceros" class="form-control form-control-sm" [(ngModel)]="filter.rubros_pagos_terceros" [clearable]="true">
+                            <ng-option disabled [value]="0" disabled>Seleccione un Rubro</ng-option>
+                            <ng-option *ngFor="let r of rubPagoTerceros" [value]="r.rub_codigo">{{r.rub_descripcion }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row m-0">
+                <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="verBanco">
+                  
+                    <app-cc-input-group-prepend label="Cuenta Bancaria" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                            [(ngModel)]="cuentaBanco" [disabled]="formValid" >
+                            <ng-option [value]="0" disabled>Chosee.. </ng-option>
+                            <ng-option *ngFor="let item of listaCuentas"
+                                [value]="item">{{item.name_banks + ' ' + item.num_cuenta }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            
+            <div class="row m-0" [hidden]="datosGuard">
+                <!-- <div class="col-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span style="width:140px;" class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Tipo Cierre</span>
+                        </div>
+                        <ng-select [hidden]="datosGuard" readonly disabled id="estado" class="form-control form-control-sm" [(ngModel)]="asientoGuard.tipo" maxlength="5">
+                            <ng-option disabled [value]="0">Seleccione un Tipo Cierre</ng-option>
+                            <ng-option *ngFor="let op of tipos" [value]="op.value">
+        
+                                {{ op.label }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div> -->
+                <!-- col-1.425 -->
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Nro. Documento</span></div>
+                        <input [hidden]="datosGuard" readonly type="text" class="form-control form-control-sm" readonly [(ngModel)]="asientoGuard.num_documento" placeholder="No.">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0" [hidden]="datosGuard">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Estado</span></div>
+                        <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                            <i placement="bottom" [ngbTooltip]="(asientoGuard.estado == 'A') ? 'Activo' :  ''" [class]="(asientoGuard.estado == 'A') ? 'fas fa-circle text-success' : ((asientoGuard.estado == 'I') ? 'fas fa-circle text-danger' :  '')">
+                            </i>
+                            {{ (asientoGuard.estado == 'A') ? 'Activo'   : ((asientoGuard.estado == 'I') ? 'Inactivo' : '') }}
+                        </div>
+                    </div>
+                </div>
+                <!-- col-2.675 -->
+                <!-- <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Fecha</span></div>
+                    <input [hidden] ="datosGuard" readonly type="date" class="form-control form-control-sm" [(ngModel)]="asientoGuard.fecha">
+                </div>
+            </div> -->
+        
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+
+    
+
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+           
+            <a (click)="handleChange($event)"  class="nav-item nav-link active font-weight-bold" id="nav-asiento-tab" data-toggle="tab" href="#nav-asiento" role="tab"
+                aria-controls="nav-asiento" aria-selected="false">Asiento</a>
+            <a (click)="handleChange($event)" class="nav-item nav-link font-weight-bold" id="nav-nomina-tab" data-toggle="tab" href="#nav-nomina" role="tab"
+                aria-controls="nav-nomina" aria-selected="true" [ngClass]="{'d-none': filter.tipo_cierre != 'NOM' || filter.tipo_asiento == 'PAGADO_NOMINA' || filter.tipo_asiento == 'PAGADO_APORTES' || filter.tipo_asiento == 'PAGADO_PRESTAMOS'}">Nomina</a>
+        </div>
+    </nav>
+
+    <div class="tab-content mb-3" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-asiento" role="tabpanel" aria-labelledby="nav-asiento-tab">
+            <div class="row justify-content-start pt-2">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right btn-add">
+                    <div class="top_table_header">
+                        <button type="button" class="btn btn-success btn-sm btn_add_detalle"
+                            [disabled]="formReadOnly"
+                            title="Inserte nuevo registro" (click)="addFields()">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2 mb-3">
+                <div class="col-sm">
+
+
+
+                                
+                    <div class="table-responsive" style="max-height: 600px; overflow-y: scroll;">
+                        <table class="table table-k table-hover table-bordered no-footer table-striped mb-0" style="min-width: 1800px;">
+                            <thead class="sticky-header ">
+                                <tr class="text-center">
+                                    <th [hidden]="formReadOnly" class="headcol" style="text-align: center;width: 70px; height: 32px; "></th>
+                                    <th style="min-width: 100px;">Fecha</th>
+                                    <th style="min-width: 100px;">Cta. Contable</th>
+                                    <th style="min-width: 200px;">Denominación</th>
+                                    <th style="min-width: 50px;">A S</th>
+                                    <th style="min-width: 50px;">T M</th>
+                                    <th style="min-width: 80px;">Debe</th>
+                                    <th style="min-width: 80px;">Haber</th>
+                                    <th style="min-width: 100px;">Partida Cod.</th>
+                                    <th style="min-width: 200px;">Partida Nombre</th>
+                                    <th style="min-width: 200px;" 
+                                        *ngIf="filter.tipo_cierre == 'PAGORENTA' || filter.tipo_cierre == 'PAGOIVA'">
+                                        Partida presupuestaria
+                                    </th>
+                                    <th style="min-width: 100px;">Tipo Presupuesto</th>
+                                    <th style="min-width: 100px;">Tipo Afectación</th>
+                                    <th style="min-width: 100px;">Partida Valor</th>
+                                    <th style="min-width: 80px;">Devengado</th>
+                                    <th style="min-width: 80px;">Cobrado/Pagado</th>
+                                    <th style="min-width: 100px;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="cierres.length == 0">
+                                    <td colspan="16" class="text-center">
+                                        <h6 class="my-1">No hay datos</h6>
+                                    </td>
+                                </tr>
+                                <ng-container *ngFor="let d of cierres, let i = index">
+                                    <tr [ngClass]="{'table-warning': d.actualizado ?? false, 'table-danger': d.tipo_cuenta == 'GRUPO'}">
+                                        <td [hidden]="formReadOnly" class="headcol"  style="text-align: center; height: 45px; width: 70px; vertical-align: middle; ">
+                                            <div class="btn-group">
+                                            <button type="button" (click)="deleteFields(i,d.agregada)"
+                                                [hidden]="!d.agregada"
+                                                class="btn btn-danger btn-sm tooltip-test mt-2"
+                                                title="Remover registro">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                            <button type="button" (click)="expandCuentasContables(i)"
+                                                [disabled]="permissions.agregar == '0'"
+                                                class="btn btn-success btn-sm tooltip-test mt-2 ml-1"
+                                                title="Agregar Cuenta">
+                                                <i class="far fa-search"></i>
+                                            </button>
+                                            <!-- <button type="button" [disabled]="!f.auxiliar" 
+                                                (click)="onClicConsultaAuxiliar(i)"
+                                                class="btn btn-warning btn-sm mt-2 ml-1"
+                                                matTooltip="Seleccionar Auxiliar">
+                                                <i class="far fa-clone"></i>
+                                            </button> -->
+                                            </div>
+                                        </td>
+                                        <td class="text-center">{{d.fecha | date:'dd/MM/yyyy'}}</td>
+                                        <!-- <td class="text-center">{{d.fk_cueta_contable}}</td> -->
+                                        <td >
+                                            {{d.cuenta_contable ?? d.cuenta_deudora}}<br>
+                                            <small class="text-muted">{{ d.tipo_cuenta }}</small>
+                                        </td>
+                                        <td >{{d.cuenta_contable_nombre ?? d.nombre_cuenta_acreedora}}</td>
+                                        <td >{{d.asiento}}</td>
+                                        <td >{{d.t_m}}</td>
+                                        <!-- <td class="text-right">{{(d.debe == 0 || d.debe == null) ? '-' : '$' + (d.debe | number:'1.2-2')}}</td>
+                                        <td class="text-right">{{(d.haber == 0 || d.haber == null) ? '-' : '$' + (d.haber | number:'1.2-2')}}</td> -->
+                                        <td>
+                                            <span [hidden]="!formReadOnly">{{(d.debe == 0 || d.debe == null) ? '-' : '$' + (d.debe | number:'1.2-2')}}</span>
+                                            <input [hidden]="formReadOnly" style="width: 120px;" [(ngModel)]="d.debe" currencyMask
+                                                class="form-control form-control-sm pr-1"
+                                                 (ngModelChange)="EventoNumberAsiento(i,'D')"/>
+                                        </td>
+                                        <td >
+                                            <span [hidden]="!formReadOnly">{{(d.haber == 0 || d.haber == null) ? '-' : '$' + (d.haber | number:'1.2-2')}}</span>
+                                            <input [hidden]="formReadOnly" style="width: 120px;" [(ngModel)]="d.haber" currencyMask
+                                                class="form-control form-control-sm pr-1 text-right"
+                                                (ngModelChange)="EventoNumberAsiento(i,'C')" />
+                                        </td>
+                                        <td >{{d.partida_presupuestaria_cod ?? d.codigo_presupuesto}}</td>
+                                        <td >{{d.partida_presupuestaria_desc ?? d.nombre_codigo_presupuesto}}</td>
+                                        <td *ngIf="filter.tipo_cierre == 'PAGORENTA' || filter.tipo_cierre == 'PAGOIVA'">{{d.codigopartida}}</td>
+                                        <td >{{d.tipo_presupuesto}}</td>
+                                        <td >{{d.tipo_afectacion}}</td>
+                                        <td class="text-right">$ {{d.partida_presupuestaria_val | number:'1.2-2'}}</td>
+                                        <td class="text-right">$ {{d.devengado | number:'1.2-2'}}</td>
+                                        <td class="text-right">$ {{d.cobrado_pagado | number:'1.2-2'}}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-secondary ml-1" (click)="expandCambioCuenta(d, i)" [disabled]="!allowEdit">
+                                                <i class="fas fa-file-invoice-dollar"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-info ml-1" (click)="expandCambioCuentaEmi(d, i)" [ngClass]="{'d-none': filter.tipo_cierre != 'EMI'}">
+                                                <i class="fas fa-sync-alt"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                                <tr>
+                                    <td [hidden]="formReadOnly" colspan="1"></td>
+                                    <td colspan="5"></td>
+                                    <td class="text-right">$ {{ totalDebe | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ totalHaber | number:'1.2-2' }}</td>
+                                    <td colspan="9"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-nomina" role="tabpanel" aria-labelledby="nav-nomina-tab">
+            <div class="mt-5">
+                <p-table [columns]="cols" 
+                        [value]="RolGeneral" 
+                        [scrollable]="true" 
+                        scrollHeight="700px"
+                        [paginator]="false"
+                        [lazy]="true" 
+                        [loading]="loading"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [rowsPerPageOptions]="[10, 25, 50]" >
+                        
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th>
+                                <input class="d-none" type="checkbox" (change)="handleColumnCheck($event)">
+                            </th>
+                            <th [ngStyle]="{'font-size':'11px',
+                                    'min-width'
+                                    : col.field == 'linea'  ? '30px' 
+                                    : col.field == 'id_persona' ? '70px' 
+                                    : col.field == 'cedula' ? '80px'
+                                    : col.field == 'nro_control' ? '150px' 
+                                    : col.field == 'nro_orden_pago' ? '150px' 
+                                    : col.field == 'full_name' ? '200px'
+                                    : col.field == 'programa_nombre' ? '200px'
+                                    : col.field == 'area_nombre' ? '200px'
+                                    : col.field == 'dep_nombre' ? '200px'
+                                    : col.field == 'dias_trabajados' ? '80px' 
+                                    : '100px'}" *ngFor="let col of columns" 
+                            [class]="col.field == salario || col.class == 'two' ? 'd-flex justify-content-end' : ''">
+                                {{col.header | titlecase}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData  let-columns="columns">
+                        <tr style="font-size: 12px;height: 45px;"  [ngClass]="{'table-danger': rowData.total_diferencia <= 0 }">
+                            <td class="text-center">
+                                <input class="d-none"  *ngIf="rowData.linea!= 'TOTAL'" [(ngModel)]="rowData.aprobar" type="checkbox" (change)="handleRowCheck($event, rowData)" [disabled]="rowData.tiene_control">
+                            </td>
+                          
+                            <td [ngStyle]="{'font-size':'11px',
+                                    'min-width'
+                                    : col.field == 'linea'  ? '30px' 
+                                    : col.field == 'id_persona' ? '70px' 
+                                    : col.field == 'cedula' ? '80px'
+                                    : col.field == 'nro_control' ? '150px' 
+                                    : col.field == 'nro_orden_pago' ? '150px'  
+                                    : col.field == 'full_name' ? '200px'
+                                    : col.field == 'programa_nombre' ? '200px'
+                                    : col.field == 'area_nombre' ? '200px'
+                                    : col.field == 'dep_nombre' ? '200px'
+                                    : col.field == 'dias_trabajados' ? '80px' 
+                                    : '100px'}" *ngFor="let col of columns, let i = index" [ngClass]="{ 'd-flex justify-content-end' : col.field == salario || col.class == 'two', 'font-weight-bold': rowData.linea== 'TOTAL' }">
+                                <div [ngClass]="{'text-left': col.class == 'one' , 'text-right  font-small': col.class == 'two' }">
+                                    {{AsociacionElementType(rowData[col.field])}}
+                                </div>
+                            </td>
+                        </tr>
+                        
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr style="font-size: 12px;">
+                            <td class="EmptyTable" [attr.colspan]="25">
+                                No hay información para mostrar
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+
+   
+
+</app-button-radio-active-new>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renLiqAnulacion"></cc-spiner-procesar>
+
+<div id="PrintSection" [hidden]="true">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <!-- <h3>Documento: {{ documento.documento }}</h3> -->
+                                <h3>Fecha: {{ asientoCierre.fecha | date: 'dd/MM/yyyy' }}</h3>
+                                <!-- <h3>Estado: {{ (documento.estado == 'P') ? 'Pendiente' : documento.estado == 'E' ?
+                                    'Emitido' : (liquidacion.estado == 'A' ? 'Aprobado' : 'Anulado')}}</h3> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2">
+
+            <div class="row mt-2 mb-3">
+                <div class="col-8" [hidden]="datosGuard">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Nro. Documento</span></div>
+                        <input [hidden]="datosGuard" readonly type="text" class="form-control form-control-sm" readonly [(ngModel)]="asientoGuard.num_documento" placeholder="No.">
+                    </div>
+                </div>
+                <div class="col-4" [hidden]="datosGuard">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Estado</span></div>
+                        <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                            <i placement="bottom" [ngbTooltip]="(asientoGuard.estado == 'A') ? 'Activo' :  ''" [class]="(asientoGuard.estado == 'A') ? 'fas fa-circle text-success' : ((asientoGuard.estado == 'I') ? 'fas fa-circle text-danger' :  '')">
+                            </i>
+                            {{ (asientoGuard.estado == 'A') ? 'Activo'   : ((asientoGuard.estado == 'I') ? 'Inactivo' : '') }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row mt-2 mb-3">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered no-footer table-hover mb-0">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th style="width: 10%;">Fecha</th>
+                                    <th style="width: 10%;">Cta. Contable</th>
+                                    <th style="width: 20%;">Denominación</th>
+                                    <th style="width: 5%;">A S</th>
+                                    <th style="width: 5%;">T M</th>
+                                    <th style="width: 5%;">Debe</th>
+                                    <th style="width: 5%;">Haber</th>
+                                    <th style="width: 10%;">Partida Cod.</th>
+                                    <th style="width: 20%;">Partida Nombre</th>
+                                    <th style="width: 10%;">Partida Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="cierres.length == 0">
+                                    <td colspan="10" class="text-center">
+                                        <h6 class="my-1">No hay datos</h6>
+                                    </td>
+                                </tr>
+                                <ng-container *ngFor="let d of cierres, let i = index">
+                                    <tr>
+                                        <td class="text-center">{{d.fecha | date:'dd/MM/yyyy'}}</td>
+                                        <!-- <td class="text-center">{{d.fk_cueta_contable}}</td> -->
+                                        <td class="text-center">{{d.cuenta_contable}}</td>
+                                        <td class="text-center">{{d.cuenta_contable_nombre}}</td>
+                                        <td class="text-center">{{d.asiento}}</td>
+                                        <td class="text-center">{{d.t_m}}</td>
+                                        <td class="text-center">{{d.debe | number:'1.2-2'}}</td>
+                                        <td class="text-center">{{d.haber | number:'1.2-2'}}</td>
+                                        <td class="text-center">{{d.partida_presupuestaria_cod}}</td>
+                                        <td class="text-center">{{d.partida_presupuestaria_desc}}</td>
+                                        <td class="text-center">{{d.partida_presupuestaria_val}}</td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2 justify-content-end">
+                <div class="col-4">
+                    <div>
+                        <h5>Total </h5>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <input id="pagoTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalDebe | number: '1.2-2' }}">
+                </div>
+                <div class="col-4">
+                    <input id="pagoTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalHaber | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed; bottom: 0px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Fecha: {{ asientoCierre.fecha }}</span>
+        </div>
+        <div *ngIf="dataUser" class="col-12 text-left" style="position: fixed; bottom: 20px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Usuario: {{ dataUser.nombre }}</span>
+        </div>
+    </div>
+</div>

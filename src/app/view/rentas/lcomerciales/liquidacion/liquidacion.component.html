@@ -1,0 +1,222 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Liquidacion de Locales Comerciales" cstyle="bg-light" icono="fas fa-print"
+        filtroBoton="btnsRenLocalLiq" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row mb-3 mt-2">
+            <div class="col-sm">
+                <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" readonly class="form-control" [placeholder]="contribuyente?.razon_social">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" matTooltip="Buscar Contribuyente" (click)="expandContribuyentes()" [disabled]="formReadonly">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm">
+                <app-cc-input-group-prepend label="Orden de Inspecci&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" readonly class="form-control" [placeholder]="orden_inspeccion?.numero_orden">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" matTooltip="Buscar Orden de Inspeccion" (click)="expandOrdenInspeccion()" [disabled]="!contribuyenteSelected">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-sm">
+                <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="liquidacion.documento">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm">
+                <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control form-control-sm" [(ngModel)]="liquidacion.fecha">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                        <i
+                            placement="bottom"
+                            [ngbTooltip]="(liquidacion.estado == 'E') ? 'Emitido' : ((liquidacion.estado == 'A') ? 'Aprobado' : ((liquidacion.estado == 'P') ? 'Pendiente' : 'Anulado'))" 
+                            [class]="(['P', 'E'].includes(liquidacion.estado)) ? 'fas fa-circle text-warning' : ((liquidacion.estado == 'A') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
+                        </i>
+                        {{ (liquidacion.estado == 'E') ? 'Emitido' : ((liquidacion.estado == 'A') ? 'Aprobado' : ((liquidacion.estado == 'P') ? 'Pendiente' : 'Anulado')) }}
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <fieldset class="border py-1 px-3 mb-3 mt-2">
+            <legend class="mb-0 w-auto font-weight-bold">Local Comercial</legend>
+
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span style="width: 155px;" class="input-group-text size-span-campo">No. Contrato</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly [value]="orden_inspeccion?.fk_local?.contrato ?? 'N/A'">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span style="width: 155px;" class="input-group-text size-span-campo">Razón Social</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly [value]="orden_inspeccion?.fk_local?.razon_social">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span style="width: 155px;" class="input-group-text size-span-campo">Actividad Comercial</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly [value]="orden_inspeccion?.fk_local?.fk_actividad_comercial.valor">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span style="width: 155px;" class="input-group-text size-span-campo">Sector</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly [value]="orden_inspeccion?.fk_local?.contrato ? orden_inspeccion?.fk_local?.fk_sector?.valor ?? 'N/A' : orden_inspeccion?.fk_local?.fk_sector?.descripcion ?? 'N/A'">
+                    </div>
+                </div> 
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span style="width: 155px;" class="input-group-text size-span-campo">Tipo</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly [value]="orden_inspeccion?.fk_local?.tipo_negocio=='MINOR' ? 'MINORISTA' : orden_inspeccion?.fk_local?.tipo_negocio=='MAYOR' ? 'MAYORISTA' : '' ">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span style="width: 155px;" class="input-group-text size-span-campo">Grupo</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly [value]="!orden_inspeccion?.fk_local?.contrato ? orden_inspeccion?.fk_local?.fk_grupo.valor : 'N/A'">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span style="width: 155px;" class="input-group-text size-span-campo">Cod. Catastral</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly [value]="orden_inspeccion?.fk_local?.cod_catastro">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span style="width: 155px;" class="input-group-text size-span-campo">Uso de Suelo</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly [value]="orden_inspeccion?.fk_local?.uso_suelo">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Tipo de Local" styleSpan="size-span-campo size-span-campo">
+                        <input type="text" class="form-control" readonly="readonly" [value]="orden_inspeccion?.fk_local?.tipo_local == 0 ? 'Local Comercial' : orden_inspeccion?.fk_local?.tipo_local == 1 ? 'Local Municipal' : orden_inspeccion?.fk_local?.tipo_local == 2 ? 'No Fisico' : ''">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+        </fieldset>
+        <div class="row mb-2">
+            <div class="col">
+                <span class="h3">Conceptos</span>
+                <button class="float-right btn btn-sm btn-success" matTooltip="Seleccionar Impuestos" (click)="expandImpuestos()" [disabled]="!ordenInspeccionSelected">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+    
+        <div class="table-responsive">
+            <table class="table table-bordered no-footer table-hover mb-0">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th>Concepto</th>
+                        <th>Comentario</th>
+                        <th>Subtotal</th>
+                        <th>Descuentos</th>
+                        <th style="width: 15%;">Total</th>
+                        <th style="width: 5%;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!conceptos.length">
+                        <td colspan="6" class="text-center">
+                            <h6 class="my-1">No hay conceptos cargados</h6>
+                        </td>
+                    </tr>
+                    <ng-container *ngFor="let d of conceptos, let i = index">
+                        <tr>
+                            <td class="text-center">{{ d.concepto?.nombre }}</td>
+                            <td class="text-right">
+                                <!-- Comentario -->
+                                <div class="input-group input-group-sm">
+                                    <input type="text" maxlength="50" class="form-control form-control-sm" [disabled]="formReadonly || conceptosDisabled" [(ngModel)]="d.comentario" [readonly]="formReadonly" > 
+                                </div>
+                            </td>
+                            <td>$ {{ d.total | number:'1.2-2' }}</td>
+                            <td>$ {{ d.descuento | number:'1.2-2' }}</td>
+                            <td class="text-right">
+                                <!-- Valor del Impuesto - Exoneraciones -->
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
+                                    <input type="text" class="form-control form-control-sm text-right" value="{{d.subtotal | number:'1.2-2'}}" readonly (keypress)="onlyNumberDot($event)" (keyup)="calcSubtotal()" maxlength="8">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-end">
+                                    <!-- <button *ngIf="d.exoneraciones.length > 0" class="btn btn-sm btn-warning align-self-center" matTooltip="Revisar Exoneraciones" (click)="expandDetalles(d)">
+                                        <i class="fas fa-eye"></i>
+                                    </button> -->
+                                    <button class="btn btn-sm btn-secondary align-self-center" matTooltip="Agregar Exoneracion" (click)="expandExoneraciones(d, i)" [disabled]="formReadonly">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger align-self-center ml-1" matTooltip="Remover Concepto" [disabled]="formReadonly || conceptosDisabled" (click)="removeConcepto(i)">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="row">
+            <div class="col-5 offset-7">
+                <div class="input-group input-group-lg input-group-total my-2">
+                    <div class="input-group-prepend">
+                        <span class="label-saldo">Subtotal</span>
+                    </div>
+                    <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="liquidacion.subtotal">
+                </div>
+                <div class="input-group input-group-lg input-group-total mb-2">
+                    <div class="input-group-prepend">
+                        <span class="label-saldo label-saldo_item" >Exoneraciones</span>
+                    </div>
+                    <input currencyMask class="form-control input-saldo" readonly [ngModel]="liquidacion.descuentos">
+                </div>
+                <div class="input-group input-group-lg input-group-total mb-2">
+                    <div class="input-group-prepend">
+                        <span class="label-saldo " >Total</span>
+                    </div>
+                    <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="liquidacion.total">
+                </div>
+
+                <!-- <app-cc-input-group-prepend label="Subtotal" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly value="$ {{liquidacion.subtotal | number:'1.2-2'}}">
+                </app-cc-input-group-prepend>
+                <app-cc-input-group-prepend label="Exoneraciones" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly value="$ {{liquidacion.descuentos | number:'1.2-2'}}">
+                </app-cc-input-group-prepend>
+                <app-cc-input-group-prepend label="Total" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly value="$ {{liquidacion.total | number:'1.2-2'}}">
+                </app-cc-input-group-prepend>
+                <app-cc-input-group-prepend label="Interés" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly value="$ {{liquidacion.interes | number:'1.2-2'}}">
+                </app-cc-input-group-prepend>
+                <app-cc-input-group-prepend label="Total Cobro" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly value="$ {{liquidacion.total | number:'1.2-2'}}">
+                </app-cc-input-group-prepend> -->
+            </div>
+        </div>
+
+    </app-button-radio-active>
+
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="renLocalesLiquidacion"></cc-spiner-procesar>

@@ -1,0 +1,118 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Información de Kardex/Proveeduría" filtroBoton="btnInfKarProvr" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-braille">
+        <div class="row justify-content-center">
+            <div class="col-12 container-filter ">
+                <div class="row  justify-content-center">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <input type="text" disabled class="form-control form-control-sm text-center font-weight-bold text-light" value="FECHAS" style="background-color: #404a63;">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Producto" styleSpan="size-span-campo">
+                                    <ng-select id="idProveedor" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="producto" (ngModelChange)="filterProducto($event)">
+                                        <ng-option [value]="0">Seleccione Producto
+                                        </ng-option>
+                                        <ng-option *ngFor="let d of arrayproducts" [value]="d.id">{{ d.nombre }}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-md-3">
+                                <app-cc-input-group-prepend label="Total Ingreso" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control text-right font-weight-bold" disabled value="{{totalIngresos}}">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+                                    <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control form-control-sm" type="text" format="yyyy-MM-dd" (ngModelChange)="rerender()">
+                                    </ejs-datepicker>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo">
+                                    <ng-select id="typ_doc" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="movimiento" (ngModelChange)="tipoMovimiento($event)">
+                                        <ng-option [value]="0">Seleccione Tipo
+                                        </ng-option>
+                                        <ng-option *ngFor="let d of arrayMovimiento" [value]="d.name">{{ d.name }}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-md-3">
+                                <app-cc-input-group-prepend label="Total Egreso" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control text-right font-weight-bold" disabled value="{{totalEgresos}}">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+                                    <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control form-control-sm" format="yyyy-MM-dd" (ngModelChange)="rerender()">
+                                    </ejs-datepicker>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <!--  <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo">
+                                    <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="grupo" (ngModelChange)="getFilterGrupo($event)">
+                                        <ng-option [value]="0">Seleccione Grupo
+                                        </ng-option>
+                                        <ng-option *ngFor="let d of arrayGrupo" [value]="d.id">{{d.nombre}}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div> -->
+                            <div class="col-md-3" *ngIf="presentaStock">
+                                <app-cc-input-group-prepend label="Stock Actual" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control text-right font-weight-bold stockA" disabled value="{{stockActual}}">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <fieldset class="border p-2 filters mb-3 mt-4">
+            <legend class="w-auto h6 prueba">Listado</legend>
+            <div class="content-table table-responsive">
+                <table datatable id="tablaInfKarProvr" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                    <thead>
+                        <tr class="text-center" style="width: 100%;">
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 7%;">Fecha</th>
+                            <!--  <th style="width: 12%;">Codigo</th> -->
+                            <!--       <th style="width: 20%;">Producto</th> -->
+                            <!-- <th style="width: 7%;">Tipo</th> -->
+                            <th style="width: 8%;">Movimiento</th>
+                            <th style="width: 8%;">Stock Actual</th>
+                            <th style="width: 8%;">Ingresos</th>
+                            <th style="width: 10%;">Egresos</th>
+                            <th style="width: 10%;">Saldos</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="validaDtUser">
+                        <tr class="text-justify" *ngFor="let dt of guardarolT; let i = index">
+                            <td class="text-center">{{ i + 1 }}</td>
+                            <td class="text-center">{{ dt.fecha }}</td>
+                            <!-- <td class="text-left">{{ dt.codigo }}</td> -->
+                            <!--   <td class="text-left" >{{ dt.nombre }}</td> -->
+                            <!-- <td class="text-center">{{ dt.tipo }}</td> -->
+                            <td class="text-center" *ngIf="dt.movimiento == 'Despacho'">VENTAS</td>
+                            <td class="text-center" *ngIf="dt.movimiento !='Despacho'">{{ dt.movimiento }}</td>
+                            <td class="text-center">{{ commonServices.formatNumber(dt.stock) }}</td>
+                            <td class="text-center " *ngIf="dt.tipo=='Ingreso' ">{{ dt.cantidad }}</td>
+                            <td class="text-center " *ngIf="dt.tipo !=='Ingreso' ">{{0}}</td>
+                            <td class="text-center " *ngIf="dt.tipo=='Egreso' ">{{ dt.cantidad }}</td>
+                            <td class="text-center " *ngIf="dt.tipo !=='Egreso' ">{{0 }}</td>
+                            <td class="text-right " *ngIf="dt.tipo=='Ingreso' && dt.movimiento=='Compras' && dt.cantidad !==undefined ">${{commonServices.formatNumber(dt.ingreso) }}</td>
+                            <td class="text-right " *ngIf="dt.tipo=='Egreso' && dt.movimiento=='Despacho' && dt.cantidad !==undefined ">${{commonServices.formatNumber(dt.egreso)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spInfKarProvr"></cc-spiner-procesar>

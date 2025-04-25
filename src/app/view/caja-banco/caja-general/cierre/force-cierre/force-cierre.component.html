@@ -1,0 +1,132 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="mt-2">
+            <app-button-radio-active titulo="Forzar cierre" filtroBoton="btnForceCierre"
+                cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-user-lock">
+                <div class="row mt-1">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">caja</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" placeholder="{{caja.nombre_caja}}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo al
+                                    corte</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm text-right pr-2" disabled
+                                placeholder="$ {{commonService.pagos(caja.total_venta_periodo)}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo"
+                                    id="inputGroup-sizing-sm">Encargado</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="{{caja.name_user_caja}}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor en
+                                    caja</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm text-right pr-2" id = "IdValue"
+                                [(ngModel)]="caja.valor_cierre" (keyup) = "calculatedDiference()">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Apertura</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="{{caja.fecha_apertura}}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo"
+                                    id="inputGroup-sizing-sm">Diferencia</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm text-right pr-2" disabled
+                                placeholder="$ {{commonService.formatNumber(caja.valor_inconsistencia)}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Autorizado
+                                    por</span>
+                            </div>
+                            <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body"
+                                [searchable]="true" [clearable]="false" [(ngModel)]="caja.supervisor">
+                                <ng-option [value]="0">Seleccione supervisor</ng-option>
+                                <ng-option *ngFor="let d of arrayUsers" [value]="d.id_usuario">
+                                    {{d.nombre}}-({{d.usuario}})</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Clave
+                                    usuario</span>
+                            </div>
+                            <input type="password" [(ngModel)]="caja.pass" placeholder="Contraseña" id="password"
+                                class="form-control form-control-sm text-center" style="height: unset !important;">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm" (click)="showPass()"
+                                    style="box-shadow: unset;outline: unset;">
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2 mb-2">
+                    <div class="col-12">
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"
+                                    style="background-color: #007BFF;color: white;">Concepto</span>
+                            </div>
+                            <textarea class="form-control" aria-label="With textarea" placeholder="Ingrese un concepto"
+                                [(ngModel)]="caja.concep_force_box" id="idConceptoForce"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 ">
+                        <div class="p-1"
+                            style="background-color: #FFC107;color: black;font-size: 10px;font-weight: bold;">
+                            Los valores reflejados en --Diferencia-- como faltantes, serán descontados al encargado de
+                            caja </div>
+
+                    </div>
+                    <div class="col-12 mt-1">
+                        <div class="p-1"
+                            style="background-color: #007BFF;color: white;font-size: 10px;font-weight: bold;">
+                            Los valores reflejados en --Diferencia-- como sobrantes, serán registrados en otros ingresos
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>

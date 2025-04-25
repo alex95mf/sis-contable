@@ -1,0 +1,71 @@
+<app-button-radio-active titulo="Detalles de Campaña" cstyle="bg-light" icono="fas fa-percentage"
+    filtroBoton="btnsModalCampaigns" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" name="" id="" class="form-control" [(ngModel)]="campaign.nombre" [disabled]="campaign.id">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Fecha Inicio" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" name="" id="" class="form-control" [(ngModel)]="campaign.fecha_desde" max="2050-12-31" >
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Fecha Fin" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" name="" id="" class="form-control" [(ngModel)]="campaign.fecha_hasta" max="2050-12-31" >
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="concepto.cod_concepto" (change)="handleSelectConcepto($event)"
+                    [items]="cmb_concepto" bindValue="codigo" bindLabel="nombre">
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask class="form-control" [(ngModel)]="concepto.valor">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Porcentaje" styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask [options]="{ prefix: '', suffix: '%' }" class="form-control" [(ngModel)]="concepto.porcentaje">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-sm btn-success float-right" (click)="agregarConcepto()">Agregar Concepto</button>
+        </div>
+    </div>
+    <table mat-table [dataSource]="lst_concepto" class="mat-elevation-z8 w-100 mb-2">
+        <ng-container matColumnDef="concepto">
+            <th mat-header-cell *matHeaderCellDef style="flex: 3;"> Concepto </th>
+            <td mat-cell *matCellDef="let element" style="flex: 3">{{ element.nom_concepto }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="valor">
+            <th mat-header-cell *matHeaderCellDef style="flex: 1;"> Valor </th>
+            <td mat-cell *matCellDef="let element" style="flex: 1;">$ {{ element.valor }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="porcentaje">
+            <th mat-header-cell *matHeaderCellDef style="flex: 1;"> Porcentaje </th>
+            <td mat-cell *matCellDef="let element" style="flex: 1;">{{ element.porcentaje }} %</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef style="flex: 1;"> Acciones </th>
+            <td mat-cell *matCellDef="let element; let rowIndex = index" style="flex: 1;">
+                <button class="btn btn-sm btn-danger" (click)="removeConcepto(element, rowIndex)"><i class="fas fa-trash-alt"></i></button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spCampaigns"></cc-spiner-procesar>

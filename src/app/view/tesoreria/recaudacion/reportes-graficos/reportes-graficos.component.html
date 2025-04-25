@@ -1,0 +1,135 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-file-pdf"
+        filtroBoton="btnsConsultaTitulos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row ml-2 mr-2" style="justify-content: space-between; align-items: center;" >
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="card mt-1 mat-mdc-card mdc-card" >
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="mr-0 mb-0 mt-2 text-center " >RECAUDACIÓN POR AÑOS</h5>
+                                </div>
+                            </div>
+                            <div class="row ml-1 mr-1 text-center">
+                                <div class="col-5">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo font-weight-bold"
+                                                id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Desde</span>
+                                        </div>
+                                        <p-calendar
+                                            [readonlyInput]="true" 
+                                            view="year" 
+                                            dateFormat="yy" 
+                                            [(ngModel)]="desde" 
+                                            [showIcon]="true" 
+                                            class="ui-calendar ui-calendar-button"
+                                            inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                                            [inputStyle]="{'height':'30px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                                        </p-calendar>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo font-weight-bold"
+                                                id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Hasta</span>
+                                        </div>
+                                        <p-calendar
+                                            [readonlyInput]="true" 
+                                            view="year" 
+                                            dateFormat="yy" 
+                                            [(ngModel)]="hasta" 
+                                            [showIcon]="true" 
+                                            class="ui-calendar ui-calendar-button"
+                                            inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                                            [inputStyle]="{'height':'30px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                                        </p-calendar>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-primary btn-sm ml-3" placement="bottom" ngbTooltip="Buscar" (click)="getDataAnios()">
+                                        <i class="fas fa-search"></i>Consultar
+                                    </button>
+                                    <!-- <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                        <i class="fas fa-eraser"></i>
+                                    </button> -->
+                                </div>
+                            </div>
+                            <div class="row" style="justify-content: space-between; align-items: center;">
+                                <div class="col-6">
+                                    <div class="card-body">
+                                        <canvas id="chartLine1" style="width: 15rem;height: 10rem;"></canvas>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-6">
+                                    <div class="card-body">
+                                        <canvas id="chartLine11" style="width: 15rem;height: 10rem;"></canvas>
+                                    </div>
+                                </div> -->
+                            </div>  
+                        </div>
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card mt-1 mat-mdc-card mdc-card" >
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="mr-0 mb-0 mt-2 text-center " >RECAUDACIÓN POR MESES</h5>
+                                </div>
+                            </div>
+                            <div class="row ml-1 mr-1 text-center">
+                                <div class="col-5">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo font-weight-bold"
+                                                id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Período</span>
+                                        </div>
+                                        <p-calendar
+                                            [readonlyInput]="true" 
+                                            view="year" 
+                                            dateFormat="yy" 
+                                            [(ngModel)]="periodo" 
+                                            [showIcon]="true" 
+                                            class="ui-calendar ui-calendar-button"
+                                            inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                                            [inputStyle]="{'height':'30px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                                        </p-calendar>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <button class="btn btn-primary btn-sm ml-3" placement="bottom" ngbTooltip="Buscar" (click)="getDataMeses()">
+                                        <i class="fas fa-search"></i>Consultar
+                                    </button>
+                                    <!-- <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                        <i class="fas fa-eraser"></i>
+                                    </button> -->
+                                </div>
+                            </div>
+                            <div class="row" style="justify-content: space-between; align-items: center;">
+                                <div class="col-8">
+                                    <div class="card-body">
+                                        <canvas id="chartLine2" style="width: 15rem;height: 10rem;"></canvas>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                 </div>
+            </div>
+            <!-- <div class="col">
+              <div class="card mt-1 mat-mdc-card mdc-card">
+                <h5 class="mr-0 mb-0 mt-2 text-center " >RECAUDACIÓN POR CONCEPTO</h5>
+                <div class="card-body">
+                  <canvas id="chattPie1" style="width: 15rem;height: 10rem;"></canvas>
+                </div>
+              </div>
+            </div> -->
+          </div>
+       
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="renConsultaReporte"></cc-spiner-procesar>
+

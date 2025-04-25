@@ -1,0 +1,113 @@
+<div class="">
+
+    <app-button-radio-active titulo="Seleccionar Inspeccion" filtroBoton="btnInspecciones" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+
+        <fieldset class="border px-2 pb-2">
+            <legend class="w-auto ml-1 bg-dark">Filtros</legend>
+            <div class="row">
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Local Comercial">
+                                <input type="text" class="form-control" [(ngModel)]="filter.razon_social">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <!-- <app-cc-input-group-prepend label="No. de Orden">
+                                <input id="filter_orden" type="text" class="form-control" [(ngModel)]="filter.numero_orden">
+                            </app-cc-input-group-prepend> -->
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha Desde">
+                                <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha Hasta">
+                                <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-xl" placement="bottom" ngbTooltip="Aplicar todos los filtros" (click)="cargarLocales()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-xl ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row my-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <!-- <th style="width: 15%;">No. Orden</th>
+                            <th style="width: 10%;">Fecha</th> -->
+                            <th style="width: 25%;">Local</th>
+                            <th style="width: 15%;">Actividad Comercial</th>
+                            <th style="width: 20%;">Sector</th>
+                            <th style="width: 20%;">Dirección</th>
+                            <th style="width: 10%;">Estado</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let dt of localesDt, let i = index">
+                            <tr>
+                                <!-- <td class="text-center">{{ dt.numero_orden}}</td>
+                                <td class="text-center">{{ dt.fecha | date: 'dd/MM/yyyy' }}</td> -->
+                                <td class="text-center">{{ dt.razon_social }}</td>
+                                <td class="text-center">{{ dt.fk_actividad_comercial.valor }}</td>
+                                <td class="text-center">{{ dt.fk_sector?.descripcion ?? dt.fk_sector?.valor ?? 'N/A' }}</td>
+                                <td class="text-center">{{ dt.direccion }}</td>                                    
+                                <td *ngIf="dt.estado == 'I'" class="text-center">
+                                    <i class="fas fa-circle text-muted"></i> Inactivo
+                                </td>
+                                <td *ngIf="dt.estado == 'A'" class="text-center">
+                                    <i class="fas fa-circle text-success"></i> Activo
+                                </td>
+                                <td *ngIf="dt.estado == 'X'" class="text-center">
+                                    <i class="fas fa-circle text-danger"></i> Cerrado
+                                </td>
+                                <td *ngIf="dt.estado == 'V'" class="text-center">
+                                    <i class="fas fa-circle text-info"></i> Vendido
+                                </td>
+                                <td *ngIf="dt.estado == 'C'" class="text-center">
+                                    <i class="fas fa-circle text-warning"></i> Cambio de arriendo
+                                </td>
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mx-1" (click)="selectLocal(dt)" placement="left" ngbTooltip="Seleccionar Local">
+                                            <i class="far fa-hand-pointer"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+
+                </table>
+
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Seleccionar página">
+                </mat-paginator>
+
+            </div>
+
+        </div>
+
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSpiner" lfulScren=true lTipo="spInspecciones"></cc-spiner-procesar>

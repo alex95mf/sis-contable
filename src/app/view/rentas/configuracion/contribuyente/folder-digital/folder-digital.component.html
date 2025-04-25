@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col">
+        <app-cc-input-group-prepend label="Tipo de Archivo" styleSpan="size-span-campo font-weight-bold">
+            <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="tipoArchivoSelected" 
+                [loading]="tipoArchivoLoading" (open)="cargaInicial()"
+                [items]="cmb_tipo_archivo" bindValue="id_catalogo" bindLabel="cat_nombre">
+            </ng-select>
+        </app-cc-input-group-prepend>
+        <app-cc-input-group-prepend label="Nombre de Archivo" styleSpan="size-span-campo font-weight-bold">
+            <input type="text" class="form-control" readonly [value]="folderDigitalForm.nombre">
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-primary" onclick="document.getElementById('getFileFolder').click()">
+                    <i class="fas fa-file"></i> BUSCAR
+                </button>
+                <input type='file' id="getFileFolder" class="d-none" (change)="handleFileInputFichaEmpleado($event.target.files)">
+            </div>
+        </app-cc-input-group-prepend>
+    </div>
+    <div class="col">
+        <button class="btn btn-sm btn-success btn-block" (click)="uploadArchivo()">
+            <i class="fas fa-file-upload"></i> SUBIR ARCHIVO
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p-table [value]="archivos" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+            <ng-template pTemplate="header">
+                <tr style="font-size: 0.9rem;">
+                    <th>Tipo de Archivo</th>
+                    <th>Nombre de Archivo</th>
+                    <th>Fecha de Creaci&oacute;n</th>
+                    <th>Acciones</th>
+                </tr>
+            </ng-template>
+    
+            <ng-template pTemplate="body" let-documento>
+                <tr style="font-size: 0.75rem;">
+                    <td>{{documento.tipo}}</td>
+                    <td>{{documento.nombre}}</td>
+                    <td>{{documento.fecha_creacion}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="descargarArchivo(documento)">
+                            <i class="fas fa-file-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteDocumento(documento)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spContribuyenteFolder"></cc-spiner-procesar>

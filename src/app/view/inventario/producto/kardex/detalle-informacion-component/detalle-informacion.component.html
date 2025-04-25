@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <div class="row" style="width: 100%">
+        <div class="col-12">
+            <div class="title-head">
+                <span>Confirmación Factura de CompraDetalleeeeeeeeeee</span>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="permissions != undefined">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
+            <div class="row">
+
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <fieldset class="border field_set p-2">
+                <p>HOLA2</p>
+
+            </fieldset>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 mt-3">
+            <fieldset class="border field_set p-2">
+
+
+            </fieldset>
+        </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="!processing">
+        <div class="container-new-loader" style="max-height: 140px; margin-top: 20px">
+            <i class="fa fa-spinner fa-spin"></i>
+        </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="processing">
+        <div class="col-12 mt-3">
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" [disabled]="modal.cancel" aria-label="Close" style="font-weight: bold" (click)="closeModal()">
+          CANCELAR
+        </button>
+                <button type="button" [disabled]="modal.save" class="btn btn-primary" style="font-weight: bold; color: white">
+          GUARDAR
+        </button>
+            </div>
+        </div>
+    </div>
+</div>

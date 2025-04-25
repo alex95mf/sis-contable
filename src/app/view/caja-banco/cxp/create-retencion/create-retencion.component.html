@@ -1,0 +1,447 @@
+<div class="mt-3">
+    <app-button-radio-active titulo="Creación de retenciones" cstyle="bg-gradient-primary text-white"
+        filtroBoton="btnsCreateRet" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div>
+                    <div class="col-sm collapse" id="divListCxPCxC">
+                        <div class="row mt-3">
+                            <div class="col-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo
+                                            retención</span>
+                                    </div>
+                                    <select [(ngModel)]="filterRet" class="form-control form-control-sm custom-select"
+                                        (ngModelChange)="rerender()">
+                                        <option value="RTC">Retención compras</option>
+                                        <option value="RTV">Retención ventas</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <app-cc-input-group-prepend label="Fecha desde" styleSpan="size-span-campo">
+                                    <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control" name="dateFrom"
+                                        format='yyyy-MM-dd' (ngModelChange)="rerender()">
+                                    </ejs-datepicker>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-4">
+                                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+                                    <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control" name="dateFrom"
+                                        format='yyyy-MM-dd' (ngModelChange)="rerender()">
+                                    </ejs-datepicker>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <fieldset class="border p-2 mb-2 mt-3 filters">
+                                    <legend class="w-auto h6" *ngIf="filterRet == 'RTC'">Listado cuentas por pagar
+                                    </legend>
+                                    <legend class="w-auto h6" *ngIf="filterRet == 'RTV'">Listado de cuentas por cobrar
+                                    </legend>
+                                    <div class="table-responsive responsive-table">
+                                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                            class="table no-footer table-hover">
+                                            <thead class="text-center thead-dark" *ngIf="filterRet == 'RTC'">
+                                                <tr>
+                                                    <th style="width: 15%; border-left: 1px solid;">Documento</th>
+                                                    <th style="width: 30%;">Proveedor</th>
+                                                    <th style="width: 15%;">A Vencer</th>
+                                                    <th style="width: 15%;">Estado</th>
+                                                    <th style="width: 15%;">Total</th>
+                                                    <th style="width: 10%;">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="validateDt && filterRet == 'RTC'">
+                                                <tr *ngFor="let el of paymentsCxp; let idx = index">
+                                                    <td class="text-break" style="border-left: 1px solid">
+                                                        {{ el.cxp_cab['document']['codigo'] }}-{{ el.doc_ref_num }}
+                                                    </td>
+                                                    <td class="text-break">
+                                                        {{ el["purchase"]["proveedor"]["nom_comercial"]}}
+                                                    </td>
+                                                    <td>{{ el.fecha_venc }}</td>
+                                                    <td *ngIf="el.valor_saldo === 0">PAGADO</td>
+                                                    <td *ngIf="current_date > el.fecha_venc && el.valor_saldo > 0">
+                                                        VENCIDO</td>
+                                                    <td *ngIf="current_date <= el.fecha_venc && el.valor_saldo > 0">POR
+                                                        VENCER
+                                                    </td>
+                                                    <td class="text-right">$ {{
+                                                        commonServices.formatNumber(el.valor_saldo) }}
+                                                    </td>
+                                                    <td style="padding-top: 0px !important;">
+                                                        <div class="section-actions text-center ">
+                                                            <button class="btn btn-sm mt-0"
+                                                                (click)="changeretencion(idx)" type="button"
+                                                                [disabled]="el.purchase['retencion'] === 1 || el.valor_saldo === 0 
+                                                                || el.cxp_cab.type == 'ImPedido' || el.cxp_cab.type == 'ImGastos' "
+                                                                style="background-color: #f0601d; color: rgb(241, 239, 239);"
+                                                                placement="left" matTooltip="Retención">
+                                                                <i class="fas fa-file-invoice"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <thead class="thead-dark" *ngIf="filterRet == 'RTV'">
+                                                <tr>
+                                                    <th style="width: 15%;">Documento</th>
+                                                    <th style="width: 35%;">Cliente</th>
+                                                    <th style="width: 10%;">Fecha a vencer</th>
+                                                    <th style="width: 15%;">Estado</th>
+                                                    <th style="width: 15%;">Total</th>
+                                                    <th style="width: 10%;text-align: center;">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="validaDt && filterRet == 'RTV'">
+                                                <tr *ngFor="let el of billing; let idx = index">
+                                                    <td class="text-break">
+                                                        {{ el.cxc_cab['document']['codigo'] }}-{{
+                                                        el.doc_ref_num.split('-')[2] }}
+                                                    </td>
+                                                    <td class="text-break">
+                                                        {{ el.cxc_cab["sales"]["client"]["nombre_comercial_cli"]}}
+                                                    </td>
+                                                    <td>{{ el.fecha_venc }}</td>
+                                                    <td *ngIf="el.valor_saldo === 0">PAGADO</td>
+                                                    <td *ngIf="current_date > el.fecha_venc && el.valor_saldo > 0">
+                                                        VENCIDO</td>
+                                                    <td *ngIf="current_date <= el.fecha_venc && el.valor_saldo > 0">POR
+                                                        VENCER</td>
+                                                    <td class="text-right">$ {{ el.valor_saldo }}</td>
+                                                    <td style="text-align: center;">
+                                                        <button type="button" class="btn btn-sm"
+                                                            (click)="changeretencion(idx)"
+                                                            [disabled]="el.cxc_cab['sales']['hasRetencion'] === 1 || el.valor_saldo === 0"
+                                                            style="background-color: #f0601d; color: white;"
+                                                            placement="left" ngbTooltip="Retención">
+                                                            <i class="fas fa-file-invoice"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm collapse" id="divCreateRetCxp">
+                        <div class="row mt-3">
+                            <div class="col-12" *ngIf="contacts !== undefined && filterRet == 'RTC'">
+                                <app-button-radio-active titulo="Comprobante Retencion compra"
+                                    cstyle="bg-gradient-primary text-white" icono="fa fa-newspaper-o">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <app-cc-input-group-prepend label="Razón Social/Nombres y Apellidos">
+                                                <input id="inpRazonSocial" type="text" class="form-control"
+                                                    [disabled]="true"
+                                                    [(ngModel)]="contacts['purchase']['proveedor']['razon_social']">
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <app-cc-input-group-prepend label="Tipo Retención"
+                                                styleSpan="size-span-campo">
+                                                <select id="inpRetencion" class="form-control form-control-sm"
+                                                    [(ngModel)]="values.method"
+                                                    (ngModelChange)="calculateRetencion($event)">
+                                                    <option hidden disabled selected [value]="0">Seleccione retención
+                                                    </option>
+                                                    <option *ngFor="let el of taxes" [value]="el.id"> {{ el.nombre_imp
+                                                        }}
+                                                    </option>
+                                                </select>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <app-cc-input-group-prepend label="Identificación"
+                                                styleSpan="size-span-campo">
+                                                <input id="inpDNI" type="text" class="form-control" [disabled]="true"
+                                                    [(ngModel)]="contacts['purchase']['proveedor']['document']">
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <app-cc-input-group-prepend label="Fecha Emisión"
+                                                styleSpan="size-span-campo">
+                                                <input id="inpEmision" type="text" class="form-control"
+                                                    [disabled]="true" [(ngModel)]="contacts['purchase']['fecha']">
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <app-cc-input-group-prepend label="Monto">
+                                                <input id="inpMonto" type="text" class="form-control text-right"
+                                                    [disabled]="true" [(ngModel)]="calculate.monto">
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <app-cc-input-group-prepend label="Base">
+                                                <input id="inptIva" type="text" class="form-control text-right"
+                                                    [disabled]="true" [(ngModel)]="calculate.iva">
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <app-cc-input-group-prepend label="Valor">
+                                                <input id="inpValue" type="text" class="form-control text-right"
+                                                    [disabled]="true" [(ngModel)]="calculate.parseValue">
+
+                                                <div class="input-group-prepend">
+                                                    <button class="btn btn-sm btn-success"
+                                                        [disabled]="values.method === 0" (click)="addRetencion()">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-12 col-sm-12">
+                                            <div class="form-row justify-content-end">
+                                                <div class="form-group col-12 mb-0 text-right">
+                                                    <label for="inpTotal" class="mb-1 font-weight-bold">
+                                                        Total: $ {{ calculate.parseTotal }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-12">
+                                                    <div class="table-responsive"
+                                                        style="overflow-y: scroll; max-height: 150px; min-height: 75px;">
+                                                        <table class="table table-sm table-hover">
+                                                            <thead>
+                                                                <tr class="text-center">
+                                                                    <th>#</th>
+                                                                    <th>Comprobante</th>
+                                                                    <th>Número</th>
+                                                                    <th>Fecha Emisión</th>
+                                                                    <th>Año Fiscal</th>
+                                                                    <th>Base Imponible</th>
+                                                                    <th>Impuesto</th>
+                                                                    <th>Código</th>
+                                                                    <th>Porcentaje</th>
+                                                                    <th>Monto</th>
+                                                                    <th>Acción</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody *ngIf="retenciones">
+                                                                <tr class="text-center"
+                                                                    *ngFor="let el of retenciones; let i = index">
+                                                                    <td>{{ i + 1 }}</td>
+                                                                    <td>{{ el.comprobante }}</td>
+                                                                    <td>{{ el.num_factura }}</td>
+                                                                    <td>{{ el.dat_factura }}</td>
+                                                                    <td>{{ el.fis_factura }}</td>
+                                                                    <td class="text-right">
+                                                                        $ {{ commonServices.formatNumber(el.base) }}
+                                                                    </td>
+                                                                    <td>{{ el.type_imp.toUpperCase() }}</td>
+                                                                    <td>{{ el.codigo_sri }}</td>
+                                                                    <td>{{ commonServices.formatNumber(el.value_imp) }}
+                                                                    </td>
+                                                                    <td class="text-right">$
+                                                                        {{el.parseValue }}
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-sm"
+                                                                            (click)="deleteFields(i)"
+                                                                            style="background-color: transparent; border: none; box-shadow: unset; outline: unset;"
+                                                                            placement="left"
+                                                                            matTooltip="Remover registro">
+                                                                            <i class="fas fa-trash-alt"
+                                                                                style="color: #FF3C2E; font-size: 16px;"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </app-button-radio-active>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm collapse" id="divCreateRetCxC">
+                        <div class="row mt-3">
+                            <div class="col-12" *ngIf="contacts !== undefined && filterRet == 'RTV'">
+                                <app-button-radio-active titulo="Comprobante Retencion venta"
+                                    cstyle="bg-gradient-primary text-white" icono="fa fa-newspaper-o">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">No. retención</span>
+                                                </div>
+                                                <input id="inretencionnum" type="text"
+                                                    class="form-control form-control-sm " placeholder="Número retención"
+                                                    [(ngModel)]="params_ret.num_ret_vt">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">No. Autorización</span>
+                                                </div>
+                                                <input type="text" class="form-control form-control-sm "
+                                                    placeholder="Número autorización"
+                                                    [(ngModel)]="params_ret.num_aut_vt">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <app-cc-input-group-prepend label="Fecha retención"
+                                                styleSpan="size-span-campo">
+                                                <ejs-datepicker [(ngModel)]="params_ret.fech_ret_vt"
+                                                    class="form-control" name="dateFrom" format='yyyy-MM-dd'>
+                                                </ejs-datepicker>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Monto</span>
+                                                </div>
+                                                <input id="inpMonto" type="text"
+                                                    class="form-control form-control-sm text-right" [disabled]="true"
+                                                    [(ngModel)]="calculate.monto">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Base</span>
+                                                </div>
+                                                <input id="inpMonto" type="text"
+                                                    class="form-control form-control-sm text-right" [disabled]="true"
+                                                    [(ngModel)]="calculate.iva">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Valor</span>
+                                                </div>
+                                                <input id="inpMonto" type="text"
+                                                    class="form-control form-control-sm text-right" [disabled]="true"
+                                                    [(ngModel)]="calculate.parseValue">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Tipo
+                                                        Retención</span>
+                                                </div>
+                                                <select id="inpRetencion" class="form-control form-control-sm"
+                                                    [(ngModel)]="values.method"
+                                                    (ngModelChange)="calculateRetencionCxC($event)">
+                                                    <option hidden disabled selected [value]="0">Seleccione retención
+                                                    </option>
+                                                    <option *ngFor="let el of taxes" [value]="el.id">
+                                                        {{ el.nombre_imp }}
+                                                    </option>
+                                                </select>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-sm btn-success"
+                                                        [disabled]="values.method === 0" (click)="addRetencionCxC()">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Total</span>
+                                                </div>
+                                                <input placeholder="{{ calculate.parseTotal }}" type="text"
+                                                    class="form-control form-control-sm" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-12 col-sm-12">
+                                            <div class="form-row justify-content-end">
+                                                <div class="form-group col-12 mb-0 text-right">
+                                                    <label for="inpTotal" class="mb-1 font-weight-bold">
+                                                        Total: $ {{ calculate.parseTotal }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-12">
+                                                    <div class="table-responsive"
+                                                        style="overflow-y: scroll; max-height: 150px; min-height: 75px;">
+                                                        <table class="table table-sm table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Nombre</th>
+                                                                    <th>Impuesto</th>
+                                                                    <th>Código</th>
+                                                                    <th class="text-center">Base Imponible</th>
+                                                                    <th class="text-center">Porcentaje</th>
+                                                                    <th class="text-center">Monto</th>
+                                                                    <th class="text-center">Acción</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody *ngIf="retenciones">
+                                                                <tr *ngFor="let el of retenciones; let i = index">
+                                                                    <td>{{ el.name }}</td>
+                                                                    <td>{{ el.type_imp }}</td>
+                                                                    <td>{{ el.code }}</td>
+                                                                    <td class="text-right pr-2">
+                                                                        $ {{ commonServices.formatNumber(el.base) }}
+                                                                    </td>
+                                                                    <td class="text-right pr-2">{{
+                                                                        commonServices.formatNumber(el.value_imp) }}
+                                                                    </td>
+                                                                    <td class="text-right pr-2">$ {{ el.parseValue }}
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <button class="btn btn-sm"
+                                                                            (click)="deleteFieldsCxC(i)"
+                                                                            style="background-color: transparent; border: none; box-shadow: unset; outline: unset;"
+                                                                            placement="left"
+                                                                            matTooltip="Remover registro">
+                                                                            <i class="fas fa-trash-alt"
+                                                                                style="color: #FF3C2E; font-size: 16px;"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </app-button-radio-active>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+    <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCreateRetencion"></cc-spiner-procesar>
+</div>

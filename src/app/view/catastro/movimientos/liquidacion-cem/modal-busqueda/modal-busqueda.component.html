@@ -1,0 +1,67 @@
+<app-button-radio-active titulo="Busqueda de Liquidaciones" cstyle="bg-light" icono="fas fa-file"
+    filtroBoton="btnsModalLiquidacionesCEM" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border px-3 pb-2 mb-2">
+        <legend class="w-auto mb-1 bg-dark">Filtros</legend>
+        <div class="row">
+            <div class="col-8">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.nombre">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Motivo" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="filter.motivo"
+                        [items]="cmb_motivo" bindValue="id_catalogo" bindLabel="descripcion">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask class="form-control" [(ngModel)]="filter.valor_desde" placeholder="Desde">
+                    <input currencyMask class="form-control" [(ngModel)]="filter.valor_hasta" placeholder="Hasta">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="filter.estado"
+                        [items]="cmb_estado" bindValue="value" bindLabel="label">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+    <table mat-table [dataSource]="lst_liquidacion" class="mat-elevation-z2 w-100">
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+        <ng-container matColumnDef="motivo">
+            <th mat-header-cell *matHeaderCellDef> Motivo </th>
+            <td mat-cell *matCellDef="let element"> {{element.motivo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="valor">
+            <th mat-header-cell *matHeaderCellDef> Valor </th>
+            <td mat-cell *matCellDef="let element" class="text-right"> $ {{element.total | number:'1.2-2'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+                <button class="btn btn-sm btn-primary" (click)="selectRow(element)">
+                    <i class="far fa-hand-pointer"></i>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator
+        showFirstLastButtons
+        [pageIndex]="paginate.pageIndex"
+        [pageSize]="paginate.perPage"
+        [length]="paginate.total"
+        showFirstLastButtons>
+    </mat-paginator>
+
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalLiquidacionCem"></cc-spiner-procesar>

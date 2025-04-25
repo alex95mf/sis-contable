@@ -1,0 +1,270 @@
+
+    <app-button-radio-active-new [titulo]="fTitle" filtroBoton="btnsBandejaTrabajo" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Filtros</legend>
+            <div class="row m-0">
+
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Tipo de Reporte" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="reporteSelected" (change)="asignarEstado($event)" [clearable]="true">
+                            <ng-option disabled [value]="0" disabled>Seleccione un Reporte</ng-option>
+                            <ng-option *ngFor="let op of listaTipoReporte" [value]="op.value">{{ op.label }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Fecha Desde" styleSpan="font-weight-bold size-span-campo">
+                        <input id="filter_fecha_desde" type="date" class="form-control" [(ngModel)]="filter.fecha_desde" max="2050-01-01">
+                    </app-cc-input-group-prepend>
+
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="font-weight-bold size-span-campo">
+                        <input id="filter_fecha_hasta" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" max="2050-01-01">
+                    </app-cc-input-group-prepend>
+                </div>
+ 
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Departamento" styleSpan="font-weight-bold size-span-campo">
+                            <input placeholder="Departamento..." type="text" #departamento="ngModel"
+                            name="departamento" [(ngModel)]="filter.dep_nombre" 
+                            class="form-control form-control-sm" [disabled]="true" 
+                            id="departamento">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" [disabled]="dusuario"
+                                style="box-shadow: unset;outline: unset;">
+                                Buscar
+                            </button>
+                        </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Usuario Responsable" styleSpan="font-weight-bold size-span-campo">
+                            <input placeholder="Usuario Responsable..." type="text" #departamento="ngModel"
+                            name="departamento" [(ngModel)]="filter.nombre_usuario" 
+                            class="form-control form-control-sm" [disabled]="true" 
+                            id="usuario">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary btn-sm" (click)="modalUsuarios()" [disabled]="dusuario">
+                                Buscar
+                            </button>
+                        </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="estadoSelected" (change)="asignarEstado($event)" [clearable]="true">
+                                <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                                <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+                    </div>
+
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Nombre Trámite" styleSpan="font-weight-bold size-span-campo">
+                            <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="filter.nombre" placeholder="Nombre Trámite">
+                        </app-cc-input-group-prepend>
+                        
+                    </div>
+
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Tipo de trámite" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select id="sub_categoria" class="form-control form-control-sm" [(ngModel)]="filter.tipo_tramite" [clearable]="true">
+                                <ng-option disabled [value]="0" disabled>Seleccione un tipo</ng-option>
+                                <ng-option *ngFor="let op of tipoTraList" [value]="op.value">{{op.label }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                        
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+        </fieldset>
+        <div class="row m-0" *ngIf="reporteSelected==='D'">
+            <div class="col-12">
+                <div class="table-responsive" style="max-height: 550px; overflow-y: auto;">
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                <th style="width: 5%;">No. Trámite</th>
+                                <th style="width: 10%;">Fecha Trámite</th>
+                                <!-- <th style="width: 10%;">Usuario Creador</th> -->
+                                <th style="width: 15%;">Nombre Trámite</th>
+                                <th style="width: 10%;">Observación Trámite</th>
+                                <th style="width: 10%;">Estado Trámite</th>
+                                <!-- <th style="width: 5%;">Id Seguimiento</th> -->
+                                <th style="width: 10%;">Fecha Máxima de Entrega</th>
+                                <th style="width: 5%;">Prioridad</th>
+                                <th>Usuario</th>
+                                <th>Departamento</th>
+                                
+                                <th style="width: 10%;">Dias Transurridos</th>
+                                <th style="width: 10%;">Fecha de Cierre</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of ticketsDt, let i = index">
+                                <td class="text-center">{{ dt.id_tramite }}</td>
+                                <td class="text-center">
+                                    <span>{{ dt?.fecha | date:'yyyy-MM-dd' }}</span><br>
+                                    <span>{{ dt?.fecha | date:'hh:mm:ss a' }}</span>
+                                   
+                                </td>
+                                <!-- <td class="text-center"><i class="fa fa-user" aria-hidden="true"></i>
+                                    
+                                    <div class="row">
+                                        <div class="col">{{ dt.usuario?.nombre | titlecase }}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted"><small>{{dt.usuario?.departamento?.dep_nombre ? dt.usuario?.departamento?.dep_nombre : 'Sin departamento' }}</small></div>
+                                    </div>
+                                </td> -->
+                                <td class="text-center">
+                                    {{ dt?.nombre }}
+
+                                    
+                                </td>
+                                <td class="text-center text-justify text-break">{{ dt?.observacion }}</td>
+                                <td class="text-center">
+                                    <i placement="bottom" [ngbTooltip]="dt?.estado == 'P' ? 'Pendiente' : dt?.estado == 'C' ? 'Cerrado' : 'Gestion'" [class]="dt?.estado == 'P' ? 'fas fa-circle text-primary' : dt?.estado == 'C' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger'"></i>
+                                    {{dt?.estado == 'P' ? 'Pendiente' :  'Cerrado'}}
+                                </td>
+                                <td class="text-center">
+                                 
+                                        <span>{{ dt.fecha_maxima != undefined ? dt.fecha_maxima : 'Sin Fecha Máxima'  }}</span>
+                             
+                 
+                                </td>
+                                <!-- <td class="text-center">{{ dt.id_tramite_seguimiento }}</td> -->
+                                <td class="text-center">
+                                   
+                                        <i
+                                            placement="bottom"
+                                            [ngbTooltip]="(dt.prioridad == 'A') ? 'Alta' : (dt.prioridad == 'M') ? 'Media' : ((dt.prioridad == 'B') ? 'Baja' : 'No tiene')" 
+                                            [class]="(dt.prioridad == 'A') ? 'fas fa-circle text-danger' : (dt.prioridad == 'M') ? 'fas fa-circle text-warning' : ((dt.prioridad == 'B') ? 'fas fa-circle text-success' : 'fas fa-circle text-muted')">
+                                        </i>
+                                        {{ (dt.prioridad == 'A') ? 'Alta' : (dt.prioridad == 'M') ? 'Media' : ((dt.prioridad == 'B') ? 'Baja' : 'No tiene')}}
+                                    
+                       
+                                </td>
+                                <td class="text-center"> {{ dt?.nom_usuario }}</td>
+                                <td class="text-center"> {{ dt?.departamento }}</td>
+                                <td class="text-center">
+                                    {{ dt.dias_transcurridos }}
+                                </td>
+                                <td class="text-center">
+                               
+                                    <div *ngIf="dt?.estado =='C'" >
+                                        {{ dt.fecha_cierre | date:'yyyy-MM-dd'}}
+
+                                    </div>   
+                                     
+                                  
+                            
+
+                                </td>
+                                <!--td class="text-center"><i placement="bottom" [ngbTooltip]="dt.tramites.prioridad == 'A' ? 'Alta' : dt.tramites.prioridad == 'M' ? 'Media' : 'Baja'" 
+                                    [class]="dt.tramites.prioridad == 'A' ? 'fas fa-circle text-danger' : dt.tramites.prioridad == 'M' ? 'fas fa-circle text-warning' : 'fas fa-circle text-success'"></i>
+                                    {{dt.tramites.prioridad == 'A' ? 'Alta' : dt.tramites.prioridad == 'M' ? 'Media' : 'Baja'}}
+                                </td-->
+                     
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage" [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+
+        <div class="row m-0" *ngIf="reporteSelected==='R'">
+            <div class="col-12">
+                <div class="table-responsive" style="max-height: 550px; overflow-y: auto;">
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                               
+                                <th style="width: 10%;">Fecha Trámite</th>
+                                <th style="width: 15%;">Cantidad de Tramites</th>
+                                <!-- <th style="width: 10%;">Usuario Creador</th> -->
+                                <th style="width: 15%;">Nombre Trámite</th>
+                             
+                                <th style="width: 10%;">Estado Trámite</th>
+                                <!-- <th style="width: 5%;">Id Seguimiento</th> -->
+                                
+                                <th style="width: 5%;">Prioridad</th>
+                                <th>Usuario</th>
+                                <th>Departamento</th>
+                                
+                             
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of ticketsResumen, let i = index">
+                             
+                                <td class="text-center">
+                                    <span>{{ dt?.fecha | date:'yyyy-MM-dd' }}</span>
+                          
+                                   
+                                </td>
+                                <td class="text-center">
+                                    {{ dt?.cantidad }}
+     
+                                </td>
+                                <td class="text-center">
+                                    {{ dt?.nombre }}
+     
+                                </td>
+            
+                                <td class="text-center">
+                                    <i placement="bottom" [ngbTooltip]="dt?.estado == 'P' ? 'Pendiente' : dt?.estado == 'C' ? 'Cerrado' : 'Gestion'" [class]="dt?.estado == 'P' ? 'fas fa-circle text-primary' : dt?.estado == 'C' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger'"></i>
+                                    {{dt?.estado == 'P' ? 'Pendiente' :  'Cerrado'}}
+                                </td>
+      
+                                <!-- <td class="text-center">{{ dt.id_tramite_seguimiento }}</td> -->
+                                <td class="text-center">
+                                   
+                                        <i
+                                            placement="bottom"
+                                            [ngbTooltip]="(dt.prioridad == 'A') ? 'Alta' : (dt.prioridad == 'M') ? 'Media' : ((dt.prioridad == 'B') ? 'Baja' : 'No tiene')" 
+                                            [class]="(dt.prioridad == 'A') ? 'fas fa-circle text-danger' : (dt.prioridad == 'M') ? 'fas fa-circle text-warning' : ((dt.prioridad == 'B') ? 'fas fa-circle text-success' : 'fas fa-circle text-muted')">
+                                        </i>
+                                        {{ (dt.prioridad == 'A') ? 'Alta' : (dt.prioridad == 'M') ? 'Media' : ((dt.prioridad == 'B') ? 'Baja' : 'No tiene')}}
+                                    
+                       
+                                </td>
+                                <td class="text-center"> {{ dt?.nom_usuario }}</td>
+                                <td class="text-center"> {{ dt?.departamento }}</td>
+
+                     
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage" [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active-new>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spMesaTrabajo"></cc-spiner-procesar>

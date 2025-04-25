@@ -1,0 +1,276 @@
+
+
+
+.filters 
+{
+background-color: white;
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 6px 0px 8px 0px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 8.5px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                    text-align: center !important;
+                    padding: 6px 0px 8px 0px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    vertical-align: middle;
+                    font-size: 8.5px;
+                }
+            }
+        }
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        overflow-y: scroll;
+        overflow-x: scroll;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #13B1E9;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    ::-webkit-scrollbar-thumb:active {
+        background-color: #999999;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #CECAC9;
+        border-radius: 4px;
+    }
+    
+}
+
+
+.color-autorizado{
+    background: rgba(127, 255, 168, 0.461);
+}
+.color-anulado{
+    background: rgba(255, 127, 127, 0.365);
+}
+.color-recepcion{
+    background: rgba(255, 187, 127, 0.509);
+}
+
+
+
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+}
+
+
+.disabled {
+    cursor: not-allowed;
+}
+
+.card-header {
+padding: 0.2rem 1.25rem;
+padding-top: 0.2rem;
+padding-right: 1.25rem;
+padding-bottom: 0.2rem;
+padding-left: 1.25rem;
+margin-bottom: 0;
+}
+
+.title_h5 {
+margin-bottom: 0rem;
+font-family: inherit;
+font-weight: 500;
+line-height: 1.2;
+color: inherit;
+font-size: 11px;
+}
+
+.panding_span {
+padding-right: 0.15em;
+}
+
+.button_margin {
+margin-left: 0.25rem !important;
+border-radius: 0.25rem !important;
+border-top-left-radius: 0.25rem !important;
+border-top-right-radius: 0.25rem !important;
+border-bottom-right-radius: 0.25rem !important;
+border-bottom-left-radius: 0.25rem !important;
+}
+
+.alinearizq {
+    float: left;
+}
+.alinearder {
+    float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.padding-table-div {
+    padding: 0px;
+    border-block: inherit;
+  }
+  
+  .padding-table-divv {
+    border-block: inherit;
+  }
+   
+  
+  .static {
+    position: absolute;
+    background-color: white;
+  }
+  
+  .first-col {
+    padding-left: 74.5px !important;
+  }
+  
+  .prt-comprobante {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  
+    .sect-one {
+      border: 1px solid;
+      border-color: rgba(78, 74, 74, 0.37);
+      border-radius: 3px;
+    }
+  
+    .sect-two {
+      border-radius: 3px;
+      background-color: #5b9bd5;
+      color: white;
+      text-transform: uppercase;
+    }
+  
+    .simu-ipt {
+      border: 1px solid;
+      border-color: rgba(78, 74, 74, 0.37);
+      border-radius: 3px;
+      padding: 5px;
+    }
+  
+    table {
+      thead {
+        tr {
+          th {
+            background-color: #5b9bd5 !important; 
+            color: white;
+            font-weight: unset;
+          }
+        }
+      } 
+    }
+  }
+  
+  .pagebreak {
+    page-break-before: always;
+  }
+  
+  hr.hr-text {
+    position: relative;
+    border: none;
+    height: 3px;
+    background: #999;
+  
+    margin-top: 1px;
+    margin-bottom: 3px;
+  }
+  
+  hr.hr-text::before {
+    content: attr(data-content);
+    display: inline-block;
+    background: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    color: #999;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .estilo-paneles {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    .valor {
+      background-color: #5b9bd5 !important;
+      padding: 6px 10px 8px 10px;
+      color: white;
+      font-weight: unset;
+    }
+  }
+  
+  .alinearizq {
+    float: left;
+}
+.alinearder {
+    float: right;
+}
+
+
+footer { 
+  position: absolute;
+  bottom: 0;
+  color: white;
+} 
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,110 @@
+<br>
+<app-button-radio-active titulo="Parametros de Activo Fijo" filtroBoton="btnParActfJd" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-sliders">
+
+    <div class="row">
+        <div class="col-sm-12 collapse" id="divListParAfMant">
+            <fieldset class="border mt-2 p-2 " *ngIf="permissions">
+                <legend class="w-auto h6">{{mensajeTitulo}} Parametro</legend>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Nombre Activo" styleSpan="size-span-campo">
+                            <input placeholder="Ingresar Nombre Activo" type="text" class="form-control form-control-sm" id="nombreActivo" [(ngModel)]="parametros.nombreActivo" maxlength="150">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Cuenta Activo" styleSpan="size-span-campo">
+                            <ng-select id="IdProvidersDoc" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="parametros.cuentaActivo" >
+                                <ng-option value="">Seleccionar Cuenta Activo</ng-option>
+                                <ng-option *ngFor="let d of lstCtasContActivo" [value]="d.codigo"> {{d.codigo}} - {{d.nombre}} </ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-sm-3">
+                        <app-cc-input-group-prepend label="Años Depreciables" styleSpan="size-span-campo">
+                            <input placeholder="Años" type="text" class="form-control form-control-sm" id="anioDepreciable"
+                            (keypress)="validaciones.numberOnly($event)" [(ngModel)]="parametros.anioDepreciable" maxlength="2">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-3">
+                        <app-cc-input-group-prepend label="Porcentaje Anual" styleSpan="size-span-campo">
+                            <input placeholder="Porcentaje" type="text" class="form-control form-control-sm text-right" (keypress)="validaciones.numberOnly($event)"
+                            id="porcentajeAnual" [(ngModel)]="parametros.porcentajeAnual" maxlength="3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputLabel-prepend">%</span>
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Cuenta Depreciación" styleSpan="size-span-campo">
+                            <ng-select id="IdProvidersDoc" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="parametros.cuentaDepreciacion" >
+                                <ng-option value="">Seleccionar Cuenta Depreciación</ng-option>
+                                <ng-option *ngFor="let d of lstCtasContDepr" [value]="d.codigo"> {{d.codigo}} - {{d.nombre}} </ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+        
+            </fieldset>
+        </div>
+        
+        <div class="col-sm-12" id="divListParAf">
+            <fieldset class="border mt-2 p-2 filters">
+                <legend class="w-auto h6">Listado</legend>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-12 col-md-12">
+                        <div class="content-table">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-sm no-footer table-hover">
+                                    <thead class="thead-dark">
+                                        <tr >
+                                            <th >Id.</th>
+                                            <th >Nombre Activo</th>
+                                            <th >Años Depreciables</th>
+                                            <th >Porcentaje Anual</th>
+                                            <th >Cuenta Activo</th>
+                                            <th >Cuenta Depreciación</th>
+                                            <th >Acción</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- permissions.editar == '0' -->
+                                        <tr  *ngFor="let el of listadoGeneral; let i = index">
+                                            <td >{{ el.id }}</td>
+                                            <td >{{ el.nombre_activo }}</td>
+                                            <td >{{ el['años_depreciables'] }}</td>
+                                            <td >{{ el.porcentaje_anual }} %</td>
+                                            <td >{{el.cuenta_activo}} {{ el.cuenta_act!=null && el.cuenta_act.length > 0?el.cuenta_act[0].nombre: '' }}</td>
+                                            <td >{{el.cuenta_depreciacion}} {{ el.cuenta_depr!=null && el.cuenta_depr.length > 0?el.cuenta_depr[0].nombre: '' }}</td>
+                                            <td >
+                                                <button class="btn btn-sm" matTooltip="Modificar Item" (click)="irAmodificar(el)">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true" style="color: #337ab7;"></i> 
+                                                </button>
+
+                                                <button class="btn btn-sm" matTooltip="Eliminar Item" (click)="eliminar(el)">
+                                                    <i class="fa fa-trash-o" aria-hidden="true" style="color:orangered;"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    
+
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spParActfJd"></cc-spiner-procesar>

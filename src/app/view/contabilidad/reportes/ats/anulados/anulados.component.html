@@ -1,0 +1,74 @@
+<!--<p-table [value]="ListaAtsAnulados" [scrollable]="true" scrollHeight="400px">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="min-width:50px">AÑO</th>
+            <th style="min-width:50px">MES</th>
+            <th style="min-width:50px">TIPO COMPROBANTE</th>
+            <th style="min-width:100px">ESTABLECIMIENTO</th>
+            <th style="min-width:200px">PUTNO EMISIÓN</th>
+            <th style="min-width:80px">SECUENCIA INICIAL</th>
+            <th style="min-width:100px">SECUENCIA FIN</th>
+            <th style="min-width:100px">AUTORIZACIÓN</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+        <tr>
+            <td>{{ item.anio }}</td>
+            <td>{{ item.mes }}</td>
+            <td>{{ item.tipo_comprobantes }}</td>
+            <td>{{ item.establecimiento }}</td>
+            <td>{{ item.punto_emision }}</td>
+            <td>{{ item.secuencial }}</td>
+            <td>{{ item.secuencial }}</td>
+            <td>{{ item.autorizacion }}</td>
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td class="EmptyTable" [attr.colspan]="7">
+                No hay información para mostrar
+             </td>
+        </tr>
+    </ng-template>
+</p-table>-->
+
+
+
+<div class="row mb-2">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-bordered no-footer table-hover mb-0">
+                
+                <thead class="thead-dark">
+                    <tr style="font-size: 12px;">
+                        <th style="min-width:50px">Año</th>
+                        <th style="min-width:50px">Mes</th>
+                        <th style="min-width:50px">Tipo Comprobante</th>
+                        <th style="min-width:100px">Establecimiento</th>
+                        <th style="min-width:200px">Punto Emisión</th>
+                        <th style="min-width:80px">Secuencia Inicial</th>
+                        <th style="min-width:100px">Secuencia Fin</th>
+                        <th style="min-width:100px">Autorización</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of ListaAtsAnulados, let i = index">
+                        <tr style="font-size: 11px;">
+                            <td>{{ item.anio }}</td>
+                            <td>{{ item.mes }}</td>
+                            <td>{{ item.tipo_comprobantes }}</td>
+                            <td>{{ item.establecimiento }}</td>
+                            <td>{{ item.punto_emision }}</td>
+                            <td>{{ item.secuencial }}</td>
+                            <td>{{ item.secuencial }}</td>
+                            <td>{{ item.autorizacion }}</td>
+                            
+                        </tr>                      
+                    </ng-container>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

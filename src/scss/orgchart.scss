@@ -1,0 +1,526 @@
+/*
+ * jQuery OrgChart Plugin
+ * https://github.com/dabeng/OrgChart
+ *
+ * Copyright 2016, dabeng
+ * https://github.com/dabeng
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+.orgchart {
+  box-sizing: border-box;
+  display: inline-block;
+  min-height: 202px;
+  min-width: 202px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: linear-gradient(90deg, rgba(200, 0, 0, 0.15) 10%, rgba(0, 0, 0, 0) 10%),
+    linear-gradient(rgba(200, 0, 0, 0.15) 10%, rgba(0, 0, 0, 0) 10%);
+  background-size: 10px 10px;
+  border: 1px dashed rgba(0, 0, 0, 0);
+  padding: 20px;
+
+  .hidden,
+  ~ .hidden {
+    display: none;
+  }
+
+  &.b2t {
+    transform: rotate(180deg);
+  }
+
+  &.l2r {
+    position: absolute;
+    transform: rotate(-90deg) rotateY(180deg);
+    transform-origin: left top;
+  }
+
+  .verticalNodes {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding-left: 18px;
+      text-align: left;
+
+      &:first-child {
+        margin-top: 2px;
+      }
+
+      > li {
+        position: relative;
+
+        &::before,
+        &::after {
+          box-sizing: border-box;
+          content: "";
+          position: absolute;
+          left: -6px;
+          border-color: rgba(217, 83, 79, 0.8);
+          border-style: solid;
+          border-width: 0 0 2px 2px;
+        }
+
+        &::before {
+          top: -4px;
+          height: 30px;
+          width: 11px;
+        }
+
+        &::after {
+          top: 1px;
+          height: 100%;
+        }
+
+        &:first-child::after {
+          box-sizing: border-box;
+          top: 24px;
+          width: 11px;
+          border-width: 2px 0 0 2px;
+        }
+
+        &:last-child::after {
+          box-sizing: border-box;
+          border-width: 2px 0 0;
+        }
+      }
+    }
+
+    > td {
+      &::before {
+        content: "";
+        border: 1px solid rgba(217, 83, 79, 0.8);
+      }
+
+      > ul > li:first-child::before {
+        box-sizing: border-box;
+        top: -4px;
+        height: 30px;
+        width: calc(50% - 2px);
+        border-width: 2px 0 0 2px;
+      }
+    }
+  }
+
+  &.r2l {
+    position: absolute;
+    transform: rotate(90deg);
+    transform-origin: left top;
+  }
+
+  > .spinner {
+    font-size: 100px;
+    margin-top: 30px;
+    color: rgba(68, 157, 68, 0.8);
+  }
+
+  table {
+    border-spacing: 0;
+    border-collapse: separate;
+  }
+
+  > table:first-child {
+    margin: 20px auto;
+  }
+
+  td {
+    text-align: center;
+    vertical-align: top;
+    padding: 0;
+  }
+
+  .lines {
+    &:nth-child(3) td {
+      box-sizing: border-box;
+      height: 20px;
+    }
+
+    .topLine {
+      border-top: 2px solid rgba(217, 83, 79, 0.8);
+    }
+
+    .rightLine {
+      border-right: 1px solid rgba(217, 83, 79, 0.8);
+      float: none;
+      border-radius: 0;
+    }
+
+    .leftLine {
+      border-left: 1px solid rgba(217, 83, 79, 0.8);
+      float: none;
+      border-radius: 0;
+    }
+
+    .downLine {
+      background-color: rgba(217, 83, 79, 0.8);
+      margin: 0 auto;
+      height: 20px;
+      width: 2px;
+      float: none;
+    }
+  }
+
+  .node {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 3px;
+    border: 2px dashed transparent;
+    text-align: center;
+  }
+
+  &.l2r .node,
+  &.r2l .node {
+    width: 50px;
+    height: 140px;
+  }
+
+  .node {
+    > .spinner {
+      position: absolute;
+      top: calc(50% - 15px);
+      left: calc(50% - 15px);
+      vertical-align: middle;
+      font-size: 30px;
+      color: rgba(68, 157, 68, 0.8);
+    }
+
+    &:hover {
+      background-color: rgba(238, 217, 54, 0.5);
+      transition: 0.5s;
+      cursor: default;
+      z-index: 20;
+    }
+
+    &.focused {
+      background-color: rgba(238, 217, 54, 0.5);
+    }
+  }
+
+  .ghost-node {
+    position: fixed;
+    left: -10000px;
+    top: -10000px;
+
+    rect {
+      fill: #ffffff;
+      stroke: #bf0000;
+    }
+  }
+
+  .node {
+    &.allowedDrop {
+      border-color: rgba(68, 157, 68, 0.9);
+    }
+
+    .title {
+      box-sizing: border-box;
+      padding: 2px;
+      width: 130px;
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      background-color: rgba(217, 83, 79, 0.8);
+      color: #fff;
+      border-radius: 4px 4px 0 0;
+    }
+  }
+
+  &.b2t .node .title {
+    transform: rotate(-180deg);
+    transform-origin: center bottom;
+  }
+
+  &.l2r .node .title {
+    transform: rotate(-90deg) translate(-45px, -45px) rotateY(180deg);
+    transform-origin: bottom center;
+  }
+
+  &.r2l .node .title {
+    transform: rotate(-90deg) translate(-45px, -45px);
+    transform-origin: bottom center;
+  }
+
+  .node {
+    .title .symbol {
+      float: left;
+      margin-top: 4px;
+      margin-left: 2px;
+    }
+
+    .content {
+      box-sizing: border-box;
+      padding: 2px;
+      height: 20px;
+      font-size: 0.625rem;
+      border: 1px solid rgba(217, 83, 79, 0.8);
+      border-radius: 0 0 4px 4px;
+      text-align: center;
+      background-color: #fff;
+      color: #333;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &.b2t .node .content {
+    transform: rotate(180deg);
+    transform-origin: center top;
+  }
+
+  &.l2r .node .content {
+    transform: rotate(-90deg) translate(-45px, -45px) rotateY(180deg);
+    transform-origin: top center;
+    width: 130px;
+  }
+
+  &.r2l .node .content {
+    transform: rotate(-90deg) translate(-45px, -45px);
+    transform-origin: top center;
+    width: 130px;
+  }
+
+  .node .edge {
+    font-size: 15px;
+    position: absolute;
+    color: rgba(68, 157, 68, 0.5);
+    cursor: default;
+    transition: 0.2s;
+  }
+
+  &.noncollapsable .node .edge {
+    display: none;
+  }
+
+  .edge:hover {
+    color: #449d44;
+    cursor: pointer;
+  }
+
+  .node {
+    .verticalEdge {
+      width: calc(100% - 10px);
+      width: -webkit-calc(100% - 10px);
+      width: -moz-calc(100% - 10px);
+      left: 5px;
+    }
+
+    .topEdge {
+      top: -4px;
+    }
+
+    .bottomEdge {
+      bottom: -4px;
+    }
+
+    .horizontalEdge {
+      width: 15px;
+      height: calc(100% - 10px);
+      height: -webkit-calc(100% - 10px);
+      height: -moz-calc(100% - 10px);
+      top: 5px;
+    }
+
+    .rightEdge {
+      right: -4px;
+    }
+
+    .leftEdge {
+      left: -4px;
+    }
+
+    .horizontalEdge::before {
+      position: absolute;
+      top: calc(50% - 7px);
+    }
+
+    .rightEdge::before {
+      right: 3px;
+    }
+
+    .leftEdge::before {
+      left: 3px;
+    }
+
+    .toggleBtn {
+      position: absolute;
+      left: 5px;
+      bottom: -2px;
+      color: rgba(68, 157, 68, 0.6);
+
+      &:hover {
+        color: rgba(68, 157, 68, 0.8);
+      }
+    }
+  }
+}
+
+.orgchart .second-menu-icon {
+  transition: opacity 0.5s;
+  opacity: 0;
+  right: -5px;
+  top: -5px;
+  z-index: 2;
+  color: white;
+  font-size: 18px;
+  position: absolute;
+}
+
+.orgchart .second-menu-icon:hover {
+  color: white;
+}
+
+.orgchart .node:hover .second-menu-icon {
+  opacity: 1;
+}
+
+.orgchart .node .second-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: -251px;
+  border-radius: 2px;
+  box-shadow: 0 0 4px 1px #999;
+  background-color: #fff;
+  z-index: 1;
+  width: 220px;
+  height: 258px;
+}
+
+.orgchart .node .second-menu .avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  float: left;
+  margin: 5px;
+}
+
+.orgchart {
+  .node {
+    i {
+      &.fas {
+        &.fa-info {
+          background-color: #1c99c3;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          font-size: 14px;
+          padding-top: 2px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+/* node styling */
+
+.oc-export-btn {
+  display: inline-block;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  color: #fff;
+  background-color: #5cb85c;
+  border: 1px solid transparent;
+  border-color: #4cae4c;
+  border-radius: 4px;
+
+  &[disabled] {
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.3;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: #449d44;
+    border-color: #347a34;
+  }
+}
+
+.orgchart {
+  ~ .mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    .spinner {
+      position: absolute;
+      top: calc(50% - 54px);
+      left: calc(50% - 54px);
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 108px;
+    }
+  }
+
+  .node {
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .slide-down {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  &.l2r .node.slide-down,
+  &.r2l .node.slide-down {
+    transform: translateY(130px);
+  }
+
+  .slide-up {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+
+  &.l2r .node.slide-up,
+  &.r2l .node.slide-up {
+    transform: translateY(-130px);
+  }
+
+  .slide-right {
+    opacity: 0;
+    transform: translateX(130px);
+  }
+
+  &.l2r .node.slide-right,
+  &.r2l .node.slide-right {
+    transform: translateX(40px);
+  }
+
+  .slide-left {
+    opacity: 0;
+    transform: translateX(-130px);
+  }
+
+  &.l2r .node.slide-left,
+  &.r2l .node.slide-left {
+    transform: translateX(-40px);
+  }
+}

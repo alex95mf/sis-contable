@@ -1,0 +1,82 @@
+<app-button-radio-active [titulo]="fTitle" filtroBoton="btnsDetalles" cstyle="bg-light text-dark"
+  [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-hand-pointer">
+
+  <div class="row my-2">
+    <div class="col">
+      <app-cc-input-group-prepend label="Expediente" styleSpan="size-span-campo font-weight-bold">
+        <input type="text" class="form-control" readonly [value]="expediente.num_expediente">
+      </app-cc-input-group-prepend>
+    </div>
+    <div class="col">
+      <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+        <input type="text" class="form-control" readonly [value]="expediente.contribuyente.razon_social">
+      </app-cc-input-group-prepend>
+    </div>
+    <div class="col">
+      <app-cc-input-group-prepend label="Tipo de Gesti&oacute;n" styleSpan="size-span-campo font-weight-bold">
+        <input type="text" class="form-control" readonly [value]="expediente.tipo_gestion">
+      </app-cc-input-group-prepend>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row my-2">
+    <div class="col">
+      <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+        <ng-select class="form-control" [clearable]="false" [(ngModel)]="data.estado" [items]="estados" bindValue="value" bindLabel="label" [readonly]="validacionDetalles"></ng-select>
+      </app-cc-input-group-prepend>
+
+    </div>
+
+    <div class="col">
+      <app-cc-input-group-prepend label="Notificador" styleSpan="size-span-campo font-weight-bold">
+        <ng-select class="form-control" [clearable]="false" [(ngModel)]="data.notificador" [readonly]="validacionDetalles">
+          <ng-option *ngFor="let notif of notificadores" [disabled]="notif.value == 0" [value]="notif.label">{{ notif.label }}</ng-option>
+        </ng-select>
+      </app-cc-input-group-prepend>
+
+    </div>
+
+    <div class="col">
+      <app-cc-input-group-prepend label="Persona que recibe" styleSpan="size-span-campo font-weight-bold">
+        <input type="text" class="form-control" [(ngModel)]="data.persona_recepcion" placeholder="Ingrese la persona que recibe" [readonly]="data.estado != 'R'">
+      </app-cc-input-group-prepend>
+
+    </div>
+  </div>
+  <div class="row mb-2">
+
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <app-cc-input-group-prepend label="Fecha de recepcion" styleSpan="size-span-campo font-weight-bold">
+            <input type="date" class="form-control" [(ngModel)]="data.fecha_recepcion" [readonly]="validacionDetalles">
+          </app-cc-input-group-prepend>
+        </div>
+      </div>
+      <div *ngIf="data.estado == 'F'" class="row">
+        <div class="col">
+          <app-cc-input-group-prepend label="Fotos" styleSpan="size-span-campo font-weight-bold">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*" (change)="cargaFoto($event.target.files)">
+              <label class="custom-file-label" for="inputGroupFile01">{{ fotos.length > 0 ? "Ha seleccionado " + fotos.length + " Fotos" : "Seleccione fotos a subir" }}</label>
+            </div>
+          </app-cc-input-group-prepend>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="col-8">
+      <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold bg-dark">
+        <textarea class="form-control" [(ngModel)]="data.observacion" [readonly]="validacionDetalles" rows="3" maxlength="500"></textarea>
+      </app-cc-input-group-prepend>
+    </div>
+
+  </div>
+
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lTipo="spExpedienteNotificador"></cc-spiner-procesar>

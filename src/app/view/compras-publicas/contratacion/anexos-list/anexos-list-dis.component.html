@@ -1,0 +1,429 @@
+<div style="max-height: 130px; overflow-y: scroll;">
+    <table class="table table-sm table-striped">
+        <!-- <thead class="thead-dark">
+            <tr>
+                <th class="text-center w-50">Nombre</th>
+                <th class="text-center" style="width: 15%;">Extension</th>
+                <th class="text-center" style="width: 35%;">Acciones</th>
+            </tr>
+        </thead> -->
+        <tbody *ngIf="tipo=='EM'">
+            <tr *ngIf="!anexosEM.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos EM.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosEM">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="tipo=='TR'">
+            <tr *ngIf="!anexosTR.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos TR.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosTR">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="tipo=='PL'">
+            <tr *ngIf="!anexosPL.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos PL.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosPL">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="tipo=='PB'">
+            <tr *ngIf="!anexosPB.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos PB.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosPB">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="tipo=='PR'">
+            <tr *ngIf="!anexosPR.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos PR.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosPR">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="tipo=='RP'">
+            <tr *ngIf="!anexosRP.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos RP.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosRP">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="tipo=='PP'">
+            <tr *ngIf="!anexosPP.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos PP.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosPP">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="tipo=='AO'">
+            <tr *ngIf="!anexosAO.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos AO.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosAO">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="tipo=='NG'">
+            <tr *ngIf="!anexosNG.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos NG.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosNG">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="tipo=='AJ'">
+            <tr *ngIf="!anexosAJ.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos AJ.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosAJ">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="tipo=='PO'">
+            <tr *ngIf="!anexosPO.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos PO.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosPO">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <tbody *ngIf="tipo=='AC'">
+            <tr *ngIf="!anexosAC.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos AC.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosAC">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <tbody *ngIf="tipo=='PV'">
+            <tr *ngIf="!anexosPV.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos PV.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosPV">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <tbody *ngIf="tipo=='DE'">
+            <tr *ngIf="!anexosDE.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos DE.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosDE">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <tbody *ngIf="tipo=='EX'">
+            <tr *ngIf="!anexosEX.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos EX.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosEX">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <tbody *ngIf="tipo=='CE'">
+            <tr *ngIf="!anexosCE.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos CE.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosCE">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <tbody *ngIf="tipo=='CO'">
+            <tr *ngIf="!anexosCO.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos CO.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosCO">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+
+
+    </table>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renMerContratoAnexos"></cc-spiner-procesar>

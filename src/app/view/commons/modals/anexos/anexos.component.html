@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="mt-4">
+            <app-button-radio-active titulo="Anexos" cstyle="bg-gradient-primary text-white"
+                filtroBoton="btnGlobalAnexos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+                icono="fas fa-file-alt">
+                <div class="row">
+                    <div class="col-12 filters">
+                        <div *ngIf="dtAnexoxShow">
+                            <fieldset class="border p-2 mb-1 mt-2">
+                                <legend class="w-auto h6">Listado:</legend>
+                                <div style="max-height:50vh;overflow-y: scroll;">
+                                    <div class="form-group table-responsive responsive-table">
+                                        <table class="table table-sm table-hover">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Extension</th>
+                                                    <th style="text-align: center;">Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="width: 100%;" *ngFor="let dt of dtanexos; let i = index">
+                                                    <td style="width: 20%;">
+                                                        <strong>{{ dt.original_name }}</strong>
+                                                    </td>
+                                                    <td style="width: 5%;">
+                                                        <strong>{{ dt.original_extension }}</strong>
+                                                    </td>
+                                                    <td style="width: 10%;text-align: center;">
+                                                        <button class="btn btn-sm tooltip-test my-1"
+                                                            style="background-color: #FFC107; color: white; border-radius: 10px"
+                                                            (click)="showAnexo(dt)" title="Mostrar anexo">
+                                                            <i class="fa fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm tooltip-test my-1"
+                                                            style="background-color: #404A63; color: white; border-radius: 10px"
+                                                            (click)="downloadAnexo(dt)" title="Descargar anexo">
+                                                            <i class="fa fa-download"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <fieldset class="border p-2 mb-1 ">
+                            <legend class="w-auto h6">Visor:</legend>
+                            <div class="row justify-content-center">
+                                <div id="viewerloader" class="container-new-loader" *ngIf="!viewer">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center" *ngIf="viewer">
+                                <div class="col-12 text-center">
+                                    <div>
+                                        <ngx-doc-viewer [url]="general" viewer="url" style="width:100%;height:50vh;">
+                                        </ngx-doc-viewer>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>

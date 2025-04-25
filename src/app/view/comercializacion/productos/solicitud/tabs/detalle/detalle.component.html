@@ -1,0 +1,145 @@
+<div class="mt-1">
+    <div class="row">
+        <div class="col-md-6">
+            <app-button-radio-active titulo="Ingreso de Productos a Solicitar" cstyle="bg-gradient-primary text-white" icono="fas fa-file-alt">
+                <div class="row mt-2">
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Productos Existente" styleSpan="size-span-campo">
+                            <div class="input-group-text mr-5">
+                                <input type="checkbox" [(ngModel)]="existent" [disabled]="!dAction || diExist" id="idExiste" (ngModelChange)="setProductoExist()">
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Productos Nuevo" styleSpan="size-span-campo">
+                            <div class="input-group-text mr-5">
+                                <input type="checkbox" [(ngModel)]="descuentoData" [disabled]="!dAction || disNuevo" id="idNuevo" (ngModelChange)="setProducto()">
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" *ngIf="existent == true">
+                        <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo">
+                            <ng-select id="idProducto" class="form-control custom" appendTo="body" [disabled]="!dAction || otroProducto " [(ngModel)]="solicitudProducto.fk_producto" (ngModelChange)="obtenerProducto($event)" [searchable]="true" [clearable]="true" style="border: 0.5px solid #000000; background-color: #e4e5e6 !important;height:28px;">
+                                <ng-option *ngFor="let dt of dataProducto" [value]="dt.id_producto">
+                                    {{dt.nombre}}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-12" *ngIf="descuentoData == true">
+                        <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo">
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="solicitudProducto.otros" id="idOtros" [disabled]="!dAction || !descuentoData">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Cantidad" styleSpan="size-span-campo">
+                            <input type="number" min="0" class="form-control form-control-sm  text-right" (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="solicitudProducto.cant_solicitada" [disabled]="!dAction  ||  !solicitada" id="idSolicitada">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Cantidad Aprobada" styleSpan="size-span-campo">
+                            <input type="number" min="0" class="form-control form-control-sm  text-right" (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="solicitudProducto.cant_aprobada" [disabled]="!dAction || !aprobada " id="idAprobada ">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-8">
+                        <app-cc-input-group-prepend label="Justificación" styleSpan="size-span-campo">
+                            <textarea name="justificacion" class="form-control form-control-sm" rows="3" placeholder="Escriba su Justificación" [(ngModel)]="solicitudProducto.justificacion" [disabled]="!dAction" id="idJustificacion"></textarea>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-4 text-right mt-3" style=" box-shadow: unset;outline: unset;">
+                        <button class="btn btn-warning " *ngIf="!editInfoDetalle" (click)="cleanForm()" placement="top" ngbTooltip="Limpiar formulario" style="box-shadow: unset;outline: unset;border-radius: 10px" [disabled]="!dAction">
+                        <i class="fa fa-eraser" aria-hidden="true"></i>
+                    </button>
+                        <button class="btn btn-success" (click)="addetalle()" *ngIf="!editInfoDetalle" placement="top" ngbTooltip="Agregar a la lista" style="box-shadow: unset;outline: unset;border-radius: 10px" [disabled]="!dAction">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                        <button class="btn btn-primary" (click)="updateDetalle()" *ngIf="editInfoDetalle" placement="top" ngbTooltip="Actualizar el lista" style="box-shadow: unset;outline: unset;border-radius: 10px">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                    </div>
+                </div>
+            </app-button-radio-active>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo">
+                                <textarea name="observation" id="obseravation" class="form-control form-control-sm" style="height: 89px;" [(ngModel)]="observacionesDt" [disabled]="validateSearch == false || obdata" (keyup)="setObservacion($event.target.value)"></textarea>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4 mt-3 text-right" *ngIf="filtro_doc == 1 && validateSearch == true">
+                            <button type="button" class="btn btn-danger btn-sm tooltip-test my-1" style=" border-radius: 10px;box-shadow: unset;outline: unset;" (click)="SetDeleteDocument(dtSearch)" placement="top" ngbTooltip="Anular Solicitud" [disabled]="validateSearch == false">
+                                <span> <i class="fas fa-trash-alt"></i> Anular Solicitud</span> 
+                            </button>
+                        </div>
+                        <div class="col-sm-4 mt-3 text-right" *ngIf="filtro_doc == 2 && validateSearch == true">
+                            <button type="button" class="btn btn-danger btn-sm tooltip-test my-1" style=" border-radius: 10px;box-shadow: unset;outline: unset;" (click)="SetDeleteDocument(dtSearch)" placement="top" ngbTooltip="Anular Solicitud" [disabled]="validateSearch == false">
+                                <span> <i class="fas fa-trash-alt"></i> Anular Solicitud</span> 
+                            </button>
+                        </div>
+                        <div class="col-sm-4 mt-3 text-right" *ngIf="filtro_doc == 3 && validateSearch == true">
+                            <button type="button" class="btn btn-danger btn-sm tooltip-test my-1" style=" border-radius: 10px;box-shadow: unset;outline: unset;" (click)="SetDeleteDocument(dtSearch)" placement="top" ngbTooltip="Anular Solicitud" [disabled]="validateSearch == false || disanular">
+                                <span> <i class="fas fa-trash-alt"></i> Anular Solicitud</span> 
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <app-button-radio-active titulo="Listado de Productos Solicitados" cstyle="bg-gradient-primary text-white" icono="fas fa-file-alt">
+                <div class="row">
+                    <div class="col-md-12 filters mt-1">
+                        <div class="form-group table-responsive responsive-table altura">
+                            <table class="table table-sm table-hover ">
+                                <thead class="thead-dark">
+                                    <tr class="text-center table-dark">
+                                        <th>#</th>
+                                        <th>Producto Existente</th>
+                                        <th> Otro Producto</th>
+                                        <th>Solicitada</th>
+                                        <th>Aprobada</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center" style="width: 100%;" *ngFor="let dt of arraydetalle; let i = index ">
+                                        <td style="width: 6%;">
+                                            <strong>{{ i + 1 }}</strong>
+                                        </td>
+                                        <td style="width: 30%;" class="text-left">
+                                            <strong> {{dt.productoName}} </strong>
+                                        </td>
+                                        <td style="width: 25%;" class="text-left">
+                                            <strong>{{ dt.otros }}</strong>
+                                        </td>
+                                        <td style="width: 12%;">
+                                            <strong>{{ dt.cant_solicitada }}</strong>
+                                        </td>
+                                        <td style="width: 12%;">
+                                            <strong>{{ dt.cant_aprobada }}</strong>
+                                        </td>
+                                        <td style="width: 15%;">
+                                            <button (click)="editDetalle(dt,i)" class="btn btn-sm tooltip-test my-1" style="background-color: #2E76BD; color: white; border-radius: 10px;box-shadow: unset;outline: unset;" placement="top" ngbTooltip="Editar Producto" [disabled]="!dAction || editProd ">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </button>
+                                            <button type="button" (click)="deleteDetalle(dt,i)" class="btn btn-sm tooltip-test my-1" style="background-color: #F86C6B; color: white; border-radius: 10px;box-shadow: unset;outline: unset;" placement="top" ngbTooltip="Remover Producto" [disabled]="!dAction || deleteProd">
+                                         <span> <i class="fas fa-trash-alt"></i> </span> 
+                                        </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>

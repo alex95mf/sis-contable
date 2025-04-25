@@ -1,0 +1,24 @@
+<app-button-radio-active titulo="Nnuevo Tipo de archivo" cstyle="bg-light" icono="far fa-file"
+    filtroBoton="btnsModalTipoArchivo" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="txt_tipo_archivo_nombre">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Descripcion" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="txt_tipo_archivo_descripcion">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Descripcion" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="txt_tipo_archivo_codigo">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalTipoArchivo"></cc-spiner-procesar>

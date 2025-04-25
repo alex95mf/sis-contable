@@ -1,0 +1,138 @@
+<!--
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="mt-4">
+            <app-button-radio-active titulo="Lista de Contribuyentes" filtroBoton="btnShowContribuyentes" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+                <div class="row mt-2 mb-2">
+                    <div class="col-12 filters">
+                        <div class="table-responsive responsive-table">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th style="width: 15%;">Nombre</th>
+                                        <th style="width: 10%;">Tipo Doc.</th>
+                                        <th style="width: 15%;">NUm Doc.</th>
+                                        <th style="width: 15%;">Teléfono</th>
+                                        <th style="width: 15%;">Ciudad</th>
+                                        <th style="width: 20%;">Dirección</th>
+                                        <th style="width: 10%; text-align: center;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngFor="let dt of dataDT">
+
+                                        <td>{{ dt.razon_social }}</td>
+                                        <td>{{ dt.tipo_documento }}</td>
+                                        <td>{{ dt.num_documento }}</td>
+                                        <td>{{ dt.telefono }}</td>
+                                        <td>{{ dt.ciudad }}</td>
+                                        <td>{{ dt.direccion }}</td>
+                                        <td>
+                                            <div class="text-center">
+                                                <button class="btn btn-primary btn-sm ml-1" (click)="editarContribuyente(dt)" placement="left" ngbTooltip="Ver contribuyente">
+                                                    <i class="far fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spContribuyente"></cc-spiner-procesar>
+-->
+<div class="">
+    <app-button-radio-active titulo="Seleccionar Contribuyente" filtroBoton="btnListConRP" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="row my-2">
+
+                <div class="col-12">
+                <div class="col-7 float-right">
+                    <div class="input-group input-group-sm mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Filtro por razón social</span>
+                        </div>
+                        <input id="filter_razon_social" type="text" class="form-control form-control-sm" [(ngModel)]="filter.razon_social">
+                        <div class="input-group-prepend ml-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Filtro por No. documento</span>
+                        </div>
+                        <input id="filter_num_documento" type="text" class="form-control form-control-sm" [(ngModel)]="filter.num_documento">
+                        <button class="btn btn-info btn-sm ml-1" placement="bottom" ngbTooltip="Buscar" (click)="cargarContribuyentes()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-12">
+                <table class="table table-bordered no-footer table-hover mb-0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="width: 15%;">Nombre</th>
+                            <th style="width: 10%;">Tipo Doc.</th>
+                            <th style="width: 10%;">Num Doc.</th>
+                            <th style="width: 10%;">Teléfono</th>
+                            <th style="width: 15%;">Ciudad</th>
+                            <th style="width: 20%;">Dirección</th>
+                            <th style="width: 10%;">Estado</th>
+                            <th style="width: 10%; text-align: center;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr *ngIf="dataDt.length == 0">
+                            <td colspan="7" class="text-center"><h6 class="my-1"></h6>No hay Contribuyentes para mostrar</td>
+                        </tr> -->
+                        <tr *ngFor="let dt of dataDT, let i = index">
+                            <td class="text-center">{{ dt.razon_social }}</td>
+                            <td class="text-center">{{ dt.tipo_documento }}</td>
+                            <td class="text-center">{{ dt.num_documento }}</td>
+                            <td class="text-center">{{ dt.telefono }}</td>
+                            <td class="text-center">{{ dt.ciudad }}</td>
+                            <td class="text-center">{{ dt.direccion }}</td>
+                            <td *ngIf="dt.estado == 'E'" class="text-center">
+                                <i class="fas fa-circle text-warning"></i> Emitido
+                            </td>
+                            <td *ngIf="dt.estado == 'A'" class="text-center">
+                                <i class="fas fa-circle text-success"></i> Aprobado
+                            </td>
+                            <td *ngIf="dt.estado == 'X'" class="text-center">
+                                <i class="fas fa-circle text-danger"></i> Anulado
+                            </td>
+                            <!--<td [class]="'text-center text-' + estados.filter(e => e.value == dt.estado)[0].color">
+                                {{ estados.filter(e => e.value == dt.estado)[0].label }}
+                            </td>-->
+                            <td>
+                                <div class="text-center mx-auto">
+                                    <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar contribuyente">
+                                        <i class="fas fa-hand-pointer"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>                    
+                </div>
+                
+                <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="cambiarPagina($event)"
+                    aria-label="Select page"> 
+                </mat-paginator>
+            </div>
+            
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spContribuyentes"></cc-spiner-procesar>

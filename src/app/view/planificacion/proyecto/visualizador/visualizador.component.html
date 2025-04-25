@@ -1,0 +1,198 @@
+
+    <app-button-radio-active-new titulo="{{ fTitle }}" icono="fas fa-file-excel" 
+    cstyle="bg-gradient-primary text-white"
+    filtroBoton="planAtriRepo" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="row m-0">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Filtros</legend>
+                <div class="row m-0">
+
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [clearable]="true" [markFirst]="false" (change)="handlePeriodoSelected($event)" [(ngModel)]="periodoSelected"
+                                [items]="periodos" bindValue="id" bindLabel="periodo"></ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [clearable]="true" [markFirst]="false" (change)="handleSelectPrograma($event)"
+                                [items]="programas" bindValue="valor" bindLabel="label"></ng-select>
+                        </app-cc-input-group-prepend>
+
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [clearable]="true" [markFirst]="false" (change)="handleSelectDepartamento($event)"
+                                [items]="departamentosFilter" bindValue="valor" bindLabel="label"></ng-select>
+                        </app-cc-input-group-prepend>
+
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+
+    </app-button-radio-active-new>
+
+    <div class="table-responsive" class="mb-2" style="max-height: 550px; overflow-y: scroll;">
+        <table class="table table-sm table-striped table-bordered bg-white" style="width: 2200px;">
+            <thead class="bg-dark text-center">
+                <tr>
+                    <th colspan="29">
+                        <h5>Plan Anual de Compras</h5>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Periodo</th>
+                    <th class="table-info text-dark">Partida Presupuestaria</th>
+                    <th class="table-success text-dark">Codigo Categoria CPC</th>
+                    <th class="table-success text-dark">Tipo Compra</th>
+                    <th class="table-warning text-dark" style="width: 400px;">Detalle del Producto</th>
+                    <th class="table-warning text-dark">Cantidad</th>
+                    <th class="table-warning text-dark">Unidad</th>
+                    <th class="table-warning text-dark">Costo Unitario</th>
+                    <th class="table-warning text-dark">Total</th>
+                    <th class="table-warning text-dark">E</th>
+                    <th class="table-warning text-dark">F</th>
+                    <th class="table-warning text-dark">M</th>
+                    <th class="table-warning text-dark">A</th>
+                    <th class="table-warning text-dark">M</th>
+                    <th class="table-warning text-dark">J</th>
+                    <th class="table-warning text-dark">X</th>
+                    <th class="table-warning text-dark">A</th>
+                    <th class="table-warning text-dark">S</th>
+                    <th class="table-warning text-dark">O</th>
+                    <th class="table-warning text-dark">N</th>
+                    <th class="table-warning text-dark">D</th>
+
+                    <th class="table-success text-dark">Tipo de Producto</th>
+                    <th class="table-success text-dark">Catalogo Electronico</th>
+                    <th class="table-success text-dark">Procedimiento Sugerido</th>
+                    <th class="table-info text-dark">Fondos BID</th>
+                    <th class="table-info text-dark">Codigo de Operacion</th>
+                    <th class="table-info text-dark">Codigo de Proyecto</th>
+                    <th class="table-success text-dark">Tipo de Regimen</th>
+                    <th class="table-info text-dark">Tipo de Presupuesto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="!bienes.length">
+                    <td colspan="29" class="text-center">
+                        <h6>No hay datos.</h6>
+                    </td>
+                </tr>
+                <tr *ngFor="let b of bienes">
+                    <td>{{ b.periodo }}</td>
+                    <td>{{ b.partida_presupuestaria?.codigo }} - {{ b.partida_presupuestaria?.nombre }}</td>
+                    <td>{{ b.codigo_cpc?.cod_unificado }} - {{ b.codigo_cpc?.nombre }}</td>
+                    <td>{{ b.tipo_compra ?? 'N/A' }}</td>
+                    <td>{{ b.descripcion }}</td>
+                    <td>{{ b.cantidad }}</td>
+                    <td>{{ b.u_medida ?? 'N/A' }}</td>
+                    <td>${{ b.costo_unitario | number:'1.2' }}</td>
+                    <td>${{ b.costo_total | number:'1.2' }}</td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo1" disabled><br>
+                        <small>
+                            <span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[1] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[1] }}
+                        </small>
+                    </td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo2" disabled><br>
+                        <small><span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[2] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[2] }}
+                        </small>
+                    </td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo3" disabled><br>
+                        <small><span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[3] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[3] }}
+                        </small>
+                    </td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo4" disabled><br>
+                        <small><span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[4] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[4] }}
+                        </small>
+                    </td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo5" disabled><br>
+                        <small><span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[5] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[5] }}
+                        </small>
+                    </td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo6" disabled><br>
+                        <small><span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[6] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[6] }}
+                        </small>
+                    </td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo7" disabled><br>
+                        <small><span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[7] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[7] }}
+                        </small>
+                    </td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo8" disabled><br>
+                        <small><span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[8] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[8] }}
+                        </small>
+                    </td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo9" disabled><br>
+                        <small><span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[9] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[9] }}
+                        </small>
+                    </td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo10" disabled><br>
+                        <small><span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[10] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[10] }}
+                        </small>
+                    </td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo11" disabled><br>
+                        <small><span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[11] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[11] }}
+                        </small>
+                    </td>
+                    <td style="min-width: 95px;" class="text-center">
+                        <input type="checkbox" [checked]="b.periodo12" disabled><br>
+                        <small><span class="font-weight-bold" matTooltip="Solicitudes">Sol.:</span> {{ b.solicitudes[12] }}<br>
+                            <span class="font-weight-bold" matTooltip="Cantidades Requeridas">Cant. Req.:</span>{{ b.cantidades[12] }}
+                        </small>
+                    </td>
+                    <td>{{ b.tipo_producto ?? 'N/A' }}</td>
+                    <td>{{ b.cat_elec ?? 'N/A' }}</td>
+                    <td>{{ b.proc_sugerido ?? 'N/A' }}</td>
+                    <td>{{ b.fondos_bid }}</td>
+                    <td>{{ b.codigo_operacion }}</td>
+                    <td>{{ b.codigo_proyecto }}</td>
+                    <td>{{ b.tipo_regimen ?? 'N/A' }}</td>
+                    <td>{{ b.tipo_presupuesto ?? 'N/A' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4">
+                        <h5>Total</h5>
+                    </td>
+                    <td>${{ total | number:'1.2' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+<!-- <div class="container-fluid">
+    <div class="row">
+        <div class="col"> -->
+            
+        <!-- </div>
+    </div>
+</div> -->
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="plaAtriVis"></cc-spiner-procesar>

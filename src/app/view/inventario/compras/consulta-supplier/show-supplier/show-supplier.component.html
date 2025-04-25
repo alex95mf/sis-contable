@@ -1,0 +1,143 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Detalle Proveedor" filtroBoton="btnsConsultProveedor"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Nombre comercial</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                        placeholder="{{info.nombre_comercial_prov}}">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Razón social</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                        placeholder="{{info.razon_social}}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">No. Documento</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                        placeholder="{{info.num_documento}}">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Clase</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="idAsesor" [disabled]="true"
+                        [(ngModel)]="info.clase">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Ciudad</span>
+                    </div>
+                    <input placeholder="Tipo de pago" type="text" class="form-control form-control-sm" [disabled]="true"
+                        [(ngModel)]="info.ciudad">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Teléfono</span>
+                    </div>
+                    <input placeholder="Tipo de pago" type="text" class="form-control form-control-sm" [disabled]="true"
+                        [(ngModel)]="info.telefono">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-sm-8">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Dirección</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                        [(ngModel)]="info.direccion">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Correo</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm " [(ngModel)]="info.email" disabled>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row mb-2">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Cupo</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-1" [disabled]="true"
+                        placeholder="$ {{commonServices.formatNumber(info.cupo_credito)}}">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Saldo</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-1" [disabled]="true"
+                        placeholder=" $ {{commonServices.formatNumber(info.saldo_credito)}}">
+                </div>
+            </div>
+        </div> -->
+        <fieldset class="border p-1" *ngIf="info.buy_compra_finish.length > 0">
+            <legend class="w-auto h6">Listado de compras</legend>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row  mb-3 pl-3 pr-3">
+                        <div class="col-12 table-responsive filters pt-2 "
+                            style="font-family: 'Poppins1';max-height: 230px;overflow-y: scroll;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr style="width: 100%;">
+                                        <th style="width: 15%;">Fecha compra</th>
+                                        <th style="width: 25%;">Nombre Doc</th>
+                                        <th style="width: 15%;">No. Doc</th>
+                                        <th style="width: 15%;">SubTotal</th>
+                                        <th style="width: 15%;">Iva</th>
+                                        <th style="width: 15%;">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let d of info.buy_compra_finish; let i = index">
+                                        <td>{{d.fecha}}</td>
+                                        <td>{{d.name_document}}</td>
+                                        <td>{{d.abb_document}}-{{d.num_documento}}</td>
+                                        <td class="text-right pr-2">
+                                            $ {{commonServices.formatNumber(d.subtotal)}}
+                                        </td>
+                                        <td class="text-right pr-2">
+                                            $ {{commonServices.formatNumber(d.iva_valor)}}
+                                        </td>
+                                        <td class="text-right pr-2">$ {{commonServices.formatNumber(d.total)}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </app-button-radio-active>
+</div>

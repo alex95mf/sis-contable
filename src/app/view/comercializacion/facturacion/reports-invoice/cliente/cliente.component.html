@@ -1,0 +1,79 @@
+<div class="modal-header">
+    <div class="row" style="width: 100%">
+        <div class="col-12">
+            <div class="title-head">
+                <span>BUSCAR - CLIENTE</span>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="row justify-content-center" *ngIf="!processing">
+    <div class="container-new-loader" style="max-height: 140px; margin-top: 20px">
+        <i class="fa fa-spinner fa-spin"></i>
+    </div>
+</div>
+<div class="modal-body " *ngIf="processing">
+    <div class="row justify-content-center">
+
+        <div class="col-md-12">
+            <fieldset class="border p-2">
+                <legend class="w-auto h6 prueba">Listado de Cliente</legend>
+                <div class="row justify-content-center">
+                    <label class="l" style="margin-top: 6px">CLIENTE :</label>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-5 ">
+
+                        <!--  <div class="col-md-5">
+                            <label class="l">CLIENTE</label>
+                        </div> -->
+
+                        <div class="form-group" style="text-align: center">
+
+                            <ng-select id="IdCliente" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="cliente" (ngModelChange)="searchCliente($event)">
+                                <ng-option *ngFor="let d of clientes" [value]="d.id_cliente">
+                                    {{ d.nombre_comercial_cli }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center" style="margin-top: 20px">
+                    <div class="col-12 container">
+                        <div class="content-table">
+                            <div class="table-responsive">
+                                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                                    <thead class="thead-dark">
+                                        <tr class="text-center">
+                                            <th>#</th>
+                                            <th>Ruc</th>
+                                            <th>Nombre Cliente</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="validaDtUser">
+                                        <tr class="text-justify" *ngFor="let dt of guardarolT; let i = index" (click)="searchClienteModal(dt)" style="cursor:pointer;text-align:center;">
+                                            <td class="text-left" style="width: 0%;">{{ i + 1 }}</td>
+                                            <td class="text-center" style="width: 1%;">{{ dt.num_documento }}</td>
+                                            <td class="text-left" style="width: 2%;">{{ dt.nombre_comercial_cli }}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 mt-3">
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>

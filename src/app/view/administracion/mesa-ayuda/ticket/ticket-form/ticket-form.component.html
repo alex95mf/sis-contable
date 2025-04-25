@@ -1,0 +1,217 @@
+<app-button-radio-active-new [titulo]="isNew ? 'Nuevo Ticket' : 'Ver Ticket'" filtroBoton="btnTicketForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+    <fieldset class="border card-fieldset">
+        <legend class="w-auto card-legend">Información de Ticket</legend>
+        <div class="row m-0">
+
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Categoría" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.categoria" [disabled]="deshabilitar" (change)="getCatalogoSubCategoria($event)" maxlength="5">
+                        <ng-option disabled [value]="0">Seleccione una Categor&iacute;a</ng-option>
+                        <ng-option *ngFor="let op of categorias" [value]="op.valor">{{ op.descripcion }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+
+
+
+   
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+
+                <app-cc-input-group-prepend label="Subcategoría" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="subcategoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.subcategoria" [disabled]="deshabilitar" maxlength="5">
+                        <ng-option disabled [value]="0">Seleccione una Sub Categor&iacute;a</ng-option>
+                        <ng-option *ngFor="let op of subCategorias" [value]="op.valor">{{ op.descripcion }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Prioridad" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.prioridad" [disabled]="deshabilitar" maxlength="5">
+                        <ng-option disabled [value]="0">Seleccione una Prioridad</ng-option>
+                        <ng-option *ngFor="let op of prioridadList" [value]="op.value">
+                            <i placement="bottom" [ngbTooltip]="(op.value == 'A') ? 'Alta' : (op.value == 'M') ? 'Media' : ((op.value == 'B') ? 'Baja' : 'No tiene')" [class]="(op.value == 'A') ? 'fas fa-circle text-danger' : (op.value == 'M') ? 'fas fa-circle text-warning' : ((op.value == 'B') ? 'fas fa-circle text-success' : 'fas fa-circle text-muted')">
+                            </i>
+                            {{ op.label }}
+                        </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-12 col-md-12 pt-0 pb-0">
+
+                <app-cc-input-group-prepend label="Observación:" styleSpan="size-span-campo font-weight-bold">
+
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketNew.observacion" [disabled]="deshabilitar" maxlength="300"></textarea>
+                </app-cc-input-group-prepend>
+
+            </div>
+        </div>
+
+
+        <div class="row m-0" *ngIf="isNew">
+
+            
+            <div class="col-12 col-md-6 pt-0 pb-0">
+
+                <app-cc-input-group-prepend label="Anexos" styleSpan="size-span-campo font-weight-bold">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)">
+                        <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
+                    </div>
+                </app-cc-input-group-prepend>
+
+                <!-- <div class="row">
+                  <div class="col">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                        (change)="cargaArchivo($event.target.files)">
+                      <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name :
+                        "Seleccione un archivo" }}</label>
+                    </div>
+                  </div>
+                 
+                </div> -->
+                
+
+
+            </div>
+            <!-- <div class="col-4 mt-2">
+                <div class="row">
+                    <div class="col">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)">
+                            <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name :
+                        "Seleccione un archivo" }}</label>
+                        </div>
+                    </div>
+                  </div>
+               
+                </div>
+                <div class="row">
+                  <div class="col">
+                   
+                  </div>
+                </div>
+            </div> -->
+
+
+        </div>
+
+        <div class="row m-0" *ngIf="!isNew">
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-anexos-list-dis [dataUser]="dataUser" [permissions]="permissions" [identifier]="data.id_ticket"></app-anexos-list-dis>
+
+            </div>
+        </div>
+
+
+
+
+
+    </fieldset>
+
+    <div *ngIf="mostrarReapertura" class="">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Re-apertura ticket</legend>
+            <div class="row m-0">
+                <div class="col-12 col-md-12 pt-0 pb-0">
+
+                    <app-cc-input-group-prepend label="Observación:" styleSpan="size-span-campo font-weight-bold">
+                        <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación de re-apertura" [(ngModel)]="observacionReapertura" maxlength="1500"></textarea>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div *ngIf="!isNew" class="">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Aprobaciones</legend>
+            <div class="row m-0">
+                <div class="col-12">
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-k table-hover" >
+                            <thead class="sticky-header">
+                            <tr class="text-center">
+                                <th style="width: 5%;">Nivel de aprobación</th>
+                                <th style="width: 10%;">Fecha</th>
+                                <th style="width: 10%;">Organigrama</th>
+                                <th style="width: 10%;">Rol</th>
+                                <th style="width: 20%;">Usuario</th>
+                                <th style="width: 15%;">Estado</th>
+                                <th style="width: 30%;">Observaci&oacute;n</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="data.aprobaciones.length == 0">
+                                <td colspan="8" class="text-center">
+                                    <h6 class="my-1">Su ticket no ha sido atendido.</h6>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let dt of data.aprobaciones, let i = index">
+                                <td class="text-center">{{ dt.orden_aprobacion}}</td>
+                                <td class="text-center">{{ dt.fecha_aprobacion}}</td>
+                                <td class="text-center"> {{ dt.organigrama.nombre}}</td>
+                                <td class="text-center"> {{ dt.rol.nombre_rol}}</td>
+                                <td class="text-center"><i class="fa fa-user" aria-hidden="true"></i>
+                                    {{ dt.usuario_aprobacion?.nombre || 'Sin Usuario' | titlecase }}
+                                </td>
+                                <td class="text-center"> {{ dt.estado_aprobacion}}</td>
+                                <td class="text-center">{{ dt.observacion }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            </div>
+        </fieldset>
+    </div>
+    <div *ngIf="!isNew" class="">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Acciones Recientes</legend>
+            <div class="row m-0">
+                <div class="col-12">
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-k table-hover" >
+                            <thead class="sticky-header">
+
+
+                   
+                            <tr class="text-center">
+                                <th style="width: 5%;">Fecha</th>
+                                <th style="width: 10%;">Usuario</th>
+                                <th style="width: 20%;">Observaci&oacute;n</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="ticketSegui.length == 0">
+                                <td colspan="8" class="text-center">
+                                    <h6 class="my-1">Su ticket no ha sido atendido.</h6>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let dt of ticketSegui, let i = index">
+
+                                <td class="text-center">{{ dt.fecha }}</td>
+                                <td class="text-center"><i class="fa fa-user" aria-hidden="true"></i>
+                                    {{ dt.usuario | titlecase }}
+                                </td>
+                                <td class="text-center">{{ dt.observacion }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            </div>
+        </fieldset>
+    </div>
+    
+</app-button-radio-active-new>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>

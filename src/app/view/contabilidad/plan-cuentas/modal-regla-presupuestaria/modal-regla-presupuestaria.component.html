@@ -1,0 +1,97 @@
+<app-button-radio-active [titulo]="isNew ? 'Registrar Cuentas Complementarias' : 'Registrar Cuentas Complementarias'" cstyle="bg-gradient-primary text-white" filtroBoton="btnSueldo" [groupButton]="botonera"
+  (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-plus-square">
+  <fieldset class="border py-1 px-3 my-3">
+    <legend class="mb-0 w-auto font-weight-bold">
+      {{isNew ? 'Registrar Cuentas Complementarias' : 'Registrar Cuentas Complementarias'}}</legend>
+    <div class="row">
+      <!-- <div class="col-sm-12">
+        <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-rubros font-weight-bold size-span-campo"
+          style="width: 155px">
+          <ng-select class="form-control form-control-sm" [clearable]="false" [(ngModel)]="tipo" (change)="borrardatos()">
+            <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+            <ng-option *ngFor="let op of tipoList" [value]="op.valor">{{ op.descripcion }}</ng-option>
+          </ng-select>
+        </app-cc-input-group-prepend>
+      </div> -->
+      <div class="col-sm-12">
+        <app-cc-input-group-prepend label="Cuenta Contable" styleSpan="size-span-rubros font-weight-bold size-span-campo"
+          style="width: 210px;">
+          <input type="text" class="form-control" readonly [(ngModel)]="cuenta_contable" placeholder="Cuenta Contable"
+            maxlength="15">
+          <button [disabled]="true" class="btn btn-primary btn-sm" (click)="modalCuentaContable('1')" [readonly]="deudora && tipo == 'GENERAL'">
+            Consultar</button>
+            <button [disabled]="true" class="btn btn-warning  btn-sm" (click)="cuenta_contable = ''">
+              <i class="fas fa-trash-alt"></i> 
+          </button>
+        </app-cc-input-group-prepend>
+      </div>
+      <!-- <div class="col-sm-12">
+        <app-cc-input-group-prepend label="Codigo Presupuesto Gasto" styleSpan="size-span-rubros font-weight-bold size-span-campo"
+          style="width: 210px;">
+          <input type="text" class="form-control" readonly [(ngModel)]="codigo_presupuesto_gasto"
+            placeholder="Cuenta Contable" maxlength="15">
+          <button [disabled]="true" class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('2')" [readonly]="presupuesto && tipo == 'GENERAL'">
+            Consultar</button>
+            <button [disabled]="true" class="btn btn-warning  btn-sm" (click)="codigo_presupuesto_gasto = ''">
+              <i class="fas fa-trash-alt"></i> 
+          </button>
+        </app-cc-input-group-prepend>
+      </div> -->
+      <!-- <div class="col-sm-12">
+        <app-cc-input-group-prepend label="Codigo Presupuesto Ingreso" styleSpan="size-span-rubros font-weight-bold size-span-campo"
+          style="width: 210px;">
+          <input type="text" class="form-control" readonly [(ngModel)]="codigo_presupuesto_ingreso"
+            placeholder="Cuenta Contable" maxlength="15">
+          <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('3')" [readonly]="presupuesto && tipo == 'GENERAL'">
+            Consultar</button>
+            <button class="btn btn-warning  btn-sm" (click)="codigo_presupuesto_ingreso = ''">
+              <i class="fas fa-trash-alt"></i> 
+          </button>
+        </app-cc-input-group-prepend>
+      </div> -->
+      <div class="col-sm-12">
+        <app-cc-input-group-prepend label="Cuenta Contable Débito" styleSpan="size-span-rubros font-weight-bold size-span-campo"
+          style="width: 210px;">
+          <input type="text" class="form-control" readonly [(ngModel)]="cuenta_contable_cobro"
+            placeholder="Cuenta Contable" maxlength="15">
+          <button class="btn btn-primary btn-sm" (click)="modalCuentaContableReg('4')" [ngReadonly]="isdebe && tipo == 'GENERAL'"
+            [disabled]="isdebe && tipo == 'GENERAL'">
+            Consultar</button>
+            <button class="btn btn-warning  btn-sm" (click)="cuenta_contable_cobro = ''">
+              <i class="fas fa-trash-alt"></i> 
+          </button>
+        </app-cc-input-group-prepend>
+      </div>
+      <div class="col-sm-12">
+        <app-cc-input-group-prepend label="Cuenta Contable Crédito" styleSpan="size-span-rubros font-weight-bold size-span-campo"
+          style="width: 210px;">
+          <input type="text" class="form-control" readonly [(ngModel)]="cuenta_contable_pago"
+            placeholder="Cuenta Contable" maxlength="15">
+          <button class="btn btn-primary btn-sm" (click)="modalCuentaContableReg('5')" [readonly]="ishaber && tipo == 'GENERAL'"
+            [disabled]="ishaber && tipo == 'GENERAL'">
+            Consultar</button>
+            <button class="btn btn-warning  btn-sm" (click)="cuenta_contable_pago = ''">
+              <i class="fas fa-trash-alt"></i> 
+          </button>
+        </app-cc-input-group-prepend>
+      </div>
+      <div>
+      </div>
+      <div class="col-sm-12">
+        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-rubros font-weight-bold size-span-campo"
+          style="width: 155px">
+          <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="estado">
+            <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+            <ng-option *ngFor="let op of estadoList" [value]="op.valor">{{ op.descripcion }}</ng-option>
+          </ng-select>
+        </app-cc-input-group-prepend>
+      </div>
+
+    </div>
+    <div class="row">
+    </div>
+    <div class="row">
+    </div>
+  </fieldset>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSpiner" lTipo="sp"></cc-spiner-procesar>

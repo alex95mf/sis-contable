@@ -1,0 +1,70 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active titulo="CIERRE DE AÑO" filtroBoton="btnsConsultCierreAnio"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-warning" role="alert">
+                    Es necesario considerar que al realizar el cierre del año contable, generara un asiento automatico que tranfiere los saldos al siguiente periodo. Este asiento se registra al 31 de Diciembre del periodo a cerrar.
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="permiso_ver =='1' ; else PermisoVerDenegado">
+
+            <div class="col-sm-3">
+                <div class="row p-2 mb-3">
+                    <div class="col-sm-12">
+                        <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo">
+                            <app-cc-select-periodo (ChangePeriodo)="ObtenerPeriodo($event)" ></app-cc-select-periodo>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="row p-2 mb-3 mt-2 content-tabla-general">
+                    <table class="table">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 25%; ">USUARIO APERTURA</th>
+                                <th style="width: 10%; ">FECHA APERTURA</th>
+                                <th style="width: 25%; ">USUARIO CIERRE</th>
+                                <th style="width: 10%; ">FECHA CIERRE</th>
+                                <th style="width: 10%; ">ESTADO</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="periodos.length > 0 else TablaVacia">
+                            <tr *ngFor="let item of periodos">
+                                <td style="padding-left: 25px;text-align: start;">{{ item.usuario_apertura }}</td>
+                                <td style="padding-left: 10px;text-align: start;">{{ item.fecha_apertura }}</td>
+                                <td style="padding-left: 25px;text-align: start;">{{ item.usuario_cierre }}</td>
+                                <td style="padding-left: 10px;text-align: start;">{{ item.fecha_cierre }}</td>
+                                <td [ngClass]="{'aperturado': item.estate == 'A' , 'cerrado': item.estate == 'C' }"   style="padding-left: 25px;text-align: start;">{{ item.estado }}</td>
+                            </tr>
+                        </tbody>
+
+                        <ng-template #TablaVacia>
+                            <tbody>
+                                <tr class="body-empty"  >
+                                    <td colspan="5" >no hay datos para mostrar</td> 
+                                </tr>
+                            </tbody>
+                        </ng-template>
+                    </table>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template>
+
+
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spPlanCuentas"></cc-spiner-procesar>

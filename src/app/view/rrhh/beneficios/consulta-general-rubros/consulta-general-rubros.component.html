@@ -1,0 +1,96 @@
+<div class="mt-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light" icono="fas fa-search-dollar"
+        filtroBoton="btnsConsultaRubros" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="px-3 pb-2">
+            <!-- <legend class="w-auto bg-dark">Consulta</legend> -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" appendTo="body" [clearable]="true" [(ngModel)]="periodo_selected"
+                                    [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                            <!-- <app-cc-input-group-prepend label="Periodo"styleSpan="size-span-campo font-weight-bold">
+                                <p-calendar [(ngModel)]="periodo_selected" view="year" dateFormat="yy"
+                                    [readonlyInput]="true" [inputStyleClass]="'form-control form-control-sm'">
+                                </p-calendar>
+                            </app-cc-input-group-prepend> -->
+                        </div>
+                        <div class="col-sm-5">
+                            <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="true" [(ngModel)]="filter.mes"
+                                    [items]="lst_mes" bindValue="cat_keyword" bindLabel="cat_descripcion"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <app-cc-input-group-prepend label="Rubro" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="true" [(ngModel)]="filter.rubro"
+                                    [items]="lst_rubro" bindValue="rub_codigo" bindLabel="rub_descripcion"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-5">
+                            <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control form-control-sm" 
+                                [(ngModel)]="filter.empleado">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <p-table 
+        [value]="registros" 
+        [scrollable]="true" 
+        scrollHeight="600px"
+        [rowHover]="true"
+        styleClass=" p-datatable-bordered">
+            <ng-template pTemplate="header">
+                <tr style="font-size: 11px;">
+                    <th style="min-width: 80px;">Año</th>
+                    <th style="min-width: 100px;">Mes</th>
+                    <th style="min-width: 80px;">Identificación</th>
+                    <th style="min-width: 200px;">Empleado</th>
+                    <th style="min-width: 100px;">Rubro</th>
+                    <th style="min-width: 100px;">Tipo Rubro</th>
+                    <th class="d-flex justify-content-end" style="min-width: 100px;">Valor</th>
+                    <!-- <th>Acciones</th> -->
+                </tr>
+            </ng-template>
+            <!-- <ng-template pTemplate="groupheader" let-registro let-rowIndex="rowIndex">
+                <tr style="font-size: 14px;background: #F8F9FA;">
+                    <td colspan="1">
+                        <span class="font-bold ml-2">{{registro.anio}}</span>
+                    </td>
+                    <td></td>
+                    <td colspan="2">
+                        <span class="text-center font-bold ml-2">{{buscarMes(registro.mes)}}</span>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </ng-template> -->
+            <ng-template pTemplate="body" let-registro>
+                <tr style="font-size: 11px;">
+                    <td style="min-width: 80px;">{{ registro.anio }}</td>
+                    <td  style="min-width:100px;">{{ buscarMes(registro.mes) }}</td>
+                    <td style="min-width:80px;">{{ registro.empleado?.emp_identificacion }}</td>
+                    <td  style="min-width:200px;">{{ registro.empleado?.emp_full_nombre }}</td>
+                    <td style="min-width: 100px;">{{ registro.rubro?.rub_descripcion }}</td>
+                    <td style="min-width: 100px;">{{ registro.id_catalogo_tipo_rubro }}</td>
+                    <td class="d-flex justify-content-end" style="min-width: 100px;">$ {{ registro.valor | number:'1.2-2' }}</td>
+                    <!-- <td></td> -->
+                </tr>
+            </ng-template>
+        </p-table>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spConsultaRubros"></cc-spiner-procesar>

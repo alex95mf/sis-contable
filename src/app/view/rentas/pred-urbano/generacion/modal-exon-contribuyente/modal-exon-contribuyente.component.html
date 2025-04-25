@@ -1,0 +1,45 @@
+<app-button-radio-active titulo="Exoneraciones por Contribuyente" cstyle="bg-light" icono="fas fa-file-alt"
+    filtroBoton="btnModalExonContribuyente" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="table-responsive" style="max-height: 450px; overflow-y: scroll;">
+        <table class="table table-hover mat-elevation-z2">
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>Código</th>
+                    <th>Impuesto</th>
+                    <th>Descripcion</th>
+                    <th>% Descuento</th>
+                    <!-- <th>Acciones</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="lst_exoneraciones.length > 0; else emptyExoneraciones">
+                    <tr *ngFor="let dt of lst_exoneraciones; let i = index">
+                        <td>
+                            <input type="checkbox" id="dt.id" [(ngModel)]="dt.aplica">
+                        </td>
+                        <td>{{ dt.con_det_codigo }}</td>
+                        <td>{{ dt.cod_concepto_det_aplicable }}</td>
+                        <td>{{ dt.descripcion }}</td>
+                        <td>
+                            <!-- {{ dt.porcentaje * 100 }} % -->
+                            <input currencyMask [options]="{prefix: '', suffix:'%'}" [(ngModel)]="dt.porcentaje"
+                                [disabled]="dt.con_det_codigo != 'OEX'" class="form-control form-control-sm">
+                        </td>
+                        <!-- <td>
+                            <button class="btn btn-sm btn-primary" (click)="aplicarExoneracion(dt)">
+                                <i class="far fa-hand-pointer"></i>
+                            </button>
+                        </td> -->
+                    </tr>
+                </ng-container>
+                <ng-template #emptyExoneraciones>
+                    <tr>
+                        <td colspan="5"><span class="h6">No hay exoneraciones aplicables.</span></td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalExonContribuyente"></cc-spiner-procesar>

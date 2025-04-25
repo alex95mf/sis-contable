@@ -1,0 +1,158 @@
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnInfoCli" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" 
+(onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-user-circle-o">  
+
+<fieldset class="border p-2 mb-2 mt-3" >
+    <legend class="w-auto h6">Informacion Cliente</legend>
+
+    <div class="row mt-2">
+        <div class="col-sm-6">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo"
+                        id="inputGroup-sizing-sm">R.U.C / C.I:</span>
+                </div>
+                <input type="text"
+                    placeholder=" {{ data.datos._ven_cliente.num_documento }}"
+                    disabled class="form-control form-control-sm">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo"
+                        id="inputGroup-sizing-sm">Grupo:</span>
+                </div>
+                <input type="text"
+                    placeholder="{{ data.datos._ven_cliente.group.name }}"
+                    disabled class="form-control form-control-sm">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo"
+                        id="inputGroup-sizing-sm">Razon Social:</span>
+                </div>
+                <input type="text"
+                    placeholder="{{ data.datos._ven_cliente.razon_social }}"
+                    disabled class="form-control form-control-sm">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo"
+                        id="inputGroup-sizing-sm">Origen:</span>
+                </div>
+                <input type="text"
+                    placeholder="{{ data.datos._ven_cliente.pais }} - {{ data.datos._ven_cliente.provincia }}"
+                    disabled class="form-control form-control-sm">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo"
+                        id="inputGroup-sizing-sm">Representante legal:</span>
+                </div>
+                <input type="text"
+                    placeholder="{{ data.datos._ven_cliente.representante_legal }}"
+                    disabled class="form-control form-control-sm">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo"
+                        id="inputGroup-sizing-sm">Dirección:</span>
+                </div>
+                <input type="text"
+                    placeholder="{{ data.datos._ven_cliente.direccion }}"
+                    disabled class="form-control form-control-sm">
+            </div>
+        </div>
+    </div>
+
+</fieldset>
+
+
+<fieldset class="border p-2 mb-2 mt-3 filters" *ngIf="data.datos._comp_ing_cam._fac_ventas != null">
+    <legend class="w-auto h6">Informacion Documento</legend>
+
+    <div class="row mt-2">
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo"
+                        id="inputGroup-sizing-sm">Fecha Emision:</span>
+                </div>
+                <input type="text"
+                    placeholder=" {{ data.datos._comp_ing_cam._fac_ventas.fecha }}"
+                    disabled class="form-control form-control-sm">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo"
+                        id="inputGroup-sizing-sm">Forma de Pago:</span>
+                </div>
+                <input type="text"
+                    placeholder="{{ data.datos._comp_ing_cam._fac_ventas.forma_pago }}"
+                    disabled class="form-control form-control-sm">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo"
+                        id="inputGroup-sizing-sm">Numero Documento:</span>
+                </div>
+                <input type="text"
+                    placeholder="{{ data.datos._comp_ing_cam._fac_ventas.num_doc }}"
+                    disabled class="form-control form-control-sm">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo"
+                        id="inputGroup-sizing-sm">Valor Total:</span>
+                </div>
+                <input type="text"
+                    placeholder="{{ data.datos._comp_ing_cam._fac_ventas.base_iva }}"
+                    disabled class="form-control form-control-sm text-right">
+            </div>
+        </div>
+    </div>
+<br>
+    <div class="table-responsive responsive-table ">
+        <table class="table table-bordered " >
+            <thead class="text-center">
+                <tr >
+                    <th>#</th>
+                    <th>Nombre Producto</th>
+                    <th>Cantidad</th>
+                    <th>Costo Unitario</th>
+                    <th>Costo Total</th>
+                </tr>
+            </thead>
+            <tbody style="width: 100%;">
+                 <tr *ngFor="let valor of data.datos._comp_ing_cam._fac_ventas.quotesdetails" >
+                    <td style="width: 5%;">{{valor.id_venta_det}}</td>
+                    <td style="width: 10%;">{{valor.product.codigoProducto }} - {{valor.product.nombre }}</td>
+                    <td style="width: 15%;">{{valor.cantidad}}</td>
+                    <td style="width: 15%;" class="text-right">{{valor.costo_unitario}}</td>
+                    <td style="width: 10%;" class="text-right">{{valor.costo_total}}</td>
+                </tr> 
+            </tbody>
+        </table>
+    </div>
+
+</fieldset>
+
+</app-button-radio-active>

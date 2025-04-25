@@ -1,0 +1,128 @@
+<div *ngIf="categoria_esp_publicitario" >
+    <app-button-radio-active [titulo]="esNuevaCatEspPub ? 'Nueva Categoria de Esp. Publicitarios' : 'Editar Categoria de Esp. Publicitarios'" filtroBoton="btnsFormCategoriasEspPublicitarios" cstyle="bg-gradient-primary text-white" [groupButton]="botonera" (onMetodoGlobal)="metodoGlobal($event)" [icono]="esNuevaCatEspPub ? 'far fa-plus-square' : 'far fa-edit'">
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Nivel</span>
+                    </div>
+                    <input id="nivel" type="number" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.nivel" min="0">
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Grupo</span>
+                    </div>
+                    <input id="grupo" type="text" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.grupo">
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Tipo</span>
+                    </div>
+                    <ng-select id="tipo" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.tipo" (change)="manejarTipo($event)">
+                        <ng-option disabled [value]="0">Seleccione un tipo</ng-option>
+                        <ng-option *ngFor="let op of lista_tipos" [value]="op.descripcion">{{ op.descripcion + " - " + op.valor }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Nombre</span>
+                    </div>
+                    <input id="nombre" type="text" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.nombre" readonly>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Formula</span>
+                    </div>
+                    <input id="formula" type="text" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.formula">
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Porcentaje</span>
+                    </div>
+                    <input id="porcentaje" type="number" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.porcentaje" min="0" max="1">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Medida inicial</span>
+                    </div>
+                    <input id="medida_desde" type="number" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.medida_desde" min="0">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Medida final</span>
+                    </div>
+                    <input id="medida_hasta" type="number" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.medida_hasta" min="0">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Excedente inicial</span>
+                    </div>
+                    <input id="excedente_desde" type="number" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.excedente_desde" min="0">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Excedente final</span>
+                    </div>
+                    <input id="excedente_hasta" type="number" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.excedente_hasta" min="0">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Porcentaje de recargo</span>
+                    </div>
+                    <input id="recargo" type="number" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.recargo" min="0" max="1">
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Observación</span>
+                    </div>
+                    <input id="observacion" type="text" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.observacion">
+                </div>
+            </div>
+        </div>
+        <br>
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="texto_barra_carga" lfulScren=true lTipo="formCategoriasEspPublicitarios"></cc-spiner-procesar>

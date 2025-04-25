@@ -1,0 +1,70 @@
+<p-table
+[value]="dataSueldoResponseI"
+[lazy]="true"
+(onLazyLoad)="CargaSueldos($event)"
+selectionMode="single"
+[(selection)]="selectedProduct2"
+(onRowSelect)="onRowSelectSueldo($event)"
+responsiveLayout="scroll"
+[paginator]="true"
+[rows]="rows"
+[totalRecords]="totalRecords"
+[loading]="loading"
+[showCurrentPageReport]="true"
+currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+[rowsPerPageOptions]="[10, 25, 50]"
+>
+<ng-template pTemplate="header">
+  <tr>
+    <th pSortableColumn="id_sueldo">
+        Codigo <p-sortIcon field="id_sueldo"></p-sortIcon>
+      </th>
+    <th pSortableColumn="sld_anio">
+      Año <p-sortIcon field="sld_anio"></p-sortIcon>
+    </th>
+    <th pSortableColumn="dep_cargo">
+        Cargo <p-sortIcon field="dep_cargo"></p-sortIcon>
+    </th>
+    <th pSortableColumn="dep_descripcion">
+        Tipo de contrato <p-sortIcon field="dep_descripcion"></p-sortIcon>
+    </th>
+    <th pSortableColumn="dep_descripcion">
+        Código Sectorial <p-sortIcon field="dep_descripcion"></p-sortIcon>
+    </th>
+    <th pSortableColumn="sld_codigo_sectorial">
+        Salario mínimo <p-sortIcon field="sld_codigo_sectorial"></p-sortIcon>
+    </th>
+    <!-- <th pSortableColumn="dep_descripcion">
+        Estado <p-sortIcon field="dep_descripcion"></p-sortIcon>
+    </th> -->
+  </tr>
+  <tr>
+    <!-- [pageLinkSize]="3" -->
+    <!-- <th>
+      <p-columnFilter type="text" field="codigo"></p-columnFilter>
+    </th> -->
+    <th></th>
+    <th>
+      <p-columnFilter type="text" field="sld_anio"></p-columnFilter>
+    </th>
+    <th>
+      <p-columnFilter type="text" field="dep_cargo"></p-columnFilter>
+    </th>
+    <th></th>
+    <th>      
+      <p-columnFilter type="text" field="dep_descripcion"></p-columnFilter>
+    </th>
+    <th></th>
+  </tr>
+</ng-template>
+<ng-template pTemplate="body" let-sueldoRpt>
+  <tr [pSelectableRow]="sueldoRpt">
+    <td>{{ sueldoRpt.id_sueldo }}</td>
+    <td>{{ sueldoRpt.sld_anio }}</td>
+    <td>{{ sueldoRpt.cargo?.car_nombre }}</td>
+    <td>{{ sueldoRpt.tipo_contrato.cat_nombre }}</td>
+    <td>{{ sueldoRpt.sld_codigo_sectorial }}</td>
+    <td>{{ sueldoRpt.sld_salario_minimo }}</td>
+  </tr>
+</ng-template>
+</p-table>

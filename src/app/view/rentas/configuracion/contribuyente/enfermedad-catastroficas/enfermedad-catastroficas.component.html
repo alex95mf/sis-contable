@@ -1,0 +1,87 @@
+<!-- (opened)="contribuyenteDis.di_tiene_discpacidad = true" (closed)="contribuyenteDis.di_tiene_discpacidad = false" -->
+<mat-expansion-panel class="mt-2"  [disabled]="!validadorNt">
+    <mat-expansion-panel-header>
+      <input type="checkbox" [(ngModel)]="contibuyenteEnfermedad.en_tiene_enfermedad"  (change)="selectedCheck()" >
+      <mat-panel-title>Enfermedades catastróficas </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="row mt-2">
+      <div class="col-4">
+
+        <app-cc-input-group-prepend label="Tipo de enfermedad" styleSpan="size-span-campo font-weight-bold">
+          <!-- <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+            [(ngModel)]="contibuyenteEnfermedad.en_tipo_enfermedad" [readonly]="!contibuyenteEnfermedad.en_tiene_enfermedad">
+            <ng-option [value]=0 disabled>Seleccione el tipo de discapacidad</ng-option>
+            <ng-option *ngFor="let doc of catalog.ren_discapacidad" [value]="doc.valor">{{doc.valor}}
+            </ng-option>
+          </ng-select> -->
+          <input class="form-control" type="text" [(ngModel)]="contibuyenteEnfermedad.en_tipo_enfermedad"
+            placeholder="Ingrese el tipo de enfermedad" [readonly]="!contibuyenteEnfermedad.en_tiene_enfermedad" maxlength="200"/>
+        </app-cc-input-group-prepend>
+
+        <!-- <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                </div>
+                <input id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección contribuyente" [(ngModel)]="contribuyente.direccion">
+            </div> -->
+      </div>
+      
+
+      <div class="col-4">
+        <app-cc-input-group-prepend label="No. Resolución" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contibuyenteEnfermedad.en_resolucion"
+            placeholder="Ingrese el número de resolución" [readonly]="!contibuyenteEnfermedad.en_tiene_enfermedad" maxlength="30"/>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Fecha de resolución" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="date" [(ngModel)]="contibuyenteEnfermedad.en_fecha_resolucion"
+            placeholder="Ingrese el primer apellido" [readonly]="!contibuyenteEnfermedad.en_tiene_enfermedad" />
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Persona que autoriza" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contibuyenteEnfermedad.en_persona_autoriza"
+            placeholder="Ingrese la perona que autoriza" [readonly]="!contibuyenteEnfermedad.en_tiene_enfermedad" maxlength="100" (keypress)="validaciones.onlyWord($event)"/>
+        </app-cc-input-group-prepend>
+
+      </div>
+
+      <!-- <div class="col-4">
+        <app-cc-input-group-prepend label="Fecha de resolucion" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="date" [(ngModel)]="contibuyenteEnfermedad.di_fecha_resolucion"
+            placeholder="Ingrese el primer apellido" [readonly]="!contibuyenteEnfermedad" />
+        </app-cc-input-group-prepend>
+
+      </div>
+
+      <div class="col-4">
+        <app-cc-input-group-prepend label="Persona que autoriza" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contibuyenteEnfermedad.di_persona_autoriza"
+            placeholder="Ingrese el segundo apellido" [readonly]="!contibuyenteEnfermedad" />
+        </app-cc-input-group-prepend>
+
+      </div> -->
+
+      <div class="col-4">
+        <div class="row">
+          <div class="col">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                (change)="cargaArchivo($event.target.files)" [disabled]="anexo?.length > 0">
+              <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name :
+                "Seleccione un archivo" }}</label>
+            </div>
+          </div>
+          <!-- <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" [disabled]='cargarAnexo'>Cargar</button></div> -->
+        </div>
+        <div class="row">
+          <div class="col">
+            <app-anexos-list-enfermedad [dataUser]="dataUser" [permissions]="permissions" [identificador]="ENF"></app-anexos-list-enfermedad>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </mat-expansion-panel>
+

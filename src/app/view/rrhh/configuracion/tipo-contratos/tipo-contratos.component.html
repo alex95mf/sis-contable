@@ -1,0 +1,214 @@
+<p-toast></p-toast>
+<p-toast position="top-left" key="tl"></p-toast>
+<p-toast position="top-right" class="custom-toast" key="tr"></p-toast>
+<p-toast position="top-center" key="tc"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+
+<div class="mt-4 mb-5">
+    <app-button-radio-active titulo="Ingeso tipo contratos" filtroBoton="btnsTiposContratos"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+
+        <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado">
+            <p-tabView (onChange)="dinamicoBotones($event)" styleClass="tab_content_compras" class="overflow-hidden">
+                <!-- [headerStyle]="{'background-color':'red'}" -->
+                <p-tabPanel class="p-0" header="TIPOS DE CONTRATOS" leftIcon="pi pi-list" [headerStyle]="{'font-size': '0.7rem'}" >
+                    
+                    <form [formGroup]="formGroupTiposContratos" (ngSubmit)="onSubmit()">
+                        <div class="row" style="font-size: 12px;">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm" style="font-size: 12px;">Tipo Contrato</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" 
+                                        #nameEmpIdentificacion formControlName="fcn_cat_tipo_contrato"
+                                        [readonly]="true"
+                                        disabled="true"
+                                        [ngClass]="{ 'is-invalid': submittedTipoContrato && ftp.fcn_cat_tipo_contrato.errors }"
+                                        placeholder="Tipo Contrato">
+                                    <!-- [ngModel]="folderDigitalForm.emp_identificacion" -->
+                                </div>
+                                <mat-error *ngIf="submittedTipoContrato && ftp.fcn_cat_tipo_contrato?.errors?.required">
+                                    Tipo Contrato es requerido.
+                                </mat-error>
+                
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tiempo Contrato</span>
+                                    </div>
+                                    <input type="number" class="form-control form-control-sm"
+                                        #nameTipContr formControlName="fcn_cat_det_cantidad_tiempo"
+                                        [ngClass]="{ 'is-invalid': submittedTipoContrato && ftp.fcn_cat_det_cantidad_tiempo.errors }"
+                                        placeholder="Tiempo Contrato">
+                                    <!-- [ngModel]="folderDigitalForm.vac_num_dias_max_vacaciones" -->
+                                </div>
+                                <mat-error *ngIf="submittedTipoContrato && ftp.fcn_cat_det_cantidad_tiempo?.errors?.required">
+                                    Tiempo Contrato es requerido.
+                                </mat-error>
+            
+                            </div>
+
+                            <div class="col-sm-6">
+                                <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="unidad_tiempo_id_cc"
+                                    (ccItemSelecionado)="viewSelectionUnidadTiempoCC($event)"
+                                    [optionDefault]="'Selecionar opcion'" #nameMes [labelDescription]="'Tiempo'"
+                                    [ngClass]="{ 'is-invalid': submittedTipoContrato && ftp.fcn_cat_unidad_tiempo.errors }" codigocatalogo="TCTP">
+
+                                </app-cc-select-nom-catalogo>
+                                <!-- formControlName="fcn_cat_unidad_tiempo" -->
+                                <mat-error
+                                    *ngIf="submittedTipoContrato && ftp.fcn_cat_unidad_tiempo?.errors?.required && (ftp.fcn_cat_unidad_tiempo!='0' || ftp.fcn_cat_unidad_tiempo!=0 || ftp.fcn_cat_unidad_tiempo!='')">
+                                    Mes es requerido.
+                                </mat-error>
+                                
+                            </div>
+                        </div>
+
+                    </form>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p-table [value]="objGetTiposDeContratos" 
+                                [lazy]="true"
+                                [paginator]="true" 
+                                responsiveLayout="scroll"
+                                [rows]="rowsTipoContrato" 
+                                [loading]="loadingTipoContrato"
+                                [totalRecords]="totalRecords"
+                                (onLazyLoad)="nextPageTipoContrato($event)"
+                                [showCurrentPageReport]="true"
+                                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+                                [rowsPerPageOptions]="pageSizeOptionsTipoContrato"
+                                (onRowSelect)="onRowSelectTipoContrato($event)"
+                                selectionMode="single"
+                                >
+                                <!-- totalRecordsTipoContrato -->
+                                totalRecords
+                                <ng-template pTemplate="header">
+                                    <tr style="font-size: 12px;">
+                                        <th>Cod.</th>
+                                        <th>Nombre Tipo Contrato</th>
+                                        <th>Tiempo del Contrato</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-catalog >
+                                    <tr  [pSelectableRow]="catalog" style="font-size: 12px;">
+                                       
+                                        <td>{{catalog.id_catalogo}}</td>
+                                        <td>{{catalog.cat_nombre}}</td>
+                                        <td><strong>{{ setTiempoTipocontrato(catalog) }}</strong></td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td class="EmptyTable" [attr.colspan]="3">
+                                            No hay información para mostrar
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+
+                </p-tabPanel>
+                <p-tabPanel class="p-0" header="LISTA EMPLEADOS CON TIPO CONTRATOS" leftIcon="pi pi-users"  [headerStyle]="{'font-size': '0.7rem'}">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p-table
+                                [value]="objGetEmpleadosTiposDeContratos"
+                                [lazy]="true"
+                                (onLazyLoad)="CargaEmpleadoTiposContratos($event)"
+                                selectionMode="single"
+                                
+                                responsiveLayout="scroll"
+                                [paginator]="true"
+                                [rows]="rowsEmpTpCt" 
+                                [totalRecords]="totalRecords"
+                                [loading]="loadingEmpTpCt"
+                                [showCurrentPageReport]="true"
+                                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+                                [rowsPerPageOptions]="pageSizeOptionsEmpTpCt"
+                                >
+                                <!-- (onRowSelect)="onRowSelectEmpleado($event)" -->
+                                <!-- [(selection)]="selectedProduct2" -->
+                                <ng-template pTemplate="header">
+                                    <tr style="font-size: 12px;">
+                                        <th>Identificación</th>
+                                        <th>Nombre</th>
+                                        <th>Fecha de Ingreso</th>
+                                        <th>Sueldo</th>
+                                        <th>Tipo de Contrato</th>
+                                        <th>Tiempo del Contrato</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-empTpCo>
+                                <tr [pSelectableRow]="empTpCo" style="font-size: 11px;" [ngClass]="{'table-warning': empTpCo.tiempo_restante > -30, 'table-danger': empTpCo.tiempo_restante > 0}">
+                                    <td>{{ empTpCo.emp_identificacion }}</td>
+                                    <td>{{ empTpCo.emp_full_nombre | titlecase }}</td>
+                                    <td>{{ empTpCo.emp_fecha_ingreso | date:'yyyy-MM-dd' }}</td>
+                                    <td>{{ empTpCo.sueldo?.sld_salario_minimo }}</td>
+                                    <td>{{ empTpCo.sueldo?.tipo_contrato?.cat_nombre }}</td>
+                                    <td>{{ empTpCo.sueldo?.tipo_contrato?.catalogo_detalle?.cantidad_tiempo +' '+ empTpCo.sueldo?.tipo_contrato?.catalogo_detalle?.tiempo?.cat_nombre }} </td>
+                                </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td class="EmptyTable" [attr.colspan]="6">
+                                            No hay información para mostrar
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+        <ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template>
+        <!-- <fieldset class="border p-2 mb-1 mt-2 filters">
+            <legend class="w-auto h6">Listado Tipos de Contratos</legend>
+            <div *ngIf="dataTipoContrato else dataTipoContratosSkeleton">
+                <div class="cmb-2 content-tabla-general">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                        class="table dataTable no-footer table-hover">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre Tipo Contrato</th>
+                                <th>Descripción Tipo Contrato</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tipCont of dataTipoContrato" (click)="setTipoContrato(tipCont)"
+                                style="cursor: pointer">
+                                <td>{{ tipCont.id_catalogo }}</td>
+                                <td>{{ tipCont.cat_nombre }}</td>
+                                <td>{{ tipCont.cat_descripcion }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <ng-template #dataTipoContratosSkeleton>
+                <p-skeleton styleClass="p-mb-2"></p-skeleton>
+                <br>
+                <p-skeleton height="10rem"></p-skeleton>
+
+            </ng-template>
+
+        </fieldset> -->
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spBacnBcn"></cc-spiner-procesar>

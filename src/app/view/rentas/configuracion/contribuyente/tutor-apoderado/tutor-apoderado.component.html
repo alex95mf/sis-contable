@@ -1,0 +1,113 @@
+<!-- (opened)="contribuyenteTutor.ap_tiene_apoderado = true" (closed)="contribuyenteTutor.ap_tiene_apoderado = false" -->
+<mat-expansion-panel class="mt-2"  [disabled]="!validadorNt">
+    <mat-expansion-panel-header>
+      <input type="checkbox" [(ngModel)]="contribuyenteTutor.ap_tiene_apoderado" (change)="selectedCheck()">
+      <mat-panel-title>Tutor o apoderado</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="row mt-2">
+      <div class="col-4">
+
+        <app-cc-input-group-prepend label="Cédula" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteTutor.ap_cedula"
+            placeholder="Ingrese la cédula" [readonly]="!contribuyenteTutor.ap_tiene_apoderado" maxlength="10" (keypress)="onlyNumber($event)"/>
+            <button class="btn btn-primary btn-sm" (click)="cargarContribuyentes()"><i class="fas fa-search"></i></button>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Primer nombre" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteTutor.ap_primer_nombre"
+            placeholder="Ingrese el primer nombre" [readonly]="!contribuyenteTutor.ap_tiene_apoderado" maxlength="100" (keypress)="validaciones.onlyWord($event)"/>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Segundo nombre" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteTutor.ap_segundo_nombre"
+            placeholder="Ingrese el segundo nombre" [readonly]="!contribuyenteTutor.ap_tiene_apoderado" maxlength="100" (keypress)="validaciones.onlyWord($event)"/>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Primer apellido" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteTutor.ap_primer_apellido"
+            placeholder="Ingrese el primer apellido" [readonly]="!contribuyenteTutor.ap_tiene_apoderado" maxlength="100" (keypress)="validaciones.onlyWord($event)"/>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Segundo apellido" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteTutor.ap_segundo_apellido"
+            placeholder="Ingrese el segundo apellido" [readonly]="!contribuyenteTutor.ap_tiene_apoderado" maxlength="100" (keypress)="validaciones.onlyWord($event)"/>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Parentesco" styleSpan="size-span-campo font-weight-bold">
+          <!-- <input class="form-control" type="text" [(ngModel)]="contribuyenteTutor.ap_catalogo"
+            placeholder="Ingrese el parentesco" [readonly]="!contribuyenteTutor.ap_tiene_apoderado" maxlength="30"/> -->
+
+            <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+            [(ngModel)]="contribuyenteTutor.ap_catalogo" [readonly]="!contribuyenteTutor.ap_tiene_apoderado">
+            <ng-option [value]=0 disabled>Seleccione el tipo de discapacidad</ng-option>
+            <ng-option *ngFor="let doc of catalog.ap_catalogo" [value]="doc.valor">{{doc.valor}}
+            </ng-option>
+          </ng-select>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Tipo de discapacidad" styleSpan="size-span-campo font-weight-bold">
+          <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+            [(ngModel)]="contribuyenteTutor.ap_tipo_discapacidad" [readonly]="!contribuyenteTutor.ap_tiene_apoderado">
+            <ng-option [value]=0 disabled>Seleccione el tipo de discapacidad</ng-option>
+            <ng-option *ngFor="let doc of catalog.ren_discapacidad" [value]="doc.valor">{{doc.valor}}
+            </ng-option>
+          </ng-select>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Porcentaje" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="number" [(ngModel)]="contribuyenteTutor.ap_porcentaje_discapacidad"
+            placeholder="Ingrese el porcentaje" [readonly]="!contribuyenteTutor.ap_tiene_apoderado" />
+        </app-cc-input-group-prepend>
+
+        <!-- <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                </div>
+                <input id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección contribuyente" [(ngModel)]="contribuyente.direccion">
+            </div> -->
+      </div>
+      
+
+      <div class="col-4">
+        <app-cc-input-group-prepend label="No. Resolución" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteTutor.ap_resolucion"
+            placeholder="Ingrese el número de resolución" [readonly]="!contribuyenteTutor.ap_tiene_apoderado" maxlength="30" />
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Fecha de resolución" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="date" [(ngModel)]="contribuyenteTutor.ap_fecha_resolucion"
+            placeholder="Ingrese el parentesco" [readonly]="!contribuyenteTutor.ap_tiene_apoderado" />
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Persona que autoriza" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteTutor.ap_persona_autoriza"
+            placeholder="Ingrese la perona que autoriza" [readonly]="!contribuyenteTutor.ap_tiene_apoderado" maxlength="100" (keypress)="validaciones.onlyWord($event)"/>
+        </app-cc-input-group-prepend>
+
+      </div>
+
+      
+
+      <div class="col-4">
+        <div class="row">
+          <div class="col">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                (change)="cargaArchivo($event.target.files)"  [disabled]="anexo?.length > 0">
+              <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name :
+                "Seleccione un archivo" }}</label>
+            </div>
+          </div>
+          <!-- <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" [disabled] = 'cargarAnexo'>Cargar</button></div> -->
+        </div>
+        <div class="row">
+          <div class="col">
+            <app-anexos-list-tutor [dataUser]="dataUser" [permissions]="permissions" [identificador]="TUAPO"></app-anexos-list-tutor>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </mat-expansion-panel>
+  <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spContribuyente"></cc-spiner-procesar>

@@ -1,0 +1,80 @@
+
+    <app-button-radio-active titulo="Generar nuevo Juicio" cstyle="bg-gradient-primary text-white" [groupButton]="botonera" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-plus-square" >
+
+    <div class="row my-2">
+        <div class="col">
+
+        </div>
+    </div>
+
+    <fieldset class="border px-2 pb-2 mb-2">
+        <legend class="ml-1 w-auto bg-dark">Datos del Contribuyente</legend>
+        
+        <div class="row">
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control"  placeholder="Seleccione un Contribuyente" [value]="juicio.fk_contribuyente?.razon_social">
+                    <button class="btn btn-sm btn-primary mr-1" matTooltip="Contribuyente" [disabled]="readOnlyMode" (click)="expandContribuyentes()" ><i class="fas fa-search"></i> </button>
+                </app-cc-input-group-prepend>
+            </div>
+            
+            <div class="col-sm-5">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select [items]="estados" bindValue="id" bindLabel="value"  [clearable]="false" class="form-control" [(ngModel)]="cmbEstado">
+                        
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+                        
+           
+            
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Num. Proceso" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="juicio.proceso">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Total"  styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask class="form-control" [(ngModel)]="juicio.total">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="No. Expediente"  styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="expediente.num_expediente">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Tipo Gestión" styleSpan="size-span-campo font-weight-bold">
+                    <!--<ng-select  bindValue="id" bindLabel="value"  [clearable]="false" class="form-control" [(ngModel)]="cmbTipoGestion">-->  
+                        <ng-select class="form-control custom"  appendTo="body" [searchable]="true" [(ngModel)]="cmbTipoGestion">
+                            <ng-option [value]="'CONCEPTOS'">CONCEPTOS</ng-option>
+                            <ng-option [value]="'CONVENIO'">CONVENIOS</ng-option>
+                            <ng-option [value]="'MERCADOS'">MERCADOS</ng-option>
+                        </ng-select> 
+                    <!--</ng-select>-->
+                </app-cc-input-group-prepend>
+            </div>
+           
+           
+            
+
+
+        </div>
+        <div class="row">
+
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold">
+                    <textarea class="form-control " type="text" rows="2" [(ngModel)]="juicio.observaciones" maxlength="200"  aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" placeholder="Escriba una Observación"></textarea>
+                    <!--<input type="text" class="form-control">-->
+                </app-cc-input-group-prepend>
+            </div>
+
+    </div>
+    </fieldset>
+
+   
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spJuicioActuacion"></cc-spiner-procesar>

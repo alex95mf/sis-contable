@@ -1,0 +1,55 @@
+<app-button-radio-active titulo="Cuentas por Pagar" cstyle="bg-light" icono="fas fa-list"
+    filtroBoton="btnsModalCuentasPorPagar" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border px-3 pb-2">
+        <legend class="mb-1 w-auto">Filtros</legend>
+        <div class="row">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Codigo" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" name="" id="" class="form-control" [(ngModel)]="filter.codigo">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" name="" id="" class="form-control" [(ngModel)]="filter.nombre">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+    <table class="table mat-elevation-z2">
+        <thead class="thead-dark">
+            <tr>
+                <th>Cuenta</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="tbl_cuentas.length > 0; else emptyCuentas">
+                <tr *ngFor="let element of tbl_cuentas">
+                    <td>{{ element.codigo }}</td>
+                    <td>{{ element.nombre }}</td>
+                    <td>{{ element.tipo }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="selectCuenta(element)">
+                            <i class="far fa-hand-pointer"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-template #emptyCuentas>
+                <tr>
+                    <td class="text-center" colspan="3"><span class="h6">No hay cuentas a Mostrar</span></td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <mat-paginator
+        [pageSize]="paginate.perPage"
+        [pageIndex]="paginate.pageIndex"
+        [length]="paginate.length"
+        showFirstLastButtons
+        (page)="changePage($event)">
+    </mat-paginator>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalCuentasPorPagar"></cc-spiner-procesar>

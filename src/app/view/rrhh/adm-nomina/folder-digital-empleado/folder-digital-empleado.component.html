@@ -1,0 +1,225 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active titulo="FOLDER DIGITAL - RR.HH" filtroBoton="btnsFolderDigital"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+
+        <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <li *ngFor="let det of messageError">
+                        <span class="badge badge-danger">{{det}}</span>
+                    </li>
+                    <!-- <p-message severity="error" [text]="messageError"></p-message> -->
+                    <!-- <p-message severity="error" [(value)]={{h}} [enableService]="false" styleClass="p-mr-2"></p-message>   -->
+                </div>
+            </div>
+
+
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+               
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo"
+                                    id="inputGroup-sizing-sm">Empleado</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="Ingrese nombre, apellido, cédula"
+                                >
+                            <!-- formControlName="jnd_tipo_jornada"
+                                [(ngModel)]="fomulario_jornada.jnd_tipo_jornada"
+                                    #vChTipoJornada [id_jornada]="0" -->
+                            <div class="input-group-append">
+                                <button (click)="onClicConsultaEmpleadosFolderDigital(content)"
+                                    class="btn btn-default btn-ligth-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                        <!-- <mat-error *ngIf="myFormGroupFomularioJornada.controls.jnd_tipo_jornada.errors?.required">
+                                Jornada es
+                                requerido</mat-error> -->
+                        <!-- <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Búsqueda </span>
+                            </div>
+                            <input [(ngModel)]="numAccountMayor" type="text" class="form-control form-control-sm"
+                                placeholder="Busqueda empleado">
+                            <div class="input-group-append">
+                                <button (click)="onClicConsultaPlanCuentas()" class="btn btn-default btn-ligth-default"
+                                    type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group input-group-sm mt-1">
+                                <input type="text" class="form-control form-control-sm" disabled="true"
+                                    #nameEmpuFullNombre
+                                    formControlName="full_nombre_empleado" 
+                                    [readonly]="true"
+                                    [ngModel]="folderDigitalForm.full_nombre_empleado"
+                                    [ngClass]="{ 'is-invalid': submitted && f.full_nombre_empleado.errors }"
+                                     placeholder="Nombre Completo">
+                            </div>
+
+
+                            <!-- <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombres
+                                    Empleado</span>
+                            </div>
+                            <input placeholder="JUAN DANIEL QUINDE SÁNCHEZ" type="text" #rsocial="ngModel" name="rsocial"
+                                id="Idrsocial" [(ngModel)]="razonsocial" minlength="20" maxlength="200"
+                                class="form-control form-control-sm" [disabled]="dusuario"> -->
+                        </div>
+                       
+                        <mat-error *ngIf="submitted && f.full_nombre_empleado?.errors?.required">
+                            Empleado es requerido.
+                        </mat-error>
+                        <mat-error *ngIf="submitted && f.full_nombre_empleado?.errors?.minlength">
+                            Minimo 6.
+                        </mat-error>
+                     
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        
+                            <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="tipo_archivo_id_cc"
+                                (ccItemSelecionado)="viewSelectionTipoArchivoCC($event)" [optionDefault]="'Selecionar opcion'"
+                                #nameTipoArchivo [labelDescription]="'Tipo Archivo'" codigocatalogo="DCFD"
+                                [ngClass]="{ 'is-invalid': submitted && f.fg_tipo_archivo.errors }"
+                                formControlName="fg_tipo_archivo" >
+                            </app-cc-select-nom-catalogo>
+                            <mat-error *ngIf="submitted && f.fg_tipo_archivo?.errors?.required && (f.fg_tipo_archivo!='0' || f.fg_tipo_archivo!=0 || f.fg_tipo_archivo!='')">
+                                Tipo de Archivo es requerido.
+                            </mat-error>
+                    </div>
+              
+                    <div class="col-sm-6">
+                        <button style="display:block;width:100%; height:30px;"
+                                            onclick="document.getElementById('getFile').click()">Subir Archivo</button>
+                        <input #Image (change)="handleFileInputFichaEmpleado($event.target.files)" 
+                            type='file' id="getFile" style="display:none">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group input-group-sm mt-1">
+                                <input type="text" class="form-control form-control-sm" disabled="true"
+                                    #nameNombreArchivo
+                                    formControlName="fg_nombre_archivo_input" 
+                                    [ngModel]="folderDigitalForm.nombre_archivo"
+                                    [readonly]="true"
+                                    [ngClass]="{ 'is-invalid': submitted && f.fg_nombre_archivo_input.errors }"
+                                     placeholder="Nombre del archivo">
+                            </div>
+                        </div>
+                       
+                        <mat-error *ngIf="submitted && f.fg_nombre_archivo_input?.errors?.required">
+                            Archivo es requerido.
+                        </mat-error>
+                    </div>
+                </div>
+            </form>
+            <div class="mt-2">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p-table [value]="objGetDocumentByEmployee" 
+                            [lazy]="true"
+                            [paginator]="true" 
+                            responsiveLayout="scroll"
+                            [rows]="rows" 
+                            [loading]="loading"
+                            [totalRecords]="totalRecords"
+                            (onLazyLoad)="nextPage($event)"
+                            [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+                            [rowsPerPageOptions]="pageSizeOptions"
+                            (onRowSelect)="onRowSelectFolderDigitalEmp($event)"
+                            selectionMode="single"
+                            >
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Acciones</th>
+                                    <th>Tipo Archivo</th>
+                                    <th>Nombre del Archivo</th>
+                                    <th>Peso del Archivo</th>
+                                    <th>Fecha de creación</th>
+                                    <th>Fecha de modificación</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-detalle_Folder_digital >
+                                <tr  [pSelectableRow]="detalle_Folder_digital">
+                                    <td>
+                                        <button pButton pRipple icon="pi pi-cloud-download" 
+                                        title="Descargar Archivo"
+                                        (click)="descargarDocumentoDigital(detalle_Folder_digital)"
+                                        class="p-button-rounded p-button-success mr-2"></button>
+                                        <!-- <button pButton pRipple icon="pi pi-trash" class=" p-button-warning"></button> -->
+                                    </td>
+                                    <td>{{detalle_Folder_digital.tipo_archivo.cat_nombre}}</td>
+                                    <td>{{detalle_Folder_digital.nombre_archivo}}</td>
+                                    <td>{{ tamanioArchivoConvert(detalle_Folder_digital.peso_archivo) }}</td>
+                                    <td>{{detalle_Folder_digital.fecha_creacion}}</td>
+                                    <td>{{ defaultFechaModificacion(detalle_Folder_digital.fecha_modificacion) }}</td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td class="EmptyTable" [attr.colspan]="9">
+                                        No hay información para mostrar
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+
+                <!-- <div class="row p-2 mb-3 mt-2 content-tabla-general">
+                    <table class="table">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 15%; ">TIPO DE ARCHIVO</th>
+                                <th style="width: 35%; ">FECHA DE CRREACION</th>
+                                <th style="width: 15%; ">FECHA DE MODIFICACIÓN</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="ingresosydescientos.length > 0 else TablaVacia">
+                            <tr *ngFor="let item of periodos">
+                                <td style="padding-left: 25px;text-align: start;">{{ item.anio }}</td>
+                                <td style="padding-left: 40px;text-align: start;">{{ item.mes }}</td>
+                                <td [ngClass]="{'aperturado': item.estate == 'A' , 'cerrado': item.estate == 'C' }"
+                                    style="padding-left: 25px;text-align: start;">{{ item.estado }}</td>
+                            </tr>
+                        </tbody>
+
+
+                        <ng-template #TablaVacia>
+                            <tbody>
+                                <tr class="body-empty">
+                                    <td colspan="3">no hay datos para mostrar</td>
+                                </tr>
+                            </tbody>
+                        </ng-template>
+                    </table>
+                </div> -->
+            </div>
+
+        </div>
+
+        <ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spBacnBcn"></cc-spiner-procesar>

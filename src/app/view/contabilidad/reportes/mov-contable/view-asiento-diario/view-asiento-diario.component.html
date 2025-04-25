@@ -1,0 +1,219 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="row justify-content-center" *ngIf="!processing">
+    <div class="container-new-loader" style="max-height: 140px; margin-top: 20px">
+        <i class="fa fa-spinner fa-spin"></i>
+    </div>
+</div>
+<div class="modal-body " *ngIf="processing">
+    <div class="row justify-content-center">
+        <div class="col-md-11 p-0">
+            <div class="title-cab">
+                CONSULTA DE ASIENTOS DE DIARIO
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-1">
+        <div class="col-md-11 .container-filter filters ">
+            <div class="row  justify-content-center">
+                <!-- <div class="col-12 mb-3 pb-2" style="border-bottom: 1px solid;border-color: rgba(0, 0, 0, 0.205);">
+             <span class="pl-0 " style="font-weight: bold;">ASIEENTO #: {{dataEnvio.Pedido}} </span>
+          </div> -->
+
+                <div class="col-md-12 justify-content-center">
+                    <div class=" pl-3 pr-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-3">
+                                <div class="row ">
+                                    <div class="col-md-12 ">
+                                        <p style="background-color: #404A63;text-align: center;color:white;">ASIENTO DE DIARIO</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row ">
+                                    <div class="col-md-12 ">
+                                        <p style="background-color: #404A63;text-align: center;color:white;">DOCUMENTO</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row ">
+                                    <div class="col-md-12 ">
+                                        <p style="background-color: #404A63;text-align: center;color:white;">FECHAS</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row ">
+                                    <div class="col-md-12 ">
+                                        <p style="background-color: #404A63;text-align: center;color:white;">MONTO</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="l">Id</label>
+                                    </div>
+                                    <div class="col-md-12 mt-0">
+                                        <!-- <input type="text"  [(ngModel)]="idAsiento "  class="form-control  form-control-sm text-left"  id="IdAsiento"> -->
+                                        <select class="form-control form-control-sm custom-select" (ngModelChange)="filterId($event)" [(ngModel)]="id">
+                           <option [value]="0">Seleccione Id</option>
+                           <option *ngFor="let d of arrayId" [value]="d.id">{{ d.id}} </option>
+                           </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="row ">
+                                    <div class="col-md-10">
+                                        <label class="l">Tipo</label>
+                                    </div>
+                                    <div class="col-md-12 mt-0">
+                                        <!-- <input type="text"  [(ngModel)]="tipoAsiento"  class="form-control  form-control-sm text-left"  (ngModelChange)="filterTipo($event)"  id="IdtipoAsiento">
+                         --><select class="form-control form-control-sm custom-select" (ngModelChange)="filterTipo($event)" [(ngModel)]="tipo">
+                              <option [value]="0">Seleccione Tipo</option>
+                              <option *ngFor="let d of arrayTipo" [value]="d.id">{{ d.codigo }} </option>
+                              </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row ">
+                                    <div class="col-md-11">
+                                        <label class="l">Desde</label>
+                                    </div>
+                                    <div class="col-md-12 ">
+                                        <ejs-datepicker [(ngModel)]="fromDatePicker" type="text" format="yyyy-MM-dd">
+                                        </ejs-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row ">
+                                    <div class="col-md-11">
+                                        <label class="l">Desde</label>
+                                    </div>
+                                    <div class="col-md-12 fechas">
+                                        <input type="text" [(ngModel)]="montoDesde" class="form-control  form-control-sm text-left" (keyup)="Desdemonto($event)" id="IdmontoDesde">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="l">Estado</label>
+                                    </div>
+                                    <div class="col-md-12 mt-0">
+                                        <!--  <input type="text"  [(ngModel)]="estadoAsiento "  class="form-control  form-control-sm text-left"  id="IdEstado"> -->
+                                        <select class="form-control form-control-sm custom-select" (ngModelChange)="filterEstado($event)" [(ngModel)]="estado">
+                       <!--  <option  selected [value]=""  >Seleccione Estado</option> -->
+                        <option *ngFor="let d of arrayEstado" [value]="d.id">{{d.name}} </option>
+                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="row ">
+                                    <div class="col-md-10">
+                                        <label class="l">Número</label>
+                                    </div>
+                                    <div class="col-md-12 mt-0">
+                                        <!--  <input type="text"  [(ngModel)]="numeroAsiento"  class="form-control  form-control-sm text-left"  id="IdNumero"> -->
+                                        <select class="form-control form-control-sm custom-select" (ngModelChange)="filterNumero($event)" [(ngModel)]="numero">
+                        <option [value]="0">Seleccione número </option>
+                        <option *ngFor="let d of arrayCab" [value]="d.name">{{ d.name} </option>
+                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row ">
+                                    <div class="col-md-11">
+                                        <label class="l">Hasta</label>
+                                    </div>
+                                    <div class="col-md-12 ">
+                                        <ejs-datepicker [(ngModel)]="toDatePicker" type="text" format="yyyy-MM-dd">
+                                        </ejs-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row ">
+                                    <div class="col-md-11">
+                                        <label class="l">Hasta</label>
+                                    </div>
+                                    <div class="col-md-12 fechas">
+                                        <input type="text" [(ngModel)]="montoHasta" class="form-control  form-control-sm text-left" id="idmontoAsiento" (keyup)="Hastamonto($event)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-2" *ngIf="processing ">
+        <div class="col-11 filters">
+            <div class="table-responsive responsive-table">
+                <div class="form-group table-responsive responsive-table">
+                    <table class="table no-footer table-hover  table-scroll  small-first-col" id="idRegistros">
+                        <thead class="text-center" style="">
+                            <tr>
+                                <th style="width: 2%;">Id</th>
+                                <th style="width: 6%;">Documento</th>
+                                <th style="width: 10%;">Detalle</th>
+                                <th style="width: 3%;">Fecha</th>
+                                <th style="width: 3%;">Valor</th>
+                                <th style="width: 3%;">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="presentDt" style="width: 100%;" class="body-half-screen">
+                            <tr *ngFor="let dt of dtConsultaAsiento; ; let i = index">
+                                <td style="">{{dt.id}}</td>
+                                <td style="cursor:pointer;" *ngIf="dt.num_doc.length == 1 " (click)="viewAsiento(dt)">{{ dt.codigo }}-{{ dt.num_doc.padStart(10, 0)}}</td>
+                                <td style="cursor:pointer;" *ngIf="dt.num_doc.length != 1 " (click)="viewAsiento(dt)">{{ dt.codigo }}-{{ dt.num_doc }}</td>
+                                <td style="">{{ dt.concepto }}</td>
+                                <td style="">{{dt.fecha}}</td>
+                                <td style="">{{dt.valor}}</td>
+                                <td style="" *ngIf="dt.estado == 1">Activo</td>
+                                <td style="" *ngIf="dt.estado != 1">Anulado</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class=" justify-content-center mt-8 tabladata" *ngIf="processing ">
+                <div class="form-group table-responsive responsive-table">
+                    <table class="table table-sm table-hover">
+                        <tfoot>
+                            <tr style="width: 100%;">
+                                <td style="width:2%;"> <strong></strong></td>
+                                <td style="width: 5%;" class="text-left">
+                                    <strong>REGISTROS </strong>
+                                </td>
+                                <td style="width: 0%;">
+                                    <strong>{{totalRegistro}}</strong>
+                                </td>
+                                <td style="width:30%" class="text-center">
+                                    <strong></strong>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,897 @@
+<div class="mt-3">
+  <app-button-radio-active titulo="Liquidaciones Finalizadas/Aprobadas" cstyle="bg-gradient-primary text-white" filtroBoton="btnsConsLiq"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-list-ul">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div>
+          <div class="col-sm collapse" id="divListaLiquidacion">
+            <div class="row mt-3">
+              <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Liquidaciones</span>
+                  </div>
+                  <select [(ngModel)]="filter" class="form-control form-control-sm custom-select"
+                    (ngModelChange)="rerender()">
+                    <option value ="Liquidado">Liquidados</option>
+                    <option value ="Anulado">Anulados</option>
+                    <option value ="Todo">Todos</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha desde" styleSpan="size-span-campo">
+                  <ejs-datepicker [(ngModel)]="fromDatePickerFilter" class="form-control" name="dateFrom" format='yyyy-MM-dd'
+                    (ngModelChange)="rerender()">
+                  </ejs-datepicker>
+                </app-cc-input-group-prepend>
+              </div>
+              <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha hasta" styleSpan="size-span-campo">
+                  <ejs-datepicker [(ngModel)]="toDatePickerFilter" class="form-control" name="dateFrom" format='yyyy-MM-dd'
+                    (ngModelChange)="rerender()">
+                  </ejs-datepicker>
+                </app-cc-input-group-prepend>
+              </div>
+            </div>
+            <div class="row justify-content-center mt-3 mb-3">
+              <div class="col-12 filters">
+                <div class="table-responsive responsive-table mt-2">
+                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th style="width: 10%;">Id liquidación</th>
+                        <th style="width: 10%;">No. Dai</th>
+                        <th style="width: 12%;">No. inspección</th>
+                        <th style="width: 14%;">Origen</th>
+                        <th style="width: 10%;">Fecha Liq</th>
+                        <th style="width: 11%;">tipo transp</th>
+                        <th style="width: 10%;">Estado</th>
+                        <th style="width: 10%;">Total</th>
+                        <th style="width: 13%; text-align: center;">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngIf="validaDt">
+                      <tr *ngFor="let dt of dataDT">
+                        <td>{{ dt.num_doc.toString().padStart(10, '0') }}</td>
+                        <td>{{ dt.num_dai }}</td>
+                        <td>{{ dt.inspeccion }}</td>
+                        <td>{{ dt.country.nom_pais }}</td>
+                        <td>{{ dt.fecha_liq }}</td>
+                        <td>{{ dt.tip_transp }}</td>
+                        <td>{{ dt.estado }}</td>
+                        <td>$ {{ commonServices.formatNumber(dt.total_general)}}</td>
+                        <td>
+                          <div class="text-center">
+                            <button class="btn btn-danger btn-sm" (click)="deleteLiquidacion(dt)" placement="top"
+                              ngbTooltip="Anular liquidación" [hidden] = "dt.estado == 'Anulado'" >
+                              <i class="far fa-trash-alt"></i>
+                            </button>
+                            <button class="btn btn-warning btn-sm" (click)="showDetalleLiq(dt)" placement="left"
+                              ngbTooltip="ver detalleliquidación">
+                              <i class="far fa-eye"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm collapse" id="divLiquiCloset">
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12 mt-0 mb-2">
+                    <div style="border-bottom: 1px solid;border-color: rgba(0, 0, 0, 0.205);">
+                      <div class="row">
+                        <div class="col-6 mb-0 pb-2">
+                          <span class="pl-3 " *ngIf="id_select != 0">Liquidación #: {{numSec}}</span>
+                        </div>
+                        <div class="col-6 text-right pr-5">
+                          <span>Total liquidación:&nbsp; ${{commonServices.formatNumber(totalesViews.tgn)}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">País origen</span>
+                      </div>
+                      <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true"
+                        style="padding-left: 7px;font-size: 13px;" [(ngModel)]="importPed.fk_pais" [clearable]="false"
+                        [disabled]="true" (ngModelChange)="changeFlag()">
+                        <ng-option [value]="0">Seleccione país</ng-option>
+                        <ng-option *ngFor="let d of arrayCountrys" [value]="d.id">
+                          {{d.nom_pais}}</ng-option>
+                      </ng-select>
+                      <div class="input-group-append w-auto">
+                        <img src="{{flag}}" alt="" style="border-radius: 0px 5px 5px 0px;">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Puerto
+                          salida</span>
+                      </div>
+                      <input type="text" placeholder="Ingrese puerto de salida" [disabled]="true"
+                        [(ngModel)]="importPed.puerto_salida" id="idprtSalida" class="form-control form-control-sm">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Puerto
+                          llegada</span>
+                      </div>
+                      <input type="text" placeholder="Ingrese puerto de llegada" class="form-control form-control-sm"
+                        [(ngModel)]="importPed.prt_llegada" id="idPrtll" [disabled]="true">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo
+                          transporte</span>
+                      </div>
+                      <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.tip_transp"
+                        [disabled]="true">
+                        <option value="0">Seleccione transporte</option>
+                        <option value="Aereo">Aéreo</option>
+                        <option value="Terrestre">Terrestre</option>
+                        <option value="Naviero">Naviero</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre
+                          transporte</span>
+                      </div>
+                      <input type="text" placeholder="Ingrese nombre transporte" class="form-control form-control-sm"
+                        [(ngModel)]="importPed.name_transp" id="idNametrp" [disabled]="true">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo carga</span>
+                      </div>
+                      <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.tipo_carga"
+                        [disabled]="true" (ngModelChange)="changeContainer($event)">
+                        <option value="0">Seleccione tipo carga</option>
+                        <option value="FCL">Full Load Container</option>
+                        <option value="LCL">Low Container Load</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Contenedores</span>
+                      </div>
+                      <input type="number" placeholder="Ingrese cantidad de contenedores"
+                        class="form-control form-control-sm" [(ngModel)]="importPed.contenedor_cat" id="idCtdCtn"
+                        [disabled]="true">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Peso (Kg)</span>
+                      </div>
+                      <input type="text" [(ngModel)]="importPed.cap_peso" min="0" class="form-control form-control-sm"
+                        placeholder="Ingrese capacidad del peso en kilogramos" id="idCpcPeso"
+                        (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Volumen
+                          (m^3)</span>
+                      </div>
+                      <input type="text" [(ngModel)]="importPed.cap_vol" min="0" id="idCpcVol"
+                        class="form-control form-control-sm"
+                        placeholder="Ingrese capacidad del volumen en metros cúbicos"
+                        (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No.
+                          inspección</span>
+                      </div>
+                      <input type="text" placeholder="Inspección" [disabled]="true" class="form-control form-control-sm"
+                        [(ngModel)]="importPed.inspeccion" id="idImpec" min="0"
+                        (keypress)="commonServices.FormatDecimalVal($event)">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. DAI</span>
+                      </div>
+                      <input type="text" placeholder="Número Dai" min="0" class="form-control form-control-sm"
+                        (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="importPed.num_dai"
+                        id="idnumDai" [disabled]="true">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. B/L</span>
+                      </div>
+                      <input type="text" placeholder="Número B/L" [(ngModel)]="importPed.bl" [disabled]="true" id="idbl"
+                        min="0" class="form-control form-control-sm"
+                        (keypress)="commonServices.FormatDecimalVal($event)">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Items</span>
+                      </div>
+                      <input type="text" [(ngModel)]="importPed.total_items" class="form-control form-control-sm"
+                        [disabled]="true">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                          Arancel</span>
+                      </div>
+                      <input type="number" class="form-control form-control-sm"
+                        placeholder="$ {{commonServices.formatNumber(totalesXProductosCierre.total_arancel)}}"
+                        id="idArancel" [disabled]="true">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Fecha Liquidación" styleSpan="size-span-campo">
+                      <ejs-datepicker [(ngModel)]="importPed.fecha_liq" name="dateFrom" format='yyyy-MM-dd'
+                        class="form-control" disabled>
+                      </ejs-datepicker>
+                    </app-cc-input-group-prepend>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Gasto</span>
+                      </div>
+                      <input type="text" placeholder="Gastos del pedido" [disabled]="true"
+                        class="form-control form-control-sm"
+                        placeholder="$ {{commonServices.formatNumber(totalesViews.tgt)}}">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                          Transporte</span>
+                      </div>
+                      <input type="text" class="form-control form-control-sm"
+                        placeholder="$ {{commonServices.formatNumber(totalesViews.total_transp)}}" [disabled]="true">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Fecha llegada" styleSpan="size-span-campo">
+                      <ejs-datepicker [(ngModel)]="importPed.fecha_llegada" name="dateFrom" format='yyyy-MM-dd'
+                        class="form-control" disabled>
+                      </ejs-datepicker>
+                    </app-cc-input-group-prepend>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Seguro</span>
+                      </div>
+                      <input type="text" [disabled]="true" class="form-control form-control-sm"
+                        placeholder="$ {{commonServices.formatNumber(totalesViews.ts)}}">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total Fob</span>
+                      </div>
+                      <input type="text" class="form-control form-control-sm"
+                        placeholder="$ {{commonServices.formatNumber(totalesViews.tf)}}" [disabled]="true">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group mt-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Observación</span>
+                      </div>
+                      <textarea class="form-control" aria-label="With textarea" [disabled]="dsbGlb"
+                        placeholder="Ingrese una observación" [(ngModel)]="importPed.observacion"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row justify-content-center mt-3">
+                  <div class="col-12 p-0">
+                    <button class="btn  btn-block" type="button" data-toggle="collapse" data-target="#collapseExample"
+                      [disabled]="true" (click)="changeStatus()" aria-expanded="false" aria-controls="collapseExample"
+                      style="height: 25px;
+                                                                                   color: white;
+                                                                                   padding: 0px;
+                                                                                   border-radius: 0px;
+                                                                                   letter-spacing: 2px;
+                                                                                   background-color: #007BFF">
+                      <i class="fas fa-chevron-up float-left pt-1 pl-2" *ngIf="btnVal"></i>
+                      <i class="fas fa-chevron-down float-left pt-1 pl-2" *ngIf="!btnVal"></i>
+                      <h5>DETALLE DE PEDIDOS</h5>
+                    </button>
+                  </div>
+                </div>
+                <div class="row justify-content-center  collapse  mb-2" id="collapseExample">
+                  <div class="col-12 mt-3">
+                    <div class="row justify-content-end">
+                      <div class="col-4 text-right">
+                        <div class="row justify-content-end">
+                          <div class="col-9 pr-0">
+                            <select class="form-control form-control-sm custom-select " [(ngModel)]="pedido"
+                              [disabled]="true">
+                              <option [value]="0">Seleccione pedido</option>
+                              <option [value]="d.id" *ngFor="let d of arrayPedidos">
+                                {{d.num_doc.toString().padStart(10,
+                                '0')}}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-3 ">
+                            <button class="btn btn-success btn-sm" [disabled]="true" (click)="addPedido()">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" [disabled]="true" (click)="deletePedido()">
+                              <i class="far fa-trash-alt"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 filters " style="background-color: white;padding: 10px;">
+                    <div class="row justify-content-center">
+                      <div class="col-12 params-table">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr style="width: 100%;">
+                              <th style="width: 10%;">No Pedido</th>
+                              <th style="width: 26%;">Producto</th>
+                              <th style="width: 12%;">Código</th>
+                              <th style="width: 12%;">No Parte</th>
+                              <th style="width: 8%;">Cantidad</th>
+                              <th style="width: 8%;">Fob</th>
+                              <th style="width: 8%;">Total</th>
+                              <th style="width: 8%;">Peso(Kg)</th>
+                              <th style="width: 8%;">Vol(m^3)</th>
+                            </tr>
+                          </thead>
+                          <tbody style="width: 100%;">
+                            <tr *ngFor="let d of dataProducto; let i = index">
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.num_ped.toString().padStart(10, '0')}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.nombre}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.codigo_pro}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.num_parte}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2  text-center">
+                                  {{d.cantidad_recibida.toFixed(2)}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{d.fob}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{d.total_fob}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  {{d.peso.toFixed(2)}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  {{d.volumen.toFixed(2)}}
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td style="background-color: #007BFF;color: white;">Totales</td>
+                              <td style="background-color: #007BFF;color: white;padding-left: 14px;"
+                                class="pr-3 text-right">
+                                $ {{commonServices.formatNumber(totalesXProductos.total_valor)}}</td>
+                              <td style="background-color: #007BFF;color: white;padding-left: 14px;"
+                                class="pr-3 text-right">
+                                $ {{commonServices.formatNumber(totalesXProductos.total_peso)}}</td>
+                              <td style="background-color: #007BFF;color: white;padding-left: 14px;"
+                                class="pr-3 text-right">
+                                $ {{commonServices.formatNumber(totalesXProductos.total_volumen)}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row justify-content-center mt-4">
+                  <div class="col-12 p-0">
+                    <button class="btn  btn-block" type="button" data-toggle="collapse" [disabled]="true"
+                      data-target="#collapseTransporte" (click)="changeStatusTr()" aria-expanded="false"
+                      aria-controls="collapseExample" style="height: 25px;
+                                                                                   color: white;
+                                                                                   padding: 0px;
+                                                                                   border-radius: 0px;
+                                                                                   letter-spacing: 2px;
+                                                                                   background-color: #28A745;">
+                      <i class="fas fa-chevron-up float-left pt-1 pl-2" *ngIf="btnValtr"></i>
+                      <i class="fas fa-chevron-down float-left pt-1 pl-2" *ngIf="!btnValtr"></i>
+                      <h5>TRANSPORTE</h5>
+                    </button>
+                  </div>
+                </div>
+                <div class="row justify-content-center  collapse  mb-2" id="collapseTransporte">
+                  <div class="col-12 mt-3 container-filter">
+                    <div class="row justify-content-center">
+                      <div class="col-3">
+                        <div class="row mt-1">
+                          <div class="col-md-11">
+                            <label class="l">Costear por:</label>
+                          </div>
+                          <div class="col-md-12 mt-0">
+                            <select class="form-control form-control-sm custom-select" [(ngModel)]="factor_transp"
+                              [disabled]="true" (ngModelChange)="calculated($event)">
+                              <option value="0">Seleccione costear por:</option>
+                              <option value="Valor">Valor</option>
+                              <option value="Volumen">Volumen</option>
+                              <option value="Peso">Peso</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="row mt-1">
+                          <div class="col-md-11">
+                            <label class="l">Total transporte:</label>
+                          </div>
+                          <div class="col-md-12 mt-0">
+                            <input type="text"
+                              placeholder="$ {{commonServices.formatNumber(totalesViews.total_transp)}}"
+                              [disabled]="true" style="border: none;">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="row mt-1">
+                          <div class="col-md-11">
+                            <label class="l">Total base:</label>
+                          </div>
+                          <div class="col-md-12 mt-0">
+                            <input type="text" placeholder="{{commonServices.formatNumber(base_transp)}} {{(prefijo)}}"
+                              [disabled]="true" style="border: none;">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 filters " style="background-color: white;padding: 10px;">
+                    <div class="row justify-content-center">
+                      <div class="col-12 params-table">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr style="width: 100%;">
+                              <th style="width: 5%;">Item</th>
+                              <th style="width: 15%;">Producto</th>
+                              <th style="width: 10%;">Código</th>
+                              <th style="width: 7%;">Cantidad</th>
+                              <th style="width: 7%;">Fob</th>
+                              <th style="width: 8%;">% Tansp</th>
+                              <th style="width: 8%;">T. Tansp</th>
+                              <th style="width: 8%;">T. Seguro</th>
+                              <th style="width: 8%;">CIF</th>
+                              <th style="width: 8%;">Total CIF</th>
+                              <th style="width: 8%;">Peso(Kg)</th>
+                              <th style="width: 8%;">Vol(m^3)</th>
+                            </tr>
+                          </thead>
+                          <tbody style="width: 100%;">
+                            <tr *ngFor="let d of dataProductoAux; let i = index">
+                              <td style="text-align: center;">
+                                <div class="mt-2">
+                                  {{i+1}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.nombre}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.codigo_pro}}
+                                </div>
+                              </td>
+
+                              <td>
+                                <div class="mt-2 text-center">
+                                  {{d.cantidad_recibida.toFixed(2)}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{d.precio}}
+                                </div>
+                              </td>
+
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  {{commonServices.formatNumber(d.transp_por)}} %
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{commonServices.formatNumber(d.transp_valor)}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{commonServices.formatNumber(d.segu_valor)}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{commonServices.formatNumber(d.fob)}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{commonServices.formatNumber(d.total_fob)}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  {{commonServices.formatNumber(d.peso)}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  {{commonServices.formatNumber(d.volumen)}}
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td style="background-color: #28A745;color: white;">Totales</td>
+                              <td style="background-color: #28A745;color: white;padding-left: 14px;"
+                                class="pr-3 text-right">
+                                $ {{commonServices.formatNumber(totalesXProductosTransp.total_valor)}}</td>
+                              <td style="background-color: #28A745;color: white;padding-left: 14px;"
+                                class="pr-3 text-right">
+                                $ {{commonServices.formatNumber(totalesXProductosTransp.total_peso)}}</td>
+                              <td style="background-color: #28A745;color: white;padding-left: 14px;"
+                                class="pr-3 text-right">
+                                $ {{commonServices.formatNumber(totalesXProductosTransp.total_volumen)}}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row justify-content-center mt-4">
+                  <div class="col-12 p-0">
+                    <button class="btn  btn-block" type="button" data-toggle="collapse"
+                      data-target="#collapseDetalleGasto" [disabled]="true" (click)="changeStatusDet()"
+                      aria-expanded="false" aria-controls="collapseExample" style="height: 25px;
+                                                                                   color: white;
+                                                                                   padding: 0px;
+                                                                                   border-radius: 0px;
+                                                                                   letter-spacing: 2px;
+                                                                                   background-color: #FFC107">
+                      <i class="fas fa-chevron-up float-left pt-1 pl-2" *ngIf="btnValDet"></i>
+                      <i class="fas fa-chevron-down float-left pt-1 pl-2" *ngIf="!btnValDet"></i>
+                      <h5>GASTOS DE IMPORTACIÓN</h5>
+                    </button>
+                  </div>
+                </div>
+                <div class="row justify-content-center  collapse  mb-2" id="collapseDetalleGasto">
+                  <div class="col-12 filters " style="background-color: white;padding: 10px;">
+                    <div class="row justify-content-center">
+                      <div class="col-12 params-table">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr style="width: 100%;">
+                              <th style="width: 5%;">Item</th>
+                              <th style="width: 9%;">No. Gasto</th>
+                              <th style="width: 10%;">No. Liq</th>
+                              <th style="width: 15%;">Gasto</th>
+                              <th style="width: 11%;">Acumula</th>
+                              <th style="width: 11%;">Aplica</th>
+                              <th style="width: 11%;">Tipo</th>
+                              <th style="width: 10%;">Estado</th>
+                              <th style="width: 10%;">Fecha</th>
+                              <th style="width: 8%;" class="text-right pr-3">Valor</th>
+                            </tr>
+                          </thead>
+                          <tbody style="width: 100%;">
+                            <tr *ngFor="let d of arrayViewsGastosImp; let i = index">
+                              <td style="text-align: center;">
+                                <div class="mt-2">
+                                  {{i+1}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.num_doc_gasto}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.num_pedido.toString().padStart(10, '0')}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.nombre}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.acumula}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.type_acumula}}
+                                </div>
+                              </td>
+
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.type}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.estado}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.fecha}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{d.value}}
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td style="background-color: #FFC107;color: white;">Totales</td>
+                              <td style="background-color: #FFC107;color: white;" class="pr-3 text-right">
+                                $ {{commonServices.formatNumber(totalGastos)}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row justify-content-center mt-4 mb-2">
+                  <div class="col-12 p-0">
+                    <button class="btn  btn-block" type="button" data-toggle="collapse" data-target="#collapseCierre"
+                      [disabled]="true" (click)="changeStatusCiere()" aria-expanded="false"
+                      aria-controls="collapseExample" style="height: 25px;
+                                                                                   color: white;
+                                                                                   padding: 0px;
+                                                                                   border-radius: 0px;
+                                                                                   letter-spacing: 2px;
+                                                                                   background-color: #DC3545;">
+                      <i class="fas fa-chevron-up float-left pt-1 pl-2" *ngIf="btnValCierre"></i>
+                      <i class="fas fa-chevron-down float-left pt-1 pl-2" *ngIf="!btnValCierre"></i>
+                      <h5>CALCULO DE COSTO DE PRODUCTO</h5>
+                    </button>
+                  </div>
+                </div>
+                <div class="row justify-content-center  collapse  mb-3" id="collapseCierre">
+                  <div class="col-12 filters " style="background-color: white;padding: 10px;">
+                    <div class="row justify-content-center">
+                      <div class="col-12 params-table">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th COLSPAN=4 class="text-center">producto</th>
+                              <th COLSPAN=3 class="text-center">arancel</th>
+                              <th COLSPAN=2 class="text-center">gasto</th>
+                              <th COLSPAN=2 class="text-center">Costo</th>
+                            </tr>
+                            <tr style="width: 100%;">
+                              <th style="width: 10%;">Pedido</th>
+                              <th style="width: 20%;">Producto</th>
+                              <th style="width: 7%;">Cif</th>
+                              <th style="width: 7%;">total cif</th>
+                              <th style="width: 9%;">partida</th>
+                              <th style="width: 7%;">Tasa</th>
+                              <th style="width: 8%;">valor</th>
+                              <th style="width: 8%;">% Gasto</th>
+                              <th style="width: 8%;">valor</th>
+                              <th style="width: 8%;text-align: center;">Costo/U</th>
+                              <th style="width: 8%;text-align: center;">Total</th>
+                            </tr>
+                          </thead>
+                          <tbody style="width: 100%;">
+                            <tr *ngFor="let d of dataProCierre; let i = index">
+                              <td style="text-align: center;">
+                                <div class="mt-2">
+                                  {{d.fk_pedido.toString().padStart(10, '0')}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pl-2">
+                                  {{d.nombre}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{d.item_cif}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{d.total_cif}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-0  text-right">
+                                  <input type="text" [(ngModel)]="d.partida_cod" min="0"
+                                    (ngModelChange)="changePartida(i,$event)"
+                                    style="text-align: left;padding-left: 10px;"
+                                    (keypress)="commonServices.FormatDecimalVal($event)" id="{{'id_partida' + i}}"
+                                    [disabled]="true">
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  {{d.partida_por}} %
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{d.arancel_partida_val}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  {{d.ptg_gt_liq}} %
+                                </div>
+                              </td>
+
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{d.val_gt_liq}}
+                                </div>
+                              </td>
+
+
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{d.cif_cierre}}
+                                </div>
+                              </td>
+                              <td>
+                                <div class="mt-2 pr-1 text-right">
+                                  $ {{d.total_cif_cierre}}
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td style="background-color: #DC3545;color: white;padding-left: 14px;">Totales
+                              </td>
+                              <td style="background-color: #DC3545;color: white;padding-left: 14px;"
+                                class="pr-3 text-right">
+                                $ {{commonServices.formatNumber(totalesXProductosCierre.total_cif)}}</td>
+                              <td style="background-color: #DC3545;color: white;"></td>
+                              <td style="background-color: #DC3545;color: white;"></td>
+                              <td style="background-color: #DC3545;color: white;padding-left: 14px;"
+                                class="pr-3 text-right">
+                                $ {{commonServices.formatNumber(totalesXProductosCierre.total_arancel)}}
+                              </td>
+                              <td style="background-color: #DC3545;color: white;"></td>
+                              <td style="background-color: #DC3545;color: white;padding-left: 14px;"
+                                class="pr-3 text-right">
+                                $ {{commonServices.formatNumber(totalesXProductosCierre.total_gasto)}}</td>
+                              <td style="background-color: #DC3545;color: white;"></td>
+                              <td style="background-color: #DC3545;color: white;padding-left: 14px;"
+                                class="pr-3 text-right">
+                                $ {{commonServices.formatNumber(totalesXProductosCierre.total_valor)}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-button-radio-active>
+  <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spConsultLiqui"></cc-spiner-procesar>
+</div>

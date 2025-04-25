@@ -1,0 +1,168 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-file-check">
+    <div class="row my-2">
+        <div class="col-12">
+            <div class="col">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row m-0">
+
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Fecha inicio" styleSpan="size-span-campo">
+                                        <input type="date" class="form-control form-control-xl" [(ngModel)]="filter.fecha_desde">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Fecha fin" styleSpan="size-span-campo">
+                                        <input type="date" class="form-control form-control-xl" [(ngModel)]="filter.fecha_hasta">
+                                    </app-cc-input-group-prepend>
+                                </div>
+
+                                <!-- <div class="input-group input-group-xl mb-2">
+                                <div class="input-group-prepend ml-2"><span class="input-group-text">Fecha inicio</span></div>
+                                
+
+                                <div class="input-group-prepend ml-2"><span class="input-group-text">Fecha fin</span></div>
+                                </div> -->
+                            </div>
+                            <div class="row m-0">
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Razón Social" styleSpan="size-span-campo">
+                                        <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.razon_social">
+                                    </app-cc-input-group-prepend>
+                                </div>
+        
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                                        <ng-select id="estado" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="select_estado" (change)="change($event)">
+                                            <ng-option disabled [value]="0">Seleccionar</ng-option>
+                                            <ng-option *ngFor="let e of estadosList" [value]="e.value">{{ e.label }}</ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm ml-4" placement="bottom" ngbTooltip="Buscar" (click)="cargarLiquidaciones()">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-2" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <!-- <div class="col-12">
+                <div class="input-group input-group-xl mb-2">
+                    
+                    <div class="input-group-prepend"><span class="input-group-text">Fecha inicio</span></div>
+                    <input type="date" class="form-control form-control-xl" [(ngModel)]="filter.fecha_desde">
+
+                    <div class="input-group-prepend ml-1"><span class="input-group-text">Fecha fin</span></div>
+                    <input type="date" class="form-control form-control-xl" [(ngModel)]="filter.fecha_hasta">
+
+                    <div class="input-group-prepend ml-2">
+                        <span class="input-group-text" id="inputGroup-sizing-xl">Contribuyente </span>
+                    </div>
+                    <input id="filter_razon_social" type="text" class="form-control form-control-xl" [(ngModel)]="filter.razon_social">
+
+                    <div class="input-group-prepend ml-2">
+                        <span class="input-group-text">Estado</span>
+                    </div>
+                    <ng-select id="estado" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="select_estado" (change)="change($event)">
+                        <ng-option disabled [value]="0">Seleccionar</ng-option>
+                        <ng-option *ngFor="let e of estadosList" [value]="e.value">{{ e.label }}</ng-option>
+                    </ng-select>
+
+
+                    <button class="btn btn-primary btn-xl ml-4" placement="bottom" ngbTooltip="Buscar" (click)="cargarLiquidaciones()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-xl ml-2" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div> -->
+
+            <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <!-- <th style="width: 5%;">Codigo</th> -->                        
+                        <th style="width: 10%;">T&iacute;tulo</th>
+                        <th style="width: 30%;">Razón social</th>
+                        <th style="width: 5%;">Valor</th>
+                        <th style="width: 15%;">Detalle</th>
+                        <th style="width: 5%;">Aval&uacute;o</th>
+                        <th style="width: 10%;">Usuario</th>
+                        <th style="width: 5%;">Emisi&oacute;n</th>
+                        <th style="width: 10%;">Estado</th>
+                        <th style="width: 10%;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="liquidacionesDt">
+                    <ng-container *ngFor="let dt of liquidacionesDt, let i = index">
+                        <tr>
+                            <!-- <td class="text-center">{{ dt.documento.split('-')[0] }}</td> -->
+                            <td class="text-center">{{ dt.documento }}</td>
+                            <td>{{ dt.contribuyente.razon_social }} </td>
+                            <td class="text-center">$ {{ dt.total | number: '1.2-2'}}</td>
+                            <td class="text-center" >
+                                <div *ngIf="dt.arancel">
+                                    <span [ngbTooltip]="(dt.arancel && dt.arancel.descripcion.length>50) ? dt.arancel.descripcion:''">
+                                        {{ (dt.arancel && dt.arancel.descripcion.length>50) ? dt.arancel.descripcion.substring(0,50)+'...':dt.arancel.descripcion }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="text-center"> {{ dt.avaluo }} </td>
+                            <td> {{ dt.usuario.nombre }} </td>
+                            <td class="text-center">{{ dt.fecha | date: 'dd/MM/yyyy' }}</td>
+                            <!-- <td *ngIf="dt.estado == 'E'" class="text-center">
+                                <i class="fas fa-circle text-warning"></i> Emitido
+                            </td>
+                            <td *ngIf="dt.estado == 'A'" class="text-center">
+                                <i class="fas fa-circle text-success"></i> Aprobado
+                            </td>
+                            <td *ngIf="dt.estado == 'X'" class="text-center">
+                                <i class="fas fa-circle text-danger"></i> Anulado
+                            </td>
+                            <td *ngIf="dt.estado == 'C'" class="text-center">
+                                <i class="fas fa-circle text-primary"></i> Cerrado
+                            </td> -->
+                            <td>
+                                <span *ngIf="dt.estado == 'E'"><i class="fas fa-circle text-warning"></i> Emitido</span>
+                                <span *ngIf="dt.estado == 'A'" ><i class="fas fa-circle text-success"></i> Aprobado</span>
+                                <span *ngIf="dt.estado == 'X'"><i class="fas fa-circle text-danger"></i> Anulado</span>
+                                <span *ngIf="dt.estado == 'C'"><i class="fas fa-circle text-primary"></i> Cerrado</span>
+                            </td>
+                            <td>
+                                <div class="text-center mx-auto">
+                                    <button class="btn btn-success btn-xl mr-1" (click)="aprobar(dt.id_liquidacion)" placement="left" ngbTooltip="Aprobar liquidacion" [disabled]="dt.estado != 'E'">
+                                        <i class="far fa-check"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+
+            <mat-paginator 
+                showFirstLastButtons
+                [length]="paginate.length"
+                [pageSize]="paginate.perPage"
+                [pageSizeOptions]="paginate.pageSizeOptions"
+                (page)="changePaginate($event)"
+                aria-label="Select page">
+            </mat-paginator>
+
+        </div>
+    </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="regPropLiqGen"></cc-spiner-procesar>

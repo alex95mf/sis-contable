@@ -1,0 +1,997 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-file-chart-line"
+filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+<div class="row mt-2 mb-3">
+    <div class="col-3"></div> 
+    <div class="col-4">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text size-span-campo">Fecha de consulta</span></div>
+            <input type="date" class="form-control form-control-sm" [(ngModel)]="fecha_consulta">
+            
+        </div>        
+    </div>
+    <div class="col-2">
+        <button [disabled]="formReadOnly || titulosDisabled" class="btn btn-sm btn-primary" ngbTooltip="Consultar reporte" (click)="getCajasDia()"><i class="fas fa-search"></i> Consultar reporte</button>
+    </div>    
+    
+    <div class="col-3"></div> 
+</div>
+
+<fieldset class="border py-1 px-3 my-3">
+    <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold">Reporte general de cajas</legend>
+
+    <div class="row mt-2 mb-3">
+        <div class="col-1"></div>
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered no-footer table-hover mb-0" style="width: 2400px;" >
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th class="col-num fixed-header" style="width: 75px;">No.</th>
+                            <th class="col-estado fixed-header" style="width: 125px;">Estado</th>
+                            <th class="col-caja fixed-header" style="width: 125px;">Caja registradora</th>
+                            <th class="col-rec fixed-header" style="width: 150px;">Recaudación</th>
+                            <th style="width: 150px;">Faltante</th>
+                            <th style="width: 150px;">Sobrante</th>
+                            <th style="width: 150px;">Efectivo</th>
+                            <th style="width: 150px;">Cheque</th>
+                            <th style="width: 150px;">Tarjeta de crédito</th>
+                            <th style="width: 150px;">Transferencia</th>
+                            <th style="width: 150px;">Tarjeta de débito</th>
+                            <th style="width: 150px;">Garantía</th>
+                            <th style="width: 150px;">Valor a favor</th>
+                            <th style="width: 150px;">Nota de débito</th>
+                            <th style="width: 150px;">Depósito</th>
+                            <th style="width: 150px;">Otro</th>
+                            <th style="width: 150px;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td *ngIf="cajasDia.length==0" colspan="17" class="text-center" >
+                                No se encontraron cajas
+                            </td>
+                        </tr>
+                        <tr *ngFor="let d of cajasDia, let i = index">
+                            <td class="text-center col-num fixed-header">
+                                {{ i + 1 }}
+                            </td>
+                            <td *ngIf="d.estado == 'A'" class="text-center col-estado fixed-header">
+                                <i class="fas fa-circle text-warning"></i> Abierto
+                            </td>
+                            <td *ngIf="d.estado == 'C'" class="text-center col-estado fixed-header">
+                                <i class="fas fa-circle text-primary"></i> Cerrado
+                            </td>
+                            <td class="col-caja fixed-header">
+                                {{ d.caja.nombre }}
+                            </td>
+                            <td class="text-right col-rec fixed-header">
+                               $ {{ d.total_recaudacion | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.total_faltante | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.total_sobrante | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.total_recaudacion_efectivo | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.totalCH | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.totalTC | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.totalTR | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.totalTD | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.totalGA | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.totalVF | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.totalND | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.totalDE | number: '1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                $ {{ d.totalOtro | number: '1.2-2' }}
+                            </td>
+                            <td class="text-center">
+                                <button [disabled]="d.estado=='A'" class="btn btn-sm btn-primary" placement="left" ngbTooltip="Reabrir caja" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                <button class="btn btn-sm btn-warning ml-1" placement="left" ngbTooltip="Inspeccionar caja" (click)="checkCaja(d)"><i class="far fa-eye"></i></button>
+                            </td>
+                        </tr>
+                        <tr style="font-size: 16px;" class="font-weight-bold">
+                            <td colspan="3" class="text-center font-weight-bold col-num fixed-header">
+                                &Sigma; TOTALES
+                            </td>
+                            <!-- <td colspan="0" class="text-center font-weight-bold fix">
+
+                            </td>
+                            <td colspan="0" class="text-center font-weight-bold fix">
+
+                            </td> -->
+                            <td class="col-rec fixed-header">
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ total | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ caja_dia.total_faltante | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ caja_dia.total_sobrante | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ totalEF | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ totalCH | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ totalTC | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ totalTR | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ totalTD | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td> 
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ totalGA | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td> 
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ totalVF | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td> 
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ totalND | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td> 
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ totalDE | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td> 
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     $ {{ totalOtro | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td> 
+                             <td colspan="1" class="text-center font-weight-bold ">
+
+                            </td>                            
+                        </tr>
+                        <tr style="font-size: 16px;" class="font-weight-bold">
+                            <td colspan="3" class="text-center font-weight-bold col-num fixed-header">
+                                Porcentajes
+                            </td>
+                            <!-- <td colspan="0" class="text-center font-weight-bold fix">
+
+                            </td>
+                            <td colspan="0" class="text-center font-weight-bold fix">
+
+                            </td> -->
+                            <td class="col-rec fixed-header">
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     {{ porcTotal | number: '1.2-2' }} %
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     N/A
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     N/A
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     {{ porcEF | number: '1.2-2' }} %
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     {{ porcCH | number: '1.2-2' }} %
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     {{ porcTC | number: '1.2-2' }} %
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     {{ porcTR | number: '1.2-2' }} %
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     {{ porcTD | number: '1.2-2' }} %
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     {{ porcGA | number: '1.2-2' }} %
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     {{ porcVF | number: '1.2-2' }} %
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     {{ porcND | number: '1.2-2' }} %
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     {{ porcDE | number: '1.2-2' }} %
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td>
+                                <div class="row">                                    
+                                     <div class="col text-right">
+                                     {{ porcOtro | number: '1.2-2' }} %
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                             <td colspan="1" class="text-center font-weight-bold ">
+
+                             </td>                                
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row mt-2 mb-4 justify-content-end">
+        <div class="col-4">
+            <div class="input-group input-group-lg input-group-subtotal">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">Sobrante</span></div>
+                <input id="sobrante" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ caja_dia.total_sobrante | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2 mb-4 justify-content-end">
+        <div class="col-4">
+            <div class="input-group input-group-lg input-group-descuentos">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">Faltante</span></div>
+                <input id="faltante" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ caja_dia.total_faltante | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div> -->
+
+
+</fieldset>
+
+<fieldset class="border py-1 px-3 my-3">
+    <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold">Totales por conceptos</legend>
+
+    <div class="row mt-2 mb-3">
+        <div class="col-1"></div>
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered no-footer table-hover mb-0" style="font-size: 16px;">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 10%;">No.</th>
+                            <th style="width: 20%;">Código</th>
+                            <th style="width: 30%;">Descripción</th>                       
+                            <th style="width: 20%;">Porcentaje</th>
+                            <th style="width: 20%;">Total</th>     
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="font-size: 20px;">
+                            <td *ngIf="conceptosReportes.length==0" colspan="5" class="text-center" >
+                                No se encontraron conceptos
+                            </td>
+                        </tr>
+                        <tr *ngFor="let c of conceptosReportes, let i = index">
+                            <td class="text-center">
+                                {{ i + 1 }}
+                            </td>
+                            <td class="text-center">
+                                {{ c.codigo }}
+                            </td>
+                            <td class="text-center">
+                                {{ c.nombre }}
+                            </td>  
+                            <td class="text-center">
+                                {{ ((c.total / totalConceptos)*100) | number: '1.2-2' }} %
+                            </td>     
+                            <td class="text-right">
+                                $ {{ c.total | number: '1.2-2' }}
+                            </td>      
+                        </tr> 
+                        <tr style="font-size: 20px;">
+                            <td colspan="4" class="text-right font-weight-bold" >
+                                &Sigma; Total Títulos &nbsp;
+                            </td>
+                            <td class="text-right"> 
+                                $ {{ totalConceptos | number: '1.2-2' }}
+                            </td>
+                        </tr>                     
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+</fieldset>
+
+<fieldset *ngIf="!fromGeneral" class="border py-1 px-3 my-3">
+    <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold">Depósito de caja
+        <!-- <button [disabled]="formReadOnly" class="btn btn-sm btn-success-outline" ngbTooltip="Recargar depósitos" (click)="calcValoresDeposito()">
+            <i class="fas fa-redo"></i>
+        </button> -->
+    </legend>
+
+    <!-- <div class="row mt-3 mb-1 align-items-center">
+        <div class="col">
+            <h5 class="mb-0 text-dark">Formas de pago</h5>
+        </div>
+    </div> -->
+    
+    <div class="row my-2">
+        <div class="col-6 ml-1">
+            
+            <div class="input-group input-group-sm">
+                
+                <!-- <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Cuentas bancarias</span></div>
+                <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="cuentaDepositar" [clearable]="false" >
+                    <ng-option [value]="0" disabled>Seleccione una cuenta de banco</ng-option>
+                    <ng-option *ngFor="let op of cuentasBancarias" [value]="op.cuenta_banco">{{ op.cuenta_banco }}</ng-option>
+                </ng-select> -->
+                <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Cuentas bancarias</span></div>
+                <ng-select [disabled]="formReadOnly || titulosDisabled || depositoDisabled" class="form-control" [(ngModel)]="cuentaDepositar" [clearable]="false" >
+                    <ng-option [value]="0" disabled>Seleccione una cuenta de banco</ng-option>
+                    <ng-option *ngFor="let item of listaCuentas" [value]="item">{{ item.name_banks + ' ' + item.num_cuenta}}</ng-option>
+                </ng-select>
+                <div class="col-1"></div>
+                <button [disabled]="formReadOnly || titulosDisabled || depositoDisabled" class="btn btn-sm btn-success" ngbTooltip="Agregar depósitos" (click)="agregaDepositos()"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class="row mb-2">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-bordered no-footer table-hover mb-0">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 5%;">No.</th>
+                            <th style="width: 15;">Cuenta de banco</th>                    
+                            <th style="width: 10%;">Número de cuenta</th>
+                            <th style="width: 10%;">Cuenta Contable</th>
+                            <th style="width: 30%;">Comentario</th>
+                            <th class="text-right" style="width: 15%;">Total</th>
+                            <th style="width: 15%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="depositos.length == 0">
+                            <td colspan="7" class="text-center"><h6 class="my-1">No hay depósitos</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let d of depositos, let i = index">
+                            <tr >
+                                <td class="text-center">{{ i + 1 }}</td>
+                                <td >{{ d.nombre_banco }}</td>
+                                <td >{{ d.cuenta_banco }}</td>
+                                <td >{{ d.cuenta_contable }}</td>
+                                <td class="text-left">
+                                    <div class="input-group input-group-sm">
+                                        
+                                        <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                    </div>
+                                </td>
+                                <td class="text-right">                                
+                                    <div class="input-group input-group-sm">             
+                                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>                       
+                                        <input currencyMask type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.total"  (keyup)="calcDepositoFinal()">
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="titulosDisabled || formReadOnly" (click)="removeDeposito(d)"><i class="far fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2 mb-4 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-total">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 240px;">Valor a depositar</span></div>
+                <input id="total_deposito" currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="totalDepositar">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2 mb-4 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-subtotal">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 240px;">Valor depositado</span></div>
+                <input id="total_depositado" currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="totalDeposito">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2 mb-4 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-descuentos">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 240px;">Diferencia</span></div>
+                <input id="diferencia" currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="difDepositos">
+            </div>
+        </div>
+    </div>
+    
+</fieldset>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="spCierreGeneral"></cc-spiner-procesar>
+
+<div id="PrintSection" [hidden]="true">
+    <div class="row justify-content-center prt-comprobante">
+
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <!-- <h3>Documento: {{ documento.documento }}</h3> -->
+                                <h3>Fecha: {{ fecha | date: 'dd/MM/yyyy' }}</h3>
+                                <h3>Estado: {{ (caja_dia.estado == '') ? 'Pendiente' : caja_dia.estado == 'A' ? 'Abierta' : (caja_dia.estado == 'C' ? 'Cerrada' : 'NA')}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2">
+
+            <fieldset class="border py-1 px-3 my-3">
+                <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold">Reporte general de cajas</legend>
+            
+                <div class="row mt-2 mb-3">
+                    <div class="col-1"></div>
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered no-footer table-hover mb-0" style="width: 2400px;" >
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                        <th class="col-num fixed-header" style="width: 75px;">No.</th>
+                                        <th class="col-estado fixed-header" style="width: 125px;">Estado</th>
+                                        <th class="col-caja fixed-header" style="width: 125px;">Caja registradora</th>
+                                        <th class="col-rec fixed-header" style="width: 150px;">Recaudación</th>
+                                        <th style="width: 150px;">Faltante</th>
+                                        <th style="width: 150px;">Sobrante</th>
+                                        <th style="width: 150px;">Efectivo</th>
+                                        <th style="width: 150px;">Cheque</th>
+                                        <th style="width: 150px;">Tarjeta de crédito</th>
+                                        <th style="width: 150px;">Transferencia</th>
+                                        <th style="width: 150px;">Tarjeta de débito</th>
+                                        <th style="width: 150px;">Garantía</th>
+                                        <th style="width: 150px;">Valor a favor</th>
+                                        <th style="width: 150px;">Nota de débito</th>
+                                        <th style="width: 150px;">Depósito</th>
+                                        <th style="width: 150px;">Otro</th>
+                                        <th style="width: 150px;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td *ngIf="cajasDia.length==0" colspan="17" class="text-center" >
+                                            No se encontraron cajas
+                                        </td>
+                                    </tr>
+                                    <tr *ngFor="let d of cajasDia, let i = index">
+                                        <td class="text-center col-num fixed-header">
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td *ngIf="d.estado == 'A'" class="text-center col-estado fixed-header">
+                                            <i class="fas fa-circle text-warning"></i> Abierto
+                                        </td>
+                                        <td *ngIf="d.estado == 'C'" class="text-center col-estado fixed-header">
+                                            <i class="fas fa-circle text-primary"></i> Cerrado
+                                        </td>
+                                        <td class="col-caja fixed-header">
+                                            {{ d.caja.nombre }}
+                                        </td>
+                                        <td class="text-right col-rec fixed-header">
+                                           $ {{ d.total_recaudacion | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.total_faltante | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.total_sobrante | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.total_recaudacion_efectivo | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.totalCH | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.totalTC | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.totalTR | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.totalTD | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.totalGA | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.totalVF | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.totalND | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.totalDE | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-right">
+                                            $ {{ d.totalOtro | number: '1.2-2' }}
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size: 16px;" class="font-weight-bold">
+                                        <td colspan="3" class="text-center font-weight-bold col-num fixed-header">
+                                            &Sigma; TOTALES
+                                        </td>
+                                        <!-- <td colspan="0" class="text-center font-weight-bold fix">
+            
+                                        </td>
+                                        <td colspan="0" class="text-center font-weight-bold fix">
+            
+                                        </td> -->
+                                        <td class="col-rec fixed-header">
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ total | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ caja_dia.total_faltante | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ caja_dia.total_sobrante | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ totalEF | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ totalCH | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ totalTC | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ totalTR | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ totalTD | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td> 
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ totalGA | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td> 
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ totalVF | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td> 
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ totalND | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td> 
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ totalDE | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td> 
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 $ {{ totalOtro | number: '1.2-2' }}
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td> 
+                                         <td colspan="1" class="text-center font-weight-bold ">
+            
+                                        </td>                            
+                                    </tr>
+                                    <tr style="font-size: 16px;" class="font-weight-bold">
+                                        <td colspan="3" class="text-center font-weight-bold col-num fixed-header">
+                                            Porcentajes
+                                        </td>
+                                        <!-- <td colspan="0" class="text-center font-weight-bold fix">
+            
+                                        </td>
+                                        <td colspan="0" class="text-center font-weight-bold fix">
+            
+                                        </td> -->
+                                        <td class="col-rec fixed-header">
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 {{ porcTotal | number: '1.2-2' }} %
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 N/A
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 N/A
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 {{ porcEF | number: '1.2-2' }} %
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 {{ porcCH | number: '1.2-2' }} %
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 {{ porcTC | number: '1.2-2' }} %
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 {{ porcTR | number: '1.2-2' }} %
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 {{ porcTD | number: '1.2-2' }} %
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 {{ porcGA | number: '1.2-2' }} %
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 {{ porcVF | number: '1.2-2' }} %
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 {{ porcND | number: '1.2-2' }} %
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 {{ porcDE | number: '1.2-2' }} %
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td>
+                                            <div class="row">                                    
+                                                 <div class="col text-right">
+                                                 {{ porcOtro | number: '1.2-2' }} %
+                                                 </div>
+                                            </div>                                
+                                           
+                                         </td>
+                                         <td colspan="1" class="text-center font-weight-bold ">
+            
+                                         </td>                                
+                                    </tr>
+                                </tbody>
+            
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- <div class="row mt-2 mb-4 justify-content-end">
+                    <div class="col-4">
+                        <div class="input-group input-group-lg input-group-subtotal">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">Sobrante</span></div>
+                            <input id="sobrante" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ caja_dia.total_sobrante | number: '1.2-2' }}">
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="row mt-2 mb-4 justify-content-end">
+                    <div class="col-4">
+                        <div class="input-group input-group-lg input-group-descuentos">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">Faltante</span></div>
+                            <input id="faltante" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ caja_dia.total_faltante | number: '1.2-2' }}">
+                        </div>
+                    </div>
+                </div> -->
+            
+            
+            </fieldset>
+            
+            <fieldset class="border py-1 px-3 my-3">
+                <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold">Totales por conceptos</legend>
+            
+                <div class="row mt-2 mb-3">
+                    <div class="col-1"></div>
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered no-footer table-hover mb-0" style="font-size: 16px;">
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                        <th style="width: 10%;">No.</th>
+                                        <th style="width: 20%;">Código</th>
+                                        <th style="width: 30%;">Descripción</th>                       
+                                        <th style="width: 20%;">Porcentaje</th>
+                                        <th style="width: 20%;">Total</th>     
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="font-size: 20px;">
+                                        <td *ngIf="conceptosReportes.length==0" colspan="5" class="text-center" >
+                                            No se encontraron conceptos
+                                        </td>
+                                    </tr>
+                                    <tr *ngFor="let c of conceptosReportes, let i = index">
+                                        <td class="text-center">
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ c.codigo }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ c.nombre }}
+                                        </td>  
+                                        <td class="text-center">
+                                            {{ ((c.total / totalConceptos)*100) | number: '1.2-2' }} %
+                                        </td>     
+                                        <td class="text-right">
+                                            $ {{ c.total | number: '1.2-2' }}
+                                        </td>      
+                                    </tr> 
+                                    <tr style="font-size: 20px;">
+                                        <td colspan="4" class="text-right font-weight-bold" >
+                                            &Sigma; Total Títulos &nbsp;
+                                        </td>
+                                        <td class="text-right"> 
+                                            $ {{ totalConceptos | number: '1.2-2' }}
+                                        </td>
+                                    </tr>                     
+                                </tbody>
+            
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+            </fieldset>
+
+        </div>
+    </div>
+
+
+</div>

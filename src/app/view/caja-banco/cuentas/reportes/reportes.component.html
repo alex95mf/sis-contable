@@ -1,0 +1,209 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Información de Reporte Banco Cheque" cstyle="bg-gradient-primary text-white"
+        filtroBoton="btnRepCtasBacn" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="far fa-file-alt">
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Cuentas bancarias" styleSpan="size-span-campo">
+                    <ng-select id="IdCliente" class="form-control custom" appendTo="body" [searchable]="true"
+                        [clearable]="false" [(ngModel)]="cuenta" (ngModelChange)="searchCuenta($event)">
+                        <ng-option [value]="0">Todas</ng-option>
+                        <ng-option *ngFor="let d of bankCuenta" [value]="d.id_banks">{{ d.name_banks }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo">
+                    <ng-select id="IdVendedor" class="form-control custom" appendTo="body" [searchable]="true"
+                        [clearable]="false" [(ngModel)]="beneficiario" (ngModelChange)="searchBeneficiario($event)"
+                        [disabled]="cuenta == 0">
+                        <ng-option [value]="0">Seleccione beneficiario</ng-option>
+                        <ng-option *ngFor="let d of arrayCheque" [value]="d.beneficiario">{{ d.beneficiario }}
+                        </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                    <ng-select id="IdVendedor" class="form-control custom" appendTo="body" [searchable]="true"
+                        [clearable]="false" [(ngModel)]="estado" (ngModelChange)="searchEstado($event)">
+                        <ng-option [value]="0">Seleccione estado</ng-option>
+                        <ng-option *ngFor="let d of statusCheque" [value]="d.name">{{ d.name }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha Emision" styleSpan="size-span-campo">
+                    <ejs-datepicker class="form-control form-control-sm" placeholder="Selecione Fecha Emisión"
+                        [(ngModel)]="viewDate" format="yyyy-MM-dd" (ngModelChange)="rerender()"></ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha Vencimiento" styleSpan="size-span-campo">
+                    <ejs-datepicker class="form-control form-control-sm" placeholder="Selecione Fecha Vencimiento"
+                        [(ngModel)]="fromDatePicker" format="yyyy-MM-dd" (ngModelChange)="rerender()"></ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha Cobro" styleSpan="size-span-campo">
+                    <ejs-datepicker class="form-control form-control-sm" placeholder="Selecione Fecha Cobro"
+                        [(ngModel)]="toDatePicker" format="yyyy-MM-dd" (ngModelChange)="rerender()"></ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-2">
+            <div class="col-12">
+                <fieldset class="border p-2 filters">
+                    <legend class="w-auto h6">Lista Reporte Banco Cheque</legend>
+                    <div class="row justify-content-center">
+                        <div class="col-12 container">
+                            <div class="content-table">
+                                <div class="table-responsive">
+                                    <table datatable [dtOptions]="dtOptions" id="tablaRepCtasBacn"
+                                        [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                                        <thead class="thead-dark">
+                                            <tr style="width: 100%;">
+                                                <th style="width: 10%;">Cuenta</th>
+                                                <th style="width: 10%;">Cheque</th>
+                                                <th style="width: 30%;">Beneficiario</th>
+                                                <th style="width: 10%;">Valor</th>
+                                                <th style="width: 10%;">Emision</th>
+                                                <th style="width: 10%;">Vencimiento</th>
+                                                <th style="width: 10%;">Cobro</th>
+                                                <th style="width: 10%;">Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="validaDtUser">
+                                            <tr class="text-justify" *ngFor="let dt of guardarolT; let i = index"
+                                                (click)="informacionSearch(dt)"
+                                                style="cursor:pointer;text-align:center;">
+                                                <td>{{ dt.name_banks }}</td>
+                                                <td class="text-left">{{ dt.number_cheque }}</td>
+                                                <td class="text-left">{{ dt.beneficiario}}</td>
+                                                <td class="text-rigth">{{ dt.valor | currency: 'USD'}}</td>
+                                                <td>{{ dt.fecha_emision }}</td>
+                                                <td>{{ dt.fecha_vencimiento }}</td>
+                                                <td *ngIf="dt.fecha_pago != null">{{ dt.fecha_pago }}</td>
+                                                <td *ngIf="dt.fecha_pago == null">Sin cobrar</td>
+                                                <td class="text-center" style="color:rgb(0,92,205);font-weight:bold;"
+                                                    *ngIf="dt.estadoBank == 'Girado'"><i style="color:rgb(0,92,205)"
+                                                        class="fas fa-circle"></i> {{ dt.estadoBank }}</td>
+                                                <td class="text-center" style="color:rgb(30, 165, 30);font-weight:bold;"
+                                                    *ngIf="dt.estadoBank == 'Pagado'"> <i style="color:rgb(30, 165, 30)"
+                                                        class="fas fa-circle"></i> {{ dt.estadoBank }}</td>
+                                                <td class="text-center" style="color:red;font-weight:bold;"
+                                                    *ngIf="dt.estadoBank == 'Anulado'"> <i style="color:red"
+                                                        class="fas fa-circle"></i> {{ dt.estadoBank }}</td>
+                                                <td class="text-center" style="color:orange;font-weight:bold;"
+                                                    *ngIf="dt.estadoBank == 'Protestado'"> <i style="color:orange"
+                                                        class="fas fa-circle"></i> {{ dt.estadoBank }}</td>
+                                                <td class="text-center"
+                                                    style="color:rgb(247, 247, 21);font-weight:bold;"
+                                                    *ngIf="dt.estadoBank == 'Procesado'"> <i
+                                                        style="color:rgb(247, 247, 21)" class="fas fa-circle"></i> {{
+                                                    dt.estadoBank }}</td>
+                                                <td class="text-center"
+                                                    style="color:rgb(57, 199, 231);font-weight:bold;"
+                                                    *ngIf="dt.estadoBank == 'Devuelto'"> <i
+                                                        style="color:rgb(57, 199, 231)" class="fas fa-circle"></i> {{
+                                                    dt.estadoBank }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<div class="modal fade modalDetalle " id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document"
+        style="padding-top: 20px;padding-bottom: 20px;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <app-button-radio-active titulo="Detalle Cheque" cstyle="bg-gradient-primary text-white"
+                    filtroBoton="btnRepCtasBacnT" [groupButton]="vmButtonsT" (onMetodoGlobal)="metodoGlobalT($event)"
+                    icono="fal fa-money-check">
+                    <div class="row mt-2 mb-2">
+                        <div class="col-6">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre
+                                        Banco</span>
+                                </div>
+                                <input placeholder="{{nombreBanco}}" type="text" class="form-control form-control-sm" disabled>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No.
+                                        Cheque</span>
+                                </div>
+                                <input placeholder="{{numeroCheque}}" type="text"
+                                    class="form-control form-control-sm text-right pr-1" disabled>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo"
+                                        id="inputGroup-sizing-sm">Beneficiario</span>
+                                </div>
+                                <input placeholder="{{benefCheque}}" type="text" class="form-control form-control-sm" disabled>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo"
+                                        id="inputGroup-sizing-sm">Valor</span>
+                                </div>
+                                <input placeholder="$ {{valorCheque}}" type="text"
+                                    class="form-control form-control-sm text-right pr-1" disabled>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">La suma
+                                        de</span>
+                                </div>
+                                <input placeholder="{{commonVarSrv.NumeroALetras(valorCheque, false)}}" type="text"
+                                    class="form-control form-control-sm" style="font-weight: bold;" disabled>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha
+                                        Emisión</span>
+                                </div>
+                                <input placeholder="{{fechaEmision}}" type="text" class="form-control form-control-sm" disabled>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <app-cc-input-group-prepend label="Fecha Vencimiento" styleSpan="size-span-campo">
+                                <ejs-datepicker [(ngModel)]="fechaVencimiento" class="form-control" name="dateFrom"
+                                    format='yyyy-MM-dd' (ngModelChange)="dateVencimineto()"
+                                    [disabled]="estadoCheque != 'Girado'">
+                                </ejs-datepicker>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spRepCtasBacn"></cc-spiner-procesar>

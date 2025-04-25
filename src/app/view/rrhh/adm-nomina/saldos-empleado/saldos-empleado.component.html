@@ -1,0 +1,82 @@
+<app-button-radio-active titulo="Saldos de Empleados" icono="far fa-dollar-bill" cstyle="bg-light"
+    filtroBoton="btnsSaldosEmpleados" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border px-3 pb-2">
+        <div class="row">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly [ngModel]="filter.empleado.emp_full_nombre">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="searchEmpleado()">
+                            <i class="far fa-search"></i>
+                        </button>
+                        <button class="btn btn-danger" (click)="clearEmpleado()">
+                            <i class="far fa-eraser"></i>
+                        </button>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Fecha Inicio" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" name="" id="" class="form-control" [(ngModel)]="filter.fecha_inicio">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Fecha Final" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" name="" id="" class="form-control" [(ngModel)]="filter.fecha_final">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+    <p-table [lazy]="true" [value]="tbl_registros" rowGroupMode="subheader" [loading]="loading" sortField="emp_full_nombre" groupRowsBy="emp_full_nombre" responsiveLayout="scroll" [scrollable]="true" scrollHeight="600px">
+        <ng-template pTemplate="header">
+            <tr style="font-size: 11px;">
+                <th style="min-width: 200px;">Fecha</th>
+                <th style="min-width: 200px;">Documento</th>
+                <th style="min-width: 200px;">Detalle/Observacion</th>
+                <th style="min-width: 200px;" class="d-flex justify-content-end">Valor</th>
+                <!-- <th style="min-width: 200px;">Debe</th>
+                <th style="min-width: 200px;">Haber</th> -->
+                <th style="min-width: 200px;" class="d-flex justify-content-end">Saldo</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="groupheader" let-movimiento>
+            <tr pRowGroupHeader>
+                <td colspan="7" class="font-weight-bold">{{ movimiento.emp_full_nombre }}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-movimiento>
+            <tr style="font-size: 11px;">
+                <td style="min-width:200px;">{{movimiento.fecha | date:'YYYY-MM-dd'}}</td>
+                <td style="min-width:200px;">{{movimiento.documento}}</td>
+                <td style="min-width:200px;">{{movimiento.detalle}}</td>
+                <td style="min-width:200px;" class="d-flex justify-content-end">
+                    $ {{movimiento.valor | number:'1.2-2'}}
+                </td>
+                <!-- <td style="min-width:200px;">
+                    $ {{movimiento.debe | number:'1.2-2'}}
+                </td>
+                <td style="min-width:200px;">
+                    $ {{movimiento.haber | number:'1.2-2'}}
+                </td> -->
+                <td sstyle="min-width:200px;" class="d-flex justify-content-end">
+                    $ {{movimiento.saldo | number:'1.2-2'}}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="groupfooter" let-movimiento>
+            <tr style="font-size: 12px;">
+                <td style="min-width:200px;"></td>
+                <td style="min-width:200px;"></td>
+                <td style="min-width:200px;" class="d-flex justify-content-end font-bold ">TOTALES:</td>
+                <td style="min-width:200px;" class="d-flex justify-content-end font-bold ">$ {{commonService.formatNumberDos(calculateTotalValor(movimiento.emp_full_nombre)) }}</td>
+                <td style="min-width:200px;" class="d-flex justify-content-end font-bold ">$ {{commonService.formatNumberDos(calculateTotalSaldo(movimiento.emp_full_nombre)) }}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="7"><span class="h6">No hay datos a mostrar</span></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spSaldosEmpleado"></cc-spiner-procesar>

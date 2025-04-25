@@ -1,0 +1,221 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" icono="fas fa-hands-usd" cstyle="bg-light text-dark"
+        [groupButton]="vmButtons" filtroBoton="btnsTarifa" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row my-2">
+            <div class="col-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="font-size: 11px;">N&uacute;mero</span></div>
+                    <input type="text" class="form-control" readonly [value]="tarifa.id | number:'3.0'">
+                    <!-- <div class="input-group-append"><button class="btn btn-primary" (click)="buscaTarifa()"><i class="far fa-search"></i></button></div> -->
+                </div>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Concepto" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select class="form-control" [clearable]="false" [searchable]="true" [disabled]="editMode"
+                        [(ngModel)]="tarifa.fk_concepto" (ngModelChange)="asignaConcepto($event)">
+                        <ng-option [value]="0" disabled><strong>Seleccione un concepto</strong></ng-option>
+                        <ng-option *ngFor="let c of conceptos" [value]="c.id">{{ c.codigo }} - {{ c.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-1">
+                <div class="custom-control custom-checkbox custom-switch text-dark mt-1">
+                    <input type="checkbox" class="custom-control-input"
+                        [(ngModel)]="tarifa.estado" [id]="'tarifa' + tarifa.id">
+                    <label class="custom-control-label" [for]="'tarifa' + tarifa.id">
+                        <div *ngIf="tarifa.estado; else elseBlock">ACTIVO</div>
+                        <ng-template #elseBlock>INACTIVO</ng-template>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-8">
+                <app-cc-input-group-prepend label="Descripci&oacute;n" styleSpan="font-weight-bold size-span-campo">
+                    <input type="text" maxlength="100" class="form-control" [(ngModel)]="tarifa.descripcion">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th style="width: 15%;">C&oacute;digo</th>
+                                <th class="text-left" style="width: 45%;" >Nombre</th>
+                                <th class="text-right" >Valor</th>
+                                <th style="width: 15%;">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-light">
+                            <tr *ngIf="!tarifa.detalles.length">
+                                <td colspan="4" class="text-center"><h6>No hay datos</h6></td>
+                            </tr>
+                            <tr *ngFor="let d of tarifa.detalles">
+                                <td>{{ d.codigo }}</td>
+                                <td>{{ d.nombre }}</td>
+                                <td>
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
+                                        <input currencyMask maxlength="9"  class="form-control text-right" min="0" step="0.01" [(ngModel)]="d.valor">
+                                        <!-- <input type="text" maxlength="9" (keypress)="onlyNumberDot($event)" class="form-control text-right" min="0" step="0.01" [(ngModel)]="d.valor"> -->
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="custom-control custom-checkbox custom-switch">
+                                        <input type="checkbox" class="custom-control-input"
+                                            [(ngModel)]="d.estado" [id]="'tarifadet' + d.fk_concepto_detalle">
+                                        <label class="custom-control-label" [for]="'tarifadet' + d.fk_concepto_detalle">
+                                            <div *ngIf="d.estado; else elseBlock">ACTIVO</div>
+                                            <ng-template #elseBlock>INACTIVO</ng-template>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div [hidden]="procesoCM" class="row">
+            
+              
+            <div class="col text-right">
+                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración"
+                (click)="expandExoneracion()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+
+        <div [hidden]="procesoCM" class="row">
+            
+            
+            
+                <div class="col">
+                    <div class="table-responsive">
+                        <table  class="table table-striped">
+                            <thead class="thead-dark text-center">
+                                <tr class="text-center">
+                                    <th style="width: 5%;">Concepto</th>
+                                    <th style="width: 5%;">Código</th>
+                                    <th style="width: 25%;">Descripción</th>
+                                    <th style="width: 30%;">Comentario</th>
+                                    <th style="width: 15%;">% Descuento</th>
+                                    <!-- <th style="width: 15%;">Total</th> -->
+                                    <th style="width: 5%;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="!exoneraciones.length">
+                                    <td colspan="7" class="text-center"><h6 class="my-1">No hay Exoneraciones aplicadas</h6></td>
+                                </tr>
+                                <tr *ngFor="let d of exoneraciones, let i = index" >
+                                    <td class="text-center">{{ d.con_codigo }}</td>
+                                    <td class="text-center">{{ d.con_det_codigo }}</td>
+                                    <td>{{ d.descripcion }}</td>
+                                    <td class="text-right">
+                                        <div class="input-group input-group-sm">
+                                            <input maxlength="80" type="text" class="form-control form-control-sm" [(ngModel)]="d.comentario"> 
+                                        </div>
+                                    </td>
+                                    <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
+                                    <!-- <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td> -->
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración"  (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+    
+                        </table>
+                    </div>
+                </div>
+
+    
+        </div>
+        <div class="row my-2 justify-content-end" [hidden]="procesoCM">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-descuentos">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                            style="width: 195px;">Exoneraciones</span></div>
+                    <input id="exonTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                        readonly
+                        >
+                </div>
+            </div>
+        </div>
+    
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renConfTare"></cc-spiner-procesar>
+
+<div [hidden]="true" id="Printsection">
+    <div class="row justify-content-center  prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Reporte de Tarifa</h3>
+                                <p>{{ tarifa.descripcion }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-12 text-center">
+                    <div class="table-responsive responsive-table">
+                        <table class="table">
+                            <thead>
+                                <tr style="width: 100%">
+                                    <th style="width: 15%;">Codigo</th>
+                                    <th class="text-left" style="width: 45%;">Nombre</th>
+                                    <th class="text-right">Valor</th>
+                                    <th style="width: 15%;">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-light text-center mb-4">
+                                <tr *ngFor="let d of tarifa.detalles">
+                                    <td>{{ d.codigo }}</td>
+                                    <td class="text-left">{{ d.nombre }}</td>
+                                    <td class="text-right">$ {{ d.valor }}</td>
+                                    <td *ngIf="d.estado">ACTIVO</td>
+                                    <td *ngIf="!d.estado">INACTIVO</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed; bottom: 0px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Fecha: {{ fecha }}</span>
+        </div>
+        <div *ngIf="dataUser" class="col-12 text-left" style="position: fixed; bottom: 20px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Usuario: {{ dataUser.nombre }}</span>
+        </div>
+    </div>
+</div>

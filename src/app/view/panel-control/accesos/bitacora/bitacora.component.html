@@ -1,0 +1,146 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Consulta de Auditoría" filtroBoton="btnsBitacora"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-signature">
+        <fieldset class="border pb-2 px-2 mb-2 mt-2">
+            <legend class="w-auto ml-1 bg-dark">Filtros</legend>
+            <div class="row ml-1 mr-1">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-3">
+                            <app-cc-input-group-prepend label="Fecha Desde" styleSpan="font-weight-bold size-span-campo">
+                                <input id="filter_fecha_desde" type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-3">
+                            <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="font-weight-bold size-span-campo">
+                                <input id="filter_fecha_hasta" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-5">
+                            <app-cc-input-group-prepend label="Usuarios" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="filter.usuario">
+                                    <ng-option [value]="0" disabled>Selecciones un usuario</ng-option>
+                                    <ng-option *ngFor="let user of arrayUsers" [value]="user.id_usuario">{{user.nombre}}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <!-- <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Filtro x usuario" styleSpan="size-span-campo">
+                                <select [(ngModel)]="userFilter" class="form-control form-control-sm custom-select" 
+                                (ngModelChange) = "filterXUser()">
+                                    <option [value]="0">Todos</option>
+                                    <option *ngFor="let d of arrayUsers" [value]="d.id_usuario">{{d.nombre}} </option>
+                                </select>
+                            </app-cc-input-group-prepend>
+                        </div> -->
+                    </div>
+                   
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="getDatabitacora(true)">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row mt-2">
+           
+            <!-- <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha desde" styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control" name="dateFrom"
+                        format='yyyy-MM-dd' id="idNominaDatef" (ngModelChange)="rerender()">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha desde" styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control" name="dateFrom" format='yyyy-MM-dd'
+                        id="idNominaDatef" (ngModelChange)="rerender()">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div> -->
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0" >
+                    <thead class="thead-dark">
+                        <tr style="width: 100%;">
+                            <th [hidden]="true" style="width: 0%;">id</th>
+                            <th style="width: 15%;">Nombre</th>
+                            <th style="width: 10%;">Modulo</th>
+                            <th style="width: 20%;">Componente</th>
+                            <th style="width: 10%;">Sucursal</th>
+                            <th style="width: 8%;">Fecha</th>
+                            <th style="width: 8%;">Hora</th>
+                            <th style="width: 21%;">Acción</th>
+                            <th style="width: 8%;">Ip</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="validaDtBitacora">
+                        <tr *ngIf="dataBitacoraAux.length == 0">
+                            <td colspan="8" class="text-center">
+                                <h6 class="my-1"></h6>No hay Tickets para mostrar.
+                            </td>
+                        </tr>
+                        <tr *ngFor="let dt of dataBitacoraAux" >
+                            <th [hidden]="true">{{dt.id_bitacora}}</th>
+                            <td>{{ dt.nombre}}</td>
+                            <td>{{ dt.nombre_modulo }}</td>
+                            <td>{{ dt.name_component }}</td>
+                            <td>{{ dt.nombre_sucursal}}</td>
+                            <td>{{ dt.fecha}}</td>
+                            <td>{{ dt.hora }}</td>
+                            <td>{{ dt.accion }}</td>
+                            <td>{{ dt.ip}}</td>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+                <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage" [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+        <!-- <div class="row justify-content-center  mt-3 mb-3">
+            <div class="col container container-table">
+                <div class="tab_container p-3 filters">
+                    <div class="table-responsive responsive-table">
+                        <table datatable id="tablaBitacora" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                            class="table dataTable no-footer table-hover">
+                            <thead class="thead-dark">
+                                <tr style="width: 100%;">
+                                    <th [hidden]="true" style="width: 0%;">id</th>
+                                    <th style="width: 15%;">Nombre</th>
+                                    <th style="width: 10%;">Modulo</th>
+                                    <th style="width: 20%;">Componente</th>
+                                    <th style="width: 10%;">Sucursal</th>
+                                    <th style="width: 8%;">Fecha</th>
+                                    <th style="width: 8%;">Hora</th>
+                                    <th style="width: 21%;">Acción</th>
+                                    <th style="width: 8%;">Ip</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="validaDtBitacora">
+                                <tr *ngFor="let dt of dataBitacoraAux">
+                                    <th [hidden]="true">{{dt.id_bitacora}}</th>
+                                    <td>{{ dt.nombre}}</td>
+                                    <td>{{ dt.nombre_modulo }}</td>
+                                    <td>{{ dt.name_component }}</td>
+                                    <td>{{ dt.nombre_sucursal}}</td>
+                                    <td>{{ dt.fecha}}</td>
+                                    <td>{{ dt.hora }}</td>
+                                    <td>{{ dt.accion }}</td>
+                                    <td>{{ dt.ip}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spBitacora"></cc-spiner-procesar>

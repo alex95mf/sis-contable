@@ -1,0 +1,105 @@
+
+
+.filters 
+{
+background-color: white;
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 6px 0px 8px 0px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 8.5px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                    text-align: center !important;
+                    padding: 6px 0px 8px 0px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    vertical-align: middle;
+                    font-size: 8.5px;
+                }
+            }
+        }
+    }
+}
+
+
+.color-autorizado{
+    background: rgba(127, 255, 168, 0.461);
+}
+.color-anulado{
+    background: rgba(255, 127, 127, 0.365);
+}
+.color-recepcion{
+    background: rgba(255, 187, 127, 0.509);
+}
+
+
+
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+}
+
+
+.disabled {
+    cursor: not-allowed;
+}
+
+.card-header {
+padding: 0.2rem 1.25rem;
+padding-top: 0.2rem;
+padding-right: 1.25rem;
+padding-bottom: 0.2rem;
+padding-left: 1.25rem;
+margin-bottom: 0;
+}
+
+.title_h5 {
+margin-bottom: 0rem;
+font-family: inherit;
+font-weight: 500;
+line-height: 1.2;
+color: inherit;
+font-size: 11px;
+}
+
+.panding_span {
+padding-right: 0.15em;
+}
+
+.button_margin {
+margin-left: 0.25rem !important;
+border-radius: 0.25rem !important;
+border-top-left-radius: 0.25rem !important;
+border-top-right-radius: 0.25rem !important;
+border-bottom-right-radius: 0.25rem !important;
+border-bottom-left-radius: 0.25rem !important;
+}
+
+.alinearizq {
+    float: left;
+}
+.alinearder {
+    float: right;
+}

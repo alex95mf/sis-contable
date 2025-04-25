@@ -1,0 +1,44 @@
+<!-- <div class="card" style="font-size: 11px;background-color: rgb(255 255 255 / 73%);"> -->
+<div class="">
+  <div class="card-header {{cstyle}}" *ngIf="presentar===true">
+    <table width="100%">
+      <tr>
+        <td class="text-left">
+          <div class="text-left {{styleTitle}}">
+            <!-- <strong><i class='{{icono}}'></i>&nbsp;&nbsp;{{titulo}}</strong> -->
+            <h2 class="table-title">{{titulo}}</h2>
+          </div>
+        </td>
+        <td class="text-md-right text-sm-left">
+          <div class="btn-group">
+            <div *ngFor="let item of agrupacion | filterByOrigin: filtrado">
+              <button class="btn btn-action {{item.clase}} btn-xs button_margin" matTooltip="{{item.boton.texto}}"
+                *ngIf="!item.imprimir" [class.isDisabled]="!item.permiso" [hidden]="!item.showimg"
+                (click)="item.accion!=null?item.accion(item.paramAccion):'';metodoGlobal(item)"
+                [disabled]="item.habilitar">
+                <span *ngIf="item.showimg && !item.faFa" class="panding_span mr-1 {{item.boton.icon}}"></span>
+                <img *ngIf="item.showimg && item.faFa" src="assets/img/{{item.boton.icon}}"
+                  style="width: 20px; height: auto;">
+                <span *ngIf="item.showbadge" class="panding_span badge badge-light">{{item.pDatoBagde}}</span>
+                <span *ngIf="item.showtxt" class="btn-action_text">{{item.boton.texto}}</span>
+              </button>
+              <button class="btn btn-action {{item.clase}} btn-xs button_margin {{item.imprimirId}}"
+                matTooltip="{{item.boton.texto}}" *ngIf="item.imprimir" [class.isDisabled]="!item.permiso"
+                [hidden]="!item.showimg" (click)="item.accion!=null?item.accion(item.paramAccion):'';metodoGlobal(item)"
+                [disabled]="item.habilitar" [useExistingCss]="true" printSectionId="{{item.printSection}}" ngxPrint>
+                <span *ngIf="item.showimg" class="panding_span mr-1 {{item.boton.icon}}"></span>
+                <span *ngIf="item.showbadge" class="panding_span badge badge-light">{{item.pDatoBagde}}</span>
+                <span *ngIf="item.showtxt" class="btn-action_text">{{item.boton.texto}}</span>
+              </button>
+            </div>
+
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!-- <div class="card-body text-left" style="padding-top: 0px; padding-bottom: 0px;"> -->
+  <div class="text-left">
+    <ng-content></ng-content>
+  </div>
+</div>

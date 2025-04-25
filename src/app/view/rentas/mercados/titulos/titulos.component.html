@@ -1,0 +1,124 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" icono="fas fa-file-invoice" cstyle="bg-light text-dark"
+        (onMetodoGlobal)="metodoGlobal($event)" filtroBoton="btnsMercadosTitulos" [groupButton]="vmButtons">
+        <fieldset class="border px-3 pb-2 mx-0">
+            <legend class="w-auto bg-dark mb-0">Filtros</legend>
+            <div class="row">
+                <div class="col">
+                    <div *ngIf="!chk_simulacion; else vSimulacion">
+                        <div class="row">
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="month" class="form-control" [(ngModel)]="fechaSeleccionada" (change)="setFecha()">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Mercado" styleSpan="size-span-campo font-weight-bold">
+                                    <ng-select [items]="cmb_mercados" bindValue="id_catalogo" bindLabel="descripcion" [(ngModel)]="filter.mercado" class="form-control" [clearable]="false"></ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                    <ng-select [items]="estados" bindLabel="nombre" bindValue="id" [(ngModel)]="filter.estado" class="form-control" [clearable]="false"></ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #vSimulacion>
+                        <div class="row">
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Mercado" styleSpan="size-span-campo font-weight-bold">
+                                    <ng-select [items]="cmb_mercados" bindValue="id_catalogo" bindLabel="descripcion" [(ngModel)]="filter.mercado" 
+                                        class="form-control" [clearable]="false">
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <div class="row">
+                        <div class="col">
+                            <input type="checkbox" [(ngModel)]="chk_simulacion"> Simulacion
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 text-right">
+                    <button class="btn btn-sm btn-primary text-light" matTooltip="Consultar" (click)="getContratoDetalles()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-sm btn-danger ml-1" matTooltip="Borrar" (click)="clearFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row my-2">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-sm mb-0">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th><input type="checkbox" [(ngModel)]="masterSelected" [indeterminate]="masterIndeterminate" (change)="selectAll()"></th>
+                                <th>N&uacute;mero Contrato</th>
+                                <th>Contribuyente</th>
+                                <th>Ubicaci&oacute;n</th>
+                                <th>Emisi&oacute;n</th>
+                                <th>Valor</th>
+                                <th>Saldo</th>
+                                <th class="text-center">Estado</th>
+                                <th class="text-center">Ref. Deuda</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!registros.length">
+                                <td colspan="7" class="text-center">
+                                    <h6>No hay datos</h6>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let registro of registros">
+                                <td><input type="checkbox" [(ngModel)]="registro.check" (change)="checkIndetereminate()" [disabled]="registro.estado == 'G'"></td>
+                                <td>{{ registro.contrato.numero_contrato }}</td>
+                                <td>
+                                    {{ registro.contrato.fk_contribuyente?.razon_social }}<br>
+                                    <span class="text-muted">{{ registro.contrato.fk_contribuyente?.num_documento }}</span>
+                                </td>
+                                <td>
+                                    <strong>Mercado:</strong>&nbsp;{{ registro.contrato.fk_mercado?.valor }}<br>
+                                    <strong>Puesto:</strong>&nbsp;{{ registro.contrato.fk_mercado_puesto?.numero_puesto }}
+                                </td>
+                                <td>
+                                    {{ registro.fecha_desde }} (#{{ registro.nro_cuota }})
+                                </td>
+                                <td>${{ registro.valor | number:'1.2-2' }}</td>
+                                <td>
+                                    Cuota: ${{ registro.saldo | number:'1.2-2' }}<br>
+                                    <span class="text-muted">Total: ${{ registro.contrato.total | number:'1.2-2' }}</span>
+                                </td>
+                                <td class="text-center">
+                                    <i class="fas fa-circle" [ngClass]="{ 'text-warning': registro.estado == 'P', 'text-success': registro.estado == 'G' }"></i>
+                                </td>
+                                <td class="text-center">
+                                    {{ registro.num_deuda ? registro.num_deuda : 'N/A' }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage"
+                        [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)"
+                        aria-label="Select page">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="renTitulos"></cc-spiner-procesar>

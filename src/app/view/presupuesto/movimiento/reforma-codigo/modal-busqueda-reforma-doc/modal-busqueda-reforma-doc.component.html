@@ -1,0 +1,90 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light" icono="far fa-hand-pointer"
+    filtroBoton="btnsBusqReforma" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border pb-3 px-2">
+        <legend class="w-auto bg-dark mb-1">Filtros</legend>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                    <input id="filter_razon_social" type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                    <input id="filter_num_documento" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" >
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col">
+                <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="filter.periodo" [clearable]="false"
+                        [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+
+    <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <!-- <th style="width: 4%;">Estado</th> -->
+                <th style="width: 15%;">Periodo</th>
+                <th style="width: 15%;">Tipo reforma</th>
+                <th style="width: 15%;">No Reforma</th>
+                <th style="width: 15%;">Fecha</th>
+                <!-- <th style="width: 15%;">Fecha nacimiento</th> -->
+                <!-- <th style="width: 10%;">Tipo</th>
+                <th style="width: 10%;">Documento</th> -->
+                <!-- <th style="width: 8%;">Valor</th>
+                <th style="width: 8%;">Porcentaje</th> -->
+                <th style="width: 10%;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="tbl_reforma.length > 0; else emptyMessage">
+                <tr *ngFor="let dt of tbl_reforma">
+                    <!-- <td class="text-center"><i placement="bottom" [ngbTooltip]="dt.estado == 'A' ? 'Activo' : 'Inactivo'" [class]="dt.estado == 'A' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger'"></i></td> Pendiente -->
+                    <!-- <td class="text-center"><i placement="bottom" ngbTooltip="Activo" class="fas fa-circle text-success"></i></td> -->
+                    <td class="text-center">{{ dt.periodo }}</td>
+                    <td class="text-center">{{ dt.tipo_reforma }}</td>
+                    <td> {{ dt.no_reforma }}</td>
+                    <td> {{ dt.fecha_registro | date:'YYYY-MM-dd' }}</td>
+                    <!-- <td class="text-center">dd/mm/aaaa</td> -->
+                    <!-- <td class="text-center">{{ dt.tipo.valor }}</td>
+                    <td class="text-center">{{ dt.documento.valor }}</td>
+                    <td class="text-right">{{ '$ ' + dt.valor }}</td>
+                    <td class="text-right">{{ dt.porcentaje }}</td> -->
+                    <td>
+                        <div class="text-center mx-auto">
+                            <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar contribuyente">
+                                <i class="fas fa-hand-pointer"></i>
+                            </button>
+                            <!-- <button *ngIf="dt.estado == 'A'" class="btn btn-danger btn-sm ml-1" (click)="deleteArancel(dt.id, i)" placement="top" ngbTooltip="Eliminar arancel">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <button *ngIf="dt.estado == 'I'" class="btn btn-info btn-sm ml-1" (click)="restoreArancel(dt.id, i)" placement="top" ngbTooltip="Restaurar arancel">
+                                <i class="fas fa-undo"></i>
+                            </button> -->
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-template #emptyMessage>
+                <tr>
+                    <td colspan="5" class="text-center"><h6>No hay resultados</h6></td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <mat-paginator 
+        showFirstLastButtons
+        [length]="paginate.length"
+        [pageSize]="paginate.perPage"
+        [pageIndex]="paginate.pageIndex"
+        (page)="changePaginate($event)"
+        aria-label="Select page">
+    </mat-paginator>
+
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalReformas"></cc-spiner-procesar>

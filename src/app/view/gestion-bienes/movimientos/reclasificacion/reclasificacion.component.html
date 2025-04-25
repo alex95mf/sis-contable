@@ -1,0 +1,77 @@
+<div class="mt-2">
+    <app-button-radio-active-new [titulo]="fTitle" 
+    cstyle="bg-gradient-primary text-white"
+    
+    icono="fas fa-box-open"
+        filtroBoton="btnsBienesMovimientoReclasificacion" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        
+        <div class="row m-0">
+            <div class="col-12">
+            </div>
+        </div>
+
+        
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Filtros</legend>
+            <div class="row m-0">
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="C&oacute;digo" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="filter.codigo">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Descripci&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="filter.descripcion">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row m-0">
+            <div class="col-12">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                    <thead class="sticky-header">
+                        <tr class="text-center">
+                            <th>Codigo</th>
+                            <th>Descripcion</th>
+                            <th>Stock</th>
+                            <th>Cod. Anterior</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!productos.length">
+                            <td colspan="5" class="text-center">
+                                <p class="h6">No hay productos.</p>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let producto of productos">
+                            <td>{{ producto.codigoproducto }}</td>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.stock }}</td>
+                            <td>{{ producto.codigoanterior ?? 'N/A' }}</td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-primary" matTooltip="Reclasificar" (click)="expandReasignacion(producto)">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator 
+                [length]="paginate.length"
+                [pageSize]="paginate.perPage"
+                [pageSizeOptions]="paginate.pageSizeOptions"
+                [pageIndex]="paginate.pageIndex"
+                showFirstLastButtons
+                (page)="changePaginate($event)"
+                aria-label="Select page"
+            ></mat-paginator>
+            </div>
+        </div>
+
+
+
+    </app-button-radio-active-new>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spReclasificacion"></cc-spiner-procesar>

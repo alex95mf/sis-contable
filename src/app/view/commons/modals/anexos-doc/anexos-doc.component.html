@@ -1,0 +1,200 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Anexos orden de compra" filtroBoton="btnCloseAnexo" cstyle="bg-gradient-primary text-white"
+        [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="row mt-2">
+            <div class="col-6">
+                <div class="contenedor-scrollArchivos text-center">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                                (fileOver)="fileOverBase($event)" [uploader]="uploader" class="well my-drop-zone">
+                                <br>Arrastre aqu&iacute; los archivos.<br><br>
+                            </div>
+                            
+                            <br>
+                            <label for="file-upload" class="btn btn-sm btn-primary">
+                                <i class="fa fa-download"></i> Subir 1 archivo
+                            </label>
+                            <input type="file" id="file-upload" ng2FileSelect [uploader]="uploader"
+                                [(ngModel)]="lArchivo" (change)="changeSelec()" style='display: none;' />
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="this.uploader.queue.length>0">
+                        <div class="col-sm" style="margin-bottom: 40px">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Tamaño</th>
+                                        <th>Acci&oacute;n</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of uploader.queue; let i = index">
+                                        <td><strong>{{ item?.file?.name }}</strong></td>
+                                        <td>{{ item?.file?.size/1024/1024 | number:'.1' }} MB</td>
+                                        <td nowrap>
+                                            <button type="button" class="btn btn-success btn-sm fa fa-upload"
+                                                (click)="abrirVistaArchivo(item)">
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm fa fa-trash-o"
+                                                (click)="item.remove();remover()">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div *ngIf="itemSeleccionado != undefined">
+                        <div *ngIf="itemSeleccionado.anexos.length == 0">
+                            NO EXISTE ARCHIVOS ADJUNTOS A ESTE CENTRO DE COSTO
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Acci&oacute;n</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of itemSeleccionado.anexos; let i = index">
+                                            <td><strong>{{ item.original_name }}</strong></td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm fa fa-download"
+                                                    title="Descargar" (click)="archivoExistente(item)">
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-sm fa fa-trash-o"
+                                                    title="Eliminar" *ngIf="itemSeleccionado.estado != 'I'"
+                                                    (click)="eliminarArchivoExistente(item)">
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-6">
+                <ngx-doc-viewer [url]="generalDocument" viewer="url" style="width:100%;height:50vh;"></ngx-doc-viewer>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="modal-header">
+    <div class="row" style="width: 100%;">
+        <div class="col-12">
+            <div class="title-head">
+                <span>Anexos</span>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div *ngIf="dtAnexoxShow">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <fieldset class="border p-2 mb-1 mt-2">
+                            <legend class="w-auto h6">Listado Solicitudes Aprobadas:</legend>
+                            <div style="overflow-y: scroll; height: 152px;">
+                                <div class="form-group table-responsive responsive-table">
+                                    <table class="table table-sm table-hover">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th>#</th>
+                                                <th>Nombre</th>
+                                                <th>Extension</th>
+                                                <th>Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="text-center" style="width: 100%;"
+                                                *ngFor="let dt of dtanexos; let i = index" >
+                                                <td style="width: 2%;">
+                                                    <strong>{{ i + 1 }}</strong>
+                                                </td>
+                                                <td style="width: 20%;">
+                                                    <strong>{{ dt.original_name }}</strong>
+                                                </td>
+                                                <td style="width: 5%;">
+                                                    <strong>{{ dt.original_extension }}</strong>
+                                                </td>
+                                                <td style="width: 5%;cursor: pointer;">
+                                                    <input type="radio" id="male" name="gender" value="male"
+                                                    (click)="showAnexo(dt)" style="cursor: pointer;">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    
+                    
+                    <div class="col-3 text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-block" 
+                         style="background-color: #25dd4d; color: white; border-radius: 10px"
+                            (click)="addDoc()">
+                            <i class="fa fa-paperclip" aria-hidden="true"></i> 
+                            Adjuntar</button>
+                    </div>
+                    <div class="col-3 text-center mt-4" >
+                        <button class="btn btn-primary btn-block " type="button"
+                            [disabled]="docSelect == undefined"
+                            style="background-color: #404A63; color: white; border-radius: 10px"
+                            (click)="downloadAnexo()" title="Descargar anexo">
+                            <i class="fa fa-download"></i> Descargar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <fieldset class="border p-2 mb-1 mt-2">
+                <legend class="w-auto h6">Vista de solicitud:</legend>
+                <div class="row justify-content-center">
+                    <div id="viewerloader" class="container-new-loader" *ngIf="!viewer">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+                <div class="row" *ngIf="viewer">
+                    <div class="col">
+                        <ngx-doc-viewer [url]="general" viewer="url" style="width:100%;height:50vh;">
+                        </ngx-doc-viewer>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div> -->

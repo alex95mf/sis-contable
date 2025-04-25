@@ -1,0 +1,47 @@
+.responsive-table 
+{
+
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 6px 0px 8px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                    padding: 5px 10px 5px 15px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    /* text-transform: uppercase; */
+                    font-weight: bold;
+                    border: none !important;
+                    font-size: 9px;
+                    
+                }
+            }
+        }
+    }
+}
+
+.placeholder
+{
+    font-size: 11px;
+}

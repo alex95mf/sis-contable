@@ -1,0 +1,208 @@
+<div class="my-2">
+    <app-button-radio-active titulo="{{ fTitle }}" icono="fas fa-bullseye-arrow" cstyle="bg-gradient-primary text-white"
+        icono="fas fa-bullseye-arrow" filtroBoton="metas_estra" [groupButton]="vmButtons"
+        (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row my-2">
+            <div class="col-2">
+                <app-cc-input-group-prepend label="Periodo" styleSpan="font-weight-bold size-span-campo">
+                    <input type="text" class="form-control" readonly [value]="2023">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Programa" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select [(ngModel)]="seleccion.id" id="cmbPrograma" class="form-control" [clearable]="false">
+                        <ng-option [value]="0" disabled>Escoger un Programa...</ng-option>
+                        <ng-option *ngFor="let programa of programas" [value]="programa.id">{{ programa.nombre }}
+                        </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            
+        </div>
+        <div class="row my-2">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Obj. Des. Sustentable" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select [(ngModel)]="seleccion.ods" id="cmbOds" class="form-control" (change)="cargaMetaODS($event)" [clearable]="false">
+                        <ng-option [value]="0" disabled>Escoger un ODS...</ng-option>
+                        <ng-option *ngFor="let o of cmb.ods" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+                
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Eje" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select [(ngModel)]="seleccion.eje" id="cmbEje" class="form-control" (change)="cargaOPG($event)" [clearable]="false">
+                        <ng-option [value]="0" disabled>Escoger un Eje...</ng-option>
+                        <ng-option *ngFor="let o of cmb.eje" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Meta ODS" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select [(ngModel)]="seleccion.meta_ods" id="cmbMetaODS" class="form-control" [clearable]="false">
+                        <ng-option [value]="0" disabled>Escoger una Meta ODS...</ng-option>
+                        <ng-option *ngFor="let o of cmb.metaods" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Obj. Plan de Gobierno" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select [(ngModel)]="seleccion.opg" id="cmbOPG" class="form-control" [clearable]="false" (change)="cargaPPG($event)">
+                        <ng-option [value]="0" disabled>Escoger un OPG...</ng-option>
+                        <ng-option *ngFor="let o of cmb.opg" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Politica" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select [(ngModel)]="seleccion.ppg" id="cmbPPG" class="form-control" [clearable]="false" (change)="cargaMetaZonal($event)">
+                        <ng-option [value]="0" disabled>Escoger una Politica...</ng-option>
+                        <ng-option *ngFor="let o of cmb.ppg" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Meta Zonal" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select [(ngModel)]="seleccion.metaZonal" id="cmbMeta" class="form-control" [clearable]="false">
+                        <ng-option [value]="0" disabled>Escoger una Meta...</ng-option>
+                        <ng-option *ngFor="let o of cmb.meta" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Competencias" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select [(ngModel)]="seleccion.competencia" id="cmbCompetencia" class="form-control" [clearable]="false">
+                        <ng-option [value]="0" disabled>Escoger una Competencia...</ng-option>
+                        <ng-option *ngFor="let o of cmb.comp_gad" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Obj. Estrategico" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select [(ngModel)]="seleccion.oe" id="cmbObjEst" class="form-control" [clearable]="false">
+                        <ng-option [value]="0" disabled>Escoger un Objetivo...</ng-option>
+                        <ng-option *ngFor="let o of cmb.obj_pdot" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Meta Resultado" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select class="form-control" [(ngModel)]="seleccion.metaResultado" [clearable]="false">
+                        <ng-option [value]="0" disabled>Escoger una Meta...</ng-option>
+                        <ng-option *ngFor="let o of cmb.meta_resultado" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Indicador" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select class="form-control" [(ngModel)]="seleccion.indicador" [clearable]="false">
+                        <ng-option [value]="0" disabled>Escoger un Indicador...</ng-option>
+                        <ng-option *ngFor="let o of cmb.indicador" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Tendencia del Indicador" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select class="form-control" [(ngModel)]="seleccion.tendencia" [clearable]="false">
+                        <ng-option [value]="0">Escoger Tendencia del Indicador</ng-option>
+                        <ng-option *ngFor="let o of cmb.tendencia" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Tipo de Intervencion" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select class="form-control" [(ngModel)]="seleccion.intervencion" [clearable]="false">
+                        <ng-option [value]="0">Escoger Tipo de Intervencion</ng-option>
+                        <ng-option *ngFor="let o of cmb.intervencion" [value]="o">{{ o.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col text-right">
+                <button class="btn btn-success" matTooltip="Asignar Meta" (click)="asignarMetas()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm" style="min-width: 1800px;">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th>Programa</th>
+                                <th>ODS</th>
+                                <th>Meta ODS</th>
+                                <th>Eje</th>
+                                <th>Objetivo</th>
+                                <th>Politica</th>
+                                <th>Meta para la Zona</th>
+                                <th>Competencia GAD</th>
+                                <th>Obj. Estrategico</th>
+                                <th style="width: 230px;">Meta de Resultados PDOT</th>
+                                <th>Indicador</th>
+                                <th style="width: 120px;">Tendencia del Indicador</th>
+                                <th style="width: 120px;">Tipo de Intevencion</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            <tr *ngIf="!programas.length">
+                                <td colspan="12" class="text-center">
+                                    <h6>No hay datos.</h6>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let elem of programas; let i = index">
+                                <td><h6>{{ elem.nombre }}</h6></td>
+                                <td>{{ elem.ods.nombre }}</td>
+                                <td>{{ elem.meta_ods.nombre }}</td>
+                                <td>{{ elem.eje.nombre }}</td>
+                                <td>{{ elem.opg.nombre }}</td>
+                                <td>{{ elem.ppg.nombre }}</td>
+                                <td>{{ elem.metaZonal.nombre }}</td>
+                                <td>{{ elem.competencia.nombre }}</td>
+                                <td>{{ elem.oe.nombre }}</td>
+                                <td>{{ elem.metaResultado.nombre }}</td>
+                                <td>{{ elem.indicador.nombre }}</td>
+                                <td>{{ elem.tendencia.nombre }}</td>
+                                <td>{{ elem.intervencion.nombre }}</td>
+                                <td>
+                                    <div class="btn-group-vertical" role="group">
+                                        <button class="btn btn-sm btn-danger" (click)="limpiar(elem)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="plaMetas"></cc-spiner-procesar>

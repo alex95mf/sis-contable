@@ -1,0 +1,301 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Reporte Cuentas por Pagar" cstyle="bg-gradient-primary text-white" filtroBoton="btnRepCxp" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+
+        <div class="row mt-1">
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control form-control-sm" type="text" format="yyyy-MM-dd" id="" (ngModelChange)="rerender()"></ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control form-control-sm" id="" format="yyyy-MM-dd" (ngModelChange)="rerender()"></ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo">
+                    <ng-select id="IdCliente" class="form-control custom" appendTo="body" ngDefaultControl [searchable]="true" [clearable]="false" [(ngModel)]="proveedor" (ngModelChange)="filterProveedor($event)">
+                        <ng-option [value]="0">Seleccione proveedor</ng-option>
+                        <ng-option *ngFor="let d of arrayProveedor" [value]="d.id_proveedor">{{ d.nombre_comercial_prov }}
+                        </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Retención" styleSpan="size-span-campo">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text btn" id="inputLabel-prepend">
+                        SI&nbsp;&nbsp; <input type="checkbox" [(ngModel)]="retencionSi" id="checkretencionSi"
+                            [disabled]="disabledDataSi" (ngModelChange)="filterRetencionSi($event)">
+                    </span>
+                    </div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text btn" id="inputLabel-prepend">
+                        NO&nbsp;&nbsp; <input type="checkbox" [(ngModel)]="retencionNo" id="checkretencionNo"
+                            [disabled]="disabledDataNo" (ngModelChange)="filterRetencionNo($event)">
+                    </span>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <fieldset class="border p-2 mb-1 mt-2 filters">
+            <legend class="w-auto h6">Listado</legend>
+            <div class="table-responsive responsive-table">
+                <table datatable [dtOptions]="dtOptions" id="tablaReporCCxP" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                    <thead class="thead-dark">
+                        <tr style="width: 100%;text-align: center;">
+                            <!-- <th style="width: 5%;">#</th> -->
+                            
+                            <th style="width: 13%;">Documento</th>
+                            <th style="width: 32%;">Proveedor</th>
+                            <th style="width: 8%;">Fecha</th>
+                            <th style="width: 10%;">Monto</th>
+                            <th style="width: 10%;">Abono</th>
+                            <th style="width: 10%;">Saldo</th>
+                            <th style="width: 10%;">Retención</th>
+                            <th style="width: 7%;">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="validaDt">
+                        <tr *ngFor="let dt of infoDt; let i = index">
+                            <!-- <td class="text-center">{{ i + 1 }}</td> -->
+                            
+                            <td style="text-align: left;cursor:pointer;" (click)="informaDocumento(dt,i) ">
+                                <span class="tooltip-test" placement="right" ngbTooltip="Ver Más">
+                                    {{ dt.codigo}}-{{ dt.doc_num}}</span></td>
+                            <td style="text-align: left;;cursor:pointer;" (click)="informaCliente(dt,i) ">
+                                <span class="tooltip-test" placement="left" ngbTooltip="Ver Más">
+                                    {{ dt.razon_social }}</span></td>
+                            <td style="text-align: center;">{{ dt.fecha_inicio }}</td>
+                            <td style="text-align: right;">${{ formatNumber(dt.monto_total)}}</td>
+                            <td style="text-align: right;">${{ formatNumber(dt.monto_abono)}}</td>
+                            <td style="text-align: right;">${{ formatNumber(dt.monto_saldo) }}</td>
+                            <td style="text-align: center;">{{dt.retencion}}</td>
+                            <td>
+                                <strong *ngIf="dt.status == 'Pendiente'" style="width: 8%;  color:rgb(0,92,205);font-weight:bold;">{{dt.status}}</strong>
+                                <strong *ngIf="dt.status == 'Pagado'" style="width: 8%; color:green;font-weight:bold;">{{dt.status}}</strong>
+                                <strong *ngIf="dt.status == 'Vencido'" style="width: 8%; color:red;font-weight:bold;">{{dt.status}}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </app-button-radio-active>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg " id="modalReportcXpagar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <app-button-radio-active titulo="Información Documento" cstyle="bg-gradient-primary text-white" filtroBoton="btnReportCxpInf" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fal fa-money-check">
+                    <div class="row mt-2" *ngIf="dataFac != 0">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.fecha}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="N° Documento" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.codigo}}{{dtInformacion.numero}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="dataFac != 0">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="N° Autorización " styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.autorizacion}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Usuario Recibe" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.aprobacion}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="dataFac != 0">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Tipo Pago" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.tipoPago}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Forma Pago" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.formaPago}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="dataFac != 0">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Asesor" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.asesor}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Despachado" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left" *ngIf="dtInformacion.despacho == 1">Si</label>
+                                <label class="form-control form-control-sm text-left" *ngIf="dtInformacion.despacho == 0">No</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="dataFac != 0">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Retención" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left" *ngIf="dtInformacion.retencion == 1">Si</label>
+                                <label class="form-control form-control-sm text-left" *ngIf="dtInformacion.retencion == 0">No</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Iva Porcentaje" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.ivaPorcentaje}}%</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="dataFac != 0">
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Subtotal" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-right">{{dtInformacion.subtotal | currency: 'USD' | lowercase}}</label>
+                            </app-cc-input-group-prepend>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Iva" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-right">{{dtInformacion.iva | currency: 'USD' | lowercase}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Total" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-right">{{dtInformacion.total | currency: 'USD' | lowercase}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center filters">
+                        <div class="col-md-12 mt-3">
+                            <div class="table-responsive responsive-table" style="overflow-y: scroll; max-height: 150px">
+                                <table class="table table-sm table-hover">
+                                    <thead class="thead-dark">
+                                        <tr style="width: 100%;">
+                                            <th style="width: 10%;">Letra</th>
+                                            <th style="width: 15%;">Fecha Pago</th>
+                                            <th style="width: 15%;">Fecha Vencimiento</th>
+                                            <th style="width: 15%;">Valor</th>
+                                            <th style="width: 15%;">Abono</th>
+                                            <th style="width: 15%;">Saldo</th>
+                                            <th style="width: 15%;">Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let dt of dtCxPagar; let i = index">
+                                            <td>
+                                                <strong>{{dt.letra}}</strong>
+                                            </td>
+                                            <td>
+                                                <strong>{{dt.fecha_pago}}</strong>
+                                            </td>
+                                            <td>
+                                                <strong>{{dt.fecha_venc}}</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <strong>${{commonServices.formatNumber(dt.valor)}}</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <strong>${{commonServices.formatNumber(dt.valor_abono)}}</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <strong>${{commonServices.formatNumber(dt.valor_saldo)}}</strong>
+                                            </td>
+                                            <td>
+                                                <strong *ngIf="dt.estado == 'Pendiente'" style="width: 8%;  color:rgb(0,92,205);font-weight:bold;">{{dt.estado}}</strong>
+                                                <strong *ngIf="dt.estado == 'Pagado'" style="width: 8%; color:green;font-weight:bold;">{{dt.estado}}</strong>
+                                                <strong *ngIf="dt.estado == 'Vencido'" style="width: 8%; color:red;font-weight:bold;">{{dt.estado}}</strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg " id="modalReportProveedor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <app-button-radio-active titulo="Información Proveedor" cstyle="bg-gradient-primary text-white" filtroBoton="btnReportCxpProveedor" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fal fa-money-check">
+                    <div class="row mt-3">
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Tipo Documento" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.Tdocumento}}</label>
+                            </app-cc-input-group-prepend>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="N° Documento" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.documento}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Tipo de Persona" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.persona}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Nombre Comercial" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.nombreC}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Razon Social " styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.razon}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Website" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.website}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Teléfono" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.telefono}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <app-cc-input-group-prepend label="Direccion" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.direccion}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Provincia" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.provincia}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Pais/Ciudad" styleSpan="size-span-campo">
+                                <label class="form-control form-control-sm text-left">{{dtInformacion.pais}}/{{dtInformacion.ciudad}}</label>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spRepCXpProv"></cc-spiner-procesar>

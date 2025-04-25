@@ -1,0 +1,110 @@
+<div *ngIf="tasasVarias">
+    <app-button-radio-active [titulo]="isNew ? 'Nueva Tasa' : 'Editar Tasa'" filtroBoton="btnTasasVariasForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">C&oacute;digo</span>
+                    </div>
+                    <input id="codigo" type="text" class="form-control form-control-sm" placeholder="Código" [(ngModel)]="tasasVarias.codigo" maxlength="10">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Descripción</span>
+                    </div>
+                    <input id="descripcion" type="text" class="form-control form-control-sm" placeholder="Descripción" [(ngModel)]="tasasVarias.descripcion" maxlength="300">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Motivaci&oacute;n Legal</span>
+                    </div>
+                    <input id="motivacion_legal" type="text" class="form-control form-control-sm" placeholder="Motivación Legal" [(ngModel)]="tasasVarias.motivacion_legal" maxlength="300">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-2 ">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Tipo de C&aacute;lculo</span>
+                    </div>
+                    <ng-select id="tipo_calculo" class="form-control form-control-sm" [(ngModel)]="tasasVarias.tipo_calculo" (ngModelChange)="disabledTipo($event)" maxlength="5">
+                        <ng-option disabled [value]="0">Seleccione un tipo de cálculo</ng-option>
+                        <ng-option *ngFor="let op of tipoCalculoList" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </div>
+            </div> 
+        </div>
+        <div class="row"> 
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Tipo Tabla</span>
+                    </div>
+                    <ng-select id="tipo_tabla" class="form-control form-control-sm"  [(ngModel)]="tasasVarias.tipo_tabla" [clearable]="false" [disabled]="actions.tipoT" maxlength="5">
+                        <ng-option disabled [value]="0" disabled>Seleccione un tabla</ng-option>
+                        <ng-option *ngFor="let op of tasas" [value]="op.valor">{{ op.valor + ' - ' + op.descripcion }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>   
+
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Depende</span>
+                    </div>
+                    <input id="depende" type="text" class="form-control form-control-sm" placeholder="Depende" [(ngModel)]="tasasVarias.depende" [disabled]="actions.depD" maxlength="300">
+                </div>
+            </div>   
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">F&oacute;rmula</span>
+                    </div>
+                    <input id="formula" type="text" class="form-control form-control-sm" placeholder="Fórmula" [(ngModel)]="tasasVarias.formula" [disabled]="actions.formu" maxlength="300">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Valor</span>
+                    </div>
+                    <input id="valor" type="text" class="form-control form-control-sm" placeholder="Valor" [(ngModel)]="tasasVarias.valor" [disabled]="actions.valor" (keypress)="validaciones.numberOnlyDot($event)" maxlength="11">
+                </div>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group input-group-sm mt-2 ">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Estado</span>
+                    </div>
+                    <ng-select id="estado" class="form-control" [(ngModel)]="tasasVarias.estado" maxlength="1">
+                        <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                        <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Observaci&oacute;n</span>
+                    </div>
+                    <input id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="tasasVarias.observacion" [disabled]="actions.obser" maxlength="300">
+                </div>
+            </div>
+        </div>
+
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="tasas-varias-form"></cc-spiner-procesar>

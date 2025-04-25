@@ -1,0 +1,25 @@
+::-webkit-scrollbar 
+    {
+      width: 5px;
+      height: 10px;
+      overflow-y: scroll;
+      overflow-x: scroll;
+  }
+  
+  ::-webkit-scrollbar-thumb 
+  {
+      background: #13B1E9;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+  
+  ::-webkit-scrollbar-thumb:active 
+  {
+      background-color: #999999;
+  }
+  
+  ::-webkit-scrollbar-track 
+  {
+      background: #CECAC9;
+      border-radius: 4px;
+  }

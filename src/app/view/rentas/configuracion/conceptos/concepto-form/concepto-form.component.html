@@ -1,0 +1,169 @@
+<div *ngIf="concepto">
+
+    <app-button-radio-active [titulo]="isNew ? 'Nuevo Concepto' : 'Editar Concepto'" filtroBoton="btnConceptoForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+        <div class="row">
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="C&oacute;digo" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="concepto.codigo" maxlength="3">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="concepto.nombre" maxlength="120">
+                </app-cc-input-group-prepend>
+            </div>
+
+           
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Cuenta Acreedora" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly [(ngModel)]="concepto.cuenta_acreedora" placeholder="Cuenta Acreedora" maxlength="15">
+                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('Acreedora')" [disabled]="searching.acreedora"> Consultar</button>
+                    <!-- <datalist id="lst_ctas_acreedoras">
+                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                    </datalist> -->
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Nombre cuenta Acreedora" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="descripcion_acreedora" type="text" readonly/>
+                    
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12">
+                <app-cc-input-group-prepend label="C&oacute;digo Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly  [(ngModel)]="concepto.codigo_presupuesto" placeholder="C&oacute;digo Presupuesto" maxlength="15">
+                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" [disabled]="searching.presupuesto"> Consultar</button>
+                    <!-- <datalist id="lst_ctas_presupuesto">
+                        <option *ngFor="let cta of cuentas.presupuesto" [value]="cta.codigo">{{ cta.codigo }} {{ cta.nombre }}</option>
+                    </datalist> -->
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Nombre cuenta Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="descripcion_presupuesto" type="text" readonly/>
+                    
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Cuenta Deudora" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly  [(ngModel)]="concepto.cuenta_deudora" placeholder="Cuenta Deudora" maxlength="15">
+                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContableReg('Deudora')" [disabled]="searching.deudora"> Consultar</button>
+                    <!-- <datalist id="lst_ctas_deudoras">
+                        <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                    </datalist> -->
+                </app-cc-input-group-prepend>
+            </div>
+
+
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Nombre cuenta Deudora" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="descripcion_deudora" type="text" readonly/>
+                    
+                </app-cc-input-group-prepend>
+            </div>
+
+          
+            <div class="col-6">
+                <app-cc-input-group-prepend label="¿Aplica Tarifa?" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="concepto.tiene_tarifa">
+                        <ng-option disabled [value]="-1">Seleccione una respuesta</ng-option>
+                        <ng-option *ngFor="let op of tieneTarifaList" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Tipo de C&aacute;lculo" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control form-control-sm" [clearable]="false" [(ngModel)]="concepto.tipo_calculo"
+                        [items]="tipoCalculosList" bindValue="descripcion" bindLabel="valor">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="concepto.estado">
+                        <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                        <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+
+            <!-- <div *ngIf="!isNew" class="col-6">
+                <div class="input-group input-group-sm mt-2 mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Estado</span>
+                    </div>
+                    <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="concepto.estado">
+                        <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                        <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </div>
+            </div> -->
+
+            <div *ngIf="!isNew && hayTarifas" class="col-6">
+                <div class="input-group input-group-sm mt-2 mb-3">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Tarifa</span>
+                    </div>
+                    <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="concepto.id_tarifa" [clearable]="false">
+                        <ng-option disabled [value]="0">Seleccione una tarifa</ng-option>
+                        <ng-option *ngFor="let tar of tarifasList" [value]="tar.id_tarifa">{{ tar.descripcion }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="¿Aplica Exoneración?" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="concepto.tiene_exoneracion">
+                        <ng-option disabled [value]="-1">Seleccione una respuesta</ng-option>
+                        <ng-option *ngFor="let op of tieneExoneracion" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="¿Aplica STA?" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="concepto.tiene_sta">
+                        <ng-option disabled [value]="-1">Seleccione una respuesta</ng-option>
+                        <ng-option *ngFor="let op of tieneSta" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Resolucion" styleSpan="size-span-campo font-weight-bold">
+                    <div *ngIf="anexo; then conAnexo else sinAnexo"></div>
+                    <ng-template #conAnexo>
+                        <input type="text" class="form-control" readonly [value]="anexo.original_name">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-primary" matTooltip="Descargar Resolucion" (click)="dlResolucion(anexo)">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn btn-sm btn-warning" matTooltip="Ver Resolucion" (click)="viewResolucion(anexo)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" matTooltip="Eliminar Resolucion" (click)="deleteAnexo(anexo)">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </ng-template>
+                    <ng-template #sinAnexo>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile" accept="application/pdf" (change)="cargaResolucionConcepto($event.target.files)">
+                            <label class="custom-file-label" for="customFile" id="lbl_anexo">Seleccionar Resolucion</label>
+                          </div>
+                    </ng-template>
+                </app-cc-input-group-prepend>
+               
+            </div>
+
+        </div>
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

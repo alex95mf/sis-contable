@@ -1,0 +1,83 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Cierre de Cuentas por Cobrar" cstyle="bg-light" icono="fas fa-file-invoice-dollar"
+        filtroBoton="btnsCierreCxc" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border pb-2 px-3 mb-2">
+            <legend class="w-auto bg-dark">Filtros</legend>
+            <div class="row">
+                <div class="col">
+                    <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" readonly [value]="documento?.num_documento">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha Documento" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control"  [(ngModel)]="documento.fecha">
+                    </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" max="9999-12-31">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold bg-dark">
+                        <textarea rows="3" class="form-control" [(ngModel)]="documento.observaciones"></textarea>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+        <p-table 
+            [value]="documento.deudas"
+            [paginator]="true"
+            [rows]="50"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[10, 25, 50]"
+            [scrollable]="true"
+            scrollHeight="450px">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="min-width:200px">Contribuyente</th>
+                    <th style="min-width:200px">Num. Documento</th>
+                    <th style="min-width:75px">Estado</th>
+                    <th style="min-width:150px">Fecha</th>
+                    <th style="min-width:150px">Cuenta Contable</th>
+                    <th style="min-width:120px">Valor</th>
+                    <th style="min-width:120px">Exoneraciones</th>
+                    <th style="min-width:120px">Descuento</th>
+                    <th style="min-width:120px">Subtotal</th>
+                    <th style="min-width:120px">Interes</th>
+                    <th style="min-width:120px">STA</th>
+                    <th style="min-width:120px">Coactiva</th>
+                    <th style="min-width:120px">Total</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-deuda>
+                <tr>
+                    <td style="min-width:200px">
+                        {{ deuda.contribuyente?.razon_social }}
+                    </td>
+                    <td style="min-width:200px">{{ deuda.documento }}</td>
+                    <td style="min-width:75">
+                        <i class="fas fa-circle" [ngClass]="{'text-success': deuda.estado == 'A', 'text-info': deuda.estado == 'V'}"></i>
+                    </td>
+                    <td style="min-width:150px">{{ deuda.fecha | date:'yyyy-MM-dd' }}</td>
+                    <td style="min-width:150px">{{ deuda.cuenta_por_cobrar }}</td>
+                    <td class="text-right" style="min-width:120px">${{ deuda.subtotal | number:'1.2-2' }}</td>
+                    <td class="text-right" style="min-width:120px">${{ deuda.exoneraciones | number:'1.2-2' }}</td>
+                    <td class="text-right" style="min-width:120px">${{ deuda.descuento | number:'1.2-2' }}</td>
+                    <td class="text-right" style="min-width:120px"></td>
+                    <td class="text-right" style="min-width:120px">${{ deuda.interes | number:'1.2-2' }}</td>
+                    <td class="text-right" style="min-width:120px">${{ deuda.servtecadmin | number:'1.2-2' }}</td>
+                    <td class="text-right" style="min-width:120px">${{ deuda.coactiva | number:'1.2-2' }}</td>
+                    <td class="text-right" style="min-width:120px">${{ deuda.total | number:'1.2-2' }}</td>
+                    
+                </tr>
+            </ng-template>
+        </p-table>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spCierreAnticiposProv"></cc-spiner-procesar>

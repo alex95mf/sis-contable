@@ -1,0 +1,69 @@
+<div *ngFor="let menu of parentMenu" class="menu-item" style="word-break: break-word;">
+    
+        <!-- <mat-icon fontSet="fa" fontIcon="th"></mat-icon> -->
+    <!-- <a *ngIf="menu.routerLink && !menu.hasSubMenu" mat-button  style="text-decoration: none; font-size: 12px;"
+        fxLayout="row" [fxLayoutAlign]="(settings.menuType=='default') ? 'start center' : 'center center'"
+        [routerLink]="[menu.routerLink]" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}"
+        [matTooltip]="menu.title" matTooltipPosition="after" [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'"
+        (click)="onClick(menu.id)" [id]="'menu-item-'+menu.id">  
+        <span class="fa-stack">
+            <i class="fas fa-circle fa-stack-2x" style="color: rgba(255,255,255,.12);"></i>
+            <i class='{{ menu.icon }} fa-stack-1x'></i>
+        </span>      
+        &nbsp;&nbsp;<span class="menu-title">{{menu.title}}</span>
+    </a>
+    <a *ngIf="menu.href && !menu.subMenu" mat-button style="text-decoration: none; font-size: 12px;"
+        fxLayout="row" [fxLayoutAlign]="(settings.menuType=='default') ? 'start center' : 'center center'"
+        [attr.href]="menu.href || ''" [attr.target]="menu.target || ''"
+        [matTooltip]="menu.title" matTooltipPosition="after" [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'"
+        (click)="onClick(menu.id)" [id]="'menu-item-'+menu.id">        
+        <span class="fa-stack">
+            <i class="fas fa-circle fa-stack-2x" style="color: rgba(255,255,255,.12);"></i>
+            <i class='{{ menu.icon }} fa-stack-1x'></i>
+        </span>  
+        &nbsp;&nbsp;<span class="menu-title">{{menu.title}}</span>
+    </a>
+
+    <a *ngIf="menu.hasSubMenu" mat-button style="text-decoration: none; font-size: 12px;"
+        fxLayout="row" [fxLayoutAlign]="(settings.menuType=='default') ? 'start center' : 'center center'"
+        [matTooltip]="menu.title" matTooltipPosition="after" [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'"
+        (click)="onClick(menu.id)" [id]="'menu-item-'+menu.id">        
+        <span class="fa-stack">
+            <i class="fas fa-circle fa-stack-2x" style="color: rgba(255,255,255,.12);"></i>
+            <i class='{{ menu.icon }} fa-stack-1x'></i>
+        </span>  
+        &nbsp;&nbsp;<span class="menu-title">{{menu.title}}</span>
+        <mat-icon class="menu-expand-icon transition-2">arrow_drop_down</mat-icon>
+    </a> -->
+    <a *ngIf="menu.routerLink && !menu.hasSubMenu" mat-button style="text-decoration: none;"
+        fxLayout="row" [fxLayoutAlign]="(settings.menuType=='default') ? 'start center' : 'center center'"
+        [routerLink]="[menu.routerLink]" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}"
+        [matTooltip]="menu.title" matTooltipPosition="after" [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'"
+        (click)="onClick(menu.id)" [id]="'menu-item-'+menu.id">
+        <!-- <mat-icon class="menu-icon">home</mat-icon> -->
+        <i class='{{ menu.icon }} menu-icon'></i>
+        <span class="menu-title" >{{menu.title}}</span>
+    </a>
+    <a *ngIf="menu.href && !menu.submenu" mat-button style="text-decoration: none;"
+        fxLayout="row" [fxLayoutAlign]="(settings.menuType=='default') ? 'start center' : 'center center'"
+        [attr.href]="menu.href || ''" [attr.target]="menu.target || ''"
+        [matTooltip]="menu.title" matTooltipPosition="after" [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'"
+        (click)="onClick(menu.id)" [id]="'menu-item-'+menu.id">
+        <!-- <mat-icon class="menu-icon">home</mat-icon> -->
+        <i class='{{ menu.icon }} menu-icon'></i>
+        <span class="menu-title" > {{menu.title}}</span>
+    </a>
+    <a *ngIf="menu.hasSubMenu" mat-button style="text-decoration: none;"
+        fxLayout="row" [fxLayoutAlign]="(settings.menuType=='default') ? 'start center' : 'center center'"
+        [matTooltip]="menu.title" matTooltipPosition="after" [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'"
+        (click)="onClick(menu.id)" [id]="'menu-item-'+menu.id">
+        <!-- <mat-icon class="menu-icon">home</mat-icon> -->
+        <i class='{{ menu.icon }} menu-icon'></i>
+        <span class="menu-title">{{menu.title}}</span>
+        <mat-icon class="menu-expand-icon transition-2">arrow_drop_down</mat-icon>
+    </a>
+
+    <div *ngIf="menu.hasSubMenu" class="sub-menu" [id]="'sub-menu-'+menu.id">
+        <app-vertical-menu [menuItems]="menuItems" [menuParentId]="menu.id"></app-vertical-menu>
+    </div>
+</div>

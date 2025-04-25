@@ -1,0 +1,301 @@
+<!-- <div class="row">
+    <div class="col-sm-6">
+        <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo">
+            <input type="text" readonly placeholder="Seleccione">
+            <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Empleado">
+                <i class="fas fa-search"></i>
+            </button>
+        </app-cc-input-group-prepend>
+    </div>
+    
+</div> -->
+<!-- <fieldset class="border p-2 mb-3 mt-4 filters">
+    <legend class="w-auto h6 ">Listado de Carga Familiares</legend>
+    <div class="table-responsive responsive-table ">
+        <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="table table-bordered ">
+            <thead>
+                <tr style="width: 100%;">
+                    <th>#</th>
+                    <th style="width: 20%;">Empleado</th>
+                    <th style="width: 20%;">Identificacion Carga</th>
+                    <th style="width: 20%;">Nombres Carga</th>
+                    <th style="width: 20%;">Apellidos Carga</th>
+                    <th style="width: 20%;">Fecha Nacimiento</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="validaDt">
+                <tr *ngFor="let dt of arrayData; let i = index">
+                     <td style="width: 10%;">
+                        {{ i + 1 }}
+                    </td>
+                    <td>
+                        {{dt.nombres}} {{dt.apellidos}}
+                    </td>
+                    <td>
+                        {{dt.cedula_carga}}
+                    <td>
+                        {{dt.nombres_general}}
+                    </td>
+                    <td>
+                        {{dt.apellidos_general}}
+                    </td>
+                    <td>
+                        {{dt.fecha_nacim}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <strong *ngIf="empleado !=0">
+        TOTAL CARGAS  <span style="background-color: #F3F0F5">{{cantidadtotal}}</span> 
+      </strong>
+</fieldset> -->
+
+<fieldset class="border pb-2 px-2">
+    <legend class="w-auto ml-1 bg-dark">Filtros</legend>
+    <div class="row mr-1 ml-1">
+        <div class="col-10">
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_codigo" type="text" class="form-control" [(ngModel)]="filter.empleado" placeholder="Nombre o identificación">
+                    </app-cc-input-group-prepend>
+                </div>
+                <!-- <div class="col">
+                    <app-cc-input-group-prepend label="Departamento" styleSpan="font-weight-bold">
+                        <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="filter.departamento" placeholder="Departamento">
+                    </app-cc-input-group-prepend>
+                </div> -->
+            </div>
+        </div>
+        <div class="col text-right">
+            <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="getTableReport()">
+                <i class="fas fa-search"></i> Consultar
+            </button>
+            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                <i class="fas fa-eraser"></i>
+            </button>
+        </div>
+    </div>
+</fieldset>
+
+<div class="row my-2">
+    <div class="col">
+        <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    
+                    <th>#</th>
+                    <th style="width: 20%;">Empleado</th>
+                    <th style="width: 20%;">Identificacion Carga</th>
+                    <th style="width: 20%;">Nombres Carga</th>
+                    <th style="width: 20%;">Apellidos Carga</th>
+                    <th style="width: 20%;">Fecha Nacimiento</th>
+                    <th style="width: 20%;">Parentesco</th>
+                    
+                </tr>
+            </thead>
+            <tbody *ngIf="arrayData">
+                <tr *ngFor="let dt of arrayData, let i = index">
+                        <td  class="text-center">
+                            {{ i + 1 }}
+                        </td>
+                        <td  class="text-center">
+                            {{dt.nombres}} {{dt.apellidos}}
+                        </td>
+                        <td  class="text-center">
+                            {{dt.cedula_carga}}
+                        <td class="text-center">
+                            {{dt.nombres_general}}
+                        </td>
+                        <td  class="text-center">
+                            {{dt.apellidos_general}}
+                        </td>
+                        <td  class="text-center">
+                            {{dt.fecha_nacim}}
+                        </td>
+                        <td  class="text-center">
+                            {{dt.relacion}}
+                        </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <mat-paginator 
+            showFirstLastButtons
+            [length]="paginate.length"
+            [pageSize]="paginate.perPage"
+            [pageSizeOptions]="paginate.pageSizeOptions"
+            (page)="changePaginate($event)"
+            aria-label="Select page">
+        </mat-paginator>
+    </div>
+</div>
+
+<!-- <div [hidden]="true" id="print-section-carga">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Impresión de Nómina</h3>
+                                <p>Reporte de Carga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-12 text-center">
+                    <div>
+                        <div class="table-responsive responsive-table">
+                            <table class="table no-footer table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th class="text-left">Apellidos</th>
+                                        <th class="text-left">Nombres</th>
+                                        <th>Relación</th>
+                                        <th class="text-left">Empleado</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt" style="width: 100%;">
+                                    <tr *ngFor="let dt of arrayData; let i = index">
+                                        <td style="width: 10%;">
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td class="text-left" style="width: 30%;">
+                                            {{dt.apellidos_general}}
+                                        </td>
+                                        <td class="text-left" style="width: 30%;">
+                                            {{dt.nombres_general}}
+                                        </td>
+                                        <td style="width: 15%;">
+                                            {{dt.relacion}}
+                                        </td>
+                                        <td class="text-left" style="width: 15%;">
+                                            {{dt.nombres}} {{dt.apellidos}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <strong *ngIf="empleado != 0">
+                            TOTAL CARGA <span style="background-color: #F3F0F5">{{cantidadtotal}}</span>  PARA EMPLEADO {{datam.nombres}} {{datam.apellidos}} 
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+                <span style="color: #404a63;font-weight:bold;text-transform:uppercase;">
+                    Fecha: {{dateNow}}&nbsp;{{hora}}</span>
+            </div>
+            <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+                <span style="color: #404a63;font-weight:bold;text-transform:uppercase;">
+                    Usuario: {{dataUser.usuario}}</span>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<!-- <div [hidden]="true" id="print-section-carga">
+
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-md-12 ">
+            <div class="row justify-content-center">
+              
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Recursos Humanos</h3>
+                                <p>Lista de Carga Familiar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center prt-comprobante mt-5">
+        <div class="col-md-12">
+            <div>
+                <div class="table-responsive responsive-table">
+                    <table class="table no-footer table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="text-left">Apellidos</th>
+                                <th class="text-left">Nombres</th>
+                                <th>Relación</th>
+                                <th class="text-left">Empleado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="validaDt" style="width: 100%;">
+                            <tr *ngFor="let dt of arrayData; let i = index">
+                                <td style="width: 10%;">
+                                    {{ i + 1 }}
+                                </td>
+                                <td class="text-left" style="width: 30%;">
+                                    {{dt.apellidos_general}}
+                                </td>
+                                <td class="text-left" style="width: 30%;">
+                                    {{dt.nombres_general}}
+                                </td>
+                                <td style="width: 15%;">
+                                    {{dt.relacion}}
+                                </td>
+                                <td class="text-left" style="width: 15%;">
+                                    {{dt.nombres}} {{dt.apellidos}}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #404a63;font-weight:bold;text-transform:uppercase;">
+                Fecha: {{dateNow}}&nbsp;{{hora}}</span>
+        </div>
+        <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+            <span style="color: #404a63;font-weight:bold;text-transform:uppercase;">
+                Usuario: {{dataUser.usuario}}</span>
+        </div>
+    </div>
+</div> -->

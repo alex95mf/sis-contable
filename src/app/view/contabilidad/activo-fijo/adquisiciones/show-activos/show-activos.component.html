@@ -1,0 +1,35 @@
+
+<div class="modal-body">
+    <app-button-radio-active titulo="Activo Fijos" filtroBoton="btnSwAtv" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-search">
+        <div class="filters mt-2"> 
+            <div class="table-responsive responsive-table">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="text-align: left;padding-left: 10px;">Proveedor</th>
+                            <th style="text-align: left;padding-left: 10px;">No. Documento</th>
+                            <th style="text-align: left;padding-left: 10px;">Forma pago</th>
+                            <th style="text-align: left;padding-left: 10px;">Iva</th>
+                            <th style="text-align: left;padding-left: 10px;">subtotal</th>
+                            <th style="text-align: left;padding-left: 10px;">Total</th>
+                            <th style="text-align: center;padding-left: 0px;">Fecha compra</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="validaDt">
+                        <tr *ngFor="let dt of dataDT" (click)="setActivo(dt)" style="cursor:pointer;">
+                            <td>{{ dt.proveedor.razon_social }}</td>
+                            <td>{{ dt.num_doc }}</td>
+                            <td>{{ dt.forma_pago }}</td>
+                            <td class="text-right">{{ dt.valor_iva }}</td>
+                            <td class="text-right">{{ dt.subtotal }}</td>
+                            <td class="text-right">{{ dt.total }}</td>
+                            <td class="text-center">{{ dt.fecha_compra }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spSwActCom"></cc-spiner-procesar>

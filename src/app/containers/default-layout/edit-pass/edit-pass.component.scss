@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+    font-family: "Poppins1";
+    src: url('../../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "PoppinsTourney";
+    src: url("../../../../assets/fonts/Tourney-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+.filter {
+    background-color: white;
+}
+
+.card {
+    border-color: black;
+}

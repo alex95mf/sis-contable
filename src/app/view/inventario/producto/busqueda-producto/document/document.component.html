@@ -1,0 +1,18 @@
+<div class="table-responsive responsive-table filters ">
+    <div style="overflow-y: scroll; height: 20vh;">
+        <table class="table no-footer table-hover" >
+            <thead>
+                <tr class="text-center" style="width: 100%;" >
+                    <th style="width: 40%;" >Nombre</th>
+                    <th style="width: 50%;" >Archivo</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="validaDtUser">
+                <tr *ngFor="let dt of documentT; let i = index" (click)="selectDocument(dt)" style="cursor:pointer;text-align:center; ">
+                    <td style="width: 0%; " *ngIf="dt.identifier == id_producto && dt.original_type == 'application/pdf'">{{dt.name}}</td>
+                    <td style="width: 0%; " *ngIf="dt.identifier == id_producto && dt.original_type == 'application/pdf'"><img src="assets/img/pdf.png" width="50" height="50"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+
+<br>
+<table width="100%">
+  <tr>
+    <td class="text-center">
+      <div class="btn-group">
+        <div *ngFor="let item of agrupacion | filterByOrigin: filtrado">
+          <button class="btn {{item.clase}} btn-xs button_margin"
+          matTooltip="{{item.boton.texto}}" *ngIf="!item.imprimir"
+            [class.isDisabled]="!item.permiso" [hidden]="!item.showimg"
+            (click)="item.accion!=null?item.accion(item.paramAccion):'';metodoGlobal(item)"
+            [disabled]="item.habilitar">
+            <span *ngIf="item.showimg" class="panding_span {{item.boton.icon}}"></span>
+            <span *ngIf="item.showbadge" class="panding_span badge badge-light">{{item.pDatoBagde}}</span>
+            <span *ngIf="item.showtxt">{{item.boton.texto}}</span>
+          </button>
+          <button class="btn {{item.clase}} btn-xs button_margin"
+          matTooltip="{{item.boton.texto}}" *ngIf="item.imprimir"
+            [class.isDisabled]="!item.permiso" [hidden]="!item.showimg"
+            (click)="item.accion!=null?item.accion(item.paramAccion):''"
+            [disabled]="item.habilitar"
+            [useExistingCss]="true" printSectionId="{{item.printSection}}" ngxPrint>
+            <span *ngIf="item.showimg" class="panding_span {{item.boton.icon}}"></span>
+            <span *ngIf="item.showbadge" class="panding_span badge badge-light">{{item.pDatoBagde}}</span>
+            <span *ngIf="item.showtxt">{{item.boton.texto}}</span>
+          </button>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>

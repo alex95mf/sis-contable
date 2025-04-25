@@ -1,0 +1,35 @@
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnMasDetDoc" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-search">  
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Nro. Autorización SRI" styleSpan="size-span-campo">
+                <input class="form-control " type="text" [value]="data.itemSeleccionado.autorizacion_sri" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled/>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Cliente" styleSpan="size-span-campo">
+                <input class="form-control " type="text" [value]="razonSocial | uppercase" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled/>
+            </app-cc-input-group-prepend>
+        </div>
+    
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Fecha Autorización SRI" styleSpan="size-span-campo">
+                <input class="form-control " type="text" [value]="data.itemSeleccionado.fecha_autorizacion_sri" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled/>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Creado Por" styleSpan="size-span-campo">
+                <input class="form-control " type="text" [value]="lUsuario | uppercase" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled/>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-12">
+            <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo">
+                <textarea class="form-control " type="text" rows="2" [value]="data.itemSeleccionado.observacion | uppercase" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+</app-button-radio-active>

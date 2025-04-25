@@ -1,0 +1,300 @@
+<app-button-radio-active [titulo]="isNew ? 'Nuevo Rubro' : 'Editar Rubro'" filtroBoton="btnConceptoForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+    <div class="row mt-2 mb-1">
+
+        <div class="col-sm-5">
+            <app-cc-input-group-prepend label="C&oacute;digo Rubro" styleSpan="size-span-campo font-weight-bold" style="width: 250px;">
+                <input type="text" class="form-control" [(ngModel)]="rubro.codigo" maxlength="18">
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-7">
+            <app-cc-input-group-prepend label="Nombre rubro" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                <input type="text" class="form-control" [(ngModel)]="rubro.nombre" maxlength="120">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+        <fieldset class="border pb-2 px-2">
+            <legend class="w-auto ml-1 bg-dark">Cuentas<!--  de Inversión --></legend>
+            <div class="row">
+                <div class="col-sm-5"><!-- Inversión  -->
+                    <app-cc-input-group-prepend label="Cuenta Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaInvDeb" placeholder="Cuenta Deudora" maxlength="15">
+                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('1')" [readonly]="deudora" [disabled]="rubro.tipoRubro == 9"> Consultar</button>
+                        <!-- <datalist id="lst_ctas_deudoras">
+                            <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                        </datalist> -->
+                    </app-cc-input-group-prepend>
+                </div>
+        
+                <div class="col-sm-7"><!-- Inversión  --> 
+                    <app-cc-input-group-prepend label="Nombre Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input class="form-control" [(ngModel)]="rubro.numcInvDeb" type="text" readonly/>
+                        
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"><!-- Inversión  -->
+                    <app-cc-input-group-prepend label="Cuenta Presupuesta Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaPresupuestoInvDeb" placeholder="C&oacute;digo Presupuesto" maxlength="15">
+                        <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('p1')" [readonly]="presupuesto"> Consultar</button>
+                        <!-- <datalist id="lst_ctas_presupuesto">
+                            <option *ngFor="let cta of cuentas.presupuesto" [value]="cta.codigo">{{ cta.codigo }} {{ cta.nombre }}</option>
+                        </datalist> -->
+                    </app-cc-input-group-prepend>
+                </div>
+        
+                <div class="col-sm-7"><!-- Inversión -->
+                    <app-cc-input-group-prepend label="Nombre presupuesto  Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input class="form-control" [(ngModel)]="rubro.numpcInvDeb" type="text" readonly/>
+                        
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"><!-- Inversión -->
+                    <app-cc-input-group-prepend label="Cuenta Haber" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaInvHab" placeholder="Cuenta Acreedora" maxlength="15">
+                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContableReg('4')" [readonly]="acreedora"> Consultar</button>
+                        <!-- <datalist id="lst_ctas_deudoras">
+                            <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                        </datalist> -->
+                    </app-cc-input-group-prepend>
+                </div>
+        
+                <div class="col-sm-7"><!-- Inversión -->
+                    <app-cc-input-group-prepend label="Nombre  Haber" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input class="form-control" [(ngModel)]="rubro.numcInvHab" type="text" readonly/>
+                        
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+        
+   
+    
+    <!-- <div class="row mt-2 mb-1">  -->
+     <!--    <fieldset class="border pb-2 px-2">
+            <legend class="w-auto ml-1 bg-dark">Cuentas Corrientes</legend>
+            <div class="row">
+                <div class="col-sm-5">
+                    <app-cc-input-group-prepend label="Cuenta Corriente Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaCorrDeb" placeholder="Cuenta Deudora" maxlength="15">
+                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('2')" [readonly]="deudora"> Consultar</button>
+                     
+                    </app-cc-input-group-prepend>
+                </div>
+        
+                <div class="col-sm-7">
+                    <app-cc-input-group-prepend label="Nombre cuenta Corriente Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;" >
+                        <input class="form-control" [(ngModel)]="rubro.numcCorrDeb" type="text" readonly/>
+                        
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+           
+            <div class="row"> 
+                <div class="col-sm-5">
+                    <app-cc-input-group-prepend label="Cuenta Presupuestaria Corriente Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaPresupuestoCorrDeb" placeholder="C&oacute;digo Presupuesto" maxlength="15">
+                        <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('p2')" [readonly]="presupuesto"> Consultar</button>
+                      
+                    </app-cc-input-group-prepend>
+                </div>
+        
+                <div class="col-sm-7">
+                    <app-cc-input-group-prepend label="Nombre presupuesto Corriente Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input class="form-control" [(ngModel)]="rubro.numpcCorrDeb" type="text" readonly/>
+                        
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+           <div class="row">
+            <div class="col-sm-5">
+                <app-cc-input-group-prepend label="Cuenta Corriente Haber" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                    <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaCorrHab" placeholder="Cuenta Acreedora" maxlength="15">
+                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('5')" [readonly]="deudora"> Consultar</button>
+                 
+                </app-cc-input-group-prepend>
+            </div>
+    
+            <div class="col-sm-7">
+                <app-cc-input-group-prepend label="Nombre cuenta Corriente Haber" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                    <input class="form-control" [(ngModel)]="rubro.numcCorrHab" type="text" readonly/>
+                    
+                </app-cc-input-group-prepend>
+            </div>
+           </div>
+            
+            
+        </fieldset> -->
+        
+    <!-- </div> -->
+    <!-- <div class="row mt-2 mb-1">  -->
+      <!--   <fieldset class="border pb-2 px-2">
+            <legend class="w-auto ml-1 bg-dark">Cuentas de Producción</legend>
+            <div class="row">
+                <div class="col-sm-5">
+                    <app-cc-input-group-prepend label="Cuenta Producción Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaProdDeb" placeholder="Cuenta Deudora" maxlength="15">
+                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('3')" [readonly]="deudora"> Consultar</button>
+                      
+                    </app-cc-input-group-prepend>
+                </div>
+        
+                <div class="col-sm-7">
+                    <app-cc-input-group-prepend label="Nombre cuenta Producción Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input class="form-control" [(ngModel)]="rubro.numcProdDeb" type="text" readonly/>
+                        
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <app-cc-input-group-prepend label="Cuenta Presupuesta Producción Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaPresupuestoProdDeb" placeholder="C&oacute;digo Presupuesto" maxlength="15">
+                        <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('p3')" [readonly]="presupuesto"> Consultar</button>
+                      
+                    </app-cc-input-group-prepend>
+                </div>
+        
+                <div class="col-sm-7">
+                    <app-cc-input-group-prepend label="Nombre presupuesto Producción Debe" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input class="form-control" [(ngModel)]="rubro.numpcProdDeb" type="text" readonly/>
+                        
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <app-cc-input-group-prepend label="Cuenta Producción Haber" styleSpan="size-span-campo font-weight-bold" style="width: 220px;">
+                        <input type="text" class="form-control" readonly  [(ngModel)]="rubro.cuentaProdHab" placeholder="Cuenta Acreedora" maxlength="15">
+                        <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('6')" [readonly]="deudora"> Consultar</button>
+                       
+                    </app-cc-input-group-prepend>
+                </div>
+        
+                <div class="col-sm-7">
+                    <app-cc-input-group-prepend label="Nombre cuenta Producción Haber" styleSpan="size-span-campo font-weight-bold" style="width: 220px;" >
+                        <input class="form-control" [(ngModel)]="rubro.numcProdHab" type="text" readonly/>
+                        
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset> -->
+
+        <!-- <div class="col-12">
+            <app-cc-input-group-prepend label="Nombre cuenta Deudora" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="rubro.alSueldo" type="text" readonly/>
+                
+            </app-cc-input-group-prepend>
+        </div> -->
+
+        <!-- <div class="col-12">
+            <app-cc-input-group-prepend label="C&oacute;digo Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly  [(ngModel)]="rubro.codigo" placeholder="C&oacute;digo Presupuesto" maxlength="15">
+                <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" [readonly]="searching.presupuesto"> Consultar</button>
+                
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Nombre cuenta Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="rubro.codigo" type="text" readonly/>
+                
+            </app-cc-input-group-prepend>
+        </div> -->
+    <!-- </div> -->
+    <div class="row mt-2 mb-2"> 
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="(%)Porcentaje al sueldo" styleSpan="size-span-campo font-weight-bold">
+                <input type="number" class="form-control" [(ngModel)]="rubro.alSueldo" maxlength="18">
+                <!-- <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="rubro.alSueldo">
+                    <ng-option disabled [value]="-1">Seleccione una respuesta</ng-option>
+                    <ng-option *ngFor="let op of tieneTarifaList" [value]="op.value">{{ op.label }}</ng-option>
+                </ng-select> -->
+            </app-cc-input-group-prepend>
+        </div>
+
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="(%)Porcentaje al ingresos" styleSpan="size-span-campo font-weight-bold">
+                <input type="number" class="form-control" [(ngModel)]="rubro.alIngreso" maxlength="18">
+                <!-- <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="rubro.alIngreso">
+                    <ng-option disabled [value]="0">Seleccione un tipo de calculo</ng-option>
+                    <ng-option *ngFor="let op of tipoCalculosList" [value]="op.value">{{ op.label }}</ng-option>
+                </ng-select> -->
+            </app-cc-input-group-prepend>
+        </div>
+
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="(%)Ingreso LOSEP" styleSpan="size-span-campo font-weight-bold">
+                <input type="number" class="form-control" [(ngModel)]="rubro.losep" maxlength="18">
+                <!-- <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="rubro.losep">
+                    <ng-option disabled [value]="0">Seleccione un tipo de calculo</ng-option>
+                    <ng-option *ngFor="let op of tipoCalculosList" [value]="op.value">{{ op.label }}</ng-option>
+                </ng-select> -->
+            </app-cc-input-group-prepend>
+        </div>
+
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Aportable" styleSpan="size-span-campo font-weight-bold">
+                <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="rubro.aportable">
+                    <ng-option disabled [value]="0">Seleccione un tipo de calculo</ng-option>
+                    <ng-option *ngFor="let op of listadoNS" [value]="op.id_catalogo">{{ op.cat_nombre }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Tipo rubro" styleSpan="size-span-campo font-weight-bold">
+                <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="rubro.tipoRubro" (change)="limpiarCDebe()">
+                    <ng-option disabled [value]="0">Seleccione un tipo de calculo</ng-option>
+                    <ng-option *ngFor="let op of tipoRubro" [value]="op.id_catalogo">{{ op.cat_nombre}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Automatico" styleSpan="size-span-campo font-weight-bold">
+                <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="rubro.automatico">
+                    <ng-option disabled [value]="0">Seleccione un tipo de calculo</ng-option>
+                    <ng-option *ngFor="let op of listadoNS" [value]="op.id_catalogo">{{ op.cat_nombre}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Tipo pago" styleSpan="size-span-campo font-weight-bold">
+                <ng-select id="codigo_tipo_rubro" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="rubro.codigoTipoPago" >
+                    <ng-option disabled [value]="0">Seleccione un tipo de pago</ng-option>
+                    <ng-option *ngFor="let op of tipoPago" [value]="op.cat_keyword">{{ op.cat_nombre}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="rubro.estado">
+                    <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                    <ng-option *ngFor="let op of estado" [value]="op.id_catalogo">{{ op.cat_nombre}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Diferencia por Región" styleSpan="size-span-campo font-weight-bold">
+                <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="rubro.diferencia_por_region">
+                    <ng-option disabled [value]="0">Seleccione un tipo de calculo</ng-option>
+                    <ng-option *ngFor="let op of listadoNS" [value]="op.id_catalogo">{{ op.cat_nombre }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

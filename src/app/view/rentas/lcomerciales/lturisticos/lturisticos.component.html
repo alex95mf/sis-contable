@@ -1,0 +1,101 @@
+
+
+<app-button-radio-active titulo="Locales turísticos" filtroBoton="btnsLugaresTuristicos" cstyle="bg-gradient-primary text-white" [groupButton]="botonera" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-tags">
+    <fieldset class="border pb-2 px-2">
+        <legend class="w-auto bg-dark ml-1">Filtros</legend>
+    <div class="row">
+        <div class="col-10">
+            <div class="row">
+                <div class="col">
+                    <app-cc-input-group-prepend label="Filtrar por:" styleSpan="font-weight-bold">
+                        <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="filtro.categoria" placeholder="Categorías">   
+                    </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col"> 
+                    <app-cc-input-group-prepend label="Filtrar por:" styleSpan="font-weight-bold">
+                        <input id="filter_codigo" type="text" class="form-control" [(ngModel)]="filtro.subcategoria" placeholder="SubCategorías">
+                    </app-cc-input-group-prepend>
+                </div>
+             </div>
+         </div>
+
+         <div class="col text-right">
+                <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="cargarLTur()">
+                    <i class="fas fa-search"></i> Consultar
+                </button>
+
+                <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                    <i class="fas fa-eraser"></i>
+                </button>
+        </div>   
+        
+    </div>
+    
+</fieldset>
+    
+    <div class="row my-2">
+        <div class="col-12">
+            <table class="table table-bordered no-footer table-hover mb-0">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                       
+                        <th style="width: 20%;">Categoría</th>
+                        <th style="width: 20%;"  >SubCategoría</th>
+                        <th style="width: 15%;" >Porcentaje</th>
+                        <th style="width: 15%;">Cálculo</th>
+                        <th style="width: 15%;">Comentario</th>
+                        <th style="width: 15%;">Acciones</th>  
+                    </tr>
+                </thead>   
+                <tbody *ngIf="lista">
+                    <ng-container *ngFor="let list of lista, let i =index">
+                        <tr>
+                        <td class="text-center">{{list.concepto_categoria.valor}} </td>
+                        <td class="text-center">{{list.sub_categoria.valor}} </td>
+                        <td class="text-center">{{list.porcentaje}} </td>
+                        <td class="text-center">{{list.base_calculo}} </td>
+                        <td class="text-center">{{list.comentario}} </td>
+                        <td>
+                            <div class="text-center mx-auto">
+                                <button class="btn btn-primary btn-sm mx-1" (click)="mostrarFormLTur(false,list)" placement="left" ngbTooltip="Editar lugar turistico">
+                                    <i class="far fa-edit"></i>
+                                </button>
+  
+                                <button class="btn btn-danger btn-sm mx-1" (click)="eliminarLT(list.id_local_comercial_configuracion
+                                )" placement="top" ngbTooltip="Eliminar lugar turistico">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                              
+                            </div>
+                        </tr>
+                       
+                    </ng-container>
+
+                </tbody> 
+                <!-- proyeccion de datos-->
+
+            </table>
+            
+            <mat-paginator 
+                showFirstLastButtons
+                [length]="paginate.length"
+                [pageSize]="paginate.perPage"
+                [pageSizeOptions]="paginate.pageSizeOptions"
+                (page)="changePaginate($event)"
+                aria-label="Select page">
+            </mat-paginator>
+            
+        </div>
+    </div>
+
+</app-button-radio-active>
+
+
+<div class="my-2">
+    
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="texto_barra_carga"  lfulScren=true ></cc-spiner-procesar>
+
+

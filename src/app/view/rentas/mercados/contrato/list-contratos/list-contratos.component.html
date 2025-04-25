@@ -1,0 +1,131 @@
+<!--<app-button-radio-active [titulo]="fTitle" icono="far fa-cabinet-filing" cstyle="bg-light text-dark"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" filtroBoton="btnsListContratos">
+    <div class="row my-2">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped"
+                    style="max-height: 200px; overflow-y: scroll;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Contribuyente</th>
+                            <th>Num. Contrato</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let t of contratos">
+                            <td>{{ t.id }}</td>
+                            <td>{{ t.contribuyente.razon_social }}</td>
+                            <td>{{ t.numero }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-info" (click)="showContrato(t)"><i
+                                        class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</app-button-radio-active>
+
+
+-->
+<div>
+    <app-button-radio-active [titulo]="fTitle" icono="far fa-cabinet-filing" cstyle="bg-light text-dark"
+        [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" filtroBoton="btnsListContratos">
+        <div class="row my-2">
+            <div class="col">
+                <fieldset class="border pb-2 px-1">
+                    <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Fecha Inicio"
+                                        styleSpan="font-weight-bold size-span-otro">
+                                        <input type="date" class="form-control form-control-sm"
+                                            [(ngModel)]="filter.fecha_desde">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Fecha Final"
+                                        styleSpan="font-weight-bold size-span-otro">
+                                        <input type="date" class="form-control form-control-sm"
+                                            [(ngModel)]="filter.fecha_hasta">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <app-cc-input-group-prepend label="Razón Social"
+                                        styleSpan="font-weight-bold size-span-otro">
+                                        <input id="filter_razon_social" type="text" class="form-control form-control-sm"
+                                            [(ngModel)]="filter.razon_social">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm ml-1" placement="bottom" ngbTooltip="Buscar"
+                                (click)="consultar()">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+
+                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros"
+                                (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 5%;">ID</th>
+                            <th style="width: 30%;">Razón social</th>
+                            <th style="width: 20%;">Num. Contrato</th>
+                            <th style="width: 15%;">Fecha de inicio</th>
+                            <th style="width: 15%;">Fecha de vencimiento</th>
+                            <th style="width: 15%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="contratos.length == 0">
+                            <td colspan="7" class="text-center">
+                                <h6 class="my-1"></h6>No hay Contratos para mostrar
+                            </td>
+                        </tr>
+                        <tr *ngFor="let t of contratos">
+                            <td class="text-center">{{ t.id_mercado_contrato }}</td>
+                            <td>{{ t.fk_contribuyente?.razon_social }}</td>
+                            <td class="text-center">{{ t.numero_contrato }}</td>
+                            <td class="text-center">{{ t.fecha_inicio | date: 'dd/MM/yyyy' }}</td>
+                            <td class="text-center">{{ t.fecha_vencimiento | date: 'dd/MM/yyyy'}}</td>
+                            <td class="text-center">
+                                <button ngbTooltip="Seleccionar Contrato" class="btn btn-sm btn-primary" (click)="showContrato(t.id_mercado_contrato)"><i
+                                        class="fas fa-hand-pointer"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-12">
+                <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage"
+                    [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renListContratos"></cc-spiner-procesar>

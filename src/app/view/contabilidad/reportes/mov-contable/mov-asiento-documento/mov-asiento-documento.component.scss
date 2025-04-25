@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+    font-family: "Poppins1";
+    src: url('../../../../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "PoppinsTourney";
+    src: url("../../../../../../assets/fonts/Tourney-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+.filters {
+    font-family: "Poppins1" !important;
+    margin-top: 5px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    table {
+        thead {
+            tr {
+                th {
+                    padding: 6px 0px 8px 10px;
+                    box-shadow: 0 0 0 4px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    padding: 5px 10px 5px 5px;
+                    box-shadow: 0 0 0 4px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    text-transform: uppercase;
+                    /*font-weight: unset; */
+                    border: none !important;
+                    font-size: 10px;
+                    button {
+                        padding: 2px 8px 2px 8px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+tfoot {
+    background-color: #404A63;
+    td {
+        font-size: 11px;
+        color: white;
+        font-weight: 300;
+    }
+}
+
+.l {
+    font-weight: bold;
+}
+
+#tablaAsiento td:hover {
+    background-color: #404a63;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.modal-header {
+    padding: unset !important;
+    background-color: #FAFAFA;
+    color: rgba(0, 0, 0, 0.568);
+    height: 50px;
+    border-bottom: 1px solid rgba(107, 107, 107, 0.3) !important;
+}
+
+.title-head {
+    text-align: center;
+    padding-top: 18px;
+    padding-left: 25px;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: "Poppins1";
+}
+
+.close {
+    margin: -6px -1px 0 auto;
+    outline: unset;
+    color: black;
+}

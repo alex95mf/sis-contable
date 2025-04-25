@@ -1,0 +1,70 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active titulo="REPORTES - ATS" filtroBoton="btnsAtsReport"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+
+        <div>
+            <div class="row">
+                <div class="col-sm-4">
+                        <!-- <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Periodo</span></div>
+                            <input type="text" data-date-format="YYYY" class="form-control form-control-sm" [(ngModel)]="selected_anio" [disabled]="constDisabled">
+                        </div> -->
+                        <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="selected_anio"
+                                [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" [disabled]="constDisabled">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                   
+
+                    <!--<div class="col-3">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Periodo</span></div>
+                            <input type="date" data-date-format="YYYY" class="form-control form-control-sm" [(ngModel)]="selected_anio" [disabled]="constDisabled">
+                        </div>
+                    </div>-->
+                    <!--<app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo">
+
+                        
+                        app-cc-select-periodo (ChangePeriodo)="ObtenerPeriodo($event)"></app-cc-select-periodo-->
+                        <!--<p-calendar view="year" dateFormat="yy"
+                            [readonlyInput]="true" [(ngModel)]="selected_anio" [showIcon]="false" inputId="icon">
+                        </p-calendar>-->
+                    <!--</app-cc-input-group-prepend>-->
+                </div>
+                
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo">
+                        <app-cc-select-meses (ChangeMes)="ChangeMesCierrePeriodos($event)" mes_actual={{mes_actual}}>
+                        </app-cc-select-meses>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <br>
+
+            <p-tabView  styleClass="tab_content_compras" class="overflow-hidden">
+                <p-tabPanel class="p-0" header="COMPRAS" [headerStyle]="{'font-size': '0.7rem'}">
+                    <app-compras [ListaAtsCompras]="ELementAtsCompras" ></app-compras>
+                </p-tabPanel>
+                <p-tabPanel class="p-0" header="RETENCIONES" [headerStyle]="{'font-size': '0.7rem'}">
+                    <app-retenciones [ListaAtsRetenciones]="ELementAtsRetenciones" ></app-retenciones>
+                </p-tabPanel>
+                <p-tabPanel class="p-0" header="VENTAS" [headerStyle]="{'font-size': '0.7rem'}">
+                    <app-ventas [ListaAtsVentas]="ELementAtsVentas" ></app-ventas>
+                </p-tabPanel>
+                <p-tabPanel class="p-0" header="ANULADOS" [headerStyle]="{'font-size': '0.7rem'}">
+                    <app-anulados [ListaAtsAnulados]="ElementAtsAnulados"></app-anulados>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+
+        <!--<ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template>-->
+    
+
+
+
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spReptRh"></cc-spiner-procesar>

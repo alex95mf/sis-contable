@@ -1,0 +1,261 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Gastos de Importación" filtroBoton="btnsGtsImp"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-money-bill-alt">
+        <div class="row">
+            <div class="col-12">
+                <div class="col-12 mb-3 pb-2 pt-2" style="border-bottom: 1px solid;border-color: rgba(0, 0, 0, 0.205);">
+                    <span class="pl-0 " style="color: rgba(0, 0, 0, 0.89);">GASTO #: {{numSec}} </span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Aplicar A:</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.aplica_a"
+                        id="idAplica" (ngModelChange)="filterTiposGasto()">
+                        <option value="Pedido">Pedido</option>
+                        <option value="Liquidacion">Liquidación</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo documento</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.tip_doc_gasto"
+                        (ngModelChange)="getNumautNumFac($event)" id="idtipodoc">
+                        <option [value]="0">Seleccione tipo documento</option>
+                        <option *ngFor="let d of arrayTipoDoc" [value]="d.id">
+                            {{d.nombre}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="importPed.fecha" name="dateFrom" format='yyyy-MM-dd'
+                        class="form-control">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1" *ngIf="importPed.aplica_a == 'Pedido' ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. pedido</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.fk_ped_liq"
+                        id="idPedido">
+                        <option [value]="0">Seleccione pedido</option>
+                        <option *ngFor="let d of arrayPedidos" [value]="d.id">{{d.num_doc.toString().padStart(10,
+                            '0')}}</option>
+                    </select>
+                </div>
+                <div class="input-group input-group-sm mt-1" *ngIf="importPed.aplica_a == 'Liquidacion' ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Liquidación</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.fk_ped_liq"
+                        id="idPedido">
+                        <option [value]="0">Seleccione liquidación</option>
+                        <option *ngFor="let d of arrayLiquidaciones" [value]="d.id">{{d.num_doc.toString().padStart(10,
+                            '0')}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. documento</span>
+                    </div>
+                    <input type="text" placeholder="Ingrese No. documento" [(ngModel)]="importPed.num_doc_gasto"
+                        id="iddocref" min="0" (keypress)="commonServices.FormatDecimalVal($event)"
+                        class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Subtotal</span>
+                    </div>
+                    <input type="text" placeholder="{{subTotalAux}}"
+                        class="form-control form-control-sm text-right pr-1" [disabled]="true">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo gasto</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.fk_grupo_gasto"
+                        id="idGasto" (ngModelChange)="getDetalleTipoGasto($event)">
+                        <option [value]="0">Seleccione tipo gasto</option>
+                        <option *ngFor="let d of arrayRubros" [value]="d.id">{{d.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo
+                            pago</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.tipo_pago"
+                        (ngModelChange)="changeDisabledBtn()" id="idTipoPagoSelect">
+                        <option [value]="0">Seleccione tipo pago</option>
+                        <option *ngFor="let d of tipo_pago" [value]="d.valor">
+                            {{d.valor}}
+                        </option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary btn-sm" (click)="setNumCuotas()"
+                            style="box-shadow: unset;outline: unset;" id="idbtndifered" [disabled]=" !flagBtnDired "
+                            placement="top" ngbTooltip="Diferir cuotas">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Iva
+                            {{ivaConverter}}%</span>
+                    </div>
+                    <input type="text" placeholder="{{ivaAux}}" class="form-control form-control-sm text-right pr-1"
+                        [disabled]="true">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Proveedor</span>
+                    </div>
+                    <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true"
+                        style="padding-left: 7px;font-size: 13px;" [(ngModel)]="importPed.fk_provider"
+                        [clearable]="false" (ngModelChange)="setRuc($event)">
+                        <ng-option [value]="0">Seleccione proveedor</ng-option>
+                        <ng-option *ngFor="let d of arrayProveedor" [value]="d.id_proveedor">
+                            {{d.razon_social}}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Forma
+                            pago</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="importPed.forma_pago"
+                        id="idFormaPago">
+                        <option [value]="0">Seleccione forma pago</option>
+                        <option *ngFor="let d of forma_pago" [value]="d.valor">
+                            {{d.valor}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total</span>
+                    </div>
+                    <input type="text" placeholder="{{totalAux}}" class="form-control form-control-sm text-right pr-1"
+                        [disabled]="true">
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-4 mb-3">
+            <div class="col-12 filters pl-2 pr-2">
+                <div class="row justify-content-end pt-1">
+                    <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
+                        <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Añadir Items"
+                            (click)="addItems()" [disabled]="importPed.fk_grupo_gasto == 0">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 pl-3 pr-3 ">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr style="width: 100%;">
+                                    <th style="width: 10%;"># Rubro</th>
+                                    <th style="width: 24%;">Nombre</th>
+                                    <th style="width: 19%;">Grupo</th>
+                                    <th style="width: 15%;">Obligatorio</th>
+                                    <th style="width: 12%;">Paga iva</th>
+                                    <th style="width: 10%;">Valor</th>
+                                    <th style="width: 10%;">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dt of arrayGastos; let i = index">
+                                    <td style="text-align: center;">{{i+1}}</td>
+                                    <td>
+                                        <select class="form-control form-control-sm custom-select"
+                                            [(ngModel)]="dt.fk_rubro_det" id="idAplica"
+                                            [disabled]="importPed.fk_grupo_gasto == 0"
+                                            (ngModelChange)="getDetGastos($event,i)">
+                                            <option value="0">Seleccione rubro</option>
+                                            <option *ngFor="let d of arrayGastosDet" [value]="d.id">
+                                                {{d.nombre}}
+                                            </option>
+                                        </select>
+                                    </td>
+                                    <td style="padding-left: 10px;">
+                                        <input type="text" placeholder="{{dt.acumula_en}}"
+                                            class="form-control form-control-sm pr-1" [disabled]="true">
+                                    </td>
+                                    <td *ngIf="dt.obligatorio == 1 " style="padding-left: 10px;">
+                                        <input type="text" placeholder="Si" class="form-control form-control-sm pr-1"
+                                            [disabled]="true">
+                                    </td>
+                                    <td *ngIf="dt.obligatorio == 0 " style="padding-left: 10px;">
+                                        <input type="text" placeholder="No" class="form-control form-control-sm pr-1"
+                                            [disabled]="true">
+                                    </td>
+
+                                    <td *ngIf="dt.paga_iva == 1 " style="padding-left: 10px;">
+                                        <input type="text" placeholder="Si" class="form-control form-control-sm pr-1"
+                                            [disabled]="true">
+                                    </td>
+                                    <td *ngIf="dt.paga_iva == 0 " style="padding-left: 10px;">
+                                        <input type="text" placeholder="No" class="form-control form-control-sm pr-1"
+                                            [disabled]="true">
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control form-control-sm pr-1"
+                                            style="text-align: right;padding-right: 10px !important;"
+                                            [(ngModel)]="dt.valor" (keyup)="sumTotal(i)" min="0"
+                                            (keypress)="commonServices.FormatDecimalVal($event)"
+                                            [disabled]=" dt.fk_rubro_det == 0" id="value{{i}}" placeholder="0.00">
+                                    </td>
+                                    <td style="width: 8%;text-align: center;">
+                                        <button class="btn btn-danger btn-sm" placement="top"
+                                            ngbTooltip="Eliminar rubro" (click)="deleteItems(i)"
+                                            [disabled]="dt.fk_rubro_det == 0"><i class="fa fa-trash-o"
+                                                aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spLiquidacionGastos"></cc-spiner-procesar>

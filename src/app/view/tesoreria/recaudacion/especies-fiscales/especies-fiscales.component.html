@@ -1,0 +1,120 @@
+<div class="my-2">
+    
+    <app-button-radio-active [titulo]="fTitle" filtroBoton="btnsEspeciesFiscales" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
+        
+        
+        <fieldset class="border pb-2 px-3">
+            <legend class="w-auto mb-1 bg-dark">Filtros</legend>
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="estado" class="form-control form-control-sm" [clearable]="true" [(ngModel)]="tipo_especie" (ngModelChange)="cargarEspeciesFiscales($event)">
+                            <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                            <ng-option *ngFor="let op of catalog" [value]="op.descripcion">{{ op.descripcion }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha desde" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_codigo" type="date" class="form-control" [(ngModel)]="filter.fecha_desde" >
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="fecha hasta" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_nombre" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" >
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="cargarEspeciesFiscales()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class="row my-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 10%;">Tipo</th>
+                            <th style="width: 6%;">Talonario</th>
+                            <th style="width: 8%;">Desde</th>
+                            <th style="max-width: 8%;">Hasta</th>
+                            <th style="width: 10%;">Costo</th>
+                            <th style="width: 10%;">Fecha de Registro</th>
+                            <th style="width: 10%;">Cantidad de Especies</th>
+                            <th style="width: 8%;">No. Actual</th>
+                            <th style="width: 8%;">Cantidad Anuladas</th>
+                            <th style="width: 8%;">Cantidad Vendidas</th>
+                            <th style="width: 8%;">Cantidad Disponible</th>
+                            <th style="width: 14%;">Valor Total Especies</th>
+                            <th style="width: 14%;">Valor Total Anuladas</th>
+                            <th style="width: 14%;">Valor Total Vendidas</th>
+                            <th style="width: 14%;">Valor Total Disponibles</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="especiesFiscales">
+                        <ng-container *ngFor="let dt of especiesFiscales, let i = index">
+                            <tr>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.tipo_especie }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.nro_talonario }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.desde }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.hasta }}</td>
+                                <td style="max-width: 10px;" class="text-center">$ {{ dt.costo | number: '1.2-2' }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.fecha }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.cantidad }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.nro_actual }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.cantidad_anuladas }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.cantidad_vendidas }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ (dt.cantidad - dt.cantidad_anuladas - dt.cantidad_vendidas) }}</td>
+                                <td style="max-width: 10px;" class="text-center">$ {{ (dt.costo * dt.cantidad) | number:'1.2-2' }}</td>
+                                <td style="max-width: 10px;" class="text-center">$ {{ (dt.costo * dt.cantidad_anuladas) | number:'1.2-2' }}</td>
+                                <td style="max-width: 10px;" class="text-center">$ {{ (dt.costo * dt.cantidad_vendidas) | number:'1.2-2' }}</td>
+                                <td style="max-width: 10px;" class="text-center">$ {{ (dt.costo * (dt.cantidad - dt.cantidad_anuladas - dt.cantidad_vendidas)) | number:'1.2-2'}}</td>
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-warning btn-sm mx-1" (click)="historiaAnulaciones(dt)" placement="left" ngbTooltip="Anulaciones de especies">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-primary btn-sm mx-1" (click)="anulacionEspeciFiscal(dt)" placement="left" ngbTooltip="Anulaciones de especies">
+                                            <i class="far fa-edit"></i>
+                                        </button>
+                                        <button *ngIf="dt.estado == 'A'" class="btn btn-danger btn-sm mx-1" (click)="deleteEspecie(dt.id_concepto)" placement="top" ngbTooltip="Eliminar concepto">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <!-- <button *ngIf="dt.estado == 'I'" class="btn btn-info btn-sm mx-1" (click)="restoreArancel(dt.id, i)" placement="top" ngbTooltip="Restaurar arancel">
+                                            <i class="fas fa-undo"></i>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+
+                <mat-paginator 
+                        showFirstLastButtons
+                        [length]="paginate.length"
+                        [pageSize]="paginate.perPage"
+                       [pageSizeOptions]="paginate.pageSizeOptions"
+                       (page)="changePaginate($event)"
+                       aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spConceptos"></cc-spiner-procesar>

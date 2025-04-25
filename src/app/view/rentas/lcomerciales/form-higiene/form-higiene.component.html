@@ -1,0 +1,317 @@
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<div class="my-2">
+    
+    <app-button-radio-active-new [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-poll-h"
+    filtroBoton="btnsFormHigiene" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    
+
+    <!-- <div class="row my-2"> -->
+        
+        <!-- <div class="col-2">
+            
+        </div> -->
+
+        <div class="row">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Inspección</legend>
+                    <div class="row m-0 justify-content-end mb-2">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Fecha de Inspección</span></div>
+                                <input type="date" class="form-control form-control-sm" [disabled]="!letEdit" [(ngModel)]="resultado.fecha">
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="row m-0">
+                        <div class="col-12 col-md-8 pt-0 pb-0 mb-2">
+
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text font-weight-bold size-span-campo size-span-campo"
+                                    id="inputGroup-sizing-sm">Orden de Inspección</span>
+                                </div>
+                                <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione una Inspección" [(ngModel)]="inspeccion_label"  >
+                               
+                                <div class="input-group-append">
+                                  <button (click)="expandirInspecciones()" placement="bottom" ngbTooltip="Buscar Inspecciones"
+                                    class="btn btn-default btn-action" type="button">
+                                    <i class="fa fa-search"></i>
+                                  </button>
+                                </div>
+                              </div>
+
+                            <!-- <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 165px;">Órden de Inspección</span></div>
+                                <input type="text" class="form-control bg-white" readonly placeholder="Seleccione una Inspección" [(ngModel)]="inspeccion_label"> 
+                                <button class="btn btn-info" (click)="expandirInspecciones()" placement="bottom" ngbTooltip="Buscar Inspecciones">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div> -->
+                            <!--[value]="inspeccion.orden_inspeccion.numero_orden"> -->
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Estado</span></div>
+                                <div class="form-control form-control-sm font-weight-bold size-span-campo" style="background-color:#E4E4EB;">
+                                    <!-- <i placement="bottom" [class]="estado == 'A' ? 'fas fa-circle text-success' : estado == 'C' ? 'fas fa-circle text-danger' : estado == 'P' ? 'fas fa-circle text-warning' : ''">
+
+                                </i>
+                                {{estado=='A'?'Abierto':estado=='C'?'Cerrado':estado=='P'?'Pendiente':''}} -->
+                                <span *ngIf="estado == 'P'" class="pill-k pill-k_warning" placement="top" [ngbTooltip]="Pendiente">Pendiente</span>
+                                <span *ngIf="estado == 'C'" class="pill-k pill-k_danger" placement="top" [ngbTooltip]="Cerrado" >Cerrado</span>
+                                <span *ngIf="estado == 'A'" class="pill-k pill-k_success" placement="top" [ngbTooltip]="Abierto">Abierto</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-8 pt-0 pb-0 mb-2">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Observaciones</span></div>
+                                <textarea [disabled]="!letEdit" cols="30" rows="3" class="form-control form-control-sm" [(ngModel)]="resultado.observacion"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                            <div class="input-group input-group-sm mb-2 input-group-custom-switch">
+                                <div class="input-group-prepend">
+                                    <span  class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Resultado</span>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                                    <input [disabled]="!letEdit" type="checkbox" class="custom-control-input" id="resultado.aprobado" [(ngModel)]="resultado.aprobado">
+                                    <label class="custom-control-label" for="resultado.aprobado"></label>
+                                </div>
+                                <input type="text" class="form-control form-control-sm" [class]="letEdit?'bg-white':''" disabled [value]="resultado.aprobado ? 'FACTIBLE' : 'NO FACTIBLE'">
+                            </div>
+    
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Próxima inspección</span></div>
+                                <input [disabled]="!letEdit || resultado.aprobado" type="date" class="form-control form-control-sm" [(ngModel)]="resultado.plazo_maximo">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+    
+
+        <!-- <div class="col-8 mt-2">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text">Inspecciones</span></div>
+                <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione una inspeccion" [(ngModel)]="inspeccion_label">
+                <button class="btn btn-info btn-sm" (click)="expandirInspecciones()" placement="bottom" ngbTooltip="Seleccione una inspeccion pendiente de llenar formulario">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div> -->
+        <!-- <div class="col-2">
+            
+        </div> -->
+
+    <!-- </div> -->
+  
+    <div class="row">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Local Comercial</legend>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Contribuyente</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial.fk_contribuyente.razon_social">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Razón Social</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial.razon_social">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Actividad Comercial</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial.fk_actividad_comercial.valor">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Sector</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial.contrato ? inspeccion.local_comercial.fk_sector.valor : inspeccion.local_comercial.fk_sector.descripcion">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Tipo</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial.tipo_negocio=='MINOR' ? 'MINORISTA' : inspeccion.local_comercial.tipo_negocio=='MAYOR' ? 'MAYORISTA' : ''">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Grupo</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly [value]="!inspeccion.local_comercial.contrato ? inspeccion.local_comercial.fk_grupo.valor : 'NA'">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Cod. Catastral</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial.cod_catastro ? inspeccion.local_comercial.cod_catastro : ''">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Uso de Suelo</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial.uso_suelo ? inspeccion.local_comercial.uso_suelo : ''">
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Anexos</legend>
+                <div class="row m-0">
+                    <div class="col-12 col-md-6 pt-0 pb-0 mb-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Fotos</span></div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*" multiple [disabled]="!letEdit" (change)="cargaFoto($event.target.files)">
+                                <label class="custom-file-label" for="inputGroupFile01">{{ fotos.length > 0 ? "Ha seleccionado " + fotos.length + " Fotos" : "Seleccione fotos a subir" }}</label>
+                            </div>
+                        </div>
+                        <div class="multiple-image-container">
+                            <div *ngFor='let foto of fotos, let i = index' class="multiple-image-preview">
+                                <img [src]="foto.recurso" (click)="expandirVistaFotos(i)" class="img-thumbnail">
+                                <button *ngIf="letEdit" class="btn btn-sm btn-danger" placement="top" ngbTooltip="Eliminar Foto" (click)="removeFoto(i)"><i class="far fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pt-0 pb-0 mb-2">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text font-weight-bold size-span-campo" >Archivos</span>
+                            </div>
+                            <div class="custom-file">
+                                <input [disabled]="!letEdit" type="file" class="custom-file-input" id="inputGroupFile02" accept=".pdf" (change)="cargaArchivo($event.target.files)">
+                                <label class="custom-file-label" for="inputGroupFile02">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
+                            </div>
+                        </div>
+                        <app-anexos-list [dataUser]="dataUser" [permissions]="permisos"></app-anexos-list>
+                    </div>
+                </div>
+
+            </fieldset>
+        </div>
+    </div>  
+    <div class="row">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Formulario</legend>
+                <div class="row m-0">       
+
+                        <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                            <div class="input-group input-group-sm mt-1 mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">¿El local posee balanzas?</span>
+                                </div>
+                                <ng-select [disabled]="!letEdit" id="respuesta" class="form-control form-control-sm" [(ngModel)]="resultado.respuesta" (change)="respChange($event)" appendTo="body">
+                                    <ng-option disabled [value]="0">Seleccione una respuesta</ng-option>
+                                    <ng-option *ngFor="let op of listaRespuestas" [value]="op">{{ op }}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-5 pt-0 pb-0 mb-2">
+                            <div class="input-group input-group-sm mt-1 mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">¿En qué estado se encuentran las balanzas?</span>
+                                </div>
+                                <ng-select [disabled]="resultado.respuesta!='SI' || !letEdit" id="estado" class="form-control form-control-sm" [(ngModel)]="resultado.estado" appendTo="body">
+                                    <ng-option disabled [value]="0">Seleccione el estado</ng-option>
+                                    <ng-option *ngFor="let op of listaEstados" [value]="op.value">{{ op.label }}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-3 pt-0 pb-0 mb-2">
+                            <div class="input-group input-group-sm mt-1 mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Ingrese la cantidad de balanzas</span>
+                                </div>
+                                <input id="porcentaje" type="number" [disabled]="resultado.respuesta!='SI' || !letEdit" class="form-control form-control-sm" [(ngModel)]="resultado.cantidad" appendTo="body">
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="col-12">
+                            <div class="input-group input-group-sm mt-1 mb-3">
+                                <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Observaciones</span></div>
+                                <textarea [disabled]="!letEdit" cols="30" rows="3" class="form-control form-control-sm" [(ngModel)]="resultado.observacion"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="col-3">
+                            <div class="input-group input-group-sm mt-1 mb-2">
+                                <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Estado</span></div>
+                                <div class="form-control form-control-sm font-weight-bold size-span-campo" style="background-color:#E4E4EB;"><i placement="bottom" [class]="estado == 'A' ? 'fas fa-circle text-success' : estado == 'C' ? 'fas fa-circle text-danger' : estado == 'P' ? 'fas fa-circle text-warning' : ''"></i>
+                                {{estado=='A'?'Abierto':estado=='C'?'Cerrado':estado=='P'?'Pendiente':''}}</div>
+                            </div>
+                        </div>
+            
+                        <div class="col-3">
+                            <div class="input-group input-group-sm mt-1 mb-2">
+                            <div class="input-group-prepend "><span class="input-group-text font-weight-bold size-span-campo" >Fecha de inspección</span></div>
+                            <input [disabled]="!letEdit" type="date" class="form-control form-control-sm" [(ngModel)]="resultado.fecha">
+                        </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="input-group input-group-sm mt-1 mb-2 input-group-custom-switch">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">¿Se aprueba la inspección?</span>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                                    <input [disabled]="!letEdit" type="checkbox" class="custom-control-input" id="resultado.aprobado" [(ngModel)]="resultado.aprobado">
+                                    <label class="custom-control-label" for="resultado.aprobado"></label>
+                                </div>
+                                <input type="text" class="form-control form-control-sm" [class]="letEdit?'bg-white':''" disabled [value]="resultado.aprobado ? 'SI' : 'NO'">
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="input-group input-group-sm mt-1 mb-2">
+                            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Proxima revision</span></div>
+                            <input [disabled]="!letEdit || resultado.aprobado" type="date" class="form-control form-control-sm" [(ngModel)]="resultado.plazo_maximo">
+                        </div>
+                        </div> -->
+
+
+                </div>
+                
+            </fieldset>
+        </div>
+    </div>   
+
+ 
+
+    
+
+
+    </app-button-radio-active-new>
+
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSpiner" lfulScren=true lTipo="formHigiene"></cc-spiner-procesar>

@@ -1,0 +1,559 @@
+<br>
+<app-button-radio-active titulo="Balance General" filtroBoton="btnBlgnr" cstyle=" bg-gradient-primary text-white"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" *ngIf="permisions" icono="fa fa-industry">
+
+    <div class="row justify-content-center mt-2">
+        <div class="col-sm-4">
+            <!-- <app-cc-input-group-prepend label="Periodos" styleSpan="size-span-campo">
+                <p-calendar view="year" dateFormat="yy" (ngModelChange)="getInitialBalance()" [readonlyInput]="true"
+                    [(ngModel)]="anioActual" [showIcon]="false" inputId="icon">
+                </p-calendar>
+            </app-cc-input-group-prepend> -->
+            <!-- <div class="input-group input-group-sm ">
+                <div class="input-group-prepend">
+                    <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Períodos</span>
+                </div>
+                <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Periodo" [(ngModel)]="anioActual"  (keypress)="onlyNumber($event)">
+               
+            </div> -->
+          
+                <app-cc-input-group-prepend label="Período" styleSpan="size-span-campo font-weight-bold">
+                    <p-calendar
+                        (ngModelChange)="periodoSelected($event,periodo)"
+                        [readonlyInput]="true" 
+                        view="year" 
+                        dateFormat="yy" 
+                        [(ngModel)]="periodo" 
+                        [showIcon]="true" 
+                        class="ui-calendar ui-calendar-button"
+                        inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                        [inputStyle]="{'height':'30px','width':'13rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                    </p-calendar>
+                </app-cc-input-group-prepend> 
+         
+        </div>
+        <div class="col-sm-4">
+            <!-- <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo">
+                <app-cc-select-meses (ChangeMes)="ChangeMesCierrePeriodos($event)" mes_actual={{mes_actual}}>
+                </app-cc-select-meses>
+            </app-cc-input-group-prepend> -->
+            <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                <!-- <app-cc-select-meses  (ChangeMes)="ChangeMesCierrePeriodos($event)" presentar="{{disabled}}" mes_actual={{mes_actual}}></app-cc-select-meses> -->
+                <ng-select 
+                   
+                    class="form-control" 
+                    id="elemento_pruebas"
+                    bindLabel="name"
+                    placeholder="-Todos-"
+                    appendTo="body"
+                    [clearable]="false"
+                    [searchable]="true"
+                    [disabled]=disabled
+                    [(ngModel)]="mes_actual">
+                    
+                    <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                        {{item.name}}
+                    </ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend> 
+        </div>
+        <!--div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Comparar con:" styleSpan="size-span-campo">
+                        <ng-select [(ngModel)]="peridoSelecionado" class="form-control form-control-sm custom-select"
+                            (ngModelChange)="getInitialBalance()">
+                            <ng-option [value]="0">Seleccione año a comparar</ng-option>
+                            <ng-option *ngFor="let d of aniosFilter" [value]="d.periodos">{{d.periodos}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div-->
+        <div class="col-sm-4">
+            <!-- (ngModelChange)="MayorizarEstadosFinancieros()" -->
+            <app-cc-input-group-prepend label="Niveles" styleSpan="size-span-campo">
+                <ng-select class="form-control form-control-sm custom-select" [(ngModel)]="nivelSeleccionado">
+                    <ng-option value="1">1</ng-option>
+                    <ng-option value="2">2</ng-option>
+                    <ng-option value="3">3</ng-option>
+                    <ng-option value="4">4</ng-option>
+                    <ng-option value="5">5</ng-option>
+                    <ng-option value="6">6</ng-option>
+                    <ng-option value="7">7</ng-option>
+                    <ng-option value="8">8</ng-option>
+                    <ng-option value="9">9</ng-option>
+                    <ng-option value="10">10</ng-option>
+
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo font-weight-bolder"
+                        id="inputGroup-sizing-sm">Gubernamental</span>
+                </div>
+                <ng-select id="gubernamental" class="form-control form-control-sm" [(ngModel)]="gubernamental" (change)="selectedGuber($event)" [clearable]="false">
+                    <ng-option disabled [value]="0" disabled>Seleccione</ng-option>
+                    <ng-option *ngFor="let op of listGubernamental" [value]="op.value">{{ op.label }}</ng-option>
+                </ng-select>
+                <!-- <ng-select class="form-control form-control-sm custom-select " [clearable]=false
+                    (ngModelChange)="filterTipo($event)" [(ngModel)]="gubernamental">
+                    <ng-option aria-selected="true" [value]="SI">SI</ng-option>
+                    <ng-option [value]="NO">NO</ng-option>
+                </ng-select> -->
+
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo font-weight-bolder"
+                        id="inputGroup-sizing-sm">Período de Visualización</span>
+                </div>
+                <ng-select id="periodo" class="form-control form-control-sm" [(ngModel)]="periodoVisualizacion" (change)="selectedPeriodoVisua($event)" [clearable]="false">
+                    <ng-option disabled [value]="0" disabled>Seleccione</ng-option>
+                    <ng-option *ngFor="let p of periodoVisua" [value]="p.value">{{ p.label }}</ng-option>
+                </ng-select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo font-weight-bolder" id="inputGroup-sizing-sm">Centro
+                        costo</span>
+                </div>
+                <ng-select style="width: 150px;" loadingText="Cargando.." [loading]="LoadOpcionCentro"
+                    placeholder="-seleccionar centro-" [(ngModel)]="centrocosto"
+                    class="form-control form-control-sm custom-select" (open)="getCentroDetalle()" [items]="centros"
+                    bindLabel="nombre" bindValue="id" appendTo="body" id="idCentroCosto"></ng-select>
+            </div>
+        </div>
+    </div>
+    <div class="content-resultado p-3 mt-2 mx-8" *ngIf="MostrarndoData">
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="text-center text-base font-medium m-0">Balance General Mensual</p>
+                <p class="text-center text-sm m-0 mb-8"><span class="font-weight-bold">Período:</span> {{periodo.getFullYear()}} <span class="font-weight-bold">Mes:</span> {{ mesString(mes_actual) }}</p>
+            </div>
+        </div>
+        <div class="row">
+     <!-- <div class="mt-4  mb-8 table-responsive content-tabla-general">
+            <table class="table table-bordered table-scroll small-first-col" id="tablaRegistros"> -->
+                <div class="table-responsive responsive-table content-tabla-general-zebra" id="tablaRegistros">
+                    <table class="table table-sm table-hover">
+                        <thead class="d-none">
+                            <tr>
+                                <th>Cuenta</th>
+                                <th>Detalle</th>
+                                <th>Clase</th>
+                                <th>Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="infomovData.length > 0 else TablaVacia" style="width: 100%;" class="body-half-screen">
+                            <tr *ngFor="let dt of infomovData; let i = index" [ngClass]="dt.class" [style]="dt.size">
+            
+                                <td class="text-left td_gerenarl" style="width: 80px;">
+                                    <span [ngClass]="{'font-normal': dt.tiene_detalle !=  'GRUPO'  }" (click)=" dt.tiene_detalle !=  'GRUPO' ? verDetalle(dt.cuenta) : undefined"
+                                    [ngStyle]="{'width':'80px','text-decoration': dt.tiene_detalle !=  'GRUPO'  ? 'underline' : '','color': dt.tiene_detalle !=  'GRUPO'  ? '#2b94e2' : '', 'cursor': dt.tiene_detalle !=  'GRUPO'  ? 'pointer' : '','font-weight': dt.tiene_detalle !=  'GRUPO' ? 'bold' : ''}">
+                                        {{dt.cuenta}}
+                                    </span>
+                                    <!-- <span >{{dt.cuenta}}</span> -->
+
+                                </td>
+                                <td style="width: 480px;" class="td_gerenarl">
+                                    <span [ngClass]="{'font-normal': dt.tiene_detalle !=  'GRUPO'  }">{{ dt.nombre_cuenta }}</span>
+                                    <!-- <span >{{ dt.nombre_cuenta }}</span> -->
+
+                                </td>
+                                <td style="width: 480px;" class="td_gerenarl">
+                                    <span [ngClass]="{'font-normal': dt.tiene_detalle !=  'GRUPO'  }">{{ dt.clase }}</span>
+                                    <!-- <span >{{ dt.nombre_cuenta }}</span> -->
+
+                                </td>
+                                <td style="text-align: left; width: 180px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500':  (dt.valor <  0  && dt?.clase =='DEUDORA') || (dt.valor > 0  && dt?.clase =='ACREEDORA')   }">$ {{ (dt.valor | number:'1.2-2').replaceAll('-','') }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="font-weight-bold" style="font-size: 16px;">TOTAL:</td>
+                                <td colspan="1" class="font-weight-bold text-right" style="font-size: 16px;">
+                                    <span [ngClass]="{'text-red-500':  (totalFinal() <  0  && dt?.clase=='DEUDORA') || (totalFinal() > 0  && dt?.clase =='ACREEDORA')   }">$ {{(totalFinal() | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+            
+                        <ng-template #TablaVacia>
+                            <tbody>
+                                <tr class="body-empty">
+                                    <td colspan="7">no hay datos para mostrar</td>
+                                </tr>
+                            </tbody>
+                        </ng-template>
+            
+                    </table>
+                </div>
+        </div>
+    </div>
+    <div class="content-resultado p-3 mt-2" *ngIf="MostrarndoDataMensual">
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="text-center text-base font-medium m-0">Balance General Anual</p>
+                <p class="text-center text-sm m-0 mb-8"><span class="font-weight-bold">Período:</span> {{periodo.getFullYear()}}</p>
+            </div>
+        </div>
+        <div class="row">
+     <!-- <div class="mt-4  mb-8 table-responsive content-tabla-general">
+            <table class="table table-bordered table-scroll small-first-col" id="tablaRegistros"> -->
+                <div class="table-responsive responsive-table content-tabla-general-zebra" id="tablaRegistros">
+                    <table class="table table-sm table-hover">
+                        <thead style="width: 120% !important;">
+                            <tr>
+                                <th style="width: 80px !important;text-align: center;"  class="col-codigo">CODIGO</th>
+                                <th style="width: 300px !important;text-align: center;" class="col-nombre">DESCRIPCION</th>
+                                <th style="width: 100px !important;text-align: center;">CLASE</th>
+                                <th style="width: 150px !important;text-align: center;">ENERO</th>
+                                <th style="width: 150px !important;text-align: center;">FEBRERO</th>
+                                <th style="width: 150px !important;text-align: center;">MARZO</th>
+                                <th style="width: 150px !important;text-align: center;">ABRIL</th>
+                                <th style="width: 150px !important;text-align: center;">MAYO</th>
+                                <th style="width: 150px !important;text-align: center;">JUNIO</th>
+                                <th style="width: 150px !important;text-align: center;">JULIO</th>
+                                <th style="width: 150px !important;text-align: center;">AGOSTO</th>
+                                <th style="width: 150px !important;text-align: center;">SEPTIEMBRE</th>
+                                <th style="width: 150px !important;text-align: center;">OCTUBRE</th>
+                                <th style="width: 150px !important;text-align: center;">NOVIEMBRE</th>
+                                <th style="width: 150px !important;text-align: center;">DICIEMBRE</th>
+                                <th style="width: 150px !important;text-align: center;">TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="infomovDataMensual.length > 0 else TablaVacia" style="width: 100%;" class="body-half-screen">
+                            <tr *ngFor="let dt of infomovDataMensual; let i = index" [ngClass]="dt.class" [style]="dt.size">
+            
+                                <td class="text-left td_gerenarl" style="width: 80px;" class="col-codigo">
+                                    <!-- <span [ngClass]="{'font-normal': dt.tiene_detalle !=  'GRUPO'  }">{{dt.codigo}}</span> -->
+                                    <span >{{dt.codigo}}</span>
+
+                                </td>
+                                <td style="width: 300px;" class="td_gerenarl" class="col-nombre">
+                                    <!-- <span [ngClass]="{'font-normal': dt.tiene_detalle !=  'GRUPO'  }">{{ dt.nombre }}</span> -->
+                                    <span >{{ dt.nombre }}</span>
+
+                                </td>
+                                <td style="width: 100px;" class="td_gerenarl">
+                                    <!-- <span [ngClass]="{'font-normal': dt.tiene_detalle !=  'GRUPO'  }">{{ dt.nombre }}</span> -->
+                                    <span >{{ dt.clase }}</span>
+
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.ene <  0  && dt.clase=='DEUDORA') || (dt.ene > 0  && dt.clase=='ACREEDORA')  }">${{ (dt.ene | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.feb <  0  && dt.clase=='DEUDORA') || (dt.feb > 0  && dt.clase=='ACREEDORA')  }">${{( dt.feb | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.mar <  0  && dt.clase=='DEUDORA') || (dt.mar > 0  && dt.clase=='ACREEDORA') }">${{ (dt.mar | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.abr <  0  && dt.clase=='DEUDORA') || (dt.abr > 0  && dt.clase=='ACREEDORA')  }">${{ (dt.abr | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.may <  0  && dt.clase=='DEUDORA') || (dt.may > 0  && dt.clase=='ACREEDORA') }">${{ (dt.may | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.jun <  0  && dt.clase=='DEUDORA') || (dt.jun > 0  && dt.clase=='ACREEDORA') }">${{ (dt.jun | number:'1.2-2').replaceAll('-','')}}</span>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.jul <  0  && dt.clase=='DEUDORA') || (dt.jul > 0  && dt.clase=='ACREEDORA')  }">${{ (dt.jul | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.ago <  0  && dt.clase=='DEUDORA') || (dt.ago > 0  && dt.clase=='ACREEDORA') }">${{ (dt.ago | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500':(dt.sep <  0  && dt.clase=='DEUDORA') || (dt.sep > 0  && dt.clase=='ACREEDORA')  }">${{ (dt.sep | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.oct <  0  && dt.clase=='DEUDORA') || (dt.oct > 0  && dt.clase=='ACREEDORA')  }">${{ (dt.oct | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.nov <  0  && dt.clase=='DEUDORA') || (dt.nov > 0  && dt.clase=='ACREEDORA') }">${{ (dt.nov | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.dic <  0  && dt.clase=='DEUDORA') || (dt.dic > 0  && dt.clase=='ACREEDORA')  }">${{ (dt.dic | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                                <td style="text-align: left; width: 150px;" class="text-right td_gerenarl">
+                                    <span [ngClass]="{'text-red-500': (dt.total <  0  && dt.clase=='DEUDORA') || (dt.total > 0  && dt.clase=='ACREEDORA')  }">${{ (dt.total | number:'1.2-2').replaceAll('-','')}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+            
+                        <ng-template #TablaVacia>
+                            <tbody>
+                                <tr class="body-empty">
+                                    <td colspan="7">no hay datos para mostrar</td>
+                                </tr>
+                            </tbody>
+                        </ng-template>
+            
+                    </table>
+                </div>
+        </div>
+    </div>
+   
+
+
+    <!--div class="row justify-content-center mt-3 mb-1" *ngIf="arrayInfo != undefined ">
+        <div class="col-10 mb-1">
+            <div class="row justify-content-end">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Buscar" styleSpan="size-span-campo">
+                        <input type="text" class="form-control text-center" [(ngModel)]="searchAccount"
+                            placeholder="nombre cuenta" aria-label="Username" aria-describedby="basic-addon1"
+                            (keyup)="searchFilterAccount()">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </div>
+        <div class="col-10 ">
+            <div class="table-container">
+                <table class="table table-bordered ">
+                    <thead>
+                        <tr style="width: 100%;">
+                            <th style="width: 20%;">código</th>
+                            <th
+                                [ngClass]="{ 'infobefore' : peridoSelecionado == 0,'infoafter' : peridoSelecionado != 0 }">
+                                nombre cuentas
+                            </th>
+                            <th class="infovalue-after" *ngIf="peridoSelecionado != 0"
+                                style="text-align: right;padding-right: 5px;">año anterior ({{peridoSelecionado}})</th>
+                            <th style="text-align: right;padding-right: 5px;"
+                                [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0  }">
+                                año actual ({{anioActual}})</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dt of arrayInfo">
+                            <td *ngIf="dt.flag == 0" [ngClass]="{'codigoone' : dt.codigo == 1 || 
+                                                                                   dt.codigo == 2 || 
+                                                                                   dt.codigo == 3,'sizeLether' : 
+                                                                                   dt.nivel > 1 && dt.nivel < 5,
+                                                                                   'formatLether':dt.nivel >= 5,
+                                                                                   'levelTwo': dt.nivel == 2 }">
+                                <button class="btn-tipe-link" (click)="viewsMoves(dt.codigo)">{{dt.codigo}}</button>
+                            </td>
+                            <td *ngIf="dt.flag == 1" style="border-right: unset;" class="codigototal"
+                                [ngClass]="{ 'codigototal3':dt.current_total < 0}"></td>
+                            <td *ngIf="dt.flag == 2" style="border-right: unset;" class="codigototal2"
+                                [ngClass]="{ 'codigototal3':dt.current_total < 0}"></td>
+
+
+
+                            <td *ngIf="dt.flag == 0" [ngClass]="{ 'infobefore' : peridoSelecionado == 0,'infoafter' : peridoSelecionado != 0,
+                                 'codigoone' : dt.codigo == 1 || dt.codigo == 2 || dt.codigo == 3,'sizeLether' : dt.nivel > 1 && dt.nivel < 5,
+                                 'formatLether':dt.nivel >= 5,'levelTwo': dt.nivel == 2}">
+                                {{dt.nombre}}</td>
+                            <td *ngIf="dt.flag == 1" class="codigototal text-right pr-3"
+                                [ngClass]="{ 'infobefore' : peridoSelecionado == 0,
+                                'infoafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0 ,'levelTwo': dt.nivel == 2 }" style="border-left: unset;">{{dt.nombre}}
+                            </td>
+                            <td *ngIf="dt.flag == 2" class="codigototal2 text-right pr-3"
+                                [ngClass]="{ 'infobefore' : peridoSelecionado == 0,
+                                'infoafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0 ,'levelTwo': dt.nivel == 2 }" style="border-left: unset;">{{dt.nombre}}
+                            </td>
+
+
+                            <td class="infovalue-after text-right pr-3" *ngIf="peridoSelecionado != 0 && dt.flag == 0"
+                                [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0 ,
+                                'codigoone' : dt.codigo == 1 || dt.codigo == 2 || dt.codigo == 3,'sizeLether' : dt.nivel > 1 && dt.nivel < 5,
+                                'formatLether':dt.nivel >= 5,'levelTwo': dt.nivel == 2}">{{
+                                commonServices.formatNumber(dt.compare_total) }}
+
+                            </td>
+                            <td class="infovalue-after codigototal text-right pr-3"
+                                *ngIf="peridoSelecionado != 0 && dt.flag == 1"
+                                style="border-right: unset;border-left: unset;" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0
+                                    ,'levelTwo': dt.nivel == 2 }">
+                                {{ commonServices.formatNumber(dt.current_old) }}
+                            </td>
+                            <td class="infovalue-after codigototal2 text-right pr-3"
+                                *ngIf="peridoSelecionado != 0 && dt.flag == 2"
+                                style="border-right: unset;border-left: unset;" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0
+                                    ,'levelTwo': dt.nivel == 2  }">
+                                {{ commonServices.formatNumber(dt.current_old) }}
+                            </td>
+
+
+
+                            <td *ngIf="dt.flag == 0" class="text-right pr-3"
+                                [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0 ,
+                                                                      'codigoone' : dt.codigo == 1 || dt.codigo == 2 || dt.codigo == 3,
+                                                                      'sizeLether' : dt.nivel > 1 && dt.nivel < 5,
+                                                                      'formatLether':dt.nivel >= 5,'levelTwo': dt.nivel == 2}">
+                                $ {{ commonServices.formatNumber(dt.current_total) }}</td>
+                            <td *ngIf="dt.flag == 1" class="codigototal text-right pr-3" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0
+                                    ,'levelTwo': dt.nivel == 2 }">
+                                $ {{ commonServices.formatNumber(dt.current_total) }}</td>
+                            <td *ngIf="dt.flag == 2" class="codigototal2 text-right pr-3" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0 
+                                    ,'levelTwo': dt.nivel == 2 }">
+                                $ {{ commonServices.formatNumber(dt.current_total) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div-->
+</app-button-radio-active>
+
+
+
+<!--div [hidden]="true" id="print-section" media="print">
+    <div class="row justify-content-center ">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>BALANCE GENERAL</h3>
+                                <p>Balance al {{fecha}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-4 pl-2 pr-2" *ngIf="arrayInfo != undefined ">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center table-status">
+                    <div class="table-container-print">
+                        <table class="table-bordered " style="width: 100%;">
+                            <thead>
+                                <tr style="width: 100%;" class="bg-dark text-uppercase">
+                                    <th style="width: 20%;">código</th>
+                                    <th
+                                        [ngClass]="{ 'infobefore' : peridoSelecionado == 0,'infoafter' : peridoSelecionado != 0 }">
+                                        nombre cuentas
+                                    </th>
+                                    <th class="infovalue-after" *ngIf="peridoSelecionado != 0"
+                                        style="text-align: right;padding-right: 5px;">año anterior
+                                        ({{peridoSelecionado}})</th>
+                                    <th style="text-align: right;padding-right: 5px;"
+                                        [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0  }">
+                                        año actual ({{anioActual}})</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="table-container-print">
+                        <table class="table table-bordered ">
+                            <tbody>
+                                <tr *ngFor="let dt of arrayInfo">
+                                    <td *ngIf="dt.flag == 0" [ngClass]="{'codigoone' : dt.codigo == 1 || dt.codigo == 2 || dt.codigo == 3,'sizeLether' : dt.nivel > 1 && dt.nivel < 5,
+                                                    'formatLether':dt.nivel >= 5,'levelTwo': dt.nivel == 2 }">
+                                        {{dt.codigo}}</td>
+                                    <td *ngIf="dt.flag == 1" style="border-right: unset;" class="codigototal"
+                                        [ngClass]="{ 'codigototal3':dt.current_total < 0}"></td>
+                                    <td *ngIf="dt.flag == 2" style="border-right: unset;" class="codigototalprint"
+                                        [ngClass]="{ 'codigototal3':dt.current_total < 0}"></td>
+
+
+                                    <td *ngIf="dt.flag == 0" [ngClass]="{ 'infobefore' : peridoSelecionado == 0,'infoafter' : peridoSelecionado != 0,
+                                     'codigoone' : dt.codigo == 1 || dt.codigo == 2 || dt.codigo == 3,'sizeLether' : dt.nivel > 1 && dt.nivel < 5,
+                                     'formatLether':dt.nivel >= 5 ,'levelTwo': dt.nivel == 2 }">
+                                        {{dt.nombre}}</td>
+                                    <td *ngIf="dt.flag == 1" class="codigototal text-right pr-3"
+                                        [ngClass]="{ 'infobefore' : peridoSelecionado == 0,
+                                    'infoafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0,'levelTwo': dt.nivel == 2   }" style="border-left: unset;">
+                                        {{dt.nombre}}
+                                    </td>
+                                    <td *ngIf="dt.flag == 2" class="codigototalprint text-right pr-3"
+                                        [ngClass]="{ 'infobefore' : peridoSelecionado == 0,
+                                    'infoafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0 ,'levelTwo': dt.nivel == 2  }" style="border-left: unset;">{{dt.nombre}}
+                                    </td>
+
+
+                                    <td class="infovalue-after text-right pr-3"
+                                        *ngIf="peridoSelecionado != 0 && dt.flag == 0" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0 ,
+                                    'codigoone' : dt.codigo == 1 || dt.codigo == 2 || dt.codigo == 3,'sizeLether' : dt.nivel > 1 && dt.nivel < 5,
+                                    'formatLether':dt.nivel >= 5,'levelTwo': dt.nivel == 2}">{{
+                                        commonServices.formatNumber(dt.compare_total) }}
+                                    </td>
+                                    <td class="infovalue-after codigototal text-right pr-3"
+                                        *ngIf="peridoSelecionado != 0 && dt.flag == 1"
+                                        style="border-right: unset;border-left: unset;" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0
+                                        ,'levelTwo': dt.nivel == 2 }">
+                                        {{ commonServices.formatNumber(dt.current_old) }}
+                                    </td>
+                                    <td class="infovalue-after codigototalprint text-right pr-3"
+                                        *ngIf="peridoSelecionado != 0 && dt.flag == 2"
+                                        style="border-right: unset;border-left: unset;" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0 
+                                        ,'levelTwo': dt.nivel == 2 }">
+                                        {{ commonServices.formatNumber(dt.current_old) }}
+                                    </td>
+
+
+                                    <td *ngIf="dt.flag == 0" class="text-right pr-3"
+                                        [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0 ,
+                                                                          'codigoone' : dt.codigo == 1 || dt.codigo == 2 || dt.codigo == 3,
+                                                                          'sizeLether' : dt.nivel > 1 && dt.nivel < 5,
+                                                                          'formatLether':dt.nivel >= 5,'levelTwo': dt.nivel == 2}">
+                                        $ {{ commonServices.formatNumber(dt.current_total) }}</td>
+                                    <td *ngIf="dt.flag == 1" class="codigototal text-right pr-3" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0
+                                        ,'levelTwo': dt.nivel == 2 }">
+                                        $ {{ commonServices.formatNumber(dt.current_total) }}</td>
+                                    <td *ngIf="dt.flag == 2" class="codigototalprint text-right pr-3" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0
+                                        ,'levelTwo': dt.nivel == 2  }">
+                                        $ {{ commonServices.formatNumber(dt.current_total) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-10 text-center pb-2 pt-2 mb-4" style="position: fixed;  bottom: 30px; ">
+            <div class="row justify-content-center text-center">
+                <div class="col-6 text-center">
+                    <div class="row text-center">
+                        <div class="col-12 text-center">
+                            ----------------------------------------------
+                        </div>
+                        <div class="col-12 text-center" style="color: #13A1EA;">
+                            <span>Gerente general</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 text-center">
+                    <div class="row text-center">
+                        <div class="col-12 text-center">
+                            ----------------------------------------------
+                        </div>
+                        <div class="col-12 text-center" style="color: #13A1EA;">
+                            <span>Contador</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #13A1EA;">
+                Fecha: {{fecha}}&nbsp;{{hora}}</span>
+        </div>
+        <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+            <span style="color: #13A1EA;">
+                Usuario: {{dataUser.nombre}}</span>
+        </div>
+    </div>
+</div-->
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spBlgrl"></cc-spiner-procesar>

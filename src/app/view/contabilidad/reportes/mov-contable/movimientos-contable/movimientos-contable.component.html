@@ -1,0 +1,213 @@
+<div class="row justify-content-center" *ngIf="!processing">
+	<div class="container-new-loader"> <i class="fa fa-spinner fa-spin"></i> </div>
+ </div>
+ <div class="row justify-content-center mt-3" *ngIf="processing">
+	<div class="col-md-11 p-0">
+	   <div class="title-cab"><i class="fas fa-exchange-alt"></i>Mayor de cuentas</div>
+	</div>
+ </div>
+ <div class="row justify-content-center mt-3" *ngIf="processing">
+	<div class="col-md-11  container-filter filters ">
+	   <div class="row  justify-content-center">
+		  <div class="col-md-12 justify-content-center">
+			 <div class=" pl-3 pr-3">
+				<div class="row justify-content-center">
+				   <div class="col-md-5">
+					  <div class="row "  >
+						 <div class="col-md-12 " >
+							<p style="background-color: #404A63;text-align: center;color:white;">CUENTA CONTABLE</p>
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-2">
+					  <div class="row ">
+						 <div class="col-md-12 " >
+							<p style="background-color: #404A63;text-align: center;color:white;">FECHAS</p>
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-2">
+					  <div class="row ">
+						 <div class="col-md-12 " >
+							<p style="background-color: #404A63;text-align: center;color:white;">DOCUMENTO</p>
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-2">
+					  <div class="row ">
+						 <div class="col-md-12 " >
+							<p style="background-color: #404A63;text-align: center;color:white;">SALDOS</p>
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-1">
+				   </div>
+				</div>
+				<div class="row justify-content-center">
+				   <div class="col-md-3">
+					  <div class="row">
+						 <div class="col-md-11">
+							<label class="l">Codigo</label>
+						 </div>
+						 <div class="col-md-12 mt-0">
+							<ng-select class="form-control beautifulNgSel" [searchable]="true" [disabled]="permisions.consultar == '0'"  style="padding-left: 7px;font-size: 13px;" [(ngModel)]="codigo" (ngModelChange)="filterCodigo($event)" [clearable]="false">
+							<ng-option [value]="0">Seleccione Codigo</ng-option>
+							<ng-option *ngFor="let d of arrayCodigo" [value]="d.codigo"> {{d.codigo}}</ng-option>
+							</ng-select>
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-2">
+				   </div>
+				   <div class="col-md-2">
+					  <div class="row ">
+						 <div class="col-md-11">
+							<label class="l">Desde</label>
+						 </div>
+						 <div class="col-md-12 mt-0">
+							<ejs-datepicker [(ngModel)]="fromDatePicker" type="text" format="yyyy-MM-dd" [disabled]="permisions.consultar == '0'" (ngModelChange)="FromOrToChange()"  >
+							</ejs-datepicker>
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-2">
+					  <div class="row ">
+						 <div class="col-md-11">
+							<label class="l">Tipo</label>
+						 </div>
+						 <div class="col-md-12 ">
+							<select class="form-control form-control-sm custom-select" (ngModelChange)="filterTipo($event)" [disabled]="permisions.consultar == '0'" [(ngModel)]="tipo">
+							<option [value]="0">Seleccione Tipo</option>
+							<option *ngFor="let d of arrayTipo" [value]="d.codigo">{{ d.codigo }} </option>
+							</select>
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-2">
+					  <div class="row ">
+						 <div class="col-md-11">
+							<label class="l">Anterior</label>
+						 </div>
+						 <div class="col-md-12 fechas">
+							<input type="text"  [(ngModel)]="anterior" disabled class="form-control form-control-sm text-right" [disabled]="permisions.consultar == '0'" id="IdAnterior">
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-1">
+				   </div>
+				</div>
+				<div class="row justify-content-center">
+				   <div class="col-md-5">
+					  <div class="row">
+						 <div class="col-md-11">
+							<label class="l">Nombre</label>
+						 </div>
+						 <div class="col-md-12 mt-0">
+							<ng-select class="form-control beautifulNgSel" [searchable]="true" style="padding-left: 7px;font-size: 13px;" [disabled]="permisions.consultar == '0'" [(ngModel)]="nombre" (ngModelChange)="filterNombre($event)" [clearable]="false">
+							<ng-option [value]="0">Seleccione Nombre</ng-option>
+							<ng-option *ngFor="let d of arrayNombre" [value]="d.nombre"> {{d.nombre}}</ng-option>
+							</ng-select>
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-2">
+					  <div class="row ">
+						 <div class="col-md-11">
+							<label class="l">Hasta</label>
+						 </div>
+						 <div class="col-md-12 mt-0">
+							<ejs-datepicker [(ngModel)]="toDatePicker" type="text" format="yyyy-MM-dd" (ngModelChange)="FromOrToChange($event)" [disabled]="permisions.consultar == '0'">
+							</ejs-datepicker>
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-2">
+					  <div class="row ">
+						 <div class="col-md-11">
+							<label class="l">Número</label>
+						 </div>
+						 <div class="col-md-12 ">
+							<select class="form-control form-control-sm custom-select" (ngModelChange)="filterNumero($event)" [disabled]="permisions.consultar == '0' || tipo == 0" [(ngModel)]="numero">
+							<option [value]="0">Seleccione Numero</option>
+							<option *ngFor="let d of arrayCab" [value]="d.num_doc">{{ d.num_doc.padStart(10, 0)}} </option>
+							</select>
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-2">
+					  <div class="row ">
+						 <div class="col-md-11">
+							<label class="l">Actual</label>
+						 </div>
+						 <div class="col-md-12 fechas">
+							<input type="text"  [(ngModel)]="actual " disabled class="form-control  form-control-sm text-right"  id="IdActual">
+						 </div>
+					  </div>
+				   </div>
+				   <div class="col-md-1">
+					  <br><button class="btn btn-sm tooltip-test my-1" style="background-color: #404A63; color: white; border-radius: 10px;margin-left:10px;"  [disabled]="permisions.consultar == '0'" (click)="limpiarMov() " placement="top" ngbTooltip="Limpiar Datos"> <i style="color:white; " class="fa fa-repeat"></i></button> 
+				   </div>
+				</div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+ </div>
+ <div class="row justify-content-center mt-2" *ngIf="processing ">
+	<div class="col-11 filters">
+	   <div class="table-responsive content-tabla-general content-tabla_editable" >
+		  <table class="table no-footer table-hover table-scroll small-first-col" id="tablaRegistros" >
+			 <thead class="text-center" >
+				<tr style="width: 100%;">
+				   <th style="width: 3%;" >#</th>
+				   <th style="width: 5%;">Fecha</th>
+				   <th style="width: 10%;">Documento</th>
+				   <th style="width: 30%;">Detalle</th>
+				   <th style="width: 8%;">Debe</th>
+				   <th style="width: 8%;">Haber</th>
+				   <th style="width: 8%;">Saldo</th>
+				</tr>
+			 </thead>
+			 <tbody *ngIf="validaDt"  style="width: 100%;" class="body-half-screen" >
+				<tr *ngFor="let dt of infoData; let i = index">
+				   <td style="padding-top: 10px;text-align: center;">{{ i + 1 }}</td>
+				   <td style="padding-top: 10px;text-align: left;">{{dt.fecha}}</td>
+				   <td style="padding-top: 10px;text-align: left;cursor:pointer;"  class="tooltip-test"  placement="left" ngbTooltip="Ver Más" *ngIf="dt.num_doc.length == 1 ">{{ dt.codigoDoc }}-{{ dt.num_doc.padStart(10, 0)}}</td>
+				   <td style="padding-top: 10px;text-align: left;cursor:pointer;" class="tooltip-test"  placement="left" ngbTooltip="Ver Más" *ngIf="dt.num_doc.length != 1 ">{{ dt.codigoDoc }}-{{ dt.num_doc }}</td>
+				   <td style="padding-top: 10px;text-align: left;">{{ dt.detalle }}</td>
+				   <td style="padding-top: 10px;text-align: right;">{{ formatNumber(dt.valor_deb)}}</td>
+				   <td style="padding-top: 10px;text-align: right;">{{ formatNumber(dt.valor_cre)}}</td>
+				   <td style="padding-top: 10px;text-align: right;">{{ formatNumber(dt.saldo) }}</td>
+				</tr>
+			 </tbody>
+		  </table>
+	   </div>
+	   <div class=" justify-content-center mt-2 tabladata" *ngIf="processing ">
+		  <div class="form-group table-responsive responsive-table" >
+			 <table class="table table-sm table-hover">
+				<tfoot>
+				   <tr  style="width: 100%;" >
+					  <td style="width: 3%;"> <strong></strong></td>
+					  <td style="width: 2%;"> <strong></strong></td>
+					  <td style="width: 8%;" class="text-left">
+						 <strong>Registros Encontrados</strong>
+					  </td>
+					  <td style="width: 10%; "  class="text-left">
+						 <strong>{{dataTotal.countRegistros}}</strong>
+					  </td>
+					  <td style="width: 8%;" class="text-right">
+						 $  <strong>{{formatNumber(dataTotal.Debe)}}</strong>
+					  </td>
+					  <td style="width: 8%;" class="text-right">
+						 $  <strong>{{formatNumber(dataTotal.Haber)}}</strong>
+					  </td>
+					  <td style="width: 8%;"  class="text-right" >
+						 $  <strong>{{formatNumber(dataTotal.Saldo)}}</strong>
+					  </td>
+				   </tr>
+				</tfoot>
+			 </table>
+		  </div>
+	   </div>
+	</div>
+ </div>

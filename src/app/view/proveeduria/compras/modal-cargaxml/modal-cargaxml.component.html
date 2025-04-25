@@ -1,0 +1,64 @@
+<app-button-radio-active titulo="Carga de XML" cstyle="bg-light" icono="fas fa-file-upload" filtroBoton="btnsModalXml"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border mb-2 px-3 pb-2">
+        <legend class="mb-0 bg-dark w-auto">Proveedor</legend>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [value]="proveedor.razon_social" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Num. Factura" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [value]="factura.num_factura" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="RUC" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [value]="proveedor.ruc" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Emision" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [value]="factura.fecha_emision" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Direccion" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [value]="proveedor.direccion" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Autorizacion" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [value]="factura.autorizacion" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+    <table mat-table [dataSource]="productos" class="mat-elevation-z8 w-100">
+        <ng-container matColumnDef="codigo">
+            <th mat-header-cell *matHeaderCellDef> Codigo </th>
+            <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+        <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+            <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+        </ng-container>
+        <ng-container matColumnDef="precio_unitario">
+            <th mat-header-cell *matHeaderCellDef> Precio Unitario </th>
+            <td mat-cell *matCellDef="let element"> $ {{element.precio_unitario | number:'1.2-2'}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner"></cc-spiner-procesar>

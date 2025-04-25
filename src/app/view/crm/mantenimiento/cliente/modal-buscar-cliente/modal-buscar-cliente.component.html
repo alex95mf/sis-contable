@@ -1,0 +1,95 @@
+<app-button-radio-active-new  titulo="Buscar Cliente"  
+cstyle="bg-gradient-primary text-white"
+filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+icono="far fa-plus-square">
+
+
+<div class="row m-0">
+    <div class="col-12">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Busqueda de Clientes {{TipoConsulta }}</legend>
+            <div class="row m-0">
+                <div class="col-12 col-md-12 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Nombre" styleSpan="input-group-text size-span-campo">
+                        <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                            [(ngModel)]="filter.nombre">
+                    </app-cc-input-group-prepend>
+                </div>
+           </div>
+           <div class="row m-0">
+ 
+       </div>
+        </fieldset>
+    </div>
+</div>
+<div class="row m-0">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-k table-hover" >
+                <thead class="sticky-header">
+                    <tr class="text-center">
+                        <th >#</th>
+                        <th style="width:10%">Ruc</th>
+                        <th style="width:30%">Nombre</th>
+                        <th >Direccion</th>
+                        <th >Telefono</th>
+                        <th >Estado</th>
+
+                        <th> Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td *ngIf="lista_clientes.length==0" colspan="12" class="text-center" >
+                            No se encontró data
+                        </td>
+                    </tr>
+                    <tr *ngFor="let d of lista_clientes, let i = index" [ngClass]="d.class" [style]="d.size">
+                        <td class="text-left">{{ i+1}}</td>
+                        <td class="text-left">{{ d?.ruc}}</td>
+                        <td class="text-left">{{d.nombre}}</td>
+                       <td class="text-left">{{ d?.direccion}}</td>
+                       <td class="text-left">{{ d?.telefono}}</td>
+                        <td class="text-center">
+                            <span *ngIf="d.estado == 'A'" class="text-center"><i class="fas fa-circle text-success"></i> Activo</span>
+                            <span *ngIf="d.estado == 'I'" class="text-center"><i class="fas fa-circle text-danger"></i> Inactivo</span>
+                            
+                        </td>
+ 
+                        <td class="text-center">
+                            <button class="btn btn-primary mr-1" 
+                            ngbTooltip="Editar"
+                            (click)="seleccionarProducto(d)"
+                          >
+                                <i class="fas fa-edit"></i>
+                            </button>
+
+
+        
+                        </td>
+                    </tr>
+
+
+                    
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<div class="row m-0">
+    <div class="col-12">
+        <mat-paginator [length]="paginate.length" [pageIndex]="paginate.pageIndex" 
+        (page)="changePage($event)" [pageSize]="paginate.perPage" 
+        [pageSizeOptions]="paginate.pageSizeOptions">
+
+    </mat-paginator>
+
+    </div>
+
+</div>
+</app-button-radio-active-new>
+
+<cc-spiner-procesar ltexto="Cargando Clientes......"></cc-spiner-procesar>

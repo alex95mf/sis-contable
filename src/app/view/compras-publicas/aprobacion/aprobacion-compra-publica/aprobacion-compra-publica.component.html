@@ -1,0 +1,91 @@
+
+<app-button-radio-active-new titulo="Aprobacion de Compra Publica" 
+cstyle="bg-gradient-primary text-white"
+icono="fas fa-tasks" filtroBoton="btnsCompaContrata" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+<div class="row m-0">
+    <div class="col-12">
+        <fieldset class="border card-fieldset">
+
+            <div class="row m-0">
+
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="ICP a asignar" styleSpan="size-span-campo font-weight-bold">
+                        <input class="form-control" [disabled]="true" [(ngModel)]="aprobacion.icp" type="text"/>
+                        <button class="btn btn-primary btn-sm mr-1" (click)="asignarIcp()" [disabled]="disabledBotonIcp"  ngbTooltip="Asignar ICP">
+                            <i class="fas fa-hand-point-up"></i>
+                        </button>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Tipo proceso" styleSpan="size-span-campo font-weight-bold">
+
+                        <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false"
+                            [(ngModel)]="aprobacion.tipo_proceso">
+                          <ng-option  [value]= "0" disabled>Tipo Proceso </ng-option>
+                          <ng-option *ngFor="let item of proceso"  [value]="item.valor">{{item.valor}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row m-0">
+
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Tipo de Regimen" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control custom"
+                            [(ngModel)]="aprobacion.tipoRegimen" (ngModelChange)="selectRegimen($event)" appendTo="body" [clearable]="false">
+                            <ng-option [value]="0" disabled>Tipo Regimen</ng-option>
+                            <ng-option *ngFor="let t of tiposRegimen" [value]="t.valor">{{t.valor}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Procedimiento Sugerido" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control custom"
+                            [(ngModel)]="aprobacion.procSugerido" appendTo="body" [clearable]="false">
+                            <ng-option [value]="0" disabled>Procedimiento Sugerido</ng-option>
+                            <ng-option *ngFor="let p of procSugeridos" [value]="p.valor">{{p.valor}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row m-0">
+
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Oficio ICP" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="aprobacion.oficio_icp">
+                    </app-cc-input-group-prepend>
+                </div>
+
+            </div>
+
+            <div class="row m-0">
+                <div class="col-12 col-md-12 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold">
+
+                        <textarea class="form-control" [(ngModel)]="aprobacion.observacion" type="text"></textarea>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+
+
+
+        </fieldset>
+    </div>
+</div>
+
+
+
+
+    
+
+
+
+    
+
+    
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>
+

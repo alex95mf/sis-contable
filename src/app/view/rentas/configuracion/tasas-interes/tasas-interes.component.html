@@ -1,0 +1,54 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light" icono="fas fa-percentage"
+        filtroBoton="btnsTasasInteres" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="periodoSelected" [clearable]="false"
+                        [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                    </ng-select>
+                    <div class="input-group-append">
+                        <button (click)="ObtenerPeriodo()" class="btn btn-primary btn-sm" type="button" matTooltip="Cargar Periodo">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                        <tr style="width: 100%;">
+                            <th >AÑO</th>
+                            <th >MES</th>
+                            <th class="w-25">PORCENTAJE</th>
+                            <th>ACCIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!lst_periodo.length">
+                            <td colspan="4" class="text-center">
+                                <p class="h6">No hay datos para mostrar</p>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let item of lst_periodo">
+                            <td>{{ item.periodo }}</td>
+                            <td>{{ item.mes_nombre }}</td>
+                            <td>
+                                <div class="input-group">
+                                    <input currencyMask [options]="{ prefix: '', allowNegative: false, min: 0, precision: 4 }" class="form-control" [(ngModel)]="item.porcentaje">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text font-weight-bold">%</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Calcular" [disabled]="formReadOnly" (click)="calcularInteres(item)">CALCULAR</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spTasasInteres"></cc-spiner-procesar>

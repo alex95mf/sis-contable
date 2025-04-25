@@ -1,0 +1,78 @@
+
+<br>
+<app-button-radio-active titulo="Depreciación"  cstyle="bg-gradient-primary text-white" icono="fa fa-signal"> 
+
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Año" styleSpan="size-span-campo">
+                <select id="inp-year" class="form-control form-control-sm" [(ngModel)]="depreciation.year" (ngModelChange)="rerender($event)">
+                    <option hidden disabled selected [value]="0">Elegir Año</option>
+                    <option *ngFor="let el of years" [value]="el.year">{{ el.year }}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo">
+                <select id="inp-year" class="form-control form-control-sm" [(ngModel)]="depreciation.acquisition" (ngModelChange)="rerender($event)">
+                    <option hidden disabled selected [value]="0">Elegir Grupo</option>
+                    <option *ngFor="let el of acquisitions" [value]="el.id">{{ el.nombre_activo }}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                <select id="inp-year" class="form-control form-control-sm" [(ngModel)]="depreciation.status" [disabled]="depreciation.year === 0 || depreciation.acquisition === 0" (ngModelChange)="rerender($event)">
+                    <option hidden disabled selected [value]="0">Elegir Estado</option>
+                    <option *ngFor="let el of status" [value]="el.name">{{ el.name }}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <fieldset class="border mt-2 p-2 filters" *ngIf="permissions != undefined">
+        <legend class="w-auto h6">Depreciaciones</legend>
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-12 col-md-12">
+                <div class="content-table">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered" datatable [dtOptions]="dtOptions"
+                            [dtTrigger]="dtTrigger" class="table table-sm no-footer table-hover">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th scope="col" class="align-middle border-right" style="width: 15%">Código</th>
+                                    <th scope="col" class="align-middle border-right">Activo Fijo</th>
+                                    <th scope="col" class="border-right" style="width: 15%">Valor Adquisición</th>
+                                    <th scope="col" class="border-right" style="width: 15%">Valor Depreciación</th>
+                                    <th scope="col" class="border-right" style="width: 10%">Inicial (M)</th>
+                                    <th scope="col" class="border-right" style="width: 10%">Actual (M)</th>
+                                    <th scope="col" class="align-middle" style="width: 5%">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr class="text-center" *ngFor="let el of fixed_assets.modified; let i = index"
+                                    style="cursor: pointer;">
+                                    <td>{{ el.codigo }}</td>
+                                    <td class="text-justify">{{ el.nombre }}</td>
+                                    <td class="text-right">$ {{ commonServices.formatNumber(el.precio) }}</td>
+                                    <td class="text-right">$ {{ commonServices.formatNumber(el.valor_actual) }}</td>
+                                    <td>{{ el.vida_util + el.depreciacion }}</td>
+                                    <td>{{ el.vida_util }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm" [disabled]="el.status == 0"
+                                            style="background-color: #2B81E4; color: white; border-radius: 10px"
+                                            (click)="depreciateFixedAsset(el)" placement="top" ngbTooltip="Depreciar">
+                                            <i class="fa fa-line-chart" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spDprActFij"></cc-spiner-procesar>

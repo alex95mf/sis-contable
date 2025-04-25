@@ -1,0 +1,31 @@
+
+
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnCcCliente" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-search"> 
+
+
+    <div class="table-responsive responsive-table filters">
+        <table id="tabla1" datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="table no-footer table-hover ">
+            <thead class="text-center" style="background-color:black; color: white;">
+                <tr>
+                    <th>Id.</th>
+                    <th>Identificación</th>
+                    <th>Nombre Cliente</th>
+                    <th>Razon Social</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dt of lstClientes; let i = index" (click)="seleccionarCliente(dt)" matTooltip="Seleccionar Cliente" style="cursor:pointer" class="text-center">
+                    <td >{{ dt.id_cliente }}</td>
+                    <td >{{ dt.num_documento }}</td>
+                    <td >{{ dt.nombre_comercial_cli | uppercase}}</td>
+                    <td >{{ dt.razon_social | uppercase}}</td>
+                    <td >{{ mapearEstados(dt.estado) | uppercase}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCcClien"></cc-spiner-procesar>

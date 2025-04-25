@@ -1,0 +1,45 @@
+<app-button-radio-active [titulo]="isNew ? 'Nuevo Evento' : 'Editar Evento'" filtroBoton="btnGestionForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+    <div class="row my-2">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="T&iacute;tulo" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="evento.titulo" maxlength="30">
+            </app-cc-input-group-prepend>
+            <app-cc-input-group-prepend label="Tipo de Evento" styleSpan="size-span-campo font-weight-bold">
+                <ng-select id="tipo_evento" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="evento.tipo_evento">
+                    <ng-option disabled [value]="0">Seleccione un tipo de evento</ng-option>
+                    <ng-option *ngFor="let op of tipoEventosList" [value]="op.valor">{{ op.descripcion }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>      
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Descripci&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                <textarea maxlength="255" cols="30" rows="3" class="form-control form-control-sm" [(ngModel)]="evento.descripcion"></textarea>          
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Fecha inicio" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control form-control-sm" [(ngModel)]="evento.fecha_inicio" max="2050-01-01" >
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Fecha fin" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control form-control-sm" [(ngModel)]="evento.fecha_fin" max="2050-01-01" >
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Hora inicio" styleSpan="size-span-campo font-weight-bold">
+                <input type="time" class="form-control form-control-sm" [(ngModel)]="evento.hora_inicio">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Hora fin" styleSpan="size-span-campo font-weight-bold">
+                <input type="time" class="form-control form-control-sm" [(ngModel)]="evento.hora_fin">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="spCalendario"></cc-spiner-procesar>

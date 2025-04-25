@@ -1,0 +1,206 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active titulo="GENERACIÓN DE RETENCIONES" filtroBoton="btnsGeneraciondeRetencion"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+
+        <!-- <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado"> -->
+            <div class="row">
+                <div class="col-3">
+                    <div class="input-group input-group-sm ">
+                        <div class="input-group-prepend">
+                            <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Períodos</span>
+                        </div>
+                        <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Periodo" [(ngModel)]="selected_anio"  (keypress)="onlyNumber($event)">
+                       
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="input-group input-group-sm ">
+                        <div class="input-group-prepend">
+                            <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Mes</span>
+                        </div>
+                        <ng-select 
+                            (ngModelChange)="ChangeMesCierrePeriodos($event)"
+                            class="form-control" 
+                            id="elemento_pruebas"
+                            bindLabel="name"
+                            placeholder="-Todos-"
+                            appendTo="body"
+                            [clearable]="false"
+                            [searchable]="true"
+                            [disabled]=disabled
+                            [(ngModel)]="mes_actual">
+                            
+                            <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                {{item.name}}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+               
+                <div class="col-4">
+                    <!-- <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo font-weight-bold"> -->
+                    <div class="input-group input-group-sm ">
+                        <div class="input-group-prepend">
+                            <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Proveedor</span>
+                        </div>
+                        <input id="proveedor" type="text" class="form-control" [(ngModel)]="proveedor">
+                    </div>
+                    <!-- </app-cc-input-group-prepend> -->
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-5">
+                    <app-cc-input-group-prepend label="Fecha inicio" styleSpan="size-span-campo font-weight-bold">
+                        <input id="fecha_ini" type="date" class="form-control" [(ngModel)]="fecha_desde">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-5">
+                    <app-cc-input-group-prepend label="Fecha fin" styleSpan="size-span-campo font-weight-bold">
+                        <input id="fecha_fin" type="date" class="form-control" [(ngModel)]="fecha_hasta">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="mt-1">
+                <div class="row p-3 mb-6 content-tabla-general">
+                    <div class="col-12">
+                        <p-tabView (onChange)="handleChange($event)" styleClass="tab_content_compras" class="overflow-hidden">
+                            <p-tabPanel class="p-0" header="GENERAR" [headerStyle]="{'font-size': '0.7rem'}">
+
+                                <p-table 
+                                 [value]="generacion_pendientes"
+                                 [(selection)]="selectedRetencionesElement" 
+                                 [scrollable]="true" scrollHeight="400px">
+                                    <ng-template pTemplate="header">
+                                        <tr style="font-size: 12px;">
+                                            <th style="width: 1rem">
+                                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                            </th>
+                                            <th style="width: 100px; ">Proveedor</th>
+                                            <th style="width: 10%; ">Fecha</th>
+                                            <th style="width: 10%; ">Tipo</th>
+                                            <th style="width: 15%; ">Número</th>
+                                            <th style="width: 15%; ">Valor Compra</th>
+                                            <th style="width: 15%; ">Identificación</th>
+                                            <th style="width: 25%; ">Observación</th>
+                                            <th style="width: 100px;">Acciones</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-item>
+                                        <tr style="font-size: 11px;">
+                                            <td style="width: 1rem">
+                                                <p-tableCheckbox [value]="item" ></p-tableCheckbox>
+                                            </td>
+                                            <td class="text-center">{{ item.nombre_comercial_prov }}</td>
+                                            <td class="text-center">{{ item.fecha_compra }}</td>
+                                            <td class="text-center">{{ item.tipo }}</td>
+                                            <td class="text-center">{{ item.num_doc }}</td>
+                                            <td class="text-right">$ {{ item.total | number:'1.2-2'}}</td>
+                                            <td class="text-center">{{ item.identificacion }}</td>
+                                            <td class="text-center"></td>
+                                            <td  style="float: left; text-align: center; width: 100px; vertical-align: middle;">
+                                                <button class="btn btn-success btn-sm" placement="top"
+                                                    ngbTooltip="Vista Previa" (click)="VistaPreviaImpuestoRetencion(item)"><i class="far fa-eye"
+                                                        aria-hidden="true"></i>
+                                                </button>
+                                                <!-- <button  style="margin-left: 5px;" class="btn btn-info btn-sm" placement="top"
+                                                    ngbTooltip="Editar Impuesto" (click)="EditarImpuestoRetencion(item)"><i class="fa fa-pencil-square-o"
+                                                        aria-hidden="true"></i>
+                                                </button> -->
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+
+                                    <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                            <td class="EmptyTable" [attr.colspan]="8">
+                                                No hay información para mostrar
+                                             </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+
+                            </p-tabPanel>
+                            <p-tabPanel class="p-0" header="CONSULTAR" [headerStyle]="{'font-size': '0.7rem'}">
+
+                                <p-table [value]="detalleReteGeneradas" 
+                                [(selection)]="selectedRetencionesElGenerement" 
+                                (onRowSelect)="onRowSelect($event)" 
+                                (onRowUnselect)="onRowUnselect($event)"
+                                [rowSelectable]="isRowSelectable" [scrollable]="true" scrollHeight="400px">
+                                    <ng-template pTemplate="header">
+                                        <tr style="font-size: 12px;">
+                                            <th style="width: 3rem" pFrozenColumn>
+                                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                            </th>
+                                            <th style="min-width:450px" >Proveedor</th >
+                                            <th style="min-width:100px">Estado</th>
+                                            <th style="min-width:150px"># Retencion.</th>
+                                            <th style="min-width:150px"># Compra proveedor.</th>
+                                            <th style="min-width:150px">Fecha Emisión</th>
+                                            <th style="min-width:100px">Total</th>
+                                            <th style="min-width:300px">N° autorización</th>
+                                            <th style="min-width:180px">Fecha autorización</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-item>
+                                        <tr style="font-size: 11px;">
+                                            <td style="width: 3rem" pFrozenColumn>
+                                                <p-tableCheckbox [value]="item" [disabled]="isOutOfStock(item)" ></p-tableCheckbox>
+                                            </td>
+                                            <td>
+                                                <div class="flex flex-row flex-wrap card-container blue-container">
+                                                    <div class="flex align-items-center justify-content-center">
+                                                        <div class="flex justify-content-end flex-wrap">
+                                                            <span title="RIDE" (click)="ImpresionRetencionPDF(item)" class="text-red-600 text-xl m-1 cursor-pointer fa fa-dofa fa-file-pdf-o"></span>
+                                                            <span title="EXCEL" (click)="ImpresionRetencionExcel(item)" class="text-green-600 text-xl m-1 cursor-pointer fa fa-dofa fa-file-excel-o"></span>
+                                                            <span title="XML" (click)="ImpresionRetencionExcel(item)" class="text-bluegray-600 text-xl m-1 cursor-pointer fa fa-dofa fa fa-file-code-o"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex align-items-center justify-content-center">
+                                                        <div class="ml-3 content-text_client">
+                                                            {{item.nombre_comercial_prov}}
+                                                            <div>
+                                                                <div class="flex justify-content-between flex-row flex-wrap card-container blue-container">
+                                                                    <div (click)="ImpresionComprobante(item)" class="link_document font-bold cursor-pointer flex align-items-center justify-content-center ">{{item.documento_proveedor}}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+    
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td [class]="'text-center product-badge status-activo'" *ngIf="item.isactive == 1"><span >ACTIVO</span></td>
+                                            <td [class]="'text-center product-badge status-anulado'"  *ngIf="item.isactive != 1"><span >ANULADO</span></td>
+                                            <td>{{ item.retencion }}</td>
+                                            <td>{{ item.documento_proveedor }}</td>
+                                            <td>{{ item.fecha_emision }}</td>
+                                            <td>$ {{ item.total | number: '1.2-2'}}</td>
+                                            <td>{{ item.num_autorizacion }}</td>
+                                            <td>{{ item.fecha_autoriazcion }}</td>
+                                            
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                            <td class="EmptyTable" [attr.colspan]="9">
+                                                No hay información para mostrar
+                                             </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </p-tabPanel>
+                        </p-tabView>
+                    </div>
+                </div>
+            </div>
+
+        <!-- </div>
+
+        <ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template> -->
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spComprasProv"></cc-spiner-procesar>

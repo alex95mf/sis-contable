@@ -1,0 +1,179 @@
+<div class="modal-header">
+    <div class="row" style="width: 100%;">
+        <div class="col-md-12">
+            <div class="title-head text-uppercase">
+                <span>asiento contable</span>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true" style="color: rgba(0, 0, 0, 0.664);">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row justify-content-center">
+        <div class="col-11 mt-3 mb-3" *ngIf="arrayAcc[0].IDENTIFICADOR == 'M' ">
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <div class="row mt-1">
+                        <div class="col-md-11">
+                            <label class=" mb-0">Tipo Movimiento</label>
+                        </div>
+                        <div class="col-md-12 mt-0">
+                            <input type="text" placeholder="{{arrayAcc[0].accounting_document.nombre}}"
+                                [disabled]="true">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-11">
+                            <label class=" mb-0">No. Documento</label>
+                        </div>
+                        <div class="col-md-12 mt-0">
+                            <input type="text" placeholder="{{arrayAcc[0].num_doc.toString().padStart(10, '0')}}"
+                                [disabled]="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row mt-1">
+                        <div class="col-md-11">
+                            <label class="mb-0">Fecha Movimiento</label>
+                        </div>
+                        <div class="col-md-12 mt-0">
+                            <input type="text" placeholder="{{arrayAcc[0].fecha}}" [disabled]="true">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-11">
+                            <label class="mb-0">Valor</label>
+                        </div>
+                        <div class="col-md-12 mt-0">
+                            <input type="text" [(ngModel)]="arrayAcc[0].valor" [disabled]="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-3 mb-3" *ngIf="arrayAcc[0].IDENTIFICADOR != 'M' ">
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <div class="row mt-1">
+                        <div class="col-md-11">
+                            <label class=" mb-0">Tipo Movimiento</label>
+                        </div>
+                        <div class="col-md-12 mt-0">
+                            <input type="text" placeholder="{{arrayAcc[0].accounting_document.nombre}}"
+                                [disabled]="true">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-11">
+                            <label class=" mb-0">No. Documento</label>
+                        </div>
+                        <div class="col-md-12 mt-0">
+                            <input type="text" placeholder="{{arrayAcc[0].secuencial.toString().padStart(10, '0')}}"
+                                [disabled]="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row mt-1">
+                        <div class="col-md-11">
+                            <label class="mb-0">Fecha Movimiento</label>
+                        </div>
+                        <div class="col-md-12 mt-0">
+                            <input type="text" placeholder="{{arrayAcc[0].fecha_emision}}" [disabled]="true">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-11">
+                            <label class="mb-0">Valor</label>
+                        </div>
+                        <div class="col-md-12 mt-0">
+                            <input type="text" placeholder="{{arrayAcc[0].valor}}" [disabled]="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row mt-1" *ngIf="arrayAcc[0].IDENTIFICADOR == 'E' ">
+                        <div class="col-md-11">
+                            <label class="mb-0">Beneficiario</label>
+                        </div>
+                        <div class="col-md-12 mt-0">
+                            <input type="text" placeholder="{{arrayAcc[0].beneficiario}}" [disabled]="true">
+                        </div>
+                    </div>
+                    <div class="row mt-1" *ngIf="arrayAcc[0].IDENTIFICADOR == 'I' ">
+                        <div class="col-md-11">
+                            <label class="mb-0">Beneficiario</label>
+                        </div>
+                        <div class="col-md-12 mt-0">
+                            <input type="text" placeholder="{{arrayAcc[0].nombre_cliente}}" [disabled]="true">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-11">
+                            <label class="mb-0">No. Doc Adquisición</label>
+                        </div>
+                        <div class="col-md-12 mt-0">
+                            <input type="text" placeholder="{{arrayAcc[0].num_doc_adq}}" [disabled]="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" style="padding-top: 20px;padding-bottom: 20px;">
+            <div class="table-responsive responsive-table">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="width: 45%;">Nombre cuenta</th>
+                            <th style="width: 25%;">Código cuenta</th>
+                            <th style="width: 15%;">Debe</th>
+                            <th style="width: 15%;">Haber</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dt of arrayAcc[0]['detalle']; let i = index">
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'M' ">{{ dt.detalle }}</td>
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'E' ">{{ dt.nombre_cta }}</td>
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'I' ">{{ dt.nombre_cta }}</td>
+
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'M' ">{{ dt.cuenta }}</td>
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'E' ">{{ dt.codigo_cta }}</td>
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'I' ">{{ dt.codigo_cta }}</td>
+
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'M' " style="text-align: right !important;">{{
+                                commonService.formatNumber(dt.valor_deb)}}</td>
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'E' " style="text-align: right !important;">{{
+                                commonService.formatNumber(dt.debe) }}</td>
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'I' " style="text-align: right !important;">{{
+                                commonService.formatNumber(dt.debe) }}</td>
+
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'M' " style="text-align: right !important;">{{
+                                commonService.formatNumber(dt.valor_cre) }}</td>
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'E' " style="text-align: right !important;">{{
+                                commonService.formatNumber(dt.haber) }}</td>
+                            <td *ngIf="arrayAcc[0].IDENTIFICADOR ==  'I' " style="text-align: right !important;">{{
+                                commonService.formatNumber(dt.haber) }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"
+                                style="text-align: right;padding-right: 10px;background-color: rgb(24, 114, 197);color: white;">
+                                Sumas</td>
+                            <td
+                                style="text-align: right;padding-right: 15px;background-color: rgb(24, 114, 197);color: white;">
+                                <span>$ {{commonService.formatNumber(suma.debe)}}</span>
+                            </td>
+                            <td
+                                style="text-align: right;padding-right: 15px;background-color: rgb(24, 114, 197);color: white;">
+                                <span>$ {{commonService.formatNumber(suma.haber)}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="showAsientos"></cc-spiner-procesar>

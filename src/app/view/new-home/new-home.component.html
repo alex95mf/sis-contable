@@ -1,0 +1,121 @@
+
+<div class="container-fluid ps-md-0" style="overflow-y:hidden !important">
+    <div class="row g-0">
+        <div class="d-none d-md-flex col-md-4 col-lg-8 p-0" (click)="changeImg()" >
+            <img [src]="img_src" class="w-100" style="position: relative; background-position: center; background-size: cover;" title="Aptimo">
+            <div class="caption-bottom col-12">
+                <h4 >
+                    <p>Aptimo, Inteligencia Empresarial.</p>
+                </h4>
+            </div>
+        </div>
+      <!-- <div *ngIf="img_index==0" class="d-none d-md-flex col-md-4 col-lg-8 bg-image1" (click)="changeImg()" >
+        <div class="caption-bottom col-12">
+            <h4 >
+                <p>Aptimo, Inteligencia Empresarial.</p>
+            </h4>
+        </div>
+      </div>
+      <div *ngIf="img_index==1" class="d-none d-md-flex col-md-4 col-lg-8 bg-image2" (click)="changeImg()" >
+        <div class="caption-bottom col-12">
+            <h4 >
+                <p>Aptimo, Inteligencia Empresarial.</p>
+            </h4>
+        </div>
+      </div>
+      <div *ngIf="img_index==2" class="d-none d-md-flex col-md-4 col-lg-8 bg-image3" (click)="changeImg()" >
+        <div class="caption-bottom col-12">
+            <h4 >
+                <p>Aptimo, Inteligencia Empresarial.</p>
+            </h4>
+        </div>
+      </div> -->
+      <div class="col-md-8 col-lg-4 bg-color">
+        <div class="login d-flex align-items-center py-5">
+            <div class="container">
+                <div class="row">
+                <div class="col-md-9 col-lg-10 mx-auto">
+                    <img src="assets/img/logoTT.png" alt="logo" style="width: 100%">
+                    <div class="brand">
+                        <!-- <h3 class="login-heading font-weight-bold mt-1 mb-2">Entrada a APTIMO</h3> -->
+                        <p class="mt-2">Bienvenido(a), por favor ingrese sus datos.</p>
+                    </div>
+    
+                    <!-- Sign In Form -->
+                    <div class="form-floating mt-4 mb-3">
+                        <input type="text" class="form-control form-control-lg" id="floatingInput" placeholder="Nombre de usuario" [(ngModel)]="usuarios" (keyup.enter)="login()">
+                        <!-- <label for="floatingInput">Email address</label> -->
+                    </div>
+                    <div class="form-floating mb-3">
+                        
+                        <div class="input-group">
+                            <input type="{{showPass?'text':'password'}}" class="form-control form-control-lg" id="floatingPassword" placeholder="Contraseña" [(ngModel)]="password" (keyup.enter)="login()">
+                            <div class="input-group-append">
+                              <span (click)="showOrHidePass()" class="input-group-text" id="floatingPassword"><i class="{{'fa fa-eye'+(!showPass?'':'-slash')}}"></i></span>
+                            </div>
+                        </div>
+                        <!-- <label for="floatingPassword">Password</label> -->
+                    </div>
+    
+                    <!-- <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
+                        <label class="form-check-label" for="rememberPasswordCheck">
+                        Remember password
+                        </label>
+                    </div> -->
+    
+                    <div class="input-group">
+                        <button class="col-6 btn btn-sm btn-primary fw-bold mb-2" (click)="login()" (keypress)="enterData($event)">
+                            <i class="fas fa-unlock"></i> Entrar
+                        </button>
+                        <!-- <button  data-toggle="modal" data-target="#exampleModal" class="col-6 btn btn-sm btn-warning text-white fw-bold mb-2" >
+                            <i class="fas fa-key"></i> Recuperar contraseña
+                        </button> -->
+                    </div>
+                    <a data-toggle="modal" data-target="#exampleModal">Recuperar contraseña</a>
+                    <!-- <div class="m-t-20 m-b-40 p-b-40 text-inverse"></div> -->
+                    <br><br><br><br>
+                    <hr>
+                    <div>
+                        <p class="text-center mb-0" style="color: grey">© Derechos reservados</p>
+                    </div>
+    
+                </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spQuotesHome"></cc-spiner-procesar>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-body">
+                  <app-button-radio-active titulo="RECUPERACION DE CONTRASEÑA" filtroBoton="btnsenvioData" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-key">
+                      <div class="row justify-content-center mb-3">
+                          <div class="col-12 container-filter ">
+                              <div class="row  justify-content-center">
+                                  <div class="col-md-12">
+                                      <div class="row">
+                                          <div class="col-sm-12">
+                                              <div class="input-group input-group-sm mt-3">
+                                                  <div class="input-group-prepend">
+                                                      <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm"> <i class="fas fa-envelope"></i>  Correo Electrónico </span>
+                                                  </div>
+                                                  <input placeholder=" ejemplo@ejemplo.com" #correo="ngModel" type="email" name="correo" class="form-control" [(ngModel)]="correos">
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </app-button-radio-active>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Termino Modal -->

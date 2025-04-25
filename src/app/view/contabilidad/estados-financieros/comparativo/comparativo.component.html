@@ -1,0 +1,88 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light" icono="fas fa-file"
+        filtroBoton="btnsRepComparativo" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Tipo de Reporte" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="filter.tipo_reporte" [clearable]="false"
+                        [items]="cmb_tipo_reporte" bindValue="value" bindLabel="label"></ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Centro de Costo" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="filter.centro_costo" [clearable]="false" [markFirst]="true"
+                        [items]="cmb_centro_costo" bindValue="id" bindLabel="nombre"></ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Nivel" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="filter.nivel" [clearable]="false"
+                        [items]="cmb_nivel" bindValue="value" bindLabel="label"></ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Periodo Uno" styleSpan="size-span-campo font-weight-bold">
+                    <p-calendar [(ngModel)]="filter.fecha_inicio" view="month" dateFormat="MM/yy" inputStyleClass="form-control"></p-calendar>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Periodo Dos" styleSpan="size-span-campo font-weight-bold">
+                    <p-calendar [(ngModel)]="filter.fecha_final" view="month" dateFormat="MM/yy" inputStyleClass="form-control"></p-calendar>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col"></div>
+        </div>
+    </app-button-radio-active>
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="w-50">Cuenta</th>
+                        <th class="text-right" >Periodo 1</th>
+                        <th class="text-right" >Periodo 2</th>
+                        <th>Horizontal</th>
+                        <th colspan="2" class="text-center">Vertical</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Periodo 1</th>
+                        <th>Periodo 2</th>
+                    </tr>
+                    <tr class="d-none">
+                        <th></th>
+                        <th *ngFor="let columna of columnas">{{ columna }}</th>
+                        <th></th>
+                        <th *ngFor="let columna of columnas">{{ columna }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!registros.length">
+                        <td colspan="5" class="text-center">
+                            <p class="h6">No hay registros a mostrar.</p>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let registro of registros">
+                        <td class="w-50">{{ registro.cuenta }} - {{ registro.nombre_cuenta }}</td>
+                        <td class="text-right" *ngFor="let columna of columnas">
+                            $ {{ registro[columna] | number:'1.2-2' }}
+                        </td>
+                        <td class="text-right">
+                            <i class="fas" [ngClass]="registro['horizontal'].direccion ? 'fa-arrow-up text-success' :  (registro['horizontal'].valor == 0 ? 'fa-solid fa-minus text-warning' : 'fa-arrow-down text-danger') "></i>
+                            {{ registro['horizontal'].valor * 100 | number:'1.2-2' }} %
+                        </td>
+                        <td  class="text-right" *ngFor="let columna of columnas">
+                            {{ registro['vertical'][columna] * 100 | number:'1.2-2' }} %
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spRepComparativos"></cc-spiner-procesar>

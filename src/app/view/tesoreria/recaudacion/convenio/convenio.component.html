@@ -1,0 +1,759 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-money-check-edit-alt"
+filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+<div class="row mt-2 mb-3">
+    <div class="col-sm-6">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Contribuyente</span></div>
+            <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes(true)" [value]="contribuyenteActive.razon_social">
+            <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes(true)" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <app-cc-input-group-prepend label="¿Tiene solicitante?" styleSpan="size-span-campo font-weight-bold">
+        <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+        [(ngModel)]="documento.garante" [readonly]="titulosDisabled || formReadOnly">
+        <ng-option  [value]= "0" disabled>Tiene solicitante</ng-option>
+        <ng-option  [value]="'S'">SI</ng-option>
+        <ng-option  [value]="'N'">NO</ng-option>
+      </ng-select>
+    </app-cc-input-group-prepend>
+    </div>
+    <!-- <button class="btn btn-sm btn-info" placement="left" ngbTooltip="Remover Título" (click)="printConvenio()"><i class="far fa-print"></i></button> -->
+
+
+
+    
+    
+    <!-- <div class="col-4">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Concepto</span></div>
+            <ng-select [disabled]=" formReadOnly || conDisabled" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" (change)="handleConcepto()">
+                <ng-option disabled [value]="0">Seleccione un Concepto</ng-option>
+                <ng-option *ngFor="let c of conceptosList" [value]="c">{{ c.codigo }} - {{ c.nombre }}</ng-option>
+            </ng-select>
+        </div>
+    </div> -->
+</div>
+
+<div class="row mt-2 mb-3">
+    
+    <div class="col-sm-6">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Solicitante</span></div>
+            <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Solicitante" (click)="expandListContribuyentes(false)" [value]="contribuyenteCActive?.razon_social">
+            <button  class="btn btn-primary btn-sm" (click)="expandListContribuyentes(false)" placement="bottom" ngbTooltip="Buscar Garante" [disabled]=" documento.garante == 'N' || documento.garante == ''? true : false">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+
+   
+</div>
+
+<div class="row mt-2 mb-3">
+    <div class="col-sm-4">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">No. Documento</span></div>
+            <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="documento.documento">
+        </div>
+    </div>
+    <!-- col-1.425 -->
+    <div class="col-sm-1" style="width: 11.87025%;
+    flex: 0 0 11.87025%;max-width: 11.87025%;">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold">No.</span></div>
+            <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="documento.id_documento">
+        </div>
+    </div>
+    <!-- col-2.675 -->
+    <div class="col-sm-3" style="width: 21.4575%;
+    flex: 0 0 21.4575%;max-width: 21.4575%;">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Fecha</span></div>
+            <input [readonly]="formReadOnly" type="date" class="form-control form-control-sm" [(ngModel)]="documento.fecha">
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Estado</span></div>
+            <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                <i
+                    placement="bottom"
+                    [ngbTooltip]="(documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado')" 
+                    [class]="(documento.estado == 'P') ? 'fas fa-circle text-muted' : (documento.estado == 'E') ? 'fas fa-circle text-warning' : ((documento.estado == 'A') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
+                </i>
+                {{ (documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado') }}
+            </div>
+            <!--<input type="text" class="form-control form-control-sm font-weight-bold" [class]="liquidacion.estado == 'E' ? 'text-warning' : (liquidacion.estado == 'A' ? 'text-success' : (liquidacion.estado == 'X' ? 'text-danger' : ''))" readonly 
+            value="{{ liquidacion.estado == 'E' ? 'Emitido' : (liquidacion.estado == 'A' ? 'Aprobado' : (liquidacion.estado == 'X' ? 'Anulado' : '')) }}">-->
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2 mb-3">
+    <div class="col-sm-8">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold text-white" style="width: 155px; background-color: #404A62;">Observaciones </span></div>
+            <textarea cols="30" rows="3" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="documento.observacion"></textarea>
+        </div>
+
+        
+    </div>
+
+    <div class="col-sm-4" *ngIf="aprobacionValidacion">
+        <app-cc-input-group-prepend label="Cambio de estado" styleSpan="size-span-campo font-weight-bold">
+            <ng-select class="form-control form-control-sm" [(ngModel)]="documento.estado" [readonly]="titulosDisabled">
+                <ng-option disabled [value]="0">Seleccione una Estado</ng-option>
+                <ng-option *ngFor="let item of estado" [value]="item.valor">{{item.descripcion}}</ng-option>
+
+            </ng-select>
+        </app-cc-input-group-prepend>
+
+    </div>
+    
+    <!-- <div class="col-4">
+        <div class="input-group input-group-sm mb-2">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">No. Resolución</span></div>
+            <input disabled type="text" maxlength="20" class="form-control form-control-sm" [readonly]="observacionesDisabled || formReadOnly" [(ngModel)]="liquidacion.resolucion_numero">
+        </div>
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Fecha Resolución</span></div>
+            <input disabled type="date" class="form-control form-control-sm" [readonly]="observacionesDisabled || formReadOnly" [(ngModel)]="liquidacion.resolucion_fecha">
+          </div> -->
+</div>
+
+<!-- uploadFile(documento.id_documento,'final') -->
+
+<div class="row">
+    <div class="col-sm-4 mt-2">
+        <div class="input-group input-group-sm mb-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold">Anexos</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo2($event.target.files, 'final')" [disabled]="titulosDisabled || formReadOnly">
+                <label class="custom-file-label" for="inputGroupFile01">{{ fileList3 !== undefined ? fileList3[0].name : "Seleccione un archivo" }}</label>
+            </div>
+            <!-- <button class="ml-1 btn btn-primary btn-sm" (click)="uploadFile2(documento.id_documento,'final')" [disabled]="escanerDisabled ? false : true ">
+                Cargar
+            </button> -->
+        </div>
+
+    </div>
+
+    <div class="col-sm-4 mt-2">
+        <app-anexos-lista-dis [dataUser]="dataUser" [permissions]="permissions" [identifier]="id" [archivo]="'final'"></app-anexos-lista-dis>
+
+    </div>
+
+    
+
+</div>
+
+
+
+<div class="row">
+
+   
+    <div class="col-sm-4">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px; ">Observaciones de deudas</span></div>
+            <textarea cols="30" rows="3" class="form-control form-control-sm" [readonly]="deudaDisabled || formReadOnly" [(ngModel)]="documento.observacion_pdf_1"></textarea>
+        </div>
+    </div>
+
+    
+
+    
+
+    <div class="col-sm-4 mt-2">
+        <div class="input-group input-group-sm mb-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold">Anexos</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)" [disabled]="deudaDisabled|| formReadOnly">
+                <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
+            </div>
+        </div>
+
+    </div>
+    <!-- <div class="col-4">
+        <app-anexos-list></app-anexos-list>
+    </div> -->
+
+    <div class="col-sm-4 mt-2">
+        <app-anexos-list-dis [dataUser]="dataUser" [permissions]="permissions" [identifier]="documento.id_documento" [archivo2]="false"></app-anexos-list-dis>
+
+    </div>
+    
+
+</div>
+
+    
+
+
+
+
+
+<div class="row mt-2 mb-1 align-items-center">
+    <div class="col">
+        <h5 class="mb-0 text-dark">Detalles de liquidaciones</h5>
+    </div>
+    <!-- <div class="col text-right">
+        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" [disabled]="titulosDisabled || formReadOnly">
+            <i class="fas fa-plus"></i>
+        </button>
+        
+    </div> -->
+</div>
+
+<div class="row mb-2">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-bordered no-footer table-hover mb-0">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th style="width: 5%;"><input type="checkbox" [(ngModel)]="masterSelected" (change)="selectAll()"></th>
+                        <!-- <th style="width: 5%;">#</th> -->
+                        <!-- <th style="width: 5%;">Concepto</th> -->
+                        <th style="width: 15%;">No. de Documento</th>
+                        <!-- <th style="width: 5%;">Fecha de emisión</th> -->
+                        <!-- <th style="width: 5%;">No. de cuota</th> -->
+                        <th class="text-right" style="width: 5%;">Interés</th>
+                        <th class="text-right" style="width: 5%;">Descuento Interés</th>
+                        <th class="text-right" style="width: 5%;">Multa</th>
+                        <th class="text-right" style="width: 5%;">Exoneración</th>
+                        <th class="text-right" style="width: 5%;">STA</th>
+                        <th class="text-right" style="width: 5%;">Recargo</th>
+                        <th class="text-right" style="width: 5%;">Coactiva</th>
+                        <th class="text-right" style="width: 5%;">Valor total</th>
+                        <th class="text-right" style="width: 5%;">Descuento</th>
+                        <th class="text-right" style="width: 5%;">Total - Descuento</th>
+                        <th class="text-right" style="width: 10%;">Saldo actual</th>
+                        <th class="text-right" style="width: 10%;">Valor a pagar</th>
+                        <th class="text-right" style="width: 10%;">Saldo restante</th>
+                        <!-- <th style="width: 5%;">Plazo máximo</th> -->
+                        <!-- <th style="width: 10%;">Acciones</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="deudas.length == 0">
+                        <td colspan="18" class="text-center"><h6 class="my-1">No hay títulos registrados</h6></td>
+                    </tr>
+                    <ng-container *ngFor="let d of deudas, let i = index">
+                        <tr >
+                            <td class="text-center">
+                                <input type="checkbox" [(ngModel)]="d.check" (ngModelChange)="calcCheck()">
+                            </td>
+                            <!-- <td class="text-center">{{ d.tipo_documento }}</td> -->
+                            <!-- <td>
+                                <div class="row">
+                                    <div class="col">{{ d.nombre }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-muted"><small>{{ d.numero_documento }}</small></div>
+                                </div>
+                            </td> -->
+
+                            <td>
+                                <div class="row">
+                                  <div class="col">{{d.concepto.nombre }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <small class="text-muted"> 
+                                            <b class="cursor-pointer" 
+                                            style="text-decoration: underline;  color: #2b94e2;"
+                                            (click)="expandDetalleLiq(d)">{{ d.numero_documento }}
+                                            </b>
+                                        </small>
+                                    </div>
+                                 
+                                </div>
+                              </td>
+                            <!-- <td class="text-center">
+                                <div class="input-group input-group-sm">
+                                    
+                                    <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                </div>
+                            </td> -->
+                            <!-- <td class="text-right"></td>
+                            <td class="text-right"></td> -->
+                            <td class="text-right">$ {{ d.interes  | number:'1.2-2' }}</td>
+                            <td class="text-right">$ {{ d.descuento_interes  | number:'1.2-2' }}</td>
+                            <td class="text-right">$ {{ d.multa  | number:'1.2-2' }}</td>
+                            <td class="text-right">$ {{ d.exoneraciones  | number:'1.2-2' }}</td>
+                            <td class="text-right">$ {{ d.sta  | number:'1.2-2' }}</td>
+                            <td class="text-right">$ {{ d.recargo  | number:'1.2-2' }}</td>
+                            <td class="text-right">$ {{ d.coactiva  | number:'1.2-2' }}</td>
+                            <td class="text-right">$ {{ d.valor | number:'1.2-2' }}</td>
+                            <td class="text-right">$ {{ d.descuento  | number:'1.2-2' }}</td>
+                            <td class="text-right">$ {{ d.total  | number:'1.2-2' }}</td>
+                            <td class="text-right">$ {{ d.saldo | number:'1.2-2' }}</td>
+                            <td class="text-right">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
+                                    <input currencyMask readonly maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.cobro" (keypress)="onlyNumberDot($event)" (keyup)="restar(d)">
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
+                                    <input currencyMask class="form-control form-control-sm text-right" [(ngModel)]="d.nuevo_saldo" readonly>
+                                </div>
+                            </td>
+                            <!-- <td class="text-left"></td> -->
+                    
+                            <!-- <td class="text-center">
+                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
+                            </td> -->
+                        </tr>
+      
+                    </ng-container>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row my-2 justify-content-end">
+    <div class="col-sm-6">
+        <div class="input-group input-group-lg input-group-subtotal">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 270px;">&Sigma; Monto Total</span></div>
+            <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalCobro | number: '1.2-2' }}">
+        </div>
+    </div>
+</div>
+<div class="row my-2 justify-content-end">
+    <div class="col-sm-6">
+        <div class="input-group input-group-lg input-group-subtotal">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 270px;">&Sigma; Monto Total Interés</span></div>
+            <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalInteres | number: '1.2-2' }}">
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3 mb-1 align-items-center">
+    <div class="col">
+        <h5 class="mb-0 text-dark">Tabla de amortización</h5>
+    </div>
+</div>
+
+<div class="row mb-2">
+
+    <div class="col-10">
+        <div class="row my-2">
+            <div class="col-sm-4 ">       
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Monto total</span></div>
+                    <input id="monto_total" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" value="$ {{ totalCobro | number: '1.2-2' }}">          
+                </div>
+            </div>
+            <div class="col-sm-4 ">       
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">{{'Cuota inicial'+(amortizacion.cuota_inicial>0?' ('+((amortizacion.cuota_inicial/totalCobro*100) | number: '1.2-2')+'%)':'')}}</span></div>
+                    <input currencyMask [disabled]="formReadOnly || titulosDisabled" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">          
+                </div>
+            </div>
+            <div class="col-sm-4 ">       
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Cuota inicial</span></div>
+                    <input id="cuota_inicial" readonly type="text" maxlength="8" class="form-control form-control-lg text-right"  [value]="total20 | number:'1.2-2'">          
+                </div>
+            </div>
+            
+              
+        </div>
+        <div class="row my-2">
+            <div class="col-sm-4 ">       
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Monto a amortizar</span></div>
+                    <input id="monto_amortizar" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [value]="amortizacion.monto_amortizar | number:'1.2-2'">          
+                </div>
+            </div>
+            <div class="col-sm-4 ">        
+                <div class="input-group input-group-sm">         
+                    <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">No. cuotas</span></div>
+                    <input id="num_cuotas" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">     
+                </div>
+            </div>
+            <div class="col-sm-4 ">        
+                <div class="input-group input-group-sm">            
+                    <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Interés</span></div>
+                    <input id="interes" readonly [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">         
+                </div>
+            </div>      
+        </div>
+
+        
+
+    </div>
+    <div class="col">
+        <div class="row my-2">
+            .
+        </div>
+        <div class="row my-2">
+            <div class="col text-right">
+                <button [disabled]="formReadOnly || titulosDisabled" class="btn btn-sm btn-warning" ngbTooltip="Calcular cuotas" (click)="detAmortizacion()"><i class="fas fa-calculator"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px; ">Observaciones de cuotas</span></div>
+                <textarea cols="30" rows="3" class="form-control form-control-sm" [disabled]="cuotasDisabled || formReadOnly" [(ngModel)]="documento.observacion_pdf_2"></textarea>
+            </div>
+        </div>
+    
+        <div class="col-sm-4 mt-2">
+            <div class="input-group input-group-sm mb-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold">Anexos</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo2($event.target.files, '')" [disabled]="cuotasDisabled || formReadOnly">
+                <label class="custom-file-label" for="inputGroupFile01">{{ fileList2 !== undefined ? fileList2[0].name : "Seleccione un archivo" }}</label>
+            </div>
+        </div>
+    
+        </div>
+
+        <div class="col-sm-4 mt-2">
+            <app-anexos-lista-dis [dataUser]="dataUser" [permissions]="permissions" [identifier]="documento.id_documento" [archivo]="'archivo2'"></app-anexos-lista-dis>
+    
+        </div>
+    
+    </div>
+ 
+
+</div>
+
+
+<div class="row mb-2">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-bordered no-footer table-hover mb-0">
+                
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th style="width: 5%;">Mes</th>     
+                        <th style="width: 10%;">Estado</th>               
+                        <th style="width: 10%;">Saldo inicial</th>
+                        <th style="width: 10%;">Interés</th>
+                        <th style="width: 15%;">Pago mensual</th>
+                        <th style="width: 15%;">Pago total</th>
+                        <th style="width: 10%;">Valor pagado</th>
+                        <th style="width: 10%;">Saldo final</th>                        
+                        <th style="width: 15%;">Plazo máximo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="amortizaciones.length == 0">
+                        <td colspan="7" class="text-center"><h6 class="my-1">No hay amortizaciones registradas</h6></td>
+                    </tr>
+                    <ng-container *ngFor="let d of amortizaciones, let i = index">
+                        <tr >
+                            
+                            <td class="text-center">{{ d.num  }}</td>
+                            <td *ngIf="d.estado == 'P'" class="text-center">
+                                <i class="fas fa-circle text-warning"></i> Pendiente
+                            </td>
+                            <td *ngIf="d.estado == 'A'" class="text-center">
+                                <i class="fas fa-circle text-warning"></i> Pendiente
+                            </td>
+                            <td *ngIf="d.estado == 'C'" class="text-center">
+                                <i class="fas fa-circle text-success"></i> Cancelado
+                            </td>
+                            <td *ngIf="d.estado == 'X'" class="text-center">
+                                <i class="fas fa-circle text-danger"></i> Anulado
+                            </td>
+                            <td class="text-right">$ {{ d.saldo_inicial | number: '1.2-2'}}</td>
+                            <td class="text-right">$ {{ d.interes | number: '1.2-2'}}</td>
+                            <td class="text-right">$ {{ d.pago_mensual | number: '1.2-2'}}</td>
+                            <td class="text-right">$ {{ d.pago_total | number: '1.2-2'}}</td> 
+                            <td *ngIf="d.estado == 'A'" class="text-right">0.00</td>
+                            <td *ngIf="d.estado == 'X'" class="text-right">0.00</td>
+                            <td *ngIf="d.estado == 'P'" class="text-right">0.00</td>
+                            <td *ngIf="d.estado == 'C'" class="text-right">$ {{ d.pago_mensual | number: '1.2-2'}}</td>                            
+                            <td class="text-right">$ {{ d.saldo_final | number: '1.2-2'}}</td>                            
+                            <td class="text-center">{{ d.plazo_maximo | date:'yyyy-MM-dd' }}</td>                           
+                        </tr>                        
+                    </ng-container>
+                    <tr *ngIf="amortizaciones.length > 0">
+                        <td colspan="2" class="text-center"><h6 class="my-1">Total</h6></td>
+                        <td></td>
+                        <td class="text-right">$ {{ totalIntereses | number: '1.2-2'}}</td>
+                        <td class="text-right">$ {{ totalPagoMensual | number: '1.2-2'}}</td>
+                        <td class="text-right">$ {{ totalPagoTotal | number: '1.2-2'}}</td>
+                        <td class="text-right">$ {{ totalValorPagado | number: '1.2-2'}}</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renLiqAnulacion"></cc-spiner-procesar>
+
+
+
+
+
+
+<button #print printTitle="Convenios" printSectionId="PrintSection" ngxPrint hidden="true" [useExistingCss]="true"></button>
+
+<div id="PrintSection" [hidden]="true">
+    <div class="row justify-content-center prt-comprobante">
+
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Documento: {{ documento.documento }}</h3>
+                                <h3>Fecha: {{ documento.fecha | date: 'dd/MM/yyyy' }}</h3>
+                                <!-- <h3>Estado: {{ (documento.estado == 'P') ? 'Pendiente' : documento.estado == 'E' ? 'Emitido' : (liquidacion.estado == 'A' ? 'Aprobado' : 'Anulado')}}</h3> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <div class="row justify-content-center prt-comprobante">
+
+        <div class="col-11 pl-2 pr-2">
+             
+                        
+            <div class="row mt-2 mb-1 align-items-center">
+                <div class="col">
+                    <h5 class="mb-0 text-dark">Detalles de liquidaciones</h5>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" [disabled]="titulosDisabled || formReadOnly">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <!-- <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto"  (click)="expandConceptos()" [disabled]="conceptosDisabled || formReadOnly">
+                        <i class="fas fa-plus"></i>
+                    </button> -->
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered no-footer table-hover mb-0">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th style="width: 5%;">Concepto</th>
+                                    <th style="width: 15%;">No. de Documento</th>
+                                    <!-- <th style="width: 20%;">Comentario</th> -->
+                                    <th class="text-right" style="width: 10%;">Valor total</th>
+                                    <th class="text-right" style="width: 10%;">Saldo actual</th>
+                                    <th class="text-right" style="width: 10%;">Valor a pagar</th>
+                                    <th class="text-right" style="width: 10%;">Saldo restante</th>
+                                    <th style="width: 10%;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="deudas.length == 0">
+                                    <td colspan="8" class="text-center"><h6 class="my-1">No hay deudas registradas</h6></td>
+                                </tr>
+                                <ng-container *ngFor="let d of deudas, let i = index">
+                                    <tr >
+                                        <td class="text-center">{{ d.tipo_documento }}</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col">{{ d.numero_documento }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col text-muted"><small>{{ d.concepto ? d.concepto.nombre : 'NA' }}</small></div>
+                                            </div>
+                                        </td>
+                                        <!-- <td class="text-center">
+                                            <div class="input-group input-group-sm">
+                                                
+                                                <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                            </div>
+                                        </td> -->
+                                        <td class="text-right">$ {{ d.valor }}</td>
+                                        <td class="text-right">$ {{ d.saldo }}</td>
+                                        <td class="text-right">
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
+                                                <input type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.cobro" (keypress)="onlyNumberDot($event)" (keyup)="restar(d)">
+                                            </div>
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
+                                                <input type="text" class="form-control form-control-sm text-right" [(ngModel)]="d.nuevo_saldo" readonly>
+                                            </div>
+                                        </td>
+                                
+                                        <td class="text-center">
+                                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                
+                                </ng-container> 
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-2 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-subtotal">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Monto Total</span></div>
+                        <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalCobro | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3 mb-1 align-items-center">
+                <div class="col">
+                    <h5 class="mb-0 text-dark">Tabla de amortización</h5>
+                </div>
+            </div>
+            
+            <div class="row mb-2">
+            
+                <div class="col-10">
+                    <div class="row my-2">
+                        <div class="col-4 ">       
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Monto total</span></div>
+                                <input id="monto_total" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="totalCobro">          
+                            </div>
+                        </div>
+                        <div class="col-4 ">       
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">{{'Cuota inicial'+(amortizacion.cuota_inicial>0?' ('+((amortizacion.cuota_inicial/totalCobro*100) | number: '1.2-2')+'%)':'')}}</span></div>
+                                <input id="cuota_inicial" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">          
+                            </div>
+                        </div>
+                        <div class="col-4 ">       
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Monto a amortizar</span></div>
+                                <input id="monto_amortizar" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.monto_amortizar">          
+                            </div>
+                        </div>
+                          
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-4 ">        
+                            <div class="input-group input-group-sm">         
+                                <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">No. cuotas</span></div>
+                                <input id="num_cuotas" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">     
+                            </div>
+                        </div>
+                        <div class="col-4 ">        
+                            <div class="input-group input-group-sm">            
+                                <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Interés</span></div>
+                                <input id="interes" readonly [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">         
+                            </div>
+                        </div>      
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row my-2">
+                        .
+                    </div>
+                    <div class="row my-2">
+                        <div class="col text-right">
+                            <button [disabled]="formReadOnly || titulosDisabled" class="btn btn-sm btn-warning" ngbTooltip="Calcular cuotas" (click)="detAmortizacion()"><i class="fas fa-calculator"></i></button>
+                        </div>
+                    </div>
+                </div>
+             
+            
+            </div>
+            
+            
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered no-footer table-hover mb-0">
+                            
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th style="width: 5%;">Mes</th>                    
+                                    <th style="width: 17.5%;">Saldo inicial</th>
+                                    <th style="width: 15%;">Interés</th>
+                                    <th style="width: 15%;">Pago mensual</th>
+                                    <th style="width: 15%;">Pago total</th>
+                                    <th style="width: 17.5%;">Saldo final</th>                        
+                                    <th style="width: 15%;">Plazo máximo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="amortizaciones.length == 0">
+                                    <td colspan="7" class="text-center"><h6 class="my-1">No hay amortizaciones registradas</h6></td>
+                                </tr>
+                                <ng-container *ngFor="let d of amortizaciones, let i = index">
+                                    <tr >
+                                        
+                                        <td class="text-center">{{ i + 1 }}</td>
+                                        <td class="text-right">$ {{ d.saldo_inicial | number: '1.2-2'}}</td>
+                                        <td class="text-right">$ {{ d.interes | number: '1.2-2'}}</td>
+                                        <td class="text-right">$ {{ d.pago_mensual | number: '1.2-2'}}</td>
+                                        <td class="text-right">$ {{ d.pago_total | number: '1.2-2'}}</td>                            
+                                        <td class="text-right">$ {{ d.saldo_final | number: '1.2-2'}}</td>                            
+                                        <td class="text-center">{{ d.plazo_maximo }}</td>                           
+                                    </tr>                        
+                                </ng-container>
+                                <tr *ngIf="amortizaciones.length > 0">
+                                    <td colspan="1" class="text-center"><h6 class="my-1">Total</h6></td>
+                                    <td></td>
+                                    <td class="text-right">$ {{ totalIntereses | number: '1.2-2'}}</td>
+                                    <td class="text-right">$ {{ totalPagoMensual | number: '1.2-2'}}</td>
+                                    <td class="text-right">$ {{ totalPagoTotal | number: '1.2-2'}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed; bottom: 0px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Fecha: {{ documento.fecha }}</span>
+        </div>
+        <div *ngIf="dataUser" class="col-12 text-left" style="position: fixed; bottom: 20px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Usuario: {{ dataUser.nombre }}</span>
+        </div>
+    </div>
+</div>

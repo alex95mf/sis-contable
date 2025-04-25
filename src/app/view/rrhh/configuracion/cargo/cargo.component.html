@@ -1,0 +1,141 @@
+<div class="my-2">
+
+    <app-button-radio-active titulo="Ingeso cargos" filtroBoton="btnsConceptos" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
+
+        <fieldset class="border pb-2 px-2 mb-2 mt-2">
+            <legend class="w-auto bg-dark">Cargo</legend>
+            <div class="row ml-1 mr-1">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_codigo" type="text" class="form-control" [(ngModel)]="cargo.nombre" placeholder="Nombre">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Descripción de cargo" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="cargo.descripcion" placeholder="Descripcion de cargo" >
+                        
+                    </app-cc-input-group-prepend>
+                </div>
+    
+               
+            </div>
+            <div class="row ml-1 mr-1">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="cargo.departamento" placeholder="Departamento" readonly>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary btn-sm" (click)="modalCargo()">Buscar</button>
+                        </div>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                        <!-- <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="cargo.descripcion" placeholder="Nombre"> -->
+                        <ng-select class="form-control" [(ngModel)]="cargo.estado">
+                            <ng-option *ngFor="let item of estado" [value]="item.valor">{{item.descripcion}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <!-- <div class="row ml-1 mr-1">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Sueldo" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_nombre" currencyMask class="form-control" [(ngModel)]="cargo.sueldo" placeholder="Sueldo">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div> -->
+        </fieldset>
+        
+
+        <fieldset class="border pb-2 px-2">
+            <legend class="w-auto bg-dark">Filtros</legend>
+            <div class="row ml-1 mr-1">
+                <div class="col-8">
+                    <div class="row">
+                        <!-- <div class="col">
+                            <app-cc-input-group-prepend label="Código" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.codigo">
+                            </app-cc-input-group-prepend>
+                        </div> -->
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo size-span-campo font-weight-bold">
+                                <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.nombre" >
+                            </app-cc-input-group-prepend>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                <!-- <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="cargo.descripcion" placeholder="Nombre"> -->
+                                <ng-select class="form-control" [(ngModel)]="filter.estado">
+                                    <ng-option *ngFor="let item of estado" [value]="item.valor">{{item.descripcion}}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="cargarCargos()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+
+
+        <div class="row mb-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <!-- <th style="width: 5%;">Código</th> -->
+                            <th style="width: 15%;">Nombre</th>
+                            <th style="width: 25%;">Descripción</th>
+                            <th style="width: 15%;">Programa</th>
+                            <th style="width: 15%;">Dirección</th>
+                            <th style="width: 15%;">Departamento</th>
+                            <th style="width: 10%;">Estado</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="conceptosDt" >
+                        <ng-container *ngFor="let dt of conceptosDt, let i = index" >
+                            <tr (click)="selectCargos(dt)" style="cursor:pointer;">
+                                <!-- <td class="text-center">{{dt.car_nombre}}</td> -->
+                                <td style="max-width: 10px;" class="text-center">{{ dt.car_nombre }}</td>
+                                <td style="max-width: 10px;">{{ dt.car_descripcion }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.depatamento?.area?.programa?.nombre }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.depatamento?.area.are_nombre }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.depatamento?.dep_nombre}}</td>
+                                <td style="max-width: 10px;" class="text-center" *ngIf="dt.catalogo?.id_catalogo == 2">
+                                    <i class="fas fa-circle text-success"></i> Activo
+                                </td>
+                                <td style="max-width: 10px;" class="text-center" *ngIf="dt.catalogo?.id_catalogo == 3">
+                                    <i class="fas fa-circle text-danger"></i> Inactivo
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+
+                <mat-paginator 
+                        showFirstLastButtons
+                        [length]="paginate.length"
+                        [pageSize]="paginate.perPage"
+                        [pageIndex]="paginate.pageIndex"
+                       [pageSizeOptions]="paginate.pageSizeOptions"
+                       (page)="changePaginate($event)"
+                       aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+
+
+    </app-button-radio-active>
+
+    <cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spConceptos"></cc-spiner-procesar>
+
+</div>

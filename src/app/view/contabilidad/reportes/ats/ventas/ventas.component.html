@@ -1,0 +1,136 @@
+<!--<p-table [value]="ListaAtsCompras" [scrollable]="true" scrollHeight="400px">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="min-width:50px">AÑO</th>
+            <th style="min-width:50px">MES</th>
+            <th style="min-width:50px">TIPO ID PROVEEDOR</th>
+            <th style="min-width:100px">ID PROVEEDOR</th>
+            <th style="min-width:350px">RAZON SOCIAL PROVEEDOR</th>
+            <th style="min-width:80px">COD. SUSTENTO</th>
+            <th style="min-width:100px">TIPO COMPROBANTE</th>
+            <th style="min-width:100px">FECHA REGISTRO</th>
+            <th style="min-width:80px">ESTABLECIMIENTO</th>
+            <th style="min-width:80px">EMISION</th>
+            <th style="min-width:80px">SECUENCIAL</th>
+            <th style="min-width:100px">FECHA EMISIÓN</th>
+            <th style="min-width:350px">AUTORIZACIÓN</th>
+            <th style="min-width:80px">BASE 12%</th>
+            <th style="min-width:80px">BASE 0%</th>
+            <th style="min-width:80px">NO OBJETO IVA</th>
+            <th style="min-width:80px">EXCENTO</th>
+            <th style="min-width:80px">IVA</th>
+            <th style="min-width:80px">IVA 10</th>
+            <th style="min-width:80px">IVA 20</th>
+            <th style="min-width:80px">IVA 30</th>
+            <th style="min-width:80px">IVA 50</th>
+            <th style="min-width:80px">IVA 70</th>
+            <th style="min-width:80px">IVA 100</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+        <tr>
+            <td>{{ item.anio }}</td>
+            <td>{{ item.mes }}</td>
+            <td>{{ item.tipo_identificacion_proveedor}}</td>
+            <td>{{ item.identificacion_proveedor }}</td>
+            <td>{{ item.razon_social_proveedor }}</td>
+            <td>{{ item.cod_sustento }}</td>
+            <td>{{ item.tipo_comprobante }}</td>
+            <td>{{ item.fecha_registro_compra }}</td>
+            <td>{{ item.establecimiento_proveedor }}</td>
+            <td>{{ item.emision_proveedor }} </td>
+            <td>{{ item.secuencial_proveedor }} </td>
+            <td>{{ item.fecha_emision_doc_proveedor }} </td>
+            <td>{{ item.autotizacion_proveedor }} </td>
+            <td class="text-right">{{ ChangeDecimal(item.basedoce) }} </td>
+            <td class="text-right">{{  ChangeDecimal(item.base0) }} </td>
+            <td class="text-right">{{  ChangeDecimal(item.no_objeto) }} </td>
+            <td class="text-right">{{  ChangeDecimal(item.exento) }} </td>
+            <td class="text-right">{{  ChangeDecimal(item.monto_iva) }} </td>
+            <td class="text-right">{{  ChangeDecimal(item.iva_10) }} </td>
+            <td class="text-right">{{  ChangeDecimal(item.iva_20) }} </td>
+            <td class="text-right">{{  ChangeDecimal(item.iva_30) }} </td>
+            <td class="text-right">{{  ChangeDecimal(item.iva_50) }} </td>
+            <td class="text-right">{{  ChangeDecimal(item.iva_70) }} </td>
+            <td class="text-right">{{  ChangeDecimal(item.iva_100) }} </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td class="EmptyTable" [attr.colspan]="18">
+                No hay información para mostrar
+             </td>
+        </tr>
+    </ng-template>
+</p-table>-->
+
+
+<div class="row mb-2">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-bordered no-footer table-hover mb-0">
+                
+                <thead class="thead-dark">
+                    <tr style="font-size: 12px;">
+                        <th style="min-width:50px">Año</th>
+                        <th style="min-width:50px">Mes</th>
+                        <th style="min-width:50px">Tipo ID Proveedor</th>
+                        <th style="min-width:100px">ID Proveedor</th>
+                        <th style="min-width:350px">Razón Social Proveedor</th>
+                        <th style="min-width:80px">Cod. Sustento</th>
+                        <th style="min-width:100px">Tipo Comprobante</th>
+                        <th style="min-width:100px">Fecha Registro</th>
+                        <th style="min-width:80px">Establecimiento</th>
+                        <th style="min-width:80px">Emisión</th>
+                        <th style="min-width:80px">Secuencial</th>
+                        <th style="min-width:100px">Fecha Emisión</th>
+                        <th style="min-width:350px">Autorización</th>
+                        <th style="min-width:80px">Base 12%</th>
+                        <th style="min-width:80px">Base 0%</th>
+                        <th style="min-width:80px">No Objeto IVA</th>
+                        <th style="min-width:80px">Excento</th>
+                        <th style="min-width:80px">IVA</th>
+                        <th style="min-width:80px">IVA 10</th>
+                        <th style="min-width:80px">IVA 20</th>
+                        <th style="min-width:80px">IVA 30</th>
+                        <th style="min-width:80px">IVA 50</th>
+                        <th style="min-width:80px">IVA 70</th>
+                        <th style="min-width:80px">IVA 100</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of ListaAtsVentas, let i = index">
+                        <tr style="font-size: 11px;">
+                            <td>{{ item.anio }}</td>
+                            <td>{{ item.mes }}</td>
+                            <td>{{ item.tipo_identificacion_proveedor}}</td>
+                            <td>{{ item.identificacion_proveedor }}</td>
+                            <td>{{ item.razon_social_proveedor }}</td>
+                            <td>{{ item.cod_sustento }}</td>
+                            <td>{{ item.tipo_comprobante }}</td>
+                            <td>{{ item.fecha_registro_venta }}</td>
+                            <td>{{ item.establecimiento_proveedor }}</td>
+                            <td>{{ item.emision_proveedor }} </td>
+                            <td>{{ item.secuencial_proveedor }} </td>
+                            <td>{{ item.fecha_emision_doc_proveedor }} </td>
+                            <td>{{ item.autotizacion_proveedor }} </td>
+                            <td class="text-right">$ {{ item.basedoce | number: '1.2-2' }} </td>
+                            <td class="text-right">$ {{  item.base0 | number: '1.2-2' }} </td>
+                            <td class="text-right">$ {{  item.no_objeto | number: '1.2-2' }} </td>
+                            <td class="text-right">$ {{  item.exento | number: '1.2-2' }} </td>
+                            <td class="text-right">$ {{  item.monto_iva | number: '1.2-2' }} </td>
+                            <td class="text-right">$ {{  item.iva_10 | number: '1.2-2' }} </td>
+                            <td class="text-right">$ {{  item.iva_20 | number: '1.2-2' }} </td>
+                            <td class="text-right">$ {{  item.iva_30 | number: '1.2-2' }} </td>
+                            <td class="text-right">$ {{  item.iva_50 | number: '1.2-2' }} </td>
+                            <td class="text-right">$ {{  item.iva_70 | number: '1.2-2' }} </td>
+                            <td class="text-right">$ {{  item.iva_100 | number: '1.2-2' }} </td>
+                            <!-- <td class="text-right">{{  ChangeDecimal(item.iva_100) }} </td> -->
+                        </tr>                     
+                    </ng-container>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

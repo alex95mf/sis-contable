@@ -1,0 +1,66 @@
+
+<app-button-radio-active titulo="Generar nuevo Abogado" cstyle="bg-gradient-primary text-white" [groupButton]="botonera" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-plus-square" >
+
+    <div class="row my-2">
+        <div class="col">
+
+        </div>
+    </div>
+
+    <fieldset class="border px-2 pb-2 mb-2">
+        <legend class="ml-1 w-auto bg-dark">Datos del Abogado</legend>
+        
+        <div class="row">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Nombres" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control"  [(ngModel)]="abogado.nombres">
+                </app-cc-input-group-prepend>
+            </div>
+            
+            <div class="col-4">
+                <div>
+                    <app-cc-input-group-prepend label="Apellidos"  styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="abogado.apellidos">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Correo electrónico"  styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="abogado.email">
+                </app-cc-input-group-prepend>
+            </div>
+                        
+           
+            
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Num. Contrato" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="abogado.matricula">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Cédula"  styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="abogado.cedula">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="filter_estado" [(ngModel)]="abogado.estado" class="form-control" [items]="estados" bindValue="id" bindLabel="nombre" [clearable]="false">
+                    </ng-select>
+                  </app-cc-input-group-prepend>
+            </div>
+           
+           
+            
+
+
+        </div>
+
+    </fieldset>
+
+   
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spJuicioActuacion"></cc-spiner-procesar>
+

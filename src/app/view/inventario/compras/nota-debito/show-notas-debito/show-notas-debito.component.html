@@ -1,0 +1,58 @@
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="mt-4">
+            <app-button-radio-active titulo="Notas de Débitos" filtroBoton="btnNdP"
+                cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+                <div class="row mt-2 mb-2">
+                    <div class="col-12 filters">
+                        <div class="table-responsive responsive-table">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th style="width: 12%;">Id</th>
+                                        <th style="width: 18%;">Razón social</th>
+                                        <th style="width: 12%;">Ruc</th>
+                                        <th style="width: 10%;">Teléfono</th>
+                                        <th style="width: 10%;">Valor</th>
+                                        <th style="width: 10%;">fecha</th>
+                                        <th style="width: 18%; text-align: center;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngFor="let dt of dataDT">
+                                        <td>{{ dt.secuencia_doc.toString().padStart(10, '0') }}</td>
+                                        <td>{{ dt.razon_social }}</td>
+                                        <td>{{ dt.ruc }}</td>
+                                        <td>{{ dt.telefono }}</td>
+                                        <td>$ {{ dt.total}}</td>
+                                        <td>{{ dt.fecha_emision }}</td>
+                                        <td>
+                                            <div class="text-center">
+                                                <button class="btn btn-danger btn-sm" (click)="deleteND(dt)" placement="top"
+                                                    ngbTooltip="Rechazar nota de débito">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </button>
+                                                <button class="btn btn-primary btn-sm" (click)="editarND(dt)" placement="left"
+                                                    ngbTooltip="Editar nota de débito">
+                                                    <i class="far fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-warning btn-sm" (click)="nexStatus(dt)" placement="left"
+                                                    ngbTooltip="Aprobar nota débito" [disabled]="dt.filter_doc == latestStatus">
+                                                    <i class="fas fa-check-double" [ngClass]="{ 'no-aprobated' : dt.filter_doc != latestStatus ,
+                                                    'aprobated': dt.filter_doc == latestStatus }"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>
+

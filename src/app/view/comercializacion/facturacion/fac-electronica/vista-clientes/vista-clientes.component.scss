@@ -1,0 +1,43 @@
+.filters 
+{
+background-color: white;
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 6px 0px 8px 0px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                    text-align: center !important;
+                    padding: 6px 0px 8px 0px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    vertical-align: middle;
+                    font-size: 8.5px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,609 @@
+<div class="card mt-4" style="font-size: 11px;background-color: rgb(255 255 255 / 73%);">
+    <div class="card-header">
+        <table width="100%">
+            <tr>
+                <td class="text-left">
+                    <div class="card-title text-left  title_h5"><strong><i
+                                class='fas fa-money-bill'></i>&nbsp;&nbsp;Establecer precios productos</strong></div>
+                </td>
+                <td class="text-right" *ngIf="!flag">
+                    <div class="btn-group">
+                        <div>
+                            <button class="btn btn-success btn-xs button_margin" (click)="confirmSave()" [disabled]="precioSelect == 0 ||
+                                                                                                precioSelect == undefined ||
+                                                                                                valuePricePorcentaje <= 0 ||
+                                                                                                valuePricePorcentaje == undefined ||
+                                                                                                valueRadio == undefined ||
+                                                                                                valueRadioCosto == undefined ||
+                                                                                                valuFluctuacion == undefined ||
+                                                                                                valuePricePorcentaje == undefined ||
+                                                                                                !change"
+                                matTooltip="Guardar cambios">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
+                            </button>
+
+                            <button class="btn btn-primary btn-xs button_margin" (click)="btnCalculator()" [disabled]="precioSelect == 0 ||
+                                                                precioSelect == undefined ||
+                                                                valuePricePorcentaje <= 0 ||
+                                                                valuePricePorcentaje == undefined ||
+                                                                valueRadio == undefined ||
+                                                                valueRadioCosto == undefined ||
+                                                                valuFluctuacion == undefined || 
+                                                                valuePricePorcentaje == undefined "
+                                matTooltip="Calcular precios">
+
+                                <i class="fa fa-calculator" aria-hidden="true"></i> Calcular
+                            </button>
+                            <button class="btn btn-warning btn-xs button_margin" (click)="revertPrices()"
+                                matTooltip="Revertir cambios"
+                                [disabled]="precioSelect == 0 || precioSelect == undefined || change">
+                                <i class="fa fa-history" aria-hidden="true"></i> Revertir
+                            </button>
+
+                            <button class="btn btn-danger btn-xs button_margin" (click)="cancelForm()"
+                                matTooltip="Cancelar">
+                                <i class="fa fa-times" aria-hidden="true"></i> Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-body text-left" style="padding-top: 0px; padding-bottom:0px;">
+        <div class="row mt-2">
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo de
+                                    precios</span>
+                            </div>
+                            <select class="form-control form-control-sm custom-select text-uppercase"
+                                [(ngModel)]="precioSelect" (ngModelChange)="searchTipePrice()"
+                                [disabled]="actions.disabledAllChange" id="idtipePrice">
+                                <option [value]="0">Todos</option>
+                                <option *ngFor="let d of dataTipoPrecios" [value]="d.name_ref">
+                                    <span>{{d.name}}</span>
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Subir
+                                    precio</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio3" value="{{valueR5}}"
+                                (click)="changeFluctuacion()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Establecer un
+                                    Porcentaje</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio" value="{{valueR1}}"
+                                (click)="changeRadio()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Calcular en
+                                    base al
+                                    costo</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio2" value="{{valueR3}}"
+                                (click)="changeRadioCosto()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- <div class="input-group input-group-sm mt-1" *ngIf = "fields != undefined">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Grupos
+                                    productos</span>
+                            </div>
+                            
+                            <ng-select class="form-control form-control-sm custom-select text-uppercase"
+                                [searchable]="true" [clearable]="false" [(ngModel)]="grupoSelect"
+                                (ngModelChange)="rerender($event)"
+                                [disabled]="!actions.dgrupo || actions.disabledAllChange " id="idGrupo">
+                                <ng-option [value]="0">Todos</ng-option>
+                                <ng-option *ngFor="let d of dataGrupo" [value]="d.id_grupo">
+                                    <span>{{d.nombre}}</span>
+                                </ng-option>
+                            </ng-select>
+                        </div> -->
+                        <div *ngIf = "fields != undefined" class="mt-1">
+                            <ejs-dropdowntree #vaSelect id='default' [changeOnBlur]='false'  cssClass = "style-dropDow"
+                            (change)='onChange($event)' [fields]='fields' 
+                            popupHeight='220px' popupWidth='400px' placeholder='{{varAux}}'><!-- [disabled]="!actions.new" -->
+                            </ejs-dropdowntree>
+                        </div>
+                        <div class="input-group input-group-sm mt-1" *ngIf = "fields == undefined">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Grupo Producto</span>
+                            </div>               
+                            <input type="text" placeholder="No existe información" class="form-control form-control-sm" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bajar
+                                    precio</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio3" value="{{valueR6}}"
+                                (click)="changeFluctuacion()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Establecer un
+                                    valor</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio" value="{{valueR2}}"
+                                (click)="changeRadio()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Calcular en
+                                    base al
+                                    Pvp</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio2" value="{{valueR4}}"
+                                (click)="changeRadioCosto()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-2">
+            <div class="col-12">
+                <fieldset class="border p-2 mb-2 mt-2 filters">
+                    <legend class="w-auto h6">Detalle cálculo de nuevos precios</legend>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="input-group input-group-sm ">
+                                        <div class="input-group-prepend" *ngIf="valueRadio == ''">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Porcentaje/Valor</span>
+                                        </div>
+                                        <div class="input-group-prepend" *ngIf="valueRadio == 'porcentaje'">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Ingrese
+                                                porcentaje</span>
+                                        </div>
+                                        <div class="input-group-prepend" *ngIf="valueRadio == 'valor' ">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Ingrese
+                                                valor</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm text-right"
+                                            [(ngModel)]="valuePricePorcentaje" placeholder="0.00" min="0"
+                                            id="idInptPrice" style="padding-right: 25px !important;"
+                                            (keypress)="commonServices.FormatDecimalVal($event)"
+                                            [disabled]="actions.disabledAll" #prc="ngModel" name="prc"
+                                            [ngClass]="{'is-invalid':((precioSelect == 0 || valuePricePorcentaje <= 0 || precioSelect == undefined) && (prc.dirty || prc.touched)),'is-valid':(precioSelect != 0 && valuePricePorcentaje > 0)}"
+                                            required>
+                                        <div class="invalid-feedback"
+                                            *ngIf="precioSelect == 0 || valuePricePorcentaje <= 0 || precioSelect == undefined">
+                                            <span>Seleccione un tipo de precio diferente a Todos o verifique valor no
+                                                puede ser
+                                                menor o igual a 0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <!-- id="basic-addon1" --> <span class="input-group-text">Buscar Items:
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Ingrese nombre de producto"
+                                            aria-label="Username" aria-describedby="basic-addon1"
+                                            (keyup)="searchPoduct($event.target.value)" [(ngModel)]="search">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="infoDt.length > 0 ">
+                        <div class="col-12 container container-table">
+                            <div class="tab_container filters">
+                                <div class="table-responsive" style="max-height: 300px;overflow-y: scroll;">
+                                    <table class="table">
+                                        <thead class="thead-dark" style="width: 100%;">
+                                            <tr>
+                                                <th style="text-align: center;padding-left: 0px !important;width: 30px !important;"
+                                                    [ngClass]="{'filter': precioSelect != 0}">
+                                                    <input type="checkbox" (click)="activeSectionAll()"
+                                                        [(ngModel)]="checkAll" [disabled]="
+                                                                actions.disabledAll ||
+                                                                precioSelect == 0 ||
+                                                                valueRadio == undefined ||
+                                                                valueRadioCosto == undefined ||
+                                                                valuFluctuacion == undefined ||
+                                                                valuePricePorcentaje == '' ||
+                                                                valuePricePorcentaje == 0 ||
+                                                                valuePricePorcentaje == undefined">
+                                                </th>
+                                                <th [ngClass]="{'code': precioSelect != 0}" style="width: 20px;">Código
+                                                </th>
+                                                <th [ngClass]="{'name': precioSelect != 0}" style="width: 150px;">Nombre
+                                                </th>
+                                                <th [ngClass]="{'costo': precioSelect != 0}">Costo</th>
+                                                <th [ngClass]="{'price': precioSelect != 0}"
+                                                    *ngIf="precioSelect != undefined && precioSelect != 0">Pvp
+                                                </th>
+
+
+                                                <th *ngIf="precioSelect == 'Consumidor final'" style="width: 14%;">
+                                                    Precio
+                                                    anterior</th>
+                                                <th *ngIf="precioSelect == 'Consumidor final' && valueRadio == 'porcentaje' && valueRadio != undefined"
+                                                    style="width: 7%;">Porcentaje</th>
+                                                <th *ngIf="precioSelect == 'Consumidor final' && valueRadio == 'valor' && valueRadio != undefined "
+                                                    style="width: 7%;">Valor</th>
+                                                <th *ngIf="precioSelect == 'Consumidor final'"
+                                                    style="width: 16%;text-align: center;">{{precioSelectView}}</th>
+                                                <th *ngIf="precioSelect == 0 " style="width: 10%;text-align: center;">
+                                                    {{dataTipoPrecios[0]['name']}}</th>
+                                                <th *ngIf="precioSelect == 'Consumidor final'" style="width: 7%;">
+                                                    Utilidad
+                                                </th>
+
+
+                                                <th *ngIf="precioSelect == 'Fijo'" style="width: 14%;">Precio anterior
+                                                </th>
+                                                <th *ngIf="precioSelect == 'Fijo' && valueRadio == 'porcentaje' && valueRadio != undefined"
+                                                    style="width: 7%;">Porcentaje</th>
+                                                <th *ngIf="precioSelect == 'Fijo' && valueRadio == 'valor' && valueRadio != undefined "
+                                                    style="width: 7%;">Valor</th>
+                                                <th *ngIf="precioSelect == 'Fijo'"
+                                                    style="width: 14%;text-align: center;">
+                                                    {{precioSelectView}}</th>
+                                                <th *ngIf="precioSelect == 0 " style="width: 10%;text-align: center;">
+                                                    {{dataTipoPrecios[1]['name']}}</th>
+                                                <th *ngIf="precioSelect == 'Fijo'" style="width: 7%;">Utilidad</th>
+
+
+                                                <th *ngIf="precioSelect == 'Concurrente'" style="width: 14%;">Precio
+                                                    anterior
+                                                </th>
+                                                <th *ngIf="precioSelect == 'Concurrente' && valueRadio == 'porcentaje' && valueRadio != undefined"
+                                                    style="width: 7%;">Porcentaje</th>
+                                                <th *ngIf="precioSelect == 'Concurrente' && valueRadio == 'valor' && valueRadio != undefined "
+                                                    style="width: 7%;">Valor</th>
+                                                <th *ngIf="precioSelect == 'Concurrente'"
+                                                    style="width: 14%;text-align: center;">{{precioSelectView}}</th>
+                                                <th *ngIf="precioSelect == 0 " style="width: 10%;text-align: center;">
+                                                    {{dataTipoPrecios[2]['name']}}</th>
+                                                <th *ngIf="precioSelect == 'Concurrente'" style="width: 7%;">Utilidad
+                                                </th>
+
+
+                                                <th *ngIf="precioSelect == 'Minorista'" style="width: 14%;">Precio
+                                                    anterior
+                                                </th>
+                                                <th *ngIf="precioSelect == 'Minorista' && valueRadio == 'porcentaje' && valueRadio != undefined"
+                                                    style="width: 7%;">Porcentaje</th>
+                                                <th *ngIf="precioSelect == 'Minorista' && valueRadio == 'valor' && valueRadio != undefined "
+                                                    style="width: 7%;">Valor</th>
+                                                <th *ngIf="precioSelect == 'Minorista'"
+                                                    style="width: 14%;text-align: center;">
+                                                    {{precioSelectView}}</th>
+                                                <th *ngIf="precioSelect == 0  " style="width: 10%;text-align: center;">
+                                                    {{dataTipoPrecios[3]['name']}}</th>
+                                                <th *ngIf="precioSelect == 'Minorista'" style="width: 7%;">Utilidad
+                                                </th>
+
+
+                                                <th *ngIf="precioSelect == 'Medio'" style="width: 14%;">Precio anterior
+                                                </th>
+                                                <th *ngIf="precioSelect == 'Medio' && valueRadio == 'porcentaje' && valueRadio != undefined"
+                                                    style="width: 7%;">Porcentaje</th>
+                                                <th *ngIf="precioSelect == 'Medio' && valueRadio == 'valor' && valueRadio != undefined "
+                                                    style="width: 7%;">Valor</th>
+                                                <th *ngIf="precioSelect == 'Medio'"
+                                                    style="width: 14%;text-align: center;">
+                                                    {{precioSelectView}}</th>
+                                                <th *ngIf="precioSelect == 0 " style="width: 10%;text-align: center;">
+                                                    {{dataTipoPrecios[4]['name']}}</th>
+                                                <th *ngIf="precioSelect == 'Medio'" style="width: 7%;">Utilidad</th>
+
+
+                                                <th *ngIf="precioSelect == 'Mayorista'" style="width: 14%;">Precio
+                                                    anterior
+                                                </th>
+                                                <th *ngIf="precioSelect == 'Mayorista' && valueRadio == 'porcentaje' && valueRadio != undefined"
+                                                    style="width: 7%;">Porcentaje</th>
+                                                <th *ngIf="precioSelect == 'Mayorista' && valueRadio == 'valor' && valueRadio != undefined "
+                                                    style="width: 7%;">Valor</th>
+                                                <th *ngIf="precioSelect == 'Mayorista'"
+                                                    style="width: 14%;text-align: center;">
+                                                    {{precioSelectView}}</th>
+                                                <th *ngIf="precioSelect == 0 " style="width: 10%;text-align: center;">
+                                                    {{dataTipoPrecios[5]['name']}}</th>
+                                                <th *ngIf="precioSelect == 'Mayorista'" style="width: 7%;">Utilidad
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="validaDt" style="width: 100%;">
+                                            <tr *ngFor="let dt of infoDt; let i = index">
+                                                <td style="width: 7px;">
+                                                    <input type="checkbox" (click)="activeSection(i)"
+                                                        [(ngModel)]="dt.activeCheckbox" [disabled]="
+                                                                actions.disabledAll ||
+                                                                precioSelect == 0 ||
+                                                                valueRadio == undefined ||
+                                                                valueRadioCosto == undefined ||
+                                                                valuFluctuacion == undefined ||
+                                                                valuePricePorcentaje == '' ||
+                                                                valuePricePorcentaje == 0 ||
+                                                                valuePricePorcentaje == undefined">
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    {{ dt.codigoProducto }}
+                                                </td>
+                                                <td style="text-align: left;">{{ dt.nombre}}</td>
+                                                <td style="width: 7px;" class="text-right">$ {{dt.costo}}</td>
+
+
+                                                <td style="width: 7px" class="text-right"
+                                                    *ngIf="precioSelect == 'Consumidor final'  ">
+                                                    $ {{dt.pvp_anterior_aux}}
+                                                </td>
+                                                <td style="width: 7px" class="text-right"
+                                                    *ngIf="precioSelect == 'Fijo'  ">
+                                                    $ {{dt.p_anterior1_aux}}
+                                                </td>
+                                                <td style="width: 7px" class="text-right"
+                                                    *ngIf="precioSelect == 'Concurrente'  ">
+                                                    $ {{dt.p_anterior2_aux}}
+                                                </td>
+                                                <td style="width: 7px" class="text-right"
+                                                    *ngIf="precioSelect == 'Minorista'  ">
+                                                    $ {{dt.p_anterior3_aux}}
+                                                </td>
+                                                <td style="width: 7px" class="text-right"
+                                                    *ngIf="precioSelect == 'Medio'  ">
+                                                    $ {{dt.p_anterior4_aux}}
+                                                </td>
+                                                <td style="width: 7px" class="text-right"
+                                                    *ngIf="precioSelect == 'Mayorista'  ">
+                                                    $ {{dt.p_anterior5_aux}}
+                                                </td>
+
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Consumidor final'  ">
+                                                    $ {{dt.pvp_anterior}}</td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Consumidor final' && valueRadio == 'porcentaje' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll "
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Consumidor final' && valueRadio == 'valor' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll "
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Consumidor final' || precioSelect == 0 ">
+                                                    <input type="number" [(ngModel)]="dt.PVP" style=" width: 60%;"
+                                                        [disabled]="true">
+                                                    <div class="invalid-price"
+                                                        *ngIf="dt.PVP < 0 && parsearNumber(dt.PVP, dt.costo) && change">
+                                                        Verifique valor
+                                                        negativo</div>
+                                                </td>
+                                                <td *ngIf="precioSelect == 'Consumidor final'" class="text-right"
+                                                    [ngClass]="{'negativoValue': dt.diferencia < 0 }"><span
+                                                        *ngIf="valuFluctuacion == 'bajar' "></span>$ {{dt.diferencia}}
+                                                </td>
+
+
+                                                <td style="width: 7px;" *ngIf="precioSelect == 'Fijo' "
+                                                    class="text-right">$ {{dt.p_anterior1}}
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Fijo' && valueRadio == 'porcentaje' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Fijo' && valueRadio == 'valor' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Fijo' || precioSelect == 0 ">
+                                                    <input type="number" [(ngModel)]="dt.precio1" style=" width: 60%;"
+                                                        [disabled]="true">
+                                                    <div class="invalid-price"
+                                                        *ngIf="dt.precio1 < 0 && parsearNumber(dt.precio1, dt.costo) && change">
+                                                        Verifique valor
+                                                        negativo</div>
+                                                </td>
+                                                <td *ngIf="precioSelect == 'Fijo'" class="text-right"
+                                                    [ngClass]="{'negativoValue': dt.diferencia < 0 }"><span
+                                                        *ngIf="valuFluctuacion == 'bajar' "></span>$ {{dt.diferencia}}
+                                                </td>
+
+
+                                                <td style="width: 7px;" *ngIf="precioSelect == 'Concurrente' "
+                                                    class="text-right">
+                                                    $ {{dt.p_anterior2}}</td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Concurrente' && valueRadio == 'porcentaje' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Concurrente' && valueRadio == 'valor' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Concurrente' || precioSelect == 0">
+                                                    <input type="number" [(ngModel)]="dt.precio2" style=" width: 50%;"
+                                                        [disabled]="true">
+                                                    <div class="invalid-price"
+                                                        *ngIf="dt.precio2 < 0 && parsearNumber(dt.precio2, dt.costo) && change">
+                                                        Verifique valor
+                                                        negativo</div>
+                                                </td>
+                                                <td *ngIf="precioSelect == 'Concurrente'" class="text-right"
+                                                    [ngClass]="{'negativoValue': dt.diferencia < 0 }">
+                                                    $ {{dt.diferencia}}
+                                                </td>
+
+
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Minorista' "><span
+                                                        *ngIf="valuFluctuacion == 'bajar' ">$ -</span>{{dt.p_anterior3}}
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Minorista' && valueRadio == 'porcentaje' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Minorista' && valueRadio == 'valor' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Minorista' || precioSelect == 0 ">
+                                                    <input type="number" [(ngModel)]="dt.precio3" style=" width: 50%;"
+                                                        [disabled]="true">
+                                                    <div class="invalid-price"
+                                                        *ngIf="dt.precio3 < 0 && parsearNumber(dt.precio3, dt.costo) && change">
+                                                        Verifique
+                                                        valor
+                                                        negativo</div>
+                                                </td>
+                                                <td *ngIf="precioSelect == 'Minorista'" class="text-right"
+                                                    [ngClass]="{'negativoValue': dt.diferencia < 0 }"><span
+                                                        *ngIf="valuFluctuacion == 'bajar' "></span>$ {{dt.diferencia}}
+                                                </td>
+
+
+                                                <td style="width: 7px;" *ngIf="precioSelect == 'Medio'"
+                                                    class="text-right">$
+                                                    {{dt.p_anterior4}}
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Medio' && valueRadio == 'porcentaje' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Medio' && valueRadio == 'valor' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Medio' || precioSelect == 0 ">
+                                                    <input type="number" [(ngModel)]="dt.precio4" style=" width: 50%;"
+                                                        [disabled]="true">
+                                                    <div class="invalid-price"
+                                                        *ngIf="dt.precio4 < 0 && parsearNumber(dt.precio4, dt.costo) && change">
+                                                        Verifique
+                                                        valor
+                                                        negativo</div>
+                                                </td>
+                                                <td *ngIf="precioSelect == 'Medio'" class="text-right"
+                                                    [ngClass]="{'negativoValue': dt.diferencia < 0 }">$
+                                                    {{dt.diferencia}}
+                                                </td>
+
+
+                                                <td style="width: 7px;" *ngIf="precioSelect == 'Mayorista' "
+                                                    class="text-right"><span *ngIf="valuFluctuacion == 'bajar' ">$
+                                                        -</span>{{dt.p_anterior5}}
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Mayorista' && valueRadio == 'porcentaje' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Mayorista' && valueRadio == 'valor' && valueRadio != undefined ">
+                                                    <input type="number" [(ngModel)]="dt.establecido"
+                                                        style=" width: 50%;"
+                                                        [disabled]="dt.active || actions.disabledAll"
+                                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                                </td>
+                                                <td style="width: 7px;" class="text-right"
+                                                    *ngIf="precioSelect == 'Mayorista' || precioSelect == 0">
+                                                    <input type="number" [(ngModel)]="dt.precio5" style=" width: 50%;"
+                                                        [disabled]="true">
+                                                    <div class="invalid-price"
+                                                        *ngIf="dt.precio5 < 0 && parsearNumber(dt.precio5, dt.costo) && change">
+                                                        Verifique
+                                                        valor
+                                                        negativo</div>
+                                                </td>
+                                                <td *ngIf="precioSelect == 'Mayorista'" class="text-right"
+                                                    [ngClass]="{'negativoValue': dt.diferencia < 0 }"><span
+                                                        *ngIf="valuFluctuacion == 'bajar' "></span>$ {{dt.diferencia}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spChangePrice"></cc-spiner-procesar>

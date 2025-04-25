@@ -1,0 +1,123 @@
+<div class="">
+    <app-button-radio-active titulo="Seleccionar documento de compra" filtroBoton="btnListRecDocumento" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        
+        <div class="row my-2">
+            <div class="col-12">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark">Filtros</legend>
+                    <div class="row">
+                        <div class="col-6">
+                            <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.razon_social">
+                            </app-cc-input-group-prepend>
+
+                        </div>
+                        <div class="col-6">
+                            <app-cc-input-group-prepend label="Num Documento" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control" [(ngModel)]="filter.num_documento">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="Fecha inicio" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_fecha_ini" type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="Fecha fin" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_fecha_fin" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" >
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [(ngModel)]="filter.estado" [clearable]="false"
+                                    [items]="lst_estados" bindValue="value" bindLabel="label">
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-12">
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 10%;">Id</th>
+                            <th style="width: 10%;">No. Doc</th>
+                            <th style="width: 10%;">Fecha</th>
+                            <th style="width: 25%;">Proveedor</th>
+                            <th style="width: 10%;">Valor</th>
+                            <th>Total a Pagar</th>
+                            <th style="width: 10%;">Saldo</th>
+                            <!-- <th style="width: 10%;">Estado</th> -->
+                            <th style="width: 7%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="documentosDt.length == 0">
+                            <td colspan="7" class="text-center"><h6 class="my-1"></h6>No hay pagos para mostrar</td>
+                        </tr>
+                        <tr *ngFor="let dt of documentosDt, let i = index">
+                            <td>{{ dt.id }}</td>
+                            <td>{{ dt.num_doc }}</td>
+                            <td class="text-center">{{ dt.fecha_compra.split(" ")[0] }}</td>
+                            <td>{{ dt.proveedor.razon_social }}</td>
+                            <td class="text-right">
+                                <!-- <input currencyMask readonly [ngModel]="dt.total" class="form-control form-control-sm"> -->
+                                $ {{ dt.total | number:'1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                <!-- <input currencyMask readonly [ngModel]="dt.total_pagar" class="form-control form-control-sm"> -->
+                                $ {{ dt.total_pagar ?? 0 | number:'1.2-2' }}
+                            </td>
+                            <td class="text-right">
+                                <!-- <input currencyMask readonly [ngModel]="dt.saldo" class="form-control form-control-sm"> -->
+                                $ {{ dt.saldo ?? 0 | number:'1.2-2' }}
+                            </td>
+                            <!-- <td>
+                                <span *ngIf="dt.estado == 'E'">
+                                    <i class="fas fa-circle text-warning"></i> Emitido
+                                </span>
+                                <span *ngIf="dt.estado == 'A'">
+                                    <i class="fas fa-circle text-success"></i> Aprobado
+                                </span>
+                                <span *ngIf="dt.estado == 'N'">
+                                    <i class="fas fa-circle text-danger"></i> Negado
+                                </span>
+                                <span *ngIf="dt.estado == 'C'">
+                                    <i class="fas fa-circle text-muted"></i> Cerrado
+                                </span>
+                            </td> -->
+                            <!--<td [class]="'text-center text-' + estados.filter(e => e.value == dt.estado)[0].color">
+                                {{ estados.filter(e => e.value == dt.estado)[0].label }}
+                            </td>-->
+                            <td>
+                                <div class="text-center mx-auto">
+                                    <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar orden de pago">
+                                        <i class="fas fa-hand-pointer"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>                    
+            </div>
+                
+            <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    showFirstLastButtons
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+            
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>
+

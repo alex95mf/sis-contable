@@ -1,0 +1,71 @@
+<app-button-radio-active titulo="Detalles Movimiento bancario" cstyle="bg-light text-dark" icono="fas fa-tasks" filtroBoton="btnsMovimientoBanc" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="row my-2">
+        <div class="col-5">
+            <app-cc-input-group-prepend label="Codigo" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control"  type="text" [(ngModel)]="dataTransaccion.referencia" readonly/>
+            </app-cc-input-group-prepend>
+
+        </div>
+
+        <div class="col-5">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="dataTransaccion.fecha_emision" readonly/>
+            </app-cc-input-group-prepend>
+
+        </div>
+
+        <div class="col-5">
+            <app-cc-input-group-prepend label="Glosa" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="dataTransaccion.concepto" readonly/>
+            </app-cc-input-group-prepend>
+
+        </div>
+
+        <div class="col-5">
+            <app-cc-input-group-prepend label="Banco" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="dataTransaccion.name_banks" readonly/>
+            </app-cc-input-group-prepend>
+
+        </div>
+
+        <div class="col-5">
+            <app-cc-input-group-prepend label="Cta Contable" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="dataTransaccion.ref_banco" readonly/>
+            </app-cc-input-group-prepend>
+
+        </div>
+
+        <div class="col-5">
+            <app-cc-input-group-prepend label="Cta. Banco" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="dataTransaccion.num_cuenta" readonly/>
+            </app-cc-input-group-prepend>
+
+        </div>
+
+        <div class="col-5">
+            <app-cc-input-group-prepend label="Tipo cuenta" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="dataTransaccion.tipo_cuenta" readonly/>
+            </app-cc-input-group-prepend>
+
+        </div>
+
+        <div class="col-5">
+            <app-cc-input-group-prepend label="Valor movimiento" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="dataTransaccion.valor" readonly/>
+            </app-cc-input-group-prepend>
+
+        </div>
+
+        <div class="col-5">
+            <app-cc-input-group-prepend label="Número pre-impreso" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="num_preimpreso" placeholder="Ingrese el numero... "/>
+            </app-cc-input-group-prepend>
+
+        </div>
+
+    </div>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>

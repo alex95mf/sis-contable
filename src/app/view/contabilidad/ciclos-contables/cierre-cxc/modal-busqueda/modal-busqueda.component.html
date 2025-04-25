@@ -1,0 +1,63 @@
+<app-button-radio-active titulo="Busqueda de Cierres" cstyle="bg-light" icono="far fa-file-signature"
+    filtroBoton="btnsModalBusqueda" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <!--  -->
+    <fieldset class="border px-3 pb-2 mb-2">
+        <legend class="w-auto bg-dark mb-1">Filtros</legend>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.num_documento">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde" max="9999-12-31">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" max="9999-12-31">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+    <table class="table mat-elevation-z3 table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Num. Documento</th>
+                <th>Fecha</th>
+                <th>Observaciones</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="lst_cierres.length; else noCierres">
+                <tr *ngFor="let element of lst_cierres">
+                    <td>{{ element.num_documento }}</td>
+                    <td>{{ element.fecha }}</td>
+                    <td>{{ element.observaciones }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="selectRow(element)">
+                            <i class="fa fa-hand-pointer"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-template #noCierres>
+                <tr>
+                    <td class="text-center" colspan="4">
+                        <h6>No hay cierres para mostrar</h6>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <mat-paginator
+        showFirstLastButtons
+        [pageIndex]="paginate.pageIndex"
+        [length]="paginate.length"
+        (page)="changePage($event)"
+        showFirstLastButtons>
+    </mat-paginator>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalBusqueda"></cc-spiner-procesar>

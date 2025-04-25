@@ -1,0 +1,138 @@
+<div class="">
+    <app-button-radio-active titulo="Seleccionar Solicitud" filtroBoton="btnContribuyenteForm" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="row my-2 ml-1 mr-1">
+            <div class="col">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row  ml-1 mr-1">
+                        <div class="col-9">
+                            <div class="row">
+                                <!-- <div class="col">
+                                    <app-cc-input-group-prepend label="Razón Social" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.razon_social">
+                                    </app-cc-input-group-prepend>
+                                </div> -->
+                                <!-- <div class="col">
+                                    <app-cc-input-group-prepend label="No. Solicitud" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.num_documento" (keypress)="validaciones.numberOnly($event)">
+                                    </app-cc-input-group-prepend>
+                                </div> -->
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="No. Solicitud" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_num_solicitud" type="text" class="form-control" [(ngModel)]="filter.num_solicitud">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="estadoSelected" (change)="asignarEstado($event)" [clearable]="true">
+                                            <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                                            <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Fecha inicio"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_fecha_ini" type="date" class="form-control"
+                                            [(ngModel)]="filter.fecha_desde">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Fecha fin"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_fecha_fin" type="date" class="form-control"
+                                            [(ngModel)]="filter.fecha_hasta">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="cargarSolicitudes()">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th class="text-center" style="width: 15;">Fecha</th>
+                            <th class="text-center" style="width: 10%;"># Solicitud</th>
+                            <th class="text-center" style="width: 20;">Descripcion</th>
+                            <th class="text-center" style="width: 10%;">No. Proceso</th>
+                            <!-- <th class="text-center">Monto Proceso</th> -->
+                            <th class="text-center" style="width: 10%;">IDP</th>
+                            <th class="text-center" style="width: 10%;">No. Orden</th>
+                            <th class="text-center" style="width: 10%;">Valor</th>
+                            <!-- <th class="text-center">Valor</th> -->
+                            <th class="text-center" style="width: 10%;">Estado</th>                            
+                            <th style="width: 5%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!solicitud.length">
+                            <td colspan="8" class="text-center"><h6>No hay resultados</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let item of dataSource.filteredData, let i = index">
+                            <tr>
+                                <td class="text-center">{{item.solicitud?.fecha_creacion}}</td>
+                                <td >
+                                   {{item.solicitud?.num_solicitud}}<br>
+                                   <small class="text-muted">{{ item.solicitud?.tipo_proceso }}</small> 
+                                </td>                      
+                                <td>{{ item.solicitud?.descripcion }}</td>
+                                <td>{{item.solicitud?.ce_proceso}}</td>
+                                <td>{{ item.solicitud?.idp }}</td>
+                                <td>{{ item.num_orden }}</td> 
+                                <td class="text-right">$ {{ item.valor | number: '1.2-2'}}</td>
+                                <!-- <td class="text-center">$ {{item.valor | number: '1.2-2'}}</td> -->
+                                <td *ngIf="item.solicitud?.estado == 'A'" class="text-center">
+                                  <i class="fas fa-circle text-success"></i> Aprobado
+                                </td>
+                                <td *ngIf="item.solicitud?.estado == 'P'" class="text-center">
+                                  <i class="fas fa-circle text-warning"></i> Pendiente
+                                </td>
+                                <td *ngIf="item.solicitud?.estado == 'D'" class="text-center">
+                                    <i class="fas fa-circle text-danger"></i> Denegado
+                                  </td>                     
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(item)" placement="left" ngbTooltip="Seleccionar Solicitud">
+                                            <i class="fas fa-hand-pointer"></i>
+                                        </button>
+                                        <!-- <button *ngIf="dt.estado == 'A'" class="btn btn-danger btn-sm ml-1" (click)="deleteArancel(dt.id, i)" placement="top" ngbTooltip="Eliminar arancel">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <button *ngIf="dt.estado == 'I'" class="btn btn-info btn-sm ml-1" (click)="restoreArancel(dt.id, i)" placement="top" ngbTooltip="Restaurar arancel">
+                                            <i class="fas fa-undo"></i>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>                     
+                </div>
+                
+                <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

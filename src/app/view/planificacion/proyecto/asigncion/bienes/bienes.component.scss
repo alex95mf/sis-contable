@@ -1,0 +1,70 @@
+.sticky-header {
+    position: sticky;
+    top: 0px;
+    z-index: 2000;
+}
+
+.col-descripcion {
+    left: 0px;
+    position: sticky;
+    z-index: 1;
+    background-color: #FFFFFF;
+}
+
+.ngb-tooltip {
+    z-index: 9999; /* Puedes ajustar este valor según sea necesario */
+  }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .custom-tooltip {
+    position: absolute;
+    z-index: 99999; /* Asegura que esté por encima de otros elementos */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.custom-tooltip {
+  position: absolute;
+  z-index: 99999; /* Asegura que esté por encima de otros elementos */
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin-top: 4px
+}
+
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #ccc;
+  top: -8px;
+  left: calc(5% - 8px);
+}

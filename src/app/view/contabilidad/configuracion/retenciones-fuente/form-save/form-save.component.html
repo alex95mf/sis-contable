@@ -1,0 +1,104 @@
+<app-button-radio-active [titulo]="isNew ? 'Nueva Retención' : 'Editar Retención'" filtroBoton="btnRetForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+    <div class="row">
+
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="retencion.descripcion" maxlength="120">
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Porcentaje" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="retencion.porcentaje" maxlength="5">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Código fuente" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="retencion.codigo_fuente" maxlength="5">
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Código anexo" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="retencion.codigo_anexo" maxlength="5">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Código concepto" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="retencion.codigo_concepto" maxlength="5">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Código valor retenido" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="retencion.codigo_valor_retenido" maxlength="5">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Código concepto retenido" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="retencion.codigo_concepto_retenido" maxlength="5">
+            </app-cc-input-group-prepend>
+        </div>
+
+        
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Formulario" styleSpan="size-span-campo font-weight-bold">
+                <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="retencion.formulario">
+                    <ng-option disabled [value]="0">¿Tiene formulario?</ng-option>
+                    <ng-option *ngFor="let op of formulario" [value]="op.valor">{{ op.label}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Cuenta inversión" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly  [(ngModel)]="retencion.cuenta" placeholder="Cuenta Principal" maxlength="15">
+                <button class="btn btn-primary btn-sm" (click)="modalCuentas('1')" > Consultar</button>
+                <!-- <datalist id="lst_ctas_deudoras">
+                    <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                </datalist> -->
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Nombre cuenta inversión" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="retencion.desc_cuenta" type="text" readonly/>
+                
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Cuenta corriente" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly  [(ngModel)]="retencion.cuenta_corriente" placeholder="Cuenta Corriente" maxlength="15">
+                <button class="btn btn-primary btn-sm" (click)="modalCuentas('2')" > Consultar</button>
+                <!-- <datalist id="lst_ctas_deudoras">
+                    <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                </datalist> -->
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Nombre cuenta corriente" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="retencion.desc_cuenta_corriente" type="text" readonly/>
+                
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Cuenta producción" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly  [(ngModel)]="retencion.cuenta_produccion" placeholder="Cuenta Producción" maxlength="15">
+                <button class="btn btn-primary btn-sm" (click)="modalCuentas('3')" > Consultar</button>
+                <!-- <datalist id="lst_ctas_deudoras">
+                    <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                </datalist> -->
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Nombre cuenta producción" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="retencion.desc_cuenta_produccion" type="text" readonly/>
+                
+            </app-cc-input-group-prepend>
+        </div>
+
+    </div>
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

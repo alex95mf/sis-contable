@@ -1,0 +1,129 @@
+<br>
+<app-button-radio-active titulo="Documentos" cstyle="bg-gradient-primary text-white" filtroBoton="btnsDocNom" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-newspaper-o"> 
+
+    <div class="contenedor-scrol-tab">
+
+        <div class="row">
+            <div class="col-sm" id="divListaDocNom">
+                <fieldset class="border p-2 mb-2 mt-3">
+                    <legend class="w-auto h6">Listado</legend>
+                    <div class="row-fluid">
+                        <div class="text-right">
+                            <app-paginator [pageSize]="setPageSize"></app-paginator>
+                        </div>
+                        <div class="example-container">
+                            <div class="example-table-container">
+                                <table mat-table [dataSource]="dataSource" class="table table-sm table-hover table-bordered" matSort>
+                                    <ng-container matColumnDef="id_anexos" class="quitar-espacio">
+                                        <th mat-header-cell class="mat-header-group text-center" *matHeaderCellDef mat-sort-header>ID.</th>
+                                        <td mat-cell *matCellDef="let valor" data-label="id_anexos" class="text-center">
+                                            {{valor.id_anexos}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="id_empleado" class="quitar-espacio">
+                                        <th mat-header-cell class="mat-header-group text-center" *matHeaderCellDef mat-sort-header>Empleado</th>
+                                        <td mat-cell *matCellDef="let valor" data-label="id_empleado" class="text-center">
+                                            {{obtenerEmpleado(valor.identifier)}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="original_name">
+                                        <th mat-header-cell class="mat-header-group text-center flex-grow-2" *matHeaderCellDef mat-sort-header>Nombre de documento</th>
+                                        <td mat-cell *matCellDef="let valor" data-label="original_name" class="text-center flex-grow-2">
+                                            {{valor.original_name}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="description">
+                                        <th mat-header-cell class="mat-header-group text-center" *matHeaderCellDef mat-sort-header>Descripcion Documento</th>
+                                        <td mat-cell *matCellDef="let valor" data-label="description" class="text-center">
+                                            {{valor.description}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="status">
+                                        <th mat-header-cell class="mat-header-group text-center flex-grow-2" *matHeaderCellDef mat-sort-header>Estado </th>
+                                        <td mat-cell *matCellDef="let valor" data-label="status" class="text-center flex-grow-2">
+                                            {{valor.status=='A'?'ACTIVO':'INACTIVO'}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="accion">
+                                        <th mat-header-cell class="mat-header-group text-center flex-grow-0 flex-shrink-0 flex-basis-100"*matHeaderCellDef>Accion </th>
+                                        <td mat-cell *matCellDef="let valor" data-label="accion" class="text-center flex-grow-0 flex-shrink-0 flex-basis-100">
+                                            <i class="btn fa fa-pencil-square-o fa-lg" (click)="seleccionaritem(valor)" matTooltip="Ir a Modificar" style="color: #337ab7;"></i>    
+                                            <i class="btn fa fa fa-eye fa-lg" (click)="verDocumentos(valor)" matTooltip="Ver Documento" style="color: #33b754;"></i>    
+                                            <i class="btn fa fa-trash-o fa-lg" (click)="eliminarDocumento(valor)" matTooltip="Eliminar" style="color:orangered;"></i>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="my-mat-row"></tr>
+                                </table>
+                                <div *ngIf="dataSource.filteredData.length===0">NO HAY DATOS QUE PRESENTAR</div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+    
+            <div class="col-sm collapse" id="divDocNom">
+                <fieldset class="border p-3 mb-2 mt-3">
+                    <legend class="w-auto h6">Información de Documento</legend>
+                    <div class="row justify-content-center" *ngIf="permisions">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo">
+                                                <select [(ngModel)]="empleSeleccionadodoc" name="emple" id="emplecarga" class="form-control form-control-sm custom-select estilo-combos"  [disabled]="permisions[0].editar == '0'">
+                                                    <option *ngFor="let d of dataEmpleado" [value]="d.id_personal">{{d.nombres}}</option>
+                                                </select>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo">
+                                                <textarea placeholder="Ingrese descripción" type="text" maxlength="200" name="des"  [(ngModel)]="desCatalogo" rows="2" class="form-control form-control-sm text" [disabled]="permisions[0].editar == '0'" id="Iddescripcion">
+                                                </textarea>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                                                <select class="form-control form-control-sm custom-select estilo-combos" name="estado" [(ngModel)]="estadoSeleccionado" [disabled]="permisions[0].editar == '0'" id="Idestado">
+                                                    <option value="A">Activo</option>
+                                                </select>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <app-cc-input-group-prepend label="Imagen PDF" styleSpan="size-span-campo">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" style="height: 48px;"><img src="assets/img/file.png" width="35"></span>
+                                                    <label class="btn sub" for="ficher"><i class="fa fa-upload" aria-hidden="true" style="font-size:14px;"></i>SELECCIONE ARCHIVO</label>
+                                                    <input type="file" id="ficher" lang="es" accept=".pdf,.doc,.docx,.xlsx,.xls,.pptx" name="file" (change)="subiendoando($event.target.files)" [disabled]="permisions[0].editar == '0'">
+                                                </div>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <!-- <div class="col-sm-12 justify-content-end" *ngIf="id_archivo!=undefined">
+                                            <button class="btn btn-sm tooltip-test my-1 boton-descargar" (click)="downloadAnexo()" title="Descargar documento" [disabled]="permisions[0].editar == '0'">
+                                                <i class="fa fa-download"></i>Descargar</button>
+                                        </div> -->
+                                        <div class="col-sm-12">
+                                            <app-cc-input-group-prepend label="Documento" styleSpan="size-span-campo">
+                                                <input type="text" class="form-control form-control-sm" style="height: 32px;" disabled [value]="filesSelect!=undefined?filesSelect.name:''">
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row cont">
+                                        <div class="col-md-12">
+                                            <ngx-doc-viewer [url]="generalDocument" viewer="url" style="width:100%;height:50vh;"></ngx-doc-viewer>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</app-button-radio-active> 
+    
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCargFam"></cc-spiner-procesar>

@@ -1,0 +1,142 @@
+<br>
+<app-button-radio-active titulo="Ingreso de datos para el vale" cstyle="bg-gradient-primary text-white" filtroBoton="btnIngVale" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Caja chica" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="smallBox.fk_caja_chica" id="idSmallBox" (ngModelChange)="rerender()">
+                    <option [value]="0">Seleccione Caja</option>
+                    <option *ngFor="let d of arrayBox" [value]="d.id_caja_chica">{{d.nombre_caja}}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Tipo gasto" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="smallBox.fk_tipo_mov" id="idTipMov" (ngModelChange)="setTotalTwo()" [disabled]="smallBox.fk_caja_chica == 0">
+                    <option [value]="0">Seleccione Gasto</option>
+                    <option *ngFor="let d of arrayTpGasto" [value]="d.fk_cuenta_contable">{{d.nombre_cuenta}}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-2">
+            <app-cc-input-group-prepend label="Monto Asig." styleSpan="size-span-otro">
+                <input placeholder="nombre quien recibe" type="number" class="form-control form-control-sm text-right" [(ngModel)]="smallBox.monto" [disabled]="true">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-2">
+            <app-cc-input-group-prepend label="Sub Total" styleSpan="size-span-otro">
+                <input type="number" class="form-control form-control-sm  text-right" id="idSubtotal" [(ngModel)]="smallBox.sub_total" min="0" [disabled]="smallBox.fk_caja_chica == 0 ||  smallBox.fk_tipo_doc   == 21 || smallBox.fk_tipo_doc   == 0 || disbInfo" (keyup)="calculateTotal()"
+                    (keypress)="commonServices.FormatDecimalVal($event)">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Tipo documento" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="smallBox.fk_tipo_doc" id="idTipDoc" [disabled]="smallBox.fk_caja_chica == 0" (ngModelChange)="setTotal()">
+                    <option [value]="0">Seleccione Documento</option>
+                    <option *ngFor="let d of arrayTypeDoc" [value]="d.id">{{d.nombre}}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Centro Costo" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" [disabled]="smallBox.fk_caja_chica == 0" [(ngModel)]="smallBox.fk_centro_costo">
+                    <option [value]="0">Seleccione centro costo</option>
+                    <option *ngFor="let d of arrayCentroCosto" [value]="d.id">{{d.nombre}}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-2">
+            <app-cc-input-group-prepend label="Saldo" styleSpan="size-span-otro">
+                <input placeholder="numero autorización" type="number" class="form-control form-control-sm text-right" [(ngModel)]="smallBox.saldo" [disabled]="true">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-2">
+            <app-cc-input-group-prepend label="Iva {{smallBox.iva}}%" styleSpan="size-span-otro">
+                <input placeholder="numero autorización" type="number" class="form-control form-control-sm text-right" id="iIvaValor" [(ngModel)]="smallBox.iva_valor" min="0" [disabled]="true" (keypress)="commonServices.FormatDecimalVal($event)">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="No. Autorización" styleSpan="size-span-campo">
+                <input placeholder="Número autorización" type="number" [disabled]="smallBox.fk_caja_chica == 0" class="form-control form-control-sm" id="idNumAut" [(ngModel)]="smallBox.num_aut" min="0" (keypress)="commonServices.FormatDecimalVal($event)">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo">
+                <input placeholder="Nombre quien recibe" type="text" class="form-control form-control-sm" id="idNameBen" [(ngModel)]="smallBox.beneficiario" [disabled]="smallBox.fk_caja_chica == 0">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-2">
+            <app-cc-input-group-prepend label="Reposición" styleSpan="size-span-otro">
+                <input placeholder="Número autorización" type="number" class="form-control form-control-sm text-right" [(ngModel)]="smallBox.reposicion" [disabled]="true">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-2">
+            <app-cc-input-group-prepend label="Total" styleSpan="size-span-otro">
+                <input placeholder="Número documento" type="number" class="form-control form-control-sm text-right" id="idTotal" [(ngModel)]="smallBox.total" min="0" [disabled]="true" (keypress)="commonServices.FormatDecimalVal($event)">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo">
+                <input placeholder="Número Documento" type="number" class="form-control form-control-sm" id="idmudoc" [(ngModel)]="smallBox.num_doc" min="0" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="smallBox.fk_caja_chica == 0">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4" *ngIf="disbInfo">
+            <app-cc-input-group-prepend label="Valor del vale" styleSpan="size-span-campo">
+                <input type="number" class="form-control form-control-sm text-right" id="idValMov" [disabled]="smallBox.fk_caja_chica == 0 || !disbInfo" [(ngModel)]="smallBox.valor_mov" min="0" (keypress)="commonServices.FormatDecimalVal($event)">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo">
+                <textarea class="form-control" rows="1" [(ngModel)]="smallBox.concepto" placeholder="Ingrese concepto del vale" [disabled]="smallBox.fk_caja_chica == 0" id="idconcepto"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+
+    <fieldset class="border p-2 mb-2 mt-2 filters">
+        <legend class="w-auto h6">Detalle de vales</legend>
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+            <thead class="thead">
+                <tr style="width: 100%;">
+                    <th style="width: 20%;">beneficiario</th>
+                    <th style="width: 15%;">valor</th>
+                    <th style="width: 15%;">fecha</th>
+                    <th style="width: 35%;">concepto</th>
+                    <th style="width: 15%;text-align: center;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="validaDt">
+                <tr *ngFor="let dt of arrayMov">
+                    <td>{{ dt.beneficiario }}</td>
+                    <td style="text-align: right;padding-right: 10px;">{{ dt.value_total_mov}} $</td>
+                    <td>{{ dt.fecha_mov }}</td>
+                    <td>
+                        <div style="max-height: 25px;overflow-y: scroll;" placement="left" ngbTooltip="{{ dt.concepto }}">
+                            {{ dt.concepto }}
+                        </div>
+                    </td>
+                    <td style="text-align: center;">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="updatedInfo(dt)" placement="left" ngbTooltip="Modificar vale">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" (click)="deleteInfo(dt)" placement="left" ngbTooltip="Eliminar vale">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spValIng"></cc-spiner-procesar>

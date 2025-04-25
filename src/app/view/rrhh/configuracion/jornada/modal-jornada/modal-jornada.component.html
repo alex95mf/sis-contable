@@ -1,0 +1,91 @@
+<div class="">
+
+    <app-button-radio-active titulo="Seleccionar Jornada" filtroBoton="btnJornadaForm" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="row my-2">
+            <div class="col">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row">
+                        <div class="col-9" >
+                            <div class="row justify-content-md-center">
+
+                                <div class="col-4">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend"><span class="input-group-text">Descripción</span></div>
+                                        <input type="text" class="form-control form-control-sm"  [(ngModel)]="filter.descripcion">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="aplicarFiltros()">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            
+        </div>
+        <div class="row my-2">
+
+            <div class="col-12">
+            <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <!-- <th style="width: 4%;">Estado</th> -->
+                        <th style="width: 45%;">Descripción</th>
+                        <th style="width: 15%;">Tiempo Almuerzo</th>
+                        <th style="width: 15%;">Almuerza</th>
+                        <th style="width: 15%;">Estado</th>
+                        <th style="width: 10%;">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!Jornadas.length">
+                        <td colspan="9" class="text-center"><h6>No hay resultados</h6></td>
+                    </tr>
+                    <ng-container *ngFor="let dt of Jornadas, let i = index">
+                        <tr>
+                            
+                            <td class="text-center"> {{dt.jnd_tipo_jornada}}</td>
+                            <td class="text-center"> {{dt.tiempo_almuerzo.cat_nombre}}</td>
+                            <td class="text-center">{{dt.estado_almuerza.cat_nombre}} </td>
+                            <td class="text-center">{{dt.estado.cat_nombre}}</td>
+                            
+
+                            <td>
+                                <div class="text-center mx-auto">
+                                    <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar Jornada">
+                                        <i class="fas fa-hand-pointer"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+                
+            </table>                    
+            </div>
+            <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="+(paginate.page)-1"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+
+        
+    </div>
+
+    </app-button-radio-active>
+
+</div>
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spLiquidaciones"></cc-spiner-procesar>

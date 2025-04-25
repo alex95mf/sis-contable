@@ -1,0 +1,40 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-file-pdf"
+        filtroBoton="btnsRenConsultaReporte" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border pb-2 px-2 my-2">
+            <legend class="w-auto bg-dark ml-1 mb-0">Filtros</legend>
+            <div class="row">
+                <!-- <div class="col">
+                    <app-cc-input-group-prepend label="Tipo de Reporte" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select [items]="tipoReportes" bindValue="id" bindLabel="name" [(ngModel)]="selectedReporte" class="form-control" [clearable]="false"></ng-select>
+                    </app-cc-input-group-prepend>
+                </div> -->
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Tipo de Reporte" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select [(ngModel)]="selectedReporte" class="form-control" [clearable]="false">
+                            <ng-option *ngFor="let r of reportes" [value]="r.reporte">{{ r.modulo }} - {{ r.name }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-otro font-weight-bold">
+                        <ng-select [(ngModel)]="selectedConcepto" class="form-control" [clearable]="false">
+                            <ng-option *ngFor="let concepto of conceptos" [value]="concepto.codigo">{{ concepto.codigo }} - {{ concepto.name }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-otro font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="fecha_desde">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-otro font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="fecha_hasta">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="renConsultaReporte"></cc-spiner-procesar>

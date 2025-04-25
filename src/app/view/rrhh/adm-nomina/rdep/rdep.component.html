@@ -1,0 +1,182 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-tasks" filtroBoton="btnsRdep" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row my-2">
+
+            <!-- <div class="col-4">
+                <div class="input-group input-group-sm">                    
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width:120px;">Periodo</span></div>
+                    <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Periodo" [(ngModel)]="filter.periodo" [disabled]="yearDisabled" (keypress)="onlyNumber($event)">
+                </div>
+            </div> -->
+            <!-- <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo text-bold"
+                            id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Período</span>
+                    </div>
+                    <p-calendar
+                        (ngModelChange)="periodoSelected($event,periodo)"
+                        [readonlyInput]="true" 
+                        view="year" 
+                        dateFormat="yy" 
+                        [(ngModel)]="periodo" 
+                        [showIcon]="true" 
+                        class="ui-calendar ui-calendar-button"
+                        inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                        [inputStyle]="{'height':'30px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                    </p-calendar>
+                </div>
+            </div> -->
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Período" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="filter.periodo"
+                        [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            
+            
+
+            <!-- <div class="col-4">
+                <div class="input-group input-group-sm">                    
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width:120px;">Tipo</span></div>
+                        <ng-select id="estado" class="form-control" [(ngModel)]="tipoSelected" (change)="asignarTipo($event)" [clearable]="false">
+                            <ng-option disabled [value]="0" disabled>Seleccione un Tipo</ng-option>
+                            <ng-option *ngFor="let op of tipoList" [value]="op.value">{{ op.label }}</ng-option>
+                        </ng-select>
+                </div>
+            </div>
+            <div class="col-4">
+                <input type="checkbox" [(ngModel)]="checkPrograma" [disabled]="resumen" (change)="programaChecked()"> Por Programa
+            </div> -->
+        </div>
+        <div  class="row">
+            <div class="col-sm-5">
+                <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" 
+                    [(ngModel)]="filter.empleado">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <!-- <div class="row my-2">
+            <div class="col-4">
+                    <app-cc-input-group-prepend label="Procesos" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="proceso" [disabled]="procesoDisabled" class="form-control form-control-sm" (change)="asignarProceso($event)" [(ngModel)]="procesoSelected" [clearable]="false">
+                            <ng-option disabled [value]="0" disabled>Seleccione un Proceso</ng-option>
+                            <ng-option *ngFor="let op of procesos" [value]="op.valor">{{op.descripcion }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+            </div>
+        </div> -->
+        <div class="row mb-2">
+            <div class="col">
+                <div class="table-responsive" style="max-height: 800px;overflow-y:auto;">
+                    <table class="table table-bordered no-footer table-hover mb-0" style="overflow-y:auto;">
+                        
+                        <thead class="thead-dark sticky-header">
+                            <tr style="font-size: 12px;">
+                                <th style="min-width:200px">Tipo de identificación del trabajador</th>
+                                <th style="min-width:200px" class="col-cedula">Número de identificación del trabajador</th>
+                                <th style="min-width:200px" class="col-apellido">Apellidos del trabajador</th>
+                                <th style="min-width:200px" class="col-nombre">Nombres del trabajador</th>
+                                <th style="min-width:150px">Código del establecimiento</th>
+                                <th style="min-width:150px">Tipo de residencia</th>
+                                <th style="min-width:150px">País de residencia</th>
+                                <th style="min-width:200px">¿Aplica convenio para evitar doble imposición?</th>
+                                <th style="min-width:200px">Condición del trabajador respecto a discapacidades</th>
+                                <th style="min-width:150px">Porcentaje de discapacidad</th>
+                                <th style="min-width:350px">Tipo de identificación de la persona con discapacidad a quien sustituye o representa</th>
+                                <th style="min-width:350px">Número de identificación de la persona con discapacidad a quien sustituye o representa</th>
+                                <th style="min-width:100px">Sueldos y salarios</th>
+                                <th style="min-width:200px">Sobresueldos, comisiones, bonos y otros ingresos gravados</th>
+                                <th style="min-width:100px">Participación de utilidades</th>
+                                <th style="min-width:200px">Ingresos gravados generados con otros empleadores</th>
+                                <th style="min-width:200px">Impuesto a la Renta asumido por este empleador</th>
+                                <th style="min-width:100px">Décimo tercer sueldo</th>
+                                <th style="min-width:100px">Décimo cuarto sueldo</th>
+                                <th style="min-width:100px">Fondo de reserva</th>
+                                <th style="min-width:200px">Compensación Económica Salario Digno</th>
+                                <th style="min-width:350px">Otros ingresos en relación de dependencia que no constituyen renta gravada</th>
+                                <th style="min-width:200px">Ingresos gravados con el empleador</th>
+                                <th style="min-width:100px">Tipo sistema salario neto</th>
+
+                                <th style="min-width:200px">Aporte personal al IESS con este empleador</th>
+                                <th style="min-width:200px">Aporte personal al IESS con otros empleadores</th>
+                                <th style="min-width:100px">Gastos personales por vivienda</th>
+                                <th style="min-width:100px">Gastos personales por salud</th>
+                                <th style="min-width:200px">Gastos personales por educación arte y cultura</th>
+                                <th style="min-width:200px">Gastos personales por alimentación</th>
+                                <th style="min-width:200px">Gastos personales por vestimenta</th>
+                                <th style="min-width:100px">Gastos personales por turismo</th>
+                                <th style="min-width:100px">Exoneración por discapacidad</th>
+                                <th style="min-width:100px">Exoneración por tercera edad</th>
+                                <th style="min-width:80px">Base imponible gravada</th>
+                                <th style="min-width:100px">Impuesto a la Renta causado</th>
+                                <th style="min-width:100px">Rebaja por gastos personales</th>
+                                <th style="min-width:350px">Impuesto a la renta despues de la rebaja de gastos personales</th>
+                                <th style="min-width:200px">I. Renta retenido y asumido por otros empleadores</th>
+                                <th style="min-width:200px">I. Renta asumido por este empleador</th>
+                                <th style="min-width:200px">I. Renta retenido al trabajador</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container>
+                                <tr>
+                                    <td *ngIf="arrayRdep.length==0" colspan="11" class="text-center" >
+                                        No se encontró data
+                                    </td>
+                                </tr>
+                                <tr *ngFor="let d of arrayRdep, let i = index">
+                                    <td>{{ d.tipidret }}</td>
+                                    <td class="col-cedula">{{ d.numruc }}</td>
+                                    <td class="col-apellido">{{ d.apellidotrab }}</td>
+                                    <td class="col-nombre">{{ d.nombretrab }}</td>
+                                    <td>{{ d.estab }}</td>
+                                    <td>{{ d.residenciatrab }}</td>
+                                    <td>{{ d.paisresidencia }}</td>
+                                    <td>{{ d.aplicaconvenio }}</td>
+                                    <td>{{ d.tipotrabajdiscap }}</td>
+                                    <td>{{ d.porcentajediscap }}</td>
+                                    <td>{{ d.tipiddiscap }}</td>
+                                    <td>{{ d.iddiscap }}</td>
+                                    <td class="text-right">$ {{ d.suelsal | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.sobsuelcomremu | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.partutil | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.intgrabgen | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.imprentempl | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.decimter | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.decimcuar | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.fondoreserva | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.salariodigno | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.otrosingrengrav | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.inggravconrsteempl | number:'1.2-2' }}</td>
+                                    <td>{{ d.sissalnet }}</td>
+                                    <td class="text-right">$ {{ d.apoperiess | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.aporperiessconotrosempls | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.deducvivienda | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.deducsalud | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.deduceducartcult | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.deducaliement | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.deducvestim | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.deduccionturismo | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.exodiscap | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.exotered | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.basimp | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.imprentcaus | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.rebajagastospersonales | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.impuestorentarebajagastospersonales | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.valretasuotrosempls | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.valimpasuesteempl | number:'1.2-2' }}</td>
+                                    <td class="text-right">$ {{ d.valret | number:'1.2-2' }}</td>
+                                </tr>                     
+                            </ng-container>
+        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSpiner" lfulScren=true lTipo="spRdep"></cc-spiner-procesar>

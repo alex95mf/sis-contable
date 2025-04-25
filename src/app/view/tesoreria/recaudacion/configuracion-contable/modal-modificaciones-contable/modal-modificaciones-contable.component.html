@@ -1,0 +1,113 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-money-check-edit-alt"
+    filtroBoton="btnsConfiguracionContable" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Tipos de pago" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="data.submodulo" (ngModelChange)="changeTipoPago($event)"
+                    [items]="tipoPagos" bindValue="valor" bindLabel="descripcion">
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6" *ngIf="tipo_pagoVal">
+            <app-cc-input-group-prepend label="Recibido Por:" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control form-control-sm" [(ngModel)]="data.empleado"  readonly placeholder="Recibido... "/>
+                <button class="btn btn-primary btn-sm" (click)="modalEncargado(1)" >Buscar</button>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend [label]="lbl_formapago" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="data.forma_pago" [clearable]="false"
+                    [items]="lst_forma_pago" bindValue="valor" bindLabel="descripcion">
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="data.descripcion" maxlength="120">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Cuenta Deudora" styleSpan="size-span-campo font-weight-bold">
+                <input list="lst_ctas_deudoras" type="text" class="form-control custom-select" readonly  [value]="data.cuenta_deudora" placeholder="Cuenta Deudora" maxlength="15">
+                <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('Deudora')" > Consultar</button>
+                <!-- <datalist id="lst_ctas_deudoras">
+                    <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                </datalist> -->
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Nombre cuenta Deudora" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [value]="descripcion_deudora" type="text" readonly/>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div *ngIf="data.submodulo != 'PAG_TIPO_DESEMBOLSO'">
+        <div class="row">
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Cuenta Acreedora" styleSpan="size-span-campo font-weight-bold">
+                    <input list="lst_ctas_acreedoras" type="text" class="form-control custom-select" readonly [value]="data.cuenta_acreedora"  placeholder="Cuenta Acreedora" maxlength="15">
+                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('Acreedora')" > Consultar</button>
+                    <!-- <datalist id="lst_ctas_acreedoras">
+                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                    </datalist> -->
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Nombre cuenta Acreedora" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [value]="descripcion_acreedora" type="text" readonly/>
+        
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <app-cc-input-group-prepend label="C&oacute;digo Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                    <input list="lst_ctas_presupuesto" type="text" class="form-control custom-select" readonly  [value]="data.codigo_presupuesto"  placeholder="C&oacute;digo Presupuesto" maxlength="15">
+                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" > Consultar</button>
+                    <!-- <datalist id="lst_ctas_presupuesto">
+                        <option *ngFor="let cta of cuentas.presupuesto" [value]="cta.codigo">{{ cta.codigo }} {{ cta.nombre }}</option>
+                    </datalist> -->
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Nombre cuenta Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [value]="descripcion_presupuesto" type="text" readonly/>
+        
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <!-- <input class="form-control" [(ngModel)]="descripcion_presupuesto" type="text" readonly/> -->
+                <ng-select class="form-control form-control-sm" [(ngModel)]="data.estado" [clearable]="false"
+                    [items]="estados" bindValue="valor" bindLabel="descripcion">
+                </ng-select>
+    
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lTipo="spModalModifContable"></cc-spiner-procesar>

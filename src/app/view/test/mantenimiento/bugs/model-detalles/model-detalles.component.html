@@ -1,0 +1,70 @@
+<app-button-radio-active [titulo]="titleModal" cstyle="bg-light" icono="fas fa-bug"
+    filtroBoton="btnsMantenimientoBubsModal" 
+    [groupButton]="vmButtons" 
+    (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-print font-weight-bold">
+                <input id="fecha" type="date" class="form-control" [(ngModel)]="bugNuevo.fecha">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Tipo de Identificacion" styleSpan="size-span-print font-weight-bold">
+                <ng-select [items]="cmb_tipo_identificacion" bindValue="valor" bindLabel="valor"
+                    [(ngModel)]="bugNuevo.tipo_documento" class="form-control"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-print font-weight-bold">
+                <input  type="text" class="form-control" readonly 
+                [ngModel]="bugNuevo.contribuyente?.razon_social">
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-primary" (click)="expandcontribuyente()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </app-cc-input-group-prepend>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Costo " styleSpan="size-span-print font-weight-bold">
+                <input currencyMask class="form-control" [(ngModel)]="bugNuevo.costo">
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-6">
+        
+            <app-cc-input-group-prepend label="Estado Bug" styleSpan="size-span-print font-weight-bold">
+                <ng-select [items]="lstestados" bindValue="estado" bindLabel="estado"
+                [(ngModel)]="bugNuevo.estado"
+                    class="form-control"></ng-select>
+        
+            </app-cc-input-group-prepend>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Observacion" 
+                styleSpan="size-span-print font-weight-bold">
+                <textarea id="observ/acion" type="text" class="form-control form-control-sm" 
+                placeholder="Observación" 
+                [(ngModel)]="bugNuevo.observacion" maxlength="300"></textarea>
+            </app-cc-input-group-prepend>
+
+            
+
+
+        </div>
+
+    </div>
+</app-button-radio-active>
+
+<cc-spiner-procesar ltexto="Guardando......"></cc-spiner-procesar>

@@ -1,0 +1,93 @@
+<div *ngIf="categoria_esp_publicitario" >
+    <app-button-radio-active [titulo]="esNuevaCatEspPub ? 'Nueva Categoria de Esp. Publicitarios' : 'Editar Categoria de Esp. Publicitarios'" filtroBoton="btnsFormCategoriasEspPublicitarios" cstyle="bg-gradient-primary text-white" [groupButton]="botonera" (onMetodoGlobal)="metodoGlobal($event)" [icono]="esNuevaCatEspPub ? 'far fa-plus-square' : 'far fa-edit'">
+        <div class="row mt-3">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Nivel" styleSpan="font-weight-bold size-span-campo">
+                    <input id="nivel" type="text" maxlength="9" (keypress)="onlyNumberDot($event)" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.nivel" min="0" (keypress)="validaciones.numberOnly($event)">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Grupo" styleSpan="font-weight-bold size-span-campo">
+                    <!--<input id="grupo" type="text" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.grupo" maxlength="15" (keypress)="validaciones.numberOnly($event)">-->
+                    <input id="grupo" type="text" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.grupo">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Tipo" styleSpan="font-weight-bold size-span-campo">
+                    <ng-select id="tipo" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.tipo" (change)="manejarTipo($event)">
+                        <ng-option disabled [value]="0">Seleccione un tipo</ng-option>
+                        <ng-option *ngFor="let op of lista_tipos" [value]="op">{{ op.descripcion + " - " + op.valor }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="font-weight-bold size-span-campo">
+                    <input id="nombre" type="text" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.nombre" readonly>
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-4">
+                <app-cc-input-group-prepend label="F&oacute;rmula" styleSpan="font-weight-bold size-span-campo">
+                    <input id="formula" type="text" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.formula" maxlength="50">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Porcentaje" styleSpan="font-weight-bold size-span-campo">
+                    <input id="porcentaje" type="text" maxlength="9" (keypress)="onlyNumberDot($event)" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.porcentaje" min="0" max="1">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Medida Inicial" styleSpan="font-weight-bold size-span-campo">
+                    <input id="medida_desde" type="text" maxlength="9" (keypress)="onlyNumberDot($event)" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.medida_desde" min="0">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Medida Final" styleSpan="font-weight-bold size-span-campo">
+                    <input id="medida_hasta" type="text" maxlength="9" (keypress)="onlyNumberDot($event)" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.medida_hasta" min="0">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Excedente Inicial" styleSpan="font-weight-bold size-span-campo">
+                    <input id="excedente_desde" type="text" maxlength="9" (keypress)="onlyNumberDot($event)" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.excedente_desde" min="0">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Excedente Final" styleSpan="font-weight-bold size-span-campo">
+                    <input id="excedente_hasta" type="text" maxlength="9" (keypress)="onlyNumberDot($event)" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.excedente_hasta" min="0">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Recargo (%)" styleSpan="font-weight-bold size-span-campo">
+                    <input id="recargo" type="text" maxlength="9" (keypress)="onlyNumberDot($event)" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.recargo" min="0">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-8">
+                <app-cc-input-group-prepend label="Observaciones" styleSpan="font-weight-bold size-span-campo">
+                    <input id="observacion" type="text" class="form-control form-control-sm" [(ngModel)]="categoria_esp_publicitario.observacion" maxlength="100">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <br>
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="texto_barra_carga" lfulScren=true lTipo="formCategoriasEspPublicitarios"></cc-spiner-procesar>

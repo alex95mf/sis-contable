@@ -1,0 +1,61 @@
+<app-button-radio-active titulo="Cambio de Cuenta" cstyle="bg-light" icono="fas fa-sync-alt"
+    filtroBoton="btnsModalCuentasEmi" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border pb-2 px-3">
+        <legend class="w-auto bg-dark">filtros</legend>
+        <div class="row">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Codigo" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" [(ngModel)]="filter.codigo">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" [(ngModel)]="filter.nombre">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </div>
+            <div class="col text-right">
+                <button class="btn btn-sm btn-primary" (click)="consultar()">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+                <button class="btn btn-sm btn-danger ml-1">
+                    <i class="fas fa-eraser"></i>
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</app-button-radio-active>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Grupo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cuenta of cuentas" (click)="onRowSelect(cuenta)">
+                            <td>{{ cuenta.codigo }}</td>
+                            <td>{{ cuenta.nombre }}</td>
+                            <td>{{ cuenta.grupo }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator
+                    [length]="paginate.length"
+                    [showFirstLastButtons]="true"
+                    [pageSize]="paginate.pageSize"
+                    (page)="changePage($event)">
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalCuentasEmi"></cc-spiner-procesar>

@@ -1,0 +1,32 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-list" filtroBoton="btnsLiqQuery"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped"
+                    style="max-height: 200px; overflow-y: scroll;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Documento</th>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let l of liquidaciones">
+                            <td>{{ l.id }}</td>
+                            <td>{{ l.doc }}</td>
+                            <td>{{ l.fecha }}</td>
+                            <td>{{ l.monto }}</td>
+                            <td><button class="btn btn-sm btn-primary" (click)="editLiquidacion(l.id)"><i class="far fa-edit"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renBusqLiq"></cc-spiner-procesar>

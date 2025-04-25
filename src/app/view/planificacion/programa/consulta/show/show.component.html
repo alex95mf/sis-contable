@@ -1,0 +1,30 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Detalle de Plan" filtroBoton="btnsShowPrograma" cstyle="bg-gradient-primary text-white"
+        [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="row">
+            <div class="col-12 mb-3 pb-2 pt-2" style="border-bottom: 1px solid;border-color: rgba(0, 0, 0, 0.205);">
+                <span>Identificador de Programa: {{ programa.id.toString().padStart(10, '0') }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Plan</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" disabled value="{{ programa.nombre }}">
+                </div>
+            </div>
+        
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Presupuesto</span>
+                    </div>
+                    <input type="number" class="form-control form-control-sm" disabled value="{{ programa.presupuesto }}">
+                </div>
+            </div>
+        </div>
+
+    </app-button-radio-active>
+</div>

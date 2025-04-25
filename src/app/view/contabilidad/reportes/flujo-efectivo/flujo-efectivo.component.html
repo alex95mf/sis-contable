@@ -1,0 +1,210 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-file-pdf"
+        filtroBoton="btnsFlujoEfectivo" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border pb-2 px-2 my-2">
+            <legend class="w-auto bg-dark ml-1 mb-0">Filtros</legend>
+            <div class="row ml-1 mr-1">
+                <div class="col-10">
+                    <div class="row mt-0 mb-0">
+                        <div class="col-sm-6">
+                            
+                            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="periodo"
+                                    [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                            <!-- <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo font-weight-bold"
+                                        id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Período</span>
+                                </div>
+                                <p-calendar
+                                    (ngModelChange)="periodoSelected($event,periodo)"
+                                    [readonlyInput]="true" 
+                                    view="year" 
+                                    dateFormat="yy" 
+                                    [(ngModel)]="periodo" 
+                                    [showIcon]="true" 
+                                    class="ui-calendar ui-calendar-button"
+                                    inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                                    [inputStyle]="{'height':'30px','width':'13rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                                </p-calendar>
+                            </div> -->
+                        </div>
+                        <div class="col-sm-6">
+                                <!-- <div class="input-group input-group-sm ">
+                                    <div class="input-group-prepend">
+                                        <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Mes</span>
+                                    </div> -->
+                                    <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select 
+                                        (ngModelChange)="ChangeMesCierrePeriodos($event)"
+                                        class="form-control" 
+                                        id="elemento_pruebas"
+                                        bindLabel="name"
+                                        placeholder="-Todos-"
+                                        appendTo="body"
+                                        [clearable]="false"
+                                        [searchable]="true"
+                                        [disabled]=disabled
+                                        [(ngModel)]="mes_actual">
+                                        <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                            {{item.name}}
+                                        </ng-option>
+                                    </ng-select>
+                                    </app-cc-input-group-prepend>
+                                    
+                                <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row mt-2 mb-3">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-footer table-hover mb-0" style="width: 100%;" >
+                        <thead class="thead-dark" style="top: 0;position: sticky;">
+                            <tr class="text-center">
+                                <!-- <th class="col-num fixed-header" style="width: 75px;">No.</th>-->
+                                <th style="width: 80px;max-width: 80px;">{{headersEnable?titles[0]:'CUENTA'}}</th>
+                                <th class="col-cuenta fixed-header" style="width: 200px;">{{headersEnable?titles[1]:'CONCEPTO'}}</th>
+                                <!-- <th class="col-rec fixed-header" style="width: 150px;">Recaudación</th> -->
+                                <th *ngIf="mes_actual == '1' || mes_actual == '0'  " style="width: 50px;max-width: 50px;">{{headersEnable?titles[2]:'ENE'}}</th>
+                                <th *ngIf="mes_actual == '2' || mes_actual == '0'  " style="width: 50px;max-width: 50px;">{{headersEnable?titles[3]:'FEB'}}</th>
+                                <th *ngIf="mes_actual == '3' || mes_actual == '0'  " style="width: 50px;max-width: 50px;">{{headersEnable?titles[4]:'MAR'}}</th>
+                                <th *ngIf="mes_actual == '4' || mes_actual == '0'  " style="width: 50px;max-width: 50px;">{{headersEnable?titles[5]:'ABR'}}</th>
+                                <th *ngIf="mes_actual == '5' || mes_actual == '0'  " style="width: 50px;max-width: 50px;">{{headersEnable?titles[6]:'MAY'}}</th>
+                                <th *ngIf="mes_actual == '6' || mes_actual == '0'  " style="width: 50px;max-width: 50px;">{{headersEnable?titles[7]:'JUN'}}</th>
+                                <th *ngIf="mes_actual == '7' || mes_actual == '0'  " style="width: 50px;max-width: 50px;">{{headersEnable?titles[8]:'JUL'}}</th>
+                                <th *ngIf="mes_actual == '8' || mes_actual == '0'  " style="width: 50px;max-width: 50px;">{{headersEnable?titles[9]:'AGO'}}</th>
+                                <th *ngIf="mes_actual == '9' || mes_actual == '0' " style="width: 50px;max-width: 50px;">{{headersEnable?titles[6]:'SEP'}}</th>
+                                <th *ngIf="mes_actual == '10' || mes_actual == '0'  " style="width: 50px;max-width: 50px;">{{headersEnable?titles[7]:'OCT'}}</th>
+                                <th *ngIf="mes_actual == '11' || mes_actual == '0'  " style="width: 50px;max-width: 50px;">{{headersEnable?titles[8]:'NOV'}}</th>
+                                <th *ngIf="mes_actual == '12' || mes_actual == '0' " style="width: 50px;max-width: 50px;">{{headersEnable?titles[9]:'DIC'}}</th>
+                                <th style="width: 50px;max-width: 50px;">{{headersEnable?titles[9]:'TOTAL'}}</th>
+                                <!-- <th style="width: 150px;">Acciones</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td *ngIf="reporte.length==0" colspan="15" class="text-center" >
+                                    No se encontró data
+                                </td>
+                            </tr>
+                            <tr *ngFor="let d of reporte, let i = index">
+                                <!-- <td class="text-center col-num fixed-header">
+                                    {{ i + 1 }}
+                                </td> -->
+                                 <!--<td class="text-center"> {{ d.descripcion }}</td> -->
+
+
+                                 <td *ngIf="d.tipo_concepto == 'M' " class="fixed-header col-cuenta ">{{ d.nombre }}<input [hidden]="true" type="text"  class="form-control" readonly [(ngModel)]=d.nombre></td>
+                                 <td *ngIf="d.tipo_concepto == 'D' " class="fixed-header col-cuenta ">{{ d.nombre }}<input [hidden]="true" type="text"  class="form-control" readonly [(ngModel)]=d.nombre></td>
+                                 <td *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;" ><b><em>{{ d.nombre }}</em></b><input [hidden]="true" type="text" class="form-control" readonly [(ngModel)]=d.nombre></td>
+                                 <td *ngIf="d.tipo_concepto == 'T' " class="fixed-header col-cuenta "><b>{{ d.nombre }}</b><input [hidden]="true" type="text"  class="form-control" readonly [(ngModel)]=d.nombre></td>
+                                 <td *ngIf="d.tipo_concepto == 'G' " class="fixed-header col-cuenta "><b><em>{{ d.nombre }}</em></b></td>
+                                 
+                                 
+                                 <td *ngIf="d.tipo_concepto == 'M' " class="fixed-header col-cuenta ">{{ d.descripcion }}<input [hidden]="true" type="text"  class="form-control" readonly [(ngModel)]=d.descripcion></td>
+                                 <td *ngIf="d.tipo_concepto == 'D' " class="fixed-header col-cuenta ">{{ d.descripcion }}<input [hidden]="true" type="text"  class="form-control" readonly [(ngModel)]=d.descripcion></td>
+                                 <td *ngIf="d.tipo_concepto == 'TOT'" style="font-size: 14px;" class="fixed-header col-cuenta "><b><em>{{ d.descripcion }}</em></b><input [hidden]="true" type="text"  class="form-control" readonly [(ngModel)]=d.descripcion></td>
+                                 <td *ngIf="d.tipo_concepto == 'T'" class="fixed-header col-cuenta "><b>{{ d.descripcion }}</b><input [hidden]="true" type="text"  class="form-control" readonly [(ngModel)]=d.descripcion></td>
+                                 <td *ngIf="d.tipo_concepto == 'G' " class="fixed-header col-cuenta "><b><em>{{ d.descripcion }}</em></b></td>
+                                 
+                                 <ng-container *ngIf="mes_actual == 1 || mes_actual == '0' ">
+                                    <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask class="form-control" [(ngModel)]=d.ene style="text-align:right;"></td>
+                                    <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.ene | number:'1.2-2' }}</td>
+                                    <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.ene | number:'1.2-2' }}</b></td>
+                                    <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.ene | number:'1.2-2' }}</em></b></td>
+                                 </ng-container>
+                                 
+                                 <ng-container *ngIf="mes_actual == 2 || mes_actual == '0' ">
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.feb style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.feb | number:'1.2-2' }}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.feb | number:'1.2-2' }}</b></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.feb | number:'1.2-2' }}</em></b></td>
+                                 </ng-container>
+
+                                 <ng-container *ngIf="mes_actual == 3 || mes_actual == '0' ">
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.mar style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.mar | number:'1.2-2' }}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.mar | number:'1.2-2' }}</b></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.mar | number:'1.2-2' }}</em></b></td>
+                                 </ng-container>
+
+                                 <ng-container *ngIf="mes_actual == 4 || mes_actual == '0' ">
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.abr style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.abr | number:'1.2-2' }}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.abr | number:'1.2-2' }}</b></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.abr | number:'1.2-2' }}</em></b></td>
+                                 </ng-container>
+
+                                 <ng-container *ngIf="mes_actual == 5 || mes_actual == '0' ">
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.may style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.may | number:'1.2-2' }}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.may | number:'1.2-2' }}</b></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.may | number:'1.2-2' }}</em></b></td>
+                                 </ng-container>
+                                 <ng-container *ngIf="mes_actual == 6 || mes_actual == '0' ">
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.jun style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.jun | number:'1.2-2' }}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.jun | number:'1.2-2' }}</b></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.jun | number:'1.2-2' }}</em></b></td>
+                                 </ng-container>
+                                 <ng-container *ngIf="mes_actual == 7 || mes_actual == '0' ">
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.jul style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.jul | number:'1.2-2' }}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.jul | number:'1.2-2'}}</b></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.jul | number:'1.2-2'}}</em></b></td>
+                                 </ng-container>
+                                 <ng-container *ngIf="mes_actual == 8 || mes_actual == '0' ">
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.ago style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.ago | number:'1.2-2' }}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.ago | number:'1.2-2' }}</b></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.ago | number:'1.2-2' }}</em></b></td>
+                                 </ng-container>
+                                 <ng-container *ngIf="mes_actual == 9 || mes_actual == '0' ">
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.sep style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.sep | number:'1.2-2' }}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.sep | number:'1.2-2' }}</b></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.sep | number:'1.2-2' }}</em></b></td>
+                                 </ng-container>
+                                 <ng-container *ngIf="mes_actual == 10 || mes_actual == '0' ">
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.oct style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.oct | number:'1.2-2'}}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.oct | number:'1.2-2'}}</b></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.oct | number:'1.2-2'}}</em></b></td>
+                                 </ng-container>
+                                 <ng-container *ngIf="mes_actual == 11 || mes_actual == '0' ">
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.nov style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.nov | number:'1.2-2'}}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.nov | number:'1.2-2'}}</b></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.nov | number:'1.2-2'}}</em></b></td>
+                                 </ng-container>
+                                 <ng-container *ngIf="mes_actual == 12 || mes_actual == '0' ">
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.dic style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.dic | number:'1.2-2'}}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.dic | number:'1.2-2'}}</b></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.dic | number:'1.2-2'}}</em></b></td>
+                                  </ng-container>
+                               
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'M' "><input currencyMask  class="form-control" [(ngModel)]=d.total style="text-align:right;"></td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'D' ">${{ d.total | number:'1.2-2'}}</td>
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'T' "><b>${{ d.total | number:'1.2-2'}}</b></td>                                 
+                                 <td class="text-right"  *ngIf="d.tipo_concepto == 'TOT' " style="font-size: 14px;"><b><em>${{ d.total | number:'1.2-2'}}</em></b></td>                                 
+                                
+                                 <!-- <td class="text-center">
+                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+    
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="renConsultaReporte"></cc-spiner-procesar>
+

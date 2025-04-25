@@ -1,0 +1,23 @@
+export interface DataConciliacion {
+    cerrada?:string;
+    conciliada?:string;
+    conciliado?:string;
+    credito?:number;
+    cuenta_bancaria?:string;
+    cuenta_contable?:string;
+    debito?:number;
+    documento?:string;
+    fecha?:string;
+    id_banco?:number;
+    id_secuencia_asiento?:number;
+    nombre_banco?:string;
+    nombre_cuenta_contable?:string;
+    notas?:string;
+    numero_referencia?:string;
+    referencia?:string;
+    saldo_final?:number;
+    saldo_inicial?:number;
+    secuencial?:number;
+    tipo_movimiento?:string;
+    ultima_conciliacion?:string;
+}

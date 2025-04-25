@@ -1,0 +1,931 @@
+
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<app-button-radio-active-new [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-money-check-edit-alt"
+    filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    
+    <div class="row">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Datos Pago</legend>
+                <div class="row m-0">
+                    <div class="col-3">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text size-span-small"
+                                    style="width: 155px;">No. DE SPI</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="documento.documento">
+                        </div>
+                    </div>
+                 
+                    <div class="col-3" style="width: 21.4575%;
+                        flex: 0 0 21.4575%;max-width: 21.4575%;">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text size-span-print">Fecha</span></div>
+                            <input type="date" class="form-control form-control-sm" [(ngModel)]="documento.fecha">
+                        </div>
+                    </div>
+            
+                    <div class="col-3">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text size-span-campo"
+                                    style="width: 155px;">Comprobante de egreso</span></div>
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="documento.comprobante_egreso"
+                            [disabled]="disabledComprobante">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text size-span-campo"
+                                    style="width: 120px;">Estado</span></div>
+                            <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                                <i placement="bottom"
+                                    [ngbTooltip]="(documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado')"
+                                    [class]="(documento.estado == 'P') ? 'fas fa-circle text-muted' : (documento.estado == 'E') ? 'fas fa-circle text-warning' : ((documento.estado == 'A') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
+                                </i>
+                                {{ (documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' :
+                                ((documento.estado == 'A') ? 'Aprobado' : 'Anulado') }}
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="row m-0">
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text size-span-campo text-white"
+                                    style=" background-color: #404A62;">Observaciones</span></div>
+                            <textarea cols="30" rows="3" maxlength="200" class="form-control form-control-sm"
+                                [(ngModel)]="documento.observacion" [disabled]=" formReadOnly"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row mt-0 mb-0">
+                            <div class="col-11">
+                                <app-cc-input-group-prepend label="Formas de pago" styleSpan="size-span-campo font-weight-bold">
+                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                                        [(ngModel)]="documento.forma_pago" [disabled]="formReadOnly"  (change)="formaPagoSelected($event)">
+                                        <ng-option [value]="0" disabled>Seleccione una forma de pago</ng-option>
+                                        <ng-option *ngFor="let op of formasDePago"
+                                            [value]="op.nombre">{{ op.nombre }}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row mt-0 mb-0">
+                            <div class="col-11">
+                                <app-cc-input-group-prepend label="Cuenta" styleSpan="size-span-campo font-weight-bold">
+                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                                        [(ngModel)]="cuenta" [disabled]="formValid">
+                                        <ng-option [value]="0" disabled>Chosee.. </ng-option>
+                                        <ng-option *ngFor="let item of listaCuentas"
+                                            [value]="item">{{item.name_banks + ' ' + item.num_cuenta }}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-6">
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-2 mt-2">
+                                <div class="custom-control custom-checkbox custom-switch text-dark align-self-center">
+                                    <input class="custom-control-input" id="anular" type="checkbox" [(ngModel)]="anular" (change)="anulacionSelected($event)"  [disabled]="disabledAnular">
+                                    <label class="custom-control-label" for="anular">
+                                        <h6>Anular</h6>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <app-cc-input-group-prepend *ngIf="anular"  label="Motivo Anulación" styleSpan="size-span-campo font-weight-bold">
+                                    <ng-select class="form-control" [(ngModel)]="documento.motivo_anulacion"
+                                        [readonly]="!anular" [items]="cmb_motivo_anulacion" bindValue="valor"
+                                        bindLabel="nombre" placeholder="-Seleccione-">
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+                <div class="row m-0 mb-2" *ngIf="mostrarMovimientos">
+                    <div class="col-3">
+                        <button [disabled]="formValid" class="btn btn-success" (click)="expandirModalMovimiento()">
+                            Movimientos Bancarios
+                        </button>
+            
+                    </div>
+            
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Detalles</legend>
+                <div class="row m-0">
+                    <div class="col-12">
+                        <!-- <nav class="p-2 my-3">
+                            <div class="card-k nav-tabs_flex mb-2" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active font-weight-bold" id="nav-ordenes-tab" data-toggle="tab" href="#nav-ordenes" role="tab"
+                                    aria-controls="nav-ordenes" aria-selected="true">Ordenes de Pago</a>
+                                <a class="nav-item nav-link font-weight-bold" id="nav-asiento-tab" data-toggle="tab" href="#nav-asiento" role="tab"
+                                    aria-controls="nav-asiento" aria-selected="false">Asiento</a>
+                            </div>
+                        </nav> -->
+
+                        <nav>
+                            <div class="card-k nav-tabs_flex mb-2" id="nav-tab" role="tablist">
+                              <a class=" tab-label active" id="nav-ordenes-tab" data-toggle="tab" href="#nav-ordenes"
+                                role="tab" aria-controls="nav-ordenes" aria-selected="true" (click)="tabActiva = 'nav-ordenes'"  [ngClass]="{'active': tabActiva === 'nav-ordenes'}" >
+                                Ordenes de Pago
+                                </a>
+                              <a class="tab-label active" id="nav-asiento-tab" data-toggle="tab" href="#nav-asiento"
+                                role="tab" aria-controls="nav-asiento" aria-selected="true" (click)="tabActiva = 'nav-asiento'" [ngClass]="{'active': tabActiva === 'nav-asiento'}" >
+                                Asiento</a>
+                            </div>
+                          </nav>
+                          <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade" [ngClass]="{'show active': tabActiva === 'nav-ordenes'}"   id="nav-ordenes" role="tabpanel"
+                              aria-labelledby="nav-ordenes-tab">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" id="flexCheckDefault" type="checkbox" [(ngModel)]="nominaCheck" (ngModelChange)="openNomina($event)" [disabled]="formReadOnly || disabledNomina"/>
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                    Nómina
+                                    </label>
+                                </div>
+                                <div *ngIf="changeNomina">
+                                    <fieldset class="border card-fieldset">
+                                        <legend class="w-auto card-legend">Ordenes de Nómina</legend>
+                                        <div class="row ml-1 mr-1 m-0">
+                                            <div class="col-10">
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="input-group input-group-sm mt-1">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text size-span-campo"
+                                                                    id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Período</span>
+                                                            </div>
+                                                            <p-calendar
+                                                            [disabled]="formReadOnly"
+                                                                (ngModelChange)="periodoSelected($event,periodo)"
+                                                                [readonlyInput]="true" 
+                                                                view="year" 
+                                                                dateFormat="yy" 
+                                                                [(ngModel)]="periodo" 
+                                                                [showIcon]="true" 
+                                                                class="ui-calendar ui-calendar-button"
+                                                                inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                                                                [inputStyle]="{'height':'30px', 'width':'5rem','border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                                                            </p-calendar>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                            <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                                                                <app-cc-select-meses (ChangeMes)="ChangeMesCierrePeriodos($event)"  mes_actual={{mes_actual}} style="width: 20%;"  [disabled]="formReadOnly">
+                                                                </app-cc-select-meses>
+                                                            </app-cc-input-group-prepend>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <app-cc-input-group-prepend label="Tipo de Contratos" styleSpan="size-span-campo font-weight-bold">
+                                                            <ng-select id="tipo_contratos" class="form-control form-control-sm"  [disabled]="formReadOnly" [(ngModel)]="filter.tipo_contrato" [clearable]="true">
+                                                                <ng-option disabled [value]="0" disabled>Seleccione una tipo</ng-option>
+                                                                <ng-option *ngFor="let tc of tipoContratos" [value]="tc.id_catalogo">{{tc.cat_nombre }}</ng-option>
+                                                            </ng-select>
+                                                        </app-cc-input-group-prepend>
+                                                    </div>
+                                                
+                                                    <div class="col-md-4">
+                                                        <app-cc-input-group-prepend label="Tipo de Desembolso" styleSpan="size-span-campo font-weight-bold">
+                                                            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="tipo_desembolso"
+                                                            [disabled]="formReadOnly">
+                                                                <ng-option [value]="0" disabled>Seleccione ... </ng-option>
+                                                                <ng-option *ngFor="let item of listaDesembolso"
+                                                                    [value]="item.valor" >{{item.descripcion}}</ng-option>
+                                                            </ng-select>
+                                                        </app-cc-input-group-prepend>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <app-cc-input-group-prepend label="Tipo de Pago" styleSpan="size-span-campo">
+                                                            <ng-select id="tipo_pago" class="form-control form-control-sm" [(ngModel)]="filter.tipo_pago" [clearable]="true">
+                                                                <ng-option disabled [value]="0" disabled>Seleccione una tipo</ng-option>
+                                                                <ng-option *ngFor="let tp of tipoPagoSueldo" [value]="tp.value">{{tp.label }}</ng-option>
+                                                            </ng-select>
+                                                        </app-cc-input-group-prepend>
+                                                    </div>
+                                                </div>
+                    
+                                            </div>
+                                            <div class="col text-right">
+                                                <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom"
+                                                    ngbTooltip="Buscar" (click)="cargarOrdenesPagoNomina()"  [disabled]="formReadOnly">
+                                                    <i class="fas fa-search"></i> Cargar
+                                                </button>
+                                                <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros"
+                                                    (click)="limpiarFiltros()"  [disabled]="formReadOnly">
+                                                    <i class="fas fa-eraser"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                    
+                                        <div class="row mb-2">
+                                            <div class="col">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-bordered table-k table-hover h-auto" style="width: 150%;">
+                                                        <thead>
+                                                            <tr class="text-center">
+                                    
+                                                                <th style="width: 20%;">No. de Documento</th>
+                                                                <th style="width: 10%;">Tipo de desembolso</th>
+                                                                <th style="width: 10%;">Cuenta</th>
+                                                                <th style="width: 10%;">Empleado</th>
+                                                                <!-- <th style="width: 10%;">Configuracionn Contable</th> -->
+                                                                <th style="width: 15%;">Comentario</th>
+                                                                <th class="text-right" style="width: 20%;">Valor total</th>
+                                                                <th class="text-right" style="width: 20%;">Saldo actual</th>
+                                                                <th class="text-right" style="width: 20%;">Valor a pagar</th>
+                                                                <th class="text-right" style="width: 20%;">Saldo restante</th>
+                                                                <th style="width: 15%;">Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngIf="ordenesNomina.length == 0">
+                                                                <td colspan="11" class="text-center">
+                                                                    <h6 class="my-1">No hay ordenes registradas</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <ng-container *ngFor="let d of ordenesNomina, let i = index">
+                                                                <tr>
+                                                                    <td class="text-center">{{d.documento }}</td>
+                                                                    <td class="text-center">{{d.descripcion_desembolso }}</td>
+                                                                    <td class="text-center">{{ d.cuenta }}</td>
+                                                                    <td class="text-center">{{d.datos_empleado ? d.datos_empleado?.emp_full_nombre : d.empleado}}</td>
+                                                                    <td class="text-center">
+                                                                        <div class="input-group input-group-sm">
+                                    
+                                                                            <input type="text" maxlength="100" class="form-control form-control-sm"
+                                                                                [disabled]="formReadOnly" [(ngModel)]="d.comentario">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="text-right">$ {{ d.total | number: '1.2-2'}}</td>
+                                                                    <td class="text-right">$ {{ d.saldo | number: '1.2-2'}}</td>
+                                                                    <td class="text-right">
+                                                                        <div class="input-group input-group-sm">
+                                                                            <div class="input-group-prepend"><span
+                                                                                    class="input-group-text font-weight-bold">$</span></div>
+                                                                            <input currencyMask type="text" maxlength="8" class="form-control form-control-sm text-right"
+                                                                                [disabled]="true" [(ngModel)]="d.cobro"
+                                                                                (keypress)="onlyNumberDot($event)" (keyup)="restar(d)" (input)="cambioMontoCobro()">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="text-right">
+                                                                        <div class="input-group input-group-sm">
+                                                                            <div class="input-group-prepend"><span
+                                                                                    class="input-group-text font-weight-bold">$</span></div>
+                                                                            <input type="text" class="form-control form-control-sm text-right"
+                                                                                [disabled]="true" [(ngModel)]="d.nuevo_saldo"
+                                                                                readonly>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título"
+                                                                            [disabled]="formReadOnly" (click)="removeTitulo(i)"><i
+                                                                                class="far fa-trash-alt"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                    
+                                                            </ng-container>
+                                    
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                                    
+                                        
+                                    </fieldset>
+                                    
+                            
+                                </div>
+                
+                                <fieldset *ngIf="!changeNomina">
+                                    <div class="row mt-2 mb-1 align-items-center">
+                                        <div class="col text-right">
+                                            <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar orden de pago"
+                                                (click)="verificarFormaPago()" [disabled]="formValid">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered table-k table-hover h-auto" style="min-width: 1600px;">
+                                                    <thead>
+                                                        <tr class="text-center">
+                                
+                                                            <th style="width: 150px;">No. de Documento</th>
+                                                            <th style="width: 140px;">Tipo de desembolso</th>
+                                                            <th style="width: 100px;">Cuenta</th>
+                                                            <th style="width: 200px;">Proveedor</th>
+                                                            <th style="width: 100px;">Configuracionn Contable</th>
+                                                            <th style="width: 200px;">Comentario</th>
+                                                            <th class="text-right" style="width: 100px;">Monto proceso</th>
+                                                            <th class="text-right" style="width: 100px;">Saldo actual</th>
+                                                            <th class="text-right" style="width: 180px;">Valor a pagar</th>
+                                                            <th class="text-right" style="width: 180px;">Saldo restante</th>
+                                                            <th style="width: 150px;">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngIf="deudas.length == 0">
+                                                            <td colspan="11" class="text-center">
+                                                                <h6 class="my-1">No hay deudas registradas</h6>
+                                                            </td>
+                                                        </tr>
+                                                        <ng-container *ngFor="let d of deudas, let i = index">
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="row">
+                                                                        <div class="col">{{d.documento }}</div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="d.tipo_desembolso"
+                                                                    [disabled]="titulosDisabled || formReadOnly ?? true">
+                                                                        <ng-option [value]="0" disabled>Chosee.. </ng-option>
+                                                                        <ng-option *ngFor="let item of listaDesembolso"
+                                                                            [value]="item.valor" >{{item.descripcion}}</ng-option>
+                                                                    </ng-select>
+                                                                </td>
+                                                                <td>
+                                                                    {{ d.cuenta }}
+                                                                </td>
+                                                                <td>
+                                                                    <div class="row">
+                                                                        <div class="col">{{d.proveedor == null ? 'No hay datos' :  d.proveedor}}</div>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    
+                                                                <p>{{d.config_contable  ? d.config_contable?.nombre : 'No hay Datos'}}</p>
+                                                                <p style="font-size:0.9em" class="text-muted font-weight-bold">{{ d.config_contable ? d.config_contable?.codigo : 'No hay Datos' }}</p>
+                                                                
+                                                                </td>
+                                                                <!-- <td>
+                                                                    <div class="row">
+                                                                        <div class="col">{{d.configCont == null ? 'No hay datos' : d.configCont}}</div>
+                                                                    </div>
+                                                                </td> -->
+                                                                <td class="text-center">
+                                                                    <div class="input-group input-group-sm">
+                                
+                                                                        <input type="text" maxlength="100" class="form-control form-control-sm"
+                                                                            [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">
+                                                                    </div>
+                                                                </td>
+                                                                <td class="text-right">$ {{ d.valor | number: '1.2-2'}}</td>
+                                                                <td class="text-right">$ {{ d.saldo | number: '1.2-2'}}</td>
+                                                                <td class="text-right">
+                                                                    <div class="input-group input-group-sm">
+                                                                        <div class="input-group-prepend"><span
+                                                                                class="input-group-text font-weight-bold size-span-otro">$</span></div>
+                                                                        <input currencyMask [options]="{prefix: ''}" class="form-control form-control-sm"
+                                                                            [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.cobro"
+                                                                            (keyup)="restar(d)">
+                                                                            <!-- (input)="cambioMontoCobro(d)" -->
+                                                                    </div>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <div class="input-group input-group-sm">
+                                                                        <div class="input-group-prepend"><span
+                                                                                class="input-group-text font-weight-bold size-span-otro">$</span></div>
+                                                                        <input currencyMask type="text" class="form-control form-control-sm text-right"
+                                                                            [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.nuevo_saldo"
+                                                                            readonly>
+                                                                    </div>
+                                                                </td>
+                                
+                                                                <td class="text-center">
+
+                                                                    <div class="text-center mx-auto">
+                                                                        <button class="btn btn-help_icon btn-sm mr-1" (click)="showHistorialComprobante(d)"
+                                                                            placement="left" ngbTooltip="Abrir detalle">
+                                                                            <span class="material-symbols-outlined">visibility</span>
+                                                                        </button>
+                                                                        <button class="btn btn-danger_icon btn-sm mr-1" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"
+                                                                            placement="right" ngbTooltip="Remover Título">
+                                                                            <span class="material-symbols-outlined">delete</span>
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                
+                                                        </ng-container>
+                                
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="tab-pane fade" [ngClass]="{'show active': tabActiva === 'nav-asiento'}"   id="nav-asiento" role="tabpanel"
+                            aria-labelledby="nav-asiento-tab">
+                                <div class="justify-content-center">
+                                    <div class="table-responsive" style="max-height: 600px; overflow-y: scroll;">
+                                        <table class="table table-striped table-bordered table-k table-hover h-auto" style="min-width: 1800px;">
+                                            <thead >
+                                                <tr class="text-center">
+                                                    <th style="width: 150px;">Fecha</th>
+                                                    <th style="width: 150px;">Cuenta</th>
+                                                    <th style="width: 200px;">Nombre</th>
+                                                    <th style="width: 80px;">A S</th>
+                                                    <th style="width: 80px;">T M</th>
+                                                    <th style="width: 120px;">Débito</th>
+                                                    <th style="width: 120px;">Crédito</th>
+                                                    <th style="width: 180px;">Codigo partida</th>
+                                                    <th style="width: 250px">Partida presupuestaria</th>
+                                                    <th style="width: 150px;">Valor</th>
+                                                    <th style="width: 100px;">Tipo Presupuesto</th>
+                                                    <th style="width: 100px;">Tipo Afectación</th>
+                                                    <th style="width: 100px;">Devengado</th>
+                                                    <th style="width: 100px;">Cobrado/Pagado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngIf="asiento.length == 0">
+                                                    <td colspan="14" class="text-center">
+                                                        <h6 class="my-1"></h6>No hay asiento para mostrar.
+                                                    </td>
+                                                </tr>
+                                                <ng-container *ngFor="let f of asiento; let i = index">
+                                                    <!-- [ngClass]="{'table-warning': d.actualizado ?? false, 'table-danger': d.tipo_cuenta == 'GRUPO'}" -->
+                                                    <tr >
+                                                        <td *ngIf="f.tipo != 'T'">{{ f.fecha | date:'dd/MM/yyyy'}}</td>
+                                                        <td *ngIf="f.tipo != 'T'">{{ f.account}}</td>
+                                                        <td *ngIf="f.tipo != 'T'">{{ f.name}}</td>
+                                                        <td *ngIf="f.tipo != 'T'"></td>
+                                                        <td *ngIf="f.tipo != 'T'"></td>
+                                                        <td *ngIf="f.tipo != 'T'" class="text-right"> {{ (f.debit == 0 || f.debit == null) ? '-'  : '$'+ (f.debit | number:'1.2-2')}}</td>
+                                                        <td *ngIf="f.tipo != 'T'" class="text-right"> {{ (f.credit == 0 || f.credit == null) ? '-' :  '$'+ (f.credit | number:'1.2-2')}}</td>
+                                                        <td *ngIf="f.tipo != 'T'">{{ f.codpresupuesto}}</td>
+                                                        <td *ngIf="f.tipo != 'T'">{{ f.presupuesto}}</td>
+                                                        <td *ngIf="f.tipo != 'T'" class="text-right">$ {{ f.valor_presupuesto | number:'1.2-2'}}</td>
+                                                        <td *ngIf="f.tipo != 'T'">{{ f.tipo_presupuesto}}</td>
+                                                        <td *ngIf="f.tipo != 'T'">{{ f.tipo_afectacion}}</td>
+                                                        <td *ngIf="f.tipo != 'T'" class="text-right">$ {{ (f.devengado != null) ? (f.devengado | number:'1.2-2') : '0.00'}}</td>
+                                                        <td *ngIf="f.tipo != 'T'" class="text-right">$ {{ (f.cobrado_pagado != null) ? (f.cobrado_pagado | number:'1.2-2') : '0.00'}}</td>
+                                                        
+                                                        <!-- <td class="text-center">{{d.fecha | date:'dd/MM/yyyy'}}</td>
+                                                        <td >
+                                                            {{d.cuenta_contable ?? d.cuenta_deudora}}<br>
+                                                            <small class="text-muted">{{ d.tipo_cuenta }}</small>
+                                                        </td>
+                                                        <td >{{d.cuenta_contable_nombre ?? d.nombre_cuenta_acreedora}}</td>
+                                                        <td >{{d.asiento}}</td>
+                                                        <td >{{d.t_m}}</td>
+                                                        <td class="text-right">$ {{d.debe | number:'1.2-2'}}</td>
+                                                        <td class="text-right">$ {{d.haber | number:'1.2-2'}}</td>
+                                                        <td >{{d.partida_presupuestaria_cod ?? d.codigo_presupuesto}}</td>
+                                                        <td >{{d.partida_presupuestaria_desc ?? d.nombre_codigo_presupuesto}}</td>
+                                                        <td >{{d.tipo_presupuesto}}</td>
+                                                        <td >{{d.tipo_afectacion}}</td>
+                                                        <td class="text-right">$ {{d.partida_presupuestaria_val | number:'1.2-2'}}</td>
+                                                        <td class="text-right">$ {{d.devengado | number:'1.2-2'}}</td>
+                                                        <td class="text-right">$ {{d.cobrado_pagado | number:'1.2-2'}}</td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-secondary ml-1" (click)="expandCambioCuenta(d, i)" [disabled]="!allowEdit">
+                                                                <i class="fas fa-file-invoice-dollar"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-info ml-1" (click)="expandCambioCuentaEmi(d, i)" [ngClass]="{'d-none': filter.tipo_cierre != 'EMI'}">
+                                                                <i class="fas fa-sync-alt"></i>
+                                                            </button>
+                                                        </td> -->
+                                                    </tr>
+                                                </ng-container>
+                                                <tr *ngFor="let g of totalAsiento; let i = index">
+                                                    <td class="text-right font-weight-bold" colspan="5"></td>
+                                                    <td class="text-right" [ngClass]="{'TotalizadoTablaScroll': g.tipo == 'T'} ">$ {{ g.debit | number:'1.2-2' }}</td>
+                                                    <td class="text-right" [ngClass]="{'TotalizadoTablaScroll': g.tipo == 'T'} ">$ {{ g.credit | number:'1.2-2' }}</td>
+                                                    <td class="text-right font-weight-bold" colspan="7"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- <div style="overflow-x:auto;" class="content-tabla-general content-tabla_editable table_scroll_horizontal_over">
+                                        <table class="table">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th style="width: 150px;">Cuenta</th>
+                                                    <th style="width: 200px;">Nombre</th>
+                                                    <th style="width: 120px;">Débito</th>
+                                                    <th style="width: 120px;">Crédito</th>
+                                                    <th style="width: 180px;">Codigo partida</th>
+                                                    <th style="width: 250px">Partida presupuestaria</th>
+                                                    <th style="width: 150px;">Valor</th>
+                                                    <th style="width: 100px;">Tipo Presupuesto</th>
+                                                    <th style="width: 100px;">Tipo Afectación</th>
+                                                    <th style="width: 100px;">Devengado</th>
+                                                    <th style="width: 100px;">Cobrado/Pagado</th>
+                    
+                                                </tr>
+                                            </thead>
+                                            <tbody class="w-full">
+                                                <tr *ngIf="asiento.length == 0">
+                                                    <td colspan="8" class="text-center">
+                                                        <h6 class="my-1"></h6>No hay asiento para mostrar.
+                                                    </td>
+                                                </tr>
+                                                <tr class="text-center" style="width: 100%;cursor: pointer; "
+                                                    *ngFor="let f of asiento; let i = index">
+                                                
+                                                    <td *ngIf="f.tipo != 'T'">
+                                                        <input style="width: 150px;" placeholder="codigo cuenta" [value]="f.account"
+                                                            name="detAccounts" [(ngModel)]="f.account"
+                                                            [disabled]="true"
+                                                            class="form-control form-control-sm " type="text"
+                                                            name="{{f.account}}" />
+                                                    </td>
+                                                
+                                                    <td *ngIf="f.tipo != 'T'">
+                                                        <input style="width: 250px;" placeholder="cuenta" [value]="f.name" name="detName"
+                                                            [(ngModel)]="f.name"
+                                                            [disabled]="true"
+                                                            class="form-control form-control-sm " type="text"
+                                                            name="{{f.name}}" />
+                                                    </td>
+                                                    <td>
+                                                        <input currencyMask  style="width: 120px;" [(ngModel)]="f.debit" placeholder="0.00"
+                                                            [disabled]="true"
+                                                            class="form-control form-control-sm pr-1 text-right"
+                                                            name="{{f.debit}}" />
+                                                    </td>
+                                                    <td >
+                                                        <input currencyMask style="width: 120px;" [(ngModel)]="f.credit" placeholder="0.00"
+                                                            [disabled]="true"
+                                                            class="form-control form-control-sm pr-1 text-right"
+                                                            name="{{f.credit}}" />
+                                                        
+                                                    </td>
+                                                    
+                                                    <td *ngIf="f.tipo != 'T'" style="width: 180px;">
+                                                        <input style="width: 180px;" [(ngModel)]="f.codpresupuesto"  
+                                                            [disabled]="true"
+                                                            class="form-control form-control-sm pr-1 text-right" type="text"
+                                                            name="{{f.codpresupuesto}}" />
+                                                    </td>
+                                                
+                                                    <td *ngIf="f.tipo != 'T'" >
+                                                        <input style="width: 250px;" [(ngModel)]="f.presupuesto"  
+                                                            [disabled]="true"
+                                                            class="form-control form-control-sm pr-1 text-right" type="text"
+                                                            name="{{f.presupuesto}}" />
+                                                    </td>
+                                                    <td>
+                                                        <input currencyMask [ngClass]="{'TotalizadoTablaScroll': f.tipo == 'T'} " style="width: 150px;" [(ngModel)]="f.valor_presupuesto" placeholder="0.00"
+                                                            [disabled]="true" class="form-control form-control-sm pr-1 text-right" name="{{f.valor_presupuesto}}" />
+                                                        
+                                                    </td>
+                                                    <td *ngIf="f.tipo != 'T'" >
+                                                        <input style="width: 150px;" [(ngModel)]="f.tipo_presupuesto"  
+                                                            [disabled]="true"
+                                                            class="form-control form-control-sm pr-1 text-right" type="text"
+                                                            name="{{f.tipo_presupuesto}}" />
+                                                    </td>
+                                                    <td *ngIf="f.tipo != 'T'" >
+                                                        <input style="width: 150px;" [(ngModel)]="f.tipo_afectacion"  
+                                                            [disabled]="true"
+                                                            class="form-control form-control-sm pr-1 text-right" type="text"
+                                                            name="{{f.tipo_afectacion}}" />
+                                                    </td>
+                                                    <td *ngIf="f.tipo != 'T'" >
+                                                        <input style="width: 150px;" [(ngModel)]="f.devengado"  
+                                                            [disabled]="true"
+                                                            class="form-control form-control-sm pr-1 text-right" type="text"
+                                                            name="{{f.devengado}}" />
+                                                    </td>
+                                                    <td *ngIf="f.tipo != 'T'" >
+                                                        <input style="width: 150px;" [(ngModel)]="f.cobrado_pagado"  
+                                                            [disabled]="true"
+                                                            class="form-control form-control-sm pr-1 text-right" type="text"
+                                                            name="{{f.cobrado_pagado}}" />
+                                                    </td>
+                                                </tr>
+                                                <tr class="text-center" style="width: 100%;cursor: pointer; "
+                                                *ngFor="let g of totalAsiento; let i = index">
+                                            
+                                                <td class="text-right font-weight-bold" colspan="2">TOTALES</td>
+                                                <td>
+                                                    <input currencyMask [ngClass]="{'TotalizadoTablaScroll': g.tipo == 'T'} "  style="width: 120px;" [(ngModel)]="g.debit" placeholder="0.00"
+                                                        [disabled]="true"
+                                                        class="form-control form-control-sm pr-1 text-right"
+                                                        type="text" name="{{g.debit}}" />
+                                                </td>
+                                                <td >
+                                                    <input currencyMask [ngClass]="{'TotalizadoTablaScroll': g.tipo == 'T'} " style="width: 120px;" [(ngModel)]="g.credit" placeholder="0.00"
+                                                        [disabled]="true"
+                                                        class="form-control form-control-sm pr-1 text-right"
+                                                        type="text"
+                                                        name="{{g.credit}}" />
+                                                    
+                                                </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div> -->
+                                </div>
+                            </div>
+                          </div>
+<!--                     
+                        <div class="tab-content mb-3" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-ordenes" role="tabpanel" aria-labelledby="nav-ordenes-tab">
+                              
+                               
+                                
+                            </div>
+                    
+                          <div class="tab-pane fade" id="nav-asiento" role="tabpanel" aria-labelledby="nav-asiento-tab">
+                            
+                                
+                                
+                            </div> 
+                        </div> -->
+                    
+                        <div class="row mb-2" *ngIf="mostrarCuentas">
+                            <div class="col">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-k table-hover h-auto">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th style="width: 10%;">Cuenta</th>
+                                                <th style="width: 10%;">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr  *ngIf="valorCuentas.length == 0">
+                                                <td colspan="2" class="text-center">
+                                                    <h6 class="my-1">No hay cuentas registradas</h6>
+                                                </td>
+                                            </tr >
+                                            <ng-container *ngFor="let d of valorCuentas, let i = index">
+                                                <tr>
+                                                    <td class="text-center">{{d.banco}}</td>
+                                                    <td class="text-right">$ {{d.valor | number: '1.2-2'}}</td>
+                                                </tr>
+                                            </ng-container>
+                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2" *ngIf="mostrarMovimientos">
+                            <div class="col">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-k table-hover h-auto">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th style="width: 10%;">Cuenta</th> 
+                                                <th style="width: 10%;">Banco</th>
+                                                <th style="width: 15%;">Tipo Movimiento</th>
+                                                <th style="width: 15%;">Fecha Emision</th>
+                                                <th style="width: 10%;">Valor movimiento</th>
+                                                <!-- <th style="width: 10%;">Acciones</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngIf="movimiento.length == 0">
+                                                <td colspan="9" class="text-center"><h6 class="my-1">No hay formas de pago</h6></td>
+                                            </tr>
+                                            <ng-container *ngFor="let d of movimiento, let i = index">
+                                                <tr >
+                                                    <td class="text-center">{{ d.num_cuenta }}</td>
+                                                    <td class="text-center">{{ d.name_banks }}</td>
+                                                    <td class="text-center">{{ d.tipo_egreso }}</td>
+                                                    <td class="text-center">{{ d.fecha_emision }}</td>
+                                                    <td class="text-center">$ {{ d.valor | number:'1.2-2' }}</td>
+                                       
+                                                    <!-- <td class="text-center">
+                                                        <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="d.id_documento_detalle !=0"  (click)="removeActivosFinancieros(i)"><i class="far fa-trash-alt"></i></button>
+                                                    </td> -->
+                                                </tr>
+                                            </ng-container>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-2 justify-content-end">
+                            <div class="col-5">
+                                <div class="input-group input-group-lg input-group-total">
+                                    <div class="input-group-prepend">
+                                        <span class="label-saldo label-saldo_item font-weight-bold"
+                                            >Valor a pagar</span>
+                                    </div>
+                                    <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                                        readonly value="$ {{ totalCobro | number: '1.2-2' }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-2 justify-content-end">
+                            <div class="col-5">
+                                <div class="input-group input-group-lg input-group-total">
+                                    <div class="input-group-prepend">
+                                        <span class="label-saldo label-saldo_item font-weight-bold">
+                                            Saldo
+                                        </span>
+                                    </div>
+                                    <input id="difTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                                        readonly value="$ {{ difCobroPago | number: '1.2-2' }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+  
+   
+   
+
+    <!-- <div class="row mt-3 mb-1 align-items-center">
+        <div class="col">
+            <h5 class="mb-0 text-dark">Formas de pago</h5>
+        </div>
+    </div> -->
+
+   
+
+
+
+   
+
+</app-button-radio-active-new>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renLiqAnulacion"></cc-spiner-procesar>
+
+
+<!-- <div id="PrintSection" [hidden]="true">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Documento: {{ documento.documento }}</h3>
+                                <h3>Fecha: {{ documento.fecha | date: 'dd/MM/yyyy' }}</h3>
+                                <h3>Estado: {{ (documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'X') ? 'Anulado': documento.estado == 'E' ?
+                                    'Emitido' : (liquidacion.estado == 'A' ? 'Aprobado' : 'Anulado')}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2">
+
+            <div class="row mt-2 mb-3">
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Cuenta</span>
+                        </div>
+                        <input disabled type="text" class="form-control form-control-sm" maxlength="200"
+                            [(ngModel)]="documento.cuenta">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Forma de
+                                pago</span></div>
+                        <input disabled type="text" class="form-control form-control-sm" maxlength="200"
+                            [(ngModel)]="documento.forma_pago">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2 mb-3">
+                <div class="col-12">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold "
+                                style="width: 155px">Observaciones</span></div>
+                        <textarea cols="30" rows="3" maxlength="200" class="form-control form-control-sm"
+                            [(ngModel)]="documento.observacion"
+                            [disabled]="titulosDisabled || formReadOnly ?? true"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2 mb-1 align-items-center">
+                <div class="col">
+                    <h5 class="mb-0 text-dark">Detalles del pago</h5>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered no-footer table-hover mb-0">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th style="width: 15%;">No. de Documento</th>
+                                    <th style="width: 15%;">Proveedor</th>
+                                    <th style="width: 20%;">Comentario</th>
+                                    <th class="text-right" style="width: 10%;">Valor total</th>
+                                    <th class="text-right" style="width: 10%;">Saldo actual</th>
+                                    <th class="text-right" style="width: 10%;">Valor a pagar</th>
+                                    <th class="text-right" style="width: 10%;">Saldo restante</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="deudas.length == 0">
+                                    <td colspan="8" class="text-center">
+                                        <h6 class="my-1">No hay deudas registradas</h6>
+                                    </td>
+                                </tr>
+                                <ng-container *ngFor="let d of deudas, let i = index">
+                                    <tr>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col">{{d.documento }}</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col">{{d.proveedor }}</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col">{{d.comentario }}</div>
+                                            </div>
+                                        </td>
+                                        <td class="text-right">$ {{ d.valor }}</td>
+                                        <td class="text-right">$ {{ d.saldo }}</td>
+                                        <td class="text-right">$ {{ d.cobro }}</td>
+                                        <td class="text-right">$ {{ d.nuevo_saldo }}</td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-subtotal">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                                style="width: 200px;">&Sigma; Valor a pagar</span></div>
+                        <input id="cobroTotal" type="text"
+                            class="form-control form-control-lg font-weight-bold text-right" readonly
+                            value="$ {{ totalCobro | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-descuentos">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                                style="width: 200px;">Saldo</span></div>
+                        <input id="difTotal" type="text"
+                            class="form-control form-control-lg font-weight-bold text-right" readonly
+                            value="$ {{ difCobroPago | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed; bottom: 0px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Fecha: {{ documento.fecha }}</span>
+        </div>
+        <div *ngIf="dataUser" class="col-12 text-left" style="position: fixed; bottom: 20px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Usuario: {{ dataUser.nombre }}</span>
+        </div>
+    </div>
+</div> -->

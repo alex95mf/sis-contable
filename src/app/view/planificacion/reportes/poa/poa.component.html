@@ -1,0 +1,184 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active-new icono="far fa-file-chart-pie" [titulo]="fTitle" 
+    cstyle="bg-gradient-primary text-white"
+        filtroBoton="btnsReporte" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+                    <div class="row m-0">
+    
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" [markFirst]="false" (change)="handlePeriodoSelected($event)" [(ngModel)]="periodoSelected"
+                                    [items]="periodos" bindValue="id" bindLabel="periodo"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" [markFirst]="false" (change)="handleSelectPrograma($event)"
+                                    [items]="programas" bindValue="valor" bindLabel="label"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" [markFirst]="false" (change)="handleSelectDepartamento($event)"
+                                    [items]="departamentosFilter" bindValue="valor" bindLabel="label"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        
+
+        <div id="Printsection">
+            <div class="d-none d-print-block">
+                <div class="text-center bg-white">
+                    <h1 class="display-2 border">Plan Operativo Anual Institucional Para el A&ntilde;o 2023</h1>
+                    <h2 class="display-3 border">Informaci&oacute;n General</h2>
+                </div>
+            </div>
+
+            
+                <fieldset class="border card-fieldset">
+
+                  
+                    
+                <legend class="w-auto card-legend d-print-none">Informaci&oacute;n General</legend>
+                <!-- <dl class="text-dark">
+                    <dt>Mision</dt>
+                    <dd>{{ mision }}</dd>
+                    <dt>Vision</dt>
+                    <dd>{{ mision }}</dd>
+                    <dt>Objetivo General</dt>
+                    <dd>{{ mision }}</dd>
+                </dl> -->
+
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Mision" styleSpan="size-span-campo">
+                            <textarea rows="4" class="form-control" [value]="gad_mision"></textarea>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Vision" styleSpan="size-span-campo">
+                            <textarea rows="4" class="form-control" [value]="gad_vision"></textarea>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Objetivo General" styleSpan="size-span-campo">
+                            <textarea rows="4" class="form-control" [value]="gad_objetivos"></textarea>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </app-button-radio-active-new>
+
+    <div class="row my-0">
+        <div class="col-12">
+            <table class="table table-striped table-bordered table-k table-hover" >
+                <thead class="sticky-header">
+                    <tr>
+                        <th colspan="2">Objetivos Estrat&eacute;gicos del Gobierno Aut&oacute;nomo
+                            Descentralizado
+                            Municipal de La Libertad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li *ngFor="let item of lst_objetivo_estrategico">{{ item.valor }}</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row m-0">
+        <div class="table-responsive" style="max-height: 600px; overflow-y: scroll;">
+            <!-- <table class="table table-striped table-bordered table-k table-hover" style="width: 3000px;" > -->
+             <table class="table table-striped table-sm" style="width: 3000px;"> 
+                <thead class="sticky-header">
+                    <tr>
+                        <th style="width: 15px;" class="d-print-none">#</th>
+                        <th class="table-warning">Objetivos de Desarrollo Sostenible (ODS)</th>
+                        <th class="table-warning">Meta (ODS)</th>
+                        <th class="table-warning">Objetivos Nacionales de Desarrollo</th>
+                        <th class="table-warning">Politica de Plan de Gobierno</th>
+                        <th class="table-warning">Eje</th>
+                        <th class="table-warning">Meta para la Zona</th>
+                        <th class="table-warning">Competencias del GAD</th>
+                        <th class="table-warning">Objetivo Estrat&eacute;gico del PDOT</th>
+                        <th class="table-warning">Meta de Resultados del PDOT</th>
+                        <th class="table-warning">Indicador</th>
+                        <th class="table-warning">Tendencia del Indicador</th>
+                        <th class="table-warning">Tipo de Intervenci&oacute;n</th>
+                        <th class="table-info">Objetivo Operativo</th>
+                        <th class="table-info">Nombre del Programa, Proyecto y Actividades</th>
+                        <th class="table-info">Formula del Indicador de Gestion</th>
+                        <th class="table-info">Frecuencia de Medicion</th>
+                        <th class="table-info">Meta POA</th>
+                        <th class="table-info">Tiempo Previsto para alcanzar la meta</th>
+                        <th class="table-info text-center" style="width: 50px;">Cuat. 1</th>
+                        <th class="table-info text-center" style="width: 50px;">Cuat. 2</th>
+                        <th class="table-info text-center" style="width: 50px;">Cuat. 3</th>
+                        <th class="table-info text-center" style="width: 50px;">Cuat. 4</th>
+                        <th class="table-info">Responsables</th>
+                        <th class="table-success">Fuente de Financiamiento</th>
+                        <th class="table-success">Estimacion Presupuestaria</th>
+                        <th class="table-success">Presupuesto Devengado</th>
+                        <th class="table-success">Presupuesto Pagado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of atribuciones; let i = index;" style="min-height: 150px;">
+                        <td class="d-print-none">{{ i + 1 }}</td>
+                        <td>{{ obj_componentes.ods?.descripcion ?? 'N/A' }}</td>
+                        <td>{{ obj_componentes.meta_ods?.descripcion ?? 'N/A' }}
+                        </td>
+                        <td>{{ obj_componentes.opg?.descripcion?? 'N/A' }}</td>
+                        <td>{{ obj_componentes.ppg?.descripcion ?? 'N/A' }}</td>
+                        <td>{{ obj_componentes.eje?.descripcion ?? 'N/A' }}</td>
+                        <td>{{ obj_componentes.meta_zonal?.descripcion ?? 'N/A'}}</td>
+                        <td>{{ obj_componentes.competencia?.valor ?? 'N/A'}}</td>
+                        <td>{{ obj_componentes.oe?.valor ?? 'N/A' }}</td>
+                        <td>{{ obj_componentes.meta_resultado?.valor ?? 'N/A' }}</td>
+                        <td>{{ obj_componentes.indicador?.valor ?? 'N/A' }}</td>
+                        <td>{{ obj_componentes.tendencia?.valor ?? 'N/A' }}</td>
+                        <td>{{ obj_componentes.intervencion?.valor ?? 'N/A' }}</td>
+                        <td>{{ mision }}</td>
+                        <td class="table-warning">{{ a.catalogo?.valor }}</td>
+                        <td class="table-warning">{{ a.formula }}</td>
+                        <td>{{ a.frecuencia?.valor ?? 'N/A' }}</td>
+                        <td class="table-warning">{{ a.meta }}</td>
+                        <td>{{ a.prevision?.valor ?? 'N/A' }}</td>
+                        <td class="table-warning">{{ a.cuatrimestre1 }} %</td>
+                        <td class="table-warning">{{ a.cuatrimestre2 }} %</td>
+                        <td class="table-warning">{{ a.cuatrimestre3 }} %</td>
+                        <td class="table-warning">{{ a.cuatrimestre4 }} %</td>
+                        <td></td> <!-- Responsables -->
+                        <td>
+                            <ul class="list-unstyled">
+                                <li *ngFor="let f of a.fuente_finaciemiento" class="mb-1">{{ f }}</li>
+                            </ul>
+                        </td> <!-- Fuente  de Financiamiento -->
+                        <td class="table-light">${{ a.presupuestado | number:'1.2-2' }}</td> <!-- Estimacion Presupuestaria -->
+                        <td class="table-light">${{ a.devengado | number:'1.2-2' }}</td> <!-- Presupuesto Devengado -->
+                        <td class="table-light">${{ a.pagado | number:'1.2-2' }}</td> <!-- Presupuesto Pagado -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner"></cc-spiner-procesar>

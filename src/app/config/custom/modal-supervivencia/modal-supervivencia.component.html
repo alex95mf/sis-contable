@@ -1,0 +1,41 @@
+<!-- <div *ngIf="contribuyente_sup"> -->
+    <app-button-radio-active titulo="Agregar supervivencia" filtroBoton="btnsFormLTuristicos" cstyle="bg-gradient-primary text-white" [groupButton]="botonera" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-plus-square" >
+       
+        
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">
+                            Supervivencia
+                        </span>
+                    </div>
+                    <ng-select class="form-control" [(ngModel)]="contribuyente_sup.supervivencia" [disabled]="readOnlyMode">
+                        <ng-option [value]="0">Seleccione si tiene supervivencia</ng-option>
+                        <ng-option value="S">SI</ng-option>
+                        <ng-option value="N">NO</ng-option>
+                    </ng-select>
+
+                    <!-- <input id="comentario" type="text" class="form-control form-control-sm"  [(ngModel)]="contribuyente_sup.supervivencia"> -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">
+                            Observacion
+                        </span>
+                    </div>
+                    <input id="comentario" type="text" class="form-control form-control-sm" [(ngModel)]="contribuyente_sup.observacion">
+                </div>
+            </div>        
+        </div>
+
+ 
+    </app-button-radio-active>
+<!-- </div> -->
+<cc-spiner-procesar [ltexto]="texto_barra_carga" lfulScren=true ></cc-spiner-procesar>
+

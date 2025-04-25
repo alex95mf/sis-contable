@@ -1,0 +1,92 @@
+<div class="row justify-content-center">
+    <div class="col-10">
+        <div class="mt-4">
+            <app-button-radio-active titulo="Apertura de caja" filtroBoton="btnOpenCaja"
+                cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-lock-open">
+                <div class="row mt-3">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre
+                                    caja</span>
+                            </div>
+                            <select [(ngModel)]="caja.punto_emision" (ngModelChange)="changeCaja($event)"
+                                class="form-control form-control-sm custom-select">
+                                <option [value]="0">Seleccione caja</option>
+                                <option *ngFor="let d of arrayCajas" [value]="d.num_punto_emision">{{d.pto_nombre}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha
+                                    Apertura</span>
+                            </div>
+
+                            <input type="text" [(ngModel)]="caja.fecha_apertura" format='yyyy-MM-dd'
+                                [disabled]="true" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Usuario
+                                    Caja</span>
+                            </div>
+                            <input type="text" [(ngModel)]="caja.name_user_caja" [disabled]="true"
+                                class="form-control form-control-sm">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Hora
+                                    Apertura</span>
+                            </div>
+
+                            <input type="text" [(ngModel)]="caja.hora_apertura" format='HH:mm:ss'
+                                [disabled]="true" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Empresa</span>
+                            </div>
+                            <input type="text" [(ngModel)]="caja.name_empresa" [disabled]="true"
+                                class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor
+                                    apertura</span>
+                            </div>
+                            <input type="text" [(ngModel)]="caja.valor_apertura" id="idvalueapertura" placeholder = "0.00"
+                                class="form-control form-control-sm" style="text-align: right !important;padding-right: 15px;">
+                        </div>
+                    </div> -->
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sucursal</span>
+                            </div>
+                            <input type="text" [(ngModel)]="caja.name_sucursal" [disabled]="true"
+                                class="form-control form-control-sm">
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAperturaCaja"></cc-spiner-procesar>

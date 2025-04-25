@@ -1,0 +1,66 @@
+<app-button-radio-active-new titulo="Ingreso Carga Familiar" cstyle="bg-gradient-primary text-white" icono="fas fa-money-check-edit-alt"
+    filtroBoton="btnContribuyenteForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="mb-3">
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Datos Carga Familiar</legend>
+                    <div>
+                        <div class="row m-0">
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Tipo Documento" styleSpan="size-span-campo">
+                                    <ng-select [items]="cmb_tipo_documento" bindValue="value" bindLabel="label" [markFirst]="true"
+                                        [(ngModel)]="familiares.tipo_documento" [clearable]="false" class="form-control" (change)="handleSetLength($event)"></ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Cédula carga" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="familiares.cedula_carga" id="IdTipo"
+                                        [maxlength]="maxlength"/>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Nombres carga" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="familiares.nombres_general" id="IdTipo"/>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Apellidos carga" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="familiares.apellidos_general" id="IdTipo"/>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Nacimiento" styleSpan="size-span-campo">
+                                    <input type="date" class="form-control form-control-sm" [(ngModel)]="familiares.fecha_nacim" id="IdTipo"/>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Relacion" styleSpan="size-span-campo ">
+                                    <ng-select class="form-control" [clearable]="false" [(ngModel)]="familiares.relacion.id_catalogo"
+                                        [items]="cmb_relaciones" bindValue="id_catalogo" bindLabel="cat_descripcion" (change)="handleSelectRelacion($event)"></ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Discapacidad" styleSpan="size-span-campo ">
+                                    <!-- <ng-select [(ngModel)]="familiares.discapacidad" (change)="asignarTipo($event)">
+                                        <ng-option [value]="0" disabled>Escoger... </ng-option>
+                                        <ng-option *ngFor="let item of disafi" [value]="item.descripcion">{{item.descripcion}}</ng-option>
+                                    </ng-select> -->
+                                    <ng-select class="form-control form-control-sm" [(ngModel)]="familiares.discapacidad"  [clearable]="false"
+                                        [items]="disafi" bindValue="valor" bindLabel="descripcion"></ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Afiliado" styleSpan="size-span-campo ">
+                                    <ng-select class="form-control form-control-sm" [(ngModel)]="familiares.afiliado"  [clearable]="false"
+                                        [items]="disafi" bindValue="valor" bindLabel="descripcion"></ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</app-button-radio-active-new>
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

@@ -1,0 +1,57 @@
+<div class="filter">
+    <app-button-radio-active titulo="CAMBIO DE CONTRASEÑA" filtroBoton="btnPass" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-lock">
+        <div class="row justify-content-center align-items-center mt-4">
+            <!--             <div class="col-sm-12 justify-content-center ">
+                <div class="col-auto">
+                    <div class="card">
+                        <img id="avatar-image" src="{{file}}" style="width: 150px;height:150px;" class="img-avatar" alt="admin@bootstrapmaster.com" />
+                    </div>
+                    <h4 class="text-center font-weight-bold">{{nameUser}}</h4>
+                </div>
+            </div> -->
+
+            <div class="col-md-6 text-center">
+                <div class="col-md-12 card">
+                    <img id="avatar-image" src="{{file}}" style="width: 150px;height:150px;" class="img-avatar " alt="{{dataUser.email}}" />
+                </div>
+                <div class="col-md-12 ">
+                    <h4 class="text-center font-weight-bold">{{nameUser}}</h4>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-center">
+            <div class="col-sm-12">
+                <app-cc-input-group-prepend label="Contraseña Actual" styleSpan="size-span-campo">
+                    <input type="password" id="passActual" class="form-control" [(ngModel)]="passwordActuals" disabled placement="top" ngbTooltip="{{passwordActuals}}">
+                    <div class="input-group-text btn" id="inputLabel-prepend">
+                        <span class="fa fa-fw fa-eye password-icon " (click)="showPass()" placement="top" ngbTooltip="{{passwordActuals}}"></span>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-12">
+                <app-cc-input-group-prepend label="Nueva Contraseña" styleSpan="size-span-campo">
+                    <input type="password" id="passNueva" class="form-control" [(ngModel)]="passwordNuevos" #codeInput placement="top" ngbTooltip="{{passwordNuevos}}" (keyup)="setPass($event.target.value)">
+                    <div class="input-group-text btn" id="inputLabel-prepend">
+                        <span class="fa fa-fw fa-eye  password-icon" (click)="showPassNueva()" placement="top" ngbTooltip="{{passwordNuevos}}"></span>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-4">
+            <div class="col-sm-12">
+                <app-cc-input-group-prepend label="Confirmar Contraseña" styleSpan="size-span-campo">
+                    <input type="password" id="passConfirPass" class="form-control " [(ngModel)]="passwordConfirs" placement="top" ngbTooltip="{{passwordConfirs}}" [disabled]="passwordNuevos == undefined">
+                    <div class="input-group-text btn" id="inputLabel-prepend">
+                        <span class="fa fa-fw fa-eye  password-icon" (click)="showPassConfirm()" placement="top" ngbTooltip="{{passwordConfirs}}"></span>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="speditPass"></cc-spiner-procesar>

@@ -1,0 +1,227 @@
+<br>
+<app-button-radio-active titulo="Entrega De Suministro" filtroBoton="btnSumEntr" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-scribd">
+
+    <div class="row" *ngIf="permisions">
+        <div class="col-sm-6">
+            <fieldset class="border p-1 mb-1 mt-2" style="border-radius: 5px;">
+                <legend class="w-auto h6">Datos del solicitante</legend>
+                <div class="row">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Departamento solicitante" styleSpan="size-span-campo">
+                            <select [(ngModel)]="solicitud.fk_departamento" (ngModelChange)="changerequest($event)" class="form-control form-control-sm custom-select" [disabled]="permisions.editar == '0' || infoProduct.length != 0" id="Idgrupo">
+                                <option [value]="0">Seleccione departamento</option>
+                                <option *ngFor="let d of dataGrupo" [value]="d.id_grupo">{{d.nombre_grupo}}</option>
+                            </select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Nombre solicitante" styleSpan="size-span-campo">
+                            <input placeholder="Ingrese nombre solicitante" type="text" id="idNamerequest" class="form-control form-control-sm" [disabled]="infoProduct.length != 0" [(ngModel)]="solicitud.nombre_solicitante">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Usuario autorizador" styleSpan="size-span-campo">
+                            <ng-select id="IdRolesUsersDoc" class="form-control form-control-sm" appendTo="body" [searchable]="true" [disabled]="true" [clearable]="false" [(ngModel)]="solicitud.fk_usuario_sol">
+                                <ng-option [value]="0">Seleccione usuario</ng-option>
+                                <ng-option *ngFor="let d of infoUsers" [value]="d.id_usuario">{{d.nombre}}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Fecha solicitud" styleSpan="size-span-campo">
+                            <ejs-datepicker [(ngModel)]="solicitud.fromDatePicker" class="form-control" name="dateFrom" format='yyyy-MM-dd' id=""></ejs-datepicker>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-sm-6">
+            <fieldset class="border p-1 mb-1 mt-2" style="border-radius: 5px;">
+                <legend class="w-auto h6">Datos del producto</legend>
+                <div class="row">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Producto" styleSpan="size-span-campo">
+                            <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" [disabled]="permisions.editar == '0'" [clearable]="false" [(ngModel)]="productSelect" (ngModelChange)="getDataProduct($event,i)">
+                                <ng-option [value]="0">Seleccione Producto</ng-option>
+                                <ng-option *ngFor="let d of arrayProduct" [value]="d.id">{{d.nombre}}</ng-option>
+                            </ng-select>
+                            <div class="input-group-prepend">
+                                <button class="btn btn-success btn-block" (click)="addProduct()" [disabled]="this.product.cantidad_solicitada > this.product.detalle.cantidad">Añadir</button>
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Unidad de medida" styleSpan="size-span-campo">
+                            <input placeholder="unidad de medida" type="text" class="form-control form-control-sm" [(ngModel)]="product.udm" [disabled]="true">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Stock" styleSpan="size-span-campo">
+                            <input placeholder="0" type="number" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="product.detalle.cantidad">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Cantidad solicitada" styleSpan="size-span-campo">
+                            <input type="number" class="form-control form-control-sm" [(ngModel)]="product.cantidad_solicitada" [disabled]="productSelect == 0" (keyup)="validaCantidad()" id="idAmount">
+                            <span *ngIf="this.product.cantidad_solicitada > this.product.detalle.cantidad" style="color: red;font-size: 10px;">La cantidad solicitada no puede ser mayor al
+                                stock</span>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+
+    <fieldset class="border p-2 mb-2 mt-2 filters">
+        <legend class="w-auto h6">Suministros Creados para entrega</legend>
+        <div class="row">
+            <div class="col-12" style="padding-top: 20px;padding-bottom: 20px;">
+                <div class="table-responsive responsive-table">
+                    <table class="table no-footer table-hover ">
+                        <thead style="width: 100%;">
+                            <tr>
+                                <th style="width: 10%;text-align: center;padding-left: 0px;">Item</th>
+                                <th style="width: 40%;">Nombre producto</th>
+                                <th style="width: 10%;">Código</th>
+                                <th style="width: 10%;">Udm</th>
+                                <th style="width: 10%;">Stock</th>
+                                <th style="width: 10%;">Cantidad</th>
+                                <th class="text-center" style="width: 10%;">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of infoProduct; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{dt.nombre}}</td>
+                                <td>{{dt.codigo}}</td>
+                                <td>{{dt.udm}}</td>
+                                <td class="text-right pr-2">{{dt.stock}}</td>
+                                <td class="text-right pr-2">{{dt.cantidad_solicitada}}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-danger btn-xs" placement="top" ngbTooltip="Eliminar Items" (click)="deleteItems(i)"><i class="fa fa-trash-o"
+                                            aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row mt-3 mb-3">
+        <div class="col-sm-12">
+            <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo">
+                <textarea class="form-control" placeholder="Ingrese una descripción de la entrega" [(ngModel)]="solicitud.observacion"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spSumEntr"></cc-spiner-procesar>
+
+<!-- PrintSecondContent -->
+<div [hidden]="true" id="print-section" *ngIf="infoProduct.length > 0" class="printInfo">
+    <div class="row justify-content-center  prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Proveeduria</h3>
+                                <p>Solicitud de suministros</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-12 text-center">
+                    <div>
+                        <div class="table-responsive responsive-table">
+                            <table class="table no-footer table-hover ">
+                                <thead style="width: 100%;">
+                                    <tr>
+                                        <th style="width: 10%;text-align: center;padding-left: 0px;">Item</th>
+                                        <th style="width: 40%;">Nombre producto</th>
+                                        <th style="width: 20%;">Código</th>
+                                        <th style="width: 10%;">Udm</th>
+                                        <th style="width: 10%;">Stock</th>
+                                        <th style="width: 10%;">Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let dt of infoProduct; let i = index">
+                                        <td style="text-align: center;">{{i+1}}</td>
+                                        <td>{{dt.nombre}}</td>
+                                        <td>{{dt.codigo}}</td>
+                                        <td>{{dt.udm}}</td>
+                                        <td>{{dt.stock}}</td>
+                                        <td>{{dt.cantidad_solicitada}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-10 text-center pb-2 pt-2" style="position: fixed;  bottom: 30px; ">
+            <div class="row justify-content-center text-center">
+                <div class="col-6 text-center">
+                    <div class="row text-center">
+                        <div class="col-12 text-center">
+                            ----------------------------------------------
+                        </div>
+                        <div class="col-12 text-center" style="color: #13A1EA;">
+                            Firma responsable
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 text-center">
+                    <div class="row text-center">
+                        <div class="col-12 text-center">
+                            ----------------------------------------------
+                        </div>
+                        <div class="col-12 text-center" style="color: #13A1EA;">
+                            Firma solicitante
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #13A1EA;">
+                Fecha: {{fecha}}&nbsp;{{hora}}</span>
+        </div>
+        <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+            <span style="color: #13A1EA;">
+                Usuario: {{dataUser.nombre}}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div>
+
+    <app-button-radio-active titulo="Fotos Subidas" filtroBoton="btnInspecciones" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-images" class="no-borders">
+
+        <ngb-carousel [activeId]="indexActive" [animation]="false">
+            <ng-template ngbSlide *ngFor="let foto of fotos, let i = index" [id]="i">
+                <div class="picsum-img-wrapper">
+                    
+                    <img [src]="foto.recurso">
+                  
+                </div>
+                <div class="carousel-caption">
+                    <h5>Holis</h5>
+                </div>
+            </ng-template>
+        </ngb-carousel>
+
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSpiner" lfulScren=true lTipo="spInspecciones"></cc-spiner-procesar>

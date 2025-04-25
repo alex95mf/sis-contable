@@ -1,0 +1,64 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Cierre de Bienes e Inventario" cstyle="bg-light" icono="fas fa-boxes"
+        filtroBoton="btnsCierreBienes" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border pb-2 px-3">
+            <legend class="w-auto bg-dark">Filtros</legend>
+            <div class="row">
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" readonly [value]="documento.num_documento">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Tipo de Bienes" styleSpan="size-span-campo font-weight-bold">
+                        <ng-container *ngIf="readOnly; else selectTipoBien">
+                            <input type="text" class="form-control" readonly [value]="documento.txt_tipo">
+                        </ng-container>
+                        <ng-template #selectTipoBien>
+                            <ng-select class="form-control" [clearable]="false" [(ngModel)]="documento.tipo"
+                                [items]="cmb_tipo_bien" bindValue="valor" bindLabel="descripcion">
+                            </ng-select>
+                        </ng-template>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control"  [(ngModel)]="documento.fecha">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold bg-dark">
+                        <textarea rows="3" class="form-control" [readonly]="readOnly" [(ngModel)]="documento.observaciones"></textarea>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+        <p-table 
+            [value]="documento.bienes"
+            [paginator]="true"
+            [rows]="50"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[10, 25, 50]">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Producto</th>
+                    <th>Cuenta Contable</th>
+                    <th *ngFor="let c of columnas" class="text-right">{{ c.label }}</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-bien>
+                <tr>
+                    <td>{{ bien.nombre }}</td>
+                    <td>{{ bien.grupo?.codigo_cuenta_contable }}</td>
+                    <td *ngFor="let c of columnas" class="text-right">
+                        <span *ngIf="c.label != 'Stock'">$</span> {{ bien[c.name] | number:'1.2-2' }}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spCierreBienes"></cc-spiner-procesar>

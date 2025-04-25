@@ -1,0 +1,104 @@
+<br>
+
+<div class="row">
+    <div class="col-sm-12">
+        <app-button-radio-active titulo="Creación de Caja Chica" filtroBoton="btnCraCChi"
+            cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+            *ngIf="permisions" icono="fas fa-file-alt">
+            <div class="row">
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Responsable caja" styleSpan="size-span-campo">
+                        <select [(ngModel)]="caja.fk_usuario" class="form-control form-control-sm custom-select"
+                            [disabled]="permisions.editar == '0'" id="idUser">
+                            <option [value]="0">Seleccione usuario</option>
+                            <option *ngFor="let d of arrayUsers" [value]="d.id_usuario">{{d.nombre}} </option>
+                        </select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Cuenta contable" styleSpan="size-span-campo">
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="caja.cuenta_caja"
+                             [disabled]="true" placeholder="cuenta contable caja">
+
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary btn-sm" id="idcuentacontable" (click)="showAccounts()"
+                                matTooltip="Seleccione cuenta">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Nombre cuenta" styleSpan="size-span-campo">
+                        <input type="text" [(ngModel)]="caja.name_cuenta_caja" class="form-control form-control-sm"
+                            placeholder="nombre cuenta contable" disabled>
+                    </app-cc-input-group-prepend>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Nombre caja" styleSpan="size-span-campo">
+                        <input type="text" [(ngModel)]="caja.nombre_caja" class="form-control form-control-sm"
+                            placeholder="Ingrese nombre caja" id="nameBox">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Monto apertura" styleSpan="size-span-campo">
+                        <input type="number" [(ngModel)]="caja.monto" class="form-control form-control-sm text-right"
+                            placeholder="Monto apertura" min="0" (keypress)="commonServices.FormatDecimalVal($event)"
+                            id="montoBox">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Monto mínimo" styleSpan="size-span-campo">
+                        <input type="number" [(ngModel)]="caja.mov_minimo"
+                            class="form-control form-control-sm text-right" placeholder="Monto mínimo" min="0"
+                            (keypress)="commonServices.FormatDecimalVal($event)" id="movBox">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo">
+                        <input type="text" class="form-control form-control-sm" placeholder="Beneficiario"
+                            [(ngModel)]="caja.beneficiario" id="idBenf">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Cuenta banco" styleSpan="size-span-campo">
+                        <select [(ngModel)]="caja.fk_banco" class="form-control form-control-sm custom-select"
+                            [disabled]="permisions.editar == '0'" (ngModelChange)="getNameBank($event)" id="idBank">
+                            <option [value]="0">Seleccione banco</option>
+                            <option *ngFor="let d of arrayBanks" [value]="d.id_banks"> {{d.name_banks}} </option>
+                        </select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="No. trx/cheque" styleSpan="size-span-campo">
+                        <input type="text" class="form-control form-control-sm" placeholder="No. transacción/cheque"
+                            [(ngModel)]="caja.num_doc_tx" id="idNumDoc" ><!-- [disabled]="!isTxNumber"  -->
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-8">
+                    <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo">
+                        <textarea class="form-control" rows="2" [(ngModel)]="caja.observacion"
+                            placeholder="Ingrese observación"></textarea>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                        <select [(ngModel)]="caja.estado" class="form-control form-control-sm custom-select mt-2"
+                            [disabled]="permisions.editar == '0' || !btnMod">
+                            <option [value]="1">Activo</option>
+                            <option [value]="0">Inactivo</option>
+                        </select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <br>
+        </app-button-radio-active>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCraCChi"></cc-spiner-procesar>

@@ -1,0 +1,31 @@
+<app-button-radio-active-new [titulo]="fTitle" cstyle="bg-light" icono="fas fa-exclamation-triangle"
+    filtroBoton="btnsModalReclamos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row m-0">
+        <div class="col-12 col-md-6 pt-0 pb-0">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" [(ngModel)]="reclamo.fecha"  [readonly]="reclamo.id">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12 col-md-6 pt-0 pb-0">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select [items]="estados" bindValue="value" bindLabel="label" [(ngModel)]="reclamo.estado"
+                    class="form-control" [markFirst]="true">
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row m-0">
+        <div class="col-12 col-md-12 pt-0 pb-0">
+            <app-cc-input-group-prepend label="Observacion Inicial">
+                <textarea class="form-control" [(ngModel)]="reclamo.observacion_inicial" rows="5" [disabled]="reclamo.id"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row m-0" *ngIf="reclamo.id">
+        <div class="col-12 col-md-12 pt-0 pb-0">
+            <app-cc-input-group-prepend label="Observacion Final">
+                <textarea class="form-control" [(ngModel)]="reclamo.observacion_final"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+</app-button-radio-active-new>

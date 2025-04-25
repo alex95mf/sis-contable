@@ -1,0 +1,48 @@
+
+.filters 
+{
+background-color: white;
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 6px 0px 8px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                   /*  text-align: center !important; */
+                    padding: 5px 10px 5px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+    }
+}
+
+.stockA {
+    background-color: #faa04d;
+    color: black;
+}

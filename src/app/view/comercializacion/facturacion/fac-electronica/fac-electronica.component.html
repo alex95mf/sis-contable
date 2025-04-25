@@ -1,0 +1,23 @@
+<br>
+<app-button-radio-active titulo="Facturación Electrónica" filtroBoton="btnFacElt" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-building-o">
+
+
+    <ul class="nav nav-tabs color-input-estandar">
+        <li class="nav-item" *ngFor="let valor of listadoTabDinamic">
+            <a class="nav-link {{valor.activeTab}}" (click)="buscarDocumentos(valor)" data-toggle="tab" href="#dat{{valor.item.tipo}}">{{valor.item.nombre}}</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" style="background-color: rgb(255 255 255 / 5%);">
+        <div *ngFor="let valor of listadoTabDinamic" id="dat{{valor.item.tipo}}" class="{{valor.classDin}}">
+             <app-tipo-factura *ngIf="valor.item.tipo === '01'"  ></app-tipo-factura>
+             <app-tipo-liquidacion *ngIf="valor.item.tipo === '03'"  ></app-tipo-liquidacion>
+             <app-tipo-ncredito *ngIf="valor.item.tipo === '04'" ></app-tipo-ncredito>
+             <app-tipo-retencion *ngIf="valor.item.tipo === '07'" ></app-tipo-retencion>
+        </div>
+
+    </div>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spFacEltro"></cc-spiner-procesar>

@@ -1,0 +1,28 @@
+<div class="table-responsive responsive-table">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th style="text-align: left;">Id</th>
+                <th style="text-align: left;">Nombre Bodega</th>
+                <th style="text-align: left;">Nombre Empresa</th>
+                <th style="text-align: left;">Nombre Sucursal</th>
+                <th style="text-align: left;">Ciudad</th>
+                <th style="text-align: left;">Dirección</th>
+                <th style="text-align: left;">Encargado</th>
+                <th style="text-align: left;">Teléfono</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="validaDtBodega">
+            <tr *ngFor="let dt of dataBodega"  style="cursor:pointer;text-align:left;" (click)="updateBodega(dt)">
+                <td style="padding-left: 17px;">{{ dt.id_bodega_cab}}</td>
+                <td style="padding-left: 17px;">{{ dt.nombre }}</td>
+                <td style="padding-left: 17px;">{{ dt.nombre_empresa }}</td>
+                <td style="padding-left: 17px;">{{ dt.nombre_sucursal}}</td>
+                <td style="padding-left: 17px;">{{ dt.ciudad }}</td>
+                <td style="padding-left: 17px;">{{ dt.direccion }}</td>
+                <td style="padding-left: 17px;">{{ dt.nombre_usuario}}</td>
+                <td style="padding-left: 17px;">{{ dt.telefono }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

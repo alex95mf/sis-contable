@@ -1,0 +1,87 @@
+
+<app-button-radio-active [titulo]="isNew ? 'Generar Nuevo Sueldo' : 'Modificar Sueldo'" cstyle="bg-gradient-primary text-white" filtroBoton="btnSueldo" [groupButton]="botonera" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-plus-square" >
+    <fieldset class="border py-1 px-3 my-3" >
+        <legend class="mb-0 w-auto font-weight-bold">{{isNew ? 'Generar Nuevo Sueldo' : 'Modificar Sueldo'}}</legend>
+        <div class="row">
+            <div class="col-sm-8">
+                <app-cc-input-group-prepend label="Grupo Ocupacional" styleSpan="size-span-campo font-weight-bold" style="width: 155px">
+                    <ng-select 
+                        class="form-control" 
+                        [markFirst]="false"
+                        [(ngModel)]="sueldo.grupo_ocupacional"
+                        placeholder="Seleccione un Grado"
+                        [items]="grado"
+                        bindValue="id_grb_ocupacional" 
+                        bindLabel="grb_grupo_ocupacional" 
+                        [clearable]="false"
+                        [disabled]="deshabilitar">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Código Sectorial" styleSpan="size-span-campo font-weight-bold" style="width: 155px">
+                    <input type="text" class="form-control" [(ngModel)]="sueldo.codigo_sectorial" [disabled]="deshabilitar" maxlength="13">
+                </app-cc-input-group-prepend>
+            </div> 
+                      
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <app-cc-input-group-prepend label="Cargo" styleSpan="size-span-campo font-weight-bold" style="width: 155px">
+                    <ng-select 
+                        class="form-control" 
+                        [markFirst]="false"
+                        [(ngModel)]="sueldo.cargo"
+                        placeholder="Seleccione un Cargo"
+                        [items]="cargo"
+                        bindValue="id_cargo" 
+                        bindLabel="car_nombre" 
+                        [clearable]="false" 
+                        [disabled]="deshabilitar">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Remuneración" styleSpan="size-span-campo font-weight-bold" style="width: 155px">
+                    <input currencyMask class="form-control" [(ngModel)]="sueldo.remuneracion" [disabled]="deshabilitar" onclick="this.select()">
+                </app-cc-input-group-prepend>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <app-cc-input-group-prepend label="Tipo de Contrato" styleSpan="size-span-campo font-weight-bold" style="width: 155px">
+                    <ng-select 
+                        class="form-control" 
+                        [markFirst]="false" 
+                        [(ngModel)]="sueldo.tipo_contrato"   
+                        placeholder="Seleccione un Tipo de Contrato"
+                        [items]="contrato" 
+                        bindValue="id_catalogo" 
+                        bindLabel="cat_nombre"  
+                        [clearable]="false" 
+                        [disabled]="deshabilitar">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold" style="width: 155px">
+                    <ng-select 
+                        class="form-control" 
+                        [markFirst]="false"
+                        [(ngModel)]="sueldo.estado"     
+                        placeholder="Seleccione un Estado"
+                        [items]="estado" 
+                        bindValue="id_catalogo" 
+                        bindLabel="cat_nombre"  
+                        [clearable]="false"
+                        [disabled]="deshabilitar">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSpiner" lTipo="sp"></cc-spiner-procesar>

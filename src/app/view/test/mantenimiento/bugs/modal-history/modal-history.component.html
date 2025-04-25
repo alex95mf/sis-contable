@@ -1,0 +1,99 @@
+<app-button-radio-active [titulo]="titleModal" cstyle="bg-light" icono="fas fa-bug"
+    filtroBoton="btnsHistoryBubsModal" 
+    [groupButton]="vmButtonsHistory" 
+    (onMetodoGlobal)="metodoGlobalHistory($event)">
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-print font-weight-bold">
+                <input id="fecha" type="date" class="form-control" [(ngModel)]="bugHistory.fecha">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Tipo de Identificacion" styleSpan="size-span-print font-weight-bold">
+                <ng-select [items]="cmb_tipo_identificacion" bindValue="valor" bindLabel="valor"
+                    [(ngModel)]="bugHistory.tipo_documento" class="form-control"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-print font-weight-bold">
+                <input  type="text" class="form-control" readonly 
+                [ngModel]="bugHistory.empleado?.nombre">
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-primary" (click)="expandEmpleado()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </app-cc-input-group-prepend>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Costo " styleSpan="size-span-print font-weight-bold">
+                <input currencyMask class="form-control" [(ngModel)]="bugHistory.costo">
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-6">
+        
+            <app-cc-input-group-prepend label="Estado Bug" styleSpan="size-span-print font-weight-bold">
+                <ng-select [items]="lstestados" bindValue="estado" bindLabel="estado"
+                [(ngModel)]="bugHistory.estado_history"
+                    class="form-control"></ng-select>
+        
+            </app-cc-input-group-prepend>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Observacion" 
+                styleSpan="size-span-print font-weight-bold">
+                <textarea type="text" class="form-control form-control-sm" 
+                placeholder="Observación" 
+                [(ngModel)]="bugHistory.observacion" maxlength="300"></textarea>
+            </app-cc-input-group-prepend>
+
+            
+
+
+        </div>
+
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th>Costo</th>
+                <th>Observacion</th>
+                <th>Empleado</th>
+                <th>Usuario</th>
+                            
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of lstBugsHistory">
+                <td>{{item.id_test_bugs_history}}</td>
+                <td>{{item.estado_history}}</td>
+                <td>{{item.fecha}}</td>
+                <td  class="text-right">$ {{item.costo | number:"1.2-2"}}</td>
+                <td>{{item.observacion}}</td>
+                <td>{{item.empleado?.emp_full_nombre}}</td>
+                <td>{{item.usuario?.nombre}}</td>
+            </tr>
+        
+    
+        </tbody>
+    
+        
+    </table>
+</app-button-radio-active>
+
+
+<cc-spiner-procesar ltexto="Guardando......"></cc-spiner-procesar>

@@ -1,0 +1,87 @@
+<app-button-radio-active-new titulo="Tareas" cstyle="bg-light text-dark" icono="fas fa-tasks"
+  filtroBoton="btnsTareas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+
+    <div class="row m-0">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Filtros</legend>
+                <div class="row m-0">
+
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Nombre de la Tarea" styleSpan="input-group-text font-weight-bold size-span-campo">
+                            <input id="filter_tarea" type="text" class="form-control" [(ngModel)]="filter.tarea">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <!-- <div class="col">
+                        <app-cc-input-group-prepend label="Prioridad" styleSpan="input-group-text font-weight-bold size-span-campo">
+                            <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.prioridad">
+                        </app-cc-input-group-prepend>
+                    </div> -->
+                    
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Prioridad" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select id="prioridad" class="form-control form-control-sm" [(ngModel)]="prioridadSelected" (change)="asignarPrioridad($event)" [clearable]="true">
+                                <ng-option disabled [value]="0" disabled>Seleccione una Prioridad</ng-option>
+                                <ng-option *ngFor="let op of prioridadList" [value]="op.value">{{ op.label }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+
+                </div>
+            </fieldset>
+        </div>
+    
+    </div>  
+
+    <div class="row m-0">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                <thead class="sticky-header">
+                    <tr class="text-center">
+                        <th>Nombre</th>
+                        <th>Descripción de puesto</th>
+                        <th>Prioridad</th>
+                        <th>Acción</th>
+            
+                    </thead>
+                    <tbody>
+                      <tr *ngIf="!tareasTable.length">
+                        <td colspan="8" class="text-center">
+                          <h6>No hay Usuario colocados</h6>
+                        </td>
+                      </tr>
+                      <tr *ngFor="let tarea of tareasTable; let i = index" style="cursor: pointer;">
+                        <td> {{ tarea.nombre }} </td>
+                        <td> {{ tarea.descripcion }} </td>
+                        <!-- <td> {{ tarea.prioridad }} </td> -->
+                        <td class="text-center"><i placement="bottom" [ngbTooltip]="tarea.prioridad == 'A' ? 'Alta' : tarea.prioridad == 'M' ? 'Media' : 'Baja'" [class]="tarea.prioridad == 'A' ? 'fas fa-circle text-danger' : tarea.prioridad == 'M' ? 'fas fa-circle text-warning' : 'fas fa-circle text-success'"></i>
+                            {{tarea.prioridad == 'A' ? 'Alta' : tarea.prioridad == 'M' ? 'Media' : 'Baja'}}
+                        </td>
+                        <td> 
+                            <div class="text-center mx-auto">
+                                <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(tarea)" placement="left" ngbTooltip="Seleccionar contribuyente">
+                                    <i class="fas fa-hand-pointer"></i>
+                                </button>
+                            </div>
+                        </td>
+                        
+                      </tr>
+                    </tbody>
+                </table>
+                <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage"
+                  [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)" aria-label="Select page">
+                </mat-paginator>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+</app-button-radio-active-new>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

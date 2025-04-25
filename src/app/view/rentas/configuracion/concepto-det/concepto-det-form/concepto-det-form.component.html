@@ -1,0 +1,136 @@
+<div *ngIf="true">
+
+    <app-button-radio-active [titulo]="esNuevo ? 'Nuevo Concepto Detalle' : 'Editar Concepto Detalle'" filtroBoton="formBtnConceptoDet" cstyle="bg-gradient-primary text-white" [groupButton]="botonera" (onMetodoGlobal)="metodoGlobal($event)" [icono]="esNuevo ? 'far fa-plus-square' : 'far fa-edit'">
+        <div class="row mt-3">
+
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold">C&oacute;digo</span>
+                    </div>
+                    <input id="codigo" type="text" class="form-control form-control-sm" placeholder="Código" [(ngModel)]="concepto_detalle.codigo_detalle" maxlength="10">
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold">Nombre</span>
+                    </div>
+                    <input id="nombre" type="text" class="form-control form-control-sm" placeholder="Nombre" [(ngModel)]="concepto_detalle.nombre_detalle" maxlength="150">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold">Cuenta deudora</span>
+                    </div>
+                    
+                    <input list="lst_ctas_deudoras" readonly (keyup)="lookup($event, 'deudora')" id="cuenta_deudora" type="text" class="form-control form-control-sm custom-select" placeholder="Cuenta Deudora" [(ngModel)]="concepto_detalle.cuenta_deudora" maxlength="20">
+                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('Deudora')" [readonly]="searching.deudora"> Consultar</button>
+                    <!-- <datalist id="lst_ctas_deudoras">
+                        <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                    </datalist> -->
+                </div>
+            </div> 
+
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Nombre cuenta Deudora" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="descripcion_deudora" type="text" readonly/>
+                    
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-12">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold">Cuenta acreedora</span>
+                    </div>
+                    <input list="lst_ctas_acreedoras" readonly (keyup)="lookup($event, 'acreedora')" id="cuenta_acreedora" type="text" class="form-control form-control-sm" placeholder="Cuenta Acreedora" [(ngModel)]="concepto_detalle.cuenta_acreedora" maxlength="20">
+                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('Acreedora')" [readonly]="searching.acreedora"> Consultar</button>
+                    <!-- <datalist id="lst_ctas_acreedoras">
+                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                    </datalist> -->
+                </div>
+            </div>
+
+
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Nombre cuenta Acreedora" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="descripcion_acreedora" type="text" readonly/>
+                    
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-12">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold">C&oacute;digo presupuesto</span>
+                    </div>
+                    <input list="lst_ctas_presupuesto" readonly (keyup)="lookup($event, 'presupuesto')" id="codigo_presupuesto" type="text" class="form-control form-control-sm" placeholder="Código presupuesto" [(ngModel)]="concepto_detalle.codigo_presupuesto" maxlength="20">
+                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" [readonly]="searching.presupuesto"> Consultar</button>
+                    <!-- <datalist id="lst_ctas_presupuesto">
+                        <option *ngFor="let cta of cuentas.presupuesto" [value]="cta.codigo">{{ cta.codigo }} {{ cta.nombre }}</option>
+                    </datalist> -->
+                </div>
+            </div>
+
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Nombre cuenta Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="descripcion_presupuesto" type="text" readonly/>
+                    
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Valor del concepto</span>
+                    </div>
+                    <input id="valor" currencyMask maxlength="9" class="form-control form-control-sm" [(ngModel)]="concepto_detalle.valor">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">¿Aplica exoneraci&oacute;n?</span>
+                    </div>
+                    <ng-select id="tiene_exoneracion" class="form-control form-control-sm" [(ngModel)]="concepto_detalle.tiene_exoneracion">
+                        <ng-option disabled [value]="0">Seleccione una respuesta</ng-option>
+                        <ng-option *ngFor="let op of tieneExoneracion" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-2 mb-3">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold">Estado</span>
+                    </div>
+                    <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="concepto_detalle.estado" [clearable]="false">
+                        <ng-option disabled [value]="0" disabled>Seleccione un estado</ng-option>
+                        <ng-option *ngFor="let op of lista_estado" [value]="op.estado">{{ op.valor }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-2 mb-3">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold">Concepto</span>
+                    </div>
+                    <ng-select id="concepto" class="form-control form-control-sm" [(ngModel)]="concepto_detalle.fk_concepto">
+                        <ng-option disabled [value]="0">Seleccione un concepto</ng-option>
+                        <ng-option *ngFor="let op of lista_conceptos" [value]="op.id_concepto">{{ op.codigo + " - " + op.nombre }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+        </div>
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar [ltexto]="texto_barra_carga" lfulScren=true lTipo="FormconceptoDet"></cc-spiner-procesar>

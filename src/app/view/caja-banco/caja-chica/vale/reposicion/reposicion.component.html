@@ -1,0 +1,159 @@
+<div class="modal-body">
+    <app-button-radio-active titulo="Reposición de caja chica" filtroBoton="btnsRepos"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-money-bill">
+        <div class="table-responsive responsive-table mt-2 mb-2">
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Monto" styleSpan="size-span-campo">
+                        <input type="number" class="form-control form-control-sm text-right pr-1" placeholder="$ {{ repoAux.monto }}"
+                            [disabled]="true" >
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Saldo" styleSpan="size-span-campo">
+                        <input type="number" class="form-control form-control-sm text-right pr-1" placeholder="$ {{ repoAux.saldo }}"
+                            [disabled]="true">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Banco" styleSpan="size-span-campo">
+                        <select [(ngModel)]="repoAux.fk_banco" (ngModelChange)="validateBank($event)"
+                            class="form-control form-control-sm custom-select">
+                            <option [value]="0">Seleccione banco</option>
+                            <option *ngFor="let d of arrayBanks" [value]="d.id_banks">
+                                {{ d.name_banks }}
+                            </option>
+                        </select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Reposición" styleSpan="size-span-campo">
+                        <input type="number" class="form-control form-control-sm text-right pr-1"
+                            placeholder="$ {{ repoAux.reposition }}" [disabled]="true">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo">
+                        <input type="text" class="form-control form-control-sm" placeholder="Beneficiario"
+                            [(ngModel)]="repoAux.beneficiario" id="idBenef">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="No. Trx/cheque" styleSpan="size-span-campo">
+                        <input type="text" class="form-control form-control-sm" placeholder="No. Documento"
+                            [(ngModel)]="repoAux.num_doc_tx" id="idTrx"><!-- [disabled]="!isTxNumber" -->
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Observación</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<div [hidden]="true" id="print-section"
+    *ngIf="dataSucursal != undefined && reposition[0]['detalle'] != undefined && repoAux != undefined">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-7 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <img src="{{empresLogo}}" alt="" style="width: 220px;">
+                            </div>
+                            <div class="col-12 mt-3">
+                                {{dataUser.company.razon_social}} - {{dataUser.company.ruc}}
+                            </div>
+                            <div class="col-12">
+                                Dirección: {{dataSucursal.direccion}} - Teléfono:
+                                {{dataSucursal.telefono1}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 text-center mt-5">
+                    <div class="sect-two pt-2 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-0" style="font-size: 25px;font-weight: 600">
+                                REPOSICIÓN CAJA
+                            </div>
+                            <div class="col-12 mt-1" style="font-size: 20px !important;">
+                                Total $ {{repoAux.monto}}
+                            </div>
+                            <div class="col-12 mt-1 mb-0" style="font-size: 20px;">
+                                Saldo $ {{repoAux.saldo }}
+                            </div>
+                            <div class="col-12" style="font-size: 20px;margin-bottom: 10px;">
+                                Reposición $ {{repoAux.reposition}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-11 mt-4 pl-2 pr-2">
+            <div class="row">
+                <div class="col-12 text-center ">
+                    <div style="background-color: #5b9bd5 !important;color: white;" class="pl-1 pr-1">
+                        DETALLE REPOSICIÓN
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 15%; ">Beneficiario</th>
+                                <th style="width: 15%;text-align: right;padding-right: 10px;">Valor</th>
+                                <th style="width: 15%; ">Fecha</th>
+                                <th style="width: 55%; ">Concepto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of reposition[0]['detalle']; let i = index">
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.beneficiario}}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.value_total_mov}}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>{{dt.fecha_mov}}</span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>{{dt.concepto}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #13A1EA;">Usuario: {{dataUser.usuario}}</span>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spShowReposition"></cc-spiner-procesar>

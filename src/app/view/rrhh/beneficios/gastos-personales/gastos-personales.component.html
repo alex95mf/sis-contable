@@ -1,0 +1,353 @@
+<div class="mt-4 mb-5">
+<app-button-radio-active titulo="GASTOS PERSONALES" cstyle="bg-light" icono="fas fa-file-alt"
+    filtroBoton="btnsGastosPersonales"  [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <mat-tab-group (selectedTabChange)="handleTabNavigation($event)">
+        <mat-tab label="Individual">
+            <!-- <form autocomplete="off" [formGroup]="fomulario_gasto_personal"> -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!-- <app-cc-select-periodos-nom [ngModelCcPeriodo]="periodo_id_cc"
+                            (ccPeriodoSelecionado)="viewSelectionPeriodoCC($event)" [optionDefault]="'Selecionar opcion'" #namePeriodo
+                            [labelDescription]="'Periodo'" estado="A">
+                        </app-cc-select-periodos-nom> -->
+
+                        <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" appendTo="body" [clearable]="false" (change)="viewSelectionPeriodoCC($event)" [(ngModel)]="filter.periodo" 
+                                [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                        <!-- <mat-error *ngIf="fomulario_gasto_personal.controls.namePeriodo.errors?.required">
+                            Periodo es
+                            requerido</mat-error> -->
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Buscar
+                                    Empleado</span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="gastosPersonalesForm.num_documento"
+                                placeholder="Busqueda Empleado"   [readonly]="isDisabled">
+                            <!-- <input type="text" class="form-control" [(ngModel)]="gastosPersonalesForm.num_documento"
+                                #nameNumDocumento placeholder="Busqueda Empleado" formControlName="lgNumDocumento"  [readonly]="isDisabled"> -->
+                            <div class="input-group-append">
+                                <button (click)="onClicConsultaPersonas()"  class="btn btn-sm btn-primary" type="button" [disabled]="isDisabled">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- <mat-error *ngIf="fomulario_gasto_personal.controls.num_documento.errors?.required">
+                            Cedula es
+                            requerido</mat-error> -->
+                    </div>
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Nombre Empleado" styleSpan="size-span-campo">
+                            <input [(ngModel)]="gastosPersonalesForm.nombre_completo" type="text" class="form-control form-control-sm"
+                                placeholder="Nombre completo" disabled>
+                            <!-- <input [(ngModel)]="gastosPersonalesForm.nombre_completo" type="text" class="form-control form-control-sm"
+                                placeholder="Nombre completo" #nameNombreCompleto formControlName="lgNombreCompleto" disabled> -->
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+        
+            <!-- </form> -->
+
+            <div class="row">
+                <div class="col-6">
+                    <!-- Ingresos -->
+                    <fieldset class="border px-3 pb-2 mt-2">
+                        <legend class="w-auto bg-dark mb-1">Ingresos</legend>
+                        <div class="row">
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Otro Empleador" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.otro_empleador" (blur)="valoresCalculables()" [disabled]="formReadonly">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Sueldo" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" currencyMask readonly [ngModel]="impuestoRenta?.sueldo">
+                                    <input class="form-control" currencyMask readonly [ngModel]="impuestoRenta?.sueldo_anual">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Horas Extra" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.horas_extra_mensual" (blur)="calcularHorasExtra()" placeholder="Mensual" [disabled]="formReadonly">
+                                    <input class="form-control" currencyMask [options]="{nullable: false}" readonly [(ngModel)]="impuestoRenta.horas_extra" placeholder="Anual">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Bonificaciones" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.bonificaciones" (blur)="valoresCalculables()" [disabled]="formReadonly">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Comisiones" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.comisiones_mensual" (blur)="calcularComisiones()" placeholder="Mensual" [disabled]="formReadonly">
+                                    <input class="form-control" currencyMask [options]="{nullable: false}" readonly [(ngModel)]="impuestoRenta.comisiones" placeholder="Anual">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Utilidades" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.utilidades" [disabled]="formReadonly" (blur)="valoresCalculables()">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Este Empleador" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" currencyMask [options]="{nullable: false}" readonly [(ngModel)]="impuestoRenta.este_empleador">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Total Ingresos" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" currencyMask [options]="{nullable: false}" readonly [(ngModel)]="impuestoRenta.total_ingresos">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-6">
+                    <!-- Egresos -->
+                    <fieldset class="border px-3 pb-2 mt-2">
+                        <legend class="w-auto bg-dark mb-1">Egresos</legend>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="IESS Personal" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" currencyMask readonly [(ngModel)]="impuestoRenta.iess_personal">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="IESS Otro Empleador" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" currencyMask readonly [(ngModel)]="impuestoRenta.iess_otro_empleador">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Otros Gastos" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" currencyMask [options]="{nullable: false}" [(ngModel)]="impuestoRenta.otros_gastos" (blur)="valoresCalculables()" [disabled]="formReadonly">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Total Egresos" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" currencyMask [options]="{nullable: false}" readonly [(ngModel)]="impuestoRenta.total_egresos">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <!-- Rebajas -->
+                    <fieldset class="border px-3 pb-2 mt-2">
+                        <legend class="w-auto bg-dark mb-1">Rebajas</legend>
+                        <div class="col-6">
+                            <app-cc-input-group-prepend label="Cargas Familiares" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" [(ngModel)]="impuestoRenta.num_cargas_familiares" (blur)="handleInputCargas()" [disabled]="formReadonly">
+                                
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Max. Gasto Personal" styleSpan="size-span-campo font-weight-bold">
+                                <input currencyMask readonly [(ngModel)]="impuestoRenta.maxGastoPersonal" class="form-control">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Gastos Personales" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" currencyMask readonly [ngModel]="impuestoRenta.deducibles">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Discapacidad" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [(ngModel)]="empleado.discapacitado" (change)="handleSelectDiscapacidad($event)"
+                                    [items]="cmb_discapacitado" bindValue="value" bindLabel="label" [clearable]="false" [disabled]="formReadonly">
+                                </ng-select>
+                                <input currencyMask [options]="{prefix: '', suffix: '%', precision: 0, nullable: false}" [disabled]="roDiscapacidad" 
+                                    [(ngModel)]="empleado.porcentaje_discapacidad" class="form-control" (blur)="consultarTablaDiscapacidad()" placeholder="Porcentaje">
+                                <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.rebaja_discapacidad" readonly placeholder="Valor">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Tercera Edad" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [(ngModel)]="empleado.tercera_edad" (change)="handleSelectTerceraEdad($event)"
+                                    [items]="cmb_tercera_edad" bindValue="value" bindLabel="label" [clearable]="false" [disabled]="formReadonly">
+                                </ng-select>
+                                <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.rebaja_tercera_edad" [readonly]="roTerceraEdad" placeholder="Valor">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        
+                    </fieldset>
+                </div>
+                <div class="col-6">
+                    <!-- Otros Calculos Finales -->
+                    <fieldset class="border px-3 pb-2 mt-2">
+                        <legend class="mb-1 w-auto">Totales</legend>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Base Imponible" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" currencyMask readonly [(ngModel)]="impuestoRenta.base_imponible">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Impuesto Causado" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" currencyMask readonly [(ngModel)]="impuestoRenta.impuesto_causado">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Retenciones" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" currencyMask [(ngModel)]="impuestoRenta.retenciones" [disabled]="formReadonly"  (blur)="calcularBase()">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Rebaja Gastos Personales" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" currencyMask readonly [(ngModel)]="impuestoRenta.rebaja_gastos_personales">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Impuesto Anual" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" currencyMask readonly [(ngModel)]="impuestoRenta.impuesto_renta_anual">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12">
+                            <app-cc-input-group-prepend label="Impuesto Mensual" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" currencyMask readonly [(ngModel)]="impuestoRenta.impuesto_renta_mensual">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            
+        
+            <fieldset class="border p-2 mb-1 mt-2 filters">
+                <legend class="w-auto h6">Gastos Proyectados</legend>
+               
+                <div class="table-responsive">
+                    
+                    <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                        <!-- datatable [dtOptions]="dtOptions" -->
+                    <table 
+                        class="table   table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>AÑO</th>
+                                <th>RUBRO</th>
+                                <th>DESCRIPCIÓN</th>
+                                <th>CÓDIGO FORMULARIO</th>
+                                <!-- <th>VALOR TOPE</th> -->
+                                <th>VALOR PROYECTADO</th>
+                                <th>VALOR REAL</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="validarRegistroTabla > 0 else TablaCatalogoNomina">
+                        <!-- <tbody *ngIf="dataGastosPersonales.length > 0 else TablaCatalogoNomina"> -->
+                            <!-- <tr *ngFor="let gatPersn of dataGastosPersonales" (click)="setRubro(rub)" style="cursor: pointer"> -->
+                            <tr *ngFor="let gatPersn of dataGastosPersonales" style="cursor: pointer">
+                                <td>{{ gatPersn.gtp_anio  }}</td>
+                                <td>{{ gatPersn.codigo_formulario.noc_nombre }}</td>
+                                <td>{{ gatPersn.codigo_formulario.noc_descripcion }}</td>
+                                <td>{{ gatPersn.codigo_formulario.noc_num_casillero }}</td>
+                                <!-- <td class="text-right">$ {{ gatPersn.codigo_formulario.valor_tope }}</td> -->
+                                <td>
+                                    <div>
+                                        <input [(ngModel)]="gatPersn.gtp_valor_proyectado" currencyMask  #vChValorProyectado [readonly]="isDisabled" (blur)="validarUpdateValorProyectado(gatPersn)">
+                                        <!-- <input [(ngModel)]="gatPersn.gtp_valor_proyectado" currencyMask  #vChValorProyectado [readonly]="isDisabled" (blur)="onBlurUpdateValorProyectado($event.target.value , gatPersn)"> -->
+                                    </div>
+                                    <!-- {{ gatPersn.gtp_valor_proyectado }} -->
+                                </td>
+                                <td>
+                                    <div>
+                                        <input [(ngModel)]="gatPersn.gtp_valor_real" currencyMask #vChValorReal [readonly]="isDisabled" (blur)='validarUpdateValorReal(gatPersn)'>
+                                        <!-- <input [(ngModel)]="gatPersn.gtp_valor_real" currencyMask #vChValorReal [readonly]="isDisabled" (blur) = 'onBlurUpdateValorReal($event.target.value, gatPersn)'> -->
+                                    </div>
+                                    <!-- {{ gatPersn.gtp_valor_real }} -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-right font-weight-bold">Total:</td>
+                                <td colspan="1" class="text-right font-weight-bold">$ {{ commonService.formatNumberDos(sumGastos.proyectado) }}</td>
+                                <td colspan="1" class="text-right font-weight-bold">$ {{ commonService.formatNumberDos(sumGastos.real) }}</td>
+                            </tr>
+                        </tbody>
+                        <!-- Datos Vacios -->
+                        <ng-template #TablaCatalogoNomina>
+                            <tbody>
+                                <tr *ngFor="let nomCat of dataCatalogNomina" style="cursor: pointer" 
+                                (click)="setGastosPersonales(nomCat)" >
+                                    <td style="width: 10%;">
+                                        {{ cc_value_anio }}
+                                    </td>
+                                    <td>{{ nomCat.noc_nombre }}</td>
+                                    <td>{{ nomCat.noc_descripcion }}</td>
+                                    <td>{{ nomCat.noc_num_casillero }}</td>
+                                    <!-- <td class="text-right">$ {{ nomCat.valor_tope }}</td> -->
+                                    <td>
+                                        <div>
+                                            <input class="border-0" [(ngModel)]="nomCat.valor_proyectado" #vChValorProyectado  [readonly]="isDisabled" [disabled]="isDisabled" currencyMask (blur)="validarValorProyectado(nomCat)" >
+                                            <!-- <input class="border-0" [ngModel]="nomCat.valor_proyectado" #vChValorProyectado  [readonly]="isDisabled" [disabled]="isDisabled" currencyMask (blur)="onBlurValorProyectado($event.target.value , nomCat)" > -->
+                                            <!-- <input [(ngModel)]="nomCat.valor_proyectado"   (blur) = 'onBlurValorProyectado(nomCat)' type="number"> -->
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input class="border-0" [(ngModel)]="nomCat.valor_real" #vChValorReal  [readonly]="isDisabled" [disabled]="isDisabled" currencyMask (blur)='validarValorReal(nomCat)'>
+                                            <!-- <input class="border-0" [ngModel]="nomCat.valor_real" #vChValorReal  [readonly]="isDisabled" [disabled]="isDisabled" currencyMask (blur) = 'onBlurValorReal($event.target.value, nomCat)'> -->
+                                            <!-- <input [(ngModel)]="nomCat.valor_real"  type="number"> -->
+                                        </div>
+                                    </td>
+                                    <!-- <td> 0 </td> -->
+                                    <!-- <td> 0 </td> -->
+                                    <!-- <td>{{ nomCat.gtp_valor_proyectado }}</td>
+                                    <td>{{ nomCat.gtp_valor_real }}</td> -->
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right font-weight-bold">Total:</td>
+                                    <td colspan="1" class="text-right font-weight-bold">$ {{ commonService.formatNumberDos(sumGastos.proyectado)  }}</td>
+                                    <td colspan="1" class="text-right font-weight-bold">$ {{ commonService.formatNumberDos(sumGastos.real)  }}</td>
+                                </tr>
+                            </tbody>
+                        </ng-template>
+                    </table>
+                </div>
+            </fieldset>
+        
+            <fieldset class="border px-3 pb-2 my-2">
+                <legend class="w-auto h6 mb-1">Impuesto a la Renta</legend>
+                <table class="table mat-elevation-z2">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Anual</th>
+                            <th>Mensual</th>
+                            <th>Acumulado</th>
+                            <th>Pendiente</th>
+                            <th>Motivo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="dataImpuestoRenta.length; else irVacio">
+                            <tr *ngFor="let element of dataImpuestoRenta" [ngClass]="{'table-secondary': element.estado == 'I', 'table-success': element.estado == 'A'}">
+                                <td>$ {{element.impuesto_renta_anual | number:'1.2-2'}}</td>
+                                <td>$ {{element.impuesto_renta_mensual | number:'1.2-2'}}</td>
+                                <td>$ {{element.acumulado | number:'1.2-2'}}</td>
+                                <td>$ {{element.impuesto_renta_anual_x_cobrar | number:'1.2-2'}}</td>
+                                <td>
+                                    {{element.motivo}}<br>
+                                    <small class="text-muted">{{ element.fecha_registro | date:'yyyy-MM-dd' }}</small>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #irVacio>
+                            <tr>
+                                <td class="text-center" colspan="5"><span class="h6">No hay registros para mostrar</span></td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </fieldset>
+        </mat-tab>
+        <mat-tab label="Masivo">
+            <ng-template matTabContent>
+                <app-view-masivo></app-view-masivo>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spBacnBcn"></cc-spiner-procesar>
+</div>

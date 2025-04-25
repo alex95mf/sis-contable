@@ -1,0 +1,94 @@
+
+<br>
+<app-button-radio-active titulo="Crear productos" filtroBoton="btnPrdInvProv" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-outdent">
+
+    <fieldset class="border p-1 mb-1 mt-2">
+        <legend class="w-auto h6">Datos del solicitante</legend>
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Tipo Suministro" styleSpan="size-span-campo">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="producto.fk_grupo" id="idTiproduct" (ngModelChange)="generatedCode()">
+                        <option [value]="0">Seleccione tipo</option>
+                        <option *ngFor="let d of arrayProductos" [value]="d.id">{{d.nombre}}</option>
+                    </select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo">
+                    <input type="text" [(ngModel)]="producto.nombre" class="form-control form-control-sm" placeholder="Ingrese nombre">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Stock mínimo" styleSpan="size-span-campo">
+                    <input type="number" [(ngModel)]="producto.stock_minimo" min="0"  class="form-control form-control-sm" (keypress)="commonServices.FormatDecimalVal($event)">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Código" styleSpan="size-span-campo">
+                    <input type="text" [(ngModel)]="producto.codigo" [disabled]="true" class="form-control form-control-sm" placeholder="Código">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Unidad de medida" styleSpan="size-span-campo">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="producto.udm" id="idTiproduct">
+                        <option [value]="0">Seleccione udm</option>
+                        <option *ngFor="let d of arrayUDM" [value]="d.unidad">{{d.unidad}}</option>
+                    </select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Stock" styleSpan="size-span-campo">
+                    <input type="number" [(ngModel)]="producto.stock" min="0" class="form-control form-control-sm" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+    </fieldset>
+
+
+    <fieldset class="border p-2 mb-1 mt-2 filters">
+        <legend class="w-auto h6">Suministros Creados</legend>
+        <div class="row">
+            <div class="col-12" style="padding-top: 20px;padding-bottom: 20px;">
+                <div class="table-responsive responsive-table">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                        class="table no-footer table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th style="text-align: left;padding-left: 10px;"># Items</th>
+                                <th style="text-align: left;padding-left: 10px;">Tipo</th>
+                                <th style="text-align: left;padding-left: 10px;">Nombre</th>
+                                <th style="text-align: left;padding-left: 10px;">Código</th>
+                                <th style="text-align: left;padding-left: 10px;">Udm</th>
+                                <th style="text-align: left;padding-left: 10px;">Stock</th>
+                                <th style="text-align: center;padding-left: 10px;">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="validaDt ">
+                            <tr *ngFor="let dt of dataDT; let i = index" style="cursor:pointer;">
+                                <td (click)="updatedItems(dt)">{{ i+1 }}</td>
+                                <td (click)="updatedItems(dt)">{{ dt.grupo.nombre }}</td>
+                                <td (click)="updatedItems(dt)">{{ dt.nombre }}</td>
+                                <td (click)="updatedItems(dt)">{{ dt.codigo }}</td>
+                                <td (click)="updatedItems(dt)">{{ dt.udm }}</td>
+                                <td (click)="updatedItems(dt)">{{ dt.stock }}</td>
+                                <td style="text-align: center" >
+                                    <button class="btn btn-danger btn-sm" (click)="deleteItems(dt)"
+                                        data-toggle="tooltip" data-placement="left" title="Eliminar Items">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+</app-button-radio-active> 
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spPrdInvProv"></cc-spiner-procesar>

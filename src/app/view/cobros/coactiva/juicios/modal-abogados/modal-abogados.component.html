@@ -1,0 +1,54 @@
+<app-button-radio-active [titulo]="fTitle" icono="fas fa-users" cstyle="bg-light text-dark"
+    filtroBoton="btnsJuicioAbogado" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+        <div class="col">
+            <h3>Juicio: {{ juicio.num_proceso }}</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly="readonly" [placeholder]="juicio.fk_contribuyente?.razon_social">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly="readonly" [placeholder]="juicio.fk_contribuyente?.num_documento">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Direcci&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly="readonly" [placeholder]="juicio.fk_contribuyente?.direccion">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col">
+            <app-cc-input-group-prepend label="Expedientes" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly="readonly" [placeholder]="juicio.expedientes?.length">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col ">
+            <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly="readonly" [placeholder]="juicio.total ?? 0">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Abogado/a" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="abogadoSelected">
+                    <ng-option disabled [value]="0">Seleccione un Abogado/a</ng-option>
+                    <ng-option *ngFor="let abogado of abogados" [value]="abogado">{{ abogado.nombres }} {{ abogado.apellidos }}</ng-option>
+                </ng-select>
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-primary" matTooltip="A&ntilde;adir Actuaci&oacute;n" (click)="ingresoAbogado()">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </app-cc-input-group-prepend>
+           
+        </div>
+
+    </div>
+    <!-- <button class="btn btn-danger" (click)="closeModal()"><i class="fas fa-window-close"></i> Cerrar</button> -->
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spJuicioAbogado"></cc-spiner-procesar>

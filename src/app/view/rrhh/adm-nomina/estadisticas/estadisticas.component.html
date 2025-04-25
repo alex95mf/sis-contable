@@ -1,0 +1,47 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Estadisticas" cstyle="bg-light" icono="far fa-chart-pie"
+        filtroBoton="btnsRRHHEstadistica" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row my-2">
+            <div class="col-4">
+                <!-- <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                    <p-calendar view="year" dateFormat="yy" [(ngModel)]="filter.periodo" [showIcon]="false"
+                        [readonlyInput]="true" [showIcon]="true" inputId="icon">
+                    </p-calendar>
+                </app-cc-input-group-prepend> -->
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo font-weight-bold"
+                            id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Periodo</span>
+                    </div>
+                    <p-calendar
+                        [readonlyInput]="true" 
+                        view="year" 
+                        dateFormat="yy" 
+                        [(ngModel)]="filter.periodo" 
+                        class="ui-calendar ui-calendar-button"
+                        [showIcon]="true" inputId="icon"
+                        [style]="{'height':'30px','display': 'inline-flex'}" 
+                        [inputStyle]="{'height':'30px','width':'150px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                    </p-calendar>
+                </div>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="filter.mes"
+                        [items]="lst_meses" bindValue="id_catalogo" bindLabel="cat_nombre">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Tipo de Permiso" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="filter.tipo"
+                        [items]="lst_tipo_permiso" bindValue="id_catalogo" bindLabel="cat_nombre">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <hr>
+        <canvas id="pieChart" #grafica></canvas>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spRRHHEstadistica"></cc-spiner-procesar>

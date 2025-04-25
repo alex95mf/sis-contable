@@ -1,0 +1,24 @@
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.col-cedula {
+    left: -3px;
+    position: sticky;
+    z-index: 1;
+    background-color: #FFFFFF;
+}
+.col-apellido {
+    left: 180px;
+    position: sticky;
+    z-index: 1;
+    background-color: #FFFFFF;
+}
+.col-nombre {
+    left: 360px;
+    position: sticky;
+    z-index: 1;
+    background-color: #FFFFFF;
+}

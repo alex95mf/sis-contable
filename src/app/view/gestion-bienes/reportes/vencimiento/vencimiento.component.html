@@ -1,0 +1,173 @@
+<app-button-radio-active-new titulo="Reporte de Vecimiento de Polizas y Garantias" 
+cstyle="bg-gradient-primary text-white"
+icono="fas fa-file"
+    filtroBoton="btnsReporteVencimiento" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div *ngIf="vSelector; then vListado; else vDetalle"></div>
+
+    <ng-template #vListado>
+        <div class="row m-0">
+            <div class="col-12">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Filtros</legend>
+            <div class="row m-0">
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="filter.num_documento">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [items]="cmb_estado" bindValue="valor" bindLabel="descripcion" [(ngModel)]="filter.estado">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [items]="cmb_tipo" bindValue="valor" bindLabel="descripcion" [(ngModel)]="filter.tipo">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+
+
+
+
+   
+            </div>
+            <div class="row m-0">
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Fecha Inicio" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control"  [(ngModel)]="filter.fecha_desde">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Fecha Final" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+            </div>
+        </div>
+
+        <div class="row m-0">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                <th >#</th>
+                                <th>No. Documento</th>
+                                <th>Proveedor</th>
+                            
+                                <th >Fecha</th>
+                                <th >Estado</th>
+                           
+                                <th> Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td *ngIf="documentos?.length==0" colspan="6" class="text-center" >
+                                    No se encontró data
+                                </td>
+                            </tr>
+
+                            <tr *ngFor="let element of documentos, let i = index">
+                                <td class="text-left">{{ i+1}}</td>
+                                <td class="text-left">
+                                    {{element.num_documento}}<br>
+                                    <small class="text-muted">{{ element.tipo_poliza }}</small>
+
+
+                                </td>
+                                <td class="text-left">
+
+                                    {{element.proveedor.razon_social}}<br>
+                                    <small class="text-muted"><strong>{{ element.proveedor.tipo_documento }}</strong> {{ element.proveedor.num_documento }}</small>
+                                </td>
+                               <td class="text-left">
+                                {{ element.fecha }}<br>
+                                <small class="text-muted">{{element.fecha_inicio}} - {{element.fecha_fin}}</small>
+
+                               </td>
+                               <td class="text-left">
+
+                                <i class="fas fa-circle" [ngClass]="{'text-warning': element.estado == 'P', 'text-danger': element.estado == 'C'}"></i>
+                                {{ element.estado == 'P' ? 'Pendiente' : element.estado == 'C' ? 'Cerrado' : 'N/A' }}
+                               </td>
+                               <td class="text-left">
+                                <button class="btn btn-primary btn-sm" (click)="select(element)">
+                                    <i class="fas fa-hand-pointer"></i>
+                                </button>
+                               </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <mat-paginator [length]="paginate.length" [pageIndex]="paginate.pageIndex" 
+                    (page)="changePage($event)" [pageSize]="paginate.perPage" 
+                    [pageSizeOptions]="paginate.pageSizeOptions">
+            
+                </mat-paginator>
+                </div>
+            </div>
+        </div> 
+        <!-- <div class="row m-0">
+            <div class="col-12">
+                <table mat-table [dataSource]="lst_documentos" class="mat-elevation-z8 w-100">
+                    <ng-container matColumnDef="num_documento">
+                        <th mat-header-cell *matHeaderCellDef> No. Documento </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.num_documento}}<br>
+                            <small class="text-muted">{{ element.tipo_poliza }}</small>
+                        </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="proveedor">
+                        <th mat-header-cell *matHeaderCellDef> Proveedor </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            {{element.proveedor.razon_social}}<br>
+                            <small class="text-muted"><strong>{{ element.proveedor.tipo_documento }}</strong> {{ element.proveedor.num_documento }}</small> </td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.fecha }}<br>
+                            <small class="text-muted">{{element.fecha_inicio}} - {{element.fecha_fin}}</small>
+                        </td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef> Estado </th>
+                        <td mat-cell *matCellDef="let element">
+                            <i class="fas fa-circle" [ngClass]="{'text-warning': element.estado == 'P', 'text-danger': element.estado == 'C'}"></i>
+                            {{ element.estado == 'P' ? 'Pendiente' : element.estado == 'C' ? 'Cerrado' : 'N/A' }}
+                        </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="acciones">
+                        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button class="btn btn-primary btn-sm" (click)="select(element)">
+                                <i class="fas fa-hand-pointer"></i>
+                            </button>
+                        </td>
+                    </ng-container>
+            
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator
+                    showFirstLastButtons
+                    [pageSizeOptions]="[10, 30, 50]"
+                    [pageSize]="30">
+                </mat-paginator>
+            </div>
+        </div> -->
+
+
+    </ng-template>
+
+    <ng-template #vDetalle></ng-template>
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spVencimientoDocumentos"></cc-spiner-procesar>

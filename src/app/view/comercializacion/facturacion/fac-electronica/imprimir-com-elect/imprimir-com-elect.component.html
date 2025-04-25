@@ -1,0 +1,244 @@
+<div class="row justify-content-center prt-comprobante" >
+    <div class="col-11 pl-2 pr-2">
+        <div class="row justify-content-center">
+            <div class="col-5 text-center mt-5">
+                <div class="sect-one pt-3 pb-3">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <img src="{{dataUser.logoEmpresa}}" alt="" style="width: 220px;">
+                        </div>
+                        <div class="col-12 mt-3">
+                            {{razonSocialEmpresa}}
+                        </div>
+                        <div class="col-12">
+                            <strong>Obligado a llevar Contabilidad:</strong> {{obligado_contabilidad}}
+                        </div>
+                        <div class="col-12">
+                            <strong>Teléfono:</strong> {{obligado_contabilidad}}
+                        </div>
+                        <div class="col-12">
+                            <strong> Dirección:</strong> {{direccionEmpresa}}
+                        </div>
+
+                        <div class="col-12">
+                            <table style="width: 100%;text-align: center;"><!-- class="table table-bordered" -->
+                                <thead>
+                                    <tr style="width: 100%;" class="text-center ">
+                                        <th colspan="3" class="quitar-espacio-2">Información Adicional</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center "><td class="quitar-espacio-2"><strong>Email empresa:</strong> {{empresaEmail}}</td></tr>
+                                    <tr class="text-center "><td class="quitar-espacio-2"><strong>Vendedor:</strong> {{lUsuario}}</td></tr>
+                                    <tr class="text-center "><td class="quitar-espacio-2"><strong>Email vendedor:</strong> {{lEmailUsuario}}</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-7 mt-5 text-center">
+                <div class="sect-two pt-3 pb-2">
+                    <div class="row ">
+                        <div class="col-12 mt-3 " style="font-size:25px;font-weight: 600">
+                            {{data.item._tipo_documento.nombre | uppercase}}
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <strong>No.</strong> {{(num_doc)}}
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <strong>Numero de Autorización:</strong> {{(data.item.autorizacion_sri)}}
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <strong>Fecha y Hora de Autorización:</strong> {{(data.item.fecha_autorizacion_sri)}}
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <strong>Ambiente:</strong> PRODUCCIÓN <!-- sacar de la tabla -->
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <strong>Emisión:</strong> NORMAL
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <strong>Clave de Acceso</strong>
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <ngx-barcode [bc-element-type]="svg" [bc-value]="data.item.codigo_acceso" [bc-format]="CODE128" 
+                                [bc-width]="1" [bc-height]="40" [bc-display-value]="true" [bc-font]="Helvetica" [bc-background]="false"
+                                [bc-text-align]="center" [bc-text-position]="bottom" [bc-text-margin]="0" [bc-font-size]="11"
+                                [bc-margin]="10" [bc-margin-top]="-5" [bc-margin-bottom]="0" [bc-margin-left]="0" [bc-margin-right]="0">
+                            </ngx-barcode> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-11 mt-4">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" >Razón Social / Nombres y Apellidos</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm"  [value]="razonSocial2 | uppercase" disabled>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend size-span-otro">
+                        <span class="input-group-text" >Identificacion</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm"  [value]="num_documento" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo"
+                             >Dirección</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm"  [value]="direccion2 | uppercase" disabled>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-otro"
+                             >Fecha</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm"  [value]="fecha" disabled>
+                </div>
+            </div>
+        </div>  
+    </div>
+    <div class="col-11 mt-2 pl-2 pr-2">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr style="width: 100%;" class="text-center negrita-label" *ngIf="data.item.fk_tipo_documento != 6">
+                            <th >Cod. Principal</th>
+                            <th >Cod. Auxiliar</th>                         
+                            <th >Nombre</th>
+                            <th >Marca</th>
+                            <th >Cantidad</th>
+                            <th >Precio Unitario</th>
+                            <th >Precio Total</th>
+                        </tr>
+                        <tr style="width: 100%;" class="text-center negrita-label" *ngIf="data.item.fk_tipo_documento == 6">
+                            <th >Comprobante</th>
+                            <th >Número</th>
+                            <th >Fecha Emisión</th>
+                            <th >Ejercicio Fiscal</th>
+                            <th >Base imponible para retención</th>
+                            <th >Impuesto</th>
+                            <th >Porcentaje Retención</th>
+                            <th >Precio Unitario</th>
+                        </tr>
+                        <tr></tr>
+                    </thead>
+                    <tbody *ngIf="data.item.fk_tipo_documento != 6">
+                        <tr *ngFor="let group of lstDetalles">                                 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{group.product.codigoProducto}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.product.num_parte}}</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.product.nombre}}</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.product.marca}}</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.cantidad}}</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="right">
+                                <ng-container>
+                                    <!-- <span class="alinearizq">$</span> -->
+                                    <span class="alinearder">$ {{group.costo_unitario}}</span>
+                                </ng-container>
+                            </td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="right">
+                                <ng-container>
+                                    <!-- <span class="alinearizq">$</span> -->
+                                    <span class="alinearder">$ {{group.costo_total}}</span>
+                                </ng-container>
+                            </td> 
+                        </tr> 
+                        
+                        <tr class="text-left "> 
+                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>  
+                            <td  class="quitar-espacio-2"><strong>SUBTOTAL:</strong></td>
+                            <td class=" quitar-espacio-2">
+                                <ng-container>
+                                    <!-- <span class="alinearizq">$</span> -->
+                                    <span class="alinearder">$ {{subtotal}}</span>
+                                </ng-container>
+                            </td>
+                        </tr>
+                        <tr class="text-left ">
+                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>  
+                            <td   class="quitar-espacio-2"><strong>ICE:</strong></td>
+                            <td class="text-right quitar-espacio-2">
+                                <ng-container>
+                                    <!-- <span class="alinearizq">$</span> -->
+                                    <span class="alinearder">$ 0.00</span>
+                                </ng-container>
+                            </td>
+                        </tr>
+                        <tr class="text-left ">
+                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>  
+                            <td   class="quitar-espacio-2"><strong>IVA 12%:</strong></td>
+                            <td class="text-right quitar-espacio-2">
+                                <ng-container>
+                                    <!-- <span class="alinearizq">$</span> -->
+                                    <span class="alinearder">$ {{iva_valor}}</span>
+                                </ng-container>
+                            </td>
+                        </tr>
+                        <tr class="text-left ">
+                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>  
+                            <td   class="quitar-espacio-2"><strong>VALOR TOTAL:</strong></td>
+                            <td class="text-right quitar-espacio-2">
+                                <ng-container>
+                                    <!-- <span class="alinearizq">$</span> -->
+                                    <span class="alinearder">$ {{total}}</span>
+                                </ng-container>
+                            </td>
+                        </tr> 
+                    </tbody>
+
+
+                    <tbody *ngIf="data.item.fk_tipo_documento == 6">
+                        <tr *ngFor="let group of data.item._retencion_cab.detalle">                                 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{data.item._retencion_cab._compras._documento_tipo.nombre}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{data.item._retencion_cab._compras.num_documento}}</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{data.item._retencion_cab._compras.fecha}}</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{data.item._retencion_cab.anio_fiscal}}</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="right">
+                                <ng-container>
+                                    <span class="alinearizq">$</span>
+                                    <span class="alinearder">{{group.base}}</span>
+                                </ng-container>
+                            </td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{group._impuesto.tipo_impuesto}}</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">Cod.: {{group._impuesto.codigo}} del {{group._impuesto.valor}}%</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="right">
+                                <ng-container>
+                                    <span class="alinearizq">$</span>
+                                    <span class="alinearder">{{group.total}}</span>
+                                </ng-container>
+                            </td> 
+                        </tr> 
+                        
+                        <tr class="text-left "> 
+                            <th style= "border:none;" colspan="6" class="quitar-espacio-2"> </th>  
+                            <td  class="quitar-espacio-2"><strong>VALOR TOTAL:</strong></td>
+                            <td class=" quitar-espacio-2">
+                                <ng-container>
+                                    <span class="alinearizq">$</span>
+                                    <span class="alinearder">{{data.item._retencion_cab.total}}</span>
+                                </ng-container>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+</div>

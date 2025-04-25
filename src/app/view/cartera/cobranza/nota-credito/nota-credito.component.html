@@ -1,0 +1,449 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Nota de Crédito" filtroBoton="btnsNCV" cstyle="bg-gradient-primary text-white"
+        [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="row mt-2">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Razón social</span>
+                    </div>
+                    <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true"
+                        style="padding-left: 7px;font-size: 13px;" [(ngModel)]="ncventa.fk_agente" [clearable]="false"
+                        (ngModelChange)="getCustomer($event)">
+                        <ng-option [value]="0">Seleccione razón social</ng-option>
+                        <ng-option *ngFor="let d of arrayCustomerAux" [value]="d.id_cliente">
+                            {{d.razon_social}}</ng-option>
+                        <ng-option [value]="0">Otro</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm"
+                            *ngIf="ncventa.fk_agente == 0 ">Razón social otro</span>
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm"
+                            *ngIf="ncventa.fk_agente != 0 ">Razón social cliente</span>
+                    </div>
+                    <input type="text" placeholder="Ingrese razón social" [(ngModel)]="ncventa.razon_social"
+                        id="idrsocial" [disabled]="ncventa.fk_agente != 0 " class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ruc cliente</span>
+                    </div>
+                    <input type="text" placeholder="Ingrese ruc" [(ngModel)]="ncventa.ruc" id="idruc"
+                        class="form-control form-control-sm" (keypress)="commonServices.FormatDecimalVal($event)"
+                        [disabled]="ncventa.fk_agente != 0 ">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Motivo</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="ncventa.causa">
+                        <option [value]="0">Seleccione motivo</option>
+                        <option *ngFor="let dt of arrayMotivos" [value]="dt.valor">
+                            {{ dt.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1" placement="top" ngbTooltip="{{ncventa.num_aut_doc}}">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+                    </div>
+                    <input type="text" placeholder="Teléfono" [(ngModel)]="ncventa.telefono" id="idtlf"
+                        (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="ncventa.fk_agente != 0 "
+                        class="form-control form-control-sm">
+
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="ncventa.fecha_emision" name="dateFrom" format='yyyy-MM-dd'
+                        class="form-control">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Factura</span>
+                    </div>
+                    <input type="text" placeholder="No. factura" [(ngModel)]="ncventa.num_doc_adq" id="idnumfac"
+                        (keypress)="commonServices.FormatDecimalVal($event)" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Doc.
+                            electrónico?</span>
+                    </div>
+                    <input type="checkbox" class="form-control form-control-sm" [(ngModel)]="ncventa.ind_electronic"
+                         style="height: 17px;margin-top: 5px;">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1" placement="top" ngbTooltip="{{ncventa.num_aut_doc}}">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Autorización</span>
+                    </div>
+                    <input class="num_aut" type="text" placeholder="No. autorización"
+                        class="form-control form-control-sm" [(ngModel)]="ncventa.num_aut_doc" [disabled]="true">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="input-group mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Concepto</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea"
+                        placeholder="Ingrese concepto de nota de crédito" [(ngModel)]="ncventa.concepto"
+                        id="idcnc"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3 mb-2">
+            <div class="col-12 filters">
+                <div class="row justify-content-center">
+                    <div class="col-12 mb-3">
+                        <div class="row justify-content-center mt-1">
+                            <div class="col-6 text-left">
+                                <i class="far fa-book-open" style="color: #404a63; font-size: 13px;"></i>
+                                &nbsp;&nbsp;Asiento contable
+                            </div>
+                            <div class="col-6 text-right ">
+                                <button class="btn btn-success btn-sm" (click)="addAccounts()" placement="top"
+                                    ngbTooltip="Agregar item">
+                                    <i class="fas fa-plus-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12" style="max-height: 205px !important; overflow-y: scroll;">
+                        <table class="table">
+                            <thead>
+                                <tr style="width: 100%;">
+                                    <th style="width: 15%; text-align: center;">Acciones</th>
+                                    <th style="width: 15%; ">Código</th>
+                                    <th style="width: 40%; ">Cuenta</th>
+                                    <th style="width: 15%; ">Debe</th>
+                                    <th style="width: 15%; ">Haber</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dt of cuentas; let i = index">
+                                    <td style="text-align: center;">
+                                        <div class="text-center">
+                                            <button class="btn btn-primary btn-xs mr-1" (click)="showAccounts(i)"
+                                                placement="top" ngbTooltip="Seleccionar cuenta" id="btnasing">
+                                                <i class="fas fa-clipboard-check"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-xs ml-1" (click)="deleteAccount(i)"
+                                                placement="top" ngbTooltip="Eliminar cuenta">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="{{dt.codigo_cta}}" disabled
+                                            class="text-left border-0">
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="{{dt.nombre_cta}}" disabled
+                                            class="text-left border-0">
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="number" [(ngModel)]="dt.debe" (keyup)="sumaDH()">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="number" [(ngModel)]="dt.haber" (keyup)="sumaDH()">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align: right;padding-right: 10px;">Sumas</td>
+                                    <td style="text-align: right;padding-right: 15px;"><span>$ {{suma.debe}}</span></td>
+                                    <td style="text-align: right;padding-right: 15px;"><span>$ {{suma.haber}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spNCV"></cc-spiner-procesar>
+<div [hidden]="true" id="print-section-ncv" *ngIf="dataSucursal != undefined">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-7 text-center mt-5">
+                    <div class="sect-two pt-2 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-0" style="font-size: 25px;font-weight: 600">
+                                NOTA DE CRÉDITO
+                            </div>
+                            <div class="col-12 mt-1" style="font-size: 20px !important;">
+                                No. {{dataUser.id_empresa.toString().padStart(3, 0)}}-{{dataUser.id_sucursal.toString().padStart(3, 0)}}-<span *ngIf="btnMov" style="font-size: 20px !important;font-weight: unset !important;">{{ncventa.secuencia_doc.toString().padStart(10, 0)}}</span>
+                            </div>
+                            <div class="col-12 mt-1 mb-0" style="font-size: 20px;">
+                                VALOR ${{commonServices.formatNumber(ncventa.total)}}
+                            </div>
+                            <div class="col-12" style="font-size: 11px;margin-top: 11px;margin-bottom: 10px;">
+                                No. Aut: {{ncventa.num_aut_doc}}
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-0" style="font-size: 25px;font-weight: 600">
+                                NOTA DE CRÉDITO
+                            </div>
+                            <div class="col-12 mt-1" style="font-size: 20px !important;">
+                                No. {{dataUser.id_empresa.toString().padStart(3,
+                                0)}}-{{dataUser.id_sucursal.toString().padStart(3, 0)}}-<span *ngIf="btnMov"
+                                    style="font-size: 20px !important;font-weight: unset !important;">{{ncventa.secuencia_doc.toString().padStart(10,
+                                    0)}}</span>
+                            </div>
+                            <div class="col-12 mt-1 mb-0" style="font-size: 20px;">
+                                VALOR ${{commonServices.formatNumber(ncventa.total)}}
+                            </div>
+                            <div class="col-12" style="font-size: 11px;margin-top: 11px;margin-bottom: 10px;">
+                                No. Aut: {{ncventa.num_aut_doc}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-4">
+            <div class="row mb-2">
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col-3 mt-1">
+                            Beneficiario:
+                        </div>
+                        <div class="col-9">
+                            <div class="simu-ipt ">
+                                <span>{{ncventa.razon_social}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-5 mt-1">
+                                    Ciudad:
+                                </div>
+                                <div class="col-7 pl-0">
+                                    <div class="simu-ipt text-center">
+                                        <span>{{ncventa.ciudad}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-5 mt-1">
+                                    Fecha:
+                                </div>
+                                <div class="col-7 pl-0">
+                                    <div class="simu-ipt text-center">
+                                        <span>{{hoySet}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="row justify-content-center">
+                        <div class="col-3 pt-2">
+                            La suma de:
+                        </div>
+                        <div class="col-9 pl-0">
+                            <div class="simu-ipt " style="margin-left: -7px;">
+                                <span *ngIf="btnMov">{{commonVarSrvice.NumeroALetras(ncventa.total, false)}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-4 pt-2">
+                            Factura ref:
+                        </div>
+                        <div class="col-8 pl-0 ">
+                            <div class="simu-ipt text-center">
+                                <span *ngIf="ncventa.num_doc_adq != null">{{ncventa.num_doc_adq}}</span>
+                                <span *ngIf="ncventa.num_doc_adq == null">N/A</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2 mb-2">
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-2 pt-2">
+                            Concepto:
+                        </div>
+                        <div class="col-10 pl-0">
+                            <div class="simu-ipt " style="margin-left: -7px;">
+                                <span *ngIf="btnMov">{{ncventa.concepto}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row">
+                <div class="col-12 text-center ">
+                    <div style="background-color: #5b9bd5 !important;color: white;font-weight:bold;" class="pl-1 pr-1">
+                        CONTABILIZACIÓN
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 15%; ">Código</th>
+                                <th style="width: 40%; ">Cuenta</th>
+                                <th style="width: 15%; ">Debe</th>
+                                <th style="width: 15%; ">Haber</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of cuentas; let i = index">
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.codigo_cta}}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.nombre_cta}}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>$ {{commonServices.formatNumber(dt.debe)}}</span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>$ {{commonServices.formatNumber(dt.haber)}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"
+                                    style="text-align: right;padding-right: 10px;background-color: #5b9bd5 !important;color: white;">
+                                    Sumas</td>
+                                <td
+                                    style="text-align: right;padding-right: 15px;background-color: #5b9bd5 !important;color: white;">
+                                    <span>$ {{commonServices.formatNumber(suma.debe)}}</span>
+                                </td>
+                                <td
+                                    style="text-align: right;padding-right: 15px;background-color: #5b9bd5 !important;color: white;">
+                                    <span>$ {{commonServices.formatNumber(suma.haber)}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 25%;text-align:center;">Elaborado por</th>
+                                <th style="width: 20%;text-align:center; ">Revisado</th>
+                                <th style="width: 25%;text-align:center; ">Aprobadoqqq</th>
+                                <th style="width: 25%;text-align:center; ">Recibí conforme</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-top: none !important; height: 100px;text-align: center;">
+                                    <div style="padding-top: 48px; ">
+                                        <hr>
+                                        <span>{{dataUser.nombre}}</span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #13A1EA;">
+                Fecha: {{fecha}}&nbsp;{{hora}}</span>
+        </div>
+        <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+            <span style="color: #13A1EA;">
+                Usuario: {{dataUser.nombre}}</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade modalNCreditoReport" id="modalNCreditoReport" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <app-report-nota-credito> </app-report-nota-credito>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

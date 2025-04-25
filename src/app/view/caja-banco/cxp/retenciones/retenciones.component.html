@@ -1,0 +1,323 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Retención de compras" filtroBoton="btnsrCompraInv"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+        <div class="row">
+            <div class="col-12 m-1">
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+                            <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control" name="dateFrom"
+                                format="yyyy-MM-dd" (ngModelChange)="rerender()">
+                            </ejs-datepicker>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+                            <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control" type="text"
+                                format="yyyy-MM-dd" id="" (ngModelChange)="rerender()">
+                            </ejs-datepicker>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo"
+                                    id="inputGroup-sizing-sm">Proveedores</span>
+                            </div>
+                            <ng-select id="Idagente" class="form-control custom" appendTo="body" [searchable]="true"
+                                [clearable]="false" [(ngModel)]="agente" (ngModelChange)="filterAgente($event)">
+                                <ng-option [value]="0">Seleccione proveedor</ng-option>
+                                <ng-option *ngFor="let d of arrayAgente" [value]="d.id_proveedor">{{d.razon_social}}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Empresa</span>
+                            </div>
+                            <ng-select id="IdEmpresa" class="form-control custom" appendTo="body" [searchable]="true"
+                                [clearable]="false" [(ngModel)]="empresa" (ngModelChange)="filterEmpresa($event)">
+                                <ng-option [value]="0">Seleccione Empresa</ng-option>
+                                <ng-option *ngFor="let d of arrayEmpresa" [value]="d.id_empresa">
+                                    {{d.nombre_comercial}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div> -->
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
+                            </div>
+                            <select id="IdTipo" class="form-control custom" appendTo="body" [(ngModel)]="estado"
+                                (ngModelChange)="filterEstado($event)">
+                                <option [value]="3">Seleccione Estado</option>
+                                <option *ngFor="let d of arrayStatus" [value]="d.id">
+                                    {{d.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center ml-1 mr-1 mt-1 mb-2 filters">
+            <div class="col-12  pl-2 pr-2">
+                <div class="row justify-content-center">
+                    <div class="col-12 pl-3 pr-3 ">
+                        <div class="table-responsive responsive-table mt-2">
+                            <table datatable id="tablaReteComprasInv" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="table no-footer table-hover">
+                                <thead>
+                                    <tr style="width: 100%;">
+                                        <th style="width: 12%;">Retención #:</th>
+                                        <th style="width: 9%;">Tipo Doc.</th>
+                                        <th style="width:12% ;">Documento</th>
+                                        <!--  <th style="width:1% ;">Autorización</th> -->
+                                        <th style="width:10% ;">Fecha</th>
+                                        <th style="width: 28%;">Agente</th>
+                                        <th style="width: 8% ;">Año</th>
+                                        <th style="width:8% ;">Total</th>
+                                        <th style="width:13% ;" class="text-center">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngFor="let dt of infoRetencion; let i = index">
+                                        <td>{{ dt.numero}}</td>
+                                        <td>{{ dt.nombre}}</td>
+                                        <td style="cursor:pointer;text-align: left;" (click)="informaDocumento(dt,i)">
+                                            <span class="tooltip-test hv-doc" placement="right" ngbTooltip="Ver Más">{{
+                                                dt.codigo}}-{{
+                                                dt.num_doc.padStart(10,
+                                                0)}}</span>
+                                        </td>
+                                        <!-- <td>{{ dt.autorizacion}}</td> -->
+                                        <td>{{ dt.fecha_emision }}</td>
+                                        <td>{{ dt.name }}</td>
+                                        <td>{{ dt.anio_fiscal }}</td>
+                                        <td style="text-align: right;">${{
+                                            commonServices.formatNumber(dt.total)}}</td>
+                                        <td class="text-center botonesSection">
+                                            <button type="button" (click)="informaDocumento(dt,i)" class="btn btn-xs"
+                                                style="background-color: #4bf41b; color: rgb(54, 49, 49); border-radius: 4px"
+                                                placement="left" ngbTooltip="Ver Retención">
+                                                <i class="far fa-eye"></i>
+                                            </button>
+                                            <button type="button" (click)="visualizarPdf(dt)" class="btn btn-xs"
+                                                style="background-color: #0F6BA4; color: white; border-radius: 4px"
+                                                placement="left" ngbTooltip="Imprimir Retención">
+                                                <i class="fas fa-print"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-xs" 
+                                                style="background-color: #f3000c; color: white; border-radius: 4px"
+                                                placement="left" ngbTooltip="Eliminar Retención"
+                                                (click)="deleteRtenecion(dt)" [disabled]="dt.isactive == 0">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<div class="modal fade bd-example-modal-xl " id="modalRetencionesDt" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row" style="width: 100%">
+                    <div class="col-md-12">
+                        <div class="title-head">
+                            DETALLE RETENCIÓN
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger btn-xs mt-2 mr-2" (click)="closeModal()">
+                    Cerrar
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo">Tipo Documento</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" disabled
+                                        [value]="dtInformacion.tipo">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo">N° Documento</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" disabled
+                                        [value]="dtInformacion.documento">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo">Fecha Emisión</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" disabled
+                                        [value]="dtInformacion.fecha |date:'yyyy-MM-dd'">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo">Agente</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                                        [value]="dtInformacion.agente">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo">Empresa</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                                        [value]="dtInformacion.empresa | uppercase">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo">Autorización</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                                        [value]="dtInformacion.autorizacion">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-6">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo">Estado</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" [disabled]="true"
+                                        [value]="dtInformacion.estado">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo">Total</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm text-right" [disabled]="true"
+                                        [value]="'$ ' + commonServices.formatNumber(dtInformacion.total)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center filters">
+                    <div class="col-md-12 mt-3">
+                        <div style="overflow-y: scroll; max-height: 150px">
+                            <div class="form-group table-responsive responsive-table">
+                                <table class="table table-sm table-hover">
+                                    <thead class="thead-dark">
+                                        <tr class="text-center">
+                                            <th>#</th>
+                                            <th>Impuesto</th>
+                                            <th>Base</th>
+                                            <th>Valor</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-center" style="width: 100%;"
+                                            *ngFor="let dt of dtretenciones; let i = index">
+                                            <td style="width: 3%;"><strong>{{ i + 1 }}</strong></td>
+                                            <td style="width: 3%;" class="text-left">
+                                                <strong>{{dt.nombre_imp}}</strong>
+                                            </td>
+                                            <td style="width: 10%;">
+                                                <strong>{{dt.base | currency: 'USD' | lowercase}}</strong>
+                                            </td>
+
+                                            <td style="width: 10%;">
+                                                <strong>{{dt.valor | currency: 'USD' | lowercase}}</strong>
+                                            </td>
+
+                                            <td style="width: 5%;">
+                                                <strong>{{dt.total | currency: 'USD' | lowercase}}</strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalRtc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="font-family: 'Poppins1';">
+            <div class="card border-0" style="font-size: 11px;background-color: rgb(255 255 255 / 73%);">
+                <div class="card-header">
+                    <table width="100%">
+                        <tr>
+                            <td class="text-left">
+                                <div class="card-title text-left title_h5 text-uppercase">
+                                    <strong>Eliminación de retención</strong>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <div>
+                                        <button class="btn btn-success btn-xs button_margin" matTooltip="Guardar"
+                                            (click)="valedateDeleteRetencion()"> Eliminar retención
+                                        </button>
+                                        <button class="btn btn-danger btn-xs button_margin " matTooltip="Cancelar"
+                                            data-dismiss="modal"> Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: #404a63; color: white;"
+                                        placeholder="Ingrese observación">Descripción</span>
+                                </div>
+                                <textarea [(ngModel)]="descriptionDeleteReten" class="form-control form-control-sm"
+                                    placeholder="Ingrese una descripción"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spRetencionCompra"></cc-spiner-procesar>

@@ -1,0 +1,196 @@
+<div class="my-2">
+
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-print"
+        filtroBoton="btnAsignacionIngresos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+        <div class="row my-2">
+            
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [clearable]="false" [(ngModel)]="periodo" [disabled]="yearDisabled"
+                        [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" style="z-index: 99999 !important;">
+                    </ng-select>
+                    <div class="input-group-append">
+                        <!-- <button class="btn btn-success" (click)="generarPeriodo()">
+                            <i class="fas fa-plus"></i>
+                        </button> -->
+                    </div>
+                </app-cc-input-group-prepend>
+                <div *ngIf="erCodPro" class="text-danger mt-2">Error en campo codigo Producto</div>
+                <div *ngIf="erCodPre" class="text-danger mt-2">Error en campo codigo Presupuesto</div>
+                <div *ngIf="erCodPar" class="text-danger mt-2">Error en campo Partida presupuestaria </div>
+
+
+            </div>
+            <div class="col-5">
+                <div class="input-group input-group-sm mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold" style="width: 155px;">Archivos</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".xlsx" (change)="onFileChange($event)">
+                        <label class="custom-file-label" for="inputGroupFile01">{{ file ? file.name : "Seleccione un archivo" }}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group input-group-sm">                    
+                    <button [disabled]="btnDisabled" class="btn btn-sm btn-primary" (click)="agregaPeriodo()"><i class="fas fa-upload"></i> Cargar Presupuesto</button>
+                </div>
+            </div> 
+            <div class="col">
+                <div class="input-group input-group-sm">                    
+                    <button class="btn btn-sm btn-success" (click)="descargarPlantilla()"><i class="fas fa-download"></i> Descargar Plantilla</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2 mb-3">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-footer table-hover mb-0" style="width: 1600px;" >
+                        <thead class="thead-dark">
+                            <tr class="text-center">
+                                <!-- <th class="col-num fixed-header" style="width: 75px;">No.</th> -->
+                                <th class="col-partida fixed-header" style="width: 70px;">{{headersEnable?titles[0].toUpperCase():'CUATRIMESTRES'}}</th>
+                                
+                                <th style="width: 150px;">{{headersEnable?titles[1].toUpperCase():'CODIGO DEPARTAMENTO'}}</th>
+                                <th class="col-denominacion fixed-header" style="width: 175px;">{{headersEnable?titles[2].toUpperCase():'DEPARTAMENTO'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[3].toUpperCase():'CODIGO PROGRAMA'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[4].toUpperCase():'PROGRAMA'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[5].toUpperCase():'TIPO NOMINA'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[6].toUpperCase():'REQUERIMIENTO'}}</th>
+                                <th style="width: 250px;">{{headersEnable?titles[7].toUpperCase():'REQUERIMIENTO ACTIVIDAD'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[8].toUpperCase():'NATURALEZA'}}</th>
+                                <th style="width: 155px;">{{headersEnable?titles[9].toUpperCase():'GRUPO'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[10].toUpperCase():'SUBGRUPO'}}</th>
+                                <!-- <th style="width: 150px;">{{headersEnable?titles[].toUpperCase():'CODIGO PP'}}</th> -->
+                                <th style="width: 150px;">{{headersEnable?titles[11].toUpperCase():'PARTIDA PRESUPUESTARIA'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[12].toUpperCase():'CANTIDAD'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[13].toUpperCase():'UNIDAD DE MEDIDA'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[14].toUpperCase():'PRECIO UNITARIO'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[15].toUpperCase():'CUENTAS POR PAGAR'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[16].toUpperCase():'NOMINA Y HONORARIOS'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[17].toUpperCase():'TOTAL PRESUPUESTO'}}</th>
+<!--                                 
+                        
+                                <th class="col-partida fixed-header" style="width: 470px;">{{headersEnable?titles[0]:'Cuatrimestres'}}</th>
+                                <th class="col-denominacion fixed-header" style="width: 175px;">{{headersEnable?titles[1]:'Departamento'}}</th>
+                              
+                                <th style="width: 150px;">{{headersEnable?titles[2]:'Programa'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[3]:'Tipo Nomina'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[4]:'Requerimiento'}}</th>
+                                <th style="width: 250px;">{{headersEnable?titles[5]:'Requerimiento Actividad'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[6]:'Naturaleza'}}</th>
+                                <th style="width: 155px;">{{headersEnable?titles[7]:'Grupo'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[8]:'Subgrupo'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[9]:'Partida Presupuestaria'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[10]:'Cantidad'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[11]:'Unidad de Medida'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[12]:'Precio Unitario'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[13]:'Cuentas por Pagar'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[14]:'Nomina y honorarios'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[15]:'Total Presupuesto'}}</th> -->
+                               
+                               
+                                
+                                
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td *ngIf="dataExcel.length==0" colspan="16" class="text-center" >
+                                    No se encontró data
+                                </td>
+                            </tr>
+                            <tr *ngFor="let d of dataExcel, let i = index">
+                                <!-- <td class="text-center col-num fixed-header">
+                                    {{ i + 1 }}
+                                </td> -->
+                                <td class="col-partida fixed-header">
+                                    {{ d.partida }}
+                                </td>
+                                <td class="text-right" [ngClass]="{ 'text-danger': !d.existecodigotipo }"> 
+                                    {{ d.codigotipo }}  </td>
+                                <td class="col-denominacion fixed-header">
+                                    {{ d.denominacion }}
+                                </td>
+                                <td class="text-right" [ngClass]="{ 'text-danger': !d.existecodigoprograma }"> 
+                                    
+                                    {{ d.codigoprograma }}  </td>
+                                <td class="text-right">
+                                   {{ d.periodo1 }}  </td>
+                                  
+                                <td class="text-right">
+                                     {{ d.periodo2  }} <!-- | number: '1.2-2' -->
+                                </td>
+                                <td class="text-right">
+                                    {{ d.periodo3 }}
+                                </td>
+                                <td class="text-right">
+                                     {{ d.ant_periodo }}<!-- | number: '1.2-2' --> 
+                                </td>
+                                <td class="text-right">
+                                     {{ d.act_periodo }}<!-- | number: '1.2-2' --> 
+                                </td>
+                                
+
+                                <td class="text-right">
+                                     {{ d.semestre1  }} <!-- | number: '1.2-2' -->
+                                </td>
+                                <td class="text-right">
+                                     {{ d.semestre2 }} <!-- | number: '1.2-2'  -->
+                                </td>
+                              <!--   <td class="text-right"  >
+                                    {{ d.codigoPP }} 
+                                </td> -->
+                                <td class="text-right"[ngClass]="{ 'text-danger': !d.tienecodigoPP }">
+                                    {{ d.periodo4 }} <!--  --> 
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.provisional }} <!--  | number: '1.2-2' -->
+                                </td>
+                              <!--   <td class="text-right">
+                                    $ {{ d.definitivo }}
+                                </td>
+                                <td>
+                                    {{ d.observaciones }}
+                                </td> -->
+                                <td class="text-right">
+                                     {{ d.unidaddemedida }} <!-- | number: '1.2-2' --> 
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.preciounitario | number: '1.2-2' }} <!--  --> 
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.cuentasporpagar | number: '1.2-2' }} <!-- --> 
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.nominayhonorarios | number: '1.2-2'}} <!--  --> 
+                                </td>
+                                 <td class="text-right">
+                                    $ {{ d.totalpresupuesto | number: '1.2-2'}} <!--  --> 
+                                </td>
+                                
+
+
+
+
+
+                                
+                                <!-- <td class="text-center">
+                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+    
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSpiner" lfulScren=true lTipo="spAsignacion"></cc-spiner-procesar>

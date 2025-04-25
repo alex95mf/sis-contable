@@ -1,0 +1,42 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="far fa-file-invoice"
+        filtroBoton="btnsMerPuesto" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row my-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="N&uacute;mero de Local" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="puesto.numero_puesto" maxlength="20">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Mercado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="fk_mercado" class="form-control" [(ngModel)]="puesto.fk_mercado">
+                        <ng-option disabled [value]="0">Seleccione un Mercado</ng-option>
+                        <ng-option *ngFor="let c of mercados" [value]="c.id_catalogo">{{ c.valor }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="estado" class="form-control" [(ngModel)]="puesto.estado">
+                        <ng-option disabled [value]="0">Seleccione un Estado</ng-option>
+                        <ng-option *ngFor="let c of estados" [value]="c.value">{{ c.descripcion }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Descripci&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="puesto.descripcion" maxlength="128">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Ubicaci&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="puesto.ubicacion" maxlength="128">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renLiqGen"></cc-spiner-procesar>

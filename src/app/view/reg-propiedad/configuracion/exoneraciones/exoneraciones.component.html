@@ -1,0 +1,121 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" filtroBoton="btnsExcepcionces" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-badge-percent">
+        <fieldset class="border pb-2 px-2 mb-2 mt-2">
+            <legend class="w-auto ml-1 bg-dark">Filtros</legend>
+            <div class="row ml-1 mr-1">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col">
+                              <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold" id="inputGroup-sizing-sm ">Concepto</span>
+                                </div>
+                                <ng-select id="concepto" class="form-control form-control-sm" [(ngModel)]="filter.concepto" >
+                                    <ng-option disabled [value]="0">Seleccione un Concepto</ng-option>
+                                    <ng-option *ngFor="let co of cmb_conceptos" [value]="co.codigo">{{ co.codigo +'-'+ co.nombre }}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                       
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="filter.estado" [clearable]="false">
+                                    <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                                    <ng-option *ngFor="let op of estadosList" [value]="op.value">{{ op.label }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                              <!-- <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-xl">Búsqueda</span>
+                                </div>
+                            <input id="filter_descripcion" type="text" class="form-control form-control-xl" [(ngModel)]="filter.descripcion"> -->
+                            <app-cc-input-group-prepend label="Descripción" styleSpan="font-weight-bold size-span-campo">
+                                <input id="filter_descripcion" type="text" class="form-control" [(ngModel)]="filter.descripcion" placeholder="Descripción">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="consultar()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <table class="table table-bordered no-footer table-hover mb-2"> 
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th style="width: 15%;">Concepto</th>
+                    <th style="width: 5%;">Código</th>
+                    <th style="width: 20%;">Descripción</th>
+                    <th style="width: 10%;">Descuento</th>
+                    <th style="width: 10%;">Rango de discapacidad</th>
+                    <th style="width: 5%;">Cod. concepto aplica</th>
+                    <th style="width: 15%;">Concepto aplica</th>
+                    <th style="width: 10%;">Estado</th>
+                    <th style="width: 15%;">Acciones</th>
+                    <!-- cont_porc_disc_desde -->
+                </tr>
+            </thead>
+            <tbody *ngIf="exoneracionesDt">
+                <ng-container *ngFor="let dt of exoneracionesDt, let i = index">
+                    <tr>
+                        <td>{{ dt.concepto?.codigo +'-'+ dt.concepto?.nombre }}</td>
+                        <td class="text-center">{{ dt.con_det_codigo }}</td>
+                       
+                        <td>{{ dt.descripcion }}</td>
+                        <td class="text-center">
+                            {{ dt.porcentaje }} %</td>
+                        <td class="text-center">
+                            {{ dt.cont_porc_disc_desde ? 'De '+ dt.cont_porc_disc_desde + ' %' : '' }} {{ dt.cont_porc_disc_hasta ? 'a '+ dt.cont_porc_disc_hasta + ' %' : ''  }}</td>
+                        <td class="text-center">
+                            {{ dt?.cod_concepto_det_aplicable }}
+                        </td>
+                        <td class="text-center">
+                            {{ dt.concepto_aplica?.nombre_detalle }}
+                        </td>
+                            <td class="text-center">
+                            <i placement="bottom" [ngbTooltip]="dt.estado == 'A' ? 'Activo' : 'Inactivo'" [class]="dt.estado == 'A' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger'"></i>
+                           {{ dt.estado == 'A' ? 'Activo' : 'Inactivo' }}
+                        </td>
+                        <td>
+                            <div class="text-center mx-auto">
+                                <button class="btn btn-primary btn-xl mr-1" (click)="showExoneracionForm(false, dt)" placement="left" ngbTooltip="Editar exoneracion">
+                                    <i class="far fa-edit"></i>
+                                </button>
+                                <button *ngIf="dt.estado == 'A'" class="btn btn-danger btn-xl ml-1" (click)="borrarExoneraciones(dt.id)" placement="top" ngbTooltip="Eliminar exoneracion">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                                <!-- <button *ngIf="dt.estado == 'I'" class="btn btn-info btn-xl ml-1" (click)="restoreArancel(dt.id, i)" placement="top" ngbTooltip="Restaurar arancel">
+                                    <i class="fas fa-undo"></i>
+                                </button> -->
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+
+        <mat-paginator 
+                showFirstLastButtons
+                [length]="paginate.length"
+                [pageSize]="paginate.perPage"
+                [pageIndex]="paginate.pageIndex"
+                [pageSizeOptions]="paginate.pageSizeOptions"
+                (page)="changePaginate($event)"
+                aria-label="Select page">
+        </mat-paginator>
+
+         
+       
+
+    </app-button-radio-active>        
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spExoneraciones"></cc-spiner-procesar>

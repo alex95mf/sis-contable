@@ -1,0 +1,38 @@
+
+
+<fieldset class="border p-2 mb-2 mt-3 filters" >
+    <legend class="w-auto h6">Listado Cuentas Por Pagar</legend>
+
+
+    <div class="table-responsive responsive-table ">
+        <table datatable [dtOptions]="dtOptionsCxP" [dtTrigger]="dtTriggerCxP" class="table table-bordered " id="tablacxp">
+            <thead class="text-center">
+                <tr>
+                    <th>Id.</th>
+                    <th>Fecha</th>
+                    <th>Documento</th>
+                    <th>Monto</th>
+                    <th>Abono</th>
+                    <th>Saldo</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody style="width: 100%;">
+                <tr *ngFor="let valor of dataSourceCxP" >
+                    <td style="width: 10%;">{{valor.id}}</td>
+                    <td style="width: 10%;">{{valor.fecha_inicio}}</td>
+                    <td style="width: 21%; font-weight: bold;" >{{valor.document.codigo + '-' + valor.doc_num}}</td>
+                    <td style="width: 8%; font-weight: bold;">{{valor.monto_total}}</td>
+                    <td style="width: 10%;" class="text-right">{{valor.monto_abono}}</td>
+                    <td style="width: 10%;" class="text-right">{{valor.monto_saldo}}</td>
+                    <td style="width: 20%;" class="text-center">
+                        <mat-radio-group [(ngModel)]="btnRadioCxP" *ngIf="presentarRadio">
+                            <mat-radio-button color="warn" [checked]="selectCxP == undefined?false:valor.id == selectCxP.id" (click)="seleccionarCxP(valor);" matTooltip="Seleccionar para cruzar pago"></mat-radio-button>
+                        </mat-radio-group>          
+                        <i class="btn fa fa-check fa-lg" *ngIf="selectCxP == undefined?false:valor.id == selectCxP.id" (click)="modPagoAnt(valor)" matTooltip="Aplicar Pago Anticipado" style="color: #337ab7;"></i>                                       
+                    </td>
+                </tr> 
+            </tbody>
+        </table>
+    </div>
+</fieldset>

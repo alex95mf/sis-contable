@@ -1,0 +1,608 @@
+<div class="mt-4 mb-5 pb-2">
+    <app-button-radio-active titulo="Conciliación Bancaria" filtroBoton="btnConciBanc"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="far fa-check-square">
+
+        <!-- <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado"> -->
+
+
+            <p-tabView (onChange)="handleChange($event)" styleClass="tab_content_compras" class="overflow-hidden">
+                <p-tabPanel class="p-0" header="CONCILIAR" [headerStyle]="{'font-size': '0.7rem'}">
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12">
+                            <div class="alert alert-warning" role="alert" style="font-size: 12px;">
+                                Para poder selecionar detalles a conciliar el saldo del estado de cuenta no debe ser 0.00
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        
+                        <!-- <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo">
+                                <p-calendar view="year" dateFormat="yy" [disabled]="disabledFields"
+                                    [readonlyInput]="true" [(ngModel)]="selected_anio" [showIcon]="false" inputId="icon">
+                                </p-calendar>
+                            </app-cc-input-group-prepend>
+                        </div> -->
+                        <div class="col-sm-4">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo text-bold"
+                                        id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Período</span>
+                                </div>
+                                <p-calendar
+                                    [readonlyInput]="true" 
+                                    view="year" 
+                                    dateFormat="yy" 
+                                    [(ngModel)]="selected_anio" 
+                                    [showIcon]="false" 
+                                    class="ui-calendar ui-calendar-button"
+                                    inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                                    [inputStyle]="{'height':'30px','width':'212px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                                </p-calendar>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                                <!-- <app-cc-select-meses  (ChangeMes)="ChangeMesCierrePeriodos($event)" presentar="{{disabled}}" mes_actual={{mes_actual}}></app-cc-select-meses> -->
+                                <ng-select 
+                                    (ngModelChange)="ChangeMesCierrePeriodos($event)"
+                                    class="form-control" 
+                                    id="elemento_pruebas"
+                                    bindLabel="name"
+                                    placeholder="Seleccione un Mes"
+                                    appendTo="body"
+                                    [clearable]="false"
+                                    [searchable]="true"
+                                    [disabled]=disabled
+                                    [(ngModel)]="mes_actual">
+                                    
+                                    <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                        {{item.name}}
+                                    </ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend> 
+                            <!-- <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo text-bold"
+                                        id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Mes</span>
+                                </div>
+                                <app-cc-select-meses (ChangeMes)="ChangeMesCierrePeriodos($event)"
+                                    mes_actual={{mes_actual}>
+                                </app-cc-select-meses>
+                            </div> -->
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Bancos" styleSpan="size-span-campo">
+                                <ng-select [clearable]=false [(ngModel)]="bankSelect"
+                                    class="form-control form-control-sm custom-select"
+                                     [disabled]="false">
+                                    <ng-option *ngFor="let d of arrayBanks"
+                                        [value]="d.id_banks">{{d.name_banks + ' ' +d.num_cuenta}}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <!-- <app-cc-input-group-prepend label="Saldo anterior" styleSpan="size-span-campo"> -->
+                            <!-- <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo text-bold"
+                                        id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Saldo segun libros</span>
+                                </div>
+                                <p-inputNumber 
+                                
+                                [disabled]="true"
+                                [(ngModel)]="saldo_libros" 
+                                mode="currency" 
+                                currency="USD" 
+                                locale="en-US"
+                                [inputStyle]="{'height':'30px','width':'13rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}"
+                                ></p-inputNumber>
+                               
+                            </div> -->
+                            <app-cc-input-group-prepend label="Saldo segun libros" styleSpan="size-span-campo">
+                                <input currencyMask [(ngModel)]="saldo_libros" [disabled]="true"
+                                    placeholder="$ 0.00" class="form-control text-right">
+                            </app-cc-input-group-prepend>
+                            <!-- <div class="p-inputgroup  md:h-2rem">
+                                <span class="input-group-text size-span-campo text-bold" >Saldo anterior</span>
+                                <p-inputNumber  [(ngModel)]="saldo_bank" mode="currency" currency="USD" locale="en-US" [disabled]="true"></p-inputNumber>
+                            </div> -->
+                            
+                            <!-- </app-cc-input-group-prepend> -->
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-4">
+                            <!-- <app-cc-input-group-prepend label="Saldo anterior" styleSpan="size-span-campo"> -->
+                                <app-cc-input-group-prepend label="Saldo anterior" styleSpan="size-span-campo">
+                                    <input currencyMask [(ngModel)]="saldo_bank" [disabled]="true"
+                                        placeholder="$ 0.00" class="form-control text-right">
+                                </app-cc-input-group-prepend>
+                            <!-- <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo text-bold"
+                                        id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Saldo anterior</span>
+                                </div>
+                                <p-inputNumber 
+                                
+                                [disabled]="true"
+                                [(ngModel)]="saldo_bank" 
+                                mode="currency" 
+                                currency="USD" 
+                                locale="en-US"
+                                [inputStyle]="{'height':'30px','width':'13rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}"
+                                ></p-inputNumber>
+                               
+                            </div> -->
+                            <!-- <div class="p-inputgroup  md:h-2rem">
+                                <span class="input-group-text size-span-campo text-bold" >Saldo anterior</span>
+                                <p-inputNumber  [(ngModel)]="saldo_bank" mode="currency" currency="USD" locale="en-US" [disabled]="true"></p-inputNumber>
+                            </div> -->
+                            
+                            <!-- </app-cc-input-group-prepend> -->
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Estado Cuenta" styleSpan="size-span-campo">
+                                <input currencyMask [(ngModel)]="EstadoCuenta" [disabled]="disabledFields"
+                                    placeholder="$ 0.00" class="form-control text-right">
+                            </app-cc-input-group-prepend>
+                            <!-- <app-cc-input-group-prepend label="Estado Cuenta" styleSpan="size-span-campo"> -->
+                                <!--p-inputNumber [(ngModel)]="EstadoCuenta" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" currency="USD" locale="en-US"></p-inputNumber-->
+                            <!-- <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo text-bold"
+                                        id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Estado Cuenta</span>
+                                </div>    
+                                <p-inputNumber 
+                                [(ngModel)]="EstadoCuenta" 
+                                mode="currency" 
+                                currency="USD" 
+                                locale="en-US"
+                                [disabled]="disabledFields"
+                                [inputStyle]="{'height':'30px','width':'13rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}"
+                                ></p-inputNumber>
+                            </div> -->
+                            <!-- <div class="p-inputgroup  md:h-2rem">
+                                <span class="p-inputgroup-addon">Estado Cuenta</span>
+                                <p-inputNumber  [(ngModel)]="EstadoCuenta" mode="currency" currency="USD" locale="en-US" [disabled]="disabledFields"></p-inputNumber>
+                            </div> -->
+                                <!--input type="numeric" min="0" [(ngModel)]="EstadoCuenta" placeholder="$ 0.00"
+                                    class="form-control text-right"-->
+                            <!-- </app-cc-input-group-prepend> -->
+                        </div>                                                
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Saldo conciliado" styleSpan="size-span-campo">
+                                <input currencyMask [(ngModel)]="SaldoConciliado" [disabled]="true"
+                                    placeholder="$ 0.00" class="form-control text-right">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Saldo Final" styleSpan="size-span-campo">
+                                <input currencyMask [disabled]="true" [(ngModel)]="saldo_bank_final"
+                                    class="form-control text-right" placeholder="$ 0.00">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- (change)="consultConciliado()" -->
+                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                                <ng-select  [clearable]=false
+                                    placeholder="-seleccionar tipo" [(ngModel)]="filtro_tipo"
+                                     class="form-control form-control-sm custom-select"
+                                    [items]="tipobusqueda" bindLabel="nombre" bindValue="id"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+
+
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha de Conciliacion" styleSpan="size-span-campo font-weight-bold">
+                              <input type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_conciliacion" [disabled]="true">
+                            </app-cc-input-group-prepend>
+                          </div>
+                    </div>
+                    <div class="mt-4">
+                         <!-- [(selection)]="selectedDataConcilia"
+                            (onRowSelect)="onRowSelect($event)" 
+                            (onRowUnselect)="onRowUnselect($event)"
+                            [rowSelectable]="isRowSeleCkeckConcilia"  -->
+                        <p-table [value]="infoDt"
+                            [(selection)]="selectedDataConcilia"
+                            (onRowSelect)="onRowSelect($event)" 
+                            (onRowUnselect)="onRowUnselect($event)"
+                            [rowSelectable]="isRowSeleCkeckConcilia"
+                            styleClass="p-datatable-gridlines p-datatable-striped" 
+                            rowGroupMode="subheader" groupRowsBy="cuenta_bancaria" 
+                            (onHeaderCheckboxToggle)="seleccionarTodos($event)"
+                            >
+                            <ng-template pTemplate="header">
+                                <tr style="font-size: 12px;">
+                                    <th style="width: 4rem">
+                                        <p-tableHeaderCheckbox 
+                                        
+                          
+                                        [disabled]="disabledFields"></p-tableHeaderCheckbox>
+                                    </th>
+                                    <th class="text-center" style="min-width:30px">#</th>
+                                    <th class="text-center" style="min-width:100px">Fecha</th>
+                                    <th class="text-center" style="min-width:100px">Fecha Banco</th>
+                                    <th class="text-center" style="min-width:100px">Documento</th>
+                                    <th class="text-center" style="min-width:200px">Detalle</th>
+                                    <th class="text-center" style="min-width:100px">Ingreso</th>
+                                    <th class="text-center" style="min-width:100px">Egreso</th>
+                                    <th>N° Referencia</th>
+                                    <th>Tipo Movimiento</th>
+                                    <th style="min-width:80px">Estado</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="groupheader" let-inf>
+                                <tr pRowGroupHeader style="height: 40px; font-size: 12px;">
+                                    <td colspan="6"  class="text-right font-bold pr-6" >Saldo Inicial</td>
+                                    <td colspan="2" class="text-right font-bold pr-6">$ {{formatNumber(SaldoInicialCal())}}</td>
+                                    <td colspan="3"></td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="groupfooter" let-inf>
+                                <tr style="font-size: 12px;">
+                                    <td colspan="6" class="text-right font-bold pr-6">Saldo Final</td>
+                                    <!-- <td colspan="2" class="text-right font-bold pr-6">{{formatNumber(SaldoFinalCal())}}</td> -->
+                                    <!-- <td colspan="2" class="text-right font-bold pr-6">{{formatNumber(SaldoFinalCal())}}</td> -->
+                                    <td colspan="2" class="text-right font-bold pr-6">$ {{ saldo_bank_final | number:'1.2-2'}}</td>
+                                    <td colspan="3"></td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-inf>
+                                <tr style="font-size: 12px;">
+                                    <td>
+                                        <p-tableCheckbox [value]="inf" [disabled]="isOutOfBlock(inf) || disabledFields"></p-tableCheckbox>
+                                    </td>
+                                    <td>{{inf.linea}}</td>
+                                    <td>{{inf.fecha}}</td>
+                                    <td>
+                                        <input id="fecha_concilia" type="date" class="form-control" [(ngModel)]="inf.fecha_conciliacion" max="2050-01-01"  [disabled]="isOutOfBlock(inf) || disabledFields">
+                                    </td>
+                                    <td>{{inf.documento}}</td>
+                                    <td>{{inf.notas}}</td>
+                                    <td class="text-right">$ {{inf.debito | number:'1.2-2'}}</td>
+                                    <td class="text-right">$ {{inf.credito | number:'1.2-2'}}</td>
+                                    <!-- <td class="text-right">{{formatNumber(inf.debito)}}</td>
+                                    <td class="text-right">{{formatNumber(inf.credito)}}</td> -->
+                                    <td>{{inf.name}}</td>
+                                    <td>{{inf.tipo_movimiento}}</td>
+                                    <td><span [class]="'product-badge status-' + inf.cerrada.toLowerCase()">{{estatucDetails(inf.cerrada)}}</span></td>
+                                    
+                                </tr>
+                            </ng-template>
+                           
+                            <!--ng-template pTemplate="summary">
+                                <tr>
+                                    <td colspan="4">
+                                        <span class="font-bold ml-2">Saldo Final</span>
+                                    </td>
+                                    <td colspan="1">
+                                        <span class="font-bold ml-2">0.00</span>
+                                    </td>
+                                </tr>
+                            </ng-template-->
+                            <ng-template pTemplate="emptymessage">
+                                <tr style="font-size: 12px;">
+                                    <td class="EmptyTable" [attr.colspan]="11">
+                                        No hay información para mostrar
+                                     </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel class="p-0" header="MOVIMIENTOS BANCARIOS" [headerStyle]="{'font-size': '0.7rem'}">
+                    <fieldset class="border pb-2 px-2 mb-2 mt-2">
+                        <legend class="w-auto bg-dark">Filtros</legend>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Período" styleSpan="size-span-campo font-weight-bold">
+                                    <ng-select class="form-control" (change)="ChangeYearPeriodos($event)" [clearable]="false" appendTo="body"  [(ngModel)]="filter.periodo_movimiento"
+                                      [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo ">
+                                    <ng-select 
+                                        (ngModelChange)="ChangeMesCierrePeriodosMov($event)"
+                                        class="form-control" 
+                                        id="elemento_pruebas"
+                                        bindLabel="name"
+                                        placeholder="-Todos-"
+                                        appendTo="body"
+                                        [clearable]="false"
+                                        [searchable]="true"
+                                        [disabled]=disabled
+                                        [(ngModel)]="filter.mes_actual_movimiento">
+                                        
+                                        <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                            {{item.name}}
+                                        </ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend> 
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Tipo Movimiento" styleSpan="size-span-campo">
+                                    <ng-select [clearable]=true [(ngModel)]="filter.tipo_movimiento"
+                                        class="form-control form-control-sm custom-select"
+                                        [disabled]="false">
+                                        <ng-option [value]="0">Seleccione un tipo movimiento</ng-option>
+                                        <ng-option *ngFor="let d of tipo_movimientos"
+                                            [value]="d.id">{{d.name}}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="font-weight-bold size-span-campo">
+                                    <input id="filter_fecha_desde" type="date" class="form-control" [(ngModel)]="filter.fecha_desde_movimiento" max="2050-01-01" >
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="font-weight-bold size-span-campo">
+                                    <input id="filter_fecha_hasta" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta_movimiento" max="2050-01-01" >
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Bancos" styleSpan="size-span-campo">
+                                    <ng-select [clearable]=true [(ngModel)]="filter.banco"
+                                        class="form-control form-control-sm custom-select"
+                                         [disabled]="false">
+                                         <ng-option [value]="0">Seleccione un Banco</ng-option>
+                                        <ng-option *ngFor="let d of arrayBanks"
+                                            [value]="d.id_banks">{{d.name_banks + ' ' +d.num_cuenta}}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                                    <ng-select  [clearable]=true
+                                        placeholder="-seleccionar tipo" [(ngModel)]="filter.estado"
+                                         class="form-control form-control-sm custom-select"
+                                        [items]="estado_movimiento" bindLabel="name" bindValue="id"></ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    
+                   
+                    <!-- <div class="mt-4"  style="overflow-x: auto;">
+                        <p-table [value]="infoMovimientosBancarios" 
+                            styleClass="p-datatable-gridlines"  style="min-width: 2000px;">
+                            <ng-template pTemplate="header">
+                                <tr style="font-size: 12px;">
+                                    <th class="text-center" style="min-width:100px">Año</th>
+                                    <th class="text-center" style="min-width:100px">Mes</th>
+                                    <th class="text-center" style="min-width:100px">Fecha Regristro</th>
+                                    <th class="text-center" style="min-width:300px">Banco</th>
+                                    <th class="text-center" style="min-width:200px">Cuenta Contable</th>
+                                    <th class="text-center" style="min-width:100px">Número Movimiento</th>
+                                    <th class="text-center" style="min-width:100px">Tipo Movimiento</th>
+                                    <th class="text-center" style="min-width:300px">Detalle</th>
+                                    <th class="text-center" style="min-width:100px">Valor</th>
+                                    <th class="text-center" style="min-width:100px">Estado</th>
+                                    <th>Acciones</th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-inf>
+                                <tr style="font-size: 12px;">
+                                    <td style="min-width:100px">{{inf.anio}}</td>
+                                    <td style="min-width:300px">{{convertirMes(inf.mes)}}</td>
+                                    <td style="min-width:200px">{{inf.fecha | date: 'dd-MM-YYYY'}}</td>
+                                    <td style="min-width:100px">{{inf.bancos?.name_banks}}</td>
+                                    <td style="min-width:100px">{{inf.cuenta_contable}}</td>
+                                    <td style="min-width:100px">{{inf.numero}}</td>
+                                    <td style="min-width:100px">{{inf.tipo_movimiento == 'D' ? 'Débito' : (inf.tipo_movimiento == 'C' ? 'Crédito' : '')}}</td>
+                                    <td style="min-width:300px">{{inf.detalle}}</td>
+                                    <td style="min-width:100px" class="text-right">$ {{inf.tipo_movimiento == 'D' ? (inf.debito | number:'1.2-2') : (inf.tipo_movimiento == 'C' ? (inf.credito | number:'1.2-2') : '')}}</td>
+                                    <td class="text-center"><i placement="bottom" [ngbTooltip]="inf.estado == 'A' ? 'Activo' : inf.estado == 'I' ? 'Inactivo' : ''" 
+                                        [class]="inf.estado == 'A' ? 'fas fa-circle text-success' : inf.estado == 'I' ? 'fas fa-circle text-danger' : 'fas fa-circle text-sprimary'"></i>
+                                        {{inf.estado== 'A' ? 'Activo' : inf.estado == 'I' ? 'Inactivo' : ''}}
+                                    </td>
+                                    <td>
+                                        <div class="text-center mx-auto">
+                                            <button  class="btn btn-warning btn-sm mx-1" (click)="nuevoMovimiento(false, inf)" placement="left" ngbTooltip="Editar Movimiento Bancario">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr style="font-size: 12px;">
+                                    <td class="EmptyTable" [attr.colspan]="8">
+                                        No hay información para mostrar
+                                     </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div> -->
+
+
+                    <div class="col-12" style="overflow-x:auto;">
+                        <table class="table table-striped table-bordered table-k table-hover" style="min-width: 1900px;max-height: 300px;"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                            <thead >
+                                <tr class="text-center" style="font-size: 11px;">
+                                    <th class="text-center" style="min-width:80px">Año</th>
+                                    <th class="text-center" style="min-width:80px">Mes</th>
+                                    <th class="text-center" style="min-width:100px">Fecha Regristro</th>
+                                    <th class="text-center" style="min-width:300px">Banco</th>
+                                    <th class="text-center" style="min-width:200px">Cuenta Contable</th>
+                                    <th class="text-center" style="min-width:100px">Número Movimiento</th>
+                                    <th class="text-center" style="min-width:100px">Tipo Movimiento</th>
+                                    <th class="text-center" style="min-width:300px">Detalle</th>
+                                    <th class="text-center" style="min-width:100px">Valor</th>
+                                    <th class="text-center" style="min-width:100px">Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="infoMovimientosBancarios.length == 0">
+                                    <td colspan="11" class="text-center"><h6 class="my-1"></h6>No hay movimientos para mostrar</td>
+                                </tr>
+                                <tr *ngFor="let inf of infoMovimientosBancarios, let i = index" style="font-size: 11px;">
+                                    <td style="min-width:80px">{{inf.anio}}</td>
+                                    <td style="min-width:80px">{{convertirMes(inf.mes)}}</td>
+                                    <td style="min-width:100px">{{inf.fecha | date: 'dd-MM-YYYY'}}</td>
+                                    <td style="min-width:300px">{{inf.bancos?.name_banks}}</td>
+                                    <td style="min-width:200px">{{inf.cuenta_banco}}</td>
+                                    <td style="min-width:100px">{{inf.numero}}</td>
+                                    <td style="min-width:100px">{{inf.tipo_movimiento == 'D' ? 'Débito' : (inf.tipo_movimiento == 'C' ? 'Crédito' : '')}}</td>
+                                    <td style="min-width:300px">{{inf.detalle}}</td>
+                                    <td style="min-width:100px" class="text-right">$ {{inf.tipo_movimiento == 'D' ? (inf.debito | number:'1.2-2') : (inf.tipo_movimiento == 'C' ? (inf.credito | number:'1.2-2') : '')}}</td>
+                                    <td class="text-center"><i placement="bottom" [ngbTooltip]="inf.estado == 'A' ? 'Activo' : inf.estado == 'I' ? 'Inactivo' : ''" 
+                                        [class]="inf.estado == 'A' ? 'fas fa-circle text-success' : inf.estado == 'I' ? 'fas fa-circle text-danger' : 'fas fa-circle text-sprimary'"></i>
+                                        {{inf.estado== 'A' ? 'Activo' : inf.estado == 'I' ? 'Inactivo' : ''}}
+                                    </td>
+                                    <td>
+                                        <div class="text-center mx-auto">
+                                            <button  class="btn btn-warning btn-sm mx-1" (click)="nuevoMovimiento(false, inf)" placement="left" ngbTooltip="Editar Movimiento Bancario">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <!-- <button class="btn btn-primary btn-sm mx-1" (click)="showSeguiTicketForm(false, dt)" placement="left" ngbTooltip="Abrir Seguimiento">
+                                                <i class="far fa-eye "></i>
+                                            </button> -->
+                                        </div>
+                                    </td>
+                                  
+                                </tr>
+                            </tbody>
+                        </table>
+                        <mat-paginator showFirstLastButtons
+                                       [length]="paginate.length"
+                                       [pageSize]="paginate.perPage"
+                                       [pageSizeOptions]="paginate.pageSizeOptions"
+                                       (page)="changePaginate($event)"
+                                       aria-label="Select page">
+                        </mat-paginator>
+                    </div>
+                </p-tabPanel>
+
+                <p-tabPanel class="p-0" header="CONSULTAR" [headerStyle]="{'font-size': '0.7rem'}">
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha Desde" styleSpan="font-weight-bold size-span-campo">
+                                <input id="filter_fecha_desde" type="date" class="form-control" [(ngModel)]="fecha_desde" max="2050-01-01" >
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="font-weight-bold size-span-campo">
+                                <input id="filter_fecha_hasta" type="date" class="form-control" [(ngModel)]="fecha_hasta" max="2050-01-01" >
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Bancos" styleSpan="size-span-campo">
+                                <ng-select [clearable]=false [(ngModel)]="bancoConsulta"
+                                    class="form-control form-control-sm custom-select"
+                                     [disabled]="false">
+                                     <ng-option [value]="0">Seleccione un Banco</ng-option>
+                                    <ng-option *ngFor="let d of arrayBanks"
+                                        [value]="d.id_banks">{{d.name_banks + ' ' +d.num_cuenta}}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p-table [value]="infoConciliacionConsulta" 
+                            [(selection)]="selectedDataConcilia"
+                            (onRowSelect)="onRowSelectConciliados($event)" 
+                            (onRowUnselect)="onRowUnselectConciliados($event)"
+                            styleClass="p-datatable-gridlines">
+                            <ng-template pTemplate="header">
+                                <tr style="font-size: 12px;">
+                                    <th style="width: 4rem">
+                                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                    </th>
+                                  
+                                    <th class="text-center" style="min-width:100px">Fecha Regristro</th>
+                                    <th class="text-center" style="min-width:300px">Banco</th>
+                                    <th class="text-center" style="min-width:100px">Año</th>
+                                    <th class="text-center" style="min-width:100px">Mes</th>
+                                    <th class="text-center" style="min-width:100px">Saldo</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-inf>
+                                <tr style="font-size: 12px;">
+                                    <td>
+                                        <p-tableCheckbox [value]="inf"></p-tableCheckbox>
+                                    </td>
+                                    
+                                    <td>{{inf.fecha_registro}}</td>
+                                    <td>{{inf.name_banks+ ' ' + inf.num_cuenta}}</td>
+                                    <td class="text-center">{{inf.anio}}</td>
+                                        <td class="text-center" *ngIf="inf.mes == 1" >Enero</td>
+                                        <td class="text-center" *ngIf="inf.mes == 2" >Febrero</td>
+                                        <td class="text-center" *ngIf="inf.mes == 3" >Marzo</td>
+                                        <td class="text-center" *ngIf="inf.mes == 4" >Abril</td>
+                                        <td class="text-center" *ngIf="inf.mes == 5" >Mayo</td>
+                                        <td class="text-center" *ngIf="inf.mes == 6" >Junio</td>
+                                        <td class="text-center" *ngIf="inf.mes == 7" >Julio</td>
+                                        <td class="text-center" *ngIf="inf.mes == 8" >Agosto</td>
+                                        <td class="text-center" *ngIf="inf.mes == 9" >Septiembre</td>
+                                        <td class="text-center" *ngIf="inf.mes == 10" >Octubre</td>
+                                        <td class="text-center" *ngIf="inf.mes == 11" >Noviembre</td>
+                                        <td class="text-center" *ngIf="inf.mes == 12" >Diciembre</td>
+                                    <td>$ {{inf.saldo_final | number:'1.2-2'}}</td>
+                                    <td [class]="'text-center product-badge status-activo'" *ngIf="inf.isactive == 1"><span >CONCILIADO</span></td>
+                                    <td [class]="'text-center product-badge status-anulado'"  *ngIf="inf.isactive != 1"><span >NO CONCILIADO</span></td>
+                                    <td>
+                                        <div class="flex flex-row flex-wrap card-container blue-container">
+                                        <div class="flex justify-content-start flex-wrap">
+                                            <button class="btn btn-action btn-sm mx-1" (click)="showConciliacionBancaria(inf)" placement="left" ngbTooltip="Ver detalles Conciliacion Bancaria">
+                                                <i class="far fa-eye "></i>
+                                            </button>
+                                        </div>
+                                          <div class="flex justify-content-start flex-wrap">
+                                            <span title="Conciliación Bancaria PDF" (click)="descargarPdf(inf)"
+                                              class="text-red-600 text-xl m-1 cursor-pointer fa fa-dofa fa-file-pdf-o"></span>
+                                          </div>
+                                          <div class="flex justify-content-end flex-wrap">
+                                            <span title="Conciliación Bancaria Resumen PDF" (click)="descargarConciliacionDetallePdf(inf)"
+                                              class="text-black-600 text-xl m-1 cursor-pointer fa fa-dofa fa-file-pdf-o"></span>
+                                          </div>
+
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr style="font-size: 12px;">
+                                    <td class="EmptyTable" [attr.colspan]="8">
+                                        No hay información para mostrar
+                                     </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+
+                </p-tabPanel>
+            </p-tabView>
+                
+        <!-- </div> -->
+        <!-- <ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template> -->
+
+    </app-button-radio-active>
+    <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spConciliation"></cc-spiner-procesar>
+</div>

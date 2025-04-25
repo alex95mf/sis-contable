@@ -1,0 +1,10 @@
+::ng-deep {
+    .NgxEditor {
+      height: 450px;
+      overflow-y: scroll;
+    }
+  
+    .NgxEditor__Content {
+      min-height: 450px;
+    }
+}

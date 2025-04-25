@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col">
+        <app-cc-input-group-prepend label="Codigo Partida" styleSpan="size-span-campo font-weight-bold">
+            <input  type="text" class="form-control" readonly [placeholder]="cod_presupuesto?.label" (click)="expandPartidas()">
+            <div class="input-group-append">
+                <button class="btn btn-secondary btn-sm" (click)="expandPartidas()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </app-cc-input-group-prepend> 
+    </div>
+    <div class="col-1">
+        <button class="btn btn-primary btn-sm mt-1" (click)="getBienes()">
+            <i class="fas fa-search"></i> Cargar
+        </button>
+    </div>
+</div>
+<div class="row">
+        
+    <div class="col">
+        <app-cc-input-group-prepend label="Valor a aumentar" styleSpan="size-span-campo font-weight-bold">
+            <input class="form-control" currencyMask placeholder="Ingrese el numero... " [(ngModel)]="valorReforma" (blur)="calcularAjuste()" />
+        
+        </app-cc-input-group-prepend>
+    </div>
+    
+
+    <div class="col">
+        <app-cc-input-group-prepend label="Valor ajustado" styleSpan="size-span-otro font-weight-bold">
+            <input class="form-control" currencyMask placeholder="Ingrese el numero... " readonly/>
+        
+        </app-cc-input-group-prepend>
+    </div>
+</div>
+
+<div class="table-responsive mt-2" >
+    <table class="table table-bordered no-footer table-hover mb-0" style="width: 1600px;" >
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center" style="width: 5%;"><input type="checkbox"  /></th>
+                <th class="text-center">Descripcion</th>
+                <th class="text-center">Departamento</th>
+                <th class="text-center">Atribucion</th>
+                <th class="text-center">Unidad de medida</th>
+                <th class="text-center">Cantidad</th>
+                <th class="text-center">Costo Unitarios</th>
+                <th class="text-center">Valor total</th>
+                <th class="text-center">Cantidad Modifcada</th>
+                <th class="text-center">Costo Unitarios Modificados</th>
+                <th class="text-center">Valor total Modificados</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngIf="!listaSolicitudesAtribucion.length">
+                <td colspan="12" class="text-center">
+                    <h6>No hay Solicitudes que mostrar</h6>
+                </td>
+
+            </tr>
+            <tr *ngFor="let item of listaSolicitudesAtribucion">
+                <td class="text-center" style="width: 5%;"> <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="calcularValorTotal()"/></td>
+                <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
+                <td class="text-center">{{item.departamento?.valor}}</td>
+                <td class="text-center" maxlength="10">{{item.fk_atribucion?.catalogo?.valor}}</td>
+                <td class="text-center">{{item.u_medida}}</td>
+                <td class="text-center" >{{item.cantidad_por_solicitar}</td>
+                <td class="text-center" >{{item.costo_unitario}}</td>
+                <td class="text-center" style="width: 10%;">
+                    <input class="form-control" currencyMask [ngModel]="item.precio_cotizado" readonly/>
+                </td>
+                <td class="text-center" >
+                    <input class="form-control" type="text" [(ngModel)]="item.cantidad_mod" (ngModelChange)="calcularValorTotal()" [disabled]="search"/>
+                </td>
+                <td class="text-center" >
+                    <input class="form-control" currencyMask [(ngModel)]="item.costo_unitario" (blur)="calcularValorTotal()" [disabled]="search"/>
+                </td>
+                <td class="text-center" style="width: 10%;">
+                    <input class="form-control" currencyMask [ngModel]="item.costo_total_mod" readonly/>
+                </td>
+            </tr>
+        </tbody>
+    </table>       
+
+</div>
+
+<div>
+    <mat-paginator  aria-label="Select page">
+    </mat-paginator> 
+
+</div>
+
+<div class="row my-2 justify-content-end">
+    <div class="col-6">
+        <div class="input-group input-group-lg input-group-total">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 300px;">&Sigma; Total por Solicitar</span></div>
+            <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="totalBienes">
+        </div>
+    </div>
+</div>
+<div class="row my-2 justify-content-end">
+    <div class="col-6">
+        <div class="input-group input-group-lg input-group-descuentos">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 300px;">&Sigma; Total Ajustado</span></div>
+            <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="totalReforma">
+        </div>
+    </div>
+</div>
+<div class="row my-2 justify-content-end">
+    <div class="col-6">
+        <div class="input-group input-group-lg input-group-subtotal">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 300px;">&Sigma; Total por Ajustar</span></div>
+            <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="totalAjustado">
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spSectionIncremento"></cc-spiner-procesar>

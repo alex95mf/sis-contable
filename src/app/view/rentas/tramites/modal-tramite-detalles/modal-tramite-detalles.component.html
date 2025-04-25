@@ -1,0 +1,68 @@
+<app-button-radio-active [titulo]="nuevo ? 'Nuevo Tramite' : 'Editar Tramite'" cstyle="bg-light" [icono]="nuevo ? 'fas fa-square-plus' : 'fas fa-edit'"
+    filtroBoton="btnsRenTramitesModal" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+        <div class="col-8">
+            <app-cc-input-group-prepend label="Documento" styleSpan="size-span-campo font-weight-bold">
+                <ng-select [items]="tipo_documento" bindLabel="nombre" bindValue="nombre" [(ngModel)]="tramite.tipo_documento" [clearable]="false" [markFirst]="false" class="form-control" placeholder="Tipo de Documento"></ng-select>
+                <input type="text" class="form-control" [(ngModel)]="tramite.numero_documento" placeholder="Numero de Documento">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Fecha Docum." styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" [(ngModel)]="tramite.fecha_documento">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col">
+            <app-cc-input-group-prepend label="Fecha Recibido" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" [(ngModel)]="tramite.fecha_recibido">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Fecha Recibido" styleSpan="size-span-campo font-weight-bold">
+                <input type="time" class="form-control" [(ngModel)]="tramite.hora_recibido">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                <ng-select [items]="departamentos" bindValue="id_catalogo" bindLabel="valor" [(ngModel)]="tramite.fk_departamento" [clearable]="false" [markFirst]="false" class="form-control"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-8">
+            <app-cc-input-group-prepend label="Tema" styleSpan="size-span-campo font-weight-bold bg-dark">
+                <textarea rows="5" class="form-control" [(ngModel)]="tramite.tema"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <fieldset class="border pb-2 px-2 mb-2">
+        <legend class="w-auto bg-dark">Destino</legend>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Destino" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="tramite.destino">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Entrega" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="tramite.fecha_entrega">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Hora Entrega" styleSpan="size-span-campo font-weight-bold">
+                    <input type="time" class="form-control" [(ngModel)]="tramite.hora_entrega">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col offset-8">
+                <app-cc-input-group-prepend label="Disposici&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select [items]="disposiciones" bindValue="nombre" bindLabel="nombre" [(ngModel)]="tramite.disposicion" [clearable]="false" [markFirst]="false" class="form-control"></ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="renTramitesModal"></cc-spiner-procesar>

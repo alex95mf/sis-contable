@@ -1,0 +1,123 @@
+<br>
+<app-button-radio-active titulo="Conciliación Bancaria" filtroBoton="btnConciBanc"
+    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+    *ngIf="permisions" icono="far fa-check-square">
+    <div class="row">
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Buscar Desde" styleSpan="size-span-campo">
+                <input  class="form-control" name="dp" max="2050-01-01" container="body"
+                    [(ngModel)]="fromDatePicker" format='yyyy-MM-dd' />
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Buscar Hasta" styleSpan="size-span-campo">
+                <input  class="form-control" name="dp" max="2050-01-01" container="body"
+                    [(ngModel)]="toDatePicker" format='yyyy-MM-dd' />
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Bancos" styleSpan="size-span-campo">
+                <select [(ngModel)]="bankSelect" class="form-control form-control-sm custom-select"
+                    (ngModelChange)="rerenderBank($event)">
+                    <!-- <option [value]="0">Todos</option> -->
+                    <option *ngFor="let d of arrayBanks" [value]="d.id_banks">{{d.name_banks}}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Saldo" styleSpan="size-span-campo">
+                <input type="text" [disabled]="true" placeholder="$ {{saldo_bank}}" class="form-control text-right">
+                <div class="input-group-prepend">
+                    <button class="btn btn-info btn-sm" matTooltip="Buscar por Conciliados"
+                        (click)="consultConciliado(1)"><span style="font-size: 10px;">
+                            <i class="fas fa-search"> CONCILIADOS</i></span></button>
+                </div>
+                <div class="input-group-prepend">
+                    <button class="btn btn-warning btn-sm" matTooltip="Buscar sin Conciliar"
+                        (click)="consultConciliado(0)"><span style="font-size: 10px;">
+                            <i class="fas fa-search"> SIN CONCILIAR</i></span></button>
+                </div>
+                <div class="input-group-prepend">
+                    <button class="btn btn-success btn-sm" matTooltip="Buscar todos"
+                        (click)="consultConciliado(3)"><span style="font-size: 10px;">
+                            <i class="fas fa-search"> TODOS</i></span></button>
+                </div>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <fieldset class="border p-2 mb-2 mt-3 filters">
+        <legend class="w-auto h6">Listado de conciliación</legend>
+        <div class="table-responsive ">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+                <thead style="background-color:black; color: white;">
+                    <tr style="width: 100%;">
+                        <th style="width: 10%;">Fecha</th>
+                        <th style="width: 10%;">Transacción</th>
+                        <th style="width: 30%;">Descripción</th>
+                        <th style="width: 10%;">Valor</th>
+                        <th style="width: 10%;">Saldo</th>
+                        <th style="width: 10%;">Cheque/trx</th>
+                        <th style="width: 10%;">Tipo</th>
+                        <th style="text-align: center;width: 10%;padding-left: 0px !important;">
+                            <div>
+                                <input type="checkbox" [(ngModel)]="checkGlobal" (click)="selectAll()">
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="validaDt">
+                    <tr *ngFor="let dt of infoDt; let i = index">
+                        <td>{{dt.fecha_movimiento}}</td>
+                        <td>
+                            <div>
+                                {{ dt.codigo_doc}}-{{ dt.secuencia.toString().padStart(10, '0')}}
+                            </div>
+                        </td>
+                        <td>
+                            <div style="width: auto;">
+                                {{ dt.descripcion}}
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div>
+                                $ {{ dt.valor}}
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div>
+                                $ {{ dt.saldo_actual}}
+                            </div>
+                        </td>
+                        <td>
+                            <div *ngIf="dt.num_doc != null">
+                                {{ dt.num_doc}}
+                            </div>
+                            <div *ngIf="dt.num_doc == null">
+                                N/A
+                            </div>
+                        </td>
+                        <td>
+                            <div *ngIf="dt.tipo_movimiento == 'C' ">
+                                Crédito
+                            </div>
+                            <div *ngIf="dt.tipo_movimiento == 'D' ">
+                                Débito
+                            </div>
+                        </td>
+                        <td style="text-align: center;padding-top: 5px !important;">
+                            <div>
+                                <input type="checkbox" [(ngModel)]="dt.status_conciliacion"
+                                    (ngModelChange)="changeStus(dt,i)">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spConciliation"></cc-spiner-procesar>

@@ -1,0 +1,254 @@
+<app-button-radio-active [titulo]="fTitle" icono="fas fa-store-alt" cstyle="bg-light text-dark"
+    filtroBoton="btnsModalLocalDet" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row">
+        <div class="col-8">
+            <app-cc-input-group-prepend label="Raz&oacute;n Social" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" name="" id="" class="form-control" [(ngModel)]="local.razon_social">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Fecha Inicio Act." styleSpan="size-span-campo font-weight-bold">
+                <input type="date" name="" id="" class="form-control" [(ngModel)]="local.fecha">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Patrimonio" styleSpan="size-span-campo font-weight-bold">
+                <div class="input-group-prepend">
+                    <span class="input-group-text font-weight-bold">$</span>
+                </div>
+                <input type="number" class="form-control text-right" [(ngModel)]="local.patrimonio" placeholder="0.00" (keypress)="validaciones.numberOnlyDot($event)">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Actividad Comercial" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.fk_actividad_comercial.id_catalogo">
+                    <ng-option [value]="0" disabled>Actividad Comercial</ng-option>
+                    <ng-option *ngFor="let actividad of cmb_activ_comer" [value]="actividad.id">{{ actividad.codigo }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.fk_grupo.id_catalogo" [disabled]="local.tipo_local == 1">
+                    <ng-option [value]="0" disabled>Grupo</ng-option>
+                    <ng-option *ngFor="let grupo of cmb_grupo" [value]="grupo.id">{{ grupo.codigo }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <app-cc-input-group-prepend label="Local Turistico" styleSpan="size-span-campo font-weight-bold">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><input type="checkbox" [(ngModel)]="local.local_turistico"></div>
+                </div>
+                <ng-select class="form-control" [readonly]="!local.local_turistico" [clearable]="false" [(ngModel)]="local.lt_categoria.descripcion" (ngModelChange)="filter_cat_2($event)">
+                    <ng-option disabled [value]="0">Categor&iacute;a</ng-option>
+                    <ng-option *ngFor="let cat of cmb_turistico_categoria" [value]="cat.descripcion">{{ cat.valor }}</ng-option>
+                </ng-select>
+                <ng-select class="form-control" [readonly]="!local.local_turistico" [clearable]="false" [(ngModel)]="local.lt_categoria_2.descripcion">
+                    <ng-option disabled [value]="0">Sub-categor&iacute;a</ng-option>
+                    <ng-option *ngFor="let cat of cmb_turistico_subcategoria_filter" [value]="cat.descripcion">{{ cat.valor }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Uso de suelo" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="local.uso_suelo">
+            </app-cc-input-group-prepend>
+        </div>
+        <div *ngIf="local.local_turistico" class="col">
+            <app-cc-input-group-prepend [label]="lblCantidad" styleSpan="size-span-campo font-weight-bold">
+                <input type="number" class="form-control" [(ngModel)]="local.lt_cantidad">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Establecimiento" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.tipo_establecimiento" [disabled]="false">
+                    <ng-option [value]="0" disabled>Establecimiento</ng-option>
+                    <ng-option *ngFor="let establecimiento of cmb_tipo_estable" [value]="establecimiento.value"> {{ establecimiento.label }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Tiene F&aacute;brica" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.tiene_fabrica" [disabled]="false">
+                    <ng-option [value]="0" disabled>Tiene Fábrica</ng-option>
+                    <ng-option *ngFor="let fabrica of cmb_tiene_fabrica" [value]="fabrica"> {{ fabrica == "S" ? 'SI': 'NO' }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Tipo de Negocio" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.tipo_negocio.descripcion">
+                    <ng-option [value]="0" disabled>Tipo de Negocio</ng-option>
+                    <ng-option *ngFor="let tipo of cmb_tipo_negocio" [value]="tipo.nombre">{{ tipo.codigo }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Direcci&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="local.direccion">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.estado">
+                    <ng-option disabled [value]="0">Seleccione un Estado</ng-option>
+                    <ng-option *ngFor="let estado of estados" [value]="estado.codigo">{{ estado.nombre }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Tipo de Local" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" disabled [(ngModel)]="local.tipo_local" [items]="cmb_tipo_local" bindLabel="value" bindValue="id">
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Fecha Creaci&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" readonly [value]="local.created_at">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Usuario" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [placeholder]="local.usuario?.nombre">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <fieldset class="border p-1 my-1">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input type="checkbox" class="form-check-input" id="chk_pesasymedidas" [checked]="local.i_pym" disabled>
+                            <label for="chk_pesasymedidas" class="form-check-label">Pesas y Medidas</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input type="checkbox" class="form-check-input" id="chk_viapublica" [checked]="local.i_vpublica" disabled>
+                            <label for="chk_viapublica" class="form-check-label">Uso de V&iacute;a P&uacute;blica</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input type="checkbox" class="form-check-input" id="chk_capmin" [checked]="local.i_capmin" disabled>
+                            <label for="chk_capmin" class="form-check-label">Uso Cap. Min.</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col">
+            <fieldset class="border pb-2 px-2">
+                <legend class="w-auto bg-dark ml-1">Ubicaci&oacute;n</legend>
+                <div *ngIf="local.tipo_local != 1; then ubicacionLC else ubicacionLM"></div>
+                <ng-template #ubicacionLC>
+                    <!-- <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Provincia">
+                                <input type="text" class="form-control" readonly placeholder="{{ local.fk_provincia ? local.fk_provincia.valor : '' }}">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Canton">
+                                <input type="text" class="form-control" readonly placeholder="{{ local.fk_canton ? local.fk_canton.valor : '' }}">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Zona" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.fk_zona.valor" (ngModelChange)="filter_sector($event)">
+                                    <ng-option [value]="0" disabled>Zona</ng-option>
+                                    <ng-option *ngFor="let zona of cmb_zona" [value]="zona.codigo">{{ zona.codigo }}. {{ zona.nombre }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Sector" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" [(ngModel)]="local.fk_sector.valor">
+                                    <ng-option [value]="0" disabled>Sector</ng-option>
+                                    <ng-option *ngFor="let sector of cmb_sector_filter" [value]="sector.codigo">{{ sector.codigo }}. {{ sector.nombre }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Manzana" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" name="" id="" class="form-control" [(ngModel)]="local.manzana">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Solar" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" name="" id="" class="form-control" [(ngModel)]="local.solar">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <app-cc-input-group-prepend label="Cod. Catastro" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control" readonly [ngModel]="local.cod_catastro">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template #ubicacionLM>
+                    <div class="row">
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="Contrato" styleSpan="size-span-otro font-weight-bold">
+                                <input type="text" class="form-control" readonly [placeholder]="local.fk_contrato?.numero_contrato">
+                                <div class="input-group-append"><button class="btn btn-primary" matTooltip="Buscar Contrato" (click)="expandContratos(contribuyente)"><i class="fas fa-search"></i></button></div>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="Comercio" styleSpan="size-span-otro font-weight-bold">
+                                <ng-select class="form-control" disabled [clearable]="false" [(ngModel)]="local.fk_contrato?.fk_mercado.id_catalogo">
+                                    <ng-option [value]="0" disabled>Comercio</ng-option>
+                                    <ng-option *ngFor="let mercado of cmb_mercado" [value]="mercado.id">{{ mercado.codigo }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Piso" styleSpan="size-span-otro font-weight-bold">
+                                <input type="text" readonly class="form-control" [placeholder]="local.piso ?? ''">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Bloque" styleSpan="size-span-otro font-weight-bold">
+                                <input type="text" readonly class="form-control" [placeholder]="local.bloque ?? ''">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Puesto" styleSpan="size-span-otro font-weight-bold">
+                                <input type="text" readonly class="form-control" [placeholder]="local.fk_contrato?.fk_mercado_puesto.numero_puesto">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </ng-template>
+                
+            </fieldset>
+        </div>
+    </div>
+    <div class="row">
+        
+        <div class="col"></div>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="modalLocalDet"></cc-spiner-procesar>

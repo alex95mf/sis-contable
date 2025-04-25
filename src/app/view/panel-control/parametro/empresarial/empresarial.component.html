@@ -1,0 +1,976 @@
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <div>
+        <app-button-radio-active-new titulo="Fichero de Empresa" filtroBoton="btnsEmpresa" icono="fas fa-user-cog"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div *ngIf="permisions.length > 0 || guardaT.length > 0">
+            <div class="mb-3">
+                <nav class="card-k p-2 mb-2">
+                    <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
+                        <a (click)="dinamicoBotones(1)" class="tab-label active" id="nav-empresas-tab"
+                            data-toggle="tab" href="#nav-empresas" role="tab" aria-controls="nav-empresas"
+                            aria-selected="true"><i class="fa fa-handshake-o" aria-hidden="true"></i> Empresas</a>
+                        <a (click)="dinamicoBotones(2)" class="tab-label" id="nav-sucursales-tab"
+                            data-toggle="tab" href="#nav-sucursales" role="tab"
+                            aria-controls="nav-sucursales" aria-selected="false"><i class="fa fa-cubes" aria-hidden="true"></i> Sucursales</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-empresas" role="tabpanel" aria-labelledby="nav-empresas-tab">
+                        <div class="row">
+                          
+                            <div class="col-12 col-md-3">
+                                <fieldset class="border card-fieldset">
+                                    <legend class="w-auto card-legend">Foto Empresa</legend>
+                                    <div class="row m-0">
+                                        <div class="col-12">
+                                            <div class="text-center">
+                                                <img class="imagen" [src]="url">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <input id="fichero" type="file" lang="es" accept="image/*"
+                                                    (change)="onselect($event)" [disabled]="dusuario">
+                                                <label for="fichero" class="btn sub1 "
+                                                    style="font-size:11px;line-height:0.5"><i class="fa fa-upload"
+                                                        aria-hidden="true" style="font-size:13px;"></i>SELECCIONE
+                                                    IMAGEN</label>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-12 text-center">
+                                            <span style="font-size: 9px !important;color: red;">Imagen recomendada 190x60 px</span>
+                                        </div> -->
+                                    </div>
+                                </fieldset>
+                            </div>
+                            
+                            <div class="col-12 col-md-9">
+                                <fieldset class="border card-fieldset">
+                                    <legend class="w-auto card-legend">Datos de Empresa</legend>
+                                    <div class="row m-0">
+                                        <div class="col-12 ">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Nombre Comercial</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese Nombre comercial" type="text"
+                                                            #nombre="ngModel" name="nombre" id="nombre"
+                                                            [(ngModel)]="nombreComercial" maxlength="200"
+                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            id="IdnombreComercial">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Dirección</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese dirección" type="text" #address="ngModel"
+                                                            name="address" [(ngModel)]="direccion"
+                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            id="Iddireccion">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Razón Social</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese razón Social" type="text" #rsocial="ngModel"
+                                                            name="rsocial" id="Idrsocial" [(ngModel)]="razonsocial"
+                                                            minlength="20" maxlength="200" class="form-control form-control-sm"
+                                                            [disabled]="dusuario">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Email</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese un correo, ejemplo@ejemplo.com" type="email"
+                                                            #email="ngModel" name="email" [(ngModel)]="emails"
+                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            id="Idemail">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Ruc</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese ruc de la empresa" type="text"
+                                                            #rucngM="ngModel" name="rucngM" [(ngModel)]="ruc"
+                                                            class="form-control form-control-sm" maxlength="13"
+                                                            [disabled]="dusuario" id="Idruc" min="0"
+                                                            (keypress)="commonServices.FormatDecimalVal($event)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Teléfono 1</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese Teléfono 1" type="text" #t1="ngModel"
+                                                            maxlength="10" name="t1" [(ngModel)]="telefono1"
+                                                            class="form-control form-control-sm" [disabled]="dusuario" id="Idt1"
+                                                            min="0" (keypress)="commonServices.FormatDecimalVal($event)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Representante Legal</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese representante legal" type="text"
+                                                            #rlegal="ngModel" name="rlegal" [(ngModel)]="rucLegal"
+                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            id="Idrlegal">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Teléfono 2</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese Teléfono 2" type="text" #t2="ngModel"
+                                                            maxlength="10" name="t2" [(ngModel)]="telefono2"
+                                                            class="form-control form-control-sm" [disabled]="dusuario" id="Idt2"
+                                                            min="0" (keypress)="commonServices.FormatDecimalVal($event)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Usuarios</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese cantidad de usuarios" type="number"
+                                                            #users="ngModel" name="users" [(ngModel)]="usersEmpresa"
+                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            id="IdUserEmpresa">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Celular</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese celular" type="text" #cel="ngModel"
+                                                            maxlength="10" name="cel" [(ngModel)]="celular"
+                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            id="Idcel" min="0"
+                                                            (keypress)="commonServices.FormatDecimalVal($event)">
+                                                    </div>
+                                                </div>
+                
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Sucursales</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese cantidad de sucursales" type="number"
+                                                            #sucur="ngModel" name="sucur" [(ngModel)]="sucursal"
+                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            id="Idsucursal">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <app-cc-input-group-prepend label="Fecha alta" styleSpan="size-span-campo">
+                                                        <ejs-datepicker [(ngModel)]="fromDatePicker" type="text" name="dateFrom"
+                                                            format='yyyy-MM-dd' [disabled]="dusuario" class="form-control">
+                                                        </ejs-datepicker><!-- (ngModelChange)="rerender()" -->
+                                                    </app-cc-input-group-prepend>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Contacto</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese contacto" type="text" #contact="ngModel"
+                                                            name="contact" [(ngModel)]="contacto"
+                                                            class="form-control form-control-sm" [disabled]="dusuario"
+                                                            id="Idcontacto">
+                                                    </div>
+                                                </div>
+                
+                                                <div class="col-sm-6">
+                                                    <app-cc-input-group-prepend label="Fecha baja" styleSpan="size-span-campo">
+                                                        <ejs-datepicker [(ngModel)]="toDatePicker" name="dateFrom"
+                                                            format='yyyy-MM-dd' [disabled]="dusuario" class="form-control">
+                                                        </ejs-datepicker><!-- (ngModelChange)="rerender()" -->
+                                                    </app-cc-input-group-prepend>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group pt-2">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                placeholder="Ingrese observación">Causa baja</span>
+                                                        </div>
+                                                        <textarea class="form-control form-control-sm"
+                                                            aria-label="With textarea" id="Idcausa" [(ngModel)]="causaBaja"
+                                                            placeholder="Ingrese causa"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Estado</span>
+                                                        </div>
+                                                        <select class="form-control form-control-sm custom-select"
+                                                            #estadoe="ngModel" name="estadoe" [(ngModel)]="estadoEmpresa"
+                                                            style="height: 28px; padding-top: 0px;padding-bottom: 0px;outline: unset;box-shadow: unset;"
+                                                            [disabled]="dusuario" id="IdestadoEmpresa">
+                                                            <option value="A">Activo</option>
+                                                            <option value="I">Inactivo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <fieldset class="border card-fieldset">
+                                    <legend class="w-auto card-legend">Parámetros de Presupuesto</legend>
+                                    <div class="row m-0">
+                                        <div class="col-md-12">
+                                            <app-cc-input-group-prepend label="Orientación"
+                                                styleSpan="size-span-campo font-weight-bold size-span-small" class="size-span-small">
+                                                <ng-select [readonly]="titulosDisabled || formReadOnly" class="form-control" [clearable]="false"
+                                                    [(ngModel)]="orientacion_gasto">
+                                                    <ng-option [value]="0">Seleccione una Orientación</ng-option>
+                                                    <ng-option *ngFor="let c of listaorientacion" [value]="c.valor">{{ c.valor }} - {{ c.nombre
+                                                        }}</ng-option>
+                                                </ng-select>
+                                            </app-cc-input-group-prepend>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <app-cc-input-group-prepend label="Función" styleSpan="size-span-campo font-weight-bold"
+                                                        class="size-span-small">
+                                                        <ng-select [readonly]="titulosDisabled || formReadOnly" class="form-control" [clearable]="false"
+                                                            [(ngModel)]="actividad">
+                                                            <ng-option [value]="0">Seleccione una Función</ng-option>
+                                                            <ng-option *ngFor="let c of listafuncion" [value]="c.valor">{{ c.valor }} - {{ c.nombre
+                                                                }}</ng-option>
+                                                        </ng-select>
+                                                    </app-cc-input-group-prepend>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 ">
+                                <fieldset class="border card-fieldset">
+                                    <legend class="w-auto card-legend">Empresas</legend>
+                                    <div class="table-responsive">
+                                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                            class="table table-striped table-bordered table-k table-hover" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre Comercial</th>
+                                                    <th>Dirección</th>
+                                                    <th>Email</th>
+                                                    <th>Ruc</th>
+                                                    <th>Celular</th>
+                                                    <th>Teléfono</th>
+                                                    <th>Estado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="validaDtUser">
+                                                <tr *ngFor="let dt of guardaT" (click)="updateEmpresa(dt)"
+                                                    style="cursor:pointer;">
+                                                    <td>{{dt.nombre_comercial}}</td>
+                                                    <td>{{ dt.direccion }}</td>
+                                                    <td>{{ dt.email }}</td>
+                                                    <td>{{ dt.ruc }}</td>
+                                                    <td>{{ dt.celular }}</td>
+                                                    <td>{{ dt.telefono1 }}</td>
+                                                    <td style="text-align: center;">{{ dt.estado }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </fieldset>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-sucursales" role="tabpanel" aria-labelledby="nav-sucursales-tab">
+                        <div class="row">
+                            <div class="col-12">
+                                <fieldset class="border card-fieldset">
+                                    <legend class="w-auto card-legend">Datos de Sucursal</legend>
+                                    <div class="row m-0">
+                                        <div class="col-12 ">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Nombre</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese nombre sucursal" type="text"
+                                                            #nombreSucu="ngModel" name="nombreSucu" [(ngModel)]="nombreSucursal"
+                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            id="IdNombreSucu">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Dirección</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese dirección" type="text" #addressuc="ngModel"
+                                                            name="addressuc" [(ngModel)]="direccionSucu"
+                                                            class="form-control form-control-sm" [disabled]="!newSucursal "
+                                                            id="IddireccionSucu">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Estado</span>
+                                                        </div>
+                                                        <select class="form-control form-control-sm custom-select"
+                                                            #estadosu="ngModel" name="estadosu" [(ngModel)]="estadoSucursal"
+                                                            style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
+                                                            [disabled]="!newSucursal" id="IdestadoSucursal">
+                                                            <option value="A">Activo</option>
+                                                            <option value="I">Inactivo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Teléfono 1</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese Teléfono 1" type="text" #t1Sucu="ngModel"
+                                                            maxlength="10" name="t1Sucu" [(ngModel)]="telefono1Sucu"
+                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            id="Idt1Sucu" min="0"
+                                                            (keypress)="commonServices.FormatDecimalVal($event)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Celular</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese celular" type="text" #celSucu="ngModel"
+                                                            maxlength="10" name="celSucu" [(ngModel)]="celularSucu"
+                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            id="IdCelSucu" min="0"
+                                                            (keypress)="commonServices.FormatDecimalVal($event)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Empresa</span>
+                                                        </div>
+                                                        <select [(ngModel)]="empresaSeleccionado"
+                                                            class="form-control form-control-sm custom-select"
+                                                            [disabled]="!newSucursal" (ngModelChange)="obtenerEmpresa($event)"
+                                                            style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
+                                                            id="IdEmpresaSucursal">
+                                                            <option [value]="0">Seleccione empresa</option>
+                                                            <option *ngFor="let d of dataEmpresa" [value]="d.id_empresa">
+                                                                {{d.nombre_comercial}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Teléfono 2</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese Teléfono 2" type="text" #t2Sucu="ngModel"
+                                                            maxlength="10" name="t2Sucu" [(ngModel)]="telefono2Sucu"
+                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            id="Idt2Sucu" min="0"
+                                                            (keypress)="commonServices.FormatDecimalVal($event)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Teléfono 2</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese Teléfono 2" type="text" #t2Sucu="ngModel"
+                                                            maxlength="10" name="t2Sucu" [(ngModel)]="telefono2Sucu"
+                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            id="Idt2Sucu" min="0"
+                                                            (keypress)="commonServices.FormatDecimalVal($event)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Correo</span>
+                                                        </div>
+                                                        <input placeholder="Ingrese email" type="text" #emailSucu="ngModel"
+                                                            name="emailSucu" [(ngModel)]="emailSucursal"
+                                                            class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                            id="idEmailSucu">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-sm mt-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text size-span-campo"
+                                                                id="inputGroup-sizing-sm">Administrador</span>
+                                                        </div>
+                                                        <select [(ngModel)]="usuarioSeleccionado" #usuario="ngModel"
+                                                            name="usuario" class="form-control form-control-sm custom-select"
+                                                            [disabled]="!newSucursal" (ngModelChange)="obtenerUsuario($event)"
+                                                            style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
+                                                            id="Idusuario">
+                                                            <!--  || usersEmpty -->
+                                                            <option [value]="0">Seleccione usuario</option>
+                                                            <option *ngFor="let d of dataUsuario" [value]="d.id_usuario">
+                                                                {{d.usuario}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <fieldset class="border card-fieldset">
+                                    <legend class="w-auto card-legend">Sucursales</legend>
+                                    <div class="row m-0">
+                                        <div class="col-md-12 col-md-12">
+                                            <app-table-sucursal [data_consultar_sucursal]="dataConsultarSucursal"
+                                                *ngIf="dataConsultarSucursal != undefined">
+                                            </app-table-sucursal>
+                                        </div>
+                                    </div>
+                                   
+                                </fieldset>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          
+           
+            <!-- <div class="col "> -->
+                <!-- <div class="row">
+                    <div class="tab_container">
+
+                        <input type="radio" name="tabs" checked class="invisible">
+                        <label class="invisible lab" style="width: 20%;"><br></label>
+
+
+                        <input id="tab1" type="radio" name="tabs" checked (click)="dinamicoBotones(1)">
+                        <label for="tab1" class="lab">
+                            <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                            <span>Empresas</span>
+                        </label>
+
+                        <input id="tab3" type="radio" name="tabs" (click)="dinamicoBotones(2)">
+                        <label class="lab" for="tab3">
+                            <i class="fa fa-cubes" aria-hidden="true"></i>
+                            <span>Sucursales</span>
+                        </label> -->
+
+                        <!-- <input id="tab4" type="radio" name="tabs" (click)="dinamicoBotones(3)">
+                        <label class="lab" for="tab4">
+                            <i class="fa fa-book" aria-hidden="true"></i>
+                            <span>Punto de Emisión</span>
+                        </label> -->
+
+                        <!-- <input type="radio" name="tabs" class="invisible">
+                        <label class="invisible lab " style="width: 20%;"><br></label>
+
+                        <section id="content1" class="tab-content">
+                            <div class="row p-3">
+                                <div class="col-10 ">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Nombre Comercial</span>
+                                                </div>
+                                                <input placeholder="Ingrese Nombre comercial" type="text"
+                                                    #nombre="ngModel" name="nombre" id="nombre"
+                                                    [(ngModel)]="nombreComercial" maxlength="200"
+                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    id="IdnombreComercial">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Dirección</span>
+                                                </div>
+                                                <input placeholder="Ingrese dirección" type="text" #address="ngModel"
+                                                    name="address" [(ngModel)]="direccion"
+                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    id="Iddireccion">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Razón Social</span>
+                                                </div>
+                                                <input placeholder="Ingrese razón Social" type="text" #rsocial="ngModel"
+                                                    name="rsocial" id="Idrsocial" [(ngModel)]="razonsocial"
+                                                    minlength="20" maxlength="200" class="form-control form-control-sm"
+                                                    [disabled]="dusuario">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Email</span>
+                                                </div>
+                                                <input placeholder="Ingrese un correo, ejemplo@ejemplo.com" type="email"
+                                                    #email="ngModel" name="email" [(ngModel)]="emails"
+                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    id="Idemail">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Ruc</span>
+                                                </div>
+                                                <input placeholder="Ingrese ruc de la empresa" type="text"
+                                                    #rucngM="ngModel" name="rucngM" [(ngModel)]="ruc"
+                                                    class="form-control form-control-sm" maxlength="13"
+                                                    [disabled]="dusuario" id="Idruc" min="0"
+                                                    (keypress)="commonServices.FormatDecimalVal($event)">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Teléfono 1</span>
+                                                </div>
+                                                <input placeholder="Ingrese Teléfono 1" type="text" #t1="ngModel"
+                                                    maxlength="10" name="t1" [(ngModel)]="telefono1"
+                                                    class="form-control form-control-sm" [disabled]="dusuario" id="Idt1"
+                                                    min="0" (keypress)="commonServices.FormatDecimalVal($event)">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Representante Legal</span>
+                                                </div>
+                                                <input placeholder="Ingrese representante legal" type="text"
+                                                    #rlegal="ngModel" name="rlegal" [(ngModel)]="rucLegal"
+                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    id="Idrlegal">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Teléfono 2</span>
+                                                </div>
+                                                <input placeholder="Ingrese Teléfono 2" type="text" #t2="ngModel"
+                                                    maxlength="10" name="t2" [(ngModel)]="telefono2"
+                                                    class="form-control form-control-sm" [disabled]="dusuario" id="Idt2"
+                                                    min="0" (keypress)="commonServices.FormatDecimalVal($event)">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Usuarios</span>
+                                                </div>
+                                                <input placeholder="Ingrese cantidad de usuarios" type="number"
+                                                    #users="ngModel" name="users" [(ngModel)]="usersEmpresa"
+                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    id="IdUserEmpresa">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Celular</span>
+                                                </div>
+                                                <input placeholder="Ingrese celular" type="text" #cel="ngModel"
+                                                    maxlength="10" name="cel" [(ngModel)]="celular"
+                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    id="Idcel" min="0"
+                                                    (keypress)="commonServices.FormatDecimalVal($event)">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Sucursales</span>
+                                                </div>
+                                                <input placeholder="Ingrese cantidad de sucursales" type="number"
+                                                    #sucur="ngModel" name="sucur" [(ngModel)]="sucursal"
+                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    id="Idsucursal">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <app-cc-input-group-prepend label="Fecha alta" styleSpan="size-span-campo">
+                                                <ejs-datepicker [(ngModel)]="fromDatePicker" type="text" name="dateFrom"
+                                                    format='yyyy-MM-dd' [disabled]="dusuario" class="form-control">
+                                                </ejs-datepicker>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Contacto</span>
+                                                </div>
+                                                <input placeholder="Ingrese contacto" type="text" #contact="ngModel"
+                                                    name="contact" [(ngModel)]="contacto"
+                                                    class="form-control form-control-sm" [disabled]="dusuario"
+                                                    id="Idcontacto">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <app-cc-input-group-prepend label="Fecha baja" styleSpan="size-span-campo">
+                                                <ejs-datepicker [(ngModel)]="toDatePicker" name="dateFrom"
+                                                    format='yyyy-MM-dd' [disabled]="dusuario" class="form-control">
+                                                </ejs-datepicker>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group pt-2">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        placeholder="Ingrese observación">Causa baja</span>
+                                                </div>
+                                                <textarea class="form-control form-control-sm"
+                                                    aria-label="With textarea" id="Idcausa" [(ngModel)]="causaBaja"
+                                                    placeholder="Ingrese causa"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Estado</span>
+                                                </div>
+                                                <select class="form-control form-control-sm custom-select"
+                                                    #estadoe="ngModel" name="estadoe" [(ngModel)]="estadoEmpresa"
+                                                    style="height: 28px; padding-top: 0px;padding-bottom: 0px;outline: unset;box-shadow: unset;"
+                                                    [disabled]="dusuario" id="IdestadoEmpresa">
+                                                    <option value="A">Activo</option>
+                                                    <option value="I">Inactivo</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 ">
+                                    <div class="row justify-content-center pt-4">
+                                        <div class="col-12">
+                                            <div class="text-center">
+                                                <img class="imagen" [src]="url">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <input id="fichero" type="file" lang="es" accept="image/*"
+                                                    (change)="onselect($event)" [disabled]="dusuario">
+                                                <label for="fichero" class="btn sub1 "
+                                                    style="font-size:11px;line-height:0.5"><i class="fa fa-upload"
+                                                        aria-hidden="true" style="font-size:13px;"></i>SELECCIONE
+                                                    IMAGEN</label>
+                                            </div>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row p-3">
+                                <div class="col-12">
+                                    <fieldset class="border pb-2 px-2 mb-2 mt-2">
+                                        <legend class="w-auto ml-1 bg-dark">Parámetros de Presupuesto</legend>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <app-cc-input-group-prepend label="Orientación"
+                                                    styleSpan="size-span-campo font-weight-bold size-span-small" class="size-span-small">
+                                                    <ng-select [readonly]="titulosDisabled || formReadOnly" class="form-control" [clearable]="false"
+                                                        [(ngModel)]="orientacion_gasto">
+                                                        <ng-option [value]="0">Seleccione una Orientación</ng-option>
+                                                        <ng-option *ngFor="let c of listaorientacion" [value]="c.valor">{{ c.valor }} - {{ c.nombre
+                                                            }}</ng-option>
+                                                    </ng-select>
+                                                </app-cc-input-group-prepend>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <app-cc-input-group-prepend label="Función" styleSpan="size-span-campo font-weight-bold"
+                                                            class="size-span-small">
+                                                            <ng-select [readonly]="titulosDisabled || formReadOnly" class="form-control" [clearable]="false"
+                                                                [(ngModel)]="actividad">
+                                                                <ng-option [value]="0">Seleccione una Función</ng-option>
+                                                                <ng-option *ngFor="let c of listafuncion" [value]="c.valor">{{ c.valor }} - {{ c.nombre
+                                                                    }}</ng-option>
+                                                            </ng-select>
+                                                        </app-cc-input-group-prepend>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                               
+                            </div>
+                        </section>
+                       
+
+                        <section id="content3" class="tab-content">
+                            <div class="row">
+                                <div class="col-12 p-3">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Nombre</span>
+                                                </div>
+                                                <input placeholder="Ingrese nombre sucursal" type="text"
+                                                    #nombreSucu="ngModel" name="nombreSucu" [(ngModel)]="nombreSucursal"
+                                                    class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                    id="IdNombreSucu">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Dirección</span>
+                                                </div>
+                                                <input placeholder="Ingrese dirección" type="text" #addressuc="ngModel"
+                                                    name="addressuc" [(ngModel)]="direccionSucu"
+                                                    class="form-control form-control-sm" [disabled]="!newSucursal "
+                                                    id="IddireccionSucu">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Estado</span>
+                                                </div>
+                                                <select class="form-control form-control-sm custom-select"
+                                                    #estadosu="ngModel" name="estadosu" [(ngModel)]="estadoSucursal"
+                                                    style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
+                                                    [disabled]="!newSucursal" id="IdestadoSucursal">
+                                                    <option value="A">Activo</option>
+                                                    <option value="I">Inactivo</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Teléfono 1</span>
+                                                </div>
+                                                <input placeholder="Ingrese Teléfono 1" type="text" #t1Sucu="ngModel"
+                                                    maxlength="10" name="t1Sucu" [(ngModel)]="telefono1Sucu"
+                                                    class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                    id="Idt1Sucu" min="0"
+                                                    (keypress)="commonServices.FormatDecimalVal($event)">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Celular</span>
+                                                </div>
+                                                <input placeholder="Ingrese celular" type="text" #celSucu="ngModel"
+                                                    maxlength="10" name="celSucu" [(ngModel)]="celularSucu"
+                                                    class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                    id="IdCelSucu" min="0"
+                                                    (keypress)="commonServices.FormatDecimalVal($event)">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Empresa</span>
+                                                </div>
+                                                <select [(ngModel)]="empresaSeleccionado"
+                                                    class="form-control form-control-sm custom-select"
+                                                    [disabled]="!newSucursal" (ngModelChange)="obtenerEmpresa($event)"
+                                                    style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
+                                                    id="IdEmpresaSucursal">
+                                                    <option [value]="0">Seleccione empresa</option>
+                                                    <option *ngFor="let d of dataEmpresa" [value]="d.id_empresa">
+                                                        {{d.nombre_comercial}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Teléfono 2</span>
+                                                </div>
+                                                <input placeholder="Ingrese Teléfono 2" type="text" #t2Sucu="ngModel"
+                                                    maxlength="10" name="t2Sucu" [(ngModel)]="telefono2Sucu"
+                                                    class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                    id="Idt2Sucu" min="0"
+                                                    (keypress)="commonServices.FormatDecimalVal($event)">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Correo</span>
+                                                </div>
+                                                <input placeholder="Ingrese email" type="text" #emailSucu="ngModel"
+                                                    name="emailSucu" [(ngModel)]="emailSucursal"
+                                                    class="form-control form-control-sm" [disabled]="!newSucursal"
+                                                    id="idEmailSucu">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="input-group input-group-sm mt-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo"
+                                                        id="inputGroup-sizing-sm">Administrador</span>
+                                                </div>
+                                                <select [(ngModel)]="usuarioSeleccionado" #usuario="ngModel"
+                                                    name="usuario" class="form-control form-control-sm custom-select"
+                                                    [disabled]="!newSucursal" (ngModelChange)="obtenerUsuario($event)"
+                                                    style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
+                                                    id="Idusuario">
+                                               
+                                                    <option [value]="0">Seleccione usuario</option>
+                                                    <option *ngFor="let d of dataUsuario" [value]="d.id_usuario">
+                                                        {{d.usuario}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="content4">
+                            <app-punto-emision></app-punto-emision>
+                        </section>
+
+
+                        <section id="content1" class="tab-content cont1">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12 ">
+                                    <div class="table-responsive responsive-table p-2">
+                                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                            class="table no-footer table-hover">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Nombre Comercial</th>
+                                                    <th>Dirección</th>
+                                                    <th>Email</th>
+                                                    <th>Ruc</th>
+                                                    <th>Celular</th>
+                                                    <th>Teléfono</th>
+                                                    <th>Estado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="validaDtUser">
+                                                <tr *ngFor="let dt of guardaT" (click)="updateEmpresa(dt)"
+                                                    style="cursor:pointer;">
+                                                    <td>{{dt.nombre_comercial}}</td>
+                                                    <td>{{ dt.direccion }}</td>
+                                                    <td>{{ dt.email }}</td>
+                                                    <td>{{ dt.ruc }}</td>
+                                                    <td>{{ dt.celular }}</td>
+                                                    <td>{{ dt.telefono1 }}</td>
+                                                    <td style="text-align: center;">{{ dt.estado }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="content3" class="tab-content">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12">
+                                    <app-table-sucursal [data_consultar_sucursal]="dataConsultarSucursal"
+                                        *ngIf="dataConsultarSucursal != undefined">
+                                    </app-table-sucursal>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div> -->
+            <!-- </div> -->
+    </app-button-radio-active-new>
+    </div>
+    
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=false lTipo="spEmpresa"></cc-spiner-procesar>

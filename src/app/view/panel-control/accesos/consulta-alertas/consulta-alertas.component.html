@@ -1,0 +1,154 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Consulta de Alertas" filtroBoton="btnsAlertas"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-signature">
+        <fieldset class="border pb-2 px-2 mb-2 mt-2">
+            <legend class="w-auto ml-1 bg-dark">Filtros</legend>
+            <div class="row ml-1 mr-1">
+                <div class="col-12">
+                    <div class="col text-right">
+                        <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="cargarAlertas()">
+                            <i class="fas fa-search"></i> Consultar
+                        </button>
+                        <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha Desde / Envia" styleSpan="font-weight-bold size-span-campo">
+                                <input id="filter_fecha_desde_envia" type="date" class="form-control" [(ngModel)]="filter.fecha_desde_envia" max="9999-12-31">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha Hasta / Envia" styleSpan="font-weight-bold size-span-campo">
+                                <input id="filter_fecha_hasta_envia" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta_envia" max="9999-12-31">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo font-weight-bold"
+                                        id="inputGroup-sizing-sm">Usuario / Envia</span>
+                                </div>
+                                <input placeholder="Usuario" type="text" 
+                                    name="usuario" [(ngModel)]="filter.usuario_envia" 
+                                    class="form-control form-control-sm" [disabled]="dusuario" 
+                                    id="usuario">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary btn-sm" (click)="modalUsuarios(1)" 
+                                        style="box-shadow: unset;outline: unset;">
+                                        Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha Desde / Recibe" styleSpan="font-weight-bold size-span-campo">
+                                <input id="filter_fecha_desde_recibe" type="date" class="form-control" [(ngModel)]="filter.fecha_desde_recibe" max="9999-12-31">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha Hasta / Recibe" styleSpan="font-weight-bold size-span-campo">
+                                <input id="filter_fecha_hasta_recibe" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta_recibe" max="9999-12-31">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo font-weight-bold"
+                                        id="inputGroup-sizing-sm">Usuario / Recibe</span>
+                                </div>
+                                <input placeholder="Usuario" type="text" 
+                                    name="usuario" [(ngModel)]="filter.usuario_recibe" 
+                                    class="form-control form-control-sm" [disabled]="dusuario" 
+                                    id="usuario">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary btn-sm" (click)="modalUsuarios(2)" 
+                                        style="box-shadow: unset;outline: unset;">
+                                        Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="filter.estado" [clearable]="true">
+                                    <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                                    <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Módulo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="filter.modulo" [clearable]="true">
+                                    <ng-option disabled [value]="0" disabled>Seleccione un módulo</ng-option>
+                                    <ng-option *ngFor="let op of modulos" [value]="op.id_modulo">{{ op.nombre }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Tipo de Alerta" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="filter.tipo_alerta" [clearable]="true">
+                                    <ng-option disabled [value]="0" disabled>Seleccione un tipo</ng-option>
+                                    <ng-option *ngFor="let op of tipoAlertas" [value]="op.id_catalogo">{{ op.descripcion }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </fieldset>
+        <div  class="row justify-content-center">
+            <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;max-height: 500px; overflow-y: auto;"> 
+                <p-table [value]="dataAlertas" rowGroupMode="subheader" groupRowsBy="nombre_usuario_recibe" >
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th style="min-width: 150px;">Usuario Envia</th>
+                            <th style="min-width: 150px;">Nombres Usuario Envia </th>
+                            <th style="min-width: 150px;" >Fecha de Envio</th>
+                            <th style="min-width: 150px;">Usuario Recibe</th>
+                            <th style="min-width: 150px;">Nombres Usuario Recibe </th>
+                            <th style="min-width: 150px;" >Fecha de Lectura</th>
+                            <th style="min-width: 150px;">Tipo Alerta</th>
+                            <th style="min-width: 150px;">Módulo</th>
+                            <th style="min-width: 200px;" >Documento</th>
+                            <th style="min-width: 400px;" >Accion</th>
+                            <th style="min-width: 150px;" >Estado</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="groupheader" let-dataAlertas>
+                        <tr pRowGroupHeader style="font-size: 12px;">
+                            <td colspan="3"></td>
+                            <td colspan="8"> 
+                                <span class="font-bold ml-2" style="font-size: 14px;">Usuario Recibe: {{dataAlertas.nombre_usuario_recibe | uppercase}}</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <td style="min-width: 150px;">{{d.usuario_envia}}</td>
+                                <td style="min-width: 150px;">{{d.nombre_usuario_envia}}</td>
+                                <td style="min-width: 150px;">{{d.fecha}}</td>
+                                <td style="min-width: 150px;">{{d.usuario_recibe}}</td>
+                                <td style="min-width: 150px;">{{d.nombre_usuario_recibe}}</td>
+                                <td style="min-width: 150px;">{{d.fecha_lectura}}</td>
+                                <td style="min-width: 150px;">{{d.tipo_alerta}}</td>
+                                <td style="min-width: 150px;">{{d.modulo}}</td>
+                                <td style="min-width: 150px;">{{d.titulo }}</td>
+                                <td style="min-width: 150px;">{{d.accion }}</td>
+                                <td style="min-width: 150px;">{{d.estado }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spConAlertas"></cc-spiner-procesar>

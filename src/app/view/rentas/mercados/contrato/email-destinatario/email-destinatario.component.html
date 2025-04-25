@@ -1,0 +1,14 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="far fa-envelope"
+[groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" filtroBoton="btnsEmailDestinatario">
+    <div class="row my-2">
+        <div class="col">
+            <div class="input-group input-grou-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text font-weight-bold">Destinatario</span>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="email">
+            </div>
+        </div>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renMerContratoEmail"></cc-spiner-procesar>

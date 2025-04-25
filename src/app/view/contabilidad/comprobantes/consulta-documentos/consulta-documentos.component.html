@@ -1,0 +1,136 @@
+<div class="my-2">
+    <app-button-radio-active-new titulo="Consulta de Documentos" filtroBoton="btnsDocumentos" 
+    cstyle="bg-gradient-primary text-white" 
+    [groupButton]="vmButtons"  icono="far fa-hand-pointer" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row m-0">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Filtros</legend>
+                    <div class="row m-0">
+            
+                               
+                                
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Tipo de Documento"
+                                        styleSpan="size-span-campo font-weight-bold">
+        
+                                        <ng-select class="form-control form-control-sm" [(ngModel)]="filter.tipo">
+                                            <ng-option *ngFor="let item of tipo"
+                                                [value]="item.valor">{{item.descripcion}}</ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="No.Documento" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.documento" >
+                                    </app-cc-input-group-prepend>
+        
+                                </div>
+                            </div>
+        
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.razon_social_proveedor" >
+                                    </app-cc-input-group-prepend>
+        
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.razon_social" >
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-4 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Fecha inicio" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_fecha_ini" type="date" class="form-control" [(ngModel)]="filter.fecha_desde" max="2050-01-01" >
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-4 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Fecha fin" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_fecha_fin" type="date" class="form-control"  [(ngModel)]="filter.fecha_hasta" max="2050-01-01" >
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-4 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Estado"
+                                        styleSpan="size-span-campo font-weight-bold">
+        
+                                        <ng-select class="form-control form-control-sm" [(ngModel)]="filter.estado">
+                                            <ng-option *ngFor="let item of estado"
+                                                [value]="item.valor">{{item.descripcion}}</ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+               
+                </fieldset>
+        </div>
+    </div>
+
+
+
+    <div class="row m-0">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                    <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="sticky-header">
+                        <tr class="text-center">
+                            <th style="width: 10%;">No. Documento</th>                            
+                            <th style="width: 10%;">Fecha</th>
+                            <th style="width: 10%;">Tipo Documento</th>
+                            <th style="width: 10%;">Contribuyente</th>
+                            <th style="width: 10%;">Proveedor</th>
+                            <th style="width: 10%;">Valor</th>
+                            <th style="width: 10%;">Saldo</th>
+                            <th style="width: 10%;">Estado</th>
+                            <!--th style="width: 10%;">Acciones</th-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="ordenesDt.length == 0">
+                            <td colspan="9" class="text-center">
+                                <h6 class="my-1">No hay informacion para mostrar</h6>
+                            </td>
+                        </tr>
+                        <tr  *ngFor="let dt of ordenesDt, let i = index">
+                            <td class="text-center">{{ dt.documento }}</td>
+                            <td class="text-center">{{ dt.fecha | date:'yyyy-MM-dd' }} </td>                            
+                            <td class="text-center">{{ dt.tipo=== null  ? dt.tipo_documento : dt.tipo   | titlecase }}</td>
+                            <td class="text-center">{{ dt.contribuyente === null ? 'Sin Contribuyente' : dt.contribuyente.razon_social | titlecase }}</td>
+                            <td class="text-center">{{  dt.proveedor === null ? 'Sin Proveedor' : dt.proveedor.razon_social | titlecase }}</td>
+                            <td class="text-center">$ {{ dt.total | number:'1.2-2'}}</td>
+                            <td class="text-center"> $ {{ dt.saldo | number:'1.2-2'}}</td>
+                            <td *ngIf="dt.estado  == 'P'" class="text-center">
+                                <i class="fas fa-circle text-warning"></i> PENDIENTE
+                            </td>
+                            <td *ngIf="dt.estado == 'E'" class="text-center">
+                                <i class="fas fa-circle text-danger"></i> EMITIDO
+                            </td>
+                            <td *ngIf="dt.estado == 'C'" class="text-center">
+                                <i class="fas fa-circle text-success"></i> CERRADO
+                            </td>
+                            <!--td>
+                                <div class="text-center mx-auto">
+                                    <button class="btn btn-primary btn-sm mx-1" (click)="detallesMovimiento(dt)" placement="left" ngbTooltip="Seleccionar documento">
+                                        <i class="fas fa-hand-pointer"></i>
+                                    </button>
+                                  
+                                </div>
+                            </td-->
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage" [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)" aria-label="Select page">
+                </mat-paginator>
+            </div>
+
+
+ 
+            </div>
+        </div>
+    </app-button-radio-active-new>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>

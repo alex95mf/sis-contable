@@ -1,0 +1,72 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active-new [titulo]="fTitle" icono="fas fa-tasks" cstyle="bg-gradient-primary text-white"
+        filtroBoton="btnsReporteTareas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select [(ngModel)]="periodoSelected" class="form-control"
+                                    [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+
+        <div class="row m-0">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                <th rowspan="2" class="text-center" style="vertical-align:middle">Meta POA</th>
+                                <th colspan="12" class="text-center">
+                                    Tareas a ser Realizadas por Mes
+                                </th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th *ngFor="let mes of meses">{{ mes.nom }}</th>
+                                <th>Total por Meta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!metas.length">
+                                <td colspan="14" class="text-center">
+                                    <p class="h6">No hay datos</p>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let meta of metas">
+                                <th class="w-25">
+                                    <span matTooltip="{{ metaTareas[meta]['nombre'] }}">
+                                        {{ metaTareas[meta]['nombre'].substring(0, 50) + '...' }}
+                                    </span>
+                                </th>
+                                <td *ngFor="let mes of meses">{{ metaTareas[meta][mes.num] }}</td>
+                                <th>{{ metaTareas[meta]['total'] }}</th>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Total por Mes:</th>
+                                <th *ngFor="let mes of meses">
+                                    {{ totales[mes.num] }}
+                                </th>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active-new>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner"></cc-spiner-procesar>

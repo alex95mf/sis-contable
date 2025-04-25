@@ -1,0 +1,477 @@
+<div class="mt-4 mb-5 pb-3">
+    <app-button-radio-active titulo="Estado de Resultados" filtroBoton="btnEstRs"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        *ngIf="permisions" icono="fa fa-industry">
+
+        <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado">
+            <div class="row mt-2" *ngIf="ActulizaEstadoREsultado">
+                <div class="col-sm-12">
+                    <div class="alert alert-primary" role="alert">
+                        Actualizando información para mostrar estado de resultado, espere un momento por favor... <i
+                            class="fa fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2 ">
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold">Fecha Desde</span></div>
+                        <input type="date"  class="form-control form-control-sm"  id="idNominaDatef" [(ngModel)]="fromDatePicker" max="9999-12-31" >
+                    </div>
+                    <!-- <app-cc-input-group-prepend label="Desde" styleSpan="size-span-campo font-weight-bold">
+                        <p-calendar id="idNominaDatef" dateFormat="dd/mm/yy" [readonlyInput]="true"
+                            [(ngModel)]="fromDatePicker" [showIcon]="true" inputId="icon">
+                        </p-calendar>
+                    </app-cc-input-group-prepend> -->
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold">Fecha Hasta</span></div>
+                        <input type="date"  class="form-control form-control-sm"   [(ngModel)]="toDatePicker"  max="9999-12-31">
+                    </div>
+                    <!-- <app-cc-input-group-prepend label="Hasta" styleSpan="size-span-campo font-weight-bold">
+                        <p-calendar dateFormat="dd/mm/yy" [readonlyInput]="true" [(ngModel)]="toDatePicker"
+                            [showIcon]="true" inputId="icon">
+                        </p-calendar>
+                       
+                    </app-cc-input-group-prepend> -->
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo font-weight-bolder"
+                                id="inputGroup-sizing-sm">Centro costo</span>
+                        </div>
+                        <ng-select style="width: 150px;" loadingText="Cargando.." [loading]="LoadOpcionCentro"
+                            placeholder="-seleccionar centro-" [(ngModel)]="centrocosto"
+                            class="form-control form-control-sm custom-select" (open)="getCentroDetalle()"
+                            [items]="centros" bindLabel="nombre" bindValue="id" appendTo="body"
+                            id="idCentroCosto"></ng-select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo font-weight-bolder"
+                                id="inputGroup-sizing-sm">Gubernamental</span>
+                        </div>
+                        <ng-select id="prioridad" class="form-control form-control-sm" [(ngModel)]="gubernamental" (change)="selectedGuber($event)" [clearable]="false">
+                            <ng-option disabled [value]="0" disabled>Seleccione</ng-option>
+                            <ng-option *ngFor="let op of listGubernamental" [value]="op.value">{{ op.label }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo font-weight-bolder"
+                                id="inputGroup-sizing-sm">Período de Visualización</span>
+                        </div>
+                        <ng-select id="periodo" class="form-control form-control-sm" [(ngModel)]="periodoVisualizacion" (change)="selectedPeriodoVisua($event)" [clearable]="false">
+                            <ng-option disabled [value]="0" disabled>Seleccione</ng-option>
+                            <ng-option *ngFor="let p of periodoVisua" [value]="p.value">{{ p.label }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Niveles" styleSpan="size-span-campo font-weight-bolder">
+                        <ng-select class="form-control form-control-sm custom-select" [(ngModel)]="nivelSeleccionado">
+                            <ng-option value="1">1</ng-option>
+                            <ng-option value="2">2</ng-option>
+                            <ng-option value="3">3</ng-option>
+                            <ng-option value="4">4</ng-option>
+                            <ng-option value="5">5</ng-option>
+                            <ng-option value="6">6</ng-option>
+                            <ng-option value="7">7</ng-option>
+                            <ng-option value="8">8</ng-option>
+                            <ng-option value="9">9</ng-option>
+                            <ng-option value="10">10</ng-option>
+        
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div class="content-resultado p-3 mt-2 mx-8" *ngIf="MostrarndoData">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text-center text-base font-medium m-0">Estado de resultado</p>
+                    <p class="text-center text-sm m-0 mb-8">Desde {{moment(fromDatePicker).format("DD/MM/YYYY")}} Hasta {{moment(toDatePicker).format("DD/MM/YYYY")}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="table-responsive responsive-table content-tabla-general-zebra">
+                    <table class="table table-sm table-hover">
+                        <thead class="d-none" style="width: 100% !important;">
+                            <tr>
+                                <th style="width: 80px !important;text-align: center;">CODIGO</th>
+                                <!-- <th style="width: 200px !important;text-align: center;">DESCRIPCION</th> -->
+                                <th style="width: 100px !important;text-align: center;">CLASE</th>
+                                <th style="width: 100px !important;text-align: center;">MES</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="balanceInit.length > 0 else TablaVacia">
+                            <tr *ngFor="let d of balanceInit; let i = index" [ngClass]="d.class" [style]="d.size" >
+                                <td style="width: 80px " >
+                                    <div style="width: 80px "
+                                    (click)=" d.tipo == 'DETALLE' ? verDetalle(d.cuenta) : undefined"
+                                    [ngStyle]="{'width':'80px','text-decoration': d.tipo == 'DETALLE' ? 'underline' : '','color': d.tipo == 'DETALLE' ? '#2b94e2' : '', 'cursor': d.tipo == 'DETALLE' ? 'pointer' : '','font-weight': d.tipo == 'DETALLE' ? 'bold' : ''}"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE' }">
+                                         <!-- {{d.cuenta.replaceAll('.','')}} -->
+                                         {{d.cuenta}}
+                                    </div>
+                                    
+                                </td>
+                                <!-- <td style="width: 100px ">
+                                    <div style="width: 100px "
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE' }">
+                                         {{d.clase}}
+                                    </div>
+                                </td> -->
+                                <td style="width: 200px">
+                                    <div
+                                        style="width: 200px"
+                                        class="text-overflow-ellipsis"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE' }">
+                                        {{d.descripcion_cuenta}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                    [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE','text-red-500': (d.valor <  0  && d?.clase=='DEUDORA') || (d.valor > 0  && d?.clase=='ACREEDORA')  }">
+                                    $ {{ (d.valor | number:'1.2-2').replaceAll('-','')}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="font-weight-bold" style="font-size: 16px;">TOTAL:</td>
+                                <td colspan="1" class="font-weight-bold text-right" style="font-size: 16px;"
+                                [ngClass]="{'text-red-500': (totalFinal() <  0  && d?.clase=='DEUDORA') || (totalFinal() > 0  && d?.clase=='ACREEDORA')  }"
+                                >$ {{(totalFinal() | number:'1.2-2').replaceAll('-','')}}</td>
+                            </tr>
+                            
+
+                        </tbody>
+
+                        <ng-template #TablaVacia>
+                            <tbody>
+                                <tr class="body-empty">
+                                    <td colspan="4">no hay datos para mostrar</td>
+                                </tr>
+                            </tbody>
+                        </ng-template>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-resultado p-3 mt-2 " *ngIf="MostrarndoDataMensual">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text-center text-base font-medium m-0">Estado de resultado</p>
+                    <p class="text-center text-sm m-0 mb-8">Desde {{moment(fromDatePicker).format("DD/MM/YYYY")}} Hasta {{moment(toDatePicker).format("DD/MM/YYYY")}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="table-responsive responsive-table content-tabla-general-zebra">
+                    <table class="table table-sm table-hover">
+                        <thead style="width: 100% !important;">
+                            <tr>
+                                <th style="width: 80px !important;text-align: center;" class="col-codigo">CODIGO</th>
+                                <th style="width: 300px !important;text-align: center;" class="col-nombre">DESCRIPCION</th>
+                                <th style="width: 100px !important;text-align: center;">ENERO</th>
+                                <th style="width: 100px !important;text-align: center;">FEBRERO</th>
+                                <th style="width: 100px !important;text-align: center;">MARZO</th>
+                                <th style="width: 100px !important;text-align: center;">ABRIL</th>
+                                <th style="width: 100px !important;text-align: center;">MAYO</th>
+                                <th style="width: 100px !important;text-align: center;">JUNIO</th>
+                                <th style="width: 100px !important;text-align: center;">JULIO</th>
+                                <th style="width: 100px !important;text-align: center;">AGOSTO</th>
+                                <th style="width: 100px !important;text-align: center;">SEPTIEMBRE</th>
+                                <th style="width: 100px !important;text-align: center;">OCTUBRE</th>
+                                <th style="width: 100px !important;text-align: center;">NOVIEMBRE</th>
+                                <th style="width: 100px !important;text-align: center;">DICIEMBRE</th>
+                                <th style="width: 400px !important;text-align: center;">TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="balanceInitMensual.length > 0 else TablaMensualVacia">
+                            <tr *ngFor="let d of balanceInitMensual; let i = index" [ngClass]="d.class" [style]="d.size">
+                                <td style="width: 80px " class="col-codigo">
+                                    <div style="width: 80px "
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE' }">
+                                         {{d.codigo}}
+                                    </div>
+                                </td>
+                                <td style="width: 300px" class="col-nombre">
+                                    <div
+                                        style="width: 300px"
+                                        class="text-overflow-ellipsis"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE'}">
+                                        {{d.nombre}}
+                                    </div>
+                                </td>
+                                
+                                <td style="width: 100px">
+                                    <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE' ,'text-red-500': (d.ene <  0  && d?.clase=='DEUDORA') || (d.ene  > 0  && d?.clase=='ACREEDORA') }">
+                                        ${{(d.ene | number:'1.2-2').replaceAll('-','')}}
+                                    </div>
+                                    <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'text-red-500': (d.ene <  0 )}">
+                                        ${{d.ene | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px">
+                                   <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                    [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.feb <  0  && d?.clase=='DEUDORA') || (d.feb  > 0  && d?.clase=='ACREEDORA') }">
+                                    ${{(d.feb | number:'1.2-2').replaceAll('-','')}}
+                                   </div>
+                                   <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'text-red-500': (d.feb <  0 )}">
+                                        ${{d.feb | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px" >
+                                    <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.mar <  0  && d?.clase=='DEUDORA') || (d.mar  > 0  && d.clase=='ACREEDORA') }">
+                                        ${{(d.mar | number:'1.2-2').replaceAll('-','')}}
+                                    </div>
+                                    <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'text-red-500': (d.mar <  0 )}">
+                                        ${{(d.mar | number:'1.2-2').replaceAll('-','')}}
+                                    </div>
+                                </td>
+                                    
+                                <td style="width: 100px">
+                                   <div  *ngIf="!d.total_fila" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.abr <  0  && d?.clase=='DEUDORA') || (d.abr  > 0  && d?.clase=='ACREEDORA') }">
+                                        ${{(d.abr | number:'1.2-2').replaceAll('-','')}}
+                                   </div>
+                                   <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'text-red-500': (d.abr <  0 )}">
+                                        ${{d.abr | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px">
+                                   <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.may <  0  && d?.clase=='DEUDORA') || (d.may  > 0  && d?.clase=='ACREEDORA') }">
+                                        ${{(d.may | number:'1.2-2').replaceAll('-','')}}
+                                   </div>
+                                   <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'text-red-500': (d.may <  0 )}">
+                                        ${{d.may | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px" >
+                                   <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.jun <  0  && d?.clase=='DEUDORA') || (d.jun  > 0  && d?.clase=='ACREEDORA') }">
+                                        ${{(d.jun | number:'1.2-2').replaceAll('-','')}}
+                                   </div>
+                                   <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'text-red-500': (d.jun <  0 )}">
+                                        ${{d.jun | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px">
+                                   <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.jul <  0  && d?.clase=='DEUDORA') || (d.jul  > 0  && d?.clase=='ACREEDORA') }">
+                                        ${{(d.jul | number:'1.2-2').replaceAll('-','')}}
+                                   </div>
+                                   <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'text-red-500': (d.jul <  0 )}">
+                                        ${{d.jul | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px">
+                                   <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                   [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.ago <  0  && d?.clase=='DEUDORA') || (d.ago  > 0  && d?.clase=='ACREEDORA') }">
+                                       ${{(d.ago | number:'1.2-2').replaceAll('-','')}}
+                                   </div>
+                                   <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'text-red-500': (d.ago <  0 )}">
+                                        ${{d.ago | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px">
+                                   <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.sep <  0  && d?.clase=='DEUDORA') || (d.sep  > 0  && d?.clase=='ACREEDORA') }">
+                                        ${{(d.sep | number:'1.2-2').replaceAll('-','')}}
+                                   </div>
+                                   <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{ 'text-red-500': (d.sep <  0 )}">
+                                        ${{d.sep | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px">
+                                   <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.oct <  0  && d?.clase=='DEUDORA') || (d.oct  > 0  && d?.clase=='ACREEDORA') }">
+                                        ${{(d.oct | number:'1.2-2').replaceAll('-','')}}
+                                   </div>
+                                   <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{ 'text-red-500': (d.oct <  0 )}">
+                                        ${{d.oct | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px">
+                                    <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.nov <  0  && d?.clase=='DEUDORA') || (d.nov  > 0  && d?.clase=='ACREEDORA') }">
+                                        ${{(d.nov | number:'1.2-2').replaceAll('-','')}}
+                                    </div>
+                                    <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'text-red-500': (d.nov <  0 )}">
+                                        ${{d.nov | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px" >
+                                    <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                    [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.dic <  0  && d?.clase=='DEUDORA') || (d.dic  > 0  && d?.clase=='ACREEDORA') }">
+                                        ${{(d.dic | number:'1.2-2').replaceAll('-','')}}
+                                    </div>
+                                    <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'text-red-500': (d.dic <  0 )}">
+                                        ${{d.dic | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                                <td style="width: 100px">
+                                    <div *ngIf="!d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                    [ngClass]="{'cuenta_grupo': d.tipo == 'GRUPO' , 'cuenta_detalle': d.tipo == 'DETALLE', 'text-red-500': (d.total <  0  && d?.clase=='DEUDORA') || (d.total  > 0  && d?.clase=='ACREEDORA') }">
+                                        ${{(d.total | number:'1.2-2').replaceAll('-','')}}
+                                    </div>
+                                    <div *ngIf="d.total_fila" style="width: 100px" style="text-align: right;padding-right: 10px;"
+                                        [ngClass]="{'text-red-500': (d.total <  0 )}">
+                                        ${{d.total | number:'1.2-2'}}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <ng-template #TablaMensualVacia>
+                            <tbody>
+                                <tr class="body-empty">
+                                    <td colspan="4">no hay datos para mostrar</td>
+                                </tr>
+                            </tbody>
+                        </ng-template>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template>
+
+    </app-button-radio-active>
+   
+
+    <div [hidden]="true" id="print-section" *ngIf="processing">
+        <div class="row justify-content-center table-status-print">
+            <div class="col-11 pl-2 pr-2 ">
+                <div class="row justify-content-center">
+                    <div class="col-md-5 text-center mt-5">
+                        <div class="sect-one pt-3 pb-3">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12 mt-4">
+                                    <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 text-center mt-5">
+                        <div class="sect-two pt-3 pb-2">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12 mt-5" style="font-size: 20px;font-weight: bold">
+                                    <h3> Estado de Resultado
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-11 mt-4 pl-2 pr-2">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 text-center ">
+                        <table class="table table-bordered">
+                            <tbody style="width: 100%;">
+                                <tr *ngFor="let d of balanceInit; let i = index"
+                                    [ngClass]="{'tInEg-print': d.nivel == '2', 'tUBrEj-print': (d.nivel == 10 || i == 0), 'total-print': d.tipo == 'T'}">
+                                    <td style="width: 60%;"
+                                        *ngIf=" d.creditos_anio != '0.00' || d.debitos_anio != '0.00' || d.nivel == '2' ">
+                                        <div>
+                                            {{d.nombre.trim()}}
+                                        </div>
+                                    </td>
+                                    <td style="width: 20%; text-align: end;"
+                                        *ngIf=" d.creditos_anio != '0.00' || d.debitos_anio != '0.00' || d.nivel == '2' ">
+                                        <div *ngIf="(d.nivel == '3' || d.nivel == '4') && d.grupo == 'INGRESOS' "
+                                            [ngClass]="{'total-error-print' :  d.creditos_anio.toString().substring(0,1) == '-' }">
+                                            $ {{formatNumber(d.creditos_anio.trim())}}
+                                        </div>
+                                        <div *ngIf="(d.nivel == '3' || d.nivel == '4') && d.grupo == 'EGRESOS' "
+                                            [ngClass]="{'total-error-print' :  d.debitos_anio.toString().substring(0,1) == '-' }">
+                                            $ {{formatNumber(d.debitos_anio.trim())}}
+                                        </div>
+                                    </td>
+
+                                    <td style="width: 20%; text-align: end;"
+                                        *ngIf=" d.creditos_anio != '0.00' || d.debitos_anio != '0.00' || d.nivel == '2' ">
+                                        <div *ngIf="d.tipo == 'T' "
+                                            [ngClass]="{'total-error-print' :  d.Value.toString().substring(0,1) == '-' }">
+                                            $ {{formatNumber(d.Value)}}
+                                        </div>
+                                        <div *ngIf="d.tipo == 'TUB' || d.tipo == 'TUP' "
+                                            [ngClass]="{'total-error-print' :  d.Value.toString().substring(0,1) == '-' }">
+                                            $ {{formatNumber(d.Value)}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row justify-content-center" style="font-family: 'Poppins1';">
+            <div class="col-10 text-center pb-2 pt-2 mb-4" style="position: fixed;  bottom: 30px; ">
+                <div class="row justify-content-center text-center">
+                    <div class="col-6 text-center">
+                        <div class="row text-center">
+                            <div class="col-12 text-center">
+                                ----------------------------------------------
+                            </div>
+                            <div class="col-12 text-center" style="color: #13A1EA;">
+                                <span>Gerente general</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 text-center">
+                        <div class="row text-center">
+                            <div class="col-12 text-center">
+                                ----------------------------------------------
+                            </div>
+                            <div class="col-12 text-center" style="color: #13A1EA;">
+                                <span>Contador</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+                <span style="color: #13A1EA;">
+                    Fecha: {{fecha}}&nbsp;{{hora}}</span>
+            </div>
+            <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+                <span style="color: #13A1EA;">
+                    Usuario: {{dataUser.usuario}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spEsRsl"></cc-spiner-procesar>

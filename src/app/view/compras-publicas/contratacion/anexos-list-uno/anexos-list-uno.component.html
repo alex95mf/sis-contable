@@ -1,0 +1,54 @@
+<div class="row mt-2 mb-3 px-3">
+    <div class="col-4 ">
+        <div   class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+            <input type="date" class="form-control form-control-sm" [(ngModel)]="date" [disabled]="anexos.length > 0">
+        </div>
+    </div>
+    <div class="col-8">
+        <div *ngIf="!anexos.length" class="input-group input-group-sm mb-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold">Anexos</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                    (change)="cargaArchivo2($event.target.files, 'RP')"
+                    [disabled]="cuotasDisabled || formReadOnly">
+                <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ?
+                    fileList[0].name : "Seleccione un archivo" }}</label>
+            </div>
+            <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo()" [disabled]='valiRP'>Cargar</button></div>
+        </div>
+        <div class="col-10">
+            <div style="max-height: 130px; overflow-y: scroll;">
+                <table class="table table-sm table-striped">
+                    <tbody >
+                        <tr *ngIf="!anexos.length">
+                            <td colspan="3" class="text-center">
+                                <h6>No hay datos.</h6>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let anexo of anexos">
+                            <td>{{ anexo.nombre }}</td>
+                            <td>{{ anexo.extension }}</td>
+                            <td class="text-center">
+                                <div>
+                                    <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                                        <i class="far fa-download"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renMerContratoAnexos"></cc-spiner-procesar>

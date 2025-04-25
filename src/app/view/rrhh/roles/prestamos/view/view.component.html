@@ -1,0 +1,239 @@
+<div class="modal-body " *ngIf="dt !=undefined">
+
+    <app-button-radio-active titulo="VISTA - PRESTAMO" filtroBoton="btnVsPrs" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-money">
+
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="A Pagar" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm " disabled value="PRESTAMO A EMPLEADO">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm " disabled [value]="fecha">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm " disabled [value]="empleado">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Tipo Pago" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm " disabled [value]="tipoPago">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Cuotas" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm " disabled [value]="cuotas">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Monto Cuotas" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm text-right" disabled [value]="montoCuotas | currency: 'USD' | lowercase">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm text-right" disabled [value]="monto | currency: 'USD' | lowercase">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Interes $" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm text-right" disabled [value]="interes | currency: 'USD' | lowercase">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Total a Pagar" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm text-right" disabled [value]="montoTotal | currency: 'USD' | lowercase">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+
+
+        <div class="row justify-content-center filters">
+            <div class="col-12 mt-3">
+                <div style="overflow-y: scroll; max-height: 150px">
+                    <div class="form-group table-responsive responsive-table">
+                        <table class="table table-sm table-hover table-striped">
+                            <thead class="head-table">
+                                <tr class="text-center">
+                                    <th scope="col">N° Cuotas</th>
+                                    <th scope="col">Fecha Pago</th>
+                                    <th scope="col">Monto Cuota</th>
+                                    <th scope="col">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" style="width: 100%" *ngFor="let d of detPrestamo;  let i = index">
+                                    <td class="text-center" style="width: 2%;">{{i+1}}</td>
+                                    <td class="text-center" style="width: 5%;">{{d.fecha_vencimiento}}</td>
+                                    <td style="width: 5%;" class="text-right">{{d.monto | currency: 'USD' | lowercase}}</td>
+                                    <td style="width: 5%;" class="text-center">{{d.estado}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spVsPst"></cc-spiner-procesar>
+
+<div [hidden]="true" id="print-section" media="print">
+    <div class="row justify-content-center  prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-4">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-4">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>RECURSOS HUMANOS</h3>
+                                <p>PRESTAMO A EMPLEADO</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-3">
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" disabled placeholder="{{fecha}}">
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Empleado</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" disabled placeholder="{{empleado}}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo Pago</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" disabled placeholder="{{tipoPago}}">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cantidad </span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" disabled placeholder="{{monto | currency: 'USD' | lowercase}}">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cuota</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" disabled placeholder="{{cuotas}}">
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Monto Cuota</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" disabled placeholder="{{montoCuotas | currency: 'USD' | lowercase}}">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Porcentaje Interes</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" disabled placeholder="{{porcentaje | number: '1.0-0'}}%">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Interes</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" disabled placeholder="{{interes | currency: 'USD' | lowercase}}">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total a Pagar</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" disabled placeholder="{{montoTotal | currency: 'USD' | lowercase}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-4 pl-2 pr-2 prt-comprobante">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <table class="table">
+                        <thead style="width: 100%;">
+                            <tr>
+                                <th scope="col">N° Cuotas</th>
+                                <th scope="col">Fecha Pago</th>
+                                <th scope="col">Monto Cuota</th>
+                                <th scope="col">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="detPrestamo != undefined">
+                            <tr class="text-center" style="width: 100%" *ngFor="let d of detPrestamo;  let i = index">
+                                <td class="text-center" style="width: 1%;">{{i+1}}</td>
+                                <td class="text-center" style="width: 1%;">{{d.fecha_vencimiento}}</td>
+                                <td style="width: 1%;" class="text-center">{{d.monto | currency: 'USD' | lowercase}}</td>
+                                <td style="width: 1%;" class="text-center">{{d.estado}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #13A1EA;">
+                Fecha: {{fecha}}&nbsp;{{hora}}</span>
+        </div>
+        <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+            <span style="color: #13A1EA;">
+                Usuario: {{dataUser.nombre}}</span>
+        </div>
+    </div>

@@ -1,0 +1,84 @@
+<div class="">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light" 
+        filtroBoton="btnsModalCuentas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <fieldset class="border px-3 pb-2">
+            <legend class="w-auto bg-dark mb-0">Filtros</legend>
+            <div class="row">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Código" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control" [(ngModel)]="filter.codigo">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control" [(ngModel)]="filter.nombre" >
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm text-light" matTooltip="CONSULTAR" (click)="consultar()">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-1" (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row my-2">
+            <div class="col" >
+                <table class="table table-bordered table-striped mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 12.5%;">Código</th>
+                            <th class="text-center">Nombre</th>
+                            <th>Tipo</th>
+                            <th>Grupo</th>
+                            <th>Clase</th>         
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!cuentas.length">
+                            <td colspan="6" class="text-center">
+                                <p class="h6">No hay resultados</p>
+                            </td>
+                        </tr>
+                        <ng-container *ngFor="let dt of cuentas, let i = index">
+                            <tr>
+                                <td class="text-center">{{ dt.codigo }}</td>
+                                <td class="text-center">{{ dt.nombre }} </td>
+                                <td class="text-center">{{ dt.tipo }}</td>
+                                <td class="text-center">{{ dt.grupo }}</td>
+                                <td class="text-center">{{ dt.clase }}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-primary btn-sm" (click)="selectOption(dt)" matTooltip="Seleccionar Cuenta">
+                                        <i class="fas fa-hand-pointer"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table> 
+                <mat-paginator 
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="+(paginate.page)-1"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    [showFirstLastButtons]="true"
+                    aria-label="Select page">
+                </mat-paginator>                   
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalCuentas"></cc-spiner-procesar>

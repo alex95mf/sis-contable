@@ -1,0 +1,152 @@
+<div class="modal-header">
+    <div class="row" style="width: 100%">
+        <div class="col-md-12">
+            <div class="title-head">
+                PEDIDO #: {{data.codigo}}-{{dataEnvio.Pedido}}
+            </div>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+   <span aria-hidden="true" style="color:black;">&times;</span>
+   </button>
+</div>
+<div class="modal-body ">
+    <div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-12 container-filter ">
+                <div class="row  justify-content-center">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha Pedido</span>
+                                    </div>
+                                    <input type="text" style="border:none" class="aaa form-control form-control-sm" [(ngModel)]="dataEnvio.FechaPedido" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Origen</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="dataEnvio.Origen" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha Llegada</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="dataEnvio.FechaLlegada" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Proveedor</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="dataEnvio.Proveedor" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="dataEnvio.Estado" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Icoterm</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="dataEnvio.Icoterm" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Forma de Pago</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="dataEnvio.FormaPago" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Liquidación</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="dataEnvio.Liquidacion" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12 filters">
+                <div class="form-group table-responsive responsive-table " style="overflow-y: scroll; height: 150px;">
+                    <table class="table no-footer table-hover" style="width: 100%;">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 2%;">#</th>
+                                <th style="width: 16%;">Codigo</th>
+                                <th style="width: 16%;">Nombre</th>
+                                <th style="width: 8%;">Peso(kg)</th>
+                                <th style="width: 8%;">Volumen(m³)</th>
+                                <th style="width: 6%;">Cantidad</th>
+                                <th style="width: 8%;">Precio</th>
+                                <th style="width: 8%;">Total</th>
+                                <th style="width: 8%;">Gastos</th>
+                                <th style="width: 8%;">Total FOB</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of dtimportPedido; let i = index">
+                                <td style="width: 1%;padding-top: 10px;text-align: center;">{{ i + 1 }}</td>
+                                <td style="width: 16%;padding-top: 10px;text-align: left;">{{dt.codigo_pro}}</td>
+                                <td style="width: 16%;padding-top: 10px;text-align: left;">{{dt.nombre}}</td>
+                                <td style="width: 8%;padding-top: 10px;text-align: center;">{{ dt.pesoKg.toFixed(2) }}</td>
+                                <td style="width: 8%;padding-top: 10px;text-align: center;">{{dt.volumenm3.toFixed(2)}}</td>
+                                <td style="width: 6%;padding-top: 10px;text-align: center;">{{dt.cantidad}}</td>
+                                <td style="width: 8%;padding-top: 10px;text-align: right;">$ {{formatNumber(dt.precio) }}</td>
+                                <td style="width: 8%;padding-top: 10px;text-align: right;">$ {{formatNumber(dt.total)}}</td>
+                                <td style="width: 8%;padding-top: 10px;text-align: right;">${{formatNumber(dt.gastos) }}</td>
+                                <td style="width: 8%;padding-top: 10px;text-align: right;">${{formatNumber(dt.total_fob)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="form-group table-responsive responsive-table">
+                    <table class="table table-sm" style="width: 100%;">
+                        <tfoot>
+                            <tr>
+                                <td style="width: 33%;"></td>
+                                <td style="width: 8%;padding-top: 10px;" class="text-center"> <strong>{{formatNumber(dataEnvio.peso)}}</strong></td>
+                                <td style="width: 8%;padding-top: 10px;" class="text-center"> <strong>{{formatNumber(dataEnvio.volumen)}}</strong></td>
+                                <td style="width: 6%;padding-top: 10px;" class="text-center"><strong></strong></td>
+                                <td style="width: 8%;padding-top: 10px;" class="text-right"> $ <strong>{{ formatNumber(dataEnvio.precio) }}</strong></td>
+                                <td style="width: 8%;padding-top: 10px;" class="text-right">$ <strong>{{ formatNumber(dataEnvio.total) }}</strong></td>
+                                <td style="width: 8%;padding-top: 10px;" class="text-right"> $ <strong>{{formatNumber(dataEnvio.gasto)}}</strong></td>
+                                <td style="width: 8%;padding-top: 10px;" class="text-right">$ <strong>{{formatNumber(dataEnvio.tb) }}</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

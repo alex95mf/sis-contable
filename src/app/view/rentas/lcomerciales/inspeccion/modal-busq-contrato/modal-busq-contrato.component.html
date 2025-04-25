@@ -1,0 +1,45 @@
+<app-button-radio-active [titulo]="fTitle" icono="far fa-file-contract" cstyle="bg-light text-dark"
+    filtroBoton="btnsLcomBusqContrato" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+        <div class="col-6">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text" style="width: 120px;">Contribuyente</span></div>
+                <input type="text" class="form-control" readonly [value]="contribuyente.razon_social">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Num. Contrato</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Vencimiento</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!contratos.length">
+                        <td colspan="4" class="text-center">
+                            <h6>No hay datos</h6>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let contrato of contratos" (click)="selectContrato(contrato)" style="cursor: pointer;">
+                        <td>{{ contrato.numero_contrato }}</td>
+                        <td>{{ contrato.fecha_inicio }}</td>
+                        <td>{{ contrato.fecha_vencimiento }}</td>
+                        <td>
+                            <i class="fas fa-circle" [ngClass]="{'text-success': contrato.estado == 'A', 'text-danger': contrato.estado == 'X'}"></i>
+                            <span *ngIf="contrato.estado == 'A'">ACTIVO</span>
+                            <span *ngIf="contrato.estado == 'X'">ANULADO</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner"></cc-spiner-procesar>

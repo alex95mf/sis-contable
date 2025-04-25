@@ -1,0 +1,18 @@
+<div class="table-responsive responsive-table filters ">
+    <div style="overflow-y: scroll; height: 50vh;">
+        <table class="table no-footer table-hover">
+            <thead>
+                <tr class="text-center" style="width: 100%;">
+                    <th style="width: 40%; " >Nombre</th>
+                    <th style="width: 60%; " >Imagen</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="validaDtUser">
+                <tr *ngFor="let dt of guardarolT; let i = index" (click)="updateCatalogo(dt)" style="cursor:pointer;text-align:center; ">
+                    <td  *ngIf="dt.identifier == id_producto && (dt.original_type == 'image/jpeg' || dt.original_type == 'image/png')">{{dt.name}}</td>
+                    <td  *ngIf="dt.identifier == id_producto && (dt.original_type == 'image/jpeg' || dt.original_type == 'image/png')"><img src="http://api-contable.local/storage{{dt.location}}" width="50" height="50"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<app-button-radio-active titulo="Seleccionar Factura" cstyle="bg-light" icono="far fa-hand-pointer"
+    filtroBoton="btnModalBusquedaFactura" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" >
+        
+    <fieldset class="border pb-2 px-3">
+        <legend class="w-auto bg-dark mb-1">Filtros</legend>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.razon_social">
+                </app-cc-input-group-prepend>
+
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde" max="2050-01-01" >
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold" max="2050-01-01" >
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" >
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+
+    <table class="table table-hover mb-0 mt-2"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+        <thead class="thead-dark">
+            <tr>
+                <th style="width: 10%;">No. Doc</th>
+                <th style="width: 10%;">Fecha</th>
+                <th style="width: 20%;">Contribuyente</th>
+                <th style="width: 10%;">Tipo Documento</th>
+                <th style="width: 10%;" class="text-right pr-2">Valor</th>
+                <!-- <th style="width: 10%;">Estado</th> -->
+                <th style="width: 10%;" class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="tbl_facturas.length > 0; else emptyMessage">
+                <tr *ngFor="let dt of tbl_facturas">
+                    <td>{{ dt.num_doc }}</td>
+                    <td>{{ dt.fecha_compra }}</td>
+                    <td>{{ dt.contribuyente?.razon_social }}</td>
+                    <td>{{ dt.sis_documentos?.nombre }}</td>
+                    <td class="text-right">$ {{ dt.total | number:'1.2-2' }}</td>
+                    <!-- <td>
+                        <i class="fas fa-circle" [ngClass]="{'text-warning': dt.estado == 'E', 'text-success': dt.estado == 'A', 'text-danger': dt.estado == 'N', 'text-muted': dt.estado == 'C'}"></i>
+                        {{ dt.estado == 'E' ? 'Emitido' : dt.estado == 'A' ? 'Aprobado' : dt.estado == 'N' ? 'Negado' : dt.estado == 'C' ? 'Cerrado' : 'N/A' }}
+                    </td> -->
+                    <td>
+                        <div class="text-center mx-auto">
+                            <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar factura">
+                                <i class="fas fa-hand-pointer"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-template #emptyMessage>
+                <tr>
+                    <td colspan="7" class="text-center">
+                        <span class="h6">No hay facturas para mostrar</span>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>   
+    <mat-paginator 
+        [length]="paginate.length"
+        [pageSize]="paginate.perPage"
+        (page)="changePaginate($event)"
+        [pageIndex]="paginate.pageIndex"
+        showFirstLastButtons
+        aria-label="Select page">
+    </mat-paginator>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalBusquedaFacturaComponent"></cc-spiner-procesar>

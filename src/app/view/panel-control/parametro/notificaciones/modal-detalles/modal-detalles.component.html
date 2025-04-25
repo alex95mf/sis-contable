@@ -1,0 +1,48 @@
+<app-button-radio-active-new titulo="Nuevo Registro para Notificaciones" 
+cstyle="bg-gradient-primary text-white" icono="fas fa-users"
+    filtroBoton="btnsNotificacionesModal" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="row m-0">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Filtros</legend>
+                <div class="row m-0">
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Modulo" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [(ngModel)]="registro.fk_modulo" [clearable]="false" (change)="handleSelectModulo($event)"
+                                [items]="lst_modulo" bindValue="id_modulo" bindLabel="nombre">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Tipo Notificacion" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [(ngModel)]="registro.fk_tipo_notificacion" [clearable]="false" (change)="handleSelectTipo($event)"
+                                [items]="lst_tipo_filter" bindValue="id_catalogo" bindLabel="descripcion">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" readonly class="form-control" [(ngModel)]="registro.empleado_full_nombre" (click)="searchEmpleado()">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-primary" (click)="searchEmpleado()">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Correo" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" readonly class="form-control" [(ngModel)]="registro.correo">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spNotificacionesModal"></cc-spiner-procesar>

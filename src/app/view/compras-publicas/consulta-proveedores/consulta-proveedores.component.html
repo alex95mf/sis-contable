@@ -1,0 +1,113 @@
+<div class="my-2">
+    <app-button-radio-active-new titulo="Consulta de Proveedores" 
+    cstyle="bg-gradient-primary text-white" icono="far fa-hand-pointer"
+        filtroBoton="btnsConProveedores" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        
+        <div class="row m-0">
+        <div class="col-12">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Filtros</legend>
+            
+            <div class="row m-0">
+
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="No. Identificación" styleSpan="size-span-campo font-weight-bold">
+                        <input id="num_documento" type="text" class="form-control form-control-sm" placeholder="Número del documento" [(ngModel)]="filter.num_documento" (keypress)="validaciones.numberOnly($event)" minlength="{{ tamDoc }}" maxlength="{{ tamDoc }}">
+                    </app-cc-input-group-prepend>
+                    
+                </div>
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Razón Social" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_razon_social" type="text" class="form-control" placeholder="Razón social" [(ngModel)]="filter.razon_social">
+                    </app-cc-input-group-prepend>
+                    
+                </div>
+
+
+
+     
+            </div>
+        </fieldset>
+        </div>
+        </div>
+
+     
+
+
+        <div class="row m-0">
+            <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;overflow-y:auto;"> 
+                <div class="table-responsive" style="height:600px;">
+
+                    <table class="table table-striped table-bordered table-k table-hover" style="width:200%;" >
+                  
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                 <th>Razón social</th>
+                                 <th>Tipo Persona</th>
+                                 <th>Clase</th>
+                                 <th>Origen</th>
+                                 <th>Pais</th>
+                                 <th>Provincia</th>
+                                 <th>Ciudad</th>
+                                 <th>Dirección</th>
+                                 <th>Teléfono</th>
+                                 <th>Correo</th>
+                                 <th>Cuenta Bancaria Principal</th>
+                                 <th>Banco</th>
+                                 <th>Tipo Cuenta</th>
+                                 <th>Estado</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr *ngIf="!proveedoresDt.length">
+                                 <td colspan="5" class="text-center"><h6>No hay resultados</h6></td>
+                             </tr>
+                             <ng-container *ngFor="let dt of proveedoresDt, let i = index">
+                                 <tr>
+                                     <td>
+                                          {{ dt.razon_social }}<br>
+                                          <small class="text-muted">{{dt.tipo_documento }}: {{ dt.num_documento }}</small>
+                                     </td>
+                                     <td> {{ dt.tipo_persona }}</td>
+                                     <td> {{ dt.clase }}</td>
+                                     <td> {{ dt.origen }}</td>
+                                     <td> {{ dt.pais }}</td>
+                                     <td> {{ dt.provincia }}</td>
+                                     <td> {{ dt.ciudad }}</td>
+                                     <td> {{ dt.direccion }}</td>
+                                     <td> {{ dt.telefono }}</td>
+                                     <td> {{ dt.correo }}</td>
+                                     <td> {{ dt.num_cuenta }}</td>
+                                     <td> {{ dt.entidad }}</td>
+                                     <td> {{ dt.tipo_cuenta }}</td>
+                                     <td class="text-center"><i placement="bottom" [ngbTooltip]="dt.estado == 'A' ? 'Activo' : (dt.estado == 'I' ? 'Inactivo' : '') " [class]="dt.estado == 'A' ? 'fas fa-circle text-success' : (dt.estado == 'I' ? 'fas fa-circle text-danger' :'' )"></i>
+                                         {{dt.estado == 'A'? 'Activo'  : 'Inactivo'}}
+                                     </td>
+                                     
+                                 </tr>
+                             </ng-container>
+                         </tbody>
+                     </table>  
+                     <mat-paginator 
+                     showFirstLastButtons
+                     [length]="paginate.length"
+                     [pageSize]="paginate.perPage"
+                     [pageSizeOptions]="paginate.pageSizeOptions"
+                     (page)="changePaginate($event)"
+                     aria-label="Select page">
+                 </mat-paginator>
+
+                </div>
+                  
+                </div>
+                
+                <div class="col-12">
+
+            </div>
+        </div>
+    </app-button-radio-active-new>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>
+
+

@@ -1,0 +1,188 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Generaci&oacute;n de Contratos de Alquiler de Puestos de Mercado" cstyle="bg-light text-dark" icono="far fa-file-contract"
+        filtroBoton="btnsRenContrato" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+        <div class="row my-2">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccione un Contribuyente" [value]="contrato.fk_contribuyente?.razon_social">
+                    <div class="input-group-append" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                        <button class="btn btn-sm btn-info" [disabled]="readOnlyMode"><i class="fas fa-search"></i></button>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Mercado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="contrato.mercado" (ngModelChange)="cargarPuestos($event)"
+                        [disabled]="readOnlyMode" [clearable]="false">
+                        <ng-option [value]="0" disabled>Seleccione un mercado</ng-option>
+                        <ng-option *ngFor="let m of mercados" [value]="m">{{ m.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Puesto</span></div>
+                    <ng-select class="form-control" [(ngModel)]="contrato.puesto" [disabled]="readOnlyMode" [clearable]="false" (ngModelChange)="puestoSelected($event)">
+                        <ng-option [value]="0" disabled>Seleccione un puesto</ng-option>
+                        <ng-option *ngFor="let p of puestos" [value]="p">({{ p.numero }}) - {{ p.descripcion }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-3">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Tipo</span></div>
+                    <ng-select class="form-control" [(ngModel)]="contrato.tipo" [disabled]="readOnlyMode" [clearable]="false">
+                        <ng-option [value]="0">Seleccione un Tipo de Contrato</ng-option>
+                        <ng-option value="P">PRIMERA VEZ</ng-option>
+                        <ng-option value="R">RENOVACION</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold">Num. Contrato</span>
+                    </div>
+                    <input type="text" class="form-control" [(ngModel)]="contrato.numero" readonly maxlength="30">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Fecha Inicio</span>
+                    </div>
+                    <!-- <ejs-datepicker [(ngModel)]="contrato.fechaInicio" class="form-control" format="yyyy/MM/dd" id="fechaInicio"></ejs-datepicker> -->
+                    <input type="date" class="form-control" [(ngModel)]="contrato.fechaInicio"
+                        [disabled]="readOnlyMode">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Fecha
+                            Vencimiento</span></div>
+                    <!-- <ejs-datepicker [(ngModel)]="contrato.fechaVencimiento" class="form-control" format="yyyy/MM/dd" id="fechaVencimiento"></ejs-datepicker> -->
+                    <input type="date" class="form-control" [(ngModel)]="contrato.fechaVencimiento"
+                        [disabled]="readOnlyMode">
+                </div>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-3">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold">Valor Mensual</span>
+                    </div>
+                    <input currencyMask class="form-control" [(ngModel)]="contrato.mensualidad" [disabled]="readOnlyMode" (keyup)="calcularGarantia()">
+                </div>
+            </div>
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Valor Garantía" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask class="form-control" readonly [ngModel]="contrato.garantia ?? 0">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Total" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask readonly class="form-control" [ngModel]="contrato.total ?? 0">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select [items]="estados" bindValue="id" bindLabel="label" [(ngModel)]="contrato.estado" [clearable]="false" class="form-control" [disabled]="readOnlyMode"></ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <!--<div class="col">
+                <div class="custom-control custom-checkbox custom-switch">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="contrato.estado" id="contrato"
+                        [disabled]="readOnlyMode">
+                    <label class="custom-control-label text-dark" for="contrato">
+                        <div *ngIf="contrato.estado; else elseBlock">ACTIVO</div>
+                        <ng-template #elseBlock>INACTIVO</ng-template>
+                    </label>
+                </div>
+            </div>-->
+        </div>
+        
+        <div class="row my-2">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo bg-dark font-weight-bold">
+                    <textarea rows="6" class="form-control" [(ngModel)]="contrato.observaciones" [disabled]="readOnlyMode"></textarea>
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group input-group-sm mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold">Anexos</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)" [disabled]="contrato.id == null">
+                        <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
+                    </div>
+                </div>
+                <app-anexos-list></app-anexos-list>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-3">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Actividad</span></div>
+                    <input type="text" class="form-control"  [disabled]="readOnlyMode" maxlength="100" [(ngModel)]="contrato.local">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Bienes Recibidos</span></div>
+                    <input type="text" class="form-control"  [disabled]="readOnlyMode" maxlength="100" [(ngModel)]="contrato.bienes">
+                </div>
+            </div>
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Estado Legal." styleSpan="size-span-campo font-weight-bold">
+                    <ng-select [items]="estados_legal" bindValue="id" bindLabel="label" [(ngModel)]="contrato.estado_legal" [clearable]="false" class="form-control" [disabled]="readOnlyMode"></ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mt-2 mb-1 align-items-center">
+            <div class="col">
+                <span class="h5 text-dark">Cuotas</span>
+                <button class="btn btn-info btn-sm ml-1 float-right" placement="left" ngbTooltip="Generar Cuotas" [disabled]="readOnlyMode" (click)="generarCuotas()">
+                    Generar Cuotas
+                    <i class="fas fa-calculator"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Num. Cuota</th>
+                                <th>Periodo</th>
+                                <th class="text-right">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!contrato.detalles.length">
+                                <td colspan="3" class="text-center">
+                                    <h6>No hay datos</h6>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let cuota of contrato.detalles">
+                                <td>{{ cuota.num_cuota }}</td>
+                                <td>{{ cuota.fechaDesde }} - {{ cuota.fechaHasta }}</td>
+                                <td>
+                                    <input currencyMask class="form-control form-control-sm" readonly [ngModel]="cuota.valor">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renMerContrato"></cc-spiner-procesar>

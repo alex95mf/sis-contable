@@ -1,0 +1,22 @@
+
+//   ::ng-deep .input-styling input {
+//     width: 100px !important;
+//     height: 5%;
+//   }
+
+// .toast_position{
+//     position: absolute;
+//     /* position: absolute; */
+//     /* left: 40px; */
+//     top: 40px;
+// }
+
+// .p-toast-top-right {
+//     top: 70px;
+//     right: 20px;
+// }
+
+:host ::ng-deep .custom-toast .p-toast-top-right {
+    top: 70px;
+    right: 20px;
+}

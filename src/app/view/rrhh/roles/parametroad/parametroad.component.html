@@ -1,0 +1,165 @@
+
+<br>
+<app-button-radio-active titulo="Parámetros" filtroBoton="btnParNom" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-archive" *ngIf="permisions != undefined">
+
+    <fieldset class="border p-2 mb-1 mt-2">
+        <legend class="w-auto h6">Información General</legend>
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.Ingresotipo" [disabled]="permisions.editar=='0' || !actions.dComponet " id="IdTipo">
+                        <option value="Ingreso">Ingreso</option>
+                        <option value="Egreso">Egreso</option>
+                    </select>
+                </app-cc-input-group-prepend>
+            </div>    
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Cuenta" styleSpan="size-span-campo">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-primary" id="idbuscar"
+                        [disabled]="permisions[0].editar == '0' || !actions.dComponet" placement="top" ngbTooltip="Buscar Cuenta" (click)="searchCuenta()">
+                            <i class="fa fa-search" style="font-size:12px" aria-hidden="true"></i>
+                        </button>
+                    </div>  
+                    <input type="text" class="form-control form-control-sm " id="idCuenta" placeholder="Buscar Cuenta" [(ngModel)]="parameters.IngresoCuenta"
+                    [disabled]="permisions[0].editar == '0' || !Discuentas"> 
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="¿Requiere Formula?">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.tipoFormula" [disabled]="permisions[0].editar == '0' || !actions.dComponet " id="idTipoFormula">
+                        <option value="S">SI</option>
+                        <option value="N">NO</option>
+                    </select>
+                </app-cc-input-group-prepend>
+            </div>  
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm" id="idNombre" placeholder="Nombre del Parametro" [(ngModel)]="parameters.IngresoNombre"
+                    [disabled]="permisions[0].editar=='0' || !actions.dComponet">
+                </app-cc-input-group-prepend>
+            </div>
+                
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Crédito/Débito" styleSpan="size-span-campo">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.IngresoDC" [disabled]="permisions[0].editar == '0' || !actions.dComponet " id="idDC">
+                        <option value="Debito">Débito</option>
+                        <option value="Credito">Crédito</option>
+                    </select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4" *ngIf="parameters.tipoFormula == 'S'">
+                <app-cc-input-group-prepend label="Formula">
+                    <textarea type="text" class="form-control form-control-sm" rows="1" [(ngModel)]="parameters.formula" id="idformula" [disabled]="permisions[0].editar=='0' || !actions.dComponet " maxlength="100">
+                    </textarea>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+
+        <div class="row"> 
+            <!-- <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Valor (%)" styleSpan="size-span-campo">
+                    <input type="number" min="0" max="100" [(ngModel)]="parameters.IngresoValor" (click)="ValorPorcentaje()" (keypress)="commonServices.FormatDecimalVal($event)"
+                    class="form-control form-control-sm" [disabled]="permisions[0].editar=='0' || !actions.dComponet || !valorupdate " id="IdValor">
+                </app-cc-input-group-prepend>
+            </div> -->
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Sueldo Unificado" styleSpan="size-span-campo">
+                    <input type="number" class="form-control form-control-sm text-right" (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="parameters.sueldoUnificado"
+                    [disabled]="permisions[0].editar=='0' || !actions.dComponet || !sueldData" id="idsuelundificado">
+                    <div class="input-group-text btn" id="inputLabel-prepend">
+                        <input type="checkbox" title="" [(ngModel)]="parameters.checkUnificado" (ngModelChange)="setsueldoUni()" [disabled]="permisions[0].editar=='0' || !actions.dComponet " id="checksueldouni">
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Clase" styleSpan="size-span-campo">
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="parameters.IngresoClase" [disabled]="permisions[0].editar == '0' ||  !actions.dComponet " id="IdClase">
+                        <option value="Rol">Rol</option>
+                        <option value="Provision">Provision</option>
+                        <option value="Anticipo">Anticipo</option>
+                        <option value="Decimo Tercero">Decimo Tercero</option>
+                        <option value="Decimo Cuarto">Decimo Cuarto</option>
+                    </select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+
+        <!-- <div class="row">
+            
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Valor Cantidad" styleSpan="size-span-campo"> 
+                    <input type="number" (keypress)="commonServices.FormatDecimalVal($event)" class="form-control form-control-sm  text-right" [(ngModel)]="parameters.cantidadMulta" id="idmulta"
+                    [disabled]="permisions[0].editar=='0' || !actions.dComponet || !descuentoData">
+                    <div class="input-group-text btn" id="inputLabel-prepend">
+                        <input type="checkbox" [(ngModel)]="parameters.checkMulta" (ngModelChange)="setMulta()" [disabled]="permisions[0].editar=='0' || !actions.dComponet " id="checkmulta">
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div> -->
+    </fieldset>
+
+    <fieldset class="border p-2 mb-1 mt-2 filters" >
+        <legend class="w-auto h6 ">Lista de Parámetros</legend>
+        <div class="col container container-table ">
+            <div class="tab_container ">
+                <div class="table-responsive responsive-table ">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover ">
+                        <thead class="text-center thead-dark ">
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo</th>
+                                <th>Nombre</th>
+                                <!-- <th>Valor %</th> -->
+                                <!-- <th>Valor Cantidad</th> -->
+                                <th>Cuenta</th>
+                                <th>Formula</th>
+                                <th>C/D</th>
+                                <th>Clase</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of guardaT" (click)="updateParametros(dt)"
+                                placement="top" ngbTooltip="Click para modificar registro"
+                                style="cursor:pointer" class="text-center">
+                                <td style="width: 2%;padding-left: 2px;">{{ dt.id_parametro }}</td>
+                                <td style="width: 10%;">{{ dt.tipo }}</td>
+                                <td style="width: 21%;text-align:left;">{{ dt.nombre }}</td>
+                                <!-- <td style="width: 10%;">{{ dt.valor | number: '1.0-2' }}%</td> -->
+                                <!-- <td style="width: 10%;">{{ dt.valor_cantidad | number: '1.0-0' }}</td> -->
+                                <td style="width: 30%;text-align:left;">{{ dt.nombre_cuenta }}</td>
+                                <td style="width: 30%;text-align:left;">{{ dt.formula }}</td>
+                                <td style="width: 10%;">{{ dt.c_d }}</td>
+                                <td style="width: 10%;">{{ dt.clase }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spParAdNom"></cc-spiner-procesar> 
+  
+<!-- Modal -->
+<div class="modal fade" id="bd-example-modal-lg" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content"> 
+            <div class="modal-body"> 
+
+                <app-button-radio-active titulo="Buscar y Seleccionar Cuenta Contable" filtroBoton="btnParNomCta" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-archive">
+                    <app-table-cuenta [data_carga_cuenta]="dataCuenta" *ngIf="dataCuenta != undefined">
+                    </app-table-cuenta>
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<br>
+<app-button-radio-active *ngIf="!processing" titulo="Reporte Nómina" filtroBoton="btnReptRh" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-pie-chart">
+    <ul class="nav nav-tabs color-input-estandar mb-3 mt-1" id="pills-tab">
+        <li class="nav-item  ">
+            <a class="nav-link active" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" (click)="dinamicoBotones(1)">Listado de Nómina</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" id="pills-anexos-tab" data-toggle="pill" href="#pills-anexos" role="tab" aria-controls="pills-anexos" aria-selected="false" (click)="dinamicoBotones(2)">Cargas Familiares</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" id="pills-anios-tab" data-toggle="pill" href="#pills-anios" role="tab" aria-controls="pills-anios" aria-selected="false" (click)="dinamicoBotones(3)">Cumpleaños</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent" style="background-color: rgb(255 255 255 / 5%);">
+        <div class="tab-pane  show active container-fluid tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <app-listado></app-listado>
+        </div>
+        <div class="tab-pane container-fluid tab-pane fade" id="pills-anexos" role="tabpanel" aria-labelledby="pills-anexos-tab">
+            <app-carga></app-carga>
+        </div>
+        <div class="tab-pane container-fluid tab-pane fade" id="pills-anios" role="tabpanel" aria-labelledby="pills-anios-tab">
+            <app-cumpleanio></app-cumpleanio>
+        </div>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spReptRh"></cc-spiner-procesar>

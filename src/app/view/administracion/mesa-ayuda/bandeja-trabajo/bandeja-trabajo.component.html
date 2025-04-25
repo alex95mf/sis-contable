@@ -1,0 +1,201 @@
+
+    <app-button-radio-active-new [titulo]="fTitle" filtroBoton="btnsBandejaTrabajo" 
+    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" 
+    (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
+     
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+        
+     
+            <div class="row m-0">
+
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Fecha Desde" styleSpan="font-weight-bold size-span-campo">
+                        <input id="filter_fecha_desde" type="date" class="form-control" 
+                        [(ngModel)]="filter.fecha_desde" max="2050-01-01" >
+                    </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col-12 col-md-4 pt-0 pb-0">
+
+                    <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="font-weight-bold size-span-campo">
+                        <input id="filter_fecha_hasta" type="date" class="form-control" 
+                        [(ngModel)]="filter.fecha_hasta" max="2050-01-01" >
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="estado" class="form-control form-control-sm" 
+                        [(ngModel)]="estadoSelected" 
+                        (change)="asignarEstado($event)" [clearable]="true">
+                            <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                            <ng-option *ngFor="let op of estadoList" [value]="op.valor">{{ op.descripcion }}
+
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row m-0">
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Categoría" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="categoria" class="form-control form-control-sm" 
+                        [(ngModel)]="filter.categoria" [clearable]="true">
+                            <ng-option disabled [value]="0" disabled>Seleccione una Categor&iacute;a
+
+                            </ng-option>
+                            <ng-option *ngFor="let op of categorias" [value]="op.valor">{{op.descripcion }}
+
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+            </div>
+
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Sub Categoría" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="sub_categoria" class="form-control form-control-sm" [(ngModel)]="filter.subcategoria" [clearable]="false">
+                            <ng-option disabled [value]="0" disabled>Seleccione una Sub Categor&iacute;a</ng-option>
+                            <ng-option *ngFor="let op of subCategorias" [value]="op.valor">{{op.descripcion }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+
+
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Prioridad" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="prioridad" class="form-control form-control-sm" 
+                        [(ngModel)]="prioridadSelected" (change)="asignarPrioridad($event)" 
+                        [clearable]="true">
+                            <ng-option disabled [value]="0" disabled>Seleccione una Prioridad</ng-option>
+                            <ng-option *ngFor="let op of prioridadList" [value]="op.value">{{ op.label }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+            </div>
+
+
+
+ 
+ 
+           
+        </fieldset>
+        <div class="row m-0">
+            <div class="col-12">
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+
+             
+                        <tr class="text-center">
+                            <th style="width: 5%;">Id</th>
+                            <th style="width: 10%;">Fecha</th>
+                            <th style="width: 10%;">Usuario</th>
+                            <th style="width: 20%;">Observaci&oacute;n</th>
+                            <th style="width: 10%;">Categor&iacute;a</th>
+                            <th style="width: 10%;">Sub Categor&iacute;a</th>
+                            <th style="width: 10%;">Estado</th>
+                            <th style="width: 10%;">Prioridad</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="ticketsDt.length == 0">
+                            <td colspan="9" class="text-center">
+                                <h6 class="my-1"></h6>No hay Tickets para mostrar.
+                            </td>
+                        </tr>
+                        <tr *ngFor="let dt of ticketsDt, let i = index">
+                            <td class="text-center">{{ dt.id_ticket }}</td>
+                            <td class="text-center">{{ dt.fecha }}</td>
+                            <td class="text-center"><i class="fa fa-user" aria-hidden="true"></i>
+                                <div class="row">
+                                    <div class="col">{{ dt.usuario.nombre | titlecase }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-muted"><small>{{ dt.usuario.departamento ? dt.usuario.departamento.dep_nombre : 'Sin departamento' }}</small></div>
+                                </div>
+                            </td>
+                            <td class="text-center text-justify text-break">{{ dt.observacion }}</td>
+                            <td class="text-center">{{ dt.catalogo_categoria.descripcion }}</td>
+                            <td class="text-center">{{ dt.catalogo_sub_categoria.descripcion }}</td>
+                            <td class="text-center"><i placement="bottom" [ngbTooltip]="dt.estado == 'P' ? 'Pendiente' : dt.estado == 'G' ? 'Gestion' : dt.estado == 'GA' ? 'Garantía' : dt.estado == 'PA' ? 'Pend. de Aprobación' : dt.estado == 'N' ? 'Negado' : 'Cerrado'" [class]="dt.estado == 'P' ? 'fas fa-circle text-primary' : dt.estado == 'C' ? 'fas fa-circle text-danger' : dt.estado == 'GA' ? 'fas fa-circle text-info' :  dt.estado == 'PA' ? 'fas fa-circle text-warning' :  dt.estado == 'N' ? 'fas fa-circle text-error' :  'fas fa-circle text-success'"></i>
+                                {{dt.estado == 'P' ? 'Pendiente' : dt.estado == 'C' ? 'Cerrado' : dt.estado == 'GA' ? 'Garantía' : dt.estado == 'PA' ? 'Pend. de Aprobación' : dt.estado == 'N' ? 'Negado' : 'Gestión'}}
+                                <br>
+                                <span [innerHTML]="evaluateTicket(dt)"></span>
+                            </td>
+
+
+                            <td class="text-center"><i placement="bottom" [ngbTooltip]="dt.prioridad == 'A' ? 'Alta' : dt.prioridad == 'M' ? 'Media' : 'Baja'" [class]="dt.prioridad == 'A' ? 'fas fa-circle text-danger' : dt.prioridad == 'M' ? 'fas fa-circle text-warning' : 'fas fa-circle text-success'"></i>
+                                {{dt.prioridad == 'A' ? 'Alta' : dt.prioridad == 'M' ? 'Media' : 'Baja'}}
+                            </td>
+                            <td>
+                                <div class="text-center mx-auto">
+                                    <button *ngIf="puedeGestionarTicket(dt)" class="btn btn-warning btn-sm mx-1" (click)="showGestionTicketForm(false, dt)" placement="left" ngbTooltip="Gestionar Trámite">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-primary btn-sm mx-1" (click)="showSeguiTicketForm(false, dt)" placement="left" ngbTooltip="Abrir Seguimiento">
+                                        <i class="far fa-eye "></i>
+                                    </button>
+                                    <button *ngIf="dt.estado === 'PA'" class="btn btn-success btn-sm mx-1" (click)="openAprobarModal(dt)" placement="left" ngbTooltip="Aprobar Ticket" [disabled] = "deshabilitarBotonAprobacion(dt)">
+                                        <i class="far fa-check"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator 
+                showFirstLastButtons
+                [length]="paginate.length" 
+                [pageSize]="paginate.perPage" 
+                [pageSizeOptions]="paginate.pageSizeOptions" 
+                (page)="changePaginate($event)" 
+                aria-label="Select page">
+                </mat-paginator>
+                </div>
+
+                <!-- Modal de Confirmación -->
+                <ng-template #aprobarModal let-modal>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Aprobar Ticket</h5>
+                        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Está seguro de cambiar el estado de aprobación este ticket?</p>
+                        <div class="form-group">
+                            <label for="estadoAprobacion">Estado: <span class="text-danger">*</span></label>
+                            <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="estadoAprobacion" [clearable]="true">
+                                <ng-option disabled [value]="'0'" disabled>Seleccione un Estado</ng-option>
+                                <ng-option [value]="'APROBADO'">Aprobado</ng-option>
+                                <ng-option [value]="'NEGADO'">Negado</ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="form-group">
+                            <label for="motivoAprobacion">Observación: <span class="text-danger">*</span></label>
+                            <textarea 
+                                id="motivoAprobacion" 
+                                class="form-control" 
+                                [(ngModel)]="motivoAprobacion" 
+                                rows="3" 
+                                placeholder="Ingrese el motivo..." 
+                                required>
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
+                        <button type="button" class="btn btn-primary" (click)="validarAprobacion(modal)">Confirmar</button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </app-button-radio-active-new>
+
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spMesaTrabajo"></cc-spiner-procesar>

@@ -1,0 +1,89 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-receipt"
+    filtroBoton="btnsRegCompModal" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+        <div class="col">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text font-weigth-bold" style="font-weight: 600;font-size: 11px;">Cedula de Asignacion</span>
+                    <span class="input-group-text" style="font-weight: 600;font-size: 11px;">{{ periodo }}</span>
+                    <!-- <span class="input-group-text" style="font-weight: 600;font-size: 11px;">{{ obj_programa.codigo }}</span> -->
+                    <span class="input-group-text" style="font-weight: 600;font-size: 11px;">{{ obj_departamento.codigo }}</span>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="secuencial" minlength="1" maxlength="4">
+            </div>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Factura" styleSpan="size-span-otro font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="factura">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col">
+            <app-cc-input-group-prepend label="Cantidad" styleSpan="size-span-otro font-weight-bold">
+                <input type="number" class="form-control" [(ngModel)]="cantidad" (input)="calcular()" min="0" max="{{ bien.solicitado - totales.cantidad }}">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Precio Unit." styleSpan="size-span-otro font-weight-bold">
+                <input type="number" class="form-control" readonly [(ngModel)]="precio_unitario" (input)="calcular()" min="0" step="0.01">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Precio Total" styleSpan="size-span-otro font-weight-bold">
+                <input type="text" class="form-control" readonly value="{{ precio_total | number:'1.2-2' }}">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="font-weight-bold">
+                <input type="date" class="form-control" [(ngModel)]="fecha">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <button class="btn btn-sm btn-success" (click)="agregar()"><i class="fas fa-plus"></i></button>
+        </div>
+    </div>
+    <div class="row my-2">
+        <table class="table table-sm" style="max-height: 120px; overflow-y: scroll;">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Cedula de Asignacion</th>
+                    <th>Fecha</th>
+                    <th>Cant.</th>
+                    <th>Precio Unitario</th>
+                    <th>Precio Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="!compras.length">
+                    <td colspan="6" class="text-center">
+                        <h6>No hay compras registradas</h6>
+                    </td>
+                </tr>
+                <tr *ngFor="let compra of compras">
+                    <td>{{ compra.cedula_asignacion }}</td>
+                    <td>{{ compra.fecha }}</td>
+                    <td>{{ compra.cantidad }}</td>
+                    <td>${{ compra.precio_unitario | number:'1.2-2' }}</td>
+                    <td>${{ compra.precio_total | number:'1.2-2' }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" ngbTooltip="Pagado" (click)="setPagado(compra)" [disabled]="compra.pagado"><i class="fas fa-check"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot class="table-dark">
+                <tr>
+                    <td colspan="2" class="text-right">Totales</td>
+                    <td>{{ totales.cantidad }}</td>
+                    <td></td>
+                    <td>${{ totales.precio_total | number:'1.2-2' }}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner"></cc-spiner-procesar>

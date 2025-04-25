@@ -1,0 +1,199 @@
+<div class="">
+    <app-button-radio-active-new titulo="Seleccionar Regla" filtroBoton="btnListReglas" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="mb-3">
+            <div class="row m-0">
+                <div class="col-12">
+                    <fieldset class="border card-fieldset">
+                        <legend class="w-auto card-legend">Datos Regla</legend>
+                        <div class="row m-0">
+                            <div class="col-12 col-md-10 pt-0 pb-0">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Tipo de Regla" styleSpan="size-span-campo font-weight-bold">
+                                            <ng-select id="tipo_regla" class="form-control form-control-sm" [(ngModel)]="filter.tipo_regla" (change)="asignarTipoRegla($event)" [clearable]="false">
+                                                <ng-option disabled [value]="0" disabled>Seleccione un tipo regla</ng-option>
+                                                <ng-option *ngFor="let op of tipoRegla" [value]="op.valor">{{ op.descripcion }}</ng-option>
+                                            </ng-select>
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Número de Regla" styleSpan="size-span-campo font-weight-bold">
+                                            <input type="text" class="form-control" [(ngModel)]="filter.numero_regla" (keypress)="onlyNumber($event)">
+                                          </app-cc-input-group-prepend>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Código Presupuesto" styleSpan="size-span-campo font-weight-bold">
+                                            <input type="text" class="form-control" [(ngModel)]="filter.codigo_presupuesto">
+                                          </app-cc-input-group-prepend>
+                                    </div>
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Código Cuenta Contable" styleSpan="size-span-campo font-weight-bold">
+                                          <input type="text" class="form-control" [(ngModel)]="filter.codigo_cuenta_contable">
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-12 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+                                          <input type="text" class="form-control" [(ngModel)]="filter.descripcion">
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col text-right">
+                                <button class="btn btn-action btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="cargarReglas(true)">
+                                    <i class="fas fa-search"></i> Consultar
+                                </button>
+                                <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                    <i class="fas fa-eraser"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-k table-hover">
+                            <thead>
+                                <tr class="text-center">
+                                    <th style="width: 15%;">Tipo Regla</th>
+                                    <!-- <th style="width: 10%;">Tipo Código</th> -->
+                                    <th style="width: 10%;">Número Regla</th>
+                                    <th style="width: 60%;">Descripcion</th>
+                                    <th style="width: 15%;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="reglasDt.length == 0">
+                                    <td colspan="7" class="text-center"><h6 class="my-1"></h6>No hay pagos para mostrar</td>
+                                </tr>
+                                <tr *ngFor="let dt of reglasDt, let i = index">
+                                    <td class="text-center">{{ dt.tipo_regla }}</td>
+                                    <!-- <td class="text-center">{{ dt.detalles.tipo_codigo }}</td> -->
+                                    <td class="text-center">{{ dt.numero_regla }}</td>
+                                    <td class="text-center">{{ dt.descripcion }}</td>
+                                    <td>
+                                        <div class="text-center mx-auto">
+                                            <button class="btn btn-help_icon btn-sm mr-1" (click)="selectOption(dt)"
+                                                placement="left" ngbTooltip="Seleccionar regla">
+                                                <!-- <i class="fas fa-hand-pointer"></i> -->
+                                                <span class="material-symbols-outlined">gesture_select</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <!-- <td>
+                                        <div class="text-center mx-auto">
+                                            <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar regla">
+                                                <i class="fas fa-hand-pointer"></i>
+                                            </button>
+                                        </div>
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>                    
+                    </div>
+                </div>
+                    
+                <div class="col-12">
+                    <mat-paginator 
+                        showFirstLastButtons
+                        [length]="paginate.length"
+                        [pageSize]="paginate.perPage"
+                        [pageSizeOptions]="paginate.pageSizeOptions"
+                        (page)="changePaginate($event)"
+                        aria-label="Select page">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+            
+                
+                   
+        
+        
+        
+
+        <!-- <div class="row my-2">
+            <div class="col-12">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row ml-1 mr-1">
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Tipo de Regla" styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select id="tipo_regla" class="form-control form-control-sm" [(ngModel)]="filter.tipo_regla" (change)="asignarTipoRegla($event)" [clearable]="false">
+                                            <ng-option disabled [value]="0" disabled>Seleccione un tipo regla</ng-option>
+                                            <ng-option *ngFor="let op of tipoRegla" [value]="op.valor">{{ op.descripcion }}</ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+                                      <input type="text" class="form-control" [(ngModel)]="filter.descripcion">
+                                    </app-cc-input-group-prepend>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="cargarReglas(true)">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-12">
+                <table class="table table-bordered no-footer table-hover mb-0"> 
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 15%;">Tipo Regla</th>
+                            <th style="width: 20%;">Número Regla</th>
+                            <th style="width: 15%;">Descripcion</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="reglasDt.length == 0">
+                            <td colspan="7" class="text-center"><h6 class="my-1"></h6>No hay pagos para mostrar</td>
+                        </tr>
+                        <tr *ngFor="let dt of reglasDt, let i = index">
+                            <td class="text-center">{{ dt.tipo_regla }}</td>
+                            <td class="text-center">{{ dt.numero_regla }}</td>
+                            <td class="text-center">{{ dt.descripcion }}</td>
+                            <td>
+                                <div class="text-center mx-auto">
+                                    <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar regla">
+                                        <i class="fas fa-hand-pointer"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>                    
+            </div>
+                
+            <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+            
+        </div> -->
+    </app-button-radio-active-new>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>
+

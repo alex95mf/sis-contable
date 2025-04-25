@@ -1,0 +1,619 @@
+<div class="mt-2" *ngIf="caja != undefined">
+    <app-button-radio-active titulo="Arqueo de caja" filtroBoton="btnCierreCaja" cstyle="bg-gradient-primary text-white"
+        [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-archive">
+        <div class="row  mt-2">
+            <div class="col-12">
+                <div class="alert alert-warning" role="alert">
+                    El valor del saldo al corte es igual al total de las ventas ${{caja.total_venta}} sumado al valor de
+                    apertura ${{arrayView.apertura}}.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Caja</span>
+                    </div>
+                    <input type="text" [(ngModel)]="caja.nombre_caja" [disabled]="true"
+                        class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Registro</span>
+                    </div>
+                    <input type="text" placeholder="RDC-{{numCajaRegister}}" [disabled]="true"
+                        class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo al
+                            corte</span>
+                    </div>
+                    <input type="text" [(ngModel)]="arrayView.ing" style="background-color:#007BFF;color:white;"
+                        [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Usuario
+                            Caja</span>
+                    </div>
+                    <input type="text" [(ngModel)]="caja.name_user_caja" [disabled]="true"
+                        class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sucursal</span>
+                    </div>
+                    <input type="text" placeholder="{{numSucursal}} - {{caja.name_sucursal}}" [disabled]="true"
+                        class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor
+                            en caja</span>
+                    </div>
+                    <input type="text" [(ngModel)]="arrayView.cierre" style="background-color: #FFC107;color: black;"
+                        id="idvaluecierre" (keyup)="changeValue()" min="0"
+                        (keypress)="commonServices.FormatDecimalVal($event)"
+                        class="form-control form-control-sm text-right pr-1" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha
+                            Apertura</span>
+                    </div>
+                    <input type="text" [(ngModel)]="caja.fecha_apertura" format='yyyy-MM-dd HH:mm:ss' [disabled]="true"
+                        class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor
+                            Apertura</span>
+                    </div>
+                    <input type="text" [(ngModel)]="arrayView.apertura" style="background-color: #17A2B8;color: white;"
+                        [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Diferencia</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-1"
+                        [ngClass]="{ 'diferentOne' : arrayView.diferencia < 0,'diferentTwo' : arrayView.diferencia >= 0 }"
+                        [(ngModel)]="arrayView.diferencia" [disabled]="true">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="tab_container p-3 filtersRegister">
+                    <div class="table-responsive responsive-table">
+                        <table datatable id="tablaBitacora" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                            class=" dataTable no-footer table-hover">
+                            <thead>
+                                <tr style="width: 100%;">
+                                    <th style="width: 5%;padding-left: 0px !important;cursor: pointer;"
+                                        class="text-center">
+                                        <input type="checkbox" (click)="changeValAll()" [(ngModel)]="changeAll"
+                                            style="cursor: pointer;">
+                                    </th>
+                                    <th style="width: 10%;">Fecha</th>
+                                    <th style="width: 10%;">Transacción</th>
+                                    <th style="width: 25%;">Cliente</th>
+                                    <th style="width: 10%;">Documento</th>
+                                    <th style="width: 20%;">Descripción</th>
+                                    <th style="width: 10%;">Forma pago</th>
+                                    <th style="width: 10%;">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="validaDt">
+                                <tr *ngFor="let dt of arraySumDet;let i = index">
+                                    <td class="text-center p-0"
+                                        style="width: 5%;padding-left: 0px !important;cursor: pointer;">
+                                        <input type="checkbox" style="cursor: pointer;" [(ngModel)]="dt.validate_sum"
+                                            (click)="changeVal(i)" [disabled]="changeAll">
+                                    </td>
+                                    <td>{{ dt.fecha }}</td>
+                                    <td *ngIf="dt.isModuleCpbt == 0">{{ getTipeDocTable(dt.tip_doc) }}-{{
+                                        dt.num_doc.toString().padStart(10, '0') }}</td>
+                                    <td *ngIf="dt.isModuleCpbt == 1">N/A</td>
+                                    <td>{{ dt.nombre_cliente }}</td>
+                                    <td *ngIf="dt.isModuleCpbt == 0">{{
+                                        getTipeDocTable(dt.tip_doc_adq) }}-{{ dt.num_doc_adq }}</td>
+                                    <td *ngIf="dt.isModuleCpbt == 1">N/A</td>
+                                    <td >{{dt.description}}</td>
+                                    <td>{{dt.f_pago}}</td>
+                                    <td class="text-right pr-1">$ {{dt.valor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="row justify-content-center mt-3 mb-3 ">
+                    <div class="col-12" style="max-height: 190px;min-height: 190px;overflow-y: scroll;">
+                        <div class="tab_container p-3 filters">
+                            <div class="table-responsive responsive-table">
+                                <table class="table table-bordered">
+                                    <thead class="bg-dark">
+                                        <tr>
+                                            <th>Detalle métodos de pagos </th>
+                                            <th style="text-align: end !important;">Valor total por método</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let d of arraySum;let i = index">
+                                            <td>Total en {{d.f_pago}}</td>
+                                            <td style="text-align: right;">$ {{d.valor}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row justify-content-center mt-3 mb-3 ">
+                    <div class="col-12 " style="max-height: 100px;overflow-y: scroll;">
+                        <div class="tab_container p-3 filters">
+                            <div class="table-responsive responsive-table">
+                                <table class="table table-bordered">
+                                    <thead class="bg-dark">
+                                        <tr>
+                                            <th>Forma pago</th>
+                                            <th style="text-align: end !important;">Valor</th>
+                                            <th style="text-align: end !important;">No. Cheque</th>
+                                            <th style="text-align: end !important;">Fecha cobro</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let d of arrayChequesPost;let i = index">
+                                            <td>Cheque post-fechado</td>
+                                            <td style="text-align: right;">$ {{d.valor}}</td>
+                                            <td style="text-align: right;">$ {{d.ref_doc}}</td>
+                                            <td style="text-align: right;">$ {{d.fecha}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="input-group mt-1 mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Observación</span>
+                            </div>
+                            <textarea class="form-control" aria-label="With textarea"
+                                placeholder="Ingrese una observación" [(ngModel)]="observation" id="idobs"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm"
+                                    style="background-color: #FFC107;color: rgba(0, 0, 0, 0.527);font-size: 18px !important;">TOTAL</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm text-right pr-3"
+                                [(ngModel)]="arrayView.cierre" [disabled]="true"
+                                style="background-color: #007BFF;color: white;font-size: 18px !important;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCierreCaja"></cc-spiner-procesar>
+
+<div [hidden]="true" id="print-section" class="printInfo">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-5 text-center mt-4">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7 text-center mt-4">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>CAJA</h3>
+                                <p>CIERRE DE CAJA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center mt-5" *ngIf="arraySumDet.length > 0">
+                <div class="col-md-12 text-center">
+                    <div>
+                        <div class="table-responsive responsive-table">
+                            <table>
+                                <thead>
+                                    <tr style="width: 100%;">
+                                        <th style="width: 10%;">Fecha</th>
+                                        <th style="width: 10%;">Transacción</th>
+                                        <th style="width: 25%;">Cliente</th>
+                                        <th style="width: 10%;">Documento</th>
+                                        <th style="width: 10%;">Forma pago</th>
+                                        <th style="width: 10%;">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngFor="let dt of arraySumDet;let i = index">
+                                        <td>{{ dt.fecha }}</td>
+                                        <td *ngIf="dt.isModuleCpbt == 0">{{ getTipeDocTable(dt.tip_doc)
+                                            }}-{{ dt.num_doc.toString().padStart(10, '0') }}</td>
+                                        <td *ngIf="dt.isModuleCpbt == 1">
+                                            N/A</td>
+                                        <td>{{ dt.nombre_cliente }}</td>
+                                        <td  *ngIf="dt.isModuleCpbt == 0">{{
+                                            getTipeDocTable(dt.tip_doc_adq) }}-{{ dt.num_doc_adq }}</td>
+                                        <td *ngIf="dt.isModuleCpbt == 1">
+                                            N/A</td>
+                                        <td>{{dt.f_pago}}</td>
+                                        <td class="text-right pr-1">$ {{dt.valor}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3" *ngIf="dataUser != undefined">
+                <div class="col-12 text-center">
+                    <div class="table-responsive responsive-table">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr style="width: 100%;">
+                                    <th style="width: 25%;text-align:center;">Elaborado por</th>
+                                    <th style="width: 25%;text-align:center; ">Revisado</th>
+                                    <th style="width: 25%;text-align:center; ">Aprobado</th>
+                                    <th style="width: 25%;text-align:center; ">Recibí conforme</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border-top: none !important; height: 100px;text-align: center;">
+                                        <div style="padding-top: 48px; ">
+                                            <hr>
+                                            <span>{{dataUser.nombre}}</span>
+                                        </div>
+                                    </td>
+                                    <td style="border-top: none !important;height: 100px;">
+                                    </td>
+                                    <td style="border-top: none !important;height: 100px;">
+                                    </td>
+                                    <td style="border-top: none !important;height: 100px;">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-warning" role="alert">
+                        El valor del saldo al corte es igual al total de las ventas ${{caja.total_venta}} sumado al
+                        valor de apertura ${{arrayView.apertura}}.
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo al
+                                corte</span>
+                        </div>
+                        <input type="text" [(ngModel)]="arrayView.ing" style="background-color:#007BFF;color:white;"
+                            [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor
+                                en caja</span>
+                        </div>
+                        <input type="text" [(ngModel)]="arrayView.cierre"
+                            style="background-color: #FFC107;color: black;" id="idvaluecierre" (keyup)="changeValue()"
+                            min="0" (keypress)="commonServices.FormatDecimalVal($event)"
+                            class="form-control form-control-sm text-right pr-1" disabled>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Diferencia</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right pr-1"
+                            style="background-color: #DD6975;color: white;" [(ngModel)]="arrayView.diferencia"
+                            [disabled]="true">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center" style="font-family: 'Poppins1';" *ngIf="dataUser != undefined">
+                <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+                    <span style="color: #13A1EA;">
+                        Fecha: {{dateNow}}&nbsp;{{hora}}</span>
+                </div>
+                <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+                    <span style="color: #13A1EA;">
+                        Usuario: {{dataUser.nombre}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="row justify-content-center">
+    <div class="col-11">
+        <div class="mt-4">
+            <app-button-radio-active titulo="Cierre de caja" filtroBoton="btnCierreCaja"
+                cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-lock">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Caja</span>
+                            </div>
+                            <input type="text" [(ngModel)]="caja.nombre_caja" [disabled]="true"
+                                class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha
+                                    Apertura</span>
+                            </div>
+                            <input type="text" [(ngModel)]="caja.fecha_apertura" format='yyyy-MM-dd HH:mm:ss'
+                                [disabled]="true" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha
+                                    cierre</span>
+                            </div>
+                            <input type="text" [(ngModel)]="caja.fecha_cierre" format='yyyy-MM-dd HH:mm:ss'
+                                [disabled]="true" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Usuario
+                                    Caja</span>
+                            </div>
+                            <input type="text" [(ngModel)]="caja.name_user_caja" [disabled]="true"
+                                class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor
+                                    Apertura</span>
+                            </div>
+                            <input type="text" placeholder="$ {{commonServices.formatNumber(arrayView.apertura)}}"
+                                [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor
+                                    diferencia</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm text-right pr-1"
+                                placeholder="$ {{commonServices.formatNumber(arrayView.diferencia)}}" [disabled]="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor
+                                    cierre</span>
+                            </div>
+                            <input type="text" placeholder="{{commonServices.formatNumber(arrayView.cierre)}}"
+                                id="idvaluecierre" (keyup)="changeValue()" min="0"
+                                (keypress)="commonServices.FormatDecimalVal($event)"
+                                class="form-control form-control-sm text-right pr-1">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor
+                                    cuadre</span>
+                            </div>
+                            <input type="text" placeholder="$ {{commonServices.formatNumber(arrayView.cuadre)}}"
+                                [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                                    ingresos</span>
+                            </div>
+                            <input type="text" placeholder="$ {{commonServices.formatNumber(arrayView.ing)}}"
+                                [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Forzar
+                                    cierre</span>
+                            </div>
+                            <input type="checkbox" [(ngModel)]="forceClose" (click)="forceCloseFunction()"
+                                class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo"
+                                    id="inputGroup-sizing-sm">Supervisor</span>
+                            </div>
+                            <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body"
+                                [searchable]="true" [disabled]="!forceClose " [clearable]="false"
+                                [(ngModel)]="caja.supervisor">
+                                <ng-option [value]="0">Seleccione supervisor</ng-option>
+                                <ng-option *ngFor="let d of arrayUsers" [value]="d.id_usuario">
+                                    {{d.nombre}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo"
+                                    id="inputGroup-sizing-sm">Contraseña</span>
+                            </div>
+                            <input type="password" [(ngModel)]="caja.pass" [disabled]="!forceClose"
+                                placeholder="Contraseña" id="Idpass" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="input-group mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Observación</span>
+                            </div>
+                            <textarea class="form-control" aria-label="With textarea"
+                                placeholder="Ingrese una observación" [(ngModel)]="observation" id="idobs"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Egresos</span>
+                            </div>
+                            <input type="number" placeholder="{{commonServices.formatNumber(arrayView.egr)}}"
+                                (keyup)="sumEgresos()" [disabled]="true" min="0" class="form-control form-control-sm"
+                                (keypress)="commonServices.FormatDecimalVal($event)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-3 mb-3">
+                    <div class="col-12 mt-2 mb-2 text-right">
+                        <button class="btn btn-warning btn-xs" (click)="sendDetail()"><i class="far fa-eye"></i> Ver
+                            Detalle de ingresos</button>
+                    </div>
+                    <div class="col-12 pl-3 pr-3 pt-3 filters">
+                        <table class="table table-bordered">
+                            <thead class="bg-dark">
+                                <tr>
+                                    <th>Detalle métodos de pagos </th>
+                                    <th style="text-align: end !important;">Valor total por método</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let d of arrayDet;let i = index">
+                                    <td>Total en {{d.f_pago}}</td>
+                                    <td style="text-align: right;">$ {{d.valor}}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="text-align: end !important;">Total Ingresos caja
+                                        &nbsp;&nbsp;<span
+                                            style="color: rgb(0, 38, 255);">${{commonServices.formatNumber(arrayView.ing)}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered">
+                            <thead class="bg-dark">
+                                <tr>
+                                    <th>Detalle otros Ingresos</th>
+                                    <th style="text-align: end !important;">Valor total por método</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let d of arrayDetPendiente;let i = index">
+                                    <td>Total en {{d.f_pago}}</td>
+                                    <td style="text-align: right;">$ {{d.valor}}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="text-align: end !important;">Total otros ingresos
+                                        &nbsp;&nbsp;<span
+                                            style="color: rgb(0, 38, 255);">${{commonServices.formatNumber(arrayView.total_others)}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCierreCaja"></cc-spiner-procesar> -->

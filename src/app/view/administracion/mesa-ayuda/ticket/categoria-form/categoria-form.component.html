@@ -1,0 +1,70 @@
+<app-button-radio-active-new [titulo]="isCategory ? 'Nueva Categoría' : 'Nueva Sub-Categoría'" filtroBoton="btnCategoryForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check"></app-button-radio-active-new>
+<div class="row m-0 pb-3" *ngIf="isCategory">
+    <div class="col-12 col-md-6 pt-0 pb-0" >
+        <app-cc-input-group-prepend label="Nombre Categoría" styleSpan="font-weight-bold size-span-campo">
+            <input id="categoria" type="text" class="form-control" [(ngModel)]="categoria.descripcion" max="2050-01-01">
+        </app-cc-input-group-prepend>
+    </div>
+    <div class="col-12 col-md-6 pt-0 pb-0" >
+        <app-cc-input-group-prepend label="Necesita Aprobacion" styleSpan="font-weight-bold size-span-campo">
+            <ng-select id="categoriasub" class="form-control form-control-sm" [(ngModel)]="categoria.necesita_aprobacion" 
+            [clearable]="true"
+            [searchable]="true"
+            >
+                <ng-option disabled [value]="null">-Seleccione-</ng-option>
+                <ng-option  [value]="'S'">SI</ng-option>
+                <ng-option  [value]="'N'">NO</ng-option>
+            </ng-select>
+        </app-cc-input-group-prepend>
+    </div>
+
+    
+
+</div>
+<div class="row m-0 pb-3" *ngIf="isCategory && categoria.necesita_aprobacion == 'S'" >
+    <div class="col-12 col-md-6 pt-0 pb-0" >
+        <app-cc-input-group-prepend label="Primer Nivel de Aprobacion" styleSpan="font-weight-bold size-span-campo">
+            <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="categoria.primer_nivel_aprobacion" 
+            (change)="onPrimerNivelChange($event)"
+            [clearable]="true"
+            [searchable]="true"
+            >
+                <ng-option disabled [value]="null" disabled>-Seleccione-</ng-option>
+                <ng-option *ngFor="let or of organigrama" [value]="or.id_organigrama">{{ or.codigo }} {{ or.nombre }}</ng-option>
+            </ng-select>
+        </app-cc-input-group-prepend>
+    </div>
+    <div class="col-12 col-md-6 pt-0 pb-0" >
+        <app-cc-input-group-prepend label="Ultimo Nivel de Aprobacion" styleSpan="font-weight-bold size-span-campo">
+            <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="categoria.ultimo_nivel_aprobacion" 
+            [clearable]="true"
+            [searchable]="true"
+            >
+                <ng-option disabled [value]="null" disabled>-Seleccione-</ng-option>
+                <ng-option *ngFor="let or of filteredOrganigrama" [value]="or.id_organigrama">{{ or.codigo }} {{ or.nombre }}</ng-option>
+            </ng-select>
+            
+        </app-cc-input-group-prepend>
+    </div>
+    
+</div>
+<div class="row m-0 pb-3" *ngIf="!isCategory">
+    <div class="col-12 col-md-6 pt-0 pb-0" >
+        <app-cc-input-group-prepend label="Categoría" styleSpan="font-weight-bold size-span-campo">
+            <ng-select id="categoriasub" class="form-control form-control-sm" [(ngModel)]="categoria.grupo" 
+            [clearable]="true"
+            [searchable]="true"
+            >
+                <ng-option disabled [value]="0" disabled>Seleccione una categoría</ng-option>
+                <ng-option *ngFor="let op of categorias" [value]="op.valor">{{ op.descripcion }}</ng-option>
+            </ng-select>
+        </app-cc-input-group-prepend>
+    </div>
+    <div class="col-12 col-md-6 pt-0 pb-0" *ngIf="!isCategory">
+        <app-cc-input-group-prepend label="Nombre Sub-Categoría" styleSpan="size-span-campo font-weight-bold">
+            <input id="subcategoria" type="text" class="form-control" [(ngModel)]="categoria.descripcion">
+        </app-cc-input-group-prepend>
+    </div>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSpinner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>

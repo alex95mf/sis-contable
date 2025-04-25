@@ -1,0 +1,143 @@
+<div class="">
+    <app-button-radio-active titulo="Facturas" filtroBoton="btnContribuyenteForm" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="row my-2">
+            <div class="col">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row ml-1 mr-1">
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo font-weight-bold">
+                                        <input type="text" class="form-control form-cnotrol-sm"  placeholder="Seleccione un Proveedor" [(ngModel)]="filter.proveedor">
+                                        <!-- <button class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor"  >
+                                            <i class="fas fa-search"></i>
+                                        </button> -->
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="No. Documento" styleSpan="font-weight-bold">
+                                        <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.num_documento" placeholder="No. Documento... ">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <!-- <div class="col">
+                                    <app-cc-input-group-prepend label="Forma de pago" styleSpan="font-weight-bold">
+                                        <input id="filter_codigo" type="text" class="form-control" [(ngModel)]="filter.forma_pago" placeholder="Forma de pago... ">
+                                    </app-cc-input-group-prepend>
+                                </div> -->
+                                <!-- <div class="col">
+                                    <app-cc-input-group-prepend label="Descripcion" styleSpan="font-weight-bold">
+                                        <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="filter.descripcion" placeholder="Descripcion... ">
+                                    </app-cc-input-group-prepend>
+                                </div>                     -->
+                            </div>
+                            <div class="row ml-1 mr-1">
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Fecha Desde" styleSpan="font-weight-bold size-span-campo">
+                                        <input id="filter_fecha_desde" type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="font-weight-bold size-span-campo">
+                                        <input id="filter_fecha_hasta" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="aplicarFiltros()">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th> No. Documento </th>
+                            <th> Proveedor </th>
+                            <!-- <th> Ruc </th> -->
+                            <th> Tipo de pago </th>
+                            <th> Forma de pago </th>
+                            <th>Valor</th>
+                            <th>Total a Pagar</th>
+                            <th>Saldo</th>
+                            <th> Metodo pago </th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!contribuyentesDt.length">
+                            <td colspan="10" class="text-center"><h6>No hay registros que mostrar</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let item of contribuyentesDt, let i = index">
+                            <tr>
+                                <td> {{item.num_doc}} </td>
+                                <!-- <td> {{item.proveedor?.nombre_comercial_prov}}  </td> -->
+                                <td>
+                                    <div class="row ml-2">
+                                      <span>{{item.proveedor?.nombre_comercial_prov}}</span>
+                                    </div>
+                                    <div class="row ml-2">
+                                      <span style="font-size:1em" class="text-muted"><span class="text-muted font-weight-bold"> {{ item.proveedor?.tipo_documento }}</span> : {{ item.proveedor?.num_documento }}</span>
+                                    </div>
+                                  </td>
+                                <!-- <td> {{item.ruc}}  </td> -->
+                                <td> {{item.tipo_pago}}  </td>
+                                <td> {{item.forma_pago}}  </td>
+                               
+                                <td class="text-right">
+                                    $ {{ item.total | number:'1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ item.total_pagar | number:'1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ item.saldo | number:'1.2-2' }}
+                                </td>
+                                <td> {{item?.metodo_pago}}  </td>
+ 
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(item)" placement="left" ngbTooltip="Seleccionar contribuyente">
+                                            <i class="fas fa-hand-pointer"></i>
+                                        </button>
+                                        <!-- <button *ngIf="dt.estado == 'A'" class="btn btn-danger btn-sm ml-1" (click)="deleteArancel(dt.id, i)" placement="top" ngbTooltip="Eliminar arancel">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <button *ngIf="dt.estado == 'I'" class="btn btn-info btn-sm ml-1" (click)="restoreArancel(dt.id, i)" placement="top" ngbTooltip="Restaurar arancel">
+                                            <i class="fas fa-undo"></i>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>                    
+                </div>
+                
+                <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="+(paginate.page)-1"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

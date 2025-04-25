@@ -1,0 +1,74 @@
+
+    <app-button-radio-active-new titulo="Seleccionar Usuario" filtroBoton="btnUsuarioForm" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+
+                    <div class="row m-0">
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Usuario" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="filter.usuario">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="filter.nombre">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="row m-0">
+            <div class="col-12">
+                <table class="table table-striped table-bordered table-k table-hover"> 
+                    <thead>
+                        <tr class="text-center">
+                         
+                            <th style="width: 12.5%;">Usuario</th>
+                            <th style="width: 17.5%;">Nombre</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!usuariosDt.length">
+                            <td colspan="5" class="text-center"><h6>No hay resultados</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let dt of usuariosDt, let i = index">
+                            <tr>
+                                <td class="text-center">{{ dt.usuario }}</td>
+                                <td class="text-center">{{ dt.nombre }}</td>
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar usuario">
+                                            <i class="fas fa-hand-pointer"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>                    
+                </div>
+                
+                <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="+(paginate.page)-1"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active-new>
+
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

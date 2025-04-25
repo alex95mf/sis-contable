@@ -1,0 +1,490 @@
+
+<div class="mt-4">
+    <app-button-radio-active titulo="Consulta de Estado de Cuenta" filtroBoton="btnsContribuyente" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="row mt-3">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend"><span style="width:140px;" class="input-group-text font-weight-bold size-span-campo" style="font-size: 11px;">Contribuyente</span></div>
+                    <input type="text" class="form-control" disabled placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyente_activo.razon_social">
+                    <div class="input-group-append">
+                        <button class="btn btn-info btn-sm" (click)="showContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-3"></div>
+        </div>
+
+        
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Tipo Documento</span>
+                    </div>
+                    <input readonly id="tipo_documento" type="text" class="form-control form-control-sm" placeholder="Tipo de documento" [(ngModel)]="contribuyente_activo.tipo_documento">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">No. Documento</span>
+                    </div>
+                    <input readonly id="num_documento" type="text" class="form-control form-control-sm" placeholder="Número del documento" [(ngModel)]="contribuyente_activo.num_documento">
+                </div>
+            </div>
+            <!-- <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Nombre Contribuyente</span>
+                    </div>
+                    <input readonly id="razon_social" type="text" class="form-control form-control-sm" placeholder="Nombre contribuyente" [(ngModel)]="contribuyente_activo.razon_social">
+                </div>
+            </div> -->
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Teléfono</span>
+                    </div>
+                    <input readonly id="telefono" type="text" class="form-control form-control-sm" placeholder="Teléfono contribuyente" [(ngModel)]="contribuyente_activo.telefono" (keypress)="validaciones.numberOnly($event)">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <!-- <div class="col-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Teléfono</span>
+                    </div>
+                    <input readonly id="telefono" type="text" class="form-control form-control-sm" placeholder="Teléfono contribuyente" [(ngModel)]="contribuyente_activo.telefono" (keypress)="onlyNumber($event)">
+                </div>
+            </div> -->
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Provincia</span>
+                    </div>
+                    <input readonly id="provincia" type="text" class="form-control form-control-sm" placeholder="Provincia contribuyente" [(ngModel)]="contribuyente_activo.provincia">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Ciudad</span>
+                    </div>
+                    <input readonly id="ciudad" type="text" class="form-control form-control-sm" placeholder="Ciudad contribuyente" [(ngModel)]="contribuyente_activo.ciudad">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Dirección</span>
+                    </div>
+                    <input readonly id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección contribuyente" [(ngModel)]="contribuyente_activo.direccion">
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row mb-3">
+            <div class="col-12">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Dirección</span>
+                    </div>
+                    <input readonly id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección contribuyente" [(ngModel)]="contribuyente_activo.direccion">
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <h5>Deudas</h5> -->
+
+        <div class="row mt-2 mb-1 align-items-center">
+            <div class="col">
+                <h5 class="mb-0 text-dark">Deudas</h5>
+            </div>
+            <div class="col text-right">
+                <button class="btn btn-info btn-sm ml-1" placement="left" ngbTooltip="Recargar deudas"  (click)="recargarDeudas()" [disabled]="!hayContribuyente">
+                    <i class="fas fa-undo"></i>
+                </button>
+                <!-- <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto"  (click)="expandConceptos()" [disabled]="conceptosDisabled || formReadOnly">
+                    <i class="fas fa-plus"></i>
+                </button> -->
+            </div>
+        </div>
+        <fieldset class="border px-2 pb-2" [disabled]="disabledFilter">
+            <legend class="w-auto bg-dark">Filtros</legend>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-otro font-weight-bold">
+                                    <ng-select [disabled]="disabledFilter" [(ngModel)]="filter.concepto"  class="form-control" [clearable]="true">
+                                        <ng-option *ngFor="let tipo of conceptosList" [value]="tipo.id_concepto">{{ tipo.codigo }} - {{ tipo.nombre }}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-otro font-weight-bold">
+                                    <ng-select [disabled]="disabledFilter" [(ngModel)]="filter.estado"  class="form-control" [clearable]="true">
+                                        <ng-option *ngFor="let est of listEstados" [value]="est.value">{{ est.label }} </ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="date" name="" id="" class="form-control" [(ngModel)]="filter.fecha_desde">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="date" name="" id="" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col text-right">
+                        <button class="btn btn-sm btn-primary" (click)="handleFilter()">
+                            <i class="fas fa-search"></i> Consultar
+                        </button>
+                        <button class="btn btn-sm btn-danger ml-1" (click)="resetFilter()">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive" style="max-height: 600px; overflow-y: scroll;">
+                    <table class="table table-striped" style="min-width: 1800px;">
+                        <thead class="thead-dark text-center sticky-header">
+                            <tr>
+                                <th style="width: 50px;">Acción</th>
+                                <th class="text-left col-nombre" style="width: 180px">No. de Documento</th>
+                                <th style="width: 130px;">Fecha</th>
+                                <th style="width: 140px;">Estado</th>
+                                <th style="width: 160px;">Sector</th>
+                                <th style="width: 160px;">Solar</th>
+                                <th style="width: 160px;">Estado Financiero</th>
+                                <th style="width: 180px;">Expediente</th>
+                                <th>Cod. Anterior</th>
+                                <th>Solares</th>
+                                <th>Edificio</th>
+                                <th>Tipo/Solar</th>
+                                <th class="text-right" style="width: 100px;">Valor</th>
+                                <th class="text-right" style="width: 100px;">Inter&eacute;s</th>
+                                <th class="text-right" style="width: 100px;">Multa</th>
+                                <th class="text-right" style="width: 100px;">Descuento</th>
+                                <th class="text-right" style="width: 100px;">Exoneraciones</th>
+                                <th class="text-right" style="width: 100px;">Recargo</th>
+                                <th class="text-right" style="width: 100px;">Coactiva</th>
+                                <th class="text-right" style="width: 100px;">Saldo</th>
+                                <th class="text-center" style="width: 180px;">Usuario</th>
+                                <th class="text-center" style="width: 120px;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-light">
+                            <tr *ngIf="!deudas.length">
+                                <td colspan="22" class="text-center"><h6>No hay deudas registradas</h6></td>
+                            </tr>
+                            <tr *ngFor="let d of deudas">
+                                <!-- <td class="text-center">{{ d.tipo_documento }}</td> -->
+                                <td class="text-center"><input  type="checkbox"  [(ngModel)]="d.Check" (ngModelChange)="calculoChecks()" /></td>
+                                <td class="col-nombre">
+                                    {{ d.concepto?.nombre ?? 'NA' }}<br><small class="text-muted">{{ d.numero_documento }}</small>
+                                </td>
+                                <td class="text-center">{{ d.liquidacion?.fecha ?? d.fecha | date:"yyyy-MM-dd" }}</td>
+                                <!-- <td class="text-center">{{ d.estado }}</td> -->
+                                <td class="text-center">
+                                    <span *ngIf="d.estado == 'E'"><i class="fas fa-circle text-warning"></i> Emitido</span>
+                                    <span *ngIf="d.estado == 'A'"><i class="fas fa-circle text-success"></i> Aprobado</span>
+                                    <span *ngIf="d.estado == 'X'"><i class="fas fa-circle text-danger"></i> Anulado</span>
+                                    <span *ngIf="d.estado == 'C'"><i class="fas fa-circle text-primary"></i> Cancelado</span>
+                                    <span *ngIf="d.estado == 'V'"><i class="fas fa-circle text-info"></i> Convenio</span>
+                                </td>
+                                <td class="text-center">
+                                    {{d.sector}}
+                                </td>
+                                <td class="text-center">
+                                    {{d.solar}}
+                                </td>
+                                <td>
+                                    <div *ngIf="d.liquidacion?.estado_financiero; else sinAsignar">
+                                        <i class="fas fa-scroll" [ngClass]="{ 'text-info': d.liquidacion.estado_financiero == 'NCOB', 'text-warning': d.liquidacion.estado_financiero == 'NCOAC', 'text-danger': d.liquidacion.estado_financiero == 'AUTO' }"></i>
+                                        <span *ngIf="d.liquidacion.estado_financiero == 'NCOB'"> Notificado por Cobranza</span>
+                                        <span *ngIf="d.liquidacion.estado_financiero == 'NCOAC'"> Notificado por Coactiva</span>
+                                        <span *ngIf="d.liquidacion.estado_financiero == 'AUTO'"> Auto de Pago</span>
+                                        <span *ngIf="d.liquidacion.estado_financiero == 'C'"> Cancelado </span>
+                                        <span *ngIf="d.liquidacion.estado_financiero == 'CCONV'"> Convenio </span>
+                                    </div>
+                                    <ng-template #sinAsignar>
+                                        N/A
+                                    </ng-template>
+                                </td>
+                                <td>{{ d.liquidacion?.fk_notificacion?.num_expediente ?? '' }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right">$ {{ d.valor }}</td>
+                                <!-- <td class="text-right">$ {{ d.interes }}</td> -->
+                                <td class="text-right cursor-pointer font-bold" 
+                                    style="text-decoration: underline;  color: #2b94e2; " 
+                                    (click)="consultaDetalleIntereses(d)">
+                                    $ {{ d.interes | number:'1.2-2' }}
+                                </td>
+                                <td class="text-right">$ {{ d.multa }}</td>
+                                <td class="text-right">$ {{ d.descuento }}</td>
+                                <td class="text-right">$ {{ d.exoneraciones }}</td>
+                                <td class="text-right">$ {{ d.recargo }}</td>
+                                <td class="text-right">$ {{ d.coactiva }}</td>
+                                <td class="text-right">
+                                    <span *ngIf="d.tipo_documento!='AN' && d.tipo_documento!='BA'">$ {{ d.saldo }}</span>
+                                    <span *ngIf="d.tipo_documento=='AN' || d.tipo_documento=='BA'" class="text-danger">$ -{{ d.saldo }}</span>
+                                </td>
+                                <td class="text-center">{{ d.usuario?.nombre }}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-warning btn-sm mr-1" (click)="expandDetalleConcepto(d)" placement="left" ngbTooltip="Ver detalle">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-info" placement="left" ngbTooltip="Imprimir" (click)="printTitulo(d)"><i class="far fa-print"></i></button>
+                                </td>
+                                
+                            </tr>
+                            <!-- <tr>
+                                <td colspan="5" class="text-right font-weight-bold">Saldo Total</td>
+                                <td class="text-right">$ {{totalDeudas | number:'1.2-2'}}</td>
+                                <td></td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div>
+
+        </div>
+
+        <div class="row mt-2 mb-4 justify-content-end">
+            <div class="col-6">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Saldo Total</span></div>
+                    <input id="total" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalDeudas | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2 mb-4 justify-content-end">
+            <div class="col-6">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 210px;">Saldo Convenio</span></div>
+                    <input type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ saldo_convenio | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2 mb-4 justify-content-end">
+            <div class="col-6">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 180px;">Valor a pagar </span></div>
+                    <input id="total" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalDeudasCheck | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-3 justify-content-end">
+            <div class="col-6">
+                <details open>
+                    <summary><span class="h3">Desglose de Valores</span></summary>
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Valor (+)" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control text-right" value="$ {{desglose.valor | number:'1.2-2'}}">
+                            </app-cc-input-group-prepend>
+                            <app-cc-input-group-prepend label="Interes (+)" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control text-right" value="$ {{desglose.interes | number:'1.2-2'}}">
+                            </app-cc-input-group-prepend>
+                            <app-cc-input-group-prepend label="Multa (+)" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control text-right" [placeholder]="desglose.multa" value="$ {{desglose.multa | number:'1.2-2'}}">
+                            </app-cc-input-group-prepend>
+                            <app-cc-input-group-prepend label="Descuento (-)" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control text-right" [placeholder]="desglose.descuento" value="$ {{desglose.descuento | number:'1.2-2'}}">
+                            </app-cc-input-group-prepend>
+                            <app-cc-input-group-prepend label="Exoneraciones (-)" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control text-right" [placeholder]="desglose.exoneraciones" value="$ {{desglose.exoneraciones | number:'1.2-2'}}">
+                            </app-cc-input-group-prepend>
+                            <app-cc-input-group-prepend label="Recargo (+)" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control text-right" [placeholder]="desglose.recargo" value="$ {{desglose.recargo | number:'1.2-2'}}">
+                            </app-cc-input-group-prepend>
+                            <app-cc-input-group-prepend label="Coactiva (+)" styleSpan="size-span-campo font-weight-bold" >
+                                <input type="text" class="form-control text-right" [placeholder]="desglose.coactiva" value="$ {{desglose.coactiva | number:'1.2-2'}}">
+                            </app-cc-input-group-prepend>
+                            <app-cc-input-group-prepend label="Saldo (=)" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control text-right" [placeholder]="desglose.saldo" value="$ {{desglose.saldo | number:'1.2-2'}}">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+    </app-button-radio-active>
+</div>
+
+
+<div [hidden]="true" id="Printsection">
+    <div class="row justify-content-center  prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Reporte de Deudas del Contribuyente</h3>
+                                <p>{{ contribuyente.razon_social }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div>
+    <div class="row mt-3">
+        <div class="col-6">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Tipo Doc.</span>
+                </div>
+                <input readonly id="tipo_documento" type="text" class="form-control form-control-sm" placeholder="Tipo de documento" [(ngModel)]="contribuyente.tipo_documento">
+
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">No. Documento</span>
+                </div>
+                <input readonly id="num_documento" type="text" class="form-control form-control-sm" placeholder="Número del documento" [(ngModel)]="contribuyente.num_documento">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Nombre Contribuyente</span>
+                </div>
+                <input readonly id="razon_social" type="text" class="form-control form-control-sm" placeholder="Nombre contribuyente" [(ngModel)]="contribuyente.razon_social">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Teléfono</span>
+                </div>
+                <input readonly id="telefono" type="text" class="form-control form-control-sm" placeholder="Teléfono contribuyente" [(ngModel)]="contribuyente.telefono" (keypress)="validaciones.numberOnly($event)">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Provincia</span>
+                </div>
+                <input readonly id="provincia" type="text" class="form-control form-control-sm" placeholder="Provincia contribuyente" [(ngModel)]="contribuyente.provincia">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Ciudad</span>
+                </div>
+                <input readonly id="ciudad" type="text" class="form-control form-control-sm" placeholder="Ciudad contribuyente" [(ngModel)]="contribuyente.ciudad">
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Dirección</span>
+                </div>
+                <input readonly id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección contribuyente" [(ngModel)]="contribuyente.direccion">
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="col-md-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-12 text-center">
+                    <div class="table-responsive responsive-table">
+                        <table class="table">
+                            <thead>
+                                <tr style="width: 100%">
+                                    <th style="width: 10%;">Concepto</th>
+                                    <th class="text-left" style="width: 25%">No. de Documento</th>
+                                    <th style="width: 15%;">Fecha</th>
+                                    <th style="width: 10%;">Estado</th>
+                                    <th class="text-right" style="width: 20%;">Valor</th>
+                                    <th class="text-right" style="width: 20%;">Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-light">
+                                <tr *ngIf="!deudas.length">
+                                    <td colspan="6" class="text-center"><h6>No hay deudas registradas</h6></td>
+                                </tr>
+                                <ng-container *ngFor="let d of deudas">
+                                    <tr *ngIf="d.estado == 'A'">
+                                        <td class="text-center">{{ d.tipo_documento }}</td>
+                                        <td class="text-left">{{ d.numero_documento }}</td>
+                                        <td class="text-center">{{ d.fecha }}</td>
+                                        <td class="text-center">{{ d.estado }}</td>
+                                        <td class="text-right">$ {{ d.valor }}</td>
+                                        <td class="text-right">$ {{ d.saldo }}</td>
+                                    </tr>
+                                </ng-container>
+                                <tr>
+                                    <td colspan="5" class="text-right font-weight-bold">Saldo Total</td>
+                                    <td class="text-right">$ {{totalDeudas | number:'1.2-2'}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="6">&nbsp;</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+0            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed; bottom: 0px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Fecha: {{ fecha }}</span>
+        </div>
+        <div *ngIf="dataUser" class="col-12 text-left" style="position: fixed; bottom: 20px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Usuario: {{ dataUser.nombre }}</span>
+        </div>
+    </div>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spContribuyente"></cc-spiner-procesar>

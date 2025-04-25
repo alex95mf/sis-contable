@@ -1,0 +1,58 @@
+/*@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+    font-family: "Poppins1";
+    src: url('../../../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "PoppinsTourney";
+    src: url("../../../../../assets/fonts/Tourney-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+h5 {
+    color: black;
+}
+
+:host ::ng-deep .mat-expansion-panel {
+    //padding: 10px 0;
+    
+    background-color: #f0f3f5!important;
+    //color: #495057!important;
+
+    .mat-expansion-panel-header {
+        background-color: grey;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        position: relative;
+
+        .mat-expansion-panel-header-title {
+            margin-left: 15px;
+        }
+
+        input {
+            position: absolute;
+            left: 15px;
+            top: 13px
+        }
+    }
+
+    .mat-expansion-panel-header.mat-expanded{
+        background-color: #0277BD;
+    }
+
+    .mat-expansion-panel-header:hover {
+        background-color: #295bac!important;
+    }
+
+    .cdk-focused.cdk-mouse-focused {
+        background-color: #295bac;
+    }
+
+    {
+        color: #495057!important;
+
+        *::after {
+            color: #495057!important;
+        }
+    }
+}*/

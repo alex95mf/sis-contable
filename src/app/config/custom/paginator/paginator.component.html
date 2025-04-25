@@ -1,0 +1,9 @@
+
+<div class="inline_box" align="right">
+  <!-- <mat-form-field class="example-full-width">
+    <input matInput placeholder="Ingrese # de Página" [(ngModel)]="manualPage" (ngModelChange)="updateManualPage($event)">
+  </mat-form-field>
+
+  <label class="inline_box"> P&aacute;gina actual: {{currentPage}} </label> -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 75, 100]" [pageSize]="pageSize" [showFirstLastButtons]="true" (change)="reloadNewData()" class="inline_box"></mat-paginator>
+</div>

@@ -1,0 +1,105 @@
+<div class="mt-2">
+    <app-button-radio-active titulo="Compras Publicas - Lista de Solicitudes" cstyle="bg-light text-dark" icono="fas fa-tasks" filtroBoton="btnsComprasP" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="col">
+            <!-- <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+
+                        <input [(ngModel)]="detalles.programa" class="form-control" readonly/>
+            
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+                <div class="col-6">
+
+                    <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+
+                        <input [(ngModel)]="detalles.departamento" class="form-control" readonly/>
+            
+                    </app-cc-input-group-prepend>
+
+                </div>
+                
+        
+                
+
+            </div> -->
+
+            <!-- <app-cc-input-group-prepend label="Atribucion" styleSpan="size-span-campo font-weight-bold">
+
+                <input [(ngModel)]="detalles.atribucion" class="form-control" readonly/>
+    
+            </app-cc-input-group-prepend> -->
+
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Asigna" styleSpan="size-span-campo font-weight-bold">
+
+                        <input [(ngModel)]="detalles.asignacion" class="form-control" readonly/>
+            
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+                <div class="col-6">
+
+                    <app-cc-input-group-prepend label="Tipo Proceso" styleSpan="size-span-campo font-weight-bold">
+
+                        <input [(ngModel)]="detalles.proceso" class="form-control" readonly/>
+            
+                    </app-cc-input-group-prepend>
+
+                </div>
+                
+        
+                
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    <app-anexos-list-dis [dataUser]="dataUser" [permissions]="permissions" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+                  </div>
+            </div>
+
+        </div>
+
+        <div class="m-2" style="overflow: scroll;height: 300px;">
+            <table class="table table-hover mt-2">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center">Descripcion</th>
+                        <th class="text-center">Programa</th>
+                        <th class="text-center">Departamento</th>
+                        <th class="text-center">Atribucion</th>
+                        <th class="text-center">Cantidad Solicitada</th>
+                        <th class="text-center">Cantidad Requerida</th>
+                        <th class="text-center">Precio Cotizado</th>
+
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngIf="!listaSolicitudes.length">
+                        <td colspan="7" class="text-center">
+                            <h6>No hay Solicitudes que mostrar</h6>
+                        </td>
+
+                    </tr>
+                    <tr *ngFor="let item of listaSolicitudes">
+                        <td class="text-center">{{item.descripcion}}</td>
+                        <td class="text-center">{{item.catalogo_departamento?.valor}}</td>                        
+                        <td class="text-center">{{item.catalogo_programa?.valor}}</td>
+                        <td class="text-center">{{item.catalogo?.catalogo?.valor}}</td>
+                        <td class="text-center">{{item.cantidad_solicitada}}</td>
+                        <td class="text-center">{{item.cantidad_requerida}}</td>
+                        <td class="text-center">$ {{item.precio_cotizado | number: '1.2-2' }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </app-button-radio-active>
+</div>

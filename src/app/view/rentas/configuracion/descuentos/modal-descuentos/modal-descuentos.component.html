@@ -1,0 +1,39 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light" icono="fas fa-cogs"
+    filtroBoton="btnsNotificacionesModal" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="registro.periodo" [clearable]="false"
+                    [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="registro.mes" [clearable]="false" (change)="handleSelectMes($event)"
+                [items]="cmb_meses" bindValue="value" bindLabel="label"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="registro.codigo_concepto" [clearable]="false"
+                [items]="cmb_concepto" bindValue="codigo" bindLabel="nombre"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Dia Desde" styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask [options]="{prefix: '', nullable: false, precision: 0}" [(ngModel)]="registro.desde" class="form-control">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Dia Hasta" styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask [options]="{prefix: '', nullable: false, precision: 0}" [(ngModel)]="registro.hasta" class="form-control">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Porcentaje" styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask [options]="{prefix: '', suffix: '%', nullable: false}" [(ngModel)]="registro.porcentaje" class="form-control">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spOtrasConfiguracionesModal"></cc-spiner-procesar>

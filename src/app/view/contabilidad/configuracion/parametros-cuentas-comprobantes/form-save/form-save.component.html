@@ -1,0 +1,62 @@
+<app-button-radio-active [titulo]="isNew ? 'Nuevos Parámetros' : 'Editar Parámetros'" filtroBoton="btnRetForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+    <div class="row mt-1 mb-1">
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Código" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="parametro.codigo_comprobante" maxlength="5">
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="parametro.descripcion_comprobante" maxlength="100">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row mt-1 mb-1">
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Cuenta" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly  [(ngModel)]="parametro.codigo_cuenta" placeholder="" maxlength="50">
+                <button class="btn btn-primary btn-sm" (click)="modalCuentas('1')" > Consultar</button>
+                <!-- <datalist id="lst_ctas_deudoras">
+                    <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                </datalist> -->
+            </app-cc-input-group-prepend>
+        </div>
+        <!-- evento: '',
+        descripcion_evento: '',
+        estado:'', -->
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Nombre cuenta" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="parametro.nombre_cuenta" type="text" readonly/>
+            </app-cc-input-group-prepend>
+        </div>
+       
+
+    </div>
+    <div class="row mt-1 mb-1">
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Clase" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="parametro.clase" maxlength="25">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Evento" styleSpan="size-span-otro font-weight-bold">
+                <ng-select class="form-control" [markFirst]="false" [clearable]="false" [(ngModel)]="eventoSelected"
+                    [items]="eventosContables" bindValue="id_evento" bindLabel="descripcion_evento" (change)="handleEventoSelected($event)"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row mt-1 mb-1">
+         <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="parametro.estado">
+                    <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                    <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

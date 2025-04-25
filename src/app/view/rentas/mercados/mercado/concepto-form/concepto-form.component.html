@@ -1,0 +1,72 @@
+
+
+<app-button-radio-active [titulo]="isNew ? 'Nuevo Mercado' : 'Editar Mercado'" filtroBoton="btnConceptoForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="mercado.nombre" maxlength="100">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Tipo mercado" styleSpan="size-span-campo font-weight-bold">
+                <!-- <input type="text" class="form-control" [(ngModel)]="mercado.tipo_mercado" maxlength="120" placeholder="Tipo mercado... "> -->
+                <ng-select class="form-control" [(ngModel)]="mercado.tipo_mercado">
+                    <ng-option disabled> Escoger... </ng-option>
+                    <ng-option *ngFor="let item of tipo_mercado" [value]="item.value">{{item.label}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Direccion" styleSpan="size-span-campo font-weight-bold">
+                <input list="form-control" type="text" class="form-control custom-select"   [(ngModel)]="mercado.direccion"  placeholder="Direccion... " maxlength="100">
+                
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Mercado" styleSpan="size-span-campo font-weight-bold">
+                <!-- <input type="text" class="form-control" [(ngModel)]="mercado.tipo_mercado" maxlength="120" placeholder="Tipo mercado... "> -->
+                <ng-select class="form-control" [(ngModel)]="mercado.fk_mercado">
+                    <ng-option disabled> Escoger... </ng-option>
+                    <ng-option *ngFor="let item of mercado_cat" [value]="item.id" >{{item.label}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Administrador" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="mercado.administrador" type="text" />
+                
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Cantidad puestos" styleSpan="size-span-campo font-weight-bold">
+                <input list="lst_ctas_acreedoras" type="text" class="form-control custom-select"  [(ngModel)]="mercado.cantidad_puestos"  placeholder="Cantidad puestos... " maxlength="15">
+                
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Cantidad puestos ocupados" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="mercado.cantidad_puestos_ocupados" type="text" placeholder="Cantidad puestos ocupados... "/>
+                
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Cantidad puestos disponibles" styleSpan="size-span-campo font-weight-bold">
+                <input list="lst_ctas_presupuesto" type="text" class="form-control custom-select"   [(ngModel)]="mercado.cantidad_puestos_disponibles"  placeholder="Cantidad puestis disponibles... " maxlength="15">
+                
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="mercado.estado">
+                    <ng-option disabled >Escoger... </ng-option>
+                    <ng-option *ngFor="let item of estado" [value]="item.valor">{{item.descripcion}}</ng-option>
+                </ng-select>
+
+                
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+</app-button-radio-active>
+
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

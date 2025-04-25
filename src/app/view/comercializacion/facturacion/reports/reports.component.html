@@ -1,0 +1,191 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Aprobaciones pendientes" filtroBoton="btnsAprobaciones"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-check">
+        <div class="row mt-2">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha desde" styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control" name="dateFrom"
+                        format='yyyy-MM-dd' (ngModelChange)="rerender()">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha hasta" styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control" name="dateFrom" format='yyyy-MM-dd'
+                        (ngModelChange)="rerender()">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo de Documento</span>
+                    </div>
+                    <select id="typ_doc" class="form-control form-control-sm" [(ngModel)]="docFilter"
+                        (ngModelChange)="reportsChange($event)">
+                        <option *ngFor="let d of typeDocs" [value]="d.name">
+                            {{ d.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5 mb-3">
+            <div class="col-12 container filters">
+                <div class="content-table">
+                    <div class="table-responsive">
+                        <table datatable id="tablaAprobaciones" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                            class="table table-sm no-footer table-hover">
+                            <thead class="thead-dark">
+                                <tr style="width: 100%;">
+                                    <th style="width: 8%;">No. Doc</th>
+                                    <th style="width: 22%;">Cliente</th>
+                                    <th style="width: 23%;">Motivo solicitud</th>
+                                    <th style="width: 8%;">Creado</th>
+                                    <th style="width: 12%;">Generado</th>
+                                    <th style="width: 8%;">Estado</th>
+                                    <th style="width: 6%;">Total</th>
+                                    <th style="width: 13%;text-align: center;padding-right: 0px !important;">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="processingQuotes">
+                                <tr class="text-justify" *ngFor="let dt of quotes; let idx = index">
+                                    <td *ngIf=" docFilter == 'Cotización' ">{{ dt.secuence.toString().padStart(10, '0') }}</td>
+                                    <td *ngIf=" docFilter == 'Facturación' ">{{ dt.doc_auth }}</td>
+                                    <td *ngIf=" docFilter == 'Devoluciones' ">{{ dt.doc_auth }}</td>
+                                    <td>{{ dt.client.razon_social }}</td>
+                                    <td *ngIf="dt.mot_notif_aprob == undefined">
+                                            Notificación:
+                                    </td>
+                                    <td *ngIf="dt.mot_notif_aprob != undefined"><!-- matTooltip="{{dt.mot_aprobated}}" -->
+                                        {{ dt.mot_notif_aprob }}
+                                    </td>
+                                    <td>{{ dt.created_at }}</td>
+                                    <td>{{ dt.creator.nombre }}</td>
+                                    <td>{{ dt.status }}</td>
+                                    <td class="text-right">$ {{ commonServices.formatNumber(dt.total) }}</td>
+                                    <td class="text-center">
+                                        <!-- Buttons Reports Quotes -->
+                                        <button type="button" (click)="nexStatus(dt)" class="btn btn-sm"
+                                            *ngIf="docFilter === 'Cotización'"
+                                            style="background-color: #404A63; color: white; border-radius: 10px"
+                                            [disabled]="dt.filter_doc == last_status" placement="left"
+                                            ngbTooltip="Aprobar cotización">
+                                            <i class="fa fa-check-square-o"></i>
+                                        </button>
+                                        <button type="button" (click)="previewQuote(idx, 1)" class="btn btn-sm"
+                                            *ngIf="docFilter === 'Cotización'"
+                                            style="background-color: #0F6BA4; color: white; border-radius: 10px"
+                                            [disabled]="dt.filter_doc == last_status" placement="left"
+                                            ngbTooltip="Modificar cotización">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </button>
+                                        <button type="button" (click)="previewQuote(idx, 2)" class="btn btn-sm"
+                                            *ngIf="docFilter === 'Cotización'"
+                                            style="background-color: #F39800; color: white; border-radius: 10px"
+                                            placement="left" ngbTooltip="Duplicar cotización">
+                                            <i class="fa fa-clone" aria-hidden="true"></i>
+                                        </button>
+                                        <!-- Buttons Reports Sales -->
+                                        <button type="button" (click)="nexStatusFacture(dt)" class="btn btn-sm"
+                                            *ngIf="docFilter === 'Facturación'"
+                                            style="background-color: #404A63; color: white; border-radius: 10px"
+                                            [disabled]="dt.filter_doc == last_status" placement="left"
+                                            ngbTooltip="Aprobar Factura">
+                                            <i class="fa fa-check-square-o"></i>
+                                        </button>
+                                        <button type="button" (click)="deleteFacture(idx)" class="btn btn-sm"
+                                            *ngIf="docFilter === 'Facturación'"
+                                            style="background-color: #F39800; color: white; border-radius: 10px"
+                                            [disabled]="dt.filter_doc == last_status" placement="left"
+                                            ngbTooltip="Eliminar Factura">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        <!-- Buttons Devoluciones -->
+                                        <button type="button" (click)="nexStatusDoc(dt, 25)" class="btn btn-sm"
+                                            *ngIf="docFilter === 'Devoluciones'"
+                                            style="background-color: #404A63; color: white; border-radius: 10px"
+                                            [disabled]="dt.filter_doc == last_status" placement="left"
+                                            ngbTooltip="Aprobar Devolución">
+                                            <i class="fa fa-check-square-o"></i>
+                                        </button>
+                                        <button type="button" (click)="showDevolucion(idx, dt)" class="btn btn-sm"
+                                            *ngIf="docFilter === 'Devoluciones'"
+                                            style="background-color: #2af300; color: white; border-radius: 10px"
+                                            placement="left" ngbTooltip="Ver detalle">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                        <button type="button" (click)="cancelDoc(dt, 25)" class="btn btn-sm"
+                                            *ngIf="docFilter === 'Devoluciones'"
+                                            style="background-color: #F00000; color: white; border-radius: 10px"
+                                            [disabled]="dt.filter_doc == last_status" placement="left"
+                                            ngbTooltip="Cancelar Devolución">
+                                            <i class="fas fa-window-close"></i>
+                                        </button>
+                                        <!-- Buttons Commons Cotizacion/Facturacion -->
+                                        <!-- <button type="button" (click)="exportPDF(idx)" class="btn btn-sm"
+                                            *ngIf="docFilter === 'Cotización' || docFilter === 'Facturación'"
+                                            style="background-color: #F00000; color: white; border-radius: 10px"
+                                            placement="left" ngbTooltip="Exportar documento">
+                                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                        </button> -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+
+<div class="modal fade" id="cancelFactureModal" tabindex="-1" role="dialog" aria-labelledby="cancelFactureModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="font-family: 'Poppins1';">
+            <div class="card border-0" style="font-size: 11px;background-color: rgb(255 255 255 / 73%);">
+                <div class="card-header">
+                    <table width="100%">
+                        <tr>
+                            <td class="text-left">
+                                <div class="card-title text-left title_h5 text-uppercase">
+                                    <strong>Eliminación de Factura</strong>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <div>
+                                        <button type="button" class="btn btn-danger btn-xs button_margin"
+                                            (click)="closeModal()">Cancelar</button>
+                                        <button type="button" class="btn btn-primary btn-xs button_margin"
+                                            (click)="validateDelete()">Aceptar</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Descripción</span>
+                                </div>
+                                <textarea id="descriptionDeletedModal" cols="30" rows="2"
+                                    class="form-control form-control-sm" [(ngModel)]="descriptionDeleted"
+                                    placeholder="Ingrese Descripción" style="box-shadow: unset;outline: unset;">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="sAprobaciones"></cc-spiner-procesar>

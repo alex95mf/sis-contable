@@ -1,0 +1,191 @@
+<div class="my-2">
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-money-check-edit-alt" filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row mt-2 mb-2">
+        <div class="col-sm-3">
+            <app-cc-input-group-prepend label="ID" styleSpan="size-span-print">
+                <input currencyMask [options]="{prefix: '', precision: 0, nullable: true}" class="form-control" [(ngModel)]="lastRecord" (keypress)="handleEnter($event)">
+                <div class="input-group-append">
+                    <button class="btn btn-action" (click)="getPrevRecord()" matTooltip="Registro Anterior" [disabled]="lastRecord == null">
+                        <i class="far fa-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-action" (click)="getNextRecord()" matTooltip="Registro Siguiente" [disabled]="lastRecord == null">
+                        <i class="far fa-chevron-right"></i>
+                    </button>
+                    <button class="btn btn-action" (click)="getLatest()" matTooltip="Ultimo Registro">
+                        <i class="far fa-chevron-double-right"></i>
+                    </button>
+                </div>
+            </app-cc-input-group-prepend>
+            <!-- <app-cc-input-group-prepend label="ID" styleSpan="font-weight-bold">
+                <input currencyMask [options]="{prefix: '', precision: 0, nullable: true}" class="form-control" [(ngModel)]="lastRecord" (keypress)="handleEnter($event)">
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-primary" (click)="getPrevRecord()" matTooltip="Registro Anterior" [disabled]="lastRecord == null">
+                        <i class="far fa-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary" (click)="getNextRecord()" matTooltip="Registro Siguiente" [disabled]="lastRecord == null">
+                        <i class="far fa-chevron-right"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary" (click)="getLatest()" matTooltip="Ultimo Registro">
+                        <i class="far fa-chevron-double-right"></i>
+                    </button>
+                </div>
+            </app-cc-input-group-prepend> -->
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text size-span-campo">No.
+                        Documento</span></div>
+                <input type="text" class="form-control form-control-sm" readonly placeholder="No. Documento" [(ngModel)]="documento.documento">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text size-span-campo">Fecha</span></div>
+                <input  type="date" class="form-control form-control-sm" [(ngModel)]="documento.fecha" [disabled]="multasDisabled" max="2050-01-01" >
+            </div>
+        </div>
+            
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text size-span-campo">Estado</span></div>
+                <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                        <i placement="bottom" [ngbTooltip]="(estado == 'P') ? 'Pendiente' : (estado == 'E') ? 'Emitido' : ((estado == 'A') ? 'Anulado' : 'Pendiente')" [class]="(estado == 'P') ? 'fas fa-circle text-muted' : (estado == 'E') ? 'fas fa-circle text-warning' : (estado == 'A') ? 'fas fa-circle text-success' : ((estado == 'N') ? 'fas fa-circle text-danger' :  'fas fa-circle text-muted')">
+                    </i> 
+                    {{ (estado == 'P') ? 'Pendiente' : (estado == 'E') ? 'Emitido' :
+                    (estado == 'A') ? 'Anulado' : ((estado == 'N') ? 'Negado' : 'Pendiente') }} 
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mb-2">
+        <div class="col-sm-4" >
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">Proveedores</span></div>
+                <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Proveedor" (click)="expandListProveedores()" [value]="proveedorActive.razon_social">
+                <button [disabled]="multasDisabled" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Tipo
+                        de Proceso</span>
+                </div>
+                <ng-select id="tipo_proceso" class="form-control form-control-sm"  (change)="tipoSelected($event)" [(ngModel)]="documento.tipo_proceso" maxlength="5" [disabled]="multasDisabled || habilitarTipoProceso">
+                    <ng-option disabled [value]="0">Seleccione un tipo</ng-option>
+                    <ng-option *ngFor="let op of tipoProceso" [value]="op.label" >
+                        {{ op.label }}</ng-option>
+                </ng-select>
+            </div>
+        </div>
+    </div>
+    
+    <div  class="row mb-2">
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">No.
+                        Proceso</span></div>
+                <input type="text" class="form-control form-control-sm"  readonly  maxlength="20" placeholder="No. Proceso"  [(ngModel)]="documento.nro_proceso" >
+                <button [disabled]="multasDisabled || habilitarProceso"  class="btn btn-primary btn-sm" ngbTooltip="Buscar solicitudes" (click)="modalSolicitud()"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Nombre
+                        Proceso</span></div>
+                <input type="text" class="form-control form-control-sm" readonly  maxlength="200" placeholder="Nombre Proceso"  [(ngModel)]="documento.nombre_proceso" >
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Monto
+                        Proceso</span></div>
+                <input type="text" class="form-control form-control-sm" readonly  maxlength="17" placeholder="Monto Proceso" (keypress)="validaciones.numberOnlyDot($event)" [(ngModel)]="documento.monto_proceso" [disabled]="multasDisabled">
+            </div>
+        </div>
+    </div>
+
+    <div  class="row mb-2">
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">No. P&oacute;liza</span></div>
+                <input type="text" class="form-control form-control-sm" readonly  maxlength="20" placeholder="No. P&oacute;liza" [(ngModel)]="documento.nro_poliza">
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Vigencia P&oacute;liza</span></div>
+                <input type="date" class="form-control form-control-sm" readonly  placeholder="Vigencia P&oacute;liza" [(ngModel)]="documento.vigencia_poliza">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">IDP</span></div>
+                <input type="text" class="form-control form-control-sm" readonly  maxlength="20" placeholder="IDP" [(ngModel)]="documento.idp">
+            </div>
+        </div>
+
+        <!-- <div class="col-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Tipo
+                        Desembolso</span>
+                </div>
+                <ng-select id="estado" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="documento.tipo_desembolso" maxlength="5">
+                    <ng-option disabled [value]="0">Seleccione un tipo</ng-option>
+                    <ng-option *ngFor="let op of tipoDesembolso" [value]="op.valor">
+                        {{ op.descripcion }}</ng-option>
+                </ng-select>
+            </div>
+        </div> -->
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Codigo cuenta contable" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control"  type="text" readonly [(ngModel)]="codigo_cuenta"/>
+                <button class="btn btn-primary btn-sm" (click)="modalCuentaContable()" [disabled]="multasDisabled" > Consultar</button>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Nombre cuenta contable" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control"  type="text"  [(ngModel)]="nombre_cuenta" readonly/>
+                
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <!-- <div class="row my-2 justify-content-end">
+        <div class="col-sm-6">
+            <div class="input-group input-group-lg input-group-total">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Valor a pagar</span></div>
+                <input currencyMask id="pagoTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" [(ngModel)]="documento.total"  [disabled]="multasDisabled">
+            </div>
+        </div>
+    </div> -->
+   
+    <div class="row m-0 my-2 justify-content-end">
+        <div class="col-12 col-md-5 py-0">
+            <div class="input-group input-group-lg input-group-total">
+                <div class="input-group-prepend">
+                    <span class="label-saldo">Valor a pagar</span>
+                </div>
+                <input currencyMask id="pagoTotal" class="form-control form-control-lg font-weight-bold"
+                [(ngModel)]="documento.total"  [disabled]="multasDisabled">
+            </div>
+        </div>
+    </div>
+
+</app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renLiqAnulacion"></cc-spiner-procesar>

@@ -1,0 +1,78 @@
+<!--<p-table [value]="ListaAtsRetenciones" [scrollable]="true" scrollHeight="400px">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="min-width:50px">AÑO</th>
+            <th style="min-width:50px">MES</th>
+            <th style="min-width:50px">NÚMERO DE COMPRAS</th>
+            <th style="min-width:100px">SECUENCIA DOC. PROVEEDOR</th>
+            <th style="min-width:200px">CÓDIGO SRI</th>
+            <th style="min-width:80px">BASE</th>
+            <th style="min-width:100px">PORCENTAJE</th>
+            <th style="min-width:100px">VALOR RETENCIÓN</th>
+            <th style="min-width:80px">COMPROBANTE RETENCIÓN</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+        <tr>
+            <td>{{ item.anio }}</td>
+            <td>{{ item.mes }}</td>
+            <td>{{ item.documento_proveedor }}</td>
+            <td>{{ item.secuencia_doc_proveedor }}</td>
+            <td>{{ item.codigo_sri }}</td>
+            <td class="text-right">{{ ChangeDecimal(item.base) }}</td>
+            <td class="text-right">{{ ChangeDecimal(item.porcentaje_retencion) }}</td>
+            <td class="text-right">{{ ChangeDecimal(item.valor_retencion) }}</td>
+            <td class="text-right">{{ item.comprobante_retencion }}</td>
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td class="EmptyTable" [attr.colspan]="9">
+                No hay información para mostrar
+             </td>
+        </tr>
+    </ng-template>
+</p-table>-->
+
+
+
+<div class="row mb-2">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-bordered no-footer table-hover mb-0">
+                
+                <thead class="thead-dark">
+                    <tr style="font-size: 12px;">
+                        <th style="min-width:50px">Año</th>
+                        <th style="min-width:50px">Mes</th>
+                        <th style="min-width:50px">Número de Compras</th>
+                        <th style="min-width:100px">Secuencia Doc. Proveedor</th>
+                        <th style="min-width:200px">Código SRI</th>
+                        <th style="min-width:80px">Base</th>
+                        <th style="min-width:100px">Porcentaje</th>
+                        <th style="min-width:100px">Valor Retención</th>
+                        <th style="min-width:80px">Comprobante Retención</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of ListaAtsRetenciones, let i = index">
+                        <tr style="font-size: 11px;">
+                            <td>{{ item.anio }}</td>
+                            <td>{{ item.mes }}</td>
+                            <td>{{ item.documento_proveedor }}</td>
+                            <td>{{ item.secuencia_doc_proveedor }}</td>
+                            <td>{{ item.codigo_sri }}</td>
+                            <td class="text-right">{{ ChangeDecimal(item.base) }}</td>
+                            <td class="text-right">{{ ChangeDecimal(item.porcentaje_retencion) }}</td>
+                            <td class="text-right">{{ ChangeDecimal(item.valor_retencion) }}</td>
+                            <td class="text-right">{{ item.comprobante_retencion }}</td>
+                            
+                        </tr>                       
+                    </ng-container>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

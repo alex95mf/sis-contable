@@ -1,0 +1,60 @@
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="periodoSelected"
+                    [items]="lst_periodos" bindValue="periodo" bindLabel="periodo"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="mesSelected" (change)="handleMesChange($event)"
+                    [items]="lst_meses" bindValue="id_catalogo" bindLabel="cat_nombre"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Biometrico" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="biometricoSelected" (change)="handleBiometricoChange($event)"
+                    [items]="lst_biometrico" bindValue="id_catalogo" bindLabel="descripcion"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Archivo" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" readonly class="form-control" [ngModel]="fileName">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" (click)="resetInput()">
+                        <i class="far fa-file-alt"></i> SELECCIONAR
+                    </button>
+                    <button class="btn btn-success" (click)="uploadFile()">
+                        <i class="far fa-upload"></i> CARGAR
+                    </button>
+                    <input type="file" class="d-none" (change)="handleInputFile($event)" #inputFile>
+                </div>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p-table [values]="tbl_marcaciones" [scrollable]="true" scrollHeight="600px">
+                <ng-template pTemplate="header">
+                    <tr style="font-size: 0.75rem;">
+                        <th style="min-width:200px">Empleado</th>
+                        <th style="min-width:200px">Biometrico</th>
+                        <th style="min-width:200px">Fecha</th>
+                        <th style="min-width:150px">Entrada</th>
+                        <th style="min-width:150px">Salida</th>
+                        <th style="min-width:400px;">Observaciones</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td class="EmptyTable" [attr.colspan]="5">
+                            No hay información para mostrar
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</section>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spBiometricos"></cc-spiner-procesar>

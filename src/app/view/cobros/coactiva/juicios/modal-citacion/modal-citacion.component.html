@@ -1,0 +1,54 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light" icono="fas fa-envelope"
+    filtroBoton="btnsJuicioCitacion" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row mt-2">
+        <div class="col">
+            <app-cc-input-group-prepend label="Juicio" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [value]="juicio.num_proceso">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [value]="juicio.fk_contribuyente.razon_social">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [value]="juicio.created_at">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <hr>
+    <div class="row mb-2">
+        <div class="col">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [items]="estados" [markFirst]="false" [clearable]="false" bindValue="id" bindLabel="label" [(ngModel)]="actuacion.estado_c"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Fecha de Recepción" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" [(ngModel)]="actuacion.fecha">
+              </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col">
+            <app-cc-input-group-prepend label="Persona que recibe" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="actuacion.persona" placeholder="Ingrese la persona que recibe">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col">
+            <app-cc-input-group-prepend label="Notificador" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [items]="notificadores" bindValue="value" bindLabel="label" [(ngModel)]="actuacion.notificador" [markFirst]="false"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-8">
+            <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold bg-dark">
+                <textarea rows="3" class="form-control" [(ngModel)]="actuacion.observacion"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spJuiciosCitacion"></cc-spiner-procesar>

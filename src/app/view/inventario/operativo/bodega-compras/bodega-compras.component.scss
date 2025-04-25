@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+    font-family: "Poppins1";
+    src: url("../../../../../assets/fonts/Montserrat-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "PoppinsTourney";
+    src: url("../../../../../assets/fonts/Tourney-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+span,
+label {
+    font-weight: bold !important;
+    font-size: 11px !important;
+}
+
+textarea,
+input,
+select {
+    font-size: 10px !important;
+    font-family: "Poppins1" !important;
+}
+
+.filters {
+    background-color: white;
+    table {
+        thead {
+            tr {
+                th {
+                    padding: 6px 0px 8px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    border: none !important;
+                    font-size: 11px !important;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    padding: 5px 10px 5px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    border: none !important;
+                    font-size: 11px !important;
+                    font-weight: bold !important;
+                }
+            }
+        }
+    }
+}

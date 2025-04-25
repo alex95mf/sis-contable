@@ -1,0 +1,39 @@
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="mt-4">
+            <app-button-radio-active titulo="Cuentas Contables" filtroBoton="btnShNcP"
+                cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+                <div class="row mt-2 mb-2">
+                    <div class="col-12 filters">
+                        <div class="table-responsive responsive-table">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th style="width: 19%;">No. cuenta</th>
+                                        <th style="width: 17%;">Clase</th>
+                                        <th style="width: 17%;">Tipo</th>
+                                        <th style="width: 17%;">Grupo</th>
+                                        <th style="width: 30%;">Nombre</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngFor="let dt of dataDT" (click)="setDataAccount(dt)" style="cursor:pointer;width: 100%;">
+                                        <td>{{ dt.codigo }}</td>
+                                        <td>{{ dt.clase }}</td>
+                                        <td>{{ dt.tipo }}</td>
+                                        <td>{{ dt.grupo }}</td>
+                                        <td>{{ dt.nombre }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>
+
+

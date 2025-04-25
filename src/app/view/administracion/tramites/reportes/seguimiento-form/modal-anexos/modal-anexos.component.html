@@ -1,0 +1,15 @@
+<app-button-radio-active [titulo]="'Anexos'" filtroBoton="btnGestionTicketForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+<div class="h-auto">
+    <fieldset class="border pb-2 px-2 mt-2">
+        <legend class="w-auto ml-1 bg-dark">Lista de Anexos</legend>
+        <div class="row">
+            <div class="col-sm-12">
+                <app-anexos-list-dis [identifier]="data.id_tramite_seguimiento"  [mostrarEliminar]="false"></app-anexos-list-dis>
+            </div>
+        </div>
+    </fieldset>
+   
+</div> 
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>

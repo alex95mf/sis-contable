@@ -1,0 +1,136 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Liquidacion CEM" icono="fas fa-file-invoice" cstyle="bg-light"
+        filtroBoton="btnsLiquidacionCem" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Num Documento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly [(ngModel)]="liquidacion_cem.num_documento">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Nombre de Obra" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [readonly]="formReadonly" [(ngModel)]="liquidacion_cem.nombre">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [readonly]="formReadonly" [(ngModel)]="liquidacion_cem.fecha">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Motivo" styleSpan="size-span-campo font-weight-bold">
+                    <ng-container *ngIf="liquidacion_cem.id; else noLiquidacionMotivo">
+                        <input type="text" class="form-control" readonly [value]="liquidacion_cem.motivo">
+                    </ng-container>
+                    <ng-template #noLiquidacionMotivo>
+                        <ng-select class="form-control" [(ngModel)]="liquidacion_cem.motivo"
+                            [items]="cmb_motivo" bindValue="id_catalogo" bindLabel="descripcion">
+                        </ng-select>
+                    </ng-template>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Plazo" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask [options]="{ prefix: '', min: 1, allowNegative: false, precision: 0 }" [readonly]="formReadonly" 
+                        class="form-control" [(ngModel)]="liquidacion_cem.plazo" onclick="this.select()" (keyup)="calcularRango()">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Rango" styleSpan="size-span-campo font-weight-bold">
+                    <input type="number" class="form-control" min="1990" [(ngModel)]="liquidacion_cem.rango_inicio" (change)="calcularRango()" [readonly]="formReadonly">
+                    <input type="number" class="form-control" min="1990" readonly [(ngModel)]="liquidacion_cem.rango_finalizacion">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <app-cc-input-group-prepend label="Zonas" styleSpan="size-span-campo font-weight-bold">
+                    <ng-container *ngIf="liquidacion_cem.id; else noLiquidacionZonas">
+                        <input type="text" class="form-control" readonly [value]="liquidacion_cem.txt_zonas">
+                    </ng-container>
+                    <ng-template #noLiquidacionZonas>
+                        <ng-select class="form-control" [multiple]="true" [closeOnSelect]="false" [(ngModel)]="zonasSelected"
+                            [items]="cmb_zona" bindValue="id_catalogo" bindLabel="descripcion" (change)="handleSelectZonas($event)" (close)="getSolares()">
+                        </ng-select>
+                    </ng-template>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Beneficiarios" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly [value]="liquidacion_cem.sum_solares">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo bg-dark font-weight-bold">
+                    <textarea cols="30" rows="5" class="form-control" [readonly]="formReadonly" [(ngModel)]="liquidacion_cem.observaciones"></textarea>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="liquidacion_cem.estado"
+                        [items]="cmb_estado" bindValue="value" bindLabel="label">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>Conceptos</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table mat-table [dataSource]="lst_base" class="mat-elevation-z2 w-100">
+                    <ng-container matColumnDef="base">
+                        <th mat-header-cell *matHeaderCellDef style="padding: 16px; font-weight: bold; color: white;"> Concepto </th>
+                        <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="valor">
+                        <th mat-header-cell *matHeaderCellDef style="padding: 16px; font-weight: bold; color: white;"> Valor </th>
+                        <td mat-cell *matCellDef="let element">
+                            <input currencyMask [(ngModel)]="element.valor" (keyup)="sumaBases()" class="form-control form-control-sm" onclick="this.select()" [readonly]="formReadonly">
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #343a40;"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 offset-8">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo">Total</span>
+                    </div>
+                    <input currencyMask class="form-control form-control-lg font-weight-bold text-right" readonly [(ngModel)]="liquidacion_cem.total">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 offset-8">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo">Valor Anual</span>
+                    </div>
+                    <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [(ngModel)]="liquidacion_cem.valor_anual">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 offset-8">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo">Anual por Solar</span>
+                    </div>
+                    <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [(ngModel)]="liquidacion_cem.valor_anual_solar">
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spLiquidacionCem"></cc-spiner-procesar>

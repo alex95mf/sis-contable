@@ -1,0 +1,183 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="CONSULTA CLIENTES" filtroBoton="btnsCCliente" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-search">
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Ruc" styleSpan="size-span-campo">
+                    <ng-select id="IdCliente" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="cliente" (ngModelChange)="searchCliente($event)">
+                        <ng-option [value]="0">
+                            Seleccione Ruc
+                        </ng-option>
+                        <ng-option *ngFor="let d of clientes" [value]="d.id_cliente">
+                            {{ d.num_documento }}
+                        </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Vendedor" styleSpan="size-span-campo">
+                    <ng-select id="IdVendedor" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="vendedor" (ngModelChange)="searchVendedor($event)">
+                        <ng-option [value]="0">
+                            Seleccione Vendedor
+                        </ng-option>
+                        <ng-option *ngFor="let d of vendedores" [value]="d.id_usuario">
+                            {{ d.nombre }}
+                        </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo">
+                    <ng-select id="IdGrupo" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="grupo" (ngModelChange)="searchGrupo($event)">
+                        <ng-option [value]="0">
+                            Seleccione Grupo
+                        </ng-option>
+                        <ng-option *ngFor="let d of groups" [value]="d.id_precio">
+                            {{ d.name }}
+                        </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="País" styleSpan="size-span-campo">
+                    <ng-select id="IdProvincia" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="pais" (ngModelChange)="searchProvinces($event)">
+                        <ng-option [value]="0">
+                            Seleccione País
+                        </ng-option>
+                        <ng-option *ngFor="let d of catalog.countries" [value]="d.valor">
+                            {{ d.valor }}
+                        </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Provincia" styleSpan="size-span-campo">
+                    <ng-select id="IdProvincia" class="form-control custom" appendTo="body" [searchable]="true" [disabled]="!provinceTurn" [clearable]="false" [(ngModel)]="provincia" (ngModelChange)="searchCities($event)">
+                        <ng-option [value]="0">
+                            Seleccione Provincia
+                        </ng-option>
+                        <ng-option *ngFor="let d of catalog.province" [value]="d.valor">
+                            {{ d.valor }} </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Ciudad" styleSpan="size-span-campo">
+                    <ng-select id="IdCiudad" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [disabled]="!cityTurn" (ngModelChange)="searchCiudad($event)" [(ngModel)]="ciudad">
+                        <ng-option [value]="0">
+                            Seleccione Ciudad
+                        </ng-option>
+                        <ng-option *ngFor="let d of catalog.city" [value]="d.valor">
+                            {{ d.valor }}
+                        </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-1 mb-3">
+            <div class="col-md-12  pl-2 pr-2">
+                <fieldset class="border p-2 mb-1 mt-2 filters">
+                    <legend class="w-auto h6">Listado</legend>
+                    <div class="row justify-content-center">
+                        <div class="col-12 pl-3 pr-3 ">
+                            <div class="table-responsive responsive-table mt-2">
+                                <table datatable id="tableConsultCli" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                                    <thead>
+                                        <tr style="width: 100%;text-align: center;">
+                                            <th style="width: 6%;">#</th>
+                                            <th style="width: 10%;">Ruc</th>
+                                            <th style="width: 22%;">Nombre</th>
+                                            <th style="width: 10%;">Telefono</th>
+                                            <th style="width: 22%;">Direccion </th>
+                                            <th style="width: 15%;">Website</th>
+                                            <th style="width: 15%;">Ciudad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="validaDt">
+                                        <tr *ngFor="let dt of infoData; let i = index">
+                                            <td class="text-center">{{ i + 1 }}</td>
+                                            <td style="padding-top: 8px;text-align: center;cursor:pointer;cursor:pointer;" (click)="informaDocumento(dt)"><span class="tooltip-test" placement="left" ngbTooltip="Ver Más">
+                                            {{ dt.num_documento }}</span></td>
+                                            <td style="padding-top: 8px;text-align: left;">{{ dt.nombre_comercial_cli }}</td>
+                                            <td style="padding-top: 8px;text-align: center;">{{ dt.telefono }}</td>
+                                            <td style="padding-top: 8px;text-align: left;">{{ dt.direccion}}</td>
+                                            <td style="padding-top: 8px;text-align: center;;">{{ dt.website }}</td>
+                                            <td style="padding-top: 8px;text-align: center;">{{ dt.ciudad}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg " id="modalConsultaCliente" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row" style="width: 100%">
+                    <div class="col-12">
+                        <div class="title-head">
+                            <span><i class="fas fa-list-alt"></i> LISTADO DE CONTACTOS</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+                    <span aria-hidden="true" style="color: rgba(0, 0, 0, 0.664);">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 col-sm-12" style="height: 200px;">
+                        <div style="overflow-y: scroll; height: 200px;margin-top:8px;">
+                            <div class="form-group table-responsive responsive-table">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nombre</th>
+                                            <th>Cargo</th>
+                                            <th>Telefono</th>
+                                            <th>Celular</th>
+                                            <th>Correo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-center" style="width: 100%;" *ngFor="let dt of dtContacto; let i = index">
+                                            <td style="width: 2%;"><strong>{{ i + 1 }}</strong></td>
+                                            <td style="width: 10%;" class="text-left">
+                                                <strong>{{dt.nombre}}</strong>
+                                            </td>
+                                            <td style="width: 8%;">
+                                                <strong>{{dt.cargo}}</strong>
+                                            </td>
+                                            <td style="width: 8%;">
+                                                <strong>{{dt.telefono}}</strong>
+                                            </td>
+                                            <td style="width: 8%;">
+                                                <strong>{{dt.celular}}</strong>
+                                            </td>
+
+                                            <td style="width: 5%;">
+                                                <strong>{{dt.email}}</strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCustomerconsu"></cc-spiner-procesar>

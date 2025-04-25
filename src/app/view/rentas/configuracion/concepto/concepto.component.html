@@ -1,0 +1,142 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Conceptos" filtroBoton="btnsConcepto" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="row mt-3">
+            <div class="col-2">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Número</span>
+                    </div>
+                    <input disabled id="id_concepto" type="text" class="form-control form-control-sm" [(ngModel)]="concepto.id_concepto">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Código</span>
+                    </div>
+                    <input id="codigo" type="text" class="form-control form-control-sm" placeholder="Código del concepto" [(ngModel)]="concepto.codigo">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Concepto</span>
+                    </div>
+                    <input id="nombre" type="text" class="form-control form-control-sm" placeholder="Nombre descriptivo del concepto" [(ngModel)]="concepto.nombre">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
+                    </div>
+                    <select id="estado" class="form-control form-control-sm" [(ngModel)]="concepto.estado">
+                        <option disabled [value]="0">Seleccione el estado</option>
+                        <option [value]="'A'">Activo</option>
+                        <option [value]="'I'">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cuenta Deudora</span>
+                    </div>
+                    <input id="cuenta_deudora" type="text" class="form-control form-control-sm" placeholder="Cuenta Deudora" [(ngModel)]="concepto.cuenta_deudora">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cuenta Acreedora</span>
+                    </div>
+                    <input id="cuenta_acreedora" type="text" class="form-control form-control-sm" placeholder="Cuenta Acreedora" [(ngModel)]="concepto.cuenta_acreedora">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">C&oacute;digo de Presupuesto</span>
+                    </div>
+                    <input id="codigo_presupuesto" type="text" class="form-control form-control-sm" placeholder="Código de Presupuesto" [(ngModel)]="concepto.codigo_presupuesto">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tafira activa</span>
+                    </div>
+                    <select id="id_tarifa" class="form-control form-control-sm" [(ngModel)]="concepto.id_tarifa">
+                        <option disabled [value]="0">Seleccione la tarifa</option>
+                        <option *ngFor="let d of tarifas" [value]="d.id_tarifa">{{ d.descripcion }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center m-0">
+            <div class="w-100 filters">
+                <div class="row justify-content-beetween pt-2">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 text-left">
+                        <h5 class="title_h5">Detalle</h5>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right btn-add">
+                        <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Añadir Detalles" (click)="addItems()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12  pl-3 pr-3 mt-2">
+                        <table class="table table-bordered ">
+                            <thead style="width: 100%;">
+                                <tr>
+                                    <th style="width: 20%;">Código</th>
+                                    <th style="width: 25%;">Nombre</th>
+                                    <th style="width: 20%;">Tiene Tarifa</th>
+                                    <th style="width: 20%;">Estado</th>
+                                    <th style="width: 15%;text-align: center;">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let d of detalle; let i = index">
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="d.codigo_detalle"
+                                            placeholder="Ingrese código del Detalle">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="d.nombre_detalle"
+                                            placeholder="Ingrese la descripción del Detalle">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="form-control form-control-sm" [(ngModel)]="d.tiene_tarifa">
+                                    </td>
+                                    <td>
+                                        <select id="estado" class="form-control form-control-sm" [(ngModel)]="d.estado">
+                                            <option disabled [value]="0">Seleccione el estado</option>
+                                            <option [value]="'A'">Activo</option>
+                                            <option [value]="'I'">Inactivo</option>
+                                        </select>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <button class="btn btn-danger" placement="top" ngbTooltip="Eliminar Items"
+                                            (click)="deleteItems(i)">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spContribuyente"></cc-spiner-procesar>

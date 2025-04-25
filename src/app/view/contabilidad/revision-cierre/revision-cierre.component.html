@@ -1,0 +1,131 @@
+<div class="mt-2">
+    <app-button-radio-active [titulo]="fTitle" icono="fas fa-file" cstyle="bg-light" 
+        filtroBoton="btnsRevCierre" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border px-3 pb-2 mb-2">
+            <legend class="w-auto bg-dark mb-1">Filtros</legend>
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Tipo de Cierre" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [(ngModel)]="filter.tipo_cierre"
+                            [items]="lst_tipo_cierre" bindValue="value" bindLabel="label"></ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col" *ngIf="filter.tipo_cierre == 'CCON'">
+                    <app-cc-input-group-prepend label="Tipo de Asiento" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [(ngModel)]="filter.tipo"
+                            [items]="lst_tipo" bindValue="value" bindLabel="label"></ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <ng-container *ngIf="viewTable == 'CCON'">
+                                    <!-- <th>Descargar</th> -->
+                                    <th>Fecha</th>
+                                    <th>Documento</th>
+                                    <th>Tipo</th>
+                                    <th>Estado</th>
+                                </ng-container>
+                                <ng-container *ngIf="viewTable == 'GREC'">
+                                    <!-- <th>Descargar</th> -->
+                                    <th>Nombre</th>
+                                    <th>Descripcion</th>
+                                    <th>Cuenta Deudora</th>
+                                </ng-container>
+                                <ng-container *ngIf="viewTable == 'AMAL'">
+                                    <!-- <th>Descargar</th> -->
+                                    <th>Num. Documento</th>
+                                    <th>Concepto</th>
+                                    <th>Fecha</th>
+                                    <th>Debe</th>
+                                    <th>Haber</th>
+                                    <th>Diferencia</th>
+                                </ng-container>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!cierres.length">
+                                <td class="text-center" colspan="5">
+                                    <p class="h6">No hay registros a mostrar</p>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let cierre of cierres" [ngClass]="{'table-success': cierre.estado == 'A'}">
+                                    <ng-container *ngIf="viewTable == 'CCON'">
+                                        <!-- <td class="text-center pointer-cursor">
+                                            <div *ngIf="cierre.estado == 'A'" class="btn-group">
+                                                <button class="btn btn-sm btn-outline-danger" title="Descargar PDF" (click)="dtViewAsiento(cierre)">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                </button>
+                                            </div>
+                                        </td> -->
+                                        <td>{{ cierre.fecha }}</td>
+                                        <td>
+                                            <span  style="text-decoration: underline;  color: #2b94e2; " class="cursor-pointer font-bold" (click)="dtViewAsiento(cierre)">
+                                                {{ cierre.documento }}
+                                            </span>
+                                           
+                                        </td>
+                                        <td>{{ cierre.subtipo }}</td>
+                                        <td>
+                                            <i class="fa fa-circle text-danger" [ngClass]="{'text-danger': cierre.estado == 'P', 'text-success': cierre.estado == 'A'}"></i>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container *ngIf="viewTable == 'GREC'">
+                                        <!-- <td class="text-center pointer-cursor">
+                                            <div *ngIf="cierre.estado == 'A'" class="btn-group">
+                                                <button class="btn btn-sm btn-outline-danger" title="Descargar PDF" (click)="dtViewAsiento(dt,2)">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                </button>
+                                            </div>
+                                        </td> -->
+                                        <td>{{ cierre.nombre }}</td>
+                                        <td>{{ cierre.descripcion }}</td>
+                                        <td>{{ cierre.cuenta_deudora }}</td>
+                                    </ng-container>
+                                    <ng-container *ngIf="viewTable == 'AMAL'">
+                                        <!-- <td class="text-center pointer-cursor">
+                                            <div *ngIf="cierre.estado == 'A'" class="btn-group">
+                                                <button class="btn btn-sm btn-outline-danger" title="Descargar PDF" (click)="dtViewAsiento(dt,2)">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                </button>
+                                            </div>
+                                        </td> -->
+                                        <td>
+                                            <span  style="text-decoration: underline;  color: #2b94e2; " class="cursor-pointer font-bold" (click)="dtViewAsiento(cierre)">
+                                                {{ cierre.num_doc }}
+                                            </span>
+                                            
+                                        </td>
+                                        <td>{{ cierre.concepto }}<br><small class="text-muted">{{ cierre.nota }}</small></td>
+                                        <td>{{ cierre.fecha | date:'yyyy-MM-dd' }}</td>
+                                        <td>{{ cierre.valor_deb }}</td>
+                                        <td>{{ cierre.valor_cre }}</td>
+                                        <td>{{ cierre.diferencia }}</td>
+                                    </ng-container>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="conRevCierres"></cc-spiner-procesar>

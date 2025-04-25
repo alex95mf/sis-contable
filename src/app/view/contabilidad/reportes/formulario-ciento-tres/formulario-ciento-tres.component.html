@@ -1,0 +1,172 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-file-pdf"
+        filtroBoton="btnsFormulario" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border pb-2 px-2 my-2">
+            <legend class="w-auto bg-dark ml-1 mb-0">Filtros</legend>
+            <div class="row ml-1 mr-1">
+                <div class="col-10">
+                    <div class="row mt-0 mb-0">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Período" styleSpan="size-span-campo">
+                                <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="periodo"
+                                    [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo">
+                                    <ng-select 
+                                        (ngModelChange)="ChangeMesCierrePeriodos($event)"
+                                        class="form-control" 
+                                        id="elemento_pruebas"
+                                        bindLabel="name"
+                                        placeholder="-Todos-"
+                                        appendTo="body"
+                                        [clearable]="false"
+                                        [searchable]="true"
+                                        [disabled]=disabled
+                                        [(ngModel)]="mes_actual">
+                                        <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                            {{item.name}}
+                                        </ng-option>
+                                    </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        
+        <section class="mt-2">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist"  >
+                    <a (click)="handleChange($event)" class="nav-item nav-link active font-weight-bold" id="nav-form-tres-tab" data-toggle="tab" href="#nav-form-tres" role="tab"
+                        aria-controls="nav-form-tres" aria-selected="true">Formulario 103</a>
+                    <a (click)="handleChange($event)" class="nav-item nav-link font-weight-bold" id="nav-form-cuatro-tab" data-toggle="tab" href="#nav-form-cuatro" role="tab"
+                        aria-controls="nav-form-cuatro" aria-selected="false">Formulario 104</a>
+                </div>
+            </nav>
+            <div class="tab-content mb-3" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-form-tres" role="tabpanel" aria-labelledby="nav-form-tres-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-12  pl-3 pr-3"  style="overflow-x:auto;max-height: 600px; overflow-y: scroll;"> 
+                            <table class="table table-striped table-k table-hover mb-0 h-auto" style="min-width:1900px;">
+                                <thead class="sticky-header">
+                                    <tr>
+                                        <th >Fecha</th>
+                                        <th >Número Factura Proveedor</th>
+                                        <th >Nombre Proveedor</th>
+                                        <th >Ruc Proveedor</th>
+                                        <th >Código SRI</th>
+                                        <th >Código Anexo SRI</th>
+                                        <th>Descripción</th>
+                                        <th class="text-right">Base</th>
+                                        <th>Porcentaje</th>
+                                        <th class="text-right">Valor Retención</th>
+                                        <th>Fecha Emisión Autorización</th>
+                                        <th>Número Retención</th>
+                                        <th>Autorización Retención</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="dataFormularioTres.length ==0">
+                                        <td  colspan="13" class="text-center">
+                                            <h6 class="my-1"></h6>No hay registros para mostrar.
+                                        </td>
+                                    </tr>
+                                    <tr class="mt-2" *ngFor="let d of dataFormularioTres; let i = index">
+                                        <td style="width: 100px;">{{d.fecha_compra | date: 'dd/MM/yyyy'}}</td>
+                                        <td style="width: 100px;">{{d.factura_proveedor}}</td>
+                                        <td style="width: 200px;">{{d.razon_social}}</td>
+                                        <td style="width: 100px;">{{d.ruc}}</td>
+                                        <td style="width: 100px;">{{d.codigo_sri}}</td>
+                                        <td style="width: 100px;">{{d.codigo_anexo_sri}}</td>
+                                        <td style="width: 200px;">{{d.descripcion}}</td>
+                                        <td style="width: 100px;" class="text-right">$ {{d.base | number:'1.2-2'}}</td>
+                                        <td style="width: 100px;" class="text-right">{{d.porcentaje | number:'1.2-2'}} %</td>
+                                        <td style="width: 100px;" class="text-right">$ {{d.valor_retencion | number:'1.2-2'}}</td>
+                                        <td style="width: 100px;">{{d.fecha_emision_autorizacion | date: 'dd/MM/yyyy'}}</td>
+                                        <td style="width: 150px;">{{d.numero_retencion}}</td>
+                                        <td style="width: 100px;">{{d.autorizacion_retencion}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- <div class="col-12">
+                            <mat-paginator 
+                                showFirstLastButtons
+                                [length]="paginate.length"
+                                [pageSize]="paginate.perPage"
+                                [pageIndex]="+(paginate.page)-1"
+                                [pageSizeOptions]="paginate.pageSizeOptions"
+                                (page)="changePaginate($event)"
+                                aria-label="Select page">
+                            </mat-paginator>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-form-cuatro" role="tabpanel" aria-labelledby="nav-form-cuatro-tab">
+                    <div class="justify-content-center">
+                        <div class="col-12  pl-3 pr-3"  style="overflow-x:auto;max-height: 600px; overflow-y: scroll;"> 
+                            <table class="table table-striped table-k table-hover mb-0 h-auto" style="min-width:1900px;">
+                                <thead class="sticky-header">
+                                    <tr>
+                                        <th >Fecha</th>
+                                        <th >Número Factura Proveedor</th>
+                                        <th >Nombre Proveedor</th>
+                                        <th >Ruc Proveedor</th>
+                                        <th >Código SRI</th>
+                                        <th >Código Anexo SRI</th>
+                                        <th>Descripción</th>
+                                        <th class="text-right">Base</th>
+                                        <th>Porcentaje</th>
+                                        <th class="text-right">Valor Retención</th>
+                                        <th>Fecha Emisión Autorización</th>
+                                        <th>Número Retención</th>
+                                        <th>Autorización Retención</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="dataFormularioCuatro.length ==0">
+                                        <td  colspan="13" class="text-center">
+                                            <h6 class="my-1"></h6>No hay registros para mostrar.
+                                        </td>
+                                    </tr>
+                                    <tr class="mt-2" *ngFor="let d of dataFormularioCuatro; let i = index">
+                                        <td style="width: 100px;">{{d.fecha_compra | date: 'dd/MM/yyyy'}}</td>
+                                        <td style="width: 100px;">{{d.factura_proveedor}}</td>
+                                        <td style="width: 200px;">{{d.razon_social}}</td>
+                                        <td style="width: 100px;">{{d.ruc}}</td>
+                                        <td style="width: 100px;">{{d.codigo_sri}}</td>
+                                        <td style="width: 100px;">{{d.codigo_anexo_sri}}</td>
+                                        <td style="width: 200px;">{{d.descripcion}}</td>
+                                        <td style="width: 100px;" class="text-right">$ {{d.base | number:'1.2-2'}}</td>
+                                        <td style="width: 100px;" class="text-right">{{d.porcentaje | number:'1.2-2'}} %</td>
+                                        <td style="width: 100px;" class="text-right">$ {{d.valor_retencion | number:'1.2-2'}}</td>
+                                        <td style="width: 100px;">{{d.fecha_emision_autorizacion | date: 'dd/MM/yyyy'}}</td>
+                                        <td style="width: 150px;">{{d.numero_retencion}}</td>
+                                        <td style="width: 100px;">{{d.autorizacion_retencion}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- <div class="col-12">
+                            <mat-paginator 
+                                showFirstLastButtons
+                                [length]="paginate.length"
+                                [pageSize]="paginate.perPage"
+                                [pageIndex]="+(paginate.page)-1"
+                                [pageSizeOptions]="paginate.pageSizeOptions"
+                                (page)="changePaginate($event)"
+                                aria-label="Select page">
+                            </mat-paginator>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="renConsultaReporte"></cc-spiner-procesar>
+

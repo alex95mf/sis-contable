@@ -1,0 +1,232 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Devoluciones en ventas" filtroBoton="btnsDevolVentas"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+        <div class="row mt-3">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cliente</span>
+                    </div>
+                    <ng-select class="form-control" [searchable]="true" [(ngModel)]="id_cliente_search"
+                        [clearable]="false" (ngModelChange)="searchSales($event)" [disabled]="flag">
+                        <ng-option [value]="0">Seleccione cliente</ng-option>
+                        <ng-option *ngFor="let d of arrayCustomer" [value]="d.id_cliente">
+                            {{d.razon_social}}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Razón social</span>
+                    </div>
+                    <input placeholder="asesor financiero" type="text" class="form-control form-control-sm"
+                        [disabled]="true" [(ngModel)]="dataBuy.client.razon_social">
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cupo</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-1" [disabled]="true"
+                        placeholder="$ {{commonServices.formatNumber(dataBuy.client.cupo_credito)}}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="num_doc_search"
+                        (ngModelChange)="getVentasDevolucion($event)"
+                        [disabled]="arrayFactura.length == 0 || id_cliente_search == 0 || flag">
+                        <option [value]="0">Seleccione documento</option>
+                        <option *ngFor="let d of arrayFactura" [value]="d.num_doc">
+                            {{d.num_doc}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Vendedor</span>
+                    </div>
+                    <input placeholder="asesor financiero" type="text" class="form-control form-control-sm"
+                        id="idAsesor" [disabled]="true" [(ngModel)]="dataBuy.asesor.nombre">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-1" [disabled]="true"
+                        placeholder=" $ {{commonServices.formatNumber(dataBuy.client.saldo_credito)}}">
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo pago</span>
+                    </div>
+                    <input placeholder="Tipo de pago" type="text" class="form-control form-control-sm" [disabled]="true"
+                        [(ngModel)]="dataBuy.tipo_pago">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Forma de pago</span>
+                    </div>
+                    <input placeholder="Tipo de pago" type="text" class="form-control form-control-sm" [disabled]="true"
+                        [(ngModel)]="dataBuy.forma_pago">
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Subtotal</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-1"
+                        placeholder="$ {{commonServices.formatNumber(dataTotales.subTotalPagado)}}" min="0" disabled>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha venta</span>
+                    </div>
+                    <input placeholder="Fecha venta" type="text" class="form-control form-control-sm"
+                        format='yyyy-MM-dd' [disabled]="true" [(ngModel)]="dataBuy.fecha">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1" *ngIf="dataUser != undefined">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Usuario
+                            Devolución</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" placeholder="{{dataUser.nombre}}" disabled>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Iva {{ivaConverter}}
+                            %</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-1"
+                        placeholder="$ {{commonServices.formatNumber(dataTotales.ivaPagado)}}" min="0" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Motivo
+                            devolución</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="causaSelect" id="idMotivo">
+                        <option [value]="0"> Seleccione motivo </option>
+                        <option *ngFor="let d of arrayMotivo" [value]="d.valor">
+                            {{d.valor}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="idSalCre" [disabled]="true"
+                        placeholder="En proceso" [(ngModel)]="dataBuy.estado_dev">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-1"
+                        placeholder="$ {{commonServices.formatNumber(dataTotales.totalPagado)}}" min="0" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 pl-3 pr-3">
+            <div class="col-12 table-responsive filters pt-2 " style="font-family: 'Poppins1';max-height: 230px;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr style="width: 100%;">
+                            <th style="width: 15%;">Código</th>
+                            <th style="width: 35%;">Nombre</th>
+                            <th style="width: 10%;">Venta</th>
+                            <th style="width: 10%;">P/U</th>
+                            <th style="width: 10%;">Pendiente</th>
+                            <th style="width: 10%;">Devolución</th>
+                            <th style="width: 10%;text-align: center;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let d of dataProducto; let i = index">
+                            <td>{{d.code_product}}</td>
+                            <td>{{d.product.nombre}}</td>
+                            <td>
+                                {{d.cantidad}}
+                            </td>
+                            <td>
+                                {{commonServices.formatNumber(d.costo_unitario)}}
+                            </td>
+                            <td>{{d.cant_pendiente}}</td>
+                            <td>
+                                <input style="text-align: right;padding-right: 10px;" type="text" min="0"
+                                    [(ngModel)]="d.cant_devuelta" (keypress)="commonServices.FormatDecimalVal($event)"
+                                    [disabled]="num_doc_search == 0  || flag" (keyup)="sumTotal(i)">
+                            </td>
+                            <td style="text-align: right;">
+                                {{commonServices.formatNumber(d.costo_total)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <div class="col-8">
+                <div class="input-group pt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                            style="background-color: #404a63; color: white;font-weight: unset !important;"
+                            placeholder="Ingrese observación">Observación</span>
+                    </div>
+                    <textarea class="form-control form-control-sm" aria-label="With textarea" [(ngModel)]="observacion"
+                        id="idobs" placeholder="Ingrese una observación" [disabled]="flag"></textarea>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tota devolución</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-1" [disabled]="true"
+                        placeholder="$ {{commonServices.formatNumber(totalView.total_devolucion)}}">
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spDevolucionesVentas"></cc-spiner-procesar>

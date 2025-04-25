@@ -1,0 +1,68 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Detalle de Plan" filtroBoton="btnsShowProyecto" cstyle="bg-gradient-primary text-white"
+        [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="row">
+            <div class="col-12 mb-3 pb-2 pt-2" style="border-bottom: 1px solid;border-color: rgba(0, 0, 0, 0.205);">
+                <span>Identificador de Proyecto: {{ proyecto.id.toString().padStart(10, '0') }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Proyecto</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" disabled value="{{ proyecto.nombre }}">
+                </div>
+            </div>
+        
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Presupuesto</span>
+                    </div>
+                    <input type="number" class="form-control form-control-sm" disabled value="{{ proyecto.presupuesto }}">
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha Inicio</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" disabled value="{{ proyecto.fechaInicio }}">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha Finalizacion</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" disabled value="{{ proyecto.fechaFinal }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Objetivo</span>
+                    </div>
+                    <textarea class="form-control form-control-sm" disabled value="{{ proyecto.objetivo }}"></textarea>
+                </div>
+            </div>
+            <div class="col-6">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr *ngFor="let actividad of proyecto.actividades">
+                            <td>{{ actividad }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </app-button-radio-active>
+</div>

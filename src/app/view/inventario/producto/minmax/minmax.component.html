@@ -1,0 +1,244 @@
+<div class="mt-2">
+    <app-button-radio-active titulo="Establecer precio mínimo y máximo" filtroBoton="btnIProducto"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fab fa-product-hunt">
+        <div class="row">
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div *ngIf="fields != undefined" class="mt-1">
+                            <ejs-dropdowntree [enabled]="!disableDropw" #vaSelect id='default' [changeOnBlur]='false'
+                                cssClass="style-dropDow" (change)='onChange($event)' [fields]='fields'
+                                popupHeight='220px' popupWidth='400px' placeholder='{{varAux}}'>
+                            </ejs-dropdowntree>
+                        </div>
+                        <div class="input-group input-group-sm mt-1" *ngIf="fields == undefined">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Grupo
+                                    Producto</span>
+                            </div>
+                            <input type="text" placeholder="No existe información" class="form-control form-control-sm"
+                                disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Precio
+                                    máximo</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio3" value="{{valueR5}}"
+                                (click)="changeFluctuacion()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Establecer un
+                                    Porcentaje</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio" value="{{valueR1}}"
+                                (click)="changeRadio()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Calcular en
+                                    base al
+                                    costo</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio2" value="{{valueR3}}"
+                                (click)="changeRadioCosto()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group input-group-sm mt-1 mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Marca
+                                    producto</span>
+                            </div>
+                            <select class="form-control form-control-sm custom-select" [(ngModel)]="marcaSelect"
+                                (ngModelChange)="filterMarca($event)" [disabled]="actions.disabledAll">
+                                <option [value]="0">Todos</option>
+                                <option *ngFor="let d of arrayMarcas" [value]="d">
+                                    <span>{{d}}</span>
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Precio
+                                    mínimo</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio3" value="{{valueR6}}"
+                                (click)="changeFluctuacion()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Establecer un
+                                    valor</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio" value="{{valueR2}}"
+                                (click)="changeRadio()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                    <div class="col-4 pl-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Calcular en
+                                    base al
+                                    Pvp</span>
+                            </div>
+                            <input type="radio" class="form-check-input" name="optradio2" value="{{valueR4}}"
+                                (click)="changeRadioCosto()" [disabled]="actions.disabledAll">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-2">
+            <div class="col-12">
+                <fieldset class="border p-2 mb-2 mt-2 filters">
+                    <legend class="w-auto h6">Detalle cálculo de precio mínimo y máximo</legend>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="input-group input-group-sm ">
+                                        <div class="input-group-prepend" *ngIf="valueRadio == ''">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Porcentaje/Valor</span>
+                                        </div>
+                                        <div class="input-group-prepend" *ngIf="valueRadio == 'porcentaje'">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Ingrese
+                                                porcentaje</span>
+                                        </div>
+                                        <div class="input-group-prepend" *ngIf="valueRadio == 'valor' ">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Ingrese
+                                                valor</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm text-right"
+                                            [(ngModel)]="valuePricePorcentaje" placeholder="0.00" min="0"
+                                            id="idInptPrice" style="padding-right: 25px !important;"
+                                            (keypress)="commonServices.FormatDecimalVal($event)"
+                                            [disabled]="actions.disabledAll" #prc="ngModel" name="prc"
+                                            [ngClass]="{'is-invalid':((valuePricePorcentaje <= 0) && (prc.dirty || prc.touched)),'is-valid':(valuePricePorcentaje > 0)}"
+                                            required>
+                                        <div class="invalid-feedback"
+                                            *ngIf="precioSelect == 0 || valuePricePorcentaje <= 0 ">
+                                            <span>Seleccione un tipo de precio diferente a Todos o verifique valor no
+                                                puede ser
+                                                menor o igual a 0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Buscar Items: </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Ingrese nombre de producto"
+                                            aria-label="Username" aria-describedby="basic-addon1"
+                                            (keyup)="searchPoduct($event.target.value)" [(ngModel)]="search">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- *ngIf="infoDt.length > 0 " -->
+                        <div class="col-12 container container-table">
+                            <div class="tab_container filters">
+                                <div class="table-responsive" style="max-height: 300px;overflow-y: scroll;">
+                                    <table class="table">
+                                        <thead class="thead-dark" style="width: 100%;">
+                                            <tr>
+                                                <th style="text-align: center;padding-left: 0px !important;width: 30px !important;"
+                                                    [ngClass]="{'filter': precioSelect != 0}">
+                                                    <input type="checkbox" (click)="activeSectionAll()"
+                                                        [(ngModel)]="checkAll" [disabled]="
+                                                                actions.disabledAll ||
+                                                                valueRadio == undefined ||
+                                                                valueRadioCosto == undefined ||
+                                                                valuFluctuacion == undefined ||
+                                                                valuePricePorcentaje == '' ||
+                                                                valuePricePorcentaje == 0 ||
+                                                                valuePricePorcentaje == undefined">
+                                                </th>
+                                                <th style="width: 10px;">Código</th>
+                                                <th style="width: 40px;">Nombre</th>
+                                                <th style="width: 10px;">Marca</th>
+                                                <th style="width: 10px;">Costo</th>
+                                                <th style="width: 10px;">Pvp</th>
+                                                <th style="width: 10px;" *ngIf="valuFluctuacion == 'minimo'">Precio
+                                                    mínimo</th>
+                                                <th style="width: 10px;" *ngIf="valuFluctuacion == 'maximo'">Precio
+                                                    máximo</th>
+                                                <th style="width: 10%;">Utilidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="validaDt" style="width: 100%;">
+                                            <tr *ngFor="let dt of infoDt; let i = index">
+                                                <td style="width: 7px;">
+                                                    <input type="checkbox" (click)="activeSection(i)"
+                                                        [(ngModel)]="dt.activeCheckbox" [disabled]="
+                                                                actions.disabledAll ||
+                                                                valueRadio == undefined ||
+                                                                valueRadioCosto == undefined ||
+                                                                valuFluctuacion == undefined ||
+                                                                valuePricePorcentaje == '' ||
+                                                                valuePricePorcentaje == 0 ||
+                                                                valuePricePorcentaje == undefined">
+                                                </td>
+                                                <td>{{dt.codigoProducto}}</td>
+                                                <td>{{dt.nombre}}</td>
+                                                <td>{{dt.marca}}</td>
+                                                <td class="text-right pr-2">{{dt.costo}}</td>
+                                                <td class="text-right pr-2">{{dt.PVP}}</td>
+                                                <td *ngIf="valuFluctuacion == 'minimo'">
+                                                    <input type="text" [(ngModel)]="dt.pminAux" class="text-right pr-2"
+                                                        (keyup)="changePriceEdit(i)" [disabled]="!disableDropw">
+                                                </td>
+                                                <td *ngIf="valuFluctuacion == 'maximo'">
+                                                    <input type="text" [(ngModel)]="dt.pmaxAux" class="text-right pr-2"
+                                                        (keyup)="changePriceEdit(i)" [disabled]="!disableDropw">
+                                                </td>
+                                                <td class="text-right pr-2">$ {{dt.utilidad}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spChangePriceMinMax"></cc-spiner-procesar>

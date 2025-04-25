@@ -1,0 +1,95 @@
+<app-button-radio-active [titulo]="fTitulo" filtroBoton="btnsDetalles" cstyle="bg-gradient-primary test-white"
+  [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+
+<br>
+  <div class="row mb-2">
+    <div class="col-6">
+      <div class="input-group input-group-sm">
+          <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Contribuyente</span></div>
+          <input type="text" class="form-control form-control-sm" readonly value=" {{ notificacion.contribuyente.razon_social}}">
+      </div>
+  </div>
+
+  <div class="col-4">
+    <div class="input-group input-group-sm">
+        <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Gestión</span></div>
+        <input type="text" class="form-control form-control-sm" readonly value=" {{ notificacion.tipo}}">
+    </div>
+</div>
+<div class="col-2">
+  <div class="input-group input-group-sm">
+      <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Total</span></div>
+      <input type="text" class="form-control form-control-sm" readonly value=" {{ notificacion.total}}">
+  </div>
+</div>
+
+  </div>
+
+  <div class="row mb-2">
+    <div class="col">
+      <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+        <ng-select class="form-control" [clearable]="false" [(ngModel)]="data.estado" [readonly]="validacionDetalles" (ngModelChange)="deshabilitarFecha($event)">
+          <ng-option *ngFor="let estado of estados" [value]="estado.value" [disabled]="estado.value == 0">{{ estado.label }}</ng-option>
+        </ng-select>
+      </app-cc-input-group-prepend>
+    </div>
+    <div class="col">
+      <app-cc-input-group-prepend label="Notificador" styleSpan="size-span-campo font-weight-bold">
+        <!-- <ng-select class="form-control" [clearable]="false" [(ngModel)]="data.notificador" [readonly]="validacionDetalles">
+          <ng-option *ngFor="let notificador of notificadores" [value]="notificador.descripcion" [disabled]="notificador.valor == 0">{{notificador.descripcion}}</ng-option>
+          
+        </ng-select> -->
+        <input type="text" readonly class="form-control" [(ngModel)]="data.notificador">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" (click)="expandEmpleados()">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+      </app-cc-input-group-prepend>
+    </div>
+    <div class="col">
+      <app-cc-input-group-prepend label="Persona que recibe" styleSpan="size-span-campo font-weight-bold">
+        <input type="text" class="form-control" [(ngModel)]="data.persona_recepcion" [readonly]="validacionDetalles">
+      </app-cc-input-group-prepend>
+    </div>
+
+    
+
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-4">
+      <div class="row">
+        <div class="col">
+          <app-cc-input-group-prepend label="Fecha de recepción" styleSpan="size-span-campo font-weight-bold">
+            <input type="date" class="form-control" [(ngModel)]="data.fecha_recepcion" [readonly]="validacionDetalles" [disabled]="validarFecha">
+          </app-cc-input-group-prepend>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <app-cc-input-group-prepend label="Anexos" styleSpan="size-span-campo font-weight-bold">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)">
+              <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
+            </div>
+          </app-cc-input-group-prepend>
+        </div>
+      </div>
+      
+      <!-- <div *ngIf="notificacion.usuario != null">
+        <app-cc-input-group-prepend label="Usuario" styleSpan="size-span-campo font-weight-bold">
+          <input type="text" class="form-control" [(ngModel)]="notificacion.usuario.nombre" readonly>
+        </app-cc-input-group-prepend>
+      </div> -->
+    </div>
+    <div class="col">
+      <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold bg-dark">
+        <textarea class="form-control" [(ngModel)]="data.observacion" [readonly]="validacionDetalles" rows="4" maxlength="500"></textarea>
+      </app-cc-input-group-prepend>
+    </div>
+  </div>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalNotificador"></cc-spiner-procesar>

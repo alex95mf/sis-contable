@@ -1,0 +1,239 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Registro de Vendedor" filtroBoton="btnsVendedor" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo Doc.</span>
+                    </div>
+                    <select id="tipo_documento" class="form-control form-control-sm" (ngModelChange)="docValidate($event)" [(ngModel)]="vendedor.tip_doc">
+                        <option [value]="0">Seleccione documento</option>
+                        <option *ngFor="let d of catalog.documents" [value]="d.valor">{{ d.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
+                    </div>
+                    <input id="num_documento" type="text" class="form-control form-control-sm" placeholder="Número del documento" [(ngModel)]="vendedor.num_doc" (keypress)="onlyNumber($event)" minlength="{{ tamDoc }}" maxlength="{{ tamDoc }}">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Linea Producto</span>
+                    </div>
+                    <select id="linea" class="form-control form-control-sm" [(ngModel)]="vendedor.fk_linea_producto">
+                        <option [value]="0">Seleccione linea</option>
+                        <option *ngFor="let d of catalog.linea" [value]="d.nombre">{{ d.nombre }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre Vendedor</span>
+                    </div>
+                    <input id="nombre" type="text" class="form-control form-control-sm" placeholder="Nombre vendedor" [(ngModel)]="vendedor.nombre">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                    </div>
+                    <input id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección vendedor" [(ngModel)]="vendedor.direccion">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+                    </div>
+                    <input id="telefono" type="text" class="form-control form-control-sm" placeholder="Teléfono vendedor" [(ngModel)]="vendedor.telefono" (keypress)="onlyNumber($event)">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Provincia</span>
+                    </div>
+                    <input id="provincia" type="text" class="form-control form-control-sm" placeholder="Provincia vendedor" [(ngModel)]="vendedor.provincia">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ciudad</span>
+                    </div>
+                    <input id="ciudad" type="text" class="form-control form-control-sm" placeholder="Ciudad vendedor" [(ngModel)]="vendedor.ciudad">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sucursal</span>
+                    </div>
+                    <select id="sucursal" class="form-control form-control-sm" [(ngModel)]="vendedor.fk_sucursal">
+                        <option [value]="0">Seleccione sucursal</option>
+                        <option *ngFor="let d of catalog.sucursal" [value]="d.nombre">{{ d.nombre }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Presupuesto</span>
+                    </div>
+                    <input id="presupuesto" type="number" step="0.25" class="form-control form-control-sm" placeholder="Presupuesto vendedor" [(ngModel)]="vendedor.presupuesto">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Inicio de actividades</span>
+                    </div>
+                    <input id="inicio_actividades" type="date" class="form-control form-control-sm" [(ngModel)]="vendedor.inicio_actividades">
+                </div>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Inicio de actividades" styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="vendedor.inicio_actividades" class="form-control" name="dateFrom" format='yyyy-MM-dd'
+                        id="idNominaDatef">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div>
+            <div class="tab_container">
+                <input type="radio" name="tabs" class="invisible">
+                <label class="invisible lab mb-0" style="width: 30%;"><br></label>
+
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1" class="lab mb-0"><i class="fa fa-user"
+                        aria-hidden="true"></i><span>Contactos</span></label>
+
+                <input id="tab2" type="radio" name="tabs">
+                <label class="lab mb-0" for="tab2"><i class="fa fa-user-circle-o" aria-hidden="true"></i><span>
+                        Productos
+                    </span></label>
+
+                <input type="radio" name="tabs" class="invisible">
+                <label class="invisible lab mb-0" style="width: 30%;"><br></label>
+
+                <section id="content1" class="tab-content">
+                    <h5 class="mt-2 mb-2">Contactos del vendedor</h5>
+                    <app-contactos-vendedor></app-contactos-vendedor>
+                </section>
+
+                <section id="content2" class="tab-content">
+                    <div class="row justify-content-end mt-2 mb-2">
+                        <h5 class="col-6">Productos asignados</h5>
+                        <div class="col-6 text-right btn-add">
+                            <button class="btn btn-success btn-sm" placement="top"
+                                ngbTooltip="Agregar productos a la cotización" (click)="addProduct()">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                        
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <div class="table-responsive responsive-table p-2">
+                                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                    class="table no-footer table-hover">
+                                    <thead class="thead-dark">
+                                        <tr style="width: 100%;">
+                                            <th style="width: 20%;text-align: center;">Nombre</th>
+                                            <th style="width: 10%;">Código</th>
+                                            <th style="width: 10%;">Precio</th>
+                                            <th style="width: 10%;">Descuento</th>
+                                            <th style="width: 10%;">Stock</th>
+                                            <th style="width: 10%;">Cantidad</th>
+                                            <th style="width: 10%;">P/U</th>
+                                            <th style="width: 10%;">Total</th>
+                                            <th style="width: 10%;">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="dataProductos !== []">
+                                        <tr *ngFor="let d of dataProductos">
+                                            <td *ngIf="d.action"><input type="text" placeholder="Producto"
+                                                [(ngModel)]="d.nombre" [disabled]="true"></td>
+                                            <td *ngIf="d.action">
+                                                <input type="text" placeholder="Código" [(ngModel)]="d.codigoProducto"
+                                                    [disabled]="true">
+                                            </td>
+                                            <td *ngIf="d.action"><input type="text"
+                                                    placeholder="$ {{d.precio_normal}}" [disabled]="true"
+                                                    style="text-align: right !important;"></td>
+        
+                                            <td *ngIf="d.action"><input type="text"
+                                                    placeholder="{{d.porcen_promocion}} %" [disabled]="true"
+                                                    style="text-align: right !important;"></td>
+        
+                                            <td *ngIf="d.action">
+                                                <div *ngIf="(d.stock-d.cantidad_reservada) > 0">
+                                                    <input type="text" placeholder="0.00" style="text-align: right !important;"
+                                                        placeholder="{{(d.stock-d.cantidad_reservada).toFixed(2)}}"
+                                                        [disabled]="true">
+                                                </div>
+                                                <div *ngIf="(d.stock-d.cantidad_reservada) <= 0">
+                                                    <input type="text" placeholder="0.00" [disabled]="true"
+                                                        style="text-align: right !important;">
+                                                </div>
+                                            </td>
+        
+                                            <td style="text-align: right;" *ngIf="d.action">
+                                                <input type="text" class="form-control form-control-sm" placeholder="0.00"
+                                                    style="text-align: right;padding-right: 10px;" [(ngModel)]="d.quantity"
+                                                    min="0" id="quantyId"
+                                                    [disabled]="actions.dComponet">
+                                            </td><!-- (keyup)="sumTotal(i)" (keypress)="commonServices.FormatDecimalVal($event)" -->
+        
+                                            <td *ngIf="d.action">
+                                                <input type="text" class="form-control form-control-sm" placeholder="$ 0.00"
+                                                    style="text-align: right;padding-right: 10px;" [(ngModel)]="d.price"
+                                                    min="0"
+                                                    [disabled]="actions.dComponet">
+                                            </td><!-- (keyup)="sumTotal(i)" (keypress)="commonServices.FormatDecimalVal($event)" -->
+                                            <td *ngIf="d.action">
+                                                <input type="text" placeholder="$ {{d.totalAux}}" [disabled]="true"
+                                                    class="form-control form-control-sm" style="text-align: right !important;">
+                                            </td>
+                                            <td style="text-align: center;" *ngIf="d.action">
+                                                <button class="btn btn-danger btn-sm" placement="top"
+                                                    ngbTooltip="Eliminar Items" (click)="deleteItems(i)"
+                                                    [disabled]="actions.dComponet">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            
+            </div>
+        
+        </div>
+        
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spVendedor"></cc-spiner-procesar>

@@ -1,0 +1,50 @@
+<div style="max-height: 130px; overflow-y: scroll;">
+    <table class="table table-striped table-bordered table-k table-hover">
+        <thead>
+            <tr>
+                <th class="text-center w-50">Nombre</th>
+                <th class="text-center" style="width: 15%;">Extensión</th>
+                <th class="text-center" style="width: 15%;">Fecha</th>
+                <th class="text-center" style="width: 35%;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!anexos.length">
+               <td colspan="3" class="text-center"><h6>No hay datos.</h6></td> 
+            </tr>
+            <tr *ngFor="let anexo of anexos">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td>{{ anexo.fecha}}</td>
+                <td class="text-center">
+                    <!-- <div>
+                        <button ngbTooltip="Ver Anexo" class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button ngbTooltip="Descargar Anexo" class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button ngbTooltip="Eliminar Anexo" class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div> -->
+                    <div class="input-group-append">
+                        <button ngbTooltip="Ver Anexo" class="btn btn-sm mx-1 btn-help_icon btn-outline btn-outline_help" (click)="verAnexo(anexo)">
+                            <!-- <i class="far fa-eye"></i> -->
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                        <button ngbTooltip="Descargar Anexo" class="btn btn-sm mx-1 btn-action_icon btn-outline btn-outline_action" (click)="descargarAnexo(anexo)">
+                            <!-- <i class="far fa-download"></i> -->
+                            <span class="material-symbols-outlined">download</span>
+                        </button>
+                        <button ngbTooltip="Eliminar Anexo" class="btn btn-sm mx-1 btn-danger_icon btn-outline btn-outline_danger" (click)="deleteAnexo(anexo)">
+                            <!-- <i class="far fa-trash-alt"></i> -->
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renMerContratoAnexos"></cc-spiner-procesar>

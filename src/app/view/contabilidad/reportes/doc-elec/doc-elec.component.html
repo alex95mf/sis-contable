@@ -1,0 +1,144 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Consulta de Documentos Electronicos" cstyle="bg-light" icono="fas fa-list"
+        filtroBoton="btnsConsultaDocElec" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border pb-2 px-3 mb-2">
+            <legend class="w-auto mb-0">Filtros</legend>
+            <div class="row">
+                <div class="col">
+                    <app-cc-input-group-prepend label="Tipo de Documento" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [(ngModel)]="filter.tipo_documento"
+                            [items]="cmb_tipo_documento" bindValue="codigo" bindLabel="nombre">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Estado Documento" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [(ngModel)]="filter.estado_documento"
+                            [items]="cmb_estado_documento" bindValue="valor" bindLabel="descripcion">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="filter.razon_social">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Num. Identificacion" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="filter.num_identificacion">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+    </app-button-radio-active>
+    <div class="table-responsive">
+        <table mat-table [dataSource]="lst_documentos" class="w-100 mat-elevation-z8">
+            <ng-container matColumnDef="checkbox">
+                <th mat-header-cell *matHeaderCellDef> <input type="checkbox" (change)="selectAll()" [(ngModel)]="masterSelected" [indeterminate]="masterIndeterminate"> </th>
+                <td mat-cell *matCellDef="let element"> <input type="checkbox" [(ngModel)]="element.check" (change)="checkIndetereminate()" [disabled]="element.estado_doc_elec == 'A' || element.estado_doc_elec == 'X'"> </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="documento">
+                <th mat-header-cell *matHeaderCellDef> Documento </th>
+                <td mat-cell *matCellDef="let element" style="min-width: 165px; padding-right: 10px;"> 
+                    {{ element.num_doc }}<br>
+                    <small class="text-muted">{{ element.codigo_tipo_documento_texto }}</small>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="beneficiario">
+                <th mat-header-cell *matHeaderCellDef> Beneficiario </th>
+                <td mat-cell *matCellDef="let element"> 
+                    {{ element.contribuyente?.razon_social }}<br>
+                    <small class="text-muted">{{ element.contribuyente?.tipo_documento }}: {{ element.contribuyente?.num_documento }}</small>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                <td mat-cell *matCellDef="let element" style="min-width: 120px;"> {{ element.fecha_compra }} </td>
+            </ng-container>
+            <ng-container matColumnDef="subtotal">
+                <th mat-header-cell *matHeaderCellDef> Subtotal </th>
+                <td mat-cell *matCellDef="let element"> $ {{ element.subtotal | number:'1.2-2' }} </td>
+            </ng-container>
+            <ng-container matColumnDef="iva">
+                <th mat-header-cell *matHeaderCellDef> IVA </th>
+                <td mat-cell *matCellDef="let element"> $ {{ element.valor_iva | number:'1.2-2' }} </td>
+            </ng-container>
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef> Total </th>
+                <td mat-cell *matCellDef="let element"> $ {{ element.total | number:'1.2-2' }} </td>
+            </ng-container>
+            <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef> Estado Documento </th>
+                <td mat-cell *matCellDef="let element"> 
+                    {{ element.estado_sri ?? 'N/A' }}<br>
+                    <!-- <small class="text-muted">{{ element.estado_elec_texto }}</small>  -->
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="observacion">
+                <th mat-header-cell *matHeaderCellDef> Observacion </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <span matTooltip="{{ element.observacion_sri }}">{{ element.observacion_sri }}</span><br>
+                    <small class="text-muted" matTooltip="{{ element.observacion_elec }}">{{ element.observacion_elec }}</small>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="fecha_autorizacion">
+                <th mat-header-cell *matHeaderCellDef> Fecha Autorizacion </th>
+                <td mat-cell *matCellDef="let element" style="min-width: fit-content;"> {{ element.fecha_autorizacion | date:'YYYY-MM-dd' ?? 'N/A' }} </td>
+            </ng-container>
+            <ng-container matColumnDef="clave_acceso">
+                <th mat-header-cell *matHeaderCellDef> Clave Acceso </th>
+                <td mat-cell *matCellDef="let element"> {{ element.clave_acceso_elec }} </td>
+            </ng-container>
+            <ng-container matColumnDef="correo">
+                <th mat-header-cell *matHeaderCellDef> Correo Destinatario </th>
+                <td mat-cell *matCellDef="let element"> {{ element.contribuyente?.correo_facturacion }} </td>
+            </ng-container>
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-primary" matTooltip="Descargar XML" 
+                            (click)="descargarXML(element)" [disabled]="(['E', 'G', 'F', 'R'].includes(element.estado_doc_elec))">
+                            <i class="fas fa-file-code"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" matTooltip="Descargar PDF" 
+                            (click)="descargarPDF(element)">
+                            <i class="fas fa-file-pdf"></i>
+                        </button>
+                        <button class="btn btn-sm btn-secondary" matTooltip="Enviar Correo" 
+                            (click)="enviarCorreo(element)" [disabled]="(['E', 'G', 'F', 'R'].includes(element.estado_doc_elec))">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                    </div>
+                    <button class="btn btn-sm btn-outline-danger ml-1" matTooltip="Reiniciar" 
+                        (click)="reiniciar(element)" [disabled]="['A', 'X'].includes(element.estado_doc_elec)">
+                        <i class="fas fa-redo-alt"></i>
+                    </button>
+                </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator
+            [pageSizeOptions]="[25, 50, 75, 100]"
+            showFirstLastButtons>
+        </mat-paginator>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spConDocElec"></cc-spiner-procesar>

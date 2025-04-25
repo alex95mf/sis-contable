@@ -1,0 +1,41 @@
+<div class="input-group input-group-sm  mt-1">
+    <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">{{ labelDescription }}</span>
+        </div>
+        <ng-select [disabled]="isDisabled" [clearable]="false" (open)="cargaInfoSustento()" (change)="onSelectMessage()"
+            class="form-control form-control-sm custom-select" (clear)="onClearLang()" [codigocatalogo]=""
+            [(ngModel)]="ngModelCcHijoCatg"
+            style="height: 28px; padding-top: 0px;padding-bottom: 0px;outline: unset;box-shadow: unset;">
+            <ng-option value="0" [disabled]="true" aria-selected="true" aria-placeholder="">{{ optionDefault}}</ng-option>
+            <ng-option *ngFor="let catalogo of catalogos" [value]="catalogo.id_catalogo">{{catalogo.cat_nombre}}</ng-option>
+        </ng-select>
+    </div>
+</div>
+
+
+<ng-template #ComboSinDataCatalog>
+    <p-skeleton height="2rem" styleClass="p-mb-2"></p-skeleton>
+</ng-template> 
+
+<!-- <pre>{{catalogos && catalogos.length>0 | json}}</pre> -->
+<!-- <mat-error  *ngIf="select.errors?.required"> {{ hint }} </mat-error> -->
+
+<!-- <div class="input-group input-group-sm mt-1">
+    <div class="input-group-prepend">
+
+        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">{{ labelDescription }}</span>
+    </div>
+
+    <ng-select [clearable]="false" (click)="onSelectMessage()" class="form-control form-control-sm custom-select"
+        (clear)="onClearLang()" [codigocatalogo]="" [(ngModel)]="prueba"
+        style="height: 28px; padding-top: 0px;padding-bottom: 0px;outline: unset;box-shadow: unset;"
+        [disabled]="dusuario" id="IdestadoEmpresa">
+        <ng-option value="0" [disabled]="true" aria-selected="true" aria-placeholder="">Selecionar opcion</ng-option>
+
+
+        <ng-option *ngFor="let catalogo of catalogos" [value]="catalogo.id_catalogo">{{catalogo.cat_nombre}}</ng-option>
+
+    </ng-select>
+
+</div> -->

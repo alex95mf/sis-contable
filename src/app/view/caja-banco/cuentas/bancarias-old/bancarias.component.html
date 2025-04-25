@@ -1,0 +1,130 @@
+<br>
+<app-button-radio-active titulo="Ingreso bancos" cstyle="bg-gradient-primary text-white" filtroBoton="btnIngBacn"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" *ngIf="permisions" icono="fas fa-university">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Nombre banco" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="banco.name_banks" id="idnamebanks"
+                    placeholder="Nombre de banco">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="País moneda" styleSpan="size-span-campo">
+                <ng-select id="IdRolesUsersDoc" class="form-control form-control-sm" appendTo="body" [searchable]="true"
+                    [disabled]="permisions.editar == '0' " [clearable]="false" [(ngModel)]="banco.fk_pais_moneda"
+                    (ngModelChange)="getCountry($event)">
+                    <ng-option [value]="0">Seleccione país de la moneda</ng-option>
+                    <ng-option *ngFor="let d of arrayCountrys" [value]="d.id">{{d.nom_pais}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Nombre jefe cuenta" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="banco.name_jefe_cuenta"
+                    id="idnamejefe" placeholder="Nombre jefe de cuenta">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Tipo cuenta" styleSpan="size-span-campo">
+                <select [(ngModel)]="banco.tipo_cuenta" class="form-control form-control-sm custom-select"
+                    [disabled]="permisions.editar == '0'">
+                    <option [value]="0">Seleccione tipo cuenta</option>
+                    <option *ngFor="let d of arrayTipAcc" [value]="d.valor">{{d.valor}}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Moneda" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="banco.moneda" [disabled]="true">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Teléfono jefe cuenta" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" maxlength="10"
+                    [(ngModel)]="banco.telf_jefe_cuenta" id="idtelfjefe" placeholder="Teléfono de jefe">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Número de Cuenta" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" maxlength="20" [(ngModel)]="banco.num_cuenta"
+                    id="Idnumcuenta" min="0" (keypress)="commonServices.FormatDecimalVal($event)"
+                    placeholder="Número de cuenta">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Cuenta contable" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="banco.cuenta_contable"
+                    id="idcuentacontable" [disabled]="true" placeholder="Cuenta contable banco">
+                <div class="input-group-prepend">
+                    <button class="btn btn-primary btn-sm"  id="inputLabel-prepend" (click)="showAccounts()"
+                    matTooltip="Seleccione cuenta">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Saldo" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm text-right" placeholder="$ {{banco.saldo_cuenta}}"
+                    id="idsaldo" min="0" (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                <select [(ngModel)]="banco.status" class="form-control form-control-sm custom-select"
+                    [disabled]="permisions.editar == '0'">
+                    <option [value]="1">Activo</option>
+                    <option [value]="0">Inactivo</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Nombre cuenta" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="banco.name_acc" [disabled]="true"
+                    placeholder="Nombre cuenta contable">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <fieldset class="border p-2 mb-1 mt-2 filters">
+        <legend class="w-auto h6">Listado</legend>
+        <div class="table-responsive responsive-table">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                class="table dataTable no-footer table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre banco</th>
+                        <th>Empresa</th>
+                        <th>No. cuenta</th>
+                        <th>Tipo cuenta</th>
+                        <th>Saldo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="validaDt">
+                    <tr *ngFor="let dt of dataAccBanks" (click)="setAccount(dt)" style="cursor: pointer;">
+                        <td>{{ dt.name_banks}}</td>
+                        <td>{{ dt.nombre_comercial }}</td>
+                        <td>{{ dt.num_cuenta}}</td>
+                        <td>{{ dt.tipo_cuenta}}</td>
+                        <td style="text-align: right !important;padding-right: 20px;">$ {{ dt.saldo_cuenta }}</td>
+                        <td *ngIf="dt.status == 1">Activo</td>
+                        <td *ngIf="dt.status == 0">Inactivo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spBacnBcn"></cc-spiner-procesar>

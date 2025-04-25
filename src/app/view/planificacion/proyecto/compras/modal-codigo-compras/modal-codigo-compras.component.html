@@ -1,0 +1,60 @@
+<app-button-radio-active-new [titulo]="fTitle" cstyle="bg-gradient-primary text-white" icono="fas fa-search"
+    [groupButton]="vmButtons" filtroBoton="btnsBusqCPC" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border card-fieldset">
+        <legend class="w-auto card-legend">Filtros</legend>
+        <div class="row m-0">
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Cod. Unificado" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.codigo">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.nombre">
+                </app-cc-input-group-prepend>
+            </div>
+
+
+        </div>
+    </fieldset>
+
+    <div class="row m-0">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                    <thead class="sticky-header">
+                        <tr class="text-center">
+                            <th style="width: 10%;">Cod. Unificado</th>
+                            <th>Nivel</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!resultados.length">
+                            <td colspan="2" class="text-center"><h6>No hay datos</h6></td>
+                        </tr>
+                        <tr *ngFor="let resultado of resultados" (click)="seleccionaCPC(resultado)" style="cursor: pointer;">
+                            <td>{{ resultado.cod_unificado }}</td>
+                            <td>{{ resultado.nivel }}</td>
+                            <td>{{ resultado.nombre }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator 
+                showFirstLastButtons
+                [length]="paginate.length"
+                [pageSize]="paginate.perPage"
+                [pageSizeOptions]="paginate.pageSizeOptions"
+                [pageIndex]="paginate.page - 1"
+                (page)="changePaginate($event)"
+                aria-label="Select page">
+            </mat-paginator>
+            </div>
+        </div>
+    </div>
+
+
+ 
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="msgSpinner"></cc-spiner-procesar>

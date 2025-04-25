@@ -1,0 +1,31 @@
+
+<div class="modal-body">
+    <app-button-radio-active titulo="Listado de Cajas chicas" filtroBoton="btnsCajaBoxList" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="table-responsive responsive-table mt-2">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre caja</th>
+                        <th>Nombre cuenta</th>
+                        <th>Monto</th>
+                        <th>Monto mínimo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="validaDt">
+                    <tr *ngFor="let dt of dataDT" (click)="setDataBox(dt)" style="cursor: pointer;">
+                        <td>{{ dt.nombre_caja}}</td>
+                        <td>{{ dt.name_cuenta }}</td>
+                        <td>{{ dt.monto}}</td>
+                        <td>{{ dt.mov_minimo}}</td>
+                        <td *ngIf="dt.estado == 1">Activo</td>
+                        <td *ngIf="dt.estado == 0">Inactivo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </app-button-radio-active>
+</div>
+
+
+

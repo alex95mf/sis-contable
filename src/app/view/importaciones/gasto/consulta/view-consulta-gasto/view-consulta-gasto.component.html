@@ -1,0 +1,125 @@
+<div class="mt -2 filter">
+    <app-button-radio-active titulo="Detalle Importacion de Gasto" filtroBoton="btnCuenta" cstyle="bg-gradient-primary text-white " [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-clipboard-check">
+        <div class="row">
+            <div class="col-12">
+                <div class="col-12 mb-3 pb-2 pt-2" style="border-bottom: 1px solid;border-color: rgba(0, 0, 0, 0.205);font-weight:bold;">
+                    <span class="pl-0">GASTO #:  G-IMP-{{dataEnvio.numSec}} </span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha:" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.fecha" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Aplica A:" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.aplica_a" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="No Pedido:" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.numPedido" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mt-1">
+
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Tipo Documento" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.tipoDocumento" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="No Documento" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.num_doc_gasto" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Tipo gasto" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.nombreGrupo" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-sm-8">
+                <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.razon_social" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Ruc" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.ruc" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Tipo pago" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.forma_pago" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Forma Pago" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm text-right" [value]="dataEnvio.tipo_pago" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="No Cuotas" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.num_cuotas" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Subtotal" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm text-right" [value]="dataEnvio.subTotal" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Iva" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm text-right" [value]="dataEnvio.iva" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Total" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm text-right" [value]="'$' + dataEnvio.total" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 filters" style="padding-top: 20px;padding-bottom: 20px;">
+                <div class="table-responsive responsive-table">
+                    <table class="table no-footer table-hover">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 25%;">Nombre Rubro</th>
+                                <th style="width: 10%;">Grupo</th>
+                                <th style="width: 10%;">Código</th>
+                                <th style="width: 25%;">Cuenta</th>
+                                <th style="width:12%;">Obligatorio</th>
+                                <th style="width: 8%;">Paga Iva</th>
+                                <th style="width: 10%;">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of arrayDt">
+                                <td class="text-left">{{ dt.nombre }}</td>
+                                <td class="text-center">{{ dt.nombreGrupo }}</td>
+                                <td class="text-left">{{ dt.cuenta }}</td>
+                                <td class="text-left">{{ dt.nombre_cuenta }}</td>
+                                <td class="text-center" *ngIf="dt.obligatorio == 0">No</td>
+                                <td class="text-center" *ngIf="dt.obligatorio != 0">Si</td>
+                                <td class="text-center" *ngIf="dt.paga_iva == 0">No</td>
+                                <td class="text-center" *ngIf="dt.paga_iva != 0">Si</td>
+                                <td class="text-right">{{ commonServices.formatNumber(dt.valor) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>

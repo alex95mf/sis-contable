@@ -1,0 +1,48 @@
+<div class="row text-right">
+    <div class="col">
+        <button  class="btn btn-sm btn-danger"  placement="top" ngbTooltip="Cerrar" (click)="close()">Cerrar</button>
+    </div>
+</div>
+<h5 style="color: rgb(27, 25, 25);">Registro de Faltas y permisos.<br> Empleado : <strong>{{data.emp_identificacion + ' - '}}{{data.emp_full_nombre}}</strong></h5>
+<h6 style="color: rgb(27, 25, 25);">Total horas F/P: <strong>{{data.totalHorasFaltasPermisos}}</strong></h6>
+
+<mat-dialog-content>
+    <div>
+        
+        <p-table [value]="data.faltas_permisos" [scrollable]="true" scrollHeight="400px">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="min-width:100px">Fecha Inicio</th>
+                    <th style="min-width:100px">Fecha Fin</th>
+                    <th style="min-width:70px">N° Horas</th>
+                    <th style="min-width:200px">Observación</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-faltaPermisos>
+                
+                <tr>
+                    <td style="min-width:100px">{{faltaPermisos.flpr_fecha_inicio | date:'yyyy-MM-dd'}}</td>
+                    <td style="min-width:100px">{{faltaPermisos.flpr_fecha_fin | date:'yyyy-MM-dd'}}</td>
+                    <td style="min-width:70px">{{faltaPermisos.flpr_num_horas}}</td>
+                    <td style="min-width:200px">{{faltaPermisos.flpr_observacion}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td class="EmptyTable" [attr.colspan]="16">
+                        No hay información para mostrar
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div>
+
+    </div>
+</mat-dialog-content>
+
+
+<!-- <mat-dialog-actions>
+    <button mat-button mat-dialog-close mat-dialog-close="true">Logear</button>
+    <button mat-button mat-dialog-close mat-dialog-close="false">desLogaer</button>
+</mat-dialog-actions> -->

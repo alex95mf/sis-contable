@@ -1,0 +1,374 @@
+<br>
+<app-button-radio-active titulo="Prestamos" filtroBoton="btnPresRol" cstyle="bg-gradient-primary text-white"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-money"
+    *ngIf="permisions != undefined">
+
+    <fieldset class="border p-2 mb-1 mt-2">
+        <legend class="w-auto ">
+            <span class="btn btn-sm" matTooltip="Mostrar/Ocultar" (click)="isCollapsed1 = !isCollapsed1"> <strong
+                    class="style-cab">Información General</strong></span>
+        </legend>
+
+        <div [ngbCollapse]="isCollapsed1">
+            <div class="row">
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo">
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="prestamos.tipo" id="IdTipo"
+                            [disabled]="permisions.editar == '0'  || !actions.dComponet">
+                    </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Tipo Pago" styleSpan="size-span-campo">
+                        <select [(ngModel)]="prestamos.tipoPago" class="form-control form-control-sm custom-select"
+                            id="IdTipoPago" [disabled]="permisions.editar == '0' || !actions.dComponet">
+                            <option *ngFor="let d of catalog.pagoPrestamo" [value]="d.valor">{{ d.valor }}</option>
+                        </select>
+                    </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                        <ejs-datepicker [(ngModel)]="prestamos.fecha" class="form-control form-control-sm"
+                            format="yyyy-MM-dd" id="" [disabled]="permisions.editar == '0'  || !actions.dComponet ">
+                        </ejs-datepicker>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm">
+                    <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn btn-primary" id="idbuscar"
+                                [disabled]="permisions[0].editar == '0' || !actions.dComponet" placement="top"
+                                matTooltip="Buscar Cuenta" (click)="searchCuenta()">
+                                <i class="fa fa-search fa-lg" style="font-size:12px" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="input-group-prepend">
+                            <input type="text" [(ngModel)]="prestamos.nombre" class="form-control form-control-sm"
+                                id="Idnombre" placeholder="Nombre" disabled>
+                        </div>
+                        <div class="input-group-prepend">
+                            <input type="text" [(ngModel)]="prestamos.apellido" class="form-control form-control-sm"
+                                id="Idapellido" placeholder="Apellido" disabled>
+                        </div>
+                        <div class="input-group-prepend">
+                            <input type="text" [(ngModel)]="prestamos.documento" class="form-control form-control-sm"
+                                id="Iddocumento" placeholder="Documento" disabled>
+                        </div>
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn btn-success" id="idlimpiar"
+                                [disabled]="permisions[0].editar == '0' || !actions.dComponet" placement="top"
+                                matTooltip="Limpiar Empleado" (click)="resetEmpleado()">
+                                <i class="fas fa-eraser  fa-lg" style="font-size:12px"></i>
+                            </button>
+                        </div>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Forma de Pago" styleSpan="size-span-campo">
+                        <ng-select id="inputLabel-prepend" class="form-control custom" appendTo="body"
+                            aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                            (ngModelChange)="limpiarCtaTran()" [(ngModel)]="prestamos.lgFormaPago" [clearable]=false>
+                            <ng-option value="">--Seleccionar Forma de Pago--</ng-option>
+                            <ng-option value="C">CHEQUE</ng-option>
+                            <ng-option value="T">TRANSACCION</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-6" *ngIf="prestamos.lgFormaPago == 'C' || prestamos.lgFormaPago == 'T'">
+                    <app-cc-input-group-prepend label="Cuenta" styleSpan="size-span-campo">
+                        <ng-select id="inputLabel-prepend" class="form-control custom" appendTo="body"
+                            aria-label="Small" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="prestamos.lgCuenta"
+                            [clearable]=false>
+                            <ng-option value="">-- Seleccionar un banco --</ng-option>
+                            <ng-option *ngFor="let d of arrayBanks | filter:[cambioTipoCta()]" [value]="d">
+                                {{d.name_cuenta + ' ( ' + validaciones.roundNumber(d.saldo_cuenta,2) + ' )'}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-6" *ngIf="prestamos.lgFormaPago == 'E'">
+                    <app-cc-input-group-prepend label="Caja Chica" styleSpan="size-span-campo">
+                        <ng-select id="inputLabel-prepend" class="form-control custom" aria-label="Small"
+                            appendTo="body" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="prestamos.lgCuenta"
+                            [clearable]=false>
+                            <ng-option value="">-- Seleccionar --</ng-option>
+                            <ng-option *ngFor="let item of lstCajaChica" [value]="item">{{item.nombre_caja + ' (
+                                Disponible: ' + validaciones.roundNumber(item.saldo,2) + ' )'}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row" *ngIf="prestamos.lgFormaPago == 'C' || prestamos.lgFormaPago == 'T'">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend
+                        label="{{prestamos.lgFormaPago == 'T'?'Num. Transaccion':'Num. Cheque'}}"
+                        styleSpan="size-span-campo">
+                        <input class="form-control " type="text" [(ngModel)]="prestamos.lgNumCheque"
+                            (keypress)="validaciones.numberOnly($event)" maxlength="20"
+                            aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend"
+                            placeholder="{{prestamos.lgFormaPago == 'T'?'Ingresar Numero de Transaccion':'Ingresar Numero de cheque'}}" />
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <fieldset class="border p-2 mb-1 mt-2">
+                <legend class="w-auto ">
+                    <span class="btn btn-sm" matTooltip="Mostrar/Ocultar" (click)="isCollapsed2 = !isCollapsed2">
+                        <strong class="style-cab">Calcular Prestamo</strong></span>
+                </legend>
+
+                <div [ngbCollapse]="isCollapsed2">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Monto" styleSpan="size-span-otro">
+                                <input type="number" min="0" [(ngModel)]="prestamos.monto" id="IdMonto"
+                                    class="form-control form-control-sm text-right"
+                                    [disabled]="permisions.editar == '0'  || !actions.dComponet">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Abono a la Deuda" styleSpan="size-span-campo">
+                                <input type="text" class="form-control form-control-sm text-right" disabled
+                                    [value]="prestamos.abono | currency: 'USD' | lowercase">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="N° Cuotas" styleSpan="size-span-otro">
+                                <input type="number" class="form-control form-control-sm text-right"
+                                    [(ngModel)]="prestamos.cuotas" id="IdCuotas"
+                                    [disabled]="permisions.editar == '0'  || !actions.dComponet">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Saldo Pendiente" styleSpan="size-span-campo">
+                                <input type="text" class="form-control form-control-sm text-right" disabled
+                                    [value]="prestamos.saldo | currency: 'USD' | lowercase">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Intereses" styleSpan="size-span-otro">
+                                <input type="number" class="form-control form-control-sm text-right"
+                                    [(ngModel)]="prestamos.porcentaje" id="Idporcentaje"
+                                    [disabled]="permisions.editar == '0'  || !actions.dComponet">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6" *ngIf="showCalculo">
+                            <app-cc-input-group-prepend label="A Pagar" styleSpan="size-span-campo">
+                                <input type="text" class="form-control form-control-sm estimo-monto-apagar  text-right"
+                                    disabled [value]="prestamos.cuotasXpagar | currency: 'USD' | lowercase">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Monto Total" styleSpan="size-span-otro">
+                                <input type="text" class="form-control form-control-sm estimo-monto-total text-right"
+                                    disabled [value]="prestamos.totalMonto | currency: 'USD' | lowercase">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary l" (click)="calcularDatos()" placement="top"
+                                        matTooltip="Calcular Prestamo"
+                                        [disabled]="permisions.editar == '0'  || prestamos.monto == '0' ">
+                                        <i class="fas fa-calculator fa-lg" style="font-size: 20px;"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-primary l" (click)="resetCalculo()" placement="top"
+                                        matTooltip="Limpiar Prestamo"
+                                        [disabled]="permisions.editar == '0'  || !actions.dComponet ">
+                                        <i class="fas fa-redo  fa-lg"></i>
+                                    </button>
+                                </div>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6" *ngIf="showCalculo">
+                            <app-cc-input-group-prepend label="Intereses" styleSpan="size-span-campo">
+                                <input type="text" class="form-control form-control-sm estimo-monto-apagar  text-right"
+                                    disabled [value]="prestamos.intereses | currency: 'USD' | lowercase">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-cc-input-group-prepend label="Detalle" styleSpan="size-span-otro">
+                                <textarea [(ngModel)]="prestamos.descripcion" id="idDescripcion"
+                                    class="form-control form-control-sm" rows="2" placeholder="Ingresar Detalle"
+                                    [disabled]="permisions.editar == '0'  || !actions.dComponet "> </textarea>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-sm-6">
+            <fieldset class="border p-2 mb-1 mt-2 filters">
+                <legend class="w-auto ">
+                    <span class="btn btn-sm" matTooltip="Mostrar/Ocultar" (click)="isCollapsed3 = !isCollapsed3">
+                        <strong class="style-cab">Listado Cuotas</strong></span>
+                </legend>
+
+                <div [ngbCollapse]="isCollapsed3">
+                    <div class="contenedor-scrol-prestamo table-responsive responsive-table">
+                        <table class="table table-sm table-hover">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th>N° Cuotas</th>
+                                    <th>Fecha Pago</th>
+                                    <th>Monto Cuota</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" style="width: 100%;" *ngFor="let dt of dtcuotas; let i = index">
+                                    <td style="width: 0%;">
+                                        <strong>{{ i + 1}}</strong>
+                                    </td>
+                                    <td style="width: 10%;">
+                                        <strong>
+                                            <ejs-datepicker [(ngModel)]="dt.fecha_vencimiento" format="yyyy-MM-dd"
+                                                (ngModelChange)="setfecha()"></ejs-datepicker>
+                                        </strong>
+                                    </td>
+                                    <td style="width: 5%;">
+                                        <strong>{{dt.monto | currency: 'USD' | lowercase}}</strong>
+                                    </td>
+                                    <td style="width: 5%;">
+                                        <select [(ngModel)]="dt.estado"
+                                            class="form-control form-control-sm custom-select" id="idEstado"
+                                            [disabled]="!estadoDisabled" style="width: 100%;">
+                                            <option *ngFor="let d of arrayStatus" [value]="d.estado">{{ d.estado }}
+                                            </option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <fieldset class="border p-2 mb-1 mt-2 filters">
+        <legend class="w-auto ">
+            <span class="btn btn-sm" matTooltip="Mostrar/Ocultar" (click)="isCollapsed4 = !isCollapsed4"> <strong
+                    class="style-cab">Listado Prestamos</strong></span>
+        </legend>
+
+        <div [ngbCollapse]="isCollapsed4">
+            <div class="col container container-table">
+                <div class="tab_container ">
+                    <div class="table-responsive responsive-table ">
+                        <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger "
+                            class="table no-footer table-hover ">
+                            <thead class="text-center" style="background-color:black; color: white;">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Empleado</th>
+                                    <th>Cedula</th>
+                                    <th>Cantidad</th>
+                                    <th>N° Cuotas</th>
+                                    <th>Monto Total</th>
+                                    <th>Tipo de Pago</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="validaDtUser">
+                                <tr *ngFor="let dt of guardarolT; let i = index" style="font-weight:bold;"
+                                    class="text-center">
+                                    <td style="width: 0%;">{{i+1}}</td>
+                                    <td style="width: 5%;">{{ dt.nombres }}{{ dt.apellidos }}</td>
+                                    <td style="width: 3%;">{{ dt.numdoc }}</td>
+                                    <td style="width: 3%;">{{ dt.monto | currency: 'USD' | lowercase }}</td>
+                                    <td style="width: 1%;">{{ dt.cuotas | number: '1.0-0' }}</td>
+                                    <td style="width: 3%;">{{ dt.monto_total | currency: 'USD' | lowercase }}</td>
+                                    <td style="width: 3%;">{{ dt.tipo_pago }}</td>
+                                    <td style="width: 3%;">
+                                        <button class="btn btn-sm tooltip-test my-1 "
+                                            style="cursor:pointer;background-color: #FFC107; border-radius: 10px "
+                                            (click)="informaciondtPrestamo(dt,i) " placement="top
+                                        " matTooltip="Mostrar Detalle Información "> <i style="color:black; "
+                                                class="fa fa-eye "></i>
+                                        </button>
+                                        <button class="btn btn-sm tooltip-test my-1"
+                                            style="cursor:pointer;background-color: #2E76BD; color: black; border-radius: 10px;box-shadow: unset;outline: unset;"
+                                            (click)="editPrestamo(dt,i)" placement="top" matTooltip="Ver Prestamo"
+                                            [disabled]="dt.isModuleCaja == 1">
+                                            <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
+                                        </button>
+                                        <button type="button" (click)="imprimirAsiento(dt)"
+                                            class="btn btn-sm tooltip-test my-1"
+                                            style="cursor:pointer;background-color: #4dbc5ba3 ; color: black; border-radius: 10px"
+                                            placement="top" matTooltip="Imprimir Asiento Diario" >
+                                            <i class="fa fa-print"></i>
+                                        </button>
+                                        <button type="button" (click)="deletePrestamo(dt)"
+                                            class="btn btn-sm tooltip-test my-1"
+                                            style="cursor:pointer;background-color: #FF4A4A ; color: black; border-radius: 10px"
+                                            placement="top" matTooltip="Eliminar" [disabled]="dt.isModuleCaja == 1">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spPrRol"></cc-spiner-procesar>
+
+<div class="modal fade" id="PrestamosModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="font-family: 'Poppins1';">
+            <div class="modal-body">
+                <app-button-radio-active titulo="Anulación Prestamo" filtroBoton="btnAnlPres"
+                    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                    (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-money">
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-cc-input-group-prepend label="Motivo" styleSpan="size-span-otro">
+                                <textarea cols="50" rows="8" class="form-control form-control-sm"
+                                    [(ngModel)]="dataModaldescription" id="Idcausa"
+                                    placeholder="Ingrese el Motivo de anulación"></textarea>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button class="imprimirDatos" [useExistingCss]="true" printSectionId="print-section-prestamo" ngxPrint></button>
+
+<div [hidden]="true" id="print-section-prestamo" *ngIf="dataUser != undefined">
+    <app-prestamo-imprimir></app-prestamo-imprimir>
+</div>

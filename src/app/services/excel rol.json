@@ -1,0 +1,57 @@
+ws.columns = [
+    { header: '#', key: 'linea', width: 5 },
+    { header: 'No. Control', key: 'nro_control', width: 20 },
+    { header: 'No. Orden Pago', key: 'nro_orden_pago', width: 20 },
+    { header: 'Cédula', key: 'codigo_partida', width: 10 },
+    { header: 'Id Persona', key: 'nombre_partida', width: 15 },
+    { header: 'Empleado', key: 'valor_partida', width: 15 },
+    { header: 'Programa', key: 'tipo_presupuesto', width: 15 },
+    { header: 'Dirección ', key: 'tipo_afectacion', width: 15 },
+    { header: 'Departamento ', key: 'comprometido', width: 10 },
+    { header: ' DEVENGADO', key: 'devengado', width: 15 },
+    { header: 'COBRADO PAGADO', key: 'cobrado_pagado', width:  15},
+    { header: 'CODIGO PROGRAMA', key: 'cod_programa', width:  15},
+    { header: 'NOMBRE PROGRAMA ', key: 'nombre_programa', width:  15},
+    
+
+  ]
+
+  
+
+
+Programa
+// Dirección
+// Departamento
+// Días Trabajados
+// Sueldo Nominal
+// Sueldos
+//     aprobar: true
+//     area_nombre: "Área de finanzas"
+//     cedula: "0701558470"
+//     dep_nombre: "Biblioteca Municipal"
+//     dias_trabajados: 30
+//     full_name: "JOSE GONZALO JUMBO DIAZ"
+//     id_persona: "120"
+//     linea: "1"
+//     nro_control: "ROL-2024-0000000042"
+//     nro_orden_pago: ""
+//     programa_nombre: "Gestión de Planificación y Desarrollo Estratégico"
+//     salario: 1200
+//     tiene_control: true
+//     tiene_op: false
+//     total_diferencia: 648.14
+//     total_egresos: "791.40"
+//     total_ingresos: "1439.54"
+//     AQUIEGRESO: 600
+//     DECICINGRESO: 39.58
+//     DECITINGRESO: 100
+//     FDRESINGRESO: 99.96
+//     HE25INGRESO: 0
+//     HE100INGRESO: 0
+//     IESSEEGRESO: 137.4
+//     IESSPPROVISIONES: 145.8
+//     MULEGRESO: 0
+//     PREQUIEGRESO: 54
+//     RETJUDEGRESO: 0
+//     SUBROINGRESO: 0
+//     SUELINGRESO: 1200

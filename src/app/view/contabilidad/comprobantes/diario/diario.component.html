@@ -1,0 +1,533 @@
+<div class="mt-4 mb-5 pb-3">
+    <app-button-radio-active titulo="CONTABILIDAD - ASIENTO DIARIO" filtroBoton="btnsAsiento"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fa fa-buysellads">
+
+        <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado">
+
+            <p-tabView  [(activeIndex)]="activeIndex" (onChange)="dinamicoBotones($event)"  styleClass="tab_content_compras" class="overflow-hidden">
+                <p-tabPanel class="p-0" header="REGISTRO" [headerStyle]="{'font-size': '0.7rem'}">
+
+                    <div class="row  sectionOne p-2">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="{{HeaderInfo.doc_name}}" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" id="idNumAut" class="form-control" placeholder="número  autorización" [(ngModel)]="HeaderInfo.sec_parse" [disabled]="true">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                                <input type="date" class="form-control" [disabled]="permisions.agregar == '0' || !actionsDaily.new" [(ngModel)]="HeaderInfo.date" max="2050-01-01" >
+                                
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4 d-none">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo"
+                                        id="inputGroup-sizing-sm">Estado</span>
+                                </div>
+                                <input type="text" class="form-control form-control-sm" aria-describedby="inpNote"
+                                    value="Activo" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="{{HeaderInfo.concepto}}" styleSpan="size-span-campo font-weight-bold">
+                                <textarea  (change)="AgregarConcepto()" class="form-control" id="inpConcept" rows="2"
+                                    [(ngModel)]="HeaderInfo.concept" placeholder="Ingrese un concepto"
+                                    [disabled]="permisions.agregar == '0' || !actionsDaily.new"></textarea>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4" *ngIf="!isEdit" >
+                            <app-cc-input-group-prepend label="Corrección" styleSpan="size-span-campo font-weight-bold">
+                                <input type="checkbox"  class="form-control"  [(ngModel)]="isCorrection" >
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="mt-0 p-2">
+                        <div class="col-12 filters p-0">
+                            <div class="row justify-content-end pt-2">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right btn-add">
+                                    <div class="top_table_header">
+                                        <button type="button" class="btn btn-success btn-sm btn_add_detalle"
+                                            [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                            title="Inserte nuevo registro" (click)="addFields()">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <!-- <div class="top_table_header">
+                                        <button type="button" class="btn btn-success btn-sm btn_add_detalle"
+                                            [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                            title="Actualizar prueba" (click)="ediVoucherDailyNew()">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div> -->
+                                    
+                                </div>
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="cmb-2 content-tabla-general content-tabla_editable table_scroll_horizontal table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr class="text-center" style="font-size: 12px;">
+                                                <th [disabled]="false">Línea</th>
+                                                <th class="headcol" style="text-align: center;width: 70px; height: 32px; "></th>
+                                                <th style="width: 150px; ">Cuenta</th>
+                                                <th style="width: 200px; left: 0px; position: sticky;z-index: 1;z-index: 99999 !important;   background-color: #FFFFFF;">Nombre</th>
+                                                <th style="width: 250px;">Detalle</th>
+                                                <th style="width: 10%;">Centro</th>
+                                                <th style="width: 120px;">Débito</th>
+                                                <th style="width: 120px;">Crédito</th>
+                                                <th style="width: 180px;">Codigo partida</th>
+                                                <th style="width: 250px">Partida presupuestaria</th>
+                                                <th style="width: 250px">Auxiliar</th>
+                                                <th style="width: 150px;">Valor</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="w-full">
+                                            <tr class="text-center" style="width: 100%;"
+                                                *ngFor="let f of fieldsDaily; let i = index">
+                                                <td>{{i + 1}}</td>
+                                                <td class="headcol"  style="text-align: center; height: 45px; width: 70px; vertical-align: middle; ">
+                                                    <div class="btn-group">
+                                                    <button type="button" (click)="deleteFields(i)"
+                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        class="btn btn-danger btn-sm tooltip-test mt-2"
+                                                        title="Remover registro">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </button>
+                                                    <button type="button" (click)="onClicConsultaPlanCuentas(i)"
+                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        class="btn btn-success btn-sm tooltip-test mt-2 ml-1"
+                                                        title="Agregar Cuenta">
+                                                        <i class="far fa-search"></i>
+                                                    </button>
+                                                    <button type="button" [disabled]="!f.auxiliar" 
+                                                        (click)="onClicConsultaAuxiliar(i)"
+                                                        class="btn btn-warning btn-sm mt-2 ml-1"
+                                                        matTooltip="Seleccionar Auxiliar">
+                                                        <i class="far fa-clone"></i>
+                                                    </button>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <input style="width: 150px;" placeholder="codigo cuenta" [value]="f.account"
+                                                        name="detAccounts" [(ngModel)]="f.account"
+                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        class="form-control form-control-sm " type="text"
+                                                        name="{{f.account}}" />
+                                                </td>
+                                                <td style="left: 0px; position: sticky;z-index: 1;z-index: 99999 !important; background-color: #FFFFFF;">
+                                                    <input style="width: 250px;" placeholder="cuenta" [value]="f.name" name="detName"
+                                                        [(ngModel)]="f.name"
+                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        class="form-control form-control-sm " type="text"
+                                                        name="{{f.name}}" />
+                                                </td>
+                                                <td>
+                                                    <input style="width: 250px;" [(ngModel)]="f.detail" placeholder="Ingrese un detalle"
+                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        class="form-control form-control-sm " type="text"
+                                                        name="{{f.detail}}" />
+                                                </td>
+                                                <td style="width: 200px;">
+                                                    <ng-select loadingText="Cargando.." 
+                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                        [clearable]=false [loading]="f.LoadOpcionCentro"
+                                                        placeholder="-seleccionar centro-" [(ngModel)]="f.centro"
+                                                        class="form-control form-control-sm custom-select"
+                                                        [items]="centros"
+                                                        bindLabel="nombre" bindValue="id"
+                                                        style="width: 200px;"
+                                                        appendTo="body"
+                                                        id="idTipImpuestoSelect"></ng-select> <!--  (open)="getListaCentrosCosto(i)"s -->
+                                                </td>
+                                                <td>
+                                                    <input style="width: 120px;" [(ngModel)]="f.debit" currencyMask
+                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new || f.grupo == 'INGRESOS'"
+                                                        class="form-control form-control-sm pr-1"
+                                                         (ngModelChange)="EventoNumberAsiento(i,'D')"
+                                                         name="{{f.debit}}" />
+                                                </td>
+                                                <td >
+                                                    <input style="width: 120px;" [(ngModel)]="f.credit" currencyMask
+                                                        [disabled]="permisions.agregar == '0' || !actionsDaily.new || f.grupo == 'GASTOS' "
+                                                        class="form-control form-control-sm pr-1 text-right"
+                                                        (ngModelChange)="EventoNumberAsiento(i,'C')"
+                                                        name="{{f.credit}}" />
+                                                      <!--   && !isCorrection  && !isCorrection -->
+                                                </td>
+                                                <td style="width: 120px;">
+                                                    <input style="width: 120px;" [(ngModel)]="f.codpresupuesto"  
+                                                        [disabled]="true"
+                                                        class="form-control form-control-sm pr-1 text-right" type="text"
+                                                        name="{{f.codpresupuesto}}" />
+                                                    <!--div style="width: 180px;">
+                                                        <ng-select loadingText="Cargando.."
+                                                            [disabled]="permisions.agregar == '0' || !actionsDaily.new"
+                                                            [loading]="f.LoadOpcionCatalogoPresupuesto"
+                                                            placeholder="-seleccionar codigo presupuesto-"
+                                                            [(ngModel)]="f.codpresupuesto"
+                                                            class="form-control form-control-sm custom-select"
+                                                            (open)="LoadListaCatalogoPresupuesto(i)" 
+                                                            [items]="catalogo_presupuesto"
+                                                            bindLabel="codigo" bindValue="codigo"
+                                                            (change)="ChangeCodigoPresupuesto($event,fieldsDaily,i)"
+                                                            [searchFn]="customSearchFn"
+                                                            appendTo="body" style="width: 180px;">
+                                                            <ng-template ng-option-tmp let-item="item">
+                                                                <strong>{{item.combo}}</strong>
+                                                            </ng-template>
+                                                        </ng-select>
+                                                    </div-->
+                                                </td>
+                                                <td >
+                                                    <input style="width: 250px;" [(ngModel)]="f.presupuesto"  
+                                                        [disabled]="true"
+                                                        class="form-control form-control-sm pr-1 text-right" type="text"
+                                                        name="{{f.presupuesto?.nombre}}" />
+                                                    
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control form-control-sm" style="width: 250px;"
+                                                        [value]="f.auxiliar?.label" disabled>
+                                                </td>
+                                                <td >
+                                                    <input style="width: 150px;" currencyMask [(ngModel)]="f.valor_presupuesto" placeholder="0.00"
+                                                    [disabled]="!actionsDaily.new || f.disabled || !f.codpresupuesto"
+                                                        class="form-control form-control-sm pr-1 text-right"
+                                                        (ngModelChange)="presupuestoChange()"
+                                                        name="{{f.valor_presupuesto}}" />
+                                                    
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-end">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right btn-add">
+                                    <table class="table table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 3%;"></td>
+                                                <td style="width: 3%;"></td>
+                                                <td style="width: 15%;"></td>
+                                                <td style="width: 15%;"></td>
+                                                <td style="width: 20%;">
+                                                    <label for=""
+                                                        style="padding-top: 5px; font-size: 12px;font-weight: 600;margin-bottom: 0px !important;text-align: right;"><strong>Total</strong></label>
+                                                </td>
+                                                <td style="width: 10%;">
+                                                    <input currencyMask [(ngModel)]="totalVoucher.debit"
+                                                        class="form-control form-control-sm pr-1 text-right" readonly>
+                                                </td>
+                                                <td style="width: 10%;">
+                                                    <input currencyMask
+                                                    [(ngModel)]="totalVoucher.credit" 
+                                                        class="form-control form-control-sm pr-1 text-right" readonly>
+                                                </td>
+                                                <td style="width: 10%;">
+                                                    <input currencyMask
+                                                    [(ngModel)]="totalVoucher.valorPresupuesto" 
+                                                        class="form-control form-control-sm pr-1 text-right" readonly>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div *ngIf="bitacoraAsiento && bitacoraAsiento.length > 0">
+
+                                        <h4>Bitacora del Asiento</h4>
+                                        <div class="table-responsive">
+                                          <table class="table table-bordered table-striped" style="font-size: 12px;">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th>ID</th>
+                                                <th>Descripción del Evento</th>
+                                                <th>Fecha de Registro</th>
+                                                <th>ID del Usuario del Evento</th>
+                                                <th>Nombre del Usuario del Evento</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr *ngFor="let dt of bitacoraAsiento">
+                                                <td>{{ dt.id }}</td>
+                                                <td [ngClass]="{ 'text-danger': dt.descripcion_evento.includes('Eliminacion') }">
+                                                    <ng-container *ngIf="dt.descripcion_evento">
+                                                      <ng-container *ngIf="dt.descripcion_evento.includes(':')">
+                                                        <div>
+                                                          <strong>{{ dt.descripcion_evento.split(':')[0] }}</strong>: 
+                                                          <ng-container *ngIf="dt.descripcion_evento.includes(';')">
+                                                            <ng-container *ngFor="let detalle of dt.descripcion_evento.split(';')">
+                                                              <div>{{ detalle }}</div>
+                                                            </ng-container>
+                                                          </ng-container>
+                                                          <ng-container *ngIf="!dt.descripcion_evento.includes(';')">
+                                                            <div>{{ dt.descripcion_evento }}</div>
+                                                          </ng-container>
+                                                          
+                                                       <!--    {{ dt.descripcion_evento.split(':')[1] }} -->
+                                                        </div>
+                                                      </ng-container>
+                                                      <ng-container *ngIf="!dt.descripcion_evento.includes(':')">
+                                                        <div>{{ dt.descripcion_evento }}</div>
+                                                      </ng-container>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="!dt.descripcion_evento">
+                                                      N/A
+                                                    </ng-container>
+                                                  </td> <!-- <td> <ng-container *ngIf="dt.descripcion_evento">
+                                                    
+                                                  </ng-container></td> -->
+                                                <td>{{ dt.fecha_registro || 'N/A' }}</td>
+                                                <td>{{ dt.id_user_event }}</td>
+                                                <td>{{ dt.name_user_event }}</td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </p-tabPanel>
+                <p-tabPanel class="p-0" header="CONSULTA" [headerStyle]="{'font-size': '0.7rem'}">
+
+                    <div class="p-2">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Desde" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="date" class="form-control" [(ngModel)]="fromDatePicker" max="2050-01-01" >
+                                    <!-- <p-calendar (change)="FromOrToChange($event)" id="idNominaDatef"
+                                        dateFormat="dd/mm/yy" [readonlyInput]="true" [(ngModel)]="fromDatePicker"
+                                        [showIcon]="true" inputId="icon">
+                                    </p-calendar> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Hasta" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="date" class="form-control" [(ngModel)]="toDatePicker" max="2050-01-01" >
+                                    <!-- <p-calendar (change)="FromOrToChange($event)" dateFormat="dd/mm/yy"
+                                        [readonlyInput]="true" [(ngModel)]="toDatePicker" [showIcon]="true"
+                                        inputId="icon">
+                                    </p-calendar> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo font-weight-bold">Estado</span>
+                                    </div>
+                                    <ng-select [clearable]=false placeholder="-seleccionar Estado-" [(ngModel)]="estado"
+                                        class="form-control form-control-sm custom-select"
+                                        (ngModelChange)="filterEstado($event)" [items]="arrayEstado" bindLabel="name"
+                                        bindValue="id"></ng-select>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="No. de Asiento" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" id="numero_asiento" class="form-control" placeholder="No. de Asiento" [(ngModel)]="numero_asiento" >
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="No. de Documento" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" id="numero_documento" class="form-control" placeholder="No. de Documento" [(ngModel)]="numero_documento" >
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" id="concepto" class="form-control" placeholder="Concepto" [(ngModel)]="concepto" >
+                                </app-cc-input-group-prepend>
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Tipo Documento" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" id="tipo_documento" class="form-control" placeholder="Tipo Documento" [(ngModel)]="tipo" >
+                                </app-cc-input-group-prepend>
+                                <!-- <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-otro">Tipo</span>
+                                    </div>
+                                    <ng-select loadingText="Cargando.." [clearable]=false [loading]="LoadOpcionTipo"
+                                        placeholder="-seleccionar Tipo-" [(ngModel)]="tipo"
+                                        class="form-control form-control-sm custom-select"
+                                        (open)="getDocumentsDetails()" [items]="arrayTipo" bindLabel="nombre"
+                                        bindValue="id"></ng-select>
+                                </div> -->
+                            </div>
+                        </div>
+                       
+
+                        <div class="justify-content-center mt-4">
+                            <div class="table-responsive responsive-table content-tabla-general">
+                                <table class="table table-striped table-sm" style="font-size: 12px;">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th style="width: 4rem">
+                                                <input type="checkbox" (change)="selectAll()">
+                                            </th>
+                                            <th class="d-none" style="width: 10% !important;text-align: center;">ID</th>
+                                            <th></th>
+                                            <th style="width: 15% !important;">No. de Asiento</th>
+                                            <th style="width: 15% !important;">No. de Documento</th>
+                                            <th style="width: 35% !important;">Concepto</th>
+                                            <th style="width: 15% !important;">Tipo Documento</th>
+                                            <th style="width: 10% !important;">Fecha</th>
+                                            <th style="width: 10% !important;" class="text-center">Estado</th>
+                                            <!-- <th style="width: 10% !important;">Valor</th> -->
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="!dtConsultaAsiento.length">
+                                            <td colspan="8" class="text-center">
+                                                <h6>No hay registros a mostrar</h6>
+                                            </td>
+                                        </tr>
+                                        <tr *ngFor="let dt of dtConsultaAsiento">
+                                            <td>
+                                                <input type="checkbox" (change)="onRowSelect($event, dt)" [(ngModel)]="dt.check" [disabled]="(dt.estado == 0 || dt.estado == 3)">
+                                            </td>
+                                            <td class="text-center d-none">{{dt.id}}</td>
+                                            <td class="text-center pointer-cursor">
+                                                <div class="btn-group">
+                                                    <button class="btn btn-sm btn-outline-primary" title="Ver Documento" (click)="dtViewAsiento(dt,1)">
+                                                        <i class="fa fa-file-o"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-danger" title="Descargar PDF" (click)="dtViewAsiento(dt,2)">
+                                                        <i class="fa fa-file-pdf-o"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-success" title="Descargar Excel" (click)="dtViewAsiento(dt,3)">
+                                                        <i class="fa fa-file-excel-o"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td class="link-modal-access">
+                                                <!-- Asiento -->
+                                               <a (click)="getDataToEdit(dt.id)" class="link-primary" href="javascript:void(0)">{{ dt.asiento }}</a>
+                                            </td>
+                                            <td class="link-modal-access">
+                                                <!-- Documento -->
+                                                {{ dt.num_doc.padStart(10, 0) }}
+                                            </td>
+                                            <td>{{ dt.concepto }}</td>
+                                            <td>{{ dt.type }}</td>
+                                            <td>{{ dt.fecha }}</td>
+                                            <td class="text-center"  >
+                                                <i placement="bottom" [class]="dt.estado == 1 ? 'fas fa-circle text-success' : dt.estado == 0 ? 'fas fa-circle text-danger' : dt.estado == 3 ? 'fas fa-circle text-warning' :  'fas fa-circle text-white'"></i>
+                                                 {{dt.estado == 1 ? ' Activo' : dt.estado == 0 ? ' Anulado' : dt.estado == 3 ? 'Reversado' : ''}}
+                            
+                                                <!-- <span *ngIf="dt.estado == 1">ACTIVO</span>
+                                                <span *ngIf="dt.estado == 0">ANULADO</span>
+                                                <span *ngIf="dt.estado == 3">REVERSADO</span> -->
+                                            </td>
+                                            <!-- <td style="text-align: right;padding-right: 10px;">${{formatNumber(dt.valor)}}</td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <!-- <p-table 
+                                [value]="dtConsultaAsiento" 
+                                [rowSelectable]="isRowSelectable"
+                                [(selection)]="selectedDiarioElement" 
+                                (onRowSelect)="onRowSelect($event)" 
+                                (onRowUnselect)="onRowUnselect($event)"
+                                [scrollable]="true" scrollHeight="400px" [tableStyle]="{'min-width': '50rem'}">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th style="width: 4rem">
+                                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                            </th>
+                                            <th class="d-none" style="width: 10% !important;text-align: center;">ID</th>
+                                            <th style="width: 8px !important;text-align: center;"></th>
+                                            <th style="width: 8px !important;text-align: center;"></th>
+                                            <th style="width: 8px !important;text-align: center;"></th>
+                                            <th style="width: 10% !important;">Documento</th>
+                                            <th style="width: 50% !important;">Detalle</th>
+                                            <th style="width: 10% !important;">Fecha</th>
+                                            <th style="width: 10% !important;" class="text-center">Estado</th>
+                                            <th style="width: 10% !important;">Valor</th>
+
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-dt>
+                                        <tr>
+                                            <td>
+                                                <p-tableCheckbox [value]="dt" [disabled]="isOutOfStock(dt)"></p-tableCheckbox>
+                                            </td>
+                                            <td class="text-center d-none">{{dt.id}}</td>
+                                            <td class="text-center pointer-cursor">
+                                                <button class="btn btn-sm btn-outline-primary" title="Ver Documento" (click)="dtViewAsiento(dt,1)">
+                                                    <i class="fa fa-file-o"></i>
+                                                </button>
+                                            </td>
+                                            <td class="text-center pdf_icon_color pointer-cursor">
+                                                <button class="btn btn-sm btn-outline-danger" title="Descargar PDF" (click)="dtViewAsiento(dt,2)">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                </button>
+                                            </td>
+                                            <td class="text-center excel_icon_color pointer-cursor">
+                                                <button class="btn btn-sm btn-outline-success" title="Descargar Excel" (click)="dtViewAsiento(dt,3)">
+                                                    <i class="fa fa-file-excel-o"></i>
+                                                </button>
+                                            </td>
+                                            <td class="link-modal-access">
+                                                {{dt.codigo }}-{{ dt.num_doc.padStart(10, 0)}}
+                                            </td>
+                                            <td>{{ dt.concepto }}</td>
+                                            <td>{{dt.fecha}}</td>
+                                            <td [class]="'text-center product-badge status-activo'" *ngIf="dt.estado == 1"><span >ACTIVO</span></td>
+                                            <td [class]="'text-center product-badge status-anulado'"  *ngIf="dt.estado == 0"><span >ANULADO</span></td>
+                                            <td [class]="'text-center product-badge status-reversado'"  *ngIf="dt.estado == 3"><span >REVERSADO</span></td>
+                                            <td style="text-align: right;padding-right: 10px;">
+                                                ${{formatNumber(dt.valor)}}</td>
+                                        </tr>
+                                    </ng-template>
+
+                                    <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                            <td class="EmptyTable" [attr.colspan]="9">
+                                                No hay información para mostrar
+                                             </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table> -->
+
+                               
+                                  
+                                
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    
+                </p-tabPanel>
+            </p-tabView>
+
+
+        </div>
+
+        <ng-template #PermisoVerDenegado>
+            <p>No tiene permisos.</p>
+        </ng-template>
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAsiento"></cc-spiner-procesar>

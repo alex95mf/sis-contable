@@ -1,0 +1,42 @@
+<div style="max-height: 130px; overflow-y: scroll;">
+    <table class="table table-sm table-striped">
+        <!-- <thead class="thead-dark">
+            <tr>
+                <th class="text-center w-50">Nombre</th>
+                <th class="text-center" style="width: 15%;">Extension</th>
+                <th class="text-center" style="width: 35%;">Acciones</th>
+            </tr>
+        </thead> -->
+        <tbody *ngIf="tipo=='EM'">
+            <tr *ngIf="!anexosEM.length">
+                <td colspan="3" class="text-center">
+                    <h6>No hay datos.</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let anexo of anexosEM">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)" ngbTooltip="Ver">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)" ngbTooltip="Descargar">
+                            <i class="far fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)" ngbTooltip="Eliminar" >
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+       
+       
+     
+    
+
+
+    </table>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renMerContratoAnexos"></cc-spiner-procesar>

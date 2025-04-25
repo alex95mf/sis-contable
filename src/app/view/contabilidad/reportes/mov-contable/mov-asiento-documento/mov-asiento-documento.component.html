@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <div class="row" style="width: 100%">
+        <div class="col-md-12">
+            <div class="title-head">
+                {{type}}
+            </div>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true" style="color:black;">&times;</span>
+  </button>
+</div>
+<div class="modal-body ">
+    <div>
+        <div class="row justify-content-center">
+            <div class="col-md-12 filters">
+                <div class="form-group table-responsive responsive-table " style="overflow-y: scroll; height: 120px;">
+                    <table class="table no-footer table-hover" style="width: 100%;">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 1%;">Id</th>
+                                <th style="width: 8%;text-align: center;">Documento</th>
+                                <th style="width: 10%;text-align: center;">Detalle</th>
+                                <th style="width: 5%;text-align: center;">Fecha</th>
+                                <th style="width: 8%;text-align: center;">Valor</th>
+                                <th style="width: 5%;text-align: center;">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="presentDt" style="width: 100%;">
+                            <tr *ngFor="let dt of arrayTable; let i = index">
+                                <td style="width: 1%;padding-top: 10px;text-align: center;">{{dt.id}}</td>
+                                <td style="width: 8%;padding-top: 10px;text-align: left;" *ngIf="dt.num_doc.length == 1 ">{{ dt.codigo }}-{{ dt.num_doc.padStart(10, 0)}}</td>
+                                <td style="width: 8%;padding-top: 10px;text-align: left;" *ngIf="dt.num_doc.length != 1 ">{{ dt.codigo }}-{{ dt.num_doc }}</td>
+                                <td style="width: 12%;padding-top: 10px;text-align: center;">{{dt.detalle}}</td>
+                                <td style="width: 5%;padding-top: 10px;text-align: center;">{{dt.fecha}}</td>
+                                <td style="width: 8;padding-top: 10px;text-align: center;">${{dt.valor}}</td>
+                                <td style="width: 5;padding-top: 10px;text-align: center;" *ngIf="dt.estado == 1 ">Activo</td>
+                                <td style="width: 5;padding-top: 10px;text-align: center;" *ngIf="dt.estado != 1 ">Anulado</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spQuotesViewfaCompra"></cc-spiner-procesar> -->

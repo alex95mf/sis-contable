@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="mt-4">
+            <app-button-radio-active titulo="Lista de Conceptos" filtroBoton="btnShowConceptos" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+                <div class="row mt-2 mb-2">
+                    <div class="col-12 filters">
+                        <div class="table-responsive responsive-table">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th style="width: 30%;">Código</th>
+                                        <th style="width: 30%;">Descripción</th>
+                                        <th style="width: 30%;">Estado</th>
+                                        <th style="width: 10%; text-align: center;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngFor="let dt of dataDT, let i = index">
+                                        <td>{{ dt.codigo }}</td>
+                                        <td>{{ dt.nombre }}</td>
+                                        <td *ngIf="dt.estado == 'A'; else elseBlock">Activo</td>
+                                        <ng-template #elseBlock><td>Inactivo</td></ng-template>
+                                        <td>
+                                            <div class="text-center">
+                                                <button class="btn btn-danger btn-sm mr-1" (click)="deleteConcepto(dt, i)" placement="top" ngbTooltip="Eliminar concepto">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                                <button class="btn btn-primary btn-sm ml-1" (click)="editarConcepto(dt)" placement="left" ngbTooltip="Editar concepto">
+                                                    <i class="far fa-edit"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="showConceptos"></cc-spiner-procesar>

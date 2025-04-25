@@ -1,0 +1,148 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Caja General Reporte" filtroBoton="btnsCajaGeneral"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+        <div class="row justify-content-center">
+            <div class="col-12 container-filter ">
+                <div class="row  justify-content-center">
+                    <div class="col-md-12">
+                        <div class="row mt-2">
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+                                    <ejs-datepicker [(ngModel)]="fromDatePicker" type="text" format="yyyy-MM-dd"
+                                        class="form-control" (ngModelChange)="rerender()" id="idDesde">
+                                    </ejs-datepicker>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Fecha hasta" styleSpan="size-span-campo">
+                                    <ejs-datepicker [(ngModel)]="toDatePicker" type="text" format="yyyy-MM-dd"
+                                        class="form-control" (ngModelChange)="rerender()" id="idHsta">
+                                    </ejs-datepicker>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Sucursales</span>
+                                    </div>
+                                    <ng-select id="IUser" class="form-control custom" appendTo="body"
+                                        [searchable]="true" [clearable]="false" [(ngModel)]="sucursal"
+                                        (ngModelChange)="userFilterSucursal($event)">
+                                        <ng-option [value]="0">Todas</ng-option>
+                                        <ng-option *ngFor="let d of arraySucursales" [value]="d.id_sucursal">{{ d.nombre }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Cajas</span>
+                                    </div>
+                                    <ng-select id="IdCaja" class="form-control custom" appendTo="body"
+                                        [searchable]="true" [clearable]="false" [(ngModel)]="caja"
+                                        (ngModelChange)="cajaReporte($event)">
+                                        <ng-option [value]="0">
+                                            Todos
+                                        </ng-option>
+                                        <ng-option *ngFor="let d of cajapunto" [value]="d.num_punto_emision">
+                                            {{ d.pto_nombre }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Forma pago</span>
+                                    </div>
+                                    <ng-select id="IdPago" class="form-control custom" appendTo="body"
+                                        [searchable]="true" [clearable]="false" [(ngModel)]="FormaPago"
+                                        (ngModelChange)="formaPago($event)">
+                                        <ng-option [value]="0">Todos</ng-option>
+                                        <ng-option *ngFor="let d of arrayPago" [value]="d.valor">{{ d.valor }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Usuarios</span>
+                                    </div>
+                                    <ng-select id="IUser" class="form-control custom" appendTo="body"
+                                        [searchable]="true" [clearable]="false" [(ngModel)]="user"
+                                        (ngModelChange)="userFilter($event)">
+                                        <ng-option [value]="0">Todos</ng-option>
+                                        <ng-option *ngFor="let d of arrayUsers" [value]="d.id_usuario">{{ d.nombre }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-3 mb-3">
+            <div class="col-12 filters pl-2 pr-2">
+                <div class="row justify-content-center">
+                    <div class="col-12 pl-3 pr-3 ">
+                        <div class="table-responsive responsive-table mt-1">
+                            <table datatable id="tableCajaGeneral" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="table no-footer table-hover">
+                                <thead>
+                                    <tr style="width: 100%;">
+                                        <th style="width: 10%;">Documento</th>
+                                        <th style="width: 8%;">Fecha</th>
+                                        <th style="width: 15%;">Cliente</th>
+                                        <th style="width: 10%;">Forma de Pago</th>
+                                        <th style="width: 10%;">No. trx/cheque</th>
+                                        <th style="width: 31%;">Detalle</th>
+                                        <th style="width: 8%;text-align: center;padding-left: 0px !important;">Estado</th>
+                                        <th style="width: 8%;text-align: center;padding-left: 0px !important;">Valor</th>
+                                        <!-- <th style="width: 13%;">Usuario</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="processingQuotes">
+                                    <tr class="text-justify" *ngFor="let dt of datoTabla; let i = index">
+                                        <td>{{dt.codigo}}-{{dt.secuencial.padStart(10, 0)}}</td>
+                                        <td>{{dt.fecha_emision}}</td>
+                                        <td>{{dt.nombre_cliente}}</td>
+                                        <td>{{dt.metodo_pago}}</td>
+                                        <td *ngIf="dt.num_tx != null">{{dt.num_tx}}</td>
+                                        <td *ngIf="dt.num_tx == null">N/A</td>
+                                        <td>{{dt.concepto}}</td>
+                                        
+                                        <td style="text-align: center;" *ngIf="dt.isactive == 1">Activo</td>
+                                        <td style="text-align: center;" *ngIf="dt.isactive == 0">Inactivo</td>
+                                        <td style="text-align: right;padding-right: 10px;">$ {{formatNumber(dt.valor)}}
+                                        </td>
+                                        <!-- <td>{{dt.users[0].nombre}}</td> -->
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: right;padding-right: 10px;font-weight: 600;">Total</td>
+                                        <td style="text-align: right;padding-right: 10px;font-weight: 600;">${{commonServices.formatNumber(totalForma)}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCgReporte"></cc-spiner-procesar>

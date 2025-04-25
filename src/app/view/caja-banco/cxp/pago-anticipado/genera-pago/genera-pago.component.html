@@ -1,0 +1,84 @@
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnsgenant" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-usd">  
+
+    <form autocomplete="off" [formGroup]="forma">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                        <ejs-datepicker id="inputLabel-prepend" class="form-control" formControlName="lgFecha" name="dateFrom" format='yyyy-MM-dd' id="lgfecha">
+                        </ejs-datepicker>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Valor $" styleSpan="size-span-campo">
+                        <input type="text" class="form-control form-control-sm text-right" id="lgValor" maxlength="6" (blur)="transformarValores('lgValor')" formControlName="lgValor">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Identificacion" styleSpan="size-span-campo"> 
+                            <input class="form-control" type="text" formControlName="lgIdentificacion" id="inputLabel-prepend"
+                                placeholder="Identificacion" maxlength="13" (keypress)="validaciones.numberOnly($event)" aria-describedby="inputGroup-sizing-sm"/> 
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo">
+                        <input class="form-control " type="text" formControlName="lgDescProveedor" maxlength="100"  aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" placeholder="Nombre"/>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm">
+                    <app-cc-input-group-prepend label="Detalle" styleSpan="size-span-campo">
+                        <textarea type="text" rows="1" class="form-control form-control-sm" id="lgDetalle" maxlength="200" formControlName="lgDetalle"></textarea>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm">
+                    <app-cc-input-group-prepend label="Forma de Pago" styleSpan="size-span-campo">
+                        <ng-select id="inputLabel-prepend" class="form-control custom" appendTo="body" aria-label="Small" aria-describedby="inputGroup-sizing-sm" (ngModelChange)="limpiarCtaTran()" formControlName="lgFormaPago" [clearable]=false  >
+                            <ng-option value="C" >CHEQUE</ng-option>
+                            <ng-option value="E" >EFECTIVO</ng-option>
+                            <ng-option value="T" >TRANSACCION</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm" *ngIf="forma.get('lgFormaPago').value == 'C' || forma.get('lgFormaPago').value == 'T'">
+                    <app-cc-input-group-prepend label="Cuenta" styleSpan="size-span-campo">
+                        <ng-select id="inputLabel-prepend" class="form-control custom" appendTo="body" aria-label="Small" aria-describedby="inputGroup-sizing-sm" formControlName="lgCuenta" [clearable]=false  >
+                            <ng-option value="">-- Seleccionar un banco --</ng-option>
+                            <ng-option *ngFor="let d of data.arrayBanks | filter:[cambioTipoCta()]" [value]="d.id_banks">
+                                {{d.name_cuenta +  ' ( ' + validaciones.roundNumber(d.saldo_cuenta,2) + ' )'}}
+                            </ng-option>
+                        </ng-select>                                
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm" *ngIf="forma.get('lgFormaPago').value == 'E'">
+                    <app-cc-input-group-prepend label="Caja Chica" styleSpan="size-span-campo">
+                        <ng-select id="inputLabel-prepend" class="form-control custom" aria-label="Small" appendTo="body" aria-describedby="inputGroup-sizing-sm" formControlName="lgCaja" [clearable]=false  >
+                            <ng-option value="" >-- Seleccionar --</ng-option>
+                            <ng-option *ngFor="let item of data.lstCajaChica" [value]="item.id_caja_chica">{{item.nombre_caja + ' ( Disponible: ' + validaciones.roundNumber(item.saldo,2) + ' )'}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row" *ngIf="forma.get('lgFormaPago').value == 'C' || forma.get('lgFormaPago').value == 'T'">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="{{forma.get('lgFormaPago').value == 'T'?'Num. Transaccion':'Num. Cheque'}}" styleSpan="size-span-campo">
+                        <input class="form-control " type="text" formControlName="lgNumCheque" (keypress)="validaciones.numberOnly($event)" maxlength="20"  aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" placeholder="{{forma.get('lgFormaPago').value == 'T'?'Ingresar Numero de Transaccion':'Ingresar Numero de cheque'}}"/>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spModalPagoAntci"></cc-spiner-procesar>

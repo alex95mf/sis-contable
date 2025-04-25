@@ -1,0 +1,191 @@
+<div class="modal-header" *ngIf="permissions != undefined">
+    <div class="row" style="width: 100%">
+        <div class="col-12">
+            <div class="title-head">
+                <i class="fas fa-file"></i> <span>AJUSTE - KARDEX</span>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body ">
+    <div style="margin-top:-50px;" *ngIf=" permissions != undefined">
+        <app-button-radio-active filtroBoton="btnsAjusteK" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-sliders">
+            <div class="row justify-content-center">
+                <div class="col-12 container-filter ">
+                    <div class="row  justify-content-center">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Producto</span>
+                                        </div>
+                                        <ng-select id="Idproducto" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="ajuste.producto" (ngModelChange)="getFilterProducto($event)" [disabled]="permissions.editar=='0' || !actions.dComponet ">
+                                            <ng-option *ngFor="let d of data" [value]="d.id_producto">
+                                                {{d.nombre}}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Grupo</span>
+                                        </div>
+                                        <input type="text" class="form-control" [(ngModel)]="ajuste.grupo" disabled id="IdGrupo">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">CANTIDAD</span>
+                                        </div>
+                                        <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="ajuste.cantidad" [disabled]="permissions.editar=='0' || !actions.dComponet " id="IdCantidad" (keypress)="commonServices.FormatDecimalVal($event)" (ngModelChange)="calculateCredit()">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo Ajuste</span>
+                                        </div>
+                                        <ng-select id="IdTipo" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="ajuste.tipo" (ngModelChange)="getFilterTipo($event)" [disabled]="permissions.editar=='0' || !actions.dComponet ">
+                                            <ng-option *ngFor="let d of arrayTipo" [value]="d.name">
+                                                {{d.name}}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Motivo</span>
+                                        </div>
+                                        <ng-select id="IdMotivo" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="ajuste.motivo" (ngModelChange)="getFilterMotivo($event)" [disabled]="permissions.editar=='0' || !actions.dComponet ">
+                                            <ng-option *ngFor="let d of arrayMotivo" [value]="d.valor">{{ d.valor }}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">COSTO ACTUAL</span>
+                                        </div>
+                                        <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="ajuste.costoActual" disabled id="IdCosto" (keypress)="commonServices.FormatDecimalVal($event)" (ngModelChange)="calculateCredit()">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="input-group input-group-sm mt-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">DETALLE</span>
+                                        </div>
+                                        <textarea type="text" class="form-control" style="" [(ngModel)]="ajuste.detalle" disabled id="IdDetalle"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">TOTAL</span>
+                                        </div>
+                                        <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="ajuste.total" disabled id="IdTotal" (keypress)="commonServices.FormatDecimalVal($event)">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</app-button-radio-active>
+    <!--     <div class="col-md-12">
+            <fieldset class="border p-2">
+                <legend class="w-auto h6 prueba">Información de Ajuste</legend>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-5 ">
+                        <div class="form-group" style="text-align: center">
+                            <label>Producto</label>
+                            <ng-select id="Idproducto" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="ajuste.producto" (ngModelChange)="getFilterProducto($event)" [disabled]="permissions.editar=='0' || !actions.dComponet ">
+                                <ng-option *ngFor="let d of data" [value]="d.id_producto">
+                                    {{d.nombre}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-5 ">
+                        <div class="form-group" style="text-align: center">
+                            <label>Grupo</label>
+                            <input type="text" class="form-control" [(ngModel)]="ajuste.grupo" disabled id="IdGrupo">
+
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-5 ">
+                        <div class="form-group" style="text-align: center">
+                            <label>Tipo Ajuste</label>
+                            <ng-select id="IdTipo" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="ajuste.tipo" (ngModelChange)="getFilterTipo($event)" [disabled]="permissions.editar=='0' || !actions.dComponet ">
+                                <ng-option *ngFor="let d of arrayTipo" [value]="d.name">
+                                    {{d.name}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-5">
+                        <div class="form-group" style="text-align: center">
+                            <label>Motivo</label>
+                            <ng-select id="IdMotivo" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="ajuste.motivo" (ngModelChange)="getFilterMotivo($event)" [disabled]="permissions.editar=='0' || !actions.dComponet ">
+                                <ng-option *ngFor="let d of arrayMotivo" [value]="d.valor">{{ d.valor }}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-3">
+                        <div class="form-group" style="text-align: center">
+                            <label>Cantidad</label>
+                            <input placeholder="" type="text" class="form-control" [(ngModel)]="ajuste.cantidad" [disabled]="permissions.editar=='0' || !actions.dComponet " id="IdCantidad" (keypress)="commonServices.FormatDecimalVal($event)" (ngModelChange)="calculateCredit()">
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-3">
+                        <div class="form-group" style="text-align: center">
+                            <label>Costo Actual</label>
+                            <input placeholder="" type="text" class="form-control" [(ngModel)]="ajuste.costoActual" disabled id="IdCosto" (keypress)="commonServices.FormatDecimalVal($event)" (ngModelChange)="calculateCredit()">
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                        <div class="form-group" style="text-align: center">
+                            <label>Total</label>
+                            <input placeholder="" type="text" class="form-control" [(ngModel)]="ajuste.total" disabled id="IdTotal" (keypress)="commonServices.FormatDecimalVal($event)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center ">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-10 ">
+                        <div class="form-group" style="text-align: center">
+                            <label>Detalle</label>
+                            <textarea placeholder="Ingrese un detalle" type="text" class="form-control" style="height:100px;" [(ngModel)]="ajuste.detalle" disabled id="IdDetalle"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row justify-content-center">
+                <div class="col-12 botones-section">
+                    <button class="btn btn-warning boton" (click)="nuevoAjuste()" [disabled]="actions.btnNuevo" placement="top" ngbTooltip="Nuevo Registro">
+                        <i class="fa fa-plus-square-o" aria-hidden="true"></i> NUEVO
+                    </button>
+                    <button class="btn btn-modificar" [disabled]="!actions.btneditar" (click)="validaUpdateAjuste()" placement="top" ngbTooltip="Modificar Registro">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> MODIFICAR
+                    </button>
+
+                    <button class="btn btn-danger  boton" [disabled]="!actions.btncancelar" placement="top" ngbTooltip="Cancelar Parametros" (click)="cleanAjuste()">
+                        <i class="fa fa-times" aria-hidden="true"></i> CANCELAR
+                    </button>
+                    <button class="btn btn-salir" (click)="closeModal()">
+                    SALIR
+                    </button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>

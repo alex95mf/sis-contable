@@ -1,0 +1,79 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light" icono="far fa-hand-pointer"
+    filtroButton="btnsModalBusquedaPartidas" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="pb-2 px-2">
+        <legend class="w-auto bg-dark mb-0">Filtros</legend>
+        <div class="row">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Código" styleSpan="size-span-campo font-weight-bold">
+                            <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.codigo">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                            <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.nombre" >
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-primary btn-sm" (click)="consultar()">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                        <button class="btn btn-danger btn-sm ml-1" (click)="limpiarFiltros()">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Descripcion general</th>        
+                <th>Acciones</th>
+            </thead>
+            <tbody>
+                <tr *ngIf="!partidas.length">
+                    <td colspan="5" class="text-center">
+                        <p class="h6">No hay partidas para mostrar.</p>
+                    </td>
+                </tr>
+                
+                <tr *ngFor="let partida of partidas, let i = index">
+                    
+                    <td class="text-center">{{ partida.codigo }}</td>
+                    <td class="text-center">{{ partida.nombre }} </td>
+                    <td class="text-center">{{ partida.tipo}}</td>
+                    <td class="text-center">{{ partida.descripcion_general}}</td>
+                    
+                    <td>
+                        <div class="text-center mx-auto">
+                            <button class="btn btn-primary btn-sm mr-1" (click)="selectPartida(partida)">
+                                <i class="fas fa-hand-pointer"></i>
+                            </button>
+                            
+                        </div>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <mat-paginator
+            [length]="paginate.length"
+            [pageSize]="paginate.perPage"
+            (page)="changePaginate($event)"
+            [showFirstLastButtons]="true"
+            aria-label="Select page">
+        </mat-paginator>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalBusquedaPartida"></cc-spiner-procesar>

@@ -1,0 +1,114 @@
+<app-button-radio-active-new titulo="Reporte de Reclamos (Tareas de Garantía)" cstyle="bg-light" icono="far fa-file"
+    filtroBoton="btnsReporteReclamos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="row m-0">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Filtros</legend>
+                <div class="row m-0">
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Producto" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" [(ngModel)]="filter.producto">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [(ngModel)]="filter.estado"
+                                [items]="lst_estado" bindValue="value" bindLabel="label"></ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+
+                <div class="row m-0">
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                            <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                            <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+
+
+            </fieldset>
+        </div>
+    </div>
+    <div class="row m-0">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                    <thead class="sticky-header">
+                        <tr class="text-center">
+                            <th >#</th>
+                            <th>Producto</th>
+                            <th>Fecha</th>
+                        
+                            <th >Observacion Inicial</th>
+                            <th >Observacion Final</th>
+                            <th> Estado</th>
+                 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td *ngIf="lst_reclamos?.length==0" colspan="7" class="text-center" >
+                                No se encontró data
+                            </td>
+                        </tr>
+
+                        <tr *ngFor="let element of lst_reclamos, let i = index">
+                            <td class="text-left">{{ i+1}}</td>
+                            <td class="text-left">
+                                {{element.producto?.nombre}}<br>
+                                <small class="text-muted">{{ element.producto?.codigoproducto }}</small>
+                             </td>
+                            <td class="text-center"> {{element.fecha}}</td>
+                            <td class="text-center">
+                                <span *ngIf="element.observacion_inicial?.length >= 32; else obsIniCompleta" matTooltip="{{ element.observacion_inicial }}">
+                                    {{ element.observacion_inicial | slice:0:32 }}...
+                                </span>
+                                <ng-template #obsIniCompleta>
+                                    {{ element.observacion_inicial }}
+                                </ng-template>
+                            </td>
+                            <td class="text-center">
+                                <span *ngIf="element.observacion_final?.length >= 32; else obsFinCompleta" matTooltip="{{ element.observacion_final }}">
+                                    {{ element.observacion_final | slice:0:32 }}...
+                                </span>
+                                <ng-template #obsFinCompleta>
+                                    {{ element.observacion_final }}
+                                </ng-template>
+
+                            </td>
+                            <td class="text-center">
+
+                                <i class="fas fa-circle" [ngClass]="{'text-warning': element.estado == 'P', 'text-danger': element.estado == 'C'}"></i>
+                                {{ element.estado == 'P' ? 'Pendiente' : element.estado == 'C' ? 'Cerrado' : 'N/A' }}
+
+
+                             
+                            </td>
+                        
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <mat-paginator [length]="paginate.length" [pageIndex]="paginate.pageIndex" 
+                (page)="changePage($event)" [pageSize]="paginate.perPage" 
+                [pageSizeOptions]="paginate.pageSizeOptions">
+        
+            </mat-paginator>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spReclamos"></cc-spiner-procesar>

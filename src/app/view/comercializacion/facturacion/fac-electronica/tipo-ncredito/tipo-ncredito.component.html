@@ -1,0 +1,120 @@
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+            <ejs-datepicker class="form-control form-control-sm" [(ngModel)]="parametros.fechaDesde" name="dateFrom" format='yyyy-MM-dd'></ejs-datepicker>
+        </app-cc-input-group-prepend>
+    </div>
+    <div class="col-sm-4">
+        <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+            <ejs-datepicker class="form-control form-control-sm" [(ngModel)]="parametros.fechaHasta" name="dateFrom" format='yyyy-MM-dd'></ejs-datepicker>
+        </app-cc-input-group-prepend>
+    </div>
+
+    <div class="col-sm-4">
+        <app-cc-input-group-prepend label="Estado SRI" styleSpan="size-span-campo">
+            <ng-select id="idEstado" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="parametros.estadoSri" (ngModelChange)="recargar()">
+                <ng-option *ngFor="let acc of lstEstado;" [value]="acc.id">{{acc.nombre}}</ng-option>
+            </ng-select>
+        </app-cc-input-group-prepend>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm">
+        <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo">
+            <div class="input-group-prepend"> 
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="parametros.identificacion" id="inputLabel-prepend" placeholder="Identificacion" maxlength="13" 
+                aria-describedby="inputGroup-sizing-sm" disabled/>
+            </div>
+
+            <div class="input-group-prepend"> 
+                <span class="input-group-text btn"  id="inputLabel-prepend"> 
+                    <i (click)="abrirModalClientes()" matTooltip="Buscar Proveedores" class="fa fa-search fa-lg"></i> 
+                </span>
+            </div>
+            
+            <input class="form-control " type="text" [(ngModel)]="parametros.proveedor" maxlength="100"  aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" placeholder="Nombre" disabled/>
+
+            <div class="input-group-prepend">
+                <button type="button" class="btn btn-success"  id="idlimpiar" placement="top" matTooltip="Limpiar" (click)="parametros.proveedor=''; parametros.identificacion=''; parametros.idCliente='';recargar()">
+                    <i class="fas fa-eraser  fa-lg" style="font-size:12px"></i>
+                </button>
+            </div>
+        </app-cc-input-group-prepend>
+    </div>
+</div> 
+
+
+<fieldset class="border p-2 mb-1 mt-2 filters">
+    
+    <legend class="w-auto h6 ">Listado de Documentos</legend>
+
+    <div class="table-responsive responsive-table ">
+        <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="table table-bordered " id="tablafrr">
+            <thead class="text-center">
+                <tr>
+                    <th>#</th>
+                    <th>Fecha</th>
+                    <th>Secuencia</th>
+                    <th>Autorización</th>
+                    <th>Fecha Autorización</th>
+                    <th>Estado</th>
+                    <th>RUC/Cliente</th>
+                    <th>Total</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody style="width: 100%;">
+                 <tr *ngFor="let dt of listado" >
+                    <td style="width: 3%;" >{{dt.id}}</td>
+                    <td style="width: 10%;">{{ dt.fecha_documento}}</td>
+                    <td style="width: 10%;">{{ dt._notas_cab._venta.num_doc}}</td>
+                    <td style="width: 21%; font-weight: bold;" >{{ dt.autorizacion_sri}}</td>
+                    <td style="width: 10%; font-weight: bold;" >{{ dt.fecha_autorizacion_sri }}</td>
+                    <td style="width: 8%; font-weight: bold; cursor:pointer" [style.color]="colorPorEstado(dt)" matTooltip="Click para mostrar mas detalle" (click)="presentarDetalle(dt)">{{ dt.estado_sri }}</td>
+                    <td style="width: 20%;">{{ dt._notas_cab._venta.client.num_documento}} / {{ dt._notas_cab._venta.client.razon_social | uppercase}}</td>
+                    <td style="width: 8%;" class="text-right">{{ dt._notas_cab._venta.total }}</td>
+                    <td style="width: 10%;" class="text-center">
+                        <img src="assets/img/enviarSRI.png" style="width: 20px; height: auto; cursor:pointer" matTooltip="GENERAR/FIRMAR/ENVIAR SRI" (click)="gererarXML(dt)">&nbsp;
+                        <img src="assets/img/pdf.png" style="width: 20px; height: auto; cursor:pointer" matTooltip="DESCARGAR PDF" (click)="visualizarPdf(dt)">&nbsp;
+
+                        <button mat-icon-button [matMenuTriggerFor]="aboveMenu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #aboveMenu="matMenu">
+                            <button mat-menu-item (click)="enviarEmail(dt)">
+                                <img src="assets/img/enviar_mail.png" style="width: 20px; height: auto;">&nbsp;
+                                <span>Enviar Correo Eletrónico</span>
+                            </button>
+                            <button mat-menu-item (click)="descargarDocumentoXML(dt)">
+                                <img src="assets/img/iconoxml.png" style="width: 20px; height: auto;">&nbsp;
+                                <span>Descargar XML</span>
+                            </button>
+                            <button mat-menu-item (click)="reprocesarDocuento(dt)">
+                                <img src="assets/img/reprocesarSRI.png" style="width: 20px; height: auto;">&nbsp;
+                                <span>Reprocesar Documento</span>
+                            </button>
+                            <button mat-menu-item (click)="anularDocumento(dt)">
+                                <img src="assets/img/anularSri.png" style="width: 20px; height: auto;">&nbsp;
+                                <span>Anular Autorización</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </tr> 
+            </tbody>
+        </table>
+    </div>
+
+
+    <br>
+    <strong>
+        <span style="background-color: #F3F0F5">&nbsp;&nbsp;&nbsp;&nbsp;</span> Por Autorizar 
+        <span style="background-color: rgba(255, 127, 127, 0.365)">&nbsp;&nbsp;&nbsp;&nbsp;</span> Error/Anulado 
+        <span style="background-color: rgba(127, 255, 168, 0.461)">&nbsp;&nbsp;&nbsp;&nbsp;</span> Autorizado 
+        <span style="background-color: rgba(255, 187, 127, 0.509)">&nbsp;&nbsp;&nbsp;&nbsp;</span> Devueltas
+    </strong>
+</fieldset>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spTipoLquiCom"></cc-spiner-procesar>

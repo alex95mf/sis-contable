@@ -1,0 +1,91 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-gradient-primary text-white" icono="fas fa-box-open" [groupButton]="vmButtons" filtroBoton="btnsVehiculosModal" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+        <div class="col-12 ml-1">
+            
+            <div class="input-group input-group-sm">
+                <button ngbTooltip="Agregar Vehículos" *ngIf="!formDisabled" class="btn btn-sm btn-success" (click)="agregaVehiculos()"><i class="fas fa-plus"></i></button>
+                <!-- <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Periodo</span></div>
+                <input type="number" class="form-control" placeholder="Periodo" [(ngModel)]="periodo"> -->
+                <h5 class="ml-2 mt-1 text-dark">{{inspeccion.local_comercial.razon_social}}</h5>
+            </div>
+
+        </div>  
+    </div>
+</app-button-radio-active>
+<div class="container-fluid">
+    <div class="row my-2">
+        <div class="col-12">
+                <table class="table table-bordered no-footer table-hover mb-0 table-striped">
+                    <thead class="thead-dark text-center">
+                        <tr>
+                            <th style="width: 25%;">Tipo</th>
+                            <th style="width: 25%;">Placa</th>
+                            <th style="width: 25%;">Toneladas</th>
+                            <th style="width: 25%;">Acciones</th>
+                        </tr>                
+                    </thead>
+                    <tbody *ngIf="formDisabled">                        
+                            <tr *ngFor="let item of listaVehiculos, let i = index">
+
+                                <td class="text-center">
+                                    <!-- para el select con los tipos de tonelaje -->
+                                    <ng-select disabled="formDisabled" class="form-control" [(ngModel)]="item.tipo_tonelaje" [clearable]="false" >
+                                        <ng-option [value]="0" disabled>Tipo de tonelaje</ng-option>
+                                        <ng-option *ngFor="let op of tiposTonelaje" [value]="op.tipo_tonelaje">{{ op.nombre }}</ng-option>
+                                    </ng-select>
+                                </td>
+                                <td class="text-center"><input disabled="formDisabled" type="text" class="form-control form-control-sm" [(ngModel)]="item.placa"></td>
+                                <td class="text-center"><input disabled="formDisabled" type="number" class="form-control form-control-sm" [(ngModel)]="item.tonelaje"></td>
+                                <!-- (keyup)="handleIngreso(item)" -->
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button  disabled="formDisabled" class="btn btn-danger btn-sm mx-1" (click)="eliminar(item, i)" placement="left" ngbTooltip="Eliminar registro">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+              
+                            </tr>
+                        
+                        
+                        <tr *ngIf="listaVehiculos.length<=0" class="text-center">
+                            <td colspan="9" class="text-center">
+                                <h6>No hay datos.</h6>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="!formDisabled">                        
+                        <tr *ngFor="let item of listaVehiculos, let i = index">
+
+                            <td class="text-center">
+                                <!-- para el select con los tipos de tonelaje -->
+                                <ng-select class="form-control" [(ngModel)]="item.tipo_tonelaje" [clearable]="false" >
+                                    <ng-option [value]="0" disabled>Tipo de tonelaje</ng-option>
+                                    <ng-option *ngFor="let op of tiposTonelaje" [value]="op.tipo_tonelaje">{{ op.nombre }}</ng-option>
+                                </ng-select>
+                            </td>
+                            <td class="text-center"><input minlength="7" maxlength="7" type="text" class="form-control form-control-sm" [(ngModel)]="item.placa"></td>
+                            <td class="text-center"><input maxlength="8" type="text" (keypress)="commonSrv.FormatDecimalVal($event)" class="form-control form-control-sm" [(ngModel)]="item.tonelaje"></td>
+                            <!-- (keyup)="handleIngreso(item)" -->
+                            <td>
+                                <div class="text-center mx-auto">
+                                    <button  class="btn btn-danger btn-sm mx-1" (click)="eliminar(item, i)" placement="left" ngbTooltip="Eliminar registro">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+          
+                        </tr>
+                    
+                    
+                    <tr *ngIf="listaVehiculos.length<=0" class="text-center">
+                        <td colspan="9" class="text-center">
+                            <h6>No hay datos.</h6>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>                
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renVehiculosModal"></cc-spiner-procesar>

@@ -1,0 +1,426 @@
+<br>
+<app-button-radio-active titulo="Decimo Tercer Pago" filtroBoton="btnsAdmDec3" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-money"> 
+
+
+    <div>
+        <div class="row mt-2">
+         <!--    <div class="col-sm-4">
+                <app-cc-input-group-prepend label="No. Control" styleSpan="font-weight-bold size-span-campo">
+                    <input type="text" class="form-control" [(ngModel)]="num_control" placeholder="Buscar por No. Control">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="getPorNoControl()" matTooltip="Buscar No. control">
+                            <i class="far fa-search"></i>
+                        </button>
+                    </div>
+                </app-cc-input-group-prepend>
+                
+            </div> -->
+            <div class="col-sm-2">
+                <app-cc-input-group-prepend label="ID" styleSpan="font-weight-bold">
+                    <input currencyMask [options]="{prefix: '', precision: 0, nullable: true}" class="form-control" [(ngModel)]="lastRecord" (keypress)="handleEnter($event)">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="getPrevRecord()" matTooltip="Registro Anterior" [disabled]="lastRecord == null">
+                            <i class="far fa-chevron-left"></i>
+                        </button>
+                        <button class="btn btn-primary" (click)="getNextRecord()" matTooltip="Registro Siguiente" [disabled]="lastRecord == null">
+                            <i class="far fa-chevron-right"></i>
+                        </button>
+                        <button class="btn btn-primary" (click)="getLatest()" matTooltip="Ultimo Registro">
+                            <i class="far fa-chevron-double-right"></i>
+                        </button>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <!-- <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Periodo"styleSpan="size-span-campo"> -->
+                    <!-- <p-calendar view="year" dateFormat="yy"
+                        [readonlyInput]="true" [(ngModel)]="select_anio" [showIcon]="false" inputId="icon">
+                    </p-calendar> -->
+                    <!-- <p-calendar view="year" dateFormat="yy"
+                        [ngModel]="select_anio" [showIcon]="false" inputId="icon"
+                        [readonlyInput]="true"
+                        [showIcon]="true" inputId="icon">
+                    </p-calendar> -->
+                <!-- </app-cc-input-group-prepend>
+            </div> -->
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold" id="inputGroup-sizing-sm" style="width: 200px;">Periodo: {{labelPeriodo}}</span>
+                    </div>
+                    <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="select_anio" 
+                        [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo"  (change)="cambiarPeriodoLabel($event)">
+                    </ng-select>
+                </div>
+                <!-- <app-cc-input-group-prepend [label]="Periodo: {labelPeriodo}" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="select_anio"
+                        [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                    </ng-select>
+                </app-cc-input-group-prepend> -->
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo font-weight-bold" id="inputGroup-sizing-sm">Fecha Aprobación</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" disabled value="{{fecha_actual}}">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo font-weight-bold" id="inputGroup-sizing-sm">Estado</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" disabled value="SIN APROBACIÓN">
+                </div>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control"  type="text" maxlength="20" [(ngModel)]="programa">
+                    <button class="btn btn-primary btn-sm" (click)="modalPrograma()">Buscar</button>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Dirección" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="area" class="form-control form-control-sm" [(ngModel)]="area" [clearable]="true" (change)="cargarDepartamentos($event)">
+                        <ng-option disabled [value]="0" disabled>Seleccione una Dirección</ng-option>
+                        <ng-option *ngFor="let d of areas" [value]="d.id_area">{{d.are_nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="area" class="form-control form-control-sm" [(ngModel)]="departamento" [clearable]="true">
+                        <ng-option disabled [value]="0" disabled>Seleccione un Departamento</ng-option>
+                        <ng-option *ngFor="let d of departamentos" [value]="d.id_departamento">{{d.dep_nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <!-- <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Departamentos" styleSpan="size-span-campo">
+                    <ng-select [(ngModel)]="ngDepartamentSelect" name="grupo" 
+                    loadingText="Cargando.." [clearable]=false [loading]="LoadOpcionDepartamento"
+                    class="form-control form-control-sm custom-select" 
+                    (open)="openComboDepartamentos()"
+                    [items]="dataDepartamentoResponseI" bindLabel="dep_nombre" bindValue="id_departamento"
+                    id="Idgrupo" (ngModelChange)="filterptDepartamento($event)">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div> -->
+
+            
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Mensualiza" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select [(ngModel)]="decimo_acumula_mensualiza" [clearable]="false"
+                    class="form-control form-control-sm custom-select" [items]="selectAcumula"
+                     bindLabel="label" bindValue="value">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4 mt-2">
+                <div class="row">
+                    <div class="col-sm-5 font-weight-bold mt-1" style="font-style: #5C6873;">
+                        <b class="ml-1" style="font-size: 12px;color: #5C6873;">Consulta por Fecha:</b>
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="mt-1" type="checkbox"  (change)="porFecha($event)" [(ngModel)]="por_fecha" style="height: 15px; height: 15px;width: 15px;background-color: #eee;">
+                    </div>
+                  
+                </div>
+            </div>
+           
+        </div>
+        <div class="row">
+            <div *ngIf="por_fecha" class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="font-weight-bold size-span-campo">
+                    <input id="filter_fecha_desde" type="date" class="form-control" [(ngModel)]="fecha_desde" max="2050-01-01" >
+                </app-cc-input-group-prepend>
+            </div>
+            <div *ngIf="por_fecha" class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="font-weight-bold size-span-campo">
+                    <input id="filter_fecha_hasta" type="date" class="form-control" [(ngModel)]="fecha_hasta" max="2050-01-01" >
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    
+        <!--div class="row">
+            
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Empleado</span>
+                    </div>
+                    <ng-select [(ngModel)]="selectPersonal" class="form-control form-control-sm custom-select" (change)="obtenerRolDetalle()">
+                        <ng-option *ngFor="let d of arrayPersonal" [value]="d.id_personal">
+                            {{d.nombres + ' ' + d.apellidos}}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+    
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Departamento</span>
+                    </div>
+                    <ng-select [(ngModel)]="grupoSeleccionado" name="grupo" class="form-control form-control-sm custom-select estilo-combos"
+                        (change)="getPersonal();obtenerRolDetalle()" id="Idgrupo">
+                        <ng-option *ngFor="let d of lstInicial[1]"
+                            [value]="d.id_grupo">{{d.nombre_grupo}}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div-->
+    
+        <!--div class="row">
+    
+            <div class="col-sm-6" *ngIf="!vmButtons[0].habilitar">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Concepto</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="idConcepto" placeholder="Escriba un Concepto" matTooltip="Escriba un concepto del decimo tercero de Pago" style="height: 32px;" [(ngModel)]="lConcepto">
+                </div>
+            </div>    
+    
+            <div class="col-sm-6" *ngIf="!vmButtons[0].habilitar">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Banco</span>
+                    </div>
+                    <select [(ngModel)]="bankSelect" class="form-control form-control-sm custom-select">
+                        <option [value]="0">-- Seleccionar un banco --</option>
+                        <option *ngFor="let d of arrayBanks" [value]="d.id_banks"> {{d.name_cuenta +  ' ( ' + validaciones.roundNumber(d.saldo_cuenta,2) + ' )'}}</option>
+                    </select>
+                </div>
+            </div>
+        </div--> 
+    
+        <div class="row">
+            
+        </div>
+    
+        <div calss="row" *ngIf="lstTablaEmpleados.length> 0">
+            <div class="col-sm-6 mt-1">
+                <div class="alert {{vmButtons[0].habilitar==true?'color-datos-empleados':'colorInconsistencias'}} quitar-espacio text-center">
+                    <i class="fa fa-warning"></i> <strong>El periodo de este Decimo tercero {{vmButtons[0].habilitar==true?'ya se encuentra registrado':'no se encuentra registrado'}}</strong>
+                </div>
+            </div>
+        </div>
+    
+        <!--div calss="row" *ngIf="lstTablaEmpleados.length == 0">
+            <div class="col-sm-6 mt-1">
+                <div class="alert colorInconsistencias quitar-espacio text-center">
+                    <i class="fa fa-warning"></i> <strong>NO EXISTE EMPLEADOS A PRESENTAR </strong>
+                </div>
+            </div>
+        </div--> 
+
+        <div class="mt-5">
+            <p-table styleClass="p-datatable-gridlines" [value]="decimotercero" [scrollable]="true" scrollHeight="650px">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th [ngClass]="{'d-none': por_fecha == true}" style="min-width:100px; font-size: 10px;">
+                            <input type="checkbox" (change)="handleColumnCheck($event)">
+                        </th>
+                        <th style="min-width:100px; font-size: 10px;">#</th>
+                        <th style="min-width:100px; font-size: 10px;">CEDULA</th>
+                        <th style="min-width:200px; font-size: 10px;">APELLIDOS</th>
+                        <th style="min-width:200px; font-size: 10px;">NOMBRES</th>
+                        <th style="min-width:200px; font-size: 10px;">NO. CONTROL</th>
+                        <th style="min-width:200px; font-size: 10px;">NO. ORDEN PAGO</th>
+                        <th style="min-width:100px; font-size: 10px;">DIAS TRABAJADOS</th>
+                        <th style="min-width:100px; font-size: 10px;">TOTAL GANADO</th>
+                        <th style="min-width:100px; font-size: 10px;">TOTAL DEVENGADO</th>
+                        <th style="min-width:100px; font-size: 10px;">VALOR RETENCION</th>
+                        <th style="min-width:100px; font-size: 10px;">VALOR DECIMO</th>
+                        <th style="min-width:100px; font-size: 10px;">MESES PROVISION</th>
+                        <th style="min-width:100px; font-size: 10px;">PRIODO DESDE</th>
+                        <th style="min-width:100px; font-size: 10px;">PRIODO HASTA</th>
+                    </tr>
+                    <!-- <tr>
+                        <th style="min-width:300px">
+                            <p-columnFilter type="text" field="nombres" [inputStyle]="{'height':'10px'}"></p-columnFilter>
+                        </th>
+                        <th style="min-width:300px"></th>
+                        <th style="min-width:300px"></th>
+                        <th style="min-width:300px"></th>
+                        <th style="min-width:300px"></th>
+                        <th style="min-width:300px"></th>
+                        <th style="min-width:300px"></th>
+                    </tr> -->
+                </ng-template>
+                <ng-template pTemplate="body" let-decimo>
+                    <tr style="font-size: 11px;" [ngClass]="{ 'font-weight-bold': decimo.cedula =='TOTAL' }">
+                        <td [ngClass]="{'d-none': por_fecha == true}" class="text-center" style="min-width:100px; font-size: 11px;">
+                            <input *ngIf="decimo.cedula !='TOTAL'" [(ngModel)]="decimo.aprobar" type="checkbox" (change)="handleRowCheck($event, decimo)" [disabled]="decimo.tiene_control">
+                        </td>
+                        <td style="min-width:100px; font-size: 11px;" >{{decimo.linea}}</td>
+                        <td style="min-width:100px; font-size: 11px;" >{{decimo.cedula}}</td>
+                        <td style="min-width:200px; font-size: 11px;">{{decimo.primer_apellido}} {{decimo.segundo_apellido }}</td>
+                        <td style="min-width:200px; font-size: 11px;">{{decimo.primer_nombre}} {{decimo.segundo_nombre }}</td>
+                        <td style="min-width:200px; font-size: 11px;">{{decimo.num_control}}</td>
+                        <td style="min-width:200px; font-size: 11px;">{{decimo.num_orden_pago}}</td>
+                        <td style="min-width:100px; font-size: 11px;">{{decimo.dias_trabajados}}</td>
+                        <td style="min-width:100px; font-size: 11px;" class="d-flex justify-content-end">$ {{decimo.total_ganado| number:'1.2-2'}}</td>
+                        <td style="min-width:100px; font-size: 11px;" class="d-flex justify-content-end">$ {{decimo.total_devengado | number:'1.2-2'}}</td>
+                        <td style="min-width:100px; font-size: 11px;" class="d-flex justify-content-end" >$ {{decimo.valor_retencion_decimo | number:'1.2-2'}}</td>
+                        <td style="min-width:100px; font-size: 11px;" class="d-flex justify-content-end"
+                        [ngClass]="{ 'text-red-500': decimo.valor_decimo <  0 }">$ {{decimo.valor_decimo | number:'1.2-2'}}</td>
+                        <td style="min-width:100px; font-size: 11px;" >{{decimo.meses_provision}}</td>
+                        <td style="min-width:100px; font-size: 11px;" >{{decimo.periodo_desde}}</td>
+                        <td style="min-width:100px; font-size: 11px;" >{{decimo.periodo_hasta}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <tr style="font-size: 12px;">
+                        <td style="min-width:100px; font-size: 11px;" class="text-left" >TOTALES</td>
+                        <td [ngClass]="{'d-none': por_fecha == true}" style="min-width:100px; font-size: 11px;" class="text-left" ></td>
+                        <td style="min-width:100px; font-size: 11px;" class="text-left" ></td>
+                        <td style="min-width:200px; font-size: 11px;" class="text-left" ></td>
+                        <td style="min-width:200px; font-size: 11px;" class="text-left" ></td>
+                        <td style="min-width:200px; font-size: 11px;" class="text-left" ></td>
+                        <td style="min-width:200px; font-size: 11px;" class="text-left" ></td>
+                        <td style="min-width:100px; font-size: 11px;" class="text-left" ></td>
+                        <td style="min-width:100px; font-size: 11px;" class="d-flex justify-content-end">$ {{ totalGanado | number:'1.2-2'}}</td>
+                        <td style="min-width:100px; font-size: 11px;" class="d-flex justify-content-end">$ {{ totalDevengado | number:'1.2-2'}}</td>
+                        <td style="min-width:100px; font-size: 11px;" class="d-flex justify-content-end">$ {{ totalRetencionDecimo | number:'1.2-2'}}</td>
+                        <td style="min-width:100px; font-size: 11px;" class="d-flex justify-content-end">$ {{ totalDecimos | number:'1.2-2'}}</td>
+                        <td style="min-width:100px; font-size: 11px;" class="text-left" ></td>
+                        <td style="min-width:100px; font-size: 11px;" class="text-left" ></td>
+                        <td style="min-width:100px; font-size: 11px;" class="text-left" ></td>
+                    </tr>
+                </ng-template>
+                
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td class="EmptyTable" [attr.colspan]="7">
+                            No hay información para mostrar
+                         </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+       
+    
+        <fieldset class="border p-2 mb-2 mt-3" *ngIf="lstTablaEmpleados.length> 0">
+            <legend class="w-auto h6">Listado</legend>        
+                <table id="ejemplo" style="font-size: 10px;" class="table table-responsive table-bordered table-hover table-striped table-scrollable">
+                    <thead>
+                        <tr>
+                            <td [attr.colspan]="listadoGeneral[0].datos_empleado.length" align="center" class="color-datos-empleados">
+                                <strong>DATOS DEL EMPLEADO</strong>
+                            </td>
+                            <td *ngIf="lstRubroIngreso.length> 0" [attr.colspan]="(lstRubroIngreso.length+1)" align="center" class="color-datos-ingresos">
+                                <strong>INGRESOS $</strong>
+                            </td>
+                            <td *ngIf="lstRubroEgreso.length> 0" [attr.colspan]="(lstRubroEgreso.length+1)" align="center" class="color-datos-egresos">
+                                <strong>EGRESOS $</strong>
+                            </td>
+                            <td *ngIf="lstRubroIngreso.length> 0" class="color-datos-total-recibir" [attr.colspan]="this.listadoGeneral[3].valor_total_recibir.length" rowspan="2" style="vertical-align: middle;" align="center">
+                                <strong>VALOR NETO A RECIBIR $</strong>
+                            </td>
+                        </tr>
+            
+                        <tr style="vertical-align: middle;" align="center">
+                            <ng-container *ngFor="let group of listadoGeneral[0].datos_empleado">
+                                <th width="{{group.sise}}" class="color-datos-empleados2">
+                                    {{group.nombre}}
+                                </th>
+                            </ng-container>
+                            <ng-container *ngFor="let group of lstRubroIngreso ; let index=index">
+                                <th width="8%" class="color-datos-ingresos2">
+                                    {{group.nombre}}
+                                </th>
+                            </ng-container>
+                            <th width="8%" class="color-datos-ingresos2">TOTAL INGRESOS</th>
+                            <ng-container *ngFor="let group of lstRubroEgreso">
+                                <th width="8%" class="color-datos-egresos2">
+                                    {{group.nombre}}
+                                </th>
+                            </ng-container>
+                            <th width="8%" class="color-datos-egresos2" *ngIf="lstRubroEgreso.length>0">TOTAL EGRESOS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of lstTablaEmpleados; let index=index">
+                            <td style="vertical-align: middle;" align="center">{{(index+1)}} 
+                                <i *ngIf="item.estadoRol == 'P' || item.estadoRol == 'A'" class="{{item.estadoRol == 'P'?'fa fa-warning':'fa fa-check'}}" 
+                                [style.color]="item.estadoRol == 'A'?'#33b752':'#b74033'"
+                                [matTooltip]="item.estadoRol == 'P'?'NO ESTA APROBADO':'ESTA APROBADO'"></i>
+                            </td>
+                            <td style="vertical-align: middle;" align="left">{{item.nombres}}</td>
+                            <td style="vertical-align: middle;" align="left">{{validaciones.verSiEsNull(item.nombre_grupo) == undefined?item.departamento:item.nombre_grupo}}</td>
+                            <td style="vertical-align: middle;" align="center">{{item.Seguro==0?'NO':'SI'}}</td>
+                            <td style="vertical-align: middle;" align="center">{{item.diasLaborados}}</td>                        
+                            <td style="vertical-align: middle;" align="center" *ngIf="vmButtons[0].habilitar">{{item.concepto}}</td>
+                            <td style="vertical-align: middle;" align="center" *ngIf="vmButtons[0].habilitar">{{item.nombre_cuenta_back}}</td>                                
+                            <td style="vertical-align: middle;" align="right">{{item.sueldoBase}}</td>
+                            <ng-container *ngFor="let group of item.datoRubro">
+                                <td style="vertical-align: middle;" align="right" *ngIf="group.tipo_calculo == 'S'" class="{{group.nombre == 'TOTAL INGRESOS'?'color-datos-ingresos2 negrita-label':''}}">
+                                    {{ validaciones.roundNumber(group.valor_cantidad, 2) }}
+                                </td>
+                                <td style="vertical-align: middle;" align="right" *ngIf="group.tipo_calculo == 'N'">
+                                    <input type="text" class="font-size-input-dialog text-right" aria-label="Small" [(ngModel)]="group.valor_cantidad" maxlength="4"
+                                        (blur)="group.valor_cantidad=validaciones.roundNumber(group.valor_cantidad,2);validaciones.numberOnly($event)"
+                                        (keyup)="calcularIngresos();calcularValorNetoRecibir();calcularTotalesIngresos()">
+                                </td>
+                            </ng-container>
+                            <ng-container *ngFor="let group of item.datoRubroEgr">
+                                <td style="vertical-align: middle;" align="right"
+                                    *ngIf="group.tipo_calculo == 'S' && group.clase != 'BANCO'" class="{{group.nombre == 'TOTAL EGRESOS'?'color-datos-egresos2 negrita-label':''}}">
+                                    {{ validaciones.roundNumber(group.valor_cantidad, 2) }}
+                                </td>
+                                <td style="vertical-align: middle;" align="right" *ngIf="group.tipo_calculo == 'N' && group.clase != 'BANCO'">
+                                    <input type="text" class="font-size-input-dialog text-right" aria-label="Small" [(ngModel)]="group.valor_cantidad" maxlength="4"
+                                        (blur)="group.valor_cantidad=validaciones.roundNumber(group.valor_cantidad,2);validaciones.numberOnly($event)"
+                                        (keyup)="calcularEgresos();calcularValorNetoRecibir();calcularTotalesEgresos()">
+                                </td>
+                            </ng-container>
+                            <td width="8%" style="vertical-align: middle;" align="right" class="color-datos-total negrita-label">
+                                {{validaciones.roundNumber(item.valorNetoRecibir,2)}}
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr style="vertical-align: middle;" align="right">
+                            <th *ngIf="vmButtons[0].habilitar"></th>
+                            <th *ngIf="vmButtons[0].habilitar"></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>TOTAL $</th>
+                            <th>{{validaciones.roundNumber(calcularTotalesSueldo(),2)}}</th>
+                            <ng-container *ngFor="let item of lstTotalIngresos">
+                                <th class="{{item.id_parametro == 0?'color-datos-ingresos2':''}}">
+                                    {{validaciones.roundNumber(item.totalValor)}}
+                                </th>
+                            </ng-container>
+                            <ng-container *ngFor="let item of lstTotalEgresos">
+                                <th class="{{item.id_parametro == 0?'color-datos-egresos2':''}}">
+                                    {{validaciones.roundNumber(item.totalValor)}}
+                                </th>
+                            </ng-container>
+                            <th class="color-datos-total">
+                                {{validaciones.roundNumber(resultadoReciTotal,2)}}
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>  
+        </fieldset>
+    </div>
+</app-button-radio-active>
+    
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spDecTerc"></cc-spiner-procesar>
+
+<div [hidden]="true" id="print-section" *ngIf="dataUser != undefined">
+    <app-imprimir-rol></app-imprimir-rol>
+</div>

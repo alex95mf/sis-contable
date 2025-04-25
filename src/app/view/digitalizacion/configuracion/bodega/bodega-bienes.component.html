@@ -1,0 +1,256 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Fichero de Bodega" filtroBoton="btnsBodega" icono="fas fa-user-cog" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row justify-content-center">
+            <div class="col ">
+                <div>
+                    <div class="tab_container">
+                        <input type="radio" name="tabs" checked class="invisible">
+                        <label class="invisible lab"><br></label>
+
+                        <input id="tab3" type="radio" name="tabs" (click)="dinamicoBotones(1)" checked>
+                        <label for="tab3" class="lab">
+                        <i class="fa fa-stack-exchange" aria-hidden="true"></i>
+                        <span>Bodega</span>
+                </label>
+
+                        <input id="tab4" type="radio" (click)="dinamicoBotones(2)" name="tabs">
+                        <label class="lab" for="tab4">
+                    <i class="fa fa-minus-square" aria-hidden="true"></i>
+                    <span>Ubicación</span>
+                </label>
+
+
+                        <input type="radio" name="tabs" class="invisible">
+                        <label class="invisible lab "><br></label>
+                        <section id="content3" class="tab-content">
+                            <legend class="w-auto bg-dark ml-1">
+                                Ingreso
+                            </legend>
+                            <div class="row mt-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
+                                        </div>
+                                        <input placeholder="Ingrese Nombre" type="text" [(ngModel)]="bodega.nombre" class="form-control form-control-sm" [disabled]=" disabledBodega" id="Idnombre">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ciudad</span>
+                                        </div>
+                                        <select [(ngModel)]="bodega.ciudad" class="form-control form-control-sm custom-select" [disabled]=" disabledBodega">
+                                            <option *ngFor="let d of dataCatalogo['CIUDAD']" [value]="d.valor">
+                                                {{d.valor}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                                        </div>
+                                        <input placeholder="Ingrese Dirección" type="text" [(ngModel)]="bodega.direccion" class="form-control form-control-sm" [disabled]=" disabledBodega" id="IdAddress">
+                                    </div>
+                                </div>
+                    
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
+                                        </div>
+                                        <select class="form-control form-control-sm custom-select" [(ngModel)]="bodega.estado" [disabled]=" disabledBodega">
+                                            <option value="A">Activo</option>
+                                            <option value="I">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2  mb-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+                                        </div>
+                                        <input placeholder="Ingrese Teléfono" type="text" [(ngModel)]="bodega.telefono" class="form-control form-control-sm" (keypress)="inputNumVal($event)" maxlength="10" [disabled]=" disabledBodega" id="IdTelefono">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Encargado</span>
+                                        </div>
+                                        <input placeholder="Encargado... " type="text" [(ngModel)]="bodega.encargado_input" class="form-control form-control-sm" disabled  id="Idencargado">
+                                        <!-- <select [(ngModel)]="bodega.encargado" class="form-control form-control-sm custom-select" [disabled]=" disbledUser|| !disabledBodega">
+                                            <option *ngFor="let d of dataUsers" [value]="d.id_usuario">{{d.nombre}}
+                                            </option>
+                                        </select> -->
+                                        <button class="btn btn-primary btn-sm" (click)="modalEncargado()" [disabled]=" disabledBodega"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-4 switch-container">
+                                    <div class="input-group input-group-sm mt-1  switch-container ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Stock menor 0</span>
+                                        </div>
+                                        <input type="checkbox" [(ngModel)]="bodega.stock_menor_cero" class="form-control form-control-sm" [disabled]=" disabledBodega">
+                                    </div>
+                                </div> -->
+                            </div>
+                        </section>
+                        <section id="content4" class="tab-content  mb-2">
+                            <legend class="w-auto bg-dark ml-1">
+                               Ubicación
+                            </legend>
+                            <div class="row mt-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bodega</span>
+                                        </div>
+                                        <select [(ngModel)]="bodegaSelect" class="form-control form-control-sm custom-select" >
+                                            <option *ngFor="let d of dataBodega" [value]="d.id_bodega_cab">
+                                                {{d.nombre}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fila</span>
+                                        </div>
+                                        <input placeholder="Ingrese fila" type="text" [(ngModel)]="filaEstruc" class="form-control form-control-sm"  id="IdFilaEs">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Código</span>
+                                        </div>
+                                        <input placeholder="Ingrese código" type="text" [(ngModel)]="codigoEstruc" class="form-control form-control-sm"  id="IdCodigoEs">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2 mb-2">
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo</span>
+                                        </div>
+                                        <select [(ngModel)]="tipoAlmaSelect" class="form-control form-control-sm custom-select">
+                                            <option *ngFor="let d of dataCatalogo['TIPO ALMACENAMIENTO']"
+                                                [value]="d.valor">{{d.valor}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Columna</span>
+                                        </div>
+                                        <input placeholder="Ingrese columna" type="text" [(ngModel)]="columnaEstruc" class="form-control form-control-sm"  id="IdColumnaEs">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dimension (m²)</span>
+                                        </div>
+                                        <input placeholder="Ingrese Dimensión (m²)" type="text" [(ngModel)]="dimensionEstruc" class="form-control form-control-sm"  id="IdEs">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="content3" class="tab-content">
+                            <div class="mt-2">
+
+                                <table class="table no-footer table-hover">
+                                    <thead class="thead-dark text-center">
+                                        <tr>
+                                            <th style="text-align: left;">Id</th>
+                                            <th style="text-align: left;">Nombre Bodega</th>
+                                            <th style="text-align: left;">Ciudad</th>
+                                            <th style="text-align: left;">Dirección</th>
+                                            <th style="text-align: left;">Encargado</th>
+                                            <th style="text-align: left;">Teléfono</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr *ngIf="!dataBodega.length">
+                                            <td colspan="6" class="text-center">
+                                                <h6>No hay Bodegas</h6>
+                                            </td>
+                                        </tr>
+                                        <tr *ngFor="let dt of dataBodega"  style="cursor:pointer;text-align:left;" (click)="updateBodega(dt)">
+                                            <td style="padding-left: 17px;">{{ dt.id_bodega_cab}}</td>
+                                            <td style="padding-left: 17px;">{{ dt.nombre }}</td>
+                                            <td style="padding-left: 17px;">{{ dt.ciudad }}</td>
+                                            <td style="padding-left: 17px;">{{ dt.direccion }}</td>
+                                            <td style="padding-left: 17px;">{{ dt.empleado?.emp_primer_nombre}} {{dt.empleado?.emp_primer_apellido}}</td>
+                                            <td style="padding-left: 17px;">{{ dt.telefono }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="col-12">
+                                    <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage"
+                                      [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)" aria-label="Select page">
+                                    </mat-paginator>
+                                </div>
+                    
+                            </div>
+                            
+                        </section>
+                        <section id="content4" class="tab-content">
+                            <div class="mt-2">
+                                <table  class="table no-footer table-hover">
+                                    <thead class="thead-dark text-center">
+                                        <tr>
+                                            <th style="text-align: left;">Id</th>
+                                            <th style="text-align: left;">Nombre_bodega</th>
+                                            <th style="text-align: left;">Dirección</th>
+                                            <th style="text-align: left;">Teléfono</th>
+                                            <th style="text-align: left;">Tipo Almacenamiento</th>
+                                            <th style="text-align: left;">Fila</th>
+                                            <th style="text-align: left;">Columna</th>
+                                            <th style="text-align: left;">Código</th>
+                                            <th style="text-align: left;">Dimensión</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="!validaDtBodega">
+                                        <tr *ngFor="let dt of dataBodega1"  style="cursor:pointer;text-align:left;" (click)="updateBodega1(dt)">
+                                            <td style="padding-left: 17px;">{{ dt.id_bodega_det}}</td>
+                                            <td style="padding-left: 17px;">{{ dt.bodega.nombre }}</td>
+                                            <td style="padding-left: 17px;">{{ dt.bodega.direccion }}</td>
+                                            <td style="padding-left: 17px;">{{ dt.bodega.telefono }}</td>
+                                            <td style="padding-left: 17px;">{{ dt.tipo_almacenamiento }}</td>
+                                            <td style="padding-left: 17px;">{{ dt.fila}}</td>
+                                            <td style="padding-left: 17px;">{{ dt.columna }}</td>
+                                            <td style="padding-left: 17px;">{{ dt.codigo }}</td>
+                                            <td style="padding-left: 17px;">{{ dt.dimension }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="col-12">
+                                    <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage"
+                                      [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate1($event)" aria-label="Select page">
+                                    </mat-paginator>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spFBodega"></cc-spiner-procesar>
+
+

@@ -1,0 +1,43 @@
+<div >
+    <app-button-radio-active [titulo]="isNew ? 'Nuevo Registro' : 'Editar Registro'" filtroBoton="btnConceptoForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+        <div class="row">
+            <div class="col-sm-12">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" maxlength="255" [(ngModel)]="documento.cat_nombre">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" maxlength="255" [(ngModel)]="documento.cat_descripcion">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <app-cc-input-group-prepend label="Keyword" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control"  type="text" maxlength="20" [(ngModel)]="documento.cat_keyword">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <app-cc-input-group-prepend label="Cantidad Tiempo" styleSpan="size-span-campo font-weight-bold">
+                    <input type="number" class="form-control form-control-sm" placeholder="Cantidad Tiempo" [(ngModel)]="documento.cat_cantidad_tiempo">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <app-cc-input-group-prepend label="Tipo Contrato" styleSpan="size-span-campo  font-weight-bold">
+                    <ng-select id="tiempo_contrato" class="form-control form-control-sm" [(ngModel)]="documento.cat_tiempo" [clearable]="false">
+                        <ng-option disabled [value]="0" disabled>Seleccione</ng-option>
+                        <ng-option *ngFor="let op of tiempo_contrato" [value]="op.id_catalogo">{{op.cat_nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

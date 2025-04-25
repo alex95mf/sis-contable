@@ -1,0 +1,101 @@
+<app-button-radio-active-new titulo="Catalogos bienes"  
+cstyle="bg-gradient-primary text-white"
+filtroBoton="btnCatalogoBienes" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+
+icono="fas fa-tasks" >
+
+
+
+
+    <div class="row m-0">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Filtros</legend>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Codigo de bienes" styleSpan="size-span-campo font-weight-bold">
+        
+                            <input class="form-control" type="text" [(ngModel)]="filter.codigo"/>
+        
+                        </app-cc-input-group-prepend>
+                    </div>
+        
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Descripcion" styleSpan="size-span-campo font-weight-bold">
+        
+                            <input class="form-control" type="text" [(ngModel)]="filter.descripcion"/>
+        
+                        </app-cc-input-group-prepend>
+                    </div>
+        
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+        
+                        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="filter.estado" >
+                              <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                              <ng-option *ngFor="let item of estado"  [value]="item.valor">{{item.descripcion}}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+        
+        
+    
+                    
+        
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+
+    <div class="row m-0">
+        <div class="col-12">
+            <div class="table-responsive" style="max-height: 550px; overflow-y: auto;">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                    <thead class="sticky-header">
+                        <tr class="text-center">
+                            <th class="text-center">Codigo bienes</th>
+                            <th class="text-center">Descripcion</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!catalogoBienes.length">
+                            <td colspan="4" class="text-center">
+                                <h6>No hay catalogo de bienes</h6>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let item of catalogoBienes">
+                            <td class="text-center">{{item.codigo_bienes}}</td>
+                            <td class="text-center">{{item.descripcion}}</td>
+                            <td *ngIf="item.estado == 'A'" class="text-center">
+                                <i class="fas fa-circle text-success"></i> Aprobado
+                            </td>
+                            <td *ngIf="item.estado == 'I'" class="text-center">
+                                <i class="fas fa-circle text-danger"></i> Inactivo
+                            </td>
+                            <td class="text-center">
+                                <button class="btn btn-primary mr-1 btn-sm" (click)="modalEdition(item)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" (click)="eliminarCata(item)" [disabled]="item.estado == 'I'">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+            
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage"
+                  [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)" aria-label="Select page">
+                </mat-paginator> 
+            </div>
+        </div>
+    </div>
+
+
+
+</app-button-radio-active-new>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>

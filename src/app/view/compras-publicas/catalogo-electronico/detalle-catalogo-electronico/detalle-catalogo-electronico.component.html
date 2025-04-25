@@ -1,0 +1,397 @@
+<div class="mt-2">
+
+
+    <div class="row m-0">
+        <div class="col-12">
+
+    <fieldset class="border card-fieldset">
+        <legend class="w-auto card-legend">Información de la Solicitud</legend>
+        <div class="row m-0">
+            <div class="col-12 col-md-12 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Numero de solicitud" styleSpan="size-span-campo font-weight-bold">
+
+                    <input [(ngModel)]="item.num_solicitud" class="form-control" readonly/>
+    
+                </app-cc-input-group-prepend>
+
+            </div>
+
+
+        </div>
+        <div class="row m-0">
+            <div class="col-12 col-md-12 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+
+                   
+
+
+                    <textarea [(ngModel)]="item.descripcion" class="form-control" readonly rows="4">
+
+                    </textarea>
+
+    
+                </app-cc-input-group-prepend>
+
+            </div>
+
+        </div>
+
+    </fieldset>
+        </div>
+    </div>
+
+           
+                <br>
+                <nav class="card-k p-2 mb-2">
+                   <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
+                        <a  class="tab-label text-center active" id="nav-datos-sercop-tab" data-toggle="tab" href="#nav-datos-sercop" role="tab"
+                            aria-controls="nav-datos-sercop" aria-selected="true">Datos SERCOP</a>
+                        <a class="tab-label text-center" id="nav-ordenes-compra-tab" data-toggle="tab" href="#nav-ordenes-compra" role="tab"
+                            aria-controls="nav-ordenes-compra" aria-selected="false">Ordenes de Compra</a>
+                        <a class="tab-label text-center" id="nav-anexos-cierre-tab" data-toggle="tab" href="#nav-anexos-cierre" role="tab"
+                            aria-controls="nav-anexos-cierre" aria-selected="false">Anexos de Cierre</a>
+                     
+                    </div>
+                </nav>
+        
+                <div class="tab-content mb-3" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-datos-sercop" role="tabpanel" aria-labelledby="nav-datos-sercop-tab">
+                        <div class="col-12">
+                            <fieldset class="border card-fieldset">
+                                <div class="row m-0">
+                
+                                    <div class="col-12 text-right">
+                                        <button class="btn btn-success" (click)="guardarCatElecDatos()">
+                                            Guardar Datos SERCOP
+                                        </button>
+                                    </div>
+                                </div>
+                
+                                <div class="row m-0">
+                
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Proceso" styleSpan="size-span-campo font-weight-bold">
+                                            <textarea  class="form-control form-control-sm" type="text" 
+                                            [(ngModel)]="datosCatElec.ce_proceso" id="proceso"
+                                            rows="3"  maxlength="500"></textarea>
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Cod. Catalogo Electrónico" styleSpan="size-span-campo font-weight-bold">
+                                            <input type="text" class="form-control form-control-sm" [(ngModel)]="datosCatElec.ce_cod_cate" maxlength="50">
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                
+                                </div> <!-- Falta cerrar este div -->
+                
+                            </fieldset>
+                        </div>
+                    </div>
+                
+                
+        
+                    <div class="tab-pane fade" id="nav-ordenes-compra" role="tabpanel" aria-labelledby="nav-ordenes-compra-tab">
+                      
+                        <div class="col-12">
+                            <fieldset class="border card-fieldset">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Admin de Compra" styleSpan="size-span-campo font-weight-bold">
+                                            <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Admin Compra" (click)="expandListAdminCompra()"  [value]="adminActive" [(ngModel)]="adminActive.nombre">
+                                            <button  class="btn btn-primary btn-sm" (click)="expandListAdminCompra()" placement="bottom" ngbTooltip="Buscar Admin de Compra">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                                    <div class="col-12 col-md-6 pt-0 pb-0 text-right">
+                                        <button class="btn btn-success" (click)="guardarCatAdmin()">
+                                            Guardar Administrador 
+                                        </button>
+                                        <button class="btn btn-success" (click)="expandModalOrden(true, item)">
+                                            Registrar Orden de Compra
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Resolucion" styleSpan="size-span-campo font-weight-bold">
+                                            <input type="text" class="form-control" [(ngModel)]="item.ce_resolucion">
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                                </div>
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Fecha de Aceptacion" styleSpan="size-span-campo font-weight-bold">
+                                            <input type="date" class="form-control" [(ngModel)]="item.ce_fecha_aceptacion">
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                            <ng-select class="form-control" [clearable]="false" [(ngModel)]="item.ce_estado"
+                                                [items]="cmb_estado" bindValue="valor" bindLabel="descripcion">
+                                            </ng-select>
+                                        </app-cc-input-group-prepend>
+                                    </div>
+
+                                
+                                </div>
+
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-12 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold">
+                                            <textarea rows="5" class="form-control" [(ngModel)]="item.ce_observacion"></textarea>
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                                </div>
+
+                                <div class="row m-0">
+<div class="col-12">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-k table-hover" >
+            <thead class="sticky-header">
+                <tr class="text-center">
+                    <!-- <th class="text-center">Id</th> -->
+                    <th class="text-center">Proveedor</th>
+                    <th class="text-center">Orden Compra</th>
+                    <th class="text-center">Valor</th>
+                    <!-- <th class="text-center">Administrador</th> -->
+                    <th class="text-center">Fecha Aceptaci&oacute;n</th>
+                    <th class="text-center">Fecha Publicaci&oacute;n</th>
+                    <th class="text-center">Observaciones</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngIf="!detalles.orden .length">
+                    <td colspan="4" class="text-center">
+                        <h6>No hay datos que mostrar</h6>
+                    </td>
+
+                </tr>
+                <tr *ngFor="let item of detalles.orden " [ngClass]="{'table-secondary': item.estado == 'I'}">
+                    <!-- <td class="text-center">{{item.id_ordenes}}</td> -->
+                    <td class="text-center">{{item.proveedor.razon_social}}</td>
+                    <td class="text-center">{{item.num_orden}}</td>
+                    <td class="text-right">$ {{ item.valor | number:'1.2-2' }}</td>
+                    <!-- <td class="text-center">{{ item.empleado ? item.empleado.emp_full_nombre : '' }}</td> -->
+                    <td class="text-center">{{ item.fecha_aceptacion }}</td>
+                    <td class="text-center">{{ item.fecha_publicacion }}</td>
+                    <td class="mat-column-observacion">
+                        <span matTooltip="{{ item.observaciones }}">{{ item.observaciones }}</span>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="item.estado == 'I'"><i class="fas fa-circle text-danger"></i> INACTIVO</span>
+                        <span *ngIf="item.estado == 'A'"><i class="fas fa-circle text-success"></i> ACTIVO</span>
+                    </td>
+                    <td class="text-center">
+                        
+                            <button class="btn btn-warning" (click)="expandModalOrden(false,item)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-right font-weight-bold">Total</td>
+                    <td class="font-weight-bold text-right">$ {{ valorTotalOrdenes | number:'1.2-2' }}</td>
+                    <td colspan="5"></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+                                </div>
+
+
+
+
+                            </fieldset>
+                        </div>
+
+
+
+ 
+
+                       
+
+
+
+                       
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-anexos-cierre" role="tabpanel" aria-labelledby="nav-anexos-cierre-tab">
+                      
+
+                        <div class="col-12">
+                            <fieldset class="border card-fieldset">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Anexo de Cierre" styleSpan="size-span-campo font-weight-bold">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                                    (change)="cargaArchivo($event.target.files)"
+                                                    [disabled]="disabledCampo">
+                                                <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ?
+                                                    fileList[0].name : "Seleccione un archivo" }}</label>
+                                                
+                                            </div>
+                                            <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" [disabled]='disabledCampo'>Cargar</button></div>
+                                       
+                                        </app-cc-input-group-prepend>
+
+                                    </div>
+
+                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                        <app-anexos-list-dis [identifier]="item.id_solicitud" custom1="CAT-ELECTRONICO"></app-anexos-list-dis>
+                                    </div>
+
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <!-- <div class="text-right m-2">
+                            <button class="btn btn-success" (click)="guardarAnexoCierre()">
+                                Guardar
+                            </button>
+                        </div> -->
+
+                    </div>
+                </div>
+
+
+                <div class="row m-0">
+                    <div class="col-12">
+            
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Detalle de la Solicitud</legend>
+                    <div class="row m-0">
+                        <div class="col-12 text-right">
+                            <button class="btn btn-primary" (click)="validaDetallesCatElec()" [disabled]="disabledDetalle">
+                                Guardar Detalle
+                            </button>
+                        </div>
+                    
+                    </div>
+                    
+                                    <div class="row m-0">
+                                        
+                           
+                    
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered table-k table-hover" >
+                                                    <thead class="sticky-header">
+                                                        <tr class="text-center">
+                                                            <th class="text-center">Descripción</th>
+                                                            <th class="text-center">Stock</th>
+                                                            <th class="text-center">Cantidad Requerida</th>
+                                                            <th class="text-center">Precio Unitario</th>
+                                                            <th class="text-center">Precio Cotizado</th>
+                                                            <th class="text-center">Cantidad Aprobada</th>
+                                                            <th class="text-center">Precio Unitario Aprobado</th>
+                                                            <th class="text-center">Precio Aprobado</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngIf="!catElecDetalles.length">
+                                                            <td colspan="5" class="text-center">
+                                                                <h6>No hay detalles que mostrar</h6>
+                                                            </td>
+                                    
+                                                        </tr>
+                                                        <tr *ngFor="let item of catElecDetalles, let i = index">
+                                                            <td class="text-center">{{item.descripcion}}</td>
+                                                            <td class="text-center">{{item.cantidad_solicitada}}</td>
+                                                            <td class="text-center">{{item.cantidad_requerida}}</td>
+                                                            <td class="text-right">${{item.bienes?.costo_unitario | number :'1.2-2'}}</td>
+                                                            <td class="text-right">${{item.precio_cotizado | number :'1.2-2'}}</td>
+                                                            <td class="text-right" >
+                                                                <div class="input-group input-group-sm" >
+                                                                    <input type="text" class="form-control form-control-sm text-right"
+                                                                         [(ngModel)]="item.cantidad_aprobada" (ngModelChange)="calcularTotalAprobado()" (keypress)="onlyNumber($event)">
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-right" >
+                                                               
+                                                                <div class="input-group input-group-sm" >
+                                                                    <div class="input-group-prepend"><span
+                                                                            class="input-group-text font-weight-bold">$</span></div>
+                                                                    <input currencyMask type="text" class="form-control form-control-sm text-right"
+                                                                         [(ngModel)]="item.precio_unitario_aprobado"  (ngModelChange)="calcularTotalAprobado()">
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-right">
+                                                                <!-- <div  *ngIf="disabledDetalle">
+                                                                    $ {{item.precio_aprobado  | number :'1.2-2'}} 
+                                                                </div> -->
+                                                                <div class="input-group input-group-sm" >
+                                                                    <div class="input-group-prepend"><span
+                                                                            class="input-group-text font-weight-bold">$</span></div>
+                                                                    <input currencyMask type="text" class="form-control form-control-sm text-right"
+                                                                         [(ngModel)]="item.precio_aprobado" readonly>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4" style="font-size: 14px; " class="font-weight-bold text-right">TOTAL COTIZADO: </th>
+                                                            <th style=" font-size: 14px;" class="font-weight-bold text-right">$ {{ totalCotizado| number: '1.2-2'}}</th>
+                                                            <!-- <th style=" font-size: 14px;" class="font-weight-bold text-center">$ {{totalValorSolicitud | number: '1.2-2'}}</th> -->
+                                                            <th colspan="2" style="font-size: 14px; " class="font-weight-bold text-right">TOTAL APROBADO: </th>
+                                                            <th style=" font-size: 14px;" class="font-weight-bold text-right">$ {{totalAprobado| number: '1.2-2'}}</th>
+                            
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                </fieldset>
+                    </div>
+                </div>
+
+
+                <div class="m-2">
+
+                    <!-- <table class="table table-hover mt-2">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center">Precio Cotizado</th>
+                                <th class="text-center">Cantidad Solicitada</th>
+                                <th class="text-center">Cantidad Requerida</th>
+                            </tr>
+                        </thead>
+        
+                        <tbody>
+                            <tr *ngIf="!catElecDetalles.length">
+                                <td colspan="5" class="text-center">
+                                    <h6>No hay detalles que mostrar</h6>
+                                </td>
+        
+                            </tr>
+                            <tr *ngFor="let item of catElecDetalles, let i = index">
+                                <td class="text-center">{{item.descripcion}}</td>
+                                <td class="text-center">$ {{item.precio_cotizado | number :'1.2-2'}}</td>
+                                <td class="text-center">{{item.cantidad_solicitada}}</td>
+                                <td class="text-center">{{item.cantidad_requerida}}</td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+
+                </div>
+            
+            
+
+    <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="lInfimas"></cc-spiner-procesar>
+</div>
+
+

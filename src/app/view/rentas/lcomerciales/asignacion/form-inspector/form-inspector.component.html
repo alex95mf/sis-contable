@@ -1,0 +1,32 @@
+<div *ngIf="true">
+
+    <app-button-radio-active [titulo]="titulo" filtroBoton="formBtnInspector" cstyle="bg-gradient-primary text-white" [groupButton]="botonera" (onMetodoGlobal)="metodoGlobal($event)" [icono]="'far fa-plus-square'">
+        <div class="row mt-3">
+
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha</span>
+                    </div>
+                    <input id="orden_inspeccion" type="date" class="form-control form-control-sm" [(ngModel)]="inspeccion.fecha_asignacion">
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="input-group input-group-sm mt-2 mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Inspector</span>
+                    </div>
+                    <ng-select id="fk_inspector" class="form-control form-control-sm" [(ngModel)]="inspeccion.fk_inspector" [clearable]="false">
+                        <ng-option disabled [value]="0">Seleccione un Inspector</ng-option>
+                        <ng-option *ngFor="let op of lista_inspectores" [value]="op.id_inspector">{{ op.nombres }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+        </div>
+    </app-button-radio-active>
+    
+</div>
+
+<cc-spiner-procesar [ltexto]="texto_barra_carga" lfulScren=true lTipo="FormInspector"></cc-spiner-procesar>

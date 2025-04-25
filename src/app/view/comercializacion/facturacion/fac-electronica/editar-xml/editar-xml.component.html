@@ -1,0 +1,14 @@
+
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnEditXml" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-pencil-square-o"> 
+     
+    <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+    <ngx-editor
+        [editor]="editor"
+        [ngModel]="html"        
+        [disabled]="false"
+        [placeholder]="'Escribir texto...'"
+    ></ngx-editor> 
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spEditarXml"></cc-spiner-procesar>

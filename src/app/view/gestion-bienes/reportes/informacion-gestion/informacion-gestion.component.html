@@ -1,0 +1,105 @@
+<div class="my-2">
+    <app-button-radio-active-new [titulo]="fTitle" 
+    
+    cstyle="bg-gradient-primary text-white"
+    
+    icono="fas fa-hand-pointer"
+        filtroBoton="btnsRenConsultaReporte" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Tipo de Reporte" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" [(ngModel)]="selectedReporte"
+                                    [items]="cmb_tipo_reporte" bindValue="value" bindLabel="descripcion" >
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Tipo de Bien" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" [(ngModel)]="selectedTipo" (change)="filterByTipoBien($event)"
+                                    [items]="cmb_tipo_bien" bindValue="value" bindLabel="label">
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="selectedReporte == 'PSG'">
+                            <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [(ngModel)]="selectedGrupo"
+                                    [items]="cmb_grupo_filter" bindValue="id_grupo_productos" bindLabel="descripcion" >
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Datos a Mostrar" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" [(ngModel)]="selectedData"
+                                    [items]="cmb_data_mostrar" bindValue="value" bindLabel="label"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+            
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="row m-0">
+            <div class="col-12">
+                <div class="table-responsive" *ngIf="mostrarMatriz; then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock>
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                <th>
+                                    <span *ngIf="selectedReporte == 'RES'">Responsable</span>
+                                    <span *ngIf="selectedReporte == 'DEP'">Dependencia</span>
+                                    <span *ngIf="selectedReporte != 'RES' && selectedReporte != 'DEP'">Periodo</span>
+                                </th>
+                                <th *ngFor="let columna of columnas">{{ columna }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let fila of matriz">
+                                <td>
+                                    {{ selectedReporte == 'RES' ? fila.responsable : fila.date_part }}
+                                    <span *ngIf="selectedReporte == 'RES'">{{ fila.responsable }}</span>
+                                    <span *ngIf="selectedReporte == 'DEP'">{{ fila.codigo }}. {{ fila.nombre_dependencia }}</span>
+                                    <span *ngIf="selectedReporte != 'RES' && selectedReporte != 'DEP'">{{ fila.date_part }}</span>
+                                </td>
+                                <td *ngFor="let columna of columnas">
+                                    <span *ngIf="selectedData == 'valor'">${{ fila[columna] ?? 0 | number:'1.2-2' }}</span>
+                                    <span *ngIf="selectedData == 'cantidad'">{{ fila[columna] ?? 0 | number:'1.0-0' }}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-template>
+                <ng-template #elseBlock>
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                <th>Tipo de Bien</th>
+                                <th>Cantidad</th>
+                                <th>Suma de Valores</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let fila of filas">
+                                <td>{{ fila.descripcion }}</td>
+                                <td>{{ fila.cantidad }}</td>
+                                <td>{{ fila.valor | number:'1.2-2' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-template>
+            </div>
+        </div>
+
+
+        
+    </app-button-radio-active-new> 
+    </div>
+    <cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spBienesReporteGestion"></cc-spiner-procesar>

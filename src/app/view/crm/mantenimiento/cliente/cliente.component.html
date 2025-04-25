@@ -1,0 +1,1800 @@
+<div *ngIf="permisions.abrir!=0;else permisodenegado">
+    <div class="mt-4 mb-5">
+        <app-button-radio-active-new titulo="CLIENTE CRM" filtroBoton="btnIProducto"
+            cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+            icono="fab fa-product-hunt">
+            <div class="row m-0">
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Datos Solo Facturacion"
+                        styleSpan="input-group-text size-span-campo">
+                        <input type="checkbox" class="form-control form-control-sm" [maxlength]="20"
+                            [(ngModel)]="SoloFacturacion">
+                    </app-cc-input-group-prepend>
+
+                </div>
+            </div>
+            <div *ngIf="SoloFacturacion==false;else soloDatosFacturacion">
+                <div class="row m-0">
+                    <div class="col-12">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">Datos Personales</legend>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+
+                                    <app-cc-input-group-prepend label="Código de Cliente"
+                                        styleSpan="input-group-text size-span-campo">
+                                        <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                            [(ngModel)]="cliente.codigo">
+                                    </app-cc-input-group-prepend>
+
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+
+                                    <app-cc-input-group-prepend label="Nombre"
+                                        styleSpan="input-group-text size-span-campo">
+                                        <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                            [(ngModel)]="cliente.nombre">
+                                    </app-cc-input-group-prepend>
+
+                                </div>
+
+                            </div>
+                            <div class="row m-0">
+
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+
+
+                                    <app-cc-input-group-prepend label="Tipo Identificacion"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
+                                            appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                            [(ngModel)]="cliente.tipo_identificacion">
+                                            <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
+
+                                            <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                *ngFor="let item of lista_tipo_documentos">
+                                                {{item.valor}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+
+                                    <app-cc-input-group-prepend label="Numero de Identificacion"
+                                        styleSpan="input-group-text size-span-campo">
+                                        <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                            [(ngModel)]="cliente.ruc">
+                                    </app-cc-input-group-prepend>
+
+                                </div>
+
+
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Telefono"
+                                        styleSpan="input-group-text size-span-campo">
+                                        <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                            [(ngModel)]="cliente.telefono1">
+                                    </app-cc-input-group-prepend>
+                                </div>
+
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Dirección" styleSpan="size-span-campo">
+                                        <textarea class="form-control form-control-sm" type="text"
+                                            [(ngModel)]="cliente.direccion" placeholder="Ingrese una Direccion"
+                                            rows="3" maxlength="255"></textarea>
+                                    </app-cc-input-group-prepend>
+                                </div>
+
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Fecha de Nacimiento"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <input type="date" class="form-control form-control-sm"
+                                            [(ngModel)]="cliente.fecha_nacimiento">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Genero"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
+                                            appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                            [(ngModel)]="cliente.genero">
+                                            <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
+                                            <ng-option [value]="item.codigo" [disabled]="item.disabled"
+                                                *ngFor="let item of lista_generos">
+                                                {{item.descripcion}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Estado Civil"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
+                                            appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                            [(ngModel)]="cliente.estado_civil">
+                                            <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                *ngFor="let item of lista_estado_civil">
+                                                {{item.valor}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Profesión u Oficio"
+                                        styleSpan="input-group-text size-span-campo">
+                                        <input type="text" class="form-control form-control-sm" [maxlength]="100"
+                                            [(ngModel)]="cliente.profesion">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Nivel Educativo"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
+                                            appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                            [(ngModel)]="cliente.nivel_educativo">
+                                            <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                *ngFor="let item of lista_nivel_educativo">
+                                                {{item.valor}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Fecha de Registro como cliente"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <input type="date" class="form-control form-control-sm"
+                                            [(ngModel)]="cliente.created_at">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Segmentacion"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
+                                            appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                            [(ngModel)]="cliente.segmentacion">
+                                            <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
+                                            <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                *ngFor="let item of lista_segmentacion">
+                                                {{item.valor}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Medio de Contacto"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
+                                            appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                            [(ngModel)]="cliente.medio_contacto">
+                                            <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
+                                            <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                *ngFor="let item of lista_medio_contacto">
+                                                {{item.valor}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Pagina web"
+                                        styleSpan="input-group-text size-span-campo">
+                                        <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                            [(ngModel)]="cliente.pagina_web">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Estado"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
+                                            appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                            [(ngModel)]="cliente.estado">
+                                            <ng-option [value]="item.estado" [disabled]="item.disabled"
+                                                *ngFor="let item of lista_estados">
+                                                {{item.descripcion}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </fieldset>
+
+                    </div>
+                </div>
+                 <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">2. Contactos</legend>
+
+                            <div class="row m-0">
+
+
+                                <div class="col-12 col-md-3 pt-0 pb-0">
+                                    <button class="btn btn-primary" (click)="addContacto()"><i
+                                            class="fa fa-plus"></i>Agregar</button>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    <th>#</th>
+                                                    <th style="width:10%">Tipo de Contacto</th>
+                                                    <th style="width:20%">Nombre </th>
+                                                    <th style="width:10%">Identificador </th>
+                                                    <th>Telefonos</th>
+                                                    <th>Correo</th>
+
+                                                    <th style="width:10%">Estado</th>
+
+                                                    <th style="width:10%"> Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td *ngIf="cliente?.contactos?.length==0" colspan="12"
+                                                        class="text-center">
+                                                        No se encontró data
+                                                    </td>
+                                                </tr>
+                                                 <tr *ngFor="let d of cliente?.contactos, let i = index"
+                                                    [ngClass]="d.class" [style]="d.size">
+                                                    <td class="text-left">{{ i+1}}</td>
+                                                    <td>
+                                                        <input class="form-control form-control-sm"
+                                                            type="text" maxlength="100" [(ngModel)]="d.tipo_contacto">
+                                                    </td>
+
+
+                                                    <td>
+                                                        <input class="form-control form-control-sm"
+                                                            type="text" maxlength="100" [(ngModel)]="d.nombre_contacto">
+                                                    </td>
+
+                                                    <td>
+                                                        <ng-select class="form-control"  placeholder="-Todos-"
+                                                        appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                        [(ngModel)]="d.tipo_identificador_contacto">
+                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                            *ngFor="let item of lista_tipo_identificador">
+                                                            {{item.valor}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                            type="text" maxlength="100" [(ngModel)]="d.telefono_contacto">
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="text" maxlength="100" [(ngModel)]="d.correo_contacto">
+                                                    </td>
+                                                    <td>
+                                                    <span *ngIf="d.estado == 'A'" class="text-center"><i
+                                                            class="fas fa-circle text-success"></i> Activo</span>
+                                                    <span *ngIf="d.estado == 'I'" class="text-center"><i
+                                                            class="fas fa-circle text-danger"></i> Inactivo</span>
+
+                                                    </td> 
+
+                                                    <td class="text-center">
+                                                        <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
+                                                            (click)="removeContacto(i)" [disabled]="d.estado=='I'">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>    
+                                                        <button class="btn btn-success mr-1" ngbTooltip="Activar"
+                                                        (click)="activarContacto(i)" [disabled]="d.estado=='A'">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>                     
+                                                    </td>
+                                                </tr> 
+
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div> 
+                <div class="row m-0">
+                    <div class="col-6 col-md-6 pt-0 pb-0">
+
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">Coordenadas del Mapa</legend>
+
+                            <div style="height: 300px;width: 100%;">
+                            
+
+                                    <!-- <p >Latitud: {{ mapCoordinates.lat }}, Longitud: {{
+                                        mapCoordinates.lng }}</p> -->
+
+                                                                     <div class="row m-0">
+
+                                <div class="col-4 col-md-4 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Latitud:"
+                                        styleSpan="input-group-text size-span-campo">
+                                        <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                            [(ngModel)]="initialLat">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-4 col-md-4 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Longitud:"
+                                        styleSpan="input-group-text size-span-campo">
+                                        <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                            [(ngModel)]="initialLng">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            
+
+
+                            </div> 
+                             
+                                <div class="col-4 col-md-4 pt-0 pb-0">
+                                  <!--Latitud:{{initialLat}} 2: {{  cliente.Latitud}}  
+                                  Longitud:{{initialLng}} 2: {{  cliente.Longitud}}  
+                                   <button (click)="updateCoordinates()">Actualizar Coordenadas</button> -->
+                                 </div>
+                                <app-google-map
+                                [initialLat]="initialLat"
+                                [initialLng]="initialLng"
+                                (coordinatesChanged)="onCoordinatesChanged($event)">
+                              </app-google-map>
+                              
+                            </div>
+                        </fieldset>
+
+
+                    </div>
+                    <div class="col-6 col-md-6 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">Anexos-Fotos</legend>
+
+                            <div class="row m-0">
+                                <div class="col-12 col-md-12 pt-0 pb-0">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend"><span style="width: 155px;"
+                                                class="input-group-text font-weight-bold">Fotos</span></div>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                accept="image/*" multiple [disabled]=" 
+                                            !disabledProduct" (change)="cargaFoto($event.target.files)">
+                                            <label class="custom-file-label" for="inputGroupFile01">{{ fotos.length > 0
+                                                ? "Ha seleccionado " + fotos.length + " Fotos" : "Seleccione fotos a
+                                                subir" }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="multiple-image-container">
+                                        <div *ngFor='let foto of fotos, let i = index' class="multiple-image-preview">
+                                            <img [src]="foto.recurso" (click)="expandirVistaFotos(i)"
+                                                class="img-thumbnail">
+                                            <button *ngIf="!formReadOnly"
+                                                [disabled]="permisions.editar == '0' || !disabledProduct"
+                                                class="btn btn-sm btn-danger" placement="top" ngbTooltip="Eliminar Foto"
+                                                (click)="removeFoto(i)"><i class="far fa-trash-alt"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+
+                </div>
+
+                
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">3. Direcciones</legend>
+
+                            <div class="row m-0">
+
+
+                                <div class="col-12 col-md-3 pt-0 pb-0">
+                                    <button class="btn btn-primary" (click)="addDireccion()"><i
+                                            class="fa fa-plus"></i>Agregar</button>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    <th>#</th>
+                                                    <th style="width:10%">Tipo de Direccion</th>
+                                                    
+                                                    <th style="width:10%">Identificador </th>
+                                                    <th style="width:20%">Direccion </th>
+                                                    <th>Provincia</th>
+                                                    <th>Ciudad</th>
+                                                    <th>Codigo Postal</th>
+
+                                                    <th style="width:10%">Estado</th>
+
+                                                    <th style="width:10%"> Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td *ngIf="cliente?.direcciones?.length==0" colspan="12"
+                                                        class="text-center">
+                                                        No se encontró data
+                                                    </td>
+                                                </tr>
+                                                 <tr *ngFor="let d of cliente?.direcciones, let i = index"
+                                                    [ngClass]="d.class" [style]="d.size">
+                                                    <td class="text-left">{{ i+1}}</td>
+                                                    <td>
+                                                        <ng-select class="form-control"  placeholder="-Todos-"
+                                                        appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                        [(ngModel)]="d.tipo_direccion">
+                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                            *ngFor="let item of lista_tipo_direccion">
+                                                            {{item.valor}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    </td>
+
+                                                    <td>
+                                                        <ng-select class="form-control"  placeholder="-Todos-"
+                                                        appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                        [(ngModel)]="d.tipo_identificador">
+                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                            *ngFor="let item of lista_tipo_identificador">
+                                                            {{item.valor}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    </td>
+
+
+                                                    <td>
+                                                        <input class="form-control form-control-sm"
+                                                            type="text" maxlength="100" [(ngModel)]="d.direccion">
+                                                    </td>
+
+
+                                                    <td>
+                                                        <ng-select class="form-control"  placeholder="-Todos-"
+                                                        appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                        [(ngModel)]="d.provincia" (ngModelChange)="cargarCiudad($event,i)" > 
+                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                            *ngFor="let item of lista_provincias">
+                                                            {{item.valor}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    </td>
+
+
+                                                    <td>
+                                                        <ng-select class="form-control"  placeholder="-Todos-"
+                                                        appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                        [(ngModel)]="d.ciudad">
+                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                            *ngFor="let item of d.ciudades">
+                                                            {{item.valor}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="text" maxlength="100" [(ngModel)]="d.codigo_postal">
+                                                    </td>
+                                                    <td>
+                                                    <span *ngIf="d.estado == 'A'" class="text-center"><i
+                                                            class="fas fa-circle text-success"></i> Activo</span>
+                                                    <span *ngIf="d.estado == 'I'" class="text-center"><i
+                                                            class="fas fa-circle text-danger"></i> Inactivo</span>
+
+                                                    </td> 
+
+                                                    <td class="text-center">
+                                                        <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
+                                                            (click)="removeDireccion(i)" [disabled]="d.estado=='I'">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>  
+                                                        <button class="btn btn-success mr-1" ngbTooltip="Activar"
+                                                        (click)="activarDireccion(i)" [disabled]="d.estado=='A'">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>                        
+                                                    </td>
+                                                </tr> 
+
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div> 
+
+
+
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">4. Referencias Comerciales</legend>
+
+                            <div class="row m-0">
+
+
+                                <div class="col-12 col-md-3 pt-0 pb-0">
+                                    <button class="btn btn-primary" (click)="addReferencia()"><i
+                                            class="fa fa-plus"></i>Agregar</button>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    <th>#</th>
+                                                    <th style="width:10%">Proveedor</th>
+                                                    <th>Provincia</th>
+                                                    <th>Ciudad</th>
+                                                    
+                                                    <th style="width:10%">Telefonos </th>
+                                                    <th style="width:20%">Productos </th>
+                                               
+                                                    <th>Plazo(dias)</th>
+                                                    <th>Compras Mensuales</th>
+
+                                                    <th style="width:10%">Estado</th>
+
+                                                    <th style="width:10%"> Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td *ngIf="cliente?.referencias?.length==0" colspan="12"
+                                                        class="text-center">
+                                                        No se encontró data
+                                                    </td>
+                                                </tr>
+                                                 <tr *ngFor="let d of cliente?.referencias, let i = index"
+                                                    [ngClass]="d.class" [style]="d.size">
+                                                    <td class="text-left">{{ i+1}}</td>
+                                                    <td>
+                                                        <input class="form-control form-control-sm"
+                                                            type="text" maxlength="100" [(ngModel)]="d.proveedor">
+                                                    </td>
+                                                    <td>
+                                                        <ng-select class="form-control"  placeholder="-Todos-"
+                                                        appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                        [(ngModel)]="d.provincia" (ngModelChange)="cargarCiudad2($event,i)" > 
+                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                            *ngFor="let item of lista_provincias">
+                                                            {{item.valor}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    </td>
+
+
+                                                    <td>
+                                                        <ng-select class="form-control"  placeholder="-Todos-"
+                                                        appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                        [(ngModel)]="d.ciudad">
+                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                            *ngFor="let item of d.ciudades">
+                                                            {{item.valor}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="text" maxlength="100" [(ngModel)]="d.telefonos">
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="text" maxlength="100" [(ngModel)]="d.productos">
+                                                    </td>
+
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="number" maxlength="100" [(ngModel)]="d.plazo">
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right" currencyMask [(ngModel)]="d.compras_mensuales"></td>
+                                               
+                                                    <td>
+                                                    <span *ngIf="d.estado == 'A'" class="text-center"><i
+                                                            class="fas fa-circle text-success"></i> Activo</span>
+                                                    <span *ngIf="d.estado == 'I'" class="text-center"><i
+                                                            class="fas fa-circle text-danger"></i> Inactivo</span>
+
+                                                    </td> 
+
+                                                    <td class="text-center">
+                                                        <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
+                                                            (click)="removeReferencia(i)" [disabled]="d.estado=='I'">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>  
+                                                        <button class="btn btn-success mr-1" ngbTooltip="Activar"
+                                                        (click)="activarReferencia(i)" [disabled]="d.estado=='A'">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>                        
+                                                    </td>
+                                                </tr> 
+
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div> 
+
+                
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">5. Informacion Financiera</legend>
+
+                            <div class="row m-0">
+
+
+                                <div class="col-12 col-md-3 pt-0 pb-0">
+                                    <button class="btn btn-primary" (click)="addInfoFinanciera()"><i
+                                            class="fa fa-plus"></i>Agregar</button>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    <th>#</th>
+                                                    <th>Fecha de Ingreso</th>
+                                                    <th>Fecha de Actualizacion</th>
+                                                    <th>Ingresos Anuales</th>
+                                                    <th>Ingresos Mensuales</th>
+                                                    <th>Gastos Anuales</th>
+                                                    <th>Gastos Mensuales</th>
+                                                    
+                                                    <th>Cupo por Vencer </th>
+                                                    <th>Cupo Vencido </th>
+                                               
+                                                   
+                                                    <th>Deudas Actuales</th>
+
+                                                    <th style="width:10%">Estado</th>
+
+                                                    <th style="width:10%"> Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td *ngIf="cliente?.informacionfinanciera?.length==0" colspan="12"
+                                                        class="text-center">
+                                                        No se encontró data
+                                                    </td>
+                                                </tr>
+                                                 <tr *ngFor="let d of cliente?.informacionfinanciera, let i = index"
+                                                    [ngClass]="d.class" [style]="d.size">
+                                                    <td class="text-left">{{ i+1}}</td>
+                                                    <td class="text-left">{{ d.created_at | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                                                    <td class="text-left">{{ d.updated_at | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                                                    <td><input class="form-control form-control-sm text-right" 
+                                                        currencyMask [(ngModel)]="d.ingresos_anuales"></td>
+                                                    
+                                                    <td class="text-right">$ {{d.ingresos_anuales/12 | number:"1.2-2"}}</td>
+                                                    <td><input class="form-control form-control-sm text-right" 
+                                                        currencyMask [(ngModel)]="d.gastos_anuales"></td>              
+                                                    
+                                                    <td class="text-right">$ {{d.gastos_anuales/12 | number:"1.2-2"}}</td>
+
+                                                    <td><input class="form-control form-control-sm text-right" 
+                                                        currencyMask [(ngModel)]="d.cupo_por_vencer"></td>
+                                                    
+                                                    <td><input class="form-control form-control-sm text-right" 
+                                                            currencyMask [(ngModel)]="d.cupo_vencido"></td>
+                                                        
+                                                            <td><input class="form-control form-control-sm text-right" 
+                                                                currencyMask [(ngModel)]="d.deudas_actuales"></td>
+                                                    <td>   
+                                                    <span *ngIf="d.estado == 'A'" class="text-center"><i
+                                                            class="fas fa-circle text-success"></i> Activo</span>
+                                                    <span *ngIf="d.estado == 'I'" class="text-center"><i
+                                                            class="fas fa-circle text-danger"></i> Inactivo</span>
+
+                                                    </td> 
+
+                                                    <td class="text-center">
+                                                        <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
+                                                            (click)="removeInfoFinanciera(i)" [disabled]="d.estado=='I'">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>  
+                                                        <button class="btn btn-success mr-1" ngbTooltip="Activar"
+                                                        (click)="activarInfoFinanciera(i)" [disabled]="d.estado=='A'">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>                        
+                                                    </td>
+                                                </tr> 
+
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
+
+
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">6. Informacion de Credito</legend>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Asesor"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
+                                            appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                            [(ngModel)]="cliente.fk_asesor">
+                                            <ng-option [value]="item.id_usuario" [disabled]="item.disabled"
+                                                *ngFor="let item of lista_asesores">
+                                                {{item.nombre}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Oficial de Credito"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
+                                            appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                            [(ngModel)]="cliente.fk_oficial_credito">
+                                            <ng-option [value]="item.id_usuario" [disabled]="item.disabled"
+                                                *ngFor="let item of lista_oficial_credito">
+                                                {{item.nombre}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Fecha de Registro Crédito"
+                                        styleSpan="size-span-campo font-weight-bold">
+                                        <input type="date" class="form-control form-control-sm"
+                                            [(ngModel)]="cliente.fecha_registro_credito">
+                                    </app-cc-input-group-prepend>
+                                </div>
+ 
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Cupo"
+                                        styleSpan="input-group-text size-span-campo">
+                                        <input  class="form-control form-control-sm" [maxlength]="20"
+                                        currencyMask  [(ngModel)]="cliente.cupo">
+                                    </app-cc-input-group-prepend>
+                                </div>
+
+
+
+                            </div>
+
+ 
+
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                   
+                                        <app-cc-input-group-prepend label="Plazo"
+                                            styleSpan="size-span-campo font-weight-bold">
+                                            <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
+                                                appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                [(ngModel)]="cliente.plazo">
+                                                <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                    *ngFor="let item of lista_plazo">
+                                                    {{item.descripcion}}
+                                                </ng-option>
+                                            </ng-select>
+                                        </app-cc-input-group-prepend>
+                                    
+                                </div>
+
+
+
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    
+                                        <app-cc-input-group-prepend label="Forma de Pago"
+                                            styleSpan="size-span-campo font-weight-bold">
+                                            <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-"
+                                                appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                [(ngModel)]="cliente.forma_pago">
+                                                <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                    *ngFor="let item of lista_forma_pago">
+                                                    {{item.descripcion}}
+                                                </ng-option>
+                                            </ng-select>
+                                        </app-cc-input-group-prepend>
+                                 
+                                </div>
+
+
+
+                            </div>
+                            <div class="row m-0">
+  
+
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Garantia" styleSpan="size-span-campo">
+                                        <textarea class="form-control form-control-sm" type="text"
+                                            [(ngModel)]="cliente.garantia" placeholder="Ingrese una Garantia"
+                                            rows="3" maxlength="255"></textarea>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo">
+                                        <textarea class="form-control form-control-sm" type="text"
+                                            [(ngModel)]="cliente.observacion" placeholder="Ingrese una Observación"
+                                            rows="3" maxlength="255"></textarea>
+                                    </app-cc-input-group-prepend>
+                                </div>
+
+                            </div>
+
+                            <div class="row m-0">
+
+
+                                <div class="col-12 col-md-3 pt-0 pb-0">
+                                    <button class="btn btn-primary" (click)="addInfoCredito()"><i
+                                            class="fa fa-plus"></i>Agregar</button>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    <th>#</th>
+                                                    <th>Banco Autorizado</th>
+                                                    <th>Numero de Cuenta</th>
+                                                    <th>Archivo Vinculado 1</th>
+                                                    <th>Archivo Vinculado 2</th>
+                                                    <th>Archivo Vinculado 3</th>
+                                                    <th>Archivo Vinculado 4</th>
+                                                    <th style="width:10%">Estado</th>
+
+                                                    <th style="width:10%"> Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td *ngIf="cliente?.informacioncredito?.length==0" colspan="12"
+                                                        class="text-center">
+                                                        No se encontró data
+                                                    </td>
+                                                </tr>
+                                                 <tr *ngFor="let d of cliente?.informacioncredito, let i = index"
+                                                    [ngClass]="d.class" [style]="d.size">
+                                                    <td class="text-left">{{ i+1}}</td>
+                                                    <td><input class="form-control form-control-sm text-right" 
+                                                        type="text" [(ngModel)]="d.banco"></td>
+                                                    
+                                                        <td><input class="form-control form-control-sm text-right" 
+                                                            type="text" [(ngModel)]="d.numero_cuenta"></td>
+
+
+                                                            <td>
+                                                                <ng-select class="form-control"  placeholder="-Todos-"
+                                                                appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                                [(ngModel)]="d.fk_archivo_1">
+                                                                <ng-option [value]="item.id_cliente_archivo" [disabled]="item.disabled"
+                                                                    *ngFor="let item of cliente.archivos">
+                                                                    {{item.descripcion}}
+                                                                </ng-option>
+                                                                </ng-select></td>
+                                                                <td>
+                                                                    <ng-select class="form-control"  placeholder="-Todos-"
+                                                                    appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                                    [(ngModel)]="d.fk_archivo_2">
+                                                                    <ng-option [value]="item.id_cliente_archivo" [disabled]="item.disabled"
+                                                                        *ngFor="let item of cliente.archivos">
+                                                                        {{item.descripcion}}
+                                                                    </ng-option>
+                                                                    </ng-select></td>
+
+                                                                    <td>
+                                                                        <ng-select class="form-control"  placeholder="-Todos-"
+                                                                        appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                                        [(ngModel)]="d.fk_archivo_3">
+                                                                        <ng-option [value]="item.id_cliente_archivo" [disabled]="item.disabled"
+                                                                            *ngFor="let item of cliente.archivos">
+                                                                            {{item.descripcion}}
+                                                                        </ng-option>
+                                                                        </ng-select></td>
+                                                                        <td>
+                                                                            <ng-select class="form-control"  placeholder="-Todos-"
+                                                                            appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                                            [(ngModel)]="d.fk_archivo_4">
+                                                                            <ng-option [value]="item.id_cliente_archivo" [disabled]="item.disabled"
+                                                                                *ngFor="let item of cliente.archivos">
+                                                                                {{item.descripcion}}
+                                                                            </ng-option>
+                                                                            </ng-select></td>
+                                                        
+                                                   <td>   
+                                                    <span *ngIf="d.estado == 'A'" class="text-center"><i
+                                                            class="fas fa-circle text-success"></i> Activo</span>
+                                                    <span *ngIf="d.estado == 'I'" class="text-center"><i
+                                                            class="fas fa-circle text-danger"></i> Inactivo</span>
+
+                                                    </td> 
+
+                                                    <td class="text-center">
+                                                        <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
+                                                            (click)="removeInfoCredito(i)" [disabled]="d.estado=='I'">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>  
+                                                        <button class="btn btn-success mr-1" ngbTooltip="Activar"
+                                                        (click)="activarInfoCredito(i)" [disabled]="d.estado=='A'">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>                        
+                                                    </td>
+                                                </tr> 
+
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
+
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">7. Informacion Adicional</legend>
+                            
+                            <div class="row m-0">
+  
+
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Notas" styleSpan="size-span-campo">
+                                        <textarea class="form-control form-control-sm" type="text"
+                                            [(ngModel)]="cliente.notas" placeholder="Ingrese una Nota"
+                                            rows="3" maxlength="255"></textarea>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Otras Información" styleSpan="size-span-campo">
+                                        <textarea class="form-control form-control-sm" type="text"
+                                            [(ngModel)]="cliente.otras_notas" placeholder="Ingrese Informacion Adicional"
+                                            rows="3" maxlength="255"></textarea>
+                                    </app-cc-input-group-prepend>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">9. Clientes Relacionados</legend>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-3 pt-0 pb-0">
+                                    <button class="btn btn-primary" (click)="addCliente()"><i
+                                            class="fa fa-plus"></i>Agregar</button>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="row m-0">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    <th>#</th>
+                                                    <th>Ruc</th>
+                                                    <th>Razon Social</th>
+                                                    <th>Cupo</th>
+                                                    <th style="width:10%">Estado</th>
+
+                                                    <th style="width:10%"> Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td *ngIf="cliente?.relacionado?.length==0" colspan="12"
+                                                        class="text-center">
+                                                        No se encontró data
+                                                    </td>
+                                                </tr>
+                                                 <tr *ngFor="let d of cliente?.relacionado, let i = index"
+                                                    [ngClass]="d.class" [style]="d.size">
+                                                    <td class="text-left">{{ i+1}}</td>
+                                                    <td class="text-left">{{ d.cliente?.ruc}}</td>
+                                                    <td class="text-left">{{ d.cliente?.nombre}}</td>
+                                                    <td class="text-right">{{ d.cliente?.cupo | number:"1.2-2"}}</td>      
+                                                 <td>   
+                                                    <span *ngIf="d.estado == 'A'" class="text-center"><i
+                                                            class="fas fa-circle text-success"></i> Activo</span>
+                                                    <span *ngIf="d.estado == 'I'" class="text-center"><i
+                                                            class="fas fa-circle text-danger"></i> Inactivo</span>
+
+                                                    </td> 
+
+                                                    <td class="text-center">
+                                                        <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
+                                                            (click)="removeCliente(i)" [disabled]="d.estado=='I'">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>  
+                                                        <button class="btn btn-success mr-1" ngbTooltip="Activar"
+                                                        (click)="activarCliente(i)" [disabled]="d.estado=='A'">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>                        
+                                                    </td>
+                                                </tr> 
+
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">10. Informacion de Entrega</legend>
+
+                            <div class="row m-0">
+
+
+                                <div class="col-12 col-md-3 pt-0 pb-0">
+                                    <button class="btn btn-primary" (click)="addInfoEntrega()"><i
+                                            class="fa fa-plus"></i>Agregar</button>
+                                </div>
+
+
+
+                            </div>
+                             <div class="row m-0">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    <th>#</th>
+                                                    <th style="width:10%">Bodega</th>
+                                                    <th>Direccion</th>
+                                                    <th>Provincia</th>
+                                                    <th>Ciudad</th>
+                                                    <th>Zona</th>
+                                                    <th>Ruta</th>
+                                                    <th>Contacto</th>
+                                                    <th>Documento</th>
+                                                    <th>Telefono </th>
+                                                    <th>Transporte </th>
+                                               
+                                                    
+                                                    <th>Forma de pago</th>
+
+                                                    <th style="width:10%">Estado</th>
+
+                                                    <th style="width:10%"> Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td *ngIf="cliente?.informacionentrega?.length==0" colspan="12"
+                                                        class="text-center">
+                                                        No se encontró data
+                                                    </td>
+                                                </tr>
+                                                 <tr *ngFor="let d of cliente?.informacionentrega, let i = index"
+                                                    [ngClass]="d.class" [style]="d.size">
+                                                    <td class="text-left">{{ i+1}}</td>
+                                                    <td>
+                                                        <input class="form-control form-control-sm"
+                                                            type="text" maxlength="100" [(ngModel)]="d.bodega">
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control form-control-sm"
+                                                            type="text" maxlength="100" [(ngModel)]="d.direccion">
+                                                    </td>
+                                                    <td>
+                                                        <ng-select class="form-control"  placeholder="-Todos-"
+                                                        appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                        [(ngModel)]="d.provincia" (ngModelChange)="cargarCiudad3($event,i)" > 
+                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                            *ngFor="let item of lista_provincias">
+                                                            {{item.valor}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    </td>
+
+
+                                                    <td>
+                                                        <ng-select class="form-control"  placeholder="-Todos-"
+                                                        appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                                        [(ngModel)]="d.ciudad">
+                                                        <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                                            *ngFor="let item of d.ciudades">
+                                                            {{item.valor}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="text" maxlength="100" [(ngModel)]="d.zona">
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="text" maxlength="100" [(ngModel)]="d.ruta">
+                                                    </td>
+
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="text" maxlength="100" [(ngModel)]="d.contacto">
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="text" maxlength="100" [(ngModel)]="d.documento">
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="text" maxlength="100" [(ngModel)]="d.telefono">
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="text" maxlength="100" [(ngModel)]="d.transporte">
+                                                    </td>
+                                                    <td><input class="form-control form-control-sm text-right"
+                                                        type="text" maxlength="100" [(ngModel)]="d.forma_pago">
+                                                    </td>
+                                                    <td>
+                                                    <span *ngIf="d.estado == 'A'" class="text-center"><i
+                                                            class="fas fa-circle text-success"></i> Activo</span>
+                                                    <span *ngIf="d.estado == 'I'" class="text-center"><i
+                                                            class="fas fa-circle text-danger"></i> Inactivo</span>
+
+                                                    </td> 
+
+                                                    <td class="text-center">
+                                                        <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
+                                                            (click)="removeInfoEntrega(i)" [disabled]="d.estado=='I'">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>  
+                                                        <button class="btn btn-success mr-1" ngbTooltip="Activar"
+                                                        (click)="activarInfoEntrega(i)" [disabled]="d.estado=='A'">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>                        
+                                                    </td>
+                                                </tr> 
+
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div> 
+
+
+                        </fieldset>
+
+                    </div>
+                </div> 
+
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">12. Preferencias del Cliente </legend>
+                            <div class="row m-0">
+
+                                <div class="col-6">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    
+                                                    <th></th>
+                                                    <th style="width:10%">Correo</th>
+                                                    <th style="width:10%">Telefono</th>
+                                                    <th style="width:10%">Whataspp</th>
+                                                    <th style="width:10%">Etc.</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Canales de comunicación preferidos
+                                                    </td>
+                                                    <td><input type="checkbox" class="form-control form-control-sm" [maxlength]="20"
+                                                        [(ngModel)]="cliente.pre_canal_correo_electronico"></td>
+                                                    <td><input type="checkbox" class="form-control form-control-sm" [maxlength]="20"
+                                                        [(ngModel)]="cliente.pre_canal_telefono"></td>
+                                                    <td><input type="checkbox" class="form-control form-control-sm" [maxlength]="20"
+                                                        [(ngModel)]="cliente.pre_canal_whatsapp"></td>
+                                                    <td><input type="checkbox" class="form-control form-control-sm" [maxlength]="20"
+                                                        [(ngModel)]="cliente.pre_canal_etc"></td>
+                                                </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    
+                                                    <th></th>
+                                                    <th style="width:10%">Instagram</th>
+                                                    <th style="width:10%">Facebook</th>
+                                                    <th style="width:10%">TicTok</th>
+                                                    <th style="width:10%">Telegram</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Redes Sociales
+                                                    </td>
+                                                    <td><input type="checkbox" class="form-control form-control-sm" [maxlength]="20"
+                                                        [(ngModel)]="cliente.pre_instagram"></td>
+                                                    <td><input type="checkbox" class="form-control form-control-sm" [maxlength]="20"
+                                                        [(ngModel)]="cliente.pre_facebook"></td>
+                                                    <td><input type="checkbox" class="form-control form-control-sm" [maxlength]="20"
+                                                        [(ngModel)]="cliente.pre_tictok"></td>
+                                                    <td><input type="checkbox" class="form-control form-control-sm" [maxlength]="20"
+                                                        [(ngModel)]="cliente.pre_telegram"></td>
+                                                </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row m-0">
+  
+
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Actividad o Servicio que se dedica" styleSpan="size-span-campo">
+                                        <textarea class="form-control form-control-sm" type="text"
+                                            [(ngModel)]="cliente.pre_actividad_dedica" placeholder="Ingrese Actividad"
+                                            rows="3" maxlength="255"></textarea>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-6 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Promociones o Descuentos deseados" styleSpan="size-span-campo">
+                                        <textarea class="form-control form-control-sm" type="text"
+                                            [(ngModel)]="cliente.pre_promocion_deseada" placeholder="Ingrese Promocio Deseada"
+                                            rows="3" maxlength="255"></textarea>
+                                    </app-cc-input-group-prepend>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">14. Documentación(Control)</legend>
+                            <div class="row m-0">
+
+ 
+                                <div class="col-12 col-md-3 pt-0 pb-0">
+                                    
+                                    <button class="btn btn-primary" (click)="addDocumento('CONTROL')"><i
+                                            class="fa fa-plus"></i>Agregar</button>
+                                </div>
+                         </div>
+                            <div class="row m-0">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    <th>#</th>
+                                                    <th>Tipo de Documento</th>
+                                                    <th>Fecha de Emision</th>
+                                                    <th>Fecha de Vencimiento</th>
+                                                    <th>Creador Por</th>
+                                                    <th>Ultima Actualizacion</th>
+                                                    <th>Archivo Adjunto</th>
+                                                    <th style="width:10%">Estado</th>
+
+                                                    <th style="width:10%"> Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td *ngIf="documentosControl?.length==0" colspan="12"
+                                                        class="text-center">
+                                                        No se encontró data
+                                                    </td>
+                                                </tr>
+                                                 <tr *ngFor="let d of documentosControl, let i = index"
+                                                    [ngClass]="d.class" [style]="d.size">
+                                                    <td class="text-left">{{ i+1}} {{ d.linea}}</td>
+                                                    <td><input class="form-control form-control-sm text-right" 
+                                                        type="text" [(ngModel)]="d.tipo_documento"></td>
+                                                    
+                                                        <td><input class="form-control form-control-sm text-right" 
+                                                            type="date" [(ngModel)]="d.fecha_emision"></td>
+                                                            <td><input class="form-control form-control-sm text-right" 
+                                                                type="date" [(ngModel)]="d.fecha_vencimiento"></td>
+
+                                                                <td class="text-left">{{ d?.usuario?.usuario}}</td>
+                                                                <td class="text-left">{{ d?.updated_at}}</td>
+
+                                                                <td class="text-center">
+                                                                    <div class="input-group input-group-sm">
+                                                                        <input type="text" readonly class="form-control" [value]="d.nombre_archivo">
+                                                                        <div class="input-group-append">
+                                                                            <ng-container *ngIf="d.archivo_base_64; else noTieneCertificado">
+                                                                                <button class="btn btn-sm btn-primary" (click)="descargarCertificado(d)" matTooltip="Descargar Documento">
+                                                                                    <i class="fas fa-file-download"></i>
+                                                                                </button>
+                                                                                <button class="btn btn-sm btn-danger" (click)="eliminarCertificado(d)" matTooltip="Eliminar Documento">
+                                                                                    <i class="fas fa-trash-alt"></i>
+                                                                                </button>
+                                                                            </ng-container>
+                                                                            <ng-template #noTieneCertificado>
+                                                                                <input type="file" class="d-none" id="anexo{{ i }}"  (change)="cargaCertificado($event.target.files,d.id_cliente_documento,d.linea)" #certificadoUpload>
+                                                                                <button class="btn btn-primary" (click)="handleButtonUpload(i)" matTooltip="Subir Documento">
+                                                                                    <i class="fas fa-file-upload"></i>
+                                                                                </button>
+                                                                            </ng-template>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+
+                                                        
+                                                   <td>   
+                                                    <span *ngIf="d.estado == 'A'" class="text-center"><i
+                                                            class="fas fa-circle text-success"></i> Activo</span>
+                                                    <span *ngIf="d.estado == 'I'" class="text-center"><i
+                                                            class="fas fa-circle text-danger"></i> Inactivo</span>
+
+                                                    </td> 
+
+                                                    <td class="text-center">
+                                                        <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
+                                                            (click)="removeDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='I'">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>  
+                                                        <button class="btn btn-success mr-1" ngbTooltip="Activar"
+                                                        (click)="activarDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='A'">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>                        
+                                                    </td>
+                                                </tr> 
+
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">14. Documentación(Informativa)</legend>
+                            <div class="row m-0">
+
+ 
+                                <div class="col-12 col-md-3 pt-0 pb-0">
+                                    
+                                    <button class="btn btn-primary" (click)="addDocumento('INFORMATIVO')"><i
+                                            class="fa fa-plus"></i>Agregar</button>
+                                </div>
+                         </div>
+                            <div class="row m-0">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    <th>#</th>
+                                                    <th>Tipo de Documento</th>
+                                                    <th>Fecha de Emision</th>
+                                                    <th>Fecha de Vencimiento</th>
+                                                    <th>Creador Por</th>
+                                                    <th>Ultima Actualizacion</th>
+                                                    <th>Archivo Adjunto</th>
+                                                    <th style="width:10%">Estado</th>
+
+                                                    <th style="width:10%"> Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td *ngIf="documentosInformativos?.length==0" colspan="12"
+                                                        class="text-center">
+                                                        No se encontró data
+                                                    </td>
+                                                </tr>
+                                                 <tr *ngFor="let d of documentosInformativos, let i = index"
+                                                    [ngClass]="d.class" [style]="d.size">
+                                                    <td class="text-left">{{ i+1}}</td>
+                                                    <td><input class="form-control form-control-sm text-right" 
+                                                        type="text" [(ngModel)]="d.tipo_documento"></td>
+                                                    
+                                                        <td><input class="form-control form-control-sm text-right" 
+                                                            type="date" [(ngModel)]="d.fecha_emision"></td>
+                                                            <td><input class="form-control form-control-sm text-right" 
+                                                                type="date" [(ngModel)]="d.fecha_vencimiento"></td>
+
+                                                                <td class="text-left">{{ d?.usuario?.usuario}}</td>
+                                                                <td class="text-left">{{ d?.updated_at}}</td>
+
+                                                                <td class="text-center">
+                                                                    <div class="input-group input-group-sm">
+                                                                        <input type="text" readonly class="form-control" [value]="d.nombre_archivo">
+                                                                        <div class="input-group-append">
+                                                                            <ng-container *ngIf="d.archivo_base_64; else noTieneCertificado">
+                                                                                <button class="btn btn-sm btn-primary" (click)="descargarCertificado(d)" matTooltip="Descargar Documento">
+                                                                                    <i class="fas fa-file-download"></i>
+                                                                                </button>
+                                                                                <button class="btn btn-sm btn-danger" (click)="eliminarCertificado(d)" matTooltip="Eliminar Documento">
+                                                                                    <i class="fas fa-trash-alt"></i>
+                                                                                </button>
+                                                                            </ng-container>
+                                                                            <ng-template #noTieneCertificado>
+                                                                                <input type="file" class="d-none" id="anexo{{ i }}"  (change)="cargaCertificado($event.target.files,d.id_cliente_documento,d.linea)" #certificadoUpload>
+                                                                                <button class="btn btn-primary" (click)="handleButtonUpload(i)" matTooltip="Subir Documento">
+                                                                                    <i class="fas fa-file-upload"></i>
+                                                                                </button>
+                                                                            </ng-template>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+
+                                                        
+                                                   <td>   
+                                                    <span *ngIf="d.estado == 'A'" class="text-center"><i
+                                                            class="fas fa-circle text-success"></i> Activo</span>
+                                                    <span *ngIf="d.estado == 'I'" class="text-center"><i
+                                                            class="fas fa-circle text-danger"></i> Inactivo</span>
+
+                                                    </td> 
+
+                                                    <td class="text-center">
+                                                        <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
+                                                            (click)="removeDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='I'">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>  
+                                                        <button class="btn btn-success mr-1" ngbTooltip="Activar"
+                                                        (click)="activarDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='A'">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>                        
+                                                    </td>
+                                                </tr> 
+
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <fieldset class="border card-fieldset">
+                            <legend class="w-auto card-legend">15. Garantias</legend>
+                            <div class="row m-0">
+
+ 
+                                <div class="col-12 col-md-3 pt-0 pb-0">
+                                    
+                                    <button class="btn btn-primary" (click)="addDocumento('GARANTIA')"><i
+                                            class="fa fa-plus"></i>Agregar</button>
+                                </div>
+                         </div>
+                            <div class="row m-0">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-k table-hover">
+                                            <thead class="sticky-header">
+                                                <tr class="text-center">
+                                                    <th>#</th>
+                                                    <th>Tipo de Documento</th>
+                                                    <th>Fecha de Emision</th>
+                                                    <th>Fecha de Vencimiento</th>
+                                                    <th>Creador Por</th>
+                                                    <th>Ultima Actualizacion</th>
+                                                    <th>Archivo Adjunto</th>
+                                                    <th style="width:10%">Estado</th>
+
+                                                    <th style="width:10%"> Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td *ngIf="documentosGarantias?.length==0" colspan="12"
+                                                        class="text-center">
+                                                        No se encontró data
+                                                    </td>
+                                                </tr>
+                                                 <tr *ngFor="let d of documentosGarantias, let i = index"
+                                                    [ngClass]="d.class" [style]="d.size">
+                                                    <td class="text-left">{{ i+1}}</td>
+                                                    <td><input class="form-control form-control-sm text-right" 
+                                                        type="text" [(ngModel)]="d.tipo_documento"></td>
+                                                    
+                                                        <td><input class="form-control form-control-sm text-right" 
+                                                            type="date" [(ngModel)]="d.fecha_emision"></td>
+                                                            <td><input class="form-control form-control-sm text-right" 
+                                                                type="date" [(ngModel)]="d.fecha_vencimiento"></td>
+
+                                                                <td class="text-left">{{ d?.usuario?.usuario}}</td>
+                                                                <td class="text-left">{{ d?.updated_at}}</td>
+
+                                                                <td class="text-center">
+                                                                    <div class="input-group input-group-sm">
+                                                                        <input type="text" readonly class="form-control" [value]="d.nombre_archivo">
+                                                                        <div class="input-group-append">
+                                                                            <ng-container *ngIf="d.archivo_base_64; else noTieneCertificado">
+                                                                                <button class="btn btn-sm btn-primary" (click)="descargarCertificado(d)" matTooltip="Descargar Documento">
+                                                                                    <i class="fas fa-file-download"></i>
+                                                                                </button>
+                                                                                <button class="btn btn-sm btn-danger" (click)="eliminarCertificado(d)" matTooltip="Eliminar Documento">
+                                                                                    <i class="fas fa-trash-alt"></i>
+                                                                                </button>
+                                                                            </ng-container>
+                                                                            <ng-template #noTieneCertificado>
+                                                                                <input type="file" class="d-none" id="anexo{{ i }}"  (change)="cargaCertificado($event.target.files,d.id_cliente_documento,d.linea)" #certificadoUpload>
+                                                                                <button class="btn btn-primary" (click)="handleButtonUpload(i)" matTooltip="Subir Documento">
+                                                                                    <i class="fas fa-file-upload"></i>
+                                                                                </button>
+                                                                            </ng-template>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+
+                                                        
+                                                   <td>   
+                                                    <span *ngIf="d.estado == 'A'" class="text-center"><i
+                                                            class="fas fa-circle text-success"></i> Activo</span>
+                                                    <span *ngIf="d.estado == 'I'" class="text-center"><i
+                                                            class="fas fa-circle text-danger"></i> Inactivo</span>
+
+                                                    </td> 
+
+                                                    <td class="text-center">
+                                                        <button class="btn btn-danger mr-1" ngbTooltip="Eliminar"
+                                                            (click)="removeDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='I'">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>  
+                                                        <button class="btn btn-success mr-1" ngbTooltip="Activar"
+                                                        (click)="activarDocumento(d.id_cliente_documento,d.linea)" [disabled]="d.estado=='A'">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>                        
+                                                    </td>
+                                                </tr> 
+
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </app-button-radio-active-new>
+    </div>
+</div>
+<ng-template #permisodenegado>
+    <h1>PERMISO DENEGADO</h1>
+</ng-template>
+<ng-template #soloDatosFacturacion>
+
+    <div class="row m-0">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Datos Solo Facturacion</legend>
+                <div class="row m-0">
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Código de Cliente"
+                            styleSpan="input-group-text size-span-campo">
+                            <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                [(ngModel)]="cliente.codigo">
+                        </app-cc-input-group-prepend>
+
+                    </div>
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Nombre" styleSpan="input-group-text size-span-campo">
+                            <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                [(ngModel)]="cliente.nombre">
+                        </app-cc-input-group-prepend>
+
+                    </div>
+
+                </div>
+                <div class="row m-0">
+
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+
+
+                        <app-cc-input-group-prepend label="Tipo Identificacion"
+                            styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
+                                appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                [(ngModel)]="cliente.tipo_identificacion">
+                                <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
+
+                                <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                    *ngFor="let item of lista_tipo_documentos">
+                                    {{item.valor}}
+                                </ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Numero de Identificacion"
+                            styleSpan="input-group-text size-span-campo">
+                            <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                [(ngModel)]="cliente.ruc">
+                        </app-cc-input-group-prepend>
+
+                    </div>
+
+
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Telefono" styleSpan="input-group-text size-span-campo">
+                            <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                [(ngModel)]="cliente.telefono1">
+                        </app-cc-input-group-prepend>
+                    </div>
+
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="e-mail" styleSpan="input-group-text size-span-campo">
+                            <input type="text" class="form-control form-control-sm" [maxlength]="20"
+                                [(ngModel)]="cliente.email">
+                        </app-cc-input-group-prepend>
+                    </div>
+
+
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Dirección" styleSpan="size-span-campo">
+                            <textarea class="form-control form-control-sm" type="text" [(ngModel)]="cliente.direccion"
+                                placeholder="Ingrese una descripción" rows="3" maxlength="255"></textarea>
+                        </app-cc-input-group-prepend>
+
+                    </div>
+                </div>
+                <div class="row m-0">
+
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Segmentacion" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
+                                appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                [(ngModel)]="cliente.segmentacion">
+                                <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
+                                <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                    *ngFor="let item of lista_segmentacion">
+                                    {{item.valor}}
+                                </ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Medio de Contacto"
+                            styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
+                                appendTo="body" [clearable]="true" [searchable]="true" [disabled]=disabled
+                                [(ngModel)]="cliente.medio_contacto">
+                                <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
+                                <ng-option [value]="item.valor" [disabled]="item.disabled"
+                                    *ngFor="let item of lista_medio_contacto">
+                                    {{item.valor}}
+                                </ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</ng-template>
+<cc-spiner-procesar ltexto="Procesando......"></cc-spiner-procesar>

@@ -1,0 +1,75 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Cierre de Cuentas por Pagar" cstyle="bg-light" icono="fas fa-file-invoice-dollar"
+        filtroBoton="btnsFacturasSaldo" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border pb-2 px-3 mb-2">
+            <legend class="w-auto bg-dark">Filtros</legend>
+            <div class="row">
+                <div class="col">
+                    <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" readonly [value]="documento?.num_documento">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha Documento" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control"  [(ngModel)]="documento.fecha">
+                    </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold bg-dark">
+                        <textarea rows="3" class="form-control" [(ngModel)]="documento.observaciones"></textarea>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+        <p-table 
+            [value]="documento.facturas"
+            [paginator]="true"
+            [rows]="50"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[10, 25, 50]">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="min-width: 150px;">Proveedor</th>
+                    <th style="min-width: 150px;">Num. Documento</th>
+                    <th style="min-width: 150px;">Cuentas Contables</th>
+                    <th style="min-width: 150px;">Fecha</th>
+                    <th style="min-width: 150px;">Subtotal</th>
+                    <th style="min-width: 150px;">IVA</th>
+                    <th style="min-width: 150px;">Total</th>
+                    <th style="min-width: 150px;">Saldo</th>
+                    <th style="min-width: 150px;">Saldo O/P</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-factura>
+                <ng-container *ngFor="let detalle of factura.detalle_cuentas">
+                <tr>
+                    <td style="min-width: 150px;">{{ factura.proveedor?.nombre_comercial_prov }}</td>
+                    <td style="min-width: 150px;">{{ factura.num_doc }}</td>
+                    <td style="min-width: 150px;">
+                        {{ detalle.var_cod_codigo_cxp }} - {{ detalle.var_nombre_cxp }}  <!--  {{ factura.detalle_cuentas }} --> <!--  -->
+                    </td>
+                    <td style="min-width: 150px;">{{ factura.fecha_compra }}</td>
+                    <td style="min-width: 150px;">${{ factura.subtotal | number:'1.2-2' }}</td>
+                    <td style="min-width: 150px;">${{ factura.valor_iva | number:'1.2-2' }}</td>
+                    <td style="min-width: 150px;" >${{calcularTotal(detalle) | number:'1.2-2' }}
+           
+                </td>
+                    <td style="min-width: 150px;">${{ factura.saldo | number:'1.2-2' }}</td>
+                    <td style="min-width: 150px;">${{ factura.saldo_orden_pago | number:'1.2-2' }}</td>
+                    
+                </tr>
+            </ng-container>
+            </ng-template>
+        </p-table>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spCierreBienes"></cc-spiner-procesar>

@@ -1,0 +1,57 @@
+<div >
+
+    <app-button-radio-active [titulo]="validacion ? 'Nuevo Registro' : 'Editar Registro'" filtroBoton="btnConceptoForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+        <div class="row">
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" maxlength="255" [(ngModel)]="departamento.dep_nombre">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Descripcion" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" maxlength="255" [(ngModel)]="departamento.dep_descripcion">
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Keyword" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control"  type="text" maxlength="20" [(ngModel)]="departamento.dep_keyword">
+                    
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Dirección" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control"  type="text" maxlength="20" [(ngModel)]="departamento.are_nombre" readonly>
+                    <button class="btn btn-success btn-sm" (click)="modalArea()">Buscar</button>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="departamento.estado">
+                        <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                        <ng-option *ngFor="let op of estado" [value]="op.valor">{{ op.descripcion }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <!-- <div class="col-6">
+                <app-cc-input-group-prepend label="Mesa Ayuda" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control"  type="text" maxlength="20" [(ngModel)]="departamento.dep_keyword">
+                    
+                </app-cc-input-group-prepend>
+            </div> -->
+
+
+            
+
+            
+
+      
+
+        </div>
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

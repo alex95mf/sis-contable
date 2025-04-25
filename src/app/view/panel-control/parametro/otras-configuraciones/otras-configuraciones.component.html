@@ -1,0 +1,92 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Configuración Sueldo Básico" cstyle="bg-light" icono="fas fa-cog"
+        filtroBoton="btnsOtrasConfiguracionesComponent" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border px-3 pb-2">
+            <legend class="w-auto mb-1">Filtros</legend>
+            <div class="row">
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [(ngModel)]="filter.periodo" [clearable]="false"
+                            [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Modulo" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [(ngModel)]="filter.modulo" [clearable]="false" (change)="handleSelectModulo($event)"
+                            [items]="cmb_modulo" bindValue="valor" bindLabel="descripcion">
+                        </ng-select>
+                        <div class="input-group-append">
+                            <a class="btn btn-success" matTooltip="Nuevo Modulo" routerLink="/panel/configuraciones/parametros"><i class="fas fa-plus"></i></a>
+                        </div>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Codigo" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="filter.codigo">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [(ngModel)]="filter.estado" [clearable]="false"
+                            [items]="cmb_estado" bindValue="value" bindLabel="label">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+        <div class="table-responsive mt-2 mb-0">
+            <table class="table mat-elevation-z2">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Periodo</th>
+                        <th>Modulo</th>
+                        <th>Codigo</th>
+                        <th>Descripcion</th>
+                        <th>Valor</th>
+                        <th>Porcentaje</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="tbl_configuraciones.length > 0; else emptyConfiguraciones">
+                        <tr *ngFor="let element of tbl_configuraciones">
+                            <td>{{ element.periodo }}</td>
+                            <td>{{ element.modulo }}</td>
+                            <td>{{ element.tipo }}</td>
+                            <td>{{ element.descripcion }}</td>
+                            <td>{{ element.valor }}</td>
+                            <td>{{ element.porcentaje }}</td>
+                            <td>
+                                <i class="fas fa-circle" [ngClass]="{'text-success': element.estado == 'A', 'text-danger': element.estado == 'I'}"></i>&nbsp;
+                                {{ element.estado == 'A' ? 'Activo' : element.estado == 'I' ? 'Inactivo' : 'N/A' }}
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" (click)="editConfiguracion(element)">
+                                    <i class="far fa-edit"></i>
+                                </button>
+                                <!-- <button class="btn btn-sm btn-danger" (click)="deleteConfiguracion(element)">
+                                    <i class="far fa-trash-alt"></i>
+                                </button> -->
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-template #emptyConfiguraciones>
+                        <tr>
+                            <td colspan="4"><span class="h6">No hay configuraciones a mostrar</span></td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
+        <mat-paginator
+            [pageIndex]="paginate.pageIndex"
+            [length]="paginate.length"
+            [pageSize]="paginate.perPage"
+            showFirstLastButtons
+            (page)="changePage($event)">
+        </mat-paginator>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spOtrasConfiguraciones"></cc-spiner-procesar>

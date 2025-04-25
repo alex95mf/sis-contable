@@ -1,0 +1,63 @@
+<div class="mt-2">
+    <app-button-radio-active titulo="Agregar condiciones de contrato" cstyle="bg-light text-dark"
+        icono="fas fa-tasks" filtroBoton="btnsComprasP" [groupButton]="vmButtons"
+        (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="col">
+            <br>
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold">Fecha de Entrega</span></div>
+                        <input type="date" class="form-control form-control-sm" [(ngModel)]="listacondiciones.fecha">
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold">Forma de Pago</span></div>
+                        <ng-select class="form-control" [(ngModel)]="listacondiciones.forma_pago" [clearable]="false"
+                            [items]="cmb_forma_pago" bindValue="valor" bindLabel="descripcion">
+                        </ng-select>
+                        <!-- <input  class="form-control form-control-sm" [(ngModel)]="listacondiciones.forma_pago"> -->
+                    </div>
+
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold">Fecha Plazo Máximo</span></div>
+                        <input type="date" class="form-control form-control-sm" [(ngModel)]="listacondiciones.plazo">
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold">Valor de la Condición</span></div>
+                        <input currencyMask class="form-control form-control-sm" [(ngModel)]="listacondiciones.valor" (ngModelChange)="validarValor($event)">
+                    </div>
+
+                </div>
+                
+            </div>
+
+            <br>
+            <div class="row">
+                <div class="col-12">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold">Descripción</span></div>
+                        <textarea  class="form-control form-control-sm" [(ngModel)]="listacondiciones.condicion" maxlength="100"></textarea>
+                    </div>
+
+                </div>
+            </div>
+            <br>
+        </div>
+
+        
+
+    
+    </app-button-radio-active>
+    <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true></cc-spiner-procesar>
+</div>

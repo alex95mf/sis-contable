@@ -1,0 +1,35 @@
+<div>
+    <app-button-radio-active titulo="Exoneraciones" cstyle="bg-light" icono="fas fa-file-alt"
+        filtroBoton="btnModalExoneraciones" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div style="max-height: 500px; overflow-y: scroll;">
+        <table class="table">
+            <thead class="thead-dark">
+                <th>Concepto</th>
+                <th>Codigo</th>
+                <th>Descripcion</th>
+                <th>Porcentaje</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr *ngIf="!exoneraciones.length">
+                    <td colspan="5">
+                        <div class="d-flex justify-content-center">
+                            <p class="h6">No hay exoneraciones aplicables.</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngFor="let exoneracion of exoneraciones">
+                    <td>{{ exoneracion.con_codigo }}</td>
+                    <td>{{ exoneracion.con_det_codigo }}</td>
+                    <td>{{ exoneracion.descripcion }}</td>
+                    <td>{{ exoneracion.porcentaje * 100 }}%</td>
+                    <td>
+                        <input type="checkbox" [(ngModel)]="exoneracion.aplica">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renModalImpuestos"></cc-spiner-procesar>

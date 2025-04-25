@@ -1,0 +1,358 @@
+<div class="mt-4" *ngIf="processing">
+    <app-button-radio-active titulo="CONSULTA ESTADO DE CUENTA DEL CLIENTE" filtroBoton="btnEstadoCliente" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-search">
+        <div class="row justify-content-center mb-3 mt-1">
+            <div class="col-md-12 container-filter ">
+                <div class="row  justify-content-center">
+                    <div class="col-md-12  justify-content-center">
+                        <div class="row  justify-content-center">
+                            <div class="col-md-12">
+                                <app-cc-input-group-prepend label="Cliente" styleSpan="size-span-campo">
+                                    <ng-select class="form-control custom " appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="cliente" (ngModelChange)="obtenerCliente($event)">
+                                        <ng-option [value]="0">Seleccione Cliente</ng-option>
+                                        <ng-option *ngFor="let d of arrayCliente" [value]="d.id_cliente">
+                                            {{ d.nombre_comercial_cli }}
+                                        </ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row  justify-content-center">
+                            <div class="col-md-6">
+                                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+                                    <ejs-datepicker [(ngModel)]="fromDatePicker" type="text" format="yyyy-MM-dd" class="form-control">
+                                    </ejs-datepicker>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-md-6">
+                                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+                                    <ejs-datepicker [(ngModel)]="toDatePicker" type="text" format="yyyy-MM-dd" class="form-control">
+                                    </ejs-datepicker>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<div class="mt-4" *ngIf="processingtwo">
+    <app-button-radio-active titulo="INFORMACIÓN DEL ESTADO DE CUENTA DEL CLIENTE" filtroBoton="btnEstadoClienteInf" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtonsInf" (onMetodoGlobal)="metodoGlobalsInf($event)" icono="fas fa-search">
+        <div class="row justify-content-center">
+            <div class="col-md-12 container-filter ">
+                <div class="row  justify-content-center">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ruc</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="dataInformacion.ruc" disabled class="form-control form-control-sm text-left">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cliente Desde</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="dataInformacion.clienteDesde" disabled class="form-control form-control-sm text-left">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cupo</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="'$' + '' + dataInformacion.cupo" disabled class="form-control form-control-sm text-right">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Compras Realizadas</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="dataInformacion.comprasR" disabled class="form-control form-control-sm text-right">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Proveedor</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="dataInformacion.existProveedor" id="iddataProveedor" disabled style="font-weight:bold" class="form-control form-control-sm text-center">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">ID</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="dataInformacion.IDProveedor" disabled style="cursor: pointer;font-weight:bold" class="form-control form-control-sm text-center">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Utilizado</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="'$'  + '' +dataInformacion.utilizado" disabled class="form-control form-control-sm text-right">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Monto Acumulado</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="'$' + '' + dataInformacion.montoAcumulado" disabled class="form-control form-control-sm text-right">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cliente</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="dataInformacion.cliente" disabled class="form-control form-control-sm text-left">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Calificación</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="dataInformacion.calificacion" disabled class="form-control form-control-sm text-center">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Disponible</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="'$' + '' + dataInformacion.disponible" disabled class="form-control form-control-sm text-right">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ultima Compra </span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="dataInformacion.ultimaComFecha" disabled class="form-control form-control-sm text-right">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ejecutivo</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="dataInformacion.ejecutivo" disabled class="form-control form-control-sm text-left">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Factura Crédito</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="dataInformacion.plazoCredito" disabled class="form-control form-control-sm text-right">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ultima Compra</span>
+                                    </div>
+                                    <input type="text" [(ngModel)]="'$' + '' + dataInformacion.ultimaComValor" disabled class="form-control form-control-sm text-right">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Observación</span>
+                                    </div>
+                                    <textarea class="form-control" aria-label="With textarea" disabled [(ngModel)]="dataInformacion.observacion"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-3 mb-2">
+            <div class="col-12">
+                <fieldset class="border p-2 filters ">
+                    <legend class="w-auto h6">Listado de Gastos</legend>
+                    <div class="row justify-content-center">
+                        <div class="col-12 pl-3 pr-3 ">
+                            <div class="table-responsive responsive-table mt-1 mb-3" style="overflow-y: scroll; max-height: 270px;">
+                                <table class="table no-footer table-hover">
+                                    <thead>
+                                        <tr style="width: 100%;text-align: center;">
+                                            <th style="width: 5%;text-align: center;">#</th>
+                                            <th style="width: 12%;">Documento</th>
+                                            <th style="width: 8%;">Fecha</th>
+                                            <th style="width: 8%;">Tipo Pago</th>
+                                            <th style="width: 8%;">Cuotas </th>
+                                            <th style="width: 10%;">Monto</th>
+                                            <th style="width: 10%;">Abono</th>
+                                            <th style="width: 10%;">Saldo</th>
+                                            <th style="width: 10%;">Vencimiento</th>
+                                            <th style="width: 10%;">Fecha Pago</th>
+                                            <th style="width: 10%;">Pagado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="presentDt">
+                                        <tr *ngFor="let dt of datConsulta; let i = index" (click)="showCxcCi(dt)" style="cursor:pointer;" placement="top" ngbTooltip="Ver más">
+                                            <td style="padding-top: 8px;text-align: center;">{{ i + 1 }}</td>
+                                            <td style="padding-top: 8px;">{{ dt.codigo }}-{{ dt.num_doc }}</td>
+                                            <td style="padding-top: 8px;text-align: center;">{{ dt.fecha }}</td>
+                                            <td style="padding-top: 8px;text-align: center;">{{ dt.tipo_pago }}</td>
+                                            <td style="padding-top: 8px;text-align: center;">{{ dt.letras }}</td>
+                                            <td style="padding-top: 8px;text-align: right;">${{formatNumber(dt.monto_total)}}</td>
+                                            <td style="padding-top: 8px;text-align: right;">${{ formatNumber(dt.monto_abono) }}</td>
+                                            <td style="padding-top: 8px;text-align: right;">${{ dt.monto_saldo}}</td>
+                                            <td style="padding-top: 8px;text-align: center;">{{ dt.fecha_inicio}}</td>
+                                            <td style="padding-top: 8px;text-align: center;">{{ dt.fecha_fin}}</td>
+                                            <td style="padding-top: 8px;text-align: center;" *ngIf="dt.pagada == '1'">Si</td>
+                                            <td style="padding-top: 8px;text-align: center;" *ngIf="dt.pagada != '1'">No</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spConsEstado"></cc-spiner-procesar>
+
+
+<div [hidden]="true" id="print-section">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-md-12">
+            <div class="row justify-content-center">
+                <div class="col-md-6  text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-3" style="font-size: 25px;font-weight: 600">
+                                ClIENTE: {{dataInformacion.cliente | uppercase}}
+                            </div>
+                            <div class="col-md-12 mt-2" style="font-size: 20px;">
+                                RUC: <span>{{dataInformacion.ruc}}</span>
+                            </div>
+                            <div class="col-md-12 mt-1 mb-2" style="font-size: 20px;">
+                                EJECUTIVO: {{dataInformacion.ejecutivo | uppercase}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-5" style="font-size: 25px;font-weight: bold">
+                                ESTADO DE CUENTA DEL CLIENTE
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-2">
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cupo</span>
+                        </div>
+                        <input type="text" [(ngModel)]="'$' + dataInformacion.cupo" disabled class="form-control form-control-sm text-right">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Utilizado</span>
+                        </div>
+                        <input type="text" [(ngModel)]="'$' + dataInformacion.utilizado" disabled class="form-control form-control-sm text-right">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Disponible</span>
+                        </div>
+                        <input type="text" [(ngModel)]="'$' + dataInformacion.disponible" disabled class="form-control form-control-sm text-right">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Observación</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" disabled [(ngModel)]="dataInformacion.observacion"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center prt-comprobante mt-3">
+        <div class="col-md-12">
+            <div>
+                <div class="form-group table-responsive responsive-table">
+                    <table class="table no-footer table-hover">
+                        <thead>
+                            <tr style="width: 100%;text-align: center;">
+                                <th style="width: 3%;text-align: center;">#</th>
+                                <th style="width: 12%;">Documento</th>
+                                <th style="width: 5%;">Fecha</th>
+                                <th style="width: 5%;">Forma</th>
+                                <th style="width: 3%;">Letra </th>
+                                <th style="width: 5%;">Monto</th>
+                                <th style="width: 5%;">Abono</th>
+                                <th style="width: 5%;">Saldo</th>
+                                <th style="width: 6%;">Vencimiento</th>
+                                <th style="width: 6%;">Fecha Pago</th>
+                                <th style="width: 3%;">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of datConsulta; let i = index">
+                                <td style="padding-top: 15px;text-align: center;">{{ i + 1 }}</td>
+                                <td style="padding-top: 15px;">{{ dt.codigo }}-{{ dt.num_doc }}</td>
+                                <td style="padding-top: 15px;text-align: center;">{{ dt.fecha }}</td>
+                                <td style="padding-top: 15px;text-align: center;">{{ dt.forma_pago }}</td>
+                                <td style="padding-top: 15px;text-align: center;">{{ dt.letras }}</td>
+                                <td style="padding-top: 15px;text-align: right;">${{formatNumber(dt.monto_total)}}</td>
+                                <td style="padding-top: 15px;text-align: right;">${{ formatNumber(dt.monto_abono) }}</td>
+                                <td style="padding-top: 15px;text-align: right;">${{ dt.monto_saldo}}</td>
+                                <td style="padding-top: 15px;text-align: center;">{{ dt.fecha_fin}}</td>
+                                <td style="padding-top: 15px;text-align: center;">{{ dt.fecha_inicio}}</td>
+                                <td style="padding-top: 15px;text-align: center;" *ngIf="dt.estado == 'A'">Activo</td>
+                                <td style="padding-top: 15px;text-align: center;" *ngIf="dt.estado !== 'A'">Anulado</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #404a63;font-weight:bold;text-transform:uppercase;">Usuario: <!-- {{dataUser.usuario}} --></span>
+        </div>
+    </div>
+</div>

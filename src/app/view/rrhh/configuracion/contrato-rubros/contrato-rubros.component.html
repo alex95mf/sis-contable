@@ -1,0 +1,33 @@
+<div class="mt-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light" icono="fas fa-edit"
+        filtroBoton="btnsConfRubros" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th *ngFor="let tipo of lst_tipo_contrato">{{ tipo.cat_nombre }}</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th *ngFor="let tipo of lst_tipo_contrato">
+                            <input type="checkbox" (change)="handleColumnCheck($event, tipo)">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rubro of lst_rubro">
+                        <td>
+                            <input type="checkbox" (change)="handleRowCheck($event, rubro)">
+                            {{ rubro.rub_descripcion }}
+                        </td>
+                        <td *ngFor="let tipo of lst_tipo_contrato">
+                            <input type="checkbox" [(ngModel)]="rubro.lst_tipo_contrato[tipo.cat_keyword]">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spConfRubros"></cc-spiner-procesar>

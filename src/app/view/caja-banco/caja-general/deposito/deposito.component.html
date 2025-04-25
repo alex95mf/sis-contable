@@ -1,0 +1,212 @@
+<div class="mt-2">
+    <app-button-radio-active titulo="Depósitos banco" filtroBoton="btnDepositoBank"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-piggy-bank">
+        <div class="row">
+            <div class="col-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Caja</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="cajaSelect"
+                        (ngModelChange)="getRegisters($event)">
+                        <option [value]="0">Seleccione caja</option>
+                        <option *ngFor="let d of arrayCajas" [value]="d.num_punto_emision">
+                            {{ d.pto_nombre }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Registro</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="registroSelect"
+                        [disabled]="arrayRegistros.length == 0 || cajaSelect == 0" (ngModelChange)="rerender($event)">
+                        <option [value]="0">Seleccione registro</option>
+                        <option *ngFor="let d of arrayRegistros" [value]="d.id">
+                            RDC-{{d.id.toString().padStart(10, '0')}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">Sucursal</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-2"
+                        placeholder="{{nameSucursal}}" disabled>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-2" disabled
+                        placeholder="{{viewDate}}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center  mt-3 mb-3">
+            <div class="col-12 container container-table">
+                <div class="tab_container p-3 filtersRegister">
+                    <div class="table-responsive responsive-table" style="max-height: 350px;overflow-y: scroll;">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr style="width: 100%;">
+                                    <th style="width: 5%;padding-left: 0px !important;cursor: pointer;"
+                                        class="text-center">
+                                        <input type="checkbox" (click)="changeValAll()" [(ngModel)]="changeAll"
+                                            style="cursor: pointer;">
+                                    </th>
+                                    <th style="width: 7%;">Fecha cobro</th>
+                                    <th style="width: 7%;">Transacción</th>
+                                    <th style="width: 18%;">Cliente</th>
+                                    <th style="width: 10%;">Documento</th>
+                                    <th style="width: 31%;">Descripción</th>
+                                    <th style="width: 9%;">Estado</th>
+                                    <th style="width: 7%;">Forma pago</th>
+                                    <th style="width: 6%;">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="validaDt">
+                                <tr *ngFor="let dt of arraySumDet;let i = index">
+                                    <td class="text-center p-0"
+                                        style="width: 5%;padding-left: 0px !important;cursor: pointer;">
+                                        <input type="checkbox" style="cursor: pointer;" [(ngModel)]="dt.validate_sum"
+                                            (click)="changeVal(i)" [disabled]="changeAll || dt.fecha_post > viewDate
+                                                                                          || dt.isCobrated == 1">
+                                    </td>
+                                    <td>{{ dt.fecha_post }}</td>
+                                    <td>{{ getTipeDocTable(dt.fk_documento) }}-{{ dt.secuencial.toString().padStart(10,
+                                        '0') }}</td>
+                                    <td>{{ dt.nombre_cliente }}</td>
+                                    <td>{{ getTipeDocTable(dt.tipo_doc_adq) }}-{{ dt.num_doc_adq }}</td>
+                                    <td>{{dt.concepto}}</td>
+                                    <td *ngIf="dt.isCobrated == 1">Depositado</td>
+                                    <td *ngIf="dt.isCobrated == 0">Pendiente</td>
+                                    <td>{{dt.metodo_pago}}</td>
+                                    <td class="text-right pr-1">$ {{dt.valor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Banco</span>
+                    </div>
+                    <select class="form-control form-control-sm custom-select" [(ngModel)]="bankSelect">
+                        <option [value]="0">Seleccione banco</option>
+                        <option *ngFor="let d of arrayBank" [value]="d.id_banks">
+                            {{d.name_cuenta}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Papeleta</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-center" min="0"
+                        (keypress)="commonServices.FormatDecimalVal($event)" placeholder="Ingrese No. papeleta"
+                        [(ngModel)]="numPapeleta">
+                </div>
+            </div>
+            <div class="col-4 text-right">
+                <button class="btn btn-success pt-1 pb-1" (click)="addRegister()"><i class="far fa-plus-square"></i>
+                    Añadir registro</button>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-2">
+            <div class="col-12" style="max-height: 190px;overflow-y: scroll;">
+                <div class="tab_container p-3 filters">
+                    <div class="table-responsive responsive-table">
+                        <table class="table table-bordered">
+                            <thead class="bg-dark">
+                                <tr style="width: 100%;">
+                                    <th style="width: 25%;">Banco</th>
+                                    <th style="width: 15%;">No. cuenta</th>
+                                    <th style="width: 10%;">saldo</th>
+                                    <th style="width: 10%;">tipo cuenta</th>
+                                    <th style="width: 10%;">cuenta contable</th>
+                                    <th style="width: 10%;">No. papeleta</th>
+                                    <th style="width: 10%;">Valor</th>
+                                    <th style="width: 10%;padding-left: 0px !important;text-align: center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="validaDt">
+                                <tr *ngFor="let dt of arrayDeposito;let i = index">
+                                    <td>{{ dt.name_banks }}</td>
+                                    <td>{{ dt.num_cuenta }}</td>
+                                    <td>{{ dt.saldo_cuenta }}</td>
+                                    <td>{{ dt.tipo_cuenta }}</td>
+                                    <td>{{dt.cuenta_contable}}</td>
+                                    <td>{{dt.num_trx}}</td>
+                                    <td class="text-right pr-3">$ {{dt.valor}}</td>
+                                    <td class="text-center pl-0">
+                                        <button class="btn btn-danger btn-xs mb-1" (click)="deleteDeposito(dt.id,i)"><i
+                                                class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-8">
+                <div class="input-group mt-1 mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Observación</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea" rows="2"
+                        placeholder="Ingrese una observación" [(ngModel)]="observacion"></textarea>
+                </div>
+            </div>
+            <div class="col-4 mb-3">
+                <div class="col-12">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                                cierre</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right pr-2 diferentOne" disabled
+                            [(ngModel)]="objTotales.cierre">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Depósito</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right pr-2 diferentTwo" disabled
+                            [(ngModel)]="objTotales.deposito">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo " id="inputGroup-sizing-sm ">Diferencia</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right pr-2 diferentThree" disabled
+                            [(ngModel)]="objTotales.diferencia">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spDepositoBank"></cc-spiner-procesar>

@@ -1,0 +1,43 @@
+<div class="mt-5">
+    <div class="row pb-5 justify-content-center">
+        <div class="col-lg-2" *ngFor="let d of dashboard; let i = index">
+            <div class="card card-dashboard mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-3 align-self-center">
+                        <img [src]="d.icon" class="card-img">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body" style="padding-right: 0px !important; padding-left: 8px !important;">
+                            <span class="card-title font-weight-bold"
+                                [ngClass]="{'text-dark': (d.total.toString().substring(0, 1) != '-'), 'text-danger': (d.total.toString().substring(0, 1) == '-')}">{{ d.symbol }}
+                                {{ d.total }}
+                            </span>
+                            <p class="card-text font-weight-bold text-left" *ngIf="label === true"
+                                [ngClass]="{'text-dark': (d.total.toString().substring(0, 1) != '-'), 'text-danger': (d.total.toString().substring(0, 1) == '-')}"
+                                (click)="label = !label">{{ d.tag }}
+                            </p>
+                            <p class="card-text font-weight-bold text-left" *ngIf="label === false"
+                                [ngClass]="{'text-dark': (d.total.toString().substring(0, 1) != '-'), 'text-danger': (d.total.toString().substring(0, 1) == '-')}"
+                                (click)="label = !label">
+                                {{ d.value }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-5 mt-5 justify-content-between align-items-end">
+        <div class="col-5 col-lg-5 col-md-5 col-sm-12">
+            <div id="dashboardChart" style="width: 100%; height: 300px"></div>
+        </div>
+        <div class="col-5 col-lg-5 col-md-5 col-sm-12">
+            <div class="row text-center">
+                <div class="col-12">
+                    <img src="assets/img/accounting/margen-bruto-ex.png" style="width: 200px;">
+                </div>
+                <div class="col-12 font-weight-bold">{{ gross_margin }} USD</div>
+                <div class="col-12 font-weight-bold">Margen Bruto</div>
+            </div>
+        </div>
+    </div>
+</div>

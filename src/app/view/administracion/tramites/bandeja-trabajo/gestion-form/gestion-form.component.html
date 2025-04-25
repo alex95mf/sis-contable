@@ -1,0 +1,245 @@
+<app-button-radio-active-new [titulo]="titulo" filtroBoton="btnGestionTicketForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+<div style="height: 600px; overflow-y : auto;" >
+        <div class="row m-0" >
+            <div class="col-6">
+                <span class="font-weight-bold text-center"><h6>
+                    <span class="font-weight-bold">Contribuyente:</span> {{tramite.contri?.razon_social}}</h6></span>
+            </div>
+            <div class="col-6">
+                <span class="font-weight-bold text-left"><h6><span class="font-weight-bold">{{ tramite.contri?.tipo_documento }}:</span> {{ tramite.contri?.num_documento }}</h6></span>
+            </div>
+        </div>
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Información de Trámite</legend>
+                    <div class="row m-0">
+                        <div class="col-sm-6">
+                            <div class="input-group input-group-sm mt-2">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Nombre Trámite</span></div>
+                                <input type="text" class="form-control form-control-sm" readonly [ngModel]="tarea.nombre">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group input-group-sm mt-2">
+                                <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold"
+                                        >Estado del Trámite</span></div>
+                                <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                                    <i placement="bottom"
+                                        [ngbTooltip]="tramite.estado == 'P' ? 'Pendiente' : 'Cerrado'"
+                                        [class]="tramite.estado == 'P' ? 'fas fa-circle text-primary' : 'fas fa-circle text-danger' ">
+                                    </i>
+                                    {{ tramite.estado == 'P' ? 'Pendiente' : 'Cerrado' }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group input-group-sm mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Prioridad</span>
+                                </div>
+                                <ng-select id="categoria" class="form-control form-control-sm" readonly [(ngModel)]="tramite.prioridad" [disabled]="deshabilitar" maxlength="5">
+                                    <ng-option disabled [value]="0">Seleccione una Prioridad</ng-option>
+                                    <ng-option *ngFor="let op of prioridadList" [value]="op.value">
+                                        <i
+                                                placement="bottom"
+                                                [ngbTooltip]="(op.value == 'A') ? 'Alta' : (op.value == 'M') ? 'Media' : ((op.value == 'B') ? 'Baja' : 'No tiene')" 
+                                                [class]="(op.value == 'A') ? 'fas fa-circle text-danger' : (op.value == 'M') ? 'fas fa-circle text-warning' : ((op.value == 'B') ? 'fas fa-circle text-success' : 'fas fa-circle text-muted')">
+                                        </i>
+                                        {{ op.label }}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="input-group input-group-sm mt-2">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Fecha Máxima</span></div>
+                                <input type="text" class="form-control form-control-sm" readonly [ngModel]="fecha_maxima">
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="input-group input-group-sm mt-2">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Días Transcurridos:</span></div>
+                                <input type="text" class="form-control form-control-sm" readonly [ngModel]="dias_trans">
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="input-group input-group-sm mt-2">
+                                <!-- <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Días Transcurridos:</span></div> -->
+                                <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                                    <span class="font-weight-bold" [ngClass]="classT">{{diasT +' '+ vencimientoT   }}</span> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="input-group input-group-sm mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Observaci&oacute;n del Trámite</span>
+                                </div>
+                                <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" readonly [(ngModel)]="tramite.observacion"  maxlength="300"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="ticketEdit.pregunta !=null">
+                        <div class="col-sm">
+                            <div class="input-group input-group-sm mt-2">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Pregunta:</span></div>
+                                <input type="text" class="form-control form-control-sm" readonly [ngModel]="ticketEdit.pregunta">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-6">
+                            <table class="table table-striped table-bordered table-k table-hover" >
+                                <thead class="sticky-header">
+                                    <tr class="text-center">
+                                        <th class="text-center" style="width: 15%;">Pasos</th>
+                                        <th class="text-center" style="width: 30%;">Descripción</th>
+                                        <th class="text-center" style="width: 15%;">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Paso Actual:  {{flujoPasos?.nro_paso}}</td>
+                                        <td>{{ flujoPasos?.descripcion }}</td>
+                                        <td class="text-center">
+                                            <i placement="bottom"
+                                                [ngbTooltip]="getEstadoLabel(ticketEdit.estado_seguimiento)"
+                                                [class]="getEstadoLabelClass(ticketEdit.estado_seguimiento)">
+                                            </i>
+                                            {{ getEstadoLabel(ticketEdit.estado_seguimiento) }}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="ticketEdit.siguiente_paso !=null">
+                                        <td>Siguiente Paso:  {{ticketEdit.siguiente_paso}}</td>
+                                        <td>{{ siguiente_paso }}</td>
+                                        <td class="text-center">
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="ticketEdit.siguiente_paso_si !=null">
+                                        <td>Siguiente Paso Respuesta (SI):  {{ticketEdit.siguiente_paso_si}}</td>
+                                        <td>{{ siguiente_paso_si }}</td>
+                                        <td class="text-center">
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="ticketEdit.siguiente_paso_no !=null">
+                                        <td>Siguiente Paso Respuesta (NO):  {{ticketEdit.siguiente_paso_no}}</td>
+                                        <td>{{ siguiente_paso_no }}</td>
+                                        <td class="text-center">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-6 mt-2">
+                            <app-anexos-list-dis [identifier]="ticketEdit.fk_tramite" [mostrarEliminar]="false"></app-anexos-list-dis>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Gestión de Trámite</legend>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="gesTicket.estado" [clearable]="false">
+                                    <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                                    <ng-option *ngFor="let op of estadoList" [value]="op.value">
+                                        <i placement="bottom"
+                                        [ngbTooltip]="getEstadoTooltip(op.value)"
+                                        [class]="getEstadoClass(op.value)">
+                                    </i>
+                                        {{ op.label }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm mt-1">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Observaci&oacute;n</span>
+                                </div>
+                                <textarea  id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="gesTicket.observacion" maxlength="300"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div *ngIf="flujoPasos.pregunta_texto != null" class="col-sm mt-1">
+                            <div class="input-group input-group-sm mt-2">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Pregunta</span></div>
+                                <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="flujoPasos.pregunta_texto">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div  *ngIf="flujoPasos.pregunta_texto != null" class="col-sm mt-1">
+                            <div class="input-group input-group-sm mt-2">
+                                <div class="input-group-prepend">
+                                    <span style="width:140px;" class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Respuesta Pregunta</span>
+                                </div>
+                                <ng-select id="respuesta" class="form-control form-control-sm" [(ngModel)]="gesTicket.respuesta" maxlength="5">
+                                    <ng-option disabled [value]="0">Seleccione una Respuesta</ng-option>
+                                    <ng-option *ngFor="let op of respuestaList" [value]="op.value">{{ op.label }}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div  *ngIf="flujoPasos.termina_flujo === 'S' && flujoPasos.siguiente_paso !=0" class="col-sm mt-1">
+                            <div class="input-group input-group-sm ">
+                                <div class="input-group-prepend">
+                                    <span style="width:140px;" class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">¿ Termina el flujo ?</span>
+                                </div>
+                                <ng-select id="respuesta" class="form-control form-control-sm" [(ngModel)]="gesTicket.respuesta_flujo" maxlength="5">
+                                    <ng-option disabled [value]="0">Seleccione una Respuesta</ng-option>
+                                    <ng-option *ngFor="let op of respuestaFlujoList" [value]="op.value">{{ op.label }}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" id="anexo_tramite"  class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 text-left">
+                            <button class="btn btn-danger" (click)="limpiarInputArchivo($event)" matTooltip="Limpiar Campo">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <button class="btn btn-primary ml-1" (click)="uploadFile()">
+                                <i class="fas fa-file-upload"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm mt-2">
+                            <app-anexos-list-dis [identifier]="ticketEdit.id_tramite_seguimiento" [mostrarEliminar]="true"></app-anexos-list-dis>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </fieldset>  
+</div> 
+</app-button-radio-active-new>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>

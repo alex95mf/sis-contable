@@ -1,0 +1,80 @@
+<div class="card bg-light mb-3 mt-3" style="font-size: 11px;background-color: rgb(255 255 255 / 73%);">
+    <div class="card-header {{cstyle}}">
+        <table width="100%">
+            <tr>
+                <td class="text-left">
+                    <div class="card-title text-left  title_h5" *ngIf="dataMod == undefined"><strong>
+                            <i class='far fa-plus-square'></i>&nbsp;&nbsp;Ingreso de nuevo{{title}}</strong>
+                    </div>
+                    <div class="card-title text-left  title_h5" *ngIf="dataMod != undefined"><strong>
+                            <i class='far fa-edit'></i>&nbsp;&nbsp;Modificación de Grupo</strong>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <div>
+                            <button class="btn btn-success  btn-xs button_margin" *ngIf="dataMod == undefined"
+                                (click)="validateInformation()" style="font-weight: unset;">GUARDAR</button>
+                            <button class="btn btn-primary  btn-xs button_margin" *ngIf="dataMod != undefined"
+                                (click)="validaUpdate()" style="font-weight: unset;">MODIFICAR</button>
+                            <button class="btn btn-danger  btn-xs button_margin" (click)="closeModal()"
+                                style="font-weight: unset;">CERRAR</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-body text-left mt-2 mb-2" style="padding-top: 0px; padding-bottom:0px;">
+        <div class="row ">
+            <div class="col-6" *ngIf="atfocus">
+                <div class="input-group input-group-sm mt-1" *ngIf="dataMod == undefined">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="idName" [(ngModel)]="nameGroup"
+                        placeholder="Ingrese nombre del nuevo grupo" #nG="ngModel" name="nG"
+                        style="outline: unset;box-shadow: unset;" autoFocus (keyup.enter)="validateInformation()">
+                </div>
+                <div class="input-group input-group-sm mt-1" *ngIf="dataMod != undefined">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="idName" [(ngModel)]="nameGroup"
+                        placeholder="Ingrese nombre del nuevo grupo" #nG="ngModel" name="nG"
+                        style="outline: unset;box-shadow: unset;" autoFocus (keyup.enter)="validaUpdate()">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Clase</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="idclaseG" [(ngModel)]="claseGroup"
+                        [disabled]="true">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nivel</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="idnivelG" [(ngModel)]="nivelGroup"
+                        [disabled]="true">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Codigo</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="idcodigoG" [(ngModel)]="codigoGroup"
+                        [disabled]="true">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

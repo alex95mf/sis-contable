@@ -1,0 +1,193 @@
+<app-button-radio-active-new [titulo]="'Seguimiento del Ticket'" filtroBoton="btnSeguimientoTicketForm" cstyle="bg-gradient-primary text-white " [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'" style=" z-index: 1600">
+    <fieldset class="border card-fieldset">
+        <legend class="w-auto card-legend">Información de Ticket</legend>
+        <div class="row m-0">
+            <div class="col-12 col-md-4 pt-0 pb-0">
+
+                <app-cc-input-group-prepend label="Nro" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" readonly value=" {{ ticketEdit.id_ticket}}">
+
+                </app-cc-input-group-prepend>
+
+
+           
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+
+                <app-cc-input-group-prepend label="Categoría" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="categoria" class="form-control form-control-sm " [(ngModel)]="ticketEdit.categoria" [disabled]="deshabilitar" maxlength="5">
+                        <ng-option disabled [value]="0">Seleccione una Categor&iacute;a</ng-option>
+                        <ng-option *ngFor="let op of categorias" [value]="op.valor">{{ op.descripcion }}</ng-option>
+                    </ng-select>
+
+                </app-cc-input-group-prepend>
+
+
+
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+
+                <app-cc-input-group-prepend label="SubCategoría" styleSpan="size-span-campo font-weight-bold">
+
+                    <ng-select id="sub_categoria" class="form-control form-control-sm" [(ngModel)]="ticketEdit.subcategoria" [disabled]="deshabilitar" maxlength="5">
+                        <ng-option disabled [value]="0">Seleccione una Sub Categor&iacute;a</ng-option>
+                        <ng-option *ngFor="let op of subCategorias" [value]="op.valor">{{ op.descripcion }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+
+
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-12 col-md-4 pt-0 pb-0">
+            
+
+                    <app-cc-input-group-prepend label="Usuario" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control form-control-sm" readonly value=" {{ ticketEdit.usuario.nombre | titlecase}}">
+                    </app-cc-input-group-prepend>
+
+              
+                
+                    <app-cc-input-group-prepend label="Prioridad" styleSpan="size-span-campo font-weight-bold">
+
+                        <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketEdit.prioridad" [disabled]="deshabilitar" maxlength="5">
+                            <ng-option disabled [value]="0">Seleccione una Prioridad</ng-option>
+                            <ng-option *ngFor="let op of prioridadList" [value]="op.value">
+                                <i placement="bottom" [ngbTooltip]="(op.value == 'A') ? 'Alta' : (op.value == 'M') ? 'Media' : ((op.value == 'B') ? 'Baja' : 'No tiene')" [class]="(op.value == 'A') ? 'fas fa-circle text-danger' : (op.value == 'M') ? 'fas fa-circle text-warning' : ((op.value == 'B') ? 'fas fa-circle text-success' : 'fas fa-circle text-muted')">
+                                </i>
+                                {{ op.label }}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+
+            
+            </div>
+            <div class="col-12 col-md-8 pt-0 pb-0">
+
+                <app-cc-input-group-prepend label="Departamento:" styleSpan="size-span-campo font-weight-bold">
+
+                    <input type="text" class="form-control form-control-sm" readonly value=" {{ ticketEdit.usuario.departamento ? ticketEdit.usuario.departamento.dep_nombre : 'Sin departamento' }}">
+                </app-cc-input-group-prepend>
+
+                <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo font-weight-bold">
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketEdit.observacion" [disabled]="deshabilitar" maxlength="300"></textarea>
+
+                </app-cc-input-group-prepend>
+ 
+            </div>
+  
+
+            <!-- <div class="col-4 mt-2">
+                <span class="font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Foto Evidencia</span>
+                <app-anexos-list-dis [identifier]="ticketEdit.id_ticket" custom1="TICKET-GESTION"></app-anexos-list-dis>
+            </div> -->
+
+
+
+        </div>
+        <div class="row m-0">
+            <div class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <app-anexos-list-dis [dataUser]="dataUser" [permissions]="permissions" [identifier]="ticketEdit.id_ticket" [mostrarEliminar]="false"></app-anexos-list-dis>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+    </fieldset>
+    
+ 
+    <fieldset class="border card-fieldset" style="height:300px;overflow-y:auto;">
+        <legend class="w-auto card-legend">Aprobaciones</legend>
+
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                    <thead class="sticky-header">
+
+                        <tr class="text-center">
+                            <th style="width: 5%;">Nivel de aprobación</th>
+                            <th style="width: 10%;">Fecha</th>
+                            <th style="width: 10%;">Organigrama</th>
+                            <th style="width: 10%;">Rol</th>
+                            <th style="width: 20%;">Usuario</th>
+                            <th style="width: 15%;">Estado</th>
+                            <th style="width: 30%;">Observaci&oacute;n</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="data.aprobaciones.length == 0">
+                            <td colspan="8" class="text-center">
+                                <h6 class="my-1">Su ticket no ha sido atendido.</h6>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let dt of data.aprobaciones, let i = index">
+
+                            <td class="text-center">{{ dt.orden_aprobacion}}</td>
+                            <td class="text-center">{{ dt.fecha_aprobacion}}</td>
+                            <td class="text-center"> {{ dt.organigrama.nombre}}</td>
+                            <td class="text-center"> {{ dt.rol.nombre_rol}}</td>
+                            <td class="text-center"><i class="fa fa-user" aria-hidden="true"></i>
+                                {{ dt.usuario_aprobacion?.nombre || 'Sin Usuario' | titlecase }}
+                            </td>
+                            <td class="text-center"> {{ dt.estado_aprobacion}}</td>
+                            <td class="text-center">{{ dt.observacion }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="border card-fieldset" style="height:300px;overflow-y:auto;">
+        <legend class="w-auto card-legend">Acciones recientes</legend>
+
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                    <thead class="sticky-header">
+
+
+                        <tr class="text-center">
+                            <th style="width: 5%;">Fecha</th>
+                            <th style="width: 10%;">Usuario</th>
+                            <th style="width: 20%;">Observaci&oacute;n</th>
+                            <th style="width: 20%;">Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="ticketSegui.length == 0">
+                            <td colspan="8" class="text-center">
+                                <h6 class="my-1">Su ticket no ha sido atendido.</h6>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let dt of ticketSegui, let i = index">
+
+                            <td class="text-center">{{ dt.fecha | date:'dd/MM/yyyy'}}</td>
+                            <td class="text-center"><i class="fa fa-user" aria-hidden="true"></i>
+                                {{ dt.usuario | titlecase }}
+                            </td>
+                            <td class="text-center text-justify text-break">{{ dt.observacion }}</td>
+                            <td>
+                                <div *ngIf="dt.foto!=null" class="multiple-image-container">
+                                    <div  class="multiple-image-preview">
+                                        <img [src]="dt.foto" (click)="expandirVistaFotos(dt.foto)" class="img-thumbnail">
+                                        <!-- <button  class="btn btn-sm btn-danger" [disabled]="true" placement="top" ngbTooltip="Eliminar Foto" (click)="removeFoto(i)"><i class="far fa-trash-alt"></i></button> -->
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+
+</app-button-radio-active-new>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>

@@ -1,0 +1,98 @@
+<div>
+    <app-button-radio-active [titulo]="isNuevo ? 'Nueva Exoneracion' : 'Editar Exoneracion'" filtroBoton="btnExoneracionForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNuevo ? 'far fa-plus-square' : 'far fa-edit'">
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Concepto</span>
+                    </div>
+                    <ng-select id="concepto" class="form-control form-control-sm" [(ngModel)]="exoneracion.fk_concepto" [disabled]="disabled" (change)="buscarConDet()">
+                        <ng-option disabled [value]="0">Seleccione un Concepto</ng-option>
+                        <ng-option *ngFor="let co of conceptos" [value]="co.id_concepto">{{ co.codigo +'-'+ co.nombre }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="input-group input-group-sm mt-1 mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Concepto Aplicable</span>
+                    </div>
+                    <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="exoneracion.fk_concepto_det_aplicable">
+                        <ng-option disabled [value]="0">Seleccione un concepto</ng-option>
+                        <ng-option *ngFor="let co of conceptosDetalles" [value]="co.id_concepto_detalle">{{ co.codigo_detalle +'-'+ co.nombre_detalle }}</ng-option>
+                    </ng-select>
+                </div>
+                <!-- <table class="table table-bordered no-footer table-hover mb-2"> 
+                    <thead class="thead-dark sticky-header">
+                        <tr class="text-center">
+                            <th style="width: 5%;">Código</th>
+                            <th style="width: 15%;">Concepto</th>
+                            <th style="width: 15%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="conceptosDetalles" >
+                        <ng-container  *ngFor="let dt of conceptosDetalles, let i = index">
+                            <tr>
+                                <td class="text-center">
+                                  {{dt.codigo_detalle}}
+                                </td>
+                                <td class="text-center">
+                                    {{dt.nombre_detalle}}
+                                </td>
+                                <td class="text-center">
+                                 
+                                </td>  
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table> -->
+            </div>
+            <div class="col-12">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Exoneracion</span>
+                    </div>
+                    <ng-select id="exoneracion" class="form-control form-control-sm" [(ngModel)]="tempExo" (change)="onChange($event)">
+                        <ng-option disabled [value]="0">Seleccione una exoneracion</ng-option>
+                        <ng-option *ngFor="let ex of exoneracionList" [value]="ex">{{ ex.nombre_detalle }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Porcentaje</span>
+                    </div>
+                    <input id="porcentaje" type="number" class="form-control form-control-sm" [(ngModel)]="exoneracion.porcentaje" >
+                </div>
+            </div>   
+
+            <div class="col-12">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Descripcion</span>
+                    </div>
+                    <input id="descripcion" type="text" class="form-control form-control-sm" [(ngModel)]="exoneracion.descripcion" >
+                </div>
+            </div>   
+            
+            <div class="col-12">
+                <div class="input-group input-group-sm mt-1 mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Estado</span>
+                    </div>
+                    <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="exoneracion.estado">
+                        <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                        <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+        </div>
+        
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="exoneracionForm"></cc-spiner-procesar>

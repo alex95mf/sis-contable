@@ -1,0 +1,422 @@
+<div class="filter">
+    <app-button-radio-active titulo="VISTA FACTURA COMPRA" filtroBoton="btnsViewFac" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-eye">
+        <div *ngIf=" permissions != undefined">
+            <div class="row justify-content-center ">
+                <div class="col-12 container-filter ">
+                    <div class="row  justify-content-center">
+                        <div class="col-12">
+                            <div class="row mt-3 mb-2">
+                                <div class="col-sm-4">
+                                    <app-cc-input-group-prepend label="FACTURA Nº" styleSpan="size-span-campo">
+                                        <label class="form-control form-control-sm text-left" *ngIf="dts !== undefined ">{{ dts.num_documento.padStart(10, 0) }}</label>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-4">
+                                    <app-cc-input-group-prepend label="FECHA COMPRA" styleSpan="size-span-campo">
+                                        <label class="form-control form-control-sm text-center" *ngIf="dts !== undefined ">{{ dts.created_at |date:"yyyy-MM-dd" }}</label>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-4">
+                                    <app-cc-input-group-prepend label="USUARIO RECIBE" styleSpan="size-span-campo">
+                                        <label class="form-control form-control-sm text-left" *ngIf="dts !== undefined ">{{ dts.nombre_usuario_recibe }}</label>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-sm-8">
+                                    <app-cc-input-group-prepend label="PROVEEDOR" styleSpan="size-span-campo">
+                                        <label class="form-control form-control-sm text-left" *ngIf="dts !== undefined ">{{ dts.nombre_comercial_prov }}</label>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-4">
+                                    <app-cc-input-group-prepend label="RUC" styleSpan="size-span-campo">
+                                        <label class="form-control form-control-sm text-center" *ngIf="dts !== undefined ">{{ dts.ruc }}</label>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <!--  -->
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-3">
+                                    <app-cc-input-group-prepend label="ESTADO COMPRA" styleSpan="size-span-campo">
+                                        <label class="form-control form-control-sm text-center" *ngIf="dts !== undefined && dts.estado == 'A' ">Activo</label>
+                                        <label class="form-control form-control-sm text-center" *ngIf="dts !== undefined && dts.estado != 'A' ">Inactivo</label>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-3">
+                                    <app-cc-input-group-prepend label="FECHA DESPACHO" styleSpan="size-span-campo">
+                                        <label class="form-control form-control-sm text-center" *ngIf="dts !== undefined ">{{ dts.fecha_confirmacion |date:"yyyy-MM-dd" }}</label>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-3">
+                                    <app-cc-input-group-prepend label="DESPACHO" styleSpan="size-span-campo">
+                                        <label class="form-control form-control-sm text-right" *ngIf="dts !== undefined && dts.despacho == '1' ">SI</label>
+                                        <label class="form-control form-control-sm text-right" *ngIf="dts !== undefined && dts.despacho != '1' ">NO</label>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-3">
+                                    <app-cc-input-group-prepend label="VALOR" styleSpan="size-span-campo">
+                                        <label class="form-control form-control-sm text-right" *ngIf="dts !== undefined ">${{formatNumber(dts.total) }}</label>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-3 mb-3">
+                <div class="col-md-12 filters">
+                    <div class="form-group table-responsive responsive-table " style="overflow-y: scroll;">
+                        <table class="table no-footer table-hover" style="width: 100%;">
+                            <thead>
+                                <tr style="width: 100%;text-align: center;">
+                                    <th style="width: 8%;">#</th>
+                                    <th style="width: 15%;">Codigo</th>
+                                    <th style="width: 30%;">Producto</th>
+                                    <th style="width: 8%;">UDM</th>
+                                    <th style="width: 12%;">Presentación</th>
+                                    <th style="width: 9%;">Cantidad</th>
+                                    <th style="width: 10%;">Cantidad Recibida</th>
+                                    <th style="width: 14%;">Confirmar</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="validaDtUser">
+                                <tr *ngFor="let dt of dtFaCompra; let i = index">
+                                    <td style="text-align: center;">{{ i + 1 }}</td>
+                                    <td style="text-align: left;">{{dt.code_product}}</td>
+                                    <td style="text-align: left;">{{dt.nombre}}</td>
+                                    <td style="text-align: center;">{{dt.UDMCompra}}</td>
+                                    <td style="text-align: center;">{{dt.presentacion}}</td>
+                                    <td style="text-align: center;">{{dt.cantidad}}</td>
+                                    <td style="text-align: center;">{{dt.cant_recibida}}</td>
+                                    <td style="text-align: center;" *ngIf="dt.confirmar == '1' "><input type="checkbox" disabled style="margin-left: 10px" *ngIf="dt.confirmar == '1' " checked="true"></td>
+                                    <td style="text-align: center;" *ngIf="dt.confirmar != '1' "><input type="checkbox" disabled style="margin-left: 10px" *ngIf="dt.confirmar != '1' "></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spQuotesViewfaCompra"></cc-spiner-procesar>
+<!-- 
+<div [hidden]="true" id="PrintSecondContent">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-3" style="font-size: 25px;font-weight: 600">
+                                {{dts.nombre_comercial_prov | uppercase}}
+                            </div>
+                            <div class="col-12 mt-2" style="font-size: 20px;">
+                                RUC: <span>{{dts.documento_proveedor}}</span>
+                            </div>
+                            <div class="col-12 mt-1 mb-2" style="font-size: 20px;">
+                                TELEFONO {{dts.telefono_proveedor}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-3" style="font-size: 25px;font-weight: 600">
+                                RECEPCION DE PRODUCTO
+                            </div>
+                            <div class="col-12 mt-2" style="font-size: 20px;">
+                                FACTURA #:<span>{{dts.num_documento.toString().padStart(10, 0)}}</span>
+                            </div>
+                            <div class="col-12 mt-2 mb-2" style="font-size: 20px;">
+                                VALOR ${{formatNumber(dts.total)}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">FECHA COMPRA</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm " style="height: 32px;" *ngIf="dts !== undefined " [value]="dts.created_at |date:'yyyy-MM-dd'">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">ESTADO COMPRA</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" style="height: 32px;" *ngIf="dts !== undefined && dts.estado == 'A' " value="Activo">
+                        <input type="text" class="form-control form-control-sm" style="height: 32px;" *ngIf="dts !== undefined && dts.estado != 'A' " value="Inactivo">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">TIPO PAGO</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" *ngIf="dts !== undefined " style="height: 32px;" [value]="dts.tipo_pago">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">FORMA PAGO</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" *ngIf="dts !== undefined " style="height: 32px; width:0px;" [value]="dts.forma_pago">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">RAZON SOCIAL</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-left" style="height: 32px;" *ngIf="dts !== undefined" [value]="dts.razon_social">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">PAIS/CIUDAD</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-left" *ngIf="dts !== undefined " style="height: 32px; width:0px;" [value]="dts.pais + '/' + dts.ciudad ">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend ">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">DIRECCION</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-left" style="height: 32px;" *ngIf="dts !== undefined" [value]="dts.direccion_proveedor">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">RECIBE</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-left" style="height: 32px;" *ngIf="dts !== undefined " [value]="dts.nombre_usuario_recibe">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">FECHA DESPACHO</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-left" *ngIf="dts !== undefined" style="height: 32px; width:0px;" [value]="dts.fecha_confirmacion |date:'yyyy-MM-dd'">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend ">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">DESPACHADO</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" style="height: 32px;" *ngIf="dts != undefined && dts.despacho == '1' " value="SI">
+                        <input type="text" class="form-control form-control-sm text-right" style="height: 32px;" *ngIf="dts != undefined && dts.despacho != '1' " value="NO">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">VALOR</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" *ngIf="dts !== undefined " style="height: 32px;" [value]="'$' + formatNumber(dts.total)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center prt-comprobante mt-3">
+        <div class="col-md-11">
+            <div>
+                <div class="form-group table-responsive responsive-table">
+                    <table class="table table-sm table-hover table-striped">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 1%;">#</th>
+                                <th style="width: 8%;text-align: center;">Codigo</th>
+                                <th style="width: 12%;text-align: center;">Producto</th>
+                                <th style="width: 4%;text-align: center;">UDM</th>
+                                <th style="width: 8%;text-align: center;">Presentación</th>
+                                <th style="width: 7%;text-align: center;">Cantidad</th>
+                                <th style="width: 12%;text-align: center;">Cantidad Recibida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of dtFaCompra; let i = index">
+                                <td style="width: 1%;padding-top: 10px;text-align: center;">{{ i + 1 }}</td>
+                                <td style="width: 8%;padding-top: 10px;text-align: left;">{{dt.code_product}}</td>
+                                <td style="width: 12%;padding-top: 10px;text-align: left;">{{dt.nombre}}</td>
+                                <td style="width: 5%;padding-top: 10px;text-align: center;">{{dt.UDMCompra}}</td>
+                                <td style="width: 5%;padding-top: 10px;text-align: center;">{{dt.presentacion}}</td>
+                                <td style="width: 4%;padding-top: 10px;text-align: center;">{{dt.cantidad}}</td>
+                                <td style="width: 4;padding-top: 10px;text-align: center;">{{dt.cant_recibida}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #404a63;font-weight:bold;text-transform:uppercase;">Usuario: {{dataUser.usuario}}</span>
+        </div>
+    </div>
+</div> -->
+
+
+<div [hidden]="true" id="PrintSecondContent">
+    <div class="row justify-content-center  prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{dataUser.logoEmpresa}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>RECEPCI&Oacute;N DE PRODUCTO</h3>
+                                <p>Vista Factura Compra</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-11 mt-2">
+            <div class="row mt-3 mb-1">
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="FACTURA Nº" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left" *ngIf="dts !== undefined ">{{ dts.num_documento.padStart(10, 0) }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="FECHA COMPRA" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-center" *ngIf="dts !== undefined ">{{ dts.created_at |date:"yyyy-MM-dd" }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="USUARIO RECIBE" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left" *ngIf="dts !== undefined ">{{ dts.nombre_usuario_recibe }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <app-cc-input-group-prepend label="PROVEEDOR" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left" *ngIf="dts !== undefined ">{{ dts.nombre_comercial_prov }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="RUC" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-center" *ngIf="dts !== undefined ">{{ dts.ruc }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-sm-3">
+                    <app-cc-input-group-prepend label="ESTADO COMPRA" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-center" *ngIf="dts !== undefined && dts.estado == 'A' ">Activo</label>
+                        <label class="form-control form-control-sm text-center" *ngIf="dts !== undefined && dts.estado != 'A' ">Inactivo</label>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-3">
+                    <app-cc-input-group-prepend label="FECHA DESPACHO" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-center" *ngIf="dts !== undefined ">{{ dts.fecha_confirmacion |date:"yyyy-MM-dd" }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-3">
+                    <app-cc-input-group-prepend label="DESPACHO" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-right" *ngIf="dts !== undefined && dts.despacho == '1' ">SI</label>
+                        <label class="form-control form-control-sm text-right" *ngIf="dts !== undefined && dts.despacho != '1' ">NO</label>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-3">
+                    <app-cc-input-group-prepend label="VALOR" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-right" *ngIf="dts !== undefined ">${{formatNumber(dts.total) }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-11 mt-1 pl-2 pr-2">
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-12 text-center">
+                    <div>
+                        <div class="table-responsive responsive-table">
+                            <table class="table table-sm table-hover table-striped">
+                                <thead>
+                                    <tr style="width: 100%;">
+                                        <th style="width: 10%;">#</th>
+                                        <th style="width: 15%;text-align: left;">Codigo</th>
+                                        <th style="width: 20%;text-align: left;">Producto</th>
+                                        <th style="width: 15%;text-align: center;">UDM</th>
+                                        <th style="width: 15%;text-align: center;">Presentación</th>
+                                        <th style="width: 10%;text-align: center;">Cantidad</th>
+                                        <th style="width: 15%;text-align: center;">Cantidad Recibida</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let dt of dtFaCompra; let i = index">
+                                        <td style="text-align: center;">{{ i + 1 }}</td>
+                                        <td style="text-align: left;">{{dt.code_product}}</td>
+                                        <td style="text-align: left;">{{dt.nombre}}</td>
+                                        <td style="text-align: center;">{{dt.UDMCompra}}</td>
+                                        <td style="text-align: center;">{{dt.presentacion}}</td>
+                                        <td style="text-align: center;">{{dt.cantidad}}</td>
+                                        <td style="text-align: center;">{{dt.cant_recibida}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #13A1EA;">
+                Fecha: {{fecha}}&nbsp;{{hora}}</span>
+        </div>
+        <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+            <span style="color: #13A1EA;">
+                Usuario: {{dataUser.nombre}}</span>
+        </div>
+    </div>
+</div>

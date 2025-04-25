@@ -1,0 +1,231 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Anticipo a Remuneraciones" cstyle="bg-light" icono="fas fa-hand-holding-usd"
+        filtroBoton="btnsPrestamosNew" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" (selectedTabChange)="handleTabChange($event)">
+            <mat-tab label="Generar">
+                <div class="container-fluid">
+                    <div class="row mt-2">
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control" readonly [(ngModel)]="prestamo.empleado.emp_full_nombre">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" (click)="expandEmpleados()">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha Inicio" styleSpan="size-span-campo font-weight-bold">
+                                <input type="date" class="form-control" [(ngModel)]="prestamo.fecha_inicio" [readonly]="formReadOnly">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha Final" styleSpan="size-span-campo font-weight-bold">
+                                <input type="date" class="form-control" [(ngModel)]="prestamo.fecha_final" [readonly]="formReadOnly">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Prestamo" styleSpan="size-span-campo font-weight-bold">
+                                <input currencyMask class="form-control" [(ngModel)]="prestamo.monto" [readonly]="formReadOnly">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Prestamo Saldo" styleSpan="size-span-campo font-weight-bold">
+                                <input currencyMask class="form-control" [(ngModel)]="prestamo.saldo" [readonly]="true">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Forma de Pago" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" [(ngModel)]="prestamo.tipo_pago" [readonly]="formReadOnly"
+                                    [items]="cmb_tipo_pago" bindValue="valor" bindLabel="valor" [markFirst]="false">
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control" readonly [ngModel]="prestamo?.num_doc">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                                <input type="date" class="form-control" [(ngModel)]="prestamo.fecha">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control" [(ngModel)]="prestamo.concepto" readonly>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="input-group input-group-sm mt-2">
+                                <div class="input-group-prepend"><span class="input-group-text size-span-campo font-weight-bold"
+                                        >Estado</span></div>
+                                <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                                    <i placement="bottom"
+                                        [ngbTooltip]="prestamo.estado == 'A' ? 'Activo' : (prestamo.estado == 'X' ?  'Anulado' : '')"
+                                        [class]="prestamo.estado == 'A' ? 'fas fa-circle text-success' : (prestamo.estado == 'X' ?  'fas fa-circle text-danger' : 'text-white') ">
+                                    </i>
+                                    {{ prestamo.estado == 'A' ? 'Activo' : (prestamo.estado == 'X' ?  'Anulado' : '') }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Código Rubro" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="codigo_rubro" class="form-control form-control-sm" [(ngModel)]="prestamo.codigo_rubro" [clearable]="true" [readonly]="formReadOnly">
+                                    <ng-option disabled [value]="0" disabled>Seleccione un Codigo</ng-option>
+                                    <ng-option *ngFor="let d of rubros" [value]="d.rub_codigo">{{d.rub_descripcion }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <fieldset class="border pb-2 px-3 mt-2">
+                        <legend class="w-auto bg-dark">Garante</legend>
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="prestamo.garante.nombre">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="No. Identificación" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="prestamo.garante.identificacion">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="No. Teléfono" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="prestamo.garante.telefono">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="row mt-2 mb-2">
+                        <div class="col-sm-8">
+                            <app-cc-input-group-prepend label="Detalles" styleSpan="size-span-campo font-weight-bold">
+                                <textarea rows="3" class="form-control" [(ngModel)]="prestamo.detalle" [readonly]="formReadOnly"></textarea>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-sm btn-success float-right" (click)="generarCuotas()" [disabled]="formReadOnly">
+                                <i class="fas fa-calculator"></i> Calcular
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="h3 my-2">Cuotas</span>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Cuota</th>
+                                    <th>Fecha de Vencimiento</th>
+                                    <th>Monto</th>
+                                    <th>Estado</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="!cuotas.length">
+                                    <td colspan="4" class="text-center">
+                                        <p class="h6">No hay datos a mostrar.</p>
+                                    </td>
+                                </tr>
+                                <tr *ngFor="let cuota of cuotas">
+                                    <td>{{ cuota.num_cuota }}</td>
+                                    <td>{{ cuota.fecha_vencimiento }}</td>
+                                    <td>{{ cuota.monto | currency }}</td>
+                                    <td>{{ cuota.estado }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Reporte">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" disabled class="form-control" [ngModel]="filter.empleado.emp_full_nombre">
+                                <div class="input-group-append">
+                                    <button class="btn btn-sm btn-secondary" (click)="expandEmpleados()">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" (click)="limpiarEmpleado()">
+                                        <i class="fas fa-eraser"></i>
+                                    </button>
+                                </div>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                                <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                                <input type="date" name="" id="" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <table class="table table-striped mb-0">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Empleado</th>
+                                        <th>Monto</th>
+                                        <th>Cuotas</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="!prestamos.length">
+                                        <td class="text-center" colspan="5">
+                                            <p class="h6">No hay prestamos a mostrar</p>
+                                        </td>
+                                    </tr>
+                                    <tr *ngFor="let prestamo of prestamos">
+                                        <td>{{ prestamo.empleado?.emp_full_nombre ?? 'Empleado No Encontrado' }}</td>
+                                        <td>$ {{ prestamo.monto_total | number:'1.2-2' }}</td>
+                                        <td>{{ prestamo.cuotas }}</td>
+                                        <td>{{ prestamo.estado }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning" matTooltip="DETALLES">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <mat-paginator 
+                                showFirstLastButtons
+                                [length]="paginate.length"
+                                [pageSize]="paginate.perPage"
+                                (page)="changePaginate($event)"
+                                aria-label="Seleccionar página">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+        
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="rrhhRolesPrestamos"></cc-spiner-procesar>

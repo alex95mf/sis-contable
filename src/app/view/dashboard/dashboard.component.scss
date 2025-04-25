@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,600");
+@font-face {
+  font-family: "Timeis";
+  src: url("../../../assets/fonts/Time-is-short.ttf") format("woff"), url("../../../assets/fonts/Time-is-short.ttf") format("truetype");
+}
+
+
+
+
+.card-dashboard{
+  gap: 20px;
+  padding: 16px;
+  border: solid 1px var(--clr-gray-00)
+}
+
+.card-dashboard_flex{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-dashboard_number{
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+.card-dashboard_icon{
+  align-items: center;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+
+  .material-icons{
+    font-size: 20px;
+  }
+}
+.card-dashboard_icon-one{
+  background-color: #D2DCFF;
+
+  .material-icons{
+    color: var(--clr-action);
+  }
+}
+.card-dashboard_icon-two{
+  background-color: #FFE7C1;
+
+  .material-icons{
+    color: var(--clr-warning);
+  }
+}
+.card-dashboard_icon-three{
+  background-color: #A8F8CC;
+
+  .material-icons{
+    color: var(--clr-success);
+  }
+}
+
+.card-dashboard_header{
+  color: #606266;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  margin-top: 20px;
+}
+
+
+.card-chart{
+  border: solid 1px var(--clr-gray-03);
+}
+
+.card-chart_header{
+  border-top: solid 1px var(--clr-gray-03);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  padding: 16px;
+  text-align: center;
+
+}
+
+
+
+
+
+

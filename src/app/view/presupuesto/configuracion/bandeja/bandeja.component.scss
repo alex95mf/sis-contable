@@ -1,0 +1,78 @@
+// thead th {
+//     top: 0;
+//     position: sticky;
+//     // background-color: #666;
+//     // color: #fff; 
+// }
+
+// .col-partida {
+//     left: 0px;
+//     position: sticky;
+// }
+
+// .col-concepto {
+//     left: 68px;
+//     position: sticky;
+// }
+
+// .fixed-header {
+//     z-index: 99999 !important;
+// }
+// // d0d5d9
+// th, td {
+//     // padding: 0;
+//     outline: 1px solid #d0d5d9;
+//     outline-offset: -1px;
+//     background-color: #f3f5f6;
+// }
+.table-bandeja {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-bandeja th,
+  .table-bandeja td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .table-bandeja th {
+    background-color: #f0f0f0;
+  }
+  
+  .table-bandeja tr:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .estado-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .estado-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .estado-text {
+    margin-left: 5px;
+  }
+  
+  .atendido {
+    background-color: #28a745; /* Verde de Bootstrap */
+    color: #fff;
+  }
+  
+  .por-atender {
+    background-color: #ffc107; /* Amarillo de Bootstrap */
+    color: #000;
+  }
+  
+  .pendiente {
+    background-color: #dc3545; /* Rojo de Bootstrap */
+    color: #fff;
+  }
+  

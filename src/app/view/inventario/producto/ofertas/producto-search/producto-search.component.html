@@ -1,0 +1,73 @@
+<fieldset class="border p-2">
+    <legend class="w-auto h6">Producto - Buscar</legend>
+    <div class="row justify-content-center" style="margin-top: 15px;">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-2 date-filter">
+            <div class="form-group text-center">
+                <label for="dateFrom">Nombre - Código Producto</label>
+                <ng-select id="idProveedor" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="producto" (ngModelChange)="filterNombre($event)">
+                    <ng-option *ngFor="let d of products" [value]="d.id_producto">
+                        {{ d.nombre }}
+                    </ng-option>
+                    <ng-option *ngFor="let d of products" [value]="d.id_producto">
+                        {{ d.codigoProducto }}
+                    </ng-option>
+                </ng-select>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-2 date-filter">
+            <div class="form-group text-center">
+                <label for="dateFrom">Linea Producto</label>
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="grupo" (ngModelChange)="filterGrupo($event)">
+                    <option *ngFor="let d of dataGrupo" [value]="d.id_grupo">{{d.nombre}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-2">
+            <div class="form-group text-center">
+                <label for="filter">Almacen</label>
+                <select [(ngModel)]="almacen" class="form-control form-control-sm custom-select" (ngModelChange)="filterAlmacen($event)">
+                    <option *ngFor="let d of dataCatalogo['TIPO ALMACENAMIENTO']"
+                        [value]="d.valor">{{d.valor}}
+                    </option>
+                </select>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive responsive-table">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="text-align: center;">#</th>
+                    <th style="text-align: center;">Nombre</th>
+                    <th style="text-align: center;">Codigo</th>
+                    <th style="text-align: center;">Marca</th>
+                    <th style="text-align: center;">Modelo</th>
+                    <th style="text-align: center;">Color</th>
+                    <th style="text-align: center;">Tipo</th>
+                    <th style="text-align: center;">Grupo</th>
+                    <th style="text-align: center;">Clase</th>
+                    <th style="text-align: center;" *ngIf="almacenData">Almacenamiento</th>
+                </tr>
+            </thead>
+
+            <tbody *ngIf="validaDtUser">
+                <tr *ngFor="let dt of guardarolT; let i = index" placement="top" ngbTooltip="Click para seleccionar un producto" (click)="selectProduct(dt)" style="cursor:pointer;text-align:center;color:black;">
+                    <td class="text-center text-dark " style="width: 2%;">{{ i + 1 }}</td>
+                    <td class="text-center text-dark " style="width: 12%;">{{dt.nombre_producto}}</td>
+                    <td class="text-center text-dark " style="width: 12%;">{{dt.codigoProducto}}</td>
+                    <td class="text-center text-dark " style="width: 10%;">{{dt.tipo}}</td>
+                    <td class="text-center text-dark " style="width: 10%;">{{dt.marca}}</td>
+                    <td class="text-center text-dark " style="width: 10%;">{{dt.modelo}}</td>
+                    <td class="text-center text-dark " style="width: 10%;">{{dt.color}}</td>
+                    <td class="text-center text-dark " style="width: 10%;">{{dt.grupo_nombre}}</td>
+                    <td class="text-center text-dark " style="width: 10%;">{{dt.clase}}</td>
+                    <td class="text-center text-dark " style="width: 5%;" *ngIf="almacenData">{{dt.tipo_almacenamiento}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</fieldset>

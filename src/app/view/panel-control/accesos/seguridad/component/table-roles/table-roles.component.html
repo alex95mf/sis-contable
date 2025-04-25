@@ -1,0 +1,71 @@
+<fieldset class="border pb-2 px-2">
+    <legend  class="w-auto ml-1 bg-dark" > Filtros</legend>
+    <div class="row">
+        <div class="col-10">
+            
+            <div class="row ml-1">
+                <div class="col">
+                    <app-cc-input-group-prepend label="Roles" styleSpan="size-span-campo font-weight-bold">
+                        <!-- <ng-select id="categoria" class="form-control form-control-sm"   [(ngModel)]="filter.tipoCatalogo" [clearable]="false"
+                            (ngModelChange)="validateSubgroup($event)">
+                            <ng-option disabled [value]="0" disabled>Seleccione una Categoria</ng-option>
+                            <ng-option *ngFor="let g of groups" [value]="g.tipo">{{g.tipo}}</ng-option>
+                        </ng-select> -->
+                        <input class="form-control form-control-sm" placeholder="Ingrese el rol... " type="text" [(ngModel)]="filter.roles"/>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="estadoSelected" (change)="asignarEstado($event)" [clearable]="true">
+                            <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                            <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                 
+                
+            </div>
+        </div>
+        <div class="col text-right">
+            <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="getDataTable(true)">
+                <i class="fas fa-search"></i> Consultar
+            </button>
+            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                <i class="fas fa-eraser"></i>
+            </button>
+        </div>
+    </div>
+</fieldset>
+<div class=" p-2">
+    <table  class="table-bordered table no-footer table-hover">
+        <thead class="thead-dark">
+            <tr style="width: 100%;">
+                <th style="width: 20% !important;text-align: center;">Item</th>
+                <th style="width: 20% !important;text-align: center;">Id</th>
+                <th style="width: 40% !important;padding-right: 10px;">Roles</th>
+                <th style="width: 10% !important;text-align: center;">Estados</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="validaDtUser">
+            <tr *ngFor="let dt of guardarolT;let i = index" (click)="updaterol(dt)"
+                style="cursor:pointer;padding-left: 10px;">
+                <td style="text-align: center;">{{i+1}}</td>
+                <td style="text-align: center;">{{ dt.id_rol}}</td>
+                <td style="padding-left: 10px;">{{ dt.nombre_rol }}</td>
+                <td style="text-align: center;">
+                    <span *ngIf="dt.estado == 'A'"><i placement="bottom" [ngbTooltip]="Activo" class="fas fa-circle text-success"></i> Activo</span>
+                    <span *ngIf="dt.estado == 'I'"><i placement="bottom" [ngbTooltip]="Inactivo" class="fas fa-circle text-danger"></i> Inactivo</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <mat-paginator showFirstLastButtons
+                   [length]="paginate.length"
+                   [pageSize]="paginate.perPage"
+                   [pageSizeOptions]="paginate.pageSizeOptions"
+                   (page)="changePaginate($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=false lTipo="spSeguridades"></cc-spiner-procesar>

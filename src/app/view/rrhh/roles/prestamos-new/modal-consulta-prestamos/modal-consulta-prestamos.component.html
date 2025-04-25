@@ -1,0 +1,82 @@
+<app-button-radio-active titulo="Consulta de Prestamos" cstyle="bg-light" icono="fas fa-money-check-edit-alt"
+    filtroBoton="btnsModalConsultaPrestamos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border px-3 pb-2 mb-2">
+        <legend class="w-auto mb-1">Filtros</legend>
+        <div class="row">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.documento">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.empleado.emp_nombre_query">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Fecha Inicio" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_inicio">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Fecha Final" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_final">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+    <table class="table mat-elevation-z2">
+        <thead class="thead-dark">
+            <tr>
+                <!-- <th>ID</th> -->
+                <th>Num. Documento</th>
+                <th>Empleado</th>
+                <th>Valor</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="tbl_prestamos.length > 0; else emptyTable">
+                <tr *ngFor="let element of tbl_prestamos">
+                    <!-- <td>{{ element.id_prestamo }}</td> -->
+                    <td>
+                        {{ element.num_doc }}<br>
+                        <small>Coutas: {{ element.detalles_count }}</small><br>
+                        <small>Inicio: {{ element.fecha_inicio }} - Final: {{ element.fecha_final }}</small>
+                    </td>
+                    <td>
+                        {{ element.empleado?.emp_full_nombre ?? 'Empleado No Encontrado' }}<br>
+                        <small>{{ element.empleado?.emp_identificacion }}</small>
+                    </td>
+                    <td>$ {{ element.monto_total | number:'1.2-2' }}</td>
+                    <td><i placement="bottom"
+                        [ngbTooltip]="element.estado == 'A' ? 'Activo' : 'Anulado'"
+                        [class]="element.estado == 'A' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger' ">
+                    </i>
+                    {{ element.estado == 'A' ? 'Activo' : 'Anulado' }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="handleSelectPrestamo(element)"><i class="far fa-hand-pointer"></i></button>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-template #emptyTable>
+                <tr>
+                    <td class="text-center" colspan="5">
+                        <h6>No hay datos para mostrar</h6>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <mat-paginator
+        [pageSize]="paginate.perPage"
+        [pageIndex]="paginate.pageIndex"
+        [length]="paginate.length"
+        (page)="changePage($event)"
+        showFirstLastButtons>
+    </mat-paginator>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lTipo="spModalConsultaPrestamos"></cc-spiner-procesar>

@@ -1,0 +1,279 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-money-check-edit-alt"
+filtroBoton="btnsGarantia" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="row mt-2">
+        <!-- <div class="col-3">
+             <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Caja Registradora</span></div>
+                <input type="text" class="form-control form-control-sm" disabled [value]="cajaActiva?cajaActiva.nombre:'Ninguna'">
+            </div> 
+        </div> -->
+        <!-- <div class="col-5">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">Contribuyente</span></div>
+                <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contribuyenteActive.razon_social">
+                <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div> -->
+        <div class="col-sm-5">
+            <app-cc-input-group-prepend label="Tipos" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="documento.tipo_financieros" (change)="selectMercadoHandler($event)"
+                [disabled]="readOnlyMode"  [readonly]="formReadOnly" [clearable]="false">
+                    <ng-option [value]="0" disabled>Seleccione un tipo</ng-option>
+                    <ng-option *ngFor="let m of catalog" [value]="m.descripcion">{{ m.descripcion }}</ng-option>
+                </ng-select>         
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-3">
+            <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="documento.documento">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                    <i
+                        placement="bottom"
+                        [ngbTooltip]="(documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado')" 
+                        [class]="(documento.estado == 'P') ? 'fas fa-circle text-muted' : (documento.estado == 'E') ? 'fas fa-circle text-warning' : ((documento.estado == 'A') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
+                    </i>
+                    {{ (documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado') }}
+                </div>            
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-sm-3">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Fecha</span></div>
+                <input disabled type="date" class="form-control form-control-sm" [(ngModel)]="documento.fecha">
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2 mb-3">
+        <div class="col-sm-8">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold text-white" style="width: 155px; background-color: #404A62;">Observaciones</span></div>
+                <textarea cols="30" rows="3" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="documento.observacion"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-sm-5">
+            <div class="input-group input-group-lg input-group-subtotal">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">Valor $</span></div>
+                <input currencyMask [disabled]="formReadOnly" id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" [(ngModel)]="totalCobro"  ><!-- (keypress)="onlyNumberDot($event)"-->
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row mt-3 mb-1 align-items-center">
+        <div class="col">
+            <h5 class="mb-0 text-dark">Formas de pago</h5>
+        </div>
+    </div> -->
+
+    <!-- <div class="row mt-2 mb-3 align-items-center">
+        <div class="col-3">   
+    
+            <div class="input-group input-group-sm">            
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width:120px;">Formas de pago</span></div>
+                <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="formaPago" [clearable]="false" (change)="handlePago($event)">
+                    <ng-option [value]="0" disabled>Seleccione forma de pago</ng-option>
+                    <ng-option *ngFor="let op of formasDePago" [value]="op">{{ op.nombre }}</ng-option>
+                </ng-select>
+            </div>
+    
+        </div>
+        
+        <div *ngIf="expandPago" class="col">
+            <button [disabled]="titulosDisabled || formReadOnly" class="btn btn-sm btn-primary" ngbTooltip="Seleccionar documento" (click)="selectDocPago()">
+                <i class="fas fa-expand-alt"></i>
+            </button>      
+        </div>
+        <div *ngIf="!expandPago" class="col-4">
+            
+            <div *ngIf="hayEntidad" class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width:120px;">Entidad</span></div>
+                <ng-select [disabled]="formReadOnly || entidadDisabled" class="form-control" [(ngModel)]="entidad" [clearable]="false" (change)="handleEntidad($event)">
+                    <ng-option [value]="0" disabled>Seleccione entidad financiera</ng-option>
+                    <ng-option *ngFor="let op of entidadesFiltrada" [value]="op">{{ op.nombre }}</ng-option>
+                </ng-select>       
+            </div>
+    
+        </div>
+        <div *ngIf="!expandPago" class="col-3">
+            
+            <div *ngIf="hayEmisor" class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width:120px;">Emisor</span></div>
+                <ng-select [disabled]="formReadOnly || emisorDisabled" class="form-control" [(ngModel)]="emisor" [clearable]="false" >
+                    <ng-option [value]="0" disabled>Seleccione banco emisor</ng-option>
+                    <ng-option *ngFor="let op of emisoresFiltrada" [value]="op">{{ op.nombre }}</ng-option>
+                </ng-select>             
+            </div>
+     
+        </div>
+        <div class="col-2 text-right">
+            <button [disabled]="titulosDisabled || formReadOnly" class="btn btn-sm btn-success" ngbTooltip="Agregar método de pago" (click)="agregaPagos()">
+                <i class="fas fa-plus"></i> Agregar forma de pago
+            </button>      
+        </div>
+            
+    </div> -->
+
+    <!-- <div class="row mb-2">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-bordered no-footer table-hover mb-0">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 10%;">Forma de pago</th> 
+                            <th style="width: 10%;">Banco</th>
+                            <th style="width: 15%;">Documento 1</th>
+                            <th style="width: 15%;">Documento 2</th>
+                            <th style="width: 10%;">Valor</th>
+                            <th style="width: 10%;">Valor recibido</th>
+                            <th style="width: 10%;">Cambio</th>                    
+                            <th style="width: 20%;">Observaciones</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="pagos.length == 0">
+                            <td colspan="9" class="text-center"><h6 class="my-1">No hay formas de pago</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let d of pagos, let i = index">
+                            <tr >
+                                <td class="text-center">{{ d.tipo_pago_lbl }}</td>
+                                <td class="text-center">{{ d.banco==''?'-':d.banco  }}</td>
+                               
+    
+                                <td *ngIf="d.tipo_pago=='CHEQUE' || d.tipo_pago=='TARJETA' || d.tipo_pago=='DEBITO' || d.tipo_pago=='TRANSFERENCIA'" class="text-center">
+                                    <div class="input-group input-group-sm">                                    
+                                        <input type="text" maxlength="50" class="form-control form-control-sm" [placeholder]="doc1PlaceHolder(d)" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
+                                    </div>
+                                </td>
+                                <td *ngIf="d.tipo_pago=='GARANTIA' || d.tipo_pago=='FAVOR'" class="text-center">
+                                    {{ d.numero_documento }}
+                                </td>
+                                <td *ngIf="d.tipo_pago!='CHEQUE' && d.tipo_pago!='TARJETA' && d.tipo_pago!='DEBITO' && d.tipo_pago!='TRANSFERENCIA' && d.tipo_pago!='GARANTIA' && d.tipo_pago!='FAVOR'" class="text-center">-</td>
+    
+                                <td *ngIf="d.tipo_pago=='CHEQUE'">                                
+                                    <div class="input-group input-group-sm">                                 
+                                        <input type="text" maxlength="50" class="form-control form-control-sm" placeholder="No. de serie" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento2">
+                                    </div>
+                                </td>
+                                <td *ngIf="d.tipo_pago=='GARANTIA' || d.tipo_pago=='FAVOR'" class="text-center">
+                                    {{ d.numero_documento2 }}
+                                </td>
+                                <td *ngIf="d.tipo_pago!='CHEQUE' && d.tipo_pago!='GARANTIA' && d.tipo_pago!='FAVOR'" class="text-center">-</td>
+    
+                                <td class="text-right">                                
+                                    <div class="input-group input-group-sm">             
+                                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>                       
+                                        <input type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
+                                    </div>
+                                </td>
+    
+                                <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">                                
+                                    <div class="input-group input-group-sm">             
+                                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>                       
+                                        <input type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.valor_recibido" (keypress)="onlyNumberDot($event)" (keyup)="getCambio(d)">
+                                    </div>
+                                </td>
+                                <td *ngIf="d.tipo_pago!='EFECTIVO'" class="text-center">-</td>
+                                <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">                                
+                                    <div class="input-group input-group-sm">             
+                                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>                       
+                                        <input type="text" maxlength="8" class="form-control form-control-sm text-right" readonly [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.cambio" (keypress)="onlyNumberDot($event)" >
+                                    </div>
+                                </td>
+                                <td *ngIf="d.tipo_pago!='EFECTIVO'" class="text-center">-</td>
+                                <td class="text-center">
+                                    <div class="input-group input-group-sm">
+                                        
+                                        <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="titulosDisabled || formReadOnly" (click)="removeFormaPago(i)"><i class="far fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-total">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Valor pagado</span></div>
+                <input id="pagoTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalPago | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div> -->
+    
+    <!-- <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-descuentos">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">Diferencia</span></div>
+                <input id="difTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ difCobroPago | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div> -->
+
+
+    <div class="row mb-2" *ngIf="movimientoValid">
+        <div class="col-3">
+            <button class="btn btn-success" (click)="expandirModalMovimiento()">
+                Movimientos Bancarios
+            </button>
+
+        </div>
+
+    </div>
+    <div class="row mb-2" *ngIf="movimientoValid">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-bordered no-footer table-hover mb-0">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 10%;">Cuenta</th> 
+                            <th style="width: 10%;">Banco</th>
+                            <th style="width: 15%;">Tipo Movimiento</th>
+                            <th style="width: 15%;">Fecha Emision</th>
+                            <th style="width: 10%;">Valor movimiento</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="movimiento.length == 0">
+                            <td colspan="9" class="text-center"><h6 class="my-1">No hay formas de pago</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let d of movimiento, let i = index">
+                            <tr >
+                                <td class="text-center">{{ d.name_banks }}</td>
+                                <td class="text-center">{{ d.num_cuenta }}</td>
+                                <td class="text-center">{{ d.tipo_egreso }}</td>
+                                <td class="text-center">{{ d.fecha_emision }}</td>
+                                <td class="text-center">$ {{ d.valor | number:'1.2-2' }}</td>
+                   
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="d.id_documento_detalle !=0"  (click)="removeActivosFinancieros(i)"><i class="far fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renLiqAnulacion"></cc-spiner-procesar>

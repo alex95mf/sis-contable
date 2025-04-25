@@ -1,0 +1,117 @@
+<app-button-radio-active [titulo]="fTitle" filtroBoton="btnsConceptos" cstyle="bg-gradient-primary text-white" 
+[groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
+
+
+<!--<button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar" (click)="limpiar()">
+    <i class="fas fa-eraser"></i>
+</button>-->
+
+<div class="row">
+
+    <!--<app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo">
+        <ng-select id="idProducto" class="form-control custom" appendTo="body" [disabled]="!dAction || otroProducto " [(ngModel)]="solicitudProducto.fk_producto" (ngModelChange)="obtenerProducto($event)" [searchable]="true" [clearable]="true" style="border: 0.5px solid #000000; background-color: #e4e5e6 !important;height:28px;">
+            <ng-option *ngFor="let dt of dataProducto" [value]="dt.id_producto">
+                {{dt.nombre}}</ng-option>
+        </ng-select>
+    </app-cc-input-group-prepend>-->
+    
+    
+    <div class="col">
+        
+            <app-cc-input-group-prepend label="Programador" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" (change)="selectOption1($event)" appendTo="body" [searchable]="true" [(ngModel)]="cmbPrograma">
+                    <ng-option *ngFor="let programa of arrayData" [value]="programa.valor">{{programa.valor}}</ng-option>
+                  <!--<ng-option  [value]= "0" >Seleccione Programador</ng-option>
+                  <ng-option  [value]="'Programador1'">Programador 1</ng-option>
+                  <ng-option  [value]="'Programador2'">Programador 2</ng-option>
+                  <ng-option  [value]="'Programador3'">Programador 3</ng-option>
+                  <ng-option *ngFor="let item of departamento"  [value]="item">{{item.valor}}</ng-option>-->
+                </ng-select>
+            </app-cc-input-group-prepend>
+        
+    </div>
+
+
+    <div class="col">
+            <app-cc-input-group-prepend w-70 label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" (change)="selectOption2($event)" appendTo="body" [searchable]="true" [(ngModel)]="cmbDepartament">
+                <ng-option *ngFor="let departamento of arrayData2" [value]="departamento.valor">{{departamento.valor}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        
+    </div>
+    <div class="col">
+            <app-cc-input-group-prepend label="Atribucion" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" id="atribucion"  appendTo="body" [searchable]="true" [(ngModel)]="cmbAtribucion" >
+                   <ng-option *ngFor="let atribucion of arrayData3" [value]="atribucion.valor">{{atribucion.valor}}</ng-option>
+                 <!-- <ng-option  [value]= "0" >Seleccione Atribucion</ng-option>
+                  <ng-option  [value]="'Departamento1'">Atribucion 1</ng-option>
+                  <ng-option  [value]="'Departamento2'">Atribucion 2</ng-option>
+                  <ng-option  [value]="'Departamento3'">Atribucion 3</ng-option>
+                  <ng-option *ngFor="let item of departamento"  [value]="item">{{item.valor}}</ng-option>-->
+                </ng-select>
+            </app-cc-input-group-prepend>
+       
+    </div>
+    <div class="col">
+       
+        <button class="btn btn-primary btn-sm ml-1 text-light" (click)="nuevoHandler()">Nuevo</button>
+        <button class="btn btn-primary btn-sm ml-1 text-light" (click)="consultarHandler()">Consultar</button>
+    </div>
+</div>
+
+<div class="row my-2">
+    <div class="col">
+        <table class="table table-bordered no-footer table-hover mb-0">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th style="width: 15%;">Programador</th>
+                    <th style="width: 15%;">Departamento</th>
+                    <th style="width: 15%;">Atribucion</th>
+                    <th style="width: 16%;">Entrada 1</th>
+                    <th style="width: 10%;">B/S</th>
+                    <th style="width: 16%;">Entrada 2</th>
+                    <th style="width: 16%;">Entrada 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let item of data, let i = index">
+                    <tr>
+                        <td style="max-width: 10px;" class="text-center">{{item.attr1}}</td>
+                        <td style="max-width: 10px;" class="text-center">{{item.attr2}}</td>
+                        <td style="max-width: 10px;" class="text-center">{{item.attr3}}</td>
+                        <td style="max-width: 5px;" class="text-center">{{fkAtr}}</td>
+                        <td style="max-width: 10px;" class="text-center">
+                            <ng-select class="form-control custom"  appendTo="body" [searchable]="true" [(ngModel)]="BS[i]">
+                                <ng-option [value]="'Bien'">Bien</ng-option>
+                                <ng-option [value]="'Servicio'">Servicio</ng-option>
+                            </ng-select>
+                        
+                        </td>
+                        <td style="max-width: 5px;" class="text-center"><input type="text"></td>
+                        <td style="max-width: 5px;" class="text-center"><input type="text"></td>
+
+                        <td>
+                            <div class="text-center mx-auto">
+ 
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <mat-paginator 
+        showFirstLastButtons
+        [length]="paginate.length"
+        [pageSize]="paginate.perPage"
+        [pageSizeOptions]="paginate.pageSizeOptions"
+        (page)="changePaginate($event)"
+        aria-label="Select page">
+</mat-paginator>
+
+    </div>
+</div>
+</app-button-radio-active>
+
+
+

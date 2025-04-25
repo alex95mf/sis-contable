@@ -1,0 +1,371 @@
+<div class="row justify-content-center" *ngIf="!processing">
+    <div class="container-new-loader">
+        <i class="fa fa-spinner fa-spin"></i>
+    </div>
+</div>
+<div class="row justify-content-center mt-5" *ngIf="processing">
+    <div class="col-10 p-0">
+        <div class="title-cab">
+            <i class="far fa-file-alt"></i> REPORTE CUENTAS POR COBRAR
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center " *ngIf="processing">
+    <div class="col-10 filters-checks ">
+        <div class=" pl-3 pr-3 ">
+            <div class="row justify-content-center" style="margin-top: 15px">
+                <div class="col-12 col-sm-6 col-md-2 col-lg-6 col-xl-2 ">
+                    <div class="form-group" style="text-align: center">
+                        <label for="dateFrom">Fecha Desde</label>
+                        <ejs-datepicker [(ngModel)]="fromDatePicker" type="text" format="yyyy-MM-dd" (ngModelChange)="rerender()">
+                        </ejs-datepicker>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-2 col-lg-6 col-xl-2" (ngModelChange)="rerender()">
+                    <div class="form-group" style="text-align: center">
+                        <label for="dateFrom">Fecha Hasta</label>
+                        <ejs-datepicker [(ngModel)]="toDatePicker" format="yyyy-MM-dd">
+                        </ejs-datepicker>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-2 col-lg-6 col-xl-3">
+                    <div class="form-group text-center">
+                        <label for="dateFrom">Cliente</label>
+                        <ng-select id="IdCliente" class="form-control custom" appendTo="body" ngDefaultControl [searchable]="true" [clearable]="true" [(ngModel)]="cliente" (ngModelChange)="filterCliente($event)">
+                            <ng-option *ngFor="let d of arrayCliente" [value]="d.id_cliente">
+                                {{ d.nombre_comercial_cli }}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-2 col-lg-6 col-xl-3">
+                    <div class="form-group" style="text-align: center">
+                        <label for="typ_doc">Factura</label>
+                        <ng-select id="IdFactura" class="form-control custom" appendTo="body" [searchable]="true" ngDefaultControl [clearable]="true" [(ngModel)]="factura" (ngModelChange)="filterFactura($event)">
+                            <ng-option *ngFor="let d of arrayDocument" [value]="d.codigo">{{d.codigo }}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-2 col-lg-6 col-xl-2">
+                    <div class="form-group" style="text-align: center">
+                        <label>Retención</label>
+                        <div class="col-md-9 col-sm-9 col-md-10 col-lg-10 col-xl-10 pr-0 ">
+                            <label style="font-size: 12px; font-weight:bold;">SI</label> <input type="checkbox" [(ngModel)]="retencionSi" id="checkretencionSi" [disabled]="disabledDataSi" (ngModelChange)="filterRetencionSi($event)">
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-md-10 col-lg-10 col-xl-10 pr-0 ">
+                            <label style="font-size: 11px; font-weight:bold;">NO</label> <input type="checkbox" [(ngModel)]="retencionNo" id="checkretencionNo" [disabled]="disabledDataNo" (ngModelChange)="filterRetencionNo($event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center " *ngIf="processing">
+    <div class="col-10 filters-checks ">
+        <div class="table-responsive responsive-table">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                <thead class="thead-dark">
+                    <tr style="width: 100%;text-align: center;">
+                        <th>#</th>
+                        <th style="width: 10%;">Documento</th>
+                        <th style="width: 24%;">Fecha</th>
+                        <th style="width: 10%;">Cliente</th>
+                        <th style="width: 10%;">Monto</th>
+                        <th style="width: 16%;">Abono</th>
+                        <th style="width: 8%;">Saldo</th>
+                        <th style="width: 8%;">Retención</th>
+                        <th style="width: 8%;">Estado</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="validaDt">
+                    <tr *ngFor="let dt of dataReport; let i = index">
+                        <td class="text-center" style="width: 0%;">{{ i + 1 }}</td>
+                        <td style="padding-top: 15px;width: 8%;cursor:pointer;" (click)="informaDocumento(dt,i) ">{{ dt.codigo}}{{ dt.doc_num}}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 5%;">{{ dt.fecha_inicio }}</td>
+                        <td style="padding-top: 15px;text-align: left;width: 8%;;cursor:pointer;" (click)="informaCliente(dt,i) ">{{ dt.nombre_comercial_cli }}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 5%;">{{ dt.monto_saldo | currency: 'USD' | lowercase}}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 5%;">{{ dt.monto_abono | currency: 'USD' | lowercase }}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 5%;">{{ dt.monto_saldo | currency: 'USD' | lowercase}}</td>
+                        <td style="padding-top: 15px;width: 3%;text-align: center;">{{dt.retencion}}</td>
+                        <td style="padding-top: 15px;width: 0%;text-align: center;" *ngIf="dt.estado == 'A' "> Activo </td>
+                        <td style="padding-top: 15px;width: 0%;text-align: center;" *ngIf="dt.estado == 'I' "> Inactivo </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg " id="modalReportcXcobrar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row" style="width: 100%">
+                    <div class="col-12">
+                        <div class="title-head">
+                            <span>Información Documento</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center " *ngIf="!processingtwo">
+                    <div class="container-new-loader">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+                <div class="row justify-content-center" *ngIf="processingtwo">
+                    <div class="col-md-12 col-sm-12">
+                        <fieldset class="border p-2 mb-1 mt-2">
+                            <legend class="w-auto h6">Información Documento</legend>
+                            <div class="form-row">
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">N° Documento</label>
+                                        <p>{{dtInformacion.codigo}}{{dtInformacion.numero}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">N° Autorización </label>
+                                        <p>{{dtInformacion.autorizacion}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Fecha</label>
+                                        <p>{{dtInformacion.fecha}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Tipo Pago</label>
+                                        <p>{{dtInformacion.tipoPago}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-top: 8px;">
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Forma Pago</label>
+                                        <p>{{dtInformacion.formaPago}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Despachado </label>
+                                        <p *ngIf="dtInformacion.despacho == 1">Si</p>
+                                        <p *ngIf="dtInformacion.despacho == 0">Si</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Usuario Aprobación</label>
+                                        <p>{{dtInformacion.aprobacion}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Asesor</label>
+                                        <p>{{dtInformacion.asesor}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-top: 8px;">
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Iva Porcentaje</label>
+                                        <p>{{dtInformacion.ivaPorcentaje}}%</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <label class="l">Subtotal</label>
+                                        <p>{{dtInformacion.subtotal | currency: 'USD' | lowercase}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <label class="l">Subtotal</label>
+                                        <p>{{dtInformacion.subtotal | currency: 'USD' | lowercase}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <label class="l">Total</label>
+                                        <p>{{dtInformacion.total | currency: 'USD' | lowercase}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <label class="l">Retención</label>
+                                        <p>{{dtInformacion.retencion}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="general" class="col-md-12 col-sm-12" style="height: 335px;">
+                        <fieldset class="border p-2 mb-1 mt-2" style="height: 335px;">
+                            <legend class="w-auto h6">Listado:</legend>
+                            <div style="overflow-y: scroll; height: 250px;margin-top:8px;">
+                                <div class="form-group table-responsive responsive-table" style="height: 200px;">
+                                    <table class="table table-sm table-hover">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th>N° Letra</th>
+                                                <th>Fecha Pago</th>
+                                                <th>Fecha Vencimiento</th>
+                                                <th>Valor</th>
+                                                <th>Abono</th>
+                                                <th>Saldo</th>
+                                                <th>Estado</th>
+                                                <!-- <th>Abono</th> -->
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="text-center" style="width: 100%;" *ngFor="let dt of dtCxCobrar; let i = index">
+                                                <td style="width: 3%;">
+                                                    <strong>{{dt.letra}}</strong>
+                                                </td>
+                                                <td style="width: 10%;">
+                                                    <strong>{{dt.fecha_pago}}</strong>
+                                                </td>
+
+                                                <td style="width: 10%;">
+                                                    <strong>{{dt.fecha_venc}}</strong>
+                                                </td>
+
+                                                <td style="width: 5%;">
+                                                    <strong>{{dt.valor | currency: 'USD' | lowercase}}</strong>
+                                                </td>
+                                                <td style="width: 5%;">
+                                                    <strong>{{dt.valor_abono | currency: 'USD' | lowercase}}</strong>
+                                                </td>
+                                                <td style="width: 5%;">
+                                                    <strong>{{dt.valor_saldo | currency: 'USD' | lowercase}}</strong>
+                                                </td>
+                                                <td style="width: 5%;">
+                                                    <strong *ngIf="dt.estado == 'Pendiente'" style="width: 8%;  color:rgb(0,92,205);font-weight:bold;">{{dt.estado}}</strong>
+                                                    <strong *ngIf="dt.estado == 'Pagado'" style="width: 8%; color:green;font-weight:bold;">{{dt.estado}}</strong>
+                                                    <strong *ngIf="dt.estado == 'Vencido'" style="width: 8%; color:red;font-weight:bold;">{{dt.estado}}</strong>
+
+                                                </td>
+                                                <td style="width: 10%;">
+                                                    <strong *ngIf="dt.estado">{{dt.observaciones}}</strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" aria-label="Close" style="font-weight: bold" (click)="closeModal()">
+                    CERRAR
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg " id="modalReportCliente" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row" style="width: 100%">
+                    <div class="col-12">
+                        <div class="title-head">
+                            <span>Información Cliente</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal2()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center " *ngIf="!processingtwo">
+                    <div class="container-new-loader">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+                <div class="row justify-content-center" *ngIf="processingtwo">
+                    <div class="col-md-12 col-sm-12">
+                        <fieldset class="border p-2 mb-1 mt-2">
+                            <legend class="w-auto h6">Información Cliente</legend>
+                            <div class="form-row">
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Nombre Cliente </label>
+                                        <p>{{dtInformacion.cliente}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Tipo Documento </label>
+                                        <p>{{dtInformacion.Tdocumento}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">N° Documento</label>
+                                        <p>{{dtInformacion.documento}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Pais/Ciudad</label>
+                                        <p>{{dtInformacion.pais}}/{{dtInformacion.ciudad}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Provincia</label>
+                                        <p>{{dtInformacion.provincia}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Direccion</label>
+                                        <p>{{dtInformacion.direccion}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Telefono</label>
+                                        <p>{{dtInformacion.telefono}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Cupo Credito</label>
+                                        <p>{{dtInformacion.credito}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" aria-label="Close" style="font-weight: bold" (click)="closeModal2()">
+                    CERRAR
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>

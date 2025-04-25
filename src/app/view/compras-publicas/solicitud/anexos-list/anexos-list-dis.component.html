@@ -1,0 +1,50 @@
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<div style="max-height: 130px; overflow-y: scroll;">
+    <table class="table table-sm table-striped">
+        <!-- <thead class="thead-dark">
+            <tr>
+                <th class="text-center w-50">Nombre</th>
+                <th class="text-center" style="width: 15%;">Extension</th>
+                <th class="text-center" style="width: 35%;">Acciones</th>
+            </tr>
+        </thead> -->
+        <tbody>
+            <tr *ngIf="!anexos.length">
+               <td colspan="3" class="text-center"><h6>No hay datos.</h6></td> 
+            </tr>
+            <tr *ngFor="let anexo of anexos">
+                <td>{{ anexo.nombre }}</td>
+                <td>{{ anexo.extension }}</td>
+                <td class="text-center">
+                    <div>
+                        <!-- <button class="btn btn-sm btn-warning mx-1" (click)="verAnexo(anexo)">
+                            <i class="far fa-eye"></i>
+                        </button> -->
+                        <button class="btn btn-sm btn-warning_icon" (click)="verAnexo(anexo)"
+                            ngbTooltip="Ver Anexo">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                        <!-- <button class="btn btn-sm btn-primary mx-1" (click)="descargarAnexo(anexo)">
+                            <i class="far fa-download"></i>
+                        </button> -->
+                        <button class="btn btn-sm btn-action_icon" (click)="descargarAnexo(anexo)"
+                            ngbTooltip="Descargar Anexo">
+                            <span class="material-symbols-outlined">download</span>
+                        </button>
+                        <!-- <button class="btn btn-sm btn-danger mx-1" (click)="deleteAnexo(anexo)">
+                            <i class="far fa-trash-alt"></i>
+                        </button> -->
+                        <button class="btn btn-sm btn-danger_icon" (click)="deleteAnexo(anexo)"
+                            ngbTooltip="Eliminar Anexo">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        
+
+    </table>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renMerContratoAnexos"></cc-spiner-procesar>

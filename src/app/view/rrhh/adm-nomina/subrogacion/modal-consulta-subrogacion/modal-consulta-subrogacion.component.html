@@ -1,0 +1,85 @@
+<app-button-radio-active titulo="Consulta de Encargos y Subrogaciones" cstyle="bg-light" icono="fas fa-money-check-edit-alt"
+    filtroBoton="btnListRecDocumento" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border px-3 pb-2 mb-2">
+        <legend class="w-auto mb-1">Filtros</legend>
+        <div class="row ml-1 mr-1">
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" [(ngModel)]="filter.nombre">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Fecha Inicio" styleSpan="size-span-campo font-weight-bold">
+                            <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Fecha Final" styleSpan="size-span-campo font-weight-bold">
+                            <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </div>
+            <div class="col text-right">
+                <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom"
+                    ngbTooltip="Buscar" (click)="cargarDocumentos()">
+                    <i class="fas fa-search"></i> Consultar
+                </button>
+                <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros"
+                    (click)="limpiarFiltros()">
+                    <i class="fas fa-eraser"></i>
+                </button>
+            </div>
+        </div>
+    </fieldset>
+    <table class="table mat-elevation-z2">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Tipo Ación</th>
+                <th>Empleado Saliente</th>
+                <th>Empleado Adicional</th>
+                <th>Fecha</th>
+                <th>Observación</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="objGetAccionPersonal.length > 0; else emptyTable">
+                <tr *ngFor="let e of objGetAccionPersonal">
+                    <td>{{ e.id_accion_personal}}</td>
+                    <td>{{ e.cat_nombre}}</td>
+                    <td>{{ e.empleado_saliente}}</td>
+                    <td>{{ e.empleado_adicional}}</td>
+                    <td>{{ e.fecha}}</td>
+                    <td>{{ e.observacion}}</td>
+                    <td>{{ e.estado === 'A' ? 'ACTIVO' : 'INACTIVO'}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="selectOption(e)"><i class="far fa-hand-pointer"></i></button>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-template #emptyTable>
+                <tr>
+                    <td class="text-center" colspan="5">
+                        <h6>No hay datos para mostrar</h6>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <mat-paginator 
+            showFirstLastButtons 
+            [length]="paginate.length" 
+            [pageSize]="paginate.perPage"
+            [pageSizeOptions]="paginate.pageSizeOptions" 
+            (page)="changePaginate($event)"
+            aria-label="Select page">
+    </mat-paginator>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lTipo="spModalConsultaSubrogaciones"></cc-spiner-procesar>

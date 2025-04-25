@@ -1,0 +1,383 @@
+<div class="my-2">
+    <app-button-radio-active-new [titulo]="fTitle" icono="fas fa-folder-tree" cstyle="bg-gradient-primary text-white"
+        filtroBoton="btnsInvGrupos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row">
+            <div class="col">
+                <fancy-grid-angular [config]="gridConfig"></fancy-grid-angular>
+            </div>
+            <div class="col">
+                <div *ngIf="newGroup">
+                    <fieldset class="border card-fieldset">
+                        <legend class="w-auto card-legend">Nuevo Grupo</legend>
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="ID" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" readonly>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Codigo" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="newGrupo.codigo_grupo_producto">
+                                </app-cc-input-group-prepend>
+                            </div>
+
+                        </div>
+                        
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Descripcion" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="newGrupo.descripcion">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Tipo Bien" styleSpan="size-span-campo font-weight-bold">
+                                    <!-- <input type="text" class="form-control" [(ngModel)]="newGrupo.descripcion"> -->
+                                    <ng-select class="form-control" [(ngModel)]="newGrupo.tipo_bien" (ngModelChange)="tipoBienFun($event)">
+                                        <ng-option *ngFor="let item of tipo_bien" [value]="item.valor">{{item.descripcion}}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+
+                        </div>
+
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Vida Util" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="number" class="form-control" [(ngModel)]="newGrupo.vida_util" [disabled]="vidaUtil">
+                                </app-cc-input-group-prepend>
+                            </div>
+
+                        </div>
+
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Codigo Anterior" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="newGrupo.codigo_anterior">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="C&oacute;digo Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                                    <input list="lst_ctas_presupuesto" type="text" class="form-control" readonly  [(ngModel)]="newGrupo.codigo_presupuesto"  placeholder="C&oacute;digo Presupuesto" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_presupuesto">
+                                        <option *ngFor="let cta of cuentas.presupuesto" [value]="cta.codigo">{{ cta.codigo }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Cuenta Deudora" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly  [(ngModel)]="newGrupo.codigo_cuenta_contable"  placeholder="Cuenta Deudora" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('Deudora')"> Consultar</button>
+                                    <!-- <datalist id="lst_ctas_deudoras">
+                                        <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    
+
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Cuenta Acreedora" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly [(ngModel)]="newGrupo.codigo_cuenta_contable2" placeholder="Cuenta Acreedora" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('Acreedora')" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_acreedoras">
+                                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    
+
+                        <!-- <div class="row">
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="C&oacute;digo Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                                    <input list="lst_ctas_presupuesto" type="text" class="form-control" readonly  [(ngModel)]="newGrupo.codigo_presupuesto"  placeholder="C&oacute;digo Presupuesto" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" > Consultar</button>
+                                    
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div> -->
+
+
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Cuenta Orden Debe" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly [(ngModel)]="newGrupo.codigo_cuenta_contable3" placeholder="Cuenta Orden Debe" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('OD')" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_acreedoras">
+                                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Codigo Orden Haber" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly [(ngModel)]="newGrupo.codigo_cuenta_contable4" placeholder="Codigo Orden Haber" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('OH')" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_acreedoras">
+                                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Codigo Dep. Acumulada" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly [(ngModel)]="newGrupo.codigo_cuenta_contable5" placeholder="Codigo Dep. Acumulada" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('DA')" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_acreedoras">
+                                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Codigo Gto. Depreciac" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly [(ngModel)]="newGrupo.codigo_cuenta_contable6" placeholder="Codigo Gto. Depreciac" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('GD')" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_acreedoras">
+                                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div *ngIf="grupoSelected">
+                    <fieldset class="border card-fieldset">
+                        <legend class="w-auto card-legend">Grupo</legend>
+
+
+                      
+
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Codigo" styleSpan="size-span-campo font-weight-bold">
+                                        <input type="text" class="form-control" [(ngModel)]="padre.codigo_grupo_producto">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+
+                            <div class="row m-0">
+
+                                <div class="col-12 col-md-12 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo font-weight-bold">
+                                        <input type="text" class="form-control" [(ngModel)]="padre.descripcion">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+
+                   
+
+
+
+                            <div class="row m-0">
+
+                                <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="ID" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" readonly="readonly" [value]="grupo.id_grupo_productos">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Codigo" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" readonly="readonly" [value]="grupo.codigo_grupo_producto">
+                                </app-cc-input-group-prepend>
+                            </div>
+
+                        </div>
+                        
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="grupo.descripcion">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Tipo Bien" styleSpan="size-span-campo font-weight-bold">
+                                    <!-- <input type="text" class="form-control" [(ngModel)]="newGrupo.descripcion"> -->
+                                    <ng-select class="form-control" [(ngModel)]="grupo.tipo_bien" (ngModelChange)="tipoBienFun($event)">
+                                        <ng-option *ngFor="let item of tipo_bien" [value]="item.valor">{{item.descripcion}}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+
+                        </div>
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Vida Util" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="number" class="form-control" [(ngModel)]="grupo.vida_util" [disabled]="vidaUtil">
+                                </app-cc-input-group-prepend>
+                            </div>
+
+                        </div>
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Codigo Anterior" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="grupo.codigo_anterior">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="C&oacute;digo Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                                    <input list="lst_ctas_presupuesto" type="text" class="form-control custom-select" readonly  [(ngModel)]="grupo.codigo_presupuesto"  placeholder="C&oacute;digo Presupuesto" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_presupuesto">
+                                        <option *ngFor="let cta of cuentas.presupuesto" [value]="cta.codigo">{{ cta.codigo }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Cuenta Deudora" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly  [(ngModel)]="grupo.codigo_cuenta_contable"  placeholder="Cuenta Deudora" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('Deudora')"> Consultar</button>
+                                    <!-- <datalist id="lst_ctas_deudoras">
+                                        <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        
+
+                        <!-- <div class="row">
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Cuenta Contable" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="grupo.codigo_cuenta_contable">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div> -->
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Cuenta Acreedora" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly [(ngModel)]="grupo.codigo_cuenta_contable2" placeholder="Cuenta Acreedora" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('Acreedora')" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_acreedoras">
+                                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        
+
+
+                        <!-- <div class="row">
+                            <div class="col">
+                                <app-cc-input-group-prepend label="Codigo Presupuesto" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="grupo.codigo_presupuesto">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div> -->
+
+                        
+                        
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Cuenta Orden Debe" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly [(ngModel)]="grupo.codigo_cuenta_contable3" placeholder="Cuenta Orden Debe" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('OD')" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_acreedoras">
+                                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Codigo Orden Haber" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly [(ngModel)]="grupo.codigo_cuenta_contable4" placeholder="Codigo Orden Haber" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('OH')" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_acreedoras">
+                                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Codigo Dep. Acumulada" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly [(ngModel)]="grupo.codigo_cuenta_contable5" placeholder="Codigo Dep. Acumulada" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('DA')" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_acreedoras">
+                                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+
+                        <div class="row m-0">
+
+                            <div class="col-12 col-md-12 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Codigo Gto. Depreciac" styleSpan="size-span-campo font-weight-bold">
+                                    <input  type="text" class="form-control" readonly [(ngModel)]="grupo.codigo_cuenta_contable6" placeholder="Codigo Gto. Depreciac" maxlength="15">
+                                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('GD')" > Consultar</button>
+                                    <!-- <datalist id="lst_ctas_acreedoras">
+                                        <option *ngFor="let cta of cuentas.acreedora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                                    </datalist> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+                    
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active-new>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="invGrupos"></cc-spiner-procesar>

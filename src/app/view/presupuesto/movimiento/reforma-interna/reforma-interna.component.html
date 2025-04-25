@@ -1,0 +1,827 @@
+<app-button-radio-active titulo="Reforma interna" cstyle="bg-light text-dark" icono="fas fa-tasks"
+    filtroBoton="btnsComprasP" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="atribucionParamsNew.periodo"
+                    (ngModelChange)="periodoSelected($event,periodo)" [items]="cmb_periodo" bindValue="periodo"
+                    bindLabel="periodo" [disabled]="search"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="No Documento" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" placeholder="Ingrese el periodo... "
+                    [(ngModel)]="atribucionParamsNew.nom_documento" readonly />
+            </app-cc-input-group-prepend>
+        </div>
+        
+        
+        
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="No Reforma	" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" placeholder="Ingrese el periodo... "
+                    [(ngModel)]="atribucionParamsNew.num_reforma" readonly />
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-primary btn-sm ml-1" (click)="modalReformas()">
+                <i class="fas fa-search"></i>Buscar
+            </button> <!-- <input type="button" value="buscar " (click)="modalReformas()">  -->
+           
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                    [(ngModel)]="atribucionParamsNew.programa" [disabled]="search">
+                    <ng-option [value]="0" disabled>Chosee.. </ng-option>
+                    <ng-option *ngFor="let item of programa" [value]="item">{{item.label}}</ng-option>
+                </ng-select>
+                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect()" [disabled]="search">
+                    <i class="fas fa-search"></i>Buscar
+                </button>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                    [(ngModel)]="atribucionParamsNew.departamento" [disabled]="search">
+                    <ng-option [value]="0" disabled>Chosee.. </ng-option>
+                    <ng-option *ngFor="let item of departamento" [value]="item">{{item.value}}</ng-option>
+                </ng-select>
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienesSelect()" [disabled]="search">
+                    <i class="fas fa-search"></i>Buscar
+                </button>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Código Partida" styleSpan="size-span-campo font-weight-bold">
+                <input type="number" class="form-control" placeholder="Ingrese el numero... "
+                    [(ngModel)]="atribucionParamsNew.reforma_presupuesto" readonly />
+                <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('Presupuestario','partida1')"
+                    [disabled]="search"><i class="fas fa-search"></i>Buscar</button>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Partida Presupuestaria" styleSpan="size-span-campo font-weight-bold"
+                style="width: 150px;">
+
+                <textarea id="descripcion_presupuesto" type="text" class="form-control form-control-sm"
+                    placeholder="Partida Presupuestaria" [(ngModel)]="descripcion_presupuesto" readonly
+                    maxlength="300"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" placeholder="Ingrese el numero... "
+                    [(ngModel)]="atribucionParamsNew.fecha" [disabled]="search" />
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-3">
+            <app-cc-input-group-prepend label="Valor a disminuir" styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask [options]="{max: totalPartida}" class="form-control"
+                    placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.ajuste_1"
+                    (keypress)="calcularValorTotal()" [disabled]="search" />
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-3">
+            <app-cc-input-group-prepend label="Valor ajustado" styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask class="form-control" placeholder="Ingrese el numero... " [ngModel]="total"
+                    readonly />
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold">
+                <textarea class="form-control" placeholder="Ingrese una observacion... "
+                    [(ngModel)]="atribucionParamsNew.observacion" [disabled]="search"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="table-responsive mt-2">
+        <table class="table table-bordered no-footer table-hover mb-0" style="width: 1600px;">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" style="width: 5%;"><input type="checkbox" [(ngModel)]="masterSelected"
+                            (change)="selectAll()" /></th>
+                    <th class="text-center">Descripcion</th>
+                    <th class="text-center">Programa</th>
+                    <th class="text-center">Departamento</th>
+                    <th class="text-center">Atribucion</th>
+                   <!--  <th class="text-center">Unidad de medida</th> -->
+                    <th class="text-center">Cantidad</th>
+                  <!--   <th class="text-center">Costo Unitarios</th> -->
+                    <th class="text-center">Valor total</th>
+                   
+                    <th class="text-center">Cantidad Modifcada</th>
+                   <!--  <th class="text-center">Costo Unitarios Modificados</th> -->
+                    <th class="text-center">Valor total Modificados</th>
+                  
+                    <th class="text-center">Cantidad Ajustada</th>
+                 <!--    <th class="text-center">Costo Unitarios Ajustado</th> -->
+                    <th class="text-center">Valor total Ajustado</th>
+                    <th class="text-center">ICP</th>
+                    <th class="text-center">Valor ICP</th>
+                    <th class="text-center">Cantidad Comprometido</th>
+                    <th class="text-center">Total Comprometido</th>
+
+                    <th class="text-center">Cantidad por comprometer</th>
+                    <th class="text-center">Saldo por Comprometer</th>
+
+                   <!--  <th class="text-center">Cantidad por Solicitar</th>
+                    <th class="text-center">Costo Unitario por Solicitar</th>
+                    <th class="text-center">Costo Total por Solicitar</th> -->
+                    <th class="text-center">Acción</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="!listaSolicitudesAtribucion.length">
+                    <td colspan="19" class="text-center">
+                        <h6>No hay Solicitudes que mostrar</h6>
+                    </td>
+
+                </tr>
+                <tr *ngFor="let item of listaSolicitudesAtribucion" [ngClass]="{'table-warning': item.check}">
+                    <td class="text-center" style="width: 5%;"> <input type="checkbox" [(ngModel)]="item.check"
+                            (ngModelChange)="calcularValorTotal()"     [disabled]="item.saldo_por_comprometer == 0 || item.icpactivo == 'activo'" /></td>
+                    <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
+                    <td class="text-center">{{item.programa}}</td>
+                    <td class="text-center">{{item.departamento}}</td>
+                    <td class="text-center" maxlength="10">{{item.atribucion}}</td>
+                   <!--  <td class="text-center">{{item.u_medida}}</td> -->
+                    <td class="text-center bg-orin">1<!-- {{item.cantidad_solicitada}} --></td>
+                  <!--   <td class="text-center bg-orin">$ {{item.costo_unitario | number:'1.2-2'}}</td> -->
+                    <td class="text-center bg-orin" style="width: 10%;"> <input class="form-control" type="text"
+                            value="$ {{item.precio_cotizado | number: '1.2-2'}}" readonly /></td>
+                  
+
+                    <td class="text-center">
+                        <input class="form-control" type="text" value="1" 
+                             disabled /><!--[]="!item.check"[(ngModel)]="item.cantidad_solicitada_por_mod" (ngModelChange)="actualizaTotalCotizado(item)" -->
+                    </td>
+                  <!--   <td class="text-center">
+                        <input class="form-control" currencyMask [(ngModel)]="item.costo_unitario_por_mod"
+                            [disabled]="!item.check" />
+                    </td> -->
+                    <!--  (ngModelChange)="actualizaTotalCotizado(item)" -->
+                 <!--    <td class="text-center" style="width: 10%;">
+                        <input class="form-control" (ngModelChange)="actualizaTotalCotizado(item)" [disabled]="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  /> readonly 
+                    </td>-->
+                    <td class="text-center" style="width: 10%;">
+                        <input class="form-control" (ngModelChange)="actualizaTotalCotizado($event, item)" [disabled]="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  />
+                    </td>
+                     <td class="text-center">1<!-- {{item.cantidad_ajustada}} --></td>
+                    <!-- <td class="text-center">$ {{item.costo_unitario_ajustado | number:'1.2-2'}}</td> -->
+                    <td class="text-center">$ {{item.costo_total_ajustado | number:'1.2-2'}}</td>
+                    <td class="text-center">{{ item.icp ? item.icp : 'N/A' }}</td>
+                    <td class="text-center">
+                        $ {{ item.precio_cotizado_icp ? (item.precio_cotizado_icp | number:'1.2-2') : '0' }}
+                    </td><!--   <td class="text-center">$ {{item.icp}}</td>
+                    <td class="text-center">$ {{item.precio_cotizado_icp | number:'1.2-2'}}</td> -->
+                    <td class="text-center">1</td>
+                    <td class="text-center">$ {{item.costo_total_solicitado | number:'1.2-2'}}</td>
+                    <td class="text-center">1</td>
+                    <td class="text-center">$ {{item.saldo_por_comprometer | number:'1.2-2'}}</td>
+                  <!--   <td class="text-center">{{item.cantidad_solicitada_mod}}</td>
+                    <td class="text-center">$ {{item.costo_unitario_mod | number:'1.2-2'}}</td>
+                    <td class="text-center">$ {{item.precio_cotizado_mod | number:'1.2-2'}}</td> -->
+                   
+                    <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)"
+                            [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <mat-paginator showFirstLastButtons [length]="paginateNew.length" [pageSize]="paginateNew.perPage"
+            [pageSizeOptions]="paginateNew.pageSizeOptions" (page)="changePaginateNew($event)" aria-label="Select page">
+        </mat-paginator>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-total">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 250px;">&Sigma; Total </span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ totalOriginal | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-subtotal">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 250px;">&Sigma; Valor a disminuir </span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ atribucionParamsNew.ajuste_1 | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-subtotal">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 250px;">&Sigma; Total a ajustar </span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ total | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-descuentos">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 250px;">&Sigma; Total Ajustado</span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ ajuste1 | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                    [(ngModel)]="atribucionParamsNew.programa_dos"
+                    [disabled]="search">
+                    <ng-option [value]="0" disabled>Chosee.. </ng-option>
+                    <ng-option *ngFor="let item of programa" [value]="item">{{item.label}}</ng-option>
+                </ng-select>
+                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect2()" [disabled]="search">
+                    <i class="fas fa-search"></i>Buscar
+                </button>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                    [(ngModel)]="atribucionParamsNew.departamento_dos" [disabled]="search">
+                    <ng-option [value]="0" disabled>Chosee.. </ng-option>
+                    <ng-option *ngFor="let item of departamento2" [value]="item">{{item.value}}</ng-option>
+                </ng-select>
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" [disabled]="search">
+                    <i class="fas fa-search"></i>Buscar
+                </button>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Codigo presupuesto " styleSpan="size-span-campo font-weight-bold">
+                <input type="number" class="form-control" placeholder="Ingrese el numero... "
+                    [(ngModel)]="atribucionParamsNew.reforma_presupuesto2" readonly />
+                <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('valor','partida2')"
+                    [disabled]="search"><i class="fas fa-search"></i>Buscar</button>
+            </app-cc-input-group-prepend>
+            <app-cc-input-group-prepend label="Partida Presupuestaria" styleSpan="size-span-campo font-weight-bold">
+                <textarea id="descripcion_presupuesto2" type="text" class="form-control form-control-sm"
+                    placeholder="Partida Presupuestaria" [(ngModel)]="descripcion_presupuesto2" readonly
+                    maxlength="300"></textarea>
+
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <app-cc-input-group-prepend label="Valor a aumentar" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask class="form-control" currencyMask placeholder="Ingrese el numero... "
+                        [(ngModel)]="atribucionParamsNew.ajuste_2" (keypress)="calcularValorTotal2()"
+                        [disabled]="search" />
+
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Valor ajustado" styleSpan="size-span-otro font-weight-bold">
+                    <input currencyMask class="form-control" placeholder="Ingrese el numero... " [ngModel]="total2"
+                        readonly />
+
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3 mt-1">
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" [disabled]="search">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive mt-2">
+        <table class="table table-bordered no-footer table-hover mb-0" style="width: 1600px;">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" style="width: 5%;"><input type="checkbox" [(ngModel)]="masterSelected"
+                            (change)="selectAll2()" /></th>
+                    <th class="text-center">Descripcion</th>
+                    <th class="text-center">Programa</th>
+                    <th class="text-center">Departamento</th>
+                    <th class="text-center">Atribucion</th>
+                   <!--  <th class="text-center">Unidad de medida</th> -->
+                    <th class="text-center">Cantidad</th>
+                   <!--  <th class="text-center">Costo Unitarios</th> -->
+                    <th class="text-center">Valor total</th>
+
+                    <th class="text-center">Cantidad Modifcada</th>
+                    <!-- <th class="text-center">Costo Unitarios Modificados</th> -->
+                    <th class="text-center">Valor total Modificados</th>
+
+                    <th class="text-center">Cantidad Ajustada</th>
+                   <!--  <th class="text-center">Costo Unitarios Ajustado</th> -->
+                    <th class="text-center">Valor total Ajustado</th>
+                    <th class="text-center">ICP</th>
+                    <th class="text-center">Valor ICP</th>
+                    <th class="text-center">Cantidad Comprometido</th>
+                    <th class="text-center">Total Comprometido</th>
+                    
+                    <th class="text-center">Cantidad por comprometer</th>
+                    <th class="text-center">Saldo por Comprometer</th>
+
+                   <!--  <th class="text-center">Cantidad por Solicitar</th>
+                    <th class="text-center">Costo Unitario por Solicitar</th>
+                    <th class="text-center">Costo Total por Solicitar</th> -->
+                   
+                   
+                    <th class="text-center">Acción</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngIf="!listaSolicitudesAtribucion2.length">
+                    <td colspan="19" class="text-center">
+                        <h6>No hay Solicitudes que mostrar</h6>
+                    </td>
+                </tr>
+                <tr *ngFor="let item of listaSolicitudesAtribucion2" [ngClass]="{'table-warning': item.check}">
+                    <td class="text-center" style="width: 5%;"> <input type="checkbox" [(ngModel)]="item.check"
+                            (ngModelChange)="calcularValorTotal2()"  [disabled]="item.icpactivo == 'activo'" /></td>
+                    <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
+                    <td class="text-center">{{item.programa}}</td>
+                    <td class="text-center">{{item.departamento}}</td>
+                    <td class="text-center" maxlength="10">{{item.atribucion}}</td>
+                    <!-- <td class="text-center">{{item.u_medida}}</td> -->
+                    <td class="text-center bg-orin">1<!-- {{item.cantidad_solicitada}} --></td>
+                  <!--   <td class="text-center bg-orin">$ {{item.costo_unitario | number:'1.2-2'}}</td> -->
+                    <td class="text-center bg-orin" style="width: 10%;"><input class="form-control" type="text"
+                            value="$ {{item.precio_cotizado | number: '1.2-2'}}" readonly /></td>
+
+                            <td class="text-center">
+                                <input class="form-control" type="text" value="1" 
+                                    disabled/><!-- []="!item.check" [(ngModel)]="item.cantidad_solicitada_por_mod" (ngModelChange)="actualizaTotalCotizado(item)" -->
+                            </td>
+                            <td class="text-center" style="width: 10%;">
+                                <input class="form-control" (ngModelChange)="actualizaTotalCotizado2($event, item)" [disabled]="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  />
+                            </td>
+                           <!--  <td class="text-center" style="width: 10%;">
+                                <input class="form-control" (ngModelChange)="actualizaTotalCotizado($event, item)" [disabled]="!item.check" currencyMask [(ngModel)]="item.costo_total_por_mod"  />
+                            </td> -->
+
+                            <td class="text-center">1<!-- {{item.cantidad_ajustada}} --></td>
+                           <!--  <td class="text-center">$ {{item.costo_unitario_ajustado | number:'1.2-2'}}</td> -->
+                            <td class="text-center">$ {{item.costo_total_ajustado | number:'1.2-2'}}</td>
+                            <td class="text-center">{{ item.icp ? item.icp : 'N/A' }}</td>
+<td class="text-center">
+    $ {{ item.precio_cotizado_icp ? (item.precio_cotizado_icp | number:'1.2-2') : '0' }}
+</td>
+
+                           
+                            <td class="text-center">1</td>
+                            <td class="text-center">$ {{item.costo_total_solicitado | number:'1.2-2'}}</td>
+                            <td class="text-center">1</td>
+                            <td class="text-center">$ {{item.saldo_por_comprometer | number:'1.2-2'}}</td>
+                 <!--    <td class="text-center">{{item.cantidad_solicitada_mod}}</td>
+                    <td class="text-center">$ {{item.costo_unitario_mod | number:'1.2-2'}}</td>
+                    <td class="text-center">$ {{item.precio_cotizado_mod | number:'1.2-2'}}</td> -->
+                   <!--  <td class="text-center"><input class="form-control" type="text"
+                            [(ngModel)]="item.cantidad_solicitada_por_mod"
+                            [disabled]="!item.check" /></td> --> <!--  (ngModelChange)="actualizaTotalCotizado2(item)" -->
+                  <!--   <td class="text-center">
+                        <input class="form-control" currencyMask [(ngModel)]="item.costo_unitario_por_mod"
+                            [disabled]="!item.check" />
+                    </td> --><!-- (ngModelChange)="actualizaTotalCotizado2(item)"  -->
+                   <!--  <td class="text-center" style="width: 10%;">
+                        <input class="form-control" currencyMask [ngModel]="item.costo_total_por_mod" readonly />
+                    </td> -->
+                   
+                   
+                  
+                    <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)"
+                            [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <mat-paginator showFirstLastButtons [length]="paginate2.length" [pageSize]="paginate2.perPage"
+            [pageSizeOptions]="paginate2.pageSizeOptions" (page)="changePaginateNew2($event)" aria-label="Select page">
+        </mat-paginator>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-total">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 200px;">&Sigma; Total </span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ total2Original | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-subtotal">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 200px;">&Sigma; Total a ajustar</span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ total2 | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-descuentos">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 200px;">&Sigma; Ajuste</span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ ajuste2 | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>
+
+
+
+<!-- 
+<app-button-radio-active titulo="Reforma interna" cstyle="bg-light text-dark" icono="fas fa-tasks"
+    filtroBoton="btnsComprasP" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="atribucionParamsNew.periodo"
+                    (ngModelChange)="periodoSelected($event,periodo)" [items]="cmb_periodo" bindValue="periodo"
+                    bindLabel="periodo" [disabled]="search"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="No Documento" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" placeholder="Ingrese el periodo... "
+                    [(ngModel)]="atribucionParamsNew.nom_documento" readonly />
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                    [(ngModel)]="atribucionParamsNew.programa" [disabled]="search">
+                    <ng-option [value]="0" disabled>Chosee.. </ng-option>
+                    <ng-option *ngFor="let item of programa" [value]="item">{{item.label}}</ng-option>
+                </ng-select>
+                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect()" [disabled]="search">
+                    <i class="fas fa-search"></i>Buscar
+                </button>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                    [(ngModel)]="atribucionParamsNew.departamento" [disabled]="search">
+                    <ng-option [value]="0" disabled>Chosee.. </ng-option>
+                    <ng-option *ngFor="let item of departamento" [value]="item">{{item.value}}</ng-option>
+                </ng-select>
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienesSelect()" [disabled]="search">
+                    <i class="fas fa-search"></i>Buscar
+                </button>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Código Partida" styleSpan="size-span-campo font-weight-bold">
+                <input type="number" class="form-control" placeholder="Ingrese el numero... "
+                    [(ngModel)]="atribucionParamsNew.reforma_presupuesto" readonly />
+                <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('Presupuestario','partida1')"
+                    [disabled]="search"><i class="fas fa-search"></i>Buscar</button>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Partida Presupuestaria" styleSpan="size-span-campo font-weight-bold"
+                style="width: 150px;">
+
+                <textarea id="descripcion_presupuesto" type="text" class="form-control form-control-sm"
+                    placeholder="Partida Presupuestaria" [(ngModel)]="descripcion_presupuesto" readonly
+                    maxlength="300"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" placeholder="Ingrese el numero... "
+                    [(ngModel)]="atribucionParamsNew.fecha" [disabled]="search" />
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-3">
+            <app-cc-input-group-prepend label="Valor a disminuir" styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask [options]="{max: totalPartida}" class="form-control"
+                    placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.ajuste_1"
+                    (keypress)="calcularValorTotal()" [disabled]="search" />
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-3">
+            <app-cc-input-group-prepend label="Valor ajustado" styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask class="form-control" placeholder="Ingrese el numero... " [ngModel]="total"
+                    readonly />
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold">
+                <textarea class="form-control" placeholder="Ingrese una observacion... "
+                    [(ngModel)]="atribucionParamsNew.observacion" [disabled]="search"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="table-responsive mt-2">
+        <table class="table table-bordered no-footer table-hover mb-0" style="width: 1600px;">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" style="width: 5%;"><input type="checkbox" [(ngModel)]="masterSelected"
+                            (change)="selectAll()" /></th>
+                    <th class="text-center">Descripcion</th>
+                    <th class="text-center">Programa</th>
+                    <th class="text-center">Departamento</th>
+                    <th class="text-center">Atribucion</th>
+                    <th class="text-center">Unidad de medida</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Costo Unitarios</th>
+                    <th class="text-center">Valor total</th>
+                    <th class="text-center">Cantidad por Solicitar</th>
+                    <th class="text-center">Costo Unitario por Solicitar</th>
+                    <th class="text-center">Costo Total por Solicitar</th>
+                    <th class="text-center">Cantidad Modifcada</th>
+                    <th class="text-center">Costo Unitarios Modificados</th>
+                    <th class="text-center">Valor total Modificados</th>
+                    <th class="text-center">Cantidad Ajustada</th>
+                    <th class="text-center">Costo Unitarios Ajustado</th>
+                    <th class="text-center">Valor total Ajustado</th>
+                    <th class="text-center">Acción</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="!listaSolicitudesAtribucion.length">
+                    <td colspan="19" class="text-center">
+                        <h6>No hay Solicitudes que mostrar</h6>
+                    </td>
+
+                </tr>
+                <tr *ngFor="let item of listaSolicitudesAtribucion" [ngClass]="{'table-warning': item.check}">
+                    <td class="text-center" style="width: 5%;"> <input type="checkbox" [(ngModel)]="item.check"
+                            (ngModelChange)="calcularValorTotal()" /></td>
+                    <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
+                    <td class="text-center">{{item.programa}}</td>
+                    <td class="text-center">{{item.departamento}}</td>
+                    <td class="text-center" maxlength="10">{{item.atribucion}}</td>
+                    <td class="text-center">{{item.u_medida}}</td>
+                    <td class="text-center bg-orin">{{item.cantidad_solicitada}}</td>
+                    <td class="text-center bg-orin">$ {{item.costo_unitario | number:'1.2-2'}}</td>
+                    <td class="text-center bg-orin" style="width: 10%;"> <input class="form-control" type="text"
+                            value="$ {{item.precio_cotizado | number: '1.2-2'}}" readonly /></td>
+                    <td class="text-center">{{item.cantidad_solicitada_mod}}</td>
+                    <td class="text-center">$ {{item.costo_unitario_mod | number:'1.2-2'}}</td>
+                    <td class="text-center">$ {{item.precio_cotizado_mod | number:'1.2-2'}}</td>
+
+                    <td class="text-center">
+                        <input class="form-control" type="text" [(ngModel)]="item.cantidad_solicitada_por_mod"
+                            (ngModelChange)="actualizaTotalCotizado(item)" [disabled]="!item.check" />
+                    </td>
+                    <td class="text-center">
+                        <input class="form-control" currencyMask [(ngModel)]="item.costo_unitario_por_mod"
+                            (ngModelChange)="actualizaTotalCotizado(item)" [disabled]="!item.check" />
+                    </td>
+                    <td class="text-center" style="width: 10%;">
+                        <input class="form-control" currencyMask [ngModel]="item.costo_total_por_mod" readonly />
+                    </td>
+                    <td class="text-center">{{item.cantidad_ajustada}}</td>
+                    <td class="text-center">$ {{item.costo_unitario_ajustado | number:'1.2-2'}}</td>
+                    <td class="text-center">$ {{item.costo_total_ajustado | number:'1.2-2'}}</td>
+                    <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)"
+                            [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <mat-paginator showFirstLastButtons [length]="paginateNew.length" [pageSize]="paginateNew.perPage"
+            [pageSizeOptions]="paginateNew.pageSizeOptions" (page)="changePaginateNew($event)" aria-label="Select page">
+        </mat-paginator>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-total">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 250px;">&Sigma; Total </span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ totalOriginal | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-subtotal">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 250px;">&Sigma; Valor a disminuir </span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ atribucionParamsNew.ajuste_1 | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-subtotal">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 250px;">&Sigma; Total a ajustar </span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ total | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-descuentos">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 250px;">&Sigma; Total Ajustado</span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ ajuste1 | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                    [(ngModel)]="atribucionParamsNew.programa_dos"
+                    [disabled]="search">
+                    <ng-option [value]="0" disabled>Chosee.. </ng-option>
+                    <ng-option *ngFor="let item of programa" [value]="item">{{item.label}}</ng-option>
+                </ng-select>
+                <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearchSelect2()" [disabled]="search">
+                    <i class="fas fa-search"></i>Buscar
+                </button>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12">
+            <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                    [(ngModel)]="atribucionParamsNew.departamento_dos" [disabled]="search">
+                    <ng-option [value]="0" disabled>Chosee.. </ng-option>
+                    <ng-option *ngFor="let item of departamento2" [value]="item">{{item.value}}</ng-option>
+                </ng-select>
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" [disabled]="search">
+                    <i class="fas fa-search"></i>Buscar
+                </button>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Codigo presupuesto " styleSpan="size-span-campo font-weight-bold">
+                <input type="number" class="form-control" placeholder="Ingrese el numero... "
+                    [(ngModel)]="atribucionParamsNew.reforma_presupuesto2" readonly />
+                <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('valor','partida2')"
+                    [disabled]="search"><i class="fas fa-search"></i>Buscar</button>
+            </app-cc-input-group-prepend>
+            <app-cc-input-group-prepend label="Partida Presupuestaria" styleSpan="size-span-campo font-weight-bold">
+                <textarea id="descripcion_presupuesto2" type="text" class="form-control form-control-sm"
+                    placeholder="Partida Presupuestaria" [(ngModel)]="descripcion_presupuesto2" readonly
+                    maxlength="300"></textarea>
+
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <app-cc-input-group-prepend label="Valor a aumentar" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask class="form-control" currencyMask placeholder="Ingrese el numero... "
+                        [(ngModel)]="atribucionParamsNew.ajuste_2" (keypress)="calcularValorTotal2()"
+                        [disabled]="search" />
+
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Valor ajustado" styleSpan="size-span-otro font-weight-bold">
+                    <input currencyMask class="form-control" placeholder="Ingrese el numero... " [ngModel]="total2"
+                        readonly />
+
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3 mt-1">
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()" [disabled]="search">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive mt-2">
+        <table class="table table-bordered no-footer table-hover mb-0" style="width: 1600px;">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" style="width: 5%;"><input type="checkbox" [(ngModel)]="masterSelected"
+                            (change)="selectAll()" /></th>
+                    <th class="text-center">Descripcion</th>
+                    <th class="text-center">Programa</th>
+                    <th class="text-center">Departamento</th>
+                    <th class="text-center">Atribucion</th>
+                    <th class="text-center">Unidad de medida</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Costo Unitarios</th>
+                    <th class="text-center">Valor total</th>
+                    <th class="text-center">Cantidad por Solicitar</th>
+                    <th class="text-center">Costo Unitario por Solicitar</th>
+                    <th class="text-center">Costo Total por Solicitar</th>
+                    <th class="text-center">Cantidad Modifcada</th>
+                    <th class="text-center">Costo Unitarios Modificados</th>
+                    <th class="text-center">Valor total Modificados</th>
+                    <th class="text-center">Cantidad Ajustada</th>
+                    <th class="text-center">Costo Unitarios Ajustado</th>
+                    <th class="text-center">Valor total Ajustado</th>
+                    <th class="text-center">Acción</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngIf="!listaSolicitudesAtribucion2.length">
+                    <td colspan="19" class="text-center">
+                        <h6>No hay Solicitudes que mostrar</h6>
+                    </td>
+                </tr>
+                <tr *ngFor="let item of listaSolicitudesAtribucion2" [ngClass]="{'table-warning': item.check}">
+                    <td class="text-center" style="width: 5%;"> <input type="checkbox" [(ngModel)]="item.check"
+                            (ngModelChange)="calcularValorTotal2()" /></td>
+                    <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
+                    <td class="text-center">{{item.programa}}</td>
+                    <td class="text-center">{{item.departamento}}</td>
+                    <td class="text-center" maxlength="10">{{item.atribucion}}</td>
+                    <td class="text-center">{{item.u_medida}}</td>
+                    <td class="text-center bg-orin">{{item.cantidad_solicitada}}</td>
+                    <td class="text-center bg-orin">$ {{item.costo_unitario | number:'1.2-2'}}</td>
+                    <td class="text-center bg-orin" style="width: 10%;"><input class="form-control" type="text"
+                            value="$ {{item.precio_cotizado | number: '1.2-2'}}" readonly /></td>
+                    <td class="text-center">{{item.cantidad_solicitada_mod}}</td>
+                    <td class="text-center">$ {{item.costo_unitario_mod | number:'1.2-2'}}</td>
+                    <td class="text-center">$ {{item.precio_cotizado_mod | number:'1.2-2'}}</td>
+                    <td class="text-center"><input class="form-control" type="text"
+                            [(ngModel)]="item.cantidad_solicitada_por_mod"
+                            (ngModelChange)="actualizaTotalCotizado2(item)" [disabled]="!item.check" /></td>
+                    <td class="text-center">
+                        <input class="form-control" currencyMask [(ngModel)]="item.costo_unitario_por_mod"
+                            (ngModelChange)="actualizaTotalCotizado2(item)" [disabled]="!item.check" />
+                    </td>
+                    <td class="text-center" style="width: 10%;">
+                        <input class="form-control" currencyMask [ngModel]="item.costo_total_por_mod" readonly />
+                    </td>
+                    <td class="text-center">{{item.cantidad_ajustada}}</td>
+                    <td class="text-center">$ {{item.costo_unitario_ajustado | number:'1.2-2'}}</td>
+                    <td class="text-center">$ {{item.costo_total_ajustado | number:'1.2-2'}}</td>
+                    <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)"
+                            [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <mat-paginator showFirstLastButtons [length]="paginate2.length" [pageSize]="paginate2.perPage"
+            [pageSizeOptions]="paginate2.pageSizeOptions" (page)="changePaginateNew2($event)" aria-label="Select page">
+        </mat-paginator>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-total">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 200px;">&Sigma; Total </span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ total2Original | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-subtotal">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 200px;">&Sigma; Total a ajustar</span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ total2 | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-descuentos">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                        style="width: 200px;">&Sigma; Ajuste</span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                    readonly value="$ {{ ajuste2 | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar> -->

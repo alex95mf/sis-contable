@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+    font-family: 'Poppins1';
+    src: url('../../../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+    font-family: "Poppins1";
+    src: url('../../../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "PoppinsTourney";
+    src: url("../../../../../assets/fonts/Tourney-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+label,
+select,
+span,
+ng-select,
+button {
+    font-family: "Poppins1" !important;
+    box-shadow: unset !important;
+    outline: unset !important;
+    font-size: 10px !important;
+}
+
+button [type=button] {
+    vertical-align: middle;
+    font-size: 10px !important;
+}

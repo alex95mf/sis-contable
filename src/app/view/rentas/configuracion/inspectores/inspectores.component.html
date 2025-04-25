@@ -1,0 +1,99 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Gesti&oacute;n de Inspectores" cstyle="bg-light" icono="fas fa-uesrs"
+        filtroBoton="btnsInspectores" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <!--  -->
+        <ng-container *ngIf="newInspectorView">
+            <fieldset class="border px-3 pb-2 mt-2">
+                <legend class="w-auto mb-1">Nuevo Inspector</legend>
+                <div class="row">
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" readonly [ngModel]="newInspector.empleado?.emp_full_nombre">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-primary" (click)="onClicConsultaEmpleados()">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-4">
+                        <app-cc-input-group-prepend label="Tipo de Inspeccion" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [(ngModel)]="newInspector.tipo_inspeccion"
+                                [items]="cmb_tipo_inspeccion" bindValue="value" bindLabel="label">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </fieldset>
+        </ng-container>
+        <fieldset class="border px-3 pb-2 mt-2">
+            <legend class="w-auto mb-1">Filtros</legend>
+            <div class="row">
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="filter.nombre">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Tipo de Inspeccion" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [(ngModel)]="filter.tipo_inspeccion"
+                            [items]="cmb_tipo_inspeccion" bindValue="value" bindLabel="label">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control"[(ngModel)]="filter.estado"
+                            [items]="cmb_estado" bindValue="value" bindLabel="label">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="table-responsive">
+            <table class="table mat-elevation-z3 mt-2">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="w-50">Empleado</th>
+                        <th>Tipo de Inspeccion</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="tbl_inspectores.length; else noInspectores">
+                        <tr *ngFor="let element of tbl_inspectores">
+                            <td>{{ element.nombres }}</td>
+                            <td>{{ element.tipo_inspeccion }}</td>
+                            <td>
+                                <i class="fas fa-circle" [ngClass]="{'text-success': element.estado == 'A', 'text-danger': element.estado == 'I'}"></i>
+                                {{ element.estado == 'A' ? 'Activo' : 'Inactivo' }}
+                            </td>
+                            <td>
+                                <ng-container *ngIf="element.estado == 'A'">
+                                    <button class="btn btn-sm btn-danger" matTooltip="Eliminar" (click)="deleteInspector(element)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </ng-container>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-template #noInspectores>
+                        <tr>
+                            <td class="text-center" colspan="4"><span class="h5">No hay datos para mostrar</span></td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
+        <mat-paginator
+            [length]="paginate.length"
+            [pageIndex]="paginate.pageIndex"
+            [pageSize]="paginate.pageSize"
+            showFirstLastButtons
+            (page)="changePage($event)">
+        </mat-paginator>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spInspectores"></cc-spiner-procesar>

@@ -1,0 +1,44 @@
+<app-button-radio-active-new titulo="Nuevo Registro para Notificaciones" 
+cstyle="bg-gradient-primary text-white"
+icono="fas fa-users"
+    filtroBoton="btnsAlertasModal" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="row m-0">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Informacion</legend>
+                <div class="row m-0">
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Modulo" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [(ngModel)]="registro.fk_modulo" [clearable]="true" (change)="handleSelectModulo($event)"
+                                [items]="lst_modulo" bindValue="id_modulo" bindLabel="nombre">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Tipo Alerta" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [(ngModel)]="registro.fk_tipo_alerta" [clearable]="true" (change)="handleSelectTipo($event)"
+                                [items]="lst_tipo_filter" bindValue="id_catalogo" bindLabel="descripcion">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" readonly class="form-control" [(ngModel)]="registro.nombre" (click)="searchUsuario()">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-primary" (click)="searchUsuario()">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spAlertasModal"></cc-spiner-procesar>

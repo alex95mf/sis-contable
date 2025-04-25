@@ -1,0 +1,40 @@
+<app-button-radio-active-new titulo="Nueva Unidad de Medida" cstyle="bg-light" icono="fas fa-ruler"
+    filtroBoton="btnsModalUdm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" (selectedTabChange)="handleType($event)">
+        <mat-tab label="Simple">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Unidad de Medida" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" [(ngModel)]="unidad_medida.texto">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Compuesta">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Unidad Primaria" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" appendTo="body" [ngModel]="unidad_medida.id_unidad_primaria" (change)="handleSelectPrimaria($event)"
+                                [items]="cmb_unidad_primaria" bindValue="id_catalogo" bindLabel="valor" [clearable]="false"></ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Cantidad" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" [(ngModel)]="unidad_medida.cantidad">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Unidad Secundaria" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" appendTo="body" [ngModel]="unidad_medida.id_unidad_secundaria" (change)="handleSelectSecundaria($event)"
+                            [items]="cmb_unidad_secundaria" bindValue="id_catalogo" bindLabel="valor" [clearable]="false"></ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalUdm"></cc-spiner-procesar>

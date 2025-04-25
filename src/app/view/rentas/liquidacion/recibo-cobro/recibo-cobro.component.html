@@ -1,0 +1,493 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-money-check-edit-alt"
+filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+<div class="row mt-2 mb-3">
+    <div class="col-3"></div> 
+    <div class="col-6">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Contribuyente</span></div>
+            <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Contribuyente" (click)="expandListContribuyentes()" [value]="contribuyenteActive.razon_social">
+            <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="col-3"></div> 
+    <!-- <div class="col-4">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Concepto</span></div>
+            <ng-select [disabled]=" formReadOnly || conDisabled" id="concepto" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="concepto" (change)="handleConcepto()">
+                <ng-option disabled [value]="0">Seleccione un Concepto</ng-option>
+                <ng-option *ngFor="let c of conceptosList" [value]="c">{{ c.codigo }} - {{ c.nombre }}</ng-option>
+            </ng-select>
+        </div>
+    </div> -->
+</div>
+
+<div class="row mt-2 mb-3">
+    <div class="col-4">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">No. Documento</span></div>
+            <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="documento.documento">
+        </div>
+    </div>
+    <!-- col-1.425 -->
+    <div class="col-1" style="width: 11.87025%;
+    flex: 0 0 11.87025%;max-width: 11.87025%;">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span  class="input-group-text font-weight-bold">No.</span></div>
+            <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="documento.id_liquidacion">
+        </div>
+    </div>
+    <!-- col-2.675 -->
+    <div class="col-3" style="width: 21.4575%;
+    flex: 0 0 21.4575%;max-width: 21.4575%;">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold">Fecha</span></div>
+            <input disabled type="date" class="form-control form-control-sm" [(ngModel)]="documento.fecha">
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Estado</span></div>
+            <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                <i
+                    placement="bottom"
+                    [ngbTooltip]="(documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado')" 
+                    [class]="(documento.estado == 'P') ? 'fas fa-circle text-muted' : (documento.estado == 'E') ? 'fas fa-circle text-warning' : ((documento.estado == 'A') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
+                </i>
+                {{ (documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado') }}
+            </div>
+            <!--<input type="text" class="form-control form-control-sm font-weight-bold" [class]="liquidacion.estado == 'E' ? 'text-warning' : (liquidacion.estado == 'A' ? 'text-success' : (liquidacion.estado == 'X' ? 'text-danger' : ''))" readonly 
+            value="{{ liquidacion.estado == 'E' ? 'Emitido' : (liquidacion.estado == 'A' ? 'Aprobado' : (liquidacion.estado == 'X' ? 'Anulado' : '')) }}">-->
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2 mb-3">
+    <div class="col-8">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold text-white" style="width: 155px; background-color: #404A62;">Observaciones</span></div>
+            <textarea cols="30" rows="3" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="documento.observacion"></textarea>
+        </div>
+    </div>
+    <!-- <div class="col-4">
+        <div class="input-group input-group-sm mb-2">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">No. Resolución</span></div>
+            <input disabled type="text" maxlength="20" class="form-control form-control-sm" [readonly]="observacionesDisabled || formReadOnly" [(ngModel)]="liquidacion.resolucion_numero">
+        </div>
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Fecha Resolución</span></div>
+            <input disabled type="date" class="form-control form-control-sm" [readonly]="observacionesDisabled || formReadOnly" [(ngModel)]="liquidacion.resolucion_fecha">
+          </div> -->
+</div>
+
+<div class="row mt-2 mb-1 align-items-center">
+    <div class="col">
+        <h5 class="mb-0 text-dark">Detalles de liquidaciones</h5>
+    </div>
+    <div class="col text-right">
+        <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" [disabled]="titulosDisabled || formReadOnly">
+            <i class="fas fa-plus"></i>
+        </button>
+        <!-- <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto"  (click)="expandConceptos()" [disabled]="conceptosDisabled || formReadOnly">
+            <i class="fas fa-plus"></i>
+        </button> -->
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-bordered no-footer table-hover mb-0">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th style="width: 5%;">Concepto</th>
+                        <th style="width: 15%;">No. de Documento</th>
+                        <th style="width: 20%;">Comentario</th>
+                        <th class="text-right" style="width: 10%;">Valor total</th>
+                        <th class="text-right" style="width: 10%;">Saldo actual</th>
+                        <th class="text-right" style="width: 10%;">Valor a pagar</th>
+                        <th class="text-right" style="width: 10%;">Saldo restante</th>
+                        <th style="width: 10%;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="deudas.length == 0">
+                        <td colspan="8" class="text-center"><h6 class="my-1">No hay deudas registradas</h6></td>
+                    </tr>
+                    <ng-container *ngFor="let d of deudas, let i = index">
+                        <tr >
+                            <td class="text-center">{{ d.tipo_documento }}</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">{{ d.numero_documento }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-muted"><small>{{ d.concepto ? d.concepto.nombre : 'NA' }}</small></div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="input-group input-group-sm">
+                                    
+                                    <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                </div>
+                            </td>
+                            <td class="text-right">$ {{ d.valor }}</td>
+                            <td class="text-right">$ {{ d.saldo }}</td>
+                            <td class="text-right">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
+                                    <input type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.cobro" (keypress)="onlyNumberDot($event)" (keyup)="restar(d)">
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
+                                    <input type="text" class="form-control form-control-sm text-right" [(ngModel)]="d.nuevo_saldo" readonly>
+                                </div>
+                            </td>
+                    
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+      
+                    </ng-container>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row my-2 justify-content-end">
+    <div class="col-6">
+        <div class="input-group input-group-lg input-group-subtotal">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Valor a pagar</span></div>
+            <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalCobro | number: '1.2-2' }}">
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3 mb-1 align-items-center">
+    <div class="col">
+        <h5 class="mb-0 text-dark">Formas de pago</h5>
+    </div>
+</div>
+
+<div class="row my-2">
+    <div class="col-4 ml-1">
+        
+        <div class="input-group input-group-sm">
+            
+            <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Formas de pago</span></div>
+            <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="formaPago" [clearable]="false" >
+                <ng-option [value]="0" disabled>Seleccione una forma de pago</ng-option>
+                <ng-option *ngFor="let op of formasDePago" [value]="op.nombre">{{ op.nombre }}</ng-option>
+            </ng-select>
+            <div class="col-1"></div>
+            <button [disabled]="formReadOnly || titulosDisabled" class="btn btn-sm btn-success" ngbTooltip="Agregar método de pago" (click)="agregaPagos()"><i class="fas fa-plus"></i></button>
+        </div>
+    </div>
+
+</div>
+
+<div class="row mb-2">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-bordered no-footer table-hover mb-0">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th style="width: 15%;">Forma de pago</th>                    
+                        <th style="width: 30%;">Comentario</th>
+                        <th style="width: 25%;">Documento</th>
+                        <th class="text-right" style="width: 15%;">Valor</th>
+                        <th style="width: 15%;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="pagos.length == 0">
+                        <td colspan="5" class="text-center"><h6 class="my-1">No hay formas de pago</h6></td>
+                    </tr>
+                    <ng-container *ngFor="let d of pagos, let i = index">
+                        <tr >
+                            <td class="text-center">{{ d.tipo_pago }}</td>
+                            <td class="text-center">
+                                <div class="input-group input-group-sm">
+                                    
+                                    <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="input-group input-group-sm">
+                                    
+                                    <input type="text" maxlength="30" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
+                                </div>
+                            </td>
+                            <td class="text-right">                                
+                                <div class="input-group input-group-sm">             
+                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>                       
+                                    <input type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="titulosDisabled || formReadOnly" (click)="removeFormaPago(i)"><i class="far fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row my-2 justify-content-end">
+    <div class="col-6">
+        <div class="input-group input-group-lg input-group-total">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Valor pagado</span></div>
+            <input id="pagoTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalPago | number: '1.2-2' }}">
+        </div>
+    </div>
+</div>
+
+<div class="row my-2 justify-content-end">
+    <div class="col-6">
+        <div class="input-group input-group-lg input-group-descuentos">
+            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">Diferencia</span></div>
+            <input id="difTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ difCobroPago | number: '1.2-2' }}">
+        </div>
+    </div>
+</div>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renLiqAnulacion"></cc-spiner-procesar>
+
+
+<div id="PrintSection" [hidden]="true">
+    <div class="row justify-content-center prt-comprobante">
+
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Documento: {{ documento.documento }}</h3>
+                                <h3>Fecha: {{ documento.fecha | date: 'dd/MM/yyyy' }}</h3>
+                                <h3>Estado: {{ (documento.estado == 'P') ? 'Pendiente' : documento.estado == 'E' ? 'Emitido' : (liquidacion.estado == 'A' ? 'Aprobado' : 'Anulado')}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <div class="row justify-content-center prt-comprobante">
+
+        <div class="col-11 pl-2 pr-2">
+             
+                        
+            <div class="row mt-2 mb-1 align-items-center">
+                <div class="col">
+                    <h5 class="mb-0 text-dark">Detalles de liquidaciones</h5>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" [disabled]="titulosDisabled || formReadOnly">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <!-- <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Concepto"  (click)="expandConceptos()" [disabled]="conceptosDisabled || formReadOnly">
+                        <i class="fas fa-plus"></i>
+                    </button> -->
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered no-footer table-hover mb-0">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th style="width: 5%;">Concepto</th>
+                                    <th style="width: 15%;">No. de Documento</th>
+                                    <th style="width: 20%;">Comentario</th>
+                                    <th class="text-right" style="width: 10%;">Valor total</th>
+                                    <th class="text-right" style="width: 10%;">Saldo actual</th>
+                                    <th class="text-right" style="width: 10%;">Valor a pagar</th>
+                                    <th class="text-right" style="width: 10%;">Saldo restante</th>
+                                    <th style="width: 10%;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="deudas.length == 0">
+                                    <td colspan="8" class="text-center"><h6 class="my-1">No hay deudas registradas</h6></td>
+                                </tr>
+                                <ng-container *ngFor="let d of deudas, let i = index">
+                                    <tr >
+                                        <td class="text-center">{{ d.tipo_documento }}</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col">{{ d.numero_documento }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col text-muted"><small>{{ d.concepto ? d.concepto.nombre : 'NA' }}</small></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="input-group input-group-sm">
+                                                
+                                                <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                            </div>
+                                        </td>
+                                        <td class="text-right">$ {{ d.valor }}</td>
+                                        <td class="text-right">$ {{ d.saldo }}</td>
+                                        <td class="text-right">
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
+                                                <input type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.cobro" (keypress)="onlyNumberDot($event)" (keyup)="restar(d)">
+                                            </div>
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
+                                                <input type="text" class="form-control form-control-sm text-right" [(ngModel)]="d.nuevo_saldo" readonly>
+                                            </div>
+                                        </td>
+                                
+                                        <td class="text-center">
+                                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                
+                                </ng-container> 
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-2 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-subtotal">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Valor a pagar</span></div>
+                        <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalCobro | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3 mb-1 align-items-center">
+                <div class="col">
+                    <h5 class="mb-0 text-dark">Formas de pago</h5>
+                </div>
+            </div>
+
+            <div class="row my-2">
+                <div class="col-4 ml-1">
+                    
+                    <div class="input-group input-group-sm">
+                        <button class="btn btn-sm btn-success" (click)="agregaPagos()"><i class="fas fa-plus"></i></button>
+                        <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Formas de pago</span></div>
+                        <ng-select class="form-control" [(ngModel)]="formaPago" [clearable]="false" >
+                            <ng-option [value]="0" disabled>Seleccione una forma de pago</ng-option>
+                            <ng-option *ngFor="let op of formasDePago" [value]="op.nombre">{{ op.nombre }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered no-footer table-hover mb-0">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th style="width: 15%;">Forma de pago</th>                    
+                                    <th style="width: 30%;">Comentario</th>
+                                    <th style="width: 25%;">Documento</th>
+                                    <th class="text-right" style="width: 15%;">Valor</th>
+                                    <th style="width: 15%;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="pagos.length == 0">
+                                    <td colspan="5" class="text-center"><h6 class="my-1">No hay formas de pago</h6></td>
+                                </tr>
+                                <ng-container *ngFor="let d of pagos, let i = index">
+                                    <tr >
+                                        <td class="text-center">{{ d.tipo_pago }}</td>
+                                        <td class="text-center">
+                                            <div class="input-group input-group-sm">
+                                                
+                                                <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="input-group input-group-sm">
+                                                
+                                                <input type="text" maxlength="30" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
+                                            </div>
+                                        </td>
+                                        <td class="text-right">                                
+                                            <div class="input-group input-group-sm">             
+                                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>                       
+                                                <input type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover forma de pago" [disabled]="titulosDisabled || formReadOnly" (click)="removeFormaPago(i)"><i class="far fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-2 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-subtotal">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Valor pagado</span></div>
+                        <input id="pagoTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalPago | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-2 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-subtotal">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">Diferencia</span></div>
+                        <input id="difTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ difCobroPago | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        
+    </div>
+
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed; bottom: 0px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Fecha: {{ documento.fecha }}</span>
+        </div>
+        <div *ngIf="dataUser" class="col-12 text-left" style="position: fixed; bottom: 20px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Usuario: {{ dataUser.nombre }}</span>
+        </div>
+    </div>
+</div>

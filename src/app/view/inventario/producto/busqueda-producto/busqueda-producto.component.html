@@ -1,0 +1,351 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="BUSQUEDA DE PRODUCTO" filtroBoton="btnBusqProducto" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-search">
+        <div class="row mt-2">
+            <div class="col-sm-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Producto</span>
+                    </div>
+                    <ng-select id="idProveedor" class="form-control beautifulNgSel" [searchable]="true" [clearable]="false" [(ngModel)]="producto" (ngModelChange)="filterProducto($event)">
+                        <ng-option [value]="0">
+                            Seleccione Producto
+                        </ng-option>
+                        <ng-option *ngFor="let d of products" [value]="d.id_producto">
+                            {{ d.nombre }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Producto Genérico</span>
+                    </div>
+                    <ng-select id="idProveedor" class="form-control beautifulNgSel" [searchable]="true" [clearable]="false" [(ngModel)]="generico" (ngModelChange)="filterGenerico($event)">
+                        <ng-option [value]="0">
+                            Seleccione Génerico
+                        </ng-option>
+                        <ng-option *ngFor="let d of products" [value]="d.generico">
+                            {{ d.generico }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Marca Producto</span>
+                    </div>
+                    <ng-select id="idProveedor" class="form-control beautifulNgSel" [searchable]="true" [clearable]="false" [(ngModel)]="marca" (ngModelChange)="filterMarca($event)">
+                        <ng-option [value]="0">
+                            Seleccione Marca
+                        </ng-option>
+                        <ng-option *ngFor="let d of marcas" [value]="d.marca">
+                            {{ d.marca }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Precio</span>
+                    </div>
+                    <ng-select id="idPrecio" class="form-control beautifulNgSel" [searchable]="true" [clearable]="false" [(ngModel)]="precio" (ngModelChange)="searchPrecio($event)">
+                        <ng-option [value]="0">
+                            Seleccione un Precio
+                        </ng-option>
+                        <ng-option *ngFor="let d of dataPrecio" [value]="d.reference">
+                            {{ d.name_ref }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center m-2">
+            <div class="col-12 filters pl-2 pr-2 ">
+                <div class="row justify-content-center">
+                    <div class="col-12 pl-3 pr-3 ">
+                        <div class="table-responsive responsive-table mt-2">
+                            <table datatable id="idTablesearchProduct" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                                <thead>
+                                    <tr class="text-center" style="width: 100%;">
+                                        <!-- <th rowspan="2" style="width: 4%" class="border-left border-right">#</th> -->
+                                        <th rowspan="2" style="width: 10%" class="border-left border-right">Codigo</th>
+                                        <th rowspan="2" style="width: 32%;text-transform: uppercase" class="border-right">Nombre</th>
+                                        <th rowspan="2" style="width: 10%" class="border-right">Marca</th>
+                                        <th colspan="2" style="width: 20%" class="border-right">Stock</th>
+                                        <th colspan="2" style="width: 20%" class="border-right">Precio</th>
+                                        <th rowspan="1" colspan="1" style="width: 8%" class="border-right"></th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center;border-right: 1px solid;width: 10%">Actual</th>
+                                        <th style="text-align: center;border-right: 1px solid;width: 10%">Tránsito</th>
+                                        <th style="text-align: center;border-right: 1px solid;width: 10%">Actual</th>
+                                        <th style="text-align: center;border-right: 1px solid;width: 10%">Mínimo</th>
+                                        <th rowspan="1" colspan="1" class="border-right text-center">Precio Oferta</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDtUser">
+                                    <tr class="text-justify" *ngFor="let dt of guardarolT; let i = index" (click)="informacionProduct(dt) " placement="top" ngbTooltip="Click para ver más" style="cursor:pointer">
+                                        <!-- <td class="text-center">{{ i + 1 }}</td> -->
+                                        <td class="text-left">{{dt.codigoProducto}}</td>
+                                        <td class="text-left">{{dt.nombre}}</td>
+                                        <td class="text-center">{{dt.marca}}</td>
+                                        <!--actual stock-->
+                                        <td class="text-center">{{formatNumber(dt.stock)}}</td>
+                                        <!--Tránsito stock-->
+                                        <td class="text-center">{{formatNumber(dt.enTransitoLocal)}}</td>
+                                        <!--actual precio-->
+                                        <td class="text-right" *ngIf="precio == 0 ">${{formatNumber(dt.pvp_ant) }}</td>
+                                        <!--actual precio-->
+                                        <td class="text-right" *ngIf="precio !== 0 && dt.PvpSearch">${{formatNumber(dt.PvpSearch) }}</td>
+                                        <!--actual precio-->
+                                        <td class="text-right" *ngIf="precio !== 0  && dt.precio1Search ">${{formatNumber(dt.precio1Search)}}</td>
+                                        <!--actual precio-->
+                                        <td class="text-right" *ngIf="precio !== 0  && dt.precio2Search ">${{formatNumber(dt.precio2Search)}}</td>
+                                        <!--actual precio-->
+                                        <td class="text-right" *ngIf="precio !== 0  && dt.precio3Search ">${{formatNumber(dt.precio3Search) }}</td>
+                                        <!--actual precio-->
+                                        <td class="text-right" *ngIf="precio !== 0  && dt.precio4Search ">${{formatNumber(dt.precio4Search)}}</td>
+                                        <!--actual precio-->
+                                        <td class="text-right" *ngIf="precio !== 0  && dt.precio5Search">${{formatNumber(dt.precio5Search)}}</td>
+                                        <!--minimo precio-->
+                                        <td class="text-right">${{formatNumber(dt.minimo)}}</td>
+                                        <td class="text-right">${{formatNumber(dt.precioferta)}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spBusProducto"></cc-spiner-procesar>
+<!-- Modal -->
+<div class="modal fade modalSeachProduct " id="modalSeachProduct" tabindex="-1 " role="dialog " aria-labelledby="myLargeModalLabel " aria-hidden="true ">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document " role="document" style="padding-top: 20px;padding-bottom: 20px;">
+        <div class="modal-content ">
+            <div class="modal-body ">
+                <app-button-radio-active titulo="Detalle Producto" cstyle="bg-gradient-primary text-white" filtroBoton="btnRepCtasBacnT" [groupButton]="vmButtonsT" (onMetodoGlobal)="metodoGlobalT($event)" icono="far fa-file-alt">
+                    <div class="row justify-content-center ">
+                        <div class="col-md-12 ">
+                            <!--Tabs--->
+                            <div class="container-fluid mt-4">
+                                <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item nav-label">
+                                        <a class="nav-link active" id="pills-contabilidad-tab" data-toggle="pill" href="#pills-contabilidad" role="tab" aria-controls="pills-contabilidad" aria-selected="false">DETALLE</a>
+                                    </li>
+                                    <li class="nav-item nav-label">
+                                        <a class="nav-link" id="pills-anexos-tab" data-toggle="pill" href="#pills-anexos" role="tab" aria-controls="pills-anexos" aria-selected="false">IMAGENES</a>
+                                    </li>
+                                    <li class="nav-item nav-label">
+                                        <a class="nav-link " id="pills-formula-tab" data-toggle="pill" href="#pills-formula" role="tab" aria-controls="pills-formula" aria-selected="false">DOCUMENTOS</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content mb-3" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-contabilidad" role="tabpanel" aria-labelledby="pills-contabilidad-tab">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <app-cc-input-group-prepend label="Codigo" styleSpan="size-span-campo">
+                                                <input placeholder="" type="text" class="form-control" [(ngModel)]="click.codigo" disabled>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <app-cc-input-group-prepend label="Número de Parte" styleSpan="size-span-campo">
+                                                <input placeholder="" type="text" class="form-control" [(ngModel)]="click.codigoParte" disabled>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <app-cc-input-group-prepend label="Procedencia" styleSpan="size-span-campo">
+                                                <input placeholder="" type="text" class="form-control" [(ngModel)]="click.procedencia" disabled>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo">
+                                                <input placeholder="" type="text" class="form-control" [(ngModel)]="click.nombre" disabled>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <app-cc-input-group-prepend label="Stock Actual" styleSpan="size-span-campo">
+                                                <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="click.stockActual" disabled>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <app-cc-input-group-prepend label="Marca" styleSpan="size-span-campo">
+                                                <input placeholder="" type="text" class="form-control " [(ngModel)]="click.marca" disabled>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <app-cc-input-group-prepend label="Modelo" styleSpan="size-span-campo">
+                                                <input placeholder="" type="text" class="form-control" [(ngModel)]="click.modelo" disabled>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <app-cc-input-group-prepend label="Stock en Transito" styleSpan="size-span-campo">
+                                                <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="click.stockTran" disabled>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <app-cc-input-group-prepend label="Color" styleSpan="size-span-campo">
+                                                <input placeholder="" type="text" class="form-control" [(ngModel)]="click.color" disabled>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <app-cc-input-group-prepend label="Presentación" styleSpan="size-span-campo">
+                                                <input placeholder="" type="text" class="form-control" [(ngModel)]="click.presentacion" disabled>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <app-cc-input-group-prepend label="Cantidad Reservada" styleSpan="size-span-campo">
+                                                <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="click.cantReservada" disabled>
+                                            </app-cc-input-group-prepend>
+                                        </div>
+                                    </div>
+                                    <fieldset class="p-2 mb-1 mt-2">
+                                        <legend class="w-auto h6">Precios</legend>
+                                        <div class="row ">
+                                            <div class="col-sm-4">
+                                                <div class="input-group input-group-sm mt-1">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">PVP</span>
+                                                    </div>
+                                                    <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="'$' + click.consumidor" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group input-group-sm mt-1">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fijo</span>
+                                                    </div>
+                                                    <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="'$' + click.fijo" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group input-group-sm mt-1">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Concurrente</span>
+                                                    </div>
+                                                    <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="'$' + click.concurrente" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-1">
+                                            <div class="col-sm-4">
+                                                <div class="input-group input-group-sm">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Minorista</span>
+                                                    </div>
+                                                    <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="'$' + click.minorista" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group input-group-sm">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Medio</span>
+                                                    </div>
+                                                    <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="'$' + click.medio" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group input-group-sm">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Mayorista</span>
+                                                    </div>
+                                                    <input placeholder="" type="text" class="form-control text-right" [(ngModel)]="'$' + click.mayorista" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-1">
+                                            <div class="col-sm-12">
+                                                <div class="input-group pt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" style="background-color: #404a63; color: white;" placeholder="Ingrese observación">Observación</span>
+                                                    </div>
+                                                    <textarea placeholder="" type="text" class="form-control" [(ngModel)]="click.observacion" disabled style="height:60px;"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="tab-pane fade" id="pills-anexos" role="tabpanel" aria-labelledby="pills-anexos-tab">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <fieldset class="p-2 mb-1 mt-2">
+                                                        -
+                                                        <legend class="w-auto h6">Imagenes</legend>
+                                                        <app-imagenes [data_imagenes]="dataConsultarDocumento" *ngIf="dataConsultarDocumento != undefined">
+                                                        </app-imagenes>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <fieldset class="p-2 mt-2">
+                                                        <legend class="w-auto h6">Vista de Imagen</legend>
+                                                        <!--   <ngx-doc-viewer [url]="general" viewer="url" style="width:100%;height:44vh;"></ngx-doc-viewer> -->
+                                                        <div *ngIf="ext == '.png' || ext == '.jpg' || ext == '.jpeg'">
+                                                            <ngx-doc-viewer [url]="general" viewer="url" style="width:100%;height:50vh;">
+                                                            </ngx-doc-viewer>
+                                                        </div>
+                                                        <!--<div *ngIf="ext == '.png' || ext == '.jpg' || ext == '.jpeg'">
+                                     <ngx-doc-viewer [url]="general" viewer="url" style="width:100%;height:44vh;">
+                                     </ngx-doc-viewer>
+                                     </div>
+                                     <div *ngIf="ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg'">
+                                     <ngx-doc-viewer [url]="general" viewer="google" style="width:100%;height:50vh;">
+                                     </ngx-doc-viewer>
+                                     </div> -->
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                            <fieldset class="p-2 mb-1 mt-2">
+                                                <legend class="w-auto h6">Descripción del producto</legend>
+                                                <div class="input-group pt-2">
+                                                    <textarea placeholder="" type="text" class="form-control" [(ngModel)]="description" disabled style="height:70px;"></textarea>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-formula" role="tabpanel" aria-labelledby="pills-formula-tab">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <fieldset class="p-2 mb-1 mt-2">
+                                                <legend class="w-auto h6">Documentos</legend>
+                                                <app-document [data_documento]="dataConsultarDocumento" *ngIf="dataConsultarDocumento != undefined">
+                                                </app-document>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <fieldset class="p-2 mt-2">
+                                                <legend class="w-auto h6">Presentación de Documento</legend>
+                                                <div *ngIf="ext == '.pdf' ">
+                                                    <ngx-doc-viewer [url]="general" viewer="url" style="width:100%;height:50vh;">
+                                                    </ngx-doc-viewer>
+                                                </div>
+                                                <!-- <div *ngIf="ext !== '.pdf'">
+                               <ngx-doc-viewer [url]="general" viewer="google" style="width:100%;height:50vh;">
+                               </ngx-doc-viewer>
+                               </div> -->
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </app-button-radio-active>
+            </div>
+        </div>

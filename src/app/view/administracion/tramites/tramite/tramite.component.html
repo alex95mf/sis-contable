@@ -1,0 +1,413 @@
+
+    <app-button-radio-active-new [titulo]="fTitle" filtroBoton="btnsTicket" 
+    cstyle="bg-gradient-primary text-white" 
+
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
+
+
+
+
+
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Nuevo Tramite</legend>
+            <div class="row m-0">
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    
+                        <app-cc-input-group-prepend label="Trámite" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.fk_tipo_flujo" [disabled]="disabledCampos" (change)="changeTipoTramite($event)" maxlength="5">
+                                <ng-option disabled [value]="0">Seleccione un tramite</ng-option>
+                                <ng-option *ngFor="let op of tareas" [value]="op">{{ op.nombre }}</ng-option>
+                            </ng-select>
+
+                        </app-cc-input-group-prepend>
+
+                   
+                </div> 
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Tipo de Tramite" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="subcategoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.tipo"  maxlength="5" disabled>
+                            <ng-option disabled [value]="0">Seleccione el tipo de tramite.. </ng-option>
+                            <ng-option [value]="'I'">Interno</ng-option>
+                            <ng-option [value]="'E'">Externo</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Prioridad" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketNew.prioridad"  maxlength="5" disabled>
+                            <ng-option disabled [value]="0">Seleccione una Prioridad</ng-option>
+                            <ng-option *ngFor="let op of prioridadList" [value]="op.value">{{ op.label }}</ng-option>
+                        </ng-select>
+
+                    </app-cc-input-group-prepend>
+
+                </div>
+            </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="No.Trámite" styleSpan="size-span-campo font-weight-bold">
+                            <input [disabled]="disabledCampos" readonly type="text" class="form-control form-control-sm" [(ngModel)]="ticketNew.nro_tramite">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                            <input [disabled]="disabledCampos" class="form-control" [(ngModel)]="ticketNew.fk_contribuyente"/>
+                            <div>
+                                <button [disabled]="disabledCampos" class="btn btn-primary btn-sm" (click)="modalContirbuyente()"><i class="fas fa-search"></i></button>
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        
+                            <button class="btn btn-primary" (click)="showRegContribuyente()"><i class="fas fa-user"></i>Registrar Contribuyente</button>
+                     
+
+                    </div>
+
+
+
+                </div>
+
+        
+
+
+                
+               
+     
+            <div class="row m-0">
+                <div class="col-12 col-md-12 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo font-weight-bold">
+                        <textarea [disabled]="disabledCampos" id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketNew.observacion" [disabled]="deshabilitar" maxlength="300"></textarea>
+                    </app-cc-input-group-prepend>
+ 
+                </div>
+                
+            </div>
+
+            <div class="row m-0">
+                <div class="col-12 col-md-12 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Información Adicional" styleSpan="size-span-campo font-weight-bold">
+                        <textarea [disabled]="disabledCampos" id="observacion" type="text" class="form-control form-control-sm" placeholder="Información Adicional" [(ngModel)]="ticketNew.informacion_adicional" [disabled]="deshabilitar" maxlength="300"></textarea>
+                    </app-cc-input-group-prepend>
+ 
+                </div>
+                
+            </div>
+
+
+
+            <div class="row m-0">
+
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Anexos" styleSpan="size-span-campo font-weight-bold">
+
+                        <div class="custom-file">
+                            <input [disabled]="disabledCampos" type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)">
+                            <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
+                        </div>
+                    </app-cc-input-group-prepend>
+
+ 
+                    <!-- <div class="row">
+                      <div class="col">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                            (change)="cargaArchivo($event.target.files)">
+                          <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name :
+                            "Seleccione un archivo" }}</label>
+                        </div>
+                      </div>
+                     
+                    </div> -->
+                    
+
+
+                </div>
+
+                
+    
+            </div>
+
+        </fieldset>
+
+
+
+        
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Filtros</legend>
+            <div class="row m-0">
+
+                <div class="col-12 col-md-3 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="No. Tramite" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_nro_tramite" type="text" class="form-control" [(ngModel)]="filter.nro_tramite">
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+                <div class="col-12 col-md-3 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="No. Doc" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.num_documento">
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+
+
+                <div class="col-12 col-md-3 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.razon_social">
+                    </app-cc-input-group-prepend>
+
+                </div>
+                <div class="col-12 col-md-3 pt-0 pb-0 text-right">
+                    <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="cargarTickets()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+
+                </div>
+
+
+            </div>
+<div class="row m-0">
+    <div class="col-12 col-md-3 pt-0 pb-0">
+        <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+
+            <input id="filter_fecha_desde" type="date" class="form-control" [(ngModel)]="filter.fecha_desde" max="2050-01-01">
+        </app-cc-input-group-prepend>
+    </div>
+
+    <div class="col-12 col-md-3 pt-0 pb-0">
+        <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+
+            <input id="filter_fecha_hasta" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" max="2050-01-01">
+        </app-cc-input-group-prepend>
+    </div>
+
+       <div class="col-12 col-md-3 pt-0 pb-0">
+        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+            <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="filter.estado"  [clearable]="false">
+                <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+            </ng-select>
+            
+        </app-cc-input-group-prepend>
+    </div>
+
+
+</div>
+
+<div class="row m-0">
+    <div class="col-12 col-md-6 pt-0 pb-0">
+        <app-cc-input-group-prepend label="Trámite" styleSpan="size-span-campo font-weight-bold">
+            <ng-select id="categoria" class="form-control form-control-sm"   [(ngModel)]="filter.tarea" [clearable]="false">
+                <ng-option disabled [value]="0" disabled>Seleccione una Categoria</ng-option>
+                <ng-option *ngFor="let op of tareas" [value]="op.id_flujo">{{op.nombre }}</ng-option>
+            </ng-select>
+
+        </app-cc-input-group-prepend>
+
+    </div>
+    <div class="col-12 col-md-6 pt-0 pb-0">
+        <app-cc-input-group-prepend label="Tipo de Trámite" styleSpan="size-span-campo font-weight-bold">
+            <ng-select id="sub_categoria" class="form-control form-control-sm"   [(ngModel)]="filter.tipo_tramite" [clearable]="false">
+                <ng-option disabled [value]="0" disabled>Seleccione una tabla</ng-option>
+                <ng-option  [value]="'I'">Interno</ng-option>
+                <ng-option  [value]="'E'">Externo</ng-option>
+            </ng-select>
+
+        </app-cc-input-group-prepend>
+    </div>
+
+</div>
+<div class="row m-0">
+
+</div>
+<div class="row m-0">
+    <div class="col-12 col-md-4 pt-0 pb-0">
+        <p-checkbox 
+        class="font-weight-bold"
+        style="color:#5c6873"
+        label="¿Tiene Hito?:" 
+        binary="true" 
+        [(ngModel)]="isHito"
+        (ngModelChange) ="selectedHito($event)">
+        </p-checkbox>
+    </div>
+</div>
+
+
+
+
+            </fieldset>
+        <div *ngIf="!isHito" class="row m-0">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                <!-- <th style="width: 5%;">Id</th> -->
+                                <th style="width: 12%;">No. Trámite</th>
+                                <th style="width: 15%;">Contribuyente</th>
+                                <th style="width: 20%;">Nombre Trámite</th> 
+                                <!-- <th style="width: 10%;">Fecha</th> -->
+                                <th style="width: 20%;">Observaci&oacute;n</th>
+                                <!-- <th style="width: 15%;">Es Hito</th> -->
+                                <th style="width: 8%;">Estado</th>
+                                <th style="width: 5%;">Prioridad</th>
+                                <th style="width: 5%;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="ticketsDt.length == 0">
+                                <td colspan="10" class="text-center"><h6 class="my-1"></h6>No hay Trámites para mostrar</td>
+                            </tr>
+                            <tr *ngFor="let dt of ticketsDt, let i = index">
+                                <!-- <td class="text-center">{{ dt.id_tramite }}</td> -->
+                                <td class="text-center">{{ dt.nro_tramite }}</td>
+                                <td>
+                                    {{ dt.contribuyente[0].razon_social }}<br>
+                                    <div class="row ml-1">
+                                        <small class="col text-muted"><span style="font-size: 13px;" class="font-weight-bold">{{ dt.contribuyente[0].tipo_documento }} : </span>{{ dt.contribuyente[0].num_documento }}</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    {{ dt.flujo == null ? 'No tiene flujo' : dt.flujo.nombre }}<br>
+                                    <span style="font-size: 13px;"><small class="col text-muted"><span class="font-weight-bold">Tipo trámite : </span>{{dt.tipo == 'I' ? 'Interno' : 'Externo' }}</small></span><br>
+                                    <span style="font-size: 13px;"><small class="col text-muted"><span class="font-weight-bold">Fecha : </span>{{dt.fecha }}</small></span>
+                                   </td>
+                                <!-- <td class="text-center">{{ dt.fecha }}</td> -->
+                                <!-- <td class="text-center">{{dt.flujo == null ? 'No tiene flujo' : dt.flujo.nombre}}</td> -->
+                                <td class="text-center text-justify text-break">{{ dt.observacion }}</td>
+                                <!-- <td class="text-center">
+                                    <div *ngFor="let fp of dt.flujo_pasos">
+                                       <span class="font-weight-bold">Paso:</span>{{fp.nro_paso}} | <span class="font-weight-bold">Hito:</span>{{ fp.hito == 'S' ? 'Si' : (  fp.hito == 'N' ? 'No': '') }}
+                                    </div>
+                                </td> -->
+                                <td class="text-center"><i placement="bottom" [ngbTooltip]="dt.estado == 'P' ? 'Pendiente' : dt.estado == 'G' ? 'Gestion' : 'Cerrado'" 
+                                    [class]="dt.estado == 'P' ? 'fas fa-circle text-primary' : dt.estado == 'C' ? 'fas fa-circle text-danger' : 'fas fa-circle text-success'"></i>
+                                    {{dt.estado == 'P' ? 'Pendiente' : dt.estado == 'C' ? 'Cerrado' : 'Gestión'}}
+                                </td>
+                                
+                                
+                                <td class="text-center"><i placement="bottom" [ngbTooltip]="dt.prioridad == 'A' ? 'Alta' : dt.prioridad == 'M' ? 'Media' : 'Baja'" 
+                                    [class]="dt.prioridad == 'A' ? 'fas fa-circle text-danger' : dt.prioridad == 'M' ? 'fas fa-circle text-warning' : 'fas fa-circle text-success'"></i>
+                                    {{dt.prioridad == 'A' ? 'Alta' : dt.prioridad == 'M' ? 'Media' : 'Baja'}}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-primary btn-sm mx-1" (click)="showTicketForm(false, dt)" placement="left" ngbTooltip="Ver Tramite">
+                                        <i class="far fa-eye "></i>
+                                    </button>
+                                    <button *ngIf="dt.estado=='C'" class="btn btn-sm btn-danger mx-1" title="Descargar PDF" (click)="descargarPdf(dt)">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <mat-paginator showFirstLastButtons
+                                   [length]="paginate.length"
+                                   [pageSize]="paginate.perPage"
+                                   [pageSizeOptions]="paginate.pageSizeOptions"
+                                   (page)="changePaginate($event)"
+                                   aria-label="Select page">
+                    </mat-paginator>
+                </div>
+  
+            </div>
+        </div>
+        <div *ngIf="isHito" class="row m-0">
+            <div class="col-12" style="overflow-x:auto;">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-k table-hover"  style="min-width: 1900px;max-height: 300px;"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                <!-- <th style="width: 5%;">Id</th> -->
+                                <th>No. Trámite</th>
+                                <th>Contribuyente</th>
+                                <th>Nombre Trámite</th> 
+                                <!-- <th style="width: 10%;">Fecha</th> -->
+                                <th >Observaci&oacute;n Trámite</th>
+                                <th>Estado Trámite</th>
+                                <th >Prioridad Trámite</th>
+                                <th >Es Hito</th>
+                                <th >Estado Seguimiento</th>
+                                <th >Observación Seguimiento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="ticketsDtPasos.length == 0">
+                                <td colspan="9" class="text-center"><h6 class="my-1"></h6>No hay Trámites para mostrar</td>
+                            </tr>
+                            <tr *ngFor="let dt of ticketsDtPasos, let i = index">
+                                <!-- <td class="text-center">{{ dt.id_tramite }}</td> -->
+                                <td class="text-center" style="width: 150px">{{ dt.nro_tramite }}</td>
+                                <td class="text-center" style="width: 200px">
+                                    {{ dt.razon_social }}<br>
+                                    <div class="row ml-1">
+                                        <small class="col text-muted"><span style="font-size: 13px;" class="font-weight-bold">{{ dt.tipo_documento }} : </span>{{ dt.num_documento }}</small>
+                                    </div>
+                                </td>
+                                <td class="text-center" style="width: 200px">
+                                    {{ dt.nombre_tramite }}<br>
+                                    <span style="font-size: 13px;"><small class="col text-muted"><span class="font-weight-bold">Tipo trámite : </span>{{dt.tipo == 'I' ? 'Interno' : 'Externo' }}</small></span><br>
+                                    <span style="font-size: 13px;"><small class="col text-muted"><span class="font-weight-bold">Fecha : </span>{{dt.fecha_tramite }}</small></span>
+                                </td>
+                                <!-- <td class="text-center">{{ dt.fecha }}</td> -->
+                                <!-- <td class="text-center">{{dt.flujo == null ? 'No tiene flujo' : dt.flujo.nombre}}</td> -->
+                                <td class="text-center text-justify text-break" class="text-center" style="width: 350px">{{ dt.observacion }}</td>
+                                <!-- <td class="text-center">
+                                    <div *ngFor="let fp of dt.flujo_pasos">
+                                       <span class="font-weight-bold">Paso:</span>{{fp.nro_paso}} | <span class="font-weight-bold">Hito:</span>{{ fp.hito == 'S' ? 'Si' : (  fp.hito == 'N' ? 'No': '') }}
+                                    </div>
+                                </td> -->
+                                <td class="text-center" class="text-center" style="width: 80px"><i placement="bottom" [ngbTooltip]="dt.estado == 'P' ? 'Pendiente' : dt.estado == 'G' ? 'Gestion' : 'Cerrado'" 
+                                    [class]="dt.estado == 'P' ? 'fas fa-circle text-primary' : dt.estado == 'C' ? 'fas fa-circle text-danger' : 'fas fa-circle text-success'"></i>
+                                    {{dt.estado == 'P' ? 'Pendiente' : dt.estado == 'C' ? 'Cerrado' : 'Gestión'}}
+                                </td>
+                                
+                                
+                                <td class="text-center" class="text-center" style="width: 80px"><i placement="bottom" [ngbTooltip]="dt.prioridad == 'A' ? 'Alta' : dt.prioridad == 'M' ? 'Media' : 'Baja'" 
+                                    [class]="dt.prioridad == 'A' ? 'fas fa-circle text-danger' : dt.prioridad == 'M' ? 'fas fa-circle text-warning' : 'fas fa-circle text-success'"></i>
+                                    {{dt.prioridad == 'A' ? 'Alta' : dt.prioridad == 'M' ? 'Media' : 'Baja'}}
+                                </td>
+                                <td class="text-left" style="width: 250px">
+                                    <span class="font-weight-bold">Descripción : </span>{{ dt.nombre_paso }}<br>
+                                    <span class="font-weight-bold">Usuario Atiende : </span>{{ dt.usuario_atiende }}<br>
+                                    <span class="font-weight-bold">Paso : </span>{{ dt.nro_paso }}<br>
+                                </td>
+                                <td class="text-center" style="width: 80px"><i placement="bottom" [ngbTooltip]="dt.estado_seguimiento == 'P' ? 'Pendiente' : dt.estado_seguimiento == 'G' ? 'Gestion' : 'Cerrado'" 
+                                    [class]="dt.estado_seguimiento == 'P' ? 'fas fa-circle text-primary' : dt.estado_seguimiento == 'C' ? 'fas fa-circle text-danger' : 'fas fa-circle text-success'"></i>
+                                    {{dt.estado_seguimiento == 'P' ? 'Pendiente' : dt.estado_seguimiento == 'C' ? 'Cerrado' : 'Gestión'}}
+                                </td>
+                                <td class="text-center text-justify text-break" style="width: 350px">{{ dt.observacion_seguimiento }}</td>
+                              
+                                <!-- <td class="text-center">
+                                    <button class="btn btn-primary btn-sm mx-1" (click)="showTicketForm(false, dt)" placement="left" ngbTooltip="Abrir Ticket">
+                                        <i class="far fa-eye "></i>
+                                    </button>
+                                    <button *ngIf="dt.estado=='C'" class="btn btn-sm btn-danger mx-1" title="Descargar PDF" (click)="descargarPdf(dt)">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                    </button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <mat-paginator showFirstLastButtons
+                                   [length]="paginate.length"
+                                   [pageSize]="paginate.perPage"
+                                   [pageSizeOptions]="paginate.pageSizeOptions"
+                                   (page)="changePaginate($event)"
+                                   aria-label="Select page">
+                    </mat-paginator>
+                </div>
+
+            </div>
+        </div>
+    </app-button-radio-active-new>
+
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spTicket"></cc-spiner-procesar>

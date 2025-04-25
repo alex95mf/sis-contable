@@ -1,0 +1,56 @@
+<br>
+<app-button-radio-active titulo="Grupos Empleados" cstyle="bg-gradient-primary text-white" filtroBoton="btnGrEm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" *ngIf="permisions?.length > 0 " 
+    icono="fa fa-users"> 
+
+    <div class="row cont">
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Nombre Grupo" styleSpan="size-span-campo">
+                <input placeholder="Ingrese Nombre" type="text" #nom="ngModel" name="nom" [(ngModel)]="noms" class="form-control form-control-sm" 
+                [disabled]="permisions[0].editar == '0' || dusuario" id="Idnombre">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Comisiona" styleSpan="size-span-campo">                  
+                <div class=" switch-container">
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" [disabled]="permisions[0].editar == '0' || dusuario  " id="myonoffswitch" checked [(ngModel)]="checkAuth" (click)="setCheck(checkAuth)">
+                        <label class="onoffswitch-label" for="myonoffswitch">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div> 
+                </div> 
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    
+
+    <fieldset class="border p-3 mb-2 mt-3 filters">
+        <legend class="w-auto h6">Listado</legend>
+        <div class="table-responsive responsive-table">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th style="text-align: center;">Id</th>
+                        <th style="text-align: center;">Nombre Grupo</th>
+                        <th style="text-align: center;">Comisiona</th>
+                        <th style="text-align: center;">Empresa</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="validaDtUser">
+                    <tr *ngFor="let dt of guardaT" (click)="updateGrupo(dt)" style="cursor:pointer;">
+                        <td style="text-align:center;">{{ dt.id_grupo }}</td>
+                        <td style="text-align:center;padding-left: 20px;">{{ dt.nombre_grupo}}</td>
+                        <td style="text-align:center;padding-left: 20px;">{{ dt.comisiona }}</td>
+                        <td style="text-align:center;padding-left: 20px;">{{ dt.nombre_comercial }}
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spGrpEml"></cc-spiner-procesar>

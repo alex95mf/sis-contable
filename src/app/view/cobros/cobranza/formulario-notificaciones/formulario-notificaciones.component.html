@@ -1,0 +1,165 @@
+<div class="my-2">
+  <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-hand-pointer"
+    filtroBoton="btnsCobranzaGestionNotificaciones" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border pb-2 px-3 my-2">
+      <legend class="mb-1 w-auto">Filtros</legend>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col-8">
+              <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="filter.razon_social">
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+              <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="filter.estado"
+                  [clearable]="false">
+                  <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                  <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <app-cc-input-group-prepend label="Tipo de Gesti&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                <ng-select [items]="gestiones" bindValue="valor" bindLabel="descripcion" class="form-control"
+                  [clearable]="false" [(ngModel)]="filter.gestion">
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4" *ngIf="filter.gestion == 'MERCADOS'">
+              <app-cc-input-group-prepend label="Mercado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select [items]="cmb_mercados" bindLabel="descripcion" bindValue="id_catalogo" class="form-control"
+                  [(ngModel)]="filter.mercado" [clearable]="false" [markFirst]="false">
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4" *ngIf="filter.gestion == 'CONCEPTOS'">
+              <app-cc-input-group-prepend label="Conceptos" styleSpan="size-span-campo font-weight-bold">
+                <ng-select [items]="cmb_conceptos" bindLabel="nombre" bindValue="id_concepto" class="form-control"
+                  [(ngModel)]="filter.concepto" [clearable]="false" [markFirst]="false">
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-4">
+              <app-cc-input-group-prepend label="Fecha inicio" styleSpan="size-span-campo font-weight-bold">
+                <input id="filter_fecha_ini" type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+              <app-cc-input-group-prepend label="Fecha fin" styleSpan="size-span-campo font-weight-bold">
+                <input id="filter_fecha_fin" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-2 text-right">
+          <button class="btn btn-primary btn-sm mr-1" matTooltip="Consultar" (click)="consultar()">
+            <i class="fas fa-search"></i> Consultar
+          </button>
+          <button class="btn btn-danger btn-sm mr-1" matTooltip="Limpiar Filtros" (click)="limpiarFiltros()">
+            <i class="fas fa-eraser"></i>
+          </button>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="row mb-2">
+      <div class="col">
+        <div style="max-height: 560px; overflow-y: auto;">
+          <table class="table no-footer table-hover mb-0">
+            <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+            <thead class="thead-dark sticky-header">
+              <tr class="text-center">
+                <th>
+                  <input type="checkbox" [(ngModel)]="masterSelected" [indeterminate]="masterIndeterminate"
+                    (change)="selectAll()">
+                </th>
+                <th>#</th>
+                <th class="w-25">Contribuyente</th>
+                <th>Tipo de gestión</th>
+                <th>Total</th>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th>Estado</th>
+                <th>Notificador</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="!liquidacionesDt.length">
+                <td colspan="9" class="text-center">
+                  <h6>No hay Títulos para mostrar</h6>
+                </td>
+              </tr>
+              <tr *ngFor="let dt of liquidacionesDt, let i = index">
+                <td class="text-center">
+                  <input type="checkbox" [(ngModel)]="dt.check" (change)="partialSelect()">
+                </td>
+                <td class="text-center">{{ dt.id_cob_notificacion }}</td>
+                <td>
+                  {{dt.contribuyente.razon_social}}<br>
+                  <small class="text-muted">
+                    <strong>{{dt.contribuyente.tipo_documento }}</strong> 
+                    {{ dt.contribuyente.num_documento }}
+                  </small>
+                </td>
+                <td class="text-center">{{ dt.tipo_gestion }}</td>
+                <td class="text-center">$ {{ dt.total | number:'1.2-2' }}</td>
+                <td class="text-center">{{ dt.fecha | date:'yyyy-MM-dd' }}</td>
+                <td class="text-center">{{ dt.usuario?.nombre }}</td>
+                <td>
+                  <i class="fas fa-circle"
+                        [ngClass]="{ 'text-warning': dt.estado == 'P', 'text-success': dt.estado == 'R' || dt.estado == 'G', 'text-danger': dt.estado == 'N' || dt.estado == 'S' }"></i>
+                  <span *ngIf="dt.estado == 'P'"> Pendiente</span>
+                  <span *ngIf="dt.estado == 'R'"> Recibido</span>
+                  <span *ngIf="dt.estado == 'N'"> No Recibido</span>
+                  <span *ngIf="dt.estado == 'G'"> Gaceta</span>
+                  <span *ngIf="dt.estado == 'S'"> Sin Direcci&oacute;n</span>
+                  <span *ngIf="dt.fecha_recepcion">
+                    <br><small class="text-muted">{{ dt.fecha_recepcion }}</small>
+                  </span>
+                </td>
+                <td class="text-center">{{ dt.notificador }}</td>
+                <td>
+                  <div class="btn-group">
+                    <button class="btn btn-success btn-sm" (click)="modalDetalles(dt)" matTooltip="Ver Detalles">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="btn btn-warning btn-sm" (click)="modalEditDetalles(dt)" matTooltip="Editar Detalles"
+                      [disabled]="dt.notificador != null">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" (click)="imprimirNotificacion(dt)"
+                      matTooltip="Imprimir">
+                      <i class="fas fa-file-pdf"></i>
+                    </button>
+                  </div>
+  
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <mat-paginator 
+          showFirstLastButtons
+          [length]="paginate.length" 
+          [pageSize]="paginate.perPage"
+          [pageSizeOptions]="paginate.pageSizeOptions" 
+          [pageIndex]="+paginate.page - 1"
+          (page)="changePaginate($event)" 
+          aria-label="Select page">
+        </mat-paginator>
+      </div>
+    </div>
+  </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spGestionCobranza"></cc-spiner-procesar>

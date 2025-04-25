@@ -1,0 +1,90 @@
+<app-button-radio-active titulo="Simulacion de Patentes y Activos Totales" cstyle="bg-light" icono="fas fa-file-invoice-dollar"
+    filtroBoton="btnsSimulacion" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border px-3 pb-2 mb-2">
+        <legend class="w-auto bg-dark mb-0">Filtros</legend>
+        <div class="row">
+            <div class="col">
+                <div class="row m-0 p-0">
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [(ngModel)]="filter.codigo"
+                                [items]="cmb_concepto" bindValue="codigo" bindLabel="nombre">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                            <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                            <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 text-right">
+                <button class="btn btn-primary btn-sm" (click)="consultar()">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+                <button class="btn btn-danger btn-sm ml-1" (click)="clearFilter()">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</app-button-radio-active>
+<div class="table-responsive">
+    <table mat-table [dataSource]="lst_impuestos" class="mat-elevation-z8 w-100">
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef> Total </th>
+            <td mat-cell *matCellDef="let element">
+                $ {{element.total | number:'1.2-2'}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="contribuyente">
+            <th mat-header-cell *matHeaderCellDef> Contribuyente </th>
+            <td mat-cell *matCellDef="let element">
+                {{element.orden_inspeccion.fk_local.fk_contribuyente.razon_social}}<br>
+                <small class="text-muted">{{element.orden_inspeccion.fk_local.fk_contribuyente.tipo_documento}} {{element.orden_inspeccion.fk_local.fk_contribuyente.num_documento}}</small>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="codigo">
+            <th mat-header-cell *matHeaderCellDef> Codigo </th>
+            <td mat-cell *matCellDef="let element">
+                {{ element.codigo_detalle == '1,5' ? 'Activos Totales' : element.codigo_detalle == 'PATENTE' ? 'Patente' : 'N/A' }}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="local">
+            <th mat-header-cell *matHeaderCellDef> Local Comercial </th>
+            <td mat-cell *matCellDef="let element">
+                {{element.orden_inspeccion.fk_local.razon_social}}<br>
+                <small class="text-muted">{{element.orden_inspeccion.fk_local.cod_catastro}} - {{element.orden_inspeccion.fk_local.direccion}}</small>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="orden">
+            <th mat-header-cell *matHeaderCellDef> Orden de Inspeccion </th>
+            <td mat-cell *matCellDef="let element">
+                {{element.orden_inspeccion.numero_orden}}<br>
+                <small class="text-muted">{{element.orden_inspeccion.fecha | date:'yyyy-MM-dd'}}</small>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator
+        [pageIndex]="paginate.pageIndex"
+        [pageSize]="paginate.perPage"
+        [length]="paginate.length"
+        showFirstLastButtons
+        (page)="changePage($event)"
+        [pageSizeOptions]="paginate.pageSizeOptions">
+    </mat-paginator>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spSimulacion"></cc-spiner-procesar>

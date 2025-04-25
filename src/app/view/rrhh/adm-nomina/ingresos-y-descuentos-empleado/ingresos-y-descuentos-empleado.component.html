@@ -1,0 +1,488 @@
+
+<p-toast></p-toast>
+<p-toast position="top-left" key="tl"></p-toast>
+<p-toast position="top-center" key="tc"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+
+<div class="mt-4 mb-5">
+<app-button-radio-active titulo="INGRESOS / DESCUENTOS" filtroBoton="btnsIngresosDsctosEmpl"
+cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+ icono="fas fa-file-alt">
+
+ <!-- <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado"> -->
+
+    <div class="row">
+        <div class="col-12">
+          <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Filtros</legend>
+            <div class="row mt-2">
+                <!-- <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="No. Control" styleSpan="font-weight-bold size-span-campo">
+                        <input type="text" class="form-control" [(ngModel)]="num_control" placeholder="Buscar por No. Control">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" (click)="getPorNoControl()" matTooltip="Buscar No. control">
+                                <i class="far fa-search"></i>
+                            </button>
+                        </div>
+                    </app-cc-input-group-prepend>
+                </div> -->
+                <div class="col-sm-2">
+                    <app-cc-input-group-prepend label="ID" styleSpan="font-weight-bold">
+                        <input currencyMask [options]="{prefix: '', precision: 0, nullable: true}" class="form-control" [(ngModel)]="lastRecord" (keypress)="handleEnter($event)">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" (click)="getPrevRecord()" matTooltip="Registro Anterior" [disabled]="lastRecord == null">
+                                <i class="far fa-chevron-left"></i>
+                            </button>
+                            <button class="btn btn-primary" (click)="getNextRecord()" matTooltip="Registro Siguiente" [disabled]="lastRecord == null">
+                                <i class="far fa-chevron-right"></i>
+                            </button>
+                            <button class="btn btn-primary" (click)="getLatest()" matTooltip="Ultimo Registro">
+                                <i class="far fa-chevron-double-right"></i>
+                            </button>
+                        </div>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <form 
+                [formGroup]="formGroupIngresoDescuento">
+        
+        
+                <div class="row">
+                    <div class="col-sm-4">
+                        <app-cc-input-group-prepend label="Año" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="sld_anio"
+                                [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" >
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="id_mes_cc" 
+                            (ccItemSelecionado)="viewSelectionMesCC($event)"
+                            [optionDefault]="'Selecionar opcion'" #nameMes 
+                            [labelDescription]="'Mes'" 
+                            [disabled]="consulta"
+                            formControlName="fcn_mes" 
+                            codigocatalogo="MES">
+                        </app-cc-select-nom-catalogo>
+                        <!-- [ngClass]="{ 'is-invalid': submitted && f.fcn_mes.errors }" -->
+                        <!-- <mat-error *ngIf="submitted && f.fcn_mes?.errors?.required && (f.fcn_mes!='0' || f.fcn_mes!=0 || f.fcn_mes!='')">
+                            Mes es requerido.
+                        </mat-error> -->
+                    </div>
+        
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="id_tipo_rubro_cc"
+                            (ccItemSelecionado)="viewSelectionTipoRubroCC($event)" 
+                            [optionDefault]="'Selecionar opcion'"
+                            #nameTipoRubro [labelDescription]="'Tipo rubro'" 
+                            formControlName="fcn_tipo_ribro" 
+                            [disabled]="consulta"
+                            codigocatalogo="TDR"
+                            >
+                        </app-cc-select-nom-catalogo>
+                         <!-- [ngClass]="{ 'is-invalid': submitted && f.fcn_tipo_ribro.errors }" -->
+                        <!-- <mat-error *ngIf="submitted && f.fcn_tipo_ribro?.errors?.required && (f.fcn_tipo_ribro!='0' || f.fcn_tipo_ribro!=0 || f.fcn_tipo_ribro!='')">
+                            Tipo de rubro es requerido.
+                        </mat-error> -->
+        
+                        <!-- <pre>
+                            Email:{{f.fcn_tipo_ribro.value}} 
+                            Invalid:{{f.fcn_tipo_ribro.invalid}} 
+                            Errors:{{f.fcn_tipo_ribro.errors|json}}
+                            </pre> -->
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo font-weight-bold" id="inputGroup-sizing-sm">Rubros</span>
+                            </div>
+                           
+                            <input type="text" class="form-control form-control-sm"
+                            [readonly]="readonlyInpuRubro"
+                           
+                            formControlName="fcn_input_searh_rubro" 
+                            [disabled]="consulta"
+                            placeholder="Ingrese rubro">
+                            <div class="input-group-append">
+                                <button (click)="onClicConsultaRubros(content)"
+                                [disabled]="btnSearchRubro"
+                                class="btn btn-primary"
+                                    type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- [ngClass]="{ 'is-invalid': submitted && f.fcn_input_searh_rubro.errors }" -->
+                        <!-- <mat-error *ngIf="submitted && f.fcn_input_searh_rubro?.errors?.required && (f.fcn_input_searh_rubro!='')">
+                            Tipo de rubro es requerido.
+                        </mat-error> -->
+        
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <input type="text" class="form-control form-control-sm" [readonly]="true"
+                            formControlName="fcn_descripcion_rubro_input" [disabled]="consulta"
+                           
+                                #nameRubroDescripcion placeholder="Rubro">
+                        </div>
+                        <!-- [ngClass]="{ 'is-invalid': submitted && f.fcn_descripcion_rubro_input.errors }" -->
+                        <!-- <mat-error *ngIf="submitted && f.fcn_descripcion_rubro_input?.errors?.required && (f.fcn_descripcion_rubro_input!='')">
+                            Rubro es requerido.
+                        </mat-error> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                            <input class="form-control"  type="text" maxlength="300" [(ngModel)]="programa" formControlName="fcn_programa_input" #namePrograma >
+                            <button class="btn btn-primary btn-sm" (click)="modalPrograma()">Buscar</button>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-cc-input-group-prepend label="Dirección" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select id="area" class="form-control form-control-sm" [(ngModel)]="area" [clearable]="true" formControlName="fcn_direccion_input" #nameDireccion (change)="cargarDepartamentos($event)" >
+                                <ng-option disabled [value]="0" disabled>Seleccione una Dirección</ng-option>
+                                <ng-option *ngFor="let d of areas" [value]="d.id_area">{{d.are_nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select id="area" class="form-control form-control-sm" [(ngModel)]="departamento" [clearable]="true" formControlName="fcn_departamento_input" #nameDepartamento (change)="selectedDepartamento($event)" >
+                                <ng-option disabled [value]="0" disabled>Seleccione un Departamento</ng-option>
+                                <ng-option *ngFor="let d of departamentos" [value]="d.id_departamento">{{d.dep_nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+        
+        
+                
+               <div class="row">
+                <div class="col-sm-8">
+                    <app-cc-input-group-prepend label="Cuenta Contable" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" readonly value="{{ cuentaContable.codigo ? cuentaContable.label : '' }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-primary" matTooltip="Seleccionar Cuenta" (click)="onClickConsultaCuentas()">
+                                <i class="far fa-search"></i>
+                            </button>
+                        </div>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Tipo de Contratos" styleSpan="size-span-campo">
+                        <ng-select id="tipo_contratos" class="form-control form-control-sm" [(ngModel)]="tipoContrato" (change)="contratoSelected($event)" 
+                        [clearable]="true" #nameTipoContrato formControlName="fcn_tipo_contrato_input" [disabled]="consulta" [ngModelOptions]="{standalone: true}">
+                            <ng-option disabled [value]="0" disabled>Seleccione un tipo</ng-option>
+                            <ng-option *ngFor="let tc of tipoContratos" [value]="tc.id_catalogo">{{tc.cat_nombre }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                
+               </div>
+               <div class="row">
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group input-group-sm mt-1">
+                                    <input type="text" class="form-control form-control-sm" disabled="true"
+                                        #nameNombreArchivo
+                                        formControlName="fcn_nombre_archivo_input"
+                                        [readonly]="true"
+                                        [disabled]="consulta"
+                                         placeholder="Nombre del archivo">
+                                </div>
+                            </div>
+                             <!-- [ngClass]="{ 'is-invalid': submitted && f.fcn_nombre_archivo_input.errors }" -->
+                            <!-- <mat-error *ngIf="submitted && f.fcn_nombre_archivo_input?.errors?.required">
+                                Archivo es requerido.
+                            </mat-error> -->
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-sm">
+                            <!-- ||  formGroupIngresoDescuento.value.fcn_tipo_ribro == '' ||
+                                        formGroupIngresoDescuento.value.fcn_tipo_ribro == null ||
+                                        formGroupIngresoDescuento.value.fcn_input_searh_rubro == '' ||
+                                        formGroupIngresoDescuento.value.fcn_mes == '' ||
+                                        formGroupIngresoDescuento.value.fcn_mes == null ||
+                                        formGroupIngresoDescuento.value.fcn_indc_anio == '' ||
+                                        formGroupIngresoDescuento.value.fcn_indc_anio == null -->
+                            <button style="display:block;width:100%; height:30px;"
+                            [disabled]="btnSubirArchivo || objGetIngresosDescuento.length > 0 "
+                            onclick="document.getElementById('getFile').click()">Cargar Archivo</button>
+                            <input #Image (change)="handleFileInputPlantilla($event.target.files)"
+                                type='file'
+                                accept=".xls, .xlsx"
+                                id="getFile" style="display:none"
+                                formControlName="fcn_archivo_input"
+                               
+                            >
+                        </div>
+                        <!-- [ngClass]="{ 'is-invalid': submitted && f.fcn_archivo_input.errors }" -->
+                        <!-- <div class="col-sm-3">
+                            <button style="display:block;width:100%; height:30px;"
+                            (click)="borrarArchivo()">Borrar Archivo</button>
+                        </div> -->
+                        <!-- <mat-error *ngIf="submitted && f.fcn_archivo_input?.errors?.required">
+                            Archivo es requerido.
+                        </mat-error> -->
+                    </div>
+                </div>
+               </div>
+               <!-- <div class="row">
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Archivo" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control form-control-sm" disabled="true"
+                                            #nameNombreArchivo
+                                            formControlName="fcn_nombre_archivo_input"
+                                            [ngClass]="{ 'is-invalid': submitted && f.fcn_nombre_archivo_input.errors }"
+                                            [readonly]="true"
+                                            [disabled]="consulta"
+                                            placeholder="Nombre del archivo">
+                            <div class="input-group-append">
+                            
+                                <button class="btn btn-primary" style="display:block;"
+                                    [disabled]="btnSubirArchivo || objGetIngresosDescuento.length > 0 "
+                                    onclick="document.getElementById('getFile').click()">
+                                    <i class="fas fa-file-upload"></i>Cargar Archivo
+                                </button>
+                                <input #Image (change)="handleFileInputPlantilla($event.target.files)"
+                                
+                                    type='file'
+                                    accept=".xls, .xlsx"
+                                    id="getFile" style="display:none"
+                                    formControlName="fcn_archivo_input"
+                                    [ngClass]="{ 'is-invalid': submitted && f.fcn_archivo_input.errors }"
+                                >
+                            
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+               </div> -->
+        
+        
+            </form>
+        
+            <hr>
+            <div class="mt-2">
+        
+                <div class="row">
+                    
+                    <div class="col-sm-12"  style="overflow-x:auto;max-height: 450px; overflow-y: scroll;">
+                        <p-table [value]="objGetIngresosDescuento"
+                            [lazy]="true"
+                            [paginator]="false"
+                            responsiveLayout="scroll"
+                            [rows]="rows"
+                            [loading]="loading"
+                            [totalRecords]="totalRecords"
+                            [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+                            [rowsPerPageOptions]="pageSizeOptions"
+                            style="width:200%;height: 450px;"
+                            >
+                             <!-- (onLazyLoad)="nextPage($event)" -->
+                            <ng-template pTemplate="caption">
+                                <div class="flex align-items-center justify-content-between" style="font-size: 12px; ">
+                                    Lista Ingresos y Descuentos
+                                    <!-- <button pButton pRipple icon="pi pi-plus-circle" title="Agregar"
+                                    class="p-button-rounded p-button-success mr-2"
+                                    (click)=onAddNewIngresoDescuento()
+                                    [disabled]="btnNewIngresoDescuento"
+                                    ></button> -->
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr style="font-size: 12px; ">
+                                    <th *ngIf="consulta"  style="min-width:100px; font-size: 10px;">
+                                        <input type="checkbox" (change)="handleColumnCheck($event)">
+                                    </th>
+                                    <th>#</th>
+                                    <th>Cédula</th>
+                                    <th>Nombre Empleado Archivo</th>
+                                    <th>Departamento</th>
+                                    <th>Número de Control</th>
+                                    <th>Valor Solicitado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-det_ingreso_descuento let-editing="editing">
+                                <tr style="font-size: 11px; " [ngClass]="{'table-danger': det_ingreso_descuento.indc_valor_solicitado <= 0 }">
+                                    <td *ngIf="consulta" class="text-center" style="min-width:100px; font-size: 11px;">
+                                        <input  [(ngModel)]="det_ingreso_descuento.aprobar" [ngModelOptions]="{standalone: true}" type="checkbox" (change)="handleRowCheck($event, det_ingreso_descuento)" [disabled]="det_ingreso_descuento.tiene_control">
+                                    </td>
+                                    <td>{{det_ingreso_descuento.linea}}</td>
+                                    <td>{{det_ingreso_descuento.emp_identificacion}}</td>
+                                    <td>{{det_ingreso_descuento.emp_full_nombre}}</td>
+                                    <td>{{det_ingreso_descuento.departamento == null ? det_ingreso_descuento.dep_nombre : det_ingreso_descuento.departamento  }}</td>
+                                    <td>{{det_ingreso_descuento.num_control}}</td>
+                                    <td pEditableColumn>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <!-- <p-inputNumber
+                                                [(ngModel)]="det_ingreso_descuento.indc_valor_solicitado"
+                                                mode="decimal"
+                                                [showButtons]="false"
+                                                [minFractionDigits]="2"
+                                                (blur)="onColumnEditComplete($event, col, record)"
+                                                inputId="minmax-buttons" [min]="0" [max]="10000000">
+                                                </p-inputNumber> -->
+        
+                                                <input pInputText type="number" (blur)="onColumnEditComplete($event.target.value, det_ingreso_descuento)"
+                                                 [(ngModel)]="det_ingreso_descuento.indc_valor_solicitado"
+                                                 [min]="0"
+                                                 required
+                                                 [disabled]="det_ingreso_descuento.tiene_control">
+                                            </ng-template>
+                                            <ng-template pTemplate="output" >
+                                                $ {{det_ingreso_descuento.indc_valor_solicitado }}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <!-- <button pButton pRipple icon="pi pi-trash" title="Borrar datos"
+                                        (click)="deleteDataIngDesc(det_ingreso_descuento)"
+                                        class="p-button-rounded p-button-danger mr-2"></button> -->
+                                        <button [disabled]="det_ingreso_descuento.tiene_control" class="btn btn-danger btn-sm" (click)="deleteDataIngDesc(det_ingreso_descuento)"><i class="fas fa-trash-alt"></i></button>
+        
+        
+                                        <!-- <button pButton pRipple icon="pi pi-user-edit"
+                                        (click)="onClicConsultaEmpleadosIngDesc(det_ingreso_descuento)"
+                                         title="Buscar Empleado"
+                                        class="p-button-rounded p-button-info mr-2"></button> -->
+                                        <!-- (click)="descargarDocumentoDigital(det_ingreso_descuento)" -->
+                                        <!-- <button pButton pRipple icon="pi pi-trash" class=" p-button-warning"></button> -->
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td class="EmptyTable" [attr.colspan]="9">
+                                        No hay información para mostrar
+                                    </td>
+                                </tr>
+                            </ng-template>
+        
+                        </p-table>
+                        <p-table *ngIf="verNoEncontrados"
+                            [value]="objGetIngresosNoEncontrados"
+                            [lazy]="true"
+                            [paginator]="false"
+                            responsiveLayout="scroll"
+                            [rows]="rows"
+                            [loading]="loading"
+                            [totalRecords]="totalRecords"
+                            (onLazyLoad)="nextPage($event)"
+                            [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+                            [rowsPerPageOptions]="pageSizeOptions"
+                            style="width:200%;height: 500px;"
+                            >
+                            <ng-template pTemplate="caption">
+                                <div class="flex align-items-center justify-content-between" style="font-size: 12px; ">
+                                    Lista de Registros no Encontrados
+                                    <!-- <button pButton pRipple icon="pi pi-plus-circle" title="Agregar"
+                                    class="p-button-rounded p-button-success mr-2"
+                                    (click)=onAddNewIngresoDescuento()
+                                    [disabled]="btnNewIngresoDescuento"
+                                    ></button> -->
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr style="font-size: 12px; ">
+                                    <th colspan="1"></th>
+                                    <th>Cédula</th>
+                                    <th>Nombre Empleado Archivo</th>
+                                    <th>Departamento</th>
+                                    <th>Valor Solicitado</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-det_no_encontrados let-editing="editing">
+                                <tr  [pSelectableRow]="det_no_encontrados" style="font-size: 11px;" >
+                                    <td>
+                                        <!-- <button pButton pRipple icon="pi pi-trash" title="Borrar datos"
+                                        (click)="deleteDataIngDesc(det_no_encontrados)"
+                                        class="p-button-rounded p-button-danger mr-2"></button> -->
+                                    </td>
+                                    <td>{{det_no_encontrados.cedula}}</td>
+                                    <td>{{det_no_encontrados.nombres}}</td>
+                                    <td>{{det_no_encontrados.departamento}}</td>
+                                    <td>{{det_no_encontrados.valor_solicitado}}</td>
+                                    <!-- <td pEditableColumn>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="number" (blur)="onColumnEditComplete($event.target.value, det_no_encontrados)"
+                                                 [(ngModel)]="det_no_encontrados.valor_solicitado"
+                                                 [min]="0"
+                                                 required>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                $ {{det_no_encontrados.valor_solicitado }}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td> -->
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td class="EmptyTable" [attr.colspan]="9">
+                                        No hay información para mostrar
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            
+                        </p-table>
+                    </div>
+                </div>
+        
+        
+            </div>
+        
+            <!-- <div class="mt-2">
+                <div class="row p-2 mb-3 mt-2 content-tabla-general">
+                    <table class="table">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 15%; ">CÉDULA</th>
+                                <th style="width: 35%; ">NOMBRE</th>
+                                <th style="width: 15%; ">VALOR SOLICITADO</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="ingresosydescientos.length > 0 else TablaVacia">
+                            <tr *ngFor="let item of periodos">
+                                <td style="padding-left: 25px;text-align: start;">{{ item.anio }}</td>
+                                <td style="padding-left: 40px;text-align: start;">{{ item.mes }}</td>
+                                <td [ngClass]="{'aperturado': item.estate == 'A' , 'cerrado': item.estate == 'C' }"   style="padding-left: 25px;text-align: start;">{{ item.estado }}</td>
+                            </tr>
+                        </tbody>
+        
+        
+                        <ng-template #TablaVacia>
+                            <tbody>
+                                <tr class="body-empty"  >
+                                    <td colspan="3" >no hay datos para mostrar</td>
+                                </tr>
+                            </tbody>
+                        </ng-template>
+                    </table>
+                </div>
+            </div> -->
+        <!-- </div>
+        
+        <ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template> -->
+         </fieldset>
+        </div>
+    </div>
+
+
+</app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spBacnBcn"></cc-spiner-procesar>
+

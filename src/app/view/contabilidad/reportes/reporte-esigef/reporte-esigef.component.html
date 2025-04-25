@@ -1,0 +1,417 @@
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+
+<div class="my-2">
+    <app-button-radio-active-new titulo="ESIGEF" filtroBoton="btnSalSum" 
+    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-money">
+
+
+
+
+    <div class="row">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Filtros</legend>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select  class="form-control form-control-sm"
+                                (change)="ObtnerArchivoDescarga($event)" 
+                                [searchable]="true" [(ngModel)]="nivelSeleccionado" [clearable]="false" 
+                                [items]="FilreportEsigef" bindLabel="descripcion" bindValue="id">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" appendTo="body" [clearable]="true" 
+                               [(ngModel)]="selected_anio"
+                                [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo"
+                                >
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo ">
+                            <ng-select 
+                                
+                                class="form-control" 
+                                id="elemento_pruebas"
+                                bindLabel="name"
+                                placeholder="-Todos-"
+                                appendTo="body"
+                                [clearable]="false"
+                                [searchable]="true"
+                                [disabled]=disabled
+                                [(ngModel)]="selected_mes">
+                                
+                                <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                    {{item.name}}
+                                </ng-option>
+                            </ng-select>
+                          </app-cc-input-group-prepend> 
+
+                    </div>
+                </div>
+            </fieldset></div></div>
+
+
+
+
+
+
+        <div class="row mb-3  pl-2 pr-2">
+            <div class="col-12">
+
+            <p-tabView [(activeIndex)]="index" (onChange)="handleChange($event)" styleClass="tab_content_compras" class="overflow">
+                
+                <p-tabPanel class="p-0" header="ASIENTO INICIAL" [headerStyle]="{'font-size': '0.7rem'}">
+                    <p-table 
+                    [value]="DataAsientoInicial"
+                    [(selection)]="selectedRetencionesElement" 
+                    [scrollable]="true" scrollHeight="400px">
+                       <ng-template pTemplate="header">
+                           <tr style="font-size: 11px;">
+                               <th  style="min-width:100px">PERIODO</th>
+                               <th  style="min-width:150px">CUENTA</th>
+                               <th  style="min-width:80px">CUENTA NIVEL1</th>
+                               <th  style="min-width:80px">CUENTA NIVEL2</th>
+                               <th  style="min-width:80px;" class="d-flex justify-content-end">SALDO DEUDOR</th>
+                               <th  style="min-width:80px;" class="d-flex justify-content-end">SALDO ACREEDOR</th>
+                           </tr>
+                       </ng-template>
+                       <ng-template pTemplate="body" let-item>
+                           <tr style="font-size: 11px;">
+                               <td style="min-width:100px">{{item.periodo}}</td>
+                               <td style="min-width:150px">{{item.cuenta_mayor}}</td>
+                               <td style="min-width:80px">{{item.cuenta_nivel1}}</td>
+                               <td style="min-width:80px">{{item.cuenta_nivel2}}</td>
+                               <td style="min-width:80px;" class="d-flex justify-content-end">$ {{item.valor_deb | number: '1.2-2'}}</td>
+                               <td style="min-width:80px;" class="d-flex justify-content-end">$ {{item.valor_cre | number: '1.2-2'}}</td>
+                           </tr>
+                       </ng-template>
+
+                       <ng-template pTemplate="emptymessage">
+                           <tr>
+                               <td class="EmptyTable" [attr.colspan]="8">
+                                 No hay registros para mostrar
+                                </td>
+                           </tr>
+                       </ng-template>
+                   </p-table>
+                </p-tabPanel>
+
+                <p-tabPanel class="p-0" header="BALANCE DE COMPROBACION" [headerStyle]="{'font-size': '0.7rem'}">
+                    <p-table [value]="bcoDataSource" [scrollable]="true" scrollHeight="400px">
+                        <ng-template pTemplate="header">
+                            <tr style="font-size: 11px;">
+                                <th style="min-width:100px">PERIODO</th>
+                                <th style="min-width:100px">CUENTA</th>
+                                <th style="min-width:100px">CODIGO</th>
+                                <th style="min-width:100px">DESCRIPCION</th>
+                                <th style="min-width:100px;" class="d-flex justify-content-end">SALDO INICIAL DEUDOR</th>
+                                <th style="min-width:100px;" class="d-flex justify-content-end">SALDO INICIAL ACREEDOR</th>
+                                <th style="min-width:100px;" class="d-flex justify-content-end">FLUJO DEUDOR</th>
+                                <th style="min-width:100px;" class="d-flex justify-content-end">FLUJO ACREDOR</th>
+                                <th style="min-width:100px;" class="d-flex justify-content-end">SUMAS DEBE</th>
+                                <th style="min-width:100px;" class="d-flex justify-content-end">SUMAS HABER</th>
+                                <th style="min-width:100px;" class="d-flex justify-content-end">SALDO DEUDOR</th>
+                                <th style="min-width:100px;" class="d-flex justify-content-end">SALDO ACREDOR</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr style="font-size: 11px;">
+                                <td style="min-width:100px">{{ item.periodo }}</td>
+                                <td style="min-width:100px">{{ item.cuenta }}</td>
+                                <td style="min-width:100px">{{ item.codigo }}</td>
+                                <td style="min-width:100px">{{ item.nombre }}</td>
+                                <td style="min-width:100px;" class="d-flex justify-content-end">$ {{ item.saldo_inicial_deudor | number:'1.2-2' }}</td>
+                                <td style="min-width:100px;" class="d-flex justify-content-end">$ {{ item.saldo_inicial_acreedor | number:'1.2-2' }}</td>
+                                <td style="min-width:100px;" class="d-flex justify-content-end">$ {{ item.flujo_deudor | number:'1.2-2' }}</td>
+                                <td style="min-width:100px;" class="d-flex justify-content-end">$ {{ item.flujo_acreedor | number:'1.2-2' }}</td>
+                                <td style="min-width:100px;" class="d-flex justify-content-end">$ {{ item.sumas_debe | number:'1.2-2' }}</td>
+                                <td style="min-width:100px;" class="d-flex justify-content-end">$ {{ item.sumas_haber | number:'1.2-2' }}</td>
+                                <td style="min-width:100px;" class="d-flex justify-content-end">$ {{ item.saldo_final_deudor | number:'1.2-2' }}</td>
+                                <td style="min-width:100px;" class="d-flex justify-content-end">$ {{ item.saldo_final_acreedor | number:'1.2-2' }}</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="emptymessage">
+                            <tr><td class="EmptyTable" [attr.colspan]="8">No hay registros para mostrar</td></tr>
+                        </ng-template>
+                   </p-table>
+                </p-tabPanel>
+
+                <!-- <p-tabPanel class="p-0" header="TRANSFERENCIAS" [headerStyle]="{'font-size': '0.7rem'}">
+                    <p-table 
+                    [value]="asiento_inicial"
+                    [(selection)]="selectedRetencionesElement" 
+                    [scrollable]="true" scrollHeight="400px">
+                       <ng-template pTemplate="header">
+                           <tr style="font-size: 11px;">
+                               <th style="min-width:100px">PERIODO</th>
+                               <th style="min-width:180px">CUENTA</th>
+                               <th style="min-width:180px">CUENTA NIVEL1</th>
+                               <th style="min-width:180px">CUENTA NIVEL2</th>
+                               <th style="min-width:200px">RUC RECEPTOR</th>
+                               <th style="min-width:200px ">RUC OTORGANTE</th>
+                               <th style="width: 25%; " class="d-flex justify-content-end">FLUJO DEUDOR</th>
+                               <th style="width: 25%; " class="d-flex justify-content-end">FLUJO ACREDOR</th>
+                               <th style="width: 25%; " class="d-flex justify-content-end">CUENTA MONETARIA</th>
+                           </tr>
+                       </ng-template>
+                       <ng-template pTemplate="body" let-item>
+                           <tr style="font-size: 11px;">
+                               <td style="padding-left: 3px;text-align: start;"></td>
+                               <td style="padding-left: 3px;text-align: start;"></td>
+                               <td style="padding-left: 3px;text-align: start;"></td>
+                               <td style="padding-left: 3px;text-align: start;"></td>
+                               <td style="padding-left: 3px;text-align: start;"></td>
+                               <td style="padding-left: 3px;text-align: start;"></td>
+                               <td style="padding-left: 3px;text-align: start;"></td>
+                               <td style="padding-left: 3px;text-align: start;"></td>
+                               <td style="padding-left: 3px;text-align: start;"></td>
+                           </tr>
+                       </ng-template>
+
+                       <ng-template pTemplate="emptymessage">
+                           <tr>
+                               <td class="EmptyTable" [attr.colspan]="8">
+                                    No hay registros para mostrar
+                                </td>
+                           </tr>
+                       </ng-template>
+                   </p-table>
+                </p-tabPanel> -->
+
+                <p-tabPanel class="p-0" header="PRESUPUESTO INICIAL" [headerStyle]="{'font-size': '0.7rem'}">
+                    <p-table [value]="priDataSource" [scrollable]="true" scrollHeight="400px">
+                        <ng-template pTemplate="header">
+                            <tr style="font-size: 11px;">
+                                <th style="min-width:100px">Tipo</th>
+                                <th style="min-width:100px">Codigo</th>
+                                <th style="min-width:100px;" class="d-flex justify-content-end">Asignacion Original</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr style="font-size: 11px;">
+                                <td style="min-width:100px">{{ item.tipo }}</td>
+                                <td style="min-width:100px">{{ item.codigo }}</td>
+                                <td style="min-width:100px;" class="d-flex justify-content-end">$ {{ item.asignacion_original | number:'1.2-2' }}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr><td class="EmptyTable" [attr.colspan]="3">No hay registros para mostrar</td></tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+
+                <p-tabPanel class="p-0" header="PRESUPUESTO" [headerStyle]="{'font-size': '0.7rem'}">
+                    <p-table [value]="preDataSource" [scrollable]="true" scrollHeight="500px">
+                        <ng-template pTemplate="header">
+                            <tr style="font-size: 11px;">
+                                <th style="min-width: 120px;">CUENTA</th>
+                                <th style="min-width: 60px;">TIPO</th>
+                                <th style="min-width: 120px;">CODIGO</th>
+                                <th style="min-width: 300px;">NOMBRE</th>
+                                <th style="min-width: 120px;" class="d-flex justify-content-end">ASIGNACION INICIAL</th>
+                                <th style="min-width: 120px;" class="d-flex justify-content-end">REFORMA</th>
+                                <th style="min-width: 120px;" class="d-flex justify-content-end">CODIFICADO</th>
+                                <th style="min-width: 120px;" class="d-flex justify-content-end">COMPROMETIDO</th>
+                                <th style="min-width: 120px;" class="d-flex justify-content-end">DEVENGADO</th>
+                                <th style="min-width: 120px;" class="d-flex justify-content-end">RECAUDADO</th>
+                                <th style="min-width: 120px;" class="d-flex justify-content-end">SALDO POR COMPROMETER</th>
+                                <th style="min-width: 120px;" class="d-flex justify-content-end">SALDO POR DEVENGAR</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr style="font-size: 11px;">
+                               <td style="min-width: 120px;">{{ item.partida }}</td>
+                               <td style="min-width: 60px;">{{ item.tipo }}</td>
+                               <td style="min-width: 120px;">{{ item.codigo }}</td>
+                               <td style="min-width: 300px;">{{ item.nombre_partida }}</td>
+                               <td style="min-width: 120px;" class="d-flex justify-content-end">$ {{ item.asignacion_original | number:'1.2-2' }}</td>
+                               <td style="min-width: 120px;" class="d-flex justify-content-end">$ {{ item.reformas | number:'1.2-2' }}</td>
+                               <td style="min-width: 120px;" class="d-flex justify-content-end">$ {{ item.asignacion_codificada | number:'1.2-2' }}</td>
+                               <td style="min-width: 120px;" class="d-flex justify-content-end">$ {{ item.comprometido | number:'1.2-2' }}</td>
+                               <td style="min-width: 120px;" class="d-flex justify-content-end">$ {{ item.devengado | number:'1.2-2' }}</td>
+                               <td style="min-width: 120px;" class="d-flex justify-content-end">$ {{ item.pagado | number:'1.2-2' }}</td>
+                               <td style="min-width: 120px;" class="d-flex justify-content-end">$ {{ item.saldo_por_comprometer | number:'1.2-2' }}</td>
+                               <td style="min-width: 120px;" class="d-flex justify-content-end">$ {{ item.saldo_por_devengar | number:'1.2-2' }}</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="emptymessage">
+                            <tr><td class="EmptyTable" [attr.colspan]="8">No hay registros para mostrar</td></tr>
+                        </ng-template>
+                   </p-table>
+                </p-tabPanel>
+
+                <!-- <p-tabPanel class="p-0" header="RECÍPROCAS INICIAL" [headerStyle]="{'font-size': '0.7rem'}">
+                    <p-table 
+                    [value]="recipIniDataSource"
+                    [(selection)]="selectedRetencionesElement" 
+                    [scrollable]="true" scrollHeight="400px" >
+                       <ng-template pTemplate="header">
+                           <tr style="font-size: 11px;">
+                               <th>PERIODO</th>
+                               <th>CUENTA</th>
+                               <th>NOMBRE CUENTA</th>
+                               <th>CUENTA MAYOR</th>
+                               <th>CUENTA NIVEL1</th>
+                               <th>CUENTA NIVEL2</th>
+                               <th>RUC RECEPTOR</th>
+                               <th>NOMBRE RECEPTOR</th>
+                               <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO DEUDOR</th>
+                               <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO ACREDOR</th>
+                               
+                           </tr>
+                       </ng-template>
+                       <ng-template pTemplate="body" let-item>
+                           <tr style="font-size: 11px;">
+                               <td style="width: 180px;">{{item.periodo}}</td>
+                               <td style="width: 180px;">{{item.cuenta_por_cobrar}}</td>
+                               <td style="width: 250px;">{{item.nombre}}</td>
+                               <td style="width: 100px;">{{item.mayor}}</td>
+                               <td style="width: 100px;">{{item.cuenta_nivel_1}}</td>
+                               <td style="width: 100px;">{{item.cuenta_nivel_2}}</td>
+                               <td style="width: 180px;">{{item.num_documento}}</td>
+                               <td style="width: 250px;">{{item.razon_social}}</td>
+                               <td style="width: 100px;" class="d-flex justify-content-end">$ {{item.total | number:'1.2-2'}}</td>
+                               <td style="width: 100px;" class="d-flex justify-content-end">$ {{item.total_acreedor | number:'1.2-2'}}</td>
+                           </tr>
+                       </ng-template>
+
+                       <ng-template pTemplate="emptymessage">
+                           <tr>
+                               <td class="EmptyTable" [attr.colspan]="8">
+                                No hay registros para mostrar
+                                </td>
+                           </tr>
+                       </ng-template>
+                   </p-table>
+                </p-tabPanel> -->
+
+                 <p-tabPanel class="p-0" header="TRANSACCIONES RECÍPROCAS" [headerStyle]="{'font-size': '0.7rem'}">
+                    <p-table 
+                    [value]="tranReciDataSource"
+                    [(selection)]="selectedRetencionesElement" 
+                    [scrollable]="true" scrollHeight="400px">
+                       <ng-template pTemplate="header">
+                           <tr style="font-size: 11px;">
+                            
+                                <th style="min-width: 100px;">MES</th>
+                                <th style="min-width: 100px;">RUC</th>
+                                <th style="min-width: 100px;">CÓDIGO OFICIAL</th>
+                                <th style="min-width: 100px;">MAYOR</th>
+                                <th style="min-width: 100px;">CUENTA1 NIVEL1</th>
+                                <th style="min-width: 100px;">CUENTA1 NIVEL2</th>
+                                <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO DEUDOR</th>
+                                <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO ACREDOR</th>
+                                <th style="min-width: 180px;">RUC RECEPTOR</th>
+                                <th style="min-width: 250px;">NOMBRE RECEPTOR</th>
+                                <th style="min-width: 100px;">GRUPO</th>
+                                <th style="min-width: 100px;">SUB GRUPO</th>
+                                <th style="min-width: 100px;">ITEM</th>
+                                <th style="min-width: 100px;">MAYOR 2</th>
+                                <th style="min-width: 100px;">CUENTA2 NIVEL1</th>
+                                <th style="min-width: 100px;">CUENTA2 NIVEL2</th>
+                                <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO DEUDOR 2</th>
+                                <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO ACREDOR 2</th>
+                                <th style="min-width: 180px;">NUM TRANSACCIÓN</th>
+                                <th style="min-width: 180px;">NUM REFERENCIA</th>
+                                <th style="min-width: 100px;">FECHA APROBADO</th>
+                                <th style="min-width: 100px;">FECHA VENCIMIENTO</th>
+                           </tr>
+                       </ng-template>
+                       <ng-template pTemplate="body" let-item>
+                            <tr style="font-size: 11px;">
+                               
+                                <td style="min-width: 100px;">{{item.mes}}</td>
+                                <td style="min-width: 100px;">{{item.ruc}}</td>
+                                <td style="min-width: 100px;">{{item.codigo_oficial}}</td>
+                                <td style="min-width: 100px;">{{item.cta1_mayor}}</td>
+                                <td style="min-width: 100px;">{{item.cta1_cuenta_nivel_1}}</td>
+                                <td style="min-width: 100px;">{{item.cta1_cuenta_nivel_2}}</td>
+                                <td style="min-width: 100px;" class="d-flex justify-content-end">$ {{item.flujo_deudor | number:'1.2-2'}}</td>
+                                <td style="min-width: 100px;" class="d-flex justify-content-end">$ {{item.flujo_acreedor | number:'1.2-2'}}</td>
+                                <td style="min-width: 180px;">{{item.ruc_beneficiario}}</td>
+                                <td style="min-width: 250px;">{{item.beneficiario}}</td>
+                                <td style="min-width: 100px;">{{item.grupo}}</td>
+                                <td style="min-width: 100px;">{{item.subgrupo}}</td>
+                                <td style="min-width: 100px;">{{item.item}}</td>
+                                <td style="min-width: 100px;">{{item.cta2_mayor}}</td>
+                                <td style="min-width: 100px;">{{item.cta2_cuenta_nivel_1}}</td>
+                                <td style="min-width: 100px;">{{item.cta2_cuenta_nivel_2}}</td>
+                                <td style="min-width: 100px;" class="d-flex justify-content-end">$ {{item.flujo_deudor_2 | number:'1.2-2'}}</td>
+                                <td style="min-width: 100px;" class="d-flex justify-content-end">$ {{item.flujo_acreedor_2 | number:'1.2-2'}}</td>
+                                <td style="min-width: 180px;">{{item.nro_transaccion}}</td>
+                                <td style="min-width: 180px;">{{item.nro_referencia}}</td>
+                                <td style="min-width: 100px;">{{item.fecha_aprobado}}</td>
+                                <td style="min-width: 100px;">{{item.fecha_vencimiento}}</td>
+                            </tr>
+                       </ng-template>
+                       <ng-template pTemplate="emptymessage">
+                           <tr>
+                               <td class="EmptyTable" [attr.colspan]="8">
+                                   No hay registros para mostrar
+                                </td>
+                           </tr>
+                       </ng-template>
+                   </p-table>
+                </p-tabPanel>
+                <p-tabPanel class="p-0" header="DETALLE DE ASIENTO INICIAL" [headerStyle]="{'font-size': '0.7rem'}">
+                    <p-table 
+                    [value]="detAsientoIniDataSource"
+                    [(selection)]="selectedRetencionesElement" 
+                    [scrollable]="true" scrollHeight="400px">
+                    <ng-template pTemplate="header">
+                        <tr style="font-size: 11px;">
+                            <th>PERIODO</th>
+                            <th>CUENTA</th>
+                            <th>NOMBRE CUENTA</th>
+                            <th>CUENTA MAYOR</th>
+                            <th>CUENTA NIVEL1</th>
+                            <th>CUENTA NIVEL2</th>
+                            <th>RUC RECEPTOR</th>
+                            <th>NOMBRE RECEPTOR</th>
+                            <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO DEUDOR</th>
+                            <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO ACREDOR</th>
+                            
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr style="font-size: 11px;">
+                            <td style="width: 180px;">{{item.mes}}</td>
+                            <td style="width: 180px;">{{item.codigo_oficial}}</td>
+                            <td style="width: 250px;">{{item.nombre_cuenta}}</td>
+                            <td style="width: 100px;">{{item.cta1_mayor}}</td>
+                            <td style="width: 100px;">{{item.cta1_cuenta_nivel_1}}</td>
+                            <td style="width: 100px;">{{item.cta1_cuenta_nivel_2}}</td>
+                            <td style="width: 180px;">{{item.ruc_beneficiario}}</td>
+                            <td style="width: 250px;">{{item.beneficiario}}</td>
+                            <td style="width: 100px;" class="d-flex justify-content-end">$ {{item.flujo_deudor | number:'1.2-2'}}</td>
+                            <td style="width: 100px;" class="d-flex justify-content-end">$ {{item.flujo_acreedor | number:'1.2-2'}}</td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td class="EmptyTable" [attr.colspan]="8">
+                             No hay registros para mostrar
+                             </td>
+                        </tr>
+                    </ng-template>
+                   </p-table>
+                </p-tabPanel>
+            </p-tabView>
+
+        </div>
+    </div>
+
+    </app-button-radio-active-new>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lTipo="spRepEsigef"></cc-spiner-procesar>

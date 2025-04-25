@@ -1,0 +1,168 @@
+<div >
+    <app-button-radio-active-new titulo="Detalle" filtroBoton="btnsFormLTuristicos" cstyle="bg-gradient-primary text-white" [groupButton]="botonera" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-plus-square">
+       
+        <div class="row m-0"> 
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Nro. Documento" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                         id="idname" [(ngModel)]="no_documento"
+                        disabled  >
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12 col-md-6 pt-0 pb-0" *ngIf="titulo == 'mantenimiento' || titulo == 'poliza'">
+                <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                         id="idname" [(ngModel)]="proveedor"
+                        disabled  >
+                </app-cc-input-group-prepend>
+            </div>
+            <div cclass="col-12 col-md-6 pt-0 pb-0" *ngIf="titulo == 'traslado'">
+                <app-cc-input-group-prepend label="Cargo recibido" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                         id="idname" [(ngModel)]="nombre_cargo_recibido"
+                        disabled  >
+                </app-cc-input-group-prepend>
+            </div>
+            
+       </div>
+       <div class="row m-0">
+        <div class="col-12 col-md-6 pt-0 pb-0">
+            <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo">
+                <textarea type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                     id="idname" [(ngModel)]="observation"
+                    disabled  ></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12 col-md-6 pt-0 pb-0">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                     id="idname" [(ngModel)]="fecha"
+                    disabled  >
+            </app-cc-input-group-prepend>
+        </div>
+
+        <!-- <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                     id="idname" [(ngModel)]="estado"
+                    disabled  >
+            </app-cc-input-group-prepend>
+        </div> -->
+
+        
+       </div>
+       <div class="row m-0">
+        <div class="col-12 col-md-6 pt-0 pb-0" *ngIf="titulo == 'mantenimiento'">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Estado</span></div>
+                <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                    <i
+                        placement="bottom"
+                        [ngbTooltip]="(estado == 'P') ? 'Pendiente' : ((estado == 'C') ? 'Cerrado' : 'Emitido')" 
+                        [class]="(estado == 'P') ? 'fas fa-circle text-warning' : ((estado == 'C') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
+                    </i>
+                    {{ (estado == 'P') ? 'Pendiente' : ((estado == 'C') ? 'Cerrado' : 'Emitido') }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 pt-0 pb-0" *ngIf="titulo == 'traslado'">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Estado del traslado</span></div>
+                <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                    <i
+                        placement="bottom"
+                        [ngbTooltip]="(estado == 'P') ? 'Pendiente' : ((estado == 'C') ? 'Cerrado' : 'Emitido')" 
+                        [class]="(estado == 'P') ? 'fas fa-circle text-warning' : ((estado == 'C') ? 'fas fa-circle text-danger' : 'fas fa-circle text-success')">
+                    </i>
+                    {{ (estado == 'P') ? 'Pendiente' : ((estado == 'C') ? 'Cerrado' : 'Emitido') }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 pt-0 pb-0" *ngIf="titulo == 'traslado'">
+            <app-cc-input-group-prepend label="Dep. que recibe" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                     id="idname" [(ngModel)]="nombre_departamento_recibido"
+                    disabled  >
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="titulo == 'poliza'">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Estado</span></div>
+                <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                    <i
+                        placement="bottom"
+                        [ngbTooltip]="(estado == 'P') ? 'Pendiente' : ((estado == 'C') ? 'Cerrado' : 'Emitido')" 
+                        [class]="(estado == 'P') ? 'fas fa-circle text-warning' : ((estado == 'C') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
+                    </i>
+                    {{ (estado == 'P') ? 'Pendiente' : ((estado == 'C') ? 'Cerrado' : 'Emitido') }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="titulo == 'poliza'">
+            <app-cc-input-group-prepend label="Fecha Inicio" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                     id="idname" [(ngModel)]="fecha_inicio"
+                    disabled  >
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="titulo == 'poliza'">
+            <app-cc-input-group-prepend label="Fecha Fin" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                     id="idname" [(ngModel)]="fecha_fin"
+                    disabled  >
+            </app-cc-input-group-prepend>
+        </div>
+       </div>
+
+       <div class="row m-0">
+        <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="titulo == 'poliza'">
+            <app-cc-input-group-prepend label="Valor asegurado" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                     id="idname" [(ngModel)]="valor_asegurado"
+                    disabled  >
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="titulo == 'poliza'">
+            <app-cc-input-group-prepend label="Tipo de póliza" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                     id="idname" [(ngModel)]="tipo_poliza"
+                    disabled  >
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12 col-md-4 pt-0 pb-0" *ngIf="titulo == 'poliza'">
+            <app-cc-input-group-prepend label="Número de póliza" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                     id="idname" [(ngModel)]="numero_poliza_contrato"
+                    disabled  >
+            </app-cc-input-group-prepend>
+        </div>
+       </div>
+
+       <div class="row m-0">
+       
+        <div class="col-12 col-md-6 pt-0 pb-0" *ngIf="titulo == 'traslado'">
+            <app-cc-input-group-prepend label="Persona que recibe" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                     id="idname" [(ngModel)]="nombre_persona_recibido"
+                    disabled  >
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-12 col-md-6 pt-0 pb-0" *ngIf="titulo == 'traslado'">
+            <app-cc-input-group-prepend label="Traslado por" styleSpan="size-span-campo">
+                <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                     id="idname" [(ngModel)]="traslado_por"
+                    disabled  >
+            </app-cc-input-group-prepend>
+        </div>
+       </div>
+
+
+
+       
+       
+
+    </app-button-radio-active-new>
+</div>
+<cc-spiner-procesar [ltexto]="texto_barra_carga" lfulScren=true ></cc-spiner-procesar>

@@ -1,0 +1,603 @@
+<p-toast></p-toast>
+<p-toast position="top-left" key="tl"></p-toast>
+<p-toast position="top-right" class="custom-toast" key="tr"></p-toast>
+<p-toast position="top-center" key="tc"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+
+<div class="mt-2 mb-5">
+    <app-button-radio-active titulo="FALTAS Y PERMISOS" filtroBoton="btnsFaltasYPermisos"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+
+        <div>
+
+            <p-tabView (onChange)="dinamicoBotones($event)" styleClass="tab_content_compras" class="overflow-hidden">
+                <p-tabPanel class="p-0" header="REGISTRAR" [headerStyle]="{'font-size': '0.7rem'}">
+
+                    <form [formGroup]="formGroupFaltaAndPermiso" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo font-weight-bold"
+                                            id="inputGroup-sizing-sm">Empleado</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" disabled="true"
+                                            #nameEmpuFullNombre formControlName="fcn_full_nombre_empleado"
+                                            [readonly]="true"
+                                            [ngClass]="{ 'is-invalid': submitted && f.fcn_full_nombre_empleado.errors }"
+                                            placeholder="Nombre Completo">
+                                    <div class="input-group-append">
+                                        <button (click)="onClicConsultaEmpleadosFaltasAndPermisos(content)"
+                                            class="btn btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <app-cc-input-group-prepend label="Año" styleSpan="size-span-campo font-weight-bold">
+                                    <ng-select 
+                                    class="form-control" 
+                                    appendTo="body" 
+                                    [clearable]="false" 
+                                    [ngModel]="faltasAndDescuentosForm.flpr_anio"
+                                    [readonlyInput]="true"
+                                    [ngClass]="{ 'is-invalid': submitted && f.fcn_flpr_anio.errors }"
+                                    [items]="cmb_periodo" 
+                                    bindValue="periodo" 
+                                    bindLabel="periodo"
+                                    formControlName="fcn_flpr_anio"
+                                    #nameAnio
+                                    >
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                                <!-- <app-cc-input-group-prepend label="Año" styleSpan="size-span-campo">
+                                    <p-calendar view="year" dateFormat="yy"
+                                        [ngModel]="faltasAndDescuentosForm.flpr_anio" [showIcon]="false" inputId="icon"
+                                        [readonlyInput]="true"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fcn_flpr_anio.errors }"
+                                        formControlName="fcn_flpr_anio" [showIcon]="true" inputId="icon" #nameAnio>
+                                    </p-calendar>
+                                </app-cc-input-group-prepend> -->
+                                <mat-error *ngIf="submitted && f.fcn_flpr_anio?.errors?.required">
+                                    Año es requerido.
+                                </mat-error>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="mes_id_cc"
+                                    (ccItemSelecionado)="viewSelectionMesCC($event)"
+                                    [optionDefault]="'Selecionar opcion'" #nameMes [labelDescription]="'Mes'"
+                                    [ngClass]="{ 'is-invalid': submitted && f.fcn_mes.errors }" codigocatalogo="MES">
+
+                                </app-cc-select-nom-catalogo>
+                                <!-- formControlName="fcn_mes" -->
+                                <mat-error
+                                    *ngIf="submitted && f.fcn_mes?.errors?.required && (f.fcn_mes!='0' || f.fcn_mes!=0 || f.fcn_mes!='')">
+                                    Mes es requerido.
+                                </mat-error>
+                                <!-- <pre>
+                            Email:{{f.fcn_mes.value}} 
+                            Invalid:{{f.fcn_mes.invalid}} 
+                            Errors:{{f.fcn_mes.errors|json}}
+                        </pre> -->
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="tipo_permiso_id_cc"
+                                    (ccItemSelecionado)="viewSelectionTipoPermisoCC($event)"
+                                    [optionDefault]="'Selecionar opcion'" #nameTipoPermiso
+                                    [labelDescription]="'Tipo de permiso'"
+                                    [ngClass]="{ 'is-invalid': submitted && f.fcn_tipo_permiso.errors }"
+                                    codigocatalogo="TPPM">
+                                </app-cc-select-nom-catalogo>
+                                <!-- formControlName="fcn_tipo_permiso" -->
+                                <mat-error
+                                    *ngIf="submitted && f.fcn_tipo_permiso?.errors?.required && (f.fcn_tipo_permiso!='0' || f.fcn_tipo_permiso!=0 || f.fcn_tipo_permiso!='')">
+                                    Tipo de permiso es requerido.
+                                </mat-error>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="afecta_rol_id_cc"
+                                    (ccItemSelecionado)="viewSelectionAfectaRolCC($event)"
+                                    [optionDefault]="'Selecionar opcion'" #nameAfectaRol
+                                    [labelDescription]="'Afecta Rol'"
+                                    [ngClass]="{ 'is-invalid': submitted && f.fcn_afecta_rol.errors }"
+                                    codigocatalogo="AFRL">
+                                </app-cc-select-nom-catalogo>
+                                <!-- formControlName="fcn_afecta_rol" -->
+                                <mat-error
+                                    *ngIf="submitted && f.fcn_afecta_rol?.errors?.required && (f.fcn_afecta_rol!='0' || f.fcn_afecta_rol!=0 || f.fcn_afecta_rol!='')">
+                                    Afecta Rol es requerido.
+                                </mat-error>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+
+                           
+                           
+
+
+                            <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                                        <input 
+                                        id="fecha_desde" 
+                                        type="date" 
+                                        class="form-control" 
+                                        max="2050-01-01" 
+                                        [readonlyInput]="true"
+                                        (onSelect)="onValidateRangoFecha('inicio')"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fnc_flpr_fecha_inicio.errors }"
+                                        [(ngModel)]="faltasAndDescuentosForm.flpr_fecha_inicio"
+                                        formControlName="fnc_flpr_fecha_inicio"
+                                        #nameFechaInicio>
+                                    </app-cc-input-group-prepend>
+                                
+                                <!-- <app-cc-input-group-prepend label="Fecha de Inicio" styleSpan="size-span-campo">
+                                    <p-calendar dateFormat="dd/mm/yy" [readonlyInput]="true"
+                                        (onSelect)="onValidateRangoFecha('inicio')" [required]="true"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fnc_flpr_fecha_inicio.errors }"
+                                        formControlName="fnc_flpr_fecha_inicio" inputId="icon" #nameFechaInicio
+                                        [ngModel]="faltasAndDescuentosForm.flpr_fecha_inicio"
+                                        placeholder="Date range from" [showIcon]="true">
+                                    </p-calendar>
+                                </app-cc-input-group-prepend> -->
+                                <mat-error *ngIf="submitted && f.fnc_flpr_fecha_inicio?.errors?.required">
+                                    Fecha de Inicio es requerido.
+                                </mat-error>
+                            </div>
+
+                            <div class="col-sm-6">
+                                
+                                    <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                                        <input 
+                                        id="fecha_hasta" 
+                                        type="date" 
+                                        class="form-control" 
+                                        max="2050-01-01" 
+                                        [readonlyInput]="true"
+                                        (onSelect)="onValidateRangoFecha('fin')"
+                                        [(ngModel)]="faltasAndDescuentosForm.flpr_fecha_fin"
+                                        formControlName="fnc_fnc_flpr_fecha_fin"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fnc_fnc_flpr_fecha_fin?.errors }"
+                                        #nameFechaFin>
+                                    </app-cc-input-group-prepend>
+                               
+                                <!-- <app-cc-input-group-prepend label="Fecha de Fin" styleSpan="size-span-campo">
+                                    <p-calendar dateFormat="dd/mm/yy" [readonlyInput]="true"
+                                        (onSelect)="onValidateRangoFecha('fin')"
+                                        [ngModel]="faltasAndDescuentosForm.flpr_fecha_fin"
+                                        formControlName="fnc_fnc_flpr_fecha_fin" inputId="icon"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fnc_fnc_flpr_fecha_fin?.errors }"
+                                        #nameFechaFin placeholder="Date range from" [showIcon]="true" [required]="true">
+                                    </p-calendar>
+                                </app-cc-input-group-prepend> -->
+                                <mat-error *ngIf="submitted && f.fnc_flpr_fecha_fin?.errors?.required">
+                                    Fecha de Fin es requerido.
+                                </mat-error>
+                                <!-- <pre>
+                            Errors:{{f.fnc_flpr_fecha_fin?.errors|json}}
+                        </pre> -->
+                                <!-- <mat-error *ngIf="submitted && f.fnc_flpr_fecha_fin?.errors?.matchPassword">
+                            Fecha de Fin es requerido.
+                        </mat-error> -->
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
+                                <app-cc-input-group-prepend label="Núm. Horas" styleSpan="size-span-campo font-weight-bold">
+
+                                    <input type="number" class="form-control form-control-sm"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fnc_flpr_num_horas.errors }"
+                                        onkeypress="return event.charCode >= 48" min="1" placeholder="Número de Horas"
+                                        formControlName="fnc_flpr_num_horas"
+                                        [ngModel]="faltasAndDescuentosForm.flpr_num_horas" />
+                                </app-cc-input-group-prepend>
+                                <mat-error *ngIf="submitted && f.fnc_flpr_num_horas?.errors?.required">
+                                    Número de horas es requerido.
+                                </mat-error>
+                            </div>
+
+                            <!-- <input pInputText type="number" (blur)="onColumnEditComplete($event.target.value, det_ingreso_descuento)"
+                                         [(ngModel)]="det_ingreso_descuento.indc_valor_solicitado"
+                                         [min]="0"
+                                         required> -->
+
+                            <!-- <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo"
+                                    id="inputGroup-sizing-sm">Núm. Horas</span>
+                                    <p-inputNumber
+                                    styleClass="inputNumber"
+                                    [ngModel]="faltasAndDescuentosForm.flpr_num_horas"
+                                    mode="decimal"
+                                    placeholder="Número de Horas"
+                                    formControlName="fnc_flpr_num_horas"
+                                    [ngClass]="{ 'is-invalid': submitted && f.fnc_flpr_num_horas.errors }"
+                                    inputId="withoutgrouping"
+                                     [useGrouping]="true"
+                                     styleClass="input-styling"
+                                     >
+                                    </p-inputNumber>
+                            </div>
+                            <mat-error *ngIf="submitted && f.fnc_flpr_num_horas?.errors?.required">
+                                Número de horas es requerido.
+                            </mat-error>
+                        </div>
+                    </div> -->
+
+
+
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm  mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo font-weight-bold">Observación</span>
+                                    </div>
+
+                                    <textarea rows="3" type="text" class="form-control"
+                                        formControlName="fnc_flpr_observacion"></textarea>
+
+                                    <!-- <textarea class="form-control" aria-label="With textarea" rows="1"
+                            formControlName="fnc_flpr_observacion"
+                            (input)="onValueChangeObservacion($event.target.value)"
+                            placeholder="Ingrese una observación"
+                           
+                            (change)="doTextareaValueChange($event)"
+                            ></textarea> -->
+                                </div>
+                                <!--  [ngModel]="faltasAndDescuentosForm.flpr_observacion"-->
+                                <!-- [ngClass]="{ 'is-invalid': submitted && f.fnc_flpr_observacion.errors }" -->
+                                <!-- <mat-error *ngIf="submitted && f.fnc_flpr_observacion?.errors?.required">
+                            Observación es requerido.
+                        </mat-error>-->
+                            </div>
+                        </div>
+
+
+
+                    </form>
+
+                    <div class="mt-2">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p-table [value]="objGetFaltaPermisosByParameter" [lazy]="true" [paginator]="true"
+                                    responsiveLayout="scroll" [rows]="rows" [loading]="loading"
+                                    [totalRecords]="totalRecords" (onLazyLoad)="nextPage($event)"
+                                    [showCurrentPageReport]="true"
+                                    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+                                    [rowsPerPageOptions]="pageSizeOptions"
+                                    (onRowSelect)="onRowSelectFaltaPermisoEmp($event)" selectionMode="single">
+                                    <ng-template pTemplate="header">
+                                        <tr style="font-size: 11px;">
+                                           
+                                            <th>Año</th>
+                                            <th>Mes</th>
+                                            <th>Tipo Permiso</th>
+                                            <th>Fecha inicio</th>
+                                            <th>Fecha fin</th>
+                                            <th>Núm Horas</th>
+                                            <th>Motivo de permiso</th>
+                                            <th>Afecta Rol</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-data_falta_permiso>
+                                        <tr [pSelectableRow]="data_falta_permiso" style="font-size: 11px;">
+                                            
+                                            <!-- <td>{{data_falta_permiso.estado_falta_permiso.cat_keyword }}</td> -->
+                                            <!-- <td *ngIf="data_falta_permiso.estado_falta_permiso.cat_keyword=='EFPA';else BTNPendienteAprobar">
+                                                <button 
+                                                styleClass="p-button-sm"
+                                                disabled="true"
+                                                class="p-button-rounded p-button-success" 
+                                                pButton pRipple label="{{ data_falta_permiso.estado_falta_permiso.cat_nombre }}" 
+                                                icon="pi pi-check">
+                                                </button>
+                                            </td> -->
+                                            <!-- <ng-template #BTNPendienteAprobar>
+                                                <td *ngIf="data_falta_permiso.estado_falta_permiso.cat_keyword=='EFPP';else BTNRechazado">
+                                                    <button 
+                                                    styleClass="p-button-sm"
+                                                    (click)="cambiarEstadoFalataPermisos(data_falta_permiso)"
+                                                    class="p-button-rounded p-button-warning" 
+                                                    pButton pRipple label="{{ data_falta_permiso.estado_falta_permiso.cat_nombre }}" 
+                                                    icon="pi pi-exclamation-triangle">
+                                                    </button>
+                                                </td>
+                                            </ng-template>
+                                            <ng-template #BTNRechazado>
+                                               
+                                                <td >
+                                                    <button 
+                                                    styleClass="p-button-sm"
+                                                    disabled="true"
+                                                    class="p-button-rounded p-button-danger" 
+                                                    pButton pRipple label="{{ data_falta_permiso.estado_falta_permiso.cat_nombre }}" 
+                                                    icon="pi pi-times">
+                                                    </button>
+                                                </td>
+                                            </ng-template> -->
+                                             <!-- *ngIf="data_falta_permiso.estado_falta_permiso.cat_keyword=='ERDO';" -->
+
+                                            <td>{{data_falta_permiso.flpr_anio }}</td>
+                                            <!-- <td>{{data_falta_permiso.flpr_anio| date:'yyyy' }}</td> -->
+                                            <td>{{data_falta_permiso.mes.cat_nombre}}</td>
+                                            <td>{{data_falta_permiso.tipo_permiso.cat_nombre}}</td>
+                                            <td>{{data_falta_permiso.flpr_fecha_inicio| date:'fullDate'}}</td>
+                                            <td>{{data_falta_permiso.flpr_fecha_fin| date:'fullDate'}}</td>
+                                            <td>{{data_falta_permiso.flpr_num_horas}}</td>
+                                            <td>{{data_falta_permiso.flpr_observacion}}</td>
+                                            <td>{{data_falta_permiso.afecta_rol.cat_nombre}}</td>
+                                            <td>
+                                                <i placement="bottom" 
+                                                [ngbTooltip]="data_falta_permiso.estado_falta_permiso.cat_keyword=='EFPA' ? 'Aprobado' 
+                                                : data_falta_permiso.estado_falta_permiso.cat_keyword=='EFPR' ? 'Rechazado' 
+                                                : 'Pendiente'" 
+                                                [class]="data_falta_permiso.estado_falta_permiso.cat_keyword=='EFPA' ? 'fas fa-circle text-success' 
+                                                : data_falta_permiso.estado_falta_permiso.cat_keyword=='EFPR' ? 'fas fa-circle text-danger' 
+                                                :  'fas fa-circle text-warning'"></i>
+                                                {{data_falta_permiso.estado_falta_permiso.cat_keyword=='EFPA' ? 'Aprobado' 
+                                                : data_falta_permiso.estado_falta_permiso.cat_keyword=='EFPR' ? 'Rechazado' 
+                                                : 'Pendiente'}}
+                                            </td>
+                                            <td>
+                                                <div >
+                                                    <button [disabled]="data_falta_permiso.estado_falta_permiso.cat_keyword != 'EFPP'"
+                                                    (click)="cambiarEstadoFalataPermisos(data_falta_permiso)"
+                                                    class="btn btn-sm btn-success"  ngbTooltip="Pendiente por aprobar">
+                                                    <i class="fas fa-check-double"></i>
+                                                    </button> 
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                            <td class="EmptyTable" [attr.colspan]="9">
+                                                No hay información para mostrar
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel class="p-0" header="REPORTE" [headerStyle]="{'font-size': '0.7rem'}">
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo"
+                                        id="inputGroup-sizing-sm">Empleado</span>
+                                </div>
+                                <input type="text" class="form-control form-control-sm"
+                                    placeholder="Ingrese nombre, apellido, cédula">
+                                <div class="input-group-append">
+                                    <button (click)="onClicConsultaEmpleadosFaltasAndPermisosReport(content)"
+                                        class="btn btn-default btn-ligth-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" disabled="true"
+                                        [readonly]="true"
+                                        [ngModel]="empleadoReport" 
+                                        placeholder="Nombre Completo">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Año" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select 
+                                class="form-control" 
+                                appendTo="body" 
+                                [clearable]="false" 
+                                [ngModel]="anio_reporte"
+                                [readonlyInput]="true"
+                                [items]="cmb_periodo" 
+                                bindValue="periodo" 
+                                bindLabel="periodo"
+                                >
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                            <!-- <app-cc-input-group-prepend label="Año" styleSpan="size-span-campo">
+                                <p-calendar view="year" dateFormat="yy"
+                                    [ngModel]="anio_reporte" [showIcon]="false" inputId="icon"
+                                    [readonlyInput]="true"
+                                    [showIcon]="true" inputId="icon">
+                                </p-calendar>
+                            </app-cc-input-group-prepend> -->
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="mesConsulta"
+                                (ccItemSelecionado)="viewSelectionmesConsulta($event)"
+                                [optionDefault]="'Selecionar opcion'" [labelDescription]="'Mes'"
+                                codigocatalogo="MES">
+
+                            </app-cc-select-nom-catalogo>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="tipo_permiso_id_cc"
+                                (ccItemSelecionado)="viewSelectionTipoPermisoCC($event)"
+                                [optionDefault]="'Selecionar opcion'" #nameTipoPermiso
+                                [labelDescription]="'Tipo de permiso'"
+                                [ngClass]="{ 'is-invalid': submitted && f.fcn_tipo_permiso.errors }"
+                                codigocatalogo="TPPM">
+                            </app-cc-select-nom-catalogo>
+                        </div>                        
+                    </div>
+
+                    
+
+                    <div class="mt-5">
+
+                        <p-table [value]="objGetFaltaPermisosReport" sortField="emp_full_nombre" sortMode="single" 
+                            [scrollable]="true" scrollHeight="400px" rowGroupMode="subheader" [loading]="loading"
+                            groupRowsBy="emp_full_nombre" [tableStyle]="{'min-width': '60rem'}">
+                            <ng-template pTemplate="header">
+                                <tr style="font-size: 11px;">
+                                    <th>Año</th>
+                                    <th>Mes</th>
+                                    <th>Tipo Permiso</th>
+                                    <th>Fecha inicio</th>
+                                    <th>Fecha fin</th>
+                                    <th>Núm Horas</th>
+                                    <th>Motivo de permiso</th>
+                                    <th>Afecta Rol</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="groupheader" let-objGetFaltaPermisosReport>
+                                <tr pRowGroupHeader style="background-color: #eaeaea; height: 50px;" style="font-size: 11px;"> 
+                                    <td colspan="9">
+                                        <span class="font-bold ml-2">{{objGetFaltaPermisosReport.emp_full_nombre}}</span>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-objGetFaltaPermisosReport let-rowIndex="rowIndex">
+                                <tr style="height: 50px;">
+                                    <td>{{objGetFaltaPermisosReport.flpr_anio }}</td>
+                                    <td>{{objGetFaltaPermisosReport.mes.cat_nombre}}</td>
+                                    <td>{{objGetFaltaPermisosReport.tipo_permiso.cat_nombre}}</td>
+                                    <td>{{objGetFaltaPermisosReport.flpr_fecha_inicio| date:'mediumDate'}}</td>
+                                    <td>{{objGetFaltaPermisosReport.flpr_fecha_fin| date:'mediumDate'}}</td>
+                                    <td>{{objGetFaltaPermisosReport.flpr_num_horas}}</td>
+                                    <td>{{objGetFaltaPermisosReport.flpr_observacion}}</td>
+                                    <td>{{objGetFaltaPermisosReport.afecta_rol.cat_nombre}}</td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td class="EmptyTable" [attr.colspan]="10">
+                                        No hay información para mostrar
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+
+                </p-tabPanel>
+                <p-tabPanel class="p-0" header="ESTADISTICAS" [headerStyle]="{'font-size': '0.7rem'}">
+
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Año" styleSpan="size-span-campo">
+                                <p-calendar view="year" dateFormat="yy"
+                                    [ngModel]="anio_reporte" [showIcon]="false" inputId="icon"
+                                    [readonlyInput]="true">
+                                </p-calendar>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="mesConsulta"
+                                (ccItemSelecionado)="viewSelectionmesConsulta($event)"
+                                [optionDefault]="'Selecionar opcion'" [labelDescription]="'Mes'"
+                                codigocatalogo="MES">
+
+                            </app-cc-select-nom-catalogo>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="tipo_permiso_id_cc"
+                                (ccItemSelecionado)="viewSelectionTipoPermisoCC($event)"
+                                [optionDefault]="'Selecionar opcion'" #nameTipoPermiso
+                                [labelDescription]="'Tipo de permiso'"
+                                [ngClass]="{ 'is-invalid': submitted && f.fcn_tipo_permiso.errors }"
+                                codigocatalogo="TPPM">
+                            </app-cc-select-nom-catalogo>
+                        </div>                        
+                    </div>
+                    <div class="mt-5">
+
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6"> 
+                                <!-- <div class="card-body">
+                                    <canvas id="esta1" ></canvas>
+                                
+                                </div> -->
+                                
+                                <div class="card-body" *ngIf="hidenBarra"  >
+                                    <!-- <p-chart type="bar" [data]="ReportGrafiFPBarras" [options]="ConfigOpcionCharBarra"></p-chart> -->
+                                    <canvas id="esta1" ></canvas>
+                                </div>
+                                <div class="card-body" *ngIf="hidenPastel"  >
+                                    <!-- <p-chart type="pie" [data]="ReportGrafiFPDona" [options]="chartOptions" ></p-chart> -->
+                                    <canvas id="esta2" ></canvas>
+                                </div>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                        
+                        <!--div class="card">
+                            <h5>Horizontal</h5>
+                            <p-chart type="bar" [data]="basicData" [options]="horizontalOptions"></p-chart>
+                        </div>
+                        
+                        <div class="card">
+                            <h5>Multi Axis</h5>
+                            <p-chart type="bar" [data]="multiAxisData" [options]="multiAxisOptions"></p-chart>
+                        </div>
+                        
+                        <div class="card">
+                            <h5>Stacked</h5>
+                            <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
+                        </div-->
+
+                    </div>
+
+                </p-tabPanel>
+            </p-tabView>
+
+        </div>
+
+        <!--<ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template>-->
+
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lTipo="spBacnBcn"></cc-spiner-procesar>

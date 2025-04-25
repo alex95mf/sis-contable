@@ -1,0 +1,334 @@
+<div>
+    <p-confirmPopup></p-confirmPopup>
+    <div class="pt-3 pr-3 pl-3">
+        <div class="row">
+            <div class="col-sm-12">
+                <p-messages [(value)]="msgs2" [enableService]="false"></p-messages>
+            </div>
+        </div>
+    </div>
+
+    <div class="pt-3 pr-3 pl-3">
+        <div class="row">
+            <div [ngClass]="{'d-none': exist_client }" class="col-sm-6">
+                <p-messages [(value)]="msgs1" [enableService]="false"></p-messages>
+            </div>
+            <div class="col-sm-6">
+                <button [ngClass]="{'d-none': exist_client }" class="p-button-sm p-button-info"
+                    (click)="RegistrarProveedor($event)" pButton type="button">Crear Proveedor</button>
+                <button [disabled]="botonConfirmar" class="ml-2 p-button-sm p-button-secondary"
+                    (click)="CargarFacturaProveedor($event)" pButton type="button">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-3">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Proveedor</span>
+                    </div>
+                    <input [(ngModel)]="compra.fk_id_proveedor" type="text" class="form-control form-control-sm d-none"
+                        disabled>
+                    <input [value]="compra?.proveedor_name" type="text" class="form-control" placeholder="Proveedor" disabled>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Identificación</span>
+                    </div>
+                    <input [value]="compra?.identificacion_proveedor" type="text"
+                        class="form-control form-control-sm" placeholder="identificacion" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">N° Comprobante</span>
+                    </div>
+                    <input [value]="compra?.numero_comprobante" type="text" class="form-control form-control-sm"
+                        placeholder="No. Comprobante" disabled>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Autorización</span>
+                    </div>
+                    <input [value]="compra?.autorizacion" type="text" class="form-control form-control-sm"
+                        placeholder="Autorizacion" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha Emisión</span>
+                    </div>
+                    <input [value]="compra?.fecha_emision" type="text" class="form-control form-control-sm"
+                        placeholder="" disabled>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="pr-3 pl-3">
+        <div class="row">
+            <div class="col-sm-12">
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <p-table [value]="dataProducto" id="tabla_xml">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Producto</th>
+                <th>Nombre</th>
+                <th>Codigo</th>
+                <th>Descripcion</th>
+                <th>Cant.</th>
+                <th>P/U</th>
+                <th>Subtotal</th>
+                <th>Desc.</th>
+                <th>Impue.</th>
+                <th>Total</th>
+                <th>Ret. Fuente</th>
+                <th>Ret. IVA</th>
+                <th>Centro</th>
+                <th>IVA</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td></td>
+                <td>{{product.nombre}}</td>
+                <td>{{product.codigo}}</td>
+                <td>{{product.observacion}}</td>
+                <td>{{product.cantidad | number:'1.2-2'}}</td>
+                <td>{{product.precio | number:'1.2-2'}}</td>
+                <td>{{product.subtotalItems | number:'1.2-2'}}</td>
+                <td>{{product.desc}}</td>
+                <td>
+                    <ng-select style="width: 150px;" loadingText="Cargando.."
+                        [clearable]=false [loading]="d.LoadOpcionImpuesto"
+                        placeholder="-seleccionar impuesto-" [(ngModel)]="product.impuesto"
+                        [disabled]="true" (ngModelChange)="CambioImpuesto(i)"
+                        class="form-control form-control-sm custom-select"
+                        (open)="getImpuestosDetalle(i,dataProducto)" [items]="impuestos"
+                        bindLabel="descripcion" bindValue="valor" appendTo="#tabla_xml"
+                        id="idTipImpuestoSelect">
+                    </ng-select>
+                </td>
+                <td>{{product.totalItems}}</td>
+                <td>
+                    <ng-select loadingText="Cargando.." [clearable]=false
+                        [loading]="d.LoadOpcionReteFuente"
+                        placeholder="-seleccionar rte. fuente-" [(ngModel)]="product.rte_fuente"
+                        class="form-control form-control-sm custom-select"
+                        (open)="getRetencionFuente(i)" [items]="rete_fuente"
+                        bindLabel="descripcion" bindValue="id_reten_fuente"
+                        (change)="ChangeFuente($event,dataProducto,i)" id="idReteFuente"
+                        appendTo="#tabla_xml" style="width: 200px;">
+                        <ng-template ng-option-tmp let-item="item">
+                            <strong>{{item.codigo_fte_sri}} ({{item.porcentaje_fte}})-</strong>{{item.descripcion}}
+                        </ng-template>
+                    </ng-select>
+                </td>
+                <td>
+                    <div style="width: 150px;">
+                        <ng-select style="width: 150px;" loadingText="Cargando.."
+                            [clearable]=false [loading]="d.LoadOpcionRteIva"
+                            placeholder="-seleccionar rte. IVA-" [(ngModel)]="product.rte_iva"
+                            class="form-control form-control-sm custom-select"
+                            (open)="getRetencionIva(i,dataProducto)" [items]="rte_iva"
+                            (change)="ChangeImpuestoIva($event,dataProducto,i)"
+                            [disabled]="d.isRetencionIva" bindLabel="descripcion_tipo_servicio"
+                            bindValue="codigo_sri_iva" id="idRteIva"
+                            appendTo="#tabla_xml">
+                        </ng-select>
+                    </div>
+                </td>
+                <td>
+                    <ng-select style="width: 150px;" loadingText="Cargando.."
+                        [clearable]=false [loading]="d.LoadOpcionCentro"
+                        placeholder="-seleccionar centro-" [(ngModel)]="product.centro"
+                        class="form-control form-control-sm custom-select"
+                        (open)="getCentroDetalle(i)" [items]="centros"
+                        bindLabel="descripcion" bindValue="valor" appendTo="#tabla_xml"
+                        id="idCentroCosto">
+                    </ng-select>
+                </td>
+                <td>{{product.iva_detalle}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <!-- <div id="tabla_xml" class="pr-3 pl-3 mb-5">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-12 filters p-0">
+                    <div class="justify-content-center">
+                        <div class="mb-2 content-tabla-general content-tabla_editable table_scroll_horizontal">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="display: none; text-align: center;width: 0%;padding-left: 0px;">
+                                            Producto</th>
+                                        <th class="headcol" style="text-align: center;width: 70px; height: 32px;"></th>
+                                        <th style="width: 250px; ">Nombre</th>
+                                        <th style="width: 0%; display: none;">Código</th>
+                                        <th style="width: 23%; display: none;">Descripción</th>
+                                        <th>Cant.</th>
+                                        <th>P/U</th>
+                                        <th style="width: 60px;">Subtotal</th>
+                                        <th style="width: 60px;">Desc.</th>
+                                        <th style="width: 150px;">Impue.</th>
+                                        <th style="width: 100px;">Total</th>
+                                        <th style="width: 200px;">Ret. Fuente</th>
+                                        <th style="width: 150px;">Ret. IVA</th>
+                                        <th style="width: 150px;">Centro</th>
+                                        <th style="width: 60px">IVA</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="w-full">
+                                    <tr *ngFor="let d of dataProducto; let i = index">
+                                        <td style="display: none; text-align: center;">{{i+1}}</td>
+                                        <td class="headcol"
+                                            style="text-align: center; height: 45px; width: 70px; vertical-align: middle;">
+
+                                            <button class="btn btn-primary btn-sm mt-2 ml-1" placement="top"
+                                                ngbTooltip="Lista Productos" (click)="onClickConsultaProductos(i)"><i
+                                                    class="fa fa-search" aria-hidden="true"></i>
+                                            </button>
+
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control form-control-sm pr-1"
+                                                style="width: 250px;" [(ngModel)]="d.nombre" [disabled]="true"
+                                                id="product_{{i}}">
+                                        </td>
+                                        <td style="display: none; text-align: center;">
+                                            <input type="text" [(ngModel)]="d.codigo" [disabled]="true"
+                                                placeholder="Código">
+                                        </td>
+                                        <td style="display: none; text-align: center;">
+                                            <textarea class="form-control form-control-sm" [(ngModel)]="d.observacion"
+                                                [disabled]="true" placeholder="Ingrese descripción" rows="1">
+                          </textarea>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control form-control-sm pr-1"
+                                                placeholder="0.00" style="width: 100px; text-align: right;"
+                                                [(ngModel)]="d.cantidad" (keyup)="sumRegistroDetalle(i)" min="0"
+                                                (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true"
+                                                id="cantidad_{{i}}">
+                                        </td>
+                                        <td>
+                                            <input style="width: 60px" type="text"
+                                                class="form-control form-control-sm pr-1" placeholder="$ 0.00"
+                                                style="width: 100px; text-align: right;" [(ngModel)]="d.precio"
+                                                (keyup)="sumRegistroDetalle(i)" min="0"
+                                                (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+                                        </td>
+                                        <td style="text-align: right; width: 100px; vertical-align: middle;">
+                                            <div style="width: 100px;">
+                                                $ {{d.subtotalItems.toFixed(2)}}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control form-control-sm pr-1"
+                                                placeholder="$ 0.00" style="width: 100px; text-align: right;"
+                                                [(ngModel)]="d.desc" (keyup)="sumRegistroDetalle(i)" min="0"
+                                                (keypress)="commonServices.FormatDecimalVal($event)" [disabled]="true">
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <ng-select style="width: 150px;" loadingText="Cargando.."
+                                                    [clearable]=false [loading]="d.LoadOpcionImpuesto"
+                                                    placeholder="-seleccionar impuesto-" [(ngModel)]="d.impuesto"
+                                                    [disabled]="true" (ngModelChange)="CambioImpuesto(i)"
+                                                    class="form-control form-control-sm custom-select"
+                                                    (open)="getImpuestosDetalle(i,dataProducto)" [items]="impuestos"
+                                                    bindLabel="descripcion" bindValue="valor" appendTo="#tabla_xml"
+                                                    id="idTipImpuestoSelect"></ng-select>
+                                            </div>
+                                        </td>
+                                        <td style="text-align: right; width: 100px; vertical-align: middle;">
+                                            <div style="width: 100px;">
+                                                $ {{d.totalItems.toFixed(2)}}
+                                            </div>
+                                        </td>
+                                        <td style="width: 200px;">
+                                            <div style="width: 200px;">
+                                                <ng-select loadingText="Cargando.." [clearable]=false
+                                                    [loading]="d.LoadOpcionReteFuente"
+                                                    placeholder="-seleccionar rte. fuente-" [(ngModel)]="d.rte_fuente"
+                                                    class="form-control form-control-sm custom-select"
+                                                    (open)="getRetencionFuente(i)" [items]="rete_fuente"
+                                                    bindLabel="descripcion" bindValue="id_reten_fuente"
+                                                    (change)="ChangeFuente($event,dataProducto,i)" id="idReteFuente"
+                                                    appendTo="#tabla_xml" style="width: 200px;">
+                                                    <ng-template ng-option-tmp let-item="item">
+                                                        <strong>{{item.codigo_fte_sri}}
+                                                            ({{item.porcentaje_fte}})-
+                                                        </strong>{{item.descripcion}}
+                                                    </ng-template>
+                                                </ng-select>
+                                            </div>
+                                        </td>
+                                        <td style="width: 150px;">
+                                            <div style="width: 150px;">
+                                                <ng-select style="width: 150px;" loadingText="Cargando.."
+                                                    [clearable]=false [loading]="d.LoadOpcionRteIva"
+                                                    placeholder="-seleccionar rte. IVA-" [(ngModel)]="d.rte_iva"
+                                                    class="form-control form-control-sm custom-select"
+                                                    (open)="getRetencionIva(i,dataProducto)" [items]="rte_iva"
+                                                    (change)="ChangeImpuestoIva($event,dataProducto,i)"
+                                                    [disabled]="d.isRetencionIva" bindLabel="descripcion_tipo_servicio"
+                                                    bindValue="codigo_sri_iva" id="idRteIva"
+                                                    appendTo="#tabla_xml"></ng-select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <ng-select style="width: 150px;" loadingText="Cargando.."
+                                                    [clearable]=false [loading]="d.LoadOpcionCentro"
+                                                    placeholder="-seleccionar centro-" [(ngModel)]="d.centro"
+                                                    class="form-control form-control-sm custom-select"
+                                                    (open)="getCentroDetalle(i)" [items]="centros"
+                                                    bindLabel="descripcion" bindValue="valor" appendTo="#tabla_xml"
+                                                    id="idCentroCosto"></ng-select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control form-control-sm pr-1"
+                                                placeholder="$ 0.00" style="width: 60px; text-align: right;"
+                                                [(ngModel)]="d.iva_detalle" min="0" [disabled]="true">
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+</div>
+<ng-template #PermisoVerDenegado>
+
+
+    No tiene permisos
+
+</ng-template>

@@ -1,0 +1,77 @@
+:host ::ng-deep .p-organizationchart {
+    .p-person {
+        padding: 0;
+        border: 0 none;
+    }
+
+    .node-header, .node-content {
+        padding: .5em .7rem;
+    }
+
+    .node-header {
+        background-color: #495ebb;
+        color: #ffffff;
+    }
+
+    .node-content {
+        text-align: center;
+        border: 1px solid #495ebb;
+    }
+
+    .node-content img {
+        border-radius: 50%;
+    }
+
+    .department-cfo {
+        background-color: #7247bc;
+        color: #ffffff;
+    }
+
+    .department-coo {
+        background-color: #a534b6;
+        color: #ffffff;
+    }
+
+    .department-cto {
+        background-color: #e9286f;
+        color: #ffffff;
+    }
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: black;
+}
+
+.chartContainer {
+    width: 300px;
+    position: relative;
+    .chartPercent {
+        position: absolute;
+        top: 130px;
+    }
+}
+
+.chartContainer-sm {
+    position: relative;
+    border-top: 1px solid black;
+    padding-top: 10px;
+    .chartPercent-sm {
+        position: absolute;
+        top:75px;
+    }
+}
+
+.h-150p {
+    height: 150px;
+}
+
+.w-20 {
+    width: 20%;
+}
+
+:host ::ng-deep .ngx-charts {
+    .label {
+        fill: #000000!important;
+    }
+}

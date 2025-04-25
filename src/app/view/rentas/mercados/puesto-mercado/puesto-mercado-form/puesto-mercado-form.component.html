@@ -1,0 +1,45 @@
+<app-button-radio-active [titulo]="isNew ? 'Crear puesto de mercado' : 'Editar puesto de mercado'" cstyle="bg-light" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'"
+    filtroBoton="btnPuestoMercadoForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="N&uacute;mero de Local" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="puesto.numero_puesto" maxlength="20">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Mercado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select [items]="mercados" bindValue="id_catalogo" bindLabel="valor" [(ngModel)]="puesto.fk_mercado" [clearable]="false" class="form-control" [markFirst]="false"></ng-select>  
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select [items]="estados" bindValue="value" bindLabel="descripcion" [(ngModel)]="puesto.estado" [clearable]="false" class="form-control" [markFirst]="false"></ng-select>  
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Descripci&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="puesto.descripcion" maxlength="120">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col">
+            <app-cc-input-group-prepend label="Canon Mensual" styleSpan="size-span-campo font-weight-bold">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">$</div>
+                </div>
+                <input type="number" class="form-control" [(ngModel)]="puesto.valor" (keypress)="validaciones.numberOnlyDot($event)">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-8">
+            <app-cc-input-group-prepend label="Ubicaci&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="puesto.ubicacion" maxlength="120">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

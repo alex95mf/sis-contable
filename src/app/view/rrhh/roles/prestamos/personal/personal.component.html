@@ -1,0 +1,48 @@
+ 
+ <div class="modal-body " >
+
+    <app-button-radio-active titulo="BUSCAR - PERSONAL" filtroBoton="btnPerMdPrs" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-user-circle"> 
+
+        <div class="row">
+            <div class="col-sm">
+                <app-cc-input-group-prepend label="Personal"styleSpan="size-span-campo">
+                    <ng-select   class="form-control form-control-sm custom-select" [searchable]="true" [clearable]="true" [(ngModel)]="personal" (ngModelChange)="searchPersonal($event)">
+                        <ng-option *ngFor="let d of personales" [value]="d.id_personal">{{ d.nombres }} {{ d.apellidos }} - {{ d.numdoc }}</ng-option>
+                        <!-- <ng-option *ngFor="let d of personales" [value]="d.id_personal">{{ d.numdoc }}</ng-option> -->
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+
+        <fieldset class="border p-2 filters">
+            <legend class="w-auto h6 prueba">Listado del Personal</legend>  
+            <div class="table-responsive">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th>#</th>
+                            <th>Nombres</th>
+                            <th>Clientes</th>
+                            <th>Tipo Documento</th>
+                            <th>Documento</th>
+                            <th>Departamento</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="validaDtUser">
+                        <tr class="text-justify" *ngFor="let dt of guardarolT; let i = index" (click)="searchPersonalModal(dt)" style="cursor:pointer;text-align:center;" placement="top" ngbTooltip="Click para Seleccionar">
+                            <td class="text-left" style="width: 0%;">{{ i + 1 }}</td>
+                            <td class="text-left" style="width: 1%;">{{ dt.nombres }}</td>
+                            <td class="text-left" style="width: 2%;">{{ dt.apellidos }}</td>
+                            <td class="text-center" style="width: 2%;">{{ dt.tipodoc }}</td>
+                            <td class="text-center" style="width: 2%;">{{ dt.numdoc }}</td>
+                            <td class="text-center" style="width: 2%;">{{ dt.nombre_grupo }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+        </fieldset>
+
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spPerMdPrs"></cc-spiner-procesar> 

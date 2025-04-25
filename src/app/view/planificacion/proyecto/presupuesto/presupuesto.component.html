@@ -1,0 +1,173 @@
+
+    <app-button-radio-active-new titulo="{{ fTitle }}" icono="fas fa-money" cstyle="bg-gradient-primary text-white"
+        filtroBoton="btnsAsigPartPres" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [markFirst]="false" [clearable]="false" [(ngModel)]="periodoSelected" (change)="handlePeriodoSelected($event)"
+                                    [items]="periodos" bindValue="id" bindLabel="periodo"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" [markFirst]="false" [(ngModel)]="programaSelected" (change)="handleSelectPrograma($event)"
+                                    [items]="programas" bindValue="valor" bindLabel="label"></ng-select>
+                            </app-cc-input-group-prepend>
+
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" [markFirst]="false" [(ngModel)]="departamentoSelected" (change)="handleSelectDepartamento($event)"
+                                [items]="departamentosFilter" bindValue="valor" bindLabel="label"></ng-select>
+                            </app-cc-input-group-prepend>
+
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+        </div>
+        
+
+    </app-button-radio-active-new>
+    <div class="row m-0">
+        <div class="col-12">
+
+
+
+            <!-- <div class="table-responsive">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                    <thead class="sticky-header">
+                        <tr class="text-center"> -->
+
+
+
+                            
+
+
+
+            <div class="table-responsive" style="max-height: 540px; overflow-y: scroll;">
+                <table class="table table-striped table-bordered table-k table-hover" style="min-width: 1900px;" >
+                    <thead class="sticky-header">
+                        <tr class="text-center"> 
+
+
+         
+                            <th class="col-nombre" style="width: 300px;">Bienes y Servicios</th>
+                            <th style="width: 80px;">Cant.</th>
+                            <th style="width: 150px;">Costo Unit.</th>
+                            <th style="width: 150px;">Costo Total</th>
+                            <th style="width: 300px;">Part. Presupuestaria</th>
+                            <th style="width: 110px;">Fondos BID</th>
+                            <th style="width: 150px;">Cod. Operacion</th>
+                            <th style="width: 150px;">Cod. Proyecto</th>
+                            <th style="width: 300px;">Fuente de Financiamiento</th>
+                            <th style="width: 200px;">Tipo de Presupuesto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!bienes.length" class="bg-white">
+                            <td colspan="10" class="text-center">
+                                <h6>No hay datos.</h6>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let bien of bienes; let i = index" class="bg-white">
+                            <td class="col-nombre">{{ bien.descripcion }}</td>
+                            <td>
+                                <input type="number" class="form-control form-control-sm border border-secondary" min="0"
+                                readonly   [(ngModel)]="bien.cantidad" (input)="calculaTotal(b)">
+                            </td>
+                            <td>
+
+                                
+                                <div class="input-group-append">
+                                    <span class="input-group-text font-weight-bold">$</span>
+                                    <input currencyMask [options]="{prefix: ''}" class="form-control border border-secondary"
+                                    readonly   [(ngModel)]="bien.costo_unitario" (blur)="calculaTotal(bien)"> 
+                                
+                                </div>
+
+
+
+
+                            </td>
+                            <td>
+
+
+                                <div class="input-group-append">
+                                    <span class="input-group-text font-weight-bold">$</span>
+                                    <input currencyMask [options]="{prefix: ''}" 
+                                    class="form-control border border-secondary"
+                                        readonly [ngModel]="bien.costo_total">  
+                                
+                                </div>
+
+
+                                
+
+                            </td>
+                            <td>
+                                <!-- Partida Presupuestaria -->
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control" readonly id="query-{{i}}" placeholder="{{ bien.partida_presupuestaria?.codigo }} - {{ bien.partida_presupuestaria?.nombre }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" (click)="buscaCodigoPresupuesto(i, bien)"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                                <!-- <ng-select class="form-control form-control-sm border border-secondary" appendTo="body"
+                                    [(ngModel)]="b.partida" [clearable]="false">
+                                    <ng-option [value]="0" disabled>Partida Presupuestaria</ng-option>
+                                    <ng-option *ngFor="let c of codigos" 
+                                        [value]="c">{{ c.valor }} - {{ c.descripcion }}</ng-option>
+                                </ng-select> -->
+                            </td>
+                            <td>
+                                <!-- Fondos BID -->
+                                <ng-select class="form-control" [markFirst]="false" [clearable]="false" [(ngModel)]="bien.fondos_bid" (change)="selectFondos($event, bien)"
+                                    [items]="cmb_fondos_bid" bindValue="value" bindLabel="label"></ng-select>
+                            </td>
+                            <td>
+                                <!-- Codigo de Operacion -->
+                                <input type="text" class="form-control form-control-sm border border-secondary" [disabled]="bien.fondosBidDisabled" [(ngModel)]="bien.codigo_operacion">
+                            </td>
+                            <td>
+                                <!-- Codigo de Proyecto -->
+                                <input type="text" class="form-control form-control-sm border border-secondary" [disabled]="bien.fondosBidDisabled" [(ngModel)]="bien.codigo_proyecto">
+                            </td>
+                            <td>
+                                <!-- Fuente de Financiamiento -->
+                                <ng-select class="form-control" [markFirst]="false" [clearable]="false" [(ngModel)]="bien.fuente_financ" appendTo="body"
+                                    [items]="cmb_fuente_financiamiento" bindValue="id_catalogo" bindLabel="valor"></ng-select>
+                                <!-- <ng-select class="form-control form-control-sm border border-secondary" appendTo="body"
+                                    [(ngModel)]="b.fuenteFinanciamiento" [clearable]="false">
+                                    <ng-option [value]="0" disabled>Fuente de Financiamiento</ng-option>
+                                    <ng-option *ngFor="let a of fuentesFinanciamiento" [value]="a">{{a.nombre}}</ng-option>
+                                </ng-select> -->
+                            </td>
+                            <td>
+                                <!-- Tipo de Presupuesto -->
+                                <ng-select class="form-control" [markFirst]="false" [clearable]="false" [(ngModel)]="bien.tipo_presupuesto" appendTo="body"
+                                    [items]="cmb_tipo_presupuesto" bindValue="id_catalogo" bindLabel="valor"></ng-select>
+                                <!-- <ng-select class="form-control form-control-sm border border-secondary" appendTo="body"
+                                    [(ngModel)]="b.tipoPresupuesto" [clearable]="false">
+                                    <ng-option [value]="0" disabled>Tipo de Presupuesto</ng-option>
+                                    <ng-option *ngFor="let a of tipoPresupuesto" [value]="a">{{a.nombre}}</ng-option>
+                                </ng-select> -->
+                                
+                            </td>
+                        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+
+        </div></div>
+
+
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="plaAtriPres"></cc-spiner-procesar>

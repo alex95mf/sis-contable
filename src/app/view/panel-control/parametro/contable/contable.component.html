@@ -1,0 +1,72 @@
+<div class="mt-4">
+    <app-button-radio-active *ngIf="processing" titulo="Actualización Cuenta Contable" filtroBoton="btnParametroCuenta" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-columns">
+        <div class="row mt-2">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cuenta</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" placeholder="Seleccione Registro" id="idCuenta" disabled [(ngModel)]="parametro.Codigo">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary" placement="top" ngbTooltip="Cambiar Cuenta" id="idbtnCuenta" (click)="showCuenta()" [disabled]="parametro.Codigo == undefined"> <i class="fas fa-clipboard-check" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" placeholder="Seleccione Registro" id="idNombre" disabled [(ngModel)]="parametro.NombreCuentaOficial">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" placeholder="Seleccione Registro" id="idTipo" disabled [(ngModel)]="parametro.tipoCuenta">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-2">
+            <div class="col-md-12">
+                <fieldset class="border p-2 filters">
+                    <legend class="w-auto h6">Lista Parametros Contable</legend>
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 container">
+                            <div class="content-table">
+                                <div class="table-responsive mt-3">
+                                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center" style="width: 100%;">
+                                                <th style="width: 2%;">#</th>
+                                                <th style="width: 16%;">Nombre Cuenta</th>
+                                                <th style="width: 8%;">Cuenta Contable</th>
+                                                <th style="width: 8%;">Tipo de Cuenta</th>
+                                                <th style="width: 8%;">Modulo</th>
+                                                <th style="width: 8%;">Empresa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="validaDtUser">
+                                            <tr class="text-justify" *ngFor="let dt of arrayData; let i = index" (click)="inforUpdate(dt)" style="cursor:pointer;">
+                                                <td class="text-center">{{ i + 1 }}</td>
+                                                <td>{{ dt.nombre_cuenta }}</td>
+                                                <td class="text-left">{{ dt.cuenta_contable }}</td>
+                                                <td class="text-left">{{ dt.tipoCuenta }}</td>
+                                                <td class="text-left">{{ dt.modulo }}</td>
+                                                <td class="text-rigth">{{ dt.razon_social }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spContable"></cc-spiner-procesar>

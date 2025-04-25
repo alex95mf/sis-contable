@@ -1,0 +1,17 @@
+<app-button-radio-active titulo="Detalle de IDP" filtroBoton="btnListRecDocumento" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons"  icono="far fa-hand-pointer" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="mb-2 mt-2">
+        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+            <ng-select class="form-control" [(ngModel)]="newData.estado">
+                <ng-option *ngFor="let item of estado" [value]="item.valor">{{item.descripcion}}</ng-option>
+            </ng-select>
+        </app-cc-input-group-prepend>
+    
+        <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold">
+            <textarea class="form-control" [(ngModel)]="newData.observacion"></textarea>
+        </app-cc-input-group-prepend>
+    </div>
+    
+</app-button-radio-active>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>

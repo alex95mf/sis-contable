@@ -1,0 +1,238 @@
+
+<div class="mt-4" >
+    <app-button-radio-active titulo="Mantenimiento" filtroBoton="btnsQuotesMantenaince"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+        <div class="row mt-2">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Razón social</span>
+                    </div>
+                    <ng-select id="duplicateQuotes" class="form-control" [searchable]="true" [clearable]="false"
+                        [disabled]="!actions.btnDuplicate" style="padding-left: 7px;font-size: 13px;"
+                        [(ngModel)]="customerSelect" (keyup)="getCustomerFilter($event.target.value)"
+                        (ngModelChange)="getCustomer($event)">
+                        <ng-option *ngFor="let d of arrayCustomerAux" [value]="d.id_cliente">
+                            {{ d.razon_social }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo
+                            contribuyente</span>
+                    </div>
+                    <input placeholder="tipo contribuyente" type="text" class="form-control form-control-sm"
+                        id="idTipCont" [disabled]="true" [(ngModel)]="tipo_con">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha cotización" styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control" name="dateFrom" format='yyyy-MM-dd'
+                        id="idNominaDatef">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo Documento</span>
+                    </div>
+                    <input placeholder="tipo documento" type="text" class="form-control form-control-sm" id="idTipDoc"
+                        [disabled]="true" [(ngModel)]="customer.tipo_documento">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cupo crédito</span>
+                    </div>
+                    <input placeholder="cupo crédito" type="text" class="form-control form-control-sm" id="idCupoCre"
+                        [disabled]="true" [(ngModel)]="customer.cupo_credito">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Asesor</span>
+                    </div>
+                    <input placeholder="asesor financiero" type="text" class="form-control form-control-sm"
+                        id="idAsesor" [disabled]="true" [(ngModel)]="customer['asesor']['nombre']">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
+                    </div>
+                    <input placeholder="numero documento" type="text" [(ngModel)]="customer.num_documento"
+                        class="form-control form-control-sm" id="idNumDoc" [disabled]="true">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo crédito</span>
+                    </div>
+                    <input placeholder="saldo crédito" type="text" class="form-control form-control-sm" id="idSalCre"
+                        [disabled]="true" [(ngModel)]="customer.saldo_credito">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+                    </div>
+                    <input placeholder="teléfono" type="text" class="form-control form-control-sm" id="idTelefono"
+                        [disabled]="true" [(ngModel)]="customer.telefono">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Grupo</span>
+                    </div>
+                    <input placeholder="Grupo" type="text" class="form-control form-control-sm" id="idGrupo"
+                        [disabled]="true" [(ngModel)]="grupo">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                    </div>
+                    <input placeholder="dirección" type="text" class="form-control form-control-sm" id="idAddress"
+                        [disabled]="true" [(ngModel)]="customer.direccion">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Forma pago</span>
+                    </div>
+                    <select id="idFormPago" class="form-control form-control-sm" [(ngModel)]="customer.formaPagoSelect">
+                        <option *ngFor="let d of arrayFormaPago" [value]="d.valor">
+                            {{ d.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group pt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="background-color: #404a63; color: white;"
+                            placeholder="Ingrese observación">Observación</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea" style="border-color: #C8CED3;
+                                    box-shadow: unset !important;outline: unset !important;"
+                        placeholder="Ingrese una observación" [(ngModel)]="customer.observationBuy"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="row pt-2">
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Subtotal</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="$ {{dataTotales.subTotalPagado.toFixed(2)}}" min="0">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo"
+                                    id="inputGroup-sizing-sm">{{ivaConverter}} % Iva</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="$ {{dataTotales.ivaPagado.toFixed(2)}}" min="0">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="$ {{dataTotales.totalPagado.toFixed(2)}}" min="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-4 mb-3  pl-2 pr-2">
+            <div class="col-12  filters pl-2 pr-2 ">
+                <div class="row justify-content-end">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 text-right btn-add mt-1 mb-1">
+                        <button class="btn btn-success btn-sm" placement="top"
+                            ngbTooltip="Agregar productos a la cotización" (click)="addProduct()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 table-responsive" style="font-family: 'Poppins1';">
+                        <table class="table table-bordered" style="max-height: 260px;">
+                            <thead style="background-color: #1e1d1d;color: white;">
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Código</th>
+                                    <th scope="col">Marca</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">P/U</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody style="width: 100%;">
+                                <tr *ngFor="let d of dataProducto; let i = index">
+                                    <td style="width: 20%;" *ngIf="d.action">{{d.nombre}}</td>
+                                    <td style="width: 14%;" *ngIf="d.action">
+                                        {{d.codigoProducto}}
+                                    </td>
+                                    <td style="width: 10%;" *ngIf="d.action">{{d.marca}}</td>
+                                    <td style="width: 10%;text-align: right;" *ngIf="d.action">{{d.stock}}</td>
+                                    <td style="width: 10%;text-align: right;" *ngIf="d.action">
+                                        <input type="number" class="form-control form-control-sm"
+                                            style="text-align: right;" [(ngModel)]="d.quantity" (keyup)="sumTotal(i)"
+                                            min="0" (keypress)="commonServices.FormatDecimalVal($event)">
+                                    </td>
+                                    <td style="width: 10%;" *ngIf="d.action">
+                                        <input type="number" class="form-control form-control-sm"
+                                            style="text-align: right;" [(ngModel)]="d.price" (keyup)="sumTotal(i)"
+                                            min="0" (keypress)="commonServices.FormatDecimalVal($event)">
+                                    </td>
+                                    <td style="width: 9%;" *ngIf="d.action">
+                                        <input type="text" placeholder="$ {{d.totalItems.toFixed(4)}}" style="text-align: right;">
+                                    </td>
+                                    <td style="width: 9%;text-align: center;" *ngIf="d.action">
+                                        <button class="btn btn-danger btn-sm" placement="top"
+                                            ngbTooltip="Eliminar Items" (click)="deleteItems(i)">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spMantenaince"></cc-spiner-procesar>

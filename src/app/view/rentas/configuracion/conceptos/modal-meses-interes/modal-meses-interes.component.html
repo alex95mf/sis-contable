@@ -1,0 +1,52 @@
+<app-button-radio-active titulo="Meses sin Intereses" cstyle="bg-light" icono="fas fa-table"
+    filtroBoton="btnsModalIntereses" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="my-3">
+        <div class="row">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly [value]="concepto.nombre">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Tipo de Persona</th>
+                    <th>Meses sin Intereses</th>
+                    <th>Mes para Expediente</th>
+                    <th>Mes para Coactiva</th>
+                    <th>Dia</th>
+                    <th>Mes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tipo of lst_tipo_persona; let i = index">
+                    <td>{{ tipo.name }}</td>
+                    <td>
+                        <input currencyMask [options]="{ prefix: '', min: 0, precision: 0, allowNegative: false }" 
+                            class="form-control form-control-sm" [(ngModel)]="tipo.meses_sin_intereses">
+                    </td>
+                    <td>
+                        <input currencyMask [options]="{ prefix: '', min: 0, precision: 0, allowNegative: false }" 
+                            class="form-control form-control-sm" [(ngModel)]="tipo.meses_expediente">
+                    </td>
+                    <td>
+                        <input currencyMask [options]="{ prefix: '', min: 0, precision: 0, allowNegative: false }" 
+                            class="form-control form-control-sm" [(ngModel)]="tipo.meses_coactiva">
+                    </td>
+                    <td>
+                        <ng-select class="form-control form-control-sm" [(ngModel)]="tipo.dia" [clearable]="false"
+                            [items]="lst_dias" bindValue="dia" bindLabel="dia">
+                        </ng-select>
+                    </td>
+                    <td>
+                        <ng-select class="form-control form-control-sm" [(ngModel)]="tipo.mes" [clearable]="false"
+                            [items]="lst_meses" bindValue="valor" bindLabel="nombre">
+                        </ng-select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalIntereses"></cc-spiner-procesar>

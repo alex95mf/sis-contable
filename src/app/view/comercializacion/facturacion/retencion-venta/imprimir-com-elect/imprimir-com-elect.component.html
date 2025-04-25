@@ -1,0 +1,167 @@
+<div class="row justify-content-center prt-comprobante">
+    <div class="col-11 pl-2 pr-2 mb-3">
+        <div class="row justify-content-center">
+            <div class="col-5 text-center mt-5">
+                <div class="sect-one pt-3 pb-3">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <img src="{{dataUser.logoEmpresa}}" alt="" style="width: 220px;">
+                        </div>
+                        <div class="col-12 mt-3">
+                            {{dataUser.company.razon_social}} - {{dataUser.company.ruc}}
+                        </div>
+                        <div class="col-12">
+                            <strong>Obligado a llevar Contabilidad:</strong> {{data.item.obligado_contabilidad}}
+                        </div>
+                        <div class="col-12">
+                            <strong>Teléfonos:</strong> {{data.item.telefono1}} - {{data.item.telefono2}}
+                        </div>
+                        <div class="col-12">
+                            <strong> Dirección:</strong> {{dataUser.company.direccion}}
+                        </div>
+
+                        <div class="col-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr style="width: 100%;" class="text-center ">
+                                        <th colspan="3" class="quitar-espacio-2">Información Adicional</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center ">
+                                        <td class="quitar-espacio-2"><strong>Email empresa:</strong> {{data.item.email}}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center ">
+                                        <td class="quitar-espacio-2"><strong>Vendedor:</strong> {{data.item.name_user}}
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center ">
+                                        <td class="quitar-espacio-2"><strong>Email vendedor:</strong> {{data.item.email_user}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7 mt-5 text-center">
+                <div class="sect-two pt-3 pb-2">
+                    <div class="row ">
+                        <div class="col-12 mt-3 " style="font-size:25px;font-weight: 600">
+                            {{data.item.nombre | uppercase}}
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <strong>No.</strong> {{data.item.num_doc}}
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <strong>Numero de Autorización:</strong> {{(data.item.autorizacion)}}
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <strong>Fecha y Hora de Autorización:</strong> {{(data.item.updated_at)}}
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <strong>Ambiente:</strong> PRODUCCIÓN
+                            <!-- sacar de la tabla -->
+                        </div>
+                        <div class="col-12 mt-2" style="font-size: 11px;">
+                            <strong>Emisión:</strong> NORMAL
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-11 mt-3">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Razón Social / Nombres y
+                            Apellidos</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" [value]="data.item.name | uppercase" disabled>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend size-span-otro">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Identificacion</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" [value]="data.item.num_doc_cliente" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" [value]="data.item.dir_cliente | uppercase" disabled>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-otro" id="inputGroup-sizing-sm">Fecha</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" [value]="data.item.fecha_emision" disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-11 mt-3 pl-2 pr-2">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr style="width: 100%;" class="text-center negrita-label">
+                            <th>No. retención</th>
+                            <th>No. Doc</th>
+                            <th>No. aut</th>
+                            <th>Impuesto</th>
+                            <th>Base</th>
+                            <th>Porcentaje</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr></tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dt of data.item.detalle ">
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">
+                                {{data.item.numero}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">
+                                {{data.item.num_doc}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">
+                                {{data.item.autorizacion}}
+                            </td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">
+                                {{dt.nombre_imp}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="right">
+                                {{dt.base}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="right">
+                                {{redondeoInteger(dt.valor)}} %
+                            </td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="right">
+                                {{dt.total}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right pr-2" style="padding-top: 3px;padding-bottom: 0px;">
+                                Total</td>
+                            <td class="text-right pr-2" style="padding-top: 3px;padding-bottom: 0px;">
+                                {{commSrv.formatNumber(data.item.total)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

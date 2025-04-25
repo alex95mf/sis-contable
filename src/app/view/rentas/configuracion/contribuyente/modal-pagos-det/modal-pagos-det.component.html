@@ -1,0 +1,48 @@
+<app-button-radio-active [titulo]="fTitle" icono="fas fa-file" cstyle="bg-light"
+    filtroBoton="btnsModalPagosDet" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Documento" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [value]="documento.documento">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Documento" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" readonly [value]="documento.fecha.split(' ')[0]">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Documento" styleSpan="size-span-campo font-weight-bold">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">$</div>
+                </div>
+                <input type="text" class="form-control" readonly [value]="documento.total">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col" style="max-height: 500px; overflow-y: scroll;">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Documento</th>
+                        <th>Valor</th>
+                        <th>Saldo Anterior</th>
+                        <th>Abono</th>
+                        <th>Saldo Actual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detalle of documento.detalles">
+                        <td>{{ detalle.fk_numero_documento }}</td>
+                        <td>{{ detalle.valor }}</td>
+                        <td>{{ detalle.saldo_anterior }}</td>
+                        <td>{{ detalle.abono }}</td>
+                        <td>{{ detalle.saldo_actual }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</app-button-radio-active>

@@ -1,0 +1,116 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Ofertas Productos" filtroBoton="btnsOfertas"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-gift">
+        <div class="row mt-2">
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo">
+                    <input type="text" placeholder="{{proNombre}}" [disabled]="true"
+                        class="form-control form-control-sm">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Código" styleSpan="size-span-campo">
+                    <input type="text" placeholder="{{proCodigo}}" [disabled]="true"
+                        class="form-control form-control-sm">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo">
+                    <input type="text" placeholder="{{proTipo}}" [disabled]="true" class="form-control form-control-sm">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Grupo Precio" styleSpan="size-span-campo">
+                    <select class="form-control form-control-sm custom-select" id="idGrupoPrecio"
+                        [(ngModel)]="promo.precio" (ngModelChange)="searchPrecio($event)"
+                        [disabled]="!actions.dComponet">
+                        <option [value]="0">Seleccione grupo precio</option>
+                        <option *ngFor="let d of dataPrecio" [value]="d.reference">
+                            {{d.name}}
+                        </option>
+                    </select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Grupo Producto" styleSpan="size-span-campo">
+                    <input type="text" placeholder="{{proGrupo}}" [disabled]="true"
+                        class="form-control form-control-sm">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En Promocion</span>
+                    </div>
+                    <div class="input-group-text form-control form-control-sm">
+                        <input class="form-check-input mt-0" type="checkbox" [(ngModel)]="promo.promocion"
+                            id="idpromocion" [disabled]="!actions.dComponet">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Precio Actual" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm" (keypress)="FormatDecimalVal($event);"
+                        [(ngModel)]="promo.cantidadAnterior" (ngModelChange)="valCupo()" id="idCantidad" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Precio - descuento" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm" (keypress)="FormatDecimalVal($event)"
+                        [(ngModel)]="promo.cantidad" id="idCantidadActual" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Porcentaje" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm" (keypress)="FormatDecimalVal($event);"
+                        id="idPorcentaje" (ngModelChange)="valCupo($event)" [(ngModel)]="promo.porcentaje"
+                        [disabled]="promo.precio == undefined || !actions.dComponet">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Valor Descuento" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control-sm" (keypress)="FormatDecimalVal($event)"
+                        [(ngModel)]="promo.descuento" id="idDescuento" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <fieldset class="border p-2 mb-2 mt-3 filters">
+            <legend class="w-auto h6">Listado de Ofertas</legend>
+            <div class="table-responsive responsive-table">
+                <table datatable [dtOptions]="dtOptions" id="tableOfertas" [dtTrigger]="dtTrigger"
+                    class="table no-footer table-hover">
+                    <thead class="text-center thead-dark">
+                        <tr>
+                            <!-- <th>#</th> -->
+                            <th class="text-left" style="width: 40%;">Producto</th>
+                            <th style="width: 20%">Empresa</th>
+                            <th style="width: 20%;">Sucursal</th>
+                            <th style="width: 10%">Porcentaje</th>
+                            <th style="width: 10%">Promoción</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="validaDtUser">
+                        <tr *ngFor="let dt of guardarolT; let i = index" (click)="updateOfert(dt)"
+                            style="cursor: pointer;width: 100%;" class="pl-2">
+                            <!-- <td class="text-center text-dark " style="width: 10%;">{{ i + 1 }}</td> -->
+                            <td>{{dt.nombre_producto}}</td>
+                            <td>{{dt.nombre_comercial}}</td>
+                            <td>{{dt.nombre_sucursal}}</td>
+                            <td class="text-center">{{ dt.rate | number: '1.0-2' }}%</td>
+                            <td *ngIf="dt.inPromotion==0" class="text-center">No</td>
+                            <td *ngIf="dt.inPromotion == 1" class="text-center">Si</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spOfertaProducto"></cc-spiner-procesar>

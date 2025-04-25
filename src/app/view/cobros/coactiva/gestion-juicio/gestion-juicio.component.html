@@ -1,0 +1,96 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" icono="fas fa-gavel" cstyle="bg-light text-dark"
+        filtroBoton="btnsGestionJuicio" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border pb-2 px-3 my-2">
+            <legend class="mb-1 w-auto">Filtros</legend>
+            <div class="row">
+                <div class="col-8">
+                    <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="filter.contribuyente">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" name="" id="" class="form-control" [(ngModel)]="filter.fecha_desde">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" name="" id="" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Fecha de Emision" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" name="" id="" class="form-control" [(ngModel)]="fecha_emision">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row my-2">
+            <div class="col">
+                <h3 class="text-dark">Expedientes</h3>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <div style="max-height: 550px; overflow-y: auto;">
+                    <table class="table no-footer">
+                        <thead class="thead-dark sticky-header">
+                            <tr>
+                                <th></th>
+                                <th>#</th>
+                                <th>Contribuyente</th>
+                                <th>Expediente</th>
+                                <th>Fecha</th>
+                                <th>Notificaci&oacute;n</th>
+                                <th>Vencimiento</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!expedientes.length">
+                                <td colspan="8"><h6>No hay expedientes a mostrar</h6></td>
+                            </tr>
+                            <tr *ngFor="let expediente of expedientes; let i = index">
+                                <td><input type="checkbox" [(ngModel)]="expediente.juicio"></td>
+                                <td>{{ expediente.id_cob_notificacion }}</td>
+                                <td><div class="row">
+                                    <div class="col">{{ expediente.contribuyente.razon_social }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-muted">{{ expediente.contribuyente.tipo_documento }} {{ expediente.contribuyente.num_documento }}</div>
+                                </div></td>
+                                <td>{{ expediente.num_expediente }}</td>
+                                <td>{{ expediente.fecha }}</td>
+                                <td>{{ expediente.fecha_recepcion ?? 'Sin entregar' }}</td>
+                                <td>
+                                    <div *ngIf="expediente.fecha_recepcion; else noVencido" [ngClass]="{'text-danger': expediente.vencimiento > 8}">{{ expediente.vencimiento }} día(s) vencido(s)</div>
+                                    <ng-template #noVencido>Sin Vencimiento</ng-template>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-warning" (click)="expandDetalles(expediente)" matTooltip="Ver Detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <mat-paginator
+                    showFirstLastButtons 
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [paegIndex]="paginate.pageIndex"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spExpedientes"></cc-spiner-procesar>

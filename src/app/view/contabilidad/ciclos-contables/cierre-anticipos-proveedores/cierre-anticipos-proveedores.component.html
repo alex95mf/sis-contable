@@ -1,0 +1,67 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Cierre de Anticipos de Proveedores" cstyle="bg-light" icono="fas fa-file-invoice-dollar"
+        filtroBoton="btnsCierreAnticipos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border pb-2 px-3">
+            <legend class="w-auto bg-dark">Filtros</legend>
+            <div class="row">
+                <div class="col">
+                    <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" readonly [value]="documento?.num_documento">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha Documento" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="documento.fecha">
+                    </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col">
+                    <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" max="9999-12-31">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold bg-dark">
+                        <textarea rows="3" class="form-control" [(ngModel)]="documento.observaciones"></textarea>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+        <p-table 
+            [value]="documento.anticipos"
+            [paginator]="true"
+            [rows]="50"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[10, 25, 50]">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Proveedor</th>
+                    <th>Num. Documento</th>
+                    <!-- <th>Tipo</th> -->
+                    <th>Cuenta Contable</th>
+                    <th>Fecha</th>
+                    <th>Total Anticipo</th>
+                    <th>Saldo</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-anticipo>
+                <tr>
+                    <td>{{ anticipo.proveedor.nombre_comercial_prov }}</td>
+                    <td>{{ anticipo.documento }}</td>
+                    <!-- <td>{{ anticipo.tipo_documento }}</td> -->
+                    <td>
+                        <!--  -->
+                    </td>
+                    <td>{{ anticipo.fecha | date:'yyyy-MM-dd' }}</td>
+                    <td class="text-right">${{ anticipo.total | number:'1.2-2' }}</td>
+                    <td class="text-right">${{ anticipo.saldo | number:'1.2-2' }}</td>
+                    
+                </tr>
+            </ng-template>
+        </p-table>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spCierreAnticiposProv"></cc-spiner-procesar>

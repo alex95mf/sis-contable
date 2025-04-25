@@ -1,0 +1,283 @@
+<div class="modal-body">
+    <app-button-radio-active titulo="Detalle Asiento Diario" filtroBoton="btnsDTasiento" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-buysellads">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Tipo Documento</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled [value]="dt.nombre">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Documento</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled [value]="dt.codigo + '-' + dt.num_doc.toString().padStart(10, 0)">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Tipo</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="dt.type">
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Fecha</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled [value]="dt.fecha |date:'yyyy-MM-dd'">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Estado</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" [disabled]="true" *ngIf="dt.estado == 1" value="Activo">
+                            <input type="text" class="form-control form-control-sm" [disabled]="true" *ngIf="dt.estado != 1" value="Anulado">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Total Asiento</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm text-right" [disabled]="true" [value]="'$' + formatNumber(dt.valor)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Concepto</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="dt.concepto">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Nota</span>
+                            </div>
+                            <textarea class="form-control form-control-sm" [disabled]="true">{{dt.nota}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center filters">
+            <div class="col-md-12 mt-3">
+                <div>
+                    <div class="form-group table-responsive responsive-table altura">
+                        <table class="table table-sm table-hover table-striped">
+                            <thead>
+                                <tr class="text-center">
+                                    <th class="text-left">#</th>
+                                    <th>CODIGO</th>
+                                    <th>NOMBRE CUENTA</th>
+                                    <th>DETALLE</th>
+                                    <th>DOCUMENTO</th>
+                                    <th>DEBE</th>
+                                    <th>HABER</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" style="width: 100%" *ngFor="let p of dtView; let i = index">
+                                    <td style="width: 1%">{{ i + 1 }}</td>
+                                    <td style="width: 10%" class="text-left">
+                                        {{ p.cuenta }}
+                                    </td>
+                                    <td style="width: 25%" class="text-left">
+                                        {{ p.nombreCuenta }}
+                                    </td>
+                                    <td style="width: 30%" class="text-left">
+                                        {{ p.detalle }}
+                                    </td>
+                                    <td style="width: 15%" class="text-left">
+                                        {{ dt.codigo}} - {{dt.num_doc.toString().padStart(10, 0) }}
+                                    </td>
+                                    <td style="width: 10%" class="text-right">${{ formatNumber(p.valor_deb) }}</td>
+                                    <td style="width: 10%" class="text-right">${{ formatNumber(p.valor_cre)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spDtAsiento"></cc-spiner-procesar>
+
+
+<!-- PrintSecondContent -->
+<div [hidden]="true" id="Printsection">
+    <div class="row justify-content-center  prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Asiento contable</h3>
+                                <p>DETALLE ASIENTO CONTABLE</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-3">
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo Documento</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" disabled [value]="dt.nombre">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Número</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" disabled [value]="dt.codigo + '-' + dt.num_doc.toString().padStart(10, 0)">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="dt.type">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" disabled [value]="dt.fecha |date:'yyyy-MM-dd'">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" [disabled]="true" *ngIf="dt.estado == 1" value="Activo">
+                        <input type="text" class="form-control form-control-sm" [disabled]="true" *ngIf="dt.estado != 1" value="Anulado">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-right" [disabled]="true" [value]="'$' + formatNumber(dt.valor)">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Concepto </span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="dt.concepto">
+                    </div>
+                </div>
+                <div class="col-6" *ngIf="dt.nota != null">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nota</span>
+                        </div>
+                        <textarea class="form-control form-control-sm" [disabled]="true">{{dt.nota}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-12 text-center">
+                    <div>
+                        <div class="table-responsive responsive-table">
+                            <table class="table table-sm table-hover ">
+                                <thead>
+                                    <tr style="width: 100%">
+                                        <th style="width: 5%">#</th>
+                                        <th style="width: 10%">CODIGO</th>
+                                        <th style="width: 20%">NOMBRE CUENTA</th>
+                                        <th style="width: 30%">DETALLE</th>
+                                        <th style="width: 15%">DOCUMENTO</th>
+                                        <th style="width: 10%">DEBE</th>
+                                        <th style="width: 10%">HABER</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="mb-4">
+                                    <tr *ngFor="let p of dtView; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>
+                                            {{ p.cuenta }}
+                                        </td>
+                                        <td>
+                                            {{ p.nombreCuenta }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ p.detalle }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ dt.codigo}} - {{dt.num_doc.toString().padStart(10, 0) }}
+                                        </td>
+                                        <td class="text-right">${{ formatNumber(p.valor_deb) }}</td>
+                                        <td class="text-right">${{ formatNumber(p.valor_cre)}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #13A1EA;">
+                Fecha: {{fecha}}&nbsp;{{hora}}</span>
+        </div>
+        <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+            <span style="color: #13A1EA;">
+                Usuario: {{dataUser.nombre}}</span>
+        </div>
+    </div>
+</div>

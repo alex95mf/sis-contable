@@ -1,0 +1,27 @@
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnsBusqClte" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-search">  
+
+
+    <div class="table-responsive responsive-table filters">
+        <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="table table-bordered ">
+            <thead class="text-center">
+                <tr>
+                    <th>Id. </th>
+                    <th>Tipo Documento </th>
+                    <th>Nro. Documento </th>
+                    <th>Razon Social </th>
+                </tr>
+            </thead>
+            <tbody style="width: 100%;">
+                 <tr *ngFor="let dt of listadoGeneral" style="cursor: pointer;" matTooltip="Seleccionar" (click)="seleccionarItem(dt)">
+                    <td style="width: 5%;" *ngIf="data.tipoDocumento == 1">{{ dt.id_cliente }}</td>
+                    <td style="width: 5%;">{{ dt.tipo_documento}}</td>
+                    <td style="width: 5%;">{{ dt.num_documento}}</td>
+                    <td style="width: 25%; font-weight: bold;" >{{ dt.razon_social}}</td>
+                </tr> 
+            </tbody>
+        </table>
+    </div>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spVistCte"></cc-spiner-procesar>

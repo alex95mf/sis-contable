@@ -1,0 +1,502 @@
+<div class="mt-4">
+    <!-- Start Print Buttons -->
+    <button #printCDI type="button" class="btn btn-success" [hidden]="true" [useExistingCss]="true"
+        printSectionId="printcdi" ngxPrint>
+    </button>
+    <!-- End Print Buttons -->
+    <app-button-radio-active titulo="Reporte de ventas" filtroBoton="btnsRventas"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+        <div class="row mt-2">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cliente</span>
+                    </div>
+                    <ng-select id="IdCliente" class="form-control custom" appendTo="body" [searchable]="true"
+                        [clearable]="false" [(ngModel)]="cliente" (ngModelChange)="searchCliente($event)">
+                        <ng-option [value]="0">
+                            Seleccione Cliente
+                        </ng-option>
+                        <ng-option *ngFor="let d of clientes" [value]="d.id_cliente">
+                            {{ d.nombre_comercial_cli }}
+                        </ng-option>
+                        <!-- <ng-option *ngFor="let d of clientes" [value]="d.id_cliente">
+                            {{ d.num_documento }}
+                        </ng-option> -->
+                    </ng-select>
+                    <!--  <div class="input-group-append">
+                        <button type="button" class="btn btn-primary" style="box-shadow: unset;outline: unset;font-size:9px" id="idbuscar" placement="top" ngbTooltip="Buscar Cliente" (click)="searchModalCliente()">
+                            <i class="fa fa-search" style="font-size:12px" aria-hidden="true"></i>
+                        </button>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Vendedor</span>
+                    </div>
+                    <ng-select id="IdVendedor" class="form-control custom" appendTo="body" [searchable]="true"
+                        [clearable]="false" [(ngModel)]="vendedor" (ngModelChange)="searchVendedor($event)">
+                        <ng-option [value]="0">
+                            Seleccione Vendedor
+                        </ng-option>
+                        <ng-option *ngFor="let d of vendedores" [value]="d.id_usuario">
+                            {{ d.nombre }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Forma
+                            de Pago</span>
+                    </div>
+                    <ng-select id="IdFormaPago" class="form-control custom" appendTo="body" [searchable]="true"
+                        [clearable]="false" [(ngModel)]="formaPagofull" (ngModelChange)="searchPago($event)">
+                        <ng-option [value]="0">
+                            Seleccione Forma de Pago
+                        </ng-option>
+                        <ng-option *ngFor="let d of formaPago" [value]="d.name">
+                            {{ d.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Desde</span>
+                    </div>
+                    <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control form-control-sm " type="text"
+                        format="yyyy-MM-dd" id="idDesde" (ngModelChange)="rerender()">
+                    </ejs-datepicker>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Hasta</span>
+                    </div>
+                    <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control form-control-sm text-right"
+                        format="yyyy-MM-dd" id="idHsta" (ngModelChange)="rerender()">
+                    </ejs-datepicker>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-3 mb-3">
+            <div class="col-12 filters pl-2 pr-2">
+                <div class="row justify-content-center">
+                    <div class="col-12 pl-3 pr-3 ">
+                        <div class="table-responsive responsive-table mt-2">
+                            <table datatable id="tableReportVentas" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="table no-footer table-hover">
+                                <thead>
+                                    <tr style="width: 100%;">
+
+                                        <th style="width: 10%;">Documento #:</th>
+                                        <th style="width: 8%;">Fecha</th>
+                                        <th style="width: 34%;">Cliente</th>
+                                        <th style="width: 10%;">Tipo de Pago</th>
+                                        <th style="width: 8%;">Subtotal</th>
+                                        <th style="width: 8%;">Iva</th>
+                                        <th style="width: 8%;">Total</th>
+                                        <th style="width: 8%;">Utilidad</th>
+                                        <th style="width: 6%;" class="text-center">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDtUser">
+                                    <tr class="text-justify" *ngFor="let dt of guardarolT; let i = index">
+
+                                        <td (click)="informacionSearch(dt)">
+                                            <span class="tooltip-test hv-doc" placement="right" ngbTooltip="Ver Más">
+                                                {{dt.codigo }}-{{ dt.num_doc }}</span>
+                                        </td>
+                                        <td (click)="informacionSearch(dt)" style="cursor:pointer;">{{ dt.fecha }}</td>
+                                        <td (click)="informacionSearch(dt)" style="cursor:pointer;">
+                                            {{dt.nombre_comercial_cli }}</td>
+                                        <td (click)="informacionSearch(dt)" style="cursor:pointer;">{{dt.tipo_pago }}
+                                        </td>
+                                        <td style="text-align: right;padding-right: 10px;cursor:pointer;"
+                                            (click)="informacionSearch(dt)">${{formatNumber(dt.subtotal) }}
+                                        </td>
+                                        <td style="text-align: right;padding-right: 10px;cursor:pointer;"
+                                            (click)="informacionSearch(dt)">${{formatNumber(dt.iva_valor) }}
+                                        </td>
+                                        <td style="text-align: right;padding-right: 10px;cursor:pointer;"
+                                            (click)="informacionSearch(dt)">${{formatNumber(dt.total) }}
+                                        </td>
+                                        <td style="text-align: right;padding-right: 10px;cursor:pointer;"
+                                            (click)="informacionSearch(dt)">
+                                            {{formatNumber(dt.rentabilidad_total) }}</td>
+                                        <td style="text-align: center;">
+                                            <button type="button" (click)="exportPDF(dt,idx)" class="btn btn-sm"
+                                                style="background-color: #F00000; color: white; border-radius: 10px"
+                                                placement="left" ngbTooltip="Exportar documento">
+                                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr style="width: 100%;">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right">
+                                            <strong>${{formatNumber(dataTotal.subTotal)}}</strong>
+                                        </td>
+                                        <td class="text-right"> <strong>${{formatNumber(dataTotal.iva)
+                                                }}</strong></td>
+                                        <td class="text-right">
+                                            <strong>${{formatNumber(dataTotal.total)}}</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>${{formatNumber(dataTotal.utilidad)}}</strong>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spReportVenta"></cc-spiner-procesar>
+<!-- Modal -->
+
+<div id="printcdi" [hidden]="true" *ngIf="print_cdi !== undefined">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2">
+            <div class="row justify-content-center">
+                <div class="col-6 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <img src="{{dataUser.logoEmpresa}}" alt="" style="width: 220px;">
+                            </div>
+                            <div class="col-12 mt-3">
+                                Empresa: {{dataUser.company.razon_social}}
+                            </div>
+                            <div class="col-12">
+                                <strong>Obligado a llevar Contabilidad:</strong>
+                                {{dataUser.company.obligado_contabilidad}}
+                            </div>
+                            <div class="col-12">
+                                <strong>Teléfono:</strong> {{dataUser.company.telefono1}} {{dataUser.company.telefono2}}
+                            </div>
+                            <div class="col-12">
+                                <strong> Dirección:</strong> {{dataUser.company.direccion}}
+                            </div>
+
+                            <div class="col-12">
+                                <table style="width: 100%;text-align: center;">
+                                    <!-- class="table table-bordered" -->
+                                    <thead>
+                                        <tr style="width: 100%;" class="text-center ">
+                                            <th colspan="3" class="quitar-espacio-2">Información Adicional</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-center ">
+                                            <td class="quitar-espacio-2">
+                                                <div class="col-12" *ngIf="print_cdi.contactos.length > 0">
+                                                    <span>Correo: </span> <label
+                                                        for="">{{print_cdi.contactos[0].email}}</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="text-center ">
+                                            <td class="quitar-espacio-2"><strong>Vendedor:</strong>{{print_cdi.nombre}}
+                                            </td>
+                                        </tr>
+                                        <tr class="text-center ">
+                                            <td class="quitar-espacio-2"><strong>Email vendedor:</strong>
+                                                {{print_cdi.email_asesor}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row ">
+                            <div class="col-12 mt-3 " style="font-size:25px;font-weight: 600">
+                                FACTURA
+                            </div>
+                            <div class="col-12 mt-2 lether-head">
+                                <strong>No.</strong> {{print_cdi.num_doc}}
+                            </div>
+                            <div class="col-12 mt-2 lether-head">
+                                <strong>No.de Autorización:</strong> {{print_cdi.num_aut}}
+                            </div>
+                            <div class="col-12 mt-2 lether-head" *ngIf="fecha_autorizacion_sri != null">
+                                <strong>Fecha y Hora de Autorización:</strong> {{print_cdi.fecha_autorizacion_sri}}
+                            </div>
+                            <div class="col-12 mt-2 lether-head" *ngIf="fecha_autorizacion_sri == null">
+                                <strong>Fecha y Hora de Autorización:</strong> yyyy-mm-dd
+                            </div>
+                            <div class="col-12 mt-2 lether-head">
+                                <strong>Ambiente:</strong> PRODUCCIÓN
+                            </div>
+                            <div class="col-12 mt-2 mb-2 lether-head mb-2">
+                                <strong>Emisión:</strong> NORMAL
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-11 mt-4 mb-2">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <span>No. cliente: </span> <label for="">{{print_cdi.num_documento}}</label>
+                        </div>
+                        <div class="col-12" *ngIf="print_cdi.contactos.length == 0">
+                            <span>Dirfección: </span> <label for="">{{print_cdi.direccion}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <span>No. cliente: </span> <label for="">{{print_cdi.num_documento}}</label>
+                        </div>
+                        <div class="col-12">
+                            <span>Fecha venta: </span> <label for="">{{print_cdi.fecha}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 13%;" class="text-center">Cod Principal</th>
+                                <th style="width: 13%;" class="text-center">Cod. Auxiliar</th>
+                                <th style="width: 30%;" class="text-center">Nombre</th>
+                                <th style="width: 15%;" class="text-center">Marca</th>
+                                <th style="width: 9%;" class="text-center">Cantidad</th>
+                                <th style="width: 10%;" class="text-center">Precio/U</th>
+                                <th style="width: 10%;" class="text-center">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of print_cdi.list_product; let i = index">
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.code_product}}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.num_parte}}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.nombre}}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.marca}}</span>
+                                </td>
+                                <td class="text-right pr-2" style="border-top: none !important;">
+                                    <span>{{dt.cantidad}}</span>
+                                </td>
+                                <td class="text-right pr-2" style="border-top: none !important;">
+                                    <span>$ {{commonServices.formatNumber(dt.costo_unitario)}}</span>
+                                </td>
+                                <td class="text-right pr-2" style="border-top: none !important;">
+                                    <span>$ {{commonServices.formatNumber(dt.costo_total)}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td ALIGN=left ROWSPAN=3 COLSPAN=5>Obervación:
+                                    <span>{{print_cdi.observaciones}}</span>
+                                </td>
+                                <td><span>Subtotal</span></td>
+                                <td class="text-right pr-2">
+                                    <span>$ {{commonServices.formatNumber(print_cdi.subtotal)}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>Iva {{ivaConverter}} %</span></td>
+                                <td class="text-right pr-2"> <span> $
+                                        {{commonServices.formatNumber(print_cdi.iva_valor)}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Total</span></td>
+                                <td class="text-right pr-2"><span>$
+                                        {{commonServices.formatNumber(print_cdi.total)}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-11">
+            <div class="row" style="font-family: 'Poppins1';" *ngIf="dataUser != undefined">
+                <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+                    <span style="color: #13A1EA;">
+                        Fecha: {{dateNow}}&nbsp;{{hora}}</span>
+                </div>
+                <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+                    <span style="color: #13A1EA;">
+                        Usuario: {{dataUser.nombre}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modalReportDetalle " id="modalReportDetalle" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document"
+        style="padding-top: 20px;padding-bottom: 20px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row" style="width: 100%">
+                    <div class="col-12">
+                        <div class="title-head">
+                            <i class="fas fa-bars"></i> DETALLE FACTURA VENTA
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger btn-xs mt-2 mr-3" (click)="closeModal()">
+                    Cerrar
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">N° Documento</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled
+                                [value]="documentoDetalle.num_doc">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Fecha venta</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled
+                                [value]="documentoDetalle.fecha">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Cliente</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled
+                                [value]="documentoDetalle.nombre_comercial_cli">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Vendedor</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled
+                                [value]="documentoDetalle.nombre">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Tipo Pago</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled
+                                [value]="documentoDetalle.tipo_pago">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Forma Pago</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled
+                                [value]="documentoDetalle.forma_pago">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Pagada</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled
+                                *ngIf="documentoDetalle.pagada == 1 " value="SI">
+                            <input type="text" class="form-control form-control-sm" disabled
+                                *ngIf="documentoDetalle.pagada != 1 " value="NO">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Observación</span>
+                            </div>
+                            <textarea type="text" style class="form-control form-control-sm"
+                                disabled>{{documentoDetalle.observaciones}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-12 col-sm-12 filters">
+                        <div class="altura">
+                            <div class="form-group table-responsive responsive-table">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Costo Unitario</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-center" style="width: 100%;"
+                                            *ngFor="let d of detalleClick; let i = index">
+                                            <!-- <td style="width: 3%">{{ i + 1 }}</td> -->
+                                            <td style="width: 15%" class="text-left">{{d.code_product}}</td>
+                                            <td style="width: 15%" class="text-left">{{d.nombre}}</td>
+                                            <td style="width: 5%">{{formatNumber(d.cantidad)}}</td>
+                                            <td style="width: 8%">{{formatNumber(d.costo_unitario)}}</td>
+                                            <td style="width: 6%" class="text-right">${{formatNumber(d.costo_total)}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

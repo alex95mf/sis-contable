@@ -1,0 +1,45 @@
+
+<div class="modal-body">
+
+    <app-button-radio-active titulo="Pagos y Servicios" filtroBoton="spShowPgSrs" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-money">
+
+        <div class="table-responsive responsive-table">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                <thead class="thead-dark">
+                    <tr class="text-center text-uppercase">
+                        <th>#</th>
+                        <th>Tipo doc.</th>
+                        <th>No. documento</th>
+                        <th>Importación</th>
+                        <th>fecha</th>
+                        <th>Total</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="processing">
+                    <tr class="text-center" *ngFor="let dt of pas; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ dt.doc }}</td>
+                        <td>{{ (dt.num !== null) ? dt.num : "Sin Documento" }}</td>
+                        <td>{{ (dt.imp) ? "SI" : "NO" }}</td>
+                        <td>{{ dt.fecha }}</td>
+                        <td class="text-rigth">$ {{ commonServices.formatNumber(dt.total) }}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="deletePaymentAndService(dt)"
+                                placement="top" matTooltip="Eliminar Pago de Servicio">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" (click)="editPaymentAndService(dt)"
+                                placement="left" matTooltip="Editar Pago de Servicio">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spShowPgSrs"></cc-spiner-procesar>

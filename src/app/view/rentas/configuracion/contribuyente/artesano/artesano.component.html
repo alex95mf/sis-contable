@@ -1,0 +1,95 @@
+<!-- (opened)="contribuyenteDis.di_tiene_discpacidad = true" (closed)="contribuyenteDis.di_tiene_discpacidad = false" -->
+<mat-expansion-panel class="mt-2"  [disabled]="!validadorNt">
+    <mat-expansion-panel-header>
+      <input type="checkbox" [(ngModel)]="contribuyenteArte.ar_artesano" (change)="selectedCheck()">
+      <mat-panel-title>Artesano</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="row mt-2">
+      <div class="col-4">
+
+        <app-cc-input-group-prepend label="Rama" styleSpan="size-span-campo font-weight-bold">
+          <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+            [(ngModel)]="contribuyenteArte.ar_rama" [readonly]="!contribuyenteArte.ar_artesano">
+            <ng-option [value]=0 disabled>Seleccione el tipo de discapacidad</ng-option>
+            <ng-option *ngFor="let doc of catalog.ar_rama" [value]="doc.valor">{{doc.valor}}
+            </ng-option>
+          </ng-select>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Calificación artesanal No." styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteArte.ar_calificacion_numero"
+            placeholder="Ingrese el porcentaje" [readonly]="!contribuyenteArte.ar_artesano" maxlength="100"/>
+        </app-cc-input-group-prepend>
+
+        
+        <app-cc-input-group-prepend label="Fecha de vigencia" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="date" [(ngModel)]="contribuyenteArte.at_vigencia"
+            placeholder="Ingrese el porcentaje" [readonly]="!contribuyenteArte.ar_artesano" />
+        </app-cc-input-group-prepend>
+
+        <!-- <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                </div>
+                <input id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección contribuyente" [(ngModel)]="contribuyente.direccion">
+            </div> -->
+      </div>
+      
+
+      <div class="col-4">
+        <app-cc-input-group-prepend label="No. Resolución" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteArte.ar_resolucion"
+            placeholder="Ingrese el número de resolución" [readonly]="!contribuyenteArte.ar_artesano" maxlength="30"/>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Fecha de resolución" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="date" [(ngModel)]="contribuyenteArte.ar_fecha_resolucion"
+            placeholder="Ingrese el primer apellido" [readonly]="!contribuyenteArte.ar_artesano" />
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Persona que autoriza" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteArte.ar_persona_autoriza"
+            placeholder="Ingrese la perona que autoriza" [readonly]="!contribuyenteArte.ar_artesano" maxlength="100" (keypress)="validaciones.onlyWord($event)"/>
+        </app-cc-input-group-prepend>
+
+      </div>
+
+      <!-- <div class="col-4">
+        <app-cc-input-group-prepend label="Fecha de resolucion" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="date" [(ngModel)]="contribuyenteDis.di_fecha_resolucion"
+            placeholder="Ingrese el primer apellido" [readonly]="!contribuyenteDis" />
+        </app-cc-input-group-prepend>
+
+      </div>
+
+      <div class="col-4">
+        <app-cc-input-group-prepend label="Persona que autoriza" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteDis.di_persona_autoriza"
+            placeholder="Ingrese el segundo apellido" [readonly]="!contribuyenteDis" />
+        </app-cc-input-group-prepend>
+
+      </div> -->
+
+      <div class="col-4">
+        <div class="row">
+          <div class="col">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                (change)="cargaArchivo($event.target.files)"  [disabled]="anexo?.length > 0">
+              <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name :
+                "Seleccione un archivo" }}</label>
+            </div>
+          </div>
+          <!-- <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" [disabled]='cargarAnexo'>Cargar</button></div> -->
+        </div>
+        <div class="row">
+          <div class="col">
+            <app-anexos-list-artesa [dataUser]="dataUser" [permissions]="permissions" [identificador]="ART"></app-anexos-list-artesa>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </mat-expansion-panel>

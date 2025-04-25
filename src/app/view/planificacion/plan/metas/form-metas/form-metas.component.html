@@ -1,0 +1,232 @@
+<app-button-radio-active-new titulo="{{ fTitle }}" cstyle="bg-gradient-primary text-white" icono="fas fa-bullseye-arrow" [groupButton]="vmButtons" filtroBoton="btnMetasForm" (onMetodoGlobal)="metodoGlobal($event)">
+
+
+    <div class="row m-0">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Infomación</legend>
+                <div class="row m-0">        
+      
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        
+                        <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" readonly [ngModel]="seleccion.periodo">
+                        </app-cc-input-group-prepend>
+
+
+                    </div>
+            
+                    
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+
+                        
+                        <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select disabled [(ngModel)]="seleccion.nombre" id="modalMetasPrograma" class="form-control" (change)="handlePrograma($event)">
+                                <ng-option disabled [value]="0">Seleccione un programa...</ng-option>
+                                <ng-option *ngFor="let programa of programas" [value]="programa">{{ programa.nombre }}
+                                </ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+                    </div>
+            
+                  
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select disabled [(ngModel)]="seleccion.departamento" id="modalMetasDepartamento" class="form-control" (change)="handleDepartamento($event)">
+                                <ng-option disabled [value]="0">Seleccione un departamento...</ng-option>
+                                <ng-option *ngFor="let departamento of deptFiltrado" [value]="departamento">{{ departamento.nombre }}
+                                </ng-option>
+                            </ng-select>  
+                        </app-cc-input-group-prepend>
+
+                    </div>
+            
+                </div>
+            
+                <div class="row m-0">
+                   
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="ODS" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select  [(ngModel)]="seleccion.ods" id="modalMetasOds" class="form-control" (change)="handleODS($event)" [clearable]="false">
+                                <ng-option disabled [value]="0">Seleccione un ODS...</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.ods" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+
+                    </div>
+            
+                 
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Meta ODS" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select [disabled]="step<3" [(ngModel)]="seleccion.meta_ods" id="modalMetasMetaODS" class="form-control" [clearable]="false" (change)="handleMetaODS($event)">
+                                <ng-option disabled [value]="0">Seleccione una Meta ODS...</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.meta_ods" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+
+                        </app-cc-input-group-prepend>
+
+
+                    </div>
+            
+                    
+            
+                </div>
+            
+                <div class="row m-0">
+                    
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Eje" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select [disabled]="step<3" [(ngModel)]="seleccion.eje" id="modalMetasEje" class="form-control" (change)="handleEje($event)" [clearable]="false" >
+                                <ng-option disabled [value]="0">Seleccione un Eje...</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.eje" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+
+
+                    </div>
+            
+                    
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="OPG" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select [disabled]="step<4" [(ngModel)]="seleccion.opg" id="modalMetasOPG" class="form-control" [clearable]="false" (change)="handleOPG($event)">
+                                <ng-option disabled [value]="0">Seleccione un OPG...</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.opg" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+
+
+                    </div>
+            
+                </div>
+            
+                <div class="row m-0">          
+            
+                   
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Politicas" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select [disabled]="step<5" [(ngModel)]="seleccion.ppg" id="modalMetasPPG" class="form-control" [clearable]="false" (change)="handlePPG($event)" >
+                                <ng-option disabled [value]="0">Seleccione una Politica...</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.ppg" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+
+                    </div>
+            
+                    
+            
+                </div>
+            
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Meta Zonal" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select [disabled]="step<6" [(ngModel)]="seleccion.meta_zonal" id="modalMetasMeta" class="form-control" [clearable]="false" (change)="handleMetaZonal($event)">
+                                <ng-option disabled [value]="0">Seleccione una Meta...</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.meta_zonal" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+
+                    </div>
+            
+                </div>
+            
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Competencias" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select [(ngModel)]="seleccion.competencia" id="modalMetasCompetencia" class="form-control" (change)="handleCompetencia($event)">
+                                <ng-option disabled [value]="0">Seleccione una Competencia...</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.competencia" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+
+                    </div>
+            
+                </div>
+            
+                <div class="row m-0">
+                    
+            
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Obj Estrategico" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select [(ngModel)]="seleccion.oe" id="modalMetasObjEst" class="form-control" (change)="handleOE($event)">
+                                <ng-option disabled [value]="0">Seleccione un Objetivo...</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.oe" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+
+                    </div>
+            
+                </div>
+            
+                <div class="row m-0">
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Meta Resultado" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [(ngModel)]="seleccion.meta_resultado" (change)="handleMetaRes($event)">
+                                <ng-option disabled [value]="0">Seleccione una Meta...</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.meta_resultado" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+ 
+                    </div>
+            
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Indicador" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [(ngModel)]="seleccion.indicador"  (change)="handleIndicador($event)">
+                                <ng-option disabled [value]="0">Seleccione un Indicador...</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.indicador" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+
+                    </div>
+            
+                </div>
+            
+                <div class="row m-0">
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Tendencia" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [(ngModel)]="seleccion.tendencia"  (change)="handleTendencia($event)">
+                                <ng-option disabled [value]="0">Seleccione Tendencia del Indicador</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.tendencia" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+                    </div>
+                    <div class="col-12 col-md-6 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Intervencion" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [(ngModel)]="seleccion.intervencion" (change)="handleIntervencion($event)">
+                                <ng-option disabled [value]="0">Seleccione Tipo de Intervencion</ng-option>
+                                <ng-option *ngFor="let o of cuerpoMetas.intervencion" [value]="o">{{ o.nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+
+                    </div>
+            
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    
+
+
+</app-button-radio-active-new>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="planMetasForm"></cc-spiner-procesar>

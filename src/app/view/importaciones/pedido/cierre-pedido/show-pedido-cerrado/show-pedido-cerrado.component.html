@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="mt-4">
+            <app-button-radio-active titulo="Pedidos Cerrados" filtroBoton="btnPedidosImpCerrado"
+                cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+                <div class="row mt-2 mb-2">
+                    <div class="col-12 filters">
+                        <div class="table-responsive responsive-table">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="table no-footer table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th style="width: 12%;">Id_pedido</th>
+                                        <th style="width: 12%;">No. compra</th>
+                                        <th style="width: 21%;">Razón social</th>
+                                        <th style="width: 10%;">Tipo compra</th>
+                                        <th style="width: 10%;">Total cierre</th>
+                                        <th style="width: 10%;">fecha cierre</th>
+                                        <th style="width: 10%;">Estado</th>
+                                        <th style="width: 15%; text-align: center;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngFor="let dt of dataDT">
+                                        <td>{{ dt.num_doc.toString().padStart(10, '0') }}</td>
+                                        <td>{{ dt.num_doc_compra }}</td>
+                                        <td>{{ dt.providers.razon_social }}</td>
+                                        <td>{{ dt.tip_doc_compra }}</td>
+                                        <td>$ {{ commonService.formatNumber(dt.total)}}</td>
+                                        <td>{{ dt.fecha_cierre }}</td>
+                                        <td>{{ dt.estado }}</td>
+                                        <td>
+                                            <div class="text-center">
+                                                <button class="btn btn-danger btn-sm" (click)="deletePedido(dt)"
+                                                    placement="top" ngbTooltip="Anular Pedido">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </button>
+                                                <button class="btn btn-warning btn-sm" (click)="showDetallePedido(dt)"
+                                                    placement="left" ngbTooltip="ver detalle cierre">
+                                                    <i class="far fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="showPedidosCerrados"></cc-spiner-procesar>

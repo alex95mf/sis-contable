@@ -1,0 +1,79 @@
+<!-- <app-content-header 
+    icon="person" 
+    title="Perfil de Usuario" 
+    desc="" 
+    [hideBreadcrumb]="true">
+</app-content-header> -->
+<div class="my-2">
+    <app-button-radio-active titulo="Perfil de Usuario" cstyle="bg-light" icono="fas fa-user">
+        <div class="row">
+            <div class="col-3">
+                <!-- Datos Inmutables del Usuario -->
+                <div class="card">
+                    <img [src]="userData?.avatar" alt="Imagen de Perfil">
+                    <div class="card-body">
+                        <button class="btn btn-link" (click)="fileUpload.click()">Cambiar Imagen</button>
+                        <button class="btn btn-link text-danger" (click)="deleteAvatar()">Eliminar</button>
+                        <input type="file" accept="image/png, image/jpeg" name="" id="" class="d-none" #fileUpload (change)="setAvatar($event)">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" readonly class="form-control" [value]="userData?.nombre">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Correo" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" readonly class="form-control" [value]="userData?.correo">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Sucursal" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" readonly class="form-control" [value]="userData?.sucursal?.nombre">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Rol" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" readonly class="form-control" [value]="userData?.rol?.nombre_rol">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Hora Entrada" styleSpan="size-span-campo font-weight-bold">
+                            <input type="time" readonly class="form-control" [value]="userData?.hora_entrada">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Hora Salida" styleSpan="size-span-campo font-weight-bold">
+                            <input type="time" readonly class="form-control" [value]="userData?.hora_fin">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Firma Digital" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" readonly class="form-control" [value]="userData?.firma_digital?.original_name">
+                            <div class="input-group-append">
+                                <ng-container *ngIf="userData.firma_digital; else noFirma">
+                                    <button class="btn btn-sm btn-primary" (click)="descargarFirma(userData?.firma_digital)" matTooltip="Descargar Archivo .p12">
+                                        <i class="fas fa-file-download"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" (click)="eliminarFirma(userData?.firma_digital)" matTooltip="Eliminar Archivo .p12">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </ng-container>
+                                <ng-template #noFirma>
+                                    <input type="file" class="d-none" accept=".p12" (change)="cargaFirma($event)" #firmaUpload>
+                                    <button class="btn btn-primary" (click)="resetInput()" matTooltip="Subir Archivo .p12">
+                                        <i class="fas fa-file-upload"></i>
+                                    </button>
+                                </ng-template>
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spUserInfoComponent"></cc-spiner-procesar>

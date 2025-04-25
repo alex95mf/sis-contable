@@ -1,0 +1,23 @@
+<app-button-radio-active-new [titulo]="'Reasignación de Usuario'" filtroBoton="btnReTicketForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+    
+   
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Ticket</legend>
+            <div class="row m-0">
+                <div class="col-12 col-md-12 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Usuario de Gestión:" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="usuario">
+                            <ng-option [value]="0" disabled>Selecciones un usuario</ng-option>
+                            <ng-option *ngFor="let user of usuariospre" [value]="user">{{user.nombre}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+          
+        </fieldset>
+        
+
+
+</app-button-radio-active-new>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>

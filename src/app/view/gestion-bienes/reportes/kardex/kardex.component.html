@@ -1,0 +1,225 @@
+<div class="my-2">
+    <app-button-radio-active-new [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-hand-pointer"
+        filtroBoton="btnsRenConsultaReporte" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+     
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+                    <div class="row m-0">
+                        
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <!-- <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [(ngModel)]="selectedGrupo" (change)="filterProductos($event)"
+                                    [items]="cmb_grupo_filter" bindValue="id_grupo_productos" bindLabel="descripcion" >
+                                </ng-select>
+                            </app-cc-input-group-prepend> -->
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo"
+                                        style="width: 155px;">Grupos</span></div>
+                                <input type="text" class="form-control form-control-sm" placeholder="Seleccione un Grupo"
+                                [(ngModel)]="grupo_descripcion" readonly >
+                                <button class="btn btn-primary btn-sm" (click)="modalGrupos()" placement="bottom"  
+                                    ngbTooltip="Buscar Grupo" >
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <!-- <app-cc-input-group-prepend label="Productos" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [(ngModel)]="selectedProductos" 
+                                    [items]="cmb_productos" bindValue="id_producto" bindLabel="nombre" >
+                                </ng-select>
+                            </app-cc-input-group-prepend> -->
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo"
+                                        style="width: 155px;">Productos</span></div>
+                                <input type="text" class="form-control form-control-sm" placeholder="Seleccione un Producto"
+                                [(ngModel)]="nombreProducto" >
+                                <button class="btn btn-primary btn-sm" (click)="expandProductos()" placement="bottom"  
+                                    ngbTooltip="Buscar Producto" >
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Bodega" styleSpan="input-group-text font-weight-bold size-span-campo inputGroup-sizing-sm">
+                                <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true"  [(ngModel)]="selectedBodega">
+                                    <ng-option [value]="0" disabled>Seleccione Bodega</ng-option>
+                                    <ng-option *ngFor="let d of arrayBodega" [value]="d.id_bodega_cab">{{d.nombre}}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                                <p-calendar 
+                                    (change)="FromOrToChange($event)" 
+                                    id="idNominaDatef"
+                                    dateFormat="dd/mm/yy" 
+                                    [readonlyInput]="true" 
+                                    [(ngModel)]="fechaDesde"
+                                    [showIcon]="true" 
+                                    inputId="icon"
+                                    class="ui-calendar ui-calendar-button"
+                                    [style]="{'height':'30px','display': 'inline-flex'}" 
+                                    [inputStyle]="{'height':'30px','width':'13.5rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                                </p-calendar>
+                              
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                                <p-calendar 
+                                    (change)="FromOrToChange($event)" 
+                                    id="idNominaDatef"
+                                    dateFormat="dd/mm/yy" 
+                                    [readonlyInput]="true" 
+                                    [(ngModel)]="fechaHasta"
+                                    [showIcon]="true" 
+                                    inputId="icon"
+                                    class="ui-calendar ui-calendar-button"
+                                    [style]="{'height':'30px','display': 'inline-flex'}" 
+                                    [inputStyle]="{'height':'30px','width':'13.5rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                                </p-calendar>
+                              
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <!-- <div class="col-4">
+                            <app-cc-input-group-prepend label="Ubicación" styleSpan="size-span-campo font-weight-bold">
+                                <input id="ubicacion" type="text" class="form-control" [(ngModel)]="ubicacion">
+                            </app-cc-input-group-prepend>
+                        </div> -->
+                        
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="Stock" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="stockSelected" [clearable]="false">
+                                    <ng-option disabled [value]="0" disabled>Seleccione un Stock</ng-option>
+                                    <ng-option *ngFor="let op of stockList" [value]="op.value">{{ op.label }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div> -->
+                </fieldset>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-center">
+            <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;max-height: 500px; overflow-y: auto;"> 
+                <p-table [value]="dataProducto" rowGroupMode="subheader" groupRowsBy="nombre" style="min-width: 1900px;" >
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th>Tipo de Movimiento</th>
+                            <th colspan="1" style="width: 150px;">Fecha</th>
+                            <th colspan="1" style="width: 200px;">No. Documento</th>
+                            <th style="width: 200px;">Proveedor/Destinatario</th>
+                            <th>Inicial</th>
+                            <th>Costo Unitario</th>
+                            <th>Costo Total</th>
+                            <th >Movimiento</th>
+                            <th>Costo Unitario</th>
+                            <th>Costo Total</th>
+                            <th>Final</th>
+                            <th>Costo Unitario</th>
+                            <th>Costo Total</th>
+                         
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="groupheader" let-dataProducto>
+                        <tr pRowGroupHeader style="font-size: 12px;">
+                            <td colspan="3"> 
+                                <span class="font-bold ml-2">Código: {{dataProducto.codigoproducto}}</span>
+                            </td>
+                            <td colspan="13">
+                                <span class="font-bold ml-2">Producto: {{dataProducto.nombre}}</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <!-- <td>{{d.id_kardex}}</td> -->
+                                <td>{{d.movimiento}}</td>
+                                <!-- <td>{{d.codigoproducto}}</td> -->
+                                <td style="width: 150px;">{{d.fecha }}</td>
+                                <td style="width: 200px;">{{d.num_documento }}</td>
+                                <td style="width: 200px;">
+                                    {{d.proveedor_destinatario }}<br>
+                                    <small class="font-weight-bold">{{d.departamento}} </small>
+                                </td>
+                                <td style="color: #2b94e2; " >
+                                    {{d.ini_stock }}
+                                </td>
+                               
+                                <td>{{d.ini_costo  | number:'1.2-2' }}</td>
+                                <td>{{d.ini_costo_total | number:'1.2-2' }}</td>
+                                <!-- <td style="color: #2b94e2; ">{{d.mov_cantidad }}</td> -->
+                                <td [ngClass]="d.movimiento == 'INGBOD' ? 'text-success' : 'text-danger'">
+                                    {{d.mov_cantidad }}
+                                    <i class="fas" [ngClass]="d.movimiento == 'INGBOD' ? 'fa-arrow-up text-success' : 'fa-arrow-down text-danger'"></i>
+                                </td>
+                                <td>{{d.mov_costo | number:'1.2-2'}}</td>
+                                <td>{{d.mov_costo_total | number:'1.2-2' }}</td>
+                                <td style="color: #2b94e2; ">{{d.fin_stock }}</td>
+                                <td>{{d.fin_costo | number:'1.2-2' }}</td>
+                                <td>{{d.fin_costo_total | number:'1.2-2' }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <!-- <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;"></th>
+                            <th colspan="2">Código Producto</th>
+                            <th colspan="3" style="width: 20%;">Nombre</th>
+                            <th>Inicial</th>
+                            <th>Costo</th>
+                            <th>Total</th>
+                            <th >Movimiento</th>
+                            <th>Costo</th>
+                            <th>Total</th>
+                            <th>Final</th>
+                            <th>Costo</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                   
+                    <tbody>
+                        <tr *ngIf="dataProducto.length == 0">
+                            <td colspan="7" class="text-center">
+                                <h6 class="my-1"></h6>No hay registros para mostrar.
+                            </td>
+                        </tr>
+
+                        <ng-template *ngFor="let d of dataProducto">
+
+                            <tr >
+                                <td>{{d.id_kardex}}</td>
+                                <td>{{d.movimiento}}</td>
+                                <td>{{d.codigoproducto}}</td>
+                                <td>{{d.nombre}}</td>
+                                <td>{{d.fecha }}</td>
+                                <td>{{d.num_documento }}</td>
+                                <td>{{d.ini_stock }}</td>
+                                <td>{{d.ini_costo  | number:'1.2-2' }}</td>
+                                <td>{{d.ini_costo_total | number:'1.2-2' }}</td>
+                                <td>{{d.mov_cantidad }}</td>
+                                <td>{{d.mov_costo | number:'1.2-2'}}</td>
+                                <td>{{d.mov_costo_total | number:'1.2-2' }}</td>
+                                <td>{{d.fin_stock }}</td>
+                                <td>{{d.fin_costo | number:'1.2-2' }}</td>
+                                <td>{{d.fin_costo_total | number:'1.2-2' }}</td>
+                             </tr>
+                        </ng-template>
+                        
+                    </tbody>
+                </table> -->
+            </div>
+        </div>
+    </app-button-radio-active-new> 
+    </div>
+    <cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spBienesReporteGestion"></cc-spiner-procesar>

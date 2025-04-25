@@ -1,0 +1,262 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+    font-family: "Poppins1";
+    src: url('../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "boldeMonserrat";
+    src: url('../../../assets/fonts/Montserrat-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "boldMonserrat";
+    src: url('../../../assets/fonts/Montserrat-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "jost";
+    src: url('../../../assets/fonts/Jost-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "nasa";
+    src: url('../../../assets/fonts/NasalizationRg-Regular.ttf') format('truetype');
+}
+
+.container-all {
+    /* background-image: url('../../../assets/img/findo2.jpg'); */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 0px;
+    background-repeat: no-repeat;
+}
+
+.nav-link {
+    font-family: "Poppins1" !important;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.textColor:hover {
+    text-decoration: none;
+    color: #0399D6;
+}
+
+.textColor {
+    font-family: "nasa" !important;
+    font-weight: 500;
+    color: black;
+    font-size: 22px;
+}
+
+.ml-auto {
+    left: auto !important;
+    right: 0px;
+}
+
+.nav-item {
+    margin-left: 40px;
+}
+
+.textbutton {
+    font-family: "Poppins1" !important;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    font-size: 15px;
+}
+
+.bg-color {
+    background-color: white;
+}
+
+.container {
+    margin-top: 160px;
+    .container-two {
+        background-color: rgba(0, 0, 0, 0.50);
+        border-radius: 0px 0px 0px 109px;
+        -webkit-border-radius: 0px 0px 0px 109px;
+        -moz-border-radius: 0px 0px 0px 109px;
+        box-shadow: -7px -4px 15px -7px rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: -7px -4px 15px -7px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -7px -4px 15px -7px rgba(0, 0, 0, 0.75);
+        height: 400px;
+    }
+    .titulo {
+        font-family: "boldeMonserrat" !important;
+        font-size: 29px;
+        text-align: center;
+        letter-spacing: 0.2px;
+        margin-bottom: 10px;
+        line-height: 30pt;
+        color: white;
+    }
+    .ingrese {
+        font-family: "boldMonserrat" !important;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+    }
+    .pass {
+        font-family: "Poppins1" !important;
+        font-size: 13px;
+        color: white;
+        float: right;
+    }
+    .recuperar {
+        /* background-color: #0399D6; */
+        font-family: "boldeMonserrat" !important;
+        font-size: 12px;
+        color: white;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        float: right;
+        cursor: pointer;
+    }
+    .recuperar:hover {
+        color: #0399D6;
+        text-decoration: none;
+        /* background-color: white; */
+    }
+}
+
+.modal-header {
+    padding: unset !important;
+    background-color: #FAFAFA;
+    color: rgba(0, 0, 0, 0.568);
+    height: 50px;
+    border-bottom: 1px solid rgba(107, 107, 107, 0.3) !important;
+}
+
+.title-head {
+    text-align: center;
+    padding-top: 18px;
+    padding-left: 25px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: "Poppins1";
+}
+
+.close {
+    margin: -6px -1px 0 auto;
+    outline: unset;
+    color: black;
+}
+
+@media screen and (max-width: 1500px) {
+    .container {
+        height: 100%;
+        margin-top: -100px;
+        .container-two {
+            background-color: rgba(0, 0, 0, 0.50);
+            border-radius: 24px 24px 0px 0px;
+            -webkit-border-radius: 24px 24px 0px 0px;
+            -moz-border-radius: 24px 24px 0px 0px;
+            box-shadow: -7px -4px 15px -7px rgba(0, 0, 0, 0.75);
+            -webkit-box-shadow: -7px -4px 15px -7px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: -7px -4px 15px -7px rgba(0, 0, 0, 0.75);
+            overflow: hidden;
+            bottom: 0px;
+            position: absolute;
+        }
+        .titulo {
+            font-family: "boldeMonserrat" !important;
+            font-size: 18px;
+            letter-spacing: 0.2px;
+            margin-bottom: 10px;
+            line-height: 30pt;
+            color: white;
+        }
+        .ingrese {
+            margin-top: -20px;
+            font-family: "boldMonserrat" !important;
+            font-size: 15px;
+            font-weight: bold;
+            color: white;
+        }
+        .pass {
+            font-family: "Poppins1" !important;
+            font-size: 10px;
+            color: white;
+            margin-right: auto;
+        }
+        .recuperar {
+            background-color: #0399D6;
+            font-family: "boldeMonserrat" !important;
+            font-size: 9px;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-right: auto;
+            cursor: pointer;
+        }
+        .recuperar:hover {
+            color: #0399D6;
+            text-decoration: none;
+            background-color: white;
+        }
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .container {
+        /*  height: 100%;
+        margin-top: -100px; */
+        .container-two {
+            background-color: rgba(0, 0, 0, 0.50);
+            border-radius: 24px 24px 0px 0px;
+            -webkit-border-radius: 24px 24px 0px 0px;
+            -moz-border-radius: 24px 24px 0px 0px;
+            box-shadow: -7px -4px 15px -7px rgba(0, 0, 0, 0.75);
+            -webkit-box-shadow: -7px -4px 15px -7px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: -7px -4px 15px -7px rgba(0, 0, 0, 0.75);
+            /*  overflow: hidden; */
+            /*   bottom: 0px; */
+            position: absolute;
+        }
+        .titulo {
+            font-family: "boldeMonserrat" !important;
+            font-size: 18px;
+            letter-spacing: 0.2px;
+            margin-bottom: 10px;
+            line-height: 30pt;
+            color: white;
+        }
+        .ingrese {
+            margin-top: -20px;
+            font-family: "boldMonserrat" !important;
+            font-size: 15px;
+            font-weight: bold;
+            color: white;
+        }
+        .pass {
+            font-family: "Poppins1" !important;
+            font-size: 10px;
+            color: white;
+            margin-right: auto;
+        }
+        .recuperar {
+            background-color: #0399D6;
+            font-family: "boldeMonserrat" !important;
+            font-size: 9px;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-right: auto;
+            cursor: pointer;
+        }
+        .recuperar:hover {
+            color: #0399D6;
+            text-decoration: none;
+            background-color: white;
+        }
+    }
+    .title-head {
+        font-size: 12px;
+    }
+}

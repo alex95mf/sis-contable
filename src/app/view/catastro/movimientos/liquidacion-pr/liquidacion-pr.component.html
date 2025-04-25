@@ -1,0 +1,284 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Liquidacion de Predio Rural" cstyle="bg-light" icono="fas fa-file-invoice" 
+        filtroBoton="btnsLiquidacionRural" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Num Documento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" readonly class="form-control" [value]="liquidacion.num_documento">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" readonly class="form-control" [value]="liquidacion.fecha">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" readonly class="form-control" value="{{ liquidacion.estado == 'E' ? 'Emitido' : liquidacion.estado == 'A' ? 'Aprobado' : liquidacion.estado == 'C' ? 'Cancelado' : 'Pendiente' }}">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" readonly class="form-control" [value]="contribuyente?.razon_social" (click)="expandContribuyente()">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" matTooltip="Buscar Contribuyente" (click)="expandContribuyente()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Propiedad" styleSpan="size-span-campo font-weight-bold">
+                    <ng-container *ngIf="formReadonly; else noPropiedad">
+                        <input type="text" class="form-control" readonly [value]="propiedadData.label">
+                    </ng-container>
+                    <ng-template #noPropiedad>
+                        <ng-select class="form-control" [readonly]="roContribuyenteSelected"
+                            [items]="cmb_propiedad$" bindLabel="label" bindValue="id"
+                            [(ngModel)]="propiedadSelected" (change)="handleSelectPropiedad($event)">
+                        </ng-select>
+                    </ng-template>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    
+        <fieldset class="border px-3 pb-2 my-2 mx-0">
+            <legend class="w-auto bg-dark mb-1">Avaluos</legend>
+            <div class="row">
+                <div class="col-4 offset-8">
+                    <app-cc-input-group-prepend label="Area" styleSpan="size-span-campo font-weight-bold">
+                        <input currencyMask [options]="{prefix: '', nullable: false}" readonly class="form-control" [ngModel]="propiedadData?.area">
+                        <div class="input-group-append">
+                            <span class="input-group-text font-weight-bold">m<sup>2</sup></span>
+                        </div>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Solar" styleSpan="size-span-campo font-weight-bold">
+                        <input currencyMask [options]="{nullable: false}" [readonly]="roContribuyenteSelected || roPropiedadSelected" 
+                            class="form-control" [(ngModel)]="propiedadData.valor_solar">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Comercial" styleSpan="size-span-campo font-weight-bold">
+                        <input currencyMask [options]="{nullable: false}" [readonly]="roContribuyenteSelected || roPropiedadSelected" 
+                            class="form-control">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Hipoteca" styleSpan="size-span-campo font-weight-bold">
+                        <input currencyMask [options]="{nullable: false}" [readonly]="roContribuyenteSelected || roPropiedadSelected" 
+                            class="form-control" [(ngModel)]="propiedadData.valor_hipoteca">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Edificacion" styleSpan="size-span-campo font-weight-bold">
+                        <input currencyMask [options]="{nullable: false}" [readonly]="roContribuyenteSelected || roPropiedadSelected" 
+                            class="form-control" [(ngModel)]="propiedadData.valor_edificacion">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Avaluo" styleSpan="size-span-campo font-weight-bold">
+                        <input currencyMask [options]="{nullable: false}" [readonly]="roContribuyenteSelected || roPropiedadSelected" 
+                            class="form-control" [(ngModel)]="propiedadData.avaluo">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo font-weight-bold">
+                        <input currencyMask [options]="{nullable: false}" [readonly]="roContribuyenteSelected || roPropiedadSelected" 
+                            class="form-control" [(ngModel)]="propiedadData.valor_metro_cuadrado">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold bg-dark">
+                    <textarea class="form-control" cols="30" rows="5" [(ngModel)]="liquidacion.observaciones" [readonly]="formReadonly"></textarea>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <ng-container *ngIf="formReadonly; else inputDetalles">
+            <div class="row">
+                <div class="col">
+                    <h4>Detalles</h4>
+                </div>
+            </div>
+            <table class="table mat-elevation-z2">
+                <thead class="thead-dark">
+                    <tr class="font-weight-bold">
+                        <th>Codigo</th>
+                        <th>Concepto</th>
+                        <th class="text-right">Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let element of liquidacion.detalles">
+                        <td>{{ element.concepto.codigo_detalle }}</td>
+                        <td class="w-50">{{ element.concepto.nombre_detalle }}</td>
+                        <td>
+                            <span *ngIf="element.cod_con_det_aplicado" class="text-danger font-weight-bold">
+                                (-)
+                            </span>
+                            <input currencyMask [ngModel]="element.valor" readonly class="form-control form-control-sm">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-container>
+        <ng-template #inputDetalles>
+            <div class="row">
+                <div class="col">
+                    <span class="h4">Conceptos</span>
+                    <button class="btn btn-sm btn-success float-right" matTooltip="Agregar Conceptos" 
+                        (click)="expandConceptos()" [disabled]="roPropiedadSelected || formReadOnly && false">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table class="table mat-elevation-z2 w-100 mb-0">
+                        <thead class="thead-dark font-weight-bold">
+                            <tr>
+                                <th class="text-center">Acciones</th>
+                                <th>Codigo</th>
+                                <th>Descripcion</th>
+                                <!-- Valor del Concepto -->
+                                <th class="text-right">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="liquidacion.conceptos.length; else noConceptos">
+                                <tr *ngFor="let element of liquidacion.conceptos; let i = index">
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-danger" (click)="removeConcepto(i)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                    <td>{{ element.codigo_detalle }}</td>
+                                    <td>{{ element.nombre_detalle }}</td>
+                                    <td>
+                                        <input currencyMask class="form-control form-control-sm" [(ngModel)]="element.valor">
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #noConceptos>
+                                <tr>
+                                    <td class="text-center" colspan="5">
+                                        <h6>No hay Conceptos seleccionados</h6>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 offset-8">
+                    <!-- SUM(Total Conceptos) -->
+                    <app-cc-input-group-prepend label="Subtotal" styleSpan="size-span-campo font-weight-bold">
+                        <input currencyMask [options]="{nullable: false}" readonly class="form-control" [ngModel]="liquidacion.sum_conceptos">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span class="h4">Exoneraciones</span>
+                    <button class="btn btn-sm btn-success float-right" matTooltip="Agregar Exoneraciones" 
+                        (click)="expandExoneraciones()" [disabled]="liquidacion.conceptos.length == 0 || formReadOnly && false">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table class="table mat-elevation-z2 w-100 mb-0">
+                        <thead class="thead-dark font-weight-bold">
+                            <tr>
+                                <th class="text-center">Acciones</th>
+                                <th>Concepto</th>
+                                <th>Codigo</th>
+                                <th>Descripcion</th>
+                                <th>% Descuento</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="liquidacion.exoneraciones.length; else noExoneraciones">
+                                <tr *ngFor="let element of liquidacion.exoneraciones; let i = index">
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-danger" (click)="removeExoneracion(i)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                    <td>{{ element.con_codigo }}</td>
+                                    <td>{{ element.con_det_codigo }}</td>
+                                    <td>{{ element.descripcion }}</td>
+                                    <td>{{ element.porcentaje * 100 }}%</td>
+                                    <td>
+                                        <input currencyMask [(ngModel)]="element.valor" class="form-control form-control-sm">
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #noExoneraciones>
+                                <tr>
+                                    <td class="text-center" colspan="5">
+                                        <h6>No hay Exoneraciones seleccionadas</h6>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 offset-8">
+                    <app-cc-input-group-prepend label="Exoneraciones" styleSpan="size-span-campo font-weight-bold">
+                        <input currencyMask [options]="{nullable: false}" readonly class="form-control" [ngModel]="liquidacion.sum_exoneraciones">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </ng-template>
+        <div class="row">
+            <div class="col-4 offset-8">
+                <!-- Subtotal - Exoneraciones -->
+                <app-cc-input-group-prepend label="Total" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask [options]="{nullable: false}" readonly class="form-control" [ngModel]="liquidacion.total">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 offset-8">
+                <app-cc-input-group-prepend label="Recargo" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask [options]="{nullable: false}" [readonly]="formReadonly" class="form-control" [(ngModel)]="liquidacion.recargo" (keyup)="calcularLiquidacion()">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 offset-8">
+                <app-cc-input-group-prepend label="Interes" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask [options]="{nullable: false}" [readonly]="formReadonly" class="form-control" [(ngModel)]="liquidacion.interes" (keyup)="calcularLiquidacion()">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 offset-8">
+                <app-cc-input-group-prepend label="Descuento" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask [options]="{nullable: false}" [readonly]="formReadonly" class="form-control" [(ngModel)]="liquidacion.descuento" (keyup)="calcularLiquidacion()">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 offset-8">
+                <!-- Total + Recargo + Interes - Descuento -->
+                <app-cc-input-group-prepend label="Total Cobro" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask [options]="{nullable: false}" readonly class="form-control" [ngModel]="liquidacion.total_cobro">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spLiquidacionRural"></cc-spiner-procesar>

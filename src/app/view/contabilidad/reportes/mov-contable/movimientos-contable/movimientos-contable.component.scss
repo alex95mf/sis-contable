@@ -1,0 +1,210 @@
+/*@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+	font-family: "Poppins1";
+	src: url("../../../../../../assets/fonts/Montserrat-Medium.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "PoppinsTourney";
+	src: url("../../../../../../assets/fonts/Tourney-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+.title-cab {
+	font-family: "Poppins1" !important;
+	background-color: #404A63;
+	color: white;
+	height: 30px;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 15px;
+	padding-top: 5px;
+	letter-spacing: 5px;
+	font-weight: bold;
+}
+
+
+.container-filter {
+	label,
+	input,
+	select,
+	span,
+	button {
+		font-family: "Poppins1" !important;
+		box-shadow: unset !important;
+		outline: unset !important;
+	}
+}
+
+.filters {
+	box-shadow: 3px 3px #36363659;
+	font-family: "Poppins1" !important;
+	margin-top: 5px;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	border-radius: 5px;
+	background-color: white;
+	border: 1px solid;
+	border-color: #00000030;
+	table {
+		thead {
+			tr {
+				th {
+					padding: 6px 0px 8px 10px;
+					box-shadow: 0 0 0 4px white !important;
+					background-color: #ffc000;
+					color: black;
+					text-transform: uppercase;
+					border: none !important;
+					font-size: 12px;
+					font-weight: bolder;
+				}
+			}
+		}
+		tbody {
+			tr {
+				td {
+					padding: 5px 10px 5px 5px;
+					box-shadow: 0 0 0 4px white !important;
+					background-color: #aeabab38;
+					color: rgba(0, 0, 0, 0.644);
+					text-transform: uppercase;
+					border: px solid #5a55555c !important;
+					font-weight: unset;
+					border: none !important;
+					font-size: 0.9em;
+					button {
+						padding: 2px 8px 2px 8px;
+					}
+
+				
+				}
+			}
+		}
+	}
+}
+
+input{
+	height: 25px;
+	box-shadow: unset;
+	outline: unset;
+	//border: 1px solid;text-align: left;
+	background-color: white !important;
+	
+}
+
+select {
+	font-family: "Poppins1" !important;
+	height: 28px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	outline: unset !important;
+	box-shadow: unset !important;
+	background-color: white !important;
+	border-radius: 3px !important;
+	border: 1px solid #5a55555c !important;
+	padding: 0px 0px 0px 5px;
+	font-size: 13px;
+}
+
+select option {
+	font-weight: bold;
+	background-color: white !important;
+	font-size: 15px;
+	color: black;
+}
+
+ng-select {
+	font-family: "Poppins1" !important;
+	box-shadow: unset !important;
+	outline: unset !important;
+	border-radius: 3px !important;
+	border: 1px solid #5a55555c !important;
+	width: 100%;
+	padding: 4px 0px 0px 5px;
+	height: 28px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	background: #fff url("../../../../../../assets/img/arrow-up-icon-23.png") no-repeat;
+	background-size: 15px;
+	background-position: right 10px center;
+	padding-left: 15px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 0px;
+}
+
+.l {
+	font-weight: bold;
+}
+
+tfoot {
+	background-color: #404A63;
+	td {
+		font-size: 14px;
+		color: white;
+		font-weight: bold;
+	}
+}
+
+
+.table-scroll{
+	display: block;
+	empty-cells: show;
+	
+	border-spacing: 0;
+  }
+  
+  .table-scroll thead{
+	background-color: #f1f1f1;  
+	position:relative;
+	display: block;
+	width:100%;
+	overflow-y: scroll;
+  }
+  
+  .table-scroll tbody{
+	display: block; position:relative;
+	width:100%; overflow-y:scroll;
+	border-top: 1px solid rgba(0,0,0,0.2);
+  }
+  
+  .table-scroll tr{
+	width: 100%;
+	display:flex;
+  }
+  
+  .table-scroll td,.table-scroll th{
+	flex-basis:100%;
+	flex-grow:2;
+	display: block;
+	padding: 1rem;
+	text-align:left;
+  }
+  
+  
+  .table-scroll.small-first-col td:first-child,
+  .table-scroll.small-first-col th:first-child{
+	flex-basis:20%;
+	flex-grow:1;
+  }
+  
+  .table-scroll tbody tr:nth-child(2n){
+	background-color: rgba(130,130,170,0.1);
+  }
+  
+  .body-half-screen{
+	max-height: 30vh; //vertical size table 
+  }
+  
+  .small-col{flex-basis:10%;}
+
+ #tablaRegistros td:hover {
+	 background-color: #ffc34d;
+     color:black;
+	 font-weight: bold;
+	 font-size: 12px;
+  }
+
+*/

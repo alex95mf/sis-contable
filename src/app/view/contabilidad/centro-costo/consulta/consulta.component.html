@@ -1,0 +1,191 @@
+
+
+<br> 
+<app-button-radio-active titulo="Consulta Centro de Costo" filtroBoton="btnConsCc" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-search"> 
+
+    <div class="row">
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Fecha Desde"  styleSpan="size-span-campo">                
+                <input type="date" class="form-control"  name="dp" max="2050-01-01" container="body" [(ngModel)]="fromDatePicker"  id="idGlobaldate"/>                
+            </app-cc-input-group-prepend> 
+        </div>
+
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Fecha Hasta"  styleSpan="size-span-campo">                
+                <input type="date" class="form-control"  name="dp" max="2050-01-01" container="body" [(ngModel)]="toDatePicker" id="idGlobaldate2"/>                
+            </app-cc-input-group-prepend> 
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Centro costo"  styleSpan="size-span-campo">                
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="fk_centro_costo" (ngModelChange)="getAccountFather($event);rerender()">
+                    <option [value]="0">Seleccionar Centro Costo</option>
+                    <option *ngFor="let d of arrayCentroCosto" [value]="d.id"> {{d.nombre}} </option>
+                </select>                
+            </app-cc-input-group-prepend> 
+        </div>
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Cuenta Mayor"  styleSpan="size-span-campo">                
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="fk_account" [disabled]="arrayAccountHigher.length == 0 " (ngModelChange)="rerender()">
+                    <option [value]="0">Todos</option>
+                    <option *ngFor="let d of arrayAccountHigher" [value]="d.codigo"> {{d.nombre}} </option>
+                </select>                
+            </app-cc-input-group-prepend> 
+        </div>
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Agrupar"  styleSpan="size-span-campo">                
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="fk_group" [disabled]="fk_centro_costo == 0 " (ngModelChange)="rerender()">
+                    <option [value]="0">Todos</option>
+                    <option [value]="1">Agrupar por cuentas</option>
+                </select>                
+            </app-cc-input-group-prepend> 
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col-sm">
+            <div class="row justify-content-center">
+                <div id="chartdiv"></div>
+            </div>
+        
+            <div class="row" *ngIf="fk_centro_costo!=0">
+                <div class="col-3 p-0">
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <i class="fas fa-square" style="color:#68FF33;"></i> <label for="">PRESUPUESTO</label>
+                        </div>
+                        <div class="col-12 text-center">
+                            <i class="fas fa-dollar-sign" style="color:#68FF33;"></i><span>
+                                {{commonServices.formatNumber(prespuesto)}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <i class="fas fa-square" style="color:#184BB8 ;"></i> <label for="">SALDO</label>
+                        </div>
+                        <div class="col-12 text-center">
+                            <i class="fas fa-dollar-sign" style="color:#184BB8;"></i><span>
+                                {{commonServices.formatNumber(saldo)}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <i class="fas fa-square" style="color:#DF3A01 ;"></i> <label for="">GASTO</label>
+                        </div>
+                        <div class="col-12 text-center">
+                            <i class="fas fa-dollar-sign" style="color:#DF3A01;"></i><span>
+                                {{commonServices.formatNumber(prespuesto-saldo)}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <i class="fas fa-square" style="color:#CD0F0F;"></i> <label for="">ALERTA</label>
+                        </div>
+                        <div class="col-12 text-center">
+                            <i class="fas fa-dollar-sign" style="color:#CD0F0F;"></i><span>
+                                {{commonServices.formatNumber(alerta)}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-sm">
+            <fieldset class="border p-2 mb-1 mt-2 filters">
+                <legend class="w-auto h6 ">Lista</legend> 
+                    <div class="table-responsive">
+                        
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                            <thead class="thead-dark" *ngIf="fk_group == 0">
+                                <tr style="width: 100%;">
+                                    <th style="width: 10%;">Fecha</th>
+                                    <th style="width: 22%;">Cuenta</th>
+                                    <th style="width: 24%;">Detalle</th>
+                                    <th style="width: 10%;">Debe</th>
+                                    <th style="width: 10%;">Haber</th>
+                                    <th style="width: 16%;">No. Documento</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="validaDt && fk_group == 0 " >
+                                <tr *ngFor="let dt of dataDT" (click)="showAsiento(dt)" matTooltip="Click para ver el asiento contable" style="cursor:pointer">
+                                    <td style="padding-top: 15px;">{{ dt.fecha }}</td>
+                                    <td style="padding-top: 15px;">{{ dt.name_cuenta }}</td>
+                                    <td style="padding-top: 15px;">{{ dt.detalle }}</td>
+                                    <td style="padding-top: 15px;text-align: right;">$ {{ formatNumber(dt.valor_deb) }}</td>
+                                    <td style="padding-top: 15px;text-align: right;">$ {{ formatNumber(dt.valor_cre) }}</td>
+                                    <td style="padding-top: 15px;text-align: right;">{{ dt.referencia }}</td>
+                                </tr>
+                            </tbody>
+                            <thead class="thead-dark" *ngIf="fk_group != 0">
+                                <tr style="width: 70%;">
+                                    <th style="width: 30%;">Cuenta</th>
+                                    <th style="width: 10%;">Debe</th>
+                                    <th style="width: 10%;">Haber</th>
+                                    <th style="width: 10%;">Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="validaDt && fk_group != 0">
+                                <tr *ngFor="let dt of dataDT">
+                                    <td style="padding-top: 15px;">{{ dt.name_cuenta }}</td>
+                                    <td style="padding-top: 15px;text-align: right;">$ {{ formatNumber(dt.valor_deb) }}</td>
+                                    <td style="padding-top: 15px;text-align: right;">$ {{ formatNumber(dt.valor_cre) }}</td>
+                                    <td style="padding-top: 15px;text-align: right;">{{ formatNumber(dt.valor_deb - dt.valor_cre) }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> 
+
+                    <div class="row justify-content-center mt-1" *ngIf="totales != undefined && fk_group == 0 ">
+                        <div class="col-11 p-0">
+                            <table class="table">
+                                <thead style="width: 100%;">
+                                    <tr style="background-color: #404a63;color: white;">
+                                        <th style="width: 10%;padding: 0px 0px 0px 0px;"></th>
+                                        <th style="width: 22%;padding: 0px 0px 0px 0px;"></th>
+                                        <th style="width: 24%;text-align: center;padding: 0px 0px 0px 0px;">TOTAL</th>
+                                        <th style="width: 10%;text-align: right;padding: 0px 10px 0px 0px;"
+                                            *ngIf="totales.total_debito.toString().substring(0, 1) != '-'" class="primaryClas">
+                                            {{formatNumber(totales.total_debito)}}</th>
+                                        <th style="width: 10%;text-align: right;padding: 0px 10px 0px 0px;"
+                                            *ngIf="totales.total_debito.toString().substring(0, 1) == '-'" class="dangerClass">
+                                            ({{formatNumber(totales.total_debito)}})</th>
+                                        <th style="width: 10%;text-align: right;padding: 0px 10px 0px 0px;"
+                                            *ngIf="totales.total_credito.toString().substring(0, 1) != '-'" class="primaryClas">
+                                            {{formatNumber(totales.total_credito)}}</th>
+                                        <th style="width: 10%;text-align: right;padding: 0px 10px 0px 0px;"
+                                            *ngIf="totales.total_credito.toString().substring(0, 1) == '-'" class="dangerClass">
+                                            ({{formatNumber(totales.total_credito)}})</th>
+                                        <th style="width: 16%;text-align: right;padding: 0px 10px 0px 0px;"
+                                            *ngIf="totales.total.toString().substring(0, 1) != '-'" class="primaryClas">
+                                            {{formatNumber(totales.total)}}</th>
+                                        <th style="width: 16%;text-align: right;padding: 0px 10px 0px 0px;"
+                                            *ngIf="totales.total.toString().substring(0, 1) == '-'" class="dangerClass">
+                                            ({{formatNumber(totales.total)}})</th>
+                                        <th style="width: 8%;padding: 0px 10px 0px 0px;"></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+            </fieldset>
+        </div>
+    </div>
+    
+    
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCcConcos"></cc-spiner-procesar>

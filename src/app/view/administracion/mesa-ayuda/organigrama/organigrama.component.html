@@ -1,0 +1,215 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active titulo="ORGANIGRAMA" filtroBoton="btnsOrganigrama"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+        <div s>
+            <div class="row">
+                <div class="col-12">
+                    <fieldset class="border pl-2 pr-2 pb-2 mb-1 mt-2">
+                        <legend class="w-auto h6">Organigrama&nbsp;&nbsp;
+                        </legend>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo:</span>
+                                    </div>
+                                    <ng-select class="form-control form-control-sm" placeholder="-Seleccione-" [clearable]="false" [(ngModel)]="nuevoNivel.tipo"
+                                        [items]="cmb_tipo" bindValue="value" bindLabel="label" disabled>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre Cargo:</span>
+                                    </div>
+                                    <input type="text" [readonly]="isReadOnly" [(ngModel)]="nuevoNivel.nombre" class="form-control form-control-sm" placeholder="Nombre Cargo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Código Padre</span>
+                                    </div>
+                                    <input type="text" readonly [(ngModel)]="nuevoNivel.codigo_padre"
+                                        class="form-control form-control-sm text-right" placeholder="Código de Padre">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Código</span>
+                                    </div>
+                                    <input type="text" readonly [(ngModel)]="nuevoNivel.codigo"
+                                        class="form-control form-control-sm text-right" placeholder="Código">
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Nivel</span>
+                                    </div>
+                                    <input type="text" readonly
+                                        [(ngModel)]="nuevoNivel.nivel" class="form-control form-control-sm text-right"
+                                        placeholder="Nivel del organigrama">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Rol</span>
+                                    </div>
+                                    <ng-select class="form-control" bindLabel="estado" 
+                                        placeholder="-Seleccione-" appendTo="body"
+                                        [clearable]="true" [searchable]="true" 
+                                        [(ngModel)]="nuevoNivel.id_rol"
+                                        [disabled]="isReadOnly"
+                                        >
+                                        <ng-option [value]="item.id_rol" *ngFor="let item of lista_roles">
+                                            {{item.nombre_rol}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+
+
+
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <!-- <fancy-grid-angular [config]="gridConfig"></fancy-grid-angular> -->
+                    <p-treeTable [value]="organigrama" 
+                                 [scrollable]="true" 
+                                 [tableStyle]="{'min-width':'68.5rem'}" 
+                                 [loading]="organigramaLoading" 
+                                 styleClass="p-treetable-gridlines"
+                                 class="custom-tree custom-tree-td custom-tree-gridlines"
+                                 selectionMode="single" [(selection)]="selectedNode2" dataKey="id_organigrama"
+                                 (onNodeSelect)="nodeSelect($event)">
+                        <ng-template pTemplate="header">
+                            <tr >
+                                <th style="width: 10%;">NIVEL</th>
+                                <th style="width: 20%;">CODIGO</th>
+                                <th style="width: 40%;">NOMBRE</th>
+                                <th style="width: 30%;">PADRE</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowNode let-rowData="rowData" >
+                            <tr [ttRow]="rowNode" (click)="manualClick(rowNode)">
+                                <td style="width: 10%;">
+                                    {{rowData.nivel}}
+                                </td>
+                                <td style="width: 20%;">
+                                    <p-treeTableToggler [rowNode]="rowNode" ></p-treeTableToggler>
+                                    {{ rowData.codigo }}
+                                </td>
+                                <td style="width: 40%;">{{ rowData.nombre }}</td>
+                                <td style="width: 30%;">{{ rowData.codigo_padre }}</td>
+                           </tr>
+                       </ng-template>
+                   </p-treeTable>
+                </div>
+            </div>
+        </div>
+
+        <!-- <ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template> -->
+
+    </app-button-radio-active>
+</div>
+
+<div [hidden]="true" id="print-section">
+    <!-- <div class="row">
+        <div class="col-md-12 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-2">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-2">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-5" style="font-size: 20px;font-weight: bold">
+                                <h3>Plan de Cuenta</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive responsive-table mb-3">
+        <table class=" no-footer table-hover" style="margin-top: 30;width: 100%">
+            <thead style="height: 30px;">
+                <tr style="border-bottom: 1px solid;border-top: 1px solid;">
+                    <th style="width: 15%;text-align: center;">ID</th>
+                    <th style="width: 15%;text-align: center;">GRUPO</th>
+                    <th style="width: 20%;text-align: center;">CODIGO</th>
+                    <th style="width: 25%;text-align: center;">NOMBRE</th>
+                    <th style="width: 25%;text-align: center;">CUENTA MAYOR</th>
+                </tr>
+            </thead>
+            <tbody style="border-top: none;">
+                <tr *ngFor="let dt of dataPrint" style="height: 30px;">
+                    <td style="padding-left: 70px;text-align: start;">{{ dt.id }}</td>
+                    <td style="padding-left: 50px;text-align: start;">{{ dt.grupo }}</td>
+                    <td style="padding-left: 70px;text-align: start;">{{ dt.codigo }}</td>
+                    <td style="padding-left: 90px;text-align: start;">{{ dt.nombre }}</td>
+                    <td style="padding-left: 70px;text-align: start;">{{ dt.codigo_padre }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #13A1EA;">
+                Fecha: {{fecha}}&nbsp;{{hora}}</span>
+        </div>
+        <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+            <span style="color: #13A1EA;">
+                Usuario: {{dataUser.nombre}}</span>
+        </div>
+    </div> -->
+</div>
+
+<ng-template #content let-modal class="modal-flotante">
+    <!-- <div class="modal-header">
+        <h5 class="modal-title">BUSQUEDA PLAN CUENTA</h5>
+        <button type="button" class="btn-close butto-close-modal" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">Cerrar</button>
+    </div>
+    <div class="modal-body body_table_search">
+        <app-cc-modal-tabla-cuenta (EventElemntRow)=CargarCuentaEditar($event)></app-cc-modal-tabla-cuenta>
+    </div> -->
+</ng-template>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spPlanCuentas"></cc-spiner-procesar>

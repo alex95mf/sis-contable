@@ -1,0 +1,125 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Gestion de Movimiento Bancarios" filtroBoton="btnsOrdPag" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <fieldset class="border pb-2 px-2">
+            <legend class="w-auto bg-dark ml-1">Filtros</legend>
+            <div class="row">
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Numero de cuenta" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="num_cuenta" placeholder="numero de cuenta... ">
+                            </app-cc-input-group-prepend>
+
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="conceptoFilt" placeholder="Observacion... ">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha inicio" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_fecha_ini" type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha fin" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_fecha_fin" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="estado"  [clearable]="false">
+                                    <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                                    <ng-option *ngFor="let op of estadoList" [value]="op.value">
+                                        <i placement="bottom" [ngbTooltip]="(op.value == 1) ? 'ACTIVO' : (op.value == 0) && 'ANULADO' " [class]="(op.value == 0) ? 'fas fa-circle text-danger' :  ((op.value == 1) && 'fas fa-circle text-success')">
+                                        </i>
+                                        {{ op.label}}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="cargarOrdenesPago(true)">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row">
+            <div class="col">
+                <table id="tabla1" class="table table-bordered no-footer table-hover mb-0">
+                    <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 10%;">Movimiento</th>                            
+                            <th style="width: 10%;">Estado</th>
+                            <th style="width: 10%;">Tipo Movimiento</th>
+                            <th style="width: 10%;">Fecha Emision</th>
+                            <th style="width: 10%;">Valor movimiento</th>
+                            <th style="width: 10%;">Número pre-impreso</th>
+                            <th style="width: 10%;">Observacion</th>
+                            <th style="width: 10%;">Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="ordenesDt.length == 0">
+                            <td colspan="7" class="text-center">
+                                <h6 class="my-1">No hay informacion para mostrar</h6>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let dt of ordenesDt, let i = index">
+                            <td class="text-center">
+                                <div class="row">
+                                    <div class="col">
+                                        {{dt.name_banks}}
+                                    </div>
+                                    
+                                </div>                
+                                <div class="row">
+                                    <div class="col text-muted">{{dt.num_cuenta}}</div>
+                                </div>
+                                
+                            </td>
+                            <td *ngIf="dt.isactive  == 1" class="text-center">
+                                <i class="fas fa-circle text-success"></i> ACTIVO
+                            </td>
+                            <td *ngIf="dt.isactive != 1" class="text-center">
+                                <i class="fas fa-circle text-warning"></i> ANULADO
+                            </td>
+                            <td class="text-center">{{ dt.tipo_egreso }}</td>
+                            <td class="text-center">{{ dt.fecha_emision }}</td>
+                            <td class="text-center">{{ dt.valor }}</td>
+                            <td class="text-center">{{ dt.num_preimpreso }}</td>
+                            <td class="text-center">{{ dt.concepto }}</td>
+                            <td>
+                                <div class="text-center mx-auto">
+                                    <button class="btn btn-primary btn-sm mx-1" (click)="detallesMovimiento(dt)" placement="left" ngbTooltip="Seleccionar orden de pago">
+                                        <i class="fas fa-hand-pointer"></i>
+                                    </button>
+                                    <!-- <button class="btn btn-warning btn-sm mx-1"  placement="left" ngbTooltip="Seleccionar orden de pago" (click)="imprimirOrdenById(false, dt)"  printSectionId="PrintSectionOrden" ngxPrint>
+                                        <i class="fa fa-print"></i>
+                                    </button> -->
+                                    <!-- <div>
+                                        <button class="imprimirDatos" [useExistingCss]="true" placement="left" printSectionId="print-section-che-pro" ngxPrint>
+                                            <i class="fa fa-print"></i>
+                                        </button>
+                                    </div> -->
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage" [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>

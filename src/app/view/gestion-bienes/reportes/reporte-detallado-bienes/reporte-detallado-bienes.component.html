@@ -1,0 +1,277 @@
+<div class="my-2">
+    <app-button-radio-active-new [titulo]="fTitle" cstyle="bg-gradient-primary text-white" 
+    icono="fas fa-hand-pointer"
+        filtroBoton="btnsRenConsultaReporte" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Tipo de Bien" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="true" [(ngModel)]="selectedTipo" (change)="filterByTipoBien($event)"
+                                    [items]="cmb_tipo_bien" bindValue="value" bindLabel="label">
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="true" [(ngModel)]="selectedGrupo" (change)="filterByGrupo($event)"
+                                    [items]="cmb_grupo_filter" bindValue="id_grupo_productos" bindLabel="descripcion" >
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Sub Grupo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [clearable]="true" [(ngModel)]="selectedSubGrupo" 
+                                    [items]="cmb_subgrupo_filter" bindValue="id_grupo_productos" bindLabel="descripcion" >
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Año de Ingreso" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="anio_ingreso" id="idNominaDatef"
+                                (change)="ChangeFechaCompras($event)" [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" [disabled]="busqueda">
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                            <!-- <app-cc-input-group-prepend label="Año de Ingreso" styleSpan="size-span-campo font-weight-bold">
+                                <p-calendar 
+                                    view="year" 
+                                    dateFormat="yy" 
+                                    [(ngModel)]="anio_ingreso" 
+                                    (change)="ChangeFechaCompras($event)" 
+                                    id="idNominaDatef" 
+                                    class="ui-calendar ui-calendar-button"
+                                    [showIcon]="true" inputId="icon" 
+                                    [disabled]="busqueda" 
+                                    [style]="{'height':'30px','display': 'inline-flex'}" 
+                                    [inputStyle]="{'height':'30px','width':'12rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}"
+                                >
+                                </p-calendar>
+                            </app-cc-input-group-prepend> -->
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+        
+                            <app-cc-input-group-prepend label="Centro Costo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select style="width: 150px;" class="form-control form-control-sm custom-select" 
+                                appendTo="body" [searchable]="true" [(ngModel)]="centro_costo">
+                                <ng-option [value]="0" disabled>Seleccione... </ng-option>
+                                <ng-option *ngFor="let item of cmb_centro_costo"
+                                    [value]="item.id" >{{item.nombre}}</ng-option>
+                             </ng-select>
+                            </app-cc-input-group-prepend>
+                           
+                        </div>
+                        
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+
+                            <app-cc-input-group-prepend label="Departamento Custodio" styleSpan="size-span-campo font-weight-bold">
+                            
+                                <input placeholder="Ubicación" type="text" #departamento="ngModel"
+                                name="departamento" readonly [(ngModel)]="departamentoSelect.dep_nombre" 
+                                class="form-control form-control-sm" 
+                                id="departamento" [disabled]="false">
+                            
+                                <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" 
+                                    style="box-shadow: unset;outline: unset;" [disabled]="false">
+                                    Buscar
+                                </button>
+                            </app-cc-input-group-prepend>
+
+
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Custodio" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control form-control-sm" [(ngModel)]="UserSelect" readonly placeholder="Custodio "/>
+                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(2)" [disabled]="false">Buscar</button>
+            
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+
+                            <app-cc-input-group-prepend label="Departamento Responsable" styleSpan="size-span-campo font-weight-bold">
+                                <input placeholder="Ubicación" type="text" #departamento="ngModel"
+                                name="departamento" readonly [(ngModel)]="departamentoSelectRes.dep_nombre" 
+                                class="form-control form-control-sm" 
+                                id="departamento" [disabled]="false">
+                            
+                                <button class="btn btn-primary btn-sm" (click)="modalDepartamentosResponsable()" 
+                                    style="box-shadow: unset;outline: unset;" [disabled]="false">
+                                    Buscar
+                                </button>
+                            </app-cc-input-group-prepend>
+
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Responsable" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control form-control-sm" [(ngModel)]="UserSelectResponsable" readonly placeholder="Responsable "/>
+                                <button class="btn btn-primary btn-sm" (click)="modalEncargado(4)" [disabled]="false">Buscar</button>
+            
+                            </app-cc-input-group-prepend>
+                        </div>
+                        
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-center">
+            <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;max-height: 410px; overflow-y: scroll;"> 
+                <table class="table table-striped table-bordered table-k table-hover"  style="width:400%;height: 410px;">
+                    <thead class="sticky-header">
+                        <tr class="text-center">
+                            <th>#</th>
+                            <th style="width: 6%;">Tipo</th>
+                            <th style="width: 6%;">Grupo</th>
+                            <th style="width: 6%;">Sub Grupo</th>
+                            <th >Año</th>
+                            <th style="width: 6%;">No. Comprobante de ingreso</th>
+                            <th >Centro costo</th>
+                            <th >Código interno de bodega</th>
+                            <th >Fecha de aquisición</th>
+                            <th >Código del bien</th>
+                            <th >Nominación del catálogo</th>
+                            <th >No. acta de entrega</th>
+                            <th >Cuenta Contable</th>
+                            <th >Descripción del bien</th>
+                            <th >Marca</th>
+                            <th >Modelo</th>
+                            <th >Serie</th>
+                            <th >No. movil</th>
+                            <th>Tipo material</th>
+                            <th >Caracterísiticas material</th>
+                            <th >Color</th>
+                            <th >Placa</th>
+                            <th >Chasis</th>
+                            <th>Motor</th>
+                            <th >Condición</th>
+                            <th >Ubicación Custodio</th>
+                            <th >Custodio</th>
+                            <th >Responsable</th>
+                            <th >Ubicación Responsable</th>
+                            <th >Valor</th>
+                            <th >Proveedor</th>
+                            <th >No. Factura</th>
+                            <th >Fecha de devolución</th>
+                            <th >Departamento que devuelve</th>
+                            <th >No. documento devolución</th>
+                            <th >Fecha de informe técnico</th>
+                            <th >No. informe técnico</th>
+                            <th >Persona que suscribe</th>
+                            <th >Ubicación actual</th>
+                            <th >Fecha de envío a bodegas ENGOROY</th>
+                            <th >No. documento envío a ENGOROY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="dataProducto.length == 0">
+                            <td colspan="37" class="text-center">
+                                <h6 class="my-1"></h6>No hay registros para mostrar.
+                            </td>
+                        </tr>
+                        <tr *ngFor="let d of dataProducto; let i = index">
+                           <td>{{ d.linea }}</td>
+                           <td>{{ d.tipo_bien }}</td>
+                           <td>{{ d.descripciongrupo }}</td>
+                           <td>{{ d.descripcionsubgrupo }}</td>
+                           <td>{{ d.anio }}</td>
+                           <td>{{ d.numero_ingreso_bodega }}</td>
+                           <td>{{ d.centro_costo }}</td>
+                           <td>{{ d.codigoproducto }}</td>
+                           <td>{{ d.fecha_compra }}</td>
+                           <td>{{ d.codigo_bien }}</td>
+                           <td>{{ d.nombre_catalogo_presupuesto }}</td>
+                           <td>{{ d.acta_entrega }}</td>
+                           <td>{{ d.codigo_cuenta_contable }}</td>
+                           <td>{{ d.descripcion_bien }}</td>
+                           <td>{{ d.marca }}</td>
+                           <td>{{ d.modelo }}</td>
+                           <td>{{ d.numero_serie }}</td>
+                           <td>{{ d.movil }}</td>
+                           <td>{{ d.tipo_material }}</td>
+                           <td>{{ d.caracterisricas_material }}</td>
+                           <td>{{ d.color }}</td>
+                           <td>{{ d.placa }}</td>
+                           <td>{{ d.numero_chasi }}</td>
+                           <td>{{ d.motor }}</td>
+                           <td>{{ d.condicion }}</td>
+                           <td>{{ d.ubicacion_custodio }}</td>
+                           <td>{{ d?.custodio }}</td>
+                           <td>{{ d?.responsable }}</td>
+                           <td>{{ d.ubicacion_responsable }}</td>
+                           <td>{{ d.valor }}</td>
+                           <td>{{ d.proveedor }}</td>
+                           <td>{{ d.factura }}</td>
+                           <td>{{ d.fecha_devolucucion }}</td>
+                           <td>{{ d.departamento_devolucion }}</td>
+                           <td>{{ d.nro_documento_devolucion }}</td>
+                           <td>{{ d.fecha_informe_tecnico }}</td>
+                           <td>{{ d.nro_informe_tecnico }}</td>
+                           <td>{{ d.servidor_suscribe }}</td>
+                           <td>{{ d.ubicacion_actual }}</td>
+                           <td>{{ d.fecha_envio_bodega }}</td>
+                           <td>{{ d.nro_documento_envio_bodega }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- <div class="table-responsive" *ngIf="mostrarMatriz; then thenBlock else elseBlock"></div> -->
+        <!-- <ng-template #thenBlock>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            <span *ngIf="selectedReporte == 'RES'">Responsable</span>
+                            <span *ngIf="selectedReporte == 'DEP'">Dependencia</span>
+                            <span *ngIf="selectedReporte != 'RES' && selectedReporte != 'DEP'">Periodo</span>
+                        </th>
+                        <th *ngFor="let columna of columnas">{{ columna }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fila of matriz">
+                        <td>
+                            {{ selectedReporte == 'RES' ? fila.responsable : fila.date_part }}
+                            <span *ngIf="selectedReporte == 'RES'">{{ fila.responsable }}</span>
+                            <span *ngIf="selectedReporte == 'DEP'">{{ fila.codigo }}. {{ fila.nombre_dependencia }}</span>
+                            <span *ngIf="selectedReporte != 'RES' && selectedReporte != 'DEP'">{{ fila.date_part }}</span>
+                        </td>
+                        <td *ngFor="let columna of columnas">
+                            <span *ngIf="selectedData == 'valor'">${{ fila[columna] ?? 0 | number:'1.2-2' }}</span>
+                            <span *ngIf="selectedData == 'cantidad'">{{ fila[columna] ?? 0 | number:'1.0-0' }}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
+        <ng-template #elseBlock>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Tipo de Bien</th>
+                        <th>Cantidad</th>
+                        <th>Suma de Valores</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fila of filas">
+                        <td>{{ fila.descripcion }}</td>
+                        <td>{{ fila.cantidad }}</td>
+                        <td>{{ fila.valor | number:'1.2-2' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template> -->
+        
+    </app-button-radio-active-new> 
+    </div>
+    <cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spBienesReporteGestion"></cc-spiner-procesar>

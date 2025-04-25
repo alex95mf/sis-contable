@@ -1,0 +1,102 @@
+<app-button-radio-active [titulo]="fTitle" icono="far fa-clipboard" cstyle="bg-light text-dark"
+    filtroBoton="btnsLcomNuevoIns" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border px-2 pb-2 my-2">
+        <legend class="w-auto h6 mb-0">Orden de Inspección</legend>
+        <div class="row mb-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Local Comercial" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly [value]="local.razon_social">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="# de Visita" styleSpan="size-span-campo font-weight-bold">
+                    <input type="number" class="form-control" [(ngModel)]="inspeccion.secuencia" min="1" [disabled]="edit">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Visita" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [disabled]="edit" [(ngModel)]="inspeccion.fecha">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row" *ngIf="!edit">
+            <div class="col-6 offset-6">
+                <app-cc-input-group-prepend label="Fecha Reorden" styleSpan="size-span-campo font-weight-bold">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox" aria-label="Checkbox for following text input" [(ngModel)]="inspeccion.retroactivo">
+                        </div>
+                      </div>                    
+                    <input type="date" class="form-control" [disabled]="edit" [(ngModel)]="inspeccion.fecha_reorden" [disabled]="!inspeccion.retroactivo">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div *ngIf="edit" class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Creado por" spanStyle="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly [placeholder]="inspeccion.usuario?.nombre">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Creacion" spanStyle="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" readonly [value]="inspeccion.created_at">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold bg-dark">
+                    <textarea class="form-control" rows="3" [(ngModel)]="inspeccion.observaciones"></textarea>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2 my-2" *ngIf="edit">
+        <legend class="w-auto h6">Asignación de Inspector</legend>
+        <div class="row mb-2">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" name="" id="" class="form-control" [(ngModel)]="fecha_asignacion">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Inspector" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="inspector">
+                        <ng-option [value]="0">Seleccione un Inspector</ng-option>
+                        <ng-option *ngFor="let inspector of inspectores" [value]="inspector">{{ inspector.nombres }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-sm btn-primary" ngbTooltip="Asignar Inspector" (click)="asignarInspector(inspeccion)">Asignar</button>
+            </div>
+        </div>
+    </fieldset>
+    
+    <div *ngIf="edit">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Departamento</th>
+                    <th>Fecha de Realización</th>
+                    <th>Inspector</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="!resultados.length">
+                    <td colspan="3" class="text-center"><h6>No hay datos</h6></td>
+                </tr>
+                <tr *ngFor="let resultado of resultados">
+                    <td>{{ resultado.departamento=='COMISARIA'?'COMISARÍA':resultado.departamento=='PLANIFICACION'?'PLANIFICACIÓN':resultado.departamento }}</td>
+                    <td>{{ resultado.fecha ?? 'Sin realizar' }}</td>
+                    <td>{{ resultado.inspector }}</td>
+                    <td><i class="fa-2x {{ resultado.estado }}"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner"></cc-spiner-procesar>

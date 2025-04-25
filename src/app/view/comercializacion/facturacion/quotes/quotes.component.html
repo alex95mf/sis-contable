@@ -1,0 +1,491 @@
+<div class="mt-4">
+    <!-- Start Print Buttons -->
+    <button #printCDI type="button" class="btn btn-success" [hidden]="true" [useExistingCss]="true"
+        printSectionId="print-cdi" ngxPrint>
+    </button>
+    <!-- End Print Buttons -->
+    <app-button-radio-active titulo="Cotización de venta" filtroBoton="btnsQuotes"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+
+        <div class="row mt-2">
+            <div class="col-sm-8">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Razón social</span>
+                    </div>
+                    <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true"
+                        [disabled]="!actions.dComponet || dPrPromocion " style="padding-left: 7px;font-size: 11px;"
+                        [(ngModel)]="customerSelect" [clearable]="false" (ngModelChange)="getCustomer($event)">
+                        <ng-option [value]="0">Seleccione razón social</ng-option>
+                        <ng-option *ngFor="let d of arrayCustomerAux" [value]="d.id_cliente">
+                            {{d.razon_social}}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <!-- <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo
+                            contribuyente</span>
+                    </div>
+                    <input placeholder="tipo contribuyente" type="text" class="form-control form-control-sm"
+                        id="idTipCont" [disabled]="true" [(ngModel)]="customer.contribuyente">
+                </div>
+            </div> -->
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha cotización" styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control" name="dateFrom" format='yyyy-MM-dd'
+                        id="idNominaDatef">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo Doc.
+                            cliente</span>
+                    </div>
+                    <input placeholder="tipo documento" type="text" class="form-control form-control-sm" id="idTipDoc"
+                        [disabled]="true" [(ngModel)]="customer.tipo_documento">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cupo crédito</span>
+                    </div>
+                    <input placeholder="cupo crédito" type="text" class="form-control form-control-sm" id="idCupoCre"
+                        [disabled]="true" [(ngModel)]="customer.cupo_credito">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Asesor</span>
+                    </div>
+                    <input placeholder="asesor financiero" type="text" class="form-control form-control-sm"
+                        id="idAsesor" [disabled]="true" [(ngModel)]="customer['asesor']['nombre']">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Doc. cliente</span>
+                    </div>
+                    <input placeholder="numero documento" type="text" [(ngModel)]="customer.num_documento"
+                        class="form-control form-control-sm" id="idNumDoc" [disabled]="true">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo crédito</span>
+                    </div>
+                    <input placeholder="saldo crédito" type="text" class="form-control form-control-sm" id="idSalCre"
+                        [disabled]="true" [(ngModel)]="customer.saldo_credito">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo pago</span>
+                    </div>
+                    <select id="idFormPago" class="form-control form-control-sm" [(ngModel)]="customer.formaPagoSelect"
+                        [disabled]="!actions.dComponet">
+                        <option value="0">Seleccione tipo</option>
+                        <option value="Contado">Contado</option>
+                        <option value="Crédito">Crédito</option>
+                        <!-- <option *ngFor="let d of arrayFormaPago" [value]="d.valor">{{
+                            d.valor }}
+                        </option> -->
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Grupo cliente</span>
+                    </div>
+                    <input placeholder="Grupo cliente" type="text" class="form-control form-control-sm" id="idGrupo"
+                        [disabled]="true" [(ngModel)]="customer.group.name">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                    </div>
+                    <input placeholder="dirección" type="text" class="form-control form-control-sm" id="idAddress"
+                        [disabled]="true" [(ngModel)]="customer.direccion">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Subtotal</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-2" disabled
+                        placeholder="$ {{dataTotales.subTotalPagado.toFixed(4)}}" min="0">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirigido a:</span>
+                    </div>
+                    <input placeholder="Nombre cotizante" type="text" class="form-control form-control-sm" id="idCotizante"
+                           [(ngModel)]="customer.cotizante">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+                    </div>
+                    <input placeholder="teléfono" type="text" class="form-control form-control-sm" id="idTelefono"
+                        [disabled]="true" [(ngModel)]="customer.telefono">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">{{ivaConverter}} %
+                            Iva</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-2" disabled
+                        placeholder="$ {{dataTotales.ivaPagado.toFixed(4)}}" min="0">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-8">
+                <div class="input-group pt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="background-color: #404a63; color: white;"
+                            placeholder="Ingrese observación">Observación</span>
+                    </div>
+                    <textarea class="form-control form-control-sm" aria-label="With textarea"
+                        [(ngModel)]="customer.observationBuy" id="idtxta"
+                        placeholder="Ingrese una observación"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm text-right pr-2" disabled
+                        placeholder="$ {{dataTotales.totalPagado.toFixed(4)}}" min="0">
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-4 mb-3  pl-2 pr-2">
+            <div class="col-12 filters pl-2 pr-2 ">
+                <div class="row justify-content-end pt-2">
+                    <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right btn-add">
+                        <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Agregar productos"
+                            (click)="addProduct()" [disabled]="!actions.dComponet || !validateIdCliente">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12  pl-3 pr-3 mt-2">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Código</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Descuento</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">P/U</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody style="width: 100%;">
+                                <tr *ngFor="let d of dataProducto; let i = index">
+                                    <td style="width: 14%;" *ngIf="d.action">
+                                        <input type="text" placeholder="Código" [(ngModel)]="d.codigoProducto"
+                                            [disabled]="true">
+                                    </td>
+                                    <td style="width: 20%;" *ngIf="d.action">
+                                        <div placement="top" ngbTooltip="{{d.nombre}}">
+                                            <input type="text" placeholder="Producto" [(ngModel)]="d.nombre"
+                                                [disabled]="true">
+                                        </div>
+                                    </td>
+                                    <td style="width: 10%;" *ngIf="d.action"><input type="text"
+                                            placeholder="$ {{d.precio_normal}}" [disabled]="true"
+                                            style="text-align: right !important;"></td>
+
+                                    <td style="width: 10%;" *ngIf="d.action"><input type="text"
+                                            placeholder="{{d.porcen_promocion}} %" [disabled]="true"
+                                            style="text-align: right !important;"></td>
+
+                                    <td style="width: 7%;" *ngIf="d.action">
+                                        <div *ngIf="(d.stock-d.cantidad_reservada) > 0">
+                                            <input type="text" placeholder="0.00" style="text-align: right !important;"
+                                                placeholder="{{(d.stock-d.cantidad_reservada).toFixed(2)}}"
+                                                [disabled]="true">
+                                        </div>
+                                        <div *ngIf="(d.stock-d.cantidad_reservada) <= 0">
+                                            <input type="text" placeholder="0.00" [disabled]="true"
+                                                style="text-align: right !important;">
+                                        </div>
+                                    </td>
+                                    <td style="width: 10%;text-align: right;" *ngIf="d.action">
+                                        <input type="text" class="form-control form-control-sm" placeholder="0.00"
+                                            style="text-align: right;padding-right: 10px;" [(ngModel)]="d.quantity"
+                                            (keyup)="sumTotal(i)" min="0" id="quantyId"
+                                            (keypress)="commonServices.FormatDecimalVal($event)"
+                                            [disabled]="!actions.dComponet">
+                                    </td>
+                                    <td style="width: 10%;" *ngIf="d.action">
+                                        <input type="text" class="form-control form-control-sm" placeholder="$ 0.00"
+                                            style="text-align: right;padding-right: 10px;" [(ngModel)]="d.price"
+                                            (keyup)="sumTotal(i)" min="0"
+                                            (keypress)="commonServices.FormatDecimalVal($event)"
+                                            [disabled]="!actions.dComponet">
+                                    </td>
+                                    <td style="width: 9%;" *ngIf="d.action">
+                                        <input type="text" placeholder="$ {{d.totalItems.toFixed(4)}}" [disabled]="true"
+                                            class="form-control form-control-sm" style="text-align: right !important;">
+                                    </td>
+                                    <td style="width: 9%;text-align: center;" *ngIf="d.action">
+                                        <button class="btn btn-danger btn-sm" placement="top"
+                                            ngbTooltip="Eliminar Items" [disabled]="!actions.dComponet"
+                                            (click)="deleteItems(i)"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<div class="modal fade modalNCreditoReport" id="modaLCotizaReport" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body pb-0">
+                <div class="row justify-content-center " *ngIf="!processingtwo">
+                    <div class="container-new-loader">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <app-reporte-quotes> </app-reporte-quotes>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer pt-0 pb-1" style="padding: none !important;border-top: none;">
+                <button type="button" class="btn btn-danger btn-xs" aria-label="Close" (click)="closeModalReport()"
+                    style="font-size: 10px; width: 75px;border-radius: 3px;">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="print-cdi" [hidden]="true" *ngIf="print_cdi !== undefined">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2">
+            <div class="row justify-content-center">
+                <div class="col-7 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <img src="{{ dataUser.logoEmpresa }}" style="width: 220px;">
+                            </div>
+                            <div class="col-12 mt-3">
+                                {{dataUser.company.razon_social}}
+                            </div>
+                            <div class="col-12">
+                                {{dataUser.company.direccion}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-3" style="font-size: 25px;font-weight: 600">
+                                COTIZACIÓN
+                            </div>
+                            <div class="col-12 mt-2" style="font-size: 18px;">
+                                No. {{print_cdi.secuencia.toString().padStart(10, '0')}}
+                            </div>
+                            <div class="col-12 mt-2 mb-2 invisible" style="font-size: 20px;">
+                                VALOR $ {{commonServices.formatNumber(print_cdi.totals.totalPagado) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-4 mb-2">
+            <div class="row">
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col-12">
+                            <span>Num Doc: </span> <label for="">{{print_cdi.customer.num_documento}}</label>
+                        </div>
+                        <div class="col-12">
+                            <span>Cliente: </span> <label for="">{{print_cdi.customer.razon_social}}</label>
+                        </div>
+                        <div class="col-12">
+                            <span>Cotizante: </span> <label for="">{{print_cdi.customer.cotizante}}</label>
+                        </div>
+                        <div class="col-12">
+                            <span>Teléfono: </span> <label for="">{{print_cdi.customer.telefono}}</label>
+                        </div>
+                        <div class="col-12" *ngIf="print_cdi.customer.contactos.length > 0">
+                            <span>Correo: </span> <label for="">{{print_cdi.customer.contactos[0].email}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-12">
+                            <span>Fecha: </span> <label for="">{{dateNow}}</label>
+                        </div>
+                        <div class="col-12">
+                            <span>Asesor: </span> <label for="">{{print_cdi.customer.asesor.nombre}}</label>
+                        </div>
+                        <div class="col-12">
+                            <span>Dirfección: </span> <label for="">{{print_cdi.customer.direccion}}</label>
+                        </div>
+                        <div class="col-12">
+                            <span>Tipo pago: </span> <label for="">{{print_cdi.payment_method}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 15%;" class="text-center">Código</th>
+                                <th style="width: 40%;" class="text-center">Nombre</th>
+                                <th style="width: 15%;" class="text-center">Marca</th>
+                                <th style="width: 10%;" class="text-center">Cantidad</th>
+                                <th style="width: 10%;" class="text-center">Precio</th>
+                                <th style="width: 10%;" class="text-center">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of print_cdi.list_product; let i = index">
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.codigoProducto}}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.nombre}}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.marca}}</span>
+                                </td>
+                                <td class="text-right pr-2" style="border-top: none !important;">
+                                    <span>{{dt.quantity}}</span>
+                                </td>
+                                <td class="text-right pr-2" style="border-top: none !important;">
+                                    <span>$ {{commonServices.formatNumber(dt.price)}}</span>
+                                </td>
+                                <td class="text-right pr-2" style="border-top: none !important;">
+                                    <span>$ {{commonServices.formatNumber(dt.totalItems)}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td ALIGN=left ROWSPAN=3 COLSPAN=4>Obervación: <span>{{print_cdi.observation_quotes}}</span></td>
+                                <td><span>Subtotal</span></td>
+                                <td class="text-right pr-2">
+                                    <span>$ {{commonServices.formatNumber(print_cdi.totals.subTotalPagado)}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>Iva {{ivaConverter}} %</span></td>
+                                <td class="text-right pr-2"> <span> $
+                                        {{commonServices.formatNumber(print_cdi.totals.ivaPagado)}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Total</span></td>
+                                <td class="text-right pr-2"><span>$
+                                        {{commonServices.formatNumber(print_cdi.totals.totalPagado)}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 25%;text-align:center;">Elaborado por</th>
+                                <th style="width: 20%;text-align:center;">Revisado</th>
+                                <th style="width: 25%;text-align:center;">Aprobado</th>
+                                <th style="width: 25%;text-align:center;">Recibí conforme</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-top: none !important; height: 100px;text-align: center;">
+                                    <div style="padding-top: 48px; ">
+                                        <hr>
+                                        <span>{{dataUser.nombre}}</span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-11">
+            <div class="row" style="font-family: 'Poppins1';" *ngIf="dataUser != undefined">
+                <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+                    <span style="color: #13A1EA;">
+                        Fecha: {{dateNow}}&nbsp;{{hora}}</span>
+                </div>
+                <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+                    <span style="color: #13A1EA;">
+                        Usuario: {{dataUser.nombre}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spQuotesPrincipal"></cc-spiner-procesar>

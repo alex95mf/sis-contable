@@ -1,0 +1,63 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-money-check-edit-alt"
+filtroBoton="btnsConfiguracionContable" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="row mb-2">
+        <div class="col-8">
+            <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="dat.tipo_especie" maxlength="120" placeholder="Tipo" [disabled]="true">
+               
+                <!-- <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="dat.tipo_especie" disabled>
+                    <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                    <ng-option *ngFor="let op of catalog" [value]="op.descripcion">{{ op.descripcion }}</ng-option>
+                </ng-select> -->
+            </app-cc-input-group-prepend>
+        </div>
+    
+    
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Desde" styleSpan="size-span-campo font-weight-bold">
+                <input type="number" class="form-control" [(ngModel)]="dat.desde" (ngModelChange)="mostrarCantidad($event)" maxlength="120" placeholder="Desde">
+            </app-cc-input-group-prepend>
+        </div>
+    
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Hasta" styleSpan="size-span-campo font-weight-bold">
+                <input list="lst_ctas_deudoras" type="number" class="form-control custom-select"  [(ngModel)]="dat.hasta" (ngModelChange)="mostrarCantidad($event)" placeholder="Hasta" maxlength="50">
+    
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Cantidad" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="dat.cantidad" type="number" placeholder="Cantidad" readonly/>
+    
+            </app-cc-input-group-prepend>
+        </div>
+    
+    
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Costo" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="dat.costo" placeholder="Costo" currencyMask onclick="this.select()">
+    
+            </app-cc-input-group-prepend>
+        </div>
+    
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Fecha de Registro" styleSpan="size-span-campo font-weight-bold">
+                <input  type="date" class="form-control custom-select"  [(ngModel)]="dat.fecha"  >
+                
+            </app-cc-input-group-prepend>
+        </div>
+    
+        
+
+    </div>
+    
+
+
+</app-button-radio-active>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spConceptos"></cc-spiner-procesar>
+
+
+

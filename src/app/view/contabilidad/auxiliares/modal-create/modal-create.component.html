@@ -1,0 +1,31 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light" icono="fas fa-user"
+    filtroBoton="btnsModalAuxiliar" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="auxiliar.tip_aux" (change)="handleSelectTipo($event)"
+                    [items]="cmb_tipo" bindValue="valor" bindLabel="label"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Referencia" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="auxiliar.codref"
+                    [items]="cmb_referencia" bindValue="valor" bindLabel="label"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Naturaleza" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="auxiliar.naturaleza"
+                    [items]="cmb_naturaleza" bindValue="value" bindLabel="label"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Descripcion" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="auxiliar.descripcion">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalAuxiliares"></cc-spiner-procesar>

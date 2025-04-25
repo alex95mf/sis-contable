@@ -1,0 +1,1400 @@
+<div class="mt-2">
+    
+        <div class="col">
+
+            
+            <app-cc-input-group-prepend label="Número de solicitud" styleSpan="size-span-campo font-weight-bold">
+
+                <input [(ngModel)]="item.num_solicitud" class="form-control" readonly/>
+
+            </app-cc-input-group-prepend>
+        </div> 
+      
+            <div class="col">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text">Descripcion</span></div>
+                    <input type="text" class="form-control form-control-sm" readonly
+                    [(ngModel)]="listaSolicitudes.descripcion">
+                </div>
+    
+            </div>
+        
+        
+            <div class="col">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="listaSolicitudes.con_estado"  [clearable]="false">
+                        <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                        <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            
+            </div>
+                   
+                    
+               
+
+            <!-- <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+
+                        <input [(ngModel)]="detalles.programa" class="form-control" readonly/>
+            
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+                <div class="col-6">
+
+                    <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+
+                        <input [(ngModel)]="detalles.departamento" class="form-control" readonly/>
+            
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+
+
+
+            </div> -->
+<!-- 
+            <app-cc-input-group-prepend label="Atribución" styleSpan="size-span-campo font-weight-bold">
+
+                <input [(ngModel)]="detalles.atribucion" class="form-control" readonly/>
+
+            </app-cc-input-group-prepend> -->
+
+            <!-- <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Asigna" styleSpan="size-span-campo font-weight-bold">
+
+                        <input [(ngModel)]="detalles.asignacion" class="form-control" readonly/>
+
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+                <div class="col-6">
+
+                    <app-cc-input-group-prepend label="Tipo Proceso" styleSpan="size-span-campo font-weight-bold">
+
+                        <input [(ngModel)]="detalles.proceso" class="form-control" readonly/> 
+
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+
+
+
+            </div> -->
+
+       
+
+        <br>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                    aria-controls="nav-home" aria-selected="true">Fase 1</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                    aria-controls="nav-profile" aria-selected="false">Fase 2</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                    aria-controls="nav-contact" aria-selected="false">Adjudicación</a>
+                <a class="nav-item nav-link" id="nav-proveedor-tab" data-toggle="tab" href="#nav-proveedor" role="tab"
+                    aria-controls="nav-proveedor" aria-selected="false">Proveedor</a>
+                <a class="nav-item nav-link" id="nav-poliza-tab" data-toggle="tab" href="#nav-poliza" role="tab"
+                    aria-controls="nav-poliza" aria-selected="false">Garantía</a>
+                
+                <a class="nav-item nav-link" id="nav-extension-tab" data-toggle="tab" href="#nav-extension" role="tab"
+                    aria-controls="nav-extension" aria-selected="false">Extensión de contrato</a>
+
+            
+                <a class="nav-item nav-link" id="nav-actas-tab" data-toggle="tab" href="#nav-actas" role="tab"
+                    aria-controls="nav-actas" aria-selected="false">Actas finales</a>
+
+                
+                <a class="nav-item nav-link" id="nav-actualizacion-tab" data-toggle="tab" href="#nav-actualizacion" role="tab"
+                    aria-controls="nav-actualizacion" aria-selected="false">Bitácora</a>
+                
+
+
+            </div>
+        </nav>
+
+
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Etapa de Determinación de la Necesidad
+                    </legend>
+
+                    <app-anexos-list-uno [dataUser] = ""  tipo="RP" [identifier] = "item.id_solicitud"></app-anexos-list-uno>
+
+
+                    <!-- <div class="row mt-2 mb-3">
+
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="dateRP">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'RP')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListRP !== undefined ?
+                                        fileListRP[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('RP')" [disabled]='valiRP'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="RP" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </fieldset>
+                
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Etapa de Estudio de mercado
+                    </legend>
+                    <app-anexos-list-uno [dataUser] = ""  tipo="EM" [identifier] = "item.id_solicitud"></app-anexos-list-uno>
+
+
+                    <!-- <div class="row mt-2 mb-3">
+
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="dateEM">
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'EM')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListEM !== undefined ?
+                                        fileListEM[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('EM')" [disabled]='valiEM'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="EM" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </fieldset>
+
+
+
+                <fieldset class="border pb-2 px-2 ">
+                    <legend class="w-auto bg-dark ml-1">
+                        Etapa de Término de referencias/Especificaciones Técnicas
+                    </legend>
+                    <app-anexos-list-uno [dataUser] = ""  tipo="TR" [identifier] = "item.id_solicitud"></app-anexos-list-uno>
+
+                    <!-- <div class="row mt-2 mb-3">
+
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="dateTR">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'TR')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListTR !== undefined ?
+                                        fileListTR[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('TR')" [disabled]='valiTR'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="TR" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </fieldset>
+
+               
+
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Etapa de Resolución de Inicio / Pliegos
+                    </legend>
+                    <app-anexos-list-uno [dataUser] = ""  tipo="PL" [identifier] = "item.id_solicitud"></app-anexos-list-uno>
+
+                    <!-- <div class="row mt-2 mb-3">
+
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="datePL">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'PL')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListPL !== undefined ?
+                                        fileListPL[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('PL')" [disabled]='valiPL'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="PL" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </fieldset>
+
+               
+                
+
+
+            </div>
+
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                       Etapa de  Publicación
+                    </legend>
+                    <app-anexos-list-uno [dataUser] = ""  tipo="PB" [identifier] = "item.id_solicitud"></app-anexos-list-uno>
+
+                    <!-- <div class="row mt-2 mb-3">
+
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="datePB">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'PB')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListPB !== undefined ?
+                                        fileListPB[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('PB')" [disabled]='valiPB'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="PB" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </fieldset>
+
+                
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Etapa de preguntas, respuestas y aclaraciones
+                    </legend>
+                    <app-anexos-list-uno [dataUser] = ""  tipo="PR" [identifier] = "item.id_solicitud"></app-anexos-list-uno>
+
+                    <!-- <div class="row mt-2 mb-3">
+
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="datePR">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'PR')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListPR !== undefined ?
+                                        fileListPR[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('PR')" [disabled]='valiPR'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="PR" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </fieldset>
+
+              
+
+                
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Etapa de Entrega de Propuestas
+                    </legend>
+                    <app-anexos-list-uno [dataUser] = ""  tipo="PP" [identifier] = "item.id_solicitud"></app-anexos-list-uno>
+
+                    <!-- <div class="row mt-2 mb-3">
+
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="datePP">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'PP')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListPP !== undefined ?
+                                        fileListPP[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('PP')" [disabled]='valiPP'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="PP" [identifier] = "item.id_solicitud" (sendDate)="handleDate($event, 'PP')" ></app-anexos-list-dis> 
+                                
+                            </div>
+                        </div>
+                    </div> -->
+                </fieldset>
+
+              
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Etapa de Apertura de Ofertas
+                    </legend>
+                    <app-anexos-list-uno [dataUser] = ""  tipo="AO" [identifier] = "item.id_solicitud"></app-anexos-list-uno>
+
+                    <!-- <div class="row mt-2 mb-3">
+
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="dateAO">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'AO')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListAO !== undefined ?
+                                        fileListAO[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('AO')" [disabled]='valiAO'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="AO" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </fieldset>
+
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Etapa de Convalidación de Errores
+                    </legend>
+                    <app-anexos-list-uno [dataUser] = ""  tipo="CE" [identifier] = "item.id_solicitud"></app-anexos-list-uno>
+
+                    <!-- <div class="row mt-2 mb-3">
+
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="dateCE">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'CE')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListCE !== undefined ?
+                                        fileListCE[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('CE')" [disabled]='valiCE'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="CE" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </fieldset>
+
+                
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Etapa de Calificación de Ofertas
+                    </legend>
+                    <app-anexos-list-uno [dataUser] = ""  tipo="CO" [identifier] = "item.id_solicitud"></app-anexos-list-uno>
+
+                    <!-- <div class="row mt-2 mb-3">
+
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="dateCO">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'CO')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListCO !== undefined ?
+                                        fileListCO[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('CO')" [disabled]='valiCO'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="CO" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </fieldset>
+
+                
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Etapa de Puja o Negociación
+                    </legend>
+                    <app-anexos-list-uno [dataUser] = ""  tipo="NG" [identifier] = "item.id_solicitud"></app-anexos-list-uno>
+
+                    <!-- <div class="row mt-2 mb-3">
+
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="dateNG">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'NG')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListNG !== undefined ?
+                                        fileListNG[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('NG')" [disabled]='valiNG'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="NG" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                            </div>
+                        </div>
+                    </div> -->
+                </fieldset>
+
+
+
+            </div>
+
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                
+                <div class="text-right m-2">
+                    <!-- <button class="btn btn-success" (click)="crearContrato()">
+                        Guardar
+                    </button> -->
+                    <button class="btn btn-success boton btn-sm" (click)="crearContrato()"><i class="fas fa-save"></i> Guardar </button>
+        
+                </div>
+                <div class="row mt-2 mb-3">
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Adjudicación" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                        [(ngModel)]="listaSolicitudes.con_adjudicado" >
+                        <ng-option  [value]= "0" disabled>Adjudicación</ng-option>
+                        <ng-option  [value]="'S'">SI</ng-option>
+                        <ng-option  [value]="'N'">NO</ng-option>
+                      </ng-select>
+                    </app-cc-input-group-prepend>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="size-span-campo input-group-text">IDP</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly
+                            [(ngModel)]="listaSolicitudes.idp">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="size-span-campo input-group-text">ICP</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly
+                            [(ngModel)]="listaSolicitudes.icp">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-2 mb-3">
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class=" size-span-campo input-group-text">Fecha</span></div>
+                            <input type="date" class="form-control form-control-sm" [disabled]=" listaSolicitudes.con_adjudicado == 'N' ? true : false"
+                             [(ngModel)]="listaSolicitudes.con_fecha_adjudicacion">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class=" size-span-campo input-group-text">Valor Adjudicado</span></div>
+                            <input currencyMask type="text" class="form-control form-control-sm" [disabled]=" listaSolicitudes.con_adjudicado == 'N' ? true : false" (ngModelChange)="validateValor($event)"
+                            [(ngModel)]="listaSolicitudes.con_valor">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2 mb-3">
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="size-span-campo input-group-text">Cod. SERCOP</span></div>
+                            <input type="text" class="form-control form-control-sm" [disabled]=" listaSolicitudes.con_adjudicado == 'N' ? true : false"
+                            [(ngModel)]="listaSolicitudes.con_cod_sercop">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="size-span-campo input-group-text">Nro. de Resolución</span></div>
+                            <input type="text" class="form-control form-control-sm" [disabled]=" listaSolicitudes.con_adjudicado == 'N' ? true : false"
+                            [(ngModel)]="listaSolicitudes.adj_nro_resolucion">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2 mb-3">
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="size-span-campo input-group-text font-weight-bold"
+                                    style="width: 155px">Observaciones </span></div>
+                            <textarea cols="30" rows="3" class="form-control form-control-sm" [disabled]=" listaSolicitudes.con_adjudicado == 'S' ? true : false"
+                             [(ngModel)]="listaSolicitudes.con_adj_observaciones" maxlength="200"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="size-span-campo input-group-text">% Porcentaje de Anticipo</span></div>
+                                    <input currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }" class="form-control form-control-sm" [disabled]=" listaSolicitudes.con_adjudicado == 'N' ? true : false"
+                                    [ngModel]="listaSolicitudes.con_anticipo_porcentaje" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="size-span-campo input-group-text">Plazo</span></div>
+                                    <input type="text" class="form-control form-control-sm" [disabled]=" listaSolicitudes.con_adjudicado == 'N' ? true : false"
+                                    [(ngModel)]="listaSolicitudes.con_plazo" (keypress)="onlyNumber($event)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class=" size-span-campo input-group-text">Forma Pago</span></div>
+                                    <input type="text" class="form-control form-control-sm" [disabled]=" listaSolicitudes.con_adjudicado == 'N' ? true : false"
+                                    [(ngModel)]="listaSolicitudes.con_forma_pago" maxlength="500">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text font-weight-bold">Anexos</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                    (change)="cargaArchivo2($event.target.files, 'AJ')"
+                                    [disabled]="cuotasDisabled || formReadOnly">
+                                <label class="custom-file-label" for="inputGroupFile01">{{ fileListAJ !== undefined ?
+                                    fileListAJ[0].name : "Seleccione un archivo" }}</label>
+                            </div>
+                            <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile('AJ')" [disabled]='valiAJ'>Cargar</button></div>
+                            <!-- <div class="col-4 mt-2">
+                                <app-anexos-list-dis [dataUser]="dataUser" [permissions]="permissions" [identifier]="listaSolicitudes.id_solicitud" [archivo2]="false"></app-anexos-list-dis>
+                        
+                            </div> -->
+                        </div>
+                        <div class="col-10">
+                            <app-anexos-list-dis [dataUser] = ""  tipo="AJ" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-proveedor" role="tabpanel" aria-labelledby="nav-proveedor-tab">
+                <div class="row mt-2 mb-3">
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">Proveedores</span></div>
+                            <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Proveedor" (click)="expandListProveedores()" [value]="proveedorActive.razon_social">
+                            <button  class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Fecha de contrato</span></div>
+                            <input type="date" class="form-control form-control-sm" [(ngModel)]="listaSolicitudes.con_fecha_contrato">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2 mb-3">
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Número Contrato</span></div>
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="listaSolicitudes.con_contrato">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Número Proceso</span></div>
+                            <input class="form-control form-control-sm" [(ngModel)]="listaSolicitudes.con_num_proceso">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2 mb-3">
+                    <div class="col-6">
+                        <div class="input-group input-group-sm mt-2">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">Admin de Compra</span></div>
+                            <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Admin Compra" (click)="expandListAdminCompra()" [value]="adminActive" [(ngModel)]="adminActive.nombre">
+                            <button  class="btn btn-primary btn-sm" (click)="expandListAdminCompra()" placement="bottom" ngbTooltip="Buscar Admin de Compra">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text font-weight-bold">Contrato</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                    (change)="cargaArchivo2($event.target.files, 'PO')"
+                                    [disabled]="cuotasDisabled || formReadOnly">
+                                <label class="custom-file-label" for="inputGroupFile01">{{ fileListPO !== undefined ?
+                                    fileListPO[0].name : "Seleccione un archivo" }}</label>
+                            </div>
+                            <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile('PO')" [disabled]='valiPO'>Cargar</button></div>
+                            
+                        </div>
+                        <div class="col-10">
+                            <app-anexos-list-dis [dataUser] = ""  tipo="PO" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row mt-2 mb-3">
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class=" size-span-campo input-group-text">Valor Adjudicado</span></div>
+                            <input currencyMask type="text" class="form-control form-control-sm" [disabled]="true"
+                            [(ngModel)]="listaSolicitudes.con_valor">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-2">
+                    <div class="text-right m-2">
+                        <button class="btn btn-success" (click)="moduloDetalle()">
+                            +
+                        </button>
+                    </div>
+                    <div class="col">
+                        <h5 class="mb-0 text-dark">Condiciones</h5>
+                    </div>
+                    
+
+                    
+                        <table class="table table-hover mt-2">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center">Fecha de entrega</th>
+                                    <th class="text-center">Forma de pago</th>
+                                    <th class="text-center">Valor</th>
+                                    <th class="text-center">Fecha Plazo Máximo</th>
+                                    <th class="text-center">Descripción</th>
+                                    <th class="text-center">Estado</th>
+                                    <th class="text-center">Acciones</th>
+            
+            
+                                </tr>
+                            </thead>
+            
+                            <tbody>
+                                <tr *ngIf="!listarCondiciones.length">
+                                    <td colspan="5" class="text-center">
+                                        <h6>No hay Solicitudes que mostrar</h6>
+                                    </td>
+            
+                                </tr>
+                                <tr *ngFor="let item of listarCondiciones">
+                                    <td class="text-center">{{item.fecha}}</td>
+                                    <td class="text-center">{{item.forma_pago}}</td>
+                                    <td class="text-center">$ {{item.valor === null ? 'No tiene valor' : item.valor | number:'1.2-2'}}</td>
+                                    <td class="text-center">{{item.plazo}}</td>
+                                    <td class="text-center">{{item.condicion}}</td>
+                                    <td *ngIf="item.estado == 'P'" class="text-center">
+                                        <i class="fas fa-circle text-warning"></i> Pendiente
+                                      </td>
+                                      <td *ngIf="item.estado == 'F'" class="text-center">
+                                        <i class="fas fa-circle text-success"></i> Facturado
+                                      </td>
+                                      <td *ngIf="item.estado == 'C'" class="text-center">
+                                        <i class="fas fa-circle text-danger"></i> Cerrado
+                                      </td> 
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Condición" (click)="eliminarCondicion(item.id_condicion)" ><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" style="font-size: 14px; " class="font-weight-bold text-right">TOTAL: </th>
+                                    <th style=" font-size: 14px;" class="font-weight-bold text-right">$ {{ totalCondiciones| number: '1.2-2'}}</th>
+                                    <!-- <th style=" font-size: 14px;" class="font-weight-bold text-center">$ {{totalValorSolicitud | number: '1.2-2'}}</th> -->
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+            
+                                </tr>
+                            </tbody>
+                        </table>
+            
+                    
+
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="nav-poliza" role="tabpanel" aria-labelledby="nav-poliza-tab">
+                <div class="text-right m-2">
+
+                    <!-- <button class="btn btn-success" (click)="crearPoliza()">
+                        Guardar Poliza
+                    </button> -->
+
+                    <button class="btn btn-success boton btn-sm" (click)="crearPoliza()"><i class="fas fa-save"></i> Guardar Garantía </button>
+        
+                </div>
+                <div class="row mt-2 mb-3">
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Forma de Garantía" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="listaPoliza.forma_garantia">
+                              <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                              <ng-option *ngFor="let item of listaGarantia"  [value]="item.valor">{{item.descripcion}}</ng-option>
+                            </ng-select>
+                
+                        </app-cc-input-group-prepend>
+    
+                    </div>
+                    <div class="col-3">
+                        <app-cc-input-group-prepend label="Fecha Inicio" styleSpan="size-span-campo font-weight-bold">
+                            <input class="form-control" type="date" [(ngModel)]="listaPoliza.fecha_inicio"/>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-3">
+                        <app-cc-input-group-prepend label="Fecha Finalización" styleSpan="size-span-campo font-weight-bold">
+                            <input class="form-control" type="date" [(ngModel)]="listaPoliza.fecha_finalizacion"/>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <!-- <div class="col-3">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Fecha Inicio</span></div>
+                            <input type="date" class="form-control form-control-sm" [(ngModel)]="listaPoliza.fecha_inicio">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Fecha Finalización</span>
+                            </div>
+                            <input type="date" class="form-control form-control-sm" [(ngModel)]="listaPoliza.fecha_finalizacion">
+                        </div>
+                    </div> -->
+                </div>
+                <div class="row mt-2 mb-3">
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Número de Póliza</span></div>
+                            <input class="form-control form-control-sm" [(ngModel)]="listaPoliza.num_poliza" [disabled]=" listaPoliza.forma_garantia == 'BOVEDA' || listaPoliza.forma_garantia == 'DEPOSITOS' ? true : false">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Valor</span></div>
+                            <input currencyMask class="form-control form-control-sm" [(ngModel)]="listaPoliza.valor" (keypress)="validaciones.numberOnlyDot($event)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2 mb-3">
+                    <!-- <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Aseguradora</span></div>
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="listaPoliza.aseguradora">
+                        </div>
+                    </div> -->
+
+
+                    <div class="col-6">
+                        <app-cc-input-group-prepend label="Aseguradora" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="listaPoliza.aseguradora" [disabled]=" listaPoliza.forma_garantia == 'BOVEDA' || listaPoliza.forma_garantia == 'DEPOSITOS' ? true : false">
+                              <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                              <ng-option *ngFor="let item of listaAseguradora"  [value]="item">{{item}}</ng-option>
+                            </ng-select>
+                
+                        </app-cc-input-group-prepend>
+    
+                    </div>
+
+
+                    <div class="col-6">
+                        <!-- <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Riesgo Asegurado</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="listaPoliza.riesgo">
+                        </div> -->
+                        <app-cc-input-group-prepend label="Riesgo Asegurado" styleSpan="size-span-campo font-weight-bold">
+      
+                            <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="listaPoliza.riesgo">
+                              <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                              <ng-option *ngFor="let item of listaCatalogo"  [value]="item">{{item}}</ng-option>
+                            </ng-select>
+                
+                        </app-cc-input-group-prepend>
+    
+                    </div>
+                </div>
+
+                <div class="m-2">
+                    <div class="col">
+                        <h5 class="mb-0 text-dark">Historial</h5>
+                    </div>
+
+                    <!-- <table class="table table-hover mt-2">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Num Poliza</th>
+                                <th class="text-center">Aseguradora</th>
+                                <th class="text-center">Valor</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <h6>No hay Solicitudes que mostrar</h6>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                            </tr>
+                        </tbody>
+                    </table> -->
+
+                    <table class="table table-hover mt-2">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Fecha Inicio </th>
+                                <th class="text-center">Forma de Garantía </th>
+                                <!-- <th class="text-center">Num Póliza</th> -->
+                                <th class="text-center">Aseguradora</th>
+                                 <th class="text-center">Riesgo Aseguradora</th>
+                                 <th class="text-center">Fecha Finalización</th>
+                                <th class="text-center">Valor</th>
+                                <th class="text-center">Estado</th>
+                                <th class="text-center">Acciones</th>
+        
+        
+                            </tr>
+                        </thead>
+        
+                        <tbody>
+                            <tr *ngIf="!listPoliza.length">
+                                <td colspan="5" class="text-center">
+                                    <h6>No hay Solicitudes que mostrar</h6>
+                                </td>
+        
+                            </tr>
+                            <tr *ngFor="let item of listPoliza">
+                                <td class="text-center">{{item.fecha_inicio}}</td>
+                                <td class="text-center">{{item.forma_garantia}}</td>
+                                <!-- <td class="text-center">{{item.num_poliza}}</td> -->
+                                <td class="text-center">{{item.aseguradora}}</td>
+                                <td class="text-center">{{item.riesgo}}</td>
+                                <td class="text-center">{{item.fecha_finalizacion}}</td>
+                                <td class="text-center">$ {{item.valor | number:'1.2-2'}}</td>
+                                <td *ngIf="item.estado == 'C'" class="text-center">
+                                    <i class="fas fa-circle text-success"></i> Cumplida
+                                  </td>
+                                  <td *ngIf="item.estado == 'E'" class="text-center">
+                                    <i class="fas fa-circle text-danger"></i> Ejecutar
+                                  </td>
+                                  <td *ngIf="item.estado == 'P'" class="text-center">
+                                    <i class="fas fa-circle text-warning"></i> Pendiente
+                                  </td> 
+
+                                
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Garantía" (click)="eliminarPoliza(item.id_poliza)" ><i class="far fa-trash-alt"></i></button>
+                                </td>
+        
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+            <div class="tab-pane fade" id="nav-extension" role="tabpanel" aria-labelledby="nav-extension-tab">
+                <div class="row mt-2 mb-3">
+                    <div class="col-4">
+                        <app-cc-input-group-prepend label="Extensión" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                        [(ngModel)]="listaSolicitudes.con_extension" >
+                        <ng-option  [value]= "0" disabled>Tiene Extension</ng-option>
+                        <ng-option  [value]="'S'">SI</ng-option>
+                        <ng-option  [value]="'N'">NO</ng-option>
+                      </ng-select>
+                    </app-cc-input-group-prepend>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">IDP</span></div>
+                            <input type="text" class="form-control form-control-sm" 
+                            [(ngModel)]="listaSolicitudes.con_extension_idp" [disabled]=" listaSolicitudes.con_extension == 'N' ? true : false">
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                            <input type="date" class="form-control form-control-sm" [disabled]="listaSolicitudes.con_extension == 'N' ? true : false"
+                             [(ngModel)]="listaSolicitudes.con_fecha_extension">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-2 mb-3">
+                    
+
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Valor</span></div>
+                            <input currencyMask  class="form-control form-control-sm" [disabled]=" listaSolicitudes.con_extension == 'N' ? true : false"
+                            [(ngModel)]="listaSolicitudes.con_extension_valor" (keypress)="validaciones.numberOnlyDot($event)">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Nro. de Resolución</span></div>
+                            <input type="text" class="form-control form-control-sm" [disabled]=" listaSolicitudes.con_extension == 'N' ? true : false"
+                            [(ngModel)]="listaSolicitudes.con_extension_resolucion">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2 mb-3">
+
+                    <div class="col-6">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                                    style="width: 155px">Observaciones </span></div>
+                            <textarea cols="30" rows="3" class="form-control form-control-sm" [disabled]=" listaSolicitudes.con_extension == 'N' ? true : false"
+                             [(ngModel)]="listaSolicitudes.con_extension_observacion" maxlength="200"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text font-weight-bold">Anexos</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                    (change)="cargaArchivo2($event.target.files, 'EX')"
+                                    [disabled]="cuotasDisabled || formReadOnly">
+                                <label class="custom-file-label" for="inputGroupFile01">{{ fileListEX !== undefined ?
+                                    fileListEX[0].name : "Seleccione un archivo" }}</label>
+                            </div>
+                            <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile('EX')" [disabled]='valiEX'>Cargar</button></div>
+                            <!-- <div class="col-4 mt-2">
+                                <app-anexos-list-dis [dataUser]="dataUser" [permissions]="permissions" [identifier]="listaSolicitudes.id_solicitud" [archivo2]="false"></app-anexos-list-dis>
+                        
+                            </div> -->
+                        </div>
+                        <div class="col-10">
+                            <app-anexos-list-dis [dataUser] = ""  tipo="EX" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                
+               
+            </div>
+
+            <div class="tab-pane fade" id="nav-actas" role="tabpanel" aria-labelledby="nav-actas-tab">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Parciales
+                    </legend>
+                    <div class="row mt-2 mb-3">
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="dateAC">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'AC')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListAC !== undefined ?
+                                        fileListAC[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('AC')">Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="AC" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+    
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Provisional
+                    </legend>
+                    <div class="row mt-2 mb-3">
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="datePV">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'PV')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListPV !== undefined ?
+                                        fileListPV[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('PV')" [disabled]='valiPV'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="PV" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+    
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">
+                        Definitiva
+                    </legend>
+                    <div class="row mt-2 mb-3">
+                        <div class="col-4">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Fecha</span></div>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="dateDE">
+                            </div>
+                        </div>
+    
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold">Anexos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo2($event.target.files, 'DE')"
+                                        [disabled]="cuotasDisabled || formReadOnly">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileListDE !== undefined ?
+                                        fileListDE[0].name : "Seleccione un archivo" }}</label>
+                                </div>
+                                <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="validacionArchivo('DE')" [disabled]='valiDE'>Cargar</button></div>
+                            </div>
+                            <div class="col-10">
+                                <app-anexos-list-dis [dataUser] = ""  tipo="DE" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+    
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+                
+            </div>
+
+            <div class="tab-pane fade" id="nav-actualizacion" role="tabpanel" aria-labelledby="nav-actualizacion-tab">
+                
+                <div class="m-2" >
+                    <div class="col">
+                        <h5 class="mb-0 text-dark">Historial del proceso</h5>
+                    </div>
+
+                    <table class="table table-hover mt-2">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Estado</th>
+                                <th class="text-center">Usuario Gestion</th>
+                          
+        
+        
+                            </tr>
+                        </thead>
+        
+                        <tbody>
+                            <tr *ngIf="!listaBitacora.length">
+                                <td colspan="5" class="text-center">
+                                    <h6>No hay Solicitudes que mostrar</h6>
+                                </td>
+        
+                            </tr>
+                            <tr *ngFor="let item of listaBitacora">
+                                <td class="text-center">{{item.fecha}}</td>
+                                <td *ngIf="item.estado == 'E'" class="text-center">
+                                    <i class="fas fa-circle text-success"></i> Ejecución
+                                  </td>
+                                  <td *ngIf="item.estado == 'I'" class="text-center">
+                                    <i class="fas fa-circle text-danger"></i> Inicial
+                                  </td>
+                                  <td *ngIf="item.estado == 'C'" class="text-center">
+                                    <i class="fas fa-circle text-danger"></i> Cerrado
+                                  </td> 
+
+                                <!-- <td class="text-center">{{item.estado}}</td> -->
+                                <td class="text-center">{{item.usuario.nombre}}</td>
+                                
+        
+                            </tr>
+                        </tbody>
+                    </table>
+        
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="m-2">
+            <div class="text-right m-2">
+                <button class="btn btn-primary" (click)="validaDetallesContratacion()" [disabled]="disabledDetalle">
+                    Guardar Detalle
+                </button>
+            </div>
+            <table class="table table-hover mt-2">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center">Descripción</th>
+                        <th class="text-center">Stock</th>
+                        <th class="text-center">Cantidad Requerida</th>
+                        <th class="text-center">Precio Unitario</th>
+                        <th class="text-center">Precio Cotizado</th>
+                        <th class="text-center">Cantidad Aprobada</th>
+                        <th class="text-center">Precio Unitario Aprobado</th>
+                        <th class="text-center">Precio Aprobado</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngIf="!listaDetSolicitudes.length">
+                        <td colspan="5" class="text-center">
+                            <h6>No hay detalles que mostrar</h6>
+                        </td>
+
+                    </tr>
+                    <tr *ngFor="let item of listaDetSolicitudes, let i = index">
+                        <td class="text-center">{{item.descripcion}}</td>
+                        <td class="text-center">{{item.cantidad_solicitada}}</td>
+                        <td class="text-center">{{item.cantidad_requerida}}</td>
+                        <td class="text-right">${{item.bienes?.costo_unitario | number :'1.2-2'}}</td>
+                        <td class="text-right">${{item.precio_cotizado | number :'1.2-2'}}</td>
+                        <td class="text-right" >
+                            <!-- <div  *ngIf="disabledDetalle">
+                                {{item.cantidad_aprobada }} 
+                            </div> -->
+                            <div class="input-group input-group-sm" >
+                                <input type="text" class="form-control form-control-sm text-right"
+                                     [(ngModel)]="item.cantidad_aprobada" [options]="{ max:1}" (ngModelChange)="calcularTotalAprobado()" (keypress)="onlyNumber($event)">
+                            </div>
+                        </td>
+                        <td class="text-right" >
+                            <!-- <div  *ngIf="disabledDetalle">
+                                $ {{item.precio_unitario_aprobado  | number :'1.2-2'}} 
+                            </div> -->
+                            <div class="input-group input-group-sm" >
+                                <div class="input-group-prepend"><span
+                                        class="input-group-text font-weight-bold">$</span></div>
+                                <input [options]="{ max: item.precio_cotizado, allowNegative: false}"
+                                currencyMask type="text" class="form-control form-control-sm text-right"
+                                     [(ngModel)]="item.precio_unitario_aprobado"
+                                     (keyup)="calculartotaladjudicado()"
+                                      (input)="calculartotaladjudicado()" (ngModelChange)="calcularTotalAprobado()">
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <!-- <div  *ngIf="disabledDetalle">
+                                $ {{item.precio_aprobado  | number :'1.2-2'}} 
+                            </div> -->
+                            <div class="input-group input-group-sm" >
+                                <div class="input-group-prepend"><span
+                                        class="input-group-text font-weight-bold">$</span></div>
+                                <input currencyMask type="text" class="form-control form-control-sm text-right"
+                                     [(ngModel)]="item.precio_aprobado" readonly>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" style="font-size: 14px; " class="font-weight-bold text-right">TOTAL COTIZADO: </th>
+                        <th style=" font-size: 14px;" class="font-weight-bold text-right">$ {{ totalCotizado| number: '1.2-2'}}</th>
+                        <!-- <th style=" font-size: 14px;" class="font-weight-bold text-center">$ {{totalValorSolicitud | number: '1.2-2'}}</th> -->
+                        <th colspan="2" style="font-size: 14px; " class="font-weight-bold text-right">TOTAL APROBADO: </th>
+                        <th style=" font-size: 14px;" class="font-weight-bold text-right">$ {{totalAprobado| number: '1.2-2'}}</th>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+      
+        <!-- <div class="m-2" >
+            <table class="table table-hover mt-2">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center">Descripción</th>
+                        <th class="text-center">Cantidad Solicitada</th>
+                        <th class="text-center">Cantidad Requerida</th>
+                        <th class="text-center">Precio Cotizado</th>
+
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngIf="!listaDetSolicitudes.length">
+                        <td colspan="5" class="text-center">
+                            <h6>No hay Solicitudes que mostrar</h6>
+                        </td>
+
+                    </tr>
+                    <tr *ngFor="let item of listaDetSolicitudes">
+                        <td class="text-center">{{item.descripcion}}</td>
+                        <td class="text-center">{{item.cantidad_solicitada}}</td>
+                        <td class="text-center">{{item.cantidad_requerida}}</td>
+                        <td class="text-right">$ {{item.precio_cotizado | number:'1.2-2'}}</td>
+
+                    </tr>
+                    <tr>
+                        <th colspan="3" style="font-size: 14px; " class="font-weight-bold text-right">TOTAL COTIZADO: </th>
+                        <th style=" font-size: 14px;" class="font-weight-bold text-right">$ {{ totalCotizado| number: '1.2-2'}}</th>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div> -->
+        <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true ></cc-spiner-procesar>
+</div>

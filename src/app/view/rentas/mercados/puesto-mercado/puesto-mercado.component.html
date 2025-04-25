@@ -1,0 +1,102 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-list" 
+        filtroBoton="btnsPuestoMercado" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" >
+        <fieldset class="border px-2 pb-2 my-2">
+            <legend class="w-auto bg-dark">Filtros</legend>
+            <div class="row">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="No. de local" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_num_local" type="text" class="form-control" [(ngModel)]="filter.num_local">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="Mercado" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [items]="mercados" bindValue="valor" bindLabel="descripcion" [(ngModel)]="filter.mercado" [markFirst]="false" [clearable]="false"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [items]="estados" bindValue="value" bindLabel="descripcion" [(ngModel)]="filter.estado" [markFirst]="false" [clearable]="false"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_descripcion" type="text" class="form-control" [(ngModel)]="filter.descripcion">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <!-- <div class="col">
+                            <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.num_documento" (keypress)="validaciones.numberOnly($event)">
+                            </app-cc-input-group-prepend>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-sm ml-1" placement="bottom" ngbTooltip="Buscar" (click)="consultarPuestos()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row mb-2">
+            <div class="col-12">
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <!-- <th style="width: 5%;">Codigo</th> -->                        
+                            <th style="width: 10%;">Número de Local</th>
+                            <th style="width: 20%;">Mercado</th>
+                            <th style="width: 20%;">Descripción</th>
+                            <th style="width: 20%;">Ubicación</th>
+                            <th style="width: 10%;">Estado</th>
+                            <th style="width: 10%;">Creaci&oacute;n</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let p of puestos, let i = index">
+                            <tr>
+                                <td style="max-width: 10px;">{{ p.numero_puesto }}</td>
+                                <td style="max-width: 10px;">{{ p.mercado.valor }}</td>
+                                <td style="max-width: 10px;">{{ p.descripcion }}</td>
+                                <td style="max-width: 10px;">{{ p.ubicacion }}</td>
+                                <td *ngIf="p.estado == 'D'">Disponible</td>
+                                <td *ngIf="p.estado == 'A'">Alquilado</td>
+                                <td *ngIf="p.estado == 'I'">Inactivo</td>
+                                <td>
+                                    {{ p.id_usuario.nombre }}<br>
+                                    <small class="text-muted">{{ p.created_at }}</small>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" ngbTooltip="Editar Puesto de Mercado" (click)="showPuestoMercadoForm(false, p)"><i class="far fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger" ngbTooltip="Eliminar Puesto de Mercado" (click)="deletePuesto(p.id_mercado_puesto, i)"><i class="far fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+
+            </div>
+        </div>
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renModalPuestos"></cc-spiner-procesar>

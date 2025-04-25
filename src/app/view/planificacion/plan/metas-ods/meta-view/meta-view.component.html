@@ -1,0 +1,149 @@
+
+<app-button-radio-active titulo="{{ fTitle }}" cstyle="bg-gradient-primary text-white" icono="fas fa-bullseye-arrow" [groupButton]="vmButtons" filtroBoton="btnsMetaView" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+        <div class="col-6">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Programa</span>
+                </div>
+                <input type="text" readonly class="form-control form-control-sm" [value]="registro.nombre">
+            </div>
+        </div>
+        
+    </div>
+    <div class="row my-2">
+        <div class="col-6">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">ODS</label>
+                </div>
+                <ng-select class="form-control form-control-sm border border-secondary" [(ngModel)]="metaOpciones.ods">
+                    <ng-option [value]="0">Seleccione ODS</ng-option>
+                    <ng-option *ngFor="let d of catalogos.ods" [value]="d">{{ d.nombre }}</ng-option>
+                </ng-select>
+                
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><label class="input-group-text">Eje</label></div>
+                <ng-select class="form-control form-control-sm border border-secondary" [(ngModel)]="metaOpciones.eje">
+                    <ng-option [value]="0">Seleccione Eje</ng-option>
+                    <ng-option *ngFor="let d of catalogos.eje" [value]="d">{{ d.nombre }}</ng-option>
+                </ng-select>
+                
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-12">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">OND</label>
+                </div>
+                <ng-select class="form-control form-control-sm border border-secondary" [(ngModel)]="metaOpciones.ond">
+                    <ng-option [value]="0">Seleccione OND</ng-option>
+                    <ng-option *ngFor="let d of catalogos.ond" [value]="d">{{ d.nombre }}</ng-option>
+                </ng-select>
+                
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-12">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Meta Zonal</label>
+                </div>
+                <ng-select class="form-control form-control-sm border border-secondary" [(ngModel)]="metaOpciones.metaZonal">
+                    <ng-option [value]="0">Seleccione OND</ng-option>
+                    <ng-option *ngFor="let d of catalogos.meta" [value]="d">{{ d.nombre }}</ng-option>
+                </ng-select>
+                
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-12">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Competencias</label>
+                </div>
+                <ng-select class="form-control form-control-sm border border-secondary" [(ngModel)]="metaOpciones.competencia">
+                    <ng-option [value]="0">Seleccione Competencia</ng-option>
+                    <ng-option *ngFor="let d of catalogos.comp_gad" [value]="d">{{ d.nombre }}</ng-option>
+                </ng-select>
+                
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-12">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Obj. Estrategico</label>
+                </div>
+                <ng-select class="form-control form-control-sm border border-secondary" [(ngModel)]="metaOpciones.oe">
+                    <ng-option [value]="0">Seleccione un Objetivo Estrategico</ng-option>
+                    <ng-option *ngFor="let d of catalogos.obj_pdot" [value]="d">{{ d.nombre }}</ng-option>
+                </ng-select>
+                
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-12">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Meta Resultado</label>
+                </div>
+                <ng-select class="form-control form-control-sm border border-secondary" [(ngModel)]="metaOpciones.metaResultado">
+                    <ng-option [value]="0">Seleccione una Meta Resultado</ng-option>
+                    <ng-option *ngFor="let d of catalogos.meta_resultado" [value]="d">{{ d.nombre }}</ng-option>
+                </ng-select>
+                
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-12">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Indicador</label>
+                </div>
+                <ng-select class="form-control form-control-sm border border-secondary" [(ngModel)]="metaOpciones.indicador">
+                    <ng-option [value]="0">Seleccione un Indicador</ng-option>
+                    <ng-option *ngFor="let d of catalogos.indicador" [value]="d">{{ d.nombre }}</ng-option>
+                </ng-select>
+                
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-6">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Tendencia</label>
+                </div>
+                <ng-select class="form-control form-control-sm border border-secondary" [(ngModel)]="metaOpciones.tendencia">
+                    <ng-option [value]="0">Seleccione una Tendencia</ng-option>
+                    <ng-option *ngFor="let d of catalogos.tendencia" [value]="d">{{ d.nombre }}</ng-option>
+                </ng-select>
+                
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Intenvencion</label>
+                </div>
+                <ng-select class="form-control form-control-sm border border-secondary" [(ngModel)]="metaOpciones.intervencion">
+                    <ng-option [value]="0">Seleccione una Intervencion</ng-option>
+                    <ng-option *ngFor="let d of catalogos.intervencion" [value]="d">{{ d.nombre }}</ng-option>
+                </ng-select>
+                
+            </div>
+        </div>
+    </div>
+</app-button-radio-active>
+

@@ -1,0 +1,163 @@
+<app-button-radio-active [titulo]="ftitulo" filtroBoton="btnsDetalles" cstyle="bg-gradient-primary test-white"
+  [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+
+  <div class="my-2">
+    <h3>Expediente</h3>
+    <div class="row my-2">
+      <div class="col">
+        <app-cc-input-group-prepend label="No. Expediente" styleSpan="size-span-campo font-weight-bold">
+          <input type="text" readonly [value]="expediente.num_expediente" class="form-control">
+        </app-cc-input-group-prepend>
+      </div>
+      <div class="col">
+        <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+          <input type="text" readonly [value]="expediente.contribuyente?.razon_social" class="form-control">
+        </app-cc-input-group-prepend>
+      </div>
+      <div class="col">
+        <app-cc-input-group-prepend label="Tipo Gesti&oacute;n" styleSpan="size-span-campo font-weight-bold">
+          <input type="text" readonly [value]="expediente.tipo_gestion" class="form-control">
+        </app-cc-input-group-prepend>
+      </div>
+    </div>
+
+    <div class="row mb-2" *ngIf="expediente.estado == 'X'">
+      <div class="col">
+        <div class="alert alert-danger">
+          {{ expediente.observacion_del }}<br><strong>{{ expediente.fk_usuario_del?.nombre }}</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-2"  style="max-height: 400px; overflow-y: scroll;overflow-x:hidden">
+      <div class="col" >
+        <h3>Detalles</h3>
+        <details *ngFor="let item of expediente.detalles">
+          <summary>
+            <span class="h6">{{ item.liquidacion?.documento }}</span>
+            <span class="text-muted ml-1">TOTAL: $ {{ item.liquidacion?.total | number:'1.2-2' }}</span>
+            <button class="btn btn-sm btn-danger ml-1" matTooltip="IMPRIMIR" (click)="imprimir(item.liquidacion)"><i class="fas fa-file-pdf"></i></button>
+          </summary>
+          <table class="table table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th>Cantidad</th>
+                <th>Concepto</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let det of item.liquidacion?.detalles">
+                <td>{{ det.cantidad }}</td>
+                <td>{{ det.concepto?.nombre_detalle ?? 'Sin Concepto' }}</td>
+                <td class="text-right">$ {{ det.total | number:'1.2-2' }}</td>
+              </tr>
+              <tr>
+                
+                <td class="font-weight-bold">Subtotal</td>
+                <td></td>
+                <td class="font-weight-bold text-right">{{item.liquidacion?.subtotal | number: '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">(-) Exoneraciones</td>
+                <td></td>
+                <td class="font-weight-bold text-right">{{item.liquidacion?.exoneraciones | number: '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">Subtotal - Exoneraciones</td>
+                <td></td>
+                <td class="font-weight-bold text-right">{{item.liquidacion?.subtotal_1 | number: '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">(+) STA</td>
+                <td></td>
+                <td class="font-weight-bold text-right">{{item.liquidacion?.sta | number: '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">Subtotal + STA</td>
+                <td></td>
+                <td class="font-weight-bold text-right">{{item.liquidacion?.subtotal_2 | number: '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">(+) Recargo</td>
+                <td></td>
+                <td class="font-weight-bold text-right">{{item.liquidacion?.recargo | number: '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">(+) Coactiva</td>
+                <td></td>
+                <td class="font-weight-bold text-right">{{item.liquidacion?.coactiva | number: '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">(+) Interés</td>
+                <td></td>
+                <td class="font-weight-bold text-right">{{item.liquidacion?.interes | number: '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">(-) Descuento</td>
+                <td></td>
+                <td class="font-weight-bold text-right">{{item.liquidacion?.descuento | number: '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">Total</td>
+                <td></td>
+                <td class="font-weight-bold text-right">{{item.liquidacion?.total | number: '1.2-2'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
+        <!-- <mat-paginator [length]="paginate.length" [pageSize]="paginate.perPage" [pageSizeOptions]="paginate.pageSizeOptions"
+          (page)="changePaginate($event)" aria-label="Select page">
+        </mat-paginator> -->
+      </div>
+      <div class="col" *ngIf="expediente.foto || expediente.anexos?.length != 0">
+        <div class="row" *ngIf="expediente.foto">
+          <div class="col">
+            <img [src]="expediente.foto" class="img-thumbnail" width="120">
+          </div>
+        </div>
+        <div class="row" *ngIf="expediente.anexos">
+          <div class="col">
+            <div class="table-responsive" >
+              <table class="table table-sm table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngIf="expediente.anexos.length > 0; else emptyAnexos">
+                    <tr *ngFor="let item of expediente.anexos">
+                      <td>{{ item.original_name }}</td>
+                      <td>
+                        <div class="btn-group">
+                          <button class="btn btn-sm btn-primary" matTooltip="Descargar"><i class="fas fa-file-download"></i></button>
+                        </div>
+                        <button class="btn btn-sm btn-outline-danger ml-1" matTooltip="Eliminar"><i class="fas fa-trash-alt"></i></button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <ng-template #emptyAnexos>
+                    <tr>
+                      <td class="text-center" colspan="2"><span class="h6">No hay anexos</span></td>
+                    </tr>
+                  </ng-template>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+  </div>
+
+
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spExpedienteDetalles"></cc-spiner-procesar>

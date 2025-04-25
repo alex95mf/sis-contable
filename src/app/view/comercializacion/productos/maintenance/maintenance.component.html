@@ -1,0 +1,337 @@
+<div class="row justify-content-center loading-spinner" *ngIf="!processing">
+    <div class="container-new-loader">
+        <i class="fa fa-spinner fa-spin"></i>
+    </div>
+</div>
+<div class="row justify-content-center mt-2" *ngIf="processing && permissions != undefined">
+    <div class="col-11 button-section">
+        <button class="btn  btn-style" *ngIf="actions.btnModify" (click)="MaintenanceQuote()"
+            style="background-color:#821DD5; color:white;">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> MODIFICAR
+        </button>
+
+        <button class="btn btn-style" *ngIf="actions.btnDuplicate" (click)="MaintenanceQuote()"
+            style="background-color: #F39800; color:white;">
+            <i class="fa fa-clone" aria-hidden="true"></i> DUPLICAR
+        </button>
+
+        <button class="btn btn-danger btn-style" [disabled]="actions.btnCancel" (click)="CancelForm()">
+            <i class="fa fa-undo" aria-hidden="true"></i> CANCELAR
+        </button>
+    </div>
+</div>
+<div class="row justify-content-center" *ngIf="processing && permissions != undefined">
+    <div class="col-12 container-customer">
+        <div class="row justify-content-center">
+            <div class="col-12 pt-4 pb-2">
+                <div style="font-family: 'Poppins1';">
+                    <div class="row justify-content-center mb-2">
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
+                            <label for="">Ruc/Razón social</label>
+                            <ng-select id="duplicateQuotes" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false"
+                                [disabled]="!actions.btnDuplicate" style="padding-left: 7px;font-size: 13px;"
+                                [(ngModel)]="customerSelect" (keyup)="getCustomerFilter($event.target.value)"
+                                (ngModelChange)="getCustomer($event)">
+                                <ng-option *ngFor="let d of arrayCustomerAux" [value]="d.id_cliente">
+                                    {{ d.razon_social }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 pt-1">
+                            <label for="dateFrom">Fecha</label>
+                            <ejs-datepicker [(ngModel)]="toDatePicker" name="dateFrom" format='yyyy-MM-dd'
+                                id="idquotes">
+                            </ejs-datepicker>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
+                            <label for="">Estado Doc.</label>
+                            <select class="form-control" [(ngModel)]="docStatus"
+                                style="padding-left: 7px; font-size: 13px;"
+                                [disabled]="permissions.editar == '0' || actions.btnDuplicate">
+                                <option *ngFor="let d of statusDocuments" [value]="d.name">
+                                    {{ d.name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
+                        <div class="row">
+                            <div class="col-12">
+                                <fieldset class="border pl-4 pr-4 pb-2 mb-1 mt-2">
+                                    <legend class="w-auto h6 ">Información del Cliente</legend>
+                                    <div class="row" *ngIf="arrayFormaPago != undefined">
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                                            <div class="row cont pt-2">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Razón social</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="razón social" type="text"
+                                                        class="form-control form-control-sm" id="idRazSocial"
+                                                        [disabled]="true" [(ngModel)]="customer.razon_social">
+                                                </div>
+                                            </div>
+                                            <div class="row cont pt-2">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Tipo Documento</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="tipo documento" type="text"
+                                                        class="form-control form-control-sm" id="idTipDoc"
+                                                        [disabled]="true" [(ngModel)]="customer.tipo_documento">
+                                                </div>
+                                            </div>
+                                            <div class="row cont pt-2">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">No. Documento</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="numero documento" type="text"
+                                                        [(ngModel)]="customer.num_documento"
+                                                        class="form-control form-control-sm" id="idNumDoc"
+                                                        [disabled]="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                                            <div class="row cont pt-2">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Tipo contribuyente</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="tipo contribuyente" type="text"
+                                                        class="form-control form-control-sm" id="idTipCont"
+                                                        [disabled]="true" [(ngModel)]="customer.tipo_contribuyente">
+                                                </div>
+                                            </div>
+                                            <div class="row cont pt-2">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Cupo crédito</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="cupo crédito" type="text"
+                                                        class="form-control form-control-sm" id="idCupoCre"
+                                                        [disabled]="true" [(ngModel)]="customer.cupo_credito">
+                                                </div>
+                                            </div>
+                                            <div class="row cont pt-2">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Saldo crédito</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="saldo crédito" type="text"
+                                                        class="form-control form-control-sm" id="idSalCre"
+                                                        [disabled]="true" [(ngModel)]="customer.saldo_credito">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                                            <div class="row cont pt-2">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Grupo</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="Grupo" type="text"
+                                                        class="form-control form-control-sm" id="idGrupo"
+                                                        [disabled]="true" [(ngModel)]="customer.grupo">
+                                                </div>
+                                            </div>
+                                            <div class="row cont pt-2">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Asesor</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="asesor financiero" type="text"
+                                                        class="form-control form-control-sm" id="idAsesor"
+                                                        [disabled]="true" [(ngModel)]="customer['asesor']['nombre']">
+                                                </div>
+                                            </div>
+                                            <div class="row cont pt-2">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Forma pago</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <select id="idFormPago" class="form-control form-control-sm"
+                                                        [(ngModel)]="customer.formaPagoSelect"
+                                                        [disabled]="permissions.editar == '0'">
+                                                        <option *ngFor="let d of arrayFormaPago" [value]="d.valor">
+                                                            {{ d.valor }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="background-color: #1e1d1d;color: white;
+                                        font-family: 'Poppins1';font-weight: 400;">Observación</span>
+                                    </div>
+                                    <textarea class="form-control" aria-label="With textarea" style="border-color: #C8CED3;
+                                    box-shadow: unset !important;outline: unset !important;"
+                                        placeholder="Ingrese una observación"
+                                        [(ngModel)]="customer.observationBuy"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+                        <div class="row">
+                            <div class="col-12">
+                                <fieldset class="border pl-4 pb-2 pr-4 mb-1 mt-2">
+                                    <legend class="w-auto h6">Información de contacto</legend>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="row cont ">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Provincia</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="provincia" type="text"
+                                                        class="form-control form-control-sm" id="idProvincia"
+                                                        [disabled]="true" [(ngModel)]="customer.provincia">
+                                                </div>
+                                            </div>
+                                            <div class="row cont ">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Ciudad</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="ciudad" type="text"
+                                                        class="form-control form-control-sm" id="idCiudad"
+                                                        [disabled]="true" [(ngModel)]="customer.ciudad">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="row cont">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Dirección</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="dirección" type="text"
+                                                        class="form-control form-control-sm" id="idAddress"
+                                                        [disabled]="true" [(ngModel)]="customer.direccion">
+                                                </div>
+                                            </div>
+                                            <div class="row cont">
+                                                <div class="col-md-12 ">
+                                                    <label class="l">Teléfono</label>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input placeholder="teléfono" type="text"
+                                                        class="form-control form-control-sm" id="idTelefono"
+                                                        [disabled]="true" [(ngModel)]="customer.telefono">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-12">
+                                <table class="table table-bordered">
+                                    <thead class="">
+                                        <tr class="" style="background-color:#1e1d1d ;">
+                                            <th>Subtotal</th>
+                                            <th scope="col" style="text-align: right;">
+                                                {{ dataTotales.subTotalPagado.toFixed(2) }}
+                                                $
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ivaConverter}} % Iva</td>
+                                            <td style="text-align: right;">{{ dataTotales.ivaPagado.toFixed(2) }} $</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td style="text-align: right;">{{ dataTotales.totalPagado.toFixed(2) }} $
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 container-customer mt-3 mb-3">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <fieldset class="border p-2 mb-1 mt-2">
+                    <legend class="w-auto h6">Lista de productos</legend>
+                    <div class="row justify-content-end">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 text-right btn-add">
+                            <button class="btn btn-success" placement="top"
+                                ngbTooltip="Agregar productos a la cotización" (click)="addProduct()"
+                                [disabled]="permissions.editar == '0'">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Agregar producto
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12 table-responsive" style="font-family: 'Poppins1';">
+                            <table class="table table-bordered" style="max-height: 260px;">
+                                <thead style="background-color: #1e1d1d;color: white;">
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Código</th>
+                                        <th scope="col">Marca</th>
+                                        <th scope="col">Stock</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">P/U</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="width: 100%;">
+                                    <tr *ngFor="let d of dataProducto; let i = index">
+                                        <td style="width: 20%;" *ngIf="d.action">{{d.nombre}}</td>
+                                        <td style="width: 14%;font-size: 13px;padding-top: 14px;" *ngIf="d.action">
+                                            {{d.codigoProducto}}
+                                        </td>
+                                        <td style="width: 10%;" *ngIf="d.action">{{d.marca}}</td>
+                                        <td style="width: 10%;text-align: right;" *ngIf="d.action">{{d.stock}}</td>
+                                        <td style="width: 10%;text-align: right;" *ngIf="d.action">
+                                            <input type="number" class="form-control form-control-sm"
+                                                style="text-align: right;" [(ngModel)]="d.quantity"
+                                                (keyup)="sumTotal(i)" min="0"
+                                                (keypress)="commonServices.FormatDecimalVal($event)"
+                                                [disabled]="permissions.editar == '0'">
+                                        </td>
+                                        <td style="width: 10%;" *ngIf="d.action">
+                                            <input type="number" class="form-control form-control-sm"
+                                                style="text-align: right;" [(ngModel)]="d.price" (keyup)="sumTotal(i)"
+                                                min="0" (keypress)="commonServices.FormatDecimalVal($event)"
+                                                [disabled]="permissions.editar == '0'">
+                                        </td>
+                                        <td style="width: 9%;text-align: right;" *ngIf="d.action">
+                                            {{d.totalItems.toFixed(4)}}
+                                        </td>
+                                        <td style="width: 9%;text-align: center;" *ngIf="d.action">
+                                            <button class="btn btn-danger btn-sm" placement="top"
+                                                ngbTooltip="Eliminar Items" (click)="deleteItems(i)">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

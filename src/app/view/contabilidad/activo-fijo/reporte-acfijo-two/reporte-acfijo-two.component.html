@@ -1,0 +1,81 @@
+<br>
+<app-button-radio-active titulo="Consulta Activos Fijos" filtroBoton="btnsConsultatwo" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-search">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"  style="padding-left: 7px;font-size: 13px;" [(ngModel)]="grupo" (ngModelChange)="filterGrupo($event)" [clearable]="false">
+                    <ng-option [value]="0">Seleccione Grupo</ng-option>
+                    <ng-option *ngFor="let d of arrayGrupo" [value]="d.id">{{ d.nombre_activo }} </ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div> 
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Código" styleSpan="size-span-campo"> 
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"  style="padding-left: 7px;font-size: 13px;" [(ngModel)]="codigo" (ngModelChange)="filterCodigo($event)" [clearable]="false">
+                    <ng-option [value]="0">Seleccione Codigo</ng-option>
+                    <ng-option *ngFor="let d of arrayCodigo" [value]="d.codigo"> {{d.codigo}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div> 
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"  style="padding-left: 7px;font-size: 13px;" [(ngModel)]="estado" (ngModelChange)="filterEstado($event)" [clearable]="false">
+                    <ng-option [value]="3">Seleccione Estado</ng-option>
+                    <ng-option *ngFor="let d of arrayStatus" [value]="d.id">{{ d.nombre }} </ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div> 
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Origen" styleSpan="size-span-campo"> 
+                <ng-select id="IdOrigen" class="form-control custom" appendTo="body" [searchable]="true" ngDefaultControl [clearable]="true" [(ngModel)]="origen" (ngModelChange)="filterOrigen($event)">
+                    <ng-option  [value]="0">Seleccione Origen</ng-option>  
+                    <ng-option *ngFor="let d of arrayCountrys" [value]="d.id">{{d.nom_pais }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div> 
+
+    </div>
+
+    <fieldset class="border p-2 mb-2 mt-3 filters" >
+        <legend class="w-auto h6">Listado</legend>
+        <div class="table-responsive responsive-table">
+            <table datatable id="tablaConsultatwo" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                <thead class="text-center">
+                    <tr style="width: 100%;">
+                        <th style="width: 2%;">#</th>
+                        <th style="width: 8%;">Codigo</th>
+                        <th style="width: 15%;">Nombre</th>
+                        <th style="width: 12%;">Grupo</th>
+                        <th style="width: 6%;">Costo</th>
+                        <th style="width: 5%;">Depreciacón <span>Meses</span></th>
+                        <th style="width: 5%;">Valor Depreciación</th>
+                        <th style="width: 5%;">Valor Actual</th>
+                        <th style="width: 10%;">Fecha Depreciación</th>
+                        <th style="width: 10%;">Origen</th>
+                        <th style="width: 5%;">Estado</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="validaDt">
+                    <tr *ngFor="let dt of infoDataActivo; let i = index">
+                        <td class="text-center">{{ i + 1 }}</td>
+                        <td style="padding-top: 15px;text-align: left;">{{dt.codigo}}</td>
+                        <td style="padding-top: 15px;text-align: left;">{{dt.nombre}}</td>
+                        <td style="padding-top: 15px;text-align: center;">{{dt.nombre_activo}}</td>
+                        <td style="padding-top: 15px;text-align: center;">{{formatNumber(dt.precio)}}</td>
+                        <td style="padding-top: 15px;text-align: center;">{{dt.depreciacion}}</td>
+                        <td style="padding-top: 15px;text-align: center;">{{formatNumber(dt.valor_depreciacion)}}</td>
+                        <td style="padding-top: 15px;text-align: center;">{{formatNumber(dt.valor_actual)}}</td>
+                        <td style="padding-top: 15px;text-align: center;">{{dt.ultima_depreciacion }}</td>
+                        <td style="padding-top: 15px;text-align: center;">{{dt.nom_pais}}</td>
+                        <td style="padding-top: 15px;text-align: center;" *ngIf="dt.status == 1">Activo</td>
+                        <td style="padding-top: 15px;text-align: center;" *ngIf="dt.status != 1">Baja</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+    
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spRrpAcFTw"></cc-spiner-procesar>

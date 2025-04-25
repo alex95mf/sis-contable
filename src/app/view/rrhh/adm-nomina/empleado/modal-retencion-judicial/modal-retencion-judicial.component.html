@@ -1,0 +1,68 @@
+<app-button-radio-active-new titulo="Registro de Retencion Judicial" cstyle="bg-gradient-primary text-white"  icono="far fa-file"
+    filtroBoton="btnsModalRetencionJudicial" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="mb-3">
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Datos Retención Judicial</legend>
+                    <div>
+                        <div class="row m-0">
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="No. de Resolucion" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="retencion.resolucion">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Nombre de Beneficiario" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="retencion.beneficiario">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="No. Identificacion" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="retencion.identificacion">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Motivo" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="retencion.motivo">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo font-weight-bold">
+                                    <input currencyMask class="form-control" [(ngModel)]="retencion.valor" onclick="this.select()">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Banco" styleSpan="size-span-campo font-weight-bold">
+                                    <ng-select class="form-control" appendTo="body" [(ngModel)]="retencion.banco"
+                                        [items]="lst_bancos" bindValue="valor" bindLabel="descripcion">
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Tipo de Cuenta" styleSpan="size-span-campo font-weight-bold">
+                                    <ng-select class="form-control" appendTo="body" [(ngModel)]="retencion.tipo_cuenta"
+                                        [items]="lst_tipo_cuenta" bindValue="value" bindLabel="label">
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="Tipo de Cuenta" styleSpan="size-span-campo font-weight-bold">
+                                    <ng-select class="form-control" appendTo="body" [(ngModel)]="retencion.tipo_cuenta"
+                                        [items]="lst_tipo_cuenta" bindValue="value" bindLabel="label">
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12 col-md-6 pt-0 pb-0">
+                                <app-cc-input-group-prepend label="No. Cuenta" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" [(ngModel)]="retencion.num_cuenta">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalRetencionJudicial"></cc-spiner-procesar>

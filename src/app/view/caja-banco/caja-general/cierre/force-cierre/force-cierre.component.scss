@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face 
+{
+    font-family: "Poppins1";
+    src: url("../../../../../../assets/fonts/Montserrat-Medium.ttf") format("truetype");
+}
+/* * {
+    font-family: "Poppins1";
+} */
+
+span
+{
+    font-size: 10px !important;
+    font-weight: bold !important;
+}
+
+textarea,
+select,
+input
+{
+    font-size: 10px !important; 
+}
+
+.filters 
+{
+    font-family: "Poppins1";
+    background-color: #fafafa;
+    border: 1px solid rgba(107, 107, 107, 0.3);
+    border-radius: 0px 0px 5px 5px;
+    border-top: unset !important;
+
+  
+
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 6px 0px 8px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                    padding: 5px 15px 5px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 11px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}
+
+
+.dangerClass
+{
+    color: red;
+    font-weight: 500;
+}
+.primaryClass
+{
+    color: black;;
+}
+
+
+
+textarea 
+{
+    font-family: "Poppins1" !important;
+    outline: unset !important;
+    box-shadow: unset !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button 
+{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] 
+{
+    -moz-appearance: textfield;
+}
+
+    ::-webkit-scrollbar 
+    {
+      width: 5px;
+      height: 3px;
+      overflow-y: scroll;
+      overflow-x: scroll;
+  }
+  
+  ::-webkit-scrollbar-thumb 
+  {
+      background: #13B1E9;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+  
+  ::-webkit-scrollbar-thumb:active 
+  {
+      background-color: #999999;
+  }
+  
+  ::-webkit-scrollbar-track 
+  {
+      background: #CECAC9;
+      border-radius: 4px;
+  }
+  

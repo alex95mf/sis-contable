@@ -1,0 +1,222 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Fichero de parametros generales" filtroBoton="btnsParametros" icono="fas fa-indent"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row justify-content-center" *ngIf="processing">
+            <div class="col-12">
+                <div>
+                    <div class="tab_container">
+
+                        <input type="radio" name="tabs" checked class="invisible">
+                        <label class="invisible lab" style="width: 25%;"><br></label>
+
+                        <input id="tab4" type="radio" name="tabs" checked (click)="dinamicoBotones(3)">
+                        <label class="lab" for="tab4" style="width: 25%;">
+                            <i class="fa fa-book" aria-hidden="true"></i>
+                            <span>Parámetros Generales</span>
+                        </label>
+
+                        <!-- <input id="tab5" type="radio" name="tabs" (click)="dinamicoBotones(4)">
+                        <label class="lab" for="tab5" style="width: 25%;">
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            <span>Documentos</span>
+                        </label> -->
+
+                        <input type="radio" name="tabs" class="invisible">
+                        <label class="invisible lab " style="width: 25%;"><br></label>
+
+                        <section id="content4" class="tab-content p-3">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm mt-1" *ngIf="!isMultiple">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Grupo</span>
+                                        </div>
+                                        <input placeholder="Ingrese tipo.. " type="text" #tipoCatalo="ngModel"
+                                            name="tipoCatalo" [(ngModel)]="tipoCatalogo"
+                                            class="form-control form-control-sm" [disabled]="!newCatalogo" id="IdTipo">
+                                    </div>
+                                    <div class="input-group input-group-sm mt-1" *ngIf="isMultiple">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Grupo</span>
+                                        </div>
+                                        <ng-select id="IdTipo" [(ngModel)]="tipoCatalogo" [searchable]="true"
+                                            class="form-control form-control-sm custom-select custom" appendTo="body"
+                                            [clearable]="true" [disabled]="!newCatalogo"
+                                            (ngModelChange)="validateSubgroup($event)">
+                                            <ng-option [value]="0">Seleccione un tipo</ng-option>
+                                            <ng-option *ngFor="let g of groups" [value]="g.tipo">
+                                                {{g.tipo}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Valor</span>
+                                        </div>
+                                        <textarea placeholder="Ingrese valor" type="text" #valCatalogo="ngModel"
+                                            name="valCatalogo" [(ngModel)]="valorCatalogo"
+                                            class="form-control form-control-sm" [disabled]="!newCatalogo"
+                                            id="IdValorCatalogo"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm" *ngIf="!newGrupo">{{lbl}}</span>
+
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm" *ngIf="newGrupo">Sub Grupo</span>
+                                        </div>
+                                        <input placeholder="Ingrese grupo" type="text" #valCatalogo="ngModel"
+                                            name="valCatalogo" [(ngModel)]="subTipo"
+                                            class="form-control form-control-sm" *ngIf="newGrupo"
+                                            id="IdValorCatalogo">
+                                        <input placeholder="Ingrese grupo" type="text" #valCatalogo="ngModel"
+                                        name="valCatalogo" [(ngModel)]="subTipo"
+                                        class="form-control form-control-sm" *ngIf="validacionNuevoSub"
+                                        id="IdValorCatalogo">
+                                        <ng-select id="IdSubgrupo" [(ngModel)]="subTipo" [searchable]="true"
+                                            class="form-control form-control-sm custom-select custom" appendTo="body"
+                                            [clearable]="true" [disabled]="!isSubGroup || !newCatalogo" *ngIf="!newGrupo && !validacionNuevoSub">
+                                            <ng-option [value]="0">Seleccione un Subgrupo</ng-option>
+                                            <ng-option *ngFor="let g of subgroups" [value]="g.grupo">
+                                                {{g.grupo}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Estado</span>
+                                        </div>
+                                        <select class="form-control form-control-sm custom-select" #estadocat="ngModel"
+                                            name="estadocat" [(ngModel)]="estadoCatalogo"
+                                            style="height: 28px; padding-top: 0px;padding-bottom: 0px; outline: unset;box-shadow: unset;"
+                                            [disabled]="!newCatalogo" id="IdestadoCatalogo">
+                                            <option value="A">Activo</option>
+                                            <option value="I">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Empresa</span>
+                                        </div>
+                                        <select [(ngModel)]="empresaSeleccionadoCatalogo"
+                                            class="form-control form-control-sm custom-select" disabled
+                                            (ngModelChange)="obtenerEmpresaCatalogo($event)" id="IdEmpresaCatalogo">
+                                            <option [value]="0">Seleccione una empresaa</option>
+                                            <option *ngFor="let d of dataEmpresa" [value]="d.id_empresa">
+                                                {{d.nombre_comercial}}
+                                            </option>
+                                        </select>
+                                        <!-- <input class="form-control" [(ngModel)]="empresaSeleccionadoCatalogo"/> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="input-group pt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"
+                                                placeholder="Ingrese observación">Descripción</span>
+                                        </div>
+                                        <textarea class="form-control form-control-sm" aria-label="With textarea" [disabled]="!newCatalogo"
+                                            [(ngModel)]="desCatalogo" id="idtxta"
+                                            placeholder="Ingrese una descripción"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="content5" class="tab-content p-3">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Documento</span>
+                                        </div>
+                                        <input id="nombre" type="text" class="form-control form-control-sm" readonly
+                                            [(ngModel)]="documents.nombre" placeholder="Nombre del documento">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Abbreviación</span>
+                                        </div>
+                                        <input id="nombre" type="text" class="form-control form-control-sm" disabled
+                                            [(ngModel)]="documents.codigo" placeholder="Abreviación del documento">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Solicitudes</span>
+                                        </div>
+                                        <div>
+                                            <ejs-multiselect id='multifilterdoc' [(ngModel)]='selectFilters'
+                                                [dataSource]='filters' [fields]='fields' mode='Box'
+                                                [placeholder]='waterMark'
+                                                [disabled]="!actionsDoc.edit || !documents.aprobaciones">
+                                            </ejs-multiselect>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Aplica filtro</span>
+                                        </div>
+                                        <input type="checkbox" [(ngModel)]="documents.aprobaciones"
+                                            [disabled]="!actionsDoc.edit" class="form-control form-control-sm"
+                                            style="height: 18px;margin-top: 7px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="content4" class="tab-content">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12">
+                                    <app-table-catalogos [data_consultar_catalogo]="dataConsultarCatalogo"
+                                        *ngIf="dataConsultarCatalogo != undefined">
+                                    </app-table-catalogos>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="content5" class="tab-content">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12">
+                                    <app-table-documentos [payload_document]="payloadDocument">
+                                    </app-table-documentos>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=false lTipo="spBitacora"></cc-spiner-procesar>

@@ -1,0 +1,159 @@
+<div class="h-100 px-2">
+    <div class="row">
+        <div class="col-3">
+            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="periodoSelected"
+                    [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-3">
+            <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="mes_id_cc"
+                (ccItemSelecionado)="viewSelectionMesCC($event)"
+                [optionDefault]="'Selecionar opcion'" #nameMes
+                [labelDescription]="'Mes'"
+                [ngClass]="{ 'is-invalid': submitted && f.fcn_mes.errors }"
+                codigocatalogo="MES">
+            </app-cc-select-nom-catalogo>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Archivo" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [value]="fileName">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" (click)="resetInput()">
+                        <i class="fas fa-file-upload"></i> CARGAR ARCHIVO
+                    </button>
+                    <input type="file" class="d-none" id="input-marcaciones"
+                        accept="text/plain"
+                        (change)="onFileSelected($event)" #fileUpload>
+                </div>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <fieldset class="border px-3 pb-2">
+        <legend class="mb-1 w-auto">Filtros</legend>
+        <div class="row">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.nombre">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control"  type="text" maxlength="20" [(ngModel)]="filter.programa">
+                    <button class="btn btn-primary btn-sm" (click)="modalPrograma()">Buscar</button>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Dirección" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="area" class="form-control form-control-sm" [(ngModel)]="filter.area" [clearable]="true" (change)="cargarDepartamentos($event)">
+                        <ng-option disabled [value]="0" disabled>Seleccione una Dirección</ng-option>
+                        <ng-option *ngFor="let d of areas" [value]="d.id_area">{{d.are_nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="area" class="form-control form-control-sm" [(ngModel)]="filter.departamento" [clearable]="true">
+                        <ng-option disabled [value]="0" disabled>Seleccione un Departamento</ng-option>
+                        <ng-option *ngFor="let d of departamentos" [value]="d.id_departamento">{{d.dep_nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <!-- <div class="col-4">
+                <app-cc-input-group-prepend label="Area" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.area">
+                </app-cc-input-group-prepend>
+            </div> -->
+            <!-- <div class="col-4">
+                <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.departamento">
+                </app-cc-input-group-prepend>
+            </div> -->
+        </div>
+    </fieldset>
+    
+    <div class="row">
+        <div class="col">
+            <p-table [value]="tbl_registros" sortField="nombre" sortMode="single" [scrollable]="true" scrollHeight="600px" rowGroupMode="subheader" groupRowsBy="nombre" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr style="font-size: 0.75rem;">
+                        <th style="min-width:200px">Fecha</th>
+                        <th style="min-width:150px">Entrada</th>
+                        <th style="min-width:150px">Salida</th>
+                        <th style="min-width: 150px;">H. Trabajo</th>
+                        <th style="min-width:150px">HE 25%</th>
+                        <th style="min-width:150px">HE 60%</th>
+                        <th style="min-width:150px">HE 100%</th>
+                        <th style="min-width:200px">Aprueba HE</th>
+                        <th style="min-width:400px;">Observaciones</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="groupheader" let-empleado>
+                    <tr pRowGroupHeader>
+                        <td colspan="5">
+                            <span class="font-bold ml-2">{{empleado.nombre}}</span>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-empleado let-rowIndex="rowIndex">
+                    <tr [ngClass]="{'table-warning': empleado.entrada == null || empleado.salida == null, 'table-success': empleado.estado == 'A'}" style="font-size: 0.75rem;">
+                        <td style="min-width:200px;">
+                            {{empleado.fecha}}
+                        </td>
+                        <td style="min-width:150px">
+                            <input type="time" [(ngModel)]="empleado.entrada" (blur)="calcularTiempos(empleado, rowIndex, $event, 'entrada')">
+                            <!-- {{empleado.Entrada}} -->
+                        </td>
+                        <td style="min-width:150px">
+                            <input type="time" [(ngModel)]="empleado.salida" (blur)="calcularTiempos(empleado, rowIndex, $event, 'salida')">
+                            <!-- {{empleado.Salida}} -->
+                        </td>
+                        <td style="min-width: 150px;">
+                            {{ empleado.tiempo_trabajado / 60 | number:'1.2-2' }} h
+                        </td>
+                        <td style="min-width:150px">
+                            <!-- 25% -->
+                            {{ empleado.minutos_extra_25 / 60 | number:'1.2-2' }} h
+                        </td>
+                        <td style="min-width:150px">
+                            <!-- 50% -->
+                            {{ empleado.minutos_extra_60 / 60 | number:'1.2-2' }} h
+                        </td>
+                        <td style="min-width:150px">
+                            <!-- 100% -->
+                            {{ empleado.minutos_extra_100 / 60 | number:'1.2-2' }} h
+                        </td>
+                        <td style="min-width:200px">
+                            <label for="chk_he_aprobado{{ rowIndex }}">
+                                <input type="checkbox" [(ngModel)]="empleado.he_aprobado" id="chk_he_aprobado{{ rowIndex }}" (change)="actualizarRegistro(empleado)" [disabled]="empleado.minutos_extra_25 == 0 && empleado.minutos_extra_50 == 0 && empleado.minutos_extra_100 == 0 || empleado.estado == 'A'">
+                                Aprobar Horas Extras
+                            </label>
+                        </td>
+                        <td style="min-width:400px">
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="empleado.observaciones" (blur)="actualizarRegistro(empleado)" [disabled]="empleado.estado == 'A'">
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td class="EmptyTable" [attr.colspan]="3">
+                            No hay información para mostrar
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spImportarMarcas"></cc-spiner-procesar>

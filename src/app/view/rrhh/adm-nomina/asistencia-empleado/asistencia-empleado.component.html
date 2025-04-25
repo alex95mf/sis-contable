@@ -1,0 +1,629 @@
+<p-toast></p-toast>
+<p-toast position="top-left" key="tl"></p-toast>
+<p-toast position="top-right" class="custom-toast" key="tr"></p-toast>
+<p-toast position="top-center" key="tc"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+
+<div class="mt-2 mb-5">
+<app-button-radio-active titulo="Asistencia Dias Trabajados" cstyle="bg-light" icono="fas fa-file-alt"
+    filtroBoton="btnsConsultDiasTrabajados" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <mat-tab-group (selectedTabChange)="handleTabChange($event)">
+        <mat-tab label="Manual">
+            <fieldset class="px-3">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="filter.periodo"
+                                [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="filter.mes" (change)="habilitarConsulta()"
+                                [items]="cmb_meses" bindValue="id_catalogo" bindLabel="cat_nombre">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-cc-input-group-prepend label="Archivo" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" readonly [value]="fileName">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-sm btn-primary" [disabled]="btnSubirArchivo" onclick="document.getElementById('getExcelAsistencia').click()">
+                                    <i class="far fa-file-excel"></i>
+                                </button>
+                                <input type="file" class="d-none" id="getExcelAsistencia" #fileUpload (change)="handleFileInputPlantillaAsistenciasDiasTrabajados($event.target.files, $event)" type='file' accept=".xls, .xlsx">
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                            <input class="form-control"  type="text" maxlength="20" [(ngModel)]="filter.programa">
+                            <button class="btn btn-primary btn-sm" (click)="modalPrograma()">Buscar</button>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-4">
+                        <app-cc-input-group-prepend label="Dirección" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select id="area" class="form-control form-control-sm" [(ngModel)]="filter.area" [clearable]="true" (change)="cargarDepartamentos($event)">
+                                <ng-option disabled [value]="0" disabled>Seleccione una Dirección</ng-option>
+                                <ng-option *ngFor="let d of areas" [value]="d.id_area">{{d.are_nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-4">
+                        <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select id="area" class="form-control form-control-sm" [(ngModel)]="filter.departamento" [clearable]="true">
+                                <ng-option disabled [value]="0" disabled>Seleccione un Departamento</ng-option>
+                                <ng-option *ngFor="let d of departamentos" [value]="d.id_departamento">{{d.dep_nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </fieldset>
+    
+   
+    <!-- <pre>{{cargaExcel}}</pre> -->
+    <div class="mt-2">
+        
+        <!-- <p-table [value]="products"
+            [(selection)]="selectedProducts5" 
+            dataKey="code" 
+            [rowSelectable]="isRowSelectable" 
+            [tableStyle]="{'min-width': '50rem'}"> -->
+            
+            <div class="row">
+                <div class="col-sm-12" style="overflow-x:auto;overflow-y:auto;">
+                    <p-table [value]="objGetDiasTrabajados"
+                        [rows]="rows"
+                        [loading]="loading"
+                        [totalRecords]="totalRecords"
+                        scrollDirection="both" [scrollable]="true" scrollHeight="400px"
+                        (onHeaderCheckboxToggle)="selectRow($event)"
+                        selectionMode="multiple"
+                        editMode="row"
+                        >
+                         <!-- (onRowSelect)="onRowSelectDiaTrabajado($event)" -->
+                         <ng-template pTemplate="caption">
+                             <div style="font-size: 12px; "  class="flex align-items-center justify-content-between">
+                                 Lista de Días Trabajados
+                             </div>
+                         </ng-template>
+                         <ng-template pTemplate="header">
+                             <tr style="font-size: 12px;">
+                                 <!-- <th>Acciones</th> -->
+                                 <!-- <th style="width: 3rem"></th> -->
+                                 <th style="width: 3rem" pFrozenColumn>
+                                     <p-tableHeaderCheckbox
+                                     [disabled]="disableHeaderCheckbox"
+                                     ></p-tableHeaderCheckbox>
+                                     <!-- <p-checkbox (click)="selectRow(e.checked)" #e></p-checkbox> -->
+                                 </th>
+                                 <th style="width: 240px" pFrozenColumn>Empleado</th>
+                                 <th [hidden]="true">Cod.</th>
+                                 <th style="width: 120px;">No. Identificacion</th>
+                                 <th style="width: 120px;">Sueldo</th>
+                                 <th style="width: 120px">Estado</th>
+                                 <th style="width: 120px">Generado</th>
+                                 <th style="width: 120px">Fecha Ingreso</th>
+                                 <th style="width: 120px">Mes ha Generar</th>
+                                 <th style="width: 120px">Días Trabajados</th>
+                                 <th style="width: 120px">Hist. F/P</th>
+                                 <th style="width: 120px">Horas Faltas/Permisos</th>
+                                 <th style="width: 120px">Horas Restadas</th>
+                                 <th style="width: 120px">Horas Trabajadas</th>
+                                 <th style="width: 120px"><strong>Horas al 25%</strong></th>
+                                 <th style="width: 120px"><strong>Horas al 50%</strong></th>
+                                 <th style="width: 120px"><strong>Horas al 60%</strong></th>
+                                 <th style="width: 120px"><strong>Horas al 100%</strong></th>
+                                 <!-- <th style="width: 120px">Horas Efectivas</th> -->
+                                 <!-- <th style="width: 120px">Días/Horas Efectivas</th> -->
+                             </tr>
+                         </ng-template>
+                         <!-- [ngStyle]="{'background-color':det_dia_trabajado.ditr_modo_generacion == 'Automática' ? 'aqua' : 'gold'}" -->
+                
+                         <ng-template pTemplate="body" let-det_dia_trabajado let-editing="editing">
+                             <tr
+                             class="p-selectable-row" style="font-size: 12px;">
+                             <!-- (click)="selectRow(det_dia_trabajado)"
+                             [pSelectableRow]="det_dia_trabajado" -->
+                                 
+                                 <!-- <td>
+                                     <p-tableCheckbox 
+                                     [value]="det_dia_trabajado"
+                                    
+                                     ></p-tableCheckbox>
+                                 </td> -->
+                
+                
+                                 <!-- <td *ngIf="(det_dia_trabajado.estado_generacion == 'no_generada' && det_dia_trabajado.ditr_modo_generacion == 'Automática'&& det_dia_trabajado.carga_excel == false );else webSIMarcar">
+                                     <button pButton pRipple icon="pi pi-times" title="No se puede marcar porque se ha subido plantilla"
+                                     disabled="true"
+                                     class="p-button-rounded p-button-danger mr-2"></button>
+                                 </td>
+                                 <ng-template #webSIMarcar>
+                                     <td *ngIf="(det_dia_trabajado.estado_generacion != 'generada');else noDisponibleCheckBox">
+                                         <p-tableCheckbox (click)="selectRow(det_dia_trabajado,$event)"
+                                          [value]="det_dia_trabajado"
+                                          [disabled]="det_dia_trabajado.estado_generacion == 'generada'"
+                                          ></p-tableCheckbox>
+                
+                                     </td>
+                                 </ng-template>
+                                 <ng-template #noDisponibleCheckBox>
+                                     <td>
+                                         <button pButton pRipple icon="pi pi-check" title="Generada"
+                                         disabled="true"
+                                         class="p-button-rounded p-button-success mr-2"></button>
+                                     </td>
+                                 </ng-template> -->
+                
+                                 <!-- <td *ngIf="( det_dia_trabajado.estado_generacion == 'no_generada' && det_dia_trabajado.ditr_modo_generacion == 'Automática' && det_dia_trabajado.carga_excel == false);else noDisponibleCheckBoxIconCheck">
+                                     <button pButton pRipple icon="pi pi-times" title="No se puede marcar porque se ha subido plantilla"
+                                     disabled="true"
+                                     class="p-button-rounded p-button-danger mr-2"></button>
+                                 </td>
+                                 <ng-template #noDisponibleCheckBoxIconCheck>
+                                     <td *ngIf="( det_dia_trabajado.estado_generacion == 'generada' );else mostrarCheckButton">
+                                         <button pButton pRipple icon="pi pi-check" title="Generada"
+                                         disabled="true"
+                                         class="p-button-rounded p-button-success mr-2"></button>
+                                     </td>
+                                 </ng-template>
+                                 <ng-template #mostrarCheckButton>
+                                     <td *ngIf="(det_dia_trabajado.estado_generacion != 'generada')">
+                                         <p-tableCheckbox (click)="selectRow(det_dia_trabajado,$event)"
+                                         [value]="det_dia_trabajado"
+                                         [disabled]="det_dia_trabajado.estado_generacion == 'generada'"
+                                         ></p-tableCheckbox>
+                                     </td>
+                                 </ng-template> -->
+                
+                                 <td *ngIf="( cargaExcel == true && 
+                                 det_dia_trabajado.estado_generacion == 'no_generada' &&  
+                                 det_dia_trabajado.ditr_modo_generacion == 'Automática' 
+                                     );else mostrarCheckAlternateButton">
+                                     <button pButton pRipple icon="pi pi-times" title="No se puede marcar porque se ha subido plantilla"
+                                     disabled="true"
+                                     class="p-button-rounded p-button-danger mr-2"></button>
+                                 </td>
+                                 <ng-template #mostrarCheckAlternateButton>
+                                     <td pFrozenColumn *ngIf="( (cargaExcel == false || cargaExcel == true) && det_dia_trabajado.estado_generacion == 'generada' );else mostrarCheckButton">
+                                         <button pButton pRipple icon="pi pi-check" title="Generada"
+                                         disabled="true"
+                                         class="p-button-rounded p-button-success mr-2"></button>
+                                     </td>
+                                 </ng-template>
+                                 <ng-template #mostrarCheckButton>
+                                     <td pFrozenColumn *ngIf="(cargaExcel == true || cargaExcel == false);">
+                                         <p-tableCheckbox (click)="selectRow(det_dia_trabajado,$event)"
+                                         [value]="det_dia_trabajado"
+                                         [disabled]="det_dia_trabajado.estado_generacion == 'generada' 
+                                         ||(cargaExcel == true && det_dia_trabajado.ditr_modo_generacion == 'Automática' )"
+                                         ></p-tableCheckbox>
+                                     </td>
+                                 </ng-template>
+                                 <td style="width: 240px" class="col-nombre" pFrozenColumn>
+                                    <div class="row" style="font-size: 11px; ">
+                                       <strong>
+                                           {{ det_dia_trabajado.emp_primer_apellido }} {{ det_dia_trabajado.emp_segundo_apellido }},
+                                           {{ det_dia_trabajado.emp_primer_nombre }} {{ det_dia_trabajado.emp_segundo_nombre }}
+                                       </strong>
+                                    </div>
+                                </td>
+                                <td style="width: 120px;"><strong>{{det_dia_trabajado.emp_identificacion }}</strong></td>
+                                <td style="width: 120px;"><strong>${{det_dia_trabajado.sld_salario_minimo}}</strong></td>
+                                
+                                 <td [hidden]="true">{{det_dia_trabajado.id_dia_trabajado}}</td>
+                                
+                                 <td class="text-center" style="width: 120px"><i placement="bottom" [ngbTooltip]="det_dia_trabajado.estado_generacion == 'generada' ? 'Generado' : det_dia_trabajado.estado_generacion == 'por_generar' ? 'Por Generar' : 'No Generado'" [class]="det_dia_trabajado.estado_generacion == 'generada' ? 'fas fa-circle text-primary' : det_dia_trabajado.estado_generacion == 'por_generar' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger'"></i>
+                                     {{det_dia_trabajado.estado_generacion == 'generada' ? 'Generado' :  det_dia_trabajado.estado_generacion == 'por_generar' ? 'Por Generar' : 'No Generado'}}
+                                 </td>
+                                 <td style="width: 120px"><i placement="bottom" [ngbTooltip]="det_dia_trabajado.ditr_modo_generacion == 'Automática' ? 'Automática' : 'Plantilla'" [class]="det_dia_trabajado.ditr_modo_generacion == 'Automática' ? 'fas fa-circle text-warning'  : 'fas fa-circle text-primary'"></i>
+                                     
+                                     {{det_dia_trabajado.ditr_modo_generacion}}
+                                 
+                             </td>
+                                 
+                                 <td style="width: 120px">{{det_dia_trabajado.emp_fecha_ingreso | date:'yyyy-MM-dd' }}</td>
+                                 <td style="width: 120px">{{det_dia_trabajado.mes_generar }}</td>
+                                 <td style="width: 120px" *ngIf="(det_dia_trabajado.estado_generacion == 'generada');                  
+                                    else editDiasTrabajados">{{det_dia_trabajado.ditr_dias_trabajados}}</td>
+                                 <ng-template #editDiasTrabajados>
+                                    <td style="width: 120px" pEditableColumn>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="number" style="width: 40px;"
+                                                    (change)="calcDiasTrabajados(det_dia_trabajado)"
+                                                    onkeypress="return event.charCode >= 48" min="0" max="30"
+                                                    [(ngModel)]="det_dia_trabajado.ditr_dias_trabajados">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{det_dia_trabajado.ditr_dias_trabajados}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                 </ng-template>
+                                 <td style="width: 120px">
+                                     <button pButton pRipple icon="pi pi-list" title="Historial Faltas y Permisos"
+                                     (click)="getFaltasPermisosAfectanRolConsult(det_dia_trabajado)"
+                                     class="p-button-rounded p-button-info mr-2"></button>
+                                  </td> 
+                                 <td style="width: 120px">{{det_dia_trabajado.ditr_horas_en_contra_falta_permisos}}</td>
+                                 <td style="width: 120px">{{det_dia_trabajado.ditr_horas_restadas}}</td>
+                                 <td style="width: 120px"><strong>{{det_dia_trabajado.ditr_horas_trabajados}}</strong></td>
+                                
+                                 <td style="width: 120px" *ngIf="(det_dia_trabajado.estado_generacion == 'generada');                  
+                                                             else editTmp25"><strong>{{ det_dia_trabajado.ditr_horas_25 }}</strong></td>
+                                 <ng-template #editTmp25>
+                                     <td style="width: 120px" pEditableColumn>
+                                         <p-cellEditor>
+                                             <ng-template pTemplate="input">
+                                               <input pInputText type="number" style="width: 80px;"
+                                                 (change)="horas25(det_dia_trabajado)" min="0" 
+                                                 [(ngModel)]="det_dia_trabajado.ditr_horas_25" />
+                                             </ng-template>
+                                             <ng-template pTemplate="output">
+                                               {{ det_dia_trabajado.ditr_horas_25 }}
+                                             </ng-template>
+                                         </p-cellEditor>
+                                     </td>
+                                 </ng-template>
+                                 <!-- onkeypress="return event.charCode >= 48" -->
+                                 
+                                 <td style="width: 120px" *ngIf="(det_dia_trabajado.estado_generacion == 'generada');                  
+                                                             else editTmp50"><strong>{{ det_dia_trabajado.ditr_horas_50 }}</strong></td>
+                                 <ng-template #editTmp50>
+                                     <td style="width: 120px" pEditableColumn>
+                                         <p-cellEditor>
+                                             <ng-template pTemplate="input">
+                                               <input pInputText type="number" style="width: 80px;" 
+                                               (change)="horas50(det_dia_trabajado)"  min="0" 
+                                                 [(ngModel)]="det_dia_trabajado.ditr_horas_50" />
+                                             </ng-template>
+                                             <ng-template pTemplate="output">
+                                               {{ det_dia_trabajado.ditr_horas_50 }}
+                                             </ng-template>
+                                         </p-cellEditor>
+                                         <!-- onkeypress="return event.charCode >= 48" -->
+                                     </td>
+                                 </ng-template>
+                                 <td style="width: 120px" *ngIf="(det_dia_trabajado.estado_generacion == 'generada');                  
+                                                             else editTmp60"><strong>{{ det_dia_trabajado.ditr_horas_60 }}</strong></td>
+                                 <ng-template #editTmp60>
+                                     <td style="width: 120px" pEditableColumn>
+                                         <p-cellEditor>
+                                             <ng-template pTemplate="input">
+                                               <input pInputText type="number" style="width: 80px;" 
+                                               (change)="horas60(det_dia_trabajado)"  min="0" 
+                                                 [(ngModel)]="det_dia_trabajado.ditr_horas_60" />
+                                             </ng-template>
+                                             <ng-template pTemplate="output">
+                                               {{ det_dia_trabajado.ditr_horas_60 }}
+                                             </ng-template>
+                                         </p-cellEditor>
+                                         <!-- onkeypress="return event.charCode >= 48" -->
+                                     </td>
+                                 </ng-template>
+                
+                                 
+                                 <td style="width: 120px" *ngIf="(det_dia_trabajado.estado_generacion == 'generada');                  
+                                                             else editTmp100"><strong>{{ det_dia_trabajado.ditr_horas_100 }}</strong></td>
+                                 <ng-template #editTmp100>
+                                     <td style="width: 120px" pEditableColumn>
+                                         <p-cellEditor>
+                                             <ng-template pTemplate="input">
+                                               <input pInputText type="number" style="width: 40px;"
+                                               (change)="horas100(det_dia_trabajado)" 
+                                               onkeypress="return event.charCode >= 48" min="0" 
+                                                 [(ngModel)]="det_dia_trabajado.ditr_horas_100" />
+                                             </ng-template>
+                                             <ng-template pTemplate="output">
+                                               {{ det_dia_trabajado.ditr_horas_100 }}
+                                             </ng-template>
+                                         </p-cellEditor>
+                                     </td>
+                                 </ng-template>
+                                 
+                                 <!-- <td style="width: 120px">
+                                     <strong>{{det_dia_trabajado.ditr_horas_efectivas}}</strong>
+                                 </td>
+                                 <td style="width: 120px">{{det_dia_trabajado.ditr_dias_efectivos + ' D/' + det_dia_trabajado.ditr_horas_efectivos +' H'}}</td> -->
+                              
+                             </tr>
+                         </ng-template>
+                         <ng-template pTemplate="emptymessage">
+                             <tr>
+                                 <td class="EmptyTable" [attr.colspan]="16">
+                                     No hay información para mostrar
+                                 </td>
+                             </tr>
+                         </ng-template>
+                     </p-table>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- <div class="mt-2">
+        <div class="row p-2 mb-3 mt-2 content-tabla-general">
+            <table class="table">
+                <thead>
+                    <tr style="width: 100%;">
+                        <th style="width: 15%; ">CÉDULA</th>
+                        <th style="width: 10%; ">ID PERSONA</th>
+                        <th style="width: 30%; ">NOMBRES</th>
+                        <th style="width: 15%; ">DIAS LABORADOS</th>
+                        <th style="width: 15%; ">DIAS HABILES</th>
+                        <th style="width: 15%; ">HORAS TRABAJADAS</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="DiasTrabajados.length > 0 else TablaVacia">
+                    <tr *ngFor="let item of DiasTrabajados">
+                        <td>{{ item.empleado[0].emp_identificacion }}</td>
+                        <td>{{ item.empleado[0].id_empleado }}</td>
+                        <td>{{ item.empleado[0].emp_full_nombre }}</td>
+                        <td>{{ item.dias_trabajados }}</td>
+                        <td>{{ item.dias_efectivos }}</td>
+                        <td>{{ item.horas_trabajados }}</td>
+                    </tr>
+                </tbody>
+                
+
+                <ng-template #TablaVacia>
+                    <tbody>
+                        <tr class="body-empty"  >
+                            <td colspan="6" >no hay datos para mostrar</td> 
+                        </tr>
+                    </tbody>
+                </ng-template>
+            </table>
+        </div>
+    </div> -->
+<!-- </div>
+
+<ng-template #PermisoVerDenegado>
+    <app-permiso-denegado></app-permiso-denegado>
+</ng-template> -->
+        </mat-tab>
+        <mat-tab label="Carga Biometrico">
+            <ng-template matTabContent>
+                <app-biometricos></app-biometricos>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Marcaciones">
+            <ng-template matTabContent>
+                <app-importar></app-importar>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Atrasos">
+            <ng-template matTabContent>
+                <app-atrasos></app-atrasos>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Horas Extras">
+            <fieldset class="px-3">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="filter.periodo"
+                                [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="filter.mes" 
+                                [items]="cmb_meses" bindValue="id_catalogo" bindLabel="cat_nombre">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-cc-input-group-prepend label="Archivo" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" readonly [value]="fileName">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-sm btn-primary" [disabled]="btnSubirArchivoHorasExtra" onclick="document.getElementById('getExcelHorasExtra').click()">
+                                    <i class="far fa-file-excel"></i>
+                                </button>
+                                <input type="file" class="d-none" id="getExcelHorasExtra" #fileUpload (change)="handleFileInputPlantillaAsHorasExtra($event.target.files, $event)" type='file' accept=".xls, .xlsx">
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                            <input class="form-control"  type="text" maxlength="20" [(ngModel)]="filter.programa">
+                            <button class="btn btn-primary btn-sm" (click)="modalPrograma()">Buscar</button>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-4">
+                        <app-cc-input-group-prepend label="Dirección" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select id="area" class="form-control form-control-sm" [(ngModel)]="filter.area" [clearable]="true" (change)="cargarDepartamentos($event)">
+                                <ng-option disabled [value]="0" disabled>Seleccione una Dirección</ng-option>
+                                <ng-option *ngFor="let d of areas" [value]="d.id_area">{{d.are_nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-4">
+                        <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select id="area" class="form-control form-control-sm" [(ngModel)]="filter.departamento" [clearable]="true">
+                                <ng-option disabled [value]="0" disabled>Seleccione un Departamento</ng-option>
+                                <ng-option *ngFor="let d of departamentos" [value]="d.id_departamento">{{d.dep_nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-4">
+                        <app-cc-input-group-prepend label="Tipo de Contratos" styleSpan="size-span-campo">
+                            <ng-select id="tipo_contratos" class="form-control form-control-sm" [(ngModel)]="tipoContrato" [clearable]="true" >
+                                <ng-option disabled [value]="0" disabled>Seleccione un tipo</ng-option>
+                                <ng-option *ngFor="let tc of tipoContratos" [value]="tc.id_catalogo">{{tc.cat_nombre }}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div> -->
+            </fieldset>
+
+            <div class="mt-2">
+
+                <div class="row">
+                    <div class="col-sm-12"  style="overflow-x:auto;max-height: 450px; overflow-y: auto;">
+                        <p-table [value]="empHorasExtraEncontrados"
+                            [lazy]="true"
+                            [paginator]="false"
+                            responsiveLayout="scroll"
+                            [rows]="rows"
+                            [loading]="loading">
+                            <ng-template pTemplate="caption">
+                                <div class="flex align-items-center justify-content-between" style="font-size: 12px; ">
+                                    Lista de Empleados con Horas Extra
+                                   
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr style="font-size: 12px; ">
+                                    <th>#</th>
+                                    <th>Cédula</th>
+                                    <th>Nombre Empleado</th>
+                                    <th>Departamento</th>
+                                    <th>Horas Extra 25</th>
+                                    <th>Horas Extra 50</th>
+                                    <th>Horas Extra 60</th>
+                                    <th>Horas Extra 100</th>
+                                    <th *ngIf="!consultaHorasExtra">Acciones</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-det_horas_extra let-editing="editing">
+                                <tr style="font-size: 11px; " [ngClass]="{'table-danger': det_horas_extra.horas_extra_25 <= 0 &&  det_horas_extra.horas_extra_50 <= 0 &&  det_horas_extra.horas_extra_60 <= 0 &&  det_horas_extra.horas_extra_100 <= 0}">
+                                    <td>{{det_horas_extra.linea}}</td>
+                                    <td>{{det_horas_extra.emp_identificacion}}</td>
+                                    <td>{{det_horas_extra.emp_full_nombre}}</td>
+                                    <td>{{det_horas_extra.departamento == null ? det_horas_extra.dep_nombre : det_horas_extra.departamento  }}</td>
+                                   
+                                    <td pEditableColumn>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input" *ngIf="!det_horas_extra.consulta">
+                                                <input pInputText type="number" (blur)="onColumnEditComplete($event.target.value, det_ingreso_descuento)"
+                                                 [(ngModel)]="det_horas_extra.horas_extra_25"
+                                                 [min]="0"
+                                                 required>
+                                            </ng-template>
+                                            <ng-template pTemplate="output" >
+                                                {{det_horas_extra.horas_extra_25 }}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td pEditableColumn>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input" *ngIf="!det_horas_extra.consulta">
+                                                <input pInputText type="number" (blur)="onColumnEditComplete($event.target.value, det_ingreso_descuento)"
+                                                 [(ngModel)]="det_horas_extra.horas_extra_50"
+                                                 [min]="0"
+                                                 required>
+                                            </ng-template>
+                                            <ng-template pTemplate="output" >
+                                                {{det_horas_extra.horas_extra_50 }}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td pEditableColumn>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input" *ngIf="!det_horas_extra.consulta">
+                                                <input pInputText type="number" (blur)="onColumnEditComplete($event.target.value, det_ingreso_descuento)"
+                                                 [(ngModel)]="det_horas_extra.horas_extra_60"
+                                                 [min]="0"
+                                                 required>
+                                            </ng-template>
+                                            <ng-template pTemplate="output" >
+                                                {{det_horas_extra.horas_extra_60 }}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td pEditableColumn>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input" *ngIf="!det_horas_extra.consulta">
+                                                <input pInputText type="number" (blur)="onColumnEditComplete($event.target.value, det_ingreso_descuento)"
+                                                 [(ngModel)]="det_horas_extra.horas_extra_100"
+                                                 [min]="0"
+                                                 required
+                                                 >
+                                            </ng-template>
+                                            <ng-template pTemplate="output" >
+                                                {{det_horas_extra.horas_extra_100 }}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td *ngIf="!consultaHorasExtra">
+                                        <button  class="btn btn-danger btn-sm" (click)="deleteDataHorasExtra(det_horas_extra)"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td class="EmptyTable" [attr.colspan]="9">
+                                        No hay información para mostrar
+                                    </td>
+                                </tr>
+                            </ng-template>
+        
+                        </p-table>
+                        <p-table *ngIf="verNoEncontrados"
+                            [value]="empHorasExtraNoEncontrados"
+                            [lazy]="true"
+                            [paginator]="false"
+                            responsiveLayout="scroll"
+                            [rows]="rows"
+                            [loading]="loading">
+                            <ng-template pTemplate="caption">
+                                <div class="flex align-items-center justify-content-between" style="font-size: 12px; ">
+                                    Lista de Empleados No Encontrados
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr style="font-size: 12px; ">
+                                    <th colspan="1"></th>
+                                    <th>Cédula</th>
+                                    <th>Nombre Empleado Archivo</th>
+                                    <th>Departamento</th>
+                                    <th>Horas Extra</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-det_no_encontrados let-editing="editing">
+                                <tr  [pSelectableRow]="det_no_encontrados" style="font-size: 11px;" >
+                                    <td>
+                                     
+                                    </td>
+                                    <td>{{det_no_encontrados.cedula}}</td>
+                                    <td>{{det_no_encontrados.nombres}}</td>
+                                    <td>{{det_no_encontrados.departamento}}</td>
+                                    <td>{{det_no_encontrados.horas_extra}}</td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td class="EmptyTable" [attr.colspan]="9">
+                                        No hay información para mostrar
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            
+                        </p-table>
+                    </div>
+                </div>
+        
+        
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+ <!-- <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado"> -->
+
+    
+
+</app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spComprasProv"></cc-spiner-procesar>

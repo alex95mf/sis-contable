@@ -1,0 +1,153 @@
+<div class="">
+    <app-button-radio-active [titulo]="fTitle" filtroBoton="btnEncargadoForm" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="row my-2">
+            <div class="col">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Código" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.codigo">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.nombre" >
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="aplicarFiltros()">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            
+        </div>
+        <div class="row my-2" *ngIf="validacionModal">
+            <div class="col" >
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <!-- <th style="width: 4%;">Estado</th> -->
+                            <th style="width: 12.5%;">Código</th>
+                            <th class="text-center">Nombre</th>
+                            <th>Tipo</th>
+                            <th>Grupo</th>
+                            <th>Clase</th>         
+                        
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!encargados.length">
+                            <td colspan="6" class="text-center"><h6>No hay resultados</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let dt of encargados, let i = index">
+                            <tr>
+                                
+                                <td class="text-center">{{ dt.codigo }}</td>
+                                <td class="text-center" >{{ dt.nombre }} </td>
+                                <td class="text-center">{{ dt.tipo}}</td>
+                                <td class="text-center">{{ dt.grupo}}</td>
+                                <td class="text-center">{{ dt.clase}}</td>
+                                
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar contribuyente">
+                                            <i class="fas fa-hand-pointer"></i>
+                                        </button>
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>                    
+            </div>
+                
+            <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="+(paginate.page)-1"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>           
+
+        </div>
+
+
+        <div class="row my-2" *ngIf="!validacionModal">
+            <div class="col" >
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <!-- <th style="width: 4%;">Estado</th> -->
+                            <th style="width: 12.5%;">Codigo</th>
+                            <th style="width: 17.5%;">Nombre</th>
+                            <th>Tipo</th>
+                            <th>Descripcion general</th>        
+                        
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!encargados.length">
+                            <td colspan="6" class="text-center"><h6>No hay resultados</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let dt of encargados, let i = index">
+                            <tr>
+                                
+                                <td class="text-center">{{ dt.codigo }}</td>
+                                <td class="text-center">{{ dt.nombre }} </td>
+                                <td class="text-center">{{ dt.tipo}}</td>
+                                <td class="text-center">{{ dt.descripcion_general}}</td>
+                                
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar contribuyente">
+                                            <i class="fas fa-hand-pointer"></i>
+                                        </button>
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>                    
+            </div>
+                
+            <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="+(paginate.page)-1"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginatePresupuesto($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>           
+
+
+
+        </div>
+
+        
+        
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

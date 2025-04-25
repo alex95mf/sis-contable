@@ -1,0 +1,27 @@
+.col-num {
+    left: 0px;
+    position: sticky;
+    background-color: whitesmoke
+}
+
+.col-doc {
+    left: 37.5px;
+    position: sticky;
+    background-color: whitesmoke;
+}
+
+.col-contr {
+    left: 187.5px;
+    position: sticky;
+    background-color: whitesmoke;
+}
+
+.col-rec {
+    left: 337.5px;
+    position: sticky;
+    background-color: whitesmoke;
+}
+
+.fixed-header {
+    z-index: 99999 !important;
+}

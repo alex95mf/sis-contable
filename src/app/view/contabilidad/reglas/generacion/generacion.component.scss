@@ -1,0 +1,45 @@
+// .tab_container .tab-content p,
+// .tab_container .tab-content h3 {
+//     -webkit-animation: fadeInScale 0.7s ease-in-out;
+//     -moz-animation: fadeInScale 0.7s ease-in-out;
+//     animation: fadeInScale 0.7s ease-in-out;
+// }
+ 
+// .tab_container .tab-content h3 {
+//     text-align: center;
+// }
+ 
+// .tab_container [id^="tab"]:checked+label {
+//     background-color: var(--clr-action);
+//     color: var(--clr-white);
+// }
+ 
+// .tab_container [id^="tab"]:checked+label .fa {
+//     color: #404A63;
+// }
+
+.tab-label{
+    background-color: #fff;
+    border-radius: 4px;
+    color: var(--clr-base);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 24px;
+  
+  
+    &:hover{
+        background-color: var(--clr-gray-03);
+        text-decoration: none;
+    }
+  }
+  .tab-label.active {
+    background-color: var(--clr-action);
+    color: var(--clr-white);
+  }
+
+  .input-group_saldo{
+    height: 44px !important;
+    // padding-top: 5px !important;
+    // padding-bottom: 5px !important;
+}

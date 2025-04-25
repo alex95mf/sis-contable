@@ -1,0 +1,102 @@
+
+    <app-button-radio-active-new [titulo]="fTitle" cstyle="bg-light" styleTitle="text-dark" icono="fas fa-chart-line-down"
+        filtroBoton="btnsBienesMovimientoDepreciacion" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+      
+
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Filtros</legend>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                            <input type="date" class="form-control" [(ngModel)]="depreciacion.fecha" readonly> 
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" [(ngModel)]="depreciacion.num_documento" readonly>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" [(ngModel)]="depreciacion.estado" readonly>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+
+                <div class="row m-0">
+                    <!-- <div class="col-4">
+                        <app-cc-input-group-prepend label="Tipo de Bienes" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select [items]="tipoBienes" bindValue="valor" bindLabel="descripcion" [clearable]="false" class="form-control" [(ngModel)]="filter.tipo"></ng-select>
+                        </app-cc-input-group-prepend>
+                    </div> -->
+                    <div class="col-12 col-md-8 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold">   
+                            <textarea rows="3" class="form-control" placeholder="Ingrese una Observacion" [(ngModel)]="depreciacion.observacion"></textarea>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0 text-right">
+                        <button class="btn btn-sm btn-primary" matTooltip="CONSULTAR BIENES" (click)="consultar()"><i class="fas fa-search"></i> CONSULTAR</button>
+                        <button class="btn btn-sm btn-danger ml-1" matTooltip="BORRAR" (click)="clearFilter()"><i class="fas fa-eraser"></i></button>
+                    </div>
+                </div>
+
+
+        </fieldset>
+
+        <div class="row m-0">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+                            <tr>
+                                <th>#</th>
+                                <th>Codigo</th>
+                                <th class="w-25">Bien</th>
+                                <th class="text-right">Costo</th>
+                                <th class="text-right">Depreciación</th>
+                                <th class="text-right">Valor Actual</th>
+                                <th class="text-right">Valor Depreciado</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!depreciacion.detalles.length">
+                                <td colspan="5" class="text-center">
+                                    <p class="h6">No hay bienes por mostrar</p>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let bien of depreciacion.detalles; let i = index">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ bien.codigoproducto ?? bien.producto.codigoproducto }}
+                                    <br>
+                                    <small class="text-muted">Id:{{ bien.id_producto ?? bien.fk_producto }}</small>
+                                </td>
+                                <td>
+                                    {{ bien.nombre }}<br>
+                                    <small class="text-muted">{{ bien.marca ?? 'Sin marca' }} - {{ bien.modelo ?? 'Sin modelo' }}</small>
+                                </td>
+                                <td class="text-right">$ {{ bien.costo ?? bien.valor_costo | number:'1.2-2' }}</td>
+                                <td class="text-right">$ {{ bien.valor_depreciacion | number:'1.2-2' }}</td>
+                                <td class="text-right">$ {{ bien.valor_actual | number:'1.2-2' }}</td>
+                                <td class="text-right">$ {{ bien.valor_depreciado | number:'1.2-2' }}</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    <mat-paginator 
+                        showFirstLastButtons
+                        [pageIndex]="paginate.pageIndex"
+                        [length]="paginate.length"
+                        [pageSize]="paginate.perPage"
+                        [pageSizeOptions]="paginate.pageSizeOptions"
+                        (page)="changePaginate($event)"
+                        aria-label="Select page"
+                    ></mat-paginator>
+                </div>
+            </div>
+        </div>
+
+    </app-button-radio-active-new>
+
+
+<cc-spiner-procesar [ltexto]="msgSpinner"></cc-spiner-procesar>

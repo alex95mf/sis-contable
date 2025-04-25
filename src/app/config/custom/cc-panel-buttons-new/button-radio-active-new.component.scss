@@ -1,0 +1,60 @@
+.disabled {
+  cursor: not-allowed;
+}
+
+.panding_span {
+  padding-right: 0.15em;
+}
+
+.button_margin {
+  margin-left: 0.25rem !important;
+  border-radius: 0.25rem !important;
+  border-top-left-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.25rem !important;
+  border-bottom-left-radius: 0.25rem !important;
+}
+
+.card-header {
+  background-color: var(--clr-gray-03);
+  box-shadow: 0 4px 4px 0 rgb(0,0,0,0.10);
+  margin-bottom: 20px;
+  padding: 8px 20px;
+}
+
+.table-title{
+  color: var(--clr-base);
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  margin: 0;
+}
+.btn-action{
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  padding: 5px 12px;
+}
+.btn-action_text{
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+@media screen and(max-width: 700px) {
+  .card-header{
+    overflow-y: overlay;
+    position: relative;
+
+    table{
+      min-width: 100%;
+
+      tr{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    button{
+      width: max-content;
+    }
+  }
+}

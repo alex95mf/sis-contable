@@ -1,0 +1,348 @@
+<div class="mt-4">
+  <app-button-radio-active titulo="Registro de Contribuyente" filtroBoton="btnsContribuyente"
+    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+    icono="fas fa-file-alt">
+
+    <div class="row mr-2 mt-2">
+
+      <div>
+        <h5 style="font-size: 20px;">
+          {{contribuyente.tipo_documento != 0 ? contribuyente.tipo_documento : 'Identificación'}}: </h5>
+      </div>
+      <div class="col-2">
+        <h5 style="font-size: 20px;">{{contribuyente.num_documento ? contribuyente.num_documento : ''}}</h5>
+
+      </div>
+
+      <div>
+        <h5 style="font-size: 20px;"> Contribuyente: </h5>
+      </div>
+      <div class="col-6">
+        <h5 *ngIf="!validadorNt && !validadorJr" style="font-size: 20px;">
+          {{contribuyente.primer_nombre  ? contribuyente.primer_nombre  : ''}}</h5>
+
+        <h5 *ngIf="validadorNt" style="font-size: 20px;">
+          {{contribuyente.primer_nombre !='' && contribuyente.primer_nombre != null  ? contribuyente.primer_nombre+ ' ' + contribuyente.segundo_nombre + ' ' + contribuyente.primer_apellido + ' ' + contribuyente.segundo_apellido : ''}}
+        </h5>
+
+        <h5 *ngIf="validadorJr" style="font-size: 20px;">
+          {{contribuyente.razon_social ? contribuyente.razon_social : ''}}</h5>
+      </div>
+
+    </div>
+    <fieldset class="border mt-2 mb-2 pb-2 px-2">
+      <legend class="w-auto ml-1 bg-dark">Filtros</legend>
+      <div class="row mt-3">
+        <div class="col-4">
+          <app-cc-input-group-prepend label="Tipo de Contribuyente" styleSpan="size-span-campo font-weight-bold">
+
+            <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+              [(ngModel)]="contribuyente.contribuyente" (ngModelChange)="validacionTipoPerson($event)"
+              [readonly]="!actions.new || validacionBusquedaContri">
+              <ng-option [value]="0" disabled>Ingrese el tipo de contribuyente</ng-option>
+              <ng-option *ngFor="let doc of catalog.tipo_contribuyente" [value]="doc.name">{{doc.name}}</ng-option>
+            </ng-select>
+          </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+          <app-cc-input-group-prepend label="Tipo Doc." styleSpan="size-span-campo font-weight-bold">
+            <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+              (ngModelChange)="changeMaxlength($event)" [(ngModel)]="contribuyente.tipo_documento"
+              [readonly]="!actions.new || validacionBusquedaContri">
+              <ng-option [value]=0 disabled>Seleccione documento</ng-option>
+              <ng-option *ngFor="let d of catalog.documents" [value]="d.valor">{{ d.valor }}</ng-option>
+            </ng-select>
+          </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+          <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo font-weight-bold">
+            <input id="num_documento" type="text" class="form-control form-control-sm" placeholder="Número del documento"
+              [(ngModel)]="NoDocumento" maxlength="{{NOCedula}}" [readonly]="!actions.new || validacionBusquedaContri">
+            <button class="btn btn-primary btn-sm" ngbTooltip="Buscar" (click)="validacionContribu()"><i
+                class="fas fa-search"></i></button>
+          </app-cc-input-group-prepend>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset *ngIf="regNatural" class="border mt-2 mb-2 pb-2 px-2">
+      <legend class="w-auto ml-1 bg-dark">Datos del Contribuyente</legend>
+        <div class="row">
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Cédula/Pasaporte" styleSpan="size-span-campo font-weight-bold">
+              <input class="form-control" type="text" [(ngModel)]="contribuyente.cedula" maxlength="{{NOCedula}}"
+                [readonly]="!validadorNt || validadorRucCedu" />
+            </app-cc-input-group-prepend>
+          </div>
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Obligado a llevar contabilidad" styleSpan=" font-weight-bold">
+              <!-- <input class="form-control" type="text" [(ngModel)]="contribuyente.obligado_contabilidad" /> -->
+              <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                [(ngModel)]="contribuyente.obligado_contabilidad" [readonly]="!validadorNt">
+                <ng-option [value]=0 disabled>Seleccione</ng-option>
+                <ng-option *ngFor="let val of estandarVariables" [value]="val">{{val}}</ng-option>
+              </ng-select>
+            </app-cc-input-group-prepend>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Ruc" styleSpan="size-span-campo font-weight-bold">
+              <input class="form-control" type="text" [(ngModel)]="contribuyente.ruc"
+                [readonly]="!validadorNt || validadorRucCedu" />
+            </app-cc-input-group-prepend>
+          </div>
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Género" styleSpan="size-span-campo font-weight-bold">
+              <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                [(ngModel)]="contribuyente.genero" [readonly]="!validadorNt">
+                <ng-option *ngFor="let doc of catalog.genero" [value]="doc.valor">{{doc.valor}}</ng-option>
+              </ng-select>
+
+            </app-cc-input-group-prepend>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Fecha de nacimiento" styleSpan="size-span-campo font-weight-bold">
+              <input class="form-control" type="date" [(ngModel)]="contribuyente.fecha_nacimiento"
+                [readonly]="!validadorNt" (ngModelChange)="verificacionTerceraEdad($event)" />
+            </app-cc-input-group-prepend>
+          </div>
+          
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Estado civil" styleSpan="size-span-campo font-weight-bold">
+              <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                [(ngModel)]="contribuyente.estado_civil" [readonly]="!validadorNt">
+                <ng-option *ngFor="let doc of catalog.estado_civil" [value]="doc.valor">{{doc.valor}}</ng-option>
+              </ng-select>
+
+            </app-cc-input-group-prepend>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Primer nombre" styleSpan="size-span-campo font-weight-bold">
+              <input class="form-control" type="text" [(ngModel)]="contribuyente.primer_nombre"
+                placeholder="Ingrese su primer nombre" [readonly]="!validadorNt" (keypress)="validaciones.onlyWord($event)" />
+            </app-cc-input-group-prepend>
+          </div>
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Nacionalidad" styleSpan="size-span-campo font-weight-bold">
+              <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                [(ngModel)]="contribuyente.pais" [readonly]="!validadorNt">
+                <ng-option *ngFor="let doc of catalog.pais" [value]="doc.valor">{{doc.valor}}</ng-option>
+              </ng-select>
+            </app-cc-input-group-prepend>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Segundo nombre" styleSpan="size-span-campo font-weight-bold">
+              <input class="form-control" type="text" [(ngModel)]="contribuyente.segundo_nombre"
+                placeholder="Ingrese su segundo nombre" [readonly]="!validadorNt" (keypress)="validaciones.onlyWord($event)"/>
+            </app-cc-input-group-prepend>
+          </div>
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Teléfono" styleSpan="size-span-campo font-weight-bold">
+              <input id="telefono" type="text" class="form-control form-control-sm"
+                placeholder="Teléfono contribuyente" [(ngModel)]="contribuyente.telefono"
+                (keypress)="onlyNumber($event)" [readonly]="!validadorNt">
+            </app-cc-input-group-prepend>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Primer apellido" styleSpan="size-span-campo font-weight-bold">
+              <input class="form-control" type="text" [(ngModel)]="contribuyente.primer_apellido"
+                placeholder="Ingrese su primer apellido" [readonly]="!validadorNt" (keypress)="validaciones.onlyWord($event)" />
+            </app-cc-input-group-prepend>
+          </div>
+          <div class="col-6">
+            <app-cc-input-group-prepend label="Segundo apellido" styleSpan="size-span-campo font-weight-bold">
+              <input class="form-control" type="text" [(ngModel)]="contribuyente.segundo_apellido"
+                placeholder="Ingrese su segundo apellido" [readonly]="!validadorNt" (keypress)="validaciones.onlyWord($event)"/>
+            </app-cc-input-group-prepend>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <app-cc-input-group-prepend label="Dirección" styleSpan="size-span-campo font-weight-bold">
+              <input id="direccion" type="text" class="form-control form-control-sm"
+                placeholder="Dirección contribuyente" [(ngModel)]="contribuyente.direccion" maxlength="255"
+                [readonly]="!validadorNt">
+            </app-cc-input-group-prepend>
+          </div>
+        </div>
+      </fieldset>
+    <fieldset *ngIf="regJuridico" class="border mt-2 mb-2 pb-2 px-2">
+        <legend class="w-auto ml-1 bg-dark">Datos del Contribuyente</legend>
+          <div class="row">
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Ruc" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="contribuyente.num_documento" maxlength="13"
+                  [readonly]="!validadorJr || validadorRucCedu " />
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Zona" styleSpan="size-span-campo font-weight-bold">
+                    
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="contribuyente.zona" [readonly]="!validadorJr">
+                  <ng-option *ngFor="let doc of catalog.zona" [value]="doc.valor">{{doc.descripcion}}</ng-option>
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Razón social" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="contribuyente.razon_social"
+                  [readonly]="!validadorJr" />
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Manzana" styleSpan="size-span-campo font-weight-bold">
+                <input id="direccion" type="text" class="form-control form-control-sm"
+                  placeholder="Manzana a la que pertenece" [(ngModel)]="contribuyente.manzana" maxlength="20"
+                  [readonly]="!validadorJr">
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Nombre Comercial" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="contribuyente.nombre_comercial_cli" maxlength="191"
+                  [readonly]="!validadorJr" />
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Solar" styleSpan="size-span-campo font-weight-bold">
+                <input id="direccion" type="text" class="form-control form-control-sm"
+                  placeholder="Solar al que pertenece" [(ngModel)]="contribuyente.solar" maxlength="20"
+                  [readonly]="!validadorJr">
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Tipo de persona Jurídica" styleSpan=" font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="contribuyente.tipo_persona_juridica" [readonly]="!validadorJr">
+                  <ng-option *ngFor="let doc of catalog.tipo_persona_juridica" [value]="doc.valor">{{doc.valor}}
+                  </ng-option>
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Sector" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="contribuyente.codigo_sector" [readonly]="!validadorJr">
+                  <ng-option *ngFor="let doc of catalog.sector" [value]="doc.valor">{{doc.descripcion}}</ng-option>
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Representante Legal" styleSpan="size-span-campo font-weight-bold">
+                <input id="representante_legal" type="text" class="form-control form-control-sm"
+                  placeholder="Representante contribuyente" [(ngModel)]="contribuyente.representante_legal"
+                  maxlength="191" [readonly]="!validadorJr">
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Dirección Referencia" styleSpan="size-span-campo font-weight-bold">
+                <input id="direccion" type="text" class="form-control form-control-sm"
+                  placeholder="Referencia de la casa" [(ngModel)]="contribuyente.direccion_referencia" maxlength="255"
+                  [readonly]="!validadorJr">
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="contribuyente.estado" [readonly]="!validadorJr">
+                  <ng-option *ngFor="let doc of catalog.estado" [value]="doc.valor">{{doc.descripcion}}</ng-option>
+                </ng-select>
+
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Provincia" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  (ngModelChange)="searchCities($event)" [(ngModel)]="contribuyente.provincia"
+                  [readonly]="!validadorJr">
+                  <ng-option *ngFor="let doc of catalog.provincia" [value]="doc.valor">{{doc.valor}}</ng-option>
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Contribuyente especial" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="contribuyente.contribuyente_especial" [readonly]="!validadorJr">
+                  <ng-option *ngFor="let doc of estandarVariables" [value]="doc">{{doc}}</ng-option>
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Ciudad" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="contribuyente.ciudad" [readonly]="!validadorJr">
+                  <ng-option *ngFor="let doc of catalog.ciudad" [value]="doc.valor">{{doc.valor}}</ng-option>
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Inicio de Actividades" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="date" [(ngModel)]="contribuyente.fecha_inicio_actividad"
+                  maxlength="191" [readonly]="!validadorJr" />
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+              <app-cc-input-group-prepend label="e-mail" styleSpan="size-span-campo font-weight-bold">
+                <input id="e-mail" type="text" class="form-control form-control-sm"
+                  placeholder="e-mail del contribuyente" [(ngModel)]="contribuyente.correo_facturacion" maxlength="100"
+                  [readonly]="!validadorJr">
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Teléfono" styleSpan="size-span-campo font-weight-bold">
+                <input id="telefono" type="text" class="form-control form-control-sm"
+                  placeholder="Teléfono contribuyente" [(ngModel)]="contribuyente.telefono"
+                  (keypress)="onlyNumber($event)" [readonly]="!validadorJr">
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Tiene convenio" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="contribuyente.tiene_convenio" [readonly]="!validadorJr">
+                  <ng-option  [value]="0">No</ng-option>
+                  <ng-option  [value]="1">Si</ng-option>
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <app-cc-input-group-prepend label="Dirección" styleSpan="size-span-campo font-weight-bold">
+                <input id="direccion" type="text" class="form-control form-control-sm"
+                  placeholder="Dirección contribuyente" [(ngModel)]="contribuyente.direccion" maxlength="255"
+                  [readonly]="!validadorJr">
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+    </fieldset>
+  </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spContribuyente"></cc-spiner-procesar>

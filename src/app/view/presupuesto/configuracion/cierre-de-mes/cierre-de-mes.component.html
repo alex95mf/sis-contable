@@ -1,0 +1,106 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active titulo="CIERRE DE PERIODO - PRESUPUESTO" cstyle="bg-light" icono="fas fa-file-alt">
+    <div class="row">
+        <div  class="col-4">
+            <div class="row p-2 mb-3">
+
+                <div class="col-sm-12">
+                    <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [(ngModel)]="selected_anio" [clearable]="false"
+                            [items]="cmb_periodos" bindValue="periodo" bindLabel="periodo" (change)="ObtenerPeriodo()"></ng-select>
+                        <div class="input-group-append">
+                            <button (click)="generarPeriodo()" class="btn btn-success btn-sm" type="button" matTooltip="Generar Periodo">
+                                <i class="far fa-plus"></i>
+                            </button>
+                        </div>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-12 d-none">
+                    <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select 
+                            (ngModelChange)="ChangeMesCierrePeriodos($event)"
+                            class="form-control" 
+                            id="elemento_pruebas"
+                            bindLabel="name"
+                            placeholder="-Todos-"
+                            appendTo="body"
+                            [clearable]="false"
+                            [searchable]="true"
+                            [disabled]=disabled
+                            [(ngModel)]="mes_actual">
+                            
+                            <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                {{item.name}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend> 
+                </div>
+                <div class="col-sm-12 d-none">
+                    <mat-checkbox [(ngModel)]="check_todos_meses" class="example-margin"  (change)="EventAllMes($event)">
+                    Todos los periodos
+                    </mat-checkbox>
+
+                </div>            
+            </div>
+        </div>
+        <div  class="col-8">
+            <div class="row p-2 mb-3">
+                <table class="table">
+                    <thead>
+                        <tr style="width: 100%;">
+                            <th >AÑO</th>
+                            <th >MES</th>
+                            <th class="w-25">ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!periodos.length">
+                            <td colspan="4" >no hay datos para mostrar</td>
+                        </tr>
+                        <tr *ngFor="let item of periodos; let i = index">
+                            <td style="padding-left: 25px;text-align: start;">{{ item.anio }}</td>
+                            <td style="padding-left: 40px;text-align: start;">{{ item.mes }}</td>
+                            <td [ngClass]="{'text-bold text-success': item.estate == 'A' , 'text-bold text-danger': item.estate == 'C' }"   style="padding-left: 25px;text-align: start;">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch{{ i }}" [checked]="item.estate == 'A'" (change)="cambiarEstate(item, $event)">
+                                    <label class="custom-control-label" for="customSwitch{{ i }}">{{ item.estado }}</label>
+                                </div>
+                            </td>
+                            <!--  -->
+                            <!-- <td [ngClass]="{'text-bold text-success': item.estate == 'A' , 'text-bold text-danger': item.estate == 'C' }"   style="padding-left: 25px;text-align: start;">{{ item.estado }}</td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-primary" (click)="cambiarEstado(item, 'A')" [disabled]="item.estate == 'A'">
+                                        <i class="fas fa-print"></i> Aperturar
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" (click)="cambiarEstado(item, 'C')" [disabled]="item.estate == 'C'">
+                                        <i class="fas fa-file-pdf"></i> Cerrar
+                                    </button>
+                                </div>
+                            </td> -->
+                            <!--  -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+                    
+        
+        </div>
+    </div>     
+    <!-- </div>
+
+    <ng-template #PermisoVerDenegado>
+        <app-permiso-denegado></app-permiso-denegado>
+    </ng-template> -->
+
+
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="spPlanCuentas"></cc-spiner-procesar>
+
+
+
+
+ 
+

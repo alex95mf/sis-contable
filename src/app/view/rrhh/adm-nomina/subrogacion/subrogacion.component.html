@@ -1,0 +1,398 @@
+<p-toast></p-toast>
+<p-toast position="top-left" key="tl"></p-toast>
+<p-toast position="top-right" class="custom-toast" key="tr"></p-toast>
+<p-toast position="top-center" key="tc"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+
+<div class="mt-4">
+    <app-button-radio-active titulo="Registro Subrogación" filtroBoton="btnsRegSub" icono="fas fa-user-cog"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+        <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado">
+            <p-tabView (onChange)="dinamicoBotones($event)" styleClass="tab_content_compras" class="overflow-hidden">
+                <p-tabPanel class="p-0" header="REGISTRO" [headerStyle]="{'font-size': '0.7rem'}">
+                    <form autocomplete="off" [formGroup]="registroSubrogacion">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="tipo_id_cc"
+                                    (ccItemSelecionado)="viewSelectionTipoCC($event)"
+                                    [isDisabled]="isDisableCatalogo"
+                                    [optionDefault]="'Selecionar opcion'" #nameTipo
+                                    disabled="readonlyInputTipo"
+                                    [labelDescription]="'Tipo'" codigocatalogo="ACPER">
+                                </app-cc-select-nom-catalogo>
+                            </div>
+                            <div class="col-sm-6"> 
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <app-cc-input-group-prepend label="Fecha" styleSpan="font-weight-bold size-span-campo">
+                                            <input 
+                                            id="fecha" 
+                                            type="date" 
+                                            class="form-control" 
+                                            [(ngModel)]="fechaReg" max="2050-01-01"
+                                            formControlName="nameFechaReg"
+                                            [readonly]="readonlyInputFecha"
+                                           #nameFechaReg>
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                                    <!-- <div class="col-sm">
+                                        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                            <ng-select 
+                                            id="estado" 
+                                            class="form-control form-control-sm" 
+                                            [clearable]="true"
+                                            [(ngModel)]="estado" 
+                                            formControlName="nameEstadoReg"
+                                            #nameEstadoReg>
+                                                <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                                                <ng-option *ngFor="let op of estados" [value]="op.value">{{ op.label }}</ng-option>
+                                            </ng-select>
+                                        </app-cc-input-group-prepend>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group pt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="background-color: #404a63; color: white;"
+                                            placeholder="Ingrese observación">Observación</span>
+                                    </div>
+                                    <textarea class="form-control form-control-sm" 
+                                        id="observacion"
+                                        formControlName="nameObservacion"
+                                        #nameObservacion
+                                        [readonly]="readonlyInputObservacion"
+                                        placeholder="Observación" 
+                                        [(ngModel)]="observacion"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <app-cc-input-group-prepend label="Fecha Desde" styleSpan="font-weight-bold size-span-campo">
+                                            <input 
+                                            id="fecha_desde" 
+                                            type="date" 
+                                            class="form-control" 
+                                            max="2050-01-01" 
+                                            [(ngModel)]="fechaDesdeReg"
+                                            formControlName="nameFechaDesde"
+                                            #nameFechaDesde>
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                                    <div class="col-sm">
+                                        <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="font-weight-bold size-span-campo">
+                                            <input 
+                                            id="fecha_hasta" 
+                                            type="date" 
+                                            class="form-control" 
+                                            max="2050-01-01" 
+                                            [(ngModel)]="fechaHastaReg"
+                                            formControlName="nameFechaHasta"
+                                            #nameFechaHasta>
+                                        </app-cc-input-group-prepend>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <p-divider align="left" type="dashed">
+                            <div class="inline-flex align-items-center">
+                                <i class="pi pi-user mr-2"></i>
+                                <b>Datos empleado saliente </b>
+                            </div>
+                        </p-divider> -->
+                    <fieldset class="border pb-2 px-2 mb-2 mt-2">
+                        <legend class="w-auto ml-1 bg-dark">Datos empleado saliente</legend>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Empleado Saliente</span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm"
+                                        placeholder="Ingrese nombre , apellido, cédula"
+                                        [readonly]="true"
+                                        #nameInputSearchEmpleado>
+                                    <div class="input-group-append">
+                                        <button (click)="onClicConsultaEmpleados(content)"
+                                        [disabled]="disableBtnConsultaEmpleados"
+                                            class="btn btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <app-cc-input-group-prepend label="Empleado Saliente" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control form-control-sm" id="idPrimerNombre"
+                                        formControlName="nameEmpuFullNombre"
+                                        #nameEmpuFullNombre
+                                        placeholder="Nombre Completo"
+                                        disabled="true">
+                                </app-cc-input-group-prepend>
+                            </div>
+                            
+                        </div>
+                   
+
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
+                                <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control form-control-sm"
+                                        formControlName="nameDepartamento"
+                                        #nameDepartamento
+                                        placeholder="Departamento"
+                                        disabled="true">
+                                </app-cc-input-group-prepend>
+
+                                <!--app-cc-select-nom-departamento 
+                                    [ngModelCcHijoDepartamento]="departamento_id_cc"
+                                    (ccItemSelecionadoDepartamento)="viewSelectionDepartamentoCC($event)"
+                                    [isDisabled]="isDisableDepartament"
+                                    [optionDefault]="'Selecionar opcion'" 
+                                    #nameDepartamento [labelDescription]="'Departamento'">
+                                </app-cc-select-nom-departamento-->
+                            </div>
+                            <div class="col-sm-6">
+                                <app-cc-input-group-prepend label="Cargo" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control form-control-sm"
+                                        formControlName="nameCargo"
+                                        #nameCargo
+                                        placeholder="Cargo"
+                                        disabled="true">
+                                </app-cc-input-group-prepend>
+                                <!--app-cc-select-nom-cargo-parameter 
+                                    [ngModelCcHijoCargo]="cargo_id_cc"
+                                    [isDisabled]="isDisableCargo"
+                                    (ccItemSelecionadoCargo)="viewSelectionCargoCC($event)"
+                                    [optionDefault]="'Selecionar opcion'" codigoCargos="1" #nameCargo
+                                    [labelDescription]="'Cargos'"></app-cc-select-nom-cargo-parameter-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <app-cc-input-group-prepend label="Remuneración" styleSpan="size-span-campo">
+                                    <input currencyMask class="form-control form-control-sm" mvndrMatCurrencyFormat
+                                        [value]="usAmount" formControlName="sugrSalarioMinimo"
+                                        [(ngModel)]="saliente_salario_minimo" placeholder="$0.00" #nameSalarioMinimo />
+                                </app-cc-input-group-prepend>
+                            </div>                            
+                        </div>
+                    </fieldset>
+
+                        <!-- <p-divider align="left" type="dashed">
+                            <div class="inline-flex align-items-center">
+                                <i class="pi pi-user mr-2"></i>
+                                <b>Datos empleado delega </b>
+                            </div>
+                        </p-divider> -->
+                        <fieldset class="border pb-2 px-2 mb-2 mt-2">
+                            <legend class="w-auto ml-1 bg-dark">Datos empleado delega</legend>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm mt-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Empleado </span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm"
+                                            placeholder="Ingrese nombre , apellido, cédula"
+                                            [readonly]="readonlyInputSearchEmpleado"
+                                            #nameInputSearchEmpleado2>
+                                        <!-- formControlName="jnd_tipo_jornada"
+                                            [(ngModel)]="fomulario_jornada.jnd_tipo_jornada"
+                                                #vChTipoJornada [id_jornada]="0" -->
+                                        <div class="input-group-append">
+                                            <button (click)="onClicConsultaEmpleados2(content)"
+                                            [disabled]="disableBtnConsultaEmpleados"
+                                                class="btn btn-primary" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+    
+                                        </div>
+                                    </div>
+                                </div> <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo">
+                                        <input type="text" class="form-control form-control-sm" id="idPrimerNombre"
+                                            formControlName="nameEmpuFullNombre2"
+                                            #nameEmpuFullNombre2
+                                            placeholder="Nombre Completo"
+                                            disabled="true">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <!-- <div class="col-sm-6">
+                                    <div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text size-span-campo"
+                                                id="inputGroup-sizing-sm">Empleado</span>
+                                        </div>
+                                        <div class="input-group input-group-sm mt-1">
+                                            <input type="text" class="form-control form-control-sm" disabled="true"
+                                                #nameEmpuFullNombre placeholder="Nombre Completo">
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo">
+                                        <input type="text" class="form-control form-control-sm"  
+                                            formControlName="nameDepartamentoDos"
+                                            #nameDepartamentoDos
+                                            placeholder="Departamento"
+                                            disabled="true">
+                                    </app-cc-input-group-prepend>
+    
+                                    <!--app-cc-select-nom-departamento 
+                                        [ngModelCcHijoDepartamento]="departamento_id_cc_dos"
+                                        [isDisabled]="isDisableDepartament"
+                                        (ccItemSelecionadoDepartamento)="viewSelectionDepartamentoCC($event)"
+                                        [optionDefault]="'Selecionar opcion'" #nameDepartamentoDos [labelDescription]="'Departamento'">
+                                    </app-cc-select-nom-departamento-->
+                                </div>
+                                <div class="col-sm-6">
+    
+                                    <app-cc-input-group-prepend label="Cargo" styleSpan="size-span-campo">
+                                        <input type="text" class="form-control form-control-sm"
+                                            formControlName="nameCargoDos"
+                                            #nameCargoDos
+                                            placeholder="Cargo"
+                                            disabled="true">
+                                    </app-cc-input-group-prepend>
+    
+                                    <!--app-cc-select-nom-cargo-parameter [ngModelCcHijoCargo]="cargo_id_cc_dos"
+                                        [isDisabled]="isDisableCargo"
+                                        (ccItemSelecionadoCargo)="viewSelectionCargoCCDos($event)"
+                                        [optionDefault]="'Selecionar opcion'" codigoCargos="1" #nameCargoDos
+                                        [labelDescription]="'Cargos'"></app-cc-select-nom-cargo-parameter-->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Remuneración" styleSpan="size-span-campo">
+                                        <input currencyMask class="form-control form-control-sm" mvndrMatCurrencyFormat
+                                            [value]="usAmount" formControlName="sugrSalarioMinimoDos"
+                                            [(ngModel)]="adicional_salario_minimo" placeholder="$0.00" #nameSalarioMinimoDos />
+                                    </app-cc-input-group-prepend>
+                                </div>                            
+                            </div>
+                        </fieldset>
+                       
+                       
+                    </form>
+                </p-tabPanel>
+                <p-tabPanel class="p-0" header="REPORTE ACCIONES" [headerStyle]="{'font-size': '0.7rem'}">
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+                                <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                                <!-- <p-calendar dateFormat="dd.mm.yy"
+                                    [ngModel]="fecha_reporte" [showIcon]="false" inputId="icon"
+                                    [readonlyInput]="true"
+                                    [showIcon]="true" inputId="icon">
+                                </p-calendar> -->
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+                                <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                                <!-- <p-calendar dateFormat="dd.mm.yy"
+                                    [ngModel]="fecha_reporte" [showIcon]="false" inputId="icon"
+                                    [readonlyInput]="true"
+                                    [showIcon]="true" inputId="icon">
+                                </p-calendar> -->
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- <app-cc-input-group-prepend label="Productos" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [(ngModel)]="selectedProductos" 
+                                    [items]="cmb_productos" bindValue="id_producto" bindLabel="nombre" >
+                                </ng-select>
+                            </app-cc-input-group-prepend> -->
+                            <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo">
+                                <input type="text" class="form-control form-control-sm" 
+                                [(ngModel)]="filter.nombre">
+                                <!-- <button class="btn btn-primary btn-sm" (click)="expandProductos()" placement="bottom"  
+                                    ngbTooltip="Buscar Producto" >
+                                    <i class="fas fa-search"></i>
+                                </button> -->
+                             
+                            </app-cc-input-group-prepend>
+                          <!--   <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo"
+                                        style="width: 155px;">Empleado</span></div>
+                                <input type="text" class="form-control form-control-sm" placeholder="Seleccione un Producto"
+                                [(ngModel)]="nombreFilter">
+                                <button class="btn btn-primary btn-sm" (click)="expandProductos()" placement="bottom"  
+                                    ngbTooltip="Buscar Producto" >
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- (onLazyLoad)="nextPage($event)" -->
+                    <p-table 
+                        [value]="objGetAccionPersonal" 
+                        [tableStyle]="{'min-width': '50rem'}"
+                        [lazy]="true"
+                        (onLazyLoad)="nextPage($event)"
+                        [paginator]="true"
+                        [rows]="rows" 
+                        [totalRecords]="totalRecords"
+                        [loading]="loading"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+                        [rowsPerPageOptions]="pageSizeOptions"
+                        >
+                        <ng-template pTemplate="header">
+                            <tr style="font-size:11px">
+                                <th  style="min-width: 80px;">ID</th>
+                                <th  style="min-width: 100px;">TIPO ACCION</th>
+                                <th  style="min-width: 100px;">EMPLEADO SALIENTE</th>
+                                <th  style="min-width: 100px;">EMPLEADO ADICIONAL</th>
+                                <th  style="min-width: 100px;">FECHA</th>
+                                <th  style="min-width: 200px;">OBSERVACIÓN</th>
+                                <th  style="min-width: 80px;">ESTADO</th>
+                                <th  style="min-width: 100px;">ACCIONES</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-his>
+                            <tr style="font-size:11px">
+                                <td style="min-width: 80px;">{{ his.id_accion_personal}}</td>
+                                <td style="min-width: 100px;">{{ his.cat_nombre}}</td>
+                                <td style="min-width: 100px;">{{ his.empleado_saliente}}</td>
+                                <td style="min-width: 100px;">{{ his.empleado_adicional}}</td>
+                                <td style="min-width: 100px;">{{ his.fecha}}</td>
+                                <td style="min-width: 200px;">{{ his.observacion}}</td>
+                                <td  style="min-width:80px;">{{ his.estado === 'A' ? 'ACTIVO' : 'INACTIVO'}}</td>
+                                <td style="min-width: 100px;">
+                                    <button 
+                                    [disabled]="his.estado == 'I'"
+                                    type="button" (click)="regDelete(his.id_accion_personal)"
+                                    class="btn btn-sm tooltip-test my-1"
+                                    style="background-color: #F86C6B; color: white; border-radius: 10px"
+                                    title="Remover registro" >
+                                    <i class="far fa-trash-alt"></i>
+                                </button></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+        <ng-template #PermisoVerDenegado>
+            <p>No tiene permisos.</p>
+        </ng-template>
+    </app-button-radio-active>
+</div>
+<br>
+<br>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=false lTipo="spEmpresa"></cc-spiner-procesar>

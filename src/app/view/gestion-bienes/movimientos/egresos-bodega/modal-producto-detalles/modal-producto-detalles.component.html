@@ -1,0 +1,29 @@
+<app-button-radio-active-new titulo="Detalles de Producto" cstyle="bg-light" icono="fas fa-box-open" 
+    filtroButton="btnsModalProductoDetalles" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <table class="table table-striped table-bordered table-k table-hover" >
+        <thead class="sticky-header">
+            <tr class="text-center">
+                <th>Cantidad Disponible</th>
+                <th>Lote</th>
+                <th>Fecha de Caducidad</th>
+                <th>Cantidad Egresada</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!lotes.length">
+                <td colspan="4" class="text-center">
+                    <p class="h6">No hay lotes ingresados.</p>
+                </td>
+            </tr>
+            <tr *ngFor="let lote of lotes">
+                <td>{{ lote.disponible }}</td>
+                <td>{{ lote.lote }}</td>
+                <td>{{ lote.fecha_caducidad }}</td>
+                <td>
+                    <input type="number" class="form-control form-control-sm" [disabled]="disabled || lote.disponible == 0" [(ngModel)]="lote.cantidad_egreso">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalProductoDetalles"></cc-spiner-procesar>

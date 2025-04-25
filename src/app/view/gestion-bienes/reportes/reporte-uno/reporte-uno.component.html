@@ -1,0 +1,203 @@
+<div class="my-2">
+    <app-button-radio-active-new [titulo]="fTitle" 
+    cstyle="bg-gradient-primary text-white"
+    icono="fas fa-hand-pointer"
+        filtroBoton="btnsRenConsultaReporte" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+
+                            <app-cc-input-group-prepend label="Grupos" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control form-control-sm" placeholder="Seleccione un Grupo"
+                                [(ngModel)]="grupo_descripcion" readonly >
+                                <button class="btn btn-primary btn-sm" (click)="modalGrupos()" placement="bottom"  
+                                    ngbTooltip="Buscar Grupo" >
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </app-cc-input-group-prepend>
+
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+
+                            <app-cc-input-group-prepend label="Productos" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control form-control-sm" placeholder="Seleccione un Producto"
+                                [(ngModel)]="nombreProducto">
+                                <button class="btn btn-primary btn-sm" (click)="expandProductos()" placement="bottom"  
+                                    ngbTooltip="Buscar Producto" >
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </app-cc-input-group-prepend>
+
+
+                            <!-- <app-cc-input-group-prepend label="Producto" styleSpan="size-span-campo font-weight-bold">
+                                <input id="producto" type="text" class="form-control" [(ngModel)]="nombreProducto">
+                            </app-cc-input-group-prepend> -->
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Bodega" styleSpan="input-group-text font-weight-bold size-span-campo inputGroup-sizing-sm">
+                                <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false"  [(ngModel)]="selectedBodega">
+                                    <ng-option [value]="0" disabled>Seleccione Bodega</ng-option>
+                                    <ng-option *ngFor="let d of arrayBodega" [value]="d.id_bodega_cab">{{d.nombre}}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Fecha de Corte" styleSpan="size-span-campo font-weight-bold">
+                                <p-calendar 
+                                    (change)="FromOrToChange($event)" 
+                                    id="idNominaDatef"
+                                    dateFormat="dd/mm/yy" 
+                                    [readonlyInput]="true" 
+                                    [(ngModel)]="fechaCorte"
+                                    [showIcon]="true" 
+                                    inputId="icon"
+                                    class="ui-calendar ui-calendar-button"
+                                    [style]="{'height':'30px','display': 'inline-flex'}" 
+                                    [inputStyle]="{'height':'30px','width':'13rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                                </p-calendar>
+                              
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <!-- <div class="col-4">
+                            <app-cc-input-group-prepend label="Ubicación" styleSpan="size-span-campo font-weight-bold">
+                                <input id="ubicacion" type="text" class="form-control" [(ngModel)]="ubicacion">
+                            </app-cc-input-group-prepend>
+                        </div> -->
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Stock" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="stockSelected" [clearable]="false">
+                                    <ng-option disabled [value]="0" disabled>Seleccione un Stock</ng-option>
+                                    <ng-option *ngFor="let op of stockList" [value]="op.value">{{ op.label }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+ 
+        <!-- <div class="row justify-content-center">
+            <div class="col-12  pl-3 pr-3 mt-2"  style="overflow-x:auto;overflow-y:auto;"> 
+                <table class="table table-bordered" style="width:150%;height: 400px;">
+                    <thead>
+                        <tr>
+                            <th style="width: 6%;">Código</th>
+                            <th style="width: 15%;" *ngIf="claseSelect==0">Grupo</th>
+                            <th style="width: 15%;">Nombre</th>
+                            <th style="width: 6%;">Unidad de Medida</th>
+                            <th style="width: 6%;">Stock</th>
+                            <th style="width: 6%;">Stock Mínimo</th>
+                            <th style="width: 6%;">Stock Máximo</th>
+                            <th style="width: 10;">Consumo Promedio Diario</th>
+                            <th style="width: 10%;">Tiempo de Entrega</th>
+                            <th style="width: 6%;">Punto de Reorden</th>
+                            <th style="width: 6%;">Cantidad a Pedir</th>
+                            <th style="width: 6%;">Rotación</th>
+                            <th style="width: 6%;">Costo Unitario</th>
+                            <th style="width: 6%;">Costo Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="dataProducto.length == 0">
+                            <td *ngIf="claseSelect==0" colspan="13" class="text-center">
+                                <h6 class="my-1"></h6>No hay registros para mostrar.
+                            </td>
+                            <td *ngIf="claseSelect !=0" colspan="12" class="text-center">
+                                <h6 class="my-1"></h6>No hay registros para mostrar.
+                            </td>
+                        </tr>
+                        <tr *ngFor="let d of dataProducto; let i = index">
+                           <td>{{d.codigoproducto}}</td>
+                           <td *ngIf="claseSelect==0">{{d.descripcion}}</td>
+                           <td>{{d.nombre }}</td>
+                           <td>{{d.udmcompra }}</td>
+                           <td [ngClass]="d.stock < d.minstock ? 'text-danger font-weight-bold' : 'text-primary font-weight-bold' " >{{d.stock }}</td>
+                           <td>{{d.minstock }}</td>
+                           <td>{{d.maxstock }}</td>
+                           <td>{{d.consumo_promedio_diario}}</td>
+                           <td>{{d.tiempo_entrega}}</td>
+                           <td>{{d.punto_reorden}}</td>
+                           <td>{{d.cantidad_pedir}}</td>
+                           <td>{{d.rotacion}}</td>
+                           <td class="text-right">$ {{d.costo | number:'1.2-2' }}</td>
+                           <td class="text-right">$ {{d.costo_total | number:'1.2-2' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> -->
+
+
+        <div class="row m-0">
+            <div class="col-12">
+      
+                    <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-k table-hover" >
+                            <thead class="sticky-header">
+                                <tr class="text-center">
+                                        <th style="width: 6%;">Código</th>
+                                        <th style="width: 15%;" *ngIf="claseSelect==0">Grupo</th>
+                                        <th style="width: 15%;">Nombre</th>
+                                        <th style="width: 6%;">Unidad de Medida</th>
+                                        <th style="width: 6%;">Stock</th>
+                                        <th style="width: 6%;">Stock Mínimo</th>
+                                        <th style="width: 6%;">Stock Máximo</th>
+                                        <th style="width: 10;">Consumo Promedio Diario</th>
+                                        <th style="width: 10%;">Tiempo de Entrega</th>
+                                        <th style="width: 6%;">Punto de Reorden</th>
+                                        <th style="width: 6%;">Cantidad a Pedir</th>
+                                        <th style="width: 6%;">Rotación</th>
+                                        <th style="width: 6%;">Costo Unitario</th>
+                                        <th style="width: 6%;">Costo Total</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngIf="dataProducto.length == 0">
+                                        <td *ngIf="claseSelect==0" colspan="13" class="text-center">
+                                            <h6 class="my-1"></h6>No hay registros para mostrar.
+                                        </td>
+                                        <td *ngIf="claseSelect !=0" colspan="12" class="text-center">
+                                            <h6 class="my-1"></h6>No hay registros para mostrar.
+                                        </td>
+                                    </tr>
+                                    <tr *ngFor="let d of dataProducto; let i = index">
+                                        <td>{{d.codigoproducto}}</td>
+                                        <td *ngIf="claseSelect==0">{{d.descripcion}}</td>
+                                        <td>{{d.nombre }}</td>
+                                        <td>{{d.udmcompra }}</td>
+                                        <td [ngClass]="d.stock < d.minstock ? 'text-danger font-weight-bold' : 'text-primary font-weight-bold' " >{{d.stock }}</td>
+                                        <td class="text-right">{{d.minstock | number:'1.2-2' }}</td>
+                                        <td class="text-right">{{d.maxstock | number:'1.2-2' }}</td>
+                                        <td class="text-right">{{d.consumo_promedio_diario | number:'1.2-2'}}</td>
+                                        <td class="text-right">{{d.tiempo_entrega | number:'1.0-0'}}</td>
+                                        <td class="text-right">{{d.punto_reorden}}</td>
+                                        <td class="text-right">{{d.cantidad_pedir}}</td>
+                                        <td class="text-right">{{d.rotacion | number:'1.2-2'}}</td>
+                                        <td class="text-right">$ {{d.costo | number:'1.2-2' }}</td>
+                                        <td class="text-right">$ {{d.costo_total | number:'1.2-2' }}</td>
+                                     </tr>
+                                </tbody>
+                            </table>
+                    </div>
+
+
+                       
+            </div>
+        </div>
+
+
+    </app-button-radio-active-new> 
+    </div>
+    <cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spBienesReporteGestion"></cc-spiner-procesar>

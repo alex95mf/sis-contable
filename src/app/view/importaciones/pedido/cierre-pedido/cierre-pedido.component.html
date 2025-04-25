@@ -1,0 +1,261 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Cierre de pedidos" filtroBoton="btnsPedImpCierre"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+        <div class="row justify-content-center">
+            <div class="col-12 container-filter ">
+                <div class="row  justify-content-center">
+                    <div class="col-12 mb-3 pb-2 pt-2"
+                        style="border-bottom: 1px solid;border-color: rgba(0, 0, 0, 0.205);">
+                        <span class="pl-3 " *ngIf="id_select == 0" style="color: rgba(0, 0, 0, 0.89);">Cierre de Pedido #:
+                            {{importPed.num_doc.toString().padStart(10,'0')}}</span>
+                        <span class="pl-3 " *ngIf="id_select != 0" style="color: rgba(0, 0, 0, 0.89);">Cierre de Pedido #:
+                            {{importPed.num_doc.toString().padStart(10,'0')}}</span>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Pedido</span>
+                                    </div>
+                                    <select class="form-control form-control-sm custom-select" [(ngModel)]="id_select"
+                                        id="idPedido" (ngModelChange)="getPedidoFilter($event)"
+                                        [disabled]="disabGlobal">
+                                        <option [value]="0">Seleccione pedido</option>
+                                        <option *ngFor="let d of arrayPedidos" [value]="d.id">
+                                            {{d.num_doc.toString().padStart(10,
+                                            '0')}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Origen</span>
+                                    </div>
+                                    <input type="text" placeholder="{{importPed.country.nom_pais}}" [disabled]="true"
+                                        class="form-control form-control-sm">
+                                    <div class="input-group-append w-auto">
+                                        <img src="{{importPed.country.flag}}" alt="" style="border-radius: 0px 5px 5px 0px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Fecha cierre" styleSpan="size-span-campo">
+                                    <ejs-datepicker [(ngModel)]="fecha_cierre" name="dateFrom" format='yyyy-MM-dd'
+                                        class="form-control">
+                                    </ejs-datepicker>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Costear
+                                            Por:</span>
+                                    </div>
+                                    <select class="form-control form-control-sm custom-select" [(ngModel)]="nombre_base"
+                                        [disabled]="id_select == 0 || disabGlobal" (ngModelChange)="calculated($event)">
+                                        <option value="0">Seleccione costear por:</option>
+                                        <option value="Valor">Valor</option>
+                                        <option value="Volumen">Volumen</option>
+                                        <option value="Peso">Peso</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Proveedor</span>
+                                    </div>
+                                    <input type="text" placeholder="{{importPed.providers.razon_social}}"
+                                        [disabled]="true" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Ruc</span>
+                                    </div>
+                                    <input type="text" placeholder="ruc proveedor" [disabled]="true"
+                                        [(ngModel)]="importPed.ruc" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                                            base</span>
+                                    </div>
+                                    <input type="text"
+                                        placeholder="{{commonServices.formatNumber(totales_views.total_base)}} {{(prefijo)}}"
+                                        [disabled]="true" class="form-control form-control-sm text-right pr-1">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                                            peso</span>
+                                    </div>
+                                    <input type="text" [disabled]="true" [(ngModel)]="totales_views.total_peso"
+                                        class="form-control form-control-sm text-right pr-1">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                                            volumen</span>
+                                    </div>
+                                    <input type="text" [disabled]="true" [(ngModel)]="totales_views.total_volumen"
+                                        class="form-control form-control-sm text-right pr-1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                                            pedido</span>
+                                    </div>
+                                    <input type="text" [disabled]="true" placeholder="$ {{totales_views.total_pedido}}"
+                                        class="form-control form-control-sm text-right pr-1">
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                                            gasto</span>
+                                    </div>
+                                    <input type="text" [disabled]="true" placeholder="$ {{totales_views.total_gasto}}"
+                                        class="form-control form-control-sm text-right pr-1">
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                                            General</span>
+                                    </div>
+                                    <input type="text" [disabled]="true" placeholder="$ {{totales_views.total_general}}"
+                                        class="form-control form-control-sm text-right pr-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-4 mb-3  pl-2 pr-2">
+            <div class="col-12 filters pl-2 pr-2 ">
+                <div class="row justify-content-center">
+                    <div class="col-12  pl-3 pr-3 mt-2">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr style="width: 100%;">
+                                    <th style="width: 5%;">Item</th>
+                                    <th style="width: 16%;">Producto</th>
+                                    <th style="width: 10%;">Código</th>
+                                    <th style="width: 8%;">Peso(Kg)</th>
+                                    <th style="width: 8%;">Vol(m^3)</th>
+                                    <th style="width: 7%;">Cantidad</th>
+                                    <th style="width: 7%;">P/U</th>
+                                    <th style="width: 7%;">Total</th>
+                                    <th style="width: 8%;">% Base)</th>
+                                    <th style="width: 8%;">Fob</th>
+                                    <th style="width: 8%;">Total Fob</th>
+                                    <th style="width: 8%;text-align: center;">Aplica</th>
+                                </tr>
+                            </thead>
+                            <tbody style="width: 100%;">
+                                <tr *ngFor="let d of dataProducto; let i = index">
+                                    <td style="text-align: center;">
+                                        <div class="mt-2">
+                                            {{i+1}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm p-0"
+                                            [(ngModel)]="d.nombre" [disabled]="true" style="width: 100%;">
+                                    </td>
+                                    <td>
+                                        <div placement="top" ngbTooltip="{{d.codigo_pro}}">
+                                            <input type="text" class="form-control form-control-sm pr-1"
+                                                [(ngModel)]="d.codigo_pro" [disabled]="true" style="width: 100%;">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm pr-1"
+                                            placeholder="{{commonServices.formatNumber(d.peso)}}" [disabled]="true"
+                                            style="width: 100%;text-align: right;">
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="number" class="form-control form-control-sm pr-1"
+                                                style="text-align: right;" (keyup)="sumTotal(i)"
+                                                placeholder="{{commonServices.formatNumber(d.volumen)}}"
+                                                [disabled]="true">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="number" class="form-control form-control-sm pr-1"
+                                                style="text-align: right;" [(ngModel)]="d.cantidad" [disabled]="true">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm pr-1"
+                                            placeholder="{{commonServices.formatNumber(d.precio)}}" [disabled]="true"
+                                            style="width: 100%;text-align: right;">
+                                    </td>
+                                    <td>
+                                        <div placement="top" ngbTooltip="{{d.total_aux}}">
+                                            <input type="text" class="form-control form-control-sm pr-1"
+                                                placeholder="{{d.total_aux}}" [disabled]="true"
+                                                style="width: 100%;text-align: right;">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm pr-1"
+                                            placeholder="{{commonServices.formatNumber(d.poctj_base)}}"
+                                            [disabled]="true" style="width: 100%;text-align: right;">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm pr-1"
+                                            placeholder="{{commonServices.formatNumber(d.fob)}}" [disabled]="true"
+                                            style="width: 100%;text-align: right;">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm pr-1"
+                                            placeholder="{{commonServices.formatNumber(d.total_fob)}}" [disabled]="true"
+                                            style="width: 100%;text-align: right;">
+                                    </td>
+                                    <td>
+                                        <div class="mt-2">
+                                            <input type="checkbox" [(ngModel)]="d.aplica_base"
+                                                [disabled]="nombre_base == '0' || disabGlobal || importPed.gastos.length == 0"
+                                                (click)="claculateNewPtjIndividual(i)">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spLiquidacionCierre"></cc-spiner-procesar>

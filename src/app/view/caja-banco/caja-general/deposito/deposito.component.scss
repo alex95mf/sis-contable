@@ -1,0 +1,286 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+
+@font-face 
+{
+    font-family: "Poppins1";
+    src: url('../../../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face 
+{
+    font-family: "PoppinsTourney";
+    src: url("../../../../../assets/fonts/Tourney-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+label,
+input,
+select,
+/* span, */
+button 
+{
+    font-family: "Poppins1" !important;
+    box-shadow: unset !important;
+    outline: unset !important;
+}
+
+span
+{
+    font-weight: bold;
+}
+
+.title-cab
+{
+    font-family: "PoppinsTourney" !important;
+    background-color: #014da3e6;;
+    color: white;
+    height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 23px;
+    padding-top: 5px;
+    letter-spacing: 5px;
+}
+
+.num_aut
+{
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.container-filter 
+{
+    label,
+    input,
+    select,
+    span,
+    button 
+    {
+        font-family: "Poppins1" !important;
+        box-shadow: unset !important;
+        outline: unset !important;
+    }
+}
+
+.title 
+{
+    font-family: "Poppins1" !important;
+    color: blue;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    span 
+    {
+        margin-left: 20px;
+    }
+}
+
+
+.botones-section 
+{
+    margin-top: 30px;
+    text-align: center;
+    button 
+    {
+        text-transform: uppercase;
+        font-family: "Poppins1" !important;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 180px;
+        box-shadow: unset;
+        outline: unset;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.btn-add 
+{
+    text-align: right;
+    margin-bottom: 10px;
+    button 
+    {
+        box-shadow: unset !important;
+        outline: unset !important;
+    }
+}
+
+textarea 
+{
+    font-family: "Poppins1" !important;
+    outline: unset !important;
+    box-shadow: unset !important;
+
+}
+
+button,
+textarea,
+span,
+label,
+select
+{
+    font-size: 11px !important;
+}
+
+input
+{
+    font-size: 10px !important;
+    font-weight: 400;
+}
+
+.button_margin 
+{
+    margin-left: 0.25rem !important;
+    border-radius: 0.25rem !important;
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+    border-bottom-left-radius: 0.25rem !important;
+}
+
+.diferentOne
+{
+    background-color:  #007BFF;
+    color: white;
+}
+
+.diferentTwo
+{
+    background-color:#4DBD74 ;
+    color: white;
+}
+
+.diferentThree
+{
+    background-color: #FFC107;
+    color: black;
+}
+
+.diferentFor
+{
+    background-color:  #6C757D;
+    color: white;
+}
+
+.filters 
+{
+background-color: white;
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 6px 20px 8px 5px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                    padding: 0px 0px 5px 5px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    border: none !important;
+                    font-size: 8px;
+                   
+                }
+                &:hover
+                {
+                    background-color: rgba(90, 202, 230, 0.514);
+                }
+            }
+        }
+    }
+}
+
+.filtersRegister 
+{
+background-color: white;
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 0px 0px 10px 10px ;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                    padding: 0px 5px 0px 10px !important;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    border: none !important;
+                    font-size: 8px;
+                    input 
+                    {
+                        margin-top: 0px !important;
+                        width: 25%;
+                        height: 25px;
+                        text-align: center;
+                    }
+                    ng-select
+                    {
+                        margin-top: 5px !important;
+                        font-size: 11px !important;
+                    }
+                    button 
+                    {
+                        padding: 2px 8px 2px 8px;
+                    }
+                }
+                &:hover
+                {
+                    background-color: rgba(90, 202, 230, 0.514);
+                }
+            }
+        }
+    }
+}
+
+input[type="checkbox"] 
+{
+    height: 20px !important;
+    margin-top: 5px;
+}
+
+#colorTetx
+{
+    color: red !important;
+}

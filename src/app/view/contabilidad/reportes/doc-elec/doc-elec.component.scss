@@ -1,0 +1,34 @@
+.mat-column-subtotal, 
+.mat-column-iva, 
+.mat-column-total,
+.mat-column-tipo_documento {
+    min-width: 120px;
+    padding-right: 16px;
+}
+
+.mat-column-beneficiario {
+    min-width: 280px;
+    padding-right: 16px;
+}
+
+.mat-column-checkbox,
+.mat-column-num_documento, 
+.mat-column-fecha, 
+.mat-column-clave_acceso,
+.mat-column-estado,
+.mat-column-correo,
+.mat-column-fecha_autorizacion {
+    padding-right: 16px;
+}
+
+.mat-column-observacion {
+    max-width: 240px;
+    padding-right: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.mat-column-acciones {
+    min-width: 180px;
+}

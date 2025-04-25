@@ -1,0 +1,189 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active-new  [titulo]="fTitle" filtroBoton="btnsProductos" cstyle="bg-gradient-primary text-white"
+        [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
+        <div class="row m-0">
+        </div>
+    </app-button-radio-active-new >
+    <div class="col-12">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Parámetros Generales</legend>
+            <div class="row m-0">
+                <div class="col-12 col-md-6 pt-0 pb-0">
+
+                    <app-cc-input-group-prepend label="Re-apertura de ticket" styleSpan="input-group-text size-span-campo">
+                        <ng-select class="form-control" bindLabel="estado" 
+                            placeholder="-Seleccione-" appendTo="body"
+                            [(ngModel)]="parametros_generales.reaperturar_ticket"
+                            [clearable]="true" [searchable]="true"                                 
+                         
+                            >
+                            <ng-option [value]="" >Seleccione</ng-option>
+                            <ng-option [value]="'S'" >SÍ</ng-option>
+                            <ng-option [value]="'N'">NO</ng-option>
+     
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+
+                </div>
+                <div class="col-12 col-md-6 pt-0 pb-0" *ngIf="parametros_generales.reaperturar_ticket === 'S'">    
+                    <app-cc-input-group-prepend label="Número máximo de re-apertura de ticket" styleSpan="input-group-text size-span-campo">
+                        <input type="number" class="form-control form-control-sm" min="0" [(ngModel)]="parametros_generales.numero_max_reincidencia_ticket" placeholder="0" (keypress)="validaciones.numberOnly($event)">
+                    </app-cc-input-group-prepend>
+                </div>
+
+            </div>
+            <div class="row m-0">
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Emitir alertas de reapertura de ticket" styleSpan="input-group-text size-span-campo">
+                        <ng-select class="form-control" bindLabel="estado" 
+                            placeholder="-Seleccione-" appendTo="body"
+                            [(ngModel)]="parametros_generales.emitir_alerta_reapertura"
+                            [clearable]="true" [searchable]="true"                                
+                         
+                            >
+                            <ng-option [value]="" >Seleccione</ng-option>
+                            <ng-option [value]="'S'" >SÍ</ng-option>
+                            <ng-option [value]="'N'">NO</ng-option>
+     
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+
+
+                </div>
+                <div class="col-12 col-md-6 pt-0 pb-0">
+
+                    <app-cc-input-group-prepend label="Reasignación de ticket" styleSpan="input-group-text size-span-campo">
+                        <ng-select class="form-control" bindLabel="estado" 
+                            placeholder="-Seleccione-" appendTo="body"
+                            [(ngModel)]="parametros_generales.reasignacion_ticket"
+                            [clearable]="true" [searchable]="true"                                 
+                         
+                            >
+                            <ng-option [value]="" >Seleccione</ng-option>
+                            <ng-option [value]="'S'" >SÍ</ng-option>
+                            <ng-option [value]="'N'">NO</ng-option>
+     
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+
+            </div>
+            <div class="row m-0">
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Asignación automatica de ticket" styleSpan="input-group-text size-span-campo">
+                        <ng-select class="form-control" bindLabel="estado" 
+                            placeholder="-Seleccione-" appendTo="body"
+                            [(ngModel)]="parametros_generales.asignacion_automatica_ticket"
+                            [clearable]="true" [searchable]="true"                                 
+                         
+                            >
+                            <ng-option [value]="" >Seleccione</ng-option>
+                            <ng-option [value]="'S'" >SÍ</ng-option>
+                            <ng-option [value]="'N'">NO</ng-option>
+     
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+
+            </div>
+        </fieldset>
+
+    </div>
+    <div class="col-md-6">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Perfiles Re-asignación</legend>
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">Perfil</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fila of perfiles_reasignacion; let i = index">
+                        <td style="min-width: 150px;">
+                            <ng-select class="form-control" bindLabel="estado" 
+                                placeholder="-Seleccione-" appendTo="body"
+                                [clearable]="true" [searchable]="true" 
+                                [(ngModel)]="fila.perfil"
+                                >
+                                <ng-option [value]="item.nombre_rol" *ngFor="let item of lista_roles">
+                                    {{item.nombre_rol}}
+                                </ng-option>
+                            </ng-select>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center align-items-center"> 
+                                <button class="btn btn-danger p-1" (click)="eliminarPerfilReasignacion(i)">
+                                    <img src="./assets/img/icons/icon-trash.png" alt="" style="width: 20px; height: 20px;">
+                                </button>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary btn-sm" (click)="agregarFilaPerfilReasignacion()">Agregar Fila</button>
+        </fieldset>
+
+    </div>
+    <div class="col-12">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Categorías</legend>
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">Categoría</th>
+                        <th class="text-center">Necesita Aprobación</th>
+                        <th class="text-center">Primer nivel Aprobación</th>
+                        <th class="text-center">Último nivel Aprobación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fila of categorias; let i = index">
+                        <td style="min-width: 150px;">
+                            {{ fila.descripcion }}
+                        </td>
+                        <td style="min-width: 150px;">
+                            <ng-select class="form-control" bindLabel="estado" 
+                                placeholder="-Seleccione-" appendTo="body"
+                                [clearable]="true" [searchable]="true" 
+                                [(ngModel)]="fila.necesita_aprobacion"
+                                >
+                                <ng-option [value]="'S'">SI</ng-option>
+                                <ng-option [value]="'N'">NO</ng-option>
+                            </ng-select>
+                        </td>
+                        <td style="min-width: 150px;">
+
+                            <ng-select *ngIf="fila.necesita_aprobacion == 'S'" class="form-control" bindLabel="estado" 
+                                placeholder="-Seleccione-" appendTo="body"
+                                [clearable]="true" [searchable]="true" 
+                                [(ngModel)]="fila.primer_nivel_aprobacion"
+                                (change)="onPrimerNivelChange($event, fila)"
+                                >
+                                <ng-option [value]="item.id_organigrama" *ngFor="let item of organigrama">
+                                    {{ item.codigo }} {{ item.nombre }}
+                                </ng-option>
+                            </ng-select>
+                        </td>
+                        <td style="min-width: 150px;">
+                            <ng-select *ngIf="fila.necesita_aprobacion == 'S'" class="form-control" bindLabel="estado" 
+                                placeholder="-Seleccione-" appendTo="body"
+                                [clearable]="true" [searchable]="true" 
+                                [(ngModel)]="fila.ultimo_nivel_aprobacion"
+                                >
+                                <ng-option [value]="item.id_organigrama" *ngFor="let item of fila.filteredOrganigrama">
+                                    {{ item.codigo }} {{ item.nombre }}
+                                </ng-option>
+                            </ng-select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+
+    </div>
+</div>

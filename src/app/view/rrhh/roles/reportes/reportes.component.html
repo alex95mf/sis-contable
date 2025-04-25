@@ -1,0 +1,257 @@
+<div class="my-2">
+    
+
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-hand-pointer"
+    filtroBoton="btnsRenConsultaReporte" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+
+
+    <fieldset class="border pb-2 px-2 my-2">
+        <legend class="w-auto bg-dark ml-1 mb-0">Filtros</legend>
+        <!-- <div class="row justify-content-md-center ml-1 mr-1">
+            <div class="col-2 text-right">
+                <button class="btn  btn-sm btn-primary " placement="bottom" ngbTooltip="Buscar" (click)="consultar()">
+                    <i class="fas fa-search"></i>Consultar
+                </button>
+                <button class="btn btn-sm btn-danger" matTooltip="Limpiar Filtros" (click)="limpiarFiltros()"><i class="fas fa-eraser"></i></button>
+            </div>
+        </div> -->
+        
+        <div class="row justify-content-md-center ml-1 mr-1">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Tipo de Reporte" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select   [(ngModel)]="selectedReporte" (change)="selectOption1($event)" bindValue="id" bindLabel="name" class="form-control" [clearable]="false">
+                        <ng-option *ngFor="let tipo of reportes" [value]="tipo.reporte">{{ tipo.descripcion }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="filter.periodo"
+                        [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+                <!-- <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo font-weight-bold"
+                            id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Período</span>
+                    </div>
+                    <p-calendar
+                        (ngModelChange)="periodoSelected($event,periodo)"
+                        [readonlyInput]="true" 
+                        view="year" 
+                        dateFormat="yy" 
+                        [(ngModel)]="filter.periodo" 
+                        [showIcon]="true" 
+                        class="ui-calendar ui-calendar-button"
+                        inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                        [inputStyle]="{'height':'30px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                    </p-calendar>
+                </div> -->
+                <!-- <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                    <input id="periodo" type="text" class="form-control" [(ngModel)]="filter.periodo"> 
+                </app-cc-input-group-prepend> -->
+            </div>
+            <div class="col-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Mes</span>
+                    </div>
+                    <ng-select 
+                        (ngModelChange)="ChangeMesCierrePeriodos($event)"
+                        class="form-control" 
+                        id="elemento_pruebas"
+                        bindLabel="name"
+                        placeholder="-Todos-"
+                        appendTo="body"
+                        [clearable]="false"
+                        [searchable]="true"
+                        [disabled]=disabled
+                        [(ngModel)]="mes_actual">
+                        
+                        <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                            {{item.name}}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-2 text-right">
+                <button class="btn  btn-sm btn-primary " placement="bottom" ngbTooltip="Buscar" (click)="consultar()">
+                    <i class="fas fa-search"></i>Consultar
+                </button>
+                <!-- <button class="btn btn-sm btn-danger" matTooltip="Limpiar Filtros" (click)="limpiarFiltros()"><i class="fas fa-eraser"></i></button> -->
+            </div>
+            
+            <!--<div class="col-lg-4">
+                <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-otro font-weight-bold">
+                    <ng-select [disabled]="formReadOnly || conceptosDisabled" [(ngModel)]="filter.selectedConcepto" bindValue="id" bindLabel="name" class="form-control" [clearable]="false">
+                        <ng-option *ngFor="let tipo of conceptos" [value]="tipo.nombre">{{ tipo.codigo }} - {{ tipo.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-lg-3">
+                <app-cc-input-group-prepend label="Caja" styleSpan="size-span-otro font-weight-bold">
+                    <ng-select [disabled]="formReadOnly || cajasDisabled" [(ngModel)]="filter.selectedCaja" bindValue="id" bindLabel="name" class="form-control" [clearable]="false">
+
+                        <ng-option *ngFor="let caja of cajas" [value]="caja.id_caja">{{ caja.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-1 text-right">
+                <button class="btn btn-sm btn-danger" matTooltip="Limpiar Filtros" (click)="limpiarFiltros()"><i class="fas fa-eraser"></i></button>
+            </div> -->
+            
+        </div>
+        <!--<div class="row justify-content-md-center"> 
+            <div class="col-lg-4" >
+                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-otro font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde" [disabled]="formReadOnly || fechaDesdeDisabled">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-lg-4">
+                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-otro font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" [disabled]="formReadOnly || fechaHastaDisabled">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>-->
+
+    </fieldset>
+    <div *ngIf="selectedReporte=='rpt_rrhh_distributivo'" class="row justify-content-center">
+        <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;"> 
+            <p-table 
+                #tblRrhhDistributivo
+                [value]="dataReportes" 
+                [paginator]="true"
+                [rows]="rows"
+                [lazy]="true"
+                (onLazyLoad)="nextPage($event)"
+                [loading]="loading"
+                [totalRecords]="totalRecords"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="pageSizeOptions"
+                responsiveLayout="scroll">
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th style="width: 80px;">No.</th>
+                            <th style="width: 150px;">Unidad a la que pertenece</th>
+                            <th style="width: 200px;">Apellidos y nombres de los servidores y servidoras</th>
+                            <th style="width: 200px;">Puesto Institucional</th>
+                            
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <td>{{d.linea}}</td>
+                                <td style="width: 150px;">{{d.nombre_area}}</td>
+                                <td style="width: 200px;">{{d.nombre_completo}}</td>
+                                <td style="width: 200px;">{{d.nombre_cargo}}</td>
+                        </tr>
+                    </ng-template>
+                    
+                </p-table>
+        </div>
+    </div>
+    <div *ngIf="selectedReporte=='rpt_rrhh_directorio'" class="row justify-content-center">
+        <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;"> 
+            <p-table 
+                #tblRrhhDirectorio
+                [value]="dataReportes" 
+                [paginator]="true"
+                [rows]="rows"
+                [lazy]="true"
+                (onLazyLoad)="nextPage($event)"
+                [loading]="loading"
+                [totalRecords]="totalRecords"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="pageSizeOptions"
+                responsiveLayout="scroll">
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th style="width: 80px;">No.</th>
+                            <th style="width: 200px;">Apellidos y nombres de los servidores y servidoras</th>
+                            <th style="width: 200px;">Puesto Institucional</th>
+                            <th style="width: 150px;">Unidad a la que pertenece</th>
+                            <th style="width: 150px;">Direccion institucional</th>
+                            <th style="width: 150px;">Ciudad en la que labora</th>
+                            <th style="width: 150px;">Teléfono institucional</th>
+                            <th style="width: 150px;">Extensión</th>
+                            <th style="width: 150px;">Correo Electrónico institucional</th>
+                            
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <td>{{d.linea}}</td>
+                                <td style="width: 200px;">{{d.nombre_completo}}</td>
+                                <td style="width: 200px;">{{d.nombre_cargo}}</td>
+                                <td style="width: 150px;">{{d.nombre_area}}</td>
+                                <td style="width: 150px;">{{d.direccion}}</td>
+                                <td style="width: 150px;">{{d.ciudad}}</td>
+                                <td style="width: 150px;">{{d.telefono}}</td>
+                                <td style="width: 150px;">{{d.extension}}</td>
+                                <td style="width: 150px;">{{d.correo}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+        </div>
+    </div>
+    <div *ngIf="selectedReporte=='rpt_rrhh_remuneracion'" class="row justify-content-center">
+        <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;"> 
+            <p-table 
+                #tblRrhhRemuneracion
+                [value]="dataReportes" 
+                [paginator]="true"
+                [rows]="rows"
+                [lazy]="true"
+                (onLazyLoad)="nextPage($event)"
+                [loading]="loading"
+                [totalRecords]="totalRecords"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="pageSizeOptions"
+                responsiveLayout="scroll">
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th style="min-width: 80px;">No.</th>
+                            <th style="min-width: 250px;">Apellidos y nombres de los servidores y servidoras</th>
+                            <th style="min-width: 200px;">Puesto Institucional</th>
+                            <th style="min-width: 150px;">Régimen Laboral al que pertence</th>
+                            <th style="min-width: 100px;">Número de Partida</th>
+                            <th style="min-width: 200px;">Grado jerárquico o escala al que pertenece el puesto</th>
+                            <th style="min-width: 100px;">Remuneración mensual unificada</th>
+                            <th style="min-width: 100px;">Remuneración unificada (anual)</th>
+                            <th style="min-width: 100px;">Décimo Tercera Remuneración</th>
+                            <th style="min-width: 100px;">Décima Cuarta Remuneración</th>
+                            <th style="min-width: 100px;">Horas suplementarias y extraordinarias</th>
+                            <th style="min-width: 150px;">Encargos y subrogaciones</th>
+                            <th style="min-width: 150px;">Total ingresos adicionales</th>
+                          
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <td style="min-width: 80px;">{{d.linea}}</td>
+                                <td style="min-width: 250px;">{{d.nombre_completo}}</td>
+                                <td style="min-width: 200px;">{{d.nombre_cargo}}</td>
+                                <td style="min-width: 150px;">{{d.regimen_laboral}}</td>
+                                <td style="min-width: 100px;">{{d.codigo_presupuesto}}</td>
+                                <td style="min-width: 200px;">{{d.grado}}</td>
+                                <td style="min-width: 100px;">{{d.remuneracion_mensual | number:'1.2-2'}}</td>
+                                <td style="min-width: 100px;">{{d.remuneracion_anual | number:'1.2-2'}}</td>
+                                <td style="min-width: 100px;">{{d.decimo_tercero | number:'1.2-2'}}</td>
+                                <td style="min-width: 100px;">{{d.decimos_cuarto | number:'1.2-2'}}</td>
+                                <td style="min-width: 150px;">{{d.horas_extras | number:'1.2-2'}}</td>
+                                <td style="min-width: 150px;">{{d.encargo | number:'1.2-2'}}</td>
+                                <td style="min-width: 150px;">{{d.total_ingreso | number:'1.2-2'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+        </div>
+    </div>
+</app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="renConsultaReporte"></cc-spiner-procesar>
+
+

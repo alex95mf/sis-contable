@@ -1,0 +1,98 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" filtroBoton="btnsTablasConfig" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
+        <fieldset class="border pb-2 px-2">
+            <legend class="w-auto ml-1 bg-dark">Filtros</legend>
+            <div class="row">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-5">
+                            <app-cc-input-group-prepend label="Nombre Tabla" styleSpan="font-weight-bold">
+                                <input id="filter_descripcion" type="text" class="form-control" [(ngModel)]="filter.descripcion" placeholder="Nombre Tabla">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-5">
+                            <app-cc-input-group-prepend label="Tipo Tabla" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="tipo_tabla" class="form-control form-control-sm"   [(ngModel)]="filter.tipo_tabla" [clearable]="false">
+                                    <ng-option disabled [value]="0" disabled>Seleccione una tabla</ng-option>
+                                    <ng-option *ngFor="let op of tablas" [value]="op.valor">{{ op.valor + ' - ' + op.descripcion }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <!-- <div class="col-3">
+                            <app-cc-input-group-prepend label="Base Cálculo" styleSpan="font-weight-bold">
+                                <input id="filter_base_calculo" type="text" class="form-control" [(ngModel)]="filter.base_calculo" placeholder="Base Cálculo">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-2">
+                            <app-cc-input-group-prepend label="Valor" styleSpan="font-weight-bold">
+                                <input id="filter_valor" type="text" class="form-control" [(ngModel)]="filter.valor" placeholder="Valor" (keypress)="validaciones.numberOnly($event)">
+                            </app-cc-input-group-prepend>
+                        </div> -->
+                        
+                    </div>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="cargarTablasConfig(true)">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row my-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 15%;">Nombre Tabla</th>
+                            <th style="width: 10%;">Tipo Tabla</th>
+                            <th style="max-width:15%;">Base C&aacute;lculo</th>
+                            <th style="width:10%;">Rango Desde</th>
+                            <th style="width: 10%;">Rango Hasta</th>
+                            <th style="width: 15%;">Valor</th>
+                            <th style="width: 15%;">Valor por excedente</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="tablasConfigDt">
+                        <ng-container *ngFor="let dt of tablasConfigDt, let i = index">
+                            <tr>
+                                <td class="text-center">{{ dt.catalog.descripcion }}</td>
+                                <td class="text-center">{{ dt.tipo_tabla }}</td>
+                                <td class="text-center">{{ dt.base_calculo }}</td>
+                                <td style="max-width: 300px;">{{ dt.rango_desde | number:'1.2-2'}}</td>
+                                <td class="text-center">{{ dt.rango_hasta | number:'1.2-2'}}</td>
+                                <td class="text-center">{{ dt.valor | number:'1.2-2'}}</td>
+                                <td class="text-center">{{ dt.valor_excedente | number:'1.2-2' }}</td>
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mx-1" (click)="showTablasConfigForm(false, dt)" placement="left" ngbTooltip="Editar tabla">
+                                            <i class="far fa-edit"></i>
+                                        </button>
+                                        <!--button class="btn btn-danger btn-sm mx-1" (click)="deleteConcepto(dt.id_tasas_configuracion)" placement="top" ngbTooltip="Eliminar tabla">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button-->
+                                        <!-- <button *ngIf="dt.estado == 'I'" class="btn btn-info btn-sm mx-1" (click)="restoreArancel(dt.id, i)" placement="top" ngbTooltip="Restaurar arancel">
+                                            <i class="fas fa-undo"></i>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <mat-paginator showFirstLastButtons
+                               [length]="paginate.length"
+                               [pageSize]="paginate.perPage"
+                               [pageSizeOptions]="paginate.pageSizeOptions"
+                               (page)="changePaginate($event)"
+                               aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spTablasConfig"></cc-spiner-procesar>

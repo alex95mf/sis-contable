@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-12">
+        <div class="mt-4">
+            
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Monto
+                                    total</span>
+                            </div>
+                            <input (ngModel)]="dataDiferido.ammount" type="number" class="form-control form-control-sm text-right pr-2" disabled
+                                placeholder="{{commonServices.formatNumber(ammount)}}">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Número de
+                                    coutas</span>
+                            </div>
+                            <input placeholder="cuotas" type="text" class="form-control form-control-sm text-right pr-2"
+                                id="idNumCoutas" [(ngModel)]="dataDiferido.cuotas" (keyup)="generateDues()"
+                                type="number" maxlength="2" oninput="if(this.value.length > this.maxLength) 
+                                this.value = this.value.slice(0, this.maxLength);">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2 mb-2">
+                    <div class="col-12 filters">
+                        <div class="table-responsive responsive-table" style="max-height: 250px;overflow-y: scroll;">
+                            <table class="table ">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th class="text-center"># Cuota</th>
+                                        <th class="text-center">Fecha Pago</th>
+                                        <th class="text-center">Valor Cuota</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let d of arrCoutas;let i=index" style="width: 100%;">
+                                        <td scope="row" style="width: 15%;" class="text-center">{{d.Num_cuota}}</td>
+                                        <td style="width: 60%;">
+                                            <ejs-datepicker [(ngModel)]="d.fecha_vencimiento" name="dateFrom"
+                                                format='yyyy-MM-dd'>
+                                            </ejs-datepicker>
+                                        </td>
+                                        <td style="width: 25%;">
+                                            <input type="text" min="0" class="text-right pr-2"
+                                                (keypress)="commonServices.FormatDecimalVal($event)"
+                                                [(ngModel)]="d.monto_cuota" (keyup)="calculatedQuotes(i)">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>

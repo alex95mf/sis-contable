@@ -1,0 +1,196 @@
+<app-button-radio-active titulo="Grupo de productos" cstyle="bg-light text-dark" icono="fas fa-tasks" filtroBoton="btnsGrupoProducto" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <fieldset class="border pb-2 px-2 mt-2">
+        <legend class="w-auto bg-dark ml-1">
+
+            
+        </legend>
+
+        <div class="row">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Codigo grupo producto" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="grupo.codigo_grupo_producto" type="text" [disabled]="validacion"/>
+                </app-cc-input-group-prepend>
+
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Descripcion" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="grupo.descripcion" type="text" [disabled]="validacion"/>
+                </app-cc-input-group-prepend>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Codigo cuenta contable" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="grupo.codigo_cuenta_contable" type="text" readonly/>
+                    <button class="btn btn-primary btn-sm" (click)="modalCuentaContable()" [disabled]="validacion"> Consultar</button>
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Nombre cuenta contable" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="grupo.descripcion_cuenta" type="text" readonly/>
+                    
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Codigo presupuesto" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="grupo.codigo_presupuesto" type="text" readonly/>
+                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto()" [disabled]="validacion"> Consultar</button>
+                </app-cc-input-group-prepend>
+
+            </div>
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Nombre presupuesto" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" [(ngModel)]="grupo.descripcion_presupuesto" type="text" readonly/>
+                    
+                </app-cc-input-group-prepend>
+            </div>
+            
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Tipo de bienes" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="grupo.tipo_bien"  [disabled]="validacion">
+                          <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                          <ng-option *ngFor="let item of catalog"  [value]="item.valor">{{item.descripcion}}</ng-option>
+                        </ng-select>
+                    <!-- <input class="form-control" [(ngModel)]="grupo.estado" type="text"/> -->
+                </app-cc-input-group-prepend>
+            </div>
+            
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="grupo.estado"  [disabled]="validacion">
+                          <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                          <ng-option *ngFor="let item of estado"  [value]="item.valor">{{item.descripcion}}</ng-option>
+                        </ng-select>
+                    <!-- <input class="form-control" [(ngModel)]="grupo.estado" type="text"/> -->
+                </app-cc-input-group-prepend>
+            </div>
+
+        </div>
+        
+        
+
+        
+
+
+    </fieldset>
+
+    <!-- <div class="text-right m-2">
+        <button class="btn btn-success btn-sm" (click)="agregarModalCatalogo()">
+            <i class="fas fa-plus"></i>
+        </button>
+
+    </div> -->
+
+    <fieldset class="border pb-2 px-2 mt-2">
+        <legend class="w-auto bg-dark ml-1">
+            Filtro
+        </legend>
+        <div class="row">
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Codigo grupo producto" styleSpan="size-span-campo font-weight-bold">
+
+                    <input class="form-control" type="text" [(ngModel)]="filter.codigo"/>
+
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Descripcion" styleSpan="size-span-otro font-weight-bold">
+
+                    <input class="form-control" type="text" [(ngModel)]="filter.descripcion"/>
+
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-3">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-otro font-weight-bold">
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="filter.estado" >
+                      <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                      <ng-option *ngFor="let item of estado"  [value]="item.valor">{{item.descripcion}}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+                
+            </div>
+
+
+            <div class="col text-right">
+
+                <button class="btn btn-primary mr-1 btn-sm" (click)="ObtenerCatalogoBienes()" ngbTooltip="Consultar">
+                    <i class="fas fa-search"></i> Consultar
+                </button>
+
+                <button class="btn btn-danger btn-sm" (click)="limpiarFiltro()" ngbTooltip="Eliminar">
+                    <i class="fas fa-eraser"></i>
+                </button>
+
+            </div>
+
+        </div>
+    </fieldset>
+
+    <table class="table table-hover mt-2" >
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">Codigo grupo producto</th>
+                <th class="text-center">Descripcion</th>
+                <th class="text-center">Codigo cuenta contable</th>
+                <th class="text-center">Codigo presupuesto</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!catalogoBienes.length">
+                <td colspan="6" class="text-center">
+                    <h6>No hay catalogo de bienes</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let item of catalogoBienes" (click)="EditarGrupo(item)" style="cursor:pointer;">
+                <td class="text-center">{{item.codigo_grupo_producto}}</td>
+                <td class="text-center">{{item.descripcion}}</td>
+                <td class="text-center">{{item.codigo_cuenta_contable}}</td>
+                <td class="text-center">{{item.codigo_presupuesto}}</td>
+                <!-- <td class="text-center">{{item.estado}}</td> -->
+                <td *ngIf="item.estado == 'A'" class="text-center">
+                    <i class="fas fa-circle text-success"></i> Aprobado
+                </td>
+                <td *ngIf="item.estado == 'I'" class="text-center">
+                    <i class="fas fa-circle text-danger"></i> Inactivo
+                </td> 
+                <td class="text-center">
+                    <!-- <button class="btn btn-primary mr-1 btn-sm" (click)="modalEdition(item)">
+                        <i class="fas fa-edit"></i>
+                    </button> -->
+                    <button class="btn btn-danger btn-sm" (click)="eliminarCata(item)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage"
+      [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)" aria-label="Select page">
+    </mat-paginator> 
+
+    <!-- creacion de subgrupo  -->
+    
+    
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>
+

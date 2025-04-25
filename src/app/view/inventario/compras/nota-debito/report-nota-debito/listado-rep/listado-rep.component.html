@@ -1,0 +1,123 @@
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnInfDoc" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-search">  
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="N° Documento" styleSpan="size-span-campo"> 
+                <input  type="text" class="form-control form-control-sm" [value]="dtInformacion.codigo +'-'+ dtInformacion.secuencia_doc" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Documento" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.nombre" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Tipo Agente" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.tipo_agente" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Ruc" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.ruc" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Razon Social" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.razon_social" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Telefono" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.telefono" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Ciudad" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.ciudad" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Causa" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.causa" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.concepto" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Empresa" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.nombreEmpresa" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Sucursal" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.nombreSucursal" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.estado" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Total" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm text-right" [value]="dtInformacion.total | currency: 'USD' | lowercase" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Valor Usado" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm text-right" [value]="dtInformacion.valor_usado | currency: 'USD' | lowercase" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Valor Disponible" styleSpan="size-span-campo"> 
+                <input type="text" class="form-control form-control-sm text-right" [value]="dtInformacion.valor_disponible | currency: 'USD' | lowercase" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Usuario Aprobación" > 
+                <input type="text" class="form-control form-control-sm" [value]="dtInformacion.name_user_aprobated" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <fieldset class="border p-2 mb-1 mt-2 filters">
+        <legend class="w-auto h6">Listado</legend> 
+        <div class="table-responsive responsive-table contenedor-scrol-notdeb-rep" >
+            <table class="table table-sm table-hover">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th>#</th>
+                        <th>Nombre Cuenta</th>
+                        <th>Codigo Cuneta</th>
+                        <th>Debe</th>
+                        <th>Haber</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" style="width: 100%;" *ngFor="let dt of dtnotaCredito; let i = index">
+                        <td style="width: 3%;"><strong>{{ i + 1 }}</strong></td>
+                        <td style="width: 3%;" class="text-left">
+                            <strong>{{dt.nombre_cta}}</strong>
+                        </td>
+                        <td style="width: 10%;">
+                            <strong>{{dt.codigo_cta}}</strong>
+                        </td>
+
+                        <td style="width: 10%;">
+                            <strong>{{dt.debe}}</strong>
+                        </td>
+
+                        <td style="width: 5%;">
+                            <strong>{{dt.haber}}</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </fieldset>
+
+</app-button-radio-active>

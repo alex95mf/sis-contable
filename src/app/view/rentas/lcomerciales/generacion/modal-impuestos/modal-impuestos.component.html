@@ -1,0 +1,75 @@
+<div>
+    <app-button-radio-active [titulo]="fTitle" filtroBoton="btnModalImpuestos"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+        (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="row my-2">
+
+            <!-- <div class="col-12">
+                <div class="input-group input-group-xl mb-2">
+
+                    <div class="input-group-prepend ml-2">
+                        <span class="input-group-text" id="inputGroup-sizing-xl">Concepto</span>
+                    </div>
+                    <input id="filter_concepto" type="text" class="form-control form-control-xl" [(ngModel)]="filter.nombre_detalle">
+
+
+
+                    <button class="btn btn-primary btn-xl ml-4" placement="bottom" ngbTooltip="Aplicar todos los filtros" (click)="aplicarFiltros()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-xl ml-2" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div> -->
+
+            <div class="col-12">
+                <table class="table table-bordered no-footer table-hover mb-0">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 15%;">Código</th>
+                            <th style="width: 15%;">Concepto</th>
+                            <th style="width: 15%;">Comentario</th>
+                            <th style="width: 15%;">Valor</th>
+                            <th style="width: 20%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr *ngIf="resdata.length == 0">
+                            <td colspan="5" class="text-center"><h6 class="my-1">No existen impuestos por cobrar para esta orden</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let dt of resdata; let i = index">
+                            <tr >
+                                <td class="text-center">{{ dt.codigo_detalle }}</td>
+                                <td class="text-center">{{ dt.nombre_detalle }}</td>
+                                <td class="text-center">{{ dt.observacion ?? "N/A"}}</td>
+                                <td class="text-right">{{ dt.valor }}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-primary" (click)="selectImpuesto(dt)">
+                                        <i class="fas fa-hand-pointer"></i>
+                                    </button>
+                                    <!-- <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                                        <input [id]="i" type="checkbox" class="custom-control-input" [(ngModel)]="dt.aplica" (change)="aplica(dt, i)">
+                                        <label class="custom-control-label" [for]="i">{{ dt.aplica ? "APLICADO" : "NO APLICADO" }}</label>
+                                    </div> -->
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+                
+            <!-- <div class="col-12">
+                <mat-paginator 
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div> -->
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renModalImpuestos"></cc-spiner-procesar>

@@ -1,0 +1,48 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Usuarios conectados al sistema" filtroBoton="btnsUserOnline"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-user-check">
+        <div class="row justify-content-center mt-3 mb-3">
+            <div class="col-12 container pt-3 pb-3 filters">
+                <div class="tab_container">
+                    <div class="table-responsive responsive-table">
+                        <table datatable id="tablaUseronline" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                            class="table no-footer table-hover">
+                            <thead class="thead-dark">
+                                <tr style="width: 100%;">
+                                    <th style="width: 0%;" *ngIf="flag">id</th>
+                                    <th style="width: 15%;">Nombre</th>
+                                    <th style="width: 12%;">Rol</th>
+                                    <th style="width: 13%;">Perfil</th>
+                                    <th style="width: 11%;">Empresa</th>
+                                    <th style="width: 20%;">Componente</th>
+                                    <th style="width: 13%;">Hora ingreso</th>
+                                    <th style="width: 8%;">Tiempo</th>
+                                    <th style="width: 8%;">Conectado</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="validaDtUserConected">
+                                <tr *ngFor="let dt of dataUserConected; let i = index">
+                                    <td *ngIf="flag">{{ dt.id_bitacora}}</td>
+                                    <td style="text-align: start;padding-left: 20px;">{{ dt.nombre}}</td>
+                                    <td style="text-align: start;padding-left: 20px;">{{ dt.nombre_rol }}</td>
+                                    <td style="text-align: start;padding-left: 20px;">{{ dt.nombre_modulo}}</td>
+                                    <td style="text-align: start;padding-left: 20px;">{{ dt.nombre_comercial}}</td>
+                                    <td style="text-align: start;padding-left: 20px;">
+                                        <div id="idNameCmp{{i}}"></div>
+                                    </td>
+                                    <td style="text-align: center;">{{ dt.updated_at }}</td>
+                                    <td style="text-align: center;">{{dt.time_conected}}</td>
+                                    <td style="text-align: center;">
+                                        <i class="fa fa-circle online"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spUserOnline"></cc-spiner-procesar>

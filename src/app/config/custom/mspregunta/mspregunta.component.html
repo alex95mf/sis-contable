@@ -1,0 +1,27 @@
+
+<cc-animation-slider>
+  <div class="modal-content" id="myModal">
+    <div class="modal-body">
+      <app-cc-panel titulo="{{title}}" bstyle="btn-primary-local" pparam="left">
+        <div class="text-justify">
+          <div [innerHTML]="mensaje" style="font-weight: bold;"></div>
+
+          <br>
+
+          <app-cc-input-group-prepend label="Correo Electrónico" styleSpan="size-span-campo" *ngIf="validaciones.verSiEsNull(variable.phCorreo) != undefined">
+            <input class="form-control " type="text" [(ngModel)]="lCorreo" maxlength="100"  aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" [placeholder]="phCorreo"/>
+          </app-cc-input-group-prepend>
+
+          <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo" *ngIf="validaciones.verSiEsNull(variable.phObservacion) != undefined">
+            <textarea class="form-control " type="text" rows="3" [(ngModel)]="lObservacion" maxlength="100"  aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" [placeholder]="phObservacion">
+            </textarea>
+          </app-cc-input-group-prepend>
+        </div>
+      </app-cc-panel>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-sm btn-primary-local" (click)="decline()" cdkFocusInitial>NO</button>
+      <button type="button" class="btn btn-sm btn-danger" (click)="accept()">SI</button>
+    </div>
+  </div>
+</cc-animation-slider>

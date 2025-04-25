@@ -1,0 +1,206 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="mt-4">
+            <app-button-radio-active titulo="Registro cuentas bancarias x cliente" filtroBoton="btnAccCustomer"
+                cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-sm-12 pr-0">
+                                <app-cc-input-group-prepend label="Cliente" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control form-control-sm"
+                                        placeholder="Nombre del Girador" id="idCliente" [(ngModel)]="dataContact.girado"
+                                        disabled />
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 pr-0">
+                                <app-cc-input-group-prepend label="Propietario Cuenta" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control form-control-sm" id="idNgirador"
+                                        [(ngModel)]="dataContact.nombreGirador" placeholder="Nombre del Girador"
+                                        [disabled]="true" />
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <!-- <div class="col-sm-9 pl-0">
+                                <app-cc-input-group-prepend label="Otro" styleSpan="size-span-campo">
+                                    <div class="input-group-text btn" id="inputLabel-prepend">
+                                        <input type="checkbox" id="idChCod" [(ngModel)]="dataContact.cliente_girado" disabled />
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" id="idNgirador" [(ngModel)]="dataContact.nombreGirador" placeholder="Nombre del Girador" [disabled]="true"  />
+                                </app-cc-input-group-prepend>
+                            </div> -->
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 pr-0">
+                                <app-cc-input-group-prepend label="Entidad Bancaria" styleSpan="size-span-campo">
+                                    <select [(ngModel)]="dataContact.fk_catalogo"
+                                        class="form-control form-control-sm custom-select" id="identidadBnco"
+                                        (ngModelChange)="setBancaria($event)">
+                                        <option [value]="0">Seleccione Entidad Bancaria</option>
+                                        <option *ngFor="let d of dataCatalogo['BANCO']" [value]="d.id_catalogo">
+                                            {{d.valor}}
+                                        </option>
+                                    </select>
+                                    <input type="hidden" [(ngModel)]="dataContact.entidad_bancaria" />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success"
+                                            style="height: 29px; padding: 4px; width: 35px; box-shadow: unset; outline: unset;"
+                                            placement="top" ngbTooltip="Agregar Entidad Bancaria"
+                                            (click)="setCatalogoTitle('Ingreso nueva entidad bancaría', 'BANCO', 'Banco')"
+                                            class="btn btn-primary">
+                                            <!-- [disabled]="!dAction" -->
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-6 pr-0">
+                                <app-cc-input-group-prepend label="Número de Cuenta" styleSpan="size-span-campo">
+                                    <input type="text" class="form-control form-control-sm"
+                                        placeholder="Número de cuenta" id="idCuenta"
+                                        [(ngModel)]="dataContact.cuenta_bancaria" /><!-- [disabled]="!dAction" -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-sm-7">
+                                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                                    <select [(ngModel)]="dataContact.estado"
+                                        class="form-control form-control-sm custom-select" id="idestado"
+                                        [disabled]="true">
+                                        <option *ngFor="let d of arrayStatus" [value]="d.estado">
+                                            {{d.estado}}
+                                        </option>
+                                    </select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-5 text-right float-right">
+                                <div class="btn-group pt-1">
+                                    <button class="btn btn-warning btn-sm" *ngIf="!editInfoContact" placement="top"
+                                        ngbTooltip="Limpiar formulario" (click)="cleanForm()"><i
+                                            class="fas fa-eraser"></i> Limpiar</button>&nbsp;
+                                    <button class="btn btn-success btn-sm" (click)="addContact()"
+                                        *ngIf="!editInfoContact" placement="top"
+                                        ngbTooltip="Agregar a la lista de Cta. Bancaria">
+                                        <!-- [disabled]="!dAction" -->
+                                        <i class="far fa-plus-square"></i> Agregar
+                                    </button> &nbsp;
+                                    <button class="btn btn-primary btn-sm" (click)="updateContact()"
+                                        *ngIf="editInfoContact" placement="top"
+                                        ngbTooltip="Actualizar lista de Cta. Bancaria">
+                                        <!-- [disabled]="!dAction" -->
+                                        <i class="fas fa-edit"></i> Actualizar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12 filters">
+                        <div class="form-group table-responsive responsive-table altura">
+                            <table class="table table-sm table-hover mt-1">
+                                <thead class="thead-dark">
+                                    <tr class="text-center table-dark" style="width: 100%;">
+                                        <th style="width: 30%;">Nombre de la cuenta</th>
+                                        <th style="width: 30%;">Entidad Bancaria</th>
+                                        <th style="width: 20%;">Número de Cuenta</th>
+                                        <th style="width: 20%;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center" *ngFor="let dt of arraybancaria; let i = index">
+                                        <td>
+                                            <strong>{{ dt.girado }}</strong>
+                                        </td>
+                                        <td>
+                                            <strong>{{ dt.entidad_bancaria }}</strong>
+                                        </td>
+                                        <td>
+                                            <strong>{{datact}}{{ dt.cuenta_bancaria }}</strong>
+                                        </td>
+                                        <td>
+                                            <!-- <button class="btn btn-xs tooltip-test my-1"
+                                                style="background-color: #2e76bd; color: white; border-radius: 10px; box-shadow: unset; outline: unset;"
+                                                (click)="editContact(dt,i)" placement="top" ngbTooltip="Editar cta. bancaria" >
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </button> -->
+                                            <button type="button" (click)="deleteContact(dt,i)"
+                                                class="btn btn-xs tooltip-test my-1"
+                                                style="background-color: #f86c6b; color: white; border-radius: 10px; box-shadow: unset; outline: unset;"
+                                                placement="top" ngbTooltip="Remover cta. bancaria"><!-- [disabled]="!dAction" -->
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAccCustomer"></cc-spiner-procesar>
+
+<div class="modal fade" id="locationModals" tabindex="-1" role="dialog" aria-labelledby="locationModals"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="font-family: 'Poppins1';">
+            <div class="card border-0" style="font-size: 11px; background-color: rgb(255 255 255 / 73%);">
+                <div class="card-header">
+                    <table width="100%">
+                        <tr>
+                            <td class="text-left">
+                                <div class="card-title text-left title_h5 text-uppercase">
+                                    <strong>{{newOrigin}}</strong>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <div>
+                                        <button class="btn btn-success btn-xs button_margin" matTooltip="Guardar"
+                                            (click)="vaidateSaveCatalogo()">Guardar</button>
+                                        <button class="btn btn-danger btn-xs button_margin" matTooltip="Cancelar"
+                                            (click)="cancelcatalogo()" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <div class="row" *ngIf="tipoOrigin == 'BANCO'">
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo"
+                                        id="inputGroup-sizing-sm">{{valueLabel}}</span>
+                                </div>
+                                <input type="text" class="form-control form-control-sm" id="IdValorCatalogo"
+                                    [(ngModel)]="dataModalsCatalogo.value" placeholder="Ingrese valor" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo"
+                                        id="inputGroup-sizing-sm">Descripción</span>
+                                </div>
+                                <textarea cols="40" rows="1" class="form-control form-control-sm"
+                                    [(ngModel)]="dataModalsCatalogo.description" id="Idcausa"
+                                    placeholder="Ingrese Descripción" style="box-shadow: unset; outline: unset;">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

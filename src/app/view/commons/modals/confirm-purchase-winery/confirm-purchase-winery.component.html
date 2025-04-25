@@ -1,0 +1,270 @@
+<div class="filter">
+    <app-button-radio-active filtroBoton="btnsConfirmar" titulo="CONFIRMACIÓN COMPRA" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-check-square">
+        <div *ngIf=" permissions != undefined" class=" mt-2 mb-3">
+            <div class="row">
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Nº Factura" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left">{{up.num_documento.toString().padStart(10, 0)}}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Fecha de emisión" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left">{{fecha |date:'yyyy-MM-dd'}}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="{{up.tipo_documento}}" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left">{{up.documento_proveedor}}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <app-cc-input-group-prepend label="Nombre Comercial" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left">{{ up.razon_social }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+                <!--                 <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="{{up.tipo_documento}}" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left">{{up.documento_proveedor}}</label>
+                    </app-cc-input-group-prepend>
+                </div> -->
+            </div>
+
+            <!--             <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo">Razón Social</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="up.razon_social">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo">Teléfono</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" disabled [value]="up.telefono_proveedor">
+                </div>
+            </div>
+            </div> -->
+            <div class="row">
+                <!--                 <div class="col-sm-6">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo">Pais/Provincia/Ciudad</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="up.pais +'/' + up.provincia +'/' + upCiudad">
+                    </div>
+                </div> -->
+                <div class="col-sm-12">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo">Dirección</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="up.direccion_proveedor">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center filters">
+                <div class="col-md-12 mt-3">
+                    <div style="overflow-y: scroll; height: 200px">
+                        <div class="table-responsive responsive-table">
+                            <table class="table table-sm table-hover table-striped">
+                                <thead>
+                                    <tr style="width: 100%">
+                                        <th style="width: 6%">#</th>
+                                        <th style="width: 15%">Codigo</th>
+                                        <th style="width: 25%">Producto</th>
+                                        <th style="width: 10%">UDM</th>
+                                        <th style="width: 14%">Presentación</th>
+                                        <th style="width: 10%">Cantidad</th>
+                                        <th style="width: 10%">Cantidad Recibida</th>
+                                        <th style="width: 20%">Confirmar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let p of products; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td class="text-left">
+                                            {{ p.code_product | uppercase }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ p.nombre_producto | uppercase }}
+                                        </td>
+                                        <td>{{ p.UDMCompra | uppercase }}</td>
+                                        <td>{{ p.presentacion | uppercase }}</td>
+                                        <td>{{ p.cantidad }}</td>
+                                        <td>
+                                            <input :id="element{{ i }}" class="form-control text-right" [(ngModel)]="p.cant_recibida" min="1" 
+                                            min="0" (keypress)="commonServices.FormatDecimalVal($event)" (keyup)="validateAmount(i)">
+                                        </td>
+                                        <td>
+                                            <input :id="elements{{ i }}" type="checkbox" style="margin-left: 10px" [(ngModel)]="p.confirmar" (ngModelChange)="setProducto(p, i)">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: #404a63; color: white;" placeholder="Ingrese observación">Observación</span>
+                                </div>
+                                <textarea placeholder="Escriba alguna Observación" type="text" class="form-control" [(ngModel)]="observation" style="height:60px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<!-- <div class="modal-header" *ngIf="permissions != undefined">
+    <div class="row" style="width: 100%">
+        <div class="col-md-12">
+            <div class="title-head">
+                <i class="far fa-check-square"></i> <span>Confirmación Factura de Compra</span>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true" style="color:black;">&times;</span>
+    </button>
+</div>
+<div class="modal-body" *ngIf="permissions != undefined">
+    <app-button-radio-active filtroBoton="btnsConfirmar" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"  icono="fa fa-handshake-o">
+        <div class="row justify-content-center">
+            <div class="col-md-12 mt-2">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Nombre Comercial</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled [value]="up.nombre_comercial_prov">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">{{up.tipo_documento}}</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled [value]="up.documento_proveedor">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Nº Factura</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="up.num_documento.toString().padStart(10, 0)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Razón Social</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="up.razon_social">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Teléfono</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" disabled [value]="up.telefono_proveedor">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Fecha de emisión</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="fecha |date:'yyyy-MM-dd'">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-5">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Pais/Provincia/Ciudad</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="up.pais +'/' + up.provincia +'/' + up.ciudad">
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo">Dirección</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" [disabled]="true" [value]="up.direccion_proveedor">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center filters">
+            <div class="col-md-12 mt-3">
+                <div style="overflow-y: scroll; height: 200px">
+                    <div class="form-group table-responsive responsive-table">
+                        <table class="table table-sm table-hover table-striped">
+                            <thead>
+                                <tr class="text-center">
+                                    <th class="text-left">#</th>
+                                    <th>Codigo</th>
+                                    <th>Producto</th>
+                                    <th>UDM</th>
+                                    <th>Presentación</th>
+                                    <th>Cantidad</th>
+                                    <th>Cantidad Recibida</th>
+                                    <th>Confirmar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" style="width: 100%" *ngFor="let p of products; let i = index">
+                                    <td style="width: 3%">{{ i + 1 }}</td>
+                                    <td style="width: 15%" class="text-left">
+                                        {{ p.code_product | uppercase }}
+                                    </td>
+                                    <td style="width: 15%" class="text-left">
+                                        {{ p.nombre_producto | uppercase }}
+                                    </td>
+                                    <td style="width: 15%">{{ p.UDMCompra | uppercase }}</td>
+                                    <td style="width: 15%">{{ p.presentacion | uppercase }}</td>
+                                    <td style="width: 15%">{{ p.cantidad }}</td>
+                                    <td style="width: 10%">
+                                        <input :id="element{{ i }}" class="form-control text-right" [(ngModel)]="p.cant_recibida" min="1" (keypress)="commonServices.FormatDecimalVal($event)" type="number">
+                                    </td>
+                                    <td style="width: 8%">
+                                        <input :id="elements{{ i }}" type="checkbox" style="margin-left: 10px" [(ngModel)]="p.confirmar" (ngModelChange)="setProducto(p, i)">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <fieldset class="borders  p-2 mt-3">
+                    <div class="form-row">
+                        <div class="col-sm-11 col-md-12">
+                            <div class="form-group">
+                                <label class="l obs">Observación</label>
+                                <textarea name="observation" class="form-control form-control-sm" rows="2" [(ngModel)]="observation" placeholder="Escriba alguna Observación"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div> -->
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="sprecepcion-confirmacion"></cc-spiner-procesar>

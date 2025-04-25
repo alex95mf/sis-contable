@@ -1,0 +1,41 @@
+<div class="table-responsive responsive-table p-2">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table dataTable no-footer table-hover">
+        <thead class="thead-dark" *ngIf="validaDt">
+            <tr>
+                <th style="text-align: center;">Usuario</th>
+                <th style="text-align: center;" *ngFor="let d of dataHeader">{{d.nombre}}</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="validaDt">
+            <tr *ngFor="let d of dataBody">
+                <td style="text-align: left;">{{d.nombre_usuario}}</td>
+                <td *ngIf="d.crear && d.crear != undefined" style="text-align: center;">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="d.crear">
+                </td>
+                <td *ngIf="!d.crear && d.crear != undefined " style="text-align: center;">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="d.crear">
+                </td>
+                <td *ngIf="d.revisar && d.revisar != undefined " style="text-align: center;">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="d.revisar">
+                </td>
+                <td *ngIf="!d.revisar && d.revisar != undefined " style="text-align: center;">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="d.revisar">
+                </td>
+                <td *ngIf="d.procesar && d.procesar != undefined" style="text-align: center;">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="d.procesar">
+                </td>
+                <td *ngIf="!d.procesar && d.procesar != undefined" style="text-align: center;">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="d.procesar">
+                </td>
+                <td *ngIf="d.aprobar && d.aprobar != undefined" style="text-align: center;">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="d.aprobar">
+                </td>
+                <td *ngIf="!d.aprobar && d.aprobar != undefined" style="text-align: center;">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="d.aprobar">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spTaPermSeg"></cc-spiner-procesar>

@@ -1,0 +1,58 @@
+<div [fxLayout]="(menuParentId == 0 ) ? 'row' : 'column'" class="horizontal-menu-item" fxLayoutAlign="center center">
+    <div *ngFor="let menu of menuItems" class="horizontal-menu-item" fxLayoutAlign="center center">
+        <!-- <a *ngIf="menu.routerLink && !menu.hasSubMenu" mat-button style="text-decoration: none;" fxLayout="row"
+            [fxLayoutAlign]="(settings.menuType=='default') ? 'start center' : 'center center'"
+            [routerLink]="[menu.routerLink]" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}"
+            [matTooltip]="menu.title" matTooltipPosition="after"
+            [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'" (click)="onClick(menu.id)"
+            [id]="'menu-item-'+menu.id">
+            <i class='{{ menu.icon }} menu-icon'></i>
+            <span class="menu-title">{{menu.title}}</span>
+        </a>
+        <a *ngIf="menu.href && !menu.submenu" mat-button style="text-decoration: none;" fxLayout="row"
+                [fxLayoutAlign]="(settings.menuType=='default') ? 'start center' : 'center center'"
+                [attr.href]="menu.href || ''" [attr.target]="menu.target || ''" [matTooltip]="menu.title"
+                matTooltipPosition="after" [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'"
+                (click)="onClick(menu.id)" [id]="'menu-item-'+menu.id">
+                <i class='{{ menu.icon }} menu-icon'></i>
+                <span class="menu-title"> {{menu.title}}</span>
+        </a>
+        <a *ngIf="menu.hasSubMenu" mat-button style="text-decoration: none;" fxLayout="row"
+                [fxLayoutAlign]="(settings.menuType=='default') ? 'start center' : 'center center'" [matTooltip]="menu.title"
+                matTooltipPosition="after" [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'"
+                (click)="onClick(menu.id)" [id]="'menu-item-'+menu.id">
+                <i class='{{ menu.icon }} menu-icon'></i>
+                <span class="menu-title">{{menu.title}}</span>
+                <mat-icon class="menu-expand-icon transition-2">keyboard_arrow_down</mat-icon>
+            </a> -->
+
+  
+        <a *ngIf="menu.routerLink && !menu.hasSubMenu" mat-button [class.parent-item]="menuParentId == 0" style="text-decoration: none; font-size: 10px;"
+            fxLayout="row" fxLayoutAlign="(menuParentId == 0) ? 'center center' : 'start center'"
+            [routerLink]="[menu.routerLink]" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}"
+            [matTooltip]="menu.title" matTooltipPosition="after" [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'"
+            [id]="'horizontal-menu-item-'+menu.id">
+            <i class='{{menu.icon}}'></i>
+            &nbsp;&nbsp;<span class="horizontal-menu-title">{{menu.title}}</span>
+        </a>
+        <a *ngIf="menu.href && !menu.subMenu" mat-button [class.parent-item]="menuParentId == 0" style="text-decoration: none; font-size: 10px;"
+            fxLayout="row" [fxLayoutAlign]="(menuParentId == 0) ? 'center center' : 'start center'"
+            [attr.href]="menu.href || ''" [attr.target]="menu.target || ''"
+            [matTooltip]="menu.title" matTooltipPosition="after" [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'"
+            [id]="'horizontal-menu-item-'+menu.id">
+            <i class='{{menu.icon}}'></i>
+            &nbsp;&nbsp;<span class="horizontal-menu-title">{{menu.title}}</span>
+        </a>
+        <a *ngIf="menu.hasSubMenu" mat-button [class.parent-item]="menuParentId == 0" style="text-decoration: none; font-size: 10px;"
+            fxLayout="row" [fxLayoutAlign]="(menuParentId == 0) ? 'center center' : 'start center'"
+            [matTooltip]="menu.title" matTooltipPosition="after" [matTooltipDisabled]="(settings.menuType=='mini') ? 'false' : 'true'"
+            [id]="'horizontal-menu-item-'+menu.id">
+            <i class='{{menu.icon}}'></i>
+            &nbsp;&nbsp;<span class="horizontal-menu-title">{{menu.title}}</span>
+        </a>
+
+        <div *ngIf="menu.hasSubMenu" class="horizontal-sub-menu mat-elevation-z1" [id]="'horizontal-sub-menu-'+menu.id">
+            <app-horizontal-menu [menuItemsHori]="menuItemsHori"  [menuParentId]="menu.id"></app-horizontal-menu>
+        </div>
+    </div>
+</div>

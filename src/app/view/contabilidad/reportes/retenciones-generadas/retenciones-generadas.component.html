@@ -1,0 +1,114 @@
+<div class="mt-4 mb-5 pb-3">
+    <app-button-radio-active-new titulo="REPORTE - RETENCIONES GENERADAS" filtroBoton="btnsRetenGener"
+    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fa fa-buysellads">
+
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+
+                            <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                                <input type="date" data-date-format="DD MMMM YYYY" class="form-control form-control-sm" (change)="FromOrToChange($event)" id="idNominaDatef" [(ngModel)]="fromDatePicker">
+                            </app-cc-input-group-prepend>
+                                                    </div>
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                                <input type="date" data-date-format="DD MMMM YYYY" class="form-control form-control-sm" (change)="FromOrToChange($event)" id="idNominaDatef" [(ngModel)]="toDatePicker">
+                            </app-cc-input-group-prepend>
+                            
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <!-- <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado"> -->
+
+            <div class="p-2">
+
+
+                <div class="justify-content-center mt-4">
+                    <div class="table-responsive responsive-table content-tabla-general" class="h-auto">
+                        <p-table 
+                        [value]="dtConsultaRetencionesGeneradas" 
+                        [scrollable]="true" scrollHeight="500px" 
+                        [tableStyle]="{'min-width': '2000px'}" >
+                            <ng-template pTemplate="header">
+                                <tr style="font-size: 12px;">
+                                    <th class="d-none" style="width: 10% !important;text-align: center;">ID</th>
+                                    <th pFrozenColumn style="min-width: 180px" class="text-center fixed-header">Documento retención</th>                                    
+                                    <th pFrozenColumn style="min-width: 150px" class=" fixed-header">Doc. Proveedor</th>
+                                    <th style="min-width: 280px ">Razon Social</th>
+                                    <!-- <th style="min-width: 100px ">Ruc</th> -->
+                                    <th style="min-width: 80px ">Fecha Emision</th>
+                                    <!-- <th style="min-width: 100px ">Secuencia Compra</th> -->
+                                    <th style="min-width: 60px " class="d-flex justify-content-end">Base Fuente</th>
+                                    <th style="min-width: 60px " class="d-flex justify-content-end">Base IVA</th>
+                                    <th style="min-width: 60px ">Codigo Fuente</th>
+                                    <th style="min-width: 60px ">% Rete. Fuente</th>
+                                    <th style="min-width: 60px ">Codigo IVA</th>
+                                    <th style="min-width: 60px ">% Rete. IVA</th>
+                                    <th style="min-width: 60px " class="d-flex justify-content-end">Valor Ret. Fuente</th>
+                                    <th style="min-width: 60px " class="d-flex justify-content-end">Valor Ret. IVA</th>
+                                    <th style="min-width: 350px ">Autorización</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-dt>
+                                <tr style="font-size: 11px;">
+                                    <td class="text-center d-none"></td>
+                                    <td pFrozenColumn style="min-width: 180px" class=" fixed-header">{{dt.retencion}}</td>
+                                    <td pFrozenColumn style="min-width: 150px" class=" fixed-header">{{dt.compra}}</td>
+                                    <td style="min-width: 280px">
+                                        <div class="col">
+                                            <div class="row">
+                                                {{ dt.razon_social }}
+                                            </div>
+                                            <div class="row" style="font-size: 10px;">
+                                                <small class="text-muted"><b>{{ dt.tipo_documento }}</b>:  {{ dt.num_documento }}</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!-- <td style="min-width: 280px">{{ dt.razon_social }}</td>
+                                    <td style="min-width: 100px">{{dt.num_documento}}</td> -->
+                                    <td style="min-width: 80px"> {{dt.fecha_emision}}</td>
+                                    <!-- <td style="min-width: 100px"> </td> -->
+                                    <td style="min-width: 60px" class="d-flex justify-content-end">$ {{dt.base_fte | number:'1.2-2'}}</td>
+                                    <td style="min-width: 60px" class="d-flex justify-content-end">$ {{dt.base_iva | number:'1.2-2'}}</td>
+                                    <td style="min-width: 60px">{{dt.cod_fte}}</td>
+                                    <td style="min-width: 60px">{{dt.porce_fte | number:'1.2-2' }} %</td>
+                                    <td style="min-width: 60px">{{dt.cod_iva}}</td>
+                                    <td style="min-width: 60px">{{dt.porce_iva | number:'1.2-2' }} %</td>
+                                    <td style="min-width: 60px" class="d-flex justify-content-end">$ {{dt.val_rt_fte | number:'1.2-2'}}</td>
+                                    <td style="min-width: 60px" class="d-flex justify-content-end">$ {{dt.val_rt_iva | number:'1.2-2'}}</td>
+                                    <td style="min-width: 350px" class="text-center">{{dt.num_autorizacion}}</td>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td class="EmptyTable" [attr.colspan]="15">
+                                        No hay información para mostrar
+                                     </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+
+
+        <!-- </div>
+        <ng-template #PermisoVerDenegado>
+            <app-permiso-denegado></app-permiso-denegado>
+        </ng-template> -->
+    </app-button-radio-active-new>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAsiento"></cc-spiner-procesar>

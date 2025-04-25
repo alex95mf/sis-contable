@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <div class="row" style="width: 100%;">
+        <div class="col-md-12">
+            <div class="title-head text-uppercase">
+                <span>Cuentas Banco</span>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true" style="color: rgba(0, 0, 0, 0.664);">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12" style="padding-top: 20px;padding-bottom: 20px;">
+            <div class="table-responsive responsive-table">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                    <thead class="thead-dark" >
+                        <tr>
+                            <th style="width: 19%;">No. cuenta</th>
+                            <th style="width: 17%;">Clase</th>
+                            <th style="width: 17%;">Tipo</th>
+                            <th style="width: 17%;">Grupo</th>
+                            <th style="width: 30%;">Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="validaDt">
+                        <tr *ngFor="let dt of dataDT" (click)="setDataAccount(dt)" style="cursor:pointer;width: 100%;">
+                            <td>{{ dt.codigo }}</td>
+                            <td>{{ dt.clase }}</td>
+                            <td>{{ dt.tipo }}</td>
+                            <td>{{ dt.grupo }}</td>
+                            <td>{{ dt.nombre }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

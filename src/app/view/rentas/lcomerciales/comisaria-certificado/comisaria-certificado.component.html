@@ -1,0 +1,81 @@
+
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-hand-pointer"
+    filtroBoton="btnsComiCerti" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10"> 
+                <app-cc-input-group-prepend label="Tipo Certificado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                        [(ngModel)]="tipo_certificado" (change)="selectedTipoCert($event)"
+                        [readonly]="false">
+                        <ng-option [value]=0 disabled>Seleccione tipo</ng-option>
+                        <ng-option *ngFor="let d of tipo_cert" [value]="d.value">{{ d.label }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row ">
+                <div class="col-1"></div>
+                <div class="col-10"> 
+                    <app-cc-input-group-prepend label="Tipo Doc." styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                            (ngModelChange)="changeMaxlength($event)" [(ngModel)]="contribuyente.tipo_documento"
+                            [readonly]="false">
+                            <ng-option [value]=0 disabled>Seleccione documento</ng-option>
+                            <ng-option *ngFor="let d of tipo_doc" [value]="d.valor">{{ d.valor }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10"> 
+                <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo font-weight-bold">
+                    <input id="num_documento" type="text" class="form-control form-control-sm" placeholder="Número del documento"
+                        [(ngModel)]="NoDocumento" maxlength="{{NOCedula}}" [readonly]="false">
+                    <button [disabled]="disabledBuscarContri" class="btn btn-primary btn-sm" ngbTooltip="Buscar" (click)="validacionContribu()"><i
+                        class="fas fa-search"></i>Buscar</button>
+                </app-cc-input-group-prepend>
+            </div>
+            
+            </div>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10"> 
+                <app-cc-input-group-prepend label="Nombres" styleSpan="size-span-campo font-weight-bold">
+                    <input id="nombre_contribuyente" type="text" class="form-control form-control-sm" placeholder="Nombres"
+                        [(ngModel)]="nombreContribuyente" [readonly]="true">
+                    </app-cc-input-group-prepend>
+            </div>
+        </div>
+        
+        <div class="row" *ngIf="contribuyente.tipo_documento !='Ruc'">
+            <div class="col-1"></div>
+            <div class="col-10"> 
+                <app-cc-input-group-prepend label="Fecha de Nacimiento" styleSpan="font-weight-bold size-span-campo">
+                    <input id="fecha_nacimiento" type="date" class="form-control" [(ngModel)]="fechaNacimiento" [readonly]="true">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row" *ngIf="mostrarDeuda">
+            <div class="col-1"></div>
+            <div class="col-10"> 
+                <h6> ¿ Tiene Deuda ? :   <span class="font-weight-bold">{{ adeuda }}</span></h6>
+            </div>
+        </div>
+        <div class="row" *ngIf="mostrarBtnVerificar">
+            <div class="col text-center">
+                <button class="btn btn-primary btn-sm" ngbTooltip="Verificar Deuda" (click)="verificarDeuda()" [disabled]="!nombreContribuyente">Verificar Deuda</button>
+            </div>
+        </div>
+        <div class="row" *ngIf="mostrarBtnCertificado">
+            <div class="col text-center">
+                <button class="btn btn-primary btn-sm" ngbTooltip="Generar Certificado" (click)="generarCertificado()">Generar Certificado</button>
+            </div>
+        </div>
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="renConsultaReporte"></cc-spiner-procesar>
+
+
+

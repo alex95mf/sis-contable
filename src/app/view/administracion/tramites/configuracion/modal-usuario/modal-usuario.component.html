@@ -1,0 +1,20 @@
+<app-button-radio-active titulo="Usuarios" cstyle="bg-light text-dark" icono="fas fa-user"
+  filtroBoton="btnsUser" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+  <div class="col-8">
+
+    <app-cc-input-group-prepend label="Usuarios" styleSpan="size-span-campo font-weight-bold">
+      <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="selectUser"
+         >
+        <!-- <ng-option [value]="0">Selecciones el usuario</ng-option> -->
+        <ng-option *ngFor="let user of usuariospre" [value]="user">{{user.nombre}}</ng-option>
+      </ng-select>
+  
+    </app-cc-input-group-prepend>
+
+  </div>
+  
+
+
+
+</app-button-radio-active>

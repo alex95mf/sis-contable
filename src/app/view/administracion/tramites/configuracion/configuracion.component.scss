@@ -1,0 +1,31 @@
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.col-paso-th {
+    left: 0;
+    position: sticky;
+    z-index: 1;
+    background-color: #F0F3F5;
+}
+.col-descripcion-th {
+    left: 95px;
+    position: sticky;
+    z-index: 1;
+    background-color: #F0F3F5;
+}
+.col-paso-td {
+    left: 0;
+    position: sticky;
+    z-index: 1;
+    background-color: #FFFFFF;
+    // opacity: 1; 
+}
+.col-descripcion-td {
+    left: 95px;
+    position: sticky;
+    z-index: 1;
+    background-color:#FFFFFF;
+    // opacity: 1; 
+}

@@ -1,0 +1,76 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-money-check-edit-alt"
+    filtroBoton="btnsConfiguracionContable" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border pb-2 px-3 mb-2">
+        <legend class="w-auto mb-1 bg-dark">Filtros</legend>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Tipos de pago" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control form-control-sm" [clearable]="true" [(ngModel)]="filter.submodulo" >
+                        <ng-option *ngFor="let item of tipoPagos" [value]="item.valor">{{item.nombre}}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>                
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Forma de pago" styleSpan="font-weight-bold">
+                    <input id="filter_codigo" type="text" class="form-control" [(ngModel)]="filter.forma_pago" placeholder="Forma de pago... ">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Descripcion" styleSpan="font-weight-bold">
+                    <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="filter.descripcion" placeholder="Descripcion... ">
+                </app-cc-input-group-prepend>
+            </div>                    
+        </div>
+    </fieldset>
+
+    <table class="table table-bordered no-footer table-hover mb-2">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th> Modulo </th>
+                <th> Forma_pago </th>
+                <th> Descripcion </th>
+                <th> Cuenta deudora </th>
+                <th> Cuenta acreedora </th>
+                <th> Codigo presupuesto </th>
+                <th> Estado </th>
+                <th> Acciones </th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr *ngIf="configuracionContable.length == 0">
+                <td colspan="8" class="text-center">
+                    <h6>No hay datos para mostrar</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let item of configuracionContable" class="text-center">
+                <td> {{item.modulo.nombre}} </td>
+                <td> {{item.forma_pago}}  </td>
+                <td> {{item.descripcion}}  </td>
+                <td> {{item.cuenta_deudora?.codigo}}  </td>
+                <td> {{item.cuenta_acreedora?.codigo ?? 'N/A'}}  </td>
+                <td> {{item.codigo_presupuesto?.codigo ?? 'N/A'}}  </td>
+                <td>
+                    <i class="fas fa-circle" [ngClass]="item.estado == 'A' ? 'text-success' : (item.estado == 'C' ? 'text-danger' : '')"></i>
+                    <span *ngIf="item.estado == 'A'"> Activo</span>
+                    <span *ngIf="item.estado == 'C'"> Inactivo</span>
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-sm" (click)="nuevoModal(false, item)"><i class="fas fa-edit"></i></button>
+                </td>
+
+            </tr>
+
+        </tbody>
+    </table>
+    <mat-paginator 
+        [pageIndex]="paginate.pageIndex"
+        [length]="paginate.length"
+        [pageSize]="paginate.perPage"
+        (page)="changePaginate($event)"
+        showFirstLastButtons
+        aria-label="Select page">
+    </mat-paginator>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lTipo="spConfigContable"></cc-spiner-procesar>

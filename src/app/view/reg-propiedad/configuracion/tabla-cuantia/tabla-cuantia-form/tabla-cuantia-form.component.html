@@ -1,0 +1,84 @@
+<div>
+    <app-button-radio-active [titulo]="esNuevo ? 'Nueva cuantia' : 'Editar cuantia'" filtroBoton="btnFormCuantia" cstyle="bg-gradient-primary text-white" [groupButton]="botonesPermisos" (onMetodoGlobal)="metodoGlobal($event)" [icono]="esNuevo ? 'far fa-plus-square' : 'far fa-edit'">
+
+        <div class="row mt-3">
+
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Período" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" appendTo="body" [clearable]="false"  [(ngModel)]="cuantia.periodo" 
+                        [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo" [disabled]="!esNuevo">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="tipo" class="form-control form-control-sm"   [(ngModel)]="cuantia.tipo" [clearable]="false" [disabled]="!esNuevo">
+                        <ng-option disabled [value]="0" disabled>Seleccione tipo</ng-option>
+                        <ng-option *ngFor="let d of tipoList" [value]="d.value">{{ d.label }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Desde" styleSpan="size-span-campo font-weight-bold">
+                    <input id="desde" type="number" class="form-control form-control-sm" [(ngModel)]="cuantia.desde" >
+                </app-cc-input-group-prepend>
+                <!-- <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Desde</span>
+                    </div>
+                    <input id="desde" type="number" class="form-control form-control-sm" [(ngModel)]="cuantia.desde" >
+                </div> -->
+            </div>   
+
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Hasta" styleSpan="size-span-campo font-weight-bold">
+                    <input id="hasta" type="number" class="form-control form-control-sm" [(ngModel)]="cuantia.hasta" >
+                </app-cc-input-group-prepend>
+                <!-- <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Hasta</span>
+                    </div>
+                    <input id="hasta" type="number" class="form-control form-control-sm" [(ngModel)]="cuantia.hasta" >
+                </div> -->
+            </div>   
+
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo font-weight-bold">
+                    <input id="valor" type="number" class="form-control form-control-sm" [(ngModel)]="cuantia.valor" >
+                </app-cc-input-group-prepend>
+                <!-- <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Valor</span>
+                    </div>
+                    <input id="valor" type="number" class="form-control form-control-sm" [(ngModel)]="cuantia.valor" >
+                </div> -->
+            </div>   
+
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Porcentaje" styleSpan="size-span-campo font-weight-bold">
+                    <input id="porcentaje" type="number" class="form-control form-control-sm" [(ngModel)]="cuantia.porcentaje" >
+                </app-cc-input-group-prepend>
+                <!-- <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Porcentaje</span>
+                    </div>
+                    <input id="porcentaje" type="number" class="form-control form-control-sm" [(ngModel)]="cuantia.porcentaje" >
+                </div> -->
+            </div>  
+            <div class="col-12">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="estado" class="form-control" [clearable]="false" [searchable]="false" [(ngModel)]="cuantia.estado">
+                        <ng-option disabled [value]="0">Seleccionar</ng-option>
+                        <ng-option *ngFor="let e of listaEstados" [value]="e.value">{{ e.label }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div> 
+
+
+        </div>
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeH" lfulScren=true lTipo="formCuantia"></cc-spiner-procesar>

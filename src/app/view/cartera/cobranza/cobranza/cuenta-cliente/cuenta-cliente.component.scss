@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+    font-family: "Poppins1";
+    src: url('../../../../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "PoppinsTourney";
+    src: url("../../../../../../assets/fonts/Tourney-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+.filters {
+    background-color: white;
+    .altura {
+        max-height: 100px;
+        min-height: 100px;
+        overflow-y: scroll;
+    }
+    table {
+        thead {
+            tr {
+                th {
+                    /* padding: 6px 0px 8px 10px; */
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    /* text-align: center !important; */
+                    /* padding: 5px 10px 5px 10px; */
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 10px;
+                    textarea,
+                    input {
+                        width: 100%;
+                        //text-align: center;
+                        padding-left: 2px;
+                        margin-top: 5px !important;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                    ng-select {
+                        margin-top: 5px !important;
+                        font-size: 11px !important;
+                    }
+                    button {
+                        margin-top: 5px !important;
+                        padding: 2px 8px 2px 8px;
+                    }
+                }
+            }
+        }
+    }
+}

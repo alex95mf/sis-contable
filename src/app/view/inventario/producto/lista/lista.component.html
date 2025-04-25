@@ -1,0 +1,266 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Lista de precios" filtroBoton="btnslistaPrecios"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-list-alt">
+        <div class="row mt-2">
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Producto" styleSpan="size-span-campo">
+                    <ng-select id="IdProducto" class="form-control custom" appendTo="body" [searchable]="true"
+                        [clearable]="false" [(ngModel)]="productoSelect" (ngModelChange)="searchProducto($event)">
+                        <!-- [disabled]="disProducto" -->
+                        <ng-option [value]="0">Todos</ng-option>
+                        <ng-option *ngFor="let d of arrayProducto" [value]="d.id_producto">{{d.nombre}}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Precio" styleSpan="size-span-campo">
+                    <select class="form-control form-control-sm custom" style="height: 30px;" id="IdPrecio"
+                        [(ngModel)]="precioSelect" (ngModelChange)="searchTipePrice()">
+                        <!-- [disabled]="disPrecio" -->
+                        <option class="text-uppercase" [value]="0">Todos</option>
+                        <option *ngFor="let d of dataTipoPrecios" [value]="d.name_ref">
+                            <span>{{d.name}}</span>
+                        </option>
+                    </select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Marca" styleSpan="size-span-campo">
+                    <select class="form-control form-control-sm custom" style="height: 30px;" id="IdPrecio"
+                        [(ngModel)]="marcaSelect" (ngModelChange)="searchMark($event)">
+                        <option class="text-uppercase" [value]="0">Todos</option>
+                        <option *ngFor="let d of arrayMark" [value]="d.nombre">
+                            <span>{{d.marca}}</span>
+                        </option>
+                    </select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Grupos" styleSpan="size-span-campo">
+                    <select class="form-control form-control-sm custom" style="height: 30px;" id="IdPrecio"
+                        [(ngModel)]="grupoSelect" (ngModelChange)="searchGroup($event)">
+                        <option class="text-uppercase" [value]="0">Todos</option>
+                        <option *ngFor="let d of arrayGroup" [value]="d.nombregrupo">
+                            <span>{{d.grupo}}</span>
+                        </option>
+                    </select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row  mt-3 mb-4" *ngIf="dataTipoPrecios.length > 0">
+            <div class="col-md-12">
+                <fieldset class="border p-2 filters">
+                    <legend class="w-auto h6">Lista de Precios</legend>
+                    <div class="row justify-content-center">
+                        <div class="col-12 pl-3 pr-3 ">
+                            <div class="table-responsive responsive-table mt-2"
+                                style="overflow-y: scroll; max-height: 300px">
+                                <table id="tablaConsulPrice" class="table no-footer table-hover">
+                                    <thead style="width: 100%;">
+                                        <tr>
+                                            <!-- <th style="width: 15%;">Grupo</th> -->
+                                            <th style="width: 9%;">Código</th>
+                                            <th style="width: 22%;">Nombre</th>
+                                            <th style="width: 9%;">Marca</th>
+                                            <th style="width: 9%;">Grupo</th>
+                                            <th style="width: 6%;">Stock</th>
+                                            <th *ngIf="precioSelect == 'Consumidor final'" style="width: 10%;">
+                                                {{precioSelectView}}</th>
+                                            <th *ngIf="precioSelect == 0 " style="width: 10%;">
+                                                {{dataTipoPrecios[0]['name']}}</th>
+
+                                            <th *ngIf="precioSelect == 'Fijo'" style="width: 7%;">{{precioSelectView}}
+                                            </th>
+                                            <th *ngIf="precioSelect == 0 " style="width: 7%;">
+                                                {{dataTipoPrecios[1]['name']}}</th>
+
+                                            <th *ngIf="precioSelect == 'Concurrente'" style="width: 7%;">
+                                                {{precioSelectView}}</th>
+                                            <th *ngIf="precioSelect == 0 " style="width: 7%;">
+                                                {{dataTipoPrecios[2]['name']}}</th>
+
+                                            <th *ngIf="precioSelect == 'Minorista'" style="width: 7%;">
+                                                {{precioSelectView}}</th>
+                                            <th *ngIf="precioSelect == 0  " style="width: 7%;">
+                                                {{dataTipoPrecios[3]['name']}}</th>
+
+                                            <th *ngIf="precioSelect == 'Medio'" style="width: 7%;">{{precioSelectView}}
+                                            </th>
+                                            <th *ngIf="precioSelect == 0 " style="width: 7%;">
+                                                {{dataTipoPrecios[4]['name']}}</th>
+
+                                            <th *ngIf="precioSelect == 'Mayorista'" style="width: 7%;">
+                                                {{precioSelectView}}</th>
+                                            <th *ngIf="precioSelect == 0 " style="width: 7%;">
+                                                {{dataTipoPrecios[5]['name']}}</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="validaDt">
+                                        <tr *ngFor="let dt of infoData; let i = index">
+                                            <!-- <td >{{dt.nombreGrupo}}</td> -->
+                                            <td><span>{{dt.codigoproducto}}</span></td>
+                                            <td><span>{{dt.nombre | uppercase}}</span></td>
+                                            <td><span>{{dt.marca}}</span></td>
+                                            <td><span>{{dt.nombreGrupo}}</span></td>
+                                            <td class="text-right pr-2"><span>{{parseFloatStock(dt.stock)}}</span></td>
+
+
+                                            <td *ngIf="precioSelect == 'Consumidor final' || precioSelect == 0 "
+                                                class="text-right pr-2">
+                                                <span>$ {{dt.PVP}}</span>
+                                            </td>
+                                            <td *ngIf="precioSelect == 'Fijo' || precioSelect == 0 "
+                                                class="text-right pr-2">
+                                                <span>$ {{dt.precio1}}</span>
+                                            </td>
+                                            <td *ngIf="precioSelect == 'Concurrente' || precioSelect == 0"
+                                                class="text-right pr-2">
+                                                <span>$ {{dt.precio2}}</span>
+                                            </td>
+                                            <td *ngIf="precioSelect == 'Minorista' || precioSelect == 0 "
+                                                class="text-right pr-2">
+                                                <span>$ {{dt.precio3}}</span>
+                                            </td>
+                                            <td *ngIf="precioSelect == 'Medio' || precioSelect == 0 "
+                                                class="text-right pr-2">
+                                                <span>$ {{dt.precio4}}</span>
+                                            </td>
+                                            <td *ngIf="precioSelect == 'Mayorista' || precioSelect == 0"
+                                                class="text-right pr-2">
+                                                <span>$ {{dt.precio5}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="splistProduct"></cc-spiner-procesar>
+<div [hidden]="true" id="print-section" class="printInfo">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-5 text-center mt-4">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7 text-center mt-4">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>INVENTARIO</h3>
+                                <p>LISTA DE PRECIOS</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center mt-5" *ngIf="dataTipoPrecios.length > 0">
+                <div class="col-md-12 text-center">
+                    <div>
+                        <div class="table-responsive responsive-table">
+                            <table class="table no-footer table-hover">
+                                <thead style="width: 100%;">
+                                    <tr>
+                                        <th style="width: 24%;">Nombre</th>
+                                        <th style="width: 10%;">Código</th>
+                                        <th style="width: 6%;">Stock</th>
+                                        <th *ngIf="precioSelect == 'Consumidor final'" style="width: 10%;">
+                                            {{precioSelectView}}</th>
+                                        <th *ngIf="precioSelect == 0 " style="width: 10%;">
+                                            {{dataTipoPrecios[0]['name']}}</th>
+
+                                        <th *ngIf="precioSelect == 'Fijo'" style="width: 10%;">{{precioSelectView}}
+                                        </th>
+                                        <th *ngIf="precioSelect == 0 " style="width: 10%;">
+                                            {{dataTipoPrecios[1]['name']}}</th>
+
+                                        <th *ngIf="precioSelect == 'Concurrente'" style="width: 10%;">
+                                            {{precioSelectView}}</th>
+                                        <th *ngIf="precioSelect == 0 " style="width: 10%;">
+                                            {{dataTipoPrecios[2]['name']}}</th>
+
+                                        <th *ngIf="precioSelect == 'Minorista'" style="width: 10%;">
+                                            {{precioSelectView}}</th>
+                                        <th *ngIf="precioSelect == 0  " style="width: 10%;">
+                                            {{dataTipoPrecios[3]['name']}}</th>
+
+                                        <th *ngIf="precioSelect == 'Medio'" style="width: 10%;">{{precioSelectView}}
+                                        </th>
+                                        <th *ngIf="precioSelect == 0 " style="width: 10%;">
+                                            {{dataTipoPrecios[4]['name']}}</th>
+
+                                        <th *ngIf="precioSelect == 'Mayorista'" style="width: 10%;">
+                                            {{precioSelectView}}</th>
+                                        <th *ngIf="precioSelect == 0 " style="width: 10%;">
+                                            {{dataTipoPrecios[5]['name']}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngFor="let dt of infoData; let i = index">
+                                        <td><span>{{dt.nombre | uppercase}}</span></td>
+                                        <td><span>{{dt.codigoProducto}}</span></td>
+                                        <td class="text-right pr-2"><span>{{parseFloatStock(dt.stock)}}</span></td>
+
+
+                                        <td *ngIf="precioSelect == 'Consumidor final' || precioSelect == 0 "
+                                            class="text-right pr-2">
+                                            <span>$ {{dt.PVP}}</span>
+                                        </td>
+                                        <td *ngIf="precioSelect == 'Fijo' || precioSelect == 0 "
+                                            class="text-right pr-2">
+                                            <span>$ {{dt.precio1}}</span>
+                                        </td>
+                                        <td *ngIf="precioSelect == 'Concurrente' || precioSelect == 0"
+                                            class="text-right pr-2">
+                                            <span>$ {{dt.precio2}}</span>
+                                        </td>
+                                        <td *ngIf="precioSelect == 'Minorista' || precioSelect == 0 "
+                                            class="text-right pr-2">
+                                            <span>$ {{dt.precio3}}</span>
+                                        </td>
+                                        <td *ngIf="precioSelect == 'Medio' || precioSelect == 0 "
+                                            class="text-right pr-2">
+                                            <span>$ {{dt.precio4}}</span>
+                                        </td>
+                                        <td *ngIf="precioSelect == 'Mayorista' || precioSelect == 0"
+                                            class="text-right pr-2">
+                                            <span>$ {{dt.precio5}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="font-family: 'Poppins1';" *ngIf="dataUser != undefined">
+                <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+                    <span style="color: #13A1EA;">
+                        Fecha: {{dateNow}}&nbsp;{{hora}}</span>
+                </div>
+                <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+                    <span style="color: #13A1EA;">
+                        Usuario: {{dataUser.nombre}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

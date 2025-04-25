@@ -1,0 +1,27 @@
+<div class="filters">
+    <div class="table-responsive responsive-table ">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="text-align: center;">ID</th>
+                    <th style="text-align: center;">Nombre</th>
+                    <th style="text-align: center;">Tipo</th>
+                    <th style="text-align: center;">Grupo</th>
+                    <th style="text-align: center;">Clase</th>
+                    <th style="text-align: center;">Codigo</th>
+                </tr>
+            </thead>
+
+            <tbody *ngIf="validaDtUser">
+                <tr *ngFor="let dt of guardarolT" placement="top" ngbTooltip="Click para seleccionar la cuenta" (click)="updateCuenta(dt)" style="cursor:pointer;text-align:center;">
+                    <td>{{dt.id}}</td>
+                    <td style="width: 35%;text-align:left;">{{dt.nombre}}</td>
+                    <td>{{dt.tipo}}</td>
+                    <td>{{dt.grupo}}</td>
+                    <td>{{dt.clase}}</td>
+                    <td>{{dt.codigo}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

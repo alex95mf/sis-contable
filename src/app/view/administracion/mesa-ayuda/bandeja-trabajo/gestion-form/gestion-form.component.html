@@ -1,0 +1,197 @@
+<app-button-radio-active-new [titulo]="'Gestión'" filtroBoton="btnGestionTicketForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+ 
+
+ 
+    <fieldset class="border card-fieldset">
+    <legend class="w-auto card-legend">Información de Ticket</legend>
+        <div class="row m-0">
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Nro</span></div>
+                    <input type="text" class="form-control form-control-sm" readonly value=" {{ ticketEdit.id_ticket}}">
+                </div>
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Categor&iacute;a</span>
+                    </div>
+                    <ng-select id="categoria" class="form-control form-control-sm " [(ngModel)]="ticketEdit.categoria" [disabled]="deshabilitar" maxlength="5">
+                        <ng-option disabled [value]="0">Seleccione una Categor&iacute;a</ng-option>
+                        <ng-option *ngFor="let op of categorias" [value]="op.valor">{{ op.descripcion }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span style="width:140px;" class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Sub Categor&iacute;a</span>
+                    </div>
+                    <ng-select id="sub_categoria" class="form-control form-control-sm" [(ngModel)]="ticketEdit.subcategoria" [disabled]="deshabilitar" maxlength="5">
+                        <ng-option disabled [value]="0">Seleccione una Sub Categor&iacute;a</ng-option>
+                        <ng-option *ngFor="let op of subCategorias" [value]="op.valor">{{ op.descripcion }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+        </div>
+        <div class="row m-0">
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Usuario:" styleSpan="size-span-campo font-weight-bold">
+
+                    <input type="text" class="form-control form-control-sm" readonly value=" {{ ticketEdit.usuario.nombre | titlecase}}">
+                </app-cc-input-group-prepend>
+                
+
+                <app-cc-input-group-prepend label="Prioridad:" styleSpan="size-span-campo font-weight-bold">
+
+                    <ng-select id="categoria" class="form-control form-control-sm" [(ngModel)]="ticketEdit.prioridad" [disabled]="deshabilitar" maxlength="5">
+                        <ng-option disabled [value]="0">Seleccione una Prioridad</ng-option>
+                        <ng-option *ngFor="let op of prioridadList" [value]="op.value">
+                            <i placement="bottom" [ngbTooltip]="(op.value == 'A') ? 'Alta' : (op.value == 'M') ? 'Media' : ((op.value == 'B') ? 'Baja' : 'No tiene')" [class]="(op.value == 'A') ? 'fas fa-circle text-danger' : (op.value == 'M') ? 'fas fa-circle text-warning' : ((op.value == 'B') ? 'fas fa-circle text-success' : 'fas fa-circle text-muted')">
+                            </i>
+                            {{ op.label }}
+                        </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+
+             
+  
+            </div>
+            <div class="col-12 col-md-8 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Departamento:" styleSpan="size-span-campo font-weight-bold">
+
+                    <input type="text" class="form-control form-control-sm" readonly value=" {{ ticketEdit.usuario.departamento ? ticketEdit.usuario.departamento.dep_nombre : 'Sin departamento' }}">
+                </app-cc-input-group-prepend>
+                <app-cc-input-group-prepend label="Observación:" styleSpan="size-span-campo font-weight-bold">
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="ticketEdit.observacion" [disabled]="deshabilitar" maxlength="300"></textarea>
+                </app-cc-input-group-prepend>
+
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="border card-fieldset">
+        <legend class="w-auto card-legend">Gestión de Ticket</legend>
+        <div class="row m-0">
+            <div class="col-12 col-md-4 pt-0 pb-0">
+
+                <app-cc-input-group-prepend label="Estado:" styleSpan="size-span-campo font-weight-bold">
+
+                    <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="gesTicket.estado" maxlength="5" (change)="selectedEstado($event)" >
+                        <ng-option disabled [value]="0">Seleccione un Estado</ng-option>
+                        <ng-option *ngFor="let op of estadoList" [value]="op.valor">{{ op.descripcion }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+
+
+
+            </div>
+            <div class="col-12 col-md-8 pt-0 pb-0">
+
+                <app-cc-input-group-prepend label="Observación:" styleSpan="size-span-campo font-weight-bold">
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [(ngModel)]="gesTicket.observacion" maxlength="300"></textarea>
+
+                </app-cc-input-group-prepend>
+
+            </div>
+        </div>
+        <div *ngIf="subirFoto">
+            <div class="row m-0">
+                <div class="col-12 col-md-4 pt-0 pb-0">
+            
+                    <app-cc-input-group-prepend label="Fotos" styleSpan="size-span-campo font-weight-bold">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*" multiple  (change)="cargaFoto($event.target.files)">
+                            <label class="custom-file-label" for="inputGroupFile01">{{ fotos.length > 0 ? "Ha seleccionado " + fotos.length + " Fotos" : "Seleccione fotos a subir" }}</label>
+                        </div>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-8 pt-0 pb-0">
+                    <div class="multiple-image-container">
+                        <div *ngFor='let foto of fotos, let i = index' class="multiple-image-preview">
+                            <img [src]="foto.recurso" (click)="expandirVistaFotos(i)" class="img-thumbnail">
+                            <button  class="btn btn-sm btn-danger" placement="top" ngbTooltip="Eliminar Foto" (click)="removeFoto(i)"><i class="far fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+ 
+
+
+               
+           
+                <!-- <div  class="col-6">
+                    <div class="input-group input-group-sm mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text font-weight-bold">Foto</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile02" accept=".pdf"
+                                (change)="cargaArchivo2($event.target.files)"
+                                [disabled]="disabledCampo">
+                            <label class="custom-file-label" for="inputGroupFile02">{{ fileList2 !== undefined ?
+                                fileList2[0].name : "Seleccione un archivo" }}</label>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <app-anexos-list-dis [identifier]="data.id_ticket" custom1="TICKET-GESTION"></app-anexos-list-dis>
+                </div> -->
+           
+        </div>
+    </fieldset>
+
+
+    <fieldset class="border card-fieldset">
+        <legend class="w-auto card-legend">Acciones Recientes</legend>
+        <div class="row m-0">
+            <div class="col">
+
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+
+              
+                        <tr class="text-center">
+                            <th style="width: 5%;">Fecha</th>
+                            <th style="width: 10%;">Usuario</th>
+                            <th style="width: 20%;">Observaci&oacute;n</th>
+                            <th style="width: 20%;">Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="ticketSegui.length == 0">
+                            <td colspan="8" class="text-center">
+                                <h6 class="my-1">Su ticket no ha sido atendido.</h6>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let dt of ticketSegui, let i = index">
+
+                            <td class="text-center">{{ dt.fecha | date:'dd/MM/yyyy'}}</td>
+                            <td class="text-center"><i class="fa fa-user" aria-hidden="true"></i>
+                                {{ dt.usuario | titlecase }}
+                            </td>
+                            <td class="text-center">{{ dt.observacion }}</td>
+                            <td>
+                                <div *ngIf="dt.foto!=null" class="multiple-image-container">
+                                    <div  class="multiple-image-preview">
+                                        <img [src]="dt.foto" (click)="expandirVistaFotos(dt.foto)" class="img-thumbnail">
+                                        <!-- <button  class="btn btn-sm btn-danger" [disabled]="true" placement="top" ngbTooltip="Eliminar Foto" (click)="removeFoto(i)"><i class="far fa-trash-alt"></i></button> -->
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+
+</app-button-radio-active-new>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>

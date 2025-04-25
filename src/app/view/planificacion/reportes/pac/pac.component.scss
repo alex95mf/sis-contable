@@ -1,0 +1,21 @@
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+}
+
+.col-head {
+    left: 0px;
+    position: sticky;
+    z-index: 4;
+    background-color: whitesmoke;
+    width: 280px;
+}
+
+.col-nombre {
+    left: 0px;
+    position: sticky;
+    z-index: 3;
+    width: 280px;
+    background-color: whitesmoke;
+}

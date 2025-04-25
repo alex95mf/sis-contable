@@ -1,0 +1,78 @@
+<div *ngIf="lugar_turistico">
+    <app-button-radio-active [titulo]="esNuevoLTur ? 'Nuevo Lugar Turístico' : 'Editar Lugar Turístico' " filtroBoton="btnsFormLTuristicos" cstyle="bg-gradient-primary text-white" [groupButton]="botonera" (onMetodoGlobal)="metodoGlobal($event)" [icono]="esNuevoLTur ? 'far fa-plus-square' : 'far fa-edit'">
+       
+        
+        <div class="row mt-2">
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Categoría</span>
+                    </div>
+  
+                    <ng-select  id="inputGroup-sizing-sm" class="form-control form-control-sm" [(ngModel)]="lugar_turistico.categoria" (change)="cargarSubCat($event)" >
+                        <ng-option disabled [value]="0">Seleccione una  categoría</ng-option>
+                        <ng-option *ngFor="let op of lista_categorias" [value]="op.codigo" >{{op.nombre}}</ng-option>
+                    </ng-select>
+                </div>
+    
+            </div>
+    
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">SubCategoría</span>
+                    </div>
+    
+                    <ng-select [disabled]="cat_step!=2" id="inputGroup-sizing-sm" class="form-control form-control-sm" [(ngModel)]="lugar_turistico.subcategoria" >
+                        <ng-option disabled [value]="0">Seleccione una SubCategoría</ng-option>
+                        <ng-option *ngFor="let op of lista_subc_fil" [value]="op.codigo" >{{op.nombre}}</ng-option>
+                    </ng-select>
+                </div>
+    
+            </div> 
+    
+           </div>
+       
+        <div class="row mt-3">
+ 
+        <div class="col-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span style="width: 155px;" class="input-group-text font-weight-bold">
+                        Porcentaje
+                    </span>
+                </div>
+                <input id="porcentaje" type="number" class="form-control form-control-sm" [(ngModel)]="lugar_turistico.porcentaje" max="100" min="0">
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span style="width: 155px;" class="input-group-text font-weight-bold">
+                        Cálculo
+                    </span>
+                </div>
+                <input id="calculo" type="text" class="form-control form-control-sm" [(ngModel)]="lugar_turistico.calculo" max="100" min="0">
+            </div>
+        </div>
+        
+        <div class="col-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span style="width: 155px;" class="input-group-text font-weight-bold">
+                        Comentario
+                    </span>
+                </div>
+                <input id="comentario" type="text" class="form-control form-control-sm" [(ngModel)]="lugar_turistico.comentario">
+            </div>
+        </div>
+
+       </div>
+
+       
+       
+
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="texto_barra_carga" lfulScren=true ></cc-spiner-procesar>

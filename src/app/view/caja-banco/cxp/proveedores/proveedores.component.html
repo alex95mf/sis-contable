@@ -1,0 +1,946 @@
+<br>
+<app-button-radio-active titulo="Pago a Proveedores" filtroBoton="btnProvPrin" cstyle="bg-gradient-primary text-white"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" *ngIf="permissions" icono="far fa-money-bill-alt">
+    <div class="row mt-2">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Desde" styleSpan="size-span-campo">
+                <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control" name="dateFrom" format='yyyy-MM-dd'
+                    (ngModelChange)="rerender()">
+                </ejs-datepicker>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Hasta" styleSpan="size-span-campo">
+                <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control" name="dateFrom" format='yyyy-MM-dd'
+                    (ngModelChange)="rerender()">
+                </ejs-datepicker>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                <select id="filter" class="form-control form-control-sm" [(ngModel)]="filterInput"
+                    (ngModelChange)="filterCxP($event)">
+                    <option *ngFor="let el of filters" [value]="el.id"> {{ el.name }} </option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <fieldset class="border p-2 mb-2 mt-3 filters">
+        <legend class="w-auto h6">Listado cuentas por cobrar</legend>
+        <div class="table-responsive responsive-table">
+            <table class="table table-sm table-bordered" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                class="table table-sm no-footer">
+                <thead class="text-center thead-dark">
+                    <tr>
+                        <th style="width: 15%; border-left: 1px solid;">Documento</th>
+                        <th style="width: 25%;">Proveedor</th>
+                        <th style="width: 15%;">A Vencer</th>
+                        <th style="width: 15%;">Estado</th>
+                        <th style="width: 15%;">Total</th>
+                        <th style="width: 15%;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="processingPayment">
+                    <tr *ngFor="let el of payments; let idx = index">
+                        <td class="text-break" style="border-left: 1px solid">
+                            {{ el.cxp_cab['document']['codigo'] }}-{{ el.doc_ref_num }}
+                        </td>
+                        <td class="text-break">
+                            {{ el["purchase"]["proveedor"]["nom_comercial"]}}
+                        </td>
+                        <td>{{ el.fecha_venc }}</td>
+                        <td *ngIf="el.valor_saldo === 0">PAGADO</td>
+                        <td *ngIf="current_date > el.fecha_venc && el.valor_saldo > 0">VENCIDO</td>
+                        <td *ngIf="current_date <= el.fecha_venc && el.valor_saldo > 0">POR VENCER
+                        </td>
+                        <td class="text-right">$ {{ commonServices.formatNumber(el.valor_saldo) }}
+                        </td>
+                        <td>
+                            <div class="section-actions text-center">
+                                <button class="btn btn-sm"  
+                                    (click)="ShowInformation(idx)" type="button"
+                                    style="background-color: #2b81e4; color: white" placement="left"
+                                    matTooltip="Ver Contacto">
+                                    <i class="fa fa-address-book" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn btn-sm"  
+                                    (click)="showRetencion(idx)" type="button"
+                                    [disabled]="el.purchase['retencion'] === 1 || 
+                                    el.valor_saldo === 0 || el.cxp_cab.type == 'ImPedido' || el.cxp_cab.type == 'ImGastos' "
+                                    style="background-color: #f0601d; color: rgb(241, 239, 239);" placement="left"
+                                    matTooltip="Retención">
+                                    <i class="fas fa-file-invoice"></i>
+                                </button>
+                                <button class="btn btn-sm" (click)="showLetter(idx)" type="button"
+                                    [disabled]="el.valor_abono === el.valor && el.valor_saldo === 0"
+                                    style="background-color: #16c210; color: white;" placement="left"
+                                    matTooltip="Pagar letra">
+                                    <i class="fa fa-usd"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</app-button-radio-active>
+
+<div class="row justify-content-center mt-3" *ngIf="permissions">
+    <div class="col-12 col-sm-12 col-md-10 col-lg-10 mt-2">
+        <!-- Start Section print buttons -->
+        <button #printCDE type="button" class="btn btn-success" [hidden]="true" [useExistingCss]="true"
+            printSectionId="print-cde" ngxPrint>
+        </button>
+        <button #printRTECXP type="button" class="btn btn-success" [hidden]="true" [useExistingCss]="true"
+            printSectionId="print-cxp" ngxPrint>
+        </button>
+        <!-- End Section print buttons -->
+    </div>
+</div>
+<!-- Modals -->
+<!-- START CONTACTS -->
+<div class="modal fade" id="ContactProveedorModal" tabindex="-1" role="dialog"
+    aria-labelledby="ContactProveedorModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <app-button-radio-active titulo="Información de Proveedor" filtroBoton="btnIfProvee"
+                    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                    (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-address-card">
+
+                    <ul id="content-pills-act" class="nav nav-tabs color-input-estandar">
+                        <li class="nav-item">
+                            <a id="contact-tab" class="nav-link active" href="#contact" data-toggle="tab"
+                                aria-controls="contact" aria-selected="false">Contacto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="cxp-tab" class="nav-link" href="#cxp" data-toggle="tab" aria-controls="cxp"
+                                aria-selected="false">Cuentas por Pagar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="history-tab" class="nav-link" href="#history" data-toggle="tab"
+                                aria-controls="history" aria-selected="false">Historial de Compras</a>
+                        </li>
+                    </ul>
+                    <div id="information-content" class="tab-content">
+                        <div *ngIf="contacts !== undefined && processingInformation" class="tab-pane fade show active"
+                            id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <fieldset class="border p-2 mb-2">
+                                <legend class="w-auto h6">Información General</legend>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label class="text-break negrita-label">R.U.C / C.I:</label>
+                                                {{ contacts.purchase["proveedor"]["document"] }}
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="text-break negrita-label">Razon Social:</label>
+                                                {{ contacts.purchase["proveedor"]["razon_social"] }}
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="text-break negrita-label">Representante legal:</label>
+                                                {{ contacts.purchase["proveedor"]["repres_legal"] }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label class=" negrita-label">Origen:</label>
+                                                {{ contacts.purchase["proveedor"]["pais"] }} -
+                                                {{ contacts.purchase["proveedor"]["provincia"] }}
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="text-break negrita-label">Dirección:</label>
+                                                {{ contacts.purchase["proveedor"]["direccion"] }}
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="text-break negrita-label">Télefono:</label>
+                                                {{ contacts.purchase["proveedor"]["telefono"] }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="border p-2 mt-2">
+                                <legend class="w-auto h6">Agenda</legend>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="table-responsive" style="overflow-y: scroll; height: 150px;">
+                                            <table class="table table-sm table-hover">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>Nombre</th>
+                                                        <th>Cargo</th>
+                                                        <th>Correo electrónico</th>
+                                                        <th>Teléfono</th>
+                                                        <th>Celular</th>
+                                                        <th>Acción</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="text-center"
+                                                        *ngFor="let el of contacts.purchase['proveedor']['contactos']; let i = index">
+                                                        <td class="text-justify text-break">{{ el.nombre }}</td>
+                                                        <td>{{ el.cargo }}</td>
+                                                        <td class="text-justify text-break">
+                                                            <a href="mailto:{{ el.email }}">
+                                                                {{ el.email }}
+                                                            </a>
+                                                        </td>
+                                                        <td>{{ el.telefono }}</td>
+                                                        <td>{{ el.celular }}</td>
+                                                        <td>
+                                                            <a href="https://api.whatsapp.com/send?phone=+593{{el.celular}}"
+                                                                target="_blank" type="button" class="btn btn-sm"
+                                                                style="background-color: #16c210; color: white; border-radius: 10px">
+                                                                <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div *ngIf="contacts !== undefined && processingInformation" class="tab-pane fade" id="cxp"
+                            role="tabpanel" aria-labelledby="cxp-tab">
+                            <div class="row">
+                                <div class="col-12 col-xs-12 col-sm-12 col-md-6">
+                                    <fieldset class="border p-2 mb-2">
+                                        <legend class="w-auto h6">General</legend>
+                                        <div class="row">
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-6">
+                                                <label class="text-break negrita-label">No.</label>
+                                                {{ contacts.document["codigo"] }}-{{ contacts.doc_num }}
+                                            </div>
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-6">
+                                                <label class="text-break negrita-label">Total</label>
+                                                $ {{ commonServices.formatNumber(contacts.monto_total) }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-6">
+                                                <label class="text-break negrita-label">Cancelado</label>
+                                                $ {{ commonServices.formatNumber(contacts.monto_abono) }}
+                                            </div>
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-6">
+                                                <label class="text-break negrita-label">Pendiente</label>
+                                                $ {{ commonServices.formatNumber(contacts.monto_saldo) }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-6">
+                                                <label class="text-break negrita-label">Letras</label>
+                                                {{ contacts.letras_canceladas }} de {{ contacts.letras }}
+                                            </div>
+                                            <div class="col-12 col-xs-12 col-sm-12 col-md-6">
+                                                <label class="text-break negrita-label">Creación</label>
+                                                {{ contacts.fecha_inicio }}
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-12 col-xs-12 col-sm-12 col-md-6">
+                                    <fieldset class="border p-2 mb-2">
+                                        <legend class="w-auto h6">Detalles</legend>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="table-responsive"
+                                                    style="overflow-y: scroll; height: 130px;">
+                                                    <table class="table table-sm table-hover">
+                                                        <thead>
+                                                            <tr class="text-center">
+                                                                <th>Letra</th>
+                                                                <th>Total</th>
+                                                                <th>Avance</th>
+                                                                <th>Pendiente</th>
+                                                                <th>Vencimiento</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr class="text-center"
+                                                                *ngFor="let el of contacts.details; let i = index">
+                                                                <td>{{ el.letra }}</td>
+                                                                <td class="text-right">
+                                                                    $ {{ commonServices.formatNumber(el.valor) }}
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    $ {{ commonServices.formatNumber(el.valor_abono) }}
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    $ {{ commonServices.formatNumber(el.valor_saldo) }}
+                                                                </td>
+                                                                <td>{{ el.fecha_venc }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="contacts !== undefined && processingInformation" class="tab-pane fade" id="history"
+                            role="tabpanel" aria-labelledby="history-tab">
+                            <fieldset class="border p-2 mt-2">
+                                <legend class="w-auto h6">Información General</legend>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="table-responsive" style="overflow-y: scroll; height: 150px;">
+                                            <table class="table table-sm table-hover">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>#</th>
+                                                        <th>Documento</th>
+                                                        <th>Emisión</th>
+                                                        <th>Tipo pago</th>
+                                                        <th>Forma pago</th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="text-center"
+                                                        *ngFor="let el of contacts.purchase['proveedor']['history']; let i = index">
+                                                        <td>{{ i + 1 }}</td>
+                                                        <td class="text-break">{{ el.num_doc }}</td>
+                                                        <td>{{ el.fecha }}</td>
+                                                        <td>{{ el.tipo_pago }}</td>
+                                                        <td>{{ el.form_pago }}</td>
+                                                        <td class="text-right">$ {{
+                                                            commonServices.formatNumber(el.total) }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTACTS -->
+
+<!-- START RETENCION -->
+<div class="modal fade" id="RetencionProveedorModal" tabindex="-1" role="dialog"
+    aria-labelledby="RetencionProveedorModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content" *ngIf="contacts !== undefined && processingRetencion">
+            <div class="modal-body">
+                <app-button-radio-active titulo="Comprobante Retencion" filtroBoton="btnComRetn"
+                    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                    (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-newspaper-o">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Razón Social/Nombres y Apellidos">
+                                <input id="inpRazonSocial" type="text" class="form-control" [disabled]="true"
+                                    [(ngModel)]="contacts['purchase']['proveedor']['razon_social']">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Tipo Retención" styleSpan="size-span-campo">
+                                <select id="inpRetencion" class="form-control form-control-sm"
+                                    [(ngModel)]="values.method" (ngModelChange)="calculateRetencion($event)">
+                                    <option hidden disabled selected [value]="0">Seleccione retención</option>
+                                    <option *ngFor="let el of taxes" [value]="el.id"> {{ el.nombre_imp }} </option>
+                                </select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Identificación" styleSpan="size-span-campo">
+                                <input id="inpDNI" type="text" class="form-control" [disabled]="true"
+                                    [(ngModel)]="contacts['purchase']['proveedor']['document']">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Fecha Emisión" styleSpan="size-span-campo">
+                                <input id="inpEmision" type="text" class="form-control" [disabled]="true"
+                                    [(ngModel)]="contacts['purchase']['fecha']">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <app-cc-input-group-prepend label="Monto">
+                                <input id="inpMonto" type="text" class="form-control text-right" [disabled]="true"
+                                    [(ngModel)]="calculate.monto">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-2">
+                            <app-cc-input-group-prepend label="Base">
+                                <input id="inptIva" type="text" class="form-control text-right" [disabled]="true"
+                                    [(ngModel)]="calculate.iva">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-2">
+                            <app-cc-input-group-prepend label="Valor">
+                                <input id="inpValue" type="text" class="form-control text-right" [disabled]="true"
+                                    [(ngModel)]="calculate.parseValue">
+
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-sm btn-success" [disabled]="values.method === 0"
+                                        (click)="addRetencion()">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-sm-12">
+                            <div class="form-row justify-content-end">
+                                <div class="form-group col-12 mb-0 text-right">
+                                    <label for="inpTotal" class="mb-1 font-weight-bold">
+                                        Total: $ {{ calculate.parseTotal }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <div class="table-responsive" style="overflow-y: scroll; height: 150px;">
+                                        <table class="table table-sm table-hover">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>#</th>
+                                                    <th>Comprobante</th>
+                                                    <th>Número</th>
+                                                    <th>Fecha Emisión</th>
+                                                    <th>Año Fiscal</th>
+                                                    <th>Base Imponible</th>
+                                                    <th>Impuesto</th>
+                                                    <th>Código</th>
+                                                    <th>Porcentaje</th>
+                                                    <th>Monto</th>
+                                                    <th>Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="retenciones">
+                                                <tr class="text-center" *ngFor="let el of retenciones; let i = index">
+                                                    <td>{{ i + 1 }}</td>
+                                                    <td>{{ el.comprobante }}</td>
+                                                    <td>{{ el.num_factura }}</td>
+                                                    <td>{{ el.dat_factura }}</td>
+                                                    <td>{{ el.fis_factura }}</td>
+                                                    <td class="text-right">
+                                                        $ {{ commonServices.formatNumber(el.base) }}
+                                                    </td>
+                                                    <td>{{ el.type_imp.toUpperCase() }}</td>
+                                                    <td>{{ el.codigo_sri }}</td>
+                                                    <td>{{ commonServices.formatNumber(el.value_imp) }}</td>
+                                                    <td class="text-right">$ {{ el.parseValue }}</td>
+                                                    <td>
+                                                        <button class="btn btn-sm" (click)="deleteFields(i)"
+                                                            style="background-color: transparent; border: none; box-shadow: unset; outline: unset;"
+                                                            placement="left" matTooltip="Remover registro">
+                                                            <i class="fas fa-trash-alt"
+                                                                style="color: #FF3C2E; font-size: 16px;"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END RETENCION -->
+
+<!-- START PRINT CDE -->
+<div id="print-cde" [hidden]="true" *ngIf="print_cde !== undefined && processingPayLetter">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2">
+            <div class="row justify-content-center">
+                <div class="col-7 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <img src="{{ payload.logoEmpresa }}" style="width: 220px;">
+                            </div>
+                            <div class="col-12 mt-3">
+                                {{ payload.company.razon_social }} - {{payload.company.ruc}}
+                            </div>
+                            <div class="col-12">
+                                Dirección: {{ payload.sucursal.direccion }} - Teléfono:
+                                {{ sucursalInformation.telefono1 }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-3" style="font-size: 25px;font-weight: 600">
+                                COMPROBANTE DE EGRESO
+                            </div>
+                            <div class="col-12 mt-2" style="font-size: 20px;">
+                                No. {{ payload.id_empresa.toString().padStart(3, 0) }}-
+                                {{ payload.id_sucursal.toString().padStart(3, 0) }}-
+                                <span>{{ print_cde.secuencia.toString().padStart(10, 0) }}</span>
+                            </div>
+                            <div class="col-12 mt-2 mb-2" style="font-size: 20px;">
+                                VALOR ${{ commonServices.formatNumber(print_cde.pay) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-4">
+            <div class="row mb-2">
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col-3 mt-1">
+                            Beneficiario:
+                        </div>
+                        <div class="col-9">
+                            <div class="simu-ipt">
+                                <span>{{ print_cde.ben }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-5 mt-1">
+                                    Ciudad:
+                                </div>
+                                <div class="col-7 pl-0">
+                                    <div class="simu-ipt text-center">
+                                        <span>{{ print_cde.ciudad }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-5 mt-1">
+                                    Fecha:
+                                </div>
+                                <div class="col-7 pl-0">
+                                    <div class="simu-ipt text-center">
+                                        <span>{{ print_cde.current_date }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="row justify-content-center">
+                        <div class="col-3 pt-2">
+                            La suma de:
+                        </div>
+                        <div class="col-9 pl-0">
+                            <div class="simu-ipt" style="margin-left: -7px;">
+                                <span>{{ commonVarSrv.NumeroALetras(print_cde.pay, false) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-5 pt-2">
+                            Forma pago:
+                        </div>
+                        <div class="col-7 pl-0">
+                            <div class="simu-ipt text-center">
+                                <span>{{ print_cde.method }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2 mb-2">
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="border-radius: 5px 0ox 0px 5px;">Concepto</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" placeholder="{{ print_cde.obs }}"
+                            style="font-size: 15px;"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2 mb-2" *ngIf="print_cde.method != 'Efectivo'">
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col-2 mt-1">
+                            No. trx:
+                        </div>
+                        <div class="col-4 pl-0">
+                            <div class="simu-ipt text-center">
+                                <span class="text-uppercase">
+                                    {{ print_cde.method.substring(0, 3) }}-{{ print_cde.ref_doc }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-2 pr-0 mt-1">
+                            Fecha trx:
+                        </div>
+                        <div class="col-4 pl-0">
+                            <div class="simu-ipt text-center">
+                                <span *ngIf="print_cde.method == 'Cheque'">{{ print_cde.postDate }}</span>
+                                <span *ngIf="print_cde.method != 'Cheque'">{{ print_cde.current_date }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-3 pr-0 mt-1">
+                            Banco:
+                        </div>
+                        <div class="col-9 pl-0">
+                            <div class="simu-ipt text-center">
+                                <span>{{ print_cde.nombre_cta }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div style="background-color: #5b9bd5 !important;color: white;" class="pl-1 pr-1">
+                        CONTABILIZACIÓN
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 15%;" class="text-center">Código</th>
+                                <th style="width: 40%;" class="text-center">Cuenta</th>
+                                <th style="width: 15%;" class="text-center">Debe</th>
+                                <th style="width: 15%;" class="text-center">Haber</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of print_cde.details_cde; let i = index">
+                                <td style="border-top: none !important;">
+                                    <span>{{ dt.codigo_cta }}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <span>{{ dt.nombre_cta }}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>$ {{ commonServices.formatNumber(dt.debe) }}</span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>$ {{ commonServices.formatNumber(dt.haber) }}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"
+                                    style="text-align: right;padding-right: 10px;background-color: #5b9bd5 !important;color: white;">
+                                    Sumas
+                                </td>
+                                <td
+                                    style="text-align: right;padding-right: 15px;background-color: #5b9bd5 !important;color: white;">
+                                    <span>$ {{ commonServices.formatNumber(print_cde.pay) }}</span>
+                                </td>
+                                <td
+                                    style="text-align: right;padding-right: 15px;background-color: #5b9bd5 !important;color: white;">
+                                    <span>$ {{ commonServices.formatNumber(print_cde.pay) }}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 25%;text-align:center;">Elaborado por</th>
+                                <th style="width: 20%;text-align:center;">Revisado</th>
+                                <th style="width: 25%;text-align:center;">Aprobado</th>
+                                <th style="width: 25%;text-align:center;">Recibí conforme</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-top: none !important; height: 100px;text-align: center;">
+                                    <div style="padding-top: 48px; ">
+                                        <hr>
+                                        <span>{{ payload.nombre }}</span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 px-2">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 40%;" class="text-center">Detalle de Deuda Aplicada</th>
+                                <th style="width: 15%;" class="text-center">Saldo Tot.</th>
+                                <th style="width: 15%;" class="text-center">Saldo Ant.</th>
+                                <th style="width: 15%;" class="text-center">Saldo Abo.</th>
+                                <th style="width: 15%;" class="text-center">Saldo Pen.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-top: none !important;">
+                                    <span>{{ print_cde.detail_purchase.detail }}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>
+                                            $ {{ commonServices.formatNumber(print_cde.detail_purchase.total) }}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>$ {{ commonServices.formatNumber(print_cde.detail_purchase.monto_ant)
+                                            }}</span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>
+                                            $ {{ commonServices.formatNumber(print_cde.detail_purchase.monto_abo) }}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>
+                                            $ {{ commonServices.formatNumber(print_cde.detail_purchase.monto_pen) }}
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-left" style="position: fixed; bottom: 0px;">
+            <span style="color: #13A1EA;">Usuario: {{ payload.usuario }}</span>
+        </div>
+    </div>
+</div>
+<!--  END PRINT CDE -->
+
+<!-- START PRINT RETENCION -->
+<div id="print-cxp" [hidden]="true" *ngIf="print_rt_cxp !== undefined && processingRetencion">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2">
+            <div class="row justify-content-center">
+                <div class="col-5 text-center mt-5">
+                    <div class="sect-one py-3">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <img src="{{ payload.logoEmpresa }}" style="width: 220px;">
+                            </div>
+                            <div class="col-12 mt-3">
+                                {{ payload.company.razon_social }} - {{ payload.company.ruc }}
+                            </div>
+                            <div class="col-12">
+                                Obligado a llevar Contabilidad: SI
+                            </div>
+                            <div class="col-12">
+                                Teléfonos: {{ sucursalInformation.telefono1 }} - {{ sucursalInformation.telefono2 }}
+                            </div>
+                            <div class="col-12 text-break">
+                                Dirección: {{ payload.sucursal.ciudad }} / {{ payload.sucursal.direccion }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7 text-center mt-5">
+                    <div class="sect-two py-3 px-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-3" style="font-size: 25px; font-weight: 600">
+                                COMPROBANTE DE RETENCION
+                            </div>
+                            <div class="col-12 mt-2" style="font-size: 20px;">
+                                No. {{ print_rt_cxp.retencion }}
+                            </div>
+                            <div class="col-12 mt-2 mb-3" style="font-size: 20px;">
+                                Número de Autorización <br> {{ print_rt_cxp.num_aut }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center mt-3">
+                    <div class="sect-one text-uppercase py-3">
+                        <div class="row justify-content-center">
+                            <div class="col-4 text-break">
+                                <b>Razón Social/Nombres y Apellidos</b>
+                                <br>
+                                {{ print_rt_cxp.purchase.proveedor.razon_social }}
+                            </div>
+                            <div class="col-4 text-break">
+                                <b>Identificación</b>
+                                <br>
+                                {{ print_rt_cxp.purchase.proveedor.document }}
+                            </div>
+                            <div class="col-4 text-break">
+                                <b>Fecha Emisión</b>
+                                <br>
+                                {{ print_rt_cxp.purchase.fecha }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mt-3">
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="text-center" style="width: 100%;">
+                                        <th>Comprobante</th>
+                                        <th>Número</th>
+                                        <th>Fecha Emisión</th>
+                                        <th>Año Fiscal</th>
+                                        <th>Base Imponible</th>
+                                        <th>Impuesto</th>
+                                        <th>Código</th>
+                                        <th>Porcentaje</th>
+                                        <th>Monto</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="print_rt_cxp.details">
+                                    <tr class="text-center" *ngFor="let el of print_rt_cxp.details; let i = index">
+                                        <td>Factura</td>
+                                        <td>{{ el.num_factura }}</td>
+                                        <td>{{ el.dat_factura }}</td>
+                                        <td>{{ el.fis_factura }}</td>
+                                        <td class="text-right">
+                                            $ {{ commonServices.formatNumber(el.base) }}
+                                        </td>
+                                        <td>{{ el.type_imp.toUpperCase() }}</td>
+                                        <td>{{ el.codigo_sri }}</td>
+                                        <td>{{ commonServices.formatNumber(el.value_imp) }}</td>
+                                        <td class="text-right">$ {{ el.parseValue }}</td>
+                                    </tr>
+                                    <tr class="space-y"></tr>
+                                    <tr>
+                                        <td colspan="6" class="text-uppercase"
+                                            style="text-align: left; padding-right: 15px; background-color: #5b9bd5 !important; color: white;">
+                                            Información Adicional
+                                        </td>
+                                        <td colspan="1" class="space-x"></td>
+                                        <td class="text-uppercase"
+                                            style="text-align: right; padding-right: 15px; background-color: #5b9bd5 !important; color: white;">
+                                            Total
+                                        </td>
+                                        <td style="text-align: right; padding-right: 15px;">
+                                            <span>$ {{ commonServices.formatNumber(print_rt_cxp.total) }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1" class="text-uppercase">Dirección</td>
+                                        <td colspan="5" class="text-break">
+                                            {{ print_rt_cxp.purchase.proveedor.direccion }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1" class="text-uppercase">Teléfono</td>
+                                        <td colspan="5">{{ print_rt_cxp.purchase.proveedor.telefono }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1" class="text-uppercase">Correo</td>
+                                        <td colspan="5">{{ print_rt_cxp.purchase.proveedor.correo }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Firmas -->
+                <div class="col-12 mt-3">
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr style="width: 100%;">
+                                        <th style="width: 25%;text-align:center;">Elaborado por</th>
+                                        <th style="width: 20%;text-align:center;">Revisado</th>
+                                        <th style="width: 25%;text-align:center;">Aprobado</th>
+                                        <th style="width: 25%;text-align:center;">Recibí conforme</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border-top: none !important; height: 100px;text-align: center;">
+                                            <div style="padding-top: 48px; ">
+                                                <hr>
+                                                <span>{{ payload.nombre }}</span>
+                                            </div>
+                                        </td>
+                                        <td style="border-top: none !important;height: 100px;">
+                                        </td>
+                                        <td style="border-top: none !important;height: 100px;">
+                                        </td>
+                                        <td style="border-top: none !important;height: 100px;">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-left" style="position: fixed; bottom: 0px;">
+            <span style="color: #13A1EA;">Usuario: {{ payload.usuario }}</span>
+        </div>
+    </div>
+</div>
+<!-- END PRINT RETENCION -->
+
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spProvCxpMon"></cc-spiner-procesar>

@@ -1,0 +1,166 @@
+<div class="my-2">
+  <app-button-radio-active titulo="Indexacion" icono="fas fa-file-invoice" cstyle="bg-light" filtroBoton="btnsSubida"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+
+      <div class="col-sm-4">
+        <app-cc-input-group-prepend label="Tipo Documento" styleSpan="size-span-campo font-weight-bold">
+          <ng-select class="form-control" [clearable]="true" (change)="selectTipoDocumento($event)"
+            [disabled]="bloquear">
+            <ng-option *ngFor="let c of lst_tipoDoC" [value]="c.id_tipo_documento">{{c.nombre}}</ng-option>
+          </ng-select>
+        </app-cc-input-group-prepend>
+      </div>
+      <div class="col-sm-4">
+        <app-cc-input-group-prepend label="Archivo" styleSpan="size-span-campo font-weight-bold">
+          <input type="text" readonly class="form-control" [ngModel]="fileName">
+          <div class="input-group-append">
+            <button class="btn btn-primary" (click)="resetInput()" [disabled]="tipoDoC == undefined || bloquear">
+              <i class="far fa-file-alt"></i> SELECCIONAR
+            </button>
+            <input type="file" class="d-none" (change)="handleInputFile($event)" #inputFile multiple
+              accept=".pdf,image/*">
+          </div>
+        </app-cc-input-group-prepend>
+      </div>
+      <div class="col-sm-4" *ngIf="tienefisico === 'SI'">
+        <app-cc-input-group-prepend label="Tipo de medio"
+          styleSpan="size-span-campo font-weight-bold">
+          <ng-select id="estado" class="form-control form-control-sm" [clearable]="true" [(ngModel)]="tipo_medio"
+            (change)="asignarEstado($event)" [clearable]="false">
+            <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+            <ng-option *ngFor="let op of estadoDevList" [value]="op.valor">{{ op.descripcion }}</ng-option>
+          </ng-select>
+        </app-cc-input-group-prepend>
+        <app-cc-input-group-prepend label="N. de medio" styleSpan="size-span-print font-weight-bold">
+          <input class="form-control form-control-sm" style="width: 50%" type="text" [(ngModel)]="numero_medio">
+        </app-cc-input-group-prepend>
+        <!--   <div class="col-sm-12 text-center" > <h4>Ubicacion Fisica</h4></div>
+                  <div class="row">
+                  <div class="col-sm-6"> <span style="width: 100%;" class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bodega</span></div>
+                  <div class="col-sm-6"> <span style="width: 100%;" class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ubicacion</span></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <select [(ngModel)]="bodega" class="form-control form-control-sm custom-select" (change)="getUbicaciones(item, $event.target.value)" >
+                        <option *ngFor="let d of dataBodega" [value]="d.id_bodega_cab">
+                            {{d.nombre}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                  <select [(ngModel)]="ubicacion" class="form-control form-control-sm custom-select" >
+                    <option *ngFor="let d of dataubicacion" [value]="d.id_bodega_det">
+                        {{d.tipo_almacenamiento}}
+                    </option>
+                </select></div>
+              </div> -->
+      </div>
+    </div>
+
+    <div class="row my-2">
+      <div class="col-sm-6">
+        <div *ngIf="arrayToUpload && arrayToUpload.length > 0">
+          <h4 *ngIf="tablaGuardadoConExito && tablaGuardadoConExito.length > 0" class="text-danger">Documentos tienen
+            conflictos</h4>
+        </div>
+        <div class="row my-2" *ngIf="arrayToUpload && arrayToUpload.length > 0">
+          <div class="col-sm-12" style="overflow-x:auto ;">
+            <table>
+              <thead>
+                <tr>
+                  <th width="5%"></th>
+                  <th width="5%"></th>
+                  <th width="5%">#</th>
+                  <th width="45%">Nombre</th>
+                  <th>Size</th>
+                  <th>Paginas</th>
+                  <ng-container *ngFor="let campo of dataForms">
+                    <th>{{ campo.campo_indice }}</th>
+                  </ng-container>
+                  <!--  <ng-container *ngIf="tienefisico === 'SI'">
+                    <th>
+                      <div class="row" style="min-width: 245px;">
+                        <div class="col-sm-12">Ubicacion Fisica</div>
+                        <div class="col-sm-6"> <span style="width: 100%;" class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bodega</span></div>
+                        <div class="col-sm-6"> <span style="width: 100%;" class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bodega</span></div>
+                      </div>
+                    </th>
+                  </ng-container> -->
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of arrayToUpload; let i = index">
+                  <tr [ngClass]="{'bg-warning': item.repetido}">
+                    <td width="5%"> <i class="fa fa-hand-pointer-o over" (click)="seleccionarpreview(item)"
+                        [ngStyle]="{'color': 'green'}"></i></td>
+
+                    <td width="5%"><i class="fa fa-minus over" (click)="eliminarElemento(item)"
+                        [ngStyle]="{'color': 'red'}"></i></td>
+                        <td width="5%">{{i+1}}</td>
+                    <td width="45%">{{ item.nombre }}</td>
+                    <td>{{item.size}}</td>
+                    <td>{{item.count}}</td>
+                    <ng-container *ngFor="let campo of dataForms; let isFirst = first">
+                      <td>
+                        <input [type]="campo.tipo_dato === 'date' ? 'date' : (campo.tipo_dato === 'numeric' ? 'number'  : 'text')" numeric
+                          (focus)="isFirst ? seleccionarpreview(item) : null"
+                          (click)="!isFirst ? seleccionarpreview(item) : null" [(ngModel)]="item[campo.campo_indice]"
+                          (keydown)="campo.tipo_dato === 'numeric' ? bloquearSignos($event) : null">
+                      </td>
+                    </ng-container>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <h4 *ngIf="tablaGuardadoConExito && tablaGuardadoConExito.length > 0" class="text-success">Datos Guardados con
+          Exito!</h4>
+        <div class="row my-2" *ngIf="tablaGuardadoConExito && tablaGuardadoConExito.length > 0">
+          <div class="col-sm-12" style="overflow-x:auto ;">
+            <table>
+              <thead>
+                <tr>
+                  <th width="5%"></th>
+                  <th width="5%"></th>
+                  <th width="50%">Nombre</th>
+                  <th>Size</th>
+                  <th>Paginas</th>
+                  <ng-container *ngFor="let campo of dataForms">
+                    <th>{{ campo.campo_indice }}</th>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of tablaGuardadoConExito; let i = index">
+                  <tr>
+                    <td width="5%"> <i class="fa fa-hand-pointer-o over" (click)="seleccionarpreview(item)"
+                        [ngStyle]="{'color': 'green'}"></i></td>
+                    <td width="5%"><i class="fa fa-minus over" (click)="eliminarElemento(item)"
+                        [ngStyle]="{'color': 'red'}"></i></td>
+                    <td width="50%">{{ item.nombre }}</td>
+                    <td>{{item.size}}</td>
+                    <td>{{item.count}}</td>
+                    <ng-container *ngFor="let campo of dataForms; let isFirst = first">
+                      <td>
+                        <input type="text" (focus)="isFirst ? seleccionarpreview(item) : null"
+                          (click)="!isFirst ? seleccionarpreview(item) : null" [(ngModel)]="item[campo.campo_indice]">
+                      </td>
+                    </ng-container>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div id="preview-container">
+          <iframe id="preview" [src]="previewUrl" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+  </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spSubida"></cc-spiner-procesar>

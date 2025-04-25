@@ -1,0 +1,490 @@
+<div class="mt-2">
+    <app-button-radio-active titulo="Registro de clientes" filtroBoton="btnsCustomeRegister" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="row mt-2">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Documento</span>
+                    </div>
+                    <select id="tipo_documento" class="form-control form-control-sm" (ngModelChange)="docValidate($event)" [(ngModel)]="supplier.tipo_documento" [disabled]="!actions.new">
+                        <option [value]="0">Seleccione documento</option>
+                        <option *ngFor="let d of catalog.documents" [value]="d.valor">{{ d.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
+                    </div>
+                    <input id="num_documento" type="text" class="form-control form-control-sm" placeholder="Número del documento" [disabled]="!actions.new" [(ngModel)]="supplier.num_documento" (keypress)="onlyNumber($event)" minlength="{{ tamDoc }}" maxlength="{{ tamDoc }}">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo Persona</span>
+                    </div>
+                    <select id="contribuyente" class="form-control form-control-sm" [(ngModel)]="supplier.contribuyente" [disabled]="!actions.new">
+                        <option [value]="0">Seleccione tipo</option>
+                        <option *ngFor="let d of catalog.persons" [value]="d.valor">{{ d.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo
+                            Contribuyente</span>
+                    </div>
+                    <select id="tipo_contribuyente" class="form-control form-control-sm" [(ngModel)]="supplier.tipo_contribuyente" [disabled]="!actions.new">
+                        <option [value]="0">Seleccione contribuyente</option>
+                        <option *ngFor="let d of catalog.contrib" [value]="d.id">{{ d.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Razón Social</span>
+                    </div>
+                    <input id="razon_social" type="text" class="form-control form-control-sm" placeholder="Razón Social Cliente" [disabled]="!actions.new" [(ngModel)]="supplier.razon_social" (keyup)="setRazonSocial($event.target.value)">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre Comercial</span>
+                    </div>
+                    <input id="nombre_comercial_cli" type="text" class="form-control form-control-sm" placeholder="Nombre Comercial Cliente" [disabled]="!actions.new" [(ngModel)]="supplier.nombre_comercial_cli">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Asesor</span>
+                    </div>
+                    <ng-select id="user_asesor" class="form-control form-control-sm custom" appendTo="body" [searchable]="true" [disabled]="!actions.new" [clearable]="false" [(ngModel)]="supplier.fk_asesor">
+                        <ng-option [value]="0">Seleccione asesor</ng-option>
+                        <ng-option *ngFor="let d of asesores" [value]="d.id_usuario">
+                            {{d.nombre}}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Reprentante
+                            Legal</span>
+                    </div>
+                    <input id="representante_legal" type="text" class="form-control form-control-sm" placeholder="Reprentante Legal" [disabled]="!actions.new" [(ngModel)]="supplier.representante_legal">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                    </div>
+                    <input id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección Cliente" [disabled]="!actions.new" [(ngModel)]="supplier.direccion">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Grupo</span>
+                    </div>
+                    <select id="grupo" class="form-control form-control-sm" [(ngModel)]="supplier.grupo" [disabled]="!actions.new">
+                        <option [value]="0">Seleccione grupo</option>
+                        <option *ngFor="let d of groups" [value]="d.id_precio">{{ d.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Clase</span>
+                    </div>
+                    <select id="clase" class="form-control form-control-sm" [(ngModel)]="supplier.clase" [disabled]="!actions.new">
+                        <option [value]="0">Seleccione clase</option>
+                        <option *ngFor="let d of catalog.class" [value]="d.valor">{{ d.valor }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Linea Producto</span>
+                    </div>
+                    <select id="linea" class="form-control form-control-sm" [(ngModel)]="supplier.linea" [disabled]="!actions.new">
+                        <option [value]="0">Seleccione linea</option>
+                        <option *ngFor="let d of catalog.linea" [value]="d.nombre">{{ d.nombre }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Origen</span>
+                    </div>
+                    <select id="origen" class="form-control form-control-sm" [(ngModel)]="supplier.origen" [disabled]="!actions.new">
+                        <option [value]="0">Seleccione origen</option>
+                        <option *ngFor="let d of catalog.origin" [value]="d.valor">{{ d.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+                    </div>
+                    <input id="telefono" type="text" class="form-control form-control-sm" placeholder="Teléfono Cliente" [disabled]="!actions.new" [(ngModel)]="supplier.telefono" (keypress)="onlyNumber($event)">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Website</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" placeholder="Sitio web Cliente" [disabled]="!actions.new" [(ngModel)]="supplier.website">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">País</span>
+                    </div>
+                    <select id="pais" class="form-control form-control-sm" [(ngModel)]="supplier.pais" (ngModelChange)="searchProvinces($event)" [disabled]="!actions.new">
+                        <option [value]="0">Seleccione país</option>
+                        <option *ngFor="let d of catalog.countries" [value]="d.valor">{{ d.valor }}
+                        </option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-success" style="height: 29px;padding: 4px;width: 35px;box-shadow: unset;outline: unset;" placement="top" ngbTooltip="Agregar País" [disabled]="!actions.new" (click)="setCatalogoTitle('Ingreso de nuevo País', 'PAIS', 'País')" class="btn btn-primary"
+                            >
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Provincia</span>
+                    </div>
+                    <select id="provincia" class="form-control form-control-sm" [(ngModel)]="supplier.provincia" (ngModelChange)="searchCities($event)" [disabled]="!actions.new || !province">
+                        <option [value]="0">Seleccione provincia</option>
+                        <option *ngFor="let d of catalog.province" [value]="d.valor">{{ d.valor }}
+                        </option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-success" style="height: 29px;padding: 4px;width: 35px;box-shadow: unset;outline: unset;" placement="top" ngbTooltip="Agregar Provincia" [disabled]="!actions.new" (click)="setCatalogoTitle('Ingreso de nueva Provincia', 'PROVINCIA', 'Provincia')"
+                            class="btn btn-primary">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ciudad</span>
+                    </div>
+                    <select id="ciudad" class="form-control form-control-sm" [(ngModel)]="supplier.ciudad" [disabled]="!actions.new || !city">
+                        <option [value]="0">Seleccione ciudad</option>
+                        <option *ngFor="let d of catalog.city" [value]="d.valor">{{ d.valor }}
+                        </option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-success" style="height: 29px;padding: 4px;width: 35px;box-shadow: unset;outline: unset;" placement="top" ngbTooltip="Agregar Ciudad" [disabled]="!actions.new" (click)="setCatalogoTitle('Ingreso de nueva Ciudad','CIUDAD','Ciudad')"
+                            class="btn btn-primary">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 switch-container">
+                <div class="input-group input-group-sm mt-1  switch-container ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Garantía Crédito</span>
+                    </div>
+                    <input type="checkbox" [(ngModel)]="supplier.garantia_credito" (click)="clearSwitchGarant()" class="form-control form-control-sm" id="switchgarant" [disabled]="!actions.new">
+                    <!-- <div class="onoffswitch text-center">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox form-control form-control-sm"
+                            id="switchgarant" checked [(ngModel)]="supplier.garantia_credito"
+                            (click)="clearSwitchGarant()"
+                            [disabled]="!actions.new">
+                        <label class="onoffswitch-label" for="switchgarant">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Garantía Monto</span>
+                    </div>
+                    <input id="garantia_monto" type="number" min="0" class="form-control form-control-sm text-right" placeholder="0.00" [disabled]="!actions.new || !supplier.garantia_credito" (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="supplier.garantia_monto">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Garantía Doc.</span>
+                    </div>
+                    <select id="garantia_documento" class="form-control form-control-sm" [(ngModel)]="supplier.garantia_documento" [disabled]="!actions.new || !supplier.garantia_credito">
+                        <option [value]="0">Seleccione garantia</option>
+                        <option *ngFor="let d of catalog.garantias" [value]="d.valor">{{ d.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4 ">
+                <div class="input-group input-group-sm mt-1  switch-container">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Crédito</span>
+                    </div>
+                    <input type="checkbox" [(ngModel)]="supplier.credito" (click)="clearSwitchCredit()" class="form-control form-control-sm" id="switchcredit" [disabled]="!actions.new">
+                    <!-- <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchcredit" checked
+                            [(ngModel)]="supplier.credito" (click)="clearSwitchCredit()" [disabled]="!actions.new">
+                        <label class="onoffswitch-label" for="switchcredit">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cupo Crédito</span>
+                    </div>
+                    <input id="cupo_credito" type="number" min="0" class="form-control form-control-sm text-right" placeholder="0.00" [disabled]="!actions.new || !supplier.credito" (keypress)="commonServices.FormatDecimalVal($event)" (ngModelChange)="calculateCredit()" [(ngModel)]="supplier.cupo_credito">
+                </div>
+            </div>
+            <div class="col-sm-4 ">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cantidad
+                            Facturas</span>
+                    </div>
+                    <input id="plazo_credito" type="number" min="0" class="form-control form-control-sm text-right" placeholder="0" [disabled]="!actions.new || !supplier.credito" (keypress)="commonServices.FormatDecimalVal($event)" [(ngModel)]="supplier.plazo_credito" (keyup)="accountBill()">
+                </div>
+                <!-- <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cantidad Facturas</span>
+                    </div>
+                    <select id="plazo_credito" class="form-control form-control-sm" [(ngModel)]="supplier.plazo_credito"
+                        [disabled]="!actions.new || !supplier.credito">
+                        <option *ngFor="let d of catalog.time" [value]="d.valor">{{ d.valor }}</option>
+                    </select>
+                </div> -->
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor Crédito</span>
+                    </div>
+                    <input type="number" min="0" class="form-control form-control-sm text-right" readonly (keypress)="commonServices.FormatDecimalVal($event)" (ngModelChange)="calculateCredit()" [(ngModel)]="supplier.valor_credito">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Saldo Crédito</span>
+                    </div>
+                    <input type="number" class="form-control form-control-sm text-right" readonly [(ngModel)]="supplier.saldo_credito">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Correo Facturación</span>
+                    </div>
+                    <input type="email" class="form-control form-control-sm" id="idemailF" placeholder="Ingrese ejemplo@ejemplo.com" [disabled]="!actions.new" [(ngModel)]="supplier.correo_facturacion">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-group pt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="background-color: #404a63; color: white;" placeholder="Ingrese observación">Observación</span>
+                    </div>
+                    <textarea name="observation" class="form-control form-control-sm" rows="2" placeholder="Observaciones" [disabled]="!actions.new" [(ngModel)]="supplier.observacion"></textarea>
+                </div>
+            </div>
+        </div>
+        <app-tabs></app-tabs>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCustomerRegister"></cc-spiner-procesar>
+
+
+<div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="font-family: 'Poppins1';">
+            <div class="card border-0" style="font-size: 11px;background-color: rgb(255 255 255 / 73%);">
+                <div class="card-header">
+                    <table width="100%">
+                        <tr>
+                            <td class="text-left">
+                                <div class="card-title text-left title_h5 text-uppercase">
+                                    <strong>{{newOrigin}}</strong>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <div>
+                                        <button class="btn btn-success btn-xs button_margin" matTooltip="Guardar" (click)="vaidateSaveCatalogo()"> Guardarssss
+                                        </button>
+                                        <button class="btn btn-danger btn-xs button_margin " matTooltip="Cancelar" (click)="cancelcatalogo()" data-dismiss="modal"> Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <div class="row" *ngIf="tipoOrigin == 'PROVINCIA' ">
+                        <div class="col-12">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">País</span>
+                                </div>
+                                <select [(ngModel)]="dataModalsCatalogo.countries" class="form-control form-control-sm custom-select">
+                                    <option *ngFor="let d of catalog.paises " [value]="d.valor">{{d.valor}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="tipoOrigin == 'CIUDAD' ">
+                        <div class="col-12">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Provincia</span>
+                                </div>
+                                <select [(ngModel)]="dataModalsCatalogo.provinces" class="form-control form-control-sm custom-select">
+                                    <option *ngFor="let d of catalog.provincias" [value]="d.valor">{{d.valor}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">{{valueLabel}}</span>
+                                </div>
+                                <input type="text" class="form-control form-control-sm" id="IdValorCatalogo" [(ngModel)]="dataModalsCatalogo.value" placeholder="Ingrese valor">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Descripción</span>
+                                </div>
+                                <textarea cols="40" rows="1" class="form-control form-control-sm" [(ngModel)]="dataModalsCatalogo.description" id="Idcausa" placeholder="Ingrese Descripción" style="box-shadow: unset;outline: unset;">
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="font-family: 'Poppins1';">
+            <div class="modal-header" style="display: unset;text-align: center !important;">
+                <h5 class="modal-title" id="locationModalLabel">{{newOrigin}}</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center" *ngIf="tipoOrigin == 'PROVINCIA' " style="margin-bottom: 10px;">
+                    <div class="col-3">
+                        <span>País:</span>
+                    </div>
+                    <div class="col-6">
+                        <ng-select [(ngModel)]="dataModalsCatalogo.countries" [searchable]="true"
+                            class="form-control form-control-sm custom-select custom" appendTo="body" [clearable]="true"
+                            id="IdproductSendNg">
+                            <ng-option *ngFor="let d of catalog.paises " [value]="d.valor">{{d.valor}}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="row justify-content-center" *ngIf="tipoOrigin == 'CIUDAD' " style="margin-bottom: 10px;">
+                    <div class="col-3">
+                        <span>Provincia:</span>
+                    </div>
+                    <div class="col-6">
+                        <ng-select [(ngModel)]="dataModalsCatalogo.provinces" [searchable]="true"
+                            class="form-control form-control-sm custom-select custom" appendTo="body" [clearable]="true"
+                            id="IdproductSendNg">
+                            <ng-option *ngFor="let d of catalog.provincias" [value]="d.valor">{{d.valor}}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="row justify-content-center" style="margin-bottom: 10px;">
+                    <div class="col-3">
+                        <span>{{valueLabel}}:</span>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" class="form-control form-control-sm" id="IdValorCatalogo"
+                            [(ngModel)]="dataModalsCatalogo.value" placeholder="Ingrese valor">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3">
+                        <span>Descripción:</span>
+                    </div>
+                    <div class="col-6">
+                        <textarea cols="40" rows="1" class="form-control form-control-sm"
+                            [(ngModel)]="dataModalsCatalogo.description" id="Idcausa" placeholder="Ingrese Descripción"
+                            style="box-shadow: unset;outline: unset;">
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer " style="display: unset;text-align: center !important;">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                    (click)="cancelcatalogo()">Cancelar</button>
+                <button type="button" class="btn btn-success" (click)="vaidateSaveCatalogo()" data-dismiss=""
+                    id="btnSave">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,108 @@
+
+
+
+<br>
+<app-button-radio-active titulo="Pago Anticipado" filtroBoton="btnspagant" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" 
+(onMetodoGlobal)="metodoGlobal($event)" *ngIf="permisions[0]" icono="far fa-money-bill-alt">  
+
+    <form autocomplete="off" [formGroup]="forma">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                        <ejs-datepicker id="inputLabel-prepend" class="form-control" formControlName="lFecha" (ngModelChange)="buscar()" name="dateFrom" format='yyyy-MM-dd' id="lfecha">
+                        </ejs-datepicker>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                        <ng-select id="inputLabel-prepend" class="form-control custom" aria-label="Small" aria-describedby="inputGroup-sizing-sm" formControlName="lEstado" (ngModelChange)="buscar();cambioAccion()" [clearable]=false  >
+                            <ng-option value="A" >ACTIVO</ng-option>
+                            <ng-option value="P" >PAGADO</ng-option>
+                            <ng-option value="I" >ANULADOS</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-sm mt-2">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" matTooltip="Limpiar" id="inputLabel-prepend">Proveedor</span>
+                        </div>
+            
+                        <div class="input-group-prepend"> 
+                            <input class="form-control form-control-sm" type="text" formControlName="lIdentificacion" id="inputLabel-prepend" (blur)="abrirModalProveedor()"
+                                placeholder="Identificacion" maxlength="13" (keypress)="validaciones.numberOnly($event)" aria-describedby="inputGroup-sizing-sm"/>
+                        </div>
+
+                        <div class="input-group-prepend"> 
+                            <span class="input-group-text btn"  id="inputLabel-prepend"> 
+                                <i (click)="abrirModalProveedor()" matTooltip="Buscar Proveedores" class="fa fa-search fa-lg"></i> 
+                            </span>
+                        </div>
+                        
+                        <input class="form-control " type="text" formControlName="lDescProveedor" maxlength="100"  aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" placeholder="Nombre"/>
+                        
+                    </div> 
+                </div>
+            </div> 
+        </div>
+    </form>    
+
+
+
+    <div class="row">
+        <div class="col-sm{{forma.get('lEstado').value=='P' || forma.get('lEstado').value=='I'?'':'-6'}}" >
+            <fieldset class="border p-2 mb-2 mt-3 filters" >
+                <legend class="w-auto h6">Listado Pago Anticipagos</legend>
+
+                <div class="table-responsive responsive-table ">
+                    <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="table table-bordered " id="tablafrr">
+                        <thead class="text-center">
+                            <tr >
+                                <th>Id.</th>
+                                <th>Fecha</th>
+                                <th>Detalle</th>
+                                <th>Documento</th>
+                                <th>Saldo Inicial</th>
+                                <th>Saldo Final</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody style="width: 100%;">
+                             <tr *ngFor="let valor of dataSource" >
+                                <td style="width: 5%;">{{valor.id}}</td>
+                                <td style="width: 10%;">{{valor.fecha}}</td>
+                                <td style="width: 21%; font-weight: bold;" >{{valor.detalle}}</td>
+                                <td style="width: 13%; font-weight: bold;" >{{valor.pago_transaccion}}</td>
+                                <td style="width: 13%;" class="text-right">{{valor.valor_inicial}}</td>
+                                <td style="width: 13%;" class="text-right">{{valor.valor_final}}</td>
+                                <td style="width: 23%;" class="text-center" >
+                                    <mat-radio-group [(ngModel)]="btnRadioPant" *ngIf="forma.get('lEstado').value == 'A' && valor.valor_final > 0">
+                                        <mat-radio-button color="primary" [checked]="selectPagoAnticipo == undefined?false:valor.id == selectPagoAnticipo.id" (click)="abrirCuentasXPagar(valor)" matTooltip="Cruzar Pago"></mat-radio-button>
+                                    </mat-radio-group>        
+                                    <i class="btn fa fa-print fa-lg"  (click)="imprimirPorClick(valor)" [matTooltip]="valor.pago_estado!='P'?'Imprimir Comprobante de Egreso': 'Imprimir Asiento de Diario'" style="color: #545415;"></i>                                        
+                                    <i class="btn fa fa-ban fa-lg" (click)="anularPagoAnticipado(valor)" matTooltip="Anular" style="color: #541515;" *ngIf="forma.get('lEstado').value == 'A' || forma.get('lEstado').value == 'P'"></i>       
+                                </td>
+                            </tr> 
+                        </tbody>
+                    </table>
+                </div>
+ 
+            </fieldset>
+        </div>
+
+        <div class="col-sm-6" *ngIf="forma.get('lEstado').value=='A'">
+            <app-lista-cxp (onSeleccionarCxP)="seleccionarCuentaPorPagar($event.items)" (onModPagoAnt)="modificaPagoAnticipado($event.items)" [selectCxP]="selectCxP"></app-lista-cxp>
+        </div>
+    </div>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spPagoAnticipado"></cc-spiner-procesar>
+
+<div [hidden]="true" id="print-section-p-ant" *ngIf="dataUser != undefined">
+    <app-imprimir></app-imprimir>
+</div>

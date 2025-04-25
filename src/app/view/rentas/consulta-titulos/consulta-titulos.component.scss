@@ -1,0 +1,40 @@
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.col-documento-th {
+    left: 0;
+    position: sticky;
+    z-index: 1;
+    background-color: #F0F3F5;
+}
+.col-nombre-th {
+    left: 190px;
+    position: sticky;
+    z-index: 1;
+    background-color: #F0F3F5;
+}
+.col-documento-td {
+    left: 0;
+    position: sticky;
+    z-index: 100;
+    background-color: #FFFFFF;
+    // opacity: 0.9; /* Ajusta la opacidad por defecto */
+    // transition: opacity 0.3s ease; /* Suaviza el cambio de opacidad */
+}
+.col-nombre-td {
+    left: 190px;
+    position: sticky;
+    z-index: 100;
+    background-color:#FFFFFF;
+    // opacity: 0.9; /* Ajusta la opacidad por defecto */
+    // transition: opacity 0.3s ease; /* Suaviza el cambio de opacidad */
+}
+// .col-documento-td:hover {
+//     opacity: 1; /* Al pasar el mouse, vuelve la opacidad a 1 */
+// }
+// .col-nombre-td:hover {
+//     opacity: 1; /* Al pasar el mouse, vuelve la opacidad a 1 */
+// }

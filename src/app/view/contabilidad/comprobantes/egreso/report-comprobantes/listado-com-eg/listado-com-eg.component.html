@@ -1,0 +1,114 @@
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnInfDocComEg" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-search">  
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Tipo Documento" styleSpan="size-span-campo"> 
+                <input  type="text" class="form-control form-control-sm" [value]="dtInformacion.nombre" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="N° Documento" styleSpan="size-span-campo"> 
+                <input  type="text" class="form-control form-control-sm" [value]="dtInformacion.documento" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Ciudad" styleSpan="size-span-campo"> 
+                <input  type="text" class="form-control form-control-sm" [value]="dtInformacion.ciudad" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha Emisión" styleSpan="size-span-campo"> 
+                <input  type="text" class="form-control form-control-sm" [value]="dtInformacion.fecha" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo"> 
+                <input  type="text" class="form-control form-control-sm" [value]="dtInformacion.beneficiario" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Metodo Pago" styleSpan="size-span-campo"> 
+                <input  type="text" class="form-control form-control-sm" [value]="dtInformacion.metodo_pago" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="N° Transacción" styleSpan="size-span-campo"> 
+                <input *ngIf="dtInformacion.metodo_pago == 'Transferencia'"  type="text" class="form-control form-control-sm" [value]="'TRA-'+dtInformacion.num_tx" disabled>
+                <input *ngIf="dtInformacion.metodo_pago == 'Cheque'" type="text" class="form-control form-control-sm" [value]="'CHE-'+dtInformacion.num_tx" disabled>
+                <input *ngIf="dtInformacion.metodo_pago == 'Tarjeta Crédito' || dtInformacion.metodo_pago == 'Tarjeta Débito'"   type="text" class="form-control form-control-sm" [value]="'TAR-'+dtInformacion.num_tx" disabled>
+                <input *ngIf="dtInformacion.metodo_pago == 'Efectivo'" type="text" class="form-control form-control-sm" value="NO DISPONIBLE" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo"> 
+                <input  type="text" class="form-control form-control-sm" [value]="dtInformacion.valor | currency: 'USD' | lowercase" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="La suma de" styleSpan="size-span-campo"> 
+                <input  type="text" class="form-control form-control-sm" [value]="commonVarSrv.NumeroALetras(dtInformacion.valor, false)" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo"> 
+                <input  type="text" class="form-control form-control-sm" [value]="dtInformacion.concepto" disabled>
+            </app-cc-input-group-prepend>
+        </div> 
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Tipo Egreso" styleSpan="size-span-campo"> 
+                <input  type="text" class="form-control form-control-sm" [value]="dtInformacion.tipo_egreso" disabled>
+            </app-cc-input-group-prepend>
+        </div>             
+
+    </div>
+
+
+    <fieldset class="border p-2 mb-1 mt-2 filters">
+        <legend class="w-auto h6">Listado</legend> 
+        <div class="table-responsive responsive-table contenedor-scrol-notdeb-rep" >
+            <table class="table table-sm table-hover">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th>#</th>
+                        <th>Nombre Cuenta</th>
+                        <th>Codigo Cuenta</th>
+                        <th>Debe</th>
+                        <th>Haber</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" style="width: 100%;" *ngFor="let dt of dtcomprobanteEgreso; let i = index">
+                        <td style="width: 3%;"><strong>{{ i + 1 }}</strong></td>
+                        <td style="width: 3%;" class="text-left">
+                            <strong>{{dt.nombre_cta}}</strong>
+                        </td>
+                        <td style="width: 10%;">
+                            <strong>{{dt.codigo_cta}}</strong>
+                        </td>
+
+                        <td style="width: 10%;">
+                            <strong>{{dt.debe}}</strong>
+                        </td>
+
+                        <td style="width: 5%;">
+                            <strong>{{dt.haber}}</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+
+
+</app-button-radio-active>

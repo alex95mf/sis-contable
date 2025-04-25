@@ -1,0 +1,106 @@
+<div class="">
+    <app-button-radio-active titulo="Seleccionar Bodega" filtroBoton="btnModalLiq" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        
+        <div class="row my-2">
+
+            <!-- <div class="col-12">
+                <div class="col-12 float-right">
+                    <div class="input-group input-group-sm mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Filtro por razon social</span>
+                        </div>
+                        <input id="filter_razon_social" type="text" class="form-control form-control-sm" [(ngModel)]="filter.razon_social">
+                        <div class="input-group-prepend ml-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Filtro por No. documento</span>
+                        </div>
+                        <input id="filter_num_documento" type="text" class="form-control form-control-sm" [(ngModel)]="filter.num_documento">
+                        <button class="btn btn-info btn-sm ml-1" placement="bottom" ngbTooltip="Buscar" (click)="cargarLiquidaciones()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="col-12">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row ml-1 mr-1">
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Codigo" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_codigo" type="text" class="form-control" [(ngModel)]="filter.codigo">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="aplicarFiltros()">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-12">
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 5%;">Id</th>
+                            <th style="width: 20%;">Nombre Bodega</th>
+                            <th style="width: 20%;">Tipo almacenamiento</th>
+                            <th style="width: 10%;">Fila</th>
+                            <th style="width: 10%;">Columna</th>
+                            <th style="width: 15%;">Código</th>
+                            <th style="width: 15%;">Dimensión</th>
+                            <th style="width: 15%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <ng-container *ngFor="let dt of bodegas, let i = index">
+                            <tr>
+                                <td class="text-center"> {{ dt.id_bodega_det}}</td>
+                                <td class="text-center"> {{ dt.bodega.nombre}}</td>
+                                <td class="text-center"> {{ dt.tipo_almacenamiento}}</td>
+                                <td class="text-center"> {{ dt.fila}}</td>
+                                <td class="text-center"> {{ dt.columna}}</td>
+                                <td class="text-center"> {{ dt.codigo}}</td>
+                                <td class="text-center"> {{ dt.dimension}}</td>
+                                <td class="text-center">
+                                    <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                                        <input [id]="dt.id_bodega_det" type="checkbox" class="custom-control-input" [(ngModel)]="dt.aplica" (change)="aplica(dt)">
+                                        <label class="custom-control-label" [for]="dt.id_bodega_det">{{ dt.aplica ? "" : "" }}</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+
+
+                    </tbody>
+                </table>                    
+            </div>
+                
+            <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+            
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

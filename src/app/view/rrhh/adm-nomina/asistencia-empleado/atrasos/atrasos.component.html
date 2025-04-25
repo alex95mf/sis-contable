@@ -1,0 +1,141 @@
+<div class="h-100 px-2">
+    <div class="row">
+        <div class="col-3">
+            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" appendTo="body" [clearable]="false" [(ngModel)]="periodoSelected"
+                    [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo">
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-3">
+            <app-cc-select-nom-catalogo [ngModelCcHijoCatg]="mes_id_cc"
+                (ccItemSelecionado)="viewSelectionMesCC($event)"
+                [optionDefault]="'Selecionar opcion'" #nameMes
+                [labelDescription]="'Mes'"
+                [ngClass]="{ 'is-invalid': submitted && f.fcn_mes.errors }"
+                codigocatalogo="MES">
+            </app-cc-select-nom-catalogo>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Archivo" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [value]="fileName">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" (click)="resetInput()">
+                        <i class="fas fa-file-upload"></i> CARGAR ARCHIVO
+                    </button>
+                    <input type="file" class="d-none" id="input-atrasos"
+                        accept="text/plain"
+                        (change)="onFileSelected($event)" #fileUpload>
+                </div>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <fieldset class="border px-3 pb-2">
+        <legend class="mb-1 w-auto">Filtros</legend>
+        <div class="row">
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.nombre">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Area" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.area">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.departamento">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row">
+        <div class="col">
+            <p-table [value]="tbl_registros" sortField="nombre" sortMode="single" [scrollable]="true" scrollHeight="600px" rowGroupMode="subheader" groupRowsBy="nombre" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr style="font-size: 0.75rem;">
+                        <th style="min-width:200px">Fecha</th>
+                        <th style="min-width:150px">Entrada</th>
+                        <!-- <th style="min-width:150px">Salida</th> -->
+                        <th style="min-width:150px">Tiempo Atrsado</th>
+                        <th style="min-width:150px">Motivo</th>
+                        <th style="min-width:200px">Aprueba</th>
+                        <th style="min-width:150px">Afecta Rol</th>
+                        <th style="min-width:400px;">Observaciones</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="groupheader" let-empleado>
+                    <tr pRowGroupHeader>
+                        <td colspan="5">
+                            <span class="font-bold ml-2">{{empleado.nombre}}</span>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-empleado let-rowIndex="rowIndex">
+                    <tr [ngClass]="{'table-warning': empleado.entrada == '' || empleado.salida == ''}" style="font-size: 0.75rem;">
+                        <td style="min-width:200px;">
+                            {{empleado.fecha}}
+                        </td>
+                        <td style="min-width:150px">
+                            <input type="time" [value]="empleado.entrada">
+                            <!-- {{empleado.Entrada}} -->
+                        </td>
+                        <!-- <td style="min-width:150px">
+                            <input type="time" [value]="empleado.salida">
+                            {{empleado.Salida}}
+                        </td> -->
+                        <td style="min-width: 150px;">
+                            {{ empleado.tiempo_atrasado / 60  | number:'2.0-0' }}:{{ empleado.tiempo_atrasado % 60 | number:'2.0-0' }}
+                        </td>
+                        <td style="min-width:150px">
+                            <ng-select id="motivo_atraso" appendTo="body" class="form-control form-control-sm" [(ngModel)]="empleado.motivo"
+                            [clearable]="true" >
+                                <ng-option disabled [value]="0" disabled>Seleccione un motivo</ng-option>
+                                <ng-option *ngFor="let tc of motivosAtraso" [value]="tc.id_catalogo">{{tc.cat_nombre }}</ng-option>
+                            </ng-select>
+                        </td>
+                        <td style="min-width:200px">
+                            <label for="chk_a_aprobado{{ rowIndex }}">
+                                <input type="checkbox" [(ngModel)]="empleado.a_aprobado" id="chk_a_aprobado{{ rowIndex }}" (change)="actualizarRegistro(empleado)">
+                                Aprobar
+                            </label>
+                        </td>
+                        <td style="min-width:150px">
+                            <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                                     [(ngModel)]="empleado.afecta_rol" (change)="actualizarRegistro(empleado)">
+                                <ng-option  [value]= "0" disabled>Seleccione</ng-option>
+                                <ng-option  [value]="'S'">SI</ng-option>
+                                <ng-option  [value]="'N'">NO</ng-option>
+                            </ng-select>
+                        </td>
+                        <td style="min-width:400px">
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="empleado.observaciones" (blur)="actualizarRegistro(empleado)">
+                        </td>
+                        
+                        
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td class="EmptyTable" [attr.colspan]="3">
+                            No hay información para mostrar
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spImportarMarcas"></cc-spiner-procesar>
+

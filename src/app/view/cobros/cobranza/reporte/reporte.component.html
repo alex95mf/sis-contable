@@ -1,0 +1,520 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-file-pdf"
+        filtroBoton="btnsRenConsultaReporte" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border pb-2 px-2 my-2">
+            <legend class="w-auto bg-dark ml-1 mb-0">Filtros</legend>
+            <div class="row justify-content-md-center">
+                <div class="col-lg-5">
+                    <app-cc-input-group-prepend label="Tipo de Reporte" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select [(ngModel)]="selectedReporte" (change)="selectOption1($event)" bindValue="id" bindLabel="name" class="form-control" [clearable]="true">
+                            <ng-option *ngFor="let tipo of reportes" [value]="tipo.reporte">{{ tipo.descripcion }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-lg-5">
+                    <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control"  [disabled]="formReadOnly || contribuyenteDisabled" placeholder="Seleccione un Contribuyente" 
+                        [value]="reporte.fk_contribuyente?.razon_social" [(ngModel)]="filter.razon_social">
+                        <button class="btn btn-sm btn-primary mr-1" matTooltip="Contribuyente" (click)="expandContribuyentes()" >
+                        <i class="fas fa-search"></i> </button>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-2 text-right">
+                    <button class="btn  btn-sm btn-primary " placement="bottom" ngbTooltip="Buscar" (click)="consultar()">
+                        <i class="fas fa-search"></i>Consultar
+                    </button>
+                    <button class="btn btn-sm btn-danger" matTooltip="Limpiar Filtros" (click)="limpiarFiltros()"><i class="fas fa-eraser"></i></button>
+                </div> 
+               
+    
+                
+            </div>
+           
+            <div class="row justify-content-md-center">
+                <div class="col-lg-3" >
+                    <app-cc-input-group-prepend label="Mercado" styleSpan="size-span-otro font-weight-bold">
+                        <ng-select [disabled]="formReadOnly || mercadosDisabled" [(ngModel)]="filter.selectedMercado" class="form-control" [clearable]="true">
+                            <!--<ng-option [value]="0">TODOS</ng-option>-->
+                            <ng-option *ngFor="let mercado of mercados" [value]="mercado.valor">{{ mercado.valor }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div> 
+                <div class="col-lg-3">
+                    <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-otro font-weight-bold">
+                        <ng-select [disabled]="formReadOnly || conceptosDisabled" [(ngModel)]="filter.selectedConcepto" bindValue="id" bindLabel="name" class="form-control" [clearable]="true">
+                            <!--<ng-option [value]="0">TODOS</ng-option>-->
+                            <ng-option *ngFor="let tipo of conceptos" [value]="tipo.nombre">{{ tipo.codigo }} - {{ tipo.nombre }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-lg-3" >
+                    <app-cc-input-group-prepend label="Sector" styleSpan="size-span-otro font-weight-bold">
+                        <ng-select [disabled]="formReadOnly || sectorDisabled" [(ngModel)]="filter.selectedSector" class="form-control" [clearable]="true">
+                            <!--<ng-option [value]="0">TODOS</ng-option>-->
+                            <ng-option *ngFor="let sector of sectores" [value]="sector.descripcion">{{ sector.descripcion }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+               
+                <div class="col-lg-3" >
+                    <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-otro font-weight-bold">
+                        <ng-select [disabled]="formReadOnly || tipoDisabled" [(ngModel)]="filter.selectedTipo" class="form-control" [clearable]="true">
+                            <!--<ng-option [value]="0">TODOS</ng-option>-->
+                            <ng-option *ngFor="let c of tipoDeuda" [value]="c.valor">{{c.descripcion}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                
+            </div>
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-3" >
+                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-otro font-weight-bold">
+                        <ng-select [disabled]="formReadOnly || estadoDisabled" [(ngModel)]="filter.selectedEstado" class="form-control" [clearable]="true">
+                            <!--<ng-option [value]="0">TODOS</ng-option>-->
+                            <ng-option *ngFor="let est of estados" [value]="est.label">{{ est.value }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-lg-3" >
+                    <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-otro font-weight-bold">
+                        <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde" [disabled]="formReadOnly || fechaDesdeDisabled" max="2050-01-01">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-lg-3">
+                    <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-otro font-weight-bold">
+                        <input type="date" min="9999-01-01" max="2050-12-31" class="form-control" [(ngModel)]="filter.fecha_hasta" [disabled]="formReadOnly || fechaHastaDisabled"  >
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-lg-3">
+                    <app-cc-input-group-prepend label="Fecha Contrato" styleSpan="size-span-otro font-weight-bold">
+                        <input type="date" min="1950-12-31" max="2050-12-31" class="form-control" [(ngModel)]="filter.fecha_contrato" [disabled]="formReadOnly || fechaContratoDisabled">
+                    </app-cc-input-group-prepend>
+                </div>
+            
+            </div>
+
+        </fieldset>
+        <div *ngIf="variableFiltro=='rpt_recaudacion_expedientes_coactivos'" class="row justify-content-center">
+            <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;"> 
+                <p-table 
+                #tblRecExpCoactivos
+                [value]="dataReportes" 
+                rowGroupMode="subheader" 
+                groupRowsBy="abogado" 
+                [paginator]="true"
+                [rows]="rows"
+                [lazy]="true"
+                (onLazyLoad)="nextPage($event)"
+                [loading]="loading"
+                [totalRecords]="totalRecords"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="pageSizeOptions"
+                responsiveLayout="scroll">
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th>Transacc.</th>
+                            <th colspan="1" style="width: 150px;">No. Título</th>
+                            <th colspan="1" style="width: 200px;">No. Exp.Coac</th>
+                            <th style="width: 200px;">Contribuyente</th>
+                            <th>Solar</th>
+                            <th >Valor</th>
+                            <th >(+) Interés</th>
+                            <th >Total</th>
+                            <th >Coactiva</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="groupheader" let-dataReportes>
+                        <tr pRowGroupHeader style="font-size: 12px;">
+                            <td colspan="5"> 
+                                <span class="font-bold ml-2">Abogado: {{dataReportes.abogado}}</span>
+                            </td>
+                            <td colspan="6">
+                              
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="groupfooter" let-dataReportes>
+                        <tr style="font-size: 12px;">
+                            <td colspan="4" class="text-right font-bold ">Total:</td>
+                            <td colspan="2" class="text-right font-bold ">$ {{calculoTotalSubtotal(dataReportes.abogado) | number:'1.2-2'}}</td>
+                            <td colspan="1" class="text-right font-bold ">$ {{calculoTotalInteres(dataReportes.abogado) | number:'1.2-2'}}</td>
+                            <td colspan="1" class="text-right font-bold ">$ {{calculoTotalTotal(dataReportes.abogado) | number:'1.2-2'}}</td>
+                            <td colspan="1" class="text-right font-bold ">$ {{calculoTotalCoactiva(dataReportes.abogado) | number:'1.2-2'}}</td>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <td>{{d.transaccion}}</td>
+                                <td style="width: 150px;">{{d.titulo }}</td>
+                                <td style="width: 200px;">{{d.numero_expediente }}</td>
+                                <td style="width: 200px;">{{d.contribuyente }}</td>
+                                <td>{{d.solar }}</td>
+                                <td  class="text-right">$ {{d.subtotal  | number:'1.2-2' }}</td>
+                                <td  class="text-right">$ {{d.interes | number:'1.2-2' }}</td>
+                                <td  class="text-right">$ {{d.total | number:'1.2-2' }}</td>
+                                <td  class="text-right">$ {{d.coactiva | number:'1.2-2' }}</td>
+                        </tr>
+                    </ng-template>
+                    
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="variableFiltro=='rpt_diversos_conceptos'" class="row justify-content-center">
+            <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;"> 
+                <p-table 
+                #tblDivConceptos
+                [value]="dataReportes" 
+                rowGroupMode="subheader" 
+                groupRowsBy="abogado" 
+                [paginator]="true"
+                [rows]="rows"
+                [lazy]="true"
+                (onLazyLoad)="nextPage($event)"
+                [loading]="loading"
+                [totalRecords]="totalRecords"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="pageSizeOptions"
+                responsiveLayout="scroll" >
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th>Concepto</th>
+                            <th colspan="1" style="width: 150px;">Emisión</th>
+                            <th colspan="1" style="width: 200px;">Título</th>
+                            <th style="width: 200px;">Contribuyente</th>
+                            <th class="text-right">Valor</th>
+                            <th>Código Catastral</th>
+                            <th >Sector</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <td>{{d.concepto}}</td>
+                                <td style="width: 150px;">{{d.emision }}</td>
+                                <td style="width: 200px;">{{d.documento }}</td>
+                                <td style="width: 200px;">{{d.razon_social }}</td>
+                                <td class="text-right">$ {{d.total | number:'1.2-2'}}</td>
+                                <td>{{d.codigocatastro}}</td>
+                                <td>{{d.sector}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr style="font-size: 14px;">
+                            <td  colspan="4" class="text-right font-weight-bold">Total:</td>
+                            <td  colspan="1" class="text-center font-weight-bold">$ {{ totalConceptos | number:'1.2-2'  }}</td>
+                            <td  colspan="2" class="text-center font-weight-bold"></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="variableFiltro=='rpt_general'" class="row justify-content-center">
+            <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;"> 
+                <p-table 
+                #tblGeneral
+                [value]="dataReportes" 
+                rowGroupMode="subheader" 
+                groupRowsBy="abogado"  
+                [paginator]="true"
+                [rows]="rows"
+                [lazy]="true"
+                (onLazyLoad)="nextPage($event)"
+                [loading]="loading"
+                [totalRecords]="totalRecords"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="pageSizeOptions"
+                responsiveLayout="scroll" >
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th style="min-width: 250px;">Contribuyente</th>
+                            <th style="min-width: 100px;">Concepto</th>
+                            <th style="min-width: 100px;">Emisión</th>
+                            <th style="min-width: 100px;">Fecha</th>
+                            <th style="min-width: 150px;">No. Título</th>
+                            <th style="min-width: 100px;">Código </th>
+                            <th style="min-width: 200px;">Sector</th>
+                            <th style="min-width: 200px;">Mercado</th>
+                            <th style="min-width: 150px;">Local</th>
+                            <th style="min-width: 100px;">Expediente</th>
+                            <th style="min-width: 80px;">Auto de pago </th>
+                            <th class="text-right" style="min-width: 150px;">Cuantía</th>
+                            <th class="text-right" style="min-width: 150px;">Abono</th>
+                            <th class="text-right" style="min-width: 200px;">Saldo</th>
+                            <th style="min-width: 80px;">Estado</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <td style="min-width: 250px;">{{d.razon_social}}</td>
+                                <td style="min-width: 100px;">{{d.nombre }}</td>
+                                <td style="min-width: 100px;">{{d.fecha | date:'yyyy-MM-dd'}}</td>
+                                <td style="min-width: 100px;">{{d.fecha | date:'yyyy-MM-dd' }}</td>
+                                <td style="min-width: 150px;">{{d.documento }}</td>
+                                <td style="min-width: 100px;">{{d.codigo_catastral}}</td>
+                                <td style="min-width: 200px;">{{d.descripcion}}</td>
+                                <td style="min-width: 200px;">{{d.mercado}}</td>
+                                <td style="min-width: 150px;">{{d.local}}</td>
+                                <td style="min-width: 100px;">{{d.num_expediente}}</td>
+                                <td style="min-width: 80px;">{{d.num_juicio}}</td>
+                                <td class="text-right" style="min-width: 150px;">$ {{d.total | number:'1.2-2'}}</td>
+                                <td class="text-right" style="min-width: 150px;">$ {{d.valorrecaudado | number:'1.2-2'}}</td>
+                                <td class="text-right" style="min-width: 200px;">$ {{d.saldototal | number:'1.2-2'}}</td>
+                                <td style="min-width: 80px;">{{d.estado =='A' ? 'Aprobado' : d.estado =='E' ? 'Emitido' : d.estado =='C' ? 'Cancelado': d.estado =='X' ? 'Anulado' : (d.estado =='V' ? 'Convenio' : '' )}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr style="font-size: 14px;">
+                            <td colspan="13" class="text-right font-weight-bold pr-6">Total:</td>
+                            <td colspan="1" class="text-right font-weight-bold pr-6">$ {{totalSaldoGeneral| number:'1.2-2' }}</td>
+                            <td colspan="1" class="text-right font-weight-bold pr-6"></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="variableFiltro=='rpt_emision_recaudacion_arriendamiento_mensual'" class="row justify-content-center">
+            <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;max-height: 600px; overflow-y: auto;"> 
+                <p-table 
+                #tblArrenMensual
+                [value]="dataReportes" 
+                rowGroupMode="subheader" 
+                groupRowsBy="abogado"
+                [paginator]="true"
+                [rows]="rows"
+                [lazy]="true"
+                (onLazyLoad)="nextPage($event)"
+                [loading]="loading"
+                [totalRecords]="totalRecords"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="pageSizeOptions"
+                responsiveLayout="scroll" >
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th style="min-width: 250px;">Mercado</th>
+                            <th style="min-width: 20px;">No. Locales según catastro</th>
+                            <th style="min-width: 100px;">Locales Activos según coordinador</th>
+                            <th style="min-width: 150px;">Locales que entraron a emisión en el mes de {{mes}}-{{anio}}</th>
+                            <th style="min-width: 150px;">Emisión Ene-Dic 2022,canon mensual</th>
+                            <th style="min-width: 150px;">Recaudado año corriente Ene/Dic 2022</th>
+                            <th style="min-width: 200px;">Valores Pendientes 2022 de Ene/Dic 2022</th>
+                            <th style="min-width: 100px;" class="text-center">%</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <td style="min-width: 250px;" class="text-center">{{d.descripcion}}</td>
+                                <td style="min-width: 100px;" class="text-center">{{d.numero_local }}</td>
+                                <td style="min-width: 100px;" class="text-center">{{d.activos}}</td>
+                                <td style="min-width: 100px;" class="text-center">{{d.nro_contratos }}</td>
+                                <td style="min-width: 150px;" class="text-right">$ {{d.por_cobrar | number:'1.2-2' }}</td>
+                                <td style="min-width: 150px;" class="text-right">$ {{d.recaudado | number:'1.2-2'}}</td>
+                                <td style="min-width: 200px;" class="text-right">$ {{d.saldo | number:'1.2-2'}}</td>
+                                <td style="min-width: 100px;" class="text-right">{{d.porcentaje | number:'1.2-4'}} %</td>
+                            </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr style="font-size: 14px;">
+                            <td  class="text-center font-weight-bold">Total:</td>
+                            <td  class="text-center font-weight-bold"> {{totalLocales  }}</td>
+                            <td  class="text-center font-weight-bold"> {{totalActivos  }}</td>
+                            <td  class="text-center font-weight-bold"> {{totalNroContratos}}</td>
+                            <td  class="text-right font-weight-bold"> $ {{totalPorCobrar | number:'1.2-2' }}</td>
+                            <td  class="text-right font-weight-bold"> $ {{totalRecaudado | number:'1.2-2' }}</td>
+                            <td  class="text-right font-weight-bold"> $ {{totalSaldo | number:'1.2-2' }}</td>
+                            <td  class="text-right font-weight-bold"> {{totalPorcentaje | number:'1.2-2' }} %</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="variableFiltro=='rpt_por_convenios'" class="row justify-content-center">
+            <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;"> 
+                <p-table 
+                #tblPorConvenios
+                [value]="dataReportes"
+                rowGroupMode="subheader"
+                groupRowsBy="abogado"
+                [paginator]="true"
+                [rows]="rows"
+                [lazy]="true"
+                (onLazyLoad)="nextPage($event)"
+                [loading]="loading"
+                [totalRecords]="totalRecords"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="pageSizeOptions"
+                responsiveLayout="scroll" >
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th style="min-width: 150px;">Número</th>
+                            <th style="min-width: 100px;">Inicio</th>
+                            <th style="min-width: 100px;">Fin</th>
+                            <th style="min-width: 100px;">Fecha último pago</th>
+                            <th style="min-width: 250px;">Contribuyente</th>
+                            <th style="min-width: 150px;">Predio</th>
+                            <th style="min-width: 200px;">Sector</th>
+                            <th style="min-width: 100px;">No. Expediente</th>
+                            <th style="min-width: 100px;">No. Auto de Pago</th>
+                            <th style="min-width: 100px;">Valor Convenio</th>
+                            <th style="min-width: 100px;">Cuota inicial</th>
+                            <th style="min-width: 100px;">Valor Recaudado</th>
+                            <th style="min-width: 100px;">Vencido en cuotas</th>
+                            <th style="min-width: 100px;">Saldo Total</th>
+                            <th style="min-width: 100px;">Cuotas Atrasadas</th>
+                            <th style="min-width: 100px;">Tipo</th>
+                            <th style="min-width: 100px;">Estado</th>
+
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <td style="min-width: 150px;">{{d.documento}}</td>
+                                <td style="min-width: 100px;">{{d.fecha | date:'dd-MM-yyyy'}}</td>
+                                <td style="min-width: 100px;">{{d.fecha_final | date:'dd-MM-yyyy'}}</td>
+                                <td style="min-width: 100px;">{{d.fecha_ultimo_pago | date:'dd-MM-yyyy'}}</td>
+                                <td style="min-width: 250px;">{{d.razon_social}}</td>
+                                <td style="min-width: 100px;">{{d.cod_catastral}}</td>
+                                <td style="min-width: 100px;">{{d.descripcion}}</td>
+                                <td style="min-width: 100px;">{{ d.num_expediente }}</td>
+                                <td style="min-width: 100px;">{{ d.num_juicio }}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.total | number:'1.2-2'}}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.cuotainicial | number:'1.2-2'}}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.valorrecaudado | number:'1.2-2'}}</td>
+                                <td style="min-width: 100px;" >{{d.cuotas_pendientes}}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.saldototal | number:'1.2-2'}}</td>
+                                <td style="min-width: 100px;">{{d.cuotas_pendientes}}</td>
+                                <td style="min-width: 100px;">{{d.tipo_documento == 'CO' ? 'Convenio por Deuda': (d.tipo_documento == 'COTE' ? 'Convenio por compra de terreno' : '')}}</td>
+                                <td style="min-width: 100px;">{{d.estado =='A' ? 'Aprobado' : d.estado =='E' ? 'Emitido' : d.estado =='C' ? 'Cancelado': d.estado =='X' ? 'Anulado' : (d.estado =='V' ? 'Convenio' : '' )}}</td>
+                            </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr style="font-size: 14px;">
+                            <td colspan="9" class="text-center font-weight-bold">Total:</td>
+                            <td colspan="1" class="text-right font-weight-bold"> ${{totalGeneralConvenios  | number:'1.2-2'}}</td>
+                            <td colspan="2" class="text-right font-weight-bold"> ${{totalRecaudadoConvenios  | number:'1.2-2'}}</td>
+                            <td colspan="2" class="text-right font-weight-bold"> ${{totalSaldoTotalconvenios  | number:'1.2-2'}}</td>
+                            <td colspan="3" class="text-right font-weight-bold"> </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="variableFiltro=='rpt_mercado'" class="row justify-content-center">
+            <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;"> 
+                <p-table 
+                #tblMercado
+                [value]="dataReportes" 
+                rowGroupMode="subheader" 
+                groupRowsBy="abogado"
+                [paginator]="true"
+                [rows]="rows"
+                [lazy]="true"
+                (onLazyLoad)="nextPage($event)"
+                [loading]="loading"
+                [totalRecords]="totalRecords"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="pageSizeOptions"
+                responsiveLayout="scroll" >
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th style="min-width: 150px;">Ubicación</th>
+                            <th style="min-width: 100px;">Local</th>
+                            <th style="min-width: 250px;">Contribuyente</th>
+                            <th style="min-width: 200px;">Concepto</th>
+                            <th style="min-width: 100px;">Desde</th>
+                            <th style="min-width: 100px;">Hasta</th>
+                            <th style="min-width: 100px;">Títulos</th>
+                            <th style="min-width: 100px;">Pendiente</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <td style="min-width: 150px;">{{d.descripcion}}</td>
+                                <td style="min-width: 100px;">{{d.local}}</td>
+                                <td style="min-width: 200px;">{{d.contribuyente}}</td>
+                                <td style="min-width: 200px;">{{d.nombre}}</td>
+                                <td style="min-width: 100px;">{{d.desde}}</td>
+                                <td style="min-width: 100px;">{{d.hasta}}</td>
+                                <td style="min-width: 100px;">{{d.cantidad_titulos}}</td>
+                                <td style="min-width: 100px;">$ {{d.pendiente | number:'1.2-2'}}</td>
+                              </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr style="font-size: 14px;">
+                            <td  colspan="7" class="text-center font-weight-bold">Total:</td>
+                            <td  colspan="1" class="text-center font-weight-bold">$ {{ sumaTotalesMercado() | number:'1.2-2'  }}</td>
+                            
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="variableFiltro=='rpt_recaudo_mercados'" class="row justify-content-center">
+            <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;max-height: 600px; overflow-y: auto;"> 
+                <p-table 
+                #tblRecaudoMercados
+                [value]="dataReportes" 
+                rowGroupMode="subheader" 
+                groupRowsBy="abogado" 
+                [paginator]="true"
+                [rows]="rows"
+                [lazy]="true"
+                (onLazyLoad)="nextPage($event)"
+                [loading]="loading"
+                [totalRecords]="totalRecords"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="pageSizeOptions"
+                responsiveLayout="scroll">
+                    <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}" >
+                        <tr style="font-size: 12px;" >
+                            <th style="min-width: 200px;">Mercado</th>
+                            <th style="min-width: 100px;" class="text-right">Arriendos</th>
+                            <th style="min-width: 100px;" class="text-right">Patente</th>
+                            <th style="min-width: 100px;" class="text-right">1.5 por Mil</th>
+                            <th style="min-width: 100px;" class="text-right">Pesas y Medidas</th>
+                            <th style="min-width: 100px;" class="text-right">Vía Pública</th>
+                            <th style="min-width: 100px;" class="text-right">Espacios Publicitarios</th>
+                            <th style="min-width: 100px;" class="text-right">Introductor</th>
+                            <th style="min-width: 100px;" class="text-right">Total</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
+                        <tr style="font-size: 11px;">
+                                <td style="min-width: 200px;">{{d.descripcion}}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.arriendo | number:'1.2-2' }}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.patente | number:'1.2-2' }}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.activos_totales | number:'1.2-2' }}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.pesas_y_medidas | number:'1.2-2' }}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.via_publica | number:'1.2-2' }}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.letreros | number:'1.2-2' }}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.introductor | number:'1.2-2' }}</td>
+                                <td style="min-width: 100px;" class="text-right">$ {{d.total | number:'1.2-2'}}</td>
+                              </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr style="font-size: 14px;">
+                            <td  class="text-right font-weight-bold">Total:</td>
+                            <td  class="text-right font-weight-bold">$ {{totalArriendo | number:'1.2-2'}}</td>
+                            <td  class="text-right font-weight-bold">$ {{totalPatente | number:'1.2-2'}}</td>
+                            <td  class="text-right font-weight-bold">$ {{totalActivosTotales | number:'1.2-2'}}</td>
+                            <td  class="text-right font-weight-bold"> $ {{totalPesasMedidas | number:'1.2-2' }}</td>
+                            <td  class="text-right font-weight-bold"> $ {{totalViaPublica | number:'1.2-2' }}</td>
+                            <td  class="text-right font-weight-bold"> $ {{totalLetreros | number:'1.2-2' }}</td>
+                            <td  class="text-right font-weight-bold"> $ {{totalIntroductor | number:'1.2-2' }}</td>
+                            <td  class="text-right font-weight-bold"> $ {{totalGeneral | number:'1.2-2' }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="renConsultaReporte"></cc-spiner-procesar>

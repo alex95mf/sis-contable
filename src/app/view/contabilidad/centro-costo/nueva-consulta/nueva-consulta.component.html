@@ -1,0 +1,105 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Consulta Centro de Costo" icono="fa fa-search" cstyle="bg-light"
+        filtroBoton="btnsNuevaConsultaComponent" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Desde" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde" max="9999-12-31">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Hasta" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" max="9999-12-31">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Cuenta Desde" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" readonly class="form-control" [value]="codigo">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" (click)="onClicConsultaPlanCuentas()">
+                            <i class="far fa-search"></i>
+                        </button>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Nombre Cuenta" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" readonly class="form-control" [value]="nombre">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Cuenta Hasta" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" readonly class="form-control" [value]="codigo_hasta">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" (click)="onClicConsultaPlanCuentasHasta()">
+                            <i class="far fa-search"></i>
+                        </button>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Nombre Cuenta" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" readonly class="form-control" [value]="nombre_hasta">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Centro de Costo" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select [clearable]="false" [(ngModel)]="centrocosto" class="form-control"
+                        [items]="cmb_centro" bindLabel="nombre" bindValue="id">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <mat-tab-group>
+            <mat-tab label="Detalles">
+                <div class="table-responsive" style="overflow-x:auto;max-height: 450px; overflow-y: scroll;">
+                    <table class="table h-auto">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="d-none" style="width: 10% !important;text-align: center;">ID</th>
+                                <th style="min-width: 100px !important;">FECHA</th>
+                                <th style="min-width: 100px  !important;">NUMERO</th>
+                                <th style="min-width: 130px  !important;">CUENTA</th>
+                                <th style="min-width: 380px  !important;">DESCRIPCION</th>
+                                <th style="min-width: 100px !important;text-align: right;padding-right: 10px;">DEBE</th>
+                                <th style="min-width: 100px  !important;text-align: right;padding-right: 10px;">HABER</th>
+                                <th style="min-width: 120px  !important;">COD. PARTIDA</th>
+                                <th style="min-width: 200px  !important;">PARTIDA</th>
+                                <th style="min-width: 100px  !important;" class="text-right">VALOR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="dtConsultaAsiento?.length; else emptyMessage">
+                                <tr *ngFor="let dt of dtConsultaAsiento">
+                                    <td class="text-center d-none">{{dt.id}}</td>
+                                    <td>{{dt.fecha | date: 'yyyy-MM-dd'}}</td>
+                                    <td>{{ dt.num_doc }}</td>
+                                    <td>{{dt.cuenta.replaceAll('.','')}}</td>
+                                    <td>{{dt.descripcion_cuenta}}</td>
+                                    <td  style="text-align: right;padding-right: 10px;">$ {{ dt.debito | number:'1.2-2'}}</td>
+                                    <td  style="text-align: right;padding-right: 10px;">$ {{ dt.credito | number:'1.2-2'}}</td>
+                                    <td> {{ dt.codigo_partida }}</td>
+                                    <td> {{ dt.partida }}</td>
+                                    <td style="text-align: right;padding-right: 10px;">$ {{ dt.valor_partida ?? 0 | number:'1.2-2' }}</td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #emptyMessage>
+                                <tr>
+                                    <td colspan="9" class="text-center">
+                                        <h6>No hay asientos para mostrar</h6>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-tab>
+            <mat-tab label="Grafico">
+                <canvas id="chartPieCentroCosto" #canvas>{{ chart }}</canvas>
+            </mat-tab>
+        </mat-tab-group>
+        
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spNuevaConsultaComponent"></cc-spiner-procesar>

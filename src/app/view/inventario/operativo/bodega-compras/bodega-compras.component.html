@@ -1,0 +1,49 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="RECEPCIÓN PRODUCTO" cstyle="bg-gradient-primary text-white" icono="fas fa-box-open">
+        <div class="row justify-content-center mt-3 mb-3">
+            <div class="col-12 filters pl-2 pr-2">
+                <div class="row justify-content-center">
+                    <div class="col-12 pl-3 pr-3 ">
+                        <div class="table-responsive responsive-table mt-2">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table dataTable no-footer table-hover">
+                                <thead>
+                                    <tr style="width: 100%;text-align: center;">
+                                        <th style="width: 8%;">#</th>
+                                        <th style="width: 10%;">Factura Nº</th>
+                                        <th style="width: 32%;">Proveedor</th>
+                                        <th style="width: 10%;">Documento</th>
+                                        <th style="width: 12%;">Valor ($)</th>
+                                        <th style="width: 10%;">Fecha</th>
+                                        <th style="width: 8%;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDtUser" class="text-center" style="cursor:pointer;">
+                                    <tr *ngFor="let dt of guardaT; let i = index">
+                                        <td class="text-center">{{ i + 1 }}</td>
+                                        <td class="text-left"> {{ dt.num_documento.padStart(10, 0)}}</td>
+                                        <td class="text-left"> {{ dt.nombre_comercial_prov}}</td>
+                                        <td class="text-center">{{ dt.ruc}}</td>
+                                        <td class="text-right">${{ commonServices.formatNumber(dt.total)}}</td>
+                                        <td class="text-center">{{ dt.created_at | date:'dd-MM-yyyy'}}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-sm tooltip-test my-1" [disabled]="actions.ver" style="background-color: #FFC107; color: black; border-radius: 30px" (click)="showInformation(dt)" placement="left" ngbTooltip="Mostrar Información">
+                                            <i class="fa fa-eye fa-xs"></i>
+                                        </button>
+                                            <button class="btn btn-sm tooltip-test my-1" [disabled]="dt.despacho == 1" (click)="ConfirmPurchase(dt)" style="background-color: #404A63; color: white; border-radius: 30px" placement="left" ngbTooltip="Confirmar">
+                                            <i class="fa fa-check-square-o fa-xs" ></i>
+                                        </button>
+                                            <!--  <button class="btn btn-sm tooltip-test my-1" [disabled]="actions.perchar" style="background-color: #00FF00; color: white; border-radius: 10px" placement="top" ngbTooltip="Perchar/Ubicar" data-toggle="modal" data-target="#exampleModalCenter">
+                                            <i class="fa fa-archive"></i>
+                                        </button> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spbodegaRecep"></cc-spiner-procesar>

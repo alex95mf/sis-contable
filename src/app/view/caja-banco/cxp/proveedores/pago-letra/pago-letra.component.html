@@ -1,0 +1,116 @@
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnPagoLetr" cstyle="bg-gradient-primary text-white"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-money">
+    <div style="background-color: rgb(255 255 255);margin-bottom: 10px;">
+        <div class="form-row mt-2 mb-2 pl-2 pr-2">
+            <div class="form-group col-sm-12 col-md-6">
+                <app-cc-input-group-prepend label="Beneficiario" styleSpan="size-span-campo">
+                    <input type="text" id="inpBeneficiario" class="form-control form-control-sm font-weight-bold"
+                        placeholder="Beneficiario" [(ngModel)]="values.ben">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="form-row pl-2 pr-2">
+            <div class="form-group col-sm-12 col-md-3">
+                <app-cc-input-group-prepend label="Método de pago" styleSpan="size-span-campo">
+                    <select id="inpMethod" class="form-control form-control-sm" [(ngModel)]="values.method"
+                        (ngModelChange)="setModelMethod($event)">
+                        <option hidden disabled selected [value]="0">Forma pago</option>
+                        <option *ngFor="let el of catalogs['FORMA PAGO PROVEEDOR']" [value]="el.valor"> {{ el.valor }}
+                        </option>
+                    </select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="form-group col-sm-12 col-md-6">
+                <app-cc-input-group-prepend label="Debitar desde" styleSpan="size-span-campo"
+                    *ngIf="values.method != 'Nota de Débito'">
+                    <select id="inpAccount" class="form-control form-control-sm" *ngIf="values.method === 0"
+                        [disabled]="true">
+                        <option hidden disabled selected [value]="0">Seleccione nota de débito</option>
+                    </select>
+                    <select id="inpAccount" class="form-control form-control-sm" [(ngModel)]="values.typ_acc"
+                        *ngIf="values.method === 'Cheque' || values.method === 'Transferencia' || values.method === 'Tarjeta Débito' || values.method === 'Tarjeta Crédito'">
+                        <option hidden disabled selected [value]="0">Seleccione cuenta banco</option>
+                        <option *ngFor="let el of type_payments" [value]="el.id_banks"> {{ el.name_cuenta +' ($ '+
+                            el.saldo_cuenta +')' }} </option>
+                    </select>
+                    <select id="inpAccount" class="form-control form-control-sm" *ngIf="values.method === 'Efectivo'"
+                        [(ngModel)]="values.typ_acc">
+                        <option hidden disabled selected [value]="0">Seleccione caja chica</option>
+                        <option *ngFor="let el of type_payments" [value]="el.id_caja_chica"> {{ el.nombre_caja +' ($ '+
+                            el.saldo +')' }} </option>
+                    </select>
+                </app-cc-input-group-prepend>
+                <app-cc-input-group-prepend label="Nota Debito" styleSpan="size-span-campo"
+                    *ngIf="values.method == 'Nota de Débito'">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text btn" id="inputLabel-prepend">
+                            <i (click)="presentarNota()" matTooltip="Buscar Nota de Débito"
+                                class="fa fa-search fa-lg"></i>
+                        </span>
+                    </div>
+                    <input class="form-control text-right" type="text" [(ngModel)]="valorND" maxlength="100" disabled
+                        aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" placeholder="Valor" />
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="form-group col-sm-12 col-md-3"
+                *ngIf="values.method === 'Cheque' || values.method === 'Transferencia' || values.method === 'Tarjeta Débito' || values.method === 'Tarjeta Crédito'">
+                <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo">
+                    <input type="text" id="inpRef" class="form-control form-control-sm" placeholder="No. Documento"
+                        [(ngModel)]="values.ref_doc">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="form-row pl-2 pr-2">
+            <div class="form-group col-sm-12 col-md-3">
+                <app-cc-input-group-prepend label="Monto a pagar" styleSpan="size-span-campo">
+                    <input type="text" class="form-control text-right" id="inpTotal" [disabled]="true"
+                        [(ngModel)]="values.parseTotal">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="form-group col-sm-12 col-md-3">
+                <app-cc-input-group-prepend label="Monto acreditado" styleSpan="size-span-campo">
+                    <input type="text" class="form-control text-right" id="inpAccredited" [disabled]="true"
+                        [(ngModel)]="values.parseAccredited">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="form-group col-sm-12 col-md-3">
+                <app-cc-input-group-prepend label="Monto pendiente" styleSpan="size-span-campo">
+                    <input type="text" class="form-control text-right" id="inpPending" [disabled]="true"
+                        [(ngModel)]="values.parsePending">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="form-group col-sm-12 col-md-3">
+
+                <app-cc-input-group-prepend label="Monto abonado" styleSpan="size-span-campo">
+                    <input type="number" min="1" step="1" class="form-control text-right" id="inpPay"
+                        (keyup)="payAmountChange()" (keypress)="commonServices.FormatDecimalVal($event)"
+                        [(ngModel)]="values.pay"
+                        [ngClass]="{'is-invalid':(values.pay > current_pending || values.pay === null), 'is-valid':values.pay <= current_pending}"
+                        style="padding-right: 25px;" required>
+
+                    <div class="invalid-feedback" *ngIf="values.pay > current_pending">
+                        <span>Validar que el saldo a pagar sea igual o menor al pendiente!</span>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="form-row pl-2 pr-2">
+            <div class="col-8 mt-0 mb-2 p-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="background-color: #404a63; color: white;"
+                            placeholder="Ingrese observación">Observación</span>
+                    </div>
+                    <textarea class="form-control form-control-sm" id="inpObservation" placeholder="Observaciones"
+                        [(ngModel)]="values.obs"></textarea>
+                </div>
+            </div>
+            <div class="form-group col-sm-4 mt-2" *ngIf="values.method === 'Cheque'">
+                <app-cc-input-group-prepend label="Fecha cheque" styleSpan="size-span-campo">
+                    <input type="date" class="form-control" name="dp" max="2050-01-01" [(ngModel)]="values.postDate"
+                        id="inpPostDate" container="body" />
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </div>
+</app-button-radio-active>

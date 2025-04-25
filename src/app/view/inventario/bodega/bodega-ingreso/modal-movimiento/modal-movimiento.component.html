@@ -1,0 +1,146 @@
+<app-button-radio-active titulo="MOVER PRODUCTO" filtroBoton="btnMovproducto" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-share-square">
+    <div class="row justify-content-center filter mb-3 mt-3">
+        <div class="col-6">
+            <fieldset class="border p-2 mb-1">
+                <legend class="w-auto h6">DESDE:</legend>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bodega a enviar</span>
+                            </div>
+                            <select [(ngModel)]="bodegaSend" class="form-control form-control-sm custom-select" (ngModelChange)="getCellerSend($event)">
+                                <option *ngFor="let d of dataBodega" [value]="d.id_bodega_cab">{{d.nombre}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-sm ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Producto</span>
+                            </div>
+                            <ng-select id="IdproductSendNg" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="productSend" [disabled]="!dPsend" (ngModelChange)="getQuantyProduct($event)">
+                                <ng-option *ngFor="let d of listProduct" [value]="d.id_producto">
+                                    {{d.nombre_producto}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-sm ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cantidad disponible</span>
+                            </div>
+                            <input type="text" [(ngModel)]="quantityAvailableSend" class="form-control form-control-sm" [disabled]="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-sm ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cantidad a Enviar</span>
+                            </div>
+                            <input placeholder="Ingrese cantidad a enviar" type="number" [(ngModel)]="quantitySend" [disabled]="!dQsend" class="form-control form-control-sm" id="idquSend">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-6">
+            <fieldset class="border p-2 mb-1">
+                <legend class="w-auto h6">HASTA:</legend>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bodega a recibir</span>
+                            </div>
+                            <select [(ngModel)]="bodegaReceived" class="form-control form-control-sm custom-select" [disabled]="!dBReceived" (ngModelChange)="getProductReceibed($event)">
+                                <option *ngFor="let d of dataBodega" [value]="d.id_bodega_cab">{{d.nombre}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-sm ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Producto</span>
+                            </div>
+                            <input type="text" [(ngModel)]="productReceived" class="form-control form-control-sm" [disabled]="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-sm ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cantidad disponible</span>
+                            </div>
+                            <input type="text" [(ngModel)]="quantyAvaReceived" class="form-control form-control-sm" [disabled]="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-sm ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cantidad a recibir</span>
+                            </div>
+                            <input type="text" [(ngModel)]="quantitySend" [disabled]="true" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</app-button-radio-active>
+s
+<div [hidden]="true" id="print-section">
+    <div class="row">
+        <div class="col-6">
+            <span>{{fecha}}</span>
+        </div>
+        <div class="col-6 text-right">
+            <span>{{hora}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center text-uppercase" style="font-weight: 700;margin-top: 20px;margin-bottom: 20px;color: #13A1EA;">
+            <span>Traslado interno de producto a otra bodega</span>
+        </div>
+    </div>
+    <div class="table-responsive responsive-table">
+        <table class=" no-footer table-hover" style="margin-top: 60PX;width: 100%">
+            <thead style="height: 30px;" class="text-center">
+                <tr style="border-bottom: 1px solid;border-top: 1px solid;">
+                    <th style="width: 15%;text-align: center;">Id_producto</th>
+                    <th style="width: 15%;text-align: center;">Nombre_Producto</th>
+                    <th style="width: 15%;text-align: center;">Bodega_desde</th>
+                    <th style="width: 20%;text-align: center;">Bodega_hasta</th>
+                    <th style="width: 25%;text-align: center;">Cantidad</th>
+                </tr>
+            </thead>
+            <!-- <tbody style="border-top: none;">
+                <tr *ngFor="let dt of dataPrint" style="height: 30px;">
+                    <td style="padding-left: 70px;text-align: start;">{{ dt.id }}</td>
+                    <td style="padding-left: 50px;text-align: start;">{{ dt.grupo }}</td>
+                    <td style="padding-left: 70px;text-align: start;">{{ dt.codigo }}</td>
+                    <td style="padding-left: 90px;text-align: start;">{{ dt.nombre }}</td>
+                    <td style="padding-left: 70px;text-align: start;">{{ dt.codigo_padre }}</td>
+                </tr>
+            </tbody> -->
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0;">
+            <span>Usuario: {{commonServices.getDataUserLogued().usuario}}</span>
+        </div>
+    </div>
+</div>

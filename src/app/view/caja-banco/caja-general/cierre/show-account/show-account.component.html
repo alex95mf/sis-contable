@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="mt-4">
+            <app-button-radio-active titulo="Cuentas contables" filtroBoton="btnCierreCajaBanck"
+                cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+                <div class="row mt-2 mb-2">
+                    <div class="col-12 filters">
+                        <div class="table-responsive responsive-table">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="table no-footer table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th style="width: 19%;">Nombre banco</th>
+                                        <th style="width: 17%;">Tipo cuenta</th>
+                                        <th style="width: 17%;">Saldo cuenta</th>
+                                        <th style="width: 30%;">No. cuenta</th>
+                                        <th style="width: 17%;">Jefe cuenta</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngFor="let dt of dataDT" (click)="setDataAccountBox(dt)"
+                                        style="cursor:pointer;width: 100%;">
+                                        <td>{{ dt.name_banks }}</td>
+                                        <td>{{ dt.tipo_cuenta }}</td>
+                                        <td>{{ dt.saldo_cuenta }}</td>
+                                        <td>{{ dt.num_cuenta }}</td>
+                                        <td>{{ dt.name_jefe_cuenta }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>

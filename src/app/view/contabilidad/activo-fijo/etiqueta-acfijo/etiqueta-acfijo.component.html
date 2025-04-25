@@ -1,0 +1,142 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Etiqueta Activos Fijos " filtroBoton="btnEtiActFij" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" *ngIf="permisions" icono="fa fa-barcode">
+        <div class="row">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo">
+                    <select class="form-control form-control-sm custom-select" id="IdGrupo" [(ngModel)]="grupo" (ngModelChange)="filterGrupo($event)">
+                    <option *ngFor="let d of arrayGrupo" [value]="d.id">{{d.nombre_activo}}</option>
+                </select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Marca" styleSpan="size-span-campo">
+                    <ng-select id="IdMarca" class="form-control custom" appendTo="body" [searchable]="true" ngDefaultControl [clearable]="true" [(ngModel)]="marca" (ngModelChange)="filterMarca($event)">
+                        <ng-option *ngFor="let d of dataMarcas" [value]="d.valor">{{d.valor}}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Modelo" styleSpan="size-span-campo">
+                    <ng-select id="IdModelo" class="form-control custom" appendTo="body" ngDefaultControl [searchable]="true" [clearable]="true" [(ngModel)]="modelo" (ngModelChange)="filterModelo($event)">
+                        <ng-option *ngFor="let d of dataModelos" [value]="d.valor"> {{ d.valor }} </ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Origen" styleSpan="size-span-campo">
+                    <ng-select id="IdOrigen" class="form-control custom" appendTo="body" [searchable]="true" ngDefaultControl [clearable]="true" [(ngModel)]="origen" (ngModelChange)="filterOrigen($event)">
+                        <ng-option *ngFor="let d of arrayCountrys" [value]="d.id">{{d.nom_pais }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                    <ng-select id="IdEstado" class="form-control custom" appendTo="body" [searchable]="true" ngDefaultControl [clearable]="true" [(ngModel)]="estado" (ngModelChange)="filterEstado($event)">
+                        <ng-option *ngFor="let d of arrayEstado" [value]="d.nombre">{{d.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <fieldset class="border mt-2 p-2 filters">
+            <legend class="w-auto h6">Listado</legend>
+            <div class="table-responsive responsive-table">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                    <thead style="width: 100%;">
+                        <tr>
+                            <th style="width: 6%;">#</th>
+                            <th style="width: 10%;">Código</th>
+                            <th style="width: 19%;">Nombre</th>
+                            <th style="width: 10%;">Precio</th>
+                            <th style="width: 10%;">Marca</th>
+                            <th style="width: 12%;">Modelo</th>
+                            <th style="width: 8%;">Estado</th>
+                            <th style="width: 10%;">Descripción</th>
+                            <th style="width: 15%;">Código Barra</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="validaDt">
+                        <tr *ngFor="let dt of infoDt; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td class="text-left">{{ dt.codigo}}</td>
+                            <td class="text-left">{{ dt.nombre }}</td>
+                            <td class="text-right">${{ commonServices.formatNumber(dt.precio) }}</td>
+                            <td>{{ dt.marca}}</td>
+                            <td>{{ dt.modelo }}</td>
+                            <td>{{ dt.estado}}</td>
+                            <td>{{dt.descripcion}}</td>
+                            <td>
+                                <!-- <label style="margin-top:15px; font-weight:bold;font-size:16px"> TODOTEK S.A.</label> -->
+                                <ngx-barcode [bc-element-type]="svg" [bc-value]="dt.codigo" [bc-format]="CODE128" [bc-width]="2" [bc-height]="40" [bc-display-value]="true" [bc-font]="Helvetica" [bc-background]="false" [bc-text-align]="center" [bc-text-position]="bottom" [bc-text-margin]="8"
+                                    [bc-font-size]="16" [bc-margin]="10" [bc-margin-top]="2" [bc-margin-bottom]="0" [bc-margin-left]="0" [bc-margin-right]="0">
+                                </ngx-barcode>
+                                <!-- <label style="margin-top:-16px; font-weight:bold;font-size:16px">{{ dt.nombre }}</label> -->
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spEtiActFij"></cc-spiner-procesar>
+
+<div [hidden]="true" id="print-section" *ngIf="infoDt != undefined ">
+    <div class="row justify-content-center ">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>ACTIVOS FIJOS</h3>
+                                <p>CÓDIGOS DE BARRAS</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center mt-5">
+                <div class="col-12 text-center">
+                    <div class="row">
+                        <div class="col-sm-3  mt-2" *ngFor="let dt of infoDt">
+                            <div class="">
+                                <div class="" style="text-align: center;">
+                                    <ngx-barcode [bc-element-type]="svg" [bc-value]="dt.codigo" [bc-format]="CODE128" [bc-width]="1" [bc-height]="40" [bc-display-value]="true" [bc-font]="Helvetica" [bc-background]="false" [bc-text-align]="center" [bc-text-position]="bottom" [bc-text-margin]="0"
+                                        [bc-font-size]="16" [bc-margin]="10" [bc-margin-top]="-5" [bc-margin-bottom]="0" [bc-margin-left]="0" [bc-margin-right]="0">
+                                    </ngx-barcode>
+                                    <label style="margin-top:-12px; font-weight:bold;font-size:15px">{{ dt.nombre }}</label><br>
+                                    <label style="margin-top:-100px;font-weight:bold;font-size:15px; ">{{dataUser.company.razon_social}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #13A1EA;">
+                Fecha: {{fecha}}&nbsp;{{hora}}</span>
+        </div>
+        <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+            <span style="color: #13A1EA;">
+                Usuario: {{dataUser.nombre}}</span>
+        </div>
+    </div>
+</div>

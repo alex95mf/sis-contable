@@ -1,0 +1,417 @@
+<div class="container-fluid my-5 mr-3 p-0 mt-3">
+    <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item nav-label">
+            <a class="nav-link active" id="pills-contabilidad-tab" data-toggle="pill" href="#pills-contabilidad" role="tab" aria-controls="pills-contabilidad" aria-selected="false">CONTABILIDAD</a>
+        </li>
+        <li class="nav-item nav-label">
+            <a class="nav-link" id="pills-anexos-tab" data-toggle="pill" href="#pills-anexos" role="tab" aria-controls="pills-anexos" aria-selected="false">ANEXOS</a>
+        </li>
+        <li class="nav-item nav-label">
+            <a class="nav-link disabled" id="pills-formula-tab" data-toggle="pill" href="#pills-formula" role="tab" aria-controls="pills-formula" aria-selected="false">FORMULA</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-contabilidad" role="tabpanel" aria-labelledby="pills-contabilidad-tab">
+            <div class="row">
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Cuenta Inventario" styleSpan="size-span-campo">
+                        <ng-select id="IdcajaChica" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="tabAccounting.costos" (ngModelChange)="ChangeSelect($event)">
+                            <ng-option [value]="0">Seleccione Cuenta</ng-option>
+                            <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo"> {{acc.nombre}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Cuenta Ventas" styleSpan="size-span-campo">
+                        <ng-select id="IdcajaChica" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.ventas" (ngModelChange)="ChangeSelect($event)" [searchable]="true">
+                            <ng-option [value]="0">Seleccione Cuenta</ng-option>
+                            <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
+                                {{acc.nombre}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Cuenta Costos" styleSpan="size-span-campo">
+                        <ng-select id="ngSelInv" class="form-control custom" appendTo="body" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.inventario" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
+                            <ng-option [value]="0">Seleccione Cuenta</ng-option>
+                            <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
+                                {{acc.nombre}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Cuenta Devoluciones" styleSpan="size-span-campo">
+                        <ng-select id="ngSelDevoluciones" class="form-control custom" appendTo="body" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.devoluciones" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
+                            <ng-option [value]="0">Seleccione Cuenta</ng-option>
+                            <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
+                                {{acc.nombre}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Cuenta Descuentos" styleSpan="size-span-campo">
+                        <ng-select id="ngSelDescuentos" class="form-control custom" appendTo="body" [(ngModel)]="tabAccounting.descuentos" (ngModelChange)="ChangeSelect($event)" [disabled]="!actionsBtn.nuevo" [searchable]="true" [clearable]="true">
+                            <ng-option [value]="0">Seleccione Cuenta</ng-option>
+                            <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
+                                {{acc.nombre}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-4">
+                    <app-cc-input-group-prepend label="Cuenta Perdidas" styleSpan="size-span-campo">
+                        <ng-select id="ngSelPerdidas" class="form-control custom" appendTo="body" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.perdidas" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
+                            <ng-option [value]="0">Seleccione Cuenta</ng-option>
+                            <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">{{acc.nombre}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group" style="float:right;">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkIR" [disabled]="!actionsBtn.nuevo" (ngModelChange)="ChangeSelect($event)" [(ngModel)]="tabAccounting.impuestoRent">
+                            <label class="form-check-label text-dark font-weight-bold" for="checkIR">
+                                    Deducible I/R
+                                </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkIVA" [disabled]="!actionsBtn.nuevo" (ngModelChange)="ChangeSelect($event)" [(ngModel)]="tabAccounting.iva">
+                            <label class="form-check-label text-dark font-weight-bold" for="checkIVA">
+                                    IVA
+                                </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4" *ngIf="tabAccounting.iva === 1 || tabAccounting.iva === true">
+                    <app-cc-input-group-prepend label="Cuenta IVA Compra" styleSpan="size-span-campo">
+                        <ng-select id="ngSelIvaCompra" class="form-control custom" appendTo="body" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.iva_compra" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
+                            <ng-option [value]="0">Seleccione Cuenta</ng-option>
+                            <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
+                                {{acc.nombre}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+
+
+                <div class="col-sm-4" *ngIf="tabAccounting.iva === 1 || tabAccounting.iva === true">
+                    <app-cc-input-group-prepend label="Cuenta IVA Venta" styleSpan="size-span-campo">
+                        <ng-select id="ngSelIvaVentas" class="form-control custom" appendTo="body" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabAccounting.iva_venta" (ngModelChange)="ChangeSelect($event)" [searchable]="true" [clearable]="true">
+                            <ng-option [value]="0">Seleccione Cuenta</ng-option>
+                            <ng-option *ngFor="let acc of accDetails" [value]="acc.codigo">
+                                {{acc.nombre}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-anexos" role="tabpanel" aria-labelledby="pills-anexos-tab">
+            <div class="mt-4">
+                <div class="row">
+                    <div class="col-6">
+                        <app-button-radio-active titulo="Anexos del Producto" cstyle="bg-gradient-primary text-white" icono="fas fa-file-alt">
+                            <div class="row mt-1">
+                                <div class="col-12">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="height: 36px;"><img src="assets/img/file.png"
+                                                width="35"></span>
+                                        <label class="btn sub" for="ficher">
+                                            <i class="fa fa-upload prueba" aria-hidden="true" style="font-size:14px;"></i>
+                                            SELECCIONE ARCHIVO
+                                        </label>
+                                        <input type="file" id="files" name="files" class="form-control-file" multiple [disabled]="!actionsBtn.nuevo" (change)="selectFiles($event.target.files)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group pt-2 mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="background-color: #404a63; color: white;" placeholder="Ingrese Descripción">Descripción</span>
+                                        </div>
+                                        <textarea id="descriptAnx" class="form-control form-control-sm" rows="3" [disabled]="!actionsBtn.nuevo" [(ngModel)]="anexos.description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </app-button-radio-active>
+                    </div>
+                    <div class="col-6">
+                        <app-button-radio-active titulo="Listado de anexos" cstyle="bg-gradient-primary text-white" icono="fas fa-file-alt" *ngIf="dtAnexoxShow">
+                            <div class="row">
+                                <div class="col-sm-12 filters ">
+                                    <!--  -->
+                                    <div class="form-group table-responsive responsive-table altura">
+                                        <table class="table table-sm table-hover  mt-1">
+                                            <thead class="thead-dark">
+                                                <tr class="text-center" style="width: 100%;">
+                                                    <th style="width: 10%;">#</th>
+                                                    <th style="width: 40%;">Nombre</th>
+                                                    <th style="width: 25%;">Extension</th>
+                                                    <th style="width: 25%;text-align: center;">Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="text-center" *ngFor="let dt of dtanexos; let i = index">
+                                                    <td>
+                                                        <span class="form-control">
+                                                            <strong>{{ i + 1 }}</strong>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{ dt.original_name }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{ dt.original_extension }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-sm tooltip-test my-1" style="background-color: #FFC107; color: white; border-radius: 10px" (click)="showAnexo(dt)" title="Mostrar anexo">
+                                                            <i class="fa fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm tooltip-test my-1" style="background-color: #404A63; color: white; border-radius: 10px" (click)="downloadAnexo(dt)" title="Descargar anexo">
+                                                            <i class="fa fa-download"></i>
+                                                        </button>
+                                                        <button type="button" (click)="deleteAnexo(dt,i)" class="btn btn-sm tooltip-test my-1" style="background-color: #F86C6B; color: white; border-radius: 10px" title="Remover Anexo">
+                                                            <i class="fa fa-trash"></i> 
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </app-button-radio-active>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-formula" role="tabpanel" aria-labelledby="pills-formula-tab">
+            <div class="mt-4">
+                <div class="row">
+                    <div class="col-6">
+                        <app-button-radio-active titulo="Formula/Complementos" cstyle="bg-gradient-primary text-white" icono="fas fa-file-alt">
+                            <div class="row mt-3">
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Tipo">
+                                        <select id="inpType" class="form-control custom-select" [disabled]="!actionsTabs.cancel || Disableenviadata" (ngModelChange)="onChangeFormuleType($event)" [(ngModel)]="tabFormule.typFormCab">
+                                            <option [value]="0">Seleccione</option>    
+                                            <option *ngFor="let t of typeFormuleCab" [value]="t.name">
+                                                    {{ t.name }}
+                                                </option>
+                                            </select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <!--                                 <div class="col-sm-4">
+                                    <app-cc-input-group-prepend label="Magnitud">
+                                        <select id="inpMag" class="form-control custom-select" [disabled]="!actionsBtn.nuevo" [(ngModel)]="tabFormule.magFormCab">
+                                            <option [value]="0">Seleccione</option>   
+                                            <option *ngFor='let m of catalogs["MAGNITUD"]' [value]="m.valor">
+                                                    {{ m.valor }}
+                                                </option>
+                                            </select>
+                                    </app-cc-input-group-prepend>
+                                </div> -->
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Costo">
+                                        <input type="number" class="form-control text-right" [(ngModel)]="tabFormule.costFinalFormCab" [disabled]="true">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-sm-1">
+                                    <button class="btn btn-sm btn-primary" data-toggle="tooltip" (click)="setModalCatalog('Ingreso Manofactura', 'MANOFACTURA', 'Manofactura')" data-placement="top" title="Crear manofactura" [disabled]="!actionsTabs.formule">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                </div>
+                                <div class="col-sm-5">
+                                    <app-cc-input-group-prepend label="Manofactura">
+                                        <select id="inpComMan" class="form-control custom-select" [disabled]="!actionsTabs.formule" [(ngModel)]="tabFormuleCom.typFormDetCom">
+                                            <option [value]="0">Seleccione</option>  
+                                             <option *ngFor='let m of catalogs["MANOFACTURA"]' [value]="m.id_catalogo">
+                                                    {{ m.valor }}
+                                                </option>
+                                            </select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-4">
+                                    <app-cc-input-group-prepend label="Valor">
+                                        <input type="number" id="inpComVal" class="form-control" min="0" [disabled]="!actionsTabs.formule" (keypress)="FormatDecimalVal($event)" [(ngModel)]="tabFormuleCom.valFormDetCom" placeholder="Valor manofactura">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button class="btn btn-sm btn-warning text-dark font-weight-bold" (click)="storeManofactura(tabFormuleCom)" [disabled]="!actionsTabs.formule">Agregar</button>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-sm-12 filters ">
+                                    <div class="form-group table-responsive responsive-table altura">
+                                        <table class="table table-sm table-hover">
+                                            <thead>
+                                                <tr class="text-center" style="width: 100%;">
+                                                    <th style="width: 10%;">#</th>
+                                                    <th style="width: 30%;">Nombre</th>
+                                                    <th style="width: 10%;">Valor</th>
+                                                    <th style="width: 10%;">Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="text-center" style="width: 100%;" *ngFor="let f of storeComp; let i = index">
+                                                    <td>
+                                                        <span class="form-control">
+                                                                <strong>{{ i + 1 }}</strong>
+                                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{ f.name }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{ commonServices.formatNumber(f.value) }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" [disabled]="!actionsTabs.formule" (click)="deleteManofactura(f.id, i)" class="btn btn-sm btn-danger tooltip-test" style="color: white; border-radius: 10px" title="Remover Registro">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </app-button-radio-active>
+                    </div>
+                    <div class="col-6">
+                        <app-button-radio-active titulo="Detalle Factula" cstyle="bg-gradient-primary text-white" icono="fas fa-file-alt">
+                            <div class="row  mt-3">
+                                <div class="col-sm-12">
+                                    <app-cc-input-group-prepend label="Producto" styleSpan="size-span-campo">
+                                        <ng-select id="ngSelProduct" class="form-control custom" appendTo="body" [disabled]="!actionsTabs.cancel" [(ngModel)]="tabDetFormule.prodFormDet" [searchable]="true" [clearable]="true" style="background-color: #e4e5e6 !important;" (ngModelChange)="searchProductDt($event)">
+                                            <ng-option [value]="0">Seleccione Producto</ng-option>
+                                            <ng-option *ngFor="let prod of products" [value]="prod.id_producto">
+                                                {{prod.nombre}}</ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-6">
+                                    <!--  <app-cc-input-group-prepend label="UDM" styleSpan="size-span-campo">
+                                        <select id="inpType" class="form-control custom-select" [disabled]="!actionsTabs.formule" [(ngModel)]="tabDetFormule.udmFormDet">
+                                            <option [value]="0">Seleccione Unidad de Medida</option>  
+                                            <option *ngFor='let t of conversions' [value]="t.id_conversion">
+                                                {{ t.unidad }}
+                                            </option>
+                                        </select>
+                                    </app-cc-input-group-prepend> -->
+                                    <app-cc-input-group-prepend label="Costo" styleSpan="size-span-campo">
+                                        <input type="number" id="inpCostodt" class="form-control" min="0" disabled (keypress)="FormatDecimalVal($event)" [(ngModel)]="tabDetFormule.costoSearFromdet">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Cantidad" styleSpan="size-span-campo">
+                                        <input type="number" id="inpCantStock" class="form-control" min="0" [disabled]="!actionsTabs.cancel" (keypress)="FormatDecimalVal($event)" [(ngModel)]="tabDetFormule.cantUseFormDet" placeholder="Cantidad a usar">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2 text-right d-flex flex-row-reverse">
+                                <div class="col-sm-6  mx-1 text-right ">
+                                    <button class="btn btn-sm btn-danger text-dark font-weight-bold" [disabled]="!actionsTabs.cancel" (click)="CancelFormule()">Cancelar</button>
+                                    <button class="btn btn-sm btn-warning text-dark font-weight-bold" [disabled]="!actionsTabs.cancel" (click)="storeProducts(tabDetFormule)">Agregar</button>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-sm-12 filters">
+                                    <div class="form-group table-responsive responsive-table altura">
+                                        <table class="table table-sm table-hover">
+                                            <thead>
+                                                <tr class="text-center" style="width: 100%;">
+                                                    <th style="width: 7%;">#</th>
+                                                    <th style="width: 30%;">Producto</th>
+                                                    <th style="width: 12%;">UDM</th>
+                                                    <th style="width: 14%;">Cantidad</th>
+                                                    <th style="width: 14%;">Costo</th>
+                                                    <th style="width: 14%;">Total</th>
+                                                    <th style="width: 9%;">Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="text-center" *ngFor="let f of storeProds; let i = index">
+                                                    <td>
+                                                        <span>
+                                                                <strong>{{ i + 1 }}</strong>
+                                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{ f.product }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{ f.udm }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{  commonServices.formatNumber(f.cantidad) }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{ commonServices.formatNumber(f.costoMaterial)  }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{ commonServices.formatNumber(f.costoTotal) }}</strong>
+                                                    </td>
+                                                    <td style="width: 2%;">
+                                                        <button type="button" (click)="deleteFields(f.fk_product, i)" [disabled]="!actionsTabs.cancel" class="btn btn-sm btn-danger tooltip-test" style="color: white; border-radius: 10px" title="Remover Registro">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </app-button-radio-active>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Section Catalog -->
+<div class="modal fade" id="generalModal" tabindex="-1" role="dialog" aria-labelledby="generalModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" *ngIf="modal !== undefined && permisions !== undefined">
+        <div class="modal-content">
+            <div class="modal-body  mt-3">
+                <app-button-radio-active titulo="{{ modal.title }}" filtroBoton="btnmanofacModal" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-plus">
+                    <div class="row mb-4 mt-1">
+                        <div class="col-sm-12">
+                            <app-cc-input-group-prepend label="{{ modal.label }}" styleSpan="size-span-campo">
+                                <input id="valueCatalog" type="text" style="box-shadow: unset; outline: unset;" class="form-control form-control-sm" [(ngModel)]="modal.value" placeholder="Ingrese valor">
+                            </app-cc-input-group-prepend>
+                        </div>
+
+                        <div class="col-sm-12 mt-1">
+                            <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo">
+                                <textarea id="descripCatalog" name="descripcion" cols="40" rows="1" class="form-control form-control-sm" [(ngModel)]="modal.description" placeholder="Ingrese Descripción" style="box-shadow: unset;outline: unset;">
+                                </textarea>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<cc-spiner-procesar ltexto="Cargando..." lfulScren=true lTipo="spAnxIngTabInv"></cc-spiner-procesar>

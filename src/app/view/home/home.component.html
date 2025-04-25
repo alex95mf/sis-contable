@@ -1,0 +1,120 @@
+<div class="container-all ">
+    <section>
+        <!--  <nav class="navbar navbar-expand-lg navbar-light bg-color">
+            <div class="container-fluid">
+                <div class="navbar-brand">
+                    <span class="navbar-logo">
+                    <a href="">
+                        <img src="assets/img/login/ttf2.png" style="height: 3rem;">
+                    </a>
+                </span>
+                    <span class="navbar-caption-wrap"><a class=" navbar-caption textColor display-7" href="">Aptimo</a></span>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto ">
+                        <li class="nav-item active "> <a class="nav-link text-dark" href="#">INICIO</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">NOSOTROS</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">PLANES</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">SUSCRIPCIÓN</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav> -->
+
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-color">
+            <div class="container-fluid">
+                <div class="navbar-brand">
+                    <!-- <span class="navbar-caption-wrap"><a class=" navbar-caption textColor display-7" href="">Aptimo</a></span> -->
+                    <img src="assets/img/logoTT.png" alt="logo" style="width: 180px">
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav ml-auto ">
+                        <li class="nav-item active "> <a class="nav-link text-dark" href="#">INICIO</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">NOSOTROS</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">PLANES</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">SUSCRIPCIÓN</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row justify-content-end container-one">
+                <div class="col-md-12 col-lg-5 container-two">
+                    <div class="col-md-12 mt-2 container-three">
+                        <div class="row mt-2">
+                            <div class="col-sm-12">
+                                <h1 class="mb-3 titulo"><strong>INTELIGENCIA <span>CONTABLE</span> <!-- PARA TU<span class="text-primary"> EMPRESA</span> --></strong></h1>
+                                <!-- class="bg-primary " -->
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-sm-12 mt-1">
+                                <p class="text-center ingrese"><strong>INGRESA A TU CUENTA</strong></p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" [(ngModel)]="usuarios" placeholder="Ingrese Usuario" (keyup.enter)="login()">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <input type="password" class="form-control" [(ngModel)]="password" placeholder="Ingrese Contraseña" (keyup.enter)="login()">
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-primary btn-block textbutton" (click)="login()" (keypress)="enterData($event)">INGRESAR</button>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end mt-5">
+                            <div class="col-sm-6">
+                                <span class="pass">¿Se te olvido la Contraseña? 
+                                    <a href="#" data-toggle="modal" data-target="#exampleModal" class="recuperar">Recuperar contraseña</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spQuotesHome"></cc-spiner-procesar>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <app-button-radio-active titulo="RECUPERACION DE CONTRASEÑA" filtroBoton="btnsenvioData" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-key">
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-12 container-filter ">
+                            <div class="row  justify-content-center">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="input-group input-group-sm mt-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm"> <i class="fas fa-envelope"></i>  Correo Electrónico </span>
+                                                </div>
+                                                <input placeholder=" ejemplo@ejemplo.com" #correo="ngModel" type="email" name="correo" class="form-control" [(ngModel)]="correos">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Termino Modal -->

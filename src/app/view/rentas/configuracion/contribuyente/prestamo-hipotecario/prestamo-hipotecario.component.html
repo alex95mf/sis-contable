@@ -1,0 +1,84 @@
+<!-- (opened)="contribuyentePrest.ph_tiene_prestamo = true" (closed)="contribuyentePrest.ph_tiene_prestamo = false" -->
+<mat-expansion-panel class="mt-2"  [disabled]="!validadorNt">
+    <mat-expansion-panel-header>
+      <input type="checkbox" [(ngModel)]="contribuyentePrest.ph_tiene_prestamo" (change)="selectedCheck()">
+      <mat-panel-title>Préstamo Hipotecario</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="row mt-2">
+      <div class="col-4">
+
+        <app-cc-input-group-prepend label="Valor Crédito" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" currencyMask [(ngModel)]="contribuyentePrest.ph_valor_credito"
+            placeholder="Ingrese el valor de credito" [readonly]="!contribuyentePrest.ph_tiene_prestamo"  maxlength="30"/>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Institución de Crédito"
+          styleSpan="size-span-campo font-weight-bold">
+          <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+            [(ngModel)]="contribuyentePrest.ph_institucion_credito" [readonly]="!contribuyentePrest.ph_tiene_prestamo">
+            <ng-option [value]=0 disabled>Seleccione el tipo de discapacidad</ng-option>
+            <ng-option *ngFor="let doc of catalog.ren_institucion_credito" [value]="doc.valor">{{doc.valor}}
+            </ng-option>
+          </ng-select>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Fecha de inicio" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="date" [(ngModel)]="contribuyentePrest.ph_fecha_inicio"
+            placeholder="Ingrese el segundo nombre" [readonly]="!contribuyentePrest.ph_tiene_prestamo" />
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Fecha de fin" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="date" [(ngModel)]="contribuyentePrest.ph_fecha_fin"
+            placeholder="Ingrese el primer apellido" [readonly]="!contribuyentePrest.ph_tiene_prestamo" />
+        </app-cc-input-group-prepend>
+        <!-- <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                </div>
+                <input id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección contribuyente" [(ngModel)]="contribuyente.direccion">
+            </div> -->
+      </div>
+      
+
+
+      <div class="col-4">
+        <app-cc-input-group-prepend label="No. Resolución" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyentePrest.ph_resolucion"
+            placeholder="Ingrese el número de resolución" [readonly]="!contribuyentePrest.ph_tiene_prestamo" maxlength="30"/>
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Fecha de resolución" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="date" [(ngModel)]="contribuyentePrest.ph_fecha_resolucion"
+            placeholder="Ingrese el parentesco" [readonly]="!contribuyentePrest.ph_tiene_prestamo" />
+        </app-cc-input-group-prepend>
+
+        <app-cc-input-group-prepend label="Persona que autoriza" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyentePrest.ph_persona_autoriza"
+            placeholder="Ingrese la perona que autoriza" [readonly]="!contribuyentePrest.ph_tiene_prestamo" maxlength="100" (keypress)="validaciones.onlyWord($event)"/>
+        </app-cc-input-group-prepend>
+
+      </div>
+
+
+      <div class="col-4">
+        <div class="row">
+          <div class="col">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                (change)="cargaArchivo($event.target.files)" [disabled]="anexo?.length > 0">
+              <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name :
+                "Seleccione un archivo" }}</label>
+            </div>
+          </div>
+          <!-- <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" [disabled] = 'cargarAnexo'>Cargar</button></div> -->
+        </div>
+        <div class="row">
+          <div class="col">
+            <app-anexos-list-prest [dataUser]="dataUser" [permissions]="permissions" [identificador]="PRES"></app-anexos-list-prest>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </mat-expansion-panel>

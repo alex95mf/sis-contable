@@ -1,0 +1,123 @@
+<app-button-radio-active-new titulo="Asignación de Presupuesto a Programas" 
+filtroBoton="planRegistro"
+    icono="fas fa-tasks"  cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+    (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row m-0">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Filtros</legend>
+                <div class="row m-0">
+                    <div class="col-12 col-md-3 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [markFirst]="false" (change)="cargaPresupuesto($event)"
+                                placeholder="Seleccione un Periodo" [items]="periodos" bindValue="id" bindLabel="periodo"
+                                [clearable]="false" [(ngModel)]="periodoSelected">
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+    
+                    </div>
+    
+                </div>
+    
+                <div class="row m-0">
+                 <div class="col-12 col-md-3 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Presupuesto" styleSpan="size-span-campo font-weight-bold">
+                        <input currencyMask class="form-control" (keyup)="sumTotal()" [(ngModel)]="presupuesto.monto" disabled>
+                    </app-cc-input-group-prepend>
+    
+                 </div>
+    
+                                    <div class="col-12 col-md-3 pt-0 pb-0">
+                                        <app-cc-input-group-prepend label="Asignado" styleSpan="size-span-campo font-weight-bold">
+                                            <input currencyMask [ngModel]="presupuesto?.asignado" class="form-control" readonly>
+                                        </app-cc-input-group-prepend>
+                    
+                 </div>
+                 <div class="col-12 col-md-3 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Disponible" styleSpan="size-span-campo font-weight-bold">
+                        <input currencyMask [ngModel]="presupuesto?.disponible" class="form-control" readonly
+                            [ngClass]="{ 'is-invalid': presupuesto?.disponible < 0 }">
+                    </app-cc-input-group-prepend>
+                    
+                 </div>
+    
+                 <div class="col-12 col-md-3 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Disponible" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" readonly
+                        [value]="presupuesto?.asignado / presupuesto?.monto * 100 | number:'1.1-1'">
+                    <div class="input-group-append"><span class="input-group-text font-weight-bold">%</span></div>
+                    </app-cc-input-group-prepend>
+                    
+                 </div>
+    
+                    
+    
+    
+    
+    
+    
+                </div>
+                
+    
+    
+            </fieldset>
+        </div>
+
+
+
+    </div>
+
+</app-button-radio-active-new>
+<!-- <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-12"> -->
+
+<div class="row m-0">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-k table-hover">
+                <thead class="sticky-header">
+                    <tr class="text-center">
+
+
+
+                        <th class="w-50">Programa</th>
+                        <th class="w-25">Presupuesto</th>
+                        <th class="w-25">Porcentaje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!programas.length">
+                        <td colspan="3" class="text-center">
+                            <h6>Cargando datos</h6>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let programa of programas; let i = index">
+                        <td>
+                            <h6>{{ programa.descripcion }}. {{ programa.valor }}</h6>
+                        </td>
+                        <td>
+                            
+
+                                <div class="input-group-append"><span class="input-group-text font-weight-bold">$</span>
+                                    <input currencyMask [options]="{ prefix: '' }" class="form-control"
+                                    (keydown)="sumTotal()" (keyup)="sumTotal()" [(ngModel)]="programa.presupuesto">    
+                                
+                                </div>
+
+                           
+                        </td>
+                        <td class="text-center">
+                            <h6>{{ programa?.presupuesto / presupuesto?.monto * 100 | number:'1.2-2' }}%</h6>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- </div>
+    </div>
+</div> -->
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="plaProgAsig"></cc-spiner-procesar>

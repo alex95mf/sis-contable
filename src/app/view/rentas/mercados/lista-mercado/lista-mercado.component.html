@@ -1,0 +1,144 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="far fa-file-contract"
+filtroBoton="btnsRenListaMer" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+
+<fieldset class="border p-2 mb-1 mt-2 filters">
+    <legend class="w-auto bg-dark ml-1">
+        Filtros
+    </legend>
+
+    <div class="row">
+
+        <div class="col-10">
+
+            <div class="row">
+            
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_num_local" type="text" class="form-control" [(ngModel)]="filter.contribuyente" readonly>
+                        <button class="btn btn-info btn-sm" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Mercado" styleSpan="size-span-campo font-weight-bold">
+                        <!-- <input id="filter_mercado" type="text" class="form-control" [(ngModel)]="filter.mercado" > -->
+                        <ng-select class="form-control" [(ngModel)]="filter.mercado">
+                            <ng-option *ngFor="let item of mercado" [value]="item.id_catalogo">{{item.descripcion}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            
+            
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Estado contrato" styleSpan="size-span-campo font-weight-bold">
+                        <!-- <input id="filter_descripcion" type="text" class="form-control" [(ngModel)]="filter.estado"> -->
+                        <ng-select class="form-control" [(ngModel)]="filter.estado">
+                            <ng-option *ngFor="let item of estado" [value]="item.valor">{{item.description}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+
+            
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Local" styleSpan="size-span-campo font-weight-bold">
+                        <input id="filter_descripcion" type="text" class="form-control" [(ngModel)]="filter.local">
+                    </app-cc-input-group-prepend>
+                </div>
+
+            
+        </div>
+
+        </div>
+        
+        <div class="col text-right">
+            <button class="btn btn-primary btn-sm ml-1" placement="bottom" ngbTooltip="Buscar" (click)="cargarListMerc()">
+                <i class="fas fa-search"></i> Consultar
+            </button>
+            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                <i class="fas fa-eraser"></i>
+            </button>
+        </div>
+    </div>
+
+</fieldset>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Contribuyente</th>
+                <th>Local comercial</th>
+                <th>Actividad</th>
+                <th>Mercado</th>
+                <th>Local</th>
+                <th>Contrato</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+                <th>Estado</th>
+                <th>Estado de legalización</th>
+                <th>Creación</th>
+                <th>Fecha</th>
+                <th>Motivo</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!listMerc.length">
+                <td colspan="13" class="text-center">
+                    <h6>No hay datos</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let item of listMerc">
+                <td>{{ item.fk_contribuyente != null ? item.fk_contribuyente.razon_social : 'No hay datos' }}</td>
+                <td>{{ item.fk_mercado_puesto != null ? item.fk_mercado_puesto.numero_puesto : 'No hay datos'}}</td>
+                <td>{{ item.local !=null ? item.local : 'No hay datos' }}</td>
+                <td>{{ item.fk_mercado !=null ?  item.fk_mercado.descripcion : 'No hay datos'}}</td>
+                <td>{{ item.fk_mercado_puesto !=null ? item.fk_mercado_puesto.descripcion : 'No hay datos'}}</td>
+                <td>{{ item.numero_contrato != null ? item.numero_contrato : 'No hay datos' }}</td>
+                <td>{{ item.fecha_inicio != null ? item?.fecha_inicio : 'No hay datos' }}</td>
+                <td>{{ item.fecha_vencimiento != null ? item.fecha_vencimiento : 'No hay datos'  }}</td>
+                <td *ngIf="item.estado == 1">
+                    Activo
+                </td>
+                <td *ngIf="item.estado == 'A'">
+                    Activo
+                </td>
+                <td *ngIf="item.estado == 'I'">
+                    Inactivo
+                </td>
+                <td *ngIf="item.estado == 'X'">
+                    Anulado
+                </td>
+                <td *ngIf="item.estado_legalizacion == 'L'">
+                    Legalizado
+                </td>
+                <td *ngIf="item.estado_legalizacion == 'N'">
+                    No Legalizado
+                </td>
+                <td *ngIf="item.estado_legalizacion == null">
+                    No hay datos
+                </td>
+                <td>{{ item.id_usuario != null ? item.id_usuario.nombre : 'No hay datos' }}</td>
+                <td>{{ item.fecha_inicio != null ? item.fecha_inicio : 'No hay datos' }}</td>
+                <td>No hay datos</td>
+            </tr>
+        </tbody>
+    </table>
+    <mat-paginator 
+            showFirstLastButtons 
+            [length]="paginate.length"
+            [pageSize]="paginate.perPage"
+            [pageSizeOptions]="paginate.pageSizeOptions"
+            (page)="changePaginate($event)"
+            aria-label="Select page">
+    </mat-paginator>
+
+</div>
+
+
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renModalPuestos"></cc-spiner-procesar>

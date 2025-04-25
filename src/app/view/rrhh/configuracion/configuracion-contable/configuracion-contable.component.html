@@ -1,0 +1,167 @@
+
+<div class="mt-4 mb5">
+    <app-button-radio-active titulo="Configuracion Contable" filtroBoton="btnsConsultRol_general" 
+         cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+     icono="fas fa-file-alt">
+    
+     <!-- <div *ngIf="permiso_ver =='1' ; else PermisoVerDenegado"> -->
+       
+        <div class="row">
+            
+           
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Tipo de Contratos" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="tipo_contratos" class="form-control form-control-sm" [(ngModel)]="tipoContrato" [clearable]="true">
+                        <ng-option disabled [value]="0" disabled>Seleccione un tipo de Contrato</ng-option>
+                        <ng-option *ngFor="let tc of tipoContratos" [value]="tc.cat_keyword">{{tc.cat_nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Código" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text " class="form-control  form-control-sm"  [(ngModel)]="codigo">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text " class="form-control  form-control-sm"  [(ngModel)]="descripcion">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        
+      
+        <!-- <div class="row mt-2 ml-3">
+            <div class="col">
+                <div class="row"> 
+                    <span class="text-center font-weight-bold">No. Empleados</span>
+                </div>
+                <div>
+                    <span class="text-center">{{numero_empleados}}</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <span class="text-center font-weight-bold">No. Control</span>
+                </div>
+                <div>
+                    <span class="text-center">{{conNumeroControl()}}</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <span class="text-center font-weight-bold">Pendientes de No. Control</span>
+                </div>
+                <div>
+                    <span class="text-center">{{sinNumeroControl()}}</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <span class="text-center font-weight-bold">Cant. con OP</span>
+                </div>
+                <div>
+                    <span class="text-center">{{conNumeroOp()}}</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <span class="text-center font-weight-bold">Pendientes de OP</span>
+                </div>
+                <div>
+                    <span class="text-center">{{sinNumeroOp()}}</span>
+                </div>
+            </div>
+        </div> -->
+       <div style="position: -webkit-sticky;position: sticky;top: 0px;">
+        <div class="table-responsive mt-2">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Código</th>
+                        <th>Rubro</th>
+                        <th>Detalle Cuenta deudora</th>
+                        <th>
+                            Detalle Cuenta Acreedora
+                        </th>
+                        <th>
+                            Detalle Presupuesto
+                         </th>
+                        <th>Acciones</th>
+                       <!--  <th *ngFor="let tipo of lst_tipo_contrato">{{ tipo.cat_nombre }}</th> -->
+                    </tr>
+                   <!--  <tr>
+                       
+                        <th *ngFor="let tipo of lst_tipo_contrato">
+                        
+                        </th>
+                    </tr> -->
+                </thead>
+                <tbody>
+                    <tr *ngFor="let newRub of rubroTipoContraro">
+                        <td>
+                         
+                            {{ newRub.cod_rubro }}
+                           
+                        </td>
+                        <td>
+                            <!-- <input type="checkbox" (change)="handleRowCheck($event, rubro)"> -->
+                            {{ newRub.rub_descripcion }}
+                           
+                        </td>
+                        <td>
+                        
+                            {{  newRub.cuenta_deudora }} - {{ newRub.nombre_cuenta_deudora }}
+                        </td>
+                        <td>
+                            
+                            {{ newRub.cuenta_acreedora }} - {{ newRub.nombre_cuenta_acreedora }}
+                        </td>
+                        <td>{{ newRub.codigo_presupuesto }} - {{newRub.nombre_presupuesto}}</td>
+                       <!--  <td *ngFor="let tipo of lst_tipo_contrato">
+                            <input type="checkbox" [(ngModel)]="rubro.lst_tipo_contrato[tipo.cat_keyword]">
+                        </td> -->
+                        <td>
+                            <button class="btn btn-primary btn-sm mx-1" (click)="showEditForm(false, newRub )" placement="left" ngbTooltip="Editar concepto">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+
+
+                    <tr *ngFor="let rubro of filteredData">
+                        <td>
+                            <!-- <input type="checkbox" (change)="handleRowCheck($event, rubro)"> -->
+                            {{ rubro.rub_descripcion }}
+                           
+                        </td>
+                        <td>
+                        
+                            {{  rubro.cuenta_deudora }} - {{ rubro.nombre_cuenta_deudora }}
+                        </td>
+                        <td>
+                            
+                            {{ rubro.cuenta_acreedora }} - {{ rubro.nombre_cuenta_acreedora }}
+                        </td>
+                        <td>{{ rubro.codigo_presupuesto }} - {{rubro.nombre_presupuesto}}</td>
+                       <!--  <td *ngFor="let tipo of lst_tipo_contrato">
+                            <input type="checkbox" [(ngModel)]="rubro.lst_tipo_contrato[tipo.cat_keyword]">
+                        </td> -->
+                        <td>
+                            <button class="btn btn-primary btn-sm mx-1" (click)="showConceptoForm(false, rubro )" placement="left" ngbTooltip="Editar concepto">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+       
+       </div>
+       
+  
+    </app-button-radio-active>
+    </div>
+    
+    <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spComprasProv"></cc-spiner-procesar>

@@ -1,0 +1,100 @@
+<div class="">
+    <app-button-radio-active titulo="Seleccionar Lote" filtroBoton="btnConsuLoteForm" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="row my-2">
+            <div class="col">
+                <fieldset class="border pb-2 px-3">
+                    <legend class="w-auto bg-dark mb-1">Filtros</legend>
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Cod. Catastral" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.cod_catastral">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col">
+                                    <app-cc-input-group-prepend label="Cod. Catastral Anterior" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.cod_catastral_anterior">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="cargarLotes()">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th>Cod. Catastral</th>
+                            <th>Cod. Catastral Anterior</th>
+                            <th>Zona</th> 
+                            <th>Sector</th>  
+                            <th>Manzana</th>
+                            <th>Solar</th>
+                            <th>Área</th>                      
+                            <th>Valor mt2</th>
+                            <th>Valor del solar </th>
+                            <th>Valor de edificación </th>
+                            <th>Valor hipoteca</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!lotesDt.length">
+                            <td colspan="12" class="text-center"><h6>No hay resultados</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let dt of lotesDt, let i = index">
+                            <tr>
+                                <td>{{ dt.cod_catastral }}</td>
+                                <td>{{ dt.cod_catastral_anterior }}</td>
+                                <td>{{ dt.zona_lote?.valor +'-'+ dt.zona_lote?.descripcion  }}</td>
+                                <td>{{  dt.sector_lote?.valor +'-'+ dt.sector_lote?.descripcion}}</td>
+                                <td>{{  dt.manzana }}</td> 
+                                <td>{{  dt.solar }}</td>
+                                <td>{{  dt.area}}</td>
+                                <td class="text-right">$ {{  dt.valor_metro_cuadrado | number:'1.2-2'}}</td>
+                                <td class="text-right">$ {{  dt.valor_solar | number:'1.2-2'}}</td>
+                                <td class="text-right">$ {{  dt.valor_edificacion | number:'1.2-2'}}</td>
+                                <td class="text-right">$ {{  dt.valor_hipoteca | number:'1.2-2'}}</td>
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar contribuyente">
+                                            <i class="fas fa-hand-pointer"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>                    
+                </div>
+                
+                <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="+(paginate.page)-1"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>
+

@@ -1,0 +1,48 @@
+<app-button-radio-active titulo="Detalle de Lotes" cstyle="bg-light" icono="fas fa-eye"
+    filtroBoton="btnsModalProdDet" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Cantidad" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [value]="doc_detalle_producto.quantity">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [value]="producto?.nombre">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <button class="btn btn-sm btn-primary" matTooltip="Agregar Detalle" (click)="agregarDetalle()" [disabled]="formReadonly">
+                <i class="fas fa-plus"></i> Agregar
+            </button>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Cantidad</th>
+                <th>Lote</th>
+                <th>Fecha de Caducidad</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!detalles.length">
+                <td colspan="3" class="text-center"><p class="h6">No hay detalles que mostrar.</p></td> 
+            </tr>
+            <tr *ngFor="let detalle of detalles">
+                <td>
+                    <input currencyMask [options]="currencyOptions" class="form-control" [(ngModel)]="detalle.cantidad" (blur)="validarCantidad()" [disabled]="formReadonly">
+                </td>
+                <td>
+                    <input type="text" class="form-control" [(ngModel)]="detalle.lote" [disabled]="formReadonly">
+                </td>
+                <td>
+                    <input type="date" class="form-control" [(ngModel)]="detalle.fecha_caducidad" [disabled]="formReadonly">
+                </td>
+                <td><button class="btn btn-sm btn-danger" (click)="eliminarDetalle(detalle)" [disabled]="detalle.id != null"><i class="fas fa-trash-alt"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="gbModalProdDet"></cc-spiner-procesar>

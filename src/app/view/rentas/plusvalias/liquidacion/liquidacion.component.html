@@ -1,0 +1,958 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-print" filtroBoton="btnsRenLiq"
+        [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        
+        <fieldset class="border py-1 px-3 my-3">
+            <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold">Plusvalía</legend>
+            <div class="row my-2">
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo">No. Doc.</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly
+                            [(ngModel)]="liquidacion.documento">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo">Fecha</span></div>
+                        <input type="date" class="form-control form-control-sm" [disabled]="formReadOnly" [(ngModel)]="liquidacion.fecha">
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo">Contribuyente</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly
+                            placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
+                        <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentes()"
+                            placement="bottom" ngbTooltip="Buscar Contribuyente">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo">Propiedad</span></div>
+                        <input style="width: 200px;" *ngIf="mostrarPro" type="text" class="form-control form-control-sm" readonly
+                        placeholder="Propiedades " [(ngModel)]="propiedadActive2">
+                        <ng-select *ngIf="!formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                            <ng-option disabled [value]="0">Seleccione una Propiedad</ng-option>
+                            <ng-option *ngFor="let c of propiedades" [value]="c"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
+                        </ng-select>
+                        <ng-select *ngIf="formReadOnly" id="codigo_catastral" [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''" class="form-control form-control-sm" [(ngModel)]="propiedadActive.id" [disabled]="codCastDisabled || formReadOnly"  (change)="selectPropiedad($event)">
+                            <ng-option *ngFor="let c of propiedades" [value]="c.id"><span class="font-weight-bold">Cod. Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span> {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <!-- <div class="col-6"> -->
+                    <!-- <div class="input-group input-group-sm"> -->
+                        <!-- <div class="input-group-prepend"><span class="input-group-text">Propiedad</span></div> -->
+                        <!-- <input *ngIf="!formReadOnly" type="text" class="form-control form-control-sm" readonly
+                        placeholder="Seleccione un Contribuyente" [(ngModel)]="propiedadActive"> -->
+                        <!-- <ng-select *ngIf="!formReadOnly" id="codigo_catastral"
+                            [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''"
+                            class="form-control form-control-sm" [(ngModel)]="propiedadActive" (change)="selectPropiedad($event)"
+                            [disabled]="codCastDisabled || formReadOnly" >
+                            <ng-option disabled>Seleccione una Propiedad</ng-option>
+                            <ng-option *ngFor="let c of propiedades" [value]="c"><span class="font-weight-bold">Cod.
+                                    Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span>
+                                {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span
+                                    class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>   </ng-select> -->
+                      
+                        <!-- <ng-select *ngIf="formReadOnly" id="codigo_catastral"
+                            [placeholder]="!codCastDisabled ? 'Seleccione una Propiedad' : ''"
+                            class="form-control form-control-sm" [(ngModel)]="propiedadActive.id"
+                            [disabled]="codCastDisabled || formReadOnly" (change)="selectPropiedad($event)">
+                            <ng-option *ngFor="let c of propiedades" [value]="c.id"><span class="font-weight-bold">Cod.
+                                    Catastral:</span> {{ c.cod_catastral }} | <span class="font-weight-bold">Mz.:</span>
+                                {{ c.manzana }} | <span class="font-weight-bold">Solar:</span> {{ c.solar }} | <span
+                                    class="font-weight-bold">Area:</span> {{ c.area }}</ng-option>
+                        </ng-select> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+            </div>
+            <div class="row my-2">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Certificado Liberatorio" styleSpan="size-span-campo ">
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                    [(ngModel)]="liquidacion.certificado_pv" (change)="valorCertificado($event)" [disabled]="formReadOnly">
+                    <ng-option *ngFor="let c of certList" [value]="c.value">{{c.label}}</ng-option>
+                    <!-- <ng-option  [value]= "0" disabled>Tiene certificado Liberatorio</ng-option>
+                    <ng-option  [value]="'S'">SI</ng-option>
+                    <ng-option  [value]="'N'">NO</ng-option> -->
+                  </ng-select>
+
+                  
+                </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo">Valor certificado</span></div>
+                        <input class="form-control form-control-sm"  [(ngModel)]="liquidacion.certif_pv_valor"  [disabled]=" liquidacion.certificado_pv == 'N' ? true : false"
+                        (keyup)="valorCertificado()">
+                        
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row my-2">
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text size-span-campo">Solar</span></div>
+                    <input type="text" class="form-control form-control-sm text-right" readonly value="$ {{ propiedadActive.valor_solar ? propiedadActive.valor_solar : 0 | number:'1.2-2'}}">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text size-span-campo">Comercial</span></div>
+                    <input type="text" class="form-control form-control-sm text-right" readonly value="$ {{ propiedadActive.avaluo ? propiedadActive.avaluo : 0 | number:'1.2-2'}}">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text size-span-campo">Fecha Adquisicion</span></div>
+                    <input type="date" class="form-control form-control-sm text-right" readonly value="{{propiedadActive.fecha_adquisicion}}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text size-span-campo">Edificio</span></div>
+                    <input type="text" class="form-control form-control-sm text-right" readonly value="$ {{ propiedadActive.valor_edificacion ? propiedadActive.valor_edificacion : 0 | number:'1.2-2'}}">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text size-span-campo">Imponible</span></div>
+                    <input type="text" class="form-control form-control-sm text-right" readonly value="$ {{ propiedadActive.avaluo ? propiedadActive.avaluo : 0 | number:'1.2-2'}}">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text size-span-campo">Valor m<sup>2</sup></span></div>
+                    <input type="text" class="form-control form-control-sm text-right" readonly value="$ {{ propiedadActive.valor_metro_cuadrado ? propiedadActive.valor_metro_cuadrado : 0 | number:'1.2-2'}}">
+                </div>
+            </div>
+        </div>
+
+        <fieldset class="border py-1 px-3 my-3">
+            <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold size-span-campo">Alcabala</legend>
+            <div class="row my-2">
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text">No. Doc.</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly
+                            [(ngModel)]="liquidacion.documento_2">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text size-span-campo">Contribuyente</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly
+                            placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteCActive.razon_social">
+                        <button class="btn btn-info btn-sm" [disabled]="formReadOnly" (click)="expandContribuyentesC()"
+                            placement="bottom" ngbTooltip="Buscar Contribuyente">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row my-2">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Certificado Liberatorio" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                    [(ngModel)]="liquidacion.certificado_al" >
+                    <ng-option  [value]= "0" disabled>Tiene certificado Liberatorio</ng-option>
+                    <ng-option  [value]="'S'">SI</ng-option>
+                    <ng-option  [value]="'N'">NO</ng-option>
+                  </ng-select>
+                </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text">Valor certificado</span></div>
+                        <input class="form-control form-control-sm" 
+                            [(ngModel)]="liquidacion.certif_al_valor" [disabled]=" liquidacion.certificado_al == 'N' ? true : false" >
+                    </div>
+                </div>
+
+            </div> -->
+        </fieldset>
+
+        <div class="row my-2">
+            <div class="col-8">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text size-span-campo"
+                            >Observaciones</span></div>
+                    <textarea cols="30" rows="3" maxlength="200" class="form-control form-control-sm"
+                        [readonly]="formReadOnly"
+                        [(ngModel)]="liquidacion.observacion"  [(ngModel)]="liquidacion_2.observacion" ></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2 mb-1 align-items-center">
+            <div class="col">
+                <h5 class="mb-0 text-dark">Concepto de plusvalía</h5>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-footer table-hover mb-0">
+                        <thead class="thead-dark">
+                            <tr class="text-center">
+                                <th style="width: 2%;">Código</th>
+                                <th style="width: 10%;">Descripción</th>
+                                <th style="width: 5%;">Comentarios</th>
+                                
+                                <th style="width: 1%;">Cálculos</th>
+                                <th style="width: 10%;">Total</th>
+                                <th style="width: 10%;">Cálculos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="detallesPl.length == 0">
+                                <td colspan="6" class="text-center">
+                                    <h6 class="my-1">No hay conceptos cargados</h6>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let d of detallesPl, let i = index">
+                                <td class="text-center">{{ d.concepto.codigo_detalle }}</td>
+                                <td class="text-center">
+                                    <b>{{ d.concepto.nombre_detalle }}</b>
+                                    
+                                </td>
+                                <!-- Comentario -->
+                                <td class="text-right">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control form-control-sm"  maxlength="255" [(ngModel)]="d.comentario" [readonly]="formReadOnly || conceptosDisabled" 
+                                        [disabled]=" liquidacion.certificado_pv == 'S'"> 
+                                    </div>
+                                </td>
+                                <!-- Calculos -->
+                                <td class="text-right">
+                                    
+                                    <div class="input-group input-group-sm" *ngIf=" i ==3 || i ==4 || i ==6 || i==1? true : false">
+                                        <div class="input-group-prepend"><p class="input-group-text">+</p></div>   
+                                    </div>
+                                    <div class="input-group input-group-sm" *ngIf="i == 10  || i ==11 || i==7 || i ==12 ? true : false">
+                                        <div class="input-group-prepend"><p class="input-group-text">-</p></div>
+                                    </div>
+                                    <div class="input-group input-group-sm" *ngIf="i == 2  || i ==5 || i == 8 || i== 9 ? true : false">
+                                        <div class="input-group-prepend"><p class="input-group-text">=</p></div>
+                                    </div>
+                                    
+                                </td>
+
+
+                                <!-- Total -->
+                                <td class="text-right">
+                                    <div class="input-group input-group-sm" *ngIf="i == 2 || i ==5  || i ==8 || i ==9 || i ==10 || i ==11 || i==12 || i==13 || i==14? true : false" >
+                                    </div>
+                                    <div class="input-group input-group-sm" *ngIf="i !=2 && i !=5  && i !=8  && i !=9 && i!=11 && i!=12 && i!=13 && i!=14? true : false" >
+                                        <!-- <div class="input-group-prepend"><span class="input-group-text">$</span></div> -->
+                                        <!-- <p-inputNumber 
+                                            [(ngModel)]="d.valor" (keyup)="calcSubtotal()"
+                                            [disabled]="liquidacion.certificado_pv == 'S' || i == 0 || i == 2 || i == 5 || i==8 || i==9 || conceptosDisabled || formReadOnly"
+                                            mode="currency" currency="USD" locale="en-US"
+                                            [inputStyle]="{'height':'30px', 'font-size':'11px'}">
+                                        </p-inputNumber> -->
+                                        <input class="form-control form-control-sm text-right" currencyMask [options]="options"
+                                            [(ngModel)]="d.valor"  [readonly]="i == 0 || i == 2 || i == 5 || i==8 || i==9 || conceptosDisabled || formReadOnly? true: false" 
+                                            [disabled]=" liquidacion.certificado_pv == 'S'"  (keyup)="calcSubtotal()">
+                                    </div>
+                                    <div class="input-group input-group-sm" *ngIf="i ==12 || i==14? true : false" >
+                                        
+                                        <input currencyMask [options]="{ min: 0, max: 100, prefix:'' }" class="form-control form-control-sm text-right"
+                                            [(ngModel)]="d.porcentaje" [readonly]="i == 0 || i == 2 || i == 5 || i==8 || i==9 || conceptosDisabled || formReadOnly? true: false" 
+                                            [disabled]=" liquidacion.certificado_pv == 'S'"  (keyup)="calcSubtotal()">
+                                        <div class="input-group-append"><span class="input-group-text">%</span></div>
+                                    </div>
+                                </td>
+
+
+                                <!-- Calculos total -->
+                                <td class="text-center">
+                                    <div class="input-group input-group-sm" *ngIf="i == 2 || i ==5  || i==9 || i==8 || i==11 ||  i==13 || i == 12 || i==14  ? true : false" >
+                                        <div class="input-group-prepend"><span class="input-group-text size-span-campo">TOTAL $</span></div>
+                                        <input type="text" class="form-control form-control-sm text-right"
+                                             [readonly]="i == 0 || i == 2 || i == 5 || i==8 || i==9 || i ==10 || i==11 || i==12 || i==13 || i==14 || conceptosDisabled ? true: false" 
+                                           [disabled]=" liquidacion.certificado_pv == 'S'" value=" {{ d.valor | number: '1.2-2' }}"  (keyup)="calcSubtotal()">
+                                    </div>
+                                    <div class="input-group input-group-sm" *ngIf="i ==10 ? true : false" >
+                                        <div class="input-group-prepend"><span class="input-group-text size-span-campo">$</span></div>
+                                        <input  type="text" class="form-control form-control-sm text-right"
+                                        value="{{ d.valor | number:'1.2-2'}}" [readonly]="i == 0 || i == 2 || i == 5  || i==8 || i==9 || i==10 || i==11 || conceptosDisabled || formReadOnly ? true: false" 
+                                            (keyup)="calcSubtotal()"   [disabled]=" liquidacion.certificado_pv == 'S'">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo"
+                            >Base Imponible</span></div>
+                    <input id="exonTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                        readonly value="$ {{ liquidacion.pl_base_imponible | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+        <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo"
+                           >Subtotal</span></div>
+                    <input id="exonTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                        readonly value="$ {{ liquidacion.pl_subtotal | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2 mb-1 align-items-center">
+            <div class="col">
+                <h5 class="mb-0 text-dark">Exoneraciones</h5>
+            </div>
+            <div class="col text-right">
+                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración"
+                (click)="expandExoneracion()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-footer table-hover mb-0">
+                        <thead class="thead-dark">
+                            <tr class="text-center">
+                                <th style="width: 5%;">Concepto</th>
+                                <th style="width: 5%;">Código</th>
+                                <th style="width: 25%;">Descripción</th>
+                                <th style="width: 30%;">Comentario</th>
+                                <th style="width: 15%;">% Descuento</th>
+                                <!-- <th style="width: 15%;">Total</th> -->
+                                <th style="width: 5%;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!exoneraciones.length">
+                                <td colspan="7" class="text-center"><h6 class="my-1">No hay Exoneraciones aplicadas</h6></td>
+                            </tr>
+                            <tr *ngFor="let d of exoneraciones, let i = index">
+                                <td class="text-center">{{ d.con_codigo }}</td>
+                                <td class="text-center">{{ d.con_det_codigo }}</td>
+                                <td>{{ d.descripcion }}</td>
+                                <td class="text-right">
+                                    <div class="input-group input-group-sm">
+                                        <input maxlength="80" type="text" class="form-control form-control-sm" [(ngModel)]="d.comentario" > 
+                                    </div>
+                                </td>
+                                <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
+                                <!-- <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td> -->
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly" (click)="removeExoneracion(i)"><i class="far fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item"
+                            >Exoneraciones</span></div>
+                    <input currencyMask id="exonTotal" class="form-control input-saldo" [ngClass]="{ 'text-danger': liquidacion.exoneraciones > 0 }" readonly [ngModel]="liquidacion.exoneraciones ?? 0">
+
+                    <!-- <input id="exonTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                        [class]="liquidacion.exoneraciones > 0 ? 'text-danger' : ''" readonly
+                        value="$ {{ liquidacion.exoneraciones > 0 ? '-' : ''}}{{ liquidacion.exoneraciones | number: '1.2-2' }}"> -->
+                </div>
+            </div>
+        </div>
+        <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo" >Subtotal</span></div>
+                    <input id="total" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ liquidacion.pl_subtotal_1 | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+        <div  class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item">STA</span></div>
+                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.pl_sta" (keyup)="calculateExoneraciones()" [disabled]="formReadOnly || conceptoStaPlus">
+                </div>
+            </div>
+        </div>
+        <div  class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo" >Subtotal</span></div>
+                    <input id="total" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ liquidacion.pl_subtotal_2 | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end mt-0">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >Recargo</span></div>
+                    <input currencyMask id="recargo" type="text" class="form-control input-saldo" readonly [ngModel]="liquidacion.pl_recargo">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end mt-0">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >Coactiva</span></div>
+                    <input currencyMask id="recargo" type="text" class="form-control input-saldo" readonly [ngModel]="liquidacion.pl_coactiva">
+                </div>
+            </div>
+        </div>
+        
+        <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item">Interés</span></div>
+                    <input currencyMask id="interes" type="text" class="form-control input-saldo" readonly [ngModel]="liquidacion.pl_interes" >
+                </div>
+            </div>
+        </div>
+        <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item">Descuento</span></div>
+                    <input currencyMask id="descuento" type="text" class="form-control input-saldo" readonly [ngModel]="liquidacion.pl_descuento" >
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2 mb-4 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo">Total Cobro</span></div>
+                    <input id="total" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ liquidacion.pl_total | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>   
+        <!-- Nuevo concepto para alcabala -->
+        <div class="row mt-2 mb-1 align-items-center">
+            <div class="col">
+                <h5 class="mb-0 text-dark">Concepto de alcabala</h5>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-footer table-hover mb-0">
+                        <thead class="thead-dark">
+                            <tr class="text-center">
+                                <th style="width: 2%;">Código</th>
+                                <th style="width: 10%;">Descripción</th>
+                                <th style="width: 5%;">Comentario</th>
+                                <th style="width: 1%;">Cálculos</th>   
+                                <th style="width: 10%;">Total</th>
+                                <th style="width: 10%;">Cálculos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="detallesAl.length == 0">
+                                <td colspan="6" class="text-center">
+                                    <h6 class="my-1">No hay conceptos cargados</h6>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let d of detallesAl, let i = index">
+                                <td class="text-center">{{ d.concepto.codigo_detalle }}</td>
+                                <td class="text-center">
+                                    <b>
+                                        {{ d.concepto.nombre_detalle }}
+                                    </b> 
+                                </td>
+                                
+
+                                <!-- Comentarios -->
+                                <td class="text-right">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control form-control-sm" maxlength="255"
+                                            [(ngModel)]="d.comentario" [readonly]="formReadOnly || conceptosDisabled">
+                                    </div>
+                                </td>
+                                <!-- Calculos -->
+                                <td>
+                                    <div class="input-group input-group-sm" *ngIf="i == 0  || i== 2 ? true : false">
+                                        <div class="input-group-prepend"><p class="input-group-text">+</p></div>
+                                    </div>
+                                    <div class="input-group input-group-sm" *ngIf="i ==1  ? true : false">
+                                        <div class="input-group-prepend"><p class="input-group-text">-</p></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm" *ngIf="d.concepto.codigo_detalle == 'DESC'">
+                                        <input currencyMask [options]="{ min: 0, max: 100, prefix:'' }" [(ngModel)]="d.porcentaje" class="form-control" [readonly]="alcabalaDisabled" (keyup)="getPorcentaje($event, d)">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text font-weight-bold">%</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group input-group-sm" *ngIf="d.concepto.codigo_detalle == 'IMPS'">
+                                        <input currencyMask [options]="options2" [(ngModel)]="d.porcentaje" class="form-control" [readonly]="alcabalaDisabled" (ngModelChange)="getPorcentaje($event, d)">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text font-weight-bold">%</span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- Valor -->
+                                <td class="text-right">
+                                    <div class="input-group input-group-sm" *ngIf="i ==1 || i==2  ? true : false">
+                                        <!-- <div class="input-group-prepend"><span class="input-group-text">$</span></div> -->
+                                        <!-- <p-inputNumber 
+                                            [(ngModel)]="d.valor" (keyup)="calcSubtotal_2()"
+                                            [disabled]="alcabalaDisabled || liquidacion.certificado_pv == 'S'"
+                                            mode="currency" currency="USD" locale="en-US" [max]="max_inputnumber"
+                                            [inputStyle]="{'height':'30px', 'font-size':'11px'}">
+                                        </p-inputNumber> -->
+                                        <!-- [readonly]="alcabalaDisabled || liquidacion.certificado_pv == 'S' || d.concepto.codigo_detalle == 'DESC'" -->
+
+                                        <input currencyMask [options]="{ prefix:'', min: 0 }" class="form-control form-control-sm text-right"
+                                            [(ngModel)]="d.valor" (input)="validaMinMax($event, d)" min="0" [max]="max_inputnumber"
+                                            [readonly]="alcabalaDisabled || d.concepto.codigo_detalle == 'DESC' || d.concepto.codigo_detalle == 'AVUO'"
+                                            (keyup)="calcSubtotal_2()" >
+                                    </div>
+                                    <div class="input-group input-group-sm" *ngIf="i == 0 ? true : false">
+                                        <div class="input-group-prepend"><span class="input-group-text size-span-campo">TOTAL $</span></div>
+                                        <input type="text" class="form-control form-control-sm text-right"
+                                        value=" {{ d.valor | number: '1.2-2' }}"  
+                                            [readonly]="i==0 || alcabalaDisabled || liquidacion.certificado_pv == 'S'? true: false"
+                                            (keyup)="calcSubtotal_2()" >
+                                    </div>
+                                </td>
+                                <!-- Calculos -->
+                                
+                                
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+         <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo"
+                            >Base Imponible</span></div>
+                    <input id="exonTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                        readonly value="$ {{ liquidacion.al_cuantia | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+        <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo"
+                            >Alcabala</span></div>
+                    <input id="exonTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                        readonly value="$ {{ liquidacion.al_subtotal | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2 mb-1 align-items-center">
+            <div class="col">
+                <h5 class="mb-0 text-dark">Exoneraciones</h5>
+            </div>
+            <div class="col text-right">
+                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración"
+                (click)="expandExoneracionAL()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-footer table-hover mb-0">
+                        <thead class="thead-dark">
+                            <tr class="text-center">
+                                <th style="width: 5%;">Concepto</th>
+                                <th style="width: 5%;">Código</th>
+                                <th style="width: 25%;">Descripción</th>
+                                <th style="width: 30%;">Comentario</th>
+                                <th style="width: 15%;">% Descuento</th>
+                                <!-- <th style="width: 15%;">Total</th> -->
+                                <th style="width: 5%;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!exoneracionesAL.length">
+                                <td colspan="7" class="text-center"><h6 class="my-1">No hay Exoneraciones aplicadas</h6></td>
+                            </tr>
+                            <tr *ngFor="let d of exoneracionesAL, let i = index">
+                                <td class="text-center">{{ d.con_codigo }}</td>
+                                <td class="text-center">{{ d.con_det_codigo }}</td>
+                                <td>{{ d.descripcion }}</td>
+                                <td class="text-right">
+                                    <div class="input-group input-group-sm">
+                                        <input maxlength="80" type="text" class="form-control form-control-sm" [(ngModel)]="d.comentario" [readonly]="formReadOnly || exoneracionDisabled" > 
+                                    </div>
+                                </td>
+                                <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
+                                <!-- <td class="text-right text-danger">$ -{{ d.valor | number: '1.2-2' }}</td> -->
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Exoneración" [disabled]="formReadOnly" (click)="removeExoneracionAL(i)"><i class="far fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item"
+                            >Exoneraciones</span></div>
+                   <input currencyMask id="exonTotal" class="form-control input-saldo" [ngClass]="{ 'text-danger': liquidacion.al_exoneraciones > 0 }" readonly [ngModel]="liquidacion.al_exoneraciones ?? 0">
+
+                    <!-- <input id="exonTotal" type="text" class="form-control input-saldo"
+                        [class]="liquidacion.al_exoneraciones > 0 ? 'text-danger' : ''" readonly
+                        value="$ {{ liquidacion.al_exoneraciones > 0 ? '-' : ''}}{{ liquidacion.al_exoneraciones | number: '1.2-2' }}"> -->
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end mt-0">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo" >Subtotal</span></div>
+                    <input id="subtotal_1" type="text" class="form-control form-control-lg  font-weight-bold text-right" readonly value="$ {{ liquidacion.al_subtotal_1 | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+        <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >IMPS</span></div>
+                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.al_imps"  [disabled]="formReadOnly">
+                </div>
+            </div>
+        </div>
+        <div  class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >STA</span></div>
+                    <input currencyMask class="form-control input-saldo" [(ngModel)]="liquidacion.al_sta" (keyup)="calcSubtotal_2_2()" [disabled]="formReadOnly || conceptoStaAlca">
+                </div>
+            </div>
+        </div>
+        <div  class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item">Subtotal</span></div>
+                    <input id="total" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ liquidacion.al_subtotal_2 | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end mt-0">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >Recargo</span></div>
+                    <input currencyMask id="recargo" type="text" class="form-control input-saldo" readonly [ngModel]="liquidacion.al_recargo" >
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end mt-0">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >Coactiva</span></div>
+                    <input currencyMask id="recargo" type="text" class="form-control input-saldo" readonly [ngModel]="liquidacion.al_coactiva">
+                </div>
+            </div>
+        </div>
+        <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >Interés</span></div>
+                    <input currencyMask id="interes" type="text" class="form-control input-saldo" readonly [ngModel]="liquidacion.al_interes">
+                </div>
+            </div>
+        </div>
+        <div class="row my-2 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo label-saldo_item" >Descuento</span></div>
+                    <input currencyMask id="descuento" type="text" class="form-control input-saldo"  readonly [ngModel]="liquidacion.al_descuento2" >
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2 mb-4 justify-content-end">
+            <div class="col-4">
+                <div class="input-group input-group-lg input-group-total">
+                    <div class="input-group-prepend"><span class="label-saldo" >Total Cobro</span></div>
+                    <input id="total" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ liquidacion.al_total | number: '1.2-2' }}">
+                </div>
+            </div>
+        </div>   
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="regPropLiqGen"></cc-spiner-procesar>
+
+<div id="PrintSection" [hidden]="true">
+    <div class="row justify-content-center  prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Liquidación: {{ liquidacion.documento }}</h3>
+                                <h3>Liquidación: {{ liquidacion.documento_2 }}</h3>
+                                <h3>Fecha: {{ liquidacion.fecha | date: 'dd/MM/yyyy' }}</h3>
+                                <!-- <h3>Estado: {{ liquidacion.estado == 'E' ? 'Emitido' : (liquidacion.estado == 'A' ? 'Aprobado' : 'Anulado')}}</h3> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2">
+
+            <div class="row my-2">
+                <div class="col-12">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text">Contribuyente</span></div>
+                        <input type="text" class="form-control form-control-sm" readonly
+                            placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteActive.razon_social">
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-12">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text">Observaciones</span></div>
+                        <textarea cols="30" rows="3" class="form-control form-control-sm" [readonly]="formReadOnly"
+                            [(ngModel)]="liquidacion.observacion"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 pl-2 pr-2">
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="table-responsive">
+                        <h5>Concepto de plusvalía</h5>
+                        <table class="table table-bordered no-footer table-hover mb-0">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th style="width: 5%;">Código</th>
+                                    <th style="width: 10%;">Descripción</th>
+                                    <th style="width: 10%;">Comentario</th>
+                                    <th style="width: 10%;">Total</th>
+                                    <!-- <th style="width: 2%;">Acciones</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="conceptos.length == 0">
+                                    <td colspan="5" class="text-center">
+                                        <h6 class="my-1">No hay conceptos cargados</h6>
+                                    </td>
+                                </tr>
+                                <tr *ngFor="let d of conceptos, let i = index">
+                                    <td class="text-center">{{ d.codigo_detalle }}</td>
+                                    <td>{{ d.nombre_detalle }}</td>
+                                    <td class="text-center">{{ d.comentario }}</td>
+                                    
+                                    <!-- <td *ngIf="d.codigo_detalle != 'COAD' && d.codigo_detalle != 'CONS' " class="text-center"></td> -->
+                                    <td class="text-center">{{ d.valor}}</td>
+                                    <!-- <td class="text-center">
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-2 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-subtotal">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                                style="width: 195px;">Base Imponible</span></div>
+                        <input id="exonTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                            readonly value="$ {{ liquidacion.pl_base_imponible | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-subtotal">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                                style="width: 155px;">Subtotal</span></div>
+                        <input id="exonTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                            readonly value="$ {{ liquidacion.pl_total | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row my-2 justify-content-end">
+                <div class="col-4">
+                    <div class="input-group input-group-lg input-group-subtotal">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                                style="width: 155px;">Subtotal</span></div>
+                        <input id="exonTotal" type="text"
+                            class="form-control form-control-lg font-weight-bold text-right" readonly
+                            value="$ {{ liquidacion.pl_total | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <!-- Nuevo concepto para alcabala -->
+        
+            <div class="col-11 pl-2 pr-2">
+                <div class="row my-2">
+                    <div class="col-12">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text">Contribuyente</span></div>
+                            <input type="text" class="form-control form-control-sm" readonly
+                                placeholder="Seleccione un Contribuyente" [(ngModel)]="contribuyenteCActive.razon_social">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+
+        <div class="col-11 pl-2 pr-2">
+            <div class="row mt-2 mb-1 align-items-center">
+                <div class="col">
+                    <h5 class="mb-0 text-dark">Concepto de alcabala</h5>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered no-footer table-hover mb-0">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th style="width: 5%;">Código</th>
+                                    <th style="width: 10%;">Descripción</th>
+                                    <th style="width: 10%;">Comentario</th>
+                                    <th style="width: 10%;">Total</th>
+                                    <!-- <th style="width: 2%;">Acciones</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="conceptos_2.length == 0">
+                                    <td colspan="5" class="text-center">
+                                        <h6 class="my-1">No hay conceptos cargados</h6>
+                                    </td>
+                                </tr>
+                                <tr *ngFor="let d of conceptos_2, let i = index">
+                                    <td class="text-center">{{ d.codigo_detalle }}</td>
+                                    <td>{{ d.nombre_detalle }}</td>
+                                    <td class="text-center">{{ d.comentario }}</td>
+                                    <td class="text-center">{{ d.valor}}</td>
+                                    <!-- <td class="text-center">
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-subtotal">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                                style="width: 195px;">Base Imponible</span></div>
+                        <input id="exonTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                            readonly value="$ {{ liquidacion.al_cuantia | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-subtotal">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                                style="width: 155px;">Subtotal</span></div>
+                        <input id="exonTotal" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                            readonly value="$ {{ liquidacion.al_subtotal | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 pl-2 pr-2">
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="table-responsive">
+                        <h5>Exoneraciones</h5>
+                        <table class="table table-bordered no-footer table-hover mb-0" style="font-size: smaller;">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th style="width: 10%;">Código</th>
+                                    <th style="width: 50%;">Descripcion</th>
+                                    <th style="width: 15%;">% Descuento</th>
+                                    <th style="width: 20%;">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-descuentos">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                                style="width: 155px;">Exoneraciones</span></div>
+                        <input id="exonTotal" type="text"
+                            class="form-control form-control-lg font-weight-bold text-right"
+                            [class]="liquidacion.exoneraciones > 0 ? 'text-danger' : ''" readonly
+                            value="$ {{ liquidacion.exoneraciones > 0 ? '-' : ''}}{{ liquidacion.exoneraciones | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2 mb-4 justify-content-end">
+                <div class="col-6">
+                    <div class="input-group input-group-lg input-group-total">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold"
+                                style="width: 155px;">Total</span></div>
+                        <input id="total" type="text" class="form-control form-control-lg font-weight-bold text-right"
+                            readonly value="$ {{ liquidacion.total | number: '1.2-2' }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="font-family: 'Poppins1';">
+        <div class="col-12 text-left" style="position: fixed; bottom: 0px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Fecha: {{ fecha }}</span>
+        </div>
+        <div *ngIf="dataUser" class="col-12 text-left" style="position: fixed; bottom: 20px; left: 25px;">
+            <span style="color: #13A1EA;">
+                Usuario: {{ dataUser.nombre }}</span>
+        </div>
+    </div>
+</div>

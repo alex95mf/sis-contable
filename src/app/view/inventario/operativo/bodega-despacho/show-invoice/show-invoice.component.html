@@ -1,0 +1,239 @@
+<app-button-radio-active titulo="Vista Productos" filtroBoton="btnDespachoView" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-clipboard-check">
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="N° Documento" styleSpan="size-span-campo">
+                <input type="text" [value]="params.preficInvoice + '-' + invoice.num_doc" [disabled]="true" class="form-control form-control-sm">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                <input type="text" [(ngModel)]="invoice.fecha" [disabled]="true" class="form-control form-control-sm">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Valor Total" styleSpan="size-span-campo">
+                <input type="text" [(ngModel)]="'$' + invoice.total" [disabled]="true" class="form-control form-control-sm text-right">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Ruc" styleSpan="size-span-campo">
+                <input type="text" [value]="invoice.rucCliente" [disabled]="true" class="form-control form-control-sm">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-8">
+            <app-cc-input-group-prepend label="Cliente" styleSpan="size-span-campo">
+                <input type="text" [(ngModel)]="invoice.cliente" [disabled]="true" class="form-control form-control-sm text-uppercase">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Tipo Pago" styleSpan="size-span-campo">
+                <input type="text" [value]="invoice.tipo_pago" [disabled]="true" class="form-control form-control-sm text-uppercase">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-3">
+            <app-cc-input-group-prepend label="Pagada" styleSpan="size-span-campo">
+                <input type="text" *ngIf="invoice.pagada == 1" value="SI" [disabled]="true" class="form-control form-control-sm">
+                <input type="text" *ngIf="invoice.pagada == 0" value="NO" [disabled]="true" class="form-control form-control-sm">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-5">
+            <app-cc-input-group-prepend label="Vendedor" styleSpan="size-span-campo">
+                <input type="text" [value]="invoice.vendedor" [disabled]="true" class="form-control form-control-sm text-uppercase">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-2 mb-2">
+        <div class="col-md-12 ">
+            <fieldset class="border p-2 filters">
+                <legend class="w-auto h6">Detalle Productos</legend>
+                <div style="overflow-y: scroll; max-height: 150px">
+                    <div class="table-responsive responsive-table table-models">
+                        <table class="table" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%;">CÓDIGO</th>
+                                    <th style="width: 40%;">NOMBRE</th>
+                                    <th style="width: 10%;">CANTIDAD</th>
+                                    <th style="width: 10%;">PRECIO</th>
+                                    <th style="width: 10%;">TOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="detInvocice != undefined">
+                                <tr *ngFor="let d of detInvocice">
+                                    <td class="text-left">{{d.codigoProducto}}</td>
+                                    <td class="text-left">{{d.nombre_producto}}</td>
+                                    <td class="text-center">{{d.cantidad}}</td>
+                                    <td class="text-right">$ {{d.costo_unitario}}</td>
+                                    <td class="text-right">$ {{d.total_items}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</app-button-radio-active>
+
+
+<div [hidden]="true" id="print-section" media="print">
+    <div class="row justify-content-center  prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-center mt-4">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 text-center mt-4">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>DESPACHO DE PRODUCTO</h3>
+                                <p>VISTA FACTURA DE VENTA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-11 mt-2">
+            <div class="row mt-3 mb-1">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="FACTURA Nº" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left">{{ invoice.num_doc }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Fecha venta" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left">{{ invoice.fecha }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Tipo de pago" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left">{{ invoice.tipo_pago }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Forma de pago" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left">{{ invoice.forma_pago }}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Cliente" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left">{{ invoice.cliente}}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Vendedor" styleSpan="size-span-campo">
+                        <label class="form-control form-control-sm text-left">{{invoice.vendedor}}</label>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-4 pl-3 pr-3">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <table border="1" style="width: 100%;">
+                        <thead class="thead-dark" style="background-color: #CCCCCC;">
+                            <tr>
+                                <th scope="col " class="text-center">Código_producto</th>
+                                <th scope="col " class="text-center">UDM</th>
+                                <th scope="col " class="text-center">Nombre_producto</th>
+                                <th scope="col " class="text-center">Cantidad</th>
+                                <th scope="col " class="text-center">Precio_unitario</th>
+                                <th scope="col " class="text-center">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="detInvocice != undefined">
+                            <tr *ngFor="let d of detInvocice">
+                                <td style="width: 18%;">{{d.codigoProducto}}</td>
+                                <td style="width: 10%;">{{d.UDMCompra}}</td>
+                                <td style="width: 32%;">{{d.nombre_producto}}</td>
+                                <td class="text-right" style="width: 10%;">{{d.cantidad}}</td>
+                                <td class="text-right" style="width: 15%;">$ {{d.costo_unitario}}</td>
+                                <td class="text-right" style="width: 15%;">$ {{d.total_items}}</td>
+                            </tr>
+                            <tr>
+                                <td COLSPAN="3" style="background-color: #CCCCCC;font-weight: 600;">Observaciones</td>
+                                <td COLSPAN="2" style="background-color: #CCCCCC;font-weight: 600;text-align: right;">Subtotal
+                                </td>
+                                <td COLSPAN="1" style="background-color: #CCCCCC;" class="text-right" style="font-weight: 600;">
+                                    $ {{detInvocice[0].subtotal}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" COLSPAN="3">{{detInvocice[0].observaciones}}</td>
+                                <td COLSPAN="2" style="font-weight: 600;text-align: right;">Iva {{ivaConverter}}%</td>
+                                <td COLSPAN="1" class="text-right" style="font-weight: 600;">$ {{detInvocice[0].iva_valor}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td COLSPAN="2" style="font-weight: 700;text-align: right;">Total</td>
+                                <td COLSPAN="1" class="text-right" style="font-weight: 700;">$ {{detInvocice[0].total}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 pt-2">
+                    <span>Si tiene alguna duda sobre esta Factura consulte con el departamento de ventas</span>
+                </div>
+            </div>
+
+            <div class="row justify-content-center" style="font-family: 'Poppins1';">
+                <div class="col-10 text-center pb-2 pt-2" style="position: fixed;  bottom: 30px; ">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-6 text-center">
+                            <div class="row text-center">
+                                <div class="col-12 text-center">
+                                    ----------------------------------------------
+                                </div>
+                                <div class="col-12 text-center" style="color: #13A1EA;">
+                                    <span>Elaborado por: </span><span>{{dataUser.nombre}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 text-center">
+                            <div class="row text-center">
+                                <div class="col-12 text-center">
+                                    ----------------------------------------------
+                                </div>
+                                <div class="col-12 text-center" style="color: #13A1EA;">
+                                    <span>Aprobado por: </span><span>{{invoice.name_user_aprobated}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+                    <span style="color: #13A1EA;">
+                            Fecha: {{fecha}}&nbsp;{{hora}}</span>
+                </div>
+                <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+                    <span style="color: #13A1EA;">
+                            Usuario: {{dataUser.nombre}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

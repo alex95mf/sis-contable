@@ -1,0 +1,79 @@
+<!-- Currently I am {{contribuyenteCon.co_tiene_conyuge ? 'open' : 'closed'}} -->
+<!-- (opened)="contribuyenteCon.co_tiene_conyuge = true" (closed)="contribuyenteCon.co_tiene_conyuge = false" -->
+<mat-expansion-panel class="mt-2"  [disabled]="!validadorNt" >
+    <mat-expansion-panel-header>
+      <input type="checkbox" [(ngModel)]="contribuyenteCon.co_tiene_conyuge" (change)="selectedCheck()">
+      <mat-panel-title>Cónyuge</mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    <div class="row mt-2">
+      <div class="col-4">
+        
+        <!-- (keypress)="changeInto($event)" -->
+        <app-cc-input-group-prepend label="Cédula" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteCon.co_cedula"
+            placeholder="Ingrese la cédula" [readonly]="!contribuyenteCon.co_tiene_conyuge" maxlength="10" (keypress)="onlyNumber($event)"/>
+            <button class="btn btn-primary btn-sm" (click)="cargarContribuyentes()"><i class="fas fa-search"></i></button>
+        </app-cc-input-group-prepend>
+        <!-- <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                </div>
+                <input id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección contribuyente" [(ngModel)]="contribuyente.direccion">
+            </div> -->
+      </div>
+      <div class="col-4">
+
+        <app-cc-input-group-prepend label="Primer nombre" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteCon.co_primer_nombre"
+            placeholder="Ingrese el primer nombre" [readonly]="!contribuyenteCon.co_tiene_conyuge" maxlength="100" (keypress)="validaciones.onlyWord($event)"/>
+        </app-cc-input-group-prepend>
+        <!-- <div class="input-group input-group-sm mt-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+          </div>
+          <input id="telefono" type="text" class="form-control form-control-sm"
+            placeholder="Teléfono contribuyente" [(ngModel)]="contribuyente.telefono"
+            (keypress)="onlyNumber($event)">
+        </div> -->
+      </div>
+
+      <div class="col-4">
+        <app-cc-input-group-prepend label="Segundo nombre" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteCon.co_segundo_nombre"
+            placeholder="Ingrese el segundo nombre" [readonly]="!contribuyenteCon.co_tiene_conyuge" maxlength="100" (keypress)="validaciones.onlyWord($event)" />
+        </app-cc-input-group-prepend>
+
+      </div>
+
+      <div class="col-4">
+        <app-cc-input-group-prepend label="Primer apellido" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteCon.co_primer_apellido"
+            placeholder="Ingrese el primer apellido" [readonly]="!contribuyenteCon.co_tiene_conyuge" maxlength="100" (keypress)="validaciones.onlyWord($event)" />
+        </app-cc-input-group-prepend>
+
+      </div>
+
+      <div class="col-4">
+        <app-cc-input-group-prepend label="Segundo apellido" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="text" [(ngModel)]="contribuyenteCon.co_segundo_apellido"
+            placeholder="Ingrese el segundo apellido" [readonly]="!contribuyenteCon.co_tiene_conyuge" maxlength="100" (keypress)="validaciones.onlyWord($event)" />
+        </app-cc-input-group-prepend>
+
+      </div>
+
+
+      <div class="col-4">
+        <app-cc-input-group-prepend label="Fecha de nacimiento" styleSpan="size-span-campo font-weight-bold">
+          <input class="form-control" type="date" [(ngModel)]="contribuyenteCon.co_fecha_nacimiento"
+            [readonly]="!contribuyenteCon.co_tiene_conyuge" />
+        </app-cc-input-group-prepend>
+
+      </div>
+      
+
+
+    </div>
+  </mat-expansion-panel>
+
+  <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spContribuyente"></cc-spiner-procesar>

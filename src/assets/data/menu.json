@@ -1,0 +1,40 @@
+{
+  "status": 1,
+  "status_code": 200,
+  "message": "The operation was executed successfully.",
+    "data": [
+        {
+          "name": "Dashboard",
+          "url": "/dashboard",
+          "icon": "fa fa-th"
+        },
+        { "name": "inventario",
+          "url": "/base",
+          "icon": "icon-puzzle",
+          "children": [
+            {
+              "name": "productos",
+              "url": "/base",
+              "icon": "icon-puzzle",
+              "children": [
+                {
+                  "name": "lista de precios",
+                  "url": "/base",
+                  "icon": "icon-puzzle"
+                },
+                {
+                  "name": "kardex",
+                  "url": "/base/carousels",
+                  "icon": "icon-puzzle"
+                }
+              ]
+            },
+            {
+              "name": "Carousels",
+              "url": "/base/carousels",
+              "icon": "icon-puzzle"
+            }
+          ]
+        }
+    ]
+}

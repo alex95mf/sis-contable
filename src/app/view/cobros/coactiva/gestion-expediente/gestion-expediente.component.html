@@ -1,0 +1,153 @@
+<div class="my-2">
+  <app-button-radio-active [titulo]="fTitle"  cstyle="bg-light text-dark" icono="far fa-folder-open"
+    filtroBoton="btnsGestionExpediente" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <fieldset class="border px-3 pb-2 my-2">
+      <legend class="mb-1 w-auto">Filtros</legend>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col-6">
+              <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="filter.contribuyente" (keypress)="handleEnter($event)">
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+              <app-cc-input-group-prepend label="Expediente" styleSpan="size-span-campo font--weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="filter.expediente">
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+              <app-cc-input-group-prepend label="Sector" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="filter.sector">
+                  <ng-option disabled [value]="0">Sector</ng-option>
+                  <ng-option *ngFor="let sector of sectores" [value]="sector.valor">{{ sector.valor }}. {{ sector.descripcion }}</ng-option>
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+              <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+              <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+              <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [items]="estados" bindValue="id" bindLabel="nombre" [clearable]="false" [(ngModel)]="filter.estado">
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+            <div class="col-3">
+              <app-cc-input-group-prepend label="Juicio" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [(ngModel)]="filter.juicio" [clearable]="false" (change)="handleSelectJuicioFilter($event)"
+                  [items]="cmbJuicio" bindValue="value" bindLabel="label">
+                </ng-select>
+              </app-cc-input-group-prepend>
+            </div>
+          </div>
+        </div>
+        <div class="col-2 text-right">
+          <button class="btn btn-primary btn-sm" matTooltip="Consultar" (click)="handleSearch()">
+            <i class="fas fa-search"></i> Consultar
+          </button>
+          <button class="btn btn-danger btn-sm ml-1" matTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+            <i class="fas fa-eraser"></i>
+          </button>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="row my-2">
+
+      <div class="col-12">
+        <div style="max-height: 550px; overflow-y: auto;">
+          <table class="table no-footer table-hover mb-0">
+            <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+            <thead class="thead-dark sticky-header">
+              <tr>
+                <th><input type="checkbox" [(ngModel)]="masterSelected" (change)="selectAll()"></th>
+                <th>#</th>
+                <th>Periodo</th>
+                <!-- <th>Lote</th> -->
+                <th>Expediente</th>
+                <th>Contribuyente</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Total</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="!expedientes.length">
+                <td colspan="9" class="text-center">
+                  <h6>No hay expedientes a mostrar</h6>
+                </td>
+              </tr>
+              <tr *ngFor="let expediente of expedientes, let i = index" [ngClass]="{ 'table-secondary': expediente.estado == 'X' }">
+                <td><input type="checkbox" [(ngModel)]="expediente.juicio"></td>
+                <td>{{ expediente.id_cob_notificacion }}</td>
+                <td>{{ expediente.periodo }}</td>
+                <!-- <td>{{ expediente.lote }}</td> -->
+                <td>{{ expediente.num_expediente }}</td>
+                <td>
+                  <div class="row">
+                    <div class="col">{{ expediente.contribuyente?.razon_social }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col text-muted"><small>{{ expediente.contribuyente?.num_documento }} - {{ expediente.contribuyente?.codigo_sector?.valor }}. {{ expediente.contribuyente?.codigo_sector?.descripcion }}</small></div>
+                  </div>
+                </td>
+                <td>{{ expediente.fecha }}</td>
+                <td>
+                  <div class="row">
+                    <div class="col">
+                      <i class="fas fa-circle" [ngClass]="{'text-warning': expediente.estado == 'P' || expediente.estado == 'V', 'text-success': expediente.estado == 'R', 'text-danger': expediente.estado == 'N' || expediente.estado == 'F' || expediente.estado == 'X' }"></i>
+                      <span *ngIf="expediente.estado == 'P'"> Pendiente</span>
+                      <span *ngIf="expediente.estado == 'R'"> Recibido</span>
+                      <span *ngIf="expediente.estado == 'N'"> No Recibido</span>
+                      <span *ngIf="expediente.estado == 'F'"> Fijado</span>
+                      <span *ngIf="expediente.estado == 'X'"> Anulado</span>
+                      <span *ngIf="expediente.estado == 'V'"> En Convenio</span>
+                    </div>
+                  </div>
+                  <div *ngIf="expediente.vencimiento" class="row" [ngClass]="{'text-danger': expediente.vencimiento > 8}">
+                    <div class="col">{{ expediente.vencimiento }} día(s) vencido(s)</div>
+                  </div>
+                </td>
+                <td>$ {{ expediente.total | number:'1.2-2' }}</td>
+                <td class="text-center">
+                  <div class="btn-group">
+                    <button class="btn btn-sm btn-warning" (click)="modalDetalles(expediente)" matTooltip="Ver Detalles">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary" (click)="modalEditDetalles(expediente)" matTooltip="Editar Detalles" [disabled]="expediente.estado == 'X'">
+                      <i class="fas fa-envelope-open"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" (click)="descargarReporte(expediente)" matTooltip="Descargar Notificacion" [disabled]="expediente.estado == 'X'">
+                      <i class="fas fa-file-pdf"></i>
+                    </button>
+                  </div>
+                  <button class="btn btn-sm btn-outline-danger ml-1" (click)="anularExpediente(expediente)" matTooltip="Anular Expediente" [disabled]="expediente.estado == 'X'">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage"
+          [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)" aria-label="Select page">
+        </mat-paginator>
+      </div>
+
+    </div>
+  </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spGestionExpediente"></cc-spiner-procesar>

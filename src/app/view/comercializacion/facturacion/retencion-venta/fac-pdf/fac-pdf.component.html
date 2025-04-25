@@ -1,0 +1,48 @@
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnPrevPdfFat" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-file-pdf-o">
+    <div style="background-color: rgb(255 255 255);" class="contenedor-scrol-tab">
+        <app-imprimir-componente-global [dataUser]="dataUser" [data]="data"></app-imprimir-componente-global>
+        <div [hidden]="true" id="print-section-doc-elec">
+            <app-imprimir-componente-global [dataUser]="dataUser" [data]="data"></app-imprimir-componente-global>
+            <footer style="width:100%; margin-left: 0px;" class="mb-5">
+                <div class="container-fluid prt-comprobante">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 25%;text-align:center;">Elaborado por</th>
+                                <th style="width: 20%;text-align:center;">Revisado</th>
+                                <th style="width: 25%;text-align:center;">Aprobado</th>
+                                <th style="width: 25%;text-align:center;">Recibí conforme</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-top: none !important; height: 100px;text-align: center;">
+                                    <div style="padding-top: 48px; ">
+                                        <hr>
+                                        <span>{{ dataUser.nombre }}</span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </footer>
+            <div class="row justify-content-center" style="font-family: 'Poppins1';">
+                <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+                    <span style="color: #13A1EA;">
+                    Fecha: {{fecha}}&nbsp;{{hora}}</span>
+                </div>
+                <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+                    <span style="color: #13A1EA;">
+                    Usuario: {{dataUser.nombre}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-button-radio-active>

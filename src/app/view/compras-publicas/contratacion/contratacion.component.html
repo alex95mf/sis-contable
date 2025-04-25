@@ -1,0 +1,242 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-file-plus" filtroBoton="btnsComprasP" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <!-- <div class="row">
+            <div class="col"><button class="btn btn-sm btn-secondary" (click)="toggleView()"></button></div>
+        </div>
+        <div *ngIf="viewSolicitudes; else viewNuevaSolicitud">
+            <h3 class="text-dark">Listado de Solicitudes</h3>
+        </div>
+        <ng-template #viewNuevaSolicitud>
+            <h3 class="text-dark">Nueva Solicitud</h3>
+        </ng-template> -->
+
+        <div *ngIf="nuevaSolicitud; else newSolicitud">
+            <div class="col">
+                <div class="col-6">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo text-bold"
+                                id="inputGroup-sizing-sm" [style]="{'height':'30px'}">Período</span>
+                        </div>
+                        <p-calendar
+                            (ngModelChange)="periodoSelected($event,periodo)"
+                            [readonlyInput]="true" 
+                            view="year" 
+                            dateFormat="yy" 
+                            [(ngModel)]="periodo" 
+                            [showIcon]="true" 
+                            class="ui-calendar ui-calendar-button"
+                            inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                            [inputStyle]="{'height':'30px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                        </p-calendar>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+
+                        <ng-select class="form-control custom" 
+                                  [items]="programa"
+                                  bindLabel="value"
+                                  bindValue="valor"
+                                  [multiple]="true"
+                                  groupBy="selectedAllGroup"
+                                  [selectableGroup]="true"
+                                  placeholder="Seleccione Programa"
+                                  (change)="onMaterialGroupChange($event)"
+                                  [closeOnSelect] = "false"
+                                  [(ngModel)]="dato_Programa">
+                            <ng-template 
+                                    ng-optgroup-tmp let-item="item" 
+                                    let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox"
+                                    [ngModel] ="item$.selected"/> Select All
+                            </ng-template>
+                        </ng-select>
+  
+                        <!-- <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="atribucionParams.programa"
+                          (ngModelChange)="departamentoSearch($event)" >
+                          <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                          <ng-option *ngFor="let item of programa"  [value]="item">{{item.value}}</ng-option>
+                        </ng-select> -->
+
+                        <button class="btn btn-primary btn-sm ml-1" (click)="departamentoSearch()">
+                            <i class="fas fa-search"></i>Buscar
+                        </button>
+            
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+                <div class="col-12">
+
+                    <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control custom" 
+                                  [items]="departamento"
+                                  bindLabel="value"
+                                  bindValue="id_catalogo"
+                                  [multiple]="true"
+                                  groupBy="selectedAllGroup"
+                                  [selectableGroup]="true"
+                                  placeholder="Seleccione usuarios"
+                                  (change)="onMaterialGroupChange($event)"
+                                  [closeOnSelect] = "false"
+                                  [(ngModel)]="datoDepartamento">
+                            <ng-template 
+                                    ng-optgroup-tmp let-item="item" 
+                                    let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox"
+                                    [ngModel] ="item$.selected"/> Select All
+                            </ng-template>
+                        </ng-select>
+                        
+                        <button class="btn btn-primary btn-sm ml-1" (click)="SearchList()">
+                            <i class="fas fa-search"></i>Buscar
+                        </button>
+                        <!-- <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="atribucionParams.departamento"
+                           (ngModelChange)="SearchList($event)" >
+                          <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                          <ng-option *ngFor="let item of departamento"  [value]="item">{{item.valor}}</ng-option>
+                        </ng-select> -->
+            
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="m-2" >
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">Filtro</legend>
+                    <div class="row ml-1 mr-1">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha desde" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" type="date" [(ngModel)]="filter.fecha_desde"/>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha hasta" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control" type="date" [(ngModel)]="filter.fecha_hasta"/>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="estadoSelected" (change)="asignarEstado($event)" [clearable]="false">
+                                    <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                                    <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button class="btn btn-primary mr-1 btn-sm" (click)="SearchList(atribucionParams.atribucion,true)" ngbTooltip="Consultar">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm" (click)="limpiarFiltro()" ngbTooltip="Eliminar">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row ml-1 mr-1">
+                        <!-- <div class="col">
+                            <app-cc-input-group-prepend label="Proveedor"
+                                styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_proveedor" type="text" class="form-control"
+                                    [(ngModel)]="filter.proveedor">
+                            </app-cc-input-group-prepend>
+                        </div> -->
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Proveedores" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control form-control-sm"  placeholder="Seleccione un Proveedor" [value]="proveedorActive.razon_social" [(ngModel)]="filter.proveedor">
+                                <button class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor"  >
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="No. Contrato"
+                                styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_con_contrato" type="text" class="form-control"
+                                    [(ngModel)]="filter.con_contrato">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="No. Solicitud" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_num_solicitud" type="text" class="form-control" [(ngModel)]="filter.num_solicitud" >
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </fieldset>
+                <table class="table table-hover mt-2">
+                    <thead class="thead-dark">
+                        <tr>
+                            <!-- <th class="text-center"># Solicitud</th> -->
+                            <th class="text-center">Num Solicitud</th>
+                            <th class="text-center">Proveedor</th>
+                            <th class="text-center">No. Contrato</th>
+                            <th class="text-center">Fecha de Solicitud</th>
+                            <th class="text-center">Valor</th>
+                            <th class="text-center">Valor Adjudicado</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Acciones</th>
+
+    
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        <tr *ngIf="!listaSolicitudes.length">
+                            <td colspan="8" class="text-center">
+                                <h6>No hay Solicitudes que mostrar</h6>
+                            </td>
+    
+                        </tr>
+                        <tr *ngFor="let item of listaSolicitudes">
+                            <td class="text-center">{{item.num_solicitud}}</td>
+                            <td class="text-center">{{item.proveedor ? item.proveedor.razon_social : "No tiene proveedor"}}</td>
+                            <td class="text-center">{{item.con_contrato}}</td>
+                            <td class="text-center">{{item.fecha_creacion}}</td>
+                            <td class="text-center">$ {{item.valor | number:'1.2-2'}}</td>
+                            <td class="text-center">$ {{item.con_valor | number:'1.2-2'}}</td>
+                            <td *ngIf="item.estado == 'A'" class="text-center">
+                                <i class="fas fa-circle text-success"></i> Aprobado
+                              </td>
+                              <td *ngIf="item.estado == 'P'" class="text-center">
+                                <i class="fas fa-circle text-danger"></i> Pendiente
+                              </td>
+                              <td *ngIf="item.estado == 'D'" class="text-center">
+                                <i class="fas fa-circle text-danger"></i> Denegado
+                              </td>    
+                            
+                            <td class="text-center">
+                                <button class="btn btn-primary" (click)="moduloDetalle(item)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage"
+                  [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)" aria-label="Select page">
+                </mat-paginator> 
+    
+            </div>
+
+        </div>
+        
+
+        <ng-template #newSolicitud>
+            <app-detalle-contratacion [item] = "itemBienes" [model]="nuevaSolicitud"></app-detalle-contratacion>
+
+        </ng-template>
+        
+        <ng-template #newSolicitud2>
+            <app-detalle-contratacion [item] = "itemBienes" [model]="nuevaSolicitud"></app-detalle-contratacion>
+
+        </ng-template>
+
+        <ng-template #newSolicitud3>
+            <app-detalle-contratacion [item] = "itemBienes" [model]="nuevaSolicitud"></app-detalle-contratacion>
+
+        </ng-template>
+        
+
+    </app-button-radio-active>
+    <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>
+</div>

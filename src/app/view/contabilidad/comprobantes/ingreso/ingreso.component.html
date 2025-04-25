@@ -1,0 +1,551 @@
+<br>
+<app-button-radio-active titulo="Comprobantes de ingreso" filtroBoton="btnsCmpIngreso"
+    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+    icono="fas fa-file-alt">
+    <div class="row">
+
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Forma Pago" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="compbt.metodo_pago"
+                    (ngModelChange)="validateForPag($event)" [disabled]="btnMov  " id="idFormaPago"
+                    *ngIf="compbt.metodo_pago != 'Nota de Crédito'">
+                    <option value="0">Seleccione forma</option>
+                    <option *ngFor="let el of forma_pago['FORMA PAGO PROVEEDOR']" [value]="el.valor">{{ el.valor }}
+                    </option>
+                    <!-- <option value="NDD-V">Nota débito Venta</option> -->
+                </select>
+                <input type="text" [(ngModel)]="compbt.metodo_pago" [disabled]="true"
+                    class="form-control form-control-sm" *ngIf="compbt.metodo_pago == 'Nota de Crédito'">
+            </app-cc-input-group-prepend>
+        </div>
+
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Centro Costo" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" [disabled]="compbt.metodo_pago == 0"
+                    [(ngModel)]="compbt.fk_centro_costo">
+                    <option [value]="0">Seleccione centro costo</option>
+                    <option *ngFor="let d of arrayCentroCosto" [value]="d.id">{{d.nombre}}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha Comprob." styleSpan="size-span-campo">
+                <ejs-datepicker [(ngModel)]="compbt.fecha_emision" name="dateFrom" format='yyyy-MM-dd'
+                    class="form-control"></ejs-datepicker>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Razón Social" styleSpan="size-span-campo">
+                <input type="text" placeholder="Razón social" [(ngModel)]="compbt.nombre_cliente" id="idrsocial"
+                    [disabled]=" compbt.metodo_pago == 0" class="form-control form-control-sm">
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Ruc" styleSpan="size-span-campo">
+                <input type="text" placeholder="ingrese ruc" [(ngModel)]="compbt.ruc"
+                    [disabled]=" compbt.metodo_pago == 0 " id="idruc" min="0"
+                    (keypress)="commonServices.FormatDecimalVal($event)" class="form-control form-control-sm">
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Ciudad" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm" [(ngModel)]="compbt.ciudad">
+                    <option [value]="0">Ciudad</option>
+                    <option *ngFor="let d of city" [value]="d.valor">{{ d.valor }}</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-success"
+                        style="height: 29px;padding: 4px;width: 35px;box-shadow: unset; outline: unset;" placement="top"
+                        ngbTooltip="Agregar Ciudad"
+                        (click)="setCatalogoTitle('Ingreso de nueva Ciudad','CIUDAD','Ciudad')" class="btn btn-primary">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-4" *ngIf="compbt.metodo_pago == 'NDD-V'">
+            <app-cc-input-group-prepend label="{{compbt.num_doc_adq == 0?'No. Doc. Nota':'$'+valueNDV}}"
+                styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" *ngIf="!btnMov"
+                    [(ngModel)]="compbt.num_doc_adq" [disabled]="compbt.metodo_pago != 'NDD-V'"
+                    (ngModelChange)="getValue($event)">
+                    <option value="0">Seleccione documento</option>
+                    <option *ngFor="let d of arrayNotas" [value]="d.secuencia_doc">
+                        {{d.secuencia_doc.toString().padStart(10, '0')}}</option>
+                </select>
+                <input type="text" [disabled]="true" *ngIf="btnMov"
+                    placeholder="{{compbt.secuencial.toString().padStart(10, '0')}}">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-8" *ngIf="compbt.metodo_pago == 'NDD-V'">
+            <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo">
+                <textarea class="form-control" aria-label="With textarea"
+                    placeholder="Ingrese concepto de comprobante de ingreso" [(ngModel)]="compbt.concepto"
+                    id="idccpt"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <!-- <div class="col-sm-4" *ngIf="compbt.metodo_pago == 'Transferencia' || compbt.metodo_pago == 'Depósito'">
+            <app-cc-input-group-prepend label="Cuenta Banco" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select"
+                    [disabled]=" compbt.metodo_pago == 0 ||  compbt.metodo_pago == 'Efectivo' || compbt.metodo_pago == 'Cheque' || compbt.metodo_pago == 'NDD-V'"
+                    [(ngModel)]="compbt.typ_acc" (ngModelChange)="selectAccountBanck($event)" id="idNbkn">
+                    <option [value]="0">Seleccione Cuenta</option>
+                    <option *ngFor="let el of type_payments" [value]="el.id_banks">{{ el.name_cuenta }}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div> -->
+
+       <!--  <div class="col-sm-4" *ngIf="compbt.metodo_pago == 'Cheque'"> -->
+        <div class="col-sm-4"
+          *ngIf="compbt.metodo_pago == 'Cheque' || compbt.metodo_pago == 'Transferencia' || compbt.metodo_pago == 'Depósito'">
+            <app-cc-input-group-prepend label="Nombre Banco" styleSpan="size-span-campo">
+                <input type="text" placeholder="Nombre banco" [(ngModel)]="compbt.name_bank" id="idNameBank"                  
+                    class="form-control form-control-sm"><!-- [disabled]="compbt.metodo_pago == 0 || compbt.metodo_pago != 'Cheque'" -->
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-4"
+            *ngIf="compbt.metodo_pago == 'Cheque' || compbt.metodo_pago == 'Transferencia' || compbt.metodo_pago == 'Depósito'">
+            <app-cc-input-group-prepend label="Num. trx/cheque" styleSpan="size-span-campo">
+                <input type="text" placeholder="Transacción" [(ngModel)]="compbt.num_tx"
+                    [disabled]=" compbt.metodo_pago == 0 || compbt.metodo_pago == 'Efectivo' || compbt.metodo_pago == 'NDD-V' "
+                    id="idNumTrx" min="0" (keypress)="commonServices.FormatDecimalVal($event)"
+                    class="form-control form-control-sm">
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-4" *ngIf="compbt.metodo_pago == 'Cheque'">
+            <app-cc-input-group-prepend label="Fecha cheque" styleSpan="size-span-campo">
+                <ejs-datepicker [(ngModel)]="compbt.fecha_post" name="dateFrom" format='yyyy-MM-dd'
+                    [disabled]=" compbt.metodo_pago != 'Cheque' " class="form-control">
+                </ejs-datepicker>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-4" *ngIf="compbt.metodo_pago == 'Depósito' || compbt.metodo_pago == 'Transferencia'">
+            <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo">
+                <textarea class="form-control" aria-label="With textarea"
+                    placeholder="Ingrese concepto de comprobante de ingreso" [(ngModel)]="compbt.concepto"
+                    id="idccpt"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <!-- <div class="col-sm-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bancos</span>
+                </div>
+                <select [(ngModel)]="compbt.fk_banco" class="form-control form-control-sm custom-select"
+                    [disabled] = "compbt.metodo_pago == 'Transferencia' || compbt.metodo_pago == 'Depósito' ">
+                    <option [value]="0">Seleccione banco</option>
+                    <option *ngFor="let d of arrayBanks" [value]="d.id_banks">{{d.name_banks}}
+                        (Cta. {{d.num_cuenta}})</option>
+                </select>
+            </div>
+        </div> -->
+        <div class="col-sm-8" *ngIf="compbt.metodo_pago == 'Cheque' || 
+                                   compbt.metodo_pago == 'Efectivo' || 
+                                         compbt.metodo_pago == '0'">
+            <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo">
+                <textarea class="form-control" aria-label="With textarea"
+                    placeholder="Ingrese concepto de comprobante de ingreso" [(ngModel)]="compbt.concepto"
+                    id="idccpt"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3 mb-2">
+        <div class="col-12 filters">
+            <div class="row justify-content-center">
+                <div class="col-12 mb-3">
+                    <div class="row justify-content-center mt-1">
+                        <div class="col-6 text-left">
+                            <i class="fas fa-calculator" style="color: #404a63; font-size: 13px;"></i>
+                            &nbsp;&nbsp;Asiento
+                            contable
+                        </div>
+                        <div class="col-6 text-right ">
+                            <button class="btn btn-success btn-sm" (click)="addAccounts()" placement="top"
+                                ngbTooltip="Agregar item">
+                                <i class="fas fa-plus-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" style="max-height: 205px !important; overflow-y: scroll;">
+                    <table class="table">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 15%; text-align: center;">Acciones</th>
+                                <th style="width: 15%; ">Código</th>
+                                <th style="width: 40%; ">Cuenta</th>
+                                <th style="width: 15%; ">Debe</th>
+                                <th style="width: 15%; ">Haber</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of cuentas; let i = index">
+                                <td style="text-align: center;padding-top: 2px;">
+                                    <div class="text-center">
+                                        <button class="btn btn-primary btn-xs" (click)="showAccounts(i)" placement="top"
+                                            ngbTooltip="Seleccionar cuenta" id="btnasing">
+                                            <i class="fas fa-clipboard-check"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-xs" (click)="deleteAccount(i)" placement="top"
+                                            ngbTooltip="Eliminar cuenta">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="{{dt.codigo_cta}}" disabled class="text-left border-0">
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="{{dt.nombre_cta}}" disabled class="text-left border-0">
+                                </td>
+                                <td>
+                                    <div>
+                                        <input type="number" [(ngModel)]="dt.debe" (keyup)="sumaDH()">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <input type="number" [(ngModel)]="dt.haber" (keyup)="sumaDH()">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="text-align: right;padding-right: 10px;">Sumas</td>
+                                <td style="text-align: right;padding-right: 15px;"><span>$ {{suma.debe}}</span></td>
+                                <td style="text-align: right;padding-right: 15px;"><span>$ {{suma.haber}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-button-radio-active>
+
+<div [hidden]="true" id="print-section" *ngIf="dataSucursal != undefined">
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-7 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <img src="{{empresLogo}}" alt="" style="width: 220px;">
+                            </div>
+                            <div class="col-12 mt-3">
+                                {{dataUser.company.razon_social}} - {{dataUser.company.ruc}}
+                            </div>
+                            <div class="col-12">
+                                Dirección: {{dataSucursal.direccion}} - Teléfono:
+                                {{dataSucursal.telefono1}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-3" style="font-size: 25px;font-weight: 600">
+                                COMPROBANTE DE INGRESO
+                            </div>
+                            <div class="col-12 mt-2" style="font-size: 20px !important;">
+                                No. {{dataUser.id_empresa.toString().padStart(3,
+                                0)}}-{{dataUser.id_sucursal.toString().padStart(3, 0)}}-<span *ngIf="btnMov"
+                                    style="font-size: 20px !important;font-weight: unset !important;">{{compbt.secuencial.toString().padStart(10,
+                                    0)}}</span>
+                            </div>
+                            <div class="col-12 mt-2 mb-2" style="font-size: 20px;">
+                                VALOR ${{commonServices.formatNumber(compbt.valor)}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-4">
+            <div class="row mb-2">
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col-3 mt-1">
+                            Beneficiario:
+                        </div>
+                        <div class="col-9">
+                            <div class="simu-ipt ">
+                                <span>{{compbt.nombre_cliente}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-5 mt-1">
+                                    Ciudad:
+                                </div>
+                                <div class="col-7 pl-0">
+                                    <div class="simu-ipt text-center">
+                                        <span>{{compbt.ciudad}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-5 mt-1">
+                                    Fecha:
+                                </div>
+                                <div class="col-7 pl-0">
+                                    <div class="simu-ipt text-center">
+                                        <span>{{hoySet}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="row justify-content-center">
+                        <div class="col-3 pt-2">
+                            La suma de:
+                        </div>
+                        <div class="col-9 pl-0">
+                            <div class="simu-ipt " style="margin-left: -7px;">
+                                <span *ngIf="btnMov">{{commonVarSrvice.NumeroALetras(compbt.valor, false)}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-5 pt-2">
+                            Forma pago:
+                        </div>
+                        <div class="col-7 pl-0">
+                            <div class="simu-ipt text-center">
+                                <span>{{compbt.metodo_pago}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2 mb-2">
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-2 pt-2">
+                            Concepto:
+                        </div>
+                        <div class="col-10 pl-0">
+                            <div class="simu-ipt " style="margin-left: -7px;">
+                                <span *ngIf="btnMov">{{compbt.concepto}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="border-radius: 5px 0ox 0px 5px;">Concepto</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" placeholder="{{compbt.concepto}}"
+                            style="font-size: 15px;"></textarea>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="row mt-2 mb-2"
+                *ngIf="compbt.metodo_pago != 'Efectivo' && compbt.metodo_pago != 'Nota de Crédito' && compbt.metodo_pago != '0'">
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col-2 mt-1">
+                            No. trx:
+                        </div>
+                        <div class="col-4 pl-0">
+                            <div class="simu-ipt text-center">
+                                <span *ngIf="btnMov"><span
+                                        class="text-uppercase">{{cutInfo(compbt.metodo_pago)}}</span>-{{compbt.num_tx}}</span>
+                            </div>
+                        </div>
+                        <div class="col-2 pr-0 mt-1">
+                            Fecha trx:
+                        </div>
+                        <div class="col-4 pl-0">
+                            <div class="simu-ipt text-center">
+                                <span>{{compbt.fecha_emision}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-3 pr-0 mt-1">
+                            Banco:
+                        </div>
+                        <div class="col-9 pl-0" *ngIf="btnMov">
+                            <div class="simu-ipt text-center">
+                                <span>{{compbt.name_bank}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row">
+                <div class="col-12 text-center ">
+                    <div style="background-color: #5b9bd5 !important;color: white;" class="pl-1 pr-1">
+                        CONTABILIZACIÓN
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 15%; ">Código</th>
+                                <th style="width: 40%; ">Cuenta</th>
+                                <th style="width: 15%; ">Debe</th>
+                                <th style="width: 15%; ">Haber</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of cuentas; let i = index">
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.codigo_cta}}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <span>{{dt.nombre_cta}}</span>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>$ {{commonServices.formatNumber(dt.debe)}}</span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;">
+                                    <div class="text-right">
+                                        <span>$ {{commonServices.formatNumber(dt.haber)}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"
+                                    style="text-align: right;padding-right: 10px;background-color: #5b9bd5 !important;color: white;">
+                                    Sumas</td>
+                                <td
+                                    style="text-align: right;padding-right: 15px;background-color: #5b9bd5 !important;color: white;">
+                                    <span>$ {{commonServices.formatNumber(suma.debe)}}</span>
+                                </td>
+                                <td
+                                    style="text-align: right;padding-right: 15px;background-color: #5b9bd5 !important;color: white;">
+                                    <span>$ {{commonServices.formatNumber(suma.haber)}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 25%;text-align:center;">Elaborado por</th>
+                                <th style="width: 20%;text-align:center; ">Revisado</th>
+                                <th style="width: 25%;text-align:center; ">Aprobado</th>
+                                <th style="width: 25%;text-align:center; ">Recibí conforme</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-top: none !important; height: 100px;text-align: center;">
+                                    <div style="padding-top: 48px; ">
+                                        <hr>
+                                        <span>{{dataUser.nombre}}</span>
+                                    </div>
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                                <td style="border-top: none !important;height: 100px;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+            <span style="color: #13A1EA;">Usuario: {{dataUser.usuario}}</span>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="font-family: 'Poppins1';">
+            <div class="modal-body">
+                <app-button-radio-active [titulo]="newOrigin" filtroBoton="btnsCiudCmpIg"
+                    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                    (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-sliders">
+
+                    <div class="row" *ngIf="tipoOrigin == 'CIUDAD' ">
+                        <div class="col-sm">
+                            <app-cc-input-group-prepend label="Provincia" styleSpan="size-span-campo">
+                                <ng-select [(ngModel)]="provincesSelect" [searchable]="true"
+                                    class="form-control form-control-sm custom-select" appendTo="body"
+                                    [clearable]="false" id="IdproductSendNg">
+                                    <ng-option *ngFor="let d of provincias" [value]="d.valor">{{d.valor}}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-cc-input-group-prepend label="{{valueLabel}}" styleSpan="size-span-campo">
+                                <input type="text" class="form-control form-control-sm" id="IdValorCatalogo"
+                                    [(ngModel)]="valueCiudad" placeholder="Ingrese valor">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo">
+                                <textarea rows="2" class="form-control form-control-sm" [(ngModel)]="desCiudad"
+                                    id="Idcausa" placeholder="Ingrese Descripción"></textarea>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spComprIngreso"></cc-spiner-procesar>

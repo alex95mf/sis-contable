@@ -1,0 +1,35 @@
+.sticky-header {
+    position: sticky;
+    top: -10px;
+    z-index: 1000;
+    background-color: #FFFFFF;
+}
+
+.col-documento-th {
+    left: 0;
+    position: sticky;
+    z-index: 1;
+    background-color: #F0F3F5;
+}
+.col-nombre-th {
+    left: 162px;
+    position: sticky;
+    z-index: 1;
+    background-color: #F0F3F5;
+}
+.col-documento-td {
+    left: 0;
+    position: sticky;
+    z-index: 100;
+    background-color: #FFFFFF;
+    // opacity: 0.9; /* Ajusta la opacidad por defecto */
+    // transition: opacity 0.3s ease; /* Suaviza el cambio de opacidad */
+}
+.col-nombre-td {
+    left: 162px;
+    position: sticky;
+    z-index: 100;
+    background-color:#FFFFFF;
+    // opacity: 0.9; /* Ajusta la opacidad por defecto */
+    // transition: opacity 0.3s ease; /* Suaviza el cambio de opacidad */
+}

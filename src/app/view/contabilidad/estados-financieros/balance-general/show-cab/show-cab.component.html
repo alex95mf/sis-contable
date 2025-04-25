@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <div class="row" style="width: 100%;">
+        <div class="col-md-12">
+            <div class="title-head text-uppercase">
+                <span>Movimientos Cuenta</span> &nbsp;&nbsp;<i class="fas fa-file-alt"> {{Account}}</i>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true" style="color: rgba(0, 0, 0, 0.664);">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12" style="padding-top: 20px;padding-bottom: 20px;">
+            <div class="table-responsive responsive-table">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="width: 10%;text-align: center;">Item</th>
+                            <th style="width: 15%;">No. Documento</th>
+                            <th style="width: 25%;">Tipo Documento</th>
+                            <th style="width: 30%;">Tipo movimiento</th>
+                            <th style="width: 10%;">Fecha</th>
+                            <th style="width: 10%;">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf = "validaDt">
+                        <tr *ngFor="let dt of dataDT; let i = index" (click) = "detailSeat(dt)">
+                            <td class="text-center">{{i+1}}</td>
+                            <td *ngIf="dt.IDENTIFICADOR ==  'M' " >{{ dt.num_doc.toString().padStart(10, '0') }}</td>
+                            <td *ngIf="dt.IDENTIFICADOR ==  'E' " >{{ dt.secuencial.toString().padStart(10, '0') }}</td>
+                            <td *ngIf="dt.IDENTIFICADOR ==  'I' " >{{ dt.secuencial.toString().padStart(10, '0') }}</td>
+                            
+                            <td >{{ dt.accounting_document.nombre }}</td>
+
+                            <td *ngIf="dt.IDENTIFICADOR ==  'M' " >{{ dt.type }}</td>
+                            <td *ngIf="dt.IDENTIFICADOR ==  'E' " >{{ dt.tipo_egreso }}</td>
+                            <td *ngIf="dt.IDENTIFICADOR ==  'I' " >{{ dt.tipo_ingreso }}</td>
+
+                            <td *ngIf="dt.IDENTIFICADOR ==  'M' " >{{ dt.fecha }}</td>
+                            <td *ngIf="dt.IDENTIFICADOR ==  'E' " >{{ dt.fecha_emision }}</td>
+                            <td *ngIf="dt.IDENTIFICADOR ==  'I' " >{{ dt.fecha_emision }}</td>
+                            
+
+                            <td style="text-align: right !important;">$ {{ commonService.formatNumber(dt.valor)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar    [ltexto]="mensajeSppiner" lfulScren=true   lTipo="showMovAsientos"></cc-spiner-procesar>
+

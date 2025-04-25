@@ -1,0 +1,33 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Consulta de Programas" icono="fas fa-tasks" cstyle="bg-gradient-primary text-white">
+        <div class="row mt-4">
+            <div class="col-12 px-2">
+                <table datatable [dtOptions]="dtOptions" class="table no-footer table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Presupuesto</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let programa of programas">
+                            <td>{{ programa.id }}</td>
+                            <td>{{ programa.nombre }}</td>
+                            <td>{{ programa.presupuesto }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary m-1" (click)="showPrograma(programa)" ngbTooltip="Mostrar Detalles">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger m-1" (click)="deletePrograma(programa)" ngbTooltip="Eliminar">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>

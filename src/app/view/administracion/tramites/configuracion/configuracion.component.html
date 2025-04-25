@@ -1,0 +1,335 @@
+
+  <!-- filtroBoton="btnsRenLiqGenValor" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" -->
+
+  <app-button-radio-active-new titulo="Tarea" cstyle="bg-gradient-primary text-white"
+  icono="fas fa-tasks" filtroBoton="btnsTramite" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+
+
+   
+
+
+        <!-- ngbTooltip="Agregar Nueva Tarea" -->
+
+        <div class="row m-0">
+
+      
+            <div class="col-12 col-md-6 pt-0 pb-0">
+              <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Agregar Tarea</legend>
+
+                <div class="col-12 col-md-12 pt-0 pb-0">
+                  <app-cc-input-group-prepend label="Tipo de trámite" styleSpan="size-span-campo font-weight-bold">
+    
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                      [(ngModel)]="tarea.tipo" >
+                      <ng-option  [value]= "0" disabled>Escoja el tipo de trámite</ng-option>
+                      <ng-option  [value]="'I'">Interno</ng-option>
+                      <ng-option  [value]="'E'">Externo</ng-option>
+                    </ng-select>
+        
+                  </app-cc-input-group-prepend>
+                  <app-cc-input-group-prepend label="Tareas" styleSpan="size-span-campo font-weight-bold">
+        
+                    <input class="form-control" type="text" placeholder="Ingrese la tarea" maxlength="200" [(ngModel)]="tarea.nombre"/>
+        
+                  </app-cc-input-group-prepend>
+        
+                  <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+        
+                    <textarea class="form-control" [(ngModel)]="tarea.descripcion" maxlength="500" placeholder="Escriba... "> </textarea>
+        
+                  </app-cc-input-group-prepend>
+        
+                  <app-cc-input-group-prepend label="Prioridad" styleSpan="size-span-campo font-weight-bold">
+        
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                      [(ngModel)]="tarea.prioridad" >
+                      <ng-option  [value]= "0" disabled>Escoja la prioridad</ng-option>
+                      <ng-option  [value]="'A'">Alta</ng-option>
+                      <ng-option  [value]="'M'">Media</ng-option>
+                      <ng-option  [value]="'B'">Baja</ng-option>
+                    </ng-select>
+        
+                  </app-cc-input-group-prepend>
+                  <app-cc-input-group-prepend label="Días Totales" styleSpan="size-span-campo font-weight-bold">
+        
+                    <input class="form-control" type="number" placeholder="Ingrese los días totales"  [(ngModel)]="tarea.dias_totales"/>
+        
+                  </app-cc-input-group-prepend>
+                  <app-cc-input-group-prepend label="Puede retornar" styleSpan="size-span-campo font-weight-bold">
+        
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                      [(ngModel)]="tarea.puede_retornar" >
+                      <ng-option  [value]= "0" disabled>Escoja si puede retornar al paso anterior</ng-option>
+                      <ng-option  [value]="'S'">SÍ</ng-option>
+                      <ng-option  [value]="'N'">NO</ng-option>
+                    </ng-select>
+        
+                  </app-cc-input-group-prepend>
+
+                </div>
+
+              </fieldset>
+
+    
+            </div>
+       
+          
+    
+
+
+          <div class="col-12 col-md-6 pt-0 pb-0">        
+              
+
+            <fieldset class="border card-fieldset">
+              <legend class="w-auto card-legend">Roles</legend>
+              <div class="d-flex justify-content-between">
+
+                <div class="col-12 col-md-12 pt-0 pb-0">  
+                  <app-cc-input-group-prepend label="Roles:" styleSpan="size-span-campo font-weight-bold">
+                
+                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="selectRol" (change)="rolSelected($event)">
+                      <!-- <ng-option [value]="0">Selecciones el usuario</ng-option> -->
+                      <ng-option *ngFor="let rol of roles" [value]="rol">{{rol.nombre_rol}}</ng-option>
+                    </ng-select> 
+                  
+                  </app-cc-input-group-prepend>
+                  <button class="btn btn-success btn-sm " [disabled]="disabled" ngbTooltip="Agregar Roles" (click)="modalAgregarRoles()"><i
+                    class="fas fa-plus"></i></button>
+                </div>
+                
+
+              </div>
+
+
+              
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                  <thead class="sticky-header">
+                      <tr class="text-center">
+                      <th>Rol</th>
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="!rolesTramite.length">
+                      <td colspan="8" class="text-center">
+                        <h6>No hay roles colocados</h6>
+                      </td>
+                    </tr>
+                    <tr *ngFor="let rol of rolesTramite; let i = index" style="cursor: pointer;">
+                      <td> {{ rol.nombre_rol }} </td>
+                      <td class="text-center"> 
+                        <div>
+                          <button class="btn btn-danger btn-sm" (click)="eliminarRol(rol, i)"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                      </td>
+  
+                    </tr>
+                  </tbody>
+                </table>
+  
+              </div>
+  
+            </fieldset>
+            
+              
+    
+            
+  
+          </div>
+      
+
+        </div>
+       
+   
+
+    
+      
+   
+    
+    <!-- <div class="row">
+      <div class="col-6">
+        <ng-multiselect-dropdown
+          [placeholder]="'custom placeholder'"
+          [settings]="dropdownSettings"
+          [data]="dropdownList"
+          [(ngModel)]="selectedItems"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+     </div>  -->
+    
+     
+
+     <fieldset class="border card-fieldset">
+      <legend class="w-auto card-legend">Pasos</legend>
+
+      <div class="text-right mt-2 mb-0 mr-2">
+        
+        <button class="btn btn-success btn-sm " [disabled]="disabledPasos" ngbTooltip="Agregar Pasos" (click)="agregarPasos()"><i
+            class="fas fa-plus"></i></button>
+        
+      </div>
+      <div style="overflow-x:auto;max-height: 500px; overflow-y: auto;">
+        <table class="table table-striped table-bordered table-k table-hover" style="min-width: 2000px;max-height: 300px;" id="tablaLocales">
+          <thead class="sticky-header">
+            <tr class="text-center">
+              <th class="col-paso-th">Pasos</th>
+              <th class="col-descripcion-th">Descripción</th>
+              <th >Días</th>
+              <th >Tiene pregunta</th>
+              <th >Pregunta</th>
+              <th >Si</th>
+              <th >No</th>
+              <th >Siguiente paso</th>
+              <th >Siguiente paso 2</th>
+              <th >Siguiente paso 3</th>
+              <th >Rol</th>
+              <!-- <th style="width: 15%;">Grupo</th> -->
+              <!-- <th style="width: 5%;">Estado</th> -->
+              <th >Termina Flujo</th>
+              <th >Es Hito</th>
+              <th>Acción</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="!listaPasos.length">
+              <td colspan="13" class="text-center">
+                <h6>No hay pasos colocados</h6>
+              </td>
+            </tr>
+            <tr *ngFor="let pasos of listaPasos; let i = index" style="cursor: pointer;height:80px;">
+              <td style="width: 100px;" class="col-paso-td"> P{{ pasos.nro_paso }} </td>
+              <td style="width: 450px;" class="col-descripcion-td">
+                <!-- <input class="form-control" [(ngModel)]="pasos.descripcion" maxlength="100"/>  -->
+                <textarea  class="form-control form-control-sm" type="text" 
+                [(ngModel)]="pasos.descripcion" id="idtxta"
+                placeholder="Ingrese una descripción" rows="3" maxlength="100"></textarea>
+        
+              </td>
+              <td style="width: 100px;">
+                <input class="form-control" [(ngModel)]="pasos.dias" maxlength="100" (change)="sumaDias($event)"/> 
+              </td>
+              <td style="width: 100px;">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="pasos.tiene_pregunta"  (ngModelChange)="limpiarCampos(pasos)">
+                  <!-- <ng-option *ngFor="let doc of pregunta" [value]="doc">{{doc}}</ng-option> -->
+                  <ng-option [value]="'S'">SI</ng-option >
+                  <ng-option [value]="'N'">NO</ng-option>
+                </ng-select>
+                
+
+              </td>
+              <td style="width: 300px;">
+                <input class="form-control" [(ngModel)]="pasos.pregunta_texto" maxlength="400" [disabled]=" pasos.tiene_pregunta == 'N' ? true : false "/> 
+              </td>
+              <td style="width: 100px;">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="pasos.nro_paso_si" [disabled]=" pasos.tiene_pregunta == 'N'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.nro_paso_si, pasos, 'S', $event)"-->
+                  <ng-option *ngFor="let doc of listaPasos; let i = index" [value]="doc.nro_paso">P{{doc.nro_paso}}</ng-option>
+                </ng-select>
+
+              </td>
+              <td style="width: 100px;"> 
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="pasos.nro_paso_no" [disabled]=" pasos.tiene_pregunta == 'N'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.nro_paso_no, pasos, 'N')"-->
+                  <ng-option *ngFor="let doc of listaPasos; let i = index" [value]="doc.nro_paso">P{{doc.nro_paso}}</ng-option>
+                </ng-select> 
+              </td>
+              <td style="width: 100px;"> 
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="pasos.siguiente_paso" [disabled]=" pasos.tiene_pregunta == 'S'  ? true : false " ><!-- (ngModelChange)="eliminarlPaso($event,pasos.nro_paso,'SP', i)" (ngModelChange)="eliminarlPaso($event,pasos.nro_paso,'S',index)" (ngModelChange)="eliminarlPaso(pasos.siguiente_paso, pasos, 'SP')"-->
+                  <ng-option *ngFor="let doc of listaPasos; let i = index" [value]="doc.nro_paso" >P{{doc.nro_paso}}</ng-option>
+                  <ng-option [value]="0">Termina</ng-option>
+                </ng-select>
+              </td>
+              <td style="width: 100px;"> 
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="pasos.siguiente_paso_dos" [disabled]=" pasos.tiene_pregunta == 'S'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.siguiente_paso_dos, pasos, 'SP')"-->
+                  <ng-option *ngFor="let docD of listaPasos; let i = index" [value]="docD.nro_paso" >P{{docD.nro_paso}}</ng-option>
+                  <ng-option [value]="0">Termina</ng-option>
+                </ng-select>
+              </td>
+              <td style="width: 100px;"> 
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="pasos.siguiente_paso_tres" [disabled]=" pasos.tiene_pregunta == 'S'  ? true : false " ><!--(ngModelChange)="eliminarlPaso(pasos.siguiente_paso_tres, pasos, 'SP')"-->
+                  <ng-option *ngFor="let docT of listaPasos; let i = index" [value]="docT.nro_paso" >P{{docT.nro_paso}}</ng-option>
+                  <ng-option [value]="0">Termina</ng-option>
+                </ng-select>
+              </td>
+              <td style="width: 150px;">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="pasos.fk_rol" >
+                  <ng-option *ngFor="let rol of rolesTramite" [value]="rol.id_rol">{{rol.nombre_rol}}</ng-option>
+                </ng-select>
+              </td>
+              <!-- <td>
+                <ng-select class="form-control custom" 
+                          [items]="usuarios"
+                          bindLabel="nombre"
+                          bindValue="id_usuario"
+                          [multiple]="true"
+                          groupBy="selectedAllGroup"
+                          [selectableGroup]="true"
+                          placeholder="Seleccione usuarios"
+                          (change)="onMaterialGroupChange($event)"
+                          [(ngModel)]="pasos.grupo_usuarios">
+                    <ng-template 
+                            ng-optgroup-tmp let-item="item" 
+                            let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox"
+                            [ngModel] ="item$.selected"/> Select All
+                    </ng-template>
+                </ng-select>
+              </td> -->
+              <!-- <td>
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="pasos.estado_flujo" >
+                  <ng-option [value]="'P'">P</ng-option>
+                  <ng-option [value]="'C'">C</ng-option>
+                </ng-select>
+
+              </td> -->
+
+              <td style="width: 150px;">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="pasos.termina_flujo" >
+                  <ng-option [value]="'S'">Si</ng-option>
+                  <ng-option [value]="'N'">No</ng-option>
+                </ng-select>
+
+              </td>
+              <td style="width: 100px;">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true"
+                  [(ngModel)]="pasos.hito" >
+                  <ng-option [value]="'S'">Si</ng-option>
+                  <ng-option [value]="'N'">No</ng-option>
+                </ng-select>
+
+              </td>
+              <td>
+                <div>
+                  <button class="btn btn-danger btn-sm" (click)="eliminarPaso(pasos, i)" [disabled]="pasos.id_flujo_pasos != 0"><i class="fas fa-trash-alt"></i></button>
+                </div>
+
+              </td>
+
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+
+    </fieldset>
+
+  </app-button-radio-active-new>
+
+
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

@@ -1,0 +1,226 @@
+<div class="my-2">
+
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-print"
+        filtroBoton="btnAsignacionIngresos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+       
+        <div class="row my-2">
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="periodo" [readonly]="yearDisabled"
+                        [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo"></ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo">Archivos</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".xlsx" (change)="onFileChange($event)" [disabled]="fileValid">
+                        <label class="custom-file-label" for="inputGroupFile01">{{ file ? file.name : "Seleccione un archivo" }}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 text-center">
+                <div class="input-group input-group-sm">                    
+                    <button [disabled]="btnDisabled" class="btn btn-sm btn-primary" (click)="agregaPeriodo()"><i class="fas fa-upload"></i> Cargar Presupuesto</button>
+                </div>
+            </div> 
+            <div class="col-sm-2 ">
+                <div class="input-group input-group-sm">                    
+                    <button class="btn btn-sm btn-success" (click)="descargarPlantilla()"><i class="fas fa-download"></i> Descargar Plantilla</button>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="row">
+            <!-- <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [ngModel]="programaSelected?.id_catalogo" (change)="handleSelectPrograma($event)" [clearable]="false"
+                        [items]="cmb_programas" bindValue="id_catalogo" bindLabel="label"></ng-select>
+                </app-cc-input-group-prepend>
+            </div> -->
+            <div class="col-sm-3">
+                <div class="input-group input-group-sm mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo">Tipo reforma</span>
+                    </div>
+                    <div class="custom-file">
+                        <ng-select class="form-control" [(ngModel)]="tipoReforma" [clearable]="false">
+                            <ng-option [value]="0" disabled>Seleccione un tipo</ng-option>
+                            <ng-option *ngFor="let m of catalog" [value]="m.descripcion">{{ m.descripcion }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="input-group input-group-sm">                 
+                    <div class="input-group-prepend ml-2"><span class="input-group-text size-span-campo" >No Reforma</span></div>
+                    <input type="text" minlength="4" maxlength="30" class="form-control" placeholder="No Reforma" [(ngModel)]="no_reforma" readonly (keypress)="onlyNumber($event)">
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="input-group input-group-sm">                 
+                    <div class="input-group-prepend ml-2"><span class="input-group-text size-span-campo" >Fecha</span></div>
+                    <input type="date" class="form-control" [(ngModel)]="fecha_ingreso" >
+                </div>
+                
+            </div>
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo size-span-campo">
+                    <ng-select id="estado" class="form-control" [(ngModel)]="estado" maxlength="1" [disabled]="true">
+                        <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                        <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+        <div class="row mt-2 mb-3">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-footer table-hover mb-0" style="width: 1600px;" >
+                        <thead class="thead-dark">
+                            <tr class="text-center">
+                                <!-- <th class="col-num fixed-header" style="width: 75px;">No.</th> -->
+                                <th class="col-partida fixed-header" style="width: 70px;">{{headersEnable?titles[0]:'Partida'}}</th>
+                                <th class="col-concepto fixed-header" style="width: 175px;">{{headersEnable?titles[1]:'CONCEPTO'}}</th>
+                                <th class="col-concepto fixed-header" style="width: 175px;">{{headersEnable?titles[2]:'PROGRAMA'}}</th>
+                                <!-- <th class="col-rec fixed-header" style="width: 150px;">Recaudación</th> -->
+                                <th style="width: 150px;">{{headersEnable?titles[3]:'ANUAL'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[4]:'SC_INGRESOS'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[5]:'SC_EGRESOS'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[6]:'RC_INGRESOS'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[7]:'RC_EGRESOS'}}</th>
+                                <th style="width: 155px;">{{headersEnable?titles[8]:'TC_INCREMENTO'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[9]:'TC_REDUCCION'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[10]:'FINAL'}}</th>
+                                <!-- <th style="width: 150px;">Acciones</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td *ngIf="dataExcel.length==0" colspan="11" class="text-center" >
+                                    No se encontró data
+                                </td>
+                            </tr>
+                            <tr *ngFor="let d of dataExcel, let i = index">
+                                <!-- <td class="text-center col-num fixed-header">
+                                    {{ i + 1 }}
+                                </td> -->
+                                <td class="col-partida fixed-header">
+                                    {{ d.partida }}
+                                </td>
+                                <td class="col-concepto fixed-header">
+                                    {{ d.concepto }}
+                                </td>
+                                <td class="col-concepto fixed-header">
+                                    {{ d.programa }}
+                                </td>
+                                <td class="text-right">
+                                   $ {{ d.anual | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.sp_ingresos | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.sp_egresos | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.rc_ingresos | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.rc_egresos | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.tc_incremento | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.tc_reduccion | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.final | number: '1.2-2' }}
+                                </td>
+                                
+                                <!-- <td class="text-center">
+                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                </td> -->
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-left font-weight-bold col-num fixed-header" style="font-size:14px;">
+                                    TOTAL
+                                </td>
+                                <td class="col-rec fixed-header">
+                                    <div class="row">                                    
+                                         <div class="col text-right font-weight-bold" style="font-size:14px;">
+                                            $ {{ totalSCingresos | number: '1.2-2'}}
+                                         </div>
+                                    </div>                                
+                                   
+                                 </td>
+                                 <td class="col-rec fixed-header">
+                                    <div class="row">                                    
+                                         <div class="col text-right font-weight-bold" style="font-size:14px;">
+                                            $ {{ totalSCegresos | number: '1.2-2'}}
+                                         </div>
+                                    </div>                                
+                                   
+                                 </td>
+                                 <td class="col-rec fixed-header">
+                                    <div class="row">                                    
+                                         <div class="col text-right font-weight-bold" style="font-size:14px;">
+                                            $ {{ totalRCingresos | number: '1.2-2'}}
+                                         </div>
+                                    </div>                                
+                                   
+                                 </td>
+                                 <td class="col-rec fixed-header">
+                                    <div class="row">                                    
+                                         <div class="col text-right font-weight-bold" style="font-size:14px;">
+                                            $ {{ totalRCegresos  | number: '1.2-2'}}
+                                         </div>
+                                    </div>                                
+                                   
+                                 </td>
+                                 <td class="col-rec fixed-header">
+                                    <div class="row">                                    
+                                         <div class="col text-right font-weight-bold" style="font-size:14px;">
+                                            $ {{ totalTCincremento | number: '1.2-2'}}
+                                         </div>
+                                    </div>                                
+                                   
+                                 </td>
+                                 <td class="col-rec fixed-header">
+                                    <div class="row">                                    
+                                         <div class="col text-right font-weight-bold" style="font-size:14px;">
+                                            $ {{ totalTCreduccion  | number: '1.2-2'}}
+                                         </div>
+                                    </div>                                
+                                   
+                                 </td>
+                                 <td class="col-rec fixed-header">
+                                    <div class="row">                                    
+                                         <div class="col text-right font-weight-bold" style="font-size:14px;">
+                                            $ {{ totalFinal  | number: '1.2-2'}}
+                                         </div>
+                                    </div>                                
+                                   
+                                 </td>
+
+                                 
+                            </tr>
+                        </tbody>
+    
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSpiner" lfulScren=true lTipo="spAsignacion"></cc-spiner-procesar>

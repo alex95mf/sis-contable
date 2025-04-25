@@ -1,0 +1,32 @@
+
+<app-button-radio-active titulo="Asiento diario" filtroBoton="btnShowDI" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-search"> 
+
+    <div class="filters">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="width: 15%; ">Código</th>
+                    <th style="width: 40%; ">Cuenta</th>
+                    <th style="width: 15%; " class="text-right">Debe</th>
+                    <th style="width: 15%; " class="text-right">Haber</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="validaDt">
+                <tr *ngFor="let dt of dataDT">
+                    <td>{{ dt.cuenta }}</td>
+                    <td>{{ dt.cont_accounts.nombre }}</td>
+                    <td style="text-align: right;">$ {{ commonService.formatNumber(dt.valor_deb) }}</td>
+                    <td style="text-align: right;">$ {{ commonService.formatNumber(dt.valor_cre) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right;padding-right: 15px;font-weight: 600;">Sumas</td>
+                    <td style="font-weight: 600;text-align: right;">$ {{commonService.formatNumber(total_debito)}}
+                    </td>
+                    <td style="font-weight: 600;text-align: right;">$ {{commonService.formatNumber(total_credito)}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</app-button-radio-active>

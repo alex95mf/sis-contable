@@ -1,0 +1,27 @@
+thead th {
+    top: 0;
+    position: sticky;
+    // background-color: #666;
+    // color: #fff; 
+}
+
+.col-partida {
+    left: 0px;
+    position: sticky;
+}
+
+.col-denominacion {
+    left: 68px;
+    position: sticky;
+}
+
+.fixed-header {
+    z-index: 99990 !important;
+}
+// d0d5d9
+th, td {
+    // padding: 0;
+    outline: 1px solid #d0d5d9;
+    outline-offset: -1px;
+    background-color: #f3f5f6;
+}

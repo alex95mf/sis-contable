@@ -1,0 +1,48 @@
+<app-button-radio-active-new [titulo]="isNew ? 'Nuevo Parámetro' : 'Editar Parámetro'" filtroBoton="btnConceptoForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+    <div class="row m-0">
+        <div class="col-12">
+            <fieldset class="border card-fieldset">
+                <legend class="w-auto card-legend">Datos Parámetros</legend>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="C&oacute;digo Parámetro" styleSpan="size-span-campo " style="width: 250px;">
+                            <input type="text" class="form-control" [(ngModel)]="parametro.codigo" maxlength="18">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo ">
+                            <ng-select id="tipo" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="parametro.tipo">
+                                <ng-option disabled [value]="0">Seleccione un Tipo</ng-option>
+                                <ng-option *ngFor="let t of tipos" [value]="t.valor">{{ t.label}}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Nombre Parámetro" styleSpan="size-span-campo " style="width: 220px;">
+                            <input type="text" class="form-control" [(ngModel)]="parametro.nombre" maxlength="120">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="(%)Porcentaje" styleSpan="size-span-campo ">
+                            <input currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }" class="form-control form-control-sm" 
+                            [(ngModel)]="parametro.valor" >
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo ">
+                            <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="parametro.estado">
+                                <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                                <ng-option *ngFor="let e of estados" [value]="e.codigo">{{ e.label}}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+   
+</app-button-radio-active-new>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

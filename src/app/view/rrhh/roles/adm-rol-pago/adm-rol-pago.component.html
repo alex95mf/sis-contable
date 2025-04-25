@@ -1,0 +1,210 @@
+
+
+<br>
+<app-button-radio-active titulo="Rol de Pago" filtroBoton="btnsAdmRol" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-handshake-o"> 
+
+    <!-- class="contenedor-scrol-tab" -->
+    <div >
+
+        <div class="row">
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Periodo Inicio"styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="periodoInicio" name="dateFrom" format='yyyy-MM-dd' class="form-control" id="idNominaDatei" name="dateFrom">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+    
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Periodo Fin"styleSpan="size-span-campo">
+                    <ejs-datepicker [(ngModel)]="periodoFin" name="dateFrom" format='yyyy-MM-dd' class="form-control" id="idNominaDatef" name="dateFrom">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-sm-6" *ngIf="!vmButtons[0].habilitar">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Concepto</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="idConcepto" placeholder="Escriba un Concepto" matTooltip="Escriba un concepto del Rol de Pago" style="height: 32px;" [(ngModel)]="lConcepto">
+                </div>
+            </div>
+    
+            <div class="col-sm-6" *ngIf="!vmButtons[0].habilitar">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Banco</span>
+                    </div>
+                    <select [(ngModel)]="bankSelect" class="form-control form-control-sm custom-select">
+                        <option [value]="0">-- Seleccionar un banco --</option>
+                        <option *ngFor="let d of arrayBanks" [value]="d.id_banks">{{d.name_cuenta +  ' ( ' + validaciones.roundNumber(d.saldo_cuenta,2) + ' )'}}</option>
+                    </select>
+                </div>
+            </div>        
+        </div>
+    
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Departamento</span>
+                    </div>
+                    <select [(ngModel)]="grupoSeleccionado" name="grupo" class="form-control form-control-sm custom-select estilo-combos" (change)="getPersonal();obtenerRolDetalle()" id="Idgrupo">
+                        <option *ngFor="let d of lstInicial[1]" [value]="d.id_grupo">{{d.nombre_grupo}}</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Empleado</span>
+                    </div>
+                    <select [(ngModel)]="selectPersonal" class="form-control form-control-sm custom-select" (change)="obtenerRolDetalle()">
+                        <option *ngFor="let d of arrayPersonal" [value]="d.id_personal"> {{d.nombres + ' ' + d.apellidos}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha Pago</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" disabled value="{{fecha_actual | date: 'dd/MM/yyyy'}}">
+                </div>
+            </div>
+        </div>
+    
+        <div calss="row" *ngIf="lstTablaEmpleados.length> 0">
+            <div class="col-sm-6 mt-1">
+                <div class="alert {{vmButtons[0].habilitar==true?'color-datos-empleados':'colorInconsistencias'}} quitar-espacio text-center">
+                    <i class="fa fa-warning"></i> <strong>El periodo de este Rol {{vmButtons[0].habilitar==true?'ya se encuentra registrado':'no se encuentra registrado'}}</strong>
+                </div>
+            </div>
+        </div>
+
+        <div calss="row" *ngIf="lstTablaEmpleados.length == 0">
+            <div class="col-sm-6 mt-1">
+                <div class="alert colorInconsistencias quitar-espacio text-center">
+                    <i class="fa fa-warning"></i> <strong>NO EXISTE EMPLEADOS A PRESENTAR </strong>
+                </div>
+            </div>
+        </div>         
+    
+        <fieldset class="border p-2 mb-2 mt-3" *ngIf="lstTablaEmpleados.length> 0">
+            <legend class="w-auto h6">Listado</legend>
+            
+            <table id="ejemplo" style="font-size: 10px;" class="table table-responsive table-bordered table-hover table-striped table-scrollable">
+                <thead>
+                    <tr>
+                        <td [attr.colspan]="listadoGeneral[0].datos_empleado.length" align="center" class="color-datos-empleados">
+                            <strong>DATOS DEL EMPLEADO</strong>
+                        </td>
+    
+                        <td *ngIf="lstRubroIngreso.length> 0" [attr.colspan]="(lstRubroIngreso.length+1)" align="center" class="color-datos-ingresos">
+                            <strong>INGRESOS $</strong>
+                        </td>
+    
+                        <td *ngIf="lstRubroEgreso.length> 0" [attr.colspan]="(lstRubroEgreso.length+1)" align="center" class="color-datos-egresos">
+                            <strong>EGRESOS $</strong>
+                        </td>
+                        <td *ngIf="lstRubroIngreso.length> 0" class="color-datos-total-recibir" [attr.colspan]="this.listadoGeneral[3].valor_total_recibir.length" rowspan="2" style="vertical-align: middle;" align="center">
+                            <strong>VALOR NETO A RECIBIR $</strong>
+                        </td>
+                    </tr>
+                    <tr style="vertical-align: middle;" align="center">
+                        <ng-container *ngFor="let group of listadoGeneral[0].datos_empleado">
+                            <th width="{{group.sise}}" class="color-datos-empleados2">
+                                {{group.nombre}}
+                            </th>
+                        </ng-container>
+                        <ng-container *ngFor="let group of lstRubroIngreso ; let index=index">
+                            <th width="8%" class="color-datos-ingresos2">
+                                {{group.nombre}}
+                            </th>
+                        </ng-container>
+                        <th width="8%" class="color-datos-ingresos2">TOTAL INGRESOS</th>
+                        <ng-container *ngFor="let group of lstRubroEgreso">
+                            <th width="8%" class="color-datos-egresos2">
+                                {{group.nombre}}
+                            </th>
+                        </ng-container>
+                        <th width="8%" class="color-datos-egresos2">TOTAL EGRESOS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of lstTablaEmpleados; let index=index">
+                        <td style="vertical-align: middle;" align="center">{{(index+1)}}
+                            <i *ngIf="item.estadoRol == 'P' || item.estadoRol == 'A'" class="{{item.estadoRol == 'P'?'fa fa-warning':'fa fa-check'}}" 
+                            [style.color]="item.estadoRol == 'A'?'#33b752':'#b74033'"
+                            [matTooltip]="item.estadoRol == 'P'?'NO ESTA APROBADO':'ESTA APROBADO'"></i>
+                        </td>
+                        <td style="vertical-align: middle;" align="left">{{item.nombres}}</td>
+                        <td style="vertical-align: middle;" align="left">{{validaciones.verSiEsNull(item.nombre_grupo) == undefined?item.departamento:item.nombre_grupo}}</td>
+                        <td style="vertical-align: middle;" align="center">{{item.Seguro==0?'NO':'SI'}}</td>
+                        <td style="vertical-align: middle;" align="center" *ngIf="vmButtons[0].habilitar">{{item.concepto}}</td>
+                        <td style="vertical-align: middle;" align="center" *ngIf="vmButtons[0].habilitar">{{item.nombre_cuenta_back}}</td>
+                        <ng-container *ngFor="let group of item.datoRubro">
+                            <td style="vertical-align: middle;" align="right" *ngIf="group.tipo_calculo == 'S'" class="{{group.nombre == 'TOTAL INGRESOS'?'color-datos-ingresos2 negrita-label':''}}">
+                                {{ validaciones.roundNumber(group.valor_cantidad, 2) }}
+                            </td>
+                            <td style="vertical-align: middle;" align="right" *ngIf="group.tipo_calculo == 'N'">
+                                <input type="text" class="font-size-input-dialog text-right" aria-label="Small" [(ngModel)]="group.valor_cantidad" maxlength="4" 
+                                (blur)="group.valor_cantidad=validaciones.roundNumber(group.valor_cantidad,2);validaciones.numberOnly($event)" 
+                                (keyup)="calcularIngresos();calcularValorNetoRecibir();calcularTotalesIngresos()">
+                            </td>
+                        </ng-container>
+                        <ng-container *ngFor="let group of item.datoRubroEgr">
+                            <td style="vertical-align: middle;" align="right" *ngIf="group.tipo_calculo == 'S'" class="{{group.nombre == 'TOTAL EGRESOS'?'color-datos-egresos2 negrita-label':''}}">
+                                {{ validaciones.roundNumber(group.valor_cantidad, 2) }}
+                            </td>
+                            <td style="vertical-align: middle;" align="right" *ngIf="group.tipo_calculo == 'N'">
+                                <input type="text" class="font-size-input-dialog text-right" aria-label="Small" [(ngModel)]="group.valor_cantidad" maxlength="4"
+                                    (blur)="group.valor_cantidad=validaciones.roundNumber(group.valor_cantidad,2);validaciones.numberOnly($event)"
+                                    (keyup)="calcularEgresos();calcularValorNetoRecibir();calcularTotalesEgresos()">
+                            </td>
+                        </ng-container>
+                        <td width="8%" style="vertical-align: middle;" align="right" class="color-datos-total negrita-label">
+                            {{validaciones.roundNumber(item.valorNetoRecibir,2)}}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="vertical-align: middle;" align="right">
+                        <th *ngIf="vmButtons[0].habilitar"></th>
+                        <th *ngIf="vmButtons[0].habilitar"></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>TOTAL $</th>
+                        <ng-container *ngFor="let item of lstTotalIngresos">
+                            <th class="{{item.id_parametro == 0?'color-datos-ingresos2':''}}">
+                                {{validaciones.roundNumber(item.totalValor)}}
+                            </th>
+                        </ng-container>
+                        <ng-container *ngFor="let item of lstTotalEgresos">
+                            <th class="{{item.id_parametro == 0?'color-datos-egresos2':''}}">
+                                {{validaciones.roundNumber(item.totalValor)}}
+                            </th>
+                        </ng-container>
+                        <th class="color-datos-total">
+                            {{validaciones.roundNumber(resultadoReciTotal,2)}}
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>        
+        </fieldset>
+        
+    </div>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAdmRolPago"></cc-spiner-procesar>
+<div [hidden]="true" id="print-section" *ngIf="dataUser != undefined">
+    <app-imprimir-rol></app-imprimir-rol>
+</div>

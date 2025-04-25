@@ -1,0 +1,140 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="CONSULTA DE GASTOS" filtroBoton="btnsrepGastos" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-search">
+        <div class="row justify-content-center">
+            <div class="col-12 container-filter ">
+                <div class="row  justify-content-center">
+                    <div class="col-12">
+                        <div class="row mt-2">
+                            <div class="col-sm-6">
+                                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+                                    <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control form-control-sm" type="text" format="yyyy-MM-dd" id="" (ngModelChange)="rerender()"></ejs-datepicker>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-6">
+                                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+                                    <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control form-control-sm" type="text" format="yyyy-MM-dd" id="" (ngModelChange)="rerender()"></ejs-datepicker>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <!--  <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Gasto No." styleSpan="size-span-campo">
+                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" style="padding-left: 7px;font-size: 13px;" [(ngModel)]="pedidonum" (ngModelChange)="filterPedido($event)" [clearable]="false">
+                                        <ng-option [value]="0">Seleccione número de Gasto</ng-option>
+                                        <ng-option *ngFor="let d of arrayPedido" [value]="d.num_doc_compra">
+                                            {{d.num_doc_compra}}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div> -->
+                            <div class="col-sm-3">
+                                <app-cc-input-group-prepend label="Tipo Documento" styleSpan="size-span-campo">
+                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" style="padding-left: 7px;font-size: 13px;" [(ngModel)]="documento" (ngModelChange)="filterDocumento($event)" [clearable]="false">
+                                        <ng-option [value]="0">Seleccione Tipo Documento</ng-option>
+                                        <ng-option *ngFor="let d of arrayDocumento" [value]="d.id">
+                                            {{d.nombre}}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-3">
+                                <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo">
+                                    <ng-select class="form-control custom" appendTo="body" [searchable]="true" style="padding-left: 7px;font-size: 13px;" [disabled]="disNumero" [(ngModel)]="numero" (ngModelChange)="filterNumero($event)" [clearable]="false">
+                                        <ng-option [value]="0">Seleccione Número Documento</ng-option>
+                                        <ng-option *ngFor="let d of arraynumDoc" [value]="d.num_doc_gasto">
+                                            {{d.num_doc_gasto}}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-4">
+                                <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo">
+                                    <ng-select id="IdRolesUsersDoc" class="form-control custom" appendTo="body" [searchable]="true" style="padding-left: 7px;font-size: 13px;" [(ngModel)]="proveedor" [clearable]="false" (ngModelChange)="setProveedor($event)">
+                                        <ng-option [value]="0">Seleccione Proveedor</ng-option>
+                                        <ng-option *ngFor="let d of arrayProveedor" [value]="d.id_proveedor">
+                                            {{d.razon_social}}</ng-option>
+                                    </ng-select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-2">
+                                <app-cc-input-group-prepend>
+                                    <input type="text" placeholder="Ruc Proveedor" [(ngModel)]="ruc" id="idruc" [disabled]="true" class="form-control form-control-sm">
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-sm-3">
+                                <app-cc-input-group-prepend label="Aplica A" styleSpan="size-span-campo">
+                                    <select class="form-control form-control-sm custom-select" [(ngModel)]="aplica" id="idAplica" (ngModelChange)="filteraplica($event)">
+                                    <option [value]="0">Selecione Aplica</option>
+                                    <option value="Pedido">Pedido</option>
+                                    <option value="Liquidacion">Liquidación</option>
+                                </select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-3">
+                                <app-cc-input-group-prepend label="Tipo Gasto" styleSpan="size-span-campo">
+                                    <select class="form-control form-control-sm custom-select" [(ngModel)]="grupo" (ngModelChange)="filterTipoGasto($event)">
+                                <option [value]="0">Seleccione tipo gasto</option>
+                                <option *ngFor="let d of arrayRubros" [value]="d.id">{{d.nombre}}</option>
+                            </select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-sm-3">
+                                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                                    <select class="form-control form-control-sm custom-select" [(ngModel)]="estado" id="idestado" (ngModelChange)="filterEstado($event)">
+                                        <option [value]="0">Selecione Estado</option>
+                                        <option *ngFor="let d of arrayEstado" >{{d.estado}}</option>
+                                    </select>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3 mb-3">
+            <div class="col-md-12">
+                <fieldset class="border p-2 filters">
+                    <legend class="w-auto h6">Listado de Gastos</legend>
+                    <div class="row justify-content-center">
+                        <div class="col-12 pl-3 pr-3 ">
+                            <div class="table-responsive responsive-table mt-2">
+                                <table datatable id="tableImGastos" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                                    <thead class="thead-dark">
+                                        <tr style="width: 100%;">
+                                            <th style="width: 10%;">Fecha</th>
+                                            <th style="width: 10%;">No. Doc</th>
+                                            <th style="width: 10%;">Ped/Liq</th>
+                                            <th style="width: 10%;">Ruc</th>
+                                            <th style="width: 30%;">Razón social</th>
+                                            <th style="width: 8%;">Sub Total</th>
+                                            <th style="width: 8%;">Iva</th>
+                                            <th style="width: 8%;">Total</th>
+                                            <th style="width: 6%;">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="validaDt">
+                                        <tr *ngFor="let dt of infoData">
+                                            <td class="text-center">{{ dt.fecha }}</td>
+                                            <td style="cursor:pointer;">{{ dt.num_doc_gasto }}</td>
+                                            <td class="text-center">{{ dt.aplica_a}}</td>
+                                            <td class="text-left">{{ dt.ruc }}</td>
+                                            <td class="text-left">{{ dt.razon_social }}</td>
+                                            <td class="text-right">{{ commonServices.formatNumber(dt.subTotal) }}</td>
+                                            <td class="text-right">{{ commonServices.formatNumber(dt.iva) }}</td>
+                                            <td class="text-right">${{commonServices.formatNumber(dt.total)}}</td>
+                                            <td class="text-center"><button class="btn btn-warning btn-sm" placement="top" ngbTooltip="Ver Más" (click)="showDtGasto(dt)"><i class="fa fa-eye"
+                                                aria-hidden="true"></i>
+                                        </button></td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCImpGastos"></cc-spiner-procesar>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCImpGastos"></cc-spiner-procesar>

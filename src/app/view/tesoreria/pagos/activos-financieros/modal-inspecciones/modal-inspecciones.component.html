@@ -1,0 +1,104 @@
+<div class="">
+
+    <app-button-radio-active titulo="Seleccionar Inspección" filtroBoton="btnInspecciones" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+
+        <fieldset class="border px-2 pb-2">
+            <legend class="w-auto bg-dark ml-1">Filtros</legend>
+            <div class="row">
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Local" styleSpan="size-span-otro font-weight-bold">
+                                <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.local_comercial">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="No. de Orden" styleSpan="size-span-otro font-weight-bold">
+                                <input id="filter_orden" type="text" class="form-control" [(ngModel)]="filter.numero_orden">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-otro font-weight-bold">
+                                <input type="date" class="form-control form-control-xl" [(ngModel)]="filter.fecha_desde">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-otro font-weight-bold">
+                                <input type="date" class="form-control form-control-xl" [(ngModel)]="filter.fecha_hasta">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" placement="bottom" ngbTooltip="Consultar" (click)="cargarInspecciones()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row my-2">
+
+            <div class="col-12">
+                <table class="table table-bordered no-footer table-hover mb-0">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 15%;">No. Orden</th>
+                            <th style="width: 10%;">Fecha</th>
+                            <th style="width: 25%;">Local</th>
+                            <th style="width: 20%;">Dirección</th>
+                            <th style="width: 10%;">Estado</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let dt of inspeccionesDt, let i = index">
+                            <tr>
+                                <td class="text-center">{{ dt.numero_orden}}</td>
+                                <td class="text-center">{{ dt.fecha | date: 'dd/MM/yyyy' }}</td>
+                                <td class="text-center">{{ dt.fk_local.razon_social }}</td>
+                                <td class="text-center">{{ dt.fk_local.fk_sector.descripcion }}</td>
+                                <td class="text-center">
+                                    <i
+                                        placement="bottom"
+                                        [ngbTooltip]="(dt.estado_1 == 'P' || dt.estado_2 == 'P' || dt.estado_3 == 'P' || dt.estado_4 == 'P') ? 'Pendiente' : ((dt.estado_1 == 'A' && dt.estado_2 == 'A' && dt.estado_3 == 'A' && dt.estado_4 == 'A') ? 'Aprobado' : 'No Aprobado')" 
+                                        [class]="(dt.estado_1 == 'P' || dt.estado_2 == 'P' || dt.estado_3 == 'P' || dt.estado_4 == 'P') ? 'fas fa-circle text-warning' : ((dt.estado_1 == 'A' && dt.estado_2 == 'A' && dt.estado_3 == 'A' && dt.estado_4 == 'A') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
+                                    </i>
+                                    {{ (dt.estado_1 == 'P' || dt.estado_2 == 'P' || dt.estado_3 == 'P' || dt.estado_4 == 'P') ? 'Pendiente' : ((dt.estado_1 == 'A' && dt.estado_2 == 'A' && dt.estado_3 == 'A' && dt.estado_4 == 'A') ? 'Aprobado' : 'No Aprobado') }}
+                                </td>
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mx-1" (click)="selectInspeccion(dt)" placement="left" ngbTooltip="Seleccionar inspección">
+                                            <!-- [disabled]="(dt.estado_1 == 'P' || dt.estado_2 == 'P' || dt.estado_3 == 'P' || dt.estado_4 == 'P' || dt.estado_1 == 'A' || dt.estado_2 == 'A' || dt.estado_3 == 'A' || dt.estado_4 == 'A')" -->
+                                            <i class="far fa-hand-pointer"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+
+                </table>
+
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Seleccionar página">
+                </mat-paginator>
+
+            </div>
+
+        </div>
+
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSpiner" lfulScren=true lTipo="spInspecciones"></cc-spiner-procesar>

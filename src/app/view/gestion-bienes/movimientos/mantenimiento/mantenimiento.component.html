@@ -1,0 +1,173 @@
+<div class="mt-4">
+    <app-button-radio-active-new titulo="Registro de Mantenimiento de Bienes" filtroBoton="btnsMantenimiento" 
+    cstyle="bg-gradient-primary text-white"
+        [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Información General</legend>
+                   
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                                <input class="form-control form-control-sm" [value]="documento.num_documento" disabled/>
+                            </app-cc-input-group-prepend>
+                        </div>
+
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">Proveedores</span></div>
+                                <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Proveedor" (click)="expandListProveedores()" [value]="proveedorActive.razon_social">
+                                <button  class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor"  [disabled]="mantenimientoDisabled">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="documento.fecha"  [disabled]="mantenimientoDisabled"/>
+                                <!-- <button class="btn btn-primary btn-sm" (click)="modalGrupos()" [disabled]="disabledSubGrupo">Buscar</button> -->
+                            </app-cc-input-group-prepend>
+                        </div>
+                   </div>
+
+                   <div class="row m-0">
+                    <div class="col-12 col-md-8 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold">
+                            <textarea cols="30" rows="3" maxlength="200" class="form-control form-control-sm" [(ngModel)]="documento.observaciones" [disabled]="mantenimientoDisabled"></textarea>
+
+                        </app-cc-input-group-prepend>
+
+                    </div>
+
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+
+                        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                            <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                                <i
+                                    placement="bottom"
+                                    [ngbTooltip]="(estado == 'P') ? 'Pendiente' : ((estado == 'C') ? 'Cerrado' : 'Cancelado')" 
+                                    [class]="(estado == 'P') ? 'fas fa-circle text-warning' : ((estado == 'C') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
+                                </i>
+                                {{ (estado == 'P') ? 'Pendiente' : ((estado == 'C') ? 'Cerrado' : 'Cancelado') }}
+                            </div>
+                        </app-cc-input-group-prepend>
+
+                        
+                    </div>
+                </div>
+
+
+                        </fieldset>
+            </div>
+        </div>
+
+
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Anexos</legend>
+                
+                    <div class="row m-0">
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Archivos" styleSpan="size-span-campo font-weight-bold">
+                                <div class="custom-file">
+                                    <input type="file" multiple="multiple" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo($event.target.files)"
+                                        [disabled]="mantenimientoDisabled">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ?
+                                        fileList[0].name : "Seleccione un archivo" }}</label>
+                                    <!-- <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="guardarArchivo()" placement="bottom" ngbTooltip="Guardar Archivo">
+                                       Guardar
+                                    </button> -->
+                                </div>
+                            </app-cc-input-group-prepend>
+
+                            <!-- <div class="col-3"><button class="btn btn-sm btn-secondary" (click)="uploadFile()" [disabled]="anexoDisabled">Cargar</button></div> -->
+                        </div>
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+                            <app-anexos-list [identifier]="id_mantenimiento" custom1="INV-PRESTAMO-BIENES"></app-anexos-list>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Bienes</legend>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 pt-0 pb-0 text-right">
+                            <button class="btn btn-success btn-sm" placement="top"
+                                ngbTooltip="Agregar productos" (click)="addProduct()"
+                                [disabled]="agregaProduct"  [disabled]="mantenimientoDisabled">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12">
+                        <table class="table table-striped table-bordered table-k table-hover" >
+                            <thead class="sticky-header">
+                                <tr class="text-center">
+                                    <th style="width: 15%;">Nombre</th>
+                                    <th style="width: 15%;">Código</th>
+                                    <th style="width: 15%;">Observación</th>
+                                    
+                            
+                                    <th style="width: 20%;" class="text-center">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody style="width: 100%;">
+                                <tr *ngFor="let d of producto; let i = index">
+                                 
+                                    <td>
+                                        <div class="row">
+                                            <div class="col">{{d.nombre}}</div>
+                                        </div> 
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col">{{d.codigoproducto}}</div>
+                                        </div> 
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" class="form-control form-control-sm"  maxlength="200" [(ngModel)]="d.observacion" [disabled]="mantenimientoDisabled"  > 
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover producto"
+                                         (click)="removeTitulo(i,d)"  [disabled]="productoDisabled"><i
+                                            class="far fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </fieldset>
+            </div>
+        </div>
+
+
+ 
+
+                    
+                    
+              
+      
+    </app-button-radio-active-new>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="spSales"></cc-spiner-procesar>

@@ -1,0 +1,110 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-gradient-primary text-white" icono="fas fa-box-open"
+  [groupButton]="vmButtons" filtroBoton="btnsActivosModal" (onMetodoGlobal)="metodoGlobal($event)">
+  <div class="row my-2">
+
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <button class="btn btn-sm btn-success" (click)="agregaActivos()"><i class="fas fa-plus"></i></button>
+        <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold"
+            style="width:120px;">Año</span></div>
+        <!-- <input type="number" class="form-control" placeholder="Periodo" [(ngModel)]="periodo"> -->
+
+
+        <!-- <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="localidades.provincia"
+          (ngModelChange)="searchCities($event)">
+          <ng-option [value]=0 disabled>Seleccione la provincia</ng-option>
+          <ng-option *ngFor="let prov of catalog.provincia" [value]="prov.valor">{{prov.valor}}</ng-option>
+        </ng-select> -->
+
+        <input type="number" class="form-control" placeholder="Año" [(ngModel)]="solar.periodo">
+
+
+
+      </div>
+
+    </div>
+
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+
+        <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold"
+            style="width:120px;">Valor</span></div>
+        <!-- <input type="number" class="form-control" placeholder="Periodo" [(ngModel)]="periodo"> -->
+
+
+
+        <!-- <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="localidades.ciudad">
+          <ng-option [value]=0 disabled>Seleccione la ciudad</ng-option>
+          <ng-option *ngFor="let ciud of catalog.ciudad" [value]="ciud.valor">{{ciud.valor}}</ng-option>
+        </ng-select> -->
+
+        <input type="number" class="form-control" placeholder="valor" [(ngModel)]="solar.valor">
+      </div>
+    </div>
+
+
+
+    <!-- <div class = "col-8 text-right mr-2">
+            <button class="btn btn-sm btn-success" (click)="guardarActivos()"><i class="fas fa-save"></i> Guardar</button>
+            <button class="btn btn-sm btn-success" (click)="guardarActivos()"><i class="fas fa-chevron-left"></i> Regresar</button>
+        </div> -->
+
+
+  </div>
+
+
+
+  <div class="container-fluid">
+    <div class="row my-2">
+      <div class="col-12" style="max-height: 250px;overflow-y: scroll;">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead class="thead-dark text-center">
+              <tr>
+                <th style="width: 5%;">Año</th>
+                <th style="width: 5%;">Valor</th>
+                <th style="width: 5%;">Acciones</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="listaActivos.length<=0" class="text-center">
+                <td colspan="9" class="text-center">
+                  <h6>No hay datos.</h6>
+                </td>
+              </tr>
+              <tr *ngFor="let item of listaActivos, let i = index">
+
+                <td class="text-center">{{item.periodo}}</td>
+                <td class="text-center"><input type="number" class="form-control form-control-sm pr-1 text-right" [(ngModel)]="item.valor" (keyup)="CalculoValorSolares(item)"></td>                
+                <td>
+                  <div class="text-center mx-auto">
+                    <button class="btn btn-danger btn-sm mx-1" (click)="eliminar(item, i)" placement="left"
+                      ngbTooltip="Eliminar registro">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" class="text-right font-weight-bold">Total</td>
+                <td class="text-right font-weight-bold">$ {{ sumaTotalSolares | number:'1.2-2'}}</td>
+                <!-- <td class="text-right font-weight-bold"> {{ sumaTotalPorcentajeIngre | number:'1.2-2'}}%</td>
+                <td class="text-right font-weight-bold">$ {{ sumaTotalPatrimonio | number:'1.2-2'}}</td>
+                <td class="text-right font-weight-bold"> {{ sumaTotalPorcentajePatrim | number:'1.2-2'}}%</td> -->
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</app-button-radio-active>
+
+
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renActivosModal"></cc-spiner-procesar>

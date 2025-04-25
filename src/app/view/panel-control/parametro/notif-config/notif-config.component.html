@@ -1,0 +1,83 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active-new titulo="Configuracion de Alertas" 
+    cstyle="bg-gradient-primary text-white"
+    
+    icono="far fa-bell"
+        filtroBoton="btnsNotifConfigComponent" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Filtros</legend>
+            <div class="row m-0">
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Modulo" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [(ngModel)]="filter.modulo" [clearable]="false" (change)="filterTipoNotificacion($event)"
+                            [items]="lst_modulo" bindValue="id_modulo" bindLabel="nombre">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [(ngModel)]="filter.tipo_alerta" [clearable]="false"
+                            [items]="lst_tipo_filter" bindValue="valor" bindLabel="descripcion">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="filter.nombre">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row m-0">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                <th>Modulo</th>
+                                <th>Tipo</th>
+                                <th>Usuario</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="tbl_notificaciones.length > 0; else emptyNotificaciones">
+                                <tr *ngFor="let element of tbl_notificaciones">
+                                    <td>{{ element.modulo }}</td>
+                                    <td>{{ element.tipo_alerta }}</td>
+                                    <td>{{ element.nombre }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary" (click)="editAlerta(element)">
+                                            <i class="far fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" (click)="deleteAlerta(element)">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #emptyNotificaciones>
+                                <tr>
+                                    <td colspan="4"><span class="h6">No hay alertas configuradas</span></td>
+                                </tr>
+                            </ng-template>
+        
+                        </tbody>
+                    </table>
+                </div>
+                <mat-paginator
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="paginate.pageIndex"
+                    showFirstLastButtons
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    [length]="paginate.length"
+                    (page)="changePage($event)">
+                </mat-paginator>
+            </div>
+        </div>
+
+
+    </app-button-radio-active-new>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spNotifConfigComponent"></cc-spiner-procesar>

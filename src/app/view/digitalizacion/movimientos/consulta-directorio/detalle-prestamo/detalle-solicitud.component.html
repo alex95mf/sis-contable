@@ -1,0 +1,207 @@
+<div class="mt-2">
+    <app-button-radio-active titulo="Gestion prestamo" cstyle="bg-light text-dark" icono="fas fa-tasks" filtroBoton="btnsComprasP" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="col">
+            <!-- <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+
+                        <input [(ngModel)]="detalles.programa" class="form-control" readonly/>
+            
+                    </app-cc-input-group-prepend>
+
+                </div>
+
+                <div class="col-6">
+
+                    <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+
+                        <input [(ngModel)]="detalles.departamento" class="form-control" readonly/>
+            
+                    </app-cc-input-group-prepend>
+
+                </div>
+                
+        
+                
+
+            </div> -->
+
+            <!-- <app-cc-input-group-prepend label="Atribucion" styleSpan="size-span-campo font-weight-bold">
+
+                <input [(ngModel)]="detalles.atribucion" class="form-control" readonly/>
+    
+            </app-cc-input-group-prepend> -->
+
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="codigo" styleSpan="size-span-campo font-weight-bold">
+
+                       <!--  <input [(ngModel)]="infprestamo.codigo" class="form-control" readonly/> -->
+            
+                    </app-cc-input-group-prepend>
+                    
+                </div>
+                
+                    
+                    
+                    
+                 
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Estado del prestamo" styleSpan="size-span-campo font-weight-bold">
+                       
+                      <!--   <div class="custom-input">
+                            <i *ngIf="infprestamo.estado_prestamo === 'D'" class="fas fa-circle text-success"></i>
+                            <i *ngIf="infprestamo.estado_prestamo === 'P'" class="fas fa-circle text-danger"></i>
+                            {{ infprestamo.estado_prestamo === 'D' ? 'Devuelto' : 'Prestado' }}
+                        </div>
+                       <input type="hidden" [(ngModel)]="infprestamo.estado_prestamo" class="form-control" readonly/> -->
+            
+                    </app-cc-input-group-prepend>
+                    
+                </div> <div class="col-6">
+                    <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+
+                  <!--       <input [(ngModel)]="infprestamo.fecha" class="form-control" readonly/> -->
+            
+                    </app-cc-input-group-prepend>
+                    
+                </div> <div class="col-6">
+                    <app-cc-input-group-prepend label="Fecha maxima" styleSpan="size-span-campo font-weight-bold">
+
+                      <!--   <input [(ngModel)]="infprestamo.fechamaxima" class="form-control" readonly/> -->
+            
+                    </app-cc-input-group-prepend>
+                    
+                </div> <div class="col-6">
+                    <app-cc-input-group-prepend label="Numero de orden" styleSpan="size-span-campo font-weight-bold">
+
+                        <!-- <input [(ngModel)]="infprestamo.num_orden" class="form-control" readonly/> -->
+            
+                    </app-cc-input-group-prepend>
+                    
+                </div>
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold">
+
+                     <!--    <input [(ngModel)]="infprestamo.observacion" class="form-control" readonly/> -->
+            
+                    </app-cc-input-group-prepend>
+                    
+                </div>
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Usuario" styleSpan="size-span-campo font-weight-bold">
+
+                    <!--     <input [(ngModel)]="infprestamo.fk_usuario" class="form-control" readonly/> -->
+            
+                    </app-cc-input-group-prepend>
+                    
+                </div>
+
+                
+                
+
+
+               <!--  <div class="col-6">
+
+                    <app-cc-input-group-prepend label="Tipo Proceso" styleSpan="size-span-campo font-weight-bold">
+
+                        <input [(ngModel)]="detalles.proceso" class="form-control" readonly/>
+            
+                    </app-cc-input-group-prepend>
+
+                </div>
+                 -->
+        
+                
+
+            </div>
+          <!--   <div class="row">
+                <div class="col">
+                    <app-anexos-list-dis [dataUser]="dataUser" [permissions]="permissions" [identifier] = "item.id_solicitud"></app-anexos-list-dis>
+                  </div>
+            </div>
+ -->
+        </div>
+<!-- 
+        <div class="m-2" style="overflow: scroll;height: 300px;">
+            <table class="table table-hover mt-2">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center">Descripcion</th>
+                        <th class="text-center">Programa</th>
+                        <th class="text-center">Departamento</th>
+                        <th class="text-center">Atribucion</th>
+                        <th class="text-center">Cantidad Solicitada</th>
+                        <th class="text-center">Cantidad Requerida</th>
+                        <th class="text-center">Precio Cotizado</th>
+
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngIf="!listaSolicitudes.length">
+                        <td colspan="7" class="text-center">
+                            <h6>No hay Solicitudes que mostrar</h6>
+                        </td>
+
+                    </tr>
+                    <tr *ngFor="let item of listaSolicitudes">
+                        <td class="text-center">{{item.descripcion}}</td>
+                        <td class="text-center">{{item.catalogo_departamento?.valor}}</td>                        
+                        <td class="text-center">{{item.catalogo_programa?.valor}}</td>
+                        <td class="text-center">{{item.catalogo?.catalogo?.valor}}</td>
+                        <td class="text-center">{{item.cantidad_solicitada}}</td>
+                        <td class="text-center">{{item.cantidad_requerida}}</td>
+                        <td class="text-center">$ {{item.precio_cotizado | number: '1.2-2' }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div> -->
+
+      <!--   <div *ngIf="resultadoConsulta != null" style="overflow: auto;" class="m-2" style="overflow: scroll;height: 300px;">
+            <div class="table-container" *ngIf="resultadoConsulta && resultadoConsulta.length > 0">
+                <table class="table table-hover mt-2">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center" *ngIf="opcion != 'ver'"  ></th>
+                    <th class="table-header">Nombre de Archivo</th>
+                    <th class="table-header">Tipo Documento</th>
+                  
+                    <th class="table-header">Fecha</th>
+                    <th class="table-header">Estado</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                  
+                    <tr *ngFor="let dato of resultadoConsulta">   
+                        <td class="text-center" *ngIf="opcion != 'ver'" >
+                            <input type="checkbox" [(ngModel)]="dato.check"   (ngModelChange)="changeValueCheck(dato)">       </td>
+                        <td>{{ dato.detalledocumento?.nombre_archivo }}</td>
+                        <td>{{ dato.detalledocumento?.detalletipodoc?.nombre}}</td> 
+                        <td>{{ dato.created_at | date:'yyyy-MM-dd' }}</td>
+                        <td class="text-center">
+                            <i *ngIf="dato.estado_prestamo === 'D'" class="fas fa-circle text-success"></i>
+                            <i *ngIf="dato.estado_prestamo === 'P'" class="fas fa-circle text-danger"></i>
+                            {{ dato.estado_prestamo === 'D' ? 'Devuelto' : 'Prestado' }}
+                           
+                        </td>
+                     
+                    </tr>
+                    <tr class="no-data" *ngIf="!resultadoConsulta || resultadoConsulta.length === 0">
+                        <td colspan="9" class="text-center">
+                            <h6>No hay Reservas que mostrar</h6>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div> -->
+
+    </app-button-radio-active>
+    
+    <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>
+</div>

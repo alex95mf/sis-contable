@@ -1,0 +1,101 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="far fa-receipt">
+        <div class="row my-2">
+            <div class="col-2">
+                <app-cc-input-group-prepend label="Periodo" styleSpan="font-weight-bold">
+                    <ng-select class="form-control" [items]="periodos" bindValue="id" bindLabel="periodo" 
+                        [markFirst]="false" [(ngModel)]="seleccion.periodo" [clearable]="false"></ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo">
+                    <ng-select class="form-control" [clearable]="false" (change)="cargaDepartamentos($event)" [(ngModel)]="seleccion.programa"
+                        [items]="programas" bindValue="valor" bindLabel="label" [markFirst]="false">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo">
+                    <ng-select class="form-control" [clearable]="false" (change)="cargaAtribuciones($event)" [(ngModel)]="seleccion.departamento"
+                        [items]="departamentos" bindValue="valor" bindLabel="label" [markFirst]="false">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                    <app-cc-input-group-prepend label="Atribucion" styleSpan="size-span-campo">
+                        <ng-select class="form-control" [clearable]="false" (change)="cargaBienes($event)"  [(ngModel)]="seleccion.atribucion"
+                            [items]="atribuciones" bindValue="id_catalogo" bindLabel="valor" [markFirst]="true">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th colspan="4"></th>
+                            <th colspan="2" class="text-center">Solicitud</th>
+                            <th colspan="2" class="text-center">Saldo</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th>Bienes</th>
+                            <th>Cant.</th>
+                            <th>Costo Unitario</th>
+                            <th>Costo Total</th>
+                            <th>Cant.</th>
+                            <th class="text-center">Comprometido</th>
+                            <th>Cant.</th>
+                            <th class="text-center">Valor</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!bienes.length">
+                            <td colspan="9" class="text-center">
+                                <h6>No hay bienes</h6>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let bien of bienes">
+                            <td>{{ bien.nombre }}</td>
+                            <td>{{ bien.cantidad }}</td>
+                            <td><app-cc-input-group-prepend label="$">
+                                <input type="text" class="form-control" readonly [value]="bien.costo_unitario | number:'1.2-2'">
+                            </app-cc-input-group-prepend></td>
+                            <td><app-cc-input-group-prepend label="$">
+                                <input type="text" class="form-control" readonly [value]="bien.costo_total | number:'1.2-2'">
+                            </app-cc-input-group-prepend></td>
+                            <td>
+                                {{ bien.solicitado }}
+                            </td>
+                            <td>
+                                <app-cc-input-group-prepend label="$">
+                                    <input type="text" class="form-control" readonly value="{{ bien.solicitado * bien.costo_unitario | number:'1.2-2' }}">
+                                </app-cc-input-group-prepend>
+                            </td>
+                            <td>
+                                {{ bien.saldo }}
+                            </td>
+                            <td>
+                                <app-cc-input-group-prepend label="$">
+                                    <input type="text" class="form-control" readonly value="{{ bien.saldo * bien.costo_unitario | number:'1.2-2' }}">
+                                </app-cc-input-group-prepend>
+                            </td>
+                            
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-success" (click)="registrarCompra(bien)"><i class="far fa-receipt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner"></cc-spiner-procesar>

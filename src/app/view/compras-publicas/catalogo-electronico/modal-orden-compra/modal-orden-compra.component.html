@@ -1,0 +1,67 @@
+<div class="mt-2">
+    <app-button-radio-active-new titulo="Registro Ordenes de Compra" 
+    
+    cstyle="bg-gradient-primary text-white"
+    icono="fas fa-tasks" filtroBoton="btnsOrdenComp" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row m-0">
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">Proveedores</span></div>
+                    <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Proveedor" (click)="expandListProveedores()" [(ngModel)]="proveedorActive.razon_social">
+                    <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">No. Orden</span></div>
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="ordenCompra.num_orden" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Fecha Publicación" styleSpan="font-weight-bold size-span-campo">
+                    <input id="fecha_generacion" type="date" class="form-control form-control-sm" [(ngModel)]="ordenCompra.fecha_publicacion">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Fecha Aceptación" styleSpan="font-weight-bold size-span-campo">
+                    <input id="fecha_aceptacion" type="date" class="form-control form-control-sm" [(ngModel)]="ordenCompra.fecha_aceptacion">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo font-weight-bold">
+                    <input currencyMask class="form-control" [(ngModel)]="ordenCompra.valor">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="ordenCompra.estado" [clearable]="false"
+                        [items]="cmb_estado" bindValue="valor" bindLabel="label" (change)="cambiarEstadoOrden(ordenCompra)">
+                    </ng-select>
+                </app-cc-input-group-prepend>
+                <!-- <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">Admin de Compra</span></div>
+                    <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Admin Compra" (click)="expandListAdminCompra()" [value]="adminActive" [(ngModel)]="adminActive.nombre">
+                    <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListAdminCompra()" placement="bottom" ngbTooltip="Buscar Admin de Compra">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div> -->
+                <!-- <app-cc-input-group-prepend label="Admin Compra" styleSpan="font-weight-bold size-span-campo">
+                    <input id="admin-compra" type="text" class="form-control form-control-sm" [(ngModel)]="ordenCompra.admin_compra">
+                </app-cc-input-group-prepend> -->
+            </div>
+           
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold">
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observaciones" [(ngModel)]="ordenCompra.observaciones"  maxlength="300"></textarea>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </app-button-radio-active-new>
+    <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="lCatElec"></cc-spiner-procesar>
+</div>

@@ -1,0 +1,72 @@
+
+<div class="modal-body ">
+
+    <app-button-radio-active titulo="Asiento de Diario#: {{idAsiento}}" filtroBoton="btnMovAst" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-pie-chart">
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha</span>
+                    </div>
+                    <input type="text" [(ngModel)]="fecha" disabled class="form-control  form-control-sm text-center">
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
+                    </div>
+                    <input type="text" [(ngModel)]="estado" disabled class="form-control  form-control-sm text-center">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Concepto</span>
+                    </div>
+                    <textarea type="text" [(ngModel)]="concepto " disabled class="form-control  form-control-sm text-left"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-12 filters">
+                <div class="form-group table-responsive responsive-table " style="overflow-y: scroll; max-height: 120px;">
+                    <table class="table no-footer table-hover" style="width: 100%;">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 1%;">#</th>
+                                <th style="width: 8%;text-align: center;">Codigo</th>
+                                <th style="width: 12%;text-align: center;">Nombre Cuenta</th>
+                                <th style="width: 12%;text-align: center;">Detalle</th>
+                                <th style="width: 8%;text-align: center;">Documento</th>
+                                <th style="width: 6%;text-align: center;">Debe</th>
+                                <th style="width: 6%;text-align: center;">Haber</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="presentDt" style="width: 100%;">
+                            <tr *ngFor="let dt of arrayTable; let i = index">
+                                <td style="width: 1%;padding-top: 10px;text-align: center;">{{ i + 1 }}</td>
+                                <td style="width: 8%;padding-top: 10px;text-align: left;">{{dt.cuenta}}</td>
+                                <td style="width: 12%;padding-top: 10px;text-align: left;">{{dt.nombreCuenta}}</td>
+                                <td style="width: 12%;padding-top: 10px;text-align: center;">{{dt.detalle}}</td>
+                                <td style="width: 8%;padding-top: 10px;text-align: center;cursor:pointer;" *ngIf="dt.num_doc.length == 1" (click)="viewDocument(dt)"><span class="tooltip-test" placement="left" ngbTooltip="Ver Más">
+                                {{ dt.codigoDoc }}-{{ dt.num_doc.padStart(10, 0)}}</span></td>
+                                <td style="width: 8%;padding-top: 10px;text-align: center;cursor:pointer;" *ngIf="dt.num_doc.length != 1 " (click)="viewDocument(dt)"><span class="tooltip-test" placement="left" ngbTooltip="Ver Más">
+                                {{ dt.codigoDoc }}-{{ dt.num_doc }}  </span></td>
+                                <td style="width: 6%;padding-top: 10px;text-align: center;">{{ formatNumber(dt.valor_deb)}}</td>
+                                <td style="width: 6;padding-top: 10px;text-align: center;">{{ formatNumber(dt.valor_cre)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </app-button-radio-active>
+</div>

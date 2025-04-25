@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face 
+{
+    font-family: "Poppins1";
+    src: url("../../../../../../assets/fonts/Montserrat-Medium.ttf") format("truetype");
+}
+
+
+span
+{
+    font-size: 11px !important;
+    font-weight: bold !important;
+}
+
+textarea,
+select,
+input
+{
+    background-color: white !important;
+    font-size: 11px !important; 
+    &:disabled
+    {
+        background-color: white !important;
+    }
+}
+
+.filters
+{
+    font-family: "Poppins1";
+    background-color: #fafafa;
+    border-radius: 0px 0px 5px 5px;
+    border-top: unset !important;
+
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 4px 0px 5px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                    padding: 5px 15px 5px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    font-weight: bold !important;
+                    border: none !important;
+                    font-size: 9px !important;
+                    input,
+                    ng-select,
+                    textarea
+                    {
+                        font-size: 9px !important; 
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.dangerClass
+{
+    color: red;
+    font-weight: 500;
+}
+.primaryClass
+{
+    color: black;;
+}
+
+
+
+textarea 
+{
+    font-family: "Poppins1" !important;
+    outline: unset !important;
+    box-shadow: unset !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button 
+{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] 
+{
+    -moz-appearance: textfield;
+}
+
+    ::-webkit-scrollbar 
+    {
+      width: 5px;
+      height: 3px;
+      overflow-y: scroll;
+      overflow-x: scroll;
+  }
+  
+  ::-webkit-scrollbar-thumb 
+  {
+      background: #13B1E9;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+  
+  ::-webkit-scrollbar-thumb:active 
+  {
+      background-color: #999999;
+  }
+  
+  ::-webkit-scrollbar-track 
+  {
+      background: #CECAC9;
+      border-radius: 4px;
+  }
+  
+  .prt-comprobante 
+  {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    .sect-one 
+    {
+        border: 1px solid;
+        border-color: rgba(78, 74, 74, 0.37);
+        border-radius: 3px;
+        height: 160px;
+    }
+    .sect-two 
+    {
+        height: 160px;
+        border-radius: 3px;
+        background-color: #5b9bd5;
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .simu-ipt 
+    {
+        border: 1px solid;
+        border-color: rgba(78, 74, 74, 0.37);
+        border-radius: 3px;
+        padding: 5px;
+    }
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 6px 5px 8px 5px;
+                    background-color: #5B9BD5;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                    padding: 6px 5px 8px 5px;
+                    color: rgba(0, 0, 0, 0.644);
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    font-size: 9px;
+                }
+            }
+        }
+    }
+  }
+
+
+
+

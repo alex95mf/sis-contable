@@ -1,0 +1,48 @@
+
+<div class="modal-body">
+
+    <app-button-radio-active titulo="Listado de Comprobantes de Egreso" filtroBoton="btnsLstCmpEg" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="table-responsive responsive-table">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                <thead class="thead-dark" >
+                    <tr>
+                        <th style="width: 15%;">Metodo</th>
+                        <th style="width: 15%;">Beneficiario</th>
+                        <th style="width: 15%;">Ciudad</th>
+                        <th style="width: 15%;">Num. transacción</th>
+                        <th style="width: 10%;">Valor</th>
+                        <th style="width: 15%;">fecha</th>
+                        <th style="width: 15%; text-align: center;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="validaDt">
+                    <tr *ngFor="let dt of dataDT">
+                        <td>{{ dt.metodo_pago }}</td>
+                        <td>{{ dt.beneficiario }}</td>
+                        <td>{{ dt.ciudad }}</td>
+                        <td>{{ dt.num_tx }}</td>
+                        <td>$ {{ dt.valor}}</td>
+                        <td>{{ dt.fecha_emision }}</td>
+                        <td>
+                            <div class="text-center">
+                                <button class="btn btn-danger btn-sm" (click)="deleteComprobante(dt)" placement="top"
+                                    ngbTooltip="Eliminar comprobante">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                                <button class="btn btn-primary btn-sm" (click)="editarComprobante(dt)" placement="top"
+                                    ngbTooltip="Editar cuenta">
+                                    <i class="far fa-edit"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </app-button-radio-active>
+     
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spShowComprEgreso"></cc-spiner-procesar>
+
+
+

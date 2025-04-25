@@ -1,0 +1,30 @@
+// pills
+.pill-k{
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    width: 88px;
+  }
+  
+  .pill-k_warning{
+    background-color: #F9E8CE;
+    color: var(--clr-warning);
+  }
+  .pill-k_success{
+    background-color: #DCF0E5;
+    color: var(--clr-success);
+  }
+  .pill-k_danger{
+    background-color: #F3DEDE;
+    color: var(--clr-danger);
+  }
+  .pill-k_action{
+    background-color: #D7DEF6;
+    color: var(--clr-action);
+  }
+  .pill-k_info{
+    background-color: #E0EEF0;
+    color: var(--clr-info);
+  }
+  // pills

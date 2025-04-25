@@ -1,0 +1,100 @@
+<app-button-radio-active-new [titulo]="fTitle" icono="fas fa-tasks" 
+cstyle="bg-gradient-primary text-white" filtroBoton="btnsAttrTareas"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border card-fieldset">
+        <legend class="w-auto card-legend">Datos Generales</legend>
+        <div class="row m-0">
+            <div class="col-12 col-md-12 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Programa" styleSpan="font-weight-bold size-span-campo">
+                    <input type="text" class="form-control" readonly [value]="programa.valor">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-12 col-md-8 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Departamento" styleSpan="font-weight-bold size-span-campo">
+                    <input type="text" class="form-control" readonly [value]="departamento.valor">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Realizacion" styleSpan="font-weight-bold size-span-campo">
+                    <input type="text" class="form-control" readonly [placeholder]="realizacion | number:'1.2-2'">
+                    <div class="input-group-append">
+                        <div class="input-group-text font-weight-bold">%</div>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-12 col-md-12 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Atribucion" styleSpan="font-weight-bold size-span-campo">
+                    <textarea rows="3" [value]="atribucion.valor" readonly class="form-control"></textarea>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-12 col-md-12 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Meta" styleSpan="font-weight-bold size-span-campo">
+                    <!-- <input type="text" class="form-control" readonly value="{{ metaToPrint(atribucion.atribucion_data.meta) }}"> -->
+
+                    <textarea rows="3" [value]="metaToPrint(atribucion.atribucion_data.meta)" readonly class="form-control"></textarea>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+
+    </fieldset>
+
+
+    <div class="row m-0">
+        <div class="col-12">
+            <div class="table-responsive" style="overflow-y: scroll; max-height: 320px;">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                    <thead class="sticky-header">
+                        <tr class="text-center">
+                            <th style="width: 250px;">Tarea</th>
+                            <th style="width: 170px;">Fecha Inicio</th>
+                            <th style="width: 170px;">Fecha Final</th>
+                            <th>Responsable</th>
+                            <th style="width: 85px;">Realizacion (%)</th>
+                            <th style="width: 50px;">Finalizado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!tareas.length">
+                            <td colspan="5" class="text-center">
+                                <h6>No hay datos</h6>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let tarea of tareas">
+                            <td><input type="text" class="form-control" [(ngModel)]="tarea.descripcion"></td>
+                            <td><input type="date" class="form-control" [(ngModel)]="tarea.fecha_inicio"></td>
+                            <td><input type="date" class="form-control" [(ngModel)]="tarea.fecha_final"></td>
+                            <!-- sis_permisos.aprobar -->
+                            <td>
+                                <app-cc-input-group-prepend label="Responsable" styleSpan="size-span-campo font-weight-bold">
+                                    <input type="text" class="form-control" readonly [value]="tarea.responsable?.emp_full_nombre">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" (click)="expandEmpleados(tarea)">
+                                            <i class="fas fa-user"></i>
+                                        </button>
+                                    </div>
+                                </app-cc-input-group-prepend>
+                            </td>
+                            <td><input type="number" [(ngModel)]="tarea.realizacion" (keypress)="validaciones.numberOnly($event)" (input)="calculaRealizacion()" class="form-control" min="0" max="100"></td>
+                            <td class="text-center">
+                                <input type="checkbox" [checked]="tarea.finalizado">
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" matTooltip="Eliminar Tarea" (click)="deleteTarea(tarea)">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="msgSpinner"></cc-spiner-procesar>

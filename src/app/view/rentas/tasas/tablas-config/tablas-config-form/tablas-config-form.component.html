@@ -1,0 +1,67 @@
+<div *ngIf="tasasConfig">
+
+    <app-button-radio-active [titulo]="isNew ? 'Nueva Tabla' : 'Editar Tabla'" filtroBoton="btnTablasConfigForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Tipo Tabla</span>
+                    </div>
+                    <ng-select id="tipo_tabla" class="form-control form-control-sm"  [(ngModel)]="tasasConfig.tipo_tabla" [clearable]="false">
+                        <ng-option disabled [value]="0" disabled>Seleccione un tabla</ng-option>
+                        <ng-option *ngFor="let op of tablas" [value]="op.valor">{{ op.valor +' - '+ op.descripcion }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Base C&aacute;lculo</span>
+                    </div>
+                    <input id="base_calculo" type="text" class="form-control form-control-sm" placeholder="Base Cálculo" [(ngModel)]="tasasConfig.base_calculo" maxlength="20">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Rango Desde</span>
+                    </div>
+                    <input id="rango_desde" type="text" pattern="[0-9]" class="form-control form-control-sm" placeholder="Rango Desde" [(ngModel)]="tasasConfig.rango_desde" (keypress)="validaciones.numberOnly($event)" maxlength="16">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Rango Hasta</span>
+                    </div>
+                    <input id="rango_desde" type="text" pattern="[0-9]" class="form-control form-control-sm" placeholder="Rango Hasta" [(ngModel)]="tasasConfig.rango_hasta" (keypress)="validaciones.numberOnly($event)" maxlength="16">
+                </div>
+            </div> 
+        </div>
+        <div class="row mb-4"> 
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Valor</span>
+                    </div>
+                    <input id="valor" type="text" pattern="[0-9]" class="form-control form-control-sm" placeholder="Valor" [(ngModel)]="tasasConfig.valor" (keypress)="validaciones.numberOnly($event)" maxlength="16">
+                </div>
+            </div>   
+
+            <div class="col-sm-6">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Valor Excedente</span>
+                    </div>
+                    <input id="valor_excedente" type="text" pattern="[0-9]" class="form-control form-control-sm" placeholder="Valor Excedente" (keypress)="validaciones.numberOnlyDot($event)" [(ngModel)]="tasasConfig.valor_excedente" maxlength="16">
+                </div>
+            </div>   
+        </div>
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="tablas-config-form"></cc-spiner-procesar>

@@ -1,0 +1,28 @@
+<p-table [value]="cuentas" [lazy]="true" (onLazyLoad)="getCuentas($event)" selectionMode="single"
+    [(selection)]="selectedProduct2" (onRowSelect)="onRowSelectCuenta($event)" responsiveLayout="scroll"
+    [paginator]="true" [rows]="10" [loading]="loading" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas" [rowsPerPageOptions]="[10,25,50]">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Tipo</th>
+            <th>Descripcion</th>
+            <th>Naturaleza</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>
+                <p-columnFilter type="text" field="codigo"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="nombre"></p-columnFilter>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cuenta>
+        <tr [pSelectableRow]="cuenta">
+            <td>{{ cuenta.codref }}</td>
+            <td>{{ cuenta.descripcion }}</td>
+            <td>{{ cuenta.naturaleza }}</td>
+        </tr>
+    </ng-template>
+</p-table>

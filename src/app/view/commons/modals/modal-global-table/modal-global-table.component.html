@@ -1,0 +1,181 @@
+<div class="mb-2">
+    <app-button-radio-active titulo="BUSCAR {{title}}" cstyle="bg-gradient-primary text-white" periodo="{{periodo_id}}"
+        filtroBoton="btnGlobal" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+        <div class="table-responsive responsive-table">
+
+            <div *ngIf="title == 'PERSONAL' then personalBlock; else jornadaBlock"></div>
+            <ng-template #personalBlock>
+                <table class="table table-sm no-footer table-hover"
+                    datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="text-align: left;padding-left: 10px;">Cod.</th>
+                            <th style="text-align: left;padding-left: 10px;">Tip. Doc.</th>
+                            <th style="text-align: left;padding-left: 10px;">Num. Doc.</th>
+                            <th style="text-align: left;padding-left: 10px;">Nombres</th>
+                            <th style="text-align: left;padding-left: 10px;">Apellidos</th>
+                            <th style="text-align: left;padding-left: 10px;">Correo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let personal of dataDTPersonal" (click)="setDataModalproviders(personal)"
+                            style="cursor:pointer;">
+                            <td>{{ personal.id_empleado }}</td>
+                            <td>{{ personal.tipodoc }}</td>
+                            <td>{{ personal.emp_identificacion }}</td>
+                            <td>{{ personal.emp_primer_nombre }}</td>
+                            <td>{{ personal.emp_primer_apellido }}</td>
+                            <td>{{ personal.emp_correo ?? personal.emp_correo_empresarial }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+            <ng-template #jornadaBlock>
+                <table class="table table-sm no-footer table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="text-align: left;padding-left: 10px;">Descripcion</th>
+                            <th style="text-align: left;padding-left: 10px;">Tiempo almuerzo</th>
+                            <th style="text-align: left;padding-left: 10px;">Almuerza</th>
+                            <th style="text-align: left;padding-left: 10px;">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dtJornada of dataDTJornada" (click)="setDataModalJornadaproviders(dtJornada)"
+                            style="cursor:pointer;">
+                            <td>{{ dtJornada.jnd_tipo_jornada }}</td>
+
+                            <td>{{ dtJornada.tiempo_almuerzo ? dtJornada.tiempo_almuerzo.cat_nombre : '-' }}
+                            </td>
+                            <td>{{ dtJornada.estado_almuerza ? dtJornada.estado_almuerza.cat_nombre : '-' }}
+                            </td>
+                            <td>{{ dtJornada.estado.cat_nombre }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+
+
+
+
+
+            <!-- <thead class="thead-dark" *ngIf="title == 'CLIENTES' ">
+                            <tr>
+                                <th style="text-align: left;padding-left: 10px;">Cliente</th>
+                                <th style="text-align: left;padding-left: 10px;">No. Doc</th>
+                                <th style="text-align: left;padding-left: 10px;">País</th>
+                                <th style="text-align: left;padding-left: 10px;">Provincia</th>
+                                <th style="text-align: left;padding-left: 10px;">Ciudad</th>
+                                <th style="text-align: left;padding-left: 10px;">Dirección</th>
+                                <th style="text-align: left;padding-left: 10px;">Teléfono</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="validaDt && title == 'CLIENTES'">
+                            <tr *ngFor="let dt of dataDT" (click)="setDataCustomer(dt)" style="cursor:pointer;">
+                                <td>{{ dt.nombre_comercial_cli }}</td>
+                                <td>{{ dt.num_documento }}</td>
+                                <td>{{ dt.pais }}</td>
+                                <td>{{ dt.provincia }}</td>
+                                <td>{{ dt.ciudad }}</td>
+                                <td>{{ dt.direccion }}</td>
+                                <td>{{ dt.telefono }}</td>
+                            </tr>
+                        </tbody>
+                        <thead class="thead-dark" *ngIf="title == 'PRODUCTO' ">
+                            <tr>
+                                <th style="text-align: left;padding-left: 10px;">Producto</th>
+                                <th style="text-align: left;padding-left: 10px;">Código</th>
+                                <th style="text-align: left;padding-left: 10px;">No. Parte</th>
+                                <th style="text-align: left;padding-left: 10px;">Formula</th>
+                                <th style="text-align: left;padding-left: 10px;">Clase</th>
+                                <th style="text-align: left;padding-left: 10px;">Tipo</th>
+                                <th style="text-align: left;padding-left: 10px;">PVP</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="validaDt && title == 'PRODUCTO'">
+                            <tr *ngFor="let dt of dataDT" (click)="setDataProduct(dt)" style="cursor:pointer;">
+                                <td style="width: 30%;">{{ dt.nombre }}</td>
+                                <td style="width: 30%;">{{ dt.codigoProducto }}</td>
+                                <td style="width: 20%;">{{ dt.num_parte }}</td>
+                                <td *ngIf="dt.fk_formula != null">Si</td>
+                                <td *ngIf="dt.fk_formula == null">No</td>
+                                <td>{{ dt.clase }}</td>
+                                <td style="width: 20%;">{{ dt.tipo }}</td>
+                                <td>{{ dt.PVP }}</td>
+                            </tr>
+                        </tbody>
+                        <thead class="thead-dark" *ngIf="title == 'SOLICITUD' ">
+                            <tr style="width: 100%;">
+                                <th style="width: 15%;">Usuario</th>
+                                <th style="width: 15%;">No. Solicitud</th>
+                                <th style="width: 20%;">Fecha Aprobación</th>
+                                <th style="width: 20%;">Fecha Solicitud</th>
+                                <th style="width: 20%;">Fecha Caducidad</th>
+                                <th style="width: 10%;">Estado</th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf="validaDt && title == 'SOLICITUD'">
+                            <tr *ngFor="let dt of dataDT" (click)="setDataSolicitud(dt)"
+                                style="cursor:pointer;">
+                                <td class="text-left">{{ dt.user.nombre }}</td>
+                                <td class="text-center">{{ dt.sec_documento.padStart(10, '0') }}</td>
+                                <td class="text-center">{{ dt.fecha_aprobacion }}</td>
+                                <td class="text-center">{{ dt.fecha_emision }}</td>
+                                <td class="text-center">{{ dt.fecha_caducidad }}</td>
+                                <td class="text-center" *ngIf="dt.filter_doc == 1">Creado</td>
+                                <td class="text-center" *ngIf="dt.filter_doc == 2">Revisado</td>
+                                <td class="text-center" *ngIf="dt.filter_doc == 3">Procesado</td>
+                                <td class="text-center" *ngIf="dt.filter_doc == 4">Aprobado</td>
+                            </tr>
+                        </tbody>
+                        <thead class="thead-dark" *ngIf="title == 'ORDENES' ">
+                            <tr>
+                                <th style="padding-left: 10px;">Orden</th>
+                                <th style="padding-left: 10px;">sucursal</th>
+                                <th style="padding-left: 10px;">Direccion</th>
+                                <th style="padding-left: 10px;">Cliente</th>
+                                <th style="padding-left: 10px;">Subtotal</th>
+                                <th style="padding-left: 10px;">Iva</th>
+                                <th style="padding-left: 10px;">Total</th>
+                                <th style="padding-left: 10px;">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="validaDt && title == 'ORDENES'" style="overflow-x: scroll;">
+                            <tr *ngFor="let dt of dataDT" (click)="setOrders(dt)" style="cursor:pointer;">
+                                <td style="width: 10%;">{{ dt.id }}</td>
+                                <td style="width: 15%;">{{ dt.nombre_sucursal }}</td>
+                                <td style="width: 20%;">{{ dt.direcc_sucursal }}</td>
+                                <td style="width: 15%;">{{ dt.nombre_cli }}</td>
+                                <td style="width: 10%;">{{ dt.subtotal }}</td>
+                                <td style="width: 10%;">{{ dt.iva }}</td>
+                                <td style="width: 10%;">{{ dt.total }}</td>
+                                <td style="width: 10%;">{{ dt.fecha }}</td>
+                            </tr>
+                        </tbody>
+
+                        <thead class="thead-dark" *ngIf="title == 'COTIZACIONES' ">
+                            <tr>
+                                <th style="padding-left: 10px;">Cotización</th>
+                                <th style="padding-left: 10px;">Cliente</th>
+                                <th style="padding-left: 10px;">Vendedor</th>
+                                <th style="padding-left: 10px;">Subtotal</th>
+                                <th style="padding-left: 10px;">Iva</th>
+                                <th style="padding-left: 10px;">Total</th>
+                                <th style="padding-left: 10px;">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="validaDt && title == 'COTIZACIONES'" style="overflow-x: scroll;">
+                            <tr *ngFor="let dt of dataDT" (click)="setQuotes(dt)" style="cursor:pointer;">
+                                <td style="width: 9%;">{{ dt.id.toString().padStart(10, '0') }}</td>
+                                <td style="width: 23%;">{{ dt.nombre_cliente }}</td>
+                                <td style="width: 23%;">{{ dt.nombre_vendedor }}</td>
+                                <td style="width: 10%;">{{ dt.subtotal }}</td>
+                                <td style="width: 10%;">{{ dt.iva }}</td>
+                                <td style="width: 10%;">{{ dt.total }}</td>
+                                <td style="width: 15%;">{{ dt.created_at }}</td>
+                            </tr>
+                        </tbody> -->
+        </div>
+    </app-button-radio-active>
+</div>

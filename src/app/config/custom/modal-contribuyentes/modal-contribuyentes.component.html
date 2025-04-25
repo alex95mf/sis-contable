@@ -1,0 +1,103 @@
+
+    <app-button-radio-active-new titulo="Seleccionar Contribuyente" 
+    filtroBoton="btnContribuyenteForm" cstyle="bg-gradient-primary test-white" 
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+                    <div class="row m-0">
+
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Razón Social" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.razon_social" (keyup.enter)="aplicarFiltros()">
+                            </app-cc-input-group-prepend>
+
+                        </div>
+
+
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.num_documento" (keypress)="validaciones.numberOnly($event)" (keyup.enter)="aplicarFiltros()">
+                            </app-cc-input-group-prepend>
+
+                        </div>
+
+
+
+                    </div>
+                </fieldset>
+            </div>
+            
+        </div>
+        <div class="row m-0">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                <!-- <th style="width: 4%;">Estado</th> -->
+                                <th style="width: 12.5%;">Tipo de documento</th>
+                                <th style="width: 17.5%;">No. Documento</th>
+                                <th>Razón social</th>
+                                <!-- <th style="width: 15%;">Fecha nacimiento</th> -->
+                                <!-- <th style="width: 10%;">Tipo</th>
+                                <th style="width: 10%;">Documento</th> -->
+                                <!-- <th style="width: 8%;">Valor</th>
+                                <th style="width: 8%;">Porcentaje</th> -->
+                                <th style="width: 10%;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!contribuyentesDt.length">
+                                <td colspan="5" class="text-center"><h6>No hay resultados</h6></td>
+                            </tr>
+                            <ng-container *ngFor="let dt of contribuyentesDt, let i = index">
+                                <tr>
+                                    <!-- <td class="text-center"><i placement="bottom" [ngbTooltip]="dt.estado == 'A' ? 'Activo' : 'Inactivo'" [class]="dt.estado == 'A' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger'"></i></td> Pendiente -->
+                                    <!-- <td class="text-center"><i placement="bottom" ngbTooltip="Activo" class="fas fa-circle text-success"></i></td> -->
+                                    <td class="text-center">{{ dt.tipo_documento }}</td>
+                                    <td class="text-center">{{ dt.num_documento }}</td>
+                                    <td> {{ dt.razon_social }}</td>
+                                    <!-- <td class="text-center">dd/mm/aaaa</td> -->
+                                    <!-- <td class="text-center">{{ dt.tipo.valor }}</td>
+                                    <td class="text-center">{{ dt.documento.valor }}</td>
+                                    <td class="text-right">{{ '$ ' + dt.valor }}</td>
+                                    <td class="text-right">{{ dt.porcentaje }}</td> -->
+                                    <td>
+                                        <div class="text-center mx-auto">
+                                            <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar contribuyente">
+                                                <i class="fas fa-hand-pointer"></i>
+                                            </button>
+                                            <!-- <button *ngIf="dt.estado == 'A'" class="btn btn-danger btn-sm ml-1" (click)="deleteArancel(dt.id, i)" placement="top" ngbTooltip="Eliminar arancel">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                            <button *ngIf="dt.estado == 'I'" class="btn btn-info btn-sm ml-1" (click)="restoreArancel(dt.id, i)" placement="top" ngbTooltip="Restaurar arancel">
+                                                <i class="fas fa-undo"></i>
+                                            </button> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>  
+                    <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="+(paginate.page)-1"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+                </div>
+
+                  
+                </div>
+                
+
+        </div>
+    </app-button-radio-active-new>
+
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

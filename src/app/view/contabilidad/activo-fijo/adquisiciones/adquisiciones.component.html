@@ -1,0 +1,321 @@
+<br>
+<app-button-radio-active titulo="Adquisición Activo Fijo" filtroBoton="btnAdqAcFij"
+    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+    *ngIf="permissions" icono="fa fa-buysellads">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Tipo documento" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="activof.fk_doc"
+                    [disabled]="true" id="idTipDocSelect">
+                    <option *ngFor="let d of tip_doc" [value]="d.id"> {{d.nombre}} </option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha compra" styleSpan="size-span-campo">
+                <ejs-datepicker [(ngModel)]="activof.fecha_compra" type="text" name="dateFrom" class="form-control"
+                    format='yyyy-MM-dd' (ngModelChange)="changeFechOne()"> </ejs-datepicker>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="activof.isactive">
+                    <option [value]="1">Activo</option>
+                    <option [value]="0">Inactivo</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo">
+                <input placeholder="número documento" type="number" class="form-control form-control-sm" id="idmudoc"
+                    [(ngModel)]="activof.num_doc" min="0" (keypress)="commonServices.FormatDecimalVal($event)">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Tipo pago" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="activof.tipo_pago"
+                    (ngModelChange)="changeDisabledBtn()" [disabled]="permissions.editar == '0'" id="idTipoPagoSelect">
+                    <option [value]="0">Seleccione tipo pago</option>
+                    <option *ngFor="let d of tipo_pago" [value]="d.valor"> {{d.valor}} </option>
+                </select>
+
+                <button class="btn btn-primary btn-sm" (click)="setNumCuotas()"
+                    style="box-shadow: unset;outline: unset;" id="idbtndifered"
+                    [disabled]="permissions.editar == '0'  || !flagBtnDired " placement="top"
+                    matTooltip="Diferir cuotas">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="SubTotal" styleSpan="size-span-campo">
+                <input type="number" class="form-control form-control-sm text-right pr-2"
+                    placeholder="$ {{commonServices.formatNumber(view.showSubt)}}" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="No. Autorización" styleSpan="size-span-campo">
+                <input placeholder="número autorización" type="number" class="form-control form-control-sm"
+                    id="IdnumAut" [(ngModel)]="activof.autorizacion" min="0"
+                    (keypress)="commonServices.FormatDecimalVal($event)">
+            </app-cc-input-group-prepend>
+        </div>
+        
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Forma pago" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="activof.forma_pago"
+                    [disabled]="permissions.editar == '0'" id="idFormaPago">
+                    <option [value]="0">Seleccione forma pago</option>
+                    <option *ngFor="let d of forma_pago" [value]="d.valor"> {{d.valor}} </option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Iva {{activof.iva}}%" styleSpan="size-span-campo">
+                <input type="number" class="form-control form-control-sm text-right pr-2"
+                    placeholder="$ {{commonServices.formatNumber(view.showIva)}}" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row ">
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo">
+                <ng-select id="IdProvidersDoc" class="form-control custom" appendTo="body" [searchable]="true"
+                    [clearable]="false" [(ngModel)]="activof.fk_proveedor">
+                    <ng-option [value]="0">Seleccione proveedor</ng-option>
+                    <ng-option *ngFor="let d of arrayProveedor" [value]="d.id_proveedor"> {{d.razon_social}}
+                    </ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group input-group-sm mt-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">País
+                        origen</span>
+                </div>
+                <ng-select class="form-control" [searchable]="true" [(ngModel)]="activof.fk_origen" [clearable]="false"
+                    (ngModelChange)="changeFlag()" id="idOrigin">
+                    <ng-option [value]="0">Seleccione país de origen</ng-option>
+                    <ng-option *ngFor="let dt of arrayCountrys" [value]="dt.id">
+                        {{dt.nom_pais}}</ng-option>
+                </ng-select>
+                <div class="input-group-append w-auto">
+                    <img src="{{flagCountry}}" alt="" style="border-radius: 0px 5px 5px 0px;">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Total" styleSpan="size-span-campo">
+                <input type="number" class="form-control form-control-sm text-right pr-2"
+                    placeholder="$ {{commonServices.formatNumber(view.showTotal)}}" disabled>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-8">
+            <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo">
+                <textarea class="form-control" rows="1" [(ngModel)]="activof.observaciones"
+                    placeholder="Ingrese una observación"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <fieldset class="border p-2 mb-1  filters">
+        <legend class="w-auto h6">INFORMACIÓN DE PRODUCTOS</legend>
+        <div class="row justify-content-end mb-2">
+            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-right ">
+                <button class="btn btn-success" placement="top" matTooltip="Añadir Items" (click)="addItems()">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row justify-content-center ">
+            <div class="col-12 ">
+                <div class="table-responsive responsive-table probandooooo">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr style="width: 100%;">
+
+                                <th style="width: 19%;">Nombre</th>
+                                <th style="width: 8%;">Precio</th>
+                                <th style="width: 15%;">Grupo</th>
+                                <th style="width: 10%;">Código</th>
+                                <th style="width: 10%;">Estado</th>
+                                <th style="width: 14%;">Marca</th>
+                                <th style="width: 14%;">Modelo</th>
+                                <th style="width: 10%;text-align: center;">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let d of dataProducto; let i = index">
+                                <td>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="d.nombre"
+                                        placeholder="Nombre producto">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control form-control-sm text-right pr-2"
+                                        [(ngModel)]="d.precio" (keyup)="sumTotal(i,$event)" min="0" placeholder="Precio"
+                                        (keypress)="commonServices.FormatDecimalVal($event)">
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-sm custom-select" [(ngModel)]="d.fk_grupo"
+                                        [disabled]="permissions.editar == '0' || 
+                                            d.precio <= 0.00 || d.precio == '' " id="idtipogroup"
+                                        (ngModelChange)="selectGroupDepreciacion(i,$event)">
+                                        <option [value]="0">Seleccione un grupo</option>
+                                        <option *ngFor="let d of arrayDepre" [value]="d.id">
+                                            {{d.nombre_activo}}
+                                        </option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="d.codigo"
+                                        [disabled]="true" placeholder="Código">
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-sm custom-select" [(ngModel)]="d.estado"
+                                        [disabled]="permissions.editar == '0'" id="idestadoselec">
+                                        <!-- <option [value]="0">Estado</option> -->
+                                        <option *ngFor="let d of arrayAux" [value]="d.id">
+                                            {{d.nombre}}
+                                        </option>
+                                    </select>
+                                </td>
+
+                                <td>
+                                    <ng-select [(ngModel)]="d.marca" appendTo="body" [searchable]="true"
+                                        (ngModelChange)="searchModelo($event,i)"
+                                        class="form-control form-control-sm custom-select custom" [clearable]="false">
+                                        <ng-option [value]="0">Marca</ng-option>
+                                        <ng-option *ngFor="let dtma of dataMarcas" [value]="dtma.valor">
+                                            {{dtma.valor}}
+                                        </ng-option>
+                                    </ng-select>
+                                </td>
+                                <td>
+                                    <ng-select [(ngModel)]="d.modelo" [searchable]="true"
+                                        class="form-control form-control-sm custom-select custom" appendTo="body"
+                                        [clearable]="false" [disabled]="d.marca == '0' ">
+                                        <ng-option [value]="0">Modelo</ng-option>
+                                        <ng-option *ngFor="let dtmo of dataModelos" [value]="dtmo.valor">
+                                            {{dtmo.valor}}
+                                        </ng-option>
+                                    </ng-select>
+                                </td>
+                                <td style="text-align: center;">
+                                    <div>
+                                        <button class="btn btn-danger  btn-sm" placement="top"
+                                            matTooltip="Eliminar Items" (click)="deleteItems(i)"><i
+                                                class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="btn btn-info btn-sm" [disabled]="permissions.agregar == '0' "
+                                            data-toggle="tooltip" data-placement="top" matTooltip="Crear marca"
+                                            (click)="setCatalogoTitle('Ingreso de nueva marca','MARCAS','Marca')">
+                                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="btn btn-primary btn-sm" [disabled]="permissions.agregar == '0' "
+                                            data-toggle="tooltip" data-placement="top" matTooltip="Crear modelo"
+                                            (click)="setCatalogoTitle('Ingreso de nuevo modelo','MODELOS','Modelo')">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+
+
+</app-button-radio-active>
+
+
+<!-- modal de qr -->
+<div class="modal fade" id="exampleModalQr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title" id="exampleModalLabel">CÓDIGO QR </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-md-6" *ngIf="activof.codigo !== undefined" style="text-align: center;">
+                        <div class="qr-container">
+                            <qrcode [qrdata]="activof.codigo" [size]="120" [level]="'M'"></qrcode>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <span>{{activof.codigo}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: unset;text-align: center !important;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" style="width: 100px;">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal de agregar servicios marca y modelos -->
+<div class="modal fade" id="exampleModalL1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document" *ngIf="permissions != undefined">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <app-button-radio-active titulo="{{newCatalogo}}" filtroBoton="btnMdlnew"
+                    cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                    (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-search-plus">
+
+                    <div class="row">
+                        <div class="col-sm-12" *ngIf="tipoCatalogo == 'MODELOS' ">
+                            <app-cc-input-group-prepend label="Marca" styleSpan="size-span-campo">
+                                <ng-select [(ngModel)]="marcaSelectNew" [searchable]="true"
+                                    class="form-control form-control-sm custom-select custom" appendTo="body"
+                                    [clearable]="true" id="IdproductSendNg">
+                                    <ng-option *ngFor="let d of dataMarcas" [value]="d.valor">{{d.valor}}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-12">
+                            <app-cc-input-group-prepend label="{{valueLabel}}" styleSpan="size-span-campo">
+                                <input type="text" #valueCata="ngModel" name="valueCata"
+                                    style="box-shadow: unset;outline: unset;" class="form-control form-control-sm"
+                                    [(ngModel)]="valorCatalogo" placeholder="Ingrese valor"
+                                    [disabled]="permissions.editar == '0' " id="IdValorCatalogo">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-12">
+                            <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo">
+                                <textarea name="descripcion" cols="40" rows="1" #causa="ngModel" name="causa"
+                                    class="form-control form-control-sm" [(ngModel)]="description"
+                                    placeholder="Ingrese Descripción" style="box-shadow: unset;outline: unset;"
+                                    [disabled]="permissions.editar == '0' " id="Idcausa">
+                                </textarea>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAdqActFij"></cc-spiner-procesar>

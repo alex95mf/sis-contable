@@ -1,0 +1,33 @@
+
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnLstND" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-search">  
+
+    <div class="table-responsive responsive-table">
+        <table class="table table-sm table-bordered" datatable [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger" class="table table-sm no-footer">
+            <thead class="text-center thead-dark">
+                <tr class="text-center">
+                    <th style="width: 15%; border-left: 1px solid;">Causa</th>
+                    <th style="width: 25%;">Fecha Emision</th>
+                    <th style="width: 15%;">Razon Social</th>
+                    <th style="width: 15%;">Tipo Agente</th>
+                    <th style="width: 15%;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" *ngFor="let el of listado | filter:[{field:'tipo', value: 'NDD-C'}]; let idx = index" (click)="seleccionarNota(el)" style="cursor:pointer;width: 100%;">
+                    <td class="text-center" style="border-left: 1px solid"> {{ el.causa }} </td>
+                    <td class="text-center"> {{ el.fecha_emision}} </td>
+                    <td class="text-center"> {{ el.razon_social}} </td>
+                    <td class="text-center"> {{ el.tipo_agente}} </td>
+                    <td class="text-right"> {{ el.total}} </td>
+                     
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spLstNtDeb"></cc-spiner-procesar>

@@ -1,0 +1,112 @@
+<div class="mt-4">
+    <div class="row">
+        <div class="col-6">
+            <app-button-radio-active titulo="Anexos de la Solicitud" cstyle="bg-gradient-primary text-white" icono="fas fa-file-alt">
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="height: 36px;"><img src="assets/img/file.png"
+                                    width="35"></span>
+                            <label class="btn sub" for="ficher">
+                                <i class="fa fa-upload prueba" aria-hidden="true" style="font-size:14px;"></i>
+                                SELECCIONE ARCHIVO
+                            </label>
+                            <input type="file" id="ficher" lang="es" accept=".pdf,.doc,.docx,.xlsx,.xls,.pptx" name="file" multiple (change)="subiendoando($event.target.files)" [disabled]="!dAction">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group pt-2 mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #404a63; color: white;" placeholder="Ingrese observación">Descripción</span>
+                            </div>
+                            <textarea id="idDescripcion" #descrip="ngModel" name="descrip" class="show" [(ngModel)]="desDocument " style="height: 40px;" class="form-control form-control-sm" rows="3" [disabled]="!dAction"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+        <div class="col-6">
+            <app-button-radio-active titulo="Listado de Anexos Registrados" cstyle="bg-gradient-primary text-white" icono="fas fa-file-alt">
+                <div class="row">
+                    <div class="col-sm-12 filters mt-1">
+                        <!--  -->
+                        <div class="form-group table-responsive responsive-table altura">
+                            <table class="table table-sm table-hover">
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>Nombre</th>
+                                        <th>Extensión</th>
+                                        <th>Estado</th>
+                                        <th *ngIf="dataSearch == true">Acciónn</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let dt of guardaT; let i = index" class="text-center" style="width: 100%;">
+                                        <td style="width: 2%;">
+                                            <span class="form-control">
+                                                <strong>{{dt.id_anexos}}</strong>
+                                            </span>
+                                        </td>
+                                        <td style="width: 20%;">
+                                            <strong>{{dt.original_name}}</strong>
+                                        </td>
+                                        <td style="width: 20%;">
+                                            <strong>{{dt.original_extension}}</strong>
+                                        </td>
+                                        <td style="width: 5%;">
+                                            <strong>{{dt.status}}</strong>
+                                        </td>
+                                        <td *ngIf="dataSearch == true" style="width: 25%;text-align: center;">
+                                            <button type="button" class="btn btn-sm tooltip-test my-1" (click)="AnexoView(dt)" style="background-color: #FFC107; color: black; border-radius: 10px" title="Mostrar anexo" [disabled]="!dAction"><i class="fa fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm tooltip-test my-1" (click)="AnexoDownload(dt)" style="background-color: #404A63; color: white; border-radius: 10px" title="Descargar anexo" [disabled]="!dAction">
+                                                <i class="fa fa-download"></i>
+                                            </button>
+                                            <button type="button" (click)="AnexoDelete(dt,i)" class="btn btn-sm tooltip-test my-1" style="background-color: #F86C6B; color: white; border-radius: 10px" title="Remover Anexo" [disabled]="!dAction">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 1 -->
+<div class="modal fade" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <app-button-radio-active titulo="NOMBRE DE ANEXO:  {{nombre | uppercase}}" cstyle="bg-gradient-primary text-white" filtroBoton="btnanexoSoli" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+
+                <div class="modal-body ">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <div>
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="row cont">
+                                            <div class="col-md-12">
+                                                <ngx-doc-viewer [url]="generalDocument" viewer="url" style="width:100%;height:50vh;"></ngx-doc-viewer>
+                                                <!-- Web <ngx-doc-viewer [url]="generalDocument" viewer="google" style="width:100%;height:50vh;"></ngx-doc-viewer>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>
+
+<cc-spiner-procesar ltexto="Cargando..." lfulScren=true lTipo="spAnexComSol"></cc-spiner-procesar>

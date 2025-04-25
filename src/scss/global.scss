@@ -1,0 +1,31 @@
+/*Modal Logo*/
+@font-face {
+  font-family: "airstrike";
+  src: url("../assets/fonts/airstrikes.ttf") format("woff"), url("../assets/fonts/airstrikes.ttf") format("truetype");
+}
+.container-logo {
+  width: 100%;
+  .arian-logo {
+    background-image: url("../assets/img/modal-logo/advantage.png");
+    background-repeat: no-repeat;
+    width: 161px;
+    height: 60px;
+    margin: auto;
+    position: relative;
+    left: 16px;
+  }
+}
+/*Modal Logo*/
+/*Title Sections*/
+.title {
+  //color: var(--font-color);
+  color: #7C7C7C;
+  font-size: 25px;
+  font-weight: 500;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-family: "airstrike" !important;
+  letter-spacing: 1px;
+}
+/*Title Sections*/

@@ -1,0 +1,168 @@
+
+
+    <div class="row justify-content-center prt-comprobante" *ngIf="dataUser.company">
+        <div class="col-11 pl-2 pr-2">
+            <div class="row justify-content-center">
+                <div class="col-7 text-center mt-5">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <img src="{{dataUser.logoEmpresa}}" alt=""  style="width: 220px;">
+                            </div>
+                            <div class="col-12 mt-3"> {{dataUser.company.razon_social}} - {{dataUser.company.ruc}} </div>
+                            <div class="col-12"> Dirección: {{dataSucursal.direccion}} - Teléfono: {{dataSucursal.telefono1}} </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 text-center mt-5">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-3" style="font-size: 25px;font-weight: 600"> {{lImprimir.type | uppercase}} </div>
+                            <div class="col-12 mt-2" style="font-size: 20px;" > 
+                                No. {{ dataUser.id_empresa.toString().padStart(3, 0) }}-
+                                {{ dataUser.id_sucursal.toString().padStart(3, 0) }}-
+                                <span>{{ lImprimir.num_doc.padStart(10, 0) }}</span>
+                            </div>
+                            <div class="col-12 mt-2" style="font-size: 20px;">
+                                VALOR ${{ validaciones.roundNumber(lImprimir.valor, 2) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-4">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo"
+                                id="inputGroup-sizing-sm">Beneficiario</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" style="height: 32px;" [value]="nombreBeneficiario | uppercase">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha Emisión</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" style="height: 32px;" [value]="lImprimir.fecha">
+                    </div>
+                </div> 
+                <div class="col-sm-12">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend ">
+                            <span class="input-group-text size-span-campo"  id="inputGroup-sizing-sm">Concepto</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" style="height: 32px;" [value]="lImprimir.concepto | uppercase">
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div style="background-color: #5b9bd5 !important;color: white;font-size: 15px;" class="pl-1 pr-1 negrita-label">
+                        {{lImprimir.type | uppercase}}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="width: 100%;" class="negrita-label">
+                                <th style="width: 15%;" class="text-center">CODIGO</th>
+                                <th style="width: 70%;">CUENTA</th>
+                                <th style="width: 15%;" class="text-center">DEBE</th>
+                                <th style="width: 15%;" class="text-center">HABER</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="lImprimir.detalle.length>0">
+
+                            <tr *ngFor="let itemValor of lImprimir.detalle">
+                                <td style="vertical-align: middle;" align="center">{{itemValor.cuenta}}</td>
+
+                                <td *ngIf="validaValor(itemValor.valor_deb)" style="vertical-align: middle;" align="left">{{itemValor.detalle | uppercase}}</td>                                
+                                <td style="vertical-align: middle;" align="right" class="color-datos-ingresos2 negrita-label" *ngIf="validaValor(itemValor.valor_deb)">
+                                    {{validaciones.roundNumber(itemValor.valor_deb, 2) }}
+                                </td>
+                                <td *ngIf="validaValor(itemValor.valor_deb)"></td>
+
+                                <td *ngIf="validaValor(itemValor.valor_cre)" style="vertical-align: middle;;text-indent: 35px" align="left">{{itemValor.detalle | uppercase}}</td>    
+                                <td *ngIf="validaValor(itemValor.valor_cre)"></td>
+                                <td *ngIf="validaValor(itemValor.valor_cre)" style="vertical-align: middle" align="right" class="color-datos-egresos2 negrita-label">
+                                    {{validaciones.roundNumber(itemValor.valor_cre, 2) }}
+                                </td>
+
+                            </tr>
+
+                            <tr >
+                                <td></td>
+                                <td style="vertical-align: middle;" align="right" class="negrita-label">TOTAL USD$</td>
+                                <td style="vertical-align: middle;" align="right" class="negrita-label">{{validaciones.roundNumber(lImprimir.detalle[0].valor_deb, 2) }}</td>
+                                <td style="vertical-align: middle;" align="right" class="negrita-label">{{validaciones.roundNumber(lImprimir.detalle[0].valor_deb, 2) }}</td>
+                            </tr>
+                        </tbody> 
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="col-12 text-center">
+                <div class="row prt-comprobante">
+                    <div class="col-sm-3 quitar-espacio">
+                        <div class="card">
+                            <div class="card-header sect-two text-center negrita-label"> Elaborado por</div>
+                            <div class="card-body text-center">
+                                <div style="padding-top: 48px;">
+                                    <hr><br>
+                                    <strong>{{dataUser.nombre}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 quitar-espacio">
+                        <div class="card">
+                            <div class="card-header sect-two text-center negrita-label"> Revisado </div>
+                            <div class="card-body text-center">
+                                <div style="padding-top: 48px;">
+                                    <hr> <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 quitar-espacio">
+                        <div class="card">
+                            <div class="card-header sect-two text-center negrita-label"> Aprobado </div>
+                            <div class="card-body text-center">
+                                <div style="padding-top: 48px;">
+                                    <hr><br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 quitar-espacio">
+                        <div class="card">
+                            <div class="card-header sect-two text-center negrita-label"> Recibí conforme </div>
+                            <div class="card-body text-center">
+                                <div style="padding-top: 48px;">
+                                    <hr><br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-12 text-left" style="position: fixed; bottom: 0px;">
+        <span style="color: #13A1EA;">Usuario: {{dataUser.usuario | uppercase}}</span>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+
+<app-button-radio-active [titulo]="data.titulo" cstyle="bg-gradient-primary text-white" filtroBoton="btnTrsBovRep" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-th-list"> 
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+                <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control form-control-sm" type="text" format="yyyy-MM-dd" id="" (ngModelChange)="rerender()"> </ejs-datepicker>
+            </app-cc-input-group-prepend> 
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+                <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control form-control-sm" type="text" format="yyyy-MM-dd" id="" (ngModelChange)="rerender()"> </ejs-datepicker>
+            </app-cc-input-group-prepend> 
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Banco" styleSpan="size-span-campo">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="banco" (ngModelChange)="filterBanco($event)">
+                    <ng-option *ngFor="let d of arrayBanco" [value]="d.id_banks">{{d.name_banks}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>  
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="N° Transferencia" styleSpan="size-span-campo">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="transferencia" (ngModelChange)="filterTransf($event)">
+                    <ng-option *ngFor="let d of arrayTransf" [value]="d.secuencia">{{d.secuencia.toString().padStart(10, 0)}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend> 
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="N° Transaccion" styleSpan="size-span-campo">
+                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="transaccion" (ngModelChange)="filterTrans($event)">
+                    <ng-option *ngFor="let d of arrayTransf" [value]="d.num_doc">{{d.num_doc}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend> 
+        </div>
+    </div>
+    
+    <fieldset class="border p-0 mb-1 mt-2 filters">
+        <legend class="w-auto h6">Listado</legend>
+        <div class="table-responsive responsive-table">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover" id="tablaReporTransCta">
+                <thead>
+                    <tr style="width: 100%;text-align: center;">
+                        <th>Referencia</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Fecha</th>
+                        <th>Valor</th>
+                        <th>Concepto</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="validaDt">
+                    <tr *ngFor="let dt of infoData">
+                        <td [hidden]="dt.tipo_movimiento == 'C' " style="text-align: center;width: 3%;">{{ dt.secuencia.toString().padStart(10, '0') }}</td>
+                        <td [hidden]="dt.tipo_movimiento == 'C' " style="text-align: center;width: 8%;">{{ dt.name_banks  }}</td>
+                        <td [hidden]="dt.tipo_movimiento == 'C' " style="text-align: center;width: 8%;">{{ selectNameBank(dt) }}</td>
+                        <td [hidden]="dt.tipo_movimiento == 'C' " style="text-align: center;width: 3%;">{{ dt.fecha_movimiento }}</td>
+                        <td [hidden]="dt.tipo_movimiento == 'C' " style="text-align: center;width: 3%;">{{ dt.valor }}</td>
+                        <td [hidden]="dt.tipo_movimiento == 'C' " style="text-align: center;width: 3%;">{{dt.descripcion}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+                
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spTranCtaRep"></cc-spiner-procesar>

@@ -1,0 +1,247 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+    font-family: 'Poppins1';
+    src: url('../../../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+.title {
+    font-family: 'Poppins1';
+    color: blue;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    span {
+        margin-left: 20px;
+    }
+}
+
+label,
+input,
+select,
+button {
+    font-family: 'Poppins1';
+    /* text-transform: uppercase; */
+    box-shadow: unset !important;
+    outline: unset !important;
+}
+
+.container-new-loader {
+    i {
+        color: #5a5151;
+        font-size: 60px;
+    }
+}
+
+select {
+    font-family: 'Poppins1';
+    box-shadow: unset !important;
+    outline: unset !important;
+    font-size: 10px !important;
+}
+
+/* .filters {
+    font-family: 'Poppins1';
+    margin-top: 20px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid;
+    border-color: #00000030;
+} */
+
+
+
+select {
+    font-family: 'Poppins1' !important;
+    height: 28px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    outline: unset !important;
+    box-shadow: unset !important;
+    background-color: white !important;
+    border-radius: 3px !important;
+    border: 1px solid #5a55555c !important;
+    padding: 0px 0px 0px 5px;
+}
+
+button {
+    width: 150px;
+}
+
+
+.filters
+{
+   /*  font-family: "Poppins1";
+    background-color: #fafafa;
+    border-radius: 0px 0px 5px 5px;
+    border-top: unset !important; */
+
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 6px 0px 8px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                    padding: 7px 15px 7px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    /* color: rgba(0, 0, 0, 0.644); */
+                    font-weight: bold !important;
+                    border: none !important;
+                    font-size: 9px !important;
+                    input,
+                    ng-select,
+                    textarea{
+                        font-size: 9px !important; 
+                    }
+                    
+                }
+            }
+            
+        }
+    }
+}
+
+.table-status {
+    font-family: 'Poppins1';
+    margin-top: 10px;
+    .tInEg {
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .tUBrEj {
+        font-weight: 700;
+        background-color: #404A63;
+        text-transform: uppercase;
+        color: white !important;
+    }
+    .total {
+        font-weight: 600;
+    }
+    .total-error {
+        color: red;
+        /* font-weight: 700; */
+    }
+    .total-error:before {
+        content: "(";
+    }
+    .total-error:after {
+        content: ")";
+    }
+}
+
+.table-status-print {
+    
+    font-family: 'Poppins1';
+    margin-top: 10px;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+        .tInEg-print {
+            -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: black !important;
+        }
+        .tUBrEj-print {
+            
+            font-weight: 700;
+            background-color: #404A63 !important;
+            text-transform: uppercase;
+            color: black !important;
+        }
+        .total-print {
+            font-weight: 600;
+        }
+        .total-error-print {
+            color: red;
+            font-weight: unset;
+        }
+        .total-error-print:before {
+            content: "(";
+        }
+        .total-error-print:after {
+            content: ")";
+        }
+    
+}
+
+
+
+
+
+
+/* table {
+    color: white;
+    font-family: 'Poppins1';
+    text-transform: uppercase;
+    color: white;
+    thead {
+        background-color: #000000ce;
+        tr {
+            th {
+                padding: 5px 5px 5px 10px;
+            }
+        }
+    }
+    tbody {
+        background-color: #00000098;
+        tr {
+            td {
+                padding: 5px 5px 5px 10px;
+            }
+        }
+    }
+} */
+
+.contenedor-scrol-estr {
+    max-height: 600px;
+    min-height: 500px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.sect-one {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    border: 1px solid;
+    border-color: rgba(78, 74, 74, 0.37);
+    border-radius: 3px;
+    height: 160px;
+}
+
+.sect-two {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    height: 160px;
+    border-radius: 3px;
+    background-color: #5b9bd5;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+span {
+    font-weight: bold;
+}

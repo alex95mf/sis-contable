@@ -1,0 +1,144 @@
+<div *ngIf="arancel" >
+    <app-button-radio-active [titulo]="isNuevoArancel ? 'Nuevo Arancel' : 'Editar Arancel'" filtroBoton="btnArancelForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNuevoArancel ? 'far fa-plus-square' : 'far fa-edit'">
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Código</span>
+                    </div>
+                    <input id="codigo" type="text" class="form-control form-control-sm" [(ngModel)]="arancel.codigo" maxlength="3">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Estado</span>
+                    </div>
+                    <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="arancel.estado">
+                        <ng-option disabled [value]="0">Seleccione una opción</ng-option>
+                        <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1 input-group-custom-switch">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Aplica llenado de Formulario</span>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                        <input type="checkbox" class="custom-control-input" id="llenado_formulario" [(ngModel)]="arancel.llenado_formulario">
+                        <label class="custom-control-label" for="llenado_formulario"><!--{{ arancel.llenado_formulario ? "SI" : "NO" }}--></label>
+                    </div>
+                    <input type="text" class="form-control form-control-sm bg-white" disabled [value]="arancel.llenado_formulario ? 'SI' : 'NO'">
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3 mb-3">
+            <div class="col-12">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Descripción</span>
+                    </div>
+                    <input id="descripcion" type="text" class="form-control form-control-sm" placeholder="Descripción" [(ngModel)]="arancel.descripcion">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Tipo de Arancel</span>
+                    </div>
+                    <ng-select id="desc_tipo" class="form-control form-control-sm" [(ngModel)]="arancel.desc_tipo"  >
+                        <ng-option disabled [value]="0">Seleccione una opción</ng-option>
+                        <ng-option *ngFor="let op of tipo_base" [value]="op.descripcion">{{ op.valor }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Documento</span>
+                    </div>
+                    <ng-select id="desc_doc" class="form-control form-control-sm" [(ngModel)]="arancel.desc_doc">
+                        <ng-option disabled [value]="0">Seleccione una opción</ng-option>
+                        <ng-option *ngFor="let op of doc_base" [value]="op.descripcion">{{ op.valor }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+            
+        <div class="row mt-3 mb-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1 input-group-custom-switch">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Aplica Cuantía</span>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                        <input type="checkbox" class="custom-control-input" id="cuantia" [(ngModel)]="arancel.cuantia">
+                        <label class="custom-control-label" for="cuantia"><!--{{ arancel.cuantia ? "SI" : "NO" }}--></label>
+                    </div>
+                    <input type="text" class="form-control form-control-sm bg-white" disabled [value]="arancel.cuantia ? 'SI' : 'NO'">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1 input-group-custom-switch">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Aplica Avalúo</span>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                        <input type="checkbox" class="custom-control-input" id="avaluo" [(ngModel)]="arancel.avaluo">
+                        <label class="custom-control-label" for="avaluo"><!--{{ arancel.avaluo ? "SI" : "NO" }}--></label>
+                    </div>
+                    <input type="text" class="form-control form-control-sm bg-white" disabled [value]="arancel.avaluo ? 'SI' : 'NO'">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1 input-group-custom-switch">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Aplica Exoneraciones</span>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                        <input type="checkbox" class="custom-control-input" id="aplica_exoneracion" [(ngModel)]="arancel.aplica_exoneracion">
+                        <label class="custom-control-label" for="aplica_exoneracion"><!--{{ arancel.aplica_exoneracion ? "SI" : "NO" }}--></label>
+                    </div>
+                    <input type="text" class="form-control form-control-sm bg-white" disabled [value]="arancel.aplica_exoneracion ? 'SI' : 'NO'">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Tipo de Cálculo</span>
+                    </div>
+                    <ng-select id="desc_calculo" class="form-control form-control-sm" [(ngModel)]="arancel.desc_calculo" (change)="changeCalculo()">
+                        <ng-option disabled [value]="0">Seleccione una opción</ng-option>
+                        <ng-option *ngFor="let op of calculo_base" [value]="op.descripcion">{{ op.valor }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Tarifa base</span>
+                    </div>
+                    <input [disabled]="arancel.desc_calculo != 'FI' && arancel.desc_calculo != 'FO'" id="valor" type="text" class="form-control form-control-sm" placeholder="Tarifa base" [(ngModel)]="arancel.valor" (keypress)="onlyNumberDot($event)">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Porcentaje</span>
+                    </div>
+                    <input [disabled]="arancel.desc_calculo != 'FO'" id="porcentaje" type="text" class="form-control form-control-sm" placeholder="Porcentaje" [(ngModel)]="arancel.porcentaje" (keypress)="onlyNumberDot($event)">
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="arancelForm"></cc-spiner-procesar>

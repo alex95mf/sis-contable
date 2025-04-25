@@ -1,0 +1,123 @@
+<br>
+<app-button-radio-active titulo="Cheques Protestados" filtroBoton="btnChqProt" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" 
+(onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-cc" *ngIf="permisions[0]">  
+
+
+<div class="row">
+    <div class="col-sm-6">
+
+        <app-cc-input-group-prepend label="Banco" styleSpan="size-span-campo">
+            <select [(ngModel)]="vInputs.lBanco" class="form-control form-control-sm custom-select" id="identidadBnco" (ngModelChange)="rerender()">
+                <option value="">Seleccionar Banco</option>
+                <option *ngFor="let d of dataCatalogo['BANCO']" [value]="d.valor">
+                    {{d.valor}}
+                </option>
+            </select>
+        </app-cc-input-group-prepend>
+
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+                    <ejs-datepicker id="inputLabel-prepend" class="form-control" [(ngModel)]="vInputs.lFechaDesde" name="lfechaDesde" format='yyyy-MM-dd' id="lfechaDesde">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+                    <ejs-datepicker id="inputLabel-prepend" class="form-control" [(ngModel)]="vInputs.lFechaHasta" name="lFechaHasta" format='yyyy-MM-dd' id="lFechaHasta">
+                    </ejs-datepicker>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="input-group input-group-sm mt-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text size-span-campo" id="inputLabel-prepend">Cliente</span>
+            </div>
+            <input class="form-control " type="text" [(ngModel)]="vInputs.lNombreCliente" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" placeholder="buscar y seleccionar cliente" disabled/>
+            <div class="input-group-prepend"> 
+                <span class="input-group-text btn"  id="inputLabel-prepend"> 
+                    <i (click)="abrirModalClientes()" matTooltip="Buscar Clientes" class="fa fa-search fa-lg"></i> 
+                </span>
+            </div>
+            <div class="input-group-prepend"> 
+                <span class="input-group-text btn"  id="inputLabel-prepend"> 
+                    <i (click)="vInputs.lNombreCliente = ''; vInputs.lIdCliente = ''; rerender()" matTooltip="Buscar Clientes" class="fa fa fa-eraser fa-lg"></i> 
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+
+        <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+            <select [(ngModel)]="vInputs.lEstado" class="form-control form-control-sm custom-select" id="lEstado" (ngModelChange)="rerender()">
+                <!-- <option value="">Seleccionar Estado</option> -->
+                <option value="Cobrado">Cobrado</option>
+                <option value="Protestado">Protestado</option>
+            </select>
+        </app-cc-input-group-prepend>
+
+    </div>
+</div>
+
+
+
+<fieldset class="border p-2 mb-2 mt-3 filters" >
+    <legend class="w-auto h6">Listado</legend>
+
+    <div class="table-responsive responsive-table ">
+        <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="table table-bordered " id="tablaChqProt">
+            <thead class="text-center">
+                <tr >
+                    <th>#</th>
+                    <th>Fecha</th>
+                    <th>Banco</th>
+                    <th>Cuenta</th>
+                    <th>Cheque</th>
+                    <th>Cliente</th>
+                    <th>Estado</th>
+                    <th>Valor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody style="width: 100%;">
+                 <tr *ngFor="let valor of dataSource" >
+                    <td style="width: 5%;">{{valor.id}}</td>
+                    <td style="width: 10%;">{{valor.fecha_emision}}</td>
+                    <td style="width: 15%;">{{valor.name_bank}}</td>
+                    <td style="width: 10%;" >{{valor.ruc}}</td>
+                    <td style="width: 10%;" >{{valor.number_cheque}}</td>
+                    <td style="width: 20%;" class="text-right">{{valor.nombre_cliente}}</td>
+                    <td style="width: 10%;" class="text-right">{{valor.status | uppercase}}</td>
+                    <td style="width: 10%;" class="text-right">{{valor.valor}}</td>
+                    <td style="width: 15%;" class="text-center" >    
+                        <i class="btn fa fa-user-circle-o fa-2x" matTooltip="Ver detalle del cliente" (click)="modalInfoCliente(valor)" style="color: #1a3e7b;"></i>                                        
+                        <i class="btn fa fa-product-hunt fa-2x" *ngIf="valor.status == 'Cobrado'" matTooltip="Ingreso para protestar cheque" (click)="modalProtestarCheque(valor)" style="color: #541515;"></i>       
+                    </td>
+                </tr> 
+            </tbody>
+        </table>
+    </div>
+
+</fieldset>
+
+
+
+</app-button-radio-active>
+
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCheqProts"></cc-spiner-procesar>
+
+
+<button class="imprimirDatos" [useExistingCss]="true" printSectionId="print-section-che-pro" ngxPrint></button>
+
+<div [hidden]="true" id="print-section-che-pro" *ngIf="dataUser != undefined">
+    <app-che-pro-imprimir></app-che-pro-imprimir>
+</div>

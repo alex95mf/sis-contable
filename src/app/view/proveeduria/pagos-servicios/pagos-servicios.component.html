@@ -1,0 +1,187 @@
+
+<br>
+<app-button-radio-active titulo="Pago de servicios" filtroBoton="btnPagDServs" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-university">
+
+    <div class="row">
+        <div class="col-sm-8">
+            <fieldset class="border p-1 mb-1 mt-2">
+                <legend class="w-auto h6">Datos de Generales</legend>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Tipo de doc." styleSpan="size-span-campo">
+                            <select id="inpTipoDoc" class="form-control form-control-sm" [(ngModel)]="values.doc" (ngModelChange)="setTypeDoc($event)">
+                                <option hidden disabled selected [value]="0">Elegir una opción</option>
+                                <option *ngFor="let el of catalogs['PAGO SERVICIOS']" [value]="el.valor">{{ el.valor }}</option>
+                            </select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Número doc." styleSpan="size-span-campo">
+                            <input id="inpNumDoc" type="text" class="form-control form-control-sm" placeholder="Número documento" [(ngModel)]="values.num" [disabled]="values.doc === 0 || values.doc === 'No Deducible'">
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Centro de Costo" styleSpan="size-span-campo">
+                            <select id="inpCC" class="form-control form-control-sm" [(ngModel)]="values.cc">
+                                <option hidden disabled selected [value]="0">Elegir una opción</option>
+                                <option *ngFor="let el of centro_c" [value]="el.id">{{ el.nombre }}</option>
+                            </select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Importación" styleSpan="size-span-campo">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text btn" id="inputLabel-prepend">
+                                    <input id="checkImportacion" type="checkbox" [(ngModel)]="values.imp" (change)="setImp($event)">
+                                </span>                        
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text btn" id="inputLabel-prepend">
+                                    <input type="radio" id="customRadioPedido" name="customRadio"  [disabled]="!values.imp" [checked]="values.pedido" (change)="setTypeImp($event)">
+                                    &nbsp;&nbsp;Pedido
+                                </span>
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text btn" id="inputLabel-prepend">
+                                    <input type="radio" id="customRadioLiq" name="customRadio" [disabled]="!values.imp" [checked]="values.liq" (change)="setTypeImp($event)">
+                                    &nbsp;&nbsp;Liquidación
+                                </span>                        
+                            </div>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Número Imp." styleSpan="size-span-campo">
+                            <input id="inpNumImp" type="text" class="form-control form-control-sm" placeholder="Número documento" [disabled]="values.pedido === false && values.liq === false" [(ngModel)]="values.num_imp">
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm-6">
+                        <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                            <ejs-datepicker id="" class="form-control form-control-sm" type="text" [(ngModel)]="current_date" format='yyyy-MM-dd'></ejs-datepicker>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo">
+                            <textarea class="form-control form-control-sm" rows="2" placeholder="Observaciones" [(ngModel)]="values.obs"></textarea>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+        
+            </fieldset>
+        </div>
+        <div class="col-sm-4">
+            <fieldset class="border p-1 mb-1 mt-2 filters">
+                <legend class="w-auto h6">Calcular</legend>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Subtotal</th>
+                            <th scope="col" style="text-align: right;">
+                                $ {{ commonServices.formatNumber(values.subtotal) }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>IVA</td>
+                            <td class="text-right">
+                                $ <input type="number" class="text-right inp-transparent"
+                                    [(ngModel)]="values.iva" min="0" (keyup)="setTotal()"
+                                    (keypress)="commonServices.FormatDecimalVal($event)">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ICE</td>
+                            <td class="text-right">
+                                $ <input type="number" class="text-right inp-transparent"
+                                    [(ngModel)]="values.ice" min="0" (keyup)="setTotal()"
+                                    (keypress)="commonServices.FormatDecimalVal($event)">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0px 0px 0px 5px; font-weight: bold; color: #DC3712;">
+                                Total
+                            </td>
+                            <td style="text-align: right; font-weight: bold; padding: 0px 0px 0px 5px;color: #dc3712;">
+                                $ {{ commonServices.formatNumber(values.total) }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div> 
+
+
+    <fieldset class="border p-1 mb-1 mt-2 filters">
+        <legend class="w-auto h6"><i class="fas fa-calculator" ></i>&nbsp;&nbsp;Servicios</legend>
+        <div class="row justify-content-center">
+            <div class="col-6 text-left"></div>
+            <div class="col-6 text-right">
+                <button class="btn btn-success btn-sm" (click)="addItemServices()" placement="top" matTooltip="Agregar servicio"> <i class="fas fa-plus-square"></i></button>
+            </div>
+        </div>
+
+        <div class="col-12 my-1 table-responsive" style="max-height: 140px !important; overflow-y: scroll;">
+            <table class="table table-bordered">
+                <thead style="position: sticky; top: 0">
+                    <tr style="width: 100%;">
+                        <th class="header" style="width: 15%;">Acciones</th>
+                        <th class="header" style="width: 5%;">#</th>
+                        <th class="header" style="width: 35%;">Nombre</th>
+                        <th class="header" style="width: 15%;">Cant.</th>
+                        <th class="header" style="width: 15%;">P/U</th>
+                        <th class="header" style="width: 15%;">Total</th>
+                    </tr>
+                </thead>
+                <tbody style="width: 100%;">
+                    <tr *ngFor="let dt of servicios; let i = index">
+                        <td style="text-align: center;padding-top: 2px;">
+                            <div class="text-center">
+                                <button class="btn btn-danger btn-sm" (click)="deleteService(i)" placement="top"
+                                matTooltip="Eliminar servicio">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td>
+                            <span>{{ i + 1 }}</span>
+                        </td>
+                        <td>
+                            <input type="text" class="text-justify form-control form-control-sm" [(ngModel)]="dt.nombre">
+                        </td>
+                        <td>
+                            <input type="number" [(ngModel)]="dt.cant" min="0" (keyup)="setPrice(i)"
+                                (keypress)="commonServices.FormatDecimalVal($event)">
+                        </td>
+                        <td>
+                            <input type="number" [(ngModel)]="dt.precio" min="0" (keyup)="setPrice(i)"
+                                (keypress)="commonServices.FormatDecimalVal($event)">
+                        </td>
+                        <td>
+                            <input type="text" [(ngModel)]="dt.totalParse" [disabled]="true">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align: right ; padding-right: 10px;">Total</td>
+                        <td style="text-align: right; padding-right: 15px;">
+                            <span>$ {{ commonServices.formatNumber(values.subtotal) }}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spPagDServs"></cc-spiner-procesar>

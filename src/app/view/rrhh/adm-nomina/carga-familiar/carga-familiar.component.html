@@ -1,0 +1,167 @@
+
+<br>
+<app-button-radio-active titulo="Carga Familiar" cstyle="bg-gradient-primary text-white" filtroBoton="btnsCargFam" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-user-circle"> 
+
+    <div class="contenedor-scrol-tab">
+
+        <div class="row">
+            <div class="col-sm" id="divListadoCarga">
+                <fieldset class="border p-2 mb-2 mt-3">
+                    <legend class="w-auto h6">Listado</legend>
+                    <div class="row-fluid">
+                        <div class="text-right">
+                            <app-paginator [pageSize]="setPageSize"></app-paginator>
+                        </div>
+                        <div class="example-container">
+                            <div class="example-table-container">
+                                <table mat-table [dataSource]="dataSource" class="table table-sm table-hover table-bordered" matSort>
+                                    <ng-container matColumnDef="id_carga" class="quitar-espacio">
+                                        <th mat-header-cell class="mat-header-group text-center" *matHeaderCellDef mat-sort-header>ID.</th>
+                                        <td mat-cell *matCellDef="let valor" data-label="id_carga" class="text-center"> 
+                                            {{valor.id_carga}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="nombres">
+                                        <th mat-header-cell class="mat-header-group text-center flex-grow-2" *matHeaderCellDef mat-sort-header>Empleados</th>
+                                        <td mat-cell *matCellDef="let valor" data-label="nombres" class="text-center flex-grow-2">
+                                            {{valor.nombres}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="cedula_carga">
+                                        <th mat-header-cell class="mat-header-group text-center" *matHeaderCellDef mat-sort-header>Cedula Carga</th>
+                                        <td mat-cell *matCellDef="let valor" data-label="cedula_carga" class="text-center">
+                                            {{valor.cedula_carga}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="nombres_general">
+                                        <th mat-header-cell class="mat-header-group text-center flex-grow-2" *matHeaderCellDef mat-sort-header> Nombres Carga </th>
+                                        <td mat-cell *matCellDef="let valor" data-label="nombres_general" class="text-center flex-grow-2">
+                                            {{valor.nombres_general}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="relacion">
+                                        <th mat-header-cell class="mat-header-group text-center flex-grow-2" *matHeaderCellDef mat-sort-header> Relacion </th>
+                                        <td mat-cell *matCellDef="let valor" data-label="relacion" class="text-center flex-grow-2">
+                                            {{valor.relacion}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="fecha_nacim">
+                                        <th mat-header-cell class="mat-header-group text-center flex-grow-2" *matHeaderCellDef mat-sort-header>Fecha Nacimiento </th>
+                                        <td mat-cell *matCellDef="let valor" data-label="fecha_nacim" class="text-center flex-grow-2">
+                                            {{valor.fecha_nacim}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="edad">
+                                        <th mat-header-cell class="mat-header-group text-center flex-grow-2" *matHeaderCellDef mat-sort-header>Edad</th>
+                                        <td mat-cell *matCellDef="let valor" data-label="edad" class="text-center flex-grow-2">
+                                            {{valor.edad}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="nombre_comercial">
+                                        <th mat-header-cell class="mat-header-group text-center flex-grow-2" *matHeaderCellDef mat-sort-header> Empresa </th>
+                                        <td mat-cell *matCellDef="let valor" data-label="nombre_comercial" class="text-center flex-grow-2">
+                                            {{valor.nombre_comercial}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="accion">
+                                        <th mat-header-cell class="mat-header-group text-center flex-grow-0 flex-shrink-0 flex-basis-100" *matHeaderCellDef>Accion </th>
+                                        <td mat-cell *matCellDef="let valor" data-label="accion" class="text-center flex-grow-0 flex-shrink-0 flex-basis-100">
+                                            <i class="btn fa fa-pencil-square-o fa-lg" (click)="seleccionaritem(valor)" matTooltip="Ir a Modificar"style="color: #337ab7;"></i>
+                                            <i class="btn fa fa-trash-o fa-lg" (click)="eliminarcarga(valor)" matTooltip="Eliminar" style="color:orangered;"></i>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="my-mat-row"></tr>
+                                </table>
+                                <div *ngIf="dataSource.filteredData.length===0">NO HAY DATOS QUE PRESENTAR</div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+    
+            <div class="col-sm collapse" id="divInputsCarga">
+                <fieldset class="border p-2 mb-2 mt-3">
+                    <legend class="w-auto h6">Información de Carga Familiar</legend>
+                    <div class="row justify-content-center" *ngIf="permisions">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <app-cc-input-group-prepend label="Empleado" styleSpan="size-span-campo">
+                                        <select [(ngModel)]="empleSeleccionado" name="emple" id="emplecarga" class="form-control form-control-sm custom-select estilo-combos"
+                                            [disabled]="permisions[0].editar == '0'">
+                                            <option *ngFor="let d of dataEmpleado" [value]="d.id_personal"> {{d.nombres}} </option>
+                                        </select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-12">
+                                    <app-cc-input-group-prepend label="Cedula" styleSpan="size-span-campo">
+                                        <input placeholder="Ingrese Cedula" type="text" name="cedcarga" maxlength="10" (keypress)="validaciones.numberOnly($event)" [(ngModel)]="cedulacarga"
+                                            class="form-control form-control-sm" [disabled]="permisions[0].editar == '0'" id="cedulacarga">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-12">
+                                    <app-cc-input-group-prepend label="Nombres" styleSpan="size-span-campo">
+                                        <input placeholder="Ingrese Nombres" type="text" name="nomcarga" maxlength="200" [(ngModel)]="nombrecarga" class="form-control form-control-sm"
+                                            [disabled]="permisions[0].editar == '0'" id="carga">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-12">
+                                    <app-cc-input-group-prepend label="Apellidos" styleSpan="size-span-campo">
+                                        <input placeholder="Ingrese Apellidos" type="text" name="apellcarga" maxlength="200" [(ngModel)]="apellidocarga" class="form-control form-control-sm"
+                                            [disabled]="permisions[0].editar == '0'" id="cargas">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-12">
+                                    <app-cc-input-group-prepend label="Relación" styleSpan="size-span-campo">
+                                        <select [(ngModel)]="relacioncarga" id="relacion" name="relacion"
+                                            class="form-control form-control-sm custom-select estilo-combos" [disabled]="permisions[0].editar == '0'">
+                                            <option *ngFor="let d of datarelacion"
+                                                [value]="d.valor">{{d.valor}}
+                                            </option>
+                                        </select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-12">
+                                    <app-cc-input-group-prepend label="Nacimiento" styleSpan="size-span-campo">
+                                        <ejs-datepicker [(ngModel)]="fechaCarga" name="dateFrom" format='yyyy-MM-dd' class="form-control" id="idNominaDate1" [disabled]="permisions[0].editar == '0'" name="dateFrom">
+                                        </ejs-datepicker>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                            <div class="row cont">
+                                <div class="col-sm-6 mt-3">
+                                    <app-cc-input-group-prepend label="Discapacidad" styleSpan="size-span-campo">
+                                        <div class="switch-container">
+                                            <div class="onoffswitch">
+                                                <input type="checkbox" name="discarga" class="onoffswitch-checkbox" [disabled]="permisions[0].editar == '0'" id="discarga" checked [(ngModel)]="discapacidadcarga">
+                                                <label class="onoffswitch-label" for="discarga">
+                                                    <span class="onoffswitch-inner"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-sm-6 mt-3">
+                                    <app-cc-input-group-prepend label="Afiliado" styleSpan="size-span-campo">
+                                        <div class="switch-container">
+                                            <div class="onoffswitch">
+                                                <input type="checkbox" name="afiliado" class="onoffswitch-checkbox" [disabled]="permisions[0].editar == '0'" id="afi" checked [(ngModel)]="afiliado">
+                                                <label class="onoffswitch-label" for="afi">
+                                                    <span class="onoffswitch-inner"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div> 
+    </div>
+</app-button-radio-active>     
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCargFam"></cc-spiner-procesar>

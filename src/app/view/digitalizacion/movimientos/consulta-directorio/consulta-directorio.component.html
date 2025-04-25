@@ -1,0 +1,206 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Consulta Directorio" icono="fas fa-file-invoice" cstyle="bg-light" filtroBoton="btnsConsultaDirectotio" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row my-2">
+            <div class="col-sm-5">
+                <div class="row">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Tipo Documento" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select class="form-control" [clearable]="false" (change)="selectTipoDocumento($event)"  [(ngModel)]="tipo_documento">
+                                <ng-option *ngFor="let c of lst_tipoDoC" [value]="c.id_tipo_documento">{{c.nombre}}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" *ngIf="filter['campos'].length > 0">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row" *ngFor="let campo of dataForms, let i = index">
+                   
+                        
+                        <div class="col-sm">
+                            <ng-container *ngIf="campo.tipo_dato !== 'date'; else dateField">
+                            <app-cc-input-group-prepend [label]="filter?.campos[i].campo_indice" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_buscador"  class="form-control" [(ngModel)]="filter?.campos[i].valor_indice"
+                                [type]="campo.tipo_dato === 'date' ? 'date' : (campo.tipo_dato === 'numeric' ? 'number'  : 'text')" 
+                                style="min-width: 50px;"> 
+                                 
+                            </app-cc-input-group-prepend>
+                        </ng-container>
+                        <ng-template #dateField>
+                            <app-cc-input-group-prepend [label]="filter?.campos[i].campo_indice" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_buscador"  class="form-control" [(ngModel)]="filter?.campos[i].valor_indice"
+                                [type]="campo.tipo_dato === 'date' ? 'date' : (campo.tipo_dato === 'numeric' ? 'number'  : 'text')" 
+                                style="min-width: 50px;"> 
+                                 
+                            </app-cc-input-group-prepend>
+                            <app-cc-input-group-prepend [label]="filter?.campos[i].campo_indice_hasta" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_buscador"  class="form-control" [(ngModel)]="filter?.campos[i].valor_indice_hasta"
+                                [type]="campo.tipo_dato === 'date' ? 'date' : (campo.tipo_dato === 'numeric' ? 'number'  : 'text')" 
+                                style="min-width: 50px;"> 
+                                 
+                            </app-cc-input-group-prepend>
+                            <!-- Aquí puedes colocar lo que quieras mostrar para campos de tipo date -->
+                            <!-- Por ahora, solo dejaremos este template vacío -->
+                        </ng-template>
+                        </div>
+                        
+                    
+                    </div>
+                    <div class="row" >
+                   
+                        
+                        <div class="col-sm">
+                            <app-cc-input-group-prepend label="Tipo de medio" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_buscador"  class="form-control" [(ngModel)]="tipo_medio" 
+                                type="text" 
+                                style="min-width: 50px;"><!-- type="text" -->   
+                            </app-cc-input-group-prepend>
+                        </div>
+                        
+                    
+                    </div>
+                    <div class="row" >
+                   
+                        
+                        <div class="col-sm">
+                            <app-cc-input-group-prepend label="N. de medio" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_buscador"  class="form-control" [(ngModel)]="numero_medio" 
+                                type="text" 
+                                style="min-width: 50px;"><!-- type="text" n. DE MEDIO-->   
+                            </app-cc-input-group-prepend>
+                        </div>
+                        
+                    
+                    </div>
+                </fieldset>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Directorio</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col">
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-secondary" (click)="treeControl.expandAll()">Expandir</button>
+                                    <button class="btn btn-sm btn-secondary" (click)="treeControl.collapseAll()">Contraer</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="max-height: 500px; overflow-y: auto;">
+                            <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+                               
+                                <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild" class="overe">
+                                    <div class="mat-tree-node" class="alert alert-info border border-info p-0 my-1 font-weight-bold overe" style="display: flex;" >
+                                        <button mat-icon-button matTreeNodeToggle >
+                                        <mat-icon class="mat-icon-rtl-mirror"  [style.opacity]="node.children && node.children.length > 0 ? 1 : 0"><!--  *ngIf="hasChild(_, node)" --> 
+                                            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                        </mat-icon>
+                                        </button>
+                                        <div (click)="handleClickSearch(node)" class="text-mat" style="height: auto;"> 
+                                            <span  >{{ node.valor.replace('_', ': ').replace('anio', 'Año').replace('mes', 'Mes').replace('dia', 'Dia') }}</span>
+                                        </div>
+                                    </div>
+                                    <div [class.example-tree-invisible]="!treeControl.isExpanded(node)"
+                                        role="group">
+                                        <ng-container matTreeNodeOutlet></ng-container>
+                                    </div>
+                                </mat-nested-tree-node>
+                            </mat-tree>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-sm-9">
+                <div *ngIf="resultadoConsulta != null" style="overflow: auto;">
+                    <div class="table-container" *ngIf="resultadoConsulta && resultadoConsulta.length > 0">
+                        <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="table-header"></th>
+                               <!--  <th class="table-header"></th> -->
+                                <!-- Generar la cabecera de manera dinámica -->
+                                <th class="table-header">Nombre de Archivo</th>
+                                <!-- <ng-container *ngFor="let detalle of resultadoConsulta[0]?.detalledocs">
+                                    <th class="table-header">{{ detalle.campo_indice }}</th>
+                                </ng-container> -->
+                                <ng-container *ngFor="let detalle of dataForms">
+                                    <th class="table-header">{{ detalle.campo_indice }}</th>
+                                </ng-container>
+                                <th class="table-header">Tipo de medio</th>
+                                <th class="table-header">N. de medio</th>
+                                <th class="table-header">Bodega</th>
+                                <th class="table-header">Ubicacion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Iterar sobre los datos y generar las filas de manera dinámica seleccionarpreview -->
+                            <tr *ngFor="let dato of resultadoConsulta">   
+                                <td width="5%"> <i class="fa fa-hand-pointer-o over" (click)="verAnexo(dato)" [ngStyle]="{'color': 'green'}"></i></td>
+                               <!--  <td> <button class="btn btn-primary btn-sm" (click)="moduloDetallePrestamo(dato)" ngbTooltip="Mostrar detalles">
+                                    <i class="fas fa-eye"></i>
+                                </button></td> -->
+                                <td>{{ dato.nombre_archivo }}</td>
+                                <ng-container *ngFor="let detalle of dato.detalledocs">
+                                    <td >{{ detalle.valor_indice }}</td>
+                                </ng-container>
+                                <td > <ng-container *ngIf="dato.tipo_medio !== null && dato.tipo_medio !== 'null'">
+                                    {{ dato.tipo_medio }}
+                                </ng-container>
+                                  </td>
+                                  <td > <ng-container *ngIf="dato.numero_medio !== null && dato.numero_medio !== 'null'">
+                                    {{ dato.numero_medio }}
+                                  </ng-container>
+                                  
+                                  </td>
+                             <!--    <td>
+                                 
+                                      {{ dato.tipo_medio }}
+                                    
+                                  </td>
+                                  <td>
+                                 
+                                      {{ dato.numero_medio }}
+                                 
+                                  </td> -->
+
+                                <td>
+                                    <span [matTooltip]="tooltipContent">
+                                      {{ dato.ubicacionrelation?.bodega?.nombre }}
+                                    </span>
+                                  </td>
+                                  <ng-template #tooltipContent>
+                                    <div>
+                                        <p>
+                                            {{ dato.ubicacionrelation?.bodega}}
+                                        </p>
+                                    </div>
+                                  </ng-template>
+                                <td>{{ dato.ubicacionrelation?.tipo_almacenamiento }}</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <mat-paginator 
+                            showFirstLastButtons
+                            [length]="paginate.length" 
+                            [pageSize]="paginate.perPage" 
+                            [pageIndex]="+paginate.page - 1"
+                            [pageSizeOptions]="paginate.pageSizeOptions" 
+                            (page)="changePaginate($event)" 
+                            aria-label="Select page">
+                        </mat-paginator>
+                    </div>
+                    <div class="no-data" *ngIf="!resultadoConsulta || resultadoConsulta.length === 0">
+                        <p>No hay datos disponibles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spSubida"></cc-spiner-procesar>

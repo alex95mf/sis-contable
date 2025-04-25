@@ -1,0 +1,93 @@
+<app-button-radio-active titulo="Detalle de Atribuciones" cstyle="bg-gradient-primary text-white" icono="fas fa-box-open" [groupButton]="vmButtons" filtroBoton="btnsAttrDet" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+        <div class="col-6">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text">Departamento</span></div>
+                <input type="text" class="form-control" readonly [value]="atribucion.departamento.nombre">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-6">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text">Indicador</span></div>
+                <input type="text" class="form-control" readonly [value]="atribucion.indicador">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text">Formula</span></div>
+                <input type="text" class="form-control" readonly [value]="atribucion.formula">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text">Frecuencia</span></div>
+                <input type="text" class="form-control" readonly [value]="atribucion.realizacion.frecMedicion.nombre">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text">Meta</span></div>
+                <input type="text" class="form-control" readonly [value]="atribucion.meta?.nombre">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text">Prevision</span></div>
+                <input type="text" class="form-control" readonly [value]="atribucion.realizacion.tiempoPrevision.nombre">
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-2">
+            <div class="text-center"><p class="h6">Realizacion</p></div>
+        </div>
+        <div class="col-2">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" readonly [value]="atribucion.realizacion.trimestre[0]">
+                <div class="input-group-append"><span class="input-group-text font-weight-bold">%</span></div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" readonly [value]="atribucion.realizacion.trimestre[1]">
+                <div class="input-group-append"><span class="input-group-text font-weight-bold">%</span></div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" readonly [value]="atribucion.realizacion.trimestre[2]">
+                <div class="input-group-append"><span class="input-group-text font-weight-bold">%</span></div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" readonly [value]="atribucion.realizacion.trimestre[3]">
+                <div class="input-group-append"><span class="input-group-text font-weight-bold">%</span></div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Descripcion</th>
+                <th>Cantidad</th>
+                <th>Unidad de Medida</th>
+                <th>Costo Unitario</th>
+                <th>Costo Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let b of atribucion.bienes">
+                <td>{{ b.descripcion }}</td>
+                <td>{{ b.cant }}</td>
+                <td>{{ b.uMedida?.nombre }}</td>
+                <td>{{ b.costoUnitario }}</td>
+                <td>{{ b.costoTotal }}</td>
+            </tr>
+        </tbody>
+    </table>
+</app-button-radio-active>

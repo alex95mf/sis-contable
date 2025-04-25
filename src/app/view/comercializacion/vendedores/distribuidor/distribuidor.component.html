@@ -1,0 +1,268 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Registro de Distribuidor" filtroBoton="btnsDistribuidor" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <!--<div class="row mt-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo Doc.</span>
+                    </div>
+                    <select id="tipo_documento" class="form-control form-control-sm" (ngModelChange)="docValidate($event)" [(ngModel)]="distribuidor.tip_doc">
+                        <option [value]="0" disabled>Seleccione documento</option>
+                        <option *ngFor="let d of catalog.documents" [value]="d.valor">{{ d.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
+                    </div>
+                    <input id="num_documento" type="text" class="form-control form-control-sm" placeholder="Número del documento" [(ngModel)]="distribuidor.num_doc" (keypress)="onlyNumber($event)" minlength="{{ tamDoc }}" maxlength="{{ tamDoc }}">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Linea Producto</span>
+                    </div>
+                    <select id="linea" class="form-control form-control-sm" [(ngModel)]="distribuidor.fk_linea_producto">
+                        <option [value]="0" disabled>Seleccione linea</option>
+                        <option *ngFor="let d of catalog.linea" [value]="d.nombre">{{ d.nombre }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre Distribuidor</span>
+                    </div>
+                    <input id="nombre" type="text" class="form-control form-control-sm" placeholder="Nombre distribuidor" [(ngModel)]="distribuidor.nombre">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                    </div>
+                    <input id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección distribuidor" [(ngModel)]="distribuidor.direccion">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+                    </div>
+                    <input id="telefono" type="text" class="form-control form-control-sm" placeholder="Teléfono distribuidor" [(ngModel)]="distribuidor.telefono" (keypress)="onlyNumber($event)">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Zona</span>
+                    </div>
+                    <select id="zona" class="form-control form-control-sm" (ngModelChange)="zonaValidate($event)" [(ngModel)]="distribuidor.zona">
+                        <option [value]="0" disabled>Seleccione zona</option>
+                        <option *ngFor="let d of catalog.zona" [value]="d.id_catalogo">{{ d.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sector</span>
+                    </div>
+                    <select id="sector" class="form-control form-control-sm" [(ngModel)]="distribuidor.sector">
+                        <option [value]="0">Seleccione sector</option>
+                        <option *ngFor="let d of catalogSector" [value]="d.id_catalogo">{{ d.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sucursal</span>
+                    </div>
+                    <select id="sucursal" class="form-control form-control-sm" [(ngModel)]="distribuidor.fk_sucursal">
+                        <option [value]="0" disabled>Seleccione sucursal</option>
+                        <option *ngFor="let d of catalog.sucursal" [value]="d.nombre">{{ d.nombre }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Presupuesto</span>
+                    </div>
+                    <input id="presupuesto" type="number" step="0.25" class="form-control form-control-sm" placeholder="Presupuesto distribuidor" [(ngModel)]="distribuidor.presupuesto">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Inicio de actividades</span>
+                    </div>
+                    <input id="inicio_actividades" type="date" class="form-control form-control-sm" [(ngModel)]="distribuidor.inicio_actividades">
+                </div>
+            </div>
+        </div>-->
+        
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre Distribuidor</span>
+                    </div>
+                    <input id="nombre" type="text" class="form-control form-control-sm" placeholder="Nombre distribuidor" [(ngModel)]="distribuidor.nombre">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo Doc.</span>
+                    </div>
+                    <select id="tipo_documento" class="form-control form-control-sm" (ngModelChange)="docValidate($event)" [(ngModel)]="distribuidor.tip_doc">
+                        <option [value]="0" disabled>Seleccione documento</option>
+                        <option *ngFor="let d of catalog.documents" [value]="d.valor">{{ d.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
+                    </div>
+                    <input id="num_documento" type="text" class="form-control form-control-sm" placeholder="Número del documento" [(ngModel)]="distribuidor.num_doc" (keypress)="onlyNumber($event)" minlength="{{ tamDoc }}" maxlength="{{ tamDoc }}">
+                </div>
+            </div>
+        </div>
+
+        <mat-card-content>
+            <!--<mat-expansion-panel class="mt-3">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Datos personales</mat-panel-title>
+                </mat-expansion-panel-header>
+
+            </mat-expansion-panel>-->
+
+            <mat-expansion-panel class="mt-2">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Información de contacto</mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row mt-2">
+                    <div class="col-8">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                            </div>
+                            <input id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección distribuidor" [(ngModel)]="distribuidor.direccion">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+                            </div>
+                            <input id="telefono" type="text" class="form-control form-control-sm" placeholder="Teléfono distribuidor" [(ngModel)]="distribuidor.telefono" (keypress)="onlyNumber($event)">
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel class="mt-2">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Area de distribución</mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row mt-2">
+                    <div class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Zona</span>
+                            </div>
+                            <select id="zona" class="form-control form-control-sm" (ngModelChange)="zonaValidate($event)" [(ngModel)]="distribuidor.zona">
+                                <option [value]="0" disabled>Seleccione zona</option>
+                                <option *ngFor="let d of catalog.zona" [value]="d.id_catalogo">{{ d.valor }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sector</span>
+                            </div>
+                            <select id="sector" class="form-control form-control-sm" [(ngModel)]="distribuidor.sector">
+                                <option [value]="0">Seleccione sector</option>
+                                <option *ngFor="let d of catalogSector" [value]="d.id_catalogo">{{ d.valor }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Sucursal</span>
+                            </div>
+                            <select id="sucursal" class="form-control form-control-sm" [(ngModel)]="distribuidor.fk_sucursal">
+                                <option [value]="0" disabled>Seleccione sucursal</option>
+                                <option *ngFor="let d of catalog.sucursal" [value]="d.nombre">{{ d.nombre }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel class="mt-2">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Información adicional</mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row mt-2">
+                    <div class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Linea Producto</span>
+                            </div>
+                            <select id="linea" class="form-control form-control-sm" [(ngModel)]="distribuidor.fk_linea_producto">
+                                <option [value]="0" disabled>Seleccione linea</option>
+                                <option *ngFor="let d of catalog.linea" [value]="d.nombre">{{ d.nombre }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Presupuesto</span>
+                            </div>
+                            <input id="presupuesto" type="number" step="0.25" class="form-control form-control-sm" placeholder="Presupuesto distribuidor" [(ngModel)]="distribuidor.presupuesto">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Inicio de actividades</span>
+                            </div>
+                            <input id="inicio_actividades" type="date" class="form-control form-control-sm" [(ngModel)]="distribuidor.inicio_actividades">
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-card-content>
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spDistribuidor"></cc-spiner-procesar>

@@ -1,0 +1,124 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Consulta de IDP" filtroBoton="btnsDocumentos" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons"  icono="far fa-hand-pointer" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border px-3 pb-2">
+            <legend class="w-auto h6 mb-1">Filtros</legend>
+            <div class="row">
+                <div class="col-10">
+                    <div class="row ml-1">
+                        <!-- <div class="col">
+                            <app-cc-input-group-prepend label="Razón social" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.razon_social">
+                            </app-cc-input-group-prepend>
+
+                        </div> -->
+                        <div class="col">
+                            <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.num_documento">
+                            </app-cc-input-group-prepend>
+                        </div>
+
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control" [(ngModel)]="filter.estado">
+                                    <ng-option *ngFor="let item of estado" [value]="item.valor">{{item.descripcion}}</ng-option>
+                                </ng-select>
+                                <!-- <input id="filter_fecha_ini" type="date" class="form-control" [(ngModel)]="filter.fecha_desde"> -->
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row ml-1">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha inicio" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_fecha_ini" type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Fecha fin" styleSpan="size-span-campo font-weight-bold">
+                                <input id="filter_fecha_fin" type="date" class="form-control" [(ngModel)]="filter.fecha_hasta" >
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="consultar()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="table-responsive">
+            <table class="table table-bordered no-footer table-hover mb-0">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th style="width: 10%;">No. Documento</th>
+                        <th style="width: 7%;">Período</th>
+                        <th style="width: 10%;">Proceso</th>
+                        <th style="width: 10%;">Proveedor</th>
+                        <th style="width: 10%;">Observación</th>
+                        <th style="width: 10%;">Programas</th>
+                        <th style="width: 5%;">Valor</th>
+                        <th style="width: 7%;">Devengado</th>
+                        <th style="width: 7%;">Por Devengar</th>
+                        <th style="width: 8%;">Pagado</th>
+                        <th style="width: 8%;">Por Pagar</th>
+                        <th style="width: 8%;">Estado</th>
+                        <th style="width: 8%;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="documentosDt.length == 0">
+                        <td colspan="13" class="text-center"><h6 class="my-1"></h6>No hay Liquidaciones para mostrar</td>
+                    </tr>
+                    <tr *ngFor="let dt of documentosDt, let i = index">
+                        <td class="text-center">{{ dt.documento }}</td>
+                        <td class="text-center">
+                            {{dt.periodo ? dt.periodo : ''}}<br>
+                            <small class="text-muted">{{ dt.fecha.split(" ")[0] }}</small>
+                        </td>
+                        <td class="text-center">
+                            {{dt.solicitud?.num_solicitud}}<br>
+                            <span class="text-muted">{{ dt.solicitud?.tipo_proceso }}</span>
+                        </td>
+                        <td class="text-center">{{ dt.solicitud?.proveedor ? dt.solicitud?.proveedor?.razon_social : 'Sin proveedor asignado'}}</td>
+                        <td class="text-center">{{ dt.observacion }}</td>
+                        <td class="text-center">
+                            {{dt.catalogo_programa ? dt.catalogo_programa.valor : dt.programas[0].valor }}
+                        </td>                     
+                        <td class="text-right">$ {{ dt.total | number:'1.2-2' }}</td>
+                        <td class="text-right">$ {{ dt.devengado | number:'1.2-2' }}</td>
+                        <td class="text-right">$ {{ dt.saldo_devengado ?? 0 | number:'1.2-2'}}</td>
+                        <td class="text-right">$ {{ dt.pagado | number:'1.2-2'}}</td>
+                        <td class="text-right">$ {{ dt.saldo_pagado ?? 0 | number:'1.2-2' }}</td>
+                        <td  class="text-center">
+                            <span *ngIf="dt.estado == 'E'"> <i class="fas fa-circle text-warning"></i> Emitido</span>
+                            <span *ngIf="dt.estado == 'A'"> <i class="fas fa-circle text-success"></i> Aprobado</span>
+                            <span *ngIf="dt.estado == 'C'"><i class="fas fa-circle text-warning"></i> Comprometido</span>
+                            <span *ngIf="dt.estado == 'D'"> <i class="fas fa-circle text-danger"></i> Devengado</span>
+                            <span *ngIf="dt.estado == 'P'"> <i class="fas fa-circle text-success"></i> Pagado</span>
+                            <span *ngIf="dt.estado == 'X'"><i class="fas fa-circle text-danger"></i> Anulado</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" (click)="selectOption(dt)" ngbTooltip="Detalle de IDP">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <mat-paginator
+            showFirstLastButtons 
+            [length]="paginate.length"
+            [pageSize]="paginate.perPage"
+            [pageIndex]="paginate.pageIndex"
+            [pageSizeOptions]="paginate.pageSizeOptions"
+            (page)="changePaginate($event)"
+            aria-label="Select page">
+        </mat-paginator>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>

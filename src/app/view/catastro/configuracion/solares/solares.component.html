@@ -1,0 +1,137 @@
+<div class="my-2">
+    <app-button-radio-active titulo="Solares" cstyle="bg-light" icono="fas fa-clone"
+        filtroBoton="btnsCatastroSolares" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <section>
+            <div class="row mt-2">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Cod. Catastral" styleSpan="size-span-campo font-weight-bold">
+                        <input class="form-control" type="text" [disabled]="true" [(ngModel)]="solar.cod_catastral" value="{{solar.zona +'-'+ solar.sector +'-'+ solar.manzana +'-'+ solar.solar}}" />
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Fecha Adquisición" styleSpan="font-weight-bold size-span-campo">
+                        <input id="fecha_adquisicion" type="date" class="form-control" [(ngModel)]="solar.fecha_adquisicion">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Código anterior" styleSpan="size-span-campo font-weight-bold">
+                        <input class="form-control" type="text" [(ngModel)]="solar.cod_catastral_anterior"  />
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm-6">
+                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [selectOnTab]="true" [(ngModel)]="solar.estado" [clearable]="false" >
+                            <ng-option [value]="0" disabled>Estado</ng-option>
+                            <ng-option *ngFor="let ep of estados_predio" [value]="ep.codigo">{{ ep.codigo }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <fieldset class="border pb-2 px-2 mb-2 mt-2">
+                <legend class="w-auto ml-1 bg-dark">Ubicación</legend>
+                
+                <div class="col-sm">
+                    <app-cc-input-group-prepend label="Zona" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [selectOnTab]="true" [(ngModel)]="solar.zona_id" [clearable]="false"
+                            (change)="filterSector($event)" [items]="zonas" bindValue="id" bindLabel="label">
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm">
+                    <app-cc-input-group-prepend label="Sector" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control" [selectOnTab]="true" [(ngModel)]="solar.sector_id" [clearable]="false" (change)="codigoCatastral($event)">
+                            <ng-option [value]="0" disabled>Sector</ng-option>
+                            <ng-option *ngFor="let sector of sectores_filter" [value]="sector.id">{{ sector.codigo }}.
+                                {{ sector.nombre }}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm">
+                    <app-cc-input-group-prepend label="Manzana" styleSpan="size-span-campo font-weight-bold">
+                        <input class="form-control" type="text" [(ngModel)]="solar.manzana"  />
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-sm">
+                    <app-cc-input-group-prepend label="Solar" styleSpan="size-span-campo font-weight-bold">
+                        <input class="form-control" type="text" [(ngModel)]="solar.solar" />
+                    </app-cc-input-group-prepend>
+                </div> 
+            </fieldset>
+            <fieldset class="border pb-2 px-2 mb-2 mt-2">
+                <legend class="w-auto ml-1 bg-dark">Dimensiones</legend>
+                <div class="row">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Área" styleSpan="size-span-campo font-weight-bold">
+                            <input class="form-control" type="text" [(ngModel)]="solar.area"  />
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Valor mt2" styleSpan="size-span-campo font-weight-bold">
+                            <input currencyMask class="form-control" type="text" [(ngModel)]="solar.valor_metro_cuadrado"  />
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Valor del solar" styleSpan="size-span-campo font-weight-bold">
+                            <input currencyMask class="form-control" type="text" [(ngModel)]="solar.valor_solar"  />
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Valor de edificación" styleSpan="size-span-campo font-weight-bold">
+                            <input currencyMask class="form-control" type="text" [(ngModel)]="solar.valor_edificacion"  />
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Valor comercial" styleSpan="size-span-campo font-weight-bold">
+                            <input currencyMask class="form-control" type="text" [(ngModel)]="solar.valor_comercial"  />
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div class="col-sm">
+                        <app-cc-input-group-prepend label="Valor hipoteca" styleSpan="size-span-campo font-weight-bold">
+                            <input currencyMask class="form-control" type="text" [(ngModel)]="solar.valor_hipoteca"  />
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+            </fieldset>
+        </section>
+        <fieldset class="border pb-2 px-2 mb-2">
+            <legend class="w-auto ml-1 bg-dark">Propietarios</legend>
+            <div class="col-12 filters ">
+                <table class="table table-hover mt-2" style="max-height: 300px;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tipo Documento</th>
+                            <th>No. Documento</th>
+                            <th>Relación</th>
+                            <!-- <th>Acciones</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!propietarios.length">
+                        <td colspan="4" class="text-center">
+                            <h6>No hay datos</h6>
+                        </td>
+                        </tr>
+                        <tr *ngFor="let pro of propietarios; let i = index" >
+                            <td>{{ pro.razon_social }}</td>
+                            <td>{{ pro.tipo_documento }} </td>
+                            <td>{{ pro.num_documento }} </td>
+                            <td>{{ pro.pivot?.tipo_relacion}}</td>
+                            <!-- <td></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+        
+            
+        
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spCatastroSolar"></cc-spiner-procesar>

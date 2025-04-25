@@ -1,0 +1,20 @@
+<div class="table-responsive responsive-table p-3">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Secuencia</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="isComplete">
+            <tr *ngFor="let dt of documents" (click)="updateDocument(dt)" style="cursor:pointer;">
+                <td>{{ dt.id }}</td>
+                <td>{{ dt.codigo }}</td>
+                <td>{{ dt.nombre }}</td>
+                <td>{{ dt.secuencia.padStart(10, '0') }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

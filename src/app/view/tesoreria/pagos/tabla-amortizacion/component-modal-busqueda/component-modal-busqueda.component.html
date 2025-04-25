@@ -1,0 +1,141 @@
+
+<div class="">
+    <app-button-radio-active titulo="Seleccionar Amortización" filtroBoton="btnContribuyenteForm" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="row my-2">
+            <div class="col">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row mr-1 ml-1">
+                        <div class="col-9" >
+                            <div class="row justify-content-md-center">
+                                <div class="col-sm-4">
+                                    <app-cc-input-group-prepend label="Tipo Amortización" styleSpan="size-span-campo font-weight-bold">
+                                        <!--<input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.periodo" (keypress)="validaciones.numberOnly($event)">-->
+                                        <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="filter.tipo" [disabled]="constDisabled">
+                                            <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                                            <ng-option value="A">Amortización Alemana</ng-option>
+                                            <ng-option value="F">Amortización Francesa</ng-option>
+                                          </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend"><span class="input-group-text">Num. Documento</span></div>
+                                        <input type="text" class="form-control form-control-sm"  [(ngModel)]="filter.numero_documento">
+                                    </div>
+                                </div>
+
+                                
+                                <div class="col-sm-4">
+                                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                        <!--<input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.periodo" (keypress)="validaciones.numberOnly($event)">-->
+                                        <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="filter.estado" [disabled]="constDisabled">
+                                            <ng-option  [value]= "0">TODOS</ng-option> 
+                                            <ng-option value="P">PENDIENTE</ng-option>
+                                            <ng-option value="C">CERRADO</ng-option>
+                                            <ng-option value="A">APROBADO</ng-option>
+                                            <ng-option value="X">ANULADO</ng-option>
+                                          </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Fecha desde" styleSpan="size-span-campo font-weight-bold">
+                                        <!--<input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.fecha_desde">-->
+                                        <input id="filter_razon_social" type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_desde" [disabled]="constDisabled">
+                                    </app-cc-input-group-prepend>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <app-cc-input-group-prepend label="Fecha hasta" styleSpan="size-span-campo font-weight-bold">
+                                        <!--<input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.fecha_hasta" >-->
+                                        <input id="filter_num_documento" type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_hasta" [disabled]="constDisabled">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="aplicarFiltros()">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <!-- <th style="width: 4%;">Estado</th> -->
+                            <th style="width: 8%;">Fecha</th>
+                            <th style="width: 10%;">Tipo de Amortización</th>
+                            <th style="width: 17%;">Numero de documento</th>
+                            <th style="width: 8%;">Estado</th>
+                            <th style="width: 10%;">Monto</th>
+                            <th style="width: 6%;">Interes</th>
+                            <th style="width: 6%;">No. Cuotas</th>
+                            <th style="width: 14%;">Observación</th>
+                            <th style="width: 6%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!Amortizaciones.length">
+                            <td colspan="9" class="text-center"><h6>No hay resultados</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let dt of Amortizaciones, let i = index">
+                            <tr>
+                                <!-- <td class="text-center"><i placement="bottom" [ngbTooltip]="dt.estado == 'A' ? 'Activo' : 'Inactivo'" [class]="dt.estado == 'A' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger'"></i></td> Pendiente -->
+                                <!-- <td class="text-center"><i placement="bottom" ngbTooltip="Activo" class="fas fa-circle text-success"></i></td> -->
+                                <td class="text-center">{{ dt.fecha }}</td>
+                                <td>
+                                    {{ dt.tipo == 'A' ? 'Alemana' : 'Francesa' }}
+                                </td>
+                                <td class="text-center">{{ dt.documento}}</td>
+                                <td class="text-center">
+                                    <i class="fas fa-circle" [ngClass]="{'text-warning': dt.estado == 'P', 'text-danger': dt.estado == 'C', 'text-success': dt.estado == 'A'}"></i>&nbsp;
+                                    {{ dt.estado == 'P' ? 'PENDIENTE' : dt.estado == 'A' ? 'APROBADO' : dt.estado == 'C' ? 'CERRADO' : '' }}
+                                </td>
+                                <td class="text-center">$ {{ dt.monto | number:'1.2-2'}}</td>
+                                <td class="text-center"> {{ dt.interes}} %</td>
+                                <td class="text-center"> {{ dt.no_cuotas}}</td>
+                                <td class="text-center"> {{ dt.observacion}}</td>
+                                
+
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar Amortizacion">
+                                            <i class="fas fa-hand-pointer"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+
+                </div>
+                
+                <div class="col-12">
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="+(paginate.page)-1"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

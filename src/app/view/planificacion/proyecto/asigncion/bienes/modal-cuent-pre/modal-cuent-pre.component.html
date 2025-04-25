@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <app-button-radio-active [titulo]="fTitle" filtroBoton="btnEncargadoForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="row my-2">
+            <div class="col">
+                <label for="detalle" class="form-label">Agregar Detalle:</label>
+                <textarea id="detalle" class="form-control" rows="3" maxlength="500" [(ngModel)]="detalle"></textarea>
+                <small class="form-text text-muted">Máximo 500 caracteres.</small>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div><!-- <div class="">
+    <app-button-radio-active [titulo]="fTitle" filtroBoton="btnEncargadoForm" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="row my-2">
+            <div class="col">
+                agergar detalle
+                <input type="text" [(ngModel)]="detalle">
+               
+            </div>
+            
+        </div>
+       
+        
+        
+    </app-button-radio-active>
+</div> -->
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

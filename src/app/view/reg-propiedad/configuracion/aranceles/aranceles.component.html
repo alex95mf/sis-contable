@@ -1,0 +1,80 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" filtroBoton="btnsAranceles" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-tags">
+        <div class="row my-2">
+            <div class="col-12">
+                <div class="col-4 float-right">
+                    <div class="input-group input-group-sm mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Búsqueda</span>
+                        </div>
+                        <input id="filter_descripcion" type="text" class="form-control form-control-sm" [(ngModel)]="filter.descripcion">
+                        <button class="btn btn-info btn-sm ml-1" placement="bottom" ngbTooltip="Buscar" (click)="consultar()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 4%;">Estado</th>
+                            <th style="width: 5%;">Código</th>
+                            <th style="width: 25%;">Descripción</th>
+                            <th style="width: 10%;">Avalúo</th>
+                            <th style="width: 10%;">Cuantía</th>
+                            <th style="width: 10%;">Tipo</th>
+                            <th style="width: 10%;">Documento</th>
+                            <th style="width: 8%;">Valor</th>
+                            <th style="width: 8%;">Porcentaje</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="arancelesDt">
+                        <ng-container *ngFor="let dt of arancelesDt, let i = index">
+                            <tr>
+                                <td class="text-center"><i placement="bottom" [ngbTooltip]="dt.estado == 'A' ? 'Activo' : 'Inactivo'" [class]="dt.estado == 'A' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger'"></i></td> <!--Pendiente-->
+                                <td class="text-center">{{ dt.codigo }}</td>
+                                <td>{{ dt.descripcion }}</td>
+                                <td class="text-center">{{ dt.avaluo ? 'SI' : 'NO' }}</td>
+                                <td class="text-center">{{ dt.cuantia ? 'SI' : 'NO' }}</td>
+                                <td class="text-center">{{ dt.tipo.valor }}</td>
+                                <td class="text-center">{{ dt.documento.valor }}</td>
+                                <td class="text-right">{{ '$ ' + dt.valor }}</td>
+                                <td class="text-right">{{ dt.porcentaje * 100 }} %</td>
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mx-1" (click)="showArancelForm(false, dt.id)" placement="left" ngbTooltip="Editar arancel">
+                                            <i class="far fa-edit"></i>
+                                        </button>
+                                        <button *ngIf="dt.estado == 'A'" class="btn btn-danger btn-sm mx-1" (click)="deleteArancel(dt.id, i)" placement="top" ngbTooltip="Eliminar arancel">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <button *ngIf="dt.estado == 'I'" class="btn btn-info btn-sm mx-1" (click)="restoreArancel(dt.id, i)" placement="top" ngbTooltip="Restaurar arancel">
+                                            <i class="fas fa-undo"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="paginate.pageIndex"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

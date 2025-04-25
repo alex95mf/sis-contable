@@ -1,0 +1,403 @@
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<div class="my-2">
+    <app-button-radio-active-new [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-poll-h"
+        filtroBoton="btnsFormPlanif" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+
+        <div class="row">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Inspección</legend>
+                    <div class="row m-0 justify-content-end mb-2">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Fecha de Inspección</span></div>
+                                <input type="date" class="form-control form-control-sm" [readonly]="formReadOnly" [(ngModel)]="inspeccion.fecha">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0 ">
+                        <div class="col-12 col-md-8 pt-0 pb-0 mb-2">
+
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text font-weight-bold size-span-campo"
+                                    id="inputGroup-sizing-sm">Orden de Inspección</span>
+                                </div>
+                                <input type="text" class="form-control form-control-sm" readonly
+                                placeholder="Seleccione una Inspección" [value]="inspeccion.orden_inspeccion.numero_orden" (click)="expandirInspecciones()" style="cursor: pointer;" >
+                               
+                                <div class="input-group-append">
+                                  <button (click)="expandirInspecciones()" placement="bottom" ngbTooltip="Buscar Inspecciones"
+                                    class="btn btn-default btn-action" type="button">
+                                    <i class="fa fa-search"></i>
+                                  </button>
+        
+                                </div>
+                              </div>
+                            <!-- <div class="input-group">
+                                <div class="input-group-prepend"><span style="width: 165px;" class="input-group-text font-weight-bold size-span-campo">Orden de Inspección</span></div>
+                                <input type="text" class="form-control bg-white" readonly placeholder="Seleccione una Inspección" [value]="inspeccion.orden_inspeccion.numero_orden"> 
+                                <button class="btn btn-info" (click)="expandirInspecciones()" placement="bottom" ngbTooltip="Buscar Inspecciones">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div> -->
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Estado</span></div>
+                                <div class="form-control form-control-sm font-weight-bold" style="background-color:#E4E4EB;">
+                                    <!-- <i placement="bottom" [class]="inspeccion.estado == 'A' ? 'fas fa-circle text-success' : inspeccion.estado == 'C' ? 'fas fa-circle text-danger' : inspeccion.estado == 'P' ? 'fas fa-circle text-warning' : ''">
+                                        
+                                    </i>
+                                {{inspeccion.estado=='A'?'Abierto':inspeccion.estado=='C'?'Cerrado':inspeccion.estado=='P'?'Pendiente':''}} -->
+                                <span *ngIf="inspeccion.estado == 'P'" class="pill-k pill-k_warning" placement="top" [ngbTooltip]="Pendiente">Pendiente</span>
+                                <span *ngIf="inspeccion.estado == 'C'" class="pill-k pill-k_danger" placement="top" [ngbTooltip]="Cerrado" >Cerrado</span>
+                                <span *ngIf="inspeccion.estado == 'A'" class="pill-k pill-k_success" placement="top" [ngbTooltip]="Abierto">Abierto</span>
+                            </div>
+                            </div>
+                            <!-- <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Estado</span></div>
+                                <input *ngIf="inspeccion.estado == 'P'" type="text" class="form-control form-control-sm font-weight-bold size-span-campo text-warning" [class] readonly value="Pendiente">
+                                <input *ngIf="inspeccion.estado == 'A'" type="text" class="form-control form-control-sm font-weight-bold size-span-campo text-success" [class] readonly value="Abierto">
+                                <input *ngIf="inspeccion.estado == 'C'" type="text" class="form-control form-control-sm font-weight-bold size-span-campo text-danger" [class] readonly value="Cerrado">
+                            </div> -->
+                        </div>
+                        
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-8 pt-0 pb-0 mb-2">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Observaciones</span></div>
+                                <textarea cols="30" rows="3" class="form-control form-control-sm" [readonly]="formReadOnly" [(ngModel)]="inspeccion.observacion"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                            <div class="input-group input-group-sm mb-2 input-group-custom-switch">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold size-span-campo"  id="inputGroup-sizing-sm">Resultado</span>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                                    <input type="checkbox" class="custom-control-input" id="aprueba" [disabled]="formReadOnly" [(ngModel)]="aprueba">
+                                    <label class="custom-control-label" for="aprueba"></label>
+                                </div>
+                                <input type="text" class="form-control form-control-sm" [class]="!formReadOnly?'bg-white':''" disabled [value]="aprueba ? 'FACTIBLE' : 'NO FACTIBLE'">
+                            </div>
+        
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Próxima Inspección</span></div>
+                                <input type="date" class="form-control form-control-sm" [disabled]="aprueba || formReadOnly" [(ngModel)]="inspeccion.fecha_proxima_visita">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+  
+            <div class="row">
+                <div class="col-12">
+                    <fieldset class="border card-fieldset">
+                        <legend class="w-auto card-legend">Local Comercial</legend>
+                        <div class="row m-0">
+                            <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Contribuyente</span></div>
+                                    <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial?.fk_contribuyente?.razon_social">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Razón Social</span></div>
+                                    <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial?.razon_social">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Actividad Comercial</span></div>
+                                    <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial?.fk_actividad_comercial?.valor">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-0">
+                            <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Sector</span></div>
+                                    <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial?.contrato ? inspeccion.local_comercial?.fk_sector?.valor : inspeccion.local_comercial?.fk_sector?.descripcion">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Tipo</span></div>
+                                    <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial?.tipo_negocio=='MINOR' ? 'MINORISTA' : inspeccion.local_comercial?.tipo_negocio=='MAYOR' ? 'MAYORISTA' : ''">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Grupo</span></div>
+                                    <input type="text" class="form-control form-control-sm" readonly [value]="!inspeccion.local_comercial?.contrato ? inspeccion.local_comercial?.fk_grupo?.valor : 'NA'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-0">
+                            <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Cod. Catastral</span></div>
+                                    <input type="text" class="form-control form-control-sm" readonly [value]="inspeccion.local_comercial?.cod_catastro ? inspeccion.local_comercial?.cod_catastro : ''">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span  class="input-group-text font-weight-bold size-span-campo">Uso de Suelo</span></div>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="inspeccion.orden_inspeccion.uso_suelo">
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <fieldset class="border card-fieldset">
+                        <legend class="w-auto card-legend">Anexos</legend>
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 pt-0 pb-0 mb-2">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo size-span-campo">Fotos</span></div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*" multiple [disabled]="formReadOnly" (change)="cargaFoto($event.target.files)">
+                                        <label class="custom-file-label" for="inputGroupFile01">{{ fotos.length > 0 ? "Ha seleccionado " + fotos.length + " Fotos" : "Seleccione fotos a subir" }}</label>
+                                    </div>
+                                </div>
+                                <div class="multiple-image-container">
+                                    <div *ngFor='let foto of fotos, let i = index' class="multiple-image-preview">
+                                        <img [src]="foto.recurso" (click)="expandirVistaFotos(i)" class="img-thumbnail">
+                                        <button *ngIf="!formReadOnly" class="btn btn-sm btn-danger" placement="top" ngbTooltip="Eliminar Foto" (click)="removeFoto(i)"><i class="far fa-trash-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-0">
+                            <div class="col-12 col-md-4 pt-0 pb-0 mb-2">
+                                <div class="input-group input-group-sm mb-2">
+                                    <div class="input-group-prepend">
+                                        <span  class="input-group-text font-weight-bold size-span-campo size-span-campo">Archivos</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input [disabled]="formReadOnly" type="file" class="custom-file-input" id="inputGroupFile02" accept=".pdf" (change)="cargaArchivo($event.target.files)">
+                                        <label class="custom-file-label" for="inputGroupFile02">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-8 pt-0 pb-0">
+                                <app-anexos-list [dataUser]="dataUser" [permissions]="permissions"></app-anexos-list>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-12">
+                    <fieldset class="border card-fieldset">
+                        <legend class="w-auto card-legend">Formulario</legend>
+                        <div class="row m-0 mb-1 align-items-center">
+                            <div class="col">
+                                <h5 class="mb-0 text-dark">Letreros</h5>
+                            </div>
+                            <div class="col text-right">
+                                <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Letrero" [disabled]="formReadOnly" (click)="addLetrero()">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row m-0 mb-3">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-k table-hover">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th style="width: 5%;">No.</th>
+                                                <th style="width: 20%;">Tipo</th>
+                                                <th style="width: 10%;">Longitud (m)</th>
+                                                <th style="width: 10%;">Altura (m)</th>
+                                                <th style="width: 10%;">Área (m²)</th>
+                                                <th style="width: 10%;">N. de Cara 1</th>
+                                                <th style="width: 10%;">N. de Cara 2</th>
+                                                <th style="width: 10%;">Factibilidad 1</th>
+                                                <th style="width: 10%;">Factibilidad 2</th>
+                                                <th style="width: 5%;">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngIf="letreros.length == 0">
+                                                <td colspan="10" class="text-center"><h6 class="my-1">No hay Letreros agregados</h6></td>
+                                            </tr>
+                                            <tr *ngFor="let le of letreros, let i = index">
+                                                <td class="text-center">
+                                                    {{ i + 1 }}
+                                                </td>
+                                                <td class="text-right">
+                                                    <ng-select class="form-control form-control-sm" [(ngModel)]="le.p_rot_tipo" [disabled]="formReadOnly" appendTo="body">
+                                                        <ng-option value="0" disabled>Seleccione un Tipo</ng-option>
+                                                        <ng-option *ngFor="let t of catalogos.tipo_letrero" [value]="t.descripcion">{{ t.descripcion + " - " + t.valor }}</ng-option>
+                                                    </ng-select>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" min="0" class="form-control form-control-sm text-right" [(ngModel)]="le.p_rot_longitud" [readonly]="formReadOnly" (keyup)="calcAreaL(i)" (change)="calcAreaL(i)"> 
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" min="0" class="form-control form-control-sm text-right" [(ngModel)]="le.p_rot_altura" [readonly]="formReadOnly" (keyup)="calcAreaL(i)" (change)="calcAreaL(i)"> 
+                                                    </div>
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" min="0" class="form-control form-control-sm text-right" [(ngModel)]="le.p_rot_area" readonly > 
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" min="0" class="form-control form-control-sm text-right" [(ngModel)]="le.p_rot_cara_1" [readonly]="formReadOnly" > 
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" min="0" class="form-control form-control-sm text-right" [(ngModel)]="le.p_rot_cara_2" [readonly]="formReadOnly" > 
+                                                    </div>
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="input-group input-group-sm input-group-custom-switch">
+                                                        <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                                                            <input type="checkbox" [disabled]="formReadOnly" class="custom-control-input" [id]="i + '-factibilidad1'" [(ngModel)]="le.p_rot_factible_1">
+                                                            <label class="custom-control-label" [for]="i + '-factibilidad1'"></label>
+                                                        </div>
+                                                        <input type="text" class="form-control form-control-sm" [class]="!formReadOnly ? 'bg-white' : ''" disabled [value]="le.p_rot_factible_1 ? 'SI' : 'NO'">
+                                                    </div>
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="input-group input-group-sm input-group-custom-switch">
+                                                        <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                                                            <input type="checkbox"  [disabled]="formReadOnly" class="custom-control-input" [id]="i + '-factibilidad2'" [(ngModel)]="le.p_rot_factible_2">
+                                                            <label class="custom-control-label" [for]="i + '-factibilidad2'"></label>
+                                                        </div>
+                                                        <input type="text" class="form-control form-control-sm" [class]="!formReadOnly ? 'bg-white' : ''" disabled [value]="le.p_rot_factible_2 ? 'SI' : 'NO'">
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm mx-1 btn-danger_icon btn-outline btn-outline_danger" placement="left" ngbTooltip="Remover Letrero" [disabled]="formReadOnly" (click)="removeLetrero(i)">
+                                                        <!-- <i class="far fa-trash-alt"></i> -->
+                                                        <span class="material-symbols-outlined">delete</span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row m-0 mb-1 align-items-center">
+                            <div class="col">
+                                <h5 class="mb-0 text-dark">Uso y Espacio de la Vía Pública</h5>
+                            </div>
+                        </div>
+                        <div class="row m-0 mb-3">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-k table-hover">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th style="width: 5%;">No.</th>
+                                                <th style="width: 35%;">Tipo</th>
+                                                <th style="width: 10%;">Aplica</th>
+                                                <th style="width: 10%;">Dimensión 1 (m)</th>
+                                                <th style="width: 10%;">Dimensión 2 (m)</th>
+                                                <th style="width: 10%;">Área (m²)</th>
+                                                <th style="width: 20%;">Ubicación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let v of viaPublica, let i = index">
+                                                <td class="text-center">
+                                                    {{ i + 1 }}
+                                                </td>
+                                                <td>
+                                                    {{ v.p_vp_tipo }}
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="input-group input-group-sm input-group-custom-switch">
+                                                        <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                                                            <input type="checkbox" class="custom-control-input"  [disabled]="formReadOnly" [id]="i + '-p_vp_aplica'" [(ngModel)]="v.p_vp_aplica" (change)="changeAplica(i)" >
+                                                            <label class="custom-control-label" [for]="i + '-p_vp_aplica'"></label>
+                                                        </div>
+                                                        <input type="text" class="form-control form-control-sm" [class]="!(formReadOnly) ? 'bg-white' : ''" disabled [value]="v.p_vp_aplica ? 'SI' : 'NO'">
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" min="0" class="form-control form-control-sm text-right" [(ngModel)]="v.p_vp_dimension_1" [readonly]="formReadOnly || !v.p_vp_aplica" (keyup)="calcAreaV(i)" (change)="calcAreaV(i)">
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" min="0" class="form-control form-control-sm text-right" [(ngModel)]="v.p_vp_dimension_2" [readonly]="formReadOnly || !v.p_vp_aplica" (keyup)="calcAreaV(i)" (change)="calcAreaV(i)">
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" min="0" class="form-control form-control-sm text-right" [(ngModel)]="v.p_vp_dimension" readonly> 
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <ng-select class="form-control form-control-sm" [(ngModel)]="v.p_vp_ubicacion" [readonly]="formReadOnly || !v.p_vp_aplica" appendTo="body">
+                                                        <ng-option value="0" disabled>Seleccione una Ubicación</ng-option>
+                                                        <ng-option *ngFor="let t of catalogos.tipo_via_publica" [value]="t.valor">{{ t.valor }}</ng-option>
+                                                    </ng-select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--<div class="row my-2">
+                            <div class="col-8">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="input-group-text">Observaciones</span></div>
+                                    <textarea cols="30" rows="3" class="form-control form-control-sm" [readonly]="formReadOnly" [(ngModel)]="inspeccion.observacion"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="col-4">
+                                <div class="input-group input-group-sm mb-2 input-group-custom-switch">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Resultado</span>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                                        <input type="checkbox" class="custom-control-input" id="aprueba" [readonly]="formReadOnly" [(ngModel)]="aprueba">
+                                        <label class="custom-control-label" for="aprueba"></label>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-white" disabled [value]="aprueba ? 'FACTIBLE' : 'NO FACTIBLE'">
+                                </div>
+
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="input-group-text">Próxima Inspección</span></div>
+                                    <input type="date" class="form-control form-control-sm" [disabled]="aprueba" [(ngModel)]="inspeccion.fecha_proxima_visita">
+                                </div>
+                            </div>
+                        </div>-->
+                    </fieldset>
+                </div>
+            </div>
+
+    </app-button-radio-active-new>
+</div>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="formPlanificacion"></cc-spiner-procesar>

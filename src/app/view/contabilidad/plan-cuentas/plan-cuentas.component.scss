@@ -1,0 +1,340 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+    font-family: "Poppins1";
+    src: url('../../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "PoppinsTourney";
+    src: url("../../../../assets/fonts/Tourney-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+label,
+input,
+select,
+
+/* span, */
+
+button {
+    font-family: "Poppins1" !important;
+    box-shadow: unset !important;
+    outline: unset !important;
+}
+
+span {
+    font-weight: bold;
+}
+
+.title-cab {
+    font-family: "PoppinsTourney" !important;
+    background-color: #014da3e6;
+    ;
+    color: white;
+    height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 23px;
+    padding-top: 5px;
+    letter-spacing: 5px;
+}
+
+.num_aut {
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.container-filter {
+    label,
+    input,
+    select,
+    span,
+    button {
+        font-family: "Poppins1" !important;
+        box-shadow: unset !important;
+        outline: unset !important;
+    }
+}
+
+.title {
+    font-family: "Poppins1" !important;
+    color: blue;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    span {
+        margin-left: 20px;
+    }
+}
+
+.botones-section {
+    margin-top: 30px;
+    text-align: center;
+    button {
+        text-transform: uppercase;
+        font-family: "Poppins1" !important;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 180px;
+        box-shadow: unset;
+        outline: unset;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.btn-add {
+    text-align: right;
+    margin-bottom: 10px;
+    button {
+        box-shadow: unset !important;
+        outline: unset !important;
+    }
+}
+
+textarea {
+    font-family: "Poppins1" !important;
+    outline: unset !important;
+    box-shadow: unset !important;
+}
+
+textarea,
+select,
+input,
+span,
+label {
+    font-size: 11px !important;
+}
+
+.button_margin {
+    margin-left: 0.25rem !important;
+    border-radius: 0.25rem !important;
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+    border-bottom-left-radius: 0.25rem !important;
+}
+
+legend {
+    font-size: 11px;
+    font-weight: bold
+}
+
+.filters {
+    background-color: white;
+    table {
+        thead {
+            tr {
+                th {
+                    padding: 6px 0px 8px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    text-align: center !important;
+                    padding: 5px 10px 5px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 10px;
+                    input {
+                        width: 100%;
+                        text-align: center;
+                        padding-left: 2px;
+                        margin-top: 5px !important;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                    ng-select {
+                        margin-top: 5px !important;
+                        font-size: 11px !important;
+                    }
+                    button {
+                        margin-top: 5px !important;
+                        padding: 2px 8px 2px 8px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.saldoOne {
+    color: red !important;
+    text-align: right !important;
+    padding-right: 5px;
+}
+
+.saldoOne {
+    color: black red !important;
+    text-align: right !important;
+    padding-right: 5px;
+}
+
+.contenedor-scrol-arbol {
+    max-height: 350px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.sect-one {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    border: 1px solid;
+    border-color: rgba(78, 74, 74, 0.37);
+    border-radius: 3px;
+    height: 160px;
+}
+
+.sect-two {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    height: 160px;
+    border-radius: 3px;
+    background-color: #5b9bd5;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#footer {
+    display: table-footer-group;
+}
+
+@page {
+    size: 21cm 29.7cm;
+    margin: 1cm 1cm 1cm 1cm;
+    mso-title-page: yes;
+    mso-page-orientation: portrait;
+    mso-header: header;
+    mso-footer: footer;
+}
+
+@page content {
+    margin: 1cm 1cm 1cm 1cm;
+}
+
+div.content {
+    page: content;
+}
+
+.p-treetable {
+    border: 2px solid #007ad9;
+    border-radius: 5px;
+    font-size: 10px !important; 
+}
+
+.p-treetable-header {
+    background-color: #007ad9;
+    color: white;
+    font-weight: bold;
+  
+}
+
+:host ::ng-deep .custom-tree thead th {
+    background: #ececec !important;
+    border-color: #ddd;
+    color: #515151;
+    font-size: 11px;
+    padding: 5px;
+}
+:host ::ng-deep .custom-tree-td tbody td {
+    color: #515151;
+    font-size: 11px;
+    padding: 5px;
+}
+:host ::ng-deep .custom-tree-gridlines table{
+    border-spacing: 0;
+    border-collapse: separate;
+}
+
+:host ::ng-deep  .p-treetable .p-treetable-tbody > tr > td .p-treetable-toggler {
+    width: 1rem;
+    height: 1rem;
+    color: #6c757d;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    margin-right: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.p-treetable .p-treetable-tbody > tr > td .p-treetable-toggler:hover {
+    background-color: #e9ecef;
+    color: #495057;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+
+
+// .p-treetable .p-treetable-tbody > tr > td .p-treetable-toggler {
+//     width: 0.8rem !important; 
+//     height: 0.8rem;
+//     color: #6c757d !important;
+//     border: 0 none;
+//     background: transparent;
+//     border-radius: 50%;
+//     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+//     margin-right: 0.5rem;
+// }
+
+
+
+// .custom-tree .p-treetable-header {
+//     background-color: var(--header-bg);
+//     color: #333;
+//     font-weight: 600;
+//     font-size: 12px;
+//     text-align: left;
+//     border-bottom: 1px solid var(--border-color);
+// }
+
+// .custom-tree .p-treetable-header th {
+//     padding: 10px;
+// }
+
+// .custom-tree .p-treetable-body tr {
+//     transition: background-color 0.2s ease-in-out;
+// }
+
+// .custom-tree .p-treetable-body tr:hover {
+//     background-color: var(--row-hover-bg);
+// }
+
+// .custom-tree .p-treetable-body tr.tt-selected {
+//     background-color: var(--row-selected-bg);
+// }
+
+// .custom-tree .p-treetable-body td {
+//     padding: 8px;
+//     font-size: 11px;
+//     border-bottom: 1px solid var(--border-color);
+// }
+
+// .custom-tree .p-treetable-toggler {
+//     margin-right: 5px;
+//     cursor: pointer;
+// }
+
+// .custom-tree .p-treetable-toggler-icon {
+//     color: #007ad9;
+// }

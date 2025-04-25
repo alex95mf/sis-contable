@@ -1,0 +1,278 @@
+<app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-money-check-edit-alt" filtroBoton="btnsActaFini" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+        <form autocomplete="off" [formGroup]="registroActaFiniquito">
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group input-group-sm mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text size-span-campo"
+                                id="inputGroup-sizing-sm">Empleado</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm"
+                            placeholder="Ingrese nombre , apellido, cédula"
+                            [readonly]="readonlyInputSearchEmpleado"
+                            formControlName="formNombreEmpleado"
+                            #nameInputSearchEmpleado>
+                        <div class="input-group-append">
+                            <button (click)="onClicConsultaEmpleados(content)"
+                            [disabled]="disableBtnConsultaEmpleados"
+                                class="btn btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <app-cc-input-group-prepend label="Nombre Completo" styleSpan="size-span-campo">
+                        <input type="text" class="form-control form-control-sm" id="idPrimerNombre"
+                            formControlName="nameEmpuFullNombre"
+                            #nameEmpuFullNombre
+                            placeholder="Nombre Completo"
+                            disabled="true">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-4">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Estado</span></div>
+                        <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                            <i placement="bottom" [ngbTooltip]="acta.estado == 'A'? 'Activo'  : 'Inactivo'" [class]="(acta.estado == 'A') ? 'fas fa-circle text-success'  : ((acta.estado == 'I') ? 'fas fa-circle text-danger' :'fas fa-circle text-muted') ">
+                            </i>
+                            {{ (acta.estado == 'A') ? 'Activo' : (acta.estado == 'I' ? 'Inactivo' : 'Pendiente')  }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </form>
+
+    <div class="row">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Fecha Inicio Labores" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" [(ngModel)]="acta.fecha_inicio_labores">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Fecha Fin Labores" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" [(ngModel)]="acta.fecha_fin_labores">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Ultima Remuneracion" styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask class="form-control" readonly [ngModel]="acta.ultima_remuneracion">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Tipo de Contrato" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [ngModel]="acta.tipo_contrato">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-8">
+            <app-cc-input-group-prepend label="Motivo" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="acta.motivo"
+                    [items]="lst_motivos_filtered" bindValue="descripcion" bindLabel="valor"></ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+   
+    <div class="row">
+        <div class="col-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">No.
+                        Documento</span></div>
+                <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="acta.num_documento" placeholder="No. Documento">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Fecha</span></div>
+                <input type="date" class="form-control form-control-sm" [(ngModel)]="acta.fecha">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-sm btn-success" (click)="calcularValores()">
+                    <i class="far fa-calculator"></i> CALCULAR
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-8">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold text-white" style="width: 155px; background-color: #404A62;">Motivo</span></div>
+                <textarea cols="30" rows="3" class="form-control form-control-sm" [readonly]="formReadOnly" [(ngModel)]="acta.motivo" placeholder="Motivo"></textarea>
+            </div>
+        </div>
+       
+    </div> -->
+    <!-- <div class="row">
+        <div  class="col">
+                <div class="input-group input-group-sm mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Observación</span>
+                    </div>
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [disabled]="formReadOnly" [(ngModel)]="acta.observacion" maxlength="500"></textarea>
+                </div>
+        </div>
+    </div> -->
+
+    <div class="row mb-2">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-bordered no-footer table-hover mb-0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <h5 class="my-1">INGRESOS</h5>
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <th style="width: 10%">Código</th>
+                            <th style="width: 80%" colspan="5">Rubro</th>
+                            <th class="hidden" style="width: 15%">Cantidad</th>
+                            <th class="hidden" style="width: 15%">Valor</th>
+                            <th class="hidden" style="width:15%">Porcentaje</th>
+                            <th  class="hidden" style="width:15%">Valor Calculado</th>
+                            <th style="width:15%">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dt of rubrosIngresos; let i = index">
+                            <td class="text-left">{{ dt.codigo_rubro }}</td>
+                            <td class="text-left" colspan="5">{{ dt.nombre_rubro }}</td>
+                            <td class="text-right hidden">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{  prefix:'',suffix:'' }" [(ngModel)]="dt.cantidad" (ngModelChange)="calculoTotales($event)"  [readonly]="formReadOnly" 
+                                    [disabled]="false"> 
+                                </div>
+                            </td>
+                            <td class="text-right hidden">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
+                                    [disabled]="false"> 
+                                </div>
+                            </td>
+                            <td class="text-right hidden">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }" [(ngModel)]="dt.porcentaje" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
+                                    [disabled]="false"> 
+                                </div>
+                            </td>
+                            <td class="text-right hidden">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor_calculado" (ngModelChange)="calculoTotales($event)"  [readonly]="formReadOnly" 
+                                    [disabled]="true"> 
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.total" (ngModelChange)="sumaTotales($event)"  [readonly]="formReadOnly" 
+                                    [disabled]="false"> 
+                                </div>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-left font-weight-bold col-num fixed-header" style="font-size:14px;">
+                                TOTAL
+                            </td>
+                            <td class="col-rec fixed-header">
+                                <div class="row">                                    
+                                     <div class="col text-right font-weight-bold" style="font-size:14px;">
+                                        $ {{ totalIngresos | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                        </tr>
+                    </tbody>
+                    <thead class="thead-dark">
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <h5 class="my-1">EGRESOS</h5>
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <th style="width: 10%">Código</th>
+                            <th style="width: 80%" colspan="5">Rubro</th>
+                            <th class="hidden"style="width: 15%">Cantidad</th>
+                            <th class="hidden" style="width: 15%">Valor</th>
+                            <th class="hidden" style="width: 15%">Porcentaje</th>
+                            <th class="hidden" style="width: 15%">Valor Calculado</th>
+                            <th  style="width: 15%">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dt of rubrosEgresos; let i = index">
+                            <td class="text-left">{{ dt.codigo_rubro }}</td>
+                            <td class="text-left" colspan="5">{{ dt.nombre_rubro }}</td>
+                            <td class="text-right hidden">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{  prefix:'',suffix:'' }"  [(ngModel)]="dt.cantidad" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
+                                    [disabled]="false"> 
+                                </div>
+                            </td>
+                            <td class="text-right hidden">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
+                                    [disabled]="false"> 
+                                </div>
+                            </td>
+                            <td class="text-right hidden">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }"  [(ngModel)]="dt.porcentaje" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
+                                    [disabled]="false"> 
+                                </div>
+                            </td>
+                            <td class="text-right hidden">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor_calculado" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
+                                    [disabled]="true"> 
+                                </div>
+                            </td>
+                            <td class="text-right ">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.total"  (ngModelChange)="sumaTotales($event)" [readonly]="formReadOnly" 
+                                    [disabled]="false"> 
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-left font-weight-bold col-num fixed-header" style="font-size:14px;">
+                                TOTAL 
+                            </td>
+                            <td class="col-rec fixed-header">
+                                <div class="row">                                    
+                                     <div class="col text-right font-weight-bold" style="font-size:14px;">
+                                       $ {{ totalEgresos | number: '1.2-2' }}
+                                     </div>
+                                </div>                                
+                               
+                             </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-total">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">Total a Recibir</span></div>
+                <input id="pagoTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalDiferencia | number: '1.2-2' }} ">
+            </div>
+        </div>
+    </div>
+
+</app-button-radio-active>
+
+
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="actaFiniquito"></cc-spiner-procesar>
+

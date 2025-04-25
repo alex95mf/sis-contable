@@ -1,0 +1,130 @@
+<app-button-radio-active [titulo]="fTitle" icono="far fa-store-alt" cstyle="bg-light text-dark" 
+    filtroBoton="btnsLcomNuevoLocal" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="container-fluid">
+        <div class="row my-2">
+            <div class="col-8">
+                <app-cc-input-group-prepend label="Raz&oacute;n Social" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="local.razon_social" readonly>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Tipo de Local" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" disabled [value]="!local.tipo_local ? 'Local Comercial' : 'Local Municipal'">
+                    <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                        <input type="checkbox" class="custom-control-input" id="tipoLocal" [(ngModel)]="local.tipo_local" (change)="cambioTipoLocal($event.target)" disabled>
+                        <label class="custom-control-label" for="tipoLocal"></label>
+                    </div>
+                </app-cc-input-group-prepend>
+                
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <app-cc-input-group-prepend label="Actividad Comercial" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="local.fk_actividad_comercial" [clearable]="false" [disabled] = 'true'>
+                        <ng-option [value]="0" disabled>Escoja una Actividad Comercial</ng-option>
+                        <ng-option *ngFor="let actividad of actividades_comerciales" [value]="actividad.id">{{ actividad.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Tipo de Negocio" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select class="form-control" [(ngModel)]="local.tipo_negocio" [clearable]="false" [disabled] = 'true'>
+                        <ng-option [value]="0" disabled>Escoja un Tipo de Negocio</ng-option>
+                        <ng-option *ngFor="let tipo of tipos_negocio" [value]="tipo.codigo">{{ tipo.nombre }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-4 my-2" [ngClass]="{'d-none': local.tipo_local}">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold" style="width: 120px;">Grupo</span>
+                    </div>
+                    <ng-select class="form-control" [(ngModel)]="local.fk_grupo" [clearable]="false" readonly [disabled] = 'true'>
+                        <ng-option disabled [value]="0">Escoja un Grupo</ng-option>
+                        <ng-option *ngFor="let grupo of grupos" [value]="grupo.id">{{ grupo.nombre }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-4 my-2" [ngClass]="{'d-none': local.tipo_local}">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold" style="width: 120px;">Sector</span>
+                    </div>
+                    <ng-select class="form-control" [(ngModel)]="local.fk_sector" [clearable]="false"  [disabled] = 'true'>
+                        <ng-option disabled [value]="0">Escoja un Sector</ng-option>
+                        <ng-option *ngFor="let sector of sectores" [value]="sector.id">{{ sector.codigo }}. {{ sector.nombre }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-4 my-2">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold" style="width: 120px;">Fecha Inicio</span>
+                    </div>
+                    <input type="date" class="form-control" [(ngModel)]="local.fecha" readonly>
+                </div>
+            </div>
+            <div class="col-4 my-2">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold" style="width: 120px;">Estado</span>
+                    </div>
+                    <ng-select class="form-control" [(ngModel)]="local.estado" [clearable]="false" [disabled] = 'true'>
+                        <ng-option [value]="0" disabled>Escoja un Estado</ng-option>
+                        <ng-option *ngFor="let estado of estados" [value]="estado.codigo">{{ estado.codigo }} - {{ estado.nombre }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <div class="row my-2" [ngClass]="{'d-none': !local.tipo_local}">
+            <div class="col">
+                <fieldset class="border p-2">
+                    <legend class="w-auto">Local Municipal</legend>
+                    <div class="row my-2">
+                        <div class="col">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold" style="width: 120px;">Contrato</span>
+                                </div>
+                                <input type="text" class="form-control" readonly [(ngModel)]="local.contrato.numero">
+                                <div class="input-group-append"><button class="btn btn-primary" (click)="buscarContrato()" disabled><i class="fas fa-search"></i></button></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold" style="width: 120px;">Fecha Vencimiento</span>
+                                </div>
+                                <input type="date" class="form-control" readonly [(ngModel)]="local.fecha_vencimiento">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-3">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold" style="width: 120px;">Mercado</span>
+                                </div>
+                                <ng-select class="form-control" [(ngModel)]="local.fk_sector" [clearable]="false" disabled>
+                                    <ng-option *ngFor="let mercado of mercados" [value]="mercado.id">{{ mercado.nombre }}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold" style="width: 120px;">Puesto</span>
+                                </div>
+                                <input type="text" class="form-control" readonly [value]="local.fk_puesto.numero">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner"></cc-spiner-procesar>

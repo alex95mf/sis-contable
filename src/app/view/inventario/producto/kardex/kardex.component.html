@@ -1,0 +1,201 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Consulta Kardex" filtroBoton="btnsKardex" cstyle="bg-gradient-primary text-white"
+        [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file">
+        <div class="row justify-content-center">
+            <div class="col-12 container-filter ">
+                <div class="row  justify-content-center">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <input type="text" disabled
+                                        class="form-control form-control-sm text-center font-weight-bold text-light"
+                                        value="FECHAS" style="background-color: #404a63;">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Producto</span>
+                                    </div>
+                                    <ng-select id="idProveedor" class="form-control custom" appendTo="body"
+                                        [searchable]="true" [clearable]="false" [(ngModel)]="producto"
+                                        (ngModelChange)="filterProducto($event)">
+                                        <ng-option [value]="1">
+                                            Digite Nombre o Código
+                                        </ng-option>
+                                        <ng-option *ngFor="let d of products" [value]="d.id_producto">
+                                            {{ d.nombre }}
+                                        </ng-option>
+                                        <ng-option *ngFor="let d of products" [value]="d.id_producto">
+                                            {{ d.codigoProducto }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                                            Ingreso Periodo</span>
+                                    </div>
+                                    <input type="text" class="form-control text-right font-weight-bold" disabled
+                                        value="{{totalIngresos}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Desde</span>
+                                    </div>
+                                    <ejs-datepicker [(ngModel)]="fromDatePicker" class="form-control form-control-sm"
+                                        type="text" format="yyyy-MM-dd" (ngModelChange)="rerender()">
+                                    </ejs-datepicker>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Marca</span>
+                                    </div>
+                                    <input type="text" placeholder="{{proMarca}}" [disabled]="true" id="pmarca"
+                                        class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total
+                                            Egreso Periodo</span>
+                                    </div>
+                                    <input type="text" class="form-control text-right font-weight-bold" disabled
+                                        value="{{totalEgresos}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo"
+                                            id="inputGroup-sizing-sm">Hasta</span>
+                                    </div>
+                                    <ejs-datepicker [(ngModel)]="toDatePicker" class="form-control form-control-sm"
+                                        format="yyyy-MM-dd" (ngModelChange)="rerender()">
+                                    </ejs-datepicker>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo de
+                                            Movimiento</span>
+                                    </div>
+                                    <ng-select id="typ_doc" class="form-control custom" appendTo="body"
+                                        [searchable]="true" [clearable]="false" [(ngModel)]="docTipo"
+                                        (ngModelChange)="tipoDocument($event)">
+                                        <ng-option [value]="0">
+                                            Seleccione Movimiento
+                                        </ng-option>
+                                        <ng-option *ngFor="let d of typeDocs" [value]="d.name">{{ d.name }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm mt-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo stockAtext"
+                                            id="inputGroup-sizing-sm">Stock Actual</span>
+                                    </div>
+                                    <input type="text" class="form-control text-right font-weight-bold " id="stockA"
+                                        disabled value="{{pStockActual}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3 mb-3">
+            <input id="present" hidden name="FirstName" value="{{empresLogo}}">
+            <div class="col-md-12" hidden id="presentData">
+                <div class="row justify-content-center">
+                    <div class="col-md-5 text-center mt-5">
+                        <div class="sect-one pt-3 pb-3">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12 mt-4">
+                                    <img src="{{empresLogo}}" alt="" style="width: 200px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 text-center mt-5">
+                        <div class="sect-two pt-3 pb-2">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                    <h3>Recursos Humanos</h3>
+                                    <p>Lista de Carga Familiar</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="presentDt"> </div>
+            <div class="col-12 filters pl-2 pr-2">
+                <div class="row justify-content-center">
+
+                    <div class="col-md-12 pl-3 pr-3 ">
+
+                        <div class="table-responsive responsive-table mt-2">
+                            <table datatable id="tableKardex" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="text-center table no-footer table-hover row-border cell-border">
+                                <thead>
+                                    <tr style="width: 100%;">
+                                        <th style="width: 7%;">Fecha</th>
+                                        <th style="width: 27%;">Detalle</th>
+                                        <th style="width: 7%;">Ingresos</th>
+                                        <th style="width: 7%;">Egresos</th>
+                                        <th style="width: 10%;">Costo Unitario</th>
+                                        <th style="width: 9%;">Costo Total</th>
+                                        <th style="width: 10%;">Costo Promedio</th>
+                                        <th style="width: 10%;">Saldo Producto</th>
+                                        <th style="width: 9%;">Saldo Dolares</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDtUser">
+                                    <tr *ngFor="let dt of guardarolT; let i = index">
+                                        <td class="text-center">{{ dt.fecha }}</td>
+                                        <td class="text-left">{{ dt.detalle }}</td>
+                                        <td class="text-center " *ngIf="dt.tipo=='Ingresos' ">{{
+                                            formatNumber(dt.cantidad) }}</td>
+                                        <td class="text-center " *ngIf="dt.tipo !=='Ingresos' "></td>
+                                        <td class="text-center " *ngIf="dt.tipo=='Egresos' ">{{
+                                            formatNumber(dt.cantidad) }}</td>
+                                        <td class="text-center " *ngIf="dt.tipo !=='Egresos' "></td>
+                                        <td class="centrard text-right ">${{formatNumber(dt.costoUnitario)}}</td>
+                                        <td class="centrard text-right ">${{formatNumber(dt.costoTotal) }}</td>
+                                        <td class="centrard text-right ">${{formatNumber(dt.costo_actual)}}</td>
+                                        <td class="text-center " *ngIf="dt.tipo=='Ingresos'">
+                                            {{formatNumber(dt.stock_actual) }}</td>
+                                        <td class="text-center " *ngIf="dt.tipo=='Egresos' ">
+                                            {{formatNumber(dt.stock_actual) }}</td>
+                                        <td class="centrard centrard text-right ">${{formatNumber(dt.costo_actual *
+                                            dt.stock_actual) }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCustomerconsu"></cc-spiner-procesar>

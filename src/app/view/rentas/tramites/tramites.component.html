@@ -1,0 +1,80 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" cstyle="bg-light" icono="fas fa-file"
+        filtroBoton="btnsRenTramites" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border pb-2 px-2 my-2">
+            <legend class="w-auto bg-dark">Filtros</legend>
+            <div class="row">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-8">
+                            <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select [items]="departamentos" bindValue="id_catalogo" bindLabel="valor" [(ngModel)]="filter.departamento" [clearable]="false" [markFirst]="false" class="form-control"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Disposici&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select [items]="disposiciones" bindValue="nombre" bindLabel="nombre" [(ngModel)]="filter.disposicion" [clearable]="false" [markFirst]="false" class="form-control"></ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                                <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-4">
+                            <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                                <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+                <div class="col text-right pt-1">
+                    <button class="btn btn-sm btn-primary" matTooltip="BUSCAR" (click)="consultar()"><i class="fas fa-search"></i> BUSCAR</button>
+                    <button class="btn btn-sm btn-danger ml-1" matTooltip="LIMPIAR FILTROS" (click)="clearFiltros()"><i class="fas fa-eraser"></i></button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="table-responsive mb-2">
+            <table class="table table-striped mb-0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Documento</th>
+                        <th>Fecha Documento</th>
+                        <th>Departamento</th>
+                        <th class="w-50">Tema</th>
+                        <th>Disposici&oacute;n</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!tramites.length">
+                        <td colspan="6" class="text-center">
+                            <h6>No hay tramites para mostrar</h6>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let tramite of tramites">
+                        <td>{{ tramite.tipo_documento }} {{ tramite.numero_documento }}</td>
+                        <td>{{ tramite.fecha_documento }}</td>
+                        <td>{{ tramite.departamento?.valor }}</td>
+                        <td>{{ tramite.tema }}</td>
+                        <td>{{ tramite.disposicion }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" (click)="editTramite(tramite)"><i class="fas fa-edit"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <mat-paginator 
+                showFirstLastButtons
+                [length]="paginate.length"
+                [pageSize]="paginate.perPage"
+                [pageSizeOptions]="paginate.pageSizeOptions"
+                (page)="changePaginate($event)"
+                aria-label="Select page"
+            ></mat-paginator>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="renTramites"></cc-spiner-procesar>

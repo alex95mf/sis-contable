@@ -1,0 +1,98 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Solicitudes" filtroBoton="btnSolicitud" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-file-text">
+        <div class="row mt-1" *ngIf="permissions != undefined && permisoCrear != undefined">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Solicitante" styleSpan="size-span-campo">
+                    <input id="name_user" type="text" #usuarioSolicitud="ngModel" [(ngModel)]="usuario" class="form-control form-control-sm" value="{{nameUser}}" disabled name="usuarioSolicitud">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-2">
+                <app-cc-input-group-prepend label="Fecha de Solicitud" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control" disabled [value]="fecha_emision" name="dateSolicitud" id="idsolicitudDate" disabled placement="top" ngbTooltip="{{fecha_emision}}">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Estado de Proceso Solicitud" styleSpan="size-span-campo">
+                    <div class="form-control form-control progress" *ngIf="actions.search == false">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="form-control form-control progress" *ngIf="filtro_doc == 1 && actions.search == true">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Creado</div>
+                    </div>
+                    <div class="form-control form-control progress" *ngIf="filtro_doc == 2 && actions.search == true">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Creado</div>
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Revisado</div>
+                    </div>
+                    <div class="form-control form-control progress" *ngIf="filtro_doc == 3 && actions.search == true">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Creado</div>
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Revisado</div>
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Procesado</div>
+                    </div>
+                    <div class="form-control form-control progress" *ngIf="filtro_doc == 4 && actions.search == true">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Creado</div>
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Revisado</div>
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Revisado</div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Aprobado</div>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mt-1" *ngIf="permissions != undefined && permisoCrear != undefined">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Permisos" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control" disabled [value]="' ' +EstadoCreado + ' ' + EstadoRevisado +  ' ' + EstadoProcesado +  ' ' + EstadoAprobado">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-2">
+                <app-cc-input-group-prepend label="Fecha Caducidad" styleSpan="size-span-campo">
+                    <input type="text" class="form-control form-control" [value]="fecha_caducidades" name="dateCaducidad" id="idcaducidadDate" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-6">
+                <app-cc-input-group-prepend label="Siguiente Estado" styleSpan="size-span-campo">
+                    <div class="btn-group btn-group-xs form-control form-control">
+                        <button type="button" class="btn btn-warning" (click)="SetnexStatus(solicitud)" [disabled]="!discreado" ngbTooltip="Cambiar Revisar">Creado</button>
+                        <button type="button" class="btn btn-success" (click)="SetnexStatus(solicitud)" [disabled]="!disrevisado" ngbTooltip="Cambiar Procesar">Revisar</button>
+                        <button type="button" class="btn btn-info" (click)="SetnexStatus(solicitud)" [disabled]="!disprocesado" ngbTooltip="Cambiar Aprobar">Procesar</button>
+                        <button type="button" class="btn btn-danger" (click)="SetnexStatus(solicitud)" [disabled]="!disaprobado">Aprobar</button>
+                    </div>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mt-1" *ngIf="permissions != undefined && permisoCrear != undefined && editInfoDetalle">
+            <div class="col-sm-3">
+                <app-cc-input-group-prepend label="No. Solicitud" styleSpan="size-span-campo">
+                    <input id="numberSolicitud" type="text" #numberSolicitud="ngModel" [(ngModel)]="numero_solicitud" class="form-control form-control-sm" disabled value="{{numero_solicitud}}" name="numberSolicitud">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row " *ngIf="permissions != undefined && permisoCrear != undefined">
+            <div class="col-md-12">
+                <app-tabs></app-tabs>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spSolicitud"></cc-spiner-procesar>
+
+<!--MODAL-->
+<div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="font-family: 'Poppins1';">
+            <div class="modal-body">
+                <app-button-radio-active titulo="Anulación de Solicitud" filtroBoton="btnSolicitudDelete" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-file-text">
+
+                    <div class="row mt-2">
+                        <div class="col-sm-12 mb-3">
+                            <app-cc-input-group-prepend label="Motivo" styleSpan="size-span-campo">
+                                <textarea class="form-control form-control-sm" [(ngModel)]="dataModaldescription" id="Idcausa" placeholder="Ingrese el Motivo de anulación de la solicitud" style="box-shadow: unset;outline: unset;">
+                                </textarea>
+                            </app-cc-input-group-prepend>
+                        </div>
+
+                    </div>
+                </app-button-radio-active>
+            </div>
+        </div>
+    </div>
+</div>

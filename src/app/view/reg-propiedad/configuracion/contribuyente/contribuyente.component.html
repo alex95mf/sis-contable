@@ -1,0 +1,81 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Consulta de Contribuyente" filtroBoton="btnsContribuyente" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo Doc.</span>
+                    </div>
+                    <select id="tipo_documento" class="form-control form-control-sm" (ngModelChange)="docValidate($event)" [(ngModel)]="contribuyente.tipo_dococumento">
+                        <option [value]="0">Seleccione documento</option>
+                        <option *ngFor="let d of catalog.documents" [value]="d.valor">{{ d.valor }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
+                    </div>
+                    <input id="num_documento" type="text" class="form-control form-control-sm" placeholder="Número del documento" [(ngModel)]="contribuyente.num_documento" (keypress)="onlyNumber($event)" minlength="{{ tamDoc }}" maxlength="{{ tamDoc }}">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre Contribuyente</span>
+                    </div>
+                    <input id="razon_social" type="text" class="form-control form-control-sm" placeholder="Nombre contribuyente" [(ngModel)]="contribuyente.razon_social">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Dirección</span>
+                    </div>
+                    <input id="direccion" type="text" class="form-control form-control-sm" placeholder="Dirección contribuyente" [(ngModel)]="contribuyente.direccion">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Teléfono</span>
+                    </div>
+                    <input id="telefono" type="text" class="form-control form-control-sm" placeholder="Teléfono contribuyente" [(ngModel)]="contribuyente.telefono" (keypress)="onlyNumber($event)">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Representante Legal</span>
+                    </div>
+                    <input id="representante_legal" type="text" class="form-control form-control-sm" placeholder="Representante contribuyente" [(ngModel)]="contribuyente.representante_legal">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Provincia</span>
+                    </div>
+                    <input id="provincia" type="text" class="form-control form-control-sm" placeholder="Provincia contribuyente" [(ngModel)]="contribuyente.provincia">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Ciudad</span>
+                    </div>
+                    <input id="ciudad" type="text" class="form-control form-control-sm" placeholder="Ciudad contribuyente" [(ngModel)]="contribuyente.ciudad">
+                </div>
+            </div>
+        </div>
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spContribuyente"></cc-spiner-procesar>

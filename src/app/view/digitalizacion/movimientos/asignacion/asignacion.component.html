@@ -1,0 +1,537 @@
+    <div class="mt-2">
+        <app-button-radio-active titulo="Asignacion de bodega" cstyle="bg-light text-dark" icono="fas fa-tasks" filtroBoton="btnsComprasP" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+            <div *ngIf="nuevaSolicitud; else newSolicitud">
+                <div class="col">
+                </div>
+                <div class="m-2" >
+                    <div class="row">
+                <div class="col-sm-6">
+                    <fieldset class="border pb-2 px-2">
+                        <legend class="w-auto bg-dark ml-1">Tipo de medio</legend>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="col-sm">
+                                    <app-cc-input-group-prepend label="Tipo medio" styleSpan="size-span-campo font-weight-bold">
+                                        <ng-select class="form-control" [clearable]="false" (change)="selectTipoMedioMid($event,'select')"  [(ngModel)]="tipo_medida">
+                                            <ng-option *ngFor="let c of estadoDevList" [value]="c.valor">{{c.descripcion}}</ng-option>
+                                        </ng-select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                           
+                        
+                     
+                        </div>
+                      
+                    </fieldset>
+                </div>
+                <div class="col-sm-6">
+                    <fieldset class="border pb-2 px-2">
+                        <legend class="w-auto bg-dark ml-1">Seleccionar Ubicacion</legend>
+                        <div class="row">
+                         
+                            <div class="col-12">
+                                <div class="col-sm">
+                                    <app-cc-input-group-prepend label="Bodega" styleSpan="size-span-campo font-weight-bold">
+                                        <select [(ngModel)]="bodega" class="form-control " (change)="getUbicaciones(item, $event.target.value,$event.target.selectedOptions[0].dataset.nombre)" >
+                                            <option *ngFor="let d of dataBodega" [value]="d.id_bodega_cab"   [attr.data-nombre]="d.nombre" >
+                                                {{d.nombre}}
+                                            </option>
+                                        </select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="col-sm">
+                                   
+                                    <app-cc-input-group-prepend label="Ubicaccion" styleSpan="size-span-campo font-weight-bold">
+                                        <select [(ngModel)]="ubicacion" class="form-control form-control-sm custom-select" (change)="setAllUbicaciones($event.target.value ,$event.target.selectedOptions[0].dataset.tipo_almacenamiento) "  [disabled]="disableGeneralUbicaciones">
+                                            <option *ngFor="let d of dataubicacion" [value]="d.id_bodega_det"   [attr.data-tipo_almacenamiento]="d.tipo_almacenamiento">
+                                                {{d.tipo_almacenamiento}}
+                                            </option>
+                                        </select>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                   
+                  <div class="row">
+              
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                       
+                         
+                    
+                </div>
+                <div class="col-sm-6">
+              </div>
+              </div>
+                           
+                          
+                     
+                        </div>
+                      
+                    </fieldset>
+                </div>
+            </div>
+                <div class="col-sm-6"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                    <div *ngIf="numeros_medios != null" style="overflow: auto;">
+                        <div class="table-container" *ngIf="numeros_medios && numeros_medios.length > 0">
+                            <table class="table table-hover mt-2">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center"></th>
+                                <th class="table-header">Codigo</th>
+                                <th class="table-header">Bodega</th>
+                                <th class="table-header">Ubicacion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dato of numeros_medios; let i = index">   
+                                    <td class="text-center">
+                                        <input type="checkbox" [(ngModel)]="dato.check" (ngModelChange)="changeValueCheck(dato)" [disabled]="dato.estado_prestamo === 'P'|| dato.bodega == '' || dato.ubicacion == ''" >
+                                    </td>
+                                    <td>{{ dato.numero_medio }}</td>
+                                    <td>
+                                        <!-- <app-cc-input-group-prepend label="Bodega" styleSpan="size-span-campo font-weight-bold"> -->
+                                            <select [(ngModel)]="dato.bodega" class="form-control " (change)="getUbicacionesIndividual(i, $event.target.value, $event.target.selectedOptions[0].dataset.nombre)" >
+                                                <option *ngFor="let d of dataBodega" [value]="d.id_bodega_cab" [attr.data-nombre]="d.nombre">
+                                                    {{d.nombre}}
+                                                </option>
+                                            </select>
+                                       <!--  </app-cc-input-group-prepend> -->
+                                       </td>
+                                    <td><!-- <app-cc-input-group-prepend label="Ubicaccion" styleSpan="size-span-campo font-weight-bold"> -->
+                                        <select [(ngModel)]="dato.ubicacion" class="form-control form-control-sm custom-select" (change)="setubicacionIndividual(i,$event.target.selectedOptions[0].dataset.tipo_almacenamiento )">
+                                            <option *ngFor="let d of dataubicacionIndividual[i]" [value]="d.id_bodega_det" [attr.data-tipo_almacenamiento]="d.tipo_almacenamiento">
+                                                {{d.tipo_almacenamiento}}
+                                            </option>
+                                        </select>
+                                  <!--   </app-cc-input-group-prepend> --></td>
+                                </tr>
+                                <tr class="no-data" *ngIf="!numeros_medios || numeros_medios.length === 0">
+                                    <td colspan="9" class="text-center">
+                                        <h6>No hay Reservas que mostrar</h6>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                            <mat-paginator 
+                            showFirstLastButtons
+                            [length]="paginateNew.length" 
+                            [pageSize]="paginateNew.perPage" 
+                            [pageIndex]="+paginateNew.page - 1"
+                            [pageSizeOptions]="paginateNew.pageSizeOptions" 
+                            (page)="changePaginateNew($event)" 
+                            aria-label="Select page">
+                        </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div *ngIf=" medios_to_save!= null" style="overflow: auto;">
+                        <div class="table-container" *ngIf="medios_to_save && medios_to_save.length > 0">
+                            <table class="table table-hover mt-2">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center"></th>
+                                <th class="table-header">Codigo</th>
+                                <th class="table-header">Bodega</th>
+                                <th class="table-header">Ubicacion</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dato of medios_to_save">   
+                                    <td class="text-center">
+                                        <a (click)="removeItem(i)"><i class="fas fa-trash-alt"></i></a>
+                                    </td>
+                                    <td>{{ dato.numero_medio }}</td>
+                                    
+                                    <td>{{ dato.bodega_nombre }}</td>
+                                    
+                                    <td>{{ dato.ubicacion_nombre }}</td>
+                                </tr>
+                                <tr class="no-data" *ngIf="!medios_to_save || medios_to_save.length === 0">
+                                    <td colspan="9" class="text-center">
+                                        <h6>No hay Reservas que mostrar</h6>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+              
+                </div>
+                    <table class="table table-hover mt-2" style="display: none;">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Codigo</th>
+                                <th class="text-center">Num. de prestamo</th>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Fecha de devolucion</th>
+                                <th class="text-center">Fecha maxima</th>
+                                <th class="text-center" style="max-width:25% ;">Observaciones</th>
+                                <th class="text-center">Responsable</th>
+                                <th class="text-center">Usuario Asignado</th>
+                                <th class="text-center">Estado</th>
+                                <th class="text-center" style="width: 88px;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!listaPrestamos.length">
+                                <td colspan="10" class="text-center">
+                                    <h6>No hay Solicitudes que mostrar</h6>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let item of listaPrestamos">
+                                <td class="text-center">
+                                    <div class="col">{{item.codigo}}</div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="col text-muted">{{ item.num_orden }} </div>
+                                </td>
+                                <td> {{ item.fecha }} </td>
+                                <td >{{item.devolucion}}</td>
+                                <td class="text-center">{{item.fechamaxima}}</td>
+                                <td class="text-center">{{item.observacion}}</td>
+                                <td class="text-center">{{item.detalle_empleadosmn?.nombre}}</td>
+                                <td class="text-center">{{item.detalleusuario?.nombre}}</td>
+                                <td class="text-center">
+                                    <i *ngIf="item.estado_prestamo === 'D'" class="fas fa-circle text-success"></i>
+                                    <i *ngIf="item.estado_prestamo === 'P'" class="fas fa-circle text-danger"></i>
+                                    {{ item.estado_prestamo === 'D' ? 'Devuelto' : 'Prestado' }}
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm" (click)="moduloDetallePrestamo(item)" ngbTooltip="Mostrar detalles">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-warning btn-sm ml-2" [disabled]="item.estado_prestamo === 'D'" (click)="moduloDetallePrestamoedit(item)" ngbTooltip="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            
+                            </tr>
+                        </tbody>
+                    </table>
+               
+                </div>
+
+            </div>
+            
+
+            <ng-template #newSolicitud>
+                <div class="row">
+
+                
+                <div class="col-12">
+                 
+
+                </div>
+
+                <div class="col-12">
+
+             
+
+                </div> 
+            </div>
+
+
+                <div class="row">
+                
+                </div>
+
+            
+
+                
+    <div class="row">
+       
+    <div class="col-sm-6">
+        
+        
+        <fieldset class="border pb-2 px-2">
+        <div class="pr-2 pl-2">
+                        <legend class="w-auto bg-dark ml-1">Datos de Prestamo</legend>
+                        <div class="row">
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Num. de prestamo" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" type="text" [(ngModel)]="newReserva.num_orden" readonly/>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Usuario Asignado" styleSpan="size-span-campo font-weight-bold">
+                                 
+                                <div class="input-group-append flex-grow-1">
+                                <input placeholder="Usuario" type="text" #usuario="ngModel"
+                                name="usuario" [(ngModel)]="newReserva.usuario" 
+                                class="form-control form-control-sm" [disabled]="dusuario" 
+                                id="usuario">
+                        
+                                <button class="btn btn-primary btn-sm" (click)="modalUsuarios()" 
+                                    style="box-shadow: unset;outline: unset;">
+                                    Buscar
+                                </button>
+                            </div><!-- 
+                                <app-cc-input-group-prepend label="Usuario" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" type="text" [(ngModel)]="newReserva.codigo"/>
+                                </app-cc-input-group-prepend> -->
+                               
+                            </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Codigo" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" type="text" [(ngModel)]="newReserva.codigo"/>
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold">
+                                    <textarea class="form-control" rows="4" [(ngModel)]="newReserva.observacion"></textarea><!--     <input class="form-control" type="text" [(ngModel)]="newReserva.observacion"/> -->
+                                </app-cc-input-group-prepend>
+                            </div>
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Fecha " styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" readonly type="date" [(ngModel)]="newReserva.fecha"/>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        <!--  <div class="col-3">
+                                <app-cc-input-group-prepend label="Fecha devolucion" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" type="date" [(ngModel)]="newReserva.devolucion"/>
+                                </app-cc-input-group-prepend>
+                            </div> -->
+                            <!--  3333-->
+                            <div class="col-12">
+                                <app-cc-input-group-prepend label="Fecha maxima devolucion" styleSpan="size-span-campo font-weight-bold">
+                                    <input class="form-control" readonly  type="date" [(ngModel)]="newReserva.fechamaxima"/>
+                                </app-cc-input-group-prepend>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    </fieldset>
+                </div>
+                <div class="col-sm-6">
+                    <fieldset class="border pb-2 px-2">
+                        <div class="pr-2 pl-2">
+                                        <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row">
+                        <div class="col-sm">
+                            <app-cc-input-group-prepend label="Tipo Documento" styleSpan="size-span-print font-weight-bold">
+                                <ng-select class="form-control" [clearable]="false" (change)="selectTipoDocumento($event)"  [(ngModel)]="filter.tipo_documento">
+                                    <ng-option *ngFor="let c of lst_tipoDoC" [value]="c.id_tipo_documento">{{c.nombre}}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>  
+                    <div class="row" *ngFor="let campo of dataForms, let i = index">
+                        <div class="col-sm">
+                            <app-cc-input-group-prepend [label]="filter.campos[i].campo_indice" styleSpan="size-span-print font-weight-bold">
+                                <input id="filter_buscador" type="text" class="form-control" [(ngModel)]="filter.campos[i].valor_indice">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                
+                </div>
+            </fieldset>
+        </div>
+                </div>
+
+
+                <div class="col">
+                    <div class="row">
+                    </div>
+                   
+                </div>
+        
+                <div class="m-2" >
+                    <mat-tab-group>
+                        <mat-tab label="Lista de Documentos"> 
+                    <div *ngIf="resultadoConsulta != null" style="overflow: auto;">
+                        <div class="table-container" *ngIf="resultadoConsulta && resultadoConsulta.length > 0">
+                            <table class="table table-hover mt-2">
+                            <thead class="thead-dark">
+                                <tr><!-- <th class="table-header"></th> -->
+                                    <th class="text-center"><!-- <input type="checkbox" [(ngModel)]="masterSelected" (change)="selectAll()" /> --></th>
+                                <th class="table-header">Nombre de Archivo</th>
+                                <ng-container *ngFor="let detalle of dataForms">
+                                    <th class="table-header">{{ detalle.campo_indice }}</th>
+                                </ng-container>
+                                <th class="table-header">Bodega</th>
+                                <th class="table-header">Ubicacion</th>
+                                <th class="table-header">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                                <tr *ngFor="let dato of resultadoConsulta">   
+                                    <td class="text-center">
+                                        <input type="checkbox" [(ngModel)]="dato.check" (ngModelChange)="changeValueCheck(dato)" [disabled]="dato.estado_prestamo === 'P'" >
+                                    </td>
+                                <!--  <td width="5%"> <i class="fa fa-hand-pointer-o over" (click)="verAnexo(dato)" [ngStyle]="{'color': 'green'}"></i></td> -->
+                                    <td>{{ dato.nombre_archivo }}</td>
+                                    <ng-container *ngFor="let detalle of dato.detalledocs">
+                                        <td >{{ detalle.valor_indice }}</td>
+                                    </ng-container>
+                                    
+                                    <td>
+                                        <span [matTooltip]="tooltipContent">
+                                        {{ dato.ubicacionrelation?.bodega?.nombre }}
+                                        </span>
+                                    </td>
+                                    
+                                    <ng-template #tooltipContent>
+                                        <div>
+                                            <p>
+                                                {{ dato.ubicacionrelation?.bodega}}
+                                            </p>
+                                        </div>
+                                    </ng-template>
+                                    
+                                    <td>{{ dato.ubicacionrelation?.tipo_almacenamiento }}</td>
+                                    <td class="text-center">
+                                        <i *ngIf="dato.estado_prestamo === 'B'" class="fas fa-circle text-success"></i>
+                                        <i *ngIf="dato.estado_prestamo === 'P'" class="fas fa-circle text-danger"></i>
+                                        {{ dato.estado_prestamo === 'B' ? 'Bodega' : 'Prestado' }}
+                                    
+                                    </td> <!-- <td>
+                                        <i *ngIf="dato.estado_prestamo === 'D'" class="fas fa-circle text-success"></i>
+                                <i *ngIf="dato.estado_prestamo === 'P'" class="fas fa-circle text-danger"></i>
+                                {{ dato.estado_prestamo === 'D' ? 'Devuelto' : 'Prestado' }} 
+                                        
+                                    </td> --> <!--  {{  }} -->
+
+
+                                </tr>
+                                <tr class="no-data" *ngIf="!resultadoConsulta || resultadoConsulta.length === 0">
+                                    <td colspan="9" class="text-center">
+                                        <h6>No hay Reservas que mostrar</h6>
+                                    </td>
+            
+                                </tr>
+                            </tbody>
+                            </table>
+                            <mat-paginator 
+                            showFirstLastButtons
+                            [length]="paginateNew.length" 
+                            [pageSize]="paginateNew.perPage" 
+                            [pageIndex]="+paginateNew.page - 1"
+                            [pageSizeOptions]="paginateNew.pageSizeOptions" 
+                            (page)="changePaginateNew($event)" 
+                            aria-label="Select page">
+                        </mat-paginator>
+                        </div><!-- *ngIf="!listaSolicitudesAtribucion.length" -->
+                    <!--  <div class="no-data" *ngIf="!resultadoConsulta || resultadoConsulta.length === 0"> 
+                            <p>No hay datos disponibles.</p>
+                        </div> -->
+
+
+                    </div>
+
+
+<!-- 
+                  <mat-paginator showFirstLastButtons [length]="paginateNew.length" [pageSize]="paginateNew.perPage"
+                    [pageSizeOptions]="paginateNew.pageSizeOptions" (page)="changePaginateNew($event)" aria-label="Select page">
+                    </mat-paginator> 
+                         -->
+                    
+
+                </mat-tab>
+                    <mat-tab label="Documentos Por Reservar">
+
+
+                    <div *ngIf=" detallesToSave!= null" style="overflow: auto;">
+                        <div class="table-container" *ngIf="detallesToSave && detallesToSave.length > 0">
+                            <table class="table table-hover mt-2">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center"><!-- <input type="checkbox" [(ngModel)]="masterSelected" (change)="selectAll()" /> --></th>
+                                <th class="table-header">Nombre de Archivo</th>
+                            <!--   <ng-container *ngFor="let detalle of dataForms">
+                                    <th class="table-header">{{ detalle.campo_indice }}</th>
+                                </ng-container> -->
+                                <th class="table-header">Tipo Documento</th>
+                                <th class="table-header">Bodega</th>
+                             
+                                <th class="table-header">Ubicacion</th>
+                                <th class="table-header">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dato of detallesToSave">   
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-danger" (click)="removeItem(i)"><i class="fas fa-trash-alt"></i></button>
+
+                                    <!-- Eliminar   <input type="checkbox" [(ngModel)]="dato.check" (ngModelChange)="changeValueCheck(dato)" [disabled]="dato.estado_prestamo === 'P'" > -->
+                                    </td>
+                                    <td>{{ dato.nombre_archivo }}</td>
+                                <!--  <ng-container *ngFor="let detalle of dato.detalledocs">
+                                        <td >{{ detalle.valor_indice }}</td>
+                                    </ng-container> -->
+                                    <td>
+                                        
+                                        {{ dato.documentoactual }} 
+                                      
+                                    </td>
+                                    <td>
+                                        
+                                        {{ dato.ubicacionrelation?.bodega?.nombre }}
+                                      
+                                    </td>
+                                    
+                                   <!--  <ng-template #tooltipContent>
+                                        <div>
+                                            <p>
+                                                {{ dato.ubicacionrelation?.bodega}}
+                                            </p>
+                                        </div>
+                                    </ng-template> -->
+                                    <td>{{ dato.ubicacionrelation?.tipo_almacenamiento }}</td>
+                                    <td class="text-center">
+                                        <i *ngIf="dato.estado_prestamo === 'B'" class="fas fa-circle text-success"></i>
+                                        <i *ngIf="dato.estado_prestamo === 'P'" class="fas fa-circle text-danger"></i>
+                                        {{ dato.estado_prestamo === 'B' ? 'Bodega' : 'Prestado' }}
+                                    
+                                    </td> 
+                                </tr>
+                                <tr class="no-data" *ngIf="!resultadoConsulta || resultadoConsulta.length === 0">
+                                    <td colspan="9" class="text-center">
+                                        <h6>No hay Reservas que mostrar</h6>
+                                    </td>
+            
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+
+                    </mat-tab>
+                
+                </mat-tab-group>
+                </div>
+
+            <!--   <div class="row my-2 justify-content-end">
+                    <div class="col-6">
+                        <div class="input-group input-group-lg input-group-subtotal">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Total</span></div>
+                            <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ total | number: '1.2-2' }}">
+                        </div>
+                    </div>
+                </div> -->
+
+
+
+            </ng-template>
+            
+            
+
+            
+
+        </app-button-radio-active>
+
+        <cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>
+    </div>
+

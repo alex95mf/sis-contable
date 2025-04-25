@@ -1,0 +1,98 @@
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnRepNotDeb" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-ils">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+                <ejs-datepicker [(ngModel)]="fromDatePicker" type="text" format="yyyy-MM-dd" id="" class="form-control form-control-sm" (ngModelChange)="rerender()"> </ejs-datepicker>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Tipo Agente" styleSpan="size-span-campo">
+                <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="Tagente" (ngModelChange)="filterTagente($event)">
+                    <ng-option *ngFor="let d of arrayTipoAgente" [value]="d.name">{{d.name}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Agente" styleSpan="size-span-campo">
+                <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="agente" (ngModelChange)="filterAgente($event)">
+                    <ng-option *ngFor="let d of arrayClientes" [value]="d.id_cliente">{{d.nombre_comercial_cli}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+                <ejs-datepicker [(ngModel)]="toDatePicker" type="text" format="yyyy-MM-dd" id="" class="form-control form-control-sm" (ngModelChange)="rerender()"> </ejs-datepicker>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Motivo" styleSpan="size-span-campo">
+                <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="motivo" (ngModelChange)="filterMotivo($event)">
+                    <ng-option *ngFor="let d of arrayMotivos" [value]="d.valor">{{d.valor}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Sucursal" styleSpan="size-span-campo">
+                <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="sucursal" (ngModelChange)="filterSucursal($event)">
+                    <ng-option *ngFor="let d of arraySucursales" [value]="d.id_sucursal">{{d.nombre}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                <ng-select id="inputLabel-prepend" class="form-control form-control-sm " aria-label="Small" aria-describedby="inputGroup-sizing-sm" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="statusFilter" (ngModelChange)="filterEstado($event)">
+                    <ng-option *ngFor="let d of statusDocuments" [value]="d.id">{{d.name}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+
+    <fieldset class="border p-2 mb-2 mt-3 filters">
+        <legend class="w-auto h6">Listado</legend>
+        <div class="table-responsive responsive-table">
+            <table datatable [dtOptions]="dtOptions" id="tablaReporNotDeb" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                <thead>
+                    <tr style="width: 100%;text-align: center;">
+                        <!-- <th>#</th> -->
+                        <th>Documento</th>
+                        <th>Razón social</th>
+                        <th>Ruc</th>
+                        <th>Teléfono</th>
+                        <th>Valor</th>
+                        <th>fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="validaDt">
+                    <tr *ngFor="let dt of infoData; let i = index">
+                        <!-- <td class="text-center" style="width: 0%;">{{ i + 1 }}</td> -->
+                        <td style="padding-top: 15px;text-align: center;width: 3%;cursor:pointer;" matTooltip="Mostrar Detalle" (click)="informaDocumento(dt,i)">{{dt.codigo}}-{{ dt.secuencia_doc.toString().padStart(10, '0') }}</td>
+                        <td style="padding-top: 15px;text-align: center;text-align: center;width: 8%;">{{ dt.razon_social }}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 3%;">{{ dt.ruc }}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 3%;">{{ dt.telefono }}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 3%;"> {{ dt.total | currency: 'USD' | lowercase}}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 3%;">{{ dt.fecha_emision }}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 5%;">
+                            <div *ngIf="dt.filter_doc != 4">
+                                En proceso
+                            </div>
+                            <div *ngIf="dt.filter_doc == latestStatus">
+                                Aprobada
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+
+
+</app-button-radio-active>

@@ -1,0 +1,686 @@
+<app-button-radio-active titulo="Reforma por codigo" cstyle="bg-light text-dark" icono="fas fa-tasks" filtroBoton="btnsComprasP" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                <!-- <input class="form-control" type="number" placeholder="Ingrese el periodo... " [(ngModel)]="atribucionParamsNew.periodo" /> -->
+                <ng-select class="form-control" (change)="handleSelectPeriodo($event)"
+                    [items]="periodos" bindValue="id" bindLabel="periodo" [disabled]="search">
+
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col">
+            <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" (change)="handleSelectPrograma($event)"
+                    [items]="programas" bindValue="descripcion" bindLabel="label" [disabled]="search">
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col">
+            <app-cc-input-group-prepend label="No Documento" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="text" [(ngModel)]="atribucionParamsNew.nom_documento" readonly/>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" [(ngModel)]="atribucionParamsNew.fecha" [disabled]="search">
+            </app-cc-input-group-prepend>
+        </div>
+        <!-- <div class="col-4">
+            <app-cc-input-group-prepend label="Reforma" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [ngModel]="reformaSelected?.no_reforma"/>
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-secondary" (click)="expandReforma()"><i class="fas fa-search"></i></button>
+                </div>
+            </app-cc-input-group-prepend>
+        </div> -->
+        <div class="col-4 offset-4">
+            <app-cc-input-group-prepend label="Codigo Partida" styleSpan="size-span-campo font-weight-bold">
+                <input  type="text" class="form-control" readonly [ngModel]="atribucionParamsNew.reforma_presupuesto" (click)="expandPartidas('partida1')">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary btn-sm" (click)="expandPartidas('partida1')">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </app-cc-input-group-prepend> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold bg-dark">
+                <textarea class="form-control" rows="3" [(ngModel)]="atribucionParamsNew.observacion"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <!-- <fieldset class="border px-3 pb-2">
+        <legend class="w-auto mb-1">Detalles</legend>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0" style="min-width: 1600px;" >
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th style="width: 70px;">PARTIDA</th>
+                        <th style="width: 175px;">CONCEPTO</th>
+                        <th style="width: 175px;">PROGRAMA</th>
+                        <th class="text-right" style="width: 150px;">ANUAL</th>
+                        <th class="text-right" style="width: 150px;">SC_INGRESOS</th>
+                        <th class="text-right" style="width: 150px;">SC_EGRESOS</th>
+                        <th class="text-right" style="width: 150px;">RC_INGRESOS</th>
+                        <th class="text-right" style="width: 150px;">RC_EGRESOS</th>
+                        <th class="text-right" style="width: 155px;">TC_INCREMENTO</th>
+                        <th class="text-right" style="width: 150px;">TC_REDUCCION</th>
+                        <th class="text-right" style="width: 150px;">FINAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let d of reformaSelected.detalles; let i = index">
+                        <td style="width: 70px;">
+                            {{ d.partida }}
+                        </td>
+                        <td style="width: 175px;">
+                            {{ d.concepto ?? 'N/A' }}
+                        </td>
+                        <td style="width: 175px;">
+                            {{ d.programa.valor }}
+                        </td>
+                        <td class="text-right" style="width: 150px;">
+                           $ {{ d.anual | number: '1.2-2' }}
+                        </td>
+                        <td class="text-right" style="width: 150px;">
+                            $ {{ d.sp_ingresos | number: '1.2-2' }}
+                        </td>
+                        <td class="text-right" style="width: 150px;">
+                            $ {{ d.sp_egresos | number: '1.2-2' }}
+                        </td>
+                        <td class="text-right" style="width: 150px;">
+                            $ {{ d.rc_ingresos | number: '1.2-2' }}
+                        </td>
+                        <td class="text-right" style="width: 150px;">
+                            $ {{ d.rc_egresos | number: '1.2-2' }}
+                        </td>
+                        <td class="text-right" style="width: 150px;">
+                            $ {{ d.tc_incremento | number: '1.2-2' }}
+                        </td>
+                        <td class="text-right" style="width: 150px;">
+                            $ {{ d.tc_reduccion | number: '1.2-2' }}
+                        </td>
+                        <td class="text-right" style="width: 150px;">
+                            $ {{ d.final | number: '1.2-2' }}
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </fieldset> -->
+
+    
+
+    <mat-tab-group preserveContent class="my-2">
+        <mat-tab label="Disminucion">
+            <div class="container-fluid">
+                <!-- <div class="row">
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Codigo Partida" styleSpan="size-span-campo font-weight-bold">
+                            <input  type="text" class="form-control" readonly [ngModel]="atribucionParamsNew.reforma_presupuesto" (click)="expandPartidas('partida1')">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary btn-sm" (click)="expandPartidas('partida1')">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </app-cc-input-group-prepend> 
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-primary btn-sm mt-1" (click)="getBienes()">
+                            <i class="fas fa-search"></i> Cargar
+                        </button>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Valor a disminuir " styleSpan="size-span-campo font-weight-bold">
+                            <input class="form-control" currencyMask placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.ajuste_1" (keypress)="calcularValorTotal()" onclick="this.select()" />
+                        </app-cc-input-group-prepend>
+                    </div> 
+                
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Valor ajustado" styleSpan="size-span-campo font-weight-bold">
+                            <input class="form-control" currencyMask placeholder="Ingrese el numero... " readonly [ngModel]="total" />
+                        </app-cc-input-group-prepend>
+                    
+                    </div>
+                </div>   
+                
+                <div class="table-responsive mt-2" style="max-height: 600px; overflow-y: scroll;">
+                    <table class="table table-bordered no-footer table-hover mb-0" style="width: 1800px;" >
+                        <thead class="thead-dark sticky-header">
+                            <tr>
+                                <th class="text-center" style="width: 5%;"><input type="checkbox" [(ngModel)]="masterSelected" (change)="selectAll()" [disabled]="search" /></th>
+                                <th class="text-center">Descripcion</th>
+                                <th class="text-center">Departamento</th>
+                                <th class="text-center">Atribucion</th>
+                                <th class="text-center">Unidad de medida</th>
+                                <th class="text-center">Cantidad</th>
+                                <th class="text-center">Costo Unitarios</th>
+                                <th class="text-center">Valor total</th>
+                                <th class="text-center">Cantidad por Solicitar</th>
+                                <th class="text-center">Costo Total por Solicitar</th>
+                                <th class="text-center">Cantidad Modifcada</th>
+                                <th class="text-center">Costo Unitarios Modificados</th>
+                                <th class="text-center">Valor total Modificados</th>
+                                <th></th>
+                
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            <ng-container *ngIf="listaSolicitudesAtribucion?.length > 0; else emptyMessageReduccion">
+                                <tr *ngFor="let item of listaSolicitudesAtribucion" [ngClass]="{'table-warning': item.check}">
+                                    <td class="text-center" style="width: 5%;"> 
+                                        <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="calcularValorTotal()" [disabled]="search" />
+                                    </td>
+                                    <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
+                                    <td class="text-center">{{item.departamento}}</td>
+                                    <td class="text-center" maxlength="10">{{item.atribucion}}</td>
+                                    <td class="text-center">{{item.u_medida}}</td>
+                                    <!-- Iniciales -->
+                                    <td class="text-center">{{item.cantidad_solicitada}}</td>
+                                    <td class="text-center">$ {{item.costo_unitario | number:'1.2-2'}}</td>
+                                    <td class="text-center" style="width: 10%;"> <input class="form-control" currencyMask [ngModel]="item.precio_cotizado" readonly></td>
+                                    <!-- Por Solicitar -->
+                                    <td class="text-center">
+                                        <input class="form-control" type="text" [(ngModel)]="item.cantidad_por_solicitar" readonly/>
+                                    </td>
+                                    <td class="text-center" style="width: 10%;">
+                                        <input class="form-control" currencyMask [(ngModel)]="item.costo_total_por_solicitar" readonly/>
+                                    </td>
+                                    <!-- Reforma -->
+                                    <td class="text-center">
+                                        <input class="form-control form-control-sm" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (blur)="calcularValorTotal()" (ngModelChange)="actualizaTotalCotizado(item)" [disabled]="!item.check">
+                                    </td>
+                                    <td class="text-center" >
+                                        <app-cc-input-group-prepend label="$" styleSpan="font-weight-bold">
+                                            <input currencyMask [options]="{prefix: ''}" class="form-control" [(ngModel)]="item.costo_unitario_mod" (blur)="calcularValorTotal()" (ngModelChange)="actualizaTotalCotizado(item)" [disabled]="!item.check">
+                                        </app-cc-input-group-prepend>
+                                    </td>
+                                    <td class="text-center" style="width: 10%;">
+                                        <app-cc-input-group-prepend label="$" styleSpan="font-weight-bold">
+                                            <input currencyMask [options]="{prefix: ''}" class="form-control" [(ngModel)]="item.precio_cotizado_mod" disabled>
+                                        </app-cc-input-group-prepend>
+                                    </td>
+                                    <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)" [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #emptyMessageReduccion>
+                                <td colspan="12" class="text-center">
+                                    <h6>No hay Solicitudes que mostrar</h6>
+                                </td>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row my-2 justify-content-end">
+                    <div class="col-6">
+                        <div class="input-group input-group-lg input-group-total">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 300px;">&Sigma; Total por Solicitar</span></div>
+                            <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="totalOriginal">
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-2 justify-content-end">
+                    <div class="col-6">
+                        <div class="input-group input-group-lg input-group-subtotal">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 300px;">&Sigma; Total por Ajustar</span></div>
+                            <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="total">
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-2 justify-content-end">
+                    <div class="col-6">
+                        <div class="input-group input-group-lg input-group-descuentos">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 300px;">&Sigma; Total Ajustado</span></div>
+                            <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="ajuste1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Incremento">
+            <div class="container-fluid">
+                <!-- <div class="row">
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Codigo Partida" styleSpan="size-span-campo font-weight-bold">
+                            <input  type="text" class="form-control" readonly [ngModel]="atribucionParamsNew.reforma_presupuesto2" (click)="expandPartidas('partida2')">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary btn-sm" (click)="expandPartidas('partida2')">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </app-cc-input-group-prepend> 
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-primary btn-sm mt-1" (click)="getBienes()">
+                            <i class="fas fa-search"></i> Cargar
+                        </button>
+                    </div>
+                </div> -->
+                <div class="row">
+                        
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Valor a aumentar" styleSpan="size-span-campo font-weight-bold">
+                            <input class="form-control" currencyMask placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.ajuste_2" (keypress)="calcularValorTotal2()" />
+                        
+                        </app-cc-input-group-prepend>
+                    </div>
+                    
+                
+                    <div class="col">
+                        <app-cc-input-group-prepend label="Valor ajustado" styleSpan="size-span-otro font-weight-bold">
+                            <input class="form-control" currencyMask placeholder="Ingrese el numero... " readonly [ngModel]="total2"/>
+                        
+                        </app-cc-input-group-prepend>
+                    </div>
+                </div>
+                
+                <div class="table-responsive mt-2" style="max-height: 600px; overflow-y: scroll;">
+                    <table class="table table-bordered no-footer table-hover mb-0" style="width: 1600px;" >
+                        <thead class="thead-dark sticky-header">
+                            <tr>
+                                <th class="text-center" style="width: 5%;"><input type="checkbox" [(ngModel)]="masterSelected" (change)="selectAll2()" /></th>
+                                <th class="text-center">Descripcion</th>
+                                <th class="text-center">Departamento</th>
+                                <th class="text-center">Atribucion</th>
+                                <th class="text-center">Unidad de medida</th>
+                                <th class="text-center">Cantidad</th>
+                                <th class="text-center">Costo Unitarios</th>
+                                <th class="text-center">Valor total</th>
+                                <th class="text-center">Cantidad por Solicitar</th>
+                                <th class="text-center">Costo Total por Solicitar</th>
+                                <th class="text-center">Cantidad Modifcada</th>
+                                <th class="text-center">Costo Unitarios Modificados</th>
+                                <th class="text-center">Valor total Modificados</th>
+                                <th></th>
+                
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            <ng-container *ngIf="listaSolicitudesAtribucion2?.length > 0; else emptyMessageIncremento">
+                                <tr *ngFor="let item of listaSolicitudesAtribucion2" [ngClass]="{'table-warning': item.check}">
+                                    <td class="text-center" style="width: 5%;"> 
+                                        <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="calcularValorTotal2()" [disabled]="item.estado == 'I'" />
+                                    </td>
+                                    <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
+                                    <td class="text-center">{{item.departamento}}</td>
+                                    <td class="text-center" maxlength="10">{{item.atribucion}}</td>
+                                    <td class="text-center">{{item.u_medida}}</td>
+                                    <!-- Iniciales -->
+                                    <td class="text-center">{{item.cantidad_solicitada}}</td>
+                                    <td class="text-center">$ {{item.costo_unitario | number:'1.2-2'}}</td>
+                                    <td class="text-center" style="width: 10%;"> <input class="form-control" currencyMask [ngModel]="item.precio_cotizado" readonly></td>
+                                    <!-- Por Solicitar -->
+                                    <td class="text-center">
+                                        <input class="form-control" type="text" [(ngModel)]="item.cantidad_por_solicitar" readonly/>
+                                    </td>
+                                    <td class="text-center" style="width: 10%;">
+                                        <input class="form-control" currencyMask [(ngModel)]="item.costo_total_por_solicitar" readonly/>
+                                    </td>
+                                    <!-- Reforma -->
+                                    <td class="text-center">
+                                        <input class="form-control form-control-sm" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (blur)="calcularValorTotal2()" (ngModelChange)="actualizaTotalCotizado2(item)" [disabled]="!item.check">
+                                    </td>
+                                    <td class="text-center" >
+                                        <app-cc-input-group-prepend label="$" styleSpan="font-weight-bold">
+                                            <input currencyMask [options]="{prefix: ''}" class="form-control" [(ngModel)]="item.costo_unitario_mod" (blur)="calcularValorTotal2()" (ngModelChange)="actualizaTotalCotizado2(item)" [disabled]="!item.check">
+                                        </app-cc-input-group-prepend>
+                                    </td>
+                                    <td class="text-center" style="width: 10%;">
+                                        <app-cc-input-group-prepend label="$" styleSpan="font-weight-bold">
+                                            <input currencyMask [options]="{prefix: ''}" class="form-control" [(ngModel)]="item.precio_cotizado_mod" disabled>
+                                        </app-cc-input-group-prepend>
+                                    </td>
+                                    <td><button class="btn btn-sm btn-info" (click)="clonarBien(item)" [disabled]="item.estado == 'I'"><i class="fas fa-clone"></i></button></td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #emptyMessageIncremento>
+                                <td colspan="12" class="text-center">
+                                    <h6>No hay Solicitudes que mostrar</h6>
+                                </td>
+                            </ng-template>
+                        </tbody>
+                    </table>       
+                
+                </div>
+                <div class="row my-2 justify-content-end">
+                    <div class="col-6">
+                        <div class="input-group input-group-lg input-group-total">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 300px;">&Sigma; Total por Solicitar</span></div>
+                            <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="total2Original">
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-2 justify-content-end">
+                    <div class="col-6">
+                        <div class="input-group input-group-lg input-group-subtotal">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 300px;">&Sigma; Total por Ajustar</span></div>
+                            <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="total2">
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-2 justify-content-end">
+                    <div class="col-6">
+                        <div class="input-group input-group-lg input-group-descuentos">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 300px;">&Sigma; Total Ajustado</span></div>
+                            <input currencyMask class="form-control form-control-lg font-weight-bold" readonly [ngModel]="ajuste2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+      
+      
+
+    <!-- <div class="row">
+        <div class="col">
+            <app-cc-input-group-prepend label="Codigo presupuesto" styleSpan="size-span-campo font-weight-bold">
+                <input  type="number" class="form-control" placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.reforma_presupuesto" readonly/>
+                <div class="input-group-append">
+                    <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('Presupuestario')"><i class="fas fa-search"></i>Buscar</button>
+                </div>
+            </app-cc-input-group-prepend> 
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Nombre cuenta Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="descripcion_presupuesto" type="text" readonly/>
+                
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-primary btn-sm mt-1" (click)="SearchBienesSelect()">
+                <i class="fas fa-search"></i>Buscar
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+        
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.fecha"/>
+            
+            </app-cc-input-group-prepend>                    
+        
+        </div>
+
+        <div class="col-3">
+        
+            <app-cc-input-group-prepend label="Valor a disminuir " styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" type="number" placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.ajuste_1" (ngModelChange)="calcularAjuste($event)"/>
+            
+            </app-cc-input-group-prepend>
+        
+        </div> 
+
+        <div class="col-3">
+        
+            <app-cc-input-group-prepend label="Valor ajustado" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" placeholder="Ingrese el numero... " value="$ {{total}}"  readonly/>
+            
+            </app-cc-input-group-prepend>
+        
+        </div>
+
+        <div class="col-6">
+        
+            <app-cc-input-group-prepend label="Observacion" styleSpan="size-span-campo font-weight-bold">
+                <textarea class="form-control" placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.observacion"></textarea>
+            
+            </app-cc-input-group-prepend>
+
+        </div> 
+
+
+        
+
+
+
+    </div>   
+
+
+
+    <div class="table-responsive mt-2" >
+        <table class="table table-bordered no-footer table-hover mb-0" style="width: 1600px;" >
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" style="width: 5%;"><input type="checkbox" [(ngModel)]="masterSelected" (change)="selectAll()" /></th>
+                    <th class="text-center">Descripcion</th>
+                    <th class="text-center">Programa</th>
+                    <th class="text-center">Departamento</th>
+                    <th class="text-center">Atribucion</th>
+                    <th class="text-center">Unidad de medida</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Costo Unitarios</th>
+                    <th class="text-center">Valor total</th>
+                    <th class="text-center">Cantidad Modifcada</th>
+                    <th class="text-center">Costo Unitarios Modificados</th>
+                    <th class="text-center">Valor total Modificados</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngIf="!listaSolicitudesAtribucion.length">
+                    <td colspan="12" class="text-center">
+                        <h6>No hay Solicitudes que mostrar</h6>
+                    </td>
+
+                </tr>
+                <tr *ngFor="let item of listaSolicitudesAtribucion">
+                    <td class="text-center" style="width: 5%;"> <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="calcularValorTotal()"/></td>
+                    <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
+                    <td class="text-center">{{item.programa}}</td>
+                    <td class="text-center">{{item.departamento}}</td>
+                    <td class="text-center" maxlength="10">{{item.atribucion}}</td>
+                    <td class="text-center">{{item.u_medida}}</td>
+                    <td class="text-center" >{{item.cantidad_solicitada}}</td>
+                    <td class="text-center" >{{item.costo_unitario}}</td>
+                    <td class="text-center" style="width: 10%;"> <input class="form-control" type="text" value="$ {{item.precio_cotizado | number: '1.2-2'}}"  readonly/></td>
+                    <td class="text-center" > <input class="form-control" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (ngModelChange)="calcularValorTotal()" [disabled]="search"/></td>
+                    <td class="text-center" ><input class="form-control" type="text" [(ngModel)]="item.costo_unitario_mod" (ngModelChange)="calcularValorTotal()" [disabled]="search"/></td>
+                    <td class="text-center" style="width: 10%;"> <input class="form-control" type="text" value="$ {{item.precio_cotizado_mod | number: '1.2-2'}}"  readonly/></td>
+                </tr>
+            </tbody>
+        </table>
+
+        //[(ngModel)]="item.precio_cotizado_mod"
+         [(ngModel)]="item.precio_cotizado" 
+
+    </div>
+
+    <div>
+        <mat-paginator [length]="paginateNew.length" [pageSize]="paginateNew.perPage"
+          [pageSizeOptions]="paginateNew.pageSizeOptions" (page)="changePaginateNew($event)" aria-label="Select page">
+        </mat-paginator> 
+
+    </div>
+
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-total">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Total </span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalOriginal | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-subtotal">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Total a ajustar </span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ total | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-descuentos">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Ajuste</span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ ajuste1 | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+
+
+        <div class="col">
+
+            
+        
+            <app-cc-input-group-prepend label="Codigo presupuesto " styleSpan="size-span-campo font-weight-bold">
+                <input  type="number" class="form-control" placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.reforma_presupuesto2" readonly/>
+                <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('valor')"><i class="fas fa-search"></i>Buscar</button>
+            </app-cc-input-group-prepend>
+
+            <app-cc-input-group-prepend label="Nombre cuenta Presupuestario" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="descripcion_presupuesto2" type="text" readonly/>
+                
+            </app-cc-input-group-prepend>
+            
+
+        </div>       
+
+
+        <div class="row">
+            
+            <div class="col-5">
+                <app-cc-input-group-prepend label="Valor a aumentar" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" type="number" placeholder="Ingrese el numero... " [(ngModel)]="atribucionParamsNew.ajuste_2" (ngModelChange)="calcularAjuste2($event)"/>
+                
+                </app-cc-input-group-prepend>
+            </div>
+            
+
+            <div class="col-4">
+                <app-cc-input-group-prepend label="Valor ajustado" styleSpan="size-span-otro font-weight-bold">
+                    <input class="form-control" placeholder="Ingrese el numero... " value="$ {{total2}}"  readonly/>
+                
+                </app-cc-input-group-prepend>
+            </div>
+
+            
+
+            <div class="col-3 mt-1">
+                <button class="btn btn-primary btn-sm ml-1" (click)="SearchBienes2()">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </div>
+            
+    
+            
+    
+        </div>
+
+
+    </div>
+
+    
+
+
+    <div class="table-responsive mt-2" >
+        <table class="table table-bordered no-footer table-hover mb-0" style="width: 1600px;" >
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" style="width: 5%;"><input type="checkbox" [(ngModel)]="masterSelected" (change)="selectAll()" /></th>
+                    <th class="text-center">Descripcion</th>
+                    <th class="text-center">Programa</th>
+                    <th class="text-center">Departamento</th>
+                    <th class="text-center">Atribucion</th>
+                    <th class="text-center">Unidad de medida</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Costo Unitarios</th>
+                    <th class="text-center">Valor total</th>
+                    <th class="text-center">Cantidad Modifcada</th>
+                    <th class="text-center">Costo Unitarios Modificados</th>
+                    <th class="text-center">Valor total Modificados</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngIf="!listaSolicitudesAtribucion2.length">
+                    <td colspan="12" class="text-center">
+                        <h6>No hay Solicitudes que mostrar</h6>
+                    </td>
+
+                </tr>
+                <tr *ngFor="let item of listaSolicitudesAtribucion2">
+                    <td class="text-center" style="width: 5%;"> <input type="checkbox" [(ngModel)]="item.check" (ngModelChange)="calcularValorTotal2()"/></td>
+                    <td class="text-center" style="width: 20%;">{{item.descripcion}}</td>
+                    <td class="text-center">{{item.programa}}</td>
+                    <td class="text-center">{{item.departamento}}</td>
+                    <td class="text-center" maxlength="10">{{item.atribucion}}</td>
+                    <td class="text-center">{{item.u_medida}}</td>
+                    <td class="text-center" >{{item.cantidad_solicitada}}</td>
+                    <td class="text-center" >{{item.costo_unitario}}</td>
+                    <td class="text-center" style="width: 10%;"><input class="form-control" type="text" value="$ {{item.precio_cotizado | number: '1.2-2'}}" readonly/></td>
+                    <td class="text-center" ><input class="form-control" type="text" [(ngModel)]="item.cantidad_solicitada_mod" (ngModelChange)="calcularValorTotal2()" [disabled]="search"/></td>
+                    <td class="text-center" ><input class="form-control" type="text" [(ngModel)]="item.costo_unitario_mod" (ngModelChange)="calcularValorTotal2()" [disabled]="search"/></td>
+                    <td class="text-center" style="width: 10%;"><input class="form-control" type="text" value="$ {{item.precio_cotizado_mod | number: '1.2-2'}}"  readonly/></td>
+                </tr>
+            </tbody>
+        </table>       
+
+    </div>
+
+    <div>
+        <mat-paginator [length]="paginate2.length" [pageSize]="paginate2.perPage"
+          [pageSizeOptions]="paginate2.pageSizeOptions" (page)="changePaginateNew2($event)" aria-label="Select page">
+        </mat-paginator> 
+
+    </div>
+
+
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-total">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Total </span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ total2Original | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-subtotal">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Total a ajustar</span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ total2 | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-2 justify-content-end">
+        <div class="col-6">
+            <div class="input-group input-group-lg input-group-descuentos">
+                <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 200px;">&Sigma; Ajuste</span></div>
+                <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ ajuste2 | number: '1.2-2' }}">
+            </div>
+        </div>
+    </div> -->
+
+
+
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>

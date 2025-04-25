@@ -1,0 +1,203 @@
+<div class="my-2">
+
+    <app-button-radio-active-new [titulo]="fTitle" cstyle="bg-gradient-primary text-white" icono="fas fa-print"
+        filtroBoton="btnAsignacionIngresos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Filtros</legend>
+
+                    <div class="row m-0">
+            
+                        <div class="col-12 col-md-3 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Tipo de bien" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="periodo" [disabled]="constDisabled">
+                                  <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                                  <ng-option *ngFor="let item of listaCatalogo"  [value]="item">{{item}}</ng-option>
+                                </ng-select>
+                    
+                            </app-cc-input-group-prepend>
+            
+                            
+                            <!-- <div class="input-group input-group-sm">                    
+                                <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Tipo de bien</span></div>
+                                <input type="text"  class="form-control" [(ngModel)]="periodo" [disabled]="yearDisabled" (keypress)="onlyNumber($event)">
+                            </div> -->
+                        </div>
+                        <div class="col-12 col-md-3 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Archivos" styleSpan="size-span-campo font-weight-bold">
+
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".xlsx" (change)="onFileChange($event)">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ file ? file.name : "Seleccione un archivo" }}</label>
+                                </div>
+                            </app-cc-input-group-prepend>
+
+                        </div>
+                        <div class="col-12 col-md-3 pt-0 pb-0">
+                            <div class="input-group input-group-sm">                    
+                                <button [disabled]="btnDisabled" class="btn btn-sm btn-primary" (click)="agregaPeriodo()"><i class="fas fa-upload"></i> Cargar Constatación física</button>
+                            </div>
+                        </div> 
+                        <div class="col-12 col-md-3 pt-0 pb-0">
+                            <div class="input-group input-group-sm">                    
+                                <button class="btn btn-sm btn-success" (click)="descargarPlantilla()"><i class="fas fa-download"></i> Descargar Plantilla</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+
+                            <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                                <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="numero_documento"
+                                >
+                            </app-cc-input-group-prepend>
+
+
+    
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="fecha" [disabled]="constDisabled">
+                            </app-cc-input-group-prepend>
+
+  
+                        </div>
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                                <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
+                                    <i
+                                        placement="bottom"
+                                        [ngbTooltip]="(estado == 'E') ? 'Emitido' : ((estado == 'A') ? 'Aprobado' : 'Anulado')" 
+                                        [class]="(estado == 'E') ? 'fas fa-circle text-warning' : ((estado == 'A') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
+                                    </i>
+                                    {{ (estado == 'E') ? 'Emitido' : ((estado == 'A') ? 'Aprobado' : 'Anulado') }}
+                                </div>
+                            </app-cc-input-group-prepend>
+
+      
+                            <!-- <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text">Estado</span></div>
+                                <input type="text" class="form-control form-control-sm" readonly
+                               >
+                            </div> -->
+                        </div>
+                        
+   
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo font-weight-bold">
+                                <textarea cols="30" rows="3" class="form-control form-control-sm" 
+                                [(ngModel)]="observacion" maxlength="200" [disabled]="constDisabled"></textarea>
+                            </app-cc-input-group-prepend>
+
+                           
+                        </div>
+
+                    </div>
+            
+                </fieldset>
+            </div>
+        </div>
+
+  
+
+        <div class="row m-0">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-k table-hover">
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                <!-- <th class="col-num fixed-header" style="width: 75px;">No.</th> -->
+                                <th class="col-partida fixed-header" style="width: 70px;">{{headersEnable?titles[0]:'Código'}}</th>
+                                <th class="col-denominacion fixed-header" style="width: 175px;">{{headersEnable?titles[1]:'Producto'}}</th>
+                                <!-- <th class="col-rec fixed-header" style="width: 150px;">Recaudación</th> -->
+                                <th style="width: 150px;">{{headersEnable?titles[2]:'Stock Sistema'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[3]:'Stock Físico'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[4]:'Diferencia'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[5]:'Observación'}}</th>
+                                <!-- <th style="width: 150px;">{{headersEnable?titles[3]:'Período 2'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[4]:'Período 3'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[5]:'Semestre 1'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[6]:'Semestre 2'}}</th>
+                                <th style="width: 155px;">{{headersEnable?titles[7]:'Período 4'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[8]:'Provisional'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[9]:'Definitivo'}}</th>
+                                <th style="width: 150px;">{{headersEnable?titles[10]:'Observaciones'}}</th> -->
+                                <!-- <th style="width: 150px;">Acciones</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td *ngIf="dataExcel.length==0" colspan="6" class="text-center" >
+                                    No se encontró data
+                                </td>
+                            </tr>
+                            <tr *ngFor="let d of dataExcel, let i = index">
+                                <!-- <td class="text-center col-num fixed-header">
+                                    {{ i + 1 }}
+                                </td> -->
+                                <td class="col-partida fixed-header">
+                                    {{ d.codigo }}
+                                </td>
+                                <td class="col-denominacion fixed-header">
+                                    {{ d.producto }}
+                                </td>
+                                <td class="text-right">
+                                    {{ d.stock | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    {{ d.stock_fisico | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    {{ d.diferencia | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control form-control-sm"  maxlength="200" [(ngModel)]="d.observacion" [disabled]="constDisabled"  > 
+                                    </div>
+                                </td>
+                                
+                                <!-- <td class="text-right">
+                                    $ {{ d.periodo2 | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.periodo3 | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.semestre1 | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.semestre2 | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.periodo4 | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.provisional | number: '1.2-2' }}
+                                </td>
+                                <td class="text-right">
+                                    $ {{ d.definitivo | number: '1.2-2' }}
+                                </td>
+                                <td>
+                                    {{ d.observaciones }}
+                                </td> -->
+                                
+                                <!-- <td class="text-center">
+                                    <button class="btn btn-sm btn-warning" placement="left" ngbTooltip="Reabrir caja" [disabled]="titulosDisabled || formReadOnly" (click)="confirmReabrir(d)"><i class="far fa-sunrise"></i></button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+    
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active-new>
+
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSpiner" lfulScren=true lTipo="spAsignacion"></cc-spiner-procesar>

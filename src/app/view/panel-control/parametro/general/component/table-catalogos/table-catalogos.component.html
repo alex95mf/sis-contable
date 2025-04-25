@@ -1,0 +1,73 @@
+<fieldset class="border pb-2 px-2">
+    <legend  class="w-auto ml-1 bg-dark" > Filtros</legend>
+    <div class="row">
+        <div class="col-10">
+            
+            <div class="row">
+                <div class="col">
+                    <app-cc-input-group-prepend label="Grupo" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="categoria" class="form-control form-control-sm"   [(ngModel)]="filter.tipoCatalogo" [clearable]="false"
+                            (ngModelChange)="validateSubgroup($event)">
+                            <ng-option disabled [value]="0" disabled>Seleccione una Categoria</ng-option>
+                            <ng-option *ngFor="let g of groups" [value]="g.tipo">{{g.tipo}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col">
+                    <app-cc-input-group-prepend label="Sub Grupo" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="sub_categoria" class="form-control form-control-sm"   [(ngModel)]="filter.subTipo" [clearable]="false">
+                            <ng-option disabled [value]="0" disabled>Seleccione una tabla</ng-option>
+                            <ng-option *ngFor="let g of subgroups" [value]="g.grupo">{{g.grupo}}</ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend>
+                </div> 
+                
+            </div>
+        </div>
+        <div class="col text-right">
+            <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="getDataTable()">
+                <i class="fas fa-search"></i> Consultar
+            </button>
+            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                <i class="fas fa-eraser"></i>
+            </button>
+        </div>
+    </div>
+</fieldset>
+
+<div class=" p-3">
+    <table  class="table-bordered table no-footer table-hover">
+        <thead class="thead-dark">
+            <tr style="width: 100%;">
+                <th [hidden]="true">id</th>
+                <th style="width: 15%;">Grupo</th>
+                <th style="width: 15%;">Sub Grupo</th>
+                <th style="width: 15%;">Valor</th>
+                <th style="width: 20%;">Descripcion</th>
+                <th style="width: 10%;text-align: center;">Estado</th>
+                <th style="width: 15%;">Empresa</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="validaDtUser">
+            <tr *ngFor="let dt of guardarolT" (click)="updateCatalogo(dt)" style="cursor:pointer;">
+                <td [hidden]="true">{{ dt.id_catalogo }}</td>
+                <td>{{ dt.tipo }}</td>
+                <td *ngIf="dt.grupo != null">{{ dt.grupo }}</td>
+                <td *ngIf="dt.grupo == null">Ninguno</td>
+                <td>{{ dt.valor }}</td>
+                <td>{{ dt.descripcion }}</td>
+                <td style="text-align: center;">{{ dt.estado }}</td>
+                <td>{{ dt.empresa.length == 0 ? 'No Tiene Empresa' : dt.empresa[0].nombre_comercial}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <mat-paginator showFirstLastButtons
+                   [length]="paginate.length"
+                   [pageSize]="paginate.perPage"
+                   [pageSizeOptions]="paginate.pageSizeOptions"
+                   (page)="changePaginate($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spTicket"></cc-spiner-procesar>

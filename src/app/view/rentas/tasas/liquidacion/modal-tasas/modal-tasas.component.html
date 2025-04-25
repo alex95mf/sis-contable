@@ -1,0 +1,107 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="fTitle" filtroBoton="btnsTasasVarias" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
+        <fieldset class="border pb-2 px-2">
+            <legend class="w-auto ml-1 bg-dark">Filtros</legend>
+            <div class="row">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Código" styleSpan="font-weight-bold">
+                                <input id="filter_codigo" type="text" class="form-control" [(ngModel)]="filter.codigo" placeholder="Código">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Descripción" styleSpan="font-weight-bold">
+                                <input id="filter_descripcion" type="text" class="form-control" [(ngModel)]="filter.descripcion" placeholder="Descripción">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <!-- <div class="col">
+                            <app-cc-input-group-prepend label="Motivacion Legal" styleSpan="font-weight-bold">
+                                <input id="filter_motivacion_legal" type="text" class="form-control" [(ngModel)]="filter.motivacion_legal" placeholder="Motivacion Legal">
+                            </app-cc-input-group-prepend>
+                        </div> -->
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Motivacion Legal" styleSpan="font-weight-bold">
+                                <input id="filter_motivacion_legal" type="text" class="form-control" [(ngModel)]="filter.motivacion_legal" placeholder="Motivacion Legal">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Tipo Cálculo" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="tipo_calculo" class="form-control form-control-sm"   [(ngModel)]="filter.tipo_calculo" [clearable]="false">
+                                    <ng-option disabled [value]="0" disabled>Seleccione tipo c&aacute;lculo</ng-option>
+                                    <ng-option *ngFor="let d of tipoCalculoList" [value]="d.value">{{ d.label }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Tipo Tabla" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select id="tipo_tabla" class="form-control form-control-sm"   [(ngModel)]="filter.tipo_tabla" [clearable]="false">
+                                    <ng-option disabled [value]="0" disabled>Seleccione una tabla</ng-option>
+                                    <ng-option *ngFor="let op of tasas" [value]="op.valor">{{ op.valor }}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="consultar()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row my-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <!-- <th style="width: 15%;">Estado</th> -->
+                            <th style="width: 10%;">C&oacute;digo</th>
+                            <th style="max-width:15%;">Descripci&oacute;n</th>
+                            <!-- <th style="width:10%;">Motivaci&oacute;n Legal</th> -->
+                            <th style="width: 10%;">Tipo C&aacute;lculo</th>
+                            <th style="width: 15%;">Tipo Tabla</th>
+                            <th style="width: 15%;">Valor</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="resdata">
+                        <ng-container *ngFor="let dt of resdata, let i = index">
+                            <tr>
+                                <!-- <td class="text-center"><i placement="bottom" [ngbTooltip]="dt.estado == 'A' ? 'Activo' : 'Inactivo'" [class]="dt.estado == 'A' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger'"></i></td> -->
+                                <td class="text-center">{{ dt.codigo }}</td>
+                                <td >{{ dt.descripcion }}</td>
+                                <!-- <td style="max-width: 300px;">{{ dt.motivacion_legal }}</td> -->
+                                <td class="text-center">{{ dt.tipo_calculo }}</td>
+                                <td class="text-center">{{ dt.tipo_tabla ?? "N/A" }}</td>
+                                <td class="text-center">{{ dt.valor }}</td>
+                                <td class="text-center">
+                                    <div class="custom-control custom-checkbox custom-switch text-dark ml-1 align-self-center">
+                                        <input [id]="dt.codigo" type="checkbox" class="custom-control-input" [(ngModel)]="dt.aplica" (change)="aplica(dt)">
+                                        <label class="custom-control-label" [for]="dt.codigo">{{ dt.aplica ? "APLICADO" : "NO APLICADO" }}</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <mat-paginator showFirstLastButtons
+                               [length]="paginate.length"
+                               [pageSize]="paginate.perPage"
+                               [pageIndex]="paginate.pageIndex"
+                               [pageSizeOptions]="paginate.pageSizeOptions"
+                               (page)="changePaginate($event)"
+                               aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spTasasVarias"></cc-spiner-procesar>
+

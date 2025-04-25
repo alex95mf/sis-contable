@@ -1,0 +1,84 @@
+<app-button-radio-active [titulo]="fTitle" icono="fas fa-edit" cstyle="bg-light text-dark"
+    filtroBoton="btnsJuicioActuacion" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+        <div class="col">
+            <h3>Juicio: {{ juicio.num_proceso }} <small class="text-muted">Estado: {{ juicio.estadoText ?? '' }}</small></h3>
+        </div>
+    </div>
+
+    <fieldset class="border px-2 pb-2 mb-2">
+        <legend class="ml-1 w-auto bg-dark">Datos del Contribuyente</legend>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly [placeholder]="juicio.fk_contribuyente?.razon_social">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Num. Documento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly [placeholder]="juicio.fk_contribuyente?.num_documento">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Direcci&oacute;n" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" readonly [placeholder]="juicio.fk_contribuyente?.direccion">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="row mb-2">
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select class="form-control" [clearable]="false" [(ngModel)]="estadoSelected">
+                    <ng-option [value]="0" disabled>Seleccione un Estado</ng-option>
+                    <ng-option *ngFor="let estado of estados" [value]="estado" [disabled]="estado.isconstant < estadoSelected.isconstant">{{ estado.descripcion }}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Tipo de Actuacion" styleSpan="size-span-campo font-weight-bold">
+                <ng-select [items]="tipos" bindValue="valor" bindLabel="descripcion" class="form-control" [clearable]="false" [(ngModel)]="tipoSelected">
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col">
+            <app-cc-input-group-prepend label="Valor Juicio"  styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask class="form-control" [(ngModel)]="valor" onclick="this.select()">
+            </app-cc-input-group-prepend>
+        </div>
+        
+    </div>
+    <div class="row mb-2">
+        <div *ngIf="estadoSelected.isconstant >= 5 && estadoSelected.isconstant < 10"  class="col-4">
+            <app-cc-input-group-prepend label="Valor por Estado"  styleSpan="size-span-campo font-weight-bold">
+                <input currencyMask class="form-control" [(ngModel)]="valor_estado" onclick="this.select()">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text font-weight-bold">Anexos</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf" (change)="cargaArchivo($event.target.files)">
+                    <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ? fileList[0].name : "Seleccione un archivo" }}</label>
+                </div>
+            </div>           
+        </div>
+        <div class="col-4">
+            <app-cc-input-group-prepend label="Fecha de Actuacion" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" [(ngModel)]="fecha_actuacion">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col">
+            <app-cc-input-group-prepend label="Observaciones" styleSpan="size-span-campo font-weight-bold bg-dark">
+                <textarea rows="7" class="form-control" [(ngModel)]="observacion"></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spJuicioActuacion"></cc-spiner-procesar>

@@ -1,0 +1,115 @@
+<div class="mt-4 mb-5">
+    <app-button-radio-active titulo="CIERRE DE PERIODO - CONTABLE" cstyle="bg-light" icono="fas fa-file-alt">
+    <!-- <app-button-radio-active titulo="CIERRE DE PERIODO - CONTABLE" cstyle="bg-light" icono="fas fa-file-alt"
+        filtroBoton="btnsConsultCierreMes" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"> -->
+    <!-- <div class="row" *ngIf="permiso_ver =='1' ; else PermisoVerDenegado"> -->
+    <div class="row">
+        <div  class="col-4">
+            <div class="row p-2 mb-3">
+
+                <div class="col-sm-12">
+                    <!-- <div class="input-group input-group-sm">                    
+                        <div class="input-group-prepend "><span class="size-span-campo input-group-text font-weight-bold">Periodo</span></div>
+                        <input type="text" minlength="4" maxlength="4" class="form-control" (change)="ObtenerPeriodo($event)" placeholder="Periodo" [(ngModel)]="selected_anio" [disabled]="yearDisabled" (keypress)="onlyNumber($event)">
+                    </div> -->
+
+
+                    <div class="input-group input-group-sm ">
+                        <div class="input-group-prepend">
+                            <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Período</span>
+                        </div>
+                        <!-- <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Periodo" [(ngModel)]="selected_anio" [disabled]="yearDisabled" (keypress)="onlyNumber($event)"> -->
+                        <ng-select class="form-control" [(ngModel)]="selected_anio" [clearable]="false"
+                            [items]="cmb_periodos" bindValue="periodo" bindLabel="periodo"></ng-select>
+                        <div class="input-group-append">
+                            <button (click)="ObtenerPeriodo()" class="btn btn-primary btn-sm" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                  
+                    <!-- <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo">
+                        <p-calendar view="year" dateFormat="yy"
+                            [readonlyInput]="true"  (onSelect)="ObtenerPeriodo($event)"  [(ngModel)]="selected_anio" [showIcon]="false" inputId="icon">
+                        </p-calendar>
+                    </app-cc-input-group-prepend> -->
+                </div>
+                <div class="col-sm-12 d-none">
+                    <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                        <!-- <app-cc-select-meses  (ChangeMes)="ChangeMesCierrePeriodos($event)" presentar="{{disabled}}" mes_actual={{mes_actual}}></app-cc-select-meses> -->
+                        <ng-select 
+                            (ngModelChange)="ChangeMesCierrePeriodos($event)"
+                            class="form-control" 
+                            id="elemento_pruebas"
+                            bindLabel="name"
+                            placeholder="-Todos-"
+                            appendTo="body"
+                            [clearable]="false"
+                            [searchable]="true"
+                            [disabled]=disabled
+                            [(ngModel)]="mes_actual">
+                            
+                            <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                                {{item.name}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend> 
+                </div>
+                <div class="col-sm-12 d-none">
+                    <mat-checkbox [(ngModel)]="check_todos_meses" class="example-margin"  (change)="EventAllMes($event)">
+                    Todos los periodos
+                    </mat-checkbox>
+
+                </div>            
+            </div>
+        </div>
+        <div  class="col-8">
+            <div class="row p-2 mb-3">
+                <table class="table">
+                    <thead>
+                        <tr style="width: 100%;">
+                            <th >AÑO</th>
+                            <th >MES</th>
+                            <th class="w-25">ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!periodos.length">
+                            <td colspan="4" >no hay datos para mostrar</td>
+                        </tr>
+                        <tr *ngFor="let item of periodos; let i = index">
+                            <td style="padding-left: 25px;text-align: start;">{{ item.anio }}</td>
+                            <td style="padding-left: 40px;text-align: start;">{{ item.mes }}</td>
+                            <td [ngClass]="{'text-bold text-success': item.estate == 'A' , 'text-bold text-danger': item.estate == 'C' }"   style="padding-left: 25px;text-align: start;">
+                                <div class="custom-control custom-switch">
+                                    <!-- <input type="checkbox" class="custom-control-input" id="customSwitch{{ i }}" [checked]="item.estate == 'A'" (change)="cambiarEstate(item, $event)">
+                                    <label class="custom-control-label" for="customSwitch{{ i }}">{{ item.estado }}</label> -->
+                                    <input class="custom-control-input" id="customSwitch{{ i }}" type="checkbox" [(ngModel)]="item.checked" (change)="cambiarEstate(item, item.checked, i)">
+                                    <label    class="custom-control-label" for="customSwitch{{ i }}">{{ item.estado }}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+                    
+        
+        </div>
+    </div>     
+    <!-- </div>
+
+    <ng-template #PermisoVerDenegado>
+        <app-permiso-denegado></app-permiso-denegado>
+    </ng-template> -->
+
+
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="spPlanCuentas"></cc-spiner-procesar>
+
+
+
+
+ 
+

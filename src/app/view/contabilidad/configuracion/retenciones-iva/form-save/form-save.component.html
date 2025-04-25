@@ -1,0 +1,52 @@
+<app-button-radio-active [titulo]="isNew ? 'Nueva Retención' : 'Editar Retención'" filtroBoton="btnRetForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+    <div class="row">
+
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="retencion.descripcion" maxlength="120">
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-3">
+            <app-cc-input-group-prepend label="Porcentaje" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" [(ngModel)]="retencion.porcentaje" maxlength="5">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-3">
+            <app-cc-input-group-prepend label="Código IVA" styleSpan="size-span-campo font-weight-bold">
+                <input type="number" class="form-control" [(ngModel)]="retencion.codigo_sri" maxlength="5" >
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Cuenta 1" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly  [(ngModel)]="retencion.num_cuenta1" placeholder="Cuenta Deudora" maxlength="15">
+                <button class="btn btn-primary btn-sm" (click)="modalCuentas('1')" > Consultar</button>
+                <!-- <datalist id="lst_ctas_deudoras">
+                    <option *ngFor="let cta of cuentas.deudora" [value]="cta.codigo_oficial">{{ cta.codigo_oficial }} {{ cta.nombre }}</option>
+                </datalist> -->
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Nombre cuenta 1" styleSpan="size-span-campo font-weight-bold">
+                <input class="form-control" [(ngModel)]="retencion.desc_cuenta1" type="text" readonly/>
+                
+            </app-cc-input-group-prepend>
+        </div>
+
+
+
+        <!-- <div class="col-6">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="rubro.estado">
+                    <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                    <ng-option *ngFor="let op of estado" [value]="op.id_catalogo">{{ op.cat_nombre}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div> -->
+
+    </div>
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

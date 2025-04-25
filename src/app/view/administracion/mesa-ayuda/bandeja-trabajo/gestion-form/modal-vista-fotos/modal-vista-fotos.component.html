@@ -1,0 +1,24 @@
+<div>
+    <app-button-radio-active titulo="Fotos Subidas" filtroBoton="btnFotos" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-images" class="no-borders">
+        <!-- <fieldset class="border pb-2 px-2 mt-2">
+            <legend class="w-auto ml-1 bg-dark">Foto</legend>
+            <img src="{{ indexActive }}" alt="" height="400px" width="400px">
+        </fieldset> -->
+        <div class="row text-right">
+            <div class="col">
+                <button  class="btn btn-sm btn-danger"  placement="top" ngbTooltip="Cerrar" (click)="closeModal()">Cerrar</button>
+            </div>
+        </div>
+        <ngb-carousel [activeId]="0" [animation]="false">
+            
+                <div class="wrapper">
+                    <img [src]="indexActive">
+                </div>
+           
+        </ngb-carousel>
+        
+        
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSpiner" lfulScren=true lTipo="spInspecciones"></cc-spiner-procesar>

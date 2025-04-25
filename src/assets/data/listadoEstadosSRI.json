@@ -1,0 +1,14 @@
+
+
+{
+  "data": [
+      {"id": "TODOS", "nombre": "TODOS"},
+      {"id": "AUTORIZADO", "nombre": "AUTORIZADOS"},
+      {"id": "ANULADO", "nombre": "ANULADOS"},
+      {"id": "DEVUELTA", "nombre": "DEVUELTAS"},
+      {"id": "NO AUTORIZADO", "nombre": "NO AUTORIZADOS"},
+      {"id": "PENDIENTE", "nombre": "PENDIENTES"},
+      {"id": "RECIBIDO", "nombre": "RECIBIDOS"},
+      {"id": "RECHAZADO", "nombre": "RECHAZADOS"}
+  ]
+}

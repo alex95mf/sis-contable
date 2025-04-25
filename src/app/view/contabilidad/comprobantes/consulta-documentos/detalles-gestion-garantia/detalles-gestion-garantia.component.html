@@ -1,0 +1,41 @@
+<app-button-radio-active titulo="Detalles gestion garantía" cstyle="bg-light text-dark" icono="fas fa-tasks" filtroBoton="btnsMovimientoBanc" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+
+    <div class="row my-2">
+        
+
+        <div class="col-5">
+            
+            <app-cc-input-group-prepend label="Comentario" styleSpan="size-span-campo font-weight-bold">
+                
+                <input class="form-control" type="text" [(ngModel)]="dataDetalles" placeholder="Ingresar observacion... "/>
+            </app-cc-input-group-prepend>
+
+        </div>
+
+
+        <div class="col-5">
+            
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+
+                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="estado"  [clearable]="false">
+                    <ng-option disabled [value]="0" disabled>Seleccione un estado</ng-option>
+                    <ng-option *ngFor="let op of estadoList" [value]="op.value">
+                        <i placement="bottom"  [class]="(op.value == 'P') ? 'fas fa-circle text-warning' :  (op.value == 'E') ? 'fas fa-circle text-danger' : (op.value == 'C') && 'fas fa-circle text-success'">
+                        </i>
+                        {{ op.label}}</ng-option>
+                </ng-select>
+                
+            </app-cc-input-group-prepend>
+
+        </div>
+
+        
+
+    </div>
+
+</app-button-radio-active>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>
+
+
+

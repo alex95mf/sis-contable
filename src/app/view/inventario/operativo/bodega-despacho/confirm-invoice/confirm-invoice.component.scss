@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+@font-face {
+    font-family: 'Poppins1';
+    src: url('../../../../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    box-shadow: unset !important;
+    outline: unset !important;
+}
+
+.filter {
+    background-color: white;
+}
+
+table {
+    thead {
+        tr {
+            th {
+                font-family: 'Poppins1';
+                color: white;
+                font-weight: unset;
+            }
+        }
+    }
+    tbody {
+        tr {
+            td {
+                color: black;
+                font-family: 'Poppins1';
+                font-weight: unset;
+                .form-group {
+                    margin-bottom: 15px !important;
+                    .invalid-feedback {
+                        font-size: 80%;
+                        color: #ce2523;
+                    }
+                }
+            }
+        }
+    }
+}
+
+button {
+    box-shadow: unset !important;
+    outline: unset !important;
+    &:hover {
+        background-color: transparent !important;
+        color: black !important;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 3px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #13B1E9;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+::-webkit-scrollbar-track {
+    background: #CECAC9;
+    border-radius: 4px;
+}
+
+span {
+    font-weight: 500;
+}
+
+.filters {
+    table {
+        thead {
+            tr {
+                th {
+                    padding: 6px 0px 8px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    padding: 5px 10px 5px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    font-weight: bold;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .modal-header .title-head {
+        font-size: 15px;
+    }
+    .modal-body .title-list {
+        font-size: 14px;
+        text-align: center !important;
+    }
+    .btn-dispached {
+        text-align: center !important;
+        .btndispached {
+            margin-top: 10px !important;
+        }
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .modal-header .title-head {
+        font-size: 15px;
+    }
+    .modal-body .title-list {
+        font-size: 14px;
+        text-align: center !important;
+    }
+    .btn-dispached {
+        text-align: center !important;
+        .btndispached {
+            margin-top: 10px !important;
+        }
+    }
+}
+
+@media (min-width: 320px) and (max-width: 480px) and (orientation: portrait) {
+    .modal-header .title-head {
+        font-size: 15px;
+    }
+    .modal-body .title-list {
+        font-size: 14px;
+        text-align: center !important;
+    }
+    .btn-dispached {
+        text-align: center !important;
+        .btndispached {
+            margin-top: 10px !important;
+        }
+    }
+}

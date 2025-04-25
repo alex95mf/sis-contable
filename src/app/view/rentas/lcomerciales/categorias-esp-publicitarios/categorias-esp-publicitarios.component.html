@@ -1,0 +1,110 @@
+<div class="my-2">
+    <app-button-radio-active [titulo]="titulo" filtroBoton="btnsCategoriasEspPublicitarios" cstyle="bg-gradient-primary text-white" [groupButton]="botonera" icono="fas fa-tags" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row my-2">
+            <div class="col-12">
+                <fieldset class="border pb-2 px-2">
+                    <legend class="w-auto bg-dark ml-1">Filtros</legend>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col-5">
+                                    <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filtro_descripcion" type="text" class="form-control" [(ngModel)]="filtro.nombre">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-primary btn-sm ml-3" placement="bottom" ngbTooltip="Buscar" (click)="cargarCategoriasEspPublicitarios()">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                                <i class="fas fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- <div class="col-7 float-right">
+                    <div class="input-group input-group-xl mb-1">
+                        <div class="input-group-prepend">
+                            <span style="width: 140px;" class="input-group-text" id="inputGroup-sizing-xl">Nombre</span>
+                        </div>
+                        <input id="filtro_descripcion" type="text" class="form-control form-control-xl" [(ngModel)]="filtro.nombre">
+                        
+                        <button class="btn btn-primary btn-xl ml-3" placement="bottom" ngbTooltip="Buscar" (click)="cargarCategoriasEspPublicitarios()">
+                            <i class="fas fa-search"></i> Consultar
+                        </button>
+                        <button class="btn btn-danger btn-xl ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                    </div>
+                </div> -->
+
+                <table class="table table-bordered no-footer table-hover mb-0">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 5%;">Estado</th>
+                            <th style="width: 5%;">Nivel</th>
+                            <th style="width: 5%;">Grupo</th>
+                            <th style="width: 5%;">Tipo</th>
+                            <th style="width: 15%;">Nombre</th>
+                            <th style="width: 5%;">F&oacute;rmula</th>
+                            <th style="width: 5%;">Porcentaje</th>
+                            <th style="width: 5%;">Medida desde</th>
+                            <th style="width: 5%;">Medida hasta</th>
+                            <th style="width: 5%;">Excedente desde</th>
+                            <th style="width: 5%;">Excedente hasta</th>
+                            <th style="width: 5%;">Recargo</th>
+                            <th style="width: 17.5%;">Observaci&oacute;n</th>
+                            <th style="width: 12.5%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="cat_esp_Pub_dt">
+                        <ng-container *ngFor="let dt of cat_esp_Pub_dt, let i = index">
+                            <tr>
+                                <td style="max-width: 10px;" class="text-center"><i placement="bottom" [ngbTooltip]="dt.estado == 'A' ? 'Activo' : 'Inactivo'" [class]="dt.estado == 'A' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger'"></i></td> <!--Pendiente-->
+                                <td style="max-width: 10px;" class="text-center">{{ dt.nivel }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.grupo }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.tipo }}</td>
+                                <td style="max-width: 10px;" >{{ dt.nombre }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.formula }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.porcentaje }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.medida_desde }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.medida_hasta }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.excedente_desde }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.excedente_hasta }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.recargo }}</td>
+                                <td style="max-width: 10px;" >{{ dt.observacion }}</td>
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mx-1" (click)="mostrarFormularioCatEspPub(false, dt)" placement="left" ngbTooltip="Editar categoria de esp. publicitario">
+                                            <i class="far fa-edit"></i>
+                                        </button>
+                                        <button *ngIf="dt.estado == 'A'" class="btn btn-danger btn-sm mx-1" (click)="borrarCategoriaEspPublicitarios(dt.id_categorias_esp)" placement="top" ngbTooltip="Eliminar Categoria de Esp. Publicitario">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <!-- <button *ngIf="dt.estado == 'I'" class="btn btn-info btn-sm mx-1" (click)="restoreArancel(dt.id_categorias_esp)" placement="top" ngbTooltip="Restaurar categoria de esp. publicitario">
+                                            <i class="fas fa-undo"></i>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+
+                <mat-paginator 
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="texto_barra_carga" lfulScren=true lTipo="spCategoriasEspPublicitarios"></cc-spiner-procesar>

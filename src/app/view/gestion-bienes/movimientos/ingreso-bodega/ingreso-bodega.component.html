@@ -1,0 +1,729 @@
+<div class="mt-4">
+    <app-button-radio-active-new titulo="Ingreso de bodega" filtroBoton="btnsOrdenCompra"
+        cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+        icono="fas fa-file-alt">
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Datos Generales</legend>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-4 pt-0 pb-0">
+                           <app-cc-input-group-prepend label="Tipo de ingreso" styleSpan="size-span-campo">
+                               <ng-select id="IdProvidersDoc" class="form-control custom" appendTo="body" [searchable]="true"
+                                   [clearable]="false" [(ngModel)]="tipoIngreso" [disabled]="!actions.dComponet || deshabilitarTi"
+                                   (ngModelChange)="validacionIngreso($event)">
+                                   <ng-option [value]="0" disabled>Seleccione tipo de ingreso</ng-option>
+                                   <ng-option *ngFor="let d of catalog" [value]="d" >
+                                       {{d.descripcion}}  {{d.valor}}</ng-option>
+                               </ng-select>
+               
+                           </app-cc-input-group-prepend>
+               
+                       </div>
+                       <div class="col-12 col-md-4 pt-0 pb-0">
+                           <app-cc-input-group-prepend label="Nro Documento" styleSpan="size-span-campo">
+                               <input class="form-control form-control-sm" style="font-weight: bold; font-size: 12;" [(ngModel)]="numero_ingreso_bodega" readonly>
+           
+                           </app-cc-input-group-prepend>
+                       
+                       </div>
+                       <div class="col-12 col-md-4 pt-0 pb-0">
+                           <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                               <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="estado"  [clearable]="false" disabled>
+                                   <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                                   <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                               </ng-select>
+                           </app-cc-input-group-prepend>
+                       </div>
+           
+                   </div>
+                   <div class="row m-0">
+            
+                    <!-- <div class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Proveedor</span>
+                            </div>
+                            <ng-select id="IdProvidersDoc" class="form-control custom" appendTo="body" [searchable]="true"
+                                [clearable]="false" [(ngModel)]="providersSelec" [disabled]="!actions.dComponet"
+                                (ngModelChange)="getFilterProveedor($event)">
+                                <ng-option [value]="0" disabled>Seleccione proveedor</ng-option>
+                                <ng-option *ngFor="let d of arrayProveedor" [value]="d.id_proveedor">
+                                    {{d.razon_social}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div> -->
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+        
+                        <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control" [(ngModel)]="nomComerPro" disabled placeholder="Nombre comercial proveedor... ">
+                            <div class="input-group-append">
+                                <button [disabled]="!actions.dComponet || formReadOnly" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </app-cc-input-group-prepend>
+        
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Nro Factura" styleSpan="size-span-campo">
+                            <input class="form-control form-control-sm" placeholder="Ingreso de factura... " [(ngModel)]="lineaPro" [disabled]="!actions.dComponet || donaciones">
+        
+                        </app-cc-input-group-prepend>
+        
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+        
+                        <app-cc-input-group-prepend label="Teléfono proveedor" styleSpan="size-span-campo font-weight-bold">
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="telefonoPro" disabled
+                            placeholder="Teléfono proveedor... ">
+                        </app-cc-input-group-prepend>
+        
+        
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-font">
+                            <input type="date" [(ngModel)]="fechaDocumento" class="form-control">
+                        </app-cc-input-group-prepend>
+                        <!-- <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Proveedor</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="nomComerPro" disabled
+                                placeholder="Nombre comercial proveedor... ">
+                            <div class="input-group-append">
+                                <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Tipo de proceso" styleSpan="input-group-text font-weight-bold size-span-campo inputGroup-sizing-sm">
+                            <ng-select id="tipo_proceso" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="true" [disabled]="!actions.dComponet"
+                             [(ngModel)]="tipoProceso">
+                                <ng-option [value]="0" disabled>Seleccione un tipo</ng-option>
+                                <ng-option *ngFor="let d of tipoProcesoList" [value]="d.value">{{d.label}}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                        <!-- <div class="input-group input-group-sm mt-1" *ngIf="flagUser"> -->
+                            <!-- <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo de proceso</span>
+                            </div> -->
+                            <!-- <input type="text" [(ngModel)]="tipoProceso" class="form-control form-control-sm" [disabled]="true"
+                                placeholder="Tipo de proceso... "> -->
+                        <!-- </div> -->
+                        <div class="input-group input-group-sm mt-1" *ngIf="!flagUser">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo de proceso</span>
+                            </div>
+                            <input type="text" [(ngModel)]="editCorreo" id="edtemail" class="form-control form-control-sm"
+                                style="border: 1px solid !important;border-color: #dfe2e4 !important;"
+                                [disabled]="permisions.editar == 0" placeholder="Correo cliente">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nro Proceso</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="numProceso" disabled
+                                placeholder="Numero de pproceso... ">
+                            <button class="btn btn-primary btn-sm" (click)="modalSolicitud()" [disabled]="!actions.dComponet || donaciones">Buscar</button>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Quien recibe" styleSpan="size-span-campo">
+                            <input class="form-control form-control-sm" [(ngModel)]="UserSelect" readonly placeholder="Quien recibe... "/>
+                            <button class="btn btn-primary btn-sm" (click)="modalEncargado()" [disabled]="!actions.dComponet">Buscar</button>
+        
+                        </app-cc-input-group-prepend>
+        
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Objeto del proceso" styleSpan="size-span-campo">
+                            <input type="text" class="form-control form-control-sm "
+                            placeholder="Objecto de proceso... " [(ngModel)]="objectoProceso" disabled>
+                        </app-cc-input-group-prepend>
+        
+        
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+        
+                        <app-cc-input-group-prepend label="Valor referencial" styleSpan="size-span-campo">
+                        
+                            <input currencyMask class="form-control form-control-sm"
+                            placeholder="Valor referencial... " [ngModel]="valorReferencia" disabled>
+                        </app-cc-input-group-prepend>
+        
+        
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <div class="input-group input-group-sm mt-1" *ngIf="flagUser">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cargo municipal</span>
+                            </div>
+                            <input type="text" [(ngModel)]="moduloUser" class="form-control form-control-sm" [disabled]="true"
+                                placeholder="Cargo cliente... ">
+                        </div>
+                        <div class="input-group input-group-sm mt-1" *ngIf="!flagUser">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Cargo municipal</span>
+                            </div>
+                            <input type="text" [(ngModel)]="editPerfil" id="edtmod" class="form-control form-control-sm"
+                                style="border: 1px solid !important;border-color: #dfe2e4 !important;"
+                                [disabled]="!actions.dComponet" placeholder="Cargo cliente... ">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+        
+                        <app-cc-input-group-prepend label="IDP" styleSpan="size-span-campo">
+                            <input type="text" [(ngModel)]="num_partida" class="form-control form-control-sm" [disabled]="true"
+                            placeholder="IDP... ">
+                        </app-cc-input-group-prepend>
+        
+          
+                    </div>
+                    <div *ngIf="tipoProceso == 'Catalogo Electronico'" cclass="col-12 col-md-4 pt-0 pb-0">
+        
+                        <app-cc-input-group-prepend label="No. Orden" styleSpan="size-span-campo">
+                            <input type="text" [(ngModel)]="num_orden" class="form-control form-control-sm" [disabled]="true"
+                            placeholder="No. Orden... ">
+                        </app-cc-input-group-prepend>
+        
+                    </div>
+                 
+                    <!-- <div *ngIf="documento.tipo == 'CAT'" class="col-sm-4">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">Valor Orden</span></div>
+                            <input currencyMask class="form-control form-control-sm" readonly [(ngModel)]="documento.valor_orden">
+                        </div>
+                    </div> -->
+                    
+        
+                    <!-- <div class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Anexos</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="{{anexoAdd.length}} Anexos Adjuntos" disabled>
+                            <div class="input-group-append">
+                                <button class="btn btn-success" (click)="showAnexosProduct()" [disabled]="!actions.dComponet"
+                                    placement="top" ngbTooltip="Adjuntar anexos">
+                                    <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Total</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm text-right pr-2"
+                                placeholder="$ {{dataTotales.totalPagado.toFixed(2)}}" disabled>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="row m-0">
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Bodega" styleSpan="input-group-text font-weight-bold size-span-campo inputGroup-sizing-sm">
+                            <ng-select id="IdBodega" class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [disabled]="!actions.dComponet" [(ngModel)]="bodega">
+                                <ng-option [value]="0" disabled>Seleccione Bodega</ng-option>
+                                <ng-option *ngFor="let d of arrayBodega" [value]="d.id_bodega_cab">{{d.nombre}}</ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend>
+                    </div>
+        
+                    
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Administrador" styleSpan="size-span-campo">
+                            <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                                 [(ngModel)]="adminCompras"
+                                disabled >
+                        </app-cc-input-group-prepend>
+                    </div>
+                    <div *ngIf="tipoProceso == 'Catalogo Electronico'" class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Valor Orden</span>
+                            </div>
+                            <input currencyMask [(ngModel)]="valor_orden" class="form-control form-control-sm" [disabled]="true"
+                                placeholder="Valor Orden... ">
+                        </div>
+                    </div>
+                    <!-- <div class="col-4">
+                        <div class="input-group input-group-sm mt-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Condiciones</span>
+                            </div>
+                            <input class="form-control form-control-sm" id="idCondition" [(ngModel)]="condiciones"
+                                placeholder="Ingrese Condiciones" [disabled]="!actions.dComponet">
+                        </div>
+                    </div> -->
+                </div>
+
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 pt-0 pb-0">
+        
+                        <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo font-weight-bold">
+                            <textarea class="form-control form-control-sm" aria-label="With textarea" [(ngModel)]="observacion"
+                                id="idtxta" placeholder="Ingrese una observación" [disabled]="!actions.dComponet"></textarea>
+                        </app-cc-input-group-prepend>
+                        
+        
+                    </div>
+                  
+                </div>
+                   
+                </fieldset>
+            </div>
+        </div>
+
+
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Anexos</legend>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+
+                            <app-cc-input-group-prepend label="Archivos" styleSpan="size-span-campo font-weight-bold">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".pdf"
+                                        (change)="cargaArchivo($event.target.files)"
+                                        [disabled]="!actions.dComponet">
+                                    <label class="custom-file-label" for="inputGroupFile01">{{ fileList !== undefined ?
+                                        fileList[0].name : "Seleccione un archivo" }}</label>
+                                    <!-- <button [disabled]="formReadOnly" class="btn btn-primary btn-sm" (click)="guardarArchivo()" placement="bottom" ngbTooltip="Guardar Archivo">
+                                       Guardar
+                                    </button> -->
+                                </div>
+
+                            </app-cc-input-group-prepend>
+
+                        </div>
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+                            <app-anexo-bodega [identifier]="id_prestamo" custom1="INV-INGRESO-BODEGA"></app-anexo-bodega>
+        
+        
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Producto</legend>
+                    <!-- <button class="btn btn-success boton btn-sm" (click)="guardar()"><i class="fas fa-save"></i> Guardar </button> -->
+                    <div class="row m-0">
+                        <!-- <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Grupo Producto" styleSpan="size-span-campo">
+                              
+                                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" (ngModelChange)="verificar($event)"
+                                    [(ngModel)]="claseSelect" >
+                                    <ng-option [value]="0">Seleccione un grupo del producto</ng-option>
+                                    <ng-option *ngFor="let d of listaProductos" [value]="d">{{d.codigo_grupo_producto}} -
+                                        {{d.descripcion}} - {{d.tipo_bien}}
+                                    </ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div> -->
+                        <div class="col-sm-6">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo"
+                                        style="width: 155px;">Grupos</span></div>
+                                <input type="text" class="form-control form-control-sm" placeholder="Seleccione un Grupo"
+                                [(ngModel)]="grupo_descripcion" readonly >
+                                <button class="btn btn-primary btn-sm" (click)="modalGrupos()" placement="bottom" [disabled]="!actions.dComponet" 
+                                    ngbTooltip="Buscar Grupo" >
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Nombre Producto" styleSpan="size-span-campo">
+                                <input type="text" class="form-control form-control-sm" #nam="ngModel" name="nam"
+                                    placeholder="Ingrese un nombre" id="idname" [(ngModel)]="listaProducto.nombre" [disabled]="catalogoDisabled == true">
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+        
+                    <div class="row ml-1 mr-1">
+                        
+                        <div class="col-sm-6">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo"
+                                        style="width: 155px;">Catalogo bienes</span></div>
+                                <input type="text" class="form-control form-control-sm" placeholder="Seleccione " 
+                                     [(ngModel)]="codigoBienesDescripcion" readonly [disabled]="!actions.dComponet" >
+                                <button class="btn btn-primary btn-sm" (click)="expandCodigoBienes()" placement="bottom" 
+                                    ngbTooltip="Busca" [disabled]="deshabilitarCatalogo" >
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Unidad de Medida" styleSpan="size-span-campo">
+                                <ng-select class="form-control custom" appendTo="body" [searchable]="false" [clearable]="false"
+                                    [(ngModel)]="listaProducto.udmcompra"
+                    
+                                    id="idUDMC" [disabled]="catalogoDisabled == true">
+                                    <ng-option [value]="0">Seleccione la Unidad de Medida
+                                    </ng-option>
+                                    <ng-option *ngFor="let d of dataUDM" [value]="d.valor">{{d.valor}}
+                                    </ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                    <div class="row ml-1 mr-1">
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Cantidad" styleSpan="size-span-campo">
+                                <input  class="form-control form-control-sm" #SMi="ngModel" name="SMi"
+                                    placeholder="Ingrese la cantidad" id="idSMinimo" [(ngModel)]="listaProducto.stock" min="0"
+                                    [disabled]="catalogoDisabled == true" >
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-cc-input-group-prepend label="Código Grupo" styleSpan="size-span-campo">
+                                <input type="text" class="form-control form-control-sm " #cod="ngModel" name="cod" id="idCodigo"
+                                    [(ngModel)]="codigo_grupo"  readonly>
+                             
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Detalle de Ingreso de Bodega</legend>
+                    <div class="row m-0">
+                        <div class="col-12 text-right">
+                            <button class="btn btn-success btn-sm" placement="top" ngbTooltip="Añadir Items"
+                                (click)="addItems()" [disabled]="deshabilitarItems">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-12">
+                            <table class="table table-striped table-bordered table-k table-hover" >
+                                <thead class="sticky-header">
+                                    <tr class="text-center">
+                                        <th style="width: 15%;">Nombre</th>
+                                        <th style="width: 10%;">Código</th>
+                                        <th style="width: 10%;">Código Bienes</th>
+                                        <th style="width: 15%;">Descripción</th>
+                                        <th style="width: 10%;">Centro Costo</th>
+                                        <th style="width: 10%;">Cantidad</th>
+                                        <th style="width: 10%;">P/U</th>
+                                        <th style="width: 10%;">Total</th>
+                                        <th style="width: 10%;text-align: center;">Acción</th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+
+                                    <tr *ngIf="!dataProducto.length">
+                                        <td colspan="9" class="text-center">
+                                            <h6>No hay productos que mostrar</h6>
+                                        </td>
+                
+                                    </tr>
+                                    <tr *ngFor="let d of dataProducto; let i = index">
+                                        <td style="text-align:center;">
+                                            <div>
+                                                <input type="text" class="form-control form-control-sm text-right pr-2"
+                                                    [(ngModel)]="d.productSelect" (keyup)="sumTotal(i)" min="0"
+                                                    (keypress)="commonServices.FormatDecimalVal($event)"
+                                                    disabled>
+                                            </div>
+                                            
+                                        </td>
+                                        <td class="text-center">{{d.codigo}}</td>
+                                        <td class="text-center">{{d.codigo_bienes}}</td>
+                                        <td>
+                                            <textarea class="form-control form-control-sm" [(ngModel)]="d.description"
+                                                placeholder="Ingrese descripción" [disabled]="ingresoDisabled" rows="1">
+                                           </textarea>
+                                        </td>
+                                        <td>
+                                            <ng-select style="width: 150px;" class="form-control form-control-sm custom-select" appendTo="body" [searchable]="true" [(ngModel)]="d.centro_costo"
+                                                [disabled]="ingresoDisabled">
+                                                    <ng-option [value]="0" disabled>Seleccione... </ng-option>
+                                                    <ng-option *ngFor="let item of centroCosto"
+                                                        [value]="item.id" >{{item.nombre}}</ng-option>
+                                            </ng-select>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <input type="text" class="form-control form-control-sm text-right pr-2"
+                                                    [(ngModel)]="d.quantity" (keyup)="sumTotal(i)" min="0"
+                                                    (keypress)="commonServices.FormatDecimalVal($event)" id="idAmount"
+                                                    [disabled]="ingresoDisabled">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <input currencyMask class="form-control form-control-sm text-right pr-2"
+                                                    [(ngModel)]="d.price" (keyup)="sumTotal(i)" min="0"
+                                                    [disabled]="ingresoDisabled">
+                                            </div>
+                                        </td>
+                                        <td class="text-right pr-3">$ {{d.totalItems | number: '1.2-2'}}</td>
+                                        <td style="text-align: right;">
+                                            <button *ngIf="(d.grupo_bien == 'EXI' || d.grupo_bien == 'EX')" 
+                                                class="btn btn-warning mr-1"placement="top" ngbTooltip="Agregar detalles"
+                                                (click)="expandProductoDetalles(id, d)">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-danger" placement="top" ngbTooltip="Eliminar Items"
+                                                (click)="deleteItems(d)" [disabled]="ingresoDisabled"><i
+                                                    class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="7" style="font-size: 14px;" class="font-weight-bold text-right">TOTAL</th>
+                                        <th style="font-size: 14px;" class="font-weight-bold text-right">$ {{totalValorItems | number: '1.2-2'}}</th>
+                                      
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Detalle de Solicitud de Compra</legend>
+                    <div class="row m-0">
+                        <div class="col-12">
+                            <table class="table table-striped table-bordered table-k table-hover" >
+                                <thead class="sticky-header">
+                                    <tr class="text-center">
+                                        <th class="text-center">Descripcion</th>
+                                        <th class="text-center">Programa</th>
+                                        <th class="text-center">Departamento</th>
+                                        <th class="text-center">Precio Unitario</th>
+                                        <th class="text-center">Cantidad Solicitada</th>
+                                        <th class="text-center">Cantidad Requerida</th>
+                                        <th class="text-center">Precio Cotizado</th>
+                                        <th class="text-center">Cantidad Aprobada</th>
+                                        <th class="text-center">Precio Unitario Aprobado</th>
+                                        <th class="text-center">Precio Aprobado</th>
+                
+                
+                                    </tr>
+                                </thead>
+                
+                                <tbody>
+                                    <tr *ngIf="!dataOrder.length">
+                                        <td colspan="10" class="text-center">
+                                            <h6>No hay Solicitudes que mostrar</h6>
+                                        </td>
+                
+                                    </tr>
+                                    <tr *ngFor="let item of dataOrder">
+                                        <td class="text-center">{{item.descripcion}}</td>
+                                        <td class="text-center">{{item.catalogo_programa?.valor}}</td>
+                                        <td class="text-center">{{item.catalogo_departamento?.valor}}</td>  
+                                        <td class="text-right">$ {{item.bienes?.costo_unitario | number: '1.2-2'}}</td>
+                                        <td class="text-center">{{item.cantidad_solicitada}}</td>
+                                        <td class="text-center">{{item.cantidad_requerida}}</td>
+                                        <td class="text-right">$ {{item.precio_cotizado | number: '1.2-2'}}</td>
+                                        <td class="text-center">{{item.cantidad_aprobada}}</td>
+                                        <td class="text-right">$ {{item.precio_unitario_aprobado | number: '1.2-2'}}</td>
+                                        <td class="text-right">$ {{item.precio_aprobado | number: '1.2-2'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" style="font-size: 14px; " class="font-weight-bold text-right">TOTAL COTIZADO</th>
+                                        <th style=" font-size: 14px;" class="font-weight-bold text-right">$ {{totalValorSolicitud | number: '1.2-2'}}</th>
+                                        <th colspan="2" style="font-size: 14px; " class="font-weight-bold text-right">TOTAL APROBADO</th>
+                                        <th style=" font-size: 14px;" class="font-weight-bold text-right">$ {{totalValorAprobado | number: '1.2-2'}}</th>
+                                    </tr>
+                                </tbody>
+                            </table>  
+                        </div>
+
+                    </div>
+
+                </fieldset>
+            </div>
+        </div>
+
+
+
+
+        <!-- <div class="row justify-content-center mt-4 mb-3  pl-2 pr-2">
+            <div class="col-12 pl-2 pr-2 ">
+                <fieldset class="border p-2 mb-1  filters">
+                    <legend class="w-auto h6">Lista de Ordenes</legend>
+                    <div class="row justify-content-center">
+                        <div class="col-12  pl-3 pr-3 mt-2">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="table no-footer table-hover">
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                        <th  style="width: 20%;">Descripción</th>
+                                        <th style="width: 10%;">Programa</th>
+                                        <th style="width: 10%;">Departamento</th>
+                                        <th style="width: 22%;">Atribucion</th>
+                                        <th  style="width: 10%;">Cantidad Solicitada</th>
+                                        <th  style="width: 10%;">Cantidad Requerida</th>
+                                        <th  style="width: 10%;">Precio Cotizado</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDtOrder">
+                                    <tr *ngIf="!dataOrder.length">
+                                        <td class="text-center" colspan="7">
+                                            <h6 >No hay datos </h6>
+                                        </td>
+                                    </tr>
+                                    <tr *ngFor="let dt of dataOrder">
+                                        <td class="text-center">
+                                            {{dt.descripcion}}
+                                        </td>
+                                        <td style="text-align: start;padding-left: 40px;">{{ dt.catalogo_programa.valor}}
+                                        </td>
+                                        <td>{{dt.catalogo_departamento.valor}}
+                                        </td>
+                                        <td>{{ dt.catalogo.catalogo.valor}}
+                                        </td>
+                                        <td class="text-center">{{ dt.cantidad_solicitada}}
+                                        </td>
+                                        <td class="text-center">{{ dt.cantidad_requerida}}
+                                        </td>
+                                        <td class="text-center">{{ dt.precio_cotizado}}
+                                        </td>
+                                     
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <span id="tudiv"></span>
+        </div> -->
+        <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+
+
+
+        <div class="row my-2">
+            <div class="col">
+                <!-- <table class="table table-bordered no-footer table-hover mb-0"> 
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Programa</th>
+                            <th class="text-center">Departamento</th>
+                            <th class="text-center">Atribucion</th>                            
+                            <th class="text-center">Cantidad Solicitada</th> 
+                            <th class="text-center">Cantidad Requerida</th> 
+                            <th class="text-center">Precio Cotizado</th> 
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!dataOrder.length">
+                            <td colspan="7" class="text-center"><h6>No hay resultados</h6></td>
+                        </tr>
+                        <ng-container *ngFor="let item of dataOrder, let i = index">
+                            <tr>
+                              
+                                <td class="text-center">{{item.descripcion}}</td>
+                                <td class="text-center"></td>
+                                <td class="text-center">{{item.catalogo_departamento.valor}}</td>
+                                <td class="text-center">{{item.catalogo.valor}}</td>
+                                <td class="text-center">{{item.detalles[0].cantidad_solicitada}}</td>
+                                <td class="text-center">{{item.detalles[0].cantidad_requerida}}</td>
+                                <td class="text-center">{{item.detalles[0].precio_cotizado}}</td>
+                                                 
+                                
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>  -->
+                 
+                </div>
+                
+                
+        </div>
+
+
+    </app-button-radio-active-new>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spOrdenCompra"></cc-spiner-procesar>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="font-family: 'Poppins1';">
+            <div class="card border-0" style="font-size: 11px;background-color: rgb(255 255 255 / 73%);">
+                <div class="card-header">
+                    <table width="100%">
+                        <tr>
+                            <td class="text-left">
+                                <div class="card-title text-left title_h5 text-uppercase">
+                                    <strong>Eliminación de Orden</strong>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <div>
+                                        <button class="btn btn-success btn-xs button_margin" matTooltip="Guardar" (click)="validateDeleteOrder()"> Eliminar orden
+                                        </button>
+                                        <button class="btn btn-danger btn-xs button_margin " matTooltip="Cancelar"
+                                        data-dismiss="modal"> Cancelar
+                                    </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group pt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: #404a63; color: white;" placeholder="Ingrese observación">Descripción</span>
+                                </div>
+                                <textarea [(ngModel)]="descriptionAnulated" class="form-control form-control-sm" placeholder="Ingrese una descripción"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

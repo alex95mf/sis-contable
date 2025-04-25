@@ -1,0 +1,294 @@
+<app-button-radio-active titulo="Reporte de Notas de Débitos" filtroBoton="btnRepNotDebcartera" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo">
+                <ejs-datepicker [(ngModel)]="fromDatePicker" type="text" format="yyyy-MM-dd" id="" (ngModelChange)="rerender()" class="form-control form-control-sm">
+                </ejs-datepicker>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Tipo Agente" styleSpan="size-span-campo">
+                <ng-select appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="Tagente" (ngModelChange)="filterTagente($event)" class="form-control form-control-sm text-left">
+                    <ng-option [value]="0">Seleccione Tipo Agente</ng-option>
+                    <ng-option *ngFor="let d of arrayTipoAgente" [value]="d.name">
+                        {{d.name}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Agente" styleSpan="size-span-campo">
+                <ng-select class="form-control form-control-sm" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="agente" (ngModelChange)="filterAgente($event)">
+                    <ng-option [value]="0">Seleccione Agente</ng-option>
+                    <ng-option *ngFor="let d of arrayClientes" [value]="d.id_cliente">
+                        {{d.nombre_comercial_cli}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo">
+                <ejs-datepicker [(ngModel)]="toDatePicker" type="text" format="yyyy-MM-dd" id="" (ngModelChange)="rerender()" class="form-control form-control-sm ">
+                </ejs-datepicker>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Motivo" styleSpan="size-span-campo">
+                <ng-select class="form-control form-control-sm " appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="motivo" (ngModelChange)="filterMotivo($event)">
+                    <ng-option [value]="0">Seleccione Motivo</ng-option>
+                    <ng-option *ngFor="let d of arrayMotivos" [value]="d.valor">
+                        {{d.valor}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Sucursal" styleSpan="size-span-campo">
+                <ng-select class="form-control form-control-sm " appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="sucursal" (ngModelChange)="filterSucursal($event)">
+                    <ng-option [value]="0">Seleccione Sucursal</ng-option>
+                    <ng-option *ngFor="let d of arraySucursales" [value]="d.id_sucursal">
+                        {{d.nombre}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo">
+                <ng-select class="form-control form-control-sm " appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="statusFilter" (ngModelChange)="filterEstado($event)">
+                    <ng-option [value]="0">Seleccione Estado</ng-option>
+                    <ng-option *ngFor="let d of statusDocuments" [value]="d.id">
+                        {{d.name}}</ng-option>
+                </ng-select>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <fieldset class="border p-2 mb-2 mt-3 filters">
+        <legend class="w-auto h6">Listado</legend>
+        <div class="table-responsive responsive-table">
+            <table datatable [dtOptions]="dtOptions" id="tablaReporNotDebito" [dtTrigger]="dtTrigger" class="table no-footer table-hover">
+                <thead>
+                    <tr style="width: 100%;text-align: center;">
+                        <!-- <th>#</th> -->
+                        <th>Documento</th>
+                        <th>Razón social</th>
+                        <th>Ruc</th>
+                        <th>Teléfono</th>
+                        <th>Valor</th>
+                        <th>fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="validaDt">
+                    <tr *ngFor="let dt of infoData; let i = index">
+                        <!-- <td class="text-center" style="width: 0%;">{{ i + 1 }}</td> -->
+                        <td style="padding-top: 15px;text-align: center;width: 3%;cursor:pointer;" (click)="informaDocumento(dt,i)">{{dt.codigo}}-{{ dt.secuencia_doc.toString().padStart(10, '0') }}</td>
+                        <td style="padding-top: 15px;text-align: center;text-align: center;width: 8%;">{{ dt.razon_social }}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 3%;">{{ dt.ruc }}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 3%;">{{ dt.telefono }}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 3%;"> {{ dt.total | currency: 'USD' | lowercase}}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 3%;">{{ dt.fecha_emision }}</td>
+                        <td style="padding-top: 15px;text-align: center;width: 5%;">
+                            <div *ngIf="dt.filter_doc != 4">
+                                En proceso
+                            </div>
+                            <div *ngIf="dt.filter_doc == latestStatus">
+                                Aprobada
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</app-button-radio-active>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg " id="modalReportnotaCredito" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row" style="width: 100%">
+                    <div class="col-12">
+                        <div class="title-head">
+                            <span>Información Documento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center " *ngIf="!processingtwo">
+                    <div class="container-new-loader">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-12 col-sm-12">
+                        <fieldset class="border p-2 mb-1 mt-2">
+                            <legend class="w-auto h6">Información Nota Crédito</legend>
+                            <div class="form-row">
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">N° Documento</label>
+                                        <p>{{dtInformacion.codigo}}-{{dtInformacion.secuencia_doc}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Documento</label>
+                                        <p>{{dtInformacion.nombre}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Tipo Agente</label>
+                                        <p>{{dtInformacion.tipo_agente}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Ruc</label>
+                                        <p>{{dtInformacion.ruc}}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-row">
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Razon Social</label>
+                                        <p>{{dtInformacion.razon_social}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Telefono</label>
+                                        <p>{{dtInformacion.telefono}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Ciudad</label>
+                                        <p>{{dtInformacion.ciudad}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Causa</label>
+                                        <p>{{dtInformacion.causa}}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-row" style="margin-top: 8px;">
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Concepto</label>
+                                        <p>{{ dtInformacion.concepto}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Total</label>
+                                        <p>{{ dtInformacion.total | currency: 'USD' | lowercase}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Valor Usado</label>
+                                        <p>{{dtInformacion.valor_usado | currency: 'USD' | lowercase}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Valor Disponible</label>
+                                        <p>{{dtInformacion.valor_disponible | currency: 'USD' | lowercase}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Empresa</label>
+                                        <p>{{dtInformacion.nombreEmpresa}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Sucursal</label>
+                                        <p>{{dtInformacion.nombreSucursal}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Estado</label>
+                                        <p>{{dtInformacion.estado}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label class="l">Usuario Aprobación</label>
+                                        <p>{{dtInformacion.name_user_aprobated}}</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="general" class="col-md-12 col-sm-12" style="height: 400px;">
+                        <fieldset class="border p-2 mb-1 mt-2" style="height: 400px;">
+                            <legend class="w-auto h6">Listado:</legend>
+                            <div style="overflow-y: scroll; height: 335px;margin-top:8px;">
+                                <div class="form-group table-responsive responsive-table">
+                                    <table class="table table-sm table-hover">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th>#</th>
+                                                <th>Nombre Cuenta</th>
+                                                <th>Codigo Cuneta</th>
+                                                <th>Debe</th>
+                                                <th>Haber</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="text-center" style="width: 100%;" *ngFor="let dt of dtnotaCredito; let i = index">
+                                                <td style="width: 3%;"><strong>{{ i + 1 }}</strong></td>
+                                                <td style="width: 3%;" class="text-left">
+                                                    <strong>{{dt.nombre_cta}}</strong>
+                                                </td>
+                                                <td style="width: 10%;">
+                                                    <strong>{{dt.codigo_cta}}</strong>
+                                                </td>
+
+                                                <td style="width: 10%;">
+                                                    <strong>{{dt.debe}}</strong>
+                                                </td>
+
+                                                <td style="width: 5%;">
+                                                    <strong>{{dt.haber}}</strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" aria-label="Close" style="font-weight: bold" (click)="closeModal()">
+                    CERRAR
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>

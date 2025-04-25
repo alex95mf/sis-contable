@@ -1,0 +1,80 @@
+<app-button-radio-active titulo="Consulta de Compra de Terrenos" cstyle="bg-light" icono="fas fa-document"
+    filtroBoton="btnsModalArriendos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border px-3 pb-2">
+        <legend class="w-auto mb-1">Filtros</legend>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Contribuyente" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" readonly class="form-control" [ngModel]="filter.razon_social">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Num Documento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.num_documento">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col">
+                <app-cc-input-group-prepend label="Fecha Hasta" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_hasta">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+    <table class="table mt-2 mat-elevation z2">
+        <thead class="thead-dark">
+            <tr>
+                <th>Num Documento</th>
+                <th>Fecha</th>
+                <th>Contribuyente</th>
+                <th>Propiedad</th>
+                <th>Valor</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="tbl_compraTerreno.length > 0; else emptyArriendos">
+                <tr *ngFor="let element of tbl_compraTerreno">
+                    <td>{{ element.documento }}</td>
+                    <td>{{ element.fecha | date:'YYYY-MM-dd' }}</td>
+                    <td>{{ element.contribuyente?.razon_social }}</td>
+                    <td>{{ element.lote?.cod_catastral }}</td>
+                    <td>$ {{ element.total | number:'1.2-2' }}</td>
+                    <td>
+                        <i class="fas fa-circle" [ngClass]="{'text-success': element.estado == 'A', 'text-danger': ['X', 'C'].includes(element.estado), 'text-warning': element.estado == 'V'}"></i>&nbsp;
+                        <span *ngIf="element.estado == 'A'">Aprobado</span>
+                        <span *ngIf="element.estado == 'X'">Anulado</span>
+                        <span *ngIf="element.estado == 'C'">Cancelado</span>
+                        <span *ngIf="element.estado == 'V'">Convenio</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" matTooltip="Seleccionar Documento" (click)="seleccionarDocumento(element)">
+                            <i class="far fa-hand-pointer"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-template #emptyArriendos>
+                <tr>
+                    <td class="text-center" colspan="7"><span class="h6">No hay Liquidaciones para mostrar.</span></td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <mat-paginator
+        showFirstLastButtons
+        [pageSize]="paginate.perPage"
+        [pageIndex]="paginate.pageIndex"
+        showFirstLastButtons
+        [length]="paginate.length"
+        (page)="changePage($event)">
+    </mat-paginator>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalArriendos"></cc-spiner-procesar>

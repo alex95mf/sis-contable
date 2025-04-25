@@ -1,0 +1,35 @@
+<div class="mt-4">
+    <app-button-radio-active titulo="Consulta de Proyectos" icono="fas fa-tasks" cstyle="bg-gradient-primary text-white" filtroBoton="consProyecto" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <div class="row">
+            <div class="col-12 px-2">
+                <table datatable [dtOptions]="dtOptions" class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Objetivo</th>
+                            <th>Presupuesto</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let proyecto of proyectos">
+                            <td>{{ proyecto.id }}</td>
+                            <td>{{ proyecto.nombre }}</td>
+                            <td>{{ proyecto.objetivo }}</td>
+                            <td>{{ proyecto.presupuesto }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary m-1" (click)="showProyecto(proyecto)" ngbTooltip="Mostrar Detalles">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger m-1" (click)="deleteProyecto(proyecto)" ngbTooltip="Eliminar">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>

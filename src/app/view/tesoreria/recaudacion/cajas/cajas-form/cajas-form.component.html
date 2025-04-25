@@ -1,0 +1,82 @@
+<app-button-radio-active [titulo]="isNew ? 'Nueva Caja' : 'Editar Caja'" filtroBoton="btnCajasForm" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+    
+    <div class="row mt-3">
+
+        <div class="col-6">
+            <div class="input-group input-group-sm mt-1 mb-3">
+                <div class="input-group-prepend">
+                    <span style="width:155px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Nombre de caja</span>
+                </div>
+                <input id="nombre" type="text" class="form-control form-control-sm" placeholder="Nombre de Caja" [(ngModel)]="caja.nombre" maxlength="100">
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="input-group input-group-sm mt-1 mb-3">
+                <div class="input-group-prepend">
+                    <span style="width:155px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Usuario de caja</span>
+                </div>
+                <ng-select id="usuario" class="form-control form-control-sm" [(ngModel)]="caja.fk_usuario_caja">
+                    <ng-option disabled [value]="0">Seleccione un usuario</ng-option>
+                    <ng-option *ngFor="let op of usuariosList" [value]="op.id_usuario">{{ op.nombre }}</ng-option>
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="input-group input-group-sm mt-1 mb-3">
+                <div class="input-group-prepend">
+                    <span style="width:155px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Código de caja</span>
+                </div>
+                <input id="codigo" type="text" class="form-control form-control-sm" placeholder="Nombre" [(ngModel)]="caja.codigo" maxlength="10">
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="input-group input-group-sm mt-1 mb-3">
+                <div class="input-group-prepend">
+                    <span style="width:155px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Establecimiento</span>
+                </div>
+                <ng-select id="establecimiento" class="form-control form-control-sm" [(ngModel)]="caja.establecimiento" (change)="handleEstablecimiento($event)">
+                    <ng-option disabled [value]="0">Seleccione un establecimiento</ng-option>
+                    <ng-option *ngFor="let op of establecimientosList" [value]="op.valor">{{ op.nombre }}</ng-option>
+                    <ng-option [value]="1">Otro</ng-option>
+                </ng-select>
+            </div>
+        </div>
+
+        <!-- <div class="col-6">
+            <div class="input-group input-group-sm mt-1 mb-3">
+                <div class="input-group-prepend">
+                    <span style="width:155px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Establecimiento</span>
+                </div>
+                <input id="establecimiento" type="text" class="form-control form-control-sm" placeholder="Establecimiento" [(ngModel)]="caja.establecimiento" maxlength="10">
+            </div>
+        </div> -->
+
+        <div class="col-6">
+            <div class="input-group input-group-sm mt-2 mb-3">
+                <div class="input-group-prepend">
+                    <span style="width:155px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Estado</span>
+                </div>
+                <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="caja.estado">
+                    <ng-option disabled [value]="0">Seleccione un estado</ng-option>
+                    <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                </ng-select>
+            </div>
+        </div>
+
+        <div *ngIf="nuevoEst" class="col-6">
+            <div class="input-group input-group-sm mt-1 mb-3">
+                <div class="input-group-prepend">
+                    <span style="width:155px;" class="input-group-text font-weight-bold" id="inputGroup-sizing-sm">Nuevo establecimiento</span>
+                </div>
+                <input id="nuevo_establecimiento" type="text" class="form-control form-control-sm" placeholder="Establecimiento" [(ngModel)]="caja.establecimiento_nuevo" maxlength="50">
+            </div>
+        </div>
+
+    </div>
+    
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

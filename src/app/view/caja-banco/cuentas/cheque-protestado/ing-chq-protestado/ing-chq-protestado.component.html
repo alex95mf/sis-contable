@@ -1,0 +1,110 @@
+<app-button-radio-active [titulo]="data.titulo" filtroBoton="btnIngChqProt" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" 
+(onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-cc">  
+
+
+<fieldset class="border p-2 mb-2 mt-3 " >
+    <legend class="w-auto h6">Detalle del Cheque</legend>
+
+    <div class="row">
+        <div class="col-sm">
+            <app-cc-input-group-prepend label="Cliente" styleSpan="size-span-campo">
+                <input class="form-control " [value]="data.datos.nombre_cliente" type="text" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled/>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <app-cc-input-group-prepend label="Banco" styleSpan="size-span-campo">
+                <input class="form-control " [value]="data.datos.name_bank" type="text" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled/>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                <input class="form-control " [value]="data.datos.fecha_emision" type="text" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled/>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Cuenta" styleSpan="size-span-campo">
+                <input class="form-control " [value]="data.datos._comp_ing_cam._vent_cli_cta.cuenta_bancaria" type="text" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled/>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Cheque" styleSpan="size-span-campo">
+                <input class="form-control " [value]="data.datos.number_cheque" type="text" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled/>
+            </app-cc-input-group-prepend>
+        </div>
+
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo">
+                <div class="input-group-prepend"> 
+                    <span class="input-group-text"  id="inputLabel-prepend"> 
+                        <i class="fa fa-usd"></i> 
+                    </span>
+                </div>
+                <input class="form-control text-right" [value]="data.datos.valor" type="text" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled/>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+</fieldset>
+
+
+<fieldset class="border p-2 mb-2 mt-3 " >
+    <legend class="w-auto h6">Datos</legend>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Motivo de Protesto" styleSpan="size-span-campo">
+                <select class="form-control form-control-sm custom-select" [(ngModel)]="lInputs.motivo" >
+                    <option value="">Seleccionar Motivo</option>
+                    <option *ngFor="let item of data.lstMotivos" [value]="item.id_catalogo + ' - ' + item.valor">{{item.valor}}</option>
+                </select>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Fecha devolución" styleSpan="size-span-campo">
+                <ejs-datepicker id="inputLabel-prepend" class="form-control" name="lfechaDevolucion" [(ngModel)]="lInputs.fechaDevolucion" format='yyyy-MM-dd' id="lfechaDevolucion">
+                </ejs-datepicker>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Valor de la comisión" styleSpan="size-span-campo">
+                <div class="input-group-prepend"> 
+                    <span class="input-group-text"  id="inputLabel-prepend"> 
+                        <i class="fa fa-usd"></i> 
+                    </span>
+                </div>
+                <input class="form-control text-right" type="text" placeholder="Ingresar comisión" [(ngModel)]="lInputs.valorComision" (blur)="lInputs.valorComision = validaciones.roundNumber(lInputs.valorComision, 4)" (keyup)="calcularTotal(data.datos.valor)" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" />
+            </app-cc-input-group-prepend>
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-sm-8">
+            <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-campo">
+                <textarea class="form-control" type="text" placeholder="Ingresar concepto" rows="1" [(ngModel)]="lInputs.concepto" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" ></textarea>
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-sm-4">
+            <app-cc-input-group-prepend label="Total por Protesto" styleSpan="size-span-campo">
+                <div class="input-group-prepend"> 
+                    <span class="input-group-text"  id="inputLabel-prepend"> 
+                        <i class="fa fa-usd"></i> 
+                    </span>
+                </div>
+                <input class="form-control text-right color-input-total-prot" type="text" [(ngModel)]="lInputs.totalProtesto" aria-describedby="inputGroup-sizing-sm" id="inputLabel-prepend" disabled/>
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+
+
+</fieldset>
+
+
+</app-button-radio-active>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spCheqProtsModal"></cc-spiner-procesar>

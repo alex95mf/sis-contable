@@ -1,0 +1,121 @@
+<div *ngIf="viaPublica">
+<!-- <div *ngIf="categoriaviaPublica" >  -->
+        <!-- <app-button-radio-active [titulo]="esNuevaCatEspPub ? 'Editar' : 'Nuevo'" filtroBoton="btnseditviapublica" cstyle="bg-gradient-primary text-white" [groupButton]="botoneras" (onMetodoGlobal)="btnseditar($event)" icono="fas fa-tags"> -->
+        <app-button-radio-active [titulo]="esNuevaCatEspPub ? 'Nueva ViaPublica' : 'Editar Via Publica'" filtroBoton="btnseditviapublica" cstyle="bg-gradient-primary text-white" [groupButton]="botoneras" (onMetodoGlobal)="btnseditar($event)" [icono]="esNuevaCatEspPub ? 'far fa-plus-square' : 'far fa-edit'">
+            <div class="row mt-3">
+            
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Codigo</span>
+                    </div>
+                    <ng-select id="tipo" class="form-control form-control-sm" [(ngModel)]="viaPublica.tipo.descripcion">
+                        <ng-option disabled [value]="0">Seleccione un tipo</ng-option>
+                        <ng-option *ngFor="let op of listavia" [value]="op.descripcion">{{ op.descripcion +' - '+ op.valor  }}</ng-option> 
+                    </ng-select> 
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Listado</span>
+                    </div>
+                        <input id="listado" type="text" class="form-control form-control-sm" [(ngModel)]="viaPublica.tipo.valor">
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Formula</span>
+                    </div>
+                    <input id="formula" type="text" class="form-control form-control-sm" [(ngModel)]="viaPublica.formula">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Periocidad</span>
+                    </div>
+                    <input id="periocidad" type="text" class="form-control form-control-sm"  [(ngModel)]="viaPublica.periodicidad">
+                </div> 
+            </div>
+
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Exencion</span>
+                    </div>
+                    <input id="Exencion" type="text" class="form-control form-control-sm" [(ngModel)]="viaPublica.exencion"> 
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Multa</span>
+                    </div>
+                    <input id="multa" type="text" class="form-control form-control-sm" [(ngModel)]="viaPublica.multa"> 
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+                    <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Porcentaje</span>
+                    </div>
+                    <input id="porcentaje" type="text" class="form-control form-control-sm" [(ngModel)]="viaPublica.porcentaje">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Factor1</span>
+                    </div>
+                    <input id="factor1" type="number" class="form-control form-control-sm" [(ngModel)]="viaPublica.factor_1">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Factor2</span>
+                    </div>
+                    <input id="factor2" type="number" class="form-control form-control-sm" [(ngModel)]="viaPublica.factor_2">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Factor3</span>
+                    </div>
+                    <input id="factor3" type="number" class="form-control form-control-sm" [(ngModel)]="viaPublica.factor_3">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span style="width: 155px;" class="input-group-text font-weight-bold">Factor4</span>
+                    </div>
+                    <input id="factor4" type="number" class="form-control form-control-sm" [(ngModel)]="viaPublica.factor_4">
+                </div>
+            </div>   
+       </div>
+       <br>
+          
+    </app-button-radio-active>
+</div> 
+<cc-spiner-procesar [ltexto]="texto_barra_carga" lfulScren=true lTipo="formEditarViapublica"></cc-spiner-procesar>

@@ -1,0 +1,48 @@
+
+.col-codigo {
+    left: 0px;
+    position: sticky;
+    z-index: 1;
+}
+
+.col-nombre {
+    left: 73px;
+    position: sticky;
+    z-index: 1;
+}
+
+.fixed-header {
+    z-index: 99999 !important;
+}
+
+// th, td {
+//     // padding: 0;
+//     outline: 1px solid #d0d5d9;
+//     outline-offset: -1px;
+//     background-color: #f3f5f6;
+// }
+.tab-label{
+    background-color: #fff;
+    border-radius: 4px;
+    color: var(--clr-base);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 24px;
+  
+  
+    &:hover{
+        background-color: var(--clr-gray-03);
+        text-decoration: none;
+    }
+  }
+  .tab-label.active {
+    background-color: var(--clr-action);
+    color: var(--clr-white);
+  }
+
+  .input-group_saldo{
+    height: 44px !important;
+    // padding-top: 5px !important;
+    // padding-bottom: 5px !important;
+}

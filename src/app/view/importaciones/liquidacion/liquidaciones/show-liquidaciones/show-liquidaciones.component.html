@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="mt-4">
+            <app-button-radio-active titulo="Liquidación de pedidos" filtroBoton="btnPedidosImpLiq"
+                cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons"
+                (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+                <div class="row mt-2 mb-2">
+                    <div class="col-12 filters">
+                        <div class="table-responsive responsive-table">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="table no-footer table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th style="width: 10%;">Id liquidación</th>
+                                        <th style="width: 10%;">No. Dai</th>
+                                        <th style="width: 12%;">No. inspección</th>
+                                        <th style="width: 14%;">Origen</th>
+                                        <th style="width: 10%;">Fecha Liq</th>
+                                        <th style="width: 11%;">tipo transp</th>
+                                        <th style="width: 10%;">Estado</th>
+                                        <th style="width: 10%;">Total</th>
+                                        <th style="width: 13%; text-align: center;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="validaDt">
+                                    <tr *ngFor="let dt of dataDT">
+                                        <td>{{ dt.num_doc.toString().padStart(10, '0') }}</td>
+                                        <td>{{ dt.num_dai }}</td>
+                                        <td>{{ dt.inspeccion }}</td>
+                                        <td>{{ dt.country.nom_pais }}</td>
+                                        <td>{{ dt.fecha_liq }}</td>
+                                        <td>{{ dt.tip_transp }}</td>
+                                        <td>{{ dt.estado }}</td>
+                                        <td>$ {{ commonService.formatNumber(dt.total_general)}}</td>
+                                        <td>
+                                            <div class="text-center">
+                                                <button class="btn btn-danger btn-sm" (click)="deleteLiquidacion(dt)"
+                                                    placement="top" ngbTooltip="Anular liquidación">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </button>
+                                                <button class="btn btn-warning btn-sm" (click)="showDetalleLiq(dt)"
+                                                    placement="left" ngbTooltip="ver liquidación">
+                                                    <i class="far fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </app-button-radio-active>
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="showLiquidacion"></cc-spiner-procesar>

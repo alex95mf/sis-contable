@@ -1,0 +1,131 @@
+<app-button-radio-active titulo="Subgrupo de productos" cstyle="bg-light text-dark" icono="fas fa-tasks"
+    filtroBoton="btnsGrupoProducto" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border pb-2 px-2 mb-4">
+        <legend class="w-auto bg-dark ml-1">
+            Subgrupo Producto
+        </legend>
+        <div class="row mt-2 mb-3">
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo"
+                            style="width: 155px;">Grupos</span></div>
+                    <input type="text" class="form-control form-control-sm" placeholder="Seleccione un Grupo"
+                        (click)="modalGrupos()" >
+                    <button class="btn btn-primary btn-sm" (click)="modalGrupos()" placement="bottom"  
+                   
+                        ngbTooltip="Buscar Grupo">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-6">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="estado" class="form-control form-control-sm" [clearable]="false" [(ngModel)]="subgrupo.estado" >
+                        <ng-option disabled [value]="0" disabled>Seleccione un Estado</ng-option>
+                        <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+            </div>
+
+
+        </div>
+        <div class="row mt-2 mb-3">
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text">Codigo Subgrupo</span></div>
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="subgrupo.codigo_subgrupo_producto" readonly>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend"><span class="input-group-text">Nombre Subgrupo</span></div>
+                    <input class="form-control form-control-sm" [(ngModel)]="subgrupo.descripcion">
+                </div>
+            </div>
+        </div>
+
+
+    </fieldset>
+    <fieldset class="border pb-2 px-2 mt-2">
+        <legend class="w-auto bg-dark ml-1">
+            Filtro
+        </legend>
+        <div class="row">
+            <div class="col-5">
+                <app-cc-input-group-prepend label="Código subgrupo" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control" type="text"  [(ngModel)]="filter.codigo_subgrupo_producto"/>
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col-5">
+                <app-cc-input-group-prepend label="Descripcion" styleSpan="size-span-otro font-weight-bold">
+                    <input class="form-control" type="text" [(ngModel)]="filter.descripcion" />
+                </app-cc-input-group-prepend>
+            </div>
+
+            <div class="col text-right">
+                <button class="btn btn-primary mr-1 btn-sm" ngbTooltip="Consultar" (click)="cargarSubgrupos()">
+                    <i class="fas fa-search"></i> Consultar
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="limpiarFiltro()" ngbTooltip="Eliminar">
+                    <i class="fas fa-eraser"></i>
+                </button>
+            </div>
+        </div>
+
+    </fieldset>
+    <table class="table table-hover mt-2">
+        <thead class="thead-dark">
+            <tr>
+                <th style="width: 25%;" class="text-center">Grupo producto</th>
+                <th style="width: 25%;"class="text-center">Descripcion</th>
+                <th style="width: 25%;"class="text-center">Codigo Subgrupo</th>
+               
+                <th style="width: 25%;" class="text-center">Estado</th>
+                <!-- <th class="text-center">Acciones</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!subgrupos.length">
+                <td colspan="6" class="text-center">
+                    <h6>No hay subgrupos</h6>
+                </td>
+            </tr>
+            <tr *ngFor="let item of subgrupos"  (click)="EditarGrupo(item)" style="cursor:pointer;">
+                <!-- <td class="text-center">{{item.codigo_grupo_producto}}</td> -->
+                <td class="text-center">
+                    <div class="row">
+                      <div class="col">{{item.grupo[0] ? item.grupo[0].descripcion : ''}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col"><small class="text-muted">{{ item.codigo_grupo_producto }}</small></div>
+                    </div>
+                  </td>
+
+
+                <td class="text-center">{{item.descripcion}}</td>
+                <td class="text-center">{{item.codigo_subgrupo_producto}}</td>
+                <td *ngIf="item.estado == 'A'" class="text-center">
+                    <i class="fas fa-circle text-success"></i> ACTIVO
+                </td>
+                <td *ngIf="item.estado == 'I'" class="text-center">
+                    <i class="fas fa-circle text-danger"></i> INACTIVO
+                </td>
+              
+                
+                <!-- <td class="text-center">
+                    <button class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+
+    <mat-paginator showFirstLastButtons [length]="paginate.length" [pageSize]="paginate.perPage" [pageSizeOptions]="paginate.pageSizeOptions"
+        (page)="changePaginate($event)" aria-label="Select page">
+    </mat-paginator>
+
+
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="ticket-form"></cc-spiner-procesar>

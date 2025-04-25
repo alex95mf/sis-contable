@@ -1,0 +1,70 @@
+<div class="mt-2 filter">
+    <app-button-radio-active titulo="Detalle Consulta Estado Cuenta Cliente" filtroBoton="btnEstCuentac" cstyle="bg-gradient-primary text-white " [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-clipboard-check">
+        <div class="row mt-1">
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Dcumento" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dt.codigo + dt.num_doc" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dt.fecha" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Usuario Aprobado" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dt.name_user_aprobated" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <app-cc-input-group-prepend label="Cliente" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.razon_social" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-sm-4">
+                <app-cc-input-group-prepend label="Ruc" styleSpan="size-span-campo">
+                    <input type="text" style="border:none" class="form-control form-control-sm" [value]="dataEnvio.ruc" disabled>
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12 filters">
+                <div class="table-responsive responsive-table mt-1 mb-3" style="overflow-y: scroll; height: 150px;margin-top:8px;">
+                    <table class="table no-footer table-hover">
+                        <thead>
+                            <tr style="width: 100%;">
+                                <th style="width: 8%;">Cuota</th>
+                                <th style="width: 8%;">Valor</th>
+                                <th style="width: 10%;">Abono</th>
+                                <th style="width: 10%;">Saldo</th>
+                                <th style="width: 10%;">Vencimiento</th>
+                                <th style="width: 10%;">Pago</th>
+                                <th style="width: 10%;">Útimo Abono</th>
+                                <th style="width: 10%;">Banco</th>
+                                <th style="width: 10%;">Metodo Pago</th>
+                                <th style="width: 10%;">Transacción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dt of arrayviewTable">
+                                <td class="text-center">{{ dt.letra }}</td>
+                                <td class="text-right">${{ dt.valor }}</td>
+                                <td class="text-right">${{ dt.valor_abono }}</td>
+                                <td class="text-right">${{ dt.valor_saldo }}</td>
+                                <td class="text-center">{{ dt.fecha_venc }}</td>
+                                <td class="text-center">{{ dt.fecha_pago }}</td>
+                                <td class="text-center">{{ dt.fecha_ult_abono }}</td>
+                                <td class="text-center">{{ dt.name_bank }}</td>
+                                <td class="text-center">{{ dt.metodo_pago }}</td>
+                                <td class="text-center">{{ dt.num_tx }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spmodalConsEstado"></cc-spiner-procesar>

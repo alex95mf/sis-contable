@@ -1,0 +1,202 @@
+<div *ngIf="userPayload != undefined">
+  <div class="container-fluid">
+    <div class="row mb-3">
+      <div class="col-12 col-md-3">
+        <div class="card-k card-dashboard">
+          <div class="card-dashboard_body">
+            <div class="card-dashboard_flex">
+              <p class="card-dashboard_number">$ {{emisionTitulos | number: '1.2-2'}}</p>
+              <div class="card-dashboard_icon card-dashboard_icon-one">
+                <!-- <i class="fas fa-file-copy fa-lg"></i> -->
+                <span class="material-icons">content_copy</span>
+              </div>
+            </div>
+          </div>
+          <h3 class="card-dashboard_header">Emisión de títulos</h3>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="card-k card-dashboard">
+          <div class="card-dashboard_body">
+            <div class="card-dashboard_flex">
+              <p class="card-dashboard_number">$ {{recaudacion | number: '1.2-2'}}</p>
+              <div class="card-dashboard_icon card-dashboard_icon-two">
+                <span class="material-icons">attach_money</span>
+              </div>
+            </div>
+          </div>
+          <h3 class="card-dashboard_header">Recaudación</h3>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="card-k card-dashboard">
+          <div class="card-dashboard_body">
+            <div class="card-dashboard_flex">
+              <p class="card-dashboard_number">$ {{desembolsos | number: '1.2-2'}}</p>
+              <div class="card-dashboard_icon card-dashboard_icon-three">
+                <span class="material-icons">chrome_reader_mode</span>
+              </div>
+            </div>
+          </div>
+          <h3 class="card-dashboard_header">Desembolsos</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="card-k card-chart mat-mdc-card mdc-card">
+          <div class="card-body">
+            <canvas id="chartLine" style="width: 15rem;height: 10rem;"></canvas>
+          </div>
+          <h5 class="card-chart_header">Emisión de títulos por mes</h5>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-k card-chart mat-mdc-card mdc-card">
+          <div class="card-body">
+            <canvas id="chattPie" style="width: 15rem;height: 10rem;"></canvas>
+          </div>
+          <h5 class="card-chart_header">Emisión de títulos por concepto</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="justify-content: space-between; align-items: center;">
+      <div class="col-12 col-md-6">
+        <div class="card-k card-chart mat-mdc-card mdc-card">
+          <div class="card-body">
+            <canvas id="chartLine1" style="width: 15rem;height: 10rem;"></canvas>
+          </div>
+          <h5 class="card-chart_header">Recaudación por mes</h5>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-k card-chart mat-mdc-card mdc-card">
+          <div class="card-body">
+            <canvas id="chattPie1" style="width: 15rem;height: 10rem;"></canvas>
+          </div>
+          <h5 class="card-chart_header">Recaudación por concepto</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="justify-content: space-between; align-items: center;">
+      <div class="col-12 col-md-6">
+        <div class="card-k card-chart mat-mdc-card mdc-card">
+          <div class="card-body">
+            <canvas id="chartLine2" style="width: 15rem;height: 10rem;"></canvas>
+          </div>
+          <h5 class="card-chart_header">Desembolsos por mes</h5>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-k card-chart mat-mdc-card mdc-card">
+          <div class="card-body">
+            <canvas id="chattPie2" style="width: 15rem;height: 10rem;"></canvas>
+          </div>
+          <h5 class="card-chart_header">Desembolsos por tipo</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div *ngIf="userPayload != undefined" style="background-color: #EEEFF1;">
+
+  <div class="row" style="justify-content: space-between; align-items: center;" >
+    <div class="col">
+      <div class="card mt-2 ml-4  mr-0 gradient-indigo" style="width: 22rem; height: 12rem;background-color: #3b53f2 ; border-radius: 15px;">
+        <h3 class="mr-0 mb-0 mb-0 mt-4 text-center " style="color: white;">EMISIÓN DE TÍTULOS</h3>
+        <div class="card-body mt-1">
+            <div class="col text-center" style="padding:0">
+              <div>
+                  <i class="fas fa-file-chart-line fa-lg" style="color: white;font-size: 30px;"></i>
+              </div>
+              <p style="color: white;font-size: x-large;">$ {{emisionTitulos | number: '1.2-2'}}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mt-2 ml-4  mr-0 gradient-amber" style="width: 22rem; height: 12rem;background-color: #3b53f2 ; border-radius: 15px;">
+        <h3 class="mr-0 mb-0 mb-0 mt-4 text-center " style="color: white;">RECAUDACIÓN</h3>
+        <div class="card-body mt-1">
+            <div class="col text-center" style="padding:0">
+              <div>
+                <i class="fas fa-hand-holding-usd fa-lg" style="color: #ffffff;font-size: 30px;"></i>
+              </div>
+              <p style="color: white;font-size: x-large;">$ {{recaudacion | number: '1.2-2'}}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mt-2 ml-4  mr-0 gradient-teal" style="width: 22rem; height: 12rem;background-color: #3b53f2 ; border-radius: 15px;">
+        <h3 class="mr-0 mb-0 mb-0 mt-4 text-center " style="color: white;">DESEMBOLSOS</h3>
+        <div class="card-body mt-1">
+            <div class="col text-center" style="padding:0">
+              <div>
+                <i class="fas fa-file-signature fa-lg" style="color: #f9fafb; font-size: 30px;"></i>
+              </div>
+              <p style="color: white;font-size: x-large;">$ {{desembolsos | number: '1.2-2'}}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row ml-2 mr-2" style="justify-content: space-between; align-items: center;" >
+    <div class="col">
+      <div class="card mt-1 mat-mdc-card mdc-card">
+        <h5 class="mr-0 mb-0 mt-2 text-center " >EMISIÓN DE TÍTULOS POR MES</h5>
+        <div class="card-body">
+          <canvas id="chartLine" style="width: 15rem;height: 10rem;" ></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mt-1 mat-mdc-card mdc-card">
+        <h5 class="mr-0 mb-0 mt-2 text-center " >EMISIÓN DE TÍTULOS POR CONCEPTO</h5>
+        <div class="card-body">
+          <canvas id="chattPie" style="width: 15rem;height: 10rem;"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row ml-2 mr-2" style="justify-content: space-between; align-items: center;" >
+    <div class="col">
+      <div class="card mt-1 mat-mdc-card mdc-card" >
+        <h5 class="mr-0 mb-0 mt-2 text-center " >RECAUDACIÓN POR MES</h5>
+        <div class="card-body">
+          <canvas id="chartLine1" style="width: 15rem;height: 10rem;"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mt-1 mat-mdc-card mdc-card">
+        <h5 class="mr-0 mb-0 mt-2 text-center " >RECAUDACIÓN POR CONCEPTO</h5>
+        <div class="card-body">
+          <canvas id="chattPie1" style="width: 15rem;height: 10rem;"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row ml-2 mr-2" style="justify-content: space-between; align-items: center;" >
+    <div class="col">
+      <div class="card mt-1 mat-mdc-card mdc-card" >
+        <h5 class="mr-0 mb-0 mt-2 text-center " >DESEMBOLSOS POR MES</h5>
+        <div class="card-body">
+          <canvas id="chartLine2" style="width: 15rem;height: 10rem;"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mt-1 mat-mdc-card mdc-card">
+        <h5 class="mr-0 mb-0 mt-2 text-center " >DESEMBOLSOS POR TIPO</h5>
+        <div class="card-body">
+          <canvas id="chattPie2" style="width: 15rem;height: 10rem;"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

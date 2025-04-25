@@ -1,0 +1,96 @@
+<app-button-radio-active-new titulo="Busqueda de Vehiculos" cstyle="bg-light" icono="fas fa-car"
+    filtroBoton="btnsModalVehiculos" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <fieldset class="border card-fieldset">
+        <legend class="w-auto card-legend">Filtros</legend>
+        <div class="row m-0">
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.nombre">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Marca" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.marca">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Fecha de Compra" styleSpan="size-span-campo font-weight-bold">
+                    <input type="date" class="form-control" [(ngModel)]="filter.fecha_compra">
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Procedencia" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control" [(ngModel)]="filter.procedencia">
+                </app-cc-input-group-prepend>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="row m-0">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-k table-hover" >
+                    <thead class="sticky-header">
+                        <tr class="text-center">
+                            <th >Codigo</th>
+                            <th >Nombre</th>
+                            <th >Detalles</th>
+                        
+                            <th >Procedencia</th>
+                            <th >Costo</th>
+                            <th> Acciones</th>
+                        </tr>
+                    </thead>
+                            <tbody>
+                        <tr>
+                            <td *ngIf="vehiculos?.length==0" colspan="6" class="text-center" >
+                                No se encontró data
+                            </td>
+                        </tr>
+
+                        <tr *ngFor="let d of vehiculos, let i = index">
+                            <td class="text-left">{{ d.codigoproducto}}</td>
+                            <td class="text-left">{{ d.nombre}}
+                                <small class="text-muted">
+                                    {{ d.marca }} - {{ d.modelo }}
+                                </small>
+
+                            </td>
+                            <td class="text-left">{{ d.placa}}
+                                <small class="text-muted">
+                                    <strong>Chasis:</strong> {{d.numero_chasis}} <strong>Motor:</strong> {{d.motor}}
+                                </small>
+
+                            </td>
+                            <td class="text-left">{{ d.procedencia}}</td>
+                            <td class="text-right">
+                                $ {{d.costo | number:'1.2-2'}}<br>
+                                <small class="text-muted">{{ d.fecha_compra }}</small>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" (click)="selectVehiculo(d)">
+                                    <i class="far fa-hand-pointer"></i>
+                                </button>
+
+                            </td>
+
+
+                        </tr>
+                            </tbody>
+                </table>
+                <mat-paginator [length]="paginate.length" [pageSize]="paginate.perPage"
+                [pageSizeOptions]="paginate.pageSizeOptions" (page)="changePaginate($event)"
+                showFirstLastButtons aria-label="Select page">
+            </mat-paginator>
+            
+
+            </div>
+        </div>
+    </div>
+
+
+
+</app-button-radio-active-new>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalVehiculos"></cc-spiner-procesar>

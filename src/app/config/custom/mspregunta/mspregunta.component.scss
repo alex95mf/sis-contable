@@ -1,0 +1,18 @@
+table.mat-table {
+  border-spacing: 0;
+}
+
+tr.mat-header-row {
+  height: 40px;
+}
+
+tr.mat-row,
+tr.mat-footer-row {
+  height: 10px;
+}
+
+.tabla-container-DetalleJud {
+  position: relative;
+  max-height: 550px;
+  overflow: auto;
+}

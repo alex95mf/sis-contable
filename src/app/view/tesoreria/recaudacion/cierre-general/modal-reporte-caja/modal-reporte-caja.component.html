@@ -1,0 +1,107 @@
+<app-button-radio-active titulo="Reporte de Caja por Dia" cstyle="bg-light" icono="fas fa-file-chart-line"
+    filtroBoton="btnsModalReporteCaja" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row">
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Caja" styleSpan="size-span-campo font-weight-bold">
+                <input type="text" class="form-control" readonly [ngModel]="caja.nombre">
+            </app-cc-input-group-prepend>
+        </div>
+        <div class="col-6">
+            <app-cc-input-group-prepend label="Fecha" styleSpan="size-span-campo font-weight-bold">
+                <input type="date" class="form-control" readonly [ngModel]="fecha">
+            </app-cc-input-group-prepend>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table mat-elevation-z2 my-2" style="min-width: 1600px;">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th class="col-num fixed-header" style="width: 37.5px;">No.</th>
+                    <th class="col-doc fixed-header" style="width: 150px;">Documento de cobro</th>
+                    <th class="col-contr fixed-header" style="width: 150px;">Contribuyente</th>
+                    <th class="col-rec fixed-header" style="width: 105px;">Recaudación</th>
+                    <th style="width: 7%;">Efectivo</th>
+                    <th style="width: 7%;">Cheque</th>
+                    <th style="width: 7%;">Tarjeta de crédito</th>
+                    <th style="width: 7%;">Transferencia</th>
+                    <th style="width: 7%;">Tarjeta de débito</th>
+                    <th style="width: 7%;">Garantía</th>
+                    <th style="width: 7%;">Valor a favor</th>
+                    <th style="width: 7%;">Nota de débito</th>
+                    <th style="width: 7%;">Depósito</th>
+                    <th style="width: 7%;">Otro</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="tbl_data.length > 0; else emptyRegistros">
+                    <tr *ngFor="let d of tbl_data, let i = index">
+                        <td class="text-center col-num fixed-header">
+                            {{ i + 1 }}
+                        </td>
+                        <td class="text-center col-doc fixed-header">
+                            {{ d.documento }}
+                        </td>                            
+                        <td class="text-center col-contr fixed-header">
+                            {{ d.contribuyente.razon_social }}
+                        </td>
+                        <td class="text-right col-rec fixed-header">
+                           $ {{ d.total | number: '1.2-2' }}
+                        </td>
+                        <td class="text-right">
+                            $ {{ d.totalEF | number: '1.2-2' }}
+                         </td>
+                         <td class="text-right">
+                            $ {{ d.totalCH | number: '1.2-2' }}
+                         </td>
+                         <td class="text-right">
+                            $ {{ d.totalTC | number: '1.2-2' }}
+                         </td>
+                         <td class="text-right">
+                            $ {{ d.totalTR | number: '1.2-2' }}
+                         </td>
+                         <td class="text-right">
+                            $ {{ d.totalTD | number: '1.2-2' }}
+                         </td>
+                         <td class="text-right">
+                            $ {{ d.totalGA | number: '1.2-2' }}
+                         </td>
+                         <td class="text-right">
+                            $ {{ d.totalVF | number: '1.2-2' }}
+                         </td>
+                         <td class="text-right">
+                            $ {{ d.totalND | number: '1.2-2' }}
+                         </td>
+                         <td class="text-right">
+                            $ {{ d.totalDE | number: '1.2-2' }}
+                         </td>    
+                         <td class="text-right">
+                            $ {{ d.totalOtro | number: '1.2-2' }}
+                         </td> 
+                    </tr>
+                </ng-container>
+                <ng-template #emptyRegistros>
+                    <tr>
+                        <td colspan="14" class="text-center">
+                            <span class="h6 my-1">No existen cobros realizados en esta caja</span>
+                        </td>
+                    </tr>
+                </ng-template>
+                <tr>
+                    <td colspan="3" class="col-num"><span class="h5">TOTALES</span></td>
+                    <td class="text-right col-rec">$ {{ totales.recaudacion | number:'1.2-2' }}</td>
+                    <td class="text-right">$ {{ totales.efectivo | number:'1.2-2' }}</td>
+                    <td class="text-right">$ {{ totales.cheque | number:'1.2-2' }}</td>
+                    <td class="text-right">$ {{ totales.t_credito | number:'1.2-2' }}</td>
+                    <td class="text-right">$ {{ totales.transferencia | number:'1.2-2' }}</td>
+                    <td class="text-right">$ {{ totales.t_debito | number:'1.2-2' }}</td>
+                    <td class="text-right">$ {{ totales.garantia | number:'1.2-2' }}</td>
+                    <td class="text-right">$ {{ totales.favor | number:'1.2-2' }}</td>
+                    <td class="text-right">$ {{ totales.n_debito | number:'1.2-2' }}</td>
+                    <td class="text-right">$ {{ totales.deposito | number:'1.2-2' }}</td>
+                    <td class="text-right">$ {{ totales.otros | number:'1.2-2' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spModalReporteCaja"></cc-spiner-procesar>

@@ -1,0 +1,256 @@
+
+
+
+
+<app-button-radio-active-new  [titulo]="isNew ? 'Registro de Tarea' : 'Edición de Tarea'"  
+cstyle="bg-gradient-primary text-white"
+filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+[icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+
+
+<div class="row m-0">
+    <div class="col-12">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Información de Tarea </legend>
+            <div class="row m-0">
+
+
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                
+                    <app-cc-input-group-prepend label="Tipo de Tarea" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select 
+                    
+                       
+                            class="form-control" 
+                       
+                            bindLabel="name"
+                            placeholder="-Seleccione-"
+                            appendTo="body"
+                            [clearable]="true"
+                            [searchable]="true"
+                            [disabled]=disabled
+                            [(ngModel)]="tarea.nombre_tarea">
+                            
+                            <ng-option [value]="item.valor" [disabled]="item.disabled" *ngFor="let item of lista_tipo_tareas">
+                                {{item.valor}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend> 
+                </div>
+
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                
+                    <app-cc-input-group-prepend label="Responsable" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select 
+                    
+                       
+                            class="form-control" 
+                       
+                            bindLabel="name"
+                            placeholder="-Seleccione-"
+                            appendTo="body"
+                            [clearable]="true"
+                            [searchable]="true"
+                            [disabled]=disabled
+                            [(ngModel)]="tarea.perfil_responsable">
+                            
+                            <ng-option [value]="item.valor" [disabled]="item.disabled" *ngFor="let item of lista_responsables">
+                                {{item.valor}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend> 
+                </div>
+                
+                <div class="col-12 col-md-4 pt-0 pb-0">
+                
+                    <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select 
+                           class="form-control" 
+    
+                            bindLabel="estado"
+                            placeholder="-Todos-"
+                            appendTo="body"
+                            [clearable]="true"
+                            [searchable]="true"
+                            [disabled]=disabled
+                            [(ngModel)]="tarea.estado">
+                            
+                            <ng-option [value]="item.estado" [disabled]="item.disabled" *ngFor="let item of lista_estados">
+                                {{item.descripcion}}
+                            </ng-option>
+                        </ng-select>
+                    </app-cc-input-group-prepend> 
+                </div>
+
+
+
+
+
+
+
+             
+            </div>
+
+            <div class="row m-0">
+
+          
+
+                <div class="col-12 col-md-8 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Observación"
+                        styleSpan="size-span-campo">
+                        <textarea class="form-control form-control-sm" type="text"
+                            [(ngModel)]="tarea.observacion" 
+                            placeholder="Ingrese una observación" rows="3"
+                             maxlength="255"></textarea>
+                    </app-cc-input-group-prepend>
+                  </div>
+
+            </div>
+            <div *ngIf="!isNew">
+                <div class="row m-0">
+          
+                
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                    
+                        <app-cc-input-group-prepend label="Tarea Siguiente Paso:" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select 
+                        
+                           
+                                class="form-control" 
+                           
+                                bindLabel="name"
+                                placeholder="-Seleccione-"
+                                appendTo="body"
+                                [clearable]="true"
+                                [searchable]="true"
+                                [disabled]=disabled
+                                [(ngModel)]="tarea.nombre_tarea_siguiente_paso">
+                                
+                                <ng-option [value]="item.valor" [disabled]="item.disabled" *ngFor="let item of lista_tipo_tareas">
+                                    {{item.valor}}
+                                </ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend> 
+                    </div>
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                    
+                        <app-cc-input-group-prepend label="Responsable Siguiente Paso:" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select 
+                        
+                           
+                                class="form-control" 
+                           
+                                bindLabel="name"
+                                placeholder="-Seleccione-"
+                                appendTo="body"
+                                [clearable]="true"
+                                [searchable]="true"
+                                [disabled]=disabled
+                                [(ngModel)]="tarea.perfil_siguiente_paso">
+                                
+                                <ng-option [value]="item.valor" [disabled]="item.disabled" *ngFor="let item of lista_responsables">
+                                    {{item.valor}}
+                                </ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend> 
+                    </div>
+                    
+                    <div class="col-12 col-md-4 pt-0 pb-0">
+                    
+                        <app-cc-input-group-prepend label="Estado de Revision" styleSpan="size-span-campo font-weight-bold">
+                            <ng-select 
+                               class="form-control" 
+        
+                                bindLabel="estado"
+                                placeholder="-Todos-"
+                                appendTo="body"
+                                [clearable]="true"
+                                [searchable]="true"
+                                [disabled]=disabled
+                                [(ngModel)]="tarea.estado_revision">
+                                
+                                <ng-option [value]="item.estado" [disabled]="item.disabled" *ngFor="let item of lista_estados_revision">
+                                    {{item.descripcion}}
+                                </ng-option>
+                            </ng-select>
+                        </app-cc-input-group-prepend> 
+                    </div>
+    
+                    
+                </div>
+                <div class="row m-0">
+    
+              
+    
+                    <div class="col-12 col-md-8 pt-0 pb-0">
+                        <app-cc-input-group-prepend label="Observación de Revision"
+                            styleSpan="size-span-campo">
+                            <textarea class="form-control form-control-sm" type="text"
+                                [(ngModel)]="tarea.observacion_revision" 
+                                placeholder="Ingrese una observación" rows="3"
+                                 maxlength="255"></textarea>
+                        </app-cc-input-group-prepend>
+                      </div>
+    
+                </div>
+            </div>
+ 
+
+
+        </fieldset>
+
+
+
+    </div>
+</div>
+<div class="row m-0">
+    <div class="col-12">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Detalle de Tarea</legend>
+       
+                <div *ngIf="Perfil == 'ASESOR'">
+                    <ng-container *ngTemplateOutlet="bienvenidoAsesor"></ng-container>
+                </div>
+                <div *ngIf="Perfil == 'BODEGA'">
+                    <ng-container *ngTemplateOutlet="bienvenidoBodega"></ng-container>
+                </div>
+                <div *ngIf="Perfil == 'SUPERVISOR'">
+                    <ng-container *ngTemplateOutlet="bienvenidoSupervisor"></ng-container>
+                </div>
+                <div *ngIf="Perfil == 'CREDITO'">
+                    <ng-container *ngTemplateOutlet="bienvenidoCredito"></ng-container>
+                </div>
+            </fieldset>
+    </div>
+
+    
+
+</div>
+
+</app-button-radio-active-new>
+
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="movimiento-form"></cc-spiner-procesar>
+<ng-template #bienvenidoAsesor>
+    <!-- Contenido específico para ASESOR -->
+    <p>Bienvenido, Asesor.</p>
+  </ng-template>
+  
+  <ng-template #bienvenidoSupervisor>
+    <!-- Contenido específico para SUPERVISOR -->
+    <p>Bienvenido, Supervisor.</p>
+  </ng-template>
+  
+  <ng-template #bienvenidoCredito>
+    <!-- Contenido específico para CREDITO -->
+    <p>Bienvenido, Crédito.</p>
+  </ng-template>
+  
+  <ng-template #bienvenidoBodega>
+    <!-- Contenido específico para VENDEDOR -->
+    <p>Bienvenido, Bodega.</p>
+  </ng-template>
+  
+  <ng-template #perfilNoReconocido>
+    <!-- Contenido por defecto si no coincide ningún perfil -->
+    <p>Perfil no reconocido.</p>
+  </ng-template>

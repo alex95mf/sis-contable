@@ -1,0 +1,463 @@
+<div class="mt-4">
+    <app-button-radio-active-new titulo="Traslado de Bienes" filtroBoton="btnsTrasBien" 
+    cstyle="bg-gradient-primary text-white"
+        [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-file-alt">
+
+        <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Información de Traslado</legend>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Traslado por:" styleSpan="size-span-campo font-weight-bold">
+                                <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="traslado.tipo_traslado" 
+                                    [disabled]="!actions.dComponet" (change)="mostrarCampos($event)">
+                                    <ng-option [value]="0" disabled>Choose...</ng-option>
+                                    <ng-option *ngFor="let item of tipoTraslado" [value]="item.valor">
+                                        {{item.descripcion}}
+                                    </ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                            
+                        </div>
+                        <div class="col-12 col-md-3 pt-0 pb-0">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Fecha</span>
+                                </div>
+                                <input id="idNominaDatef" name="dateFrom"  format='yyyy-MM-dd' type="date" class="form-control" [disabled]="!actions.dComponet"  [(ngModel)]="traslado.fecha">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 pt-0 pb-0">
+                            <div class="input-group input-group-sm mt-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">No. Documento</span>
+                                </div>
+                                <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="traslado.num_doc">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+                            <app-cc-input-group-prepend label="Departamento que recibe" 
+                            styleSpan="size-span-campo font-weight-bold">
+                            <input placeholder="Departamento que recibe..." type="text" #departamento="ngModel"
+                            name="departamento" readonly [(ngModel)]="departamentoSelect.dep_nombre" 
+                            class="form-control form-control-sm" 
+                            id="departamento" [disabled]="!actions.dComponet">
+                      
+                            <button class="btn btn-primary btn-sm" (click)="modalDepartamentos()" 
+                                style="box-shadow: unset;outline: unset;" [disabled]="!actions.dComponet">
+                                Buscar
+                            </button>
+                            </app-cc-input-group-prepend>
+
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+        </div>
+     <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Custodio</legend>
+                            <div class="row m-0">
+
+                                <div class="col-12 col-md-4 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Custodio" styleSpan="size-span-campo font-weight-bold">
+                                        <input class="form-control form-control-sm" [(ngModel)]="traslado.custodio" [disabled]="!actions.dComponet" readonly placeholder="Custodio... "/>
+                                        <button class="btn btn-primary btn-sm" (click)="modalEncargado(2)" 
+                                        [disabled]="!actions.dComponet">Buscar</button>
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-12 col-md-4 pt-0 pb-0">
+
+                                    <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                                        <input type="text" class="form-control form-control-sm"  [disabled]="true" [(ngModel)]="traslado.nombre_departamento_custodio">  
+                                    </app-cc-input-group-prepend>
+
+
+                                </div>
+                                <div class="col-12 col-md-4 pt-0 pb-0">
+                                    <app-cc-input-group-prepend label="Cargo" styleSpan="size-span-campo font-weight-bold">
+                                        <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="traslado.nombre_cargo_custodio">
+                                    </app-cc-input-group-prepend>
+
+                                </div>
+                            </div>
+
+                     
+        <div *ngIf="aplicarConfig.fld_custodio_origen" class="row m-0">
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Custodio unidad origen" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control form-control-sm" [(ngModel)]="traslado.custodio_origen" [disabled]="!actions.dComponet" readonly placeholder="Custodio unidad origen... "/>
+                    <button class="btn btn-primary btn-sm" (click)="modalEncargado(7)" [disabled]="!actions.dComponet">Buscar</button>
+
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Departamento</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="traslado.nombre_departamento_custodio_origen">                
+                </div>
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <div class="input-group input-group-sm mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Cargo</span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="traslado.nombre_cargo_custodio_origen">                
+                </div>
+            </div>
+        </div>
+    
+        <div *ngIf="aplicarConfig.fld_entregado_por" class="row m-0">
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Entregado por" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control form-control-sm" [(ngModel)]="traslado.entregado" [disabled]="!actions.dComponet" readonly placeholder="Entregado por... "/>
+                    <button class="btn btn-primary btn-sm" (click)="modalEncargado(3)" [disabled]="!actions.dComponet">Buscar</button>
+
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="traslado.nombre_departamento_entregado">
+                </app-cc-input-group-prepend>
+
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Cargo" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="traslado.nombre_cargo_entregado">
+                </app-cc-input-group-prepend>
+
+            </div>
+        </div>
+     
+        <div *ngIf="aplicarConfig.fld_funcionario_responsable" class="row m-0">
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Funcionario Responsable" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control form-control-sm" [(ngModel)]="traslado.responsable" [disabled]="!actions.dComponet" readonly placeholder="Responsable... "/>
+                    <button class="btn btn-primary btn-sm" (click)="modalEncargado(4)" [disabled]="!actions.dComponet">Buscar</button>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="traslado.nombre_departamento_responsable">
+                </app-cc-input-group-prepend>
+
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Cargo" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="traslado.nombre_cargo_responsable">
+                </app-cc-input-group-prepend>
+
+
+            </div>
+        </div>
+
+        <div *ngIf="aplicarConfig.fld_verificacion_usuario" class="row m-0">
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Verificado por" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control form-control-sm" [(ngModel)]="traslado.verifica" [disabled]="!actions.dComponet" readonly placeholder="verificado por... "/>
+                    <button class="btn btn-primary btn-sm" (click)="modalEncargado(6)" [disabled]="!actions.dComponet">Buscar</button>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                   <input type="text" class="form-control form-control-sm"  [disabled]="true" [(ngModel)]="traslado.nombre_departamento_verifica">
+                </app-cc-input-group-prepend>
+            </div>
+     
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Cargo" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="traslado.nombre_cargo_verifica">   
+                </app-cc-input-group-prepend>
+
+            </div>
+        </div>
+ 
+        <div *ngIf="aplicarConfig.fld_elaborado_por" class="row m-0">
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Elaborado Por" styleSpan="size-span-campo font-weight-bold">
+                    <input class="form-control form-control-sm" [(ngModel)]="traslado.elabora" [disabled]="!actions.dComponet" readonly placeholder="Elaborado por... "/>
+                    <button class="btn btn-primary btn-sm" (click)="modalEncargado(5)" [disabled]="!actions.dComponet">Buscar</button>
+                </app-cc-input-group-prepend>
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Departamento" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="traslado.nombre_departamento_elabora">
+                </app-cc-input-group-prepend>
+
+            </div>
+            <div class="col-12 col-md-4 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Cargo" styleSpan="size-span-campo font-weight-bold">
+
+                    <input type="text" class="form-control form-control-sm" [disabled]="true" [(ngModel)]="traslado.nombre_cargo_elabora">
+                </app-cc-input-group-prepend>
+
+            </div>
+        </div>
+      
+        <div *ngIf="aplicarConfig.fld_fecha_devolucion" class="row m-0">
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Fecha devolución" styleSpan="size-span-campo font-weight-bold">
+                    <input id="fecha_devolucion" name="dateFrom"  format='yyyy-MM-dd' type="date" class="form-control" [disabled]="!actions.dComponet"  [(ngModel)]="traslado.fecha_devolucion">
+                </app-cc-input-group-prepend>
+
+
+            </div>
+        </div>
+  
+        <div *ngIf="aplicarConfig.fld_documento_referencia" class="row m-0">
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Doc. referencial" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" [disabled]="!actions.dComponet" [(ngModel)]="traslado.doc_ref_informe_tecnico">
+                </app-cc-input-group-prepend>
+
+
+            </div>
+        </div>
+        <div *ngIf="aplicarConfig.fld_doc_devolucion" class="row m-0">
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Doc. devolución sistemas" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" [disabled]="!actions.dComponet" [(ngModel)]="traslado.doc_devolucion_sistemas">
+
+                </app-cc-input-group-prepend>
+ 
+            </div>
+        </div>
+
+        <div *ngIf="aplicarConfig.fld_destino_final" class="row m-0">
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Destino final" styleSpan="size-span-campo font-weight-bold">
+                    <input type="text" class="form-control form-control-sm" [disabled]="!actions.dComponet" [(ngModel)]="traslado.ubicacion_final">
+                </app-cc-input-group-prepend>
+
+ 
+            </div>
+            
+        </div>
+        <div *ngIf="aplicarConfig.fld_estado" class="row m-0">
+            <div class="col-12 col-md-6 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
+                    <ng-select id="estado" class="form-control form-control-sm" [disabled]="!actions.dComponet" [(ngModel)]="traslado.estado" maxlength="5" >
+                        <ng-option disabled [value]="0">Seleccione un Estado</ng-option>
+                        <ng-option *ngFor="let op of estadosTraslado" [value]="op.value">{{ op.label }}</ng-option>
+                    </ng-select>
+                </app-cc-input-group-prepend>
+
+
+            </div>
+        </div>
+     
+        <div *ngIf="aplicarConfig.fld_informe_tecnico" class="row m-0">
+
+            <div class="col-12 col-md-12 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Informe Tecnico" styleSpan="size-span-campo font-weight-bold">
+
+                    <textarea id="inf_tecnico" type="text" class="form-control form-control-sm" 
+                    placeholder="Informe Tecnico" [disabled]="!actions.dComponet" [(ngModel)]="traslado.informe_tecnico" maxlength="500"></textarea>
+
+               
+                </app-cc-input-group-prepend>
+
+
+            </div>
+        </div>
+        <div *ngIf="aplicarConfig.fld_desarrollo" class="row m-0">
+            <div class="col-12 col-md-12 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Desarrollo" styleSpan="size-span-campo font-weight-bold">
+                    <textarea id="desarrollo" type="text" class="form-control form-control-sm" placeholder="Desarrollo" [disabled]="!actions.dComponet" [(ngModel)]="traslado.desarrollo" maxlength="500"></textarea>
+
+                </app-cc-input-group-prepend>
+
+            </div>
+        </div>
+        <div *ngIf="aplicarConfig.fld_nota" class="row m-0">    
+            <div class="col-12 col-md-12 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Nota" styleSpan="size-span-campo font-weight-bold">
+                    <textarea id="nota" type="text" class="form-control form-control-sm" placeholder="Nota" [disabled]="!actions.dComponet" [(ngModel)]="traslado.nota" maxlength="500"></textarea>
+
+                </app-cc-input-group-prepend>
+
+            </div>
+        </div>
+        <div *ngIf="aplicarConfig.fld_observacion" class="row m-0">    
+            <div class="col-12 col-md-12 pt-0 pb-0">
+                <app-cc-input-group-prepend label="Observación" styleSpan="size-span-campo font-weight-bold">
+                    <textarea id="observacion" type="text" class="form-control form-control-sm" placeholder="Observación" [disabled]="!actions.dComponet" [(ngModel)]="traslado.observaciones" maxlength="500"></textarea>
+                </app-cc-input-group-prepend>
+
+            </div>
+        </div>
+                        </fieldset>
+            </div>
+        </div>
+
+         <div class="row m-0">
+            <div class="col-12">
+                <fieldset class="border card-fieldset">
+                    <legend class="w-auto card-legend">Anexos</legend>
+                    <div class="row m-0">
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*" multiple [disabled]="!actions.dComponet" (change)="cargaFoto($event.target.files)">
+                                <label class="custom-file-label" for="inputGroupFile01">{{ fotos.length > 0 ? "Ha seleccionado " + fotos.length + " Fotos" : "Seleccione fotos a subir" }}</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 pt-0 pb-0">
+
+                            <div class="multiple-image-container">
+                                <div *ngFor='let foto of fotos, let i = index' class="multiple-image-preview">
+                                    <img [src]="foto.recurso" (click)="expandirVistaFotos(i)" class="img-thumbnail">
+                                    <button *ngIf="!formReadOnly" [disabled]="!actions.dComponet" class="btn btn-sm btn-danger" placement="top" ngbTooltip="Eliminar Foto" (click)="removeFoto(i)"><i class="far fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        
+ 
+        
+    
+     
+
+
+   <div class="row m-0">
+    <div class="col-12">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Bienes</legend>
+            <div class="row m-0">
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Tipo de bienes" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="grupo.tipo_bien" [disabled]="!actions.dComponet || disabledBienes" (change)="buscarGrupoProducto($event)">
+                            <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
+                            <ng-option *ngFor="let item of catalog_filter"  [value]="item.valor">{{item.descripcion}}</ng-option>
+                            </ng-select>
+                     
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-12 col-md-6 pt-0 pb-0">
+                    <app-cc-input-group-prepend label="Grupo Producto" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select class="form-control custom" appendTo="body" [searchable]="true" [clearable]="false" [(ngModel)]="claseSelect" [disabled]="disabledGrupo || disabledBienes" (change)="selectedGrupo($event)">
+                            <ng-option  [value]= "0" >Seleccione un grupo del producto</ng-option>
+                            <ng-option *ngFor="let d of listaProductos"  [value]="d">{{d.codigo_grupo_producto}} -
+                                {{d.descripcion}} - {{d.tipo_bien}}
+                            </ng-option>
+                            </ng-select>
+          
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+            <div class="row m-0">
+
+                <div class="col-12 col-md-6 pt-0 pb-0">
+
+                    <app-cc-input-group-prepend label="Seleccione un Estado" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select id="estado_producto" class="form-control form-control-sm" [(ngModel)]="estado_producto" maxlength="5"  [disabled]="disabledBienes">
+                            <ng-option disabled [value]="0">Seleccione un Estado</ng-option>
+                            <ng-option *ngFor="let op of estadoList" [value]="op.value">{{ op.label }}</ng-option>
+                        </ng-select>
+
+                    </app-cc-input-group-prepend>
+
+                </div>
+                <div class="col-12 col-md-6 pt-0 pb-0 text-right">
+                    <button class="btn btn-success btn-sm" placement="top"
+                        ngbTooltip="Agregar productos" (click)="addProduct()"
+                        [disabled]="agregaProduct || disabledBienes">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row m-0">
+                <div class="col-12">
+                    <table class="table table-striped table-bordered table-k table-hover" >
+                        <thead class="sticky-header">
+                            <tr class="text-center">
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Código</th>
+                                <th scope="col">Precio</th>
+                             
+                                <th scope="col">Stock</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">P/U</th>
+                                <th scope="col">Total</th>
+                                <th scope="col" class="text-center">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody style="width: 100%;">
+                            <tr *ngFor="let d of dataProducto; let i = index">
+                                <td style="width: 18%;" *ngIf="d.action">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Producto"
+                                        [(ngModel)]="d.nombre" [disabled]="true"></td>
+                                <td style="width: 13%;" *ngIf="d.action">
+                                    <input type="text"  class="form-control form-control-sm" placeholder="Código" [(ngModel)]="d.codigoProducto"
+                                        [disabled]="true">
+                                </td>
+                                <td style="width: 10%;" *ngIf="d.action">
+                                    <input type="text" class="form-control form-control-sm"
+                                        placeholder="$ {{d.price}}" [disabled]="true"
+                                        style="text-align: right !important;" >
+                                    </td>
+
+                      
+
+                                <td style="width: 7%;" *ngIf="d.action">
+
+                                    <input type="text" class="form-control form-control-sm" placeholder="0.00"
+                                        style="text-align: right;padding-right: 10px;" [(ngModel)]="d.stock"
+                                        id="stock"
+                                        [disabled]="true">
+                                </td>
+
+                                <td style="width: 10%;text-align: right;" *ngIf="d.action">
+                                    <input type="text" class="form-control form-control-sm" placeholder="0.00"
+                                        style="text-align: right;padding-right: 10px;" [(ngModel)]="d.quantity"
+                                        (keyup)="sumTotal(i)" min="0" id="quantyId"
+                                        (keypress)="commonServices.FormatDecimalVal($event)"
+                                        [disabled]="!actions.dComponet || disabled || disabledCantidad">
+                                </td>
+
+                                <td style="width: 10%;" *ngIf="d.action">
+                                    <input type="text" class="form-control form-control-sm" placeholder="$ 0.00"
+                                        style="text-align: right;padding-right: 10px;" [(ngModel)]="d.price"
+                                        (keyup)="sumTotal(i)" min="0"
+                                        (keypress)="commonServices.FormatDecimalVal($event)"
+                                        [disabled]="true">
+                                </td>
+                                <td style="width: 9%;" *ngIf="d.action">
+                                    <input type="text" placeholder="$ {{d.totalAux}}" [disabled]="true"
+                                        class="form-control form-control-sm" style="text-align: right !important;">
+                                </td>
+                                <td style="width: 9%;text-align: center;" *ngIf="d.action">
+                                    <button class="btn btn-primary btn-sm mx-1" (click)="showDetalleProducto(d)" placement="left" ngbTooltip="Ver detalle">
+                                        <i class="far fa-eye "></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" placement="top"
+                                        ngbTooltip="Eliminar Items" (click)="deleteItems(i)"
+                                        [disabled]="!actions.dComponet || disabled">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                </fieldset>
+    </div>
+   </div>
+
+
+    </app-button-radio-active-new>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spSales"></cc-spiner-procesar>
+

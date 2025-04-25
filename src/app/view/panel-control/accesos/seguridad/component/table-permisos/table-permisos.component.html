@@ -1,0 +1,174 @@
+<fieldset class="border pb-2 px-2">
+    <legend  class="w-auto ml-1 bg-dark" > Filtros</legend>
+    <div class="row">
+        <div class="col-10">
+            
+            <div class="row">
+                <div class="col">
+                    <app-cc-input-group-prepend label="Componente" styleSpan="size-span-campo font-weight-bold">
+                        <!-- <ng-select id="categoria" class="form-control form-control-sm"   [(ngModel)]="filter.tipoCatalogo" [clearable]="false"
+                            (ngModelChange)="validateSubgroup($event)">
+                            <ng-option disabled [value]="0" disabled>Seleccione una Categoria</ng-option>
+                            <ng-option *ngFor="let g of groups" [value]="g.tipo">{{g.tipo}}</ng-option>
+                        </ng-select> -->
+                        <input class="form-control form-control-sm" placeholder="Ingrese el componente... " type="text" [(ngModel)]="filter.componentes"/>
+                    </app-cc-input-group-prepend>
+                </div>
+                 
+                
+            </div>
+        </div>
+        <div class="col text-right">
+            <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="getDataTable()">
+                <i class="fas fa-search"></i> Filtrar
+            </button>
+            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                <i class="fas fa-eraser"></i>
+            </button>
+        </div>
+    </div>
+</fieldset>
+<div class="p-2">
+
+    <table  class="table-bordered table no-footer table-hover">
+        <thead class="thead-dark">
+            <tr style="width: 100%;">
+                <th style="width: 3%;">
+                    <input type="checkbox" [(ngModel)]="allSelected" (change)="selectAll($event)">
+                </th> <!-- Para los chk de las filas -->
+                <th style="width: 8%;text-align: center;">Código</th>
+                <th style="width: 9%;">Componentes</th>
+                <th style="width: 5%;">Ver</th>
+                <th style="width: 5%;">Abrir</th>
+                <th style="width: 6%;">Consultar</th>
+                <th style="width: 5%;">Editar</th>
+                <th style="width: 5%;">Agregar</th>
+                <th style="width: 5%;">Guardar</th>
+                <th style="width: 6%;">Eliminar</th>
+                <th style="width: 6%;">Imprimir</th>
+                <th style="width: 6%;">Exportar</th>
+                <th style="width: 7%;">Descargar</th>
+                <th style="width: 5%;">Enviar</th>
+                <th style="width: 4%;">Aprobar</th>
+                <th style="width: 6%;">Anular</th>
+                <th style="width: 6%;">Procesar</th>
+                <!-- <th style="width: 6%;">Acción</th> -->
+            </tr>
+            <tr *ngIf="dataT.length">
+                <th colspan="3"></th>
+                <th class="text-center"><input type="checkbox" name="ver" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="abrir" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="consultar" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="editar" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="agregar" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="guardar" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="eliminar" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="imprimir" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="exportar" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="descargar" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="enviar" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="aprobar" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="bloquear" (change)="seleccionar($event)"></th>
+                <th class="text-center"><input type="checkbox" name="procesar" (change)="seleccionar($event)"></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="validaDt" >
+            <tr *ngFor="let d of dataT" style="height: 5%;">
+                <td style="width: 3%;"><input type="checkbox" [(ngModel)]="d.check" (change)="handleCheckboxRow($event, d)"></td>
+                <td >{{d.componente.codigo}}</td>
+                <td style="text-align: left;">{{d.componente.nombre_componente}}</td>
+                <td *ngIf="d.ver" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.ver">
+                </td>
+                <td *ngIf="!d.ver" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.ver">
+                </td>
+                <td *ngIf="d.abrir" class="text-center">
+                    <input  type="checkbox" [(ngModel)]="d.abrir">
+                </td>
+                <td *ngIf="!d.abrir" class="text-center">
+                    <input  type="checkbox" [(ngModel)]="d.abrir">
+                </td>
+                <td *ngIf="d.consultar" class="text-center">
+                    <input  type="checkbox" [(ngModel)]="d.consultar">
+                </td>
+                <td *ngIf="!d.consultar" class="text-center">
+                    <input  type="checkbox" [(ngModel)]="d.consultar">
+                </td>
+                <td *ngIf="d.editar" class="text-center">
+                    <input  type="checkbox" [(ngModel)]="d.editar">
+                </td>
+                <td *ngIf="!d.editar" class="text-center">
+                    <input  type="checkbox" [(ngModel)]="d.editar">
+                </td>
+                <td *ngIf="d.agregar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.agregar">
+                </td>
+                <td *ngIf="!d.agregar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.agregar">
+                </td>
+                <td *ngIf="d.guardar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.guardar">
+                </td>
+                <td *ngIf="!d.guardar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.guardar">
+                </td>
+                <td *ngIf="d.eliminar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.eliminar">
+                </td>
+                <td *ngIf="!d.eliminar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.eliminar">
+                </td>
+                <td *ngIf="d.imprimir" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.imprimir">
+                </td>
+                <td *ngIf="!d.imprimir" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.imprimir">
+                </td>
+                <td *ngIf="d.exportar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.exportar">
+                </td>
+                <td *ngIf="!d.exportar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.exportar">
+                </td>
+                <td *ngIf="d.descargar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.descargar">
+                </td>
+                <td *ngIf="!d.descargar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.descargar">
+                </td>
+                <td *ngIf="d.enviar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.enviar">
+                </td>
+                <td *ngIf="!d.enviar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.enviar">
+                </td>
+                <td *ngIf="d.aprobar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.aprobar">
+                </td>
+                <td *ngIf="!d.aprobar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.aprobar">
+                </td>
+                <td *ngIf="d.bloquear" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.bloquear">
+                </td>
+                <td *ngIf="!d.bloquear" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.bloquear">
+                </td>
+                <td *ngIf="d.procesar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.procesar">
+                </td>
+                <td *ngIf="!d.procesar" class="text-center">
+                    <input type="checkbox" [(ngModel)]="d.procesar">
+                </td>
+                <!-- <td style="text-align: center;">
+                    <button class="btn btn-dark " (click)="updatePermisos(d)" data-toggle="tooltip" data-placement="top"
+                        title="Guardar" style="padding-left: 10px;padding-right: 10px;">
+                        <i class="fa fa-floppy-o " aria-hidden="true"></i>
+                    </button>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spTaPermSeg"></cc-spiner-procesar>

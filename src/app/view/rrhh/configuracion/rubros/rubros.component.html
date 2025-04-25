@@ -1,0 +1,103 @@
+<div class="my-2">
+    
+    <app-button-radio-active [titulo]="fTitle" filtroBoton="btnsConceptos" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
+        <fieldset class="border pb-2 px-2">
+            <legend class="w-auto ml-1 bg-dark">Filtros</legend>
+            <div class="row">
+                <div class="col-10">
+                    <div class="row ml-1 mr-1">
+                        <div class="col">
+                            <app-cc-input-group-prepend label="C&oacute;digo" styleSpan="font-weight-bold">
+                                <input id="filter_codigo" type="text" class="form-control" [(ngModel)]="filter.codigo" placeholder="C&oacute;digo">
+                            </app-cc-input-group-prepend>
+                        </div>
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Descripcion" styleSpan="font-weight-bold">
+                                <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="filter.descripcion" placeholder="Nombre">
+                            </app-cc-input-group-prepend>
+                        </div>
+
+                        <div class="col">
+                            <app-cc-input-group-prepend label="Estado" styleSpan="font-weight-bold">
+                                <!-- <input id="filter_nombre" type="text" class="form-control" [(ngModel)]="filter.descripcion" placeholder="Nombre"> -->
+                                <ng-select class="form-control" [(ngModel)]="filter.estado">
+                                    <ng-option *ngFor="let item of estado" [value]="item.valor">{{item.descripcion}}</ng-option>
+                                </ng-select>
+                            </app-cc-input-group-prepend>
+                        </div>
+                    </div>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-sm ml-2" placement="bottom" ngbTooltip="Buscar" (click)="consultar()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class="row my-2">
+            <div class="col">
+                <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 5%;">Código</th>
+                            <th style="width: 15%;">Descripción</th>
+                            <th style="width: 15%;">% Al Sueldo</th>
+                            <th style="width: 15%;">% Al Ingreso</th>
+                            <th style="width: 15%;">% Al Ingreso LOSEP</th>
+                            <th style="width: 15%;">Aportable</th>
+                            <th style="width: 10%;">Automatico</th>
+                            <th style="width: 10%;">Estado</th>
+                            <th style="width: 10%;">Tipo Rubro</th>
+                            <th style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="conceptosDt">
+                        <ng-container *ngFor="let dt of conceptosDt, let i = index">
+                            <tr>
+                                <td class="text-center">{{dt.rub_codigo}}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.rub_descripcion }}</td>
+                                <td style="max-width: 10px;">{{ dt.porcentaje_al_sueldo }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.porcentaje_al_ingreso }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.porcentaje_al_ingreso_losep }}</td>
+                                <td style="max-width: 10px;" class="text-center">{{ dt.aportable?.cat_nombre }}</td>
+                                <td class="text-center">{{ dt.automatico?.cat_nombre }}</td>
+                                <td class="text-center">{{ dt.estado?.cat_nombre }}</td>
+                                <td class="text-center">{{ dt.tipo_rubro?.cat_nombre }}</td>
+                                <td>
+                                    <div class="text-center mx-auto">
+                                        <button class="btn btn-primary btn-sm mx-1" (click)="showConceptoForm(false, dt)" placement="left" ngbTooltip="Editar concepto">
+                                            <i class="far fa-edit"></i>
+                                        </button>
+                                        <!-- <button *ngIf="dt.estado == 'A'" class="btn btn-danger btn-sm mx-1" (click)="deleteConcepto(dt.id_concepto)" placement="top" ngbTooltip="Eliminar concepto">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button> -->
+                                        <!-- <button *ngIf="dt.estado == 'I'" class="btn btn-info btn-sm mx-1" (click)="restoreArancel(dt.id, i)" placement="top" ngbTooltip="Restaurar arancel">
+                                            <i class="fas fa-undo"></i>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+
+                <mat-paginator
+                    showFirstLastButtons
+                    [length]="paginate.length"
+                    [pageSize]="paginate.perPage"
+                    [pageIndex]="paginate.pageIndex"
+                    [pageSizeOptions]="paginate.pageSizeOptions"
+                    (page)="changePaginate($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-button-radio-active>
+
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spConceptos"></cc-spiner-procesar>

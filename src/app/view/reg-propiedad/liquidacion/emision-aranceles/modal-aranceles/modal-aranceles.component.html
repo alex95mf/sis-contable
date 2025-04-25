@@ -1,0 +1,76 @@
+<div>
+    <app-button-radio-active titulo="Seleccionar Arancel" filtroBoton="btnArancelForm" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <fieldset class="border px-3 pb-2">
+            <legend class="w-auto mb-1">Filtros</legend>
+            <div class="row">
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Código" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="filter.codigo">
+                    </app-cc-input-group-prepend>
+                </div>
+                <div class="col-6">
+                    <app-cc-input-group-prepend label="Descripción" styleSpan="size-span-campo font-weight-bold">
+                        <input type="text" class="form-control" [(ngModel)]="filter.descripcion">
+                    </app-cc-input-group-prepend>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="table-responsive" style="max-height: 450px; overflow-y: scroll;">
+            <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <!-- <th style="width: 4%;">Estado</th> -->
+                        <th style="width: 10%;">Código</th>
+                        <th style="width: 40%;">Descripción</th>
+                        <!-- <th style="width: 10%;">Avalúo</th>
+                        <th style="width: 10%;">Cuantía</th> -->
+                        <th style="width: 20%;">Tipo</th>
+                        <th style="width: 20%;">Documento</th>
+                        <!-- <th style="width: 8%;">Valor</th>
+                        <th style="width: 8%;">Porcentaje</th> -->
+                        <th style="width: 10%;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="arancelesDt">
+                    <ng-container *ngFor="let dt of arancelesDt, let i = index">
+                        <tr>
+                            <!-- <td class="text-center"><i placement="bottom" [ngbTooltip]="dt.estado == 'A' ? 'Activo' : 'Inactivo'" [class]="dt.estado == 'A' ? 'fas fa-circle text-success' : 'fas fa-circle text-danger'"></i></td> Pendiente -->
+                            <td class="text-center">{{ dt.codigo }}</td>
+                            <td>{{ dt.descripcion }}</td>
+                            <!-- <td class="text-center">{{ dt.avaluo ? 'SI' : 'NO' }}</td>
+                            <td class="text-center">{{ dt.cuantia ? 'SI' : 'NO' }}</td> -->
+                            <td class="text-center">{{ dt.tipo.valor }}</td>
+                            <td class="text-center">{{ dt.documento.valor }}</td>
+                            <!-- <td class="text-right">{{ '$ ' + dt.valor }}</td>
+                            <td class="text-right">{{ dt.porcentaje }}</td> -->
+                            <td>
+                                <div class="text-center mx-auto">
+                                    <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(dt)" placement="left" ngbTooltip="Seleccionar arancel">
+                                        <i class="fas fa-hand-pointer"></i>
+                                    </button>
+                                    <!-- <button *ngIf="dt.estado == 'A'" class="btn btn-danger btn-sm ml-1" (click)="deleteArancel(dt.id, i)" placement="top" ngbTooltip="Eliminar arancel">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                    <button *ngIf="dt.estado == 'I'" class="btn btn-info btn-sm ml-1" (click)="restoreArancel(dt.id, i)" placement="top" ngbTooltip="Restaurar arancel">
+                                        <i class="fas fa-undo"></i>
+                                    </button> -->
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <mat-paginator 
+            showFirstLastButtons
+            [length]="paginate.length"
+            [pageSize]="paginate.perPage"
+            [pageSizeOptions]="paginate.pageSizeOptions"
+            (page)="changePaginate($event)"
+            aria-label="Select page">
+        </mat-paginator>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="spAranceles"></cc-spiner-procesar>

@@ -1,0 +1,125 @@
+<div class="my-2">
+    <app-button-radio-active-new [titulo]="fTitle" 
+    cstyle="bg-gradient-primary text-white"
+    
+    icono="fas fa-hand-pointer"
+        filtroBoton="btnsRenConsultaReporte" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
+        <fieldset class="border card-fieldset">
+            <legend class="w-auto card-legend">Filtros</legend>
+            <div class="row m-0">
+                <div class="col-12 col-md-6 pt-0 pb-0">
+
+                    <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
+                        <p-calendar
+                            [readonlyInput]="true" 
+                            view="year" 
+                            dateFormat="yy" 
+                            [(ngModel)]="periodo" 
+                            [showIcon]="true" 
+                            class="ui-calendar ui-calendar-button"
+                            inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                            [inputStyle]="{'height':'30px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
+                        </p-calendar>
+
+                    </app-cc-input-group-prepend>
+
+
+                    
+                </div>
+                <div class="col-12 col-md-6 pt-0 pb-0">
+
+                    <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
+                        <ng-select 
+                        (ngModelChange)="ChangeMesCierrePeriodos($event)"
+                        class="form-control" 
+                        id="elemento_pruebas"
+                        bindLabel="name"
+                        placeholder="-Todos-"
+                        appendTo="body"
+                        [clearable]="false"
+                        [searchable]="true"
+                        [disabled]=disabled
+                        [(ngModel)]="mes_actual">
+                        
+                        <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
+                            {{item.name}}
+                        </ng-option>
+                    </ng-select>
+                    </app-cc-input-group-prepend>
+
+
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row m-0">
+            <div class="col-12">
+               
+                    <div class="row justify-content-center">
+                        <div class="col-12"> 
+
+                          
+                                <section *ngFor="let d of arrayDetalles">
+                                    <div class="row m-0">
+                                        <div class="col-12">
+                                            <fieldset class="border card-fieldset">
+                                                <div class="row text-center justify-content-center">
+                                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                                        <table class="table" style="width: 100%;">
+                                                            <thead>
+                                                                <tr  class="text-center" style="width: 100%;">
+                                                                    <th colspan="3">{{d.nombre_grupo}}</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <thead>
+                                                              <tr>
+                                                                <th scope="col">Clase</th>
+                                                                <th scope="col">Total</th>
+                                                                <th scope="col">Antiguedad</th>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                              <tr *ngFor="let e of d.clases">
+                                                                <td>{{e.clase}}</td>
+                                                                <td>$ {{e.costo_total | number:'1.2-2' }} </td>
+                                                                <td>{{e.antiguedad}}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 pt-0 pb-0">
+                                                        <div class="card-body">
+                                                            <div class="text-center font-weight-bold">{{d.nombre_grupo}}</div>
+                                                            <canvas [id]="d.chart" ></canvas>
+                                                        </div>
+                                                        <!-- <div class="mt-5">
+                                                            <div class="row">
+                                                                <div class="col-sm-3"></div>
+                                                                <div class="col-sm-6"> 
+                                                                   
+                                                                </div>
+                                                                <div class="col-sm-3"></div>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+
+
+
+                                </section>
+                   
+
+
+                        </div>
+                    </div>
+          
+            </div>
+        </div>
+
+
+    </app-button-radio-active-new> 
+    </div>
+    <cc-spiner-procesar [ltexto]="msgSpinner" lTipo="spBienesReporteGestion"></cc-spiner-procesar>

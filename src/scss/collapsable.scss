@@ -1,0 +1,117 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+fieldset,
+img {
+    border: 0;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+    font-style: normal;
+    font-weight: normal;
+}
+
+caption,
+th {
+    text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+q {
+    &:before,
+    &:after {
+        content: "";
+    }
+}
+
+abbr,
+acronym {
+    border: 0;
+}
+
+body {
+    background: #fff;
+}
+
+
+/* optional Container STYLES */
+
+.chart {
+    height: auto;
+    margin: 5px;
+    width: 100%;
+}
+
+.Treant {
+    >.node {
+        padding: 3px;
+        //border: 1px solid #484848;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .collapse-switch {
+        width: 100% !important;
+        height: 100% !important;
+        border: none;
+    }
+    .node.collapsed {
+        border: 1px solid rgba(26, 158, 216, 0.27058823529411763);
+        cursor: pointer;
+        cursor: pointer;
+        .collapse-switch {
+            background: none;
+            width: 100% !important;
+            height: 100% !important;
+        }
+    }
+}

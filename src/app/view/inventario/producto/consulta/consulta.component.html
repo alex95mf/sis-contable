@@ -1,0 +1,1149 @@
+<div class="mt-2">
+    <app-button-radio-active titulo="Listado de productos" filtroBoton="btnsListProduct" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-list">
+        <div class="row">
+            <div class="col-6 ">
+                <div class="row " *ngIf="processing_tree">
+                    <div class="col-12 section-arbol" style="overflow-y: scroll;overflow-x: scroll;">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="input-group input-group-sm mt-3 mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Mostrar
+                                            Inactivos</span>
+                                    </div>
+                                    <input type="checkbox" class="form-control form-control-sm" style="cursor: pointer;" [(ngModel)]="checkAuth" (click)="mostrarInactivos()">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="tree">
+                                    <ejs-treeview id='treeelement' [fields]='field' (nodeSelecting)="onNodeSelecting($event)" style="font-family: 'Poppins1', sans-serif;">
+                                    </ejs-treeview>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-12 section-information" style="overflow-y: scroll;overflow-x: scroll;">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row justify-content-center" *ngIf="(activateSecGroup || activateSecProduct)">
+                                    <div class="col-12 title-information">
+                                        <span>Información del {{title}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12" *ngIf="activateSecGroup">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-0 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm " id="idnameG" [(ngModel)]="nameGroup" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-1">
+                                        <div class="input-group input-group-sm mt-0 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Clase</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm " id="idClaseG" [(ngModel)]="claseGroup" [disabled]="permisions[0].editar == '0' || !disabledProduct">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 mt-1">
+                                        <div class="input-group input-group-sm mt-0 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Código</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm " id="idCodigoG" [(ngModel)]="codigoGroup" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nivel</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm " id="idlevelG" [(ngModel)]="levelGroup" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Estado</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm " id="idEstadoG" [(ngModel)]="statusGroup" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-1">
+                                        <div class="input-group input-group-sm mt-0 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Fecha
+                                                    de creación</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm " id="idDateG" [(ngModel)]="dateGroup" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12" *ngIf="activateSecProduct && informationProduct.clase == 'Productos'">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idnameP" [(ngModel)]="nameProduct" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Stock</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idStockP" style="background-color: #404A63;color: white !important;font-weight: unset !important;" [(ngModel)]="stock" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Pvp</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idPVPP" style="background-color: #404A63;color: white !important;font-weight: unset !important;" [(ngModel)]="pvp" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Marca</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idMarcaP" [(ngModel)]="marca" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Modelo</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idModeloP" [(ngModel)]="modelo" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Color</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idColorP" [(ngModel)]="color" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Clase</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idClaseP" [(ngModel)]="claseProduct" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Número
+                                                    de parte</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idNumPP" [(ngModel)]="num_parte" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Código
+                                                    del producto</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idCodeProd" [(ngModel)]="codigo_producto" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Aplica
+                                                    descuento</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idDescuentoP" [(ngModel)]="descuento" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tasa de
+                                                    descuento</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idTasaP" [(ngModel)]="tasaDes" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
+                                                    transito Local</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idTLP" [(ngModel)]="inTransitoL" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
+                                                    Importación</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idIMP" [(ngModel)]="inImportacion" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
+                                                    Producción</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idEPP" [(ngModel)]="inProduction" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre
+                                                    Genérico</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idGeneP" [(ngModel)]="generico" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Stock
+                                                    sugerido</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idStSugeP" [(ngModel)]="stockSugerido" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bajo en
+                                                    Stock</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idBajSt" [(ngModel)]="bajoStock" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo
+                                                    Formula</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idItinerisioP" [(ngModel)]="itinerario" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12" *ngIf="activateSecProduct && informationProduct.clase == 'Servicios'">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Nombre</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idnameP" [(ngModel)]="nameProduct" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Pvp</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idPVPP" style="background-color: #404A63;color: white !important;font-weight: unset !important;" [(ngModel)]="pvp" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Clase</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idClaseP" [(ngModel)]="claseProduct" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Código
+                                                    del producto</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idCodeProd" [(ngModel)]="codigo_producto" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Aplica
+                                                    descuento</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idDescuentoP" [(ngModel)]="descuento" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tasa de
+                                                    descuento</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idTasaP" [(ngModel)]="tasaDes" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
+                                                    transito Local</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idTLP" [(ngModel)]="inTransitoL" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
+                                                    Importación</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idIMP" [(ngModel)]="inImportacion" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">En
+                                                    Producción</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idEPP" [(ngModel)]="inProduction" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Stock
+                                                    sugerido</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idStSugeP" [(ngModel)]="stockSugerido" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Bajo en
+                                                    stock</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idBajSt" [(ngModel)]="bajoStock" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group input-group-sm mt-1 classColor">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text size-span-campo" id="inputGroup-sizing-sm">Tipo
+                                                    Formula</span>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" id="idItinerisioP" [(ngModel)]="itinerario" [disabled]="!disabledProduct">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+<cc-spiner-procesar [ltexto]="mensajeSppiner" lfulScren=true lTipo="spListProduct"></cc-spiner-procesar>
+
+
+<div [hidden]="true" id="print-section-group" media="print">
+    <div class="row justify-content-center  prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-5 text-center mt-4">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{dataUser.logoEmpresa}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7 text-center mt-4">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Inventario</h3>
+                                <p>Información del {{title}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-4 pl-2 pr-2">
+            <div class="row justify-content-center" *ngIf="informationProduct != undefined">
+                <div class="col-md-12 text-center">
+                    <table class="table no-footer table-hover">
+                        <thead style="width: 100%;">
+                            <tr>
+                                <th style="width: 25%;">Nombre</th>
+                                <th style="width: 25%;">Clase</th>
+                                <th style="width: 25%;">Estado</th>
+                                <th style="width: 25%;">Fecha Emisisón</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{nameGroup}}</td>
+                                <td>{{claseGroup}}</td>
+                                <td>{{statusGroup}}</td>
+                                <td>{{informationProduct.created_at}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="font-family: 'Poppins1';">
+                <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+                    <span style="color: #13A1EA;">
+                        Fecha: {{fecha}}&nbsp;{{hora}}</span>
+                </div>
+                <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+                    <span style="color: #13A1EA;">
+                        Usuario: {{dataUser.nombre}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-12" [hidden]="true" id="print-section" media="print">
+
+    <div class="row justify-content-center prt-comprobante">
+        <div class="col-11 pl-2 pr-2 ">
+            <div class="row justify-content-center">
+                <div class="col-5 text-center mt-4">
+                    <div class="sect-one pt-3 pb-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-4">
+                                <img src="{{dataUser.logoEmpresa}}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7 text-center mt-4">
+                    <div class="sect-two pt-3 pb-2">
+                        <div class="row justify-content-center">
+                            <div class="col-12 mt-4" style="font-size: 20px;font-weight: bold">
+                                <h3>Inventario</h3>
+                                <p>Información del {{title}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 mt-2 pl-2 pr-2">
+            <div class="row justify-content-center mt-5" *ngIf="permisions != undefined ">
+                <div class="col-md-12">
+                    <div class="container-fluid container-principal">
+                        <div class="row justify-content-center" *ngIf="informationProduct != undefined">
+                            <div class="col-6">
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;font-size: 16px;">
+                                        <label class="l">Nombre</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{nameProduct}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Clase</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{claseProduct}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Nombre Genérico</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{generico}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Número de parte</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{num_parte}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">PVP.</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{pvp}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Código del producto</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{codigo_producto}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Stock</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{stock}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Stock sugerido</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{stockSugerido}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Unidad Medida Compra</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.UDMCompra}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Unidad Medida Venta</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.UDMVenta}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Código barra</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.codigoBarr}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Costo anterior</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.costoAnterior}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Costo</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.costo}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Cuenta costo</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.cuentaCostos}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Cuenta descuento</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.cuentaDescuentos}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Cuenta devoluciones</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.cuentaDevoluciones}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Cuenta perdida</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.cuentaPerdida}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Cuenta ventas</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.cuentaVentas}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Deducible IR</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.deducibleIR}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">En Producción</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.enProduccion}}</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">En Importación</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.enImportacion}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">En Transito Local</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.enTransitoLocal}}</label>
+                                    </div>
+                                </div>
+
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">En venta</label>
+                                    </div>
+                                    <div class="col-11 " *ngIf="informationProduct.enVenta == 1 ">
+                                        <label for=""> Si </label>
+                                    </div>
+                                    <div class="col-11 " *ngIf="informationProduct.enVenta == 0">
+                                        <label for=""> No </label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Máximo stock</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.maxStock}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Mínimo stock</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.minStock}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Metodo de costo</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.metodoCosto}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Bajo en stock</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{bajoStock}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Tipo formula</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{itinerario}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Marca</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{marca}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Modelo</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{modelo}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Marca</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{color}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Aplica descuento</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{descuento}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Tasa de descuento</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{tasaDes}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Precio 1</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.precio1}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Precio 2</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.precio2}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Precio 3</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.precio3}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Precio 4</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.precio4}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Precio 5</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.precio5}}</label>
+                                    </div>
+                                </div>
+                                <div class="row con-data justify-content-center">
+                                    <div class="col-11 lbel" style="font-weight: 700;">
+                                        <label class="l">Fecha de creación</label>
+                                    </div>
+                                    <div class="col-11 ">
+                                        <label for="">{{informationProduct.created_at}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="font-family: 'Poppins1';" *ngIf="dataUser != undefined">
+                <div class="col-12 text-left" style="position: fixed;  bottom: 0px; ">
+                    <span style="color: #13A1EA;">
+                        Fecha: {{fecha}}&nbsp;{{hora}}</span>
+                </div>
+                <div class="col-12 text-left" style="position: fixed;  bottom: 20px; ">
+                    <span style="color: #13A1EA;">
+                        Usuario: {{dataUser.nombre}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--     <div class="row">
+        <div class="col-6">
+            <span>{{fecha}}</span>
+        </div>
+        <div class="col-6 text-right">
+            <span>{{hora}}</span>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 title-information text-center" style="font-weight: 700;margin-top: 20px;margin-bottom: 30px;color: #13A1EA;">
+            <h2>Información del {{title}}</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 content-info" *ngIf="permisions != undefined ">
+            <div class="container-fluid container-principal">
+                <div class="row justify-content-center" *ngIf="informationProduct != undefined">
+                    <div class="col-6">
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;font-size: 16px;">
+                                <label class="l">Nombre</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{nameProduct}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Clase</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{claseProduct}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Nombre Genérico</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{generico}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Número de parte</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{num_parte}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">PVP.</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{pvp}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Código del producto</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{codigo_producto}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Stock</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{stock}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Stock sugerido</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{stockSugerido}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Unidad Medida Compra</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.UDMCompra}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Unidad Medida Venta</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.UDMVenta}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Código barra</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.codigoBarr}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Costo anterior</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.costoAnterior}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Costo</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.costo}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Cuenta costo</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.cuentaCostos}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Cuenta descuento</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.cuentaDescuentos}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Cuenta devoluciones</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.cuentaDevoluciones}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Cuenta perdida</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.cuentaPerdida}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Cuenta ventas</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.cuentaVentas}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Deducible IR</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.deducibleIR}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">En Producción</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.enProduccion}}</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">En Importación</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.enImportacion}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">En Transito Local</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.enTransitoLocal}}</label>
+                            </div>
+                        </div>
+
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">En venta</label>
+                            </div>
+                            <div class="col-11 " *ngIf="informationProduct.enVenta == 1 ">
+                                <label for=""> Si </label>
+                            </div>
+                            <div class="col-11 " *ngIf="informationProduct.enVenta == 0">
+                                <label for=""> No </label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Máximo stock</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.maxStock}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Mínimo stock</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.minStock}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Metodo de costo</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.metodoCosto}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Bajo en stock</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{bajoStock}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Tipo formula</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{itinerario}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Marca</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{marca}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Modelo</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{modelo}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Marca</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{color}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Aplica descuento</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{descuento}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Tasa de descuento</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{tasaDes}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Precio 1</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.precio1}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Precio 2</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.precio2}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Precio 3</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.precio3}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Precio 4</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.precio4}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Precio 5</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.precio5}}</label>
+                            </div>
+                        </div>
+                        <div class="row con-data justify-content-center">
+                            <div class="col-11 lbel" style="font-weight: 700;">
+                                <label class="l">Fecha de creación</label>
+                            </div>
+                            <div class="col-11 ">
+                                <label for="">{{informationProduct.created_at}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

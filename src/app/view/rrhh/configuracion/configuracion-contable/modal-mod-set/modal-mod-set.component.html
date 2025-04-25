@@ -1,0 +1,64 @@
+<app-button-radio-active [titulo]="isNew ? 'Nuevo Rubro' : 'Editar Rubro'" filtroBoton="btnConceptoForm"
+  cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
+  [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
+  <fieldset class="border pb-2 px-2">
+    <legend class="w-auto ml-1 bg-dark">Cuentas</legend>
+    <div class="row">
+      <div class="col-sm-5"><!-- Inversión  -->
+        <app-cc-input-group-prepend label="Cuenta Debe" styleSpan="size-span-rubros font-weight-bold"
+          style="width: 220px;">
+          <input type="text" class="form-control" readonly [(ngModel)]="rubro.cuentaInvDeb" placeholder="Cuenta Deudora"
+            maxlength="15">
+          <button class="btn btn-primary btn-sm" (click)="modalCuentaContable('1')" [readonly]="deudora">
+            Consultar</button>
+            <button class="btn btn-secondary btn-sm" (click)="rubro.cuentaInvDeb = null; rubro.numcInvDeb = null;"> <i class="fas fa-eraser"></i> </button>
+        </app-cc-input-group-prepend>
+
+      </div>
+      <div class="col-sm-7"><!-- Inversión  -->
+        <app-cc-input-group-prepend label="Nombre Debe" styleSpan="size-span-rubros font-weight-bold"
+          style="width: 220px;">
+          <input class="form-control" [(ngModel)]="rubro.numcInvDeb" type="text" readonly />  
+        </app-cc-input-group-prepend>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-5"><!-- Inversión  -->
+        <app-cc-input-group-prepend label="Cuenta Presupuesta Debe"
+          styleSpan="size-span-rubros font-weight-bold" style="width: 220px;">
+          <input type="text" class="form-control" readonly [(ngModel)]="rubro.cuentaPresupuestoInvDeb"
+            placeholder="C&oacute;digo Presupuesto" maxlength="15">
+          <button class="btn btn-primary btn-sm" (click)="modalCodigoPresupuesto('p1')" [readonly]="presupuesto">
+            Consultar</button>
+            <button class="btn btn-secondary btn-sm" (click)="rubro.cuentaPresupuestoInvDeb = null; rubro.numpcInvDeb = null;"> <i class="fas fa-eraser"></i> </button>
+        </app-cc-input-group-prepend>
+      </div>
+      <div class="col-sm-7"><!-- Inversión  -->
+        <app-cc-input-group-prepend label="Nombre presupuesto Debe"
+          styleSpan="size-span-rubros font-weight-bold" style="width: 220px;">
+          <input class="form-control" [(ngModel)]="rubro.numpcInvDeb" type="text" readonly />
+        </app-cc-input-group-prepend>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-5"><!-- Inversión  -->
+        <app-cc-input-group-prepend label="Cuenta Haber" styleSpan="size-span-rubros font-weight-bold"
+          style="width: 220px;">
+          <input type="text" class="form-control" readonly [(ngModel)]="rubro.cuentaInvHab"
+            placeholder="Cuenta Acreedora" maxlength="15">
+          <button class="btn btn-primary btn-sm" (click)="modalCuentaContableReg('4')" [readonly]="acreedora">
+            Consultar</button>
+            <button class="btn btn-secondary btn-sm" (click)="rubro.cuentaInvHab = null; rubro.numcInvHab = null;"> <i class="fas fa-eraser"></i> </button>
+        </app-cc-input-group-prepend>
+      </div>
+      <div class="col-sm-7"><!-- Inversión  -->
+        <app-cc-input-group-prepend label="Nombre Haber" styleSpan="size-span-rubros font-weight-bold"
+          style="width: 220px;">
+          <input class="form-control" [(ngModel)]="rubro.numcInvHab" type="text" readonly />
+        </app-cc-input-group-prepend>
+      </div>
+    </div>
+  </fieldset>
+</app-button-radio-active>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="conceptoForm"></cc-spiner-procesar>

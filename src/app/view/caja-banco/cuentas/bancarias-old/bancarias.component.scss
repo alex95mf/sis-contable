@@ -1,0 +1,209 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
+
+@font-face 
+{
+    font-family: "Poppins1";
+    src: url('../../../../../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face 
+{
+    font-family: "PoppinsTourney";
+    src: url("../../../../../assets/fonts/Tourney-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+label,
+input,
+select,
+/* span, */
+button 
+{
+    font-family: "Poppins1" !important;
+    box-shadow: unset !important;
+    outline: unset !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button 
+    {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+    input[type=number] { -moz-appearance:textfield; }
+
+.title-cab
+{
+    font-family: "PoppinsTourney" !important;
+    background-color: #014da3e6;;
+    color: white;
+    height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 23px;
+    padding-top: 5px;
+    letter-spacing: 5px;
+}
+
+.num_aut
+{
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.container-filter 
+{
+    label,
+    input,
+    select,
+    span,
+    button 
+    {
+        font-family: "Poppins1" !important;
+        box-shadow: unset !important;
+        outline: unset !important;
+    }
+}
+
+.title 
+{
+    font-family: "Poppins1" !important;
+    color: blue;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    span 
+    {
+        margin-left: 20px;
+    }
+}
+
+
+.botones-section 
+{
+    margin-top: 30px;
+    text-align: center;
+    button 
+    {
+        text-transform: uppercase;
+        font-family: "Poppins1" !important;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 180px;
+        box-shadow: unset;
+        outline: unset;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.btn-add 
+{
+    text-align: right;
+    //margin-bottom: 10px;
+    button 
+    {
+        box-shadow: unset !important;
+        outline: unset !important;
+    }
+}
+
+textarea 
+{
+    font-family: "Poppins1" !important;
+    outline: unset !important;
+    box-shadow: unset !important;
+
+}
+
+
+textarea,
+input,
+span,
+label,
+select,
+ng-select
+{
+    font-size: 11px !important;
+}
+
+span{
+    font-weight: bold;
+}
+
+.button_margin 
+{
+    margin-left: 0.25rem !important;
+    border-radius: 0.25rem !important;
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+    border-bottom-left-radius: 0.25rem !important;
+}
+
+
+.filters 
+{
+background-color: white;
+    table 
+    {
+        thead 
+        {
+            tr 
+            {
+                th 
+                {
+                    padding: 6px 0px 8px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #404a63;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 9px;
+                }
+            }
+        }
+        tbody 
+        {
+            tr 
+            {
+                td 
+                {
+                    padding: 5px 10px 5px 10px;
+                    box-shadow: 0 0 0 5px white !important;
+                    background-color: #aeabab38;
+                    color: rgba(0, 0, 0, 0.644);
+                    font-weight: unset;
+                    border: none !important;
+                    font-size: 11px;
+                    
+                    textarea,
+                    input 
+                    {
+                        width: 100%;
+                        //text-align: center;
+                        padding-left: 2px;
+                        margin-top: 5px !important;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                    ng-select
+                    {
+                        margin-top: 5px !important;
+                        font-size: 11px !important;
+                    }
+                    button 
+                    {
+                        margin-top: 5px !important;
+                        padding: 2px 8px 2px 8px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+/* Estilo específico para el componente app-cc-input-group-prepend */
+.custom-input {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 0.375rem 0.75rem;
+    height: calc(1.5em + 0.75rem + 2px);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.custom-input i {
+    margin-right: 5px;
+}
+
+.custom-input .fa-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.custom-input .text-success {
+    background-color: #28a745;
+}
+
+.custom-input .text-danger {
+    background-color: #dc3545;
+}

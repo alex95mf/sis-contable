@@ -1,0 +1,92 @@
+<div class="">
+    <app-button-radio-active titulo="Ver detalles del producto" filtroBoton="btnDetProduct" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
+        <div class="row">
+            <div class="col-12">
+                <fieldset class="border py-1 px-1 my-1">
+                    <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold">Detalles</legend>
+                    <div class="row ml-1 mr-1">
+                        <div class="col-12">
+                            
+                            <!-- <div class="row">
+                                <div class="col-4">
+                                    <app-cc-input-group-prepend label="Tipo Bien" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_nombre" type="text" class="form-control" [disabled]="true" [(ngModel)]="listaProductos_filter.descripcion">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-4">
+                                    <app-cc-input-group-prepend label="Grupos" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_grupo" type="text" class="form-control" [disabled]="true" [(ngModel)]="listaProductos_filter.descripcion">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-4">
+                                    <app-cc-input-group-prepend label="Sub Grupo" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_sub_grupo" type="text" class="form-control" [disabled]="true" [(ngModel)]="listaProductos_filter.descripcion">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                
+                                
+                            </div> -->
+                            <div class="row">
+                                <div class="col-4">
+                                    <app-cc-input-group-prepend label="Nombre" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_nombre" type="text" class="form-control" [disabled]="true" [(ngModel)]="producto.nombre">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-4">
+                                    <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_tipo" type="text" class="form-control" [disabled]="true" [(ngModel)]="producto.tipo">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-4">
+                                    <app-cc-input-group-prepend label="Clase" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_clase" type="text" class="form-control" [disabled]="true" [(ngModel)]="producto.clase">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <app-cc-input-group-prepend label="Codigo Producto" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_codigoProducto" type="text" class="form-control" [disabled]="true" [(ngModel)]="producto.codigoproducto">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-4">
+                                    <app-cc-input-group-prepend label="Codigo Barra" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_codigoBarra" type="text" class="form-control" [disabled]="true" [(ngModel)]="producto.codigobarra">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-4">
+                                    <app-cc-input-group-prepend label="Marca" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_marca" type="text" class="form-control" [disabled]="true" [(ngModel)]="producto.marca">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                   <app-cc-input-group-prepend label="Modelo" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_modelo" type="text" class="form-control" [disabled]="true" [(ngModel)]="producto.modelo">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-4">
+                                    <app-cc-input-group-prepend label="Color" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_color" type="text" class="form-control" [disabled]="true" [(ngModel)]="producto.color">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                <div class="col-4">
+                                    <app-cc-input-group-prepend label="Codigo Bien" styleSpan="size-span-campo font-weight-bold">
+                                        <input id="filter_codigoBienes" type="text" class="form-control" [disabled]="true" [(ngModel)]="producto.codigobienes">
+                                    </app-cc-input-group-prepend>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </app-button-radio-active>
+</div>
+
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>
+

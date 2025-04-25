@@ -1,0 +1,126 @@
+<!-- <app-button-radio-active [titulo]="fTitle" cstyle="bg-gradient-primary text-white" icono="fas fa-box-open" [groupButton]="vmButtons" filtroBoton="btnsActivosModal" (onMetodoGlobal)="metodoGlobal($event)">
+    <div class="row my-2">
+        <div class="col-3 ml-1">
+            
+            <div class="input-group input-group-sm">
+                <button class="btn btn-sm btn-success" (click)="agregaActivos()"><i class="fas fa-plus"></i></button>
+                <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Periodo</span></div>
+                <input type="number" class="form-control" placeholder="Periodo" [(ngModel)]="periodo">
+            </div>
+        </div>
+        
+
+    </div>
+</app-button-radio-active> -->
+<div class="row my-2">
+    <div class="col-3 ml-1">
+        
+        <div class="input-group input-group-sm">
+            <button class="btn btn-sm btn-success" (click)="agregaActivos()"><i class="fas fa-plus"></i></button>
+            <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Periodo</span></div>
+            <input type="number" class="form-control" placeholder="Periodo" [(ngModel)]="periodo">
+        </div>
+    </div>
+
+    <div class = "col-8 text-right ">
+        <button class="btn btn-sm btn-success" (click)="validarActivos()"><i class="fas fa-save"></i> Guardar</button>
+    </div>
+    
+
+</div>
+<div class="container-fluid">
+    <div class="row my-2">
+        <div class="col-12 table-responsive" style="overflow-y: scroll;">
+            <!-- <div class="table-responsive" style="height: 250px;"> -->
+                <table class="table table-striped" style="min-width: 1800px; ">
+                    <thead class="thead-dark text-center">
+                        <tr>
+                            <th>Periodos</th>
+                            <th>Fecha declaracion</th>
+                            <th>Tipo</th>
+                            <th>Original/sustitutiva</th>
+                            <th>Observacion</th>
+                            <th>Activos</th>
+                            <th>Pasivos corrientes</th>
+                            <th>Pasivos contingentes</th>
+                            <th>Pasivos totales</th>
+                            <th>Patrimonio</th>
+                            <th>Ingresos</th>
+                            <th>Egresos</th>
+                            <th>Resultado</th>
+                            <th>Acciones</th>
+                        </tr>                
+                    </thead>
+                    <tbody>                        
+                        <tr *ngFor="let item of listaActivos, let i = index" >
+                            <td class="text-center">{{item.periodo}}</td>
+                            <td class="text-center">
+                                <input class="form-control form-control-sm" type="date" [(ngModel)]="item.fecha" [disabled]="item.variable_declara"/>
+                            </td>
+                            <td class="text-center" >
+                                <ng-select class="form-control" [(ngModel)]="item.tipo" (ngModelChange)="cambioTipo($event, item)" appendTo="body">
+                                    <ng-option [value]="0" disabled>Escoga un tipo... </ng-option>
+                                    <ng-option *ngFor="let e of tipo_e" [value]="e" >{{e}}</ng-option>
+                                </ng-select>
+                            </td>
+                            <td class="text-center">
+                                <ng-select class="form-control" [(ngModel)]="item.declarativa"  [disabled]="item.variable_declara" appendTo="body">
+                                    <ng-option [value]="0" disabled>Escoga un tipo... </ng-option>
+                                    <ng-option *ngFor="let c of declara_e" [value]="c">{{c}}</ng-option>
+                                </ng-select>
+                            </td>
+                            <td class="text-center"><input type="text" class="form-control form-control-sm" [(ngModel)]="item.observacion"/></td>
+                            <td class="text-center" style="width: 150px;">
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.activos" (blur)="handleActivo(item)" [disabled]="item.variable">
+                            </td>
+                            <td class="text-center" style="width: 150px;">
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.pasivos_corrientes" [disabled]="item.variable">
+                            </td>
+                            <td class="text-center" style="width: 150px;">
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.pasivos_contingentes" [disabled]="item.variable">
+                            </td>
+                            <td class="text-center" style="width: 150px;">
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.pasivos" (blur)="handlePasivo(item)" [disabled]="item.variable"> 
+                            </td>
+                            <td class="text-center" *ngIf="!item.variable">
+                                <!-- <input readonly type="number" class="form-control form-control-sm"  [(ngModel)]="item.patrimonio"> -->
+                                $ {{item.patrimonio | number: '1.2-2'}}
+                            </td>
+                            <td class="text-center" *ngIf="item.variable" style="width: 150px;">
+                                <input currencyMask class="form-control form-control-sm"  [(ngModel)]="item.patrimonio">
+                                <!-- $ {{item.patrimonio | number: '1.2-2'}} -->
+                            </td>
+                            <td class="text-center" style="width: 150px;">
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.ingresos"  (blur)="handleEgreso(item)" [disabled]="item.variable">
+                            </td> 
+                            <!-- (keyup)="handleIngreso(item)" -->
+                            <td class="text-center" style="width: 150px;">
+                                <input currencyMask class="form-control form-control-sm" [(ngModel)]="item.egresos" (blur)="handleEgreso(item)" [disabled]="item.variable">
+                            </td>
+                            <td class="text-center" style="width: 150px;">
+                                <!-- <input type="number" class="form-control form-control-sm"  [(ngModel)]="item.resultado" readonly> -->
+                                $ {{item.resultado | number: '1.2-2'}}
+                            </td>
+                            <td>
+                                <div class="text-center mx-auto" style="width: 150px;">
+                                    <button class="btn btn-danger btn-sm mx-1" (click)="eliminar(item, i)" matTooltip="Eliminar registro">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-warning" (click)="modalActivosCiudad(item)" matTooltip="Registro de valores de activos" >
+                                        <i class="fad fa-edit"></i>
+                                      </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="listaActivos.length<=0" class="text-center">
+                            <td colspan="12" class="text-center">
+                                <h6>No hay datos.</h6>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>                
+            <!-- </div> -->
+        </div>
+    </div>
+</div>
+<cc-spiner-procesar [ltexto]="msgSpinner" lfulScren=true lTipo="renActivosModal"></cc-spiner-procesar>
