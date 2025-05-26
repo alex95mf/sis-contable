@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-// import {DefaultServices} from './containers/default-layout/default-layout.services';
-// import { CookieService } from "ngx-cookie-service";
+import { filter } from 'rxjs/operators';
 
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
@@ -11,19 +10,22 @@ import { Settings } from './app.settings.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public settings: Settings;
-  constructor(private router: Router, /*private defaultServices:DefaultServices,private cookies: CookieService,*/
-    public appSettings:AppSettings) { 
-    this.settings = this.appSettings.settings;
-  } 
 
-  ngOnInit() {
-    // this.router.events.subscribe((evt) => {
-    //   if (!(evt instanceof NavigationEnd)) {
-    //     return;
-    //   }
-    //   window.scrollTo(0, 0);
-    // });
+  constructor(
+    private router: Router,
+    public appSettings: AppSettings
+  ) {
+    this.settings = this.appSettings.settings;
+  }
+
+  ngOnInit(): void {
+    // Scroll to top on route change (descomentado y mejorado)
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        window.scrollTo(0, 0);
+      });
   }
 }
