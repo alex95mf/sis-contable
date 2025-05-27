@@ -5,7 +5,7 @@ import { IngresoBodegaService } from '../ingreso-bodega.service';
 import { CurrencyMaskInputMode } from 'ngx-currency';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { ProductoDetalle } from './IProductoDetalles';
 
 @Component({

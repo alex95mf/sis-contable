@@ -4,7 +4,7 @@ import { CierreMesService } from 'src/app/view/presupuesto/configuracion/cierre-
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { ToastrService } from 'ngx-toastr';
-import moment from 'moment';
+import { format } from 'date-fns';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
 @Component({

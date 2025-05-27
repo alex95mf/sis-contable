@@ -5,7 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import Botonera from 'src/app/models/IBotonera';
 import { ConceptosService } from '../conceptos.service';
 import Swal from 'sweetalert2';
-import moment from 'moment';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-modal-meses-interes',

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IReclamo } from './IReclamos';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { ProductoService } from '../producto.service';
 import { ToastrService } from 'ngx-toastr';
 

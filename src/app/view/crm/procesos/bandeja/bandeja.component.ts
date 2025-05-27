@@ -2,7 +2,7 @@
 
 
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { ToastrService } from 'ngx-toastr';
 import { MatPaginator } from '@angular/material/paginator';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

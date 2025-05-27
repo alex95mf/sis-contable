@@ -6,7 +6,7 @@ import { AprobacionService } from '../aprobacion.service';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ToastrService } from 'ngx-toastr';
-import moment from 'moment';
+import { format } from 'date-fns';
 @Component({
   selector: 'app-aprobacion-compra-publica',
   templateUrl: './aprobacion-compra-publica.component.html',

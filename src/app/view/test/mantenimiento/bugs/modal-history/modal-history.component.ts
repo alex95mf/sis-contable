@@ -3,11 +3,25 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { BugsServiceService } from '../bugs-service.service';
 import { ToastrService } from 'ngx-toastr';
-import moment from 'moment';
+import { format } from 'date-fns';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ButtonRadioActiveComponent } from 'src/app/config/custom/cc-panel-buttons/button-radio-active.component';
+import { CcInputGroupPrepend } from 'src/app/config/custom/cc-input-group-prepend.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-modal-history',
+  standalone: true,
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    CcSpinerProcesarComponent,
+    ButtonRadioActiveComponent,  
+    CcInputGroupPrepend,  
+    NgSelectModule          
+  ],
   templateUrl: './modal-history.component.html',
   styleUrls: ['./modal-history.component.scss']
 })
@@ -32,7 +46,7 @@ export class ModalHistoryComponent implements OnInit {
     fk_test_bugs: 0,
     
   
-    fecha: moment().format('YYYY-MM-DD'),
+    fecha: format(new Date(), 'yyyy-MM-dd'),
     estado_history: "",
     observacion: "",
     costo: 0,

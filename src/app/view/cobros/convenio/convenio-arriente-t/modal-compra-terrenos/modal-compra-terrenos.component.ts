@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { ConvenioArrienteTService } from '../convenio-arriente-t.service';

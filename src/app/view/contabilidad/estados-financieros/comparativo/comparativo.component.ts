@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ComparativoService } from './comparativo.service';
 import Botonera from 'src/app/models/IBotonera';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 import { PrimeNGConfig } from 'primeng/api';
 

@@ -8,7 +8,7 @@ import { SolicitudService } from './solicitud.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from 'src/app/global';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';

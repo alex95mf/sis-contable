@@ -1,5 +1,5 @@
 import { Component, OnInit ,Input,ViewChild} from '@angular/core';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as myVarGlobals from '../../../../global';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';

@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
-import moment from 'moment';
+import { format } from 'date-fns';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { FormularioNotificacionesService } from './formulario-notificaciones.service';
 import { Subject } from 'rxjs';

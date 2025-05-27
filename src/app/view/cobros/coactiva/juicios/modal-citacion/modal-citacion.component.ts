@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { ToastrService } from 'ngx-toastr';
 
 import { CommonVarService } from 'src/app/services/common-var.services';

@@ -1,13 +1,31 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BugsServiceService } from './bugs-service.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
-import { MatPaginator } from '@angular/material/paginator';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ButtonRadioActiveComponent } from 'src/app/config/custom/cc-panel-buttons/button-radio-active.component';
+import { CcInputGroupPrepend } from 'src/app/config/custom/cc-input-group-prepend.component';
+import { BugsServiceService } from './bugs-service.service';
 import { ModelDetallesComponent } from './model-detalles/model-detalles.component';
 import { ModalHistoryComponent } from './modal-history/modal-history.component';
 
 @Component({
   selector: 'app-bugs',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatPaginatorModule,
+    NgSelectModule,
+    NgbModule,
+    NgxCurrencyDirective,
+    CcSpinerProcesarComponent,
+    ButtonRadioActiveComponent,
+    CcInputGroupPrepend
+  ],
   templateUrl: './bugs.component.html',
   styleUrls: ['./bugs.component.scss']
 })

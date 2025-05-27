@@ -14,7 +14,7 @@
             <app-cc-input-group-prepend label="Tipo de Identificacion" styleSpan="size-span-print font-weight-bold">
                 <ng-select [items]="cmb_tipo_identificacion" 
                     bindValue="valor"
-                    bindLabel="valor" [(ngMode)]="filter.tipo_documento"
+                    bindLabel="valor" [(ngModel )]="filter.tipo_documento"
                     class="form-control"></ng-select>
 
             </app-cc-input-group-prepend>
@@ -35,19 +35,19 @@
     <div class="row">
         <div class="col-4">
             <app-cc-input-group-prepend label="Costo Desde" styleSpan="size-span-print font-weight-bold">
-                <input currencyMask class="form-control" [(ngModel)]="filter.costo_desde">
+                <input currencyMask class="form-control" [(ngModel l)]="filter.costo_desde">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-4">
             <app-cc-input-group-prepend label="Costo Hasta" styleSpan="size-span-print font-weight-bold">
-                <input currencyMask class="form-control" [(ngModel)]="filter.costo_hasta">
+                <input currencyMask class="form-control" [(ngModel l)]="filter.costo_hasta">
             </app-cc-input-group-prepend>
         </div>
         <div class="col-4">
         
             <app-cc-input-group-prepend label="Estado Bug" styleSpan="size-span-print font-weight-bold">
                 <ng-select [items]="lstestados" bindValue="estado" bindLabel="estado"
-                [(ngModel)]="filter.estado"
+                [(ngModel l)]="filter.estado"
                     class="form-control"></ng-select>
         
             </app-cc-input-group-prepend>

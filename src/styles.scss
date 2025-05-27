@@ -5,11 +5,11 @@
 
 // indigo-pink, deeppurple-amber, purple-green and pink-bluegrey.
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
- 
+
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import "../node_modules/dragula/dist/dragula.min.css";
 @import "../node_modules/@swimlane/ngx-datatable/themes/material.css";
-@import "../node_modules/@swimlane/ngx-datatable/assets/icons.css"; 
+@import "../node_modules/@swimlane/ngx-datatable/assets/icons.css";
 @import "../node_modules/leaflet/dist/leaflet.css";
 
 @import "app/theme/styles/base";
@@ -19,7 +19,11 @@
 @import "app/theme/styles/gradients";
 @import "app/theme/styles/rtl";
 
+@import 'primeng/resources/themes/lara-light-blue/theme.css';
+@import 'primeng/resources/primeng.min.css';
+@import 'primeicons/primeicons.css';
 
+@import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -32,7 +36,7 @@
     font-size: 13px;*/
     text-align: left;
   }
-  .ng-select.custom .ng-select-container  {            
+  .ng-select.custom .ng-select-container  {
     /*min-height: 36px;*/
     min-height: unset;
     /*font-size: 10px;*/
@@ -40,7 +44,7 @@
   }
   .form-control.ng-select {
     border: 0;
-    //padding: 0;    
+    //padding: 0;
     position: relative;
   }
   .ng-select.custom .ng-dropdown-panel {
@@ -72,7 +76,7 @@
   .ng-select.custom .ng-clear-wrapper .ng-clear {
     line-height: inherit;
   }
-  
+
   /**************** Componente sm *************************/
   .ng-select.custom-sm {
     width: 52%;
@@ -82,31 +86,31 @@
     font-size: 5px;
     text-align: left;
   }
-  .ng-select.custom-sm .ng-select-container  {            
+  .ng-select.custom-sm .ng-select-container  {
     min-height: 30px;
     border-radius: 0;
     font-size: 11px;
   }
   .form-control-sm.ng-select {
     border: 0;
-    padding: 0;    
+    padding: 0;
     position: relative;
   }
 
- .size-span-campo{ 
-    width: 155px; 
+ .size-span-campo{
+    width: 155px;
 }
 
 .size-span-small .input-group .input-group-prepend {
   flex: 0.3!important;
 }
 
-.size-span-print{ 
-    width: 115px; 
+.size-span-print{
+    width: 115px;
 }
 
-.size-span-otro{ 
-  width: 90px; 
+.size-span-otro{
+  width: 90px;
 }
 
 .estilo-btn-modificar{
@@ -115,7 +119,7 @@
 }
 
 .estilo-btn-eliminar{
-    color:white; 
+    color:white;
     background:#8b3838;
 }
 
@@ -124,9 +128,9 @@
 }
 
 .estilo-combos{
-    height: 28px; 
+    height: 28px;
     padding-top: 0px;
-    padding-bottom: 0px; 
+    padding-bottom: 0px;
     outline: unset;
     box-shadow: unset;
 }
@@ -167,7 +171,7 @@
 
 
 .font-size-input-dialog{
-    font-size: 11px; 
+    font-size: 11px;
     background-color: rgba(79, 160, 103, 0.441);
     height: auto;
     width: 70%;
@@ -198,8 +202,8 @@
 
 .boton-descargar{
     float:right;
-    background-color: #404A63; 
-    color: white; 
+    background-color: #404A63;
+    color: white;
     border-radius: 10px;
     font-size:12px;
 }

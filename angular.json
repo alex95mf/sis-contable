@@ -46,13 +46,13 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "bootstrap/dist/css/bootstrap.min.css",
+              "primeng/resources/themes/lara-light-blue/theme.css",
+              "primeng/resources/primeng.min.css",
+              "primeicons/primeicons.css",
+              "ngx-toastr/toastr.css",
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
@@ -154,13 +154,13 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "bootstrap/dist/css/bootstrap.min.css",
+              "primeng/resources/themes/lara-light-blue/theme.css",
+              "primeng/resources/primeng.min.css",
+              "primeicons/primeicons.css",
+              "ngx-toastr/toastr.css",
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"

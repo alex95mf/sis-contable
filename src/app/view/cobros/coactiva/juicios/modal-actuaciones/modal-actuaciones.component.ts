@@ -9,7 +9,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { JuiciosService } from '../juicios.service';
 import * as myVarGlobals from 'src/app/global';
 import Swal from 'sweetalert2/dist/sweetalert2';
-import moment from 'moment';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-modal-actuaciones',

@@ -5,7 +5,7 @@ import { ReformaCodigoService } from '../reforma-codigo.service';
 import Botonera from 'src/app/models/IBotonera';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ToastrService } from 'ngx-toastr';
-import moment from 'moment';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-modal-busqueda-reforma-doc',
