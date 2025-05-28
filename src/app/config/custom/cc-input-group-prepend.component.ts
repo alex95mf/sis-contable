@@ -1,12 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-
 
 @Component({
   selector: "app-cc-input-group-prepend",
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   template: `
     <div class="input-group input-group-sm mt-1">
       <div class="input-group-prepend" (click)="accionClickSpan()" [matTooltip]="spanToolTip">

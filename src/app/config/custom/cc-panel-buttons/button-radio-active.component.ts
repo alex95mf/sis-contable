@@ -8,14 +8,11 @@ import {
   ViewChild,
   ElementRef,
 } from "@angular/core";
-import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { Botones, cbtn } from "../cc-buttons/buttons.componente";
-import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-button-radio-active",
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: "./button-radio-active.component.html",
   styleUrls: ["./button-radio-active.component.scss"],
 })

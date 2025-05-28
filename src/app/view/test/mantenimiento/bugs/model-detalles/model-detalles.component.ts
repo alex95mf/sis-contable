@@ -1,7 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
 import { BugsServiceService } from '../bugs-service.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Swal from 'sweetalert2';
@@ -9,22 +7,10 @@ import { ToastrService } from 'ngx-toastr';
 import moment from 'moment';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
-import { CommonModule } from '@angular/common';
-import { ButtonRadioActiveComponent } from 'src/app/config/custom/cc-panel-buttons/button-radio-active.component';
-import { CcInputGroupPrepend } from 'src/app/config/custom/cc-input-group-prepend.component';
-
+import { object } from '@amcharts/amcharts4/core';
 
 @Component({
   selector: 'app-model-detalles',
-  standalone: true,
-  imports: [
-    CcSpinerProcesarComponent,
-    ButtonRadioActiveComponent,
-    CcInputGroupPrepend,
-    NgSelectModule,
-    FormsModule,
-    CommonModule
-  ],
   templateUrl: './model-detalles.component.html',
   styleUrls: ['./model-detalles.component.scss']
 })

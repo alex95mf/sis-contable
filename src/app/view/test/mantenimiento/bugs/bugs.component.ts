@@ -1,31 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgxCurrencyDirective } from 'ngx-currency';
-import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
-import { ButtonRadioActiveComponent } from 'src/app/config/custom/cc-panel-buttons/button-radio-active.component';
-import { CcInputGroupPrepend } from 'src/app/config/custom/cc-input-group-prepend.component';
 import { BugsServiceService } from './bugs-service.service';
+import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModelDetallesComponent } from './model-detalles/model-detalles.component';
 import { ModalHistoryComponent } from './modal-history/modal-history.component';
 
 @Component({
   selector: 'app-bugs',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatPaginatorModule,
-    NgSelectModule,
-    NgbModule,
-    NgxCurrencyDirective,
-    CcSpinerProcesarComponent,
-    ButtonRadioActiveComponent,
-    CcInputGroupPrepend
-  ],
   templateUrl: './bugs.component.html',
   styleUrls: ['./bugs.component.scss']
 })
@@ -58,13 +40,13 @@ export class BugsComponent implements OnInit {
   constructor(
     private apiBugsService:BugsServiceService,
     private modalService:NgbModal
-    ) { 
-   
+    ) {
+
     this.apiBugsService.actualizarFormulario$.subscribe(
       ()=>{
         this.cargarBugs();
       }
-    )  
+    )
     this.lstestados = [
       { estado: "CERRADO" },
       { estado: "PENDIENTE" },
@@ -137,7 +119,7 @@ this.vmButtons=[
   ngOnInit(): void {
 
     setTimeout(() =>this.cargaInicial(),50);
-    
+
 
   }
 
@@ -157,7 +139,7 @@ this.vmButtons=[
       case "Modificar":
         this.modificar(this.bug);
 
-            break;   
+            break;
       default:
         break;
     }
@@ -183,7 +165,7 @@ this.vmButtons=[
         size:"lg",
         backdrop:"static"
       });
-      
+
     modal.componentInstance.isNuevo=true;
    // modal.componentInstance.bug=this.bug;
     modal.componentInstance.cmb_tipo_identificacion = this.cmb_tipo_identificacion;
@@ -208,7 +190,7 @@ this.vmButtons=[
 
   }
   agregarHistory(item):void{
-    
+
     const modal= this.modalService.open(ModalHistoryComponent,
       {
         size:"lg",
@@ -238,15 +220,15 @@ this.vmButtons=[
  });
  */
 
-    
+
 
    // console.log(bugs);
 
    bugs.data.forEach((e: any) => Object.assign(e, {contribuyente: e.cliente}))
     this.lst_bugs= bugs.data;
     this.paginate.length = bugs.total;
-    
-    
+
+
     let sum: number = this.lst_bugs.map(a => Number(a.costo)).reduce(function (a, b) {
       return a + b;
     });
@@ -292,7 +274,7 @@ this.vmButtons=[
     Object.assign(this.paginate,{
       page:pageIndex+1,
       perPage:pageSize
-      
+
     })
     this.cargarBugs();
   }

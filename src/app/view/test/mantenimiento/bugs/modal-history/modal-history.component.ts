@@ -5,23 +5,9 @@ import { BugsServiceService } from '../bugs-service.service';
 import { ToastrService } from 'ngx-toastr';
 import moment from 'moment';
 import Swal from 'sweetalert2';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ButtonRadioActiveComponent } from 'src/app/config/custom/cc-panel-buttons/button-radio-active.component';
-import { CcInputGroupPrepend } from 'src/app/config/custom/cc-input-group-prepend.component';
-import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-modal-history',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    CcSpinerProcesarComponent,
-    ButtonRadioActiveComponent,
-    CcInputGroupPrepend,
-    NgSelectModule
-  ],
   templateUrl: './modal-history.component.html',
   styleUrls: ['./modal-history.component.scss']
 })
