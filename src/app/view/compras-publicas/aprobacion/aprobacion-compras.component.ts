@@ -7,7 +7,7 @@ import { CierreMesService } from '../../contabilidad/ciclos-contables/cierre-de-
 import { DenegacionCompraPublicaComponent } from './denegacion-compra-publica/denegacion-compra-publica.component';
 import { DetalleComprasComponent } from './detalle-compras/detalle-compras.component';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import { format } from 'date-fns';
+import moment from 'moment';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { ToastrService } from 'ngx-toastr';
 
@@ -66,7 +66,7 @@ export class AprobacionComprasComponent implements OnInit {
     private cierremesService: CierreMesService,
   ) {
     this.commonVrs.guardarAprobacion.subscribe((res)=>{
-      this.mensajeSppiner = "Cargando solicitudes...";    
+      this.mensajeSppiner = "Cargando solicitudes...";
       this.lcargando.ctlSpinner(true);
       this.SearchList(this.atribucionParams['atribucion'])
     })
@@ -83,7 +83,7 @@ export class AprobacionComprasComponent implements OnInit {
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
 
-   
+
     this.filter = {
       num_solicitud:"",
       estado:['A','P','D'],
@@ -91,7 +91,7 @@ export class AprobacionComprasComponent implements OnInit {
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
       proveedor: undefined,
       con_contrato: undefined,
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -107,8 +107,8 @@ export class AprobacionComprasComponent implements OnInit {
       this.SearchList({})
       await this.cargaInicial()
     }, 500);
-    
-    
+
+
 
 
 
@@ -176,27 +176,27 @@ export class AprobacionComprasComponent implements OnInit {
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-    
+
       if (result.isConfirmed) {
         this.atribucionParams = {
           programa: null,
           departamento: null,
           atribucion: null
         }
-    
+
         this.listaSolicitudes = []
       }
     })
-    
+
   }
 
 
   cargarPrograma(){
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSppiner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
-    
+
     let data ={
-  
+
       periodo: Number(this.periodo),
     }
     console.log(data)
@@ -205,7 +205,7 @@ export class AprobacionComprasComponent implements OnInit {
        this.lcargando.ctlSpinner(false);
       let program = []
       res.map((data)=>{
-        
+
         let dat = {
           ...data.catalogo,
           value: data.catalogo['descripcion'] + '-'+ data.catalogo['valor']
@@ -220,7 +220,7 @@ export class AprobacionComprasComponent implements OnInit {
 
   departamentoSearch(event){
     console.log(event);
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSppiner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -246,7 +246,7 @@ export class AprobacionComprasComponent implements OnInit {
 
   AtribucionSearch(event){
     console.log(event);
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSppiner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event.valor
@@ -259,10 +259,10 @@ export class AprobacionComprasComponent implements OnInit {
   }
 
   SearchList(event,flag: boolean = false){
-    
+
 
     console.log(event);
-    this.mensajeSppiner = "Cargando Solicitudes...";    
+    this.mensajeSppiner = "Cargando Solicitudes...";
     this.lcargando.ctlSpinner(true);
     if (flag) this.paginate.page = 1
     let data = {
@@ -272,7 +272,7 @@ export class AprobacionComprasComponent implements OnInit {
         filter: this.filter
       }
 
-      
+
     }
     this.service.searchSolicitud(data).subscribe((dat)=>{
       console.log(dat);
@@ -286,7 +286,7 @@ export class AprobacionComprasComponent implements OnInit {
           this.listaSolicitudes = Object.values(dat['data']['data']);
         }
       }
-      
+
 
       this.lcargando.ctlSpinner(false);
     },
@@ -342,29 +342,29 @@ export class AprobacionComprasComponent implements OnInit {
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-    
+
       if (result.isConfirmed) {
 
 
           this.mensajeSppiner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
-          
+
           let dat = {
             "anio": Number(moment().format('YYYY')),
             "mes": Number(moment().format('MM'))
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.mensajeSppiner = "Cargando...";    
+              this.mensajeSppiner = "Cargando...";
               this.lcargando.ctlSpinner(true);
-              
+
               let data ={
                 id_solicitud: item.id_solicitud,
                 idp: item.idp
               }
-             
+
               this.service.reversarSolicitud(data).subscribe((res: any)=>{
                  console.log(res);
                  if (res["status"] == 1) {
@@ -390,20 +390,20 @@ export class AprobacionComprasComponent implements OnInit {
                     confirmButtonColor: '#20A8D8',
                   });
                 }
-                 
-               
+
+
               },
               (error) => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.message);
               }
               )
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
@@ -418,7 +418,7 @@ export class AprobacionComprasComponent implements OnInit {
       estado:['A','P','D'],
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
-      filterControl: ""  
+      filterControl: ""
     };
     this.estadoSelected = 0
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
@@ -193,7 +193,7 @@ export class ConvenioArrienteTComponent implements OnInit {
           this.conceptos.fk_contribuyente = res;
           this.titulosDisabled = false;
         }
-        
+
       }
     );
 
@@ -534,7 +534,7 @@ export class ConvenioArrienteTComponent implements OnInit {
         this.msgSpinner = 'Generando convenio...';
         this.lcargando.ctlSpinner(true);
         this.arriendoTerreno.fk_contribuyente = this.contribuyenteActive.id_cliente;
-        this.arriendoTerreno['cant_convenios'] = this.contribuyenteActive.cant_convenios 
+        this.arriendoTerreno['cant_convenios'] = this.contribuyenteActive.cant_convenios
         this.arriendoTerreno.subtotal = this.totalCobro;
         this.arriendoTerreno.total = this.totalCobro;
         this.arriendoTerreno.cuota_inicial = this.amortizacion.cuota_inicial;
@@ -1026,7 +1026,7 @@ export class ConvenioArrienteTComponent implements OnInit {
       documento: null,
       cuotas: []
     })
-  
+
 
     // Cambiado a Object.assign()
     /* this.arriendoTerreno = {

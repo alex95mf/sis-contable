@@ -6,14 +6,14 @@ import { AprobacionService } from '../aprobacion.service';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ToastrService } from 'ngx-toastr';
-import { format } from 'date-fns';
+import moment from 'moment';
 @Component({
   selector: 'app-aprobacion-compra-publica',
   templateUrl: './aprobacion-compra-publica.component.html',
   styleUrls: ['./aprobacion-compra-publica.component.scss']
 })
 export class AprobacionCompraPublicaComponent implements OnInit {
-  
+
   aprobacion: any = {
     id: null,
     estado: 'A',
@@ -61,7 +61,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
 
     setTimeout(() => {
       console.log(this.item);
-      
+
       this.cargarCatalogos()
       if( this.item['icp'] !=null || this.item['tipo_proceso'] !=null || this.item['observacion'] !=null){
         this.disabledBotonIcp = true;
@@ -73,7 +73,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
         this.aprobacion.tipoRegimen = this.item['tipo_regimen'];
         this.aprobacion.procSugerido = this.item['procsugerido'];
         this.aprobacion.oficio_icp = this.item['oficio_icp'];
-        
+
       }else{
         this.aprobacion['id'] = this.item['id_solicitud']
       }
@@ -118,37 +118,37 @@ export class AprobacionCompraPublicaComponent implements OnInit {
     }else if(this.aprobacion.observacion == null){
       this.toastr.info('El campo Observaciones no debe estar vacio')
     } else {
-      
+
       this.mensajeSppiner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
-      
+
       let data = {
         "anio": Number(moment().format('YYYY')),
         "mes": Number(moment().format('MM'))
       }
         this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-        
+
         /* Validamos si el periodo se encuentra aperturado */
         if (res["data"][0].estado !== 'C') {
-    
+
           this.guardarContratacion()
-    
+
         } else {
           this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
           this.lcargando.ctlSpinner(false);
         }
-    
+
         }, error => {
             this.lcargando.ctlSpinner(false);
             this.toastr.info(error.error.mesagge);
         })
-      
+
     }
   }
 
   asignarIcp(){
     console.log(this.item.id_solicitud)
-    this.mensajeSppiner = "Asignando ICP ...";    
+    this.mensajeSppiner = "Asignando ICP ...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id_solicitud: this.item.id_solicitud
@@ -174,25 +174,25 @@ export class AprobacionCompraPublicaComponent implements OnInit {
           this.aprobacion.fk_icp = res['data'].id_documento;
           this.lcargando.ctlSpinner(false);
         }
-        
+
       }
     },
     (error)=>{
       console.log(error);
       this.lcargando.ctlSpinner(false);
     })
-    
+
   }
 
   guardarContratacion(){
     console.log('Guardado');
-    this.mensajeSppiner = "Guardando...";    
+    this.mensajeSppiner = "Guardando...";
     this.lcargando.ctlSpinner(true);
-    
+
     console.log(this.aprobacion);
     this.service.saveAprobacion(this.aprobacion).subscribe((res)=>{
       console.log(res);
-      
+
       this.lcargando.ctlSpinner(false);
       Swal.fire({
         icon: "success",
@@ -202,7 +202,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
         confirmButtonText: "Aceptar",
         confirmButtonColor: '#20A8D8'
       }).then((result) => {
-        if (result.isConfirmed) {          
+        if (result.isConfirmed) {
           this.activeModal.close()
           this.aprobacion = {
             estado: 'A',
@@ -216,8 +216,8 @@ export class AprobacionCompraPublicaComponent implements OnInit {
           this.commonVrs.guardarAprobacion.next()
         }
       })
-      
-      
+
+
     })
   }
 
@@ -226,7 +226,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
     this.aprobacion.procSugerido = null
     this.procSugeridos = []
     this.procSugeridos = this.procsSugeridos.filter(p => p.grupo == event)
-  
+
 
     // let data1 = {
     //   departamento: this.item['fk_departamento']
@@ -241,7 +241,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
 
     //   this.lcargando.ctlSpinner(false);
 
-      
+
     // })
   }
 
@@ -287,17 +287,17 @@ export class AprobacionCompraPublicaComponent implements OnInit {
       //   res1['data'].map((b)=>{
       //     this.procSugeridos = this.procsSugeridos.filter(p => p.grupo == this.procsSugeridos.find(p => p.id == b.proc_sugerido.id_catalogo).grupo)
       //   })
-  
+
       //   this.lcargando.ctlSpinner(false);
-  
-        
+
+
       // })
 
-      
+
 
     })
-    
-    
+
+
   }
 
 }

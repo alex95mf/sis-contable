@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
@@ -47,14 +47,14 @@ export class LiquidacionComponent implements OnInit {
       label: 'Anulado'
     },
   ]
-  
+
   formReadOnly = false;
   ordenDisabled = true;
   codCastDisabled = true;
   observacionesDisabled = true;
   conceptosDisabled = true;
   exoneracionDisabled = true;
-  staTasas:boolean = false; 
+  staTasas:boolean = false;
 
   verifyRestore = false;
 
@@ -93,7 +93,7 @@ export class LiquidacionComponent implements OnInit {
   contribuyenteActive: any = {
     razon_social: ""
   };
-  
+
   conceptosBackup: any = [];
   conceptos: any = [];
   exoneracionesBackup: any = [];
@@ -151,7 +151,7 @@ export class LiquidacionComponent implements OnInit {
               aplica: true,
               valor_excedente: e.tasas.valor_unitario ?? 0
             }
-  
+
             this.conceptos.push(conc);
           }
         });
@@ -221,10 +221,10 @@ export class LiquidacionComponent implements OnInit {
             //   c.total = c.valor;
             }else if(c.tipo_calculo=="TA"){ // TABLA DEPENDERA DE INGRESAR ALGO EN CANTIDAD COMO FACTOR1
               c.cantidad = undefined;
-              c.total = 0; // 
+              c.total = 0; //
             }else { // PARA INPUT DEPENDERA DE INGRESAR ALGO EN VALOR DIRECTAMENTE
               c.cantidad = 1;
-              c.total = 0; // 
+              c.total = 0; //
             }
           }
         })
@@ -233,7 +233,7 @@ export class LiquidacionComponent implements OnInit {
       }
     );
 
-    this.commonVarService.selectContribuyenteCustom.pipe(takeUntil(this.onDestroy$)).subscribe( 
+    this.commonVarService.selectContribuyenteCustom.pipe(takeUntil(this.onDestroy$)).subscribe(
       (res) => {
         //console.log(res);
         this.contribuyenteActive = res;
@@ -244,7 +244,7 @@ export class LiquidacionComponent implements OnInit {
         this.vmButtons[3].habilitar = false;
 
         if (res.valid == 5) {
-            
+
           if (res.fecha_nacimiento != null) {
             if (this.contribuyenteActive.contribuyente == "Natural" && this.contribuyenteActive.supervivencia == "S" && this.verificacionTerceraEdad(res.fecha_nacimiento)
             ) {
@@ -260,21 +260,21 @@ export class LiquidacionComponent implements OnInit {
         // (res) => {
 
         //   if (res.valid == 5) {
-            
+
         //     if (res.fecha_nacimiento != null) {
         //       if (this.contribuyenteActive.contribuyente == "Natural" && this.contribuyenteActive.supervivencia == "S" && this.verificacionTerceraEdad(res.fecha_nacimiento)
         //       ) {
         //         this.expandSupervivencia(res.id_cliente);
         //         console.log(res);
-  
+
         //       }
         //     }
         //     else {
         //       console.log("hola")
         //     }
         //   }
-  
-  
+
+
         // }
       }
     );
@@ -520,7 +520,7 @@ export class LiquidacionComponent implements OnInit {
         control:""
       }
     }
-    
+
     this.apiService.getTablasConfig(data).subscribe(
       (res) => {
         console.log(res);
@@ -546,9 +546,9 @@ export class LiquidacionComponent implements OnInit {
       params: "'REN_TIPO_TABLA_TASA'",
     };
     this.apiService.getCatalogo(data).subscribe(
-      
+
       (res) => {
-        
+
         this.tasas = res["data"]['REN_TIPO_TABLA_TASA'];
         this.lcargando.ctlSpinner(false);
         // console.log(this.tasas);
@@ -600,10 +600,10 @@ export class LiquidacionComponent implements OnInit {
             "mes": Number(moment(this.liquidacion.fecha).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-             
+
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
-                  
+
                 this.msgSpinner = 'Generando Liquidación...';
                 this.lcargando.ctlSpinner(true);
                 this.liquidacion.fk_contribuyente = this.contribuyenteActive.id_cliente;
@@ -659,12 +659,12 @@ export class LiquidacionComponent implements OnInit {
                     });
                   }
                 );
-          
+
               } else {
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
               }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
@@ -689,7 +689,7 @@ export class LiquidacionComponent implements OnInit {
 
   calcTablasValor(det) {
     let total = 0;
-    // es necesario no alterar la tabla original 
+    // es necesario no alterar la tabla original
     let tablasFiltradas = this.tablasConfigDt.filter(t => (t.tipo_tabla == det.tipo_tabla));
     console.log(tablasFiltradas)
     let cant = parseFloat(det.cantidad);
@@ -718,7 +718,7 @@ export class LiquidacionComponent implements OnInit {
             let producto = +resta * +t.valor_excedente;
             total = +total + +producto;
           } else {det.valor = 0; det.valor_excedente=0;}
-        } 
+        }
       }
     })
     det.total = total;
@@ -740,9 +740,9 @@ export class LiquidacionComponent implements OnInit {
   }
 
   calculateExoneraciones() {
-    
+
     this.calcExonerTotal();
-    
+
     this.exoneracionesBackup = JSON.parse(JSON.stringify(this.exoneraciones));
 
     this.calcSubtotal_1();
@@ -792,12 +792,12 @@ export class LiquidacionComponent implements OnInit {
     this.calcSubtotal_1()
   }
 
-  
+
 
   calcSubtotal_1() {
     let subtotal_1 = this.liquidacion.subtotal - this.liquidacion.exoneraciones;
     this.liquidacion.subtotal_1 = subtotal_1;
-  
+
     this.calcSubtotal_2();
   }
 
@@ -808,10 +808,10 @@ export class LiquidacionComponent implements OnInit {
   }
 
   calcTotal() {
-    
+
       let sumasValores =  (this.liquidacion.subtotal_2 + this.liquidacion.recargo + this.liquidacion.interes)
       this.liquidacion.total = sumasValores - this.liquidacion.descuento;
-  
+
     this.vmButtons[0].habilitar = false;
   }
 
@@ -849,7 +849,7 @@ export class LiquidacionComponent implements OnInit {
     }
     this.msgSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
-   
+
     this.apiService.getStaConcepto(data).subscribe(
       (res) => {
         console.log(res)
@@ -858,12 +858,12 @@ export class LiquidacionComponent implements OnInit {
           const datos = res['data'].filter(e => e.codigo == 'TA')[0]
           if(datos.tiene_sta == 'S') {
             console.log(datos.tiene_sta)
-            this.staTasas= false; 
+            this.staTasas= false;
           }else{
-            this.staTasas= true; 
+            this.staTasas= true;
           }
         }else{
-          this.staTasas= true; 
+          this.staTasas= true;
         }
         console.log(this.staTasas)
       },
@@ -1021,7 +1021,7 @@ export class LiquidacionComponent implements OnInit {
     this.contribuyenteActive = {
       razon_social: ""
     };
-    
+
     this.conceptosBackup = [];
     this.conceptos = [];
     this.exoneracionesBackup = [];

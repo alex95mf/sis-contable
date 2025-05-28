@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CatalogoBienesService } from './catalogo-bienes.service';
@@ -49,7 +49,7 @@ export class CatalogoBienesComponent implements OnInit {
   ngOnInit(): void {
 
 
- 
+
     this.vmButtons = [
 
       {
@@ -98,7 +98,7 @@ export class CatalogoBienesComponent implements OnInit {
       codigo: null,
       descripcion: null,
       estado: null,
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -148,7 +148,7 @@ export class CatalogoBienesComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    
+
     this.service.getCatalogoBienes(data).subscribe(
       (res)=>{
         console.log(res);
@@ -174,7 +174,7 @@ export class CatalogoBienesComponent implements OnInit {
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
       codigo: null,
       descripcion: null,
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -202,7 +202,7 @@ export class CatalogoBienesComponent implements OnInit {
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-    
+
       if (result.isConfirmed) {
         this.service.deleteCatalogoBienes(data).subscribe(
           (res)=>{
@@ -223,7 +223,7 @@ export class CatalogoBienesComponent implements OnInit {
         )
       }
     })
-    
+
   }
 
   agregarModalCatalogo(){

@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { BugsServiceService } from '../bugs-service.service';
 import { ToastrService } from 'ngx-toastr';
-import { format } from 'date-fns';
+import moment from 'moment';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,12 +15,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
   selector: 'app-modal-history',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
+    CommonModule,
+    FormsModule,
     CcSpinerProcesarComponent,
-    ButtonRadioActiveComponent,  
-    CcInputGroupPrepend,  
-    NgSelectModule          
+    ButtonRadioActiveComponent,
+    CcInputGroupPrepend,
+    NgSelectModule
   ],
   templateUrl: './modal-history.component.html',
   styleUrls: ['./modal-history.component.scss']
@@ -33,24 +33,24 @@ export class ModalHistoryComponent implements OnInit {
   @Input() lstestados;
   @Input() cmb_tipo_identificacion;
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
-  
+
   titleModal: String = "Registro de History";
   isNuevo: boolean=true;
   lstBugsHistory: Array<any> = [];
 
 
- 
+
   bugHistory: any={
-    
+
     fk_empleado: 92,
     fk_test_bugs: 0,
-    
-  
-    fecha: format(new Date(), 'yyyy-MM-dd'),
+
+
+    fecha: moment().format('YYYY-MM-DD'),
     estado_history: "",
     observacion: "",
     costo: 0,
-    
+
   }
 
 
@@ -93,7 +93,7 @@ export class ModalHistoryComponent implements OnInit {
 
    // this.lstBugsHistory= this.bug.history;
     this.bugHistory.fk_test_bugs = this.bug.id_test_bugs;
- 
+
 
 
     //alert(JSON.stringify(this.bug));
@@ -130,7 +130,7 @@ export class ModalHistoryComponent implements OnInit {
 
         break;
       case "Cerrar":
-        
+
         this.activemodal.close();
         //   this.modificar(this.bug);
 
@@ -148,39 +148,39 @@ export class ModalHistoryComponent implements OnInit {
   async guardar() {
 
     let mensaje='';
-    
+
     if (this.bugHistory.observacion.trim().length==0) mensaje+='* La observacion no puede ser vacia.<br>';
-    
+
     if (mensaje.length>0)
     {
       this.toastr.warning(mensaje,'Validacion de Datos',{enableHtml:true});
       return;
     }
-    
-    
-    
+
+
+
     const result=await Swal.fire({
       titleText:"Mensaje de Confirmacion", text:"Estas seguro que desea guardar?",
       icon: 'question', showCancelButton:true, cancelButtonText:"No", confirmButtonText:"Si"
     });
-    
+
     if (result.isConfirmed){
-      
+
       this.lcargando.ctlMensaje("Guardando....!!!");
       this.lcargando.ctlSpinner(true)
-      
-      
+
+
       let respuesta;
        if (this.isNuevo)
       {
-        
+
        // alert(JSON.stringify(this.bugHistory));
          respuesta = await this.apiBugsService.guardarBugHistory({ bugshistory: this.bugHistory });
       }
       else
       {
         // respuesta = await this.apiBugsService.modificarBug(this.bugHistory.id_test_bugs,{ bugs: this.bugNuevo });
-      } 
+      }
       this.lcargando.ctlSpinner(false)
       const result2=await Swal.fire({
         titleText:"Mensaje de Informacion", text:"Se guardó con éxito!!!",
@@ -189,10 +189,10 @@ export class ModalHistoryComponent implements OnInit {
 
       this.activemodal.close();
       this.apiBugsService.actualizarFormulario$.emit();
-      
+
     }
-    
-        
+
+
       }
 
 }

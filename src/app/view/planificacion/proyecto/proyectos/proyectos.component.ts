@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from '../../../../global';
 
@@ -22,7 +22,7 @@ export class ProyectosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator : MatPaginator
-  
+
 
   proyecto:any={
       id_proyecto: 0,
@@ -38,10 +38,10 @@ export class ProyectosComponent implements OnInit {
   vmButtons:any={};
   nombreBarraBotones="btnsMantenimientoProyecto";
   programas: any[] = [];
- 
+
   anioActual: any;
   mes_actual: any = 0;
-  
+
 
   viewDate: Date = new Date();
 
@@ -62,7 +62,7 @@ paginate: any= {
  periodoSelected(evt: any, year:any){
   console.log(evt)
   this.filter.periodo = evt
- 
+
 }
 
 
@@ -84,9 +84,9 @@ paginate: any= {
        this.lista_estados = [
      { estado: "A",descripcion:"ACTIVO" },
      { estado: "I",descripcion:"INACTIVO" }
-   
 
-   ] 
+
+   ]
 
    this.vmButtons=[
 {
@@ -196,11 +196,11 @@ this.paginate.length = proyectos.total;
      // case "Modificar":
      //   this.modificar(this.proyecto);
 
-            break;   
+            break;
       case "Cancelar":
               this.cancelar();
-      
-                  break;   
+
+                  break;
       default:
         break;
     }
@@ -210,7 +210,7 @@ this.paginate.length = proyectos.total;
     Object.assign(this.paginate,{
       page:pageIndex+1,
       perPage:pageSize
-      
+
     })
     this.CargarProyectos();
   }
@@ -244,7 +244,7 @@ this.paginate.length = proyectos.total;
       windowClass: "viewer-content-general",
     });
     modalInvoice.componentInstance.module_comp = myVarGlobals.fConciliacionBank;
-   
+
     modalInvoice.componentInstance.isNew = false;
     modalInvoice.componentInstance.data = this.proyecto;
 
@@ -256,17 +256,17 @@ this.paginate.length = proyectos.total;
   {
 
   }
-  
+
   async CargarProyectos(){
     this.mensajeSpiner = 'Cargando Proyectos';
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
 
-     
-     
+
+
       let proyectos =await this.apiSrv.getProyectos({filter: this.filter, paginate : this.paginate});
       this.lista_proyectos= proyectos.data;
       this.paginate.length = proyectos.total;
@@ -289,7 +289,7 @@ this.paginate.length = proyectos.total;
         windowClass: "viewer-content-general",
       });
       modalInvoice.componentInstance.module_comp = myVarGlobals.fConciliacionBank;
-     
+
       modalInvoice.componentInstance.isNew = isNew;
       modalInvoice.componentInstance.data = data;
 
@@ -298,7 +298,7 @@ this.paginate.length = proyectos.total;
       modalInvoice.componentInstance.cmb_periodo= this.cmb_periodo;
 
 
-      
+
 
 
 

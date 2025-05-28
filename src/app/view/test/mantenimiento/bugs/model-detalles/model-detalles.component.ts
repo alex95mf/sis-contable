@@ -6,7 +6,7 @@ import { BugsServiceService } from '../bugs-service.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonModule } from '@angular/common';
@@ -20,8 +20,8 @@ import { CcInputGroupPrepend } from 'src/app/config/custom/cc-input-group-prepen
   imports: [
     CcSpinerProcesarComponent,
     ButtonRadioActiveComponent,
-    CcInputGroupPrepend, 
-    NgSelectModule, 
+    CcInputGroupPrepend,
+    NgSelectModule,
     FormsModule,
     CommonModule
   ],
@@ -34,17 +34,17 @@ export class ModelDetallesComponent implements OnInit {
   @Input() cmb_tipo_identificacion;
   @Input() lstestados;
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
-  
+
   vmButtons: Array<any> = [];
   titleModal: String = "";
   fecha: any = new Date;
   bugNuevo: any={
-    
+
     fk_cliente: 0,
     fk_tipo_documento: 0,
     tipo_documento: "CEDULA",
     num_documento: "",
-    fecha: format(new Date(), 'yyyy-MM-dd'),
+    fecha: moment().format('YYYY-MM-DD'),
     estado: "",
     observacion: "",
     costo: 0,
@@ -58,7 +58,7 @@ export class ModelDetallesComponent implements OnInit {
     private modalService: NgbModal,
     private commonVarService: CommonVarService
   ) {
-    
+
     this.commonVarService.selectContribuyenteCustom.asObservable().subscribe(
       (contribuyente)=>{
         Object.assign(this.bugNuevo,{contribuyente
@@ -67,7 +67,7 @@ export class ModelDetallesComponent implements OnInit {
           ,tipo_documento:contribuyente.tipo_documento
         });
       }
-      
+
       );
     this.vmButtons = [
       {
@@ -153,11 +153,11 @@ const result=await Swal.fire({
 });
 
 if (result.isConfirmed){
-  
+
   this.lcargando.ctlMensaje("Guardando....!!!");
   this.lcargando.ctlSpinner(true)
-  
-  
+
+
   let respuesta;
   if (this.isNuevo)
   {
@@ -171,10 +171,10 @@ if (result.isConfirmed){
 
   this.activemodal.close();
   this.apiBugsService.actualizarFormulario$.emit();
-  
+
 }
 
-    
+
   }
 
   expandcontribuyente()

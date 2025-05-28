@@ -10,7 +10,7 @@ import { AsignacionService } from './asignacion.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from 'src/app/global';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { DatePipe } from '@angular/common';
@@ -209,7 +209,7 @@ export class AsignacionComponent implements OnInit {
 
 
     /*   this.filter = {
-      
+
         filterControl: ""
       } */
 
@@ -299,14 +299,14 @@ export class AsignacionComponent implements OnInit {
 
 
   }
-  /* 
+  /*
     metodoGlobal(event: any) {
       switch (event.items.boton.texto) {
-        
+
         case "LIMPIAR":
-        
+
           break;
-      
+
         default:
           break;
       }
@@ -638,7 +638,7 @@ export class AsignacionComponent implements OnInit {
       }
     )
   }
-  
+
  /*  AtribucionSearch(event) {
     // console.log(event);
     this.mensajeSppiner = "Cargando Programa...";
@@ -783,7 +783,7 @@ export class AsignacionComponent implements OnInit {
   regresar() {
     this.vmButtons[0].showimg = false
     this.vmButtons[1].showimg = false
-    this.vmButtons[2].showimg = false 
+    this.vmButtons[2].showimg = false
     this.vmButtons[3].showimg = false
     this.vmButtons[4].showimg = true
     this.nuevaSolicitud = true
@@ -870,7 +870,7 @@ export class AsignacionComponent implements OnInit {
       fecha: moment(this.today).format('YYYY-MM-DD'),
       devolucion: null,
       fechamaxima: moment(this.lastday).format('YYYY-MM-DD'),
-      num_orden: '' 
+      num_orden: ''
     }
 
     this.vmButtons[1].habilitar = false
@@ -1031,18 +1031,18 @@ export class AsignacionComponent implements OnInit {
   selectTipoMedio(event) {
 
     this.lcargando.ctlSpinner(true);
-    let datae = { tipo_medio: event, paginate: this.paginateNew }; 
+    let datae = { tipo_medio: event, paginate: this.paginateNew };
     this.service.getNumMedios(datae).subscribe((res: any) => {
       console.log(res);
       this.lcargando.ctlSpinner(false);
       let resultado = res;
-      if (resultado.current_page == 1) { 
+      if (resultado.current_page == 1) {
         this.numeros_medios = resultado.data;
       } else {
         this.numeros_medios = Object.values(resultado['data']);
       }
       this.numeros_medios.forEach(item => {
-       
+
         item['check'] = false;
         item['bodega'] = "";
         item['ubicacion'] = "";
@@ -1181,10 +1181,10 @@ export class AsignacionComponent implements OnInit {
     const elementosCheckTrue = this.medios_to_save;
     let data = { tipo_medio: this.tipo_medida, bodega: this.bodega, ubicacion: this.ubicacion, detalle: elementosCheckTrue };
     this.service.saveBodegaDig(data).subscribe(res => {
-      
+
       this.lcargando.ctlSpinner(false);
       this.toastr.success(res['message']);
-     
+
 
     }, error => {
       this.lcargando.ctlSpinner(false);
@@ -1244,7 +1244,7 @@ export class AsignacionComponent implements OnInit {
           this.dataubicacion = res["data"]["data"];
           this.numeros_medios.forEach((item, index) => {
           this.dataubicacionIndividual[index] =res["data"]["data"];
-          
+
           });
           this.lcargando.ctlSpinner(false);
         },

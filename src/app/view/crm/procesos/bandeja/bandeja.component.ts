@@ -2,7 +2,7 @@
 
 
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { MatPaginator } from '@angular/material/paginator';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -27,7 +27,7 @@ export class BandejaComponent implements OnInit {
     nombre:'',
     edad:10
   };
-  
+
   tarea:any={
     id_tarea: 0,
     fk_documento:0,
@@ -76,7 +76,7 @@ titulo :string="";
     private toastr: ToastrService,
     private apiSrv: BandejaService,
     private modal: NgbModal
-  ) { 
+  ) {
 
 
     this.apiSrv.tareas$.subscribe(
@@ -93,9 +93,9 @@ titulo :string="";
       { estado: "GESTION",descripcion:"GESTION" },
       { estado: "APROBADO",descripcion:"APROBADO" },
       { estado: "NEGADO",descripcion:"NEGADO" }
-    
- 
-    ] 
+
+
+    ]
 
     this.vmButtons=[
       {
@@ -142,7 +142,7 @@ titulo :string="";
       //   clase: "btn btn-info text-white boton btn-sm",
       //   habilitar: false,
       // },
-      
+
       {
         orig: this.nombreBarraBotones,
         paramAccion: "",
@@ -220,7 +220,7 @@ titulo :string="";
     setTimeout(()=> {
       this.cancelar();
      // this.cargaInicial()
-      
+
       //this.getCatalogos();
     }, 50);
 
@@ -251,14 +251,14 @@ titulo :string="";
       windowClass: "viewer-content-general",
     });
     modalInvoice.componentInstance.module_comp = myVarGlobals.fConciliacionBank;
-   
+
     modalInvoice.componentInstance.isNew = false;
     modalInvoice.componentInstance.data = this.tarea;
     modalInvoice.componentInstance.Perfil = this.Perfil.nombre;
 
     modalInvoice.componentInstance.lista_estados = this.lista_estados;
     modalInvoice.componentInstance.lista_tipo_tareas= this.lista_tipo_tareas;
-    
+
     modalInvoice.componentInstance.lista_responsables= this.lista_responsables;
 
   }
@@ -277,7 +277,7 @@ titulo :string="";
          windowClass: "viewer-content-general",
        });
        modalInvoice.componentInstance.module_comp = myVarGlobals.fCrmProductos;
-      
+
        modalInvoice.componentInstance.isNew = isNew;
        modalInvoice.componentInstance.data = data;
        modalInvoice.componentInstance.Perfil = this.Perfil.nombre;
@@ -287,12 +287,12 @@ titulo :string="";
 
      //  modalInvoice.componentInstance.programas = this.programas;
      //  modalInvoice.componentInstance.cmb_periodo= this.cmb_periodo;
- 
- 
-       
- 
- 
- 
+
+
+
+
+
+
    }
 
   async cargarTareas(){
@@ -300,9 +300,9 @@ titulo :string="";
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
-     
+
       let tareas =await this.apiSrv.getTareas({filter: this.filter, paginate : this.paginate});
       this.lista_tareas= tareas.data;
       this.paginate.length = tareas.total;
@@ -319,7 +319,7 @@ titulo :string="";
     this.lcargando.ctlSpinner(true)
     try {
 
-    
+
       this.mensajeSpiner = 'Cargando Tareas'
       let tareas =await this.apiSrv.getTareas({filter: this.filter, paginate : this.paginate});
 this.lista_tareas= tareas.data;
@@ -331,13 +331,13 @@ this.paginate.length = tareas.total;
       this.toastr.error(err.error.message, 'Error en Carga Inicial')
     }
   }
- 
+
   changePage({pageIndex,pageSize})
   {
     Object.assign(this.paginate,{
       page:pageIndex+1,
       perPage:pageSize
-      
+
     })
     this.cargarTareas();
   }
@@ -348,19 +348,19 @@ this.paginate.length = tareas.total;
         this.consultar()
         break;
         case "Nuevo":
-       
+
            this.crearTarea(true,this.tarea);
            break;
       case "Grabar":
-        
+
       //    this.guardar();
 
 
-            break;   
+            break;
       case "Cancelar":
             this.cancelar();
-      
-                  break;   
+
+                  break;
       default:
         break;
     }
@@ -370,7 +370,7 @@ this.paginate.length = tareas.total;
 
   {
     this.filter={
-    
+
       fecha_desde: new Date(Number(moment(new Date()).format('YYYY')), Number(moment(new Date()).format('MM')) - 1, 1).toISOString().substring(0, 10),
       fecha_hasta: new Date(Number(moment(new Date()).format('YYYY')), Number(moment(new Date()).format('MM')), 0).toISOString().substring(0, 10),
       nombre_cliente:'',
@@ -378,7 +378,7 @@ this.paginate.length = tareas.total;
       estado : '',
       perfil_responsable: this.Perfil.nombre
 
-   
+
   };
   this.consultar();
   this.tarea={
@@ -393,7 +393,7 @@ this.paginate.length = tareas.total;
     fk_tarea_principal:0
 };
 
-  
+
   }
   consultar()
   {

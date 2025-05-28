@@ -5,7 +5,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { AprobacionService } from '../aprobacion.service';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
-import { format } from 'date-fns';
+import moment from 'moment';
 
 @Component({
   selector: 'app-denegacion-compra-publica',
@@ -46,7 +46,7 @@ export class DenegacionCompraPublicaComponent implements OnInit {
   }
   metodoGlobal(event: any){
     switch(event.items.boton.texto){
-      
+
       case "Guardar":
         this.validacion();
         break;
@@ -63,35 +63,35 @@ export class DenegacionCompraPublicaComponent implements OnInit {
 
       this.mensajeSppiner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
-      
+
       let data = {
         "anio": Number(moment().format('YYYY')),
         "mes": Number(moment().format('MM'))
       }
         this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-        
+
         /* Validamos si el periodo se encuentra aperturado */
         if (res["data"][0].estado !== 'C') {
-    
+
           this.guardarDenegacion()
-    
+
         } else {
           this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
           this.lcargando.ctlSpinner(false);
         }
-    
+
         }, error => {
             this.lcargando.ctlSpinner(false);
             this.toastr.info(error.error.mesagge);
         })
-      
+
     }
   }
 
   guardarDenegacion(){
     console.log('Guardado');
 
-    this.mensajeSppiner = "Guardando...";    
+    this.mensajeSppiner = "Guardando...";
     this.lcargando.ctlSpinner(true);
 
     let data = {id: this.item['id_solicitud'],observacion: this.Observaciones, estado: 'D', Detalles: this.item['detalles']}

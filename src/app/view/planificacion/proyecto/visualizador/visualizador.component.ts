@@ -7,7 +7,7 @@ import * as myVarGlobals from 'src/app/global';
 
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ToastrService } from 'ngx-toastr';
-import { format } from 'date-fns';
+import moment from 'moment';
 
 declare const $: any;
 
@@ -56,9 +56,9 @@ export class VisualizadorComponent implements OnInit {
   lst_tipo_presupuesto: Array<any>;
 
   constructor(
-    private apiService : ReporteService, 
-    private toastr : ToastrService, 
-    private excelService : ExcelService, 
+    private apiService : ReporteService,
+    private toastr : ToastrService,
+    private excelService : ExcelService,
     private xlsService : XlsExportService,
     private commonServices : CommonService
   ) { }
@@ -67,9 +67,9 @@ export class VisualizadorComponent implements OnInit {
     this.vmButtons = [
 
       { orig: "planAtriRepo", paramAccion: "", boton: { icon: "fa fa-search", texto: "CONSULTAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary btn-sm", habilitar: false, imprimir: false},
-    
+
       { orig: "planAtriRepo", paramAccion: "", boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success btn-sm", habilitar: true, imprimir: false}
-    
+
     ]
     setTimeout(() => {
       this.validaPermisos()
@@ -77,10 +77,10 @@ export class VisualizadorComponent implements OnInit {
   }
 
   metodoGlobal(event) {
-    switch (event.items.boton.texto) {     
+    switch (event.items.boton.texto) {
 
       case "CONSULTAR":
-        if (this.periodoObjectSelected == undefined || this.programaObjectSelected == undefined 
+        if (this.periodoObjectSelected == undefined || this.programaObjectSelected == undefined
           || this.departamentoObjectSelected == undefined)
           {
             this.toastr.warning("Por favor seleccione Periodo, Programa y Departamento..", this.fTitle);
@@ -91,7 +91,7 @@ export class VisualizadorComponent implements OnInit {
       case "EXCEL":
         this.handleClickExcel()
         break;
-    }  
+    }
   }
 
   validaPermisos() {
@@ -181,7 +181,7 @@ export class VisualizadorComponent implements OnInit {
       this.msgSpinner = 'Cargando Bienes'
       this.bienes = await this.apiService.getBienes({periodo: this.periodoSelected, departamento: this.departamentoObjectSelected.id_catalogo});
       console.log(this.bienes)
-      this.bienes.map((bien: any) => Object.assign(bien, { 
+      this.bienes.map((bien: any) => Object.assign(bien, {
         tipo_compra: (bien.tipo_compra != 0) ? this.lst_tipo_compra.find((tipo: any) => tipo.id_catalogo == bien.tipo_compra).valor : null,
         tipo_producto: (bien.tipo_producto != 0) ? this.lst_tipo_producto.find((tipo: any) => tipo.id_catalogo == bien.tipo_producto).valor : null,
         cat_elec: (bien.cat_elec == 0) ? 'NO' : 'SI',

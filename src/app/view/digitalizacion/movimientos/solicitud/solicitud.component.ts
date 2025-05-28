@@ -10,18 +10,18 @@ import { SolicitudService } from './solicitud.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from 'src/app/global';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CommonVarService } from 'src/app/services/common-var.services';
-import { DatePipe } from '@angular/common';                                                     
+import { DatePipe } from '@angular/common';
 
 import { ModalUsuariosComponent } from 'src/app/config/custom/modal-usuarios/modal-usuarios.component';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 
 
-                                          
 
-import { ConsultaDirectorioService } from '../consulta-directorio/consulta-directorio.service'; 
+
+import { ConsultaDirectorioService } from '../consulta-directorio/consulta-directorio.service';
 @Component({
   selector: 'app-solicitud',
   templateUrl: './solicitud.component.html',
@@ -98,7 +98,7 @@ daylimit:any;
   dropdownSettings: IDropdownSettings = {};
   cargarAnexo: boolean = true;
 
-  
+
 
   fileList: FileList;
 
@@ -127,9 +127,9 @@ daylimit:any;
     private commonSrv: CommonService,
     private commonVarService: CommonVarService,
     private modalService: NgbModal,
-    
+
     private commonVarSrv: CommonVarService,
-    
+
     private apiService: ConsultaDirectorioService,
     private xlsService: XlsExportService
   ) {
@@ -204,10 +204,10 @@ this.lastday = new Date( this.lastday - 1);
     num_orden: '',
     estadoSelected:'',
     };
-    
+
 
   /*   this.filter = {
-    
+
       filterControl: ""
     } */
 
@@ -296,14 +296,14 @@ this.lastday = new Date( this.lastday - 1);
 
 
   }
-/* 
+/*
   metodoGlobal(event: any) {
     switch (event.items.boton.texto) {
-      
+
       case "LIMPIAR":
-      
+
         break;
-    
+
       default:
         break;
     }
@@ -314,7 +314,7 @@ this.lastday = new Date( this.lastday - 1);
     switch (event.items.boton.texto) {
       case "Guardar":
        // this.validaSolicitud();
-  
+
     this.saveBodega();
         break;
       case "Regresar":
@@ -323,7 +323,7 @@ this.lastday = new Date( this.lastday - 1);
         case "Nuevo":
           this.nuevoSolicitud(1);//()
           break;
-  
+
       case "Buscar":
         this.SearchList();
         break;
@@ -341,7 +341,7 @@ this.lastday = new Date( this.lastday - 1);
       case "Excel":
         this.exportExcel();
         break;
-        
+
     }
   }
 
@@ -357,7 +357,7 @@ this.lastday = new Date( this.lastday - 1);
 
     try {
       await this.validaDataGlobal()
-      
+
       this.guardarSolicitud()
     } catch (err) {
       console.log(err)
@@ -463,10 +463,10 @@ this.lastday = new Date( this.lastday - 1);
 
   cantidadTotalItem(item) {
     console.log(item['precio_cotizado']);
-    
+
 
     let precio_cotizado = item['costo_unitario'] * item['cantidad_requerida']
-    
+
     if (precio_cotizado > item['costo_total_por_solicitar']) {
       this.toastr.info('El Valor Total de '+  this.commonSrv.formatNumberDos(precio_cotizado)+ ' no puede ser mayor al Total Disponible de ' + this.commonSrv.formatNumberDos(parseFloat(item['costo_total_por_solicitar'])))
       setTimeout(() => {
@@ -479,7 +479,7 @@ this.lastday = new Date( this.lastday - 1);
         item['cantidad_requerida'] = null
       }, 10);
 
-    } 
+    }
     // else if (item['costo_total_por_solicitar'] < item['precio_cotizado']) {
     //   this.toastr.info('El Valor Total de '+  this.commonSrv.formatNumberDos(parseFloat(item['precio_cotizado']))+ 'no puede ser mayor al Total Disponible de ' + this.commonSrv.formatNumberDos(parseFloat(item['costo_total_por_solicitar'])))
     //   setTimeout(() => {
@@ -497,7 +497,7 @@ this.lastday = new Date( this.lastday - 1);
 
   guardarSolicitud() {
     console.log(this.departamento)
-    
+
     if (this.fileList == undefined) {
       this.toastr.info("Debe ingresar un anexo")
       return;
@@ -650,7 +650,7 @@ this.lastday = new Date( this.lastday - 1);
 
   SearchList() {
     // console.log(event);
-    
+
     this.lcargando.ctlSpinner(true);
     this.listaSolicitudes = []
     this.mensajeSppiner = "Cargando Programa...";
@@ -697,7 +697,7 @@ this.lastday = new Date( this.lastday - 1);
        if (dat['data'].length == 0) {
         this.listaSolicitudes = [];
       } else {
-        
+
         // this.listaSolicitudes = dat['data'];
         this.paginate.length = dat['total'];
         if (dat['current_page'] == 1) {
@@ -708,18 +708,18 @@ this.lastday = new Date( this.lastday - 1);
       }
 
 
-      
-       
+
+
       /*  if (dat['data']['current_page'] == 1) {
         this.listaPrestamos = dat['data']['data'];
       } else {
         this.listaPrestamos = Object.values(dat['data']['data']);
       } */
-       
+
       /*if (dat['data'].length == 0) {
         this.listaSolicitudes = [];
       } else {
-       
+
         this.paginate.length = dat['data']['total'];
         if (dat['data']['current_page'] == 1) {
           this.listaSolicitudes = dat['data']['data'];
@@ -768,7 +768,7 @@ this.lastday = new Date( this.lastday - 1);
         //       valor: res.u_medida?.valor,
         //       cantidad_solicitada: res.cantidad,
         //       costo_unitario: res.costo_unitario,
-        //       cantidad_requerida: null, 
+        //       cantidad_requerida: null,
         //       precio_cotizado: null
         //     }
         //     this.listaSolicitudesAtribucion.push(bienes)
@@ -782,7 +782,7 @@ this.lastday = new Date( this.lastday - 1);
         //       valor: res.u_medida?.valor,
         //       cantidad_solicitada: res.cantidad,
         //       costo_unitario: res.costo_unitario,
-        //       cantidad_requerida: null, 
+        //       cantidad_requerida: null,
         //       precio_cotizado: null
         //     }
         //     this.listaSolicitudesAtribucion.push(bienes)
@@ -835,7 +835,7 @@ this.lastday = new Date( this.lastday - 1);
     //     if(dat['data'].length == 0){
     //       this.toastr.info('No existe bienes para esa atribución')
     //       this.listaSolicitudesAtribucion = []
-    //     }else { 
+    //     }else {
 
     //       // if (dat['data']['current_page'] == 1) {
 
@@ -846,7 +846,7 @@ this.lastday = new Date( this.lastday - 1);
     //       //       valor: res.u_medida?.valor,
     //       //       cantidad_solicitada: res.cantidad,
     //       //       costo_unitario: res.costo_unitario,
-    //       //       cantidad_requerida: null, 
+    //       //       cantidad_requerida: null,
     //       //       precio_cotizado: null
     //       //     }
     //       //     this.listaSolicitudesAtribucion.push(bienes)
@@ -860,7 +860,7 @@ this.lastday = new Date( this.lastday - 1);
     //       //       valor: res.u_medida?.valor,
     //       //       cantidad_solicitada: res.cantidad,
     //       //       costo_unitario: res.costo_unitario,
-    //       //       cantidad_requerida: null, 
+    //       //       cantidad_requerida: null,
     //       //       precio_cotizado: null
     //       //     }
     //       //     this.listaSolicitudesAtribucion.push(bienes)
@@ -874,7 +874,7 @@ this.lastday = new Date( this.lastday - 1);
     //           valor: res.u_medida?.valor,
     //           cantidad_solicitada: res.cantidad,
     //           costo_unitario: res.costo_unitario,
-    //           cantidad_requerida: null, 
+    //           cantidad_requerida: null,
     //           precio_cotizado: null
     //         }
     //         this.listaSolicitudesAtribucion.push(bienes)
@@ -899,7 +899,7 @@ this.lastday = new Date( this.lastday - 1);
     this.vmButtons[4].showimg = false
     this.nuevaSolicitud = false
     this.vmButtons[0].showimg = true
-    this.vmButtons[1].showimg = true/* 
+    this.vmButtons[1].showimg = true/*
     this.vmButtons[3].showimg = false */
     // this.vmButtons[3].showimg = false
 
@@ -949,7 +949,7 @@ this.lastday = new Date( this.lastday - 1);
       fecha:moment(this.today).format('YYYY-MM-DD'),
       devolucion:null,
       fechamaxima:moment(this.lastday).format('YYYY-MM-DD'),//null , //moment(this.daylimit).format('YYYY-MM-DD')
-    
+
     }
 this.SearchList();
   }
@@ -972,7 +972,7 @@ this.SearchList();
     })
 
     modal.componentInstance.item = event
-    
+
 modal.result.then((result) => {
   // Aquí puedes manejar los datos devueltos desde el modal
  /*  let  = result['data']
@@ -1009,7 +1009,7 @@ modal.result.then((result) => {
     modal.componentInstance.opcion = 'editar'
   }
 
-  
+
 
 
   limpiar() {
@@ -1020,7 +1020,7 @@ modal.result.then((result) => {
       num_solicitud: null,
       fecha_creacion: moment(this.today).format('YYYY-MM-DD')
     }
-   
+
     this.listaSolicitudesAtribucion = []
     this.newReserva = {
       codigo:'',
@@ -1030,11 +1030,11 @@ modal.result.then((result) => {
       fechamaxima:moment(this.lastday).format('YYYY-MM-DD'),//null ,
       num_orden: '' //moment(this.daylimit).format('YYYY-MM-DD')
     }
-   
-    this.vmButtons[1].habilitar= true;/* 
+
+    this.vmButtons[1].habilitar= true;/*
     this.vmButtons[5].habilitar= false; */
-    
-    /* 
+
+    /*
     Swal.fire({
       icon: "warning",
       title: "¡Atención!",
@@ -1082,7 +1082,7 @@ modal.result.then((result) => {
     }
 
 
- 
+
 
 
 this.dataForms= [];
@@ -1135,7 +1135,7 @@ this.dataForms= [];
       filterControl: ""
     };
 
-    
+
     this.filterdev= {
       codigo: '',
       fecha:  moment(this.firstday).format('YYYY-MM-DD'),// null,
@@ -1170,12 +1170,12 @@ this.dataForms= [];
       //
   //this.diasprestamotemporal
 /*
-    
+
 */
-  
+
     console.log(item);
-   
-    
+
+
 
 
     if (item.check) {
@@ -1190,7 +1190,7 @@ this.dataForms= [];
     }
 
 
-    /* 
+    /*
         this.detallesToSave.push(item); */
     } else {
         const index = this.detallesToSave.findIndex(detalle => detalle.id_prestamo_detalle === item.id_prestamo_detalle);
@@ -1211,8 +1211,8 @@ this.daylimit.setDate(this.daylimit.getDate() + this.diasprestamoactual);
 this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
 
 
-  
- 
+
+
 
   }
 
@@ -1221,19 +1221,19 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
 
 
 
-     
+
       this.diasprestamoactual = 0;
       for (const detalle of this.detallesToSave) {
         if (detalle.diasprestamo > this.diasprestamoactual) {
           this.diasprestamoactual = detalle.diasprestamo;
         }
     }
-  
-  
+
+
     this.daylimit = new Date(this.today);
   this.daylimit.setDate(this.daylimit.getDate() + this.diasprestamoactual);
   this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
-  
+
 
 
 
@@ -1286,10 +1286,10 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
     let data = {};
    // this.getReadFiles();
     this.service.getTipoDocumentos(data).subscribe((res) => {
-      console.log(res) 
+      console.log(res)
       this.lcargando.ctlSpinner(false);
       this.lst_tipoDoC = res["data"];
-     
+
       /*  this.dataEmpleado = res["data"];
        this.listadoGeneral(); */
     }, (error) => {
@@ -1302,11 +1302,11 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
 
   selectTipoDocumento(event){
     console.log(event);
-  
+
     this.tipoDoC = event;
     const tipoDocumentoEncontrado = this.lst_tipoDoC.find(doc => doc.id_tipo_documento === event);
     this.lcargando.ctlSpinner(true);
-    
+
     if (tipoDocumentoEncontrado) {
         // Obtener el valor de dias_prestamo del objeto encontrado
         this.diasprestamotemporal = tipoDocumentoEncontrado.dias_prestamo;
@@ -1316,11 +1316,11 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
           this.diasprestamotemporal = 0;
         }
 
-       
+
     } else {
       this.diasprestamotemporal = 0;
     }
-/* 
+/*
     this.lst_tipoDoC  buscar id_tipo_documento recorrer y obtener dias_prestamo
  */
     this.dataForms=[];
@@ -1330,7 +1330,7 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
     this.DocGeneral = []
     this.directorioDt = []
     let Data = []
-    
+
     this.apiService.getOrdenCampos(data).subscribe((res) => {
 
 
@@ -1345,7 +1345,7 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
         // Agregamos la clave check con el valor false a cada objeto
         item['check'] = false;
     }); */
-      
+
 
       this.dataForms.forEach(campo => {
         Object.assign(campo, { valor: '' })
@@ -1393,7 +1393,7 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
         this.toastr.info(error.error.message);
       }
     );
-    
+
   }
 
 
@@ -1405,7 +1405,7 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
     this.resultadoConsulta = []
     this.filter.tipo_documento=  this.tipoDoC
     const camposFiltrados = this.filter.campos.filter(camp => camp.campo_indice && camp.valor_indice);
-    
+
     let data = {
       params: {
         filter: this.filter,
@@ -1414,7 +1414,7 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
     }
     console.log("data al paginate",data)
     if(camposFiltrados.length > 0){
-      
+
      /*  this.paginateNew.page = {
         length: 0,
         perPage: 10,
@@ -1426,12 +1426,12 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
 
       this.apiService.getDirectorio(data).subscribe(
         (res: any) => {
-  
+
           console.log(res)
           this.paginateNew.length = res['data']['total'];
           this.directorioDt = res.data.data;
           this.resultadoConsulta = res.data.data;
-          
+
           console.log(this.resultadoConsulta)
           this.paginateNew.length = res.data.total;
           this.lcargando.ctlSpinner(false);
@@ -1444,12 +1444,12 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
     }else{
       this.apiService.getDirectorio(data).subscribe(
         (res: any) => {
-  
+
           console.log(res)
           this.paginateNew.length = res['data']['total'];
           this.directorioDt = res.data.data;
           this.resultadoConsulta = res.data.data;
-          
+
           console.log(this.resultadoConsulta)
           this.paginateNew.length = res.data.total;
           this.lcargando.ctlSpinner(false);
@@ -1459,7 +1459,7 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
           this.toastr.info(error.error.message);
         }
       );
-      /* 
+      /*
       let data = {tipoDoc:this.tipoDoC};
       this.apiService.getOrdenCampos(data).subscribe((res) => {
         this.resultadoConsulta= res["data"]["documento2"]
@@ -1468,9 +1468,9 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
         this.toastr.info(error.message);
         this.lcargando.ctlSpinner(false);
       }); */
-          
+
     }
-    
+
   }
 
 
@@ -1489,7 +1489,7 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
             fecha:moment(this.today).format('YYYY-MM-DD'),
             devolucion:null,
             fechamaxima: moment(this.lastday).format('YYYY-MM-DD'),//null , //moment(this.daylimit).format('YYYY-MM-DD')
-          }  
+          }
   }
 
 
@@ -1517,10 +1517,10 @@ if (!this.newReserva.usuario) {
 } else {
   // Si todos los campos están llenos, ejecuta la lógica que sigue aquí
 }
-/* 
+/*
 if (!this.newReserva.usuario || !this.newReserva.codigo || !this.newReserva.observacion || !this.newReserva.fecha || !this.newReserva.fechamaxima) {
   this.toastr.error("Faltan campos por llenar");
- 
+
 } */
 
 
@@ -1540,7 +1540,7 @@ if (!this.newReserva.usuario || !this.newReserva.codigo || !this.newReserva.obse
       this.vmButtons[1].habilitar= true;
       this.toastr.success(res['message']);
    //   this.consultarDirectorio();
-     
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
@@ -1556,7 +1556,7 @@ if (!this.newReserva.usuario || !this.newReserva.codigo || !this.newReserva.obse
   }
 
   exportExcel(){
-    
+
 
     this.mensajeSppiner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
@@ -1570,11 +1570,11 @@ if (!this.newReserva.usuario || !this.newReserva.codigo || !this.newReserva.obse
         filterdev: this.filterdev,
       }
     }
-   
+
     this.service.searchReservascab(data).subscribe(res => {
       console.log(res)
-      
-   
+
+
         this.listaPrestamosExcel = res["data"];
         this.listaPrestamosExcel.forEach(e => {
           Object.assign(e, {
@@ -1584,7 +1584,7 @@ if (!this.newReserva.usuario || !this.newReserva.codigo || !this.newReserva.obse
           });
         })
         if (this.listaPrestamosExcel.length > 0) {
-          
+
           let data = {
             title: 'Prestamo de Documentos',
             fecha_desde: moment(this.filterdev.fecha).format('YYYY-MM-DD'),
@@ -1603,5 +1603,5 @@ if (!this.newReserva.usuario || !this.newReserva.codigo || !this.newReserva.obse
     });
   }
 
-    
+
 }

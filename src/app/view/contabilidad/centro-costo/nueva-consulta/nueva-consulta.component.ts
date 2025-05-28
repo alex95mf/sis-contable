@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NuevaConsultaService } from './nueva-consulta.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CcModalTablaCuentaComponent } from 'src/app/config/custom/cc-modal-tabla-cuenta/cc-modal-tabla-cuenta.component';
-import { format } from 'date-fns';
+import moment from 'moment';
 import Chart from 'chart.js';
 import { ExcelService } from 'src/app/services/excel.service';
 

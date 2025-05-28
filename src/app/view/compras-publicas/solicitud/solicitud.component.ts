@@ -8,7 +8,7 @@ import { SolicitudService } from './solicitud.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from 'src/app/global';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
@@ -250,9 +250,9 @@ export class SolicitudComponent implements OnInit {
     }
 
     try {
-      
+
       await this.validaDataGlobal()
-      
+
       this.guardarSolicitud()
     } catch (err) {
       console.log(err)
@@ -314,7 +314,7 @@ export class SolicitudComponent implements OnInit {
     }else{
       this.filter.estado = [evt]
     }
-    
+
   }
 
   periodoSelected(evt: any, year: any) {
@@ -362,10 +362,10 @@ export class SolicitudComponent implements OnInit {
 
   cantidadTotalItem(item) {
     console.log(item['precio_cotizado']);
-    
+
 
     let precio_cotizado = item['costo_unitario'] * item['cantidad_requerida']
-    
+
     if (precio_cotizado > item['costo_total_por_solicitar']) {
       this.toastr.info('El Valor Total de '+  this.commonSrv.formatNumberDos(precio_cotizado)+ ' no puede ser mayor al Total Disponible de ' + this.commonSrv.formatNumberDos(parseFloat(item['costo_total_por_solicitar'])))
       setTimeout(() => {
@@ -378,7 +378,7 @@ export class SolicitudComponent implements OnInit {
         item['cantidad_requerida'] = null
       }, 10);
 
-    } 
+    }
     // else if (item['costo_total_por_solicitar'] < item['precio_cotizado']) {
     //   this.toastr.info('El Valor Total de '+  this.commonSrv.formatNumberDos(parseFloat(item['precio_cotizado']))+ 'no puede ser mayor al Total Disponible de ' + this.commonSrv.formatNumberDos(parseFloat(item['costo_total_por_solicitar'])))
     //   setTimeout(() => {
@@ -395,11 +395,11 @@ export class SolicitudComponent implements OnInit {
 
 
   guardarSolicitud() {
-   
+
 
 
     console.log(this.departamento)
-    
+
     if (this.fileList == undefined) {
       this.toastr.info("Debe ingresar un anexo")
       return;
@@ -425,10 +425,10 @@ export class SolicitudComponent implements OnInit {
           "mes": Number(moment(this.atribucionParamsNew.fecha_creacion).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              
+
               this.mensajeSppiner = "Creando Solicitud...";
               this.lcargando.ctlSpinner(true);
               console.log(this.atribucionParamsNew);
@@ -453,7 +453,7 @@ export class SolicitudComponent implements OnInit {
                   descripcion: this.atribucionParamsNew.descripcion,
                   periodo: this.periodoSelectedV
                 }
-      
+
               }
               this.service.crearSolicitud(data).subscribe((dat: any) => {
                 console.log(dat);
@@ -486,13 +486,13 @@ export class SolicitudComponent implements OnInit {
                   }
                 });
               })
-             
-        
+
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
@@ -514,7 +514,7 @@ export class SolicitudComponent implements OnInit {
   onDepartamentoSelect(event: Array<any>) {
     this.listaSolicitudesAtribucion = []
   }
-  
+
 
   onMaterialGroupChange(event) {
     // this.departamento = []
@@ -644,7 +644,7 @@ export class SolicitudComponent implements OnInit {
         //       valor: res.u_medida?.valor,
         //       cantidad_solicitada: res.cantidad,
         //       costo_unitario: res.costo_unitario,
-        //       cantidad_requerida: null, 
+        //       cantidad_requerida: null,
         //       precio_cotizado: null
         //     }
         //     this.listaSolicitudesAtribucion.push(bienes)
@@ -658,7 +658,7 @@ export class SolicitudComponent implements OnInit {
         //       valor: res.u_medida?.valor,
         //       cantidad_solicitada: res.cantidad,
         //       costo_unitario: res.costo_unitario,
-        //       cantidad_requerida: null, 
+        //       cantidad_requerida: null,
         //       precio_cotizado: null
         //     }
         //     this.listaSolicitudesAtribucion.push(bienes)
@@ -711,7 +711,7 @@ export class SolicitudComponent implements OnInit {
     //     if(dat['data'].length == 0){
     //       this.toastr.info('No existe bienes para esa atribución')
     //       this.listaSolicitudesAtribucion = []
-    //     }else { 
+    //     }else {
 
     //       // if (dat['data']['current_page'] == 1) {
 
@@ -722,7 +722,7 @@ export class SolicitudComponent implements OnInit {
     //       //       valor: res.u_medida?.valor,
     //       //       cantidad_solicitada: res.cantidad,
     //       //       costo_unitario: res.costo_unitario,
-    //       //       cantidad_requerida: null, 
+    //       //       cantidad_requerida: null,
     //       //       precio_cotizado: null
     //       //     }
     //       //     this.listaSolicitudesAtribucion.push(bienes)
@@ -736,7 +736,7 @@ export class SolicitudComponent implements OnInit {
     //       //       valor: res.u_medida?.valor,
     //       //       cantidad_solicitada: res.cantidad,
     //       //       costo_unitario: res.costo_unitario,
-    //       //       cantidad_requerida: null, 
+    //       //       cantidad_requerida: null,
     //       //       precio_cotizado: null
     //       //     }
     //       //     this.listaSolicitudesAtribucion.push(bienes)
@@ -750,7 +750,7 @@ export class SolicitudComponent implements OnInit {
     //           valor: res.u_medida?.valor,
     //           cantidad_solicitada: res.cantidad,
     //           costo_unitario: res.costo_unitario,
-    //           cantidad_requerida: null, 
+    //           cantidad_requerida: null,
     //           precio_cotizado: null
     //         }
     //         this.listaSolicitudesAtribucion.push(bienes)

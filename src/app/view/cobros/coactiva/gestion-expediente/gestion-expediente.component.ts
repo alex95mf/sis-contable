@@ -5,7 +5,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 
-import { format } from 'date-fns';
+import moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 // import * as myVarGlobals from "../../../../../global";
 
@@ -76,7 +76,7 @@ export class GestionExpedienteComponent implements OnInit {
     this.commonVrs.modalEditionDetallesCobro.asObservable().subscribe(
       (res: any) => {
         Object.assign(
-          this.expedientes.find(e => e.id_cob_notificacion == res.id_cob_notificacion), 
+          this.expedientes.find(e => e.id_cob_notificacion == res.id_cob_notificacion),
           res
         )
       }
@@ -176,7 +176,7 @@ export class GestionExpedienteComponent implements OnInit {
           this.lcargando.ctlSpinner(false)
           return;
         }
-        
+
         this.paginate.length = res.data.total;
         this.expedientes = res.data.data;
 
@@ -196,7 +196,7 @@ export class GestionExpedienteComponent implements OnInit {
         setTimeout(() => {
           this.lcargando.ctlSpinner(false);
         }, 2500)
-        
+
       },
       (error: any) => {
         this.lcargando.ctlSpinner(false);
@@ -287,7 +287,7 @@ export class GestionExpedienteComponent implements OnInit {
         Swal.fire('Expediente anulado', '', 'success')
       }
     })
-    
+
   }
 
   modalDetalles(expediente: any){
@@ -330,7 +330,7 @@ export class GestionExpedienteComponent implements OnInit {
           const { id_cob_notificacion,tipo_gestion, total, fecha, estado, notificador, fecha_recepcion, ...items } = liquidacion;
           const { razon_social, num_documento, codigo_sector, ...contribuyente  } = liquidacion.contribuyente;
           const { nombre } = liquidacion.usuario == null ? '' : liquidacion.usuario
-    
+
           const data = {
             NumNotificacion: id_cob_notificacion,
             Contribuyente: razon_social,

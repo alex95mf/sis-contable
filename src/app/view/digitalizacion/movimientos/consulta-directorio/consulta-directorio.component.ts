@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ConsultaDirectorioService } from './consulta-directorio.service'; 
+import { ConsultaDirectorioService } from './consulta-directorio.service';
 
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
-import { format } from 'date-fns';
+import moment from 'moment';
 import Swal from 'sweetalert2';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AnexoListaService } from 'src/app/view/tesoreria/recaudacion/convenio/anexos-lista/anexo-lista.service';
@@ -119,13 +119,13 @@ rutacompletadeldirectorioactuali:any;
     private modalService: NgbModal,
     private apiServiceAnexo: AnexoListaService,
     private confirmationDialogService: ConfirmationDialogService,
-    
+
     private apiServicecat: CatalogoService,
   ) {}
 
   ngOnInit(): void {
     this.vmButtons = [
-    
+
       {
         orig: 'btnsConsultaDirectotio',
         paramAccion: '',
@@ -165,12 +165,12 @@ rutacompletadeldirectorioactuali:any;
       pageSizeOptions: [20, 50,100]
     }
 
-   
+
 
     setTimeout(() => {
       this.getDatosIniciales()
     }, 10);
-   
+
   }
 
   metodoGlobal(event: any) {
@@ -182,7 +182,7 @@ rutacompletadeldirectorioactuali:any;
       case "LIMPIAR":
         this.limpiar()
         break;
-    
+
       default:
         break;
     }
@@ -219,7 +219,7 @@ this.tipobusqueda = 'indices';
     console.log(event);
     this.tipoDoC = event;
     this.filter.tipo_documento= event
-    
+
     let data = {
       tipoDoc:this.tipo_documento,
       params: {
@@ -230,7 +230,7 @@ this.tipobusqueda = 'indices';
     this.directorioDt = []
     this.filter.campos=[]
     this.dataFormsAux=[]
-   
+
 
     const selectedTipoDocumento = this.lst_tipoDoC.find(tipo => tipo.id_tipo_documento === event);
     if (selectedTipoDocumento) {
@@ -241,7 +241,7 @@ this.tipobusqueda = 'indices';
     this.apiService.getOrdenCampos(data).subscribe((res) => {
         if(res['status']==1){
           console.log("datos de orden",res)
-          
+
           this.dataForms= res["data"]["tipoDocumento"];
           console.log("consultar directorio",this.dataForms)
 let newDataForms= [];
@@ -261,7 +261,7 @@ let newDataForms= [];
           this.dataFormsAux=res["data"]["tipoDocumento"];
           this.rutaFinal= res["data"]["ruta"];
           this.documento =  res["data"]["documento"];
-    
+
           //this.resultadoConsulta= res["data"]["documento2"]
           this.dataForms.forEach(campo => {
             Object.assign(campo, { valor: '' })
@@ -280,10 +280,10 @@ let newDataForms= [];
                 campo_indice: campoI[0].campo_indice,
                 valor : campoI[0].valor,
                 tipo:campoI[0].tipo_dato
-               
+
               }
             }
-           
+
             this.filter['campos'].push(data)
             this.campos = this.filter['campos']
           });
@@ -292,7 +292,7 @@ let newDataForms= [];
 
           this.getReadFiles();
         }
-     
+
     }, (error) => {
       this.toastr.info(error.message);
       this.lcargando.ctlSpinner(false);
@@ -319,8 +319,8 @@ let newDataForms= [];
     Object.assign(this.paginate, {page: 1, pageIndex: 0})
    //this.paginator.firstPage()
      //Consulta con el filtro campos
-     
-    
+
+
     this. consultarDirectorio(1)
   }
 
@@ -328,7 +328,7 @@ let newDataForms= [];
     this.msgSpinner = 'Consultando Directorio...'
     this.lcargando.ctlSpinner(true);
 
-  
+
 
     this.resultadoConsulta = [];
     this.filter.tipo_documento=  this.tipoDoC;
@@ -336,7 +336,7 @@ let newDataForms= [];
     this.filter.numero_medio=  this.numero_medio;
     this.filter.extras = this.camposRangos;
     const camposFiltrados = this.filter.campos.filter(camp => camp.campo_indice && camp.valor_indice);
-    
+
     let data = {
       params: {
         filter: this.filter,
@@ -349,12 +349,12 @@ let newDataForms= [];
       if(camposFiltrados.length > 0 || this.tipo_medio != '' || this.numero_medio != '' ){
         this.apiService.getDirectorio(data).subscribe(
           (res: any) => {
-    
+
             console.log(res)
             this.paginate.length = res['data']['total'];
             this.directorioDt = res.data.data;
             this.resultadoConsulta = res.data.data;
-            
+
             console.log(this.resultadoConsulta)
             this.paginate.length = res.data.total;
             this.lcargando.ctlSpinner(false);
@@ -379,12 +379,12 @@ let newDataForms= [];
     if(flag == 2){
       this.apiService.getDirectorio(data).subscribe(
         (res: any) => {
-  
+
           console.log(res)
           this.paginate.length = res['data']['total'];
           this.directorioDt = res.data.data;
           this.resultadoConsulta = res.data.data;
-          
+
           console.log(this.resultadoConsulta)
           this.paginate.length = res.data.total;
           this.lcargando.ctlSpinner(false);
@@ -395,10 +395,10 @@ let newDataForms= [];
         }
       );
     }
-    
-    
+
+
   }
-  
+
   changePaginate(event: PageEvent) {
     if(this.tipobusqueda = 'indices'){
     Object.assign(this.paginate, { page: event.pageIndex + 1})
@@ -407,13 +407,13 @@ let newDataForms= [];
   }else{
     Object.assign(this.paginate, { page: event.pageIndex + 1})
     //Consulta sin el filtro pero desde cualquier pagina
-    
-  
+
+
   this.lcargando.ctlSpinner(true);
     this.msgSpinner = 'Cargando Arbol'
 
     this.apiService.getSearchFilesByFile({origen:this.tipoDoCNombre,rutacompleta:this.rutacompletadeldirectorioactuali,paginate:this.paginate}).subscribe((res: any) => {
-    
+
       // Nuevo arreglo para almacenar los datos transformados
     this.consultaDirectorio = false
     let resultado =res['data'];
@@ -433,7 +433,7 @@ let newDataForms= [];
       this.resultadoConsulta = resultado; //nuevoArreglo
       this.paginate.length = resultado.total;
       this.lcargando.ctlSpinner(false);
-     
+
     } , (error) => {
     this.toastr.info("No se encontraron archivos en la ruta");//error.message
     this.resultadoConsulta = null;
@@ -468,7 +468,7 @@ let newDataForms= [];
       this.vmButtons[1].habilitar = true
       this.vmButtons[2].habilitar = false
       this.formReadonly = true
-    } *//* 
+    } *//*
     this.vmButtons[1].habilitar = true
     this.vmButtons[2].habilitar = false */
     this.lcargando.ctlSpinner(true)
@@ -495,7 +495,7 @@ let newDataForms= [];
       console.log("ejecutando");
       this.msgSpinner = 'Cargando Data' //item: catalogo this.filter.tipo_documento
       this.apiService.getReadFiles({tipocontrato:this.tipoDoCNombre}).subscribe((res: any) => {
-       
+
           //arboldosarboldos
           this.dataSource.data = res
           this.treeControl.dataNodes =  res
@@ -503,10 +503,10 @@ let newDataForms= [];
 
           this.lcargando.ctlSpinner(false);
           console.log(res)
-        
-        
+
+
       } , (error) => {
-        
+
       this.toastr.info("no se encuentra directorios para el tipo de documento");//
       this.lcargando.ctlSpinner(false);
     });
@@ -514,7 +514,7 @@ let newDataForms= [];
       console.log(response) */
       //this.nuevoItemVista = false
     //  this.itemCatalogo = response.data
-   
+
   }
   seleccionarpreview(data){
 
@@ -522,7 +522,7 @@ let newDataForms= [];
   }
 
   verAnexo(anexo) { ///app/public/anexos/
-    let prueba = 'Digitalizacion/Contratos/2027/01/1312334731/01' 
+    let prueba = 'Digitalizacion/Contratos/2027/01/1312334731/01'
     let ruta = '20240325102711_asientopruebadef1.pdf'
     let data = {
 
@@ -572,7 +572,7 @@ let newDataForms= [];
 
     console.log(event); this.rutacompletadeldirectorioactuali = event.rutacompleta;
     this.apiService.getSearchFilesByFile({origen:this.tipoDoCNombre,rutacompleta:event.rutacompleta,paginate:this.paginate}).subscribe((res: any) => {
-    
+
       // Nuevo arreglo para almacenar los datos transformados
     this.consultaDirectorio = false
     let resultado =res['data'];
@@ -592,7 +592,7 @@ let newDataForms= [];
       this.resultadoConsulta = resultado; //nuevoArreglo
       this.paginate.length = resultado.total;
       this.lcargando.ctlSpinner(false);
-     
+
     } , (error) => {
     this.toastr.info("No se encontraron archivos en la ruta");//error.message
     this.resultadoConsulta = null;

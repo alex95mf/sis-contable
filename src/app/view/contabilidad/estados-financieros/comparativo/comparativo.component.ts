@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ComparativoService } from './comparativo.service';
 import Botonera from 'src/app/models/IBotonera';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 import { PrimeNGConfig } from 'primeng/api';
 
@@ -199,7 +199,7 @@ export class ComparativoComponent implements OnInit {
         })
 
       }
-      
+
       // Analisis Vertical
       let sum_periodo1 = this.registros.reduce((acc, curr) => acc + parseFloat(curr[periodo1]), 0)
       let sum_periodo2 = this.registros.reduce((acc, curr) => acc + parseFloat(curr[periodo2]), 0)

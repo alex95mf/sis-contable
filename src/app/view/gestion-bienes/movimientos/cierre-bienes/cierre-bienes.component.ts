@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Botonera from 'src/app/models/IBotonera';
 import { CierreBienesService } from './cierre-bienes.service';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
 import Swal from 'sweetalert2';
@@ -173,7 +173,7 @@ export class CierreBienesComponent implements OnInit {
       this.toastr.warning(message, 'Validacion de Datos', { enableHtml: true })
       return;
     }
-    
+
     this.lcargando.ctlSpinner(true)
     try {
       this.msgSpinner = 'Consultando Bienes'
@@ -192,26 +192,26 @@ export class CierreBienesComponent implements OnInit {
   }
 
   async guardar() {
-    
+
     this.msgSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let data = {
       "anio": Number(moment(this.documento.fecha).format('YYYY')),
       "mes": Number(moment(this.documento.fecha).format('MM'))
       }
-      
+
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
           try {
-           
+
             if (res["data"][0]?.estado !=='C') {
               let message = '';
               if (this.documento.observaciones == null) message += '* No ha ingresado una Observacion para este documento.<br>';
-          
+
               if (message.length > 0) {
                 this.toastr.warning(message, 'Validacion de Datos', { enableHtml: true })
                 return;
               }
-          
+
               this.lcargando.ctlSpinner(true)
               try {
                 this.msgSpinner = 'Almacenando Documento'
@@ -228,7 +228,7 @@ export class CierreBienesComponent implements OnInit {
                 this.toastr.error(err.error?.message, 'Error almacenando Documento')
               }
             } else {
-                
+
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
             }
@@ -239,12 +239,12 @@ export class CierreBienesComponent implements OnInit {
   }
 
   clearForm() {
-    Object.assign(this.documento, { 
-      fecha: moment(new Date()).format('YYYY-MM-DD'), 
-      num_documento: null, 
-      tipo: null, 
-      observaciones: null, 
-      bienes: [] 
+    Object.assign(this.documento, {
+      fecha: moment(new Date()).format('YYYY-MM-DD'),
+      num_documento: null,
+      tipo: null,
+      observaciones: null,
+      bienes: []
     })
 
     this.vmButtons[1].habilitar = true
@@ -280,25 +280,25 @@ export class CierreBienesComponent implements OnInit {
         "anio": Number(moment(this.documento.fecha).format('YYYY')),
         "mes": Number(moment(this.documento.fecha).format('MM'))
         }
-      
+
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
           try {
-           
+
             if (res["data"][0]?.estado !=='C') {
               this.lcargando.ctlSpinner(true)
               try {
                 this.msgSpinner = 'Eliminando Cierre'
                 await this.apiService.deleteCierre(this.documento.id)
-        
+
                 this.lcargando.ctlSpinner(false)
                 Swal.fire('Cierre eliminado correctamente.', '', 'success').then(() => this.clearForm())
               } catch (err) {
                 console.log(err)
                 this.lcargando.ctlSpinner(false)
                 this.toastr.error(err.error?.message)
-              } 
+              }
             } else {
-                
+
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
             }

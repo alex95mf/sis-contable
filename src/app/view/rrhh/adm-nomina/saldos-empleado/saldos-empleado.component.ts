@@ -3,7 +3,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Botonera from 'src/app/models/IBotonera';
 import { SaldosEmpleadoService } from './saldos-empleado.service';
 import { ToastrService } from 'ngx-toastr';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CommonService } from 'src/app/services/commonServices';
@@ -51,7 +51,7 @@ export class SaldosEmpleadoComponent implements OnInit {
   ngOnInit(): void {
 
     setTimeout(async () => {
-   
+
       await this.consultar()
      }, 50);
   }
@@ -70,7 +70,7 @@ export class SaldosEmpleadoComponent implements OnInit {
       case "EXCEL":
         this.GenerarReporteExcel();
         break;
-    
+
       default:
         break;
     }
@@ -90,7 +90,7 @@ export class SaldosEmpleadoComponent implements OnInit {
         this.vmButtons[2].habilitar = false
         this.vmButtons[3].habilitar = false
       }
-     
+
     } catch (err) {
       console.log(err)
       this.toastr.error(err.error?.message, 'Error cargando Saldos.')
@@ -135,7 +135,7 @@ export class SaldosEmpleadoComponent implements OnInit {
       idEmpleado =this.filter.empleado.id_empleado ;
     }
       window.open(environment.ReportingUrl + "rpt_rrhh_saldos_empleado.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&id_empresa=1&id_empleado="+ idEmpleado +"&fecha_desde="+ this.filter.fecha_inicio + "&fecha_hasta="+ this.filter.fecha_final, '_blank');
-    
+
   }
 
   // GenerarReporteExcel(){
@@ -147,14 +147,14 @@ export class SaldosEmpleadoComponent implements OnInit {
   //    idEmpleado =this.filter.empleado.id_empleado ;
   //  }
   //    window.open(environment.ReportingUrl + "rpt_rrhh_saldos_empleado.xlsx?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&id_empresa=1&id_empleado="+ idEmpleado +"&fecha_desde="+ this.filter.fecha_inicio + "&fecha_hasta="+ this.filter.fecha_final, '_blank');
-   
+
   // }
 
 
   GenerarReporteExcel = async () => {
 
-		this.msgSpinner = "Generando Archivo Excel..."; 
-		this.lcargando.ctlSpinner(true); 
+		this.msgSpinner = "Generando Archivo Excel...";
+		this.lcargando.ctlSpinner(true);
 		// let data = {
 		// 	dateFrom: moment(this.filter.fecha_inicio).format('YYYY-MM-DD'),
 		// 	dateTo: moment(this.filter.fecha_final).format('YYYY-MM-DD'),
@@ -177,7 +177,7 @@ export class SaldosEmpleadoComponent implements OnInit {
      // this.infomovDataExcel.push(lineaTotales)
 
 			if(this.infomovDataExcel.length > 0){
-			  
+
 				let data = {
 				  title: 'Saldo de Empleados',
 				  razon_social: 'Gobierno Autonomo Descentralizado',
@@ -193,17 +193,17 @@ export class SaldosEmpleadoComponent implements OnInit {
 			  this.xlsService.exportExcelSaldosEmpleados(data, 'Saldo de Empleados')
 				// let tipo = 'Asiento'
 				// this.exportAsXLSX(this.fieldsDaily,tipo);
-				this.lcargando.ctlSpinner(false); 
+				this.lcargando.ctlSpinner(false);
 			  }else{
 				this.toastr.info("No hay datos para exportar")
-				this.lcargando.ctlSpinner(false); 
+				this.lcargando.ctlSpinner(false);
 			  }
 		// }, error => {
 		// 	this.toastr.info(error.error.mesagge);
 		// 	this.lcargando.ctlSpinner(false);
 		// });
-			
-		
+
+
 	  }
   calculateTotalValor(name) {
     let total = 0.00;

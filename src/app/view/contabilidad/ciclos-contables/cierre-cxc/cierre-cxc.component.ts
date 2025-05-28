@@ -2,10 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { ToastrService } from 'ngx-toastr';
-import { format } from 'date-fns';
+import moment from 'moment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { CierreCxcService } from './cierre-cxc.service';
-import { CierreMesService } from 'src/app/view/presupuesto/configuracion/cierre-de-mes/cierre-mes.service'; 
+import { CierreMesService } from 'src/app/view/presupuesto/configuracion/cierre-de-mes/cierre-mes.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
 
@@ -196,7 +196,7 @@ export class CierreCxcComponent implements OnInit {
         "anio": Number(moment(this.documento.fecha).format('YYYY')),
         "mes": Number(moment(this.documento.fecha).format('MM'))
         }
-        
+
         this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
             try {
               if (res["data"][0].estado !=='C') {
@@ -210,7 +210,7 @@ export class CierreCxcComponent implements OnInit {
                   // cambiar estado de Botones
                   this.vmButtons[1].habilitar = true
                   this.vmButtons[3].habilitar = false
-          
+
                   this.lcargando.ctlSpinner(false)
                   Swal.fire('Cierre almacenado correctamente', '', 'success').then(() => this.clearForm())
                 } catch (err) {
@@ -219,7 +219,7 @@ export class CierreCxcComponent implements OnInit {
                   this.toastr.error(err.error?.message)
                 }
               } else {
-                  
+
                   this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                   this.lcargando.ctlSpinner(false);
               }
@@ -264,17 +264,17 @@ export class CierreCxcComponent implements OnInit {
         "anio": Number(moment(this.documento.fecha).format('YYYY')),
         "mes": Number(moment(this.documento.fecha).format('MM'))
         }
-      
+
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
           try {
-           
+
             if (res["data"][0]?.estado !=='C') {
-              
+
               this.lcargando.ctlSpinner(true)
               try {
                 this.msgSpinner = 'Eliminando Cierre'
                 await this.apiService.deleteCierre(this.documento.id)
-        
+
                 this.lcargando.ctlSpinner(false)
                 Swal.fire('Cierre eliminado correctamente.', '', 'success').then(() => this.clearForm())
               } catch (err) {
@@ -283,7 +283,7 @@ export class CierreCxcComponent implements OnInit {
                 this.toastr.error(err.error?.message)
               }
             } else {
-                
+
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
             }

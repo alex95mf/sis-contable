@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
@@ -58,7 +58,7 @@ export class AsignacionComponent implements OnInit {
     private srvComun: CommonService,
     private srvVarComun: CommonVarService,
     private srvAsignacion: AsignacionService
-  ) { 
+  ) {
     this.srvVarComun.editAsignacion.asObservable().subscribe(
       (res) => {
         if (res) {
@@ -211,8 +211,8 @@ export class AsignacionComponent implements OnInit {
         this.paginacion.length = res['data']['total'];
         if (res['data']['current_page'] == 1) {
           this.asignacion_dt = res['data']['data'];
-            
-          
+
+
         }
          else {
           this.asignacion_dt = Object.values(res['data']['data']);
@@ -239,7 +239,7 @@ export class AsignacionComponent implements OnInit {
     invocar_modal.componentInstance.tipo_inspeccion = tipo_inspeccion;
     invocar_modal.componentInstance.permisos = this.permisos;
     invocar_modal.componentInstance.id_inspeccion_res = id_inspeccion_res;
-    invocar_modal.componentInstance.fk_inspector = fk_inspector ?? 0; 
+    invocar_modal.componentInstance.fk_inspector = fk_inspector ?? 0;
     invocar_modal.componentInstance.fecha_asignacion = fecha_asignacion;
   }
 
@@ -263,7 +263,7 @@ export class AsignacionComponent implements OnInit {
     // this.cargarAsignaciones();
   }
 
-  
+
   cambiarTipoResultado(evento) {
     this.tipo_inspeccion = evento;
     this.titulo = "Asignación de Inspector de " + this.tipo_inspeccion;

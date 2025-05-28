@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CategoriaProductoService } from './categoria-producto.service';
@@ -38,7 +38,7 @@ export class CategoriaProductoComponent implements OnInit {
     {valor: 'A', descripcion: "Activo"},
   ]
 
- 
+
 
   catalogoBienes: any = []
 
@@ -71,15 +71,15 @@ export class CategoriaProductoComponent implements OnInit {
       (res)=>{
         console.log(res);
         if(res['validacion']){
-          this.grupo.codigo_cuenta_contable = res['data']['codigo'];        
+          this.grupo.codigo_cuenta_contable = res['data']['codigo'];
           this.grupo.descripcion_cuenta = res['data']['nombre'];
         }else{
           this.grupo.codigo_presupuesto = res['data']['codigo'];
           this.grupo.descripcion_presupuesto = res['data']['nombre']
         }
-        
 
-        
+
+
       }
     )
   }
@@ -103,7 +103,7 @@ export class CategoriaProductoComponent implements OnInit {
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
       codigo: null,
       descripcion: null,
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -121,7 +121,7 @@ export class CategoriaProductoComponent implements OnInit {
 
   metodoGlobal(event){
     switch(event.items.boton.texto){
-      
+
       case "Nuevo":
         this.newGrupo();
         break;
@@ -133,7 +133,7 @@ export class CategoriaProductoComponent implements OnInit {
       case "Editar":
         this.guardarEdition();
         break;
-      
+
       case "Limpiar":
         this.limpiarForm()
         // this.activeModal.close()
@@ -156,7 +156,7 @@ export class CategoriaProductoComponent implements OnInit {
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-    
+
       if (result.isConfirmed) {
         this.vmButtons[0].habilitar = false
         this.vmButtons[1].habilitar = true
@@ -175,7 +175,7 @@ export class CategoriaProductoComponent implements OnInit {
       }
     });
 
-    
+
 
   }
 
@@ -192,7 +192,7 @@ export class CategoriaProductoComponent implements OnInit {
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-    
+
       if (result.isConfirmed) {
         this.validacion = false
         this.vmButtons[0].habilitar = true
@@ -200,14 +200,14 @@ export class CategoriaProductoComponent implements OnInit {
         this.vmButtons[2].habilitar = true
       }
     });
-    
+
   }
 
 
   agregarCatalogo(){
     this.mensajeSppiner = "Guardando...";
     this.lcargando.ctlSpinner(true);
-    
+
     console.log(this.grupo);
     this.service.saveCatalogoBienes(this.grupo).subscribe(
       (res)=>{
@@ -254,8 +254,8 @@ export class CategoriaProductoComponent implements OnInit {
             this.ObtenerCatalogoBienes()
           }
         })
-        
-        
+
+
       }
     )
   }
@@ -332,7 +332,7 @@ export class CategoriaProductoComponent implements OnInit {
       codigo: null,
       descripcion: null,
       estado: null,
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -359,7 +359,7 @@ export class CategoriaProductoComponent implements OnInit {
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-    
+
       if (result.isConfirmed) {
         this.service.deleteCatalogoBienes(data).subscribe(
           (res)=>{
@@ -380,7 +380,7 @@ export class CategoriaProductoComponent implements OnInit {
         )
       }
     })
-    
+
   }
 
   agregarModalCatalogo(){
@@ -419,10 +419,10 @@ export class CategoriaProductoComponent implements OnInit {
 
     modal.componentInstance.validacionModal = true;
     modal.componentInstance.validar = true
-    
+
   }
 
-  
+
 
 }
 

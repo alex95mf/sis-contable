@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { DocElecService } from './doc-elec.service';
 import Botonera from 'src/app/models/IBotonera';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { environment } from 'src/environments/environment';
@@ -48,15 +48,15 @@ export class DocElecComponent implements OnInit {
   ]
   lst_documentos: MatTableDataSource<any>;
   displayedColumns: string[] = [
-    'checkbox', 
-    'documento', 
-    'beneficiario', 
-    'fecha', 
-    'subtotal', 
-    'iva', 
-    'total', 
-    'clave_acceso', 
-    'estado', 
+    'checkbox',
+    'documento',
+    'beneficiario',
+    'fecha',
+    'subtotal',
+    'iva',
+    'total',
+    'clave_acceso',
+    'estado',
     'fecha_autorizacion',
     'observacion',
     'correo',
@@ -125,19 +125,19 @@ export class DocElecComponent implements OnInit {
       case 'CONSULTAR':
         this.getDocumentos()
         break;
-    
+
       case 'REPROCESAR':
         this.reprocesarLote()
         break;
-    
+
       case 'ENVIAR AL CORREO':
         this.enviarCorreoLote()
         break;
-    
+
       case 'EXCEL':
         this.exportExcel()
         break;
-    
+
       default:
         break;
     }
@@ -158,8 +158,8 @@ export class DocElecComponent implements OnInit {
       this.msgSpinner = 'Cargando Documentos'
       let documentos = await this.apiService.getDocumentos({ filter: this.filter })
       // console.log(documentos)
-      documentos.map((item: any) => Object.assign(item, { 
-        check: false, 
+      documentos.map((item: any) => Object.assign(item, {
+        check: false,
         estado_elec_texto: this.lst_estado_documento.find((e: any) => e.valor == item.estado_doc_elec)?.descripcion,
         codigo_tipo_documento_texto: this.cmb_tipo_documento.find((e: any) => e.codigo == item.codigo_tipo_documento)?.nombre,
       }))
@@ -180,8 +180,8 @@ export class DocElecComponent implements OnInit {
       this.msgSpinner = 'Cargando Documentos'
       let documentos = await this.apiService.getDocumentos({ filter: this.filter })
       // console.log(documentos)
-      documentos.map((item: any) => Object.assign(item, { 
-        check: false, 
+      documentos.map((item: any) => Object.assign(item, {
+        check: false,
         estado_elec_texto: this.lst_estado_documento.find((e: any) => e.valor == item.estado_doc_elec)?.descripcion,
         codigo_tipo_documento_texto: this.cmb_tipo_documento.find((e: any) => e.codigo == item.codigo_tipo_documento)?.nombre,
       }))
@@ -232,7 +232,7 @@ export class DocElecComponent implements OnInit {
       //   await Swal.fire(`Correo no se pudo enviar porque el documento no esta Autorizado .`, '', 'error');
       // }
       //
-     
+
     } catch (err) {
       console.log(err)
       this.lcargando.ctlSpinner(false)
@@ -247,7 +247,7 @@ export class DocElecComponent implements OnInit {
       this.msgSpinner = 'Restaurando estados del Documento'
       let comprobante = await this.apiService.reiniciar({documento: documento})
       Object.assign(comprobante, {
-        check: false, 
+        check: false,
         estado_elec_texto: this.lst_estado_documento.find((e: any) => e.valor == comprobante.estado_doc_elec)?.descripcion,
         codigo_tipo_documento_texto: this.cmb_tipo_documento.find((e: any) => e.codigo == comprobante.codigo_tipo_documento)?.nombre,
       })
@@ -273,7 +273,7 @@ export class DocElecComponent implements OnInit {
         .filter((documento: any) => documento.estado_doc_elec !== 'A' && documento.estado_doc_elec !== 'X')
         .forEach((documento: any) => documento.check = this.masterSelected);
 }
-/* 
+/*
   selectAll() {
     this.masterIndeterminate = false
     this.lst_documentos.data.map((documento: any) => documento.check = this.masterSelected)
@@ -313,7 +313,7 @@ export class DocElecComponent implements OnInit {
 //    let registros = this.lst_documentos.data.filter((item: any) => item.estado === 'A' || item.estado === 'X');
 let registros = this.lst_documentos.data.filter((item: any) =>  item.check === true); //(item.estado_doc_elec === 'A' || item.estado_doc_elec === 'X') &&
 
-    
+
     if (registros.length == 0) {
       Swal.fire('No hay registros a reprocesar', 'Esto puede ser porque no ha escogido registros o los seleccionados ya han sido autorizados.', 'warning')
       return;

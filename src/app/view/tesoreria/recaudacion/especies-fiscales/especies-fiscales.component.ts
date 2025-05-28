@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
@@ -44,7 +44,7 @@ export class EspeciesFiscalesComponent implements OnInit {
   exportList: any[];
 
   constructor(
-    
+
     private commonSrv: CommonService,
     private toastr: ToastrService,
     private commonVarSrv: CommonVarService,
@@ -78,18 +78,18 @@ export class EspeciesFiscalesComponent implements OnInit {
         clase: "btn btn-warning boton btn-sm",
         habilitar: false,
       },
-      { 
-        orig: "btnsEspeciesFiscales", 
-        paramAccion: "", 
-        boton: { icon: "fa fa-file-excel-o", texto: " EXCEL" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
+      {
+        orig: "btnsEspeciesFiscales",
+        paramAccion: "",
+        boton: { icon: "fa fa-file-excel-o", texto: " EXCEL" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
         habilitar: false
       }
-      
+
     ];
 
 
@@ -98,7 +98,7 @@ export class EspeciesFiscalesComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     //this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
@@ -130,7 +130,7 @@ export class EspeciesFiscalesComponent implements OnInit {
         }else{
           this.newEspeciFiscal(true);
         }
-        
+
         break;
       case " EXCEL":
         this.exportarExcel()
@@ -196,7 +196,7 @@ export class EspeciesFiscalesComponent implements OnInit {
       (res) => {
         console.log(res);
         this.catalog = res["data"]["REC_ESPECIE_FISCAL"];
-        
+
 
         // console.log(this.catalog);
         this.lcargando.ctlSpinner(false);
@@ -326,11 +326,11 @@ export class EspeciesFiscalesComponent implements OnInit {
 
           this.excelData.push(filter_values);
 
-       
-      
+
+
         })
         this.exportAsXLSX();
-          
+
 
         this.lcargando.ctlSpinner(false);
       },(error) => {
@@ -338,7 +338,7 @@ export class EspeciesFiscalesComponent implements OnInit {
         this.toastr.info(error.error.message);
       }
     )
-  
+
   }
   exportAsXLSX() {
     this.excelService.exportAsExcelFile(this.excelData, 'Especies Fiscales');

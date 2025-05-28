@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ApiServiceService } from './api-service.service';
 import Botonera from 'src/app/models/IBotonera';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { ExcelService } from 'src/app/services/excel.service';
 
@@ -24,7 +24,7 @@ export class ConsultaGeneralRubrosComponent implements OnInit {
   }
   periodo_selected: any;
   //periodo_selected: Date = new Date();
-  
+
 
   lst_mes: Array<any> = [];
   lst_rubro: Array<any> = [];
@@ -75,7 +75,7 @@ export class ConsultaGeneralRubrosComponent implements OnInit {
       case "EXCEL":
         this.exportarExcel()
         break;
-    
+
       default:
         break;
     }

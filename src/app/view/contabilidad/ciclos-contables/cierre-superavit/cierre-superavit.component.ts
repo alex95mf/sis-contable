@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { ApiService } from './api.service';
@@ -19,7 +19,7 @@ export class CierreSuperavitComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   vmButtons: Array<Botonera> = [];
   msgSpinner: string;
-  
+
   documentos: Array<any> = [];
 
   filter: any = {
@@ -94,7 +94,7 @@ export class CierreSuperavitComponent implements OnInit {
       case "LIMPIAR":
         this.clearForm()
         break;
-    
+
       default:
         break;
     }
@@ -138,7 +138,7 @@ export class CierreSuperavitComponent implements OnInit {
       this.toastr.warning(message, 'Validacion de Datos', { enableHtml: true });
       return;
     }
-    
+
     let result: SweetAlertResult = await Swal.fire({
       text: 'Seguro/a desea generar este cierre?',
       title: 'Cierre de Saldos a Favor del Contribuyente',
@@ -147,7 +147,7 @@ export class CierreSuperavitComponent implements OnInit {
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Generar',
     });
-    
+
     if (result.isConfirmed) {
 
       this.msgSpinner = "Verificando período contable";
@@ -157,7 +157,7 @@ export class CierreSuperavitComponent implements OnInit {
         "anio": Number(moment(this.documento.fecha).format('YYYY')),
         "mes": Number(moment(this.documento.fecha).format('MM'))
         }
-        
+
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
           try {
             if (res["data"][0].estado !=='C') {
@@ -175,9 +175,9 @@ export class CierreSuperavitComponent implements OnInit {
                 this.lcargando.ctlSpinner(false)
                 this.toastr.error(err.error?.message)
               }
-              
+
             } else {
-                
+
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
             }

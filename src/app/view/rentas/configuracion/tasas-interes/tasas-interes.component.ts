@@ -4,7 +4,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { TasasInteresService } from './tasas-interes.service';
 import { ToastrService } from 'ngx-toastr';
 import Swal, { SweetAlertResult } from 'sweetalert2';
-import { format } from 'date-fns';
+import moment from 'moment';
 
 @Component({
   selector: 'app-tasas-interes',
@@ -72,7 +72,7 @@ export class TasasInteresComponent implements OnInit {
       case "BUSCAR":
         //
         break;
-    
+
       default:
         break;
     }
@@ -132,7 +132,7 @@ export class TasasInteresComponent implements OnInit {
           confirmButtonText: 'Generar',
           cancelButtonText: 'Cancelar',
         })
-        
+
         if (result.isConfirmed) this.generarPeriodo();
       }
     } catch (err) {
@@ -148,7 +148,7 @@ export class TasasInteresComponent implements OnInit {
     try {
       this.msgSpinner = 'Generando Periodo'
       await this.apiService.generarPeriodoTasas({periodo: this.periodoSelected})
-      
+
       this.lcargando.ctlSpinner(false)
       Swal.fire('Periodo Generado', '', 'success').then(() => this.ObtenerPeriodo())
     } catch (err) {
@@ -174,7 +174,7 @@ export class TasasInteresComponent implements OnInit {
         this.msgSpinner = 'Almacenando Tasas de Interes'
         let tasas = await this.apiService.setTasasInteres({ tasas: this.lst_periodo })
         console.log(tasas)
-  
+
         this.lcargando.ctlSpinner(false)
         Swal.fire('Tasas de Interes almacenadas correctamente', '', 'success')
       } catch (err) {
@@ -193,10 +193,10 @@ export class TasasInteresComponent implements OnInit {
     //   this.toastr.info('Debe seleccionar un Mes');
     // }
     else{
-  
+
       let data = {
         periodo: Number(this.periodoSelected),
-        //mes: 
+        //mes:
       }
       this.msgSpinner = 'Inicializando Intereses'
       this.lcargando.ctlSpinner(true);
@@ -227,7 +227,7 @@ export class TasasInteresComponent implements OnInit {
       this.toastr.info('Debe seleccionar un Mes');
     }
     else{
-  
+
       let data = {
         periodo: Number(item.periodo),
         mes: Number(item.mes),

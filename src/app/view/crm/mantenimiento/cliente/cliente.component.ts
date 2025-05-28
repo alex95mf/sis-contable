@@ -1,5 +1,5 @@
 import { Component, OnInit ,Input,ViewChild} from '@angular/core';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as myVarGlobals from '../../../../global';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
@@ -66,8 +66,8 @@ export class ClienteComponent implements OnInit {
   //onCoordinatesChanged(coordinates: { lat: number, lng: number }) {
   //  this.mapCoordinates = coordinates;
  // }
-  
- 
+
+
   // Método para manejar el evento de click en el mapa
  // mapClicked($event: google.maps.MapMouseEvent) {
  //   this.lat = $event.latLng.lat();
@@ -157,11 +157,11 @@ Fecha_Actual : any=new Date(Number(moment(new Date()).format('YYYY')), Number(mo
 
     fecha_nacimiento: new Date(Number(moment(new Date()).format('YYYY')), Number(moment(new Date()).format('MM')) - 1, 1).toISOString().substring(0, 10),
     fecha_registro_credito: new Date(Number(moment(new Date()).format('YYYY')), Number(moment(new Date()).format('MM')) - 1, 1).toISOString().substring(0, 10),
-   
+
     estado : 'A',
     documentos:[]
 
- 
+
 };
 
 clienteRelacionado:any={};
@@ -171,40 +171,40 @@ lista_estados:any = [
   { estado: "A",descripcion:"ACTIVO" },
   { estado: "I",descripcion:"INACTIVO" }
 
-] 
+]
 
 lista_generos:any = [
   { codigo: "M",descripcion:"MASCULINO" },
   { codigo: "F",descripcion:"FEMENINO" }
 
-] 
+]
 
   constructor(
     private modal: NgbModal,
     private clienteSrv: ClienteServiceService,
     private toastr: ToastrService,
     private commonSrv: CommonService,
-  ) { 
+  ) {
 
     this.clienteSrv.clientes$.subscribe(
       (res: any) => {
       console.log(res)
         if(res.refrescar){
          // alert(res.id);
-          
+
           if (res.TipoConsulta==="Cliente")
           {
             this.cliente.id_cliente = res.id;
             this.consultarCliente();
-            
+
           }
-          
+
         else if (res.TipoConsulta==="Relacionado")
         {
           this.clienteRelacionado.id_cliente = res.id;
           this.consultarClienteRelacionado();
         }
-          
+
         }
       }
     )
@@ -216,7 +216,7 @@ lista_generos:any = [
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fCrmProductos,
       id_rol: this.dataUser.id_rol,
@@ -234,15 +234,15 @@ lista_generos:any = [
           }
         this.permissions = res["data"][0];
 
-        
+
         if (this.permissions.abrir == "0") {
           this.lcargando.ctlSpinner(false);
           this.vmButtons = [];
           this.toastr.warning("No tiene permisos para usar este recurso.", this.fTitle);
         } else {
           this.lcargando.ctlSpinner(false);
-        
-           
+
+
         }
       },
       err => {
@@ -256,7 +256,7 @@ lista_generos:any = [
     //   case "NUEVO1":
     //     this.newProduct();
     //     break;
-     case "BUSCAR1":  
+     case "BUSCAR1":
          this.buscarClientes();
        break;
 
@@ -293,7 +293,7 @@ lista_generos:any = [
     }
   }
 
-  
+
   cargaFoto(archivos) {
     this.mensajeSpiner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
@@ -373,8 +373,8 @@ lista_generos:any = [
 
           let data={
             cliente:{
-              id_cliente_documento: this.cliente.documentos[index].id_cliente_documento, 
-              archivo_base_64: this.cliente.documentos[index].archivo_base_64, 
+              id_cliente_documento: this.cliente.documentos[index].id_cliente_documento,
+              archivo_base_64: this.cliente.documentos[index].archivo_base_64,
               nombre_archivo: this.cliente.documentos[index].nombre_archivo
             }
           }
@@ -498,8 +498,8 @@ lista_generos:any = [
    //     this.producto.fotosEliminar = this.fotosEliminar;
 
 
-        
-      
+
+
         this.clienteSrv.guardarCliente({cliente:this.cliente}).subscribe(
           (res) => {
             console.log(res);
@@ -509,7 +509,7 @@ lista_generos:any = [
 
               this.cliente.fecha_nacimiento = moment( res["data"].fecha_nacimiento).format("YYYY-MM-DD");
               this.cliente.fecha_registro_credito = moment( res["data"].fecha_registro_credito).format("YYYY-MM-DD");
-           
+
               this.cliente.created_at = moment( res["data"].created_at).format("YYYY-MM-DD");
 
 
@@ -518,10 +518,10 @@ lista_generos:any = [
                 documento.fecha_vencimiento = moment( documento.fecha_vencimiento).format("YYYY-MM-DD");
              });
 
-             
+
              // this.producto.fotos = res["data"].fotos;
              // this.producto.fotosEliminar=[];
-              
+
            //   this.needRefresh = true;
               this.lcargando.ctlSpinner(false);
               Swal.fire({
@@ -575,13 +575,13 @@ lista_generos:any = [
       if (result.isConfirmed) {
         this.mensajeSpiner = "Editando Cliente...";
         this.lcargando.ctlSpinner(true);
-   
+
         this.cliente.id_usuario= this.dataUser['id_usuario'];
 
         this.cliente.documentos = this.cliente.documentos.filter(doc => doc.id_cliente_documento === 0);
 
-     
-     
+
+
         this.cliente.fotos = this.fotos.filter(e => e.id_cliente_fotos === 0);
         this.cliente.fotosEliminar = this.fotosEliminar;
         console.log(this.cliente);
@@ -591,7 +591,7 @@ lista_generos:any = [
         this.cliente.latitud = this.initialLat;
         this.cliente.longitud = this.initialLng;
 
-  
+
         this.clienteSrv.editarCliente({cliente:this.cliente}).subscribe(
           (res) => {
             console.log(res);
@@ -606,9 +606,9 @@ lista_generos:any = [
               documento.fecha_vencimiento = moment( documento.fecha_vencimiento).format("YYYY-MM-DD");
            });
 
-           
 
-            
+
+
        //     this.producto.fotos = res["data"].fotos;
        //     this.producto.fotosEliminar=[];
 
@@ -681,7 +681,7 @@ lista_generos:any = [
         this.toastr.info("El campo RUC no puede ser vacío");
         flag = true;
       }
-    
+
 
       !flag ? resolve(true) : resolve(false);
     })
@@ -796,9 +796,9 @@ lista_generos:any = [
         }
       }
 
-    let response=await this.clienteSrv.getProvincias 
+    let response=await this.clienteSrv.getProvincias
     (data);
-    
+
 this.lista_provincias = response;
  this.lcargando.ctlSpinner(false)
   } catch (err) {
@@ -815,9 +815,9 @@ this.lista_provincias = response;
     this.lcargando.ctlSpinner(true)
     try {
 
-    let response=await this.clienteSrv.getCatalogos 
+    let response=await this.clienteSrv.getCatalogos
     ({params:"'IMPUESTOS','DOCUMENTO','ESTADO CIVIL','NIVEL EDUCATIVO','CLI_SEGMENTACION','CLI_MEDIO_CONTACTO','CLI_TIPO_IDENTIFICADOR','CLI_TIPO_DIRECCION','CLI_FORMA_PAGO','CLI_PLAZO'"});
-    
+
 
     this.lista_impuestos=response['IMPUESTOS'];
     this.lista_tipo_documentos=response['DOCUMENTO'];
@@ -833,8 +833,8 @@ this.lista_provincias = response;
     this.lista_plazo=response['CLI_PLAZO'];
 
     //console.log(this.lista_tipo_contacto);
-    
-    
+
+
     let data = {
       params: {
         perfiles: [3,42]
@@ -855,12 +855,12 @@ this.lista_oficial_credito = this.lista_usuarios.filter(usuario => usuario.role.
 
 
 
-  
 
 
 
 
- 
+
+
 
 
 
@@ -882,15 +882,15 @@ this.lista_oficial_credito = this.lista_usuarios.filter(usuario => usuario.role.
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
-     
+
       let grupos =await this.clienteSrv.getGrupoProductos({});
       this.lista_grupos= grupos;
 
 
     //  console.log(this.lista_grupos);
-      
+
       //this.lista_Clase_Productos= this.lista_Grupos.filter(e => e.padreid === 0);
       this.lista_clase_productos = this.lista_grupos.filter(grupo => grupo.padreid === 0);
 //console.log(this.lista_clase_productos);
@@ -902,9 +902,9 @@ this.lista_oficial_credito = this.lista_usuarios.filter(usuario => usuario.role.
 
         }
       //  console.log(this.lista_grupos_productos);
-          
 
-  
+
+
       this.lcargando.ctlSpinner(false)
     } catch (err) {
       console.log(err)
@@ -920,19 +920,19 @@ this.lista_oficial_credito = this.lista_usuarios.filter(usuario => usuario.role.
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
-     
+
       let bodegas =await this.clienteSrv.getBodegas({});
       //this.lista_bodegas= bodegas;
 
 
-      
-      
 
-          
 
-  
+
+
+
+
       this.lcargando.ctlSpinner(false)
     } catch (err) {
       console.log(err)
@@ -946,7 +946,7 @@ this.lista_oficial_credito = this.lista_usuarios.filter(usuario => usuario.role.
 removeContacto(index)
   {
     if (this.cliente.contactos[index].id_cliente_contacto === 0) {
-    
+
       this.cliente.contactos.splice(index, 1);
     }
     else
@@ -954,18 +954,18 @@ removeContacto(index)
       this.cliente.contactos[index].estado='I'
     }
   };
-  
+
   activarContacto(index)
   {
    this.cliente.contactos[index].estado='A';
   };
-  
+
 
 
   removeDireccion(index)
   {
     if (this.cliente.direcciones[index].id_cliente_direccion === 0) {
-    
+
       this.cliente.direcciones.splice(index, 1);
     }
     else
@@ -980,12 +980,12 @@ removeContacto(index)
   };
 
   addContacto(): void {
- 
+
 
    // const existe = this.cliente.bodegas.some(bodega => bodega.fk_bodega === this.bodega.id_bodega);
 
     // Si no existe, agregarla
-  
+
       let nuevoElemento = {
         id_cliente_contacto: 0,
         fk_ciente: this.cliente.id_cliente,
@@ -996,30 +996,30 @@ removeContacto(index)
         correo_contacto:'',
         estado:'A'
 
-       
+
       };
       this.cliente.contactos.push(nuevoElemento);
- 
+
       // Manejar el caso donde la bodega ya existe
     //  console.log('La bodega ya existe en producto.bodegas');
       // Aquí podrías mostrar un mensaje al usuario o manejarlo según tus necesidades
-    
 
- 
+
+
   }
 
   addDireccion(): void {
- 
+
 
     // const existe = this.cliente.bodegas.some(bodega => bodega.fk_bodega === this.bodega.id_bodega);
- 
+
      // Si no existe, agregarla
-   
+
        let nuevoElemento = {
          id_cliente_direccion: 0,
          fk_ciente: this.cliente.id_cliente,
          tipo_direccion:'',
-       
+
          direccion:'',
          tipo_identificador:'',
          provincia:'',
@@ -1027,26 +1027,26 @@ removeContacto(index)
          codigo_postal:'',
          estado:'A',
          ciudades:[]
- 
-        
+
+
        };
        this.cliente.direcciones.push(nuevoElemento);
-  
+
        // Manejar el caso donde la bodega ya existe
      //  console.log('La bodega ya existe en producto.bodegas');
        // Aquí podrías mostrar un mensaje al usuario o manejarlo según tus necesidades
-     
- 
-  
+
+
+
    }
 
    addReferencia(): void {
- 
+
 
     // const existe = this.cliente.bodegas.some(bodega => bodega.fk_bodega === this.bodega.id_bodega);
- 
+
      // Si no existe, agregarla
-   
+
        let nuevoElemento = {
          id_cliente_referencia: 0,
          fk_ciente: this.cliente.id_cliente,
@@ -1059,23 +1059,23 @@ removeContacto(index)
          compras_mensuales:0,
          estado:'A',
          ciudades:[]
- 
-        
+
+
        };
        this.cliente.referencias.push(nuevoElemento);
-  
+
        // Manejar el caso donde la bodega ya existe
      //  console.log('La bodega ya existe en producto.bodegas');
        // Aquí podrías mostrar un mensaje al usuario o manejarlo según tus necesidades
-     
- 
-  
+
+
+
    }
 
    removeReferencia(index)
    {
      if (this.cliente.referencias[index].id_cliente_referencia === 0) {
-     
+
        this.cliente.referencias.splice(index, 1);
      }
      else
@@ -1083,7 +1083,7 @@ removeContacto(index)
        this.cliente.referencias[index].estado='I'
      }
    };
- 
+
    activarReferencia(index)
    {
      this.cliente.referencias[index].estado='A';
@@ -1091,12 +1091,12 @@ removeContacto(index)
 
 
    addInfoFinanciera(): void {
- 
+
 
     // const existe = this.cliente.bodegas.some(bodega => bodega.fk_bodega === this.bodega.id_bodega);
- 
+
      // Si no existe, agregarla
-   
+
        let nuevoElemento = {
          id_cliente_informacion_financiera: 0,
          fk_ciente: this.cliente.id_cliente,
@@ -1107,21 +1107,21 @@ removeContacto(index)
          deudas_actuales:0,
 
          estado:'A',
-      
- 
-        
+
+
+
        };
        this.cliente.informacionfinanciera.push(nuevoElemento);
 
      console.log(this.cliente.informacionfinanciera);
- 
-  
+
+
    }
 
    removeInfoFinanciera(index)
    {
      if (this.cliente.informacionfinanciera[index].id_cliente_informacion_financiera === 0) {
-     
+
        this.cliente.informacionfinanciera.splice(index, 1);
      }
      else
@@ -1129,21 +1129,21 @@ removeContacto(index)
        this.cliente.informacionfinanciera[index].estado='I'
      }
    };
- 
+
    activarInfoFinanciera(index)
    {
      this.cliente.informacionfinanciera[index].estado='A';
    };
 
 
-   
+
    addInfoEntrega(): void {
- 
+
 
     // const existe = this.cliente.bodegas.some(bodega => bodega.fk_bodega === this.bodega.id_bodega);
- 
+
      // Si no existe, agregarla
-   
+
        let nuevoElemento = {
         id_cliente_informacion_entrega: 0,
          fk_ciente: this.cliente.id_cliente,
@@ -1158,21 +1158,21 @@ removeContacto(index)
          transporte :'',
          forma_pago:'',
          estado:'A',
-      
- 
-        
+
+
+
        };
        this.cliente.informacionentrega.push(nuevoElemento);
 
 
- 
-  
+
+
    }
 
    removeInfoEntrega(index)
    {
      if (this.cliente.informacionentrega[index].id_cliente_informacion_entrega === 0) {
-     
+
        this.cliente.informacionentrega.splice(index, 1);
      }
      else
@@ -1180,7 +1180,7 @@ removeContacto(index)
        this.cliente.informacionentrega[index].estado='I'
      }
    };
- 
+
    activarInfoEntrega(index)
    {
      this.cliente.informacionentrega[index].estado='A';
@@ -1189,7 +1189,7 @@ removeContacto(index)
 
 
    addCliente(): void {
- 
+
 
 
     const modalInvoice = this.modal.open(ModalBuscarClienteComponent, {
@@ -1199,27 +1199,27 @@ removeContacto(index)
     });
     modalInvoice.componentInstance.module_comp = myVarGlobals.fConciliacionBank;
     this.cliente.id_producto = 0;
-   
+
 
     modalInvoice.componentInstance.cliente = this.clienteRelacionado;
     modalInvoice.componentInstance.TipoConsulta = "Relacionado";
 
 
     // const existe = this.cliente.bodegas.some(bodega => bodega.fk_bodega === this.bodega.id_bodega);
- 
+
      // Si no existe, agregarla
-   
-      
 
 
- 
-  
+
+
+
+
    }
 
    removeCliente(index)
    {
      if (this.cliente.relacionado[index].id_cliente_relacionado === 0) {
-     
+
        this.cliente.relacionado.splice(index, 1);
      }
      else
@@ -1227,7 +1227,7 @@ removeContacto(index)
        this.cliente.relacionado[index].estado='I'
      }
    };
- 
+
    activarCliente(index)
    {
      this.cliente.relacionado[index].estado='A';
@@ -1248,12 +1248,12 @@ removeContacto(index)
 
 
   addInfoCredito(): void {
- 
+
 
     // const existe = this.cliente.bodegas.some(bodega => bodega.fk_bodega === this.bodega.id_bodega);
- 
+
      // Si no existe, agregarla
-   
+
        let nuevoElemento = {
          id_cliente_informacion_credito: 0,
          fk_ciente: this.cliente.id_cliente,
@@ -1265,21 +1265,21 @@ removeContacto(index)
          fk_archivo_4:0,
 
          estado:'A',
-      
- 
-        
+
+
+
        };
        this.cliente.informacioncredito.push(nuevoElemento);
 
      //console.log(this.cliente.informacionfinanciera);
- 
-  
+
+
    }
 
    removeInfoCredito(index)
    {
      if (this.cliente.informacioncredito[index].id_cliente_informacion_credito === 0) {
-     
+
        this.cliente.informacioncredito.splice(index, 1);
      }
      else
@@ -1287,7 +1287,7 @@ removeContacto(index)
        this.cliente.informacioncredito[index].estado='I'
      }
    };
- 
+
    activarInfoCredito(index)
    {
      this.cliente.informacioncredito[index].estado='A';
@@ -1295,12 +1295,12 @@ removeContacto(index)
 
 
    addDocumento(tipodoc): void {
- 
+
 
     // const existe = this.cliente.bodegas.some(bodega => bodega.fk_bodega === this.bodega.id_bodega);
- 
+
      // Si no existe, agregarla
-   
+
      this.cliente.documentos.length
        let nuevoElemento = {
          id_cliente_documento: 0,
@@ -1317,15 +1317,15 @@ removeContacto(index)
 
 
          estado:'A',
-      
- 
-        
+
+
+
        };
        this.cliente.documentos.push(nuevoElemento);
 
      //console.log(this.cliente.informacionfinanciera);
- 
-  
+
+
    }
 
    removeDocumento(id, linea)
@@ -1339,12 +1339,12 @@ removeContacto(index)
     {
       index = this.cliente.documentos.findIndex(item => item.id_cliente_documento === id);
     }
- 
-    
+
+
 
 
      if (this.cliente.documentos[index].id_cliente_documento === 0) {
-     
+
        this.cliente.documentos.splice(index, 1);
      }
      else
@@ -1352,7 +1352,7 @@ removeContacto(index)
        this.cliente.documentos[index].estado='I'
      }
    };
- 
+
    activarDocumento(id,linea)
    {
     let index = 0;
@@ -1364,7 +1364,7 @@ removeContacto(index)
     {
       index = this.cliente.documentos.findIndex(item => item.id_cliente_documento === id);
     }
- 
+
      this.cliente.documentos[index].estado='A';
    };
 
@@ -1373,10 +1373,10 @@ removeContacto(index)
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
     // console.log(this.producto);
-     
+
       let cliente =await this.clienteSrv.getCliente(this.cliente.id_cliente,
         { cliente: this.cliente });
       //alert(JSON.stringify(producto));
@@ -1396,7 +1396,7 @@ removeContacto(index)
       this.cliente.archivos.push({ id_cliente_archivo:1,descripcion:'firna 1' }); // Agregar la nueva dirección a la lista
       this.cliente.archivos.push({ id_cliente_archivo:2,descripcion:'firna 2' }); // Agregar la nueva dirección a la lista
       this.fotos = this.cliente.fotos;
-      
+
      // this.mapCoordinates= { lat: this.cliente.latitud, lng: this.cliente.Longitud };
    //  this.setKnownCoordinates(-2.147866, -79.922742);
     //   this.setKnownCoordinates(this.cliente.latitud,this.cliente.longitud);
@@ -1423,7 +1423,7 @@ removeContacto(index)
 
 
 
-  
+
 
       this.lcargando.ctlSpinner(false)
     } catch (err) {
@@ -1440,17 +1440,17 @@ removeContacto(index)
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
     // console.log(this.producto);
-     
+
       let cliente =await this.clienteSrv.getCliente(this.clienteRelacionado.id_cliente,
         { cliente: this.clienteRelacionado });
       //alert(JSON.stringify(producto));
 
 
       this.clienteRelacionado= cliente;//.data;
-   
+
 
       let nuevoElemento = {
         id_cliente_relacionado: 0,
@@ -1459,15 +1459,15 @@ removeContacto(index)
         fk_cliente_relacionado : this.clienteRelacionado.id_cliente,
 
         estado:'A',
-     
 
-       
+
+
       };
       this.cliente.relacionado.push(nuevoElemento);
 
 
 
-  
+
 
       this.lcargando.ctlSpinner(false)
     } catch (err) {
@@ -1486,7 +1486,7 @@ removeContacto(index)
     });
     modalInvoice.componentInstance.module_comp = myVarGlobals.fConciliacionBank;
     this.cliente.id_producto = 0;
-   
+
 
     modalInvoice.componentInstance.cliente = this.cliente;
     modalInvoice.componentInstance.TipoConsulta = "Cliente";
@@ -1535,7 +1535,7 @@ removeContacto(index)
   }
   cancelar():void{
 
-    
+
     this.vmButtons[0].habilitar=false;
     this.vmButtons[1].habilitar=false;
     this.vmButtons[2].habilitar=true;
@@ -1556,9 +1556,9 @@ removeContacto(index)
       estado_civil:'',
 
       fecha_nacimiento: this.Fecha_Actual,
-     
+
       created_at: this.Fecha_Actual,
-     
+
       estado : 'A',
       segmentacion:'',
       medio_contacto:'',
@@ -1585,7 +1585,7 @@ removeContacto(index)
       documentos:[],
       latitud: -2.145357,
       longitud:-79.901385
-   
+
   };
   this.fotos=[];
   this.fotosEliminar=[];
@@ -1604,7 +1604,7 @@ removeContacto(index)
  this.initialLng= -79.922742;
 //this.initialLat= -2.2199766900493;
 //this.initialLng =   -79.695248034246;
-  
+
     }
 
 }

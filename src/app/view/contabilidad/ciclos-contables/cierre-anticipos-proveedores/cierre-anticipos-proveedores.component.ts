@@ -4,7 +4,7 @@ import { CierreMesService } from 'src/app/view/presupuesto/configuracion/cierre-
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { ToastrService } from 'ngx-toastr';
-import { format } from 'date-fns';
+import moment from 'moment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
 @Component({
@@ -85,7 +85,7 @@ export class CierreAnticiposProveedoresComponent implements OnInit {
       case "LIMPIAR":
         this.clearForm()
         break;
-    
+
       default:
         break;
     }
@@ -135,7 +135,7 @@ export class CierreAnticiposProveedoresComponent implements OnInit {
         "anio": Number(moment(this.documento.fecha).format('YYYY')),
         "mes": Number(moment(this.documento.fecha).format('MM'))
         }
-        
+
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
           try {
             if (res["data"][0].estado !=='C') {
@@ -154,7 +154,7 @@ export class CierreAnticiposProveedoresComponent implements OnInit {
                 this.toastr.error(err.error?.message)
               }
             } else {
-                
+
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
             }

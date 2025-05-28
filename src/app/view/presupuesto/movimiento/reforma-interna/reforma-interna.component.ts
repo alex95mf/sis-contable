@@ -8,7 +8,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from 'src/app/global';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { ReformaInternaService } from './reforma-interna.service';
@@ -132,14 +132,14 @@ iddetallecabecerareformageneral: any;
         this.atribucionParamsNew.num_reforma = res.no_reforma;
         /*  const detallesConIncremento = res.detalles.filter(detalle => parseFloat(detalle.tc_incremento) > 0);
          const detallesConReduccion = res.detalles.filter(detalle => parseFloat(detalle.tc_reduccion) > 0);
- 
- 
- 
+
+
+
          this.atribucionParamsNew.programa = detallesConIncremento.cod_programa */
 
         const detallesConIncremento = res.detalles.filter(detalle => parseFloat(detalle.tc_incremento) > 0);
         const detallesConReduccion = res.detalles.filter(detalle => parseFloat(detalle.tc_reduccion) > 0);
-       
+
         if (detallesConReduccion.length > 0) {
           // Asigna el valor del campo 'cod_programa' del primer detalle con incremento a 'atribucionParamsNew.programa'
           this.atribucionParamsNew.programa = detallesConReduccion[0].programa;
@@ -175,7 +175,7 @@ iddetallecabecerareformageneral: any;
           this.descripcion_presupuesto2 = detallesConIncremento[0].presupuesto.descripcion_general
 
         }
-        
+
         // También puedes hacer lo mismo para detallesConReduccion si necesitas asignar algo basado en esos detalles
       }
 
@@ -233,13 +233,13 @@ iddetallecabecerareformageneral: any;
           (e) => {
             e.precio_cotizado = e.costo_unitario;
             e.costo_total_por_mod = e.valor_reforma
-            e.saldo_por_comprometer =e.costo_total_por_solicitar 
-            
-            if (e.tipo_ajuste == 1) { 
-              
+            e.saldo_por_comprometer =e.costo_total_por_solicitar
+
+            if (e.tipo_ajuste == 1) {
+
               this.listaSolicitudesAtribucion.push(e)
             } else {
-             
+
               this.listaSolicitudesAtribucion2.push(e)
             }
 
@@ -464,7 +464,7 @@ iddetallecabecerareformageneral: any;
         // }
         // else if (
         //   (res.cantidad_requerida == null ||
-        //   res.cantidad_requerida == undefined) 
+        //   res.cantidad_requerida == undefined)
         // ) {
         //   this.toastr.info("El campo cantidad requerida no debe estar vacío en ",res['descripcion']);
         //   flag = true;
@@ -499,7 +499,7 @@ iddetallecabecerareformageneral: any;
       console.log(res);
       this.lcargando.ctlSpinner(false);
       //  let programasRes: []
-      //  res.map((item: any) => 
+      //  res.map((item: any) =>
       //  Object.assign(item, { label: `${item.catalogo.descripcion} - ${item.catalogo.valor}` }
       //  ))
       //  this.programa = programasRes
@@ -547,10 +547,10 @@ iddetallecabecerareformageneral: any;
      element.cantidad_ajustada = parseInt(element.cantidad_solicitada_mod) + parseInt(element.cantidad_solicitada_por_mod)
      element.costo_unitario_ajustado = element.costo_unitario_por_mod
      element.costo_total_ajustado = element.costo_unitario_ajustado * element.cantidad_ajustada
- 
- 
- 
-     this.calcularValorTotal2() 
+
+
+
+     this.calcularValorTotal2()
    } */
 
   actualizaTotalCotizado2(newValue: any, element: any) {
@@ -568,8 +568,8 @@ iddetallecabecerareformageneral: any;
    // element.costo_unitario_ajustado = element.costo_unitario_por_mod
    // element.costo_total_ajustado = element.costo_unitario_ajustado * element.cantidad_ajustada
    console.log("calculando");
-   element.costo_total_ajustado = parseInt(element.precio_cotizado) + parseInt(element.costo_total_por_mod)//   - 
-    this.calcularValorTotal() 
+   element.costo_total_ajustado = parseInt(element.precio_cotizado) + parseInt(element.costo_total_por_mod)//   -
+    this.calcularValorTotal()
   } */
 
   actualizaTotalCotizado(newValue: any, element: any) {
@@ -604,7 +604,7 @@ iddetallecabecerareformageneral: any;
     this.listaSolicitudesAtribucion2.map((res) => {
       if (res.check) {
         console.log('Entro', res.cantidad_solicitada_mod);
-        res.precio_cotizado_mod = res.costo_unitario_mod // res.cantidad_solicitada_mod * 
+        res.precio_cotizado_mod = res.costo_unitario_mod // res.cantidad_solicitada_mod *
         total += res.costo_unitario_mod//(res.cantidad_solicitada_mod * )
       }
     })
@@ -714,7 +714,7 @@ iddetallecabecerareformageneral: any;
           "mes": Number(moment(this.atribucionParamsNew.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
               this.mensajeSppiner = "Creando Reforma interna...";
@@ -727,22 +727,22 @@ iddetallecabecerareformageneral: any;
                   this.atribucionParamsNew.bienes.push(res);
                 }
               })
-      
+
               this.listaSolicitudesAtribucion2.map((res) => {
                 if (res.check) {
                   res['tipo_ajuste'] = 2;
                   this.atribucionParamsNew.bienes.push(res);
                 }
               })
-      
+
               this.atribucionParamsNew.total_1 = this.totalOriginal
               this.atribucionParamsNew.total_2 = this.total2Original
               this.atribucionParamsNew.diferencia_1 = this.total
               this.atribucionParamsNew.diferencia_2 = this.total2
               this.atribucionParamsNew.tipo_reforma = 'INTERNA'
-      
+
               console.log(this.atribucionParamsNew);
-      
+
               this.service.setReformaInterna({ documento: this.atribucionParamsNew }).subscribe((dat: any) => {
                 if (this.iddetallecabecerareformageneral !=null){
                   this.service.setReformaAtendida({ id_reforma: this.iddetallecabecerareformageneral }).subscribe((dat: any) => {})
@@ -770,12 +770,12 @@ iddetallecabecerareformageneral: any;
                   console.log(error);
                 }
               )
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
@@ -969,7 +969,7 @@ iddetallecabecerareformageneral: any;
               costo_total_por_mod: 0,
               cantidad_solicitada_por_mod: 0,
               costo_unitario_por_mod: 0,
-              precio_cotizado_mod: res.costo_unitario_por_solicitar, // res.cantidad_por_solicitar * 
+              precio_cotizado_mod: res.costo_unitario_por_solicitar, // res.cantidad_por_solicitar *
               cantidad_ajustada: res.cantidad_ajustada,
               icp: res.icp,
               precio_cotizado_icp: res.precio_cotizado_icp,
@@ -1031,7 +1031,7 @@ iddetallecabecerareformageneral: any;
               costo_total_por_mod: 0,
               cantidad_solicitada_por_mod: 0,
               costo_unitario_por_mod: 0,
-              precio_cotizado_mod: res.costo_unitario_por_solicitar, //res.cantidad_por_solicitar * 
+              precio_cotizado_mod: res.costo_unitario_por_solicitar, //res.cantidad_por_solicitar *
               cantidad_ajustada: res.cantidad_ajustada,
               icp: res.icp,
               precio_cotizado_icp: res.precio_cotizado_icp,
@@ -1284,7 +1284,7 @@ iddetallecabecerareformageneral: any;
           periodo: this.atribucionParamsNew,
           programa: this.programa,
         })
-        
+
         response.map((item: any) => Object.assign(item, {
           check: false,
           cantidad_mod: item.cantidad_por_solicitar,
@@ -1315,7 +1315,7 @@ iddetallecabecerareformageneral: any;
             codigo: this.atribucionParamsNew.reforma_presupuesto,
           }
         }
-     
+
         this.service.getCatalogoPresupuestoreforma(data).subscribe(
           (res: any) => {
             console.log(res);
@@ -1339,7 +1339,7 @@ iddetallecabecerareformageneral: any;
   }
 
 
-  modalReformas() { 
+  modalReformas() {
     const modal = this.modalDet.open(ModalBusquedaReformaGeneralComponent, {
       size: "xl",
       backdrop: "static",

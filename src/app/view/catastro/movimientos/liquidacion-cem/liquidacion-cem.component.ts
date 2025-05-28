@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
-import { format } from 'date-fns';
+import moment from 'moment';
 import Swal from 'sweetalert2';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
 import { MatTable } from '@angular/material/table';
@@ -151,7 +151,7 @@ export class LiquidacionCemComponent implements OnInit {
       case "LIMPIAR":
         this.limpiarForm();
         break;
-    
+
       default:
         break;
     }
@@ -244,7 +244,7 @@ export class LiquidacionCemComponent implements OnInit {
         this.formReadonly = false
         this.vmButtons[0].habilitar = false
         this.vmButtons[1].habilitar = true
-  
+
         let catalogos = await this.apiService.getCatalogos({params: "'CEM_BASE_CALCULO'"})
         this.lst_base = catalogos['CEM_BASE_CALCULO'];
         this.lst_base.map((item: any) => Object.assign(item, { valor: 0 }))
@@ -256,7 +256,7 @@ export class LiquidacionCemComponent implements OnInit {
         this.lcargando.ctlSpinner(false)
         this.toastr.error(err.error?.message)
       }
-      
+
 
     }
   }

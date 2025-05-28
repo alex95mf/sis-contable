@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { OrdenService } from '../orden.service';
-import { format } from 'date-fns';
+import moment from 'moment';
 
 @Component({
   selector: 'app-modal-solicitud-cat',

@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
-import { format } from 'date-fns';
+import moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { FormularioNotificacionesService } from './formulario-notificaciones.service';
 import { Subject } from 'rxjs';
@@ -33,7 +33,7 @@ export class FormularioNotificacionesComponent implements OnInit {
 
   cmb_mercados: any[] = []
   cmb_conceptos: any[] = []
-  
+
   sectores: any[] = [
     { valor: 0, descripcion: 'Seleccione un Sector' }
   ]
@@ -48,7 +48,7 @@ export class FormularioNotificacionesComponent implements OnInit {
     {value: "R",label: "RECIBIDO"},
     {value: "N",label: "NO RECIBIDO"}
   ]
-  
+
   deudas: any = [];
   liquidacionesDt: any[] = [];
   masterIndeterminate: boolean = false
@@ -66,7 +66,7 @@ export class FormularioNotificacionesComponent implements OnInit {
     private commonVrs: CommonVarService,
     private apiSrv: FormularioNotificacionesService,
     private excelService: ExcelService,
-  ) { 
+  ) {
     this.commonVrs.modalEditionDetallesCobro.asObservable().subscribe(
       (res)=>{
         this.cargarLiquidaciones();
@@ -91,7 +91,7 @@ export class FormularioNotificacionesComponent implements OnInit {
         showbadge: false,
         clase: "btn btn-outline-danger boton btn-sm",
         habilitar: false,
-        
+
       },
       {
         orig: "btnsCobranzaGestionNotificaciones",
@@ -123,7 +123,7 @@ export class FormularioNotificacionesComponent implements OnInit {
       page: 1,
       pageSizeOptions: [10, 20, 30, 50]
     }
-    
+
     setTimeout(()=> {
       // this.cargarLiquidaciones();
       // this.getConceptos();
@@ -140,11 +140,11 @@ export class FormularioNotificacionesComponent implements OnInit {
       case "EXCEL":
         this.exportarExcel()
       break;
-    
+
       case "GENERAR EXPEDIENTE":
         this.generarNotificacion()
         break;
-    
+
       default:
         break;
     }
@@ -250,7 +250,7 @@ export class FormularioNotificacionesComponent implements OnInit {
     if (this.filter.razon_social != null) {
       this.filter.razon_social = this.filter.razon_social.trim().length > 0 ? this.filter.razon_social.trim() : null
     }
-    
+
     this.msgSpinner = "Cargando Notificaciones...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getNotificacionCobro({params: {tipo:"GESTION", filter: this.filter, paginate: this.paginate } }).subscribe(
@@ -260,14 +260,14 @@ export class FormularioNotificacionesComponent implements OnInit {
           this.lcargando.ctlSpinner(false)
           return;
         }
-        
+
         this.paginate.length = res['data']['total'];
 
         this.liquidacionesDt = (res.data.current_page == 1) ? res.data.data : Object.values(res.data.data)
         this.liquidacionesDt.forEach((element: any) => {
           Object.assign(element, { check: false })
         });
-        
+
         this.lcargando.ctlSpinner(false);
       },
       (err: any) => {
@@ -299,7 +299,7 @@ export class FormularioNotificacionesComponent implements OnInit {
       this.toastr.warning('No ha seleccionado ninguna notificacion', `${this.fTitle} - Imprimir`)
       return
     }
-    
+
     notif.forEach((element: any) => {
       if (element.tipo_gestion == 'MERCADOS') {
         window.open(`${environment.ReportingUrl}rpt_notificacion_mercado.pdf?&j_username=${environment.UserReporting}&j_password=${environment.PasswordReporting}&id_notificacion=${element.id_cob_notificacion}`)
@@ -374,7 +374,7 @@ export class FormularioNotificacionesComponent implements OnInit {
             Swal.fire(this.fTitle, `${res.data.conteo} registros procesados`, 'success').then((result) => {
               this.procesados.next(res.data.registros)
             })
-            
+
           },
           (err: any) => {
             console.log(err)
@@ -418,7 +418,7 @@ export class FormularioNotificacionesComponent implements OnInit {
       estado: 0,
       contribuyente: null,
       fecha_desde: moment().subtract(1, 'month').startOf('month').format('YYYY-MM-DD'),
-      fecha_hasta: moment().endOf('month').format('YYYY-MM-DD'), 
+      fecha_hasta: moment().endOf('month').format('YYYY-MM-DD'),
     }
     // this.cargarLiquidaciones();
   }
@@ -435,7 +435,7 @@ export class FormularioNotificacionesComponent implements OnInit {
           const { id_cob_notificacion,tipo_gestion, total, fecha, estado, notificador, fecha_recepcion, ...items } = liquidacion;
           const { razon_social, num_documento, codigo_sector, ...contribuyente  } = liquidacion.contribuyente;
           const {nombre} = liquidacion.usuario == null ? '' : liquidacion.usuario
-    
+
           const data = {
             NumNotificacion: id_cob_notificacion,
             Contribuyente: razon_social,

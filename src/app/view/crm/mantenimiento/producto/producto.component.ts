@@ -1,5 +1,5 @@
 import { Component, OnInit ,Input,ViewChild} from '@angular/core';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as myVarGlobals from '../../../../global';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
@@ -84,14 +84,14 @@ imageBase64:string="/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsL
     fecha_actual:new Date(),
     estado : 'A',
     secuencia:'000',
- 
+
 };
 
 lista_estados:any = [
   { estado: "A",descripcion:"ACTIVO" },
   { estado: "I",descripcion:"INACTIVO" }
 
-] 
+]
 
 
   constructor(
@@ -99,7 +99,7 @@ lista_estados:any = [
     private productoSrv: ProductoServiceService,
     private toastr: ToastrService,
     private commonSrv: CommonService,
-  ) { 
+  ) {
 
     this.productoSrv.productos$.subscribe(
       (res: any) => {
@@ -119,7 +119,7 @@ lista_estados:any = [
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fCrmProductos,
       id_rol: this.dataUser.id_rol,
@@ -137,15 +137,15 @@ lista_estados:any = [
           }
         this.permissions = res["data"][0];
 
-        
+
         if (this.permissions.abrir == "0") {
           this.lcargando.ctlSpinner(false);
           this.vmButtons = [];
           this.toastr.warning("No tiene permisos para usar este recurso.", this.fTitle);
         } else {
           this.lcargando.ctlSpinner(false);
-        
-           
+
+
         }
       },
       err => {
@@ -159,7 +159,7 @@ lista_estados:any = [
     //   case "NUEVO1":
     //     this.newProduct();
     //     break;
-     case "BUSCAR1":  
+     case "BUSCAR1":
          this.buscarProductoS();
        break;
 
@@ -196,7 +196,7 @@ lista_estados:any = [
     }
   }
 
-  
+
   cargaFoto(archivos) {
     this.mensajeSpiner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
@@ -282,8 +282,8 @@ lista_estados:any = [
         this.producto.fotosEliminar = this.fotosEliminar;
 
 
-        
-  
+
+
         this.productoSrv.guardarProducto({producto:this.producto}).subscribe(
           (res) => {
             console.log(res);
@@ -292,7 +292,7 @@ lista_estados:any = [
               this.producto = res["data"];
               this.producto.fotos = res["data"].fotos;
               this.producto.fotosEliminar=[];
-              
+
            //   this.needRefresh = true;
               this.lcargando.ctlSpinner(false);
               Swal.fire({
@@ -346,17 +346,17 @@ lista_estados:any = [
       if (result.isConfirmed) {
         this.mensajeSpiner = "Editando Producto...";
         this.lcargando.ctlSpinner(true);
-   
+
         this.producto.id_usuario= this.dataUser['id_usuario'];
 
-     
-     
+
+
         this.producto.fotos = this.fotos.filter(e => e.id_producto_fotos === 0);
         this.producto.fotosEliminar = this.fotosEliminar;
         console.log(this.producto);
 
 
-  
+
         this.productoSrv.editarProducto({producto:this.producto}).subscribe(
           (res) => {
             console.log(res);
@@ -435,7 +435,7 @@ lista_estados:any = [
         this.toastr.info("El campo Nombre Corto no puede ser vacío");
         flag = true;
       }
-    
+
 
       !flag ? resolve(true) : resolve(false);
     })
@@ -452,14 +452,14 @@ lista_estados:any = [
     try {
 
     let response=await this.productoSrv.getCatalogos ({params:"'IMPUESTOS'"});
-    
+
 
     this.lista_impuestos=response['IMPUESTOS'];
 
     console.log(this.lista_impuestos);
-    
 
- 
+
+
 
 
 
@@ -481,15 +481,15 @@ lista_estados:any = [
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
-     
+
       let grupos =await this.productoSrv.getGrupoProductos({});
       this.lista_grupos= grupos;
 
 
     //  console.log(this.lista_grupos);
-      
+
       //this.lista_Clase_Productos= this.lista_Grupos.filter(e => e.padreid === 0);
       this.lista_clase_productos = this.lista_grupos.filter(grupo => grupo.padreid === 0);
 //console.log(this.lista_clase_productos);
@@ -501,9 +501,9 @@ lista_estados:any = [
 
         }
       //  console.log(this.lista_grupos_productos);
-          
 
-  
+
+
       this.lcargando.ctlSpinner(false)
     } catch (err) {
       console.log(err)
@@ -519,19 +519,19 @@ lista_estados:any = [
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
-     
+
       let bodegas =await this.productoSrv.getBodegas({});
       this.lista_bodegas= bodegas;
 
 
-      
-      
 
-          
 
-  
+
+
+
+
       this.lcargando.ctlSpinner(false)
     } catch (err) {
       console.log(err)
@@ -545,13 +545,13 @@ lista_estados:any = [
 removeBodega(index)
   {
     if (this.producto.bodegas[index].id_bodega_stock === 0) {
-    
+
       this.producto.bodegas.splice(index, 1);
     }
   };
 
   addBodega(): void {
- 
+
 
     const existe = this.producto.bodegas.some(bodega => bodega.fk_bodega === this.bodega.id_bodega);
 
@@ -570,7 +570,7 @@ removeBodega(index)
       // Aquí podrías mostrar un mensaje al usuario o manejarlo según tus necesidades
     }
 
- 
+
   }
 
   onClaseProductoChange(newValue: any) {
@@ -591,10 +591,10 @@ removeBodega(index)
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
     // console.log(this.producto);
-     
+
       let producto =await this.productoSrv.getProducto(this.producto.id_producto,{ producto: this.producto });
       //alert(JSON.stringify(producto));
 
@@ -708,8 +708,8 @@ removeBodega(index)
       secuencia:'000',
       bodegas:[],
       codigo_impuesto_iva : ''
-      
-   
+
+
   };
   this.fotos=[];
   this.fotosEliminar=[];
@@ -721,8 +721,8 @@ removeBodega(index)
 
     }
 
-  
-  
+
+
     }
 
 }

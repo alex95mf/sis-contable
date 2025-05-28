@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 import { EmisionArancelesService } from '../emision-aranceles.service';
-import { format } from 'date-fns';
+import moment from 'moment';
 
 @Component({
   selector: 'app-list-liquidaciones',

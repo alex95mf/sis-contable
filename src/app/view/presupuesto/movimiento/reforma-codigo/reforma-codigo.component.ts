@@ -8,7 +8,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from 'src/app/global';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CommonVarService } from 'src/app/services/common-var.services';
 // import { ReformaInternaService } from './reforma-interna.service';
@@ -28,7 +28,7 @@ import { SweetAlertResult } from 'sweetalert2';
 export class ReformaCodigoComponent implements OnInit, OnDestroy {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  
+
   msgSpinner: string;
   mensajeSppiner: string = "Cargando...";
 
@@ -72,7 +72,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
     atribucion: null
   }
 
-  
+
   binding: any
 
   paginate: any;
@@ -158,7 +158,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
     this.commonVarService.modalreformaInterna.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
       (res: any)=>{
         console.log(res);
-        
+
         this.search = true
         this.atribucionParamsNew = res
         // this.atribucionParamsNew.nom_documento = res.nom_documento
@@ -206,7 +206,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
           this.atribucionParamsNew.reforma_presupuesto2 = res.data.codigo;
           this.descripcion_presupuesto2 = res.data.descripcion_general
         } */
-        
+
 
       }
     )
@@ -228,7 +228,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
     /* this.filter = {
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -241,7 +241,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
     this.filter2 = {
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate2 = {
@@ -251,12 +251,12 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
       pageSizeOptions: [5, 10]
     };
 
-    
+
 
     this.filterNew = {
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginateNew = {
@@ -327,8 +327,8 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
       response = await this.service.getPeriodos();
       // console.log(response)
       this.periodos = response;
-      
-      
+
+
       // Cargar Programas
       this.mensajeSppiner = 'Cargando Programas'
       response = await this.service.getProgramas();
@@ -380,7 +380,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
     if (this.permissions.guardar == "0") {
       this.toastr.warning("No tiene permisos para crear nuevos Reformas internas");
       return;
-    } 
+    }
     else if ( this.permissions.editar == "0") {
       this.toastr.warning("No tiene permisos para Reformas internas.");
       return;
@@ -401,9 +401,9 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
 
     if (result.isConfirmed) {
       Object.assign(this.atribucionParamsNew, {
-        bienes: [], 
-        total_1: this.totalOriginal, 
-        total_2: this.total2Original, 
+        bienes: [],
+        total_1: this.totalOriginal,
+        total_2: this.total2Original,
         diferencia_1: this.total,
         diferencia_2: this.total2,
         tipo_reforma: 'COD'
@@ -503,7 +503,7 @@ console.log("departamento",departamento);
 
     if (result.isConfirmed) {
       this.por_actualizar = true;
- 
+
       this.lcargando.ctlSpinner(true)
       try {
         this.msgSpinner = 'Duplicando Bien'
@@ -514,7 +514,7 @@ console.log("departamento",departamento);
           programa: this.programa,
         })
         console.log("response",response);
-        response.map((item: any) => Object.assign(item, { 
+        response.map((item: any) => Object.assign(item, {
           check: false,
           cantidad_mod: item.cantidad_por_solicitar,
           costo_total_mod: item.costo_total_por_solicitar,
@@ -530,7 +530,7 @@ console.log("departamento",departamento);
           length: 0,
           perPage: 7,
         }
-            
+
         let data = {
           params: {
             filter: {codigo: null, nombre: null},
@@ -543,12 +543,12 @@ console.log("departamento",departamento);
           }
         }
 //;
-      
+
 
 console.log("ejecutando recalculo",data);
         this.service.getCatalogoPresupuestoreforma(data).subscribe(
           (res: any)=>{
-             console.log(res); 
+             console.log(res);
            // //this.paginate.length= res.data.total
           //  this.encargados = res.data.data
         // res.data.data  codigo o id_catalogo_presupuesto "510304"
@@ -561,8 +561,8 @@ console.log("ejecutando recalculo",data);
         this.SearchBienes2()
 
 
-          
-           
+
+
           //  this.lcargando.ctlSpinner(false);
           },
           (err: any) => {
@@ -576,7 +576,7 @@ console.log("ejecutando recalculo",data);
 
 
       /*   this.listaSolicitudesAtribucion = response;
-  
+
         this.lcargando.ctlSpinner(false) */
       } catch (err) {
         console.log(err)
@@ -628,23 +628,23 @@ console.log("ejecutando recalculo",data);
     //   if(event == '') {console.log('algo');this.atribucionParamsNew.ajuste_1 = 0};
     // }, 50);
     let total = 0
-    
+
     this.listaSolicitudesAtribucion.map((res)=>{
       if(res.check){
         console.log('Entro',res.cantidad_solicitada_mod);
         res.precio_cotizado_mod = res.cantidad_solicitada_mod * res.costo_unitario_mod
         total += (res.cantidad_solicitada_mod * res.costo_unitario_mod)
-        
+
       }
-     
+
     })
     console.log(this.atribucionParamsNew.ajuste_1);
     this.total = total - parseFloat(this.atribucionParamsNew.ajuste_1);
-    
+
     if(isNaN(this.total)) this.total = 0;
     console.log(total);
   } */
-  
+
 
 
   /* calcularValorTotal(){
@@ -657,7 +657,7 @@ console.log("ejecutando recalculo",data);
         total += (res.cantidad_solicitada_mod * res.costo_unitario_mod)
         totalOr += (res.cantidad_solicitada * res.costo_unitario)
       }
-     
+
     })
     console.log(this.atribucionParamsNew.ajuste_1);
     // this.total = total - this.atribucionParamsNew.ajuste_1
@@ -674,26 +674,26 @@ console.log("ejecutando recalculo",data);
     //   if(event == '') {console.log('algo');this.atribucionParamsNew.ajuste_2 = 0};
     // }, 50);
 
-    
+
     let total = 0
-    
+
     this.listaSolicitudesAtribucion2.map((res)=>{
       if(res.check){
         console.log('Entro',res.cantidad_solicitada_mod);
         res.precio_cotizado_mod = res.cantidad_solicitada_mod * res.costo_unitario_mod
         total += (res.cantidad_solicitada_mod * res.costo_unitario_mod)
-        
+
       }
-     
+
     })
     console.log(this.atribucionParamsNew.ajuste_1);
     this.total2 = total + parseFloat(this.atribucionParamsNew.ajuste_2);
-    
+
     if(isNaN(this.total2)) this.total2 = 0;
     console.log(total);
   } */
 
-  
+
 
   /* calcularValorTotal2(){
     let total = 0
@@ -705,7 +705,7 @@ console.log("ejecutando recalculo",data);
         total += (res.cantidad_solicitada_mod * res.costo_unitario_mod)
         totalOr += (res.cantidad_solicitada * res.costo_unitario)
       }
-     
+
     })
     this.ajuste2 = total
     this.total2Original = totalOr
@@ -747,7 +747,7 @@ console.log("ejecutando recalculo",data);
       setTimeout(() => {
         item['cantidad_requerida'] = null
       }, 10);
-      
+
     }else if(item['cantidad_requerida'] == 0){
       this.toastr.info('El valor ingresado no debe ser cero')
       setTimeout(() => {
@@ -759,14 +759,14 @@ console.log("ejecutando recalculo",data);
       item['precio_cotizado'] =( item['costo_unitario'] * item['cantidad_requerida'])
       this.calcularValorTotal()
     }
-    
+
   } */
-  
+
 
   /* guardarSolicitud(){
     if(this.total2Original == 0 || this.ajuste2 == 0){
       this.toastr.info('Realice la reforma interna')
-      return 
+      return
     }else if (this.atribucionParamsNew.periodo == null){
       this.toastr.info('Ingrese el periodo')
       return
@@ -783,9 +783,9 @@ console.log("ejecutando recalculo",data);
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-    
+
       if (result.isConfirmed) {
-        this.mensajeSppiner = "Creando Reforma interna...";    
+        this.mensajeSppiner = "Creando Reforma interna...";
         this.lcargando.ctlSpinner(true);
         console.log(this.atribucionParamsNew);
         // let detalles = []
@@ -809,7 +809,7 @@ console.log("ejecutando recalculo",data);
         this.atribucionParamsNew.total_2 = this.total2Original
         this.atribucionParamsNew.diferencia_1 = this.total
         this.atribucionParamsNew.diferencia_2 = this.total2
-        
+
         console.log(this.atribucionParamsNew);
 
         this.service.setReformaInterna(this.atribucionParamsNew).subscribe((dat:any)=>{
@@ -829,7 +829,7 @@ console.log("ejecutando recalculo",data);
               setTimeout(() => {
                 this.atribucionParamsNew.nom_documento = dat.data.nom_documento
               }, 50);
-              
+
               // this.nuevaSolicitud =true
               // this.SearchList()
             }
@@ -843,9 +843,9 @@ console.log("ejecutando recalculo",data);
         )
       }
     });
-    
 
-    
+
+
   } */
 
   onMaterialGroupChange(event){
@@ -853,14 +853,14 @@ console.log("ejecutando recalculo",data);
   }
 
   cargarPrograma(){
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSppiner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     this.service.searchPrograma({}).subscribe((res: any)=>{
       // console.log(res);
       let program = []
       res.map((data)=>{
-        
+
         let dat = {
           ...data.catalogo,
           value: data.catalogo['descripcion'] + '-'+ data.catalogo['valor']
@@ -875,7 +875,7 @@ console.log("ejecutando recalculo",data);
 
   departamentoSearch(){
     // console.log(event);
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSppiner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -902,7 +902,7 @@ console.log("ejecutando recalculo",data);
 
   departamentoSearchSelect(){
     // console.log(event);
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSppiner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -930,7 +930,7 @@ console.log("ejecutando recalculo",data);
 
   AtribucionSearch(event){
     // console.log(event);
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSppiner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event.valor
@@ -945,10 +945,10 @@ console.log("ejecutando recalculo",data);
   /* SearchList(){
     // console.log(event);
     this.listaSolicitudes = []
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSppiner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
-    
-    
+
+
     let data = {
       id: this.datoDepartamento,
       params:{
@@ -956,7 +956,7 @@ console.log("ejecutando recalculo",data);
         filter: this.filter
       }
 
-      
+
     }
     console.log(data);
     this.service.searchSolicitud(data).subscribe((dat)=>{
@@ -972,7 +972,7 @@ console.log("ejecutando recalculo",data);
           this.listaSolicitudes = Object.values(dat['data']['data']);
         }
       }
-      
+
 
       this.lcargando.ctlSpinner(false);
     },
@@ -993,7 +993,7 @@ console.log("ejecutando recalculo",data);
       return
     }else{
       this.listaSolicitudesAtribucion = []
-      this.mensajeSppiner = "Cargando Bienes...";    
+      this.mensajeSppiner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
         id: this.datoDepartamento,
@@ -1006,7 +1006,7 @@ console.log("ejecutando recalculo",data);
         if(dat['data'].length == 0){
           this.toastr.info('No existe bienes para esa atribución')
           this.listaSolicitudesAtribucion = []
-        }else { 
+        }else {
 
           dat['data'].map((res)=>{
             let bienes = {
@@ -1021,7 +1021,7 @@ console.log("ejecutando recalculo",data);
               atribucion: res.fk_atribucion?.catalogo?.valor,
               fk_programa: res.departamento?.programa?.id_catalogo,
               programa: res.departamento?.programa?.valor,
-              cantidad_requerida: null, 
+              cantidad_requerida: null,
               precio_cotizado: res.cantidad * res.costo_unitario,
               cantidad_solicitada_mod: res.cantidad,
               costo_unitario_mod: res.costo_unitario,
@@ -1038,7 +1038,7 @@ console.log("ejecutando recalculo",data);
 
       })
 
-    }    
+    }
   } */
 
   SearchBienesSelect(){
@@ -1051,7 +1051,7 @@ console.log("ejecutando recalculo",data);
       return
     }else{
       this.listaSolicitudesAtribucion = []
-      this.mensajeSppiner = "Cargando Bienes...";    
+      this.mensajeSppiner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
         id: this.atribucionParamsNew.departamento,
@@ -1064,7 +1064,7 @@ console.log("ejecutando recalculo",data);
         if(dat['data'].length == 0){
           this.toastr.info('No existe bienes para esa atribución')
           this.listaSolicitudesAtribucion = []
-        }else { 
+        }else {
 
           dat['data'].map((res)=>{
             let bienes = {
@@ -1083,7 +1083,7 @@ console.log("ejecutando recalculo",data);
               costo_unitario: res.costo_unitario_ajustado,
               precio_cotizado: res.costo_total_ajustado,
               // Cantidades por Solicitar
-              cantidad_por_solicitar: res.cantidad_por_solicitar, 
+              cantidad_por_solicitar: res.cantidad_por_solicitar,
               costo_total_por_solicitar: res.cantidad_por_solicitar * res.costo_unitario_ajustado,
               // Cantidades Reforma
               cantidad_solicitada_mod: res.cantidad_por_solicitar,
@@ -1101,7 +1101,7 @@ console.log("ejecutando recalculo",data);
 
       })
 
-    }    
+    }
   }
 
   SearchBienes2(){
@@ -1111,7 +1111,7 @@ console.log("ejecutando recalculo",data);
     //   this.toastr.info('Debe ingresar el codigo presupuesto')
     // }else{
       this.listaSolicitudesAtribucion2 = []
-      this.mensajeSppiner = "Cargando Bienes...";    
+      this.mensajeSppiner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
         id: this.atribucionParamsNew.departamento,
@@ -1125,7 +1125,7 @@ console.log("ejecutando recalculo",data);
         if(dat['data'].length == 0){
           this.toastr.info('No existe bienes para esa atribución')
           this.listaSolicitudesAtribucion2 = []
-        }else { 
+        }else {
 
           dat['data'].map((res)=>{
             let bienes = {
@@ -1143,7 +1143,7 @@ console.log("ejecutando recalculo",data);
               costo_unitario: res.costo_unitario_ajustado,
               precio_cotizado: res.costo_total_ajustado,
               // Cantidades por Solicitar
-              cantidad_por_solicitar: res.cantidad_por_solicitar, 
+              cantidad_por_solicitar: res.cantidad_por_solicitar,
               costo_total_por_solicitar: res.cantidad_por_solicitar * res.costo_unitario_ajustado,
               // Cantidades Reforma
               cantidad_solicitada_mod: res.cantidad_por_solicitar,
@@ -1162,7 +1162,7 @@ console.log("ejecutando recalculo",data);
       })
 
     // }
-    
+
   }
 
   // nuevoSolicitud(valor){
@@ -1179,7 +1179,7 @@ console.log("ejecutando recalculo",data);
   //     console.log(this.atribucionParamsNew['atribucion']);
   //     this.SearchBienes();
   //   }
-    
+
   //   // this.listaSolicitudes = []
   //   // console.log(this.vmButtons[0]);
 
@@ -1191,7 +1191,7 @@ console.log("ejecutando recalculo",data);
   //   this.vmButtons[2].showimg=true
   //   // this.vmButtons[3].showimg = true
   //   this.nuevaSolicitud =true
-    
+
   // }
 
   AtribucionSearchNew(event){
@@ -1222,14 +1222,14 @@ console.log("ejecutando recalculo",data);
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-    
+
       if (result.isConfirmed) {
         this.atribucionParams = {
           programa: null,
           departamento: null,
           atribucion: null
         }
-    
+
         this.atribucionParamsNew = {
           nom_documento: '',
           periodo: null,
@@ -1261,14 +1261,14 @@ console.log("ejecutando recalculo",data);
         this.descripcion_presupuesto2 = undefined;
 
         this.search = false
-    
+
         this.listaSolicitudes = []
 
         this.dato_Programa =[]
         this.datoDepartamento = []
       }
     })
-    
+
   } */
 
 
@@ -1305,7 +1305,7 @@ console.log("ejecutando recalculo",data);
     this.filter = {
       fecha_desde: null,
       fecha_hasta: null,
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -1315,7 +1315,7 @@ console.log("ejecutando recalculo",data);
       pageSizeOptions: [5, 10]
     };
   }
- 
+
   cargaArchivo(archivos) {
     if (archivos.length > 0) {
       this.fileList = archivos
@@ -1353,7 +1353,7 @@ console.log("ejecutando recalculo",data);
   //   this.service.uploadAnexo(file, payload).toPromise().then(res => {
   //     console.log('aqui', res);
   //   }).then(res => {
-      
+
   //   })
   // }
 

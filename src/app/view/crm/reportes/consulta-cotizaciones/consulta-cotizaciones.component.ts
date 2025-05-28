@@ -4,7 +4,7 @@ import * as myVarGlobals from '../../../../global';
 import { CommonVarService } from 'src/app/services/common-var.services';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { MatPaginator } from '@angular/material/paginator';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -21,7 +21,7 @@ export class ConsultaCotizacionesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator : MatPaginator
-  
+
   proyecto:any={
     id_proyecto: 0,
     fk_programa:null,
@@ -60,16 +60,16 @@ pageSizeOptions:[5,10,20,50]
     private toastr: ToastrService,
     private apiSrv: ConsultaCotizacionesService,
     private modal: NgbModal
-  ) { 
+  ) {
 
     this.lista_estados = [
       { estado: "PENDIENTE",descripcion:"PENDIENTE" },
       { estado: "GESTION",descripcion:"GESTION" },
       { estado: "APROBADO",descripcion:"APROBADO" },
       { estado: "NEGADO",descripcion:"NEGADO" }
-    
- 
-    ] 
+
+
+    ]
 
     this.vmButtons=[
       {
@@ -116,7 +116,7 @@ pageSizeOptions:[5,10,20,50]
       //   clase: "btn btn-info text-white boton btn-sm",
       //   habilitar: false,
       // },
-      
+
       {
         orig: this.nombreBarraBotones,
         paramAccion: "",
@@ -137,7 +137,7 @@ pageSizeOptions:[5,10,20,50]
     setTimeout(()=> {
       this.cancelar();
      // this.cargaInicial()
-      
+
       //this.getCatalogos();
     }, 50);
   }
@@ -150,19 +150,19 @@ pageSizeOptions:[5,10,20,50]
         this.consultar()
         break;
         case "Nuevo":
-       
+
           // this.crearProyecto(true,this.proyecto);
            break;
       case "Grabar":
-        
+
       //    this.guardar();
 
 
-            break;   
+            break;
       case "Cancelar":
             this.cancelar();
-      
-                  break;   
+
+                  break;
       default:
         break;
     }
@@ -177,9 +177,9 @@ pageSizeOptions:[5,10,20,50]
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      alert(JSON.stringify(this.filter));
-     
+
       let cotizaciones =await this.apiSrv.getCotizaciones({filter: this.filter, paginate : this.paginate});
       this.lista_cotizaciones= cotizaciones.data;
       this.paginate.length = cotizaciones.total;
@@ -196,7 +196,7 @@ pageSizeOptions:[5,10,20,50]
     this.lcargando.ctlSpinner(true)
     try {
 
-    
+
       this.mensajeSpiner = 'Cargando Cotizaciones'
       let cotizaciones =await this.apiSrv.getCotizaciones({filter: this.filter, paginate : this.paginate});
 this.lista_cotizaciones= cotizaciones.data;
@@ -213,18 +213,18 @@ this.paginate.length = cotizaciones.total;
 
   {
     this.filter={
-    
+
       fecha_desde: new Date(Number(moment(new Date()).format('YYYY')), Number(moment(new Date()).format('MM')) - 1, 1).toISOString().substring(0, 10),
       fecha_hasta: new Date(Number(moment(new Date()).format('YYYY')), Number(moment(new Date()).format('MM')), 0).toISOString().substring(0, 10),
       nombre_cliente:'',
       nombre_usuario:'',
       estado : ''
 
-   
+
   };
   this.consultar();
 
-  
+
   }
   consultar()
   {
@@ -242,7 +242,7 @@ this.paginate.length = cotizaciones.total;
     Object.assign(this.paginate,{
       page:pageIndex+1,
       perPage:pageSize
-      
+
     })
     this.CargarCotizaciones();
   }

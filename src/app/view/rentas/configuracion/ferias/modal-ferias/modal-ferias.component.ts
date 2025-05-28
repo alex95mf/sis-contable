@@ -6,7 +6,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { ModalContribuyenteComponent } from '../modal-contribuyente/modal-contribuyente.component';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { format } from 'date-fns';
+import moment from 'moment';
 
 interface Feria {
   id?: number

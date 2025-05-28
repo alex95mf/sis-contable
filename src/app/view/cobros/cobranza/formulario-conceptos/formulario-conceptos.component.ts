@@ -6,7 +6,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from 'src/app/global';
 
-import { format } from 'date-fns';
+import moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 // import * as myVarGlobals from "../../../../../global";
 import { FormularioConceptosService } from './formulario-conceptos.service';
@@ -32,7 +32,7 @@ export class FormularioConceptosComponent implements OnInit {
   @Input() fk_contribuyente: any;
   @Input() deudas: any = [];
   @Input() listaConceptos: any;
-  
+
   conceptosList: any = [];
 
   vmButtons: any;
@@ -90,7 +90,7 @@ export class FormularioConceptosComponent implements OnInit {
       sector: 0,
       num_documento: undefined,
       fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
-      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),      
+      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigo: 0,
       gestion: 0,
       estado: undefined,
@@ -103,10 +103,10 @@ export class FormularioConceptosComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
       this.validaPermisos()
-      
+
     }, 20);
   }
 
@@ -150,7 +150,7 @@ export class FormularioConceptosComponent implements OnInit {
     )
   }
 
-  
+
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
       case " REGRESAR":
@@ -181,12 +181,12 @@ export class FormularioConceptosComponent implements OnInit {
             filter_values['Valor'] = (this.exportList[key].total != undefined) ? this.exportList[key].total : "";
             filter_values['Saldo'] = (this.exportList[key].deuda != undefined) ? this.exportList[key].deuda.saldo : "TITULO INVALIDO";
             filter_values['Estado'] = (this.exportList[key].estado != undefined) ? (this.exportList[key].estado == 'E' ? 'Emitido' : this.exportList[key].estado == 'A' ? 'Aprobado' : this.exportList[key].estado == 'X' ? 'Anulado' : this.exportList[key].estado == 'C' && 'Anulado' ) : "";
-          
+
             // filter_values['Acciones'] = (this.liquidacionesDt[key].current_total != undefined) ? this.commonServices.formatNumber(parseFloat(this.liquidacionesDt[key].current_total).toFixed(2)) : "";
-          
+
             // dt.deuda ? '$ '+ dt.deuda.saldo : 'TITULO INVALIDO'
-          
-          
+
+
 
             this.excelData.push(filter_values);
           })
@@ -194,7 +194,7 @@ export class FormularioConceptosComponent implements OnInit {
         }
       }
     )
-    
+
   }
 
 
@@ -342,7 +342,7 @@ export class FormularioConceptosComponent implements OnInit {
         total: dt.total,
         id_liquidacion: dt.id_liquidacion
       })
-    
+
       this.deudas.push(dt);
     }else {
       // let id = this.conceptos.indexOf(dt);
@@ -362,7 +362,7 @@ export class FormularioConceptosComponent implements OnInit {
       razon_social: undefined,
       num_documento: undefined,
       fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
-      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),      
+      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigo: 0,
       estado: undefined,
       filterControl: ""

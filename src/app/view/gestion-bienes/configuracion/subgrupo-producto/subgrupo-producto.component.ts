@@ -1,6 +1,6 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { SubgrupoProductoService} from './subgrupo-producto.service';
@@ -50,7 +50,7 @@ export class SubgrupoProductoComponent implements OnInit {
     private modalDet: NgbModal,
     private commonVrs: CommonVarService,
     private toastr: ToastrService,
-  ) { 
+  ) {
     this.commonVrs.selectGrupo.asObservable().subscribe(
       (res) => {
         this.grupo = res
@@ -59,7 +59,7 @@ export class SubgrupoProductoComponent implements OnInit {
         this.subgrupo.fk_grupo_producto = this.grupo.id_grupo_productos
         console.log(this.grupo)
         this.generaActionRawMaterial()
-       
+
       }
     )
   }
@@ -82,7 +82,7 @@ export class SubgrupoProductoComponent implements OnInit {
       // fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
       codigo_subgrupo_producto: null,
       descripcion: null,
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -94,14 +94,14 @@ export class SubgrupoProductoComponent implements OnInit {
 
     setTimeout(()=>{
       this.cargarSubgrupos()
-    
+
       // this.ObtenerCatalogoBienes()
     },500)
   }
 
   metodoGlobal(event){
     switch(event.items.boton.texto){
-      
+
       case "Nuevo":
         //this.newGrupo();
         break;
@@ -113,7 +113,7 @@ export class SubgrupoProductoComponent implements OnInit {
       case "Editar":
         this.guardarEdition();
         break;
-      
+
       case "Limpiar":
         this.limpiarForm()
         // this.activeModal.close()
@@ -136,7 +136,7 @@ export class SubgrupoProductoComponent implements OnInit {
       codigo_subgrupo_producto: null,
       descripcion: null,
       // estado: null,
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -147,7 +147,7 @@ export class SubgrupoProductoComponent implements OnInit {
     };
   }
   modalGrupos(){
-   
+
     let modal = this.modalDet.open(ModalGruposComponent,{
       size: "lg",
       backdrop: "static",
@@ -158,8 +158,8 @@ export class SubgrupoProductoComponent implements OnInit {
     modal.componentInstance.validar = true
     modal.componentInstance.verifyRestore = this.verifyRestore;
     //this.generaActionRawMaterial()
-    
-    
+
+
   }
 
   cargarSubgrupos(){
@@ -191,10 +191,10 @@ export class SubgrupoProductoComponent implements OnInit {
 
   generaActionRawMaterial() {
 
-    
+
    // this.lcargando.ctlSpinner(true);
-   
-    
+
+
     let codigo = this.grupo.codigo_grupo_producto
     let inicial =1
 
@@ -210,11 +210,11 @@ export class SubgrupoProductoComponent implements OnInit {
           console.log(codigo)
         }else{
           codigo = codigo + "-" + "0"+ (parseInt(res['data']) + 1)
-          
+
           this.grupo.secuencia = (res['data'] + 1)
         }
-        
-    
+
+
         console.log(this.subgrupo.secuencia)
         this.subgrupo.codigo_subgrupo_producto = codigo;
         console.log(codigo);
@@ -261,7 +261,7 @@ export class SubgrupoProductoComponent implements OnInit {
           (res) => {
             res['data']=this.subgrupo
             console.log(res);
-            
+
             if (res["status"] == 1) {
               this.lcargando.ctlSpinner(false);
 
@@ -277,7 +277,7 @@ export class SubgrupoProductoComponent implements OnInit {
                   console.log("hola")
                   this.cargarSubgrupos()
                   this.vmButtons[0].habilitar = true
-                  
+
                 }
               });
             } else {
@@ -315,7 +315,7 @@ export class SubgrupoProductoComponent implements OnInit {
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-    
+
       if (result.isConfirmed) {
         this.vmButtons[0].habilitar = false
         this.vmButtons[1].habilitar = true
@@ -340,7 +340,7 @@ export class SubgrupoProductoComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     console.log(this.subgrupo);
     let data = {
-     
+
       subgrupo: this.subgrupo
     }
     console.log(data)
@@ -363,18 +363,18 @@ export class SubgrupoProductoComponent implements OnInit {
             this.cargarSubgrupos()
           }
         })
-        
-        
+
+
       }
     )
   }
 
-  
+
   EditarGrupo(item){
     console.log(item);
-    
+
     this.subgrupo = item
-    this.grupo = item.grupo[0]   
+    this.grupo = item.grupo[0]
     this.validacion = false
     this.vmButtons[0].habilitar = true
     this.vmButtons[1].habilitar = false

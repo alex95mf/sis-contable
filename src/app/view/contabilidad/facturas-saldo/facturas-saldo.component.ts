@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Botonera from 'src/app/models/IBotonera';
 import { FacturasSaldoService } from './facturas-saldo.service';
 import { CierreMesService } from '../ciclos-contables/cierre-de-mes/cierre-mes.service';
-import { format } from 'date-fns';
+import moment from 'moment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
@@ -127,7 +127,7 @@ export class FacturasSaldoComponent implements OnInit {
           this.lcargando.ctlSpinner(false)
           this.toastr.error(err.error?.message)
         }
-        
+
       }
     )
   }
@@ -153,7 +153,7 @@ export class FacturasSaldoComponent implements OnInit {
       case "ELIMINAR":
         this.deleteCierre()
         break;
-    
+
       default:
         break;
     }
@@ -208,7 +208,7 @@ export class FacturasSaldoComponent implements OnInit {
         "anio": Number(moment(this.documento.fecha).format('YYYY')),
         "mes": Number(moment(this.documento.fecha).format('MM'))
         }
-        
+
         this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
             try {
             if (res["data"][0].estado !=='C') {
@@ -226,9 +226,9 @@ export class FacturasSaldoComponent implements OnInit {
                 console.log(err)
                 this.lcargando.ctlSpinner(false)
                 this.toastr.error(err.error?.message)
-              } 
+              }
             } else {
-                
+
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
             }
@@ -239,7 +239,7 @@ export class FacturasSaldoComponent implements OnInit {
 
 
 
-     
+
     }
   }
 
@@ -279,7 +279,7 @@ calcularTotal(detalle: any) {
       valorMulta
   ).toFixed(2); // Redondear el resultado a 2 decimales
 }
-/* 
+/*
 calcularTotal(detalle: any) {
   const totalItems = parseFloat(detalle.totalitems) ?? 0;
   const ivaDetalleItem = parseFloat(detalle.iva_detalle_item) ?? 0;
@@ -316,12 +316,12 @@ calcularTotal(detalle: any) {
         "anio": Number(moment(this.documento.fecha).format('YYYY')),
         "mes": Number(moment(this.documento.fecha).format('MM'))
         }
-      
+
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
           try {
-           
+
             if (res["data"][0]?.estado !=='C') {
-              
+
             this.lcargando.ctlSpinner(true)
             try {
               this.msgSpinner = 'Eliminando Cierre'
@@ -335,7 +335,7 @@ calcularTotal(detalle: any) {
               this.toastr.error(err.error?.message)
             }
             } else {
-                
+
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
             }

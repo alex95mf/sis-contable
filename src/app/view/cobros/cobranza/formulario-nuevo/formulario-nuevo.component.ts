@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import { format } from 'date-fns';
+import moment from 'moment';
 
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
@@ -27,7 +27,7 @@ export class FormularioNuevoComponent implements OnInit {
   dataUser: any;
   permissions: any;
   vmButtons: any;
-  
+
   cmb_mercados: any[] = []
   cmb_conceptos: any[] = []
 
@@ -37,7 +37,7 @@ export class FormularioNuevoComponent implements OnInit {
   gestiones: any[] = [
     { valor: 0, descripcion: "TODOS" },
   ];
-  
+
   liquidacionesDt: any[] = [];
   masterSelected: boolean = false
   masterIndeterminate: boolean = false
@@ -123,15 +123,15 @@ export class FormularioNuevoComponent implements OnInit {
       case "EXCEL":
         this.exportarExcel()
         break;
-    
+
       case "EMISION MASIVA":
         this.generarNotificacionMasiva()
         break;
-      
+
       case "EMITIR":
         this.generarNotificacion()
         break;
-    
+
       default:
         break;
     }
@@ -197,7 +197,7 @@ export class FormularioNuevoComponent implements OnInit {
       }
     )
   }
-  
+
   cargarLiquidaciones(){
     let msgInvalid = ''
 
@@ -219,14 +219,14 @@ export class FormularioNuevoComponent implements OnInit {
           this.lcargando.ctlSpinner(false)
           return;
         }
-        
+
         this.paginate.length = res.data.total;
         this.liquidacionesDt = res.data.data
 
         this.liquidacionesDt.forEach((element: any) => {
           Object.assign(element, { check: false })
         });
-        
+
         this.lcargando.ctlSpinner(false);
       },
       (err: any) => {
@@ -324,7 +324,7 @@ export class FormularioNuevoComponent implements OnInit {
       concepto: null,
       contribuyente: null,
       fecha_desde: moment().subtract(1, 'month').startOf('month').format('YYYY-MM-DD'),
-      fecha_hasta: moment().format('YYYY-MM-DD'),      
+      fecha_hasta: moment().format('YYYY-MM-DD'),
       filterControl: ""
     }
   }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { EstadoCuentaService } from './estado-cuenta.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CcModalTableEmpleadoComponent } from 'src/app/config/custom/modal-component/cc-modal-table-empleado/cc-modal-table-empleado.component';
@@ -16,7 +16,7 @@ import {MessageService} from 'primeng/api';
   providers: [DialogService, MessageService],
 })
 export class EstadoCuentaComponent implements OnInit {
- 
+
   msgSpinner: string = "Cargando...";
 
 	@ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
@@ -66,14 +66,14 @@ export class EstadoCuentaComponent implements OnInit {
         this.clearFiltros()
         break;
       case "EXCEL":
-        
+
       this.GenerarReporteExcel();
       break;
       case "PDF":
-        
+
       this.GenerarReportePdf();
       break;
-    
+
       default:
         break;
     }
@@ -156,12 +156,12 @@ export class EstadoCuentaComponent implements OnInit {
 
   GenerarReporteExcel(){
 
-		//this.msgSpinner = "Generando Archivo Excel..."; 
-		//this.lcargando.ctlSpinner(true); 
-   
+		//this.msgSpinner = "Generando Archivo Excel...";
+		//this.lcargando.ctlSpinner(true);
+
      this.infomovDataExcel = this.tbl_movimientos;
 			if(this.infomovDataExcel.length > 0){
-			  
+
 				let data = {
 				  title: 'Estado de Cuenta de Empleado',
 				  empleado: this.empleadoActive.emp_full_nombre,
@@ -169,12 +169,12 @@ export class EstadoCuentaComponent implements OnInit {
 				}
 				console.log(data)
 			  this.xlsService.exportExcelEstadoCuentaEmpleado(data, 'Estado de Cuenta de Empleado')
-				//this.lcargando.ctlSpinner(false); 
+				//this.lcargando.ctlSpinner(false);
 			  }else{
 				this.toastr.info("No hay datos para exportar")
-				//this.lcargando.ctlSpinner(false); 
+				//this.lcargando.ctlSpinner(false);
 			  }
-		
+
 	  }
 
     GenerarReportePdf(){

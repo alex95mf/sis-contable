@@ -5,7 +5,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Botonera from 'src/app/models/IBotonera';
 import { DescuentosService } from '../descuentos.service';
 import Swal from 'sweetalert2';
-import { format } from 'date-fns';
+import moment from 'moment';
 
 @Component({
   selector: 'app-modal-descuentos',

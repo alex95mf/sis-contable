@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalContribuyenteComponent } from './modal-contribuyente/modal-contribuyente.component';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { ModalConceptosComponent } from './modal-conceptos/modal-conceptos.component';
 import Swal from 'sweetalert2';
 import { ModalSupervivenciaComponent } from 'src/app/config/custom/modal-supervivencia/modal-supervivencia.component';
@@ -52,7 +52,7 @@ export class LiquidacionPrComponent implements OnInit {
   propiedadData: Solar = {
     area: 0,
     valor_solar: 0,
-    valor_hipoteca: 0, 
+    valor_hipoteca: 0,
     valor_edificacion: 0,
     avaluo: 0,
     valor_metro_cuadrado: 0,
@@ -214,9 +214,9 @@ export class LiquidacionPrComponent implements OnInit {
         this.expandLiquidaciones()
         break;
       case "LIMPIAR":
-        
+
         break;
-    
+
       default:
         break;
     }
@@ -342,8 +342,8 @@ export class LiquidacionPrComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
       let response = await this.apiService.setLiquidacion({
-        contribuyente: this.contribuyente, 
-        propiedad: this.propiedadData, 
+        contribuyente: this.contribuyente,
+        propiedad: this.propiedadData,
         liquidacion: this.liquidacion
       })
       console.log(response)

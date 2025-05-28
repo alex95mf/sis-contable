@@ -4,7 +4,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { RevisionCierreService } from './revision-cierre.service';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
-import { format } from 'date-fns';
+import moment from 'moment';
 
 @Component({
   selector: 'app-revision-cierre',
@@ -70,7 +70,7 @@ export class RevisionCierreComponent implements OnInit {
       case "CONSULTAR":
         this.getCierres()
         break;
-    
+
       default:
         break;
     }
@@ -101,7 +101,7 @@ export class RevisionCierreComponent implements OnInit {
           let estado = (cierre.documento != null) ? 'A' : 'P';
           Object.assign(cierre, { estado })
         })
-  
+
       } /* else if (this.filter.tipo_cierre == 'GREC') {
         //
       } else if (this.filter.tipo_cierre == 'AMAL') {
@@ -133,12 +133,12 @@ console.log(cierre)
         window.open(environment.ReportingUrl + "rpt_asiento_contable.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_documento=" + cierre.id, '_blank')
       }
     }
-    
+
     // if (cierre.id != undefined) {
     //   //window.open("http://154.12.249.218:9090/jasperserver/flow.html?_flowId=viewReportFlow&_flowId=viewReportFlow&ParentFolderUri=%2Freports&reportUnit=%2Freports%2Fasientos_contables&standAlone=true&j_username=jasperadmin&j_password=jasperadmin&id_document="+dt.id, '_blank');
     //   window.open(environment.ReportingUrl + "rpt_asiento_contable.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_documento=" + cierre.fk_asiento, '_blank')
     // }
-   
+
   }
 
 }

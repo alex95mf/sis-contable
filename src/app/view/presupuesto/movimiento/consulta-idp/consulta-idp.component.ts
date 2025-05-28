@@ -6,7 +6,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 import { environment } from 'src/environments/environment';
 
-import { format } from 'date-fns';
+import moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 import { ConsultaIdpService } from './consulta-idp.service';
@@ -132,7 +132,7 @@ export class ConsultaIdpComponent implements OnInit {
     this.dia_siguiente.setDate(this.dia_siguiente.getDate() + 1);
     this.primer_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth() + 1, 0);
-    
+
     setTimeout(()=> {
       this.cargarDocumentos();
     }, 50);
@@ -150,7 +150,7 @@ export class ConsultaIdpComponent implements OnInit {
       case "PROCESAR":
         this.procesarSp();
         break;
-          
+
     }
   }
 
@@ -197,12 +197,12 @@ export class ConsultaIdpComponent implements OnInit {
           })
         })
         this.documentosDt = res['data']['data'];
-        
+
         console.log(res['data']['data']);
 
-        
+
         /* if (res['data']['current_page'] == 1) {
-          
+
 
         } else {
           res['data']['data'].forEach(e => {
@@ -257,12 +257,12 @@ export class ConsultaIdpComponent implements OnInit {
       this.toastr.warning(message, 'Validacion de Datos', {enableHtml: true})
     }
     // else{
-  
+
       const data = {
         fecha_desde: moment(this.filter.fecha_desde).format('YYYYMMDD'),
         fecha_hasta: moment(this.filter.fecha_hasta).format('YYYYMMDD'),
       }
-    
+
       this.mensajeSppiner = "Procesando...";
       this.lcargando.ctlSpinner(true);
       this.apiSrv.procesarSp(data).subscribe(res => {
@@ -327,11 +327,11 @@ export class ConsultaIdpComponent implements OnInit {
     console.log(estado_reporte)
     console.log(environment.ReportingUrl +"rpt_pre_detalle_idp.pdf?&j_username="  + environment.UserReporting  + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde+"&fechaFin=" + this.filter.fecha_hasta+"&estado=" + estado_reporte,'_blank')
 
-    window.open(environment.ReportingUrl +"rpt_pre_detalle_idp.pdf?&j_username="  + environment.UserReporting 
+    window.open(environment.ReportingUrl +"rpt_pre_detalle_idp.pdf?&j_username="  + environment.UserReporting
     + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde+"&fechaFin=" + this.filter.fecha_hasta+"&estado=" + estado_reporte,'_blank')
 
   }
-  
+
   showExcel(){
     console.log(this.filter.estado)
     let estado_reporte=''
@@ -340,10 +340,10 @@ export class ConsultaIdpComponent implements OnInit {
     }else{
       estado_reporte= this.filter.estado
     }
-   
-    window.open(environment.ReportingUrl +"rpt_pre_detalle_idp.xlsx?&j_username="  + environment.UserReporting 
+
+    window.open(environment.ReportingUrl +"rpt_pre_detalle_idp.xlsx?&j_username="  + environment.UserReporting
     + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde+"&fechaFin=" + this.filter.fecha_hasta+"&estado=" + estado_reporte,'_blank')
-    
+
   }
 
 }

@@ -5,7 +5,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 import { AsientoCierreService } from '../asiento-cierre.service';
-import { format } from 'date-fns';
+import moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from 'src/app/global';
 
@@ -71,14 +71,14 @@ export class ModalCierresComponent implements OnInit {
       }
     ]
 
-    
+
     this.hoy = new Date();
     this.dia_siguiente = new Date(this.hoy);
     this.dia_siguiente.setDate(this.dia_siguiente.getDate() + 1);
     this.primer_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth() + 1, 0);
 
-    
+
     this.filter = {
       tipo: 0,
       num_documento: undefined,
@@ -93,7 +93,7 @@ export class ModalCierresComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
       this.cargarCierres();
     }, 0);
@@ -121,8 +121,8 @@ export class ModalCierresComponent implements OnInit {
     this.mensajeSppiner = "Cargando lista de Asiento Cierre...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1 
-    
+    if (flag) this.paginate.page = 1
+
     let data = {
       params: {
         filter: this.filter,

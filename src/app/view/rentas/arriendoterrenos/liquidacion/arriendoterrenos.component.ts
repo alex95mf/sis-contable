@@ -1,19 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 import { ListContratosComponent } from '../../mercados/contrato/list-contratos/list-contratos.component';
 import * as myVarGlobals from 'src/app/global';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';   
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 import { ArriendoterrenoService } from './arriendoterreno.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ToastrService } from 'ngx-toastr';
 import { ListLiquidacionesComponent } from './list-liquidaciones/list-liquidaciones.component';
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
-import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component'; 
+import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component';
 import { ModalSupervivenciaComponent } from 'src/app/config/custom/modal-supervivencia/modal-supervivencia.component';
 
 @Component({
@@ -22,10 +22,10 @@ import { ModalSupervivenciaComponent } from 'src/app/config/custom/modal-supervi
   styleUrls: ['./arriendoterrenos.component.scss']
 })
 export class ArriendoterrenosComponent implements OnInit {
- 
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory
- 
+
   fTitle = "Generación de Arriendo de Terreno"
   msgSpinner: string;
   dataUser: any;
@@ -110,14 +110,14 @@ export class ArriendoterrenosComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: NgbModal,
     private cierremesService: CierreMesService
-  ) { 
+  ) {
 
     this.commonVarService.selectContribuyenteCustom.asObservable().subscribe(
       res => {
         //console.log(res);
         this.selectContibuyente(res);
         this.conceptos.fk_contribuyente = res;
-       
+
         if (res.fecha_nacimiento != null) {
           if (this.contribuyenteActive.contribuyente == "Natural" && this.contribuyenteActive.supervivencia == "S" && this.verificacionTerceraEdad(res.fecha_nacimiento)
           ) {
@@ -127,7 +127,7 @@ export class ArriendoterrenosComponent implements OnInit {
         else {
           console.log("hola")
         }
-        
+
       }
     );
     // this.commonVarService.selectContribuyenteCustom.asObservable().subscribe(
@@ -183,7 +183,7 @@ export class ArriendoterrenosComponent implements OnInit {
         }
         else {
           this.propiedades = [
-            {      
+            {
               id: null,
               cod_catastral: res.codigo_catastro,
               manzana: null,
@@ -192,7 +192,7 @@ export class ArriendoterrenosComponent implements OnInit {
             }
           ];
         }
-      
+
         this.propiedadActive = res.lote;
         res.detalles.forEach(e => {
           if (!e.fk_con_det_aplicado) {
@@ -201,7 +201,7 @@ export class ArriendoterrenosComponent implements OnInit {
           }
         });
         this.baseImponible = this.propiedadActive.area * this.propiedadActive.valor_metro_cuadrado;
-     
+
         if(res.detalles.concepto==null){
           res.detalles.forEach(e => {
             if (e.fk_con_det_aplicado) {
@@ -223,9 +223,9 @@ export class ArriendoterrenosComponent implements OnInit {
         this.vmButtons[1].habilitar = false;
         this.vmButtons[2].habilitar = false;
         this.vmButtons[3].habilitar = false;
-        
+
        // this.getConceptos();
-        
+
         this.lcargando.ctlSpinner(false);
       }
     )
@@ -236,7 +236,7 @@ export class ArriendoterrenosComponent implements OnInit {
           Object.assign(e, {fk_concepto_detalle: e['fk_concepto_det']})
         });
         this.calculateExoneraciones();
-        
+
       }
     );
 
@@ -307,7 +307,7 @@ export class ArriendoterrenosComponent implements OnInit {
     this.msgSpinner = 'Cargando Permisos de Usuario...'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
-     
+
     let params = {
       codigo: myVarGlobals.fRenArriendoTerrenos,
       id_rol: this.dataUser.id_rol,
@@ -338,7 +338,7 @@ export class ArriendoterrenosComponent implements OnInit {
         this.expandListLiquidaciones();
         break;
       case "IMPRIMIR":
-        
+
         break;
       case "LIMPIAR":
          this.confirmRestore();
@@ -422,7 +422,7 @@ export class ArriendoterrenosComponent implements OnInit {
       this.propiedades = [];
       this.propiedadActive = {};
     }
-   
+
   }
 
   limpiarForm(keepContr, softRestore) {
@@ -492,7 +492,7 @@ export class ArriendoterrenosComponent implements OnInit {
   async validaLiquidacion() {
       let resp = await this.validaDataGlobal().then((respuesta) => {
         if(respuesta) {
-            this.createLiquidacion(); 
+            this.createLiquidacion();
         }
       });
   }
@@ -500,45 +500,45 @@ export class ArriendoterrenosComponent implements OnInit {
   validaDataGlobal() {
     let flag = false;
     return new Promise((resolve, reject) => {
-  
+
       if(
         this.at_tipo == "" ||
-        this.at_tipo == undefined 
+        this.at_tipo == undefined
       ) {
         this.toastr.info("El campo Tipo no puede ser vacío");
         flag = true;
       }
       else if (
         this.at_contrato == 0 ||
-        this.at_contrato == undefined 
+        this.at_contrato == undefined
       ){
         this.toastr.info("El campo Nro Contrato no puede ser vacío");
         flag = true;
       }
       else if (
         this.contribuyenteActive.razon_social == 0 ||
-        this.contribuyenteActive.razon_social == undefined 
+        this.contribuyenteActive.razon_social == undefined
       ){
         this.toastr.info("El campo Contribuyente no puede ser vacío");
         flag = true;
       }
       else if (
         this.propiedadActive == 0 ||
-        this.propiedadActive == undefined 
+        this.propiedadActive == undefined
       ){
         this.toastr.info("El campo Propiedad no puede ser vacío");
         flag = true;
       } else if (
         // this.liquidacion.observacion == "" ||
-        // this.liquidacion.observacion == undefined 
+        // this.liquidacion.observacion == undefined
         this.observacion.trim() == "" ||
         this.observacion.trim().length == 0
       ){
         this.toastr.info("El campo Observaciones no puede ser vacío");
         flag = true;
       }
-      
-      
+
+
       !flag ? resolve(true) : resolve(false);
     })
   }
@@ -579,13 +579,13 @@ export class ArriendoterrenosComponent implements OnInit {
     console.log(this.propiedadActive.valor_metro_cuadrado)
     console.log(this.baseImponible)
 
-     
+
     this.serArrt.getArriendoTerrenoTabla({}).subscribe(
       (res) => {
         let porcentaje = 0;
         let arriendoTabla = res['data'];
         let cant = baseImponible;
-      
+
         arriendoTabla.forEach(t => {
           if(t.rango_hasta>0 ){
             // cuando esta en un rango de valores normal
@@ -596,13 +596,13 @@ export class ArriendoterrenosComponent implements OnInit {
             // cuando el rango hasta es infinito
             if(cant >= t.rango_desde){
               porcentaje = t.porcentaje;
-            } 
+            }
           }
         });
         this.porcentaje = porcentaje;
       //  console.log('porcentaje'+this.porcentaje);
     });
-    
+
     this.serArrt.getConceptoDetalle(data).subscribe(
       (res) => {
         let calculo = 0;
@@ -610,7 +610,7 @@ export class ArriendoterrenosComponent implements OnInit {
           //console.log('codigo '+e.codigo_detalle);
           if(this.propiedadActive != 0){
 
-            if(e.codigo_detalle == "ARRI"){ 
+            if(e.codigo_detalle == "ARRI"){
               //this.getArriendoTerrenoTabla(this.baseImponible);
               Object.assign(e, {valor: this.porcentaje*baseImponible/100 ,comentario:e.comentario, fk_concepto_detalle: e.id_concepto_detalle});
               calculo += +e.valor
@@ -623,7 +623,7 @@ export class ArriendoterrenosComponent implements OnInit {
                 Object.assign(e, {valor: valorArea ,comentario:e.comentario, fk_concepto_detalle: e.id_concepto_detalle});
                 calculo += +e.valor
               }else if(this.propiedadActive.area > limiteArea){
-                
+
                 Object.assign(e, {valor: excedente*valorExcedente+valorArea ,comentario:e.comentario, fk_concepto_detalle: e.id_concepto_detalle});
                 calculo += +e.valor
               }else{
@@ -657,12 +657,12 @@ export class ArriendoterrenosComponent implements OnInit {
           }
         })
 
-        
+
         console.log(this.baseImponible)
-        
+
         this.conceptos = JSON.parse(JSON.stringify(res['data']));
         this.liquidacion.subtotal = calculo;
-        
+
         this.calcExonerTotal();
         //this.calcTotal();
         //this.calcSubtotal();
@@ -673,7 +673,7 @@ export class ArriendoterrenosComponent implements OnInit {
       }
     );
   }
- 
+
    calcSubtotal() {
     //console.log('aqui '+this.conceptos);
     let calculo = 0;
@@ -683,7 +683,7 @@ export class ArriendoterrenosComponent implements OnInit {
     this.liquidacion.subtotal = calculo;
     this.liquidacion.subtotal_0 = calculo;
     this.calcExonerTotal();
-  
+
   }
 
   calculateExoneraciones() {
@@ -699,21 +699,21 @@ export class ArriendoterrenosComponent implements OnInit {
     //   calculo += +e.valor
     // });
     console.log(this.exoneraciones)
-    
+
     this.liquidacion.exoneraciones = Math.floor(this.exoneraciones.reduce((acc: number, curr: any) => {
       const valor = this.conceptos.find(c => curr.cod_concepto_det_aplicable == c.codigo_detalle).valor * curr.porcentaje
       console.log(valor)
       Object.assign(curr, {valor})
       return acc + valor;
     }, 0) * 100) / 100;
-    
+
     this.calcSubtotal_1();
   }
 
   calcSubtotal_1() {
     let subtotal_1 = this.liquidacion.subtotal - this.liquidacion.exoneraciones;
     this.liquidacion.subtotal_1 = subtotal_1;
-  
+
     this.calcSubtotal_2();
   }
   calcSubtotal_2() {
@@ -723,7 +723,7 @@ export class ArriendoterrenosComponent implements OnInit {
 }
 
 calcTotal() {
-    
+
   let sumasValores =  (this.liquidacion.subtotal_2 + this.liquidacion.recargo + this.liquidacion.interes)
   this.liquidacion.total = sumasValores - this.liquidacion.descuento;
 
@@ -780,14 +780,14 @@ calcTotal() {
     //this.propiedadSelected = c;
     //console.log(this.propiedadActive);
     this.getConceptos();
-  
+
     this.verifyRestore = true;
     this.restoreForm(true, true);
     this.conceptosDisabled = false;
     this.exoneracionDisabled = false;
     this.calculateExoneraciones();
     this.calculaSta();
-    
+
   }
   calculaSta(){
   console.log(this.liquidacion.sta)
@@ -803,16 +803,16 @@ calcTotal() {
       }else{
         this.liquidacion.sta = 0
       }
-    }    
-    console.log(this.staArri) 
+    }
+    console.log(this.staArri)
     console.log(this.liquidacion.sta)
   }
 
 
    validarLiquidacion(data){
-   
+
     this.serArrt.getLiquidacionExiste(data).subscribe(
-            
+
             (res) => {
               console.log(res)
               this.liquidacionExiste= res
@@ -835,7 +835,7 @@ calcTotal() {
                 });
               }else{
                  this.serArrt.setLiquidacion(data).subscribe(
-            
+
                   (res) => {
                     Swal.fire({
                       icon: "success",
@@ -905,15 +905,15 @@ calcTotal() {
             "mes": Number(moment(this.fecha).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-             
+
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
-                    
+
                   this.msgSpinner = 'Generando liquidación...';
                   this.lcargando.ctlSpinner(true);
                   this.liquidacion.detalles = [];
                   this.liquidacion.fk_lote = this.propiedadActive.id;
-        
+
                   this.liquidacion.at_tipo = this.at_tipo
                   this.liquidacion.at_contrato = this.at_contrato
                   this.liquidacion.periodo = this.periodo
@@ -932,12 +932,12 @@ calcTotal() {
                   }
                 console.log(data)
                   this.validarLiquidacion(data);
-          
+
               } else {
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
               }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
@@ -980,7 +980,7 @@ calcTotal() {
       modalInvoice.componentInstance.verifyRestore = this.verifyRestore;
     }
   }
-  
+
   onlyNumberDot(event): boolean {
     let key = event.which ? event.which : event.keyCode;
     if (key !== 46 && key > 31 && (key < 48 || key > 57)) {
@@ -995,7 +995,7 @@ calcTotal() {
     }
     this.msgSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
-   
+
     this.serArrt.getStaConcepto(data).subscribe(
       (res) => {
         console.log(res)
@@ -1004,14 +1004,14 @@ calcTotal() {
           const datos = res['data'].filter(e => e.codigo == 'AR')[0]
           if(datos.tiene_sta == 'S') {
             console.log(datos.tiene_sta)
-            
-            
-            this.staArri= false; 
+
+
+            this.staArri= false;
           }else{
-            this.staArri= true; 
+            this.staArri= true;
           }
         }else{
-          this.staArri= true; 
+          this.staArri= true;
         }
         console.log(this.staArri)
       },
@@ -1077,7 +1077,7 @@ calcTotal() {
     }
   }
 
-  
+
   expandSupervivencia(id) {
     console.log('con-varios')
     const modalInvoice = this.modalService.open(ModalSupervivenciaComponent, {

@@ -1,5 +1,5 @@
 import { Component, OnInit ,Input,ViewChild} from '@angular/core';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as myVarGlobals from '../../../../global';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
@@ -48,7 +48,7 @@ export class RevisionComponent implements OnInit {
 
   addTab(): void {
     this.tabs.push({
-      
+
       numero: '2050',
       secuencia:'0',
       fecha: '',
@@ -97,21 +97,21 @@ export class RevisionComponent implements OnInit {
     fecha_actual:new Date(),
     estado : 'A',
     secuencia:'000',
- 
+
 };
 
 lista_estados:any = [
   { estado: "A",descripcion:"ACTIVO" },
   { estado: "I",descripcion:"INACTIVO" }
 
-] 
+]
 
   constructor(
     private modal: NgbModal,
     private RevisionSrv: RevisionService,
     private toastr: ToastrService,
     private commonSrv: CommonService,
-  ) { 
+  ) {
     this.RevisionSrv.revision$.subscribe(
       (res: any) => {
       console.log(res)
@@ -130,7 +130,7 @@ lista_estados:any = [
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fConciliacionBank,
       id_rol: this.dataUser.id_rol,
@@ -145,8 +145,8 @@ lista_estados:any = [
           this.toastr.warning("No tiene permisos para usar este recurso.", this.fTitle);
         } else {
           this.lcargando.ctlSpinner(false);
-        
-           
+
+
         }
       },
       err => {
@@ -160,10 +160,10 @@ lista_estados:any = [
     //   case "NUEVO1":
     //     this.newProduct();
     //     break;
-     case "BUSCAR1":  
+     case "BUSCAR1":
       //   this.buscarProductoS();
        break;
-       case "CATALOGO1":  
+       case "CATALOGO1":
        this.consultar();
      break;
     //   case "GUARDAR1":
@@ -235,7 +235,7 @@ lista_estados:any = [
       if (result.isConfirmed) {
         this.mensajeSpiner = "Guardando Producto...";
         this.lcargando.ctlSpinner(true);
-  
+
         this.RevisionSrv.guardarProducto({producto:this.producto}).subscribe(
           (res) => {
             console.log(res);
@@ -293,15 +293,15 @@ lista_estados:any = [
       if (result.isConfirmed) {
         this.mensajeSpiner = "Editando Proyecto...";
         this.lcargando.ctlSpinner(true);
-   
+
         this.producto.id_usuario= this.dataUser['id_usuario'];
 
         console.log(this.producto);
-     
 
 
 
-  
+
+
         this.RevisionSrv.editarProducto({producto:this.producto}).subscribe(
           (res) => {
             console.log(res);
@@ -374,7 +374,7 @@ lista_estados:any = [
         this.toastr.info("El campo Nombre Corto no puede ser vacío");
         flag = true;
       }
-    
+
 
       !flag ? resolve(true) : resolve(false);
     })
@@ -397,13 +397,13 @@ lista_estados:any = [
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
-     
+
       let productos =await this.RevisionSrv.getProductosconFoto({filter: this.filter, paginate : this.paginate});
       productos.data.map((item: any) => Object.assign(item, { cantidad: 1 }))
-     
-      
+
+
       this.lista_productos= productos.data;
 
       console.log(this.lista_productos);
@@ -433,7 +433,7 @@ lista_estados:any = [
     Object.assign(this.paginate,{
       page:pageIndex+1,
       perPage:pageSize
-      
+
     })
     this.CargarProductos();
   }
@@ -443,10 +443,10 @@ lista_estados:any = [
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
      console.log(this.producto);
-     
+
       let producto =await this.RevisionSrv.getProducto(this.producto.id_producto,{ producto: this.producto });
       //alert(JSON.stringify(producto));
 
@@ -507,9 +507,9 @@ lista_estados:any = [
     this.vmButtons[1].habilitar=false;
     this.vmButtons[2].habilitar=true;
     this.vmButtons[3].habilitar=false;
-  
-  
-  
+
+
+
     }
 
 

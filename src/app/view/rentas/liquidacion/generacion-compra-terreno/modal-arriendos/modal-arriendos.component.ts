@@ -5,7 +5,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { GeneracionCompraTerrenoService } from '../generacion-compra-terreno.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { format } from 'date-fns';
+import moment from 'moment';
 
 @Component({
   selector: 'app-modal-arriendos',

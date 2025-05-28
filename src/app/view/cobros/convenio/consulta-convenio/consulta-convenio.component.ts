@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { format } from 'date-fns';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
@@ -108,7 +108,7 @@ export class ConsultaConvenioComponent implements OnInit {
         filter: this.filter,
         paginate: this.paginate,
       },
-      
+
     }
 
     this.apiSrv.getRecDocumentos(data).subscribe(
@@ -120,7 +120,7 @@ export class ConsultaConvenioComponent implements OnInit {
         this.paginate.length = res['data']['total'];
         if (res['data']['current_page'] == 1) {
           this.documentosDt = res['data']['data'];
-          
+
           // this.documentosDt['fecha_fin'] =  this.documentosDt['detalles'][ res['data']['data']['detalles'].length - 1]['fecha_plazo_maximo'].split(' ')[0];
         } else {
           this.documentosDt = Object.values(res['data']['data']);
