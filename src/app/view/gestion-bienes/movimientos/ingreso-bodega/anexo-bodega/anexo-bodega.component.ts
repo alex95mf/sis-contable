@@ -16,6 +16,7 @@ import { IngresoBodegaService } from '../ingreso-bodega.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-anexo-bodega',
   templateUrl: './anexo-bodega.component.html',
   styleUrls: ['./anexo-bodega.component.scss']

@@ -9,6 +9,7 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import * as internal from 'stream';
 
 @Component({
+standalone: false,
   template:  `
   <p-table 
     [value]="impuestos" 

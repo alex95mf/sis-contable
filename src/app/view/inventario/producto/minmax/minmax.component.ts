@@ -11,6 +11,7 @@ import * as myVarGlobals from '../../../../global';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-minmax',
   templateUrl: './minmax.component.html',
   styleUrls: ['./minmax.component.scss']

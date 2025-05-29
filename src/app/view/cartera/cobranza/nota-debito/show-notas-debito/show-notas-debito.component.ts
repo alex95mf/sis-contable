@@ -12,6 +12,7 @@ import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spine
 
 
 @Component({
+standalone: false,
   selector: 'app-show-notas-debito',
   templateUrl: './show-notas-debito.component.html',
   styleUrls: ['./show-notas-debito.component.scss']

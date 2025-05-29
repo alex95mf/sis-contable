@@ -8,6 +8,7 @@ import { ParametrosCuentasComprobantesService } from '../parametros-cuentas-comp
 import { ModalCuentPreComponent } from 'src/app/view/rrhh/configuracion/rubros/modal-cuent-pre/modal-cuent-pre.component';
 
 @Component({
+standalone: false,
   selector: 'app-form-save',
   templateUrl: './form-save.component.html',
   styleUrls: ['./form-save.component.scss']

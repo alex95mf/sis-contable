@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from '../../../../global';
 
@@ -12,6 +12,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { ProyectoFormComponent } from './proyecto-form/proyecto-form.component';
 
 @Component({
+standalone: false,
   selector: 'app-proyectos',
   templateUrl: './proyectos.component.html',
   styleUrls: ['./proyectos.component.scss']

@@ -10,6 +10,7 @@ import * as myVarGlobals from "../../../../../global";
 import { EmisionArancelesService } from '../emision-aranceles.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-contribuyentes',
   templateUrl: './modal-contribuyentes.component.html',
   styleUrls: ['./modal-contribuyentes.component.scss'],

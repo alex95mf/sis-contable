@@ -12,6 +12,7 @@ import { VistaArchivoComponent } from 'src/app/view/contabilidad/centro-costo/cc
 import { FormComisariaService } from '../../form-comisaria/form-comisaria.service';
 
 @Component({
+standalone: false,
   selector: 'app-anexos-list',
   templateUrl: './anexos-list.component.html',
   styleUrls: ['./anexos-list.component.scss']

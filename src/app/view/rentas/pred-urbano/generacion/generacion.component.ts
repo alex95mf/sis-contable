@@ -21,6 +21,7 @@ import { Subject } from 'rxjs';
 import { ModalExonContribuyenteComponent } from './modal-exon-contribuyente/modal-exon-contribuyente.component';
 
 @Component({
+standalone: false,
   selector: 'app-generacion',
   templateUrl: './generacion.component.html',
   styleUrls: ['./generacion.component.scss']

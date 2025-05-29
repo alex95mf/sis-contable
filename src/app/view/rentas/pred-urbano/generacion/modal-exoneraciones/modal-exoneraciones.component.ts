@@ -8,6 +8,7 @@ import { GeneracionService } from '../generacion.service';
 import { Cone } from '@amcharts/amcharts4/core';
 
 @Component({
+standalone: false,
   selector: 'app-modal-exoneraciones',
   templateUrl: './modal-exoneraciones.component.html',
   styleUrls: ['./modal-exoneraciones.component.scss']

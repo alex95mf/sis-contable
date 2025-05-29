@@ -14,6 +14,7 @@ import { ValidacionesFactory } from "../../../../config/custom/utils/Validacione
 const Swal = require('sweetalert2');
 declare const $: any;
 @Component({
+standalone: false,
   selector: "app-parametroad",
   templateUrl: "./parametroad.component.html",
   styleUrls: ["./parametroad.component.scss"],

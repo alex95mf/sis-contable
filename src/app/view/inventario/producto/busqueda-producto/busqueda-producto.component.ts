@@ -16,6 +16,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 import { DetalleComponent } from '../../../comercializacion/productos/solicitud/tabs/detalle/detalle.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: "app-busqueda-producto",
   templateUrl: "./busqueda-producto.component.html",
   styleUrls: ["./busqueda-producto.component.scss"],

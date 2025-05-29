@@ -26,6 +26,7 @@ import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cie
 
 
 @Component({
+standalone: false,
   selector: 'app-recaudaciones-especies-fiscales',
   templateUrl: './recaudaciones-especies-fiscales.component.html',
   styleUrls: ['./recaudaciones-especies-fiscales.component.scss']

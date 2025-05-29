@@ -10,6 +10,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
+standalone: false,
   selector: 'app-informacion-gestion',
   templateUrl: './informacion-gestion.component.html',
   styleUrls: ['./informacion-gestion.component.scss']

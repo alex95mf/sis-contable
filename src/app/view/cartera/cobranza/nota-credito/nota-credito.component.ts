@@ -16,6 +16,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-nota-credito',
   templateUrl: './nota-credito.component.html',
   styleUrls: ['./nota-credito.component.scss']

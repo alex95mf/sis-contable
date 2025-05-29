@@ -13,6 +13,7 @@ import { saturate } from '@amcharts/amcharts4/.internal/core/utils/Colors';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
+standalone: false,
   selector: 'app-detalle-reforma',
   templateUrl: './detalle-reforma.component.html',
   styleUrls: ['./detalle-reforma.component.scss']

@@ -8,6 +8,7 @@ import { GeneracionService } from '../generacion.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-modal-detalles',
   templateUrl: './modal-detalles.component.html',
   styleUrls: ['./modal-detalles.component.scss']

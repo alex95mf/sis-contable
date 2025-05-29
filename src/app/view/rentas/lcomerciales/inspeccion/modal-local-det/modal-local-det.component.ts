@@ -11,6 +11,7 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
 import { ModalBusqContratoComponent } from '../modal-busq-contrato/modal-busq-contrato.component';
 
 @Component({
+standalone: false,
   selector: 'app-modal-local-det',
   templateUrl: './modal-local-det.component.html',
   styleUrls: ['./modal-local-det.component.scss']

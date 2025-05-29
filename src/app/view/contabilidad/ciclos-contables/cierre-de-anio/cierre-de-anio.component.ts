@@ -11,6 +11,7 @@ const Swal = require('sweetalert2');
 import * as moment from 'moment'
 
 @Component({
+standalone: false,
   selector: 'app-cierre-de-anio',
   templateUrl: './cierre-de-anio.component.html',
   styleUrls: ['./cierre-de-anio.component.scss']

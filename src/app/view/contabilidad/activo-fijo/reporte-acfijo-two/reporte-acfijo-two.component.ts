@@ -13,6 +13,7 @@ import { CommonVarService } from "../../../../services/common-var.services";
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-reporte-acfijo-two',
   templateUrl: './reporte-acfijo-two.component.html',
   styleUrls: ['./reporte-acfijo-two.component.scss']

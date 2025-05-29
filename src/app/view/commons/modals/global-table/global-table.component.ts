@@ -8,6 +8,7 @@ import { CommonService } from "../../../../services/commonServices";
 import { CommonVarService } from '../../../../services/common-var.services';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 @Component({
+standalone: false,
   selector: 'app-global-table',
   templateUrl: './global-table.component.html',
   styleUrls: ['./global-table.component.scss']

@@ -6,18 +6,19 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 import { EmisionService } from '../emision.service';
 
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-historial-comprobante',
   templateUrl: './historial-comprobante.component.html',
   styleUrls: ['./historial-comprobante.component.scss']
 })
 export class HistorialComprobanteComponent implements OnInit {
 
-  
+
   mensajeSppiner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
@@ -121,11 +122,11 @@ export class HistorialComprobanteComponent implements OnInit {
             }else{
               this.documentosDt = []
             }
-            
+
           }
-         
+
         } else {
-         
+
           this.documentosDt = Object.values(res['data']['data'][0]['pago']);
         }
         this.lcargando.ctlSpinner(false);

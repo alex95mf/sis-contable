@@ -19,6 +19,7 @@ import { ModalGruposComponent } from '../reporte-productos/modal-grupos/modal-gr
 import { ListBusquedaComponent } from '../reporte-productos/list-busqueda/list-busqueda.component'; 
 
 @Component({
+standalone: false,
   selector: 'app-reporte-saldos',
   templateUrl: './reporte-saldos.component.html',
   styleUrls: ['./reporte-saldos.component.scss']

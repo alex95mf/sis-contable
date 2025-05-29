@@ -7,6 +7,7 @@ import { GeneralService } from 'src/app/services/general.service';
 import { Chart } from "chart.js";
 
 @Component({
+standalone: false,
   selector: 'app-estadisticas',
   templateUrl: './estadisticas.component.html',
   styleUrls: ['./estadisticas.component.scss']

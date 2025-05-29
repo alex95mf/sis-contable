@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
+standalone: false,
   selector: 'app-reclamos',
   templateUrl: './reclamos.component.html',
   styleUrls: ['./reclamos.component.scss']

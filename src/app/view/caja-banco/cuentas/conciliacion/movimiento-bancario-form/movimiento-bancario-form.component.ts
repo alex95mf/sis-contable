@@ -14,6 +14,7 @@ import * as myVarGlobals from "../../../../../global";
 
 
 @Component({
+standalone: false,
   selector: 'app-movimiento-bancario-form',
   templateUrl: './movimiento-bancario-form.component.html',
   styleUrls: ['./movimiento-bancario-form.component.scss']

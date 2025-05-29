@@ -19,6 +19,7 @@ import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
+standalone: false,
   selector: 'app-inspeccion',
   templateUrl: './inspeccion.component.html',
   styleUrls: ['./inspeccion.component.scss']

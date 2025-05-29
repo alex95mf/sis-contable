@@ -8,6 +8,7 @@ import { CommonVarService } from '../../../../../services/common-var.services';
 import { BodegaIngresoServices } from '../../../bodega/bodega-ingreso/bodega-ingreso.services';
 
 @Component({
+standalone: false,
   selector: 'app-producto-search',
   templateUrl: './producto-search.component.html',
   styleUrls: ['./producto-search.component.scss']

@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../../../../../services/commonServices'
 
 @Component({
+standalone: false,
   selector: 'app-tabs-estructura',
   templateUrl: './tabs-estructura.component.html',
   styleUrls: ['./tabs-estructura.component.scss']

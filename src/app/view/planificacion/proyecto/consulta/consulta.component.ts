@@ -5,6 +5,7 @@ import { ShowProyectoComponent } from './show/show.component';
 import { ConsultaService } from './consulta.service';
 
 @Component({
+standalone: false,
   selector: 'app-consulta',
   templateUrl: './consulta.component.html',
   styleUrls: ['./consulta.component.scss']

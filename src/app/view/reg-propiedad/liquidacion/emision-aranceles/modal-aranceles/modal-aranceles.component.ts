@@ -12,6 +12,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-modal-aranceles',
   templateUrl: './modal-aranceles.component.html',
   styleUrls: ['./modal-aranceles.component.scss'],

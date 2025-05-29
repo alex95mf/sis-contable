@@ -8,6 +8,7 @@ import { CommonService } from '../../../../../services/commonServices'
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-group',
   templateUrl: './modal-group.component.html',
   styleUrls: ['./modal-group.component.scss']

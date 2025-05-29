@@ -6,11 +6,12 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 import { ReciboCobroService } from '../recibo-cobro.service';
 
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-list-vafavor',
   templateUrl: './list-vafavor.component.html',
   styleUrls: ['./list-vafavor.component.scss']

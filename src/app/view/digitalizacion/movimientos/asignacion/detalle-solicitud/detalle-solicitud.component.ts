@@ -4,6 +4,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 
 
 @Component({
+standalone: false,
   selector: 'app-detalle-solicitud',
   templateUrl: './detalle-solicitud.component.html',
   styleUrls: ['./detalle-solicitud.component.scss']

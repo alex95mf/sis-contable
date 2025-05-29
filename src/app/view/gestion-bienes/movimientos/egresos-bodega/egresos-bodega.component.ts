@@ -26,6 +26,7 @@ import { ModalBuscaVehiculoComponent } from './modal-busca-vehiculo/modal-busca-
 import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
+standalone: false,
   selector: 'app-egresos-bodega',
   templateUrl: './egresos-bodega.component.html',
   styleUrls: ['./egresos-bodega.component.scss']

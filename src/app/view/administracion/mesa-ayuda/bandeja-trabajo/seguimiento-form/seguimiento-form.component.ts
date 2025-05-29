@@ -13,6 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
+standalone: false,
   selector: 'app-seguimiento-form',
   templateUrl: './seguimiento-form.component.html',
   styleUrls: ['./seguimiento-form.component.scss']

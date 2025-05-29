@@ -11,6 +11,7 @@ import { VistaArchivoComponent } from 'src/app/view/contabilidad/centro-costo/cc
 import { FormHigieneService } from '../form-higiene.service'  // Cambiar de acuerdo al modulo
 
 @Component({
+standalone: false,
   selector: 'app-anexos-list',
   templateUrl: './anexos-list.component.html',
   styleUrls: ['./anexos-list.component.scss']

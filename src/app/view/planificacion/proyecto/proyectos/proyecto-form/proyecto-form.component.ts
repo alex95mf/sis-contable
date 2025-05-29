@@ -13,6 +13,7 @@ import * as myVarGlobals from "../../../../../global";
 import { ProyectosService } from './../proyectos.service';
 
 @Component({
+standalone: false,
   selector: 'app-proyecto-form',
   templateUrl: './proyecto-form.component.html',
   styleUrls: ['./proyecto-form.component.scss']

@@ -12,7 +12,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { DataTablesModule } from 'angular-datatables';
 import { ViewerComponent } from '../../../commons/modals/viewer/viewer.component'
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
-import { QRCodeModule } from 'angularx-qrcode';
+import { QRCodeComponent } from 'angularx-qrcode';
 import {CommonModalModule} from '../../../commons/modals/modal.module'
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { AppCustomModule } from '../../../../config/custom/app-custom.module';
@@ -35,7 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgSelectModule,
     DataTablesModule,
     NgxDocViewerModule,
-    QRCodeModule,
+    QRCodeComponent,
     ButtonsModule.forRoot(),
     CommonModalModule,
     NgxExtendedPdfViewerModule,

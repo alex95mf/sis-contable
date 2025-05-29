@@ -10,6 +10,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 
 @Component({
+standalone: false,
   selector: 'app-show-denomination-cierre',
   templateUrl: './show-denomination-cierre.component.html',
   styleUrls: ['./show-denomination-cierre.component.scss']

@@ -2,10 +2,11 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ContribuyenteService } from '../contribuyente.service';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-folder-digital',
   templateUrl: './folder-digital.component.html',
   styleUrls: ['./folder-digital.component.scss']
@@ -54,7 +55,7 @@ export class FolderDigitalComponent implements OnInit {
         let catalogos = await this.apiService.getCatalogoAsync();
         console.log(catalogos)
         this.cmb_tipo_archivo = catalogos;
-  
+
         // this.lcargando.ctlSpinner(false)
         this.tipoArchivoLoading = false
       } catch (err) {
@@ -124,10 +125,10 @@ export class FolderDigitalComponent implements OnInit {
   descargarArchivo(documento: any) {
     // Obtén el contenido base64 del archivo desde el objeto
     const archivoBase64 = documento.archivo_base_64;
-  
+
     // Extrae solo la parte base64 del prefijo "data:application/pdf;base64,"
     const base64Data = archivoBase64.split(',')[1];
-  
+
     // Convierte el contenido base64 en un Blob
     const byteCharacters = atob(base64Data);
     const byteNumbers = new Array(byteCharacters.length);
@@ -136,7 +137,7 @@ export class FolderDigitalComponent implements OnInit {
     }
     const byteArray = new Uint8Array(byteNumbers);
     const blob = new Blob([byteArray]);
-  
+
     // Crea un enlace de descarga y simula el clic en el enlace
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');

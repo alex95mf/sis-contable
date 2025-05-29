@@ -16,6 +16,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-tramite',
   templateUrl: './tramite.component.html',
   styleUrls: ['./tramite.component.scss']

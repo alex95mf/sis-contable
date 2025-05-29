@@ -14,6 +14,7 @@ import { ModalCodigoComprasComponent } from './modal-codigo-compras/modal-codigo
 import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
+standalone: false,
   selector: 'app-compras',
   templateUrl: './compras.component.html',
   styleUrls: ['./compras.component.scss']

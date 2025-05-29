@@ -6,7 +6,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { ModalContribuyenteComponent } from '../modal-contribuyente/modal-contribuyente.component';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import moment from 'moment';
+import * as moment from 'moment';
 
 interface Feria {
   id?: number
@@ -27,6 +27,7 @@ interface Contribuyente {
 }
 
 @Component({
+standalone: false,
   selector: 'app-modal-ferias',
   templateUrl: './modal-ferias.component.html',
   styleUrls: ['./modal-ferias.component.scss']
@@ -134,7 +135,7 @@ export class ModalFeriasComponent implements OnInit {
       case "CERRAR":
         this.activeModal.close()
         break;
-    
+
       default:
         break;
     }

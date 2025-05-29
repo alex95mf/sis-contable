@@ -8,6 +8,7 @@ import { ProgamaService } from './progama.service';
 import { ProgramaFormComponent } from './programa-form/programa-form.component';
 
 @Component({
+standalone: false,
   selector: 'app-progama',
   templateUrl: './progama.component.html',
   styleUrls: ['./progama.component.scss']

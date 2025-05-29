@@ -17,6 +17,7 @@ import { DetallesGestionGarantiaComponent } from './detalles-gestion-garantia/de
 // import { GestionMovimientoBancarioService } from './gestion-movimiento-bancario.service';
 
 @Component({
+standalone: false,
   selector: 'app-gestion-garantia',
   templateUrl: './gestion-garantia.component.html',
   styleUrls: ['./gestion-garantia.component.scss']

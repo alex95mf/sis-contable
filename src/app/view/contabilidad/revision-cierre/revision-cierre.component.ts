@@ -4,9 +4,10 @@ import Botonera from 'src/app/models/IBotonera';
 import { RevisionCierreService } from './revision-cierre.service';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-revision-cierre',
   templateUrl: './revision-cierre.component.html',
   styleUrls: ['./revision-cierre.component.scss']

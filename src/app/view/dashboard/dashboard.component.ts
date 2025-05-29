@@ -6,6 +6,7 @@ import { transition } from '@angular/animations';
 import { CommonService } from 'src/app/services/commonServices';
 
 @Component({
+standalone: false,
   selector: 'app-dashboard',
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.scss']

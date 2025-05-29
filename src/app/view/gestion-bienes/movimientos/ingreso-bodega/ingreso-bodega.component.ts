@@ -34,6 +34,7 @@ import { ModalProductoDetallesComponent } from './modal-producto-detalles/modal-
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-ingreso-bodega',
   templateUrl: './ingreso-bodega.component.html',
   styleUrls: ['./ingreso-bodega.component.scss']

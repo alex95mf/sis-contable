@@ -14,6 +14,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 declare const $: any;
 
 @Component({
+standalone: false,
 	selector: 'app-toma-fisica',
 	templateUrl: './toma-fisica.component.html',
 	styleUrls: ['./toma-fisica.component.scss']

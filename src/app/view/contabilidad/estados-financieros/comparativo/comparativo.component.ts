@@ -4,11 +4,12 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ComparativoService } from './comparativo.service';
 import Botonera from 'src/app/models/IBotonera';
-import moment from 'moment';
+import * as moment from 'moment';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
+standalone: false,
   selector: 'app-comparativo',
   templateUrl: './comparativo.component.html',
   styleUrls: ['./comparativo.component.scss']

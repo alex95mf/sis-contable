@@ -10,6 +10,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { InspeccionService } from '../inspeccion.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-nueva-inspeccion',
   templateUrl: './modal-nueva-inspeccion.component.html',
   styleUrls: ['./modal-nueva-inspeccion.component.scss']

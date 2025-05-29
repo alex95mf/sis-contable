@@ -20,6 +20,7 @@ import { ListBusquedaComponent } from '../reporte-productos/list-busqueda/list-b
 
 
 @Component({
+standalone: false,
   selector: 'app-kardex',
   templateUrl: './kardex.component.html',
   styleUrls: ['./kardex.component.scss'],

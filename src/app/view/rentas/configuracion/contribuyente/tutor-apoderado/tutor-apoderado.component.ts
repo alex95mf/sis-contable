@@ -8,6 +8,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-tutor-apoderado',
   templateUrl: './tutor-apoderado.component.html',
   styleUrls: ['./tutor-apoderado.component.scss']

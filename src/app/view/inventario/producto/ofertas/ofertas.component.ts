@@ -16,6 +16,7 @@ import { ConsultaCentroModule } from "src/app/view/contabilidad/centro-costo/con
 const Swal = require("sweetalert2");
 declare const $: any;
 @Component({
+standalone: false,
     selector: "app-ofertas",
     templateUrl: "./ofertas.component.html",
     styleUrls: ["./ofertas.component.scss"],

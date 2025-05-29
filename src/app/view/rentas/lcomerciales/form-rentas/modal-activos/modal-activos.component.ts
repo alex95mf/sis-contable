@@ -9,6 +9,7 @@ import { FormRentasService } from '../form-rentas.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-activos',
   templateUrl: './modal-activos.component.html',
   styleUrls: ['./modal-activos.component.scss']

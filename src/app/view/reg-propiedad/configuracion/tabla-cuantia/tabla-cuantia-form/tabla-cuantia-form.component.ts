@@ -8,6 +8,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import moment from "moment";
 
 @Component({
+standalone: false,
   selector: 'app-tabla-cuantia-form',
   templateUrl: './tabla-cuantia-form.component.html',
   styleUrls: ['./tabla-cuantia-form.component.scss']

@@ -14,6 +14,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-reportes-trans',
   templateUrl: './reportes-trans.component.html',
   styleUrls: ['./reportes-trans.component.scss']

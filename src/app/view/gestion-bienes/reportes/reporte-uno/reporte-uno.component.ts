@@ -20,6 +20,7 @@ import { ListBusquedaComponent } from '../reporte-productos/list-busqueda/list-b
 import { DataTableDirective } from 'angular-datatables';
 
 @Component({
+standalone: false,
   selector: 'app-reporte-uno',
   templateUrl: './reporte-uno.component.html',
   styleUrls: ['./reporte-uno.component.scss']

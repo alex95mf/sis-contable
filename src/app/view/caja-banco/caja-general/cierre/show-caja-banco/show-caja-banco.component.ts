@@ -9,6 +9,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-show-caja-banco',
   templateUrl: './show-caja-banco.component.html',
   styleUrls: ['./show-caja-banco.component.scss']

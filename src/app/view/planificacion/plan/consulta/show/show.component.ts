@@ -4,6 +4,7 @@ import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-show',
   templateUrl: './show.component.html',
   styleUrls: ['./show.component.scss']

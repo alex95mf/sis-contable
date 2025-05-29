@@ -15,6 +15,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { GestionMovimientoBancarioService } from './gestion-movimiento-bancario.service';
 
 @Component({
+standalone: false,
   selector: 'app-gestion-movimiento-bancario',
   templateUrl: './gestion-movimiento-bancario.component.html',
   styleUrls: ['./gestion-movimiento-bancario.component.scss']

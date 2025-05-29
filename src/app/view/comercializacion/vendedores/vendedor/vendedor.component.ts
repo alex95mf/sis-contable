@@ -13,6 +13,7 @@ import { ModalProductComponent } from "./modal-product/modal-product.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from 'moment';
 @Component({
+standalone: false,
   selector: "app-vendedor",
   templateUrl: "./vendedor.component.html",
   styleUrls: ["./vendedor.component.scss"],

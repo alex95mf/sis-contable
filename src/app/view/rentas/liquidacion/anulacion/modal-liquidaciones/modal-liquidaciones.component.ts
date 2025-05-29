@@ -10,6 +10,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-modal-liquidaciones',
   templateUrl: './modal-liquidaciones.component.html',
   styleUrls: ['./modal-liquidaciones.component.scss']

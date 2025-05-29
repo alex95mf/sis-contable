@@ -5,6 +5,7 @@ import { CommonVarService } from "src/app/services/common-var.services";
 import { VendedorService } from "../vendedor.service";
 
 @Component({
+standalone: false,
   selector: "app-contactos-vendedor",
   templateUrl: "./contactos.component.html",
   styleUrls: ["./contactos.component.scss"],

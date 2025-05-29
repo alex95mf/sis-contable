@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
@@ -14,6 +14,7 @@ import { ListRecDocumentosComponent } from './list-rec-documentos/list-rec-docum
 import { environment } from 'src/environments/environment';
 import { ModalCompraTerrenosComponent } from './modal-compra-terrenos/modal-compra-terrenos.component';
 @Component({
+standalone: false,
   selector: 'app-convenio-arriente-t',
   templateUrl: './convenio-arriente-t.component.html',
   styleUrls: ['./convenio-arriente-t.component.scss']

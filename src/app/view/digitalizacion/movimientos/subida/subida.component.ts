@@ -20,6 +20,7 @@ import { resolveCname } from "dns";
 import { HttpResponse } from "@angular/common/http";
 
 @Component({
+standalone: false,
   selector: "app-subida",
   templateUrl: "./subida.component.html",
   styleUrls: ["./subida.component.scss"],

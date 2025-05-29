@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda',
   templateUrl: './modal-busqueda.component.html',
   styleUrls: ['./modal-busqueda.component.scss']

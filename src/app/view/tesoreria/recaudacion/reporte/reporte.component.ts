@@ -11,6 +11,7 @@ import { Table } from 'primeng/table';
 
 
 @Component({
+standalone: false,
   selector: 'app-reporte',
   templateUrl: './reporte.component.html',
   styleUrls: ['./reporte.component.scss'],

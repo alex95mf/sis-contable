@@ -18,6 +18,7 @@ import { ModalVehiculosComponent } from '../form-comisaria/modal-vehiculos/modal
 
 
 @Component({
+standalone: false,
   selector: 'app-form-rentas',
   templateUrl: './form-rentas.component.html',
   styleUrls: ['./form-rentas.component.scss']

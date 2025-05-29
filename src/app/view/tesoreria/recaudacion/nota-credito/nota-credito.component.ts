@@ -18,6 +18,7 @@ import { ListNotaCreditoComponent } from '../recibo-cobro/list-nota-credito/list
 import { environment } from 'src/environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-nota-credito',
   templateUrl: './nota-credito.component.html',
   styleUrls: ['./nota-credito.component.scss']

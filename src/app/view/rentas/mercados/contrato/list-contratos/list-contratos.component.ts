@@ -10,6 +10,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-list-contratos',
   templateUrl: './list-contratos.component.html',
   styleUrls: ['./list-contratos.component.scss']
@@ -145,6 +146,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-list-contratos',
   templateUrl: './list-contratos.component.html',
   styleUrls: ['./list-contratos.component.scss']

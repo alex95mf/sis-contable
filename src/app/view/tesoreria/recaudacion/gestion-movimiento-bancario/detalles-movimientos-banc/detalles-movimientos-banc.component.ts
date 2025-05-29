@@ -6,6 +6,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { GestionMovimientoBancarioService } from '../gestion-movimiento-bancario.service';
 
 @Component({
+standalone: false,
   selector: 'app-detalles-movimientos-banc',
   templateUrl: './detalles-movimientos-banc.component.html',
   styleUrls: ['./detalles-movimientos-banc.component.scss']

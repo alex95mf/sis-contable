@@ -7,10 +7,11 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 
 import * as myVarGlobals from 'src/app/global';
 import { GestionExpedienteService } from '../gestion-expediente.service';
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 @Component({
+standalone: false,
   selector: 'app-modal-edition',
   templateUrl: './modal-edition.component.html',
   styleUrls: ['./modal-edition.component.scss']
@@ -67,7 +68,7 @@ export class ModalEditionComponent implements OnInit {
         showbadge: false,
         clase: "btn btn-success boton btn-sm",
         habilitar: false,
-        
+
       },
       {
         orig: "btnsDetalles",
@@ -79,7 +80,7 @@ export class ModalEditionComponent implements OnInit {
         showbadge: false,
         clase: "btn btn-danger boton btn-sm",
         habilitar: false,
-        
+
       },
     ]
 

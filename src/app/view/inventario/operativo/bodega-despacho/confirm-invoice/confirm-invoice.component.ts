@@ -10,6 +10,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 //import { ThrowStmt } from '@angular/compiler';
 import { MatDialogRef } from '@angular/material/dialog';
 @Component({
+standalone: false,
   selector: 'app-confirm-invoice',
   templateUrl: './confirm-invoice.component.html',
   styleUrls: ['./confirm-invoice.component.scss']

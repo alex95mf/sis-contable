@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
+standalone: false,
   selector: 'app-difered-cuotes',
   templateUrl: './difered-cuotes.component.html',
   styleUrls: ['./difered-cuotes.component.scss']

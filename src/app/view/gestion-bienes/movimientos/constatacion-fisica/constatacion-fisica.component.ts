@@ -17,6 +17,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 
 
 @Component({
+standalone: false,
   selector: 'app-constatacion-fisica',
   templateUrl: './constatacion-fisica.component.html',
   styleUrls: ['./constatacion-fisica.component.scss']

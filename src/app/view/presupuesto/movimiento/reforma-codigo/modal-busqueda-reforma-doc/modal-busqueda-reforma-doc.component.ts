@@ -5,9 +5,10 @@ import { ReformaCodigoService } from '../reforma-codigo.service';
 import Botonera from 'src/app/models/IBotonera';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { ToastrService } from 'ngx-toastr';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda-reforma-doc',
   templateUrl: './modal-busqueda-reforma-doc.component.html',
   styleUrls: ['./modal-busqueda-reforma-doc.component.scss']

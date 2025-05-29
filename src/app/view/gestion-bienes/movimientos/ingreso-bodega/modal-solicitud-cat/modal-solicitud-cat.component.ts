@@ -4,11 +4,12 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { IngresoBodegaService } from '../ingreso-bodega.service';
-import moment from 'moment';
+import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
+standalone: false,
   selector: 'app-modal-solicitud-cat',
   templateUrl: './modal-solicitud-cat.component.html',
   styleUrls: ['./modal-solicitud-cat.component.scss']
@@ -26,11 +27,11 @@ export class ModalSolicitudCatComponent implements OnInit {
   solicitud:any = []
 
   vmButtons: any = []
-  
+
   filter: any;
   paginate: any;
 
-  
+
   today: any;
   tomorrow: any;
   firstday: any;
@@ -66,7 +67,7 @@ export class ModalSolicitudCatComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
       razon_social: undefined,
@@ -118,7 +119,7 @@ export class ModalSolicitudCatComponent implements OnInit {
       (res)=>{
          console.log(res);
         this.paginate.length = res['data']['total']
-       
+
         // res['data']['data'].forEach(soli => {
         //    soli.ordenes.forEach(orden => {
         //    // Object.assign(soli,{num_orden: orden.num_orden,valor_orden: orden.valor,estado_orden: orden.estado})
@@ -137,7 +138,7 @@ export class ModalSolicitudCatComponent implements OnInit {
         //        estado_orden: orden.estado,
         //        detalles: soli.detalles
         //      }
-        //      this.solicitud.push(data) 
+        //      this.solicitud.push(data)
         //  });
         // });
         this.solicitud = res['data']['data'];
@@ -153,9 +154,9 @@ export class ModalSolicitudCatComponent implements OnInit {
 
       }
     )
-    
+
   }
-  
+
   asignarEstado(evt) {
     this.filter.estado = evt
    }
@@ -171,7 +172,7 @@ export class ModalSolicitudCatComponent implements OnInit {
 
 
   selectOption(data) {
-    
+
     Swal.fire({
       icon: "warning",
       title: "¡Atención!",
@@ -190,7 +191,7 @@ export class ModalSolicitudCatComponent implements OnInit {
         this.activeModal.close()
       }
     });
-    
+
   }
   limpiarFiltros() {
     this.filter = {

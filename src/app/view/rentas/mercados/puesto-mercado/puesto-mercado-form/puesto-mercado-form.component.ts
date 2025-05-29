@@ -8,6 +8,7 @@ import { PuestoMercadoService } from '../puesto-mercado.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 @Component({
+standalone: false,
   selector: 'app-puesto-mercado-form',
   templateUrl: './puesto-mercado-form.component.html',
   styleUrls: ['./puesto-mercado-form.component.scss']

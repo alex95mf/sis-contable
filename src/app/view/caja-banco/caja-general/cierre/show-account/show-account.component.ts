@@ -7,6 +7,7 @@ import { CommonService } from "../../../../../services/commonServices";
 import { CommonVarService } from '../../../../../services/common-var.services';
 import { CierreService } from '../cierre.service';
 @Component({
+standalone: false,
   selector: 'app-show-account',
   templateUrl: './show-account.component.html',
   styleUrls: ['./show-account.component.scss']

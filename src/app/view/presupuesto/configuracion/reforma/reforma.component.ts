@@ -16,6 +16,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { environment } from 'src/environments/environment';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 @Component({
+standalone: false,
   selector: 'app-reforma',
   templateUrl: './reforma.component.html',
   styleUrls: ['./reforma.component.scss']

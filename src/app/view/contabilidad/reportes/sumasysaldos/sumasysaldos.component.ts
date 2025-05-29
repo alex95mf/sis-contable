@@ -14,6 +14,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import * as moment from 'moment'
 import { environment } from 'src/environments/environment';
 @Component({
+standalone: false,
   selector: 'app-sumasysaldos',
   templateUrl: './sumasysaldos.component.html',
   styleUrls: ['./sumasysaldos.component.scss']

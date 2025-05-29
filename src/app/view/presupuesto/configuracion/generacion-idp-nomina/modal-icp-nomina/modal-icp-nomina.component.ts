@@ -8,6 +8,7 @@ import { GeneracionIdpNominaService } from '../generacion-idp-nomina.service';
 // import { OrdenService } from '../orden.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-icp-nomina',
   templateUrl: './modal-icp-nomina.component.html',
   styleUrls: ['./modal-icp-nomina.component.scss']

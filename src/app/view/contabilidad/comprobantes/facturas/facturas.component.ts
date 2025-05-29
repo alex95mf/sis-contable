@@ -45,6 +45,7 @@ import * as $ from 'jquery';
 import { ModalBusquedaFacturaComponent } from './modal-busqueda-factura/modal-busqueda-factura.component';
 
 @Component({
+standalone: false,
   selector: 'app-facturas',
   templateUrl: './facturas.component.html',
   styleUrls: ['./facturas.component.scss'],

@@ -12,6 +12,7 @@ const Swal = require('sweetalert2');
 import 'sweetalert2/src/sweetalert2.scss';
 
 @Component({
+standalone: false,
   selector: 'app-pago-letra',
   templateUrl: './pago-letra.component.html',
   styleUrls: ['./pago-letra.component.scss']

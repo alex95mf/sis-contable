@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment';
+import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CatalogoBienesService } from './catalogo-bienes.service';
@@ -9,6 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ModalCreateComponent } from './modal-create/modal-create.component';
 
 @Component({
+standalone: false,
   selector: 'app-catalogo-bienes',
   templateUrl: './catalogo-bienes.component.html',
   styleUrls: ['./catalogo-bienes.component.scss']

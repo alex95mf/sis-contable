@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 
 import { CommonVarService } from 'src/app/services/common-var.services';
@@ -9,6 +9,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { JuiciosService } from '../juicios.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-citacion',
   templateUrl: './modal-citacion.component.html',
   styleUrls: ['./modal-citacion.component.scss']
@@ -121,10 +122,10 @@ export class ModalCitacionComponent implements OnInit {
     }
 
     Object.assign(
-      this.actuacion, 
+      this.actuacion,
       { observaciones: `${this.actuacion.observacion} | ${this.estados.find(e => e.id == this.actuacion.estado_c).label} | ${this.actuacion.fecha} | ${this.notificadores.find(e => e.value == this.actuacion.notificador).label}` }
     )
-    
+
     this.msgSpinner = 'Registrando Citacion'
     this.lcargando.ctlSpinner(true)
     this.apiService.saveCitacion({juicio: this.juicio, citacion: this.actuacion}).subscribe(

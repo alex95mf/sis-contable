@@ -7,6 +7,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-incremento',
   templateUrl: './incremento.component.html',
   styleUrls: ['./incremento.component.scss']

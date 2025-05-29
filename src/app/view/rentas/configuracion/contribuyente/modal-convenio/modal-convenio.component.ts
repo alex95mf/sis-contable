@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-convenio',
   templateUrl: './modal-convenio.component.html',
   styleUrls: ['./modal-convenio.component.scss']

@@ -27,6 +27,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 
 
 @Component({
+standalone: false,
   selector: 'app-dashboard',
   templateUrl: './configuracion.component.html',
   styleUrls: ['./configuracion.component.scss'],
@@ -428,6 +429,7 @@ export class ConfiguracionComponent implements OnInit {
 // import { Settings } from 'src/app/app.settings.model';
 
 // @Component({
+standalone: false,
 //   selector: 'app-configuracion',
 //   templateUrl: './configuracion.component.html',
 //   styleUrls: ['./configuracion.component.scss']

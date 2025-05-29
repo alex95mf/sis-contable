@@ -2,6 +2,7 @@ import { Component, Inject, inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
+standalone: false,
   selector: 'app-cc-modal-list-faltas-permisos',
   templateUrl: './cc-modal-list-faltas-permisos.component.html',
   styleUrls: ['./cc-modal-list-faltas-permisos.component.scss']

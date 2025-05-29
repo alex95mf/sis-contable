@@ -11,6 +11,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { MercadoService } from './mercado.service';
 
 @Component({
+standalone: false,
   selector: 'app-mercado',
   templateUrl: './mercado.component.html',
   styleUrls: ['./mercado.component.scss']

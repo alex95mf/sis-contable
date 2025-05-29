@@ -15,6 +15,7 @@ import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.
 import { ModalVehiculosComponent } from './modal-vehiculos/modal-vehiculos.component';
 
 @Component({
+standalone: false,
   selector: 'app-form-comisaria',
   templateUrl: './form-comisaria.component.html',
   styleUrls: ['./form-comisaria.component.scss']

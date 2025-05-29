@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
@@ -17,6 +17,7 @@ import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exonera
 import { ModalSupervivenciaComponent } from 'src/app/config/custom/modal-supervivencia/modal-supervivencia.component';
 
 @Component({
+standalone: false,
   selector: 'app-arriendoterrenos',
   templateUrl: './arriendoterrenos.component.html',
   styleUrls: ['./arriendoterrenos.component.scss']

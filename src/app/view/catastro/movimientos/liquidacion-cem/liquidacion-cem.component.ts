@@ -4,12 +4,13 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
 import { MatTable } from '@angular/material/table';
 
 @Component({
+standalone: false,
   selector: 'app-liquidacion-cem',
   templateUrl: './liquidacion-cem.component.html',
   styleUrls: ['./liquidacion-cem.component.scss']

@@ -6,6 +6,7 @@ import { ApiServices } from 'src/app/services/api.service';
 import { HomeServices } from '../home/home.service';
 
 @Component({
+standalone: false,
   selector: 'app-new-home',
   templateUrl: './new-home.component.html',
   styleUrls: ['./new-home.component.scss']

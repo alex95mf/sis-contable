@@ -6,7 +6,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 import { environment } from 'src/environments/environment';
 
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 import { ConsultaIdpService } from './consulta-idp.service';
@@ -14,6 +14,7 @@ import { ModalIdpdetallesComponent } from './modal-idpdetalles/modal-idpdetalles
 import { ModalEstadoComponent } from './modal-estado/modal-estado.component';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-idp',
   templateUrl: './consulta-idp.component.html',
   styleUrls: ['./consulta-idp.component.scss']

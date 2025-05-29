@@ -6,6 +6,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda-partida',
   templateUrl: './modal-busqueda-partida.component.html',
   styleUrls: ['./modal-busqueda-partida.component.scss']

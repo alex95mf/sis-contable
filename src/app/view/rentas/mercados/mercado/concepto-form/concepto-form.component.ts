@@ -15,6 +15,7 @@ import { ModalCuentPreComponent } from '../modal-cuent-pre/modal-cuent-pre.compo
 import { MercadoService } from '../mercado.service';
 
 @Component({
+standalone: false,
   selector: 'app-concepto-form',
   templateUrl: './concepto-form.component.html',
   styleUrls: ['./concepto-form.component.scss']

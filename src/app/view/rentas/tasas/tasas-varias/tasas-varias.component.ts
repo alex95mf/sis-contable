@@ -14,6 +14,7 @@ import * as myVarGlobals from 'src/app/global';
 import { environment } from 'src/environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-tasas-varias',
   templateUrl: './tasas-varias.component.html',
   styleUrls: ['./tasas-varias.component.scss']

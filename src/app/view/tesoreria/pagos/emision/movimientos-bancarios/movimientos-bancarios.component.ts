@@ -17,6 +17,7 @@ import { EmisionService } from '../emision.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-movimientos-bancarios',
   templateUrl: './movimientos-bancarios.component.html',
   styleUrls: ['./movimientos-bancarios.component.scss']

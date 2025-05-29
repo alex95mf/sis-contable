@@ -17,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as FileSaver from 'file-saver';
 
 @Component({
+standalone: false,
   selector: 'app-rpd-compras-dinamico',
   templateUrl: './rpd-compras-dinamico.component.html',
   styleUrls: ['./rpd-compras-dinamico.component.scss'],

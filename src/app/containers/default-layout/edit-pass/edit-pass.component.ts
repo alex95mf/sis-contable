@@ -13,6 +13,7 @@ const Swal = require('sweetalert2');
 import { MatDialogRef } from '@angular/material/dialog';
 import { CcSpinerProcesarComponent } from '../../../config/custom/cc-spiner-procesar.component';
 @Component({
+standalone: false,
 	selector: 'app-edit-pass',
 	templateUrl: './edit-pass.component.html',
 	styleUrls: ['./edit-pass.component.scss']

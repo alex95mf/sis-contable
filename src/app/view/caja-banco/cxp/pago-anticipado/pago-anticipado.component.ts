@@ -19,6 +19,7 @@ import { ListaCxpComponent } from './lista-cxp/lista-cxp.component';
 declare const $: any;  
 
 @Component({
+standalone: false,
   selector: 'app-pago-anticipado',
   templateUrl: './pago-anticipado.component.html',
   styleUrls: ['./pago-anticipado.component.scss']

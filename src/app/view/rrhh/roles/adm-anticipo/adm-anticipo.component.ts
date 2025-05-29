@@ -12,6 +12,7 @@ import * as myVarGlobals from "../../../../global";
 import { AdmAnticipoService } from "./adm-anticipo.service";
 
 @Component({
+standalone: false,
   selector: "app-adm-anticipo",
   templateUrl: "./adm-anticipo.component.html",
   styleUrls: ["./adm-anticipo.component.scss"],

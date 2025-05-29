@@ -1,5 +1,5 @@
 import { Component, OnInit ,Input,ViewChild} from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as myVarGlobals from '../../../../global';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
@@ -28,6 +28,7 @@ interface Cotizacion {
 }
 
 @Component({
+standalone: false,
   selector: 'app-revision',
   templateUrl: './revision.component.html',
   styleUrls: ['./revision.component.scss']

@@ -15,6 +15,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-cierre',
   templateUrl: './cierre.component.html',
   styleUrls: ['./cierre.component.scss']
@@ -475,6 +476,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-cierre',
   templateUrl: './cierre.component.html',
   styleUrls: ['./cierre.component.scss']

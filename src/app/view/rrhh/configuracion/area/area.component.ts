@@ -14,6 +14,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
+standalone: false,
   selector: 'app-area',
   templateUrl: './area.component.html',
   styleUrls: ['./area.component.scss']

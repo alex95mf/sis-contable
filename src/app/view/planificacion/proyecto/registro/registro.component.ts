@@ -9,6 +9,7 @@ import { RegistroService } from './registro.service';
 import { ModalComponent } from './modal/modal.component';
 
 @Component({
+standalone: false,
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss']

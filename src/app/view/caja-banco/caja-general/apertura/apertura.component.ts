@@ -13,6 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-apertura',
   templateUrl: './apertura.component.html',
   styleUrls: ['./apertura.component.scss']

@@ -8,6 +8,7 @@ import { JornadaService } from '../jornada.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ButtonRadioActiveComponent } from 'src/app/config/custom/cc-panel-buttons/button-radio-active.component';
 @Component({
+standalone: false,
   selector: 'app-modal-jornada',
   templateUrl: './modal-jornada.component.html',
   styleUrls: ['./modal-jornada.component.scss']

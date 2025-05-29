@@ -11,6 +11,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 
 
 @Component({
+standalone: false,
   selector: 'app-reportes-pagos',
   templateUrl: './reportes-pagos.component.html',
   styleUrls: ['./reportes-pagos.component.scss']

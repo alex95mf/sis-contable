@@ -13,6 +13,7 @@ import { ArancelFormComponent } from "./arancel-form/arancel-form.component";
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: "app-aranceles",
   templateUrl: "./aranceles.component.html",
   styleUrls: ["./aranceles.component.scss"],

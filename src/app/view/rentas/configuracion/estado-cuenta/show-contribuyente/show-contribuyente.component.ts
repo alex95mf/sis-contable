@@ -13,6 +13,7 @@ import { CcSpinerProcesarComponent } from "src/app/config/custom/cc-spiner-proce
 
 
 @Component({
+standalone: false,
   selector: "app-show-contribuyente",
   templateUrl: "./show-contribuyente.component.html",
   styleUrls: ["./show-contribuyente.component.scss"],

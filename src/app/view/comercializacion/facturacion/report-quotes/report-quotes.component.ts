@@ -14,6 +14,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-report-quotes',
   templateUrl: './report-quotes.component.html',
   styleUrls: ['./report-quotes.component.scss']

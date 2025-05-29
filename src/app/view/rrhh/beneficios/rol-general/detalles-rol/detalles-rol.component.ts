@@ -5,6 +5,7 @@ import { RolGeneralEmplService } from '../rol-general-empl.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-detalles-rol',
   templateUrl: './detalles-rol.component.html',
   styleUrls: ['./detalles-rol.component.scss']

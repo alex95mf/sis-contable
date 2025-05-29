@@ -16,6 +16,7 @@ const Swal = require('sweetalert2');
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: "app-reportes-bancos",
   templateUrl: "./reportes.component.html",
   styleUrls: ["./reportes.component.scss"],

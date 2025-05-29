@@ -15,6 +15,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-gestion-juicio',
   templateUrl: './gestion-juicio.component.html',
   styleUrls: ['./gestion-juicio.component.scss']

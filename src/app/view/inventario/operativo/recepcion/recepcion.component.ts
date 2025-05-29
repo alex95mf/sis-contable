@@ -14,6 +14,7 @@ import { ShowRecepcionComponent } from './show-recepcion/show-recepcion.componen
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component'
 
 @Component({
+standalone: false,
   selector: 'app-recepcion',
   templateUrl: './recepcion.component.html',
   styleUrls: ['./recepcion.component.scss']

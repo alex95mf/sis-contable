@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment';
+import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { ComprasService } from '../compras.service';
@@ -8,6 +8,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-modal-cargaxml',
   templateUrl: './modal-cargaxml.component.html',
   styleUrls: ['./modal-cargaxml.component.scss']

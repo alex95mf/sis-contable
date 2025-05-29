@@ -12,6 +12,7 @@ import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-gestion-form',
   templateUrl: './gestion-form.component.html',
   styleUrls: ['./gestion-form.component.scss']

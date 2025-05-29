@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonVarService } from '../../../../../../services/common-var.services';
 
 @Component({
+standalone: false,
   selector: 'app-listado-com-eg',
   templateUrl: './listado-com-eg.component.html',
   styleUrls: ['./listado-com-eg.component.scss']

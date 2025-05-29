@@ -6,12 +6,13 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 // import { PrestamoService } from '../prestamo.service';
 
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 import { MantenimientoService } from '../mantenimiento.service';
 
 @Component({
+standalone: false,
   selector: 'app-list-busqueda-prestamo',
   templateUrl: './list-busqueda-prestamo.component.html',
   styleUrls: ['./list-busqueda-prestamo.component.scss']
@@ -87,7 +88,7 @@ export class ListBusquedaPrestamoComponent implements OnInit {
     this.primer_dia = new Date(this.hoy.getFullYear(), this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(), this.hoy.getMonth() + 1, 0);
     this.filter = {
-    
+
       // fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
       // fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigoData: null,
@@ -171,7 +172,7 @@ export class ListBusquedaPrestamoComponent implements OnInit {
    // this.closeModal()
     // console.log("aquii")
     // console.log(data);
-    
+
       // Swal.fire({
       //   icon: "warning",
       //   title: "¡Atención!",
@@ -193,11 +194,11 @@ export class ListBusquedaPrestamoComponent implements OnInit {
       //     // console.log(data);
       //   }
       // });
-    
+
   }
 
   closeModal(data?: any) {
-    
+
     this.activeModal.dismiss();
   }
 

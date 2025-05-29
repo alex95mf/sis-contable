@@ -6,6 +6,7 @@ import { CommonVarService } from '../../../../../services/common-var.services';
 import { ConsultaService } from '../consulta.service';
 
 @Component({
+standalone: false,
   selector: 'app-show-diario',
   templateUrl: './show-diario.component.html',
   styleUrls: ['./show-diario.component.scss']

@@ -8,6 +8,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
+standalone: false,
   selector: 'app-editviapublica',
   templateUrl: './editviapublica.component.html',
   styleUrls: ['./editviapublica.component.scss']

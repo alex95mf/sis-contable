@@ -15,6 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-bodega-ingreso',
   templateUrl: './bodega-ingreso.component.html',
   styleUrls: ['./bodega-ingreso.component.scss']

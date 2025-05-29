@@ -13,6 +13,7 @@ import { ListBusquedaComponent } from './list-busqueda/list-busqueda.component';
 import * as myVarGlobals from '../../../../global';
 
 @Component({
+standalone: false,
   selector: 'app-registro-poliza',
   templateUrl: './registro-poliza.component.html',
   styleUrls: ['./registro-poliza.component.scss']

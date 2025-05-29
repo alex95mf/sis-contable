@@ -10,6 +10,7 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-reasignar-usuario',
   templateUrl: './reasignar-usuario.component.html',
   styleUrls: ['./reasignar-usuario.component.scss']

@@ -11,6 +11,7 @@ import "sweetalert2/src/sweetalert2.scss";
 const Swal = require("sweetalert2");
 
 @Component({
+standalone: false,
   selector: 'app-ingreso-ajuste-component',
   templateUrl: './ingreso-ajuste.component.html',
   styleUrls: ['./ingreso-ajuste.component.scss'],

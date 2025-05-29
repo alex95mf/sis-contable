@@ -14,6 +14,7 @@ import { ModalInspeccionesComponent } from './modal-inspecciones/modal-inspeccio
 import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.component';
 
 @Component({
+standalone: false,
   selector: 'app-form-planificacion',
   templateUrl: './form-planificacion.component.html',
   styleUrls: ['./form-planificacion.component.scss']

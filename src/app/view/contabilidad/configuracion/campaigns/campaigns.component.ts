@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalCampaignDetailsComponent } from './modal-campaign-details/modal-campaign-details.component';
 
 @Component({
+standalone: false,
   selector: 'app-campaigns',
   templateUrl: './campaigns.component.html',
   styleUrls: ['./campaigns.component.scss']

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ContribuyenteService } from '../../contribuyente.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-activos-ciudad',
   templateUrl: './modal-activos-ciudad.component.html',
   styleUrls: ['./modal-activos-ciudad.component.scss']

@@ -13,6 +13,7 @@ import { ConstatacionFisicaBCAService } from '../constatacion-fisica-bca.service
 //import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 // import { ValidacionesFactory } from '../utils/ValidacionesFactory';
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda-constatacion',
   templateUrl: './modal-busqueda-constatacion.component.html',
   styleUrls: ['./modal-busqueda-constatacion.component.scss']

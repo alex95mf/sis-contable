@@ -20,6 +20,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-ordenes',
   templateUrl: './ordenes.component.html',
   styleUrls: ['./ordenes.component.scss']

@@ -10,6 +10,7 @@ import { CommonVarService } from "../../../../../services/common-var.services";
 import { ConsultaGService } from "../consulta.service";
 import { MatDialogRef } from '@angular/material/dialog';
 @Component({
+standalone: false,
   selector: 'app-view-consulta-gasto',
   templateUrl: './view-consulta-gasto.component.html',
   styleUrls: ['./view-consulta-gasto.component.scss']

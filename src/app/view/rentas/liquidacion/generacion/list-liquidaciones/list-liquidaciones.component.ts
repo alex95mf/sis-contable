@@ -10,6 +10,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-list-liquidaciones',
   templateUrl: './list-liquidaciones.component.html',
   styleUrls: ['./list-liquidaciones.component.scss']

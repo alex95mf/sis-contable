@@ -9,6 +9,7 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
 import { EventValidationErrorMessage } from 'calendar-utils';
 
 @Component({
+standalone: false,
   selector: 'app-pertenece-cooperativa',
   templateUrl: './pertenece-cooperativa.component.html',
   styleUrls: ['./pertenece-cooperativa.component.scss']

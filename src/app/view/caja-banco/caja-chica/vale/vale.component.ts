@@ -15,6 +15,7 @@ import { ReposicionComponent } from './reposicion/reposicion.component'
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-vale',
   templateUrl: './vale.component.html',
   styleUrls: ['./vale.component.scss']

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { EstadoCuentaService } from './estado-cuenta.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CcModalTableEmpleadoComponent } from 'src/app/config/custom/modal-component/cc-modal-table-empleado/cc-modal-table-empleado.component';
@@ -10,6 +10,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 import { environment } from 'src/environments/environment';
 import {MessageService} from 'primeng/api';
 @Component({
+standalone: false,
   selector: 'app-estado-cuenta',
   templateUrl: './estado-cuenta.component.html',
   styleUrls: ['./estado-cuenta.component.scss'],

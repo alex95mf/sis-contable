@@ -12,6 +12,7 @@ import { CommonService } from "../../../../../services/commonServices";
 import { CommonVarService } from "../../../../../services/common-var.services";
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-report-nota-debito',
   templateUrl: './report-nota-debito.component.html',
   styleUrls: ['./report-nota-debito.component.scss']

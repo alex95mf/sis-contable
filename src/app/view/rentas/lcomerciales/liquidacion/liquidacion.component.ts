@@ -19,6 +19,7 @@ import { ModalBusquedaDocumentoComponent } from './modal-busqueda-documento/moda
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-liquidacion',
   templateUrl: './liquidacion.component.html',
   styleUrls: ['./liquidacion.component.scss']

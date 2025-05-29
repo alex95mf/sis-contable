@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-multa-det',
   templateUrl: './multa-det.component.html',
   styleUrls: ['./multa-det.component.scss']

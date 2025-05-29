@@ -20,6 +20,7 @@ import { ShowLiquidacionesComponent } from '../liquidaciones/show-liquidaciones/
 
 
 @Component({
+standalone: false,
   selector: 'app-consulta',
   templateUrl: './consulta.component.html',
   styleUrls: ['./consulta.component.scss']

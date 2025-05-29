@@ -4,6 +4,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CustonService } from 'src/app/config/custom/app-custom.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda-auxiliar',
   templateUrl: './modal-busqueda-auxiliar.component.html',
   styleUrls: ['./modal-busqueda-auxiliar.component.scss']

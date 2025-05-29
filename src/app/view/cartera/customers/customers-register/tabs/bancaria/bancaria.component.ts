@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as myVarGlobals from '../../../../../../global';
 declare const $: any;
 @Component({
+standalone: false,
 	selector: 'app-bancaria',
 	templateUrl: './bancaria.component.html',
 	styleUrls: ['./bancaria.component.scss']

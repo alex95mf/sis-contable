@@ -11,6 +11,7 @@ declare const $: any;
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-cuenta-cliente',
   templateUrl: './cuenta-cliente.component.html',
   styleUrls: ['./cuenta-cliente.component.scss']

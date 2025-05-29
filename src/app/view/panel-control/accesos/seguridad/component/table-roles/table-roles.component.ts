@@ -7,6 +7,7 @@ import { CommonService } from '../../../../../../services/commonServices'
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-table-roles',
   templateUrl: './table-roles.component.html',
   styleUrls: ['./table-roles.component.scss']

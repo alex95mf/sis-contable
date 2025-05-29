@@ -15,6 +15,7 @@ import { ViewConsultaGastoComponent } from './view-consulta-gasto/view-consulta-
 import { ConfirmationDialogService } from '../../../../config/custom/confirmation-dialog/confirmation-dialog.service';
 declare const $: any;
 @Component({
+standalone: false,
 selector: 'app-consulta',
 templateUrl: './consulta.component.html',
 styleUrls: ['./consulta.component.scss']

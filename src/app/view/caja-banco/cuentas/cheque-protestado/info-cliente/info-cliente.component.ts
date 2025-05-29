@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IngChqProtestadoComponent } from '../ing-chq-protestado/ing-chq-protestado.component';
 
 @Component({
+standalone: false,
   selector: 'app-info-cliente',
   templateUrl: './info-cliente.component.html',
   styleUrls: ['./info-cliente.component.scss']

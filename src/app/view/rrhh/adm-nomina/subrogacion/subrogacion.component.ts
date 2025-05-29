@@ -39,6 +39,7 @@ import { ModalConsultaSubrogacionComponent } from "./modal-consulta-subrogacion/
 import { CierreMesService } from "src/app/view/presupuesto/configuracion/cierre-de-mes/cierre-mes.service";
 
 @Component({
+standalone: false,
   selector: "app-subrogacion",
   templateUrl: "./subrogacion.component.html",
   styleUrls: ["./subrogacion.component.scss"],

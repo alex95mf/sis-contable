@@ -11,6 +11,7 @@ import { contableConfService } from "../contable.service";
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
+standalone: false,
 	selector: 'app-parametro-cuenta',
 	templateUrl: './parametro-cuenta.component.html',
 	styleUrls: ['./parametro-cuenta.component.scss']

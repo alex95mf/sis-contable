@@ -10,6 +10,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { PoaService } from './poa.service';
 
 @Component({
+standalone: false,
   selector: 'app-poa',
   templateUrl: './poa.component.html',
   styleUrls: ['./poa.component.scss']

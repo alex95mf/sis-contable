@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CapacitacionService } from './capacitacion.service';
 @Component({
+standalone: false,
   selector: 'app-capacitacion',
   templateUrl: './capacitacion.component.html',
   styleUrls: ['./capacitacion.component.scss']

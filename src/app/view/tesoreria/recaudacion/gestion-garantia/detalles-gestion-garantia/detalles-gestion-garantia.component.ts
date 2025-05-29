@@ -6,6 +6,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { GestionGarantiaService } from '../gestion-garantia.service';
 
 @Component({
+standalone: false,
   selector: 'app-detalles-gestion-garantia',
   templateUrl: './detalles-gestion-garantia.component.html',
   styleUrls: ['./detalles-gestion-garantia.component.scss']

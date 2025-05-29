@@ -14,6 +14,7 @@ import { ValidacionesFactory } from '../../../config/custom/utils/ValidacionesFa
 import { CcSpinerProcesarComponent } from '../../../config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-reportes',
   templateUrl: './reportes.component.html',     
   styleUrls: ['./reportes.component.scss']

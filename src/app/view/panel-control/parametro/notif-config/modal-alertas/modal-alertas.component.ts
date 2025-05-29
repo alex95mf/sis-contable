@@ -11,6 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-modal-alertas',
   templateUrl: './modal-alertas.component.html',
   styleUrls: ['./modal-alertas.component.scss']

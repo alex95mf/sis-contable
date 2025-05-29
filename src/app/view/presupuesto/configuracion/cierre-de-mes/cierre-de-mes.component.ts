@@ -14,6 +14,7 @@ import Botonera from 'src/app/models/IBotonera';
 
 
 @Component({
+standalone: false,
   selector: 'app-cierre-de-mes',
   templateUrl: './cierre-de-mes.component.html',
   styleUrls: ['./cierre-de-mes.component.scss'],

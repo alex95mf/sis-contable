@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import { ModalPuestosComponent } from './modal-puestos/modal-puestos.component';
 
 @Component({
+standalone: false,
   selector: 'app-puesto',
   templateUrl: './puesto.component.html',
   styleUrls: ['./puesto.component.scss']

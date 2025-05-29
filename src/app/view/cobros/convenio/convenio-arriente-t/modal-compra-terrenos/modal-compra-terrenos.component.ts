@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import moment from 'moment';
+import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { ConvenioArrienteTService } from '../convenio-arriente-t.service';
@@ -8,6 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-modal-compra-terrenos',
   templateUrl: './modal-compra-terrenos.component.html',
   styleUrls: ['./modal-compra-terrenos.component.scss']
@@ -57,7 +58,7 @@ export class ModalCompraTerrenosComponent implements OnInit {
       case 'CERRAR':
         this.activeModal.close()
         break;
-    
+
       default:
         break;
     }

@@ -9,6 +9,7 @@ import { NotificacionesService } from '../notificaciones.service';
 import Swal from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-modal-detalles',
   templateUrl: './modal-detalles.component.html',
   styleUrls: ['./modal-detalles.component.scss'],

@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AnexoListaService } from 'src/app/view/tesoreria/recaudacion/convenio/anexos-lista/anexo-lista.service';
@@ -43,6 +43,7 @@ interface FlatNode {
 
 
 @Component({
+standalone: false,
   selector: 'app-consulta-directorio',
   templateUrl: './consulta-directorio.component.html',
   styleUrls: ['./consulta-directorio.component.scss']

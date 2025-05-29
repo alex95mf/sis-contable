@@ -60,6 +60,7 @@ import moment from "moment";
 import { ModalTipoArchivoComponent } from "./modal-tipo-archivo/modal-tipo-archivo.component";
 import { ModalRetencionJudicialComponent } from "./modal-retencion-judicial/modal-retencion-judicial.component";
 @Component({
+standalone: false,
   selector: "app-empleado",
   templateUrl: "./empleado.component.html",
   styleUrls: ["./empleado.component.scss"],

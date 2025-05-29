@@ -6,11 +6,12 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 import { IngresoBodegaService } from '../ingreso-bodega.service';
 
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-modal-codigo-bienes',
   templateUrl: './modal-codigo-bienes.component.html',
   styleUrls: ['./modal-codigo-bienes.component.scss']
@@ -84,7 +85,7 @@ export class ModalCodigoBienesComponent implements OnInit {
     this.primer_dia = new Date(this.hoy.getFullYear(), this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(), this.hoy.getMonth() + 1, 0);
     this.filter = {
-    
+
       fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
       fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       descripcion: null,
@@ -167,7 +168,7 @@ export class ModalCodigoBienesComponent implements OnInit {
 
     this.closeModal(data);
     console.log("aquii")
-    
+
       // Swal.fire({
       //   icon: "warning",
       //   title: "¡Atención!",
@@ -184,10 +185,10 @@ export class ModalCodigoBienesComponent implements OnInit {
       //     // console.log(data);
       //     this.closeModal(data);
       //     console.log("aquii")
-          
+
       //   }
       // });
-    
+
   }
 
   closeModal(data?: any) {

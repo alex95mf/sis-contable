@@ -7,11 +7,12 @@ import { CierreMesService } from '../../contabilidad/ciclos-contables/cierre-de-
 import { DenegacionCompraPublicaComponent } from './denegacion-compra-publica/denegacion-compra-publica.component';
 import { DetalleComprasComponent } from './detalle-compras/detalle-compras.component';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import moment from 'moment';
+import * as moment from 'moment';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-aprobacion-compras',
   templateUrl: './aprobacion-compras.component.html',
   styleUrls: ['./aprobacion.component.scss']

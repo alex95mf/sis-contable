@@ -18,6 +18,7 @@ interface FlatNode {
 }
 
 @Component({
+standalone: false,
   selector: 'app-plan-cuentas-tree',
   templateUrl: './plan-cuentas-tree.component.html',
   styleUrls: ['./plan-cuentas-tree.component.scss']

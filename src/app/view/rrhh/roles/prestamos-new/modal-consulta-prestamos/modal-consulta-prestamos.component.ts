@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment';
+import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { PrestamosService } from '../prestamos.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-modal-consulta-prestamos',
   templateUrl: './modal-consulta-prestamos.component.html',
   styleUrls: ['./modal-consulta-prestamos.component.scss']
@@ -59,7 +60,7 @@ export class ModalConsultaPrestamosComponent implements OnInit {
       case "CANCELAR":
         this.activeModal.close()
         break;
-    
+
       default:
         break;
     }

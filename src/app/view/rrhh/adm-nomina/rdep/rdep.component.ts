@@ -15,6 +15,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-rdep',
   templateUrl: './rdep.component.html',
   styleUrls: ['./rdep.component.scss']

@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-balancecomprobacion',
   templateUrl: './balancecomprobacion.component.html',
   styleUrls: ['./balancecomprobacion.component.scss']

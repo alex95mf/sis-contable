@@ -16,6 +16,7 @@ import { SueldosService } from './sueldos.service';
 import { SueldoNuevoComponent } from './sueldo-nuevo/sueldo-nuevo.component';
 
 @Component({
+standalone: false,
   selector: 'app-sueldos',
   templateUrl: './sueldos.component.html',
   styleUrls: ['./sueldos.component.scss']

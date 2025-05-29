@@ -23,6 +23,7 @@ import * as FileSaver from 'file-saver';
 
 import Swal from "sweetalert2/dist/sweetalert2.js";
 @Component({
+standalone: false,
   selector: "app-adm-decimo-cuarto",
   templateUrl: "./adm-decimo-cuarto.component.html",
   styleUrls: ["./adm-decimo-cuarto.component.scss"],

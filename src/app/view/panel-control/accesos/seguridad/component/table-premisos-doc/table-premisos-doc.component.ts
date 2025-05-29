@@ -8,6 +8,7 @@ import { CcSpinerProcesarComponent } from '../../../../../../config/custom/cc-sp
 
 
 @Component({
+standalone: false,
   selector: 'app-table-premisos-doc',
   templateUrl: './table-premisos-doc.component.html',
   styleUrls: ['./table-premisos-doc.component.scss']

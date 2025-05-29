@@ -7,6 +7,7 @@ import { CargoService } from './cargo.service';
 import { ModalDepartamenteComponent } from './modal-departamente/modal-departamente.component';
 
 @Component({
+standalone: false,
   selector: 'app-cargo',
   templateUrl: './cargo.component.html',
   styleUrls: ['./cargo.component.scss']

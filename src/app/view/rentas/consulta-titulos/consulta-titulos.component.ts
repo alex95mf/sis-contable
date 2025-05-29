@@ -17,6 +17,7 @@ import { VistaArchivoComponent } from 'src/app/view/contabilidad/centro-costo/cc
 import { ModalTasasComponent } from './modal-tasas/modal-tasas.component';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-titulos',
   templateUrl: './consulta-titulos.component.html',
   styleUrls: ['./consulta-titulos.component.scss']

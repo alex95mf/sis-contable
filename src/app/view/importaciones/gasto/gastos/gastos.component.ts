@@ -15,6 +15,7 @@ import { DiferedCuotasComponent } from './difered-cuotas/difered-cuotas.componen
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-gastos',
   templateUrl: './gastos.component.html',
   styleUrls: ['./gastos.component.scss']

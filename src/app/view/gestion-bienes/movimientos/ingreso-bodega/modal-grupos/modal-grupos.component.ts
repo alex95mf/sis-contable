@@ -9,6 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-modal-grupos',
   templateUrl: './modal-grupos.component.html',
   styleUrls: ['./modal-grupos.component.scss']

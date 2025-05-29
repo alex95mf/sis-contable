@@ -8,6 +8,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { TramitesService } from '../tramites.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-tramite-detalles',
   templateUrl: './modal-tramite-detalles.component.html',
   styleUrls: ['./modal-tramite-detalles.component.scss']

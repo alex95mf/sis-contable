@@ -14,6 +14,7 @@ import { IngresoService } from "../../../../../inventario/producto/ingreso/ingre
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-anexos',
   templateUrl: './anexos.component.html',
   styleUrls: ['./anexos.component.scss']

@@ -18,6 +18,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-reportes-ice',
   templateUrl: './reportes-ice.component.html',
   styleUrls: ['./reportes-ice.component.scss']

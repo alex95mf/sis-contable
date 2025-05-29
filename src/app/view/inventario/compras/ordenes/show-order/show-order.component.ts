@@ -12,6 +12,7 @@ import { ConsultaEstadoClienteComponent } from '../../../../cartera/customers/co
 
 
 @Component({
+standalone: false,
   selector: 'app-show-order',
   templateUrl: './show-order.component.html',
   styleUrls: ['./show-order.component.scss']

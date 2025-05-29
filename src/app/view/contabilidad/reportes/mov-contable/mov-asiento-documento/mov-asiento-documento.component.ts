@@ -10,6 +10,7 @@ import { CommonVarService } from "../../../../../services/common-var.services";
 import { MovContableService } from "../mov-contable.service";
 
 @Component({
+standalone: false,
 	selector: 'app-mov-asiento-documento',
 	templateUrl: './mov-asiento-documento.component.html',
 	styleUrls: ['./mov-asiento-documento.component.scss']

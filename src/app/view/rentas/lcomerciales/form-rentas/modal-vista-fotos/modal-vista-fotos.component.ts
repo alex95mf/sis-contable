@@ -4,6 +4,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-modal-vista-fotos',
   templateUrl: './modal-vista-fotos.component.html',
   styleUrls: ['./modal-vista-fotos.component.scss'],

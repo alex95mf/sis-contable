@@ -9,6 +9,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from 'src/app/global';
 
 @Component({
+standalone: false,
   selector: 'app-meta-view',
   templateUrl: './meta-view.component.html',
   styleUrls: ['./meta-view.component.scss']

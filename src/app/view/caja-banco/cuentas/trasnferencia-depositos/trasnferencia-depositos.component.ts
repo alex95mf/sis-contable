@@ -32,6 +32,7 @@ import {CurrencyMaskInputMode} from 'ngx-currency'
 
 
 @Component({
+standalone: false,
   selector: 'app-trasnferencia-depositos',
   templateUrl: './trasnferencia-depositos.component.html',
   styleUrls: ['./trasnferencia-depositos.component.scss'],

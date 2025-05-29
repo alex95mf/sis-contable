@@ -3,7 +3,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Botonera from 'src/app/models/IBotonera';
 import { SaldosEmpleadoService } from './saldos-empleado.service';
 import { ToastrService } from 'ngx-toastr';
-import moment from 'moment';
+import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CommonService } from 'src/app/services/commonServices';
@@ -12,6 +12,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 import { CcModalTableEmpleadoComponent } from 'src/app/config/custom/modal-component/cc-modal-table-empleado/cc-modal-table-empleado.component';
 
 @Component({
+standalone: false,
   selector: 'app-saldos-empleado',
   templateUrl: './saldos-empleado.component.html',
   styleUrls: ['./saldos-empleado.component.scss'],

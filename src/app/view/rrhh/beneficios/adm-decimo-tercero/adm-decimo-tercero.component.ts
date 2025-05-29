@@ -29,6 +29,7 @@ import e from 'cors';
 
 
 @Component({
+standalone: false,
   selector: 'app-adm-decimo-tercero',
   templateUrl: './adm-decimo-tercero.component.html',
   styleUrls: ['./adm-decimo-tercero.component.scss']

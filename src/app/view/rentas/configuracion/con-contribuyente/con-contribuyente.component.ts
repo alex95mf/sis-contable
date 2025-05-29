@@ -12,6 +12,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-con-contribuyente',
   templateUrl: './con-contribuyente.component.html',
   styleUrls: ['./con-contribuyente.component.scss']

@@ -15,6 +15,7 @@ import { environment } from '../../../../../../environments/environment';
 
 
 @Component({
+standalone: false,
   selector: 'app-imagenes',
   templateUrl: './imagenes.component.html',
   styleUrls: ['./imagenes.component.scss']

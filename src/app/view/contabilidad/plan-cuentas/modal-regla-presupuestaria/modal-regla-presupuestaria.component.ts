@@ -13,6 +13,7 @@ import { GradoOcupacionalService } from '../grado-ocupacional.service'; */
 import * as myVarGlobals from "src/app/global";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 @Component({
+standalone: false,
   selector: "app-modal-regla-presupuestaria",
   templateUrl: "./modal-regla-presupuestaria.component.html",
   styleUrls: ["./modal-regla-presupuestaria.component.scss"],

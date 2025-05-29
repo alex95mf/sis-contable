@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../../../../../services/commonServices'
 
 @Component({
+standalone: false,
   selector: 'app-tabs-bodega',
   templateUrl: './tabs-bodega.component.html',
   styleUrls: ['./tabs-bodega.component.scss']

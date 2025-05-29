@@ -3,6 +3,7 @@ import { PeriodoResponseI } from "src/app/models/responsePeriodo.interface";
 import { GeneralService } from "src/app/services/general.service";
 
 @Component({
+standalone: false,
   selector: "app-cc-select-periodos-nom",
   templateUrl: "./cc-select-periodos-nom.component.html",
   styleUrls: ["./cc-select-periodos-nom.component.scss"],

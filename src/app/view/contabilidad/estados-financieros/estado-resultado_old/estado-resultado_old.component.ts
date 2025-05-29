@@ -9,6 +9,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 
 
 @Component({
+standalone: false,
   selector: 'app-estado-resultado',
   templateUrl: './estado-resultado.component.html',
   styleUrls: ['./estado-resultado.component.scss']

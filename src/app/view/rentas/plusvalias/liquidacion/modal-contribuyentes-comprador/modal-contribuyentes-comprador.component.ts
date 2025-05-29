@@ -8,6 +8,7 @@ import { LiquidacionService } from '../liquidacion.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 @Component({
+standalone: false,
   selector: 'app-modal-contribuyentes-comprador',
   templateUrl: './modal-contribuyentes-comprador.component.html',
   styleUrls: ['./modal-contribuyentes-comprador.component.scss']

@@ -9,6 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 //import * as myVarGlobals from "../../../../../global";
 @Component({
+standalone: false,
   selector: 'app-modal-empleados',
   templateUrl: './modal-empleados.component.html',
   styleUrls: ['./modal-empleados.component.scss']

@@ -13,6 +13,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 
 @Component({
+standalone: false,
   selector: 'app-configuracion',
   templateUrl: './configuracion.component.html',
   styleUrls: ['./configuracion.component.scss']

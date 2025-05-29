@@ -13,6 +13,7 @@ const Swal = require('sweetalert2');
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-empresarial',
   templateUrl: './empresarial.component.html',
   styleUrls: ['./empresarial.component.scss']

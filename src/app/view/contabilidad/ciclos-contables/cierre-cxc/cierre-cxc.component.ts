@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { ToastrService } from 'ngx-toastr';
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { CierreCxcService } from './cierre-cxc.service';
 import { CierreMesService } from 'src/app/view/presupuesto/configuracion/cierre-de-mes/cierre-mes.service';
@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
 
 @Component({
+standalone: false,
   selector: 'app-cierre-cxc',
   templateUrl: './cierre-cxc.component.html',
   styleUrls: ['./cierre-cxc.component.scss']

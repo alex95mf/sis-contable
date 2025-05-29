@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-modal-area',
   templateUrl: './modal-area.component.html',
   styleUrls: ['./modal-area.component.scss']

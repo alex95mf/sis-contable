@@ -13,6 +13,7 @@ import * as moment from 'moment';
 // import { OrdenService } from '../orden.service';
 // import { ValidacionesFactory } from '../utils/ValidacionesFactory';
 @Component({
+standalone: false,
   selector: 'app-modal-facturas',
   templateUrl: './modal-facturas.component.html',
   styleUrls: ['./modal-facturas.component.scss']

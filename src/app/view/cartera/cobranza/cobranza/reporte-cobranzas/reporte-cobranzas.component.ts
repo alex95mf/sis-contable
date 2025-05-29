@@ -15,6 +15,7 @@ import { Console } from 'console';
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-reporte-cobranzas',
   templateUrl: './reporte-cobranzas.component.html',
   styleUrls: ['./reporte-cobranzas.component.scss']

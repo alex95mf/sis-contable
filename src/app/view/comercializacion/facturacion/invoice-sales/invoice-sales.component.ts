@@ -16,6 +16,7 @@ import { Socket } from '../../../../services/socket.service';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-invoice-sales',
   templateUrl: './invoice-sales.component.html',
   styleUrls: ['./invoice-sales.component.scss']

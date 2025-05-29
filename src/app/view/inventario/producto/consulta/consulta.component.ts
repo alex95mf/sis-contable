@@ -12,6 +12,7 @@ import { AnexosComponent } from '../../../commons/modals/anexos/anexos.component
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-producto',
   templateUrl: './consulta.component.html',
   styleUrls: ['./consulta.component.scss']

@@ -27,13 +27,25 @@ import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 import { BarcodeGeneratorAllModule, QRCodeGeneratorAllModule, DataMatrixGeneratorAllModule } from '@syncfusion/ej2-angular-barcode-generator';
 
-// CoreUI
+// CoreUI v5
 import {
-  AppAsideModule,
-  AppBreadcrumbModule,
-  AppHeaderModule,
-  AppFooterModule,
-  AppSidebarModule,
+  AvatarModule,
+  BadgeModule,
+  BreadcrumbModule,
+  ButtonGroupModule,
+  ButtonModule,
+  CardModule,
+  FormModule,
+  GridModule,
+  HeaderModule,
+  ListGroupModule,
+  NavModule,
+  ProgressModule,
+  SharedModule as CoreUISharedModule,
+  SidebarModule,
+  TabsModule as CoreUITabsModule,
+  UtilitiesModule,
+  WidgetModule
 } from '@coreui/angular';
 
 // Bootstrap
@@ -41,17 +53,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
-// Charts - Updated to ng-charts
-import { NgChartsModule } from 'ng-charts';
+// Charts - Updated to ng2-charts
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 
 // Other libraries
-import { QRCodeModule } from 'angularx-qrcode';
+import { QRCodeComponent } from 'angularx-qrcode';
 import { ToastrModule } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPrintModule } from 'ngx-print';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { NgxBarcodeModule } from 'ngx-barcode';
+import { NgxBarcode6Module } from 'ngx-barcode6';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 // App modules
@@ -136,7 +148,7 @@ const APP_CONTAINERS = [
     CommonModule,
 
     // Perfect Scrollbar
-    PerfectScrollbarModule,
+    // PerfectScrollbarModule,
 
     // Calendar
     CalendarModule.forRoot({
@@ -157,23 +169,37 @@ const APP_CONTAINERS = [
     QRCodeGeneratorAllModule,
     DataMatrixGeneratorAllModule,
 
-    // CoreUI
-    AppAsideModule,
-    AppBreadcrumbModule.forRoot(),
-    AppFooterModule,
-    AppHeaderModule,
-    AppSidebarModule,
+    // CoreUI v5
+    AvatarModule,
+    BadgeModule,
+    BreadcrumbModule,
+    ButtonGroupModule,
+    ButtonModule,
+    CardModule,
+    FormModule,
+    GridModule,
+    HeaderModule,
+    ListGroupModule,
+    NavModule,
+    ProgressModule,
+    CoreUISharedModule,
+    SidebarModule,
+    CoreUITabsModule,
+    UtilitiesModule,
+    WidgetModule,
 
     // Bootstrap
     NgbModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
 
-    // Charts - Updated
-    NgChartsModule,
+    // Charts - Updated to ng2-charts
+    // NgChartsModule,
+    BaseChartDirective,
 
     // Other libraries
-    QRCodeModule,
+    // QRCodeComponent,
+    QRCodeComponent,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
@@ -183,7 +209,7 @@ const APP_CONTAINERS = [
     NgxPrintModule,
     FlatpickrModule.forRoot(),
     InfiniteScrollModule,
-    NgxBarcodeModule,
+    NgxBarcode6Module,
     NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
@@ -199,6 +225,7 @@ const APP_CONTAINERS = [
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    provideCharts(withDefaultRegisterables()),
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

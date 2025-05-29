@@ -13,6 +13,7 @@ import { GeneralService } from "src/app/services/general.service";
 import { ModalService } from "../modal.service";
 
 @Component({
+standalone: false,
   selector: "app-modal-global-table",
   templateUrl: "./modal-global-table.component.html",
   styleUrls: ["./modal-global-table.component.scss"],

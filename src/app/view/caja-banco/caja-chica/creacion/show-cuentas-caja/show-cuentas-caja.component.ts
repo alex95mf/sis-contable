@@ -8,6 +8,7 @@ import { CommonVarService } from '../../../../../services/common-var.services';
 import { CreacionService } from '../creacion.service';
 
 @Component({
+standalone: false,
   selector: 'app-show-cuentas-caja',
   templateUrl: './show-cuentas-caja.component.html',
   styleUrls: ['./show-cuentas-caja.component.scss']

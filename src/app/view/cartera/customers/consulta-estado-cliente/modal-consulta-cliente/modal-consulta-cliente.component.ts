@@ -11,6 +11,7 @@ import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spine
 import { MatDialogRef } from '@angular/material/dialog';
 import { join } from '@amcharts/amcharts4/core';
 @Component({
+standalone: false,
 	selector: 'app-modal-consulta-cliente',
 	templateUrl: './modal-consulta-cliente.component.html',
 	styleUrls: ['./modal-consulta-cliente.component.scss']

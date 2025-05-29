@@ -13,6 +13,7 @@ import { IFilter, IProducto, IProductoResponse } from './IProducto';
 import { ModalReasignacionComponent } from './modal-reasignacion/modal-reasignacion.component';
 
 @Component({
+standalone: false,
   selector: 'app-reclasificacion',
   templateUrl: './reclasificacion.component.html',
   styleUrls: ['./reclasificacion.component.scss']

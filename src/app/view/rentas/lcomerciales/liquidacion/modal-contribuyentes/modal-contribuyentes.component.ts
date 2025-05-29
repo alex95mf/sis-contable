@@ -6,6 +6,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { LiquidacionService } from '../liquidacion.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-contribuyentes',
   templateUrl: './modal-contribuyentes.component.html',
   styleUrls: ['./modal-contribuyentes.component.scss']

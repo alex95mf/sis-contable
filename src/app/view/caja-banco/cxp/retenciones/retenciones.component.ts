@@ -18,6 +18,7 @@ const Swal = require('sweetalert2');
 import 'sweetalert2/src/sweetalert2.scss';
 
 @Component({
+standalone: false,
   selector: 'app-retenciones',
   templateUrl: './retenciones.component.html',
   styleUrls: ['./retenciones.component.scss']

@@ -13,6 +13,7 @@ import { VistaArchivoComponent } from 'src/app/view/contabilidad/centro-costo/cc
 import { AnexoListService } from './anexo-list.service';
 
 @Component({
+standalone: false,
   selector: 'app-anexos-list-dis',
   templateUrl: './anexos-list-dis.component.html',
   styleUrls: ['./anexos-list.component.scss']

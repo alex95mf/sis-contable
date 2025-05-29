@@ -10,6 +10,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-configuracion-contable',
   templateUrl: './configuracion-contable.component.html',
   styleUrls: ['./configuracion-contable.component.scss']

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { FacturasService } from '../facturas.service';
@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda-factura',
   templateUrl: './modal-busqueda-factura.component.html',
   styleUrls: ['./modal-busqueda-factura.component.scss']
@@ -88,7 +89,7 @@ export class ModalBusquedaFacturaComponent implements OnInit {
       case "LIMPIAR":
         this.clearFilter()
         break;
-    
+
       default:
         break;
     }

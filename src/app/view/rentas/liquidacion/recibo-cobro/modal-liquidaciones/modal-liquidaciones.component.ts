@@ -5,12 +5,13 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 import { ReciboCobroService } from '../recibo-cobro.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-liquidaciones',
   templateUrl: './modal-liquidaciones.component.html',
   styleUrls: ['./modal-liquidaciones.component.scss']
@@ -76,7 +77,7 @@ export class ModalLiquidacionesComponent implements OnInit {
       razon_social: undefined,
       num_documento: undefined,
       fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
-      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),      
+      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigo: 0,
       filterControl: ""
     }
@@ -87,13 +88,13 @@ export class ModalLiquidacionesComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
       this.cargarLiquidaciones();
     }, 0);
   }
 
-  
+
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
       case " REGRESAR":
@@ -206,7 +207,7 @@ export class ModalLiquidacionesComponent implements OnInit {
         total: dt.total,
         id_liquidacion: dt.id_liquidacion
       })
-    
+
       this.deudas.push(dt);
     }else {
       // let id = this.conceptos.indexOf(dt);
@@ -226,7 +227,7 @@ export class ModalLiquidacionesComponent implements OnInit {
       razon_social: undefined,
       num_documento: undefined,
       fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
-      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),      
+      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigo: 0,
       filterControl: ""
     }

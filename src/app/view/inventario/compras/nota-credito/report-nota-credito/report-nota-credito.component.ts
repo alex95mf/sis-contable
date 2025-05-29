@@ -16,6 +16,7 @@ import { ListadoRepNcComponent } from './listado-rep-nc/listado-rep-nc.component
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-report-nota-credito',
   templateUrl: './report-nota-credito.component.html',
   styleUrls: ['./report-nota-credito.component.scss']

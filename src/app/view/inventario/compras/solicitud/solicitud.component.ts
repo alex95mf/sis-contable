@@ -14,6 +14,7 @@ import { Socket } from '../../../../services/socket.service';
 import * as moment from "moment";
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 @Component({
+standalone: false,
   selector: 'app-solicitud',
   templateUrl: './solicitud.component.html',
   styleUrls: ['./solicitud.component.scss']

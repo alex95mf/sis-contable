@@ -8,8 +8,9 @@ import { MatPaginator } from '@angular/material/paginator';
 
 
 import { ProductoServiceService } from './../producto-service.service';
-import moment from 'moment';
+import * as moment from 'moment';
 @Component({
+standalone: false,
   selector: 'app-modal-buscar-producto',
   templateUrl: './modal-buscar-producto.component.html',
   styleUrls: ['./modal-buscar-producto.component.scss']
@@ -34,7 +35,7 @@ export class ModalBuscarProductoComponent implements OnInit {
     private productoSrv: ProductoServiceService,
     private commonVarSrv: CommonVarService,
     private modalSrv: NgbModal,
-  
+
 
   ) {
 
@@ -95,7 +96,7 @@ export class ModalBuscarProductoComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
 
-      
+
 
 
       this.mensajeSpiner = 'Cargando Productos'
@@ -119,9 +120,9 @@ this.paginate.length = productos.total;
       case " REGRESAR":
           this.closeModal();
           break;
-       
+
     }
-  
+
   }
 
   seleccionarProducto(item)
@@ -152,7 +153,7 @@ this.paginate.length = productos.total;
     Object.assign(this.paginate,{
       page:pageIndex+1,
       perPage:pageSize
-      
+
     })
     this.CargarProductos();
   }
@@ -161,9 +162,9 @@ this.paginate.length = productos.total;
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
-     
+
       let productos =await this.productoSrv.getProductos({filter: this.filter, paginate : this.paginate});
       this.lista_productos= productos.data;
       this.paginate.length = productos.total;
@@ -178,7 +179,7 @@ this.paginate.length = productos.total;
   }
   closeModal() {
 
-    
+
     //this.commonVarSrv.seguiTicket.next(this.needRefresh);
     this.productoSrv.productos$.emit({refrescar:this.needRefresh,id:this.producto.id_producto})
     this.activeModal.dismiss();

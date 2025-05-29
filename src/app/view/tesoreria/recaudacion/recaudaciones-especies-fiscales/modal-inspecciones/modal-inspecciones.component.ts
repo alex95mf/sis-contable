@@ -12,6 +12,7 @@ import { RecaudacionesEspeciesFiscalesService } from '../recaudaciones-especies-
 // import { GarantiaService } from '../garantia.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-inspecciones',
   templateUrl: './modal-inspecciones.component.html',
   styleUrls: ['./modal-inspecciones.component.scss']

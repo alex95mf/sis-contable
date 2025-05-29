@@ -10,6 +10,7 @@ import * as myVarGlobals from "../../../../global";
 import { CommonService } from 'src/app/services/commonServices';
 
 @Component({
+standalone: false,
   selector: 'app-abogados',
   templateUrl: './abogados.component.html',
   styleUrls: ['./abogados.component.scss']

@@ -7,6 +7,7 @@ import { CommonService } from '../../../../../../services/commonServices'
 import { CommonVarService } from '../../../../../../services/common-var.services'
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 @Component({
+standalone: false,
   selector: 'app-table-catalogos',
   templateUrl: './table-catalogos.component.html',
   styleUrls: ['./table-catalogos.component.scss']

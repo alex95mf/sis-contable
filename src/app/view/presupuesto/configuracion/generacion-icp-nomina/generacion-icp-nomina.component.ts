@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
+standalone: false,
   selector: 'app-generacion-icp-nomina',
   templateUrl: './generacion-icp-nomina.component.html',
   styleUrls: ['./generacion-icp-nomina.component.scss']

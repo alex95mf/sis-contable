@@ -5,6 +5,7 @@ import { CommonService } from "../../../../../services/commonServices";
 import { CommonVarService } from '../../../../../services/common-var.services';
 
 @Component({
+standalone: false,
   selector: 'app-force-cierre',
   templateUrl: './force-cierre.component.html',
   styleUrls: ['./force-cierre.component.scss']

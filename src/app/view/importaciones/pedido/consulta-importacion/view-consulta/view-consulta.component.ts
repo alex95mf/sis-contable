@@ -10,6 +10,7 @@ import { CommonService } from "../../../../../services/commonServices";
 import { CommonVarService } from "../../../../../services/common-var.services";
 import { ConsultaImportacionService } from "../consulta-importacion.service";
 @Component({
+standalone: false,
 	selector: 'app-view-consulta',
 	templateUrl: './view-consulta.component.html',
 	styleUrls: ['./view-consulta.component.scss']

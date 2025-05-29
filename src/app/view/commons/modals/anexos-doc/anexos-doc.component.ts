@@ -12,6 +12,7 @@ import { ConfirmationDialogService } from "../../../../config/custom/confirmatio
 
 
 @Component({
+standalone: false,
   selector: 'app-anexos-doc',
   templateUrl: './anexos-doc.component.html',
   styleUrls: ['./anexos-doc.component.scss']

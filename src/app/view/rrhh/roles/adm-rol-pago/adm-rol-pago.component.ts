@@ -13,6 +13,7 @@ import { MspreguntaComponent } from "../../../../config/custom/mspregunta/mspreg
 import { ImprimirRolComponent } from "./imprimir-rol/imprimir-rol.component";
 
 @Component({
+standalone: false,
   selector: "app-adm-rol-pago",
   templateUrl: "./adm-rol-pago.component.html",
   styleUrls: ["./adm-rol-pago.component.scss"],

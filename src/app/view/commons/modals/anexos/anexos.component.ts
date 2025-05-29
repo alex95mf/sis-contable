@@ -5,6 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-anexos',
   templateUrl: './anexos.component.html',
   styleUrls: ['./anexos.component.scss']

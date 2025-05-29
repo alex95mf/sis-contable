@@ -6,6 +6,7 @@ import { WorkdayAditionalI } from 'src/app/models/responseWorkdayAditional.inter
 import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
+standalone: false,
   selector: "app-cc-modal-table-jornada",
   templateUrl: "./cc-modal-table-jornada.component.html",
   styleUrls: ["./cc-modal-table-jornada.component.scss"],

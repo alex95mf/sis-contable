@@ -17,6 +17,7 @@ import * as myVarGlobals from 'src/app/global';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
+standalone: false,
   selector: 'app-bandeja-trabajo-general',
   templateUrl: './bandeja-trabajo-general.component.html',
   styleUrls: ['./bandeja-trabajo-general.component.scss']

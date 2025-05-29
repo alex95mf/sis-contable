@@ -6,11 +6,12 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 import { ProductoService } from '../producto.service';
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 //import { ReciboCobroService } from '../recibo-cobro.service';
 @Component({
+standalone: false,
   selector: 'app-modal-bodega',
   templateUrl: './modal-bodega.component.html',
   styleUrls: ['./modal-bodega.component.scss']
@@ -44,15 +45,15 @@ export class ModalBodegaComponent implements OnInit {
   ngOnInit(): void {
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.vmButtons = [
-      { orig: "btnModalLiq", 
-      paramAccion: "", 
-      boton: { icon: "fas fa-plus", texto: " APLICAR" }, 
-      permiso: true, 
-      showtxt: true, 
-      showimg: true, 
-      showbadge: false, 
+      { orig: "btnModalLiq",
+      paramAccion: "",
+      boton: { icon: "fas fa-plus", texto: " APLICAR" },
+      permiso: true,
+      showtxt: true,
+      showimg: true,
+      showbadge: false,
       clase: "btn btn-success boton btn-sm",
-      habilitar: false 
+      habilitar: false
     }
       ,{
         orig: "btnModalLiq",
@@ -68,7 +69,7 @@ export class ModalBodegaComponent implements OnInit {
 
     ]
 
-    this.filter = {   
+    this.filter = {
       codigo: undefined,
       filterControl: ""
     }
@@ -79,7 +80,7 @@ export class ModalBodegaComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
       this.cargarBodegas();
     }, 100);
@@ -154,11 +155,11 @@ limpiarFiltros() {
           this.paginate.length = res['data']['total'];
           if (res['data']['current_page'] == 1) {
             this.bodegas = res['data']['data'];
-           
+
         }
         else {
            this.bodegas = Object.values(res['data']['data']);
-          
+
           }
           console.log(this.bodegas)
         }

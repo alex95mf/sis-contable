@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
+standalone: false,
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
   styleUrls: ['./google-map.component.css']
@@ -87,6 +88,7 @@ export class GoogleMapComponent implements OnInit, OnChanges {
 // import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 // @Component({
+standalone: false,
 //   selector: 'app-google-map',
 //   templateUrl: './google-map.component.html',
 //   styleUrls: ['./google-map.component.css']
@@ -172,6 +174,7 @@ export class GoogleMapComponent implements OnInit, OnChanges {
 // import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 // @Component({
+standalone: false,
 //   selector: 'app-google-map',
 //   templateUrl: './google-map.component.html',
 //   styleUrls: ['./google-map.component.css']

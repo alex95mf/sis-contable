@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CrucePagosService } from '../cruce-pagos.service';
 
 @Component({
+standalone: false,
   selector: 'app-concepto-det',
   templateUrl: './concepto-det.component.html',
   styleUrls: ['./concepto-det.component.scss']

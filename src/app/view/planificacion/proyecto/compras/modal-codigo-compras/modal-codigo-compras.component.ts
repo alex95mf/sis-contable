@@ -8,6 +8,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { ComprasService } from '../compras.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-codigo-compras',
   templateUrl: './modal-codigo-compras.component.html',
   styleUrls: ['./modal-codigo-compras.component.scss']

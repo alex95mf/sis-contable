@@ -15,6 +15,7 @@ declare const $: any;
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
+standalone: false,
 	selector: 'app-lista',
 	templateUrl: './lista.component.html',
 	styleUrls: ['./lista.component.scss']

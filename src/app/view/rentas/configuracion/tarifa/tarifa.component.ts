@@ -15,6 +15,7 @@ import * as moment from 'moment';
 import { ModalExoneracionesComponent } from '../../liquidacion/generacion-valor/modal-exoneraciones/modal-exoneraciones.component';
 
 @Component({
+standalone: false,
   selector: 'app-tarifa',
   templateUrl: './tarifa.component.html',
   styleUrls: ['./tarifa.component.scss']

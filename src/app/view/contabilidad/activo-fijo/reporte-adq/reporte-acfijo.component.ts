@@ -15,6 +15,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-reporte-acfijo',
   templateUrl: './reporte-acfijo.component.html',
   styleUrls: ['./reporte-acfijo.component.scss']

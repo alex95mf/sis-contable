@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busca-vehiculo',
   templateUrl: './modal-busca-vehiculo.component.html',
   styleUrls: ['./modal-busca-vehiculo.component.scss']

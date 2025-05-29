@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
@@ -8,6 +8,7 @@ import { DepreciacionService } from '../depreciacion.service';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda',
   templateUrl: './modal-busqueda.component.html',
   styleUrls: ['./modal-busqueda.component.scss']

@@ -5,6 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-show-detail-payment',
   templateUrl: './show-detail-payment.component.html',
   styleUrls: ['./show-detail-payment.component.scss']

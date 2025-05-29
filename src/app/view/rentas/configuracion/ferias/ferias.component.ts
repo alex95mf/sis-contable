@@ -3,13 +3,14 @@ import { FeriasService } from './ferias.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
-import moment from 'moment';
+import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { ModalFeriasComponent } from './modal-ferias/modal-ferias.component';
 import { MatTable } from '@angular/material/table';
 
 @Component({
+standalone: false,
   selector: 'app-ferias',
   templateUrl: './ferias.component.html',
   styleUrls: ['./ferias.component.scss']

@@ -8,8 +8,9 @@ import { MatPaginator } from '@angular/material/paginator';
 
 
 import { ClienteServiceService } from '../cliente-service.service';
-import moment from 'moment';
+import * as moment from 'moment';
 @Component({
+standalone: false,
   selector: 'app-modal-buscar-cliente',
   templateUrl: './modal-buscar-cliente.component.html',
   styleUrls: ['./modal-buscar-cliente.component.scss']
@@ -35,7 +36,7 @@ export class ModalBuscarClienteComponent implements OnInit {
     private clienteSrv: ClienteServiceService,
     private commonVarSrv: CommonVarService,
     private modalSrv: NgbModal,
-  
+
 
   ) {
 
@@ -96,7 +97,7 @@ export class ModalBuscarClienteComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
 
-      
+
 
 
       this.mensajeSpiner = 'Cargando Productos'
@@ -120,9 +121,9 @@ this.paginate.length = clientes.total;
       case " REGRESAR":
           this.closeModal();
           break;
-       
+
     }
-  
+
   }
 
   seleccionarProducto(item)
@@ -153,7 +154,7 @@ this.paginate.length = clientes.total;
     Object.assign(this.paginate,{
       page:pageIndex+1,
       perPage:pageSize
-      
+
     })
     this.CargarClientes();
   }
@@ -162,9 +163,9 @@ this.paginate.length = clientes.total;
     this.lcargando.ctlSpinner(true)
     try {
 
-   
+
      //alert(JSON.stringify(this.filter));
-     
+
       let clientes =await this.clienteSrv.getClientes({filter: this.filter, paginate : this.paginate});
       this.lista_clientes= clientes.data;
       this.paginate.length = clientes.total;
@@ -179,7 +180,7 @@ this.paginate.length = clientes.total;
   }
   closeModal() {
 
-    
+
     //this.commonVarSrv.seguiTicket.next(this.needRefresh);
     this.clienteSrv.clientes$.emit({refrescar:this.needRefresh,id:this.cliente.id_cliente,TipoConsulta:this.TipoConsulta})
     this.activeModal.dismiss();

@@ -7,6 +7,7 @@ import * as myVarGlobals from "../../../../../global";
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-enfermedad-catastroficas',
   templateUrl: './enfermedad-catastroficas.component.html',
   styleUrls: ['./enfermedad-catastroficas.component.scss']

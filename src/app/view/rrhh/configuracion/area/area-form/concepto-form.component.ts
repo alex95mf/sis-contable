@@ -15,6 +15,7 @@ import { ModalProgramaComponent } from '../modal-programa/modal-programa.compone
 
 
 @Component({
+standalone: false,
   selector: 'app-concepto-form',
   templateUrl: './concepto-form.component.html',
   styleUrls: ['./concepto-form.component.scss']

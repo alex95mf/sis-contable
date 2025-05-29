@@ -17,6 +17,7 @@ import { DiarioService } from 'src/app/view/contabilidad/comprobantes/diario/dia
 import { MovimientosBancariosComponent } from './movimientos-bancarios/movimientos-bancarios.component';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 @Component({
+standalone: false,
   selector: 'app-emision',
   templateUrl: './emision.component.html',
   styleUrls: ['./emision.component.scss']

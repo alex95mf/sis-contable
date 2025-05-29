@@ -16,6 +16,7 @@ import { ValidacionesFactory } from '../../../config/custom/utils/ValidacionesFa
 import { CcSpinerProcesarComponent } from '../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-pagos-servicios',
   templateUrl: './pagos-servicios.component.html',
   styleUrls: ['./pagos-servicios.component.scss']

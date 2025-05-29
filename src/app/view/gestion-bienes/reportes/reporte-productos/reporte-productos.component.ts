@@ -19,6 +19,7 @@ import { ModalGruposComponent } from './modal-grupos/modal-grupos.component';
 import { ListBusquedaComponent } from './list-busqueda/list-busqueda.component';
 
 @Component({
+standalone: false,
   selector: 'app-reporte-productos',
   templateUrl: './reporte-productos.component.html',
   styleUrls: ['./reporte-productos.component.scss']

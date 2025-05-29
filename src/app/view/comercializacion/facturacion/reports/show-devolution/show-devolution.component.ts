@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-show-devolution',
   templateUrl: './show-devolution.component.html',
   styleUrls: ['./show-devolution.component.scss']

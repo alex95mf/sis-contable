@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { DocElecService } from './doc-elec.service';
 import Botonera from 'src/app/models/IBotonera';
-import moment from 'moment';
+import * as moment from 'moment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
+standalone: false,
   selector: 'app-doc-elec',
   templateUrl: './doc-elec.component.html',
   styleUrls: ['./doc-elec.component.scss']

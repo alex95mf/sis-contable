@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
+standalone: false,
   selector: 'app-acta-finiquito',
   templateUrl: './acta-finiquito.component.html',
   styleUrls: ['./acta-finiquito.component.scss'],

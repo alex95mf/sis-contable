@@ -7,6 +7,7 @@ import { ToastrService } from "ngx-toastr";
 import {TreeNode} from 'primeng/api';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 @Component({
+standalone: false,
   selector: "app-organizacion",
   templateUrl: "./organizacion.component.html",
   styleUrls: ["./organizacion.component.scss"],

@@ -7,6 +7,7 @@ import { LiquidacionService } from '../liquidacion.service';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-modal-tasas',
   templateUrl: './modal-tasas.component.html',
   styleUrls: ['./modal-tasas.component.scss']

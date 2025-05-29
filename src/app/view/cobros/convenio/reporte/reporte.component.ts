@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { ReporteService } from './reporte.service';
 
 @Component({
+standalone: false,
   selector: 'app-reporte',
   templateUrl: './reporte.component.html',
   styleUrls: ['./reporte.component.scss']

@@ -10,6 +10,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { Socket } from '../../../../../services/socket.service';
 
 @Component({
+standalone: false,
   selector: 'app-show-notas-credito',
   templateUrl: './show-notas-credito.component.html',
   styleUrls: ['./show-notas-credito.component.scss']

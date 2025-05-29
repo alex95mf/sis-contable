@@ -6,6 +6,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { ConsultaIdpService } from '../consulta-idp.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-estado',
   templateUrl: './modal-estado.component.html',
   styleUrls: ['./modal-estado.component.scss']

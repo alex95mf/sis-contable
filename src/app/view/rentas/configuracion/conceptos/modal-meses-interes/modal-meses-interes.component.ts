@@ -5,9 +5,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import Botonera from 'src/app/models/IBotonera';
 import { ConceptosService } from '../conceptos.service';
 import Swal from 'sweetalert2';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal-meses-interes',
   templateUrl: './modal-meses-interes.component.html',
   styleUrls: ['./modal-meses-interes.component.scss']
@@ -71,7 +72,7 @@ export class ModalMesesInteresComponent implements OnInit {
       case "GUARDAR":
         this.setMesesSinIntereses()
         break;
-    
+
       default:
         break;
     }

@@ -16,6 +16,7 @@ interface Presupuesto {
 }
 
 @Component({
+standalone: false,
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss']

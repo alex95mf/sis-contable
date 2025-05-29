@@ -7,6 +7,7 @@ import { TicketService } from '../ticket.service';
 import Swal from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-categoria-form',
   templateUrl: './categoria-form.component.html',
   styleUrls: ['./categoria-form.component.scss']

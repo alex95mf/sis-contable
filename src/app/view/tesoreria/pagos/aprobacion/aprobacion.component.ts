@@ -16,6 +16,7 @@ import jsPDF from 'jspdf';
 import { NgxPrintDirective } from 'ngx-print';
 
 @Component({
+standalone: false,
   selector: 'app-aprobacion',
   templateUrl: './aprobacion.component.html',
   styleUrls: ['./aprobacion.component.scss']

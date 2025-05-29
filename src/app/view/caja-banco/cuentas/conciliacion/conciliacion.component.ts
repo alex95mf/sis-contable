@@ -23,6 +23,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { number } from '@amcharts/amcharts4/core';
 import { Table } from 'primeng/table';
 @Component({
+standalone: false,
   selector: 'app-conciliacion',
   templateUrl: './conciliacion.component.html',
   styleUrls: ['./conciliacion.component.scss']

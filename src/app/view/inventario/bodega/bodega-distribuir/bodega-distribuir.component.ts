@@ -13,6 +13,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 
 @Component({
+standalone: false,
   selector: 'app-bodega-distribuir',
   templateUrl: './bodega-distribuir.component.html',
   styleUrls: ['./bodega-distribuir.component.scss']

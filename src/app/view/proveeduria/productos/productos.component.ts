@@ -13,6 +13,7 @@ import { ValidacionesFactory } from '../../../config/custom/utils/ValidacionesFa
 import { CcSpinerProcesarComponent } from '../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-productos',
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.scss']

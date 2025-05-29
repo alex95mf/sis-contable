@@ -16,6 +16,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-generacion',
   templateUrl: './generacion.component.html',
   styleUrls: ['./generacion.component.scss']

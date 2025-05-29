@@ -18,6 +18,7 @@ import { TitulosService } from 'src/app/view/rentas/mercados/titulos/titulos.ser
 
 
 @Component({
+standalone: false,
   selector: 'app-anticipo-precobrado',
   templateUrl: './anticipo-precobrado.component.html',
   styleUrls: ['./anticipo-precobrado.component.scss']

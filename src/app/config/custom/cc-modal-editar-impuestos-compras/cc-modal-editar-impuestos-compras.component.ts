@@ -4,22 +4,23 @@ import { ChangeDetectorRef } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ConfirmationService,Message,MessageService } from 'primeng/api';
-import { PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService,MessageService, ToastMessageOptions  } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { MenuItem } from 'primeng/api';
 
 import { CustonService } from '../app-custom.service';
-import { contableConfService } from 'src/app/view/panel-control/parametro/contable/contable.service'; 
+import { contableConfService } from 'src/app/view/panel-control/parametro/contable/contable.service';
 
 @Component(
 
   {
+    standalone: false,
     template:  `
     <div *ngIf="LoadModalCargaEditImp ; else PermisoVerDenegado">
 
         <p-confirmPopup></p-confirmPopup>
 
-      
+
 
         <div class="pt-3 pr-3 pl-3">
           <div class="row">
@@ -32,7 +33,7 @@ import { contableConfService } from 'src/app/view/panel-control/parametro/contab
             </div>
 
           </div>
-        </div>   
+        </div>
 
 
         <div class="p-3">
@@ -88,7 +89,7 @@ import { contableConfService } from 'src/app/view/panel-control/parametro/contab
                       placeholder="" disabled>
               </div>
             </div>
-            
+
           </div>
         </div>
 
@@ -106,7 +107,7 @@ import { contableConfService } from 'src/app/view/panel-control/parametro/contab
                 <p-tabView styleClass="tab_content_compras" class="overflow-hidden">
                   <p-tabPanel class="p-0" header="ITEMS">
                       <div class="col-12 filters p-0">
-                          
+
                           <div class="justify-content-center">
                               <div
                                   class="mb-2 content-tabla-general content-tabla_editable table_scroll_horizontal_over">
@@ -167,7 +168,7 @@ import { contableConfService } from 'src/app/view/panel-control/parametro/contab
                                                       min="0" (keypress)="commonServices.FormatDecimalVal($event)"
                                                       [disabled]="d.fk_producto == undefined ">
                                               </td>
-                                              <td 
+                                              <td
                                                   style="display: none; text-align: right; width: 100px; vertical-align: middle;">
                                                   <div style="width: 100px;">
                                                       $ {{d.subtotalItems.toFixed(2)}}
@@ -261,7 +262,7 @@ import { contableConfService } from 'src/app/view/panel-control/parametro/contab
                   </p-tabPanel>
                   <p-tabPanel class="p-0" header="CUENTAS">
                       <div class="col-12 filters p-0">
-                          
+
                           <div class="justify-content-center">
                               <div
                                   class="mb-2 content-tabla-general content-tabla_editable table_scroll_horizontal_over">
@@ -421,7 +422,7 @@ import { contableConfService } from 'src/app/view/panel-control/parametro/contab
 
       </div>
       <ng-template #PermisoVerDenegado>
-            
+
 
       <div id="contenedor_session_permiso_denegado">
           <div class="container-xxl container-p-y">
@@ -439,7 +440,7 @@ import { contableConfService } from 'src/app/view/panel-control/parametro/contab
       </div>
 
       </ng-template>
-    
+
     `,
     providers: [DialogService, MessageService,ConfirmationService]
   }
@@ -467,20 +468,20 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
 
   dataProducto: any = [{ editado:"N", cod_anexo_iva: "", cod_iva: "", porce_iva: 0, cod_anexo_fte: "", cod_fte: "", porce_fte: 0, isRetencionIva: false, LoadOpcionImpuesto: false, LoadOpcionReteFuente: false, LoadOpcionRteIva: false, LoadOpcionCentro: false, subtotal_noobjeto: (0.00).toFixed(2), subtotal_excento: (0.00).toFixed(2), subtotal_cero: (0.00).toFixed(2), subtotal_iva: (0.00).toFixed(2), InputDisabledCantidad: true, iva_detalle: (0.00).toFixed(2), fk_producto: 0, impuesto: 2, rte_fuente: 0, rte_iva: 0, centro: 0, nombre: null, codigo: null, observacion: null, cantidad: null, precio: null, desc: (0.00).toFixed(2), subtotalItems: 0.00, totalItems: 0.00, paga_iva: 1 }];
   dataCuenta: any = [{ editado:"N", cod_anexo_iva: "", cod_iva: "", porce_iva: 0, cod_anexo_fte: "", cod_fte: "", porce_fte: 0, isRetencionIva: false, LoadOpcionImpuesto: false, LoadOpcionReteFuente: false, LoadOpcionRteIva: false, LoadOpcionCentro: false, subtotal_noobjeto: (0.00).toFixed(2), subtotal_excento: (0.00).toFixed(2), subtotal_cero: (0.00).toFixed(2), subtotal_iva: (0.00).toFixed(2), InputDisabledCantidad: true, iva_detalle: (0.00).toFixed(2), cuenta_detalle: 0, impuesto: 2, rte_fuente: 0, rte_iva: 0, centro: 0, nombre: null, codigo: null, observacion: null, cantidad: null, precio: null, desc: (0.00).toFixed(2), subtotalItems: 0.00, totalItems: 0.00, paga_iva: 1 }];
-  
+
   detalleImpuesto: any = [];
   detalleImpuestoTemp: any = [];
 
   tabmenu: MenuItem[];
-  msgs1: Message[];
+  msgs1: ToastMessageOptions[];
 
   constructor
   (
-   
+
     private confirmationService: ConfirmationService,
-    private primengConfig: PrimeNGConfig,
-    private messageService: MessageService, 
-    public ref: DynamicDialogRef, 
+    private primengConfig: PrimeNG,
+    private messageService: MessageService,
+    public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     public dialogService: DialogService,
     private cdRef:ChangeDetectorRef,
@@ -495,7 +496,7 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
   }
 
   ngOnInit(): void {
-    
+
 
     this.msgs1 = [
       {severity:'info', detail:'Al seleccionar un nuevo codigo de impuesto se vera afectuado solo cuando se de clic en actualizar.', closable:false}
@@ -517,30 +518,30 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
       this.compra.autorizacion = comprobante.num_aut;
       this.compra.numero_comprobante = comprobante.num_doc;
       this.compra.fecha_emision = comprobante.fecha_compra
-      
+
 
 
 
       this.contableService.getRetencionFuenteCompras().subscribe(res => {
         this.rete_fuente = res;
-  
+
         this.contableService.getRetencionIvaCompras().subscribe(res => {
           this.rte_iva = res;
-  
+
           let data = { fields: ["IMPUESTOS"] };
           this.contableService.ObtenerCatalogoGeneral(data).subscribe(res => {
-  
+
             let catalogo = res['data']['catalogs'];
             this.impuestos = catalogo['IMPUESTOS'];
-  
+
             this.contableService.getRetencionFuenteCompras().subscribe(res => {
-  
+
               this.rete_fuente = res;
               this.dataProducto = [];
-  
+
               if (comprobante.detalle.length > 0) {
                 comprobante.detalle.forEach(element => {
-  
+
                   this.dataProducto.push({
                     cod_anexo_iva: element.cod_riva_anexo,
                     cod_iva: element.cod_riva,
@@ -570,15 +571,15 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
                   })
                 });
               }
-  
+
               if (comprobante.detalle_cuentas.length > 0) {
-  
+
                 this.dataCuenta = [];
-  
-  
+
+
                 comprobante.detalle_cuentas.forEach(element => {
-  
-  
+
+
                   this.dataCuenta.push({
                     cuenta_detalle: '(' + element.codigo_cuenta + ') ' + element.nombre_cuenta,
                     cod_anexo_iva: element.cod_riva_anexo,
@@ -613,16 +614,16 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
               this.LoadModalCargaEditImp = true;
               //this.calculaImpuesto();
               this.calculaImpuestoIva();
-  
-  
+
+
             }, error => {
               //this.lcargando.ctlSpinner(false);
               //this.toastr.info(error.error.message);
             })
-  
+
             //this.calculaImpuestoIva();
             //this.lcargando.ctlSpinner(false);
-  
+
           }, error => {
             //this.toastr.info(error.error.message);
             //this.lcargando.ctlSpinner(false);
@@ -768,7 +769,7 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
       });
 
 
-      
+
 
       resolve(true);
 
@@ -953,7 +954,7 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
           console.log(this.detalleImpuesto);
         },
         reject: () => {
-          
+
         }
       });
     }else{
@@ -961,7 +962,7 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
         {severity:'error', detail:'No se a realizado cambio alguno, se debe aplicar algun cambio en los codigos de retención para continuar con la actualización', closable:false}
       ];
     }
-    
+
 
   }
 

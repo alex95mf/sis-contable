@@ -9,6 +9,7 @@ import { AdquisicionesService } from '../adquisiciones.service'
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-show-activos',
   templateUrl: './show-activos.component.html',
   styleUrls: ['./show-activos.component.scss']

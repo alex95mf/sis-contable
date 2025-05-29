@@ -1,12 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { EspeciesFiscalesService } from '../especies-fiscales.service';
 
 @Component({
+standalone: false,
   selector: 'app-historial-anulaciones',
   templateUrl: './historial-anulaciones.component.html',
   styleUrls: ['./historial-anulaciones.component.scss']
@@ -44,7 +45,7 @@ export class HistorialAnulacionesComponent implements OnInit {
   ngOnInit(): void {
 
     this.vmButtons = [
-      
+
       {
         orig: "btnsConfiguracionContable",
         paramAccion: "",
@@ -63,7 +64,7 @@ export class HistorialAnulacionesComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     //this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
       fecha_desde: undefined,
@@ -122,7 +123,7 @@ export class HistorialAnulacionesComponent implements OnInit {
       case " CRERRAR":
         this.modal.close();
       break;
-      
+
     }
   }
 

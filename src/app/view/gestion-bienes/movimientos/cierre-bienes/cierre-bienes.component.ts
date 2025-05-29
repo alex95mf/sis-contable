@@ -4,13 +4,14 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Botonera from 'src/app/models/IBotonera';
 import { CierreBienesService } from './cierre-bienes.service';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
-import moment from 'moment';
+import * as moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
 import Swal from 'sweetalert2';
 
 
 @Component({
+standalone: false,
   selector: 'app-cierre-bienes',
   templateUrl: './cierre-bienes.component.html',
   styleUrls: ['./cierre-bienes.component.scss']

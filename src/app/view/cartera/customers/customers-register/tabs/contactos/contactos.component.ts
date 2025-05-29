@@ -5,6 +5,7 @@ import { CommonVarService } from '../../../../../../services/common-var.services
 import { CustomersRegisterService } from '../../customers-register.service';
 
 @Component({
+standalone: false,
   selector: 'app-contactos-customer',
   templateUrl: './contactos.component.html',
   styleUrls: ['./contactos.component.scss']

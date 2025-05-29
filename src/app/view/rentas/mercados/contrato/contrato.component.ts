@@ -20,6 +20,7 @@ import { resolve } from 'path';
 import { Socket } from 'src/app/services/socket.service';
 
 @Component({
+standalone: false,
   selector: 'app-contrato',
   templateUrl: './contrato.component.html',
   styleUrls: ['./contrato.component.scss']

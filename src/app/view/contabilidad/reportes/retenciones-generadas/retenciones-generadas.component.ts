@@ -12,6 +12,7 @@ import { ReportRetencionGeneradasService } from './retenciones-generadas.service
 import { environment } from 'src/environments/environment';
  
 @Component({
+standalone: false,
   selector: 'app-retenciones-generadas',
   templateUrl: './retenciones-generadas.component.html',
   styleUrls: ['./retenciones-generadas.component.scss']

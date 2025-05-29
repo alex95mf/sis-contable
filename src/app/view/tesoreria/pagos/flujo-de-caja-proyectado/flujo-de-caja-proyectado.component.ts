@@ -14,6 +14,7 @@ import * as XLSX from 'xlsx';
 import * as moment from 'moment';
 import { sep } from 'path';
 @Component({
+standalone: false,
   selector: 'app-flujo-de-caja-proyectado',
   templateUrl: './flujo-de-caja-proyectado.component.html',
   styleUrls: ['./flujo-de-caja-proyectado.component.scss']

@@ -14,6 +14,7 @@ import { DataTableDirective } from 'angular-datatables';
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-parametros',
   templateUrl: './parametros.component.html',
   styleUrls: ['./parametros.component.scss']

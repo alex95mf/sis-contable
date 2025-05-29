@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { BenefGastosPersonalesService } from '../benef-gastos-personales.service';
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-view-masivo',
   templateUrl: './view-masivo.component.html',
   styleUrls: ['./view-masivo.component.scss']
@@ -109,7 +110,7 @@ export class ViewMasivoComponent implements OnInit {
           Nombre: element.emp_full_nombre,
           Anual: element.impuesto_renta?.impuesto_renta_anual ?? 0,
           Mensual: element.impuesto_renta?.impuesto_renta_mensual ?? 0,
-          Acumulado: element.impuesto_renta?.acumulado ?? 0, 
+          Acumulado: element.impuesto_renta?.acumulado ?? 0,
           Pendiente: element.impuesto_renta?.impuesto_renta_anual_x_cobrar ?? 0,
         }
         excelData.push(o)

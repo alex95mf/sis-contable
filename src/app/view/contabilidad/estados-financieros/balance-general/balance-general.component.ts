@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 import * as moment from 'moment'
 
 @Component({
+standalone: false,
   selector: 'app-balance-general',
   templateUrl: './balance-general.component.html',
   styleUrls: ['./balance-general.component.scss']

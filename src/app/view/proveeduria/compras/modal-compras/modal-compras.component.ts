@@ -6,13 +6,14 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
 import { ComprasService } from '../compras.service';
 
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../global";import { MatPaginator } from '@angular/material/paginator';
 import Botonera from 'src/app/models/IBotonera';
 ;
 
 @Component({
+standalone: false,
   selector: 'app-modal-compras',
   templateUrl: './modal-compras.component.html',
   styleUrls: ['./modal-compras.component.scss']

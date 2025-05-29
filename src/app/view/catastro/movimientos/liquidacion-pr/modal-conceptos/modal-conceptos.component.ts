@@ -7,6 +7,7 @@ import { LiquidacionPrService } from '../liquidacion-pr.service';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-modal-conceptos',
   templateUrl: './modal-conceptos.component.html',
   styleUrls: ['./modal-conceptos.component.scss']

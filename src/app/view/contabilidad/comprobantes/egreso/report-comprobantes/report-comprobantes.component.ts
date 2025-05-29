@@ -17,6 +17,7 @@ import { ListadoComEgComponent } from './listado-com-eg/listado-com-eg.component
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-report-comprobantes',
   templateUrl: './report-comprobantes.component.html',
   styleUrls: ['./report-comprobantes.component.scss']

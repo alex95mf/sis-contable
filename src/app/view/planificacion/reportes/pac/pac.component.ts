@@ -10,6 +10,7 @@ import { PacService } from './pac.service';
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-pac',
   templateUrl: './pac.component.html',
   styleUrls: ['./pac.component.scss']

@@ -14,6 +14,7 @@ import "sweetalert2/src/sweetalert2.scss";
 const Swal = require("sweetalert2");
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 @Component({
+standalone: false,
 	selector: "app-asignacion-cliente",
 	templateUrl: "./asignacion-cliente.component.html",
 	styleUrls: ["./asignacion-cliente.component.scss"],

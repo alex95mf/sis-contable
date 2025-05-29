@@ -9,6 +9,7 @@ import { resourceLimits } from 'worker_threads';
 import { EstadoResultadoComponent } from '../../../../contabilidad/estados-financieros/estado-resultado/estado-resultado.component';
 
 @Component({
+standalone: false,
   selector: 'app-difered',
   templateUrl: './difered.component.html',
   styleUrls: ['./difered.component.scss']

@@ -12,6 +12,7 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-detalle-conciliacion',
   templateUrl: './detalle-conciliacion.component.html',
   styleUrls: ['./detalle-conciliacion.component.scss']

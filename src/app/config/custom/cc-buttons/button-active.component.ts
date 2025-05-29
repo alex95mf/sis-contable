@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { Botones, cbtn } from "./buttons.componente";
 
 @Component({
+standalone: false,
   selector: "app-button-active",
   templateUrl: "./button-active.component.html",
   styleUrls: ["./button-active.component.css"],

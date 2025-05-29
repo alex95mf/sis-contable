@@ -10,6 +10,7 @@ import 'sweetalert2/src/sweetalert2.scss';
 const Swal = require('sweetalert2');
 import * as moment from 'moment';
 @Component({
+standalone: false,
   selector: 'app-cumpleanio',
   templateUrl: './cumpleanio.component.html',
   styleUrls: ['./cumpleanio.component.scss']

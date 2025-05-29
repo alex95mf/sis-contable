@@ -8,6 +8,7 @@ import { GeneralService } from "src/app/services/general.service";
 import { CustonService } from "../../app-custom.service";
 
 @Component({
+standalone: false,
   selector: "app-cc-modal-table-departamento",
   templateUrl: "./cc-modal-table-departamento.component.html",
   styleUrls: ["./cc-modal-table-departamento.component.scss"],

@@ -12,6 +12,7 @@ import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spine
 const Swal = require("sweetalert2");
 import { MatDialogRef } from '@angular/material/dialog';
 @Component({
+standalone: false,
   selector: 'app-view-fac-compra',
   templateUrl: './view-fac-compra.component.html',
   styleUrls: ['./view-fac-compra.component.scss']

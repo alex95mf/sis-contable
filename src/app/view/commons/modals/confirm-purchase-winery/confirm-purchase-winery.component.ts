@@ -13,6 +13,7 @@ const Swal = require("sweetalert2");
 import { MatDialogRef } from '@angular/material/dialog';
 import { resolve } from "url";
 @Component({
+standalone: false,
   selector: "app-confirm-purchase-winery",
   templateUrl: "./confirm-purchase-winery.component.html",
   styleUrls: ["./confirm-purchase-winery.component.scss"],

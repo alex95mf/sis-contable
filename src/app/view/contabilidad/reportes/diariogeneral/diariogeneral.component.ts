@@ -17,6 +17,7 @@ import { CcModalTablaCuentaComponent } from 'src/app/config/custom/cc-modal-tabl
 import { XlsExportService } from 'src/app/services/xls-export.service';
 
 @Component({
+standalone: false,
   selector: 'app-diariogeneral',
   templateUrl: './diariogeneral.component.html',
   styleUrls: ['./diariogeneral.component.scss'],

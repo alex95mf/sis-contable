@@ -14,6 +14,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-puesto-mercado',
   templateUrl: './puesto-mercado.component.html',
   styleUrls: ['./puesto-mercado.component.scss']

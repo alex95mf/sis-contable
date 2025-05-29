@@ -9,6 +9,7 @@ import * as myVarGlobals from 'src/app/global';
 import { CommonVarService } from 'src/app/services/common-var.services';
 
 @Component({
+standalone: false,
   selector: 'app-form-metas',
   templateUrl: './form-metas.component.html',
   styleUrls: ['./form-metas.component.scss']

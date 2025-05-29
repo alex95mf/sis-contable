@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
+standalone: false,
   selector: 'app-imprimir-com-elect',
   templateUrl: './imprimir-com-elect.component.html',
   styleUrls: ['./imprimir-com-elect.component.scss']

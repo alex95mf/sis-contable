@@ -14,6 +14,7 @@ import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spine
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-reporte-quotes',
   templateUrl: './reporte-quotes.component.html',
   styleUrls: ['./reporte-quotes.component.scss']

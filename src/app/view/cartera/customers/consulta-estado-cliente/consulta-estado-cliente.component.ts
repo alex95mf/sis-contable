@@ -18,6 +18,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-consulta-estado-cliente',
   templateUrl: './consulta-estado-cliente.component.html',
   styleUrls: ['./consulta-estado-cliente.component.scss']

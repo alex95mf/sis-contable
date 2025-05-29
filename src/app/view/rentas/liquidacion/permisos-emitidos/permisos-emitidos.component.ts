@@ -11,6 +11,7 @@ import { PermisoDetComponent } from './permiso-det/permiso-det.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-permisos-emitidos',
   templateUrl: './permisos-emitidos.component.html',
   styleUrls: ['./permisos-emitidos.component.scss']

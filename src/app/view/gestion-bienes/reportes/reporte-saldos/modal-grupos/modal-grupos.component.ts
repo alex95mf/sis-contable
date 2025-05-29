@@ -8,6 +8,7 @@ import { ReporteSaldosService } from '../reporte-saldos.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 @Component({
+standalone: false,
   selector: 'app-modal-grupos',
   templateUrl: './modal-grupos.component.html',
   styleUrls: ['./modal-grupos.component.scss']

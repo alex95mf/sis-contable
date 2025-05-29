@@ -9,6 +9,7 @@ import * as myVarGlobals from "../../../../global";
 import { FormSaveComponent } from './form-save/form-save.component';
 
 @Component({
+standalone: false,
   selector: 'app-parametros-cuentas-comprobantes',
   templateUrl: './parametros-cuentas-comprobantes.component.html',
   styleUrls: ['./parametros-cuentas-comprobantes.component.scss']

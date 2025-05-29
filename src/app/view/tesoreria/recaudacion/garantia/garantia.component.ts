@@ -24,6 +24,7 @@ import { Subject } from 'rxjs';
 
 
 @Component({
+standalone: false,
   selector: 'app-garantia',
   templateUrl: './garantia.component.html',
   styleUrls: ['./garantia.component.scss']

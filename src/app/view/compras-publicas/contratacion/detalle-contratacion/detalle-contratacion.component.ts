@@ -17,6 +17,7 @@ import { EncargadoComponent } from 'src/app/config/custom/encargado/encargado.co
 import { AnexosListComponentDis } from '../anexos-list/anexos-list-dis.component';
 
 @Component({
+standalone: false,
   selector: 'app-detalle-contratacion',
   templateUrl: './detalle-contratacion.component.html',
   styleUrls: ['./detalle-contratacion.component.scss']

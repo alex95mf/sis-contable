@@ -8,10 +8,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component";
 import { BandejaService } from '../bandeja.service';
-import moment from 'moment';
+import * as moment from 'moment';
 // import { ValidacionesFactory } from '../utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda-reforma',
   templateUrl: './modal-busqueda-reforma.component.html',
   styleUrls: ['./modal-busqueda-reforma.component.scss']

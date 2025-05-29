@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-atrasos',
   templateUrl: './atrasos.component.html',
   styleUrls: ['./atrasos.component.scss']

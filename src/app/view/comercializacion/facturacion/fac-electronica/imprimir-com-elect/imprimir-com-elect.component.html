@@ -63,11 +63,11 @@
                             <strong>Clave de Acceso</strong>
                         </div>
                         <div class="col-12 mt-2" style="font-size: 11px;">
-                            <ngx-barcode [bc-element-type]="svg" [bc-value]="data.item.codigo_acceso" [bc-format]="CODE128" 
+                            <ngx-barcode6 [bc-element-type]="svg" [bc-value]="data.item.codigo_acceso" [bc-format]="CODE128"
                                 [bc-width]="1" [bc-height]="40" [bc-display-value]="true" [bc-font]="Helvetica" [bc-background]="false"
                                 [bc-text-align]="center" [bc-text-position]="bottom" [bc-text-margin]="0" [bc-font-size]="11"
                                 [bc-margin]="10" [bc-margin-top]="-5" [bc-margin-bottom]="0" [bc-margin-left]="0" [bc-margin-right]="0">
-                            </ngx-barcode> 
+                            </ngx-barcode6>
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                     <input type="text" class="form-control form-control-sm"  [value]="fecha" disabled>
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
     <div class="col-11 mt-2 pl-2 pr-2">
         <div class="row justify-content-center">
@@ -121,7 +121,7 @@
                     <thead>
                         <tr style="width: 100%;" class="text-center negrita-label" *ngIf="data.item.fk_tipo_documento != 6">
                             <th >Cod. Principal</th>
-                            <th >Cod. Auxiliar</th>                         
+                            <th >Cod. Auxiliar</th>
                             <th >Nombre</th>
                             <th >Marca</th>
                             <th >Cantidad</th>
@@ -141,12 +141,12 @@
                         <tr></tr>
                     </thead>
                     <tbody *ngIf="data.item.fk_tipo_documento != 6">
-                        <tr *ngFor="let group of lstDetalles">                                 
+                        <tr *ngFor="let group of lstDetalles">
                             <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{group.product.codigoProducto}}</td>
-                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.product.num_parte}}</td> 
-                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.product.nombre}}</td> 
-                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.product.marca}}</td> 
-                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.cantidad}}</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.product.num_parte}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.product.nombre}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.product.marca}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="left">{{group.cantidad}}</td>
                             <td class="quitar-espacio-2" style="vertical-align: middle;" align="right">
                                 <ng-container>
                                     <!-- <span class="alinearizq">$</span> -->
@@ -158,11 +158,11 @@
                                     <!-- <span class="alinearizq">$</span> -->
                                     <span class="alinearder">$ {{group.costo_total}}</span>
                                 </ng-container>
-                            </td> 
-                        </tr> 
-                        
-                        <tr class="text-left "> 
-                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>  
+                            </td>
+                        </tr>
+
+                        <tr class="text-left ">
+                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>
                             <td  class="quitar-espacio-2"><strong>SUBTOTAL:</strong></td>
                             <td class=" quitar-espacio-2">
                                 <ng-container>
@@ -172,7 +172,7 @@
                             </td>
                         </tr>
                         <tr class="text-left ">
-                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>  
+                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>
                             <td   class="quitar-espacio-2"><strong>ICE:</strong></td>
                             <td class="text-right quitar-espacio-2">
                                 <ng-container>
@@ -182,7 +182,7 @@
                             </td>
                         </tr>
                         <tr class="text-left ">
-                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>  
+                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>
                             <td   class="quitar-espacio-2"><strong>IVA 12%:</strong></td>
                             <td class="text-right quitar-espacio-2">
                                 <ng-container>
@@ -192,7 +192,7 @@
                             </td>
                         </tr>
                         <tr class="text-left ">
-                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>  
+                            <th style= "border:none;" colspan="5" class="quitar-espacio-2"> </th>
                             <td   class="quitar-espacio-2"><strong>VALOR TOTAL:</strong></td>
                             <td class="text-right quitar-espacio-2">
                                 <ng-container>
@@ -200,34 +200,34 @@
                                     <span class="alinearder">$ {{total}}</span>
                                 </ng-container>
                             </td>
-                        </tr> 
+                        </tr>
                     </tbody>
 
 
                     <tbody *ngIf="data.item.fk_tipo_documento == 6">
-                        <tr *ngFor="let group of data.item._retencion_cab.detalle">                                 
+                        <tr *ngFor="let group of data.item._retencion_cab.detalle">
                             <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{data.item._retencion_cab._compras._documento_tipo.nombre}}</td>
-                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{data.item._retencion_cab._compras.num_documento}}</td> 
-                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{data.item._retencion_cab._compras.fecha}}</td> 
-                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{data.item._retencion_cab.anio_fiscal}}</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{data.item._retencion_cab._compras.num_documento}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{data.item._retencion_cab._compras.fecha}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{data.item._retencion_cab.anio_fiscal}}</td>
                             <td class="quitar-espacio-2" style="vertical-align: middle;" align="right">
                                 <ng-container>
                                     <span class="alinearizq">$</span>
                                     <span class="alinearder">{{group.base}}</span>
                                 </ng-container>
                             </td>
-                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{group._impuesto.tipo_impuesto}}</td> 
-                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">Cod.: {{group._impuesto.codigo}} del {{group._impuesto.valor}}%</td> 
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">{{group._impuesto.tipo_impuesto}}</td>
+                            <td class="quitar-espacio-2" style="vertical-align: middle;" align="center">Cod.: {{group._impuesto.codigo}} del {{group._impuesto.valor}}%</td>
                             <td class="quitar-espacio-2" style="vertical-align: middle;" align="right">
                                 <ng-container>
                                     <span class="alinearizq">$</span>
                                     <span class="alinearder">{{group.total}}</span>
                                 </ng-container>
-                            </td> 
-                        </tr> 
-                        
-                        <tr class="text-left "> 
-                            <th style= "border:none;" colspan="6" class="quitar-espacio-2"> </th>  
+                            </td>
+                        </tr>
+
+                        <tr class="text-left ">
+                            <th style= "border:none;" colspan="6" class="quitar-espacio-2"> </th>
                             <td  class="quitar-espacio-2"><strong>VALOR TOTAL:</strong></td>
                             <td class=" quitar-espacio-2">
                                 <ng-container>
@@ -240,5 +240,5 @@
                 </table>
             </div>
         </div>
-    </div> 
+    </div>
 </div>

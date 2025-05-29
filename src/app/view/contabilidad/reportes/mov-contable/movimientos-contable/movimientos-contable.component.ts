@@ -6,6 +6,7 @@ import { MovimientosContablesService } from './movimientos-contables.service'
 import * as moment from "moment";
 import { CommonService } from '../../../../../services/commonServices';
 @Component({
+standalone: false,
 	selector: 'app-movimientos-contable',
 	templateUrl: './movimientos-contable.component.html',
 	styleUrls: ['./movimientos-contable.component.scss']

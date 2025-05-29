@@ -14,6 +14,7 @@ import * as moment from "moment";
 
 
 @Component({
+standalone: false,
   selector: 'app-consulta-supplier',
   templateUrl: './consulta-supplier.component.html',
   styleUrls: ['./consulta-supplier.component.scss']

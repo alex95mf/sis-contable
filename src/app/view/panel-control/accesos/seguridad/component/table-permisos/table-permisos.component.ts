@@ -10,6 +10,7 @@ const Swal = require('sweetalert2');
 import { CcSpinerProcesarComponent } from '../../../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-table-permisos',
   templateUrl: './table-permisos.component.html',
   styleUrls: ['./table-permisos.component.scss']

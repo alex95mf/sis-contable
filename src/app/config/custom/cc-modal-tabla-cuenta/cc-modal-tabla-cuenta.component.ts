@@ -2,29 +2,29 @@ import { ViewChild,EventEmitter,Component, OnInit, AfterViewChecked,Output } fro
 import { PlanCuentasService } from 'src/app/view/contabilidad/plan-cuentas/plan-cuentas.service';
 
 import { LazyLoadEvent } from 'primeng/api';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { CustonService } from '../app-custom.service';
 
 import { ChangeDetectorRef } from '@angular/core';
 
-
 @Component({
+standalone: false,
   template: `
-    <p-table 
-      [value]="cuentas" 
-      [lazy]="true" 
-      (onLazyLoad)="CargaCuentas($event)" 
-      selectionMode="single" 
+    <p-table
+      [value]="cuentas"
+      [lazy]="true"
+      (onLazyLoad)="CargaCuentas($event)"
+      selectionMode="single"
       [(selection)]="selectedProduct2"
       (onRowSelect)="onRowSelectCuenta($event)"
-      responsiveLayout="scroll" 
-      [paginator]="true" 
-      [rows]="10" 
-      [totalRecords]="totalRecords" 
-      [loading]="loading" 
-      [showCurrentPageReport]="true" 
+      responsiveLayout="scroll"
+      [paginator]="true"
+      [rows]="10"
+      [totalRecords]="totalRecords"
+      [loading]="loading"
+      [showCurrentPageReport]="true"
       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
       [rowsPerPageOptions]="[10,25,50]">
     <ng-template pTemplate="header">
@@ -76,14 +76,14 @@ export class CcModalTablaCuentaComponent implements AfterViewChecked {
 
 
   @Output() EventElemntRow = new EventEmitter();
-  
+
 
   constructor
   (
     //private entityService: PlanCuentasService,
     public ref: DynamicDialogRef,
     private entityService: CustonService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private cdRef:ChangeDetectorRef,
   ) { }
 
@@ -106,7 +106,7 @@ export class CcModalTablaCuentaComponent implements AfterViewChecked {
 
     this.loading = true;
     this.isDetalle = localStorage.getItem("detalle_consulta") === "true"
-    
+
 
     let consulta = {
       busqueda: localStorage.getItem("busqueda_cierre"),
@@ -118,7 +118,7 @@ console.log("116");
 
       setTimeout(() => {
 
-        
+
 
         let datosPost: any = {
 
@@ -192,7 +192,7 @@ console.log("116");
           }
 
           return this.entityService.obtenePlanCuentaGeneral(con);
-        
+
         }),
         map(data => {
           this.isLoadingResults = false;

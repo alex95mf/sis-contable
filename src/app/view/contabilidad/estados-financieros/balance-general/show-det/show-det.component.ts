@@ -14,6 +14,7 @@ import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spine
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-show-det',
   templateUrl: './show-det.component.html',
   styleUrls: ['./show-det.component.scss']

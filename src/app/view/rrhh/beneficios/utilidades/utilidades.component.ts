@@ -5,6 +5,7 @@ import { ValidacionesFactory } from '../../../../config/custom/utils/Validacione
 import { CommonService } from '../../../../services/commonServices';
 
 @Component({
+standalone: false,
   selector: 'app-utilidades',
   templateUrl: './utilidades.component.html',
   styleUrls: ['./utilidades.component.scss']

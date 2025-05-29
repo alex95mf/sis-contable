@@ -1,32 +1,33 @@
 import { ViewChild,EventEmitter,Component, OnInit, AfterViewChecked,Output } from '@angular/core';
 
 import { CustonService } from '../app-custom.service';
-import { CcSpinerProcesarComponent } from '../cc-spiner-procesar.component'; 
-import { ComprasService } from 'src/app/view/proveeduria/compras/compras.service'; 
+import { CcSpinerProcesarComponent } from '../cc-spiner-procesar.component';
+import { ComprasService } from 'src/app/view/proveeduria/compras/compras.service';
 
 
 
 import { LazyLoadEvent } from 'primeng/api';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import {DynamicDialogRef} from 'primeng/dynamicdialog';
 
 import { ChangeDetectorRef } from '@angular/core';
 
 
 @Component({
+standalone: false,
   template:  `
-          <p-table 
-            [value]="compras" 
-            [lazy]="true" 
-            (onLazyLoad)="CargaRegistroCompras($event)" 
-            selectionMode="single" 
+          <p-table
+            [value]="compras"
+            [lazy]="true"
+            (onLazyLoad)="CargaRegistroCompras($event)"
+            selectionMode="single"
             (onRowSelect)="onRowSelect($event)"
-            responsiveLayout="scroll" 
-            [paginator]="true" 
-            [rows]="10" 
-            [totalRecords]="totalRecords" 
-            [loading]="loading" 
-            [showCurrentPageReport]="true" 
+            responsiveLayout="scroll"
+            [paginator]="true"
+            [rows]="10"
+            [totalRecords]="totalRecords"
+            [loading]="loading"
+            [showCurrentPageReport]="true"
             currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
             [rowsPerPageOptions]="[10,25,50]">
           >
@@ -85,13 +86,13 @@ export class CcModalTablaComprasComponent implements AfterViewChecked {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Output() EventElemntRow = new EventEmitter();
-  
+
 
   constructor
   (
     private entityService: CustonService,
     public ref: DynamicDialogRef,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private comSrv: ComprasService,
     private cdRef:ChangeDetectorRef,
   ) { }
@@ -149,7 +150,7 @@ export class CcModalTablaComprasComponent implements AfterViewChecked {
       }, 1000);
 
     }, error => {
-      
+
     })
 
   }
@@ -184,10 +185,10 @@ export class CcModalTablaComprasComponent implements AfterViewChecked {
           }
 
           return this.entityService.ComprasRegistradas(con);
-        
+
         }),
-        map(data => {     
-          
+        map(data => {
+
           console.log(data);
 
           this.isLoadingResults = false;
@@ -206,7 +207,7 @@ export class CcModalTablaComprasComponent implements AfterViewChecked {
       ).subscribe(data => this.entitiesDataSource.data = data["data"]);
 
   }
-  
+
 
   getClicRow( event:any){
 

@@ -9,6 +9,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-modal-cuentas-contables',
   templateUrl: './modal-cuentas-contables.component.html',
   styleUrls: ['./modal-cuentas-contables.component.scss']

@@ -1,6 +1,6 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment';
+import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { SubgrupoProductoService} from './subgrupo-producto.service';
@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { event } from 'jquery';
 import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
 @Component({
+standalone: false,
   selector: 'app-subgrupo-producto',
   templateUrl: './subgrupo-producto.component.html',
   styleUrls: ['./subgrupo-producto.component.scss']

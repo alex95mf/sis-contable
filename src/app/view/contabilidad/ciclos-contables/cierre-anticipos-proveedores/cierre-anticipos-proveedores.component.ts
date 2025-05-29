@@ -4,10 +4,11 @@ import { CierreMesService } from 'src/app/view/presupuesto/configuracion/cierre-
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Botonera from 'src/app/models/IBotonera';
 import { ToastrService } from 'ngx-toastr';
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-cierre-anticipos-proveedores',
   templateUrl: './cierre-anticipos-proveedores.component.html',
   styleUrls: ['./cierre-anticipos-proveedores.component.scss']

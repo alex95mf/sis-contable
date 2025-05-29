@@ -4,12 +4,12 @@ import { BugsServiceService } from '../bugs-service.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
-import { object } from '@amcharts/amcharts4/core';
 
 @Component({
+standalone: false,
   selector: 'app-model-detalles',
   templateUrl: './model-detalles.component.html',
   styleUrls: ['./model-detalles.component.scss']

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import moment from 'moment';
+import * as moment from 'moment';
 
 import { AsigncionService } from '../asigncion.service';
 
@@ -13,6 +13,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CcModalTableEmpleadoComponent } from 'src/app/config/custom/modal-component/cc-modal-table-empleado/cc-modal-table-empleado.component';
 
 @Component({
+standalone: false,
   selector: 'app-tareas',
   templateUrl: './tareas.component.html',
   styleUrls: ['./tareas.component.scss']
@@ -230,19 +231,19 @@ export class TareasComponent implements OnInit {
     try {
       this.msgSpinner = 'Validando Datos'
       await this.validateData()
-      
+
       try {
         this.msgSpinner = 'Almacenando Tareas'
         let response = await this.apiService.setTareas({
-          periodo: this.periodo, 
-          programa: this.programa, 
-          departamento: this.departamento, 
-          atribucion: this.atribucion, 
+          periodo: this.periodo,
+          programa: this.programa,
+          departamento: this.departamento,
+          atribucion: this.atribucion,
           tareas: this.tareas
         })
         console.log(response)
         this.tareas = response
-  
+
         this.lcargando.ctlSpinner(false)
         Swal.fire('Tareas almacenadas correctamente', '', 'success')
       } catch (err) {

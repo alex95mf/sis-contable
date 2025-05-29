@@ -10,6 +10,7 @@ import Botonera from 'src/app/models/IBotonera';
 // import { DepartamentoService } from '../departamento.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-programa',
   templateUrl: './modal-programa.component.html',
   styleUrls: ['./modal-programa.component.scss']

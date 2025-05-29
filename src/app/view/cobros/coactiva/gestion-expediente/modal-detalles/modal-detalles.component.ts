@@ -10,6 +10,7 @@ import { GestionExpedienteService } from '../gestion-expediente.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-modal-detalles',
   templateUrl: './modal-detalles.component.html',
   styleUrls: ['./modal-detalles.component.scss']

@@ -13,6 +13,7 @@ import { DetalleReformaComponent } from './detalle-reforma/detalle-reforma.compo
 import e from 'cors';
 
 @Component({
+standalone: false,
   selector: 'app-cedula-presupuestaria',
   templateUrl: './cedula-presupuestaria.component.html',
   styleUrls: ['./cedula-presupuestaria.component.scss']

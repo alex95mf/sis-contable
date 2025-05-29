@@ -16,6 +16,7 @@ import { Subject } from 'rxjs';
 
 
 @Component({
+standalone: false,
   selector: 'app-recibo-cobro',
   templateUrl: './recibo-cobro.component.html',
   styleUrls: ['./recibo-cobro.component.scss']

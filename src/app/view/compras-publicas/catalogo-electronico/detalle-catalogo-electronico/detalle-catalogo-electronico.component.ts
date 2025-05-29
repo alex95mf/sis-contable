@@ -19,6 +19,7 @@ import * as moment from 'moment';
 
 
 @Component({
+standalone: false,
   selector: 'app-detalle-catalogo-electronico',
   templateUrl: './detalle-catalogo-electronico.component.html',
   styleUrls: ['./detalle-catalogo-electronico.component.scss']

@@ -11,7 +11,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { DataTablesModule } from 'angular-datatables';
 
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
-import { QRCodeModule } from 'angularx-qrcode';
+import { QRCodeComponent } from 'angularx-qrcode';
 import {CommonModalModule} from '../../../commons/modals/modal.module'
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { AppCustomModule } from '../../../../config/custom/app-custom.module';
@@ -30,7 +30,7 @@ import { ModalReclamosComponent } from './modal-reclamos/modal-reclamos.componen
 import { ModalUdmComponent } from './modal-udm/modal-udm.component';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.component'; 
+import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.component';
 
 
 @NgModule({
@@ -42,7 +42,7 @@ import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.
   ],
   imports: [
     CommonModule,
-    AppCustomModule, 
+    AppCustomModule,
     NgxCurrencyModule,
     ProductoRoutingModule,
     CalendarModule,
@@ -54,7 +54,7 @@ import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.
     NgSelectModule,
     DataTablesModule,
     NgxDocViewerModule,
-    QRCodeModule,
+    QRCodeComponent,
     ButtonsModule.forRoot(),
     CommonModalModule,
     NgxExtendedPdfViewerModule,
@@ -66,11 +66,11 @@ import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.
     NgxPrintModule,
     MultiSelectModule,
     MatTabsModule,
-   
+
   ],
   entryComponents: [
-    
+
   ]
-  
+
 })
 export class ProductoModule { }

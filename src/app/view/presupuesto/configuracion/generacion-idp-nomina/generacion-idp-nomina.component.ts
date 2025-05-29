@@ -23,6 +23,7 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
+standalone: false,
   selector: 'app-generacion-idp-nomina',
   templateUrl: './generacion-idp-nomina.component.html',
   styleUrls: ['./generacion-idp-nomina.component.scss']

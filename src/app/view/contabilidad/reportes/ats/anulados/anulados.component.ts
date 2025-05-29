@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment'
 
 @Component({
+standalone: false,
   selector: 'app-anulados',
   templateUrl: './anulados.component.html',
   styleUrls: ['./anulados.component.scss']

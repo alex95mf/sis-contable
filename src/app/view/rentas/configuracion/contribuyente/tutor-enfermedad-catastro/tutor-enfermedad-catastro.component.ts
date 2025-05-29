@@ -8,6 +8,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-tutor-enfermedad-catastro',
   templateUrl: './tutor-enfermedad-catastro.component.html',
   styleUrls: ['./tutor-enfermedad-catastro.component.scss']

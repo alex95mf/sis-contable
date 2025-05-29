@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-modal-contribuyente',
   templateUrl: './modal-contribuyente.component.html',
   styleUrls: ['./modal-contribuyente.component.scss']

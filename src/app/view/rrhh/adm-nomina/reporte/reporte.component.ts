@@ -12,6 +12,7 @@ const Swal = require('sweetalert2');
 import * as myVarGlobals from '../../../../global';
 
 @Component({
+standalone: false,
   selector: 'app-reporte',
   templateUrl: './reporte.component.html',
   styleUrls: ['./reporte.component.scss']

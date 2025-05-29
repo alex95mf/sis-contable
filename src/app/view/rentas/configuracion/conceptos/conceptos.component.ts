@@ -12,6 +12,7 @@ import { ModalMesesInteresComponent } from './modal-meses-interes/modal-meses-in
 import { Socket } from '../../../../services/socket.service';
 
 @Component({
+standalone: false,
   selector: 'app-conceptos',
   templateUrl: './conceptos.component.html',
   styleUrls: ['./conceptos.component.scss']

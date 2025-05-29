@@ -13,6 +13,7 @@ import { ModalCuentPreComponent } from './modal-cuent-pre/modal-cuent-pre.compon
 /* 
 import { DetalleBienesModalComponent } from './detalle-bienes-modal/detalle-bienes-modal.component'; */
 @Component({
+standalone: false,
   selector: 'app-bienes',
   templateUrl: './bienes.component.html',
   styleUrls: ['./bienes.component.scss']

@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../../../../../../services/commonServices'
 
 @Component({
+standalone: false,
   selector: 'app-table-sucursal',
   templateUrl: './table-sucursal.component.html',
   styleUrls: ['./table-sucursal.component.scss']

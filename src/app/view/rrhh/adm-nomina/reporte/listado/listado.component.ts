@@ -16,6 +16,7 @@ const Swal = require('sweetalert2');
 import * as moment from 'moment';
 import { ExcelService } from 'src/app/services/excel.service';
 @Component({
+standalone: false,
   selector: 'app-listado',
   templateUrl: './listado.component.html',
   styleUrls: ['./listado.component.scss']

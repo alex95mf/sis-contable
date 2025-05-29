@@ -8,7 +8,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from 'src/app/global';
-import moment from 'moment';
+import * as moment from 'moment';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { ReformaInternaService } from './reforma-interna.service';
@@ -22,6 +22,7 @@ import { takeUntil } from 'rxjs/operators';
 import { SweetAlertResult } from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-reforma-interna',
   templateUrl: './reforma-interna.component.html',
   styleUrls: ['./reforma-interna.component.scss']

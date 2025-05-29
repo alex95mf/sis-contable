@@ -12,6 +12,7 @@ import { ModalBuscaCodigoComponent } from './modal-busca-codigo/modal-busca-codi
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 import { NgSelectComponent } from '@ng-select/ng-select';
 @Component({
+standalone: false,
   selector: 'app-presupuesto',
   templateUrl: './presupuesto.component.html',
   styleUrls: ['./presupuesto.component.scss']

@@ -11,6 +11,7 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
 import { CrucePagosService } from '../cruce-pagos.service';
 import * as moment from 'moment';
 @Component({
+standalone: false,
   selector: 'app-modal-rec-documento',
   templateUrl: './modal-rec-documento.component.html',
   styleUrls: ['./modal-rec-documento.component.scss']

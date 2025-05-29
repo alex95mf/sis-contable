@@ -10,6 +10,7 @@ import { List } from '@amcharts/amcharts4/core';
 
 import * as moment from 'moment';
 @Component({
+standalone: false,
   selector: 'app-modal-supervivencia',
   templateUrl: './modal-supervivencia.component.html',
   styleUrls: ['./modal-supervivencia.component.scss']

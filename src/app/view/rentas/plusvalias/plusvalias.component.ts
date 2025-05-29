@@ -8,6 +8,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 
 
 @Component({
+standalone: false,
   selector: 'app-plusvalias',
   templateUrl: './plusvalias.component.html',
   styleUrls: ['./plusvalias.component.scss']

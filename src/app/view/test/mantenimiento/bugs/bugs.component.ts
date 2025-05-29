@@ -7,6 +7,7 @@ import { ModelDetallesComponent } from './model-detalles/model-detalles.componen
 import { ModalHistoryComponent } from './modal-history/modal-history.component';
 
 @Component({
+standalone: false,
   selector: 'app-bugs',
   templateUrl: './bugs.component.html',
   styleUrls: ['./bugs.component.scss']

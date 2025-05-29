@@ -30,6 +30,7 @@ import { ActivatedRoute } from '@angular/router';
 
 declare const $: any;
 @Component({
+standalone: false,
 	selector: 'app-mov-contable',
 	templateUrl: './mov-contable.component.html',
 	styleUrls: ['./mov-contable.component.scss'],

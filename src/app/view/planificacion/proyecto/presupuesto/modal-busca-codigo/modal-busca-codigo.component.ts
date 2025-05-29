@@ -9,6 +9,7 @@ import { PresupuestoService } from '../presupuesto.service';
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busca-codigo',
   templateUrl: './modal-busca-codigo.component.html',
   styleUrls: ['./modal-busca-codigo.component.scss']

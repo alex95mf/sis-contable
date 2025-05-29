@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfiguracionDetallesComponent } from './modal-configuracion-detalles/modal-configuracion-detalles.component';
 
 @Component({
+standalone: false,
   selector: 'app-otras-configuraciones',
   templateUrl: './otras-configuraciones.component.html',
   styleUrls: ['./otras-configuraciones.component.scss']

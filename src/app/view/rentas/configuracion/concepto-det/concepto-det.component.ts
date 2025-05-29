@@ -10,6 +10,7 @@ import * as variablesGlobales from "../../../../global";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 @Component({
+standalone: false,
   selector: 'app-concepto-det',
   templateUrl: './concepto-det.component.html',
   styleUrls: ['./concepto-det.component.scss']

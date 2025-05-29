@@ -16,6 +16,7 @@ import { ConfirmationService, Message, MessageService } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
+standalone: false,
   template: `
 
 

@@ -6,6 +6,7 @@ import { CcSpinerProcesarComponent } from '../../config/custom/cc-spiner-procesa
 import {CommonService} from '../../services/commonServices'
 import { ApiServices } from '../../services/api.service';
 @Component({
+standalone: false,
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']

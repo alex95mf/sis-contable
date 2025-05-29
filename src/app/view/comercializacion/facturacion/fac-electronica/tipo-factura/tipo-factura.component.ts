@@ -15,6 +15,7 @@ import { VistaClientesComponent } from '../vista-clientes/vista-clientes.compone
 // declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-tipo-factura',
   templateUrl: './tipo-factura.component.html',
   styleUrls: ['./tipo-factura.component.scss']

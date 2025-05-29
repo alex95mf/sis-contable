@@ -9,6 +9,7 @@ import { ValidacionesFactory } from '../../../../../config/custom/utils/Validaci
 import { PagoAnticipadoService } from '../pago-anticipado.service';
 
 @Component({
+standalone: false,
   selector: 'app-genera-pago',
   templateUrl: './genera-pago.component.html',
   styleUrls: ['./genera-pago.component.scss']

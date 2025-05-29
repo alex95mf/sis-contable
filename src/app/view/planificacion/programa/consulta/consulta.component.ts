@@ -4,6 +4,7 @@ import { ShowProgramaComponent } from './show/show.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-consulta',
   templateUrl: './consulta.component.html',
   styleUrls: ['./consulta.component.scss']

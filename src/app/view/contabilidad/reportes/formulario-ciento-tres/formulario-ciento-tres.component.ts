@@ -15,6 +15,7 @@ import * as myVarGlobals from 'src/app/global';
 
 
 @Component({
+standalone: false,
   selector: 'app-formulario-ciento-tres',
   templateUrl: './formulario-ciento-tres.component.html',
   styleUrls: ['./formulario-ciento-tres.component.scss']

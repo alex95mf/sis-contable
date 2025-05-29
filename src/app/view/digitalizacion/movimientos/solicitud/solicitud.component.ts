@@ -10,7 +10,7 @@ import { SolicitudService } from './solicitud.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from 'src/app/global';
-import moment from 'moment';
+import * as moment from 'moment';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { DatePipe } from '@angular/common';
@@ -23,6 +23,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 
 import { ConsultaDirectorioService } from '../consulta-directorio/consulta-directorio.service';
 @Component({
+standalone: false,
   selector: 'app-solicitud',
   templateUrl: './solicitud.component.html',
   styleUrls: ['./solicitud.component.scss']

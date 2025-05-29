@@ -8,6 +8,7 @@ import { TarifaService } from '../tarifa.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
+standalone: false,
   selector: 'app-modal-tarifas',
   templateUrl: './modal-tarifas.component.html',
   styleUrls: ['./modal-tarifas.component.scss']

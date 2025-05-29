@@ -35,6 +35,7 @@ import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cie
 ModalProgramaComponent
 
 @Component({
+standalone: false,
   selector: 'app-asistencia-empleado',
   templateUrl: './asistencia-empleado.component.html',
   styleUrls: ['./asistencia-empleado.component.scss'],

@@ -9,6 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-form-inspector',
   templateUrl: './form-inspector.component.html',
   styleUrls: ['./form-inspector.component.scss']

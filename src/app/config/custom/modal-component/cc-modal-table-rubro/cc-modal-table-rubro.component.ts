@@ -7,6 +7,7 @@ import { RubroAditionalResponseI } from "src/app/models/responseRubroAditional.i
 import { GeneralService } from "src/app/services/general.service";
 
 @Component({
+standalone: false,
   selector: "app-cc-modal-table-rubro",
   templateUrl: "./cc-modal-table-rubro.component.html",
   styleUrls: ["./cc-modal-table-rubro.component.scss"],

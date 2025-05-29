@@ -6,6 +6,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-modal-exoneraciones',
   templateUrl: './modal-exoneraciones.component.html',
   styleUrls: ['./modal-exoneraciones.component.scss']

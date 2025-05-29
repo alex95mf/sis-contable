@@ -8,6 +8,7 @@ import { ComisariaCertificadoService } from './comisaria-certificado.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 @Component({
+standalone: false,
   selector: 'app-comisaria-certificado',
   templateUrl: './comisaria-certificado.component.html',
   styleUrls: ['./comisaria-certificado.component.scss']

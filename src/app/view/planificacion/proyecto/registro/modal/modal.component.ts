@@ -6,9 +6,10 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ToastrService } from 'ngx-toastr';
 
 import { RegistroService } from '../registro.service';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
@@ -102,7 +103,7 @@ export class ModalComponent implements OnInit {
       case "CERRAR":
         this.activeModal.close()
         break;
-    
+
       default:
         break;
     }

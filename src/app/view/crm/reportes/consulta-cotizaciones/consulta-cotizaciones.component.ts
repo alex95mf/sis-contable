@@ -4,7 +4,7 @@ import * as myVarGlobals from '../../../../global';
 import { CommonVarService } from 'src/app/services/common-var.services';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { MatPaginator } from '@angular/material/paginator';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,7 @@ import { ConsultaCotizacionesService } from './consulta-cotizaciones.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-cotizaciones',
   templateUrl: './consulta-cotizaciones.component.html',
   styleUrls: ['./consulta-cotizaciones.component.scss']

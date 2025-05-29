@@ -7,6 +7,7 @@ import 'sweetalert2/src/sweetalert2.scss';
 const Swal = require('sweetalert2');
 
 @Component({
+standalone: false,
   selector: 'app-parametro',
   templateUrl: './parametro.component.html',
   styleUrls: ['./parametro.component.scss']

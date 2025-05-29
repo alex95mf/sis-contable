@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
@@ -13,6 +13,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-especies-fiscales',
   templateUrl: './especies-fiscales.component.html',
   styleUrls: ['./especies-fiscales.component.scss']

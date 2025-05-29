@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { Botones, cbtn } from "../cc-buttons/buttons.componente";
 
 @Component({
+standalone: false,
   selector: "app-button-radio-active-new",
   templateUrl: "./button-radio-active-new.component.html",
   styleUrls: ["./button-radio-active-new.component.scss"],

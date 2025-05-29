@@ -13,6 +13,7 @@ import { ModalConsultaComponent } from './modal-consulta/modal-consulta.componen
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
+standalone: false,
   selector: 'app-consulta',
   templateUrl: './consulta.component.html',
   styleUrls: ['./consulta.component.scss']

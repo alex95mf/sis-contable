@@ -11,6 +11,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-lista-mercado',
   templateUrl: './lista-mercado.component.html',
   styleUrls: ['./lista-mercado.component.scss']

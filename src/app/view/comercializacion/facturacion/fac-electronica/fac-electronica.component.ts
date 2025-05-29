@@ -10,6 +10,7 @@ import { TipoNcreditoComponent } from './tipo-ncredito/tipo-ncredito.component';
 import { TipoRetencionComponent } from './tipo-retencion/tipo-retencion.component';
 
 @Component({
+standalone: false,
   selector: 'app-fac-electronica',
   templateUrl: './fac-electronica.component.html',
   styleUrls: ['./fac-electronica.component.scss']

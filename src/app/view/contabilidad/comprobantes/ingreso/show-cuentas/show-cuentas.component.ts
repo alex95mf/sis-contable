@@ -8,6 +8,7 @@ import { CommonVarService } from '../../../../../services/common-var.services';
 import { IngresoService } from '../ingreso.service';
 
 @Component({
+standalone: false,
   selector: 'app-show-cuentas',
   templateUrl: './show-cuentas.component.html',
   styleUrls: ['./show-cuentas.component.scss']

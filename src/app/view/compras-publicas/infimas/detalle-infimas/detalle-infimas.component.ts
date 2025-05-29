@@ -18,6 +18,7 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
 
 
 @Component({
+standalone: false,
   selector: 'app-detalle-infimas',
   templateUrl: './detalle-infimas.component.html',
   styleUrls: ['./detalle-infimas.component.scss']

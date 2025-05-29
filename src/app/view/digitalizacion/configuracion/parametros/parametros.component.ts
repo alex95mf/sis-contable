@@ -10,6 +10,7 @@ import { ConsultaParametrosComponent } from './consulta-parametros/consulta-para
 
 
 @Component({
+standalone: false,
   selector: 'app-parametros',
   templateUrl: './parametros.component.html',
   styleUrls: ['./parametros.component.scss']

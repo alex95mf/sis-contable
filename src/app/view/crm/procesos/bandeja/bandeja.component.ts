@@ -2,7 +2,7 @@
 
 
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { MatPaginator } from '@angular/material/paginator';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,7 @@ import * as myVarGlobals from '../../../../global';
 import { TareaFormComponent } from './tarea-form/tarea-form.component';
 
 @Component({
+standalone: false,
   selector: 'app-bandeja',
   templateUrl: './bandeja.component.html',
   styleUrls: ['./bandeja.component.scss']

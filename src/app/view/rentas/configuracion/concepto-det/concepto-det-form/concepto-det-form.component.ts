@@ -12,6 +12,7 @@ import { debounceTime } from 'rxjs/operators';
 import { ModalCuentPreComponent } from '../modal-cuent-pre/modal-cuent-pre.component';
 
 @Component({
+standalone: false,
   selector: 'app-concepto-det-form',
   templateUrl: './concepto-det-form.component.html',
   styleUrls: ['./concepto-det-form.component.scss']

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-detalle-compras',
   templateUrl: './detalle-compras.component.html',
   styleUrls: ['./detalle-compras.component.scss']

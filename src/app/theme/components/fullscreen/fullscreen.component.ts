@@ -3,6 +3,7 @@ import { Component, ViewEncapsulation, ViewChild, HostListener, ElementRef } fro
 const document: any = window.document;
 
 @Component({
+standalone: false,
   selector: 'app-fullscreen',
   encapsulation: ViewEncapsulation.None,
   template: `

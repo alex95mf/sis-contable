@@ -7,6 +7,7 @@ import { CommonVarService } from '../../../../../services/common-var.services'
 import { GeneracionValorService } from '../generacion-valor.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-exoneraciones',
   templateUrl: './modal-exoneraciones.component.html',
   styleUrls: ['./modal-exoneraciones.component.scss']

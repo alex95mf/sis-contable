@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment';
+import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CategoriaProductoService } from './categoria-producto.service';
@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
+standalone: false,
   selector: 'app-categoria-producto',
   templateUrl: './categoria-producto.component.html',
   styleUrls: ['./categoria-producto.component.scss']

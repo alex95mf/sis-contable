@@ -14,6 +14,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
+standalone: false,
   selector: 'app-titulos',
   templateUrl: './titulos.component.html',
   styleUrls: ['./titulos.component.scss']

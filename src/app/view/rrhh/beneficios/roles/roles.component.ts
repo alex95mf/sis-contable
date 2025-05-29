@@ -16,6 +16,7 @@ import * as moment from 'moment'
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
 
 @Component({
+standalone: false,
   selector: 'app-roles',
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.scss']

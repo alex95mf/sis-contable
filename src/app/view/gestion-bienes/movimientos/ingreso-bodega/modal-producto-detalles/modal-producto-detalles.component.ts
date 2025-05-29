@@ -5,10 +5,11 @@ import { IngresoBodegaService } from '../ingreso-bodega.service';
 import { CurrencyMaskInputMode } from 'ngx-currency';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ProductoDetalle } from './IProductoDetalles';
 
 @Component({
+standalone: false,
   selector: 'app-modal-producto-detalles',
   templateUrl: './modal-producto-detalles.component.html',
   styleUrls: ['./modal-producto-detalles.component.scss']
@@ -27,8 +28,8 @@ export class ModalProductoDetallesComponent implements OnInit {
   detalles: Array<ProductoDetalle> = [];
 
   currencyOptions = {
-    prefix: '', 
-    nullable: true, 
+    prefix: '',
+    nullable: true,
     min: 1,
     precision: 0,
     inputMode: CurrencyMaskInputMode.NATURAL
@@ -40,27 +41,27 @@ export class ModalProductoDetallesComponent implements OnInit {
     private toastr: ToastrService,
   ) {
     this.vmButtons = [
-      { 
-        orig: "btnsModalProdDet", 
-        paramAccion: "", 
-        boton: { icon: "fas fa-floppy-o", texto: "GUARDAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
-        habilitar: false 
+      {
+        orig: "btnsModalProdDet",
+        paramAccion: "",
+        boton: { icon: "fas fa-floppy-o", texto: "GUARDAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
+        habilitar: false
       },
-      { 
-        orig: "btnsModalProdDet", 
-        paramAccion: "", 
-        boton: { icon: "fas fa-window-close", texto: "REGRESAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-danger boton btn-sm", 
-        habilitar: false 
+      {
+        orig: "btnsModalProdDet",
+        paramAccion: "",
+        boton: { icon: "fas fa-window-close", texto: "REGRESAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-danger boton btn-sm",
+        habilitar: false
       }
     ]
   }
@@ -129,7 +130,7 @@ export class ModalProductoDetallesComponent implements OnInit {
 
       let response = await this.apiService.setDetalles({documento: this.documento, producto: this.producto, detalles: this.detalles});
       this.detalles = response
-      
+
       this.lcargando.ctlSpinner(false)
       Swal.fire('Detalles almacenados correctamente', '', 'success');
     } catch (err) {

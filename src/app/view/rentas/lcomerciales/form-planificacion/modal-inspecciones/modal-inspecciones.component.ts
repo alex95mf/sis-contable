@@ -13,6 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-modal-inspecciones',
   templateUrl: './modal-inspecciones.component.html',
   styleUrls: ['./modal-inspecciones.component.scss'],

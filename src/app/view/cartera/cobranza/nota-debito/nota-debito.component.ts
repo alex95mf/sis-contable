@@ -15,6 +15,7 @@ import { Socket } from '../../../../services/socket.service';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-nota-debito',
   templateUrl: './nota-debito.component.html',
   styleUrls: ['./nota-debito.component.scss']

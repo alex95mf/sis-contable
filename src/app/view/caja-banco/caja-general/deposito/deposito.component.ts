@@ -13,6 +13,7 @@ import { DepositoService } from './deposito.service'
 import * as moment from "moment";
 
 @Component({
+standalone: false,
   selector: 'app-deposito',
   templateUrl: './deposito.component.html',
   styleUrls: ['./deposito.component.scss']

@@ -5,6 +5,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { TramitesService } from '../../tramites.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-tareas',
   templateUrl: './modal-tareas.component.html',
   styleUrls: ['./modal-tareas.component.scss']

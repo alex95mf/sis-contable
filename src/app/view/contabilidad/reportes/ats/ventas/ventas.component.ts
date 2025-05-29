@@ -12,6 +12,7 @@ const Swal = require('sweetalert2');
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-ventas',
   templateUrl: './ventas.component.html',
   styleUrls: ['./ventas.component.scss']

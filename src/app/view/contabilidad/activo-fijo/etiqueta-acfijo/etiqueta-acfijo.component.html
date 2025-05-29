@@ -67,9 +67,9 @@
                             <td>{{dt.descripcion}}</td>
                             <td>
                                 <!-- <label style="margin-top:15px; font-weight:bold;font-size:16px"> TODOTEK S.A.</label> -->
-                                <ngx-barcode [bc-element-type]="svg" [bc-value]="dt.codigo" [bc-format]="CODE128" [bc-width]="2" [bc-height]="40" [bc-display-value]="true" [bc-font]="Helvetica" [bc-background]="false" [bc-text-align]="center" [bc-text-position]="bottom" [bc-text-margin]="8"
+                                <ngx-barcode6 [bc-element-type]="svg" [bc-value]="dt.codigo" [bc-format]="CODE128" [bc-width]="2" [bc-height]="40" [bc-display-value]="true" [bc-font]="Helvetica" [bc-background]="false" [bc-text-align]="center" [bc-text-position]="bottom" [bc-text-margin]="8"
                                     [bc-font-size]="16" [bc-margin]="10" [bc-margin-top]="2" [bc-margin-bottom]="0" [bc-margin-left]="0" [bc-margin-right]="0">
-                                </ngx-barcode>
+                                </ngx-barcode6>
                                 <!-- <label style="margin-top:-16px; font-weight:bold;font-size:16px">{{ dt.nombre }}</label> -->
                             </td>
 
@@ -116,9 +116,9 @@
                         <div class="col-sm-3  mt-2" *ngFor="let dt of infoDt">
                             <div class="">
                                 <div class="" style="text-align: center;">
-                                    <ngx-barcode [bc-element-type]="svg" [bc-value]="dt.codigo" [bc-format]="CODE128" [bc-width]="1" [bc-height]="40" [bc-display-value]="true" [bc-font]="Helvetica" [bc-background]="false" [bc-text-align]="center" [bc-text-position]="bottom" [bc-text-margin]="0"
+                                    <ngx-barcode6 [bc-element-type]="svg" [bc-value]="dt.codigo" [bc-format]="CODE128" [bc-width]="1" [bc-height]="40" [bc-display-value]="true" [bc-font]="Helvetica" [bc-background]="false" [bc-text-align]="center" [bc-text-position]="bottom" [bc-text-margin]="0"
                                         [bc-font-size]="16" [bc-margin]="10" [bc-margin-top]="-5" [bc-margin-bottom]="0" [bc-margin-left]="0" [bc-margin-right]="0">
-                                    </ngx-barcode>
+                                    </ngx-barcode6>
                                     <label style="margin-top:-12px; font-weight:bold;font-size:15px">{{ dt.nombre }}</label><br>
                                     <label style="margin-top:-100px;font-weight:bold;font-size:15px; ">{{dataUser.company.razon_social}}</label>
                                 </div>

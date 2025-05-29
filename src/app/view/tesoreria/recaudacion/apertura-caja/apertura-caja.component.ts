@@ -11,6 +11,7 @@ import { AperturaCajaService } from './apertura-caja.service';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 
 @Component({
+standalone: false,
   selector: 'app-apertura-caja',
   templateUrl: './apertura-caja.component.html',
   styleUrls: ['./apertura-caja.component.scss']

@@ -18,6 +18,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 
 
 @Component({
+standalone: false,
   selector: 'app-mda-organigrama',
   templateUrl: './organigrama.component.html',
   styleUrls: ['./organigrama.component.scss'],

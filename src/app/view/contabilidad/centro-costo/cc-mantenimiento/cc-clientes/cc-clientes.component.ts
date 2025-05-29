@@ -5,6 +5,7 @@ import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spine
 import { CcMantenimientoService } from '../cc-mantenimiento.service';
 
 @Component({
+standalone: false,
   selector: 'app-cc-clientes',
   templateUrl: './cc-clientes.component.html',
   styleUrls: ['./cc-clientes.component.scss']

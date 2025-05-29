@@ -12,6 +12,7 @@ import { title } from 'process';
 
 
 @Component({
+standalone: false,
   selector: 'app-via-publica',
   templateUrl: './via-publica.component.html',
   styleUrls: ['./via-publica.component.scss']

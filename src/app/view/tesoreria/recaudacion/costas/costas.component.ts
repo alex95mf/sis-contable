@@ -23,6 +23,7 @@ import { environment } from 'src/environments/environment';
 import { id } from '@swimlane/ngx-charts';
 
 @Component({
+standalone: false,
   selector: 'app-costas',
   templateUrl: './costas.component.html',
   styleUrls: ['./costas.component.scss']

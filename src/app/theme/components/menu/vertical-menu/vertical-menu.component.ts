@@ -5,6 +5,7 @@ import { Settings } from '../../../../app.settings.model';
 import { MenuService } from '../menu.service';
 
 @Component({
+standalone: false,
   selector: 'app-vertical-menu',
   templateUrl: './vertical-menu.component.html',
   styleUrls: ['./vertical-menu.component.scss'],
