@@ -10,6 +10,7 @@ import * as moment from "moment";
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
 import { MatDialogRef } from '@angular/material/dialog';
 @Component({
+standalone: false,
 	selector: 'app-modal-consulta-cliente',
 	templateUrl: './modal-consulta-cliente.component.html',
 	styleUrls: ['./modal-consulta-cliente.component.scss']

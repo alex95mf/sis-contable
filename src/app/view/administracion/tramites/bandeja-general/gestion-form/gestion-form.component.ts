@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import * as myVarGlobals from 'src/app/global';
 
 @Component({
+standalone: false,
   selector: 'app-gestion-form',
   templateUrl: './gestion-form.component.html',
   styleUrls: ['./gestion-form.component.scss']

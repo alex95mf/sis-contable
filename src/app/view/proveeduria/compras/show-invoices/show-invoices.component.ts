@@ -9,6 +9,7 @@ import { ComprasService } from '../compras.service'
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-show-invoices',
   templateUrl: './show-invoices.component.html',
   styleUrls: ['./show-invoices.component.scss']

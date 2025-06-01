@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+standalone: false,
   selector: 'app-caja-chica',
   templateUrl: './caja-chica.component.html',
   styleUrls: ['./caja-chica.component.scss']

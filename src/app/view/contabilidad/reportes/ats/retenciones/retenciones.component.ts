@@ -3,6 +3,7 @@ import { Component, OnInit, Input} from '@angular/core';
 import * as moment from 'moment'
 
 @Component({
+standalone: false,
   selector: 'app-retenciones',
   templateUrl: './retenciones.component.html',
   styleUrls: ['./retenciones.component.scss']

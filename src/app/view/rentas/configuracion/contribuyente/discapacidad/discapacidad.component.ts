@@ -8,6 +8,7 @@ import * as myVarGlobals from "../../../../../global";
 import { ContribuyenteService } from '../contribuyente.service';
 
 @Component({
+standalone: false,
   selector: 'app-discapacidad',
   templateUrl: './discapacidad.component.html',
   styleUrls: ['./discapacidad.component.scss']

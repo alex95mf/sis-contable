@@ -5,6 +5,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { CategoriaProductoService } from '../categoria-producto.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-cuent-pre',
   templateUrl: './modal-cuent-pre.component.html',
   styleUrls: ['./modal-cuent-pre.component.scss']

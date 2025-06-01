@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import Swal from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss']

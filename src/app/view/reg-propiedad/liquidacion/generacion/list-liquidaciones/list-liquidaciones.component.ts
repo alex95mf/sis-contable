@@ -10,6 +10,7 @@ import * as myVarGlobals from "../../../../../global";
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-list-liquidaciones',
   templateUrl: './list-liquidaciones.component.html',
   styleUrls: ['./list-liquidaciones.component.scss']
@@ -65,7 +66,7 @@ export class ListLiquidacionesComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
       razon_social: undefined,
@@ -81,7 +82,7 @@ export class ListLiquidacionesComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
       this.cargarLiquidaciones();
     }, 0);

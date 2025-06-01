@@ -23,6 +23,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 
 import { ConsultaDirectorioService } from '../consulta-directorio/consulta-directorio.service';
 @Component({
+standalone: false,
   selector: 'app-solicitud',
   templateUrl: './solicitud.component.html',
   styleUrls: ['./solicitud.component.scss']

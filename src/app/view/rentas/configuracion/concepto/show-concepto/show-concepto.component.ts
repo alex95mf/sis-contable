@@ -11,6 +11,7 @@ import * as moment from "moment";
 import { CcSpinerProcesarComponent } from "../../../../../config/custom/cc-spiner-procesar.component";
 
 @Component({
+standalone: false,
   selector: "app-show-concepto",
   templateUrl: "./show-concepto.component.html",
   styleUrls: ["./show-concepto.component.scss"],

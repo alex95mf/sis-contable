@@ -43,6 +43,7 @@ interface FlatNode {
 
 
 @Component({
+standalone: false,
   selector: 'app-consulta-directorio',
   templateUrl: './consulta-directorio.component.html',
   styleUrls: ['./consulta-directorio.component.scss']

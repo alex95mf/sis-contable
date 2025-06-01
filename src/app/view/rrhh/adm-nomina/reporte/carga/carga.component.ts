@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import * as myVarGlobals from 'src/app/global';
 import { ExcelService } from 'src/app/services/excel.service';
 @Component({
+standalone: false,
   selector: 'app-carga',
   templateUrl: './carga.component.html',
   styleUrls: ['./carga.component.scss']

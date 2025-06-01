@@ -12,6 +12,7 @@ import * as myVarGlobals from "../../../../../global";
 import { RecaudacionesEspeciesFiscalesService } from '../recaudaciones-especies-fiscales.service';
 
 @Component({
+standalone: false,
   selector: 'app-list-rec-documentos',
   templateUrl: './list-rec-documentos.component.html',
   styleUrls: ['./list-rec-documentos.component.scss']

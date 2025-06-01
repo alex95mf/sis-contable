@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
-import { MultasService } from '../multas.service'; 
+import { MultasService } from '../multas.service';
 
 import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
@@ -13,6 +13,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-list-busqueda',
   templateUrl: './list-busqueda.component.html',
   styleUrls: ['./list-busqueda.component.scss']
@@ -72,7 +73,7 @@ export class ListBusquedaComponent implements OnInit {
     this.primer_dia = new Date(this.hoy.getFullYear(), this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(), this.hoy.getMonth() + 1, 0);
     this.filter = {
-    
+
       // fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
       // fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
 
@@ -166,7 +167,7 @@ export class ListBusquedaComponent implements OnInit {
     this.activeModal.close()
     // console.log("aquii")
     // console.log(data);
-    
+
       // Swal.fire({
       //   icon: "warning",
       //   title: "¡Atención!",
@@ -188,7 +189,7 @@ export class ListBusquedaComponent implements OnInit {
       //     // console.log(data);
       //   }
       // });
-    
+
   }
 
 

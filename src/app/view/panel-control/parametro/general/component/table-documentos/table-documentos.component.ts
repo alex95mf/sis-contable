@@ -7,6 +7,7 @@ import { CommonService } from '../../../../../../services/commonServices'
 import { CommonVarService } from '../../../../../../services/common-var.services'
 
 @Component({
+standalone: false,
   selector: 'app-table-documentos',
   templateUrl: './table-documentos.component.html',
   styleUrls: ['./table-documentos.component.scss']

@@ -7,6 +7,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IPaginate } from 'src/app/view/contabilidad/auxiliares/IAuxiliares';
 
 @Component({
+standalone: false,
   selector: 'app-modal-cuentas-emi',
   templateUrl: './modal-cuentas-emi.component.html',
   styleUrls: ['./modal-cuentas-emi.component.scss']

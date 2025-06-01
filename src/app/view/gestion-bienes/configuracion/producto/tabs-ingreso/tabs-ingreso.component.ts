@@ -12,6 +12,7 @@ import 'sweetalert2/src/sweetalert2.scss';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-tabs-ingreso',
   templateUrl: './tabs-ingreso.component.html',
   styleUrls: ['./tabs-ingreso.component.scss']

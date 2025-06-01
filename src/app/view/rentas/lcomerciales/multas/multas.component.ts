@@ -19,6 +19,7 @@ import * as moment from 'moment';
 import { ModalLocalesComponent } from './modal-locales/modal-locales.component';
 import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component';
 @Component({
+standalone: false,
   selector: 'app-multas',
   templateUrl: './multas.component.html',
   styleUrls: ['./multas.component.scss']

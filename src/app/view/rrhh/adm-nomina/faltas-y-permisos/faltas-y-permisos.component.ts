@@ -25,6 +25,7 @@ import { AppConfig } from './AppConfig.interface';
 import { AppConfigService } from './AppConfig.services';
 
 @Component({
+standalone: false,
   selector: 'app-faltas-y-permisos',
   templateUrl: './faltas-y-permisos.component.html',
   styleUrls: ['./faltas-y-permisos.component.scss'],

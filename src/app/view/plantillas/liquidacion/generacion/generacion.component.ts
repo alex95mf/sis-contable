@@ -18,6 +18,7 @@ import * as moment from 'moment';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 
 @Component({
+standalone: false,
   selector: 'app-generacion',
   templateUrl: './generacion.component.html',
   styleUrls: ['./generacion.component.scss']

@@ -10,6 +10,7 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-gestion',
   templateUrl: './modal-gestion.component.html',
   styleUrls: ['./modal-gestion.component.scss']

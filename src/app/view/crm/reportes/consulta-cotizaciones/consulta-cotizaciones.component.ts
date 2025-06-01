@@ -12,6 +12,7 @@ import { ConsultaCotizacionesService } from './consulta-cotizaciones.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-cotizaciones',
   templateUrl: './consulta-cotizaciones.component.html',
   styleUrls: ['./consulta-cotizaciones.component.scss']

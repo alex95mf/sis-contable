@@ -12,6 +12,7 @@ import * as moment from 'moment';
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-visualizador',
   templateUrl: './visualizador.component.html',
   styleUrls: ['./visualizador.component.scss']

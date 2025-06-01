@@ -6,6 +6,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-modal-reporte-caja',
   templateUrl: './modal-reporte-caja.component.html',
   styleUrls: ['./modal-reporte-caja.component.scss']

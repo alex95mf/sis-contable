@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import * as myVarGlobals from 'src/app/global';
 
 @Component({
+standalone: false,
   selector: 'app-seguimiento-form',
   templateUrl: './seguimiento-form.component.html',
   styleUrls: ['./seguimiento-form.component.scss']

@@ -9,6 +9,7 @@ import { RegistroService } from '../registro.service';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
@@ -102,7 +103,7 @@ export class ModalComponent implements OnInit {
       case "CERRAR":
         this.activeModal.close()
         break;
-    
+
       default:
         break;
     }

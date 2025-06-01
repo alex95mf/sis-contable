@@ -12,6 +12,7 @@ import { ParametrosNominaService } from './parametros-nomina.service';
 import { ParametroFormComponent } from './parametro-form/parametro-form.component';
 
 @Component({
+standalone: false,
   selector: 'app-parametros-nomina',
   templateUrl: './parametros-nomina.component.html',
   styleUrls: ['./parametros-nomina.component.scss']

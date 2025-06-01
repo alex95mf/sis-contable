@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda-reforma-doc',
   templateUrl: './modal-busqueda-reforma-doc.component.html',
   styleUrls: ['./modal-busqueda-reforma-doc.component.scss']

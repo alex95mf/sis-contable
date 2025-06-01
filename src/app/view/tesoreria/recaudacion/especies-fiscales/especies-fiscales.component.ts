@@ -13,6 +13,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-especies-fiscales',
   templateUrl: './especies-fiscales.component.html',
   styleUrls: ['./especies-fiscales.component.scss']

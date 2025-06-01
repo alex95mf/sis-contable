@@ -10,6 +10,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-list-tarifa',
   templateUrl: './list-tarifa.component.html',
   styleUrls: ['./list-tarifa.component.scss']

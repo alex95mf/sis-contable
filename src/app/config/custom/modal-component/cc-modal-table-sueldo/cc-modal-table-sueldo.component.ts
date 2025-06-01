@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
-import { LazyLoadEvent, PrimeNGConfig } from "primeng/api";
+import { LazyLoadEvent } from "primeng/api";
+import { PrimeNG } from "primeng/config";
 import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 import { SalaryAditionalI } from "src/app/models/responseSalaryAditional.interfase";
 import { GeneralService } from "src/app/services/general.service";
 
 @Component({
+standalone: false,
   selector: "app-cc-modal-table-sueldo",
   templateUrl: "./cc-modal-table-sueldo.component.html",
   styleUrls: ["./cc-modal-table-sueldo.component.scss"],
@@ -19,7 +21,7 @@ export class CcModalTableSueldoComponent {
   constructor(
     private cdRef: ChangeDetectorRef,
     public config: DynamicDialogConfig,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     public ref: DynamicDialogRef,
     private generalService: GeneralService,
     private toastr: ToastrService
@@ -67,7 +69,7 @@ export class CcModalTableSueldoComponent {
       cargo: $filterCargo,
       relation: this.config.data?.relation,
       relation_selected: this.config.data?.relation_selected,
-     
+
     };
 
     console.log(parameterUrl)

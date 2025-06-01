@@ -9,6 +9,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { EncargadoTrasladoComponent } from 'src/app/view/gestion-bienes/movimientos/traslado/encargado-traslado/encargado-traslado.component';
 
 @Component({
+standalone: false,
   selector: 'app-modal-modificaciones-contable',
   templateUrl: './modal-modificaciones-contable.component.html',
   styleUrls: ['./modal-modificaciones-contable.component.scss']

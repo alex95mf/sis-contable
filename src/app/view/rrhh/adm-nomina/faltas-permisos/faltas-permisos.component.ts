@@ -30,6 +30,7 @@ import { Chart } from 'chart.js';
 
 
 @Component({
+standalone: false,
   selector: 'app-faltas-permisos',
   templateUrl: './faltas-permisos.component.html',
   styleUrls: ['./faltas-permisos.component.scss'],

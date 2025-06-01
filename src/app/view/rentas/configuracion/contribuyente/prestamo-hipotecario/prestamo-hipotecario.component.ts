@@ -8,6 +8,7 @@ import * as myVarGlobals from "../../../../../global";
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-prestamo-hipotecario',
   templateUrl: './prestamo-hipotecario.component.html',
   styleUrls: ['./prestamo-hipotecario.component.scss']

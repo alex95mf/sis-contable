@@ -13,6 +13,7 @@ import { VistaClientesComponent } from '../vista-clientes/vista-clientes.compone
 
 // declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-tipo-liquidacion',
   templateUrl: './tipo-liquidacion.component.html',
   styleUrls: ['./tipo-liquidacion.component.scss']

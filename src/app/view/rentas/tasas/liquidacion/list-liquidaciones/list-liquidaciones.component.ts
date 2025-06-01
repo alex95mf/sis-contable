@@ -13,6 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-list-liquidaciones',
   templateUrl: './list-liquidaciones.component.html',
   styleUrls: ['./list-liquidaciones.component.scss']

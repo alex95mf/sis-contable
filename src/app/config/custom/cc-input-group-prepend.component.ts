@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
+standalone: false,
   selector: "app-cc-input-group-prepend",
   template: `
     <div class="input-group input-group-sm mt-1">

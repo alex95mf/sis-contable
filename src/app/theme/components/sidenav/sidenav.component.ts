@@ -7,6 +7,7 @@ import { Settings } from '../../../app.settings.model';
 import { MenuService } from '../menu/menu.service';
 
 @Component({
+standalone: false,
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],

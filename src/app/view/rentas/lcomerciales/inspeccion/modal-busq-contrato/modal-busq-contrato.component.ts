@@ -8,6 +8,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { InspeccionService } from '../inspeccion.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busq-contrato',
   templateUrl: './modal-busq-contrato.component.html',
   styleUrls: ['./modal-busq-contrato.component.scss']

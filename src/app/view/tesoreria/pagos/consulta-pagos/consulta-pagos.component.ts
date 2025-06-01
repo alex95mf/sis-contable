@@ -16,6 +16,7 @@ import { ConfirmationDialogService } from 'src/app/config/custom/confirmation-di
 import { VistaArchivoComponent } from 'src/app/view/contabilidad/centro-costo/cc-mantenimiento/vista-archivo/vista-archivo.component';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-pagos',
   templateUrl: './consulta-pagos.component.html',
   styleUrls: ['./consulta-pagos.component.scss']

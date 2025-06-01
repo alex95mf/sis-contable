@@ -22,6 +22,7 @@ import { takeUntil } from 'rxjs/operators';
 import { SweetAlertResult } from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-reforma-interna',
   templateUrl: './reforma-interna.component.html',
   styleUrls: ['./reforma-interna.component.scss']

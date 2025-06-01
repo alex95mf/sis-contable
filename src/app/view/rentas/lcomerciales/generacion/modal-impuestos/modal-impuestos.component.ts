@@ -6,6 +6,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { GeneracionService } from '../generacion.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-impuestos',
   templateUrl: './modal-impuestos.component.html',
   styleUrls: ['./modal-impuestos.component.scss']

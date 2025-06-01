@@ -15,6 +15,7 @@ declare const $: any;
 import { ExcelService } from 'src/app/services/excel.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 @Component({
+standalone: false,
 	selector: 'app-lista-precios',
 	templateUrl: './lista-precios.component.html',
 	styleUrls: ['./lista-precios.component.scss']

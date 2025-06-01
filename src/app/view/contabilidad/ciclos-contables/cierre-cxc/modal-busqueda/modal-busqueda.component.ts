@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda',
   templateUrl: './modal-busqueda.component.html',
   styleUrls: ['./modal-busqueda.component.scss']

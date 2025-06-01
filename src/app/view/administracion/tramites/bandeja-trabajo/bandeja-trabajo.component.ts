@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
+standalone: false,
   selector: 'app-bandeja-trabajo',
   templateUrl: './bandeja-trabajo.component.html',
   styleUrls: ['./bandeja-trabajo.component.scss']

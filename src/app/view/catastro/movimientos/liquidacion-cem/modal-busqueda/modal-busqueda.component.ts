@@ -6,6 +6,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda',
   templateUrl: './modal-busqueda.component.html',
   styleUrls: ['./modal-busqueda.component.scss']

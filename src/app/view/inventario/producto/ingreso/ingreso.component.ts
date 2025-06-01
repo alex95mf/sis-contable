@@ -15,6 +15,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-ingreso-producto',
   templateUrl: './ingreso.component.html',
   styleUrls: ['./ingreso.component.scss']

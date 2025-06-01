@@ -9,6 +9,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
+standalone: false,
   selector: 'app-comparativo',
   templateUrl: './comparativo.component.html',
   styleUrls: ['./comparativo.component.scss']

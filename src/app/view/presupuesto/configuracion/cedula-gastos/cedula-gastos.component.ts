@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import Botonera from 'src/app/models/IBotonera';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 @Component({
+standalone: false,
   selector: 'app-asignacion-ingresos',
   templateUrl: './cedula-gastos.component.html',
   styleUrls: ['./cedula-gastos.component.scss']

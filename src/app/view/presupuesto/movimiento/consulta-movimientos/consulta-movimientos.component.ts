@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-movimientos',
   templateUrl: './consulta-movimientos.component.html',
   styleUrls: ['./consulta-movimientos.component.scss']

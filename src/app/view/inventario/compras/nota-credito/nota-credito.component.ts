@@ -17,6 +17,7 @@ import { ConfirmationDialogService } from '../../../../config/custom/confirmatio
 import { ReportNotaCreditoComponent } from './report-nota-credito/report-nota-credito.component';
 
 @Component({
+standalone: false,
   selector: 'app-nota-credito',
   templateUrl: './nota-credito.component.html',
   styleUrls: ['./nota-credito.component.scss']

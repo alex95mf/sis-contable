@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
+standalone: false,
   selector: 'app-doc-elec',
   templateUrl: './doc-elec.component.html',
   styleUrls: ['./doc-elec.component.scss']

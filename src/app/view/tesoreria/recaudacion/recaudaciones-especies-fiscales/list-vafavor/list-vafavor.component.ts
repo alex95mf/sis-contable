@@ -11,6 +11,7 @@ import * as myVarGlobals from "../../../../../global";
 import { RecaudacionesEspeciesFiscalesService } from '../recaudaciones-especies-fiscales.service';
 
 @Component({
+standalone: false,
   selector: 'app-list-vafavor',
   templateUrl: './list-vafavor.component.html',
   styleUrls: ['./list-vafavor.component.scss']

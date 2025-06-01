@@ -11,6 +11,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-detalles-producto',
   templateUrl: './detalles-producto.component.html',
   styleUrls: ['./detalles-producto.component.scss']
@@ -25,7 +26,7 @@ export class DetallesProductoComponent implements OnInit {
   @Input() data: any;
   @Input() verifyRestore: any;
   @Input() isNew: any;
-  
+
 
   vmButtons: any;
   documentosDt: any = [];
@@ -75,14 +76,14 @@ export class DetallesProductoComponent implements OnInit {
       }
     ];
 
-    
+
     this.hoy = new Date();
     this.dia_siguiente = new Date(this.hoy);
     this.dia_siguiente.setDate(this.dia_siguiente.getDate() + 1);
     this.primer_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth() + 1, 0);
 
-    
+
     this.filter = {
       razon_social: undefined,
       num_documento: undefined,
@@ -109,7 +110,7 @@ export class DetallesProductoComponent implements OnInit {
       codigobienes:"",
     }
 
-  
+
 
     console.log(this.data)
     console.log(this.isNew)
@@ -120,12 +121,12 @@ export class DetallesProductoComponent implements OnInit {
       this.id_producto = this.data.id_producto;
    // this.producto = JSON.parse(JSON.stringify(this.data['producto'][0]));
     }
-    
-    
-   
-  
-   
- 
+
+
+
+
+
+
 
 
     setTimeout(()=> {
@@ -175,7 +176,7 @@ export class DetallesProductoComponent implements OnInit {
       console.log(res["data"])
       // this.listaProductos_filter = res["data"].filter(p => {p.id_grupo_productos == this.data.fk_grupo_producto});
       // console.log(this.listaProductos_filter)
-      
+
       // console.log(res["data"])
       this.lcargando.ctlSpinner(false);
     }, error => {
@@ -183,7 +184,7 @@ export class DetallesProductoComponent implements OnInit {
       this.toastr.info(error.error.message)
     })
   }
-  
+
   // buscarGrupoProducto(){
   //   this.mensajeSppiner = "Cargando...";
   //   this.lcargando.ctlSpinner(true);
@@ -194,7 +195,7 @@ export class DetallesProductoComponent implements OnInit {
   //     this.listaProductos = res["data"]
   //     this.listaProductos_filter = res["data"].filter(p => {p.id_grupo_productos == this.data.fk_grupo_producto});
   //     console.log(this.listaProductos_filter)
-      
+
   //     console.log(res["data"])
   //     this.lcargando.ctlSpinner(false);
   //   }, error => {
@@ -212,7 +213,7 @@ export class DetallesProductoComponent implements OnInit {
       this.catalog = res["data"]["INV_TIPO_BIEN"];
       this.catalog = this.catalog.filter(c => {c.valor== this.data.tipo_bien});
       console.log(this.catalog)
-     
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message)
@@ -223,21 +224,21 @@ export class DetallesProductoComponent implements OnInit {
   //   this.mensajeSppiner = "Cargando lista de Traslados de Bienes...";
   //   this.lcargando.ctlSpinner(true);
 
-  //   if (flag) this.paginate.page = 1 
-    
+  //   if (flag) this.paginate.page = 1
+
   //   let data = {
   //     params: {
   //       filter: this.filter,
   //       paginate: this.paginate,
   //     },
-     
+
   //   }
 
   //   this.apiSrv.getTraladoBienesData(data).subscribe(
   //     (res) => {
   //       console.log(res['data'])
   //       //console.log('documentos'+res);
-        
+
   //       this.documentosDt = res['data'];
   //       this.paginate.length = res['data']['total'];
   //       if (res['data']['current_page'] == 1) {

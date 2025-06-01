@@ -8,6 +8,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-decremento',
   templateUrl: './decremento.component.html',
   styleUrls: ['./decremento.component.scss']

@@ -9,6 +9,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 
 import * as moment from 'moment';
 @Component({
+standalone: false,
   selector: 'app-modal-supervivencia',
   templateUrl: './modal-supervivencia.component.html',
   styleUrls: ['./modal-supervivencia.component.scss']

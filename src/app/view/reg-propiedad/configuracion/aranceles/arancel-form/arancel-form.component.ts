@@ -12,6 +12,7 @@ import { DataTableDirective } from "angular-datatables";
 import { Subject } from "rxjs";
 
 @Component({
+standalone: false,
     selector: "app-arancel-form",
     templateUrl: "./arancel-form.component.html",
     styleUrls: ["./arancel-form.component.scss"],

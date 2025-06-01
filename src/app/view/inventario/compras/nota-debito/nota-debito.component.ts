@@ -17,6 +17,7 @@ import { ReportNotaDebitoInvComponent } from './report-nota-debito/report-nota-d
 import { ShowCuentasInvComponent } from './show-cuentas/show-cuentas.component';
 
 @Component({
+standalone: false,
   selector: 'app-nota-debito',
   templateUrl: './nota-debito.component.html',
   styleUrls: ['./nota-debito.component.scss']

@@ -13,6 +13,7 @@ import { CommonVarService } from "../../../../../services/common-var.services";
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-cuentas',
   templateUrl: './cuentas.component.html',
   styleUrls: ['./cuentas.component.scss']

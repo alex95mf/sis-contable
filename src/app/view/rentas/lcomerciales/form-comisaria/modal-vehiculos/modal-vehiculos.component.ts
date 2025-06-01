@@ -8,6 +8,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { CommonService } from 'src/app/services/commonServices';
 
 @Component({
+standalone: false,
   selector: 'app-modal-vehiculos',
   templateUrl: './modal-vehiculos.component.html',
   styleUrls: ['./modal-vehiculos.component.scss']

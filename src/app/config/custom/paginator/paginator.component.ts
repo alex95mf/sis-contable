@@ -4,6 +4,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { PaginatorService } from "./paginator.service";
 
 @Component({
+standalone: false,
   selector: "app-paginator",
   templateUrl: "./paginator.component.html",
   styleUrls: ["./paginator.component.css"],

@@ -37,6 +37,7 @@ interface Solar {
 }
 
 @Component({
+standalone: false,
   selector: 'app-liquidacion-pr',
   templateUrl: './liquidacion-pr.component.html',
   styleUrls: ['./liquidacion-pr.component.scss']

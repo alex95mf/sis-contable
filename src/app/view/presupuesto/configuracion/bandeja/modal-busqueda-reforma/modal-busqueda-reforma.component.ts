@@ -12,6 +12,7 @@ import * as moment from 'moment';
 // import { ValidacionesFactory } from '../utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda-reforma',
   templateUrl: './modal-busqueda-reforma.component.html',
   styleUrls: ['./modal-busqueda-reforma.component.scss']

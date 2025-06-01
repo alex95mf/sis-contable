@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { OtrasConfiguracionesService } from '../otras-configuraciones.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-configuracion-detalles',
   templateUrl: './modal-configuracion-detalles.component.html',
   styleUrls: ['./modal-configuracion-detalles.component.scss']

@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import * as myVarGlobals from 'src/app/global';
 
 @Component({
+standalone: false,
   selector: 'app-modal-anexos',
   templateUrl: './modal-anexos.component.html',
   styleUrls: ['./modal-anexos.component.scss']

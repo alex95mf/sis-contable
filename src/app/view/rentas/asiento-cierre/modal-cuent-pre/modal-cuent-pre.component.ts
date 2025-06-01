@@ -9,6 +9,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-modal-cuent-pre',
   templateUrl: './modal-cuent-pre.component.html',
   styleUrls: ['./modal-cuent-pre.component.scss']

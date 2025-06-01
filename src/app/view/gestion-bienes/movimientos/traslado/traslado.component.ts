@@ -23,6 +23,7 @@ import { DetallesProductoComponent } from '../traslado/detalles-producto/detalle
 import { environment } from 'src/environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-traslado',
   templateUrl: './traslado.component.html',
   styleUrls: ['./traslado.component.scss']

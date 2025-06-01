@@ -9,6 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ModalContribuyentesComponent } from "src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 @Component({
+standalone: false,
   selector: "app-contribuyente",
   templateUrl: "./contribuyente.component.html",
   styleUrls: ["./contribuyente.component.scss"],

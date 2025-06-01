@@ -12,6 +12,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import moment from "moment";
 
 @Component({
+standalone: false,
   selector: 'app-tabla-cuantia',
   templateUrl: './tabla-cuantia.component.html',
   styleUrls: ['./tabla-cuantia.component.scss']

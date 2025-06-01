@@ -17,6 +17,7 @@ import { ModalAnexoComponent } from 'src/app/view/administracion/tramites/tramit
 
 
 @Component({
+standalone: false,
   selector: 'app-anexos-list-uno',
   templateUrl: './anexos-list-uno.component.html',
   styleUrls: ['./anexos-list-uno.component.scss']

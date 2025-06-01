@@ -16,6 +16,7 @@ import { CreateRetencionService } from './create-retencion.service'
 
 
 @Component({
+standalone: false,
   selector: 'app-create-retencion',
   templateUrl: './create-retencion.component.html',
   styleUrls: ['./create-retencion.component.scss']

@@ -7,6 +7,7 @@ import { ConceptoDetService } from '../concepto-det.service';
 // import { ConceptosService } from '../conceptos.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-cuent-pre',
   templateUrl: './modal-cuent-pre.component.html',
   styleUrls: ['./modal-cuent-pre.component.scss']

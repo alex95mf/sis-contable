@@ -17,6 +17,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 
 @Component({
+standalone: false,
   selector: 'app-tramite',
   templateUrl: './dfd.component.html',
   styleUrls: ['./dfd.component.scss']

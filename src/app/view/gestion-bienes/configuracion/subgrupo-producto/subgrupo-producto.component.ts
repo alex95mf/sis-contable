@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { event } from 'jquery';
 import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
 @Component({
+standalone: false,
   selector: 'app-subgrupo-producto',
   templateUrl: './subgrupo-producto.component.html',
   styleUrls: ['./subgrupo-producto.component.scss']

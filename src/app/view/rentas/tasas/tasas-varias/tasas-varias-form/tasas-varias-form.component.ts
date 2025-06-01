@@ -9,6 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-tasas-varias-form',
   templateUrl: './tasas-varias-form.component.html',
   styleUrls: ['./tasas-varias-form.component.scss']

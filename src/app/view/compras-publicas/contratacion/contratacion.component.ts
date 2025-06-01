@@ -16,6 +16,7 @@ import * as myVarGlobals from "../../../global";
 import { ExcelService } from 'src/app/services/excel.service';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 @Component({
+standalone: false,
   selector: 'app-contratacion',
   templateUrl: './contratacion.component.html',
   styleUrls: ['./contratacion.component.scss']

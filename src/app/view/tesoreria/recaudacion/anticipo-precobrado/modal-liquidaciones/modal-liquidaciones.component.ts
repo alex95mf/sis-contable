@@ -11,6 +11,7 @@ import * as myVarGlobals from "../../../../../global";
 import { AnticipoPrecobradoService } from '../anticipo-precobrado.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-liquidaciones',
   templateUrl: './modal-liquidaciones.component.html',
   styleUrls: ['./modal-liquidaciones.component.scss']
@@ -82,7 +83,7 @@ export class ModalLiquidacionesComponent implements OnInit {
       razon_social: undefined,
       num_documento: undefined,
       fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
-      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),      
+      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigo: 0,
       filterControl: ""
     }
@@ -98,7 +99,7 @@ export class ModalLiquidacionesComponent implements OnInit {
       razon_social: undefined,
       num_documento: undefined,
       fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
-      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),      
+      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigo: 0,
       filterControl: ""
     }
@@ -114,7 +115,7 @@ export class ModalLiquidacionesComponent implements OnInit {
       razon_social: undefined,
       num_documento: undefined,
       fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
-      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),      
+      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigo: 0,
       filterControl: ""
     }
@@ -125,13 +126,13 @@ export class ModalLiquidacionesComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
       this.cargarLiquidaciones(true);
     }, 0);
   }
 
-  
+
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
       case " REGRESAR":
@@ -216,7 +217,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: e.cuota.documento.total,
                     cobro: e.cuota.valor,
                     plazo_maximo: e.cuota.fecha_plazo_maximo,
-                  })              
+                  })
                 }
                 else { // CUOTA INICIAL no tiene rec_documento_det
                   Object.assign(e, {
@@ -224,7 +225,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: (+(+e.total*100 / +e.observacion)).toFixed(2),
                     cobro: e.total,
                     plazo_maximo: e.resolucion_fecha,
-                  })   
+                  })
                 }
               }
             }
@@ -232,7 +233,7 @@ export class ModalLiquidacionesComponent implements OnInit {
               if (e.id_liquidacion==c.id_liquidacion){
                 Object.assign(e, {
                   aplica: true
-                })                   
+                })
               }
             })
           })
@@ -263,7 +264,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: e.cuota.documento.total,
                     cobro: (+e.cuota.valor).toFixed(2),
                     plazo_maximo: e.cuota.fecha_plazo_maximo,
-                  })              
+                  })
                 }
                 else { // CUOTA INICIAL no tiene rec_documento_det
                   Object.assign(e, {
@@ -271,7 +272,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: +e.total*100 / +e.observacion,
                     cobro: (+e.total).toFixed(2),
                     plazo_maximo: e.resolucion_fecha,
-                  })   
+                  })
                 }
               }
             }
@@ -279,14 +280,14 @@ export class ModalLiquidacionesComponent implements OnInit {
               if (e.id_liquidacion==c.id_liquidacion){
                 Object.assign(e, {
                   aplica: true
-                })                   
+                })
               }
             })
           })
           this.resdata = array;
         }
 
-        // 
+        //
         if(firstload){
           this.cargarConvenios(true);
         }else{
@@ -299,7 +300,7 @@ export class ModalLiquidacionesComponent implements OnInit {
       }
     );
 
-    
+
   }
 
   cargarConvenios(firstload: boolean) {
@@ -346,7 +347,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: e.cuota.documento.total,
                     cobro: e.cuota.valor,
                     plazo_maximo: e.cuota.fecha_plazo_maximo,
-                  })              
+                  })
                 }
                 else { // CUOTA INICIAL no tiene rec_documento_det
                   Object.assign(e, {
@@ -354,7 +355,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: (+(+e.total*100 / +e.observacion)).toFixed(2),
                     cobro: e.total,
                     plazo_maximo: e.resolucion_fecha,
-                  })   
+                  })
                 }
               }
             }
@@ -362,7 +363,7 @@ export class ModalLiquidacionesComponent implements OnInit {
               if (e.id_liquidacion==c.id_liquidacion){
                 Object.assign(e, {
                   aplica: true
-                })                   
+                })
               }
             })
           })
@@ -393,7 +394,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: e.cuota.documento.total,
                     cobro: (+e.cuota.valor).toFixed(2),
                     plazo_maximo: e.cuota.fecha_plazo_maximo,
-                  })              
+                  })
                 }
                 else { // CUOTA INICIAL no tiene rec_documento_det
                   Object.assign(e, {
@@ -401,7 +402,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: +e.total*100 / +e.observacion,
                     cobro: (+e.total).toFixed(2),
                     plazo_maximo: e.resolucion_fecha,
-                  })   
+                  })
                 }
               }
             }
@@ -409,14 +410,14 @@ export class ModalLiquidacionesComponent implements OnInit {
               if (e.id_liquidacion==c.id_liquidacion){
                 Object.assign(e, {
                   aplica: true
-                })                   
+                })
               }
             })
           })
           this.liquidacionesDt = array;
         }
 
-        // 
+        //
         if(firstload){
           this.cargarConveniosAT(true);
         }else{
@@ -474,7 +475,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: e.cuota.documento.total,
                     cobro: e.cuota.valor,
                     plazo_maximo: e.cuota.fecha_plazo_maximo,
-                  })              
+                  })
                 }
                 else { // CUOTA INICIAL no tiene rec_documento_det
                   Object.assign(e, {
@@ -482,7 +483,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: (+(+e.total*100 / +e.observacion)).toFixed(2),
                     cobro: e.total,
                     plazo_maximo: e.resolucion_fecha,
-                  })   
+                  })
                 }
               }
             }
@@ -490,7 +491,7 @@ export class ModalLiquidacionesComponent implements OnInit {
               if (e.id_liquidacion==c.id_liquidacion){
                 Object.assign(e, {
                   aplica: true
-                })                   
+                })
               }
             })
           })
@@ -521,7 +522,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: e.cuota.documento.total,
                     cobro: (+e.cuota.valor).toFixed(2),
                     plazo_maximo: e.cuota.fecha_plazo_maximo,
-                  })              
+                  })
                 }
                 else { // CUOTA INICIAL no tiene rec_documento_det
                   Object.assign(e, {
@@ -529,7 +530,7 @@ export class ModalLiquidacionesComponent implements OnInit {
                     monto_total: +e.total*100 / +e.observacion,
                     cobro: (+e.total).toFixed(2),
                     plazo_maximo: e.resolucion_fecha,
-                  })   
+                  })
                 }
               }
             }
@@ -537,7 +538,7 @@ export class ModalLiquidacionesComponent implements OnInit {
               if (e.id_liquidacion==c.id_liquidacion){
                 Object.assign(e, {
                   aplica: true
-                })                   
+                })
               }
             })
           })
@@ -582,7 +583,7 @@ export class ModalLiquidacionesComponent implements OnInit {
             monto_total: dt.cuota.documento.total,
             cobro: (+dt.cuota.valor).toFixed(2),
             plazo_maximo: dt.cuota.fecha_plazo_maximo,
-          })              
+          })
         }
         else { // CUOTA INICIAL no tiene rec_documento_det
           Object.assign(dt, {
@@ -590,10 +591,10 @@ export class ModalLiquidacionesComponent implements OnInit {
             monto_total: (+(+dt.total*100 / +dt.observacion)).toFixed(2),
             cobro: (+dt.total).toFixed(2),
             plazo_maximo: dt.resolucion_fecha,
-          })   
+          })
         }
       }
-    
+
       this.deudas.push(dt);
       this.totalCobro += +dt.cobro;
     }else {
@@ -615,7 +616,7 @@ export class ModalLiquidacionesComponent implements OnInit {
       razon_social: undefined,
       num_documento: undefined,
       fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
-      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),      
+      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigo: 0,
       filterControl: ""
     }
@@ -627,7 +628,7 @@ export class ModalLiquidacionesComponent implements OnInit {
       razon_social: undefined,
       num_documento: undefined,
       fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
-      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),      
+      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigo: 0,
       filterControl: ""
     }
@@ -639,7 +640,7 @@ export class ModalLiquidacionesComponent implements OnInit {
       razon_social: undefined,
       num_documento: undefined,
       fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
-      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),      
+      fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigo: 0,
       filterControl: ""
     }

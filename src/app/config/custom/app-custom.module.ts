@@ -11,7 +11,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ToastrModule } from "ngx-toastr";
 import { FileUploadModule } from "ng2-file-upload";
 import { DatePipe } from "@angular/common";
-import { ChartsModule } from "ng2-charts";
+// import { ChartsModule } from "ng2-charts";
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ButtonsModule } from "ngx-bootstrap/buttons";
 import { CalendarModule, DatePickerModule } from "@syncfusion/ej2-angular-calendars";
@@ -46,8 +47,9 @@ import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
 import { VistaArchivoComponent } from "../../view/contabilidad/centro-costo/cc-mantenimiento/vista-archivo/vista-archivo.component";
 import { CcClientesComponent } from "../../view/contabilidad/centro-costo/cc-mantenimiento/cc-clientes/cc-clientes.component";
 import { ShowDiarioComponent } from "../../view/contabilidad/centro-costo/consulta/show-diario/show-diario.component";
-import { QRCodeModule } from "angularx-qrcode";
-import { NgxBarcodeModule } from "ngx-barcode"; 
+import { QRCodeComponent } from "angularx-qrcode";
+// import { NgxBarcodeModule } from "ngx-barcode";
+import { NgxBarcode6Module } from "ngx-barcode6";
 import { BarcodeGeneratorAllModule, DataMatrixGeneratorAllModule, QRCodeGeneratorAllModule } from "@syncfusion/ej2-angular-barcode-generator";
 import { ShowBoxComponent } from "../../view/caja-banco/caja-chica/creacion/show-box/show-box.component";
 import { ShowActivosComponent } from "../../view/contabilidad/activo-fijo/adquisiciones/show-activos/show-activos.component";
@@ -175,7 +177,8 @@ import { TreeTableModule } from 'primeng/treetable';
         ReactiveFormsModule,
         NgSelectModule,
         FileUploadModule,
-        ChartsModule,
+        // ChartsModule,
+        BaseChartDirective,
         BsDropdownModule,
         ButtonsModule.forRoot(),
         DataTablesModule,
@@ -186,7 +189,7 @@ import { TreeTableModule } from 'primeng/treetable';
         NgxExtendedPdfViewerModule,
         NgxDocViewerModule,
         DatePickerModule,
-    AppMaterialModule,
+        AppMaterialModule,
         NgxSpinnerModule,
         ToastrModule.forRoot(),
         MultiSelectModule,
@@ -198,15 +201,15 @@ import { TreeTableModule } from 'primeng/treetable';
         /* CommonModalModule, */
         CalendarModule,
         ButtonModule,
-        QRCodeModule,
+        QRCodeComponent,
         SkeletonModule,
-        NgxBarcodeModule,
+        NgxBarcode6Module,
         BarcodeGeneratorAllModule,
         QRCodeGeneratorAllModule,
         DataMatrixGeneratorAllModule,
         ProgressSpinnerModule,
         TreeTableModule,
-        
+
         NgxEditorModule.forRoot({
             locals: {
                 // menu
@@ -280,7 +283,7 @@ import { TreeTableModule } from 'primeng/treetable';
         ShowBoxComponent,
         DiferedCuotasComponent,
         ShowActivosComponent,
-        QRCodeModule,
+        QRCodeComponent,
         LstNotaDebitoComponent,
         PagoLetraComponent,
         ShowCuentasInvComponent,
@@ -288,7 +291,7 @@ import { TreeTableModule } from 'primeng/treetable';
         ReportNotaDebitoComponent,
         ReportNotaDebitoInvComponent,
         ListadoRepComponent,
-        NgxBarcodeModule,
+        NgxBarcode6Module,
         NgxEditorModule,
         VistaClientesComponent,
         IngChqProtestadoComponent,
@@ -326,8 +329,8 @@ import { TreeTableModule } from 'primeng/treetable';
         PaginatorService
     ],
   entryComponents: [
-    MspreguntaComponent, 
-    ImprimirRolComponent, 
+    MspreguntaComponent,
+    ImprimirRolComponent,
     ShowLiquidacionesComponent,
     BusqProveedorComponent,
     GeneraPagoComponent,
@@ -340,8 +343,8 @@ import { TreeTableModule } from 'primeng/treetable';
     ShowActivosComponent,
     LstNotaDebitoComponent,
     PagoLetraComponent,
-    ShowCuentasInvComponent, 
-    ShowNotasDebitoComponent, 
+    ShowCuentasInvComponent,
+    ShowNotasDebitoComponent,
     ReportNotaDebitoComponent,
     ReportNotaDebitoInvComponent,
     ListadoRepComponent,

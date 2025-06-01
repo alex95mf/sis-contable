@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 
 
 @Component({
+standalone: false,
   selector: 'app-cierre-bienes',
   templateUrl: './cierre-bienes.component.html',
   styleUrls: ['./cierre-bienes.component.scss']

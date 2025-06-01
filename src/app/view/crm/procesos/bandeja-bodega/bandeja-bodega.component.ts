@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
+standalone: false,
   selector: 'app-bandeja-bodega',
   templateUrl: './bandeja-bodega.component.html',
   styleUrls: ['./bandeja-bodega.component.scss']

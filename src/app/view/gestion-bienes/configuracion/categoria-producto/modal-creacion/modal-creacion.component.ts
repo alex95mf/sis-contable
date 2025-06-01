@@ -6,6 +6,7 @@ import { CategoriaProductoService } from '../categoria-producto.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 @Component({
+standalone: false,
   selector: 'app-modal-creacion',
   templateUrl: './modal-creacion.component.html',
   styleUrls: ['./modal-creacion.component.scss']

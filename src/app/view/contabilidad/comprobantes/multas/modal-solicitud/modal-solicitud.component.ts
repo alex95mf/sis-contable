@@ -6,6 +6,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { MultasService } from '../multas.service'; 
 
 @Component({
+standalone: false,
   selector: 'app-modal-solicitud',
   templateUrl: './modal-solicitud.component.html',
   styleUrls: ['./modal-solicitud.component.scss']

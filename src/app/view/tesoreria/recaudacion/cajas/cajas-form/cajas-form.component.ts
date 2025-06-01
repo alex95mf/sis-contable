@@ -8,6 +8,7 @@ import { CajasService } from '../cajas.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 @Component({
+standalone: false,
   selector: 'app-cajas-form',
   templateUrl: './cajas-form.component.html',
   styleUrls: ['./cajas-form.component.scss']

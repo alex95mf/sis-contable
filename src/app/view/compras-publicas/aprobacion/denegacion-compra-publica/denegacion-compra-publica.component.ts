@@ -8,6 +8,7 @@ import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cie
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-denegacion-compra-publica',
   templateUrl: './denegacion-compra-publica.component.html',
   styleUrls: ['./denegacion-compra-publica.component.scss']

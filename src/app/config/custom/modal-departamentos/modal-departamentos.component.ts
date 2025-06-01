@@ -5,6 +5,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { ModalDepartamentosService } from './modal-departamentos.service'; 
 
 @Component({
+standalone: false,
   selector: 'app-modal-departamentos',
   templateUrl: './modal-departamentos.component.html',
   styleUrls: ['./modal-departamentos.component.scss']

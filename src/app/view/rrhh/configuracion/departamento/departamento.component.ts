@@ -12,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-departamento',
   templateUrl: './departamento.component.html',
   styleUrls: ['./departamento.component.scss']

@@ -8,6 +8,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-modal-cargaxml',
   templateUrl: './modal-cargaxml.component.html',
   styleUrls: ['./modal-cargaxml.component.scss']

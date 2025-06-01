@@ -16,6 +16,7 @@ import { ReportComprobantesComponent } from './report-comprobantes/report-compro
 import { ConfirmationDialogService } from '../../../../config/custom/confirmation-dialog/confirmation-dialog.service';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-egreso',
   templateUrl: './egreso.component.html',
   styleUrls: ['./egreso.component.scss']

@@ -6,6 +6,7 @@ import { ProductoService } from '../producto.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-modal-reclamos',
   templateUrl: './modal-reclamos.component.html',
   styleUrls: ['./modal-reclamos.component.scss']
@@ -40,37 +41,37 @@ export class ModalReclamosComponent implements OnInit {
   ngOnInit(): void {
     this.vmButtons = [
       {
-        orig: "btnsModalReclamos", 
-        paramAccion: "1", 
-        boton: { icon: "fa fa-floppy-o", texto: "GUARDAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
+        orig: "btnsModalReclamos",
+        paramAccion: "1",
+        boton: { icon: "fa fa-floppy-o", texto: "GUARDAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
         habilitar: this.reclamo.id
       },
       {
-        orig: "btnsModalReclamos", 
-        paramAccion: "1", 
-        boton: { icon: "fa fa-floppy-o", texto: "ACTUALIZAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-primary boton btn-sm", 
+        orig: "btnsModalReclamos",
+        paramAccion: "1",
+        boton: { icon: "fa fa-floppy-o", texto: "ACTUALIZAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-primary boton btn-sm",
         habilitar: !this.reclamo.id
       },
       {
-        orig: "btnsModalReclamos", 
-        paramAccion: "1", 
-        boton: { icon: "fa fa-window-close", texto: "CANCELAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-warning boton btn-sm", 
-        habilitar: false 
+        orig: "btnsModalReclamos",
+        paramAccion: "1",
+        boton: { icon: "fa fa-window-close", texto: "CANCELAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-warning boton btn-sm",
+        habilitar: false
       },
     ]
   }
@@ -86,7 +87,7 @@ export class ModalReclamosComponent implements OnInit {
       case "GUARDAR":
         this.setReclamo();
         break;
-    
+
       default:
         break;
     }

@@ -5,6 +5,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { LiquidacionService } from '../liquidacion.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-valores-cobrar',
   templateUrl: './modal-valores-cobrar.component.html',
   styleUrls: ['./modal-valores-cobrar.component.scss']

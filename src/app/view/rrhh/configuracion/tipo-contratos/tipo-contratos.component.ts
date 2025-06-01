@@ -23,6 +23,7 @@ import moment from "moment";
 
 
 @Component({
+standalone: false,
   selector: "app-tipo-contratos",
   templateUrl: "./tipo-contratos.component.html",
   styleUrls: ["./tipo-contratos.component.scss"],

@@ -11,6 +11,7 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
 import { ProveedoresService } from '../proveedores.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-proveedores',
   templateUrl: './modal-proveedores.component.html',
   styleUrls: ['./modal-proveedores.component.scss']

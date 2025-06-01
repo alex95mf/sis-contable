@@ -14,6 +14,7 @@ import { ClienteComponent } from "./cliente/cliente.component";
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: "app-reports-invoice",
   templateUrl: "./reports-invoice.component.html",
   styleUrls: ["./reports-invoice.component.scss"],

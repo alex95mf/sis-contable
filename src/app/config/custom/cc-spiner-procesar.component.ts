@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
-  standalone: false,
+standalone: false,
   selector: "cc-spiner-procesar",
   template: `<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#607ec9" type="ball-spin-clockwise-fade" [fullScreen]="lfulScren" [name]="lTipo">
   <p style="color: white" >{{ ltexto }}</p>

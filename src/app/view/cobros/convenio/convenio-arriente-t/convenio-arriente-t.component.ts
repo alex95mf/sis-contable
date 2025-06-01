@@ -14,6 +14,7 @@ import { ListRecDocumentosComponent } from './list-rec-documentos/list-rec-docum
 import { environment } from 'src/environments/environment';
 import { ModalCompraTerrenosComponent } from './modal-compra-terrenos/modal-compra-terrenos.component';
 @Component({
+standalone: false,
   selector: 'app-convenio-arriente-t',
   templateUrl: './convenio-arriente-t.component.html',
   styleUrls: ['./convenio-arriente-t.component.scss']

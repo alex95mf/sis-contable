@@ -11,6 +11,7 @@ import { EmisionExpedienteService } from '../emision-expediente.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-nuevoJuicio',
   templateUrl: './modalExpedienteContribuyente.component.html',
   styleUrls: ['./modalExpedienteContribuyente.component.scss']

@@ -4,6 +4,7 @@ import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spine
 import { ValidacionesFactory } from '../../../../../config/custom/utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-vista-archivo',
   templateUrl: './vista-archivo.component.html',
   styleUrls: ['./vista-archivo.component.scss'],

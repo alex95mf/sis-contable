@@ -14,6 +14,7 @@ import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spine
 const Swal = require("sweetalert2");
 
 @Component({
+standalone: false,
   selector: 'app-personal',
   templateUrl: './personal.component.html',
   styleUrls: ['./personal.component.scss']

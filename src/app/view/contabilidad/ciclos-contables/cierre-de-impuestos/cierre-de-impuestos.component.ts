@@ -31,6 +31,7 @@ import { CicloscontablesService } from '../cicloscontables.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-cierre-de-impuestos',
   templateUrl: './cierre-de-impuestos.component.html',
   styleUrls: ['./cierre-de-impuestos.component.scss'],

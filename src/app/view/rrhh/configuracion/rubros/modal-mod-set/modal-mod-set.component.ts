@@ -7,6 +7,7 @@ import { ModalCuentPreComponent } from '../modal-cuent-pre/modal-cuent-pre.compo
 import { RubrosService } from '../rubros.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-mod-set',
   templateUrl: './modal-mod-set.component.html',
   styleUrls: ['./modal-mod-set.component.scss']

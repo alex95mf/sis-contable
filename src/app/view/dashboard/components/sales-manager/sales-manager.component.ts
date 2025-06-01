@@ -12,6 +12,7 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 am4core.useTheme(am4themes_animated);
 
 @Component({
+standalone: false,
   selector: 'app-sales-manager',
   templateUrl: './sales-manager.component.html',
   styleUrls: ['./sales-manager.component.scss']

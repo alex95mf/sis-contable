@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-modal-history',
   templateUrl: './modal-history.component.html',
   styleUrls: ['./modal-history.component.scss']

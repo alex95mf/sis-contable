@@ -10,6 +10,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import { ModalDescuentosComponent } from './modal-descuentos/modal-descuentos.component';
 
 @Component({
+standalone: false,
   selector: 'app-descuentos',
   templateUrl: './descuentos.component.html',
   styleUrls: ['./descuentos.component.scss']

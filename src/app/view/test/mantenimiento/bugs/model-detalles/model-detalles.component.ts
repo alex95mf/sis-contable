@@ -9,6 +9,7 @@ import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contri
 import { CommonVarService } from 'src/app/services/common-var.services';
 
 @Component({
+standalone: false,
   selector: 'app-model-detalles',
   templateUrl: './model-detalles.component.html',
   styleUrls: ['./model-detalles.component.scss']

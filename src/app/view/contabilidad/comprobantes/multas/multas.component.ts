@@ -16,6 +16,7 @@ import { ModalCuentPreComponent } from 'src/app/view/tesoreria/recaudacion/confi
 import { ListBusquedaComponent } from './list-busqueda/list-busqueda.component';
 import { CierreMesService } from '../../ciclos-contables/cierre-de-mes/cierre-mes.service';
 @Component({
+standalone: false,
   selector: 'app-multas',
   templateUrl: './multas.component.html',
   styleUrls: ['./multas.component.scss']

@@ -16,6 +16,7 @@ import { ConfirmInvoiceComponent } from './confirm-invoice/confirm-invoice.compo
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import { ConfirmationDialogService } from '../../../../config/custom/confirmation-dialog/confirmation-dialog.service';
 @Component({
+standalone: false,
   selector: 'app-bodega-despacho',
   templateUrl: './bodega-despacho.component.html',
   styleUrls: ['./bodega-despacho.component.scss']

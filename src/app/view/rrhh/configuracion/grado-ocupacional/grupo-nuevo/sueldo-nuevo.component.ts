@@ -7,6 +7,7 @@ import { GradoOcupacionalService } from '../grado-ocupacional.service';
 import * as myVarGlobals from 'src/app/global';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 @Component({
+standalone: false,
   selector: 'app-sueldo-nuevo',
   templateUrl: './sueldo-nuevo.component.html',
   styleUrls: ['./sueldo-nuevo.component.scss']

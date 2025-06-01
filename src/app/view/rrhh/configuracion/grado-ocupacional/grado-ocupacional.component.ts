@@ -4,6 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SueldoNuevoComponent } from './grupo-nuevo/sueldo-nuevo.component';
 @Component({
+standalone: false,
   selector: 'app-grado-ocupacional',
   templateUrl: './grado-ocupacional.component.html',
   styleUrls: ['./grado-ocupacional.component.scss']

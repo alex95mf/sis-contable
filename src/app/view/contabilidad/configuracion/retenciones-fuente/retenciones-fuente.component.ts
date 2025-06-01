@@ -9,6 +9,7 @@ import * as myVarGlobals from "../../../../global";
 import { FormSaveComponent } from './form-save/form-save.component';
 
 @Component({
+standalone: false,
   selector: 'app-retenciones-fuente',
   templateUrl: './retenciones-fuente.component.html',
   styleUrls: ['./retenciones-fuente.component.scss']

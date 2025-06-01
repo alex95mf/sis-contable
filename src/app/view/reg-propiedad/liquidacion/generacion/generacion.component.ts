@@ -16,6 +16,7 @@ import * as myVarGlobals from 'src/app/global';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-generacion',
   templateUrl: './generacion.component.html',
   styleUrls: ['./generacion.component.scss']

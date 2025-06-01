@@ -6,6 +6,7 @@ import { EmpleadosService } from './empleados.service';
 import { GeneralService } from "src/app/services/general.service";
 
 @Component({
+standalone: false,
   selector: 'app-empleados',
   templateUrl: './empleados.component.html',
   styleUrls: ['./empleados.component.scss']

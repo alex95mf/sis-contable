@@ -16,6 +16,7 @@ import * as moment from 'moment';
 
 
 @Component({
+standalone: false,
   selector: 'app-solares',
   templateUrl: './solares.component.html',
   styleUrls: ['./solares.component.scss']

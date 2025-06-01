@@ -19,6 +19,7 @@ import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exonera
 import { ModalExoneracionesAlComponent } from './modal-exoneraciones-al/modal-exoneraciones-al.component';
 
 @Component({
+standalone: false,
   selector: 'app-liquidacion',
   templateUrl: './liquidacion.component.html',
   styleUrls: ['./liquidacion.component.scss']

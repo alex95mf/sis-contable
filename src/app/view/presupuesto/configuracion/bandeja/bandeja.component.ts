@@ -15,6 +15,7 @@ import {ModalBusquedaReformaComponent} from './modal-busqueda-reforma/modal-busq
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { environment } from 'src/environments/environment';
 @Component({
+standalone: false,
   selector: 'app-bandeja',
   templateUrl: './bandeja.component.html',
   styleUrls: ['./bandeja.component.scss']

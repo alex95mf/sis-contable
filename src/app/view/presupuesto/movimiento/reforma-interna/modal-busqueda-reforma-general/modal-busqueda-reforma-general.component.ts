@@ -12,6 +12,7 @@ import * as moment from 'moment';
 // import { ValidacionesFactory } from '../utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda-reforma',
   templateUrl: './modal-busqueda-reforma.component.html',
   styleUrls: ['./modal-busqueda-reforma.component.scss']
@@ -19,7 +20,7 @@ import * as moment from 'moment';
 export class ModalBusquedaReformaGeneralComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   mensajeSppiner: string = "Cargando...";
- 
+
 
   dataUser: any;
 
@@ -125,7 +126,7 @@ export class ModalBusquedaReformaGeneralComponent implements OnInit {
     if(this.tipoReforma == 'RI'){
       this.filter.estado_notificacion = 'A'
     }else{this.filter.estado_notificacion = undefined}
-    
+
     let data = {
       params: {
         filter: this.filter,

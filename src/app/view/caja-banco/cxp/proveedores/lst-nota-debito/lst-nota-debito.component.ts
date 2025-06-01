@@ -7,6 +7,7 @@ import { ValidacionesFactory } from '../../../../../config/custom/utils/Validaci
 import { ProveedoresService } from '../proveedores.service';
 
 @Component({
+standalone: false,
   selector: 'app-lst-nota-debito',
   templateUrl: './lst-nota-debito.component.html',
   styleUrls: ['./lst-nota-debito.component.scss']

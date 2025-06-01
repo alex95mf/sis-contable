@@ -10,6 +10,7 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
 import jsPDF from 'jspdf';
 
 @Component({
+standalone: false,
   selector: 'app-modal-imprimir',
   templateUrl: './modal-imprimir.component.html',
   styleUrls: ['./modal-imprimir.component.scss']

@@ -11,6 +11,7 @@ import * as myVarGlobals from "../../../../../global";
 import { GarantiaService } from '../garantia.service';
 
 @Component({
+standalone: false,
   selector: 'app-list-vafavor',
   templateUrl: './list-vafavor.component.html',
   styleUrls: ['./list-vafavor.component.scss']
@@ -63,14 +64,14 @@ export class ListVafavorComponent implements OnInit {
       }
     ]
 
-    
+
     this.hoy = new Date();
     this.dia_siguiente = new Date(this.hoy);
     this.dia_siguiente.setDate(this.dia_siguiente.getDate() + 1);
     this.primer_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth() + 1, 0);
 
-    
+
     this.filter = {
       razon_social: undefined,
       num_documento: undefined,
@@ -85,7 +86,7 @@ export class ListVafavorComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
       this.cargarDocumentos();
     }, 0);

@@ -11,6 +11,7 @@ import { CommonService } from "../../../../../services/commonServices";
 import { CommonVarService } from "../../../../../services/common-var.services";
 import { MovContableService } from "../mov-contable.service";
 @Component({
+standalone: false,
 	selector: 'app-view-asiento-diario',
 	templateUrl: './view-asiento-diario.component.html',
 	styleUrls: ['./view-asiento-diario.component.scss']

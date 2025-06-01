@@ -22,6 +22,7 @@ declare const $: any;
 
 
 @Component({
+standalone: false,
   selector: 'app-asigncion',
   templateUrl: './asigncion.component.html',
   styleUrls: ['./asigncion.component.scss']

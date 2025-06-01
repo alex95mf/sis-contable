@@ -19,6 +19,7 @@ import { MovimientosBancariosComponent } from './movimientos-bancarios/movimient
 import { environment } from 'src/environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-activos-financieros',
   templateUrl: './activos-financieros.component.html',
   styleUrls: ['./activos-financieros.component.scss']

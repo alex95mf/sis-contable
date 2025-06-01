@@ -15,6 +15,7 @@ import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.
 
 
 @Component({
+standalone: false,
   selector: 'app-producto',
   templateUrl: './producto.component.html',
   styleUrls: ['./producto.component.scss']

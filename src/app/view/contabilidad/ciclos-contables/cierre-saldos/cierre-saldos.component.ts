@@ -31,6 +31,7 @@ import { CicloscontablesService } from '../cicloscontables.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-cierre-saldos',
   templateUrl: './cierre-saldos.component.html',
   styleUrls: ['./cierre-saldos.component.scss'],

@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-cheques-post',
   templateUrl: './cheques-post.component.html',
   styleUrls: ['./cheques-post.component.scss']

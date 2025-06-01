@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { NgxPrintDirective } from 'ngx-print';
 
 @Component({
+standalone: false,
   selector: 'app-multas-emitidas',
   templateUrl: './multas-emitidas.component.html',
   styleUrls: ['./multas-emitidas.component.scss']

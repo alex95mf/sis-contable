@@ -11,6 +11,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CanjearRegularizarService } from './canjear-regularizar.service';
 
 @Component({
+standalone: false,
   selector: 'app-canjear-regularizar',
   templateUrl: './canjear-regularizar.component.html',
   styleUrls: ['./canjear-regularizar.component.scss']

@@ -12,6 +12,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 import * as myVarGlobals from "../../../../global";
 declare const $: any;
 @Component({
+standalone: false,
 	selector: 'app-consulta-caja',
 	templateUrl: './consulta.component.html',
 	styleUrls: ['./consulta.component.scss']

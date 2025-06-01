@@ -14,6 +14,7 @@ import { AnexoListService } from './anexo-list.service';
 import { ModalAnexoComponent } from '../tramite/modal-anexo/modal-anexo.component';
 
 @Component({
+standalone: false,
   selector: 'app-anexos-list-dis',
   templateUrl: './anexos-list-dis.component.html',
   styleUrls: ['./anexos-list.component.scss']

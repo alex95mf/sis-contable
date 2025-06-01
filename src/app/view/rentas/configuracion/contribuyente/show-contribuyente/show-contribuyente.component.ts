@@ -13,6 +13,7 @@ import * as moment from "moment";
 import { CcSpinerProcesarComponent } from "../../../../../config/custom/cc-spiner-procesar.component";
 
 @Component({
+standalone: false,
   selector: "app-show-contribuyente",
   templateUrl: "./show-contribuyente.component.html",
   styleUrls: ["./show-contribuyente.component.scss"],

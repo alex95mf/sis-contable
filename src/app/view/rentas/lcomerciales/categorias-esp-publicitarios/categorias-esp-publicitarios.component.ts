@@ -10,6 +10,7 @@ import { FormCategoriasEspacioPublicitarioComponent } from './form-categorias-es
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 @Component({
+standalone: false,
   selector: 'app-categorias-esp-publicitarios',
   templateUrl: './categorias-esp-publicitarios.component.html',
   styleUrls: ['./categorias-esp-publicitarios.component.scss']

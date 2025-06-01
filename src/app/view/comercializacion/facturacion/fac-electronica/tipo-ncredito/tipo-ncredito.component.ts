@@ -12,6 +12,7 @@ import { MasDetalleComponent } from '../mas-detalle/mas-detalle.component';
 import { VistaClientesComponent } from '../vista-clientes/vista-clientes.component';
 
 @Component({
+standalone: false,
   selector: 'app-tipo-ncredito',
   templateUrl: './tipo-ncredito.component.html',
   styleUrls: ['./tipo-ncredito.component.scss']

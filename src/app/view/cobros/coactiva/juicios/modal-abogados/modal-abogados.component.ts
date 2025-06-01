@@ -8,6 +8,7 @@ import { ModalNuevoAbogadoComponent } from  '../modal-nuevoAbogado/modal-nuevoAb
 import { JuiciosService } from '../juicios.service';
 import { BehaviorSubject } from "rxjs";
 @Component({
+standalone: false,
   selector: 'app-modal-abogados',
   templateUrl: './modal-abogados.component.html',
   styleUrls: ['./modal-abogados.component.scss']

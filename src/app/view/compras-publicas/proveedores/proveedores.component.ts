@@ -15,6 +15,7 @@ declare const $: any;
 import { DropDownTreeComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { ModalProveedoresComponent } from './modal-proveedores/modal-proveedores.component';
 @Component({
+standalone: false,
   selector: 'app-proveedores',
   templateUrl: './proveedores.component.html',
   styleUrls: ['./proveedores.component.scss']

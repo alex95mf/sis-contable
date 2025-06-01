@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
+standalone: false,
   selector: 'app-categoria-producto',
   templateUrl: './categoria-producto.component.html',
   styleUrls: ['./categoria-producto.component.scss']

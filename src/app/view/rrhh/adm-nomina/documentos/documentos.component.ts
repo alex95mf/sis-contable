@@ -18,6 +18,7 @@ import { VistaArchivoComponent } from "../../../contabilidad/centro-costo/cc-man
 import { ToastrService } from "ngx-toastr";
 declare const $: any;
 @Component({
+standalone: false,
   selector: "app-documentos",
   templateUrl: "./documentos.component.html",
   styleUrls: ["./documentos.component.scss"],

@@ -6,6 +6,7 @@ import { CargoService } from '../cargo.service';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-modal-departamente',
   templateUrl: './modal-departamente.component.html',
   styleUrls: ['./modal-departamente.component.scss']

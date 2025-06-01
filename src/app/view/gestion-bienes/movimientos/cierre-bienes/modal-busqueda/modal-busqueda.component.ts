@@ -8,6 +8,7 @@ import { CierreBienesService } from '../cierre-bienes.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda',
   templateUrl: './modal-busqueda.component.html',
   styleUrls: ['./modal-busqueda.component.scss']

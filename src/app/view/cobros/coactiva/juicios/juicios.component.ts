@@ -23,6 +23,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-juicios',
   templateUrl: './juicios.component.html',
   styleUrls: ['./juicios.component.scss']

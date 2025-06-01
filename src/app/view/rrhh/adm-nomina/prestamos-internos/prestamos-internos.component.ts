@@ -28,6 +28,7 @@ import { CcModalTableEmpleadoComponent } from "src/app/config/custom/modal-compo
 
 
 @Component({
+standalone: false,
   selector: 'app-prestamos-internos',
   templateUrl: './prestamos-internos.component.html',
   styleUrls: ['./prestamos-internos.component.scss'],

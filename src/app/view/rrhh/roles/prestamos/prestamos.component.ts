@@ -19,6 +19,7 @@ import { ImprimirPrestamoComponent } from "./imprimir/imprimir.component";
 declare const $: any;
 
 @Component({
+standalone: false,
 	selector: "app-prestamos",
 	templateUrl: "./prestamos.component.html",
 	styleUrls: ["./prestamos.component.scss"],

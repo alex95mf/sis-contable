@@ -15,6 +15,7 @@ import * as moment from 'moment';
 import { EstadoCuentaProveedorService } from './estado-cuenta-proveedor.service';
 
 @Component({
+standalone: false,
   selector: 'app-estado-cuenta-proveedor',
   templateUrl: './estado-cuenta-proveedor.component.html',
   styleUrls: ['./estado-cuenta-proveedor.component.scss'],

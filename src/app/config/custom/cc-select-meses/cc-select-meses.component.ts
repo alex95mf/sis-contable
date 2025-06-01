@@ -3,6 +3,7 @@ import * as moment from 'moment'
 import * as internal from 'stream';
 
 @Component({
+standalone: false,
   selector: 'app-cc-select-meses',
   templateUrl: './cc-select-meses.component.html',
   styleUrls: ['./cc-select-meses.component.scss']

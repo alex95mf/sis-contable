@@ -14,6 +14,7 @@ import { Socket } from '../../../../services/socket.service';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-customers-consult',
   templateUrl: './customers-consult.component.html',
   styleUrls: ['./customers-consult.component.scss']

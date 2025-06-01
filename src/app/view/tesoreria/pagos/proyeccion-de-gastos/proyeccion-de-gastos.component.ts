@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { element } from 'angular';
 @Component({
+standalone: false,
   selector: 'app-proyeccion-de-gastos',
   templateUrl: './proyeccion-de-gastos.component.html',
   styleUrls: ['./proyeccion-de-gastos.component.scss']

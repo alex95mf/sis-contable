@@ -13,6 +13,7 @@ import { FormularioConceptosService } from './formulario-conceptos.service';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
+standalone: false,
   selector: 'app-formulario-conceptos',
   templateUrl: './formulario-conceptos.component.html',
   styleUrls: ['./formulario-conceptos.component.scss']

@@ -59,7 +59,7 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeflex/primeflex.css"
-            
+
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.min.js",
@@ -80,7 +80,7 @@
               "dragula",
               "hammerjs",
               "clone-deep",
-              "ngx-barcode",
+              "ngx-barcode6",
               "core-js/modules/es.array.concat",
               "core-js/modules/es.array.every",
               "core-js/modules/es.array.fill",

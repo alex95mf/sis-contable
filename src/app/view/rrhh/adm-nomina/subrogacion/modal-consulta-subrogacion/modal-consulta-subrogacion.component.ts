@@ -11,6 +11,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-modal-consulta-subrogacion',
   templateUrl: './modal-consulta-subrogacion.component.html',
   styleUrls: ['./modal-consulta-subrogacion.component.scss']
@@ -102,7 +103,7 @@ export class ModalConsultaSubrogacionComponent implements OnInit {
     params: {
       filter: this.filter,
       paginate: this.paginate,
-      
+
     }
   }
   console.log(data)
@@ -154,6 +155,6 @@ export class ModalConsultaSubrogacionComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
-  
+
 
 }

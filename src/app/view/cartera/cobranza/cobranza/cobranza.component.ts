@@ -17,6 +17,7 @@ import 'sweetalert2/src/sweetalert2.scss';
 import { CuentaClienteComponent } from './cuenta-cliente/cuenta-cliente.component'
 
 @Component({
+standalone: false,
   selector: 'app-cobranza',
   templateUrl: './cobranza.component.html',
   styleUrls: ['./cobranza.component.scss']

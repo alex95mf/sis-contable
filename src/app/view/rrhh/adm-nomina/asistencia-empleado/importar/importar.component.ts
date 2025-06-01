@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-importar',
   templateUrl: './importar.component.html',
   styleUrls: ['./importar.component.scss']

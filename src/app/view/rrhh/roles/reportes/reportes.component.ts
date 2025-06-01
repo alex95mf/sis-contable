@@ -9,6 +9,7 @@ import { Table } from 'primeng/table';
 import { LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
 
 @Component({
+standalone: false,
   selector: 'app-reportes',
   templateUrl: './reportes.component.html',
   styleUrls: ['./reportes.component.scss']

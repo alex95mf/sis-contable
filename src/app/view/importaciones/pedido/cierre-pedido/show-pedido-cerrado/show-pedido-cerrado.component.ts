@@ -12,6 +12,7 @@ import { Socket } from '../../../../../services/socket.service';
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-show-pedido-cerrado',
   templateUrl: './show-pedido-cerrado.component.html',
   styleUrls: ['./show-pedido-cerrado.component.scss']

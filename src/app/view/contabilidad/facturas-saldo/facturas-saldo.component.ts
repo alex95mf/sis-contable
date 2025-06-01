@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
 
 @Component({
+standalone: false,
   selector: 'app-facturas-saldo',
   templateUrl: './facturas-saldo.component.html',
   styleUrls: ['./facturas-saldo.component.scss']

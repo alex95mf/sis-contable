@@ -9,6 +9,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-nuevo',
   templateUrl: './modal-nuevo.component.html',
   styleUrls: ['./modal-nuevo.component.scss']

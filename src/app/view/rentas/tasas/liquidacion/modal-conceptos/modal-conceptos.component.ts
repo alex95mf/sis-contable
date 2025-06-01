@@ -7,6 +7,7 @@ import { CommonVarService } from '../../../../../services/common-var.services'
 import { LiquidacionService } from '../liquidacion.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-conceptos',
   templateUrl: './modal-conceptos.component.html',
   styleUrls: ['./modal-conceptos.component.scss']

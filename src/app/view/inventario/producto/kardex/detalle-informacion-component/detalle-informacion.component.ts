@@ -9,6 +9,7 @@ import "sweetalert2/src/sweetalert2.scss";
 const Swal = require("sweetalert2");
 
 @Component({
+standalone: false,
   selector: 'app-detalle-informacion-component',
   templateUrl: './detalle-informacion.component.html',
   styleUrls: ['./detalle-informacion.component.scss']

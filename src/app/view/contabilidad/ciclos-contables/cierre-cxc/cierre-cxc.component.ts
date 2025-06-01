@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
 
 @Component({
+standalone: false,
   selector: 'app-cierre-cxc',
   templateUrl: './cierre-cxc.component.html',
   styleUrls: ['./cierre-cxc.component.scss']

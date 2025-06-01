@@ -9,6 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-form-categorias-espacio-publicitario',
   templateUrl: './form-categorias-espacio-publicitario.component.html',
   styleUrls: ['./form-categorias-espacio-publicitario.component.scss']

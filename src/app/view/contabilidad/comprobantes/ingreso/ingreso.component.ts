@@ -16,6 +16,7 @@ import { ConfirmationDialogService } from '../../../../config/custom/confirmatio
 import { ReportComprobantesComponent } from './report-comprobantes/report-comprobantes.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-ingreso-comprobantes',
   templateUrl: './ingreso.component.html',
   styleUrls: ['./ingreso.component.scss']

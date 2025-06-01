@@ -12,6 +12,7 @@ import Swal from 'sweetalert2/dist/sweetalert2';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal-actuaciones',
   templateUrl: './modal-actuaciones.component.html',
   styleUrls: ['./modal-actuaciones.component.scss']
@@ -45,7 +46,7 @@ export class ModalActuacionesComponent implements OnInit {
     { id: 'PA', value: 'PERITO AVALUADOR' },
     { id: 'PO', value: 'POSTURA' },
     { id: 'APL', value: 'ADJUDICACIÓN Y PERITO LIQUIDADOR' }, */
- 
+
     // { id: 'ESC', value: 'ESCRITO' },
     // { id: 'SRA', value: 'SENTAR RAZON' },
     // { id: 'RAZ', value: 'RAZON' },
@@ -169,7 +170,7 @@ export class ModalActuacionesComponent implements OnInit {
     if (this.estadoSelected == 0) msgInvalid += '* No se ha seleccionado un Estado<br>';
     if (this.tipoSelected == 0 || this.tipoSelected == null) msgInvalid += '* No se ha seleccionado un Tipo<br>';
     if (!this.observacion.trim().length) msgInvalid += '* No se ha ingresado una observacion<br>';
-    
+
 
     if (msgInvalid.length > 0) {
       this.toastr.warning(msgInvalid, 'Validacion de Datos', {enableHtml: true})
@@ -184,11 +185,11 @@ export class ModalActuacionesComponent implements OnInit {
         valor: (this.estadoSelected.isconstant >= 5 && this.estadoSelected.isconstant < 10) ? this.valor_estado : null,
         fecha_actuacion: this.fecha_actuacion,
       }
-  
+
       Object.assign(this.juicio, { valor: this.valor })
       this.msgSpinner = 'Almancenando Actuacion'
       this.lcargando.ctlSpinner(true)
-  
+
       console.log(data)
 
       const response = await this.apiService.almacenaActuacion({ juicio: this.juicio, actuacion: data }).toPromise<any>()
@@ -221,11 +222,11 @@ export class ModalActuacionesComponent implements OnInit {
         if (this.estadoSelected == 0) {
           response += '* No se ha seleccionado un Estado<br>';
         }
-  
+
         if (this.tipoSelected == 0 || this.tipoSelected == null) {
           response += '* No se ha seleccionado un Tipo<br>'
         }
-  
+
         if (!this.observacion.trim().length) {
           response += '* No se ha ingresado una observacion<br>'
         }

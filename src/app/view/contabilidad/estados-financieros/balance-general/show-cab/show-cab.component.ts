@@ -15,6 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShowDetComponent } from '../show-det/show-det.component'
 
 @Component({
+standalone: false,
   selector: 'app-show-cab',
   templateUrl: './show-cab.component.html',
   styleUrls: ['./show-cab.component.scss']

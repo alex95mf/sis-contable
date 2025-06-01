@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'pagination'
+  name: 'pagination',
+  standalone: false
 })
 export class PaginationPipe implements PipeTransform {
     transform(data, args?) : Array<any> {
@@ -11,7 +12,7 @@ export class PaginationPipe implements PipeTransform {
                 pageSize: 6,
                 length: data.length
             }
-        }    
+        }
         return this.paginate(data, args.pageSize, args.pageIndex);
    }
 

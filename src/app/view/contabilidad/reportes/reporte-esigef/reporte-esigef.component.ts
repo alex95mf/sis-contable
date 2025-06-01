@@ -6,6 +6,7 @@ import * as moment from 'moment'
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component'; 
 import { CustomersConsultModule } from 'src/app/view/cartera/customers/customers-consult/customers-consult.module';
 @Component({
+standalone: false,
   selector: 'app-reporte-esigef',
   templateUrl: './reporte-esigef.component.html',
   styleUrls: ['./reporte-esigef.component.scss']

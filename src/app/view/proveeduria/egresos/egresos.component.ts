@@ -12,6 +12,7 @@ import { CcSpinerProcesarComponent } from '../../../config/custom/cc-spiner-proc
 import { ValidacionesFactory } from '../../../config/custom/utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-egresos',
   templateUrl: './egresos.component.html',
   styleUrls: ['./egresos.component.scss']

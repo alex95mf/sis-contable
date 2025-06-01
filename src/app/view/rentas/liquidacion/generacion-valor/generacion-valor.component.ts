@@ -19,6 +19,7 @@ import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
+standalone: false,
   selector: 'app-generacion-valor',
   templateUrl: './generacion-valor.component.html',
   styleUrls: ['./generacion-valor.component.scss']

@@ -15,6 +15,7 @@ import "sweetalert2/src/sweetalert2.scss";
 import * as moment from "moment";
 declare const $: any;
 @Component({
+standalone: false,
   selector: "app-carga-familiar",
   templateUrl: "./carga-familiar.component.html",
   styleUrls: ["./carga-familiar.component.scss"],

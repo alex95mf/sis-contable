@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-atribucion-det',
   templateUrl: './atribucion-det.component.html',
   styleUrls: ['./atribucion-det.component.scss']

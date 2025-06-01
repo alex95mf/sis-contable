@@ -16,6 +16,7 @@ import { ShowInvoicesComponent } from './show-invoices/show-invoices.component';
 import { CcSpinerProcesarComponent } from '../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-compras',
   templateUrl: './compras.component.html',
   styleUrls: ['./compras.component.scss']

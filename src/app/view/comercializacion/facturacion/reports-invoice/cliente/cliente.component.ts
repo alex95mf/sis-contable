@@ -13,6 +13,7 @@ import 'sweetalert2/src/sweetalert2.scss';
 const Swal = require('sweetalert2');
 
 @Component({
+standalone: false,
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
   styleUrls: ['./cliente.component.scss']

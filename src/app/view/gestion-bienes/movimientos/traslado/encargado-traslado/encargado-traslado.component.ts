@@ -5,6 +5,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { EncargadoTrasladoService } from './encargado-traslado.service';
 
 @Component({
+standalone: false,
   selector: 'app-encargado-traslado',
   templateUrl: './encargado-traslado.component.html',
   styleUrls: ['./encargado-traslado.component.scss']

@@ -14,6 +14,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-estado-resultado',
   templateUrl: './estado-resultado.component.html',
   styleUrls: ['./estado-resultado.component.scss']

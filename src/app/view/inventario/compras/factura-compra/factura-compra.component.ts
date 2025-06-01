@@ -17,6 +17,7 @@ import { GlobalTableComponent } from '../../../commons/modals/global-table/globa
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-factura-compra',
   templateUrl: './factura-compra.component.html',
   styleUrls: ['./factura-compra.component.scss']

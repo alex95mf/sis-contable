@@ -20,6 +20,7 @@ import { ModalArriendosComponent } from './modal-arriendos/modal-arriendos.compo
 
 
 @Component({
+standalone: false,
   selector: 'app-generacion-compra-terreno',
   templateUrl: './generacion-compra-terreno.component.html',
   styleUrls: ['./generacion-compra-terreno.component.scss']

@@ -9,6 +9,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { AbogadosService } from '../abogados.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-edicion',
   templateUrl: './modal-edicion.component.html',
   styleUrls: ['./modal-edicion.component.scss']

@@ -12,6 +12,7 @@ import * as myVarGlobals from "../../../../global";
 
 import { EmisionService } from '../../../tesoreria/pagos/emision/emision.service';
 @Component({
+standalone: false,
   selector: 'app-configuracion-contable',
   templateUrl: './configuracion-contable.component.html',
   styleUrls: ['./configuracion-contable.component.scss']

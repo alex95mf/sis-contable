@@ -13,6 +13,7 @@ interface CuentaContable {
 }
 
 @Component({
+standalone: false,
   selector: 'app-modal-cuentas-por-pagar',
   templateUrl: './modal-cuentas-por-pagar.component.html',
   styleUrls: ['./modal-cuentas-por-pagar.component.scss']

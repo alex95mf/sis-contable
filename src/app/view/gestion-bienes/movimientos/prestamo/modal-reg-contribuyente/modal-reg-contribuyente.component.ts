@@ -10,6 +10,7 @@ import { PrestamoService } from '../prestamo.service';
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-modal-reg-contribuyente',
   templateUrl: './modal-reg-contribuyente.component.html',
   styleUrls: ['./modal-reg-contribuyente.component.scss']

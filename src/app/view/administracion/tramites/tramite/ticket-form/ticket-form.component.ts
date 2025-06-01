@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import * as myVarGlobals from 'src/app/global';
 import { Socket } from '../../../../../services/socket.service';
 @Component({
+standalone: false,
   selector: 'app-ticket-form',
   templateUrl: './ticket-form.component.html',
   styleUrls: ['./ticket-form.component.scss']

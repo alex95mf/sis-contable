@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
   name: "filterByOrigin",
+  standalone: false
 })
 export class FilterByOriginPipe implements PipeTransform {
   transform(listado: any[], filtro: string): any[] {

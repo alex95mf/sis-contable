@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-reposicion',
   templateUrl: './reposicion.component.html',
   styleUrls: ['./reposicion.component.scss']

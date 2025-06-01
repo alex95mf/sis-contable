@@ -5,6 +5,7 @@ import { EstadoCuentaService } from '../estado-cuenta.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-concepto-det',
   templateUrl: './concepto-det.component.html',
   styleUrls: ['./concepto-det.component.scss']

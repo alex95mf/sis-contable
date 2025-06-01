@@ -13,6 +13,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ModalAbogadosComponent } from '../modal-abogados/modal-abogados.component';
 
 @Component({
+standalone: false,
   selector: 'app-modal-nuevoAbogado',
   templateUrl: './modal-nuevoAbogado.component.html',
   styleUrls: ['./modal-nuevoAbogado.component.scss']

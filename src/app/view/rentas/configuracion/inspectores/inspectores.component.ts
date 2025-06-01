@@ -20,6 +20,7 @@ interface Inspector {
 }
 
 @Component({
+standalone: false,
   selector: 'app-inspectores',
   templateUrl: './inspectores.component.html',
   styleUrls: ['./inspectores.component.scss']

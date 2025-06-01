@@ -9,6 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-modal-contribuyentes',
   templateUrl: './modal-contribuyentes.component.html',
   styleUrls: ['./modal-contribuyentes.component.scss'],

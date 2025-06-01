@@ -12,6 +12,7 @@ import { ValidacionesFactory } from '../../../../config/custom/utils/Validacione
 const Swal = require('sweetalert2');
 
 @Component({
+standalone: false,
   selector: 'app-grupo',
   templateUrl: './grupo.component.html',
   styleUrls: ['./grupo.component.scss']

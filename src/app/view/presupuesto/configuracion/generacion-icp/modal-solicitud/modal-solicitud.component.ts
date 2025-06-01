@@ -8,6 +8,7 @@ import { GeneracionIcpService } from '../generacion-icp.service';
 // import { OrdenService } from '../orden.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-solicitud',
   templateUrl: './modal-solicitud.component.html',
   styleUrls: ['./modal-solicitud.component.scss']

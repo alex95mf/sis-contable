@@ -17,6 +17,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-formulario-notificaciones',
   templateUrl: './formulario-notificaciones.component.html',
   styleUrls: ['./formulario-notificaciones.component.scss']

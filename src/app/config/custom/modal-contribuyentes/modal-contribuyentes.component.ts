@@ -12,6 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Paginator } from 'primeng/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-modal-contribuyentes',
   templateUrl: './modal-contribuyentes.component.html',
   styleUrls: ['./modal-contribuyentes.component.scss']

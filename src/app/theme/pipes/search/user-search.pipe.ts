@@ -1,6 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'UserSearchPipe', pure: false })
+@Pipe({
+  name: 'UserSearchPipe',
+  pure: false,
+  standalone: false
+})
 export class UserSearchPipe implements PipeTransform {
   transform(value, args?): Array<any> {
     let searchText = new RegExp(args, 'ig');

@@ -8,6 +8,7 @@ import { CommonVarService } from '../../../../../services/common-var.services';
 import { CreacionService } from '../../creacion/creacion.service'
 
 @Component({
+standalone: false,
   selector: 'app-show-box',
   templateUrl: './show-box.component.html',
   styleUrls: ['./show-box.component.scss']

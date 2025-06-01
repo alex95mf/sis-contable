@@ -12,6 +12,7 @@ declare const $: any;
 import { Socket } from '../../../../services/socket.service';
 
 @Component({
+standalone: false,
   selector: 'app-usuarios-online',
   templateUrl: './usuarios-online.component.html',
   styleUrls: ['./usuarios-online.component.scss']

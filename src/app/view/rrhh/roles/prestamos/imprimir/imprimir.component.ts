@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ValidacionesFactory } from '../../../../../config/custom/utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-prestamo-imprimir',
   templateUrl: './imprimir.component.html',
   styleUrls: ['./imprimir.component.scss']

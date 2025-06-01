@@ -18,6 +18,7 @@ import { ThemeService } from 'ng2-charts';
 
 
 @Component({
+standalone: false,
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
   styleUrls: ['./cliente.component.scss']

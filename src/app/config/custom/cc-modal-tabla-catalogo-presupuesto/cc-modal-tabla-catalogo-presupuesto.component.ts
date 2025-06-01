@@ -9,6 +9,7 @@ import { CustonService } from '../app-custom.service';
 import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
+standalone: false,
   template: `
     <p-table 
       [value]="catalogo" 

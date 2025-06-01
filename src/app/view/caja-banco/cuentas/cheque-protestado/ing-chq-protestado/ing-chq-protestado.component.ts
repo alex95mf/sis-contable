@@ -10,6 +10,7 @@ import { ConfirmationDialogService } from 'src/app/config/custom/confirmation-di
 import { MspreguntaComponent } from 'src/app/config/custom/mspregunta/mspregunta.component';
 
 @Component({
+standalone: false,
   selector: 'app-ing-chq-protestado',
   templateUrl: './ing-chq-protestado.component.html',
   styleUrls: ['./ing-chq-protestado.component.scss']

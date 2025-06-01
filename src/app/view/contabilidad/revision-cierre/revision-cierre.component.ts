@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-revision-cierre',
   templateUrl: './revision-cierre.component.html',
   styleUrls: ['./revision-cierre.component.scss']

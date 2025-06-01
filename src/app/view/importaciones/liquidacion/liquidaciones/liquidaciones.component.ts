@@ -14,6 +14,7 @@ import { ShowLiquidacionesComponent } from './show-liquidaciones/show-liquidacio
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-liquidaciones',
   templateUrl: './liquidaciones.component.html',
   styleUrls: ['./liquidaciones.component.scss']

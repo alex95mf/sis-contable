@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+standalone: false,
   selector: 'app-compras',
   templateUrl: './compras.component.html',
   styleUrls: ['./compras.component.scss']

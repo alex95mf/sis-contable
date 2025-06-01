@@ -15,6 +15,7 @@ import { CategoriaFormComponent } from './categoria-form/categoria-form.componen
 
 
 @Component({
+standalone: false,
   selector: 'app-ticket',
   templateUrl: './ticket.component.html',
   styleUrls: ['./ticket.component.scss']

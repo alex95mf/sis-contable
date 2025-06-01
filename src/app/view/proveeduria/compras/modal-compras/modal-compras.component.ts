@@ -13,6 +13,7 @@ import Botonera from 'src/app/models/IBotonera';
 ;
 
 @Component({
+standalone: false,
   selector: 'app-modal-compras',
   templateUrl: './modal-compras.component.html',
   styleUrls: ['./modal-compras.component.scss']

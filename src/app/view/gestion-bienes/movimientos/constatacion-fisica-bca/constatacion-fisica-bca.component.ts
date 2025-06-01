@@ -17,6 +17,7 @@ import { ModalBusquedaConstatacionComponent } from './modal-busqueda-constatacio
 import { CommonVarService } from 'src/app/services/common-var.services';
 
 @Component({
+standalone: false,
   selector: 'app-constatacion-fisica-bca',
   templateUrl: './constatacion-fisica-bca.component.html',
   styleUrls: ['./constatacion-fisica-bca.component.scss']

@@ -10,6 +10,7 @@ import * as myVarGlobals from "src/app/config/custom/modal-contribuyentes/modal-
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-modal-contribuyentes',
   templateUrl: './modal-contribuyentes.component.html',
   styleUrls: ['./modal-contribuyentes.component.scss']

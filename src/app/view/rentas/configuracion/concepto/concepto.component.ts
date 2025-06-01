@@ -10,6 +10,7 @@ import { ShowConceptoComponent } from "./show-concepto/show-concepto.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { connectableObservableDescriptor } from "rxjs/internal/observable/ConnectableObservable";
 @Component({
+standalone: false,
   selector: "app-concepto",
   templateUrl: "./concepto.component.html",
   styleUrls: ["./concepto.component.scss"],

@@ -4,9 +4,10 @@ import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 
-import { GeneracionIdpNominaService } from '../generacion-idp-nomina.service'; 
+import { GeneracionIdpNominaService } from '../generacion-idp-nomina.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-ingreso-asignacion',
   templateUrl: './modal-ingreso-asignacion.component.html',
   styleUrls: ['./modal-ingreso-asignacion.component.scss']
@@ -33,7 +34,7 @@ export class ModalIngresoAsignacionComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private commonVrs: CommonVarService,
   ) {
-    
+
   }
 
   ngOnInit(): void {
@@ -104,8 +105,8 @@ export class ModalIngresoAsignacionComponent implements OnInit {
 
   }
 
-  
-  
+
+
   cargarIngresos(flag: boolean = false){
 
     this.mensajeSppiner = "Cargando lista de asignacion ingreso...";
@@ -143,7 +144,7 @@ export class ModalIngresoAsignacionComponent implements OnInit {
       denominacion:"",
       filterControl: ""
      }
-   
+
 
     this.paginate= {
       length: 0,

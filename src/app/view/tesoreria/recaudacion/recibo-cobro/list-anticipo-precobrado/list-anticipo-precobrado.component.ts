@@ -11,6 +11,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-list-anticipo-precobrado',
   templateUrl: './list-anticipo-precobrado.component.html',
   styleUrls: ['./list-anticipo-precobrado.component.scss']

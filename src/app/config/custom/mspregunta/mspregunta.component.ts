@@ -3,6 +3,7 @@ import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ValidacionesFactory } from "../utils/ValidacionesFactory";
 
 @Component({
+standalone: false,
   selector: "app-mspregunta",
   templateUrl: "./mspregunta.component.html",
   styleUrls: ["./mspregunta.component.scss"],

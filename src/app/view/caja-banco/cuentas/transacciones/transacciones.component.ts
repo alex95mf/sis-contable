@@ -14,6 +14,7 @@ import { ConfirmationDialogService } from '../../../../config/custom/confirmatio
 import { ReportesTransComponent } from './reportes-trans/reportes-trans.component';
 
 @Component({
+standalone: false,
   selector: 'app-transacciones',
   templateUrl: './transacciones.component.html',
   styleUrls: ['./transacciones.component.scss']

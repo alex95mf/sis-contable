@@ -3,6 +3,7 @@ import { AppSettings } from '../../../app.settings';
 import { Settings } from '../../../app.settings.model';
 
 @Component({
+standalone: false,
   selector: 'app-flags-menu',
   templateUrl: './flags-menu.component.html',
   styleUrls: ['./flags-menu.component.scss'],

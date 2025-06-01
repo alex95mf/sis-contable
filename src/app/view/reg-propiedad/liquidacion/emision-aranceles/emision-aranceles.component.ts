@@ -20,6 +20,7 @@ import { ModalSupervivenciaComponent } from 'src/app/config/custom/modal-supervi
 import { ModalExonContribuyenteComponent } from './modal-exon-contribuyente/modal-exon-contribuyente.component';
 
 @Component({
+standalone: false,
   selector: 'app-emision-aranceles',
   templateUrl: './emision-aranceles.component.html',
   styleUrls: ['./emision-aranceles.component.scss']

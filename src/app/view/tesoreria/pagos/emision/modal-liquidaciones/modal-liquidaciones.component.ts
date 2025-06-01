@@ -10,6 +10,7 @@ import { EmisionService } from '../emision.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-liquidaciones',
   templateUrl: './modal-liquidaciones.component.html',
   styleUrls: ['./modal-liquidaciones.component.scss']
@@ -26,7 +27,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   @Input() fk_contribuyente: any;
   @Input() cuenta:any;
   @Input() formaPago:any;
-  
+
 
   // @Input() id_concepto: any;
   // @Input() codigo: string;
@@ -98,7 +99,7 @@ export class ModalLiquidacionesComponent implements OnInit {
     //   this.cuenta.name_cuenta=''
     //   this.buscarCuentaContable(this.cuenta.cuenta_contable)
     // }
-  
+
   }
 
 
@@ -114,9 +115,9 @@ export class ModalLiquidacionesComponent implements OnInit {
     let cod ={
       codigos:[codigo]
     }
-    
+
     this.apiSrv.getAccountsByCodigo(cod).subscribe(res2 => {
-        console.log(res2['data'][0].nombre) 
+        console.log(res2['data'][0].nombre)
         this.cuenta.name_cuenta=res2['data'][0].nombre
     })
   }
@@ -144,7 +145,7 @@ export class ModalLiquidacionesComponent implements OnInit {
     this.apiSrv.getLiqByContribuyente(data).subscribe(
       (res) => {
         console.log(this.deudas)
-        
+
         this.paginate.length = res['data']['total'];
         this.liquidacionesDt = res['data']['data'];
 
@@ -166,7 +167,7 @@ export class ModalLiquidacionesComponent implements OnInit {
             }else{
                 Object.assign(e, {
                   aplica:false
-                 
+
                 })
             }
             // if(e.compras[0].hasretencion == 1){
@@ -174,18 +175,18 @@ export class ModalLiquidacionesComponent implements OnInit {
             //     disabled: true,
             //     retencion: 'Sin Retencion'
             //   })
-              
+
             // }else if(e.compras[0].hasretencion == 2){
             //   Object.assign(e, {
             //     disabled: false,
             //     retencion: 'Retención Generada'
             //   })
             // }
-             
+
            })
           }
           )
-              
+
         // else {
         //   this.liquidacionesDt = Object.values(res['data']['data']);
         //   this.liquidacionesDt.map((data) => {
@@ -205,7 +206,7 @@ export class ModalLiquidacionesComponent implements OnInit {
       //             disabled: true,
       //             retencion: 'Sin Retencion'
       //           })
-                
+
       //         }else if(e.compras[0].hasretencion == 2){
       //           Object.assign(e, {
       //             aplica:true,
@@ -222,7 +223,7 @@ export class ModalLiquidacionesComponent implements OnInit {
       //         disabled: true,
       //         retencion: 'Sin Retencion'
       //       })
-            
+
       //     }else if(e.compras[0].hasretencion == 2){
       //       Object.assign(e, {
       //         aplica:false,
@@ -276,9 +277,9 @@ export class ModalLiquidacionesComponent implements OnInit {
       this.deudas.push(dt);
       this.totalCobro += +dt.cobro;
       this.cargarLiquidaciones()
-      
+
       this.commonVrs.selectPago.next({dato: dt, val: ''});
-    } 
+    }
     else{
       Object.assign(dt, {
         documento: dt.documento,
@@ -307,12 +308,12 @@ export class ModalLiquidacionesComponent implements OnInit {
           // this.totalCobro = 0;
           this.commonVrs.selectPago.next({dato: dt, val: 'val'});
           this.cargarLiquidaciones()
-         
+
         }
       })
     }
     console.log(dt)
-    
+
   }
 
   limpiarFiltros() {

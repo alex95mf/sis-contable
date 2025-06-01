@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonService } from '../../../../../services/commonServices'
 
 @Component({
+standalone: false,
   selector: 'app-imprimir-componente-global',
   templateUrl: './imprimir-com-elect.component.html',
   styleUrls: ['./imprimir-com-elect.component.scss']

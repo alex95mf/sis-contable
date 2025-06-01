@@ -24,6 +24,7 @@ import { ModalCuentasContablesComponent } from './modal-cuentas-contables/modal-
 
 
 @Component({
+standalone: false,
   selector: 'app-asiento-cierre',
   templateUrl: './asiento-cierre.component.html',
   styleUrls: ['./asiento-cierre.component.scss']

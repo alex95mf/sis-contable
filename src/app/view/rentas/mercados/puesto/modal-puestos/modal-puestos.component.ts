@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
+standalone: false,
   selector: 'app-modal-puestos',
   templateUrl: './modal-puestos.component.html',
   styleUrls: ['./modal-puestos.component.scss']

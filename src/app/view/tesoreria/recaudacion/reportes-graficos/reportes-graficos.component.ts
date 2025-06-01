@@ -17,6 +17,7 @@ import { VistaArchivoComponent } from 'src/app/view/contabilidad/centro-costo/cc
 import { Chart } from 'chart.js';
 
 @Component({
+standalone: false,
   selector: 'app-reportes-graficos',
   templateUrl: './reportes-graficos.component.html',
   styleUrls: ['./reportes-graficos.component.scss']

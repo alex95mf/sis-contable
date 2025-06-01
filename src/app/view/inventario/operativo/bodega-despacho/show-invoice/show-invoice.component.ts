@@ -7,6 +7,7 @@ import * as myVarGlobals from '../../../../../global';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogRef } from '@angular/material/dialog';
 @Component({
+standalone: false,
   selector: 'app-show-invoice',
   templateUrl: './show-invoice.component.html',
   styleUrls: ['./show-invoice.component.scss']

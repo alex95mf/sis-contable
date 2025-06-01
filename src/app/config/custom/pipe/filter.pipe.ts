@@ -8,6 +8,7 @@ export interface FilterParam {
 @Pipe({
   name: 'filter',
   pure: true,
+  standalone: false,
 })
 export class FilterPipe implements PipeTransform {
   transform(values: any[], filter: FilterParam[] | string | number): any {
@@ -16,7 +17,7 @@ export class FilterPipe implements PipeTransform {
     } else {
       return this._checkSimpleType(values, filter);
     }
-  }  
+  }
 
   /**
    * Handle simple filters (not arrays)

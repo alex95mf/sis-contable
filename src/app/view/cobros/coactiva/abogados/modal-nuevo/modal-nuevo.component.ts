@@ -7,6 +7,7 @@ import { JuiciosService } from '../../juicios/juicios.service';
 import { CommonVarService } from 'src/app/services/common-var.services';
 
 @Component({
+standalone: false,
   selector: 'app-modal-nuevo',
   templateUrl: './modal-nuevo.component.html',
   styleUrls: ['./modal-nuevo.component.scss']

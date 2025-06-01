@@ -5,6 +5,7 @@ import { CommonVarService } from '../../../../../../services/common-var.services
 import { SuppliersService } from '../../suppliers.service'
 
 @Component({
+standalone: false,
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']

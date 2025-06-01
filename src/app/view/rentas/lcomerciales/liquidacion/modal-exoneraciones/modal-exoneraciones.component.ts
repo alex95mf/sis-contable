@@ -5,6 +5,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { LiquidacionService } from '../liquidacion.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-exoneraciones',
   templateUrl: './modal-exoneraciones.component.html',
   styleUrls: ['./modal-exoneraciones.component.scss']

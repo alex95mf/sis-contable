@@ -13,6 +13,7 @@ import { ShowPedidoCerradoComponent } from './show-pedido-cerrado/show-pedido-ce
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-cierre-pedido',
   templateUrl: './cierre-pedido.component.html',
   styleUrls: ['./cierre-pedido.component.scss']

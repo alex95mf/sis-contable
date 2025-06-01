@@ -21,6 +21,7 @@ import { DetalleConciliacionComponent } from './detalle-conciliacion/detalle-con
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-conciliacion',
   templateUrl: './conciliacion.component.html',
   styleUrls: ['./conciliacion.component.scss']

@@ -13,6 +13,7 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
 import * as myVarGlobals from 'src/app/global';
 
 @Component({
+standalone: false,
   selector: 'app-tablas-config',
   templateUrl: './tablas-config.component.html',
   styleUrls: ['./tablas-config.component.scss']

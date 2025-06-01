@@ -18,6 +18,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-infimas',
   templateUrl: './infimas.component.html',
   styleUrls: ['./infimas.component.scss']

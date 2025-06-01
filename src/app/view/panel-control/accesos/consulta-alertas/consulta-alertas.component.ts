@@ -17,6 +17,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 
 
 @Component({
+standalone: false,
   selector: 'app-consulta-alertas',
   templateUrl: './consulta-alertas.component.html',
   styleUrls: ['./consulta-alertas.component.scss'],

@@ -9,6 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 
 
 @Component({
+standalone: false,
   selector: 'app-exoneracion-form',
   templateUrl: './exoneracion-form.component.html',
   styleUrls: ['./exoneracion-form.component.scss']

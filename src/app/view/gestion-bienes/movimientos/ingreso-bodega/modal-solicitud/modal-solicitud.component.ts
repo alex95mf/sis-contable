@@ -7,6 +7,7 @@ import { IngresoBodegaService } from '../ingreso-bodega.service';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal-solicitud',
   templateUrl: './modal-solicitud.component.html',
   styleUrls: ['./modal-solicitud.component.scss']
@@ -147,7 +148,7 @@ export class ModalSolicitudComponent implements OnInit {
 
       }
     )
-    
+
   }
   asignarEstado(evt) {
     this.filter.estado = [evt]
@@ -165,7 +166,7 @@ export class ModalSolicitudComponent implements OnInit {
 
 
   selectOption(data) {
-    
+
     Swal.fire({
       icon: "warning",
       title: "¡Atención!",
@@ -183,11 +184,11 @@ export class ModalSolicitudComponent implements OnInit {
         this.servicioSolicitud.listaSolicitudes$.emit({data:data, tipo: 'COM'})
 
 
-        
+
         this.activeModal.close()
       }
     });
-    
+
   }
   limpiarFiltros() {
     this.filter = {

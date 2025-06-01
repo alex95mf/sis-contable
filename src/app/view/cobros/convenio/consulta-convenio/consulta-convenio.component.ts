@@ -7,6 +7,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { ConsultaConvenioService } from './consulta-convenio.service';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-convenio',
   templateUrl: './consulta-convenio.component.html',
   styleUrls: ['./consulta-convenio.component.scss']

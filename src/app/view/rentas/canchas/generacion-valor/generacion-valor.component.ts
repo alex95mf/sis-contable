@@ -17,6 +17,7 @@ import Botonera from 'src/app/models/IBotonera';
 
 
 @Component({
+standalone: false,
   selector: 'app-generacion-valor',
   templateUrl: './generacion-valor.component.html',
   styleUrls: ['./generacion-valor.component.scss']

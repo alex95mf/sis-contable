@@ -13,6 +13,7 @@ import { CommonVarService } from '../../../../services/common-var.services';
 import { Socket } from '../../../../services/socket.service';
 
 @Component({
+standalone: false,
   selector: 'app-maintenance',
   templateUrl: './maintenance.component.html',
   styleUrls: ['./maintenance.component.scss']

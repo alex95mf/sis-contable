@@ -5,6 +5,7 @@ import { ValidacionesFactory } from '../../../../../config/custom/utils/Validaci
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-busq-proveedor',
   templateUrl: './busq-proveedor.component.html',
   styleUrls: ['./busq-proveedor.component.scss']

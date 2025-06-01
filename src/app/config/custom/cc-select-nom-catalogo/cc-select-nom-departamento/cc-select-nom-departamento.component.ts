@@ -3,6 +3,7 @@ import { DepartamentoResponseI } from "src/app/models/responseDepartamento.inter
 import { GeneralService } from "src/app/services/general.service";
 
 @Component({
+standalone: false,
   selector: "app-cc-select-nom-departamento",
   templateUrl: "./cc-select-nom-departamento.component.html",
   styleUrls: ["./cc-select-nom-departamento.component.scss"],

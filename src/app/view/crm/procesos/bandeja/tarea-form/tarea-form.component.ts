@@ -145,6 +145,7 @@ interface Cotizacion {
 
 
 @Component({
+standalone: false,
   selector: 'app-tarea-form',
   templateUrl: './tarea-form.component.html',
   styleUrls: ['./tarea-form.component.scss']

@@ -14,6 +14,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 const Swal = require('sweetalert2');
 
 @Component({
+standalone: false,
   selector: 'app-show-pagos-servicios',
   templateUrl: './show-pagos-servicios.component.html',
   styleUrls: ['./show-pagos-servicios.component.scss']

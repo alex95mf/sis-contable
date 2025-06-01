@@ -14,6 +14,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-reporte-cxp',
   templateUrl: './reporte-cxp.component.html',
   styleUrls: ['./reporte-cxp.component.scss']

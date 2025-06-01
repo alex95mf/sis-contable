@@ -8,6 +8,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-contrato-rubros',
   templateUrl: './contrato-rubros.component.html',
   styleUrls: ['./contrato-rubros.component.scss']

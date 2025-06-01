@@ -25,6 +25,7 @@ import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
+standalone: false,
   selector: 'app-recibo-cobro',
   templateUrl: './recibo-cobro.component.html',
   styleUrls: ['./recibo-cobro.component.scss']

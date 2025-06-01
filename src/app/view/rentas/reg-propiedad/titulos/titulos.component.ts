@@ -12,6 +12,7 @@ import * as myVarGlobals from 'src/app/global';
 
 
 @Component({
+standalone: false,
   selector: 'app-titulos',
   templateUrl: './titulos.component.html',
   styleUrls: ['./titulos.component.scss']

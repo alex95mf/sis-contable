@@ -11,6 +11,7 @@ import { Socket } from '../../../../../services/socket.service';
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-show-notas-credito',
   templateUrl: './show-notas-credito.component.html',
   styleUrls: ['./show-notas-credito.component.scss']

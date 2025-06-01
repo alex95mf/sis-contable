@@ -14,6 +14,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-anexos',
   templateUrl: './anexos.component.html',
   styleUrls: ['./anexos.component.scss']

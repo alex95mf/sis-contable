@@ -8,6 +8,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import * as myVarGlobals from 'src/app/global';
 
 @Component({
+standalone: false,
   selector: 'app-email-destinatario',
   templateUrl: './email-destinatario.component.html',
   styleUrls: ['./email-destinatario.component.scss']

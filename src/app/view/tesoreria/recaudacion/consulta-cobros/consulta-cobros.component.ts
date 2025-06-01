@@ -17,6 +17,7 @@ import { VistaArchivoComponent } from 'src/app/view/contabilidad/centro-costo/cc
 // import { ModalUsuariosComponent } from 'src/app/config/custom/modal-usuarios/modal-usuarios.component';
 import { ModalUsuariosComponent } from './modal-usuarios/modal-usuarios.component';
 @Component({
+standalone: false,
   selector: 'app-consulta-cobros',
   templateUrl: './consulta-cobros.component.html',
   styleUrls: ['./consulta-cobros.component.scss']

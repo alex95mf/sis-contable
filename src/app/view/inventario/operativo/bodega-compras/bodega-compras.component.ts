@@ -15,6 +15,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 import { ViewFacCompraComponent } from './view-fac-compra/view-fac-compra.component';
 import { ConfirmationDialogService } from '../../../../config/custom/confirmation-dialog/confirmation-dialog.service';
 @Component({
+standalone: false,
   selector: 'app-bodega-compras',
   templateUrl: './bodega-compras.component.html',
   styleUrls: ['./bodega-compras.component.scss']

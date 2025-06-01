@@ -16,6 +16,7 @@ import { ButtonRadioActiveComponent } from 'src/app/config/custom/cc-panel-butto
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-cheque-protestado',
   templateUrl: './cheque-protestado.component.html',
   styleUrls: ['./cheque-protestado.component.scss']

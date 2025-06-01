@@ -4,6 +4,7 @@ import { CustonService } from "../../app-custom.service";
 // import { CargoService } from "src/app/view/rrhh/mantenimiento-empl/cargo/cargo.service";
 
 @Component({
+standalone: false,
   selector: "app-cc-select-nom-cargo-parameter",
   templateUrl: "./cc-select-nom-cargo-parameter.component.html",
   styleUrls: ["./cc-select-nom-cargo-parameter.component.scss"],

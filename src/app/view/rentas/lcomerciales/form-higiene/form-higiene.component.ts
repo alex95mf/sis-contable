@@ -16,6 +16,7 @@ import { ModalVistaFotosComponent } from '../form-planificacion/modal-vista-foto
 
 
 @Component({
+standalone: false,
   selector: 'app-form-higiene',
   templateUrl: './form-higiene.component.html',
   styleUrls: ['./form-higiene.component.scss']

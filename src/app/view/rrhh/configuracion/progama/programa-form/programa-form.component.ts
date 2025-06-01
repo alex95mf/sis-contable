@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { ProgamaService } from '../progama.service';
 
 @Component({
+standalone: false,
   selector: 'app-programa-form',
   templateUrl: './programa-form.component.html',
   styleUrls: ['./programa-form.component.scss']

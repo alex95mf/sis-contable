@@ -7,6 +7,7 @@ import { GeneralService } from 'src/app/services/general.service';
 import { EmpleadoService } from '../empleado.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-tipo-archivo',
   templateUrl: './modal-tipo-archivo.component.html',
   styleUrls: ['./modal-tipo-archivo.component.scss']

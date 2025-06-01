@@ -29,6 +29,7 @@ import {  RetencionGeneradas } from './retenciones_generdas';
 
 
 @Component({
+standalone: false,
   selector: 'app-generacion-de-retencion',
   templateUrl: './generacion-de-retencion.component.html',
   styleUrls: ['./generacion-de-retencion.component.scss'],

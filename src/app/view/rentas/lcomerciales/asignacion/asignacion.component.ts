@@ -10,6 +10,7 @@ import * as variablesGlobales from "../../../../global";
 import { FormInspectorComponent } from './form-inspector/form-inspector.component';
 
 @Component({
+standalone: false,
   selector: 'app-asignacion',
   templateUrl: './asignacion.component.html',
   styleUrls: ['./asignacion.component.scss']

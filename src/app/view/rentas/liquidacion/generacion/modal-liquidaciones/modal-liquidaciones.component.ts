@@ -8,6 +8,7 @@ import { GeneracionService } from '../generacion.service';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal-liquidaciones',
   templateUrl: './modal-liquidaciones.component.html',
   styleUrls: ['./modal-liquidaciones.component.scss']

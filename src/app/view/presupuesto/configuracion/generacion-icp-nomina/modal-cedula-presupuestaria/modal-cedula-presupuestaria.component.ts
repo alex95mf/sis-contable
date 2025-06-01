@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 // import { OrdenService } from '../orden.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-cedula-presupuestaria',
   templateUrl: './modal-cedula-presupuestaria.component.html',
   styleUrls: ['./modal-cedula-presupuestaria.component.scss']

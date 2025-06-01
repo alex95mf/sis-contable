@@ -15,6 +15,7 @@ import { SeguimientoFormComponent } from './seguimiento-form/seguimiento-form.co
 import * as myVarGlobals from 'src/app/global';
 
 @Component({
+standalone: false,
   selector: 'app-bandeja-trabajo',
   templateUrl: './bandeja-trabajo.component.html',
   styleUrls: ['./bandeja-trabajo.component.scss']

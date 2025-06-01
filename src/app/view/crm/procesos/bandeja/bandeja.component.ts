@@ -12,6 +12,7 @@ import * as myVarGlobals from '../../../../global';
 import { TareaFormComponent } from './tarea-form/tarea-form.component';
 
 @Component({
+standalone: false,
   selector: 'app-bandeja',
   templateUrl: './bandeja.component.html',
   styleUrls: ['./bandeja.component.scss']

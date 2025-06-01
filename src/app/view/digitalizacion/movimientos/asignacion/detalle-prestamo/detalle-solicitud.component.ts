@@ -8,6 +8,7 @@ import { AsignacionService } from '../asignacion.service';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 @Component({
+standalone: false,
   selector: 'app-detalle-solicitud',
   templateUrl: './detalle-solicitud.component.html',
   styleUrls: ['./detalle-solicitud.component.scss']

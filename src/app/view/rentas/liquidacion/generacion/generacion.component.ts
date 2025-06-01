@@ -29,6 +29,7 @@ import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cie
 import e from 'cors';
 
 @Component({
+standalone: false,
   selector: 'app-generacion',
   templateUrl: './generacion.component.html',
   styleUrls: ['./generacion.component.scss']

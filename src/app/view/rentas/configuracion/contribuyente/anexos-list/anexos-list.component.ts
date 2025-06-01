@@ -12,6 +12,7 @@ import { VistaArchivoComponent } from 'src/app/view/contabilidad/centro-costo/cc
 import { ContribuyenteService } from '../contribuyente.service';
 
 @Component({
+standalone: false,
   selector: 'app-anexos-list',
   templateUrl: './anexos-list.component.html',
   styleUrls: ['./anexos-list.component.scss']

@@ -7,6 +7,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-modal-reasignacion',
   templateUrl: './modal-reasignacion.component.html',
   styleUrls: ['./modal-reasignacion.component.scss']

@@ -33,6 +33,7 @@ const colors: any = {
 };
 
 @Component({
+standalone: false,
   selector: 'app-gestion',
   templateUrl: './gestion.component.html',
   styleUrls: ['./gestion.component.scss']

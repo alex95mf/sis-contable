@@ -13,6 +13,7 @@ interface CuentaContable {
 }
 
 @Component({
+standalone: false,
   selector: 'app-modal-cuenta-ret-fuente',
   templateUrl: './modal-cuenta-ret-fuente.component.html',
   styleUrls: ['./modal-cuenta-ret-fuente.component.scss']

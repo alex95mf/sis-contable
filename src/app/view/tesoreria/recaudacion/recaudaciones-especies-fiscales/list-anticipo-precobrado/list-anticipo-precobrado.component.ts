@@ -12,6 +12,7 @@ import * as myVarGlobals from "../../../../../global";
 import { RecaudacionesEspeciesFiscalesService } from '../recaudaciones-especies-fiscales.service';
 
 @Component({
+standalone: false,
   selector: 'app-list-anticipo-precobrado',
   templateUrl: './list-anticipo-precobrado.component.html',
   styleUrls: ['./list-anticipo-precobrado.component.scss']

@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 
 import { MspreguntaComponent } from "src/app/config/custom/mspregunta/mspregunta.component";
 @Component({
+standalone: false,
   selector: 'app-modal-mod-set',
   templateUrl: './modal-mod-set.component.html',
   styleUrls: ['./modal-mod-set.component.scss']

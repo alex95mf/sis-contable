@@ -18,6 +18,7 @@ interface CatalogoNom {
 }
 
 @Component({
+standalone: false,
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.scss']

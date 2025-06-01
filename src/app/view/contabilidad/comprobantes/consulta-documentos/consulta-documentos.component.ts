@@ -16,6 +16,7 @@ import { ConsultaDocumentosService } from './consulta-documentos.service';
 import { DetallesGestionGarantiaComponent } from './detalles-gestion-garantia/detalles-gestion-garantia.component';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-documentos',
   templateUrl: './consulta-documentos.component.html',
   styleUrls: ['./consulta-documentos.component.scss']

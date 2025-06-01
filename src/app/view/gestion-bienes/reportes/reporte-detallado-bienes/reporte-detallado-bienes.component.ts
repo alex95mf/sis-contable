@@ -19,6 +19,7 @@ import { Subject } from 'rxjs';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 
 @Component({
+standalone: false,
   selector: 'app-reporte-detallado-bienes',
   templateUrl: './reporte-detallado-bienes.component.html',
   styleUrls: ['./reporte-detallado-bienes.component.scss']

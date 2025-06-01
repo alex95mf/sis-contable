@@ -14,6 +14,7 @@ import { ModalIdpdetallesComponent } from './modal-idpdetalles/modal-idpdetalles
 import { ModalEstadoComponent } from './modal-estado/modal-estado.component';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-idp',
   templateUrl: './consulta-idp.component.html',
   styleUrls: ['./consulta-idp.component.scss']

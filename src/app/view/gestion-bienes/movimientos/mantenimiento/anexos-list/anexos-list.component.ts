@@ -15,6 +15,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
+standalone: false,
   selector: 'app-anexos-list',
   templateUrl: './anexos-list.component.html',
   styleUrls: ['./anexos-list.component.scss']

@@ -11,6 +11,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-list-puestos',
   templateUrl: './list-puestos.component.html',
   styleUrls: ['./list-puestos.component.scss']

@@ -22,6 +22,7 @@ import { CcClientesComponent } from "./cc-clientes/cc-clientes.component";
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-cc-mantenimiento',
   templateUrl: './cc-mantenimiento.component.html',
   styleUrls: ['./cc-mantenimiento.component.scss']

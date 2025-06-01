@@ -7,6 +7,7 @@ import { OrdenService } from '../orden.service';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal-solicitud-cat',
   templateUrl: './modal-solicitud-cat.component.html',
   styleUrls: ['./modal-solicitud-cat.component.scss']
@@ -58,7 +59,7 @@ export class ModalSolicitudCatComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
       razon_social: undefined,
@@ -105,7 +106,7 @@ export class ModalSolicitudCatComponent implements OnInit {
     console.log(data);
   //  this.servicioSolicitud.getSolicitudModalCat(data).subscribe(
     this.servicioSolicitud.getSolicitudModalCatIngreso(data).subscribe(
-    
+
       (res)=>{
          console.log(res);
          this.paginate.length = res['data']['total']
@@ -126,7 +127,7 @@ export class ModalSolicitudCatComponent implements OnInit {
         //         estado: soli.estado,
         //         estado_orden: orden.estado,
         //       }
-        //       this.solicitud.push(data) 
+        //       this.solicitud.push(data)
         //   });
         //  });
         // this.solicitud = res['data']['data']
@@ -140,9 +141,9 @@ export class ModalSolicitudCatComponent implements OnInit {
 
       }
     )
-    
+
   }
-  
+
 
 
   changePaginate(event) {
@@ -156,7 +157,7 @@ export class ModalSolicitudCatComponent implements OnInit {
 
 
   selectOption(data) {
-    
+
     Swal.fire({
       icon: "warning",
       title: "¡Atención!",
@@ -174,7 +175,7 @@ export class ModalSolicitudCatComponent implements OnInit {
         this.activeModal.close()
       }
     });
-    
+
   }
 
   limpiarFiltros() {

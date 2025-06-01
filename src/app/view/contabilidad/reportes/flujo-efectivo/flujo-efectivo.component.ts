@@ -15,6 +15,7 @@ import * as myVarGlobals from 'src/app/global';
 
 
 @Component({
+standalone: false,
   selector: 'app-flujo-efectivo',
   templateUrl: './flujo-efectivo.component.html',
   styleUrls: ['./flujo-efectivo.component.scss']

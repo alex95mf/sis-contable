@@ -14,13 +14,14 @@ import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-modal-facturas',
   templateUrl: './modal-facturas.component.html',
   styleUrls: ['./modal-facturas.component.scss']
 })
 export class ModalFacturasComponent implements OnInit {
 
-  
+
   mensajeSppiner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
@@ -85,14 +86,14 @@ export class ModalFacturasComponent implements OnInit {
       }
     ]
 
-    
+
     this.hoy = new Date();
     this.dia_siguiente = new Date(this.hoy);
     this.dia_siguiente.setDate(this.dia_siguiente.getDate() + 1);
     this.primer_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth() + 1, 0);
 
-    
+
     this.filter
 
     this.paginate = {
@@ -101,7 +102,7 @@ export class ModalFacturasComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
       this.cargarFacturasGeneradas();
     }, 0);
@@ -139,13 +140,13 @@ export class ModalFacturasComponent implements OnInit {
    cargarFacturasGeneradas(){
     this.mensajeSppiner = "Cargando lista de facturas...";
     this.lcargando.ctlSpinner(true);
-    
+
     let data = {
       params: {
         filter: this.filter,
         paginate: this.paginate,
       },
-     
+
     }
 
     this.apiSrv.getFacturasGeneradas(data).subscribe(

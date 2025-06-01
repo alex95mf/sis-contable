@@ -14,6 +14,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-catalogo-electronico',
   templateUrl: './catalogo-electronico.component.html',
   styleUrls: ['./catalogo-electronico.component.scss']

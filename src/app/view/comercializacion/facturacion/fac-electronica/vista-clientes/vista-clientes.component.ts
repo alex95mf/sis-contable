@@ -9,6 +9,7 @@ import { ValidacionesFactory } from '../../../../../config/custom/utils/Validaci
 import { FacElectronicaService } from '../fac-electronica.service';
 
 @Component({
+standalone: false,
   selector: 'app-vista-clientes',
   templateUrl: './vista-clientes.component.html',
   styleUrls: ['./vista-clientes.component.scss']

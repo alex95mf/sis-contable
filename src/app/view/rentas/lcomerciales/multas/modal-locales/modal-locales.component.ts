@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { MultasService } from '../multas.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-locales',
   templateUrl: './modal-locales.component.html',
   styleUrls: ['./modal-locales.component.scss']

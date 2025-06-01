@@ -4,6 +4,7 @@ import { CommonVarService } from '../../../../../services/common-var.services';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-show-supplier',
   templateUrl: './show-supplier.component.html',
   styleUrls: ['./show-supplier.component.scss']

@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-view-masivo',
   templateUrl: './view-masivo.component.html',
   styleUrls: ['./view-masivo.component.scss']
@@ -109,7 +110,7 @@ export class ViewMasivoComponent implements OnInit {
           Nombre: element.emp_full_nombre,
           Anual: element.impuesto_renta?.impuesto_renta_anual ?? 0,
           Mensual: element.impuesto_renta?.impuesto_renta_mensual ?? 0,
-          Acumulado: element.impuesto_renta?.acumulado ?? 0, 
+          Acumulado: element.impuesto_renta?.acumulado ?? 0,
           Pendiente: element.impuesto_renta?.impuesto_renta_anual_x_cobrar ?? 0,
         }
         excelData.push(o)

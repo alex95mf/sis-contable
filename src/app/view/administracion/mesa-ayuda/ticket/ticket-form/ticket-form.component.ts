@@ -11,6 +11,7 @@ import * as myVarGlobals from "../../../../../global";
 import { Socket } from 'src/app/services/socket.service';
 
 @Component({
+standalone: false,
   selector: 'app-ticket-form',
   templateUrl: './ticket-form.component.html',
   styleUrls: ['./ticket-form.component.scss']

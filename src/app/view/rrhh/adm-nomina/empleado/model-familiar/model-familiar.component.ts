@@ -7,6 +7,7 @@ import { EmpleadoService } from '../empleado.service';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-model-familiar',
   templateUrl: './model-familiar.component.html',
   styleUrls: ['./model-familiar.component.scss']
@@ -94,13 +95,13 @@ export class ModelFamiliarComponent implements OnInit {
     setTimeout(() => this.cargaInicial(), 50)
     // console.log(this.isNew)
     console.log(this.cmb_relaciones)
-    
+
     if (this.data) {
-      
+
       this.vmButtons[0].showimg = false;
       this.vmButtons[1].showimg = true;
       this.vmButtons[1].habilitar = false;
-     
+
       console.log(this.data)
       this.familiares['id_empleado'] =this.empleado;
       this.familiares.id_carga =this.data.id_carga;
@@ -115,7 +116,7 @@ export class ModelFamiliarComponent implements OnInit {
       this.familiares.afiliado = this.data.afiliado;
 
     }
-    
+
   }
 
   metodoGlobal(evento: any) {
@@ -177,7 +178,7 @@ export class ModelFamiliarComponent implements OnInit {
       this.lcargando.ctlSpinner(false)
       this.toastr.error(err.error.message, 'Error almacenando Familiar');
     }
-    
+
   }
 
   async modificar(){
@@ -192,13 +193,13 @@ export class ModelFamiliarComponent implements OnInit {
       if (moment().diff(this.familiares.fecha_nacim) < 0) mensaje += '* Ingrese una fecha de nacimiento valida<br>'
       if (this.familiares.discapacidad == null) mensaje += '* Escoga la capacidad<br>'
       if (this.familiares.afiliado == null) mensaje += '* Escoga si esta afiliado<br>'
-  
+
       if (mensaje.length > 0) {
         this.toastr.warning(mensaje, 'Validacion de Datos', { enableHtml: true })
         return;
       }
-      
-  
+
+
       this.lcargando.ctlSpinner(true);
       try {
         this.mensajeSppiner = 'Guardando...'

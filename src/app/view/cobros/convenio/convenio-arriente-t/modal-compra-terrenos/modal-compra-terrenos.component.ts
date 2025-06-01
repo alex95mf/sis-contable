@@ -8,6 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-modal-compra-terrenos',
   templateUrl: './modal-compra-terrenos.component.html',
   styleUrls: ['./modal-compra-terrenos.component.scss']
@@ -57,7 +58,7 @@ export class ModalCompraTerrenosComponent implements OnInit {
       case 'CERRAR':
         this.activeModal.close()
         break;
-    
+
       default:
         break;
     }

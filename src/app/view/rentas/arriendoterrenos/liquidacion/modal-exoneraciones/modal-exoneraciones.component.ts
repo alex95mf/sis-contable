@@ -7,6 +7,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { ArriendoterrenoService } from '../arriendoterreno.service'; 
 
 @Component({
+standalone: false,
   selector: 'app-modal-exoneraciones',
   templateUrl: './modal-exoneraciones.component.html',
   styleUrls: ['./modal-exoneraciones.component.scss']

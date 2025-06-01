@@ -18,6 +18,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-gestion-expediente',
   templateUrl: './gestion-expediente.component.html',
   styleUrls: ['./gestion-expediente.component.scss']

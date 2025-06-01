@@ -16,6 +16,7 @@ import {ModalExpedienteContribuyenteComponent} from './modalExpedienteContribuye
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatPaginator } from '@angular/material/paginator';
 @Component({
+standalone: false,
   selector: 'app-emision-expediente',
   templateUrl: './emision-expediente.component.html',
   styleUrls: ['./emision-expediente.component.scss']

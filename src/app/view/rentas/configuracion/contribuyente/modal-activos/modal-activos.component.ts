@@ -11,6 +11,7 @@ import { ModalActivosCiudadComponent } from './modal-activos-ciudad/modal-activo
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-activos',
   templateUrl: './modal-activos.component.html',
   styleUrls: ['./modal-activos.component.scss']
@@ -40,14 +41,14 @@ export class ModalActivosComponent implements OnInit {
     private commonVarSrv: CommonVarService,
     private apiSrv: ContribuyenteService,
     private modalService: NgbModal
-    ) { 
+    ) {
       this.commonVarSrv.guardarActivos.asObservable().subscribe(
         (res) => {
           console.log(res);
           this.listaActivos = res['data']; // se actualiza la lista para que tenga ids en caso que se agreguen
           res['data'].map(
             (e)=>{
-              
+
               if(e.tipo == 'directa'){
                 e['variable'] = true;
                 e['variable_declara'] = true;
@@ -55,8 +56,8 @@ export class ModalActivosComponent implements OnInit {
                 e['variable'] = false;
                 e['variable_declara'] = false;
               }
-  
-              
+
+
             }
           )
           // sort descendiente
@@ -71,7 +72,7 @@ export class ModalActivosComponent implements OnInit {
           this.contr = {id_cliente: res.id_cliente};
           // console.log(this.contr, this.permisos);
           this.cargarActivos();
-          
+
         }
       )
 
@@ -81,7 +82,7 @@ export class ModalActivosComponent implements OnInit {
         }
       )
 
-      
+
     }
 
   ngOnInit(): void {
@@ -93,7 +94,7 @@ export class ModalActivosComponent implements OnInit {
     // console.log(this.contr);
 
     setTimeout(() => {
-      
+
     }, 0)
 
 
@@ -149,7 +150,7 @@ export class ModalActivosComponent implements OnInit {
         this.listaActivos = res['data'];
         res['data'].map(
           (e)=>{
-            
+
             if(e.tipo == 'directa'){
               e['variable'] = true;
               e['variable_declara'] = true;
@@ -158,7 +159,7 @@ export class ModalActivosComponent implements OnInit {
               e['variable_declara'] = false;
             }
 
-            
+
           }
         )
         this.listaActivos.sort(function(a,b) {
@@ -179,7 +180,7 @@ export class ModalActivosComponent implements OnInit {
   }
 
   handlePasivo(item) {
-    
+
     item.patrimonio = item.activos - item.pasivos;
   }
 
@@ -282,7 +283,7 @@ export class ModalActivosComponent implements OnInit {
       fecha: null,
       tipo: 0,
       declarativa: 0,
-      
+
     }
 
     if (!this.periodo){
@@ -297,8 +298,8 @@ export class ModalActivosComponent implements OnInit {
         if (this.periodo==i.periodo){
           this.toastr.warning("Solo se permite un registro por periodo.", this.fTitle);
           this.periodo=null;
-        } 
-        
+        }
+
       });
     }
     if(this.periodo) {
@@ -394,6 +395,6 @@ export class ModalActivosComponent implements OnInit {
         )
       }
     });
-    
+
   }
 }

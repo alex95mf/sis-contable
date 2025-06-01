@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
+standalone: false,
   selector: 'app-generacion-icp',
   templateUrl: './generacion-icp.component.html',
   styleUrls: ['./generacion-icp.component.scss']

@@ -7,6 +7,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-tasas-interes',
   templateUrl: './tasas-interes.component.html',
   styleUrls: ['./tasas-interes.component.scss']

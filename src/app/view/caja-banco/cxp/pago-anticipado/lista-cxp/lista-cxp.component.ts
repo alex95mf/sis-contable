@@ -5,6 +5,7 @@ import { PagoAnticipadoService } from '../pago-anticipado.service';
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-lista-cxp',
   templateUrl: './lista-cxp.component.html',
   styleUrls: ['./lista-cxp.component.scss']

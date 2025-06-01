@@ -13,6 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
+standalone: false,
   selector: 'app-exoneraciones',
   templateUrl: './exoneraciones.component.html',
   styleUrls: ['./exoneraciones.component.scss']

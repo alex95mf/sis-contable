@@ -5,6 +5,7 @@ import { EgresosBodegaService } from '../egresos-bodega.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-modal-producto-detalles',
   templateUrl: './modal-producto-detalles.component.html',
   styleUrls: ['./modal-producto-detalles.component.scss']

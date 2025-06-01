@@ -18,6 +18,7 @@ import 'sweetalert2/src/sweetalert2.scss';
 
 
 @Component({
+standalone: false,
   selector: 'app-retencion-venta',
   templateUrl: './retencion-venta.component.html',
   styleUrls: ['./retencion-venta.component.scss']

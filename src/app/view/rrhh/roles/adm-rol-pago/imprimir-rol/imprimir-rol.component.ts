@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { ValidacionesFactory } from "../../../../../config/custom/utils/ValidacionesFactory";
 
 @Component({
+standalone: false,
   selector: "app-imprimir-rol",
   templateUrl: "./imprimir-rol.component.html",
   styleUrls: ["./imprimir-rol.component.scss"],

@@ -16,6 +16,7 @@ import { ShowActivosComponent } from './show-activos/show-activos.component';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-adquisiciones',
   templateUrl: './adquisiciones.component.html',
   styleUrls: ['./adquisiciones.component.scss']

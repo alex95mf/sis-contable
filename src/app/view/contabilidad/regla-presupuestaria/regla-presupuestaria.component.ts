@@ -6,6 +6,7 @@ import { SueldoNuevoComponent } from './grupo-nuevo/sueldo-nuevo.component';
 
 import {ReglaPresupuestariaService} from './regla-presupuestaria.service'
 @Component({
+standalone: false,
   selector: 'app-regla-presupuestaria',
   templateUrl: './regla-presupuestaria.component.html',
   styleUrls: ['./regla-presupuestaria.component.scss']

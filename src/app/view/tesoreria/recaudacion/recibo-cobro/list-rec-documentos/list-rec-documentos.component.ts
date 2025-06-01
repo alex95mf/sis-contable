@@ -11,6 +11,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-list-rec-documentos',
   templateUrl: './list-rec-documentos.component.html',
   styleUrls: ['./list-rec-documentos.component.scss']

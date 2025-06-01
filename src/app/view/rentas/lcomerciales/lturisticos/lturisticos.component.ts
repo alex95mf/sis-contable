@@ -11,6 +11,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 
 
 @Component({
+standalone: false,
   selector: 'app-lturisticos',
   templateUrl: './lturisticos.component.html',
   styleUrls: ['./lturisticos.component.scss']

@@ -28,6 +28,7 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
+standalone: false,
   selector: 'app-prestamo',
   templateUrl: './prestamo.component.html',
   styleUrls: ['./prestamo.component.scss']

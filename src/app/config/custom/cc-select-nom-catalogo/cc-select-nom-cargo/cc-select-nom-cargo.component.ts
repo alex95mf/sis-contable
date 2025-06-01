@@ -3,6 +3,7 @@ import { CargoResponseI } from 'src/app/models/responseCargo.interface';
 import { GeneralService } from "src/app/services/general.service";
 
 @Component({
+standalone: false,
   selector: 'app-cc-select-nom-cargo',
   templateUrl: './cc-select-nom-cargo.component.html',
   styleUrls: ['./cc-select-nom-cargo.component.scss']

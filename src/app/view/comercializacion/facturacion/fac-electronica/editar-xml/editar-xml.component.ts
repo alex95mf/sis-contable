@@ -5,6 +5,7 @@ import { Editor, toDoc } from 'ngx-editor';
 import { FacElectronicaService } from '../fac-electronica.service';
 
 @Component({
+standalone: false,
   selector: 'app-editar-xml',
   templateUrl: './editar-xml.component.html',
   styleUrls: ['./editar-xml.component.scss']

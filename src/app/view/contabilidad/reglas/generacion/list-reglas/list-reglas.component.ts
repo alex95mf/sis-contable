@@ -4,13 +4,14 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
-import { GeneracionService } from '../generacion.service'; 
+import { GeneracionService } from '../generacion.service';
 
 import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-list-reglas',
   templateUrl: './list-reglas.component.html',
   styleUrls: ['./list-reglas.component.scss']
@@ -25,7 +26,7 @@ export class ListReglasComponent implements OnInit {
   @Input() module_comp: any;
   @Input() permissions: any;
   @Input() verifyRestore: any;
- 
+
 
   vmButtons: any;
   reglasDt: any = [];
@@ -38,7 +39,7 @@ export class ListReglasComponent implements OnInit {
   hoy: any;
   dia_siguiente: any;
   tipoReglaSelected = 0
-  
+
   tipoCodigoList = [
     {value: "CON",label: "Contable"},
     {value: "PRE",label: "Presupuesto"}
@@ -70,14 +71,14 @@ export class ListReglasComponent implements OnInit {
       }
     ]
 
-    
+
     this.hoy = new Date();
     this.dia_siguiente = new Date(this.hoy);
     this.dia_siguiente.setDate(this.dia_siguiente.getDate() + 1);
     this.primer_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth() + 1, 0);
 
-    
+
     this.filter = {
       tipo_regla: undefined,
       tipo_codigo: undefined,
@@ -96,7 +97,7 @@ export class ListReglasComponent implements OnInit {
       pageSizeOptions: [5, 10]
     }
     console.log(this.tipoRegla)
-    
+
     setTimeout(()=> {
       this.cargarReglas();
       this.getCatalogos();
@@ -142,14 +143,14 @@ export class ListReglasComponent implements OnInit {
       }
     );
   }
- 
+
 
    cargarReglas(flag: boolean = false){
     this.mensajeSppiner = "Cargando lista de reglas...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1 
-    
+    if (flag) this.paginate.page = 1
+
     let data = {
       params: {
         filter: this.filter,
@@ -170,7 +171,7 @@ export class ListReglasComponent implements OnInit {
           this.reglasDt = []
           this.lcargando.ctlSpinner(false);
         }
-        
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);

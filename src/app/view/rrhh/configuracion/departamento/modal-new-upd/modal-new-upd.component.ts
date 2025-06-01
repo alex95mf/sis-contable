@@ -9,6 +9,7 @@ import { DepartamentoService } from '../departamento.service';
 import { ModalAreaComponent } from '../modal-area/modal-area.component';
 
 @Component({
+standalone: false,
   selector: 'app-modal-new-upd',
   templateUrl: './modal-new-upd.component.html',
   styleUrls: ['./modal-new-upd.component.scss']

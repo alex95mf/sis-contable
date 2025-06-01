@@ -25,6 +25,7 @@ import { takeUntil } from "rxjs/operators";
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: "app-contribuyente",
   templateUrl: "./contribuyente.component.html",
   styleUrls: ["./contribuyente.component.scss"],

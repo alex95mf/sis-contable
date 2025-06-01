@@ -5,6 +5,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PrestamosService } from '../prestamos.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busca-prestamo',
   templateUrl: './modal-busca-prestamo.component.html',
   styleUrls: ['./modal-busca-prestamo.component.scss']

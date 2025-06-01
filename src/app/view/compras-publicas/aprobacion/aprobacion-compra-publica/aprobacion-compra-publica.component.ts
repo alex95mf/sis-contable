@@ -8,6 +8,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 @Component({
+standalone: false,
   selector: 'app-aprobacion-compra-publica',
   templateUrl: './aprobacion-compra-publica.component.html',
   styleUrls: ['./aprobacion-compra-publica.component.scss']

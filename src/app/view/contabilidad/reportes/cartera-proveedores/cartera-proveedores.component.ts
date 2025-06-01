@@ -14,6 +14,7 @@ import * as myVarGlobals from "../../../../global";
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-cartera-proveedores',
   templateUrl: './cartera-proveedores.component.html',
   styleUrls: ['./cartera-proveedores.component.scss'],

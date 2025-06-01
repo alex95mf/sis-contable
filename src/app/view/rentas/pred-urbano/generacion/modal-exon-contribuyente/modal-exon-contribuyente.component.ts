@@ -7,6 +7,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { GeneracionService } from '../generacion.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-exon-contribuyente',
   templateUrl: './modal-exon-contribuyente.component.html',
   styleUrls: ['./modal-exon-contribuyente.component.scss']

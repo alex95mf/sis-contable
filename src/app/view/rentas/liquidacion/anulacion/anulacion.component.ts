@@ -18,6 +18,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
+standalone: false,
   selector: 'app-anulacion',
   templateUrl: './anulacion.component.html',
   styleUrls: ['./anulacion.component.scss']

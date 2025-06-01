@@ -13,6 +13,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 import { ShowCuentasCajaComponent } from './show-cuentas-caja/show-cuentas-caja.component'
 
 @Component({
+standalone: false,
   selector: 'app-creacion',
   templateUrl: './creacion.component.html',
   styleUrls: ['./creacion.component.scss']

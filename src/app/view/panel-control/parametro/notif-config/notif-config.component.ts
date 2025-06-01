@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { ModalAlertasComponent } from './modal-alertas/modal-alertas.component';
 
 @Component({
+standalone: false,
   selector: 'app-notif-config',
   templateUrl: './notif-config.component.html',
   styleUrls: ['./notif-config.component.scss']

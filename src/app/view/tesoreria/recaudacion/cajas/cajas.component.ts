@@ -10,6 +10,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CajasFormComponent } from './cajas-form/cajas-form.component';
 
 @Component({
+standalone: false,
   selector: 'app-cajas',
   templateUrl: './cajas.component.html',
   styleUrls: ['./cajas.component.scss']

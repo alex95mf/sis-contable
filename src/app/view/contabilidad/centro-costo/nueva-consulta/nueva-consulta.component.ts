@@ -12,6 +12,7 @@ import Chart from 'chart.js';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
+standalone: false,
   selector: 'app-nueva-consulta',
   templateUrl: './nueva-consulta.component.html',
   styleUrls: ['./nueva-consulta.component.scss']

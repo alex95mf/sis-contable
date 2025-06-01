@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda-documento',
   templateUrl: './modal-busqueda-documento.component.html',
   styleUrls: ['./modal-busqueda-documento.component.scss']
@@ -86,7 +87,7 @@ export class ModalBusquedaDocumentoComponent implements OnInit {
 
   async getDocumentos() {
     this.lcargando.ctlSpinner(true);
-    
+
     try {
       this.msgSpinner = 'Cargando Documentos'
       let response = await this.apiService.getDocumentos({

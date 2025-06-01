@@ -11,6 +11,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-busqueda-prestamo',
   templateUrl: './busqueda-prestamo.component.html',
   styleUrls: ['./busqueda-prestamo.component.scss']
@@ -63,14 +64,14 @@ export class BusquedaPrestamoComponent implements OnInit {
       }
     ];
 
-    
+
     this.hoy = new Date();
     this.dia_siguiente = new Date(this.hoy);
     this.dia_siguiente.setDate(this.dia_siguiente.getDate() + 1);
     this.primer_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth() + 1, 0);
 
-    
+
     this.filter = {
       razon_social: undefined,
       num_documento: undefined,
@@ -85,7 +86,7 @@ export class BusquedaPrestamoComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
      this.cargarDocumentos();
      this.getBodega();
@@ -124,21 +125,21 @@ export class BusquedaPrestamoComponent implements OnInit {
     this.mensajeSppiner = "Cargando lista de Prestamo de Bienes...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1 
-    
+    if (flag) this.paginate.page = 1
+
     let data = {
       params: {
         filter: this.filter,
         paginate: this.paginate,
       },
-     
+
     }
 
     this.apiSrv.getPrestamoBienesData(data).subscribe(
       (res) => {
         console.log(res['data'])
         //console.log('documentos'+res);
-        
+
         this.documentosDt = res['data'];
         this.paginate.length = res['data']['total'];
         if (res['data']['current_page'] == 1) {

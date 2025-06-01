@@ -14,6 +14,7 @@ import { ValidacionesFactory } from '../../../../config/custom/utils/Validacione
 import { formatDate } from '@angular/common';
 
 @Component({
+standalone: false,
   selector: 'app-conciliacion',
   templateUrl: './conciliacion.component.html',
   styleUrls: ['./conciliacion.component.scss']

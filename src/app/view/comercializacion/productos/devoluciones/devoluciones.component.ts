@@ -14,6 +14,7 @@ const Swal = require('sweetalert2');
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-devoluciones',
   templateUrl: './devoluciones.component.html',
   styleUrls: ['./devoluciones.component.scss']

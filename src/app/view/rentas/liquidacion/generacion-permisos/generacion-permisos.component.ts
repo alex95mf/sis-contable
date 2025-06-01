@@ -19,6 +19,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-generacion-permisos',
   templateUrl: './generacion-permisos.component.html',
   styleUrls: ['./generacion-permisos.component.scss']

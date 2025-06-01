@@ -39,6 +39,7 @@ import { EmpleadosComponent } from "./empleados/empleados.component";
 
 
 @Component({
+standalone: false,
   selector: "app-gastos-personales",
   templateUrl: "./gastos-personales.component.html",
   styleUrls: ["./gastos-personales.component.scss"],

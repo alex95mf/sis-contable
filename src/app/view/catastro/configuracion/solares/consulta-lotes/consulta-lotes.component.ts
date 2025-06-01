@@ -12,6 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Paginator } from 'primeng/paginator';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-lotes',
   templateUrl: './consulta-lotes.component.html',
   styleUrls: ['./consulta-lotes.component.scss']

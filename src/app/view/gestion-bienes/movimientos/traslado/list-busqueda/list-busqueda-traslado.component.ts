@@ -4,13 +4,14 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
-import { TrasladoService } from '../traslado.service'; 
+import { TrasladoService } from '../traslado.service';
 
 import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-list-busqueda-traslado',
   templateUrl: './list-busqueda-traslado.component.html',
   styleUrls: ['./list-busqueda-traslado.component.scss']
@@ -85,7 +86,7 @@ export class ListBusquedaTrasladoComponent implements OnInit {
     this.primer_dia = new Date(this.hoy.getFullYear(), this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(), this.hoy.getMonth() + 1, 0);
     this.filter = {
-    
+
       // fecha_desde: moment(this.primer_dia).format('YYYY-MM-DD'),
       // fecha_hasta: moment(this.ultimo_dia).format('YYYY-MM-DD'),
       codigoData: null,
@@ -125,8 +126,8 @@ export class ListBusquedaTrasladoComponent implements OnInit {
     Object.assign(this.paginate, newPaginate);
     this.cargarDocumentos();
   }
-  
-  
+
+
   cargarDocumentos(flag: boolean = false) {
     this.mensajeSppiner = "Cargando listado de productos...";
     this.lcargando.ctlSpinner(true);
@@ -178,7 +179,7 @@ export class ListBusquedaTrasladoComponent implements OnInit {
     this.closeModal()
     // console.log("aquii")
     // console.log(data);
-    
+
       // Swal.fire({
       //   icon: "warning",
       //   title: "¡Atención!",
@@ -200,11 +201,11 @@ export class ListBusquedaTrasladoComponent implements OnInit {
       //     // console.log(data);
       //   }
       // });
-    
+
   }
 
   closeModal(data?: any) {
-    
+
     this.activeModal.dismiss();
   }
 

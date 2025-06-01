@@ -14,6 +14,7 @@ import { ViewConsultaComponent } from './view-consulta/view-consulta.component';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
 	selector: 'app-consulta-importacion',
 	templateUrl: './consulta-importacion.component.html',
 	styleUrls: ['./consulta-importacion.component.scss']

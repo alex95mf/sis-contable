@@ -19,6 +19,7 @@ import { MessageService } from 'primeng/api';
 
 
 @Component({
+standalone: false,
   selector: 'app-plan-cuentas',
   templateUrl: './plan-cuentas.component.html',
   styleUrls: ['./plan-cuentas.component.scss'],

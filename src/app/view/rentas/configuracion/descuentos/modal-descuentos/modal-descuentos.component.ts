@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal-descuentos',
   templateUrl: './modal-descuentos.component.html',
   styleUrls: ['./modal-descuentos.component.scss']
@@ -77,7 +78,7 @@ export class ModalDescuentosComponent implements OnInit {
           this.lcargando.ctlSpinner(false)
           this.toastr.error(err.error?.message, 'Error almacenando Configuracion')
         }
-        
+
         break;
       case "MODIFICAR":
         try {
@@ -96,7 +97,7 @@ export class ModalDescuentosComponent implements OnInit {
           this.toastr.error(err.error?.message, 'Error almacenando Configuracion')
         }
         break;
-    
+
       default:
         break;
     }
@@ -130,7 +131,7 @@ export class ModalDescuentosComponent implements OnInit {
     // console.log(event)
     this.fecha.month(value - 1)
     Object.assign(this.registro, {
-      desde: this.fecha.startOf('month').format('D'), 
+      desde: this.fecha.startOf('month').format('D'),
       hasta: this.fecha.endOf('month').format('D')
     })
   }

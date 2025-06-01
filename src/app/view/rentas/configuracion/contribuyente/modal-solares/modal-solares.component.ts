@@ -8,6 +8,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ContribuyenteService } from '../contribuyente.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-solares',
   templateUrl: './modal-solares.component.html',
   styleUrls: ['./modal-solares.component.scss']

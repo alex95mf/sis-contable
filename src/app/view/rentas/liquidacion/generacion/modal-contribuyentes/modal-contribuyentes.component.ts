@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { GeneracionService } from '../generacion.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-contribuyentes',
   templateUrl: './modal-contribuyentes.component.html',
   styleUrls: ['./modal-contribuyentes.component.scss']

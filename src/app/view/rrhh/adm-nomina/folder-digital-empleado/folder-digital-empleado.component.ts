@@ -17,6 +17,7 @@ import * as moment from 'moment';
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
 
 @Component({
+standalone: false,
   selector: 'app-folder-digital-empleado',
   templateUrl: './folder-digital-empleado.component.html',
   styleUrls: ['./folder-digital-empleado.component.scss'],

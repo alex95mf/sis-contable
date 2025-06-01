@@ -12,6 +12,7 @@ import { CookieService } from "ngx-cookie-service";
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
+standalone: false,
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],

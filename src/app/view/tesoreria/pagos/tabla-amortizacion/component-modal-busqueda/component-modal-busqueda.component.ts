@@ -11,6 +11,7 @@ import { AmortizacionService } from '../tabla-amortizacion.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 @Component({
+standalone: false,
   selector: 'app-component-modal-busqueda',
   templateUrl: './component-modal-busqueda.component.html',
   styleUrls: ['./component-modal-busqueda.component.scss']

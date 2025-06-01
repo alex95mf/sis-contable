@@ -13,6 +13,7 @@ import Botonera from 'src/app/models/IBotonera';
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-condiciones',
   templateUrl: './modal-condiciones.component.html',
   styleUrls: ['./modal-condiciones.component.scss']

@@ -8,6 +8,7 @@ import { EmpleadoService } from '../empleado.service';
 import { EmployeesResponseI } from 'src/app/models/responseEmployee.interface';
 
 @Component({
+standalone: false,
   selector: 'app-modal-retencion-judicial',
   templateUrl: './modal-retencion-judicial.component.html',
   styleUrls: ['./modal-retencion-judicial.component.scss']

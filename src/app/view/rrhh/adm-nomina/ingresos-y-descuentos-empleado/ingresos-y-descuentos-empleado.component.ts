@@ -29,6 +29,7 @@ import { CierreMesService } from 'src/app/view/presupuesto/configuracion/cierre-
 
 
 @Component({
+standalone: false,
   selector: 'app-ingresos-y-descuentos-empleado',
   templateUrl: './ingresos-y-descuentos-empleado.component.html',
   styleUrls: ['./ingresos-y-descuentos-empleado.component.scss'],

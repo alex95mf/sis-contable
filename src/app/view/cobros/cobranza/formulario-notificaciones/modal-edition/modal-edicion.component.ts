@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { EncargadoComponent } from 'src/app/config/custom/encargado/encargado.component';
 
 @Component({
+standalone: false,
   selector: 'app-modal-edicion',
   templateUrl: './modal-edicion.component.html',
   styleUrls: ['./modal-edicion.component.scss']
@@ -76,7 +77,7 @@ export class ModalEdicionComponent implements OnInit {
         showbadge: false,
         clase: "btn btn-success boton btn-sm",
         habilitar: false,
-        
+
       },
       {
         orig: "btnsDetalles",
@@ -88,7 +89,7 @@ export class ModalEdicionComponent implements OnInit {
         showbadge: false,
         clase: "btn btn-danger boton btn-sm",
         habilitar: false,
-        
+
       },
     ]
 
@@ -146,7 +147,7 @@ export class ModalEdicionComponent implements OnInit {
   }
 
   deshabilitarFecha(event){
-    
+
     if(event == 'R' || event == 'G'){
       this.validarFecha = false;
     }else {
@@ -173,7 +174,7 @@ export class ModalEdicionComponent implements OnInit {
         this.toastr.info("El campo notificador no puede ser vacío");
         flag = true;
       } else if (
-        this.data.estado == 'R' && 
+        this.data.estado == 'R' &&
         (this.data.persona_recepcion == "" ||
         this.data.persona_recepcion == undefined)
       ) {
@@ -224,7 +225,7 @@ export class ModalEdicionComponent implements OnInit {
         Swal.fire('Notificación actualizada con éxito', '', 'success').then((result)=>{
           this.modal.close()
         }
-          
+
         )
       },
       (err: any) => {
@@ -292,6 +293,6 @@ export class ModalEdicionComponent implements OnInit {
     this.modal.close();
   } */
 
-  
+
 
 }

@@ -18,6 +18,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 import { ModalUsuariosComponent } from 'src/app/config/custom/modal-usuarios/modal-usuarios.component';
 
 @Component({
+standalone: false,
   selector: 'app-reportes',
   templateUrl: './reportes.component.html',
   styleUrls: ['./reportes.component.scss']

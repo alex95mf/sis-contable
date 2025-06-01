@@ -6,6 +6,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { ConsultaTitulosService } from '../consulta-titulos.service'; 
 
 @Component({
+standalone: false,
   selector: 'app-modal-tasas',
   templateUrl: './modal-tasas.component.html',
   styleUrls: ['./modal-tasas.component.scss']

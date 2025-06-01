@@ -8,6 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal-arriendos',
   templateUrl: './modal-arriendos.component.html',
   styleUrls: ['./modal-arriendos.component.scss']

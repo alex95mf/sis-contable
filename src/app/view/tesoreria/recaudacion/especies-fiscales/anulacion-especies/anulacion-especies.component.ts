@@ -5,6 +5,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { EspeciesFiscalesService } from '../especies-fiscales.service';
 
 @Component({
+standalone: false,
   selector: 'app-anulacion-especies',
   templateUrl: './anulacion-especies.component.html',
   styleUrls: ['./anulacion-especies.component.scss']

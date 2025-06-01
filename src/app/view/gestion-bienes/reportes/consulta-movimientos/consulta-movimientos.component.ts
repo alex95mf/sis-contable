@@ -10,6 +10,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-consulta-movimientos',
   templateUrl: './consulta-movimientos.component.html',
   styleUrls: ['./consulta-movimientos.component.scss']

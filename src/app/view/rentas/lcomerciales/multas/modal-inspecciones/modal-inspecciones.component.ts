@@ -12,6 +12,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import e from 'cors';
 
 @Component({
+standalone: false,
   selector: 'app-modal-inspecciones',
   templateUrl: './modal-inspecciones.component.html',
   styleUrls: ['./modal-inspecciones.component.scss']

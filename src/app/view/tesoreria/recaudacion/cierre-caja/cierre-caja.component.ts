@@ -12,6 +12,7 @@ import { CierreCajaService } from './cierre-caja.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-cierre-caja',
   templateUrl: './cierre-caja.component.html',
   styleUrls: ['./cierre-caja.component.scss']

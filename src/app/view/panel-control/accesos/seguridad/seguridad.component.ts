@@ -15,6 +15,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 
 
 @Component({
+standalone: false,
   selector: 'app-seguridad',
   templateUrl: './seguridad.component.html',
   styleUrls: ['./seguridad.component.scss']

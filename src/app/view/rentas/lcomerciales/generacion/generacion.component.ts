@@ -19,6 +19,7 @@ import * as moment from 'moment';
 import { ModalImpuestosComponent } from './modal-impuestos/modal-impuestos.component';
 
 @Component({
+standalone: false,
   selector: 'app-generacion',
   templateUrl: './generacion.component.html',
   styleUrls: ['./generacion.component.scss']

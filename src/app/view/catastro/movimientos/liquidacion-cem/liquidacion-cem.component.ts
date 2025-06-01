@@ -10,6 +10,7 @@ import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.componen
 import { MatTable } from '@angular/material/table';
 
 @Component({
+standalone: false,
   selector: 'app-liquidacion-cem',
   templateUrl: './liquidacion-cem.component.html',
   styleUrls: ['./liquidacion-cem.component.scss']

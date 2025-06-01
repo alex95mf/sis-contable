@@ -9,6 +9,7 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
 import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
+standalone: false,
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss']

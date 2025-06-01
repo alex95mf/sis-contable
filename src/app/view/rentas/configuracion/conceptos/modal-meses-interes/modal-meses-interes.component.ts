@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-modal-meses-interes',
   templateUrl: './modal-meses-interes.component.html',
   styleUrls: ['./modal-meses-interes.component.scss']
@@ -71,7 +72,7 @@ export class ModalMesesInteresComponent implements OnInit {
       case "GUARDAR":
         this.setMesesSinIntereses()
         break;
-    
+
       default:
         break;
     }

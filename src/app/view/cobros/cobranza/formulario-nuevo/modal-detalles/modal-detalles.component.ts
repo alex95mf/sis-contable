@@ -7,6 +7,7 @@ import { FormularioNuevoService } from '../formulario-nuevo.service';
 import * as myVarGlobals from 'src/app/global';
 
 @Component({
+standalone: false,
   selector: 'app-modal-detalles',
   templateUrl: './modal-detalles.component.html',
   styleUrls: ['./modal-detalles.component.scss']

@@ -10,6 +10,7 @@ import { ModalFeriasComponent } from './modal-ferias/modal-ferias.component';
 import { MatTable } from '@angular/material/table';
 
 @Component({
+standalone: false,
   selector: 'app-ferias',
   templateUrl: './ferias.component.html',
   styleUrls: ['./ferias.component.scss']

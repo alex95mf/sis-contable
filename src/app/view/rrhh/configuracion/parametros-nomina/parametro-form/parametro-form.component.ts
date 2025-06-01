@@ -8,6 +8,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as moment from 'moment';
 
 @Component({
+standalone: false,
   selector: 'app-parametro-form',
   templateUrl: './parametro-form.component.html',
   styleUrls: ['./parametro-form.component.scss']

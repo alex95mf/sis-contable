@@ -11,6 +11,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-list-nota-credito',
   templateUrl: './list-nota-credito.component.html',
   styleUrls: ['./list-nota-credito.component.scss']

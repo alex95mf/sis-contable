@@ -12,6 +12,7 @@ import { RubrosService } from './rubros.service';
 import { ModalModSetComponent } from './modal-mod-set/modal-mod-set.component';
 
 @Component({
+standalone: false,
   selector: 'app-rubros',
   templateUrl: './rubros.component.html',
   styleUrls: ['./rubros.component.scss']

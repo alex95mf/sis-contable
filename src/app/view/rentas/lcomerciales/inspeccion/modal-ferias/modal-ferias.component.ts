@@ -6,6 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-modal-ferias',
   templateUrl: './modal-ferias.component.html',
   styleUrls: ['./modal-ferias.component.scss']

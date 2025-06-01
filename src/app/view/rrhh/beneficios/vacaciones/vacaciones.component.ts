@@ -23,6 +23,7 @@ import * as moment from 'moment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
+standalone: false,
   selector: 'app-vacaciones',
   templateUrl: './vacaciones.component.html',
   styleUrls: ['./vacaciones.component.scss'],

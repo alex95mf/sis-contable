@@ -11,6 +11,7 @@ const Swal = require('sweetalert2');
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component'
 
 @Component({
+standalone: false,
   selector: 'app-show-comprobantes',
   templateUrl: './show-comprobantes.component.html',
   styleUrls: ['./show-comprobantes.component.scss']

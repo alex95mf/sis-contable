@@ -13,6 +13,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import * as myVarGlobals from 'src/app/global';
 
 @Component({
+standalone: false,
   selector: 'app-tramites',
   templateUrl: './tramites.component.html',
   styleUrls: ['./tramites.component.scss']

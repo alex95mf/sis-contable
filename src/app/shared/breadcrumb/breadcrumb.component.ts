@@ -6,6 +6,7 @@ import { Settings } from '../../app.settings.model';
 import { MenuService } from '../../theme/components/menu/menu.service';
 
 @Component({
+standalone: false,
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss'],

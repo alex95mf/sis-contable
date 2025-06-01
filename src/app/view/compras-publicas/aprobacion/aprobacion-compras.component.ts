@@ -12,6 +12,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-aprobacion-compras',
   templateUrl: './aprobacion-compras.component.html',
   styleUrls: ['./aprobacion.component.scss']

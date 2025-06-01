@@ -11,6 +11,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-conceptos',
   templateUrl: './modal-conceptos.component.html',
   styleUrls: ['./modal-conceptos.component.scss']

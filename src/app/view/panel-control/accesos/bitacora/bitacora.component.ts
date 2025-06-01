@@ -15,6 +15,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-bitacora',
   templateUrl: './bitacora.component.html',
   styleUrls: ['./bitacora.component.scss']

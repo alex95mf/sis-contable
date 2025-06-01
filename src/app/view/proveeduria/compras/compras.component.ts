@@ -47,6 +47,7 @@ import { ModalCuentaRetIvaComponent } from './modal-cuenta-ret-iva/modal-cuenta-
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-compras',
   templateUrl: './compras.component.html',
   styleUrls: ['./compras.component.scss'],

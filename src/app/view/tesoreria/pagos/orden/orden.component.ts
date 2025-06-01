@@ -26,6 +26,7 @@ import { Socket } from '../../../../services/socket.service';
 
 
 @Component({
+standalone: false,
   selector: 'app-orden',
   templateUrl: './orden.component.html',
   styleUrls: ['./orden.component.scss']

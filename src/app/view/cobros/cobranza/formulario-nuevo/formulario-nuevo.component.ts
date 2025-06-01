@@ -15,6 +15,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
+standalone: false,
   selector: 'app-formulario-nuevo',
   templateUrl: './formulario-nuevo.component.html',
   styleUrls: ['./formulario-nuevo.component.scss']

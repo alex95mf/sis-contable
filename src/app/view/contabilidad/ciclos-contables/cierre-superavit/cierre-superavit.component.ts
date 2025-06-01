@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-cierre-superavit',
   templateUrl: './cierre-superavit.component.html',
   styleUrls: ['./cierre-superavit.component.scss']

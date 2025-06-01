@@ -12,7 +12,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ChartsModule } from 'ng2-charts';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import {CommonModalModule} from '../../../commons/modals/modal.module'
-import { NgxBarcodeModule } from 'ngx-barcode';
+import { NgxBarcode6Module } from 'ngx-barcode6';
 import { NgxPrintModule } from 'ngx-print';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { AppCustomModule } from '../../../../config/custom/app-custom.module';
@@ -34,7 +34,7 @@ import { ExcelService } from 'src/app/services/excel.service';
     CommonModalModule,
     ButtonsModule,
     ChartsModule,
-    NgxBarcodeModule,
+    NgxBarcode6Module,
     NgxPrintModule,
     FlatpickrModule,
     AppCustomModule

@@ -8,6 +8,7 @@ import { PrestamosService } from '../prestamos.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+standalone: false,
   selector: 'app-modal-consulta-prestamos',
   templateUrl: './modal-consulta-prestamos.component.html',
   styleUrls: ['./modal-consulta-prestamos.component.scss']
@@ -59,7 +60,7 @@ export class ModalConsultaPrestamosComponent implements OnInit {
       case "CANCELAR":
         this.activeModal.close()
         break;
-    
+
       default:
         break;
     }

@@ -13,6 +13,7 @@ import { CommonVarService } from "../../../../services/common-var.services";
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-consulta-cajach',
   templateUrl: './consulta-cajach.component.html',
   styleUrls: ['./consulta-cajach.component.scss']

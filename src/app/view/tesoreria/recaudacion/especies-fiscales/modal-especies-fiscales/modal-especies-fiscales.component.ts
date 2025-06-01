@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-modal-especies-fiscales',
   templateUrl: './modal-especies-fiscales.component.html',
   styleUrls: ['./modal-especies-fiscales.component.scss']

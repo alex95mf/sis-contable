@@ -11,6 +11,7 @@ import * as myVarGlobals from "../../../../../global";
 import { NotaCreditoService } from './../nota-credito.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-liquidaciones',
   templateUrl: './modal-liquidaciones.component.html',
   styleUrls: ['./modal-liquidaciones.component.scss']

@@ -29,6 +29,7 @@ import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cie
 
 
 @Component({
+standalone: false,
   selector: 'app-diario',
   templateUrl: './diario.component.html',
   styleUrls: ['./diario.component.scss'],

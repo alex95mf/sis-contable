@@ -9,6 +9,7 @@ interface Atribucion {
 }
 
 @Component({
+standalone: false,
   selector: 'app-modal-nueva-atribucion',
   templateUrl: './modal-nueva-atribucion.component.html',
   styleUrls: ['./modal-nueva-atribucion.component.scss']

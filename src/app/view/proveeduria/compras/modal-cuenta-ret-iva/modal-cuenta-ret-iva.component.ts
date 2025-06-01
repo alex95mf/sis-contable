@@ -13,6 +13,7 @@ interface CuentaContable {
 }
 
 @Component({
+standalone: false,
   selector: 'app-modal-cuenta-ret-iva',
   templateUrl: './modal-cuenta-ret-iva.component.html',
   styleUrls: ['./modal-cuenta-ret-iva.component.scss']

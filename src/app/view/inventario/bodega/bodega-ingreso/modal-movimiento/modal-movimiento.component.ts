@@ -7,6 +7,7 @@ import 'sweetalert2/src/sweetalert2.scss';
 import { CommonService } from '../../../../../services/commonServices';
 import { MatDialogRef } from '@angular/material/dialog';
 @Component({
+standalone: false,
   selector: 'app-modal-movimiento',
   templateUrl: './modal-movimiento.component.html',
   styleUrls: ['./modal-movimiento.component.scss']

@@ -12,7 +12,7 @@ import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {CommonModalModule} from '../../../commons/modals/modal.module'
-import { NgxBarcodeModule } from 'ngx-barcode';
+import { NgxBarcode6Module } from 'ngx-barcode6';
 import { NgxPrintModule } from 'ngx-print';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { AppCustomModule } from '../../../../config/custom/app-custom.module';
@@ -30,7 +30,7 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     CalendarModule,
     NgSelectModule,
     CommonModalModule,
-    NgxBarcodeModule,
+    NgxBarcode6Module,
     NgxPrintModule,
     FlatpickrModule,
     ButtonsModule.forRoot(),

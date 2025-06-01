@@ -9,6 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ModalCreateComponent } from './modal-create/modal-create.component';
 
 @Component({
+standalone: false,
   selector: 'app-catalogo-bienes',
   templateUrl: './catalogo-bienes.component.html',
   styleUrls: ['./catalogo-bienes.component.scss']

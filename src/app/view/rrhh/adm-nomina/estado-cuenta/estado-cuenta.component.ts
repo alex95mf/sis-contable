@@ -10,6 +10,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 import { environment } from 'src/environments/environment';
 import {MessageService} from 'primeng/api';
 @Component({
+standalone: false,
   selector: 'app-estado-cuenta',
   templateUrl: './estado-cuenta.component.html',
   styleUrls: ['./estado-cuenta.component.scss'],

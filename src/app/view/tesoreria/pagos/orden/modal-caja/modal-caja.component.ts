@@ -12,6 +12,7 @@ import { OrdenService } from '../orden.service';
 // import { ValidacionesFactory } from '../utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-modal-caja',
   templateUrl: './modal-caja.component.html',
   styleUrls: ['./modal-caja.component.scss']

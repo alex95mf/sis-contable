@@ -20,6 +20,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
+standalone: false,
   selector: 'app-bancarias',
   templateUrl: './bancarias.component.html',
   styleUrls: ['./bancarias.component.scss'],

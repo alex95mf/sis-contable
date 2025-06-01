@@ -19,6 +19,7 @@ import { CierreMesService } from 'src/app/view/presupuesto/configuracion/cierre-
 import e from 'cors';
 
 @Component({
+standalone: false,
   selector: 'app-prestamos-new',
   templateUrl: './prestamos-new.component.html',
   styleUrls: ['./prestamos-new.component.scss']

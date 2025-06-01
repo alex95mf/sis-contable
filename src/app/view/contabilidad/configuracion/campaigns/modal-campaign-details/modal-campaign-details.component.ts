@@ -26,6 +26,7 @@ interface Concepto {
 }
 
 @Component({
+standalone: false,
   selector: 'app-modal-campaign-details',
   templateUrl: './modal-campaign-details.component.html',
   styleUrls: ['./modal-campaign-details.component.scss']

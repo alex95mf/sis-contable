@@ -14,6 +14,7 @@ import { table } from "console";
 import { environment } from '../../../../../../environments/environment';
 
 @Component({
+standalone: false,
   selector: 'app-document',
   templateUrl: './document.component.html',
   styleUrls: ['./document.component.scss']

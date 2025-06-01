@@ -12,6 +12,7 @@ import { XlsExportService } from 'src/app/services/xls-export.service';
 import { CcModalTableEmpleadoComponent } from 'src/app/config/custom/modal-component/cc-modal-table-empleado/cc-modal-table-empleado.component';
 
 @Component({
+standalone: false,
   selector: 'app-saldos-empleado',
   templateUrl: './saldos-empleado.component.html',
   styleUrls: ['./saldos-empleado.component.scss'],

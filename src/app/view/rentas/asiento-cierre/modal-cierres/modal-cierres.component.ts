@@ -11,6 +11,7 @@ import * as myVarGlobals from 'src/app/global';
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-cierres',
   templateUrl: './modal-cierres.component.html',
   styleUrls: ['./modal-cierres.component.scss']

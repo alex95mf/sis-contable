@@ -16,6 +16,7 @@ import { Socket } from "../../../../../services/socket.service";
 import { CcSpinerProcesarComponent } from "../../../../../config/custom/cc-spiner-procesar.component";
 
 @Component({
+standalone: false,
   selector: "app-punto-emision",
   templateUrl: "./punto-emision.component.html",
   styleUrls: ["./punto-emision.component.scss"],

@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
+standalone: false,
   selector: 'app-consulta-general-rubros',
   templateUrl: './consulta-general-rubros.component.html',
   styleUrls: ['./consulta-general-rubros.component.scss']

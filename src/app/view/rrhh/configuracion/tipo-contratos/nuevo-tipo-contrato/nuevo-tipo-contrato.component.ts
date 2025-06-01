@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 
 @Component({
+standalone: false,
   selector: 'app-nuevo-tipo-contrato',
   templateUrl: './nuevo-tipo-contrato.component.html',
   styleUrls: ['./nuevo-tipo-contrato.component.scss']

@@ -23,6 +23,7 @@ am4core.useTheme(am4themes_animated);
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-consulta-centro',
   templateUrl: './consulta.component.html',
   styleUrls: ['./consulta.component.scss']

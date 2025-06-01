@@ -21,6 +21,7 @@ import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
+standalone: false,
   selector: 'app-convenio',
   templateUrl: './convenio.component.html',
   styleUrls: ['./convenio.component.scss']

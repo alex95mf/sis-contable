@@ -12,6 +12,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { ContribuyenteService } from '../contribuyente.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-nuevolocal',
   templateUrl: './modal-nuevolocal.component.html',
   styleUrls: ['./modal-nuevolocal.component.scss']

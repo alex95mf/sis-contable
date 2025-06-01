@@ -19,6 +19,7 @@ import { IngresoAjusteComponent } from 'src/app/view/inventario/producto/kardex/
 import { EventEmitter } from 'protractor';
 
 @Component({
+standalone: false,
   selector: 'app-jornada',
   templateUrl: './jornada.component.html',
   styleUrls: ['./jornada.component.scss']

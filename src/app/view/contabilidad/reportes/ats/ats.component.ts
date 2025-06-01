@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
+standalone: false,
   selector: 'app-ats',
   templateUrl: './ats.component.html',
   styleUrls: ['./ats.component.scss']

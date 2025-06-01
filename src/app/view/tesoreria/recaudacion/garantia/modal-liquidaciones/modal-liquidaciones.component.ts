@@ -11,6 +11,7 @@ import * as myVarGlobals from "../../../../../global";
 import { GarantiaService } from '../garantia.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-liquidaciones',
   templateUrl: './modal-liquidaciones.component.html',
   styleUrls: ['./modal-liquidaciones.component.scss']

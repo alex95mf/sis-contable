@@ -6,6 +6,7 @@ import { EmployeesAditionalI } from 'src/app/models/responseEmployeesAditional.i
 import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
+standalone: false,
   selector: 'app-cc-modal-table-empleado',
   templateUrl: './cc-modal-table-empleado.component.html',
   styleUrls: ['./cc-modal-table-empleado.component.scss']

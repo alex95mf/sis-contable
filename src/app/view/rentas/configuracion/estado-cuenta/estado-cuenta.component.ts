@@ -15,6 +15,7 @@ import { ConceptoDetComponent } from "./concepto-det/concepto-det.component";
 import { environment } from "src/environments/environment";
 import { ValidacionesFactory } from "src/app/config/custom/utils/ValidacionesFactory";
 @Component({
+standalone: false,
   selector: "app-estado-cuenta",
   templateUrl: "./estado-cuenta.component.html",
   styleUrls: ["./estado-cuenta.component.scss"],

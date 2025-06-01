@@ -12,6 +12,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { ListBusquedaComponent } from './list-busqueda/list-busqueda.component';
 import * as myVarGlobals from '../../../../global';
 @Component({
+standalone: false,
   selector: 'app-mantenimiento',
   templateUrl: './mantenimiento.component.html',
   styleUrls: ['./mantenimiento.component.scss']

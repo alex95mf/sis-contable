@@ -9,6 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ShowDistribuidorComponent } from "./show-distribuidor/show-distribuidor.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 @Component({
+standalone: false,
   selector: "app-distribuidor",
   templateUrl: "./distribuidor.component.html",
   styleUrls: ["./distribuidor.component.scss"],

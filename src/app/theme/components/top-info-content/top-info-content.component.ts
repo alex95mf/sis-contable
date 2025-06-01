@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import {TopSenMailService} from './top-info-content.service'
 
 @Component({
+standalone: false,
   selector: 'app-top-info-content',
   templateUrl: './top-info-content.component.html',
   styleUrls: ['./top-info-content.component.scss']

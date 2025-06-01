@@ -4,6 +4,7 @@ import { Settings } from '../../../../app.settings.model';
 import { MenuService } from '../menu.service';
 
 @Component({
+standalone: false,
   selector: 'app-horizontal-menu',
   templateUrl: './horizontal-menu.component.html',
   styleUrls: ['./horizontal-menu.component.scss'],

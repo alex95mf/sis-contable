@@ -10,6 +10,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 
 @Component({
+standalone: false,
   selector: 'app-show-denomination',
   templateUrl: './show-denomination.component.html',
   styleUrls: ['./show-denomination.component.scss']

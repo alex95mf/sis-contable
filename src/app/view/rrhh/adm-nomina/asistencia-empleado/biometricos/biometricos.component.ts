@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-biometricos',
   templateUrl: './biometricos.component.html',
   styleUrls: ['./biometricos.component.scss']

@@ -22,6 +22,7 @@ import htmlToPdfmake from 'html-to-pdfmake';
 
 
 @Component({
+standalone: false,
   selector: 'app-tipo-retencion',
   templateUrl: './tipo-retencion.component.html',
   styleUrls: ['./tipo-retencion.component.scss']

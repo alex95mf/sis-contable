@@ -13,6 +13,7 @@ import { ReformaInternaService } from '../reforma-interna.service';
 // import { ValidacionesFactory } from '../utils/ValidacionesFactory';
 
 @Component({
+standalone: false,
   selector: 'app-modal-busqueda-reforma',
   templateUrl: './modal-busqueda-reforma.component.html',
   styleUrls: ['./modal-busqueda-reforma.component.scss']

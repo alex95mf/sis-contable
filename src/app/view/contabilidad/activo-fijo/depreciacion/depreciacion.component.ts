@@ -13,6 +13,7 @@ import { AdquisicionesService } from '../adquisiciones/adquisiciones.service'
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-depreciacion',
   templateUrl: './depreciacion.component.html',
   styleUrls: ['./depreciacion.component.scss']

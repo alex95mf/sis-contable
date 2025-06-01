@@ -4,6 +4,7 @@ import { CatalogoResponseI } from "src/app/models/responseCatalogo.interface";
 import { GeneralService } from "src/app/services/general.service";
 
 @Component({
+standalone: false,
   selector: "app-cc-select-nom-catalogo",
   templateUrl: "./cc-select-nom-catalogo.component.html",
   styleUrls: ["./cc-select-nom-catalogo.component.scss"],

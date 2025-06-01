@@ -11,6 +11,7 @@ import { PreciosService } from './precios.service';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
+standalone: false,
   selector: 'app-precios',
   templateUrl: './precios.component.html',
   styleUrls: ['./precios.component.scss']

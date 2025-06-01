@@ -27,6 +27,7 @@ interface Contribuyente {
 }
 
 @Component({
+standalone: false,
   selector: 'app-modal-ferias',
   templateUrl: './modal-ferias.component.html',
   styleUrls: ['./modal-ferias.component.scss']
@@ -134,7 +135,7 @@ export class ModalFeriasComponent implements OnInit {
       case "CERRAR":
         this.activeModal.close()
         break;
-    
+
       default:
         break;
     }

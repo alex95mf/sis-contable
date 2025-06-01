@@ -20,6 +20,7 @@ import { CommonVarService } from '../../../../services/common-var.services';
 import { resolveSanitizationFn } from '@angular/compiler/src/render3/view/template';
 declare const $: any;
 @Component({
+standalone: false,
   selector: 'app-proveedores',
   templateUrl: './proveedores.component.html',
   styleUrls: ['./proveedores.component.scss']

@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonVarService } from '../../../../../services/common-var.services'
 
 @Component({
+standalone: false,
   selector: 'app-modal-product',
   templateUrl: './modal-product.component.html',
   styleUrls: ['./modal-product.component.scss']

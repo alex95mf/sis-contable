@@ -15,6 +15,7 @@ import { ModalContribuyentesComponent } from '../modal-contribuyentes/modal-cont
 import { ModalFeriasComponent } from '../modal-ferias/modal-ferias.component';
 
 @Component({
+standalone: false,
   selector: 'app-modal-nuevolocal',
   templateUrl: './modal-nuevolocal.component.html',
   styleUrls: ['./modal-nuevolocal.component.scss']

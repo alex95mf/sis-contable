@@ -10,6 +10,7 @@ import { FormMetasComponent } from './form-metas/form-metas.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 
 @Component({
+standalone: false,
   selector: 'app-metas',
   templateUrl: './metas.component.html',
   styleUrls: ['./metas.component.scss']

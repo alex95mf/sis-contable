@@ -11,6 +11,7 @@ import * as myVarGlobals from "../../../../../global";
 import "sweetalert2/src/sweetalert2.scss";
 const Swal = require("sweetalert2");
 @Component({
+standalone: false,
   selector: 'app-view-document-dt',
   templateUrl: './view-document-dt.component.html',
   styleUrls: ['./view-document-dt.component.scss']

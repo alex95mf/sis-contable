@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-modal-pagos-det',
   templateUrl: './modal-pagos-det.component.html',
   styleUrls: ['./modal-pagos-det.component.scss']

@@ -22,6 +22,7 @@ import { ModalUsuariosComponent } from 'src/app/config/custom/modal-usuarios/mod
 import { ConsultaDirectorioService } from '../consulta-directorio/consulta-directorio.service';
 import { subscribeOn } from 'rxjs/operators';
 @Component({
+standalone: false,
   selector: 'app-asignacion',
   templateUrl: './asignacion.component.html',
   styleUrls: ['./asignacion.component.scss']

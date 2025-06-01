@@ -11,6 +11,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-consulta-parametros',
   templateUrl: './consulta-parametros.component.html',
   styleUrls: ['./consulta-parametros.component.scss']
@@ -60,14 +61,14 @@ export class ConsultaParametrosComponent implements OnInit {
       }
     ]
 
-    
+
     this.hoy = new Date();
     this.dia_siguiente = new Date(this.hoy);
     this.dia_siguiente.setDate(this.dia_siguiente.getDate() + 1);
     this.primer_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth() + 1, 0);
 
-    
+
     this.filter = {
       tipo_documento: '',
       codigo: '',
@@ -81,7 +82,7 @@ export class ConsultaParametrosComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
       this.cargarParametros();
     }, 0);
@@ -94,7 +95,7 @@ export class ConsultaParametrosComponent implements OnInit {
         break;
     }
   }
- 
+
   changePaginate(event) {
     let newPaginate = {
       perPage: event.pageSize,
@@ -111,14 +112,14 @@ export class ConsultaParametrosComponent implements OnInit {
     this.mensajeSppiner = "Cargando Configuraciones de Parametros...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1 
-    
+    if (flag) this.paginate.page = 1
+
     let data = {
       params: {
         filter: this.filter,
         paginate: this.paginate,
       },
-      
+
     }
     this.apiSrv.getConfigParametros(data).subscribe(
       (res: any) => {
@@ -141,13 +142,13 @@ export class ConsultaParametrosComponent implements OnInit {
       desdcripcion: '',
       filterControl: ""
     }
-    
+
   }
 
   selectOption(data) {
-    
+
       this.closeModal(data);
-    
+
   }
 
   closeModal(data?:any) {

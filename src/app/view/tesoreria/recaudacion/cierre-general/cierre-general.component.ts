@@ -15,6 +15,7 @@ import { ModalReporteCajaComponent } from './modal-reporte-caja/modal-reporte-ca
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-cierre-general',
   templateUrl: './cierre-general.component.html',
   styleUrls: ['./cierre-general.component.scss']

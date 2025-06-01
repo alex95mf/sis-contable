@@ -14,6 +14,7 @@ import { GruposService } from './grupos.service';
 import { ModalCuentPreComponent } from './modal-cuent-pre/modal-cuent-pre.component';
 
 @Component({
+standalone: false,
   selector: 'app-grupos',
   templateUrl: './grupos.component.html',
   styleUrls: ['./grupos.component.scss']

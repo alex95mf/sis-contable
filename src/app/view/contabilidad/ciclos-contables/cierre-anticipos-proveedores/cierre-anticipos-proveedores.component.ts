@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-cierre-anticipos-proveedores',
   templateUrl: './cierre-anticipos-proveedores.component.html',
   styleUrls: ['./cierre-anticipos-proveedores.component.scss']

@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PaginatorService } from '../../../../../config/custom/paginator/paginator.service';
 
 @Component({
+standalone: false,
   selector: 'app-mas-detalle',
   templateUrl: './mas-detalle.component.html',
   styleUrls: ['./mas-detalle.component.scss']

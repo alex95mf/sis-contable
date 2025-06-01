@@ -9,6 +9,7 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 import { ModalCreateComponent } from './modal-create/modal-create.component';
 
 @Component({
+standalone: false,
   selector: 'app-auxiliares',
   templateUrl: './auxiliares.component.html',
   styleUrls: ['./auxiliares.component.scss']

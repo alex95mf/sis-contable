@@ -7,6 +7,7 @@ import { CommonService } from '../../../../../services/commonServices';
 import { CommonVarService } from '../../../../../services/common-var.services';
 
 @Component({
+standalone: false,
   selector: 'app-table-cuenta',
   templateUrl: './table-cuenta.component.html',
   styleUrls: ['./table-cuenta.component.scss']

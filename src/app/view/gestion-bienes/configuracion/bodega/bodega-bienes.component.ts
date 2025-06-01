@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EncargadoComponent } from '../../../../config/custom/encargado/encargado.component';
 import { Subject } from 'rxjs';
 @Component({
+standalone: false,
   selector: 'app-bodega',
   templateUrl: './bodega-bienes.component.html',
   styleUrls: ['./bodega.component.scss']

@@ -17,6 +17,7 @@ import { ShowDevolutionComponent } from './show-devolution/show-devolution.compo
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+standalone: false,
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss']

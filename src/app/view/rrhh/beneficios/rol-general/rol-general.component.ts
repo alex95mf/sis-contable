@@ -27,6 +27,7 @@ import { OneDimension } from '@syncfusion/ej2-angular-barcode-generator';
 
 
 @Component({
+standalone: false,
   selector: 'app-rol-general',
   templateUrl: './rol-general.component.html',
   styleUrls: ['./rol-general.component.scss'],

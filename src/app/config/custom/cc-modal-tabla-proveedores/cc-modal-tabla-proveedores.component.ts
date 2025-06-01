@@ -6,9 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 */
 
-import { ComprasService } from 'src/app/view/proveeduria/compras/compras.service'; 
+import { ComprasService } from 'src/app/view/proveeduria/compras/compras.service';
 
-import { CcSpinerProcesarComponent } from '../cc-spiner-procesar.component'; 
+import { CcSpinerProcesarComponent } from '../cc-spiner-procesar.component';
 /*
 import { merge } from 'rxjs/observable/merge';
 import { of as observableOf } from 'rxjs/observable/of';
@@ -19,27 +19,28 @@ import { switchMap } from 'rxjs/operators/switchMap';
 */
 
 import { LazyLoadEvent } from 'primeng/api';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import {DynamicDialogRef} from 'primeng/dynamicdialog';
 
 import { ChangeDetectorRef } from '@angular/core';
 
 
 @Component({
+standalone: false,
   template:  `
-          <p-table 
-            [value]="proveedores" 
+          <p-table
+            [value]="proveedores"
             [lazy]="true"
-            (onLazyLoad)="CargaProveedores($event)" 
-            selectionMode="single" 
+            (onLazyLoad)="CargaProveedores($event)"
+            selectionMode="single"
             [(selection)]="selectedProduct2"
             (onRowSelect)="onRowSelect($event)"
-            responsiveLayout="scroll" 
-            [paginator]="true" 
-            [rows]="10" 
-            [totalRecords]="totalRecords" 
-            [loading]="loading" 
-            [showCurrentPageReport]="true" 
+            responsiveLayout="scroll"
+            [paginator]="true"
+            [rows]="10"
+            [totalRecords]="totalRecords"
+            [loading]="loading"
+            [showCurrentPageReport]="true"
             currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
             [rowsPerPageOptions]="[10,25,50]">
           <ng-template pTemplate="header" [headerStyle]="{'font-size': '0.7rem'}">
@@ -94,12 +95,12 @@ export class CcModalTablaProveedoresComponent implements AfterViewChecked {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Output() EventElemntRow = new EventEmitter();
-  
 
-  constructor(private cdRef:ChangeDetectorRef,public ref: DynamicDialogRef,private entityService: CustonService,private primengConfig: PrimeNGConfig,private comSrv: ComprasService) { }
+
+  constructor(private cdRef:ChangeDetectorRef,public ref: DynamicDialogRef,private entityService: CustonService,private primengConfig: PrimeNG,private comSrv: ComprasService) { }
 
   ngOnInit(): void {
-   
+
   }
 
 
@@ -159,7 +160,7 @@ export class CcModalTablaProveedoresComponent implements AfterViewChecked {
       }, 1000);
 
     }, error => {
-      
+
     })
 
   }

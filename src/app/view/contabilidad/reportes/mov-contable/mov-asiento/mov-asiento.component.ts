@@ -15,6 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MovAsientoDocumentoComponent } from '../mov-asiento-documento/mov-asiento-documento.component';
 import { Console } from 'console';
 @Component({
+standalone: false,
   selector: 'app-mov-asiento',
   templateUrl: './mov-asiento.component.html',
   styleUrls: ['./mov-asiento.component.scss']

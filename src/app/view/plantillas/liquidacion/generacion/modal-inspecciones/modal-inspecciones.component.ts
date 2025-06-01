@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
+standalone: false,
   selector: 'app-modal-inspecciones',
   templateUrl: './modal-inspecciones.component.html',
   styleUrls: ['./modal-inspecciones.component.scss']

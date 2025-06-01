@@ -17,6 +17,7 @@ import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exonera
 import { ModalSupervivenciaComponent } from 'src/app/config/custom/modal-supervivencia/modal-supervivencia.component';
 
 @Component({
+standalone: false,
   selector: 'app-arriendoterrenos',
   templateUrl: './arriendoterrenos.component.html',
   styleUrls: ['./arriendoterrenos.component.scss']

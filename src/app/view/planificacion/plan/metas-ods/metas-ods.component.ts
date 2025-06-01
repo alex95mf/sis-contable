@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MetaViewComponent } from './meta-view/meta-view.component';
 
 @Component({
+standalone: false,
   selector: 'app-metas-ods',
   templateUrl: './metas-ods.component.html',
   styleUrls: ['./metas-ods.component.scss']

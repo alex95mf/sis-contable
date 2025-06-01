@@ -20,6 +20,7 @@ import { ConsoleService } from '@ng-select/ng-select/lib/console.service';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 
 @Component({
+standalone: false,
   selector: 'app-bandeja-general',
   templateUrl: './bandeja-general.component.html',
   styleUrls: ['./bandeja-general.component.scss']

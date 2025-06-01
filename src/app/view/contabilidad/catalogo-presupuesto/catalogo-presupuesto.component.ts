@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment';
 import Botonera from 'src/app/models/IBotonera';
 
 @Component({
+standalone: false,
   selector: 'app-catalogo-presupuesto',
   templateUrl: './catalogo-presupuesto.component.html',
   styleUrls: ['./catalogo-presupuesto.component.scss'],

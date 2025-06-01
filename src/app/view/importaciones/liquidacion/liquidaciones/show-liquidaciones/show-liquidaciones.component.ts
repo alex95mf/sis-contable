@@ -14,6 +14,7 @@ import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spine
 
 
 @Component({
+standalone: false,
   selector: 'app-show-liquidaciones',
   templateUrl: './show-liquidaciones.component.html',
   styleUrls: ['./show-liquidaciones.component.scss']

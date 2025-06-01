@@ -8,6 +8,7 @@ import { CommonVarService } from '../../../../../services/common-var.services'
 import { MultasService } from '../multas.service';
 
 @Component({
+standalone: false,
   selector: 'app-modal-exoneraciones',
   templateUrl: './modal-exoneraciones.component.html',
   styleUrls: ['./modal-exoneraciones.component.scss']

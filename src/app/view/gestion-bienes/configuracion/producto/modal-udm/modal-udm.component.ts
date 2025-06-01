@@ -8,6 +8,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
 @Component({
+standalone: false,
   selector: 'app-modal-udm',
   templateUrl: './modal-udm.component.html',
   styleUrls: ['./modal-udm.component.scss']

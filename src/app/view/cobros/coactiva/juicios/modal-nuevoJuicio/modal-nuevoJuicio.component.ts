@@ -14,6 +14,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 
 @Component({
+standalone: false,
   selector: 'app-modal-nuevoJuicio',
   templateUrl: './modal-nuevoJuicio.component.html',
   styleUrls: ['./modal-nuevoJuicio.component.scss']

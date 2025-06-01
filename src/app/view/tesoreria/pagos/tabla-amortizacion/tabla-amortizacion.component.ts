@@ -17,6 +17,7 @@ import { takeUntil } from 'rxjs/operators';
 import Botonera from 'src/app/models/IBotonera';
 import { SweetAlertResult } from 'sweetalert2';
 @Component({
+standalone: false,
   selector: 'app-tabla-amortizacion',
   templateUrl: './tabla-amortizacion.component.html',
   styleUrls: ['./tabla-amortizacion.component.scss']

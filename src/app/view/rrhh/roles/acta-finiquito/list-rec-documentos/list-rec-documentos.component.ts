@@ -4,13 +4,14 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
-import { ActaFiniquitoService } from '../acta-finiquito.service'; 
+import { ActaFiniquitoService } from '../acta-finiquito.service';
 
 import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "../../../../../global";
 
 @Component({
+standalone: false,
   selector: 'app-list-rec-documentos',
   templateUrl: './list-rec-documentos.component.html',
   styleUrls: ['./list-rec-documentos.component.scss']
@@ -70,14 +71,14 @@ export class ListRecDocumentosComponent implements OnInit {
       }
     ]
 
-    
+
     this.hoy = new Date();
     this.dia_siguiente = new Date(this.hoy);
     this.dia_siguiente.setDate(this.dia_siguiente.getDate() + 1);
     this.primer_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth(), 1);
     this.ultimo_dia = new Date(this.hoy.getFullYear(),this.hoy.getMonth() + 1, 0);
 
-    
+
     this.filter = {
       nombre_empleado: undefined,
       num_documento: undefined,
@@ -93,7 +94,7 @@ export class ListRecDocumentosComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
       this.cargarDocumentos();
     }, 0);
@@ -124,14 +125,14 @@ export class ListRecDocumentosComponent implements OnInit {
     this.mensajeSppiner = "Cargando lista de actas de finiquito...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1 
-    
+    if (flag) this.paginate.page = 1
+
     let data = {
       params: {
         filter: this.filter,
         paginate: this.paginate,
       },
-    
+
     }
 
     this.apiSrv.getRecDocumentos(data).subscribe(
@@ -140,7 +141,7 @@ export class ListRecDocumentosComponent implements OnInit {
         //console.log('documentos'+res);
         this.documentosDt = res['data'];
         this.paginate.length = res['total'];
-        
+
         this.lcargando.ctlSpinner(false);
       },
       (error) => {

@@ -23,6 +23,7 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
+standalone: false,
   selector: 'app-generacion-idp',
   templateUrl: './generacion-idp.component.html',
   styleUrls: ['./generacion-idp.component.scss']

@@ -16,6 +16,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
+standalone: false,
   selector: 'app-modal-orden-compra',
   templateUrl: './modal-orden-compra.component.html',
   styleUrls: ['./modal-orden-compra.component.scss']

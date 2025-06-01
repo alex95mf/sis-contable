@@ -12,6 +12,7 @@ import * as myVarGlobals from "../../../../../global";
 import { RecaudacionesEspeciesFiscalesService } from '../recaudaciones-especies-fiscales.service';
 
 @Component({
+standalone: false,
   selector: 'app-list-cruce-convenio',
   templateUrl: './list-cruce-convenio.component.html',
   styleUrls: ['./list-cruce-convenio.component.scss']

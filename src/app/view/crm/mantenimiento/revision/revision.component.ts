@@ -28,6 +28,7 @@ interface Cotizacion {
 }
 
 @Component({
+standalone: false,
   selector: 'app-revision',
   templateUrl: './revision.component.html',
   styleUrls: ['./revision.component.scss']

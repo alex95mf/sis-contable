@@ -18,6 +18,7 @@ import { ParametroCuentaComponent } from './parametro-cuenta/parametro-cuenta.co
 const Swal = require('sweetalert2');
 
 @Component({
+standalone: false,
 	selector: 'app-contable',
 	templateUrl: './contable.component.html',
 	styleUrls: ['./contable.component.scss']

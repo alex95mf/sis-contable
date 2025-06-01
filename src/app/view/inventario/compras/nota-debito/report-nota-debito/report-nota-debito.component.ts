@@ -16,6 +16,7 @@ import { ListadoRepComponent } from './listado-rep/listado-rep.component';
 declare const $: any;
 
 @Component({
+standalone: false,
   selector: 'app-report-nota-debito-inv',
   templateUrl: './report-nota-debito.component.html',
   styleUrls: ['./report-nota-debito.component.scss']
