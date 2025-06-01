@@ -142,7 +142,7 @@ export class BodegaIngresoComponent implements OnInit {
         }
       });
     }, 10);
-    
+
   }
 
   ngOnInit(): void {
@@ -167,7 +167,7 @@ export class BodegaIngresoComponent implements OnInit {
     setTimeout(() => {
       this.vmButtons.forEach(element => {
         if(element.paramAccion == 1){
-          element.permiso = true; element.showimg = true;          
+          element.permiso = true; element.showimg = true;
         }else{
           element.permiso = false; element.showimg = false;
         }
@@ -189,7 +189,7 @@ export class BodegaIngresoComponent implements OnInit {
       if (this.permisions[0].ver == "0") {
         this.lcargando.ctlSpinner(false);
         this.toastr.info("Usuario no tiene Permiso para ver el formulario de Bodega");
-      } else {      
+      } else {
         setTimeout(() => {
           this.getStockXCeller();
           this.getEmpresa();
@@ -204,21 +204,21 @@ export class BodegaIngresoComponent implements OnInit {
 
   metodoGlobal(evento: any) {
     switch (evento.items.paramAccion+evento.items.boton.texto) {
-      case "1NUEVO": 
+      case "1NUEVO":
         this.newBodega();
       break;
       case "1GUARDAR":
-        this.validaSaveBodega(); 
+        this.validaSaveBodega();
       break;
-      case "1MODIFICAR": 
+      case "1MODIFICAR":
       this.validaUpdateBodega();
       break;
-      case "1CANCELAR": 
+      case "1CANCELAR":
       this.deleteCeller2();
       break;
 
 
-      case "2NUEVO": 
+      case "2NUEVO":
       this.newStruct();
       break;
       case "2GUARDAR":
@@ -244,7 +244,7 @@ export class BodegaIngresoComponent implements OnInit {
 			case "3IMPRIMIR":
 				$('#FicheroMover').DataTable().button('.buttons-print').trigger();
 				break;
-      
+
     }
   }
 
@@ -315,7 +315,7 @@ export class BodegaIngresoComponent implements OnInit {
             //console.log(res['data']);
             this.dataStockBodega = res['data'];
             setTimeout(() => {
-              this.dtTrigger.next();
+              this.dtTrigger.next(null);
               //this.ngOnDestroy();
             }, 50);
           }, error => {
@@ -380,7 +380,7 @@ export class BodegaIngresoComponent implements OnInit {
       this.empresaSeleccionado = e;
       this.dataSucursal = undefined;
       setTimeout(() => {
-        this.getSucursal(); 
+        this.getSucursal();
       }, 30);
     }
   }
@@ -633,7 +633,7 @@ export class BodegaIngresoComponent implements OnInit {
       id_controlador: myVarGlobals.fBodegaMovimiento
     }
     this.bodegaService.updateEstruture(data).subscribe(res => {
-      this.commonServices.refreshDataTableStruct.next();
+      this.commonServices.refreshDataTableStruct.next(null);
       this.deleteStruc();
       this.toastr.success(res['message']);
       this.dmodificaStruct = false;
@@ -655,7 +655,7 @@ export class BodegaIngresoComponent implements OnInit {
     }
     this.bodegaService.saveEstruture(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);
-      this.commonServices.refreshDataTableStruct.next();
+      this.commonServices.refreshDataTableStruct.next(null);
       this.deleteStruc();
       this.toastr.success(res['message']);
       this.dguardaStruct = false;
@@ -684,7 +684,7 @@ export class BodegaIngresoComponent implements OnInit {
     }
     this.bodegaService.updateBodega(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);
-      this.commonServices.refreshDataTable.next();
+      this.commonServices.refreshDataTable.next(null);
       this.deleteCeller2();
       this.toastr.success(res['message']);
       this.dmodificarBodega = false;
@@ -730,7 +730,7 @@ export class BodegaIngresoComponent implements OnInit {
     }
     this.bodegaService.saveBodega(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);
-      this.commonServices.refreshDataTable.next();
+      this.commonServices.refreshDataTable.next(null);
       this.deleteCeller2();
       this.toastr.success(res['message']);
       this.dguardarbodega = false;

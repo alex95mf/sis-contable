@@ -58,7 +58,7 @@ export class ParametroFormComponent implements OnInit {
     private modalDet: NgbModal,
     private commonVarSrv: CommonVarService,
   ) {
-  
+
   }
 
   ngOnInit(): void {
@@ -101,16 +101,16 @@ export class ParametroFormComponent implements OnInit {
     setTimeout(() => {
 
       console.log(this.data)
-     
+
       if(!this.isNew){
         this.parametro = this.data
         this.vmButtons[0].showimg = false
       }else{
-        
+
         this.vmButtons[0].showimg = true
         this.vmButtons[1].showimg = false
       }
-      
+
     }, 50);
 
   }
@@ -126,7 +126,7 @@ export class ParametroFormComponent implements OnInit {
         break;
       case " Actualizar":
         this.validacion('UPDATE');
-        break; 
+        break;
     }
   }
 
@@ -135,7 +135,7 @@ export class ParametroFormComponent implements OnInit {
     this.modal.close()
   }
 
- 
+
 
   validacion(valor){
     this.lcargando.ctlSpinner(true)
@@ -156,12 +156,12 @@ export class ParametroFormComponent implements OnInit {
 
 
   guardarParametrosNomina(){
-    
+
     this.service.setParametrosNomina(this.parametro).subscribe(
       (res)=>{
         console.log(res)
         if (res["status"] == 1) {
-         
+
         this.lcargando.ctlSpinner(false);
         Swal.fire({
           icon: "success",
@@ -172,11 +172,11 @@ export class ParametroFormComponent implements OnInit {
           confirmButtonColor: '#20A8D8',
         }).then((res) => {
           if (res.isConfirmed) {
-           
+
           }
         })
         this.closeModal();
-        this.commonVarSrv.modalCargarRubros.next()
+        this.commonVarSrv.modalCargarRubros.next(null)
         } else {
           this.lcargando.ctlSpinner(false);
           Swal.fire({
@@ -188,7 +188,7 @@ export class ParametroFormComponent implements OnInit {
             confirmButtonColor: '#20A8D8',
           });
         }
-      
+
       },(error) => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -196,13 +196,13 @@ export class ParametroFormComponent implements OnInit {
     )
   }
   actualizarParametrosNomina(){
-    
-   
+
+
     this.service.updateParametrosNomina(this.parametro).subscribe(
       (res)=>{
         console.log(res)
         if (res["status"] == 1) {
-         
+
         this.lcargando.ctlSpinner(false);
         Swal.fire({
           icon: "success",
@@ -213,12 +213,12 @@ export class ParametroFormComponent implements OnInit {
           confirmButtonColor: '#20A8D8',
         }).then((res) => {
           if (res.isConfirmed) {
-           
+
           }
         })
         this.closeModal();
-        this.commonVarSrv.modalParametrosNomina.next()
-        
+        this.commonVarSrv.modalParametrosNomina.next(null)
+
         } else {
           this.lcargando.ctlSpinner(false);
           Swal.fire({
@@ -230,7 +230,7 @@ export class ParametroFormComponent implements OnInit {
             confirmButtonColor: '#20A8D8',
           });
         }
-      
+
       },(error) => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -241,19 +241,19 @@ export class ParametroFormComponent implements OnInit {
 // limpiarCDebe(){
 //   if (this.rubro.tipoRubro == 9){
 
- 
+
 //   console.log("limpiando")
 //   this.rubro.cuentaInvDeb ='';
 //   this.rubro.numcInvDeb=''; }
 // }
 //   actualizarRubro(){
-    
+
 //     this.service.updateRubros(this.rubro).subscribe(
 //       (res)=>{
 //         this.toastr.success('Se Actualizo con éxito');
 //         this.lcargando.ctlSpinner(false);
 //         this.closeModal();
-//         this.commonVarSrv.modalCargarRubros.next()
+//         this.commonVarSrv.modalCargarRubros.next(null)
 //       }
 //     )
 //   }

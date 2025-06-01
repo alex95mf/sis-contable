@@ -112,7 +112,7 @@ export class BodegaBienesComponent implements OnInit {
     private toastr: ToastrService,
     private commonVrs: CommonVarService,
     private modal_Encargado: NgbModal
-  ) { 
+  ) {
 
 
 
@@ -140,17 +140,17 @@ export class BodegaBienesComponent implements OnInit {
       }
     )
     this.commonServices.refreshDataTableStruct.asObservable().subscribe(res =>{
-      if(!this.validaDtBodega){                
+      if(!this.validaDtBodega){
         this.getDataTable1();
       }
-    }) 
+    })
     this.commonServices.refreshDataTableStruct.asObservable().subscribe(res =>{
-      if(!this.validaDtBodega){                
+      if(!this.validaDtBodega){
         this.getDataTable();
       }else{
        //this.rerender();
       }
-    }) 
+    })
 
   }
 
@@ -164,7 +164,7 @@ export class BodegaBienesComponent implements OnInit {
         }
       });
     }, 10);
-    
+
   }
   ngOnInit(): void {
 
@@ -182,7 +182,7 @@ export class BodegaBienesComponent implements OnInit {
 
     this.filter = {
       nombre_bodega: null,
-      filterControl: "" 
+      filterControl: ""
     }
 
     this.paginate = {
@@ -198,7 +198,7 @@ export class BodegaBienesComponent implements OnInit {
     setTimeout(() => {
       this.vmButtons.forEach(element => {
         if(element.paramAccion == 1){
-          element.permiso = true; element.showimg = true;          
+          element.permiso = true; element.showimg = true;
         }else{
           element.permiso = false; element.showimg = false;
         }
@@ -220,7 +220,7 @@ export class BodegaBienesComponent implements OnInit {
       if (this.permisions[0].ver == "0") {
         this.lcargando.ctlSpinner(false);
         this.toastr.info("Usuario no tiene Permiso para ver el formulario de Bodega");
-      } else {      
+      } else {
         setTimeout(() => {
           //this.getStockXCeller();
           this.getEmpresa();
@@ -237,21 +237,21 @@ export class BodegaBienesComponent implements OnInit {
 
   metodoGlobal(evento: any) {
     switch (evento.items.paramAccion+evento.items.boton.texto) {
-      case "1NUEVO": 
+      case "1NUEVO":
         this.newProduct();
       break;
       case "1GUARDAR":
-        this.validaSaveBodega(); 
+        this.validaSaveBodega();
       break;
-      case "1MODIFICAR": 
+      case "1MODIFICAR":
       this.validaUpdateBodega();
       break;
-      case "1CANCELAR": 
+      case "1CANCELAR":
       this.deleteCeller2();
       break;
 
 
-      case "2NUEVO": 
+      case "2NUEVO":
       this.newStruct();
       break;
       case "2GUARDAR":
@@ -348,7 +348,7 @@ export class BodegaBienesComponent implements OnInit {
     Object.assign(this.paginate, newPaginate);
     this.getDataTable1();
   }
-  
+
 
 
   validaGlobal(){
@@ -442,7 +442,7 @@ export class BodegaBienesComponent implements OnInit {
     console.log(data);
     this.bodegaService.saveBodegaDig(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);
-      this.commonServices.refreshDataTable.next();
+      this.commonServices.refreshDataTable.next(null);
       this.deleteCeller2();
       this.toastr.success(res['message']);
       this.dguardarbodega = false;
@@ -475,7 +475,7 @@ export class BodegaBienesComponent implements OnInit {
 
     this.bodegaService.updateBodegaDig(this.bodega).subscribe(res => {
       this.lcargando.ctlSpinner(false);
-      // this.commonServices.refreshDataTable.next();
+      // this.commonServices.refreshDataTable.next(null);
       this.toastr.success(res['message']);
       this.disabledBodega = true;
       this.getDataTable();
@@ -519,7 +519,7 @@ export class BodegaBienesComponent implements OnInit {
     }
     this.bodegaService.saveEstrutureDig(data).subscribe(res => { //saveEstruture
       this.lcargando.ctlSpinner(false);
-      this.commonServices.refreshDataTableStruct.next();
+      this.commonServices.refreshDataTableStruct.next(null);
       this.deleteStruc();
       this.toastr.success(res['message']);
       this.dguardaStruct = false;
@@ -543,7 +543,7 @@ export class BodegaBienesComponent implements OnInit {
       id_controlador: myVarGlobals.fBodegaMovimiento
     }
     this.bodegaService.updateEstrutureDig(data).subscribe(res => {
-      this.commonServices.refreshDataTableStruct.next();
+      this.commonServices.refreshDataTableStruct.next(null);
       this.deleteStruc();
       this.toastr.success(res['message']);
       this.dmodificaStruct = false;
@@ -555,7 +555,7 @@ export class BodegaBienesComponent implements OnInit {
   limpiarFiltro(){
     this.filter = {
       nombre_bodega: null,
-      filterControl: "" 
+      filterControl: ""
     }
   }
 
@@ -626,7 +626,7 @@ export class BodegaBienesComponent implements OnInit {
         }
 
         this.lcargando.ctlSpinner(false);
-        
+
       }, error => {
 
       });
@@ -656,10 +656,10 @@ export class BodegaBienesComponent implements OnInit {
           this.dataBodega1 = res['data']['data'];
         } else {
           this.dataBodega1 = Object.values(res['data']['data']);
-        }  
+        }
 
         this.lcargando.ctlSpinner(false);
-        
+
       }, error => {
 
       });
@@ -786,7 +786,7 @@ export class BodegaBienesComponent implements OnInit {
           this.confirmAction("Seguro desea guardar el registro?", "ADD_BODEGA");
         }
       })
-    
+
   }
 
   async validaUpdateStruc() {
@@ -832,7 +832,7 @@ export class BodegaBienesComponent implements OnInit {
           }
         }, 1000);
       })
-    
+
   }
 
 
@@ -864,8 +864,8 @@ export class BodegaBienesComponent implements OnInit {
 
 
 
-  
-  
+
+
 
 
 }

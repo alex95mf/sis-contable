@@ -192,7 +192,7 @@ export class ModalActuacionesComponent implements OnInit {
 
       console.log(data)
 
-      const response = await this.apiService.almacenaActuacion({ juicio: this.juicio, actuacion: data }).toPromise<any>()
+      const response = await this.apiService.almacenaActuacion({ juicio: this.juicio, actuacion: data }) as any
       console.log(response)
       if (this.fileList != undefined) {
         this.uploadFile()

@@ -11,7 +11,7 @@ import { RolGeneralEmplService } from 'src/app/view/rrhh/beneficios/rol-general/
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalProgramaComponent } from 'src/app/view/rrhh/beneficios/rol-general/modal-programa/modal-programa.component';
-import 'sweetalert2/src/sweetalert2.scss';  
+import 'sweetalert2/src/sweetalert2.scss';
 const Swal = require('sweetalert2');
 import * as moment from 'moment';
 import { ExcelService } from 'src/app/services/excel.service';
@@ -36,7 +36,7 @@ export class ListadoComponent implements OnInit {
   arrayGrupo: Array<any> = [];
   arrayData:any;
   grupo: any = 0;
-  areas:any; 
+  areas:any;
   departamentos:any;
   cantidadtotal:any = 0;
   validaDt: any = false;
@@ -48,7 +48,7 @@ export class ListadoComponent implements OnInit {
   dateNow:  any;
   hora = this.date.getHours() + ':' + this.date.getMinutes() + ':' + this.date.getSeconds();
 
-  
+
   dataDt: any = [];
   paginate: any;
   filter: any;
@@ -92,7 +92,7 @@ export class ListadoComponent implements OnInit {
         (res)=>{  console.log("prueba")
           this.filter.programa = res.nombre
           this.fk_programa = res.id_nom_programa
-         
+
           this.cargarAreas()  /**/
         }
       )
@@ -156,7 +156,7 @@ export class ListadoComponent implements OnInit {
     )
   }
 
-  
+
   cargarAreas() {
    // this.mensajeSpiner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
@@ -216,17 +216,17 @@ export class ListadoComponent implements OnInit {
         this.arrayData = res['data'];
         this.cantidadtotal = res['data'].length;
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         /* this.lcargando.ctlSpinner(false); */
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
         this.toastr.info(error.error.message);
       });
     }
-    
+
     rerender(): void {
       this.arrayData = [];
       this.validaDt = false;
@@ -235,7 +235,7 @@ export class ListadoComponent implements OnInit {
         this.getTableReport();
       });
     }
-    
+
     filterptDepartamento(data) {
       if (this.grupo != 0) {
         this.grupo = data;
@@ -244,7 +244,7 @@ export class ListadoComponent implements OnInit {
         this.rerender();
       }
     }
-    
+
   cargarDepartamentos(event) {
   //  this.mensajeSpiner = "Cargando listado de Departamentos...";
     this.lcargando.ctlSpinner(true);
@@ -276,7 +276,7 @@ export class ListadoComponent implements OnInit {
     }
 
     limpiarFiltros() {
-      
+
       this.filter.nombre = undefined;
       this.filter.area = undefined;
       this.filter.departamento = undefined;
@@ -284,5 +284,5 @@ export class ListadoComponent implements OnInit {
       this.filter.programa = undefined;
     }
 
-  
+
 }

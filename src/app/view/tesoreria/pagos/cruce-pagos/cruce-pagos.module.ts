@@ -14,7 +14,7 @@ import { ModalLiquidacionesComponent } from './modal-liquidaciones/modal-liquida
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ModalFacturasComponent } from './modal-facturas/modal-facturas.component';
 import { ModalRecDocumentoComponent } from './modal-rec-documento/modal-rec-documento.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({

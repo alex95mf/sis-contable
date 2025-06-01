@@ -32,14 +32,14 @@ export class MantenimientoComponent implements OnInit {
     fecha: moment(new Date()).format('YYYY-MM-DD'),
     fk_proveedor:0,
     detalles:[]
-  
+
 }
   producto:any = []
 
-  mantenimientoDisabled =false 
+  mantenimientoDisabled =false
   anexoDisabled =true
-  
-  productoDisabled =false 
+
+  productoDisabled =false
 
   fileList: FileList;
   id:any
@@ -89,7 +89,7 @@ export class MantenimientoComponent implements OnInit {
 
         //this.producto=[];
         res.detalles.forEach(e => {
-        
+
           let det = {
             nombre: e['producto'][0].nombre,
             codigoproducto: e['producto'][0].codigo,
@@ -97,22 +97,22 @@ export class MantenimientoComponent implements OnInit {
             observacion:e['observacion'],
             id_mantenimiento_det:e['id_mantenimiento_det']
           }
-         
+
           this.producto.push(det)
-        
+
         })
        // console.log(this.producto)
         this.documento.detalles = this.producto
 
 
         this.commonVarServices.contribAnexoLoad.next({condi:'infimas', id: res.id_mantenimiento,estado:this.estado});
-       
+
         if(res['estado']=="C"){
           this.vmButtons[2].habilitar = true;
           this.vmButtons[3].habilitar = true;
           this.vmButtons[4].habilitar = true;
           this.mantenimientoDisabled = true
-          this.productoDisabled = true        
+          this.productoDisabled = true
         }
          else {
           this.vmButtons[2].habilitar = true;
@@ -122,7 +122,7 @@ export class MantenimientoComponent implements OnInit {
         this.productoDisabled = false
         this.anexoDisabled =false
 
-        
+
         }
       }
     );
@@ -157,7 +157,7 @@ export class MantenimientoComponent implements OnInit {
       case "APROBAR":
           this.aprobar()
             break;
- 
+
     }
   }
 
@@ -174,7 +174,7 @@ export class MantenimientoComponent implements OnInit {
     this.proveedorActive = {
       razon_social: ""
     }
-    this.commonVarServices.clearAnexos.next()
+    this.commonVarServices.clearAnexos.next(null)
     this.estado = 'P'
     this.vmButtons[2].habilitar= false;
     this.vmButtons[3].habilitar= true;
@@ -200,10 +200,10 @@ export class MantenimientoComponent implements OnInit {
         windowClass: "viewer-content-general",
       });
       //modalInvoice.componentInstance.module_comp = myVarGlobals.fContratacion;
-  
+
     }
 
-    
+
   removeTitulo(index,producto) {
     this.producto.splice(index, 1);
     this.producto_delete = producto
@@ -212,7 +212,7 @@ export class MantenimientoComponent implements OnInit {
       this.eliminarDetalle()
     }
   }
-  
+
   saveMantenimiento(){
     if(this.documento.detalles.length <=0 || this.documento.detalles == undefined){
       this.toastr.info("Debe seleccionar producto(s)")
@@ -250,7 +250,7 @@ export class MantenimientoComponent implements OnInit {
             });
             this.documento = res['data']
             this.uploadFile(res['data'].id_mantenimiento)
-            this.mantenimientoDisabled = true 
+            this.mantenimientoDisabled = true
             this.lcargando.ctlSpinner(false);
           },
           (error) => {
@@ -265,7 +265,7 @@ export class MantenimientoComponent implements OnInit {
             });
           }
         );
-        
+
       }
     });
   }
@@ -300,7 +300,7 @@ export class MantenimientoComponent implements OnInit {
       id_controlador: myVarGlobals.fGestBienesMant,
       accion: `Nuevo anexo para Prestamo de Bienes ${id_mantenimiento}`,
       ip: this.commonServices.getIpAddress(),
-      custom1:'INV-PRESTAMO-BIENES' 
+      custom1:'INV-PRESTAMO-BIENES'
     }
     if(this.fileList.length!=0){
       for (let i = 0; i < this.fileList.length; i++) {
@@ -313,7 +313,7 @@ export class MantenimientoComponent implements OnInit {
 
   UploadService(file,  identifier, payload?: any): void {
     this.invService.uploadAnexo(file, payload).subscribe(
-      res => { 
+      res => {
         this.commonVarServices.contribAnexoLoad.next({condi:'infimas', id: identifier})
       },
       err => {
@@ -360,14 +360,14 @@ export class MantenimientoComponent implements OnInit {
               confirmButtonText: "Aceptar",
               confirmButtonColor: '#20A8D8'
             }).then((result) => {
-              if (result.isConfirmed) { 
+              if (result.isConfirmed) {
                 this.productoDisabled = false
                 console.log(this.fileList)
               if(this.fileList!=undefined){
                 this.uploadFile(data.id)
               }
                // this.mantenimientoDisabled = true
-               
+
               }
             })
           }
@@ -382,7 +382,7 @@ export class MantenimientoComponent implements OnInit {
               confirmButtonColor: '#20A8D8'
             });
           }
-          
+
           },
           (error)=>{
             this.lcargando.ctlSpinner(false);
@@ -391,11 +391,11 @@ export class MantenimientoComponent implements OnInit {
         )
       }
     })
-   
+
   }
 
   aprobar(){
-   
+
     if (this.documento.observaciones == "" || this.documento.observaciones == undefined) {
       this.toastr.info("Debe editar e ingresar una observación para realizar el mantenimiento")
       return;
@@ -464,7 +464,7 @@ export class MantenimientoComponent implements OnInit {
                   confirmButtonColor: '#20A8D8'
           });
             }
-           
+
           },
           (error)=>{
             this.lcargando.ctlSpinner(false);
@@ -474,8 +474,8 @@ export class MantenimientoComponent implements OnInit {
       }
     })
 
-    
-    
+
+
   }
 
   eliminarDetalle(){

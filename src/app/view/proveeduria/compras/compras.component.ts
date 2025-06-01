@@ -28,7 +28,7 @@ import { ModalComprasComponent } from './modal-compras/modal-compras.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Message } from 'primeng/api'; 
+import { Message } from 'primeng/api';
 
 import { MenuItem } from 'primeng/api';
 
@@ -81,7 +81,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
   dtTrigger = new Subject();
   fecha: Date = new Date();
   codigos_partidas_idp:any
-  
+
   asientoAnticiposname: any;
   asientoMultasname: any;
   asientoCabname: any;
@@ -115,7 +115,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
 
   dataCargaXML: any = [{ cod_anexo_iva: "", cod_iva: "", porce_iva: 0, cod_anexo_fte: "", cod_fte: "", porce_fte: 0, isRetencionIva: false, LoadOpcionImpuesto: false, LoadOpcionReteFuente: false, LoadOpcionRteIva: false,LoadOpcionIceSri: false, LoadOpcionCentro: false, subtotal_noobjeto: (0.00).toFixed(2), subtotal_excento: (0.00).toFixed(2), subtotal_cero: (0.00).toFixed(2), subtotal_iva: (0.00).toFixed(2), InputDisabledCantidad: true, iva_detalle: (0.00).toFixed(2), ice_detalle: (0.00).toFixed(2), fk_producto: 0, impuesto: 2, rte_fuente: 0, rte_iva: 0, centro: 0, nombre: null, codigo: null, observacion: null, cantidad: null, precio: null, desc: (0.00).toFixed(2), subtotalItems: 0.00, totalItems: 0.00, paga_iva: 1 }];
 
-  
+
   proveedor: any
   tip_documeto: any;
 
@@ -208,7 +208,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
   numIngresoSelected: string
   tbl_partidas: any[] = []
   totalPartidas: number = 0
-  activeIndex: number = 1 
+  activeIndex: number = 1
   dataAnticipos: any = []
   dataMultas: any = []
 
@@ -222,7 +222,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
   reglasCuentas: any = []
 
   constructor(
-    private diarioSrv: DiarioService, 
+    private diarioSrv: DiarioService,
     private toastr: ToastrService,
     private commonServices: CommonService,
     private router: Router,
@@ -301,7 +301,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
         this.buyProv.identificacion_proveedor = res.ruc
 
         let fecha_compra =  new Date(res.fecha_compra)
-        this.fecha_compra=  new Date(fecha_compra.getFullYear(),fecha_compra.getMonth(),fecha_compra.getDate() + 1); 
+        this.fecha_compra=  new Date(fecha_compra.getFullYear(),fecha_compra.getMonth(),fecha_compra.getDate() + 1);
 
         // console.log(this.fecha_compra)
         let tipo_proceso
@@ -319,7 +319,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
         }else {
          this.buyProv.num_contrato = ''
         }
-        
+
         this.buyProv.idp = res.contratacion?.idp
         this.buyProv.tipo_documento = res.tipo_documento_sustento
 
@@ -334,7 +334,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
         this.CargarCondicionesProveedor(res.fk_solicitud_contrato)
         //this.fecha_compra= res.fecha_compra
        // this.BuscarRetencionCompra(res.id)
-       
+
        if(res.retencion?.isactive == 1){
           this.retencionIsActive = true
           this.num_retencion = res.retencion?.num_retencion
@@ -346,7 +346,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
           this.id_retencion = undefined
           this.retencionIsActive = false
        }
-        
+
         this.buyProv.isActive = res.isactive
         this.buyProv.fk_usuario_receive = res.usuario?.id_usuario
         this.orden = res.tiene_orden_pago
@@ -428,7 +428,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
           //   this.rete_fuente = res['data'];
           // })
 
-          
+
 
           // Listas de las lineas
           this.rete_fuente = await this.contableService.getRetencionFuenteComprasAsync();
@@ -440,7 +440,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
 
           // Carga tabla Cuentas
           res.detalle_cuentas.forEach((element,index) => {
-            
+
             // let tipo=''
             let obj = {
               cuenta_detalle: '(' + element.codigo_cuenta + ') ' + element.nombre_cuenta,
@@ -486,7 +486,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
               retencion: element.total_rft,
               retencion_iva: element.total_riva,
               ice_detalle: element.total_ice
-              
+
             }
 
             const item = this.tbl_partidas.find((p: any) => p.codigo == element.codigo_partida)
@@ -499,7 +499,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
             }
             this.tbl_partidas.find((p: any) => p.codigo == element.codigo_partida).valor += parseFloat(element.subtotalitems)
 
-            /// Buscas en otro array 
+            /// Buscas en otro array
             this.rete_fuente.forEach(f => {
               // console.log(element.codigo_retencion_fuente , f.id_reten_fuente)
               if(f.cuenta != "" && element.codigo_retencion_fuente == f.id_reten_fuente){
@@ -533,21 +533,21 @@ export class ComprasComponent implements OnInit, OnDestroy {
             //  this.getRetencionIva(index,this.dataCuenta); // TODO: Llama a sumaTotales que limpia Anticipos y Multas
               // this.ChangeImpuestoIva(this.rte_iva,this.dataCuenta,index)  // Llena los valores de Retencion IVA
             });
-            
+
             // this.calculaIceSri();  // TODO: Llama a sumaTotales que limpia Anticipos y Multas
           //this.calculaImpuestoIva(); //04-10-2023
 
           // Caraga tabla resumen de impuestos
           this.detalleImpuesto=[]
           res.detalle_impuestos.forEach((element,index) => {
-      
+
             let obj = {
               base: element.base,
               porcentaje: element.porcentaje_retencion,
               total: element.valor_retencion,
               tipo: element.codigo_impuesto,
               rte_fuente: element.valor_retencion,
-              codigo: element.codigo_sri, 
+              codigo: element.codigo_sri,
               codigo_anexo: element.cod_anexo_sri
             }
             this.detalleImpuesto.push(obj)
@@ -557,7 +557,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
           // this.generaPreviewAsientoContable();
 
 
-          console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", res);/* 
+          console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", res);/*
 this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor - cruce de asiento */
           const asientoAnticipo = res.asiento_cabrelacionados?.find((asiento: any) => asiento.type === "Factura Proveedor - cruce de asiento");
 
@@ -568,7 +568,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
             this.asientoAnticiposId = null;
             this.asientoAnticiposname =null;
           }
-          
+
 
           const asientoMultas = res.asiento_cabrelacionados?.find((asiento: any) => asiento.type === "Factura Proveedor - cruce de multa");
           if (asientoMultas) {
@@ -580,16 +580,16 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
           }
 
 
-          
+
           this.asientoCabId = res.asiento_cab?.id
           console.log("res.asiento_cab?.asiento",res.asiento_cab?.asiento)
           this.asientoCabname = res.asiento_cab?.asiento
         }
 
-      
 
-        
-        
+
+
+
         // Llena Asientos /
         this.fieldsDaily=[]
          // antiormente jalaba del campo detalles en lugar del campo detallestot
@@ -604,7 +604,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
           account: element?.cuenta,
           name: element?.cuentas?.nombre,
           detail:element.detalle,
-          credit: parseFloat(element.valor_cre).toFixed(2), //parseFloat(element.valor_cre).toFixed(2) 
+          credit: parseFloat(element.valor_cre).toFixed(2), //parseFloat(element.valor_cre).toFixed(2)
           debit:parseFloat(element.valor_deb).toFixed(2) ,//parseFloat(element.valor_deb).toFixed(2)
           centro: element?.centro_costo?.id, //this.centros.find((c)=> c.id ==element?.centro_costo?.id)?.nombre
           tipo: 'A',
@@ -638,7 +638,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
         this.ListaAnticipos=[]
         this.ListaMultas=[]
         if(res.anticipos.length > 0){
-          
+
           this.ExistenAnticipos = false;
           res.anticipos.forEach(e => {
             if(e.tipo_cruce=='MU'){
@@ -646,38 +646,38 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
               let data = {
                 disabled: true,
                 id_documento: e.id_compra_anticipo,
-                documento: e.documento[0].documento, 
-                tipo_documento:e.tipo_cruce, 
-                fecha:e.documento.fecha, 
-                total:e.total, 
-                saldo:e.disponible, 
+                documento: e.documento[0].documento,
+                tipo_documento:e.tipo_cruce,
+                fecha:e.documento.fecha,
+                total:e.total,
+                saldo:e.disponible,
                 valor_aplicado:e.valor_aplicado,
                 cod_cuenta_multa:e.cod_cuenta_multa,
                 nom_cuenta_multa:e.nom_cuenta_multa,
                 cod_cuenta_por_pagar_multa:e.cod_cuenta_por_pagar_multa,
                 nom_cuenta_por_pagar_multa:e.nom_cuenta_por_pagar_multa,
-              
+
               }
               this.ListaMultas.push(data);
             }else{
               let data = {
                 disabled: true,
                 id_documento: e.id_compra_anticipo,
-                documento: e.documento[0].documento, 
-                tipo_documento:e.tipo_cruce, 
-                fecha:e.documento.fecha, 
-                total:e.total, 
-                saldo:e.disponible, 
+                documento: e.documento[0].documento,
+                tipo_documento:e.tipo_cruce,
+                fecha:e.documento.fecha,
+                total:e.total,
+                saldo:e.disponible,
                 valor_aplicado:e.valor_aplicado,
                 cod_cuenta_anticipo:e.cod_cuenta_anticipo,
                 nom_cuenta_anticipo:e.nom_cuenta_anticipo,
                 cod_cuenta_por_pagar_anticipo:e.cod_cuenta_por_pagar_anticipo,
                 nom_cuenta_por_pagar_anticipo:e.nom_cuenta_por_pagar_anticipo,
-                
+
               }
               this.ListaAnticipos.push(data);
             }
-            
+
           })
         }
 
@@ -696,7 +696,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
         this.lcargando.ctlSpinner(false)
         this.vmButtons[0].habilitar = true;
         //this.vmButtons[7].habilitar = false;
-        
+
       }
     )
 
@@ -823,7 +823,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
       this.ref.close();
     }
 
-    this.onDestroy$.next()
+    this.onDestroy$.next(null)
     this.onDestroy$.complete();
   }
    convertirNumeroALetras(numero) {
@@ -899,7 +899,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
     return resultado.trim();
 }
 
-  
+
   imprimirAsiento() {
     window.open(environment.ReportingUrl + "rpt_asiento_contable.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_documento=" + this.asientoCabId, '_blank')
   }
@@ -947,7 +947,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
     this.mensajeSppiner = 'Cargando Permisos'
 
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
-    
+
     let id_rol = this.dataUser.id_rol;
 
     let data = {
@@ -959,7 +959,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
 
       this.permisions = res['data'][0];
       this.permiso_ver = this.permisions.ver;
-      
+
 
       if (this.permisions.ver == "0") {
 
@@ -983,13 +983,13 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
 
   seleccionado(event){
     console.log(event)
-   
+
     //if (event.checked.length > 0) {
     if (event) {
-     
+
       this.orden= 'S';
     } else {
-      
+
       this.orden= 'N';
     }
     console.log(this.orden)
@@ -1025,7 +1025,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
 
   onClickConsultaCuentas(i) {
 
-  
+
       if (this.buyProv.fk_id_proveedor > 0) {
 
         if ((this.buyProv.num_doc !== "") && (typeof (this.buyProv.num_doc) !== 'undefined')) {
@@ -1049,7 +1049,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
               if (cuentas) {
                 this.CargarCuentas(cuentas, i);
                 this.CuentasReglas(cuentas, i)
-                    
+
                 this.recalculateAfectacion();
               }
 
@@ -1110,7 +1110,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
         this.toastr.info("No ha ingresado la información del proveedor, por favor verificar");
       }
 
-  
+
 
   }
 
@@ -1118,7 +1118,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
     const { cod_cuenta_por_pagar, cuenta_por_pagar } = this.dataCuenta[idx]
 
     // Validar que se haya escogido una CxP
-    if (cod_cuenta_por_pagar == undefined || cod_cuenta_por_pagar == "" || 
+    if (cod_cuenta_por_pagar == undefined || cod_cuenta_por_pagar == "" ||
     cuenta_por_pagar == undefined || cuenta_por_pagar == "") {
       this.toastr.warning('No ha seleccionado una CxP para aplicar')
       return
@@ -1205,7 +1205,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
   }
 
   // BuscarRetencionCompra(fk_compra_cab){
-    
+
   //   let data={
   //     fk_compra_cab: fk_compra_cab
   //   }
@@ -1609,7 +1609,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
 
 
   // generaPreviewAsientoContable = async () => {
-  //   //debugger 
+  //   //debugger
   //   try {
 
   //     this.fieldsDaily = [];
@@ -1819,7 +1819,7 @@ console.log(this.dataCuenta)
         await this.CentrosPresupuesto();
 
 
-        
+
         if (this.fieldsDaily.length > 0) {
 
 
@@ -1869,7 +1869,7 @@ console.log(this.dataCuenta)
 
 
               } else {
-                
+
                 this.fieldsDaily.unshift({
                   LoadOpcionCatalogoPresupuesto: false,
                   presupuesto: '',
@@ -1900,13 +1900,13 @@ console.log(this.dataCuenta)
                   tipo_detalle: 'CXP'
                 });
 
-                
+
 
               }
 
             }
 
-           
+
 
               this.fieldsDaily.push({
                 LoadOpcionCatalogoPresupuesto: false,
@@ -1922,7 +1922,7 @@ console.log(this.dataCuenta)
                 tipo: 'A',
                 tipo_detalle: 'GTO'
               });
-            
+
           }
 
 
@@ -1960,7 +1960,7 @@ console.log(this.dataCuenta)
               tipo: 'P',
               tipo_detalle: 'CXP'
             });
-           
+
           }
 
           this.fieldsDaily.push({
@@ -1977,7 +1977,7 @@ console.log(this.dataCuenta)
             tipo: 'A',
             tipo_detalle: 'GTO'
           });
-          
+
 
         }
         if(element.cod_cuenta_impuesto_rtefte != ''){
@@ -2041,7 +2041,7 @@ console.log(this.dataCuenta)
             tipo_detalle: 'RTICXP'
         });
         }
-       
+
 
         DetailCount++
 
@@ -2052,7 +2052,7 @@ console.log(this.dataCuenta)
       });
       console.log(codigo_cuentas)
       console.log(this.fieldsDaily)
-      
+
       // insertamos un ultimo registro para los totalizados
 
       // if (this.buyProv.valor_iva > 0) {
@@ -2071,7 +2071,7 @@ console.log(this.dataCuenta)
 
   async generaPreviewAsientoContable() {
     console.log('Generando asientos')
-    
+
     this.lcargando.ctlSpinner(true);
     this.fieldsDaily = []
     // console.log(this.dataAnticipos)
@@ -2168,10 +2168,10 @@ console.log(this.dataCuenta)
         tipo_afectacion: "",
         devengado: 0,
         cobrado_pagado: 0,
-      
+
       });
       const resultadosFiltrados = this.codigos_partidas_idp.filter(item => item.codigopartida === elementoEncontrado?.codigo_partida_icp);
-       
+
       this.fieldsDaily.push({
         LoadOpcionCatalogoPresupuesto: false,
         presupuesto: elementoEncontrado?.nombrepresupuesto,//'',
@@ -2183,7 +2183,7 @@ console.log(this.dataCuenta)
         actividad:resultadosFiltrados.length > 0 ? resultadosFiltrados.map(item => item.proyecto)[0] :'',
         funcion:resultadosFiltrados.length > 0 ? resultadosFiltrados.map(item => item.proyecto)[0] :'',
         fk_programa:resultadosFiltrados.length > 0 ? resultadosFiltrados.map(item => item.fk_programa)[0] :'',
-        
+
         valor_presupuesto: parseFloat(multas.valor_aplicado),//,elementoEncontrado?.cantidad,
         valor_partida: parseFloat(multas.valor_aplicado),//elementoEncontrado?.cantidad,//,0.00,
         account: multas.cod_cuenta_por_pagar_multa,//this.dataMultas[0].cod_cuenta_por_pagar_multa,
@@ -2200,12 +2200,12 @@ console.log(this.dataCuenta)
         devengado: parseFloat(multas.valor_aplicado),
         cobrado_pagado: 0,
       });
-    
+
     }
     }
 
     // IVA
-    const response = await this.comSrv.obtenerListaConfContable('FAC').toPromise<any>()
+    const response = await this.comSrv.obtenerListaConfContable('FAC') as any
     console.log(response)
     let CuentaIva='';
     let CuentaIvaNoombreCuenta='';
@@ -2228,7 +2228,7 @@ console.log(this.dataCuenta);
         nombrepresupuesto: element.nombrepresupuesto,
         codpresupuesto: element.codigo_presupuesto,
         codpartidaidp:element?.codigo_partida_icp,
-        
+
         proyecto: resultadosFiltrados.length > 0 ? resultadosFiltrados.map(item => item.proyecto)[0] : '',
         orientacion:resultadosFiltrados.length > 0 ? resultadosFiltrados.map(item => item.proyecto)[0] :'',
         geografico:resultadosFiltrados.length > 0 ? resultadosFiltrados.map(item => item.proyecto)[0] :'',
@@ -2279,7 +2279,7 @@ console.log(this.dataCuenta);
           LoadOpcionCatalogoPresupuesto: false,
           presupuesto: '',
           codpresupuesto: '',
-          codpartidaidp:'', 
+          codpartidaidp:'',
           proyecto:'',
           orientacion:'',
           geografico:'',
@@ -2311,7 +2311,7 @@ console.log(this.dataCuenta);
           LoadOpcionCatalogoPresupuesto: false,
           presupuesto: '',
           codpresupuesto: '',
-          codpartidaidp:'', 
+          codpartidaidp:'',
           proyecto:'',
           orientacion:'',
           geografico:'',
@@ -2468,7 +2468,7 @@ console.log(this.dataCuenta);
       }
 
       if(element.cuenta_inversion_cobro_codigo != null || element.cuenta_inversion_cobro_codigo != ''){
-       
+
           this.fieldsDaily.push({
             LoadOpcionCatalogoPresupuesto: false,
             presupuesto: '',//cuenta.nombre_catalogo_presupuesto,
@@ -2498,7 +2498,7 @@ console.log(this.dataCuenta);
           });
       }
       if(element.cuenta_inversion_pago_codigo != null || element.cuenta_inversion_pago_codigo != ''){
-       
+
         this.fieldsDaily.push({
           LoadOpcionCatalogoPresupuesto: false,
           presupuesto: '',//cuenta.nombre_catalogo_presupuesto,
@@ -2539,7 +2539,7 @@ console.log(this.dataCuenta);
       let TotalDebito = 0;
       let TotalCredito = 0;
       let TotalPresupuesto = 0;
-    
+
 
 
 
@@ -2591,9 +2591,9 @@ console.log(this.dataCuenta);
         dataCuenta: null,
         tipoPresupuesto:null,
         tipoAfectacion:null,
-        
+
       });
-   
+
    this.calcularAntipipoMulta();
     this.lcargando.ctlSpinner(false);
     console.log('Fin generacion asientos')
@@ -2603,7 +2603,7 @@ functemp(x){
   if (x.index==2 && this.lastRecord == null){
 this.generaPreviewAsientoContable();
   }
-  
+
 }
 calcularAntipipoMulta(){
   let TotalDebit_anticipo=0;
@@ -2712,7 +2712,7 @@ return acc
       });
 
 
-      
+
 
       if(this.buyProv.acountMultaContrapartida !== ''){
 
@@ -2775,7 +2775,7 @@ console.log('aqui se totaliza');
     console.log(TotalDebito, TotalCredito, TotalPresupuesto)
 
     // this.fieldsDaily.forEach((elementAsiento) => {
-      
+
     //   TotalDebito = TotalDebito + parseFloat(elementAsiento.debit);
     //   TotalCredito = TotalCredito + parseFloat(elementAsiento.credit);
     //   TotalPresupuesto = TotalPresupuesto + parseFloat(elementAsiento.valor_presupuesto);
@@ -2792,7 +2792,7 @@ console.log('aqui se totaliza');
       orientacion:'',
       geografico:'',
       actividad:'',
-      funcion:'', 
+      funcion:'',
       fk_programa:'',
       valor_presupuesto: TotalPresupuesto.toFixed(2),
       account: 'Total',
@@ -2803,7 +2803,7 @@ console.log('aqui se totaliza');
       centro: 0,
       tipo: 'T',
       tipo_detalle: '',
-      
+
     });
 
 
@@ -2814,7 +2814,7 @@ console.log('aqui se totaliza');
   }
 
   async CentrosPresupuesto() {
-    const reponse = await this.comSrv.ListaCatalogoPresupuesto().toPromise<any>()
+    const reponse = await this.comSrv.ListaCatalogoPresupuesto() as any
     this.catalogo_presupuesto = reponse.data
     /* await this.comSrv.ListaCatalogoPresupuesto().subscribe((result) => {
       this.catalogo_presupuesto = result['data']
@@ -2822,14 +2822,14 @@ console.log('aqui se totaliza');
   }
 
   async Centros() {
-    const reponse = await this.comSrv.ListaCentroCostos().toPromise<any>()
+    const reponse = await this.comSrv.ListaCentroCostos() as any
     this.centros = reponse.data
     /* await this.comSrv.ListaCentroCostos().subscribe((resCentro) => {
       this.centros = resCentro["data"]
     }) */
   }
 
-  
+
   getCatalogos() {
     this.mensajeSppiner = 'Cargando Catalogos'
     let data = {
@@ -2837,8 +2837,8 @@ console.log('aqui se totaliza');
      // params: "REC_METODO_PAGO"
     }
     this.comSrv.getCatalogos(data).subscribe(res => {
-     
-      
+
+
       this.tipo_pago = res['data']['TIPO PAGO'];
       this.forma_pago = res['data']['FORMA PAGO'];
       this.metodo_pago = res["data"]['REC_METODO_PAGO'];
@@ -2848,7 +2848,7 @@ console.log('aqui se totaliza');
       this.toastr.info(error.error.message)
     })
   }
-  
+
 
   getimpuestos() {
 
@@ -2922,9 +2922,9 @@ console.log('aqui se totaliza');
       this.dataCuenta.splice(index, 1);
 
       console.log("el calculo");
-      this.calculaImpuestoIva();/* 
+      this.calculaImpuestoIva();/*
     this.generaPreviewAsientoContable(); */
-    
+
     this.calculaImpuesto()
     this.generaPreviewAsientoContable();
       this.recalculateAfectacion();
@@ -3069,7 +3069,7 @@ console.log('aqui se totaliza');
         console.log('Calculando ICE')
       await this.calculaIceSri();
     }
-    
+
     console.log('Llamando a sumTotalizados')
     this.sumTotalizados();  // Totalizacion de Valores mostrados en la parte baja
     console.log('Genera asientos')
@@ -3165,7 +3165,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
         const sumProporcional: number = this.dataCuenta.reduce((acc:number, curr: any) => {
           console.log(curr.proporcional)
           if (curr.proporcional !== undefined) return acc + parseFloat(curr.proporcional)
-          return acc 
+          return acc
         }, 0);
         console.log(sumProporcional)
         proporcional = 1 - sumProporcional;
@@ -3181,7 +3181,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
     // }
     // const sumSubtotalesItems: number = this.dataCuenta.reduce((acc:number, curr: any) => {
     //   if (curr.proporcional !== undefined) return acc + parseFloat(curr.proporcional)
-    //   return acc 
+    //   return acc
     // }, 0);
     // Object.assign(this.dataCuenta[this.dataCuenta.length - 1], { proporcional: 1 - sumSubtotalesItems })
 
@@ -3296,7 +3296,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
               total: parseFloat(retencion.toFixed(2)),
               tipo: 'FUENTE',
               rte_fuente: element.rte_fuente,
-              codigo: element.cod_fte, 
+              codigo: element.cod_fte,
               codigo_anexo: element.cod_anexo_fte
             });
             console.log(this.detalleImpuesto)
@@ -3327,7 +3327,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
 
               this.detalleImpuesto[contador - 1].total = parseFloat(retencion.toFixed(2));
               this.detalleImpuesto[contador - 1].base = parseFloat(base_update.toFixed(2));
-              
+
 
             } else {
 
@@ -3337,12 +3337,12 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
               element.retencion = retencion
 
               this.detalleImpuesto.push({
-                base: parseFloat(parseFloat(base).toFixed(2)), 
-                porcentaje: element.porce_fte, 
-                total: parseFloat(retencion.toFixed(2)), 
-                tipo: 'FUENTE', 
-                rte_fuente: element.rte_fuente, 
-                codigo: element.cod_fte, 
+                base: parseFloat(parseFloat(base).toFixed(2)),
+                porcentaje: element.porce_fte,
+                total: parseFloat(retencion.toFixed(2)),
+                tipo: 'FUENTE',
+                rte_fuente: element.rte_fuente,
+                codigo: element.cod_fte,
                 codigo_anexo: element.cod_anexo_fte
               });
             }
@@ -3371,7 +3371,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
               porcentaje: element.porce_ice,
               total: parseFloat(iceSri.toFixed(2)),
               tipo: 'ICE',
-              codigo: element.cod_ice, 
+              codigo: element.cod_ice,
             });
             console.log(this.detalleIceSri)
           } else {
@@ -3400,7 +3400,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
 
               this.detalleIceSri[contador - 1].total = parseFloat(iceSri.toFixed(2));
               this.detalleIceSri[contador - 1].base = parseFloat(base_update.toFixed(2));
-              
+
 
             } else {
 
@@ -3408,20 +3408,20 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
               let iceSri = parseFloat(base) * (parseFloat(element.porce_ice) / 100);
 
               this.detalleIceSri.push({
-                base: parseFloat(parseFloat(base).toFixed(2)), 
-                porcentaje: element.porce_ice, 
-                total: parseFloat(iceSri.toFixed(2)), 
-                tipo: 'ICE', 
-                codigo: element.cod_fte, 
+                base: parseFloat(parseFloat(base).toFixed(2)),
+                porcentaje: element.porce_ice,
+                total: parseFloat(iceSri.toFixed(2)),
+                tipo: 'ICE',
+                codigo: element.cod_fte,
               });
 
-            
+
 
             }
 
           }
 
-         
+
 
         }
       });
@@ -3435,7 +3435,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
 
     this.detalleImpuesto = [];
 
-  
+
     this.dataProducto.forEach(element => {
 
       if (element.fk_producto !== 0) {
@@ -3572,12 +3572,12 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
               let retencion = parseFloat(base) * (parseFloat(element.porce_iva) / 100);
 
               this.detalleImpuesto.push({
-                base: base, 
-                porcentaje: element.porce_iva, 
-                total: parseFloat(retencion.toFixed(2)), 
-                tipo: 'IVA', 
-                rte_fuente: element.rte_iva, 
-                codigo: element.cod_iva, 
+                base: base,
+                porcentaje: element.porce_iva,
+                total: parseFloat(retencion.toFixed(2)),
+                tipo: 'IVA',
+                rte_fuente: element.rte_iva,
+                codigo: element.cod_iva,
                 codigo_anexo: element.cod_anexo_iva
               });
             }
@@ -3620,12 +3620,12 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
                 let retencion = parseFloat(base) * (parseFloat(element.porce_iva) / 100);
 
                 this.detalleImpuesto.push({
-                  base: base, 
-                  porcentaje: element.porce_iva, 
-                  total: parseFloat(retencion.toFixed(2)), 
-                  tipo: 'IVA', 
-                  rte_fuente: element.rte_iva, 
-                  codigo: element.cod_iva, 
+                  base: base,
+                  porcentaje: element.porce_iva,
+                  total: parseFloat(retencion.toFixed(2)),
+                  tipo: 'IVA',
+                  rte_fuente: element.rte_iva,
+                  codigo: element.cod_iva,
                   codigo_anexo: element.cod_anexo_iva
                 });
               }
@@ -3655,12 +3655,12 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
               element.retencion_iva = retencion
 
               this.detalleImpuesto.push({
-                base: base, 
-                porcentaje: element.porce_iva, 
-                total: parseFloat(retencion.toFixed(2)), 
-                tipo: 'IVA', 
-                rte_fuente: element.rte_iva, 
-                codigo: element.cod_iva, 
+                base: base,
+                porcentaje: element.porce_iva,
+                total: parseFloat(retencion.toFixed(2)),
+                tipo: 'IVA',
+                rte_fuente: element.rte_iva,
+                codigo: element.cod_iva,
                 codigo_anexo: element.cod_anexo_iva
               });
             }
@@ -3706,12 +3706,12 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
                 element.retencion_iva = retencion
 
                 this.detalleImpuesto.push({
-                  base: base, porcentaje: 
-                  element.porce_iva, 
-                  total: parseFloat(retencion.toFixed(2)), 
-                  tipo: 'IVA', 
-                  rte_fuente: element.rte_iva, 
-                  codigo: element.cod_iva, 
+                  base: base, porcentaje:
+                  element.porce_iva,
+                  total: parseFloat(retencion.toFixed(2)),
+                  tipo: 'IVA',
+                  rte_fuente: element.rte_iva,
+                  codigo: element.cod_iva,
                   codigo_anexo: element.cod_anexo_iva
                 });
               }
@@ -3724,7 +3724,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
       });
       console.log('Llamando sumaTotales desde calculaImpuestoIVA')
       this.sumaTotales(undefined,undefined,undefined);
-     
+
 
 
     // });
@@ -3733,84 +3733,84 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
   async calculaIceSri() {
     console.log(this.dataCuenta)
       this.detalleIceSri = [];
-  
+
       await this.calculaIceSriImp().then(rsp => {
-  
-  
+
+
         /* recorremos los detalles de cuenta */
         this.dataCuenta.forEach(element => {
           console.log(element)
-  
+
           if (element.codigo !== null) {
-  
+
             if (this.detalleIceSri.length === 0) {
-  
+
               if (parseFloat(element.porce_ice) > 0) {
-  
+
                 let base = element.ice_detalle;
                 let iceSri = parseFloat(base) * (parseFloat(element.porce_ice) / 100);
-  
+
                 this.detalleIceSri.push({
-                  base: base, porcentaje: element.porce_ice, total: parseFloat(iceSri.toFixed(2)), tipo: 'ICE', codigo: element.cod_ice 
+                  base: base, porcentaje: element.porce_ice, total: parseFloat(iceSri.toFixed(2)), tipo: 'ICE', codigo: element.cod_ice
                 });
               }
-  
+
             } else {
-  
+
               //verificamos si existe registrado el codigo fuente
               let valida_ice = false;
               let contador = 0;
-  
+
               this.detalleIceSri.forEach(impues => {
-  
+
                 if ((impues.cod_ice === element.cod_ice) && (impues.tipo === 'ICE')) {
                   valida_ice = true;
                 }
-  
+
                 contador++;
-  
+
               })
-  
-  
+
+
               if (valida_ice) {
-  
+
                 if (parseFloat(element.porce_ice) > 0) {
-  
+
                   let base = this.detalleIceSri[contador - 1].base;
                   let base_update = parseFloat(base) + parseFloat(element.ice_detalle);
-  
+
                   let iceSri = base_update * (parseFloat(element.porce_ice) / 100);
-  
+
                   this.detalleIceSri[contador - 1].total = parseFloat(iceSri.toFixed(2));
                   this.detalleIceSri[contador - 1].base = parseFloat(base_update.toFixed(2));
                 }
-  
+
               } else {
-  
+
                 if (parseFloat(element.porce_ice) > 0) {
-  
+
                   let base = element.ice_detalle;
                   let iceSri = parseFloat(base) * (parseFloat(element.porce_iva) / 100);
-  
+
                   this.detalleIceSri.push({
                     base: base, porcentaje: element.porce_ice, total: parseFloat(iceSri.toFixed(2)), tipo: 'ICE', codigo: element.cod_ice
                   });
                 }
-  
+
               }
-  
+
             }
-  
+
           }
         });
         console.log('Llamando sumaTotales desde calculaIceSri')
           this.sumaTotales(undefined,undefined,undefined)
-        
-       
-  
-  
+
+
+
+
       });
-  
+
     }
 
   sumaTotales(event: any,tipo,index){
@@ -3818,10 +3818,10 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
     let pagoTotalRet = 0;
     let pagoTotalAnt = 0;
     let pagoTotalMul = 0;
-    
-    
+
+
     this.detalleImpuesto.forEach(e => {
-      pagoTotalRet += +e.total; 
+      pagoTotalRet += +e.total;
     });
 
     this.ListaAnticipos.forEach((value, index2) => {
@@ -3832,8 +3832,8 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
           }
         }
       }
-     
-      pagoTotalAnt += +value.valor_aplicado; 
+
+      pagoTotalAnt += +value.valor_aplicado;
     });
     this.ListaMultas.forEach((value, index2) => {
       if(event != undefined || event != null  && tipo != undefined  && index != undefined){
@@ -3843,7 +3843,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
           }
         }
       }
-      pagoTotalMul += +value.valor_aplicado; 
+      pagoTotalMul += +value.valor_aplicado;
     });
 
     this.buyProv.total_retencion = pagoTotalRet;
@@ -3864,7 +3864,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
 
       const sumAnticipos: number = this.dataCuenta.reduce((acc:number, curr: any) => {
       if (curr.valor_anticipo !== undefined || curr.valor_anticipo !== null) return acc + parseFloat(curr.valor_anticipo)
-        return acc 
+        return acc
       }, 0);
       const valor_ant = parseFloat(this.buyProv.total_anticipo) - sumAnticipos
       Object.assign(this.dataCuenta[i], { valor_anticipo: valor_ant }) */
@@ -3877,7 +3877,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
         let valor_ant = 0
         let cod_cuenta_ant = ''
         let cuenta_ant = ''
-        
+
 
         if(this.buyProv.subtotal > 0 && e.subtotalItems > 0){
           proporcional = parseFloat(e.subtotalItems) / parseFloat(this.buyProv.subtotal)
@@ -3892,19 +3892,19 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
           const sumAnticipos: number = this.dataCuenta.reduce((acc:number, curr: any) => {
             console.log(curr.valor_anticipo)
             if (curr.valor_anticipo !== undefined) return acc + parseFloat(curr.valor_anticipo)
-            return acc 
-          }, 0);  
+            return acc
+          }, 0);
           console.log( parseFloat(this.buyProv.total_anticipo), sumAnticipos, parseFloat(this.buyProv.total_anticipo) - sumAnticipos)
           // valor_ant = parseFloat(this.buyProv.total_anticipo) - sumAnticipos
           // Object.assign(e , {cod_cuenta_anticipo: cod_cuenta_ant, cuenta_anticipo: cuenta_ant,valor_anticipo: valor_ant,proporcional: proporcional})
-        } 
-        
+        }
+
         Object.assign(e , {cod_cuenta_anticipo: cod_cuenta_ant, cuenta_anticipo: cuenta_ant,valor_anticipo: valor_ant})
 
       })
     }
 
-    
+
     if(this.ListaMultas.length > 0 && this.buyProv.total_multa > 0){
       console.log(this.dataMultas)
       const l = this.dataCuenta.length - 1;
@@ -3932,22 +3932,22 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
           const sumMultas: number = this.dataCuenta.reduce((acc:number, curr: any) => {
             console.log(curr.valor_multa)
             if (curr.valor_multa !== undefined) return acc + parseFloat(curr.valor_multa)
-            return acc 
-          }, 0);  
+            return acc
+          }, 0);
           console.log( parseFloat(this.buyProv.total_multa), sumMultas, parseFloat(this.buyProv.total_multa) - sumMultas)
           //valor_mu = parseFloat(this.buyProv.total_multa) - sumMultas
           //valor_mu = parseFloat(this.buyProv.total_anticipo) - sumMultas
 
           // Object.assign(e , {cod_cuenta_anticipo: cod_cuenta_ant, cuenta_anticipo: cuenta_ant,valor_anticipo: valor_ant,proporcional: proporcional})
-        } 
-       
+        }
+
         Object.assign(e , {cod_cuenta_multa: cod_cuenta_mu, cuenta_multa: cuenta_mu,valor_multa: valor_mu})
 
       })
     }
 
   }
- 
+
 
   async ChangeFuente(event: any, dataelement, index) {
 
@@ -4028,7 +4028,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
     this.calculaImpuestoIva();
     this.lcargando.ctlSpinner(false)
     this.generaPreviewAsientoContable();
-    
+
 
   }
   ChangeIceSri(event: any, dataelement, index) {
@@ -4039,7 +4039,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
     dataelement[index].porce_ice = event.porcentaje;
     dataelement[index].cod_ice = event.codigo;
     dataelement[index].ice_detalle = dataelement[index].subtotalItems * event.porcentaje.toFixed(2) / 100
-   
+
     this.calculaTotalIceSri();
     this.sumTotalizados();
     this.generaPreviewAsientoContable();
@@ -4049,7 +4049,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
     let totalIce=0
     this.dataCuenta.forEach(e =>{
       if(e.ice_detalle > 0){
-        totalIce += +e.ice_detalle 
+        totalIce += +e.ice_detalle
       }
     })
     this.buyProv.otro_impuesto = totalIce
@@ -4226,7 +4226,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
       if (validaAddDetalle) {
         let cuentas = { cod_anexo_iva: "", cod_iva: "", porce_iva: 0, cod_anexo_fte: "", cod_fte: "", porce_fte: 0, isRetencionIva: false, LoadOpcionImpuesto: false, LoadOpcionReteFuente: false, LoadOpcionRteIva: false,LoadOpcionIceSri: false, LoadOpcionCentro: false, subtotal_noobjeto: 0.00, subtotal_excento: 0.00, subtotal_cero: 0.00, subtotal_iva: 0.00, InputDisabledCantidad: true, iva_detalle: (0.00).toFixed(2),ice_detalle:(0.00).toFixed(2),  fk_producto: 0, impuesto: "2", rte_fuente: 0, rte_iva: 0, centro: 0, nombre: null, codigo: null, observacion: null, cantidad: null, precio: null, desc: (0.00).toFixed(2), subtotalItems: 0.00, totalItems: 0.00, paga_iva: 1 };
         this.dataCuenta.push(cuentas);
-    
+
       } else {
         this.toastr.info(mensaje);
       }
@@ -4248,7 +4248,7 @@ this.lastRecord = null
 
     this.dataCuenta = [{ cod_anexo_iva: "", cod_iva: "", porce_iva: 0, cod_ice: "", porce_ice: 0,cod_anexo_fte: "", cod_fte: "", porce_fte: 0, isRetencionIva: false, LoadOpcionImpuesto: false, LoadOpcionReteFuente: false, LoadOpcionRteIva: false,LoadOpcionIceSri: false, LoadOpcionCentro: false, subtotal_noobjeto: (0.00).toFixed(2), subtotal_excento: (0.00).toFixed(2), subtotal_cero: (0.00).toFixed(2), subtotal_iva: (0.00).toFixed(2), InputDisabledCantidad: true, iva_detalle: (0.00).toFixed(2),ice_detalle: (0.00).toFixed(2), cuenta_detalle: 0, impuesto: 2, rte_fuente: 0, rte_iva: 0, centro: 0, nombre: null, codigo: null, observacion: null, cantidad: null, precio: null, desc: (0.00).toFixed(2), subtotalItems: 0.00, totalItems: 0.00, paga_iva: 1, cod_cuenta_por_pagar: '', cuenta_por_pagar: '', codigo_partida: '', valor_anticipo: 0.00,cod_cuenta_anticipo: '',cuenta_anticipo:'', valor_multa: 0.00, cod_cuenta_multa: '',cuenta_multa:'',proporcional:0}];
     this.dataProducto = [{ cod_anexo_iva: "", cod_iva: "", porce_iva: 0,cod_ice: "", porce_ice: 0, cod_anexo_fte: "", cod_fte: "", porce_fte: 0, isRetencionIva: false, LoadOpcionImpuesto: false, LoadOpcionReteFuente: false, LoadOpcionRteIva: false,LoadOpcionIceSri: false, LoadOpcionCentro: false, subtotal_noobjeto: 0.00, subtotal_excento: 0.00, subtotal_cero: 0.00, subtotal_iva: 0.00, InputDisabledCantidad: true, iva_detalle: 0, ice_detalle: 0, fk_producto: 0, impuesto: 2, rte_fuente: 0, rte_iva: 0, centro: 0, nombre: null, codigo: null, observacion: null, cantidad: null, precio: null, desc: null, subtotalItems: 0.00, totalItems: 0.00, paga_iva: 1 }];
-   
+
 
     this.fieldsDaily = [];
     this.ListaAnticipos = [];
@@ -4315,7 +4315,7 @@ this.lastRecord = null
     this.dataCuenta[i].funcion = opcion.funcion;
     this.dataCuenta[i].fk_programa = opcion.fk_programa;
   }
-   
+
   }
   setNumCuotas() {
 
@@ -4381,8 +4381,8 @@ this.lastRecord = null
 
     let coinciden = true;
     this.tbl_partidas.forEach(partida => {
-    
-      
+
+
         if (resultado[partida.codigo] !== partida.valor) {
             coinciden = false;
             return;
@@ -4445,7 +4445,7 @@ this.lastRecord = null
     //         return
     //       }
     //     }
-        
+
     //     this.confirmSave("Seguro desea guardar la compra de proveeduria?", "SAVE_PROVEEDURIA");
 
     // }).catch((err) => {
@@ -4458,7 +4458,7 @@ this.lastRecord = null
 
 
 
-      
+
     // }
   }
 
@@ -4547,7 +4547,7 @@ this.lastRecord = null
       "mes": Number(moment(this.fecha_compra).format('MM'))
     }
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
 
@@ -4572,13 +4572,13 @@ this.lastRecord = null
         if (this.buyProv.isactive == 0) {
           this.buyProv['fecha_anulacion'] = moment(this.fecha).format('YYYY-MM-DD');
         }
-    
-    
+
+
         /*obtenemos detalle de asiento */
-    
+
         let dataDocument = { company_id: this.dataUser.id_empresa, doc_type: "COM" };
         this.diarioSrv.getCompanyInformation(dataDocument).subscribe(resDocument => {
-    
+
           const detailAsiento = this.fieldsDaily.filter(asiento => asiento.tipo !== "T");
           const dataAsientoSave = {
             ip: this.commonServices.getIpAddress(),
@@ -4603,17 +4603,17 @@ this.lastRecord = null
               if(e.valor_aplicado > 0){
                 let anticipos = {
                   id_documento: e.id_documento,
-                  documento: e.documento, 
-                  tipo_documento:e.tipo_documento, 
-                  fecha:e.fecha, 
-                  total:e.total, 
-                  saldo:e.saldo, 
+                  documento: e.documento,
+                  tipo_documento:e.tipo_documento,
+                  fecha:e.fecha,
+                  total:e.total,
+                  saldo:e.saldo,
                   valor_aplicado:e.valor_aplicado,
                   cod_cuenta_anticipo:e.orden_pago?.detalles[0].cuentas?.codigo,
                   nom_cuenta_anticipo:e.orden_pago?.detalles[0].cuentas?.nombre,
                   cod_cuenta_por_pagar_anticipo:e.cuenta_por_pagar.codigo,
                   nom_cuenta_por_pagar_anticipo:e.cuenta_por_pagar.nombre,
-                  
+
                 }
                 this.arrayAnticipos.push(anticipos);
               }
@@ -4626,11 +4626,11 @@ this.lastRecord = null
               if(e.valor_aplicado > 0){
                 let multas = {
                   id_documento: e.id_documento,
-                  documento: e.documento, 
-                  tipo_documento:e.tipo_documento, 
-                  fecha:e.fecha, 
-                  total:e.total, 
-                  saldo:e.saldo, 
+                  documento: e.documento,
+                  tipo_documento:e.tipo_documento,
+                  fecha:e.fecha,
+                  total:e.total,
+                  saldo:e.saldo,
                   valor_aplicado:parseFloat(e.valor_aplicado),
                   cod_cuenta_multa:e.cuenta_contable?.codigo,
                   nom_cuenta_multa:e.cuenta_contable?.nombre,
@@ -4643,7 +4643,7 @@ this.lastRecord = null
           }else{
             this.buyProv['multas'] = [];
           }
-    
+
           this.buyProv['detalle'] = this.dataProducto;
           this.buyProv['detalle_cuenta'] = this.dataCuenta;
           this.buyProv['impuestos'] = this.detalleImpuesto;
@@ -4661,29 +4661,29 @@ this.lastRecord = null
           this.buyProv['tiene_metodo_pago'] = this.tiene_metodo_pago;
           this.buyProv['tiene_fecha_limite'] = this.tiene_fecha_limite;
           this.buyProv.total_pagar = this.totalPagar
-          
+
           this.buyProv['fecha_limite'] = this.tiene_fecha_limite=='S' ? this.fecha_limite : null;
           /* if(this.tiene_fecha_limite=='S'){
             this.buyProv['fecha_limite'] = this.fecha_limite;
           }else{
             this.buyProv['fecha_limite'] = null;
           } */
-          
+
           this.buyProv['fk_ingreso_bodega'] = (!this.ExistenItems && (this.ingresoSelected != undefined || this.ingresoSelected != null)) ? this.ingresoSelected : null
-    
-    
+
+
           // let data = {
           //   "anio": this.buyProv.anio,
           //   "mes": this.buyProv.mes
           // }
-    
+
           // this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-    
+
             console.log(res)
             // if (res["data"][0].estado !== 'C') {
-    
+
               /* Validamos si el periodo se encuentra aperturado */
-    
+
               this.comSrv.saveBuyProv(this.buyProv).subscribe(res => {
                 if (res["status"] == 1) {
                   this.lcargando.ctlSpinner(false);
@@ -4704,7 +4704,7 @@ this.lastRecord = null
                   this.vmButtons[8].habilitar = false;
                   window.open(environment.ReportingUrl + "rpt_compras.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_compra=" + res["data"].id, '_blank')
                   //this.cancel();
-                } 
+                }
                 else {
                   this.lcargando.ctlSpinner(false);
                   Swal.fire({
@@ -4716,24 +4716,24 @@ this.lastRecord = null
                     confirmButtonColor: '#20A8D8',
                   });
                 }
-        
-    
-                
+
+
+
               }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.message);
               })
-    
+
             // } else {
             //   this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             //   this.lcargando.ctlSpinner(false);
             // }
-    
+
           // }, error => {
           //   this.lcargando.ctlSpinner(false);
           //   this.toastr.info(error.error.mesagge);
           // })
-    
+
         }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.message);
@@ -4742,7 +4742,7 @@ this.lastRecord = null
         this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
         this.lcargando.ctlSpinner(false);
       }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
@@ -4755,9 +4755,9 @@ this.lastRecord = null
 
 
 
-    
 
-   
+
+
 
   }
 
@@ -4824,7 +4824,7 @@ this.lastRecord = null
           //this.toastr.info("debe ingresar un número de autorización");
           mensajes += "debe ingresar un número de autorización<br>"
           // document.getElementById("idNumAut").focus(); return;
-        } 
+        }
         else if ((this.buyProv.num_aut).length != 10 && (this.buyProv.num_aut).length != 49) {
           /*validamos que el numero de autorizacion contenga 10 o 49 digitos */
           //this.toastr.info("El numero de autorización debe contener 10 o 49 digitos");
@@ -4850,27 +4850,27 @@ this.lastRecord = null
           // document.getElementById('idtxta').focus(); return;
         } else {
           if(this.ListaAnticipos.length != 0 ) {
-       
+
             for (let index = 0; index < this.ListaAnticipos.length; index++) {
               if (this.ListaAnticipos[index].valor_aplicado > this.ListaAnticipos[index].saldo ) {
                 //this.toastr.info("Revise la pestaña de Anticipos. El valor aplicado no puede ser mayor a el saldo del anticipo "+ this.ListaAnticipos[index].documento);
                 //flag = true; break;
                 mensajes += "Revise la pestaña de Anticipos. El valor aplicado no puede ser mayor a el saldo del anticipo "+this.ListaAnticipos[index].documento +"<br>"
-              } 
+              }
             }
-          
-          }  
-          
+
+          }
+
           if(this.ListaMultas.length != 0 ) {
-             
+
             for (let index = 0; index < this.ListaMultas.length; index++) {
               if (this.ListaMultas[index].valor_aplicado > this.ListaMultas[index].saldo ) {
                 // this.toastr.info("Revise la pestaña de Multas. El valor aplicado no puede ser mayor a el saldo de la multa "+ this.ListaMultas[index].documento);
                 // flag = true; break;
                 mensajes += "Revise la pestaña de Multas. El valor aplicado no puede ser mayor a el saldo de la multa "+this.ListaMultas[index].documento +"<br>"
-              } 
+              }
             }
-            
+
           }
 
           if (this.dataProducto.length > 0 && this.dataProducto[0].fk_producto != 0) {
@@ -4880,7 +4880,7 @@ this.lastRecord = null
               if (element['precio'] <= 0 || element['precio'] == "" || element['precio'] == null ||
                 element['cantidad'] <= 0 || element['cantidad'] == "" || element['cantidad'] == null) {
                 c += 1;
-                if (c == 1) { 
+                if (c == 1) {
                  // this.toastr.info("Revise la información en los items, el precio o la cantidad no pueden ser 0")
                   mensajes += "Revise la información en los items, el precio o la cantidad no pueden ser 0<br>"
                 }
@@ -4888,7 +4888,7 @@ this.lastRecord = null
               }
             });
 
-          
+
 
           }
 
@@ -4898,20 +4898,20 @@ this.lastRecord = null
               if (element['precio'] <= 0 || element['precio'] == "" || element['precio'] == null ||
                 element['cantidad'] <= 0 || element['cantidad'] == "" || element['cantidad'] == null) {
                 c += 1;
-                if (c == 1) { 
+                if (c == 1) {
                  // this.toastr.info("Revise la información en el detalle de cuenta, el precio o la cantidad no pueden ser 0")
                   mensajes += "Revise la información en el detalle de cuenta, el precio o la cantidad no pueden ser 0.<br>"
- 
+
                 }
                 //flag = true; return;
               }
-              
+
               if(element['cod_cuenta_por_pagar'] == null || element['cod_cuenta_por_pagar']==''){
                 c += 1;
-                if (c == 1) { 
+                if (c == 1) {
                  // this.toastr.info("Revise la información en el detalle de cuenta, el precio o la cantidad no pueden ser 0")
                   mensajes += "Debe seleccionar la cuenta por pagar.<br>"
- 
+
                 }
               }
 
@@ -4919,7 +4919,7 @@ this.lastRecord = null
               if (element.rte_fuente == undefined || element.rte_fuente == null || element.rte_fuente == 0) {
                 mensajes += 'Debe seleccionar la Retencion en Fuente.<br>'
               }
-              
+
               if (element.rte_iva == undefined || element.rte_iva == null || element.rte_iva == 0) {
                 mensajes += 'Debe seleccionar la retencion de IVA.<br>'
               }
@@ -4941,10 +4941,10 @@ this.lastRecord = null
             this.fieldsDaily.forEach(element => {
               if (element['tipo'] == 'T' && Math.floor(element['credit'] * 100)!= Math.floor(element['debit'] * 100) ) {
                 c += 1;
-                if (c == 1) { 
+                if (c == 1) {
                  // this.toastr.info("Revise la información en el detalle de cuenta, el precio o la cantidad no pueden ser 0")
                   mensajes += "Revise la información en el asiento , el total del credito debe ser igual a la del débito <br>"
- 
+
                 }
                 //flag = true; return;
               }
@@ -4979,7 +4979,7 @@ this.lastRecord = null
       //   } else if (this.buyProv.fk_id_proveedor == 0) {
       //     //this.toastr.info("debe seleccionar un proveedor");
       //     mensajes +="debe seleccionar un proveedor";
-      //   } 
+      //   }
       //   else if (this.dataProducto.length == 0) {
       //     //this.toastr.info("debe ingresar al menos un detalle para el registro de la liquidacion");
       //     mensajes +="debe ingresar al menos un detalle para el registro de la liquidacion";
@@ -5003,8 +5003,8 @@ this.lastRecord = null
       //         if (element['precio'] <= 0 || element['precio'] == "" || element['precio'] == null ||
       //           element['cantidad'] <= 0 || element['cantidad'] == "" || element['cantidad'] == null) {
       //           c += 1;
-      //           if (c == 1) { 
-      //             //this.toastr.info("Revise la información en los items, el valor o la cantidad no pueden ser 0") 
+      //           if (c == 1) {
+      //             //this.toastr.info("Revise la información en los items, el valor o la cantidad no pueden ser 0")
       //             mensajes +="Revise la información en los items, el valor o la cantidad no pueden ser 0";
       //           }
       //          // flag = true; return;
@@ -5021,18 +5021,18 @@ this.lastRecord = null
       //         if (element['precio'] <= 0 || element['precio'] == "" || element['precio'] == null ||
       //           element['cantidad'] <= 0 || element['cantidad'] == "" || element['cantidad'] == null) {
       //           c += 1;
-      //           if (c == 1) { 
+      //           if (c == 1) {
       //            // this.toastr.info("Revise la información en el detalle de cuenta, el precio o la cantidad no pueden ser 0")
       //             mensajes += "Revise la información en el detalle de cuenta, el precio o la cantidad no pueden ser 0<br>"
- 
+
       //           }
       //           //flag = true; return;
       //         }else if(element['cod_cuenta_por_pagar'] == null || element['cod_cuenta_por_pagar']==''){
       //           c += 1;
-      //           if (c == 1) { 
+      //           if (c == 1) {
       //            // this.toastr.info("Revise la información en el detalle de cuenta, el precio o la cantidad no pueden ser 0")
       //             mensajes += "Debe seleccionar la cuenta por pagar<br>"
- 
+
       //           }
       //         }
       //       });
@@ -5044,17 +5044,17 @@ this.lastRecord = null
       //       this.fieldsDaily.forEach(element => {
       //         if (element['tipo'] == 'T' && element['credit']!= element['debit'] ) {
       //           c += 1;
-      //           if (c == 1) { 
+      //           if (c == 1) {
       //            // this.toastr.info("Revise la información en el detalle de cuenta, el precio o la cantidad no pueden ser 0")
       //             mensajes += "Revise la información en el asiento , el total del credito debe ser igual a la del débito <br>"
- 
+
       //           }
       //           //flag = true; return;
       //         }
       //       });
 
       //     }
-         
+
 
       //   }
 
@@ -5067,9 +5067,9 @@ this.lastRecord = null
         this.toastr.info("En tiene metodo de pago debe escoger Si o No");
       }
 
-   
 
-     
+
+
     });
   }
 
@@ -5100,7 +5100,7 @@ this.lastRecord = null
 
       console.log(cuenta);
       console.log(this.dataCuenta);
-      
+
       //debugger;
       this.dataCuenta[index].cuenta_detalle = "(" + filt.codigo + ") " + filt.nombre
       this.dataCuenta[index].codigo = filt.codigo;
@@ -5111,8 +5111,8 @@ this.lastRecord = null
       this.dataCuenta[index].nombrepresupuesto= filt.nombre_catalogo_presupuesto;
       if (filt.nombre_catalogo_presupuesto == "" || filt.nombre_catalogo_presupuesto == null) {
         this.dataCuenta[index].nombrepresupuesto =  filt.presupuesto?.nombre
-      } 
-      
+      }
+
 
       this.dataCuenta[index].codigo_cuenta_contable = filt.codigo;
       console.log(filt.codigo_presupuesto);
@@ -5185,7 +5185,7 @@ this.lastRecord = null
     // this.modalService.dismissAll();
 
   }
- 
+
 
   CargarProveedor(event: any) {
 
@@ -5200,7 +5200,7 @@ this.lastRecord = null
     this.ListaMultas = [];
     this.CargarAnticipoProveedor(event.id_proveedor);
     this.CargarMultasProveedor(event.id_proveedor);
-    
+
 
     this.modalService.dismissAll();
 
@@ -5227,9 +5227,9 @@ this.lastRecord = null
     this.buyProv.otro_impuesto = event.otro_impuesto;
     this.buyProv.servicio = event.servicios;
     this.buyProv.total = event.total;
-    //tipo_pago: 0, 
-    //forma_pago: 0, 
-    //fk_usuario_receive: 0, 
+    //tipo_pago: 0,
+    //forma_pago: 0,
+    //fk_usuario_receive: 0,
     this.buyProv.isActive = event.isactive;
     this.buyProv.num_aut = event.num_aut;
     this.buyProv.observacion = event.observacion;
@@ -5424,11 +5424,11 @@ this.lastRecord = null
         this.mensajeSppiner = 'Cargando Condiciones'
         this.id_solicitud = id_proceso
         console.log(this.contratos.filter(e => e.id_solicitud == this.id_solicitud))
-       
+
         if(this.contratos?.length > 0){
           let filter_contrato = this.contratos.filter(e => e.id_solicitud == this.id_solicitud)
           if(filter_contrato[0]?.tipo_proceso=='Contratacion'){
-            const condicionesResponse = await this.comSrv.CondicionesProveedores(id_proceso).toPromise<any>()
+            const condicionesResponse = await this.comSrv.CondicionesProveedores(id_proceso) as any
             this.ListaCondiciones = condicionesResponse.data;
           }else{
             this.ListaCondiciones = []
@@ -5456,12 +5456,12 @@ this.lastRecord = null
         /*
         this.codigos_partidas_idp = Array.from(new Set(this.codigos_partidas_idp));*/  // = list(map(str, set(this.codigos_partidas_idp)));
         }
-       
+
         this.ExistenItems= false;
 
         this.mensajeSppiner = 'Cargando Ingresos de Bodega asociados'
         this.cmb_ingreso = []
-        const ingresoResponse = await this.comSrv.cargarIngresoBodega(id_proceso).toPromise<any>()
+        const ingresoResponse = await this.comSrv.cargarIngresoBodega(id_proceso) as any
         console.log(ingresoResponse)
         ingresoResponse.data.forEach((element: any) => {
           const { id, numero_ingreso_bodega } = element
@@ -5501,49 +5501,49 @@ this.lastRecord = null
           codigo_grupo_producto: element.codigo_grupo_producto,
           codigo_cuenta_contable:  element.codigo_cuenta_contable,
           codigo_presupuesto:  element.codigo_presupuesto,
-          
+
           nombrepresupuesto:  element.catalogo_presupuesto?.nombre,
         })
         console.log("this.ListaItems",this.ListaItems);
         this.dataCuenta.push({
           cod_anexo_iva: "",
           cod_iva: "",
-          porce_iva: 0, 
+          porce_iva: 0,
           cod_anexo_fte: "",
-          cod_fte: "", 
-          porce_fte: 0, 
-          isRetencionIva: false, 
-          LoadOpcionImpuesto: false, 
-          LoadOpcionReteFuente: false, 
+          cod_fte: "",
+          porce_fte: 0,
+          isRetencionIva: false,
+          LoadOpcionImpuesto: false,
+          LoadOpcionReteFuente: false,
           LoadOpcionRteIva: false,
-          LoadOpcionIceSri: false, 
-          LoadOpcionCentro: false, 
-          subtotal_noobjeto: 0.00, 
-          subtotal_excento: 0.00, 
-          subtotal_cero: 0.00, 
-          subtotal_iva: 0.00, 
-          InputDisabledCantidad: false, 
-          iva_detalle: (0.00).toFixed(2), 
-          ice_detalle: (0.00).toFixed(2), 
-          fk_producto: 0, 
-          impuesto: "2", 
-          rte_fuente: 0, 
-          rte_iva: 0, 
-          centro: 0, 
-          nombre: element.cuenta_contable?.nombre,  
-          codigo: element.cuenta_contable?.codigo, 
+          LoadOpcionIceSri: false,
+          LoadOpcionCentro: false,
+          subtotal_noobjeto: 0.00,
+          subtotal_excento: 0.00,
+          subtotal_cero: 0.00,
+          subtotal_iva: 0.00,
+          InputDisabledCantidad: false,
+          iva_detalle: (0.00).toFixed(2),
+          ice_detalle: (0.00).toFixed(2),
+          fk_producto: 0,
+          impuesto: "2",
+          rte_fuente: 0,
+          rte_iva: 0,
+          centro: 0,
+          nombre: element.cuenta_contable?.nombre,
+          codigo: element.cuenta_contable?.codigo,
           nombrepresupuesto:  element.catalogo_presupuesto?.nombre,
-          observacion: null, 
-          cantidad: element.cantidad, 
-          precio: element.precio_unitario, 
-          desc: (0.00).toFixed(2), 
+          observacion: null,
+          cantidad: element.cantidad,
+          precio: element.precio_unitario,
+          desc: (0.00).toFixed(2),
           subtotalItems: element.total, //element.cantidad * element.precio_unitario
-          totalItems: element.cantidad * element.precio_unitario, 
+          totalItems: element.cantidad * element.precio_unitario,
           paga_iva: 1,
           codigo_presupuesto: element.codigo_presupuesto ,
           codigo_cuenta_contable:  element.codigo_cuenta_contable,
           cuenta_detalle: "("+ element.cuenta_contable?.codigo + ")"+ element.cuenta_contable?.nombre,
-          
+
         })
 
         const item = this.tbl_partidas.find((p: any) => p.codigo == element.codigo_presupuesto)
@@ -5574,9 +5574,9 @@ this.lastRecord = null
 
   CargarCondicionesProveedor(event: any) {
     // console.log(event)
-   
+
     if (typeof event !== undefined && event !== '' && event !== null) {
-     
+
 
       this.id_solicitud= event;
       this.lcargando.ctlSpinner(true);
@@ -5590,7 +5590,7 @@ this.lastRecord = null
         this.ListaCondiciones = res['data'];
         this.ExistenItems= false;
         // this.lcargando.ctlSpinner(false);
-        
+
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -5600,7 +5600,7 @@ this.lastRecord = null
   }
 
   cargarIngresoBodega(){
-    
+
       this.lcargando.ctlSpinner(true);
       this.comSrv.cargarIngresoBodega(this.id_solicitud).subscribe(res => {
         console.log(res)
@@ -5621,7 +5621,7 @@ this.lastRecord = null
                   codigo_grupo_producto:d.codigo_grupo_producto,
                   codigo_cuenta_contable:  d.codigo_cuenta_contable,
                   codigo_presupuesto:  d.codigo_presupuesto,
-                 
+
                 }
                 this.ListaItems.push(data);
 
@@ -5632,42 +5632,42 @@ this.lastRecord = null
                 let cuentas = {
                    cod_anexo_iva: "",
                     cod_iva: "",
-                     porce_iva: 0, 
+                     porce_iva: 0,
                      cod_anexo_fte: "",
-                      cod_fte: "", 
-                      porce_fte: 0, 
-                      isRetencionIva: false, 
-                      LoadOpcionImpuesto: false, 
-                      LoadOpcionReteFuente: false, 
+                      cod_fte: "",
+                      porce_fte: 0,
+                      isRetencionIva: false,
+                      LoadOpcionImpuesto: false,
+                      LoadOpcionReteFuente: false,
                       LoadOpcionRteIva: false,
-                      LoadOpcionIceSri: false, 
-                      LoadOpcionCentro: false, 
-                      subtotal_noobjeto: 0.00, 
-                      subtotal_excento: 0.00, 
-                      subtotal_cero: 0.00, 
-                      subtotal_iva: 0.00, 
-                      InputDisabledCantidad: false, 
-                      iva_detalle: (0.00).toFixed(2), 
-                      ice_detalle: (0.00).toFixed(2), 
-                      fk_producto: 0, 
-                      impuesto: "2", 
-                      rte_fuente: 0, 
-                      rte_iva: 0, 
-                      centro: 0, 
-                      nombre: d.cuenta_contable?.nombre,  
-                      codigo: d.cuenta_contable?.codigo, 
-                      observacion: null, 
-                      cantidad: d.cantidad, 
-                      precio: d.precio_unitario, 
-                      desc: (0.00).toFixed(2), 
-                      subtotalItems:d.cantidad * d.precio_unitario, 
-                      totalItems: d.cantidad * d.precio_unitario, 
+                      LoadOpcionIceSri: false,
+                      LoadOpcionCentro: false,
+                      subtotal_noobjeto: 0.00,
+                      subtotal_excento: 0.00,
+                      subtotal_cero: 0.00,
+                      subtotal_iva: 0.00,
+                      InputDisabledCantidad: false,
+                      iva_detalle: (0.00).toFixed(2),
+                      ice_detalle: (0.00).toFixed(2),
+                      fk_producto: 0,
+                      impuesto: "2",
+                      rte_fuente: 0,
+                      rte_iva: 0,
+                      centro: 0,
+                      nombre: d.cuenta_contable?.nombre,
+                      codigo: d.cuenta_contable?.codigo,
+                      observacion: null,
+                      cantidad: d.cantidad,
+                      precio: d.precio_unitario,
+                      desc: (0.00).toFixed(2),
+                      subtotalItems:d.cantidad * d.precio_unitario,
+                      totalItems: d.cantidad * d.precio_unitario,
                       paga_iva: 1,
                       codigo_presupuesto: d.codigo_presupuesto ,
                       codigo_cuenta_contable:  d.codigo_cuenta_contable,
                       cuenta_detalle: "("+ d.cuenta_contable?.codigo + ")"+ d.cuenta_contable?.nombre
                     };
-                
+
                // Object.assign(element,{cuenta_detalle:"("+codigo[0].codigo+")"+codigo[0].nombre,codigo:codigo[0].codigo});
 
                 this.dataCuenta.push(cuentas);
@@ -5675,8 +5675,8 @@ this.lastRecord = null
                 //this.sumRegistroDetalleCuenta(index)
                 this.sumaTotales(undefined,undefined,undefined);
                 this.sumTotalizados();
-                
-               
+
+
               });
             }
           });
@@ -5700,16 +5700,16 @@ this.lastRecord = null
             //   this.sumaTotales(undefined,undefined,undefined);
 
             // });
-            
+
           //  this.sumTotalizados();
           //  this.generaPreviewAsientoContable();
-            
+
          // });
         }else{
           this.ListaItems=[];
         }
         this.lcargando.ctlSpinner(false);
-        
+
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -5729,7 +5729,7 @@ sumRegistroTodo(){
       element.desc = 0
     }
     element.totalItems = element.subtotalItems - element.desc
-    
+
     switch (element.impuesto) {
       case "2":
         element.iva_detalle = (element.totalItems * (this.buyProv.iva / 100)).toFixed(2)
@@ -5759,7 +5759,7 @@ sumRegistroTodo(){
       case "8":
         element.iva_detalle = (element.totalItems * (8 / 100)).toFixed(2)
         break;
-    
+
       default:
         break;
     }
@@ -5767,7 +5767,7 @@ sumRegistroTodo(){
     if (typeof element.porce_fte !== undefined && element.porce_fte > 0) this.calculaImpuestoIva()
     if (typeof element.porce_ice !== undefined && element.porce_ice > 0) this.calculaIceSri()
 
-    
+
   });
   this.generaPreviewAsientoContable();
 }
@@ -5791,7 +5791,7 @@ sumRegistroTodo(){
           this.ExistenAnticipos = true;
         }
         this.lcargando.ctlSpinner(false);
-        
+
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -5815,7 +5815,7 @@ sumRegistroTodo(){
           this.ExistenMultas = true;
         }
         this.lcargando.ctlSpinner(false);
-        
+
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -5836,9 +5836,9 @@ sumRegistroTodo(){
     if (typeof id_proveedor !== undefined && id_proveedor !== '' && id_proveedor !== 0) {
 
       this.LoadOpcionContratos = true;
-      const contratosResponse = await this.comSrv.ListarContratos(id_proveedor).toPromise<any>()
+      const contratosResponse = await this.comSrv.ListarContratos(id_proveedor) as any
       console.log(contratosResponse)
-      const catelecResponse = await this.comSrv.ListarContratosCatElec(id_proveedor).toPromise<any>()
+      const catelecResponse = await this.comSrv.ListarContratosCatElec(id_proveedor) as any
       if (contratosResponse) {
         contratosResponse.forEach((element: any) => {
           if (element.tipo_proceso == 'Infimas') tipo_proceso = 'INF'
@@ -5847,14 +5847,14 @@ sumRegistroTodo(){
           else tipo_proceso = element.tipo_proceso
 
           this.contratos.push({
-            id_solicitud: element.id_solicitud, 
+            id_solicitud: element.id_solicitud,
             num_solicitud: tipo_proceso + '-' + element.num_solicitud,
             idp: element.idp,
             codigos_partidas_idp : element.recdocidp,
             tipo_proceso: element.tipo_proceso
           })
 
-          
+
         })
       }
       console.log(catelecResponse)
@@ -5863,7 +5863,7 @@ sumRegistroTodo(){
         else tipo_proceso = element.solicitud.tipo_proceso
 
         this.contratos.push({
-          id_solicitud: element.solicitud.id_solicitud, 
+          id_solicitud: element.solicitud.id_solicitud,
           num_solicitud: tipo_proceso + '-' + element.solicitud.num_solicitud + ' [O/C: ' + element.num_orden + ']',
           idp: element.solicitud.idp,
           codigos_partidas_idp : element.solicitud?.recdocidp,
@@ -5895,9 +5895,9 @@ sumRegistroTodo(){
             }
             this.contratos.push(o)
           })
-          
+
         }
-        
+
         this.LoadOpcionContratos = false;
       }, error => {
         this.lcargando.ctlSpinner(false);
@@ -5909,7 +5909,7 @@ sumRegistroTodo(){
       this.comSrv.ListarContratosCatElec(id_proveedor).subscribe(res2 => {
         console.log(res2);
         this.infoContratoCatalogo = res2['data'];
-        
+
         this.infoContratoCatalogo.forEach(c => {
           if(c.solicitud.tipo_proceso=='Catalogo Electronico'){
             tipo_proceso= 'CAT';
@@ -5975,7 +5975,7 @@ sumRegistroTodo(){
     //}
   }
 
-  
+
   getEgreCorrientes() {
 
     //if (typeof(this.tip_doc) === 'undefined') {
@@ -6041,7 +6041,7 @@ sumRegistroTodo(){
 
       this.LoadOpcionImpuesto = true;
 
-      this.impuestos = 
+      this.impuestos =
       [
         {
           id:2,
@@ -6105,39 +6105,39 @@ sumRegistroTodo(){
        })
        const dataArr = new Set(cuentas);
 
-      let result = [...dataArr];  
+      let result = [...dataArr];
        this.ListaCuentasPagarAnticipos = result
 
        this.LoadOpcionCuentaPagarAnt = false
        console.log(this.ListaCuentasPagarAnticipos )
-   
 
 
-    
+
+
   }
   selectAnticipo(imp,i) {
- 
+
     console.log(imp)
    //let aplica = false
 
     if ( imp.orden_pago?.detalles.length == 0) {
       this.toastr.warning('Debe seleccionar una cuenta por pagar')
-    // event['aplica'] =false 
+    // event['aplica'] =false
      imp['deshabilitar'] =true
      this.sumaTotales(imp.valor_aplicado,'ANT',i)
-      return 
+      return
     }else if (imp.cuenta_por_pagar.codigo == undefined ) {
       //this.toastr.warning('Debe tener cuentas asociadas al anticipo')
      // event['aplica'] =false
       imp['deshabilitar'] =true
       this.sumaTotales(imp.valor_aplicado,'ANT',i)
-      return  
+      return
     }else if ( imp.valor_aplicado == 0) {
      // this.toastr.warning('El valor aplicado no puede ser 0')
      // event['aplica'] =false
       imp['deshabilitar'] =true
       this.sumaTotales(imp.valor_aplicado,'ANT',i)
-      return  
+      return
     }
     else{
      // aplica = true
@@ -6145,10 +6145,10 @@ sumRegistroTodo(){
       imp['deshabilitar'] =false
       this.sumaTotales(imp.valor_aplicado,'ANT',i)
       return
-     
+
     }
 
-   
+
     // console.log(aplica)
     // if (aplica) {
     //   this. cargaAnticipo(event,imp)
@@ -6184,9 +6184,9 @@ sumRegistroTodo(){
 
      this.sumaTotales(imp.valor_aplicado,'ANT',i)
      this.generaPreviewAsientoContable()
-      
-    } 
-    
+
+    }
+
     console.log( this.dataAnticipos)
   }
 
@@ -6210,7 +6210,7 @@ sumRegistroTodo(){
        })
        const dataArr = new Set(cuentas);
 
-      let result = [...dataArr];  
+      let result = [...dataArr];
        this.ListaCuentasPagarMultas = result
 
        this.LoadOpcionCuentaPagarMulta = false
@@ -6223,23 +6223,23 @@ sumRegistroTodo(){
    let aplica = false
 
     if ( imp.cuenta_contable?.codigo == undefined) {
-   
+
      imp['deshabilitar'] =true
      this.sumaTotales(imp.valor_aplicado,'MU',i)
-      return 
+      return
     }else if (imp.cuenta_por_pagar.codigo == undefined ) {
-   
+
       imp['deshabilitar'] =true
       this.sumaTotales(imp.valor_aplicado,'MU',i)
-      return  
+      return
     }else if ( imp.valor_aplicado == 0) {
-    
+
       imp['deshabilitar'] =true
       this.sumaTotales(imp.valor_aplicado,'MU',i)
-      return  
+      return
     }
     else{
-    
+
       imp['deshabilitar'] =false
       this.sumaTotales(imp.valor_aplicado,'MU',i)
       return
@@ -6249,7 +6249,7 @@ sumRegistroTodo(){
 
   cargaMulta(event,imp,i) {
     console.log(event)
-    
+
    // let aplica = event.aplica;
    this.dataMultas = []
     if (event) {
@@ -6260,17 +6260,17 @@ sumRegistroTodo(){
           nombre: e.cuenta_contable?.nombre,
           cod_cuenta_por_pagar_multa : e.cuenta_por_pagar?.codigo,
           nombre_cuenta_por_pagar_multa : e.cuenta_por_pagar?.nombre,
-          valor_aplicado: e.valor_aplicado, 
+          valor_aplicado: e.valor_aplicado,
         }
         this.dataMultas.push(data)
       }
      });
      this.sumaTotales(imp.valor_aplicado,'MU',i)
-     
+
      this.generaPreviewAsientoContable()
-      
-    } 
-    
+
+    }
+
     console.log( this.dataMultas)
   }
 
@@ -6280,7 +6280,7 @@ sumRegistroTodo(){
 
     if (this.impuestos == undefined || this.impuestos.length === 1) {
       try {
-        const response = await this.contableService.ObtenerCatalogoGeneral({ fields: ["IMPUESTOS"] }).toPromise<any>()
+        const response = await this.contableService.ObtenerCatalogoGeneral({ fields: ["IMPUESTOS"] }) as any
         console.log(response)
         this.impuestos = response.data.catalogs['IMPUESTOS']
       } catch (err) {
@@ -6316,7 +6316,7 @@ sumRegistroTodo(){
 
     if (this.iceSri == undefined) {
       try {
-        const response = await this.comSrv.getIceSri().toPromise<any>()
+        const response = await this.comSrv.getIceSri() as any
         console.log(response)
         this.iceSri = response.data
       } catch (err) {
@@ -6326,7 +6326,7 @@ sumRegistroTodo(){
 
       /* data_combo[i].LoadOpcionIceSri = true;
       this.comSrv.getIceSri().subscribe(res => {
-       
+
        console.log(res)
        this.iceSri = res['data'];
         data_combo[i].LoadOpcionIceSri = false;
@@ -6345,10 +6345,10 @@ sumRegistroTodo(){
 
   async getRetencionFuente(i?) {
 
-    
+
     if (this.rete_fuente == undefined) {
       try {
-        const response = await this.contableService.getRetencionFuenteCompras().toPromise<any>()
+        const response = await this.contableService.getRetencionFuenteCompras() as any
         console.log(response)
         this.rete_fuente = response.data
       } catch (err) {
@@ -6377,10 +6377,10 @@ sumRegistroTodo(){
 
   async getRetencionIva(i?, datos?) {
 
-    
+
     if (this.rte_iva == undefined) {
       try {
-        const response = await this.contableService.getRetencionIvaCompras().toPromise<any>()
+        const response = await this.contableService.getRetencionIvaCompras() as any
         console.log(response)
         this.rte_iva = response.data
       } catch (err) {
@@ -6407,7 +6407,7 @@ sumRegistroTodo(){
 
     if (this.centros == undefined) {
       try {
-        const response = await this.comSrv.ListaCentroCostos().toPromise<any>()
+        const response = await this.comSrv.ListaCentroCostos() as any
         console.log(response)
         this.centros = response.data
       } catch (err) {
@@ -6518,7 +6518,7 @@ sumRegistroTodo(){
     modal.componentInstance.validar = true
   }
 
- 
+
 
 
   LoadListaCatalogoPresupuesto(index) {
@@ -6543,12 +6543,12 @@ sumRegistroTodo(){
     myThrowingFunction = async () => {
       const myString = func();
       const myResolvedPromiseString = await asyncFunc();
-    
+
       myString.length;
       myResolvedPromiseString.length;
     };
-  
-  
+
+
     asyncFunctionCatching = async () => {
       const myReturnValue = "Hello world";
       try {
@@ -6663,20 +6663,20 @@ sumRegistroTodo(){
       // this.xmlToJson(value).then(response => this.ProcesaCargaXml(response));
     });
 
-   
+
 
 
 
     /*
         const reader = new FileReader();
         reader.onload = (e) => {
-    
+
           const text = reader.result.toString().trim();
           parseString(text, function (err, result) {
-    
+
             console.log(this.dataCuenta);
-    
-    
+
+
           });
         }
         reader.readAsText(this.files[0]);*/
@@ -7035,7 +7035,7 @@ sumRegistroTodo(){
   }
 
   descargarPdf(){
-     
+
     window.open(environment.ReportingUrl + "rpt_compras.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_compra=" + this.id_compra, '_blank')
 
   }
@@ -7047,29 +7047,29 @@ sumRegistroTodo(){
 
   exportExcelCuentas(){
     if(this.dataCuenta.length > 0){
-      this.mensajeSppiner = "Generando Archivo Excel..."; 
+      this.mensajeSppiner = "Generando Archivo Excel...";
       this.lcargando.ctlSpinner(true);
       let data = {
         title: 'Cuentas',
         rows:  this.dataCuenta
       }
       console.log(data)
-      this.xlsService.exportExcelCuentasCompras(data, 'Cuentas') 
+      this.xlsService.exportExcelCuentasCompras(data, 'Cuentas')
       // let tipo = 'Cuentas'
       // this.exportAsXLSX(this.dataCuenta,tipo);
-      this.lcargando.ctlSpinner(false); 
+      this.lcargando.ctlSpinner(false);
     }else {
       this.toastr.info("No hay datos para exportar")
     }
 
 
   }
- 
+
   exportExcelAsiento(){
     if(this.fieldsDaily.length > 0){
 
-      this.mensajeSppiner = "Generando Archivo Excel..."; 
-      this.lcargando.ctlSpinner(true); 
+      this.mensajeSppiner = "Generando Archivo Excel...";
+      this.lcargando.ctlSpinner(true);
       let data = {
         title: 'Asiento',
         rows:  this.fieldsDaily
@@ -7078,27 +7078,27 @@ sumRegistroTodo(){
     this.xlsService.exportExcelAsientoCompras(data, 'Asiento')
       // let tipo = 'Asiento'
       // this.exportAsXLSX(this.fieldsDaily,tipo);
-      this.lcargando.ctlSpinner(false); 
+      this.lcargando.ctlSpinner(false);
     }else{
       this.toastr.info("No hay datos para exportar")
     }
   }
   exportExcelAsientoAnticipos(){
 
-   
+
 //this.fieldsDaily
     if(this.fieldsDaily.length > 0){
       const filteredRows = this.fieldsDaily.filter(f => f.tipo_detalle === 'ANTICIPO' || f.tipo_detalle === 'ANTCXP');
-      this.mensajeSppiner = "Generando Archivo Excel..."; 
-      this.lcargando.ctlSpinner(true); 
+      this.mensajeSppiner = "Generando Archivo Excel...";
+      this.lcargando.ctlSpinner(true);
       let data = {
         title: 'Asiento Anticipos',
         rows:  filteredRows
       }
       console.log(data)
     this.xlsService.exportExcelAsientoCompras(data, 'Asiento Anticipos')
-     
-      this.lcargando.ctlSpinner(false); 
+
+      this.lcargando.ctlSpinner(false);
     }else{
       this.toastr.info("No hay datos para exportar")
     }
@@ -7106,20 +7106,20 @@ sumRegistroTodo(){
 
   exportExcelAsientoMultas(){
 
-   
+
     //this.fieldsDaily
         if(this.fieldsDaily.length > 0){
           const filteredRows = this.fieldsDaily.filter(f => f.tipo_detalle === 'MULTA' || f.tipo_detalle === 'MUCXP');
-          this.mensajeSppiner = "Generando Archivo Excel..."; 
-          this.lcargando.ctlSpinner(true); 
+          this.mensajeSppiner = "Generando Archivo Excel...";
+          this.lcargando.ctlSpinner(true);
           let data = {
             title: 'Asiento Multas',
             rows:  filteredRows
           }
           console.log(data)
         this.xlsService.exportExcelAsientoCompras(data, 'Asiento Multas')
-         
-          this.lcargando.ctlSpinner(false); 
+
+          this.lcargando.ctlSpinner(false);
         }else{
           this.toastr.info("No hay datos para exportar")
         }
@@ -7157,28 +7157,28 @@ sumRegistroTodo(){
             "mes": Number(moment(this.fecha_compra).format('MM'))
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-             
+
               this.mensajeSppiner = "Generando retención...";
               this.lcargando.ctlSpinner(true);
               let datosRetencion = {
-        
+
                 'fk_usuario_trans': this.dataUser.id_usuario,
                 'id_compra': this.id_compra,
                 'doc_proveedor': this.buyProv.fk_id_proveedor,
                 'fecha_emision': this.pipe.transform(this.fecha_compra, 'yyyy-MM-dd'),
                 'ip': this.commonServices.getIpAddress(),
                 'id_controlador': myVarGlobals.fProveeduriaCompras
-        
+
               };
-        
+
               this.comSrv.GeneraRetencionesCompraProv(datosRetencion).subscribe(
                 res => {
                   if (res["status"] == 1) {
                     this.lcargando.ctlSpinner(false);
-                    
+
                     Swal.fire({
                       icon: "success",
                       title: "Retención generada con éxito!",
@@ -7198,28 +7198,28 @@ sumRegistroTodo(){
                       this.retencionIsActive = false
                     }
                   }
-        
+
               }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.message);
-        
+
               })
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
             })
-       
+
         }
       });
 
 
-     
+
     }
 
 filterWithAccount(list: any[]) {
@@ -7253,7 +7253,7 @@ filterWithAccount(list: any[]) {
     }
   }
 
-  
+
 
 
 
@@ -7326,10 +7326,10 @@ filterWithAccount(list: any[]) {
   }
 
 recalculateAfectacion(){
- 
+
 this.tbl_partidas = [];
   this.dataCuenta.forEach((element,index) => {
-            
+
     // let tipo=''
     let obj = {
       cuenta_detalle: '(' + element.codigo_cuenta + ') ' + element.nombre_cuenta,
@@ -7375,7 +7375,7 @@ this.tbl_partidas = [];
       retencion: element.total_rft,
       retencion_iva: element.total_riva,
       ice_detalle: element.total_ice
-      
+
     }
 
     const item = this.tbl_partidas.find((p: any) => p.codigo == element.codigo_presupuesto)
@@ -7401,7 +7401,7 @@ this.tbl_partidas = [];
 
   this.buyProv.subtotal = 0.00;
   this.buyProv.valor_iva = 0.00;
-  this.buyProv.total = 0.00;/* 
+  this.buyProv.total = 0.00;/*
   this.dataProducto.splice(index, 1); */
 /*dataProducto*/
   this.dataCuenta.forEach(element => {
@@ -7433,7 +7433,7 @@ this.tbl_partidas = [];
       this.lcargando.ctlSpinner(true)
       this.mensajeSppiner = 'Cargando Registro'
       try {
-        const response = await this.comSrv.getComprasGeneradas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}).toPromise<any>()
+        const response = await this.comSrv.getComprasGeneradas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}) as any
         console.log(response)
         if (response.data.data.length > 0) {
           this.totalRecords = response.data.total
@@ -7455,11 +7455,11 @@ this.tbl_partidas = [];
 
 
   async consultaRegGuardado(id_compra) {
-   
+
       this.lcargando.ctlSpinner(true)
       this.mensajeSppiner = 'Cargando Registro'
       try {
-        const response = await this.comSrv.getComprasGeneradas({params: {filter: {id: id_compra}, paginate: {page: 1, perPage: 1}}}).toPromise<any>()
+        const response = await this.comSrv.getComprasGeneradas({params: {filter: {id: id_compra}, paginate: {page: 1, perPage: 1}}}) as any
         console.log(response)
         if (response.data.data.length > 0) {
           this.totalRecords = response.data.total
@@ -7476,7 +7476,7 @@ this.tbl_partidas = [];
         this.lcargando.ctlSpinner(false)
         this.toastr.error(err.error?.message, 'Error cargando Registro')
       }
-    
+
   }
   tabSelected(tab){
     console.log(tab);
@@ -7486,7 +7486,7 @@ this.tbl_partidas = [];
       this.mostrarCuentas = false;
     }
   }
-  
+
   async getPrevRecord() {
     this.lastRecord -= 1
     await this.handleEnter({key: 'Enter'})
@@ -7539,7 +7539,7 @@ this.tbl_partidas = [];
             this.toastr.error(err.error?.message, 'Error anulando Compra')
           }
         } else {
-            
+
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
         }
@@ -7550,11 +7550,11 @@ this.tbl_partidas = [];
     });
 
 
-      
-     
 
 
-     
+
+
+
     }
   }
 

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ConfiguracionRoutingModule } from './configuracion.routing'; 
+import { ConfiguracionRoutingModule } from './configuracion.routing';
 import { ConfiguracionComponent } from './configuracion.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatRadioModule } from '@angular/material/radio';
 
@@ -18,7 +18,7 @@ import { MatRadioModule } from '@angular/material/radio';
     AppCustomModule,
     MatRadioModule,
     // SharedModule,  // Para los componentes propios del tema
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     ConfiguracionRoutingModule
   ]
 })

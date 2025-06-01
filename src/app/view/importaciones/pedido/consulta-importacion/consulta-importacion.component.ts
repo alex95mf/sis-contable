@@ -228,13 +228,13 @@ export class ConsultaImportacionComponent implements OnInit {
 			  }
 			this.lcargando.ctlSpinner(false);
 			setTimeout(() => {
-				this.dtTrigger.next();
+				this.dtTrigger.next(null);
 			}, 50);
 		}, error => {
 			this.lcargando.ctlSpinner(false);
 			this.validaDt = true;
 			setTimeout(() => {
-				this.dtTrigger.next();
+				this.dtTrigger.next(null);
 			}, 50);
 			this.lcargando.ctlSpinner(false);
 			this.toastr.info(error.error.message);

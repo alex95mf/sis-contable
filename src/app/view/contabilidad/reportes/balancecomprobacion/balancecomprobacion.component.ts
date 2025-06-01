@@ -92,8 +92,8 @@ export class BalancecomprobacionComponent implements OnInit {
           }else{
             this.btnPrint = true
             this.vmButtons[2].habilitar = false;
-          }          
-          
+          }
+
           this.getParametersFilter();
         }
     }, error =>{
@@ -135,7 +135,7 @@ export class BalancecomprobacionComponent implements OnInit {
 
       if(this.dataLength[0]){
         for (let index = 0; index < this.dataLength[0].niveles; index++) {
-          this.lstNiveles.push(index+1);          
+          this.lstNiveles.push(index+1);
         }
       }
 
@@ -175,7 +175,7 @@ export class BalancecomprobacionComponent implements OnInit {
       this.sumaDebito = res['data']['total_saldo_deudor'];
       this.sumaCredito = res['data']['total_saldo_acreedor'];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.lcargando.ctlSpinner(false);
@@ -234,7 +234,7 @@ export class BalancecomprobacionComponent implements OnInit {
       this.sumaCredito = res['data']['total_saldo_acreedor'];
       setTimeout(() => {
         this.lcargando.ctlSpinner(false);
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.lcargando.ctlSpinner(false);

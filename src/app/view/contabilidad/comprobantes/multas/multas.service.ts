@@ -17,7 +17,7 @@ export class MultasService {
   }
 
   getUltimaMulta(data: any = {}) {
-    return this.api.apiCall('multas/get-ultima-multa', 'POST', data).toPromise<any>();
+    return this.api.apiCall('multas/get-ultima-multa', 'POST', data) as any;
   }
 
   updateEstado(data){

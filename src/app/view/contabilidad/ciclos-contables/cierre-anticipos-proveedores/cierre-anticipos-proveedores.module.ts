@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CierreAnticiposProveedoresRoutingModule } from './cierre-anticipos-proveedores.routing';
 import { CierreAnticiposProveedoresComponent } from './cierre-anticipos-proveedores.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { TableModule } from 'primeng/table';
 
 
@@ -15,7 +15,7 @@ import { TableModule } from 'primeng/table';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     TableModule,
     CierreAnticiposProveedoresRoutingModule
   ]

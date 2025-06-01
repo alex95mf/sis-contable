@@ -19,7 +19,7 @@ export class FormSaveComponent implements OnInit {
 
   @Input() isNew: any;
   @Input() data: any;
-  
+
   vmButtons: any;
 
   retencion = {
@@ -57,7 +57,7 @@ export class FormSaveComponent implements OnInit {
     private toastr: ToastrService,
     private modalDet: NgbModal,
     private commonVarSrv: CommonVarService,
-  ) { 
+  ) {
     this.commonVarSrv.seleciconCategoriaCuentaPro.asObservable().subscribe(
       (res)=>{
         console.log(res);
@@ -134,13 +134,13 @@ export class FormSaveComponent implements OnInit {
 
         this.vmButtons[0].showimg = false
       }else{
-        
+
         this.vmButtons[0].showimg = true
         this.vmButtons[1].showimg = false
       }
    } , 50);
   }
-  
+
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
       case " REGRESAR":
@@ -151,56 +151,56 @@ export class FormSaveComponent implements OnInit {
         break;
       case " ACTUALIZAR":
         this.validacion('UPDATE');
-        break; 
+        break;
     }
   }
-  
+
   validacion(valor){
     this.lcargando.ctlSpinner(true)
     if(this.retencion.descripcion == undefined || this.retencion.descripcion == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese una descripción');
-      
+
     }else if(this.retencion.porcentaje < 0){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('El porcentaje no puede ser menor a cero');
-      
+
     }else if(this.retencion.codigo_fuente <= 0){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('El código fuente no puede ser menor o igual a cero');
-      
+
     }else if(this.retencion.codigo_anexo <= 0){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('El código anexo no puede ser menor o igual a cero');
-      
+
     }else if(this.retencion.codigo_concepto <= 0){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('El código concepto no puede ser menor o igual a cero');
-      
+
     }else if(this.retencion.codigo_valor_retenido <= 0){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('El código valor retenido no puede ser menor o igual a cero');
-      
+
     }else if(this.retencion.codigo_concepto_retenido <= 0){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('El código concepto retenido no puede ser menor o igual a cero');
-      
+
     }else if(this.retencion.cuenta == undefined || this.retencion.cuenta == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta principal');
-      
+
     }else if(this.retencion.cuenta_corriente == undefined || this.retencion.cuenta_corriente == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta corriente');
-      
+
     }else if(this.retencion.cuenta_produccion == undefined || this.retencion.cuenta_produccion == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta produccion');
-      
+
     }else if(this.retencion.formulario == undefined || this.retencion.formulario == 0){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja si tiene o no formulario');
-      
+
     }else{
       if(valor == 'SAVE'){
         this.guardarRetencion();
@@ -211,25 +211,25 @@ export class FormSaveComponent implements OnInit {
   }
 
   guardarRetencion(){
-    
+
     this.service.setRetencion(this.retencion).subscribe(
       (res)=>{
         this.toastr.success('Se Guardo con éxito');
         this.lcargando.ctlSpinner(false);
         this.closeModal();
-        this.commonVarSrv.modalCargarRetIVA.next()
+        this.commonVarSrv.modalCargarRetIVA.next(null)
       }
     )
   }
 
   actualizarRetencion(){
-    
+
     this.service.updateRetencion(this.retencion).subscribe(
       (res)=>{
         this.toastr.success('Se Actualizo con éxito');
         this.lcargando.ctlSpinner(false);
         this.closeModal();
-        this.commonVarSrv.modalCargarRetIVA.next()
+        this.commonVarSrv.modalCargarRetIVA.next(null)
       }
     )
   }
@@ -237,7 +237,7 @@ export class FormSaveComponent implements OnInit {
   closeModal(){
     this.modal.close()
   }
-  
+
   // getCatalogo(){
   //   this.lcargando.ctlSpinner(true)
   //   let paretnId = [7, 4, 1]

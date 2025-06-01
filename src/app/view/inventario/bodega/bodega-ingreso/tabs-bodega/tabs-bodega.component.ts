@@ -26,7 +26,7 @@ export class TabsBodegaComponent implements OnInit {
                 private bodegaService:BodegaIngresoServices,
                 private toastr: ToastrService,
                 private commonServices:CommonService
-             ) { 
+             ) {
                this.commonServices.refreshDataTable.asObservable().subscribe(res =>{
                 if(!this.validaDtBodega){
                   this.getDataTable();
@@ -37,7 +37,7 @@ export class TabsBodegaComponent implements OnInit {
              }
 
   ngOnInit(): void {
-    this.getDataTable();  
+    this.getDataTable();
   }
 
   getDataTable(){
@@ -55,7 +55,7 @@ export class TabsBodegaComponent implements OnInit {
         this.validaDtBodega = true;
         this.dataBodega = res['data'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.validaDtBodega = false;
@@ -72,7 +72,7 @@ export class TabsBodegaComponent implements OnInit {
 
   rerender(): void {
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-        dtInstance.destroy();    
+        dtInstance.destroy();
         this.getDataTable();
       });
   }

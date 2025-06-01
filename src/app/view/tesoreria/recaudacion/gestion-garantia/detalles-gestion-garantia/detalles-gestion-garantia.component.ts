@@ -95,7 +95,7 @@ export class DetallesGestionGarantiaComponent implements OnInit {
         console.log(res);
         this.lcargando.ctlSpinner(false);
         this.ngModal.close();
-        this.commonVr.modalMovimientoBanco.next();
+        this.commonVr.modalMovimientoBanco.next(null);
       },
       (error)=>{
         this.tsr.info('Ocurrio un error en la peticion ', error.message)

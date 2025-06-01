@@ -17,7 +17,7 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
 import { ModalSolicitudComponent } from './modal-solicitud/modal-solicitud.component';
 import { ModalSolicitudCatComponent } from './modal-solicitud-cat/modal-solicitud-cat.component';
 import { ModalProductoDetallesComponent } from './modal-producto-detalles/modal-producto-detalles.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -37,7 +37,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     CommonModalModule,
     NgxDocViewerModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
   ],
   entryComponents: [
     ShowOrderComponent

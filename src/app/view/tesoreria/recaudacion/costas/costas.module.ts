@@ -6,7 +6,7 @@ import { ListRecDocumentosComponent } from './list-rec-documentos/list-rec-docum
 
 import { CostasRoutingModule } from './costas.routing';
 import { CostasComponent } from './costas.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({

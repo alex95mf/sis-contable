@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AperturaCajaRoutingModule } from './apertura-caja-routing.module';
 import { AperturaCajaComponent } from './apertura-caja.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -13,8 +13,8 @@ import { NgxCurrencyModule } from 'ngx-currency';
   ],
   imports: [
     CommonModule,
-    AppCustomModule,  
-    NgxCurrencyModule,
+    AppCustomModule,
+    NgxCurrencyDirective,
     AperturaCajaRoutingModule
   ]
 })

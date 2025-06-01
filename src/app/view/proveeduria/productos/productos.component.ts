@@ -135,13 +135,13 @@ export class ProductosComponent implements OnInit {
         this.validaDt = true;
         this.dataDT = res['data'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.processing = true;
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
         this.toastr.info(error.error.message);
       });
@@ -231,7 +231,7 @@ export class ProductosComponent implements OnInit {
   }
 
 
-  
+
 
   deleteProduct(dt){
     dt['ip'] = this.commonServices.getIpAddress(),
@@ -313,9 +313,9 @@ export class ProductosComponent implements OnInit {
     }
   }
 
-  updatedItems(dt){   
+  updatedItems(dt){
     this.producto = dt;
-    this.actions.btnSave = false; 
+    this.actions.btnSave = false;
     this.actions.btnUpdated = true;
 
     this.vmButtons[0].habilitar = true;

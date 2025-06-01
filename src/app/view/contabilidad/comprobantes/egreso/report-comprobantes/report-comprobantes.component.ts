@@ -82,7 +82,7 @@ export class ReportComprobantesComponent implements OnInit {
         { orig: "btnRepCompEg", paramAccion: "1", boton: { icon: "fa fa-times", texto: "CERRAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary btn-sm", habilitar: false, imprimir: false}
     ];
 
-    
+
     this.processing = true;
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
     this.getTableReport();
@@ -101,11 +101,11 @@ export class ReportComprobantesComponent implements OnInit {
         $('#tablaReporCompEg').DataTable().button( '.buttons-excel' ).trigger();
       break;
       case "IMPRIMIR1":
-        $('#tablaReporCompEg').DataTable().button( '.buttons-print' ).trigger();       
+        $('#tablaReporCompEg').DataTable().button( '.buttons-print' ).trigger();
       break;
       case "PDF1":
         $('#tablaReporCompEg').DataTable().button( '.buttons-pdf' ).trigger();
-      break; 
+      break;
     }
   }
 
@@ -187,13 +187,13 @@ export class ReportComprobantesComponent implements OnInit {
           this.processing = true;
           this.infoData = res['data'];
           setTimeout(() => {
-              this.dtTrigger.next();
+              this.dtTrigger.next(null);
           }, 50);
       }, error => {
           this.validaDt = true;
           this.processing = true;
           setTimeout(() => {
-              this.dtTrigger.next();
+              this.dtTrigger.next(null);
           }, 50);
           this.toastr.info(error.error.message);
       });
@@ -215,7 +215,7 @@ export class ReportComprobantesComponent implements OnInit {
           let filt = this.arrayEgreso.find((e) => e.secuencial == this.documento);
           this.beneficiario = filt.beneficiario;
           this.inBeneficiario = true;
-          /* this.arrayData = filt; */     
+          /* this.arrayData = filt; */
       } else {
           this.rerender();
       }
@@ -229,7 +229,7 @@ export class ReportComprobantesComponent implements OnInit {
           this.documento = filt.secuencial;
           this.inDocumento = true;
           /* this.arrayData = filt; */
-        
+
       } else {
           this.rerender();
       }
@@ -288,7 +288,7 @@ export class ReportComprobantesComponent implements OnInit {
     }
 
 
-    
+
 informaDocumento(dt,i) {
   this.processingtwo = true;
   let modalDoc = this.arrayDtCEgreso.filter((e) => e.fk_cde == dt.id);
@@ -307,7 +307,7 @@ informaDocumento(dt,i) {
   const dialogRef = this.confirmationDialogService.openDialogMat(ListadoComEgComponent, {
     width: '1500px', height: 'auto',
     data: { titulo: "Información Documento", dtInformacion: this.dtInformacion, dtcomprobanteEgreso: this.dtcomprobanteEgreso}
-    
+
   } );
 
   dialogRef.afterClosed().subscribe(resultado => {
@@ -320,8 +320,8 @@ informaDocumento(dt,i) {
 
 
 
-  } 
-  
+  }
+
   closeModal() {
 //   ($("#modalComprobanteEgreso") as any).modal("hide");
   this.processingtwo = false;

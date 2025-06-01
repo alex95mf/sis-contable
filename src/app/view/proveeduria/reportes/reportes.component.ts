@@ -16,7 +16,7 @@ declare const $: any;
 @Component({
 standalone: false,
   selector: 'app-reportes',
-  templateUrl: './reportes.component.html',     
+  templateUrl: './reportes.component.html',
   styleUrls: ['./reportes.component.scss']
 })
 export class ReportesComponent implements OnInit {
@@ -39,7 +39,7 @@ export class ReportesComponent implements OnInit {
   totalIngresos:any;
   totalEgresos:any;
   permisions: any;
-  producto: any = 0; 
+  producto: any = 0;
   movimiento:any = 0;
   arrayMovimiento: Array<any> = [
     { id: 1, name: "Ingreso" },
@@ -62,7 +62,7 @@ export class ReportesComponent implements OnInit {
     private reportesSrv: ReportesService,
     private modalService: NgbModal,
     private commonServices: CommonService,
-    private commonVarSrv: CommonVarService) { }   
+    private commonVarSrv: CommonVarService) { }
 
   ngOnInit(): void {
 
@@ -74,10 +74,10 @@ export class ReportesComponent implements OnInit {
     ];
 
     setTimeout(() => {
-      this.permisos(); 
+      this.permisos();
     }, 10)
 
-  } 
+  }
 
   metodoGlobal(evento: any) {
 		switch (evento.items.boton.texto) {
@@ -85,7 +85,7 @@ export class ReportesComponent implements OnInit {
           $('#tablaInfKarProvr').DataTable().button( '.buttons-excel' ).trigger();
         break;
         case "IMPRIMIR":
-          $('#tablaInfKarProvr').DataTable().button( '.buttons-print' ).trigger();       
+          $('#tablaInfKarProvr').DataTable().button( '.buttons-print' ).trigger();
         break;
         case "PDF":
           $('#tablaInfKarProvr').DataTable().button( '.buttons-pdf' ).trigger();
@@ -93,7 +93,7 @@ export class ReportesComponent implements OnInit {
         case "LIMPIAR FILTROS":
         this.informaciondtlimpiar();
         break;
-		}  	 
+		}
 	}
 
   permisos() {
@@ -139,7 +139,7 @@ export class ReportesComponent implements OnInit {
       this.arrayGrupo = res['data'];
     },)
   }
-  
+
     getDataTabledos() {
       let fechaActual = moment(this.viewDate).format("YYYY-MM-DD");
       let fechaIngresoHasta = moment(this.toDatePicker).format("YYYY-MM-DD");
@@ -208,7 +208,7 @@ export class ReportesComponent implements OnInit {
                     },
                 },
             ],
-    
+
             language: {
                 url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
             },
@@ -218,7 +218,7 @@ export class ReportesComponent implements OnInit {
         this.reportesSrv.tablaReportdos(data).subscribe(res => {
             this.validaDtUser = true;
             this.lcargando.ctlSpinner(false);
-            this.guardarolT = res['data'];            
+            this.guardarolT = res['data'];
             if (res['data'].length > 0) {
               this.SumaTotales();
               this.vmButtons[1].habilitar = false;
@@ -232,18 +232,18 @@ export class ReportesComponent implements OnInit {
                 this.totalEgresos = 0;
             }
             setTimeout(() => {
-                this.dtTrigger.next();
+                this.dtTrigger.next(null);
             }, 50);
         }, error => {
             this.validaDtUser = true;
             this.lcargando.ctlSpinner(false);
             setTimeout(() => {
-                this.dtTrigger.next();
+                this.dtTrigger.next(null);
             }, 50);
             this.toastr.info(error.error.message);
         });
     }
-    
+
     rerender(): void {
         this.validaDtUser = true;
         this.lcargando.ctlSpinner(true);
@@ -261,10 +261,10 @@ export class ReportesComponent implements OnInit {
         total += this.guardarolT[i]["cantidad"];
       } else if (this.guardarolT[i]["tipo"] == "Egreso") {
         totals += this.guardarolT[i]["cantidad"];
-      } 
+      }
       this.totalIngresos = total;
       this.totalEgresos = totals;
-    } 
+    }
     this.saldoProducto();
   }
 
@@ -272,18 +272,18 @@ export class ReportesComponent implements OnInit {
     var total = 0;
     for (let i = 0; i < this.guardarolT.length; i++) {
       if (isNaN(parseFloat(this.guardarolT[i]["ingreso"])) && isNaN(parseFloat(this.guardarolT[i]["egreso"]))) {
-        total += 0;     
-      } else{ 
+        total += 0;
+      } else{
         total += this.guardarolT[i]["ingreso"];
         this.guardarolT[i]["ingreso"] = total;
         this.prueba = total -= this.guardarolT[i]["egreso"] ;
-        this.guardarolT[i]["egreso"] = this.prueba;     
+        this.guardarolT[i]["egreso"] = this.prueba;
       }
-    }  
-    
+    }
+
   }
-  
-  filterProducto(data){ 
+
+  filterProducto(data){
         if (this.producto != 0) {
             this.producto = data
              this.dataStock = this.arrayproducts.find(e => e.id == this.producto);
@@ -297,7 +297,7 @@ export class ReportesComponent implements OnInit {
   }
 
 
-  tipoMovimiento(data){ 
+  tipoMovimiento(data){
         if (this.movimiento != 0) {
             this.movimiento = data
             this.rerender();
@@ -306,7 +306,7 @@ export class ReportesComponent implements OnInit {
         }
   }
 
-  
+
   getFilterGrupo(evt) {
           if (this.grupo != 0) {
             this.grupo = evt;
@@ -314,7 +314,7 @@ export class ReportesComponent implements OnInit {
         } else {
             this.rerender();
         }
-   
+
   }
 
   informaciondtlimpiar(){

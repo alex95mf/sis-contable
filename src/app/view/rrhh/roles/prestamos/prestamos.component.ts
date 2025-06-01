@@ -8,7 +8,7 @@ import { prestamosService } from "./prestamos.service";
 import { CommonVarService } from "../../../../services/common-var.services";
 import { CommonService } from "../../../../services/commonServices";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import 'sweetalert2/src/sweetalert2.scss';  
+import 'sweetalert2/src/sweetalert2.scss';
 const Swal = require('sweetalert2');
 import * as moment from "moment";
 import { PersonalComponent } from "./personal/personal.component";
@@ -127,7 +127,7 @@ export class PrestamosComponent implements OnInit {
 			{ orig: "btnAnlPres", paramAccion: "", boton: { icon: "fa fa-check-square-o", texto: "ANULAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: false, imprimir: false},
 			{ orig: "btnAnlPres", paramAccion: "", boton: { icon: "fa fa-times", texto: "CERRAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: false, imprimir: false}
 		];
-			
+
 		setTimeout(() => {
 			this.lcargando.ctlSpinner(true);
 		}, 10);
@@ -136,7 +136,7 @@ export class PrestamosComponent implements OnInit {
 
 	}
 
-	metodoGlobal(evento: any) {	
+	metodoGlobal(evento: any) {
 		switch (evento.items.boton.texto) {
 			case "NUEVO":
 				this.newPrestamo();
@@ -157,7 +157,7 @@ export class PrestamosComponent implements OnInit {
 			case "CERRAR":
 				this.closeModal();
 			break;
-		}    
+		}
 	}
 
 	arrayBanks: any = [];
@@ -225,7 +225,7 @@ export class PrestamosComponent implements OnInit {
 		this.prestamos.lgCuenta = "";
 		this.prestamos.lgNumCheque = "";
 
-		
+
 
 		this.actions.btnGuardar = false;
 		this.actions.dComponet = false;
@@ -369,7 +369,7 @@ export class PrestamosComponent implements OnInit {
 	}
 
 	validateDataGlobal() {
-		
+
 		let flag = false;
 		return new Promise((resolve, reject) => {
 			if (this.prestamos.tipoPago == undefined) {
@@ -443,7 +443,7 @@ export class PrestamosComponent implements OnInit {
 				dtInstance.destroy();
 				this.getDataTable();
 				this.imprimirAsiento(res["data"]);
-			});			
+			});
 		},(error) => {
 			this.lcargando.ctlSpinner(false);
 			this.toastr.info(error.error.message);
@@ -483,11 +483,11 @@ export class PrestamosComponent implements OnInit {
 			this.guardarolT = res["data"];
 			this.getDetalle();
 			setTimeout(() => {
-				this.dtTrigger.next();
+				this.dtTrigger.next(null);
 			}, 50);
 		}, (error) => {
 			this.lcargando.ctlSpinner(false);
-			this.dtTrigger.next();
+			this.dtTrigger.next(null);
 			this.processing = true;
 		});
 	}
@@ -543,7 +543,7 @@ export class PrestamosComponent implements OnInit {
 			this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
 				dtInstance.destroy();
 				this.getDataTable();
-			});		
+			});
 		}, (error) => {
 			this.lcargando.ctlSpinner(false);
 			this.toastr.info(error.error.message);
@@ -712,7 +712,7 @@ export class PrestamosComponent implements OnInit {
 			this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
 				dtInstance.destroy();
 				this.getDataTable();
-			});	
+			});
 		}, (error) => {
 			this.lcargando.ctlSpinner(false);
 			this.toastr.info(error.error.message);
@@ -736,7 +736,7 @@ export class PrestamosComponent implements OnInit {
 	imprimirAsiento(datos:any){
 		console.log("imprimirAsiento: ", datos)
 		this.lcargando.ctlSpinner(true);
-		this.prestamosSrvc.getAsientoDiario({datos: datos}).subscribe((datosAsi:any)=>{ 
+		this.prestamosSrvc.getAsientoDiario({datos: datos}).subscribe((datosAsi:any)=>{
 
 			this.imprimirPrestamoComponent.setearValores(datosAsi.data[0], this.dataUser, this.dataSucursal, datos);
 
@@ -744,7 +744,7 @@ export class PrestamosComponent implements OnInit {
 				this.lcargando.ctlSpinner(false);
 				let element: HTMLElement = document.getElementsByClassName("imprimirDatos")[0] as HTMLElement;
 				element.click();
-			}, 100); 
+			}, 100);
 
 		}, error=>{
 			this.lcargando.ctlSpinner(false);

@@ -8,15 +8,15 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CostasService } from './costas.service'; 
+import { CostasService } from './costas.service';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 //import { ModalLiquidacionesComponent } from './modal-liquidaciones/modal-liquidaciones.component';
 import { ListRecDocumentosComponent } from './list-rec-documentos/list-rec-documentos.component';
-import { ListGarantiasComponent } from '../recibo-cobro/list-garantias/list-garantias.component'; 
+import { ListGarantiasComponent } from '../recibo-cobro/list-garantias/list-garantias.component';
 import { ListVafavorComponent } from '../recibo-cobro/list-vafavor/list-vafavor.component';
-import { ListCruceConvenioComponent } from '../recibo-cobro/list-cruce-convenio/list-cruce-convenio.component'; 
-import { ListNotaCreditoComponent } from '../recibo-cobro/list-nota-credito/list-nota-credito.component'; 
-import { ListAnticipoPrecobradoComponent } from '../recibo-cobro/list-anticipo-precobrado/list-anticipo-precobrado.component'; 
+import { ListCruceConvenioComponent } from '../recibo-cobro/list-cruce-convenio/list-cruce-convenio.component';
+import { ListNotaCreditoComponent } from '../recibo-cobro/list-nota-credito/list-nota-credito.component';
+import { ListAnticipoPrecobradoComponent } from '../recibo-cobro/list-anticipo-precobrado/list-anticipo-precobrado.component';
 import jsPDF from 'jspdf';
 import { environment } from 'src/environments/environment';
 //import { ConceptoDetComponent } from './concepto-det/concepto-det.component';
@@ -32,7 +32,7 @@ export class CostasComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild("print") print!: ElementRef;
-  
+
   fTitle = "Costas";
   msgSpinner: string;
   vmButtons: any = [];
@@ -74,7 +74,7 @@ export class CostasComponent implements OnInit {
 
   formaPago: any = {
     nombre: '',
-    valor: '',    
+    valor: '',
   };
 
   entidadesFiltrada: any = [];
@@ -82,8 +82,8 @@ export class CostasComponent implements OnInit {
   hayEntidad: boolean = false;
   entidad: any = {
     nombre: '',
-    valor: '',  
-    grupo: '',  
+    valor: '',
+    grupo: '',
   };
 
   emisoresFiltrada: any = [];
@@ -91,8 +91,8 @@ export class CostasComponent implements OnInit {
   hayEmisor: boolean = false;
   emisor: any = {
     nombre: '',
-    valor: '',  
-    grupo: '',  
+    valor: '',
+    grupo: '',
   };
 
   documento: any = {
@@ -157,7 +157,7 @@ export class CostasComponent implements OnInit {
     { id: 'PA', value: 'PERITO AVALUADOR' },
     { id: 'PO', value: 'POSTURA' },
     { id: 'APL', value: 'ADJUDICACIÓN Y PERITO LIQUIDADOR' },
- 
+
     // { id: 'ESC', value: 'ESCRITO' },
     // { id: 'SRA', value: 'SENTAR RAZON' },
     // { id: 'RAZ', value: 'RAZON' },
@@ -180,7 +180,7 @@ export class CostasComponent implements OnInit {
     private modalService: NgbModal,
     private apiSrv: CostasService,
     private cierremesService: CierreMesService
-    ) { 
+    ) {
       this.commonVrs.selectContribuyenteCustom.asObservable().subscribe(
         (res) => {
           let n= 0;
@@ -205,20 +205,20 @@ export class CostasComponent implements OnInit {
           this.titulosDisabled = false;
           this.disabledJuicio = false;
           this.vmButtons[3].habilitar = false;
-         
+
           this.buscarJuicios();
-         
+
         }
       );
 
       this.commonVrs.selectRecDocumento.asObservable().subscribe(
         (res) => {
           let n= 0;
-          
+
           this.restoreForm();
           this.formReadOnly = true;
           console.log(res);
-         
+
           // this.concepto = res.concepto; // ya no se maneja eligiendo concepto se puede eliminar
           this.contribuyenteActive = res.contribuyente;
           this.documento = res;
@@ -228,12 +228,12 @@ export class CostasComponent implements OnInit {
           this.filter.contribuyente = res.contribuyente.razon_social;
           this.documento.juicio = res.cob_juicios.num_proceso;
 
-         
-           
+
+
           console.log(res)
           res.detalles.forEach(e => {
             console.log(e)
-          
+
             let det = {
               aplica:true,
               id_cob_juicio_actuaciones: e.juicio_actuaciones[0].id_cob_juicio_actuaciones,
@@ -256,7 +256,7 @@ export class CostasComponent implements OnInit {
 
           this.vmButtons[0].habilitar = true;
           this.vmButtons[1].habilitar = false;
-          this.vmButtons[2].habilitar = false;        
+          this.vmButtons[2].habilitar = false;
           this.vmButtons[3].habilitar = false;
           this.vmButtons[4].habilitar = false;
           console.log('superavit '+res.superavit)
@@ -288,7 +288,7 @@ export class CostasComponent implements OnInit {
 
       //   }
       // );
-      
+
 
       this.commonVrs.needRefresh.asObservable().subscribe(
         (res) => {
@@ -315,7 +315,7 @@ export class CostasComponent implements OnInit {
     this.formaPago = 0;
     this.entidad = 0;
     this.emisor = 0;
-    
+
     this.vmButtons = [
       {
         orig: "btnsRenLiqCobro",
@@ -421,7 +421,7 @@ export class CostasComponent implements OnInit {
     }
   }
 
-  triggerPrint(): void {   
+  triggerPrint(): void {
     this.print.nativeElement.click();
   }
 
@@ -453,7 +453,7 @@ export class CostasComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fTesRecTitulos,
       id_rol: this.dataUser.id_rol,
@@ -494,11 +494,11 @@ export class CostasComponent implements OnInit {
   //   else if(dt.tipo_documento=='PC'){
   //     window.open(environment.ReportingUrl + "rep_tasas_permiso_construccion.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_liquidacion=" + dt.id_liquidacion + "&forma_pago=" + this.pagos[0].tipo_pago_lbl , '_blank')
   //   }
- 
+
   // }
 
   buscarJuicios(){
-  
+
     this.msgSpinner = 'Cargando Juicios...';
     this.lcargando.ctlSpinner(true);
 
@@ -511,7 +511,7 @@ export class CostasComponent implements OnInit {
       (res) => {
         console.log(res);
         this.juicios= res['data']
-        this.lcargando.ctlSpinner(false);               
+        this.lcargando.ctlSpinner(false);
       },
       (err) => {
         this.lcargando.ctlSpinner(false)
@@ -534,18 +534,18 @@ export class CostasComponent implements OnInit {
       (res) => {
         console.log(res);
         this.costas= res['data']
-        this.lcargando.ctlSpinner(false);               
+        this.lcargando.ctlSpinner(false);
       },
       (err) => {
         this.lcargando.ctlSpinner(false)
         this.toastr.error(err.error.message, 'Error cargando Costas')
       }
     )
-    
-    
+
+
   }
   selectCostaHandler(event: any){
-    
+
     this.costasArray = {
       aplica:true,
       id_cob_juicio_actuaciones: event.id_cob_juicio_actuaciones,
@@ -554,12 +554,12 @@ export class CostasComponent implements OnInit {
       saldo:event.saldo,
       cobro: event.saldo
     }
-    
+
     this.disabledJuicio = true;
     this.agregaCostas = false;
-    
+
   }
-  
+
   addCosta(){
     let flag = true;
     for(let i = 0 ; i<this.deudas.length; i++){
@@ -574,7 +574,7 @@ export class CostasComponent implements OnInit {
       console.log(flag)
     }else{
       console.log(flag)
-      this.toastr.info( "No puede seleccionar la misma costa."); 
+      this.toastr.info( "No puede seleccionar la misma costa.");
     }
     this.vmButtons[0].habilitar=false;
     this.calcCobroTotal()
@@ -629,8 +629,8 @@ export class CostasComponent implements OnInit {
           this.emisores.push(f_pago);
         })
 
-       
-        // this.lcargando.ctlSpinner(false);               
+
+        // this.lcargando.ctlSpinner(false);
        // this.getConceptos();
        this.validacionCaja()
       },
@@ -695,8 +695,8 @@ export class CostasComponent implements OnInit {
 
   } */
 
- 
- 
+
+
 
 
   restar(deuda) {
@@ -711,18 +711,18 @@ export class CostasComponent implements OnInit {
         let cobro100 = +e.cobro * 100;
         cobroTotal += +cobro100;
       // }
-   
+
     });
 
- 
-    
+
+
     this.totalCobro = +cobroTotal / 100;
     // this.calcSaldoRestanteTotal();
     this.calcDifCobroPago();
-   
+
   }
 
-  
+
 
   // calcSaldoRestanteTotal() {
   //   let saldoResTotal = 0;
@@ -802,7 +802,7 @@ export class CostasComponent implements OnInit {
     let tipo = this.formaPago.valor;
     if (tipo=="CHEQUE" || tipo=="TRANSFERENCIA" || tipo=="DEPOSITO"){
       return tipo.substring(0,2)+' - '+ this.entidad.valor;
-    } else 
+    } else
     if (tipo=="TARJETA" || tipo=="DEBITO") {
       return (tipo=="TARJETA"?'T/C':'T/D')+' - '+this.emisor.valor;
     }
@@ -813,7 +813,7 @@ export class CostasComponent implements OnInit {
     let tipo = this.formaPago.valor;
     if (tipo=="CHEQUE" || tipo=="TRANSFERENCIA" || tipo=="DEPOSITO"){
       return this.entidad.nombre;
-    } else 
+    } else
     if (tipo=="TARJETA" || tipo=="DEBITO") {
       return this.emisor.nombre;
     }
@@ -830,7 +830,7 @@ export class CostasComponent implements OnInit {
     if ( (tipo=="CHEQUE" || tipo=="TRANSFERENCIA" || tipo=="DEPOSITO") && this.entidad==0){
       this.toastr.info("Debe seleccionar una Entidad para ésta forma de pago.")
       return ;
-    } else 
+    } else
     if ((tipo=="TARJETA" || tipo=="DEBITO") && (this.entidad==0 || this.emisor==0)){
       this.toastr.info("Debe seleccionar Entidad y Emisor para ésta forma de pago.")
       return ;
@@ -876,7 +876,7 @@ export class CostasComponent implements OnInit {
       estado: "E"
     }
 
-    
+
     this.pagos.push(nuevo);
     this.vmButtons[0].habilitar=false;
   }
@@ -901,7 +901,7 @@ export class CostasComponent implements OnInit {
     this.emisor = 0;
     this.entidadesFiltrada = this.entidades.filter(e => e.grupo == event.valor);
     this.entidadDisabled = false;
-    
+
     /* if(event.valor == "GARANTIA" || event.valor == "FAVOR" || event.valor == "CRUCE CONVENIO" || event.valor == "NOTA CREDITO" || event.valor == "ANTICIPO PRECOBRADO"){
       this.expandPago = true;
     } else {
@@ -942,9 +942,9 @@ export class CostasComponent implements OnInit {
     for(let i=0;i<this.deudas.length;i++) {
       if (
         this.deudas[i].nuevo_saldo<0
-      ) {        
-        return true;         
-      } 
+      ) {
+        return true;
+      }
     }
     return false;
   }
@@ -958,17 +958,17 @@ export class CostasComponent implements OnInit {
     for(let i=0;i<this.pagos.length;i++) {
       if (
         this.pagos[i].tipo_pago=='EFECTIVO' && (this.pagos[i].cambio<0)
-      ) {        
+      ) {
         this.fila = +(i+1) +' - '+ this.pagos[i].tipo_pago_lbl;
         this.msjError = "El valor recibido no puede ser menor al valor que se está pagando en efectivo";
-        return true;         
+        return true;
       } else if (
         (this.pagos[i].tipo_pago=='GARANTIA' || this.pagos[i].tipo_pago=='FAVOR' || this.pagos[i].tipo_pago=='CRUCE CONVENIO' || this.pagos[i].tipo_pago=='NOTA CREDITO' || this.pagos[i].tipo_pago=='ANTICIPO PRECOBRADO') && (+this.pagos[i].valor>+this.pagos[i].saldo_max)
-      ) {       
-        this.fila = +(i+1) +' - '+ this.pagos[i].tipo_pago_lbl; 
+      ) {
+        this.fila = +(i+1) +' - '+ this.pagos[i].tipo_pago_lbl;
         this.msjError = "El valor a pagar no puede ser mayor al saldo restante en "+this.pagos[i].tipo_pago_lbl;
-        return true;         
-      } 
+        return true;
+      }
     }
     return false;
   }
@@ -983,42 +983,42 @@ export class CostasComponent implements OnInit {
     //   //   console.log(this.documento.superavit);
     //   //   if(+this.documento.superavit > 0) {
 
-    //   //     return false;  
-    //   //   }      
+    //   //     return false;
+    //   //   }
     //   // } else
     //    if (
-    //     this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO' 
-    //   ) {        
+    //     this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO'
+    //   ) {
     //     // this.fila = i+1;
     //     this.msjError = "El valor recibido no puede ser menor al valor que se está pagando en efectivo";
     //     console.log(this.documento.superavit);
     //     if(+this.documento.superavit > 0) {
 
-    //       return false;  
-    //     }       
+    //       return false;
+    //     }
     //   }
     // }
     // return true;
     for(let i=0;i<this.pagos.length;i++) {
       if(
-        this.pagos[i].tipo_pago=='GARANTIA' || this.pagos[i].tipo_pago=='FAVOR' || this.pagos[i].tipo_pago=='CRUCE CONVENIO' || this.pagos[i].tipo_pago=='NOTA CREDITO' || this.pagos[i].tipo_pago=='ANTICIPO PRECOBRADO' 
+        this.pagos[i].tipo_pago=='GARANTIA' || this.pagos[i].tipo_pago=='FAVOR' || this.pagos[i].tipo_pago=='CRUCE CONVENIO' || this.pagos[i].tipo_pago=='NOTA CREDITO' || this.pagos[i].tipo_pago=='ANTICIPO PRECOBRADO'
       ) {
         if(+this.difCobroPago!=0) {
 
-          return true;  
-        }      
-      } 
+          return true;
+        }
+      }
       // else
       //  if (
-      //   this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO' 
-      // ) {        
+      //   this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO'
+      // ) {
       //   // this.fila = i+1;
       //   this.msjError = "El valor recibido no puede ser menor al valor que se está pagando en efectivo";
       //   console.log(this.documento.superavit);
       //   if(+this.documento.superavit > 0) {
 
-      //     return false;  
-      //   }       
+      //     return false;
+      //   }
       // }
     }
     return false;
@@ -1033,7 +1033,7 @@ export class CostasComponent implements OnInit {
       // if(this.documento.observacion==""||this.documento.observacion==undefined){
       //   this.toastr.info("Debe ingresar una observación para el recibo")
       //   return;
-      // } else 
+      // } else
       if(
         this.deudas.length<=0||!this.deudas.length
       ) {
@@ -1089,7 +1089,7 @@ export class CostasComponent implements OnInit {
         this.documento.superavit = +superavit.toFixed(2);
         this.superavit = 1;
         this.quitarDeudas = false;
-      } else if (+this.difCobroPago>0){    
+      } else if (+this.difCobroPago>0){
         this.documento.superavit = +this.totalPago;
         this.superavit = 2;
         this.quitarDeudas = true;
@@ -1120,17 +1120,17 @@ export class CostasComponent implements OnInit {
             "mes": Number(moment(this.documento.fecha).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
               this.msgSpinner = 'Generando Documento de cobro...';
               this.lcargando.ctlSpinner(true);
-                        
+
               if(this.quitarDeudas){
                 this.totalCobro = 0;
                 this.deudas = [];
               }
-    
+
               this.documento.estado = "E";
              // this.documento.tipo_documento = this.concepto.codigo;
               this.documento.fk_contribuyente = this.contribuyenteActive.id_cliente;
@@ -1138,12 +1138,12 @@ export class CostasComponent implements OnInit {
               this.documento.total = this.totalCobro;
               this.documento.detalles = [];
               this.documento.fk_caja = this.cajaActiva.id_caja;
-    
+
               console.log(this.deudas);
               console.log(this.pagos);
               this.deudas.forEach(e => {
                 if (e.aplica && e.cobro > 0) {
-    
+
                   let doc_det = {
                     id_documento_detalle: 0,
                     fk_documento: 0,
@@ -1162,22 +1162,22 @@ export class CostasComponent implements OnInit {
                    // codigo_concepto: e.concepto.codigo,
                    // fk_cuota: (e.cuota && e.cuota.id_documento_detalle) ? e.cuota.id_documento_detalle : 0, // id del documento det (cuota) para cambiar su estado luego de pagarla, 0 si no es cuota
                   }
-    
+
                   this.documento.detalles.push(doc_det);
                 }
               });
-    
+
               this.documento.formas_pago = [];
               this.pagos.forEach(e => {
                 if(e.valor > 0){
                   this.documento.formas_pago.push(e);
                 }
               });
-    
+
               let data2 = {
                 documento: this.documento
               }
-              console.log(this.documento);     
+              console.log(this.documento);
               // servicio que crea el documento, sus detalles, sus formas de pago asociadas
               // tambien cambia el saldo de la tabla deudas y el campo estado pasa a C en liquidacion y deudas si el nuevo saldo es 0
               // this.lcargando.ctlSpinner(false);
@@ -1185,7 +1185,7 @@ export class CostasComponent implements OnInit {
               this.apiSrv.setRecDocumento(data2).subscribe(
                 (res) => {
                   console.log(res);
-                  
+
                   this.documento = res['data'];
                   this.formReadOnly = true;
                   this.vmButtons[0].habilitar = true;
@@ -1224,7 +1224,7 @@ export class CostasComponent implements OnInit {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
@@ -1244,9 +1244,9 @@ export class CostasComponent implements OnInit {
     }
     // else if(this.documento.fecha != hoy){
     //   this.toastr.info('No puede anular un Documento cobrado en dias previos');
-    //   return ;     
+    //   return ;
     // }
-   
+
     Swal.fire({
       icon: "warning",
       title: "¡Atención!",
@@ -1269,7 +1269,7 @@ export class CostasComponent implements OnInit {
           "mes": Number(moment(this.documento.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-          
+
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
             let data2 = {
@@ -1282,7 +1282,7 @@ export class CostasComponent implements OnInit {
             this.apiSrv.anularCosta(data2).subscribe(
               (res) => {
                 console.log(res);
-                
+
                 this.documento = res['data'];
                 this.documento.fecha = res['data'].fecha.split(' ')[0];
                 this.formReadOnly = true;
@@ -1318,7 +1318,7 @@ export class CostasComponent implements OnInit {
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
           }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
@@ -1418,7 +1418,7 @@ export class CostasComponent implements OnInit {
       this.toastr.info('No tiene caja activa');
       this.formReadOnly = true
       this.activo = false
-    } 
+    }
 
     if (this.cajaActiva && this.cajaActiva.fecha != moment().format('YYYY-MM-DD')) {
       console.log('No fue abierta hoy')
@@ -1429,11 +1429,11 @@ export class CostasComponent implements OnInit {
 
     try {
       let response = await this.apiSrv.getCajaDiaByCaja({
-        id_caja: this.cajaActiva.id_caja, 
+        id_caja: this.cajaActiva.id_caja,
         fecha: this.cajaActiva.fecha
-      }).toPromise<any>()
+      }) as any
       console.log(response.data)
-  
+
       if (response.data.length == 0) {
         console.log('No hay registro en la base')
         this.toastr.info('No hay cajas reabiertas')
@@ -1455,7 +1455,7 @@ export class CostasComponent implements OnInit {
       this.toastr.warning(err.error?.message)
     }
   }
-  
+
   onlyNumber(event): boolean {
     let key = event.which ? event.which : event.keyCode;
     if (key > 31 && (key < 48 || key > 57)) {

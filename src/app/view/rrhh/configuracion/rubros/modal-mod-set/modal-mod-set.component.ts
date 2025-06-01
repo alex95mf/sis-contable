@@ -82,7 +82,7 @@ export class ModalModSetComponent implements OnInit {
           this.rubro.cuentaInvDeb = res.data.codigo
           this.rubro.numcInvDeb = res.data.nombre
           this.rubro.cuentaPresupuestoInvDeb = res.data.presupuesto != null ? res.data.presupuesto?.codigo : res.data.presupuesto_haber?.codigo
-          this.rubro.numpcInvDeb = res.data.presupuesto != null ? res.data.presupuesto?.nombre : res.data.presupuesto_haber?.nombre 
+          this.rubro.numpcInvDeb = res.data.presupuesto != null ? res.data.presupuesto?.nombre : res.data.presupuesto_haber?.nombre
         }else if(res.validacion == '2'){
           this.rubro.cuentaCorrDeb = res.data.codigo
           console.log(res.data);
@@ -118,7 +118,7 @@ export class ModalModSetComponent implements OnInit {
           this.rubro.cuentaPresupuestoProdDeb = res.data.codigo
           this.rubro.numpcProdDeb = res.data.descripcion_general
         }
-        
+
       }
     )
   }
@@ -200,11 +200,11 @@ export class ModalModSetComponent implements OnInit {
 
         this.vmButtons[0].showimg = false
       }else{
-        
+
         this.vmButtons[0].showimg = true
         this.vmButtons[1].showimg = false
       }
-      
+
     }, 50);
 
   }
@@ -220,7 +220,7 @@ export class ModalModSetComponent implements OnInit {
         break;
       case " ACTUALIZAR":
         this.validacion('UPDATE');
-        break; 
+        break;
     }
   }
 
@@ -259,88 +259,88 @@ export class ModalModSetComponent implements OnInit {
     if(this.rubro.codigo == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese el Codigo');
-      
+
     }else if(this.rubro.nombre == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese el nombre del rubro');
-      
+
     }else if(this.rubro.cuentaInvDeb == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta de Inversion Debe');
-      
+
     }/* else if(this.rubro.cuentaCorrDeb == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta Corriente Debe');
-      
+
     } else if(this.rubro.cuentaProdDeb == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta Producción Debe');
-      
+
     }*/
     else if(this.rubro.cuentaInvHab == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta Inversion Haber');
-      
+
     }/* else if(this.rubro.cuentaCorrHab == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta Corriente Haber');
-      
+
     } else if(this.rubro.cuentaProdHab == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta Producción Haber');
-      
+
     }*/
     else if(this.rubro.cuentaPresupuestoInvDeb == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta presupuesto de Inversion Debe');
-      
+
     }/* else if(this.rubro.cuentaPresupuestoCorrDeb == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta presupuesto Corriente Debe');
-      
+
     } else if(this.rubro.cuentaPresupuestoProdDeb == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta presupuesto de Producción Debe');
-      
+
     }*/else if(this.rubro.alSueldo == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese % al sueldo');
-      
+
     }else if(this.rubro.alIngreso == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese % al ingreso');
-      
+
     }else if(this.rubro.losep == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese % ingreso LOSEP');
-      
+
     }else if(this.rubro.aportable == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja Aportable');
-      
+
     }else if(this.rubro.diferencia_por_region == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Seleccion diferenciable por región');
     }
-    
-    
+
+
     else if(this.rubro.tipoRubro == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja tipo rubro');
-      
+
     } else if(this.rubro.codigoTipoPago == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja tipo pago');
-      
+
     }
     else if(this.rubro.automatico == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja automatico');
-      
+
     }else if(this.rubro.estado == null){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja el estado');
-      
+
     }else{
       if(valor == 'SAVE'){
         this.guardarRubro();
@@ -352,13 +352,13 @@ export class ModalModSetComponent implements OnInit {
 
 
   guardarRubro(){
-    
+
     this.service.setRubros(this.rubro).subscribe(
       (res)=>{
         this.toastr.success('Se Guardo con éxito');
         this.lcargando.ctlSpinner(false);
         this.closeModal();
-        this.commonVarSrv.modalCargarRubros.next()
+        this.commonVarSrv.modalCargarRubros.next(null)
       }
     )
   }
@@ -366,19 +366,19 @@ export class ModalModSetComponent implements OnInit {
 limpiarCDebe(){
   if (this.rubro.tipoRubro == 9){
 
- 
+
   console.log("limpiando")
   this.rubro.cuentaInvDeb ='';
   this.rubro.numcInvDeb=''; }
 }
   actualizarRubro(){
-    
+
     this.service.updateRubros(this.rubro).subscribe(
       (res)=>{
         this.toastr.success('Se Actualizo con éxito');
         this.lcargando.ctlSpinner(false);
         this.closeModal();
-        this.commonVarSrv.modalCargarRubros.next()
+        this.commonVarSrv.modalCargarRubros.next(null)
       }
     )
   }
@@ -394,7 +394,7 @@ limpiarCDebe(){
     modal.componentInstance.validacionModal = true;
     modal.componentInstance.tieneReglas = false;
     modal.componentInstance.validar = valor;
-    
+
   }
   modalCuentaContableReg(valor){
     console.log("reglas")

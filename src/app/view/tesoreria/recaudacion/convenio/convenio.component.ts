@@ -167,7 +167,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
   aprobacionValidacion: boolean = false;
 
   destroy = new Subject<any>();
- 
+
 
   constructor(
     private commonService: CommonService,
@@ -175,7 +175,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
     private commonVrs: CommonVarService,
     private modalService: NgbModal,
     private apiSrv: ConvenioService
-    ) { 
+    ) {
       this.commonVrs.selectContribuyenteCustom.asObservable().pipe(takeUntil(this.destroy)).subscribe(
         (res) => {
           console.log(res);
@@ -183,7 +183,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
 
           let date = new Date()
 
-          
+
 
           if((res['fecha'] != null ? res['fecha'].split('-')[0] == date.getFullYear : true) && (res['cant_convenios'] >= 0 && res['cant_convenios'] < 2 )){
 
@@ -196,11 +196,11 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
               this.vmButtons[1].habilitar = true;
               this.vmButtons[2].habilitar = true;
               this.vmButtons[3].habilitar = true;
-              this.vmButtons[4].habilitar = false; 
+              this.vmButtons[4].habilitar = false;
               this.vmButtons[7].habilitar = true;
-              
+
               this.getLiquidaciones();
-              
+
               // if(this.contribuyenteActive.tiene_convenio == 1){
               //   console.log("hola")
               //   Swal.fire({
@@ -218,19 +218,19 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
               //   this.vmButtons[3].habilitar = false;
               //   console.log(this.documento)
               // }
-  
+
               // else{
               //   this.titulosDisabled = false;
-              //   this.vmButtons[3].habilitar = false; 
-               
-              //   this.getLiquidaciones();         
-                
-              // }             
-            
+              //   this.vmButtons[3].habilitar = false;
+
+              //   this.getLiquidaciones();
+
+              // }
+
             }
             else{
               console.log('2')
-              
+
               this.contribuyenteCActive = res;
 
               if (this.contribuyenteActive.id_cliente == this.contribuyenteCActive.id_cliente) {
@@ -257,11 +257,11 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
             this.vmButtons[4].habilitar = false;
 
           }
-    
-          
-          
-         
-          
+
+
+
+
+
           // this.deudaDisabled = false;
         }
       );
@@ -283,9 +283,9 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
 
       this.commonVrs.selectRecDocumento.asObservable().pipe(takeUntil(this.destroy)).subscribe(
         (res) => {
- 
+
           // this.formReadOnly = true;
-         
+
           this.restoreForm();
           // if(res['estado'] = 'A'){
           //   this.formReadOnly = true;
@@ -294,10 +294,10 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
             this.formReadOnly = false;
             this.titulosDisabled = false;
           // }
-          
+
           // console.log(res.contribuyente);
           // this.concepto = res.concepto; // ya no se maneja eligiendo concepto se puede eliminar
-          
+
           this.contribuyenteActive = res.contribuyente;
           this.contribuyenteCActive = res.contribuyente_2;
           // console.log(this.contribuyenteActive)
@@ -307,8 +307,8 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
           this.documento = res;
           this.newDocument = res['id_documento'];
           this.documento.fecha = res.fecha.split(" ")[0];
-          this.documento['id_documento_detalle'] = 1; 
-          this.documento['id__documento'] = res['id_documento'] 
+          this.documento['id_documento_detalle'] = 1;
+          this.documento['id__documento'] = res['id_documento']
 
 
           console.log( res.detalles);
@@ -331,7 +331,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
                   codigo_concepto: e.codigo_concepto,
                   fk_concepto: e.fk_concepto,
                 }
-  
+
                 this.amortizaciones.push(amort);
               }else{
                 let amort = {
@@ -347,11 +347,11 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
                   codigo_concepto: e.codigo_concepto,
                   fk_concepto: e.fk_concepto,
                 }
-  
+
                 this.amortizaciones.push(amort);
               }
-              
-             
+
+
 
             } else {
               let det = {
@@ -418,11 +418,11 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
                   this.detallesNon.push(e.concepto.nombre);
                 }
               }
-  
+
               this.deudas.push(det);
 
             }
-            
+
           })
 
           this.detallesNon.map(
@@ -432,7 +432,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
               }else {
                 this.detallesHorizontal = res
               }
-              
+
             }
           )
 
@@ -449,7 +449,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
             interes: 0, //por ahora hasta que tenga valor
             monto_amortizar: +res.total - +res.cuota_inicial,
           }
-          
+
           this.amortizaciones.forEach( e => {
             // intereses aun no porque esta en 0
             this.totalPagoMensual += +e.pago_mensual;
@@ -467,17 +467,17 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
           this.vmButtons[0].habilitar = true;
           this.vmButtons[1].habilitar = false;
           this.vmButtons[2].habilitar = res['estado'] == 'A'
-          this.vmButtons[3].habilitar = false;        
+          this.vmButtons[3].habilitar = false;
           this.vmButtons[4].habilitar = false;
           this.vmButtons[5].habilitar = false;
           this.vmButtons[7].habilitar = false;
-          
+
         }
       )
     }
 
   ngOnInit(): void {
-    
+
     this.vmButtons = [
       {
         orig: "btnsRenLiqCobro",
@@ -522,7 +522,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
         showbadge: false,
         clase: "btn btn-info boton btn-sm",
         habilitar: true,
-       
+
       },
       {
         orig: "btnsRenLiqCobro",
@@ -567,7 +567,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
         showbadge: false,
         clase: "btn btn-info boton btn-sm",
         habilitar: true,
-       
+
       }
     ]
 
@@ -603,22 +603,22 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
         break;
       case " RESOLUCIÓN":
           this.printResolucion();
-          break; 
+          break;
       default:
         break;
     }
   }
 
-  triggerPrint(): void {   
+  triggerPrint(): void {
     this.print.nativeElement.click();
   }
-  
+
   validaPermisos = () => {
     this.msgSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fConvenio,
       id_rol: this.dataUser.id_rol,
@@ -753,7 +753,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
     );
   }
 
-  
+
   selectAll() {
     console.log(this.masterSelected)
     this.deudas.map((e: any) => e.check = this.masterSelected)
@@ -762,7 +762,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
       this.totalCobro = 0;
     }
     else{
-      
+
     }
   }
   restar(deuda) {
@@ -794,20 +794,20 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
     this.deudas.forEach(e => {
       if (e.check) {
         let cobro100 = + parseFloat(e.cobro) ;
-        cobroTotal += +cobro100; 
-        
-       
+        cobroTotal += +cobro100;
+
+
         this.calcDifCobroPago();
        }
        else{
         // console.log("holis")
-        
+
        }
     });
     this.totalCobro = cobroTotal;
     this.calcMontoInicial();
-    
-   
+
+
   }
 
   calcMontoInicial() {
@@ -815,7 +815,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
     let monto20 = +total100 / 10000;
     this.monto20 = +monto20.toFixed(2);
     //console.log(this.monto20)
-    
+
     this.total20 = +this.monto20
     //console.log(amortizacion)
     this.amortizacion.cuota_inicial = +this.monto20 ;
@@ -838,7 +838,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
     }
     else{
 
-      this.deudaDisabled = false; 
+      this.deudaDisabled = false;
     Swal.fire({
       icon: "warning",
       title: "¡Atención!",
@@ -855,8 +855,8 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
       this.toastr.info("Debe ingresar una observacion sobre las liquidaciones");
       // return;
     }
-    
-    
+
+
     }
     if(this.amortizacion.num_cuotas>24  ){
 
@@ -872,7 +872,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
         cancelButtonColor: '#F86C6B',
         confirmButtonColor: '#4DBD74',
       })
-      this.cuotasDisabled = false; 
+      this.cuotasDisabled = false;
       //  if (this.documento.observacion_pdf_2 =="" || this.documento.observacion_pdf_2 == undefined){
       //   this.toastr.info("Debe ingresar una observacion sobre las cuotas");
       //   return;
@@ -888,7 +888,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
       this.toastr.info("El No. de cuotas debe ser de 1 a 24");
       return;
     }
-    
+
     else if(this.amortizacion.interes > 100){
       this.toastr.info("El interés no puede ser mayor a 100");
       return;
@@ -912,7 +912,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
     let anio = hoy.getFullYear();
 
     for(let i=0;i<this.amortizacion.num_cuotas;i++){
-      
+
 
       if(i==0){
         let saldo_inicial = +this.amortizacion.monto_amortizar;
@@ -945,7 +945,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
           estado: "P",
           codigo_concepto: 'CU',
         }
-        
+
         this.amortizaciones.push(amort);
 
       }else{
@@ -986,16 +986,16 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
           this.calcAmortizaciones()
         }
 
-       
 
-    
+
+
       }
 
       this.documento['id_documento_detalle'] = 0;
 
 
     }
-   
+
       let cuota_inicial = {
         id_documento_detalle: 0,
         num: 0,
@@ -1009,17 +1009,17 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
         codigo_concepto: 'CU',
       }
       this.amortizaciones.unshift(cuota_inicial);
-  
-    
+
+
 
     // this.vmButtons[0].habilitar = false;
 
   }
 
-  
+
   async preAnularConvenio() {
-    
-    
+
+
     if(this.documento.estado=='X'){
       this.toastr.info('Este Convenio ya esta Anulado.');
       return ;
@@ -1044,12 +1044,12 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
         superavit: this.totalValorPagado,
         id_documento :this.docId
       }
-     
+
       this.lcargando.ctlSpinner(true);
       this.apiSrv.anularConvenio(data).subscribe(
         (res) => {
           console.log(res);
-          
+
           this.documento = res['data'];
           this.documento.fecha = res['data'].fecha.split(' ')[0];
           this.formReadOnly = true;
@@ -1077,10 +1077,10 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
         }
       );
     }
- 
+
   }
 
-  calcAmortizaciones() {  
+  calcAmortizaciones() {
 console.log(this.amortizaciones)
     this.totalIntereses = 0;
     this.totalPagoMensual = 0;
@@ -1091,12 +1091,12 @@ console.log(this.amortizaciones)
       this.totalIntereses += +e.interes;
       this.totalPagoMensual += +e.pago_mensual;
       this.totalPagoTotal += +e.pago_total;
-      
+
       if(e.deuda?.estado=='C'){
         this.totalValorPagado += +e.pago_mensual;
       }
-     
-  
+
+
     })
     this.totalPagoMensual = this.totalPagoMensual + this.amortizacion.cuota_inicial;
     this.totalPagoTotal = this.totalPagoTotal + this.amortizacion.cuota_inicial;
@@ -1156,15 +1156,15 @@ console.log(this.amortizaciones)
       console.log(this.deudas[i].nuevo_saldo)
       if (
         this.deudas[i].nuevo_saldo<0
-      ) {        
-        return true;         
-      } 
+      ) {
+        return true;
+      }
     }
     return false;
   }
 
   createRecDocumento() {
-   
+
      if (this.permissions.guardar == "0") {
       this.toastr.warning("No tiene permisos emitir Convenios.", this.fTitle);
     } else {
@@ -1225,7 +1225,7 @@ console.log(this.amortizaciones)
           this.documento.cuota_inicial = this.amortizacion.cuota_inicial;
           this.documento.porcentaje = (+this.amortizacion.cuota_inicial/+this.totalCobro*100);
           this.documento.num_cuotas = this.amortizacion.num_cuotas;
-          this.documento['cant_convenios'] = this.contribuyenteActive.cant_convenios 
+          this.documento['cant_convenios'] = this.contribuyenteActive.cant_convenios
           console.log(this.deudas);
           console.log(this.pagos);
           this.deudas.forEach(e => {
@@ -1294,7 +1294,7 @@ console.log(this.amortizaciones)
               if(!!this.fileList2){
                 this.uploadFile2(res['data']['id_documento'], '');
               }
-              
+
               console.log(res);
               console.log(this.contribuyenteActive.tiene_convenio);
               Swal.fire({
@@ -1304,7 +1304,7 @@ console.log(this.amortizaciones)
                 showCloseButton: true,
                 confirmButtonText: "Aceptar",
                 confirmButtonColor: '#20A8D8',
-              })/*.then((res)=> 
+              })/*.then((res)=>
               {
                 if(res.isConfirmed){
                   this.triggerPrint();
@@ -1343,7 +1343,7 @@ console.log(this.amortizaciones)
 
 
   updateRecDocumento() {
-   
+
     if (this.permissions.guardar == "0") {
      this.toastr.warning("No tiene permisos emitir Convenios.", this.fTitle);
    } else {
@@ -1404,9 +1404,9 @@ console.log(this.amortizaciones)
                 saldo_inicial: e.saldo_anterior,
                 saldo_final: e.saldo_actual,
                 plazo_maximo: e.fecha_plazo_maximo,
-                estado: e.estado, 
+                estado: e.estado,
                 codigo_concepto: e.codigo_concepto,
-                fk_concepto: e.fk_concepto,               
+                fk_concepto: e.fk_concepto,
               }
 
               this.documento['ant_cuota'].push(amort);
@@ -1414,7 +1414,7 @@ console.log(this.amortizaciones)
             }
 
           })
-           
+
 
          }
          this.documento.fk_contribuyente = this.contribuyenteActive.id_cliente;
@@ -1427,7 +1427,7 @@ console.log(this.amortizaciones)
          this.documento.cuota_inicial = this.amortizacion.cuota_inicial;
          this.documento.porcentaje = (+this.amortizacion.cuota_inicial/+this.totalCobro*100);
          this.documento.num_cuotas = this.amortizacion.num_cuotas;
-         this.documento['cant_convenios'] = this.contribuyenteActive.cant_convenios 
+         this.documento['cant_convenios'] = this.contribuyenteActive.cant_convenios
          console.log(this.deudas);
          console.log(this.pagos);
          this.deudas.forEach(e => {
@@ -1449,7 +1449,7 @@ console.log(this.amortizaciones)
            }
          });
 
-         
+
 
         //  let abono = {
         //   id_documento_detalle: 0,
@@ -1496,11 +1496,11 @@ console.log(this.amortizaciones)
           }else{
             this.documento['cant_convenios'] =  this.contribuyenteActive.cant_convenios -= 1;
           }
-           
-          
+
+
          }
 
-         
+
          console.log(this.documento);
          // servicio que crea el documento, sus detalles, sus cuotas asociadas
          // tambien cambia el saldo de la tabla deudas y el campo estado pasa a C en liquidacion y deudas si el nuevo saldo es 0
@@ -1523,7 +1523,7 @@ console.log(this.amortizaciones)
              if(!!this.fileList2){
                this.uploadFile2(res['data']['id_documento'], '');
              }
-             
+
              console.log(res);
              console.log(this.contribuyenteActive.tiene_convenio);
              Swal.fire({
@@ -1533,7 +1533,7 @@ console.log(this.amortizaciones)
                showCloseButton: true,
                confirmButtonText: "Aceptar",
                confirmButtonColor: '#20A8D8',
-             })/*.then((res)=> 
+             })/*.then((res)=>
              {
                if(res.isConfirmed){
                  this.triggerPrint();
@@ -1569,7 +1569,7 @@ console.log(this.amortizaciones)
    }
  }
 
-  
+
   confirmRestore() {
     Swal.fire({
       icon: "warning",
@@ -1589,7 +1589,7 @@ console.log(this.amortizaciones)
     });
   }
 
-  
+
 
   cargaArchivo(archivos) {
     if (archivos.length > 0) {
@@ -1599,12 +1599,12 @@ console.log(this.amortizaciones)
           this.toastr.info('Ha seleccionado ' + this.fileList.length + ' archivo(s).', 'Anexos de trámite')
         }, 50)
 
-      
-      
+
+
       // console.log(this.fileList)
     }
-   
-   
+
+
   }
 
   algo(){
@@ -1631,17 +1631,17 @@ console.log(this.amortizaciones)
       }
       // console.log(this.fileList)
     }
-   
-   
+
+
   }
-  
-  
+
+
   /**
 * Se encarga de enviar los archivos al backend para su almacenado
 * @param data Informacion del Formulario de Inspeccion (CAB)
 */
 uploadFile(identifier) {
-  
+
 
 
   console.log('Presionado una vez');
@@ -1661,7 +1661,7 @@ uploadFile(identifier) {
     this.UploadService(this.fileList[i], data, null);
   }
   this.fileList = undefined
-  
+
   // this.lcargando.ctlSpinner(false)
 }
 
@@ -1738,8 +1738,8 @@ UploadService2(file, payload?: any, custom1?: any): void {
     this.fileList2 = undefined;
     this.variable = false;
     this.aprobacionValidacion = false;
-   
-    
+
+
     this.contribuyenteActive = {
       razon_social: ""
     };
@@ -1806,14 +1806,14 @@ UploadService2(file, payload?: any, custom1?: any): void {
     this.vmButtons[3].habilitar = true;
     this.vmButtons[4].habilitar = true;
     this.vmButtons[7].habilitar = true;
-    this.commonVrs.clearAnexos.next()
+    this.commonVrs.clearAnexos.next(null)
 
   }
 
   handleConcepto() {
     this.titulosDisabled = false;
   }
-  
+
   onlyNumber(event): boolean {
     let key = event.which ? event.which : event.keyCode;
     if (key > 31 && (key < 48 || key > 57)) {
@@ -1872,7 +1872,7 @@ UploadService2(file, payload?: any, custom1?: any): void {
       modalInvoice.componentInstance.validacion = 8;
       modalInvoice.componentInstance.verificaContribuyente = verificacionC
     }
-    
+
   }
 
   expandDetalleLiq(c) {
@@ -1884,26 +1884,26 @@ UploadService2(file, payload?: any, custom1?: any): void {
     modalInvoice.componentInstance.concepto = c;
   }
   printConvenio(){
-  
+
     //window.open(environment.ReportingUrl + "rpt_notifiacion_convenios.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_convenio=145" , '_blank')
     window.open(environment.ReportingUrl + "rpt_convenios.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_convenio=" + this.newDocument, '_blank')
       //http://vmi1057060.contaboserver.net:9090/jasperserver/rest_v2/reports/reports/rpt_notifiacion_convenios.html?id_convenio=
-    
-    
+
+
   }
 
   ngOnDestroy() {
     // this.commonVrs.selectContribuyenteCustom;
-    this.destroy.next()
+    this.destroy.next(null)
     this.destroy.complete()
   }
 
   printResolucion(){
     console.log(this.newDocument)
     window.open(environment.ReportingUrl + "rpt_resolucion_convenio.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_convenio=" + this.newDocument, '_blank')
-  
-    
-    
+
+
+
   }
 
 }

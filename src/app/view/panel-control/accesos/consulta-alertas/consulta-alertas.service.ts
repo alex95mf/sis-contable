@@ -16,7 +16,7 @@ export class ConsultaAlertasService {
     return this.apiService.apiCall('bitacora/get-consulta-auditoria', 'POST', data);
   }
 
-  
+
 
   getBitacoraXDate(data) {
     return this.apiService.apiCall('bitacora/get-bitacora', 'POST', data);
@@ -35,10 +35,10 @@ export class ConsultaAlertasService {
   }
 
   getModulos() {
-    return this.apiService.apiCall('seguridad/get-modulos', 'POST', {}).toPromise<any>()
+    return this.apiService.apiCall('seguridad/get-modulos', 'POST', {}) as any
   }
 
-  
+
 
 }
 

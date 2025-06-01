@@ -90,7 +90,7 @@ export class ConsultaComponent implements OnInit {
 
     this.elementRef.nativeElement.ownerDocument.body.style = 'background: url(/assets/img/findo.jpg) !important ;background-size: cover !important;no-repeat;';
     setTimeout(() => {
-      this.lcargando.ctlSpinner(true);  
+      this.lcargando.ctlSpinner(true);
     }, 10);
     this.getPermisions();
   }
@@ -119,13 +119,13 @@ export class ConsultaComponent implements OnInit {
         this.toastr.info("Usuario no tiene Permiso para ver el formulario consulta de centro de costo");
         // this.router.navigateByUrl('dashboard');
         this.vmButtons = [];
-        this.lcargando.ctlSpinner(false);  
+        this.lcargando.ctlSpinner(false);
       } else {
         this.processing = true;
         this.getCentroCosto();
       }
     }, error => {
-      this.lcargando.ctlSpinner(false);  
+      this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     })
   }
@@ -135,7 +135,7 @@ export class ConsultaComponent implements OnInit {
       this.arrayCentroCosto = res['data'];
       this.getCentroCostoXCuentas();
     }, error => {
-      this.lcargando.ctlSpinner(false);  
+      this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     })
   }
@@ -160,17 +160,17 @@ export class ConsultaComponent implements OnInit {
     }
 
     this.cosuSrv.getCentroCostoXCuentas(data).subscribe(res => {
-      this.lcargando.ctlSpinner(false);  
+      this.lcargando.ctlSpinner(false);
       this.validaDt = true;
       this.dataDT = res['data']['maping'];
       this.totales = res['data'];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
-      this.lcargando.ctlSpinner(false);  
+      this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message);
     });
@@ -197,7 +197,7 @@ export class ConsultaComponent implements OnInit {
       this.lengtinite = Math.round((parseFloat(this.saldo) * 100) / sumTotal);
       this.lengtinite += this.lengtinitm;
       this.valueHand = /* Math.round( */(parseFloat(this.saldo) * 100) / parseFloat(this.prespuesto)/* ) */;
-      this.valueHand = 100 - this.valueHand; 
+      this.valueHand = 100 - this.valueHand;
       let auxVal = this.valueHand.toFixed(2).toString();
       this.valueHand = auxVal.toString();
       this.fchart(this.lengtinit, this.lengtinitm, this.lengtinite, this.lengtinitf);

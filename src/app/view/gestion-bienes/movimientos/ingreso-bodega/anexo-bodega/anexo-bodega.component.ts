@@ -33,7 +33,7 @@ export class AnexoBodegaComponent implements OnInit {
   @Input() mostrarEliminar: any;
   @Input() custom1: any;
 
-  
+
   anexos = [];
   anexosCP = []
   //anexos
@@ -41,13 +41,13 @@ export class AnexoBodegaComponent implements OnInit {
   onDestroy$: Subject<void> = new Subject();
 
   constructor(
-    private commonService: CommonService, 
+    private commonService: CommonService,
     private commonVarService: CommonVarService,
     private toastr: ToastrService,
     private apiService: IngresoBodegaService,
     private confirmationDialogService: ConfirmationDialogService
   ) {
-    
+
     this.commonVarService.contribAnexoLoad.asObservable().subscribe(
       (res: any) => {
         this.lcargando.ctlSpinner(true)
@@ -60,7 +60,7 @@ export class AnexoBodegaComponent implements OnInit {
           component: myVarGlobals.fOrdenesCompra,
           identifier: res.id,
           custom1:this.custom1
-          
+
         }
 
         console.log(data)
@@ -70,7 +70,7 @@ export class AnexoBodegaComponent implements OnInit {
             (res: any) => {
               console.log('Anexo ', this.custom1,res)
               this.anexos = res.data
-              
+
               console.log(res.data.length);
               if(res.data.length ==0){
                 // this.commonVarService.diableCargarDis.next({})
@@ -86,7 +86,7 @@ export class AnexoBodegaComponent implements OnInit {
             }
           )
         }
-        
+
       }
     )
 
@@ -107,13 +107,13 @@ export class AnexoBodegaComponent implements OnInit {
 
   }
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
   ngOnInit(): void {
     // console.log(this.permissions);
-    
+
     setTimeout(() => {
       this.cargarArchivo()
       console.log(this.identifier);
@@ -142,7 +142,7 @@ export class AnexoBodegaComponent implements OnInit {
         }else if(this.custom1 == res.data.custom1){
 
         }
-        
+
         console.log(res.data.length);
         if(res.data.length ==0){
           this.commonVarService.diableCargarDis.next({})
@@ -150,7 +150,7 @@ export class AnexoBodegaComponent implements OnInit {
         }else{
           this.commonVarService.compPubInfimas.next({validacion: true, custom1: this.custom1})
         }
-        
+
         this.lcargando.ctlSpinner(false)
       },
       (err: any) => {
@@ -185,7 +185,7 @@ export class AnexoBodegaComponent implements OnInit {
         this.commonVarService.diableCargarDis.next({})
         this.commonVarService.compPubInfimas.next(false)
 
-       
+
 
         // Swal.fire({
         //   title: this.fTitle,
@@ -226,7 +226,7 @@ export class AnexoBodegaComponent implements OnInit {
             accion: `Borrado de Anexo ${anexo.id_anexo}`,
             ip: this.commonService.getIpAddress()
           }
-      
+
           this.msgSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true)
           console.log()

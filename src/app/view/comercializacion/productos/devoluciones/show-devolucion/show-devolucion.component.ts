@@ -82,7 +82,7 @@ export class ShowDevolucionComponent implements OnInit {
         this.validaDt = true;
         this.dataDT = res['data'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.commonVarService.updPerm.next(false);
         }, 50);
       }, error => {
@@ -90,7 +90,7 @@ export class ShowDevolucionComponent implements OnInit {
         this.dataDT = [];
         this.validaDt = true;
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.commonVarService.updPerm.next(false);
         }, 50);
       });

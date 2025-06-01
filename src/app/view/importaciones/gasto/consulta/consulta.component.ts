@@ -67,7 +67,7 @@ mensajeSppiner: string = "Cargando...";
 	private reportesSrv: ConsultaGService,
 	private modalService: NgbModal,
 	private commonServices: CommonService,
-	private commonVarSrv: CommonVarService,		
+	private commonVarSrv: CommonVarService,
     private confirmationDialogService: ConfirmationDialogService) { }
 
 	ngOnInit(): void {
@@ -77,7 +77,7 @@ mensajeSppiner: string = "Cargando...";
 				{ orig: "btnsrepGastos", paramAccion: "", boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: false, imprimir: false },
 				{ orig: "btnsrepGastos", paramAccion: "", boton: { icon: "fa fa-file-pdf-o", texto: "PDF" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: false, imprimir: false },
 	];
-	
+
 	setTimeout(() => {
 	this.getPermisions();
 	}, 10);
@@ -107,7 +107,7 @@ mensajeSppiner: string = "Cargando...";
 			this.toastr.info(error.error.message);
 		})
 	}
-	
+
 	metodoGlobal(evento: any) {
 		switch (evento.items.boton.texto) {
 			case "CANCELAR":
@@ -124,7 +124,7 @@ mensajeSppiner: string = "Cargando...";
 				break;
 		}
 	}
-	
+
 	getProveedores() {
 		this.reportesSrv.getProveedores().subscribe(res => {
 			this.arrayProveedor = res['data'];
@@ -134,7 +134,7 @@ mensajeSppiner: string = "Cargando...";
 			this.toastr.info(error.error.message);
 		})
 	}
-	
+
 	getTipoPedidos() {
 		this.reportesSrv.getTipoGastos().subscribe(res => {
 			this.arrayRubros = res['data'];
@@ -144,7 +144,7 @@ mensajeSppiner: string = "Cargando...";
 			this.toastr.info(error.error.message);
 		})
 	}
-	
+
 	getDocument() {
 		let data = {
 			params: "'C'"
@@ -156,7 +156,7 @@ mensajeSppiner: string = "Cargando...";
 			this.toastr.info(error.error.message)
 		})
 	}
-	
+
 	getTableReport() {
 		this.dtOptions = {
 			pagingType: "full_numbers",
@@ -234,19 +234,19 @@ mensajeSppiner: string = "Cargando...";
 			  }
 			this.lcargando.ctlSpinner(false);
 			setTimeout(() => {
-				this.dtTrigger.next();
+				this.dtTrigger.next(null);
 			}, 50);
 		}, error => {
 			this.lcargando.ctlSpinner(false);
 			this.validaDt = true;
 			setTimeout(() => {
-				this.dtTrigger.next();
+				this.dtTrigger.next(null);
 			}, 50);
 			this.lcargando.ctlSpinner(false);
 			this.toastr.info(error.error.message);
 		});
 	}
-	
+
 	rerender(): void {
 		this.validaDt = false;
 		this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -254,7 +254,7 @@ mensajeSppiner: string = "Cargando...";
 			this.getTableReport();
 		});
 	}
-	
+
 	setProveedor(evt) {
 		if (evt != 0) {
 			this.proveedor = evt;
@@ -265,7 +265,7 @@ mensajeSppiner: string = "Cargando...";
 			this.rerender();
 		}
 	}
-	
+
 	filterDocumento(data) {
 		if (data != 0) {
 			let filt = this.dataDT.filter(e => e.tip_doc_gasto == data);
@@ -277,8 +277,8 @@ mensajeSppiner: string = "Cargando...";
 			this.rerender();
 		}
 	}
-	
-	
+
+
 	filterNumero(data) {
 		if (data != 0) {
 			this.numero = data;
@@ -287,7 +287,7 @@ mensajeSppiner: string = "Cargando...";
 			this.rerender();
 		}
 	}
-	
+
 	filterEstado(data) {
 		if (data != 0) {
 			this.aplica = data;
@@ -296,7 +296,7 @@ mensajeSppiner: string = "Cargando...";
 			this.rerender();
 		}
 	}
-	
+
 	filterTipoGasto(data) {
 		if (data != 0) {
 			this.grupo = data;
@@ -305,7 +305,7 @@ mensajeSppiner: string = "Cargando...";
 			this.rerender();
 		}
 	}
-	
+
 	filteraplica(data) {
 		if (data != 0) {
 			this.aplica = data;
@@ -314,7 +314,7 @@ mensajeSppiner: string = "Cargando...";
 			this.rerender();
 		}
 	}
-	
+
 	informaciondtlimpiar() {
 		this.ruc = undefined;
 		this.disNumero = true;
@@ -327,7 +327,7 @@ mensajeSppiner: string = "Cargando...";
 		this.toDatePicker = new Date();
 		/* this.rerender(); */
 	}
-	
+
 	showDtGasto(dt) {
 		const dialogRef = this.confirmationDialogService.openDialogMat(ViewConsultaGastoComponent, {
 			width: '1000px',
@@ -335,5 +335,5 @@ mensajeSppiner: string = "Cargando...";
 		});
 		dialogRef.componentInstance.dt = dt;
 	}
-	
+
 }

@@ -39,7 +39,7 @@ export class FormSaveComponent implements OnInit {
     private toastr: ToastrService,
     private modalDet: NgbModal,
     private commonVarSrv: CommonVarService,
-  ) {  
+  ) {
     this.commonVarSrv.seleciconCategoriaCuentaPro.asObservable().subscribe(
       (res)=>{
         console.log(res);
@@ -101,7 +101,7 @@ export class FormSaveComponent implements OnInit {
 
         this.vmButtons[0].showimg = false
       }else{
-        
+
         this.vmButtons[0].showimg = true
         this.vmButtons[1].showimg = false
       }
@@ -118,28 +118,28 @@ export class FormSaveComponent implements OnInit {
         break;
       case " ACTUALIZAR":
         this.validacion('UPDATE');
-        break; 
+        break;
     }
   }
-  
+
   validacion(valor){
     this.lcargando.ctlSpinner(true)
     if(this.retencion.descripcion == undefined || this.retencion.descripcion == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese una descripción');
-      
+
     }else if(this.retencion.porcentaje < 0){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('El porcentaje no puede ser menor a cero');
-      
+
     }else if(this.retencion.codigo_sri <= 0){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('El código no puede ser menor o igual a cero');
-      
+
     }else if(this.retencion.num_cuenta1 == undefined || this.retencion.num_cuenta1 == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Escoja la cuenta 1');
-      
+
     }else{
       if(valor == 'SAVE'){
         this.guardarRetencion();
@@ -150,25 +150,25 @@ export class FormSaveComponent implements OnInit {
   }
 
   guardarRetencion(){
-    
+
     this.service.setRetencion(this.retencion).subscribe(
       (res)=>{
         this.toastr.success('Se Guardo con éxito');
         this.lcargando.ctlSpinner(false);
         this.closeModal();
-        this.commonVarSrv.modalCargarRetIVA.next()
+        this.commonVarSrv.modalCargarRetIVA.next(null)
       }
     )
   }
 
   actualizarRetencion(){
-    
+
     this.service.updateRetencion(this.retencion).subscribe(
       (res)=>{
         this.toastr.success('Se Actualizo con éxito');
         this.lcargando.ctlSpinner(false);
         this.closeModal();
-        this.commonVarSrv.modalCargarRetIVA.next()
+        this.commonVarSrv.modalCargarRetIVA.next(null)
       }
     )
   }
@@ -176,7 +176,7 @@ export class FormSaveComponent implements OnInit {
   closeModal(){
     this.modal.close()
   }
-  
+
   // getCatalogo(){
   //   this.lcargando.ctlSpinner(true)
   //   let paretnId = [7, 4, 1]

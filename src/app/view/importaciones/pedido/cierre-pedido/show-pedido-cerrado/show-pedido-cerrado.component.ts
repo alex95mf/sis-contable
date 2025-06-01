@@ -96,14 +96,14 @@ export class ShowPedidoCerradoComponent implements OnInit {
           element['total'] = parseFloat(element['total']).toFixed(2);
         });
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.commonVarSrvice.updPerm.next(false);
         }, 50);
       }, error => {
         this.validaDt = true;
         this.dataDT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.commonVarSrvice.updPerm.next(false);
         }, 50);
       });
@@ -143,7 +143,7 @@ export class ShowPedidoCerradoComponent implements OnInit {
           this.accSrv.deletePedidosCerrados(data).subscribe(res => {
             this.lcargando.ctlSpinner(false);
             this.toastr.success(res['message']);
-            this.commonVarSrvice.cancelImpPedido.next();
+            this.commonVarSrvice.cancelImpPedido.next(null);
             this.closeModal();
           }, error => {
             this.toastr.info(error.error.message);

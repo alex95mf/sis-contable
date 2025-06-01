@@ -61,7 +61,7 @@ export class CustomersConsultComponent implements OnInit {
     this.vmButtons = [
       { orig: "btnsCCliente", paramAccion: "", boton: { icon: "fas fa-share-square", texto: "LIMPIAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-dark boton btn-sm", habilitar: false, imprimir: false},
       { orig: "btnsCCliente", paramAccion: "", boton: { icon: "fa fa-print", texto: "IMPRIMIR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-warning boton btn-sm", habilitar: false, imprimir: false},
-      { orig: "btnsCCliente", paramAccion: "", boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: false, imprimir: false},	 
+      { orig: "btnsCCliente", paramAccion: "", boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: false, imprimir: false},
       { orig: "btnsCCliente", paramAccion: "", boton: { icon: "fa fa-file-pdf-o", texto: "PDF" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: false, imprimir: false},
     ];
 
@@ -69,8 +69,8 @@ export class CustomersConsultComponent implements OnInit {
         this.getPermisions();
       }, 10);
   }
-  
-  getPermisions() {   
+
+  getPermisions() {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
     let id_rol = this.dataUser.id_rol;
@@ -85,9 +85,9 @@ export class CustomersConsultComponent implements OnInit {
         this.vmButtons = [];
         this.lcargando.ctlSpinner(false);
       } else {
-        
+
         this.getClientes();
-        
+
       }
     }, error => {
       this.lcargando.ctlSpinner(false);
@@ -107,7 +107,7 @@ export class CustomersConsultComponent implements OnInit {
 				$('#tableConsultCli').DataTable().button('.buttons-pdf').trigger();
 				break;
 			case "IMPRIMIR":
-        $('#tableConsultCli').DataTable().button( '.buttons-print' ).trigger();      
+        $('#tableConsultCli').DataTable().button( '.buttons-print' ).trigger();
       break;
 		}
 	}
@@ -172,7 +172,7 @@ export class CustomersConsultComponent implements OnInit {
     })
   }
 
-  searchCliente(data){ 
+  searchCliente(data){
     if (this.cliente != 0) {
       this.cliente = data;
       this.rerender();
@@ -181,7 +181,7 @@ export class CustomersConsultComponent implements OnInit {
     }
     }
 
-    searchVendedor(data){ 
+    searchVendedor(data){
     if (this.vendedor != 0) {
       this.vendedor = data;
       this.rerender();
@@ -190,7 +190,7 @@ export class CustomersConsultComponent implements OnInit {
     }
     }
 
-    searchGrupo(data){ 
+    searchGrupo(data){
       if (this.grupo != 0) {
         this.grupo = data;
         this.rerender();
@@ -198,7 +198,7 @@ export class CustomersConsultComponent implements OnInit {
           this.rerender();
       }
       }
-  
+
   searchProvinces(event) {
 
     if (this.pais != 0) {
@@ -212,7 +212,7 @@ export class CustomersConsultComponent implements OnInit {
         this.provincia = 0;
         this.catalog.city = undefined;
         this.ciudad = 0;
-  
+
       }, 500);
     }, error => {
       this.lcargando.ctlSpinner(false);
@@ -224,7 +224,7 @@ export class CustomersConsultComponent implements OnInit {
 }
 
   }
-  
+
   searchCities(event) {
     if (this.provincia != 0) {
     this.reportesSrv.filterProvinceCity({ grupo: event }).subscribe(res => {
@@ -239,13 +239,13 @@ export class CustomersConsultComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     })
-    
+
   } else{
     this.rerender();
 }
   }
 
-  searchCiudad(data){ 
+  searchCiudad(data){
     if (this.ciudad != 0) {
       this.ciudad = data;
       this.rerender();
@@ -261,7 +261,7 @@ export class CustomersConsultComponent implements OnInit {
       grupo: this.grupo  == 0  ? null : this.grupo,
       pais: this.pais  == 0  ? null : this.pais,
       provincia: this.provincia  == 0  ? null : this.provincia,
-      ciudad: this.ciudad  == 0  ? null : this.ciudad,    
+      ciudad: this.ciudad  == 0  ? null : this.ciudad,
     }
     this.dtOptions = {
       pagingType: "full_numbers",
@@ -295,10 +295,10 @@ export class CustomersConsultComponent implements OnInit {
     this.mensajeSppiner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.reportesSrv.getReportCliente(data).subscribe(res => {
-  
+
     this.validaDt = true;
-    this.infoData = res['data']; 
-    
+    this.infoData = res['data'];
+
     if(this.infoData.length == 0){
       this.vmButtons[1].habilitar = true;
       this.vmButtons[2].habilitar = true;
@@ -309,14 +309,14 @@ export class CustomersConsultComponent implements OnInit {
       this.vmButtons[3].habilitar = false;
     }
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
       this.lcargando.ctlSpinner(false);
     }, 50);
   }, error => {
     this.validaDt = true;
     this.lcargando.ctlSpinner(false);
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
     this.lcargando.ctlSpinner(false);
     this.vmButtons[1].habilitar = true;
@@ -342,14 +342,14 @@ limpiarCliente(){
   this.ciudad = 0;
   this.provincia = 0;
   this.rerender();
-  } 
-   
+  }
+
 informaDocumento(dt) {
   $('#modalConsultaCliente').appendTo("body").modal('show');
   let modalDoc = this.arrayDtContacto.filter((e) => e.fk_cliente == dt.id_cliente);
   this.dtContacto = modalDoc;
-  } 
-  
+  }
+
   closeModal() {
   ($("#modalConsultaCliente") as any).modal("hide");
      this.dtInformacion = {};

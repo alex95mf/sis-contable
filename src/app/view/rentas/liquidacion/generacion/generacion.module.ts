@@ -10,7 +10,7 @@ import { ModalDetallesComponent } from './modal-detalles/modal-detalles.componen
 import { ModalContribuyentesComponent } from './modal-contribuyentes/modal-contribuyentes.component';
 import { ModalLiquidacionesComponent } from './modal-liquidaciones/modal-liquidaciones.component';
 import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     GeneracionRoutingModule
   ]
 })

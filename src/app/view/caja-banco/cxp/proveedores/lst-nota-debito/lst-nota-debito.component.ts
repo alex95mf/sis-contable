@@ -72,7 +72,7 @@ export class LstNotaDebitoComponent implements OnInit {
       console.log("this.listado: ", this.listado)
 
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
 
     }, error => {

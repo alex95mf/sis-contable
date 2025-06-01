@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { CommonService } from '../../../../services/commonServices';
 import { CommonVarService } from '../../../../services/common-var.services';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 import * as myVarGlobals from '../../../../global';
@@ -106,12 +106,12 @@ export class BodegaDespachoComponent implements OnInit {
         this.infoDt = res['data'];
         this.validaDt = true;
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 150);
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.validaDt = true;
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.processing = true;
       });
   }
@@ -138,12 +138,12 @@ export class BodegaDespachoComponent implements OnInit {
         this.infoDt = res['data'];
         this.validaDt = true;
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 150);
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.validaDt = true;
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.processing = true;
       });
   }
@@ -173,7 +173,7 @@ export class BodegaDespachoComponent implements OnInit {
 
   dispacheInvoice(dt) {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
-    const modalInvoice = this.confirmationDialogService.openDialogMat(ConfirmInvoiceComponent, 
+    const modalInvoice = this.confirmationDialogService.openDialogMat(ConfirmInvoiceComponent,
       {
         width: '1500px',
         height: 'auto',

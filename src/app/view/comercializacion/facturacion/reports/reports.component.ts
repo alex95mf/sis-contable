@@ -152,14 +152,14 @@ export class ReportsComponent implements OnDestroy, OnInit {
             this.vmButtons[2].habilitar = false;
           }
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
           }, 50);
         }, error => {
           this.lcargando.ctlSpinner(false);
           this.quotes = [];
           this.processingQuotes = true;
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
           }, 50);
           this.vmButtons[0].habilitar = true;
           this.vmButtons[1].habilitar = true;
@@ -181,14 +181,14 @@ export class ReportsComponent implements OnDestroy, OnInit {
             this.vmButtons[2].habilitar = false;
           }
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
           }, 50);
         }, error => {
           this.lcargando.ctlSpinner(false);
           this.quotes = [];
           this.processingQuotes = true;
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
           }, 50);
           this.vmButtons[0].habilitar = true;
           this.vmButtons[1].habilitar = true;
@@ -254,11 +254,11 @@ export class ReportsComponent implements OnDestroy, OnInit {
           this.quotes = res['data'];
 
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
           }, 50);
         }, error => {
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
           }, 50);
           this.toastr.info(error.error.message);
         });
@@ -278,11 +278,11 @@ export class ReportsComponent implements OnDestroy, OnInit {
             this.vmButtons[2].habilitar = false;
           }
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
           }, 50);
         }, error => {
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
           }, 50);
           this.vmButtons[0].habilitar = true;
           this.vmButtons[1].habilitar = true;
@@ -433,7 +433,7 @@ export class ReportsComponent implements OnDestroy, OnInit {
           storage: `${res["data"]["storage"]}`,
           name: `${res["data"]["name"]}`,
         };
-        
+
         this.reportSrv.descargar(datos).subscribe((resultado) => {
             this.lcargando.ctlSpinner(false);
             const url = URL.createObjectURL(resultado);

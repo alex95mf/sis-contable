@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { InspectoresRoutingModule } from './inspectores.routing';
 import { InspectoresComponent } from './inspectores.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ExcelService } from 'src/app/services/excel.service';
 import { DialogService } from 'primeng/dynamicdialog';
 
@@ -16,7 +16,7 @@ import { DialogService } from 'primeng/dynamicdialog';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     InspectoresRoutingModule
   ],
   providers: [

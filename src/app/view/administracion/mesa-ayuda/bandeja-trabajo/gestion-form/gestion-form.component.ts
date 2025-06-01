@@ -150,7 +150,7 @@ export class GestionFormComponent implements OnInit {
     if(this.ticketEdit.estado=='G'){
       this.subirFoto=true;
     }
-    this.commonVarSrv.bandTrabTicket.next();
+    this.commonVarSrv.bandTrabTicket.next(null);
   }
   setTimeout(()=> {
     this.getCatalogoCategoria();

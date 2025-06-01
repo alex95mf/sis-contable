@@ -25,7 +25,7 @@ export class CierreCajaComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   @ViewChild("print") print!: ElementRef;
-  
+
   msgSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
@@ -85,7 +85,7 @@ export class CierreCajaComponent implements OnInit {
   totalOtro = 0;
 
 
-  cuentaDepositar = 0;  
+  cuentaDepositar = 0;
 
   cuentasBancarias: any = [
     {
@@ -96,7 +96,7 @@ export class CierreCajaComponent implements OnInit {
     },
     {
       cuenta_banco: "CUENTA 3"
-    },    
+    },
   ]
 
   depositos: any = [];
@@ -142,7 +142,7 @@ export class CierreCajaComponent implements OnInit {
         },
       ]
     }else{
-      
+
     this.vmButtons = [
       {
         orig: "btnsRecCierraCaja",
@@ -170,7 +170,7 @@ export class CierreCajaComponent implements OnInit {
     ]
     }
 
-    
+
       setTimeout(() => {
         // this.caja_dia.fk_caja = this.cajaActiva.id_caja;
         if(this.fromGeneral){
@@ -208,7 +208,7 @@ export class CierreCajaComponent implements OnInit {
     }
   }
 
-  triggerPrint(): void {   
+  triggerPrint(): void {
     this.print.nativeElement.click();
   }
 
@@ -217,7 +217,7 @@ export class CierreCajaComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fTesCierreCaja,
       id_rol: this.dataUser.id_rol,
@@ -231,7 +231,7 @@ export class CierreCajaComponent implements OnInit {
           this.vmButtons = [];
           this.toastr.warning("No tiene permisos para usar este recurso.", this.fTitle);
         } else {
-          this.getCatalogos(); 
+          this.getCatalogos();
         }
       },
       err => {
@@ -258,20 +258,20 @@ export class CierreCajaComponent implements OnInit {
             let m = {
               denominacion: e.descripcion,
               cantidad: 0,
-              total_denominacion: 0,   
+              total_denominacion: 0,
             }
             this.monedasCat.push(m);
           }else if(e.grupo=="B"){
             let b = {
               denominacion: e.descripcion,
               cantidad: 0,
-              total_denominacion: 0,   
+              total_denominacion: 0,
             }
             this.billetesCat.push(b);
           }
         })
-        // this.lcargando.ctlSpinner(false);   
-        this.getCajasData();     
+        // this.lcargando.ctlSpinner(false);
+        this.getCajasData();
       },
       (err) => {
         this.lcargando.ctlSpinner(false)
@@ -294,7 +294,7 @@ export class CierreCajaComponent implements OnInit {
       (res) => {
         console.log(res);
         this.cajasList = res['data'];
-        // this.lcargando.ctlSpinner(false);       
+        // this.lcargando.ctlSpinner(false);
         // this.verificarCaja();
         // this.recargarCaja();
         this.validacionCaja()
@@ -306,7 +306,7 @@ export class CierreCajaComponent implements OnInit {
     )
 
   }
-  
+
   async validacionCaja() {
     this.msgSpinner = 'Validando Estado de Caja'
     this.lcargando.ctlSpinner(true)
@@ -319,7 +319,7 @@ export class CierreCajaComponent implements OnInit {
       this.formReadOnly = true
       this.activo = false
       throw new Error('No tiene caja activa.')
-    } 
+    }
 
     if (this.cajaActiva && this.cajaActiva.fecha != moment(this.caja_dia.fecha).format('YYYY-MM-DD')) {
       console.log('No fue abierta hoy')
@@ -328,13 +328,13 @@ export class CierreCajaComponent implements OnInit {
       this.activo = false
       throw new Error('La caja activa no fue abierta hoy.')
     }
-    
+
       const response = await this.apiSrv.getCajaDiaByCaja({
-        id_caja: this.cajaActiva.id_caja, 
+        id_caja: this.cajaActiva.id_caja,
         fecha: this.cajaActiva.fecha
-      }).toPromise<any>()
+      }) as any
       console.log(response.data)
-  
+
       if (response.data.length == 0) {
         console.log('No hay registro en la base')
         this.toastr.info('No hay cajas reabiertas')
@@ -359,7 +359,7 @@ export class CierreCajaComponent implements OnInit {
       this.toastr.warning(err.error?.message ?? err, 'Validacion de Caja Activa')
     }
   }
-  
+
   recargarCaja() {
     this.cajaActiva = JSON.parse(localStorage.getItem('activeCaja'));
 
@@ -448,7 +448,7 @@ export class CierreCajaComponent implements OnInit {
 
     this.caja_dia = data;
 
-  
+
   }
 
   fillData() {
@@ -482,7 +482,7 @@ export class CierreCajaComponent implements OnInit {
 
     // // llena data de los depositos bancarios
     // data.depositos.forEach(d => {
-      
+
     //   this.totalDeposito += +d.total;
     //   let dep = {
     //     cuenta_banco: d.cuenta_banco,
@@ -501,7 +501,7 @@ export class CierreCajaComponent implements OnInit {
     this.msgSpinner = 'Cargando Reporte diario...';
     this.lcargando.ctlSpinner(true);
 
-    
+
     let dt = this.cajaDiaData;
 
     let data = {
@@ -522,7 +522,7 @@ export class CierreCajaComponent implements OnInit {
         this.lcargando.ctlSpinner(false)
         this.toastr.error(err.error.message, 'Error cargando Recibos de la caja activa')
       }
-    )    
+    )
 
   }
 
@@ -577,7 +577,7 @@ export class CierreCajaComponent implements OnInit {
   }
 
   calcDocumentos() {
-    
+
     this.total = 0;
     this.totalEF = 0;
     this.totalCH = 0;
@@ -636,10 +636,10 @@ export class CierreCajaComponent implements OnInit {
             totalCH: totalCH,
             totalTC: totalTC,
             totalTR: totalTR,
-            totalTD: totalTD,          
-            totalGA: totalGA,          
-            totalVF: totalVF,          
-            totalND: totalND,          
+            totalTD: totalTD,
+            totalGA: totalGA,
+            totalVF: totalVF,
+            totalND: totalND,
             totalDE: totalDE,
             totalOtro: totalOtro,
           });
@@ -647,7 +647,7 @@ export class CierreCajaComponent implements OnInit {
       })
 
       console.log(r)
-      
+
       if(r.tipo_documento=='CA') { // documentos cobro de caja
         if(!r.superavit || +r.superavit==0){ //cobro de caja sin superavit
           console.log('Caja sin superavit');
@@ -674,12 +674,12 @@ export class CierreCajaComponent implements OnInit {
           // r.total = +r.superavit;
           console.log('Solo superavit');
         }
-      } 
+      }
       // else if(r.tipo_documento=='GA'){
       //   r.total -= (+r.totalGA + +r.totalVF);
       //   console.log('Garantia');
       // }
-      
+
       // if(r.tipo_documento == "CA"){
       //  let totalGF = (+(r.totalGA) + +(r.totalVF)) * 100;
       //  let resta = +(r.total * 100) - +totalGF;
@@ -701,12 +701,12 @@ export class CierreCajaComponent implements OnInit {
 
     })
 
-    
+
     // aqui revisar si se deposita el efectivo recaudado o el efectivo fisico (es decir, se quedaria debiendo de la caja o la caja queda intacta)
 
     this.caja_dia.total_efectivo_cierre_final = parseFloat((+this.caja_dia.total_efectivo_inicio + +this.totalEF).toFixed(2));
 
-    this.sobraOFalta(); 
+    this.sobraOFalta();
 
     // lo que se deposita es el total del efectivo mas cheque (+ sobrante si existe)
     // this.calcValoresDeposito(); // ya se calculan desde sobraOfalta
@@ -716,7 +716,7 @@ export class CierreCajaComponent implements OnInit {
 
     let sobra100 = +this.caja_dia.total_sobrante * 100; // valor del sobrante x 100 , 0 si era 0 inicialmente
     let efect100 = +this.totalEF * 100;
-    let cheqe100 = +this.totalCH * 100; 
+    let cheqe100 = +this.totalCH * 100;
     let total100 = +sobra100 + +efect100 + +cheqe100;
     this.totalDepositar = +total100 / 100;
     this.calcDifDepositos();
@@ -767,7 +767,7 @@ export class CierreCajaComponent implements OnInit {
 
     // reinicia los arrays a como estan cargados de catalogos
 
-    this.monedas = JSON.parse(JSON.stringify(this.monedasCat));  
+    this.monedas = JSON.parse(JSON.stringify(this.monedasCat));
     this.billetes = JSON.parse(JSON.stringify(this.billetesCat));
 
 
@@ -791,7 +791,7 @@ export class CierreCajaComponent implements OnInit {
     this.difDepositos = 0;
 
   }
-   
+
   reabrirCaja() {
     console.log(this.caja_dia);
     this.msgSpinner = 'Reabriendo caja...';
@@ -804,8 +804,8 @@ export class CierreCajaComponent implements OnInit {
     this.apiSrv.reabrirCaja(data).subscribe(
       (res) => {
         console.log(res);
-        
-        this.lcargando.ctlSpinner(false);               
+
+        this.lcargando.ctlSpinner(false);
         this.verificarCaja();
         Swal.fire({
           icon: "success",
@@ -846,17 +846,17 @@ export class CierreCajaComponent implements OnInit {
                   "mes": Number(moment(this.caja_dia.fecha).format('MM')),
                 }
                   this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-                  
+
                   /* Validamos si el periodo se encuentra aperturado */
                   if (res["data"][0].estado !== 'C') {
-              
+
                     this.cerrarCajaDia();
-              
+
                   } else {
                     this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                     this.lcargando.ctlSpinner(false);
                   }
-              
+
                   }, error => {
                       this.lcargando.ctlSpinner(false);
                       this.toastr.info(error.error.mesagge);
@@ -864,7 +864,7 @@ export class CierreCajaComponent implements OnInit {
               }
             });
           }
-        });  
+        });
     }
   }
 
@@ -878,12 +878,12 @@ export class CierreCajaComponent implements OnInit {
         this.toastr.info("Debe ingresar el efectivo con el que cierra la caja");
         flag = true;
       } else if(
-        this.caja_dia.total_efectivo_fisico < this.caja_dia.total_efectivo_inicio 
+        this.caja_dia.total_efectivo_fisico < this.caja_dia.total_efectivo_inicio
       ) {
         this.toastr.info("El efectivo con el que cierra la caja no puede ser menor al valor que se ingresó al inicio "+this.caja_dia.total_efectivo_inicio);
         flag = true;
       } else if(
-        this.caja_dia.total_faltante > 0 
+        this.caja_dia.total_faltante > 0
       ) {
         this.toastr.info("No puede cerrar la caja con dinero faltante");
         flag = true;
@@ -894,17 +894,17 @@ export class CierreCajaComponent implements OnInit {
         this.toastr.info("El campo Fecha no puede ser vacío");
         flag = true;
       } else if(
-        this.caja_dia.estado == undefined  
+        this.caja_dia.estado == undefined
       ) {
         this.toastr.info("Debe seleccionar un Estado");
         flag = true;
-      } 
+      }
       // else if(
       //   this.depositos.length<=0||!this.depositos.length
       // ) {
       //   this.toastr.info("Debe ingresar al menos un depósito")
       //   flag = true;
-      // } 
+      // }
       // else if(
       //   this.difDepositos!=0
       // ) {
@@ -921,20 +921,20 @@ export class CierreCajaComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
 
     console.log(this.caja_dia);
-    
+
     // LLENA ARRAY MONEDAS DE CAJA_DIA
     this.caja_dia.monedas = [];
     this.monedas.forEach(e => {
       // if(e.cantidad>0){ // solo si tiene de esa denominacion se agrega
-        let m = {        
+        let m = {
           tipo_detalle: "C",
           tipo_denominacion: "M",
           denominacion: e.denominacion,
           cantidad_cierre: e.cantidad,
-          total_cierre: e.total_denominacion,  
+          total_cierre: e.total_denominacion,
         }
         this.caja_dia.monedas.push(m);
-      // }      
+      // }
     })
 
     // LLENA ARRAY BILLETES DE CAJA_DIA
@@ -946,14 +946,14 @@ export class CierreCajaComponent implements OnInit {
           tipo_denominacion: "B",
           denominacion: e.denominacion,
           cantidad_cierre: e.cantidad,
-          total_cierre: e.total_denominacion,  
+          total_cierre: e.total_denominacion,
         }
         this.caja_dia.billetes.push(b);
       // }
     })
 
     // SE LLENAN LOS IDS DE CADA DETALLE
-    
+
     this.caja_dia.detalles.forEach(e => {
       this.caja_dia.monedas.forEach(m => {
         if(e.tipo_denominacion=="M" && +e.denominacion == +m.denominacion){
@@ -998,30 +998,30 @@ export class CierreCajaComponent implements OnInit {
         forma_pago: "DEBITO",
         total: this.totalTD,
       },
-      
+
       {
         forma_pago: "GARANTIA",
         total: this.totalGA,
       },
-      
+
       {
         forma_pago: "FAVOR",
         total: this.totalVF,
       },
-      
+
       {
         forma_pago: "NOTA",
         total: this.totalND,
-      },      
+      },
       {
         forma_pago: "DEPOSITO",
         total: this.totalDE,
-      },      
+      },
       {
         forma_pago: "OTRO",
         total: this.totalOtro,
       },
-      
+
     ]
 
     //this.caja_dia.depositos = this.depositos;
@@ -1036,7 +1036,7 @@ export class CierreCajaComponent implements OnInit {
       (res) => {
         console.log(res);
         if (res["status"] == 1) {
-        this.lcargando.ctlSpinner(false);        
+        this.lcargando.ctlSpinner(false);
         this.caja_dia.estado = "C"; // Estado C de caja cerrada
         this.vmButtons[0].habilitar = true; // YA ESTA CERRADA NO SE PUEDE CERRAR
         this.vmButtons[1].habilitar = false;
@@ -1109,18 +1109,18 @@ export class CierreCajaComponent implements OnInit {
   mostrarReporte(){
 
 
-            
-            window.open(environment.ReportingUrl +"rpt_cierreCaja"+".pdf?&j_username=" + environment.UserReporting 
+
+            window.open(environment.ReportingUrl +"rpt_cierreCaja"+".pdf?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&fecha=" + this.caja_dia.fecha + "&caja="+ this.caja_dia.fk_caja,'_blank')
               console.log( this.caja_dia.fecha);
               console.log(this.caja_dia.fk_caja);
 
-            
 
 
 
-    
-    
+
+
+
   }
 
 }

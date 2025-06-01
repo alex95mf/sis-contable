@@ -121,7 +121,7 @@ export class ShowContribuyenteComponent implements OnInit {
         this.validaDt = true;
         this.dataDT = res["data"];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           //this.lcargando.ctlSpinner(false);
         }, 50);
       },
@@ -129,7 +129,7 @@ export class ShowContribuyenteComponent implements OnInit {
         this.validaDt = true;
         this.dataDT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           //this.lcargando.ctlSpinner(false);
         }, 50);
       }

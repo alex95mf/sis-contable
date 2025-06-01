@@ -185,7 +185,7 @@ this.getListaCentrosCosto(1);
 
       this.vmButtons.forEach(element => {
         console.log(element);
-       
+
         if (element.paramAccion == valor) {
           if (element.boton.texto != "ACTUALIZAR"){
           element.permiso = true; element.showimg = true;
@@ -193,14 +193,14 @@ this.getListaCentrosCosto(1);
         } else {
           element.permiso = false; element.showimg = false;
         }
-      
+
       });
 
 
 
 
 
-     
+
       //console.log(this.fieldToEdit)true this.fieldToEdit  == null || this.fieldToEdit == undefined ||  ==
        if (this.fieldToEdit?.details && valor == 1 ){//
         this.vmButtons[6].showimg = true;
@@ -230,7 +230,7 @@ this.getListaCentrosCosto(1);
         { orig: "btnsAsiento", paramAccion: "2", boton: { icon: "fa fa-eraser", texto: "LIMPIAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-dark btn-sm", habilitar: false, imprimir: false },
         { orig: "btnsAsiento", paramAccion: "2", boton: { icon: "fa fa-trash-o", texto: "ANULAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger btn-sm", habilitar: true, imprimir: false },
         { orig: "btnsAsiento", paramAccion: "1", boton: { icon: "fa fa-floppy-o", texto: "ACTUALIZAR" }, permiso: true, showtxt: true, showimg: false, showbadge: false, clase: "btn btn-success btn-sm", habilitar: false, imprimir: false }
-      
+
       ];
 
 
@@ -323,7 +323,7 @@ this.getListaCentrosCosto(1);
         case "1ACTUALIZAR":
           this.ediVoucherDailyNew();
           break;
-        
+
       case "1CANCELAR":
         this.CancelDaily();
         break;
@@ -341,9 +341,9 @@ this.getListaCentrosCosto(1);
   }
 
   getDocuments() {
-    
+
     this.vmButtons[6].showimg = false;
-    
+
     let data = { company_id: this.dataUser.id_empresa, doc_type: "CDD" };
     this.diarioSrv.getCompanyInformation(data).subscribe(res => {
 
@@ -438,7 +438,7 @@ this.getListaCentrosCosto(1);
   }
 
   ediVoucherDailyNew() {
-    
+
    console.log("edit")
     this.flag = false;
 
@@ -457,14 +457,14 @@ this.getListaCentrosCosto(1);
       this.dailyVoucher = [];
       this.flag = true; return;
 
-    } 
-    
-    
-    
+    }
+
+
+
     this.fieldsDaily.forEach((element,index) => { if (
       'auxiliar' in element &&
       element['auxiliar'] !== null &&
-      (element['auxiliar'] !== undefined || element['auxiliar'] !== null || element['auxiliar'] !== '') && 
+      (element['auxiliar'] !== undefined || element['auxiliar'] !== null || element['auxiliar'] !== '') &&
       (element['auxiliar'].codigo2 == undefined || element['auxiliar'].codigo2 == null)
     ) {
     // this.c += 1
@@ -494,14 +494,14 @@ this.getListaCentrosCosto(1);
       total: (this.totalVoucher.debit === this.totalVoucher.credit) ? this.totalVoucher.debit : 0,
     },
      */
-    
-    
-    
+
+
+
     console.log("enviando");
     let information = this.fieldToEdit;
     information["debit"] = this.totalVoucher.debit
     information["concept"] = this.HeaderInfo.concept
-    
+
     information["concepto"] = this.HeaderInfo.concept
     information["details"] = this.fieldsDaily;
     information["fieldstodelete"] = this.fieldsToDelete;
@@ -536,7 +536,7 @@ this.getListaCentrosCosto(1);
 
   }
   }
-  
+
 
 
   async getListaCentrosCosto(i) {
@@ -599,7 +599,7 @@ console.log("centros cargados");
   }
 
   deleteFields(idx) {
-  
+
     const deletedField = this.fieldsDaily.splice(idx, 1);
     this.fieldsToDelete.push(deletedField[0]);
     console.log('this.fieldsToDelete',this.fieldsToDelete);
@@ -671,7 +671,7 @@ this.bitacoraAsiento =[];
     this.vmButtons[0].habilitar = true;
     //this.vmButtons[1].habilitar = false;
     this.vmButtons[2].habilitar = false;
-    
+
     this.vmButtons[1].showimg = false;
     console.log("x",x);
     this.restartFields();
@@ -695,7 +695,7 @@ this.bitacoraAsiento =[];
           };
       });
       this.fieldToEdit.details = this.fieldsDaily;
-        
+
         this.bitacoraAsiento = res['data']['bitacora'];
         this.HeaderInfo.concept = res['data']['concepto'];
        /*  this.HeaderInfo.secuencia = res['data']['secuencialdoc']; */
@@ -710,16 +710,16 @@ this.bitacoraAsiento =[];
         this.vmButtons[6].showimg = true;
         this.vmButtons[0].habilitar = true;
         this.vmButtons[1].showimg = false;
-      
-        
+
+
     this.dinamicoBotones({index: 0})
     this.vmButtons[1].showimg = false;
-      
+
       },
       (error: any) => {
         this.lcargando.ctlSpinner(false);
       });
-  
+
   }
 
 
@@ -743,7 +743,7 @@ this.bitacoraAsiento =[];
 
 
 
-/* 
+/*
 
 this.getDataToEdit(); */
 
@@ -762,7 +762,7 @@ this.getDataToEdit(); */
     this.vmButtons[0].habilitar = false;
     this.vmButtons[1].habilitar = true;
     this.vmButtons[2].habilitar = true;
-    
+
     this.vmButtons[6].showimg = false;
     //this.vmButtons[0].habilitar = false;
     this.vmButtons[1].showimg = true;
@@ -770,7 +770,7 @@ this.getDataToEdit(); */
     this.restartFields();
   }
 
-  
+
 
   SaveDaily() {
 
@@ -819,7 +819,7 @@ this.getDataToEdit(); */
         this.dailyVoucher = [];
         this.flag = true; return;
       } else {
-       
+
         this.fieldsDaily.forEach((element,index) => {
 
           if ((element['debit'] > 0.00 && element['credit'] > 0.00)) {
@@ -853,7 +853,7 @@ this.getDataToEdit(); */
             this.flag = true; return;
           } else if (
                 'auxiliar' in element &&
-                (element['auxiliar'] !== undefined || element['auxiliar'] !== null || element['auxiliar'] !== '') && 
+                (element['auxiliar'] !== undefined || element['auxiliar'] !== null || element['auxiliar'] !== '') &&
                 (element['auxiliar'].codigo2 == undefined || element['auxiliar'].codigo2 == null)
               ) {
               // this.c += 1
@@ -874,8 +874,8 @@ this.getDataToEdit(); */
             });
           }
 
-        }); 
-      
+        });
+
         if (!this.flag) {
           Swal.fire({
             title: "Atención",
@@ -894,10 +894,10 @@ this.getDataToEdit(); */
                   "mes": Number(moment(this.HeaderInfo.date).format('MM')),
                 }
                   this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-                   
+
                   /* Validamos si el periodo se encuentra aperturado */
                     if (res["data"][0].estado !== 'C') {
-                
+
                       let data = {
                         ip: this.commonServices.getIpAddress(),
                         accion: `Registro de comprobante No. ${this.HeaderInfo.secuencia}`,
@@ -912,14 +912,14 @@ this.getDataToEdit(); */
                         details: this.dailyVoucher,
                         total: (this.totalVoucher.debit === this.totalVoucher.credit) ? this.totalVoucher.debit : 0,
                       }
-        
+
                       this.addVoucherDaily(data);
-                
+
                     } else {
                       this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                       this.lcargando.ctlSpinner(false);
                     }
-              
+
                   }, error => {
                       this.lcargando.ctlSpinner(false);
                       this.toastr.info(error.error.mesagge);
@@ -1073,7 +1073,7 @@ this.getDataToEdit(); */
         this.fieldsDaily[pos].valor_presupuesto= parseFloat(this.fieldsDaily[pos].debit)+parseFloat(this.fieldsDaily[pos].credit)
         this.presupuestoChange();/*  this.creditChange() ; */
       }
-     
+
       this.fieldsDaily[pos].presupuesto = evt.presupuesto?.nombre;
       this.fieldsDaily[pos].grupo = evt.grupo;//nombre_catalogo_presupuesto
       if (evt.cod_ref_auxiliar) {
@@ -1139,22 +1139,22 @@ this.getDataToEdit(); */
 console.log(evento);
 console.log(tipo);
     if (tipo === 'D') {
-    
+
       this.fieldsDaily[evento].credit=0;
       this.fieldsDaily[evento].valor_presupuesto = (codpresupuesto === null || codpresupuesto === '') ? 0.00 : parseFloat(this.fieldsDaily[evento].debit);
       this.debitChange();
       this.presupuestoChange();
-   
+
     } else {
 
-     
+
       this.fieldsDaily[evento].debit=0;
       this.fieldsDaily[evento].valor_presupuesto = (codpresupuesto === null || codpresupuesto === '') ? 0.00 : parseFloat(this.fieldsDaily[evento].credit);
       this.creditChange();
       this.presupuestoChange();
     }
 
-   
+
 
   }
   /* credit/debit change */
@@ -1252,20 +1252,20 @@ console.log(tipo);
 
   /*
   filterId(data) {
-    
+
     if (data != 0) {
       this.id = data;
       this.presentDt = false;
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         dtInstance.destroy();
         this.getDetailsMove();
-      }); 
+      });
     } else {
       this.limpiarData();
     }
   }
 
-  
+
   filterTipo(data) {
 
     if (data != 0) {
@@ -1311,11 +1311,11 @@ console.log(tipo);
         this.limpiarData();
       }
     }
-  
+
     Desdemonto(data) {
       let parse = data.target.value;
       if (parse != undefined) {
-       
+
         this.presentDt = false;
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
@@ -1325,12 +1325,12 @@ console.log(tipo);
         this.limpiarData();
       }
     }
-  
-    
+
+
     Hastamonto(data) {
       let parse = data.target.value;
       if (parse != undefined) {
-      
+
         this.presentDt = false;
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
@@ -1340,8 +1340,8 @@ console.log(tipo);
         this.limpiarData();
       }
     }
-  
-  
+
+
     FromOrToChange() {
       this.presentDt = false;
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -1397,7 +1397,7 @@ console.log(tipo);
         this.dtConsultaAsiento = [];
         this.totalRegistro = this.dtConsultaAsiento.length;
         // setTimeout(() => {
-        //   this.dtTrigger.next();
+        //   this.dtTrigger.next(null);
         // }, 50);
         this.toastr.info(error.error.message);
       });
@@ -1579,7 +1579,7 @@ console.log(tipo);
 
     /*this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       dtInstance.destroy();
-      
+
     });*/
 
   }
@@ -1649,7 +1649,7 @@ console.log(tipo);
     return data.estado == 0 && data.estado == 3;
   }
 
-  /* 
+  /*
   selectAll() {
     this.masterIndeterminate = false
     // this.data.map((e) => e.check = this.masterSelected)

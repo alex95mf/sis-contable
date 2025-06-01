@@ -54,7 +54,7 @@
                     <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
                     <thead class="thead-dark">
                         <tr class="text-center">
-                            <th style="width: 10%;">Fecha Inicio</th>                            
+                            <th style="width: 10%;">Fecha Inicio</th>
                             <th style="width: 10%;">Forma de Garantía</th>
                             <th style="width: 10%;">Seguradora</th>
                             <th style="width: 10%;">Riesgo Aseguradora</th>
@@ -76,7 +76,7 @@
                             </td>
                             <td class="text-center">
                                 {{dt.forma_garantia}}
-                            </td>                            
+                            </td>
                             <td class="text-center">{{ dt.aseguradora }}</td>
                             <td class="text-center">{{ dt.riesgo }}</td>
                             <td class="text-center">{{ dt.fecha_finalizacion }}</td>
@@ -115,4 +115,4 @@
     </app-button-radio-active>
 </div>
 
-<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="msgSpinner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>

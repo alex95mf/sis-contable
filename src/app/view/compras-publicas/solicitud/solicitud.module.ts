@@ -8,7 +8,7 @@ import { DetalleSolicitudComponent } from './detalle-solicitud/detalle-solicitud
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AnexosListComponentDis } from './anexos-list/anexos-list-dis.component';
 import { CalendarModule } from 'primeng/calendar';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     SolicitudRoutingModule,
     CalendarModule,
     NgMultiSelectDropDownModule.forRoot()

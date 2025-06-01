@@ -83,7 +83,7 @@ export class ContableComponent implements OnInit {
         break;
     }
   }
-  
+
   permissions() {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -105,7 +105,7 @@ export class ContableComponent implements OnInit {
       }
     });
   }
-  
+
   ParametroCuentas() {
     this.contableConfSrv.presentaTablaParametros().subscribe((res) => {
       this.paramCuenta = res["data"];
@@ -113,7 +113,7 @@ export class ContableComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
     });
   }
-  
+
   getDataTable() {
     this.dtOptions = {
       pagingType: "full_numbers",
@@ -132,7 +132,7 @@ export class ContableComponent implements OnInit {
         this.validaDtUser = true;
         this.arrayData = res["data"];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.ngOnDestroy();
         }, 50);
       }, error => {
@@ -140,11 +140,11 @@ export class ContableComponent implements OnInit {
         this.toastr.info(error.error.message);
       });
   }
-  
+
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
-  
+
   inforUpdate(dt) {
     document.getElementById("idbtnCuenta").style.border = "2px solid black ";
     this.vmButtons[0].habilitar = false;
@@ -156,7 +156,7 @@ export class ContableComponent implements OnInit {
     this.parametro.id_update = dt.id;
     this.parametro.nombre_cuenta = dt.nombre_cuenta;
   }
-  
+
   // EDIT
   async confirmSave(message, action) {
     Swal.fire({
@@ -175,8 +175,8 @@ export class ContableComponent implements OnInit {
       }
     });
   }
-  
-  
+
+
   updateData() {
     let data = {
       id: this.parametro.id_update,
@@ -194,7 +194,7 @@ export class ContableComponent implements OnInit {
       this.toastr.info(error.error.message);
     });
   }
-  
+
   async validateUdate() {
     if (this.permisions.modificar == "0") {
       this.toastr.info("Usuario no tiene permiso para Actualizar los Parametros Contables");
@@ -206,7 +206,7 @@ export class ContableComponent implements OnInit {
       });
     }
   }
-  
+
   validateDataGlobal() {
     let flag = false;
     return new Promise((resolve, reject) => {
@@ -221,7 +221,7 @@ export class ContableComponent implements OnInit {
       }
     });
   }
-  
+
   limpiarDatos() {
     this.parametro.Codigo = undefined;
     this.parametro.NombreCuentaOficial = undefined;
@@ -230,7 +230,7 @@ export class ContableComponent implements OnInit {
     this.vmButtons[0].habilitar = true;
     this.vmButtons[1].habilitar = true;
   }
-  
+
   showCuenta() {
     const dialogRef = this.confirmationDialogService.openDialogMat(ParametroCuentaComponent, {
       width: '1000px',

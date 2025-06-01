@@ -47,7 +47,7 @@ export class ParametrosComponent implements OnInit {
       this.ocultarBoton(2, false);
     }, 10);
     this.ocultarMostrar("show", "hide");
-    this.getPermisions();    
+    this.getPermisions();
   }
 
   mensajeTitulo:any = "Crear";
@@ -74,7 +74,7 @@ export class ParametrosComponent implements OnInit {
           this.pregunta(1);
         }else{
           this.pregunta(2);
-        }        
+        }
         break;
     }
   }
@@ -139,7 +139,7 @@ export class ParametrosComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
       this.listadoGeneral = datos.data;
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error=>{
       this.lcargando.ctlSpinner(false);
@@ -153,10 +153,10 @@ export class ParametrosComponent implements OnInit {
     this.parametrosService.obtenerCtasContablesGrupo().subscribe((datos:any)=>{
       this.lstCtasContActivo = [];
       this.lstCtasContDepr = [];
-            
+
       datos.data.ctas_grupo.forEach(element => {
         if(element.nombre_cuenta == "Cuenta Grupo de Activos Depreciables"){
-          datos.data.ctas_con.forEach(element2 => {            
+          datos.data.ctas_con.forEach(element2 => {
             if(element2.codigo.startsWith(element.cuenta_contable) && element2.tipo.trim() == "DETALLE"){
               this.lstCtasContActivo.push(element2);
             }
@@ -164,7 +164,7 @@ export class ParametrosComponent implements OnInit {
         }
 
         if(element.nombre_cuenta == "Cuenta Grupo de Depreciacion de Activos"){
-          datos.data.ctas_con.forEach(element2 => {            
+          datos.data.ctas_con.forEach(element2 => {
             if(element2.codigo.startsWith(element.cuenta_contable) && element2.tipo.trim() == "DETALLE"){
               this.lstCtasContDepr.push(element2);
             }
@@ -240,7 +240,7 @@ export class ParametrosComponent implements OnInit {
     this.pregunta(3);
   }
 
-  saveOrUpdate(opcion:any){    
+  saveOrUpdate(opcion:any){
     this.parametros.id_controlador = myVarGlobals.fActivoParametros;
     this.parametros.ip = this.commonServices.getIpAddress();
     this.parametros.accion = "";
@@ -295,7 +295,7 @@ export class ParametrosComponent implements OnInit {
       if (result.value) {
         this.saveOrUpdate(action);
       }
-    }) 
+    })
   }
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;

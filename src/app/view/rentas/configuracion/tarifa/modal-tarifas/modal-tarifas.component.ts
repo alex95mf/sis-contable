@@ -117,10 +117,10 @@ export class ModalTarifasComponent implements OnInit {
             // }
           })
 
-                
+
         this.lcargando.ctlSpinner(false);
         // setTimeout(() => {
-        //   this.dtTrigger.next()
+        //   this.dtTrigger.next(null)
         // }, 50)
 
       },
@@ -132,7 +132,7 @@ export class ModalTarifasComponent implements OnInit {
     )
   }
 
-  
+
   editTarifa(tarifa) {
     /** param: ID de Tarifa */
     this.msgSpinner = 'Obteniendo Tarifa...'
@@ -151,7 +151,7 @@ export class ModalTarifasComponent implements OnInit {
 
   }
 
-  
+
   limpiarFiltros() {
     this.filter = {
       estado: ['A'],

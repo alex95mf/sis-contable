@@ -10,7 +10,7 @@ import { AnexosListComponent } from './anexos-list/anexos-list.component';
 import { EmailDestinatarioComponent } from './email-destinatario/email-destinatario.component';
 import { ModalContribuyentesComponent } from './modal-contribuyentes/modal-contribuyentes.component';
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -24,7 +24,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     ContratoRoutingModule
   ],
   providers: [

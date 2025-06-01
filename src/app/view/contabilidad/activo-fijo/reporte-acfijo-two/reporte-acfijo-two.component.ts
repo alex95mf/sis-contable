@@ -92,7 +92,7 @@ export class ReporteAcfijoTwoComponent implements OnInit {
           $('#tablaConsultatwo').DataTable().button( '.buttons-csv' ).trigger();
         break;
         case "IMPRIMIR":
-          $('#tablaConsultatwo').DataTable().button( '.buttons-print' ).trigger();       
+          $('#tablaConsultatwo').DataTable().button( '.buttons-print' ).trigger();
         break;
         case "PDF":
           $('#tablaConsultatwo').DataTable().button( '.buttons-pdf' ).trigger();
@@ -100,7 +100,7 @@ export class ReporteAcfijoTwoComponent implements OnInit {
         case "LIMPIAR":
         this.informaciondtlimpiar();
         break;
-		}  	 
+		}
 	}
 
   getGrupo(){
@@ -132,7 +132,7 @@ getsCodigos(){
     this.toastr.info(error.error.message);
   })
 }
-    
+
 getTableReport() {
 
   this.dtOptions = {
@@ -162,7 +162,7 @@ getTableReport() {
       customize: function( win ) {
         $( win.document.body ).find( 'td' ).css( 'text-align', 'center' );
     }
-      
+
     },
     {
       extend: "pdf",
@@ -174,8 +174,8 @@ getTableReport() {
       }, customize: function ( doc ) {
         doc.defaultStyle.fontSize = 8
         doc.defaultStyle.alignment = 'center';
-      } 
-      
+      }
+
     },
   ],
     language: {
@@ -196,14 +196,14 @@ getTableReport() {
     this.processing = true;
     this.infoDataActivo = res['data'];
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }, error => {
     this.lcargando.ctlSpinner(false);
     this.validaDt = true;
     this.processing = true;
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
     this.toastr.info(error.error.message);
   });
@@ -217,7 +217,7 @@ rerender(): void {
   });
 }
 
-filterGrupo(data){ 
+filterGrupo(data){
   if (this.grupo != 0) {
     this.grupo = data
     this.rerender();
@@ -226,7 +226,7 @@ filterGrupo(data){
   }
 }
 
-  filterOrigen(data){ 
+  filterOrigen(data){
   if (this.origen != 0) {
     this.origen = data
     this.rerender();
@@ -236,7 +236,7 @@ filterGrupo(data){
 }
 
 
-filterEstado(data){ 
+filterEstado(data){
   if (this.estado != 0) {
     this.estado = data
     this.rerender();
@@ -245,7 +245,7 @@ filterEstado(data){
   }
 }
 
-filterCodigo(data){ 
+filterCodigo(data){
   if (this.codigo != 0) {
     this.codigo = data
     this.rerender();

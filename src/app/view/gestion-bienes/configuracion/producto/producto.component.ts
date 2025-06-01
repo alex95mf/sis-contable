@@ -235,7 +235,7 @@ export class ProductoComponent implements OnInit {
   cmb_presentacion_b: Array<any> = [];
 
   cmb_metodo_depreciacion: Array<any> = [];
-  
+
   presentacion_a: number;
   presentacion_b: number;
   cmb_vehiculo = [
@@ -261,7 +261,7 @@ export class ProductoComponent implements OnInit {
   constructor(private toastr: ToastrService, private commonServices: CommonService, private router: Router,
     private ingresoService: ProductoService, private modalService: NgbModal
     , private commonVrs: CommonVarService, private elementRef: ElementRef) {
-      
+
     this.commonServices.sendAccountingInv.asObservable().subscribe(res => {
       this.dataContabilidad = res;
     });
@@ -297,7 +297,7 @@ export class ProductoComponent implements OnInit {
       }
     )
 
-    //this.commonVrs.selectUbicacionProducto.asObservable().subscribe( 
+    //this.commonVrs.selectUbicacionProducto.asObservable().subscribe(
     this.ingresoService.bodegas$.subscribe(
       (res) => {
         console.log(res)
@@ -305,12 +305,12 @@ export class ProductoComponent implements OnInit {
         //this.observacionesDisabled = false;
         //this.conceptosDisabled = false;
         //this.exoneracionDisabled = false;
-  
+
         // this.bodegas.forEach(c => {
-  
+
         // })
-  
-        
+
+
       }
     );
 
@@ -346,7 +346,7 @@ export class ProductoComponent implements OnInit {
           this.catalogoDisabled = true
           this.stockDisabled = false
           this.departamentoDisabled = true
-         
+
 
          // this.consultarReportGrafi();
         }
@@ -357,7 +357,7 @@ export class ProductoComponent implements OnInit {
           this.catalogoDisabled = false
           this.stockDisabled = true
           this.departamentoDisabled = false
-         
+
         }
         //this.id_subgrupo = this.subgrupo.id_subgrupo_producto
         this.generarCodigoEx()
@@ -376,7 +376,7 @@ export class ProductoComponent implements OnInit {
         /* if (this.produto.depreciacion != null) {
           let anios: number = this.produto.depreciacion.años_depreciables
         } */
-        
+
         if (res['validacion'] == 'PR' || res['validacion'] == null || res['validacion'] == undefined) {
 
           this.catalogoDisabled = true
@@ -386,13 +386,13 @@ export class ProductoComponent implements OnInit {
           console.log(res);
           this.tipo_bien_visibilidad = res['grupo']['tipo_bien']
           if (res['grupo']['tipo_bien'] == "EXI" || res['grupo']['tipo_bien'] == "EX" || res['grupo']['tipo_bien'] == "") {
-            
+
             if(res?.stock_bodega.length > 0){
               this.bodegasStock = res?.stock_bodega.filter(e => e.bodega?.estado == 'A')
               console.log(this.bodegasStock)
             }
             console.log(this.bodegasStock)
-           
+
             this.serieDisabled = true
             this.tipomaterialDisabled = true
             this.observacionDisabled = true
@@ -457,11 +457,11 @@ export class ProductoComponent implements OnInit {
             !res['bienes'] ? this.codigoBienesDescripcion = undefined : this.codigoBienesDescripcion = res['bienes']['codigo_bienes'] + "-" + res['bienes']['descripcion']
             this.disabledCustodio = true;
             this.disabledResponsable = true;
-            
+
             this.fechaUltimaCompra = res['fecha_ultima_compra'];
             this.precioUltimaCompra = res['precio_ultima_compra'];
 
-            
+
 
           } else if (res['grupo']['tipo_bien'] == "BLD" || res['grupo']['tipo_bien'] == "BCA") {
             this.serieDisabled = false
@@ -485,7 +485,7 @@ export class ProductoComponent implements OnInit {
               this.ingresoDepartamento = res['departamento']['id_departamento']
             }
             this.nuevoCodigo = res['codigoproducto']
-            // this.subgrupo.descripcion = res['subgrupo']['descripcion'] 
+            // this.subgrupo.descripcion = res['subgrupo']['descripcion']
             //this.id_subgrupo = res['fk_subgrupo']
             this.id_producto = res['id_producto']
             this.claseSelect = res['grupo']
@@ -523,7 +523,7 @@ export class ProductoComponent implements OnInit {
             this.disabledCustodio = false;
             this.disabledResponsable = false;
 
-            
+
           }
 
           if (res['estado_ficha_prod'] == "C" ) {
@@ -682,7 +682,7 @@ export class ProductoComponent implements OnInit {
     }, 150);
   }
 
-  ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; } 
+  ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto + evento.items.paramAccion) {
       case "NUEVO1":
@@ -967,7 +967,7 @@ async cargaInicial() {
       this.lcargando.ctlSpinner(false);
       this.processing = true;
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.processing = true;
@@ -975,7 +975,7 @@ async cargaInicial() {
       this.lcargando.ctlSpinner(false);
 
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message)
     })
@@ -1140,7 +1140,7 @@ async cargaInicial() {
     if (this.permisions[0].editar == "0") {
       this.toastr.info("Usuario no tiene permiso para actualizar");
     } else {
-      /* if(this.searchDataUpdateDelete.fk_formula != null) {this.commonServices.updateData.next()}; */
+      /* if(this.searchDataUpdateDelete.fk_formula != null) {this.commonServices.updateData.next(null)}; */
       // let val1 = (this.searchDataUpdateDelete.fk_formula != null) ? true : false;
       // this.commonServices.updateData.next(val1);
       this.validaGlobalData()
@@ -1172,17 +1172,17 @@ async cargaInicial() {
       //   this.toastr.info('Seleccione el campo Origen')
       //   flag = false;
 
-      // } 
+      // }
       if (this.nameData == null || this.nameData.trim() == '') {
         message += '* El campo Nombre Producto no debe estar vacio.<br>'
         // this.toastr.info('El campo Nombre Producto no debe estar vacio')
         // flag = false;
-      } 
+      }
 
       if (this.udmcSelect == undefined || this.udmcSelect == null) {
         message += '* No ha seleccionado una Unidad de Medida.<br>'
       }
-       
+
       // else if (this.presentacionData == undefined) {
       //   this.toastr.info('El campo Presentacion no debe estar vacio')
       //   flag = false;
@@ -1196,14 +1196,14 @@ async cargaInicial() {
       //   this.toastr.info('Seleccione el campo Grupo')
       //   flag = false;
 
-      // } 
+      // }
       // else if (this.udmcSelect == undefined || this.udmcSelect == 0) {
       //   this.toastr.info('Seleccione el campo - Compra')
       //   flag = false;
       // } else if (this.colorSelect == undefined || this.colorSelect == 0) {
       //   this.toastr.info('Seleccione el campo Color')
       //   flag = false;
-      // } 
+      // }
       // else if (this.TipoCompraSelect == undefined || this.TipoCompraSelect == 0) {
       //   this.toastr.info('Seleccione el campo Tipo Compra');
       //   flag = false;
@@ -1224,7 +1224,7 @@ async cargaInicial() {
         // flag = false;
       } */
 
-      return (!message.length) ? resolve(true) : reject(message) 
+      return (!message.length) ? resolve(true) : reject(message)
 
 
     });
@@ -1235,7 +1235,7 @@ async cargaInicial() {
   }
 
   validaDataFormula() {
-    this.commonServices.selectFormula.next();
+    this.commonServices.selectFormula.next(null);
   }
 
   async confirmSave(message, action) {
@@ -1552,7 +1552,7 @@ async cargaInicial() {
       if(this.claseSelect.tipo_bien != "EXI"){
         this.vmButtons[6].habilitar = false;
       }
-   
+
       // this.borrar();
       setTimeout(() => {
         /*   location.reload(); */
@@ -1690,7 +1690,7 @@ async cargaInicial() {
     this.disabledResponsable = true;
     this.catalogoDisabled = false;
     // this.rerender();
-   
+
   }
 
   tabSelection() {
@@ -1778,7 +1778,7 @@ async cargaInicial() {
       this.dataContabilidad = undefined;
       this.formulaData = {};
       this.setDataUpdateDelete();
-    }, 
+    },
     (error: any) => {
       console.log(error)
       this.lcargando.ctlSpinner(false);
@@ -2309,7 +2309,7 @@ async cargarProductoAdicional() {
   this.lcargando.ctlSpinner(true)
   try {
     let response: any = await this.ingresoService.getInfoProducto(this.id_producto, { params: { filter: this.filter, paginate: this.paginate}})
-    
+
     // TODO: Paginate por cada tabla
 console.log(response)
     this.traslado = response.traslado.data
@@ -2446,7 +2446,7 @@ console.log(response)
     modal.componentInstance.dt = dt;
     //modal.componentInstance.esNuevoLTur= esNuevoLTur;
     //modal.componentInstance.dato = dato;
-    
+
   }
 
   /*expandModalBodega() {
@@ -2464,7 +2464,7 @@ console.log(response)
       //modalInvoice.componentInstance.codigo = this.concepto.codigo;
       //modalInvoice.componentInstance.fk_contribuyente = this.contribuyenteActive.id_cliente;
       //modalInvoice.componentInstance.deudas = this.deudas;
-    
+
   }*/
 
   expandModalBodega() {
@@ -2521,7 +2521,7 @@ console.log(response)
         this.ingresoService.guardarBodegaProducto(data).subscribe(
           res => {
             console.log(res);
-    
+
             Swal.fire({
               icon: "success",
               title: "Exito",
@@ -2532,7 +2532,7 @@ console.log(response)
               confirmButtonColor: '#20A8D8',
             });
             this.lcargando.ctlSpinner(false);
-    
+
           },
           err => {
             this.lcargando.ctlSpinner(false)
@@ -2594,7 +2594,7 @@ console.log(response)
           this.mensajeSppiner = 'Eliminando Costo Adicional'
           let response = await this.ingresoService.delCosto(costo.id)
           console.log(response)
-          
+
           this.costos.splice(this.costos.indexOf(costo), 1);
           this.lcargando.ctlSpinner(false)
         } catch (err) {
@@ -2622,7 +2622,7 @@ console.log(response)
 
 
     // let motivo = (typeof this.tipo_permiso_id_cc === 'undefined') ? "" : (this.tipo_permiso_id_cc === null) ? "" : this.tipo_permiso_id_cc;
-     
+
      let id =this.id_producto
      let parameterUrl: any = {
         flpr_anio: '2023'
@@ -2630,7 +2630,7 @@ console.log(response)
        // id_mes: this.mesConsulta == null ? 0 : this.mesConsulta,
        // motivo_permiso: motivo
      };
-    
+
      this.mensajeSppiner = 'Cargando...'
      this.lcargando.ctlSpinner(true)
      this.ingresoService.getReporteGraficoTendencia(parameterUrl,id).subscribe((res: any) => {
@@ -2643,63 +2643,63 @@ console.log(response)
            this.chart1.destroy()
            console.log('ejecuta1');
          }
- 
- 
- 
+
+
+
          for (let i = 0; i < res['data'].length; i++) {
            labelInfoBar.push(res['data'][i].mes);
          }
- 
+
          /*Recorremos el elemento principal que son los  motivos */
-         
+
          for (let i = 0; i < res['data'].length; i++) {
- 
- 
+
+
            if (DataSetGrafit.length > 0) {
- 
+
              let labelGraf = DataSetGrafit.filter(co => co.label == res['data'][i].motivo);
-            
- 
+
+
              if (labelGraf.length > 0) {
                labelGraf[0]['data'].push(res['data'][i].total);
              } else {
- 
+
                let dataPointGrafit = []
- 
+
                dataPointGrafit.push(res['data'][i].total);
- 
+
                DataSetGrafit.push({
                  label: res['data'][i].motivo,
                  backgroundColor: '#42A5F5',
                  data: dataPointGrafit
                })
- 
+
              }
- 
+
            } else {
- 
+
              let dataPointGrafit = []
- 
+
              dataPointGrafit.push(res['data'][i].total);
- 
+
              DataSetGrafit.push({
                label: res['data'][i].motivo,
                backgroundColor: '#42A5F5',
                data: dataPointGrafit
              })
- 
+
            }
            console.log(DataSetGrafit)
-         
+
            const datos = DataSetGrafit[0]?.data
            const posiciones = datos?.map((valor, indice) => indice + 0.5);
            const lineaTendencia = this.calcularLineaTendencia(posiciones, datos);
            const valoresYLineaTendencia = posiciones.map(x => lineaTendencia.m * x + lineaTendencia.b); // Calcula los valores Y correspondientes a la línea de tendencia
            console.log(valoresYLineaTendencia)
-         
- 
+
+
            //labelInfoBar.push(res[i].mes);
-       
+
          this.ReportGrafiFPBarras = {
            labels: labelInfoBar,
            datasets: DataSetGrafit
@@ -2712,11 +2712,11 @@ console.log(response)
            this.chart1 = this.chart("chart1", "bar", labelInfoBar, data,tendencia);
            console.log(this.chart1);
          }, 50);
- 
- 
- 
+
+
+
        }
-       
+
      },
      (error) => {
        this.lcargando.ctlSpinner(false);
@@ -2730,21 +2730,21 @@ console.log(response)
      let sumY = 0;
      let sumXY = 0;
      let sumXX = 0;
-   
+
      for (let i = 0; i < n; i++) {
        sumX += x[i];
        sumY += Number(y[i]);
        sumXY += x[i] * Number(y[i]);
        sumXX += x[i] * x[i];
      }
-   
+
      const m = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
      const b = (sumY - m * sumX) / n;
-   
+
      return { m, b }; // Devuelve los coeficientes de la línea de tendencia (pendiente y ordenada al origen)
    }
- 
- 
+
+
   chart(name: string, tipo: string, label: string[], data: number[], tendencia: number[]) {
 
     let htmlRef = this.elementRef.nativeElement.querySelector(`#chart1`);
@@ -2853,10 +2853,10 @@ console.log(response)
                 'rgba(212, 132, 17, 0.52)',
                 'rgba(212, 17, 68, 0.52)'
               ],
-              
+
               borderWidth: 1
             },
-           
+
           ]
           },
           options: {
@@ -2872,18 +2872,18 @@ console.log(response)
                 ticks: {
                   beginAtZero: true
                 },
-    
+
               }],
               yAxes: [{
                 ticks: {
                   beginAtZero: true
                 },
-    
+
               }]
             }
           }
         });
       }
- 
+
       periodoSelected() {}
 }

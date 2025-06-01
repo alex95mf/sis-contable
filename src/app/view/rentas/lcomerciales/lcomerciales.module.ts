@@ -12,7 +12,7 @@ import { ModalNuevaInspeccionComponent } from './inspeccion/modal-nueva-inspecci
 import { ModalBusqContratoComponent } from './inspeccion/modal-busq-contrato/modal-busq-contrato.component';
 import { ModalLocalDetComponent } from './inspeccion/modal-local-det/modal-local-det.component';
 import { ModalFeriasComponent } from './inspeccion/modal-ferias/modal-ferias.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -31,7 +31,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     LcomercialesRoutingModule
   ]
 })

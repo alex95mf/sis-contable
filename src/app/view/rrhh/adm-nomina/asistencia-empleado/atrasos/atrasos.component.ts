@@ -32,9 +32,9 @@ export class AtrasosComponent implements OnInit, OnDestroy {
     fecha_hasta: null,
     area: null,
     departamento: null,
-   
+
   }
- 
+
   motivosAtraso: any = [];
 
   private onDestroy$: Subject<void> = new Subject<void>();
@@ -179,11 +179,11 @@ export class AtrasosComponent implements OnInit, OnDestroy {
     )
 
     this.apiService.atrasosLimpiar.pipe(takeUntil(this.onDestroy$)).subscribe(() => this.clearScreen())
-   
+
   }
-  
+
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -197,7 +197,7 @@ export class AtrasosComponent implements OnInit, OnDestroy {
   resetInput() {
     // Limpia el valor seleccionado para que el cambio se dispare siempre
     this.fileUpload.nativeElement.value = null;
-    
+
     // Dispara el evento de clic en el elemento de entrada de archivo original
     this.fileUpload.nativeElement.click();
   }
@@ -241,12 +241,12 @@ export class AtrasosComponent implements OnInit, OnDestroy {
     }
     this.lst_update.push(element)
   }
-  
+
   getMotivosAtrasos(){
     let data = {
       valor_cat: 'TPPM',
     }
-    
+
     this.apiService.getMotivoAtraso(data).subscribe((result: any) => {
       console.log(result);
 

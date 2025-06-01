@@ -127,7 +127,7 @@ export class ModalBusquedaReformaComponent implements OnInit {
     }
 
     try {
-      const response = await this.mdlSrv.getReformaInterna(data).toPromise<any>()
+      const response = await this.mdlSrv.getReformaInterna(data) as any
       // console.log(response.data)
       this.paginate.length = response.data.total
       this.contribuyentesDt = response.data.data

@@ -31,19 +31,19 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
   @Input() mostrarEliminar: any;
   @Input() custom1: any;
 
-  
+
   anexos = [];
   anexosCP = []
   //anexos
   onDestroy$: Subject<void> = new Subject();
   constructor(
-    private commonService: CommonService, 
+    private commonService: CommonService,
     private commonVarService: CommonVarService,
     private toastr: ToastrService,
     private apiService: AnexoListService,
     private confirmationDialogService: ConfirmationDialogService
   ) {
-    
+
     this.commonVarService.contribAnexoLoad.asObservable().subscribe(
       (res: any) => {
         this.lcargando.ctlSpinner(true)
@@ -55,7 +55,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
           component: myVarGlobals.fCompPubInfi,
           identifier: this.identifier,
           custom1:this.custom1
-          
+
         }
 
         console.log(data)
@@ -65,7 +65,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
             (res: any) => {
               console.log('Anexo ', this.custom1,res)
               this.anexos = res.data
-              
+
               console.log(res.data.length);
               if(res.data.length ==0){
                 // this.commonVarService.diableCargarDis.next({})
@@ -81,7 +81,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
             }
           )
         }
-        
+
       }
     )
 
@@ -103,13 +103,13 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
   ngOnInit(): void {
     // console.log(this.permissions);
-    
+
     setTimeout(() => {
       this.cargarArchivo()
       console.log(this.identifier);
@@ -138,7 +138,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
         }else if(this.custom1 == res.data.custom1){
 
         }
-        
+
         console.log(res.data.length);
         if(res.data.length ==0){
           this.commonVarService.diableCargarDis.next({})
@@ -146,7 +146,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
         }else{
           this.commonVarService.compPubInfimas.next({validacion: true, custom1: this.custom1})
         }
-        
+
         this.lcargando.ctlSpinner(false)
       },
       (err: any) => {
@@ -181,7 +181,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
         this.commonVarService.diableCargarDis.next({})
         this.commonVarService.compPubInfimas.next(false)
 
-       
+
 
         // Swal.fire({
         //   title: this.fTitle,
@@ -222,7 +222,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
             accion: `Borrado de Anexo ${anexo.id_anexo}`,
             ip: this.commonService.getIpAddress()
           }
-      
+
           this.msgSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true)
           console.log()

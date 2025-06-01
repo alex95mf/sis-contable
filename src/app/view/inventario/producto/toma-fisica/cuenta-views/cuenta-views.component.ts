@@ -54,24 +54,24 @@ export class CuentaViewsComponent implements OnInit {
        this.validaDt = true;
        this.infoData = res['data'];
        setTimeout(() => {
-         this.dtTrigger.next();
+         this.dtTrigger.next(null);
        }, 50);
      }, error => {
        setTimeout(() => {
-         this.dtTrigger.next();
+         this.dtTrigger.next(null);
        }, 50);
        this.toastr.info(error.error.message);
      });
    }
- 
+
    selectCuentaDos(dt){
      this.commonVarSrv.setCuentasFisicados.next(dt);
      this.closeModal();
    }
- 
+
    closeModal() {
      ($("#modalSearchCuentaDos") as any).modal("hide"); //linea para cerrar el modal de boostrap
      this.processingtwo = false;
    }
  }
- 
+

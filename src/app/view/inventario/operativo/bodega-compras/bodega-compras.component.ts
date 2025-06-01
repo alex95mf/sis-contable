@@ -123,14 +123,14 @@ export class BodegaComprasComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
         this.guardaT = res['data'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         setTimeout(() => {
           this.validaDtUser = true;
           this.lcargando.ctlSpinner(false);
           this.guardaT = [];
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       });
   }

@@ -75,7 +75,7 @@ export class ShowCabComponent implements OnInit {
     this.validaDt = true;
     this.dataDT = this.infoAccount;
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }
 

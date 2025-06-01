@@ -90,7 +90,7 @@ export class VistaClientesComponent implements OnInit {
       this.listadoGeneral = arregloNoDuplicado;
 
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
 
       

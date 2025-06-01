@@ -263,7 +263,7 @@ export class ProveedoresComponent implements OnInit {
       this.paymentsAux = response["data"];
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         setTimeout(() => {
           this.filterCxP(5);
         }, 100);
@@ -273,7 +273,7 @@ export class ProveedoresComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
       this.processing = true;
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     });
   }
@@ -306,7 +306,7 @@ export class ProveedoresComponent implements OnInit {
       this.paymentsAux = response["data"];
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         setTimeout(() => {
           this.filterCxP(5);
         }, 100);
@@ -316,7 +316,7 @@ export class ProveedoresComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
       this.processing = true;
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message);
     });
@@ -370,7 +370,7 @@ export class ProveedoresComponent implements OnInit {
 
   PayCxP() {
     this.flag = false ;
-    this.commonVarSrv.listenCxpRes.next();
+    this.commonVarSrv.listenCxpRes.next(null);
     this.values.id = this.contacts.id;
     this.values.letter = this.contacts.letra;
     this.values.ref = this.contacts.doc_ref_num;
@@ -685,7 +685,7 @@ export class ProveedoresComponent implements OnInit {
     this.payments = info;
 
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
 
     this.processingPayment = true;

@@ -99,27 +99,27 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
         this.fTitle = 'Nueva configuracion contable'
         console.log(this.tipo);
         this.dat.tipo_especie = this.tipo;
-  
+
       }else{
         console.log('WHAT UP');
         this.vmButtons[0].showimg = false;
         this.fTitle = 'Edicion de configuracion contable';
 
-        
+
         this.dat.id_especie_fiscal = this.data.id_especie_fiscal
         this.dat.desde = this.data.desde
         this.dat.hasta = this.data.hasta;
         this.dat.costo = this.data.costo;
         this.dat.fecha = this.data.fecha;
         this.dat.cantidad = this.data.cantidad;
-        
+
       }
     }, 5);
 
 
     setTimeout(() => {
       this.fillCatalog()
-      
+
     }, 500);
   }
 
@@ -140,7 +140,7 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
       case "CERRAR":
         this.modal.close();
       break;
-      
+
     }
   }
 
@@ -154,7 +154,7 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
     //   "mes": Number(moment(this.dat.fecha).format('MM')),
     // }
       // this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
       // if (res["data"][0].estado !== 'C') {
         this.lcargando.ctlSpinner(true)
@@ -163,7 +163,7 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
           (res)=>{
             console.log(res);
             this.lcargando.ctlSpinner(false)
-            this.commonVarSrv.modalEspeciesFiscales.next()
+            this.commonVarSrv.modalEspeciesFiscales.next(null)
             Swal.fire('Talonario almacenado correctamente', '', 'success').then(() => this.modal.close())
           },
           (err: any) => {
@@ -176,7 +176,7 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
       //   this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
       //   this.lcargando.ctlSpinner(false);
       // }
-  
+
       // }, error => {
       //     this.lcargando.ctlSpinner(false);
       //     this.toastr.info(error.error.mesagge);
@@ -189,7 +189,7 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
       (res)=>{
         console.log(res);
         this.modal.close()
-        this.commonVarSrv.modalEspeciesFiscales.next() 
+        this.commonVarSrv.modalEspeciesFiscales.next(null)
       }
     )
 
@@ -199,7 +199,7 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
   mostrarCantidad(event){
 
     // console.log(event);
-    
+
     this.dat.cantidad = parseInt(this.dat.hasta) - parseInt(this.dat.desde) + 1;
 
   }
@@ -218,7 +218,7 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
       (res) => {
         console.log(res);
         this.catalog = res["data"]["REC_ESPECIE_FISCAL"];
-        
+
 
         // console.log(this.catalog);
         this.lcargando.ctlSpinner(false);
@@ -237,6 +237,6 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
 
 
 
-  
+
 
 }

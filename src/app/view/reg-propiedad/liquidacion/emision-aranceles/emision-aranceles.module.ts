@@ -9,7 +9,7 @@ import { ModalArancelesComponent } from './modal-aranceles/modal-aranceles.compo
 import { ListLiquidacionesComponent } from './list-liquidaciones/list-liquidaciones.component';
 import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component';
 import {InputNumberModule} from 'primeng/inputnumber';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ModalExonContribuyenteComponent } from './modal-exon-contribuyente/modal-exon-contribuyente.component';
 
 
@@ -26,7 +26,7 @@ import { ModalExonContribuyenteComponent } from './modal-exon-contribuyente/moda
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     EmisionArancelesRoutingModule,
     InputNumberModule
   ]

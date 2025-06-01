@@ -33,7 +33,7 @@ standalone: false,
 export class ReciboCobroComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild("print") print!: ElementRef;
-  
+
   fTitle = "Recibo de caja";
   msgSpinner: string;
   vmButtons: any = [];
@@ -73,7 +73,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
 
   formaPago: any = {
     nombre: '',
-    valor: '',    
+    valor: '',
   };
 
   entidadesFiltrada: any = [];
@@ -81,8 +81,8 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   hayEntidad: boolean = false;
   entidad: any = {
     nombre: '',
-    valor: '',  
-    grupo: '',  
+    valor: '',
+    grupo: '',
   };
 
   emisoresFiltrada: any = [];
@@ -90,8 +90,8 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   hayEmisor: boolean = false;
   emisor: any = {
     nombre: '',
-    valor: '',  
-    grupo: '',  
+    valor: '',
+    grupo: '',
   };
 
   documento: any = {
@@ -142,7 +142,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   disabledAnular: boolean = true;
 
   private onDestroy$: Subject<void> = new Subject<void>();
-  
+
   constructor(
     private commonService: CommonService,
     private toastr: ToastrService,
@@ -150,7 +150,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private apiSrv: ReciboCobroService,
     private cierremesService: CierreMesService,
-    ) { 
+    ) {
       this.commonVrs.selectContribuyenteCustom.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
         (res) => {
           let n= 0;
@@ -164,23 +164,23 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
           else{
             this.mensaje = "El contribuyente no tiene convenios"
           }
-          
+
           this.cargarjuicios()
-        
+
           if(this.verifyRestore){
             this.restoreForm();
           }
           this.contribuyenteActive = res;
           this.titulosDisabled = false;
           this.vmButtons[3].habilitar = false;
-         
+
         }
       );
 
       this.commonVrs.selectRecDocumento.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
         (res) => {
           let n= 0;
-          
+
           this.restoreForm();
           this.formReadOnly = true;
           this.disabledAnular = false;
@@ -240,8 +240,8 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
                 monto_total: e.liquidacion.cuota.documento.total,
                 cobro: e.liquidacion.cuota.valor,
                 plazo_maximo: e.liquidacion.cuota.fecha_plazo_maximo,
-              })    
-              console.log(e);               
+              })
+              console.log(e);
             }
 
             this.deudas.push(det);
@@ -258,7 +258,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
 
           this.vmButtons[0].habilitar = true;
           this.vmButtons[1].habilitar = false;
-          this.vmButtons[2].habilitar = false;        
+          this.vmButtons[2].habilitar = false;
           this.vmButtons[3].habilitar = false;
           //this.vmButtons[4].habilitar = false;
           console.log('superavit '+res.superavit)
@@ -283,7 +283,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
       );
 
       this.commonVrs.selectGarantia.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
-    
+
         (res) => {
 
           console.log(res);
@@ -299,7 +299,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
 
       //   }
       // );
-      
+
 
       this.commonVrs.needRefresh.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
         (res) => {
@@ -323,7 +323,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
       )
     }
   ngOnDestroy(): void {
-    this.onDestroy$.next()
+    this.onDestroy$.next(null)
     this.onDestroy$.complete()
   }
 
@@ -339,7 +339,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     this.emisor = 0;
     this.anular = false
     this.disabledAnular = true;
-    
+
     this.vmButtons = [
       {
         orig: "btnsRenLiqCobro",
@@ -443,7 +443,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     }
   }
 
-  triggerPrint(): void {   
+  triggerPrint(): void {
     this.print.nativeElement.click();
   }
 
@@ -509,7 +509,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
       this.formReadOnly = true
       this.activo = false
       throw new Error('No tiene caja activa.')
-    } 
+    }
 
     if (this.cajaActiva && this.cajaActiva.fecha != moment(this.documento.fecha).format('YYYY-MM-DD')) {
       console.log('No fue abierta hoy')
@@ -518,13 +518,13 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
       this.activo = false
       throw new Error('La caja activa no fue abierta hoy.')
     }
-    
+
       const response = await this.apiSrv.getCajaDiaByCaja({
-        id_caja: this.cajaActiva.id_caja, 
+        id_caja: this.cajaActiva.id_caja,
         fecha: this.cajaActiva.fecha
-      }).toPromise<any>()
+     }) as any
       console.log(response.data)
-  
+
       if (response.data.length == 0) {
         console.log('No hay registro en la base')
         this.toastr.info('No hay cajas reabiertas')
@@ -553,7 +553,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fTesRecTitulos,
       id_rol: this.dataUser.id_rol,
@@ -624,8 +624,8 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     else{
       window.open(environment.ReportingUrl + "rep_rentas_generico.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_liquidacion=" + dt.id_liquidacion + "&forma_pago=" + this.pagos[0].tipo_pago_lbl , '_blank')
     }
-    
-    
+
+
   }
 
   getCatalogos() {
@@ -681,14 +681,14 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
         //     let m = {
         //       denominacion: e.descripcion,
         //       cantidad: 0,
-        //       total_denominacion: 0,   
+        //       total_denominacion: 0,
         //     }
         //     this.monedasCat.push(m);
         //   }else if(e.grupo=="B"){
         //     let b = {
         //       denominacion: e.descripcion,
         //       cantidad: 0,
-        //       total_denominacion: 0,   
+        //       total_denominacion: 0,
         //     }
         //     this.billetesCat.push(b);
         //   }
@@ -706,7 +706,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     this.msgSpinner = 'Obteniendo campañas de descuento...';
     //let id = this.cajaActiva.id_caja;
 
-    // busaca campañas activas y que se puedan aplicar a los conceptos segun la fecha 
+    // busaca campañas activas y que se puedan aplicar a los conceptos segun la fecha
     this.apiSrv.getCampaigns().subscribe(
       (res) => {
         if(res['data']?.length > 0){
@@ -715,7 +715,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
         }else{
           this.campaigns= [];
         }
-        
+
       },
       (err) => {
         this.lcargando.ctlSpinner(false)
@@ -815,7 +815,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
               comentario: "",
               valor: e.total,
               saldo: e.deuda.saldo,
-              cobro: 0, 
+              cobro: 0,
               nuevo_saldo: 0,
               aplica: true,
               total: e.total,
@@ -829,7 +829,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
             //   comentario: "",
             //   valor: e.total,
             //   saldo: e.deuda.saldo,
-            //   cobro: 0, 
+            //   cobro: 0,
             //   nuevo_saldo: 0,
             //   aplica: true,
             //   total: e.total,
@@ -844,7 +844,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
                   monto_total: e.cuota.documento.total,
                   cobro: (+e.cuota.valor).toFixed(2),
                   plazo_maximo: e.cuota.fecha_plazo_maximo,
-                })              
+                })
               }
               else { // CUOTA INICIAL no tiene rec_documento_det
                 Object.assign(e, {
@@ -852,10 +852,10 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
                   monto_total: (+(+e.total*100 / +e.observacion)).toFixed(2),
                   cobro: (+e.total).toFixed(2),
                   plazo_maximo: e.resolucion_fecha,
-                })   
+                })
               }
             }
-        
+
             this.deudasBackup.push(e);
           }
         });
@@ -900,18 +900,18 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
         let cobro100 = +e.cobro * 100;
         cobroTotal += +cobro100;
       // }
-   
+
     });
 
- 
-    
+
+
     this.totalCobro = +cobroTotal / 100;
     // this.calcSaldoRestanteTotal();
     this.calcDifCobroPago();
-   
+
   }
 
-  
+
 
   // calcSaldoRestanteTotal() {
   //   let saldoResTotal = 0;
@@ -1007,7 +1007,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     let tipo = this.formaPago.valor;
     if (tipo=="CHEQUE" || tipo=="TRANSFERENCIA" || tipo=="DEPOSITO"){
       return tipo.substring(0,2)+' - '+ this.entidad.valor;
-    } else 
+    } else
     if (tipo=="TARJETA" || tipo=="DEBITO") {
       return (tipo=="TARJETA"?'T/C':'T/D')+' - '+this.emisor.valor;
     }
@@ -1018,7 +1018,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     let tipo = this.formaPago.valor;
     if (tipo=="CHEQUE" || tipo=="TRANSFERENCIA" || tipo=="DEPOSITO"){
       return this.entidad.nombre;
-    } else 
+    } else
     if (tipo=="TARJETA" || tipo=="DEBITO" || tipo=="MEDIANET") {
       return this.emisor.nombre;
     }
@@ -1035,7 +1035,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     if ( (tipo=="CHEQUE" || tipo=="TRANSFERENCIA" || tipo=="DEPOSITO") && this.entidad==0){
       this.toastr.info("Debe seleccionar una Entidad para ésta forma de pago.")
       return ;
-    } else 
+    } else
     if ((tipo=="TARJETA" || tipo=="DEBITO" || tipo=="MEDIANET") && (this.entidad==0 || this.emisor==0)){
       this.toastr.info("Debe seleccionar Entidad y Emisor para ésta forma de pago.")
       return ;
@@ -1081,7 +1081,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
       estado: "E"
     }
 
-    
+
     this.pagos.push(nuevo);
     this.vmButtons[0].habilitar=false;
   }
@@ -1106,7 +1106,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     this.emisor = 0;
     this.entidadesFiltrada = this.entidades.filter((e: any) => e.grupo == event.valor);
     this.entidadDisabled = false;
-    
+
     this.expandPago = ['GARANTIA', 'FAVOR', 'CRUCE CONVENIO', 'NOTA CREDITO', 'ANTICIPO PRECOBRADO'].includes(event.valor);
     this.deshabilitarFormaPag = ["GARANTIA", "FAVOR", "CRUCE CONVENIO", "NOTA CREDITO", "ANTICIPO PRECOBRADO"].includes(event.valor)
     this.hayEmisor = ['TARJETA', 'DEBITO','MEDIANET'].includes(event.valor);
@@ -1137,12 +1137,12 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   checkDeudas() {
     console.log(this.deudas)
     for(let i=0;i<this.deudas.length;i++) {
-      if (this.deudas[i].nuevo_saldo<0) {        
-        return true;         
+      if (this.deudas[i].nuevo_saldo<0) {
+        return true;
       }else if(this.deudas[i].descuento_interes>0 && this.deudas[i].cobro != this.deudas[i].total){
         this.msjError = "Debe pagar el valor total del titulo  "+this.deudas[(i+1)].numero_documento;
         return true;
-      } 
+      }
     }
     return false;
   }
@@ -1156,17 +1156,17 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     for(let i=0;i<this.pagos.length;i++) {
       if (
         this.pagos[i].tipo_pago=='EFECTIVO' && (this.pagos[i].cambio<0)
-      ) {        
+      ) {
         this.fila = +(i+1) +' - '+ this.pagos[i].tipo_pago_lbl;
         this.msjError = "El valor recibido no puede ser menor al valor que se está pagando en efectivo";
-        return true;         
+        return true;
       } else if (
         (this.pagos[i].tipo_pago=='GARANTIA' || this.pagos[i].tipo_pago=='FAVOR' || this.pagos[i].tipo_pago=='CRUCE CONVENIO' || this.pagos[i].tipo_pago=='NOTA CREDITO' || this.pagos[i].tipo_pago=='ANTICIPO PRECOBRADO') && (+this.pagos[i].valor>+this.pagos[i].saldo_max)
-      ) {       
-        this.fila = +(i+1) +' - '+ this.pagos[i].tipo_pago_lbl; 
+      ) {
+        this.fila = +(i+1) +' - '+ this.pagos[i].tipo_pago_lbl;
         this.msjError = "El valor a pagar no puede ser mayor al saldo restante en "+this.pagos[i].tipo_pago_lbl;
-        return true;         
-      } 
+        return true;
+      }
     }
     return false;
   }
@@ -1181,42 +1181,42 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     //   //   console.log(this.documento.superavit);
     //   //   if(+this.documento.superavit > 0) {
 
-    //   //     return false;  
-    //   //   }      
+    //   //     return false;
+    //   //   }
     //   // } else
     //    if (
-    //     this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO' 
-    //   ) {        
+    //     this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO'
+    //   ) {
     //     // this.fila = i+1;
     //     this.msjError = "El valor recibido no puede ser menor al valor que se está pagando en efectivo";
     //     console.log(this.documento.superavit);
     //     if(+this.documento.superavit > 0) {
 
-    //       return false;  
-    //     }       
+    //       return false;
+    //     }
     //   }
     // }
     // return true;
     for(let i=0;i<this.pagos.length;i++) {
       if(
-        this.pagos[i].tipo_pago=='GARANTIA' || this.pagos[i].tipo_pago=='FAVOR' || this.pagos[i].tipo_pago=='CRUCE CONVENIO' || this.pagos[i].tipo_pago=='NOTA CREDITO' || this.pagos[i].tipo_pago=='ANTICIPO PRECOBRADO' 
+        this.pagos[i].tipo_pago=='GARANTIA' || this.pagos[i].tipo_pago=='FAVOR' || this.pagos[i].tipo_pago=='CRUCE CONVENIO' || this.pagos[i].tipo_pago=='NOTA CREDITO' || this.pagos[i].tipo_pago=='ANTICIPO PRECOBRADO'
       ) {
         if(+this.difCobroPago!=0) {
 
-          return true;  
-        }      
-      } 
+          return true;
+        }
+      }
       // else
       //  if (
-      //   this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO' 
-      // ) {        
+      //   this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO'
+      // ) {
       //   // this.fila = i+1;
       //   this.msjError = "El valor recibido no puede ser menor al valor que se está pagando en efectivo";
       //   console.log(this.documento.superavit);
       //   if(+this.documento.superavit > 0) {
 
-      //     return false;  
-      //   }       
+      //     return false;
+      //   }
       // }
     }
     return false;
@@ -1269,7 +1269,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
 
     return false;
   }
-  
+
   checkCuotasATPlazos() {
 
     let cuotas = this.cobros.cuotasAT;
@@ -1298,7 +1298,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   aplicarDescuentoCampaigns(){
     console.log(this.deudas)
     console.log(this.campaigns)
-    
+
     if(this.deudas.length > 0){
       let descuentoIntereses = 0
       this.deudas.forEach(element => {
@@ -1331,14 +1331,14 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
             }
           }
         });
-        
-      
+
+
       });
       this.totalDescuentoInteres = descuentoIntereses
       console.log(this.totalDescuentoInteres)
       this.calcPagoTotal();
     }
-   
+
   }
 
   createRecDocumento() {
@@ -1349,7 +1349,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
       // if(this.documento.observacion==""||this.documento.observacion==undefined){
       //   this.toastr.info("Debe ingresar una observación para el recibo")
       //   return;
-      // } else 
+      // } else
       if(
         this.deudas.length<=0||!this.deudas.length
       ) {
@@ -1402,7 +1402,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
         this.documento.superavit = +superavit.toFixed(2);
         this.superavit = 1;
         this.quitarDeudas = false;
-      } else if (+this.difCobroPago.toFixed(2)>0){    
+      } else if (+this.difCobroPago.toFixed(2)>0){
         this.documento.superavit = +this.totalPago;
         this.superavit = 2;
         this.quitarDeudas = true;
@@ -1431,13 +1431,13 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
             "mes": Number(moment(this.documento.fecha).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
-                
+
                 this.msgSpinner = 'Generando Documento de cobro...';
                 this.lcargando.ctlSpinner(true);
-                          
+
                 if(this.quitarDeudas){
                   this.totalCobro = 0;
                   this.deudas = [];
@@ -1451,7 +1451,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
                 this.documento.descuento_interes = this.totalDescuentoInteres;
                 this.documento.detalles = [];
                 this.documento.fk_caja = this.cajaActiva.id_caja;
-                
+
                 console.log(this.quitarDeudas);
                 console.log(+this.difCobroPago)
                 console.log(this.deudas);
@@ -1499,7 +1499,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
                 let data = {
                   documento: this.documento
                 }
-                console.log(this.documento);     
+                console.log(this.documento);
                 // servicio que crea el documento, sus detalles, sus formas de pago asociadas
                 // tambien cambia el saldo de la tabla deudas y el campo estado pasa a C en liquidacion y deudas si el nuevo saldo es 0
                 // this.lcargando.ctlSpinner(false);
@@ -1507,7 +1507,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
                 this.apiSrv.setRecDocumento(data).subscribe(
                   (res) => {
                     console.log(res);
-                    
+
                     this.documento = res['data'];
                     this.formReadOnly = true;
                     this.vmButtons[0].habilitar = true;
@@ -1541,12 +1541,12 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
                     });
                   }
                 );
-          
+
               } else {
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
               }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
@@ -1606,7 +1606,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
       })
 
       //this.toastr.info('No puede anular un Documento cobrado en dias previos');
-      //     
+      //
     }
     else
     {
@@ -1639,7 +1639,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
           "mes": Number(moment(this.documento.fecha).format('MM'))
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
               this.msgSpinner = 'Anulando documento...';
@@ -1651,7 +1651,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
               this.apiSrv.anularRecDocument(data).subscribe(
                 (res) => {
                   console.log(res);
-                  
+
                   this.documento = res['data'];
                   this.documento.fecha = res['data'].fecha.split(' ')[0];
                   this.formReadOnly = true;
@@ -1683,12 +1683,12 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
                   });
                 }
               );
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
@@ -1752,7 +1752,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     this.tieneSuperavit = false;
     this.anular = false;
     this.disabledAnular = true;
-   
+
 
     this.documento = {
       id_documento: null,
@@ -1786,7 +1786,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     window.open(environment.ReportingUrl + "rpt_tesoreria_recaudacion_titulos.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_doc=" + this.documento.id_documento, '_blank')
 
   }
-  
+
   onlyNumber(event): boolean {
     let key = event.which ? event.which : event.keyCode;
     if (key > 31 && (key < 48 || key > 57)) {
@@ -1803,7 +1803,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  expandModalTitulos() {    
+  expandModalTitulos() {
     // if (this.permissions.consultar == "0") {
     //   this.toastr.warning("No tiene permisos consultar Liquidaciones.", this.fTitle);
     // } else {
@@ -1937,8 +1937,8 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     }else{
       this.vmButtons[4].habilitar = true;
     }
-  
+
   }
- 
+
 
 }

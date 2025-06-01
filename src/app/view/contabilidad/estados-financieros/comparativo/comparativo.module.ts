@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ComparativoRoutingModule } from './comparativo.routing';
 import { ComparativoComponent } from './comparativo.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { CalendarModule } from 'primeng/calendar';
 
 
@@ -15,7 +15,7 @@ import { CalendarModule } from 'primeng/calendar';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     CalendarModule,
     ComparativoRoutingModule
   ]

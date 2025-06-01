@@ -67,7 +67,7 @@ export class ModalEstadoComponent implements OnInit {
         clase: "btn btn-danger boton btn-sm",
         habilitar: false,
       }
-      
+
     ]
 
     setTimeout(() => {
@@ -98,7 +98,7 @@ export class ModalEstadoComponent implements OnInit {
   }
 
   guardar(){
-    
+
     if(this.newData.estado == null){
       return this.toastr.info('Escoja un estado')
     }
@@ -111,7 +111,7 @@ export class ModalEstadoComponent implements OnInit {
         console.log(e);
         this.lcargando.ctlSpinner(false);
         this.modal.close();
-        this.commonVrs.modalCambioEstaIDP.next();
+        this.commonVrs.modalCambioEstaIDP.next(null);
       },
       (error)=>{
         this.toastr.info(error['message'])

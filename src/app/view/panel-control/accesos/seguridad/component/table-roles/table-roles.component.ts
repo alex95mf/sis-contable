@@ -110,7 +110,7 @@ export class TableRolesComponent implements OnInit {
         }
         console.log(this.guardarolT);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.toastr.info(error.error.message);

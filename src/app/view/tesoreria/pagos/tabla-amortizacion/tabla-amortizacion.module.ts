@@ -4,7 +4,7 @@ import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 
 import { TablaAmortizacionRoutingModule } from './tabla-amortizacion-rounting.module';
 import { ComponentModalBusquedaComponent } from './component-modal-busqueda/component-modal-busqueda.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     TablaAmortizacionRoutingModule,
     AppCustomModule,
     NgxCurrencyModule
-    
+
   ]
 })
 export class TablaAmortizacionModule { }

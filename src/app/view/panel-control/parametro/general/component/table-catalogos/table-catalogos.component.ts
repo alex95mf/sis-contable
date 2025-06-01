@@ -100,7 +100,7 @@ export class TableCatalogosComponent implements OnInit {
         this.commonVarServices.updPerm.next(false);
         this.validaDtUser = true;;
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
 
       }, error => {
@@ -110,7 +110,7 @@ export class TableCatalogosComponent implements OnInit {
         this.validaDtUser = true;
         this.guardarolT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
         
       });

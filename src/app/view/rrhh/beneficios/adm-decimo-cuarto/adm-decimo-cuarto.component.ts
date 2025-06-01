@@ -72,14 +72,14 @@ export class AdmDecimoCuartoComponent implements OnInit {
   cmb_region: any = 'Costa';
   cmb_region_temp: any;
   locality: any;
-  
-  lastRecord: number|null = null/* 
+
+  lastRecord: number|null = null/*
   lastRecord:any; */
   LoadOpcionDepartamento: any = false;
   dataDepartamentoResponseI: any
   ngDepartamentSelect: any;
   num_control: any
-  // campos para la fila de sumas totales 
+  // campos para la fila de sumas totales
   totalDiasTrab: any = 0
   totalGanado: any = 0
   totalDevengado: any = 0
@@ -100,8 +100,8 @@ export class AdmDecimoCuartoComponent implements OnInit {
   { value: 5, label: 'NO' },
 
   ]
-  /* 
-      {value: '6', label: 'MENSUALIZA'},  
+  /*
+      {value: '6', label: 'MENSUALIZA'},
       {value: '5', label: 'ACUMULA TODOS'}, */
   selectRegion = [
     { value: 'MENSUALIZA', valor: '', descripcion: '' },
@@ -253,7 +253,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
 
     try {
       this.mensajeSppiner = "Cargando Catalogos";
-      const response = await this.empleadoService.getCatalogs({ params: "'NOM_REGION'" }).toPromise<any>()
+      const response = await this.empleadoService.getCatalogs({ params: "'NOM_REGION'" }) as any
 
       this.selectRegion = response.data["NOM_REGION"];
       console.log(this.selectRegion);
@@ -276,7 +276,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
        this.getNumControl()
       }
 
-    
+
     }
   }
   metodoGlobal(evento: any) {
@@ -335,7 +335,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
       }else{
         this.btnExportExcel();
       }
-        
+
         //this.geenerarReporteDecimoExcel()
         break;
         case "GENERAR ORDEN":
@@ -361,7 +361,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
     if (this.departamento == null) { this.departamento = 0 }
     this.lcargando.ctlSpinner(true);
     let year;
-   
+
 
     let rango = this.selectRegion.find(item => item.valor === this.cmb_region);
     console.log("rango del seleccionado", rango);
@@ -1202,7 +1202,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
 
     let year;
-   
+
 
     let rango = this.selectRegion.find(item => item.valor === this.cmb_region);
     let mes = parseInt(rango.descripcion); //12;
@@ -1214,7 +1214,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
     year = this.select_anio;
     let Desde = (year - 1) + "0" + rango.descripcion //+ "12"
     let Hasta = year + "0" + (parseInt(rango.descripcion) - 1).toString(); //+ "11"
-    /*   let Desde = (year - 1 ) 
+    /*   let Desde = (year - 1 )
       let Hasta = year "11" */
 
 
@@ -1274,45 +1274,45 @@ export class AdmDecimoCuartoComponent implements OnInit {
      // this.vmButtons[7].habilitar = false
     });
 
-    /* 
-    
+    /*
+
         if(this.decimo_acumula_mensualiza == null){this.decimo_acumula_mensualiza = 0 }
         if(this.programa==undefined || this.programa=='') { this.fk_programa=0 }
         if(this.area==null) { this.area=0 }
         if(this.departamento==null) { this.departamento=0 }
-    
+
         this.lcargando.ctlSpinner(true);
         let year;
         let mes = 12;
-    
+
         // if(typeof this.select_anio !== "string"){
         //   year = this.select_anio;
         // }else{
         //   year = this.select_anio;
         // }
         year = this.select_anio;
-    
+
         let Desde = (year - 1 ) + "03"
         let Hasta = year + "02"
-    
-        
-    
+
+
+
         this.admDecimoCuartoService.getDecimoCuarto(1,year, mes, Desde, Hasta,this.fk_programa,this.area, this.ngDepartamentSelect,this.decimo_acumula_mensualiza).subscribe(res => {
           console.log(res);
-          
+
           this.decimocuarto = res;
           if(this.decimocuarto.length > 0){
-    
+
             this.vmButtons[0].habilitar = false
             this.vmButtons[1].habilitar = false
             this.vmButtons[2].habilitar = false
             this.vmButtons[4].habilitar = false
             this.vmButtons[5].habilitar = false
           }
-          
+
           this.lcargando.ctlSpinner(false);
-    
-         
+
+
         }); */
   }
 
@@ -1335,7 +1335,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
     let yearHasta;
     let mesHasta = Number(moment(this.fecha_hasta).format("MM"));
     yearHasta = Number(moment(this.fecha_hasta).format("YYYY"));
-    
+
     let Desde = String(year*100+mes)
     let Hasta = String(yearHasta*100+mesHasta)
 
@@ -1377,21 +1377,21 @@ export class AdmDecimoCuartoComponent implements OnInit {
 
     this.lcargando.ctlSpinner(false);
     this.vmButtons[4].habilitar = true
-   
+
     });
 
-    
+
   }
 
   async getPrevRecord() {
-    
+
     this.lastRecord = Number(this.lastRecord)- 1;
      this.getNumControl()
   //  await this.handleEnter({key: 'Enter'})
   }
 
   async getNextRecord() {
-    
+
     this.lastRecord = Number(this.lastRecord)+ 1;
      this.getNumControl()
    // await this.handleEnter({key: 'Enter'})
@@ -1406,7 +1406,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
     let respuesta;
     this.admDecimoCuartoService.getLatest(data).subscribe(
       res => {
-       
+
         respuesta = res;
         this.lastRecord = respuesta?.data?.id;
         if (respuesta.data.num_documento) {
@@ -1414,9 +1414,9 @@ export class AdmDecimoCuartoComponent implements OnInit {
           // this.getRolNoControl()
 
           this.getPorNoControl();
-        
+
         } else {
-       
+
           this.lcargando.ctlSpinner(false)
           Swal.fire('Registro Inexistente', 'El registro solicitado no existe. Intente otro identificador.', 'warning')
         }
@@ -1456,7 +1456,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
 
   geenerarReporteDecimo() {
     let year;
-   
+
     // if(typeof this.select_anio !== "string"){
     //   year = this.select_anio.getFullYear();
     // }else{
@@ -1508,15 +1508,15 @@ export class AdmDecimoCuartoComponent implements OnInit {
   generarTxt() {
     // armar array con cabeceras
     // this.downloadFile(
-    //   this.decimocuarto, 
-    //   'DecimoCuarto', 
+    //   this.decimocuarto,
+    //   'DecimoCuarto',
     //   ['nombres', 'porpagar', 'pagado', 'valor_pagar', 'nromesesprovision', 'periodoinicial', 'periodofinal']
     // )
     this.decimocuarto.forEach(e => {
       Object.assign(e, {
         apellidos: e.primer_apellido + ' ' + e?.segundo_apellido,
         nombres: e.primer_nombre + ' ' + e?.segundo_nombre,
-        
+
       });
 
       // if(e.fecha_jubilacion != '' || e.fecha_jubilacion != null){
@@ -1715,7 +1715,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
 
     // let Desde = (year - 1) + "0" + rango.descripcion //+ "12"
     // let Hasta = year + "0" + (parseInt(rango.descripcion) - 1).toString(); //+ "11"
-  
+
     let year;
     year = this.select_anio;
     let mes = Number(moment(this.fecha_desde).format("MM"));
@@ -1836,7 +1836,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
       anio: this.select_anio,
       mes: mes,
       tipo_decimo: 'DECIC',
-      empleados: empleadosCheck 
+      empleados: empleadosCheck
     }
     this.lcargando.ctlSpinner(true);
     this.admDecimoCuartoService.generarOrdenesPago(data).subscribe(res => {
@@ -1919,9 +1919,9 @@ export class AdmDecimoCuartoComponent implements OnInit {
       this.vmButtons[0].habilitar = true;
       this.vmButtons[2].habilitar = true;
       this.vmButtons[3].habilitar = true;
-     
+
     }
-   
+
   }
 
 

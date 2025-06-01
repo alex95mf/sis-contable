@@ -41,7 +41,7 @@ import { ModalPagosDetComponent } from './modal-pagos-det/modal-pagos-det.compon
 import { MatTableModule } from '@angular/material/table';
 import { FolderDigitalComponent } from './folder-digital/folder-digital.component';
 import { TableModule } from 'primeng/table';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ConsultaLotesComponent } from './consulta-lotes/consulta-lotes.component';
 import { DetalleInteresesComponent } from './detalle-intereses/detalle-intereses.component';
 
@@ -92,10 +92,10 @@ import { DetalleInteresesComponent } from './detalle-intereses/detalle-intereses
     AppCustomModule,
     MatTableModule,
     TableModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
   ],
   entryComponents: [
-    
+
   ]
 })
 

@@ -66,7 +66,7 @@ export class ConciliacionComponent implements OnInit {
   mensajeSppiner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
-  selectAllChecked: boolean = true; 
+  selectAllChecked: boolean = true;
 
 
   selected_anio: any;
@@ -108,7 +108,7 @@ export class ConciliacionComponent implements OnInit {
       {id: "A",name: "Activo"},
       {id: "I",name: "Inactivo"}
     ]
-    
+
 
 
 
@@ -132,7 +132,7 @@ export class ConciliacionComponent implements OnInit {
     }
 
     paginate:any = 0
-     
+
   constructor(
     private cslSrv: ConciliacionService,
     private commonServices: CommonService,
@@ -140,7 +140,7 @@ export class ConciliacionComponent implements OnInit {
     private cierremesService: CierreMesService,
     private router: Router,
     private modalSrv: NgbModal
-  ) { 
+  ) {
 
 
     this.cslSrv.movimientos$.subscribe(
@@ -163,7 +163,7 @@ export class ConciliacionComponent implements OnInit {
   }
 
   getPermisions() {
-    
+
     //this.selected_anio = moment(new Date()).format('YYYY');
     this.selected_anio = new Date();
     this.mes_actual = (Number(moment(new Date()).format('MM'))).toString();
@@ -206,7 +206,7 @@ export class ConciliacionComponent implements OnInit {
           nombre: 'SIN CONCILIAR',
           id: 2
         },
-        
+
       ]
 
       this.paginate = {
@@ -218,7 +218,7 @@ export class ConciliacionComponent implements OnInit {
 
 
     setTimeout(() => {
-      this.cargaInicial() 
+      this.cargaInicial()
       //this.lcargando.ctlSpinner(true);
     }, 50);
 
@@ -250,7 +250,7 @@ export class ConciliacionComponent implements OnInit {
 
     this.filtro_tipo = 0;
 
-    
+
 
   }
 
@@ -304,9 +304,9 @@ export class ConciliacionComponent implements OnInit {
     // this.filter.fecha_desde= primerDia;
     // this.filter.fecha_hasta = ultimoDia;
     // }
-    
-  } 
-  
+
+  }
+
 
   async cargaInicial() {
     try {
@@ -348,7 +348,7 @@ export class ConciliacionComponent implements OnInit {
 
   ChangeMesCierrePeriodos(evento: any) {
     const year = this.filter.periodo_movimiento;
-     this.mes_actual = evento; 
+     this.mes_actual = evento;
 
      if(evento == 0){
       const primerDia = new Date(year, 1 - 1, 1).toISOString().substring(0, 10);
@@ -411,7 +411,7 @@ console.log(moment(this.selected_anio).format('YYYY'))
         if(this.infoConciliacion[0].isactive === 1){
 
          // this.filtro_tipo = 1;
-          
+
           let data = {
             anio: moment(this.selected_anio).format('YYYY'),
             mes: this.mes_actual,
@@ -421,9 +421,9 @@ console.log(moment(this.selected_anio).format('YYYY'))
           }
           //console.log(this.infoConciliacion[0].estado)
           this.ObetenerSaldosBancoPeriodo(data);
-          
+
           this.ConsultaConciliacionMes();
-          
+
           this.vmButtons[1].habilitar = true;
           this.vmButtons[2].habilitar = true;
           //this.vmButtons[3].habilitar = false;
@@ -431,31 +431,31 @@ console.log(moment(this.selected_anio).format('YYYY'))
 
         }else{
 
-          this.ConsultaConciliacionMes();     
+          this.ConsultaConciliacionMes();
           this.vmButtons[1].habilitar = false;
           this.vmButtons[2].habilitar = false;
-        
+
         }
-        
-      
-        
+
+
+
       }else{
         //console.log('aqui 5')
         this.vmButtons[1].habilitar = false;
         this.vmButtons[2].habilitar = false;
-      
+
 
        // this.filtro_tipo = 0;
         this.ConsultaConciliacionMes();
 
       }
-     
+
     }, error => {
 
     });
 
 
-   
+
   }
 
 
@@ -481,13 +481,13 @@ console.log(moment(this.selected_anio).format('YYYY'))
     }
 
 
-   
+
     this.cslSrv.ObtenerConciliacion(data).subscribe(res => {
 
 
       //console.log( <DataConciliacion[]>res['data']);
       //console.log('aqui 7')
-      
+
       if(res['data'].length > 0){
         //console.log('aqui 8')
         //  console.log(data.cerrada)
@@ -523,7 +523,7 @@ console.log(moment(this.selected_anio).format('YYYY'))
       //console.log(res['data'].filter(e => e.conciliada == 'Si'));
       this.selectedDataConcilia = <DataConciliacion[]>res['data'].filter(e => e.conciliada == 'Si');
       console.log(this.selectedDataConcilia)
-     
+
       //console.log('aqui 12')
       localStorage.setItem('conciliation', JSON.stringify(this.infoDt));
       //console.log('aqui 13')
@@ -532,25 +532,25 @@ console.log(moment(this.selected_anio).format('YYYY'))
       this.infoDt = [];
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     });
-    
+
   }
 
 
   conultaListaConcliadas() {
     let yearDesde;
     let yearHasta;
-    
+
     let mesDesde = Number(moment(this.fecha_desde).format("MM"));
     yearDesde = Number(moment(this.fecha_desde).format("YYYY"));
 
     let mesHasta = Number(moment(this.fecha_hasta).format("MM"));
     yearHasta = Number(moment(this.fecha_hasta).format("YYYY"));
 
-    let Desde = String(yearDesde*100+mesDesde) 
-    let Hasta = String(yearHasta*100+mesHasta) 
+    let Desde = String(yearDesde*100+mesDesde)
+    let Hasta = String(yearHasta*100+mesHasta)
 
     let data = {
       fecha_desde: Desde,
@@ -650,7 +650,7 @@ console.log(moment(this.selected_anio).format('YYYY'))
   }
 
   actualizarFechaConciliacion() {
-   
+
     for (const inf of this.infoDt) {
       inf.fecha_conciliacion = this.filter.fecha_conciliacion;
     }
@@ -667,10 +667,10 @@ console.log(moment(this.selected_anio).format('YYYY'))
       let SaldoConciliado = ((typeof this.SaldoConciliado === 'number') ? this.SaldoConciliado : parseFloat(this.SaldoConciliado));
 
       let SaldoConcilia = 0;
-      
+
       if (SaldoECuenta != 0) {
-      
-      
+
+
           if(this.selectedDataConcilia.length > 0){
             this.vmButtons[1].habilitar = false;
             this.vmButtons[2].habilitar = false;
@@ -679,7 +679,7 @@ console.log(moment(this.selected_anio).format('YYYY'))
             if (data['debito'] > 0) SaldoConcilia += data['debito'] * 100
             else SaldoConcilia -=  data['credito'] * 100
           })
-    
+
           this.SaldoConciliado = SaldoConcilia / 100;
           this.saldo_bank_final = (SaldoConcilia / 100) + this.saldo_bank;
 
@@ -699,13 +699,13 @@ console.log(moment(this.selected_anio).format('YYYY'))
       let SaldoConciliado = ((typeof this.SaldoConciliado === 'number') ? this.SaldoConciliado : parseFloat(this.SaldoConciliado));
 
       let SaldoConcilia = 0;
-    
+
       if (SaldoECuenta != 0) {
           if(this.selectedDataConcilia.length > 0){
             this.vmButtons[1].habilitar = false;
             this.vmButtons[2].habilitar = false;
           }
-         
+
           this.selectedDataConcilia.forEach((data: any) => {
             if (data['debito'] > 0) SaldoConcilia += data['debito'] * 100
             else SaldoConcilia -=  data['credito'] * 100
@@ -718,7 +718,7 @@ console.log(moment(this.selected_anio).format('YYYY'))
       }
     }
   }
-  
+
   selectAll() {
     this.checkGlobal = !this.checkGlobal;
     if (this.checkGlobal) {
@@ -734,7 +734,7 @@ console.log(moment(this.selected_anio).format('YYYY'))
         this.validaDt = true;
         this.infoDt = JSON.parse(localStorage.getItem('conciliation'));
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       });
     }
@@ -753,7 +753,7 @@ console.log(moment(this.selected_anio).format('YYYY'))
     this.status_conciliaton = 0;
     this.infoDt = [];
 
-     
+
    // this.selected_anio = moment(new Date()).format('YYYY');
     this.selected_anio = new Date();
     this.mes_actual = (Number(moment(new Date()).format('MM'))).toString();
@@ -761,14 +761,14 @@ console.log(moment(this.selected_anio).format('YYYY'))
     this.bankSelectConsulta = 0;
     this.mes_actual_consulta = '0';
     this.EstadoCuenta = 0;
-  
+
 
     this.vmButtons[1].habilitar = false;
     this.vmButtons[2].habilitar = false;
 
    // this.rerender();
 
-    
+
 
   }
 
@@ -776,7 +776,7 @@ console.log(moment(this.selected_anio).format('YYYY'))
     // Extraer el año de la fecha
     //const anioFecha = fecha.getFullYear();
     const anioFecha = Number(moment(fecha).format('YYYY'))
-    
+
     // Comparar los años
     console.log(anio + '---'+anioFecha)
     return anio == anioFecha;
@@ -785,7 +785,7 @@ compararMesConFecha(mes: number, fecha: any): boolean {
   // Extraer el año de la fecha
   //const anioFecha = fecha.getFullYear();
   const mesFecha = Number(moment(fecha).format('MM'))
-  
+
   // Comparar los años
   console.log(mes + '---'+mesFecha)
   return mes == Number(mesFecha);
@@ -806,15 +806,15 @@ compararMesConFecha(mes: number, fecha: any): boolean {
       mensaje += 'No puede guardar sin registros seleccionados'
     }
     else if(this.selectedDataConcilia.length > 0){
-       
-     
+
+
       this.selectedDataConcilia.forEach( e =>{
 
          // Ejemplo de uso
          const anio = this.selected_anio.getFullYear(); // Año a comparar
          const fecha = e.fecha_conciliacion; // Fecha actual
 
-         const mes = this.mes_actual; 
+         const mes = this.mes_actual;
          console.log(this.compararAnioConFecha(anio, fecha) && this.compararMesConFecha(mes, fecha))
          if (this.compararAnioConFecha(anio, fecha) && this.compararMesConFecha(mes, fecha)) {
            //  console.log(`El año ${anio} es igual al año de la fecha.`);
@@ -822,23 +822,23 @@ compararMesConFecha(mes: number, fecha: any): boolean {
 
           mensaje += '* Debe colocar una fecha de banco que sea de período '+ this.selected_anio.getFullYear() + ' y el mes de '+  moment(this.mes_actual).format('MMMM')+' en la línea '+e.linea+'<br>'
         }
-         
+
       })
       // console.log(this.selectedDataConcilia)
       //   for (let index = 0; index < this.selectedDataConcilia.length; index++) {
       //     let anioBanco = moment(this.selectedDataConcilia[index].fecha_conciliacion).format('YYYY')
       //     let mesBanco = moment(this.selectedDataConcilia[index].fecha_conciliacion).format('MM')
-        
+
       //     if (moment(this.selectedDataConcilia[index].fecha_conciliacion).format('YYYY')!= this.selected_anio.getFullYear() && Number(moment(this.selectedDataConcilia[index].fecha_conciliacion).format('MM')) != this.mes_actual) {
       //       mensaje += '* Debe colocar una fecha de banco que sea de período '+ this.selected_anio.getFullYear() + ' y el mes de '+  moment(this.mes_actual).format('MMMM')+' en la línea '+this.selectedDataConcilia[index].linea+'<br>'
       //     }
 
       //     console.log(anioBanco[index] + '-'+this.selected_anio.getFullYear())
       //     console.log(Number(mesBanco[index])+ '-'+this.mes_actual)
-           
+
       //   }
     }
-    
+
 
     if (mensaje.length > 0) {
       this.toastr.warning(mensaje, 'Validacion de Datos', { enableHtml: true })
@@ -864,22 +864,22 @@ compararMesConFecha(mes: number, fecha: any): boolean {
             "mes": Number(moment(this.mes_actual).format('MM'))
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-             
+
               this.RegistrarBorradorConciliacion();
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
             })
-         
+
         }
       })
     }
@@ -944,8 +944,8 @@ compararMesConFecha(mes: number, fecha: any): boolean {
     this.filter.fecha_desde= primerDia;
     this.filter.fecha_hasta = ultimoDia;
     }
-    
-  } 
+
+  }
 
   onRowSelect(event) {
     console.log(event, ' aqui')
@@ -958,16 +958,16 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
     let SaldoConciliado = ((typeof this.SaldoConciliado === 'number') ? this.SaldoConciliado : parseFloat(this.SaldoConciliado));
 
     let SaldoConcilia = 0;
-    
+
     if (SaldoECuenta != 0) {
-     
+
       // if(SaldoConciliado < SaldoECuenta){
 
         if(this.selectedDataConcilia.length > 0){
           this.vmButtons[1].habilitar = false;
           this.vmButtons[2].habilitar = false;
         }
-  
+
         // Formatear numero a cosa rara
         /* for (let element of this.selectedDataConcilia) {
           let deb = element['debito'].toString().replace('$', '').replace(',', '');
@@ -982,7 +982,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
           if (data['debito'] > 0) SaldoConcilia += data['debito'] * 100
           else SaldoConcilia -=  data['credito'] * 100
         })
-  
+
         this.SaldoConciliado = SaldoConcilia / 100;
         this.saldo_bank_final = (SaldoConcilia / 100) + this.saldo_bank;
 
@@ -1008,16 +1008,16 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
     let SaldoConciliado = ((typeof this.SaldoConciliado === 'number') ? this.SaldoConciliado : parseFloat(this.SaldoConciliado));
 
     let SaldoConcilia = 0;
-    
+
     if (SaldoECuenta != 0) {
-     
+
       // if(SaldoConciliado < SaldoECuenta){
 
         if(this.selectedDataConcilia.length > 0){
           this.vmButtons[1].habilitar = false;
           this.vmButtons[2].habilitar = false;
         }
-  
+
         // Formatear numero a cosa rara
         /* for (let element of this.selectedDataConcilia) {
           let deb = element['debito'].toString().replace('$', '').replace(',', '');
@@ -1033,9 +1033,9 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
           else SaldoConcilia -=  data['credito'] * 100
         })
 
-        
-        
-  
+
+
+
         this.SaldoConciliado = SaldoConcilia / 100;
         this.saldo_bank_final = (SaldoConcilia / 100) + this.saldo_bank;
 
@@ -1072,7 +1072,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
           this.vmButtons[1].habilitar = false;
           this.vmButtons[2].habilitar = false;
         }
-  
+
         for (let element of this.selectedDataConcilia) {
           let deb = element['debito'].toString().replace('$', '').replace(',', '');
           if (parseFloat(deb) > 0) {
@@ -1082,7 +1082,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
             SaldoConcilia = SaldoConcilia - parseFloat(haber);
           }
         }
-  
+
         this.SaldoConciliado = SaldoConcilia;
         this.saldo_bank_final = SaldoConcilia - this.saldo_bank;
 
@@ -1113,7 +1113,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
   }
 
   isOutOfBlock(data) {
-   
+
     let resp = ((typeof this.EstadoCuenta === 'number') ? this.EstadoCuenta : parseFloat(this.EstadoCuenta))  === 0;
     if(!resp){
 
@@ -1139,7 +1139,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
   onRowUnselectConciliados(event) {
     console.log(event, ' UNSelected')
   }
-  
+
   dinamicoBotones(valor: any) {
 
     let value = valor.index + 1;
@@ -1230,22 +1230,22 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
             "mes": Number(moment(this.mes_actual).format('MM'))
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-             
+
               this.habilitarConciliation();
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
             })
-         
+
         }
       })
     }
@@ -1258,8 +1258,8 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
     let mensaje: string = '';
     if (this.permisions.editar == "0") {
       this.toastr.info("Usuario no tiene Permiso para modificar los registros");
-    } 
-    
+    }
+
     else if(this.infoDt.length > 0){
       this.selectedDataConcilia.forEach( e =>{
 
@@ -1267,7 +1267,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
         const anio = this.selected_anio.getFullYear(); // Año a comparar
         const fecha = e.fecha_conciliacion; // Fecha actual
 
-        const mes = this.mes_actual; 
+        const mes = this.mes_actual;
         console.log(this.compararAnioConFecha(anio, fecha) && this.compararMesConFecha(mes, fecha))
         if (this.compararAnioConFecha(anio, fecha) && this.compararMesConFecha(mes, fecha)) {
           //  console.log(`El año ${anio} es igual al año de la fecha.`);
@@ -1275,7 +1275,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
 
          mensaje += '* Debe colocar una fecha de banco que sea de período '+ this.selected_anio.getFullYear() + ' y el mes de '+  moment(this.mes_actual).format('MMMM')+' en la línea '+e.linea+'<br>'
        }
-        
+
      })
       // console.log(this.infoDt)
       //   for (let index = 0; index < this.infoDt.length; index++) {
@@ -1286,10 +1286,10 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
       //     if (anioBanco[index] != this.selected_anio.getFullYear() && Number(mesBanco[index]) != this.mes_actual) {
       //       mensaje += '* Debe colocar una fecha de banco que sea de período '+ this.selected_anio.getFullYear() + ' y el mes de '+  moment(this.mes_actual).format('MMMM')+' en la línea '+this.selectedDataConcilia[index].linea+'<br>'
       //     }
-           
+
       //   }
     }
-    
+
     if (mensaje.length > 0) {
       this.toastr.warning(mensaje, 'Validacion de Datos', { enableHtml: true })
       return;
@@ -1324,22 +1324,22 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
               "mes": Number(moment(this.mes_actual).format('MM'))
             }
               this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-              
+
               /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
-               
+
                 this.updateConciliation();
-          
+
               } else {
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
               }
-          
+
               }, error => {
                   this.lcargando.ctlSpinner(false);
                   this.toastr.info(error.error.mesagge);
               })
-            
+
           }
         })
 
@@ -1366,7 +1366,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
     this.cslSrv.habilitarConciliation(data).subscribe(res => {
 
       this.vmButtons[6].habilitar = false;
-     
+
       this.getTableConciliation();
       // this.disabledFields=false;
       // this.vmButtons[1].habilitar = false;
@@ -1404,12 +1404,12 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
     }
 
     this.cslSrv.saveConciliation(data).subscribe(res => {
-      
+
         localStorage.removeItem('conciliation');
         this.toastr.success(res['message']);
         this.lcargando.ctlSpinner(false);
         this.cancel();
-      
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
@@ -1539,7 +1539,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
     let cuenta = selected['cuenta_contable']
     let anio = selected['anio'];
     let mes = selected['mes'];
-  
+
       window.open(environment.ReportingUrl + "rpt_conciliacion_bancaria.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&id_banco="+id_banco +"&cuenta="+cuenta +"&anio="+anio +"&mes="+mes, '_blank');
     console.log(environment.ReportingUrl + "rpt_conciliacion_bancaria.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&id_banco="+id_banco +"&cuenta="+cuenta +"&anio="+anio +"&mes="+mes)
   }
@@ -1550,7 +1550,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
     let cuenta = selected['cuenta_contable']
     let anio = selected['anio'];
     let mes = selected['mes'];
-  
+
       window.open(environment.ReportingUrl + "rpt_conciliacion_bancaria_resumen.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&id_banco="+id_banco +"&cuenta="+cuenta +"&anio="+anio +"&mes="+mes, '_blank');
     console.log(environment.ReportingUrl + "rpt_conciliacion_bancaria_resumen.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&id_banco="+id_banco +"&cuenta="+cuenta +"&anio="+anio +"&mes="+mes)
   }
@@ -1563,11 +1563,11 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
         windowClass: "viewer-content-general",
       });
       modalInvoice.componentInstance.module_comp = myVarGlobals.fConciliacionBank;
-     
+
       modalInvoice.componentInstance.isNew = isNew;
       modalInvoice.componentInstance.data = data;
 
-      
+
 
   }
 
@@ -1581,14 +1581,14 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
         paginate: this.paginate
       }
     }
- 
+
     this.cslSrv.getMovimientoBancarios(data).subscribe(res => {
       console.log(res)
       //this.infoMovimientosBancarios =res['data']['data'][0];
       this.paginate.length = res['data']['data'].total;
       this.infoMovimientosBancarios = (res['data']['data'].current_page == 1) ? res['data']['data']: Object.values(res['data']['data'])
       this.lcargando.ctlSpinner(false);
-     
+
 
     }, (error) => {
       this.lcargando.ctlSpinner(false);
@@ -1597,7 +1597,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
     });
   }
 
-  
+
   actualizarConciliacion() {
 
     this.mensajeSppiner = "Verificando período contable";
@@ -1607,10 +1607,10 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
       "mes": Number(moment(this.mes_actual).format('MM'))
     }
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
-       
+
         this.mensajeSppiner = "Actualizando Conciliación...";
         this.lcargando.ctlSpinner(true);
         //this.filter.mes_actual_movimiento = Number( this.filter.mes_actual_movimiento)
@@ -1623,36 +1623,36 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
           //estado: conciliada
         }
 
-    
+
         this.cslSrv.actualizarConciliacion(data2).subscribe(res => {
           console.log(res)
           //this.infoMovimientosBancarios =res['data']['data'][0];
           //this.paginate.length = res['data']['data'].total;
           //this.infoMovimientosBancarios = (res['data']['data'].current_page == 1) ? res['data']['data']: Object.values(res['data']['data'])
           this.lcargando.ctlSpinner(false);
-        
+
 
         }, (error) => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.message);
           console.log(error);
         });
-  
+
       } else {
         this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
         this.lcargando.ctlSpinner(false);
       }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
       })
-   
+
   }
 
   convertirMes(evento){
 
-    let mes_letter = "" 
+    let mes_letter = ""
     switch (evento) {
       case 1: {
         mes_letter = "ENERO";
@@ -1713,7 +1713,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
     Object.assign(this.paginate, newPaginate);
     this.conultaMovimientoBancarios();
   }
- 
+
   showConciliacionBancaria(data?:any) {
     // console.log(data);
     // if (!isNew && this.permissions.consultar == "0") {
@@ -1730,8 +1730,8 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
       modalInvoice.componentInstance.data = data;
     //}
   }
-                                            
 
-  
+
+
 
 }

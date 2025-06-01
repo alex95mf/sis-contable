@@ -36,7 +36,7 @@ export class IngresosYDsctosEmpleadosService {
     let id_area = dataOption['id_area'];
     let id_departamento = dataOption['id_departamento'];
     let tipo_contrato = dataOption['tipo_contrato'];
-    
+
 
     return this.apiService.apiCall(`income-discounts-list-parameter?indc_anio=${indc_anio}&id_mes=${id_mes}&id_tipo_rubro=${id_tipo_rubro}&id_rubro=${id_rubro}&id_programa=${id_programa}&id_area=${id_area}&id_departamento=${id_departamento}&tipo_contrato=${tipo_contrato}`, "GETV1", {});
   }
@@ -75,7 +75,7 @@ export class IngresosYDsctosEmpleadosService {
   }
 
   getUltimoNumero(data: any = {}) {
-    return this.apiService.apiCall('income-discounts/ultimo-numero-control', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('income-discounts/ultimo-numero-control', 'POST', data) as any
   }
 
   getPeriodos(data: any = {}) {
@@ -98,9 +98,9 @@ export class IngresosYDsctosEmpleadosService {
   }
 
 
- 
 
-  
+
+
     // deleteArea(data){
   //   return this.apiService.apiCall(`areas/${data.id_area}`, 'DELETEV1', data);
   // }

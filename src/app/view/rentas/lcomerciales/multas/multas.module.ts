@@ -27,7 +27,7 @@ import { NgxCurrencyModule } from "ngx-currency";
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     MultasRoutingModule
   ]
 })

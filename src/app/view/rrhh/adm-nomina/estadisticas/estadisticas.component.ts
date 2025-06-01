@@ -53,14 +53,14 @@ export class EstadisticasComponent implements OnInit {
   async cargaInicial() {
     try {
       this.msgSpinner = 'Cargando Datos Iniciales'
-      const responseMes = await this.generalService.getCatalogoKeyWork('MES').toPromise<any>()
+      const responseMes = await this.generalService.getCatalogoKeyWork('MES') as any
       console.log(responseMes)
       responseMes.data.forEach((element: any) => {
         const {id_catalogo, cat_nombre} = element
         this.lst_meses = [...this.lst_meses, {id_catalogo, cat_nombre}]
       })
 
-      const responseTipo = await this.generalService.getCatalogoKeyWork('TPPM').toPromise<any>()
+      const responseTipo = await this.generalService.getCatalogoKeyWork('TPPM') as any
       console.log(responseTipo)
       responseTipo.data.forEach((element: any) => {
         const {id_catalogo, cat_nombre} = element
@@ -86,7 +86,7 @@ export class EstadisticasComponent implements OnInit {
       case "EXCEL":
         //
         break;
-    
+
       default:
         break;
     }
@@ -101,7 +101,7 @@ export class EstadisticasComponent implements OnInit {
     this.msgSpinner = 'Cargando Gráfico...'
     // // this.chartPie('pieChart', 'pie')
     Object.assign(this.filter, {fp_anio: new Date(this.filter.periodo).getFullYear()})
-    const response = await this.apiService.getFaltasPermisosEmployeesReportGrafi({filter: this.filter}).toPromise<any>()
+    const response = await this.apiService.getFaltasPermisosEmployeesReportGrafi({filter: this.filter}) as any
     // console.log(response)
     this.dataChart = []
     this.dataChart = response.data
@@ -136,8 +136,8 @@ export class EstadisticasComponent implements OnInit {
     })
   }
 
-   chartPie(ctx:string, tipo:string, lbls: any,dataValues: any){ 
-   
+   chartPie(ctx:string, tipo:string, lbls: any,dataValues: any){
+
     this.lcargando.ctlSpinner(false)
     return new Chart(ctx, {
       type: tipo,
@@ -260,7 +260,7 @@ export class EstadisticasComponent implements OnInit {
               fontColor: '#000',
               fontStyle: 'bold',
               minRotation: 45
-              
+
             },
           }],
           yAxes: [{
@@ -274,15 +274,15 @@ export class EstadisticasComponent implements OnInit {
               padding: 0,
               fontColor: '#000',
               fontStyle: 'bold',
-              
-              
+
+
             },
           }],
-          
+
         }
       }
     });
-   
+
 
   }
 

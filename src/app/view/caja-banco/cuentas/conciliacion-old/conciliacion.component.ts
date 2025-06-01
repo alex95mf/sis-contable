@@ -151,14 +151,14 @@ export class ConciliacionComponent implements OnInit {
       this.infoDt = res['data'];
       localStorage.setItem('conciliation', JSON.stringify(this.infoDt));
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.validaDt = true;
       this.infoDt = [];
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     });
   }
@@ -205,7 +205,7 @@ export class ConciliacionComponent implements OnInit {
         this.validaDt = true;
         this.infoDt = JSON.parse(localStorage.getItem('conciliation'));
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       });
     }

@@ -101,7 +101,7 @@ export class ReasignarUsuarioComponent implements OnInit {
     this.ticketEdit = JSON.parse(JSON.stringify(this.data));
     console.log(this.ticketEdit.estado)
     this.deshabilitar=true;
-    this.commonVarSrv.bandTrabTicket.next();
+    this.commonVarSrv.bandTrabTicket.next(null);
   }
   setTimeout(()=> {
     this.validaPermisos();

@@ -20,11 +20,11 @@ export class CatalogoService {
   }
 
   getArbol(data: any = {}) {
-    return this.apiServices.apiCall('catastro/get-tree', 'POST', data).toPromise<any>();
+    return this.apiServices.apiCall('catastro/get-tree', 'POST', data) as any;
   }
 
   getItemCatalogo(data: any = {}) {
-    return this.apiServices.apiCall('catastro/get-item-catalogo', 'POST', data).toPromise<any>()
+    return this.apiServices.apiCall('catastro/get-item-catalogo', 'POST', data) as any
   }
 
   setCatalogo(data: any = {}) {

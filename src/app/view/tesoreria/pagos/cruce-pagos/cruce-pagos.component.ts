@@ -36,7 +36,7 @@ standalone: false,
 export class CrucePagosComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild("print") print!: ElementRef;
-  
+
   fTitle = "Cruce de Pagos";
   msgSpinner: string;
   vmButtons: any = [];
@@ -76,7 +76,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
 
   formaPago: any = {
     nombre: '',
-    valor: '',    
+    valor: '',
   };
 
   entidadesFiltrada: any = [];
@@ -84,8 +84,8 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
   hayEntidad: boolean = false;
   entidad: any = {
     nombre: '',
-    valor: '',  
-    grupo: '',  
+    valor: '',
+    grupo: '',
   };
 
   emisoresFiltrada: any = [];
@@ -93,8 +93,8 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
   hayEmisor: boolean = false;
   emisor: any = {
     nombre: '',
-    valor: '',  
-    grupo: '',  
+    valor: '',
+    grupo: '',
   };
 
   documento: any = {
@@ -145,7 +145,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private apiSrv: CrucePagosService,
     private cierremesService: CierreMesService
-    ) { 
+    ) {
       this.commonVrs.selectContribuyenteCustom.asObservable().subscribe(
         (res) => {
           let n= 0;
@@ -159,23 +159,23 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
           else{
             this.mensaje = "El contribuyente no tiene convenios"
           }
-          
+
           this.cargarjuicios()
-        
+
           if(this.verifyRestore){
             this.restoreForm();
           }
           this.contribuyenteActive = res;
           this.titulosDisabled = false;
           this.vmButtons[3].habilitar = false;
-         
+
         }
       );
 
       this.commonVrs.modalFacturaCajaChica.asObservable().subscribe(
         (res) => {
           let n= 0;
-          
+
           // this.restoreForm();
 
           console.log(res);
@@ -208,7 +208,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
           }else{
             this.toastr.info('No se puede escoger la misma factura');
           }
-          
+
 
           this.calculationSaldo(res)
           // this.totalPago = +res.total + +res.superavit;
@@ -217,7 +217,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
 
           this.vmButtons[0].habilitar = false;
           this.vmButtons[1].habilitar = false;
-          this.vmButtons[2].habilitar = true;        
+          this.vmButtons[2].habilitar = true;
           this.vmButtons[3].habilitar = false;
           // this.vmButtons[4].habilitar = false;
           console.log('superavit '+res.superavit)
@@ -249,7 +249,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
 
       //   }
       // );
-      
+
 
       this.commonVrs.needRefresh.asObservable().subscribe(
         (res) => {
@@ -280,7 +280,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
           }else{
             this.toastr.info('No se puede escoger la misma Caja Chica')
           }
-          
+
           this.calculationCajaChica(res)
         }
       )
@@ -317,11 +317,11 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
           // <td> {{item.contribuyente?.razon_social}}  </td>
           // <td> {{item.fecha}}  </td>
           // <td> {{item.observacion}}  </td>
-          // <td *ngIf="item.estado == 'E'"> 
-          //     <i class="fas fa-circle text-warning"></i> Emitido 
+          // <td *ngIf="item.estado == 'E'">
+          //     <i class="fas fa-circle text-warning"></i> Emitido
           // </td>
-          // <td *ngIf="item.estado == 'A'"> 
-          //     <i class="fas fa-circle text-success"></i> Aprobado 
+          // <td *ngIf="item.estado == 'A'">
+          //     <i class="fas fa-circle text-success"></i> Aprobado
           // </td>
           // <td> {{item.subtotal}}  </td>
           // <td> {{item.total}}  </td>
@@ -352,7 +352,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
           this.formReadOnly = true;
           this.vmButtons[0].habilitar = true;
           this.vmButtons[1].habilitar = false;
-          this.vmButtons[2].habilitar = false;        
+          this.vmButtons[2].habilitar = false;
           this.vmButtons[3].habilitar = false;
 
 
@@ -363,7 +363,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
 
 
     ngOnDestroy() {
-      this.onDestroy$.next();
+      this.onDestroy$.next(null);
       this.onDestroy$.complete();
     }
 
@@ -376,7 +376,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     this.formaPago = 0;
     this.entidad = 0;
     this.emisor = 0;
-    
+
     this.vmButtons = [
       {
         orig: "btnsRenLiqCobro",
@@ -478,7 +478,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     }
   }
 
-  triggerPrint(): void {   
+  triggerPrint(): void {
     this.print.nativeElement.click();
   }
 
@@ -506,7 +506,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fTesRecTitulos,
       id_rol: this.dataUser.id_rol,
@@ -576,8 +576,8 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     else{
       window.open(environment.ReportingUrl + "rep_rentas_generico.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_liquidacion=" + dt.id_liquidacion + "&forma_pago=" + this.pagos[0].tipo_pago_lbl , '_blank')
     }
-    
-    
+
+
   }
 
 
@@ -636,26 +636,26 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
           this.emisores.push(f_pago);
         })
 
-        
+
 
         // res['data']['REC_DENOMINACION_DETALLE'].forEach(e => {
         //   if(e.grupo=="M"){
         //     let m = {
         //       denominacion: e.descripcion,
         //       cantidad: 0,
-        //       total_denominacion: 0,   
+        //       total_denominacion: 0,
         //     }
         //     this.monedasCat.push(m);
         //   }else if(e.grupo=="B"){
         //     let b = {
         //       denominacion: e.descripcion,
         //       cantidad: 0,
-        //       total_denominacion: 0,   
+        //       total_denominacion: 0,
         //     }
         //     this.billetesCat.push(b);
         //   }
         // })
-        this.lcargando.ctlSpinner(false);               
+        this.lcargando.ctlSpinner(false);
         this.getConceptos();
       },
       (err) => {
@@ -783,7 +783,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
               comentario: "",
               valor: e.total,
               saldo: e.deuda.saldo,
-              cobro: 0, 
+              cobro: 0,
               nuevo_saldo: 0,
               aplica: true,
               total: e.total,
@@ -797,7 +797,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
             //   comentario: "",
             //   valor: e.total,
             //   saldo: e.deuda.saldo,
-            //   cobro: 0, 
+            //   cobro: 0,
             //   nuevo_saldo: 0,
             //   aplica: true,
             //   total: e.total,
@@ -812,7 +812,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
                   monto_total: e.cuota.documento.total,
                   cobro: (+e.cuota.valor).toFixed(2),
                   plazo_maximo: e.cuota.fecha_plazo_maximo,
-                })              
+                })
               }
               else { // CUOTA INICIAL no tiene rec_documento_det
                 Object.assign(e, {
@@ -820,10 +820,10 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
                   monto_total: (+(+e.total*100 / +e.observacion)).toFixed(2),
                   cobro: (+e.total).toFixed(2),
                   plazo_maximo: e.resolucion_fecha,
-                })   
+                })
               }
             }
-        
+
             this.deudasBackup.push(e);
           }
         });
@@ -868,18 +868,18 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
         let cobro100 = +e.cobro * 100;
         cobroTotal += +cobro100;
       // }
-   
+
     });
 
- 
-    
+
+
     this.totalCobro = +cobroTotal / 100;
     // this.calcSaldoRestanteTotal();
     this.calcDifCobroPago();
-   
+
   }
 
-  
+
 
   // calcSaldoRestanteTotal() {
   //   let saldoResTotal = 0;
@@ -971,7 +971,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     let tipo = this.formaPago.valor;
     if (tipo=="CHEQUE" || tipo=="TRANSFERENCIA" || tipo=="DEPOSITO"){
       return tipo.substring(0,2)+' - '+ this.entidad.valor;
-    } else 
+    } else
     if (tipo=="TARJETA" || tipo=="DEBITO") {
       return (tipo=="TARJETA"?'T/C':'T/D')+' - '+this.emisor.valor;
     }
@@ -982,7 +982,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     let tipo = this.formaPago.valor;
     if (tipo=="CHEQUE" || tipo=="TRANSFERENCIA" || tipo=="DEPOSITO"){
       return this.entidad.nombre;
-    } else 
+    } else
     if (tipo=="TARJETA" || tipo=="DEBITO") {
       return this.emisor.nombre;
     }
@@ -999,7 +999,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     if ( (tipo=="CHEQUE" || tipo=="TRANSFERENCIA" || tipo=="DEPOSITO") && this.entidad==0){
       this.toastr.info("Debe seleccionar una Entidad para ésta forma de pago.")
       return ;
-    } else 
+    } else
     if ((tipo=="TARJETA" || tipo=="DEBITO") && (this.entidad==0 || this.emisor==0)){
       this.toastr.info("Debe seleccionar Entidad y Emisor para ésta forma de pago.")
       return ;
@@ -1045,7 +1045,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
       estado: "E"
     }
 
-    
+
     this.pagos.push(nuevo);
     this.vmButtons[0].habilitar=false;
   }
@@ -1070,7 +1070,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     this.emisor = 0;
     this.entidadesFiltrada = this.entidades.filter(e => e.grupo == event.valor);
     this.entidadDisabled = false;
-    
+
     if(event.valor == "GARANTIA" || event.valor == "FAVOR" || event.valor == "CRUCE CONVENIO" || event.valor == "NOTA CREDITO" || event.valor == "ANTICIPO PRECOBRADO"){
       this.expandPago = true;
     } else {
@@ -1109,9 +1109,9 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     for(let i=0;i<this.deudas.length;i++) {
       if (
         this.deudas[i].nuevo_saldo<0
-      ) {        
-        return true;         
-      } 
+      ) {
+        return true;
+      }
     }
     return false;
   }
@@ -1125,17 +1125,17 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     for(let i=0;i<this.pagos.length;i++) {
       if (
         this.pagos[i].tipo_pago=='EFECTIVO' && (this.pagos[i].cambio<0)
-      ) {        
+      ) {
         this.fila = +(i+1) +' - '+ this.pagos[i].tipo_pago_lbl;
         this.msjError = "El valor recibido no puede ser menor al valor que se está pagando en efectivo";
-        return true;         
+        return true;
       } else if (
         (this.pagos[i].tipo_pago=='GARANTIA' || this.pagos[i].tipo_pago=='FAVOR' || this.pagos[i].tipo_pago=='CRUCE CONVENIO' || this.pagos[i].tipo_pago=='NOTA CREDITO' || this.pagos[i].tipo_pago=='ANTICIPO PRECOBRADO') && (+this.pagos[i].valor>+this.pagos[i].saldo_max)
-      ) {       
-        this.fila = +(i+1) +' - '+ this.pagos[i].tipo_pago_lbl; 
+      ) {
+        this.fila = +(i+1) +' - '+ this.pagos[i].tipo_pago_lbl;
         this.msjError = "El valor a pagar no puede ser mayor al saldo restante en "+this.pagos[i].tipo_pago_lbl;
-        return true;         
-      } 
+        return true;
+      }
     }
     return false;
   }
@@ -1150,42 +1150,42 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     //   //   console.log(this.documento.superavit);
     //   //   if(+this.documento.superavit > 0) {
 
-    //   //     return false;  
-    //   //   }      
+    //   //     return false;
+    //   //   }
     //   // } else
     //    if (
-    //     this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO' 
-    //   ) {        
+    //     this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO'
+    //   ) {
     //     // this.fila = i+1;
     //     this.msjError = "El valor recibido no puede ser menor al valor que se está pagando en efectivo";
     //     console.log(this.documento.superavit);
     //     if(+this.documento.superavit > 0) {
 
-    //       return false;  
-    //     }       
+    //       return false;
+    //     }
     //   }
     // }
     // return true;
     for(let i=0;i<this.pagos.length;i++) {
       if(
-        this.pagos[i].tipo_pago=='GARANTIA' || this.pagos[i].tipo_pago=='FAVOR' || this.pagos[i].tipo_pago=='CRUCE CONVENIO' || this.pagos[i].tipo_pago=='NOTA CREDITO' || this.pagos[i].tipo_pago=='ANTICIPO PRECOBRADO' 
+        this.pagos[i].tipo_pago=='GARANTIA' || this.pagos[i].tipo_pago=='FAVOR' || this.pagos[i].tipo_pago=='CRUCE CONVENIO' || this.pagos[i].tipo_pago=='NOTA CREDITO' || this.pagos[i].tipo_pago=='ANTICIPO PRECOBRADO'
       ) {
         if(+this.difCobroPago!=0) {
 
-          return true;  
-        }      
-      } 
+          return true;
+        }
+      }
       // else
       //  if (
-      //   this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO' 
-      // ) {        
+      //   this.pagos[i].tipo_pago=='EFECTIVO' || this.pagos[i].tipo_pago=='CHEQUE' || this.pagos[i].tipo_pago=='TARJETA' || this.pagos[i].tipo_pago=='DEBITO' || this.pagos[i].tipo_pago=='TRANSFERENCIA' || this.pagos[i].tipo_pago=='DEPOSITO'
+      // ) {
       //   // this.fila = i+1;
       //   this.msjError = "El valor recibido no puede ser menor al valor que se está pagando en efectivo";
       //   console.log(this.documento.superavit);
       //   if(+this.documento.superavit > 0) {
 
-      //     return false;  
-      //   }       
+      //     return false;
+      //   }
       // }
     }
     return false;
@@ -1238,7 +1238,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
 
     return false;
   }
-  
+
   checkCuotasATPlazos() {
 
     let cuotas = this.cobros.cuotasAT;
@@ -1294,7 +1294,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
           "mes": Number(moment(this.documento.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-          
+
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
             this.msgSpinner = 'Guardando Cruce de pagos...';
@@ -1313,13 +1313,13 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
             //   formas_pago: [], // pagos
             //   fk_caja: 0, // caja activa al momento de cobrar
             // }
-    
+
             this.documento.tipo_documento = 'CRUZA';
             this.documento.subtotal = this.totalCobro;
             this.documento.total = this.totalCobro;
             this.documento.superavit = this.totalCobro;
             this.documento.saldo = this.difFactura;
-    
+
             this.deudas.map(
               (e)=>{
                 let doc_det = {
@@ -1336,13 +1336,13 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
                   // comentario: e.comentario,
                   // fk_concepto: e.fk_concepto,
                   codigo_concepto: '',
-    
+
                 }
-    
+
                 this.documento.detalles.push(doc_det);
               }
             )
-    
+
             this.pagos.map(
               (e)=>{
                 let pagos_det = {
@@ -1360,17 +1360,17 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
                   // comentario: e.comentario,
                   // fk_concepto: e.fk_concepto,
                   codigo_concepto: '',
-    
+
                 }
-    
+
                 this.documento.formas_pago.push(pagos_det);
               }
             )
-    
+
             let dato = {
               documento: this.documento
             }
-    
+
             console.log(dato);
             this.apiSrv.setCrucePAgos(dato).subscribe(
               (res)=>{
@@ -1407,18 +1407,18 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
                 this.lcargando.ctlSpinner(false);
               }
             )
-         
-      
+
+
           } else {
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
           }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
           })
-      
+
       }
     });
   }
@@ -1433,7 +1433,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
       return ;
     }else if(this.documento.fecha != hoy){
       this.toastr.info('No puede anular un Documento cobrado en dias previos');
-      return ;     
+      return ;
     }
 
     Swal.fire({
@@ -1456,7 +1456,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
         this.apiSrv.anularRecDocument(data).subscribe(
           (res) => {
             console.log(res);
-            
+
             this.documento = res['data'];
             this.documento.fecha = res['data'].fecha.split(' ')[0];
             this.formReadOnly = true;
@@ -1561,7 +1561,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
       formas_pago: [], // pagos
       fk_caja: 0, // caja activa al momento de cobrar
     }
-    
+
     this.mensaje = '';
     this.juicio_mensaje = '';
 
@@ -1575,7 +1575,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
   handleConcepto() {
     this.titulosDisabled = false;
   }
-  
+
   onlyNumber(event): boolean {
     let key = event.which ? event.which : event.keyCode;
     if (key > 31 && (key < 48 || key > 57)) {
@@ -1592,7 +1592,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  expandModalTitulos() {    
+  expandModalTitulos() {
     // if (this.permissions.consultar == "0") {
     //   this.toastr.warning("No tiene permisos consultar Liquidaciones.", this.fTitle);
     // } else {
@@ -1700,7 +1700,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
   expandModalCaja(){
     // console.log(this.formaPagoCCH);
     if(this.formaPagoCCH === 0) {
-      
+
       return this.toastr.info('Escoga el valor de Forma de pago')
     }
 

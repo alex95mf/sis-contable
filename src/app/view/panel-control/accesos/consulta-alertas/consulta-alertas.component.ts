@@ -31,7 +31,7 @@ standalone: false,
   .layout-news-active :host ::ng-deep .p-datatable tr > th {
       top: 7rem;
   }
-  
+
 `]
 })
 export class ConsultaAlertasComponent implements OnInit {
@@ -75,15 +75,15 @@ export class ConsultaAlertasComponent implements OnInit {
   ]
 
   constructor(
-    private toastr: ToastrService, 
-    private commonServices: CommonService, 
-    private apiService: ConsultaAlertasService, 
+    private toastr: ToastrService,
+    private commonServices: CommonService,
+    private apiService: ConsultaAlertasService,
     private xlsService: XlsExportService,
     private excelService: ExcelService,
     private router: Router,
     private modalService: NgbModal,
     private commonVarSrv :CommonVarService) {
-      
+
       this.commonVarSrv.selectUsuario.asObservable().subscribe(
         (res)=>{
           console.log(res)
@@ -95,10 +95,10 @@ export class ConsultaAlertasComponent implements OnInit {
             this.filter.id_usuario_recibe = res['data']['id_usuario'];
             this.filter.usuario_recibe = res['data']['usuario'];
           }
-         
+
         }
       )
-     
+
      }
 
   ngOnInit(): void {
@@ -117,7 +117,7 @@ export class ConsultaAlertasComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
     this.filter = {
       fecha_desde_envia: moment(this.firstday).format('YYYY-MM-DD'),
       fecha_hasta_envia: moment(this.lastday).format('YYYY-MM-DD'),
@@ -171,7 +171,7 @@ export class ConsultaAlertasComponent implements OnInit {
     /*this.mensajeSppiner = "Cargando Catalogos...";
     this.lcargando.ctlSpinner(true);*/
     this.apiService.getCatalogos(data).subscribe(
-     
+
       (res) => {
         console.log(res["data"]['TIPO_NOTIFICACION_ALERTA'])
         this.lcargando.ctlSpinner(false);
@@ -202,12 +202,12 @@ export class ConsultaAlertasComponent implements OnInit {
   cargarAlertas(){
     this.mensajeSppiner = 'Cargando...';
     this.lcargando.ctlSpinner(true);
-    
+
     let data= {
       params: {
         filter: this.filter,
         paginate: this.paginate,
-        
+
       }
     }
     this.apiService.getConsultaAlertas(data).subscribe(
@@ -221,7 +221,7 @@ export class ConsultaAlertasComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
       }
-      
+
   }
 
   ngOnDestroy(): void {
@@ -257,13 +257,13 @@ export class ConsultaAlertasComponent implements OnInit {
   //       this.validaDtBitacora = true;
   //       this.dataBitacoraAux = this.dataBitacora;
   //       setTimeout(() => {
-  //         this.dtTrigger.next();
+  //         this.dtTrigger.next(null);
   //       }, 50);
   //     }else{
   //       this.validaDtBitacora = true;
   //       this.dataBitacoraAux = this.dataBitacora.filter(us => us.id_usuario == this.userFilter);
   //       setTimeout(() => {
-  //         this.dtTrigger.next();
+  //         this.dtTrigger.next(null);
   //       }, 50);
   //     }
   //   });
@@ -272,11 +272,11 @@ export class ConsultaAlertasComponent implements OnInit {
 
   btnExportarExcel() {
 
-  
+
     this.mensajeSppiner = "Generando Archivo Excel...";
-    this.lcargando.ctlSpinner(true); 
-        
-       
+    this.lcargando.ctlSpinner(true);
+
+
          this.excelData = [];
          console.log(this.dataAlertas);
            Object.keys(this.dataAlertas).forEach(key => {
@@ -293,14 +293,14 @@ export class ConsultaAlertasComponent implements OnInit {
              filter_values['Acción'] = (this.dataAlertas[key].accion != null) ? this.dataAlertas[key].accion : "";
              filter_values['Estado'] = (this.dataAlertas[key].estado != null) ? this.dataAlertas[key].estado : "";
 
-            
+
              this.excelData.push(filter_values);
              this.lcargando.ctlSpinner(false);
            })
            this.exportAsXLSX();
-         
+
    }
-     
+
    exportAsXLSX() {
      this.excelService.exportAsExcelFile(this.excelData, 'Reporte Consulta de Alertas');
    }

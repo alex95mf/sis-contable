@@ -52,7 +52,7 @@ export class ShowDetailPaymentComponent implements OnInit {
       }
     };
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }
 

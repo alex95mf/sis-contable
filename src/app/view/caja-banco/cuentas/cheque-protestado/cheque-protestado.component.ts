@@ -62,20 +62,20 @@ export class ChequeProtestadoComponent implements OnInit {
   }
 
   metodoGlobal(evento: any) {
-    switch (evento.items.boton.texto) {     
-      case "BUSCAR": 
+    switch (evento.items.boton.texto) {
+      case "BUSCAR":
         this.rerender();
-      break; 
-      case "CANCELAR": 
+      break;
+      case "CANCELAR":
         this.cancelar();
       break;
       case "EXCEL":
         $('#tablaChqProt').DataTable().button( '.buttons-excel' ).trigger();
       break;
       case "IMPRIMIR":
-        $('#tablaChqProt').DataTable().button( '.buttons-print' ).trigger();       
+        $('#tablaChqProt').DataTable().button( '.buttons-print' ).trigger();
       break;
-    }   
+    }
   }
 
   cancelar(){
@@ -155,13 +155,13 @@ export class ChequeProtestadoComponent implements OnInit {
     });
   }
 
-  abrirModalClientes(){   
+  abrirModalClientes(){
     const dialogRef = this.confirmationDialogService.openDialogMat(VistaClientesComponent, {
       width: '1000px', height: 'auto',
       data: { titulo: "Listado de Clientes", tipoDocumento: 1, lEstado: this.vInputs.lEstado}
-      
+
     } );
- 
+
     dialogRef.afterClosed().subscribe(resultado => {
       console.log("resultado: ", resultado)
       if(resultado!=false && resultado!=undefined){
@@ -169,7 +169,7 @@ export class ChequeProtestadoComponent implements OnInit {
         this.vInputs.lIdCliente = resultado.id_cliente;
         this.rerender();
       }
-    }); 
+    });
   }
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
@@ -211,18 +211,18 @@ export class ChequeProtestadoComponent implements OnInit {
       lFechaHasta: this.validaciones.verSiEsNull(this.vInputs.lFechaHasta)==undefined? null: moment(this.vInputs.lFechaHasta).format('YYYY-MM-DD'),
       estado: this.validaciones.verSiEsNull(this.vInputs.lEstado)==undefined? "Cobrado": this.vInputs.lEstado
     }
-    
+
     this.lcargando.ctlSpinner(true);
-    this.chequeProtestadoService.obtenerCheques(filtros).subscribe((res:any) => {    
+    this.chequeProtestadoService.obtenerCheques(filtros).subscribe((res:any) => {
       console.log("obtenerCheques: ", res.data);
       this.lcargando.ctlSpinner(false);
       this.dataSource = res.data;
 
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
 
-      
+
     }, (error) => {
       this.lcargando.ctlSpinner(false);
     });
@@ -245,16 +245,16 @@ export class ChequeProtestadoComponent implements OnInit {
     const dialogRef = this.confirmationDialogService.openDialogMat(IngChqProtestadoComponent, {
       width: '1000px', height: 'auto',
       data: { titulo: "Ingreso de Cheque Protestado", datos: valor, lstMotivos: this.lstMotivos, lstCtas: this.lstCtas}
-      
+
     } );
- 
+
     dialogRef.afterClosed().subscribe(resultado => {
       console.log("resultado: ", resultado)
       if(resultado!=false && resultado!=undefined){
         this.seterarValoresImprimir(resultado);
         this.rerender();
       }
-    }); 
+    });
 
   }
 
@@ -264,15 +264,15 @@ export class ChequeProtestadoComponent implements OnInit {
     const dialogRef = this.confirmationDialogService.openDialogMat(InfoClienteComponent, {
       width: '1000px', height: 'auto',
       data: { titulo: "Información de Cliente", datos: valor, lstMotivos: this.lstMotivos, lstCtas: this.lstCtas}
-      
+
     } );
- 
+
     dialogRef.afterClosed().subscribe(resultado => {
       console.log("resultado: ", resultado)
       if(resultado!=false && resultado!=undefined){
 
       }
-    }); 
+    });
 
   }
 

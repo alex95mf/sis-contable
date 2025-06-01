@@ -180,14 +180,14 @@ export class ReporteQuotesComponent implements OnInit {
       }
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.validaDt = true;
       this.processing = true;
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.lcargando.ctlSpinner(false);
       this.vmButtons[1].habilitar = true;

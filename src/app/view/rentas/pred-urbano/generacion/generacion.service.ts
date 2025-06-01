@@ -40,7 +40,7 @@ export class GeneracionService {
   }
 
   getConceptoConfig(data: any = {}) {
-    return this.api.apiCall('concepto/obtener-concepto-filtro', 'POST', data).toPromise<any>();
+    return this.api.apiCall('concepto/obtener-concepto-filtro', 'POST', data) as any;
   }
 
   getConceptoDetalle(data: any = {}) {
@@ -74,6 +74,6 @@ export class GeneracionService {
   }
 
   getUltimoRegistro(data: any = {}) {
-    return this.api.apiCall('liquidacion/get-ultima-liquidacion', 'POST', data).toPromise<any>()
+    return this.api.apiCall('liquidacion/get-ultima-liquidacion', 'POST', data) as any
   }
 }

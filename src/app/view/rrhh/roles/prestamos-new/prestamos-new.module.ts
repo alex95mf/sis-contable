@@ -21,7 +21,7 @@ import { ModalConsultaPrestamosComponent } from './modal-consulta-prestamos/moda
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     MatTabsModule,
     PrestamosNewRoutingModule
   ],

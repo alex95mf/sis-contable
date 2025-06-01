@@ -56,7 +56,7 @@ export class ModalReporteCajaComponent implements OnInit {
       case "CERRAR":
         this.activeModal.close()
         break;
-    
+
       default:
         break;
     }
@@ -65,7 +65,7 @@ export class ModalReporteCajaComponent implements OnInit {
   async getRecibosCajaDia() {
     try {
       this.msgSpinner = 'Cargando datos de Caja'
-      const response = await this.apiService.getRecibosByDia({id_caja: this.caja.id_caja, fecha: this.fecha}).toPromise<any>()
+      const response = await this.apiService.getRecibosByDia({id_caja: this.caja.id_caja, fecha: this.fecha}) as any
       console.log(response)
       this.tbl_data = response.data
       this.calcDocumentos()
@@ -76,7 +76,7 @@ export class ModalReporteCajaComponent implements OnInit {
   }
 
   calcDocumentos() {
-    
+
     let total = 0;
     let totalEF = 0;
     let totalCH = 0;
@@ -131,10 +131,10 @@ export class ModalReporteCajaComponent implements OnInit {
             totalCH: r_totalCH,
             totalTC: r_totalTC,
             totalTR: r_totalTR,
-            totalTD: r_totalTD,          
-            totalGA: r_totalGA,          
-            totalVF: r_totalVF,          
-            totalND: r_totalND,          
+            totalTD: r_totalTD,
+            totalGA: r_totalGA,
+            totalVF: r_totalVF,
+            totalND: r_totalND,
             totalDE: r_totalDE,
             totalOtro: r_totalOtro,
           });
@@ -142,7 +142,7 @@ export class ModalReporteCajaComponent implements OnInit {
       })
 
       console.log(r)
-      
+
       if(r.tipo_documento=='CA') { // documentos cobro de caja
         if(!r.superavit || +r.superavit==0){ //cobro de caja sin superavit
           console.log('Caja sin superavit');
@@ -169,12 +169,12 @@ export class ModalReporteCajaComponent implements OnInit {
           // r.total = +r.superavit;
           console.log('Solo superavit');
         }
-      } 
+      }
       // else if(r.tipo_documento=='GA'){
       //   r.total -= (+r.totalGA + +r.totalVF);
       //   console.log('Garantia');
       // }
-      
+
       // if(r.tipo_documento == "CA"){
       //  let totalGF = (+(r.totalGA) + +(r.totalVF)) * 100;
       //  let resta = +(r.total * 100) - +totalGF;
@@ -196,12 +196,12 @@ export class ModalReporteCajaComponent implements OnInit {
 
     })
 
-    
+
     // aqui revisar si se deposita el efectivo recaudado o el efectivo fisico (es decir, se quedaria debiendo de la caja o la caja queda intacta)
 
     // this.caja_dia.total_efectivo_cierre_final = parseFloat((+this.caja_dia.total_efectivo_inicio + +this.totalEF).toFixed(2));
 
-    // this.sobraOFalta(); 
+    // this.sobraOFalta();
 
     // lo que se deposita es el total del efectivo mas cheque (+ sobrante si existe)
     // this.calcValoresDeposito(); // ya se calculan desde sobraOfalta
@@ -218,8 +218,8 @@ export class ModalReporteCajaComponent implements OnInit {
     const garantia = this.tbl_data.reduce((acc, curr) => acc + parseFloat(curr.totalGA), 0)
     const favor = this.tbl_data.reduce((acc, curr) => acc + parseFloat(curr.totalVF), 0)
     const n_debito = this.tbl_data.reduce((acc, curr) => acc + parseFloat(curr.totalND), 0)
-    const deposito = this.tbl_data.reduce((acc, curr) => acc + parseFloat(curr.totalDE), 0) 
-    const otros = this.tbl_data.reduce((acc, curr) => acc + parseFloat(curr.totalOtro), 0) 
+    const deposito = this.tbl_data.reduce((acc, curr) => acc + parseFloat(curr.totalDE), 0)
+    const otros = this.tbl_data.reduce((acc, curr) => acc + parseFloat(curr.totalOtro), 0)
 
     Object.assign(this.totales, {recaudacion, efectivo, cheque, t_credito, transferencia, t_debito, garantia, favor, n_debito, deposito, otros})
   }

@@ -43,7 +43,7 @@ export class ParametroCuentaComponent implements OnInit {
     setTimeout(() => {
       this.commonVarSrv.updPerm.next(true);
       this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
-      this.getTableCuenta();  
+      this.getTableCuenta();
     }, 10);
   }
 
@@ -54,7 +54,7 @@ export class ParametroCuentaComponent implements OnInit {
         break;
     }
   }
-  
+
   getTableCuenta() {
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -67,7 +67,7 @@ export class ParametroCuentaComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
     };
-  
+
     let data = {
       company_id: this.dataUser.id_empresa
     };
@@ -76,20 +76,20 @@ export class ParametroCuentaComponent implements OnInit {
         this.validaDt = true;
         this.dataDT = res['data'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.commonVarSrv.updPerm.next(false);
         }, 50);
       }, error => {
         this.validaDt = true;
         this.dataDT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.commonVarSrv.updPerm.next(false);
         }, 50);
         this.toastr.info(error.error.message);
       });
   }
-  
+
   setDataCuenta(dt) {
     this.commonVarSrv.paramsAccount.next(dt);
     this.dialogRef.close(false);

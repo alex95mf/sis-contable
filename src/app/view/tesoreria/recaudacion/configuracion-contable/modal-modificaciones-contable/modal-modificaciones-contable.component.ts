@@ -23,7 +23,7 @@ export class ModalModificacionesContableComponent implements OnInit {
 
   vmButtons: any;
 
-  
+
   tipo_pago: boolean = true
 
   tipoPagos: any[] = [];
@@ -83,7 +83,7 @@ export class ModalModificacionesContableComponent implements OnInit {
           this.data.codigo_presupuesto = res.data.codigo
           this.descripcion_presupuesto = res.data.descripcion_general
         }
-        
+
       }
     )
 
@@ -177,7 +177,7 @@ export class ModalModificacionesContableComponent implements OnInit {
       case 'CERRAR':
         this.modal.close();
         break;
- 
+
     }
   }
 
@@ -255,7 +255,7 @@ export class ModalModificacionesContableComponent implements OnInit {
         if (!this.new) {
           this.changeTipoPago(this.data.submodulo)
         }
-        
+
         this.lcargando.ctlSpinner(false);
       },
       (err) => {
@@ -284,7 +284,7 @@ export class ModalModificacionesContableComponent implements OnInit {
       this.lst_forma_pago = this.tipoDesembolso
       this.lbl_formapago = 'Tipo de Desembolso'
     }
-    
+
   }
 
   guardarNuevo(){
@@ -295,7 +295,7 @@ export class ModalModificacionesContableComponent implements OnInit {
         console.log(res);
         this.lcargando.ctlSpinner(false)
 
-        this.commonVarSrv.modalConfiguracionContable.next()
+        this.commonVarSrv.modalConfiguracionContable.next(null)
         this.modal.close()
       }
     )
@@ -309,7 +309,7 @@ export class ModalModificacionesContableComponent implements OnInit {
         console.log(res);
         this.lcargando.ctlSpinner(false)
 
-        this.commonVarSrv.modalConfiguracionContable.next()
+        this.commonVarSrv.modalConfiguracionContable.next(null)
         this.modal.close()
       }
     )
@@ -344,7 +344,7 @@ export class ModalModificacionesContableComponent implements OnInit {
 
     modal.componentInstance.validacionModal = true;
     modal.componentInstance.validar = valor;
-    
+
   }
 
 }

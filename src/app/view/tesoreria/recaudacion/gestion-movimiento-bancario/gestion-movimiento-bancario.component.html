@@ -57,7 +57,7 @@
                     <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
                     <thead class="thead-dark">
                         <tr class="text-center">
-                            <th style="width: 10%;">Movimiento</th>                            
+                            <th style="width: 10%;">Movimiento</th>
                             <th style="width: 10%;">Estado</th>
                             <th style="width: 10%;">Tipo Movimiento</th>
                             <th style="width: 10%;">Fecha Emision</th>
@@ -79,12 +79,12 @@
                                     <div class="col">
                                         {{dt.name_banks}}
                                     </div>
-                                    
-                                </div>                
+
+                                </div>
                                 <div class="row">
                                     <div class="col text-muted">{{dt.num_cuenta}}</div>
                                 </div>
-                                
+
                             </td>
                             <td *ngIf="dt.isactive  == 1" class="text-center">
                                 <i class="fas fa-circle text-success"></i> ACTIVO
@@ -122,4 +122,4 @@
     </app-button-radio-active>
 </div>
 
-<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="msgSpinner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>

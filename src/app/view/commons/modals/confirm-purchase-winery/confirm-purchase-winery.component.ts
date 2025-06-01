@@ -245,7 +245,7 @@ export class ConfirmPurchaseWineryComponent implements OnInit {
     this.bodegaCompSrv.saveConfirmation(data).subscribe(res => {
       this.toastr.success(res['message']);
       this.lcargando.ctlSpinner(false);
-      this.commonVarSrvice.refreshPurchases.next();
+      this.commonVarSrvice.refreshPurchases.next(null);
       this.dialogRef.close(false);
     }, error => {
       this.lcargando.ctlSpinner(false);

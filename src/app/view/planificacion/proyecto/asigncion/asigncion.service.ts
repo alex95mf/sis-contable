@@ -115,7 +115,7 @@ export class AsigncionService {
   }
 
   deleteBienes(data: any = {}) {
-    return this.apiServices.apiCall('planificacion/delete-bien', 'POST', data).toPromise<any>();
+    return this.apiServices.apiCall('planificacion/delete-bien', 'POST', data) as any;
   }
 
   getTareas(data: any = {}) {
@@ -146,7 +146,7 @@ export class AsigncionService {
   }
 
 deleteTarea(data: any = {}) {
-  return this.apiServices.apiCall('planificacion/delete-atribucion-tarea', 'POST', data).toPromise<any>()
+  return this.apiServices.apiCall('planificacion/delete-atribucion-tarea', 'POST', data) as any
 }
   // Legacy
   // getCatalogos(data) {
@@ -222,7 +222,7 @@ deleteTarea(data: any = {}) {
   enviarCorreos(data) {
     return this.apiServices.apiCall('planificacion/send-mail-bienes', 'POST', data);
   }
-  
+
   obtenerCatalogos(datos) {
     return this.apiServices.apiCall("proveedores/get-catalogo", "POST", datos);
   }

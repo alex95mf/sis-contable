@@ -7,7 +7,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 import {SkeletonModule} from 'primeng/skeleton';
 import {DividerModule} from 'primeng/divider';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ModalConsultaSubrogacionComponent } from './modal-consulta-subrogacion/modal-consulta-subrogacion.component';
 
 

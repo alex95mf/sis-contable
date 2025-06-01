@@ -11,7 +11,7 @@ import { ListVafavorComponent } from './list-vafavor/list-vafavor.component';
 import { ListNotaCreditoComponent } from './list-nota-credito/list-nota-credito.component';
 import { ListCruceConvenioComponent } from './list-cruce-convenio/list-cruce-convenio.component';
 import { ListAnticipoPrecobradoComponent } from './list-anticipo-precobrado/list-anticipo-precobrado.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     RecaudacionesEspeciesFiscalesRoutingModule,
   ]
 })

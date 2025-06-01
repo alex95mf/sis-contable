@@ -1,26 +1,26 @@
 import { Component, OnInit, ViewChild, HostListener, ViewChildren, QueryList, ViewEncapsulation } from '@angular/core';
 import { element } from 'protractor';
 import { navItems } from 'src/app/_nav';
-import { DefaultServices } from 'src/app/containers/default-layout/default-layout.services'; 
+import { DefaultServices } from 'src/app/containers/default-layout/default-layout.services';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from "ngx-cookie-service";
 import { ToastrService } from 'ngx-toastr';
 import 'sweetalert2/src/sweetalert2.scss';
 const Swal = require('sweetalert2');
-import { Socket } from 'src/app/services/socket.service'; 
-import { CommonService } from 'src/app/services/commonServices'; 
+import { Socket } from 'src/app/services/socket.service';
+import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import * as myVarGlobals from 'src/app/global';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EditPassComponent } from 'src/app/containers/default-layout/edit-pass/edit-pass.component'; 
-import { ConfirmationDialogService } from 'src/app/config/custom/confirmation-dialog/confirmation-dialog.service'; 
+import { EditPassComponent } from 'src/app/containers/default-layout/edit-pass/edit-pass.component';
+import { ConfirmationDialogService } from 'src/app/config/custom/confirmation-dialog/confirmation-dialog.service';
 
-  
+
 import { PerfectScrollbarDirective, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { AppSettings } from 'src/app/app.settings'; 
-import { Settings } from 'src/app/app.settings.model'; 
+import { AppSettings } from 'src/app/app.settings';
+import { Settings } from 'src/app/app.settings.model';
 import { rotate } from 'src/app/theme/utils/app-animation';
-import { MenuService } from 'src/app/theme/components/menu/menu.service'; 
+import { MenuService } from 'src/app/theme/components/menu/menu.service';
 import { ConfiguracionService } from './configuracion.service';
 import { Menu } from 'src/app/theme/components/menu/menu.model';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
@@ -39,15 +39,15 @@ standalone: false,
 export class ConfiguracionComponent implements OnInit {
 
    /*PLANTILLA */
-   @ViewChild('sidenav') sidenav:any;  
-   @ViewChild('backToTop') backToTop:any;  
+   @ViewChild('sidenav') sidenav:any;
+   @ViewChild('backToTop') backToTop:any;
    @ViewChildren(PerfectScrollbarDirective) pss: QueryList<PerfectScrollbarDirective>;
    public optionsPsConfig: PerfectScrollbarConfigInterface = {};
    public settings:Settings;
    public showSidenav:boolean = false;
    public showInfoContent:boolean = false;
    public toggleSearchBar:boolean = false;
-   private defaultMenu:string; //declared for return default menu when window resized 
+   private defaultMenu:string; //declared for return default menu when window resized
    public menus = ['Vertical', 'Horizontal'];
    public menuOption:string;
    public menuTypes = ['Por Defecto', 'Compácto', 'Mini'];
@@ -56,7 +56,7 @@ export class ConfiguracionComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems: any = [];
 
-  
+
   menuItemsHori:any=[];
   presentarHorizontal:boolean = false;
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
@@ -126,7 +126,7 @@ export class ConfiguracionComponent implements OnInit {
       this.user = this.dataUser.usuario;
 
       /* TODO: this.destroyInterval = setInterval(() => this.setActivityInterval(), 60000); */
-      // this.destroyInterval = setInterval(() => this.setActivityInterval(), 300000); 
+      // this.destroyInterval = setInterval(() => this.setActivityInterval(), 300000);
 
       this.commonSrv.onHandleNotification.asObservable().subscribe(res => {
         this.loadNotifications();
@@ -151,15 +151,15 @@ export class ConfiguracionComponent implements OnInit {
       this.settings.sidenavIsOpened = false;
       this.settings.sidenavIsPinned = false;
     }
-    this.menuOption = 'Vertical'; 
-    this.menuTypeOption = this.settings.menuType; 
+    this.menuOption = 'Vertical';
+    this.menuTypeOption = this.settings.menuType;
     this.defaultMenu = this.settings.menu;
     /* plantilla */
 
     setTimeout(() => {
-      this.chooseMenu();  
+      this.chooseMenu();
     }, 50);
-    
+
 
     this.showPassUser();
     this.services.getIpAddress().subscribe(res => {
@@ -209,7 +209,7 @@ export class ConfiguracionComponent implements OnInit {
       this.router.navigateByUrl('home');
     })
   }
-  
+
 
   /* notifications methods */
   loadNotifications() {
@@ -310,15 +310,15 @@ export class ConfiguracionComponent implements OnInit {
 
 
 
- 
-  
+
+
   public toggleSidenav(){
     this.sidenav.toggle();
   }
 
   public chooseMenu(){
      this.presentarHorizontal = false;
-    this.settings.menu = this.menuOption; 
+    this.settings.menu = this.menuOption;
     this.defaultMenu = this.menuOption;
     if(this.menuOption == 'Horizontal'){
       this.settings.fixedSidenav = false;
@@ -327,10 +327,10 @@ export class ConfiguracionComponent implements OnInit {
     }
     //this.router.navigate(['/']);
   }
-  
+
   // public chooseMenu(){
   //   this.presentarHorizontal = false;
-  //   this.settings.menu = this.menuOption; 
+  //   this.settings.menu = this.menuOption;
   //   this.defaultMenu = this.menuOption;
   //   if(this.menuOption == 'Horizontal'){
   //     this.settings.fixedSidenav = false;
@@ -343,9 +343,9 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   public changeTheme(theme){
-    this.settings.theme = theme;  
+    this.settings.theme = theme;
   }
-  
+
   public closeInfoContent(showInfoContent){
     this.showInfoContent = !showInfoContent;
   }
@@ -364,7 +364,7 @@ export class ConfiguracionComponent implements OnInit {
     }
   }
 
-  public onPsScrollY(event){   
+  public onPsScrollY(event){
     (event.target.scrollTop > 300) ? this.backToTop.nativeElement.style.display = 'flex' : this.backToTop.nativeElement.style.display = 'none';
   }
 
@@ -375,11 +375,11 @@ export class ConfiguracionComponent implements OnInit {
       }
     });
   }
-  
+
   public closeSubMenus(){
     if(this.settings.menu == "Vertical"){
       this.menuService.closeAllSubMenus();
-    }      
+    }
   }
 
   // MenuHorizontal() {
@@ -404,8 +404,8 @@ export class ConfiguracionComponent implements OnInit {
   //         title: element.nombre
   //       };
   //       menuArmado.push(menuPlus);
-  //     }); 
-       
+  //     });
+
   //     this.menuItemsHori = menuArmado;
   //     console.log(this.menuItemsHori)
   //     this.presentarFavorito = true;
@@ -416,13 +416,13 @@ export class ConfiguracionComponent implements OnInit {
   //   })
   // };
 
- 
+
 }
 
 // import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 // import { ToastrService } from 'ngx-toastr';
 // import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
-// import { ConfiguracionService } from './configuracion.service'; 
+// import { ConfiguracionService } from './configuracion.service';
 // import * as myVarGlobals from 'src/app/global';
 // import { CommonService } from 'src/app/services/commonServices';
 // import Swal from 'sweetalert2';
@@ -484,7 +484,7 @@ standalone: false,
 //       let response = await this.commonServices.getPermisionsGlobas({
 //         codigo: myVarGlobals.fUserProfile,
 //         id_rol: this.userData.id_rol,
-//       }).toPromise<any>()
+//       }) as any
 //       console.log(response);
 
 //       this.permissions = response.data[0]
@@ -551,8 +551,8 @@ standalone: false,
 //   public settings:Settings;
 
 //   public changeTheme(theme){
-//     this.settings.theme = theme;       
+//     this.settings.theme = theme;
 //   }
 
- 
+
 // }

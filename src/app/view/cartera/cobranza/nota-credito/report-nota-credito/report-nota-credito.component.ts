@@ -213,12 +213,12 @@ export class ReportNotaCreditoComponent implements OnInit {
       this.vmButtons[2].habilitar = true;
   } 
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }, error => {
     this.validaDt = true;
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
     this.toastr.info(error.error.message);
   });

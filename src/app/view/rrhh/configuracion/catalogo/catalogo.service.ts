@@ -11,18 +11,18 @@ export class CatalogoService {
   ) { }
 
   getArbolNomina = (data: any = {}) => {
-    return this.apiServices.apiCall('rrhh/get-catalogo-tree', 'POST', data).toPromise<any>()
+    return this.apiServices.apiCall('rrhh/get-catalogo-tree', 'POST', data) as any
   }
 
   getItemCatalogo = (id: number, data: any = {}) => {
-    return this.apiServices.apiCall(`rrhh/get-catalogo-item/${id}`, 'POST', data).toPromise<any>()
+    return this.apiServices.apiCall(`rrhh/get-catalogo-item/${id}`, 'POST', data) as any
   }
 
   setItemCatalogo = (data: any = {}) => {
-    return this.apiServices.apiCall('rrhh/set-catalogo-item', 'POST', data).toPromise<any>()
+    return this.apiServices.apiCall('rrhh/set-catalogo-item', 'POST', data) as any
   }
 
   updateItemCatalogo = (id: number, data: any = {}) => {
-    return this.apiServices.apiCall(`rrhh/put-catalogo-item/${id}`, 'POST', data).toPromise<any>()
+    return this.apiServices.apiCall(`rrhh/put-catalogo-item/${id}`, 'POST', data) as any
   }
 }

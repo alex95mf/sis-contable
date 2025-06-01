@@ -80,14 +80,14 @@ export class ShowInvoicesComponent implements OnInit {
       this.validaDt = true;
       this.dataDT = res['data'];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.commonVarSrvice.updPerm.next(false);
       }, 50);
     }, error => {
       this.validaDt = true;
       this.dataDT = [];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.commonVarSrvice.updPerm.next(false);
       }, 50);
       this.toastr.info(error.error.message);

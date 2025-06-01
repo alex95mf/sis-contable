@@ -7,7 +7,7 @@ import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component';
 import { ListLiquidacionesComponent } from './list-liquidaciones/list-liquidaciones.component';
 import { ModalContribuyentesComponent } from '../../pred-urbano/generacion/modal-contribuyentes/modal-contribuyentes.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ModalArriendosComponent } from './modal-arriendos/modal-arriendos.component';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { ModalArriendosComponent } from './modal-arriendos/modal-arriendos.compo
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     GeneracionCompraTerrenoRoutingModule,
   ]
 })

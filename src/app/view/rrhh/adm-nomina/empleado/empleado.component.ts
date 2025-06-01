@@ -20,7 +20,7 @@ import { DialogService } from "primeng/dynamicdialog";
 import { CcModalTableDepartamentoComponent } from "src/app/config/custom/modal-component/cc-modal-table-departamento/cc-modal-table-departamento.component";
 import { DepartemtAditionalI } from "src/app/models/responseDepartemtAditional.interface";
 import { DepartamentoResponseI } from "src/app/models/responseDepartamento.interface";
- import { CargoService } from "../../configuracion/cargo/cargo.service"; 
+ import { CargoService } from "../../configuracion/cargo/cargo.service";
 import { CargoResponseI } from "src/app/models/responseCargo.interface";
 //import Swal from "sweetalert2";
 import Swal from 'sweetalert2/dist/sweetalert2.js';
@@ -51,7 +51,7 @@ import { DocFicha, DocFichaAditionalResponseI } from 'src/app/models/responseDoc
 
 import { environment } from 'src/environments/environment';
 import { HistoryResponseI } from "src/app/models/responseHistory.interface";
-import { HistoryContractsResponseI } from "src/app/models/responseHistoryContacts.interface copy"; 
+import { HistoryContractsResponseI } from "src/app/models/responseHistoryContacts.interface copy";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ModelFamiliarComponent } from "./model-familiar/model-familiar.component";
 import { CommonVarService } from "src/app/services/common-var.services";
@@ -68,7 +68,7 @@ standalone: false,
 })
 export class EmpleadoComponent implements OnInit {
 
-  
+
   ////////////
   //inicio modal
   tieneFondo :boolean = false;
@@ -121,7 +121,7 @@ export class EmpleadoComponent implements OnInit {
   @ViewChild("nameNacionalidad") inputNacionalidad; // accessing the reference element
   @ViewChild("nameLocalidad") inputLocalidad; // accessing the reference element
   @ViewChild("nameJubilacion") inputJubilacion; // accessing the reference element
-  
+
   @ViewChild("nameRegion") inputRegion; // accessing the reference element
   @ViewChild("nameDireccion") inputDireccion; // accessing the reference element
   @ViewChild("nameCodigoBiometrico") inputCodigoBiometrico; // accessing the reference element
@@ -173,7 +173,7 @@ export class EmpleadoComponent implements OnInit {
   @Input() objCargasFamiliares: CargaFamiliarResponseI [] = [];
   @Input() objEducacionEmp: EducacionEmpleadoResponseI | any;
   @Input() objReferenciaEmp: ReferenciaEmpleadoResponseI | any;
- 
+
   // @Input() id_tipo_salario: any;
 
 
@@ -185,7 +185,7 @@ export class EmpleadoComponent implements OnInit {
   lgValorMarcaBiometrico:boolean = true;
   fechaActual:any;
   isDisableTipoPago:boolean = true;
-  
+
   timeout: any;
 
   dataCatalogoResponse: CatalogoResponseI;
@@ -196,7 +196,7 @@ export class EmpleadoComponent implements OnInit {
     path: "",
     detail:"",
     code: 0
-  
+
   }; */
 
   processing: any = false;
@@ -306,7 +306,7 @@ export class EmpleadoComponent implements OnInit {
   readonlyInputGenero : boolean;
   disabledCCEstado : boolean;
   disabledCCTipoDiscapacidad : boolean;
-  
+
   //Contactos
   readonlyInputTelefonoConvencional : boolean;
   readonlyInputCelular : boolean;
@@ -357,7 +357,7 @@ export class EmpleadoComponent implements OnInit {
   @ViewChild(PaginatorComponent, { static: false })
   paginatorComponent: PaginatorComponent;
 
-  
+
    /*folder digital */
 
    fileToUploadFolde: any;
@@ -379,7 +379,7 @@ export class EmpleadoComponent implements OnInit {
    @Input() objGetDocumentByEmployee: DocFicha[];
    @Input() objGetHistoryByEmployee: HistoryResponseI[];
    @Input() objGetHistoryByEmployeeContracts: HistoryContractsResponseI[];
-    
+
    folderDigitalForm: DocFicha = {
     full_nombre_empleado: '',
     nombre_archivo: '',
@@ -409,7 +409,7 @@ export class EmpleadoComponent implements OnInit {
   vmButtons: any = [];
   cmb_nacionalidad: any[] = [];
   cmb_localidad: any[] = [];
-  
+
   cmb_region: any[] = [];
   cmb_forma_pago: any = [];
   cmb_entidad: any = [];
@@ -631,7 +631,7 @@ totalSemanal: any = 0
   } */
 
 
-  idCargoEmpl :string|number= '0';  
+  idCargoEmpl :string|number= '0';
   ngOnInit(): void {
    this.fechaActual = moment()
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -656,7 +656,7 @@ totalSemanal: any = 0
           this.vmButtons = [];
           this.lcargando.ctlSpinner(false);
         } else {
-          
+
           this.imagenDefaultPerfil();
           this.cargarCatalogos();
 
@@ -678,14 +678,14 @@ totalSemanal: any = 0
       }
     );
 
-   
+
 
     this.registerForm = this.fb.group({
       full_nombre_empleado: [{ value: ''/* ,disabled: true */}, [Validators.required, Validators.minLength(1)]],
       fg_nombre_archivo_input: [{ value: ''/* ,disabled: true */}, [Validators.required]],
       fg_tipo_archivo: ['', [Validators.required]],
     });
-    
+
     this.formFichaEmpleado = this.fb.group({
       lgIdentificacion : [''],
       lgPrimerNombre : [''],
@@ -719,9 +719,9 @@ totalSemanal: any = 0
       lgSelectCargo : [''],
       lgJubilacion : [''],
       lgNacionalidad : [''],
-      
+
       lgLocalidad : [''],
-      
+
       lgRegion : [''],
       lgDireccion : [''],
       lgCodigoBiometrico : [''],
@@ -744,20 +744,20 @@ totalSemanal: any = 0
     });
 
     let today = new Date();
-    
+
     this.emp_fecha_nacimiento = moment().format('YYYY-MM-DD');
     this.fechajubilacion = null;
     //this.fechajubilacion = moment().format('YYYY-MM-DD');
     // this.emp_fecha_nacimiento.setDate(today.getDate());
     //this.emp_fecha_nacimiento.setDate(today.getDate()-30);
-    
+
 
     this.emp_fecha_ingreso = moment().format('YYYY-MM-DD');
     // this.emp_fecha_ingreso.setDate(today.getDate());
 
     this.readOnlyInputsTrueInitialTrue('yes');
     this.readOnlyInputsTrue();
-  
+
   }
 
   readOnlyInputsTrueInitialTrue(ptr){
@@ -838,7 +838,7 @@ this.tieneFondo = false
       this.dataLength = res['data'];
       if(this.dataLength[0]){
         for (let index = 0; index < this.dataLength[0].niveles; index++) {
-          this.lstNiveles.push(index+1);          
+          this.lstNiveles.push(index+1);
         }
       }
 
@@ -958,15 +958,15 @@ this.tieneFondo = false
   }
 
 
-  
+
   descargarContratoPdf(contrato){
     let tipo_contrato = contrato.catalogo?.cat_nombre;
     let id_tipo_contrato = contrato.catalogo?.id_catalogo;
     let id_emp_contrato = contrato.id_emp_contrato;
     let idEmpleado = this.empleadoForm?.id_empleado;
-  
 
-  
+
+
     if(tipo_contrato =='Contrato ocacionales'){
       window.open(environment.ReportingUrl + "rep_rrhh_contrato_serv_ocasionales.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&id_emp_contrato="+id_emp_contrato, '_blank');
     }
@@ -983,7 +983,7 @@ this.tieneFondo = false
     }
   }
 
- 
+
 
   async confirmSave(message, action) {
     Swal.fire({
@@ -1067,7 +1067,7 @@ this.tieneFondo = false
         this.inputNamePorcentajeValorQuincena.nativeElement.value??0,
       id_config_semanal: ((this.configuracion_semanal_id_cc === 0) || (this.configuracion_semanal_id_cc === '0') ) ? null : this.configuracion_semanal_id_cc,
       emp_fecha_ingreso:this.emp_fecha_ingreso, //formatDate(this.inputFechaIngreso.value,'yyyy-MM-dd',"en-US"), //this.dateToYMD(this.inputFechaNacimiento),
-      emp_fecha_cese: this.emp_fecha_cese, 
+      emp_fecha_cese: this.emp_fecha_cese,
 
       //    DATOS DE AFILIACION
       id_extension_conyuge: this.extension_conyuge_id_cc,
@@ -1081,7 +1081,7 @@ this.tieneFondo = false
       id_retenciones_judiciales: this.retenciones_judiciales_id_cc,
       // emp_codigo_trabajo:this.id_codigo_trabajo_cc,
       id_codigo_trabajo:this.id_codigo_trabajo_cc,
-    
+
 
       //- FOTO
       nombre_foto: this.namePhoto,
@@ -1101,7 +1101,7 @@ this.tieneFondo = false
       emp_valor_reeten_judicial:this.formFichaEmpleado.controls.lgValorReetenJudiacial.value,
       id_empresa:this.dataUser.id_empresa,
       familiares: this.objCargasFamiliares,
-      
+
       tienejubilacion: this.tienejubilacion,
       nacionalidad: this.nacionalidad,
       localidad:this.localidad,
@@ -1109,7 +1109,7 @@ this.tieneFondo = false
       direccion: this.direccion,
       id_codigo_biometrico: this.codigo_biometrico,
       marca_biometrico: this.marca_biometrico_id_cc,
-      
+
       // sld_anio: this.inputNadireccionmeAnio.nativeElement.value,
       // sld_anio: this.inputNameAnio.inputFieldValue,
       // id_mes: this.mes_id_cc,
@@ -1124,7 +1124,7 @@ this.tieneFondo = false
     this.empleadoService.saveFichaEmpleado(data).subscribe(
       (res: any) => {
         console.log(res)
-        
+
        // if (res.code == 200) {
         if (res) {
 
@@ -1275,7 +1275,7 @@ this.tieneFondo = false
       id_retenciones_judiciales: this.retenciones_judiciales_id_cc,
       id_codigo_trabajo: this.id_codigo_trabajo_cc,
       // emp_codigo_trabajo: this.id_codigo_trabajo_cc,
-      
+
       //- FOTO
       nombre_foto: this.namePhoto,
       extension: null,
@@ -1336,11 +1336,11 @@ this.tieneFondo = false
           if(error.error.errors['tipo_cuenta']){error.error.errors['tipo_cuenta'][0] = 'El campo tipo de cuenta es obligatorio cuando la forma de pago es TRANSFERENCIA <br> '}
 
           message += error.error.errors[e][0]+'<br>'
-          
-         
+
+
           })
         this.toastr.warning(message, 'Error de validación', {enableHtml: true});
-       
+
       }
     );
   }
@@ -1349,10 +1349,10 @@ this.tieneFondo = false
   LoadOpcionProvincia: any = false;
   LoadOpcionCiudad: any = false;
   LoadOpcionCargo: any = false;
-  // arrayCountry:CountrStatesCitiesResponseI | any; 
-  // arrayStates : StatesResponseI |any;   
-  // arrayCities : CitiesResponseI | any; 
-  arrayCargos : CargoResponseI | any; 
+  // arrayCountry:CountrStatesCitiesResponseI | any;
+  // arrayStates : StatesResponseI |any;
+  // arrayCities : CitiesResponseI | any;
+  arrayCargos : CargoResponseI | any;
 
 
   //***************************** */
@@ -1364,7 +1364,7 @@ this.tieneFondo = false
     if (responseId == 42) this.max_length_tipo_identificacion = 30;
 
     this.consultarCatalogo(this.tipo_identificacion_id_cc);
-    
+
     this.formFichaEmpleado
       .get("nameTipoIdentificacion")
       .setValue(this.tipo_identificacion_id_cc);
@@ -1402,7 +1402,7 @@ this.tieneFondo = false
     this.nivel_edu_id_cc = responseId;
     this.formFichaEmpleado.get("nameNivelEdu").setValue(this.nivel_edu_id_cc);
   }
- 
+
   viewSelectionSueldoVariableCC(responseId: any) {
     console.log(responseId)
     this.variable_id_cc = responseId;
@@ -1411,7 +1411,7 @@ this.tieneFondo = false
     }else{
       this.formFichaEmpleado.controls["lgValorVariable"].disable();
     }
-    
+
     // this.formFichaEmpleado.get("nameSueldoVariable").setValue(this.variable_id_cc);
   }
 
@@ -1423,7 +1423,7 @@ this.tieneFondo = false
   }
   viewSelectionTipoNominaPagoCC(responseId: any) {
 
-  
+
     this.tipo_nomina_pago_id_cc = responseId;
     console.log(this.tipo_nomina_pago_id_cc)
 
@@ -1452,9 +1452,9 @@ this.tieneFondo = false
       this.configuracion_semanal_id_cc = '0';
 
     }
-    
 
-    
+
+
 
     this.formFichaEmpleado
       .get("nameTipoNominaPago")
@@ -1475,7 +1475,7 @@ this.tieneFondo = false
       this.formFichaEmpleado.controls["lgNumeroCuenta"].disable();
       this.formFichaEmpleado.controls["lgTipoCuenta"].disable();
     }
-   
+
     this.formFichaEmpleado
     .get("nameTipoPago")
     .setValue(this.tipo_pago_id_cc);
@@ -1510,7 +1510,7 @@ this.tieneFondo = false
       //this.formFichaEmpleado.get("nameFechaCese").setValue('');
       this.emp_fecha_cese = null
     }
-    
+
     //this.disable_fecha_cese = responseId == 3
     // this.formFichaEmpleado.get("nameEstado").setValue(this.estado_id_cc);
   }
@@ -1539,7 +1539,7 @@ this.tieneFondo = false
   }
 
   viewSelectionCargoParameterCC(responseId: any) {
-  
+
     this.cargo_id_cc = responseId;
     this.formFichaEmpleado.get("nameCargoSession").setValue(this.cargo_id_cc);
   }
@@ -1602,7 +1602,7 @@ this.tieneFondo = false
       this.formFichaEmpleado.controls['lgValorReetenJudiacial'].disable();
       this.inputValorRetencionJudiacial.nativeElement.value = 0;
     }
-    
+
     // this.formFichaEmpleado.get("nameRetencionesJudiciales").setValue(this.retenciones_judiciales_id_cc);
   }
 
@@ -1724,11 +1724,11 @@ this.tieneFondo = false
     };
     this.empleadoService.getEducacionByEmpleado(parameterUrl).subscribe({
       next: (rpt: EducacionEmpleadoResponseI) => {
-       
+
         this.objEducacionEmp = rpt;
         console.log( this.objEducacionEmp)
         this.getHistoryByEmpleadoUno( ptr_id_empleado)
-        
+
         // console.log(this.objEducacionEmp);
         this.loadingEdu = false;
       },
@@ -1772,7 +1772,7 @@ this.tieneFondo = false
     };
     this.empleadoService.getPhotoByEmploye(parameterUrl).subscribe({
       next: (rpt: FotoEmpleadoResponseI) => {
-        
+
         // this.objCargasFamiliares = rpt;
         if (Object.entries(rpt).length != 0) {
           console.log(rpt)
@@ -1783,7 +1783,7 @@ this.tieneFondo = false
         }else{
           this.imagenDefaultPerfil();
         }
-        
+
       },
       error: (e) => {
         console.log(e);
@@ -1804,8 +1804,8 @@ this.tieneFondo = false
    */
   onClicConsultaSueldo() {
 
-   
-   
+
+
     this.ref = this.dialogService.open(CcModalTableSueldoComponent, {
       data: {
         search :  this.formFichaEmpleado.get('lgSueldo').value,
@@ -1852,9 +1852,9 @@ this.tieneFondo = false
       return false;
     }
     return true;
- 
+
  }
- 
+
 
 
   /**
@@ -1961,7 +1961,7 @@ this.tieneFondo = false
 
       //this.arrayCargos = await this.empleadoService.getCargosAsync(this.empleadoForm.id_departamento)
 
-      
+
       //FOTO DEL EMPLEADO
       this.getFotoEmpleado(this.empleadoForm.id_empleado);
       //EDUCACION DEL EMPLEADO
@@ -2001,13 +2001,13 @@ this.tieneFondo = false
       //DATOS EMPLEADO FOLDER DIGITAL
       this.folderDigitalForm.full_nombre_empleado = empleadoData.emp_full_nombre;
       this.folderDigitalForm.id_empleado = empleadoData.id_empleado;
-      
+
       // let emp_fecha_nacimiento =  new Date(empleadoData.emp_fecha_nacimiento)
-      // this.emp_fecha_nacimiento=  new Date(emp_fecha_nacimiento.getFullYear(),emp_fecha_nacimiento.getMonth(),emp_fecha_nacimiento.getDate() + 1); 
+      // this.emp_fecha_nacimiento=  new Date(emp_fecha_nacimiento.getFullYear(),emp_fecha_nacimiento.getMonth(),emp_fecha_nacimiento.getDate() + 1);
       this.emp_fecha_nacimiento = moment(empleadoData.emp_fecha_nacimiento).format('YYYY-MM-DD')
      this.fechajubilacion =  empleadoData.fechajubilacion ? moment(empleadoData.fechajubilacion).format('YYYY-MM-DD') : null;
       // let emp_fecha_ingreso =  new Date(empleadoData.emp_fecha_ingreso)
-      // this.emp_fecha_ingreso=  new Date(emp_fecha_ingreso.getFullYear(),emp_fecha_ingreso.getMonth(),emp_fecha_ingreso.getDate() + 1); 
+      // this.emp_fecha_ingreso=  new Date(emp_fecha_ingreso.getFullYear(),emp_fecha_ingreso.getMonth(),emp_fecha_ingreso.getDate() + 1);
 
 
 
@@ -2015,20 +2015,20 @@ this.tieneFondo = false
       this.emp_fecha_ingreso =  moment(empleadoData.emp_fecha_ingreso).format('YYYY-MM-DD')
 
 
-     
-     
 
-    
 
-      
+
+
+
+
 
 
       this.emp_fecha_cese = empleadoData.emp_fecha_cese ? moment(empleadoData.emp_fecha_cese).format('YYYY-MM-DD') : null
-      
+
       this.estado_civil_id_cc = empleadoData.id_estado_civil;
       this.genero_id_cc = empleadoData.id_genero;
       this.nivel_edu_id_cc = empleadoData.id_nivel_educativo;
-      
+
       this.tienejubilacion = empleadoData?.tienejubilacion;
       this.nacionalidad = empleadoData?.nacionalidad;
       this.localidad = empleadoData?.localidad;
@@ -2067,10 +2067,10 @@ this.tieneFondo = false
         this.formFichaEmpleado.controls["lgTipoCuenta"].disable();
       }
 
-     
 
-     
-     
+
+
+
 
       // SECCIÓN DE TRABAJO DEL EMPLEADO
       this.inputNameDepartamento.nativeElement.value =
@@ -2138,7 +2138,7 @@ this.tieneFondo = false
           empleadoData.emp_porcentaje_valor_quincena),
         (this.configuracion_semanal_id_cc = empleadoData.id_config_semanal),
         // emp_fecha_ingreso :  "12-01-2023",
-      
+
 
 
 
@@ -2153,7 +2153,7 @@ this.tieneFondo = false
       this.acu_fondo_reserva_id_cc = empleadoData.id_fondo_reserva_uno_dia;
       this.variable_id_cc = empleadoData.id_sueldo_variable;
 
-      
+
       // ---HR
       this.retenciones_judiciales_id_cc =empleadoData.id_retenciones_judiciales;
       this.inputValorRetencionJudiacial.nativeElement.value = empleadoData.emp_valor_reeten_judicial;
@@ -2164,30 +2164,30 @@ this.tieneFondo = false
       if(this.tipo_nomina_pago_id_cc === 75){
         this.isDisableTipoAnticipo = false;
         this.formFichaEmpleado.controls["lgValorPorcentajeAnticipo"].enable();
-  
+
         this.isDisableConfigSemanal = true;
         this.configuracion_semanal_id_cc = '0';
-  
+
       }else if (this.tipo_nomina_pago_id_cc === 73) {
-  
+
         this.isDisableConfigSemanal = false;
         this.isDisableTipoAnticipo = true;
         this.formFichaEmpleado.controls["lgValorPorcentajeAnticipo"].disable();
         this.inputNamePorcentajeValorQuincena.nativeElement.value = 0;
         this.tipo_anticipo_id_cc = '0';
-  
+
       }else{
         this.isDisableTipoAnticipo = true;
         this.formFichaEmpleado.controls["lgValorPorcentajeAnticipo"].disable();
         this.inputNamePorcentajeValorQuincena.nativeElement.value = 0;
         this.tipo_anticipo_id_cc = '0';
-  
+
         this.isDisableConfigSemanal = true;
         this.configuracion_semanal_id_cc = '0';
-  
+
       }
       // this.departamentoForm.area = info.area.are_descripcion;
-     
+
 
       // this.inputNameDepartamento.nativeElement.value = selectDepatamentOption.dep_nombre;
       // this.id_departamento = selectDepatamentOption.id_departamento;
@@ -2215,7 +2215,7 @@ this.tieneFondo = false
     // this.readOnlyInputsTrueInitialTrue('not');
     this.readOnlyInputsTrueInitialTrue("yes");
     this.disable_fecha_cese = true
-        
+
     this.empleadoForm.id_empleado = 0;
     // DATOS DEL EMPLEADO
     this.tipo_identificacion_id_cc = "0";
@@ -2330,7 +2330,7 @@ this.tieneFondo = false
 
     //tabla referencias familiares
     this.objReferenciaEmp = null;
-    
+
     this.actions = { btnGuardar: true, btnMod: false };
     this.vmButtons[0].habilitar = false;
     this.vmButtons[1].habilitar = false;
@@ -2344,8 +2344,8 @@ this.tieneFondo = false
 this.objGetDocumentByEmployee = []
 
 
-    
-   
+
+
   }
 
   // onNodeSelecting(id: any) {
@@ -2359,7 +2359,7 @@ this.objGetDocumentByEmployee = []
 
   async cedEvent(event: any) {
     let ident = event.target.value;
-    
+
     console.log(ident);
     if(ident==''){
       return this.messageService.add({key: 'tr', severity:'error', summary: 'Identificación', detail: 'LLenar campo Identificación.'});
@@ -2375,7 +2375,7 @@ this.objGetDocumentByEmployee = []
           }
           this.toastr.info(this.dataResponseGeneral.detail);
           // setTimeout(() => {
-          //   // this.dtTrigger.next();
+          //   // this.dtTrigger.next(null);
           // }, 50);
         },
         error: (e) => {
@@ -2457,7 +2457,7 @@ this.objGetDocumentByEmployee = []
         // console.log(this.catalogos);
       });
   }
-  
+
   catalogosNE: CatalogoResponseI;
   catalogsNivelEducacionSelectOptionTable(){
     this.generalService
@@ -2480,14 +2480,14 @@ this.objGetDocumentByEmployee = []
       });
   }
 
- 
-  
+
+
   onAddNewReferenciaEmpleado()
   {
      //validar q no se pueda agregar mas filas si mas referencias empleados
      if(this.objReferenciaEmp!=undefined){
       let valores = Object.values(this.objReferenciaEmp);
-   
+
       for(let i=0; i< valores.length; i++){
         if(valores[i]['tipo_referencia_id']=='0' || valores[i]['tipo_referencia_id']==0){
           this.messageService.add({key: 'bc', severity:'error', summary: 'Faltan campos', detail: 'LLenar campo tipo referencia.'});
@@ -2508,7 +2508,7 @@ this.objGetDocumentByEmployee = []
       "tipo_referencia": undefined,
       "estado": undefined
     };
-    
+
     if(this.objReferenciaEmp !== undefined && this.objReferenciaEmp !== null ){
       this.objReferenciaEmp = [ dataReferencia, ...this.objReferenciaEmp];
     }
@@ -2516,8 +2516,8 @@ this.objGetDocumentByEmployee = []
     if(this.objReferenciaEmp == undefined){
     this.objReferenciaEmp = [dataReferencia];
     }
-    
- 
+
+
      //REFERENCIA EMPLEADO
     //  refencia: [
     //   /*  {
@@ -2560,7 +2560,7 @@ this.objGetDocumentByEmployee = []
             this.objReferenciaEmp.splice(index, 1);
           }
         }
-        
+
       }
     });
 
@@ -2594,7 +2594,7 @@ this.objGetDocumentByEmployee = []
             this.objCargasFamiliares.splice(index, 1);
           }
         }
-        
+
       }
     });
 
@@ -2628,13 +2628,13 @@ this.objGetDocumentByEmployee = []
             this.objGetDocumentByEmployee.splice(index, 1);
           }
         }
-        
+
       }
     });
 
 
   }
-  
+
 
   deleteOneDataBaseReferencia(id_emp_referencia, index){
     this.loading = true;
@@ -2649,7 +2649,7 @@ this.objGetDocumentByEmployee = []
     this.empleadoService.deleteOneReferecnia(data)
       .subscribe({
         next: (rpt:any /*  GeneralResponseI */) => {
-      
+
           this.messageService.add({key: 'bc', severity:'success', summary: 'Confirmado', detail: 'Referencia empleado borrado correctamente.'});
 
           if ( index !== -1 ) {
@@ -2659,7 +2659,7 @@ this.objGetDocumentByEmployee = []
 
           this.loading = false;
 
-        
+
         },
         error: (e) => {
           console.log(e.data);
@@ -2683,7 +2683,7 @@ this.objGetDocumentByEmployee = []
     this.empleadoService.deleteOneCarga(data)
       .subscribe({
         next: (rpt:any /*  GeneralResponseI */) => {
-      
+
           this.messageService.add({key: 'bc', severity:'success', summary: 'Confirmado', detail: 'Carga familiar del empleado borrada correctamente.'});
 
           if ( index !== -1 ) {
@@ -2693,7 +2693,7 @@ this.objGetDocumentByEmployee = []
 
           this.loading = false;
 
-        
+
         },
         error: (e) => {
           console.log(e.data);
@@ -2716,7 +2716,7 @@ this.objGetDocumentByEmployee = []
     this.empleadoService.deleteOneDocumentoDigital(data)
       .subscribe({
         next: (rpt:any /*  GeneralResponseI */) => {
-      
+
           this.messageService.add({key: 'bc', severity:'success', summary: 'Confirmado', detail: 'Documento digital borrado correctamente.'});
 
           if ( index !== -1 ) {
@@ -2725,7 +2725,7 @@ this.objGetDocumentByEmployee = []
           this.getHistoryByEmpleadoUno(this.empleadoForm.id_empleado);
           this.loading = false;
 
-        
+
         },
         error: (e) => {
           console.log(e.data);
@@ -2738,20 +2738,20 @@ this.objGetDocumentByEmployee = []
 
   /**
    * select de referencia
-   * @param $data 
+   * @param $data
    */
   onSelectOptionTipoReferencia($data, data_row_ref)
   {
-    
+
     const id_referencia = $data.target.value;
 
     data_row_ref.tipo_referencia_id = id_referencia;
-    
+
 
     // this.objReferenciaEmp.tipo_referencia_id=id_referencia;
     if(this.catalogos!=undefined){
       let valores = Object.values(this.catalogos);
-   
+
       for(let i=0; i< valores.length; i++){
         if(valores[i]['id_catalogo']==id_referencia){
           // this.objReferenciaEmp.tipo_referencia = valores[i];
@@ -2761,13 +2761,13 @@ this.objGetDocumentByEmployee = []
         }
       }
     }
-   
-    // console.log(this.objReferenciaEmp); 
-   
+
+    // console.log(this.objReferenciaEmp);
+
   }
 
   saveEditDataReferencia(data){
- 
+
     console.log("guardar o editar referencia");
     let mensaje = "";
     if(data.id_emp_referencia ==0 && data.id_empleado == 0){
@@ -2794,12 +2794,12 @@ this.objGetDocumentByEmployee = []
         this.execSaveOrUpdateOneReferencia(data,mensaje);
       }
     });
-    
+
     // console.log(data.id_emp_referencia, data.id_empleado, mensaje);
   }
 
   execSaveOrUpdateOneReferencia(dataRefEmp,mensaje){
-    
+
     let idEmpleado = this.empleadoForm.id_empleado==0?dataRefEmp.id_empleado:this.empleadoForm.id_empleado;
     this.loading = true;
     let data = {
@@ -2820,7 +2820,7 @@ this.objGetDocumentByEmployee = []
     this.empleadoService.saveOrUpdateOneReferencia(data)
       .subscribe({
         next: (rpt:any /*  GeneralResponseI */) => {
-      
+
           this.getReferenciaEmpleado(idEmpleado);
           this.messageService.add({key: 'bc', severity:'success', summary: 'Confirmado', detail: 'Referencia empleado. '+mensaje});
 
@@ -2831,7 +2831,7 @@ this.objGetDocumentByEmployee = []
 
           this.loading = false;
 
-        
+
         },
         error: (e) => {
           console.log(e.data);
@@ -2851,7 +2851,7 @@ this.objGetDocumentByEmployee = []
     //validar q no se pueda agregar mas filas si mas referencias empleados
     if(this.objEducacionEmp!=undefined){
       let valores = Object.values(this.objEducacionEmp);
-    
+
       for(let i=0; i< valores.length; i++){
         if(valores[i]['nivel_educacion_id']=='0' || valores[i]['nivel_educacion_id']==0){
           this.messageService.add({key: 'bc', severity:'error', summary: 'Faltan campos', detail: 'Llenar campo Nivel Educación.'});
@@ -2873,7 +2873,7 @@ this.objGetDocumentByEmployee = []
       "nivel_educacion": undefined,
       "estado": undefined,
     };
-    
+
     if(this.objEducacionEmp !== undefined && this.objEducacionEmp !== null ){
       this.objEducacionEmp = [ dataReferencia, ...this.objEducacionEmp];
     }
@@ -2910,13 +2910,13 @@ this.objGetDocumentByEmployee = []
             this.objEducacionEmp.splice(index, 1);
           }
         }
-        
+
       }
     });
   }
 
 
-  
+
   deleteOneDataBaseEducacion(id_emp_educacion, index){
     this.loadingEdu = true;
     let data = {
@@ -2930,7 +2930,7 @@ this.objGetDocumentByEmployee = []
     this.empleadoService.deleteOneEducacion(data)
       .subscribe({
         next: (rpt:any /*  GeneralResponseI */) => {
-      
+
           this.messageService.add({key: 'bc', severity:'success', summary: 'Confirmado', detail: 'Educación empleado borrado correctamente.'});
 
           if ( index !== -1 ) {
@@ -2940,7 +2940,7 @@ this.objGetDocumentByEmployee = []
 
           this.loadingEdu = false;
 
-        
+
         },
         error: (e) => {
           console.log(e.data);
@@ -3000,7 +3000,7 @@ this.objGetDocumentByEmployee = []
   // }
 
   saveOrUpdateOneEducacion(dataRefEmp,mensaje){
-    
+
     let idEmpleado = this.empleadoForm.id_empleado==0?dataRefEmp.id_empleado:this.empleadoForm.id_empleado;
     this.loadingEdu = true;
     let data = {
@@ -3022,7 +3022,7 @@ this.objGetDocumentByEmployee = []
     this.empleadoService.saveOrUpdateOneEducacion(data)
       .subscribe({
         next: (rpt:any /*  GeneralResponseI */) => {
-      
+
           this.getEducacionEmpleado(idEmpleado);
           this.messageService.add({key: 'bc', severity:'success', summary: 'Confirmado', detail: 'Educación empleado. '+mensaje});
 
@@ -3034,7 +3034,7 @@ this.objGetDocumentByEmployee = []
 
           this.loadingEdu = false;
 
-        
+
         },
         error: (e) => {
           console.log(e.data);
@@ -3045,7 +3045,7 @@ this.objGetDocumentByEmployee = []
     });
   }
   // updateCargaFamiliar(dataRefEmp){
-    
+
   //   let idEmpleado = this.empleadoForm.id_empleado==0?dataRefEmp.id_empleado:this.empleadoForm.id_empleado;
   //   this.loadingEdu = true;
   //   let data = {
@@ -3071,7 +3071,7 @@ this.objGetDocumentByEmployee = []
   //   this.empleadoService.modificarFamiliar(idEmpleado,data)
   //     .subscribe({
   //       next: (rpt:any /*  GeneralResponseI */) => {
-      
+
   //         this.getCargaFamiliares(idEmpleado);
   //         this.messageService.add({key: 'bc', severity:'success', summary: 'Confirmado', detail: 'Carga familiar actualizada con éxito. '});
 
@@ -3097,12 +3097,12 @@ this.objGetDocumentByEmployee = []
     console.log($data);
     console.log(data_row_ref);
     const id_educacion = $data.target.value;
-    
+
     data_row_ref.nivel_educacion_id = id_educacion;
-    
+
     if(this.catalogosNE!=undefined){
       let valores = Object.values(this.catalogosNE);
-   
+
       for(let i=0; i< valores.length; i++){
         if(valores[i]['id_catalogo']==id_educacion){
           return data_row_ref.nivel_educacion = valores[i];
@@ -3114,12 +3114,12 @@ this.objGetDocumentByEmployee = []
   {
     console.log(data_row_ref);
     const nombre_carga = $data.target.value;
-    
+
     data_row_ref.relacion = nombre_carga;
-    
+
     if(this.catalogosRECA!=undefined){
       let valores = Object.values(this.catalogosNE);
-   
+
       for(let i=0; i< valores.length; i++){
         if(valores[i]['cat_nombre']==nombre_carga){
           return data_row_ref.relacion = valores[i];
@@ -3138,8 +3138,8 @@ this.objGetDocumentByEmployee = []
       id_empleado: ptr_id_empleado,
       page:  this.pageIndex ,
       size: this.rows,//event.rows,
-      sort: 'id_doc_ficha', 
-      type_sort: 'asc' 
+      sort: 'id_doc_ficha',
+      type_sort: 'asc'
     };
     console.log(parameterUrl);
     this.objGetDocumentByEmployee = []
@@ -3166,8 +3166,8 @@ this.objGetDocumentByEmployee = []
       id_empleado: ptr_id_empleado,
       page:  this.pageIndex ,
       size: 100,//event.rows,
-      sort: 'id', 
-      type_sort: 'asc' 
+      sort: 'id',
+      type_sort: 'asc'
     };
     console.log(parameterUrl);
     this.empleadoService.getHistoryByEmployee(parameterUrl).subscribe({
@@ -3192,8 +3192,8 @@ this.objGetDocumentByEmployee = []
       id_empleado: ptr_id_empleado,
       page:  this.pageIndex ,
       size: 100,//event.rows,
-      sort: 'id_emp_contrato', 
-      type_sort: 'asc' 
+      sort: 'id_emp_contrato',
+      type_sort: 'asc'
     };
     console.log(parameterUrl);
     this.empleadoService.getHistoryContactsByEmployee(parameterUrl).subscribe({
@@ -3206,7 +3206,7 @@ this.objGetDocumentByEmployee = []
         const ultimoContrato=this.objGetHistoryByEmployeeContracts[this.objGetHistoryByEmployeeContracts.length - 2]
        this.ultimoCese = this.objGetHistoryByEmployeeContracts[this.objGetHistoryByEmployeeContracts.length - 2]['fecha_cese'];
        console.log("this.ultimoCese",this.ultimoCese);
-  
+
 // Asigna valores a las fechas (ejemplos)
 this.fechaActual = moment();  // Fecha de hoy
 this.ultimoCese = moment(this.ultimoCese);  // Fecha de cese (ejemplo)
@@ -3261,7 +3261,7 @@ if ( superaAnios >= 12 ){
   defaultFechaModificacion($fModif)
   {
     if($fModif) return $fModif;
-    
+
     return '-';
   }
 
@@ -3287,7 +3287,7 @@ if ( superaAnios >= 12 ){
     this.folderDigitalForm.tipo_archivo_id =  responseId;
     this.registerForm.get("fg_tipo_archivo").setValue(this.tipo_archivo_id_cc);
   }
-  
+
   handleSelectTipoArchivo(event: any) {
     this.tipo_anticipo_id_cc = event.id_catalogo
     this.folderDigitalForm.tipo_archivo_id = event.id_catalogo
@@ -3300,9 +3300,9 @@ if ( superaAnios >= 12 ){
   }
 
   dinamicoBotones(e){
-    console.log(e) 
+    console.log(e)
     var index = e;
-    
+
     if (index === 3) {
 
       this.vmButtons[0].showimg = false;
@@ -3346,7 +3346,7 @@ if ( superaAnios >= 12 ){
     if (this.registerForm.invalid) { return; }
     this.confirmSaveFolder("Seguro desea actualizar el documento?", "UPDATED_FOLDER_DIGITAL");
   }
-  
+
   async validaDeleteFolderDigital() {
     this.confirmSaveFolder(
       "Seguro desea eliminar el documento?",
@@ -3488,7 +3488,7 @@ if ( superaAnios >= 12 ){
 
 
   deleteFolderDigital() {
-   
+
     let data = {
       // info: this.areaForm,
       ip: this.commonService.getIpAddress(),
@@ -3501,13 +3501,13 @@ if ( superaAnios >= 12 ){
     this.lcargando.ctlSpinner(true);
     this.empleadoService.deleteFolderDigital(data).subscribe(
       (res) => {
-     
+
         this.cancelFolder("not");
         this.messageError = [];
         this.getDocumentoByEmpleadoUno(this.folderDigitalForm.id_empleado);
         this.lcargando.ctlSpinner(false);
         this.toastr.success("Borrado" /* res['message'] */);
-        
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -3517,7 +3517,7 @@ if ( superaAnios >= 12 ){
           this.toastr.error(element.toString());
         });
         this.messageError = [];
-       
+
       }
     );
   }
@@ -3528,13 +3528,13 @@ if ( superaAnios >= 12 ){
     return local.toJSON();
   }
 
-  
+
   async cargarCatalogos() {
     this.lcargando.ctlSpinner(true);
-    
+
     try {
       this.mensajeSppiner = "Cargando Catalogos";
-      const response = await this.empleadoService.getCatalogs({params: "'PAIS','BANCO','TIPO CUENTA','NOM_LOCALIDAD','NOM_REGION'"}).toPromise<any>()
+      const response = await this.empleadoService.getCatalogs({params: "'PAIS','BANCO','TIPO CUENTA','NOM_LOCALIDAD','NOM_REGION'"}) as any
       console.log(response)
       this.cmb_nacionalidad = response.data["PAIS"];
       this.cmb_entidad = response.data["BANCO"];
@@ -3556,7 +3556,7 @@ if ( superaAnios >= 12 ){
 
   cancelFolder($notDeleteParameter) {
 
-    this.submitted = false; 
+    this.submitted = false;
     if($notDeleteParameter == 'yes'){
       this.folderDigitalForm.id_empleado = 0;
       this.folderDigitalForm.full_nombre_empleado = '';
@@ -3592,13 +3592,13 @@ if ( superaAnios >= 12 ){
     if(this.tipo_discapacidad_id_cc== 87){
     //this.formFichaEmpleado.get("lgPorcentajeDiscapacidad").setValue('');
     this.inputNamePorcentajeDiscapacidad.nativeElement.value = '';
-    
+
     }//this.formFichaEmpleado.controls["lgPorcentajeDiscapacidad"].value() = '';
   }
 
   handleFileInputFichaEmpleado(file: FileList) {
-   
- 
+
+
     // Convertir en base 64
     this.fileToUpload = file[0];
     console.log(file[0])
@@ -3608,15 +3608,15 @@ if ( superaAnios >= 12 ){
     reader.onload = async (event: any) => {
           this.fileBase64 = event.target.result;
           this.nameFile = this.fileToUpload.name;
-          
+
           this.folderDigitalForm.archivo_base_64 = event.target.result;
-          
+
           this.folderDigitalForm.nombre_archivo = this.fileToUpload.name;
           this.registerForm.get('fg_nombre_archivo_input').setValue( this.fileToUpload.name);
           this.folderDigitalForm.extension =  this.fileToUpload.name.split('.').pop();
           this.folderDigitalForm.peso_archivo =  this.fileToUpload.size;
 
-     
+
 
     };
     reader.readAsDataURL(this.fileToUpload);
@@ -3654,7 +3654,7 @@ if ( superaAnios >= 12 ){
 
  // modalFamiliar(edit: boolean,data: any){
     modalFamiliar(){
-    
+
 
     const modal = this.modal.open(ModelFamiliarComponent,{
 			size: "lg",
@@ -3705,8 +3705,8 @@ if ( superaAnios >= 12 ){
     this.empleadoService.generarContratoEmpleado(data).subscribe(
       (res: any) => {
         console.log(res)
-        
-        
+
+
           this.toastr.success(
             "Contrato de Empleado generado correctamente."
           );
@@ -3800,6 +3800,6 @@ if ( superaAnios >= 12 ){
     this.jornadaParcialPermanente = event.target.checked
   }
 
- 
+
 
 }

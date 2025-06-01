@@ -99,9 +99,9 @@ export class IngresoBodegaComponent implements OnInit {
   fk_bodega: any;
   nombreBodega: any;
 
-  id_ordenes: any = 0; 
-  num_orden: any = '';  
-  valor_orden: any = 0;  
+  id_ordenes: any = 0;
+  num_orden: any = '';
+  valor_orden: any = 0;
 
   /*productos*/
   dataProducto = [];
@@ -297,8 +297,8 @@ export class IngresoBodegaComponent implements OnInit {
         }
 
         if(res.tipo=='CAT'){
-       
-          
+
+
           this.valor_orden = res['data']['valor_orden']
           if (res['data']['solicitud']['administrador'] != null) {
             this.adminCompras = res['data']['solicitud']['administrador']['emp_full_nombre']
@@ -316,7 +316,7 @@ export class IngresoBodegaComponent implements OnInit {
           this.num_orden = res['data']['num_orden']
           this.valor_orden = res['data']['valor']
 
-        
+
 
              //this.dataOrder = res['detalles']
         this.dataOrder = res['data']['solicitud']['detalles'];
@@ -396,7 +396,7 @@ export class IngresoBodegaComponent implements OnInit {
           this.dataOrder = res['solicitud'][0]['detalles'];
           console.log(this.dataOrder)
         }
-        
+
         // let pagoTotalApro = 0;
         // //let pagoTotalSolicitud = 0;
         // this.dataOrder.forEach(e => {
@@ -410,7 +410,7 @@ export class IngresoBodegaComponent implements OnInit {
         // this.totalValorAprobado = pagoTotalApro
 
 
-       
+
 
         // this.dataOrder = res.solicitud === null ? [] : res.solicitud.detalles
         console.log(res['estado']);
@@ -459,11 +459,11 @@ export class IngresoBodegaComponent implements OnInit {
         if (res.solicitud.length > 0) {
           pagoTotalSoli = res.solicitud[0].detalles.reduce((acc, curr) => acc + parseFloat(curr.precio_cotizado), 0)
           pagoTotalApro = res.solicitud[0].detalles.reduce((acc, curr) => acc + parseFloat(curr.precio_aprobado), 0)
-         
+
           // this.dataOrder = res.solicitud[0].detalles
 
           // this.dataOrder.forEach(e => {
-          //   pagoTotalSoli += +e.precio_cotizado; 
+          //   pagoTotalSoli += +e.precio_cotizado;
           // });
         }
         this.totalValorSolicitud = pagoTotalSoli
@@ -558,7 +558,7 @@ export class IngresoBodegaComponent implements OnInit {
 
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -885,14 +885,14 @@ export class IngresoBodegaComponent implements OnInit {
           }, 500);
         }
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           // this.lcargando.ctlSpinner(false);
         }, 50);
       }, error => {
         this.validaDtOrder = true;
         this.dataOrder = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           //this.lcargando.ctlSpinner(false);
         }, 50);
       });
@@ -1237,7 +1237,7 @@ export class IngresoBodegaComponent implements OnInit {
         this.codigo_grupo = "";
         this.totalValorItems = 0;
         this.totalValorSolicitud = 0;
-        this.commonVarSrvice.clearAnexos.next()
+        this.commonVarSrvice.clearAnexos.next(null)
       }
     });
   }
@@ -1274,7 +1274,7 @@ export class IngresoBodegaComponent implements OnInit {
       //  else if (this.ingresoDepartamento == undefined || this.ingresoDepartamento == "") {
       //   this.toastr.info("Ingrese un departamento");
 
-      // } 
+      // }
       else if (this.tipoIngreso == undefined || this.tipoIngreso == "") {
         this.toastr.info("Ingrese un tipo de ingreso");
         // document.getElementById("txobserva").focus();
@@ -1316,12 +1316,12 @@ export class IngresoBodegaComponent implements OnInit {
           //   this.toastr.info("Ingrese un valor de referencia");
           //   flag = true
           //   // document.getElementById("txobserva").focus();
-          // } 
+          // }
           // if (this.num_partida == undefined || this.num_partida == "") {
           //   this.toastr.info("Ingrese un numero de partida");
           //   flag = true
           //   // document.getElementById("txobserva").focus();
-          // } 
+          // }
           if (this.numProceso == undefined || this.numProceso == "") {
             this.toastr.info("Ingrese un numero de proceso");
             flag = true
@@ -1331,7 +1331,7 @@ export class IngresoBodegaComponent implements OnInit {
           //   this.toastr.info("Ingrese un objeto del proceso");
           //   flag = true
           //   // document.getElementById("txobserva").focus();
-          // } 
+          // }
           else if (this.tipoProceso == undefined || this.tipoProceso == "") {
             this.toastr.info("Ingrese un tipo de proceso");
             flag = true
@@ -1508,7 +1508,7 @@ export class IngresoBodegaComponent implements OnInit {
       "mes": Number(moment(this.fechaDocumento).format('MM'))
     }
       this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
         this.mensajeSppiner = "Guardando ingreso...";
@@ -1516,7 +1516,7 @@ export class IngresoBodegaComponent implements OnInit {
         let prefict = this.dataUser.permisos_doc.filter(e => e.fk_documento == 5);
         let filter = prefict[0]['filtros'].split(',');
         filter = filter[0];
-    
+
         let data = {
           id_empresa: this.dataEmpresa.filterEmpresa[0].id_empresa,
           id_sucursal: this.dataEmpresa.filterSucursal[0].id_sucursal,
@@ -1558,9 +1558,9 @@ export class IngresoBodegaComponent implements OnInit {
           estado: this.estado,
           fecha: this.fechaDocumento
         }
-       
+
         this.ordenesServices.saveOrdersBuy(data).subscribe(res => {
-    
+
           Swal.fire({
             title: 'Proceso exitoso!!',
             text: `Su registro de ingreso a bodega se realizo exitosamente con el No.` + res['data']['numero_ingreso_bodega'] + ` Por favor debe actualizar los datos del bien en la ficha del Producto`,
@@ -1576,11 +1576,11 @@ export class IngresoBodegaComponent implements OnInit {
           this.listaIngreso = res['data']
           this.numero_ingreso_bodega = res['data']['numero_ingreso_bodega']
           this.id = this.listaIngreso.id
-    
+
           if (this.fileList != undefined) {
             this.uploadFile(res['data']['id']);
           }
-    
+
           // this.saveAnexo(res['data'], "N");
           this.socket.onEmitNotification(this.commonServices.filterUserNotification(filter, 5));
           this.lcargando.ctlSpinner(false);
@@ -1588,21 +1588,21 @@ export class IngresoBodegaComponent implements OnInit {
           this.socket.onEmitNotification(data['usersFilter']);
           setTimeout(() => {
             this.getSolicitudesAux();
-    
+
           }, 100);
-    
+
         }, error => {
           this.processing = true;
           this.btnSave = false;
           this.toastr.info(error.error.message);
         })
-      
-  
+
+
       } else {
         this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
         this.lcargando.ctlSpinner(false);
       }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
@@ -1612,7 +1612,7 @@ export class IngresoBodegaComponent implements OnInit {
 
 
 
-   
+
   }
 
 
@@ -2028,14 +2028,14 @@ export class IngresoBodegaComponent implements OnInit {
 
 
   async aprobacion() {
-    
+
     this.mensajeSppiner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let data = {
       "anio": Number(moment(this.fechaDocumento).format('YYYY')),
       "mes": Number(moment(this.fechaDocumento).format('MM'))
       }
-      
+
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
           try {
             if (res["data"][0].estado !=='C') {
@@ -2048,13 +2048,13 @@ export class IngresoBodegaComponent implements OnInit {
                   id_productos.push(producto.fk_product)
                 }
               })
-          
+
               // Existen productos de Tipo EXI
               if (id_productos.length) {
                 // Listado de productos perecibles que aparecen en dataProductos
                 const perecibles = await this.ordenesServices.getPerecibles({ productos: id_productos })
                 console.log(perecibles)
-          
+
                 let detalles: any;
                 // Si hay productos perecibles, obtener sus detalles
                 if (perecibles.data.length > 0) {
@@ -2063,7 +2063,7 @@ export class IngresoBodegaComponent implements OnInit {
                     productos: id_productos
                   })
                   console.log(detalles.data)
-          
+
                   // Si no hay detalles, no han agregado los lotes a consumir
                   if (!detalles.data.length) {
                     this.lcargando.ctlSpinner(false)
@@ -2072,10 +2072,10 @@ export class IngresoBodegaComponent implements OnInit {
                     // return;
                   }
                 }
-          
+
                 // Validar que la sumatoria de Cantidad por Lote sea igual a la cantidad por Item
                 const dataProductoFilter = this.dataProducto.filter((element: any) => perecibles.data.some((perecible: any) => perecible.id_producto === element.fk_product))
-                
+
                 dataProductoFilter.forEach((producto: any) => {
                   const detalleProd = detalles.data.filter((element: any) => producto.fk_product == element.fk_producto)
                   console.log(detalleProd) // Detalle de Lotes
@@ -2083,17 +2083,17 @@ export class IngresoBodegaComponent implements OnInit {
                   console.log(totalCantidadProd) // Cantidad en Detalles de Lotes
                   // console.log(totalCantidadProd, parseFloat(producto.quantity), totalCantidadProd != parseFloat(producto.quantity))
                   if (totalCantidadProd != parseFloat(producto.quantity)) message += `* La cantidad de ${producto.description} no ha sido completada en sus lotes.<br>`
-          
+
                   // const detalle = detalles.data.find((element: any) => producto.fk_product == element.fk_producto)
                 })
-          
+
                 if (message.length > 0) {
                   this.lcargando.ctlSpinner(false)
                   this.toastr.warning(message, 'Validacion de Datos', { enableHtml: true })
                   return;
                 }
               }
-          
+
               this.estado = 'C';
               this.lcargando.ctlSpinner(true)
               this.crearProducto()
@@ -2111,7 +2111,7 @@ export class IngresoBodegaComponent implements OnInit {
                   }
               }) */
             } else {
-                
+
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
             }
@@ -2124,8 +2124,8 @@ export class IngresoBodegaComponent implements OnInit {
   }
 
   editar() {
-  
-   
+
+
   this.mensajeSppiner = "Verificando período contable";
   this.lcargando.ctlSpinner(true);
   let dat = {
@@ -2133,18 +2133,18 @@ export class IngresoBodegaComponent implements OnInit {
     "mes": Number(moment(this.fechaDocumento).format('MM'))
   }
     this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(res => {
-    
+
     /* Validamos si el periodo se encuentra aperturado */
     if (res["data"][0].estado !== 'C') {
-      
+
       this.mensajeSppiner = "Editando ingreso";
       this.lcargando.ctlSpinner(true);
-  
+
       let prefict = this.dataUser.permisos_doc.filter(e => e.fk_documento == 5);
       let filter = prefict[0]['filtros'].split(',');
       filter = filter[0];
-  
-  
+
+
       let data = {
         id: this.id,
         id_empresa: 1,
@@ -2178,10 +2178,10 @@ export class IngresoBodegaComponent implements OnInit {
       }
       this.ordenesServices.updateIngresoBodega(data).subscribe(
         (res) => {
-  
-  
+
+
           // if (res['data']['estado'] == "C") {
-  
+
           //   this.dataProducto.forEach(e => {
           //     console.log(e)
           //       if(e.grupo_bien == "BCA" || e.grupo_bien == "BLD" ){
@@ -2192,8 +2192,8 @@ export class IngresoBodegaComponent implements OnInit {
           //         this.updateExi()
           //       }
           //   })
-  
-  
+
+
           //   // if(this.claseSelect.tipo_bien == "BCA" || this.claseSelect.tipo_bien == "BLD"){
           //   //   this.crearProducto()
           //   // this.vmButtons[4].habilitar = true;
@@ -2201,10 +2201,10 @@ export class IngresoBodegaComponent implements OnInit {
           //   // else{
           //   //   this.updateExi()
           //   // }
-  
+
           // }
-  
-  
+
+
           this.lcargando.ctlSpinner(false);
           Swal.fire({
             icon: "success",
@@ -2219,7 +2219,7 @@ export class IngresoBodegaComponent implements OnInit {
               console.log(res['data']['detalles'])
               this.dataProducto = []
               const det: any = []
-  
+
               console.log(res['detalles'])
               res['data']['detalles'].map((res) => {
                 let data = {
@@ -2243,9 +2243,9 @@ export class IngresoBodegaComponent implements OnInit {
               //this.dataProducto= res['data']['detalles'];
               console.log(this.dataProducto)
               this.delete()
-  
+
             } else {
-  
+
             }
           })
         },

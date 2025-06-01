@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FacturasSaldoRoutingModule } from './facturas-saldo.routing';
 import { FacturasSaldoComponent } from './facturas-saldo.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { TableModule } from 'primeng/table';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
 
@@ -17,7 +17,7 @@ import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.componen
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     TableModule,
     FacturasSaldoRoutingModule
   ]

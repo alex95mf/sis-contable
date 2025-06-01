@@ -7,7 +7,7 @@ import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ModalLiquidacionesComponent } from './modal-liquidaciones/modal-liquidaciones.component';
 import { ListRecDocumentosComponent } from './list-rec-documentos/list-rec-documentos.component';
 import { ModalInspeccionesComponent } from './modal-inspecciones/modal-inspecciones.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     NotaCreditoRoutingModule,
   ]
 })

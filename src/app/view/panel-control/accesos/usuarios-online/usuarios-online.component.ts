@@ -124,7 +124,7 @@ export class UsuariosOnlineComponent implements OnInit {
       pageLength: 10,
       search: true,
       paging: true,
-      dom: 'lfrtip',  //lfrtipB Bfrtip 
+      dom: 'lfrtip',  //lfrtipB Bfrtip
       order: [[0, "desc"]],
       buttons: [{
         extend: 'excel',
@@ -151,7 +151,7 @@ export class UsuariosOnlineComponent implements OnInit {
         localStorage.setItem('userOnline', JSON.stringify(this.dataUserConected));
         this.dataUserConectedAux = res['data'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           for (let index = 0; index < this.dataUserConected.length; index++) {
             this.divHtml = document.getElementById("idNameCmp" + index);
             this.divHtml.innerHTML = `<span>${this.dataUserConected[index].component_actual}</span>`;
@@ -227,7 +227,7 @@ export class UsuariosOnlineComponent implements OnInit {
       pageLength: 10,
       search: true,
       paging: true,
-      dom: 'lfrtip',  //lfrtipB Bfrtip  
+      dom: 'lfrtip',  //lfrtipB Bfrtip
       order: [[0, "desc"]],
       buttons: [{
         extend: 'excel',
@@ -253,7 +253,7 @@ export class UsuariosOnlineComponent implements OnInit {
           element['time_conected'] = this.msConversion(element.updated_at);
         });
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.validaDtUserConected = true;

@@ -159,7 +159,7 @@ export class IngresoComponent implements OnInit {
       { orig: "btnIProducto", paramAccion: "1", boton: { icon: "fas fa-edit", texto: "MODIFICAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-info boton btn-sm", habilitar: true},
       { orig: "btnIProducto", paramAccion: "1", boton: { icon: "fa fa-times", texto: "CANCELAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: true},
       { orig: "btnIProducto", paramAccion: "1", boton: { icon: "fa fa-trash-o", texto: "ELIMINAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-secondary boton btn-sm", habilitar: true},
-      
+
       // Modal de Marca, Modelo, Color
       { orig: "btnIProductoModal", paramAccion: "2", boton: { icon: "fa fa-floppy-o", texto: "GUARDAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: false},
       { orig: "btnIProductoModal", paramAccion: "2", boton: { icon: "fa fa-times", texto: "CERRAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: false},
@@ -345,7 +345,7 @@ export class IngresoComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
       this.masa = res["data"]["udms"]["Masa"]
       this.long = res["data"]["udms"]["Longitud"]
-      
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message)
@@ -368,7 +368,7 @@ export class IngresoComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
       this.processing = true;
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.processing = true;
@@ -376,7 +376,7 @@ export class IngresoComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
 
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message)
     })
@@ -551,7 +551,7 @@ export class IngresoComponent implements OnInit {
     if (this.permisions[0].editar == "0") {
       this.toastr.info("Usuario no tiene permiso para actualizar");
     } else {
-      /* if(this.searchDataUpdateDelete.fk_formula != null) {this.commonServices.updateData.next()}; */
+      /* if(this.searchDataUpdateDelete.fk_formula != null) {this.commonServices.updateData.next(null)}; */
       let val1 = (this.searchDataUpdateDelete.fk_formula != null) ? true : false;
       this.commonServices.updateData.next(val1);
       let resp = await this.validaGlobalData().then(respuesta => {
@@ -712,7 +712,7 @@ export class IngresoComponent implements OnInit {
   }
 
   validaDataFormula() {
-    this.commonServices.selectFormula.next();
+    this.commonServices.selectFormula.next(null);
   }
 
   async confirmSave(message, action) {
@@ -1013,7 +1013,7 @@ export class IngresoComponent implements OnInit {
     this.checkCodigo = false;
     this.checkAuth = false;
     this.randomGenerate = "";
-    this.stockActualData = false; 
+    this.stockActualData = false;
     if (this.searchDataUpdateDelete != undefined) { this.searchDataUpdateDelete = undefined }
 
     this.values = {
@@ -1123,14 +1123,14 @@ export class IngresoComponent implements OnInit {
     if (this.searchDataUpdateDelete.fk_formula != null) {
       this.disabledForCheck = true;
       this.metCostoSelect = "Directo";
-      (this.searchDataUpdateDelete.fk_formula != null) ? this.disabledFormula = false : this.disabledFormula = true; 
-    }; 
+      (this.searchDataUpdateDelete.fk_formula != null) ? this.disabledFormula = false : this.disabledFormula = true;
+    };
     if (this.searchDataUpdateDelete.clase == "Productos") {
       this.disabledMateriaPrima = (this.searchDataUpdateDelete.fk_formula != null) ? true : false;
       (this.searchDataUpdateDelete.fk_formula != null) ? this.disabledFormula = false : this.disabledFormula = true; //disabled check
     }
     this.disabledModSearch = (this.searchDataUpdateDelete.fk_formula != null) ? true : false;
-    (this.searchDataUpdateDelete.fk_formula != null) ? this.disabledFormula = false : this.disabledFormula = true; 
+    (this.searchDataUpdateDelete.fk_formula != null) ? this.disabledFormula = false : this.disabledFormula = true;
     this.checkAuth = (this.searchDataUpdateDelete.fk_formula != null) ? true : false;
     this.grupoSelect = this.searchDataUpdateDelete.fk_grupo;
     this.materiaPrima = (this.searchDataUpdateDelete.tipo == "Producto") ? false : true;
@@ -1144,7 +1144,7 @@ export class IngresoComponent implements OnInit {
     this.sugeridoData = this.searchDataUpdateDelete.sugStock;
     this.origenData = this.searchDataUpdateDelete.procedencia;
     this.codigoData = this.searchDataUpdateDelete.codigoProducto;
-    this.editCode = true; 
+    this.editCode = true;
     this.checkCodigo = true;
     this.checkCodigo = true;
     this.minimoData = this.searchDataUpdateDelete.minStock;
@@ -1153,7 +1153,7 @@ export class IngresoComponent implements OnInit {
     this.nameData = this.searchDataUpdateDelete.nombre;
     this.metCostoSelect = this.searchDataUpdateDelete.metodoCosto;
     this.costoData = this.searchDataUpdateDelete.costo;
-    this.CBData = this.searchDataUpdateDelete.codigoBarra; 
+    this.CBData = this.searchDataUpdateDelete.codigoBarra;
     this.presentacionData = this.searchDataUpdateDelete.presentacion;
     this.genericoData = this.searchDataUpdateDelete.generico;
     this.NumParteData = this.searchDataUpdateDelete.num_parte;
@@ -1194,8 +1194,8 @@ export class IngresoComponent implements OnInit {
     this.values.code = (this.searchDataUpdateDelete.code != null || this.searchDataUpdateDelete.code != "") ? this.searchDataUpdateDelete.code : "";
     (this.searchDataUpdateDelete.fk_arancel == undefined || this.searchDataUpdateDelete.fk_arancel == "") ?  this.values.porcentaje = "" :  this.values.porcentaje = this.aranceles[this.searchDataUpdateDelete.fk_arancel]['tarifa_arancelaria'];
     (this.searchDataUpdateDelete.fk_arancel == undefined || this.searchDataUpdateDelete.fk_arancel == "") ?  this.values.nombre = "" :  this.values.nombre = this.aranceles[this.searchDataUpdateDelete.fk_arancel]['nombre'];
-    this.commonServices.editDeleteData.next(dataAccount);  
-     this.stockActualData = true; 
+    this.commonServices.editDeleteData.next(dataAccount);
+     this.stockActualData = true;
   }
 
   validateDeleteProduct() {

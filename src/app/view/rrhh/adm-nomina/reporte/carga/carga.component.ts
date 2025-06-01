@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 import { ModalEmpleadosComponent } from './modal-empleados/modal-empleados.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import 'sweetalert2/src/sweetalert2.scss';  
+import 'sweetalert2/src/sweetalert2.scss';
 const Swal = require('sweetalert2');
 import * as moment from 'moment';
 import * as myVarGlobals from 'src/app/global';
@@ -57,7 +57,7 @@ export class CargaComponent implements OnInit {
               let excelData: any[] = [];
              //  console.log(res.data)
              this.arrayData.forEach((element: any) => {
-             
+
                 let o = {
                   Empleado: `${element.nombres} ${element.apellidos}`,
                   IdentificacionCarga: element.cedula_carga,
@@ -135,7 +135,7 @@ export class CargaComponent implements OnInit {
           paginate: this.paginate
         }
       }
-  
+
       this.reportService.getPersonalCarga(data).subscribe(
         (res) => {
           console.log(res);
@@ -152,7 +152,7 @@ export class CargaComponent implements OnInit {
           this.toastr.info(error.error.message);
         }
       )
-    
+
       // this.reportService.getPersonalCarga(data).subscribe(res => {
       //   console.log(res);
       // this.validaDt = true;
@@ -167,16 +167,16 @@ export class CargaComponent implements OnInit {
       //   console.log(this.datam)
       // }
       //   setTimeout(() => {
-      //     this.dtTrigger.next();
+      //     this.dtTrigger.next(null);
       //   }, 50);
       // }, error => {
       //   setTimeout(() => {
-      //     this.dtTrigger.next();
+      //     this.dtTrigger.next(null);
       //   }, 50);
       //   this.toastr.info(error.error.message);
       // });
     }
-    
+
     rerender(): void {
       this.arrayData = [];
       this.validaDt = false;
@@ -185,12 +185,12 @@ export class CargaComponent implements OnInit {
         this.getTableReport();
       });
     }
-    
+
     filterptDepartamento(data) {
       if (this.empleado != 0) {
         this.empleado = data;
 
-        
+
         this.rerender();
       } else {
 
@@ -199,9 +199,9 @@ export class CargaComponent implements OnInit {
     }
 
     limpiarFiltros() {
-      
+
       this.filter.empleado = '';
-     
+
     }
     changePaginate(event) {
       let newPaginate = {

@@ -18,7 +18,7 @@ export class ConceptoDetComponent implements OnInit {
   @Input() concepto: any;
 
   detalles: any = [];
-  
+
   fTitle: any = 'Detalle de conceptos';
   vmButtons: any = [];
   dataUser: any;
@@ -27,12 +27,12 @@ export class ConceptoDetComponent implements OnInit {
     private modal: NgbActiveModal,
     private apiSrv: ReciboCobroService,
     private toastr: ToastrService
-  ) { 
+  ) {
 
   }
 
   ngOnInit(): void {
- 
+
     this.vmButtons = [
       {
         orig: "btnDetConcepto",
@@ -51,7 +51,7 @@ export class ConceptoDetComponent implements OnInit {
       console.log(this.concepto)
       this.getDetalles();
     },50)
-    
+
   }
 
   getDetalles() {
@@ -81,7 +81,7 @@ export class ConceptoDetComponent implements OnInit {
                class: ''
               })
           }
-        });  
+        });
         this.detalles = res['data'];
         this.detalles.push({
           concepto: {
@@ -99,7 +99,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total: this.concepto.exoneraciones,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -153,7 +153,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total: this.concepto.interes,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -162,7 +162,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total: this.concepto.descuento,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -196,7 +196,7 @@ export class ConceptoDetComponent implements OnInit {
                class: ''
               })
           }
-        });  
+        });
         this.detalles = res['data'];
         this.detalles.push({
           concepto: {
@@ -214,7 +214,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total: this.concepto.exoneraciones,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -268,7 +268,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total: this.concepto.interes,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -277,7 +277,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total: this.concepto.descuento,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -316,7 +316,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total: this.concepto.exoneraciones,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -370,7 +370,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total: this.concepto.interes,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -379,7 +379,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total: this.concepto.descuento,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -419,7 +419,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total: this.concepto.exoneraciones,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -473,7 +473,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total: this.concepto.interes,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -482,7 +482,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total: this.concepto.descuento,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -502,8 +502,8 @@ export class ConceptoDetComponent implements OnInit {
       );
     }
   }
- 
-  
+
+
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
       case " REGRESAR":
@@ -511,7 +511,7 @@ export class ConceptoDetComponent implements OnInit {
         break;
     }
   }
-  
+
   closeModal() {
     this.modal.dismiss();
   }

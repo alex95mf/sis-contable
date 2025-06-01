@@ -286,9 +286,9 @@ export class EmpresarialComponent implements OnInit {
         this.toastr.info("Usuario no tiene Permiso para ver el formulario de Seguridades");
         this.router.navigateByUrl('dashboard');
       } else {
-       
+
         this.getsucursales();
-        this.obtenerCatalogos() 
+        this.obtenerCatalogos()
         this.getCatalogos();
         this.getFiltersDocuments();
       }
@@ -346,14 +346,14 @@ export class EmpresarialComponent implements OnInit {
       this.processing = true;
       this.validaDtUser = true;
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.validaDtUser = true;
       this.guardaT = [];
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message);
     })
@@ -385,7 +385,7 @@ export class EmpresarialComponent implements OnInit {
       (res) => {
         console.log("datos", res);
 
-        
+
         res['data']['PRE_ORIENTACION_GASTO'].forEach(e => {
           let f_pago = {
             nombre: e.descripcion,
@@ -806,7 +806,7 @@ export class EmpresarialComponent implements OnInit {
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (res) => {
         this.url = res.target.result;
-      }      
+      }
     }
   }
 
@@ -1251,7 +1251,7 @@ export class EmpresarialComponent implements OnInit {
     this.seguridadServices.updateDocument(this.documents).subscribe(res => {
       this.lcargando.ctlSpinner(false);
       this.cancelDocument();
-      this.commonServices.dtSModifyDocuments.next();
+      this.commonServices.dtSModifyDocuments.next(null);
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);

@@ -84,14 +84,14 @@ export class ConsultaCajachComponent implements OnInit {
       this.toastr.info(error.error.message);
     })
   }
-  
+
 	metodoGlobal(evento: any) {
 		switch (evento.items.boton.texto) {
 		    case "EXCEL":
           $('#tablaConsultCjChica').DataTable().button( '.buttons-excel' ).trigger();
         break;
         case "IMPRIMIR":
-          $('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger();       
+          $('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger();
         break;
         case "PDF":
           $('#tablaConsultCjChica').DataTable().button( '.buttons-pdf' ).trigger();
@@ -99,7 +99,7 @@ export class ConsultaCajachComponent implements OnInit {
         case "LIMPIAR":
         this.informaciondtlimpiar();
         break;
-		}  	 
+		}
 	}
 
   getBoxSmallXUsuario() {
@@ -111,7 +111,7 @@ export class ConsultaCajachComponent implements OnInit {
       this.toastr.info(error.error.message);
     })
   }
-  
+
   getAccountSmallBox() {
     this.reportesSrv.getAccountSmallBox().subscribe(res => {
       this.arrayTipo = res['data'];
@@ -121,7 +121,7 @@ export class ConsultaCajachComponent implements OnInit {
       this.toastr.info(error.error.message);
     })
   }
-  
+
   getTipoDoc() {
     this.reportesSrv.getTipoDoc().subscribe(res => {
       this.arrayDocumento = res['data'];
@@ -131,7 +131,7 @@ export class ConsultaCajachComponent implements OnInit {
       this.toastr.info(error.error.message);
     })
   }
-  
+
   getTableReport() {
     this.dtOptions = {
       pagingType: "full_numbers",
@@ -178,19 +178,19 @@ export class ConsultaCajachComponent implements OnInit {
       this.validaDt = true;
       this.processing = true;
       this.infoData = res['data'];
-  
+
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message);
     });
   }
-  
+
   rerender(): void {
     this.infoData = [];
     this.validaDt = false;
@@ -199,7 +199,7 @@ export class ConsultaCajachComponent implements OnInit {
       this.getTableReport();
     });
   }
-  
+
   filterCajaChica(data) {
     if (this.cajaChica != 0) {
       this.cajaChica = data;
@@ -208,7 +208,7 @@ export class ConsultaCajachComponent implements OnInit {
       this.rerender();
     }
   }
-  
+
   filterTipo(data) {
     if (this.tipo != 0) {
       this.tipo = data;
@@ -217,7 +217,7 @@ export class ConsultaCajachComponent implements OnInit {
       this.rerender();
     }
   }
-  
+
   filterDocumento(data) {
     if (this.documento != 0) {
       this.documento = data;
@@ -226,7 +226,7 @@ export class ConsultaCajachComponent implements OnInit {
       this.rerender();
     }
   }
-  
+
   informaciondtlimpiar() {
     this.cajaChica = 0;
     this.tipo = 0;

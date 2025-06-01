@@ -57,7 +57,7 @@ export class CcClientesComponent implements OnInit {
       this.lstClientes = datos.data;
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       console.log("this.lstClientes: ", this.lstClientes)
     }, error=>{

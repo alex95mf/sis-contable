@@ -1,11 +1,11 @@
 import {  AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { CommonService } from 'src/app/services/commonServices';
-import { CommonVarService } from 'src/app/services/common-var.services'; 
-import { AsistenciaEmpleadoService } from './asistencia-empleado.service'; 
+import { CommonVarService } from 'src/app/services/common-var.services';
+import { AsistenciaEmpleadoService } from './asistencia-empleado.service';
 import * as myVarGlobals from "../../../../global"
 import { ToastrService } from 'ngx-toastr';
-import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component'; 
+import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
 import { environment } from 'src/environments/environment';
 
@@ -21,7 +21,7 @@ import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { CcModalListFaltasPermisosComponent } from 'src/app/config/custom/modal-component/cc-modal-list-faltas-permisos/cc-modal-list-faltas-permisos.component';
 import { FaltaPermiso } from 'src/app/models/responseFaltasAndPermisosAditional.interfase';
-import { GeneralService } from 'src/app/services/general.service'; 
+import { GeneralService } from 'src/app/services/general.service';
 import { CatalogoNominaResponseI } from 'src/app/models/responseCatalogoNomina.interfase';
 import { CatalogoResponseI } from 'src/app/models/responseCatalogo.interface';
 import { MatTabChangeEvent } from '@angular/material/tabs';
@@ -39,7 +39,7 @@ standalone: false,
   templateUrl: './asistencia-empleado.component.html',
   styleUrls: ['./asistencia-empleado.component.scss'],
   styles: [`
-  
+
   :host ::ng-deep .p-datatable .p-datatable-thead .col-nombre {
       left: 0px;
       position: sticky;
@@ -68,7 +68,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
   AnioAsistencia: any = 0;
 
   //------------------------------
-  
+
   //formulario
   ref: DynamicDialogRef;
   formGroupDiasTrabajados: FormGroup;
@@ -175,7 +175,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
     private modalService: NgbModal,
     private commonVarSrv: CommonVarService,
     private cierremesService: CierreMesService,
-  
+
     ) {
     this.totalRecords = 0;
     this.rows = 10;
@@ -210,7 +210,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       }
     )
 
-  
+
 
     this.vmButtons = [
       // Manual
@@ -410,16 +410,16 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         showbadge: false,
         habilitar: true,
       },
-      { orig: 'btnsConsultDiasTrabajados', 
-        paramAccion: '4', 
-        boton: {icon: 'far fa-trash-alt', 
-        texto: 'ELIMINAR'}, 
-        clase: 'btn btn-sm btn-danger', 
-        permiso: true, 
-        habilitar: true, 
-        showbadge: false, 
-        showimg: true, 
-        showtxt: true, 
+      { orig: 'btnsConsultDiasTrabajados',
+        paramAccion: '4',
+        boton: {icon: 'far fa-trash-alt',
+        texto: 'ELIMINAR'},
+        clase: 'btn btn-sm btn-danger',
+        permiso: true,
+        habilitar: true,
+        showbadge: false,
+        showimg: true,
+        showtxt: true,
       }
 
     ];
@@ -497,7 +497,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
     this.vmButtons[1].habilitar = true;
     this.btnSubirArchivo= true;
     // this.validateForm();
-    
+
     this.handleTabChange({index: 0})
 
   }
@@ -507,10 +507,10 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         this.dataLength = res['data'];
         if(this.dataLength[0]){
           for (let index = 0; index < this.dataLength[0].niveles; index++) {
-            this.lstNiveles.push(index+1);          
+            this.lstNiveles.push(index+1);
           }
         }
-  
+
         this.getGrupoAccount();
       }, error =>{
         this.lcargando.ctlSpinner(false);
@@ -544,7 +544,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
 
-      const resMeses = await this.generalService.getCatalogoKeyWork('MES').toPromise<any>()
+      const resMeses = await this.generalService.getCatalogoKeyWork('MES') as any
       console.log(resMeses)
       this.cmb_meses = resMeses.data
 
@@ -553,7 +553,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       this.toastr.warning(err.error?.message, 'Error en Carga Inicial')
     }
   }
-  
+
 
   metodoGlobal(evento: any) {
     switch (evento.items.paramAccion + evento.items.boton.texto) {
@@ -566,7 +566,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         break;
       case "0GENERAR":
         this.generarDiasTrabajados();
-        //$('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger();       
+        //$('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger();
         break;
       case "0CONSULTAR":
         this.getDiasTrabajados();
@@ -575,7 +575,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         break;
       case "0APROBAR":
         this.saveGenerarDiasTrabajados();
-        //$('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger();       
+        //$('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger();
         break;
       case "0PDF":
 
@@ -605,13 +605,13 @@ export class AsistenciaEmpleadoComponent implements OnInit {
 
         break;
       case "0PLANTILLA":
-        this.descargar_plantilla(); 
+        this.descargar_plantilla();
         break;
       case "0ACTUALIZAR F/P":
-          this.actualizarFaltasPermisos(); 
+          this.actualizarFaltasPermisos();
         break;
       case "0ACTUALIZAR H/E":
-        this.actualizarHorasExtra(); 
+        this.actualizarHorasExtra();
       break;
       case "2CONSULTAR":
         this.asistenciadiasempleService.importarConsultar.emit();
@@ -677,12 +677,12 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         //     return this.messageService.add({key: 'tr', severity:'error', summary: 'Advertencia', detail: 'No se puede registrar información, con fecha posterior a la fecha actual'/* ,life:300000 */});
         //   }
         // });
-        
+
       },
       error: (e) => {
         console.log(e);
         this.loading = false;
-      
+
       },
     });
   }
@@ -780,7 +780,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
 
       // return this.toastr.error("Por favor seleccionar al menos un registro.");
     }
-    
+
 
     this.confirmSave(
       "Seguro desea generar dias trabajados para los empleados seleccionados?",
@@ -788,7 +788,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
     );
   }
 
-  
+
   async confirmSave(message, action) {
     Swal.fire({
       title: "Atención!!",
@@ -812,7 +812,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
 
 
   async saveListDiasTrbajadosEmpleado() {
-     
+
     //crear el objeto a enviar---------------------------
     let insertData = [];
 
@@ -827,7 +827,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
     }
 
     //---------------------------------------------------
-    
+
 
     let data = {
       // info: this.formSueldoEmpleado,
@@ -835,9 +835,9 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       accion: "Creación de ingreso y desceunto  rrhh",
       id_controlador: myVarGlobals.fCuentaBancos,
 
-      //DATOS 
+      //DATOS
       listGenerar : insertData,
-   
+
     };
     this.mensajeSppiner = "Guardando...";
     this.lcargando.ctlSpinner(true);
@@ -868,7 +868,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
   }
 
   actualizarFaltasPermisos(){
- 
+
     if(this.filter.periodo ==undefined){
       this.toastr.info('Debe seleccionar un Período');
     }
@@ -876,7 +876,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       this.toastr.info('Debe seleccionar un Mes');
     }
     else{
-  
+
       let data = {
         periodo: Number(this.filter.periodo),
         mes: Number(this.filter.mes)
@@ -902,7 +902,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
   }
 
   actualizarHorasExtra(){
- 
+
     if(this.filter.periodo ==undefined){
       this.toastr.info('Debe seleccionar un Período');
     }
@@ -910,7 +910,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       this.toastr.info('Debe seleccionar un Mes');
     }
     else{
-  
+
       let data = {
         periodo: Number(this.filter.periodo),
         mes: this.convertirMes()
@@ -946,12 +946,12 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       name_file : 'PlantillaHorasTrabajadas.xlsx'
     };
     console.log(data)
-  
+
     this.asistenciadiasempleService.getDonwloadFiles(data)
     .subscribe({
       next: (rpt: any) => {
          console.log(rpt);
-  
+
         const filename = 'PlantillaHorasTrabajadas';
         let dataType = rpt.type;
           let binaryData = [];
@@ -963,7 +963,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
           }
           document.body.appendChild(downloadLink);
           downloadLink.click()
-      
+
       },
       error: (e) => {
         console.log(e);
@@ -973,9 +973,9 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         this.toastr.error(e);
       },
     });
-    
+
   }
-  
+
 
 
   ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
@@ -1074,7 +1074,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    */
 
   // convenience getter for easy access to form fields
@@ -1144,7 +1144,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       next: (rpt: DiaTrabajadoAditionalResponseI) => {
         console.log(rpt)
         this.lcargando.ctlSpinner(false);
-        
+
         if (localStorage.getItem('objCopyGetDiasTrabajados')) localStorage.removeItem('objCopyGetDiasTrabajados');
         // let info = rpt.data;
         // console.log(info);
@@ -1160,7 +1160,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         }
         // console.log('condicion', cont, totalData)
         this.disableHeaderCheckbox = cont==totalData ? true : false;
-     
+
         // Guardo el objeto como un string
         localStorage.setItem('objCopyGetDiasTrabajados', JSON.stringify(rpt));
 
@@ -1170,7 +1170,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         this.loading = false;
         this.vmButtons[1].habilitar = false;
         this.btnSubirArchivo = cont == totalData;
-        
+
         if (totalData == 0) {
           this.toastr.info('Presione Generar para cargar datos.', 'No hay datos')
         } else {
@@ -1180,20 +1180,20 @@ export class AsistenciaEmpleadoComponent implements OnInit {
           this.vmButtons[20].habilitar = false  // Actualizar faltas y permisos
           this.vmButtons[24].habilitar = false // Actualizar horas extra
         }
-        
+
       },
       error: (e) => {
         console.log(e);
         this.loading = false;
         this.lcargando.ctlSpinner(false);
-       
+
       },
     });
   }
   generarDiasTrabajados(){
     this.cargaExcel = false;
     this.submitted = true;
- 
+
     if(this.filter.programa==undefined || this.filter.programa=='') { this.filter.fk_programa=0 }
     if(this.filter.departamento==null) { this.filter.departamento=0 }
     if(this.filter.area==null) { this.filter.area=0 }
@@ -1223,8 +1223,8 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         "anio": this.filter.periodo,
         "mes": this.convertirMes()
       }
-    
-      this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {  
+
+      this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
       console.log(res["data"][0].estado)
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
@@ -1238,7 +1238,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
             this.lcargando.ctlSpinner(false);
             console.log(rpt)
             if (localStorage.getItem('objCopyGetDiasTrabajados')) localStorage.removeItem('objCopyGetDiasTrabajados');
-          
+
             this.getDiasTrabajados();
 
             //saber si esta debo bloquear el check de cabecera
@@ -1254,13 +1254,13 @@ export class AsistenciaEmpleadoComponent implements OnInit {
             this.vmButtons[16].habilitar = false
             this.vmButtons[17].habilitar = false
             this.btnSubirArchivo = cont==totalData ? true : false;
-            
+
           },
           error: (e) => {
             console.log(e);
             this.loading = false;
             this.lcargando.ctlSpinner(false);
-          
+
           },
         });
 
@@ -1270,7 +1270,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
         this.lcargando.ctlSpinner(false);
       }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
@@ -1278,10 +1278,10 @@ export class AsistenciaEmpleadoComponent implements OnInit {
   }
 
   nextPage(event: LazyLoadEvent) {
-    
+
   }
 
- 
+
   /**
    * subir archivo
    */
@@ -1304,7 +1304,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         this.dataExcel = XLSX.utils.sheet_to_json(workbook.Sheets[element]);
         console.log(this.dataExcel);
       });
-      
+
       const arrayVacio = (arr) => !Array.isArray(arr) || arr.length === 0;//array vacio retorna TRUE , array lleno FALSE
 
       if(!arrayVacio(this.dataExcel)){
@@ -1354,7 +1354,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       };
     });
   }
-  // 
+  //
 
   saveWorkedTemplate(dataExcel)
   {
@@ -1365,13 +1365,13 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       accion: "Creación de ingreso y desceunto  rrhh",
       id_controlador: myVarGlobals.fCuentaBancos,
 
-      //DATOS 
+      //DATOS
       id_mes :  this.filter.mes,
       id_empresa : 1,
       anio :   this.filter.periodo,
       data_template : dataExcel,
 
-   
+
     };
     this.mensajeSppiner = "Guardando...";
     this.lcargando.ctlSpinner(true);
@@ -1413,7 +1413,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         const horasTrabajadas = data.ditr_dias_trabajados * 8;
         const horasEfectivas = horasTrabajadas + Number(data.ditr_horas_25 ?? 0) + Number(data.ditr_horas_50 ?? 0) + Number(data.ditr_horas_60 ?? 0) + Number(data.ditr_horas_100 ?? 0)
         Object.assign(data, {
-          ditr_horas_trabajados: horasTrabajadas, 
+          ditr_horas_trabajados: horasTrabajadas,
           ditr_horas_efectivas: horasEfectivas,
           ditr_dias_efectivos: Math.floor(horasEfectivas / 8),
           ditr_horas_efectivos: Math.ceil(horasEfectivas % 8)
@@ -1424,14 +1424,14 @@ export class AsistenciaEmpleadoComponent implements OnInit {
   }
 
   horas25(data:DiaTrabajado) {
-   
+
     let  horas25 = data.ditr_horas_25;
     if(horas25 == ''||horas25 == null) horas25 = 0;
 
     // const objCopyGetDiasTrabajados = this.getDataLclStorage();
     const objCopyGetDiasTrabajados = localStorage.getItem('objCopyGetDiasTrabajados');
     let valores = Object.values(JSON.parse(objCopyGetDiasTrabajados));
-   
+
     for(let i=0; i< valores.length; i++){
       if(valores[i]['id_dia_trabajado']==data.id_dia_trabajado)
       {
@@ -1447,15 +1447,15 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         // console.log(valores[i]['ditr_horas_25'],valores[i]['ditr_horas_efectivas']);
         // return data.ditr_horas_efectivas = Number(valores[i]['ditr_horas_25']+valores[i]['ditr_horas_50']+valores[i]['ditr_horas_100']+ valores[i]['ditr_horas_efectivas']) ;
       }
-      
+
     }
 
     // let sumaHora = Number(data.ditr_horas_efectivas) + Number(horas25) /* + Number(data.ditr_horas_50) + Number(data.ditr_horas_100) */;
     // return data.ditr_horas_efectivas = sumaHora;
   }
-  
+
   horas50(data:DiaTrabajado) {
-    
+
     let  horas50 = data.ditr_horas_50;
     if(horas50 == ''||horas50 == null) horas50 = 0;
 
@@ -1476,14 +1476,14 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         return data.ditr_horas_efectivas;
         // return data.ditr_horas_efectivas = Number(valores[i]['ditr_horas_25']+valores[i]['ditr_horas_50']+valores[i]['ditr_horas_100']+ valores[i]['ditr_horas_efectivas']) ;
       }
-      
+
     }
 
     // let sumaHora = Number(data.ditr_horas_efectivas) /* + Number(data.ditr_horas_25) */ + Number(horas50) /* + Number(data.ditr_horas_100) */;
     // return data.ditr_horas_efectivas = sumaHora;
   }
   horas60(data:DiaTrabajado) {
-    
+
     let  horas60 = data.ditr_horas_60;
     if(horas60 == ''||horas60 == null) horas60 = 0;
 
@@ -1504,7 +1504,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         return data.ditr_horas_efectivas
         // return data.ditr_horas_efectivas = Number(valores[i]['ditr_horas_25']+valores[i]['ditr_horas_50']+valores[i]['ditr_horas_100']+ valores[i]['ditr_horas_efectivas']) ;
       }
-      
+
     }
 
     // let sumaHora = Number(data.ditr_horas_efectivas) /* + Number(data.ditr_horas_25) */ + Number(horas50) /* + Number(data.ditr_horas_100) */;
@@ -1513,7 +1513,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
 
 
   horas100(data:DiaTrabajado) {
-    
+
     let  horas100 = data.ditr_horas_100;
     if(horas100 == ''||horas100 == null) horas100 = 0;
 
@@ -1534,12 +1534,12 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         return data.ditr_horas_efectivas ;
         // return data.ditr_horas_efectivas = Number(valores[i]['ditr_horas_25']+valores[i]['ditr_horas_50']+valores[i]['ditr_horas_100']+ valores[i]['ditr_horas_efectivas']) ;
       }
-      
+
     }
 
     // let sumaHora =  Number(data.ditr_horas_efectivas) /* + Number(data.ditr_horas_25) + Number(data.ditr_horas_50) */ + Number(horas100);
     // return data.ditr_horas_efectivas = sumaHora;
-   
+
   }
 
 
@@ -1583,12 +1583,12 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         this.loading = false;
         this.vmButtons[1].habilitar = false;
         this.btnSubirArchivo= false;
-        
+
       },
       error: (e) => {
         console.log(e);
         this.loading = false;
-       
+
       },
     });
   }
@@ -1604,16 +1604,16 @@ isOutOfStock(data) {
  */
 
   selectRow(checkValue:DiaTrabajado|any, event) {
-  
+
     //check de cabecera
     if(checkValue && checkValue.estado_generacion == undefined){
       if(checkValue.checked == true){
 
         let valores = Object.values(this.objGetDiasTrabajados);
-      
+
         for(let i=0; i< valores.length; i++){
 
-          
+
 
           if(this.cargaExcel == false){//carga normal
             valores[i]['estado_generacion'] = (valores[i]['estado_generacion']=="generada") ? "generada" : "por_generar";
@@ -1635,9 +1635,9 @@ isOutOfStock(data) {
         return valores;
         // return this.objGetDiasTrabajados.estado_generacion = "no_generado";
       }
-      
+
     }
-  
+
     //let valorCheck = event.target.ariaChecked;
     console.log(event.target.ariaChecked)
     let valorCheck;
@@ -1651,7 +1651,7 @@ isOutOfStock(data) {
     console.log(this.cargaExcel);
     //check individual
     if(this.cargaExcel == false){
-      
+
       if( valorCheck == true || valorCheck == 'true' ){
         checkValue.estado_generacion = 'por_generar';
       }else if( valorCheck == null || valorCheck == 'null' || valorCheck == false || valorCheck == 'false' ){
@@ -1693,7 +1693,7 @@ isOutOfStock(data) {
     }
 
     let dialogRefs = this.dialogRef.open(CcModalListFaltasPermisosComponent, {
-      data:{ 
+      data:{
         emp_full_nombre: dtDiaTrabajado.emp_full_nombre,
         emp_identificacion :dtDiaTrabajado.emp_identificacion,
         faltas_permisos : dataFaltaPermisos,
@@ -1705,12 +1705,12 @@ isOutOfStock(data) {
     dialogRefs.afterClosed().subscribe(result=>{
       console.log(`Dialogo resultado: ${result}`);
     });
-    
+
   }
 
   getFaltasPermisosAfectanRolConsult(dataPtr:DiaTrabajado ){
 
-  
+
     // this.loading = true;
     let data = {
       // info: this.areaForm,
@@ -1743,14 +1743,14 @@ isOutOfStock(data) {
           // this.loading = false;
           // this.vmButtons[1].habilitar = false;
           // this.btnSubirArchivo= false;
-          
+
         },
         error: (e) => {
-          
+
           this.loading = false;
           this.lcargando.ctlSpinner(false);
           console.log(e);
-        
+
         },
     });
 
@@ -1769,7 +1769,7 @@ isOutOfStock(data) {
 
   habilitarConsulta() {
     this.vmButtons[0].habilitar = false
-    
+
     this.deleteDataTable();
     // this.deleteDataLclStorage();
     if (localStorage.getItem('objCopyGetDiasTrabajados')) localStorage.removeItem('objCopyGetDiasTrabajados');
@@ -1778,7 +1778,7 @@ isOutOfStock(data) {
   resetInput() {
     // Limpia el valor seleccionado para que el cambio se dispare siempre
     this.fileUpload.nativeElement.value = null;
-    
+
     // Dispara el evento de clic en el elemento de entrada de archivo original
     this.fileUpload.nativeElement.click();
   }
@@ -1806,12 +1806,12 @@ isOutOfStock(data) {
 
   async deleteDiasTrabajados() {
 
-    
+
     let data = {
       "anio": this.filter.periodo,
       "mes": this.convertirMes()
     }
-    
+
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
         try {
           if (res["data"][0].estado !=='C') {
@@ -1826,11 +1826,11 @@ isOutOfStock(data) {
               confirmButtonText: 'Eliminar',
               cancelButtonText: 'Cancelar'
             })
-        
+
             if (result.isConfirmed) {
               try {
                 this.lcargando.ctlSpinner(true)
-                const response = await this.asistenciadiasempleService.deleteDiasTrabajados(this.filter.periodo, this.filter.mes,this.filter.fk_programa,this.filter.area,this.filter.departamento).toPromise<any>();
+                const response = await this.asistenciadiasempleService.deleteDiasTrabajados(this.filter.periodo, this.filter.mes,this.filter.fk_programa,this.filter.area,this.filter.departamento) as any;
                 console.log(response)
                 this.lcargando.ctlSpinner(false)
                 Swal.fire(response.message, '', 'success').then(() => this.deleteDataTable())
@@ -1841,7 +1841,7 @@ isOutOfStock(data) {
               }
             }
           } else {
-           
+
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
           }
@@ -1862,10 +1862,10 @@ isOutOfStock(data) {
        this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
       }else{
 
-       
+
       }
 
-   
+
   }
 
   modalPrograma(){
@@ -1982,7 +1982,7 @@ isOutOfStock(data) {
     if(this.filter.programa==undefined || this.filter.programa=='') { this.filter.fk_programa=0 }
     if(this.filter.departamento==null) { this.filter.departamento=0 }
     if(this.filter.area==null) { this.filter.area=0 }
-    
+
       let data = {
         params: {
           programa: this.filter.fk_programa,
@@ -1997,7 +1997,7 @@ isOutOfStock(data) {
           this.exportList = res
           this.excelData = [];
           // if (this.permisions[0].ver== "0") {
-            
+
           //   this.toastr.info("Usuario no tiene permiso para exportar");
           // } else {
             Object.keys(this.exportList).forEach(key => {
@@ -2020,15 +2020,15 @@ isOutOfStock(data) {
       )
     //}
 
-   
-    
+
+
   }
   exportAsXLSX() {
     this.excelService.exportAsExcelFile(this.excelData, 'Plantilla de Horas Extra');
   }
 
   handleFileInputPlantillaAsHorasExtra(file: FileList, $event) {
-   
+
     console.log($event);
     // console.log(this.fileToUpload);
     const selectedFile = file.item(0);
@@ -2046,7 +2046,7 @@ isOutOfStock(data) {
         this.dataExcel = XLSX.utils.sheet_to_json(workbook.Sheets[element]);
         console.log(this.dataExcel);
       });
-      
+
       const arrayVacio = (arr) => !Array.isArray(arr) || arr.length === 0;//array vacio retorna TRUE , array lleno FALSE
 
       if(!arrayVacio(this.dataExcel)){
@@ -2056,8 +2056,8 @@ isOutOfStock(data) {
       }
 
     }
-    
-  
+
+
   }
   subirDataExcelHorasExtra(dataExcel, $event)
   {
@@ -2098,23 +2098,23 @@ isOutOfStock(data) {
       accion: "get lista horas extra  rrhh",
       id_controlador: myVarGlobals.fCuentaBancos,
 
-      //DATOS 
+      //DATOS
       id_mes :  this.filter.mes,
       id_empresa : 1,
       anio :   this.filter.periodo,
       data_template : dataExcel,
 
-   
+
     };
     this.mensajeSppiner = "Verificando empleados...";
     this.lcargando.ctlSpinner(true);
     this.asistenciadiasempleService.verificarHorasExtra(data).subscribe(
-     
+
      (res) =>{
       console.log(res)
       this.verNoEncontrados = true;
       this.empHorasExtraEncontrados = res[0].encontrados;
-     
+
       // this.empleadosHorasExtra.forEach((element: any) => {
       //   Object.assign(element, {cuenta_id: this.cuentaContable?.id, cuenta_codigo: this.cuentaContable?.codigo, cuenta_nombre: this.cuentaContable?.nombre})
       // })
@@ -2122,15 +2122,15 @@ isOutOfStock(data) {
       this.lcargando.ctlSpinner(false);
       console.log(res);
       this.loading = false;
-     
+
       //this.formGroupIngresoDescuento.get('fcn_archivo_input').reset();
      },
-     
+
       (error) => {
         console.log(error);
         this.lcargando.ctlSpinner(false);
         this.toastr.error(error.error?.detail ?? error.error?.message);
-      
+
       }
     );
   }
@@ -2177,8 +2177,8 @@ isOutOfStock(data) {
 
   guardarHorasExtra(){
 console.log(this.filter.mes)
- 
-    let regValoresCeroNegativo = this.empHorasExtraEncontrados.filter(e => e.horas_extra_25 <= 0 && e.horas_extra_50 <= 0 && e.horas_extra_60 <= 0 && e.horas_extra_100 <= 0) 
+
+    let regValoresCeroNegativo = this.empHorasExtraEncontrados.filter(e => e.horas_extra_25 <= 0 && e.horas_extra_50 <= 0 && e.horas_extra_60 <= 0 && e.horas_extra_100 <= 0)
 
     if(this.filter.mes == 0 || this.filter.mes  ==null){
       this.messageService.add({ key: 'bc', severity: 'warn', summary: 'Mes', detail: ' Debe seleccionar un Mes.' });
@@ -2196,7 +2196,7 @@ console.log(this.filter.mes)
       this.messageService.add({ key: 'bc', severity: 'warn', summary: 'Horas Extra', detail: ' No puede guardar registros con horas extra en 0.' });
       return;
     }
-    
+
 
     Swal.fire({
       title: "Atención!!",
@@ -2291,12 +2291,12 @@ console.log(this.filter.mes)
           this.toastr.success(
             "Datos de horas extra guardados correctamente."
           );
-         
+
        // }
         // this.rerender();
         //this.consultarIngresoDescuento();
         this.lcargando.ctlSpinner(false);
-        
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -2355,7 +2355,7 @@ console.log(this.filter.mes)
     this.mensajeSppiner = "Cargando...";
     this.lcargando.ctlSpinner(true);
 
-   
+
     let data = {
       anio: Number(this.filter.periodo),
       mes: month,
@@ -2376,8 +2376,8 @@ console.log(this.filter.mes)
           this.vmButtons[25].habilitar= true
           this.btnSubirArchivoHorasExtra = false
         }
-        
-       
+
+
        this.empHorasExtraEncontrados.forEach((e,index) => {
         Object.assign(e,{
           linea:(index+1),
@@ -2385,12 +2385,12 @@ console.log(this.filter.mes)
           emp_full_nombre: e.empleado.emp_full_nombre,
           dep_nombre: e.departamento.dep_nombre,
           departamento: e.departamento.dep_nombre,
-          
+
         })
-        
+
        });
         this.lcargando.ctlSpinner(false);
-        
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -2434,11 +2434,11 @@ console.log(this.filter.mes)
 
 
   // geEmpleadosListaVerificada(prtEmp) {
-    
+
   //   if(this.programa==undefined || this.programa=='') { this.fk_programa=0 }
   //   if(this.departamento==null) { this.departamento=0 }
   //   if(this.area==null) { this.area=0 }
-     
+
   //   this.loading = true;
   //   let data = {
   //     // info: this.areaForm,
@@ -2478,7 +2478,7 @@ console.log(this.filter.mes)
   //         // }
   //         // this.toastr.info(this.dataResponseGeneral.detail);
   //         // // setTimeout(() => {
-  //         // //   // this.dtTrigger.next();
+  //         // //   // this.dtTrigger.next(null);
   //         // // }, 50);
   //       },
   //       error: (e) => {
@@ -2559,7 +2559,7 @@ console.log(this.filter.mes)
 
       default:
     }
-  
+
 
     console.log("delete");
     let data = {
@@ -2569,7 +2569,7 @@ console.log(this.filter.mes)
       id_controlador: myVarGlobals.fBovedas,
       anio: Number(this.filter.periodo),
       mes: month,
-     
+
     };
     // this.validaDt = false;
     this.mensajeSppiner = "Eliminando registros de Horas Extra...";

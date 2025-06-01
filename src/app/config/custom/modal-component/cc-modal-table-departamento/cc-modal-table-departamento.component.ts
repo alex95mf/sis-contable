@@ -160,7 +160,7 @@ export class CcModalTableDepartamentoComponent implements AfterViewChecked {
         this.loading = false;
 
         // setTimeout(() => {
-        //   this.dtTrigger.next();
+        //   this.dtTrigger.next(null);
         // }, 50);
       },
       error: (e) => {

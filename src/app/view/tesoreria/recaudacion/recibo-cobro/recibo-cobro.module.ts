@@ -12,7 +12,8 @@ import { ConceptoDetComponent } from './concepto-det/concepto-det.component';
 import { ListCruceConvenioComponent } from './list-cruce-convenio/list-cruce-convenio.component';
 import { ListNotaCreditoComponent } from './list-nota-credito/list-nota-credito.component';
 import { ListAnticipoPrecobradoComponent } from './list-anticipo-precobrado/list-anticipo-precobrado.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+// import { NgxCurrencyDirective } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    // NgxCurrencyDirective,
+    NgxCurrencyDirective,
     ReciboCobroRoutingModule
   ]
 })

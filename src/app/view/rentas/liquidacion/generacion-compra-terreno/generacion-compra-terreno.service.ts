@@ -19,7 +19,7 @@ export class GeneracionCompraTerrenoService {
   getLiquidaciones(data) {
     return this.api.apiCall("aranceles/get-liquidaciones", "POST", data);
   }
-  
+
 
   getExoneraciones(data) {
     return this.api.apiCall('aranceles/get-exoneraciones-codigo', 'POST', data);
@@ -45,7 +45,7 @@ export class GeneracionCompraTerrenoService {
   aprobarLiquidacion(id) {
     return this.api.apiCall(`aranceles/cobrarCTerreno/${id}`, 'POST', {});
   }
-  
+
   setLiquidaciones(data: any = {})
   {
     return this.api.apiCall('liquidacion/set-liquidacionCTerreno', 'POST', data)
@@ -64,7 +64,7 @@ export class GeneracionCompraTerrenoService {
   }
 
   getArriendos(data: any = {}) {
-    return this.api.apiCall('aranceles/get-liquidaciones-ar', 'POST', data).toPromise<any>()
+    return this.api.apiCall('aranceles/get-liquidaciones-ar', 'POST', data) as any
   }
-  
+
 }

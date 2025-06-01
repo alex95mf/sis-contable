@@ -15,8 +15,8 @@ import { CommonVarService } from '../../../../services/common-var.services';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { XlsExportService } from 'src/app/services/xls-export.service';
-import { ModalGruposComponent } from '../reporte-productos/modal-grupos/modal-grupos.component'; 
-import { ListBusquedaComponent } from '../reporte-productos/list-busqueda/list-busqueda.component'; 
+import { ModalGruposComponent } from '../reporte-productos/modal-grupos/modal-grupos.component';
+import { ListBusquedaComponent } from '../reporte-productos/list-busqueda/list-busqueda.component';
 import { DataTableDirective } from 'angular-datatables';
 
 @Component({
@@ -55,9 +55,9 @@ export class ReporteUnoComponent implements OnInit {
   claseSelect: any = 0;
   codigo_grupo:any
 
- 
 
- 
+
+
   cmb_grupo: any[] = [];
   cmb_subgrupo: any[] = [];
   cmb_productos: [];
@@ -66,7 +66,7 @@ export class ReporteUnoComponent implements OnInit {
   cmb_productos_filter: any[] = [];
 
   arrayBodega: Array<any> = [];
- 
+
    stockList = [
     {value: "1",label: "CON STOCK"},
     {value: "2",label: "SIN STOCK"},
@@ -96,7 +96,7 @@ export class ReporteUnoComponent implements OnInit {
       (res) => {
         this.lcargando.ctlSpinner(false);
         this.claseSelect = res
-        
+
         this.grupo_descripcion = this.claseSelect['codigo_grupo_producto'] + "-" + this.claseSelect['descripcion'] + "-" + this.claseSelect['tipo_bien']
         this.selectedGrupo = this.claseSelect['id_grupo_productos']
         console.log(this.claseSelect)
@@ -110,11 +110,11 @@ export class ReporteUnoComponent implements OnInit {
         this.selectedProductos = res['id_producto']
         this.nombreProducto = res['nombre']
 
-     
+
       }
     )
-  
-  
+
+
     this.vmButtons = [
       {
         orig: "btnsRenConsultaReporte",
@@ -202,7 +202,7 @@ export class ReporteUnoComponent implements OnInit {
   //   this.filter.estado = [evt]
   //  }
 
- 
+
 
   async consultarReporte() {
    // Validar opciones seleccionadas
@@ -215,7 +215,7 @@ export class ReporteUnoComponent implements OnInit {
     //   return;
     // }
 
-    
+
     this.lcargando.ctlSpinner(true)
     try {
       let data={
@@ -240,13 +240,13 @@ export class ReporteUnoComponent implements OnInit {
         this.vmButtons[2].habilitar = false
         this.lcargando.ctlSpinner(false)
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
     } catch (err) {
       console.log(err)
       this.lcargando.ctlSpinner(false)
       // setTimeout(() => {
-			// 	this.dtTrigger.next();
+			// 	this.dtTrigger.next(null);
 			// }, 50);
       this.toastr.error(err.error.message, 'Error consultando Reporte')
     }
@@ -271,7 +271,7 @@ export class ReporteUnoComponent implements OnInit {
       grupo: this.grupo_descripcion,
       bodega:bodega[0]?.nombre,
       ubicacion:this.ubicacion,
-      fecha_corte:moment(this.fechaCorte).format('YYYY-MM-DD'), 
+      fecha_corte:moment(this.fechaCorte).format('YYYY-MM-DD'),
       stock: stock[0]?.label ? stock[0]?.label : '',
       rows: this.dataProducto
     }
@@ -292,14 +292,14 @@ export class ReporteUnoComponent implements OnInit {
      this.apiService.getProductos(data).subscribe(res => {
       console.log(res['data'])
       this.cmb_productos= res['data']
-      
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message)
     })
-    
+
      this.cmb_subgrupo_filter = this.cmb_subgrupo.filter((item: any) => item.parent_id == event.id_grupo_productos)
-     
+
      setTimeout(() => this.lcargando.ctlSpinner(false), 750)
   // }
  }
@@ -336,14 +336,14 @@ export class ReporteUnoComponent implements OnInit {
     modal.componentInstance.validacionModal = true;
     modal.componentInstance.validar = true
     modal.componentInstance.verifyRestore = this.verifyRestore;
- 
+
   }
-  
+
   expandProductos() {
 
     // abre modal de forma de pago distinto para cada titulo que se vaya a pagar
     const modal = this.modalService.open(ListBusquedaComponent, { size: "xl", backdrop: 'static', windowClass: 'viewer-content-general' })
-    
+
     modal.componentInstance.claseSelect = this.claseSelect
     modal.componentInstance.verifyRestore = this.verifyRestore;
   }

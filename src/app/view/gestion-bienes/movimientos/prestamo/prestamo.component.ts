@@ -7,20 +7,20 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { PrestamoService } from './prestamo.service'; 
+import { PrestamoService } from './prestamo.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalInvoicesProductComponent } from 'src/app/view/comercializacion/facturacion/invoice-sales/modal-invoices-product/modal-invoices-product.component'; 
+import { ModalInvoicesProductComponent } from 'src/app/view/comercializacion/facturacion/invoice-sales/modal-invoices-product/modal-invoices-product.component';
 import { DiferedComponent } from 'src/app/view/comercializacion/facturacion/invoice-sales/difered/difered.component';
 import { GlobalTableComponent } from '../../../commons/modals/global-table/global-table.component';
 import { Socket } from '../../../../services/socket.service';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
-import { BusquedaPrestamoComponent } from './busqueda-prestamo/busqueda-prestamo.component'; 
+import { BusquedaPrestamoComponent } from './busqueda-prestamo/busqueda-prestamo.component';
 import { BusquedaPrestamoSalidasComponent } from './busqueda-prestamo-salidas/busqueda-prestamo-salidas.component';
 import { ListBusquedaPrestamoComponent } from './list-busqueda-prestamo/list-busqueda-prestamo.component';
 import { ModalDepartamentosComponent } from 'src/app/config/custom/modal-departamentos/modal-departamentos.component';
 import { EncargadoTrasladoComponent } from '../traslado/encargado-traslado/encargado-traslado.component';
 import { ModalGruposComponent } from '../../configuracion/producto/modal-grupos/modal-grupos.component';
-import { ModalVistaFotosComponent } from '../traslado/modal-vista-fotos/modal-vista-fotos.component'; 
+import { ModalVistaFotosComponent } from '../traslado/modal-vista-fotos/modal-vista-fotos.component';
 import { DetallesProductoComponent } from '../traslado/detalles-producto/detalles-producto.component';
 import { ModalContribuyentesComponent } from "src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component";
 import { ModalRegContribuyenteComponent } from './modal-reg-contribuyente/modal-reg-contribuyente.component';
@@ -87,11 +87,11 @@ export class PrestamoComponent implements OnInit {
   /*actions*/
   // actions: any = { dComponet: false };
 
-  actions: any = { btnNuevo: false, 
-    btnGuardar: false, 
-    btnEnviar: false, 
-    btncancelar: false, 
-    btnDescargar: false, 
+  actions: any = { btnNuevo: false,
+    btnGuardar: false,
+    btnEnviar: false,
+    btncancelar: false,
+    btnDescargar: false,
     dComponet: false,
     view: false };
 
@@ -125,21 +125,21 @@ export class PrestamoComponent implements OnInit {
     }
 
     estadoList = [
-  
+
       {value: "B",label: "Bueno"},
       {value: "R",label: "Regular"},
       {value: "M",label: "Mal estado"}
-  
-    ] 
+
+    ]
     tipoList = [
       {value: "S",label: "Salida"},
       {value: "D",label: "Devolución"},
-    ] 
+    ]
     tipoPersonasList = [
       {value: "E",label: "Empleado"},
       {value: "C",label: "Contribuyente"},
       {value: "N",label: "No Contribuyente"}
-    ] 
+    ]
 
   /*data totales*/
   dataTotales = { subTotalPagado: 0.00, ivaPagado: 0.00, totalPagado: 0.00, ivaBase: 0.00, iva0: 0.00 };
@@ -169,9 +169,9 @@ export class PrestamoComponent implements OnInit {
 
   zona_filter:any = []
   sector_filter:any = []
- 
 
-  
+
+
   grupo = {
     codigo_grupo_producto: null,
     descripcion: null,
@@ -255,18 +255,18 @@ sectorNombre: any;
     //     this.lcargando.ctlSpinner(false)
     //     this.disabled=false;
     //     this.agregaProduct=false;
-        
+
     //   }
     // )
     this.commonVarServices.selectContribuyenteCustom.asObservable().subscribe(
       (res) => {
         console.log(res);
-        
+
         this.contribuyenteActive = res;
       });
 
 
-   
+
     this.commonVarServices.encargadoSelect.asObservable().subscribe(
       (res)=>{
         console.log(res);
@@ -283,14 +283,14 @@ sectorNombre: any;
             this.prestamo.nombre_departamento_recibido = res['recibido']['departamento']['dep_nombre'];
             this.prestamo.nombre_cargo_recibido = res['recibido']['cargos']['car_nombre'];
         }
-        
+
         this.filtClient = {
           id_personal: res['dt']['id_empleado'],
           nombres: res['dt']['emp_full_nombre']
 
         }
         //this.moduloUser = res['cargos']['car_nombre']
-        
+
       }
     )
 
@@ -378,9 +378,9 @@ sectorNombre: any;
         this.prestamo = res;
         this.prestamo.responsable = res.nombre_persona_responsable;
         this.prestamo.recibido = res.nombre_empleado_recibido;
-        
+
         this.prestamo.tipo_persona = res.tipo_persona_recibido;
-       
+
         if(this.prestamo.tipo_persona=='E'){
           this.prestamo.nombre_departamento_recibido = res.nombre_departamento_recibido;
           this.prestamo.nombre_cargo_recibido = res.nombre_cargo_recibido;
@@ -420,7 +420,7 @@ sectorNombre: any;
           })
           this.eventoAux = this.tipoEventosList.filter(e => e.valor == this.evento.tipo_evento)
           this.eventoNombre = this.eventoAux[0].descripcion
-          
+
           // this.evento= res.eventos;
           // this.evento.fecha_inicio= res.eventos.fecha_inicio.split(' ')[0];
           // this.evento.fecha_fin= res.eventos.fecha_fin.split(' ')[0];
@@ -442,22 +442,22 @@ sectorNombre: any;
         this.vmButtons[3].habilitar = false;
 
 
-        
-        this.cantidad_bienes =res.detalles.length 
-       
+
+        this.cantidad_bienes =res.detalles.length
+
        console.log(res.detalles);
        res.detalles.forEach((p) => {
-              Object.assign(p, 
-                { 
+              Object.assign(p,
+                {
                   action: true,
                   nombre: p.producto[0].nombre,
-                  codigoProducto : p.code_product, 
+                  codigoProducto : p.code_product,
                   precio_normal:p.costo_unitario,
                   stock: p.stock_actual,
                   quantity: p.cantidad,
                   price: p.costo,
                   totalAux:  p.costo_total,
-                 
+
                 });
         });
         this.dataProducto = JSON.parse(JSON.stringify(res.detalles));
@@ -472,7 +472,7 @@ sectorNombre: any;
         this.disabledCampos = false;
         this.disabledCampo = false;
         this.disabledDevolucion = true;
-        
+
         this.disabledGrupo = true;
         this.disabled=true;
         this.isNew = true;
@@ -484,7 +484,7 @@ sectorNombre: any;
         this.prestamo.estado = res.estado;
         this.prestamo.fecha = moment(new Date()).format('YYYY-MM-DD');
         this.prestamo.recibido = res.nombre_empleado_recibido;
-       
+
         this.prestamo.tipo_persona = res.tipo_persona_recibido;
         if(this.prestamo.tipo_persona=='E'){
           this.prestamo.nombre_departamento_recibido = res.nombre_departamento_recibido;
@@ -496,7 +496,7 @@ sectorNombre: any;
         }else {
 
         }
-        
+
         if(res.tipo_persona_recibido=='E'){
           this.prestamo.recibido = res.nombre_empleado_recibido;
           this.prestamo.nombre_departamento_recibido = res.nombre_departamento_recibido;
@@ -507,9 +507,9 @@ sectorNombre: any;
         this.prestamo.nombre_departamento_responsable=res.nombre_cargo_responsable;
         this.fecha_salida = res.fecha;
         this.prestamo.doc_salida = res.num_doc;
-        //this.grupo.tipo_bien = 
+        //this.grupo.tipo_bien =
 
-        
+
         this.zona_filter = this.zonaList.filter(e => e.valor === res.zona)
         this.prestamo.zona = this.zona_filter[0].descripcion;
         console.log(this.zona_filter)
@@ -545,22 +545,22 @@ sectorNombre: any;
         //this.vmButtons[3].habilitar = false;
 
 
-        
-        this.cantidad_bienes =res.detalles.length 
-       
+
+        this.cantidad_bienes =res.detalles.length
+
        console.log(res.detalles);
        res.detalles.forEach((p) => {
-              Object.assign(p, 
-                { 
+              Object.assign(p,
+                {
                   action: true,
                   nombre: p.producto[0].nombre,
-                  codigoProducto : p.code_product, 
+                  codigoProducto : p.code_product,
                   precio_normal:p.costo_unitario,
                   stock: p.stock_actual,
                   quantity: p.cantidad,
                   price: p.costo,
                   totalAux:  p.costo_total,
-                 
+
                 });
         });
         this.dataProducto = JSON.parse(JSON.stringify(res.detalles));
@@ -572,10 +572,10 @@ sectorNombre: any;
       (res) => {
         console.log(res)
         //this.dataProducto = res['data'];
-      
+
         this.addItems(res)
         this.vmButtons[0].habilitar = false;
-         
+
     }
     )
 
@@ -590,8 +590,8 @@ sectorNombre: any;
         if(res.custom1 == 'INV-PRESTAMO-BIENES'){
           // this.disabledCampo = res.validacion;
         }
-        
-        
+
+
       }
     );
   }
@@ -664,10 +664,10 @@ sectorNombre: any;
           if(flag){
             let cantidad= 0
             let items =
-               { 
+               {
                 action: true,
                 nombre: data.nombre,
-                codigoProducto : data.codigoproducto, 
+                codigoProducto : data.codigoproducto,
                 precio_normal:data.PVP,
                 stock: data.stock,
                 quantity: 1,
@@ -679,7 +679,7 @@ sectorNombre: any;
                 id_subgrupo_producto:this.subgrupo.id_subgrupo_producto,
                 tipo_bien:this.grupo.tipo_bien,
                 estado: this.estado_producto
-        
+
               };
 
               this.dataProducto.push(items);
@@ -689,17 +689,17 @@ sectorNombre: any;
             console.log(flag)
           }else{
             console.log(flag)
-            this.toastr.info( "No puede seleccionar el mismo bien dos veces"); 
+            this.toastr.info( "No puede seleccionar el mismo bien dos veces");
           }
           // this.dataProducto.forEach(p=> {
           //   if(p.codigoProducto == data.codigoProducto){
           //     this.toastr.info("No puede repetir este bien");
           //   }else{
           //     let items =
-          //     { 
+          //     {
           //       action: true,
           //       nombre: data.nombre,
-          //       codigoProducto : data.codigoProducto, 
+          //       codigoProducto : data.codigoProducto,
           //       precio_normal:data.PVP,
           //       stock: data.stock,
           //       quantity: 1,
@@ -711,7 +711,7 @@ sectorNombre: any;
           //       id_subgrupo_producto:this.subgrupo.id_subgrupo_producto,
           //       tipo_bien:this.grupo.tipo_bien,
           //       estado: this.estado_producto
-        
+
           //     };
           //     this.dataProducto.push(items);
           //     console.log(this.dataProducto)
@@ -721,10 +721,10 @@ sectorNombre: any;
           // });
         }else{
           let items =
-              { 
+              {
                 action: true,
                 nombre: data.nombre,
-                codigoProducto : data.codigoproducto, 
+                codigoProducto : data.codigoproducto,
                 precio_normal:data.PVP,
                 stock: data.stock,
                 quantity: 1,
@@ -736,7 +736,7 @@ sectorNombre: any;
                 id_subgrupo_producto:this.subgrupo.id_subgrupo_producto,
                 tipo_bien:this.grupo.tipo_bien,
                 estado: this.estado_producto
-        
+
               };
               this.dataProducto.push(items);
               this.sumarItems()
@@ -744,7 +744,7 @@ sectorNombre: any;
               this.disabledCantidad=true;
         }
       }
-        
+
     }
   }
 
@@ -752,7 +752,7 @@ sectorNombre: any;
     this.cantidad_bienes += +1;
   }
   restarItems(){
-    let valor_restar=1 
+    let valor_restar=1
     let cantidad = this.cantidad_bienes
     if(this.cantidad_bienes!=0){
       this.cantidad_bienes =  +cantidad - +valor_restar;
@@ -776,7 +776,7 @@ sectorNombre: any;
     }
     this.invService.getCatalogos(data).subscribe(res => {
       this.tipoEventosList = [];
-     
+
       res['data']['CAL_EVENTO'].forEach(e => {
         this.tipoEventosList.push(e);
       });
@@ -796,13 +796,13 @@ sectorNombre: any;
       this.expandListDocumentosSalidasRec()
     }
 
-  
+
   }
 
   buscarGrupoProducto(event){
     this.mensajeSppiner = "Cargando...";
     this.lcargando.ctlSpinner(true);
-   
+
     let data = {
        tipo_bien: event
     }
@@ -916,7 +916,7 @@ sectorNombre: any;
   modal.componentInstance.subgrupo = this.subgrupo
   modal.componentInstance.id_custodio = this.prestamo.id_responsable
   modal.componentInstance.verifyRestore = this.verifyRestore;
-  
+
   }
 
   deleteItems(index) {
@@ -948,7 +948,7 @@ sectorNombre: any;
       this.dataTotales.totalPagado = this.dataTotales.subTotalPagado + this.dataTotales.ivaPagado;
       this.valueLethers = this.commonVarServices.NumeroALetras(this.dataTotales.totalPagado, false);
       this.restarItems()
-      
+
     }
   }
 
@@ -1016,9 +1016,9 @@ sectorNombre: any;
       doc_salida:null,
       observaciones:null,
       estado:null
-      
-      
-    
+
+
+
       // recibido:null,
       // id_recibido:null,
       // nombre_departamento_recibido:null,
@@ -1057,13 +1057,13 @@ sectorNombre: any;
       tipo_evento: 0,
       id_origin: 0
     };
-    
+
     this.contribuyenteActive = {
       razon_social: ""
     };
 
-    this.commonVarServices.clearAnexos.next()
-  
+    this.commonVarServices.clearAnexos.next(null)
+
     this.actions.dComponet = false;
     this.dataProducto = [];
     this.vmButtons[0].habilitar = false;
@@ -1108,70 +1108,70 @@ sectorNombre: any;
       // }
       //if (this.UserSelect == undefined) {
       //   this.toastr.info("Debe seleccionar un responsable");
-      //   flag = true;  
+      //   flag = true;
       // }else if (this.prestamo.recibido_por == "" || this.prestamo.recibido_por == undefined) {
       //   this.toastr.info("Debe ingresar el nombre de la persona que recibira los bienes prestados");
-      //   flag = true;  
+      //   flag = true;
       // }
       console.log(this.prestamo.tipo);
       if (this.prestamo.zona == 0 || this.prestamo.zona == undefined) {
         this.toastr.info('Debe ingresar la zona.')
-        flag = true; 
+        flag = true;
       }
       else if (this.prestamo.codigo_sector == 0 || this.prestamo.codigo_sector == undefined) {
         this.toastr.info('Debe ingresar el sector.')
-        flag = true; 
+        flag = true;
       }
       else if (this.prestamo.tipo_persona == 0 || this.prestamo.tipo_persona == undefined) {
         this.toastr.info('Debe seleccionar el tipo de persona que recibe.')
-        flag = true; 
+        flag = true;
       }
       else if (this.prestamo.tipo_persona=='E') {
         if (this.prestamo.recibido == '' || this.prestamo.recibido == undefined) {
           this.toastr.info('Debe ingresar el nombre del empleado que recibirá el bien.')
-          flag = true; 
+          flag = true;
         }
       }else if(this.prestamo.tipo_persona=='C'){
         if (this.contribuyenteActive.razon_social == '' || this.contribuyenteActive.razon_social == undefined) {
           this.toastr.info('Debe ingresar el nombre del contribuyente que recibirá el bien.')
-          flag = true; 
+          flag = true;
         }
       }else if(this.prestamo.tipo_persona=='N'){
         if (this.prestamo.recibido_por== '' || this.prestamo.recibido_por == undefined) {
           this.toastr.info('Debe ingresar el nombre de la persona que recibirá el bien.')
-          flag = true; 
+          flag = true;
         }
       }
-      
-      
+
+
       if (this.prestamo.tipo=='S'){
         if (
           this.evento.titulo == '' || this.evento.titulo == undefined
         ) {
           this.toastr.info('Debe ingresar un título para el evento.')
-          flag = true; 
+          flag = true;
         } else if(
           this.evento.descripcion == '' || this.evento.descripcion == undefined
         ) {
           this.toastr.info('Ingrese una descripción para el evento.')
-          flag = true; 
+          flag = true;
         } else if(
           this.evento.tipo_evento == 0 || this.evento.tipo_evento == undefined
         ) {
           this.toastr.info('Debe seleccionar un tipo de evento.')
-          flag = true; 
+          flag = true;
         }
-        
+
         if(
           this.evento.fecha_fin < this.evento.fecha_inicio
         ) {
           this.toastr.info('La fecha final del evento no puede ser anterior a la fecha de inicio.')
-          flag = true; 
+          flag = true;
         } else if(
           (this.evento.fecha_fin == this.evento.fecha_inicio) &&  (this.evento.hora_fin <= this.evento.hora_inicio)
         ) {
           this.toastr.info('Si el evento es del mismo día la hora final no puede ser igual o menor a la hora inicial del evento.')
-          flag = true; 
+          flag = true;
         }
 
 
@@ -1181,7 +1181,7 @@ sectorNombre: any;
 
 
       else if(this.dataProducto.length != 0 ) {
-       
+
             for (let index = 0; index < this.dataProducto.length; index++) {
               if (this.dataProducto[index].quantity <= 0 && this.dataProducto[index].action ) {
                 this.toastr.info("Revise la cantidad de los productos, no puede estar vacio o ser 0");
@@ -1204,19 +1204,19 @@ sectorNombre: any;
           flag = true;
         } else if(this.dataProducto[0]==undefined){
           this.toastr.info("Debe seleccionar productos");
-          flag = true;  
+          flag = true;
         }else if (this.dataProducto[0].codigoproducto == null && this.dataProducto.length == 0) {
           this.toastr.info("Ingrese al menos un producto");
-          flag = true;  
+          flag = true;
         }
-    
+
     (!flag) ? resolve(true) : resolve(false);
   });
   }
 
 
   async saveSales() {
-   
+
     let notify = `Se ha generado una nuevo Prestamo de bienes por el usuario ${this.dataUser.nombre}`;
     let productSend = [];
     let prefict = this.dataUser.permisos_doc.filter(e => e.fk_documento == 2);
@@ -1312,7 +1312,7 @@ sectorNombre: any;
       }else if(this.prestamo.tipo=='D'){
         this.prestamo.estado='D';
       }
-      
+
       let data = {
         list_product: productSend,
         id_user: this.dataUser.id_usuario,
@@ -1330,7 +1330,7 @@ sectorNombre: any;
         evento:this.evento,
 
       }
-       console.log(data); 
+       console.log(data);
       this.invService.savePrestamoBienes(data).subscribe(
         res => {
         if (res["status"] == 1) {
@@ -1370,7 +1370,7 @@ sectorNombre: any;
             if(this.eventoAux[0]!=undefined){
               this.eventoNombre = this.eventoAux[0].descripcion
             }
-         
+
           }else{
             this.eventoNombre = ""
           }
@@ -1384,7 +1384,7 @@ sectorNombre: any;
             if(this.sectorAux[0]!=undefined){
               this.sectorNombre = this.sectorAux[0].descripcion
             }
-            
+
           }else if(this.prestamo.tipo='D'){
             this.zonaNombre = this.prestamo.zona
             this.sectorNombre = this.prestamo.codigo_sector
@@ -1396,9 +1396,9 @@ sectorNombre: any;
           this.vmButtons[1].habilitar = true;
           this.vmButtons[2].habilitar = true;
           this.vmButtons[3].habilitar = false;
-          
+
          // this.imprimirComprobante()
-         
+
         } else {
           this.lcargando.ctlSpinner(false);
           this.cancelSales();
@@ -1460,7 +1460,7 @@ sectorNombre: any;
     this.vmButtons[1].habilitar = false;
     this.vmButtons[2].habilitar = false;
     this.disabledCampos = false
-    
+
   }
 
   cargaFoto(archivos) {
@@ -1509,7 +1509,7 @@ sectorNombre: any;
       id_controlador: myVarGlobals.fGestBienesPrestamo,
       accion: `Nuevo anexo para Prestamo de Bienes ${id_prestamo}`,
       ip: this.commonServices.getIpAddress(),
-      custom1:'INV-PRESTAMO-BIENES' 
+      custom1:'INV-PRESTAMO-BIENES'
     }
     if(this.fileList != undefined && this.fileList.length!=0){
       for (let i = 0; i < this.fileList.length; i++) {
@@ -1521,7 +1521,7 @@ sectorNombre: any;
   }
   UploadService(file,  identifier, payload?: any): void {
     this.invService.uploadAnexo(file, payload).subscribe(
-      res => { 
+      res => {
         this.commonVarServices.contribAnexoLoad.next({condi:'infimas', id: identifier})
       },
       err => {
@@ -1540,13 +1540,13 @@ sectorNombre: any;
 
 
   expandListDocumentosRec() {
-   
+
     const modal = this.modalService.open(BusquedaPrestamoComponent, { size: "xl", backdrop: 'static', windowClass: 'viewer-content-general' })
     // modal.componentInstance.contr = this.contribuyenteActive;
     modal.componentInstance.permissions = this.permissions;
   }
   expandListDocumentosSalidasRec() {
-   
+
     const modal = this.modalService.open(BusquedaPrestamoSalidasComponent, { size: "xl", backdrop: 'static', windowClass: 'viewer-content-general' })
     // modal.componentInstance.contr = this.contribuyenteActive;
     modal.componentInstance.permissions = this.permissions;
@@ -1580,7 +1580,7 @@ sectorNombre: any;
   //   modal.componentInstance.validar = true
   //   modal.componentInstance.verifyRestore = this.verifyRestore;
   //   modal.componentInstance.claseSelect = this.claseSelect;
-    
+
   //   //this.generaActionRawMaterial()
   // }
   expandirVistaFotos(index) {
@@ -1593,7 +1593,7 @@ sectorNombre: any;
     modalInvoice.componentInstance.indexActive = index;
   }
   showDetalleProducto(data) {
-    
+
     const modalInvoice = this.modalService.open(DetallesProductoComponent,{
       size:"xl",
       backdrop: "static",
@@ -1601,7 +1601,7 @@ sectorNombre: any;
     });
     modalInvoice.componentInstance.data = data;
     modalInvoice.componentInstance.isNew = this.isNew;
-    
+
   }
   modalContirbuyente(){
     let modal =  this.modalService.open(ModalContribuyentesComponent,{
@@ -1632,7 +1632,7 @@ sectorNombre: any;
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
       //modalInvoice.componentInstance.ticket = this.ticket;
-      
+
     }
   }
 

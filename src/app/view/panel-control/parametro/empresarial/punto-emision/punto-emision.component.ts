@@ -126,7 +126,7 @@ export class PuntoEmisionComponent implements OnInit {
     this.filter = {
       nombre: undefined,
       administrador: undefined,
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -188,14 +188,14 @@ export class PuntoEmisionComponent implements OnInit {
         this.validaDtUser = true;
         this.guardaT = res["data"];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       },
       (error) => {
         this.validaDtUser = true;
         this.guardaT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
         this.toastr.info(error.error.message);
       }
@@ -772,7 +772,7 @@ export class PuntoEmisionComponent implements OnInit {
 
   updatePtoEmision(dt) {
     this.commonVarSrvice.updPerm.next(true);
-    this.commonVarSrvice.listeButtonPtEm.next();
+    this.commonVarSrvice.listeButtonPtEm.next(null);
     this.disabledUpdated = true;
     this.ptoemision.empresa = dt.fk_empresa;
     this.getSucursal();

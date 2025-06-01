@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EstadisticasRoutingModule } from './estadisticas.routing';
 import { EstadisticasComponent } from './estadisticas.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { CalendarModule } from 'primeng/calendar';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -17,7 +17,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     AppCustomModule,
     CalendarModule,
     NgxChartsModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     EstadisticasRoutingModule,
   ],
 })

@@ -7,9 +7,9 @@ import io from 'socket.io-client';
 import * as SocketIOClient from 'socket.io-client';
 //import { io } from 'socket.io-client';
 import { ToastrService } from 'ngx-toastr';
-import { CommonService } from './commonServices'; 
+import { CommonService } from './commonServices';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs'; 
+import { Observable } from 'rxjs';
 
 // Convertimos la función "io" a un tipo callable
 const ioFunc = io as unknown as (uri: string, opts?: any) => any;
@@ -41,7 +41,7 @@ export class Socket {
     onSocket() {
         this.socket.on('notification-push', () => {
             this.toastr.info('Un nuevo mensaje en su bandeja de entrada');
-            this.commonSrv.onHandleNotification.next();
+            this.commonSrv.onHandleNotification.next(null);
         });
     }
 
@@ -53,5 +53,5 @@ export class Socket {
     onEmitDisconnected(identifier) {
         this.socket.emit('leave-room', identifier);
     }
-   
+
 }

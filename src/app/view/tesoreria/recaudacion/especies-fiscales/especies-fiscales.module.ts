@@ -7,7 +7,7 @@ import { ModalEspeciesFiscalesComponent } from './modal-especies-fiscales/modal-
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { AnulacionEspeciesComponent } from './anulacion-especies/anulacion-especies.component';
 import { HistorialAnulacionesComponent } from './historial-anulaciones/historial-anulaciones.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     EspeciesFiscalesRoutingModule,
   ]
 })

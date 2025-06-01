@@ -12,7 +12,7 @@ import { NgxCurrencyModule } from "ngx-currency";
         CommonModule,
         RegistroRoutingModule,
         AppCustomModule,
-        NgxCurrencyModule,
+        NgxCurrencyDirective,
     ],
     entryComponents: []
 })

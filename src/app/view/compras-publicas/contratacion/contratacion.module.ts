@@ -10,14 +10,14 @@ import { AnexosListComponentDis } from './anexos-list/anexos-list-dis.component'
 import { AnexosListUnoComponentDis } from './anexos-list-uno/anexos-list-uno.component';
 // import { AnexosListaComponentDis } from './anexos-lista/anexos-lista-dis.component';
 import { CalendarModule } from 'primeng/calendar';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ExcelService } from 'src/app/services/excel.service';
 @NgModule({
   declarations: [
     ContratacionComponent,
     DetalleContratacionComponent,
     ModalCondicionesComponent,
-    AnexosListComponentDis, 
+    AnexosListComponentDis,
     AnexosListUnoComponentDis
     // AnexosListaComponentDis
   ],
@@ -30,7 +30,7 @@ import { ExcelService } from 'src/app/services/excel.service';
     CalendarModule,
     ContratacionRoutingModule,
     NgxCurrencyModule
-    
+
   ]
 })
 export class ContratacionModule { }

@@ -100,7 +100,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
     total: 0,
     fk_documento_2: null,
     documento_2: "",
-    detalles: [], 
+    detalles: [],
   }
 
   estados = [
@@ -132,7 +132,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
 
     this.commonVarService.selectContribuyenteCustom.pipe(takeUntil(this.onDestroy$)).subscribe(
       (res) => {
-        
+
         if (res.valid == 13) {
           console.log(res);
           this.contribuyenteActive = res;
@@ -173,7 +173,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
             }
             )
         }
-  
+
 
         this.liquidacion = res;
         this.liquidacion.fecha = res.fecha.split(" ")[0];
@@ -201,7 +201,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
                 total: e.valor,
                 aplica: true
               }
-              
+
             this.conceptos.push(conc);
             }
           }else if(e.tasas){
@@ -222,12 +222,12 @@ export class AnulacionComponent implements OnInit, OnDestroy {
           }
         });
 
-  
+
         this.vmButtons[0].habilitar = true;
         this.vmButtons[1].habilitar = false;
         this.vmButtons[2].habilitar = false;
         this.vmButtons[3].habilitar = false;
-      
+
       }
     );
 
@@ -267,7 +267,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
                 total: e.valor,
                 aplica: true
               }
-              
+
             this.conceptos.push(conc);
             }
           }else if(e.tasas){
@@ -299,13 +299,13 @@ export class AnulacionComponent implements OnInit, OnDestroy {
            this.conceptos.push(conc);
           }
 
-          
+
         });
 
         if (res.subtotal==0){
           this.calcSubtotal();
         }else{
-                  
+
           this.liquidacion.subtotal = res.subtotal;
           this.liquidacion.exoneraciones = res.exoneraciones;
           this.liquidacion.total = res.total;
@@ -313,19 +313,19 @@ export class AnulacionComponent implements OnInit, OnDestroy {
 
         this.liquidacion.detalles = res.detalles;
         console.log(this.liquidacion);
-         
+
         this.vmButtons[0].habilitar = false;
         this.vmButtons[1].habilitar = false;
         this.vmButtons[2].habilitar = false;
         this.vmButtons[3].habilitar = false;
- 
+
       }
     );
 
    }
 
    ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -383,7 +383,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
       this.validaPermisos();
     }, 0);
   }
-  
+
   metodoGlobal = (event) => {
     switch (event.items.boton.texto) {
       case " GUARDAR":
@@ -394,7 +394,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
         this.expandListLiquidaciones();
         break;
       case " IMPRIMIR":
-        
+
         break;
       case " LIMPIAR":
         this.confirmRestore();
@@ -409,7 +409,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fRenPredUrbanoEmision,
       id_rol: this.dataUser.id_rol,
@@ -532,7 +532,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
             "mes": Number(moment(this.liquidacion.fecha).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-             
+
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
 
@@ -540,7 +540,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
                 this.lcargando.ctlSpinner(true);
                 this.liquidacion.fk_contribuyente = this.contribuyenteActive.id_cliente;
                 this.liquidacion.fk_concepto = this.conceptosBackup.find((c: any) => c.codigo == "AN").id;
-      
+
                 let data = {
                   concepto_codigo: this.anulacion.codigo,
                   liquidacion: this.liquidacion
@@ -564,7 +564,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
                     this.vmButtons[3].habilitar = false;
                     this.guardarDeuda(res['data'].id_liquidacion);
                     this.lcargando.ctlSpinner(false);
-      
+
                   },
                   (error) => {
                     console.log(error)
@@ -576,14 +576,14 @@ export class AnulacionComponent implements OnInit, OnDestroy {
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
               }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
             })
         }
       });
-    
+
   }
 
   guardarDeuda(id) {
@@ -715,13 +715,13 @@ export class AnulacionComponent implements OnInit, OnDestroy {
       total: 0,
       fk_documento_2: null,
       documento_2: "",
-      detalles: [], 
+      detalles: [],
     }
 
     this.contribuyenteActive = {
       razon_social: ""
     };
-    
+
     // this.conceptosBackup = [];
     this.conceptos = [];
     this.exoneracionesBackup = [];
@@ -791,7 +791,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
       this.toastr.warning("No tiene permisos consultar Liquidaciones.", this.fTitle);
       return
     }
-    
+
     const modalInvoice = this.modalService.open(ModalLiquidacionesComponent,{
       size:"lg",
       backdrop: "static",

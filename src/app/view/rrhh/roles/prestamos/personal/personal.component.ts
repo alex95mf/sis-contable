@@ -41,7 +41,7 @@ export class PersonalComponent implements OnInit {
     vmButtons: any = [];
     mensajeSppiner: string = "Cargando...";
     @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  
+
   ngOnInit(): void {
 
     this.vmButtons = [
@@ -55,12 +55,12 @@ export class PersonalComponent implements OnInit {
     this.getClientes();
   }
 
-  metodoGlobal(evento: any) {	
+  metodoGlobal(evento: any) {
 		switch (evento.items.boton.texto) {
 			case "CERRAR":
 				this.closeModal();
 			break;
-		}    
+		}
 	}
 
    /* actions modals */
@@ -98,11 +98,11 @@ export class PersonalComponent implements OnInit {
       this.flag += 1;
       this.guardarolT = res["data"];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, (error) => {
       this.lcargando.ctlSpinner(false);
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
       this.processing = true;
     });
   }
@@ -133,11 +133,11 @@ export class PersonalComponent implements OnInit {
         this.flag += 1;
         this.guardarolT = res["data"];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, (error) => {
         this.lcargando.ctlSpinner(false);
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.processing = true;
       }
     );

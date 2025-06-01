@@ -180,7 +180,7 @@ export class ModalConsultaComponent implements OnInit {
       ];
     }
 
-    this.commonVarSrv.bandTrabTicket.next();
+    this.commonVarSrv.bandTrabTicket.next(null);
   }else{
     this.deshabilitar=true;
     this.gestOrden = {

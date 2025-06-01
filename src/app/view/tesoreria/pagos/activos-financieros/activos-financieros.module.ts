@@ -8,7 +8,7 @@ import { ModalInspeccionesComponent } from './modal-inspecciones/modal-inspeccio
 import { ModalLiquidacionesComponent } from './modal-liquidaciones/modal-liquidaciones.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { MovimientosBancariosComponent } from './movimientos-bancarios/movimientos-bancarios.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({

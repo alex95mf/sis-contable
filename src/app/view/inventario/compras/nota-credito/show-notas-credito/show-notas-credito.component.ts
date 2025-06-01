@@ -99,11 +99,11 @@ export class ShowNotasCreditoComponent implements OnInit {
           element['total'] = parseFloat(element['total']).toFixed(2);
         });
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       });
   }

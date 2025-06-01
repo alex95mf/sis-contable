@@ -9,7 +9,7 @@ export class RolGeneralEmplService {
 
 
   constructor(private apiService: ApiServices) { }
-  
+
   cuentasContables$ = new EventEmitter<any>();
 
   listaRoles$ = new EventEmitter<any>();
@@ -17,9 +17,9 @@ export class RolGeneralEmplService {
   GenerarNominaRolGeneral(data) {
     return this.apiService.apiCall('nomina/reporte-rolmensual/reporte-rubros', 'POST', data);
   }
- 
 
-  
+
+
 
   GenerarNominaRolGeneralMensual(data) {
     return this.apiService.apiCall('nomina/rolgeneral/generarRolMensual', 'POST', data);
@@ -32,7 +32,7 @@ export class RolGeneralEmplService {
     return this.apiService.apiCall('nomina/rolgeneral/eliminarRolGeneral', 'POST', data);
   }
 
-  
+
 
   //public function GeneralRolQuincenal(Request $request)
 
@@ -51,7 +51,7 @@ export class RolGeneralEmplService {
   anularOrdenesPago(data: any) {
     return this.apiService.apiCall('nomina/rolgeneral/anularOrdenesPago','POST', data);
   }
- 
+
 
   getConCuentas(data){
     return this.apiService.apiCall('gestion-bienes/cuentas', 'POST',data);
@@ -88,11 +88,11 @@ export class RolGeneralEmplService {
   }
 
   getUltimoNumero(data: any = {}) {
-    return this.apiService.apiCall('nomina/ultimo-numero-control', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('nomina/ultimo-numero-control', 'POST', data) as any
   }
 
   getNumeroControl(data: any) {
-    return this.apiService.apiCall('nomina/numero-control', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('nomina/numero-control', 'POST', data) as any
   }
 
   getPeriodos(data: any = {}) {
@@ -104,21 +104,21 @@ export class RolGeneralEmplService {
     })
   }
 
-  
-
-  
-
-  
 
 
-  
 
 
-  
 
-  
 
-  
+
+
+
+
+
+
+
+
+
 
 
 

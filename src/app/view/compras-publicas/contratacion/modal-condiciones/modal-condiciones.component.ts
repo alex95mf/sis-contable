@@ -20,7 +20,7 @@ standalone: false,
 })
 export class ModalCondicionesComponent implements OnInit {
 
-  @ViewChild(CcSpinerProcesarComponent, { static: false }) 
+  @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   mensajeSpinner: string = "Cargando...";
   msgSpinner: string
@@ -63,18 +63,18 @@ export class ModalCondicionesComponent implements OnInit {
     private commonService: CommonService,
     private commonVrs: CommonVarService,
     private cierremesService: CierreMesService
-    
+
   ) {
     this.vmButtons = [
-      { orig: "btnsComprasP", 
-      paramAccion: "1", 
-      boton: { icon: "fas fa-chevron-left", texto: "REGRESAR" }, 
-      permiso: true, 
-      showtxt: true, 
-      showimg: true, 
-      showbadge: false, 
-      clase: "btn btn-warning btn-sm", 
-      habilitar: false, 
+      { orig: "btnsComprasP",
+      paramAccion: "1",
+      boton: { icon: "fas fa-chevron-left", texto: "REGRESAR" },
+      permiso: true,
+      showtxt: true,
+      showimg: true,
+      showbadge: false,
+      clase: "btn btn-warning btn-sm",
+      habilitar: false,
       imprimir: false},
       {
         orig: "btnsComprasP",
@@ -104,7 +104,7 @@ export class ModalCondicionesComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
       this.mensajeSpinner = 'Cargando Formas de Pago'
-      let catalogo = await this.contratoService.getCatalogo({params: "'CMP_COND_FORMA_PAGO'"}).toPromise<any>()
+      let catalogo = await this.contratoService.getCatalogo({params: "'CMP_COND_FORMA_PAGO'"}) as any
       console.log(catalogo.data)
       //
       this.cmb_forma_pago = catalogo.data['CMP_COND_FORMA_PAGO']
@@ -118,7 +118,7 @@ export class ModalCondicionesComponent implements OnInit {
 
   metodoGlobal(event: any){
     switch(event.items.boton.texto){
-      
+
       case "REGRESAR":
         this.activeModal.close()
         break;
@@ -130,12 +130,12 @@ export class ModalCondicionesComponent implements OnInit {
   }
   validarValor(event){
     console.log(event,parseFloat(this.item.con_valor))
-   
-   
+
+
     let totalValorCondicion= 0
     this.condiciones.forEach(element => {
       totalValorCondicion += +parseFloat(element.valor)
-     
+
     });
     this.totalValorCondiciones = totalValorCondicion
 console.log((this.totalValorCondiciones+event)+ ' ' + parseFloat(this.item.con_valor))
@@ -160,7 +160,7 @@ console.log((this.totalValorCondiciones+event)+ ' ' + parseFloat(this.item.con_v
 
 
    validaCondiciones() {
-  
+
     this.validaCond().then(respuesta => {
       if (respuesta) {
         this.crearCondiones()
@@ -173,11 +173,11 @@ console.log((this.totalValorCondiciones+event)+ ' ' + parseFloat(this.item.con_v
 }
 validaCond() {
 
-     
+
   let c = 0;
   let mensajes: string = '';
   return new Promise((resolve, reject) => {
-     
+
     if(new Date(this.listacondiciones.fecha) >= new Date(this.listacondiciones.plazo)){
       mensajes += "* Debe ingresar una fecha válida para la condición <br>"
     }
@@ -196,17 +196,17 @@ validaCond() {
 
 
     return (mensajes.length) ? reject(mensajes) : resolve(true)
-   
+
   });
 }
 
 
   crearCondiones(){
-   
+
     // let totalValorCondicion= 0
     // this.condiciones.forEach(element => {
     //   totalValorCondicion += +parseFloat(element.valor)
-     
+
     // });
 
     // if(new Date(this.listacondiciones.fecha) >= new Date(this.listacondiciones.plazo) ){
@@ -271,10 +271,10 @@ validaCond() {
     "mes": Number(moment().format('MM')),
   }
     this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-     
+
     /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
-       
+
         this.mensajeSpinner = "Cargando...";
         this.lcargando.ctlSpinner(true);
         let data = {
@@ -288,12 +288,12 @@ validaCond() {
             valor:this.listacondiciones.valor
           }
         }
-        
+
 
         this.contratoService.guardarCondiciones(data).subscribe(
             (res) => {
                 console.log(res);
-                
+
                 if (res["status"] == 1) {
                   this.lcargando.ctlSpinner(false);
                 Swal.fire({
@@ -309,7 +309,7 @@ validaCond() {
                     this.commonVrs.selectCondicion.next(res)
                     this.activeModal.close()
                   }
-                  
+
                 });
                 } else {
                 this.lcargando.ctlSpinner(false);
@@ -321,7 +321,7 @@ validaCond() {
                     confirmButtonText: "Aceptar",
                     confirmButtonColor: '#20A8D8',
                 });
-                
+
                 }
             },
                 (error) => {
@@ -344,7 +344,7 @@ validaCond() {
 
 
 
-             
+
         }
     });
   }

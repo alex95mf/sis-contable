@@ -360,7 +360,7 @@ export class SubgrupoProductoComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             // this.activeModal.close()
-            // this.commonVrs.CatalogoBienes.next()
+            // this.commonVrs.CatalogoBienes.next(null)
             this.cargarSubgrupos()
           }
         })

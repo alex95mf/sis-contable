@@ -165,7 +165,7 @@ export class ConfirmInvoiceComponent implements OnInit {
     }
     this.bodegaService.saveDispached(data).subscribe(res => {
       this.commonVarService.updPerm.next(false);
-      this.commonVarService.listenDispached.next();
+      this.commonVarService.listenDispached.next(null);
       this.toastr.success(res['message']);
       this.dialogRef.close(false);
       this.closeModal();

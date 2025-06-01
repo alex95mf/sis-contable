@@ -13,7 +13,7 @@ import { ModalCitacionComponent } from './modal-citacion/modal-citacion.componen
 import { ModalNuevoAbogadoComponent } from './modal-nuevoAbogado/modal-nuevoAbogado.component';
 import { ConceptoDetComponent } from './concepto-det/concepto-det.component';
 import { ExcelService } from 'src/app/services/excel.service';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -35,7 +35,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     CommonModule,
     AppCustomModule,
     JuiciosRoutingModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
   ]
 })
 export class JuiciosModule { }

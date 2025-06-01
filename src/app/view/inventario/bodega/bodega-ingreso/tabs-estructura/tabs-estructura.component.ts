@@ -55,7 +55,7 @@ export class TabsEstructuraComponent implements OnInit {
         this.validaDtBodega = true;
         this.dataBodega = res['data'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.validaDtBodega = false;

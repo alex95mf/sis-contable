@@ -84,7 +84,7 @@ export class AnulacionEspeciesComponent implements OnInit {
       case " CRERRAR":
         this.modal.close();
       break;
-      
+
     }
   }
 
@@ -104,7 +104,7 @@ export class AnulacionEspeciesComponent implements OnInit {
       (res)=>{
         console.log(res);
         this.modal.close()
-        this.commonVarSrv.modalAnulacionEspeciesFiscales.next()
+        this.commonVarSrv.modalAnulacionEspeciesFiscales.next(null)
       }
     )
   }

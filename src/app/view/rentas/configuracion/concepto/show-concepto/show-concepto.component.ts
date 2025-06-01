@@ -93,7 +93,7 @@ export class ShowConceptoComponent implements OnInit {
         this.dataDT = res["data"];
         //this.lcargando.ctlSpinner(false);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       },
       (error) => {
@@ -101,7 +101,7 @@ export class ShowConceptoComponent implements OnInit {
         this.dataDT = [];
         //this.lcargando.ctlSpinner(false);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }
     );
@@ -167,7 +167,7 @@ export class ShowConceptoComponent implements OnInit {
       // Destroy the table first
       dtInstance.destroy();
       // Call the dtTrigger to rerender again
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     });
   }
 

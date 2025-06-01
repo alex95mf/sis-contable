@@ -1,10 +1,14 @@
 @use '@angular/material' as mat;
 
+$indigo-palette: mat.define-palette(mat.$indigo-palette);
+$pink-palette: mat.define-palette(mat.$pink-palette);
+$red-palette: mat.define-palette(mat.$red-palette);
+
 $indigo-light-theme: (
   color: (
-    primary: mat.$indigo-palette,
-    secondary: mat.$pink-palette,
-    tertiary: mat.$red-palette,
+    primary: $indigo-palette,
+    secondary: $pink-palette,
+    tertiary: $red-palette,
     theme-type: light,
   ),
   typography: Roboto,

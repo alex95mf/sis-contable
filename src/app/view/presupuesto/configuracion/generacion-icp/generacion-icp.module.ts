@@ -7,7 +7,7 @@ import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ListRecDocumentosComponent } from './list-rec-documentos/list-rec-documentos.component';
 import { ModalIngresoAsignacionComponent } from './modal-ingreso-asignacion/modal-ingreso-asignacion.component';
 import { ModalSolicitudComponent } from './modal-solicitud/modal-solicitud.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({

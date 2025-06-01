@@ -74,11 +74,11 @@ export class ShowBoxComponent implements OnInit {
           this.dataDT[key].mov_minimo = parseFloat(this.dataDT[key].mov_minimo).toFixed(2);
         })
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
         this.toastr.info(error.error.message);
       });

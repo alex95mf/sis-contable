@@ -39,11 +39,11 @@ export class ContribuyenteComponent implements OnInit {
   dataUser: any;
   permissions: any;
   catalog: any = {};
-  contribuyente: any = { 
-    id_cliente: null, 
-    tipo_documento: 0, 
-    contribuyente: 0, 
-    primer_nombre: '', segundo_nombre: '', 
+  contribuyente: any = {
+    id_cliente: null,
+    tipo_documento: 0,
+    contribuyente: 0,
+    primer_nombre: '', segundo_nombre: '',
     primer_apellido: '', segundo_apellido: '',
     telefono_movil1: null,
     telefono_movil2: null,
@@ -77,7 +77,7 @@ export class ContribuyenteComponent implements OnInit {
   verifyRestore = false;
 
   validaciones = new ValidacionesFactory;
- 
+
   contriLoteActive: any = '';
   //Locales Comerciales
   locales: any[] = [];
@@ -229,7 +229,7 @@ export class ContribuyenteComponent implements OnInit {
     razon_social: ""
   };
   relacion: any
-  
+
 
   discapacidad = [
     {value: "S",label: "SI"},
@@ -254,35 +254,35 @@ export class ContribuyenteComponent implements OnInit {
   checkConyugue: any = false
   datosConyugue: any
 
-  checkDisca: any =false 
+  checkDisca: any =false
   datosDisca:  any
   fileListDisca: any = undefined
   anexoDisca:  any = undefined
 
-  checkTutorApo: any =false 
+  checkTutorApo: any =false
   datosTutorApo: any
-  fileListTutorApo:  any = undefined  
+  fileListTutorApo:  any = undefined
   anexoTutorApo: any = undefined
 
-  checkPresHipo: any =false 
+  checkPresHipo: any =false
   datosPresHipo: any
-  fileListPresHipo: any = undefined  
-  anexoPresHipo: any = undefined 
+  fileListPresHipo: any = undefined
+  anexoPresHipo: any = undefined
 
-  checkCoop: any =false 
+  checkCoop: any =false
   datosCoop: any
-  fileListCoop:  any = undefined 
-  anexoCoop:any = undefined 
-  
-  checkArte: any =false 
+  fileListCoop:  any = undefined
+  anexoCoop:any = undefined
+
+  checkArte: any =false
   datosArte: any
-  fileListArte: any = undefined  
-  anexoArte:any = undefined 
+  fileListArte: any = undefined
+  anexoArte:any = undefined
 
   checkTutorEnf : any =false
   datosTutorEnf: any
-  fileListTutorEnf: any = undefined  
-  anexoTutorEnf: any = undefined  
+  fileListTutorEnf: any = undefined
+  anexoTutorEnf: any = undefined
 
 
   constructor(
@@ -356,7 +356,7 @@ export class ContribuyenteComponent implements OnInit {
           })
           console.log(documentos)
           this.documentos = documentos;
-          
+
           let resolucion: any = await this.contribuyenteSrv.getResolucion({
             id_component: myVarGlobals.fContribuyente,
             identifier: this.contribuyente.id_cliente
@@ -364,7 +364,7 @@ export class ContribuyenteComponent implements OnInit {
           console.log(resolucion)
           this.contribuyente['resolucion'] = resolucion.data;
           this.lcargando.ctlSpinner(false)
-          
+
           // console.log(res.created_at.split('T')[0]);
           // console.log(res.supervivencia);
           console.log(res.contribuyente)
@@ -393,8 +393,8 @@ export class ContribuyenteComponent implements OnInit {
             this.n_supervivencia = this.contribuyente.supervivencia;
             this.contribuyente.supervivencia_fecha_registro = res.supervivencia_fecha_registro === null ? null : res.supervivencia_fecha_registro.split(' ')[0];
 
-            
-            
+
+
 
 
             console.log('Natural');
@@ -406,14 +406,14 @@ export class ContribuyenteComponent implements OnInit {
             this.validadorRucCedu = true;
             this.NoDocumento = this.contribuyente['num_documento']
             console.log('Juridico');
-          } 
+          }
           if(res.relaciones != null){
             this.dataRelacion = res.relaciones
           }
           console.log(res.relaciones)
           console.log(this.dataRelacion)
 
-        
+
           this.cargaDatosContribuyente(res);
           this.cargaDatosContribuyenteAnulados(res);
           this.novedadesCarga(res);
@@ -638,14 +638,14 @@ export class ContribuyenteComponent implements OnInit {
         habilitar: true,
         printSection: "Printsection", imprimir: true
       },
-      
+
     ];
 
     this.today = new Date();
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
       contribuyente: undefined,
@@ -948,7 +948,7 @@ export class ContribuyenteComponent implements OnInit {
               valor_comercial: e.avaluo
             })
 
-            
+
           });
           this.solares = res['data'];
           // console.log(res);
@@ -1367,7 +1367,7 @@ export class ContribuyenteComponent implements OnInit {
 
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -1470,7 +1470,7 @@ export class ContribuyenteComponent implements OnInit {
         // Como llegamos aqui?!
         this.toastr.warning('Ha escogido un archivo invalido', 'Resolucion Tercera Edad')
         return;
-      } 
+      }
 
       if (this.contribuyente.id_cliente) {
         const result = await Swal.fire({
@@ -1900,7 +1900,7 @@ export class ContribuyenteComponent implements OnInit {
         this.superValid = true;
         this.novedades = []
         this.n_supervivencia = null
-       
+
       }
 
     });
@@ -1940,9 +1940,9 @@ export class ContribuyenteComponent implements OnInit {
     this.detalle_contactos = [];
     this.detalle_edit = undefined;
     this.lote = { cod_catastral: '',cod_catastral_anterior: '',zona: '',sector: '',manzana: '',solar: '',area: '',valor_metro_cuadrado: 0,valor_solar: 0,valor_edificacion: 0,valor_comercial: 0,valor_hipoteca: 0,tipo_relacion: 0
-  
+
     }
-   
+
   }
 
   async validateSaveContribuyente() {
@@ -2022,7 +2022,7 @@ export class ContribuyenteComponent implements OnInit {
         ) {
           this.toastr.info("Ingrese un número de documento");
           flag = true;
-        } 
+        }
         else if (
           this.contribuyente.obligado_contabilidad == '' ||
           this.contribuyente.obligado_contabilidad == undefined
@@ -2031,7 +2031,7 @@ export class ContribuyenteComponent implements OnInit {
           flag = true;
         } else if (
           this.contribuyente.primer_nombre == '' ||
-          this.contribuyente.primer_nombre == undefined 
+          this.contribuyente.primer_nombre == undefined
         ) {
           this.toastr.info("Ingrese el primer nombre");
           flag = true;
@@ -2041,22 +2041,22 @@ export class ContribuyenteComponent implements OnInit {
         ) {
           this.toastr.info("Ingrese el genero");
           flag = true;
-        } 
+        }
         else if (
           this.contribuyente.fecha_nacimiento == '' ||
           this.contribuyente.fecha_nacimiento == undefined
         ) {
           this.toastr.info("Ingrese la fecha de nacimiento");
           flag = true;
-        } 
-       
+        }
+
         else if (
           this.contribuyente.estado_civil == '' ||
           this.contribuyente.estado_civil == undefined
         ) {
           this.toastr.info("Ingrese el estado civil");
           flag = true;
-        } 
+        }
 
         else if (
           this.contribuyente.direccion == "" ||
@@ -2089,19 +2089,19 @@ export class ContribuyenteComponent implements OnInit {
           this.toastr.info("Ingrese el tipo");
           flag = true;
 
-        } 
-        
+        }
+
         else if (
           this.contribuyente.pais == '' ||
           this.contribuyente.pais == undefined
         ) {
           this.toastr.info("Ingrese el pais");
           flag = true;
-        } 
-        
+        }
+
         // else if (
         //   (this.contribuyente.segundo_nombre == '' ||
-        //   this.contribuyente.segundo_nombre == undefined ) 
+        //   this.contribuyente.segundo_nombre == undefined )
         // ) {
         //   this.toastr.info("Ingrese el segundo nombre");
         //   flag = true;
@@ -2117,8 +2117,8 @@ export class ContribuyenteComponent implements OnInit {
         // ) {
         //   this.toastr.info("Ingrese el segundo apellido");
         //   flag = true;
-        // } 
-       
+        // }
+
         else if (
           this.n_supervivencia == '' ||
           this.n_supervivencia == undefined
@@ -2185,10 +2185,10 @@ export class ContribuyenteComponent implements OnInit {
             this.toastr.info("Debe seleccionar un archivo en la sección de Enfermedad Catastrófica");
             flag = true;
           }
-          
+
         }
 
-      
+
 
         if(this.checkDisca){
           if(this.datosDisca.di_tipo_discapacidad == undefined || this.datosDisca.di_tipo_discapacidad == 0){
@@ -2268,7 +2268,7 @@ export class ContribuyenteComponent implements OnInit {
           }
         }
 
-        
+
         if(this.checkPresHipo){
           if(this.datosPresHipo.ph_valor_credito == undefined || this.datosPresHipo.ph_valor_credito == 0 || this.datosPresHipo.ph_valor_credito == ""){
             this.toastr.info("Ingrese un Valor Crédito en la sección de Préstamo Hipotecario");
@@ -2337,7 +2337,7 @@ export class ContribuyenteComponent implements OnInit {
             this.toastr.info("Debe seleccionar un archivo en la sección de Pertenece a Cooperativa (Taxis)");
             flag = true;
           }
-          
+
         }
 
         if(this.checkArte){
@@ -2373,7 +2373,7 @@ export class ContribuyenteComponent implements OnInit {
             this.toastr.info("Debe seleccionar un archivo en la sección de Artesano");
             flag = true;
           }
-          
+
         }
 
         if(this.checkTutorEnf){
@@ -2417,9 +2417,9 @@ export class ContribuyenteComponent implements OnInit {
             this.toastr.info("Debe seleccionar un archivo en la sección de Tutor o apoderado (Enfermedades catastróficas)");
             flag = true;
           }
-          
+
         }
-        
+
 
 
 
@@ -2541,7 +2541,7 @@ export class ContribuyenteComponent implements OnInit {
       }
        if ( this.contribuyente.primer_apellido == '' || this.contribuyente.primer_apellido == undefined) {
         mensaje += '* El campo Primer Apellido esta vacio.<br>'
-     
+
       }
       if (this.contribuyente.segundo_apellido == '' || this.contribuyente.segundo_apellido == undefined) {
         mensaje += '* El campo Segundo Apellido esta vacio.<br>'
@@ -2599,12 +2599,12 @@ export class ContribuyenteComponent implements OnInit {
           }
         }
       });
-    
+
     }
 
 
 
-   
+
   }
 
   searchProvinces(event) {
@@ -2934,21 +2934,21 @@ export class ContribuyenteComponent implements OnInit {
         );
       }
 
-     
+
     }
 
     validarRelacion(){
 
       console.log('valida datos')
       let mensaje: string = ''
-   
+
          if ((this.relacion.nombre_contribuyente== '' || this.relacion.nombre_contribuyente == undefined ) ) {
           mensaje += '* El campo Nombres Completos esta vacio.<br>'
-  
+
         }
         //  if ( this.relacion.fecha_nacimiento == '' || this.relacion.fecha_nacimiento== undefined) {
         //   mensaje += '* El campo Fecha Nacimiento esta vacio.<br>'
-       
+
         // }
         if (this.relacion.tipo_relacion == 0 || this.relacion.tipo_relacion == undefined) {
           mensaje += '* Debe seleccionar un tipo de relación.<br>'
@@ -3052,7 +3052,7 @@ export class ContribuyenteComponent implements OnInit {
     validarLote(){
       console.log('valida datos')
       let mensaje: string = ''
-   
+
         if ((this.lote.tipo_relacion== 0 || this.lote.tipo_relacion == undefined )) {
           mensaje += '* Debe seleccionar un tipo de relación.<br>'
         }
@@ -3061,7 +3061,7 @@ export class ContribuyenteComponent implements OnInit {
           console.log('mensaje')
           this.toastr.warning(mensaje, 'Validacion de Datos', { enableHtml: true})
           return;
-          
+
         }else{
           console.log('agrega datos')
           this.guardarLote(this.lote)
@@ -3069,7 +3069,7 @@ export class ContribuyenteComponent implements OnInit {
     }
 
     guardarLote(data){
-     
+
       let filtro_solares = []
       filtro_solares = this.solares.filter(e => e.id == data.id)
       if(filtro_solares.length > 0){
@@ -3106,12 +3106,12 @@ export class ContribuyenteComponent implements OnInit {
                if (result.isConfirmed) {
                 this.lcargando.ctlSpinner(true)
                 this.mensajeSppiner = 'Guaradando Lote...'
-        
+
                 let data ={
                   id_contribuyente: this.contribuyente['id_cliente'],
                   lote: this.lote,
                 }
-  
+
                 this.contribuyenteSrv.saveContribuyenteLotes(data).subscribe(
                   (res: any) => {
                       if (res["status"] == 1) {
@@ -3147,7 +3147,7 @@ export class ContribuyenteComponent implements OnInit {
                             this.toastr.error(error.error.message, 'Error cargando Propiedades')
                           }
                         );
-      
+
                       } else {
                         this.lcargando.ctlSpinner(false);
                         Swal.fire({
@@ -3169,12 +3169,12 @@ export class ContribuyenteComponent implements OnInit {
                }
              });
 
-          
-         
+
+
         }
       }
-   
-      
+
+
     }
     activarLote(data){
       console.log(data)
@@ -3197,7 +3197,7 @@ export class ContribuyenteComponent implements OnInit {
             (res) => {
               if (res["status"] == 1) {
                 this.lcargando.ctlSpinner(false);
-               
+
                 Swal.fire({
                   icon: "success",
                   title: "Lote Activado",
@@ -3207,7 +3207,7 @@ export class ContribuyenteComponent implements OnInit {
                   confirmButtonColor: '#20A8D8',
                 });
                 this.getSolares(this.contribuyente['id_cliente'])
-              
+
               } else {
                 this.lcargando.ctlSpinner(false);
                 Swal.fire({
@@ -3250,7 +3250,7 @@ export class ContribuyenteComponent implements OnInit {
               (res) => {
                 if (res["status"] == 1) {
                   this.lcargando.ctlSpinner(false);
-                 
+
                   Swal.fire({
                     icon: "success",
                     title: "Lote inactivado",
@@ -3260,7 +3260,7 @@ export class ContribuyenteComponent implements OnInit {
                     confirmButtonColor: '#20A8D8',
                   });
                   this.getSolares(this.contribuyente['id_cliente'])
-                
+
                 } else {
                   this.lcargando.ctlSpinner(false);
                   Swal.fire({
@@ -3280,7 +3280,7 @@ export class ContribuyenteComponent implements OnInit {
             )
           }
         });
-      
+
     }
 
     eliminarRelacion(data){
@@ -3292,7 +3292,7 @@ export class ContribuyenteComponent implements OnInit {
 
     verificarEnfCheck(evento: any) {
       console.log(evento)
-    
+
         this.checkEnfermedadCatastrofica = evento.check
         this.datosEnfermedadCatastrofica = evento.datos
         this.fileListEnfermedadCatastrofica = evento.file
@@ -3303,7 +3303,7 @@ export class ContribuyenteComponent implements OnInit {
       console.log(evento)
         this.checkConyugue = evento.check
         this.datosConyugue = evento.datos
-     
+
     }
     verifDiscaCheck(evento: any) {
       console.log(evento)
@@ -3311,7 +3311,7 @@ export class ContribuyenteComponent implements OnInit {
       this.datosDisca = evento.datos
       this.fileListDisca = evento.file
       this.anexoDisca = evento.anexo
-     
+
     }
     verifTutorApoCheck(evento: any) {
       console.log(evento)
@@ -3319,7 +3319,7 @@ export class ContribuyenteComponent implements OnInit {
       this.datosTutorApo = evento.datos
       this.fileListTutorApo = evento.file
       this.anexoTutorApo = evento.anexo
-     
+
     }
     verifPresHipoCheck(evento: any) {
       console.log(evento)
@@ -3327,7 +3327,7 @@ export class ContribuyenteComponent implements OnInit {
       this.datosPresHipo = evento.datos
       this.fileListPresHipo = evento.file
       this.anexoPresHipo = evento.anexo
-     
+
     }
     verifCoopCheck(evento: any) {
       console.log(evento)
@@ -3335,7 +3335,7 @@ export class ContribuyenteComponent implements OnInit {
       this.datosCoop = evento.datos
       this.fileListCoop = evento.file
       this.anexoCoop = evento.anexo
-     
+
     }
     verifArteCheck(evento: any) {
       console.log(evento)
@@ -3343,7 +3343,7 @@ export class ContribuyenteComponent implements OnInit {
       this.datosArte = evento.datos
       this.fileListArte = evento.file
       this.anexoArte = evento.anexo
-     
+
     }
 
     verificarTutorEnfCheck(evento: any) {
@@ -3352,17 +3352,17 @@ export class ContribuyenteComponent implements OnInit {
       this.datosTutorEnf = evento.datos
       this.fileListTutorEnf = evento.file
       this.anexoTutorEnf = evento.anexo
-     
+
     }
 
-    
+
 
     getSolares(id_contribuyente){
       this.contribuyenteSrv.getPropiedades(id_contribuyente).subscribe(
         (res) => {
           console.log(res);
           if (res['data'].length > 0) {
-  
+
             res['data'].forEach(e => {
              // Object.assign(e, e.propietarios.find(p => p.id_cliente == id_contribuyente))
               // Object.assign(e, {propietario: e.propietarios.find(p => p.id_cliente == id_contribuyente)})
@@ -3390,7 +3390,7 @@ export class ContribuyenteComponent implements OnInit {
     }
 
     consultaDetalleIntereses(data?:any) {
- 
+
       const modalInvoice = this.modalService.open(DetalleInteresesComponent, {
         size: "lg",
         backdrop: "static",

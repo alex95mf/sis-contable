@@ -172,7 +172,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
       page: 1,
       pageSizeOptions: [5, 10,20,50]
     }
-  
+
   }
 
   vmButtons: any = [];
@@ -187,7 +187,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
         }
       });
     }, 10);
-    
+
   }
 
   ngOnInit() {
@@ -213,7 +213,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
     setTimeout(() => {
       this.vmButtons.forEach(element => {
         if(element.paramAccion == 1){
-          element.permiso = true; element.showimg = true;          
+          element.permiso = true; element.showimg = true;
         }else{
           element.permiso = false; element.showimg = false;
         }
@@ -251,21 +251,21 @@ export class SeguridadComponent implements OnDestroy, OnInit {
   metodoGlobal(evento: any) {
     console.log(evento);
     switch (evento.items.paramAccion+evento.items.boton.texto) {
-      case "1NUEVO": 
+      case "1NUEVO":
         this.dnuevo();
       break;
-      case "1GUARDAR": 
+      case "1GUARDAR":
         this.validateSaveUserAsync();
       break;
-      case "1MODIFICAR": 
+      case "1MODIFICAR":
         this.validaModificarUser();
       break;
-      case "1CANCELAR": 
+      case "1CANCELAR":
         this.borrar();
       break;
 
 
-      case "2NUEVO": 
+      case "2NUEVO":
         this.dnuevorol();
       break;
       case "2GUARDAR":
@@ -275,7 +275,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
         this.validaUpdateRol();
       break;
       case "2CANCELAR":
-        this.borrar();      
+        this.borrar();
       break;
 
 
@@ -285,13 +285,13 @@ export class SeguridadComponent implements OnDestroy, OnInit {
       case "3MODIFICAR":
         this.savePermisionsComponent();
       break;
-      
+
 
       case "4CONSULTAR":
         this.consultarDocuments();
       break;
       case "4GUARDAR":
-        this.validaSavePermisionsDoc();      
+        this.validaSavePermisionsDoc();
       break;
     }
   }
@@ -312,7 +312,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
     }
 
     try {
-      const response = await this.seguridadServices.getSucursales(data).toPromise<any>()
+      const response = await this.seguridadServices.getSucursales(data) as any
       //
       this.dataSucursal = response['data'];
       this.disbledSucursal = true;
@@ -405,9 +405,9 @@ export class SeguridadComponent implements OnDestroy, OnInit {
       // let data = {
       //   username: this.usuarios
       // }
-      
+
       // this.seguridadServices.getUserExist(data).subscribe(res => {
-      
+
       //   this.usuarioExiste = res['data'];
       //   console.log(res['data'])
       // }, error => {
@@ -418,7 +418,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
       // }
 
       // console.log(this.usuarioExiste)
-     
+
       this.ipSave = this.commonServices.getIpAddress();
       if (this.permisions[0].guardar == "0") {
         this.toastr.info("Usuario no tiene permiso para guardar");
@@ -458,7 +458,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
         }
         // else if (this.perfilSeleccionadoUser == undefined) {
         //   this.toastr.info("Debe Seleccionar un perfil !!");
-        // } 
+        // }
         else if (!this.validarEmail(this.emails)) {
           this.toastr.info("El correo no es válido !!");
           document.getElementById("Idemail").focus();
@@ -560,7 +560,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
               accion: `Nuevo anexo Firma Digital para Usuario ${res.data.id_usuario}`,
               ip: this.commonServices.getIpAddress(),
             }
-  
+
             let response = await this.seguridadServices.fileService(this.fileList[0], dataAnexo);
             console.log(response)
           } catch (err) {
@@ -577,8 +577,8 @@ export class SeguridadComponent implements OnDestroy, OnInit {
         //   dtInstance.destroy();
         //   this.getRoles();
         // });
-        
-      }, 
+
+      },
     (error: any) => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
@@ -615,7 +615,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
       username: user
     }
     this.seguridadServices.getUserExist(data).subscribe(res => {
-      
+
       if (res['data'].length == 0) {
         this.userExist = false;
       } else {
@@ -653,24 +653,24 @@ export class SeguridadComponent implements OnDestroy, OnInit {
       res => {
         console.log('actualza tabla usuarios')
         console.log(res);
-        
+
         this.validaDtUser = true;
         // this.guardaT = res['data'];
         this.paginate.length = res['data']['total'];
         this.guardaT = res['data']['data']
-        
+
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.lcargando.ctlSpinner(false);
         }, 50);
-      }, 
+      },
       error => {
         console.log(error);
         this.validaDtUser = true;
         this.guardaT = [];
-        
+
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.lcargando.ctlSpinner(false);
         }, 50);
       });
@@ -680,8 +680,8 @@ export class SeguridadComponent implements OnDestroy, OnInit {
     if(evt!=null){
       this.filter.estado = evt.value
     }
-   
-   } 
+
+   }
 
   changePaginate(event) {
     let newPaginate = {
@@ -782,7 +782,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
 
   handleCategorias(event) {
     console.log(event)
-    if (event.value == 'SI') 
+    if (event.value == 'SI')
       this.ng_categorias.setDisabledState(false)
     else {
       this.mda_categoria = null
@@ -877,7 +877,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
 
   consultar() {
     this.seguridadServices.resetPermisosComponentes$.emit();
-    
+
     if (this.permisions[0].consultar == "0") {
       this.toastr.info("Usuario no tiene permiso para consultar");
     } else {
@@ -912,7 +912,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
   rerender(): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       dtInstance.destroy();
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     });
   }
 
@@ -925,7 +925,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
       this.dguardar = false;
       this.dcancelar = false;
       this.dborrar = false;
-      
+
       this.vmButtons[1].habilitar = false;
       this.vmButtons[2].habilitar = true;
       this.vmButtons[3].habilitar = false;
@@ -968,7 +968,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
   }
 
   async updateUser(dt) {
-    
+
     this.vmButtons[0].habilitar = true;
     this.vmButtons[1].habilitar = true;
     this.vmButtons[2].habilitar = false;
@@ -986,7 +986,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
     }
 
     this.mensajeSppiner = "Seteando valores...";
-    this.lcargando.ctlSpinner(true);    
+    this.lcargando.ctlSpinner(true);
     this.seguridadServices.updateUser(data).subscribe(
       async (res: any) => {
         console.log(res)
@@ -1034,7 +1034,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
       }
 
       this.lcargando.ctlSpinner(false);
-    }, 
+    },
     (error: any) => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error?.message);
@@ -1156,7 +1156,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
                 accion: `Nuevo anexo Firma Digital para Usuario ${this.userIdUpdate}`,
                 ip: this.commonServices.getIpAddress(),
               }
-    
+
               let response = await this.seguridadServices.fileService(this.fileList[0], dataAnexo);
               console.log(response)
             } catch (err) {
@@ -1167,7 +1167,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
 
           this.lcargando.ctlSpinner(false);
         }
-        
+
         this.userIdUpdate = undefined;
         this.toastr.success('Datos actualizados con éxito');
         this.borrar();
@@ -1177,8 +1177,8 @@ export class SeguridadComponent implements OnDestroy, OnInit {
         //   dtInstance.destroy();
         //   this.getRoles();
         // });
-      
-    }, 
+
+    },
     (error: any) => {
       console.log(error)
       this.toastr.info(error.error?.message);
@@ -1213,7 +1213,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
   }
 
   validaSavePermisionsDoc() {
-    this.commonServices.actionDocCall.next();
+    this.commonServices.actionDocCall.next(null);
   }
 
   savePermisionDoc() {
@@ -1238,7 +1238,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
   }
 
   savePermisionsComponent(){
-   this.comVsrv.changePermisions.next();
+   this.comVsrv.changePermisions.next(null);
   }
 
   modalDepartamentos(){

@@ -207,9 +207,9 @@ export class RetencionCompraComponent implements OnInit {
         this.vmButtons[1].habilitar = true;
         this.vmButtons[2].habilitar = true;
         this.vmButtons[3].habilitar = true;
-    } 
+    }
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.lcargando.ctlSpinner(false);
       }, 50);
     }, error => {
@@ -217,7 +217,7 @@ export class RetencionCompraComponent implements OnInit {
       this.processing = true;
       this.infoRetencion = [];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.lcargando.ctlSpinner(false);
       }, 50);
     });

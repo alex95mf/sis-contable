@@ -62,7 +62,7 @@ export class UserInfoComponent implements OnInit {
       let response = await this.commonServices.getPermisionsGlobas({
         codigo: myVarGlobals.fUserProfile,
         id_rol: this.userData.id_rol,
-      }).toPromise<any>()
+      }) as any
       console.log(response);
 
       this.permissions = response.data[0]

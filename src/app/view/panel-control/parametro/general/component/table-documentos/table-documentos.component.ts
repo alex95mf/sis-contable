@@ -64,14 +64,14 @@ export class TableDocumentosComponent implements OnInit, OnDestroy {
         this.isComplete = true;
         this.documents = res['data'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.commonVarServices.updPerm.next(false);
         this.isComplete = true;
         this.documents = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       });
   }

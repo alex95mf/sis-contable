@@ -93,7 +93,7 @@ export class ModalDetallesComponent implements OnInit {
               });
               this.validaDt = true;
               setTimeout(() => {
-                this.dtTrigger.next();
+                this.dtTrigger.next(null);
               }, 50);
             },
             (error) => {
@@ -101,7 +101,7 @@ export class ModalDetallesComponent implements OnInit {
               this.validaDt = true
               this.dataDT = [];
               setTimeout(() => {
-                this.dtTrigger.next();
+                this.dtTrigger.next(null);
               }, 50);
             }
           )
@@ -111,7 +111,7 @@ export class ModalDetallesComponent implements OnInit {
           this.validaDt = true
           this.dataDT = [];
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
           }, 50);
         }
       );
@@ -119,11 +119,11 @@ export class ModalDetallesComponent implements OnInit {
       Object.assign(this.dataDT, JSON.parse(JSON.stringify(this.detalles)));
       this.validaDt = true;
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }
-    
-    
+
+
     /*this.invoiService.searchProduct(data)
       .subscribe(res => {
         this.validaDt = true;
@@ -137,14 +137,14 @@ export class ModalDetallesComponent implements OnInit {
         }
         this.commonVarService.updPerm.next(false);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.validaDt = true
         this.dataDT = [];
         this.commonVarService.updPerm.next(false);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       });*/
   }
@@ -161,7 +161,7 @@ export class ModalDetallesComponent implements OnInit {
   /*addListProduct() {
     for (let i = 0; i < this.dataDT.length; i++) {
       this.dataDT[i]['quantity'] = (this.dataDT[i]['quantity'] == undefined) ? 0 : this.dataDT[i]['quantity'];
-      /* this.dataDT[i]['price'] = (this.dataDT[i]['price'] != undefined) ? this.dataDT[i]['price'] : 0.00; 
+      /* this.dataDT[i]['price'] = (this.dataDT[i]['price'] != undefined) ? this.dataDT[i]['price'] : 0.00;
       this.dataDT[i]['price'] = (this.dataDT[i]['PVP'] != undefined) ? this.dataDT[i]['PVP'] : 0.00;
       this.dataDT[i]['totalItems'] = (this.dataDT[i]['totalItems'] == undefined) ? 0.00 : this.dataDT[i]['totalItems'];
       if (this.dataDT[i]['action'] == undefined) {

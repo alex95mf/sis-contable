@@ -100,7 +100,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   area: any = 0
   departamento: any = 0
 
-  departamentos: any = [] 
+  departamentos: any = []
 
   dep_nombre: any
   departamentoSelect: any = {
@@ -114,7 +114,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
     nombre: null
   }
 
-  num_control: any 
+  num_control: any
   guardado: boolean = false
 
   lastRecord: number|null = null
@@ -145,7 +145,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
         this.departamentoSelect = res;
         this.dep_nombre = res['dep_nombre'];
 
-      
+
 
         //console.log(this.departamentoSelect)
       }
@@ -160,7 +160,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
         this.cargarAreas()
       }
     )
-    
+
   }
 
   ngOnInit(): void {
@@ -207,8 +207,8 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
         permiso: true,
         showtxt: true,
         showimg: true,
-        showbadge: false, 
-        clase: "btn btn-primary boton btn-sm", 
+        showbadge: false,
+        clase: "btn btn-primary boton btn-sm",
         habilitar: true },
       {
         orig: "btnsIngresosDsctosEmpl",
@@ -293,7 +293,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
       fcn_direccion_input: ["",[]],
       fcn_departamento_input: ["", []],
       fcn_tipo_contrato_input: ["", []],
-      
+
 
     });
 
@@ -351,10 +351,10 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
         this.dataLength = res['data'];
         if(this.dataLength[0]){
           for (let index = 0; index < this.dataLength[0].niveles; index++) {
-            this.lstNiveles.push(index+1);          
+            this.lstNiveles.push(index+1);
           }
         }
-  
+
         this.getGrupoAccount();
       }, error =>{
         this.lcargando.ctlSpinner(false);
@@ -394,7 +394,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
         //$('#tablaConsultCjChica').DataTable().button( '.buttons-excel' ).trigger();
         break;
       case "IMPRIMIR":
-        //$('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger();       
+        //$('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger();
         break;
       case "PDF":
         this.exportarPdf();
@@ -440,15 +440,15 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
       codigo: null,
       nombre: null
     })
-   
+
 
     this.borrarArchivo();
   }
 
- 
+
   /** metodo de consulta */
   consultarIngresoDescuento() {
-   
+
       this.verNoEncontrados = false;
       this.loading = true;
 
@@ -475,21 +475,21 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
        // id_departamento: this.departamentoSelect.id_departamento,
         tipo_contrato: this.tipoContrato == null ? 0 : this.tipoContrato
       };
-  
+
       this.ingresosydescuentosService.getListIngresoDescuentoAll(data)
         .subscribe({
           next: (rpt: IngresoDescuentolResponseI) => {
 
-           
+
             this.objGetIngresosDescuento = rpt;
             this.objGetIngresosDescuento.forEach((e,index) => {
-    
+
               if(e.num_control ==null || e.num_control =='' || e.num_control ==undefined){
                 Object.assign(e,{ aprobar:false, tiene_control:false})
               }else{
                 Object.assign(e,{ aprobar:true, tiene_control:true})
               }
-              
+
             });
             console.log(this.objGetIngresosDescuento);
             this.consulta = true;
@@ -512,17 +512,17 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
               this.consulta = false;
               this.toastr.info('No se encontraron datos en la consulta');
             }
-           
+
             // this.vmButtons[2].habilitar = false;
-            
+
             this.loading = false;
-  
+
             // if (this.dataResponseGeneral.code != 200) {
             //   this.toastr.error(this.dataResponseGeneral.detail);
             // }
             // this.toastr.info(this.dataResponseGeneral.detail);
             // // setTimeout(() => {
-            // //   // this.dtTrigger.next();
+            // //   // this.dtTrigger.next(null);
             // // }, 50);
           },
           error: (e) => {
@@ -533,8 +533,8 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
             // this.toastr.error(this.dataResponseGeneral.detail);
           },
         });
-   
-   
+
+
 
   }
 
@@ -662,7 +662,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
       // return false;
     }
 
-    let regValoresCeroNegativo = this.objGetIngresosDescuento.filter(e => e.indc_valor_solicitado <= 0) 
+    let regValoresCeroNegativo = this.objGetIngresosDescuento.filter(e => e.indc_valor_solicitado <= 0)
 
     if(regValoresCeroNegativo.length > 0){
       this.messageService.add({ key: 'bc', severity: 'warn', summary: 'Valores Solicitados', detail: ' El valor solicitado debe ser mayor a 0. Por favor corrija el Valor Solicitado en las filas marcadas en rojo o elimine las filas para poder guardar .' });
@@ -748,7 +748,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
       "anio": Number(this.sld_anio),
       "mes": this.convertirMes()
       }
-      
+
     this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(async (res) => {
         try {
           if (res["data"][0].estado !=='C') {
@@ -769,7 +769,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
                 accion: "Actualizacion de ingreso y desceunto  rrhh",
                 id_controlador: myVarGlobals.fCuentaBancos,
 
-                //DATOS 
+                //DATOS
                 ing_desc: insertData,
 
               };
@@ -799,7 +799,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
                 }
               );
           } else {
-              
+
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
           }
@@ -807,7 +807,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
             console.error("Error occurred:", error);
         }
     });
-   
+
   }
 
   ///
@@ -820,7 +820,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
       "anio": Number(this.sld_anio),
       "mes": this.convertirMes()
       }
-      
+
     this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(async (res) => {
         try {
           if (res["data"][0].estado !=='C') {
@@ -828,32 +828,32 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
             //crear el objeto a enviar---------------------------
             let insertData = [];
-        
+
             let valores = Object.values(this.objGetIngresosDescuento);
             for (let i = 0; i < valores.length; i++) {
               let data = Object.assign(valores[i], this.ingresoDesctForm);
               insertData.push(data);
-        
+
             }
             //---------------------------------------------------
             if(this.programa==undefined || this.programa=='') { this.fk_programa=0 }
             if(this.departamento==null) { this.departamento=0 }
             if(this.area==null) { this.area=0 }
-        
+
             let data = {
               // info: this.formSueldoEmpleado,
               ip: this.commonService.getIpAddress(),
               accion: "Creación de ingreso y desceunto  rrhh",
               id_controlador: myVarGlobals.fCuentaBancos,
-        
-              //DATOS 
+
+              //DATOS
               ing_desc: insertData,
               id_programa: this.fk_programa,
               id_area: this.area,
               id_departamento: this.departamento,
               //id_departamento: this.departamentoSelect.id_departamento,
               tipo_contrato: this.tipoContrato
-        
+
             };
             this.mensajeSppiner = "Guardando...";
             this.lcargando.ctlSpinner(true);
@@ -883,9 +883,9 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
                 // this.toastr.info(error.error.message);
               }
             );
-           
+
           } else {
-              
+
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
           }
@@ -896,8 +896,8 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param responseId 
+   *
+   * @param responseId
    */
   async validaDeleteIngresoDescuentoEmpleado() {
 
@@ -925,20 +925,20 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
       "anio": Number(this.sld_anio),
       "mes": this.convertirMes()
       }
-      
+
     this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(async (res) => {
         try {
           if (res["data"][0].estado !=='C') {
             let idDeleteIngDEscData = [];
             this.loading = true;
-        
+
             let valores = Object.values(this.objGetIngresosDescuento);
             for (let i = 0; i < valores.length; i++) {
-        
+
               idDeleteIngDEscData.push(valores[i]['id_ing_desc']);
-        
+
             }
-        
+
             console.log("delete");
             let data = {
               // info: this.areaForm,
@@ -961,7 +961,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
                 this.lcargando.ctlSpinner(false);
                 this.loading = false;
                 this.toastr.success("Borrado" /* res['message'] */);
-        
+
               },
               (error) => {
                 this.lcargando.ctlSpinner(false);
@@ -971,12 +971,12 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
                 //   this.toastr.error(element.toString());
                 // });
                 // this.messageError = [];
-        
+
               }
             );
-           
+
           } else {
-              
+
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
           }
@@ -1004,7 +1004,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param content consultar rubros
    */
   onClicConsultaRubros(content) {
@@ -1032,12 +1032,12 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
         const data = rubroData.cuentas
         Object.assign(this.cuentaContable, {
           label: `${data.codigo} - ${data.nombre}`,
-          clase: data.clase, 
-          codigo: data.codigo, 
-          codigo_padre: data.codigo_padre, 
-          descripcion_original: data.descripcion_original, 
-          id: data.id, 
-          nombre: data.nombre, 
+          clase: data.clase,
+          codigo: data.codigo,
+          codigo_padre: data.codigo_padre,
+          descripcion_original: data.descripcion_original,
+          id: data.id,
+          nombre: data.nombre,
           tipo: data.tipo
         })
       }
@@ -1047,10 +1047,10 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
   dataExcel = Array();
   handleFileInputPlantilla(file: FileList) {
-   
+
 
     console.log(file)
-  
+
         // this.fileToUpload = file.item(0);
     // console.log(this.fileToUpload);
     const selectedFile = file.item(0);
@@ -1079,16 +1079,16 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
       }
 
     }
-    
-  
+
+
   }
 
   geEmpleadosListaVerificada(prtEmp) {
-    
+
     if(this.programa==undefined || this.programa=='') { this.fk_programa=0 }
     if(this.departamento==null) { this.departamento=0 }
     if(this.area==null) { this.area=0 }
-     
+
     this.loading = true;
     let data = {
       // info: this.areaForm,
@@ -1128,7 +1128,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
           // }
           // this.toastr.info(this.dataResponseGeneral.detail);
           // // setTimeout(() => {
-          // //   // this.dtTrigger.next();
+          // //   // this.dtTrigger.next(null);
           // // }, 50);
         },
         error: (e) => {
@@ -1150,10 +1150,10 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param value 
-   * @param model 
-   * @returns 
+   *
+   * @param value
+   * @param model
+   * @returns
    */
   onColumnEditComplete(value, model) {
     if (value != 0 || value != '0' || value.value != '') {
@@ -1165,8 +1165,8 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param index 
+   *
+   * @param index
    */
   deleteDataIngDesc(data) {
     console.log(data.id_ing_desc);
@@ -1354,7 +1354,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   // anioSelected(evt: any, year:any){
   //   console.log(evt)
   //   this.sld_anio = evt
-   
+
   // }
 
    handleBoton() {
@@ -1366,7 +1366,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
     }else{
       document.getElementById('getFile').click();
     }
-   
+
   }
   modalDepartamentos(){
     let modal = this.modalSrv.open(ModalDepartamentosComponent, {
@@ -1386,7 +1386,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
     if(this.programa==undefined || this.programa=='') { this.fk_programa=0 }
     if(this.departamento==null) { this.departamento=0 }
     if(this.area==null) { this.area=0 }
-    
+
       let data = {
         params: {
           programa: this.fk_programa,
@@ -1402,7 +1402,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
           this.exportList = res
           this.excelData = [];
           // if (this.permisions[0].ver== "0") {
-            
+
           //   this.toastr.info("Usuario no tiene permiso para exportar");
           // } else {
             Object.keys(this.exportList).forEach(key => {
@@ -1420,8 +1420,8 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
       )
     //}
 
-   
-    
+
+
   }
   exportAsXLSX() {
     this.excelService.exportAsExcelFile(this.excelData, 'Plantilla de Ingresos y Descuentos');
@@ -1468,19 +1468,19 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
         const data = cuentas.data
         Object.assign(this.cuentaContable, {
           label: `${data.codigo} - ${data.nombre}`,
-          clase: data.clase, 
-          codigo: data.codigo, 
-          codigo_padre: data.codigo_padre, 
-          descripcion_original: data.descripcion_original, 
-          id: data.id, 
-          nombre: data.nombre, 
+          clase: data.clase,
+          codigo: data.codigo,
+          codigo_padre: data.codigo_padre,
+          descripcion_original: data.descripcion_original,
+          id: data.id,
+          nombre: data.nombre,
           tipo: data.tipo
         })
 
         if (this.objGetIngresosDescuento.length > 0) {
           this.objGetIngresosDescuento.forEach((element: any) => {
             Object.assign(element, {
-              cuenta_id: this.cuentaContable.id, 
+              cuenta_id: this.cuentaContable.id,
               cuenta_codigo: this.cuentaContable.codigo,
               cuenta_nombre: this.cuentaContable.nombre,
             })
@@ -1491,11 +1491,11 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   btnExportExcel(){
-    this.mensajeSppiner = "Generando Archivo Excel..."; 
-    this.lcargando.ctlSpinner(true); 
+    this.mensajeSppiner = "Generando Archivo Excel...";
+    this.lcargando.ctlSpinner(true);
    // this.ingresosydescuentosService.getRecDocumentosExport(data).subscribe(
     //  (res)=>{
-      
+
         this.exportListIngresos = this.objGetIngresosDescuento
         this.excelDataIngresos = [];
           Object.keys(this.exportListIngresos).forEach(key => {
@@ -1509,14 +1509,14 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
             this.excelDataIngresos.push(filter_values);
           })
-          
+
           this.exportAsXLSXIngresos();
-          this.lcargando.ctlSpinner(false); 
+          this.lcargando.ctlSpinner(false);
 
         //}
      // }
    // )
-  
+
   }
 
   exportAsXLSXIngresos() {
@@ -1525,7 +1525,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
   exportarPdf(){
 
-    
+
     if(this.tipoContrato == undefined || this.tipoContrato == null ){
       this.tipoContrato = 0
     }
@@ -1558,7 +1558,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
     console.log(event.target.checked)
     console.log(data)
     this.objGetIngresosDescuento.forEach(e => {
-      
+
       if(event.target.checked ){
         Object.assign(e, {aprobar: event.target.checked})
       }else{
@@ -1605,16 +1605,16 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
       "mes": this.convertirMes()
     }
       this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
         let empleadosCheck= this.objGetIngresosDescuento.filter(e => e.aprobar==true && e.tiene_control== false)
         console.log(empleadosCheck)
         let data = {
           anio: this.sld_anio,
-          empleados: empleadosCheck 
+          empleados: empleadosCheck
         }
-    
+
         console.log("datadecimoterce",data)
         this.mensajeSppiner = "Aprobando Ingresos y Descuentos...";
         this.lcargando.ctlSpinner(true);
@@ -1630,64 +1630,64 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
             confirmButtonColor: '#20A8D8',
         })
         this.consultarIngresoDescuento()
-       
+
         },error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
         });
-        
-  
+
+
       } else {
         this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
         this.lcargando.ctlSpinner(false);
       }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
       })
-   
+
   }
 
   getPorNoControl() {
-      
+
     if(this.num_control == '' || this.num_control == undefined){
       this.toastr.info('Debe ingresar un No. de control para realizar la busqueda')
     }else{
       this.mensajeSppiner = "Buscando";
       this.lcargando.ctlSpinner(true);
-  
+
       let data = {
         num_control : this.num_control
       }
       this.ingresosydescuentosService.consultaNumControl(data).subscribe(
         (result: any) => {
           console.log(result)
-  
+
           this.objGetIngresosDescuento = result;
           this.objGetIngresosDescuento.forEach(e => {
-        
+
             if(e.num_control !=null){
               Object.assign(e,{ aprobar:true, tiene_control:true})
             }
           });
-    
+
           // let totalDiasTrab = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.dias_trabajados), 0)
           // let totalGanado = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.total_ganado), 0)
           // let totalDevengado = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.total_devengado), 0)
           // let totalDecimos = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.valor_decimo), 0)
           // let totalRetencionDecimo = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.valor_retencion_decimo), 0)
-  
-    
+
+
           // this.totalDiasTrab =totalDiasTrab
           // this.totalGanado =totalGanado
           // this.totalDevengado =totalDevengado
-          // this.totalDecimos =  totalDecimos 
-          // this.totalRetencionDecimo =  totalRetencionDecimo 
+          // this.totalDecimos =  totalDecimos
+          // this.totalRetencionDecimo =  totalRetencionDecimo
           this.vmButtons[7].habilitar = false
           this.vmButtons[8].habilitar = false
           this.lcargando.ctlSpinner(false);
-         
+
           // // //si trae datos de empleados con decimo habilito el boton aprobar
           // let sinAprobar = this.decimotercero.filter(e => e.aprobar == true && e.num_control =='')
           // if(sinAprobar.length > 0){
@@ -1695,31 +1695,31 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
           // }else{
           //   this.vmButtons[2].habilitar = true;
           // }
-    
+
           // //si hay aprobados sin orden de pago habilito el boton generar orden de pago
           // let aprobados = this.decimotercero.filter(e => e.tiene_control == true && e.num_orden_pago =='')
           // if(aprobados.length > 0){
           //   this.vmButtons[3].habilitar = false;
           // }
-    
+
           // this.vmButtons[6].habilitar = false
           // this.vmButtons[7].habilitar = false
-  
+
         })
     }
-  
+
   }
 
-  
+
   async getPrevRecord() {
-    
+
     this.lastRecord = Number(this.lastRecord)- 1;
     this.getNumControl()
   //  await this.handleEnter({key: 'Enter'})
   }
 
   async getNextRecord() {
-    
+
     this.lastRecord = Number(this.lastRecord)+ 1;
     this.getNumControl()
    // await this.handleEnter({key: 'Enter'})

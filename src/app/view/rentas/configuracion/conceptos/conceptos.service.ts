@@ -11,7 +11,7 @@ export class ConceptosService {
   getConceptos(data:any = {}) {
     return this.apiSrv.apiCall("concepto/obtener-concepto-filtro","POST",data);
   }
-  
+
   getConceptoBy(id) {
     return this.apiSrv.apiCall(`concepto/obtener-concepto-id/${id}`,"POST",{});
   }
@@ -51,7 +51,7 @@ export class ConceptosService {
   getConCuentasconReglas(data){
     return this.apiSrv.apiCall('gestion-bienes/cuentasconRegla', 'POST',data);
   }
-  
+
 
   getCatalog(data: any = {}) {
     return new Promise((resolve, reject) => {
@@ -72,7 +72,7 @@ export class ConceptosService {
   }
 
   validarEsigef(data: any = {}) {
-    return this.apiSrv.apiCall("concepto/validar-concepto", "POST", data).toPromise<any>();
+    return this.apiSrv.apiCall("concepto/validar-concepto", "POST", data) as any;
   }
 
   getRegla(data: any = {}) {

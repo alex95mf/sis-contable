@@ -40,7 +40,7 @@ export class CuentasComponent implements OnInit {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
     this.getTableReport()
   }
- 
+
   getTableReport() {
    this.dtOptions = {
         pagingType: 'full_numbers',
@@ -58,11 +58,11 @@ export class CuentasComponent implements OnInit {
       this.validaDt = true;
       this.infoData = res['data'];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message);
     });

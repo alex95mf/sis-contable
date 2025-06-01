@@ -14,6 +14,6 @@ export class PaginatorService {
   }
 
   clearPageLoad() {
-    this.missionAnnouncedSource.next();
+    this.missionAnnouncedSource.next(null);
   }
 }

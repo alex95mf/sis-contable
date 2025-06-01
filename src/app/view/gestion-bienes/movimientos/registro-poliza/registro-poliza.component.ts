@@ -38,14 +38,14 @@ export class RegistroPolizaComponent implements OnInit {
     valor_asegurado:0,
     numero_poliza_contrato:"",
     detalles:[]
-  
+
 }
   producto:any = []
 
-  mantenimientoDisabled =false 
+  mantenimientoDisabled =false
   anexoDisabled =true
   id:any
-  productoDisabled =false 
+  productoDisabled =false
 
   fileList: FileList;
   listaCatalogo: any = []
@@ -59,8 +59,8 @@ export class RegistroPolizaComponent implements OnInit {
 
     private modalService: NgbModal,
     private invService: RegistroPolizaService,
-  ) 
-  { 
+  )
+  {
     this.commonVarServices.selectProveedorCustom.asObservable().subscribe(
       (res) => {
         this.documento.fk_proveedor = res['id_proveedor']
@@ -76,7 +76,7 @@ export class RegistroPolizaComponent implements OnInit {
         codigoProducto:res['codigoproducto'],
         fk_producto:res['id_producto'],
         id_registro_poliza_det:0
-        
+
        }
        this.documento.detalles.push(data)
        this.producto = this.documento.detalles
@@ -101,7 +101,7 @@ export class RegistroPolizaComponent implements OnInit {
         this.estado = res['estado']
         console.log(res.detalles)
         res.detalles.forEach(e => {
-        
+
           let det = {
             nombre: e['producto'][0].nombre,
             codigoProducto: e['producto'][0].codigoproducto,
@@ -110,10 +110,10 @@ export class RegistroPolizaComponent implements OnInit {
             id_registro_poliza_det:e['id_registro_poliza_det']
 
           }
-         
+
           this.producto.push(det)
           this.documento.detalles = this.producto
-          
+
         })
         this.commonVarServices.contribAnexoLoad.next({condi:'infimas', id: res.id_registro_poliza,estado:this.estado});
        // this.commonVarServices.clearAnexos.next({condi:'infimas',id:res.id_registro_poliza})
@@ -124,8 +124,8 @@ export class RegistroPolizaComponent implements OnInit {
         this.mantenimientoDisabled = true
         this.productoDisabled = true
 
-       
-        
+
+
        }
        else{
         this.vmButtons[2].habilitar = true;
@@ -134,7 +134,7 @@ export class RegistroPolizaComponent implements OnInit {
        this.mantenimientoDisabled = false
         this.anexoDisabled =false
         this.productoDisabled = false
-        
+
        }
       }
     );
@@ -173,8 +173,8 @@ export class RegistroPolizaComponent implements OnInit {
       case "APROBAR":
          this.aprobar()
             break;
- 
- 
+
+
     }
   }
 
@@ -196,9 +196,9 @@ export class RegistroPolizaComponent implements OnInit {
       razon_social: ""
     }
     this.fileList= undefined
-    this.commonVarServices.clearAnexos.next()
+    this.commonVarServices.clearAnexos.next(null)
     this.estado = 'P'
-    
+
   }
 
 
@@ -212,7 +212,7 @@ export class RegistroPolizaComponent implements OnInit {
     // modal.componentInstance.verifyRestore = this.verifyRestore;
     }
 
-    
+
     expandListProveedores() {
 
       const modalInvoice = this.modalService.open(ModalProveedoresComponent, {
@@ -221,10 +221,10 @@ export class RegistroPolizaComponent implements OnInit {
         windowClass: "viewer-content-general",
       });
       //modalInvoice.componentInstance.module_comp = myVarGlobals.fContratacion;
-  
+
     }
 
-    
+
   removeTitulo(index,producto) {
     this.producto.splice(index, 1);
     this.producto_delete = producto
@@ -232,9 +232,9 @@ export class RegistroPolizaComponent implements OnInit {
     if(producto.id_registro_poliza_det != 0 || producto.id_registro_poliza_det>0 ){
       this.eliminarDetalle()
     }
-   
+
   }
-  
+
   saveMantenimiento(){
      if(this.documento.detalles.length <=0 || this.documento.detalles == undefined){
       this.toastr.info("Debe seleccionar producto(s)")
@@ -272,7 +272,7 @@ export class RegistroPolizaComponent implements OnInit {
             });
             this.documento = res['data']
             this.uploadFile(res['data'].id_registro_poliza)
-            this.mantenimientoDisabled = true 
+            this.mantenimientoDisabled = true
             this.lcargando.ctlSpinner(false);
             this.vmButtons[2].habilitar = true;
           },
@@ -288,7 +288,7 @@ export class RegistroPolizaComponent implements OnInit {
             });
           }
         );
-        
+
       }
     });
   }
@@ -323,7 +323,7 @@ export class RegistroPolizaComponent implements OnInit {
       id_controlador: myVarGlobals.fGestBienesPoliza,
       accion: `Nuevo anexo para Prestamo de Bienes ${id_registro_poliza}`,
       ip: this.commonServices.getIpAddress(),
-      custom1:'INV-PRESTAMO-BIENES' 
+      custom1:'INV-PRESTAMO-BIENES'
     }
     if(this.fileList.length!=0){
       for (let i = 0; i < this.fileList.length; i++) {
@@ -336,7 +336,7 @@ export class RegistroPolizaComponent implements OnInit {
 
   UploadService(file,  identifier, payload?: any): void {
     this.invService.uploadAnexo(file, payload).subscribe(
-      res => { 
+      res => {
         this.commonVarServices.contribAnexoLoad.next({condi:'infimas', id: identifier})
       },
       err => {
@@ -373,7 +373,7 @@ export class RegistroPolizaComponent implements OnInit {
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74'
     }).then((result)=>{
-      if (result.isConfirmed) { 
+      if (result.isConfirmed) {
         this.msgSpinner = 'Guardando...';
         this.lcargando.ctlSpinner(true);
         let data = {
@@ -405,7 +405,7 @@ export class RegistroPolizaComponent implements OnInit {
                 this.uploadFile(data.id)
                 this.productoDisabled = false
               }
-             
+
             })
            }
            else{
@@ -425,10 +425,10 @@ export class RegistroPolizaComponent implements OnInit {
             this.toastr.info(error.error.message);
           }
         )
-        
+
       }
     })
-   
+
   }
 
   aprobar(){
@@ -497,7 +497,7 @@ export class RegistroPolizaComponent implements OnInit {
               this.productoDisabled = true
               this.vmButtons[3].habilitar = true;
               this.vmButtons[4].habilitar = true;
-            }  
+            }
           })
         }
         else{
@@ -510,7 +510,7 @@ export class RegistroPolizaComponent implements OnInit {
             confirmButtonText: "Aceptar",
             confirmButtonColor: '#20A8D8'
           });
-        } 
+        }
       },
       (error)=>{
         this.lcargando.ctlSpinner(false);
@@ -520,11 +520,11 @@ export class RegistroPolizaComponent implements OnInit {
     )
       }
     })
-    
+
   }
 
   eliminarDetalle(){
-   
+
     this.invService.deleteRegistro(this.producto_delete).subscribe(
       (res)=>{
         if(res["status"]==1){

@@ -11,7 +11,7 @@ import {TabMenuModule} from 'primeng/tabmenu';
 import {TabViewModule} from 'primeng/tabview';
 import { CalendarModule } from 'primeng/calendar';
 import {InputNumberModule} from 'primeng/inputnumber';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { MovimientoBancarioFormComponent } from './movimiento-bancario-form/movimiento-bancario-form.component';
 import { DetalleConciliacionComponent } from './detalle-conciliacion/detalle-conciliacion.component';
 
@@ -28,7 +28,7 @@ import { DetalleConciliacionComponent } from './detalle-conciliacion/detalle-con
     TabViewModule,
     CalendarModule,
     InputNumberModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
   ]
 })
 export class ConciliacionModule { }

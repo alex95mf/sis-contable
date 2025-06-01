@@ -132,14 +132,14 @@ export class ConsultaSupplierComponent implements OnInit {
         localStorage.setItem('providers', JSON.stringify(this.arrayProveedor));
         this.arrayProveedorAux = JSON.parse(localStorage.getItem('providers'));
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.validaDt = true;
         this.arrayProveedor = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       });
   }
@@ -265,7 +265,7 @@ export class ConsultaSupplierComponent implements OnInit {
     this.arrayProveedor = info;
     this.lcargando.ctlSpinner(false);
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }
 

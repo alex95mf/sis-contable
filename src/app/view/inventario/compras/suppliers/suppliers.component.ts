@@ -474,7 +474,7 @@ export class SuppliersComponent implements OnInit {
   async saveProveedor() {
     await this.commonValidate(0).then(resp => {
       if (resp) {
-        this.commonServices.contactProvider.next();
+        this.commonServices.contactProvider.next(null);
         this.confirmSave("Seguro desea guardar el proveedor?", "SET_SUPPLIERS");
       }
     })
@@ -483,8 +483,8 @@ export class SuppliersComponent implements OnInit {
   async updateProveedor() {
     await this.commonValidate(1).then(resp => {
       if (resp) {
-        this.commonServices.contactProvider.next();
-        this.commonServices.anexosProvider.next();
+        this.commonServices.contactProvider.next(null);
+        this.commonServices.anexosProvider.next(null);
         this.confirmSave("Seguro desea actualizar el proveedor?", "PATCH_SUPPLIERS");
       }
     });

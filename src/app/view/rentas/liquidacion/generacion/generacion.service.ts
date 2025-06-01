@@ -10,7 +10,7 @@ export class GeneracionService {
 
   exoneracionesSelected$ = new EventEmitter<any>();
 
-  getLiquidaciones() 
+  getLiquidaciones()
   {
     return this.api.apiCall('liquidacion/get-liquidaciones', 'POST', {})
   }
@@ -65,6 +65,6 @@ export class GeneracionService {
   }
 
   getUltimoRegistro(data: any = {}) {
-    return this.api.apiCall('liquidacion/get-ultima-liquidacion', 'POST', data).toPromise<any>()
+    return this.api.apiCall('liquidacion/get-ultima-liquidacion', 'POST', data) as any
   }
 }

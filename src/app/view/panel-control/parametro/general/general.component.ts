@@ -206,7 +206,7 @@ export class GeneralComponent implements OnInit {
     })
 
     this.commonServices.dtSystemDocuments.asObservable().subscribe(res => {
-      
+
       this.selectFilters = undefined;
       if (res.filtros !== null && res.aprobaciones == 1) {
         this.selectFilters = res.filtros.split(',');
@@ -216,7 +216,7 @@ export class GeneralComponent implements OnInit {
       }
 
       this.documents = res;
-      
+
       this.actionsDoc.edit = true;
       this.actionsDoc.cancel = true;
       this.vmButtons[4].habilitar = false;
@@ -462,7 +462,7 @@ export class GeneralComponent implements OnInit {
           this.dborrar = false;
           this.valueCatalogo = false;
           this.newGrupo = false;
-          
+
         }, error => {
           this.toastr.info(error.error.message);
         })
@@ -535,7 +535,7 @@ export class GeneralComponent implements OnInit {
     this.processing = true;
     this.validaDtUser = true;
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
       this.ngOnDestroy();
     }, 50);
   }
@@ -566,7 +566,7 @@ export class GeneralComponent implements OnInit {
   rerender(): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       dtInstance.destroy();
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     });
   }
 
@@ -589,7 +589,7 @@ export class GeneralComponent implements OnInit {
     this.vmButtons[1].habilitar = true;
     this.vmButtons[2].habilitar = true;
     this.vmButtons[3].habilitar = false;
-    
+
     this.validS = true;
     this.lbl = 'Sub Grupo'
     this.validacionNuevoSub = false;
@@ -738,18 +738,18 @@ export class GeneralComponent implements OnInit {
         denyButtonColor: `#13A1EA`,
       }).then((result) => {
         if (result.isConfirmed) {
-  
+
           this.subTipo = ''
           this.validacionNuevoSub = true
-  
+
         } else if (result.isDenied) {
           this.validacionNuevoSub = false
           this.lbl = "";
           this.subgroups = [];
           this.isSubGroup = false;
-  
+
           this.lbl = event
-  
+
           let data = {
             tipo: event
           }
@@ -762,23 +762,23 @@ export class GeneralComponent implements OnInit {
               this.isSubGroup = true;
               this.subgroups = res['data'];
             }
-  
+
           }, error => {
             this.toastr.info(error.error.message);
           });
-  
+
         }
       })
 
     }
-    
 
 
 
 
-    
 
-    
+
+
+
 
     // /* Add new params */
     // if (event == 'MODELOS' || event == 'PROVINCIA' || event == 'CIUDAD') {
@@ -847,7 +847,7 @@ export class GeneralComponent implements OnInit {
     this.seguridadServices.updateDocument(this.documents).subscribe(res => {
       this.toastr.success(res['message']);
       this.cancelDocument();
-      this.commonServices.dtSModifyDocuments.next();
+      this.commonServices.dtSModifyDocuments.next(null);
     }, error => {
       this.toastr.info(error.error.message);
     })

@@ -154,7 +154,7 @@ export class DepreciacionComponent implements OnInit {
 
     setTimeout(() => {
       this.lcargando.ctlSpinner(false);
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }
 
@@ -174,7 +174,7 @@ export class DepreciacionComponent implements OnInit {
 
       setTimeout(() => {
         this.lcargando.ctlSpinner(false);
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
 
     }, error => {
@@ -182,7 +182,7 @@ export class DepreciacionComponent implements OnInit {
       setTimeout(() => {
         this.fixed_assets = [];
         this.fixed_assets_aux = [];
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     });
   }

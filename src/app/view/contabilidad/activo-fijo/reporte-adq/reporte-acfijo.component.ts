@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ['./reporte-acfijo.component.scss']
 })
 export class ReporteAcfijoComponent implements OnInit {
-  
+
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dtOptions: any = {};
@@ -87,18 +87,18 @@ export class ReporteAcfijoComponent implements OnInit {
         $('#tablaReporActFj').DataTable().button( '.buttons-excel' ).trigger();
       break;
       case "IMPRIMIR1":
-        $('#tablaReporActFj').DataTable().button( '.buttons-print' ).trigger();       
+        $('#tablaReporActFj').DataTable().button( '.buttons-print' ).trigger();
       break;
       case "PDF1":
         $('#tablaReporActFj').DataTable().button( '.buttons-pdf' ).trigger();
-      break; 
+      break;
       case "CERRAR1":
         this.closeModal();
       break;
     }
   }
 
-  getPermisions() {   
+  getPermisions() {
       this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
       let id_rol = this.dataUser.id_rol;
       let data = {
@@ -131,7 +131,7 @@ export class ReporteAcfijoComponent implements OnInit {
         this.toastr.info(error.error.message);
       })
     }
-    
+
     getCatalogos() {
       let data = {
         params: "'TIPO PAGO','FORMA PAGO'"
@@ -164,7 +164,7 @@ export class ReporteAcfijoComponent implements OnInit {
         proveedor: this.proveedor  == undefined ? null : this.proveedor,
         tipo: this.tipo  == undefined ? null : this.tipo,
         forma: this.forma  == undefined  ? null : this.forma,
-        retencion: this.retencion  == undefined  ? null : this.retencion 
+        retencion: this.retencion  == undefined  ? null : this.retencion
   }
    this.dtOptions = {
     pagingType: 'full_numbers',
@@ -209,19 +209,19 @@ export class ReporteAcfijoComponent implements OnInit {
     this.processing = true;
     this.infoData = res['data'];
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }, error => {
     this.lcargando.ctlSpinner(false);
     this.validaDt = true;
     this.processing = true;
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
     this.toastr.info(error.error.message);
   });
 }
- 
+
 rerender(): void {
   this.validaDt = false;
   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -248,14 +248,14 @@ filterRetencionNo(data){
     this.retencion = "0";
    this.disabledDataSi = true;
    this.rerender();
-   
+
   }else{
    this.disabledDataSi = false;
    this.rerender();
   }
 }
 
-filterProveedor(data){ 
+filterProveedor(data){
   if (this.proveedor != undefined) {
     this.proveedor = data
     this.rerender();
@@ -264,7 +264,7 @@ filterProveedor(data){
   }
 }
 
-filterTipo(data){ 
+filterTipo(data){
   if (this.tipo != undefined) {
     this.tipo = data
     this.rerender();
@@ -273,7 +273,7 @@ filterTipo(data){
   }
 }
 
-filterForma(data){ 
+filterForma(data){
   if (this.forma != undefined) {
     this.forma = data
     this.rerender();
@@ -307,7 +307,7 @@ informaDocumento(dt,i) {
   this.dtInformacion.valor_iva = dt.valor_iva;
   this.dtInformacion.total  = dt.total;
 
-} 
+}
 
 closeModal() {
   ($("#modalReportactFijo") as any).modal("hide");

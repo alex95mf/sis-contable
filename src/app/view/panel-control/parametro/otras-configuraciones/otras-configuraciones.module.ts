@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { OtrasConfiguracionesRoutingModule } from './otras-configuraciones.routing';
 import { OtrasConfiguracionesComponent } from './otras-configuraciones.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ModalConfiguracionDetallesComponent } from './modal-configuracion-detalles/modal-configuracion-detalles.component';
 
 
@@ -16,7 +16,7 @@ import { ModalConfiguracionDetallesComponent } from './modal-configuracion-detal
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     OtrasConfiguracionesRoutingModule,
   ]
 })

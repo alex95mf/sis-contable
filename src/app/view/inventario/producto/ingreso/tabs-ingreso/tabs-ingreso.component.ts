@@ -206,7 +206,7 @@ export class TabsIngresoComponent implements OnInit {
       { orig: "btnmanofacModal", paramAccion: "", boton: { icon: "fa fa-times", texto: "GUARDAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: false},
        { orig: "btnmanofacModal", paramAccion: "", boton: { icon: "fa fa-times", texto: "CERRAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: false},
     ];
-    
+
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
     this.validatePermissions();
 
@@ -409,7 +409,7 @@ export class TabsIngresoComponent implements OnInit {
 
     this.emitRequestInformation(false);
     this.startPositionTab();
-    this.commonServices.cancelFormula.next();
+    this.commonServices.cancelFormula.next(null);
   }
 
   ClearAll() {
@@ -511,13 +511,13 @@ export class TabsIngresoComponent implements OnInit {
         modalInvoice.componentInstance.ext = item.original_extension;
         modalInvoice.componentInstance.uri = item.location;
         modalInvoice.componentInstance.lstorage = resultado;
-        
+
       }, (error) => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.message);
       });
     }
-    
+
   }
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
@@ -536,7 +536,7 @@ export class TabsIngresoComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.ingresoSrv.descargar(datos).subscribe((resultado) => {
         this.lcargando.ctlSpinner(false);
-        
+
         const url = URL.createObjectURL(resultado);
         const link = document.createElement("a");
         link.href = url;
@@ -608,11 +608,11 @@ export class TabsIngresoComponent implements OnInit {
         this.actionsTabs.cancel = (cancel === undefined) ? true : cancel; */
       if($evt == 'Producto'){
         this.actionsTabs.formule = true;
-        this.actionsTabs.cancel = true; 
+        this.actionsTabs.cancel = true;
         }else{
           this.actionsTabs.formule = false;
-          this.actionsTabs.cancel = true; 
-        } 
+          this.actionsTabs.cancel = true;
+        }
       }
     }, error => {
       this.toastr.info(error.error.message);
@@ -700,7 +700,7 @@ export class TabsIngresoComponent implements OnInit {
   }
 
   searchProductDt(dt){
-  let productdt =  this.products.find(datos=> datos.id_producto == dt); 
+  let productdt =  this.products.find(datos=> datos.id_producto == dt);
   this.tabDetFormule.costoSearFromdet = productdt.costo;
   }
 }

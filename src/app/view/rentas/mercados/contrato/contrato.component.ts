@@ -614,7 +614,7 @@ export class ContratoComponent implements OnInit {
       this.msgSpinner = 'Actualizando Contrato'
       let res: any = await this.updateContrato()
       Object.assign(
-        this.contrato, 
+        this.contrato,
         {
           local: res.local,
           bienes: res.bienes,
@@ -720,7 +720,7 @@ export class ContratoComponent implements OnInit {
       local: '',
       detalles: []
     }
-    this.commonVarService.clearContratoForm.next()
+    this.commonVarService.clearContratoForm.next(null)
     Object.assign(this.contrato, empty)
     this.readOnlyMode = false
     this.fileList = undefined

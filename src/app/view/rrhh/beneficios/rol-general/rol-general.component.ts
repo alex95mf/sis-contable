@@ -15,7 +15,7 @@ import { ModalCuentPreComponent } from './modal-cuent-pre/modal-cuent-pre.compon
 import { ModalProgramaComponent } from './modal-programa/modal-programa.component';
 import { DetallesRolComponent } from './detalles-rol/detalles-rol.component';
 import { XlsExportService } from 'src/app/services/xls-export.service';
-import { GeneralService } from 'src/app/services/general.service'; 
+import { GeneralService } from 'src/app/services/general.service';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 
 
@@ -83,7 +83,7 @@ export class RolGeneralComponent implements OnInit {
 
   totalRecords: any = 0
 
-  num_control: any 
+  num_control: any
 
   // tipoPagoSueldo = [
   //   {value: "Q",label: "Quincena"},
@@ -108,10 +108,10 @@ export class RolGeneralComponent implements OnInit {
   checked: any = false
   paginate: any
   cuenta: any
-  
+
   lastRecord: number|null = null
- 
- 
+
+
   constructor(
     private commonService: CommonService,
     private rolgeneralemplService: RolGeneralEmplService,
@@ -122,18 +122,18 @@ export class RolGeneralComponent implements OnInit {
     private generalService: GeneralService,
     private cierremesService: CierreMesService,) {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
-   
+
     this.rolgeneralemplService.cuentasContables$.subscribe(
       (res) => {
-      
+
         console.log(res);
         if (res['validacion']) {
           //this.grupo.id_cuenta_contable = res['data']['id'];
           this.codigo_cuenta_contable = res['data']['codigo'];
           this.descripcion_cuenta = res['data']['nombre'];
-        
-        } 
-        
+
+        }
+
       }
     )
     this.commonVarSrv.modalProgramArea.subscribe(
@@ -195,7 +195,7 @@ export class RolGeneralComponent implements OnInit {
         this.toastr.info("Usuario no tiene Permiso para ver el formulario de Jornada");
         this.vmButtons = [];
         this.lcargando.ctlSpinner(false);
-        
+
       } else {
         /*
         if (this.permisions[0].imprimir == "0") {
@@ -225,10 +225,10 @@ export class RolGeneralComponent implements OnInit {
         this.dataLength = res['data'];
         if(this.dataLength[0]){
           for (let index = 0; index < this.dataLength[0].niveles; index++) {
-            this.lstNiveles.push(index+1);          
+            this.lstNiveles.push(index+1);
           }
         }
-  
+
         this.getGrupoAccount();
       }, error =>{
         this.lcargando.ctlSpinner(false);
@@ -258,7 +258,7 @@ export class RolGeneralComponent implements OnInit {
         // }else{
           this.validaProcesarRoles();
         //}
-      
+
       break;
       case "Aprobar":
       this.setAprobarRol();
@@ -273,9 +273,9 @@ export class RolGeneralComponent implements OnInit {
         this.AnularOrden();
         break;
       case "Excel":
-        //$('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger(); 
+        //$('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger();
         this.btnExportarExcelNuevo()
-        //this.btnExportarExcel()      
+        //this.btnExportarExcel()
         break;
       case "Pdf":
         this.btnExportPdf()
@@ -292,13 +292,13 @@ export class RolGeneralComponent implements OnInit {
 
   async cargaInicial() {
     try {
-     
+
       const resPeriodos = await this.rolgeneralemplService.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
 
-      const resMeses = await this.generalService.getCatalogoKeyWork('MES').toPromise<any>()
-      const resTipoPago = await this.generalService.getCatalogoKeyWork('TDP').toPromise<any>()
+      const resMeses = await this.generalService.getCatalogoKeyWork('MES') as any
+      const resTipoPago = await this.generalService.getCatalogoKeyWork('TDP') as any
       console.log(resMeses)
       this.cmb_meses = resMeses.data
       this.tipoPagoSueldo = resTipoPago.data
@@ -322,11 +322,11 @@ export class RolGeneralComponent implements OnInit {
           if (res["data"][0].estado !=='C') {
             let resp = await this.validaDataGlobal().then((respuesta) => {
               if(respuesta) {
-                  this.getDiasTrabajadosPeriodo(); 
+                  this.getDiasTrabajadosPeriodo();
               }
             });
           } else {
-              
+
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
           }
@@ -334,7 +334,7 @@ export class RolGeneralComponent implements OnInit {
             console.error("Error occurred:", error);
         }
     });
-   
+
   }
 
 validaDataGlobal() {
@@ -342,14 +342,14 @@ validaDataGlobal() {
   return new Promise((resolve, reject) => {
 
     if(
-      this.AnioAsistencia == undefined 
+      this.AnioAsistencia == undefined
     ) {
       this.toastr.info("El campo Año no puede ser vacio");
       flag = true;
     }
     else if (
       this.tipoContrato == 0 ||
-      this.tipoContrato == undefined 
+      this.tipoContrato == undefined
     ){
       this.toastr.info("Debe seleccionar un Tipo de Contrato");
       flag = true;
@@ -359,7 +359,7 @@ validaDataGlobal() {
         this.toastr.info("Debe seleccionar un tipo de pago");
         flag = true;
     }
-  
+
     !flag ? resolve(true) : resolve(false);
   })
 }
@@ -391,7 +391,7 @@ setAprobarRol(){
   // }
   else{
 
-   
+
     console.log(empleadosCheck)
     let data = {
       // anio: Number(moment(this.AnioAsistencia).format('YYYY')),
@@ -401,9 +401,9 @@ setAprobarRol(){
       tipo_contrato: this.tipoContrato,
       //cuenta_contable: this.codigo_cuenta_contable,
       tipo_pago: this.tipoPago,
-      empleados: empleadosCheck 
+      empleados: empleadosCheck
     }
-  
+
     this.lcargando.ctlSpinner(true);
     this.rolgeneralemplService.aprobarRol(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -448,7 +448,7 @@ setAprobarRol(){
       let tipo = ["INGRESO","EGRESO","PROVISIONES"]
       let Data = []
       let anio;
-  
+
       if (typeof this.AnioAsistencia == 'string') {
         anio = this.AnioAsistencia;
       } else {
@@ -461,7 +461,7 @@ setAprobarRol(){
       if(this.area==null) { this.area=0 }
 
       let dataRolGeneral = {
-  
+
         id_empresa: this.dataUser.id_empresa,
         anio: anio,
        // mes: Number(this.mes_actual),
@@ -472,10 +472,10 @@ setAprobarRol(){
         id_area: this.area,
         id_departamento: this.departamento
       }
-  
+
       this.rolgeneralemplService.GenerarNominaRolGeneral(dataRolGeneral).subscribe((result: any) => {
         console.log(result);
-  
+
         this.lcargando.ctlSpinner(false);
         if(result.length > 0){
           this.vmButtons[2].habilitar = false;
@@ -484,23 +484,23 @@ setAprobarRol(){
           this.lcargando.ctlSpinner(false);
           this.totalRecords = result.length
          // console.log(result.length)
-         
+
           const distintosRegistros = Array.from(new Set(
             result.map(usuario => `${usuario.codigo_rubro}-${usuario.id_catalogo_tipo_rubro}-${usuario.rub_descripcion}-${usuario.orden}`)
           )).map((clave: any) => {
             const [codigo_rubro, id_catalogo_tipo_rubro, rub_descripcion, orden] = clave.split('-');
             return { codigo_rubro, id_catalogo_tipo_rubro, rub_descripcion, orden };
           });
-           
+
           let cabeceraIngresos = []
           let cabeceraEgresos = []
           let cabeceraProvisiones = []
           cabeceraIngresos = distintosRegistros.filter(e => e.id_catalogo_tipo_rubro == 'INGRESO' )
           cabeceraEgresos = distintosRegistros.filter(e => e.id_catalogo_tipo_rubro == 'EGRESO' )
           cabeceraProvisiones = distintosRegistros.filter(e => e.id_catalogo_tipo_rubro == 'PROVISIONES' )
-          
+
           this.dataGeneral = result
-        
+
           Data = result;
           // var objetoRol = {};
           this.cols = [
@@ -517,7 +517,7 @@ setAprobarRol(){
             { field: 'horas_trabajadas', header: 'Horas Trabajadas', order: 11, class: "",total: 0,tipo: '' },
             { field: 'salario', header: 'Sueldo Nominal', order: 12, class: "two",total: 0,tipo: '' },
           ]
-        
+
           let order = 12
           for ( let i = 0; i < cabeceraIngresos.length; i++){
             this.cols.push(
@@ -525,7 +525,7 @@ setAprobarRol(){
             )
             order++
           }
-          
+
           this.cols.push(
             { field: 'total_ingresos', header: 'Total Ingresos', order: order +1 , class: "two" ,total: 0},
           )
@@ -555,14 +555,14 @@ setAprobarRol(){
             { field: 'total_provisiones', header: 'Total Provisiones', order: order +1 , class: "two" ,total: 0},
           )
           let encabezado = this.cols.filter(e => e.order > 9)
-          
 
-        
-    
+
+
+
           //console.log(this.cols);
-    
+
           for(let a = 0; a< tipo.length;a++){
-    
+
             let arrayTipo = this.cols.filter(co => co.id_catalogo_tipo_rubro == tipo[a]);
             console.log(arrayTipo);
           }
@@ -570,12 +570,12 @@ setAprobarRol(){
           //console.log(this.RolGeneral)
          // console.log(Data)
           let linea = 0
-          
+
           for (let i = 0; i < Data.length; i++) {
             /*arreglo detall de rol */
             let rol = this.RolGeneral.filter(rol => rol.id_persona == Data[i].id_persona);
            // console.log(rol)
-          
+
           let valoresColumnas = this.cols.filter(col => col.field === Data[i].codigo_rubro + Data[i].id_catalogo_tipo_rubro);
           // console.log('primero')
           // console.log(valoresColumnas[0])
@@ -588,7 +588,7 @@ setAprobarRol(){
           }
           // console.log('segundo')
           // console.log(valoresColumnas[0])
-        
+
            if (rol.length == 0) {
               linea++;
               this.numero_empleados = linea
@@ -608,44 +608,44 @@ setAprobarRol(){
               objetoRol['dias_trabajados'] = Data[i].dias_trabajados;
               objetoRol['horas_trabajadas'] = Data[i].horas_trabajadas;
               objetoRol['salario'] = parseFloat((Data[i].sld_salario_minimo));
-            
+
               for ( let i = 0; i < cabeceraIngresos.length; i++){
-                
+
                 objetoRol[cabeceraIngresos[i].codigo_rubro + cabeceraIngresos[i].id_catalogo_tipo_rubro] =0;
-               
+
               }
               objetoRol['total_ingresos'] = 0;
 
               for ( let i = 0; i < cabeceraEgresos.length; i++){
-                
+
                 objetoRol[cabeceraEgresos[i].codigo_rubro + cabeceraEgresos[i].id_catalogo_tipo_rubro] =0;
-               
+
               }
               objetoRol['total_egresos'] = 0;
               objetoRol['total_diferencia'] = 0;
-              
 
-              
+
+
               for ( let i = 0; i < cabeceraProvisiones.length; i++){
-                
+
                 objetoRol[cabeceraProvisiones[i].codigo_rubro + cabeceraProvisiones[i].id_catalogo_tipo_rubro] =0;
-               
+
               }
               objetoRol['total_provisiones'] = 0;
-              
+
               objetoRol[Data[i].codigo_rubro + Data[i].id_catalogo_tipo_rubro] = parseFloat(Data[i].valor);
-             
+
               this.RolGeneral.push(objetoRol);
 
-      
-             
+
+
             } else {
               rol[0][Data[i].codigo_rubro + Data[i].id_catalogo_tipo_rubro] = parseFloat(Data[i].valor);
-              
+
               // objetoRol = {};
             }
            //  console.log(this.RolGeneral)
-           
+
           }
           console.log(this.cols)
           console.log(Data)
@@ -657,16 +657,16 @@ setAprobarRol(){
             console.log(rol)
               rol.forEach(f => {
                 if(f.id_catalogo_tipo_rubro == 'INGRESO'){
-                  totalIngresos += parseFloat(f.valor) 
+                  totalIngresos += parseFloat(f.valor)
                 }
                 if(f.id_catalogo_tipo_rubro == 'EGRESO'){
-                  totalEgresos += parseFloat(f.valor) 
+                  totalEgresos += parseFloat(f.valor)
                 }
                 if(f.id_catalogo_tipo_rubro == 'PROVISIONES'){
-                  totalProvisiones += parseFloat(f.valor) 
+                  totalProvisiones += parseFloat(f.valor)
                 }
 
-                
+
               })
 
 
@@ -678,7 +678,7 @@ setAprobarRol(){
             let totalesEgresos =  this.RolGeneral.reduce((suma: number, x: any) => suma +  parseFloat(x.total_egresos), 0)
             let totalesDiferencia =  this.RolGeneral.reduce((suma: number, x: any) => suma +   parseFloat(x.total_diferencia), 0)
             let totalesProvisiones =  this.RolGeneral.reduce((suma: number, x: any) => suma +   parseFloat(x.total_provisiones), 0)
-           
+
 
             console.log(totalesIngresos)
             console.log(totalesEgresos)
@@ -688,7 +688,7 @@ setAprobarRol(){
               valoresColumnasSal.forEach(e =>{
                 e.total = parseFloat(totalesSalario)
               })
-            } 
+            }
 
             let valoresColumnasIn = this.cols.filter(col => col.field === 'total_ingresos');
             if(valoresColumnasIn.length > 0){
@@ -717,7 +717,7 @@ setAprobarRol(){
                 e.total = parseFloat(totalesProvisiones)
               })
             }
-          
+
             let lineaTotales = {}
               lineaTotales['linea'] = 'TOTAL';
               lineaTotales['nro_control'] = '';
@@ -731,42 +731,42 @@ setAprobarRol(){
               lineaTotales['dias_trabajados'] ='';
               lineaTotales['horas_trabajadas'] ='';
               lineaTotales['salario'] ='';
-            
+
               for ( let i = 0; i < cabeceraIngresos.length; i++){
-                
+
                 lineaTotales[cabeceraIngresos[i].codigo_rubro + cabeceraIngresos[i].id_catalogo_tipo_rubro] =0;
-               
+
               }
               lineaTotales['total_ingresos'] = 0;
 
               for ( let i = 0; i < cabeceraEgresos.length; i++){
-                
+
                 lineaTotales[cabeceraEgresos[i].codigo_rubro + cabeceraEgresos[i].id_catalogo_tipo_rubro] =0;
-               
+
               }
               lineaTotales['total_egresos'] = 0;
               //lineaTotales['total_diferencia'] = 0;
 
               for ( let i = 0; i < cabeceraProvisiones.length; i++){
-                
+
                 lineaTotales[cabeceraProvisiones[i].codigo_rubro + cabeceraProvisiones[i].id_catalogo_tipo_rubro] =0;
-               
+
               }
               lineaTotales['total_provisiones'] = 0;
-          
+
               for(let i = 8; i < this.cols.length; i++){
                 lineaTotales[this.cols[i].field] = parseFloat(this.cols[i].total);
                 console.log(lineaTotales[this.cols[i].field])
               }
               console.log(lineaTotales)
-             
+
               this.RolGeneral.push(lineaTotales);
               let totalDiferenciaNegativo =  this.RolGeneral.filter(e=>e.total_diferencia < 0)
               if(totalDiferenciaNegativo.length > 0 ){
                 this.toastr.error('Hay valores negativos, por favor revisar')
               }
               console.log(this.RolGeneral)
-              
+
           // return
           //console.log(this.RolGeneral)
           this.vmButtons[3].habilitar = false;
@@ -790,9 +790,9 @@ setAprobarRol(){
           this.lcargando.ctlSpinner(false);
           this.toastr.info('No hay registros para esta consulta')
         }
-       
-  
-        
+
+
+
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -806,7 +806,7 @@ setAprobarRol(){
     console.log(event.target.checked)
     console.log(data)
     this.RolGeneral.forEach(e => {
-      
+
       if(event.target.checked ){
         Object.assign(e, {aprobar: event.target.checked})
       }else{
@@ -829,9 +829,9 @@ setAprobarRol(){
    });
 
    console.log(this.RolGeneral)
-   
-    
-  } 
+
+
+  }
 
 
   GenerarOrden(){
@@ -860,11 +860,11 @@ setAprobarRol(){
       this.toastr.info('Ya fueron generadas las ordenes de pago');
     }
 
-    
+
     else{
-  
+
       let data = {
-        
+
         //anio: Number(moment(this.AnioAsistencia).format('YYYY')),
         anio: Number(this.AnioAsistencia),
         //mes: Number(this.mes_actual),
@@ -874,7 +874,7 @@ setAprobarRol(){
         codigo_presupuesto : this.codigo_presupuesto,
         tipo_pago: this.tipoPago
       }
-    
+
       this.lcargando.ctlSpinner(true);
       this.rolgeneralemplService.generarOrdenesPago(data).subscribe(res => {
         this.lcargando.ctlSpinner(false);
@@ -897,12 +897,12 @@ setAprobarRol(){
   AnularOrden(){
 
 
-      
+
       let data = {
         num_control: this.num_control
-        
+
       }
-    
+
       this.lcargando.ctlSpinner(true);
       this.rolgeneralemplService.anularOrdenesPago(data).subscribe(res => {
         this.lcargando.ctlSpinner(false);
@@ -919,16 +919,16 @@ setAprobarRol(){
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.mesagge);
       });
-  
+
   }
 
   btnExportarExcel() {
 
     console.log(this.RolGeneral)
     this.mensajeSpiner = "Generando Archivo Excel...";
-    this.lcargando.ctlSpinner(true); 
-        
-       
+    this.lcargando.ctlSpinner(true);
+
+
          this.excelData = [];
         // console.log(this.RolGeneral);
 
@@ -936,15 +936,15 @@ setAprobarRol(){
             let totalIngresos  = 0
             let totalEgresos = 0
             let rol = this.dataGeneral.filter(rol => rol.id_persona == this.RolGeneral[key].id_persona);
-            
+
             rol.forEach(f => {
               if(f.id_catalogo_tipo_rubro == 'INGRESO'){
-                totalIngresos += parseFloat(f.valor) 
+                totalIngresos += parseFloat(f.valor)
               }
               if(f.id_catalogo_tipo_rubro == 'EGRESO'){
-                totalEgresos += parseFloat(f.valor) 
+                totalEgresos += parseFloat(f.valor)
               }
-              
+
             })
 
             //Object.assign(this.RolGeneral[key], {total_ingresos: totalIngresos.toFixed(2) ,total_egresos: totalEgresos.toFixed(2), total_diferencia: Math.floor(totalIngresos - totalEgresos).toFixed(2) })
@@ -986,8 +986,8 @@ setAprobarRol(){
               }
               if(this.RolGeneral[key].DECICINGRESO != null){
                 filter_values['Decimo Cuarto Sueldo Mensualizado'] = (this.RolGeneral[key].DECICINGRESO != null) ? this.RolGeneral[key].DECICINGRESO : "0.00";
-              } 
-          
+              }
+
               if(this.RolGeneral[key].FDRESINGRESO != null){
                 filter_values['Fondos De Reserva'] = (this.RolGeneral[key].FDRESINGRESO != null) ? this.RolGeneral[key].FDRESINGRESO : "0.00";
               }
@@ -1006,7 +1006,7 @@ setAprobarRol(){
 
               //filter_values['Total Ingresos'] = totalIngresos
               filter_values['Total Ingresos'] = (this.RolGeneral[key].total_ingresos != null) ? parseFloat(this.RolGeneral[key].total_ingresos) : "0.00";
-              
+
               if(this.RolGeneral[key].PRESEGRESO != null){
                 filter_values['Préstamos Internos'] = (this.RolGeneral[key].PRESEGRESO != null) ? this.RolGeneral[key].PRESEGRESO : "0.00";
               }
@@ -1047,16 +1047,16 @@ setAprobarRol(){
               }
 
              // console.log(filter_values)
-            
+
              this.excelData.push(filter_values);
              console.log(this.excelData)
              this.lcargando.ctlSpinner(false);
            })
            console.log(this.excelData)
            this.exportAsXLSX();
-         
+
    }
-     
+
    exportAsXLSX() {
      this.excelService.exportAsExcelFile(this.excelData, 'Reporte Rol General');
    }
@@ -1097,7 +1097,7 @@ setAprobarRol(){
       numeroControl= '0'
     }else {
       numeroControl = this.num_control
-   
+
     }
     if(this.tipoPago == undefined){this.tipoPago=0}
     //console.log(this.programa)
@@ -1135,7 +1135,7 @@ setAprobarRol(){
       if(this.tipoPago == 'Q'){
         this.GenerarNominaRolGeneralQuncenal()
       }else{
-        
+
       if (typeof this.AnioAsistencia == 'string') {
         anio = this.AnioAsistencia;
       } else {
@@ -1162,7 +1162,7 @@ setAprobarRol(){
         this.rolgeneralemplService.getDiasTrabajadosPeriodo(dataRolGeneral).subscribe((result: any) => {
           console.log(result);
           //let mensaje = ''
-        // let noGenerados = result.filter(e => e.estado_generacion == 'no_generada') 
+        // let noGenerados = result.filter(e => e.estado_generacion == 'no_generada')
 
           // if(noGenerados.length > 0){
           //   noGenerados.forEach(e => {
@@ -1181,20 +1181,20 @@ setAprobarRol(){
           //     confirmButtonColor: '#4DBD74',
           //   })
           // }
-    
+
           if(result.length > 0){
-          
+
             if(this.tipoPago == 'M'){
               this.GenerarNominaRolGeneralMensual();
             }
-    
-          
+
+
           }else {
             this.toastr.info('No hay registros de dias trabajados para este periodo y mes');
             this.lcargando.ctlSpinner(false);
           }
-          
-        
+
+
         }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.message);
@@ -1204,7 +1204,7 @@ setAprobarRol(){
   }
 
   GenerarNominaRolGeneralQuncenal() {
-  
+
     this.lcargando.ctlSpinner(true);
 
     let anio;
@@ -1250,14 +1250,14 @@ setAprobarRol(){
     this.vmButtons[6].habilitar = false;
     this.GenerarConsultaNomina();
     this.vmButtons[1].habilitar = false;
-    
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     });
   }
   GenerarNominaRolGeneralMensual() {
-  
+
     this.lcargando.ctlSpinner(true);
 
     let anio;
@@ -1290,7 +1290,7 @@ setAprobarRol(){
     this.rolgeneralemplService.GenerarNominaRolGeneralMensual(dataRolGeneral).subscribe((result: any) => {
       console.log(result);
 
-      
+
 
       this.lcargando.ctlSpinner(false);
       //this.toastr.info('Se ha procesado con éxito');
@@ -1303,7 +1303,7 @@ setAprobarRol(){
         confirmButtonColor: '#20A8D8',
     })
     this.GenerarConsultaNomina();
-    
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
@@ -1313,7 +1313,7 @@ setAprobarRol(){
   eliminarRolGeneral(){
 
 
-    
+
 
 
       Swal.fire({
@@ -1333,12 +1333,12 @@ setAprobarRol(){
             "mes": this.convertirMes()
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
 
               let anio;
-  
+
               if (typeof this.AnioAsistencia == 'string') {
                 anio = this.AnioAsistencia;
               } else {
@@ -1348,14 +1348,14 @@ setAprobarRol(){
               }
 
               let dataRolGeneral = {
-      
+
                 id_empresa: this.dataUser.id_empresa,
                 anio: anio,
                 //mes: Number(this.mes_actual),
                 mes: this.convertirMes(),
                 tipo_contrato: this.tipoContrato,
                 tipo_nomina: this.tipoPago
-      
+
               }
 
               this.rolgeneralemplService.eliminarRolGeneral(dataRolGeneral).subscribe((result: any) => {
@@ -1371,17 +1371,17 @@ setAprobarRol(){
                   confirmButtonColor: '#20A8D8',
               })
               this.GenerarConsultaNomina();
-              
+
               }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.message);
               });
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
@@ -1390,8 +1390,8 @@ setAprobarRol(){
         }
       })
 
-    
-        
+
+
   }
 
 
@@ -1514,7 +1514,7 @@ setAprobarRol(){
       this.toastr.warning("Debe seleccionar un Tipo de Pago. Por favor revise")
       return;
      }
-     
+
 
     this.mensajeSpiner = "Cargando cuenta contable...";
     this.lcargando.ctlSpinner(true);
@@ -1556,14 +1556,14 @@ setAprobarRol(){
           this.toastr.info(error.error.message);
         }
         )
-        
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
       }
     )
-    
+
   }
 
   expandDetalleRol(detalle) {
@@ -1584,7 +1584,7 @@ setAprobarRol(){
   }
 
   limpiarForm(){
-    
+
   this.dataGeneral=  []
   //this.mes_actual = Number(moment(new Date()).format('MM'));
   this.mes = null;
@@ -1610,7 +1610,7 @@ setAprobarRol(){
   }
 
     getRolNoControl() {
-      
+
     this.lcargando.ctlSpinner(true)
     this.mensajeSpiner = 'Buscando'
     this.RolGeneral = []
@@ -1629,7 +1629,7 @@ setAprobarRol(){
         this.lcargando.ctlSpinner(false);
         this.totalRecords = result.length
        // console.log(result.length)
-       
+
         const distintosRegistros = Array.from(new Set(
           result.map(usuario => `${usuario.codigo_rubro}-${usuario.id_catalogo_tipo_rubro}-${usuario.rub_descripcion}-${usuario.orden}`)
         )).map((clave: any) => {
@@ -1643,7 +1643,7 @@ setAprobarRol(){
         cabeceraIngresos = distintosRegistros.filter(e => e.id_catalogo_tipo_rubro == 'INGRESO' )
         cabeceraEgresos = distintosRegistros.filter(e => e.id_catalogo_tipo_rubro == 'EGRESO' )
         cabeceraProvisiones = distintosRegistros.filter(e => e.id_catalogo_tipo_rubro == 'PROVISIONES' )
-       
+
         this.dataGeneral = result
         Data = result;
         this.cols = [
@@ -1660,7 +1660,7 @@ setAprobarRol(){
           { field: 'horas_trabajadas', header: 'Horas Trabajadas', order: 11, class: "",total: 0,tipo: '' },
           { field: 'salario', header: 'Sueldo Nominal', order: 12, class: "two",total: 0 },
         ]
-      
+
         let order = 12
         for ( let i = 0; i < cabeceraIngresos.length; i++){
           this.cols.push(
@@ -1668,7 +1668,7 @@ setAprobarRol(){
           )
           order++
         }
-        
+
         this.cols.push(
           { field: 'total_ingresos', header: 'Total Ingresos', order: order +1 , class: "two" ,total: 0},
         )
@@ -1699,25 +1699,25 @@ setAprobarRol(){
             { field: 'total_provisiones', header: 'Total Provisiones', order: order +1 , class: "two" ,total: 0},
           )
         let encabezado = this.cols.filter(e => e.order > 9)
-  
+
         for(let a = 0; a< tipo.length;a++){
-  
+
           let arrayTipo = this.cols.filter(co => co.id_catalogo_tipo_rubro == tipo[a]);
           console.log(arrayTipo);
         }
-        
+
         let linea = 0
-        
+
         for (let i = 0; i < Data.length; i++) {
         let rol = this.RolGeneral.filter(rol => rol.id_persona == Data[i].id_persona);
-        
+
         let valoresColumnas = this.cols.filter(col => col.field === Data[i].codigo_rubro + Data[i].id_catalogo_tipo_rubro);
         if(valoresColumnas.length > 0){
           valoresColumnas.forEach(e =>{
             e.total += parseFloat(Data[i].valor)
           })
         }
-      
+
          if (rol.length == 0) {
             linea++;
             this.numero_empleados = linea
@@ -1738,26 +1738,26 @@ setAprobarRol(){
             objetoRol['dias_trabajados'] = Data[i].dias_trabajados;
             objetoRol['horas_trabajadas'] = Data[i].horas_trabajadas;
             objetoRol['salario'] = parseFloat((Data[i].sld_salario_minimo));
-          
+
             for ( let i = 0; i < cabeceraIngresos.length; i++){
-              
+
               objetoRol[cabeceraIngresos[i].codigo_rubro + cabeceraIngresos[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
             objetoRol['total_ingresos'] = 0;
 
             for ( let i = 0; i < cabeceraEgresos.length; i++){
-              
+
               objetoRol[cabeceraEgresos[i].codigo_rubro + cabeceraEgresos[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
             objetoRol['total_egresos'] = 0;
             objetoRol['total_diferencia'] = 0;
 
             for ( let i = 0; i < cabeceraProvisiones.length; i++){
-                
+
               objetoRol[cabeceraProvisiones[i].codigo_rubro + cabeceraProvisiones[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
 
             objetoRol['total_provisiones'] = 0;
@@ -1765,7 +1765,7 @@ setAprobarRol(){
             this.RolGeneral.push(objetoRol);
           } else {
             rol[0][Data[i].codigo_rubro + Data[i].id_catalogo_tipo_rubro] = parseFloat(Data[i].valor);
-            
+
           }
         }
         console.log(this.cols)
@@ -1778,13 +1778,13 @@ setAprobarRol(){
           console.log(rol)
             rol.forEach(f => {
               if(f.id_catalogo_tipo_rubro == 'INGRESO'){
-                totalIngresos += parseFloat(f.valor) 
+                totalIngresos += parseFloat(f.valor)
               }
               if(f.id_catalogo_tipo_rubro == 'EGRESO'){
-                totalEgresos += parseFloat(f.valor) 
+                totalEgresos += parseFloat(f.valor)
               }
               if(f.id_catalogo_tipo_rubro == 'PROVISIONES'){
-                totalProvisiones += parseFloat(f.valor) 
+                totalProvisiones += parseFloat(f.valor)
               }
             })
 
@@ -1798,7 +1798,7 @@ setAprobarRol(){
           let totalesDiferencia =  this.RolGeneral.reduce((suma: number, x: any) => suma +   parseFloat(x.total_diferencia), 0)
           let totalesProvisiones =  this.RolGeneral.reduce((suma: number, x: any) => suma +   parseFloat(x.total_provisiones), 0)
 
-         
+
 
           console.log(totalesIngresos)
           console.log(totalesEgresos)
@@ -1808,7 +1808,7 @@ setAprobarRol(){
             valoresColumnasSal.forEach(e =>{
               e.total = parseFloat(totalesSalario)
             })
-          } 
+          }
 
           let valoresColumnasIn = this.cols.filter(col => col.field === 'total_ingresos');
           if(valoresColumnasIn.length > 0){
@@ -1838,7 +1838,7 @@ setAprobarRol(){
               })
             }
 
-          
+
 
           let lineaTotales = {}
             lineaTotales['linea'] = 'TOTAL';
@@ -1853,35 +1853,35 @@ setAprobarRol(){
             lineaTotales['dias_trabajados'] ='';
             lineaTotales['horas_trabajadas'] ='';
             lineaTotales['salario'] ='';
-          
+
             for ( let i = 0; i < cabeceraIngresos.length; i++){
-              
+
               lineaTotales[cabeceraIngresos[i].codigo_rubro + cabeceraIngresos[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
             lineaTotales['total_ingresos'] = 0;
 
             for ( let i = 0; i < cabeceraEgresos.length; i++){
-              
+
               lineaTotales[cabeceraEgresos[i].codigo_rubro + cabeceraEgresos[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
             lineaTotales['total_egresos'] = 0;
             lineaTotales['total_diferencia'] = 0;
 
             for ( let i = 0; i < cabeceraProvisiones.length; i++){
-                
+
               lineaTotales[cabeceraProvisiones[i].codigo_rubro + cabeceraProvisiones[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
             lineaTotales['total_provisiones'] = 0;
-            
+
             for(let i = 8; i < this.cols.length; i++){
               lineaTotales[this.cols[i].field] = parseFloat(this.cols[i].total);
               console.log(lineaTotales[this.cols[i].field])
             }
             console.log(lineaTotales)
-          
+
             this.RolGeneral.push(lineaTotales);
             console.log(this.RolGeneral)
         // return
@@ -1897,7 +1897,7 @@ setAprobarRol(){
           }else {
             this.vmButtons[2].habilitar = true;
           }
-        
+
       }else{
         this.lcargando.ctlSpinner(false);
         this.toastr.info('No hay registros para esta consulta')
@@ -1906,7 +1906,7 @@ setAprobarRol(){
 
     })
 
-   
+
   }
 
   numEmpleados(){
@@ -1920,7 +1920,7 @@ setAprobarRol(){
     let totalConNumControl = 0
     let conNumControl = this.RolGeneral.filter(e => e.tiene_control == true)
     return conNumControl.length;
-    
+
   }
   sinNumeroControl(){
     let totalSinNumControl = 0
@@ -1931,30 +1931,30 @@ setAprobarRol(){
     let totalConNumOp = 0
     let conNumOp = this.RolGeneral.filter(e => e.tiene_op == true)
     return conNumOp.length;
-    
+
   }
   sinNumeroOp(){
     let totalSinNumOp = 0
     let sinNumOp = this.RolGeneral.filter(e => e.tiene_op == false)
     return sinNumOp.length;
-    
+
   }
 
   async getPrevRecord() {
-    
+
     this.lastRecord = Number(this.lastRecord)- 1;
     this.getNumControl()
   //  await this.handleEnter({key: 'Enter'})
   }
 
   async getNextRecord() {
-    
+
     this.lastRecord = Number(this.lastRecord)+ 1;
     this.getNumControl()
    // await this.handleEnter({key: 'Enter'})
   }
 
-  
+
   async handleEnter({key}) {
     if (key === 'Enter') {
       if (this.lastRecord == null) {
@@ -1967,9 +1967,9 @@ setAprobarRol(){
       // this.lcargando.ctlSpinner(true)
       // this.mensajeSpiner = 'Cargando Registro'
 
-      
+
       // try {
-      //   const response = await this.rolgeneralemplService.consultaNumControl({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}).toPromise<any>()
+      //   const response = await this.rolgeneralemplService.consultaNumControl({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}) as any
       //   console.log(response)
       //   if (response.data.data.length > 0) {
       //     this.totalRecords = response.data.total
@@ -2082,7 +2082,7 @@ setAprobarRol(){
     return month
   }
 
- 
+
 
 
 

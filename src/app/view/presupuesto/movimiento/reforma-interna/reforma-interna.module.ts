@@ -7,7 +7,7 @@ import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ModalBusquedaReformaComponent } from './modal-busqueda-reforma/modal-busqueda-reforma.component';
 import { ModalBusquedaReformaGeneralComponent } from './modal-busqueda-reforma-general/modal-busqueda-reforma-general.component';
 import { ModalCuentPreComponent } from './modal-cuent-pre/modal-cuent-pre.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     ReformaInternaRoutingModule,
   ]
 })

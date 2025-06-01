@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
-import { ParametrosCuentasComprobantesService } from '../parametros-cuentas-comprobantes.service'; 
+import { ParametrosCuentasComprobantesService } from '../parametros-cuentas-comprobantes.service';
 import { ModalCuentPreComponent } from 'src/app/view/rrhh/configuracion/rubros/modal-cuent-pre/modal-cuent-pre.component';
 
 @Component({
@@ -39,7 +39,7 @@ export class FormSaveComponent implements OnInit {
 
 
   estado = []
-  eventosContables: any = []; 
+  eventosContables: any = [];
   eventoObjetoSelected: any;
   eventoSelected: any;
   estadoList = [
@@ -54,7 +54,7 @@ export class FormSaveComponent implements OnInit {
     private toastr: ToastrService,
     private modalDet: NgbModal,
     private commonVarSrv: CommonVarService,
-  ) {  
+  ) {
     this.commonVarSrv.seleciconCategoriaCuentaPro.asObservable().subscribe(
       (res)=>{
         console.log(res);
@@ -122,8 +122,8 @@ export class FormSaveComponent implements OnInit {
 
     setTimeout(() => {
       // this.getCatalogo();
-      
-  
+
+
       this.getEventosContables()
       if(!this.isNew){
         console.log(this.data)
@@ -140,9 +140,9 @@ export class FormSaveComponent implements OnInit {
         // this.parametro.num_cuenta1 = this.data.codigo;
         // this.parametro.desc_cuenta1 = this.data.cuenta_1?.descripcion_original;
         this.vmButtons[0].showimg = false
-     
+
       }else{
-        
+
         this.vmButtons[0].showimg = true
         this.vmButtons[1].showimg = false
       }
@@ -159,47 +159,47 @@ export class FormSaveComponent implements OnInit {
         break;
       case " ACTUALIZAR":
         this.validacion('UPDATE');
-        break; 
+        break;
     }
   }
-  
+
   validacion(valor){
     this.lcargando.ctlSpinner(true)
     if(this.parametro.codigo_comprobante == undefined || this.parametro.codigo_comprobante == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese una código');
-      
+
     }else if(this.parametro.descripcion_comprobante == undefined || this.parametro.descripcion_comprobante == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese una descripción');
-      
+
     }else if(this.parametro.clase == undefined || this.parametro.clase == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese una clase');
-      
+
     }else if(this.parametro.codigo_cuenta == undefined || this.parametro.codigo_cuenta == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese una codigo de cuenta');
-      
+
     }else if(this.parametro.nombre_cuenta == undefined || this.parametro.nombre_cuenta == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese una nombre de cuenta');
-      
+
     }
     else if(this.parametro.evento == undefined || this.parametro.evento == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese un evento');
-      
+
     }
     else if(this.parametro.evento == undefined || this.parametro.evento == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese un evento');
-      
+
     }
     else if(this.parametro.estado == undefined || this.parametro.estado == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese un evento');
-      
+
     }
     else{
       if(valor == 'SAVE'){
@@ -211,17 +211,17 @@ export class FormSaveComponent implements OnInit {
   }
 
   // guardarParametros(){
-    
+
   //   this.service.setParametros(this.parametro).subscribe(
   //     (res)=>{
   //       this.toastr.success('Se Guardo con éxito');
   //       this.lcargando.ctlSpinner(false);
   //       this.closeModal();
-  //       this.commonVarSrv.modalCargarRetIVA.next()
+  //       this.commonVarSrv.modalCargarRetIVA.next(null)
   //     }
   //   )
   // }
-  
+
   guardarParametros() {
     Swal.fire({
       icon: "warning",
@@ -238,12 +238,12 @@ export class FormSaveComponent implements OnInit {
           if (result.isConfirmed) {
               this.msgSpinner = "Guardando parametros...";
               this.lcargando.ctlSpinner(true);
-         
+
               this.service.setParametros(this.parametro).subscribe(
                   (res) => {
                      // console.log(res);
                       if (res["status"] == 1) {
-                     
+
                       this.lcargando.ctlSpinner(false);
                       Swal.fire({
                           icon: "success",
@@ -255,9 +255,9 @@ export class FormSaveComponent implements OnInit {
                       }).then((result) => {
                         if (result.isConfirmed) {
                          // this.uploadFile();
-                       
+
                           this.closeModal();
-                          //this.commonVarSrv.modalCargarRetIVA.next()
+                          //this.commonVarSrv.modalCargarRetIVA.next(null)
                           this.service.listaParametros$.emit()
                         }
                       });
@@ -281,7 +281,7 @@ export class FormSaveComponent implements OnInit {
         }
     });
   }
- 
+
 
   actualizarParametros(){
     this.msgSpinner = "Actualizando parametros...";
@@ -291,7 +291,7 @@ export class FormSaveComponent implements OnInit {
         this.toastr.success('Se Actualizo con éxito');
         this.lcargando.ctlSpinner(false);
         this.closeModal();
-        //this.commonVarSrv.modalCargarRetIVA.next()
+        //this.commonVarSrv.modalCargarRetIVA.next(null)
         this.service.listaParametros$.emit()
       }
     )
@@ -300,7 +300,7 @@ export class FormSaveComponent implements OnInit {
   closeModal(){
     this.modal.close()
   }
-  
+
   // getCatalogo(){
   //   this.lcargando.ctlSpinner(true)
   //   let paretnId = [7, 4, 1]

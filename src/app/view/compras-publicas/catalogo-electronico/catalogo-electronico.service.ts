@@ -18,7 +18,7 @@ export class CatalogoElectronicoService {
   searchDepartamento(data) {
     return this.apiService.apiCall('compras/get-programa-departamento', 'POST', data);
   }
-  
+
   getPeriodos(data: any = {}) {
     return new Promise<Array<any>>((resolve, reject) => {
       this.apiService.apiCall('planificacion/get-periodos', 'POST', data).subscribe(
@@ -64,13 +64,13 @@ export class CatalogoElectronicoService {
   getCatalogos(data: any = {}) {
     return this.apiService.apiCall('proveedores/get-catalogo', 'POST', data)
   }
- 
+
   getCataElectronico(data:any = {}) {
     return this.apiService.apiCall('compras/get-catalogo-electronico-excel', 'POST', data);
   }
 
   setEstadoOrden(data: any = { }) {
-    return this.apiService.apiCall('compras/set-estado-orden', 'POST', data).toPromise<any>();
+    return this.apiService.apiCall('compras/set-estado-orden', 'POST', data) as any;
   }
   saveCatElecDetalles(data) {
     return this.apiService.apiCall('compras/set-cat-elec-detalles', 'POST', data);

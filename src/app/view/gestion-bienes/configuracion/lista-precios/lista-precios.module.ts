@@ -17,7 +17,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { AppCustomModule } from '../../../../config/custom/app-custom.module';
 import { ExcelService } from 'src/app/services/excel.service';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -39,7 +39,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     NgxPrintModule,
     FlatpickrModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
   ],
   providers: [
     ExcelService

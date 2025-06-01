@@ -17,7 +17,7 @@ export class ModalEditionComponent implements OnInit {
     id: null,
     descripcion: null,
     codigo: null
-  } 
+  }
   vmButtons: any;
   @Input() item: any;
 
@@ -51,7 +51,7 @@ export class ModalEditionComponent implements OnInit {
       case "Guardar":
         this.guardarEdition();
         break;
-      
+
       case "Regresar":
         this.activeModal.close()
         break;
@@ -77,11 +77,11 @@ export class ModalEditionComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             this.activeModal.close()
-            this.commonVrs.CatalogoBienes.next()
+            this.commonVrs.CatalogoBienes.next(null)
           }
         })
-        
-        
+
+
       }
     )
   }

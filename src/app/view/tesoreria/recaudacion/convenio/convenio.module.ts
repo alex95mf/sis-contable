@@ -10,14 +10,14 @@ import { AnexosListaComponentDis } from './anexos-lista/anexos-lista-dis.compone
 import { ConceptoDetComponent } from './concepto-det/concepto-det.component';
 
 import { AnexosListComponentDis } from './anexos-list/anexos-list-dis.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 @NgModule({
   declarations: [
     ConvenioComponent,
     ModalLiquidacionesComponent,
     ListRecDocumentosComponent,
-    AnexosListComponentDis, 
+    AnexosListComponentDis,
     AnexosListaComponentDis,
     ConceptoDetComponent
   ],

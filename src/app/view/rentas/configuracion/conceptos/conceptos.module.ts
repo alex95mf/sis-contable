@@ -7,7 +7,7 @@ import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ConceptoFormComponent } from './concepto-form/concepto-form.component';
 import { ModalCuentPreComponent } from './modal-cuent-pre/modal-cuent-pre.component';
 import { ModalMesesInteresComponent } from './modal-meses-interes/modal-meses-interes.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     ConceptosRoutingModule
   ]
 })

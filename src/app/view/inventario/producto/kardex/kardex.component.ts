@@ -394,7 +394,7 @@ export class KardexComponent implements OnInit {
             doc.content.splice(0, 0, {
               /*           columns: [{
                             margin: [ 50, 0, 0, 0 ],
-                            fit: [ 100 , 100 ], 
+                            fit: [ 100 , 100 ],
                             alignment: 'center',
                             image: logo,
                             width: 110
@@ -409,7 +409,7 @@ export class KardexComponent implements OnInit {
                 /* { text: 'This is a header', style: 'header' },
                           'No styling here, this is a standard paragraph',
                           { text: 'Another text', style: 'anotherStyle' },
-              { text: 'Multiple styles applied', style: [ 'header', 'anotherStyle' ] } */ 
+              { text: 'Multiple styles applied', style: [ 'header', 'anotherStyle' ] } */
                 {
                 width: 150,
                 text: "",
@@ -488,14 +488,14 @@ export class KardexComponent implements OnInit {
           }
         }
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       },
       (error) => {
         this.validaDtUser = true;
         this.lcargando.ctlSpinner(false);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
         this.toastr.info(error.error.message);
       }
@@ -559,7 +559,7 @@ export class KardexComponent implements OnInit {
     		});
     		modalInvoice.componentInstance.products = this.products;
     	}
-    
+
     	informaciondtKardex(dts) {
     		const modalInvoice = this.modalService.open(DetalleInformacionComponent, {
     			size: "xl",

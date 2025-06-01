@@ -32,7 +32,7 @@ export class ModalNewUpdComponent implements OnInit {
     private service: DepartamentoService,
     private commonVarSrv: CommonVarService,
     private modal: NgbModal
-  ) { 
+  ) {
     this.commonVarSrv.modalAreaDepartamento.pipe(takeUntil(this.onDestroy$)).subscribe(
     (res)=>{
       this.departamento.id_area = res.id_area
@@ -42,7 +42,7 @@ export class ModalNewUpdComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -140,7 +140,7 @@ export class ModalNewUpdComponent implements OnInit {
           confirmButtonColor: '#20A8D8',
         });
         this.lcargando.ctlSpinner(false);
-        this.commonVarSrv.modalDepartamento.next()
+        this.commonVarSrv.modalDepartamento.next(null)
         this.activeModal.close();
       }
     )
@@ -160,9 +160,9 @@ export class ModalNewUpdComponent implements OnInit {
           confirmButtonColor: '#20A8D8',
         });
         this.lcargando.ctlSpinner(false);
-        this.commonVarSrv.modalDepartamento.next()
+        this.commonVarSrv.modalDepartamento.next(null)
         this.activeModal.close();
-        
+
       }
     )
   }

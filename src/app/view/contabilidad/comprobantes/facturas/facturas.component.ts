@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import * as myVarGlobals from '../../../../global';
-import { CommonService } from 'src/app/services/commonServices'; 
-import { CommonVarService } from 'src/app/services/common-var.services'; 
+import { CommonService } from 'src/app/services/commonServices';
+import { CommonVarService } from 'src/app/services/common-var.services';
 import { contableConfService } from 'src/app/view/panel-control/parametro/contable/contable.service';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
@@ -19,7 +19,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DiferedBuyProvComponent } from './difered-buy-prov/difered-buy-prov.component';
 import { ShowInvoicesComponent } from './show-invoices/show-invoices.component';
 import { CcModalTablaComprasComponent } from 'src/app/config/custom/cc-modal-tabla-compras/cc-modal-tabla-compras.component';
-import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component'; 
+import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 
 import { CcModalTablaProveedoresComponent } from 'src/app/config/custom/cc-modal-tabla-proveedores/cc-modal-tabla-proveedores.component';
 import { CcModalTablaProductosComponent } from 'src/app/config/custom/cc-modal-tabla-productos/cc-modal-tabla-productos.component';
@@ -91,7 +91,7 @@ export class FacturasComponent implements OnInit {
   dtTrigger = new Subject();
   fecha: Date = new Date();
 
- 
+
 
 
   fecha_compra = new Date();
@@ -112,38 +112,38 @@ export class FacturasComponent implements OnInit {
     {value: "1",label: "Activo"},
     {value: "0",label: "Anular"},
   ]
-  buyProv: any = { 
-    CodacountMulta: '', 
-    acountMulta: '', 
-    motivo_multa: '', 
-    multa: (0.00).toFixed(2), 
-    num_contrato: '', 
-    tipo_documento: 0, 
-    sustento: '01', 
-    //proveedor_name: '', 
+  buyProv: any = {
+    CodacountMulta: '',
+    acountMulta: '',
+    motivo_multa: '',
+    multa: (0.00).toFixed(2),
+    num_contrato: '',
+    tipo_documento: 0,
+    sustento: '01',
+    //proveedor_name: '',
     contribuyente_name: '',
-    anio: 2022, mes: 9, 
-    //identificacion_proveedor: '', 
+    anio: 2022, mes: 9,
+    //identificacion_proveedor: '',
     identificacion_contribuyente: '',
-    tipo_identificacion: '01', 
-    //fk_id_proveedor: 0, 
-    fk_id_contribuyente: 0, 
-    subtotal: (0.00).toFixed(2), 
-    subcero: (0.00).toFixed(2), 
-    objeto: (0.00).toFixed(2), 
-    exento: (0.00).toFixed(2), 
-    descuento: (0.00).toFixed(2), 
-    propina: (0.00).toFixed(2), 
-    otro_impuesto: (0.00).toFixed(2), 
-    servicio: (0.00).toFixed(2), 
-    valor_iva: (0.00).toFixed(2), 
-    total: (0.00).toFixed(2), 
-    tipo_pago: 0, forma_pago: 0, 
-    fk_usuario_receive: 0, 
+    tipo_identificacion: '01',
+    //fk_id_proveedor: 0,
+    fk_id_contribuyente: 0,
+    subtotal: (0.00).toFixed(2),
+    subcero: (0.00).toFixed(2),
+    objeto: (0.00).toFixed(2),
+    exento: (0.00).toFixed(2),
+    descuento: (0.00).toFixed(2),
+    propina: (0.00).toFixed(2),
+    otro_impuesto: (0.00).toFixed(2),
+    servicio: (0.00).toFixed(2),
+    valor_iva: (0.00).toFixed(2),
+    total: (0.00).toFixed(2),
+    tipo_pago: 0, forma_pago: 0,
+    fk_usuario_receive: 0,
     isActive: this.estados[0],
-    metodo_pago: 0 , 
-    saldo: 0.00, 
-    condicion: 0, 
+    metodo_pago: 0 ,
+    saldo: 0.00,
+    condicion: 0,
     total_retencion: (0.00).toFixed(2),
     total_anticipo: (0.00).toFixed(2),
     total_multa: (0.00).toFixed(2),
@@ -159,43 +159,43 @@ export class FacturasComponent implements OnInit {
 
 
   dataProducto: any = [{ cod_anexo_iva: "", cod_iva: "", porce_iva: 0, cod_anexo_fte: "", cod_fte: "", porce_fte: 0, isRetencionIva: false, LoadOpcionImpuesto: false, LoadOpcionReteFuente: false, LoadOpcionRteIva: false, LoadOpcionCentro: false, subtotal_noobjeto: (0.00).toFixed(2), subtotal_excento: (0.00).toFixed(2), subtotal_cero: (0.00).toFixed(2), subtotal_iva: (0.00).toFixed(2), InputDisabledCantidad: true, iva_detalle: (0.00).toFixed(2), fk_producto: 0, impuesto: 2, rte_fuente: 0, rte_iva: 0, centro: 0, nombre: null, codigo: null, observacion: null, cantidad: null, precio: null, desc: (0.00).toFixed(2), subtotalItems: 0.00, totalItems: 0.00, paga_iva: 1 }];
-  dataCuenta: any = [{ 
-    cod_anexo_iva: "", 
-    cod_iva: "", 
-    porce_iva: 0, 
-    cod_anexo_fte: "", 
-    cod_fte: "", 
-    porce_fte: 0, 
+  dataCuenta: any = [{
+    cod_anexo_iva: "",
+    cod_iva: "",
+    porce_iva: 0,
+    cod_anexo_fte: "",
+    cod_fte: "",
+    porce_fte: 0,
     cod_ice: "",
     porce_ice: 0,
-    isRetencionIva: false, 
+    isRetencionIva: false,
     LoadOpcionImpuesto: false,
-    LoadOpcionIceSri: false, 
-    LoadOpcionReteFuente: false, 
-    LoadOpcionRteIva: false, 
-    LoadOpcionCentro: false, 
-    subtotal_noobjeto: (0.00).toFixed(2), 
-    subtotal_excento: (0.00).toFixed(2), 
-    subtotal_cero: (0.00).toFixed(2), 
-    subtotal_iva: (0.00).toFixed(2), 
-    InputDisabledCantidad: true, 
-    iva_detalle: (0.00).toFixed(2), 
-    cuenta_detalle: 0, impuesto: 2, 
-    rte_fuente: 0, 
-    rte_iva: 0, 
-    centro: 0, 
-    nombre: null, 
-    codigo: null, 
-    observacion: null, 
-    observacion_adicional: null, 
-    cantidad: null, 
-    precio: null, 
-    desc: (0.00).toFixed(2), 
-    subtotalItems: 0.00, 
-    totalItems: 0.00, 
-    paga_iva: 1, 
-    cod_cuenta_por_pagar: '', 
-    cuenta_por_pagar: '', 
+    LoadOpcionIceSri: false,
+    LoadOpcionReteFuente: false,
+    LoadOpcionRteIva: false,
+    LoadOpcionCentro: false,
+    subtotal_noobjeto: (0.00).toFixed(2),
+    subtotal_excento: (0.00).toFixed(2),
+    subtotal_cero: (0.00).toFixed(2),
+    subtotal_iva: (0.00).toFixed(2),
+    InputDisabledCantidad: true,
+    iva_detalle: (0.00).toFixed(2),
+    cuenta_detalle: 0, impuesto: 2,
+    rte_fuente: 0,
+    rte_iva: 0,
+    centro: 0,
+    nombre: null,
+    codigo: null,
+    observacion: null,
+    observacion_adicional: null,
+    cantidad: null,
+    precio: null,
+    desc: (0.00).toFixed(2),
+    subtotalItems: 0.00,
+    totalItems: 0.00,
+    paga_iva: 1,
+    cod_cuenta_por_pagar: '',
+    cuenta_por_pagar: '',
     codigo_partida: '' }];
 
   actions: any = { btnSave: false, btnmod: false, btnfac: false, btncancel: false };
@@ -287,7 +287,7 @@ export class FacturasComponent implements OnInit {
   lastRecord: number|null = null
   totalRecords: number = 0
   constructor(
-    private diarioSrv: DiarioService, 
+    private diarioSrv: DiarioService,
     private toastr: ToastrService,
     private commonServices: CommonService,
     private router: Router,
@@ -329,22 +329,22 @@ export class FacturasComponent implements OnInit {
         this.buyProv.fk_egreso_bodega = factura.fk_egreso_bodega
 
         // let fecha_compra =  new Date(factura.fecha_compra)
-        // this.fecha_compra=  new Date(fecha_compra.getFullYear(),fecha_compra.getMonth(),fecha_compra.getDate() + 1); 
+        // this.fecha_compra=  new Date(fecha_compra.getFullYear(),fecha_compra.getMonth(),fecha_compra.getDate() + 1);
 
         // this.buyProv.tipo_documento = factura.tipo_documento_sustento
-        const ptoEmisionResponse = await this.comSrv.getPuntosEmision(factura.tipo_documento_sustento).toPromise<any>()
+        const ptoEmisionResponse = await this.comSrv.getPuntosEmision(factura.tipo_documento_sustento) as any
         console.log(ptoEmisionResponse)
         this.punto_emision = (ptoEmisionResponse.data?.length > 0) ? ptoEmisionResponse.data : []
 
         this.cargaInfoSustento();
         this.buyProv.sustento = factura.sustento_tirbutario
         this.CargarComboUsuario()
-        
+
         this.buyProv.isActive = factura.isactive
         this.buyProv.fk_usuario_receive = factura.usuario?.id_usuario
-       
+
         this.buyProv.pto_emision = factura.id_punto_emision
-   
+
 
         this.buyProv.subtotal = factura.subtotal;
         this.buyProv.total_impuesto = factura.subtotal;
@@ -359,13 +359,13 @@ export class FacturasComponent implements OnInit {
         this.buyProv.total = factura.total;
         this.motivo = factura.motivo;
 
-        
+
         if (factura.detalle_cuentas.length > 0) {
           this.dataCuenta = [];
           this.centros = await this.contableService.getListaCentroCostosAsync();
           this.iceSri = await this.contableService.getIceSriAsync();
 
-          this.CentrosPresupuesto() 
+          this.CentrosPresupuesto()
 
           factura.detalle_cuentas.forEach((element,index) => {
             this.fieldsDaily=[]
@@ -409,7 +409,7 @@ export class FacturasComponent implements OnInit {
             this.dataCuenta.push(obj)
             this.getRetencionIva(index,this.dataCuenta);
           });
-          this.generaPreviewAsientoContable();   
+          this.generaPreviewAsientoContable();
         }
       }
     )
@@ -437,9 +437,9 @@ export class FacturasComponent implements OnInit {
         this.contribuyenteActive.num_documento=  res.contribuyente?.num_documento
         this.buyProv.identificacion_contribuyente = res.ruc
         this.buyProv.fk_egreso_bodega = res.fk_egreso_bodega
-        
+
         if(res?.egreso_bodega?.detalles.length > 0){
-          
+
           res?.egreso_bodega?.detalles.forEach(e => {
             let data= {
               nro_egreso: res.egreso_bodega?.num_doc,
@@ -458,13 +458,13 @@ export class FacturasComponent implements OnInit {
 
         console.log( res.fecha_compra)
         let fecha_compra =  new Date(res.fecha_compra)
-        this.fecha_compra=  new Date(fecha_compra.getFullYear(),fecha_compra.getMonth(),fecha_compra.getDate() + 1); 
+        this.fecha_compra=  new Date(fecha_compra.getFullYear(),fecha_compra.getMonth(),fecha_compra.getDate() + 1);
 
         //var f = res.fecha_compra;
         //this.fecha_compra=  new Date(res.fecha_compra.getDate() + "-"+ res.fecha_compra.getMonth()+ "-" +res.fecha_compra.getFullYear());
         console.log( this.fecha_compra)
-      
-       
+
+
         this.buyProv.tipo_documento = res.tipo_documento_sustento
         let data ={
           id: res.tipo_documento_sustento
@@ -475,12 +475,12 @@ export class FacturasComponent implements OnInit {
         this.cargaInfoSustento();
         this.buyProv.sustento = res.sustento_tirbutario
         this.CargarComboUsuario()
-        
+
         this.buyProv.isActive = res.isactive
         this.buyProv.fk_usuario_receive = res.usuario?.id_usuario
-       
+
         this.buyProv.pto_emision = res.id_punto_emision
-   
+
 
         this.buyProv.subtotal = res.subtotal;
         this.buyProv.total_impuesto = res.subtotal;
@@ -495,15 +495,15 @@ export class FacturasComponent implements OnInit {
         this.buyProv.total = res.total;
         this.motivo = res.motivo;
 
-        
+
         if (res.detalle_cuentas.length > 0) {
           this.dataCuenta = [];
           this.centros = await this.contableService.getListaCentroCostosAsync();
           this.iceSri = await this.contableService.getIceSriAsync();
 
           console.log(this.centros)
-          this.CentrosPresupuesto() 
-            
+          this.CentrosPresupuesto()
+
           console.log(this.catalogo_presupuesto)
           res.detalle_cuentas.forEach((element,index) => {
             this.fieldsDaily=[]
@@ -552,12 +552,12 @@ export class FacturasComponent implements OnInit {
           });
          // this.calculaImpuestoIva();
           this.generaPreviewAsientoContable();
-             
+
         }
 
         //this.CargarComprasRegistradas(res)
         this.vmButtons[0].habilitar = true;
-        
+
       }
     )
     this.comSrv.listaEgresos$.subscribe(
@@ -579,7 +579,7 @@ export class FacturasComponent implements OnInit {
             this.egresosBodega.push(data)
            })
         }
-       
+
       }
     )
 
@@ -604,7 +604,7 @@ export class FacturasComponent implements OnInit {
     //         this.vmButtons[1].habilitar = false;
     //         this.flagBtnDired = (res['tipo_pago'] == 'Crédito') ? true : false;
     //         this.buyProv['last_doc'] = res['num_doc'];
-      
+
     // })
   }
 
@@ -740,7 +740,7 @@ export class FacturasComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
-    
+
     let id_rol = this.dataUser.id_rol;
 
     let data = {
@@ -752,7 +752,7 @@ export class FacturasComponent implements OnInit {
 
       this.permisions = res['data'][0];
       this.permiso_ver = this.permisions.ver;
-      
+
 
       if (this.permisions.ver == "0") {
 
@@ -811,10 +811,10 @@ export class FacturasComponent implements OnInit {
        console.log(res)
        if(res['data']?.length > 0){
         this.punto_emision = res['data'];
-       }  
-      
+       }
+
         this.lcargando.ctlSpinner(false);
-        
+
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -834,13 +834,13 @@ export class FacturasComponent implements OnInit {
 
   seleccionado(event){
     console.log(event)
-   
+
     //if (event.checked.length > 0) {
     if (event) {
-     
+
       this.orden= 'S';
     } else {
-      
+
       this.orden= 'N';
     }
     console.log(this.orden)
@@ -884,7 +884,7 @@ export class FacturasComponent implements OnInit {
       if (this.buyProv.fk_id_contribuyente > 0) {
 
         //if ((this.buyProv.num_doc !== "") && (typeof (this.buyProv.num_doc) !== 'undefined')) {
-/* 
+/*
           if ((this.buyProv.num_aut !== "") && (typeof (this.buyProv.num_aut) !== 'undefined')) {
  */
             let busqueda = '';
@@ -910,7 +910,7 @@ export class FacturasComponent implements OnInit {
         /*   } else {
             this.toastr.info("Debe agregar un numero de autorizacion comprobante valido.");
           } */
-       // } 
+       // }
         // else {
         //   this.toastr.info("Debe agregar el numero de comprobante del contribuyente a registrar, por favor verificar.");
         // }
@@ -1387,7 +1387,7 @@ export class FacturasComponent implements OnInit {
       });
 
 
-      
+
 
       // if(this.buyProv.acountMultaContrapartida !== ''){
 
@@ -1462,15 +1462,15 @@ export class FacturasComponent implements OnInit {
     })
   }
 
-  
+
   getCatalogos() {
     let data = {
       params: "'TIPO PAGO','FORMA PAGO','REC_METODO_PAGO'"
      // params: "REC_METODO_PAGO"
     }
     this.comSrv.getCatalogos(data).subscribe(res => {
-     
-      
+
+
       this.tipo_pago = res['data']['TIPO PAGO'];
       this.forma_pago = res['data']['FORMA PAGO'];
       this.metodo_pago = res["data"]['REC_METODO_PAGO'];
@@ -1480,7 +1480,7 @@ export class FacturasComponent implements OnInit {
       this.toastr.info(error.error.message)
     })
   }
-  
+
 
   getimpuestos() {
 
@@ -1501,7 +1501,7 @@ export class FacturasComponent implements OnInit {
 
       data_combo[i].LoadOpcionIceSri = true;
       this.comSrv.getIceSri().subscribe(res => {
-       
+
        console.log(res)
        this.iceSri = res['data'];
         data_combo[i].LoadOpcionIceSri = false;
@@ -1949,7 +1949,7 @@ export class FacturasComponent implements OnInit {
               porcentaje: element.porce_ice,
               total: parseFloat(iceSri.toFixed(2)),
               tipo: 'ICE',
-              codigo: element.cod_ice, 
+              codigo: element.cod_ice,
             });
             console.log(this.detalleIceSri)
           } else {
@@ -1978,7 +1978,7 @@ export class FacturasComponent implements OnInit {
 
               this.detalleIceSri[contador - 1].total = parseFloat(iceSri.toFixed(2));
               this.detalleIceSri[contador - 1].base = parseFloat(base_update.toFixed(2));
-              
+
 
             } else {
 
@@ -1986,20 +1986,20 @@ export class FacturasComponent implements OnInit {
               let iceSri = parseFloat(base) * (parseFloat(element.porce_ice) / 100);
 
               this.detalleIceSri.push({
-                base: parseFloat(parseFloat(base).toFixed(2)), 
-                porcentaje: element.porce_ice, 
-                total: parseFloat(iceSri.toFixed(2)), 
-                tipo: 'ICE', 
-                codigo: element.cod_fte, 
+                base: parseFloat(parseFloat(base).toFixed(2)),
+                porcentaje: element.porce_ice,
+                total: parseFloat(iceSri.toFixed(2)),
+                tipo: 'ICE',
+                codigo: element.cod_fte,
               });
 
-            
+
 
             }
 
           }
 
-         
+
 
         }
       });
@@ -2011,7 +2011,7 @@ export class FacturasComponent implements OnInit {
 
 
   async calculaImpuestoIva() {
-  console.log('aqui') 
+  console.log('aqui')
     this.detalleImpuesto = [];
 
     await this.calculaImpuesto().then(rsp => {
@@ -2151,7 +2151,7 @@ export class FacturasComponent implements OnInit {
       });
 
       this.sumaTotales(undefined,undefined,undefined);
-     
+
 
 
     });
@@ -2161,83 +2161,83 @@ export class FacturasComponent implements OnInit {
   async calculaIceSri() {
     console.log(this.dataCuenta)
       this.detalleIceSri = [];
-  
+
       await this.calculaIceSriImp().then(rsp => {
-  
-  
+
+
         /* recorremos los detalles de cuenta */
         this.dataCuenta.forEach(element => {
           console.log(element)
-  
+
           if (element.codigo !== null) {
-  
+
             if (this.detalleIceSri.length === 0) {
-  
+
               if (parseFloat(element.porce_ice) > 0) {
-  
+
                 let base = element.ice_detalle;
                 let iceSri = parseFloat(base) * (parseFloat(element.porce_ice) / 100);
-  
+
                 this.detalleIceSri.push({
-                  base: base, porcentaje: element.porce_ice, total: parseFloat(iceSri.toFixed(2)), tipo: 'ICE', codigo: element.cod_ice 
+                  base: base, porcentaje: element.porce_ice, total: parseFloat(iceSri.toFixed(2)), tipo: 'ICE', codigo: element.cod_ice
                 });
               }
-  
+
             } else {
-  
+
               //verificamos si existe registrado el codigo fuente
               let valida_ice = false;
               let contador = 0;
-  
+
               this.detalleIceSri.forEach(impues => {
-  
+
                 if ((impues.cod_ice === element.cod_ice) && (impues.tipo === 'ICE')) {
                   valida_ice = true;
                 }
-  
+
                 contador++;
-  
+
               })
-  
-  
+
+
               if (valida_ice) {
-  
+
                 if (parseFloat(element.porce_ice) > 0) {
-  
+
                   let base = this.detalleIceSri[contador - 1].base;
                   let base_update = parseFloat(base) + parseFloat(element.ice_detalle);
-  
+
                   let iceSri = base_update * (parseFloat(element.porce_ice) / 100);
-  
+
                   this.detalleIceSri[contador - 1].total = parseFloat(iceSri.toFixed(2));
                   this.detalleIceSri[contador - 1].base = parseFloat(base_update.toFixed(2));
                 }
-  
+
               } else {
-  
+
                 if (parseFloat(element.porce_ice) > 0) {
-  
+
                   let base = element.ice_detalle;
                   let iceSri = parseFloat(base) * (parseFloat(element.porce_iva) / 100);
-  
+
                   this.detalleIceSri.push({
                     base: base, porcentaje: element.porce_ice, total: parseFloat(iceSri.toFixed(2)), tipo: 'ICE', codigo: element.cod_ice
                   });
                 }
-  
+
               }
-  
+
             }
-  
+
           }
         });
-  
+
         this.sumaTotales(undefined,undefined,undefined);
-       
-  
-  
+
+
+
       });
-  
+
     }
 
   sumaTotales(event: any,tipo,index){
@@ -2246,10 +2246,10 @@ export class FacturasComponent implements OnInit {
     let pagoTotalRet = 0;
     let pagoTotalAnt = 0;
     let pagoTotalMul = 0;
-    
-    
+
+
     this.detalleImpuesto.forEach(e => {
-      pagoTotalRet += +e.total; 
+      pagoTotalRet += +e.total;
     });
 
     this.ListaAnticipos.forEach((value, index2) => {
@@ -2260,8 +2260,8 @@ export class FacturasComponent implements OnInit {
           }
         }
       }
-     
-      pagoTotalAnt += +value.valor_aplicado; 
+
+      pagoTotalAnt += +value.valor_aplicado;
     });
     this.ListaMultas.forEach((value, index2) => {
       if(event != undefined || event != null  && tipo != undefined  && index != undefined){
@@ -2271,7 +2271,7 @@ export class FacturasComponent implements OnInit {
           }
         }
       }
-      pagoTotalMul += +value.valor_aplicado; 
+      pagoTotalMul += +value.valor_aplicado;
     });
 
     this.buyProv.total_retencion = pagoTotalRet;
@@ -2280,7 +2280,7 @@ export class FacturasComponent implements OnInit {
     this.totalPagar = this.buyProv.total - this.buyProv.total_retencion - this.buyProv.total_anticipo - this.buyProv.total_multa
     this.buyProv.saldo = this.totalPagar;
   }
- 
+
 
   ChangeFuente(event: any, dataelement, index) {
 
@@ -2362,17 +2362,17 @@ export class FacturasComponent implements OnInit {
      dataelement[index].porce_ice = event.porcentaje;
      dataelement[index].cod_ice = event.codigo;
      dataelement[index].ice_detalle = dataelement[index].subtotalItems * event.porcentaje.toFixed(2) / 100
-    
+
      this.calculaTotalIceSri();
      this.sumTotalizados();
      this.generaPreviewAsientoContable();
- 
+
    }
    calculaTotalIceSri(){
      let totalIce=0
      this.dataCuenta.forEach(e =>{
        if(e.ice_detalle > 0){
-         totalIce += +e.ice_detalle 
+         totalIce += +e.ice_detalle
        }
      })
      this.buyProv.otro_impuesto = totalIce
@@ -2515,7 +2515,7 @@ export class FacturasComponent implements OnInit {
   }
 
   addCuentas() {
-   
+
 
     let validaAddDetalle = true;
     let mensaje = '';
@@ -2565,38 +2565,38 @@ export class FacturasComponent implements OnInit {
 
     this.busqueda= false
     this.flagBtnDired = false;
-    this.buyProv = { 
-      CodacountMulta: '', 
-      acountMulta: '', 
-      motivo_multa: '', 
-      multa: (0.00).toFixed(2), 
-      num_contrato: '', 
-      tipo_documento: 0, 
-      sustento: '01', 
-      //proveedor_name: '', 
+    this.buyProv = {
+      CodacountMulta: '',
+      acountMulta: '',
+      motivo_multa: '',
+      multa: (0.00).toFixed(2),
+      num_contrato: '',
+      tipo_documento: 0,
+      sustento: '01',
+      //proveedor_name: '',
       contribuyente_name: '',
-      anio: 2022, mes: 9, 
-      //identificacion_proveedor: '', 
+      anio: 2022, mes: 9,
+      //identificacion_proveedor: '',
       identificacion_contribuyente: '',
-      tipo_identificacion: '01', 
-      //fk_id_proveedor: 0, 
-      fk_id_contribuyente: 0, 
-      subtotal: (0.00).toFixed(2), 
-      subcero: (0.00).toFixed(2), 
-      objeto: (0.00).toFixed(2), 
-      exento: (0.00).toFixed(2), 
-      descuento: (0.00).toFixed(2), 
-      propina: (0.00).toFixed(2), 
-      otro_impuesto: (0.00).toFixed(2), 
-      servicio: (0.00).toFixed(2), 
-      valor_iva: (0.00).toFixed(2), 
-      total: (0.00).toFixed(2), 
-      tipo_pago: 0, forma_pago: 0, 
-      fk_usuario_receive: 0, 
+      tipo_identificacion: '01',
+      //fk_id_proveedor: 0,
+      fk_id_contribuyente: 0,
+      subtotal: (0.00).toFixed(2),
+      subcero: (0.00).toFixed(2),
+      objeto: (0.00).toFixed(2),
+      exento: (0.00).toFixed(2),
+      descuento: (0.00).toFixed(2),
+      propina: (0.00).toFixed(2),
+      otro_impuesto: (0.00).toFixed(2),
+      servicio: (0.00).toFixed(2),
+      valor_iva: (0.00).toFixed(2),
+      total: (0.00).toFixed(2),
+      tipo_pago: 0, forma_pago: 0,
+      fk_usuario_receive: 0,
       isActive: this.estados[0],
-      metodo_pago: 0 , 
-      saldo: 0.00, 
-      condicion: 0, 
+      metodo_pago: 0 ,
+      saldo: 0.00,
+      condicion: 0,
       total_retencion: (0.00).toFixed(2),
       total_anticipo: (0.00).toFixed(2),
       total_multa: (0.00).toFixed(2),
@@ -2614,7 +2614,7 @@ export class FacturasComponent implements OnInit {
 
     this.dataCuenta = [{ cod_anexo_iva: "", cod_iva: "", porce_iva: 0,cod_ice: "", porce_ice: 0, cod_anexo_fte: "", cod_fte: "", porce_fte: 0, isRetencionIva: false, LoadOpcionImpuesto: false,LoadOpcionIceSri: false, LoadOpcionReteFuente: false, LoadOpcionRteIva: false, LoadOpcionCentro: false, subtotal_noobjeto: (0.00).toFixed(2), subtotal_excento: (0.00).toFixed(2), subtotal_cero: (0.00).toFixed(2), subtotal_iva: (0.00).toFixed(2), InputDisabledCantidad: true, iva_detalle: (0.00).toFixed(2), cuenta_detalle: 0, impuesto: 2, rte_fuente: 0, rte_iva: 0, centro: 0, nombre: null, codigo: null, observacion: null, cantidad: null, precio: null, desc: (0.00).toFixed(2), subtotalItems: 0.00, totalItems: 0.00, paga_iva: 1, cod_cuenta_por_pagar: '', cuenta_por_pagar: '', codigo_partida: '' }];
     this.dataProducto = [{ cod_anexo_iva: "", cod_iva: "", porce_iva: 0,cod_ice: "", porce_ice: 0, cod_anexo_fte: "", cod_fte: "", porce_fte: 0, isRetencionIva: false, LoadOpcionImpuesto: false, LoadOpcionReteFuente: false, LoadOpcionRteIva: false, LoadOpcionCentro: false, subtotal_noobjeto: 0.00, subtotal_excento: 0.00, subtotal_cero: 0.00, subtotal_iva: 0.00, InputDisabledCantidad: true, iva_detalle: 0, fk_producto: 0, impuesto: 2, rte_fuente: 0, rte_iva: 0, centro: 0, nombre: null, codigo: null, observacion: null, cantidad: null, precio: null, desc: null, subtotalItems: 0.00, totalItems: 0.00, paga_iva: 1 }];
-   
+
 
     this.fieldsDaily = [];
     this.ListaAnticipos = [];
@@ -2706,7 +2706,7 @@ export class FacturasComponent implements OnInit {
     if (this.permisions.guardar == "0") {
       this.toastr.info("Usuario no tiene permiso para guardar");
       return;
-    } 
+    }
       this.validateDataGlobal().then(respuesta => {
         if (respuesta) {
           this.confirmSave("Seguro desea guardar la "+this.nombre_documento+"?", "SAVE_FACTURA");
@@ -2719,7 +2719,7 @@ export class FacturasComponent implements OnInit {
   }
 
   async confirmSave(message, action) {
- 
+
     Swal.fire({
       title: "Atención!!",
       text: message,
@@ -2825,8 +2825,8 @@ export class FacturasComponent implements OnInit {
         total_pagar: this.totalPagar,
         tipo_registro: "Factura de Venta"
       }
-      
-     
+
+
 
       this.buyProv['detalle'] = this.dataProducto;
       this.buyProv['detalle_cuenta'] = this.dataCuenta;
@@ -2852,7 +2852,7 @@ export class FacturasComponent implements OnInit {
         "anio": Number(moment(this.fecha_compra).format('YYYY')),
         "mes": Number(moment(this.fecha_compra).format('MM')),
       }
-      
+
 
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
 
@@ -2875,12 +2875,12 @@ export class FacturasComponent implements OnInit {
               //this.toastr.success(res['message']);
               this.busqueda = true;
               this.id_compra = res["data"].id_factura;
-              this.buyProv.num_doc = res['data'].num_doc; 
-              this.buyProv.num_aut = res['data'].num_aut; 
+              this.buyProv.num_doc = res['data'].num_doc;
+              this.buyProv.num_aut = res['data'].num_aut;
               this.vmButtons[6].habilitar = false;
               //window.open(environment.ReportingUrl + "rpt_compras.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_compra=" + res["data"].id, '_blank')
              // this.cancel();
-            } 
+            }
             else {
               this.lcargando.ctlSpinner(false);
               Swal.fire({
@@ -2892,9 +2892,9 @@ export class FacturasComponent implements OnInit {
                 confirmButtonColor: '#20A8D8',
               });
             }
-    
 
-            
+
+
           }, error => {
             this.lcargando.ctlSpinner(false);
             this.toastr.info(error.error.message);
@@ -2958,7 +2958,7 @@ export class FacturasComponent implements OnInit {
           mensajes += "Seleccione un tipo de pago<br>"
         } else if (this.buyProv.forma_pago == 0) {
           mensajes += "Seleccione una forma de pago<br>"
-        } 
+        }
         else if (this.buyProv.tipo_documento == 0 || this.buyProv.tipo_documento == undefined || this.buyProv.tipo_documento == '') {
           mensajes += "Debe seleccionar un documento de contribuyente<br>"
         }
@@ -2968,7 +2968,7 @@ export class FacturasComponent implements OnInit {
         //  else if ((this.buyProv.num_doc).length < 15) {
         //   mensajes += "El numero de comprobante del contribuyente debe tener 15 digitos<br>"
         //   return;
-        // } 
+        // }
        /*  else if (this.buyProv.num_aut == "" || this.buyProv.num_aut == undefined) {
           mensajes += "debe ingresar un número de autorización<br>"
         }  else if ((this.buyProv.num_aut).length != 10 && (this.buyProv.num_aut).length != 49) {
@@ -2993,7 +2993,7 @@ export class FacturasComponent implements OnInit {
               if (element['precio'] <= 0 || element['precio'] == "" || element['precio'] == null ||
                 element['cantidad'] <= 0 || element['cantidad'] == "" || element['cantidad'] == null) {
                 c += 1;
-                if (c == 1) { 
+                if (c == 1) {
                   mensajes += "Revise la información en los items, el precio o la cantidad no pueden ser 0<br>"
                 }
               }
@@ -3006,41 +3006,41 @@ export class FacturasComponent implements OnInit {
 
               if(element['cuenta_detalle'] == 0 || element['cuenta_detalle'] == "" || element['cuenta_detalle'] == null){
                 c += 1;
-                if (c == 1) { 
+                if (c == 1) {
                   mensajes += "En la línea "+ (index+1)+ " debe seleccionar una cuenta<br>"
                 }
               }
               else if(element['cantidad'] <= 0 || element['cantidad'] == "" || element['cantidad'] == null){
                 c += 1;
-                if (c == 1) { 
+                if (c == 1) {
                   mensajes += "En la línea "+ (index+1)+ " la cantidad no puede ser 0<br>"
                 }
               }
               else if (element['precio'] <= 0 || element['precio'] == "" || element['precio'] == null) {
                 c += 1;
-                if (c == 1) { 
+                if (c == 1) {
                   mensajes += "En la línea "+ (index+1)+ " el precio no puede ser 0<br>"
                 }
               }
               else if(element['observacion'] <= 0 || element['observacion'] == "" || element['observacion'] == null){
                 c += 1;
-                if (c == 1) { 
+                if (c == 1) {
                   mensajes += "En la línea "+ (index+1)+ " debe ingresar una observación<br>"
                 }
               }
               else if(element['observacion_adicional'] <= 0 || element['observacion_adicional'] == "" || element['observacion_adicional'] == null){
                 c += 1;
-                if (c == 1) { 
+                if (c == 1) {
                   mensajes += "En la línea "+ (index+1)+ " debe ingresar una observación adicional<br>"
                 }
               }
               else if(element['cod_cuenta_por_pagar'] == 0 || element['cod_cuenta_por_pagar'] == "" || element['cod_cuenta_por_pagar'] == null){
                 c += 1;
-                if (c == 1) { 
+                if (c == 1) {
                   mensajes += "En la línea "+ (index+1)+ " debe seleccionar una cuenta por pagar<br>"
                 }
               }
-              
+
             });
           }
 
@@ -3080,8 +3080,8 @@ export class FacturasComponent implements OnInit {
               if (element['precio'] <= 0 || element['precio'] == "" || element['precio'] == null ||
                 element['cantidad'] <= 0 || element['cantidad'] == "" || element['cantidad'] == null) {
                 c += 1;
-                if (c == 1) { 
-                  //this.toastr.info("Revise la información en los items, el valor o la cantidad no pueden ser 0") 
+                if (c == 1) {
+                  //this.toastr.info("Revise la información en los items, el valor o la cantidad no pueden ser 0")
                   mensajes +="Revise la información en los items, el valor o la cantidad no pueden ser 0";
                 }
                 //flag = true; return;
@@ -3092,7 +3092,7 @@ export class FacturasComponent implements OnInit {
            return (!mensajes.length) ? resolve(true) : reject(mensajes);
 
           }
-         
+
 
         }
 
@@ -3105,9 +3105,9 @@ export class FacturasComponent implements OnInit {
         this.toastr.info("En tiene metodo de pago debe escoger Si o No");
       }
 
-   
 
-     
+
+
     });
   }
 
@@ -3138,7 +3138,7 @@ export class FacturasComponent implements OnInit {
 
       console.log(cuenta);
       console.log(this.dataCuenta);
-      
+
       //debugger;
       this.dataCuenta[index].cuenta_detalle = "(" + filt.codigo + ") " + filt.nombre
       this.dataCuenta[index].codigo = filt.codigo;
@@ -3190,7 +3190,7 @@ export class FacturasComponent implements OnInit {
     this.modalService.dismissAll();
 
   }
- 
+
 
   CargarProveedor(event: any) {
 
@@ -3227,9 +3227,9 @@ export class FacturasComponent implements OnInit {
     this.buyProv.otro_impuesto = event.otro_impuesto;
     this.buyProv.servicio = event.servicios;
     this.buyProv.total = event.total;
-    //tipo_pago: 0, 
-    //forma_pago: 0, 
-    //fk_usuario_receive: 0, 
+    //tipo_pago: 0,
+    //forma_pago: 0,
+    //fk_usuario_receive: 0,
     this.buyProv.isActive = event.isactive;
     this.buyProv.num_aut = event.num_aut;
     this.buyProv.observacion = event.observacion;
@@ -3472,7 +3472,7 @@ export class FacturasComponent implements OnInit {
 
       this.LoadOpcionImpuesto = true;
 
-      this.impuestos = 
+      this.impuestos =
       [
         {
           id:2,
@@ -3580,7 +3580,7 @@ export class FacturasComponent implements OnInit {
     if (typeof event !== undefined && event !== '' && event !== 0) {
       this.ExistenItems = false;
     }
-  
+
     // this.egresosBodega = []
     // if (typeof event !== undefined && event !== '' && event !== 0) {
     //   if(event=='VB'){
@@ -3592,8 +3592,8 @@ export class FacturasComponent implements OnInit {
     //       this.lcargando.ctlSpinner(false);
     //       this.toastr.info(error.error.message);
     //     })
-  
-       
+
+
     //   }
     // }
   }
@@ -3667,7 +3667,7 @@ export class FacturasComponent implements OnInit {
         this.validateUpdateProv();
         break;
       case "BUSCAR":
-        
+
         this.showModalFacturas();
        //this.onClickConsultaComprasRegistradas()
         break;
@@ -3700,12 +3700,12 @@ export class FacturasComponent implements OnInit {
 
   expandModalDocSecundario() {
     console.log('ModalSecundario')
-    const modal = this.modalService.open(ModalBusquedaFacturaComponent, { 
-      size: 'xl', 
+    const modal = this.modalService.open(ModalBusquedaFacturaComponent, {
+      size: 'xl',
       backdrop: 'static'
     })
   }
- 
+
 
 
   LoadListaCatalogoPresupuesto(index) {
@@ -3821,20 +3821,20 @@ export class FacturasComponent implements OnInit {
       this.xmlToJson(value).then(response => this.ProcesaCargaXml(response));
     });
 
-   
+
 
 
 
     /*
         const reader = new FileReader();
         reader.onload = (e) => {
-    
+
           const text = reader.result.toString().trim();
           parseString(text, function (err, result) {
-    
+
             console.log(this.dataCuenta);
-    
-    
+
+
           });
         }
         reader.readAsText(this.files[0]);*/
@@ -4204,7 +4204,7 @@ export class FacturasComponent implements OnInit {
   }
 
   expandListContribuyentes() {
-     
+
       const modalInvoice = this.modalService.open(ModalContribuyentesComponent,{
         size:"xl",
         backdrop: "static",
@@ -4214,7 +4214,7 @@ export class FacturasComponent implements OnInit {
       modalInvoice.componentInstance.permissions = this.permissions;
       modalInvoice.componentInstance.verifyRestore = this.verifyRestore;
       modalInvoice.componentInstance.validacion = 8;
-   
+
   }
 
   async getLatest() {
@@ -4251,7 +4251,7 @@ export class FacturasComponent implements OnInit {
       this.lcargando.ctlSpinner(true)
       this.mensajeSppiner = 'Cargando Registro'
       try {
-        const response = await this.comSrv.getFacturasGeneradas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}).toPromise<any>()
+        const response = await this.comSrv.getFacturasGeneradas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}) as any
         console.log(response)
         if (response.data.data.length > 0) {
           this.totalRecords = response.data.total

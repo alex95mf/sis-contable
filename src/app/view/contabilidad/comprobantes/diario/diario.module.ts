@@ -28,7 +28,7 @@ import { CalendarModule } from 'primeng/calendar';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {TabViewModule} from 'primeng/tabview';
 import { ModalBusquedaAuxiliarComponent } from './modal-busqueda-auxiliar/modal-busqueda-auxiliar.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 @NgModule({
     imports: [
@@ -54,7 +54,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
         CalendarModule,
         ButtonModule,
         ButtonsModule.forRoot(),
-        NgxCurrencyModule,
+        NgxCurrencyDirective,
     ],
     declarations: [DiarioComponent, ViewDocumentDtComponent, ModalBusquedaAuxiliarComponent],
     providers: [

@@ -4,7 +4,7 @@ import { ParametrosNominaRoutingModule } from './parametros-nomina-routing.modul
 import { ParametrosNominaComponent } from './parametros-nomina.component';
 import { ParametroFormComponent } from './parametro-form/parametro-form.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 

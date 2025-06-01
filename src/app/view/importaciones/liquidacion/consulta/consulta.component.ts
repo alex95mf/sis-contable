@@ -174,14 +174,14 @@ export class ConsultaComponent implements OnInit {
         });
         this.validaDt = true;
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.lcargando.ctlSpinner(false);
         }, 50);
       }, error => {
         this.validaDt = true;
         this.dataDT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.lcargando.ctlSpinner(false);
         }, 50);
       });

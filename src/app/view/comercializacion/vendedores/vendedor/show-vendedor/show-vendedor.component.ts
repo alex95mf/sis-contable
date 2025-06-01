@@ -96,7 +96,7 @@ export class ShowVendedorComponent implements OnInit {
           element['total'] = parseFloat(element['total']).toFixed(2);
         }); */
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           /* this.commonVarSrvice.updPerm.next(false); */
         }, 50);
       },
@@ -104,7 +104,7 @@ export class ShowVendedorComponent implements OnInit {
         this.validaDt = true;
         this.dataDT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           /* this.commonVarSrvice.updPerm.next(false); */
         }, 50);
       }

@@ -73,7 +73,7 @@ export class ModalComponent implements OnInit {
           }
         });
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.validaDt = true;
         }, 50);
       }, error => {

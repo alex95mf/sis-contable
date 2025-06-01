@@ -265,7 +265,7 @@ export class FacturaCompraComponent implements OnInit {
           }, 500);
         }
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.lcargando.ctlSpinner(false);

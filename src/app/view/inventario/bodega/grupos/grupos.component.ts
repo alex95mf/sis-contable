@@ -198,7 +198,7 @@ export class GruposComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 

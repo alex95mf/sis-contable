@@ -214,7 +214,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
 
    }
   ngOnDestroy(): void {
-    this.onDestroy$.next()
+    this.onDestroy$.next(null)
     this.onDestroy$.complete()
   }
 

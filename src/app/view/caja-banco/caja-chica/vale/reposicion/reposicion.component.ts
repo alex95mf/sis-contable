@@ -131,7 +131,7 @@ export class ReposicionComponent implements OnInit {
                 this.crtSrv.saveReposition(this.repoAux).subscribe(res => {
                   this.commonVarService.updPerm.next(false);
                   this.toastr.success(res['message']);
-                  this.commonVarService.listenBoxSmallReposition.next();
+                  this.commonVarService.listenBoxSmallReposition.next(null);
                   this.closeModal();
                 }, error => {
                   this.toastr.info(error.error.message);

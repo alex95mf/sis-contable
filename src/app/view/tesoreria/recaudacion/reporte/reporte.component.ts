@@ -6,7 +6,8 @@ import { ButtonRadioActiveComponent } from '../../../../config/custom/cc-panel-b
 import { ExcelService } from 'src/app/services/excel.service';
 import * as moment from 'moment';
 import { ReporteService } from './reporte.service';
-import { LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { Table } from 'primeng/table';
 
 
@@ -25,11 +26,11 @@ standalone: false,
   .layout-news-active :host ::ng-deep .p-datatable tr > th {
       top: 7rem;
   }
-  
+
 `]
 })
 export class ReporteComponent implements OnInit {
-  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
+  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('tblPropiosAjenos') tblPropiosAjenos: Table
   @ViewChild('tblTitulosRecaudados') tblTitulosRecaudados: Table
   @ViewChild('tblRecDetallada') tblRecDetallada: Table
@@ -39,7 +40,7 @@ export class ReporteComponent implements OnInit {
   @ViewChild('tblExpedientesRec') tblExpedientesRec: Table
   @ViewChild('tblRecTitulosCaja') tblRecTitulosCaja: Table
   @ViewChild('tblRecGarantias') tblRecGarantias: Table
-  
+
   fTitle: string = "Reportes de Tesorería";
   msgSpinner: string;
   conceptosDisabled = false;
@@ -62,7 +63,7 @@ export class ReporteComponent implements OnInit {
   conceptos: any[] = [];
   cajas: any[] = [];
   paginate: any;
-  filter: any 
+  filter: any
   // filter: any = {
   //   selectedConcepto: '*',
   //   selectedCaja: ' ',
@@ -80,13 +81,14 @@ export class ReporteComponent implements OnInit {
 
 
   selectedReporte: any = undefined;
+  formReadOnly: boolean = false;
   selectedConcepto: any = ' ';
   selectedCaja: any = ' ';
   today = moment(new Date()).format('YYYY-MM-DD');
   fecha_desde: string = moment(this.today).startOf('month').format('YYYY-MM-DD');
   fecha_hasta: string = moment(this.today).endOf('month').format('YYYY-MM-DD');
 
- 
+
 
   totalFondProAje:any = 0
 
@@ -113,7 +115,7 @@ export class ReporteComponent implements OnInit {
   coactivaGenTituRecCaja: any = 0
 
   totalDetEspCanje: any = 0
-  
+
   constructor(
     private apiService: ReporteService,
     private toastr: ToastrService,
@@ -134,15 +136,15 @@ export class ReporteComponent implements OnInit {
         clase: "btn btn-danger boton btn-sm",
         habilitar: false,
       },
-      { 
-        orig: "btnsRenConsultaReporte", 
-        paramAccion: "", 
-        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
+      {
+        orig: "btnsRenConsultaReporte",
+        paramAccion: "",
+        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
         habilitar: false
       },
     ];
@@ -196,7 +198,7 @@ export class ReporteComponent implements OnInit {
     // console.log(reporteUrl)
     //window.open(reporteUrl, "_blank")
     console.log(this.selectedReporte);
-    window.open(environment.ReportingUrl +`${this.selectedReporte}`+"?&j_username=" + environment.UserReporting 
+    window.open(environment.ReportingUrl +`${this.selectedReporte}`+"?&j_username=" + environment.UserReporting
     + "&j_password=" + environment.PasswordReporting, '_blank')
     this.lcargando.ctlSpinner(false);
   }
@@ -205,7 +207,7 @@ export class ReporteComponent implements OnInit {
   //rpt_ren_listado_locales_municipales.pdf
   //imprimirOrden(){
     //console.log()
-      //window.open(environment.ReportingUrl + "rep_cpinfimas_orden_compra.pdf?&j_username=" + environment.UserReporting 
+      //window.open(environment.ReportingUrl + "rep_cpinfimas_orden_compra.pdf?&j_username=" + environment.UserReporting
       //+ "&j_password=" + environment.PasswordReporting + "&id_solicitud=" + this.item.id_solicitud , '_blank')
   //}
   consultar() {
@@ -236,8 +238,8 @@ export class ReporteComponent implements OnInit {
     if(this.selectedReporte=='rpt_recaudacion_garantias'){
       this.tblRecGarantias.first = 0
     }
-    
- 
+
+
     this.first = 0
     this.nextPage({first: this.first, rows: this.rows})
   }
@@ -260,19 +262,19 @@ export class ReporteComponent implements OnInit {
     console.log(this.filter)
         this.msgSpinner = 'Cargando...';
         // this.lcargando.ctlSpinner(true);
-        this.filter.reporte = this.selectedReporte 
+        this.filter.reporte = this.selectedReporte
         let data= {
           params: {
             filter: this.filter,
             paginate: this.paginate,
-            
+
           }
         }
         this.apiService.getConsultaReportes(data).subscribe(
           (res: any) => {
              console.log(res);
              if(res.status==1){
-             
+
               this.dataReportes = res.data.data;
               this.totalRecords= res.data?.total[0]?.count
               this.loading = false;
@@ -326,7 +328,7 @@ export class ReporteComponent implements OnInit {
                 this.coactivaGenTituRecCaja=res.data.total[0].total_coactiva
                 //this.totalesTitulosRecCaja()
               }
-            
+
 
               // this.lcargando.ctlSpinner(false);
              }
@@ -342,20 +344,20 @@ export class ReporteComponent implements OnInit {
             this.loading = false;
           }
         )
-        
+
       }
 
       cargarDetallesEspecialCanjes(){
         this.loading = true;
         this.msgSpinner = 'Cargando...';
         // this.lcargando.ctlSpinner(true);
-        this.filter.reporte = this.selectedReporte 
-    
+        this.filter.reporte = this.selectedReporte
+
         let data= {
           params: {
             filter: this.filter,
             paginate: this.paginate,
-            
+
           }
         }
         this.apiService.getConsultaDetEspCanjes(data).subscribe(
@@ -387,7 +389,7 @@ export class ReporteComponent implements OnInit {
           }
         }
         this.totalFondProAje= total
-       
+
       }
 
       cantTitulosRecaudados(name) {
@@ -454,7 +456,7 @@ export class ReporteComponent implements OnInit {
         this.rebajaGeneralTituRec= rebaja
         this.totalGeneralTituRec= total
 
-       
+
       }
 
       totalRecDet1(name){
@@ -469,7 +471,7 @@ export class ReporteComponent implements OnInit {
         return total;
       }
 
-      
+
       totalGeneralRecDetallada1(){
         let total = 0;
         if (this.dataReportes.length > 0) {
@@ -502,7 +504,7 @@ export class ReporteComponent implements OnInit {
           }
         }
         return total;
-      }   
+      }
       totalGeneralEspeciesFiscales(){
         let total = 0;
         if (this.dataReportes.length > 0) {
@@ -725,7 +727,7 @@ export class ReporteComponent implements OnInit {
         return totalCoactiva;
       }
 
-     
+
 
   mostrarReporte(){
     console.log(this.selectedReporte);
@@ -758,33 +760,33 @@ export class ReporteComponent implements OnInit {
               if(this.filter.selectedConcepto=='COSTAS'){
                 this.filter.selectedConcepto='COST'
               }
-  
-              window.open(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
+
+              window.open(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
               + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin=" + this.filter.fecha_hasta
               +"&concepto="+this.filter.selectedConcepto+"&caja="+this.filter.selectedCaja, '_blank')
-             
-              console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
+
+              console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
               + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin=" + this.filter.fecha_hasta
               +"&concepto="+this.filter.selectedConcepto+"&caja="+this.filter.selectedCaja);
-  
+
             }
-         
+
           }else {
             if (element.reporte == this.selectedReporte){
               console.log('desde: '+element.fecha_desde);
               console.log('hasta: '+element.fecha_hasta);
-              
-              window.open(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
+
+              window.open(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
               + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin=" + this.filter.fecha_hasta
               +"&concepto="+this.filter.selectedConcepto+"&caja="+this.filter.selectedCaja, '_blank')
-              //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting + 
+              //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting +
               //"&j_password=" + environment.PasswordReporting + "&id_liquidacion=" + dt.id_liquidacion + "&forma_pago=" + this.pagos[0].tipo_pago_lbl , '_blank')
-              console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
+              console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
               + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin=" + this.filter.fecha_hasta
               +"&concepto="+this.filter.selectedConcepto+"&caja="+this.filter.selectedCaja);
             }
           }
-        
+
         });
 
       },
@@ -793,11 +795,11 @@ export class ReporteComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       }
     )
-    
+
   }
 
 
-  selectOption1(evt) { 
+  selectOption1(evt) {
     this.dataReportes = []
     this.limpiarTotales()
     if (evt !== 0) {
@@ -834,11 +836,11 @@ export class ReporteComponent implements OnInit {
       else{
         this.fechaHastaDisabled=false;
       }
-          
+
         //this.arrayData2 = res['data'];
       });
 		}
-    
+
   }
 
 
@@ -860,13 +862,13 @@ export class ReporteComponent implements OnInit {
           if (element.reporte == this.selectedReporte){
             //console.log('desde: '+element.fecha_desde);
             //console.log('hasta: '+element.fecha_hasta);
-            
-            window.open(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting 
+
+            window.open(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin=" + this.filter.fecha_hasta
             +"&concepto="+this.filter.selectedConcepto+"&caja="+this.filter.selectedCaja, '_blank')
-            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting + 
+            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting +
             //"&j_password=" + environment.PasswordReporting + "&id_liquidacion=" + dt.id_liquidacion + "&forma_pago=" + this.pagos[0].tipo_pago_lbl , '_blank')
-            console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
+            console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin=" + this.filter.fecha_hasta
             +"&concepto="+this.filter.selectedConcepto+"&caja="+this.filter.selectedCaja);
 
@@ -879,7 +881,7 @@ export class ReporteComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       }
     )
-    
+
   }
 
   getConceptosReporte(){

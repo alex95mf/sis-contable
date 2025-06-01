@@ -8,7 +8,7 @@ import { DataTableDirective } from "angular-datatables";
 import { ParametroadService } from "./parametroad.service";
 import { CommonVarService } from "../../../../services/common-var.services";
 import { CommonService } from "../../../../services/commonServices";
-import 'sweetalert2/src/sweetalert2.scss';  
+import 'sweetalert2/src/sweetalert2.scss';
 import { CcSpinerProcesarComponent } from "../../../../config/custom/cc-spiner-procesar.component";
 import { ValidacionesFactory } from "../../../../config/custom/utils/ValidacionesFactory";
 const Swal = require('sweetalert2');
@@ -91,10 +91,10 @@ export class ParametroadComponent implements OnInit {
 			{ orig: "btnParNom", paramAccion: "1", boton: { icon: "fa fa-pencil-square-o", texto: "MODIFICAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btns-modificar boton btn-sm", habilitar: true, imprimir: false},
       { orig: "btnParNom", paramAccion: "1", boton: { icon: "fa fa-trash-o", texto: "ELIMINAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btns-eliminar boton btn-sm", habilitar: true, imprimir: false},
 			{ orig: "btnParNom", paramAccion: "1", boton: { icon: "fa fa-times", texto: "CANCELAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: true, imprimir: false},
-      
+
       { orig: "btnParNomCta", paramAccion: "2", boton: { icon: "fa fa-times", texto: "CERRAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-info boton btn-sm", habilitar: false, imprimir: false},
     ];
-			
+
 		setTimeout(() => {
 			this.lcargando.ctlSpinner(true);
 		}, 10);
@@ -102,7 +102,7 @@ export class ParametroadComponent implements OnInit {
     this.permissions();
   }
 
-  metodoGlobal(evento: any) {	
+  metodoGlobal(evento: any) {
 		switch (evento.items.boton.texto+evento.items.paramAccion) {
 			case "NUEVO1":
 				this.newparameter();
@@ -123,7 +123,7 @@ export class ParametroadComponent implements OnInit {
       case "CERRAR2":
 				this.closeModal();
 			break;
-		}    
+		}
 	}
 
   /* Api permisos */
@@ -177,7 +177,7 @@ export class ParametroadComponent implements OnInit {
       this.validaDtUser = true;
       this.guardaT = res["data"];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.ngOnDestroy();
       }, 50);
     }, (error) => {
@@ -522,7 +522,7 @@ export class ParametroadComponent implements OnInit {
 		this.vmButtons[2].habilitar = true;
 		this.vmButtons[3].habilitar = true;
     this.vmButtons[4].habilitar = true;
-  } 
+  }
 
   setMulta() {
     if (this.parameters.checkMulta == true) {

@@ -1,6 +1,6 @@
 import { HttpEventType } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { ApiServices } from 'src/app/services/api.service'; 
+import { ApiServices } from 'src/app/services/api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +54,7 @@ export class AsistenciaEmpleadoService {
     let id_departamento = dataOption['id_departamento'];
     // return this.apiService.apiCall(`days-worked/calculate-employees/only-consult?page=${page}&size=${size}&type_sort=${type_sort}&sort=${sort}&search=${search}&ditr_anio=${ditr_anio}&id_mes=${id_mes}&id_empresa=${id_empresa}`, "GETV1", {});
     return this.apiService.apiCall(`days-worked/calculate-employees?page=${page}&size=${size}&type_sort=${type_sort}&sort=${sort}&search=${search}&ditr_anio=${ditr_anio}&id_mes=${id_mes}&id_empresa=${id_empresa}&id_programa=${id_programa}&id_area=${id_area}&id_departamento=${id_departamento}`, "GET", {});
-  
+
   }
 
   getOnlyDaysWorkeEmployees(dataOption? :object){
@@ -71,14 +71,14 @@ export class AsistenciaEmpleadoService {
     let id_departamento = dataOption['id_departamento'];
 
     return this.apiService.apiCall(`days-worked/calculate-employees/only-consult?page=${page}&size=${size}&type_sort=${type_sort}&sort=${sort}&search=${search}&ditr_anio=${ditr_anio}&id_mes=${id_mes}&id_empresa=${id_empresa}&id_programa=${id_programa}&id_area=${id_area}&id_departamento=${id_departamento}`, "GETV1", {});
-  
+
   }
 
 
   getDonwloadFiles(dataOption? :object){
     let name_file = dataOption['name_file'];
     return this.apiService.apiCall(`download-template?name_file=${name_file}`, "GETFILEV1", {});
-  
+
   }
 
   saveTemplateDayWorked(data){
@@ -88,7 +88,7 @@ export class AsistenciaEmpleadoService {
   saveListDiasTrabajados(data){
     return this.apiService.apiCall('days-worked/list-save-generate', 'POST', data);
   }
-  
+
 
   getFaltasPermisosEmployees(dataOption? :object){
 
@@ -96,10 +96,10 @@ export class AsistenciaEmpleadoService {
     let flpr_anio = dataOption['flpr_anio'];
     let id_mes = dataOption['id_mes'];
     let afecta_rol_keyword = dataOption['afecta_rol_keyword'];
-   
+
     // let id_empresa = dataOption['id_empresa'];
     return this.apiService.apiCall(`fault_and_permissions/catalogs-multiple?id_empleado=${id_empleado}&flpr_anio=${flpr_anio}&id_mes=${id_mes}&afecta_rol_keyword=${afecta_rol_keyword}`, "GETV1", {});
-  
+
   }
 
   getPeriodos(data: any = {}) {
@@ -112,11 +112,11 @@ export class AsistenciaEmpleadoService {
   }
 
   getCatalogoNomina(data: any = {}) {
-    return this.apiService.apiCall(`catalogos/${data.catalogo}`, 'GET', {}).toPromise<any>()
+    return this.apiService.apiCall(`catalogos/${data.catalogo}`, 'GET', {}) as any
   }
 
   getCatalogo(data: any = {}) {
-    return this.apiService.apiCall('proveedores/get-catalogo', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('proveedores/get-catalogo', 'POST', data) as any
   }
 
   procesarMarcas(file: File, data: any = {}) {
@@ -198,7 +198,7 @@ export class AsistenciaEmpleadoService {
       )
     })
   }
-  
+
   procesarAtrasos(file: File, data: any = {}) {
     return new Promise<any>((resolve, reject) => {
       this.apiService.apiCallFileNom('nomina/procesar-atrasos', 'POST', file, data).subscribe(
@@ -275,7 +275,7 @@ export class AsistenciaEmpleadoService {
     return this.apiService.apiCall('nomina/actualizar-horas-extra-sp','POST', data);
   }
 
-  
+
   getPlantilla(data){
     return this.apiService.apiCall('horas-extra-download-template', 'POST', data );
   }
@@ -301,8 +301,8 @@ export class AsistenciaEmpleadoService {
     return this.apiService.apiCall(`nomina/horas-extra-list-delete`, 'POST', data);
   }
 
-  
 
-  
+
+
 
 }

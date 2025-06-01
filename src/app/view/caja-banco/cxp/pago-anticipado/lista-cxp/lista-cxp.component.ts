@@ -80,7 +80,7 @@ export class ListaCxpComponent implements OnInit {
       this.dataAnteriorCxP = JSON.parse(this.dataAnteriorCxP);
 
       setTimeout(() => {
-        this.dtTriggerCxP.next();
+        this.dtTriggerCxP.next(null);
       }, 50);
       
     }, (error) => {

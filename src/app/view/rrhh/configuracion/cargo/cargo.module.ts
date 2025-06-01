@@ -5,7 +5,7 @@ import { CargoRoutingModule } from './cargo-routing.module';
 import { CargoComponent } from './cargo.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ModalDepartamenteComponent } from './modal-departamente/modal-departamente.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({

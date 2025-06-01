@@ -6,7 +6,7 @@ import { RegistroPolizaComponent } from './registro-poliza.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ListBusquedaComponent } from './list-busqueda/list-busqueda.component';
 import { AnexosListComponent } from './anexos-list/anexos-list.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({

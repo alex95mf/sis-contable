@@ -52,13 +52,13 @@ export class TableSucursalComponent implements OnInit {
         this.validaDtUser = true;
         this.guardarolT = res;
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.validaDtUser = true;
         this.guardarolT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
         this.toastr.info(error.error.message);
       });

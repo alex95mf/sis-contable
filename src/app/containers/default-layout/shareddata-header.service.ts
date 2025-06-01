@@ -6,7 +6,7 @@ export class ShareddataHeaderService {
 
   constructor() { }
 
-  
+
   // Observable string sources
   private componentMethodCallCreate = new Subject<any>();
   private componentMethodCallClose = new Subject<any>();
@@ -24,14 +24,14 @@ export class ShareddataHeaderService {
   // Service commands to call methods of father component from a dynamic child component stream1
   callCreateComponent(nameSelect: any) {
     this.componentMethodCallCreate.next(nameSelect);
-    
+
   }
 
-  
+
   // Service message to call methods of father component from a dynamic child component stream2
   callCloseComponent(nameSelect: any) {
     this.componentMethodCallClose.next(nameSelect);
-    
+
   }
 
   // Llamada de Menu
@@ -45,18 +45,18 @@ export class ShareddataHeaderService {
       this.componentVisibleTab.next(elementos);
   }
 
-  
-  clearDataofCreate(){    
-    this.componentMethodCallCreate.next();
+
+  clearDataofCreate(){
+    this.componentMethodCallCreate.next(null);
   }
   clearDataofClose(){
-    this.componentMethodCallClose.next();
+    this.componentMethodCallClose.next(null);
   }
   clearDataofMenu(){
-    this.componentCallMenu.next();
+    this.componentCallMenu.next(null);
   }
   clearDataofVisible(){
-    this.componentVisibleTab.next();
+    this.componentVisibleTab.next(null);
   }
 
 

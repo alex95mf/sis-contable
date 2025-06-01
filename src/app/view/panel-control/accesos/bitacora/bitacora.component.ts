@@ -69,7 +69,7 @@ export class BitacoraComponent implements OnDestroy, OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
     this.filter = {
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
@@ -143,7 +143,7 @@ export class BitacoraComponent implements OnDestroy, OnInit {
         }
         this.lcargando.ctlSpinner(false);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.lcargando.ctlSpinner(false);
@@ -152,7 +152,7 @@ export class BitacoraComponent implements OnDestroy, OnInit {
         this.dataBitacoraAux = [];
         this.processing = true;
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       });
   }
@@ -170,7 +170,7 @@ export class BitacoraComponent implements OnDestroy, OnInit {
   //     pageLength: 10,
   //     //search: false,
   //     paging: true,
-  //     dom: 'lfrtip',  //lfrtipB Bfrtip   
+  //     dom: 'lfrtip',  //lfrtipB Bfrtip
   //     order: [[0, "desc"]],
   //     buttons: [{
   //       extend: 'excel',
@@ -197,7 +197,7 @@ export class BitacoraComponent implements OnDestroy, OnInit {
   //       this.dataBitacora = res['data'];
   //       this.dataBitacoraAux = res['data'];
   //       setTimeout(() => {
-  //         this.dtTrigger.next();
+  //         this.dtTrigger.next(null);
   //       }, 50);
   //     }, error => {
   //       this.lcargando.ctlSpinner(false);
@@ -206,7 +206,7 @@ export class BitacoraComponent implements OnDestroy, OnInit {
   //       this.dataBitacoraAux = [];
   //       this.processing = true;
   //       setTimeout(() => {
-  //         this.dtTrigger.next();
+  //         this.dtTrigger.next(null);
   //       }, 50);
   //     });
   // }
@@ -244,13 +244,13 @@ export class BitacoraComponent implements OnDestroy, OnInit {
         this.validaDtBitacora = true;
         this.dataBitacoraAux = this.dataBitacora;
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }else{
         this.validaDtBitacora = true;
         this.dataBitacoraAux = this.dataBitacora.filter(us => us.id_usuario == this.userFilter);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }
     });
@@ -261,9 +261,9 @@ export class BitacoraComponent implements OnDestroy, OnInit {
 
     console.log(this.dataBitacoraAux)
     this.mensajeSppiner = "Generando Archivo Excel...";
-    this.lcargando.ctlSpinner(true); 
-        
-       
+    this.lcargando.ctlSpinner(true);
+
+
          this.excelData = [];
          console.log(this.dataBitacoraAux);
            Object.keys(this.dataBitacoraAux).forEach(key => {
@@ -277,14 +277,14 @@ export class BitacoraComponent implements OnDestroy, OnInit {
              filter_values['Acción'] = (this.dataBitacoraAux[key].accion != null) ? this.dataBitacoraAux[key].accion : "";
              filter_values['Ip'] = (this.dataBitacoraAux[key].ip != null) ? this.dataBitacoraAux[key].ip : "";
 
-            
+
              this.excelData.push(filter_values);
              this.lcargando.ctlSpinner(false);
            })
            this.exportAsXLSX();
-         
+
    }
-     
+
    exportAsXLSX() {
      this.excelService.exportAsExcelFile(this.excelData, 'Reporte Consulta de Auditoría');
    }

@@ -8,7 +8,7 @@ import { PlanCuentasService } from "../plan-cuentas.service";
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ModalCuentPreComponent } from "../modal-cuent-pre/modal-cuent-pre.component";
-/* 
+/*
 import { GradoOcupacionalService } from '../grado-ocupacional.service'; */
 import * as myVarGlobals from "src/app/global";
 import Swal from "sweetalert2/dist/sweetalert2.js";
@@ -81,7 +81,7 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
   ) {
     this.commonVarService.seleciconCategoriaCuentaPro.pipe(takeUntil(this.onDestroy$))
       .subscribe((res) => { //
-        
+
         console.log("cuenta seleccionada",res);
         if (res.validacion == "1") {
           this.cuenta_contable = res.data.codigo + ". " + res.data.nombre;
@@ -92,7 +92,7 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
               : res.data.presupuesto_haber != null
                 ? res.data.presupuesto_haber.codigo + ". " + res.data.presupuesto_haber.nombre
                 : '';
- 
+
           console.log(this.isdebe, this.ishaber);
           if (this.tipo == 'GENERAL') {
             this.isdebe = true;
@@ -100,11 +100,11 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
             this.cuenta_contable_cobro = "";
             this.codigo_presupuesto_ingreso = "";
           }
-         
+
         } else if (res.validacion == "2") {
           this.codigo_presupuesto_gasto =
             res.data.codigo + ". " + res.data.nombre;
-          
+
           console.log(this.isdebe, this.ishaber);
           if (this.tipo == 'GENERAL') {
             this.isdebe = true;
@@ -119,14 +119,14 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
               this.rubro.numpcCorrDeb = res.data.presupuesto != null ? res.data.presupuesto?.nombre : res.data.presupuesto_haber?.nombre */
         } else if (res.validacion == "3") {
           this.codigo_presupuesto_ingreso = res.data.codigo + ". " + res.data.nombre;
-         
+
           if (this.tipo == "GENERAL") {
             this.isdebe = false;
             this.ishaber = true;
             this.cuenta_contable_pago = "";
             this.codigo_presupuesto_gasto = "";
           }
-        
+
         } else if (res.validacion == "4") {
           if(!this.isNew){
             this.cuenta_contable_cobro = res.data.codigo + ". " + res.data.nombre;
@@ -143,12 +143,12 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
             this.cuenta_contable_pago = res.data.codigo + " " + res.data.nombre;
 
           }
-         
+
         }
       });
   }
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
   ngOnInit(): void {
@@ -170,7 +170,7 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
 
     setTimeout(() => {
       this.findReglaPresupuestaria();
-       
+
       }, 250)
   }
 
@@ -209,13 +209,13 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
 // console.log("fn")
 //     if (this.tipo == 'GENERAL') {
 //       if (this.isdebe) {
-        
+
 //         this.cuenta_contable_cobro = "";
 //         this.codigo_presupuesto_ingreso = "";
 //       } else if( this.ishaber){
 //         this.cuenta_contable_pago = "";
 //         this.codigo_presupuesto_gasto = "";
-       
+
 //       }else{
 //         this.cuenta_contable_pago = "";
 //         this.codigo_presupuesto_gasto = "";
@@ -280,7 +280,7 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
             this.codigo_presupuesto_gasto = this.codigo_presupuesto+ " " +this.nombre_presupuesto
 
           }
-       
+
         } else {
           this.lcargando.ctlSpinner(false);
           Swal.fire({
@@ -297,7 +297,7 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
       }
-    ); 
+    );
 
   }
 
@@ -502,13 +502,13 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
       this.codigo_presupuesto_gasto !== "" &&
       this.codigo_presupuesto_gasto !== " " &&
       this.codigo_presupuesto_gasto !== ". "
-      
+
     ) {
       this.isdebe = true;
-      
+
 
     }else{
-      this.codigo_presupuesto_gasto = null//this.data["codigo_presupuesto_gasto"] 
+      this.codigo_presupuesto_gasto = null//this.data["codigo_presupuesto_gasto"]
     }
 
     this.codigo_presupuesto_ingreso = this.data["codigo_presupuesto_ingreso"];
@@ -550,7 +550,7 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
     else{
       this.cuenta_contable_pago = null
     }
-   
+
     // this.estado = this.data["estado"];
     // this.tipo = this.data["tipo"];
   }
@@ -578,7 +578,7 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
     })
 
     modal.componentInstance.validacionModal = true;
-    
+
     modal.componentInstance.validar = valor;
     console.log("antes llamra")
     if(this.tipo == "GENERAL"){

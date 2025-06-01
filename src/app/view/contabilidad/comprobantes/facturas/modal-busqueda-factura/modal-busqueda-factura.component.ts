@@ -111,7 +111,7 @@ export class ModalBusquedaFacturaComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
       this.msgSpinner = 'Cargando Facturas'
-      let facturas = await this.apiService.getFacturasGeneradas({params: { filter: this.filter, paginate: this.paginate }}).toPromise<any>()
+      let facturas = await this.apiService.getFacturasGeneradas({params: { filter: this.filter, paginate: this.paginate }}) as any
       this.paginate.length = facturas.data.total
       this.tbl_facturas = facturas.data.data
       //

@@ -92,14 +92,14 @@ export class ShowComprobantesComponent implements OnInit {
           element['valor'] = parseFloat(element['valor']).toFixed(2);
         });
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.commonVarSrvice.updPerm.next(false);
         }, 50);
       }, error => {
         this.validaDt = true;
         this.dataDT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.commonVarSrvice.updPerm.next(false);
         }, 50);
       });
@@ -149,7 +149,7 @@ export class ShowComprobantesComponent implements OnInit {
           }
           this.accSrv.deleteComprobante(data).subscribe(res => {
             this.toastr.success(res['message']);
-            this.commonVarSrvice.refreshNDV.next();
+            this.commonVarSrvice.refreshNDV.next(null);
             this.commonVarSrvice.updPerm.next(false);
             this.closeModal();
           }, error => {

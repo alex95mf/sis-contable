@@ -53,13 +53,13 @@ export class ModalExonContribuyenteComponent implements OnInit {
     try {
       this.lcargando.ctlSpinner(true)
       this.msgSpinner = 'Cargando Exoneraciones'
-      const response = await this.apiService.getExoneraciones({contribuyente: this.contribuyente, lote: this.lote, concepto: {codigo: 'PU'}}).toPromise<any>()
+      const response = await this.apiService.getExoneraciones({contribuyente: this.contribuyente, lote: this.lote, concepto: {codigo: 'PU'}}) as any
       console.log(response.data)
 
       const filtered: any[] = response.data.filter((element: any) => element.cod_concepto_det_aplicable == this.codigo_detalle)
       filtered.forEach((element: any) => Object.assign(element, {aplica: false, porcentaje: element.porcentaje * 100}))
       this.lst_exoneraciones = filtered
-      
+
       // Marca las que ya han sido seleccionadas
       this.lst_exoneraciones.forEach((exoneracion: any) => {
         this.exonSelected.forEach((element: any) => Object.assign(exoneracion, {aplica: exoneracion.id == element.id}))

@@ -95,14 +95,14 @@ export class TipoFacturaComponent implements OnInit {
         element.isCollapsed = true;
       });
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       
     }, error=>{
       this.listado = [];
       this.validateDt = true;
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.lcargando.ctlSpinner(false);
     })

@@ -191,7 +191,7 @@ export class ModalImprimirComponent implements OnInit {
       ];
     }
 
-    this.commonVarSrv.bandTrabTicket.next();
+    this.commonVarSrv.bandTrabTicket.next(null);
    
   }else{
     this.deshabilitar=false;

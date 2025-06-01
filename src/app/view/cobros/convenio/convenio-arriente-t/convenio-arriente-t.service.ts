@@ -38,7 +38,7 @@ export class ConvenioArrienteTService {
   }
 
   getCompraTerreno(data: any = {}) {
-    return this.apiarriendo.apiCall('aranceles/get-liquidaciones', 'POST', data).toPromise<any>()
+    return this.apiarriendo.apiCall('aranceles/get-liquidaciones', 'POST', data) as any
   }
 
 }

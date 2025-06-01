@@ -11,7 +11,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { ExcelService } from 'src/app/services/excel.service';
 import { ModalCuentasEmiComponent } from './modal-cuentas-emi/modal-cuentas-emi.component';
 import { ModalCuentasContablesComponent } from './modal-cuentas-contables/modal-cuentas-contables.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({

@@ -48,7 +48,7 @@ export class BiometricosComponent implements OnInit, OnDestroy {
     })
   }
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -102,7 +102,7 @@ export class BiometricosComponent implements OnInit, OnDestroy {
   resetInput() {
     // Limpia el valor seleccionado para que el cambio se dispare siempre
     this.fileUpload.nativeElement.value = null;
-    
+
     // Dispara el evento de clic en el elemento de entrada de archivo original
     this.fileUpload.nativeElement.click();
   }
@@ -121,7 +121,7 @@ export class BiometricosComponent implements OnInit, OnDestroy {
 
   handleInputFile(event) {
     this.file = event.target.files[0];
-    
+
     if (this.file) {
       this.fileName = this.file.name
     }

@@ -10,12 +10,12 @@ export class CierreMesService {
 
   obtenerCierresPeriodoPresupuesto(data) {
     return this.apiService.apiCall('presupuesto/obtenerEstatusCierreMes', 'POST', data);
-  }  
+  }
 
 
   obtenerCierresPeriodoPorMes(data) {
     return this.apiService.apiCall('cierremes/obtenerEstatusCierreMes', 'POST', data);
-  }  
+  }
 
   updateEstadoMesPresupuesto(data: any = {}) {
     return new Promise((resolve, reject) => {
@@ -27,11 +27,11 @@ export class CierreMesService {
   }
 
   getNuevoPeriodo() {
-    return this.apiService.apiCall('presupuesto/get-ultimo-periodo', 'POST', {}).toPromise<any>()
+    return this.apiService.apiCall('presupuesto/get-ultimo-periodo', 'POST', {}) as any
   }
 
   generarPeriodoPresupuesto(data: any = {}) {
-    return this.apiService.apiCall('presupuesto/generar-periodo', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('presupuesto/generar-periodo', 'POST', data) as any
     /* return new Promise((resolve, reject) => {
       this.apiService.apiCall('presupuesto/generar-periodo', 'POST', data).subscribe(
         (res: any) => resolve(res.data),

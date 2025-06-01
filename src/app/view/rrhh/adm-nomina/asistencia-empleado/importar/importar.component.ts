@@ -3,9 +3,9 @@ import { AsistenciaEmpleadoService } from '../asistencia-empleado.service';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { HttpEventType } from '@angular/common/http';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
-import { CommonVarService } from 'src/app/services/common-var.services'; 
+import { CommonVarService } from 'src/app/services/common-var.services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalProgramaComponent } from '../../../beneficios/rol-general/modal-programa/modal-programa.component'; 
+import { ModalProgramaComponent } from '../../../beneficios/rol-general/modal-programa/modal-programa.component';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
@@ -202,9 +202,9 @@ export class ImportarComponent implements OnInit, OnDestroy {
 
     this.apiService.importarLimpiar.pipe(takeUntil(this.onDestroy$)).subscribe(() => this.clearScreen())
   }
-  
+
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -217,7 +217,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
   resetInput() {
     // Limpia el valor seleccionado para que el cambio se dispare siempre
     this.fileUpload.nativeElement.value = null;
-    
+
     // Dispara el evento de clic en el elemento de entrada de archivo original
     this.fileUpload.nativeElement.click();
   }
@@ -264,14 +264,14 @@ export class ImportarComponent implements OnInit, OnDestroy {
       // Calcular
       let hora_entrada = moment(`${registro.fecha} ${registro.entrada}`)
       let hora_salida = moment(`${registro.fecha} ${registro.salida}`)
-  
+
       if (tipo == 'entrada') {
         hora_entrada = moment(`${registro.fecha} ${event.target.value}`)
       } else {
         hora_salida = moment(`${registro.fecha} ${event.target.value}`)
       }
 
-      
+
       let factor_entrada = this.getFactorTabla(hora_entrada, tabla);
       let factor_salida = this.getFactorTabla(hora_salida, tabla);
 
@@ -323,7 +323,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
         console.log('salida => minutos_extra_25', minutos_extra_25)
         console.log('salida => minutos_extra_60', minutos_extra_60)
       }
-      
+
       factores.forEach((factor: number) => {
         let rango = tabla[factor];
         let hora_inferior = moment(rango[0])
@@ -337,7 +337,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
       console.log('tiempo_intermedio', tiempo_intermedio)
       console.log('intermedio => minutos_extra_25', minutos_extra_25)
       console.log('intermedio => minutos_extra_60', minutos_extra_60)
-      
+
       /* if (factor_salida != factor_entrada) {
         tiempo_salida = hora_salida.diff(tabla[factor_salida][0], 'minutes')
         if (factor_salida != 3) minutos_extra_25 += hora_salida.diff(tabla[factor_salida][0], 'minutes')
@@ -371,13 +371,13 @@ export class ImportarComponent implements OnInit, OnDestroy {
 
 
 
-      
+
 
 
       // let factor: number;
       // const keys = Object.keys(tabla)
       // const values = Object.values(tabla)
-      
+
       // for(let i = 0; i < values.length; i++) {
       //   const inicio = values[i][0];
       //   const final = values[i][1];
@@ -404,7 +404,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
         } else if (['60'].includes(keys[factor])) {
           minutos_extra_60 += minutos_extra;
         }
-        
+
         Object.assign(this.tbl_registros[idx], {
           tiempo_trabajado,
           minutos_extra_25,
@@ -415,7 +415,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
         this.toastr.warning('No se encontro informacion')
       } */
       this.lcargando.ctlSpinner(false)
-  
+
       // Poneren lista de actualizacion
       this.actualizarRegistro(registro)
     }
@@ -425,7 +425,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
     let factor: number;
     const keys = Object.keys(tabla)
     const values = Object.values(tabla)
-    
+
     for(let i = 0; i < values.length; i++) {
       const inicio = values[i][0];
       const final = values[i][1];

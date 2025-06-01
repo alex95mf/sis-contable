@@ -184,14 +184,14 @@ export class CreateRetencionComponent implements OnInit {
         this.validateDt = true;
         this.paymentsCxp = response["data"];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.lcargando.ctlSpinner(false);
         }, 50);
       }, error => {
         this.validateDt = true;
         this.paymentsCxp = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.lcargando.ctlSpinner(false);
         }, 50);
       });
@@ -200,14 +200,14 @@ export class CreateRetencionComponent implements OnInit {
         this.validaDt = true;
         this.billing = response["data"];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.lcargando.ctlSpinner(false);
         }, 50);
       }, error => {
         this.validaDt = true;
         this.billing = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.lcargando.ctlSpinner(false);
         }, 50);
       });
@@ -319,7 +319,7 @@ export class CreateRetencionComponent implements OnInit {
     } else if (retencion.tipo_impuesto === "Iva") {
       this.calculate.value = (retencion.simbolo === "%") ? (parseFloat(this.contacts['purchase']['iva']) * parseFloat(retencion.valor)) / 100 : parseFloat(this.contacts['purchase']['iva']) + parseFloat(retencion.valor);
     }
-    this.calculate.parseValue = this.commonServices.formatNumber(this.calculate.value)  
+    this.calculate.parseValue = this.commonServices.formatNumber(this.calculate.value)
   }
 
   confirmPayRetencion() {

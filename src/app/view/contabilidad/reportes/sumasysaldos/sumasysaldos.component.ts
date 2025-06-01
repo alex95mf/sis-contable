@@ -57,7 +57,7 @@ export class SumasysaldosComponent implements OnInit {
  periodo= Number(moment(new Date()).format('YYYY'));
  fecha_desde= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(new Date()).format('MM')) - 1, 1).toISOString().substring(0, 10);
 fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(new Date()).format('MM')), 0).toISOString().substring(0, 10);
-   
+
   //periodo: this.hoy.getFullYear()
 	// fromDatePicker: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
 	// toDatePicker: Date = new Date();
@@ -65,7 +65,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
 	toDatePicker:any
 
 
- 
+
 
   URL_API = environment.apiUrl
   mensajeSpiner: string = "Cargando...";
@@ -156,11 +156,11 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.fromDatePicker = moment(this.firstday).format('YYYY-MM-DD');
 	  this.toDatePicker = moment(this.today).format('YYYY-MM-DD');
-    
+
 
     setTimeout(() => {
       this.cargaInicial()
@@ -188,7 +188,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
           }else{
             this.btnPrint = true
             this.vmButtons[3].habilitar = false;
-          }          
+          }
           console.log('danielsai');
           this.getParametersFilter();
         }
@@ -198,10 +198,10 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
     })
   }
 
-  ChangeMesCierrePeriodos(evento: any) { 
+  ChangeMesCierrePeriodos(evento: any) {
     const year = this.periodo;
-    this.mes_actual = evento; 
-  
+    this.mes_actual = evento;
+
     if(evento == 0){
       const primerDia = new Date(year, 1 - 1, 1).toISOString().substring(0, 10);
       const ultimoDia = new Date(year, 12, 0).toISOString().substring(0, 10);
@@ -267,7 +267,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
 
       if(this.dataLength[0]){
         for (let index = 0; index < this.dataLength[0].niveles; index++) {
-          this.lstNiveles.push(index+1);          
+          this.lstNiveles.push(index+1);
         }
       }
 
@@ -299,7 +299,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
     //let anio = Number(this.anioActual)
     let mes = Number(this.mes_actual)
     let anio = this.periodo;
-  
+
 
 
     this.mensajeSppiner = "Cargando...";
@@ -313,16 +313,16 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
     this.balanceService.obtenerBalanceComprobacion(fecha_desde,fecha_hasta,centro,id_empresa,id_user,nivel,anio, mes).subscribe(res => {
 
       console.log(res)
-      this.dataAccount = res;      
+      this.dataAccount = res;
       this.lcargando.ctlSpinner(false);
-      
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     })
     }
 
-  
+
   }
 
 
@@ -369,7 +369,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
       this.sumaCredito = res['data']['total_saldo_acreedor'];
       setTimeout(() => {
         this.lcargando.ctlSpinner(false);
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.lcargando.ctlSpinner(false);
@@ -439,7 +439,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
       if(sale.tipo_valor=='T'){
         total += parseFloat(sale.saldo_inicial_deudor);
       }
-     
+
     }
     return total.toFixed(2);
   }
@@ -449,7 +449,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
       if(sale.tipo_valor=='T'){
         total += parseFloat(sale.saldo_inicial_acreedor);
       }
-     
+
     }
     return total.toFixed(2);
   }
@@ -460,7 +460,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
       if(sale.tipo_valor=='T'){
         total += parseFloat(sale.debe);
       }
-     
+
     }
 
     return total.toFixed(2);
@@ -527,7 +527,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
   periodoSelected(evt: any, year:any){
     console.log(evt)
     this.periodo = evt
-   
+
   }
 
   onlyNumber(event): boolean {
@@ -539,8 +539,8 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
   }
 
   procesarSp(){
-  
-    
+
+
     if(this.periodo ==undefined){
       this.toastr.info('Debe ingresar un Período');
     }
@@ -548,7 +548,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
       this.toastr.info('Debe seleccionar un Mes');
     }
     else{
-  
+
       let data = {
         // fecha_desde: moment(this.filter.fecha_desde).format('YYYYMMDD'),
         // fecha_hasta: moment(this.filter.fecha_hasta).format('YYYYMMDD'),
@@ -559,7 +559,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
         mes: Number(this.mes_actual),
         nivel:this.nivelSeleccionado
       }
-    
+
       this.mensajeSppiner = "Procesando...";
       this.lcargando.ctlSpinner(true);
       this.balanceService.procesarSp(data).subscribe(res => {
@@ -585,28 +585,28 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
     let mes = this.mes_actual -1
     let codigo_cuenta = cuenta
     console.log(periodo )
-   
+
     // FECHA DESDE
     let fecha_primer_dia = new Date(periodo, mes, 1);
     console.log(fecha_primer_dia )
     let primerDiaAnio = fecha_primer_dia.getFullYear();
-    let primerDiaMes = fecha_primer_dia.getMonth() + 1; 
+    let primerDiaMes = fecha_primer_dia.getMonth() + 1;
     let primerDiaDia = fecha_primer_dia.getDate();
 
     let fechaDesde = primerDiaAnio + '-' + (primerDiaMes < 10 ? '0' + primerDiaMes : primerDiaMes) + '-' + (primerDiaDia < 10 ? '0' + primerDiaDia : primerDiaDia);
-   
+
     let fecha_ultimo_dia = new Date(periodo, mes + 1, 1);
 
     // Restar un día para obtener el último día del mes actual
     fecha_ultimo_dia.setDate(fecha_ultimo_dia.getDate() - 1);
-    
+
     // Obtener el año, mes y día del último día del mes
     let ultimoDiaAnio = fecha_ultimo_dia.getFullYear();
     let ultimoDiaMes = fecha_ultimo_dia.getMonth() + 1; // Los meses se indexan desde 0, por lo que sumamos 1 para obtener el mes real
     let ultimoDiaDia = fecha_ultimo_dia.getDate();
-    
+
     let fechaHasta = ultimoDiaAnio + '-' + (ultimoDiaMes < 10 ? '0' + ultimoDiaMes : ultimoDiaMes) + '-' + (ultimoDiaDia < 10 ? '0' + ultimoDiaDia : ultimoDiaDia);
-   
+
     let  fecha_desde = fechaDesde.replace(/-/g, '');
     let  fecha_hasta = fechaHasta.replace(/-/g, '');
     console.log(fecha_desde)
@@ -617,10 +617,10 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
      const nuevaVentana = window.open('','_blank')
       if(nuevaVentana){
        nuevaVentana.location.href = rutaMayor
- 
+
       }
    }
- 
+
 
 
 

@@ -13,14 +13,14 @@ standalone: false,
   styleUrls: ['./modal-edition.component.scss']
 })
 export class ModalEditionComponent implements OnInit {
-  
+
 
   catalogo: any = {
     id: null,
     descripcion: null,
     codigo: null,
     estado: null
-  } 
+  }
 
   estado = [
     {valor: 'A', descripcion: 'Aprobado'},
@@ -62,7 +62,7 @@ export class ModalEditionComponent implements OnInit {
       case "Guardar":
         this.validacion();
         break;
-      
+
       case "Regresar":
         this.activeModal.close()
         break;
@@ -102,11 +102,11 @@ export class ModalEditionComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             this.activeModal.close()
-            this.commonVrs.CatalogoBienes.next()
+            this.commonVrs.CatalogoBienes.next(null)
           }
         })
-        
-        
+
+
       }
     )
   }

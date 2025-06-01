@@ -89,7 +89,7 @@ export class TipoNcreditoComponent implements OnInit {
         element.isCollapsed = true;
       });
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       
     }, error=>{

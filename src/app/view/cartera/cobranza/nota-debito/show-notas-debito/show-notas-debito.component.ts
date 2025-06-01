@@ -96,14 +96,14 @@ export class ShowNotasDebitoComponent implements OnInit {
           element['total'] = parseFloat(element['total']).toFixed(2);
         });
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.commonVarSrvice.updPerm.next(false);
         }, 50);
       }, error => {
         this.validaDt = true;
         this.dataDT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.commonVarSrvice.updPerm.next(false);
         }, 50);
       });

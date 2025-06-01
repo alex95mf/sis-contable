@@ -102,7 +102,7 @@ export class DetalleCatalogoElectronicoComponent implements OnInit, OnDestroy {
       (res) => {
         //this.detalles.orden.push(res);
         this.cargarOrdenes()
-        // this.commonVrs.encargadoSelect.next()
+        // this.commonVrs.encargadoSelect.next(null)
 
       }
     );
@@ -126,7 +126,7 @@ export class DetalleCatalogoElectronicoComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy(): void {
-    this.onDestroy$.next()
+    this.onDestroy$.next(null)
     this.onDestroy$.complete()
   }
 
@@ -165,9 +165,9 @@ export class DetalleCatalogoElectronicoComponent implements OnInit, OnDestroy {
       let valorTotalCotizado = 0;
       let valorTotalAprobado = 0;
       this.item['detalles'].forEach(element => {
-        valorTotalCotizado += +element.precio_cotizado; 
-        valorTotalAprobado += +element.precio_aprobado; 
-        
+        valorTotalCotizado += +element.precio_cotizado;
+        valorTotalAprobado += +element.precio_aprobado;
+
       });
       this.totalCotizado= valorTotalCotizado
       this.totalAprobado= valorTotalAprobado
@@ -238,7 +238,7 @@ export class DetalleCatalogoElectronicoComponent implements OnInit, OnDestroy {
   async getCatalogos() {
     this.lcargando.ctlSpinner(true)
     try {
-      let estados = await this.service.getCatalogos({params: "'CMP_CE_ESTADO'"}).toPromise<any>()
+      let estados = await this.service.getCatalogos({params: "'CMP_CE_ESTADO'"}) as any
       console.log(estados)
 
       this.cmb_estado = estados.data['CMP_CE_ESTADO']
@@ -335,15 +335,15 @@ export class DetalleCatalogoElectronicoComponent implements OnInit, OnDestroy {
   }
 
   async validaDetallesCatElec() {
-  
+
     this.catElecDetalles.forEach(element => {
       if (element.precio_aprobado > element.precio_cotizado){
         this.toastr.info("El valor aprobado: "+element.precio_aprobado+
-        " super al precio cotizado: "+element.precio_cotizado) 
+        " super al precio cotizado: "+element.precio_cotizado)
         return
       }
-     
-     
+
+
     });
     this.validaDatos().then(respuesta => {
       if (respuesta) {
@@ -361,19 +361,19 @@ validaDatos() {
   let c = 0;
   let mensajes: string = '';
   return new Promise((resolve, reject) => {
-     
+
     if(this.totalAprobado.toFixed(2) > this.totalCotizado.toFixed(2)){
-      mensajes += "El valor total aprobado de $"+ this.commonService.formatNumberDos(this.totalAprobado.toFixed(2)) +" no puede ser mayor al valor total cotizado de $" 
-        + this.commonService.formatNumberDos(this.totalCotizado.toFixed(2)) + " la diferencia es de $ " 
+      mensajes += "El valor total aprobado de $"+ this.commonService.formatNumberDos(this.totalAprobado.toFixed(2)) +" no puede ser mayor al valor total cotizado de $"
+        + this.commonService.formatNumberDos(this.totalCotizado.toFixed(2)) + " la diferencia es de $ "
         + (this.commonService.formatNumberDos(this.totalAprobado.toFixed(2) - this.totalCotizado.toFixed(2) )) +"<br>"
     }
     return (mensajes.length) ? reject(mensajes) : resolve(true)
-   
+
   });
 }
 
 async confirmSave(message, action) {
- 
+
   Swal.fire({
     title: "Atención!!",
     text: message,
@@ -388,7 +388,7 @@ async confirmSave(message, action) {
     if (result.value) {
       if (action == "SAVE_DETALLES") {
         this.guardarCatElecDetalles();
-      } 
+      }
     }
   })
 }
@@ -402,10 +402,10 @@ guardarCatElecDetalles(){
   }
   console.log(datos)
   this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-  
+
   /* Validamos si el periodo se encuentra aperturado */
     if (res["data"][0].estado !== 'C') {
-        
+
     let data = {
       detalles: this.catElecDetalles,
       totalAprobado: this.totalAprobado,
@@ -428,14 +428,14 @@ guardarCatElecDetalles(){
           let valorTotalCotizado = 0;
           let valorTotalAprobado = 0;
           res['data'].forEach(element => {
-            valorTotalCotizado += +element.precio_cotizado; 
-            valorTotalAprobado += +element.precio_aprobado; 
-            
+            valorTotalCotizado += +element.precio_cotizado;
+            valorTotalAprobado += +element.precio_aprobado;
+
           });
           this.totalCotizado= valorTotalCotizado
           this.totalAprobado= valorTotalAprobado
-        
-          
+
+
           this.catElecDetalles= res['data']
           this.lcargando.ctlSpinner(false);
 
@@ -456,7 +456,7 @@ guardarCatElecDetalles(){
               this.toastr.info(error.error.message);
       }
     )
-     
+
     } else {
       this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
       this.lcargando.ctlSpinner(false);
@@ -492,13 +492,13 @@ guardarCatElecDetalles(){
             }
             console.log(datos)
             this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
-              
+
                 this.msgSpinner = "Guardando datos...";
                 this.lcargando.ctlSpinner(true);
-    
+
                 let data = {
                   catelec: {
                   id_solicitud: this.item.id_solicitud
@@ -549,7 +549,7 @@ guardarCatElecDetalles(){
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
               }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
@@ -581,7 +581,7 @@ guardarCatElecDetalles(){
     let valorTotalAprobado = 0;
     this.catElecDetalles.forEach(element => {
        Object.assign(element,{ precio_aprobado:parseFloat(element.cantidad_aprobada) * parseFloat(element.precio_unitario_aprobado)})
-      valorTotalAprobado += +element.precio_aprobado; 
+      valorTotalAprobado += +element.precio_aprobado;
     });
     this.totalAprobado= valorTotalAprobado
   }
@@ -642,12 +642,12 @@ guardarCatElecDetalles(){
       }
       console.log(datos)
       this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
         if (res["data"][0].estado !== 'C') {
           this.msgSpinner = "Guardando datos...";
           this.lcargando.ctlSpinner(true);
-    
+
           let data = {
             catelec: {
               id_solicitud: this.item.id_solicitud
@@ -660,7 +660,7 @@ guardarCatElecDetalles(){
               ce_observacion: this.item.observacion,
             }
           }
-    
+
           this.service.setCatAdminDatos(data).subscribe(
             (res) => {
               console.log(res)
@@ -696,12 +696,12 @@ guardarCatElecDetalles(){
               this.toastr.info(error.error.message);
             }
           )
-          
+
         } else {
           this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
           this.lcargando.ctlSpinner(false);
         }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);

@@ -102,11 +102,11 @@ export class ReportNotaDebitoInvComponent implements OnInit {
         $('#tablaReporNotDeb').DataTable().button( '.buttons-excel' ).trigger();
       break;
       case "IMPRIMIR1":
-        $('#tablaReporNotDeb').DataTable().button( '.buttons-print' ).trigger();       
+        $('#tablaReporNotDeb').DataTable().button( '.buttons-print' ).trigger();
       break;
       case "PDF1":
         $('#tablaReporNotDeb').DataTable().button( '.buttons-pdf' ).trigger();
-      break; 
+      break;
     }
   }
 
@@ -126,7 +126,7 @@ export class ReportNotaDebitoInvComponent implements OnInit {
     this.reportesSrv.getCatalogs(data).subscribe(res => {
       this.arrayMotivos = res["data"]["NOTA CLIENTE"];
       this.getsucursales();
-      
+
     }, (error) => {
       this.toastr.info(error.error.message);
     });
@@ -209,15 +209,15 @@ this.reportesSrv.getReportNotaCredito(data).subscribe(res => {
     this.vmButtons[0].habilitar = true;
     this.vmButtons[1].habilitar = true;
     this.vmButtons[2].habilitar = true;
-} 
+}
   setTimeout(() => {
-    this.dtTrigger.next();
+    this.dtTrigger.next(null);
   }, 50);
 }, error => {
   this.validaDt = true;
   this.processing = true;
   setTimeout(() => {
-    this.dtTrigger.next();
+    this.dtTrigger.next(null);
   }, 50);
   this.toastr.info(error.error.message);
 });
@@ -231,7 +231,7 @@ this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
 });
 }
 
-filterTagente(data){ 
+filterTagente(data){
   if (this.Tagente != undefined) {
     this.Tagente = data;
     this.rerender();
@@ -240,7 +240,7 @@ filterTagente(data){
   }
 }
 
-filterAgente(data){ 
+filterAgente(data){
 if (this.agente != undefined) {
   this.agente = data;
   this.rerender();
@@ -249,7 +249,7 @@ if (this.agente != undefined) {
 }
 }
 
-filterMotivo(data){ 
+filterMotivo(data){
 if (this.motivo != undefined) {
   this.motivo = data;
   this.rerender();
@@ -258,7 +258,7 @@ if (this.motivo != undefined) {
 }
 }
 
-filterSucursal(data){ 
+filterSucursal(data){
 if (this.sucursal != undefined) {
   this.sucursal = data;
   this.rerender();
@@ -267,7 +267,7 @@ if (this.sucursal != undefined) {
 }
 }
 
-filterEstado(data){ 
+filterEstado(data){
 if (this.statusFilter != undefined) {
   this.statusFilter = data;
   this.rerender();
@@ -286,10 +286,10 @@ this.rerender();
 }
 
 
-  informaDocumento(dt,i) { 
+  informaDocumento(dt,i) {
     this.processingtwo = true;
-    let modalDoc = this.arrayDtNotaCredito.filter((e) => e.fk_notas == dt.id); 
-    this.dtnotaCredito = modalDoc; 
+    let modalDoc = this.arrayDtNotaCredito.filter((e) => e.fk_notas == dt.id);
+    this.dtnotaCredito = modalDoc;
     this.dtInformacion.codigo = dt.codigo;
     this.dtInformacion.nombre = dt.nombre;
     this.dtInformacion.secuencia_doc = dt.secuencia_doc.toString().padStart(10, '0');
@@ -311,7 +311,7 @@ this.rerender();
     const dialogRef = this.confirmationDialogService.openDialogMat(ListadoRepComponent, {
       width: '1500px', height: 'auto',
       data: { titulo: "Información Nota Crédito", dtInformacion: this.dtInformacion, dtnotaCredito: this.dtnotaCredito}
-      
+
     } );
 
     dialogRef.afterClosed().subscribe(resultado => {
@@ -323,7 +323,7 @@ this.rerender();
     });
 
 
-  } 
+  }
 
   closeModal() {
     // ($("#modalReportnotaCredito") as any).modal("hide");

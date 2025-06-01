@@ -11,7 +11,7 @@ import { PacComponent } from './pac/pac.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TareasComponent } from './tareas/tareas.component';
 import { ExcelService } from 'src/app/services/excel.service';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     AppCustomModule,
     ReportesRoutingModule,
     NgxChartsModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
   ],
   providers: [
     ExcelService,

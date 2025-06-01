@@ -230,7 +230,7 @@ export class CobranzaComponent implements OnInit {
         element['multp_cxc'] = false;
       });
       /* setTimeout(() => {
-        this.dtTrigger.next(); */
+        this.dtTrigger.next(null); */
       /* setTimeout(() => { */
       this.filterBilling(5);
       /* }, 100); */
@@ -242,7 +242,7 @@ export class CobranzaComponent implements OnInit {
       this.billingAux = [];
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     });
   }
@@ -275,7 +275,7 @@ export class CobranzaComponent implements OnInit {
       this.billingAux = response["data"];
 
       /* setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         setTimeout(() => { */
       this.filterBilling(5);
       /* }, 100);
@@ -287,7 +287,7 @@ export class CobranzaComponent implements OnInit {
       this.billing = [];
       this.billingAux = [];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message);
     });
@@ -827,7 +827,7 @@ export class CobranzaComponent implements OnInit {
     this.values.box = this.current_box.id;
     this.values.ruc_cliente = this.contacts["cxc_cab"]["sales"]["client"]["num_documento"]
     this.values.nombre_cliente = this.contacts["cxc_cab"]["sales"]["client"]["razon_social"]
-    
+
 
     if (this.values.method === "Cheque") this.values.postDate = moment(this.postDate).format('YYYY-MM-DD');
 
@@ -1157,7 +1157,7 @@ export class CobranzaComponent implements OnInit {
     this.filterCustomerArray();
 
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
 
   }

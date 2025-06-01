@@ -110,13 +110,13 @@ export class ChequesPostComponent implements OnInit {
       localStorage.setItem('chequesPost', JSON.stringify(this.dataDT));
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.validaDt = true;
       this.dataDT = [];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message);
       this.lcargando.ctlSpinner(false);

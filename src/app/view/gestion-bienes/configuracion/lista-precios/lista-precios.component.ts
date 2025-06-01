@@ -180,7 +180,7 @@ export class ListaPreciosComponent implements OnInit {
 				this.validaDt = true;
 				this.infoData = res['data'];
 				/* setTimeout(() => {
-					this.dtTrigger.next();
+					this.dtTrigger.next(null);
 				}, 50); */
 				this.getMarkGroup(this.infoData);
 				localStorage.setItem('dataProductsInit', JSON.stringify(this.infoData));
@@ -190,7 +190,7 @@ export class ListaPreciosComponent implements OnInit {
 				console.log(error)
 				this.lcargando.ctlSpinner(false);
 				/* setTimeout(() => {
-					this.dtTrigger.next();
+					this.dtTrigger.next(null);
 				}, 50); */
 			});
 	}
@@ -237,7 +237,7 @@ export class ListaPreciosComponent implements OnInit {
 	metodoGlobal(evento: any) {
 		switch (evento.items.boton.texto) {
 			//case "CONSULTAR":
-			//this.getPermisions();			
+			//this.getPermisions();
 			//this.getTableInitPrice();
 			//break;
 			case "ACTUALIZAR":
@@ -352,7 +352,7 @@ export class ListaPreciosComponent implements OnInit {
 			setTimeout(() => {
 				this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
 					dtInstance.destroy()
-					this.dtTrigger.next();
+					this.dtTrigger.next(null);
 				})
 			}, 0);
 

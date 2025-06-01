@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { GeneracionRoutingModule } from './generacion-routing.module';
 import { GeneracionComponent } from './generacion.component';
 import { ListLiquidacionesComponent } from './list-liquidaciones/list-liquidaciones.component';
@@ -24,7 +24,7 @@ import { ModalExonContribuyenteComponent } from './modal-exon-contribuyente/moda
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     GeneracionRoutingModule,
   ]
 })

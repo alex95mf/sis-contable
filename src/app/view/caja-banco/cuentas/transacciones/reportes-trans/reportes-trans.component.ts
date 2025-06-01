@@ -179,14 +179,14 @@ standalone: false,
           this.processing = true;
           this.infoData = res['data'];
           setTimeout(() => {
-              this.dtTrigger.next();
+              this.dtTrigger.next(null);
           }, 50);
       }, error => {
         this.lcargando.ctlSpinner(false);
           this.validaDt = true;
           this.processing = true;
           setTimeout(() => {
-              this.dtTrigger.next();
+              this.dtTrigger.next(null);
           }, 50);
           this.toastr.info(error.error.message);
       });

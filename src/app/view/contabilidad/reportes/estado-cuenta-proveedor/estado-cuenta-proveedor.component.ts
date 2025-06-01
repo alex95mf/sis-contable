@@ -63,7 +63,7 @@ export class EstadoCuentaProveedorComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.fromDatePicker=moment(this.firstday).format('YYYY-MM-DD');
     this.toDatePicker= moment(this.today).format('YYYY-MM-DD');
@@ -277,34 +277,34 @@ export class EstadoCuentaProveedorComponent implements OnInit {
       this.lcargando.ctlSpinner(true);
       //this.filterInput = 5;
       this.estProv.ObtenerCarteraProveedor(dateFrom, dateTo, this.id_proveedor).subscribe(response => {
-  
+
         console.log(response);
-      
+
         this.estado_cuenta = response;
         this.estado_cuenta.forEach(e => {
-          
+
           Object.assign(e,{saldo_actual: e.saldo_actual == null ? 0 : e.saldo_actual})
         });
         this.lcargando.ctlSpinner(false);
-  
+
         /*this.processing = true;
         this.processingPayment = true;
         this.payments = response["data"];
         this.paymentsAux = response["data"];
         this.lcargando.ctlSpinner(false);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           setTimeout(() => {
             this.filterCxP(5);
           }, 100);
         }, 50);*/
-  
+
       }, error => {
-  
+
       });
     }
 
-    
+
   }
 
 }

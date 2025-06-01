@@ -99,7 +99,7 @@ export class GeneracionPermisosComponent implements OnInit {
         this.liquidacion.fecha = res.fecha.split(" ")[0];
         this.contribuyenteActive = res.contribuyente;
 
-        if(res.fk_lote){          
+        if(res.fk_lote){
           this.propiedades = [
             {
               id: res.lote.id,
@@ -118,8 +118,8 @@ export class GeneracionPermisosComponent implements OnInit {
              Object.assign(this.conceptos.find(c => c.codigo_detalle == e.concepto.codigo_detalle), { comentario: e.comentario, valor: e.valor });
           }
         });
-        
-       
+
+
       if(res.detalles.concepto==null){
         res.detalles.forEach(e => {
           if (e.fk_con_det_aplicado) {
@@ -136,7 +136,7 @@ export class GeneracionPermisosComponent implements OnInit {
         });
       }
       console.log(this.exoneraciones)
-        
+
         this.vmButtons[0].habilitar = true;
         this.vmButtons[1].habilitar = false;
         this.vmButtons[2].habilitar = false;
@@ -174,7 +174,7 @@ export class GeneracionPermisosComponent implements OnInit {
             console.log("hola")
           }
         }
-        
+
 
 
       }
@@ -192,7 +192,7 @@ export class GeneracionPermisosComponent implements OnInit {
 
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -526,7 +526,7 @@ export class GeneracionPermisosComponent implements OnInit {
             "mes": Number(moment(this.liquidacion.fecha).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-             
+
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
 
@@ -534,10 +534,10 @@ export class GeneracionPermisosComponent implements OnInit {
                 this.lcargando.ctlSpinner(true);
                 this.liquidacion.fk_lote = this.propiedadActive.id;
                 this.liquidacion.estado = 'A';
-      
+
                 const documento = { ...this.liquidacion, detalles: [...this.conceptos, ...this.exoneraciones] }
                 console.log(documento)
-               
+
                 this.apiService.setLiquidacion({liquidacion: documento}).subscribe(
                   (res) => {
                     Swal.fire({
@@ -555,7 +555,7 @@ export class GeneracionPermisosComponent implements OnInit {
                     this.vmButtons[3].habilitar = false;
                     this.lcargando.ctlSpinner(false);
                     // this.guardarDeuda(res['data'].id_liquidacion); // comentado porque aqui solo se emiten, se aprueban o anulan desde permisos emitidos
-      
+
                   },
                   (error) => {
                     this.lcargando.ctlSpinner(false);
@@ -569,12 +569,12 @@ export class GeneracionPermisosComponent implements OnInit {
                     });
                   }
                 );
-                
+
               } else {
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
               }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);

@@ -93,14 +93,14 @@ export class ShowContribuyenteComponent implements OnInit {
         this.validaDt = true;
         this.dataDT = res["data"];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       },
       (error) => {
         this.validaDt = true;
         this.dataDT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }
     );

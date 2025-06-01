@@ -62,11 +62,11 @@ export class ShowAccountComponent implements OnInit {
         this.validaDt = true;
         this.dataDT = res['data'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
         this.toastr.info(error.error.message);
       });

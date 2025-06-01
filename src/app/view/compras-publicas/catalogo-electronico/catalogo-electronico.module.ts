@@ -8,7 +8,7 @@ import { DetalleCatalogoElectronicoComponent } from './detalle-catalogo-electron
 import { ModalOrdenCompraComponent } from './modal-orden-compra/modal-orden-compra.component';
 import { AnexosListComponentDis } from './anexos-list/anexos-list-dis.component';
 import { CalendarModule } from 'primeng/calendar';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     CatalogoElectronicoRoutingModule,
     AppCustomModule,
     CalendarModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
   ]
 })
 export class CatalogoElectronicoModule { }

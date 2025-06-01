@@ -38,7 +38,7 @@ export class IngresoBodegaService {
   }
 
   getDetalles(data: any = {}) {
-    return this.apiService.apiCall('productos/get-detalles', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('productos/get-detalles', 'POST', data) as any
   }
 
   getProveedores() {
@@ -133,7 +133,7 @@ export class IngresoBodegaService {
     return this.apiService.apiCall('compras/get-solicitudes-modal-proceso', 'POST', data)
   }
 
-  
+
 
   getDepartamento(data) {
     return this.apiService.apiCall('bodega/get-departamento', 'POST', data)
@@ -210,12 +210,12 @@ export class IngresoBodegaService {
   }
 
   getPerecibles(data: any = {}) {
-    return this.apiService.apiCall('productos/get-perecibles', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('productos/get-perecibles', 'POST', data) as any
   }
   getSolicitudModalCatIngreso(data) {
     return this.apiService.apiCall('compras/get-cat-elec-ingreso', 'POST', data)
   }
 
-  
+
 
 }

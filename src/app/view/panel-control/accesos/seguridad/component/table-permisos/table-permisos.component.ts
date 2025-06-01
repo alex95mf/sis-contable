@@ -118,7 +118,7 @@ export class TablePermisosComponent implements OnDestroy, OnInit {
         this.dataT.map((item: any) => Object.assign(item, { check: false }))
 
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 100);
       }, 
       (error: any) => {
@@ -127,7 +127,7 @@ export class TablePermisosComponent implements OnDestroy, OnInit {
         this.validaDt = true;
         this.dataT = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 100);
       }
     );

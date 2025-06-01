@@ -83,7 +83,7 @@ export class ShowActivosComponent implements OnInit {
       this.validaDt = true;
       this.dataDT = res['data'];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.commonVarSrvice.updPerm.next(false);
       }, 50);
     }, error => {
@@ -91,7 +91,7 @@ export class ShowActivosComponent implements OnInit {
       this.dataDT = [];
       this.commonVarSrvice.updPerm.next(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message);
     });

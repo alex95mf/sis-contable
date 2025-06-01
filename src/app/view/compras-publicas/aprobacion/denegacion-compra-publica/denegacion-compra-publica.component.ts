@@ -101,7 +101,7 @@ export class DenegacionCompraPublicaComponent implements OnInit {
     this.service.saveAprobacion(data).subscribe((res)=>{
       console.log(res);
       this.activeModal.close()
-      this.commonVrs.guardarAprobacion.next()
+      this.commonVrs.guardarAprobacion.next(null)
       this.lcargando.ctlSpinner(false);
     })
   }

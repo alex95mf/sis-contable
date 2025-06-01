@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CierreCxcRoutingModule } from './cierre-cxc.routing';
 import { CierreCxcComponent } from './cierre-cxc.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
 
 
@@ -16,7 +16,7 @@ import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.componen
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     CierreCxcRoutingModule
   ]
 })

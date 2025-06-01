@@ -56,9 +56,9 @@ export class ShowPagosServiciosComponent implements OnInit {
     }, 10)
 
     this.payload = JSON.parse(localStorage.getItem('Datauser'));
-    
+
   }
-  
+
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
       case "CERRAR":
@@ -87,14 +87,14 @@ export class ShowPagosServiciosComponent implements OnInit {
       this.pas = response["data"];
 
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
 
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.processing = true;
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     });
   }

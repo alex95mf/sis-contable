@@ -285,14 +285,14 @@ export class ReportsInvoiceComponent implements OnInit {
 
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.validaDtUser = true;
       this.guardarolT = [];
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.vmButtons[1].habilitar = true;
       this.vmButtons[2].habilitar = true;

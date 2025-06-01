@@ -49,7 +49,7 @@ export class GeneracionValorComponent implements OnInit {
   contribuyenteActive: any = {
     razon_social: ""
   };
-  
+
   conceptosBackup: any = [];
   conceptos: any = [];
   exoneracionesBackup: any = [];
@@ -113,7 +113,7 @@ export class GeneracionValorComponent implements OnInit {
     private commonVarService: CommonVarService,
     private apiService: GeneracionValorService,
     private cierremesService: CierreMesService
-  ) { 
+  ) {
     //al seleccionar una liquidacion desde el modal BUSCAR
     this.commonVarService.selectListLiqPURen.asObservable().subscribe(
     (res) => {
@@ -157,7 +157,7 @@ export class GeneracionValorComponent implements OnInit {
       this.vmButtons[1].habilitar = false;
       this.vmButtons[2].habilitar = false;
       this.vmButtons[3].habilitar = false;
-      
+
       //this.lcargando.ctlSpinner(false);
     }
   )
@@ -223,7 +223,7 @@ export class GeneracionValorComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -284,13 +284,13 @@ export class GeneracionValorComponent implements OnInit {
     }, 0);
 
   }
-  
+
   validaPermisos = () => {
     this.msgSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fRenPredUrbanoEmision,
       id_rol: this.dataUser.id_rol,
@@ -332,7 +332,7 @@ export class GeneracionValorComponent implements OnInit {
         this.expandListLiquidaciones();
         break;
       case "IMPRIMIR":
-        
+
         break;
       case "LIMPIAR":
         this.confirmRestore();
@@ -476,10 +476,10 @@ export class GeneracionValorComponent implements OnInit {
             "mes": Number(moment(this.liquidacion.fecha).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-             
+
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
-                    
+
                   this.msgSpinner = 'Generando Liquidación...';
                   this.lcargando.ctlSpinner(true);
                   this.liquidacion.fk_contribuyente = this.contribuyenteActive.id_cliente;
@@ -500,7 +500,7 @@ export class GeneracionValorComponent implements OnInit {
                     liquidacion: this.liquidacion
                   }
                   console.log(this.liquidacion);
-                  
+
                   this.apiService.setLiquidacion(data).subscribe(
                     (res) => {
                       console.log(res);
@@ -533,12 +533,12 @@ export class GeneracionValorComponent implements OnInit {
                       });
                     }
                   );
-          
+
               } else {
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
               }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
@@ -570,7 +570,7 @@ export class GeneracionValorComponent implements OnInit {
   calculateExoneraciones() {
 
     ///// CALCULOS AUTOMATICOS EXONERACIONES
-    
+
     this.calcExonerTotal();
     this.exoneracionesBackup = JSON.parse(JSON.stringify(this.exoneraciones));
     this.calcTotal();
@@ -618,11 +618,11 @@ export class GeneracionValorComponent implements OnInit {
     this.calcSubtotal_1();
   }
 
-    
+
   calcSubtotal_1() {
     let subtotal_1 = this.liquidacion.subtotal - this.liquidacion.exoneraciones;
     this.liquidacion.subtotal_1 = subtotal_1;
-  
+
     this.calcSubtotal_2();
   }
   calcSubtotal_2() {
@@ -632,7 +632,7 @@ export class GeneracionValorComponent implements OnInit {
   }
 
   calcTotal() {
-    
+
     let sumasValores =  (this.liquidacion.subtotal_2 + this.liquidacion.recargo + this.liquidacion.interes)
     this.liquidacion.total = sumasValores - this.liquidacion.descuento;
 
@@ -677,7 +677,7 @@ export class GeneracionValorComponent implements OnInit {
     }
     this.msgSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
-   
+
     this.apiService.getStaConcepto(data).subscribe(
       (res) => {
         console.log(res)
@@ -686,12 +686,12 @@ export class GeneracionValorComponent implements OnInit {
           const datos = res['data'].filter(e => e.codigo == 'EP')[0]
           if(datos.tiene_sta == 'S') {
             console.log(datos.tiene_sta)
-            this.staEspPub= false; 
+            this.staEspPub= false;
           }else{
-            this.staEspPub= true; 
+            this.staEspPub= true;
           }
         }else{
-          this.staEspPub= true; 
+          this.staEspPub= true;
         }
         console.log(this.staEspPub)
       },
@@ -763,7 +763,7 @@ export class GeneracionValorComponent implements OnInit {
     this.contribuyenteActive = {
       razon_social: ""
     };
-    
+
     this.conceptosBackup = [];
     // this.conceptos.forEach(e => {
     //   e.comentario = "",

@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { ApiServices } from 'src/app/services/api.service'; 
+import { ApiServices } from 'src/app/services/api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -82,7 +82,7 @@ export class FacturasService {
   }
 
   getUltimaFactura(data: any = {}) {
-    return this.apiService.apiCall('contabilidad/get-ultima-factura', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('contabilidad/get-ultima-factura', 'POST', data) as any
   }
 
   getCatalogo(data) {
@@ -105,6 +105,6 @@ export class FacturasService {
   getIceSri() {
     return this.apiService.apiCall("contabilidad/get-ice-sri", "POST", {});
   }
-  
+
 
 }

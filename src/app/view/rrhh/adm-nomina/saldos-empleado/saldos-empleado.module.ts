@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SaldosEmpleadoRoutingModule } from './saldos-empleado.routing';
 import { SaldosEmpleadoComponent } from './saldos-empleado.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
@@ -16,7 +16,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     SharedModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     SaldosEmpleadoRoutingModule,
   ]
 })

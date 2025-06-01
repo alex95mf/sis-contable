@@ -16,7 +16,7 @@ import { ButtonRadioActiveComponent } from '../../../../config/custom/cc-panel-b
 import { DataTableDirective } from 'angular-datatables';
 import { ListaCxpComponent } from './lista-cxp/lista-cxp.component';
 
-declare const $: any;  
+declare const $: any;
 
 @Component({
 standalone: false,
@@ -45,13 +45,13 @@ export class PagoAnticipadoComponent implements OnInit {
       { orig: "btnspagant", paramAccion: "", boton: { icon: "fa fa-plus-square-o", texto: "GENERAR PAGO ANTICIPADO" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success btn-sm", habilitar: false, imprimir: false},
       { orig: "btnspagant", paramAccion: "", boton: { icon: "fa fa-print", texto: "IMPRIMIR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-warning btn-sm", habilitar: false, printSection: "print-section-p-ant", imprimir: true, imprimirId: "imprimirDatos"},
       { orig: "btnspagant", paramAccion: "", boton: { icon: "fa fa-search", texto: "BUSCAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary btn-sm", habilitar: false, imprimir: false}
-    ];; 
+    ];;
 
-    this.crearFormulario(); 
+    this.crearFormulario();
 
     setTimeout(() => {
       this.permisos();
-    }, 10);    
+    }, 10);
   }
   lestado:any;
   permisions: any = [];
@@ -107,7 +107,7 @@ export class PagoAnticipadoComponent implements OnInit {
 
   lstParametrosCuentas:any = [];
   lstParametrosCxP:any = [];
-  parametrosCuentas(){    
+  parametrosCuentas(){
     this.pagoAnticipadoService.getParametrosCuentas({ id: 21 }).subscribe((res1) => {
       this.lstParametrosCuentas = res1["data"];
 
@@ -116,7 +116,7 @@ export class PagoAnticipadoComponent implements OnInit {
       }, (error) => {});
     }, (error) => {});
   }
- 
+
 
   forma: FormGroup;
   crearFormulario(){
@@ -125,7 +125,7 @@ export class PagoAnticipadoComponent implements OnInit {
       lEstado:["A",[Validators.required]],
       lIdentificacion:["",[Validators.required]],
       lIdProveedor:[null,[Validators.required]],
-      lDescProveedor:[{value: "",disabled:true},[Validators.required]],       
+      lDescProveedor:[{value: "",disabled:true},[Validators.required]],
       itemDinamicos: this.fb.array([])
     });
   }
@@ -134,11 +134,11 @@ export class PagoAnticipadoComponent implements OnInit {
   metodoGlobal(evento: any) {
     let lIdentificacion:any = this.forma.get("lIdentificacion").value;
     switch (evento.items.boton.texto) {
-      case "GENERAR PAGO ANTICIPADO":         
+      case "GENERAR PAGO ANTICIPADO":
         if(this.validaciones.verSiEsNull(lIdentificacion) == undefined){
           this.validaciones.mensajeAdvertencia("Adertencia","Por favor selecione un proveedor");
           return;
-        } 
+        }
         this.mensajeSppiner = "Seteando valores...";
         this.lcargando.ctlSpinner(true);
         this.pagoAnticipadoService.getAccountsByDetails({ company_id: this.dataUser.id_empresa }).subscribe((res) => {
@@ -151,9 +151,9 @@ export class PagoAnticipadoComponent implements OnInit {
               data: { titulo: "Generación de Pago Anticipado", dataUser: this.dataUser,
               lstParametrosCuentas: this.lstParametrosCuentas, arrayBanks: this.arrayBanks, lstCajaChica: this.lstCajaChica,
               myVarGlobals: myVarGlobals, commonServices: this.commonServices, formulario: this.forma}
-              
+
             } );
-         
+
             dialogRef.afterClosed().subscribe(resultado => {
               if(resultado!=false && resultado!=undefined){
 
@@ -162,15 +162,15 @@ export class PagoAnticipadoComponent implements OnInit {
                   secuencial: resultado.data.num_doc_eg
                 }
                 this.pagoAnticipadoService.getComprobanteEgreso(datosEnviar).subscribe((respdatos:any)=>{
-            
+
                   resultado.data.comprobanteEgreso = respdatos.data;
-                  
+
 
                   let lstPlusImprimir:any = [];
                   let validaTermina:boolean = false;
                   let contador:any = 0;
                   [resultado.data].forEach(itemImp => {
-      
+
                     let buscar:any = {
                       num_doc_eg: itemImp.num_doc_eg,
                       tip_doc_eg: itemImp.tip_doc_eg,
@@ -178,39 +178,39 @@ export class PagoAnticipadoComponent implements OnInit {
                       num_doc_pa: itemImp.num_doc_pa,
                       lEstado: this.forma.get("lEstado").value
                      };
-                    this.pagoAnticipadoService.getMovimientos(buscar).subscribe((datosMov:any)=>{              
+                    this.pagoAnticipadoService.getMovimientos(buscar).subscribe((datosMov:any)=>{
                       datosMov.data.mov_eg.forEach(element => {
                         lstPlusImprimir.push(element);
                       });
                       datosMov.data.mov_pa.forEach(element => {
                         lstPlusImprimir.push(element);
-                      });                      
+                      });
                       if((contador+1) == [resultado.data].length){
                         validaTermina = true;
                       }
                       contador++;
                     }, error=>{
-                
+
                     });
-              
+
                   });
 
- 
+
                   this.impTimer = setInterval(() => {
                     if (validaTermina) {
                       this.imprimirComponent.setearValores(lstPlusImprimir, this.dataUser, this.dataSucursal, this.forma.get("lDescProveedor").value);
                       clearInterval(this.impTimer);
                       setTimeout(() => {
-                        this.buttonRadioActiveComponent.printSectionCDE("imprimirDatos");      
-                        
+                        this.buttonRadioActiveComponent.printSectionCDE("imprimirDatos");
+
                         this.recargarPa();
                         this.recargarCxP();
                       }, 100);
-                    }     
+                    }
                   }, 200);
-                  
+
                 }, error=>{
-            
+
                 });
 
 
@@ -223,10 +223,10 @@ export class PagoAnticipadoComponent implements OnInit {
           this.lcargando.ctlSpinner(false);
         });
         break;
-      case "BUSCAR": 
+      case "BUSCAR":
         this.buscar();
         break;
-    }   
+    }
   }
 
   buscar(){
@@ -249,7 +249,7 @@ export class PagoAnticipadoComponent implements OnInit {
     if (valor=="I"){
       return "ANULADO";
     }
-  } 
+  }
 
   /**LISTADO */
   dataSource: any;
@@ -284,7 +284,7 @@ export class PagoAnticipadoComponent implements OnInit {
       lEstado: lEstado == "P"? "A": lEstado
     };
     this.lcargando.ctlSpinner(true);
-    this.pagoAnticipadoService.obtenerPagosAnticipados(data).subscribe((res:any) => {      
+    this.pagoAnticipadoService.obtenerPagosAnticipados(data).subscribe((res:any) => {
 
       if(lEstado == "P"){
         let resultado:any = [];
@@ -293,7 +293,7 @@ export class PagoAnticipadoComponent implements OnInit {
             resultado.push(element);
           }
         });
-        
+
         this.dataSource = resultado;
         this.dataAnteriorPA = JSON.stringify(resultado);
         this.dataAnteriorPA = JSON.parse(this.dataAnteriorPA);
@@ -306,10 +306,10 @@ export class PagoAnticipadoComponent implements OnInit {
       this.setearImprimir();
 
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
 
-      
+
     }, (error) => {
 
     });
@@ -326,7 +326,7 @@ export class PagoAnticipadoComponent implements OnInit {
       this.listadoGeneral();
     }
   }
-  
+
   /**LISTADO */
 
   selectPagoAnticipo:any = null;
@@ -338,7 +338,7 @@ export class PagoAnticipadoComponent implements OnInit {
     this.listaCxpComponent.dataSourceCxP.forEach(element => {
       let item:any = this.listaCxpComponent.dataAnteriorCxP.find(datos=> datos.id == element.id);
       if(item!=undefined){
-        element.monto_abono = item.monto_abono; 
+        element.monto_abono = item.monto_abono;
         element.monto_saldo = item.monto_saldo;
       }
     });
@@ -354,13 +354,13 @@ export class PagoAnticipadoComponent implements OnInit {
       this.listaCxpComponent.presentarRadio = false;
       this.validaciones.mensajeAdvertencia("Advertencia","Por favor seleccione un pago de anticipo");
       return;
-    } 
+    }
 
     this.selectCxP = dato;
     this.listaCxpComponent.dataSourceCxP.forEach(element => {
       let item:any = this.listaCxpComponent.dataAnteriorCxP.find(datos=> datos.id == element.id);
       if(item!=undefined){
-        element.monto_abono = item.monto_abono; 
+        element.monto_abono = item.monto_abono;
         element.monto_saldo = item.monto_saldo;
       }
     });
@@ -387,9 +387,9 @@ export class PagoAnticipadoComponent implements OnInit {
       }
     });
   }
-  
 
-  abrirModalProveedor(){   
+
+  abrirModalProveedor(){
     let lIdentificacion:any = this.forma.get("lIdentificacion").value;
     this.lcargando.ctlSpinner(true);
     this.pagoAnticipadoService.getProveedores().subscribe((res) => {
@@ -408,9 +408,9 @@ export class PagoAnticipadoComponent implements OnInit {
           const dialogRef = this.confirmationDialogService.openDialogMat(BusqProveedorComponent, {
             width: '1000px', height: 'auto',
             data: { titulo: "Proveedores", dataUser: this.dataUser, identificacion: "", listado: res["data"]}
-            
+
           } );
-          
+
 
           dialogRef.afterClosed().subscribe(resultado => {
             this.forma.get("lIdentificacion").patchValue(null);
@@ -420,11 +420,11 @@ export class PagoAnticipadoComponent implements OnInit {
               this.forma.get("lIdentificacion").patchValue(resultado.num_documento);
               this.forma.get("lIdProveedor").patchValue(resultado.id_proveedor);
               this.forma.get("lDescProveedor").patchValue(resultado.nombre_comercial_prov);
-      
+
               this.recargarPa();
               this.recargarCxP();
             }
-          });         
+          });
       // }
 
     }, error=>{
@@ -441,7 +441,7 @@ export class PagoAnticipadoComponent implements OnInit {
     this.selectCxP = null;
     this.btnRadioCxP = false;
   }
-  
+
   recargarCxP(){
     let lEstado:any = this.forma.get("lEstado").value;
     let lfecha:any = this.forma.get("lFecha").value;
@@ -451,10 +451,10 @@ export class PagoAnticipadoComponent implements OnInit {
         this.listadoGeneralCxP();
       this.listaCxpComponent.recargarCxP(lIdProveedor, lfecha, lEstado);
       }, 10);
-      
-    }    
-  }  
-  
+
+    }
+  }
+
   /**LISTADO */
 
 
@@ -479,17 +479,17 @@ export class PagoAnticipadoComponent implements OnInit {
         this.selectPagoAnticipo.ip = this.commonServices.getIpAddress();
         this.selectPagoAnticipo.accion = "Aplicar pago anticipado del proveedor " + lgIdProveedor + "- " + lgDescProveedor;
         this.selectPagoAnticipo.id_controlador = myVarGlobals.fPagoAnticipado;
-        
+
         this.selectPagoAnticipo.cxp_fecha = this.selectCxP.fecha_inicio;
         this.selectPagoAnticipo.cxp_id = this.selectCxP.id;
         this.selectPagoAnticipo.cxp_proveedor = this.selectCxP.fk_provider;
         if(Number(this.selectCxP.monto_saldo) <= 0 && Number(this.selectPagoAnticipo.valor) == Number(this.selectPagoAnticipo.valor_inicial)){
           this.selectPagoAnticipo.pago_estado = "P";
-        }        
+        }
 
         let valorAbono = Number(this.selectCxP.monto_abono);
         let contLetras:any = 0;
-        if(this.selectCxP.details.length > 0){          
+        if(this.selectCxP.details.length > 0){
           this.selectCxP.details.forEach(element => {
             if(Number(element.valor_saldo) > 0){
               element.fecha_ult_abono = moment(new Date()).format("YYYY-MM-DD");
@@ -501,10 +501,10 @@ export class PagoAnticipadoComponent implements OnInit {
                 contLetras++;
               }
             }
-            
+
           });
         }
-        
+
         this.selectCxP.letras_canceladas = contLetras;
         this.selectCxP.letras_pendientes = Number(this.selectCxP.letras_pendientes) - Number(contLetras);
         this.selectCxP.fecha_fin = moment(new Date()).format("YYYY-MM-DD");
@@ -543,15 +543,15 @@ export class PagoAnticipadoComponent implements OnInit {
                 lstPlusImprimir.push(element);
               });
 
-              
+
               if((contador+1) == [this.selectPagoAnticipo].length){
                 validaTermina = true;
               }
               contador++;
             }, error=>{
-        
+
             });
-      
+
           });
 
 
@@ -560,12 +560,12 @@ export class PagoAnticipadoComponent implements OnInit {
               this.imprimirComponent.setearValores(lstPlusImprimir, this.dataUser, this.dataSucursal, this.forma.get("lDescProveedor").value);
               clearInterval(this.impTimer);
               setTimeout(() => {
-                this.buttonRadioActiveComponent.printSectionCDE("imprimirDatos");      
-                
+                this.buttonRadioActiveComponent.printSectionCDE("imprimirDatos");
+
                 this.recargarPa();
                 this.recargarCxP();
               }, 100);
-            }     
+            }
           }, 200);
 
           this.validaciones.mensajeExito("Exito","El pago anticipado se generó correctamente");
@@ -575,12 +575,12 @@ export class PagoAnticipadoComponent implements OnInit {
         });
       }
     });
-  } 
+  }
 
   @ViewChild(ImprimirComponent, { static: false }) imprimirComponent: ImprimirComponent;
   timer: any;
   setearImprimir(){
- 
+
     this.imprimirComponent.lstPlusImprimir = [];
     this.dataSource.forEach(element => {
 
@@ -589,10 +589,10 @@ export class PagoAnticipadoComponent implements OnInit {
         secuencial: element.num_doc_eg
       }
       this.pagoAnticipadoService.getComprobanteEgreso(datos).subscribe((datos:any)=>{
-  
+
         element.comprobanteEgreso = datos.data;
       }, error=>{
-  
+
       });
     });
 
@@ -617,13 +617,13 @@ export class PagoAnticipadoComponent implements OnInit {
           lstPlusImprimir.push(element);
         });
 
-        
+
         if((contador+1) == this.dataSource.length){
           validaTermina = true;
         }
         contador++;
       }, error=>{
-  
+
       });
 
     });
@@ -634,14 +634,14 @@ export class PagoAnticipadoComponent implements OnInit {
         this.imprimirComponent.setearValores(lstPlusImprimir, this.dataUser, this.dataSucursal, this.forma.get("lDescProveedor").value);
         clearInterval(this.impTimer);
         this.lcargando.ctlSpinner(false);
-      }     
+      }
 
       if (this.dataSource.length == 0) {
         clearInterval(this.timer);
         this.lcargando.ctlSpinner(false);
-      }  
-    }, 200); 
-  } 
+      }
+    }, 200);
+  }
 
 
   imprimirPorClick(valor:any){
@@ -669,13 +669,13 @@ export class PagoAnticipadoComponent implements OnInit {
           lstPlusImprimir.push(element);
         });
 
-        
+
         if((contador+1) == [valor].length){
           validaTermina = true;
         }
         contador++;
       }, error=>{
-  
+
       });
 
     });
@@ -686,13 +686,13 @@ export class PagoAnticipadoComponent implements OnInit {
         this.imprimirComponent.setearValores(lstPlusImprimir, this.dataUser, this.dataSucursal, this.forma.get("lDescProveedor").value);
         clearInterval(this.impTimer);
         setTimeout(() => {
-          this.buttonRadioActiveComponent.printSectionCDE("imprimirDatos");      
-          
+          this.buttonRadioActiveComponent.printSectionCDE("imprimirDatos");
+
           this.recargarPa();
           this.recargarCxP();
         }, 100);
-      }     
-    }, 200); 
+      }
+    }, 200);
   }
 
 
@@ -716,11 +716,11 @@ export class PagoAnticipadoComponent implements OnInit {
 
         if(valor.details_cruce.length > 0){
           valor.details_cruce.forEach(dato1 => {
-            
+
 
 
             let contLetras:any = 0;
-            if(dato1.detalle_cx_p_cab.details.length > 0){          
+            if(dato1.detalle_cx_p_cab.details.length > 0){
               dato1.detalle_cx_p_cab.details.forEach(element1 => {
                 if(Number(element1.valor_abono) > 0){
                   element1.fecha_ult_abono = null;
@@ -729,18 +729,18 @@ export class PagoAnticipadoComponent implements OnInit {
                   element1.observaciones = "Se anulo el anticipo de pago por lo tanto se reverso el pago";
                   contLetras++;
                 }
-                
+
               });
-            }      
+            }
             dato1.detalle_cx_p_cab.letras_canceladas = Number(dato1.detalle_cx_p_cab.letras_canceladas) - Number(contLetras);
-            dato1.detalle_cx_p_cab.letras_pendientes = Number(dato1.detalle_cx_p_cab.letras_pendientes) + Number(contLetras);    
+            dato1.detalle_cx_p_cab.letras_pendientes = Number(dato1.detalle_cx_p_cab.letras_pendientes) + Number(contLetras);
             dato1.detalle_cx_p_cab.fecha_fin = null;
             dato1.detalle_cx_p_cab.monto_abono = 0;
             dato1.detalle_cx_p_cab.monto_saldo = dato1.detalle_cx_p_cab.monto_total;
           });
-          
+
         }
-        
+
         this.mensajeSppiner = "Amulando Pago Anticipado";
         this.lcargando.ctlSpinner(true);
         this.pagoAnticipadoService.anularPagoAnticipado(valor).subscribe(datos=>{
@@ -754,14 +754,14 @@ export class PagoAnticipadoComponent implements OnInit {
       }
     });
   }
-  
+
 
   cambioAccion(){
     let lEstado:any = this.forma.get("lEstado").value;
     this.vmButtons[1].permiso = true;
     this.vmButtons[1].showimg = true;
     if(lEstado != "I"){
-      
+
     }else{
       this.vmButtons[1].permiso = false;
       this.vmButtons[1].showimg = false;

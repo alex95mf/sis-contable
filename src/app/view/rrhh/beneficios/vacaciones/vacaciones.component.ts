@@ -136,7 +136,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
     return new Date();
   }
 
-  constructor(    
+  constructor(
     private commonService: CommonService,
     private toastr: ToastrService,
     public dialogService: DialogService,
@@ -144,7 +144,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
     private fb: FormBuilder,
     private primengConfig: PrimeNGConfig,
     // private translateService: TranslateService,
-    ) { 
+    ) {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
   }
 
@@ -157,7 +157,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
 
     this.vmButtons = [
-			
+
 			{ orig: "btnsConsultVacacionesEmpleado", paramAccion: "", boton: { icon: "fa fa-plus-square-o", texto: "GENERAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary boton btn-sm", habilitar: false},
       /* {
         orig: "btnsConsultVacacionesEmpleado",
@@ -183,19 +183,19 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
         codigo: myVarGlobals.fVacaciones,
         id_rol: id_rol
       }
-  
+
       this.commonService.getPermisionsGlobas(data).subscribe(res => {
-       
+
         this.permisions = res['data'];
-  
+
         this.permiso_ver = this.permisions[0].abrir;
-  
+
         if (this.permiso_ver == "0") {
-  
+
           this.toastr.info("Usuario no tiene Permiso para ver el formulario de Balance comprobación");
           this.vmButtons = [];
           this.lcargando.ctlSpinner(false);
-  
+
         } else {
           /*
           if (this.permisions[0].imprimir == "0") {
@@ -206,7 +206,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
             this.vmButtons[2].habilitar = false;
           }
           */
-  
+
           /* this.getParametersFilter(); */
         }
       }, error => {
@@ -225,11 +225,11 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
 
     this.vac_fecha_fin = this.getInitialDateFrom();
     this.vac_fecha_fin.setDate(today.getDate());
-    
+
     this.formGroupVacaciones.get("fcn_fecha_inicio").setValue(this.vac_fecha_inicio);
     this.formGroupVacaciones.get("fcn_fecha_fin").setValue(this.vac_fecha_fin);
 
-   
+
 
   }
 
@@ -264,7 +264,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
       this.dataLength = res['data'];
       if(this.dataLength[0]){
         for (let index = 0; index < this.dataLength[0].niveles; index++) {
-          this.lstNiveles.push(index+1);          
+          this.lstNiveles.push(index+1);
         }
       }
 
@@ -293,7 +293,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
           //$('#tablaConsultCjChica').DataTable().button( '.buttons-excel' ).trigger();
           break;
         case "IMPRIMIR":
-          //$('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger();       
+          //$('#tablaConsultCjChica').DataTable().button( '.buttons-print' ).trigger();
           break;
         case "PDF":
           //$('#tablaConsultCjChica').DataTable().button( '.buttons-pdf' ).trigger();
@@ -304,7 +304,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
         case "GENERAR":
           this.generarVacaciones()
           break;
-		}  	 
+		}
 	}
 
   // convenience getter for easy access to form fields
@@ -319,7 +319,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
         // relation_selected : "sueldoVariable@sueldo",
         relation_selected : "codigoTrabajo",
       },
-     
+
       header: "Empleados",
       width: "70%",
       contentStyle: { "max-height": "500px", overflow: "auto" },
@@ -328,7 +328,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
 
     this.ref.onClose.subscribe(async (empleadoData: Empleado) => {
       /**
-       * 
+       *
        */
       /* this.vacacionesForm.id_empleado = empleadoData.id_empleado;
       this.formGroupVacaciones.get("fcn_full_nombre_empleado").setValue(empleadoData.emp_full_nombre);
@@ -341,20 +341,20 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
       // COTR
       this.formGroupVacaciones.get("fcn_vac_num_dias_max_vacaciones").setValue(maxDiasVacaciones);
 
-      let mesVacaciones = (empleadoData.codigo_trabajo.cat_keyword == 'LOSEP') ? 11  : 12 ; 
+      let mesVacaciones = (empleadoData.codigo_trabajo.cat_keyword == 'LOSEP') ? 11  : 12 ;
       this.formGroupVacaciones.get("fcn_vac_a_partir_meses").setValue(mesVacaciones +" Meses");
 
       // dias trabajando
 
       let finalIngreso = formatDate(new Date(empleadoData.emp_fecha_ingreso),'yyyy-MM-dd',"en-US");
       let fechaActual = formatDate(new Date(),'yyyy-MM-dd',"en-US");
-  
-  
+
+
       let totalD = new Date(fechaActual).getTime() - new Date(finalIngreso).getTime();
       let totalDias = totalD/(1000*60*60*24);
 
       this.formGroupVacaciones.get("fcn_vac_tiempo_trabajando").setValue(this.getFormatedStringFromDays(totalDias)); */
-      
+
       console.log(empleadoData)
       if (empleadoData) {
         // const {emp_full_nombre, emp_identificacion, emp_fecha_ingreso} = empleadoData
@@ -364,14 +364,14 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
         Object.assign(this.empleado, {...empleadoData, max_dias_vacaciones, vac_a_partir_meses, vac_tiempo_trabajando})
         this.mensajeSppiner = "Cargando...";
         // this.lcargando.ctlSpinner(true);
-  
+
         this.loading = true;
         let data = {
           // info: this.areaForm,
           ip: this.commonService.getIpAddress(),
           accion: "get lista vacaciones empleado rrhh",
           id_controlador: myVarGlobals.fBovedas,
-    
+
           page : this.pageIndex,
           size : 10/* this.rows */,
           sort : 'vac_anio',
@@ -379,11 +379,11 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
           search : '',
           id_empleado : empleadoData.id_empleado,
           id_empresa : 1,
-    
+
         };
 
         try {
-          const vacaciones = await this.vacaServ.getVacaciones(empleadoData.id_empleado).toPromise<any>()
+          const vacaciones = await this.vacaServ.getVacaciones(empleadoData.id_empleado) as any
           console.log(vacaciones)
           this.objGetVacationes = vacaciones.data
           //
@@ -392,7 +392,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
           this.loading = false
           console.log(err);
         }
-    
+
         /* this.vacaServ.getVacationDaysEmployees(data).subscribe({
           next: (rpt: VacacionAditionalResponseI) => {
             console.log(rpt);
@@ -400,21 +400,21 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
             // console.log(info);
             this.objGetVacationes = rpt.data;
             // this.lcargando.ctlSpinner(false);
-            
+
             this.loading = false;
-          
-            
+
+
           },
           error: (e) => {
             console.log(e);
             this.loading = false;
             this.lcargando.ctlSpinner(false);
-          
+
           },
         }); */
       }
 
-    
+
 
       // //
       // this.empleSeleccionado = empleadoData.id_empleado;
@@ -435,17 +435,17 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
 
 
       // this.vacaServ.GenerarRegistroVaciones(data).subscribe(res => {
-       
+
       //   // console.log(res);
       //   this.vacacionesempleado = res;
       //   this.lcargando.ctlSpinner(false);
-        
+
       // }, error => {
       //   this.lcargando.ctlSpinner(false);
       //   this.toastr.info(error.error.message);
       // })
 
-      
+
     });
   }
 
@@ -468,7 +468,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
   async setVacacionesCab() {
     this.loading = true
     try {
-      const response = await this.vacaServ.saveVacation({empleado: this.empleado.id_empleado, empresa: this.dataUser.id_empresa}).toPromise<any>()
+      const response = await this.vacaServ.saveVacation({empleado: this.empleado.id_empleado, empresa: this.dataUser.id_empresa}) as any
       console.log(response)
       this.objGetVacationes = response.data
       this.loading = false
@@ -487,10 +487,10 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
     var yearsDisplay = years > 0 ? years + (years == 1 ? " año, " : " años, ") : "";
     var monthsDisplay = months > 0 ? months + (months == 1 ? " mes, " : " meses, ") : "";
     var daysDisplay = days > 0 ? days + (days == 1 ? " día" : " dias") : "";
-    return yearsDisplay + monthsDisplay + daysDisplay; 
+    return yearsDisplay + monthsDisplay + daysDisplay;
 }
 
-  
+
   /**-----METODOS DE GUARDAR */
   async validaSaveVacaciones() {
     // console.log(JSON.stringify(this.formGroupFaltaAndPermiso.value));
@@ -528,7 +528,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
           this.updateFaltaAndPermisoEmpleado();
         }else if (action == "DELETE_FALTA_AND_PERMISO_EMPLEADO") {
           this.deleteFaltaAndPermisoEmpleado();
-        } */ 
+        } */
       }
     });
   }
@@ -538,13 +538,13 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
    */
     saveFaltaAndPermisoEmpleado() {
       // const idEmp = this.faltasAndDescuentosForm.id_empleado;
-  
+
       let data = {
         // info: this.formSueldoEmpleado,
         ip: this.commonService.getIpAddress(),
         accion: "Creación de nueva falta y permisos  rrhh",
         id_controlador: myVarGlobals.fCuentaBancos,
-  
+
         id_vacacion: this.vacDetalleFORM.id_vacacion,
         id_empresa: this.vacDetalleFORM.id_empresa,
         id_empleado:  this.vacDetalleFORM.id_empleado ,
@@ -562,22 +562,22 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
           this.toastr.success(
             "Datos de vacaciones guardados correctamente."
           );
-  
+
           // this.cancel(0);
           // this.getFaltasPermisos(idEmp);
           this.lcargando.ctlSpinner(false);
-        
-          
+
+
         },
         (error) => {
           this.lcargando.ctlSpinner(false);
           this.toastr.error(error?.error?.detail);
-         
+
         }
       );
     }
 
-  /* changeFechaFin(){   
+  /* changeFechaFin(){
     let inputFechaInicio = this.formGroupVacaciones.get("fcn_fecha_inicio").value;
     let inputFechaFin = this.formGroupVacaciones.get("fcn_fecha_fin").value;
 
@@ -591,7 +591,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
     this.formGroupVacaciones.get("fcn_vac_total_horas").setValue(totalDias);
 
     // let totaHoras = fechaFin - fechaInicio
-    
+
     this.formGroupVacaciones.get("fcn_vac_num_dias_gozar").setValue(totalDias);
     this.formGroupVacaciones.get("fcn_vac_num_horas_gozar").setValue(totalDias*8);
     this.formGroupVacaciones.get("fcn_vac_total_horas").setValue(totalDias*8);
@@ -620,7 +620,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
     this.formGroupVacaciones.get("fcn_vac_total_horas").setValue(totalDias*8); */
   }
 
-  
+
   onRowSelectVacionesEmp(dataVacaciones : Vacaciones){
     let dataVac = dataVacaciones.data;
 
@@ -638,7 +638,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
       id_empresa: dataVac.id_empresa,
       fecha_inicio: ''
     })
-    
+
     this.vacDetalleFORM.vdt_fecha_inicio = fechaInicio;
     this.vacDetalleFORM.vdt_fecha_fin = fechaFin;
 
@@ -708,7 +708,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
         ip: this.commonService.getIpAddress(),
         accion: "get lista vacaciones empleado rrhh",
         id_controlador: myVarGlobals.fBovedas,
-  
+
         page : this.pageIndex,
         size : 10/* this.rows */,
         sort : 'vac_anio',
@@ -717,7 +717,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
         id_empleado : this.empleado.id_empleado,
         id_empresa : 1,
       }
-      const vacaciones = await this.vacaServ.getVacaciones(this.empleado.id_empleado).toPromise<any>()
+      const vacaciones = await this.vacaServ.getVacaciones(this.empleado.id_empleado) as any
       console.log(vacaciones)
       this.objGetVacationes = vacaciones.data
       this.lcargando.ctlSpinner(false)

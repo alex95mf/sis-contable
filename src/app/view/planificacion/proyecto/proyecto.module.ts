@@ -19,7 +19,7 @@ import { TareasComponent } from './asigncion/tareas/tareas.component';
 import { ModalCodigoComprasComponent } from './compras/modal-codigo-compras/modal-codigo-compras.component';
 import { ModalNuevaAtribucionComponent } from './asigncion/modal-nueva-atribucion/modal-nueva-atribucion.component';
 import { DialogService } from 'primeng/dynamicdialog';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {ModalCuentPreComponent} from './asigncion/bienes/modal-cuent-pre/modal-cuent-pre.component';
 import { ProyectosComponent } from './proyectos/proyectos.component';
@@ -44,7 +44,7 @@ import { ProyectoFormComponent } from './proyectos/proyecto-form/proyecto-form.c
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     ProyectoRoutingModule,MatTooltipModule
   ],
   providers: [

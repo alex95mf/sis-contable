@@ -84,7 +84,7 @@ export class ModalModSetComponent implements OnInit {
           this.rubro.cuentaInvDeb = res.data.codigo
           this.rubro.numcInvDeb = res.data.nombre
           this.rubro.cuentaPresupuestoInvDeb = res.data.presupuesto != null ? res.data.presupuesto?.codigo : res.data.presupuesto_haber?.codigo
-          this.rubro.numpcInvDeb = res.data.presupuesto != null ? res.data.presupuesto?.nombre : res.data.presupuesto_haber?.nombre 
+          this.rubro.numpcInvDeb = res.data.presupuesto != null ? res.data.presupuesto?.nombre : res.data.presupuesto_haber?.nombre
     /*       this.rubro.cuentaPresupuestoInvDeb = res.data.presupuesto != null ? res.data.presupuesto?.codigo : res.presupuesto_haber?.codigo */
        /*    this.rubro.numpcInvDeb = res.data.presupuesto != null ? res.data.presupuesto?.nombre : res.data.presupuesto_haber?.nombre  */
         }else if(res.validacion == '2'){
@@ -122,7 +122,7 @@ export class ModalModSetComponent implements OnInit {
           this.rubro.cuentaPresupuestoProdDeb = res.data.codigo
           this.rubro.numpcProdDeb = res.data.descripcion_general
         }
-        
+
       }
     )
   }
@@ -196,11 +196,11 @@ export class ModalModSetComponent implements OnInit {
 
         this.vmButtons[0].showimg = false
       }else{
-        
+
         this.vmButtons[0].showimg = true
         this.vmButtons[1].showimg = false
       } */
-      
+
     }, 50);
 
   }
@@ -216,7 +216,7 @@ export class ModalModSetComponent implements OnInit {
         break;
       case " ACTUALIZAR":
         this.validacion('UPDATE');
-        break; 
+        break;
     }
   }
 
@@ -250,12 +250,12 @@ export class ModalModSetComponent implements OnInit {
   validacion(valor){
     this.lcargando.ctlSpinner(true)
     if(this.rubro.cuentaInvDeb == null){
-      Swal.fire({ 
+      Swal.fire({
         title: 'Pregunta',
         text: '¿Está seguro de guardar sin cuenta Debe?',
         icon: 'question',
         showCancelButton: true,
-        confirmButtonText: 'Sí', 
+        confirmButtonText: 'Sí',
         cancelButtonText: 'No'
     }).then((result) => {
         if (!result.value) {
@@ -266,10 +266,10 @@ export class ModalModSetComponent implements OnInit {
                 this.guardarRubro();
             }
         }
-    });/* 
+    });/*
       this.lcargando.ctlSpinner(false)
-      return this.toastr.info('Escoja la cuenta de Debe'); */ //Inversion 
-      
+      return this.toastr.info('Escoja la cuenta de Debe'); */ //Inversion
+
     }
     else if(this.rubro.cuentaInvHab == null){
       Swal.fire({
@@ -291,11 +291,11 @@ export class ModalModSetComponent implements OnInit {
     });
 
 
-    
-      
+
+
     }
     else if(this.rubro.cuentaPresupuestoInvDeb == null){
- 
+
       Swal.fire({
         title: 'Pregunta',
         text: '¿Está seguro de guardar sin cuenta presupuesto de Debe ?',
@@ -321,17 +321,17 @@ export class ModalModSetComponent implements OnInit {
       }else if(valor == 'UPDATE'){
        // this.actualizarRubro();
       }
-    } 
+    }
   }
 
 
  async guardarRubro(){
-    
+
 
     console.log(this.data)
     console.log(this.rubro);
-    
-  /* 
+
+  /*
   , */ /*  */
     await this.apiService.updateTipoContratoRubro({id:this.data,cuenta_deudora: this.rubro.cuentaInvDeb, codigo_presupuesto: this.rubro.cuentaPresupuestoInvDeb, cuenta_acreedora: this.rubro.cuentaInvHab})
     this.toastr.success('Se Guardo con éxito');
@@ -342,20 +342,20 @@ export class ModalModSetComponent implements OnInit {
         this.toastr.success('Se Guardo con éxito');
         this.lcargando.ctlSpinner(false);
         this.closeModal();
-        this.commonVarSrv.modalCargarRubros.next()
+        this.commonVarSrv.modalCargarRubros.next(null)
       }
     ) */
   }
 
 
   actualizarRubro(){
-    
+
    /*  this.service.updateRubros(this.rubro).subscribe(
       (res)=>{
         this.toastr.success('Se Actualizo con éxito');
         this.lcargando.ctlSpinner(false);
         this.closeModal();
-        this.commonVarSrv.modalCargarRubros.next()
+        this.commonVarSrv.modalCargarRubros.next(null)
       }
     ) */
   }
@@ -371,7 +371,7 @@ export class ModalModSetComponent implements OnInit {
     modal.componentInstance.validacionModal = true;
     modal.componentInstance.tieneReglas = false;
     modal.componentInstance.validar = valor;
-    
+
   }
   modalCuentaContableReg(valor){
     console.log("reglas")
@@ -386,7 +386,7 @@ export class ModalModSetComponent implements OnInit {
     modal.componentInstance.validar = valor;
     modal.componentInstance.filtrar = this.rubro.cuentaPresupuestoInvDeb;
   }
-  
+
 
 
 

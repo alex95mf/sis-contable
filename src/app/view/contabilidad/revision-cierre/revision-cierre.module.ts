@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RevisionCierreRoutingModule } from './revision-cierre.routing';
 import { RevisionCierreComponent } from './revision-cierre.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -14,7 +14,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     RevisionCierreRoutingModule
   ]
 })

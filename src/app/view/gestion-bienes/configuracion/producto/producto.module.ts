@@ -25,7 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { ProductoRoutingModule } from './producto-routing.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ModalReclamosComponent } from './modal-reclamos/modal-reclamos.component';
 import { ModalUdmComponent } from './modal-udm/modal-udm.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -43,7 +43,7 @@ import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     ProductoRoutingModule,
     CalendarModule,
     FormsModule,

@@ -49,7 +49,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       label: 'Anulado'
     },
   ] */
-  
+
   formReadOnly = false;
   codCastDisabled = true;
   observacionesDisabled = true;
@@ -87,7 +87,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     detalles: [],
     tasa_admin:null,
     periodoLiq: null
-    
+
   };
 
   propiedades: any = [];
@@ -97,7 +97,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
   conceptosAplicados: any[] = [];
   exoneracionesAplicados: any[] = [];
-  
+
   conceptosBackup: any = [];
   conceptos: any[] = [];
   exoneracionesBackup: any = [];
@@ -123,7 +123,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     this.apiService.liquidacionSelected$.subscribe(
       (res: any) => {
         this.msgSpinner = 'Cargando datos de la Liquidación...';
-        
+
         this.lcargando.ctlSpinner(true)
         this.restoreForm(false, false);
         this.totalCalculo= false;
@@ -188,15 +188,15 @@ export class GeneracionComponent implements OnInit, OnDestroy {
             this.exoneraciones.push(exon);
           }
         });
-        
+
         // this.conceptosAplicados = this.conceptos
 
         // para traer detalles de conceptos al buscar
         // this.calculateConceptos();
         // this.calcSubtotal();
 
-        
-        
+
+
         this.lcargando.ctlSpinner(false);
       }
     )
@@ -246,8 +246,8 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       (res) => {
 
         if (res.valid == 5) {
-          
-          this.selectContibuyente(res); 
+
+          this.selectContibuyente(res);
           if (res.fecha_nacimiento != null) {
             console.log('holis');
             if (this.contribuyenteActive.contribuyente == "Natural" && this.contribuyenteActive.supervivencia == "S" && this.verificacionTerceraEdad(res.fecha_nacimiento)
@@ -271,7 +271,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -348,7 +348,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       this.msgSpinner = 'Cargando Permisos de Usuario'
       this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
       this.empresLogo = this.dataUser.logoEmpresa
-      const response = await this.commonService.getPermisionsGlobas({codigo: myVarGlobals.fRenPredUrbanoEmision, id_rol: this.dataUser.id_rol}).toPromise<any>()
+      const response = await this.commonService.getPermisionsGlobas({codigo: myVarGlobals.fRenPredUrbanoEmision, id_rol: this.dataUser.id_rol}) as any
       this.permissions = response.data[0]
       if (this.permissions.abrir == "0") {
         this.vmButtons = [];
@@ -357,7 +357,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       }
 
       this.msgSpinner = 'Cargando Periodos'
-      const periodoResponse = await this.apiService.getPeriodos().toPromise<any>();
+      const periodoResponse = await this.apiService.getPeriodos() as any;
       console.log(periodoResponse)
       this.cmb_periodo = periodoResponse.data
 
@@ -370,7 +370,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       this.conceptos = conceptoConfig.data[0].concepto_detalle
       this.conceptos.forEach(e => Object.assign(e, {valor: 0, fk_concepto_detalle: e.id_concepto_detalle}))
 
-      /* const conceptoResponse = await this.apiService.getConceptoDetalle({codigo: 'PU'}).toPromise<any>()
+      /* const conceptoResponse = await this.apiService.getConceptoDetalle({codigo: 'PU'}) as any
       console.log(conceptoResponse)
       conceptoResponse.data.forEach(e => {
         Object.assign(e, {valor: 0, fk_concepto_detalle: e.id_concepto_detalle});
@@ -427,7 +427,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       this.updtaeLiquidacion();
         break;
       case "IMPRIMIR":
-        
+
         break;
       case "LIMPIAR":
         this.confirmRestore();
@@ -496,8 +496,8 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       tasa_admin:null,
       periodoLiq: null
     };
-    
-    this.conceptosBackup = [];  
+
+    this.conceptosBackup = [];
     this.conceptos.forEach(e => {
       e.comentario = "";
       e.valor = 0;
@@ -674,7 +674,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     this.msgSpinner = 'Obteniendo valores';
     this.lcargando.ctlSpinner(true);
 
-    const response = await this.apiService.getValoresPropiedad({lote: this.propiedadActive.id}).toPromise<any>()
+    const response = await this.apiService.getValoresPropiedad({lote: this.propiedadActive.id}) as any
     console.log(response.data)
     this.conceptosAplicados = []
     Object.keys(response.data).forEach((element: any) => {
@@ -691,7 +691,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     if (this.propiedadActive.valor_edificacion == 0) this.conceptosAplicados.push(this.conceptos.find(c => c.codigo_detalle == 'ADC'));
     this.conceptosAplicados.push(this.conceptos.find(c => c.codigo_detalle == 'CEM'));
     this.conceptosAplicados.push(this.conceptos.find(c => c.codigo_detalle == 'CEM2022'));
-    
+
     this.lcargando.ctlSpinner(false);
     this.calcSubtotal();
     /* this.apiService.getValoresPropiedad({lote: this.propiedadActive.id}).subscribe(
@@ -727,9 +727,9 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   calculateExoneraciones() {
 
     ///// CALCULOS AUTOMATICOS EXONERACIONES
-    
+
     this.calcExonerTotal();
-    
+
     this.exoneracionesBackup = JSON.parse(JSON.stringify(this.exoneraciones));
 
     // this.calcTotal();
@@ -763,13 +763,13 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       valor_exo_hipo = this.propiedadActive.valor_hipoteca * 0.0023
       Object.assign(exon_hipoteca, { valor: valor_exo_hipo })
       /* if (moment().diff(moment(exon_hipoteca.fecha_adquisicion), 'years') < 5) {
-        
+
       } else {
         this.toastr.info('La Propiedad tiene una Fecha de Adquisicion mayor a 5 años.')
         const idx = this.exoneraciones.findIndex((element: any) => element.con_det_codigo == 'EPH')
         this.exoneraciones.splice(idx, 1)
       } */
-    } 
+    }
     let valor_exon_dla = 0
     const exon_tercera_edad = this.exoneraciones.find((elem: any) => elem.con_det_codigo == 'DLA')
     if (exon_tercera_edad) {
@@ -795,7 +795,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
         const valor = Math.floor(this.conceptosAplicados.find(c => curr.cod_concepto_det_aplicable == c.codigo_detalle).valor * curr.porcentaje)
         Object.assign(curr, {valor})
         return acc + valor
-      } else 
+      } else
       return acc
     }, 0)
     this.liquidacion.exoneraciones = calculo + valor_exo_hipo + valor_exon_dla + valor_exon_dis;
@@ -809,7 +809,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       if(this.totalCalculo){
         this.liquidacion.total = this.liquidacion.pre_total;
       }
-     
+
     } else {
       this.liquidacion.pre_total = 0;
       if(this.totalCalculo){
@@ -865,7 +865,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
             "mes": Number(moment(this.liquidacion.fecha).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
               this.msgSpinner = 'Generando Liquidación...';
@@ -880,11 +880,11 @@ export class GeneracionComponent implements OnInit, OnDestroy {
                   this.liquidacion.tasa_admin = e.valor
                 }
               });
-              this.exoneraciones.forEach(e => {      
+              this.exoneraciones.forEach(e => {
                 e.porcentaje = (e.porcentaje/100);
                 this.liquidacion.detalles.push(e);
               });
-              
+
               // return console.log(this.liquidacion);
               // console.log(this.liquidacion);
               this.apiService.setLiquidacion({liquidacion: this.liquidacion}).subscribe(
@@ -921,12 +921,12 @@ export class GeneracionComponent implements OnInit, OnDestroy {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
             })
-          
+
         }
       });
     }
@@ -957,10 +957,10 @@ export class GeneracionComponent implements OnInit, OnDestroy {
             "mes": Number(moment(this.liquidacion.fecha).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-        
+
               this.msgSpinner = 'Actualizando Liquidación...';
               this.lcargando.ctlSpinner(true);
               this.liquidacion.detalles = [];
@@ -976,7 +976,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
                 e.porcentaje = (e.porcentaje/100);
                 this.liquidacion.detalles.push(e);
               });
-             
+
               // return  console.log(this.liquidacion);
               this.apiService.updateLiquidacion({liquidacion: this.liquidacion}).subscribe(
                 (res)=>{
@@ -995,12 +995,12 @@ export class GeneracionComponent implements OnInit, OnDestroy {
                   console.log(error);
                 }
               )
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
@@ -1025,7 +1025,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
 
   reestablecerConceptos() {
-    
+
   }
 
   reestablecerExoneracion() {
@@ -1174,7 +1174,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       const conceptos = [this.conceptoConfig.id_concepto]
       const response = await this.apiService.getUltimoRegistro({conceptos, skip})
       console.log(response)
-      
+
       this.apiService.liquidacionSelected$.emit(response.data[0])
       //
       this.lcargando.ctlSpinner(false)

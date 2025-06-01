@@ -224,7 +224,7 @@ export class CategoriaProductoComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             // this.activeModal.close()
-            // this.commonVrs.CatalogoBienes.next()
+            // this.commonVrs.CatalogoBienes.next(null)
             this.ObtenerCatalogoBienes()
             this.vmButtons[1].habilitar = true
           }
@@ -251,7 +251,7 @@ export class CategoriaProductoComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             // this.activeModal.close()
-            // this.commonVrs.CatalogoBienes.next()
+            // this.commonVrs.CatalogoBienes.next(null)
             this.ObtenerCatalogoBienes()
           }
         })

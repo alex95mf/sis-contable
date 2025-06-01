@@ -19,7 +19,7 @@ export class AprobacionService {
   getRecDocumentosAprobar(data) {
     return this.api.apiCall("ordenPago/get-rec-documento-aprobar", "POST", data);
   }
-  
+
   gestionOrdenPago(id, data) {
     return this.api.apiCall(`ordenPago/gestion-orden-pago/${id}`,"POST",data);
   }
@@ -33,6 +33,6 @@ export class AprobacionService {
   }
 
   anularAprobacion(data: any = {}) {
-    return this.api.apiCall('ordenPago/anular-aprobacion', 'POST', data).toPromise<any>();
+    return this.api.apiCall('ordenPago/anular-aprobacion', 'POST', data) as any;
   }
 }

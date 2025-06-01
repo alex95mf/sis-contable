@@ -43,7 +43,7 @@ export class ReportNotaCreditoComponent implements OnInit {
     { id: 4, name: "Aprobado" },
   ];
 
-  
+
 
   arrayClientes: Array<any> = [];
   arrayMotivos: Array<any> = [];
@@ -104,15 +104,15 @@ export class ReportNotaCreditoComponent implements OnInit {
           $('#tablaReporNotCred').DataTable().button( '.buttons-excel' ).trigger();
         break;
         case "IMPRIMIR1":
-          $('#tablaReporNotCred').DataTable().button( '.buttons-print' ).trigger();       
+          $('#tablaReporNotCred').DataTable().button( '.buttons-print' ).trigger();
         break;
         case "PDF1":
           $('#tablaReporNotCred').DataTable().button( '.buttons-pdf' ).trigger();
-        break; 
+        break;
       }
     }
-  
- /*    getPermisions() {   
+
+ /*    getPermisions() {
       this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
       let id_rol = this.dataUser.id_rol;
       let data = {
@@ -149,7 +149,7 @@ export class ReportNotaCreditoComponent implements OnInit {
       this.reportesSrv.getCatalogs(data).subscribe(res => {
         this.arrayMotivos = res["data"]["NOTA CLIENTE"];
         this.getsucursales();
-        
+
       }, (error) => {
         this.toastr.info(error.error.message);
       });
@@ -174,7 +174,7 @@ export class ReportNotaCreditoComponent implements OnInit {
         this.toastr.info(error.error.message);
       })
     }
-  
+
     getTableReport() {
       let data = {
         dateFrom: moment(this.fromDatePicker).format('YYYY-MM-DD'),
@@ -232,20 +232,20 @@ export class ReportNotaCreditoComponent implements OnInit {
       this.vmButtons[0].habilitar = true;
       this.vmButtons[1].habilitar = true;
       this.vmButtons[2].habilitar = true;
-  } 
+  }
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }, error => {
     this.validaDt = true;
     this.processing = true;
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
     this.toastr.info(error.error.message);
   });
   }
-  
+
   rerender(): void {
   this.validaDt = false;
   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -254,7 +254,7 @@ export class ReportNotaCreditoComponent implements OnInit {
   });
   }
 
-  filterTagente(data){ 
+  filterTagente(data){
     if (this.Tagente != undefined) {
       this.Tagente = data;
       this.rerender();
@@ -263,7 +263,7 @@ export class ReportNotaCreditoComponent implements OnInit {
     }
   }
 
-  filterAgente(data){ 
+  filterAgente(data){
   if (this.agente != undefined) {
     this.agente = data;
     this.rerender();
@@ -272,7 +272,7 @@ export class ReportNotaCreditoComponent implements OnInit {
   }
 }
 
-filterMotivo(data){ 
+filterMotivo(data){
   if (this.motivo != undefined) {
     this.motivo = data;
     this.rerender();
@@ -281,7 +281,7 @@ filterMotivo(data){
   }
 }
 
-filterSucursal(data){ 
+filterSucursal(data){
   if (this.sucursal != undefined) {
     this.sucursal = data;
     this.rerender();
@@ -290,7 +290,7 @@ filterSucursal(data){
   }
 }
 
-filterEstado(data){ 
+filterEstado(data){
   if (this.statusFilter != undefined) {
     this.statusFilter = data;
     this.rerender();
@@ -308,7 +308,7 @@ informaciondtlimpiar(){
   this.rerender();
  }
 
-  
+
  informaDocumento(dt,i) {
   this.processingtwo = true;
   let modalDoc = this.arrayDtNotaCredito.filter((e) => e.fk_notas == dt.id);
@@ -336,7 +336,7 @@ informaciondtlimpiar(){
   const dialogRef = this.confirmationDialogService.openDialogMat(ListadoRepNcComponent, {
     width: '1500px', height: 'auto',
     data: { titulo: "Información Nota Crédito", dtInformacion: this.dtInformacion, dtnotaCredito: this.dtnotaCredito}
-    
+
   } );
 
   dialogRef.afterClosed().subscribe(resultado => {
@@ -348,7 +348,7 @@ informaciondtlimpiar(){
   });
 
 
-} 
+}
 
 closeModal() {
   // ($("#modalReportnotaCredito") as any).modal("hide");
@@ -357,6 +357,6 @@ closeModal() {
  */  this.dtnotaCredito = [];
 }
 
- 
- 
+
+
 }

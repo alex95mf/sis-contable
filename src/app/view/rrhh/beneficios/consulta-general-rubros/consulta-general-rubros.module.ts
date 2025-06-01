@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ConsultaGeneralRubrosRoutingModule } from './consulta-general-rubros.routing';
 import { ConsultaGeneralRubrosComponent } from './consulta-general-rubros.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { CalendarModule } from 'primeng/calendar';
 
 
@@ -15,7 +15,7 @@ import { CalendarModule } from 'primeng/calendar';
   imports: [
     AppCustomModule,
     CommonModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     CalendarModule,
     ConsultaGeneralRubrosRoutingModule
   ]

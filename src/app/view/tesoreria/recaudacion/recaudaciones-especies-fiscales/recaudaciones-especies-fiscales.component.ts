@@ -101,7 +101,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
 
   formaPago: any = {
     nombre: '',
-    valor: '',    
+    valor: '',
   };
 
   entidadesFiltrada: any = [];
@@ -109,8 +109,8 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
   hayEntidad: boolean = false;
   entidad: any = {
     nombre: '',
-    valor: '',  
-    grupo: '',  
+    valor: '',
+    grupo: '',
   };
 
   emisoresFiltrada: any = [];
@@ -118,8 +118,8 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
   hayEmisor: boolean = false;
   emisor: any = {
     nombre: '',
-    valor: '',  
-    grupo: '',  
+    valor: '',
+    grupo: '',
   };
 
   documento: any = {
@@ -158,7 +158,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
 
   activo: boolean = false;
   superavit: boolean = false;
-  
+
 
   expandPago: boolean = false;
   deshabilitarFormaPag: boolean = false
@@ -172,7 +172,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     private apiSrv: RecaudacionesEspeciesFiscalesService,
     private contSvr:ContratoService,
     private cierremesService: CierreMesService
-    ) { 
+    ) {
       this.commonVrs.selectContribuyenteCustom.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
         (res) => {
           console.log(res);
@@ -197,7 +197,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
         (res) => {
 
           console.log(res);
-         
+
           this.pagoDirecto(res);
 
         }
@@ -215,7 +215,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
 
           // this.formReadOnly = true;
           this.restoreForm();
-          
+
 
           console.log(res);
           // this.concepto = res.concepto; // ya no se maneja eligiendo concepto se puede eliminar
@@ -224,12 +224,12 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
           this.nro_talonario = res.nro_talonario
           this.documento.fecha = res.fecha.split(" ")[0];
           this.documento.mercado =  this.mercados.find(m => m.id == res.fk_mercado);
-          
-          
+
+
           let data = {
             mercado: this.mercados.find(m => m.id == res.fk_mercado)
           }
-          
+
           this.msgSpinner = 'Cargando Puestos de Mercado'
           this.puestos_filter = this.puestos.filter(e => e.fk_mercado == res.fk_mercado)
           // this.lcargando.ctlSpinner(true)
@@ -245,7 +245,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
                 this.lcargando.ctlSpinner(false)
                 return
               }
-      
+
               res['data'].forEach(p => {
                 let puesto = {
                   id: p.id_mercado_puesto,
@@ -254,7 +254,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
                   estado: p.estado
                 }
                 this.puestos.push({ ...puesto })
-                
+
               })
               this.lcargando.ctlSpinner(false)
             },
@@ -282,7 +282,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
           res.formas_pago.forEach(e => {
             this.pagos.push(e);
           });
-          
+
           this.totalCobro = res.total;
           this.totalPago = +res.total + +res.superavit;
           this.difCobroPago = 0 - +res.superavit;
@@ -290,7 +290,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
           this.formReadOnly = true;
           this.vmButtons[0].habilitar = true;
           this.vmButtons[1].habilitar = false;
-          this.vmButtons[2].habilitar = false;        
+          this.vmButtons[2].habilitar = false;
           this.vmButtons[3].habilitar = false;
         }
       )
@@ -304,7 +304,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
       );
     }
   ngOnDestroy(): void {
-    this.onDestroy$.next()
+    this.onDestroy$.next(null)
     this.onDestroy$.complete()
   }
 
@@ -317,7 +317,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     this.formaPago = 0;
     this.entidad = 0;
     this.emisor = 0;
-    
+
     this.vmButtons = [
       {
         orig: "btnsGarantia",
@@ -383,7 +383,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
       });
       this.formReadOnly = true
     }else{
-      
+
     } */
 
   }
@@ -425,7 +425,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     this.documento.precio_unit = Number(evento.costo)
   }
 
-  triggerPrint(): void {   
+  triggerPrint(): void {
     this.print.nativeElement.click();
   }
 
@@ -434,7 +434,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fRecaudacionEspeciesFiscales,
       id_rol: this.dataUser.id_rol,
@@ -504,7 +504,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     this.lcargando.ctlSpinner(true);
     let data = {
       id: event,
-      
+
     }
     this.apiSrv.getEspeciesfiscales(data).subscribe(
       (res)=>{
@@ -532,7 +532,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
       (res) => {
         console.log(res);
         this.catalog = res["data"]["REC_ESPECIE_FISCAL"];
-        
+
 
         // console.log(this.catalog);
         this.lcargando.ctlSpinner(false);
@@ -628,7 +628,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
             }
             this.formasDePago.push(f_pago);
           }
-          
+
         })
 
         res['data']['REC_FORMA_PAGO_ENTIDAD'].forEach(e => {
@@ -656,19 +656,19 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
         //     let m = {
         //       denominacion: e.descripcion,
         //       cantidad: 0,
-        //       total_denominacion: 0,   
+        //       total_denominacion: 0,
         //     }
         //     this.monedasCat.push(m);
         //   }else if(e.grupo=="B"){
         //     let b = {
         //       denominacion: e.descripcion,
         //       cantidad: 0,
-        //       total_denominacion: 0,   
+        //       total_denominacion: 0,
         //     }
         //     this.billetesCat.push(b);
         //   }
         // })
-        // this.lcargando.ctlSpinner(false);               
+        // this.lcargando.ctlSpinner(false);
         // this.getConceptos();
         this.validacionCaja()
       },
@@ -796,7 +796,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
               comentario: "",
               valor: e.total,
               saldo: e.deuda.saldo,
-              cobro: 0, 
+              cobro: 0,
               nuevo_saldo: 0,
               aplica: true,
               total: e.total,
@@ -810,7 +810,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
             //   comentario: "",
             //   valor: e.total,
             //   saldo: e.deuda.saldo,
-            //   cobro: 0, 
+            //   cobro: 0,
             //   nuevo_saldo: 0,
             //   aplica: true,
             //   total: e.total,
@@ -825,7 +825,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
                   monto_total: e.cuota.documento.total,
                   cobro: (+e.cuota.valor).toFixed(2),
                   plazo_maximo: e.cuota.fecha_plazo_maximo,
-                })              
+                })
               }
               else { // CUOTA INICIAL no tiene rec_documento_det
                 Object.assign(e, {
@@ -833,10 +833,10 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
                   monto_total: (+(+e.total*100 / +e.observacion)).toFixed(2),
                   cobro: (+e.total).toFixed(2),
                   plazo_maximo: e.resolucion_fecha,
-                })   
+                })
               }
             }
-        
+
             this.deudasBackup.push(e);
           }
         });
@@ -869,7 +869,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
         cobroTotal += +cobro100;
       // }
     });
-    
+
     this.totalCobro = +cobroTotal / 100;
     // this.calcSaldoRestanteTotal();
     this.calcDifCobroPago();
@@ -940,7 +940,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     let tipo = this.formaPago.valor;
     if (tipo=="CHEQUE" || tipo=="TRANSFERENCIA"){
       return tipo.substring(0,2)+' - '+ this.entidad.valor;
-    } else 
+    } else
     if (tipo=="TARJETA" || tipo=="DEBITO") {
       return (tipo=="TARJETA"?'T/C':'T/D')+' - '+this.emisor.valor;
     }
@@ -951,7 +951,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     let tipo = this.formaPago.valor;
     if (tipo=="CHEQUE" || tipo=="TRANSFERENCIA"){
       return this.entidad.nombre;
-    } else 
+    } else
     if (tipo=="TARJETA" || tipo=="DEBITO") {
       return this.emisor.nombre;
     }
@@ -969,7 +969,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     if ( (tipo=="CHEQUE" || tipo=="TRANSFERENCIA") && this.entidad==0){
       this.toastr.info("Debe seleccionar una Entidad para ésta forma de pago.")
       return ;
-    } else 
+    } else
     if ((tipo=="TARJETA" || tipo=="DEBITO") && (this.entidad==0 || this.emisor==0)){
       this.toastr.info("Debe seleccionar Entidad y Emisor para ésta forma de pago.")
       return ;
@@ -993,8 +993,8 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     this.pagos.push(nuevo);
     this.vmButtons[0].habilitar=false;
   }
-  
-  
+
+
   pagoDirecto(doc: any) {
     console.log(doc)
     let nuevo = {
@@ -1013,17 +1013,17 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
       comentario: '',
       fk_garantia: doc.id_documento, // id del documento del cual se esta sacando saldo para pagar (garantia o valor a favor)
       estado: "E"
-    } 
+    }
 
-    
+
     this.pagos.push(nuevo);
     this.vmButtons[0].habilitar=false;
-  } 
+  }
 
   selectDocPago() {
     if(this.formaPago.valor=='GARANTIA'){
       this.expandGarantias();
-    } 
+    }
   }
 
   handlePago(event) {
@@ -1071,9 +1071,9 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     for(let i=0;i<this.deudas.length;i++) {
       if (
         this.deudas[i].nuevo_saldo<0
-      ) {        
-        return true;         
-      } 
+      ) {
+        return true;
+      }
     }
     return false;
   }
@@ -1082,9 +1082,9 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     for(let i=0;i<this.pagos.length;i++) {
       if (
         this.pagos[i].tipo_pago=='EFECTIVO' && (this.pagos[i].cambio<0)
-      ) {        
-        return true;         
-      } 
+      ) {
+        return true;
+      }
     }
     return false;
   }
@@ -1096,7 +1096,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
       // if(this.documento.observacion==""||this.documento.observacion==undefined){
       //   this.toastr.info("Debe ingresar una observación para el recibo")
       //   return;
-      // } else 
+      // } else
       if(
         this.totalCobro<=0
       ) {
@@ -1115,7 +1115,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
         console.log(superavit);
         this.documento.superavit = +superavit.toFixed(2);
         this.superavit = true;
-      } else {        
+      } else {
         this.documento.superavit = 0;
         this.superavit = false;
       }
@@ -1140,7 +1140,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
             "mes": Number(moment(this.documento.fecha).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
               this.msgSpinner = 'Generando Especie Fiscal...';
@@ -1152,8 +1152,8 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
               this.documento.subtotal = this.totalCobro;
               this.documento.total = this.totalCobro;
               this.documento.detalles = [];
-              this.documento.fk_caja = this.cajaActiva.id_caja;   
-              
+              this.documento.fk_caja = this.cajaActiva.id_caja;
+
               this.documento.formas_pago = [];
               this.pagos.forEach(e => {
                 if(e.valor > 0){
@@ -1164,13 +1164,13 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
               let data = {
                 documento: this.documento
               }
-              console.log(this.documento);     
+              console.log(this.documento);
               // servicio que crea el documento, sus detalles, sus formas de pago asociadas
               // tambien cambia el saldo de la tabla deudas y el campo estado pasa a C en liquidacion y deudas si el nuevo saldo es 0
               this.apiSrv.setGarantia(data).subscribe(
                 (res) => {
                   console.log(res);
-                  
+
                   this.documento = res['data'];
                   this.formReadOnly = true;
                   this.cantidadVendida = true;
@@ -1209,7 +1209,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
@@ -1328,7 +1328,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
       this.toastr.info('No tiene caja activa');
       this.formReadOnly = true
       this.activo = false
-    } 
+    }
 
     if (this.cajaActiva && this.cajaActiva.fecha != moment().format('YYYY-MM-DD')) {
       console.log('No fue abierta hoy')
@@ -1339,11 +1339,11 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
 
     try {
       let response = await this.apiSrv.getCajaDiaByCaja({
-        id_caja: this.cajaActiva.id_caja, 
+        id_caja: this.cajaActiva.id_caja,
         fecha: this.cajaActiva.fecha
-      }).toPromise<any>()
+      }) as any
       console.log(response.data)
-  
+
       if (response.data.length == 0) {
         console.log('No hay registro en la base')
         this.toastr.info('No hay cajas reabiertas')
@@ -1365,7 +1365,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
       this.toastr.warning(err.error?.message)
     }
   }
-  
+
   onlyNumber(event): boolean {
     let key = event.which ? event.which : event.keyCode;
     if (key > 31 && (key < 48 || key > 57)) {
@@ -1382,7 +1382,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     return true;
   }
 
-  expandModalTitulos() {    
+  expandModalTitulos() {
     // if (this.permissions.consultar == "0") {
     //   this.toastr.warning("No tiene permisos consultar Liquidaciones.", this.fTitle);
     // } else {
@@ -1438,7 +1438,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     modalInvoice.componentInstance.permissions = this.permissions;
     modalInvoice.componentInstance.verifyRestore = this.verifyRestore;
     modalInvoice.componentInstance.contribuyente = this.contribuyenteActive;
-  
+
   }
   expandGarantias() {
     // abre modal de forma de pago distinto para cada titulo que se vaya a pagar

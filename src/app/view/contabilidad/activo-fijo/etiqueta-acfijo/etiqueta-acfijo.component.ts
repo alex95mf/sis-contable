@@ -58,7 +58,7 @@ export class EtiquetaAcfijoComponent implements OnInit {
     private commonServices: CommonService,
     private commonVarSrv: CommonVarService) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     setTimeout(() => {
       this.lcargando.ctlSpinner(true);
     }, 10);
@@ -70,8 +70,8 @@ export class EtiquetaAcfijoComponent implements OnInit {
     this.getPermisions();
   }
 
-  
-  getPermisions() {  
+
+  getPermisions() {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
     this.empresLogo = this.dataUser.logoEmpresa;
     let id_rol = this.dataUser.id_rol;
@@ -176,23 +176,23 @@ getSucursal() {
       this.dsPrint = true;
       this.vmButtons[1].habilitar = false;
       this.infoDt = res['data'];
-      
+
       setTimeout(() => {
         this.lcargando.ctlSpinner(false);
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.validaDt = true;
       this.processing = true;
       setTimeout(() => {
         this.lcargando.ctlSpinner(false);
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message);
     });
   }
 
-  
+
   rerender(): void {
     this.validaDt = false;
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -201,7 +201,7 @@ getSucursal() {
     });
   }
 
-  filterGrupo(data){ 
+  filterGrupo(data){
     if (this.grupo != undefined) {
       this.grupo = data
       this.rerender();
@@ -210,7 +210,7 @@ getSucursal() {
     }
   }
 
-    filterMarca(data){ 
+    filterMarca(data){
     if (this.marca != undefined) {
       this.marca = data
       this.rerender();
@@ -219,7 +219,7 @@ getSucursal() {
     }
   }
 
-    filterModelo(data){ 
+    filterModelo(data){
     if (this.modelo != undefined) {
       this.modelo = data
       this.rerender();
@@ -228,7 +228,7 @@ getSucursal() {
     }
   }
 
-    filterOrigen(data){ 
+    filterOrigen(data){
     if (this.origen != undefined) {
       this.origen = data
       this.rerender();
@@ -238,7 +238,7 @@ getSucursal() {
   }
 
 
-    filterEstado(data){ 
+    filterEstado(data){
     if (this.estado != undefined) {
       this.estado = data
       this.rerender();
@@ -255,7 +255,7 @@ getSucursal() {
     this.origen = undefined;
     this.estado = undefined;
   }
-  
+
   savePrint() {
     let data = {
       ip: this.commonServices.getIpAddress(),

@@ -326,14 +326,14 @@ export class OrdenesComponent implements OnInit {
           }, 500);
         }
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.lcargando.ctlSpinner(false);
         }, 50);
       }, error => {
         this.validaDtOrder = true;
         this.dataOrder = [];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
           this.lcargando.ctlSpinner(false);
         }, 50);
       });

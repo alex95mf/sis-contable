@@ -406,8 +406,8 @@ export class CustomersRegisterComponent implements OnInit {
   async saveClient() {
     await this.commonValidate(0).then(resp => {
       if (resp) {
-        this.commonServices.contactClient.next();
-        this.commonServices.cuentaClient.next();
+        this.commonServices.contactClient.next(null);
+        this.commonServices.cuentaClient.next(null);
         this.supplier.correo_facturacion == undefined ? null : this.supplier.correo_facturacion;
         this.confirmSave("Seguro desea guardar el cliente?", "SET_CLIENT");
       }
@@ -417,9 +417,9 @@ export class CustomersRegisterComponent implements OnInit {
   async updateClient() {
     await this.commonValidate(1).then(resp => {
       if (resp) {
-        this.commonServices.contactClient.next();
-        this.commonServices.anexosClient.next();
-        this.commonServices.cuentaClient.next();
+        this.commonServices.contactClient.next(null);
+        this.commonServices.anexosClient.next(null);
+        this.commonServices.cuentaClient.next(null);
         this.confirmSave("Seguro desea actualizar el cliente?", "PATCH_CLIENT");
       }
     });
@@ -775,6 +775,6 @@ export class CustomersRegisterComponent implements OnInit {
 
   setRazonSocial(evt){
     this.commonServices.nameClient.next(evt);
-  } 
+  }
 
 }

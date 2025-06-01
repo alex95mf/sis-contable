@@ -912,7 +912,7 @@ this.lastday = new Date( this.lastday - 1);
       this.SearchBienes();
     }
 
-    let periodos = await this.service.getPeriodos().toPromise<any>()
+    let periodos = await this.service.getPeriodos() as any
     console.log(periodos.data)
     this.cmb_periodo = periodos.data
     // this.listaSolicitudes = []

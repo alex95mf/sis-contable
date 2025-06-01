@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SolaresRoutingModule } from './solares.routing'; 
+import { SolaresRoutingModule } from './solares.routing';
 import { SolaresComponent } from './solares.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,7 +19,7 @@ import { ConsultaLotesComponent } from './consulta-lotes/consulta-lotes.componen
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     SolaresRoutingModule,
     MatTreeModule,
     MatIconModule,

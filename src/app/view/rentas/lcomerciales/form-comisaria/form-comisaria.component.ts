@@ -119,12 +119,12 @@ export class FormComisariaComponent implements OnInit {
           this.disableVehiculos = false;
         } else {
           this.disableVehiculos = true;
-        } 
+        }
         this.inspeccion.fecha = this.inspeccion.fecha ? this.inspeccion.fecha.split(" ")[0] : "";
         this.inspeccion.fecha_proxima_visita = this.inspeccion.fecha_proxima_visita ? this.inspeccion.fecha_proxima_visita.split(" ")[0] : "";
         this.inspeccion.orden_inspeccion.fecha = this.inspeccion.orden_inspeccion.fecha ? this.inspeccion.orden_inspeccion.fecha.split(" ")[0] : "";
         this.aprueba = this.inspeccion.aprueba=='A' ? true : false;
-        
+
         if (this.inspeccion.estado == "C") {
           this.vmButtons[0].habilitar = true;
           this.vmButtons[2].habilitar = false;
@@ -242,7 +242,7 @@ export class FormComisariaComponent implements OnInit {
       codigo: myVarGlobals.fRenFormComisaria, //////////////////*************** AGREGAR EL CODIGO A VARIABLES GLOBALES
       id_rol: this.dataUser.id_rol,
     };
-    
+
     this.commonService.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -265,11 +265,11 @@ export class FormComisariaComponent implements OnInit {
   metodoGlobal = (event) => {
     switch (event.items.boton.texto) {
       /*case " SELECCIONAR":
-        
+
         break;*/
       case " GUARDAR":
-        // Junto al metodo de Guardar, llamar a UploadFile. 
-        // Una vez se tenga la confirmacion del almacenamiento, llamar a this.commonVarService.updateFormularioCabCom.next() con el objeto res_cab 
+        // Junto al metodo de Guardar, llamar a UploadFile.
+        // Una vez se tenga la confirmacion del almacenamiento, llamar a this.commonVarService.updateFormularioCabCom.next(null) con el objeto res_cab
         // (o un objeto con propiedad id_inspeccion_res que deberia ser el ID de la cabecera)
         this.validarFormulario();
         break;
@@ -336,7 +336,7 @@ export class FormComisariaComponent implements OnInit {
   }
 
   limpiarForm() {
-    
+
     this.fileList = undefined
     this.inspeccion = {
       id_inspeccion_res: 0,
@@ -383,7 +383,7 @@ export class FormComisariaComponent implements OnInit {
         }
       }
     };
-  
+
     this.aprueba = false;
 
     this.fotos = [];
@@ -443,7 +443,7 @@ export class FormComisariaComponent implements OnInit {
             this.toastr.info("Si no aprueba debe ingresar días y observación, en fila #"+ (i+1) );
             flag = true;
             resolve(false);
-            break;          
+            break;
           } else if (i==3 && (this.formulario[i].c_respuesta && (
             this.formulario[i].c_anio==undefined || this.formulario[i].c_anio==null || this.formulario[i].c_anio==0
           ))) {
@@ -509,8 +509,8 @@ export class FormComisariaComponent implements OnInit {
           }
         });
   }
-    
-  
+
+
 
   assingFormData(data) {
     let orden = JSON.parse(JSON.stringify(this.inspeccion.orden_inspeccion));
@@ -525,12 +525,12 @@ export class FormComisariaComponent implements OnInit {
     this.inspeccion.fecha_proxima_visita = this.inspeccion.fecha_proxima_visita ? this.inspeccion.fecha_proxima_visita.split(" ")[0] : "";
     this.inspeccion.orden_inspeccion.fecha = this.inspeccion.orden_inspeccion.fecha ? this.inspeccion.orden_inspeccion.fecha.split(" ")[0] : "";
     this.aprueba = this.inspeccion.aprueba=='A' ? true : false;
-    
+
     if(this.inspeccion.c_esintroductor == 'SI') {
       this.disableVehiculos = false;
     } else {
       this.disableVehiculos = true;
-    } 
+    }
 
     if (this.inspeccion.estado == "C") {
       this.vmButtons[0].habilitar = true;
@@ -611,7 +611,7 @@ export class FormComisariaComponent implements OnInit {
     if (this.formulario[index].c_respuesta) {
       this.formulario[index].c_dias = null;
     }
-    
+
   }
 
   handleCheck(fila) {
@@ -621,7 +621,7 @@ export class FormComisariaComponent implements OnInit {
         this.toastr.warning("No es posible quitar este campo si tiene vehiculos registrados", 'Atención');
         return false;
       }
-      
+
     } else {
       return true;
     }

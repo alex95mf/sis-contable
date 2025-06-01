@@ -32,7 +32,7 @@ export class ContratacionComponent implements OnInit {
   viewSolicitudes: boolean = true
 
   verifyRestore = false;
-  
+
   programa: any = [];
   departamento: any = [];
   atribucion: any = [];
@@ -103,7 +103,7 @@ export class ContratacionComponent implements OnInit {
   ) {
     this.commonVrs.selectProveedorCustom.asObservable().subscribe(
       (res) => {
-      
+
         this.proveedorActive = res;
         this.filter.proveedor = res.razon_social
         console.log(this.proveedorActive);
@@ -113,15 +113,15 @@ export class ContratacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.vmButtons = [
-      { orig: "btnsComprasP", 
-      paramAccion: "1", 
-      boton: { icon: "fas fa-save", texto: "Guardar" }, 
-      permiso: true, 
+      { orig: "btnsComprasP",
+      paramAccion: "1",
+      boton: { icon: "fas fa-save", texto: "Guardar" },
+      permiso: true,
       showtxt: true,
-      showimg: true, 
-      showbadge: false, 
-      clase: "btn btn-warning btn-sm", 
-      habilitar: false, 
+      showimg: true,
+      showbadge: false,
+      clase: "btn btn-warning btn-sm",
+      habilitar: false,
       imprimir: false}
       ,
       {
@@ -136,25 +136,25 @@ export class ContratacionComponent implements OnInit {
         habilitar: false,
       },
       { orig: "btnsComprasP",
-       paramAccion: "1", 
-       boton: { icon: "fas fa-eraser", texto: "Limpiar" }, 
-       permiso: true, 
-       showtxt: true, 
-       showimg: true, 
-       showbadge: false, 
-       clase: "btn btn-danger btn-sm", 
-       habilitar: false, 
+       paramAccion: "1",
+       boton: { icon: "fas fa-eraser", texto: "Limpiar" },
+       permiso: true,
+       showtxt: true,
+       showimg: true,
+       showbadge: false,
+       clase: "btn btn-danger btn-sm",
+       habilitar: false,
        imprimir: false},
 
        { orig: "btnsComprasP",
-       paramAccion: "1", 
-       boton: { icon: "fas fa-eraser", texto: "EXCEL" }, 
-       permiso: true, 
-       showtxt: true, 
-       showimg: true, 
-       showbadge: false, 
-       clase: "btn btn-success btn-sm", 
-       habilitar: false, 
+       paramAccion: "1",
+       boton: { icon: "fas fa-eraser", texto: "EXCEL" },
+       permiso: true,
+       showtxt: true,
+       showimg: true,
+       showbadge: false,
+       clase: "btn btn-success btn-sm",
+       habilitar: false,
        imprimir: false}
 
 
@@ -178,7 +178,7 @@ export class ContratacionComponent implements OnInit {
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
       proveedor: undefined,
       con_contrato: undefined,
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -191,7 +191,7 @@ export class ContratacionComponent implements OnInit {
     this.filterNew = {
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.atribucionParamsNew = {
@@ -277,7 +277,7 @@ export class ContratacionComponent implements OnInit {
     switch (event.items.boton.texto) {
 
       case "Guardar":
-          this.commonVrs.selectContrato.next()
+          this.commonVrs.selectContrato.next(null)
         break;
 
       case "REGRESAR":
@@ -285,7 +285,7 @@ export class ContratacionComponent implements OnInit {
         this.nuevaSolicitud = true
         this.vmButtons[1].showimg=false
         this.vmButtons[0].showimg=false
-        
+
         break;
 
         case "Buscar":
@@ -298,7 +298,7 @@ export class ContratacionComponent implements OnInit {
           this.exportarExcel();
           break;
 
-        
+
     }
   }
 
@@ -316,9 +316,9 @@ export class ContratacionComponent implements OnInit {
     }
   }
   cargarPrograma(){
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSppiner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
-    
+
     let data ={
       periodo: this.periodo.getFullYear(),
     }
@@ -328,7 +328,7 @@ export class ContratacionComponent implements OnInit {
        this.lcargando.ctlSpinner(false);
       let program = []
       res.map((data)=>{
-        
+
         let dat = {
           ...data.catalogo,
           value: data.catalogo['descripcion'] + '-'+ data.catalogo['valor']
@@ -344,7 +344,7 @@ export class ContratacionComponent implements OnInit {
 
   departamentoSearch(event){
   // console.log(event);
-  this.mensajeSppiner = "Cargando Programa...";    
+  this.mensajeSppiner = "Cargando Programa...";
   this.lcargando.ctlSpinner(true);
 
   let data = {
@@ -367,11 +367,11 @@ export class ContratacionComponent implements OnInit {
     this.lcargando.ctlSpinner(false);
   })
   }
-  
+
 
   AtribucionSearch(event){
     console.log(event);
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSppiner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event.valor
@@ -383,12 +383,12 @@ export class ContratacionComponent implements OnInit {
     })
   }
 
-  
-  
+
+
 
   nuevoSolicitud(valor){
     // this.nuevaSolicitud = false
-       
+
     // this.vmButtons[1].showimg=true
     console.log(this.vmButtons[0]);
     // this.moduloDetalle();
@@ -401,7 +401,7 @@ export class ContratacionComponent implements OnInit {
 
   selectAll() {
     this.listaSolicitudesAtribucion.map((e: any) => e.check = this.masterSelected)
-    
+
   }
 
   moduloDetalle(event){
@@ -437,14 +437,14 @@ export class ContratacionComponent implements OnInit {
       this.exportAsXLSX();
       this.lcargando.ctlSpinner(false);
     }
-        
-      
-    
+
+
+
     (error) => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     }
-    
+
   }
   exportarExcel = () => {
 
@@ -452,8 +452,8 @@ export class ContratacionComponent implements OnInit {
       this.toastr.info("Usuario no tiene permiso para exportar");
     } else {
       let data ={
-        params: { 
-          filter: this.filter 
+        params: {
+          filter: this.filter
         }
       }
       let excelData = []
@@ -471,12 +471,12 @@ export class ContratacionComponent implements OnInit {
               rows:  res.data
             }
             console.log(data)
-        
+
           this.xlsService.exportConsultaContrataciones(data, 'Contrataciones')
           this.lcargando.ctlSpinner(false)
           }
-         
-          
+
+
         },
         (err: any) => {
           console.log(err)
@@ -485,7 +485,7 @@ export class ContratacionComponent implements OnInit {
         }
       )
     }
-    
+
   }
 
   exportAsXLSX() {
@@ -512,13 +512,13 @@ export class ContratacionComponent implements OnInit {
   }
 
   SearchList(event,flag: boolean = false){
-    
- 
+
+
     // console.log(event);
     this.listaSolicitudes = []
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSppiner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
-    
+
     if (flag) this.paginate.page = 1
     let data = {
       id_programa :this.dato_Programa,
@@ -528,7 +528,7 @@ export class ContratacionComponent implements OnInit {
         filter: this.filter
       }
 
-      
+
     }
     console.log(data);
     this.service.searchSolicitud(data).subscribe((dat)=>{
@@ -544,7 +544,7 @@ export class ContratacionComponent implements OnInit {
           this.listaSolicitudes = Object.values(dat['data']['data']);
         }
       }
-      
+
 
       this.lcargando.ctlSpinner(false);
     },
@@ -568,24 +568,24 @@ export class ContratacionComponent implements OnInit {
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-    
+
       if (result.isConfirmed) {
         this.atribucionParams = {
           programa: null,
           departamento: null,
           atribucion: null
         }
-    
+
         this.atribucionParamsNew = {
           programa: null,
           departamento: null,
           atribucion: null
         }
-    
+
         this.listaSolicitudes = []
       }
     })
-    
+
   }
 
   expandListProveedores() {
@@ -604,7 +604,7 @@ export class ContratacionComponent implements OnInit {
     }
   }
 
- 
+
 
 
 }

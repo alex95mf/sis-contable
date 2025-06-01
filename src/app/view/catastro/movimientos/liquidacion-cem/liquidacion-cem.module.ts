@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LiquidacionCemRoutingModule } from './liquidacion-cem.routing';
 import { LiquidacionCemComponent } from './liquidacion-cem.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ExcelService } from 'src/app/services/excel.service';
 import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.component';
 
@@ -17,7 +17,7 @@ import { ModalBusquedaComponent } from './modal-busqueda/modal-busqueda.componen
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     LiquidacionCemRoutingModule,
   ],
   providers: [

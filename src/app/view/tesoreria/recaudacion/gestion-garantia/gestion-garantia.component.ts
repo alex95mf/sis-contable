@@ -25,7 +25,7 @@ standalone: false,
 export class GestionGarantiaComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
- 
+
   fTitle = "Gestión (Ordenenes de Pago)";
   msgSpinner: string;
   vmButtons: any = [];
@@ -49,7 +49,7 @@ export class GestionGarantiaComponent implements OnInit {
   ordenesDetalles:any = {};
   ordenesEdit: any = {};
 
-  
+
   conceptosList: any = [];
   concepto: any = 0;
   tipoDesembolso: any = 0;
@@ -63,7 +63,7 @@ export class GestionGarantiaComponent implements OnInit {
   verifyRestore = false;
 
   estadoSelected = 0
- 
+
   estadoList = [
     {value: 'E',label: "EJECUTADO"},
     {value: 'P',label: "PENDIENTE"},
@@ -105,7 +105,7 @@ export class GestionGarantiaComponent implements OnInit {
     private modalService: NgbModal,
     private apiSrv: GestionGarantiaService,
     private excelService: ExcelService,
-  ) { 
+  ) {
     // this.commonVrs.bandTrabTicket.asObservable().subscribe(
     //   (res) => {
     //     //console.log(res);
@@ -120,7 +120,7 @@ export class GestionGarantiaComponent implements OnInit {
         this.cargarOrdenesPago()
       }
     )
-   
+
   }
 
   ngOnInit(): void {
@@ -130,7 +130,7 @@ export class GestionGarantiaComponent implements OnInit {
 
 
     this.vmButtons = [
-      
+
       // {
       //   orig: "btnsOrdPag",
       //   paramAccion: "",
@@ -143,26 +143,26 @@ export class GestionGarantiaComponent implements OnInit {
       //   habilitar: false,
       //   printSection: "PrintSection", imprimir: true
       // },
-      { 
-        orig: "btnsGestionGarantia", 
-        paramAccion: "2", 
-        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-outline-success boton btn-sm", 
+      {
+        orig: "btnsGestionGarantia",
+        paramAccion: "2",
+        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-outline-success boton btn-sm",
         habilitar: false
       },
-      /*{ 
-        orig: "btnsOrdPag", 
-        paramAccion: "2", 
-        boton: { icon: "fa fa-file-pdf-o", texto: "PDF" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-danger boton btn-sm", 
+      /*{
+        orig: "btnsOrdPag",
+        paramAccion: "2",
+        boton: { icon: "fa fa-file-pdf-o", texto: "PDF" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-danger boton btn-sm",
         habilitar: false
       },*/
      /* { orig: "btnCCmant", paramAccion: "2", boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: false},
@@ -171,14 +171,14 @@ export class GestionGarantiaComponent implements OnInit {
      */
     ]
 
-    
+
     this.today = new Date();
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
-    
+
     this.filter = {
       id_orden_pago: undefined,
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
@@ -235,13 +235,13 @@ export class GestionGarantiaComponent implements OnInit {
   metodoGlobal = (event) => {
     switch (event.items.boton.texto) {
       case "IMPRIMIR":
-       
+
         break;
       case "EXCEL":
         this.btnExportar();
         break;
       case "PDF":
-        
+
         break;
     }
   }
@@ -259,11 +259,11 @@ export class GestionGarantiaComponent implements OnInit {
     }
     this.lcargando.ctlSpinner(true)
     try {
-      let resposne = await this.apiSrv.getGestionGarantia(data).toPromise<any>()
+      let resposne = await this.apiSrv.getGestionGarantia(data) as any
       // console.log(resposne)
 
       resposne.data.forEach((elem: any) => {
-        
+
         const {fecha_inicio, fecha_finalizacion, num_poliza, valor, cod_sercop, aseguradora,  riesgo, forma_garantia, estado} = elem
         const {con_contrato, con_num_proceso, con_admin_contrato} = elem.solicitud == null ? {con_contrato: '', con_num_proceso: '', con_admin_contrato: ''} : elem.solicitud
         const {nombre_comercial_prov}  = elem.solicitud?.proveedor ?? {nombre_comercial_prov: ''}
@@ -303,7 +303,7 @@ export class GestionGarantiaComponent implements OnInit {
     this.msgSpinner = "Buscando concepto...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogoConcepto(data).subscribe(
-     
+
       (res) => {
         this.conceptos = res["data"]['OP_CONCEPTOS'];
         this.tipoDesembolso = res["data"]['PAG_TIPO_DESEMBOLSO'];
@@ -317,7 +317,7 @@ export class GestionGarantiaComponent implements OnInit {
     );
   }
   cargarOrdenesPago(flag: boolean = false) {
-    
+
     this.msgSpinner = "Cargando Ordenes de Pago...";
     this.lcargando.ctlSpinner(true);
 
@@ -332,7 +332,7 @@ export class GestionGarantiaComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    
+
     this.apiSrv.getGestionGarantia(data).subscribe(
       (res) => {
         //console.log('documentos'+res);
@@ -344,7 +344,7 @@ export class GestionGarantiaComponent implements OnInit {
           this.ordenesDt = Object.values(res['data']['data']);
         }
         this.lcargando.ctlSpinner(false);
-       
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -354,7 +354,7 @@ export class GestionGarantiaComponent implements OnInit {
   }
 
 
-  
+
   asignarEstado(evt) {
     this.filter.estado = [evt]
    }
@@ -362,15 +362,15 @@ export class GestionGarantiaComponent implements OnInit {
 
 
   // showModalGestion(isNew:boolean, data?:any) {
-    
+
   //    console.log(this.tipoDesembolso);
   //    if (!isNew && this.permissions.consultar == "0") {
   //      this.toastr.warning("No tiene permisos para consultar Ordenes de Pago.", this.fTitle);
   //    } else if (isNew && this.permissions.guardar == "0") {
   //      this.toastr.warning("No tiene permisos para crear Ordenes de Pago.", this.fTitle);
   //    } else {
- 
- 
+
+
   //      const modalInvoice = this.modalService.open(ModalGestionComponent, {
   //        size: "xl",
   //        backdrop: "static",
@@ -382,11 +382,11 @@ export class GestionGarantiaComponent implements OnInit {
   //      modalInvoice.componentInstance.data = data;
   //      modalInvoice.componentInstance.permissions = this.permissions;
   //      modalInvoice.componentInstance.ordenes = this.ordenes;
-       
+
   //    }
   //  }
   //  showModalImprimir(isNew:boolean, data?:any) {
-    
+
   //   console.log(this.tipoDesembolso);
   //   if (!isNew && this.permissions.consultar == "0") {
   //     this.toastr.warning("No tiene permisos para consultar Ordenes de Pago.", this.fTitle);
@@ -406,7 +406,7 @@ export class GestionGarantiaComponent implements OnInit {
   //     modalInvoice.componentInstance.data = data;
   //     modalInvoice.componentInstance.permissions = this.permissions;
   //     modalInvoice.componentInstance.ordenes = this.ordenes;
-      
+
   //   }
   // }
 
@@ -425,7 +425,7 @@ export class GestionGarantiaComponent implements OnInit {
     this.ordenesEdit = JSON.parse(JSON.stringify(data));
     this.ordenesDeta = JSON.parse(JSON.stringify(data['detalles']));
   }
-  
+
 
   limpiarFiltros() {
     this.filter = {
@@ -435,7 +435,7 @@ export class GestionGarantiaComponent implements OnInit {
       estado: undefined,
     }
     this.estadoSelected = 0
-   
+
 
   }
   changePaginate(event) {

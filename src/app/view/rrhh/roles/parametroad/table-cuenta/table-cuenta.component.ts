@@ -29,10 +29,10 @@ export class TableCuentaComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.getDataTable(this.data_carga_cuenta);  
+      this.getDataTable(this.data_carga_cuenta);
     }, 10);
-    
- 
+
+
   }
 
   getDataTable(data) {
@@ -47,14 +47,14 @@ export class TableCuentaComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
     };
-    this.parametroAdminidtracionSrv.tablaCuenta(data).subscribe(res => {      
+    this.parametroAdminidtracionSrv.tablaCuenta(data).subscribe(res => {
         this.validaDtUser = true;
-        this.guardarolT = res['data']; 
+        this.guardarolT = res['data'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
-        this.toastr.info(error.error.message);  
+        this.toastr.info(error.error.message);
       });
   }
 

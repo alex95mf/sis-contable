@@ -214,7 +214,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
             procSugerido: null,
             oficio_icp: null,
           }
-          this.commonVrs.guardarAprobacion.next()
+          this.commonVrs.guardarAprobacion.next(null)
         }
       })
 

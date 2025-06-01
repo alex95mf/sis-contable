@@ -23,14 +23,14 @@ import { NgxCurrencyModule } from "ngx-currency";
     GeneracionComponent,
     ModalContribuyentesCompradorComponent,
     ModalExoneracionesAlComponent
-  
-    
+
+
   ],
   imports: [
     CommonModule,
     PlusvaliasRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
   ]
 })
 export class PlusvaliasModule { }

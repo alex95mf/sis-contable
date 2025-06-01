@@ -26,7 +26,7 @@ import { ModalSolicitudCatComponent } from './orden/modal-solicitud-cat/modal-so
 import { ModalComprasComponent } from './orden/modal-compras/modal-compras.component';
 import { MovimientosBancariosComponent } from './emision/movimientos-bancarios/movimientos-bancarios.component';
 import { CalendarModule } from 'primeng/calendar';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -52,7 +52,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     ModalSolicitudCatComponent,
     ModalComprasComponent,
     MovimientosBancariosComponent
-   
+
   ],
   providers: [
     ExcelService
@@ -62,7 +62,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     PagosRoutingModule,
     AppCustomModule,
     CalendarModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
   ]
 })
 export class PagosModule { }

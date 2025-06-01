@@ -104,7 +104,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
 
   }
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 

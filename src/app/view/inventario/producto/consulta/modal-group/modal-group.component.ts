@@ -76,7 +76,7 @@ export class ModalGroupComponent implements OnInit {
           }
           this.consultaService.updateGroup(data).subscribe(res => {
             this.toastr.success(res['message']);
-            this.commonServices.refreshTree.next();
+            this.commonServices.refreshTree.next(null);
           }, error => {
             this.toastr.info(error.error.message)
           })
@@ -164,7 +164,7 @@ export class ModalGroupComponent implements OnInit {
             this.consultaService.saveNewGroup(data).subscribe(res => {
               this.toastr.success(res['message']);
               this.closeModal();
-              this.commonServices.refreshTree.next();
+              this.commonServices.refreshTree.next(null);
             }, error => {
               this.toastr.info(error.error.message);
             })

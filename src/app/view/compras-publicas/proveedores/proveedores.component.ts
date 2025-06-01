@@ -7,8 +7,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProveedoresService } from './proveedores.service';
 import { CommonService } from 'src/app/services/commonServices';
-import { CommonVarService } from 'src/app/services/common-var.services'; 
-import { IngresoService } from '../../inventario/producto/ingreso/ingreso.service'; 
+import { CommonVarService } from 'src/app/services/common-var.services';
+import { IngresoService } from '../../inventario/producto/ingreso/ingreso.service';
 import { GlobalTableComponent } from '../../commons/modals/global-table/global-table.component';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 declare const $: any;
@@ -219,9 +219,9 @@ export class ProveedoresComponent implements OnInit {
     );
     this.provSrv.listaProveedores$.subscribe(
       (res) => {
-     
+
         console.log(res)
-        
+
         this.supplier.id_proveedor      = res['id_proveedor'];
         this.supplier.document          = res['tipo_documento'];
         this.supplier.docnumber         = res['num_documento'];
@@ -270,7 +270,7 @@ export class ProveedoresComponent implements OnInit {
       }
     )
 
-    
+
   }
 
   PrintSectionCDI() {
@@ -380,7 +380,7 @@ export class ProveedoresComponent implements OnInit {
   validCuentas() {
     if(this.supplier.cuentas.length<=0){
       return false;
-    } else {  
+    } else {
       let sum = 0;
       for(let i=0; i<this.cuentas.length;i++) {
         sum += this.cuentas[i].principal;
@@ -392,7 +392,7 @@ export class ProveedoresComponent implements OnInit {
           return true;
         } else if(
           this.cuentas[i].num_cuenta  == undefined ||
-          this.cuentas[i].num_cuenta  == '' 
+          this.cuentas[i].num_cuenta  == ''
         ) {
           this.toastr.info("Debe escribir un número para la cuenta "+(i+1));
           return true;
@@ -412,11 +412,11 @@ export class ProveedoresComponent implements OnInit {
     }
   }
 
-  
+
   validCuentasRep() {
     if(this.supplier.cuentas.length<=0){
       return false;
-    } else {  
+    } else {
       for(let i=0; i<this.cuentas.length;i++) {
         for(let j=i+1; j<this.cuentas.length;j++){
           if(this.cuentas[i].entidad == this.cuentas[j].entidad && this.cuentas[i].num_cuenta == this.cuentas[j].num_cuenta){
@@ -441,7 +441,7 @@ export class ProveedoresComponent implements OnInit {
           break;
         } else if(
           this.cuentas[i].num_cuenta  == undefined ||
-          this.cuentas[i].num_cuenta  == '' 
+          this.cuentas[i].num_cuenta  == ''
         ) {
           this.toastr.info("Debe escribir un número para la cuenta "+(i+1));
           flag = true;
@@ -458,12 +458,12 @@ export class ProveedoresComponent implements OnInit {
           if(this.cuentas[i].entidad == this.cuentas[j].entidad && this.cuentas[i].num_cuenta == this.cuentas[j].num_cuenta){
             this.toastr.info("No pueden existir dos cuentas asociadas al mismo banco y al mismo numero de cuenta" );
             flag = true;
-            break;    
+            break;
           }
         }
       }
       !flag ? resolve(true) : resolve(false);
-    });    
+    });
   }
 
   checkPrincipal(index, event) {
@@ -487,7 +487,7 @@ export class ProveedoresComponent implements OnInit {
     if (this.cuentas.length<=0){
       // si es la primera cuenta que se agrega automaticamente se pone como principal
       t = 1;
-      
+
     }
     this.cuentas.push({
       id_cuenta: 0,
@@ -500,7 +500,7 @@ export class ProveedoresComponent implements OnInit {
       archivo_base_64: null
     })
   }
-  
+
   async removeCuenta(cuenta: any, index: number) {
     if (this.cuentas[index].id_cuenta > 0) {
       const result = await Swal.fire({
@@ -525,7 +525,7 @@ export class ProveedoresComponent implements OnInit {
           this.lcargando.ctlSpinner(false)
           this.toastr.error(err.error?.mesagge, 'Error eliminando Cuenta Bancaria')
         }
-        
+
       }
       // this.cuentasEliminar.push(this.cuentas.splice(index, 1)[0].id_cuenta);
     } else {
@@ -552,7 +552,7 @@ export class ProveedoresComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     });
-  } 
+  }
 
    getTreeProduct(data) {
     this.provSrv.getTreeProducts(data).subscribe(res => {
@@ -564,7 +564,7 @@ export class ProveedoresComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.mesagge);
     })
-  } 
+  }
 
   changeGroup(evt) {
     this.lcargando.ctlSpinner(true);
@@ -886,7 +886,7 @@ export class ProveedoresComponent implements OnInit {
     this.supplier.cuentasEliminar = this.cuentasEliminar;
     await this.commonValidate(0).then(resp => {
       if (resp) {
-        this.commonServices.contactProvider.next();
+        this.commonServices.contactProvider.next(null);
         if(this.supplier.cuentas.length>0){
           this.confirmSave("Seguro desea guardar el proveedor?", "SET_SUPPLIERS");
         }
@@ -902,8 +902,8 @@ export class ProveedoresComponent implements OnInit {
     this.supplier.cuentasEliminar = this.cuentasEliminar;
     await this.commonValidate(1).then(resp => {
       if (resp) {
-        this.commonServices.contactProvider.next();
-        this.commonServices.anexosProvider.next();
+        this.commonServices.contactProvider.next(null);
+        this.commonServices.anexosProvider.next(null);
         this.confirmSave("Seguro desea actualizar el proveedor?", "PATCH_SUPPLIERS");
       }
     });
@@ -921,7 +921,7 @@ export class ProveedoresComponent implements OnInit {
         this.historicoCuentas = res['data'];
       } else {
         this.historicoCuentas = [];
-       
+
       }
     }
     //  }, error => {
@@ -970,7 +970,7 @@ export class ProveedoresComponent implements OnInit {
       // else if (this.supplier.linea == "" || this.supplier.linea == undefined || this.supplier.linea == null) {
       //   document.getElementById("linea").focus();
       //   this.toastr.info("Seleccione una linea de producto");
-      // } 
+      // }
       else if (this.supplier.phone == undefined || this.supplier.phone == "") {
         document.getElementById("phone").focus();
         this.toastr.info("Ingrese un teléfono");
@@ -1002,7 +1002,7 @@ export class ProveedoresComponent implements OnInit {
       } else if (this.validCuentasRep()) {
         // validacion para que las cuentas bancarias no se repitan
         this.toastr.info("No pueden existir dos cuentas asociadas al mismo banco y al mismo numero de cuenta" );
-      } 
+      }
       else {
         if (action === 0) {
           this.lcargando.ctlSpinner(true);
@@ -1025,7 +1025,7 @@ export class ProveedoresComponent implements OnInit {
 
   validDocxPersona() {
     if(
-      (this.supplier.constribuyente!='Natural' && this.supplier.document!='Ruc') 
+      (this.supplier.constribuyente!='Natural' && this.supplier.document!='Ruc')
     ){
       return true;
     }
@@ -1293,7 +1293,7 @@ export class ProveedoresComponent implements OnInit {
         break;
       case "BUSCAR":
         //this.searchProviders();
-        this.expandListProveedores(); 
+        this.expandListProveedores();
         break;
       case "GUARDAR":
         this.saveProveedor();
@@ -1346,8 +1346,8 @@ export class ProveedoresComponent implements OnInit {
         this.mensajeSppiner = 'Almacenando Certificado'
         try {
           let response = await this.provSrv.saveCertificado({
-            id: this.cuentas[index].id_cuenta, 
-            certificado: this.cuentas[index].archivo_base_64, 
+            id: this.cuentas[index].id_cuenta,
+            certificado: this.cuentas[index].archivo_base_64,
             nombre: this.cuentas[index].nombre_archivo
           })
           console.log(response)
@@ -1413,7 +1413,7 @@ export class ProveedoresComponent implements OnInit {
       // ip: this.commonService.getIpAddress(),
       // accion: "get folder digital",
       // id_controlador: myVarGlobals.fBovedas,
-      id_proveedor:this.supplier.id_proveedor, 
+      id_proveedor:this.supplier.id_proveedor,
       id_cuenta : id_cuenta
     };
 
@@ -1439,7 +1439,7 @@ export class ProveedoresComponent implements OnInit {
         error: (e) => {
           console.log(e.data);
           this.loading = false;
-        
+
         },
     });
   }
@@ -1457,9 +1457,9 @@ export class ProveedoresComponent implements OnInit {
     this.certificadoUpload.nativeElement.click();
   }
 
- 
+
   cargaArchivo(archivos) {
-  
+
     if (archivos.length > 0) {
       this.fileList = archivos
       setTimeout(() => {
@@ -1477,13 +1477,13 @@ export class ProveedoresComponent implements OnInit {
       id_controlador: myVarGlobals.fProveedores,
       accion: `Nuevo anexo para Registro de Proveedores Certificado Bancario ${id}`,
       ip: this.commonServices.getIpAddress(),
-      custom1:'PROVEEDOR-CERTIFICADO-BANCARIO' 
+      custom1:'PROVEEDOR-CERTIFICADO-BANCARIO'
     }
     console.log(data)
     this.UploadService(this.fileList[0], data);
     // if(this.fileList.length!=0){
     //   for (let i = 0; i < this.fileList.length; i++) {
-        
+
     //   }
     // }
     this.fileList = undefined
@@ -1492,7 +1492,7 @@ export class ProveedoresComponent implements OnInit {
   UploadService(file, payload?: any): void {
     console.log('G',payload)
     this.provSrv.uploadAnexo(file, payload).subscribe(
-      (res: any) => { 
+      (res: any) => {
         console.log(res)
         if (res.type == 4) {
           console.log('Fin de carga de archivo', {condi:'PROVEEDOR-CERTIFICADO-BANCARIO', identifier: res.body.identifier})

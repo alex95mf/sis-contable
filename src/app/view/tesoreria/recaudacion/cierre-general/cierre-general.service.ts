@@ -21,7 +21,7 @@ export class CierreGeneralService {
     return this.api.apiCall('concepto/get-conceptos-caja-cierre-general', 'POST', {})
   }
 
-  
+
   reabrirCaja(data) {
     return this.api.apiCall('recaudacion/reabrir-caja-dia', 'POST', data)
   }
@@ -39,7 +39,7 @@ export class CierreGeneralService {
   }
 
   eliminarDeposito(data: any = {}) {
-    return this.api.apiCall('recaudacion/eliminar-deposito', 'POST', data).toPromise<any>()
+    return this.api.apiCall('recaudacion/eliminar-deposito', 'POST', data) as any
   }
 
 }

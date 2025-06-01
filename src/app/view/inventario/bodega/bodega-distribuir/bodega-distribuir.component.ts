@@ -40,10 +40,10 @@ export class BodegaDistribuirComponent implements OnInit{
   guardaT: any = [];
   permisions: any;
   processing: any = false;
-  actions: any = { 
+  actions: any = {
   dComponet: false,
-  btnNuevo: false, 
-  btnGuardar: false, 
+  btnNuevo: false,
+  btnGuardar: false,
   btncancelar: false
   };
   /*Productos*/
@@ -63,13 +63,13 @@ export class BodegaDistribuirComponent implements OnInit{
   disbledTipo: any = false;
   codigoBodega : any;
   filaBodega: any;
-  columnaBodega: any; 
+  columnaBodega: any;
   productsPerchar: any;
 	vmButtons: any = [];
 
   constructor(private toastr: ToastrService, private router: Router, private modalService: NgbModal,private commonServices: CommonService,
      private bodegaDistribSrv: BodegaDistribuirService, private commonVarSrvice: CommonVarService) { }
-  
+
   ngOnInit(): void {
     this.vmButtons = [
 			{ orig: "btnDistri", paramAccion: "", boton: { icon: "fa fa-plus-square-o", texto: "NUEVO" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-warning boton btn-sm", habilitar: false, imprimir: false},
@@ -81,7 +81,7 @@ export class BodegaDistribuirComponent implements OnInit{
       this.permissions();
     }, 10);
   }
- 
+
    /* Api call */
  permissions() {
   this.lcargando.ctlSpinner(true);
@@ -138,7 +138,7 @@ showDataTableDistribuir() {
       this.validaDtUser = true;
       this.guardaT = res["data"];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.ngOnDestroy();
       }, 50);
     }, error => {
@@ -182,7 +182,7 @@ deleteBuy() {
 getProductos() {
   this.bodegaDistribSrv.getProducts().subscribe(res => {
     this.lcargando.ctlSpinner(false);
-    this.arrayProducts = res['data']; 
+    this.arrayProducts = res['data'];
     this.getBodega();
   }, error => {
     this.lcargando.ctlSpinner(false);
@@ -190,7 +190,7 @@ getProductos() {
   })
 }
 
-getFilterProduct(evt) { 
+getFilterProduct(evt) {
   let filt = this.arrayProducts.filter(e => e.id_producto == evt)
   filt = filt[0];
    if (filt != undefined) {
@@ -198,12 +198,12 @@ getFilterProduct(evt) {
     this.bodegaDistribSrv.getDataResultado({
       id: filt.id_producto
     }).subscribe(
-      (res) => { 
+      (res) => {
           this.lcargando.ctlSpinner(false);
           this.productsPerchar = res["data"];
           this.stock = res['data'][0].stock;
           this.valorPerchado =  res['data'][0].perchado;
-          this.cantidadRestante = res['data'][0].restante;          
+          this.cantidadRestante = res['data'][0].restante;
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -216,7 +216,7 @@ getFilterProduct(evt) {
     this.udm = "";
     this.codigoProduct = "";
     this.cantidadRestante = "";
-  }  
+  }
 }
 
 getFilterBodega(e) {
@@ -262,7 +262,7 @@ getFilterAlmacenamiento(e) {
     this.codigoBodega = "";
     this.filaBodega = "";
     this.columnaBodega = "";
-  }  
+  }
 }
 
 
@@ -304,7 +304,7 @@ saveConfirma() {
    let data = {
    fk_producto: this.productosSearch,
    fk_bod_det: this.almacenamientoSearch,
-   bodega: this.bodegaSearch,  
+   bodega: this.bodegaSearch,
    codigo: this.codigoBodega,
    fila: this.filaBodega,
    columna: this.columnaBodega,
@@ -317,12 +317,12 @@ saveConfirma() {
     this.lcargando.ctlSpinner(false);
    this.toastr.success(res['message']);
    setTimeout(() => {
-      location.reload();   
+      location.reload();
     }, 300);
   }, error => {
     this.lcargando.ctlSpinner(true);
     this.toastr.info(error.error.message);
-  }) 
+  })
 }
 
 async confirmSave(message, action) {

@@ -52,21 +52,21 @@ export class ReportsCompraComponent implements OnInit {
   constructor(   private toastr: ToastrService,
     private router: Router,
     private reportSrv: ReportsCompraService,
-    private commonServices: CommonService,   
+    private commonServices: CommonService,
     private commonVarSrv: CommonVarService) { }
 
   ngOnInit(): void {
         this.vmButtons = [
 			{ orig: "btnreportCom", paramAccion: "", boton: { icon: "fas fa-eraser", texto: "LIMPIAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-dark boton btn-sm", habilitar: false, imprimir: false},
 			  { orig: "btnreportCom", paramAccion: "", boton: { icon: "fa fa-print", texto: "IMPRIMIR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-warning boton btn-sm", habilitar: false, imprimir: false},
-      { orig: "btnreportCom", paramAccion: "", boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: false, imprimir: false},	 
+      { orig: "btnreportCom", paramAccion: "", boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: false, imprimir: false},
       { orig: "btnreportCom", paramAccion: "", boton: { icon: "fa fa-file-pdf-o", texto: "PDF" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: false, imprimir: false},
 			];
-  
+
       setTimeout(() => {
       this.validatePermission();
     }, 10);
-  
+
   }
 
   /* validate permissions by windows */
@@ -91,8 +91,8 @@ export class ReportsCompraComponent implements OnInit {
           this.datoTabla = [];
         } else {
           setTimeout(() => {
-            this.getProveedr();    
-            this.getTableReport();      
+            this.getProveedr();
+            this.getTableReport();
           }, 100);
         }
       },
@@ -196,7 +196,7 @@ export class ReportsCompraComponent implements OnInit {
         customize: function (win) {
         $(win.document.body).find('stilo').css('text-align', 'right');
         $(win.document.body).find('tbody').css('font-size', '5px');
-		} 
+		}
         },
         {
           extend: "pdf",
@@ -210,7 +210,7 @@ export class ReportsCompraComponent implements OnInit {
                             color: '#404a63',
                             fontSize: '14',
                             alignment: 'center',
-							bold: true,					
+							bold: true,
                         },//title
                         doc.styles.tableHeader = {
                             fillColor:'#404a63',
@@ -238,15 +238,15 @@ export class ReportsCompraComponent implements OnInit {
       this.vmButtons[1].habilitar = true;
       this.vmButtons[2].habilitar = true;
       this.vmButtons[3].habilitar = true;
-  } 
+  }
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }, error => {
     this.lcargando.ctlSpinner(false);
     this.processingQuotes = true;
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
     this.toastr.info(error.error.message);
   });

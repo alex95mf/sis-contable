@@ -7,7 +7,7 @@ import { DataTableDirective } from "angular-datatables";
 import { CcMantenimientoService } from "./cc-mantenimiento.service";
 import { CommonVarService } from "../../../../services/common-var.services";
 import { CommonService } from "../../../../services/commonServices";
-import 'sweetalert2/src/sweetalert2.scss';  
+import 'sweetalert2/src/sweetalert2.scss';
 const Swal = require('sweetalert2');
 import * as moment from "moment";
 import { environment } from "../../../../../environments/environment";
@@ -92,10 +92,10 @@ export class CcMantenimientoComponent implements OnInit {
 
   ngOnInit(): void {
     //this.elementRef.nativeElement.ownerDocument.body.style = 'background: url(/assets/img/fondo.jpg);background-size: cover !important;no-repeat;';
-    
+
     $("#divListadocont").collapse("show");
     $("#divMantcont").collapse("hide");
-    
+
     this.vmButtons = [
       { orig: "btnCCmant", paramAccion: "1", boton: { icon: "fa fa-plus-square-o", texto: "NUEVO" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-warning boton btn-sm", habilitar: false},
       { orig: "btnCCmant", paramAccion: "1", boton: { icon: "fa fa-floppy-o", texto: "GUARDAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary boton btn-sm", habilitar: false},
@@ -113,14 +113,14 @@ export class CcMantenimientoComponent implements OnInit {
           if(element.paramAccion != "2"){
             element.permiso = false;
             element.showimg = false;
-          }          
+          }
         }
       });
     }, 10);
-    
+
     setTimeout(() => {
-      this.lcargando.ctlSpinner(true);  
-    }, 10);   
+      this.lcargando.ctlSpinner(true);
+    }, 10);
 
 
     this.permissions();
@@ -141,7 +141,7 @@ export class CcMantenimientoComponent implements OnInit {
             if(element.paramAccion == "2"){
               element.permiso = false;
               element.showimg = false;
-            }          
+            }
           }
         });
 
@@ -158,7 +158,7 @@ export class CcMantenimientoComponent implements OnInit {
         }else{
           this.validaSaveCosto();
         }
-        
+
         break;
 
       case "ELIMINAR":
@@ -176,12 +176,12 @@ export class CcMantenimientoComponent implements OnInit {
             if(element.paramAccion == "1"){
               element.permiso = false;
               element.showimg = false;
-            }          
+            }
           }
         });
 
         this.cleanparameter();
-        
+
         break;
 
       /**** */
@@ -427,7 +427,7 @@ export class CcMantenimientoComponent implements OnInit {
     this.mensajeSppiner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.centroCostoSrv.saveCentroCosto(data).subscribe(res => {
-      
+
       this.saveAnexo(res, "N");
 
     }, (error) => {
@@ -515,7 +515,7 @@ export class CcMantenimientoComponent implements OnInit {
   timer: any;
   valida:boolean = false;
   saveAnexo(res:any, tipo) {
-    let ingresoId = this.maxId + 1;    
+    let ingresoId = this.maxId + 1;
     if(this.uploader.queue.length > 0){
 
       let params = {};
@@ -541,40 +541,40 @@ export class CcMantenimientoComponent implements OnInit {
           identifier: this.identifier,
         };
       }
-  
+
       this.valida = false;
       this.timer = setInterval(() => {
         if (this.valida) {
           clearInterval(this.timer);
           this.toastr.success(res["message"]);
           setTimeout(() => {
-            this.lcargando.ctlSpinner(false);                       
+            this.lcargando.ctlSpinner(false);
             this.recargar();
-          }, 3000);          
+          }, 3000);
         }
       }, 200);
 
       let contador:any = 0;
       for (let j = 0; j < this.uploader.queue.length; j++) {
-        let fileItem = this.uploader.queue[j]._file; 
+        let fileItem = this.uploader.queue[j]._file;
         this.IngresoSrv.fileService(fileItem, params).subscribe((res) => {
-  
+
           contador++;
           if(contador == this.uploader.queue.length){
             this.valida = true;
           }
         },(error) => {
-        });  
+        });
       }
 
-      
+
 
     }else{
       this.lcargando.ctlSpinner(false);
       this.toastr.success(res["message"]);
       this.recargar();
     }
-    
+
   }
 
   updateAnexo() {
@@ -594,7 +594,7 @@ export class CcMantenimientoComponent implements OnInit {
           this.toastr.success(res["message"]);
           setTimeout(() => {
             location.reload();
-          }, 1000); 
+          }, 1000);
         }
       }, */
     );
@@ -650,7 +650,7 @@ export class CcMantenimientoComponent implements OnInit {
       }, 10);
     }
   }
-  
+
   showCosto() {
     this.dtOptions = {
       pagingType: "full_numbers",
@@ -699,13 +699,13 @@ export class CcMantenimientoComponent implements OnInit {
         this.processing = true;
         this.guardarolT = res["data"];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       },
       (error) => {
         this.processing = true;
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }
     );
@@ -728,7 +728,7 @@ export class CcMantenimientoComponent implements OnInit {
         if(element.paramAccion == "2"){
           element.permiso = false;
           element.showimg = false;
-        }          
+        }
       }
     });
     this.tipoAccion = "M";
@@ -809,14 +809,14 @@ export class CcMantenimientoComponent implements OnInit {
         if(element.paramAccion == "1"){
           element.permiso = false;
           element.showimg = false;
-        }          
+        }
       }
     });
 
     this.cleanparameter();
     this.rerender()
 
-    
+
   }
 
   rerender(): void {
@@ -837,22 +837,22 @@ export class CcMantenimientoComponent implements OnInit {
   lArchivo:any;
   fileItem:any;
   isSucc:boolean=false;
-  changeSelec(){ 
+  changeSelec(){
     if(this.uploader.queue.length > 0){
-      
+
       for (let j = 0; j < this.uploader.queue.length; j++) {
-        
-        this.fileItem = this.uploader.queue[j]._file; 
-        if (this.fileItem.type === "image/jpeg" || this.fileItem.type === "image/jpg" || this.fileItem.type === "image/bmp" || this.fileItem.type === "image/png" 
+
+        this.fileItem = this.uploader.queue[j]._file;
+        if (this.fileItem.type === "image/jpeg" || this.fileItem.type === "image/jpg" || this.fileItem.type === "image/bmp" || this.fileItem.type === "image/png"
         || this.fileItem.type === "image/gif" || this.fileItem.type === "image/tif" ||
         this.fileItem.type === "application/pdf"
           || this.fileItem.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
          ||this.fileItem.type ==='application/vnd.openxmlformats-officedocument.wordprocessingml.document'
          ||this.fileItem.type ==='application/vnd.openxmlformats-officedocument.presentationml.presentation'
-         //|| this.fileItem.type === "text/plain" 
+         //|| this.fileItem.type === "text/plain"
          || this.fileItem.type==="application/msword"
         ) {
-                  
+
 
           this.isSucc=true;
         }else{
@@ -868,15 +868,15 @@ export class CcMantenimientoComponent implements OnInit {
     if(this.uploader.queue.length > 0){
       this.hasBaseDropZoneOver = e;
       this.changeSelec();
-    }      
+    }
   }
- 
+
   public fileOverAnother(e:any):void {
     this.hasAnotherDropZoneOver = e;
   }
 
   remover(){
-    
+
     if(this.uploader.queue.length === 0){
       this.isSucc=false;
     }else{
@@ -886,7 +886,7 @@ export class CcMantenimientoComponent implements OnInit {
         }
       }
     }
-  } 
+  }
 
 
   abrirVistaArchivo(valor:any){
@@ -894,14 +894,14 @@ export class CcMantenimientoComponent implements OnInit {
     const dialogRef = this.confirmationDialogService.openDialogMat(VistaArchivoComponent, {
       width: '1000px', height: 'auto',
       data: { titulo: "Vista de Archivo", dataUser: this.dataUser, objectUrl: URL.createObjectURL(blob), tipoArchivo: valor.file.type}
-      
+
     } );
- 
+
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado!=false && resultado!=undefined){
 
       }
-    }); 
+    });
   }
 
   archivoExistente(valores:any){
@@ -915,14 +915,14 @@ export class CcMantenimientoComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
         const dialogRef = this.confirmationDialogService.openDialogMat(VistaArchivoComponent, {
           width: '1000px', height: 'auto',
-          data: { titulo: "Vista de Archivo", dataUser: this.dataUser, objectUrl: URL.createObjectURL(resultado), tipoArchivo: valores.original_type}          
+          data: { titulo: "Vista de Archivo", dataUser: this.dataUser, objectUrl: URL.createObjectURL(resultado), tipoArchivo: valores.original_type}
         } );
-     
+
         dialogRef.afterClosed().subscribe(resultado => {
           if(resultado!=false && resultado!=undefined){
-    
+
           }
-        }); 
+        });
       }, (error) => {
         this.lcargando.ctlSpinner(false);
       }
@@ -937,7 +937,7 @@ export class CcMantenimientoComponent implements OnInit {
       valor = "ELIMINADO";
     }
     return valor;
-  } 
+  }
 
   eliminarArchivoExistente(valor:any){
     Swal.fire({
@@ -964,22 +964,22 @@ export class CcMantenimientoComponent implements OnInit {
           this.toastr.info("Error inesperado, no hubo conexion con el servidor")
         });
       }
-    }); 
+    });
   }
 
   abrirModalClientes(){
     const dialogRef = this.confirmationDialogService.openDialogMat(CcClientesComponent, {
       width: '1000px', height: 'auto',
       data: { titulo: "Seleccionar Clientes", dataUser: this.dataUser }
-      
+
     } );
- 
+
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado!=false && resultado!=undefined){
         this.costo.cliente = resultado.id_cliente;
         this.costo.nombre_comercial_cli = resultado.nombre_comercial_cli;
       }
-    }); 
+    });
   }
 
 }

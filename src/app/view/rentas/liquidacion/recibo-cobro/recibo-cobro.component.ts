@@ -91,7 +91,7 @@ export class ReciboCobroComponent implements OnInit {
     private commonVrs: CommonVarService,
     private modalService: NgbModal,
     private apiSrv: ReciboCobroService
-    ) { 
+    ) {
       this.commonVrs.selectContribuyenteCustom.pipe(takeUntil(this.onDestroy$)).subscribe(
         (res) => {
           console.log(res);
@@ -138,19 +138,19 @@ export class ReciboCobroComponent implements OnInit {
 
           this.vmButtons[0].habilitar = true;
           this.vmButtons[1].habilitar = false;
-          this.vmButtons[2].habilitar = false;        
+          this.vmButtons[2].habilitar = false;
           this.vmButtons[3].habilitar = false;
         }
       )
     }
 
     ngOnDestroy() {
-      this.onDestroy$.next();
+      this.onDestroy$.next(null);
       this.onDestroy$.complete();
     }
 
   ngOnInit(): void {
-    
+
     this.vmButtons = [
       {
         orig: "btnsRenLiqCobro",
@@ -214,7 +214,7 @@ export class ReciboCobroComponent implements OnInit {
         this.expandListDocumentosRec();
         break;
       case " IMPRIMIR":
-        
+
         break;
       case " LIMPIAR":
         this.confirmRestore();
@@ -229,7 +229,7 @@ export class ReciboCobroComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fRenPredUrbanoEmision,
       id_rol: this.dataUser.id_rol,
@@ -374,8 +374,8 @@ export class ReciboCobroComponent implements OnInit {
       if (
         this.deudas[i].nuevo_saldo<0
       ) {
-        return true;         
-      } 
+        return true;
+      }
       return false;
     }
   }
@@ -569,7 +569,7 @@ export class ReciboCobroComponent implements OnInit {
   handleConcepto() {
     this.titulosDisabled = false;
   }
-  
+
   onlyNumber(event): boolean {
     let key = event.which ? event.which : event.keyCode;
     if (key > 31 && (key < 48 || key > 57)) {

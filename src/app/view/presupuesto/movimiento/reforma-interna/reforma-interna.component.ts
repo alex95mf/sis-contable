@@ -357,7 +357,7 @@ iddetallecabecerareformageneral: any;
     };
   }
   ngOnDestroy(): void {
-    this.onDestroy$.next()
+    this.onDestroy$.next(null)
     this.onDestroy$.complete()
   }
 

@@ -11,6 +11,6 @@ export class PlanCuentasTreeService {
   ) { }
 
   getCuentasArbol() {
-    return this.apiServices.apiCall('plandecuentas/obtener-plancuenta-json', 'POST', {}).toPromise<any>()
+    return this.apiServices.apiCall('plandecuentas/obtener-plancuenta-json', 'POST', {}) as any
   }
 }

@@ -87,14 +87,14 @@ export class ModalInvoicesProductComponent implements OnInit {
         }
         this.commonVarService.updPerm.next(false);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.validaDt = true
         this.dataDT = [];
         this.commonVarService.updPerm.next(false);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       });
   }

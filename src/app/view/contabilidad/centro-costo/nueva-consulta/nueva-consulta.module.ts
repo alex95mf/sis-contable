@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NuevaConsultaRoutingModule } from './nueva-consulta.routing';
 import { NuevaConsultaComponent } from './nueva-consulta.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ExcelService } from 'src/app/services/excel.service';
@@ -18,7 +18,7 @@ import { ExcelService } from 'src/app/services/excel.service';
     CommonModule,
     SharedModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     NuevaConsultaRoutingModule
   ],
   providers: [

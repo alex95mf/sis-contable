@@ -77,7 +77,7 @@ export class NuevaConsultaComponent implements OnInit {
 
     try {
       this.msgSpinner = 'Cargando Permisos'
-      let response = await this.commonServices.getPermisionsGlobas(data).toPromise<any>();
+      let response = await this.commonServices.getPermisionsGlobas(data) as any;
       console.log(response.data)
       this.permisions = response.data[0]
       //
@@ -120,7 +120,7 @@ export class NuevaConsultaComponent implements OnInit {
   async cargaInicial() {
     try {
       this.msgSpinner = 'Cargando Catalogos'
-      let catalogos = await this.apiService.getCentroCostos().toPromise<any>();
+      let catalogos = await this.apiService.getCentroCostos() as any;
       console.log(catalogos)
       this.cmb_centro = catalogos.data
 

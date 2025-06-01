@@ -102,9 +102,9 @@ export class ListContratosComponent implements OnInit {
           this.contratos.push({...contrato})
         })
         setTimeout(() => {
-          this.dtTrigger.next()
+          this.dtTrigger.next(null)
         }, 50)
-        
+
         this.lcargando.ctlSpinner(false)
       },
       err => {
@@ -218,7 +218,7 @@ export class ListContratosComponent implements OnInit {
       page: 1,
       pageSizeOptions: [5, 10]
     }
-    
+
     setTimeout(()=> {
       this.cargarLiquidaciones();
     }, 0);

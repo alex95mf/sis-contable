@@ -6,7 +6,7 @@ import { MultasComponent } from './multas.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ListBusquedaComponent } from './list-busqueda/list-busqueda.component';
 import { ModalSolicitudComponent } from './modal-solicitud/modal-solicitud.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({

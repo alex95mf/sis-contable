@@ -71,11 +71,11 @@ export class ClienteComponent implements OnInit {
         this.flag += 1;
         this.guardarolT = res["data"];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       },
       (error) => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.processing = true;
       }
     );
@@ -105,11 +105,11 @@ export class ClienteComponent implements OnInit {
         this.guardarolT = res["data"];
        
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       },
       (error) => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.processing = true;
       }
     );

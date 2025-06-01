@@ -208,7 +208,7 @@ export class ModalGestionComponent implements OnInit {
       this.gestOrden.vigencia_poliza = this.ordenesEdit.vigencia_poliza.split(" ")[0];
     }
 
-    this.commonVarSrv.bandTrabTicket.next();
+    this.commonVarSrv.bandTrabTicket.next(null);
   }else{
     this.deshabilitar=false;
     this.gestOrden = {

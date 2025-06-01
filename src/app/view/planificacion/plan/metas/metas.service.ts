@@ -9,7 +9,7 @@ export class MetasService {
   constructor(private apiServices: ApiServices) { }
 
   getPeriodos(data = {}) {
-    return this.apiServices.apiCall('planificacion/get-periodos', 'POST', data).toPromise<any>();
+    return this.apiServices.apiCall('planificacion/get-periodos', 'POST', data) as any;
   }
 
   getProgramas()
@@ -52,7 +52,7 @@ export class MetasService {
     return this.apiServices.apiCall('planificacion/get-competencias', 'POST', {});
   }
 
-  getCatalogs(data) 
+  getCatalogs(data)
   {
     return this.apiServices.apiCall("proveedores/get-catalogo", "POST", data);
   }

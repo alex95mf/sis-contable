@@ -34,7 +34,7 @@ export class ReporteCxpComponent implements OnInit {
   validaDt: any = false;
   infoDt: any;
   proveedor: any = 0;
-  factura:any = 0; 
+  factura:any = 0;
   retencion:any;
   arrayProveedor: Array<any> = [];
   arrayFactura: Array<any> = [];
@@ -90,7 +90,7 @@ export class ReporteCxpComponent implements OnInit {
           $('#tablaReporCCxP').DataTable().button( '.buttons-csv' ).trigger();
         break;
         case "IMPRIMIR":
-          $('#tablaReporCCxP').DataTable().button( '.buttons-print' ).trigger();       
+          $('#tablaReporCCxP').DataTable().button( '.buttons-print' ).trigger();
         break;
         case "PDF":
           $('#tablaReporCCxP').DataTable().button( '.buttons-pdf' ).trigger();
@@ -101,7 +101,7 @@ export class ReporteCxpComponent implements OnInit {
         case "CERRAR ":
           this.closeModal();
         break;
-    }   
+    }
   }
 
   getPermisions() {
@@ -119,7 +119,7 @@ export class ReporteCxpComponent implements OnInit {
         this.vmButtons = [];
       } else {
         this.processing = true;
-        this.getCliente();    
+        this.getCliente();
       }
     }, error => {
       this.lcargando.ctlSpinner(false);
@@ -136,7 +136,7 @@ export class ReporteCxpComponent implements OnInit {
     })
   }
 
-  
+
 
   getTableReport() {
     this.valorData  == false ? this.retencion = undefined : this.retencion;
@@ -189,7 +189,7 @@ export class ReporteCxpComponent implements OnInit {
        this.infoDt = res['data'];
        this.getDataPrincipal();
        setTimeout(() => {
-         this.dtTrigger.next();
+         this.dtTrigger.next(null);
        }, 50);
      }, error => {
        this.lcargando.ctlSpinner(false);
@@ -197,7 +197,7 @@ export class ReporteCxpComponent implements OnInit {
        this.processing = true;
        setTimeout(() => {
          this.lcargando.ctlSpinner(false);
-         this.dtTrigger.next();
+         this.dtTrigger.next(null);
        }, 50);
        this.toastr.info(error.error.message);
      });
@@ -241,7 +241,7 @@ export class ReporteCxpComponent implements OnInit {
     })
   }
 
-  
+
   getDocumentos(){
     this.reportesSrv.getDocument().subscribe(res => {
       this.arrayDocument = res['data'];
@@ -271,7 +271,7 @@ export class ReporteCxpComponent implements OnInit {
 
 
   filterRetencionSi(data){
-    
+
     if(data == true){
       this.valorData = data;
       this.retencion = "SI";
@@ -298,8 +298,8 @@ export class ReporteCxpComponent implements OnInit {
     }
   }
 
-  
-  filterProveedor(data){ 
+
+  filterProveedor(data){
 
     if (this.proveedor != 0) {
       this.proveedor = data
@@ -308,8 +308,8 @@ export class ReporteCxpComponent implements OnInit {
         this.rerender();
     }
   }
-  
-  filterFactura(data){ 
+
+  filterFactura(data){
     if (this.factura != 0) {
       this.factura = data
       this.rerender();
@@ -386,9 +386,9 @@ export class ReporteCxpComponent implements OnInit {
       }
      }
     }
-  } 
-  
-  
+  }
+
+
   closeModal2() {
     ($("#modalReportProveedor") as any).modal("hide");
     this.processingtwo = false;

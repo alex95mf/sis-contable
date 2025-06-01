@@ -28,7 +28,7 @@ export class LiquidacionService {
     return this.api.apiCall('aranceles/get-exoneraciones-codigo', 'POST', data);
   }
 
-  
+
 
   getConceptoDetalle(data) {
     return this.api.apiCall('concepto/get-detalle', 'POST', data);
@@ -88,13 +88,13 @@ export class LiquidacionService {
   // editTasasVarias(id, data) {
   //   return this.api.apiCall(`rentas/tasas/tasas-varias/editarTasasVarias/${id}`,"POST",data);
   // }
- 
+
   // deleteTasasVarias(id) {
   //   return this.api.apiCall(`rentas/tasas/tasas-varias/deleteTasasVarias/${id}`,"POST",{});
   // }
 
   getUltimoRegistro(data: any = {}) {
-    return this.api.apiCall('liquidacion/get-ultima-liquidacion', 'POST', data).toPromise<any>()
+    return this.api.apiCall('liquidacion/get-ultima-liquidacion', 'POST', data) as any
   }
-  
+
 }

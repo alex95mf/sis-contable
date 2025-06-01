@@ -159,12 +159,12 @@ export class TransaccionesComponent implements OnInit {
       this.validaDt = true;
       this.dataDT = res['data'];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.toastr.info(error.error.message);
     });
@@ -463,15 +463,15 @@ export class TransaccionesComponent implements OnInit {
       const dialogRef = this.confirmationDialogService.openDialogMat(ReportesTransComponent, {
         width: 'auto', height: 'auto',
         data: { titulo: "Reporte Tranferencia Bancaria",}
-        
+
       } );
-   
+
       dialogRef.afterClosed().subscribe(resultado => {
         if(resultado!=false && resultado!=undefined){
         }else{
           this.closeModalTra();
         }
-      }); 
+      });
     }
   }
 }

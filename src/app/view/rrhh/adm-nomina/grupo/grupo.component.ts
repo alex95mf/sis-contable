@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import * as myVarGlobals from '../../../../global';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../../services/commonServices'
-import 'sweetalert2/src/sweetalert2.scss';  
+import 'sweetalert2/src/sweetalert2.scss';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import { ValidacionesFactory } from '../../../../config/custom/utils/ValidacionesFactory';
 const Swal = require('sweetalert2');
@@ -242,7 +242,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
       this.guardaT = res['data'];
       this.processing = true;
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.ngOnDestroy();
       }, 50);
     }, error => {

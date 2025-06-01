@@ -4,7 +4,7 @@ import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { SueldosComponent } from './sueldos.component';
 import { SueldosRoutingModule } from './sueldos-routing.module';
 import { SueldoNuevoComponent } from './sueldo-nuevo/sueldo-nuevo.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -17,8 +17,8 @@ import { NgxCurrencyModule } from 'ngx-currency';
     SueldosRoutingModule,
     AppCustomModule,
     NgxCurrencyModule
-    
-    
+
+
   ]
 })
 export class SueldosModule { }

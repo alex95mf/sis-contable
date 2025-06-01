@@ -120,7 +120,7 @@ export class ProgramaFormComponent implements OnInit {
   }
 
   closeModal() {
-    
+
     this.activeModal.dismiss();
   }
 
@@ -186,7 +186,7 @@ export class ProgramaFormComponent implements OnInit {
       (res)=>{
         console.log(res);
         this.lcargando.ctlSpinner(false);
-        this.commonSrv.modalProgramaConfig.next()
+        this.commonSrv.modalProgramaConfig.next(null)
         this.activeModal.dismiss();
       },
       (error)=>{
@@ -201,7 +201,7 @@ export class ProgramaFormComponent implements OnInit {
       (res)=>{
         console.log(res);
         this.lcargando.ctlSpinner(false);
-        this.commonSrv.modalProgramaConfig.next()
+        this.commonSrv.modalProgramaConfig.next(null)
         this.activeModal.dismiss();
       },
       (error)=>{

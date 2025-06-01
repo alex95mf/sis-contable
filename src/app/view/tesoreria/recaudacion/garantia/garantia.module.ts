@@ -7,7 +7,7 @@ import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ModalLiquidacionesComponent } from './modal-liquidaciones/modal-liquidaciones.component';
 import { ListRecDocumentosComponent } from './list-rec-documentos/list-rec-documentos.component';
 import { ModalInspeccionesComponent } from './modal-inspecciones/modal-inspecciones.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ListVafavorComponent } from './list-vafavor/list-vafavor.component';
 import { ListNotaCreditoComponent } from './list-nota-credito/list-nota-credito.component';
 import { ListCruceConvenioComponent } from './list-cruce-convenio/list-cruce-convenio.component';
@@ -28,7 +28,7 @@ import { ListAnticipoPrecobradoComponent } from './list-anticipo-precobrado/list
     CommonModule,
     AppCustomModule,
     GarantiaRoutingModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
   ]
 })
 export class GarantiaModule { }

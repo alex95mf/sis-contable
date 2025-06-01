@@ -103,7 +103,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   }
 
   conceptoExoneracion:boolean = true;
-  conceptoSta:boolean = true; 
+  conceptoSta:boolean = true;
   tieneExoneracion = ""
   tieneSta =""
 
@@ -252,7 +252,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
               }
               this.exoneraciones.push(exon);
             }
-            
+
           })
         }
 
@@ -319,7 +319,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       (res) => {
         console.log(res)
         this.exoneraciones = res;
-       
+
         this.calcExonerTotal()
         this.exoneraciones.forEach(e => {
           Object.assign(e, {fk_concepto_detalle: e['fk_concepto_det']})
@@ -327,11 +327,11 @@ export class GeneracionComponent implements OnInit, OnDestroy {
        // this.calculateExoneraciones();
       }
     );
-   
+
 
   }
 
-  
+
 
   ngOnInit(): void {
     this.vmButtons = [
@@ -397,7 +397,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
     this.liquidacion.fecha = moment(this.liquidacion.fecha).format('YYYY-MM-DD')
     setTimeout(() => {
-     
+
       this.validaPermisos();
     }, 0)
 
@@ -517,9 +517,9 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // Clean up chart when the component is removed
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
-    
+
     this.browserOnly(() => {
       if (this.chart) {
         this.chart.dispose();
@@ -665,14 +665,14 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   }
 
   nuevaLiquidacion() {
-    
+
     this.exoneraciones = []
     // this.conceptoCementerio = true
     // this.conceptoCentroMedico = true
     // this.conceptoComplejoAcacias = true
     this.conceptoExoneracion = true
     this.conceptoSta = true
-   
+
     // document.getElementById("button-add-detalle").setAttribute("disabled", "");
     Object.assign(this.liquidacion, {
       id: null,
@@ -765,7 +765,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       return
     }
 
-  
+
     // this.exoneraciones.forEach(e => {
     //   documento.detalles.push(e);
     // });
@@ -777,13 +777,13 @@ export class GeneracionComponent implements OnInit, OnDestroy {
           "mes": Number(moment(this.liquidacion.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
               this.liquidacion.estado = 'A'
 
               const documento = { ...this.liquidacion, detalles: [...this.liquidacion.detalles, ...this.exoneraciones] }
-              
+
               this.msgSpinner = 'Almacenando Liquidacion'
               this.lcargando.ctlSpinner(true)
               // console.log(data)
@@ -810,17 +810,17 @@ export class GeneracionComponent implements OnInit, OnDestroy {
                   console.log(err)
                 }
               )
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
           })
-   
+
   }
 
   guardarDeuda(id) {
@@ -857,13 +857,13 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     //   this.conceptoCementerio = false;
     //   this.conceptoCentroMedico = true
     //   this.conceptoComplejoAcacias = true
-      
+
     // }
     // else if(event.nombre == 'CENTRO MEDICO'){
     //   this.conceptoCementerio = true
     //   this.conceptoCentroMedico = false
     //   this.conceptoComplejoAcacias = true
-     
+
     // }
     // else if(event.nombre == 'COMPLEJO ACACIAS' || event.nombre == 'COMPLEJO LIBERTAD' ){
     //   this.conceptoCementerio = true
@@ -876,16 +876,16 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     // //   this.conceptoCentroMedico = true
     // //   this.conceptoComplejoLibertad = false
     // // }
-    // else { 
+    // else {
     //   this.conceptoCementerio = true
     //   this.conceptoCentroMedico = true
     //   this.conceptoComplejoAcacias = true
-      
+
     // }
     if(event.tiene_exoneracion == "S"){
       this.conceptoExoneracion = false
     }
-    else if (event.tiene_exoneracion == "N" || event.tiene_exoneracion == null 
+    else if (event.tiene_exoneracion == "N" || event.tiene_exoneracion == null
     || event.tiene_exoneracion == undefined){
       this.conceptoExoneracion = true
     }
@@ -897,7 +897,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       this.conceptoSta = false
     }
     else if (event.tiene_sta == "N"
-    || event.tiene_sta == null 
+    || event.tiene_sta == null
     || event.tiene_sta == undefined){
       this.conceptoSta = true
     }
@@ -910,13 +910,13 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     let totalDetalles = 0;
     this.liquidacion.detalles.forEach(d => {
       totalDetalles += +d.total;
-    }) 
+    })
     this.liquidacion.subtotal = totalDetalles;
 
     const subtotal_0: number = this.liquidacion.detalles.reduce((acc: number, curr: any) => acc + curr.total, 0)
     Object.assign(this.liquidacion, {subtotal_0})
     this.calcExonerTotal()
-    
+
   }
 
   calcular(){
@@ -932,7 +932,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       total = this.liquidacion.sta + this.liquidacion.subtotal - this.liquidacion.exoneraciones
       this.liquidacion.total = total
     }
-    else if (this.tieneExoneracion == "N" 
+    else if (this.tieneExoneracion == "N"
     || this.tieneExoneracion == null
     || this.tieneExoneracion == undefined)
     {
@@ -956,14 +956,14 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     //   total = this.liquidacion.subtotal + this.liquidacion.sta - this.liquidacion.exoneraciones
     //   this.liquidacion.total = total
     // }
-    
+
 
     // else{
     //   total = this.liquidacion.subtotal
     //   this.liquidacion.total = total
     // }
 
-    
+
   }
 
   eliminarDetalle(detalle, index) {
@@ -1082,7 +1082,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   calculateExoneraciones() {
 
     ///// CALCULOS AUTOMATICOS EXONERACIONES
-    
+
     this.calcExonerTotal();
     this.exoneracionesBackup = JSON.parse(JSON.stringify(this.exoneraciones));
     this.calcular();

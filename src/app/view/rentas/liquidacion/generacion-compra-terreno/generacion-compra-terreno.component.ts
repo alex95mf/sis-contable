@@ -41,7 +41,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
   exoneracionDisabled = true;
   verifyRestore = false;
   conceptos = [];
-  
+
 
   liquidacion = {
     id: null,
@@ -134,7 +134,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
           }
         ];
         this.propiedadActive = res.lote;
-        
+
         console.log( res.detalles)
         console.log(this.conceptos)
           res.detalles.forEach(e => {
@@ -145,7 +145,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
               }
             }
           });
-          
+
         // //console.log( res.detalles)
         if(res.detalles.concepto==null){
           res.detalles.forEach(e => {
@@ -170,7 +170,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
           this.vmButtons[2].habilitar = false;
           this.vmButtons[3].habilitar = false;
           this.lcargando.ctlSpinner(false);
-      
+
     });
     this.commonVarService.selectExonerLiqPURen.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
       (res) => {
@@ -217,7 +217,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -326,7 +326,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
   async validaLiquidacion() {
     let resp = await this.validaDataGlobal().then((respuesta) => {
       if(respuesta) {
-          this.createLiquidacion(); 
+          this.createLiquidacion();
       }
     });
 }
@@ -337,34 +337,34 @@ validaDataGlobal() {
 
     if(
       this.liquidacion.resolucion_numero == "" ||
-      this.liquidacion.resolucion_numero == undefined 
+      this.liquidacion.resolucion_numero == undefined
     ) {
       this.toastr.info("El campo Resolución Nro no puede ser vacío");
       flag = true;
     }
     else if (
       this.liquidacion.resolucion_fecha == "" ||
-      this.liquidacion.resolucion_fecha == undefined 
+      this.liquidacion.resolucion_fecha == undefined
     ){
       this.toastr.info("El campo Resolución Fecha no puede ser vacío");
       flag = true;
     }
     else if (
       this.contribuyenteActive.razon_social == 0 ||
-      this.contribuyenteActive.razon_social == undefined 
+      this.contribuyenteActive.razon_social == undefined
     ){
       this.toastr.info("El campo Contribuyente no puede ser vacío");
       flag = true;
     }
     else if (
       this.propiedadActive == 0 ||
-      this.propiedadActive == undefined 
+      this.propiedadActive == undefined
     ){
       this.toastr.info("El campo Propiedad no puede ser vacío");
       flag = true;
     } else if (
       this.liquidacion.resolucion_observacion == "" ||
-      this.liquidacion.resolucion_observacion == undefined 
+      this.liquidacion.resolucion_observacion == undefined
     ){
       this.toastr.info("El campo Resolución Observacion no puede ser vacío");
       flag = true;
@@ -389,8 +389,8 @@ validaDataGlobal() {
         flag = true;
       }
     }
-    
-    
+
+
     !flag ? resolve(true) : resolve(false);
   })
 }
@@ -488,7 +488,7 @@ validaDataGlobal() {
     /*this.mensajeSppiner = "Buscando categoría...";
     this.lcargando.ctlSpinner(true);*/
     this.apiService.getCatalogos(data).subscribe(
-     
+
       (res) => {
         this.tipoCompra = res["data"]['CT_TIPO_COMPRA'];
         this.lcargando.ctlSpinner(false);
@@ -505,7 +505,7 @@ validaDataGlobal() {
   }
 
   sumaMtsLinderos(){
-    let sumaMtsLinderos = ((this.linderos.mts_norte*1) + (this.linderos.mts_sur*1) + (this.linderos.mts_este*1) + (this.linderos.mts_oeste*1)); 
+    let sumaMtsLinderos = ((this.linderos.mts_norte*1) + (this.linderos.mts_sur*1) + (this.linderos.mts_este*1) + (this.linderos.mts_oeste*1));
     let calculoMts = sumaMtsLinderos*this.linderos.totalMts2;
     this.cantidadTotalMts2=sumaMtsLinderos;
     this.totalValor = calculoMts;
@@ -533,7 +533,7 @@ validaDataGlobal() {
         res['data'].forEach(e => {
           if(this.propiedadActive != 0){
             if(e.codigo_detalle == "CT1"){ //CT1//CTE
-              if(this.propiedadActive.area && this.propiedadActive.valor_metro_cuadrado && 
+              if(this.propiedadActive.area && this.propiedadActive.valor_metro_cuadrado &&
                 this.propiedadActive?.area != 0 && this.propiedadActive?.valor_metro_cuadrado != 0){
                 Object.assign(e, { valor: valorCompra , fk_concepto_detalle: e.id_concepto_detalle });
               }else{
@@ -549,7 +549,7 @@ validaDataGlobal() {
               if(this.propiedadActive.area != 0 && this.propiedadActive.area <= limiteArea ){
                 Object.assign(e, {valor: valorArea ?? 0 , fk_concepto_detalle: e.id_concepto_detalle});
               }else if(this.propiedadActive.area > limiteArea){
-                
+
                 Object.assign(e, {valor: excedente*valorExcedente+valorArea , fk_concepto_detalle: e.id_concepto_detalle});
               }else{
                 Object.assign(e, {valor: 0 , fk_concepto_detalle: e.id_concepto_detalle});
@@ -659,7 +659,7 @@ validaDataGlobal() {
     this.linderos.totalMts2 = this.propiedadActive.valor_metro_cuadrado;
   }
 
-  
+
 
   createLiquidacion() {
     if (this.permissions.guardar == "0") {
@@ -687,19 +687,19 @@ validaDataGlobal() {
             "mes": Number(moment(this.liquidacion.fecha).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-             
+
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
 
                 this.msgSpinner = 'Generando Liquidación...';
                 this.lcargando.ctlSpinner(true);
                 this.liquidacion.fk_lote = this.propiedadActive.id;
-      
+
                 const documento = {...this.liquidacion, detalles: [...this.exoneraciones]}
                 this.conceptos.forEach(e => {
                   if (e.valor > 0) documento.detalles.push(e)
                 })
-               
+
                 this.apiService.setLiquidaciones({liquidacion: documento, linderos: this.linderos}).subscribe(
                   (res) => {
                     Swal.fire({
@@ -718,7 +718,7 @@ validaDataGlobal() {
                     this.vmButtons[3].habilitar = false;
                     this.lcargando.ctlSpinner(false);
                     this.guardarDeuda(res['data'].id_liquidacion);
-      
+
                   },
                   (error) => {
                     this.lcargando.ctlSpinner(false);
@@ -732,12 +732,12 @@ validaDataGlobal() {
                     });
                   }
                 );
-                
+
               } else {
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
               }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
@@ -817,7 +817,7 @@ validaDataGlobal() {
     this.vmButtons[0].habilitar = false;
   }
 
- 
+
   expandListLiquidaciones() {
     if (this.permissions.consultar == "0") {
       this.toastr.warning("No tiene permisos de consultar Liquidaciones.", this.fTitle);
@@ -872,6 +872,6 @@ validaDataGlobal() {
     const modal = this.modalService.open(ModalArriendosComponent, { size:'xl', backdrop:'static' })
     modal.componentInstance.contribuyente = this.contribuyenteActive
   }
- 
+
 
 }

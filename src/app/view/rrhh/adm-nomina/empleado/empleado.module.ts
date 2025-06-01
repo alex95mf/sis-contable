@@ -11,7 +11,7 @@ import {TabViewModule} from 'primeng/tabview';
 import {ToastModule} from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { ModelFamiliarComponent } from './model-familiar/model-familiar.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ModalTipoArchivoComponent } from './modal-tipo-archivo/modal-tipo-archivo.component';
 import { ModalRetencionJudicialComponent } from './modal-retencion-judicial/modal-retencion-judicial.component';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -28,7 +28,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     TabViewModule,
     ToastModule,
     ButtonModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     CheckboxModule
   ],
 })

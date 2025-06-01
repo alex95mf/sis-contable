@@ -5,7 +5,7 @@ import { EstadoCuentaRoutingModule } from './estado-cuenta.routing';
 import { EstadoCuentaComponent } from './estado-cuenta.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     CommonModule,
     SharedModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     EstadoCuentaRoutingModule
   ]
 })

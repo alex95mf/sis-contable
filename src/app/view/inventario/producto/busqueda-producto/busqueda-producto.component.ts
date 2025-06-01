@@ -142,7 +142,7 @@ export class BusquedaProductoComponent implements OnInit {
         this.getPermisions();
       }, 10);
     }
-    
+
     getPermisions() {
       /* this.lcargando.ctlSpinner(true); */
       this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
@@ -168,7 +168,7 @@ export class BusquedaProductoComponent implements OnInit {
         this.toastr.info(error.error.message);
       })
     }
-    
+
     metodoGlobal(evento: any) {
       switch (evento.items.boton.texto) {
         case "LIMPIAR":
@@ -185,8 +185,8 @@ export class BusquedaProductoComponent implements OnInit {
           break;
       }
     }
-    
-    
+
+
     getTableReport() {
       let data = {
         id_producto: this.producto == 0 ? null : this.producto,
@@ -260,19 +260,19 @@ export class BusquedaProductoComponent implements OnInit {
       }
         this.lcargando.ctlSpinner(false);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
         this.validaDtUser = true;
         this.lcargando.ctlSpinner(false);
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
       });
     }
-    
+
     rerender(): void {
       this.validaDtUser = false;
       this.lcargando.ctlSpinner(true);
@@ -281,7 +281,7 @@ export class BusquedaProductoComponent implements OnInit {
         this.getTableReport();
       });
     }
-    
+
     informaciondtlimpiar() {
       this.producto = 0;
       this.generico = 0;
@@ -289,7 +289,7 @@ export class BusquedaProductoComponent implements OnInit {
       this.precio = 0;
       this.rerender();
     }
-    
+
     informacionProduct(dt) {
       this.commonVarSrv.sendAnexos.next(dt.id_producto);
       this.id_producto = dt.id_producto;
@@ -315,7 +315,7 @@ export class BusquedaProductoComponent implements OnInit {
       ($("#pills-contabilidad-tab") as any).tab("show");
       $('#modalSeachProduct').appendTo("body").modal('show');
     }
-    
+
     closeModal() {
       this.click = [];
       this.data = [];
@@ -323,35 +323,35 @@ export class BusquedaProductoComponent implements OnInit {
       ($("#pills-contabilidad-tab") as any).tab("show");
       ($("#modalSeachProduct") as any).modal("hide"); /* linea para cerrar el modal de boostrap */
     }
-    
+
     getCatalogos() {
       let data = {
         id: 2,
       };
       this.dataConsultarDocumento = data;
     }
-    
+
     getProductos() {
       this.reportesSrv.getProducts().subscribe((res) => {
         this.products = res["data"];
         this.getPrecio();
       });
     }
-    
+
     getPrecio() {
       this.reportesSrv.getPrecio().subscribe((res) => {
         this.dataPrecio = res["data"];
         this.getMarca();
       });
     }
-    
+
     getMarca() {
       this.reportesSrv.getMarcas().subscribe((res) => {
         this.marcas = res["data"];
       });
     }
-    
-    
+
+
     searchPrecio(event) {
       if (this.precio != 0) {
         this.precio = event;
@@ -375,7 +375,7 @@ export class BusquedaProductoComponent implements OnInit {
         this.rerender();
       }
     }
-    
+
     filterGenerico(event) {
       if (this.generico != 0) {
         this.generico = event;
@@ -384,8 +384,8 @@ export class BusquedaProductoComponent implements OnInit {
         this.rerender();
       }
     }
-    
-        
+
+
     filterProducto(data) {
       if (this.producto != 0) {
         this.producto = data;
@@ -403,7 +403,7 @@ export class BusquedaProductoComponent implements OnInit {
         this.rerender();
       }
     }
-    
+
     buttonsTwo() {
       this.vmButtonsT = [{
         orig: "btnRepCtasBacnT",
@@ -421,7 +421,7 @@ export class BusquedaProductoComponent implements OnInit {
         imprimir: false
       }, ];
     }
-    
+
     metodoGlobalT(evento: any) {
       switch (evento.items.boton.texto) {
         case "CERRAR":
@@ -429,8 +429,8 @@ export class BusquedaProductoComponent implements OnInit {
           break;
       }
     }
-    
-    
+
+
     formatNumber(params) {
       this.locality = 'en-EN';
       params = parseFloat(params).toLocaleString(this.locality, {

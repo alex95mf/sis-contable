@@ -92,7 +92,7 @@ export class EgresosBodegaService {
   }
 
   getDetalles(data: any = {}) {
-    return this.apiService.apiCall('productos/get-detalles-egreso', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('productos/get-detalles-egreso', 'POST', data) as any
   }
 
   putDetalles(id: number, data: any = {}) {

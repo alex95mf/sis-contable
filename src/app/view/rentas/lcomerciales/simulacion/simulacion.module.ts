@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SimulacionRoutingModule } from './simulacion.routing';
 import { SimulacionComponent } from './simulacion.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ExcelService } from 'src/app/services/excel.service';
 
 
@@ -15,7 +15,7 @@ import { ExcelService } from 'src/app/services/excel.service';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     SimulacionRoutingModule
   ],
   providers: [

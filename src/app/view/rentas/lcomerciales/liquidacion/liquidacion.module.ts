@@ -10,7 +10,7 @@ import { ModalOrdenInspeccionComponent } from './modal-orden-inspeccion/modal-or
 import { ModalValoresCobrarComponent } from './modal-valores-cobrar/modal-valores-cobrar.component';
 import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component';
 import { ModalBusquedaDocumentoComponent } from './modal-busqueda-documento/modal-busqueda-documento.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     LiquidacionRoutingModule
   ]
 })

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FacturasRoutingModule } from './facturas-routing.module';
 import { FacturasComponent } from './facturas.component';
 import { DiferedBuyProvComponent } from './difered-buy-prov/difered-buy-prov.component';
-import { ShowInvoicesComponent } from './show-invoices/show-invoices.component'; 
+import { ShowInvoicesComponent } from './show-invoices/show-invoices.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ModalFacturasComponent } from './modal-facturas/modal-facturas.component';
 import { BusquedaEgresosComponent } from './busqueda-egresos/busqueda-egresos.component';
@@ -14,7 +14,7 @@ import {TabViewModule} from 'primeng/tabview';
 import { CalendarModule } from 'primeng/calendar';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ModalBusquedaFacturaComponent } from './modal-busqueda-factura/modal-busqueda-factura.component';
  //import { NgSelect2Module } from 'ng-select2';
 

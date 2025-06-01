@@ -110,7 +110,7 @@ export class ModalGlobalTableComponent implements OnInit {
           // this.dataDT = res["data"];
           this.dataDTPersonal = res;
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
             this.commonVarSrvice.updPerm.next(false);
           }, 50);
         },
@@ -119,7 +119,7 @@ export class ModalGlobalTableComponent implements OnInit {
           this.dataDT = [];
           this.commonVarSrvice.updPerm.next(false);
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
           }, 50);
         }
       );
@@ -132,7 +132,7 @@ export class ModalGlobalTableComponent implements OnInit {
          // res.estado? res.estado:[];
           this.dataDTJornada = res;
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
             this.commonVarSrvice.updPerm.next(false);
           }, 50);
         },
@@ -141,7 +141,7 @@ export class ModalGlobalTableComponent implements OnInit {
           this.dataDT = [];
           this.commonVarSrvice.updPerm.next(false);
           setTimeout(() => {
-            this.dtTrigger.next();
+            this.dtTrigger.next(null);
           }, 50);
         }
       );

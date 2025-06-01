@@ -64,7 +64,7 @@ export class BusqProveedorComponent implements OnInit {
 
     this.dataSource = this.data.listado;
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }
   /**LISTADO */

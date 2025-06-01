@@ -6,7 +6,7 @@ import { AnticipoPrecobradoComponent } from './anticipo-precobrado.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ModalLiquidacionesComponent } from './modal-liquidaciones/modal-liquidaciones.component';
 import { ListRecDocumentosComponent } from './list-rec-documentos/list-rec-documentos.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { CheckboxModule } from 'primeng/checkbox';
 
 
@@ -20,7 +20,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     CommonModule,
     AppCustomModule,
     AnticipoPrecobradoRoutingModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     CheckboxModule
   ]
 })

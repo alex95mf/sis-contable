@@ -75,13 +75,13 @@ export class TablePremisosDocComponent implements OnInit {
       .subscribe(res => {
         this.lcargando.ctlSpinner(false); 
         if (res['data']['body'].length > 0) {
-          this.commonServices.activateSaveBtn.next();
+          this.commonServices.activateSaveBtn.next(null);
         }
         this.validaDt = true;
         this.dataHeader = res['data']['header'];
         this.dataBody = res['data']['body'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
 
       }, error => {
@@ -90,7 +90,7 @@ export class TablePremisosDocComponent implements OnInit {
         this.dataBody = [];
         this.lcargando.ctlSpinner(false); 
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
         this.toastr.info(error.error.message);
       });

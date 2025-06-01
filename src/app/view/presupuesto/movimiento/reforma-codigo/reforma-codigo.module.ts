@@ -8,7 +8,7 @@ import { ModalCuentPreComponent } from './modal-cuent-pre/modal-cuent-pre.compon
 import { ModalBusquedaReformaComponent } from './modal-busqueda-reforma/modal-busqueda-reforma.component';
 import { ModalBusquedaPartidaComponent } from './modal-busqueda-partida/modal-busqueda-partida.component';
 import { ModalBusquedaReformaDocComponent } from './modal-busqueda-reforma-doc/modal-busqueda-reforma-doc.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     ReformaCodigoRoutingModule,
   ]
 })

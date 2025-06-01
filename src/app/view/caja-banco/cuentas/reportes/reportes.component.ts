@@ -143,7 +143,7 @@ export class ReportesComponent implements OnInit {
         this.fromDatePicker = undefined;
         this.toDatePicker = undefined;
         this.Cuentas();
-        
+
       }
     });
   }
@@ -227,7 +227,7 @@ export class ReportesComponent implements OnInit {
       this.guardarolT = res["data"];
       setTimeout(() => {
         this.lcargando.ctlSpinner(false);
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
 
@@ -236,7 +236,7 @@ export class ReportesComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
       setTimeout(() => {
         this.lcargando.ctlSpinner(false);
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);

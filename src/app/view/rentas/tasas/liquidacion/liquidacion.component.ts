@@ -287,7 +287,7 @@ export class LiquidacionComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 

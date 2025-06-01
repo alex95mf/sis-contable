@@ -22,7 +22,7 @@ import { AnexosListComponentDis } from './prestamo/anexos-list/anexos-list-dis.c
 //import { ConstatacionFisicaBCAComponent } from './constatacion-fisica-bca/constatacion-fisica-bca.component';
 import { AnexosListComponent } from './mantenimiento/anexos-list/anexos-list.component';
 import { AnexoBodegaComponent } from './ingreso-bodega/anexo-bodega/anexo-bodega.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 //import { DetallesProductoComponent } from './traslado/detalles-producto/detalles-producto.component';
 

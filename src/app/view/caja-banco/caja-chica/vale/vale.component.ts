@@ -195,7 +195,7 @@ export class ValeComponent implements OnInit {
     this.dataDT = [];
     setTimeout(() => {
       this.lcargando.ctlSpinner(false);
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }
 
@@ -247,7 +247,7 @@ export class ValeComponent implements OnInit {
         })
       }
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
       this.validaDt = true;
@@ -255,7 +255,7 @@ export class ValeComponent implements OnInit {
       this.dataDT = [];
 
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
         this.lcargando.ctlSpinner(false);
       }, 50);
       this.toastr.info(error.error.message);

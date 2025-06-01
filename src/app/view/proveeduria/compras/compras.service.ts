@@ -25,7 +25,7 @@ export class ComprasService {
   getImpuestosIva() {
     return this.apiService.apiCall('ordenes/get-impuestos-iva', 'POST', {});
   }
-  
+
 
   getUsuario() {
     return this.apiService.apiCall('buy/get-usuario', 'POST', {});
@@ -108,8 +108,8 @@ export class ComprasService {
   MultasProveedores(id_proveedor :number) {
     return this.apiService.apiCall(`proveeduria/multas-por-proveedor/${id_proveedor}`, 'GET',  {});
   }
-  
- 
+
+
   CondicionesProveedores(id_solicitud :number) {
     return this.apiService.apiCall(`proveeduria/condiciones_proveedores/${id_solicitud}`, 'GET',  {});
   }
@@ -119,7 +119,7 @@ export class ComprasService {
   }
 
   getUltimaCompra(data: any = {}) {
-    return this.apiService.apiCall('proveeduria/get-ultima-compra', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('proveeduria/get-ultima-compra', 'POST', data) as any
   }
 
   cargarIngresoBodega(id_solicitud :number) {
@@ -127,11 +127,11 @@ export class ComprasService {
   }
 
   getIngreso(data: any = {}) {
-    return this.apiService.apiCall('proveeduria/get-ingreso', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('proveeduria/get-ingreso', 'POST', data) as any
   }
 
   getIngresoDetalles(data: any = {}) {
-    return this.apiService.apiCall(`proveeduria/get-ingreso-detalles`, 'POST', data).toPromise<any>()
+    return this.apiService.apiCall(`proveeduria/get-ingreso-detalles`, 'POST', data) as any
   }
 
   obtenerCuentasCompras(data) {
@@ -159,7 +159,7 @@ export class ComprasService {
       )
     })
   }
-  
+
   getEmpresa(data: any = {}) {
     return new Promise<any>((resolve, reject) => {
       this.apiService.apiCall('seguridad/get-empresa', 'POST', data).subscribe(
@@ -179,23 +179,23 @@ export class ComprasService {
   GeneraRetencionesCompraProv(data) {
     return this.apiService.apiCall('retenciones-sin-autorizar', 'POST',  data);
   }
-  
+
   BuscarRetencionesCompraProv(data) {
     return this.apiService.apiCall('buscar-retencion-compras', 'POST',  data);
   }
 
   getCuentas(data: any = {}) {
-    return this.apiService.apiCall('plandecuentas/get-cuentas-cp', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('plandecuentas/get-cuentas-cp', 'POST', data) as any
   }
   getCuentasRetFte(data: any = {}) {
-    return this.apiService.apiCall('plandecuentas/get-cuentas-retfte', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('plandecuentas/get-cuentas-retfte', 'POST', data) as any
   }
   getCuentasRetIva(data: any = {}) {
-    return this.apiService.apiCall('plandecuentas/get-cuentas-retiva', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('plandecuentas/get-cuentas-retiva', 'POST', data) as any
   }
 
   anularCompra(data: any = {}) {
-    return this.apiService.apiCall('proveeduria/anular-compra', 'POST', data).toPromise<any>()
+    return this.apiService.apiCall('proveeduria/anular-compra', 'POST', data) as any
   }
 
   getCuentasConReglas(data: any){

@@ -225,7 +225,7 @@ export class CierreComponent implements OnInit {
       element['validate_sum'] = false;
     });
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
   }
 
@@ -652,7 +652,7 @@ export class CierreComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.validaDt = true;
     setTimeout(() => {
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     }, 50);
 
   }

@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultasService } from './multas.service';
 import { ModalProveedoresComponent } from 'src/app/config/custom/modal-proveedores/modal-proveedores.component';
 //import { ModalSolicitudComponent } from 'src/app/view/tesoreria/pagos/orden/modal-solicitud/modal-solicitud.component';
-import { ModalSolicitudComponent } from './modal-solicitud/modal-solicitud.component'; 
+import { ModalSolicitudComponent } from './modal-solicitud/modal-solicitud.component';
 
 import { ModalCuentPreComponent } from 'src/app/view/tesoreria/recaudacion/configuracion-contable/modal-cuent-pre/modal-cuent-pre.component';
 import { ListBusquedaComponent } from './list-busqueda/list-busqueda.component';
@@ -71,14 +71,14 @@ export class MultasComponent implements OnInit {
 
   lastRecord: number|null = null
   totalRecords: number = 0
-  constructor(  
+  constructor(
     private commonService: CommonService,
     private toastr: ToastrService,
     private commonVrs: CommonVarService,
     private modalService: NgbModal,
     private apiSrv: MultasService,
     private cierremesService: CierreMesService) {
-      
+
       this.commonVrs.selectProveedorCustom.asObservable().subscribe(
         (res) => {
           //console.log(new Date(this.documento.vigencia_poliza)).format('YYYY-MM-DD') < this.documento.fecha)(res);
@@ -105,7 +105,7 @@ export class MultasComponent implements OnInit {
           this.documento.vigencia_poliza = res['poliza']['fecha_finalizacion']
           this.documento.nro_poliza = res['poliza']['num_poliza']
           this.documento.idp = res['idp']
-         
+
         }
       )
       this.commonVrs.seleciconCategoriaCuentaPro.asObservable().subscribe(
@@ -114,8 +114,8 @@ export class MultasComponent implements OnInit {
           this.documento.fk_cuenta_contable = res['data']['id']
           this.codigo_cuenta = res['data']['codigo']
           this.nombre_cuenta = res['data']['nombre']
-            // this.grupo.id_cuenta_contable = res['data']['id']; 
-            // this.grupo.codigo_cuenta_contable = res['data']['codigo'];        
+            // this.grupo.id_cuenta_contable = res['data']['id'];
+            // this.grupo.codigo_cuenta_contable = res['data']['codigo'];
             // this.grupo.descripcion_cuenta = res['data']['nombre'];
             // this.addConcepto = false;
             // this.titulosDisabled = false;
@@ -142,7 +142,7 @@ export class MultasComponent implements OnInit {
           this.documento.total = res['total']
           this.documento.tipo_proceso = res.solicitud?.tipo_proceso
 
-          this.vmButtons[2].habilitar = false; 
+          this.vmButtons[2].habilitar = false;
           this.vmButtons[3].habilitar = false;
           this.multasDisabled = true
         }
@@ -151,7 +151,7 @@ export class MultasComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
-    
+
     this.vmButtons = [
       {
         orig: "btnsRenLiqCobro",
@@ -210,12 +210,12 @@ export class MultasComponent implements OnInit {
         break;
       case "ANULAR":
         this.anular()
-        
+
         break;
       case " LIMPIAR":
         this.limpiar()
         break;
-       
+
       default:
         break;
     }
@@ -228,7 +228,7 @@ export class MultasComponent implements OnInit {
     }else{
       this.habilitarProceso= true
     }
-  
+
   }
 
 
@@ -241,7 +241,7 @@ export class MultasComponent implements OnInit {
       modalInvoice.componentInstance.module_comp = myVarGlobals.fRenPredUrbanoEmision;
       modalInvoice.componentInstance.verifyRestore = this.verifyRestore;
       //modalInvoice.componentInstance.validacion = 8;
-    
+
   }
 
   modalSolicitud(){
@@ -267,11 +267,11 @@ export class MultasComponent implements OnInit {
 
     modal.componentInstance.validacionModal = true;
     modal.componentInstance.validar = true
-    
+
   }
 
   saveMulta(){
-   
+
    Swal.fire({
      icon: "warning",
      title: "¡Atención!",
@@ -291,10 +291,10 @@ export class MultasComponent implements OnInit {
         "mes": Number(moment(this.documento.fecha).format('MM')),
       }
         this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-        
+
         /* Validamos si el periodo se encuentra aperturado */
         if (res["data"][0].estado !== 'C') {
-    
+
           this.msgSpinner = 'Guardando...';
           this.lcargando.ctlSpinner(true);
           let data2 = {
@@ -313,7 +313,7 @@ export class MultasComponent implements OnInit {
                 confirmButtonColor: '#20A8D8',
               });
               this.documento = res['data']
-            
+
               this.lcargando.ctlSpinner(false);
               this.vmButtons[2].habilitar = true;
               this.vmButtons[0].habilitar = true;
@@ -331,12 +331,12 @@ export class MultasComponent implements OnInit {
              });
            }
          );
-    
+
         } else {
           this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
           this.lcargando.ctlSpinner(false);
         }
-    
+
         }, error => {
             this.lcargando.ctlSpinner(false);
             this.toastr.info(error.error.mesagge);
@@ -406,7 +406,7 @@ anular(){
         "mes": Number(moment(this.documento.fecha).format('MM')),
       }
         this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-        
+
         /* Validamos si el periodo se encuentra aperturado */
         if (res["data"][0].estado !== 'C') {
           this.msgSpinner = 'Anulando Multa...';
@@ -445,32 +445,32 @@ anular(){
                     confirmButtonColor: '#20A8D8'
             });
               }
-             
+
             },
             (error)=>{
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.message);
             }
           )
-          
-    
+
+
         } else {
           this.toastr.info("No se puede anular porque el periodo contable se encuentra cerrado, por favor verificar");
           this.lcargando.ctlSpinner(false);
         }
-    
+
         }, error => {
             this.lcargando.ctlSpinner(false);
             this.toastr.info(error.error.mesagge);
         })
-    
+
     }else {
       this.lcargando.ctlSpinner(false);
     }
   })
 
-  
-  
+
+
 }
 
 async getLatest() {
@@ -507,7 +507,7 @@ async handleEnter({key}) {
     this.lcargando.ctlSpinner(true)
     this.msgSpinner = 'Cargando Registro'
     try {
-      const response = await this.apiSrv.getMultas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}).toPromise<any>()
+      const response = await this.apiSrv.getMultas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}) as any
       console.log(response)
       if (response.data.data.length > 0) {
         this.totalRecords = response.data.total

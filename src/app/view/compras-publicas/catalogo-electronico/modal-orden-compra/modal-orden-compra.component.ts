@@ -42,7 +42,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
   };
   adminActive: any = {
     nombre:"",
-    
+
   };
   adjudicadoChecked: boolean = true;
   ordenCompra: any = {
@@ -69,7 +69,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
     { valor: 'I', label: 'INACTIVO' },
   ]
   onDestroy$ = new Subject<void>();
-  
+
 
   @Input() item: any;
   @Input() isNew: any;
@@ -98,11 +98,11 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
       }
     );
 
-    
-    
+
+
    }
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -163,7 +163,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
       }
 
     ]; */
-    
+
     }else{
       console.log(this.item)
       console.log('nuevo')
@@ -179,9 +179,9 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
       // if(this.item['tipo_proceso']=='CAT'){
       //   this.detalles.proceso = 'CATALOGO ELECTRÓNICO'
       // }
-      
 
-     
+
+
     }, 50); */
     //getOrdenesCompraCatElec
     // console.log('Item '+this.item)
@@ -189,7 +189,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     // this.fecha_publicacion= moment(this.firstday).format('YYYY-MM-DD');
     // this.fecha_aceptacion= moment(this.today).format('YYYY-MM-DD');
@@ -197,7 +197,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
     // this.vmButtons[0].showimg=true
     //this.vmButtons[1].showimg=true
 
-    
+
   }
 
   metodoGlobal(event: any) {
@@ -217,7 +217,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fRenPredUrbanoEmision,
       id_rol: this.dataUser.id_rol,
@@ -276,12 +276,12 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
       }
       console.log(datos)
       this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
         if (res["data"][0].estado !== 'C') {
           this.msgSpinner = "Guardando datos...";
           this.lcargando.ctlSpinner(true);
-    
+
           let data = {
             catelec: {
               id_solicitud:this.item.id_solicitud ?? this.item.fk_solicitud
@@ -299,7 +299,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
               //id_usuario: this.dataUser.user_token_id
             }
           }
-    
+
           this.service.setCatElecOrdenes(data).subscribe(
             (res) => {
                // console.log(res);
@@ -339,21 +339,21 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
               this.toastr.info(error.error?.message);
             }
           )
-          
+
         } else {
           this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
           this.lcargando.ctlSpinner(false);
         }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
       })
-     
+
     }
   }
 
- 
+
 
   expandListProveedores() {
     // if (this.permissions.consultar == "0") {
@@ -367,7 +367,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
       modalInvoice.componentInstance.module_comp = myVarGlobals.fRenPredUrbanoEmision;
       modalInvoice.componentInstance.permissions = this.permissions;
     }
-    
+
     expandListAdminCompra() {
     // if (this.permissions.consultar == "0") {
     //   this.toastr.warning("No tiene permisos consultar Proveedores.", this.fTitle);
@@ -379,12 +379,12 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
       });
       modalInvoice.componentInstance.module_comp = myVarGlobals.fRenPredUrbanoEmision;
       modalInvoice.componentInstance.permissions = this.permissions;
- 
+
     }
   //}
   closeModal() {
     //this.commonVrs.CpCatElecOrden.next(this.needRefresh);
-    this.commonVrs.CpCatElecOrden.next();
+    this.commonVrs.CpCatElecOrden.next(null);
     this.activeModal.dismiss();
   }
 

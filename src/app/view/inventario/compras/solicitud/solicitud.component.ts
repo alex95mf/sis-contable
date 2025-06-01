@@ -93,7 +93,7 @@ export class SolicitudComponent implements OnInit {
   constructor(private toastr: ToastrService, private router: Router, private commonServices: CommonService,
     private requestService: SolicitudService, private seguridadServices: SeguridadService, private modalService: NgbModal,
     private socket: Socket, private commonVarSrvice: CommonVarService) {
-  
+
     this.commonServices.resdetalleSolicitud.asObservable().subscribe(res => {
       this.solicitud.detalle_delete = res.detalle_delete;
       this.solicitud.detalle_modify = res.detalle_modify;
@@ -180,13 +180,13 @@ export class SolicitudComponent implements OnInit {
     this.commonServices.actionDataOb.asObservable().subscribe(res => {
       let data =  (res == undefined)  ? null : res ;
       this.solicitud.observaciones = data;
-      
+
   })
   this.commonServices.enviaDt.asObservable().subscribe(res => {
-    this.dataValor = res;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-   
+    this.dataValor = res;
+
 })
-  
+
   }
 
   ngOnInit(): void {
@@ -288,7 +288,7 @@ export class SolicitudComponent implements OnInit {
     this.permisoCrear = this.permisoSolicitud[0]["crear"];
     this.permisoRevisar = this.permisoSolicitud[0]["revisar"];
     this.permisoProcesar = this.permisoSolicitud[0]["procesar"];
-    this.permisoAprobar = this.permisoSolicitud[0]["aprobar"];  
+    this.permisoAprobar = this.permisoSolicitud[0]["aprobar"];
     this.permisoCrear == 1  ? this.EstadoCreado = '- Crear' : this.EstadoCreado = "" ;
     this.permisoRevisar == 1  ? this.EstadoRevisado = '- Revisar' : this.EstadoRevisado = "" ;
     this.permisoProcesar == 1  ? this.EstadoProcesado = ' - Procesar' : this.EstadoProcesado = "" ;
@@ -344,12 +344,12 @@ export class SolicitudComponent implements OnInit {
 
       let resp = await this.validacionSolicitud().then(respuesta => {
         if (respuesta) {
-          // this.commonServices.detalleSolicitud.next();
+          // this.commonServices.detalleSolicitud.next(null);
           this.permisoSolicitud = this.dataUser.permisos_doc.filter(e => e.fk_documento == 4);
           this.filtros = this.permisoSolicitud[0]['filtros'].split(',');
           this.filter = this.filtros[0];
           if (this.commonServices.filterUser(this.filter, 4)) {
-            this.commonServices.detalleSolicitud.next();
+            this.commonServices.detalleSolicitud.next(null);
             this.confirmSave("Seguro desea guardar el solicitud?", "SET_SOLICITUD");
           } else {
             this.CancelForm();
@@ -436,8 +436,8 @@ export class SolicitudComponent implements OnInit {
       this.vmButtons[3].habilitar = false;
     } else {
       if (this.commonServices.filterUser(this.filtro_doc, 4)) {
-        this.commonServices.detalleSolicitud.next();
-        this.commonServices.anexosSolicitud.next();
+        this.commonServices.detalleSolicitud.next(null);
+        this.commonServices.anexosSolicitud.next(null);
         this.confirmSave('Seguro desea actualizar la solicitud' + ' ' + this.numero_solicitud + ' ' + '?', "MOD_SOLICITUD");
       } else {
         this.toastr.info("Usuario no tiene permiso para Modificar una solicitud orden de compra");

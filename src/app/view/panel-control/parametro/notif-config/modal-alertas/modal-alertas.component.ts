@@ -57,7 +57,7 @@ export class ModalAlertasComponent implements OnInit, OnDestroy {
     )
   }
   ngOnDestroy(): void {
-    this.onDestory.next()
+    this.onDestory.next(null)
     this.onDestory.complete()
   }
 
@@ -90,7 +90,7 @@ export class ModalAlertasComponent implements OnInit, OnDestroy {
         this.activeModal.close()
         Swal.fire('Configuracion de Alerta actualizado', '', 'success')
         break;
-    
+
       default:
         break;
     }
@@ -120,7 +120,7 @@ export class ModalAlertasComponent implements OnInit, OnDestroy {
     }
   }
 
-  
+
 
   handleSelectModulo({id_modulo, nombre}) {
     Object.assign(this.registro, {fk_modulo: id_modulo, modulo: nombre, fk_tipo_alerta: null, tipo_alerta: null})

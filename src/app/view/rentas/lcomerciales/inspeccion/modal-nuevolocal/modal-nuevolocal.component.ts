@@ -117,7 +117,7 @@ export class ModalNuevolocalComponent implements OnInit {
         Object.assign(this.local, obj)
       }
     )
-    
+
     this.apiService.contribuyenteSelected$.subscribe(
       (res: any) => {
         this.local.fk_contribuyente = res
@@ -182,7 +182,7 @@ export class ModalNuevolocalComponent implements OnInit {
       case "LIMPIAR":
         this.limpiarForm();
         break;
-  
+
         case "REGRESAR":
         this.activeModal.close()
         break;
@@ -191,11 +191,11 @@ export class ModalNuevolocalComponent implements OnInit {
         break;
     }
   }
-  
+
   async cargaCatalogos() {
     this.msgSpinner = 'Cargando Catalogos'
     this.lcargando.ctlSpinner(true)
-    
+
     try {
       let catalogos: any = await this.apiService.getCatalogos({ params: "'REN_TIPO_NEG', 'CAT_ZONA','CAT_SECTOR', 'REN_MERCADO','REN_GRUPO_NEG','REN_ESTADO_NEG','REN_LOCAL_TIPO_NEGOCIO','REN_LOCAL_TURISTICO_CATEGORIA','REN_LOCAL_TURISTICO_CATEGORIA_2'" })
       // Zona
@@ -480,7 +480,7 @@ export class ModalNuevolocalComponent implements OnInit {
           // console.log(res.data)
 
           this.lcargando.ctlSpinner(false)
-          this.commonVarService.setNuevoLocal.next()
+          this.commonVarService.setNuevoLocal.next(null)
 
           Swal.fire({
             icon: 'success',
@@ -498,10 +498,10 @@ export class ModalNuevolocalComponent implements OnInit {
   }
 
   buscarContrato() {
-    const modal = this.modalService.open(ModalBusqContratoComponent, { 
-      size: 'xl', 
-      backdrop: 'static', 
-      windowClass: 'viewer-content-general' 
+    const modal = this.modalService.open(ModalBusqContratoComponent, {
+      size: 'xl',
+      backdrop: 'static',
+      windowClass: 'viewer-content-general'
     })
     modal.componentInstance.contribuyente = this.local.fk_contribuyente
   }
@@ -513,10 +513,10 @@ export class ModalNuevolocalComponent implements OnInit {
   }
 
   expandContribuyente() {
-    const modal = this.modalService.open(ModalContribuyentesComponent, { 
-      size: 'xl', 
-      backdrop: 'static', 
-      windowClass: "viewer-content-general", 
+    const modal = this.modalService.open(ModalContribuyentesComponent, {
+      size: 'xl',
+      backdrop: 'static',
+      windowClass: "viewer-content-general",
     })
   }
 

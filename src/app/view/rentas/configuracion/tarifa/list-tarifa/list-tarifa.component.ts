@@ -96,7 +96,7 @@ export class ListTarifaComponent implements OnInit {
           this.lcargando.ctlSpinner(false)
         })
         setTimeout(() => {
-          this.dtTrigger.next()
+          this.dtTrigger.next(null)
         }, 50)
 
       },

@@ -93,7 +93,7 @@ export class ListPuestosComponent implements OnInit {
         this.lcargando.ctlSpinner(false)
 
         setTimeout(() => {
-          this.dtTrigger.next()
+          this.dtTrigger.next(null)
         }, 50)
       },
       err => {
@@ -155,7 +155,7 @@ export class ListPuestosComponent implements OnInit {
       // Destroy the table first
       dtInstance.destroy();
       // Call the dtTrigger to rerender again
-      this.dtTrigger.next();
+      this.dtTrigger.next(null);
     });
   }
 

@@ -24,7 +24,7 @@ standalone: false,
 })
 export class ReportesGraficosComponent implements OnInit {
 
-  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
+  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = "Reportes Gráficos de Reacaudación ";
   msgSpinner: string;
   vmButtons: any[] = [];
@@ -59,22 +59,22 @@ export class ReportesGraficosComponent implements OnInit {
     private modalService: NgbModal,
     private elementRef: ElementRef
   ) {
- 
+
    }
 
   ngOnInit(): void {
     this.vmButtons = [
-     
-    
-      // { 
-      //   orig: "btnsConsultaTitulos", 
-      //   paramAccion: "", 
-      //   boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, 
-      //   permiso: true, 
-      //   showtxt: true, 
-      //   showimg: true, 
-      //   showbadge: false, 
-      //   clase: "btn btn-success boton btn-sm", 
+
+
+      // {
+      //   orig: "btnsConsultaTitulos",
+      //   paramAccion: "",
+      //   boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" },
+      //   permiso: true,
+      //   showtxt: true,
+      //   showimg: true,
+      //   showbadge: false,
+      //   clase: "btn btn-success boton btn-sm",
       //   habilitar: false
       // },
     ];
@@ -105,21 +105,21 @@ export class ReportesGraficosComponent implements OnInit {
         break;
     }
   }
- 
+
   getDataAnios(){
 
     let dat = {
       date_desde: Number(this.desde.getFullYear()),
       date_hasta: Number(this.hasta.getFullYear()),
-    
+
     }
 
     // let data = {
     //   periodo: Number(this.periodo.getFullYear()),
     //   mes: Number(this.mes_actual)
     // }
-  
-    
+
+
     console.log(dat);
     this.apiService.getDataRecAnios(dat).subscribe(
       (res)=>{
@@ -152,7 +152,7 @@ export class ReportesGraficosComponent implements OnInit {
 
     let dat = {
       date: Number(this.periodo.getFullYear()),
-    
+
     }
 
     this.apiService.getDataRecMeses(dat).subscribe(
@@ -163,12 +163,12 @@ export class ReportesGraficosComponent implements OnInit {
           this.chartLine2.destroy()
           console.log('ejecuta1');
         }
-        
+
         this.recaudacionMes = undefined
         this.recaudacionMes = res['data']['recaudacion']['grafico1'];
         let {meses: recaMes, valores: recaVal} = this.recaudacionMes;
         let tipo = 'Meses';
-   
+
         setTimeout(() => {
           this.chartLine2 = this.chartBar("chartLine2", "bar", recaMes, recaVal,tipo);
           console.log(this.chartLine2);
@@ -191,9 +191,9 @@ export class ReportesGraficosComponent implements OnInit {
   }
 
   chart(name:string, tipo:string, label: string[], data: number[]){
-    
+
     return  new Chart(name, {
-      type: tipo,
+      type: tipo as any,
       data: {
         labels: label,
         datasets: [{
@@ -260,9 +260,9 @@ export class ReportesGraficosComponent implements OnInit {
           //   '#7BF70E',//verde
           //   '#F9CA6B',//naranja claro
           //   '#5973D1',//azul claro
-           
+
           // ],
-          
+
           // borderColor: [
           //   '#0F2FD0',//azul
           //   '#D00F19',//rojo
@@ -280,7 +280,7 @@ export class ReportesGraficosComponent implements OnInit {
           //   '#7BF70E',//verde
           //   '#F9CA6B',//naranja claro
           //   '#5973D1',//azul claro
-          
+
           // ],
           borderWidth: 1
         }]
@@ -293,17 +293,20 @@ export class ReportesGraficosComponent implements OnInit {
         //     }
         //   }
         // },
-         
+
         legend: {
           display: false
         },
-        
-        
+
+
         scales: {
-          xAxes:[{
+          x:{
+            beginAtZero: true,
             ticks:{
-              beginAtZero: true,
-              fontSize: 10,
+              font: {
+                size: 10,
+                style: 'bold'
+              },
               padding: 0,
               fontColor: '#505050',
               fontStyle: 'bold',
@@ -315,28 +318,31 @@ export class ReportesGraficosComponent implements OnInit {
                   return '$' + value;
                 }
               }
-              
+
             },
             scaleLabel: {
               display: true,
               labelString: 'Monto',
-              fontSize: 10,
-              fontStyle: 'bold',
+              font: {
+                size: 10,
+                style: 'bold'
+              },
               fontColor: '#000000',
             }
-            
+
           },
-          
-        ],
-          yAxes: [{
+          y: {
+            beginAtZero: true,
             ticks: {
-              beginAtZero: true,
-              fontSize: 11,
+             font: {
+              size: 11,
+              style: 'bold'
+            },
               padding: 0,
               //fontColor: '#000',
               fontStyle: 'bold',
               fontColor: '#000000',
-            
+
             },
             scaleLabel: {
               display: true,
@@ -345,24 +351,24 @@ export class ReportesGraficosComponent implements OnInit {
               fontStyle: 'bold',
               fontColor: '#000000',
             }
-            
-          }]
+
+          }
         },
-        
-        
+
+
       }
     });
   }
   chartLine(name:string, tipo:string, label: string[], data: number[]){
-    
+
     return  new Chart(name, {
-      type: tipo,
+      type: tipo as any,
       data: {
         labels: label,
         datasets: [{
           label: '# Mensual',
           fill: false,
-          lineTension: 0.1,
+          tension: 0.1,
           backgroundColor: "rgba(75,192,192,0.4)",
           borderColor: "rgba(75,192,192,1)",
           borderCapStyle: 'butt',
@@ -379,7 +385,7 @@ export class ReportesGraficosComponent implements OnInit {
           pointRadius: 1,
           pointHitRadius: 10,
           data: data,
-      
+
           borderWidth: 1
         }]
       },
@@ -391,22 +397,25 @@ export class ReportesGraficosComponent implements OnInit {
         //     }
         //   }
         // },
-         
+
         legend: {
           display: false
         },
-        
-        
+
+
         scales: {
-          xAxes:[{
+          x:{
+            beginAtZero: true,
             ticks:{
-              beginAtZero: true,
-              fontSize: 10,
+             font: {
+                size: 10,
+                style: 'bold'
+              },
               padding: 0,
               fontColor: '#000000',
               fontStyle: 'bold',
               minRotation: 45
-              
+
             },
             scaleLabel: {
               display: true,
@@ -415,12 +424,15 @@ export class ReportesGraficosComponent implements OnInit {
               fontStyle: 'bold',
               fontColor: '#000000',
             }
-            
-          }],
-          yAxes: [{
+
+          },
+          y: {
+            beginAtZero: true,
             ticks: {
-              beginAtZero: true,
-              fontSize: 10,
+             font: {
+                size: 10,
+                style: 'bold'
+              },
               padding: 0,
               //fontColor: '#000',
               fontStyle: 'bold',
@@ -439,8 +451,8 @@ export class ReportesGraficosComponent implements OnInit {
               fontStyle: 'bold',
               fontColor: '#000000',
             }
-            
-          }]
+
+          }
         }
       }
     });
@@ -456,9 +468,9 @@ export class ReportesGraficosComponent implements OnInit {
     if(name == 'chartLine2'){
       htmlRef = this.elementRef.nativeElement.querySelector(`#chartLine2`);
     }
- 
+
      return  new Chart(htmlRef, {
-      type: tipo,
+      type: tipo as any,
       data: {
         labels: label,
         datasets: [{
@@ -525,9 +537,9 @@ export class ReportesGraficosComponent implements OnInit {
           //   '#7BF70E',//verde
           //   '#F9CA6B',//naranja claro
           //   '#5973D1',//azul claro
-          
+
           // ],
-          
+
           // borderColor: [
           //   '#0F2FD0',//azul
           //   '#D00F19',//rojo
@@ -545,7 +557,7 @@ export class ReportesGraficosComponent implements OnInit {
           //   '#7BF70E',//verde
           //   '#F9CA6B',//naranja claro
           //   '#5973D1',//azul claro
-          
+
           // ],
           borderWidth: 1
         }]
@@ -558,22 +570,25 @@ export class ReportesGraficosComponent implements OnInit {
         //     }
         //   }
         // },
-         
+
         legend: {
           display: false
         },
-        
-        
+
+
         scales: {
-          xAxes:[{
+          x:{
+            beginAtZero: true,
             ticks:{
-              beginAtZero: true,
-              fontSize: 10,
+             font: {
+                size: 10,
+                style: 'bold'
+              },
               padding: 0,
               fontColor: '#000000',
               fontStyle: 'bold',
               minRotation: 45
-              
+
             },
             scaleLabel: {
               display: true,
@@ -582,12 +597,15 @@ export class ReportesGraficosComponent implements OnInit {
               fontStyle: 'bold',
               fontColor: '#000000',
             }
-            
-          }],
-          yAxes: [{
+
+          },
+          y: {
+            beginAtZero: true,
             ticks: {
-              beginAtZero: true,
-              fontSize: 10,
+             font: {
+              size: 10,
+              style: 'bold'
+            },
               padding: 0,
               //fontColor: '#000',
               fontStyle: 'bold',
@@ -606,8 +624,8 @@ export class ReportesGraficosComponent implements OnInit {
               fontStyle: 'bold',
               fontColor: '#000000',
             }
-            
-          }]
+
+          }
         }
       }
     });
@@ -616,7 +634,7 @@ export class ReportesGraficosComponent implements OnInit {
   chartPie(name:string, tipo:string, label: string[], data: number[]){
 
     return  new Chart(name, {
-      type: tipo,
+      type: tipo as any,
       data: {
         labels: label,
         datasets: [{
@@ -650,7 +668,7 @@ export class ReportesGraficosComponent implements OnInit {
             '#2EF8A0',//verde claro
             '#067D6B',
             '#067D6B'
-          
+
           ],
           borderColor: [
             '#0F2FD0',//azul
@@ -669,7 +687,7 @@ export class ReportesGraficosComponent implements OnInit {
             '#7BF70E',//verde
             '#F9CA6B',//naranja claro
             '#5973D1',//azul claro
-        
+
           ],
           borderWidth: 1
         }]
@@ -686,37 +704,43 @@ export class ReportesGraficosComponent implements OnInit {
           display: true
         },
         scales: {
-          xAxes:[{
+          x:{
             display: false,
             gridLines:{
               display: false
             },
+            beginAtZero: true,
             ticks:{
-              beginAtZero: true,
-              fontSize: 10,
+              font: {
+                size: 10,
+                style: 'bold'
+              },
               padding: 0,
               fontColor: '#000',
               fontStyle: 'bold',
               minRotation: 45
-              
+
             },
-          }],
-          yAxes: [{
+          },
+          y: {
             display: false,
             gridLines: {
               display: false
             },
+            beginAtZero: true,
             ticks:{
-              beginAtZero: true,
-              fontSize: 10,
+              font: {
+                size: 10,
+                style: 'bold'
+              },
               padding: 0,
               fontColor: '#000',
               fontStyle: 'bold',
-              
-              
+
+
             },
-          }],
-          
+          },
+
         }
       }
     });

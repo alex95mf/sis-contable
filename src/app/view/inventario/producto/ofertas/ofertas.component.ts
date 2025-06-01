@@ -277,7 +277,7 @@ standalone: false,
                     this.vmButtons[4].habilitar = false;
                 }
                 setTimeout(() => {
-                    this.dtTrigger.next();
+                    this.dtTrigger.next(null);
                 }, 50);
             },
             (error) => {
@@ -286,7 +286,7 @@ standalone: false,
                 this.guardarolT = [];
                 this.processing = true;
                 setTimeout(() => {
-                    this.dtTrigger.next();
+                    this.dtTrigger.next(null);
                 }, 50);
                 this.vmButtons[2].habilitar = true;
                 this.vmButtons[3].habilitar = true;

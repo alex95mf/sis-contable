@@ -55,7 +55,7 @@ export class DepartamentoComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(null);
     this.onDestroy$.complete();
   }
 
@@ -102,7 +102,7 @@ export class DepartamentoComponent implements OnInit {
       case " NUEVO":
         this.showConceptoForm(true, {});
         break;
-      
+
     }
   }
   consultar() {
@@ -213,10 +213,10 @@ export class DepartamentoComponent implements OnInit {
         }else {
           this.lcargando.ctlSpinner(false);
         }
-        
+
       }
     )
-    
+
 
   }
 

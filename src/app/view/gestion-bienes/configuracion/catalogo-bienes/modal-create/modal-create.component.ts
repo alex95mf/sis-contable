@@ -44,7 +44,7 @@ export class ModalCreateComponent implements OnInit {
       case "Guardar":
         this.agregarCatalogo();
         break;
-      
+
       case "Regresar":
         this.activeModal.close()
         break;
@@ -54,7 +54,7 @@ export class ModalCreateComponent implements OnInit {
   agregarCatalogo(){
     this.mensajeSppiner = "Guardando...";
     this.lcargando.ctlSpinner(true);
-    
+
     console.log(this.catalogo);
     this.service.saveCatalogoBienes(this.catalogo).subscribe(
       (res)=>{
@@ -70,7 +70,7 @@ export class ModalCreateComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             this.activeModal.close()
-            this.commonVrs.CatalogoBienes.next()
+            this.commonVrs.CatalogoBienes.next(null)
           }
         })
       }

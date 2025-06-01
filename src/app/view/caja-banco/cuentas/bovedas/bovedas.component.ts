@@ -94,7 +94,7 @@ export class BovedasComponent implements OnInit {
     this.commonServices.getPermisionsGlobas(data).subscribe(res => {
       this.permisions = res['data'][0];
       if (this.permisions.ver == "0") {
-        this.lcargando.ctlSpinner(false); 
+        this.lcargando.ctlSpinner(false);
         this.toastr.info("Usuario no tiene Permiso para ver el formulario de Cuenta boveda");
         this.vmButtons = [];
       } else {
@@ -113,7 +113,7 @@ export class BovedasComponent implements OnInit {
       this.arrayCountrys = res['data']
       this.getCatalogos();
     }, error => {
-      this.lcargando.ctlSpinner(false); 
+      this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     })
   }
@@ -136,7 +136,7 @@ export class BovedasComponent implements OnInit {
       this.getAccountsTypeDetails();
       this.getCountry(1);
     }, error => {
-      this.lcargando.ctlSpinner(false); 
+      this.lcargando.ctlSpinner(false);
       this.processing = true
       this.toastr.info(error.error.message)
     })
@@ -156,7 +156,7 @@ export class BovedasComponent implements OnInit {
       this.accDetails = res['data'];
       this.getsucursales();
     }, error => {
-      this.lcargando.ctlSpinner(false); 
+      this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     })
   }
@@ -169,7 +169,7 @@ export class BovedasComponent implements OnInit {
       this.sucursales = res['data'];
       this.getDatabitacora();
     }, error => {
-      this.lcargando.ctlSpinner(false); 
+      this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     })
   }
@@ -187,19 +187,19 @@ export class BovedasComponent implements OnInit {
       }
     };
     this.mensajeSppiner = "Cargando";
-    this.lcargando.ctlSpinner(true); 
+    this.lcargando.ctlSpinner(true);
     this.accSrv.getBovedas().subscribe(res => {
-      this.lcargando.ctlSpinner(false); 
+      this.lcargando.ctlSpinner(false);
       this.validaDt = true;
       this.dataAccBanks = res['data'];
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     }, error => {
-      this.lcargando.ctlSpinner(false); 
+      this.lcargando.ctlSpinner(false);
       this.processing = true;
       setTimeout(() => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       }, 50);
     });
   }
@@ -263,10 +263,10 @@ export class BovedasComponent implements OnInit {
       id_controlador: myVarGlobals.fBovedas
     }
     this.mensajeSppiner = "Guardando...";
-    this.lcargando.ctlSpinner(true);  
+    this.lcargando.ctlSpinner(true);
     this.accSrv.saveAccount(data).subscribe(res => {
       this.toastr.success(res['message']);
-      this.lcargando.ctlSpinner(false);  
+      this.lcargando.ctlSpinner(false);
       this.cancel();
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         dtInstance.destroy();
@@ -274,7 +274,7 @@ export class BovedasComponent implements OnInit {
         this.getCountry(1);
       });
     }, error => {
-      this.lcargando.ctlSpinner(false);  
+      this.lcargando.ctlSpinner(false);
       this.processing = true;
       this.toastr.info(error.error.message);
     })
@@ -310,7 +310,7 @@ export class BovedasComponent implements OnInit {
     }
     this.validaDt = false;
     this.mensajeSppiner = "Actualizando...";
-    this.lcargando.ctlSpinner(true);  
+    this.lcargando.ctlSpinner(true);
     this.accSrv.updatedAccount(data).subscribe(res => {
       this.toastr.success(res['message']);
       this.cancel();
@@ -320,7 +320,7 @@ export class BovedasComponent implements OnInit {
         this.getCountry(1);
       });
     }, error => {
-      this.lcargando.ctlSpinner(false);  
+      this.lcargando.ctlSpinner(false);
       this.processing = true;
       this.toastr.info(error.error.message);
     })

@@ -24,9 +24,9 @@ standalone: false,
 })
 export class TablaAmortizacionComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  vmButtons: Botonera[] = []; 
-  
-  
+  vmButtons: Botonera[] = [];
+
+
   titles: any = [];
   dataExcel: any = [];
   monto_total: number = 0;
@@ -65,7 +65,7 @@ export class TablaAmortizacionComponent implements OnInit, OnDestroy {
     private apiSrv: AmortizacionService,
     private toastr: ToastrService,
 
-  ) { 
+  ) {
     this.commonVrs.modalConstFisica.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
       (res: any) => {
         console.log(res)
@@ -81,13 +81,13 @@ export class TablaAmortizacionComponent implements OnInit, OnDestroy {
         this.estado = res['estado']
         this.periodo = res['tipo_bien']
         this.numero_documento = res['numero_documento']
-       
+
         this.constDisabled = true*/
 
         this.selectTipo = res.tipo
         this.fecha = res.fecha
         this.estado = (res.estado == 'P') ? 'PENDIENTE' : (res.estado == 'C') ? 'CERRADO' : (res.estado == 'A') ? 'APROBADO' : ''
-            
+
         if(res['estado'] == 'P'){
           this.vmButtons[0].habilitar = true
           this.vmButtons[2].habilitar = false;
@@ -129,13 +129,13 @@ export class TablaAmortizacionComponent implements OnInit, OnDestroy {
       }
     )*/
 
-    
+
   }
   ngOnDestroy(): void {
-    this.onDestroy$.next()
+    this.onDestroy$.next(null)
     this.onDestroy$.complete()
   }
-  
+
   ngOnInit(): void {
     this.vmButtons = [
       { orig: "btnsTabla", paramAccion: '',  boton: { icon: "fa fa-plus-square-o", texto: "GUARDAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary btn-sm", habilitar: true, imprimir: false},
@@ -149,26 +149,26 @@ export class TablaAmortizacionComponent implements OnInit, OnDestroy {
     ];
      this.fecha = moment().format('YYYY-MM-DD');
   }
-  
+
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
 
       case "GUARDAR":
-        this.validarGuardar(); 
+        this.validarGuardar();
         break;
-      case "BUSCAR": 
+      case "BUSCAR":
         this.modalConsultar();
         break;
-      case "MODIFICAR": 
+      case "MODIFICAR":
         this.actualizarData();
         break;
-      case "IMPRIMIR": 
+      case "IMPRIMIR":
         this.getDataExportar();
         break;
-      case "LIMPIAR": 
+      case "LIMPIAR":
         this.limpiarData();
         break;
-      case "CERRAR": 
+      case "CERRAR":
         this.cerrarAmortizacion();
         break;
       case "APROBAR":
@@ -223,7 +223,7 @@ calcularCronograma() {
     let fechaActual = this.fecha; //Date.now();
     console.log(fechaActual);
     let mes_actual = moment(fechaActual);
-    mes_actual.add(1, 'month');    
+    mes_actual.add(1, 'month');
     console.log(mes_actual);
 
     let pagoInteres=0, pagoCapital = 0, cuota = 0, saldo_inicial=0;
@@ -248,7 +248,7 @@ calcularCronograma() {
           capital: pagoCapital,
           monto: this.monto_total,
           cuota: cuota,
-          plazo_maximo:plazo_maximo[i] 
+          plazo_maximo:plazo_maximo[i]
         }
         console.log(amort);
         this.amortizaciones.push(amort);
@@ -256,13 +256,13 @@ calcularCronograma() {
         this.totalPagoMensual = this.totalPagoMensual+ pagoCapital;
         this.totalPagoTotal = this.totalPagoTotal + cuota;
     }
-    
+
   }
   else if (this.selectTipo=="A" || this.selectTipo=="Amortizacion Alemana"){
     let fechas1 = [];
-    let fechaActual1 = this.fecha; 
+    let fechaActual1 = this.fecha;
     let mes_actual1 = moment(fechaActual1);
-    mes_actual1.add(1, 'month'); 
+    mes_actual1.add(1, 'month');
     let saldo_inicial=0;
     let mesActual = dayjs().add(1, 'month');
     console.log(mesActual);
@@ -290,14 +290,14 @@ calcularCronograma() {
           capital: pagoCapital,
           monto: this.monto_total,
           cuota: cuota,
-        } 
-    
+        }
+
         this.amortizaciones.push(amortaleman);
         this.totalIntereses= this.totalIntereses +pagoInteres;
         this.totalPagoMensual = this.totalPagoMensual+ pagoCapital;
         this.totalPagoTotal = this.totalPagoTotal + cuota;
   }
-  
+
 
     }
     //estado:"C",
@@ -334,7 +334,7 @@ calculateAmortization() {
   for (let month = 1; month <= numberOfMonths; month++) {
     let interestPayment = balance * monthlyInterestRate;
     let principalPayment = monthlyPayment - interestPayment;
-    
+
     if (amortizationMethod === 'German') {
       balance -= principalPayment;
     }
@@ -368,13 +368,13 @@ async aprobarAmortizacion() {
       this.mensajeSpiner = 'Aprobando Amortizacion'
       let response = await this.apiSrv.aprobarAmortizacion({amortizacion: this.numero_documento})
       console.log(response)
-  
+
       this.estado = 'APROBADO'
       this.vmButtons[2].habilitar = true
       this.botonDisabled = false;
       this.constDisabled = true;
       this.calculoDisabled = true;
-  
+
       this.lcargando.ctlSpinner(false)
     } catch (err) {
       console.log(err)
@@ -490,7 +490,7 @@ fillTableBySearch(data) {
             capital: e.pago_mensual,
             monto: e.saldo_final,
             cuota: e.pago_total,
-          } 
+          }
       this.amortizaciones.push(tablaBusqueda);
       this.totalIntereses= this.totalIntereses +parseFloat(e.interes);
       this.totalPagoMensual = this.totalPagoMensual+ parseFloat(e.pago_mensual);
@@ -520,7 +520,7 @@ fillTableBySearch(data) {
   else if(data.estado == "C"){
     this.estado = "Cerrado"
   } */
-  
+
   // this.vmButtons[0].habilitar = true;
   // this.vmButtons[2].habilitar = false;
   // this.vmButtons[3].habilitar = false;
@@ -619,13 +619,13 @@ actualizarData(){
                       console.log(res);
 
                       this.lcargando.ctlSpinner(false);
-              
+
                     },
-              
+
                   )
-    
+
                 },
-    
+
               )
         })
     })
@@ -713,7 +713,7 @@ validarActualizar(){
         this.actualizarData()
       }
     });
-  
+
   }
 
 async cerrarAmortizacion(){
@@ -738,7 +738,7 @@ async cerrarAmortizacion(){
   if (result.isConfirmed) {
     this.mensajeSpiner = 'Actualizando Estado...';
     this.lcargando.ctlSpinner(true);
-    
+
     this.apiSrv.actualizarEstadoCerrado({numero_documento: this.numero_documento}).subscribe(
       res => {
         console.log(res);
@@ -813,7 +813,7 @@ guardarAmortizacion(){
     this.calculoDisabled = true;
     //this.calcAmortizaciones();
     //this.limpiarData()
-    
+
 }
 
 

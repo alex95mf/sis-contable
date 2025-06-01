@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LiquidacionPrRoutingModule } from './liquidacion-pr.routing';
 import { LiquidacionPrComponent } from './liquidacion-pr.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ExcelService } from 'src/app/services/excel.service';
 import { ModalContribuyenteComponent } from './modal-contribuyente/modal-contribuyente.component';
 import { ModalConceptosComponent } from './modal-conceptos/modal-conceptos.component';
@@ -23,7 +23,7 @@ import { ModalLiquidacionesComponent } from './modal-liquidaciones/modal-liquida
   imports: [
     CommonModule,
     AppCustomModule,
-    NgxCurrencyModule,
+    NgxCurrencyDirective,
     LiquidacionPrRoutingModule
   ],
   providers: [

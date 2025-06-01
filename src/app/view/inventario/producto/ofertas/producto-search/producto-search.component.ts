@@ -61,15 +61,15 @@ export class ProductoSearchComponent implements OnInit {
       }
     };
     this.ofertasSrv.tablaProducto(data)
-      .subscribe(res => {      
+      .subscribe(res => {
         this.validaDtUser = true;
         this.flag += 1;
         this.guardarolT = res['data'];
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
       }, error => {
-        this.dtTrigger.next();
+        this.dtTrigger.next(null);
       });
   }
 
@@ -96,16 +96,16 @@ export class ProductoSearchComponent implements OnInit {
       }
     };
     this.ofertasSrv.tablaProductodos(data)
-      .subscribe(res => {      
+      .subscribe(res => {
         this.validaDtUser = true;
              this.flag += 1;
         this.guardarolT = res['data'];
-    
+
         setTimeout(() => {
-          this.dtTrigger.next();
+          this.dtTrigger.next(null);
         }, 50);
-      }, error => { 
-        this.dtTrigger.next();
+      }, error => {
+        this.dtTrigger.next(null);
 
       });
   }
@@ -126,10 +126,10 @@ export class ProductoSearchComponent implements OnInit {
       },
     );
   }
-  
+
   getGrupos() {
     this.ofertasSrv.getGrupos().subscribe(res => {
-      this.dataGrupo = res['data'];  
+      this.dataGrupo = res['data'];
     }, error => {
       this.toastr.info(error.error.message)
     })
@@ -143,14 +143,14 @@ export class ProductoSearchComponent implements OnInit {
       }
       this.bodegaService.getCiudades(data).subscribe(res => {
         this.dataCatalogo = res['data']['catalogos'];
-        
+
       }, error => {
         this.toastr.info(error.error.message);
       })
-   
+
   }
 
-  filterNombre(data){ 
+  filterNombre(data){
     this.producto = data;
     this.grupo = undefined;
     this.almacen = undefined;
@@ -169,7 +169,7 @@ export class ProductoSearchComponent implements OnInit {
 this.almacen = data;
 this.grupo = undefined;
 this.producto = undefined;
-this.almacenData = true; 
+this.almacenData = true;
 this.rerender();
 
   }

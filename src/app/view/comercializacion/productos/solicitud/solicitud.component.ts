@@ -117,7 +117,7 @@ export class SolicitudComponent implements OnInit {
           this.actions.edit = true;
           this.actions.cancel = false;
           this.actions.delete = true;
-  
+
           this.vmButtons[0].habilitar = false;
           this.vmButtons[1].habilitar = false;
           this.vmButtons[2].habilitar = true;
@@ -179,17 +179,17 @@ export class SolicitudComponent implements OnInit {
       this.commonServices.actionDataOb.asObservable().subscribe(res => {
         let data =  (res == undefined)  ? null : res ;
         this.solicitud.observaciones = data;
-        
+
     })
     this.commonServices.enviaDt.asObservable().subscribe(res => {
-      this.dataValor = res;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-     
+      this.dataValor = res;
+
   })
-    
+
     }
-  
+
     ngOnInit(): void {
-  
+
     this.vmButtons = [
         { orig: "btnSolicitud", paramAccion: "", boton: { icon: "fa fa-plus-square-o", texto: "NUEVO" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-warning boton btn-sm", habilitar: false},
         { orig: "btnSolicitud", paramAccion: "", boton: { icon: "fa fa-search", texto: "BUSCAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary boton btn-sm", habilitar: false},
@@ -199,15 +199,15 @@ export class SolicitudComponent implements OnInit {
         { orig: "btnSolicitudDelete", paramAccion: "", boton: { icon: "fas fa-trash", texto: "ANULAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-info boton btn-sm", habilitar: false},
         { orig: "btnSolicitudDelete", paramAccion: "", boton: { icon: "fa fa-times", texto: "CANCELAR " }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: false}
       ];
-  
+
       setTimeout(() => {
         this.lcargando.ctlSpinner(true);
       }, 50);
-  
+
       this.Permission();
-  
+
     }
-  
+
     Permission() {
       this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
       this.permisoSolicitud = this.dataUser.permisos_doc.filter(e => e.fk_documento == 4);
@@ -233,7 +233,7 @@ export class SolicitudComponent implements OnInit {
           this.toastr.info("Usuario no tiene Permiso para ver el formulario de Solicitud");
           this.vmButtons = [];
         } else {
-  
+
           setTimeout(() => {
             this.nameUser = this.dataUser.nombre;
             this.idUser = this.dataUser.id_usuario;
@@ -245,7 +245,7 @@ export class SolicitudComponent implements OnInit {
         this.toastr.info(error.error.message);
       });
     }
-  
+
     getVigencia() {
       this.requestService.getVigenciaSolicitud().subscribe(res => {
         this.lcargando.ctlSpinner(false);
@@ -254,11 +254,11 @@ export class SolicitudComponent implements OnInit {
         this.fecha_caducidades = this.today.getFullYear() + '-' + (this.today.getMonth() + 1) + '-' + (this.today.getDate() + this.diaCaducidad);
       })
     }
-  
+
       metodoGlobal(evento: any) {
       switch (evento.items.boton.texto) {
           case "NUEVO":
-  
+
           this.ActivateForm();
           break;
           case "BUSCAR":
@@ -282,18 +282,18 @@ export class SolicitudComponent implements OnInit {
           break;
       }
     }
-  
+
     permisosData() {
       this.permisoCrear = this.permisoSolicitud[0]["crear"];
       this.permisoRevisar = this.permisoSolicitud[0]["revisar"];
       this.permisoProcesar = this.permisoSolicitud[0]["procesar"];
-      this.permisoAprobar = this.permisoSolicitud[0]["aprobar"];  
+      this.permisoAprobar = this.permisoSolicitud[0]["aprobar"];
       this.permisoCrear == 1  ? this.EstadoCreado = '- Crear' : this.EstadoCreado = "" ;
       this.permisoRevisar == 1  ? this.EstadoRevisado = '- Revisar' : this.EstadoRevisado = "" ;
       this.permisoProcesar == 1  ? this.EstadoProcesado = ' - Procesar' : this.EstadoProcesado = "" ;
       this.permisoAprobar == 1  ? this.EstadoAprobado = '- Aprobar' : this.EstadoAprobado = "" ;
     }
-  
+
     ActivateForm() {
       this.CancelForm();
       this.permisoCrear = this.permisoSolicitud[0]["crear"]; //id de crear
@@ -316,7 +316,7 @@ export class SolicitudComponent implements OnInit {
         this.commonServices.actionsSolicitud.next(this.actions);
       }
     }
-  
+
     searchSolicitud() {
       this.actions.search = true;
       this.permisoSolicitud = this.dataUser.permisos_doc.filter(e => e.fk_documento == 4);
@@ -328,7 +328,7 @@ export class SolicitudComponent implements OnInit {
       modalInvoice.componentInstance.documento_id = this.envio_fk_documento;
       this.CancelForm();
     }
-  
+
     async saveSolicitud() {
       if (this.permissions.guardar == "0") {
         this.toastr.info("Usuario no tiene permiso para guardar");
@@ -338,17 +338,17 @@ export class SolicitudComponent implements OnInit {
         this.vmButtons[1].habilitar = false;
         this.vmButtons[2].habilitar = true;
         this.vmButtons[3].habilitar = false;
-  
+
       } else {
-  
+
         let resp = await this.validacionSolicitud().then(respuesta => {
           if (respuesta) {
-            // this.commonServices.detalleSolicitud.next();
+            // this.commonServices.detalleSolicitud.next(null);
             this.permisoSolicitud = this.dataUser.permisos_doc.filter(e => e.fk_documento == 4);
             this.filtros = this.permisoSolicitud[0]['filtros'].split(',');
             this.filter = this.filtros[0];
             if (this.commonServices.filterUser(this.filter, 4)) {
-              this.commonServices.detalleSolicitud.next();
+              this.commonServices.detalleSolicitud.next(null);
               this.confirmSave("Seguro desea guardar el solicitud?", "SET_SOLICITUD");
             } else {
               this.CancelForm();
@@ -359,7 +359,7 @@ export class SolicitudComponent implements OnInit {
         })
       }
     }
-  
+
     /* Validation Forms Cabezera*/
     validacionSolicitud() {
      return new Promise((resolve, reject) => {
@@ -370,7 +370,7 @@ export class SolicitudComponent implements OnInit {
       }
       });
     }
-  
+
     setSolicitud(data) {
       this.permisoSolicitud = this.dataUser.permisos_doc.filter(e => e.fk_documento == 4);
       this.envio_fk_documento = this.permisoSolicitud[0]["fk_documento"];
@@ -401,7 +401,7 @@ export class SolicitudComponent implements OnInit {
         this.toastr.info(error.error.message);
       });
     }
-  
+
     nexStatus(dt, doc) {
       if (this.permissions.editar == "0") {
         this.toastr.info("Usuario no tiene Permiso para actualizar el estado");
@@ -421,7 +421,7 @@ export class SolicitudComponent implements OnInit {
         }
       }
     }
-  
+
     updateClient() {
       this.numero_solicitud = this.secuencia_sol.padStart(10, "0");
       if (this.permissions.editar == "0") {
@@ -435,8 +435,8 @@ export class SolicitudComponent implements OnInit {
         this.vmButtons[3].habilitar = false;
       } else {
         if (this.commonServices.filterUser(this.filtro_doc, 4)) {
-          this.commonServices.detalleSolicitud.next();
-          this.commonServices.anexosSolicitud.next();
+          this.commonServices.detalleSolicitud.next(null);
+          this.commonServices.anexosSolicitud.next(null);
           this.confirmSave('Seguro desea actualizar la solicitud' + ' ' + this.numero_solicitud + ' ' + '?', "MOD_SOLICITUD");
         } else {
           this.toastr.info("Usuario no tiene permiso para Modificar una solicitud orden de compra");
@@ -444,8 +444,8 @@ export class SolicitudComponent implements OnInit {
         }
       }
     }
-  
-  
+
+
     patchSolicitud(data) {
       delete data['anexos'];
       delete data['contactos'];
@@ -465,7 +465,7 @@ export class SolicitudComponent implements OnInit {
         this.toastr.info(error.error.message);
       });
     }
-  
+
     CancelForm() {
       this.dataValor  = [];
       this.editInfoDetalle = false;
@@ -486,21 +486,21 @@ export class SolicitudComponent implements OnInit {
       this.commonServices.actionsSolicitud.next(this.actions);
       this.ClearForm();
     }
-  
+
     ClearForm() {
       this.solicitud = {};
       this.getVigencia();
       this.fecha_emision = this.today.getFullYear() + '-' + (this.today.getMonth() + 1) + '-' + this.today.getDate();
     }
-  
+
     cancelcatalogo() {
       this.dataModaldescription = "";
     }
-  
+
     setDeleteSolicitudes(dt) {
       this.varDeleteSolicitud = dt;
     }
-  
+
     deleteSolicitud() {
       this.anularDocumento = this.varDeleteSolicitud.sec_documento.padStart(10, "0");
       if (this.permissions.eliminar == "0") {
@@ -514,14 +514,14 @@ export class SolicitudComponent implements OnInit {
         }
       }
     }
-  
+
     destroySoliciitud(dt) {
       dt.id = dt.id;
       dt.descripcionModal = this.dataModaldescription;
       dt.id_controlador = myVarGlobals.fSolicitud;
       dt.accion = `Borrado la solicitud ${dt.id}`;
       dt.ip = this.commonServices.getIpAddress();
-  
+
       this.requestService.deleteSolicitudes(dt).subscribe(res => {
         this.toastr.success(res["message"]);
         this.CancelForm();
@@ -532,7 +532,7 @@ export class SolicitudComponent implements OnInit {
         this.toastr.info(error.error.message);
       });
     }
-  
+
     modStatus(order) {
       let data = {
         nexPermi: this.NexPermisions,
@@ -568,7 +568,7 @@ export class SolicitudComponent implements OnInit {
         this.toastr.info(error.error.message);
       })
     }
-  
+
     /* Confirm CRUD's */
     async confirmSave(message, action, order?: any) {
       Swal.fire({
@@ -594,11 +594,10 @@ export class SolicitudComponent implements OnInit {
         }
       })
     }
-  
+
     SetnexStatus(next) {
       this.commonVarSrvice.nextStatus.next(next);
       /* this.commonServices.actionDataOb.next(this.observacionesDt); */
     }
-  
+
   }
-  

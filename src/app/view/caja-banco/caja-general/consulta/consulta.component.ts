@@ -266,19 +266,19 @@ export class ConsultaComponent implements OnInit {
 		this.reporSrv.getValorConsultar(data).subscribe(res => {
 			this.processingQuotes = true;
 			this.lcargando.ctlSpinner(false);
-			this.datoTabla = res["data"]; 
+			this.datoTabla = res["data"];
 			this.totalForma = parseFloat('0.00');
 			this.datoTabla.forEach(element => {
 				this.totalForma = parseFloat(this.totalForma) + parseFloat(element['valor']);
 			});
 			setTimeout(() => {
-				this.dtTrigger.next();
+				this.dtTrigger.next(null);
 			}, 50);
 		}, error => {
 			this.lcargando.ctlSpinner(false);
 			this.processingQuotes = true;
 			setTimeout(() => {
-				this.dtTrigger.next();
+				this.dtTrigger.next(null);
 			}, 50);
 			this.toastr.info(error.error.message);
 		});
@@ -311,7 +311,7 @@ export class ConsultaComponent implements OnInit {
 			this.rerender();
 		} else {
 			this.rerender();
-		}	
+		}
 	}
 
 	formaPago(evt) {

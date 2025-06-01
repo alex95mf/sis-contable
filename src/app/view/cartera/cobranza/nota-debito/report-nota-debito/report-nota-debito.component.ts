@@ -191,13 +191,13 @@ this.reportesSrv.getReportNotaCredito(data).subscribe(res => {
     this.vmButtons[2].habilitar = true;
 } 
   setTimeout(() => {
-    this.dtTrigger.next();
+    this.dtTrigger.next(null);
   }, 50);
 }, error => {
   this.validaDt = true;
   this.processing = true;
   setTimeout(() => {
-    this.dtTrigger.next();
+    this.dtTrigger.next(null);
   }, 50);
   this.toastr.info(error.error.message);
 });
