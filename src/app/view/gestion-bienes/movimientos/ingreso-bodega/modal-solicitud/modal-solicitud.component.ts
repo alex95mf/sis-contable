@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { IngresoBodegaService } from '../ingreso-bodega.service';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-modal-solicitud',

@@ -21,7 +21,6 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { VacacionesService } from '../../beneficios/vacaciones/vacaciones.services';
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
-import { object, string } from '@amcharts/amcharts4/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ApiServices } from 'src/app/services/api.service';
 import { environment } from 'src/environments/environment';

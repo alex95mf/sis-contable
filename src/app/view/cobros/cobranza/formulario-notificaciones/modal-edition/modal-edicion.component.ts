@@ -7,7 +7,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { FormularioNotificacionesService } from '../formulario-notificaciones.service';
 import * as myVarGlobals from 'src/app/global';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import moment from 'moment';
+import * as moment from 'moment';
 import { EncargadoComponent } from 'src/app/config/custom/encargado/encargado.component';
 
 @Component({

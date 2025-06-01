@@ -1,11 +1,12 @@
-$green-dark-primary: mat.define-palette(mat.$green-palette, 700, 50, 800);
-$green-dark-accent: mat.define-palette(mat.$amber-palette, A200, A100, A700);
-$green-dark-warn: mat.define-palette(mat.$red-palette, A200);
+@use '@angular/material' as mat;
 
-$green-dark-theme: mat.define-dark-theme((
-    color: (
-        primary: $green-dark-primary,
-        accent: $green-dark-accent,
-        warn: $green-dark-warn,
-    )
-));
+$green-dark-theme: (
+  color: (
+    primary: mat.$green-palette,
+    secondary: mat.$amber-palette,
+    tertiary: mat.$red-palette,
+    theme-type: dark,
+  ),
+  typography: Roboto,
+  density: 0
+);

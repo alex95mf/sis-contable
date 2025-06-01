@@ -9,7 +9,6 @@ import { Router } from "@angular/router";
 import * as moment from "moment";
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
 import { MatDialogRef } from '@angular/material/dialog';
-import { join } from '@amcharts/amcharts4/core';
 @Component({
 	selector: 'app-modal-consulta-cliente',
 	templateUrl: './modal-consulta-cliente.component.html',

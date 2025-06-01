@@ -20,8 +20,6 @@ import { MovimientoBancarioFormComponent } from './movimiento-bancario-form/movi
 import { DetalleConciliacionComponent } from './detalle-conciliacion/detalle-conciliacion.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { number } from '@amcharts/amcharts4/core';
-import { Table } from 'primeng/table';
 @Component({
   selector: 'app-conciliacion',
   templateUrl: './conciliacion.component.html',

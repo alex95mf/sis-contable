@@ -6,8 +6,6 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { LturisticosService } from '../lturisticos.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
-import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
-import { List } from '@amcharts/amcharts4/core';
 
 
 @Component({

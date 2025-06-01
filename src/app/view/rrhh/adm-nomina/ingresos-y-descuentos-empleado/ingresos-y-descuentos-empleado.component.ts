@@ -17,7 +17,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcModalTableEmpleadoComponent } from 'src/app/config/custom/modal-component/cc-modal-table-empleado/cc-modal-table-empleado.component';
 import { EmployeesResponseI } from 'src/app/models/responseEmployee.interface';
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
-import { array } from '@amcharts/amcharts4/core';
 import { IngresoDescuentolResponseI } from 'src/app/models/responseIngresoDescuento.interface';
 import { ModalDepartamentosComponent } from 'src/app/config/custom/modal-departamentos/modal-departamentos.component';
 import { CommonVarService } from 'src/app/services/common-var.services';

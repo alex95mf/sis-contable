@@ -5,7 +5,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CommonVarService } from '../../../../../services/common-var.services'
 import { GeneracionService } from '../generacion.service';
-import { Cone } from '@amcharts/amcharts4/core';
 
 @Component({
   selector: 'app-modal-exoneraciones',

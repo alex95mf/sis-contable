@@ -6,7 +6,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ToastrService } from 'ngx-toastr';
 
 import { RegistroService } from '../registro.service';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-modal',

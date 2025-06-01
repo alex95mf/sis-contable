@@ -16,7 +16,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DiaTrabajado, DiaTrabajadoAditionalResponseI } from 'src/app/models/responseDayWorkedAditional.interface';
 import { LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
 //import { TranslateService } from "@ngx-translate/core";
-import { array, number } from '@amcharts/amcharts4/core';
 import * as XLSX from 'xlsx';
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
 import { MatDialog } from '@angular/material/dialog';

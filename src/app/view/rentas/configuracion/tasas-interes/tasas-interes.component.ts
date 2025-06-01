@@ -4,7 +4,7 @@ import Botonera from 'src/app/models/IBotonera';
 import { TasasInteresService } from './tasas-interes.service';
 import { ToastrService } from 'ngx-toastr';
 import Swal, { SweetAlertResult } from 'sweetalert2';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tasas-interes',

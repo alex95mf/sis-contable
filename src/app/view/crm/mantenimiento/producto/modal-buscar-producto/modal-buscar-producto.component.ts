@@ -8,7 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 
 import { ProductoServiceService } from './../producto-service.service';
-import moment from 'moment';
+import * as moment from 'moment';
 @Component({
   selector: 'app-modal-buscar-producto',
   templateUrl: './modal-buscar-producto.component.html',

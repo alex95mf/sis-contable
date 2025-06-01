@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ContribuyenteService } from '../contribuyente.service';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
-import moment from 'moment';
+import * as moment from 'moment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
 @Component({

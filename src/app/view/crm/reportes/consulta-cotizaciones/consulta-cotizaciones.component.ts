@@ -4,7 +4,7 @@ import * as myVarGlobals from '../../../../global';
 import { CommonVarService } from 'src/app/services/common-var.services';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { MatPaginator } from '@angular/material/paginator';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

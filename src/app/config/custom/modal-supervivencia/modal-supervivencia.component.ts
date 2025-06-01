@@ -6,7 +6,6 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { ModalSupervivenciaService } from './modal-supervivencia.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
-import { List } from '@amcharts/amcharts4/core';
 
 import * as moment from 'moment';
 @Component({

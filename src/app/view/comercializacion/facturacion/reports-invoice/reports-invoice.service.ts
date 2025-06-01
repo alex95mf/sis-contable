@@ -1,4 +1,3 @@
-import { DataLoader } from '@amcharts/amcharts4/core';
 import { Injectable } from '@angular/core';
 import { ApiServices } from '../../../../services/api.service';
 

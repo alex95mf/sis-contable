@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import { CommonService } from 'src/app/services/commonServices';
 import * as myVarGlobals from '../../../../global';
 

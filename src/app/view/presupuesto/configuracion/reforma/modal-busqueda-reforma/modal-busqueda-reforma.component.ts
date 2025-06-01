@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as myVarGlobals from "src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component";
 import { ReformaService } from '../reforma.service';
-import moment from 'moment';
+import * as moment from 'moment';
 // import { ValidacionesFactory } from '../utils/ValidacionesFactory';
 
 @Component({
