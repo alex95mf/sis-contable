@@ -1,6 +1,7 @@
 import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { LazyLoadEvent, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { WorkdayAditionalI } from 'src/app/models/responseWorkdayAditional.interfase';
 import { GeneralService } from 'src/app/services/general.service';
@@ -21,7 +22,7 @@ export class CcModalTableJornadaComponent implements AfterViewChecked {
   constructor(
     private cdRef: ChangeDetectorRef,
     public config: DynamicDialogConfig,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     public ref: DynamicDialogRef,
     private generalService: GeneralService,
     private toastr: ToastrService

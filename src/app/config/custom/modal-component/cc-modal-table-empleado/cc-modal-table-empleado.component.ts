@@ -1,6 +1,7 @@
 import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { LazyLoadEvent, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EmployeesAditionalI } from 'src/app/models/responseEmployeesAditional.interface';
 import { GeneralService } from 'src/app/services/general.service';
@@ -27,7 +28,7 @@ export class CcModalTableEmpleadoComponent implements AfterViewChecked{
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
     private cdRef: ChangeDetectorRef,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private generalService: GeneralService,
     private toastr: ToastrService,
 
@@ -36,7 +37,7 @@ export class CcModalTableEmpleadoComponent implements AfterViewChecked{
   ngOnInit(): void {}
 
   CargaEmpleado(event: LazyLoadEvent) {
-  
+
     this.rows = 10;
     this.loading = true;
     this.primengConfig.setTranslation({
@@ -68,11 +69,11 @@ export class CcModalTableEmpleadoComponent implements AfterViewChecked{
       // filters: event.filters,
       // detalle:this.isDetalle
 
-      
+
 
       page:  p_page,
       size:  this.rows,//event.rows,
-      sort: (event.sortField == undefined) ? 'id_empleado' : event.sortField, 
+      sort: (event.sortField == undefined) ? 'id_empleado' : event.sortField,
       type_sort: (event.sortOrder == -1) ? 'desc' : 'asc',
       // search: (JSON.stringify(event.filters)) === '{}' ? null : JSON.stringify(event.filters),
       search: buscarInput == '' ? buscarFilter : buscarInput,
@@ -106,13 +107,13 @@ export class CcModalTableEmpleadoComponent implements AfterViewChecked{
   }
 
   onRowSelectEmpleado(empleado:EmployeesAditionalI) {
-    
+
   //  console.log(empleado.data);
     this.ref.close(empleado.data);
   }
 
 
-  
+
  public handlePagination(paginationData): void {
   // this.currentPage = paginationData.page + 1;
   // this.filterProducts();

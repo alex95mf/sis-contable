@@ -1,6 +1,7 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Output } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
-import { LazyLoadEvent, PrimeNGConfig } from "primeng/api";
+import { LazyLoadEvent } from "primeng/api";
+import { PrimeNG } from "primeng/config";
 import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 // import { DepartamentoResponseI } from "src/app/models/responseDepartamento.interface";
 import { DepartemtAditionalI } from "src/app/models/responseDepartemtAditional.interface";
@@ -103,7 +104,7 @@ export class CcModalTableDepartamentoComponent implements AfterViewChecked {
     public config: DynamicDialogConfig,
     private entityService: CustonService,
     private generalService: GeneralService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private cdRef: ChangeDetectorRef,
     private toastr: ToastrService
   ) {}
@@ -171,7 +172,7 @@ export class CcModalTableDepartamentoComponent implements AfterViewChecked {
 
     /*   setTimeout(() => {
 
-        
+
 
         let datosPost: any = {
 
@@ -207,7 +208,7 @@ export class CcModalTableDepartamentoComponent implements AfterViewChecked {
   }
 
   onRowSelectDepartamento(departament:DepartemtAditionalI) {
-    
+
     //  console.log(departament.data);
     this.ref.close(departament.data);
   }

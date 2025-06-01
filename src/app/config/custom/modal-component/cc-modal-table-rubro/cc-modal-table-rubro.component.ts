@@ -1,6 +1,7 @@
 import { AfterViewChecked, ChangeDetectorRef, Component } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
-import { LazyLoadEvent, PrimeNGConfig } from "primeng/api";
+import { LazyLoadEvent } from "primeng/api";
+import { PrimeNG } from "primeng/config";
 import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 import { EmployeesAditionalI } from "src/app/models/responseEmployeesAditional.interface";
 import { RubroAditionalResponseI } from "src/app/models/responseRubroAditional.interface";
@@ -26,7 +27,7 @@ export class CcModalTableRubroComponent implements AfterViewChecked {
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
     private cdRef: ChangeDetectorRef,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private generalService: GeneralService,
     private toastr: ToastrService
   ) {}

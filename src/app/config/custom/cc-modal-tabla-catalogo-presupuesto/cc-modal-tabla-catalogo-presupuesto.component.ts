@@ -1,7 +1,7 @@
 import { ViewChild,EventEmitter,Component, OnInit, AfterViewChecked,Output } from '@angular/core';
 
 import { LazyLoadEvent } from 'primeng/api';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { CustonService } from '../app-custom.service';
@@ -11,19 +11,19 @@ import { ChangeDetectorRef } from '@angular/core';
 @Component({
 standalone: false,
   template: `
-    <p-table 
-      [value]="catalogo" 
-      [lazy]="true" 
-      (onLazyLoad)="CargaCatalogo($event)" 
-      selectionMode="single" 
+    <p-table
+      [value]="catalogo"
+      [lazy]="true"
+      (onLazyLoad)="CargaCatalogo($event)"
+      selectionMode="single"
       [(selection)]="selectedProduct2"
       (onRowSelect)="onRowSelectCatalogo($event)"
-      responsiveLayout="scroll" 
-      [paginator]="true" 
-      [rows]="10" 
-      [totalRecords]="totalRecords" 
-      [loading]="loading" 
-      [showCurrentPageReport]="true" 
+      responsiveLayout="scroll"
+      [paginator]="true"
+      [rows]="10"
+      [totalRecords]="totalRecords"
+      [loading]="loading"
+      [showCurrentPageReport]="true"
       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
       [rowsPerPageOptions]="[10,25,50]">
     <ng-template pTemplate="header">
@@ -69,13 +69,13 @@ export class CcModalTablaCatalogoPresupuestoComponent implements AfterViewChecke
 
 
   @Output() EventElemntRow = new EventEmitter();
-  
+
 
   constructor
   (
     public ref: DynamicDialogRef,
     private entityService: CustonService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private cdRef:ChangeDetectorRef,
   ) { }
 
@@ -98,7 +98,7 @@ export class CcModalTablaCatalogoPresupuestoComponent implements AfterViewChecke
 
     this.loading = true;
     this.isDetalle = localStorage.getItem("detalle_consulta") === "true"
-    
+
 
     let consulta = {
       busqueda: localStorage.getItem("busqueda_presupuesto"),

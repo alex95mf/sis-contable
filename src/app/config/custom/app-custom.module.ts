@@ -199,7 +199,7 @@ import { TreeTableModule } from 'primeng/treetable';
         DataMatrixGeneratorAllModule,
         ProgressSpinnerModule,
         TreeTableModule,
-        
+
         // NgxEditorModule.forRoot({ // COMENTADO: Problemas con Angular 19
         //     locals: {
         //         // ... configuración
