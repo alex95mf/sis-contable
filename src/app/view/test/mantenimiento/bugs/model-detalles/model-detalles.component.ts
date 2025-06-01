@@ -7,9 +7,15 @@ import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
+import { CommonModule } from '@angular/common';
+import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 
 @Component({
-standalone: false,
+standalone: true,
+  imports: [
+    CommonModule,
+    AppCustomModule
+  ],
   selector: 'app-model-detalles',
   templateUrl: './model-detalles.component.html',
   styleUrls: ['./model-detalles.component.scss']

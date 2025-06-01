@@ -9,19 +9,18 @@ import {
 } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ToastrModule } from "ngx-toastr";
-import { FileUploadModule } from "ng2-file-upload";
+// import { FileUploadModule } from "ng2-file-upload"; // TEMPORAL: Comentar
 import { DatePipe } from "@angular/common";
-// import { ChartsModule } from "ng2-charts";
-import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective } from 'ng2-charts';
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ButtonsModule } from "ngx-bootstrap/buttons";
 import { CalendarModule, DatePickerModule } from "@syncfusion/ej2-angular-calendars";
-import { NgxDocViewerModule } from "ngx-doc-viewer";
-import { NgxExtendedPdfViewerModule } from "ngx-extended-pdf-viewer";
+// import { NgxDocViewerModule } from "ngx-doc-viewer"; // TEMPORAL: Comentar
+// import { NgxExtendedPdfViewerModule } from "ngx-extended-pdf-viewer"; // TEMPORAL: Comentar
 import { TreeViewModule } from "@syncfusion/ej2-angular-navigations";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { NgxPrintModule } from "ngx-print";
-import { DataTablesModule } from "angular-datatables";
+// import { DataTablesModule } from "angular-datatables"; // TEMPORAL: Comentar
 import { FlatpickrModule } from "angularx-flatpickr";
 import { FilterByOriginPipe } from "./pipe/filter-by-origin.pipe";
 import { AppMaterialModule } from "../app-material/app-material.module";
@@ -39,7 +38,6 @@ import { MspreguntaComponent } from "./mspregunta/mspregunta.component";
 import { ImprimirRolComponent } from "../../view/rrhh/roles/adm-rol-pago/imprimir-rol/imprimir-rol.component";
 import { ShowLiquidacionesComponent } from "../../view/importaciones/liquidacion/liquidaciones/show-liquidaciones/show-liquidaciones.component";
 import { MultiSelectModule } from "@syncfusion/ej2-angular-dropdowns";
-/* import { CommonModalModule } from "../../view/commons/modals/modal.module"; */
 import { BusqProveedorComponent } from "../../view/caja-banco/cxp/pago-anticipado/busq-proveedor/busq-proveedor.component";
 import { GeneraPagoComponent } from "../../view/caja-banco/cxp/pago-anticipado/genera-pago/genera-pago.component";
 import { ImprimirComponent } from "../../view/caja-banco/cxp/pago-anticipado/imprimir/imprimir.component";
@@ -48,7 +46,6 @@ import { VistaArchivoComponent } from "../../view/contabilidad/centro-costo/cc-m
 import { CcClientesComponent } from "../../view/contabilidad/centro-costo/cc-mantenimiento/cc-clientes/cc-clientes.component";
 import { ShowDiarioComponent } from "../../view/contabilidad/centro-costo/consulta/show-diario/show-diario.component";
 import { QRCodeComponent } from "angularx-qrcode";
-// import { NgxBarcodeModule } from "ngx-barcode";
 import { NgxBarcode6Module } from "ngx-barcode6";
 import { BarcodeGeneratorAllModule, DataMatrixGeneratorAllModule, QRCodeGeneratorAllModule } from "@syncfusion/ej2-angular-barcode-generator";
 import { ShowBoxComponent } from "../../view/caja-banco/caja-chica/creacion/show-box/show-box.component";
@@ -61,19 +58,17 @@ import { ReportNotaDebitoComponent } from "src/app/view/cartera/cobranza/nota-de
 import { ReportNotaDebitoInvComponent } from "../../view/inventario/compras/nota-debito/report-nota-debito/report-nota-debito.component";
 import { ShowCuentasInvComponent } from "../../view/inventario/compras/nota-debito/show-cuentas/show-cuentas.component";
 import { ListadoRepComponent } from "../../view/inventario/compras/nota-debito/report-nota-debito/listado-rep/listado-rep.component";
-import { NgxEditorModule } from "ngx-editor";
+// import { NgxEditorModule } from "ngx-editor"; // TEMPORAL: Comentar
 import { VistaClientesComponent } from "../../view/comercializacion/facturacion/fac-electronica/vista-clientes/vista-clientes.component";
 import { IngChqProtestadoComponent } from "src/app/view/caja-banco/cuentas/cheque-protestado/ing-chq-protestado/ing-chq-protestado.component";
 import { InfoClienteComponent } from "src/app/view/caja-banco/cuentas/cheque-protestado/info-cliente/info-cliente.component";
 import { ImprimirCheProComponent } from "src/app/view/caja-banco/cuentas/cheque-protestado/imprimir/imprimir.component";
 import { ImprimirPrestamoComponent } from "src/app/view/rrhh/roles/prestamos/imprimir/imprimir.component";
 import { ModalSupervivenciaComponent } from "./modal-supervivencia/modal-supervivencia.component";
-
 import { ModalContribuyentesComponent } from "./modal-contribuyentes/modal-contribuyentes.component";
 import { ModalUsuariosComponent } from "./modal-usuarios/modal-usuarios.component";
 import { ModalProveedoresComponent } from "./modal-proveedores/modal-proveedores.component";
 import { ModalConceptosComponent } from "./modal-conceptos/modal-conceptos.component";
-// import { EncargadoComponent } from "./encargado/encargado.component";
 import { ModalDepartamentosComponent } from "./modal-departamentos/modal-departamentos.component";
 import { CcSelectMesesComponent } from "./cc-select-meses/cc-select-meses.component";
 import { CcModalTablaCuentaComponent } from './cc-modal-tabla-cuenta/cc-modal-tabla-cuenta.component';
@@ -86,7 +81,6 @@ import { CcModalPreviewRetencionesComponent } from "./cc-modal-preview-retencion
 import { TableModule } from 'primeng/table';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
-//import { ButtonModule } from 'primeng/button';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {TabViewModule} from 'primeng/tabview';
 import {SkeletonModule} from 'primeng/skeleton';
@@ -142,11 +136,9 @@ import { TreeTableModule } from 'primeng/treetable';
         ImprimirCheProComponent,
         ImprimirPrestamoComponent,
         ModalSupervivenciaComponent,
-
         ModalContribuyentesComponent,
         ModalProveedoresComponent,
         ModalConceptosComponent,
-        // EncargadoComponent,
         ModalDepartamentosComponent,
         CcSelectMesesComponent,
         CcModalTablaCuentaComponent,
@@ -176,18 +168,17 @@ import { TreeTableModule } from 'primeng/treetable';
         FormsModule,
         ReactiveFormsModule,
         NgSelectModule,
-        FileUploadModule,
-        // ChartsModule,
+        // FileUploadModule, // COMENTADO: Problemas con Angular 19
         BaseChartDirective,
         BsDropdownModule,
         ButtonsModule.forRoot(),
-        DataTablesModule,
+        // DataTablesModule, // COMENTADO: Problemas con Angular 19
         FlatpickrModule.forRoot(),
         NgxPrintModule,
         InfiniteScrollModule,
         TreeViewModule,
-        NgxExtendedPdfViewerModule,
-        NgxDocViewerModule,
+        // NgxExtendedPdfViewerModule, // COMENTADO: Problemas con Angular 19
+        // NgxDocViewerModule, // COMENTADO: Problemas con Angular 19
         DatePickerModule,
         AppMaterialModule,
         NgxSpinnerModule,
@@ -198,7 +189,6 @@ import { TreeTableModule } from 'primeng/treetable';
         MessageModule,
         TabMenuModule,
         TabViewModule,
-        /* CommonModalModule, */
         CalendarModule,
         ButtonModule,
         QRCodeComponent,
@@ -209,51 +199,19 @@ import { TreeTableModule } from 'primeng/treetable';
         DataMatrixGeneratorAllModule,
         ProgressSpinnerModule,
         TreeTableModule,
-
-        NgxEditorModule.forRoot({
-            locals: {
-                // menu
-                bold: 'Negrita',
-                italic: 'Cursiva',
-                code: 'Codigo',
-                underline: 'Subrayar',
-                strike: 'Rayado',
-                blockquote: 'Sangria',
-                bullet_list: 'Lista de viñetas',
-                ordered_list: 'Lista ordenada',
-                heading: 'Tamaño Texto',
-                h1: 'Encabezado 1',
-                h2: 'Encabezado 2',
-                h3: 'Encabezado 3',
-                h4: 'Encabezado 4',
-                h5: 'Encabezado 5',
-                h6: 'Encabezado 6',
-                align_left: 'Alinear Izquierda',
-                align_center: 'Alinear Centro',
-                align_right: 'Alinear Derecha',
-                align_justify: 'Justificar',
-                text_color: 'Color de texto',
-                background_color: 'Color de fondo',
-                insertLink: 'Insertar Link',
-                removeLink: 'Remover Link',
-                insertImage: 'Insertar Imagen',
-                // pupups, forms, others...
-                url: 'URL',
-                text: 'Texto',
-                openInNewTab: 'Abrir nueva pestaña',
-                insert: 'Insertar',
-                altText: 'Texto',
-                title: 'Titulo',
-                remove: 'Por defecto',
-            },
-        })
+        
+        // NgxEditorModule.forRoot({ // COMENTADO: Problemas con Angular 19
+        //     locals: {
+        //         // ... configuración
+        //     },
+        // })
     ],
     exports: [
         CommonModule,
         CcInputGroupPrepend,
         NgbModule,
         NgSelectModule,
-        FileUploadModule,
+        // FileUploadModule, // COMENTADO
         FormsModule,
         ReactiveFormsModule,
         ButtonRadioActiveComponent,
@@ -270,12 +228,12 @@ import { TreeTableModule } from 'primeng/treetable';
         FlatpickrModule,
         NgxPrintModule,
         ImprimirRolComponent,
-        NgxExtendedPdfViewerModule,
-        NgxDocViewerModule,
+        // NgxExtendedPdfViewerModule, // COMENTADO
+        // NgxDocViewerModule, // COMENTADO
         BusqProveedorComponent,
         GeneraPagoComponent,
         ImprimirComponent,
-        DataTablesModule,
+        // DataTablesModule, // COMENTADO
         ButtonModule,
         VistaArchivoComponent,
         CcClientesComponent,
@@ -292,7 +250,7 @@ import { TreeTableModule } from 'primeng/treetable';
         ReportNotaDebitoInvComponent,
         ListadoRepComponent,
         NgxBarcode6Module,
-        NgxEditorModule,
+        // NgxEditorModule, // COMENTADO
         VistaClientesComponent,
         IngChqProtestadoComponent,
         InfoClienteComponent,
@@ -318,7 +276,9 @@ import { TreeTableModule } from 'primeng/treetable';
         CcSelectPeriodosNomComponent,
         CcModalListFaltasPermisosComponent,
         ProgressSpinnerModule,
-        TreeTableModule
+        TreeTableModule,
+        // Exportar componentes importantes
+        ModalContribuyentesComponent,
     ],
     providers: [
         DatePipe,
@@ -328,32 +288,6 @@ import { TreeTableModule } from 'primeng/treetable';
         ConfirmationDialogService,
         PaginatorService
     ],
-  entryComponents: [
-    MspreguntaComponent,
-    ImprimirRolComponent,
-    ShowLiquidacionesComponent,
-    BusqProveedorComponent,
-    GeneraPagoComponent,
-    ImprimirComponent,
-    VistaArchivoComponent,
-    CcClientesComponent,
-    ShowDiarioComponent,
-    ShowBoxComponent,
-    DiferedCuotasComponent,
-    ShowActivosComponent,
-    LstNotaDebitoComponent,
-    PagoLetraComponent,
-    ShowCuentasInvComponent,
-    ShowNotasDebitoComponent,
-    ReportNotaDebitoComponent,
-    ReportNotaDebitoInvComponent,
-    ListadoRepComponent,
-    VistaClientesComponent,
-    IngChqProtestadoComponent,
-    InfoClienteComponent,
-    ImprimirCheProComponent,
-    ImprimirPrestamoComponent
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppCustomModule {}
