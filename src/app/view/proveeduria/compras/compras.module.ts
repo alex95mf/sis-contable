@@ -29,10 +29,6 @@ import { ModalCuentaRetIvaComponent } from './modal-cuenta-ret-iva/modal-cuenta-
     NgxCurrencyDirective
 
   ],
-  entryComponents: [
-    DiferedBuyProvComponent,
-    ShowInvoicesComponent
-  ],
   providers: [
     ExcelService
   ]

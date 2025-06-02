@@ -11,6 +11,5 @@ import { ShowCuentasCajaComponent } from './show-cuentas-caja/show-cuentas-caja.
     CreacionRoutingModule,
     AppCustomModule
   ],
-  entryComponents: [ShowCuentasCajaComponent]
 })
 export class CreacionModule { }

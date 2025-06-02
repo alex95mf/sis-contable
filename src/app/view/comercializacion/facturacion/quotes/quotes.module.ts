@@ -35,8 +35,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     DatePickerModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ModalProductComponent
-  ]
 })
 export class QuotesModule { }

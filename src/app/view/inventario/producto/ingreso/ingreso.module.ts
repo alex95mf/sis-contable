@@ -52,8 +52,5 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     IngresoComponent, TabsIngresoComponent, ViewerComponent
   ],
-  entryComponents: [
-    ViewerComponent
-  ]
 })
 export class IngresoProductoModule { }

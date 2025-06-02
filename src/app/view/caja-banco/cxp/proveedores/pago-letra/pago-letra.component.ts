@@ -8,7 +8,7 @@ import { CommonService } from '../../../../../services/commonServices';
 import { CommonVarService } from '../../../../../services/common-var.services';
 import { LstNotaDebitoComponent } from '../lst-nota-debito/lst-nota-debito.component';
 import { ProveedoresService } from '../proveedores.service';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 
 @Component({
@@ -27,7 +27,7 @@ export class PagoLetraComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService,
     private commonServices: CommonService,
     private cmVrSrv: CommonVarService
-  ) { 
+  ) {
     this.cmVrSrv.listenCxpRes.asObservable().subscribe(res =>{
       this.dialogRef.close();
     })
@@ -38,7 +38,7 @@ export class PagoLetraComponent implements OnInit {
   contacts:any = undefined;
   current_pending: any = 0.00;
   type_payments:any = [];
-  
+
   vmButtons:any = [];
   postDate: any = formatDate(new Date(), 'yyyy-MM-dd', 'en');
   validaciones: ValidacionesFactory = new ValidacionesFactory();
@@ -48,13 +48,13 @@ export class PagoLetraComponent implements OnInit {
       { orig: "btnPagoLetr", paramAccion: "", boton: { icon: "fa fa-check", texto: "ACEPTAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success btn-sm", habilitar: true, imprimir: false},
       { orig: "btnPagoLetr", paramAccion: "", boton: { icon: "fa fa-times", texto: "CERRAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger btn-sm", habilitar: false, imprimir: false}
     ];
-    
+
     setTimeout(() => {
       this.values = this.data.valor;
       this.catalogs = this.data.catalogs;
       this.type_payments = this.data.type_payments;
       this.contacts = this.data.contacts;
-      this.current_pending = this.data.current_pending;  
+      this.current_pending = this.data.current_pending;
       let f_pagos =  this.catalogs['FORMA PAGO PROVEEDOR'].filter(fp =>fp.valor != "Depósito")
       this.catalogs['FORMA PAGO PROVEEDOR'] = f_pagos;
     }, 5);
@@ -70,7 +70,7 @@ export class PagoLetraComponent implements OnInit {
             return;
           }
         }
-        
+
         if(this.validaciones.verSiEsNull(this.values.obs) == undefined){
           this.toastr.info("Por favor ingrese una observación");
           return;
@@ -101,7 +101,7 @@ export class PagoLetraComponent implements OnInit {
             }
             this.dialogRef.close(valor);
           }
-        }); */        
+        }); */
       break;
       case "CERRARbtnPagoLetr":
         this.dialogRef.close(false);
@@ -113,7 +113,7 @@ export class PagoLetraComponent implements OnInit {
     if(evt != "Nota de Débito"){
       this.values.typ_acc = 0
       this.values.ref_doc = undefined;
-  
+
       let data = {
         type: evt
       }
@@ -125,7 +125,7 @@ export class PagoLetraComponent implements OnInit {
         this.cmVrSrv.updPerm.next(false)
         this.toastr.info(error.error.message);
       });
-    }    
+    }
   }
 
   valorND:any = 0;
@@ -137,9 +137,9 @@ export class PagoLetraComponent implements OnInit {
     const dialogRef = this.confirmationDialogService.openDialogMat(LstNotaDebitoComponent, {
       width: '1000px', height: 'auto',
       data: { titulo: "Listado de Nota de Débito"  }
-      
+
     } );
- 
+
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado!=false && resultado!=undefined){
         this.valorND = resultado.total;
@@ -148,7 +148,7 @@ export class PagoLetraComponent implements OnInit {
         this.values.pay = this.valorND;
       }
       this.payAmountChange();
-    }); 
+    });
   }
 
   payAmountChange() {

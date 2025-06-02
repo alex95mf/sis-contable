@@ -21,6 +21,5 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
   ],
-  entryComponents: []
 })
 export class BodegaModule { }

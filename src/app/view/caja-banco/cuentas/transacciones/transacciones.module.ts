@@ -18,6 +18,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     TransaccionesRoutingModule,
     AppCustomModule
   ],
-  entryComponents: [ReportesTransComponent]
 })
 export class TransaccionesModule { }

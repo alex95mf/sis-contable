@@ -53,7 +53,7 @@ export class ComparativoComponent implements OnInit {
     private toastr: ToastrService,
     private apiService: ComparativoService,
     private xlsService: XlsExportService,
-    private ngConfig: PrimeNGConfig,
+    private ngConfig: PrimeNG,
   ) {
     this.vmButtons = [
       {

@@ -7,9 +7,9 @@ import { CommonVarService } from '../../../../../services/common-var.services';
 import { Router } from "@angular/router";
 import * as moment from "moment";
 import * as myVarGlobals from "../../../../../global";
-import 'sweetalert2/src/sweetalert2.scss';  
+import 'sweetalert2/src/sweetalert2.scss';
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 
 @Component({
 standalone: false,
@@ -79,7 +79,7 @@ export class ViewComponent implements OnInit {
     this.monto = this.dt.monto;
     this.interes   = this.dt.interes;
     this.porcentaje   = this.dt.porcentaje;
-    this.montoTotal = this.dt.monto_total;  
+    this.montoTotal = this.dt.monto_total;
     this.montoCuotas  = this.dt.cuotas_paga;
     this.processing = true;
     setTimeout(() => {
@@ -94,7 +94,7 @@ export class ViewComponent implements OnInit {
     this.validatePermission();
   }
 
-  metodoGlobal(evento: any) {	
+  metodoGlobal(evento: any) {
 		switch (evento.items.boton.texto) {
 			case "IMPRIMIR":
 				this.savePrint();
@@ -102,7 +102,7 @@ export class ViewComponent implements OnInit {
       case "CERRAR":
 				this.closeModal();
 			break;
-		}    
+		}
 	}
 
   validatePermission() {
@@ -115,7 +115,7 @@ export class ViewComponent implements OnInit {
         this.permissions = res["data"][0];
         if (this.permissions.ver == "0") {
           this.lcargando.ctlSpinner(false);
-          this.toastr.info("Usuario no tiene Permiso para ver el formulario de Prestamo");  
+          this.toastr.info("Usuario no tiene Permiso para ver el formulario de Prestamo");
           this.closeModal();
         } else {
           this.prestamoIdDT();

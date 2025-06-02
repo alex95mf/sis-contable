@@ -33,9 +33,6 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     FlatpickrModule,
     NgxPrintModule,
     DatePickerModule
-  ], 
-  entryComponents:[
-    ShowCuentasComponent, ShowNotasDebitoComponent
-  ]
+  ],
 })
 export class NotaDebitoModule { }

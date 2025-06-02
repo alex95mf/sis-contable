@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotaDebitoService } from './nota-debito.service';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { ShowNotasDebitoComponent } from './show-notas-debito/show-notas-debito.component';
 import { Socket } from '../../../../services/socket.service';
@@ -70,8 +70,8 @@ export class NotaDebitoComponent implements OnInit {
   contador = 0;
   c = 0;
   ccc = 0;
-  
-  
+
+
   mensajeSppiner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
@@ -125,7 +125,7 @@ export class NotaDebitoComponent implements OnInit {
 
   ngOnInit(): void {
 
-     
+
     this.vmButtons = [
       { orig: "btnNotDebInv", paramAccion: "", boton: { icon: "fa fa-floppy-o", texto: "GUARDAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: false },
       { orig: "btnNotDebInv", paramAccion: "", boton: { icon: "fa fa-pencil-square-o", texto: "MODIFICAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary boton btn-sm", habilitar: true },
@@ -556,19 +556,19 @@ export class NotaDebitoComponent implements OnInit {
       const dialogRef = this.confirmationDialogService.openDialogMat(ReportNotaDebitoInvComponent, {
         width: '1500px', height: 'auto',
         data: { titulo: "Reporte Nota De Débito", latestStatus: this.latestStatus}
-        
+
       } );
-   
+
       dialogRef.afterClosed().subscribe(resultado => {
         if(resultado!=false && resultado!=undefined){
-          
 
-          
+
+
         }else{
           this.latestStatus = null;
           this.closeModalDebito();
         }
-      }); 
+      });
 
     }
   }

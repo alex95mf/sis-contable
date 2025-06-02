@@ -9,7 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalProductComponent } from './modal-product/modal-product.component'
 import * as moment from 'moment';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import { Socket } from '../../../../services/socket.service';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 declare const $: any;

@@ -15,7 +15,7 @@ import { Socket } from "../../../../services/socket.service";
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import { ConfirmationDialogService } from '../../../../config/custom/confirmation-dialog/confirmation-dialog.service';
 import { ParametroCuentaComponent } from './parametro-cuenta/parametro-cuenta.component';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 
 @Component({
 standalone: false,

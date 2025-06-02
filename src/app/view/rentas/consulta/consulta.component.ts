@@ -6,7 +6,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { ReporteService } from './reporte.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { Table } from 'primeng/table';
 
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
@@ -26,11 +27,11 @@ standalone: false,
   .layout-news-active :host ::ng-deep .p-datatable tr > th {
       top: 7rem;
   }
-  
+
 `]
 })
 export class ConsultaComponent implements OnInit {
-  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
+  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('tblTitulosEmiDet') tblTitulosEmiDet: Table
   @ViewChild('tblEmiDetalladaDia') tblEmiDetalladaDia: Table
   @ViewChild('tblEmiPredUrb') tblEmiPredUrb: Table
@@ -71,7 +72,7 @@ export class ConsultaComponent implements OnInit {
   today = moment(new Date()).format('YYYY-MM-DD');
   fecha_desde: string = moment(this.today).startOf('month').format('YYYY-MM-DD');
   fecha_hasta: string = moment(this.today).endOf('month').format('YYYY-MM-DD');
-  filter: any 
+  filter: any
   // filter: any = {
   //   selectedConcepto: ' ',
   //   fecha_desde: moment().subtract(1, 'month').startOf('month').format('YYYY-MM-DD'),
@@ -105,15 +106,15 @@ export class ConsultaComponent implements OnInit {
         habilitar: false,
       },
       ,
-      { 
-        orig: "btnsRenConsultaReporte", 
-        paramAccion: "", 
-        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
+      {
+        orig: "btnsRenConsultaReporte",
+        paramAccion: "",
+        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
         habilitar: false
       },
     ];
@@ -150,8 +151,8 @@ export class ConsultaComponent implements OnInit {
       default:
         break;
     }
-  } 
-  
+  }
+
   consultar() {
 
     if(this.selectedReporte=='rpt_titulos_emitidos_detalle'){
@@ -169,7 +170,7 @@ export class ConsultaComponent implements OnInit {
     if(this.selectedReporte=='rpt_resumen_anulacion'){
       this.tblResumenAnulacion.first = 0
     }
-   
+
     this.first = 0
     this.nextPage({first: this.first, rows: this.rows})
   }
@@ -269,13 +270,13 @@ export class ConsultaComponent implements OnInit {
     console.log(this.filter)
         this.msgSpinner = 'Cargando...';
         // this.lcargando.ctlSpinner(true);
-        this.filter.reporte = this.selectedReporte 
-    
+        this.filter.reporte = this.selectedReporte
+
         let data= {
           params: {
             filter: this.filter,
             paginate: this.paginate,
-            
+
           }
         }
         this.apiService.getConsultaReportes(data).subscribe(
@@ -296,12 +297,12 @@ export class ConsultaComponent implements OnInit {
               }
               if(this.filter.reporte == 'rpt_emision_predios_urbanos'){
                 this.countTitulos = res.data.total[0].count
-                this.totalImpPrin =  res.data.total[0].total_imp 
-                this.totalSolNoEdif = res.data.total[0].total_solar_no_efificado 
-                this.totalConEspMe = res.data.total[0].total_cem  
-                this.totalConEsp =  res.data.total[0].total_cem2022 
-                this.totalTasaAdm = res.data.total[0].total_sta 
-                this.totalEmiPreUrb =  res.data.total[0].total_general 
+                this.totalImpPrin =  res.data.total[0].total_imp
+                this.totalSolNoEdif = res.data.total[0].total_solar_no_efificado
+                this.totalConEspMe = res.data.total[0].total_cem
+                this.totalConEsp =  res.data.total[0].total_cem2022
+                this.totalTasaAdm = res.data.total[0].total_sta
+                this.totalEmiPreUrb =  res.data.total[0].total_general
                 this.totalAseoCalle = res.data.total[0].total_aseo_calle
                 //this.totalesEmiPredUrb()
               }
@@ -329,11 +330,11 @@ export class ConsultaComponent implements OnInit {
            // this.lcargando.ctlSpinner(false);
           }
         )
-        
+
       }
   calculoTotalTitulosEmi(name) {
     let total = 0;
-   
+
     if (this.dataReportes.length > 0) {
       for (let datos of this.dataReportes) {
           if (datos.nombre == name ) {
@@ -341,7 +342,7 @@ export class ConsultaComponent implements OnInit {
           }
       }
     }
-    
+
     return total;
   }
   calculoSaldoTitulosEmi(name){
@@ -358,7 +359,7 @@ export class ConsultaComponent implements OnInit {
   titulosEmiTotales() {
     let total = 0;
     let saldo = 0;
-   
+
     if (this.dataReportes.length > 0) {
       for (let datos of this.dataReportes) {
             total += parseFloat(datos.total);
@@ -371,7 +372,7 @@ export class ConsultaComponent implements OnInit {
 
   emiDetDiaTotales(){
     let total = 0;
-   
+
     if (this.dataReportes.length > 0) {
       for (let datos of this.dataReportes) {
             total += parseFloat(datos.total);
@@ -382,7 +383,7 @@ export class ConsultaComponent implements OnInit {
 
   calculoTotalEmiDetDia(name){
     let total = 0;
-   
+
     if (this.dataReportes.length > 0) {
       for (let datos of this.dataReportes) {
           if (datos.concepto == name ) {
@@ -390,13 +391,13 @@ export class ConsultaComponent implements OnInit {
           }
       }
     }
-    
+
     return total;
   }
 
   calculoTituEmiTotal(name){
     let total = 0;
-   
+
     if (this.dataReportes.length > 0) {
       for (let datos of this.dataReportes) {
           if (datos.rubros == name ) {
@@ -416,7 +417,7 @@ export class ConsultaComponent implements OnInit {
     let totalConEsp = 0;
     let totalTasaAdm = 0;
     let total = 0;
-   
+
     if (this.dataReportes.length > 0) {
       for (let datos of this.dataReportes) {
             count += 1
@@ -428,20 +429,20 @@ export class ConsultaComponent implements OnInit {
             total += parseFloat(datos.total);
       }
     }
-    
+
     this.countTitulos = count
-    this.totalImpPrin = totalImpPrin 
+    this.totalImpPrin = totalImpPrin
     this.totalSolNoEdif = totalSolNoEdif
-    this.totalConEspMe = totalConEspMe 
-    this.totalConEsp = totalConEsp 
+    this.totalConEspMe = totalConEspMe
+    this.totalConEsp = totalConEsp
     this.totalTasaAdm = totalTasaAdm
-    this.totalEmiPreUrb = total 
+    this.totalEmiPreUrb = total
   }
 
   totalesTituEmi(){
-  
+
     let total = 0;
-   
+
     if (this.dataReportes.length > 0) {
       for (let datos of this.dataReportes) {
             total += parseFloat(datos.total);
@@ -453,7 +454,7 @@ export class ConsultaComponent implements OnInit {
 
   cantidadTitulosAnula(name){
     let cant = 0;
-   
+
     if (this.dataReportes.length > 0) {
       for (let datos of this.dataReportes) {
           if (datos.nombre2 == name ) {
@@ -465,11 +466,11 @@ export class ConsultaComponent implements OnInit {
   }
   calculoTitulosAnula(name){
     let total = 0;
-   
+
     if (this.dataReportes.length > 0) {
       for (let datos of this.dataReportes) {
           if (datos.nombre2 == name ) {
-            total += parseFloat(datos.total); 
+            total += parseFloat(datos.total);
           }
       }
     }
@@ -479,7 +480,7 @@ export class ConsultaComponent implements OnInit {
   totalGeneralTitulosAnu(){
     let total = 0;
     let cant = 0;
-   
+
     if (this.dataReportes.length > 0) {
       for (let datos of this.dataReportes) {
             cant += 1;
@@ -511,12 +512,12 @@ export class ConsultaComponent implements OnInit {
           if (element.reporte == this.selectedReporte){
             console.log('desde: '+element.fecha_desde);
             console.log('hasta: '+element.fecha_hasta);
-            
-            window.open(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
+
+            window.open(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin=" + this.filter.fecha_hasta +"&concepto="+this.filter.selectedConcepto , '_blank')
-            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting + 
+            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting +
             //"&j_password=" + environment.PasswordReporting + "&id_liquidacion=" + dt.id_liquidacion + "&forma_pago=" + this.pagos[0].tipo_pago_lbl , '_blank')
-            console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
+            console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin=" + this.filter.fecha_hasta+"&concepto="+this.filter.selectedConcepto);
           }
         });
@@ -527,7 +528,7 @@ export class ConsultaComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       }
     )
-    
+
   }
 
   /*
@@ -558,12 +559,12 @@ export class ConsultaComponent implements OnInit {
           if (element.reporte == this.selectedReporte){
             console.log('desde: '+element.fecha_desde);
             console.log('hasta: '+element.fecha_hasta);
-            
-            window.open(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting 
+
+            window.open(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin=" + this.filter.fecha_hasta +"&estado="+"A"+"&concepto="+this.filter.selectedConcepto , '_blank')
-            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting + 
+            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting +
             //"&j_password=" + environment.PasswordReporting + "&id_liquidacion=" + dt.id_liquidacion + "&forma_pago=" + this.pagos[0].tipo_pago_lbl , '_blank')
-            console.log(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting 
+            console.log(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin=" + this.filter.fecha_hasta+"&estado="+"A"+"&concepto="+this.filter.selectedConcepto);
           }
         });
@@ -574,10 +575,10 @@ export class ConsultaComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       }
     )
-    
+
   }
 
-  selectOption1(evt) { 
+  selectOption1(evt) {
     this.dataReportes = []
     this.limpiarTotales()
   }

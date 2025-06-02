@@ -27,8 +27,5 @@ import { CuentaClienteComponent } from './cuenta-cliente/cuenta-cliente.componen
     CobranzaRoutingModule,
     AppCustomModule
   ],
-  entryComponents: [
-    CuentaClienteComponent
-  ]
 })
 export class CobranzaModule { }

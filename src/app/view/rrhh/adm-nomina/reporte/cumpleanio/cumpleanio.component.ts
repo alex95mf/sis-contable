@@ -6,8 +6,8 @@ import { ReporteNominaService } from '../reporte.service'
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import 'sweetalert2/src/sweetalert2.scss';  
-const Swal = require('sweetalert2');
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal from 'sweetalert2';
 import * as moment from 'moment';
 @Component({
 standalone: false,
@@ -117,8 +117,8 @@ export class CumpleanioComponent implements OnInit {
       let data = {
         fecha: this.mes == 0 ? null : this.mes,
       }
-      this.reportService.getPersonalCumple(data).subscribe(res => {  
-        console.log(res);    
+      this.reportService.getPersonalCumple(data).subscribe(res => {
+        console.log(res);
         this.validaDt = true;
         this.arrayCumple = res['data'];
         if(this.arrayCumple.length > 0){
@@ -136,7 +136,7 @@ export class CumpleanioComponent implements OnInit {
         this.toastr.info(error.error.message);
       });
     }
-    
+
     filterptDepartamento(data) {
       if (this.mes != 0) {
         this.mes = data;

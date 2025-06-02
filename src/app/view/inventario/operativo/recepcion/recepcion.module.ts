@@ -14,8 +14,5 @@ import { DataTablesModule } from 'angular-datatables';
     AppCustomModule,
     DataTablesModule
   ],
-  entryComponents: [
-    ShowRecepcionComponent
-  ]
 })
 export class RecepcionModule { }

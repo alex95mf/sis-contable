@@ -8,10 +8,7 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
   declarations: [ConsultaComponent],
   imports: [
     ConsultaRoutingModule,
-    AppCustomModule    
+    AppCustomModule
   ],
-  entryComponents: [
-    
-  ]
 })
 export class ConsultaCentroModule { }

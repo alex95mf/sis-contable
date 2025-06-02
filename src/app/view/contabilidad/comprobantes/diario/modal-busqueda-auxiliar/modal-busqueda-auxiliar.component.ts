@@ -18,7 +18,7 @@ export class ModalBusquedaAuxiliarComponent implements AfterViewChecked {
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private entityService: CustonService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private cdRef:ChangeDetectorRef,
   ) { }
 

@@ -42,9 +42,6 @@ import { ExcelService } from 'src/app/services/excel.service';
     NgbModule
 
   ],
-  entryComponents: [
-    ListadoComponent,CargaComponent,CumpleanioComponent
-  ],
   providers: [
     ExcelService,
   ]

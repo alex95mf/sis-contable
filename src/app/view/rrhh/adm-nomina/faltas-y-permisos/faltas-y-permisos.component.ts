@@ -6,15 +6,16 @@ import * as myVarGlobals from '../../../../global';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { EmployeesResponseI } from 'src/app/models/responseEmployee.interface'; 
+import { EmployeesResponseI } from 'src/app/models/responseEmployee.interface';
 import { CcModalTableEmpleadoComponent } from 'src/app/config/custom/modal-component/cc-modal-table-empleado/cc-modal-table-empleado.component';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
 //import { FaltaAndPermisoAditionalResponseI, FaltaPermiso } from 'src/app/Models/responseFaltasAndPermisosAditional.interface';
 import { FaltaAndPermisoAditionalResponseI, FaltaPermiso } from 'src/app/models/responseFaltasAndPermisosAditional.interfase';
-import { LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
-import { GeneralResponseI } from 'src/app/models/responseGeneral.interface'; 
+import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
+import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
 import { format } from 'util';
 // import { TranslateService } from '@ngx-translate/core';
 
@@ -132,7 +133,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
     public dialogService: DialogService,
     private fb: FormBuilder,
     private perfaltasypermisosService: PerFaltasYPermisosService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     // private translateService: TranslateService,
     private configService: AppConfigService,
   ) {
@@ -591,7 +592,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
 
   // /**
   //  * validar rango
-  //  * @returns 
+  //  * @returns
   //  */
   // private dateRangeValidator: ValidatorFn = (): {
   //   [key: string]: any;
@@ -744,7 +745,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
 
         for (let i = 0; i < res.length; i++) {
 
-          
+
           dataPointGrafit.push(res[i].total);
 
 /*
@@ -756,9 +757,9 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
               labelGraf[0]['data'].push(res[i].total);
             } else {
 
-             
 
-              
+
+
 
               DataSetGrafitDune.push({
                 label: res[i].motivo,
@@ -835,10 +836,10 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
     let flpr_anio = dataOption['flpr_anio'];
     let id_mes = dataOption['id_mes'];
     let motivo_permiso = dataOption['motivo_permiso'];
-   
+
     // let id_empresa = dataOption['id_empresa'];
     return this.apiService.apiCall(`fault_and_permissions/report_grafi?flpr_anio=${flpr_anio}&id_mes=${id_mes}&motivo_permiso=${motivo_permiso}`, "GETV1", {});
-  
+
   }*/
 
 
@@ -968,7 +969,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * 
+   *
    * @returns actualizar confir
    */
   async validaUpdateFaltaAndPermiso() {
@@ -1079,7 +1080,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * actualizar 
+   * actualizar
    */
   async updateFaltaAndPermisoEmpleado() {
     const idEmp = this.faltasAndDescuentosForm.id_empleado;
@@ -1162,11 +1163,11 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
   /**
    * Buscar empleado
    */
-  
+
   onClicConsultaEmpleadosFaltasAndPermisos(content) {
-    
+
     console.log(this.formGroupFaltaAndPermiso.get('fcn_full_nombre_empleado').value);
-    
+
     this.ref = this.dialogService.open(CcModalTableEmpleadoComponent, {
       data: {
         relation: "not",
@@ -1385,7 +1386,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
 
 
   applyDarkTheme() {
-   
+
 
     this.horizontalOptions = {
       indexAxis: 'y',
@@ -1560,14 +1561,14 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
         this.getFaltasPermisos(idEmp);
         this.lcargando.ctlSpinner(false);
 
-   
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
         this.toastr.error(error?.error?.detail);
-       
+
       }
     );
   }
-  
+
 }

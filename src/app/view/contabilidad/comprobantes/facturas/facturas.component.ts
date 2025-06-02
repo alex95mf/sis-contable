@@ -8,7 +8,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { CierreMesService } from '../../ciclos-contables/cierre-de-mes/cierre-mes.service';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 //import Swal from "sweetalert2";
 //import 'sweetalert2/src/sweetalert2.scss';
 import { ToastrService } from 'ngx-toastr';

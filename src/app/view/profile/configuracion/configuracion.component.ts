@@ -6,7 +6,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from "ngx-cookie-service";
 import { ToastrService } from 'ngx-toastr';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import { Socket } from 'src/app/services/socket.service';
 import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';

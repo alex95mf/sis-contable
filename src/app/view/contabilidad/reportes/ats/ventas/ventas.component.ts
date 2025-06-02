@@ -7,8 +7,8 @@ import { RprtAtsService } from './../ats.service';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import 'sweetalert2/src/sweetalert2.scss';  
-const Swal = require('sweetalert2');
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal from 'sweetalert2';
 import * as moment from 'moment';
 
 @Component({
@@ -19,7 +19,7 @@ standalone: false,
 })
 export class VentasComponent implements OnInit {
 
-  
+
   @Input() ListaAtsVentas: any;
 
 
@@ -27,8 +27,8 @@ export class VentasComponent implements OnInit {
 
   constructor(
     private rprService: RprtAtsService
-  ) { 
-    
+  ) {
+
   }
 
   ChangeDecimal(valor:string){

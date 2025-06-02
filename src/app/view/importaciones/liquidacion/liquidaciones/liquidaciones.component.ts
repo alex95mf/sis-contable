@@ -3,7 +3,7 @@ import * as myVarGlobals from '../../../../global';
 import { CommonService } from '../../../../../app/services/commonServices';
 import { CommonVarService } from '../../../../../app/services/common-var.services';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -216,7 +216,7 @@ export class LiquidacionesComponent implements OnInit {
           this.prefijo = " (Kg)"
           this.calculteXPeso();
         }
-      }    
+      }
     })
   }
 

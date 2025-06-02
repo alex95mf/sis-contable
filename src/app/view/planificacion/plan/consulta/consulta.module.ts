@@ -13,7 +13,6 @@ import { ShowPlanComponent } from './show/show.component';
         ConsultaRoutingModule,
         AppCustomModule
     ],
-    entryComponents: []
 })
 
 export class PlanConsultaModule {  }

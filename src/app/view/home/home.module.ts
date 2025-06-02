@@ -41,7 +41,6 @@ import { AppCustomModule } from '../../config/custom/app-custom.module';
 
   declarations: [
     HomeComponent],
-  entryComponents: []
 
 })
 export class HomeModule { }

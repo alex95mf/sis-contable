@@ -17,8 +17,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     BancariaRoutingModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ShowCuentasComponent
-  ]
 })
 export class BancariasModule { }

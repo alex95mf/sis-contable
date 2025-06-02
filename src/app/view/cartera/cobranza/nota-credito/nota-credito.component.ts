@@ -8,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShowCuentasComponent } from './show-cuentas/show-cuentas.component';
 import { NotaCreditoService } from './nota-credito.service';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { ShowNotasCreditoComponent } from './show-notas-credito/show-notas-credito.component';
 import { Socket } from '../../../../services/socket.service';

@@ -45,8 +45,6 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
   declarations: [
     ConsultaImportacionComponent, ViewConsultaComponent
   ],
-  entryComponents: [
-    ViewConsultaComponent]
 
 })
 export class ConsultaImportacionModule { }

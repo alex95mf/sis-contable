@@ -11,11 +11,7 @@ import { AppCustomModule } from '../../../config/custom/app-custom.module';
   imports: [
     ComprasRoutingModule,
     AppCustomModule
-    
+
   ],
-  entryComponents: [
-    DiferedBuyProvComponent,
-    ShowInvoicesComponent
-  ]
 })
 export class ComprasModule { }

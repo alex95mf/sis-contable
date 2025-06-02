@@ -68,9 +68,6 @@ import { ModalVistaFotosComponent } from './modal-vista-fotos/modal-vista-fotos.
     MatTabsModule,
 
   ],
-  entryComponents: [
-
-  ]
 
 })
 export class ProductoModule { }

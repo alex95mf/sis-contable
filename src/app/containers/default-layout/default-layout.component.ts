@@ -6,7 +6,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from "ngx-cookie-service";
 import { ToastrService } from 'ngx-toastr';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import { Socket } from '../../services/socket.service';
 import { CommonService } from '../../services/commonServices'
 import { CommonVarService } from '../../services/common-var.services'
@@ -15,7 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditPassComponent } from "./edit-pass/edit-pass.component";
 import { ConfirmationDialogService } from '../../config/custom/confirmation-dialog/confirmation-dialog.service';
 
-  
+
 import { PerfectScrollbarDirective, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { AppSettings } from '../../app.settings';
 import { Settings } from '../../app.settings.model';
@@ -103,7 +103,7 @@ export class DefaultLayoutComponent implements OnInit {
       this.user = this.dataUser.usuario;
 
       /* TODO: this.destroyInterval = setInterval(() => this.setActivityInterval(), 60000); */
-      // this.destroyInterval = setInterval(() => this.setActivityInterval(), 300000); 
+      // this.destroyInterval = setInterval(() => this.setActivityInterval(), 300000);
 
       this.commonSrv.onHandleNotification.asObservable().subscribe(res => {
         this.loadNotifications();
@@ -128,15 +128,15 @@ export class DefaultLayoutComponent implements OnInit {
       this.settings.sidenavIsOpened = false;
       this.settings.sidenavIsPinned = false;
     }
-    this.menuOption = 'Vertical'; 
-    this.menuTypeOption = this.settings.menuType; 
+    this.menuOption = 'Vertical';
+    this.menuTypeOption = this.settings.menuType;
     this.defaultMenu = this.settings.menu;
     /* plantilla */
 
     setTimeout(() => {
-      this.chooseMenu();  
+      this.chooseMenu();
     }, 50);
-    
+
 
     this.showPassUser();
     this.services.getIpAddress().subscribe(res => {
@@ -167,7 +167,7 @@ export class DefaultLayoutComponent implements OnInit {
             title: element.nombre
           };
           menuArmado.push(menuPlus);
-        });      
+        });
         this.menuItemsHori = menuArmado;
         this.presentarFavorito = true;
       }, error => {
@@ -219,7 +219,7 @@ export class DefaultLayoutComponent implements OnInit {
       this.router.navigateByUrl('home');
     })
   }
-  
+
 
   /* notifications methods */
   loadNotifications() {
@@ -321,20 +321,20 @@ export class DefaultLayoutComponent implements OnInit {
 
 
   /*PLANTILLA */
-  @ViewChild('sidenav') sidenav:any;  
-  @ViewChild('backToTop') backToTop:any;  
+  @ViewChild('sidenav') sidenav:any;
+  @ViewChild('backToTop') backToTop:any;
   @ViewChildren(PerfectScrollbarDirective) pss: QueryList<PerfectScrollbarDirective>;
   public optionsPsConfig: PerfectScrollbarConfigInterface = {};
   public settings:Settings;
   public showSidenav:boolean = false;
   public showInfoContent:boolean = false;
   public toggleSearchBar:boolean = false;
-  private defaultMenu:string; //declared for return default menu when window resized 
+  private defaultMenu:string; //declared for return default menu when window resized
   public menus = ['Vertical', 'Horizontal'];
   public menuOption:string;
   public menuTypes = ['Por Defecto', 'Compácto', 'Mini'];
   public menuTypeOption:string;
-  
+
   public toggleSidenav(){
     this.sidenav.toggle();
   }
@@ -344,7 +344,7 @@ export class DefaultLayoutComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   public chooseMenu(){
     //this.presentarHorizontal = false;
-    this.settings.menu = this.menuOption; 
+    this.settings.menu = this.menuOption;
     this.defaultMenu = this.menuOption;
     if(this.menuOption == 'Horizontal'){
       this.settings.fixedSidenav = false;
@@ -358,9 +358,9 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   public changeTheme(theme){
-    this.settings.theme = theme;       
+    this.settings.theme = theme;
   }
-  
+
   public closeInfoContent(showInfoContent){
     this.showInfoContent = !showInfoContent;
   }
@@ -379,7 +379,7 @@ export class DefaultLayoutComponent implements OnInit {
     }
   }
 
-  public onPsScrollY(event){   
+  public onPsScrollY(event){
     (event.target.scrollTop > 300) ? this.backToTop.nativeElement.style.display = 'flex' : this.backToTop.nativeElement.style.display = 'none';
   }
 
@@ -390,11 +390,11 @@ export class DefaultLayoutComponent implements OnInit {
       }
     });
   }
-  
+
   public closeSubMenus(){
     if(this.settings.menu == "Vertical"){
       this.menuService.closeAllSubMenus();
-    }      
+    }
   }
 
   MenuHorizontal() {
@@ -418,7 +418,7 @@ export class DefaultLayoutComponent implements OnInit {
           title: element.nombre
         };
         menuArmado.push(menuPlus);
-      }); 
+      });
         this.menuItemsHori = menuArmado;
         this.presentarFavorito = true;
     }, error => {
@@ -449,8 +449,8 @@ export class DefaultLayoutComponent implements OnInit {
   //         title: element.nombre
   //       };
   //       menuArmado.push(menuPlus);
-  //     });   
-    
+  //     });
+
   //     this.menuItemsHori = menuArmado;
   //     this.presentarFavorito = true;
   //   }, error => {

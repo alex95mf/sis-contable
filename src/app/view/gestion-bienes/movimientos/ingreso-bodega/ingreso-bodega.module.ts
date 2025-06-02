@@ -39,8 +39,5 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     AppCustomModule,
     NgxCurrencyDirective,
   ],
-  entryComponents: [
-    ShowOrderComponent
-  ]
 })
 export class IngresoBodegaModule { }

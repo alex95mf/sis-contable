@@ -14,7 +14,8 @@ import Swal from "sweetalert2";
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DiaTrabajado, DiaTrabajadoAditionalResponseI } from 'src/app/models/responseDayWorkedAditional.interface';
-import { LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 //import { TranslateService } from "@ngx-translate/core";
 import * as XLSX from 'xlsx';
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
@@ -166,7 +167,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
     private asistenciadiasempleService: AsistenciaEmpleadoService,
     private toastr: ToastrService,
     private fb: FormBuilder,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     //private translateService: TranslateService,
     private dialogRef: MatDialog,
     private messageService: MessageService,

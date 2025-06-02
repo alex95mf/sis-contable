@@ -35,7 +35,7 @@
                                     <ng-option *ngFor="let op of estadoList" [value]="op.value">
                                         <i
                                         placement="bottom"
-                                        [ngbTooltip]="(op.value == 'E') ? 'Emitido' : (op.value == 'A') ? 'Aprobado' : ((op.value == 'C') ? 'Pagado' : 'Negado')" 
+                                        [ngbTooltip]="(op.value == 'E') ? 'Emitido' : (op.value == 'A') ? 'Aprobado' : ((op.value == 'C') ? 'Pagado' : 'Negado')"
                                         [class]="(op.value == 'N') ? 'fas fa-circle text-danger' : (op.value == 'E') ? 'fas fa-circle text-warning' : ((op.value == 'A') ? 'fas fa-circle text-success' : 'fas fa-circle text-primary')">
                                     </i>
                                         {{ op.label }}</ng-option>
@@ -125,7 +125,7 @@
     </app-button-radio-active>
 </div>
 
-<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="msgSpinner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>
 
 <div id="PrintSection" [hidden]="true">
     <div class="row justify-content-center prt-comprobante">
@@ -144,7 +144,7 @@
             </div>
         </div>
     </div>
-        
+
     <div class="row justify-content-center prt-comprobante">
         <div class="col-11 pl-2 pr-2">
             <div class="row mb-2">
@@ -165,7 +165,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                                 <ng-container *ngFor="let dt of ordenesDt, let i = index">
                                     <tr>
                                         <td class="text-center">{{ dt.documento }}</td>

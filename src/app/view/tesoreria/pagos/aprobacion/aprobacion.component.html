@@ -12,7 +12,7 @@
                                     <ng-option  [value]="todosOption.valor"> - TODOS - </ng-option>
                                     <ng-option *ngFor="let op of tipoOrden" [value]="op.valor">
                                         {{ op.descripcion }}</ng-option>
-                                </ng-select>            
+                                </ng-select>
                             </app-cc-input-group-prepend>
                         </div>
                         <div class="col-sm" *ngIf="!nomina">
@@ -32,7 +32,7 @@
                                 <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.num_documento" placeholder="No. Documento">
                             </app-cc-input-group-prepend>
                         </div>
-                        
+
                     </div>
                     <div class="row">
                         <div class="col-sm">
@@ -106,7 +106,7 @@
                                 <td style="min-width: 100px;">{{ dt.catalogo?.descripcion }}</td>
                                 <!--<td>{{ dt.codigo_catastro }}</td>-->
                                 <!-- <td>{{ dt.config_contable === null ? 'No hay datos' : dt.config_contable.nombre}}</td> -->
-                                <td *ngIf="dt.tipo == 'PF'" style="min-width: 250px;"> 
+                                <td *ngIf="dt.tipo == 'PF'" style="min-width: 250px;">
                                     <div  *ngFor="let d of dt.detalles_cuentas, let f = index">
                                         <span><b>Cuenta {{f+1}}:</b>{{ d.cuenta_cxp }}</span>&nbsp;<span><b>Nombre {{f+1}}:</b>{{ d?.nombre_cuenta_cxp === null ? 'No hay datos' : d.nombre_cuenta_cxp }}</span>
                                         <!-- <div class="row">
@@ -165,7 +165,7 @@
                         </tbody>
                     </table>
                 </div>
-                
+
                 <!-- <table *ngIf="nomina" id="tabla1" class="table table-bordered no-footer table-hover mb-0">
                     <thead class="thead-dark">
                         <tr class="text-center">
@@ -195,7 +195,7 @@
                             <td class="text-center">{{ dt.fecha.split(" ")[0] }}</td>
                             <td>{{ dt.empleados ? dt.empleados.emp_full_nombre : 'No hay datos' }}</td>
                             <td>{{ dt.catalogo?.descripcion }}</td>
-                           
+
                             <td class="text-center">
                                 <div class="row">
                                     <div class="col">{{ dt?.cuenta === null ? 'No hay datos' : dt?.cuenta?.nombre }}</div>
@@ -222,13 +222,13 @@
                             </td>
                             <td class="text-center">{{ dt.fecha_gestion === null ? 'Sin fecha' : dt.fecha_gestion.split(" ")[0] }}</td>
                             <td class="text-center">{{ dt.fecha_recepcion === null ? 'Sin fecha' : dt.fecha_recepcion.split(" ")[0] }}</td>
-                          
+
                             <td>
                                 <div class="text-center mx-auto">
                                     <button class="btn btn-primary btn-sm mx-1" (click)="showModalGestion(false, dt)" placement="left" ngbTooltip="Seleccionar orden de pago">
                                         <i class="fas fa-hand-pointer"></i>
                                     </button>
-                                   
+
                                 </div>
                             </td>
                         </tr>
@@ -241,7 +241,7 @@
     </app-button-radio-active>
 </div>
 
-<cc-spiner-procesar style="z-index: 2000;" [ltexto]="mensajeSppiner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>
+<cc-spiner-procesar style="z-index: 2000;" [ltexto]="msgSpinner" lfulScren=true lTipo="listRecDocumentos"></cc-spiner-procesar>
 <iframe [hidden]="true" id="docpdf" style="background-color:#EEE; width:750px;height:600px;">
     PDF goes here
 </iframe>

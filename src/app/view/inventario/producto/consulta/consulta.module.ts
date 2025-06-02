@@ -31,8 +31,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
   ],
   declarations: [
     ConsultaComponent, ModalGroupComponent, AutofocusDirective, AnexosComponent],
-  entryComponents: [
-    ModalGroupComponent, AnexosComponent
-  ]
 })
 export class ConsultaProductoModule { }

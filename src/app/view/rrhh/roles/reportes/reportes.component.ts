@@ -4,9 +4,10 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { environment } from 'src/environments/environment';
 import { ButtonRadioActiveComponent } from '../../../../config/custom/cc-panel-buttons/button-radio-active.component';
 import * as moment from 'moment';
-import { ActaFiniquitoService } from '../acta-finiquito/acta-finiquito.service'; 
+import { ActaFiniquitoService } from '../acta-finiquito/acta-finiquito.service';
 import { Table } from 'primeng/table';
-import { LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 
 @Component({
 standalone: false,
@@ -16,11 +17,11 @@ standalone: false,
 })
 export class ReportesComponent implements OnInit {
 
-  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
+  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('tblRrhhDistributivo') tblRrhhDistributivo: Table
   @ViewChild('tblRrhhDirectorio') tblRrhhDirectorio: Table
   @ViewChild('tblRrhhRemuneracion') tblRrhhRemuneracion: Table
-  
+
   fTitle: string = "Reportes de LOTAIP";
   msgSpinner: string;
 
@@ -47,7 +48,7 @@ export class ReportesComponent implements OnInit {
   pageIndex: number = 1;
   pageSize: number = 5;
   pageSizeOptions: number[] = [50,100,200];
- 
+
   filter: any = {
     selectedConcepto: ' ',
     selectedCaja: ' ',
@@ -139,15 +140,15 @@ export class ReportesComponent implements OnInit {
         clase: "btn btn-danger boton btn-sm",
         habilitar: false,
       },
-      { 
-        orig: "btnsRenConsultaReporte", 
-        paramAccion: "", 
-        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
+      {
+        orig: "btnsRenConsultaReporte",
+        paramAccion: "",
+        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
         habilitar: false
       },
     ];
@@ -165,7 +166,7 @@ export class ReportesComponent implements OnInit {
       this.getTiposReporte()
       await this.cargaInicial()
     }, 75);
-    
+
   }
   ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
   periodoSelected(evt: any, year:any){
@@ -196,7 +197,7 @@ export class ReportesComponent implements OnInit {
         break;
     }
   }
-  
+
   consultar() {
     if(this.selectedReporte=='rpt_rrhh_distributivo'){
       this.tblRrhhDistributivo.first = 0
@@ -207,7 +208,7 @@ export class ReportesComponent implements OnInit {
     if(this.selectedReporte=='rpt_rrhh_remuneracion'){
       this.tblRrhhRemuneracion.first = 0
     }
-   
+
     this.first = 0
     this.nextPage({first: this.first, rows: this.rows})
   }
@@ -239,28 +240,28 @@ export class ReportesComponent implements OnInit {
       this.toastr.info('Debe ingresar un Período');
       return;
     }
-   
+
       this.msgSpinner = 'Cargando...';
       //this.lcargando.ctlSpinner(true);
-      this.filter.reporte = this.selectedReporte 
+      this.filter.reporte = this.selectedReporte
       this.filter.mes = this.mes_actual
 
       let data= {
         params: {
           filter: this.filter,
           paginate: this.paginate,
-          
+
         }
       }
-     
-  
+
+
       this.apiService.getConsultaReportes(data).subscribe(
         (res: any) => {
            console.log(res);
            if(res.status==1){
             this.dataReportes = res.data.data;
             this.totalRecords= res.data?.total[0]?.count
-          
+
             //this.dataReportes = res.data;
             this.loading = false;
             //this.lcargando.ctlSpinner(false);
@@ -277,10 +278,10 @@ export class ReportesComponent implements OnInit {
           //this.lcargando.ctlSpinner(false);
         }
       )
-      
+
     }
 
-  
+
   mostrarReporte(){
     console.log(this.filter.periodo)
     if (
@@ -312,11 +313,11 @@ export class ReportesComponent implements OnInit {
           console.log(this.selectedReporte);
           if (element.reporte == this.selectedReporte){
             console.log(this.filter.periodo);
-            window.open(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
+            window.open(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&p_anio=" + this.filter.periodo+"&p_mes=" + this.mes_actual, '_blank')
-            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting + 
+            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting +
             //"&j_password=" + environment.PasswordReporting + "&id_liquidacion=" + dt.id_liquidacion + "&forma_pago=" + this.pagos[0].tipo_pago_lbl , '_blank')
-            console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
+            console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&p_anio=" + this.filter.periodo+"&p_mes=" + this.mes_actual);
           }
         });
@@ -327,7 +328,7 @@ export class ReportesComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       }
     )
-    
+
   }
 
 
@@ -383,10 +384,10 @@ export class ReportesComponent implements OnInit {
           };
           //this.reportes.push({ ...o });
           if (element.reporte == this.selectedReporte){
-            window.open(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting 
+            window.open(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&p_anio=" + this.filter.periodo+"&p_mes=" + this.mes_actual, '_blank')
 
-            console.log(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting 
+            console.log(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&p_anio=" + this.filter.periodo+"&p_mes=" + this.mes_actual);
 
           }
@@ -398,7 +399,7 @@ export class ReportesComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       }
     )
-    
+
   }
 
   limpiarFiltros() {

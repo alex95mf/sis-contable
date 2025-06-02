@@ -47,7 +47,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppCustomModule
   ],
   declarations: [BusquedaProductoComponent, ImagenesComponent, DocumentComponent],
-  entryComponents: [ImagenesComponent,DocumentComponent]
 })
 
 export class BusquedaProductoModule { }

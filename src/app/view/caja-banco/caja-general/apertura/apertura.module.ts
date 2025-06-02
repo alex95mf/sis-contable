@@ -20,8 +20,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     NgbModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ShowDenominationComponent
-  ]
 })
 export class AperturaModule { }

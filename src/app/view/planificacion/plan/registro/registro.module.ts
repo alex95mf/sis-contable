@@ -14,7 +14,6 @@ import { NgxCurrencyDirective } from "ngx-currency";
         AppCustomModule,
         NgxCurrencyDirective,
     ],
-    entryComponents: []
 })
 
 export class PlanRegistroModule {  }

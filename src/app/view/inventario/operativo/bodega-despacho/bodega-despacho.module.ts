@@ -23,8 +23,5 @@ import {NgxPrintModule} from 'ngx-print';
     NgxPrintModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ShowInvoiceComponent,ConfirmInvoiceComponent
-  ]
 })
 export class BodegaDespachoModule { }

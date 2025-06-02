@@ -4,7 +4,7 @@ import * as myVarGlobals from '../../../../global';
 import { CommonService } from '../../../../../app/services/commonServices';
 import { CommonVarService } from '../../../../../app/services/common-var.services';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DiferedCuotesComponent } from './difered-cuotes/difered-cuotes.component';
@@ -256,7 +256,7 @@ export class PedidosComponent implements OnInit {
     } else {
       setTimeout(() => {
         this.dataProducto[index].cantidad = "" ;
-        document.getElementById('quanty'+index).focus();        
+        document.getElementById('quanty'+index).focus();
       }, 50);
       let filt = this.arrayProductos.filter(e => e.id_producto == evt);
       filt = filt[0];
@@ -645,7 +645,7 @@ export class PedidosComponent implements OnInit {
         this.cancel();
         break;
     }
-  }  
+  }
 
   changeFlag(){
     if(this.importPed.fk_pais != 0){

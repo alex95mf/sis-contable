@@ -9,7 +9,8 @@ import { ReporteService } from './reporte.service';
 import * as myVarGlobals from 'src/app/global';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonVarService } from 'src/app/services/common-var.services';
-import { LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { Table } from 'primeng/table';
 import { AnySrvRecord } from 'dns';
 import 'moment/locale/es';
@@ -34,7 +35,7 @@ standalone: false,
 `]
 })
 export class ReporteComponent implements OnInit {
-  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
+  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('tblRecExpCoactivos') tblRecExpCoactivos: Table
   @ViewChild('tblDivConceptos') tblDivConceptos: Table
   @ViewChild('tblGeneral') tblGeneral: Table
@@ -106,7 +107,7 @@ export class ReporteComponent implements OnInit {
  filter: any
 
   reportes: any[] = [];
-  mercados: any[] = [];  
+  mercados: any[] = [];
   sectores: any[] = [];
   estados: any[] = [];
   selectedReporte: any = undefined;
@@ -115,14 +116,14 @@ export class ReporteComponent implements OnInit {
   selectedSector: any = ' ';
   selectedEstado: any = ' ';
   selectedTipo: any = ' ';
-  
+
   razon_social:any = ' ';
   reporte = {
     fk_contribuyente: { razon_social: '', email: 'dbarrera@todotek.net' },
     proceso:'',
     total:0,
     observaciones:'',
-    
+
   }
   loading: boolean;
   totalRecords: number;
@@ -143,11 +144,11 @@ export class ReporteComponent implements OnInit {
     private toastr: ToastrService,
     private commonVarService: CommonVarService,
     private modalService: NgbModal,
-  ) { 
+  ) {
     this.commonVarService.selectContribuyenteCustom.asObservable().subscribe(
-      
+
       (res: any) => {
-          
+
           this.reporte.fk_contribuyente = res
           this.filter.fk_contribuyente = res.id_cliente
           console.log(res);
@@ -172,15 +173,15 @@ export class ReporteComponent implements OnInit {
         clase: "btn btn-info boton btn-sm",
         habilitar: false,
       },
-      { 
-        orig: "btnsRenConsultaReporte", 
-        paramAccion: "", 
-        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
+      {
+        orig: "btnsRenConsultaReporte",
+        paramAccion: "",
+        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
         habilitar: false
       },
     ];
@@ -220,10 +221,10 @@ export class ReporteComponent implements OnInit {
       this.getTiposReporte()
     }, 75)
     setTimeout(() => {
-      this.getMercados() 
+      this.getMercados()
     }, 75)
     setTimeout(() => {
-      this.getSector() 
+      this.getSector()
     }, 75)
     setTimeout(() => {
       this.getConceptosReporte()
@@ -238,7 +239,7 @@ export class ReporteComponent implements OnInit {
       case "EXCEL":
         this.btnExportar()
         break;
-    
+
       default:
         break;
     }
@@ -287,16 +288,16 @@ export class ReporteComponent implements OnInit {
   this.loading = true;
     this.msgSpinner = 'Cargando...';
     //this.lcargando.ctlSpinner(true);
-    this.filter.reporte = this.variableFiltro 
+    this.filter.reporte = this.variableFiltro
 
     let data= {
       params: {
         filter: this.filter,
         paginate: this.paginate,
-        
+
       }
     }
-   
+
 
     this.apiService.getConsultaReportes(data).subscribe(
       (res: any) => {
@@ -304,7 +305,7 @@ export class ReporteComponent implements OnInit {
          if(res.status==1){
           this.dataReportes = res.data.data;
           this.totalRecords= res.data?.total[0]?.count
-        
+
           //this.dataReportes = res.data;
 
           if(this.filter.reporte =='rpt_diversos_conceptos'){
@@ -314,11 +315,11 @@ export class ReporteComponent implements OnInit {
             this.totalSaldoGeneral = res.data.total[0].total_saldo
           }
 
-          
+
           if(this.filter.reporte =='rpt_emision_recaudacion_arriendamiento_mensual'){
 
             this.totalLocales=  res.data.total[0].total_total_numero_local
-            this.totalActivos=   res.data.total[0].total_activos                  
+            this.totalActivos=   res.data.total[0].total_activos
             this.totalNroContratos= res.data.total[0].total_nro_contratos
             this.totalPorCobrar= res.data.total[0].total_por_cobrar
             this.totalRecaudado= res.data.total[0].total_recaudado
@@ -342,7 +343,7 @@ export class ReporteComponent implements OnInit {
             this.totalPendiente= res.data.total[0].total_general
           }
 
-          
+
           if(this.filter.reporte == 'rpt_por_convenios'){
             this.totalGeneralConvenios = res.data.total[0].total_general;
             this.totalRecaudadoConvenios = res.data.total[0].total_valorrecaudado;
@@ -364,7 +365,7 @@ export class ReporteComponent implements OnInit {
         //this.lcargando.ctlSpinner(false);
       }
     )
-    
+
   }
   calcularTotalesArrendaMensual(){
     let totalLocales = 0
@@ -426,13 +427,13 @@ export class ReporteComponent implements OnInit {
     let totalGeneral= 0
     let totalRecaudado= 0
     let totalSaldoTotal= 0
-   
+
     this.dataReportes.forEach(e => {
       totalGeneral += parseFloat(e.total);
       totalRecaudado += parseFloat(e.valorrecaudado);
       totalSaldoTotal += parseFloat(e.saldototal);
   });
-   
+
       this.totalGeneralConvenios= totalGeneral
       this.totalRecaudadoConvenios= totalRecaudado
       this.totalSaldoTotalconvenios= totalSaldoTotal
@@ -489,7 +490,7 @@ export class ReporteComponent implements OnInit {
       for (let datos of this.dataReportes) {
         totalSaldo += parseFloat(datos.saldototal);
       }
-    } 
+    }
     return totalSaldo;
   }
 
@@ -499,7 +500,7 @@ export class ReporteComponent implements OnInit {
       for (let datos of this.dataReportes) {
         totalPendiente += parseFloat(datos.pendiente);
       }
-    } 
+    }
     return totalPendiente;
   }
 
@@ -509,11 +510,11 @@ export class ReporteComponent implements OnInit {
       for (let datos of this.dataReportes) {
         totalConceptos += parseFloat(datos.total);
       }
-    } 
+    }
     return totalConceptos;
   }
 
-  
+
 
   mostrarReporte(){
     console.log(this.selectedReporte)
@@ -523,7 +524,7 @@ export class ReporteComponent implements OnInit {
 
     // this.apiService.getTiposReporte().subscribe(
     //   (res: any) => {
-        
+
         // console.log(res.data);
          var variable: "";
         this.reportes.forEach((element: any) => {
@@ -535,20 +536,20 @@ export class ReporteComponent implements OnInit {
           //this.reportes.push({ ...o });
           //console.log(element.descripcion , )
           if (element.reporte == this.selectedReporte){
-            
-            
-            window.open(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
-            + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin="+ this.filter.fecha_hasta+"&mercado="+(this.selectedMercado == ' ' || this.selectedMercado == undefined ? '*' :this.selectedMercado) 
+
+
+            window.open(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
+            + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin="+ this.filter.fecha_hasta+"&mercado="+(this.selectedMercado == ' ' || this.selectedMercado == undefined ? '*' :this.selectedMercado)
             +"&sector="+ (this.selectedSector == ' ' || this.selectedSector == undefined  ? '*' :this.selectedSector) +"&estado="+ (this.filter.selectedEstado == '' || this.filter.selectedEstado == undefined  ? '*' :this.filter.selectedEstado)
             +"&contribuyente="+ (this.filter.razon_social == ' ' || this.filter.razon_social == undefined  ? '*' :this.filter.razon_social)+"&tipo="+ (this.selectedTipo == ' ' || this.selectedTipo == undefined ? '*' :this.selectedTipo)
             +"&concepto="+ (this.selectedConcepto == ' ' || this.selectedConcepto == undefined ? '*' :this.selectedConcepto),'_blank')
-            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting + 
+            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting +
             //"&j_password=" + environment.PasswordReporting + "&id_liquidacion=" + dt.id_liquidacion + "&forma_pago=" + this.pagos[0].tipo_pago_lbl , '_blank')
-            // console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
+            // console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
             // + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.fecha_desde + "&fechaFin=" + this.fecha_hasta //+"&mercado="+this.selectedMercado
             // +"&sector="+this.selectedSector+"&estado="+this.filter.selectedEstado+"&contribuyente="+this.filter.razon_social+"&tipo="+this.selectedTipo+"&concepto="+this.selectedConcepto);
-            // console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting 
-            // + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin="+ this.filter.fecha_hasta+"&mercado="+(this.selectedMercado == ' ' || this.selectedMercado == undefined ? '*' :this.selectedMercado) 
+            // console.log(environment.ReportingUrl +`${element.reporte}`+".pdf?&j_username=" + environment.UserReporting
+            // + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin="+ this.filter.fecha_hasta+"&mercado="+(this.selectedMercado == ' ' || this.selectedMercado == undefined ? '*' :this.selectedMercado)
             // +"&sector="+ (this.selectedSector == ' ' || this.selectedSector == undefined  ? '*' :this.selectedSector) +"&estado="+ (this.filter.selectedEstado == '' || this.filter.selectedEstado == undefined  ? '*' :this.filter.selectedEstado)
             // +"&contribuyente="+ (this.filter.razon_social == ' ' || this.filter.razon_social == undefined  ? '*' :this.filter.razon_social)+"&tipo="+ (this.selectedTipo == ' ' || this.selectedTipo == undefined ? '*' :this.selectedTipo)
             // +"&concepto="+ (this.selectedConcepto == ' ' || this.selectedConcepto == undefined ? '*' :this.selectedConcepto))
@@ -562,7 +563,7 @@ export class ReporteComponent implements OnInit {
     //     this.lcargando.ctlSpinner(false);
     //   }
     // )
-    
+
   }
 
   getConceptosReporte(){
@@ -648,13 +649,13 @@ export class ReporteComponent implements OnInit {
           //this.reportes.push({ ...o });
           if (element.descripcion == this.selectedReporte){
 
-            
-            window.open(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting 
-            + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin="+ this.filter.fecha_hasta+"&mercado="+this.filter.selectedMercado 
+
+            window.open(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting
+            + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.filter.fecha_desde + "&fechaFin="+ this.filter.fecha_hasta+"&mercado="+this.filter.selectedMercado
             +"&sector="+this.filter.selectedSector+"&estado="+this.filter.selectedEstado+"&contribuyente="+this.filter.razon_social+"&tipo="+this.filter.selectedTipo+"&concepto="+this.filter.selectedConcepto,'_blank')
-            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting + 
+            //window.open(environment.ReportingUrl + "rep_tasas_plusvalia.pdf?&j_username=" + environment.UserReporting +
             //"&j_password=" + environment.PasswordReporting + "&id_liquidacion=" + dt.id_liquidacion + "&forma_pago=" + this.pagos[0].tipo_pago_lbl , '_blank')
-            console.log(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting 
+            console.log(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting
             + "&j_password=" + environment.PasswordReporting+"&fechaInicio=" + this.fecha_desde + "&fechaFin=" + this.fecha_hasta+"&mercado="+this.filter.selectedMercado
             +"&sector="+this.filter.selectedSector+"&estado="+this.filter.selectedEstado+"&contribuyente="+this.filter.razon_social+"&tipo="+this.filter.selectedTipo+"&concepto="+this.filter.selectedConcepto);
           }
@@ -666,11 +667,11 @@ export class ReporteComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       }
     )
-    
+
   }
 
 
-  selectOption1(evt) { 
+  selectOption1(evt) {
     this.dataReportes= []
     this.limpiarTotales()
     if (evt !== 0) {
@@ -681,7 +682,7 @@ export class ReporteComponent implements OnInit {
       console.log(data2);
       this.apiService.getDataTipoReporte(data2).subscribe(res => {
         console.log(res);
-     
+
       if(res['data'][0].parametro_1 == '0'){
         this.mercadosDisabled=true;
       }
@@ -736,21 +737,21 @@ export class ReporteComponent implements OnInit {
       else{
         this.fechaContratoDisabled=false;
       }
-          
+
         //this.arrayData2 = res['data'];
       });
 		}
-    
+
   }
 
 
   getSector() {
     this.lcargando.ctlSpinner(true);
     this.mensajeSppiner = "Cargando Sector";
-    
+
     this.apiService.getCatalogs().subscribe(
       (res: any) => {
-        
+
         console.log(res.data);
         res.data.forEach((element: any) => {
           let o = {
@@ -828,10 +829,10 @@ export class ReporteComponent implements OnInit {
   /*getEstado() {
     this.lcargando.ctlSpinner(true);
     this.mensajeSppiner = "Cargando Estado";
-    
+
     this.apiService.getEstado().subscribe(
       (res: any) => {
-        
+
         console.log(res.data);
         res.data.forEach((element: any) => {
           let o = {

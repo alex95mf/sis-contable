@@ -9,7 +9,7 @@ import { ModalEmpleadosComponent } from './modal-empleados/modal-empleados.compo
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import * as myVarGlobals from 'src/app/global';
 import { ExcelService } from 'src/app/services/excel.service';

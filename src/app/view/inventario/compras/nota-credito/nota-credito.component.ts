@@ -8,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShowCuentasComponent } from './show-cuentas/show-cuentas.component';
 import { NotaCreditoService } from './nota-credito.service';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { ShowNotasCreditoComponent } from './show-notas-credito/show-notas-credito.component';
 import { Socket } from '../../../../services/socket.service';
@@ -537,19 +537,19 @@ export class NotaCreditoComponent implements OnInit {
       const dialogRef = this.confirmationDialogService.openDialogMat(ReportNotaCreditoComponent, {
         width: '1500px', height: 'auto',
         data: { titulo: "Reporte Nota de Crédito", latestStatus: this.latestStatus}
-        
+
       } );
-   
+
       dialogRef.afterClosed().subscribe(resultado => {
         if(resultado!=false && resultado!=undefined){
-          
 
-          
+
+
         }else{
           this.latestStatus = null;
           this.closeModalReport();
         }
-      }); 
+      });
 
     }
   }

@@ -41,8 +41,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     DatePickerModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ShowPedidoCerradoComponent
-  ]
 })
 export class CierrePedidoModule { }

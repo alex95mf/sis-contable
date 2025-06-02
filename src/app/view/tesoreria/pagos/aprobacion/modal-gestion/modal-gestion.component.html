@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-             
+
             <div class="col-3">
                 <div class="input-group input-group-sm mt-2 ">
                     <div class="input-group input-group-sm">
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row mt-2 mb-3">
             <div class="col-4">
                 <div class="input-group input-group-sm">
@@ -296,21 +296,21 @@
                 <div class="col-4">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">No. Proceso</span></div>
-                        <input type="text" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="ordenesEdit.nro_proceso" maxlength="20" placeholder="No. Proceso">
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="ordenesEdit.nro_proceso" maxlength="20" placeholder="No. Proceso">
                     </div>
                 </div>
                 <!-- col-1.425 -->
                 <div class="col-4">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Nombre Proceso</span></div>
-                        <input type="text" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="ordenesEdit.nombre_proceso" maxlength="200" placeholder="Nombre Proceso">
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="ordenesEdit.nombre_proceso" maxlength="200" placeholder="Nombre Proceso">
                     </div>
                 </div>
                 <!-- col-2.675 -->
                 <div class="col-4">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Monto Proceso</span></div>
-                        <input type="text" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="ordenesEdit.monto_proceso" maxlength="17" placeholder="Monto Proceso" (keypress)="validaciones.numberOnlyDot($event)">
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="ordenesEdit.monto_proceso" maxlength="17" placeholder="Monto Proceso" (keypress)="validaciones.numberOnlyDot($event)">
                     </div>
                 </div>
             </div>
@@ -318,13 +318,13 @@
                 <div class="col-4">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="width: 155px;">No. P&oacute;liza</span></div>
-                        <input type="text" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="ordenesEdit.nro_poliza" maxlength="20" placeholder="No. P&oacute;liza">
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="ordenesEdit.nro_poliza" maxlength="20" placeholder="No. P&oacute;liza">
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">Vigencia P&oacute;liza</span></div>
-                        <input type="date" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="gestOrden.vigencia_poliza" placeholder="Vigencia P&oacute;liza">
+                        <input type="date" class="form-control form-control-sm" [(ngModel)]="gestOrden.vigencia_poliza" placeholder="Vigencia P&oacute;liza">
                     </div>
                 </div>
                 <div class="col-4">
@@ -332,7 +332,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text font-weight-bold size-span-campo" id="inputGroup-sizing-sm">Tipo Desembolso</span>
                         </div>
-                        <ng-select id="estado" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="ordenesEdit.tipo_desembolso" maxlength="5">
+                        <ng-select id="estado" class="form-control form-control-sm" [(ngModel)]="ordenesEdit.tipo_desembolso" maxlength="5">
                             <ng-option disabled [value]="0">Seleccione un tipo</ng-option>
                             <ng-option *ngFor="let op of tipoDesembolso" [value]="op.valor">
                                 {{ op.descripcion }}</ng-option>
@@ -344,7 +344,7 @@
                 <div class="col-8">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold text-white" style="width: 155px; background-color: #404A62;">Observaciones</span></div>
-                        <textarea cols="30" rows="3" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="ordenesEdit.observacion" placeholder="Observaciones"></textarea>
+                        <textarea cols="30" rows="3" class="form-control form-control-sm" [(ngModel)]="ordenesEdit.observacion" placeholder="Observaciones"></textarea>
                     </div>
                 </div>
             </div> -->

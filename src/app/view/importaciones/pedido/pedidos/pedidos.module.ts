@@ -13,9 +13,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     DataTablesModule,
     AppCustomModule
   ],
-  entryComponents: [
-    DiferedCuotesComponent,
-    ShowPedidosComponent
-  ]
 })
 export class PedidosModule { }

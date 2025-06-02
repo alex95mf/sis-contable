@@ -11,19 +11,19 @@ import { ChangeDetectorRef } from '@angular/core';
 @Component({
 standalone: false,
   template: `
-          <p-table 
-            [value]="productos" 
-            [lazy]="true" 
-            (onLazyLoad)="CargaProveedores($event)" 
-            selectionMode="single" 
+          <p-table
+            [value]="productos"
+            [lazy]="true"
+            (onLazyLoad)="CargaProveedores($event)"
+            selectionMode="single"
             [(selection)]="selectedProduct2"
             (onRowSelect)="onRowSelect($event)"
-            responsiveLayout="scroll" 
-            [paginator]="true" 
-            [rows]="10" 
-            [totalRecords]="totalRecords" 
-            [loading]="loading" 
-            [showCurrentPageReport]="true" 
+            responsiveLayout="scroll"
+            [paginator]="true"
+            [rows]="10"
+            [totalRecords]="totalRecords"
+            [loading]="loading"
+            [showCurrentPageReport]="true"
             currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
             [rowsPerPageOptions]="[10,25,50]">
           <ng-template pTemplate="header">
@@ -76,7 +76,7 @@ export class CcModalTablaProductosComponent implements AfterViewChecked {
   constructor(
     public ref: DynamicDialogRef,
     private entityService: CustonService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private cdRef:ChangeDetectorRef,
   ) { }
 

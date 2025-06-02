@@ -88,12 +88,12 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
   isDisableDepartament:boolean = true;
   isDisableCargo:boolean = true;
   isDisableCatalogo:boolean = true;
-  
+
   timeout: any;
   nombreFilter:any;
   dataCatalogoResponse: CatalogoResponseI;
 
-  dataResponseGeneral: any; 
+  dataResponseGeneral: any;
   processing: any = false;
 
   registroSubrogacion: FormGroup;
@@ -197,13 +197,13 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
   disableBtnDescargarFoto : boolean;
   disableBtnSubirFoto : boolean;
   readonlyInputObservacion : boolean;
- 
+
 
   //Datos del empleado
   readonlyInputTipo : boolean;
   readonlyInputFecha : boolean;
   fecha_reporte: any
-  
+
   fecha_desde: any
   fecha_hasta: any
 
@@ -256,10 +256,10 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
 
   id_accion_personal: any = 0
 
-  filter: any 
-     
+  filter: any
+
   constructor(
-    private rhfolderdigitalService: RhfolderDigitalEmpleadoService, 
+    private rhfolderdigitalService: RhfolderDigitalEmpleadoService,
     private commonService: CommonService,
     private generalService: GeneralService,
     private toastr: ToastrService,
@@ -267,12 +267,12 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
     public dialogService: DialogService,
     private fb: FormBuilder,
     private messageService: MessageService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private modalService: NgbModal,
     private cierremesService: CierreMesService,
     // private translateService: TranslateService,
   ) {
- 
+
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.totalRecords = 0;
     //this.rows = 5;
@@ -291,11 +291,11 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
 
         this.vmButtons[2].habilitar = true;
         this.vmButtons[3].habilitar = false;
-        
+
         this.tipo_id_cc = res.id_catalogo_tipo_accion;
         this.id_accion_personal = res.id_accion_personal;
         this.consultarCatalogo(this.tipo_id_cc);
-       
+
        // this.inputTipo.nativeElement.value = this.tipo_id_cc;
         this.inputNameEmpFullNombre.nativeElement.value = res.empleado_saliente;
         this.inputNameSalarioMinimo.nativeElement.value =res.sueldo_saliente;
@@ -304,17 +304,17 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
 
         this.inputNameEmpFullNombre2.nativeElement.value = res.empleado_adicional;
         this.inputNameSalarioMinimoDos.nativeElement.value = res.sueldo_adicional;
-        this.inputNamenameDepartamentoDos.nativeElement.value = res.nombre_departamento_adicional;      
+        this.inputNamenameDepartamentoDos.nativeElement.value = res.nombre_departamento_adicional;
         this.inputNamenameCargoDos.nativeElement.value = res.nombre_cargo_adicional;
-       
-    
+
+
         //this.inputNameEstadoReg.nativeElement.value = res.estado;
         this.inputNameFechaReg.nativeElement.value = res.fecha;
         this.inputNameFechaDesde.nativeElement.value = moment(res.fecha_desde).format('YYYY-MM-DD');
         this.inputNameFechaHasta.nativeElement.value = moment(res.fecha_hasta).format('YYYY-MM-DD');
-    
+
         this.inputNameObservacion.nativeElement.value = res.observacion;
-        
+
         // this.fechaReg= res.fecha
         // this.observacion= res.observacion
         // this.fechaDesdeReg= res.fecha_desde
@@ -336,18 +336,18 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
 
   mensajeSppiner: string = "Cargando...";
 
- 
+
   public getInitialDateFrom(): Date {
     return new Date();
   }
 
   ngOnInit(): void {
-    
+
     this.today = new Date();
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter= {
       nombre: '',
@@ -355,9 +355,9 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
       fecha_hasta:  moment(this.lastday).format('YYYY-MM-DD')
     }
 
-   
-  
-   
+
+
+
     this.fecha_reporte = moment().format('YYYY-MM-DD');
     this.fecha_desde= moment().format('YYYY-MM-DD');
     this.fecha_hasta= moment().format('YYYY-MM-DD');
@@ -451,12 +451,12 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
         clase: "btn btn btn-primary boton btn-sm",
         habilitar: true,
         imprimir: false,
-      }, 
-     
+      },
+
     ];
 
 
-    
+
 
     this.fechaReg = moment().format('YYYY-MM-DD')
     this.fechaDesdeReg = moment().format('YYYY-MM-DD')
@@ -486,7 +486,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
           this.vmButtons = [];
           this.lcargando.ctlSpinner(false);
         } else {
-  
+
         }
       },
       (error) => {
@@ -494,10 +494,10 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
         this.toastr.info(error.error.message);
       }
 
-      
+
     );
 
- 
+
     this.registroSubrogacion = this.fb.group({
       nameEmpuFullNombre : [{value: '', disabled: true}, [Validators.required]],
       nameEmpuFullNombre2 : [{value: '', disabled: true}, [Validators.required]],
@@ -511,7 +511,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
       nameFechaDesde: [{value: '', disabled: false}, [Validators.required]],
       nameFechaHasta: [{value: '', disabled: false}, [Validators.required]],
       nameObservacion: [{value: '', disabled: false}, [Validators.required]],
-    
+
     });
 
     let today = new Date();
@@ -523,7 +523,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
       page: 1,
       pageSizeOptions: [ 50, 100]
     };
-    
+
     this.vmButtons[2].habilitar = true;
   }
 
@@ -563,7 +563,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
           this.getAccionPersonal()
         //this.consultarFiltro();
         break;
-     
+
     }
   }
 
@@ -574,7 +574,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
       if (respuesta) {
         console.log(this.registroSubrogacion.valid)
         if (this.registroSubrogacion.valid == true) {
-          
+
           this.confirmSave(
             "Seguro desea guardar la acción personal?",
             "SAVE_ACCION_PERSONAL"
@@ -616,13 +616,13 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
 
       let mesDesdeSelected = moment(this.fechaDesdeReg).format('MM')
       let anioDesdeSelected = moment(this.fechaDesdeReg).format('YYYY')
-      
+
       let mesHastaSelected = moment(this.fechaHastaReg).format('MM')
       let anioHastaSelected = moment(this.fechaHastaReg).format('YYYY')
 
       console.log(mesSelected+'/'+mesHastaSelected)
       console.log(anioSelected+'/'+anioHastaSelected)
-      
+
       if(fechaDesde < fecha ){
         mensajes += "* El campo Fecha Desde no debe ser menor al campo Fecha <br>"
       }
@@ -645,7 +645,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
       }
 
       return (mensajes.length) ? reject(mensajes) : resolve(true)
-     
+
     });
   }
 
@@ -658,7 +658,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
     return;
   }
 
- 
+
 
   async confirmSave(message, action) {
     Swal.fire({
@@ -694,7 +694,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
       "anio": Number(moment(this.fechaReg).format('YYYY')),
       "mes": Number(moment(this.fechaReg).format('MM')),
       }
-      
+
     this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(async (res) => {
         try {
           if (res["data"][0].estado !=='C') {
@@ -715,7 +715,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
               fecha_desde: this.fechaDesdeReg,
               fecha_hasta: this.fechaHastaReg,
               //estado: this.estado
-             
+
             };
             this.mensajeSppiner = "Guardando...";
             this.lcargando.ctlSpinner(true);
@@ -738,11 +738,11 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
               (error) => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.error(error.error.detail);
-        
+
               }
             );
           } else {
-              
+
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
           }
@@ -762,7 +762,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
       "anio": Number(moment(this.fechaReg).format('YYYY')),
       "mes": Number(moment(this.fechaReg).format('MM')),
       }
-      
+
     this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(async (res) => {
         try {
           if (res["data"][0].estado !=='C') {
@@ -782,7 +782,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
               fecha_desde: this.fechaDesdeReg,
               fecha_hasta: this.fechaHastaReg,
               //estado: this.estado
-             
+
             };
             this.mensajeSppiner = "Modificando...";
             this.lcargando.ctlSpinner(true);
@@ -805,11 +805,11 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
               (error) => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.error(error.error.detail);
-        
+
               }
             );
           } else {
-              
+
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
           }
@@ -818,7 +818,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
         }
     });
   }
-  
+
 
 
   //***************************** */
@@ -827,7 +827,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
     this.tipo_id_cc = responseId;
 
     this.consultarCatalogo(this.tipo_id_cc);
-    
+
    // this.registroSubrogacion.get("nameTipo").setValue(this.tipo_id_cc);
   }
   consultarCatalogo(idCatalog){
@@ -851,7 +851,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
     if (event.target.value.length == 10) {
       return false;
     }
- 
+
  }
 
  getAccionPersonal()
@@ -861,7 +861,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
   //   fecha: this.fecha_reporte,
   //   page:  this.pageIndex ,
   //   size: 10,//event.rows,
-  //   sort: 'id', 
+  //   sort: 'id',
   //   type_sort: 'asc' ,
   //   fechaDesde: this.fecha_desde,
   //   fechaHasta: this.fecha_hasta
@@ -872,7 +872,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
     params: {
       filter: this.filter,
       paginate: this.paginate,
-      
+
     }
   }
   console.log(data)
@@ -882,7 +882,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
        if(res.status==1){
         this.objGetAccionPersonal = res.data.data;
         this.totalRecords= res.data?.total[0]?.count
-      
+
         //this.dataReportes = res.data;
         this.loading = false;
         //this.lcargando.ctlSpinner(false);
@@ -940,7 +940,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
 }
 
 
- 
+
   onClicConsultaEmpleados(content) {
 
     this.ref = this.dialogService.open(CcModalTableEmpleadoComponent, {
@@ -993,7 +993,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
       this.inputNameSalarioMinimoDos.nativeElement.value = empleadoData.sueldo.sld_salario_minimo,
       this.id_empleado_2 = empleadoData.id_empleado;
 
-      this.inputNamenameDepartamentoDos.nativeElement.value = empleadoData.departamento.dep_nombre;      
+      this.inputNamenameDepartamentoDos.nativeElement.value = empleadoData.departamento.dep_nombre;
       this.inputNamenameCargoDos.nativeElement.value = empleadoData.sueldo.cargo.car_nombre;
       //this.registroSubrogacion.get("nameCargoDos").setValue(this.cargo_id_cc_dos);
 
@@ -1016,7 +1016,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
     this.readOnlyInputsTrueInitialTrue("yes");
     this.empleadoForm.id_empleado = 0;
     // DATOS DEL EMPLEADO
-   
+
     this.inputNameEmpFullNombre.nativeElement.value = "";
     this.inputNameEmpFullNombre2.nativeElement.value = "";
     this.actions = { btnGuardar: true, btnMod: false };
@@ -1024,7 +1024,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
 
 
     this.inputNameSalarioMinimoDos.nativeElement.value = "";
-    this.inputNamenameDepartamentoDos.nativeElement.value = "";      
+    this.inputNamenameDepartamentoDos.nativeElement.value = "";
     this.inputNamenameCargoDos.nativeElement.value = "";
 
     this.inputNameSalarioMinimo.nativeElement.value = "";
@@ -1044,13 +1044,13 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
     this.fechaDesdeReg = moment(this.firstday).format('YYYY-MM-DD')
     this.fechaHastaReg = moment(this.lastday).format('YYYY-MM-DD')
 
-    
-    
+
+
     this.estado = 0
- 
- 
-    
-   
+
+
+
+
   }
 
   values = "";
@@ -1068,9 +1068,9 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
   //   if(e.index== 1){
   //   this.getAccionPersonal();
   //   this.vmButtons[1].showimg = true;
-    
+
   //  }
-   
+
   // }
   dinamicoBotones(valor: any) {
 
@@ -1091,8 +1091,8 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
 
 
   /* async  */consultarFiltro() {
-   
-     
+
+
      this.lcargando.ctlSpinner(true)
      try {
 
@@ -1101,23 +1101,23 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
       //   fecha: this.fecha_reporte,
       //   page:  this.pageIndex ,
       //   size: 10,//event.rows,
-      //   sort: 'id', 
+      //   sort: 'id',
       //   type_sort: 'asc',
       //   fechaDesde: this.fecha_desde,
       //   fechaHasta: this.fecha_hasta
       // };
-      
+
       // console.log(parameterUrl);
       let data= {
         params: {
           filter: this.filter,
           paginate: this.paginate,
-          
+
         }
       }
     //  /*  await  */ this.empleadoService.getAccionPersonal(parameterUrl).subscribe({
       this.empleadoService.getAccionPersonalPaginate(data).subscribe({
-    
+
         next: (rpt: AccionPErsonalResponseI) => {
           console.log(rpt)
           this.objGetAccionPersonal = rpt['data'];
@@ -1129,7 +1129,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
           this.loading = false;
         },
       });
-        
+
          this.vmButtons[2].habilitar = false
          this.lcargando.ctlSpinner(false)
      } catch (err) {
@@ -1138,7 +1138,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
        this.toastr.error(err.error.message, 'Error consultando Reporte')
      }
    }
- 
+
 
   //  regDelete(item) {
   //   let parameterUrl: any = {
@@ -1146,7 +1146,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
   //     fecha: this.fecha_reporte,
   //     page:  this.pageIndex ,
   //     size: 100,//event.rows,
-  //     sort: 'id', 
+  //     sort: 'id',
   //     type_sort: 'asc',
   //     fechaDesde: this.fecha_desde,
   //     fechaHasta: this.fecha_hasta,
@@ -1181,7 +1181,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
           let data = {
             idToDelete: item
           }
-      
+
           this.mensajeSppiner = 'Eliminando registro'
           this.lcargando.ctlSpinner(true)
               this.empleadoService.deleteAccionPersonal(data).subscribe(
@@ -1213,12 +1213,12 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
       fecha: this.fecha_reporte,
       page:   pageIndex + 1 ,
       size: 10,//event.rows,
-      sort: 'id', 
+      sort: 'id',
       type_sort: 'asc',
       fechaDesde: this.fecha_desde,
       fechaHasta: this.fecha_hasta
     };
-    
+
     console.log(parameterUrl);
     /*  await  */ this.empleadoService.getAccionPersonal(parameterUrl).subscribe({
       next: (rpt: AccionPErsonalResponseI) => {
@@ -1230,9 +1230,9 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
         this.loading = false;
       },
     });
-      
+
     Object.assign(this.paginate, {page: pageIndex + 1, perPage: pageSize})
-   
+
   }
 
   expandModalSubrogaciones() {

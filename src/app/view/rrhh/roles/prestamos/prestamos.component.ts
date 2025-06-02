@@ -9,7 +9,7 @@ import { CommonVarService } from "../../../../services/common-var.services";
 import { CommonService } from "../../../../services/commonServices";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import * as moment from "moment";
 import { PersonalComponent } from "./personal/personal.component";
 import { ViewComponent } from './view/view.component';

@@ -37,10 +37,6 @@ import { ImprimirComponentGlobal } from './imprimir-com-elect/imprimir-com-elect
     ButtonsModule.forRoot(),
     AppCustomModule
   ],
-  entryComponents: [
-    FacPdfComponent,
-    ImprimirComponentGlobal
-  ],
   exports: [
     FacPdfComponent,
     ImprimirComponentGlobal

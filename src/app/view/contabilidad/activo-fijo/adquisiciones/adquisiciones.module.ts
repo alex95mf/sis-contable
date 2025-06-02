@@ -9,6 +9,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     AdquisicionesRoutingModule,
     AppCustomModule
   ],
-  entryComponents: []
 })
 export class AdquisicionesModule { }

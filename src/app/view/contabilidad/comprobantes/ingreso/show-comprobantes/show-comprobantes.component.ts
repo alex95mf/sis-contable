@@ -6,8 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonService } from "../../../../../services/commonServices";
 import { CommonVarService } from '../../../../../services/common-var.services';
 import { IngresoService } from '../ingreso.service';
-import 'sweetalert2/src/sweetalert2.scss';  
-const Swal = require('sweetalert2');
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal from 'sweetalert2';
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component'
 
 @Component({
@@ -20,7 +20,7 @@ export class ShowComprobantesComponent implements OnInit {
   mensajeSppiner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
-  
+
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};

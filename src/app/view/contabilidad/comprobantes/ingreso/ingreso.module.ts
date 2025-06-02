@@ -14,15 +14,9 @@ import { ListadoComIgComponent } from './report-comprobantes/listado-com-ig/list
   declarations: [ShowCuentasComponent, ShowComprobantesComponent,IngresoComponent, ReportComprobantesComponent, ListadoComIgComponent],
   imports: [
     CommonModule,
-    DataTablesModule,   
+    DataTablesModule,
     IngresoRoutingModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ShowCuentasComponent,
-    ShowComprobantesComponent,
-    ReportComprobantesComponent,
-    ListadoComIgComponent
-  ]
 })
 export class IngresoComprobantesModule { }

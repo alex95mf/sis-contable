@@ -40,8 +40,5 @@ import { ModalConsultaClienteComponent } from './modal-consulta-cliente/modal-co
     ReactiveFormsModule,
     AppCustomModule
   ],
-  entryComponents:[
-    ModalConsultaClienteComponent
-  ]
 })
 export class ConsultaEstadoClientetModule { }

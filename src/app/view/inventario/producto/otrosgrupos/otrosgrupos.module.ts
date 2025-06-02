@@ -31,8 +31,5 @@ import { OtrosgruposComponent } from './otrosgrupos.component'
     ],
     declarations: [
         OtrosgruposComponent, ModalGroupComponent, AutofocusDirective, AnexosComponent],
-    entryComponents: [
-      ModalGroupComponent, AnexosComponent
-    ]
   })
 export class OtrosGruposModule { }

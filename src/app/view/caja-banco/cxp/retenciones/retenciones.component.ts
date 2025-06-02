@@ -14,7 +14,7 @@ import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-p
 declare const $: any;
 import { ConfirmationDialogService } from '../../../../config/custom/confirmation-dialog/confirmation-dialog.service';
 import { FacPdfComponent } from './fac-pdf/fac-pdf.component';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 
 @Component({

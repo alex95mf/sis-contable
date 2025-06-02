@@ -35,9 +35,6 @@ import { ShowConceptoComponent } from './show-concepto/show-concepto.component';
     DatePickerModule,
     AppCustomModule
   ],
-  entryComponents: [
-    
-  ]
 })
 
 export class ConceptoModule { }

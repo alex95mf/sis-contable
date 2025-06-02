@@ -4,7 +4,7 @@ import { CommonService } from '../../../../services/commonServices'
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import * as myVarGlobals from '../../../../global';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalGroupComponent } from './modal-group/modal-group.component'
@@ -95,19 +95,19 @@ export class ConsultaComponent implements OnInit {
 
   metodoGlobal(evento: any) {
     switch (evento.items.paramAccion+evento.items.boton.texto) {
-      case "1AGREGAR GRUPO": 
+      case "1AGREGAR GRUPO":
         this.confirmCreateGroup();
       break;
       case "1MODIFICAR GRUPO":
-        this.confirmUpdateGroup(); 
+        this.confirmUpdateGroup();
       break;
-      case "1ELIMNAR GRUPO": 
+      case "1ELIMNAR GRUPO":
       this.confirmDeleteGroup();
       break;
 
 
 
-      case "2NUEVO PRODUCTO": 
+      case "2NUEVO PRODUCTO":
       this.newProduct();
       break;
       case "2IMPRIMIR GRUPO":
@@ -137,7 +137,7 @@ export class ConsultaComponent implements OnInit {
       case "3IMPRIMIR":
         $('#FicheroMover').DataTable().button('.buttons-print').trigger();
         break; */
-      
+
     }
   }
 

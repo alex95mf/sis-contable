@@ -16,9 +16,5 @@ import { CommonModalModule } from '../../../commons/modals/modal.module';
     AppCustomModule,
     CommonModalModule
   ],
-  entryComponents: [
-    ModalInvoicesProductComponent,
-    DiferedComponent
-  ]
 })
 export class InvoiceSalesModule { }

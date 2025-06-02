@@ -8,7 +8,7 @@ import { CommonVarService } from '../../../../../services/common-var.services';
 import { CommonService } from '../../../../../services/commonServices';
 import * as myVarGlobals from '../../../../../global';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 
 @Component({
 standalone: false,

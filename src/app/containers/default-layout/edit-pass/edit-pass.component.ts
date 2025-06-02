@@ -8,8 +8,8 @@ import * as myVarGlobals from "../../../global";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
 import { Socket } from '../../../services/socket.service';
-import 'sweetalert2/src/sweetalert2.scss';  
-const Swal = require('sweetalert2');
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal from 'sweetalert2';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CcSpinerProcesarComponent } from '../../../config/custom/cc-spiner-procesar.component';
 @Component({
@@ -217,7 +217,7 @@ export class EditPassComponent implements OnInit {
 		}
 	}
 
-	logout() {	
+	logout() {
 		this.lcargando.ctlSpinner(true);
 		let data = {
 			id_usuario: this.dataUser['id_usuario'],
@@ -235,7 +235,7 @@ export class EditPassComponent implements OnInit {
 			this.cookies.delete("token");
 			this.toastr.info("Cerrando Sesión");
 			this.router.navigateByUrl('home');
-			
+
 		})
 	}
 

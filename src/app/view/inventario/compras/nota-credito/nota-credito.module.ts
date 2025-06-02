@@ -11,9 +11,6 @@ import { ListadoRepNcComponent } from './report-nota-credito/listado-rep-nc/list
   imports: [
     NotaCreditoRoutingModule,
     AppCustomModule
-  ], 
-  entryComponents:[
-    ShowCuentasComponent, ShowNotasCreditoComponent, ReportNotaCreditoComponent, ListadoRepNcComponent
-  ]
+  ],
 })
 export class NotaCreditoModule { }

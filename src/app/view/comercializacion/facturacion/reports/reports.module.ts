@@ -24,8 +24,5 @@ import { ShowDevolutionComponent } from './show-devolution/show-devolution.compo
     ReportsRoutingModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ShowDevolutionComponent
-  ]
 })
 export class ReportsVentasModule { }

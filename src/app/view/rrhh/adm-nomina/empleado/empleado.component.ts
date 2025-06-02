@@ -461,7 +461,7 @@ totalSemanal: any = 0
      public cargoService: CargoService,
     private fb: FormBuilder,
     private messageService: MessageService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private modal: NgbModal,
     private commonVrs: CommonVarService,
     // private translateService: TranslateService,

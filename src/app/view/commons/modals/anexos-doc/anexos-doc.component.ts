@@ -6,7 +6,7 @@ import { environment } from '../../../../../environments/environment';
 import { CommonVarService } from '../../../../services/common-var.services'
 import { CommonService } from '../../../../services/commonServices'
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import { FileUploader } from "ng2-file-upload";
 import { ConfirmationDialogService } from "../../../../config/custom/confirmation-dialog/confirmation-dialog.service";
 
@@ -271,6 +271,6 @@ export class AnexosDocComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
- 
+
 
 }

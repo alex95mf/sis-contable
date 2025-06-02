@@ -31,8 +31,6 @@ import { ViewFacCompraComponent } from './view-fac-compra/view-fac-compra.compon
     NgxPrintModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ConfirmPurchaseWineryComponent,ViewFacCompraComponent]
 
 })
 export class BodegaComprasModule { }

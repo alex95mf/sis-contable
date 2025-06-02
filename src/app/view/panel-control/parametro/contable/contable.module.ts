@@ -36,7 +36,5 @@ import { ParametroCuentaComponent } from './parametro-cuenta/parametro-cuenta.co
     AppCustomModule
   ],
   declarations: [ContableComponent, ParametroCuentaComponent],
-  entryComponents: [
-    ParametroCuentaComponent]
 })
 export class ContableModule { }

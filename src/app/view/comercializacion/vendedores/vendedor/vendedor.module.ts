@@ -36,9 +36,6 @@ import { ModalProductComponent } from "./modal-product/modal-product.component";
     DatePickerModule,
     AppCustomModule
   ],
-  entryComponents: [
-    
-  ]
 })
 
 export class VendedorModule { }

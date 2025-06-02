@@ -16,8 +16,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     ValeRoutingModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ReposicionComponent
-  ]
 })
 export class ValeModule { }

@@ -39,9 +39,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     PanelModule,
     NgxChartsModule,
   ],
-  entryComponents: [
-    
-  ]
 })
 
 export class OrganizacionModule { }

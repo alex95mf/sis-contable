@@ -36,9 +36,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     AppCustomModule,
     MatPaginatorModule
   ],
-  entryComponents: [
-    
-  ]
 })
 
 export class ArancelesModule { }

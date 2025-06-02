@@ -33,7 +33,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     AppCustomModule,
     ReportQuotesRoutingModule
   ],
-  entryComponents: [  
-  ]
 })
 export class ReportQuotesModule { }

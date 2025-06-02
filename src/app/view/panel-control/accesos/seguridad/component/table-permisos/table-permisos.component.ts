@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../../../../../../services/commonServices'
 import { CommonVarService } from '../../../../../../services/common-var.services';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import { CcSpinerProcesarComponent } from '../../../../../../config/custom/cc-spiner-procesar.component';
 
 @Component({
@@ -104,13 +104,13 @@ export class TablePermisosComponent implements OnDestroy, OnInit {
 
     console.log(data);
     this.mensajeSppiner = "Cargando...";
-    this.lcargando.ctlSpinner(true);  
+    this.lcargando.ctlSpinner(true);
     this.seguridadServices.getPermisosComponentes(data).subscribe(
       (res: any) => {
       // console.log(res);
-        this.lcargando.ctlSpinner(false);  
+        this.lcargando.ctlSpinner(false);
         this.validaDt = true;
-        
+
         // this.paginate.length = res.data.total;
         // this.dataT = (res.data.current_page == 1) ? this.dataT = res.data.data : this.dataT = Object.values(res.data.data);
         this.dataT = res.data
@@ -120,9 +120,9 @@ export class TablePermisosComponent implements OnDestroy, OnInit {
         setTimeout(() => {
           this.dtTrigger.next(null);
         }, 100);
-      }, 
+      },
       (error: any) => {
-        this.lcargando.ctlSpinner(false);  
+        this.lcargando.ctlSpinner(false);
         console.log(error);
         this.validaDt = true;
         this.dataT = [];
@@ -142,7 +142,7 @@ export class TablePermisosComponent implements OnDestroy, OnInit {
     this.getDataTable();
   }
 
-  
+
 
   updatePermisos(/* e */) {
 

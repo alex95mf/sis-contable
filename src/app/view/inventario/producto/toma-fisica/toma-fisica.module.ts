@@ -28,7 +28,7 @@ import { CuentaViewsComponent } from './cuenta-views/cuenta-views.component';
     TomaFisicaComponent,
     CuentasComponent,
     CuentaViewsComponent,
-  ],                                           
+  ],
   imports: [
     FormsModule,
     CommonModule,
@@ -51,9 +51,6 @@ import { CuentaViewsComponent } from './cuenta-views/cuenta-views.component';
     ReactiveFormsModule,
     AppCustomModule
   ],
-    entryComponents: [
-      CuentasComponent,CuentaViewsComponent
-    ]
 
 })
 export class TomaFisicaModule { }

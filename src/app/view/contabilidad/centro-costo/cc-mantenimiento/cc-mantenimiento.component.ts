@@ -8,7 +8,7 @@ import { CcMantenimientoService } from "./cc-mantenimiento.service";
 import { CommonVarService } from "../../../../services/common-var.services";
 import { CommonService } from "../../../../services/commonServices";
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import * as moment from "moment";
 import { environment } from "../../../../../environments/environment";
 import { IngresoService } from "../../../inventario/producto/ingreso/ingreso.service";

@@ -35,7 +35,5 @@ import { ViewConsultaGastoComponent } from './view-consulta-gasto/view-consulta-
     FlatpickrModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ViewConsultaGastoComponent]
 })
 export class ConsultaModule { }

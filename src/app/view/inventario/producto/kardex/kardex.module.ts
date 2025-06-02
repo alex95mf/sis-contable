@@ -42,10 +42,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     DatePickerModule,
     AppCustomModule
   ],
-  entryComponents: [
-    IngresoAjusteComponent,
-    DetalleInformacionComponent
-
-  ]
 })
 export class KardexModule { }

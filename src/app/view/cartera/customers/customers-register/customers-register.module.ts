@@ -21,8 +21,5 @@ import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
     AppCustomModule,
     TreeViewModule
   ],
-  entryComponents: [
-    TabsComponent
-  ]
 })
 export class CustomersRegisterModule { }

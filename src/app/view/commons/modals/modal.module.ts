@@ -18,7 +18,7 @@ import { AppCustomModule } from '../../../config/custom/app-custom.module';
   declarations: [GlobalTableComponent, AnexosDocComponent, ModalGlobalTableComponent],
   imports: [
     CommonModule,
-    DataTablesModule, 
+    DataTablesModule,
     NgxExtendedPdfViewerModule,
     NgxDocViewerModule,
     NgbModule,
@@ -30,11 +30,6 @@ import { AppCustomModule } from '../../../config/custom/app-custom.module';
     ReactiveFormsModule,
     AppCustomModule
   ],
-  entryComponents: [
-    GlobalTableComponent,
-    AnexosDocComponent,
-    ModalGlobalTableComponent,
-  ]
-  
+
 })
 export class CommonModalModule { }

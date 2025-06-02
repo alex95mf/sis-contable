@@ -20,7 +20,7 @@
         <div class="row justify-content-md-center ml-1 mr-1">
             <div class="col-4">
                 <app-cc-input-group-prepend label="Tipo de Reporte" styleSpan="size-span-campo font-weight-bold">
-                    <ng-select   [(ngModel)]="selectedReporte" (change)="selectOption1($event)" bindValue="id" bindLabel="name" class="form-control" [clearable]="false">
+                    <ng-select   [(ngModel)]="selectedReporte" bindValue="id" bindLabel="name" class="form-control" [clearable]="false">
                         <ng-option *ngFor="let tipo of reportes" [value]="tipo.reporte">{{ tipo.descripcion }}</ng-option>
                     </ng-select>
                 </app-cc-input-group-prepend>

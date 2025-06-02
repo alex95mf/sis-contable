@@ -25,7 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppCustomModule } from '../../../../config/custom/app-custom.module';
 @NgModule({
   declarations: [ReportsInvoiceComponent, ClienteComponent, VendedorComponent],
-  
+
   imports: [
     NgbModule,
     FormsModule,
@@ -51,9 +51,6 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     AppCustomModule
 
   ],
-  entryComponents: [
-    ClienteComponent,VendedorComponent
-  ]
-  
+
 })
 export class ReportsInvoiceModule { }

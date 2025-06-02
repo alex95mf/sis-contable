@@ -3,8 +3,8 @@ import { ChangeDetectorRef } from '@angular/core';
 import * as myVarGlobals from '../../../global';
 
 import { ToastrService } from 'ngx-toastr';
-import { CommonService } from 'src/app/services/commonServices'; 
-import { SuppliersService } from 'src/app/view/inventario/compras/suppliers/suppliers.service'; 
+import { CommonService } from 'src/app/services/commonServices';
+import { SuppliersService } from 'src/app/view/inventario/compras/suppliers/suppliers.service';
 import { CcModalTablaProductosComponent } from 'src/app/config/custom/cc-modal-tabla-productos/cc-modal-tabla-productos.component';
 
 
@@ -15,7 +15,7 @@ import { ConfirmationService,Message,MessageService } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 
 import { CustonService } from '../app-custom.service';
-import { contableConfService } from 'src/app/view/panel-control/parametro/contable/contable.service'; 
+import { contableConfService } from 'src/app/view/panel-control/parametro/contable/contable.service';
 
 //import Swal from "sweetalert2";;
 
@@ -63,7 +63,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
   buyProv: any = { tipo_documento: '7', sustento: '01', proveedor_name: '', anio: 2022, mes: 9, identificacion_proveedor: '', tipo_identificacion: '01', fk_id_proveedor: 0, subtotal: (0.00).toFixed(2), subcero: (0.00).toFixed(2), objeto: (0.00).toFixed(2), exento: (0.00).toFixed(2), descuento: (0.00).toFixed(2), propina: (0.00).toFixed(2), otro_impuesto: (0.00).toFixed(2), servicio: (0.00).toFixed(2), valor_iva: (0.00).toFixed(2), total: (0.00).toFixed(2), tipo_pago: 0, forma_pago: 0, fk_usuario_receive: 0, isActive: 1 };
   compra: any = {fecha_emision:'',identificacion_proveedor: '',direccion_proveedor: '', numero_comprobante: '', autorizacion: '',  tipo_identificacion: '01', fk_id_proveedor: 0,  proveedor_name:''};
   dataProducto: any = [{ cod_anexo_iva: "", cod_iva: "", porce_iva: 0, cod_anexo_fte: "", cod_fte: "", porce_fte: 0, isRetencionIva: false, LoadOpcionImpuesto: false, LoadOpcionReteFuente: false, LoadOpcionRteIva: false, LoadOpcionCentro: false, subtotal_noobjeto: (0.00).toFixed(2), subtotal_excento: (0.00).toFixed(2), subtotal_cero: (0.00).toFixed(2), subtotal_iva: (0.00).toFixed(2), InputDisabledCantidad: true, iva_detalle: (0.00).toFixed(2), fk_producto: 0, impuesto: 2, rte_fuente: 0, rte_iva: 0, centro: 0, nombre: null, codigo: null, observacion: null, cantidad: null, precio: null, desc: (0.00).toFixed(2), subtotalItems: 0.00, totalItems: 0.00, paga_iva: 1 }];
-  
+
 
   /* Information */
   supplier: any = {
@@ -90,11 +90,11 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
   (
     private toastr: ToastrService,
     private confirmationService: ConfirmationService,
-    private contableService: contableConfService, 
-    private servCusto: CustonService, 
-    private primengConfig: PrimeNGConfig,
-    private messageService: MessageService, 
-    public ref: DynamicDialogRef, 
+    private contableService: contableConfService,
+    private servCusto: CustonService,
+    private primengConfig: PrimeNG,
+    private messageService: MessageService,
+    public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private commonServices: CommonService,
     private supplierSrv: SuppliersService,
@@ -104,7 +104,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
 
   ngOnInit(): void {
 
-  
+
 
     this.primengConfig.ripple = true;
     // this.validatePermission();
@@ -132,10 +132,10 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
           let catalogo = res['data']['catalogs'];
           this.impuestos = catalogo['IMPUESTOS'];
 
-          this.dataProducto = []; 
+          this.dataProducto = [];
 
           for (let detalle of datos_xml.detalles["detalle"]) {
-           
+
 
             this.dataProducto.push({
               cod_anexo_iva: 0,
@@ -164,7 +164,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
               totalItems: parseFloat(detalle.precioTotalSinImpuesto[0]),
               paga_iva: 1
             })
-          
+
           }
 
           console.log(this.dataProducto)
@@ -172,13 +172,13 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
           this.LoadModalCargaXml = true;
 
         }, error => {
-        
+
         })
       }, error => {
-       
+
       })
     }, error => {
-     
+
     })
 
 
@@ -195,22 +195,22 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
 
     this.servCusto.obteneProveedorIdentificacion(data).subscribe(resTotales => {
 
-      if(resTotales["data"].length > 0){       
-          this.CargarProveedor(resTotales["data"]);       
+      if(resTotales["data"].length > 0){
+          this.CargarProveedor(resTotales["data"]);
           this.exist_client = true;
       }else{
         this.botonConfirmar = true;
         this.msgs1 = [
             {severity:'error', summary:'Verificar', detail:'El proveedor '+proveedor_name+' no se encuentra registrado, es necesario registrara proveedor para continuar'}
         ];
-        
+
       }
-      
+
     }, error => {
-      
+
     })
 
-    
+
   }
 
   CargarProveedor(event: any) {
@@ -227,7 +227,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
 
 
   }
-  
+
   getImpuestosDetalle(i, data_combo) {
 
     if ((typeof (this.impuestos) === 'undefined') || (this.impuestos.length === 1)) {
@@ -267,7 +267,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
     datos[i].LoadOpcionRteIva = true;
 
     this.contableService.getRetencionIvaCompras().subscribe(res => {
-      
+
       this.rte_iva = res;
       datos[i].LoadOpcionRteIva = false;
     }, error => {
@@ -313,7 +313,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
         this.setProveedor(this.supplier);
       },
       reject: () => {
-        
+
       }
     });
 
@@ -344,7 +344,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
         this.botonConfirmar = false;
 
         //this.commonServices.saveProveedores.next({ identifier: res['data']['id'] });
-       
+
         /*setTimeout(() => {
           this.fillCatalog();
         }, 300);*/
@@ -484,7 +484,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
     dataelement[index].porce_fte = event.porcentaje_fte;
     dataelement[index].cod_fte = event.codigo_fte_sri;
     dataelement[index].cod_anexo_fte = event.codigo_anexo_sri;
-  
+
 
   }
 
@@ -493,7 +493,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
     dataelement[index].porce_iva = event.porcentaje_rte_iva;
     dataelement[index].cod_iva = event.codigo_sri_iva;
     dataelement[index].cod_anexo_iva = event.codigo_sri_iva;
-  
+
 
   }
 

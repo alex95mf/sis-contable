@@ -35,8 +35,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     NgxDocViewerModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ShowOrderComponent
-  ]
 })
 export class OrdenesModule { }

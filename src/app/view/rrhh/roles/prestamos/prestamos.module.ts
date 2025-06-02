@@ -31,9 +31,6 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     AppCustomModule
   ],
   declarations: [PrestamosComponent, PersonalComponent, ViewComponent],
-  entryComponents: [
-    PersonalComponent,ViewComponent
-  ]
 })
 
 export class  PrestamosModule { }

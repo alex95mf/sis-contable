@@ -35,9 +35,6 @@ import { ShowContribuyenteComponent } from './show-contribuyente/show-contribuye
     DatePickerModule,
     AppCustomModule
   ],
-  entryComponents: [
-    
-  ]
 })
 
 export class ContribuyenteModule { }

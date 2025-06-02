@@ -9,8 +9,8 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
 import * as moment from "moment";
 import * as myVarGlobals from "../../../../../global";
-import 'sweetalert2/src/sweetalert2.scss';  
-const Swal = require('sweetalert2');
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal from 'sweetalert2';
 
 @Component({
 standalone: false,
@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./cliente.component.scss']
 })
 export class ClienteComponent implements OnInit {
-  
+
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dtOptions: any = {};
@@ -40,7 +40,7 @@ export class ClienteComponent implements OnInit {
   ngOnInit(): void {
     this.getClientes();
  this.getDataTable();
- 
+
   }
 
    /* actions modals */
@@ -103,7 +103,7 @@ export class ClienteComponent implements OnInit {
         this.processing = true;
         this.flag += 1;
         this.guardarolT = res["data"];
-       
+
         setTimeout(() => {
           this.dtTrigger.next(null);
         }, 50);

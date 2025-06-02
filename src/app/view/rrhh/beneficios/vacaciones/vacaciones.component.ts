@@ -142,7 +142,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
     public dialogService: DialogService,
     private vacaServ : VacacionesService,
     private fb: FormBuilder,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     // private translateService: TranslateService,
     ) {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));

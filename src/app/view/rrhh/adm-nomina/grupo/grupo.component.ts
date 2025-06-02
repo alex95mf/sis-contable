@@ -9,7 +9,7 @@ import { CommonService } from '../../../../services/commonServices'
 import 'sweetalert2/src/sweetalert2.scss';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import { ValidacionesFactory } from '../../../../config/custom/utils/ValidacionesFactory';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 
 @Component({
 standalone: false,

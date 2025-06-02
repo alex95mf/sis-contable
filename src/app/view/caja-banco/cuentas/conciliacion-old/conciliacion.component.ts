@@ -5,7 +5,7 @@ import * as moment from 'moment';
 import { ConciliacionService } from './conciliacion.service';
 import { CommonService } from '../../../../services/commonServices';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import * as myVarGlobals from '../../../../global';
 import { Router } from '@angular/router';

@@ -45,9 +45,6 @@ import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFac
     DatePickerModule,
     AppCustomModule
   ],
-  entryComponents: [
-    
-  ],
   providers: [
     ValidacionesFactory
   ]

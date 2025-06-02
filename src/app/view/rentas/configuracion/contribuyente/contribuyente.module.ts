@@ -94,9 +94,6 @@ import { DetalleInteresesComponent } from './detalle-intereses/detalle-intereses
     TableModule,
     NgxCurrencyDirective,
   ],
-  entryComponents: [
-
-  ]
 })
 
 export class ContribuyenteModule { }

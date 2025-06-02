@@ -10,7 +10,7 @@ import { CommonVarService } from '../../../services/common-var.services';
 import { IngresoService } from '../../inventario/producto/ingreso/ingreso.service';
 import { ShowPagosServiciosComponent } from './show-pagos-servicios/show-pagos-servicios.component'
 
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 import { ValidacionesFactory } from '../../../config/custom/utils/ValidacionesFactory';
 import { CcSpinerProcesarComponent } from '../../../config/custom/cc-spiner-procesar.component';

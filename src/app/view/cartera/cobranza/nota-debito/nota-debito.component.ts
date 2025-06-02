@@ -8,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShowCuentasComponent } from './show-cuentas/show-cuentas.component';
 import { NotaDebitoService } from './nota-debito.service';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { ShowNotasDebitoComponent } from './show-notas-debito/show-notas-debito.component';
 import { Socket } from '../../../../services/socket.service';
@@ -75,7 +75,7 @@ export class NotaDebitoComponent implements OnInit {
   date: Date = new Date();
   fecha = this.date.getDate() + '-' + (this.date.getMonth() + 1) + '-' + this.date.getFullYear();
   hora = this.date.getHours() + ':' + this.date.getMinutes() + ':' + this.date.getSeconds();
-  
+
 
   constructor(private toastr: ToastrService,
     private commonServices: CommonService,

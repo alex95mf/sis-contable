@@ -12,7 +12,6 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as XLSX from 'xlsx';
 import * as moment from 'moment';
-import { sep } from 'path';
 @Component({
 standalone: false,
   selector: 'app-flujo-de-caja-proyectado',
@@ -23,7 +22,7 @@ export class FlujoDeCajaProyectadoComponent implements OnInit {
   mensajeSpiner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  
+
   fTitle: string = "Flujo de Caja Proyectado";
 
   vmButtons: any = [];
@@ -37,7 +36,7 @@ export class FlujoDeCajaProyectadoComponent implements OnInit {
   cmb_periodo: any[] = [];
 
   file: any;
-  
+
   //periodo: any;
   yearDisabled = false;
   fileDisabled = true;
@@ -117,7 +116,7 @@ export class FlujoDeCajaProyectadoComponent implements OnInit {
         name: "Diciembre"
       },
     ];
-  constructor(  
+  constructor(
     private apiSrv: FlujoCajaProyectadoService,
     private excelSrv: ExcelService,
     private xlsService : XlsExportService,
@@ -133,9 +132,9 @@ export class FlujoDeCajaProyectadoComponent implements OnInit {
         { orig: "btnAsignacionIngresos", boton: { icon: "fa fa-floppy-o", texto: "PROCESAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success btn-sm", habilitar: false, imprimir: false},
         { orig: "btnAsignacionIngresos", boton: { icon: "fa fa-eraser", texto: "EXCEL" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success btn-sm", habilitar: false, imprimir: false},
         { orig: "btnAsignacionIngresos", boton: { icon: "fa fa-eraser", texto: "LIMPIAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-warning btn-sm", habilitar: false, imprimir: false},
-  
+
       ];
-    
+
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.mes_actual = (Number(moment(new Date()).format('MM'))).toString();
@@ -150,18 +149,18 @@ export class FlujoDeCajaProyectadoComponent implements OnInit {
     switch (evento.items.boton.texto) {
 
       case "GUARDAR":
-        this.guardarValores(); 
+        this.guardarValores();
       break;
-      case "CONSULTAR": 
+      case "CONSULTAR":
       this.showDataFlujoProyectado();
       break;
-      case "PROCESAR": 
+      case "PROCESAR":
         this.ejecutarSP();
       break;
-      case "LIMPIAR": 
+      case "LIMPIAR":
       this.limpiarData();
       break;
-      case "EXCEL": 
+      case "EXCEL":
       this.getDataExportar();
       break;
 
@@ -316,7 +315,7 @@ ejecutarSP(){
       periodo: Number(this.periodo),
       mes: Number(this.mes_actual)
     }
-  
+
     this.lcargando.ctlSpinner(true);
     this.apiSrv.setEjecutarFlujoCajaProyectadoSp(data).subscribe(res => {
       if(res['status'] == 1){
@@ -439,7 +438,7 @@ onFileChange(ev) {
     const data = reader.result;
     workBook = XLSX.read(data, { type: 'binary' });
     jsonData = workBook.SheetNames.reduce((initial, name) => {
-      
+
       const sheet = workBook.Sheets[name];
       initial[name] = XLSX.utils.sheet_to_json(sheet);
       // console.log('two',initial);
@@ -451,7 +450,7 @@ onFileChange(ev) {
     console.log(jsonData);
     this.btnDisabled = false;
      //this.fillTable(jsonData);
-    
+
   }
   reader.readAsBinaryString(this.file);
 }
@@ -508,7 +507,7 @@ fillTable(dataJson) {
       }
       this.dataFlujoNew.push(data);
     })
-   
+
     this.titles =  [descripcion, ene, feb, mar, abr, may, jun,jul, ago, sep, oct, nov, dic];
     if(this.break){
       this.dataFlujoNew = [];
@@ -540,7 +539,7 @@ fillTable(dataJson) {
 
     this.reporte.forEach(e => {
       console.log(e.descripcion)
-      
+
      // let datosNew = this.dataFlujoNew.filter(flujo => flujo.descripcion == e.descripcion )
       let datosNew = this.dataFlujoNew
       .filter(flujo => flujo.descripcion === e.descripcion)
@@ -582,13 +581,13 @@ fillTable(dataJson) {
              dic: datosNew[0].dic,
            });
         }
-        
+
        }
-     
+
       // You can now do something with datosNew for each element 'e' in reporte
-     
+
      // let datosNew = this.dataFlujoNew.filter(flujo => flujo.descripcion == e.descripcion )
-     
+
     });
     this.toastr.info("¡Su plantilla fue cargada con éxito!")
    // this.reporte = { ...this.reporte, ...data }

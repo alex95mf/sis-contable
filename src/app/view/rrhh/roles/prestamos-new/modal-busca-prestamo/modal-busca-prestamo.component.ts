@@ -21,7 +21,7 @@ export class ModalBuscaPrestamoComponent implements AfterViewChecked {
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
     private cdRef: ChangeDetectorRef,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private toastr: ToastrService,
     private apiService: PrestamosService,
   ) { }
@@ -61,7 +61,7 @@ export class ModalBuscaPrestamoComponent implements AfterViewChecked {
       paginate: 1,  // 0: todos, 1: paginado
       page:  p_page,
       size:  this.rows,
-      sort: (event.sortField == undefined) ? 'id_prestamo' : event.sortField, 
+      sort: (event.sortField == undefined) ? 'id_prestamo' : event.sortField,
       type_sort: (event.sortOrder == -1) ? 'desc' : 'asc',
       search: buscarInput == '' ? buscarFilter : buscarInput,
       relation: this.config.data?.relation,

@@ -31,9 +31,6 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     DataTablesModule,
     NgxPrintModule,
     AppCustomModule
-  ], entryComponents: 
-  [
-    ModalMovimientoComponent
-  ]
+  ],
 })
 export class BodegaIngresoModule { }

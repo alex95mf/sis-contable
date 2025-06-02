@@ -7,7 +7,7 @@ import { CommonService } from "../../../../../services/commonServices";
 import { CommonVarService } from '../../../../../services/common-var.services';
 import { GastosService } from '../gastos.service';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import { Socket } from '../../../../../services/socket.service';
 import * as moment from 'moment';
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';

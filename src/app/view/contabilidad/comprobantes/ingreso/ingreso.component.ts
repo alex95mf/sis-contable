@@ -8,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShowCuentasComponent } from './show-cuentas/show-cuentas.component';
 import { IngresoService } from './ingreso.service';
 import 'sweetalert2/src/sweetalert2.scss';
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { ShowComprobantesComponent } from './show-comprobantes/show-comprobantes.component';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';

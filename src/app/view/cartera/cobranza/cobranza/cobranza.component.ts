@@ -12,7 +12,7 @@ import { IngresoService } from '../../../inventario/producto/ingreso/ingreso.ser
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare const $: any;
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 import { CuentaClienteComponent } from './cuenta-cliente/cuenta-cliente.component'
 

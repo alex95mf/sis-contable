@@ -16,8 +16,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     BovedasRoutingModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ShowCuentasComponent
-  ]
 })
 export class BovedasModule { }

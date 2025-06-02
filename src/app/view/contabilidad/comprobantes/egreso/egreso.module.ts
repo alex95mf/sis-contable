@@ -11,7 +11,7 @@ import { ListadoComEgComponent } from './report-comprobantes/listado-com-eg/list
 
 @NgModule({
   declarations: [
-    EgresoComponent, 
+    EgresoComponent,
     ShowComprobantesComponent, ReportComprobantesComponent,ShowCuentasComponent, ListadoComEgComponent
   ],
   imports: [
@@ -20,9 +20,6 @@ import { ListadoComEgComponent } from './report-comprobantes/listado-com-eg/list
     DataTablesModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ShowComprobantesComponent,ReportComprobantesComponent,ShowCuentasComponent, ListadoComEgComponent
-  ]
-  
+
 })
 export class EgresoModule { }

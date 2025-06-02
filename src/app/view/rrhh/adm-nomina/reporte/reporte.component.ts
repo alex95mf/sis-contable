@@ -7,8 +7,8 @@ import { ReporteNominaService } from './reporte.service'
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import 'sweetalert2/src/sweetalert2.scss';  
-const Swal = require('sweetalert2');
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal from 'sweetalert2';
 import * as myVarGlobals from '../../../../global';
 
 @Component({
@@ -41,7 +41,7 @@ export class ReporteComponent implements OnInit {
         this.lcargando.ctlSpinner(state)
       }
     )
-    
+
     this.commonServices.actionRpNomina.asObservable().subscribe(res => {
     if(res.length > 0){
       this.vmButtons[2].habilitar = false;
@@ -69,7 +69,7 @@ export class ReporteComponent implements OnInit {
         }
       });
     }, 10);
-    
+
   }
 
   ngOnInit(): void {
@@ -99,7 +99,7 @@ export class ReporteComponent implements OnInit {
       setTimeout(() => {
         this.vmButtons.forEach(element => {
           if(element.paramAccion == 1){
-            element.permiso = true; element.showimg = true;          
+            element.permiso = true; element.showimg = true;
           }else{
             element.permiso = false; element.showimg = false;
           }
@@ -141,19 +141,19 @@ export class ReporteComponent implements OnInit {
 
    metodoGlobal(evento: any) {
     switch (evento.items.paramAccion+evento.items.boton.texto) {
-      case "1BUSCAR": 
+      case "1BUSCAR":
      /*  this.newBodega(); */
       break;
       case "1IMPRIMIR":
       break;
-      case "1CANCELAR": 
+      case "1CANCELAR":
 /*  this.newBodega(); */
       break;
       case "1EXCEL":
         this.reportService.exportExcel$.emit();
         break;
 
-      case "2BUSCAR": 
+      case "2BUSCAR":
         /*  this.newBodega(); */
       break;
       // case "2IMPRIMIR":
@@ -161,19 +161,19 @@ export class ReporteComponent implements OnInit {
       case "2EXCEL":
         this.reportService.exportCargasExcel$.emit();
         break;
-      case "2CANCELAR": 
+      case "2CANCELAR":
       /*  this.newBodega(); */
       break;
 
-      case "3BUSCAR": 
+      case "3BUSCAR":
         /*  this.newBodega(); */
       break;
       case "3IMPRIMIR":
       break;
-      case "3CANCELAR": 
+      case "3CANCELAR":
       /*  this.newBodega(); */
       break;
-      case "4ENVIAR": 
+      case "4ENVIAR":
       /*  this.newBodega(); */
       break;
     }

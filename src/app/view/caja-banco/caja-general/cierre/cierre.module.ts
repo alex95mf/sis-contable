@@ -23,12 +23,5 @@ import { ForceCierreComponent } from './force-cierre/force-cierre.component';
     NgbModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ShowDenominationCierreComponent,
-    ShowCajaBancoComponent,
-    ShowAccountComponent,
-    ShowDetailPaymentComponent,
-    ForceCierreComponent
-  ]
 })
 export class CierreModule { }

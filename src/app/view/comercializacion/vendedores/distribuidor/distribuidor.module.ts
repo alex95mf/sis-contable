@@ -37,9 +37,6 @@ import { AccordionModule } from 'primeng/accordion';
     AppCustomModule,
     AccordionModule
   ],
-  entryComponents: [
-    
-  ]
 })
 
 export class DistribuidorModule { }

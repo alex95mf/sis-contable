@@ -8,7 +8,8 @@ import { CcSpinerProcesarComponent } from "src/app/config/custom/cc-spiner-proce
 import { CommonService } from "src/app/services/commonServices";
 import { ToastrService } from "ngx-toastr";
 import { Catalog, CatalogAditionalResponseI, CatalogoDetalle } from "src/app/models/responseCatalogAditional.interfase";
-import { LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { DynamicDialogRef } from "primeng/dynamicdialog";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import Swal from "sweetalert2";
@@ -101,7 +102,7 @@ export class TipoContratosComponent implements OnInit {
       //   showbadge: false,
       //   clase: "btn btn-success boton btn-sm",
       //   habilitar: false,
-        
+
       // },
       {
         orig: "btnsTiposContratos",
@@ -113,7 +114,7 @@ export class TipoContratosComponent implements OnInit {
         showbadge: false,
         clase: "btn btn-success boton btn-sm",
         habilitar: false,
-        
+
       },
       {
         orig: "btnsTiposContratos",
@@ -181,16 +182,16 @@ export class TipoContratosComponent implements OnInit {
         clase: "btn btn-warning boton btn-sm",
         habilitar: false,
       },
-      // { 
-      //   orig: "btnsTiposContratos", 
-      //   paramAccion: "TAB_CONFIGURAR_REMITENTE", 
-      //   boton: { icon: "fa fa-search", texto: "CONSULTAR" }, 
+      // {
+      //   orig: "btnsTiposContratos",
+      //   paramAccion: "TAB_CONFIGURAR_REMITENTE",
+      //   boton: { icon: "fa fa-search", texto: "CONSULTAR" },
       //   permiso: true,
       //   showtxt: true,
       //   showimg: false,
-      //   showbadge: false, 
+      //   showbadge: false,
       //   clase: "btn btn-info boton btn-sm",
-      //   habilitar: true 
+      //   habilitar: true
       // },
       // {
       //   orig: "btnsTiposContratos",
@@ -225,16 +226,16 @@ export class TipoContratosComponent implements OnInit {
       //   clase: "btn btn-danger boton btn-sm",
       //   habilitar: false,
       // },
-			{ 
-        orig: "btnsTiposContratos", 
+			{
+        orig: "btnsTiposContratos",
         paramAccion: "TAB_LISTA_EMPLEADOS",
-        boton: { icon: "fa fa-file-pdf-o", texto: "PDF" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: false, 
-        showbadge: false, 
-        clase: "btn btn-danger boton btn-sm", 
-        habilitar: true, 
+        boton: { icon: "fa fa-file-pdf-o", texto: "PDF" },
+        permiso: true,
+        showtxt: true,
+        showimg: false,
+        showbadge: false,
+        clase: "btn btn-danger boton btn-sm",
+        habilitar: true,
       },
 		];
 
@@ -242,11 +243,11 @@ export class TipoContratosComponent implements OnInit {
       this.getPermissions()
     }, 50);
 
-    
+
   }
 
   getPermissions(){
-    
+
     let id_rol = this.dataUser.id_rol;
     let data = {
       id: 2,
@@ -339,9 +340,9 @@ export class TipoContratosComponent implements OnInit {
   get ftp() { return this.formGroupTiposContratos.controls; }
 
   dinamicoBotones($event){
-    
+
     let opcion = $event.originalEvent.currentTarget.innerText;
-    
+
     switch (opcion) {
       case "TIPOS DE CONTRATOS"://1
         this.accionesVerOcultarBotones('TAB_TIPO_CONTRATO');
@@ -352,11 +353,11 @@ export class TipoContratosComponent implements OnInit {
       case "LISTA EMPLEADOS CON TIPO CONTRATOS"://3
       this.accionesVerOcultarBotones('TAB_LISTA_EMPLEADOS');
       break;
-       
-		}  	 
+
+		}
   }
 
-  
+
   accionesVerOcultarBotones($valor)
   {
     for(let i=0; i< this.vmButtons.length; i++){
@@ -377,7 +378,7 @@ export class TipoContratosComponent implements OnInit {
       cat_keyword : acrom/* 'TCC' */,
       page:  this.pageIndexTipoContrato ,
       size: this.pageSizeTipoContrato,//event.rows,
-      sort: 'id_catalogo', 
+      sort: 'id_catalogo',
       type_sort: 'asc' ,
       search : '',
       relation_selected : 'catalogoDetalle.tiempo' //catalogoDetalle.tiempo@
@@ -387,15 +388,15 @@ export class TipoContratosComponent implements OnInit {
     this.tiposContratosService.getTypeContracTimer(parameterUrl)
       .subscribe({
         next: (rpt: CatalogAditionalResponseI) => {
-        
+
           let dataCat = rpt.data;
-      
+
           this.objGetTiposDeContratos = dataCat;
           // this.totalRecordsTipoContrato = rpt.total;
           this.totalRecords = rpt.total;
           this.lcargando.ctlSpinner(false);
           this.loadingTipoContrato = false;
-      
+
       },
       error: (e) => {
         console.log(e);
@@ -405,7 +406,7 @@ export class TipoContratosComponent implements OnInit {
     });
   }
 
-  
+
 
 
   onRowSelectTipoContrato(data:Catalog){
@@ -447,7 +448,7 @@ export class TipoContratosComponent implements OnInit {
       return rptData;
     }
     return 'No definido'
-    
+
   }
 
 
@@ -544,14 +545,14 @@ export class TipoContratosComponent implements OnInit {
         this.toastr.success(
           "Datos de tipo contrato actualizados correctamente."
         );
-      
+
         // this.objGetTiposDeContratos = [];
         this.cancelTipoContrato(1);
         this.getDataTableTipoContrato('TCC');
         // this.cancelar();
         this.lcargando.ctlSpinner(false);
-      
-        
+
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -614,7 +615,7 @@ export class TipoContratosComponent implements OnInit {
 
 
   CargaEmpleadoTiposContratos(event: LazyLoadEvent) {
-  
+
     this.rowsEmpTpCt = 10;
     this.loadingEmpTpCt = true;
 
@@ -623,7 +624,7 @@ export class TipoContratosComponent implements OnInit {
     let parameterUrl: any = {
       page:  p_page,
       size:  this.pageSizeEmpTpCt,
-      sort: 'id_empleado', 
+      sort: 'id_empleado',
       type_sort: 'asc',
       search: '',
       relation: 'not',
@@ -643,7 +644,7 @@ export class TipoContratosComponent implements OnInit {
           Object.assign(empleado, { fin_contrato, tiempo_restante })
         })
         this.objGetEmpleadosTiposDeContratos = rpt.data;
- 
+
         this.totalRecords = rpt.total;
         // this.totalRecordsEmpTpCt = rpt.total;
 
@@ -713,12 +714,12 @@ export class TipoContratosComponent implements OnInit {
   pageSizeTpCtCorreo: number= 10;
   pageSizeOptionsTpCtCorreo: number[] = [10, 15, 20];
   // totalRecords: number;
- 
+
   @Input() objGetConfiguracionTipoContrato: TPCTCorreoAditional[]|any;
- 
- 
+
+
   getConfiguracionTipoContrato(event: LazyLoadEvent) {
-  
+
     this.rowsTpCtCorreo = 10;
     this.loadingTpCtCorreo = true;
 
@@ -727,7 +728,7 @@ export class TipoContratosComponent implements OnInit {
     let parameterUrl: any = {
       page:  p_page,
       size:  this.pageSizeTpCtCorreo,
-      sort: 'id_tpct_correo', 
+      sort: 'id_tpct_correo',
       type_sort: 'asc',
       search: '',
     };
@@ -742,7 +743,7 @@ export class TipoContratosComponent implements OnInit {
         this.objGetConfiguracionTipoContrato = rpt.data;
 
         this.totalRecords = rpt.total;
-  
+
 
         if(rpt.data.length == 0)
           this.botonConfigurarRemitenteAlerta(false,1);
@@ -814,20 +815,20 @@ export class TipoContratosComponent implements OnInit {
         this.toastr.success(
           "Datos de alerta tipo contrato actualizados correctamente."
         );
-      
+
         let parameterUrl: any = {
           page:  1,
           size:  this.pageSizeTpCtCorreo,
-          sort: 'id_tpct_correo', 
+          sort: 'id_tpct_correo',
           type_sort: 'asc',
           search: '',
         };
-    
+
         this.loadingTpCtCorreo = true;
         this.getTpCtCorreo(parameterUrl);
         this.lcargando.ctlSpinner(false);
-      
-        
+
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -841,13 +842,13 @@ export class TipoContratosComponent implements OnInit {
       }
     );
   }
-  
+
 
     //formulario
   // ref: DynamicDialogRef;
   formGroupTestEmail: FormGroup;
   submittedTestEmail = false;
-  
+
   // processingConfigurarRemitenteAlertas :any = false;
 
   // convenience getter for easy access to form fields
@@ -890,7 +891,7 @@ export class TipoContratosComponent implements OnInit {
       id_empresa          : this.dataUser.id_empresa,
       subject             : this.formGroupTestEmail.value.fcn_subject_test,
       mailDestination     : this.formGroupTestEmail.value.fcn_mail_destinationt,
-      
+
     }
     this.mensajeSppiner = "Enviando Correo Test...";
     this.lcargando.ctlSpinner(true);
@@ -898,9 +899,9 @@ export class TipoContratosComponent implements OnInit {
       (res: GeneralResponseI) => {
 
         this.toastr.success("Correo enviado correctamente.");
-      
+
         this.lcargando.ctlSpinner(false);
-      
+
         this.cancelFormEmail();
 
       },
@@ -930,7 +931,7 @@ export class TipoContratosComponent implements OnInit {
   pageSizeTbCfEmail: number= 10;
   pageSizeOptionsTbCfEmail: number[] = [10, 15, 20];
   // totalRecords: number;
- 
+
   @Input() objGetConfiguracionStmpEmail: SMTPEmailAditionalResponseI[]|any;
   smtpemailForm : StmpEmailNom = {
     id_smpt_email: 0,
@@ -950,7 +951,7 @@ export class TipoContratosComponent implements OnInit {
   // ref: DynamicDialogRef;
   formGroupEmailConfig: FormGroup;
   submittedEmailConfig = false;
-  
+
   // processingConfigurarRemitenteAlertas :any = false;
 
   // convenience getter for easy access to form fields
@@ -966,9 +967,9 @@ export class TipoContratosComponent implements OnInit {
       fcn_clave_smpt: ["", [Validators.required]],
     });
   }
- 
+
   getConfiguracionEmailSmtp(event: LazyLoadEvent) {
-  
+
     this.rowsTbCfEmail = 10;
     this.loadingTbCfEmail = true;
 
@@ -977,7 +978,7 @@ export class TipoContratosComponent implements OnInit {
     let parameterUrl: any = {
       page:  p_page,
       size:  this.pageSizeTbCfEmail,
-      sort: 'id_smpt_email', 
+      sort: 'id_smpt_email',
       type_sort: 'asc',
       search: '',
     };
@@ -992,7 +993,7 @@ export class TipoContratosComponent implements OnInit {
         this.objGetConfiguracionStmpEmail = rpt.data;
 
         this.totalRecords = rpt.total;
-  
+
 
         if(rpt.data.length == 0)
           this.botonConfigurarRemitenteAlerta(false,2);
@@ -1069,13 +1070,13 @@ export class TipoContratosComponent implements OnInit {
         this.toastr.success(
           "Datos de configuracion smtp actualizados correctamente."
         );
-      
-        
+
+
         this.cancelSmtpEmail(1);
         this.getDataSmtpEmail();
         this.lcargando.ctlSpinner(false);
-      
-        
+
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -1099,7 +1100,7 @@ export class TipoContratosComponent implements OnInit {
     let parameterUrl: any = {
       page:  p_page,
       size:  this.pageSizeTbCfEmail,
-      sort: 'id_smpt_email', 
+      sort: 'id_smpt_email',
       type_sort: 'asc',
       search: '',
     };
@@ -1137,13 +1138,13 @@ export class TipoContratosComponent implements OnInit {
   rowsEmpNotif: number;
   pageSizeEmpNotif: number= 10000;
   pageSizeOptionsEmpNotif: number[] = [10, 15, 20];
-  
+
   @Input() objGetListNotificationListEmp: SMTPEmailAditionalResponseI[]|any;
 
   // totalRecords: number;
 
   getListaEmpleadosNotificar(event: LazyLoadEvent) {
-  
+
     this.rowsEmpNotif = 10;
     this.loadingTbCfEmail = true;
 
@@ -1152,7 +1153,7 @@ export class TipoContratosComponent implements OnInit {
     let parameterUrl: any = {
       page        :  p_page,
       size        :  this.pageSizeEmpNotif,
-      sort        : 'id_empleado', 
+      sort        : 'id_empleado',
       type_sort   : 'asc',
       id_empresa  : this.dataUser.id_empresa,
     };
@@ -1168,7 +1169,7 @@ export class TipoContratosComponent implements OnInit {
         this.objGetListNotificationListEmp = rpt.data;
 
         this.totalRecords = rpt.total;
-  
+
         if(rpt.data.length == 0){
           this.vmButtons.forEach(element => {
             if(element.paramAccion == "TAB_CONFIGURAR_REMITENTE"){
@@ -1197,7 +1198,7 @@ export class TipoContratosComponent implements OnInit {
     });
   }
 
-  //enviar correo 
+  //enviar correo
   /**
   * metodo de enviar correo
   */
@@ -1252,7 +1253,7 @@ export class TipoContratosComponent implements OnInit {
     });
     modalInvoice.componentInstance.fTitle = this.fTitle;
     modalInvoice.componentInstance.isNew = isNew;
-    modalInvoice.componentInstance.data = data;    
+    modalInvoice.componentInstance.data = data;
 }
 
   /**

@@ -14,7 +14,8 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { FaltaAndPermisoAditionalResponseI, FaltaPermiso } from 'src/app/models/responseFaltasAndPermisosAditional.interfase';
-import { LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
 import { format } from 'util';
 //import { TranslateService } from '@ngx-translate/core';
@@ -137,7 +138,7 @@ export class FaltasPermisosComponent implements OnInit {
     public dialogService: DialogService,
     private fb: FormBuilder,
     private PerFaltasYPermisosService: PerFaltasYPermisosService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private cierremesService: CierreMesService,
     //private translateService: TranslateService,
     //private configService: AppConfigService,
@@ -617,7 +618,7 @@ export class FaltasPermisosComponent implements OnInit {
 
   // /**
   //  * validar rango
-  //  * @returns 
+  //  * @returns
   //  */
   // private dateRangeValidator: ValidatorFn = (): {
   //   [key: string]: any;
@@ -713,14 +714,14 @@ export class FaltasPermisosComponent implements OnInit {
 
 
         /*Recorremos el elemento principal que son los  motivos */
-        
+
         for (let i = 0; i < res.length; i++) {
 
 
           if (DataSetGrafit.length > 0) {
 
             let labelGraf = DataSetGrafit.filter(co => co.label == res[i].motivo);
-           
+
 
             if (labelGraf.length > 0) {
               labelGraf[0]['data'].push(res[i].total);
@@ -796,37 +797,37 @@ export class FaltasPermisosComponent implements OnInit {
 
           /*
                     if (DataSetGrafitDune.length > 0) {
-          
+
                       let labelGraf = DataSetGrafitDune.filter(co => co.label == res[i].motivo);
-          
+
                       if (labelGraf.length > 0) {
                         labelGraf[0]['data'].push(res[i].total);
                       } else {
-          
-                       
-          
-                        
-          
+
+
+
+
+
                         DataSetGrafitDune.push({
                           label: res[i].motivo,
                           backgroundColor: '#42A5F5',
                           data: dataPointGrafit
                         })
-          
+
                       }
-          
+
                     } else {
-          
+
                       let dataPointGrafit = []
-          
+
                       dataPointGrafit.push(res[i].total);
-          
+
                       DataSetGrafitDune.push({
                         label: res[i].motivo,
                         backgroundColor: '#42A5F5',
                         data: dataPointGrafit
                       })
-          
+
                     }*/
 
 
@@ -888,10 +889,10 @@ export class FaltasPermisosComponent implements OnInit {
     let flpr_anio = dataOption['flpr_anio'];
     let id_mes = dataOption['id_mes'];
     let motivo_permiso = dataOption['motivo_permiso'];
-   
+
     // let id_empresa = dataOption['id_empresa'];
     return this.apiService.apiCall(`fault_and_permissions/report_grafi?flpr_anio=${flpr_anio}&id_mes=${id_mes}&motivo_permiso=${motivo_permiso}`, "GETV1", {});
-  
+
   }*/
 
 
@@ -954,7 +955,7 @@ console.log(data)
           ],
           borderWidth: 1
         },
-       
+
       ]
       },
       options: {
@@ -1202,7 +1203,7 @@ console.log(data)
   }
 
   /**
-   * 
+   *
    * @returns actualizar confir
    */
   async validaUpdateFaltaAndPermiso() {
@@ -1263,7 +1264,7 @@ console.log(data)
       "mes": this.convertirMes()
     }
       this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
         const idEmp = this.faltasAndDescuentosForm.id_empleado;
@@ -1273,7 +1274,7 @@ console.log(data)
           ip: this.commonService.getIpAddress(),
           accion: "Creación de nueva falta y permisos  rrhh",
           id_controlador: myVarGlobals.fCuentaBancos,
-    
+
           id_empleado: idEmp,
           flpr_anio: moment(this.formGroupFaltaAndPermiso.value.fcn_flpr_anio).year(), // new Date(this.formGroupFaltaAndPermiso.value.fcn_flpr_anio + '-12-31').getFullYear(),
           id_mes: this.mes_id_cc,
@@ -1290,13 +1291,13 @@ console.log(data)
         this.lcargando.ctlSpinner(true);
         console.log(data);
         this.PerFaltasYPermisosService.saveFaultAndPermission(data).subscribe(
-    
+
           (res: GeneralResponseI) => {
             console.log(res);
             this.toastr.success(
               "Datos de falta y permisos guardados correctamente."
             );
-    
+
             this.cancel(0);
             console.log(idEmp);
             this.getFaltasPermisos(idEmp);
@@ -1306,13 +1307,13 @@ console.log(data)
             //     "Datos de falta y permisos guardados correctamente."
             //   );
             // }
-    
+
             // this.submitted = false;
             // this.cancel(0);
-    
+
             // this.rerender();
-    
-    
+
+
           },
           (error) => {
             this.lcargando.ctlSpinner(false);
@@ -1323,24 +1324,24 @@ console.log(data)
             // this.toastr.info(error.error.message);
           }
         );
-  
+
       } else {
         this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
         this.lcargando.ctlSpinner(false);
       }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
       })
-    
+
   }
 
   /**
-   * actualizar 
+   * actualizar
    */
   async updateFaltaAndPermisoEmpleado() {
-    
+
     this.mensajeSppiner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let dat = {
@@ -1348,7 +1349,7 @@ console.log(data)
       "mes": this.convertirMes()
     }
       this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
         const idEmp = this.faltasAndDescuentosForm.id_empleado;
@@ -1378,12 +1379,12 @@ console.log(data)
             this.toastr.success(
               "Datos de falta y permisos actualizados correctamente."
             );
-    
+
             this.cancel(0);
-    
+
             this.getFaltasPermisos(idEmp);
             this.lcargando.ctlSpinner(false);
-    
+
           },
           (error) => {
             this.lcargando.ctlSpinner(false);
@@ -1394,12 +1395,12 @@ console.log(data)
             // this.toastr.info(error.error.message);
           }
         );
-  
+
       } else {
         this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
         this.lcargando.ctlSpinner(false);
       }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
@@ -1418,10 +1419,10 @@ console.log(data)
       "mes": this.convertirMes()
     }
       this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
-        
+
         console.log("delete");
         let data = {
           // info: this.areaForm,
@@ -1429,19 +1430,19 @@ console.log(data)
           accion: "Borrar falta y permiso rrhh",
           id_controlador: myVarGlobals.fBovedas,
           id_falt_perm: this.faltasAndDescuentosForm.id_falt_perm,
-    
+
         };
         // this.validaDt = false;
         this.mensajeSppiner = "Borrando...";
         this.lcargando.ctlSpinner(true);
         this.PerFaltasYPermisosService.deleteFaultAndPermission(data).subscribe(
           (res) => {
-    
+
             this.cancel(0);
             this.getFaltasPermisos(this.faltasAndDescuentosForm.id_empleado);
             this.lcargando.ctlSpinner(false);
             this.toastr.success("Datos de falta y permisos borradis correctamente.");
-    
+
           },
           (error) => {
             this.lcargando.ctlSpinner(false);
@@ -1454,12 +1455,12 @@ console.log(data)
         this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
         this.lcargando.ctlSpinner(false);
       }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
       })
-    
+
   }
   /**
    * Buscar empleado

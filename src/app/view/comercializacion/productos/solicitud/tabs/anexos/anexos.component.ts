@@ -5,8 +5,8 @@ import { SolicitudService } from '../../solicitud.service';
 import { DataTableDirective } from "angular-datatables";
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
-import 'sweetalert2/src/sweetalert2.scss';  
-const Swal = require('sweetalert2');
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal from 'sweetalert2';
 import { CommonService } from "../../../../../../services/commonServices";
 import { environment } from '../../../../../../../environments/environment';
 import * as myVarGlobals from '../../../../../../global';
@@ -67,7 +67,7 @@ export class AnexosComponent implements OnInit {
           this.guardaT = [];
         }else if (res.search) {
           this.validateSearch = true;
-          
+
           this.limpiar();
           this.dAction = false;
           this.guardaT = [];
@@ -168,7 +168,7 @@ export class AnexosComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.requestService.descargar(datos).subscribe((resultado) => {
         this.lcargando.ctlSpinner(false);
-        
+
         const url = URL.createObjectURL(resultado);
         const link = document.createElement("a");
         link.href = url;

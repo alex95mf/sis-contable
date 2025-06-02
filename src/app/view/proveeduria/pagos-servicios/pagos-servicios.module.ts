@@ -10,8 +10,5 @@ import { AppCustomModule } from '../../../config/custom/app-custom.module';
     PagosServiciosRoutingModule,
     AppCustomModule
   ],
-  entryComponents: [
-    ShowPagosServiciosComponent
-  ]
 })
 export class PagosServiciosModule { }

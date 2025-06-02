@@ -19,7 +19,5 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     NgbModule,
     AppCustomModule
   ],
-  entryComponents: [
-  ]
 })
 export class DepositoModule { }

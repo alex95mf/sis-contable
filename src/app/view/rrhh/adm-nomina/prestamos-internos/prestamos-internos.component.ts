@@ -6,7 +6,8 @@ import * as myVarGlobals from '../../../../global';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { GeneralService } from 'src/app/services/general.service';
 import { Empleado } from 'src/app/models/responseEmployeesAditional.interface';
 import { formatDate } from '@angular/common';
@@ -61,7 +62,7 @@ export class PrestamosInternosComponent implements OnInit {
   vmButtons: any = [];
 
   mensajeSppiner: string = "Cargando...";
-  /** 
+  /**
    * vaciones tab inicio
   */
   //formulario
@@ -127,7 +128,7 @@ export class PrestamosInternosComponent implements OnInit {
   displayModalVacacionesFaltasPermisos: boolean;
   @Input() objGetFaltaPermisosByParameter: FaltaPermiso[];
 
-  /** 
+  /**
    * vaciones tab FIN
   */
 
@@ -149,11 +150,11 @@ export class PrestamosInternosComponent implements OnInit {
     private serviceFaltasYPermisosService: PerFaltasYPermisosService,
     // private translateService: TranslateService,
     private fb: FormBuilder,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private vacaServ: VacacionesService,
     public sanitizer: DomSanitizer,
     private apiService: ApiServices,
-    private perfaltasypermisosService: PerFaltasYPermisosService, 
+    private perfaltasypermisosService: PerFaltasYPermisosService,
   ) {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
     this.faltasPermisosContruct();
@@ -267,16 +268,16 @@ export class PrestamosInternosComponent implements OnInit {
         clase: "btn btn-danger boton btn-sm",
         habilitar: false,
       },
-      /* { 
+      /* {
         orig: "btnsSoliciudesEmpleados", paramAccion: "TAB_PERMISOS", boton: { icon: "fa fa-eraser", texto: "LIMPIAR" }, permiso: true,
         showtxt: true, showimg: false, showbadge: false, clase: "btn btn-dark boton btn-sm", habilitar: false, imprimir: false
       },
-      { 
-        orig: "btnsSoliciudesEmpleados", paramAccion: "TAB_PERMISOS", boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, permiso: true, 
+      {
+        orig: "btnsSoliciudesEmpleados", paramAccion: "TAB_PERMISOS", boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, permiso: true,
         showtxt: true, showimg: false, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: false, imprimir: false
       }, */
-      // { 
-      //   orig: "btnsSoliciudesEmpleados", paramAccion: "TAB_CERTIFICADOS_LABORALES", boton: { icon: "fa fa-print", texto: "IMPRIMIR" }, permiso: true, 
+      // {
+      //   orig: "btnsSoliciudesEmpleados", paramAccion: "TAB_CERTIFICADOS_LABORALES", boton: { icon: "fa fa-print", texto: "IMPRIMIR" }, permiso: true,
       //   showtxt: true, showimg: false, showbadge: false, clase: "btn btn-primary boton btn-sm", habilitar: false, imprimir: false
       // },
       {
@@ -351,7 +352,7 @@ export class PrestamosInternosComponent implements OnInit {
     this.vmButtons[0].habilitar = true;
     this.changeFechaFin();
 
-    //certificados 
+    //certificados
     this.validateFormCertificadosLaboral();
     //vacaciones
     this.validateFormFaltasPermisos();
@@ -362,10 +363,10 @@ export class PrestamosInternosComponent implements OnInit {
         this.dataLength = res['data'];
         if(this.dataLength[0]){
           for (let index = 0; index < this.dataLength[0].niveles; index++) {
-            this.lstNiveles.push(index+1);          
+            this.lstNiveles.push(index+1);
           }
         }
-  
+
         this.getGrupoAccount();
       }, error =>{
         this.lcargando.ctlSpinner(false);
@@ -679,7 +680,7 @@ export class PrestamosInternosComponent implements OnInit {
         this.toastr.success(
           "Datos de vacaciones actualizados correctamente."
         );
-        //consultar nuevamente 
+        //consultar nuevamente
         // this.cancel(0);
         // this.getFaltasPermisos(idEmp);
         this.objGetVacationes = [];
@@ -793,7 +794,7 @@ export class PrestamosInternosComponent implements OnInit {
         this.toastr.success(
           "Datos de vacaciones guardados correctamente."
         );
-        //consultar nuevamente 
+        //consultar nuevamente
         // this.cancel(0);
         // this.getFaltasPermisos(idEmp);
         this.objGetVacationes = [];
@@ -868,7 +869,7 @@ export class PrestamosInternosComponent implements OnInit {
     console.log(empleadoData);
     this.objGetVacationes = [];
     /**
-     * 
+     *
      */
     this.vacacionesForm.id_empleado = empleadoData.id_empleado;
     this.formGroupVacaciones.get("fcn_full_nombre_empleado").setValue(empleadoData.emp_full_nombre);
@@ -979,7 +980,7 @@ export class PrestamosInternosComponent implements OnInit {
       this.loading = false
       this.toastr.error(err.error?.message, 'Error cargando Vacaciones')
     }
-    
+
   }
 
   nextPage($event) {
@@ -1353,7 +1354,7 @@ export class PrestamosInternosComponent implements OnInit {
     this.empleadoDataCertificados = empleadoData;
     this.objGetVacationes = [];
     /**
-     * 
+     *
      */
 
     this.formGroupCertificadosLaborales.get("fcn_cer_full_nombre_empleado").setValue(empleadoData.emp_full_nombre);
@@ -1692,7 +1693,7 @@ export class PrestamosInternosComponent implements OnInit {
 
     this.ref.onClose.subscribe(
       (empleadoData: Empleado) => this.llenarInputEmpleado(empleadoData)
-      
+
       /* {
         console.log(empleadoData)
         this.formGroupVacaciones.get("fcn_full_nombre_empleado").setValue(empleadoData.emp_full_nombre);
@@ -1736,20 +1737,20 @@ export class PrestamosInternosComponent implements OnInit {
       // COTR
       this.formGroupVacaciones.get("fcn_vac_num_dias_max_vacaciones").setValue(maxDiasVacaciones);
 
-      let mesVacaciones = (empleadoData.codigo_trabajo.cat_keyword == 'LOSEP') ? 11  : 12 ; 
+      let mesVacaciones = (empleadoData.codigo_trabajo.cat_keyword == 'LOSEP') ? 11  : 12 ;
       this.formGroupVacaciones.get("fcn_vac_a_partir_meses").setValue(mesVacaciones +" Meses");
 
       // dias trabajando
 
       let finalIngreso = formatDate(new Date(empleadoData.emp_fecha_ingreso),'yyyy-MM-dd',"en-US");
       let fechaActual = formatDate(new Date(),'yyyy-MM-dd',"en-US");
-  
-  
+
+
       let totalD = new Date(fechaActual).getTime() - new Date(finalIngreso).getTime();
       let totalDias = totalD/(1000*60*60*24);
 
       this.formGroupVacaciones.get("fcn_vac_tiempo_trabajando").setValue(this.getFormatedStringFromDays(totalDias));
-      
+
 
       this.mensajeSppiner = "Guardando...";
       this.lcargando.ctlSpinner(true);
@@ -1760,7 +1761,7 @@ export class PrestamosInternosComponent implements OnInit {
         ip: this.commonService.getIpAddress(),
         accion: "get lista vacaciones empleado rrhh",
         id_controlador: myVarGlobals.fBovedas,
-  
+
         page : this.pageIndex,
         size : 10,  // this.rows
         sort : 'vac_anio',
@@ -1768,9 +1769,9 @@ export class PrestamosInternosComponent implements OnInit {
         search : '',
         id_empleado : empleadoData.id_empleado,
         id_empresa : 1,
-  
+
       };
-  
+
     this.vacacionesEmpleadoService.getVacationDaysEmployees(data)
       .subscribe({
         next: (rpt: VacacionAditionalResponseI) => {
@@ -1779,16 +1780,16 @@ export class PrestamosInternosComponent implements OnInit {
           // console.log(info);
           this.objGetVacationes = info;
           this.lcargando.ctlSpinner(false);
-          
+
           this.loading = false;
-        
-          
+
+
         },
         error: (e) => {
           console.log(e);
           this.loading = false;
           this.lcargando.ctlSpinner(false);
-         
+
         },
       }); */
 
@@ -2156,7 +2157,7 @@ export class PrestamosInternosComponent implements OnInit {
 
 
   /**
-   * 
+   *
    * @returns actualizar confir
    */
   async validaUpdateFaltaAndPermiso() {
@@ -2182,7 +2183,7 @@ export class PrestamosInternosComponent implements OnInit {
 
 
   /**
-  * actualizar 
+  * actualizar
   */
   async updateFaltaAndPermisoEmpleadoSolicitudes() {
     const idEmp = this.faltasAndDescuentosForm.id_empleado;

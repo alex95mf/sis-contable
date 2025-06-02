@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as myVarGlobals from '../../../../global';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 
-const Swal = require('sweetalert2');
+import Swal from 'sweetalert2';
 
 import * as moment from 'moment'
 
@@ -30,7 +30,7 @@ export class CierreDeAnioComponent implements OnInit {
   groupAccount: any;
   processing:any = false;
   periodos:any = [];
-  
+
   selected_anio: any;
 
   permiso_ver:any = "0";
@@ -38,7 +38,7 @@ export class CierreDeAnioComponent implements OnInit {
 
   constructor(
     private commonService: CommonService,
-    private toastr: ToastrService, 
+    private toastr: ToastrService,
     private cierremesService: CierreDeAnioService,
   ) {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
@@ -73,7 +73,7 @@ export class CierreDeAnioComponent implements OnInit {
     }
 
     this.commonService.getPermisionsGlobas(data).subscribe(res => {
-     
+
       this.permisions = res['data'];
       this.permiso_ver = this.permisions[0].ver;
 
@@ -106,7 +106,7 @@ export class CierreDeAnioComponent implements OnInit {
   ObtenerPeriodo(anio: any) {
 
     this.selected_anio = anio;
-  
+
   }
 
   CierrePeriodoAnual(){
@@ -135,7 +135,7 @@ export class CierreDeAnioComponent implements OnInit {
         //$('#tablaConsultCjChica').DataTable().button( '.buttons-excel' ).trigger();
         break;
       case "CERRAR":
-        this.confirmCierrePeriodoAnual();    
+        this.confirmCierrePeriodoAnual();
         break;
     }
   }
