@@ -160,7 +160,7 @@ export class GastosPersonalesComponent implements OnInit {
   // Tabla de Impuesto a la Renta
   displayedColumns: string[] = ['anual', 'mensual', 'acumulado', 'pendiente', 'motivo'];
 
-  filter: any 
+  filter: any
   cmb_periodo: any[] = []
 
   constructor(
@@ -179,7 +179,7 @@ export class GastosPersonalesComponent implements OnInit {
     //   lgNumPerido: [],
     //   namePeriodo: ["", [Validators.required]],
     //   num_documento: ["", [Validators.required]],
-      
+
     // });
 
     this.catalogosNomina("GPP");
@@ -197,14 +197,14 @@ export class GastosPersonalesComponent implements OnInit {
         this.empleado = res
         this.formReadonly = false
 
-       
+
 
         this.gastosPersonalesForm.num_documento = res.emp_identificacion;
         this.gastosPersonalesForm.nombre_completo = res.emp_full_nombre;
         // console.log(res.gastos_personales.length);
 
         this.validarRegistroTabla = res.gastos_personales.length;
-      
+
         // this.inputNumDocumento.nativeElement.value = res.emp_identificacion;
         this.id_personal = res.id_empleado;
 
@@ -233,7 +233,7 @@ export class GastosPersonalesComponent implements OnInit {
           sueldo_anual: res.sueldo.sld_salario_minimo * 12,
           num_cargas_familiares: res.familiares_count,
         })
-        
+
         this.lcargando.ctlSpinner(true)
         try {
           // Consultar IRbase_imponibl
@@ -281,24 +281,24 @@ export class GastosPersonalesComponent implements OnInit {
             //this.empleado.discapacitado = data.tiene_discapacidad
 
             console.log(this.impuestoRenta)
-  
+
             this.roDiscapacidad = !res.discapacitado
             this.roTerceraEdad = !res.tercera_edad
 
             this.empleado.discapacitado = data.tiene_discapacidad
             this.empleado.tercera_edad = data.tiene_tercera_edad
-  
+
             this.dataImpuestoRenta = response
-      
+
             //Consultar otros Valores (Iniciales)
             console.log(data.num_cargas_familiares)
-            
+
               await this.getMaxGastoPersonal(data.num_cargas_familiares ?? 0, this.cc_value_anio)
-            
+
             if (this.dataImpuestoRenta.length > 0) {
               if (res.discapacitado && data.rebaja_discapacidad == 0) await this.getRebajaDiscapacidad(res.porcentaje_discapacidad ?? 0,  this.cc_value_anio)
               if (res.tercera_edad && data.rebaja_tercera_edad == 0) await this.getRebajaTerceraEdad(this.cc_value_anio)
-  
+
               // Calcular segun los valores iniciales
               this.valoresCalculables()
             }
@@ -313,12 +313,12 @@ export class GastosPersonalesComponent implements OnInit {
             const factorGastos: number = 0.18;
             let minimo = Math.min(parseFloat(this.impuestoRenta.maxGastoPersonal), parseFloat(this.impuestoRenta.deducibles))
             this.impuestoRenta.rebaja_gastos_personales = minimo * factorGastos
-            
+
           }else{
             this.valoresCalculables();
             this.handleInputCargas();
           }
-          
+
           //
           this.vmButtons[4].habilitar = false
           this.lcargando.ctlSpinner(false)
@@ -578,7 +578,7 @@ export class GastosPersonalesComponent implements OnInit {
           return;
         }
       });
-      
+
     //}
 
     console.log("falta validar");
@@ -613,7 +613,7 @@ export class GastosPersonalesComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: message,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -681,7 +681,7 @@ export class GastosPersonalesComponent implements OnInit {
     }else{
       this.toastr.info('No existen valores para exportar')
     }
-    
+
   }
 
   async handleInputCargas() {
@@ -763,7 +763,7 @@ export class GastosPersonalesComponent implements OnInit {
     this.impuestoRenta.horas_extra = parseFloat(this.impuestoRenta.horas_extra_mensual) * 12
     this.valoresCalculables()
   }
-  
+
   calcularComisiones() {
     this.impuestoRenta.comisiones = parseFloat(this.impuestoRenta.comisiones_mensual) * 12
     this.valoresCalculables()
@@ -805,7 +805,7 @@ export class GastosPersonalesComponent implements OnInit {
       console.log(base_imponible)
       let response = await this.gastospersonalesService.getImpuestoCausado({ base_imponible })
       console.log(response)
-      
+
       const { desde, valor, porcentaje } = response
       impuesto_causado = ((base_imponible - parseFloat(desde)) * parseFloat(porcentaje)) + parseFloat(valor);
       impuesto_renta_anual = impuesto_causado - parseFloat(this.impuestoRenta.rebaja_gastos_personales) - parseFloat(this.impuestoRenta.retenciones);
@@ -829,10 +829,10 @@ export class GastosPersonalesComponent implements OnInit {
       this.lcargando.ctlSpinner(true)
       await this.getRebajaDiscapacidad(this.empleado.porcentaje_discapacidad,this.filter.periodo)
       this.lcargando.ctlSpinner(false)
-    } 
+    }
     // else {
     //   this.impuestoRenta.rebaja_tercera_edad = null
-    // } 
+    // }
     this.calcularBase()
   }
 
@@ -935,7 +935,7 @@ export class GastosPersonalesComponent implements OnInit {
             total_ingresos: data.total_ingresos ?? 0,
             utilidades: data.utilidades ?? 0,
           })
-    
+
           if (data) { this.impuestoRenta = data }
 
           if(this.cc_value_anio){
@@ -1035,7 +1035,7 @@ export class GastosPersonalesComponent implements OnInit {
           this.mensajeSppiner = 'Actualizando datos'
           let response = await this.gastospersonalesService.getImpuestoRenta({empleado: this.empleado.emp_identificacion})
           this.dataImpuestoRenta = response
-          
+
           let data = response.find((element: any) => element.estado == 'A')
 
           Object.assign(data, {
@@ -1067,7 +1067,7 @@ export class GastosPersonalesComponent implements OnInit {
             total_ingresos: data.total_ingresos ?? 0,
             utilidades: data.utilidades ?? 0,
           })
-    
+
           if (data) { this.impuestoRenta = data }
 
           await this.getMaxGastoPersonal(this.empleado.familiares_count ?? 0, this.cc_value_anio)
@@ -1140,7 +1140,7 @@ export class GastosPersonalesComponent implements OnInit {
         this.toastr.success("Borrado" /* res['message'] */);
         // this.toastr.success(res['message']);
         // this.cancel();
-        // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        // this.dtElement.dtInstance.then((dtInstance: any) => {
         //   dtInstance.destroy();
         //   this.getDataTableArea();
         // });
@@ -1162,7 +1162,7 @@ export class GastosPersonalesComponent implements OnInit {
   //   modalInvoice.componentInstance.title = "PERSONAL";
   //   modalInvoice.componentInstance.periodo_id = this.periodo_id_cc;
   // }
-  
+
   onClicConsultaPersonas() {
     console.log(this.periodo_id_cc)
     const modalInvoice = this.modalService.open(ModalGlobalTableComponent, {
@@ -1175,7 +1175,7 @@ export class GastosPersonalesComponent implements OnInit {
   }
 
 
-  
+
 
   viewSelectionPeriodoCC(response: any) {
 
@@ -1364,7 +1364,7 @@ export class GastosPersonalesComponent implements OnInit {
     this.sumGastos.proyectado = 0
     this.sumGastos.real = 0
     this.formReadonly = true
-    
+
   }
   // DEPRECATED, reemplaza validarUpdateValorProyectado()
   /* onBlurUpdateValorProyectado($dtValue, $dataTab) {
@@ -1397,7 +1397,7 @@ export class GastosPersonalesComponent implements OnInit {
   } */
 
   // rerender(): void {
-  //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  //   this.dtElement.dtInstance.then((dtInstance: any) => {
   //     dtInstance.destroy();
   //     //    this.catalogosNomina("GPP");
 

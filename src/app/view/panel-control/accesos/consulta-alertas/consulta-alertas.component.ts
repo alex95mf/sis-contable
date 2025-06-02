@@ -230,7 +230,7 @@ export class ConsultaAlertasComponent implements OnInit {
 
   // rerender(): void {
   //   this.validaDtBitacora = false;
-  //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  //   this.dtElement.dtInstance.then((dtInstance: any) => {
   //     dtInstance.destroy();
   //     this.getDatabitacora();
   //   });
@@ -251,7 +251,7 @@ export class ConsultaAlertasComponent implements OnInit {
   // filterXUser(){
   //   this.validaDtBitacora = false;
   //   this.dataBitacoraAux = [];
-  //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  //   this.dtElement.dtInstance.then((dtInstance: any) => {
   //     dtInstance.destroy();
   //     if(this.userFilter == 0){
   //       this.validaDtBitacora = true;

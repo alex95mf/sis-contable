@@ -1376,7 +1376,7 @@ export class ProveedoresComponent implements OnInit {
     const result = await Swal.fire({
       title: "Atención!!",
       text: "Esta seguro de borrar el Certificado Bancario?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",

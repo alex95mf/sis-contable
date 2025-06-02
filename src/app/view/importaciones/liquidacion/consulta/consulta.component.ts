@@ -140,7 +140,7 @@ export class ConsultaComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.validaDt = true;
     this.dataDT = [];
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getTableAccounts();
     });

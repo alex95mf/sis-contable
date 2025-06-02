@@ -23,7 +23,7 @@ standalone: false,
   templateUrl: './organigrama.component.html',
   styleUrls: ['./organigrama.component.scss'],
   providers: [DialogService,MessageService]
-  
+
 })
 export class OrganigramaComponent implements OnInit {
   mensajeSppiner: string = "Cargando...";
@@ -40,12 +40,12 @@ export class OrganigramaComponent implements OnInit {
   cmb_estado: Array<any> = [
     { value: 'A', label: 'ACTIVO' },
     { value: 'I', label: 'INACTIVO' },
-  ] 
-  
+  ]
+
   cmb_tipo: Array<any> = [
     { value: 'NIVEL', label: 'NIVEL' },
     { value: 'SUBNIVEL', label: 'SUBNIVEL' },
-  ] 
+  ]
 
   paginate: any;
   filter: any;
@@ -130,7 +130,7 @@ export class OrganigramaComponent implements OnInit {
       this.cargarParametrosOrganigrama();
       this.CargarOrganigramaArbolNew(this.grid, this.listEstado)
     }
-      
+
     , 50);
 
 
@@ -142,7 +142,7 @@ export class OrganigramaComponent implements OnInit {
       id_empresa: this.dataUser.id_empresa
     }
 
-    
+
     this.organigramaService.getRol(data).subscribe(resrol => {
       //console.log(resrol['data'].filter(rol => rol.estado === 'A'))
       if(resrol['data'].length > 0){
@@ -150,23 +150,23 @@ export class OrganigramaComponent implements OnInit {
       }else{
         this.lista_roles = []
       }
-      
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     })
 
-    
+
   }
 
 
   nodeSelect(event: any) {
     console.log('Evento de selección:', event); // Primero verifica si el evento se dispara
-    
+
     if (event.node) {
         const nodeData = event.node.data;
         console.log('Datos del nodo seleccionado:', nodeData);
-        
+
         // Opcional: Mostrar en la interfaz
         this.selectedNode2 = nodeData;
     }
@@ -179,7 +179,7 @@ export class OrganigramaComponent implements OnInit {
 
     this.vmButtons[1].habilitar = true
     this.vmButtons[2].habilitar = false
-    
+
   }
 
   CargarOrganigramaArbolNew(grid, estado?: []) {
@@ -207,7 +207,7 @@ export class OrganigramaComponent implements OnInit {
         key: elem.id_organigrama,
         data: {
           id_organigrama: elem.id_organigrama,
-          tipo: elem.tipo,          
+          tipo: elem.tipo,
           nivel: elem.nivel,
           codigo: elem.codigo,
           codigo_padre: elem.codigo_padre,
@@ -215,7 +215,7 @@ export class OrganigramaComponent implements OnInit {
           descripcion: elem.descripcion,
           id_rol: elem.id_rol,
           id_empresa: elem.id_empresa,
-          estado: elem.estado,          
+          estado: elem.estado,
         },
         children: elem.children ? this.mapResponseToNode(elem.children) : []
       }
@@ -265,7 +265,7 @@ export class OrganigramaComponent implements OnInit {
     this.excelService.exportAsExcelFile(this.excelData[0], 'Organigrama');
   }
 
-  
+
 
 
 
@@ -289,7 +289,7 @@ export class OrganigramaComponent implements OnInit {
 
 
   setNewAccount() {
-    
+
   }
 
 
@@ -327,14 +327,14 @@ export class OrganigramaComponent implements OnInit {
     descripción:funcion para guardar la nueva cuenta
   */
 
-  
+
 
   async confirmUpdate() {
 
     Swal.fire({
       title: "Atención!!",
       text: "Seguro desea modificar la cuenta?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',
@@ -361,7 +361,7 @@ export class OrganigramaComponent implements OnInit {
 
     } else {
       this.toastr.info("Usuario si tiene permiso para modificar");
-      
+
     }
   }
 
@@ -387,7 +387,7 @@ export class OrganigramaComponent implements OnInit {
     this.vmButtons[0].habilitar = false;
     this.vmButtons[1].habilitar = true;
     this.vmButtons[2].habilitar = true;
-    
+
 
   }
 
@@ -461,7 +461,7 @@ export class OrganigramaComponent implements OnInit {
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
       case "NUEVO":
-        this.validarNuevo(); 
+        this.validarNuevo();
         break;
       case "GUARDAR":
         this.validarDataOrganigrama()
@@ -490,7 +490,7 @@ export class OrganigramaComponent implements OnInit {
     }
   }
 
-  
+
 
   getButtons() {
     this.vmButtons = [
@@ -525,7 +525,7 @@ export class OrganigramaComponent implements OnInit {
 
   validarNuevo(): void {
     this.isReadOnly = false;
-    this.limpiarFormulario(); 
+    this.limpiarFormulario();
     this.nuevoNivelOrganigrama();
     this.vmButtons[1].habilitar = false
     this.vmButtons[2].habilitar = true
@@ -540,7 +540,7 @@ export class OrganigramaComponent implements OnInit {
       this.toastr.warning("Debe de seleccionar el rol")
       return;
     }
-    
+
     this.saveNivelOrganigrama()
 
   }
@@ -548,7 +548,7 @@ export class OrganigramaComponent implements OnInit {
   nuevoNivelOrganigrama() {
       // Ocultar Grupo mostrado, de aplicar
       this.nivelSelected = false
-  
+
       Swal.fire({
         title: 'Que desea crear?',
         icon: 'question',
@@ -581,7 +581,7 @@ export class OrganigramaComponent implements OnInit {
             id_empresa: this.dataUser.id_empresa,
             estado: 'A'
           }
-  
+
         } else if (!result.isConfirmed && result.isDenied) {
           // Subgrupo
           // console.log('Nuevo Subgrupo')
@@ -602,7 +602,7 @@ export class OrganigramaComponent implements OnInit {
             id_empresa: this.dataUser.id_empresa,
             estado: 'A'
           }
-  
+
         } else {
           // Cerro el modal
           return
@@ -619,7 +619,7 @@ export class OrganigramaComponent implements OnInit {
         this.lcargando.ctlSpinner(false)
         this.limpiarFormulario()
         this.CargarOrganigramaArbolNew(this.grid, this.listEstado)
-        
+
         //this.getGrupos(this.grid)
       },
       (err: any) => {

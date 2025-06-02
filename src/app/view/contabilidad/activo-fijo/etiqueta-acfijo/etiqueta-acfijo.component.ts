@@ -195,7 +195,7 @@ getSucursal() {
 
   rerender(): void {
     this.validaDt = false;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getTableReport();
     });

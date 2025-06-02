@@ -151,7 +151,7 @@ export class DepositoComponent implements OnInit {
       this.nameSucursal = "Nombre Sucursal";
       this.validaDt = false;
       this.arraySumDet = [];
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getTableInit();
       });

@@ -194,7 +194,7 @@ export class ConsultaCajachComponent implements OnInit {
   rerender(): void {
     this.infoData = [];
     this.validaDt = false;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getTableReport();
     });

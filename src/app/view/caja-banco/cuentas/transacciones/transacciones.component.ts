@@ -298,7 +298,7 @@ export class TransaccionesComponent implements OnInit {
       this.toastr.success(res['message']);
       this.cancel();
       this.validaDt = false;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getInfoBank();
       });
@@ -309,7 +309,7 @@ export class TransaccionesComponent implements OnInit {
 
   rerender(): void {
     this.validaDt = false;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getTableAccounts();
     });
@@ -350,7 +350,7 @@ export class TransaccionesComponent implements OnInit {
       this.toastr.success(res['message']);
       this.cancel();
       this.validaDt = false;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getInfoBank();
       });
@@ -436,7 +436,7 @@ export class TransaccionesComponent implements OnInit {
       this.toastr.success(res['message']);
       this.cancel();
       this.validaDt = false;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getInfoBank();
       });

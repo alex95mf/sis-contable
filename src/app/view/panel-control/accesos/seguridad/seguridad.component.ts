@@ -573,7 +573,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
         this.borrar();
         this.getRoles();
         this.lcargando.ctlSpinner(false);
-        // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        // this.dtElement.dtInstance.then((dtInstance: any) => {
         //   dtInstance.destroy();
         //   this.getRoles();
         // });
@@ -910,7 +910,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
   }
 
   rerender(): void {
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.dtTrigger.next(null);
     });
@@ -1173,7 +1173,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
         this.borrar();
         this.getRoles();
         this.lcargando.ctlSpinner(false);
-        // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        // this.dtElement.dtInstance.then((dtInstance: any) => {
         //   dtInstance.destroy();
         //   this.getRoles();
         // });

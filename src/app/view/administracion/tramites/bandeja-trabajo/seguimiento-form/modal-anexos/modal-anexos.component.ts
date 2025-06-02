@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
-import { BandejaTrabajoService } from 'src/app/view/administracion/mesa-ayuda/bandeja-trabajo/bandeja-trabajo.service'; 
+import { BandejaTrabajoService } from 'src/app/view/administracion/mesa-ayuda/bandeja-trabajo/bandeja-trabajo.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 import * as moment from 'moment';
@@ -36,10 +36,10 @@ export class ModalAnexosComponent implements OnInit {
   deshabilitar: boolean = false;
   fileList: FileList;
   siguiente_paso: any = ''
-  
+
 
   gesTicket: any = {};
-  
+
   @Input() module_comp: any;
   @Input() isNew: any;
   @Input() data: any;
@@ -48,7 +48,7 @@ export class ModalAnexosComponent implements OnInit {
   @Input() ticket: any;
 
   estadoList = [
-  
+
     {value: "P",label: "PENDIENTE"},
     {value: "C",label: "CERRADO"}
   ]
@@ -56,9 +56,9 @@ export class ModalAnexosComponent implements OnInit {
     {value: "A",label: "ALTA"},
     {value: "M",label: "MEDIA"},
     {value: "B",label: "BAJA"},
-    
+
   ]
-  
+
   respuestaList = [
     {value: "S",label: "SI"},
     {value: "N",label: "NO"}
@@ -73,9 +73,9 @@ export class ModalAnexosComponent implements OnInit {
   diasT: any
   classT:any
   dias_trans: any
-  
- 
-  
+
+
+
   constructor(public activeModal: NgbActiveModal,
       private toastr: ToastrService,
       private commonSrv: CommonService,
@@ -150,8 +150,8 @@ export class ModalAnexosComponent implements OnInit {
     this.flujoPasos = JSON.parse(JSON.stringify(this.data['flujo_pasos']));
     this.flujoPasosTodos = JSON.parse(JSON.stringify(this.data['flujo_pasos_dos']));
     console.log(this.flujoPasosTodos)
-    
-  
+
+
     if(this.flujoPasosTodos.length > 0){
      let pasoSigFilter = this.flujoPasosTodos.filter(e => e.nro_paso == this.ticketEdit.siguiente_paso)[0];
       console.log(pasoSigFilter.descripcion)
@@ -177,25 +177,25 @@ export class ModalAnexosComponent implements OnInit {
      let fecha_vencida = moment(fechaM).add( 1, 'days')
      if(fecha_vencida<=today){
        this.vencimientoT= 'día(s) transcurrido(s)';
-       this.diasT= Math.abs(dias_vencidos); 
+       this.diasT= Math.abs(dias_vencidos);
        this.classT = 'text-danger';
      }else if(fecha_vencida==today){
       this.vencimientoT= 'día(s) para gestionar';
-      this.diasT= Math.abs(today.diff(fecha_vencida, 'days')); 
+      this.diasT= Math.abs(today.diff(fecha_vencida, 'days'));
       this.classT = 'text-warning';
      }else if(fecha_vencida > today && today.diff(fecha_vencida, 'days') != 0){
       this.vencimientoT= 'día(s) para gestionar';
-      this.diasT= Math.abs(today.diff(fecha_vencida, 'days')); 
+      this.diasT= Math.abs(today.diff(fecha_vencida, 'days'));
       this.classT = 'text-success';
      }else if(fecha_vencida > today && today.diff(fecha_vencida, 'days') == 0){
       this.vencimientoT= 'Tiene '+dias_disponibles+' días(s) para gestionar';
-      this.diasT= ''; 
+      this.diasT= '';
       this.classT = 'text-success';
      }
    }
 
 
-   
+
     console.log(this.ticketEdit.siguiente_paso);
     this.deshabilitar=true;
     this.gesTicket.estado = this.ticketEdit.estado
@@ -218,20 +218,20 @@ export class ModalAnexosComponent implements OnInit {
             this.validaGestionTramite();
             break;
     }
-  
+
   }
 
   async validaGestionTramite() {
     if(this.isNew && this.permissions.guardar=="0") {
       this.toastr.warning("No tiene permisos para gestionar Trámites");
-  
+
     } else if (!this.isNew && this.permissions.editar == "0") {
       this.toastr.warning("No tiene permisos para gestionar Trámites.", this.fTitle);
     } else {
         let resp = await this.validaDataGlobal().then((respuesta) => {
-          
+
           if(respuesta) {
-              this.gestionarTramite(); 
+              this.gestionarTramite();
           }
         });
     }
@@ -239,28 +239,28 @@ export class ModalAnexosComponent implements OnInit {
   validaDataGlobal() {
     let flag = false;
     return new Promise((resolve, reject) => {
-  
+
       if(
         this.flujoPasos.pregunta_texto!=null && this.gesTicket.respuesta == 0 ||  this.flujoPasos.pregunta_texto!=null && this.gesTicket.respuesta == undefined
       ) {
         this.toastr.info("El campo Respuesta no puede ser vacio");
         flag = true;
-      } 
+      }
       else if(
         this.gesTicket.observacion == "" ||
-        this.gesTicket.observacion == undefined 
+        this.gesTicket.observacion == undefined
       ) {
         this.toastr.info("El campo Observación no puede ser vacio");
         flag = true;
       }
-      
+
       !flag ? resolve(true) : resolve(false);
     })
   }
 
   gestionarTramite() {
 
-   
+
     Swal.fire({
       icon: "warning",
       title: "¡Atención!",
@@ -276,7 +276,7 @@ export class ModalAnexosComponent implements OnInit {
           if (result.isConfirmed) {
               this.mensajeSppiner = "Gestionando Trámite...";
               this.lcargando.ctlSpinner(true);
-  
+
               let data = {
                 gesTicket: {
                   fk_tramite:this.ticketEdit.fk_tramite,
@@ -296,7 +296,7 @@ export class ModalAnexosComponent implements OnInit {
                   termina_flujo:this.flujoPasos.termina_flujo
                 }
               }
-  
+
               this.bandejaTraSrv.gestionTramiteSeguimiento(data).subscribe(
                   (res) => {
                       console.log(res);
@@ -377,14 +377,14 @@ export class ModalAnexosComponent implements OnInit {
       })
   }
 
- 
+
 
  async  limpiarInputArchivo(event)
   {
     const result = await Swal.fire({
       title: "Atención!!",
       text: "Esta seguro que desea limpiar el campo?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -395,10 +395,10 @@ export class ModalAnexosComponent implements OnInit {
     if (result.isConfirmed) {
       if(this.fileList !== undefined){
         this.fileList = undefined
-      } 
+      }
     }
 
   }
- 
+
 
 }

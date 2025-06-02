@@ -405,7 +405,7 @@ this.getListaCentrosCosto(1);
 
         this.CancelDaily();
         /*
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        this.dtElement.dtInstance.then((dtInstance: any) => {
           dtInstance.destroy();
           this.restartFields();
           this.getDocuments();
@@ -880,7 +880,7 @@ this.getDataToEdit(); */
           Swal.fire({
             title: "Atención",
             text: "Seguro desea guardar la siguiente información?",
-            //type: "warning",
+            //icon: "warning",
             showCancelButton: true,
             cancelButtonColor: '#DC3545',
             confirmButtonColor: '#13A1EA',
@@ -988,7 +988,7 @@ this.getDataToEdit(); */
           Swal.fire({
             title: "Atención",
             text: "Seguro desea actualizar la siguiente información?",
-            //type: "warning",
+            //icon: "warning",
             showCancelButton: true,
             cancelButtonColor: '#DC3545',
             confirmButtonColor: '#13A1EA',
@@ -1015,7 +1015,7 @@ this.getDataToEdit(); */
       Swal.fire({
         title: "Atención",
         text: "Seguro desea eliminar la siguiente información?",
-        //type: "warning",
+        //icon: "warning",
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',
@@ -1256,7 +1256,7 @@ console.log(tipo);
     if (data != 0) {
       this.id = data;
       this.presentDt = false;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getDetailsMove();
       });
@@ -1274,7 +1274,7 @@ console.log(tipo);
       this.arrayCab = filt;
       this.tipo = data;
       this.presentDt = false;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getDetailsMove();
       });
@@ -1290,7 +1290,7 @@ console.log(tipo);
     if (data != 0) {
       this.numero = data;
       this.presentDt = false;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getDetailsMove();
       });
@@ -1303,7 +1303,7 @@ console.log(tipo);
       if (data != "") {
         this.estado = data;
         this.presentDt = false;
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        this.dtElement.dtInstance.then((dtInstance: any) => {
           dtInstance.destroy();
           this.getDetailsMove();
         });
@@ -1317,7 +1317,7 @@ console.log(tipo);
       if (parse != undefined) {
 
         this.presentDt = false;
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        this.dtElement.dtInstance.then((dtInstance: any) => {
           dtInstance.destroy();
           this.getDetailsMove();
         });
@@ -1332,7 +1332,7 @@ console.log(tipo);
       if (parse != undefined) {
 
         this.presentDt = false;
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        this.dtElement.dtInstance.then((dtInstance: any) => {
           dtInstance.destroy();
           this.getDetailsMove();
         });
@@ -1344,7 +1344,7 @@ console.log(tipo);
 
     FromOrToChange() {
       this.presentDt = false;
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        this.dtElement.dtInstance.then((dtInstance: any) => {
           dtInstance.destroy();
           this.getDetailsMove();
         });
@@ -1411,7 +1411,7 @@ console.log(tipo);
       Swal.fire({
         title: "Atención",
         text: "Al ejecutar el proceso se anulara los registro, los mismos no podran ser reversados. \n ¿Desea continuar?",
-        //type: "warning",
+        //icon: "warning",
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',
@@ -1577,7 +1577,7 @@ console.log(tipo);
 
     this.getDetailsMove();
 
-    /*this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    /*this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
 
     });*/

@@ -605,7 +605,7 @@ export class CcMantenimientoComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: message,
-      type: "warning",
+      icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -821,7 +821,7 @@ export class CcMantenimientoComponent implements OnInit {
 
   rerender(): void {
     this.guardarolT = [];
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.showCosto();
     });
@@ -943,7 +943,7 @@ export class CcMantenimientoComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: "¿Esta seguro de realizar esta accion?",
-      type: "warning",
+      icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",

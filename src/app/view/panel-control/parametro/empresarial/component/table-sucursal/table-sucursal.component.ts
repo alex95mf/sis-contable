@@ -42,7 +42,7 @@ export class TableSucursalComponent implements OnInit {
       paging: true,
       /* scrollY: "200px",
       scrollCollapse: true, */
-      order: [[0, "desc"]],   
+      order: [[0, "desc"]],
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
@@ -67,7 +67,7 @@ export class TableSucursalComponent implements OnInit {
   rerender(data): void {
     this.validaDtUser = false;
     this.guardarolT = [];
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getDataTable(data);
     });

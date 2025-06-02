@@ -65,7 +65,7 @@ standalone: false,
         { orig: "btnTrsBovRep", paramAccion: "", boton: { icon: "fa fa-eraser", texto: "LIMPIAR FILTROS" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-info boton btn-sm", habilitar: false},
         { orig: "btnTrsBovRep", paramAccion: "", boton: { icon: "fa fa-times", texto: "CERRAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-dark boton btn-sm", habilitar: false}
     ];
-    
+
     this.processing = true;
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
     setTimeout(() => {
@@ -86,12 +86,12 @@ standalone: false,
           $('#tablaReporTransCta').DataTable().button( '.buttons-excel' ).trigger();
         break;
         case "IMPRIMIR":
-          $('#tablaReporTransCta').DataTable().button( '.buttons-print' ).trigger();       
+          $('#tablaReporTransCta').DataTable().button( '.buttons-print' ).trigger();
         break;
         case "PDF":
           $('#tablaReporTransCta').DataTable().button( '.buttons-pdf' ).trigger();
         break;
-    }   
+    }
   }
 
   getInfoBank() {
@@ -194,7 +194,7 @@ standalone: false,
 
   rerender(): void {
       this.validaDt = false;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
           dtInstance.destroy();
           this.getTableReport();
       });

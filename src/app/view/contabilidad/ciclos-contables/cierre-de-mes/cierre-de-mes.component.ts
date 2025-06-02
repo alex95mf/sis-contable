@@ -218,7 +218,7 @@ export class CierreDeMesComponent implements OnInit {
     Swal.fire({
       title: "Confirmar",
       text: text,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',
@@ -235,7 +235,7 @@ export class CierreDeMesComponent implements OnInit {
     Swal.fire({
       title: "Confirmar",
       text: text,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',
@@ -252,7 +252,7 @@ export class CierreDeMesComponent implements OnInit {
 
     // if(typeof anio !== "string"){
     //   year = anio.getFullYear();
-      
+
     // }else{
     //   year = anio;
     // }
@@ -275,7 +275,7 @@ export class CierreDeMesComponent implements OnInit {
         for (let element of res["data"]) {
 
           let mes_letter;
-  
+
           switch (element["mes"]) {
             case 1: {
               mes_letter = "ENERO";
@@ -326,22 +326,22 @@ export class CierreDeMesComponent implements OnInit {
               break;
             }
           }
-  
+
           this.periodos.push(
             {
-  
+
               anio: element["anio"],
               estado: element["estado"] === "C" ? "CERRADO" : "APERTURADO",
               mes: mes_letter,
               estate: element["estado"],
               mes_numero: element["mes"],
               checked: element["estado"] === "C" ? false : true,
-  
+
             }
           )
 
           this.lcargando.ctlSpinner(false);
-  
+
         }
       }else{
         this.periodos = [];
@@ -358,7 +358,7 @@ export class CierreDeMesComponent implements OnInit {
           if (result.isConfirmed) this.generarPeriodo();
         })
       }
-      
+
 
     }, error => {
       this.lcargando.ctlSpinner(false);
@@ -385,20 +385,20 @@ export class CierreDeMesComponent implements OnInit {
       this.toastr.info("Usuario no tiene permiso para guardar");
       return false;
     }
-    
+
     if(this.check_todos_meses) {
 
       this.lcargando.ctlSpinner(true);
 
       for (let i = 0; i < 12; i++) {
-       
+
         let data = {
           "id_empresa": id_empresa,
           "anio": year,
           "mes": i+1,
           "estado": "A"
         }
-    
+
         this.cierremesService.registrarCierresPeriodo(data).subscribe(res => {
           console.log(res);
         }, error => {
@@ -408,7 +408,7 @@ export class CierreDeMesComponent implements OnInit {
 
         if(i === 11){
           this.ObtenerPeriodo();
-          
+
         }
 
       }
@@ -441,8 +441,8 @@ export class CierreDeMesComponent implements OnInit {
       this.RegistrarCierreApertura(data);
 
       console.log('fin')
-    */  
-  
+    */
+
       this.cierremesService.registrarCierresPeriodo(data).subscribe(res => {
         this.ObtenerPeriodo();
       }, error => {
@@ -452,9 +452,9 @@ export class CierreDeMesComponent implements OnInit {
 
     }
 
-    
 
-    
+
+
 
 
   }
@@ -478,20 +478,20 @@ export class CierreDeMesComponent implements OnInit {
       this.toastr.info("Usuario no tiene permiso para guardar");
       return false;
     }
-    
+
     if(this.check_todos_meses) {
 
       this.lcargando.ctlSpinner(true);
 
       for (let i = 0; i < 12; i++) {
-       
+
         let data = {
           "id_empresa": id_empresa,
           "anio": year,
           "mes": i+1,
           "estado": "C"
         }
-    
+
         this.cierremesService.registrarCierresPeriodo(data).subscribe(res => {
           console.log(res);
         }, error => {
@@ -501,7 +501,7 @@ export class CierreDeMesComponent implements OnInit {
 
         if(i === 11){
           this.ObtenerPeriodo();
-          
+
         }
 
       }
@@ -534,8 +534,8 @@ export class CierreDeMesComponent implements OnInit {
       this.RegistrarCierreApertura(data);
 
       console.log('fin')
-    */  
-  
+    */
+
       this.cierremesService.registrarCierresPeriodo(data).subscribe(res => {
         this.ObtenerPeriodo();
       }, error => {
@@ -567,7 +567,7 @@ export class CierreDeMesComponent implements OnInit {
 
       case "APERTURAR":
         if(this.check_todos_meses)
-        
+
           this.confirmSave("Efectuar apertura del todos los meses del periodo "+ this.selected_anio);
         else
           this.confirmSave("Efectuar apertura del mes "+ this.mes_actual + ', para el periodo '+ this.selected_anio);
@@ -576,13 +576,13 @@ export class CierreDeMesComponent implements OnInit {
         if(this.check_todos_meses)
           this.confirmCierre("Efectuar cierre de todos los meses del periodo "+ this.selected_anio);
         else
-          this.confirmCierre("Efectuar cierre del mes "+ this.mes_actual + ', para el periodo '+ this.selected_anio);  
+          this.confirmCierre("Efectuar cierre del mes "+ this.mes_actual + ', para el periodo '+ this.selected_anio);
         break;
     }
   }
 
 
-  
+
 
   async RegistrarCierreApertura (data) {
 
@@ -603,16 +603,16 @@ export class CierreDeMesComponent implements OnInit {
     })
     */
 
-    
+
 
   }
 
   async cambiarEstate(item: any, event: any,index) {
     //
-   
+
 
    // console.log(item, event.target.checked)
-     
+
     // switch (item.mes) {
     //   case "ENERO":
     //     Object.assign(item, { mes: 1 })
@@ -650,14 +650,14 @@ export class CierreDeMesComponent implements OnInit {
     //   case "DICIEMBRE":
     //     Object.assign(item, { mes: 12 })
     //     break;
-    
+
     //   default:
     //     break;
     // }
     console.log(this.periodos)
     const anteriorIndex = item.mes_numero - 1;
     const siguienteIndex= item.mes_numero + 1;
- 
+
 
     let mesAnterior: any = this.periodos.filter((datos) => datos.mes_numero == anteriorIndex);
     let mesPosterior: any = this.periodos.filter((datos) => datos.mes_numero == siguienteIndex);
@@ -679,7 +679,7 @@ export class CierreDeMesComponent implements OnInit {
       checkbox.checked = true;
       this.toastr.warning('* No puede cerrar el mes de ' + item.mes +' porque el estado del mes de '+ mesAnterior[0].mes +' esta APERTURADO.')
       return;
-    } 
+    }
     //message += '* No puede cerrar el mes de' + item.mes +' porque el estado del mes de '+ mesAnterior[0].mes +' esta APERTURADO.<br>';
 
      item.checked = false;
@@ -697,7 +697,7 @@ export class CierreDeMesComponent implements OnInit {
       this.msgSpinner = 'Cambiando Estado'
       let response = await this.cierremesService.updateEstadoMes({ anio: item.anio, mes: item.mes_numero, estado });
       console.log(response)
-      
+
       this.lcargando.ctlSpinner(false)
       Swal.fire('Estado actualizado correctamente.', '', 'success').then(() => this.ObtenerPeriodo())
     } catch (err) {
@@ -747,7 +747,7 @@ export class CierreDeMesComponent implements OnInit {
       case "DICIEMBRE":
         Object.assign(data, { mes: 12 })
         break;
-    
+
       default:
         break;
     }
@@ -757,7 +757,7 @@ export class CierreDeMesComponent implements OnInit {
       this.msgSpinner = 'Cambiando Estado'
       let response = await this.cierremesService.updateEstadoMes({ anio: data.anio, mes: data.mes, estado });
       console.log(response)
-      
+
       this.lcargando.ctlSpinner(false)
       Swal.fire('Estado actualizado correctamente.', '', 'success').then(() => this.ObtenerPeriodo())
     } catch (err) {
@@ -787,7 +787,7 @@ export class CierreDeMesComponent implements OnInit {
       this.lcargando.ctlSpinner(true)
       try {
         await this.cierremesService.generarPeriodo({anio: this.selected_anio})
-        
+
         this.lcargando.ctlSpinner(false)
         Swal.fire('Periodo Generado', '', 'success')
       } catch (err) {

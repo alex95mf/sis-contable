@@ -724,7 +724,7 @@ export class ReportsComponent implements OnDestroy, OnInit {
   rerender(): void {
     this.lcargando.ctlSpinner(true);
     this.processingQuotes = false;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getReportQuotes();
     });

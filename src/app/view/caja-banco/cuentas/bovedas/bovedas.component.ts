@@ -268,7 +268,7 @@ export class BovedasComponent implements OnInit {
       this.toastr.success(res['message']);
       this.lcargando.ctlSpinner(false);
       this.cancel();
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getAccountsTypeDetails();
         this.getCountry(1);
@@ -314,7 +314,7 @@ export class BovedasComponent implements OnInit {
     this.accSrv.updatedAccount(data).subscribe(res => {
       this.toastr.success(res['message']);
       this.cancel();
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getAccountsTypeDetails();
         this.getCountry(1);

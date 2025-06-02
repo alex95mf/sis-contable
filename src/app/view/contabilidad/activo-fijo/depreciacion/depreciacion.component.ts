@@ -134,7 +134,7 @@ export class DepreciacionComponent implements OnInit {
 
   rerender(evt?): void {
     if (this.depreciation.status !== 0 && this.depreciation.year !== 0 && this.depreciation.acquisition !== 0) {
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.onSearchDepreciation(evt);
       });

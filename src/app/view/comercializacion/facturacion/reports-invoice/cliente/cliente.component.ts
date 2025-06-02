@@ -127,7 +127,7 @@ export class ClienteComponent implements OnInit {
   rerender(): void {
     this.validaDtUser = false;
     if (this.flag >= 1) {
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.guardarolT = [];
         this.getReportsVentados();

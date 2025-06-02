@@ -40,7 +40,7 @@ export class AsientoCierreComponent implements OnInit {
   permissions: any;
   empresLogo: any;
 
-  cierres: Array<any> = [];  
+  cierres: Array<any> = [];
   existe: boolean=true;
   datosGuard:boolean=true;
   verTabla:boolean=false;
@@ -71,7 +71,7 @@ export class AsientoCierreComponent implements OnInit {
     {value: "Q",label: "Quincena"},
     {value: "M",label: "Fin de mes"},
   ]
-  tipoPago: any 
+  tipoPago: any
   cuenta: any
 
   codigo_cuenta_contable: any = ''
@@ -133,12 +133,12 @@ export class AsientoCierreComponent implements OnInit {
     private xlsService: ExcelService,
     private xlsServ: XlsExportService,
     private cierremesService: CierreMesService,
-    
-  ) { 
+
+  ) {
     this.commonVrs.selectRecDocumento.asObservable().subscribe(
       (res) => {
         this.restoreForm();
-       
+
         this.asientoCierre = res;
         this.asientoCierre.fecha = res.fecha.split(" ")[0];
         this.asientoGuard.id_con_cierre = res.id_con_cierre
@@ -152,9 +152,9 @@ export class AsientoCierreComponent implements OnInit {
         })
 
         res.detalles.forEach((p) => {
-                  let datos = { 
-                    fecha: p.fecha, 
-                   // fk_cueta_contable:p.concepto.cuenta_acreedora.id, 
+                  let datos = {
+                    fecha: p.fecha,
+                   // fk_cueta_contable:p.concepto.cuenta_acreedora.id,
                     cuenta_contable: p.cuenta_contable,
                     cuenta_contable_nombre: p.cuenta_contable_nombre,
                     asiento:"",
@@ -166,7 +166,7 @@ export class AsientoCierreComponent implements OnInit {
                     partida_presupuestaria_val:parseFloat(p.partida_presupuestaria_val),
                     fk_contribuyente: p.fk_contribuyente,
                     fk_liquidacion: p.fk_liquidacion,
-                    fk_cuenta_contable:p.fk_cuenta_contable, 
+                    fk_cuenta_contable:p.fk_cuenta_contable,
                     tipo_presupuesto:p.tipo_presupuesto,
                     tipo_afectacion: p.tipo_afectacion,
                     devengado: p.devengado,
@@ -176,7 +176,7 @@ export class AsientoCierreComponent implements OnInit {
 
                   this.totalDebe += +p.debe;
                   this.totalHaber += +p.haber;
-          
+
                   this.cierres.push(datos);
                   this.calcPagoTotal()
         })
@@ -188,12 +188,12 @@ export class AsientoCierreComponent implements OnInit {
 
         this.vmButtons[0].habilitar = true;
         this.vmButtons[1].habilitar = false;
-        this.vmButtons[3].habilitar = false;        
+        this.vmButtons[3].habilitar = false;
         this.vmButtons[4].habilitar = false;
         this.vmButtons[5].habilitar = false;
 
 
-        
+
       }
     )
 
@@ -213,10 +213,10 @@ export class AsientoCierreComponent implements OnInit {
         // Decirle a la siguiente posicion la nueva regla de la cuenta seleccionada
         if (this.cierres[this.idxSelected + 1].regla != cuenta.esigef.numero_regla) {
           Object.assign(
-            this.cierres[this.idxSelected + 1], 
-            { 
-              regla: cuenta.esigef.numero_regla, 
-              valid: false 
+            this.cierres[this.idxSelected + 1],
+            {
+              regla: cuenta.esigef.numero_regla,
+              valid: false
             }
           )
 
@@ -256,16 +256,16 @@ export class AsientoCierreComponent implements OnInit {
         clase: "btn btn-primary boton btn-sm",
         habilitar: false,
       },
-      { 
+      {
         orig: "btnsAsiCierre",
          paramAccion: "",
-        boton: { icon: "fa fa-floppy-o", texto: "GENERAR ORDEN" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-info boton btn-sm", 
-        habilitar: true 
+        boton: { icon: "fa fa-floppy-o", texto: "GENERAR ORDEN" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-info boton btn-sm",
+        habilitar: true
       },
       {
         orig: "btnsAsiCierre",
@@ -366,9 +366,9 @@ export class AsientoCierreComponent implements OnInit {
         this.btnExportarExcelNuevo();
       }
         //this.exportarExcel();
-       
+
         break;
-      
+
       default:
         break;
     }
@@ -379,7 +379,7 @@ export class AsientoCierreComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fRenPredUrbanoEmision,
       id_rol: this.dataUser.id_rol,
@@ -406,7 +406,7 @@ export class AsientoCierreComponent implements OnInit {
 
   async cargaInicial() {
     try {
-    
+
       const resCatNomina = await this.apiSrv.getCatalogos({params: "'NOMINA'"})
       this.tipoAsientoList = resCatNomina['NOMINA']
 
@@ -434,14 +434,14 @@ export class AsientoCierreComponent implements OnInit {
     })
   }
   addFields() {
-           
-      let datos =  { 
+
+      let datos =  {
         agregada: true,
         fk_contribuyente: 0,
         fk_liquidacion: 0,
-        fecha: moment().format('YYYY-MM-DD'), 
+        fecha: moment().format('YYYY-MM-DD'),
         regla:'',
-        fk_cuenta_contable:0, 
+        fk_cuenta_contable:0,
         cuenta_contable:'',
         cuenta_contable_nombre: '',
         tipo_cuenta: '',
@@ -459,7 +459,7 @@ export class AsientoCierreComponent implements OnInit {
         tipo: '',
         valid: true,
       }
-            
+
       this.cierres.push(datos)
   }
 
@@ -473,7 +473,7 @@ export class AsientoCierreComponent implements OnInit {
         confirmButtonText: 'Eliminar',
         cancelButtonText: 'Cancelar',
       });
-  
+
       if (result.isConfirmed) {
         const deletedField = this.cierres.splice(idx, 1);
         this.calcPagoTotal()
@@ -484,15 +484,15 @@ export class AsientoCierreComponent implements OnInit {
 
   changeCuenta(cuenta){
    // console.log(cuenta)
-    
+
     this.cierres[cuenta.index].fk_cuenta_contable = cuenta.datos?.id
     this.cierres[cuenta.index].cuenta_contable = cuenta.datos?.codigo
     this.cierres[cuenta.index].cuenta_contable_nombre = cuenta.datos?.nombre
     this.cierres[cuenta.index].tipo_cuenta = cuenta.datos?.tipo
     this.cierres[cuenta.index].partida_presupuestaria_cod = cuenta.datos?.presupuesto?.codigo
     this.cierres[cuenta.index].partida_presupuestaria_desc = cuenta.datos?.codigo_presupuesto !=null ? cuenta.datos?.presupuesto?.nombre : ''
-    
-   
+
+
 
     if (this.filter.tipo_cierre == 'EMI') {
       this.cierres[cuenta.index].tipo_presupuesto = cuenta.datos?.codigo_presupuesto !=null ? 'INGRESO': ''
@@ -511,26 +511,26 @@ export class AsientoCierreComponent implements OnInit {
         this.cierres[cuenta.index].tipo_presupuesto = cuenta.datos?.codigo_presupuesto !=null ? 'GASTOS': ''
         this.cierres[cuenta.index].tipo_afectacion = cuenta.datos?.codigo_presupuesto !=null ? 'PAGADO': ''
       }
-    } 
+    }
     // else if (this.filter.tipo_cierre == 'DEP') {
-    
+
     // } else if (this.filter.tipo_cierre == 'CIE') {
-    
+
     // } else if (this.filter.tipo_cierre == 'TCC') {
-    
+
     // } else if (this.filter.tipo_cierre == 'DEPO') {
-    
-    
+
+
     // } else if (this.filter.tipo_cierre == 'CONSU') {
-    
-    // } 
+
+    // }
     else if (this.filter.tipo_cierre == 'PAGORENTA') {
       this.cierres[cuenta.index].tipo_presupuesto = cuenta.datos?.codigo_presupuesto !=null ? 'GASTOS': ''
       this.cierres[cuenta.index].tipo_afectacion = cuenta.datos?.codigo_presupuesto !=null ? 'PAGADO': ''
-    
-    } 
+
+    }
     // else if (this.filter.tipo_cierre == 'PAGOIVA'){
-    
+
     // }
 
     if(this.cierres[cuenta.index].debe != 0){
@@ -542,7 +542,7 @@ export class AsientoCierreComponent implements OnInit {
 
 
   }
-  
+
 
   EventoNumberAsiento(evento, tipo) {
 
@@ -550,7 +550,7 @@ export class AsientoCierreComponent implements OnInit {
    // console.log(evento);
     //console.log(tipo);
     if (tipo === 'D') {
-    
+
       this.cierres[evento].haber=0;
       this.cierres[evento].partida_presupuestaria_val = (codpresupuesto === null || codpresupuesto === '') ? 0.00 : parseFloat(this.cierres[evento].debe);
       if(this.cierres[evento].tipo_afectacion=='DEVENGADO'){
@@ -559,13 +559,13 @@ export class AsientoCierreComponent implements OnInit {
       if(this.cierres[evento].tipo_afectacion=='COBRADO' || this.cierres[evento].tipo_afectacion=='PAGADO'){
         this.cierres[evento].cobrado_pagado = (codpresupuesto === null || codpresupuesto === '') ? 0.00 : parseFloat(this.cierres[evento].debe);
       }
-      
+
       this.calcPagoTotal()
       //this.debitChange();
       //this.presupuestoChange();
-   
+
     } else {
-     
+
       this.cierres[evento].debe=0;
       this.cierres[evento].partida_presupuestaria_val = (codpresupuesto === null || codpresupuesto === '') ? 0.00 : parseFloat(this.cierres[evento].haber);
       if(this.cierres[evento].tipo_afectacion=='DEVENGADO'){
@@ -583,7 +583,7 @@ export class AsientoCierreComponent implements OnInit {
 
 
   geNumControl(event){
-    
+
 
     if (this.tipoPago == 0 || this.tipoPago == undefined) {
       this.toastr.warning('Debe seleccionar un Tipo de Pago')
@@ -599,9 +599,9 @@ export class AsientoCierreComponent implements OnInit {
         anio: moment(this.filter.fecha_desde).format('YYYY'),
         mes: moment(this.filter.fecha_desde).format('MM'),
         tipo_contrato: event,
-        tipo_pago: this.tipoPago 
+        tipo_pago: this.tipoPago
       }
-  
+
       this.apiSrv.geNumControl(data).subscribe(
         (res: any) => {
           console.log(res);
@@ -612,7 +612,7 @@ export class AsientoCierreComponent implements OnInit {
             this.lcargando.ctlSpinner(false);
             this.toastr.info('No hay numeros de control para el tipo de contrato seleccionado')
           }
-          
+
         },
         (error) => {
           this.lcargando.ctlSpinner(false);
@@ -622,7 +622,7 @@ export class AsientoCierreComponent implements OnInit {
     }
 
 
-    
+
   }
 
   // getTipoContratos(){
@@ -649,12 +649,12 @@ export class AsientoCierreComponent implements OnInit {
   //   let data = {
   //     params: "'NOMINA'",
   //   };
-   
+
   //   this.apiSrv.getCatalogos(data).subscribe(
-     
+
   //     (res) => {
   //       this.tipoAsiento = res["data"]['NOMINA'];
-       
+
   //     },
   //     (error) => {
   //       this.lcargando.ctlSpinner(false);
@@ -741,7 +741,7 @@ export class AsientoCierreComponent implements OnInit {
   }
 
   consultar() {
-    
+
     console.log(this.filter.id_numero_control)
     console.log(this.cuentaBanco)
     if(this.filter.id_num_control == undefined){this.filter.id_num_control = 0}
@@ -779,7 +779,7 @@ export class AsientoCierreComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.asientoGuard.estado="";
     let params = {
-      fecha: this.filter.fecha_desde, 
+      fecha: this.filter.fecha_desde,
       tipo: this.filter.tipo_cierre,
       tipo_asiento: this.filter.tipo_asiento,
       tipo_contrato: this.filter.tipo_contrato,
@@ -796,10 +796,10 @@ export class AsientoCierreComponent implements OnInit {
           this.existe = true;
           this.cierres = [];
 
-         
+
           //this.cierres=res["data"];
-         
-          this.datosGuard=false;  
+
+          this.datosGuard=false;
           this.verTabla=true;
           this.formReadOnly = true;
           this.asientoGuard=res["data"][0];
@@ -807,10 +807,10 @@ export class AsientoCierreComponent implements OnInit {
           let des: any;
 
           res["data"][0]["detalles"].forEach((p) => {
-            let datos = { 
+            let datos = {
               agregada: false,
-              fecha: p.fecha, 
-             // fk_cueta_contable:p.concepto.cuenta_acreedora.id, 
+              fecha: p.fecha,
+             // fk_cueta_contable:p.concepto.cuenta_acreedora.id,
               cuenta_contable: p.cuenta_contable,
               cuenta_contable_nombre: p.cuenta_contable_nombre,
               asiento:"",
@@ -828,11 +828,11 @@ export class AsientoCierreComponent implements OnInit {
             }
 
             {
-             
+
           }
             this.totalDebe += +p.debe;
             this.totalHaber += +p.haber;
-    
+
             this.cierres.push(datos);
           });
           this.calcPagoTotal()
@@ -854,7 +854,7 @@ export class AsientoCierreComponent implements OnInit {
           //this.vmButtons[2].habilitar = false;
           this.vmButtons[4].habilitar = false;
           this.verTabla=false;
-          this.datosGuard=true;  
+          this.datosGuard=true;
           this.existe=true;
           this.formReadOnly = false;
           //this.lcargando.ctlSpinner(false);
@@ -864,9 +864,9 @@ export class AsientoCierreComponent implements OnInit {
             this.getRolNoControl()
           }
         }
-      
-        
-        
+
+
+
       },
       (err: any) => {
         console.log(err);
@@ -878,7 +878,7 @@ export class AsientoCierreComponent implements OnInit {
   consultaServicio(){
     this.msgSpinner = 'Cargando Asientos';
     this.lcargando.ctlSpinner(true);
-   
+
     // let datos={
     //   concepto: {
     //     fecha:this.asientoCierre.fecha,
@@ -886,8 +886,8 @@ export class AsientoCierreComponent implements OnInit {
     //     codigo: "CM",
     //     paginate: this.paginate
     //   }
-    // } 
-    
+    // }
+
     let datos={
       params:{
         filter:{
@@ -918,7 +918,7 @@ export class AsientoCierreComponent implements OnInit {
      //   console.log(res)
 
        // this.paginate.length = res['data']['total'];
-    
+
         // if (res['data']['current_page'] == 1) {
         //   cierresAux = res['data'];
         // } else {
@@ -935,13 +935,13 @@ export class AsientoCierreComponent implements OnInit {
             //    console.log(p)
 
                 Object.assign(
-                  p, 
-                  { 
+                  p,
+                  {
                     fk_contribuyente: p.fk_contribuyente,
                     fk_liquidacion: p.id_liquidacion,
-                    fecha: p.fecha, 
+                    fecha: p.fecha,
                     regla:'',
-                    fk_cuenta_contable:0, 
+                    fk_cuenta_contable:0,
                     cuenta_contable:(p.tipo == 'D') ? p.cuenta_deudora : p.cuenta_acreedora,
                     cuenta_contable_nombre: (p.tipo == 'D') ?  p.nombre_cuenta_deudora :  p.nombre_cuenta_acreedora,
                     tipo_cuenta:  (p.tipo == 'D') ? p.tipo_cuenta_deudora : p.tipo_cuenta_acreedora,
@@ -959,16 +959,16 @@ export class AsientoCierreComponent implements OnInit {
                     tipo:  (p.tipo == 'D') ? 'Deudora' : 'Acreedora',
                     valid: true,
                     agregada: false,
-                   
+
                   }
                 )
 
               // console.log(p)
               // if (p.concepto?.cuenta_deudora) {
-              //   let datos1= { 
-              //     fecha: p.fecha, 
+              //   let datos1= {
+              //     fecha: p.fecha,
               //     regla: p.concepto.cuenta_deudora.esigef?.numero_regla,
-              //     fk_cuenta_contable:p.concepto.cuenta_deudora.id, 
+              //     fk_cuenta_contable:p.concepto.cuenta_deudora.id,
               //     cuenta_contable: p.concepto.cuenta_deudora.codigo,
               //     cuenta_contable_nombre: p.concepto.cuenta_deudora.nombre,
               //     tipo_cuenta: p.concepto.cuenta_deudora.tipo,
@@ -986,10 +986,10 @@ export class AsientoCierreComponent implements OnInit {
               // }
 
               // if (p.concepto?.cuenta_acreedora) {
-              //   let datos2 = { 
-              //     fecha: p.fecha, 
+              //   let datos2 = {
+              //     fecha: p.fecha,
               //     regla: p.concepto.cuenta_deudora.esigef?.numero_regla,
-              //     fk_cuenta_contable:p.concepto.cuenta_acreedora.id, 
+              //     fk_cuenta_contable:p.concepto.cuenta_acreedora.id,
               //     cuenta_contable: p.concepto.cuenta_acreedora.codigo,
               //     cuenta_contable_nombre: p.concepto.cuenta_acreedora.nombre,
               //     tipo_cuenta: p.concepto.cuenta_deudora.tipo,
@@ -1009,7 +1009,7 @@ export class AsientoCierreComponent implements OnInit {
             })
             this.cierres =cierresAux
             this.vmButtons[2].habilitar = true;
-            
+
             this.calcPagoTotal()
             //this.cierres=res["data"];
             this.lcargando.ctlSpinner(false);
@@ -1023,8 +1023,8 @@ export class AsientoCierreComponent implements OnInit {
           this.cierres = cierresAux;
           this.cierres.forEach((e: any) => {
             Object.assign(
-              e, 
-              { 
+              e,
+              {
                 fk_contribuyente: e.fk_contribuyente,
                 fk_liquidacion: e.id_liquidacion,
                 fk_documento: e.id_documento,
@@ -1037,12 +1037,12 @@ export class AsientoCierreComponent implements OnInit {
                 partida_presupuestaria_desc: e.nombre_codigo_presupuesto,
                 tipo_presupuesto: e.tipo_presupuesto,
                 tipo_afectacion: e.tipo_afectacion,
-                asiento: "", 
-                t_m: "", 
-                partida_presupuestaria_val: e.valor_partida, 
+                asiento: "",
+                t_m: "",
+                partida_presupuestaria_val: e.valor_partida,
                 devengado: e.devengado,
                 cobrado_pagado: e.cobrado_pagado,
-                debe: (e.tipo == 'D') ? e.total : 0, 
+                debe: (e.tipo == 'D') ? e.total : 0,
                 haber: (e.tipo == 'H') ? e.total : 0 ,
                 agregada: false,
               }
@@ -1053,14 +1053,14 @@ export class AsientoCierreComponent implements OnInit {
           this.lcargando.ctlSpinner(false)
 
          }else if (this.filter.tipo_cierre == 'NOM'){
-          
+
           if(this.filter.tipo_asiento =='PAGADO_NOMINA'){
-            
+
             if (cierresAux.length > 0) {
            //   console.log(cierresAux)
               // cuenta: this.cuenta.name_banks,
               // num_cuenta:this.cuenta.num_cuenta,
-            
+
               let totalHaber = 0
               cierresAux.forEach(e =>{
                 totalHaber += parseFloat(e.total)
@@ -1077,19 +1077,19 @@ export class AsientoCierreComponent implements OnInit {
                 partida_presupuestaria_desc: '',
                 tipo_presupuesto:'',
                 tipo_afectacion: '',
-                asiento: "", 
-                t_m: "", 
-                partida_presupuestaria_val: parseFloat('00.00'), 
+                asiento: "",
+                t_m: "",
+                partida_presupuestaria_val: parseFloat('00.00'),
                 devengado: parseFloat('00.00'),
-                cobrado_pagado: parseFloat('00.00'), 
+                cobrado_pagado: parseFloat('00.00'),
                 debe:  parseFloat('00.00'),
                 haber:  totalHaber,
                 agregada: false,
               }
               this.cierres.push(data_haber)
-              
+
               cierresAux.forEach((e: any) => {
-  
+
                 let data_debe={
                   fk_cuenta_contable: 1,
                   fk_partida_presupuestaria: 1,
@@ -1100,23 +1100,23 @@ export class AsientoCierreComponent implements OnInit {
                   partida_presupuestaria_desc: e.nombre_partida,
                   tipo_presupuesto: 'GASTOS',
                   tipo_afectacion: 'PAGADO',
-                  asiento: "", 
-                  t_m: "", 
-                  partida_presupuestaria_val: e.total, 
+                  asiento: "",
+                  t_m: "",
+                  partida_presupuestaria_val: e.total,
                   devengado: parseFloat('00.00'),
-                  cobrado_pagado: e.total, 
-                  debe: e.total, 
+                  cobrado_pagado: e.total,
+                  debe: e.total,
                   haber: parseFloat('00.00') ,
                   agregada: false,
                 }
 
                 this.cierres.push(data_debe)
                 this.vmButtons[2].habilitar = true;
-               
-  
+
+
                 // Object.assign(
-                //   e, 
-                //   { 
+                //   e,
+                //   {
                 //     fk_cuenta_contable: 1,
                 //     fk_partida_presupuestaria: 1,
                 //     cuenta_contable: (e.tipo == 'D') ? e.cuenta_deudora : e.name_cuenta,
@@ -1126,27 +1126,27 @@ export class AsientoCierreComponent implements OnInit {
                 //     partida_presupuestaria_desc: e.nombre_codigo_presupuesto,
                 //     tipo_presupuesto: e.tipo_presupuesto,
                 //     tipo_afectacion: e.tipo_afectacion,
-                //     asiento: "", 
-                //     t_m: "", 
-                //     partida_presupuestaria_val: e.valor_partida, 
+                //     asiento: "",
+                //     t_m: "",
+                //     partida_presupuestaria_val: e.valor_partida,
                 //     devengado: e.devengado,
-                //     cobrado_pagado: e.cobrado_pagado, 
-                //     debe: (e.tipo == 'D') ? e.total : 0, 
+                //     cobrado_pagado: e.cobrado_pagado,
+                //     debe: (e.tipo == 'D') ? e.total : 0,
                 //     haber: (e.tipo == 'H') ? e.total : 0 ,
-                  
+
                 //   }
-  
-                
+
+
                 // )
               })
             }
-           
+
           }else{
             this.cierres = cierresAux;
             this.cierres.forEach((e: any) => {
               Object.assign(
-                e, 
-                { 
+                e,
+                {
                   fk_cuenta_contable: 1,
                   fk_partida_presupuestaria: 1,
                   cuenta_contable: (e.tipo == 'D') ? e.cuenta_deudora : e.cuenta_acreedora,
@@ -1156,15 +1156,15 @@ export class AsientoCierreComponent implements OnInit {
                   partida_presupuestaria_desc: e.nombre_codigo_presupuesto,
                   tipo_presupuesto: e.tipo_presupuesto,
                   tipo_afectacion: e.tipo_afectacion,
-                  asiento: "", 
-                  t_m: "", 
-                  partida_presupuestaria_val: e.valor_partida, 
+                  asiento: "",
+                  t_m: "",
+                  partida_presupuestaria_val: e.valor_partida,
                   devengado: e.devengado,
-                  cobrado_pagado: e.cobrado_pagado, 
-                  debe: (e.tipo == 'D') ? e.total : 0, 
+                  cobrado_pagado: e.cobrado_pagado,
+                  debe: (e.tipo == 'D') ? e.total : 0,
                   haber: (e.tipo == 'H') ? e.total : 0 ,
                   agregada: false,
-                
+
                 }
               )
             })
@@ -1185,11 +1185,11 @@ export class AsientoCierreComponent implements OnInit {
                 partida_presupuestaria_desc: '',
                 tipo_presupuesto:'',
                 tipo_afectacion: '',
-                asiento: "", 
-                t_m: "", 
-                partida_presupuestaria_val: parseFloat('00.00'), 
+                asiento: "",
+                t_m: "",
+                partida_presupuestaria_val: parseFloat('00.00'),
                 devengado: parseFloat('00.00'),
-                cobrado_pagado: parseFloat('00.00'), 
+                cobrado_pagado: parseFloat('00.00'),
                 debe:  parseFloat('00.00'),
                 haber:  totalHaber,
                 agregada: false,
@@ -1198,7 +1198,7 @@ export class AsientoCierreComponent implements OnInit {
             }
             this.vmButtons[2].habilitar = false;
           }
-        
+
           this.calcPagoTotal()
           this.lcargando.ctlSpinner(false)
          } else if (this.filter.tipo_cierre == 'DEP') {
@@ -1220,7 +1220,7 @@ export class AsientoCierreComponent implements OnInit {
               tipo_presupuesto: '',
               tipo_afectacion: '',
               devengado: '',
-              cobrado_pagado: '', 
+              cobrado_pagado: '',
               agregada: false,
             }
             datos.push(as_d);
@@ -1240,7 +1240,7 @@ export class AsientoCierreComponent implements OnInit {
               tipo_presupuesto: '',
               tipo_afectacion: '',
               devengado: '',
-              cobrado_pagado: '', 
+              cobrado_pagado: '',
               agregada: false,
             }
             datos.push(as_h);
@@ -1277,7 +1277,7 @@ export class AsientoCierreComponent implements OnInit {
               tipo_afectacion: '',
               devengado: '',
               cobrado_pagado: '',
-              agregada: false, 
+              agregada: false,
             }
 
             datos.push(o)
@@ -1308,7 +1308,7 @@ export class AsientoCierreComponent implements OnInit {
               tipo_afectacion: '',
               devengado: '',
               cobrado_pagado: '',
-              agregada: false, 
+              agregada: false,
             };
 
             datos.push(orig);
@@ -1329,7 +1329,7 @@ export class AsientoCierreComponent implements OnInit {
               tipo_presupuesto: '',
               tipo_afectacion: '',
               devengado: '',
-              cobrado_pagado: '', 
+              cobrado_pagado: '',
               agregada: false,
             };
 
@@ -1344,8 +1344,8 @@ export class AsientoCierreComponent implements OnInit {
           this.cierres = cierresAux;
           this.cierres.forEach((e: any) => {
             Object.assign(
-              e, 
-              { 
+              e,
+              {
                 fk_cuenta_contable: 1,
                 fk_partida_presupuestaria: 1,
                 cuenta_contable: e.cuenta_deudora,
@@ -1353,14 +1353,14 @@ export class AsientoCierreComponent implements OnInit {
                 partida_presupuestaria_cod: e.codigo_presupuesto,
                 partida_presupuestaria_desc: e.nombre_codigo_presupuesto,
                 tipo_cuenta: e.tipo_cuenta_deudora ?? e.tipo_cuenta_acreedora,
-                asiento: "", 
-                t_m: "", 
-                partida_presupuestaria_val: "", 
+                asiento: "",
+                t_m: "",
+                partida_presupuestaria_val: "",
                 tipo_presupuesto: '',
                 tipo_afectacion: '',
                 devengado: '',
-                cobrado_pagado: '', 
-                debe: (e.tipo == 'D') ? e.total : parseFloat('0.00'), 
+                cobrado_pagado: '',
+                debe: (e.tipo == 'D') ? e.total : parseFloat('0.00'),
                 haber: (e.tipo == 'H') ? e.total : parseFloat('0.00') ,
                 agregada: false,
               }
@@ -1377,11 +1377,11 @@ export class AsientoCierreComponent implements OnInit {
             //    console.log(p)
 
                 Object.assign(
-                  p, 
-                  { 
-                    fecha: p.fecha, 
+                  p,
+                  {
+                    fecha: p.fecha,
                     regla:'',
-                    fk_cuenta_contable:0, 
+                    fk_cuenta_contable:0,
                     cuenta_contable:(p.tipo == 'D') ? p.cuenta_deudora : p.cuenta_acreedora,
                     cuenta_contable_nombre: (p.tipo == 'D') ?  p.nombre_cuenta_deudora :  p.nombre_cuenta_acreedora,
                     tipo_cuenta:  (p.tipo == 'D') ? p.tipo_cuenta_deudora : p.tipo_cuenta_acreedora,
@@ -1399,12 +1399,12 @@ export class AsientoCierreComponent implements OnInit {
                     tipo:  (p.tipo == 'D') ? 'Deudora' : 'Acreedora',
                     valid: true,
                     agregada: false,
-                   
+
                   }
                 )
             })
             this.cierres =cierresAux
-            
+
             this.calcPagoTotal()
             //this.cierres=res["data"];
             this.lcargando.ctlSpinner(false);
@@ -1418,8 +1418,8 @@ export class AsientoCierreComponent implements OnInit {
           this.cierres = cierresAux;
             this.cierres.forEach((e: any) => {
               Object.assign(
-                e, 
-                { 
+                e,
+                {
                   fk_cuenta_contable: 1,
                   fk_partida_presupuestaria: 1,
                   cuenta_contable: (e.tipo == 'D') ? e.cuenta_deudora : e.cuenta_acreedora,
@@ -1429,16 +1429,16 @@ export class AsientoCierreComponent implements OnInit {
                   partida_presupuestaria_desc: e.nombre_codigo_presupuesto,
                   tipo_presupuesto: e.tipo_presupuesto,
                   tipo_afectacion: e.tipo_afectacion,
-                  asiento: "", 
-                  t_m: "", 
-                  partida_presupuestaria_val: e.valor_partida, 
+                  asiento: "",
+                  t_m: "",
+                  partida_presupuestaria_val: e.valor_partida,
                   devengado: e.devengado,
-                  cobrado_pagado: e.cobrado_pagado, 
-                  debe: (e.tipo == 'D') ? e.total : 0, 
+                  cobrado_pagado: e.cobrado_pagado,
+                  debe: (e.tipo == 'D') ? e.total : 0,
                   haber: (e.tipo == 'H') ? e.total : 0 ,
                   codigopartida: e.codigopartida,
                   agregada: false,
-                
+
                 }
               )
             })
@@ -1458,11 +1458,11 @@ export class AsientoCierreComponent implements OnInit {
                 partida_presupuestaria_desc: '',
                 tipo_presupuesto:'',
                 tipo_afectacion: '',
-                asiento: "", 
-                t_m: "", 
-                partida_presupuestaria_val: parseFloat('00.00'), 
+                asiento: "",
+                t_m: "",
+                partida_presupuestaria_val: parseFloat('00.00'),
                 devengado: parseFloat('00.00'),
-                cobrado_pagado: parseFloat('00.00'), 
+                cobrado_pagado: parseFloat('00.00'),
                 debe:  parseFloat('00.00'),
                 haber:  totalHaber,
                 agregada: false,
@@ -1472,8 +1472,8 @@ export class AsientoCierreComponent implements OnInit {
           this.cierres = cierresAux;
           this.cierres.forEach((e: any) => {
             Object.assign(
-              e, 
-              { 
+              e,
+              {
                 fk_cuenta_contable: 1,
                 fk_partida_presupuestaria: 1,
                 cuenta_contable: (e.tipo == 'D') ? e.cuenta_deudora : e.cuenta_acreedora,
@@ -1483,12 +1483,12 @@ export class AsientoCierreComponent implements OnInit {
                 partida_presupuestaria_desc: e.nombre_codigo_presupuesto,
                 tipo_presupuesto: e.tipo_presupuesto,
                 tipo_afectacion: e.tipo_afectacion,
-                asiento: "", 
-                t_m: "", 
-                partida_presupuestaria_val: e.valor_partida, 
+                asiento: "",
+                t_m: "",
+                partida_presupuestaria_val: e.valor_partida,
                 devengado: e.devengado,
-                cobrado_pagado: e.cobrado_pagado, 
-                debe: (e.tipo == 'D') ? e.total : 0, 
+                cobrado_pagado: e.cobrado_pagado,
+                debe: (e.tipo == 'D') ? e.total : 0,
                 haber: (e.tipo == 'H') ? e.total : 0 ,
                 codigopartida: e.codigopartida,
                 agregada: false,
@@ -1505,7 +1505,7 @@ export class AsientoCierreComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       }
     );
-  
+
   }
 
   calcPagoTotal() {
@@ -1525,13 +1525,13 @@ export class AsientoCierreComponent implements OnInit {
     this.cierres.forEach(e => {
       // if (e.aplica) {
         pagoDebe += +e.debe;
-        pagoHaber += +e.haber; 
+        pagoHaber += +e.haber;
       // }
     });
     console.log(pagoDebe) */
     this.totalDebe = totalDebe
     this.totalHaber = totalHaber
-    
+
   }
 
   guardarAsientoCierre(){
@@ -1543,32 +1543,32 @@ export class AsientoCierreComponent implements OnInit {
       "mes": Number(moment(this.asientoCierre.fecha).format('MM')),
     }
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
-        
+
      //   console.log(this.cuentaBanco)
         let msgInvalid = ''
-    
+
         this.cierres.forEach((element: any, idx: number) => {
           if (element.tipo_cuenta == 'GRUPO') msgInvalid += `La linea ${idx + 1} tiene una cuenta mal configurada.<br>`
           if (element.cuenta_contable == '' || element.cuenta_contable == undefined) msgInvalid += `La linea ${idx + 1} no tiene un número de cuenta seleccionado.<br>`
           if (element.cuenta_contable_nombre == '' || element.cuenta_contable_nombre == undefined) msgInvalid += `La linea ${idx + 1} no tiene un nombre de cuenta seleccionado.<br>`
         })
-    
+
         if (this.totalDebe != this.totalHaber) msgInvalid += 'El asiento esta descuadrado. Por favor revise.<br>'
-    
+
         if (this.filter.tipo_asiento == 'PAGADO_NOMINA' && this.cuentaBanco.length == 0) {
            this.toastr.warning('Debe seleccionar una cuenta. . Por favor revise')
            return;
         }
-      
+
         if (msgInvalid.length > 0) {
-    
+
           Swal.fire({
             title: "Atención!!",
             html: msgInvalid + " Desea continuar?" ,
-            //type: "warning",
+            //icon: "warning",
             showCancelButton: true,
             cancelButtonColor: "#DC3545",
             confirmButtonColor: "#13A1EA",
@@ -1583,22 +1583,22 @@ export class AsientoCierreComponent implements OnInit {
               return
             }
           });
-          
+
         }else{
           this.guardarAsiento()
         }
-        
-  
+
+
       } else {
         this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
         this.lcargando.ctlSpinner(false);
       }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
       })
-   
+
   }
 
   guardarAsiento(){
@@ -1648,12 +1648,12 @@ export class AsientoCierreComponent implements OnInit {
                 this.vmButtons[5].habilitar = false;
                 this.vmButtons[6].habilitar = false;
                 this.asientoGuard=res["data"];
-                this.datosGuard=false; 
+                this.datosGuard=false;
                 this.formReadOnly = true;
                 this.lcargando.ctlSpinner(false);
               }
             });
-            
+
           },
           (error) => {
             this.lcargando.ctlSpinner(false);
@@ -1744,11 +1744,11 @@ export class AsientoCierreComponent implements OnInit {
   // console.log(this.filter.tipo_cierre)
     this.verBanco= false
     this.filter.tipo_asiento = 0
-   
+
       if(this.filter.tipo_cierre == 'PAGORENTA'){
         this.verBanco= true
       }
-    
+
 
   }
 
@@ -1778,8 +1778,8 @@ export class AsientoCierreComponent implements OnInit {
     if (result.isConfirmed) {
       this.btnAggCuentaAjusteDisabled = true;
       // Agregar la cuenta a la estructura de Cierres
-      const c = { 
-        fecha: this.filter.fecha_desde, 
+      const c = {
+        fecha: this.filter.fecha_desde,
         fk_cuenta_contable: this.aggCuenta.id,
         cuenta_contable: this.aggCuenta.codigo,
         cuenta_contable_nombre: this.aggCuenta.nombre,
@@ -1804,7 +1804,7 @@ export class AsientoCierreComponent implements OnInit {
     modal.componentInstance.regla = asiento.regla;
     this.idxSelected = idx
   }
-  
+
   // exportarExcel() {
   //   let excelData = [];
 
@@ -1821,17 +1821,17 @@ export class AsientoCierreComponent implements OnInit {
   //     excelData.push({...o})
   //   })
   //   excelData.push({Debe: this.totalDebe, Haber: this.totalHaber})
-    
+
   //   this.xlsService.exportAsExcelFile(excelData, `Cierre-${this.filter.tipo_cierre}-${moment().format('YYYY-MM-DD')}`)
   // }
 
   GenerarReporteExcel(){
 
-		this.mensajeSppiner = "Generando Archivo Excel..."; 
-		this.lcargando.ctlSpinner(true); 
-	
-     
-     
+		this.mensajeSppiner = "Generando Archivo Excel...";
+		this.lcargando.ctlSpinner(true);
+
+
+
 			this.cierreExcel = this.cierres;
       let totalDebe = 0
       let totalHaber = 0
@@ -1841,9 +1841,9 @@ export class AsientoCierreComponent implements OnInit {
         totalHaber += parseFloat(e.haber)
       })
       this.cierreExcel.push({debe: totalDebe, haber: totalHaber})
-      
+
 			if(this.cierreExcel.length > 0){
-			  
+
 				let data = {
           fecha: this.filter.fecha_desde,
 				  title: 'Asiento de Cierre',
@@ -1851,12 +1851,12 @@ export class AsientoCierreComponent implements OnInit {
 				}
 				//console.log(data)
 			  this.xlsServ.exportExcelAsientoCierre(data,  `Cierre-${this.filter.tipo_cierre}-${moment().format('YYYY-MM-DD')}`)
-				this.lcargando.ctlSpinner(false); 
+				this.lcargando.ctlSpinner(false);
 			  }else{
 				this.toastr.info("No hay datos para exportar")
-				this.lcargando.ctlSpinner(false); 
+				this.lcargando.ctlSpinner(false);
 			  }
-		
+
 	  }
 
   imprimirReporte(){
@@ -1864,12 +1864,12 @@ export class AsientoCierreComponent implements OnInit {
    // window.open(environment.ReportingUrl + "rpt_rrhh_asientos_cierre.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&fecha=" + this.filter.fecha_desde + "&id_cierre=" + this.asientoGuard.id_con_cierre, '_blank')
     window.open(environment.ReportingUrl + "rpt_asiento_contable_cierre.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_documento=" + this.asientoGuard.id_con_cierre, '_blank')
 
-   
+
   }
 
 
   getRolNoControl() {
-      
+
     this.lcargando.ctlSpinner(true)
     this.mensajeSppiner = 'Buscando'
     this.RolGeneral = []
@@ -1885,11 +1885,11 @@ export class AsientoCierreComponent implements OnInit {
 
       this.lcargando.ctlSpinner(false)
       if(result.length > 0){
-      
+
         this.lcargando.ctlSpinner(false);
         this.totalRecords = result.length
        // console.log(result.length)
-       
+
         const distintosRegistros = Array.from(new Set(
           result.map(usuario => `${usuario.codigo_rubro}-${usuario.id_catalogo_tipo_rubro}-${usuario.rub_descripcion}-${usuario.orden}`)
         )).map((clave: any) => {
@@ -1903,7 +1903,7 @@ export class AsientoCierreComponent implements OnInit {
         cabeceraIngresos = distintosRegistros.filter(e => e.id_catalogo_tipo_rubro == 'INGRESO' )
         cabeceraEgresos = distintosRegistros.filter(e => e.id_catalogo_tipo_rubro == 'EGRESO' )
         cabeceraProvisiones = distintosRegistros.filter(e => e.id_catalogo_tipo_rubro == 'PROVISIONES' )
-       
+
         this.dataGeneral = result
         Data = result;
         this.cols = [
@@ -1920,7 +1920,7 @@ export class AsientoCierreComponent implements OnInit {
           { field: 'horas_trabajadas', header: 'Horas Trabajadas', order: 11, class: "one",total: 0 },
           { field: 'salario', header: 'Sueldo Nominal', order: 12, class: "two",total: 0 },
         ]
-      
+
         let order = 12
         for ( let i = 0; i < cabeceraIngresos.length; i++){
           this.cols.push(
@@ -1928,7 +1928,7 @@ export class AsientoCierreComponent implements OnInit {
           )
           order++
         }
-        
+
         this.cols.push(
           { field: 'total_ingresos', header: 'Total Ingresos', order: order +1 , class: "two" ,total: 0},
         )
@@ -1958,25 +1958,25 @@ export class AsientoCierreComponent implements OnInit {
           { field: 'total_provisiones', header: 'Total Provisiones', order: order +1 , class: "two" ,total: 0},
         )
         let encabezado = this.cols.filter(e => e.order > 9)
-  
+
         for(let a = 0; a< tipo.length;a++){
-  
+
           let arrayTipo = this.cols.filter(co => co.id_catalogo_tipo_rubro == tipo[a]);
        //   console.log(arrayTipo);
         }
-        
+
         let linea = 0
-        
+
         for (let i = 0; i < Data.length; i++) {
         let rol = this.RolGeneral.filter(rol => rol.id_persona == Data[i].id_persona);
-        
+
         let valoresColumnas = this.cols.filter(col => col.field === Data[i].codigo_rubro + Data[i].id_catalogo_tipo_rubro);
         if(valoresColumnas.length > 0){
           valoresColumnas.forEach(e =>{
             e.total += parseFloat(Data[i].valor)
           })
         }
-      
+
          if (rol.length == 0) {
             linea++;
             this.numero_empleados = linea
@@ -1997,34 +1997,34 @@ export class AsientoCierreComponent implements OnInit {
             objetoRol['dias_trabajados'] = Data[i].dias_trabajados;
             objetoRol['horas_trabajadas'] = Data[i].horas_trabajadas;
             objetoRol['salario'] = parseFloat((Data[i].sld_salario_minimo));
-          
+
             for ( let i = 0; i < cabeceraIngresos.length; i++){
-              
+
               objetoRol[cabeceraIngresos[i].codigo_rubro + cabeceraIngresos[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
             objetoRol['total_ingresos'] = 0;
 
             for ( let i = 0; i < cabeceraEgresos.length; i++){
-              
+
               objetoRol[cabeceraEgresos[i].codigo_rubro + cabeceraEgresos[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
             objetoRol['total_egresos'] = 0;
             objetoRol['total_diferencia'] = 0;
 
             for ( let i = 0; i < cabeceraProvisiones.length; i++){
-                
+
               objetoRol[cabeceraProvisiones[i].codigo_rubro + cabeceraProvisiones[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
-            objetoRol['total_provisiones'] = 0; 
+            objetoRol['total_provisiones'] = 0;
 
             objetoRol[Data[i].codigo_rubro + Data[i].id_catalogo_tipo_rubro] = parseFloat(Data[i].valor);
             this.RolGeneral.push(objetoRol);
           } else {
             rol[0][Data[i].codigo_rubro + Data[i].id_catalogo_tipo_rubro] = parseFloat(Data[i].valor);
-            
+
           }
         }
      //   console.log(this.cols)
@@ -2037,13 +2037,13 @@ export class AsientoCierreComponent implements OnInit {
         //  console.log(rol)
             rol.forEach(f => {
               if(f.id_catalogo_tipo_rubro == 'INGRESO'){
-                totalIngresos += parseFloat(f.valor) 
+                totalIngresos += parseFloat(f.valor)
               }
               if(f.id_catalogo_tipo_rubro == 'EGRESO'){
-                totalEgresos += parseFloat(f.valor) 
+                totalEgresos += parseFloat(f.valor)
               }
               if(f.id_catalogo_tipo_rubro == 'PROVISIONES'){
-                totalProvisiones += parseFloat(f.valor) 
+                totalProvisiones += parseFloat(f.valor)
               }
             })
 
@@ -2056,13 +2056,13 @@ export class AsientoCierreComponent implements OnInit {
           let totalesEgresos =  this.RolGeneral.reduce((suma: number, x: any) => suma +  parseFloat(x.total_egresos), 0)
           let totalesDiferencia =  this.RolGeneral.reduce((suma: number, x: any) => suma +   parseFloat(x.total_diferencia), 0)
           let totalesProvisiones =  this.RolGeneral.reduce((suma: number, x: any) => suma +   parseFloat(x.total_provisiones), 0)
-        
+
           let valoresColumnasSal = this.cols.filter(col => col.field === 'salario');
           if(valoresColumnasSal.length > 0){
             valoresColumnasSal.forEach(e =>{
               e.total = parseFloat(totalesSalario)
             })
-          } 
+          }
 
           let valoresColumnasIn = this.cols.filter(col => col.field === 'total_ingresos');
           if(valoresColumnasIn.length > 0){
@@ -2105,35 +2105,35 @@ export class AsientoCierreComponent implements OnInit {
             lineaTotales['dias_trabajados'] ='';
             lineaTotales['horas_trabajadas'] ='';
             lineaTotales['salario'] ='';
-          
+
             for ( let i = 0; i < cabeceraIngresos.length; i++){
-              
+
               lineaTotales[cabeceraIngresos[i].codigo_rubro + cabeceraIngresos[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
             lineaTotales['total_ingresos'] = 0;
 
             for ( let i = 0; i < cabeceraEgresos.length; i++){
-              
+
               lineaTotales[cabeceraEgresos[i].codigo_rubro + cabeceraEgresos[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
             lineaTotales['total_egresos'] = 0;
             lineaTotales['total_diferencia'] = 0;
 
             for ( let i = 0; i < cabeceraProvisiones.length; i++){
-                
+
               lineaTotales[cabeceraProvisiones[i].codigo_rubro + cabeceraProvisiones[i].id_catalogo_tipo_rubro] =0;
-             
+
             }
             lineaTotales['total_provisiones'] = 0;
-            
+
             for(let i = 8; i < this.cols.length; i++){
               lineaTotales[this.cols[i].field] = parseFloat(this.cols[i].total);
             //  console.log(lineaTotales[this.cols[i].field])
             }
          //   console.log(lineaTotales)
-          
+
             this.RolGeneral.push(lineaTotales);
           //  console.log(this.RolGeneral)
         // return
@@ -2146,13 +2146,13 @@ export class AsientoCierreComponent implements OnInit {
         //   }else {
         //     this.vmButtons[3].habilitar = true;
         //   }
-        
+
         let empleadosSinOrden= this.RolGeneral.filter(e =>  e.tiene_control == true && e.tiene_op == false)
        // console.log(empleadosSinOrden)
         if(empleadosSinOrden.length > 0){
           this.vmButtons[2].habilitar = false;
         }
-        
+
       }else{
         this.lcargando.ctlSpinner(false);
         this.toastr.info('No hay registros para esta consulta')
@@ -2161,7 +2161,7 @@ export class AsientoCierreComponent implements OnInit {
 
     })
 
-   
+
   }
   AsociacionElementType(ahora: any) {
 
@@ -2258,9 +2258,9 @@ console.log(this.RolGeneral)
       this.toastr.info('Ya fueron generadas las ordenes de pago');
     }
 
-    
+
     else{
-  
+
       let data = {
         anio: Number(anio),
         mes: Number(mes),
@@ -2269,7 +2269,7 @@ console.log(this.RolGeneral)
         codigo_presupuesto : this.codigo_presupuesto,
         tipo_pago: this.tipoPago
       }
-    
+
       this.lcargando.ctlSpinner(true);
       this.apiSrv.generarOrdenesPago(data).subscribe(res => {
         this.lcargando.ctlSpinner(false);
@@ -2331,22 +2331,22 @@ console.log(this.RolGeneral)
           this.toastr.info(error.error.message);
         }
         )
-        
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
       }
     )
-    
+
   }
 
   consultaTipoAsiento(event){
    // [ngClass]="{'d-none': filter.tipo_asiento == 'ASIENTO_PROVISIONES' || filter.tipo_asiento == 'DEVENGADO_NOMINA'  || filter.tipo_asiento == 'CRUCE_ANTICIPO' }"
-    
+
  //  console.log(event)
-   
-   
+
+
    if(event == 'PAGADO_TERCEROS'){
       this.verBanco= true
       this.mensajeSppiner = "Cargando Rubros...";
@@ -2372,10 +2372,10 @@ console.log(this.RolGeneral)
     if( event == 'PAGADO_NOMINA' || event == 'PAGADO_APORTES' || event == 'PAGADO_PRESTAMOS'){
       this.verBanco= true
     }
-   
+
   }
 
 
-  
+
 
 }

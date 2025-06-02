@@ -396,7 +396,7 @@ export class FacturaCompraComponent implements OnInit {
     this.validChange = false;
     this.identiFyOrders = false;
     this.validaDtBuy = false;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getTypeDocument();
     });

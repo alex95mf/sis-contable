@@ -1,20 +1,20 @@
 import { Component, OnInit, NgZone, ViewChild, TemplateRef } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { DiarioService } from 'src/app/view/contabilidad/comprobantes/diario/diario.service';
-import { PlanCuentasService } from 'src/app/view/contabilidad/plan-cuentas/plan-cuentas.service'; 
+import { PlanCuentasService } from 'src/app/view/contabilidad/plan-cuentas/plan-cuentas.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import * as myVarGlobals from '../../../../global';
 import { Router } from '@angular/router';
-import { CommonService } from 'src/app/services/commonServices'; 
-import { CommonVarService } from 'src/app/services/common-var.services'; 
+import { CommonService } from 'src/app/services/commonServices';
+import { CommonVarService } from 'src/app/services/common-var.services';
 import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
-import { ViewDocumentDtComponent } from 'src/app/view/contabilidad/comprobantes/diario/view-document-dt/view-document-dt.component'; 
+import { ViewDocumentDtComponent } from 'src/app/view/contabilidad/comprobantes/diario/view-document-dt/view-document-dt.component';
 import { environment } from 'src/environments/environment';
 
 import { CcModalTablaCuentaComponent } from 'src/app/config/custom/cc-modal-tabla-cuenta/cc-modal-tabla-cuenta.component';
@@ -22,9 +22,9 @@ import { CcModalTablaCuentaComponent } from 'src/app/config/custom/cc-modal-tabl
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
- import { DiarioObjeto } from 'src/app/view/contabilidad/comprobantes/diario/diario'; 
+ import { DiarioObjeto } from 'src/app/view/contabilidad/comprobantes/diario/diario';
 
-import { TrasnferenciaDepositosService } from './trasnferencia-depositos.service'; 
+import { TrasnferenciaDepositosService } from './trasnferencia-depositos.service';
 
 import { MovimientosBancos } from './movimientoBancarios';
 import {CurrencyMaskInputMode} from 'ngx-currency'
@@ -407,7 +407,7 @@ export class TrasnferenciaDepositosComponent {
       this.bankSelect = 0;
       this.bankSelectDestino = 0;
       this.bankSelectConsulta = 0;
-      
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
@@ -428,7 +428,7 @@ export class TrasnferenciaDepositosComponent {
   }
 
   getDocuments() {
-    
+
     let data = { company_id: this.dataUser.id_empresa, doc_type:(this.select_mivimiento === 'E' ? "CDE" : "CDI")};
     this.diarioSrv.getCompanyInformation(data).subscribe(res => {
       this.HeaderInfo.doc_id = res["data"].id;
@@ -555,7 +555,7 @@ export class TrasnferenciaDepositosComponent {
     this.diarioSrv.ListaCatalogoPresupuesto().subscribe(res => {
 
       this.catalogo_presupuesto = res['data'];
-     
+
       this.fieldsDaily[index].LoadOpcionCatalogoPresupuesto = false;
 
     }, error => {
@@ -613,10 +613,10 @@ export class TrasnferenciaDepositosComponent {
     this.cod_transaccion = ""
     // this.select_mivimiento = 0;
     // this.tipo_movimiento = 0;
-    
-    
+
+
     this.fieldsDaily.push({ banco:true, LoadOpcionCatalogoPresupuesto: false, presupuesto:'', codpresupuesto:'', valor_presupuesto: parseFloat('0.00').toFixed(2), centro:0, account: '', name: '', detail: "", credit: parseFloat('0.00').toFixed(2), debit: parseFloat('0.00').toFixed(2) }, { banco:false, LoadOpcionCatalogoPresupuesto: false, presupuesto:'', codpresupuesto:'', valor_presupuesto: parseFloat('0.00').toFixed(2), centro:0, account: '', name: '', detail: "", credit: parseFloat('0.00').toFixed(2), debit: parseFloat('0.00').toFixed(2),disabled: true });
-  
+
   }
 
 
@@ -720,7 +720,7 @@ export class TrasnferenciaDepositosComponent {
 
   /* buttons actions */
   NewRegister() {
-    
+
     if (this.permisions.agregar == "0") {
       this.toastr.info("Usuario no tiene permiso para agregar");
     } else {
@@ -728,7 +728,7 @@ export class TrasnferenciaDepositosComponent {
       this.actionsDaily.save = false;
       this.actionsDaily.print = false;
       this.actionsDaily.cancel = false;
-      
+
 
       this.vmButtons[0].habilitar = true;
       this.vmButtons[1].habilitar = false;
@@ -852,7 +852,7 @@ export class TrasnferenciaDepositosComponent {
           Swal.fire({
             title: "Atención",
             text: "Seguro desea guardar la siguiente información?",
-            //type: "warning",
+            //icon: "warning",
             showCancelButton: true,
             cancelButtonColor: '#DC3545',
             confirmButtonColor: '#13A1EA',
@@ -942,7 +942,7 @@ export class TrasnferenciaDepositosComponent {
           Swal.fire({
             title: "Atención",
             text: "Seguro desea actualizar la siguiente información?",
-            //type: "warning",
+            //icon: "warning",
             showCancelButton: true,
             cancelButtonColor: '#DC3545',
             confirmButtonColor: '#13A1EA',
@@ -961,7 +961,7 @@ export class TrasnferenciaDepositosComponent {
       }
     }
   }
-  
+
   /*
   deletProcess() {
     if (this.permisions.eliminar == "0") {
@@ -970,7 +970,7 @@ export class TrasnferenciaDepositosComponent {
       Swal.fire({
         title: "Atención",
         text: "Seguro desea eliminar la siguiente información?",
-        //type: "warning",
+        //icon: "warning",
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',
@@ -1077,7 +1077,7 @@ export class TrasnferenciaDepositosComponent {
     this.creCgSearch();
   }
 
-  
+
   EventoNumberAsiento(evento, tipo){
 
     let codpresupuesto = this.fieldsDaily[evento].codpresupuesto;
@@ -1088,14 +1088,14 @@ export class TrasnferenciaDepositosComponent {
       this.fieldsDaily[evento].valor_presupuesto = (codpresupuesto === null || codpresupuesto === '') ? 0.00 : parseFloat(this.fieldsDaily[evento].debit);
       this.fieldsDaily[evento].disabled = (codpresupuesto === null || codpresupuesto === '') ? true : false;
     }else{
-      
+
       this.creditChange();
       this.presupuestoChange();
       this.fieldsDaily[evento].valor_presupuesto = (codpresupuesto === null || codpresupuesto === '') ? 0.00 : parseFloat(this.fieldsDaily[evento].credit);
       this.fieldsDaily[evento].disabled = (codpresupuesto === null || codpresupuesto === '') ? true : false;
     }
 
-    
+
 
   }
   /* credit/debit change */
@@ -1189,7 +1189,7 @@ export class TrasnferenciaDepositosComponent {
       Swal.fire({
         title: "Atención",
         text: "Al ejecutar el proceso se anulara los registro, los mismos no podran ser reversados. \n ¿Desea continuar?",
-        //type: "warning",
+        //icon: "warning",
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',
@@ -1254,7 +1254,7 @@ export class TrasnferenciaDepositosComponent {
     if (numero === 1) {
       window.open(environment.ReportingUrl + "rpt_movimiento_banco.html?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_empresa=1&id_documento=" + dt.codigo_movbank, '_blank');
     }
-    
+
 
     if (numero === 2) {
       window.open(environment.ReportingUrl + "rpt_movimiento_banco.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_empresa=1&id_documento=" + dt.codigo_movbank, '_blank');
@@ -1335,7 +1335,7 @@ export class TrasnferenciaDepositosComponent {
   }
 
 
-  
+
 
 
   MovimientosRegistrados() {
@@ -1347,7 +1347,7 @@ export class TrasnferenciaDepositosComponent {
       fecha_desde: moment(this.fromDatePicker).format('YYYYMMDD'),
       fecha_hasta: moment(this.toDatePicker).format('YYYY-MM-DD')
     }
-    
+
     this.transfServ.ListaMovimientosBancos(data).subscribe(res => {
 
       this.detalleMovimientos = <MovimientosBancos[]>res['data'];
@@ -1387,6 +1387,6 @@ export class TrasnferenciaDepositosComponent {
   }
 
 
-  
+
 
 }

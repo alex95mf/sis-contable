@@ -245,7 +245,7 @@ export class ReportesComponent implements OnInit {
 
   rerender(): void {
     this.validaDtUser = false;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getTableReport();
     });
@@ -400,7 +400,7 @@ export class ReportesComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: message,
-      type: "warning",
+      icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",

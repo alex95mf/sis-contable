@@ -564,7 +564,7 @@ export class GeneralComponent implements OnInit {
   }
 
   rerender(): void {
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.dtTrigger.next(null);
     });

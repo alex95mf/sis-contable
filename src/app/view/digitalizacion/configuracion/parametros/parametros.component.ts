@@ -28,7 +28,7 @@ export class ParametrosComponent implements OnInit {
   tienedate:any = false;
   cols: any[];
   disabledModificar: boolean = false;
- 
+
   listTipoDato: any = [
     {value: "text",label: "Texto"},
     {value: "date",label: "Fecha"},
@@ -45,12 +45,12 @@ export class ParametrosComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: NgbModal
   ) {
-   
+
 
 
     this.apiSrv.listaParametros$.subscribe(
       (res) => {
-     
+
         console.log(res)
         this.vmButtons[0].habilitar = true;
         this.vmButtons[2].habilitar = false;
@@ -58,7 +58,7 @@ export class ParametrosComponent implements OnInit {
 
         this.tipoDocumento = res;
         this.tipoDocumento.fisicotemp =this.tipoDocumento.fisico == 'SI' ? true : false;
-        
+
         res.tipo_documento_indice.forEach(e => {
           Object.assign(e,{
             es_directorio: e.es_directorio == 'SI' ? true : false,
@@ -81,7 +81,7 @@ export class ParametrosComponent implements OnInit {
   ngOnInit(): void {
 
     this.vmButtons = [
-     
+
       {
         orig: 'btnsParametros',
         paramAccion: '',
@@ -148,7 +148,7 @@ export class ParametrosComponent implements OnInit {
 
   metodoGlobal(event: any) {
     switch (event.items.boton.texto) {
-    
+
       case "GUARDAR":
        this.validateSaveParametros();
         break;
@@ -161,14 +161,14 @@ export class ParametrosComponent implements OnInit {
       case "LIMPIAR":
        this.confirmRestore()
         break;
-    
+
       default:
         break;
     }
   }
 
 
-  
+
   addParametros() {
 
     if(this.disabledAgregar){
@@ -194,13 +194,13 @@ export class ParametrosComponent implements OnInit {
         disabled: false
       }
       this.listaParametros.push(item)
-   
+
   }
 
   encontrarRepetidosPorValor(lista: any[], propiedad: string): void {
     const conteo = {};
     const repetidos = [];
-  
+
     // Contar la frecuencia de cada valor de la propiedad en la lista
     lista.forEach((item, index) => {
       const valor = item[propiedad];
@@ -210,14 +210,14 @@ export class ParametrosComponent implements OnInit {
         conteo[valor] = {valor, indices: [index + 1]}; // Sumar 1 al índice
       }
     });
-  
+
     // Agregar los valores repetidos al array repetidos
     for (const valor in conteo) {
       if (conteo.hasOwnProperty(valor) && conteo[valor].indices.length > 1) {
         repetidos.push(conteo[valor]);
       }
     }
-  
+
     // Mostrar mensaje de validación si hay elementos repetidos
     if (repetidos.length > 0) {
       let mensaje = 'Los siguientes elementos se repiten en la lista:\n';
@@ -234,7 +234,7 @@ export class ParametrosComponent implements OnInit {
       console.log('El campo está vacío');
       return;
     }
-  
+
     const existe = this.listaParametros.some((item, i) => i !== index && item.campo_indice === campoIndice);
 
     if (existe) {
@@ -245,11 +245,11 @@ export class ParametrosComponent implements OnInit {
       console.log('El campo es válido');
       this.disabledAgregar = false
     }
-          
+
   }
- 
+
   async validateSaveParametros() {
-   
+
       this.validateDataGlobal().then(respuesta => {
         if (respuesta) {
           this.confirmSave("Seguro desea guardar esta configuración ?", "SAVE_CONFIGURACION");
@@ -261,7 +261,7 @@ export class ParametrosComponent implements OnInit {
 
   }
   async validateUpdateParametros() {
-   
+
     this.validateDataGlobal().then(respuesta => {
       if (respuesta) {
         this.confirmSave("Seguro desea modificar esta configuración ?", "UPDATE_CONFIGURACION");
@@ -272,19 +272,19 @@ export class ParametrosComponent implements OnInit {
     });
 
 }
-  
+
   validateDataGlobal() {
-  
+
     let c = 0;
     let mensajes: string = '';
     return new Promise((resolve, reject) => {
-  
-  
+
+
       if (this.tipoDocumento.nombre == "" || this.tipoDocumento.nombre == undefined) {
         mensajes += "* Debe ingresar un Nombre <br>"
-      
+
       }
-      
+
       if (this.tipoDocumento.descripcion == "" || this.tipoDocumento.descripcion  == undefined) {
         mensajes += "* Debe ingresar un Descripción <br>"
       }
@@ -310,13 +310,13 @@ export class ParametrosComponent implements OnInit {
         mensajes += "* Debe agregar al menos un item a la lista de parámetros <br>"
       }
       if(this.listaParametros.length != 0 ) {
-       
+
         for (let index = 0; index < this.listaParametros.length; index++) {
           if (this.listaParametros[index].campo_indice == '' || this.listaParametros[index].campo_indice == undefined) {
             mensajes += "En el parámetro número "+ (index + 1)+" el campo Nombre no puede ser vacío<br>"
           }else if(this.listaParametros[index].tipo_dato == 0 || this.listaParametros[index].tipo_dato == undefined){
             mensajes += "En el parámetro número "+ (index + 1)+" en el campo Tipo debe seleccionar una opción<br>"
-          } 
+          }
           else if(this.listaParametros[index].tipo_dato == 0 || this.listaParametros[index].tipo_dato == undefined){
             mensajes += "En el parámetro número "+ (index + 1)+" en el campo Tipo debe seleccionar una opción<br>"
           }
@@ -326,39 +326,39 @@ export class ParametrosComponent implements OnInit {
               datosParaTipoFecha = 1
             }
             if(datosParaTipoFecha == 0) mensajes += "En el parámetro número "+ (index + 1)+" en el campo Fecha debe seleccionar minimo un campo a tomarse en cuenta <br>"
-            
-            
-            
+
+
+
           }
           if (this.listaParametros[index].campo_indice == "nombre" || this.listaParametros[index].campo_indice == "Nombre"  || this.listaParametros[index].campo_indice == "NOMBRE") {
             mensajes += "* El campo 'nombre' se encuentra reservado para el nombre del documento <br>"
-          
+
           }
           if (this.listaParametros[index].campo_indice == "Size" || this.listaParametros[index].campo_indice == "SIZE"  || this.listaParametros[index].campo_indice == "size") {
             mensajes += "* El campo 'nombre' se encuentra reservado para el nombre del documento <br>"
-          
+
           }
           if (this.listaParametros[index].campo_indice == "Paginas" || this.listaParametros[index].campo_indice == "PAGINAS"  || this.listaParametros[index].campo_indice == "paginas") {
             mensajes += "* El campo 'nombre' se encuentra reservado para el nombre del documento <br>"
-          
+
           }
-          
-          
+
+
         }
-      
+
       }
 
       return (mensajes.length) ? reject(mensajes) : resolve(true)
-     
+
     });
   }
- 
+
   async confirmSave(message, action) {
- 
+
     Swal.fire({
       title: "Atención!!",
       text: message,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',
@@ -369,17 +369,17 @@ export class ParametrosComponent implements OnInit {
       if (result.value) {
         if (action == "SAVE_CONFIGURACION") {
           this.setParametros();
-        } 
+        }
         if (action == "UPDATE_CONFIGURACION") {
           this.updateParametros();
-        } 
+        }
       }
     })
   }
 
 
   setParametros(){
-    
+
       this.msgSpinner = 'Guardando Configuración...';
       this.lcargando.ctlSpinner(true);
       let data = {
@@ -417,7 +417,7 @@ export class ParametrosComponent implements OnInit {
               confirmButtonColor: '#20A8D8',
             });
           }
-          
+
           this.lcargando.ctlSpinner(false);
         },
         (error) => {
@@ -432,11 +432,11 @@ export class ParametrosComponent implements OnInit {
           });
         }
       );
-    
+
   }
 
   updateParametros(){
-    
+
     this.msgSpinner = 'Modificando Configuración...';
     this.lcargando.ctlSpinner(true);
     let data = {
@@ -482,7 +482,7 @@ export class ParametrosComponent implements OnInit {
         });
       }
     );
-  
+
 }
 
   getParametros(){
@@ -503,7 +503,7 @@ export class ParametrosComponent implements OnInit {
           confirmButtonText: "Aceptar",
           confirmButtonColor: '#20A8D8',
         });
-        
+
         this.lcargando.ctlSpinner(false);
       },
       (error) => {
@@ -526,17 +526,17 @@ export class ParametrosComponent implements OnInit {
     for (let i=0; i<this.listaParametros.length;i++){
       if(i==index) {
         this.listaParametros[i].es_directorio = event;
-      } 
+      }
     }
     console.log(this.listaParametros)
-  } 
+  }
 
   estadoSelected(event,index){
- 
+
       for (let i=0; i<this.listaParametros.length;i++){
         if(i==index) {
            this.listaParametros[i].estado = event;
-        } 
+        }
       }
       console.log(this.listaParametros)
   }
@@ -545,7 +545,7 @@ export class ParametrosComponent implements OnInit {
     for (let i=0; i<this.listaParametros.length;i++){
       if(i==index) {
         this.listaParametros[i].es_obligatorio = event;
-      } 
+      }
     }
     console.log(this.listaParametros)
   }
@@ -594,7 +594,7 @@ export class ParametrosComponent implements OnInit {
         });
       }
     });
-   
+
 
     // if (this.fotos[index].id_ticket_fotos > 0) {
     //   this.fotosEliminar.push(this.fotos.splice(index, 1)[0].id_ticket_fotos);
@@ -614,7 +614,7 @@ export class ParametrosComponent implements OnInit {
    this.listaParametros = []
    this.vmButtons[0].habilitar =false;
    this.vmButtons[2].habilitar =true;
-    
+
   }
 
   onDragStart(event: DragEvent, index: number) {
@@ -632,7 +632,7 @@ export class ParametrosComponent implements OnInit {
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
-  
+
 
 
   validartipo() {
@@ -649,11 +649,11 @@ export class ParametrosComponent implements OnInit {
         }
       }
       if (item.tipo_dato != "date") {
-      
+
           item.anio_dir = false;
           item.mes_dir = false;
           item.dia_dir = false;
-       
+
       }
     })
 

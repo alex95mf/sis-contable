@@ -51,7 +51,7 @@ export class TablePermisosComponent implements OnDestroy, OnInit {
         // if (this.contador == 1) {
         //   this.getDataTable();
         // } else {
-        //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        //   this.dtElement.dtInstance.then((dtInstance: any) => {
         //     dtInstance.destroy();
         //     this.getDataTable();
         //   });
@@ -205,7 +205,7 @@ export class TablePermisosComponent implements OnDestroy, OnInit {
       this.toastr.success('Datos actualizados correctamente');
       this.lcargando.ctlSpinner(false)
       // this.coVasrv.updPerm.next(false);
-      // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // this.dtElement.dtInstance.then((dtInstance: any) => {
       //   dtInstance.destroy();
       //   this.getDataTable();
       // });

@@ -276,7 +276,7 @@ export class BusquedaProductoComponent implements OnInit {
     rerender(): void {
       this.validaDtUser = false;
       this.lcargando.ctlSpinner(true);
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getTableReport();
       });

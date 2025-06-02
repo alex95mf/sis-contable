@@ -24,7 +24,7 @@ standalone: false,
   templateUrl: './plan-cuentas.component.html',
   styleUrls: ['./plan-cuentas.component.scss'],
   providers: [DialogService,MessageService]
-  
+
 })
 export class PlanCuentasComponent implements OnInit {
   mensajeSppiner: string = "Cargando...";
@@ -246,7 +246,7 @@ export class PlanCuentasComponent implements OnInit {
 
     await this.loadCatalogoAuxiliares();
 
-    
+
     let id_rol = this.dataUser.id_rol;
 
     let data = {
@@ -576,7 +576,7 @@ export class PlanCuentasComponent implements OnInit {
     let data = {
       id_nodo:d,
       t_data : this.treeData
-    } 
+    }
     this.pCuentasService.getTreePlanCuentas2(data).subscribe(res => {
       this.treeData = res['data'];
       this.field = { dataSource: res['data'], id: 'id', text: 'name', child: 'subChild', expanded: 'expanded' };
@@ -816,13 +816,13 @@ public expandOrContraerAll() {
       let niveles: number[] = [1, 1, 1, 2, 2, 2, 2, 2, 2, 2]
       let codigo_padre: string[] = this.codigoGlobalMayor.split(this.lengthCaracter.caracter)
       let nivel: number = codigo_padre.length
-      
+
       let ultimo_hijo = await this.pCuentasService.getUltimaCuenta({codigo: this.codigoGlobalMayor})
       if (ultimo_hijo[0].codigo != null) {
         let ultimo_digito: number = parseInt(ultimo_hijo[0].codigo.split(this.lengthCaracter.caracter).slice(-1)[0]) + 1
         let codigo = [...codigo_padre, `${ultimo_digito}`.padStart(niveles[nivel], '0')].join(this.lengthCaracter.caracter)
         console.log(codigo_padre, ultimo_digito, codigo)
-        
+
         this.codigoSaveFinal = codigo;
       } else {
         let codigo = [...codigo_padre, '1'.padStart(niveles[nivel], '0')].join(this.lengthCaracter.caracter)
@@ -995,7 +995,7 @@ public expandOrContraerAll() {
     Swal.fire({
       title: "Atención!!",
       text: "Seguro desea modificar la cuenta?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',
@@ -1446,7 +1446,7 @@ public expandOrContraerAll() {
     // modalInvoice.componentInstance.isNew = isNew;
     // modalInvoice.componentInstance.data = data;
     modalInvoice.result.then(
-     
+
       // Función a ejecutar cuando el modal se cierra
       (result) => {
         if (result == "actualizar") {
@@ -1479,27 +1479,27 @@ public expandOrContraerAll() {
           console.log("LENG0")
           this.reglas = []
         } else {
-  
+
           this.reglas = res['data']['data'];
-  
+
           this.reglas.forEach(element => {
-          if (element.codigo_presupuesto_gasto != null && element.codigo_presupuesto_gasto!= null)  
+          if (element.codigo_presupuesto_gasto != null && element.codigo_presupuesto_gasto!= null)
               element.codigo_presupuesto_gasto = element.codigo_presupuesto_gasto + ". " + (element.nombre_codigo_presupuesto_gasto ? element.nombre_codigo_presupuesto_gasto : "");
-          
-          if (element.codigo_presupuesto_ingreso != null  && element.codigo_presupuesto_ingreso!= null)  
+
+          if (element.codigo_presupuesto_ingreso != null  && element.codigo_presupuesto_ingreso!= null)
               element.codigo_presupuesto_ingreso = element.codigo_presupuesto_ingreso + ". " + (element.nombre_codigo_presupuesto_ingreso ? element.nombre_codigo_presupuesto_ingreso : "");
-          
-          if (element.cuenta_contable != null  && element.cuenta_contable!= null)  
+
+          if (element.cuenta_contable != null  && element.cuenta_contable!= null)
               element.cuenta_contable = element.cuenta_contable + ". " + (element.nombre_cuenta_contable ? element.nombre_cuenta_contable : "");
-          
-          if (element.cuenta_contable_cobro != null  && element.cuenta_contable_cobro!= null)  
+
+          if (element.cuenta_contable_cobro != null  && element.cuenta_contable_cobro!= null)
               element.cuenta_contable_cobro = element.cuenta_contable_cobro + ". " + (element.nombre_cuenta_contable_cobro ? element.nombre_cuenta_contable_cobro : "");
-          
-          if (element.cuenta_contable_pago != null  && element.cuenta_contable_pago!= null)  
+
+          if (element.cuenta_contable_pago != null  && element.cuenta_contable_pago!= null)
               element.cuenta_contable_pago = element.cuenta_contable_pago + ". " + (element.nombre_cuenta_contable_pago ? element.nombre_cuenta_contable_pago : "");
           });
-  
-  
+
+
           this.paginate.length = res['data']['total'];
           console.log(" this.reglas", this.reglas)
         }

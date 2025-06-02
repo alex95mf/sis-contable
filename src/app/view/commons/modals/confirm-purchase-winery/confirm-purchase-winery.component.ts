@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
 import * as moment from "moment";
 import * as myVarGlobals from "../../../../global";
 import "sweetalert2/src/sweetalert2.scss";
-const Swal = require("sweetalert2");
+import Swal from 'sweetalert2';
 import { MatDialogRef } from '@angular/material/dialog';
 import { resolve } from "url";
 @Component({
@@ -257,7 +257,7 @@ export class ConfirmPurchaseWineryComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: message,
-      type: "warning",
+      icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",

@@ -503,7 +503,7 @@ export class IngresoBodegaComponent implements OnInit {
     this.commonServices.onHandleNotification.pipe(takeUntil(this.onDestroy$)).subscribe(res => {
       if (this.contador == 0) {
         this.contador += 1;
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        this.dtElement.dtInstance.then((dtInstance: any) => {
           dtInstance.destroy();
           // this.getDataTableOrder();
         });
@@ -1797,7 +1797,7 @@ export class IngresoBodegaComponent implements OnInit {
       this.socket.onEmitNotification(data['usersFilter']);
       this.toastr.success(res['message']);
       setTimeout(() => {
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        this.dtElement.dtInstance.then((dtInstance: any) => {
           dtInstance.destroy();
           this.getSolicitudes();
         });

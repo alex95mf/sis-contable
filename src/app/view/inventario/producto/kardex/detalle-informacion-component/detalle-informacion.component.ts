@@ -6,7 +6,7 @@ import { KardexService } from "../kardex.service";
 import { CommonVarService } from '../../../../../services/common-var.services';
 import { Router } from "@angular/router";
 import "sweetalert2/src/sweetalert2.scss";
-const Swal = require("sweetalert2");
+import Swal from 'sweetalert2';
 
 @Component({
 standalone: false,

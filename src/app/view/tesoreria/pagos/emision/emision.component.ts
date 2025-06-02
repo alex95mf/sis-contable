@@ -60,7 +60,7 @@ export class EmisionComponent implements OnInit {
   movimientoFilter: any = [];
   cuentas_filter: any;
 
-  pipe = new DatePipe('en-US'); 
+  pipe = new DatePipe('en-US');
   conceptosList: any = [];
   concepto: any = 0;
   totalCobro = 0;
@@ -74,7 +74,7 @@ export class EmisionComponent implements OnInit {
     // {
     //   nombre: "EFECTIVO",
     //   valor: "EF"
-    // }, 
+    // },
     // {
     //   nombre: "TARJETA",
     //   valor: "TC"
@@ -82,7 +82,7 @@ export class EmisionComponent implements OnInit {
     //  {
     //   nombre: "CHEQUE",
     //   valor: "CH"
-    // }, 
+    // },
     {
       nombre: "TRANSFERENCIA",
       valor: "TR"
@@ -161,8 +161,8 @@ export class EmisionComponent implements OnInit {
   cmb_motivo_anulacion: any = []
   disabledAnular: boolean = true;
 
-  tabActiva: string = 'nav-ordenes'; 
-  
+  tabActiva: string = 'nav-ordenes';
+
 
   constructor(
     private commonService: CommonService,
@@ -171,7 +171,7 @@ export class EmisionComponent implements OnInit {
     private modalService: NgbModal,
     private apiSrv: EmisionService,
     private excelService: ExcelService,
-    private diarioSrv: DiarioService, 
+    private diarioSrv: DiarioService,
     private cierremesService: CierreMesService
   ) {
     // this.commonVrs.selectContribuyenteCustom.asObservable().subscribe(
@@ -204,7 +204,7 @@ export class EmisionComponent implements OnInit {
         console.log(res)
         console.log(this.valorCuentas)
         console.log(res.dato.detalles)
-   
+
         if (res.val == 'val') {
           // Cuando se deselecciona un documento
           // console.log('asd')
@@ -214,7 +214,7 @@ export class EmisionComponent implements OnInit {
               if (e.cuenta == res.banco) {
                 e.valor -= res.dato.cobro,
                 e.cuenta_contable=res.dato.cuenta_contable ,
-                e.name_cuenta=res.dato.name_cuenta 
+                e.name_cuenta=res.dato.name_cuenta
 
               }
             }
@@ -228,7 +228,7 @@ export class EmisionComponent implements OnInit {
             (e) => {
               if (e.cuenta == res.banco) {
                 e.cuenta_contable=res.dato.cuenta_contable ,
-                e.name_cuenta=res.dato.name_cuenta 
+                e.name_cuenta=res.dato.name_cuenta
               }
             }
           )
@@ -236,7 +236,7 @@ export class EmisionComponent implements OnInit {
           // this.totalCobro = res.cobro
           this.difCobroPago = 0
           this.generaPreviewAsientoContable();
-         
+
         }
 
         // this.id_orden_pago=res.dato.id_orden_pago
@@ -273,7 +273,7 @@ export class EmisionComponent implements OnInit {
           valor:  res.comprobante_egreso?.valor
         }
         this.movimiento.push(data)
-       
+
 
         if(res['tipo_pago']==null || res['tipo_pago']=='FACTURA'){
           this.changeNomina = false;
@@ -299,13 +299,13 @@ export class EmisionComponent implements OnInit {
               configCont: e.config_contable === null ? null : e.config_contable.descripcion
             }
             this.deudas.push(det);
-  
+
           })
         }else{
           this.changeNomina = true;
           this.cargarDesembolso();
           this.tipo_desembolso = res.tipo_pago
-          
+
           res.detalles.forEach(e => {
             let descripcion_desembolso = this.listaDesembolso.filter(d => d.valor == e.tipo_desembolso)
             let det = {
@@ -329,29 +329,29 @@ export class EmisionComponent implements OnInit {
               configCont: e.config_contable === null ? null : e.config_contable.descripcion
             }
             this.ordenesNomina.push(det);
-  
+
           })
         }
         console.log(this.ordenesNomina)
-       
-     
+
+
         if(res.asiento!=null){
           if(res.asiento.detalle.length > 0){
             let cuentas=[]
             res.asiento.detalle.forEach(e => {
               cuentas.push(e.cuenta);
             })
-  
+
             let cod ={
               codigos:cuentas
             }
             this.apiSrv.getAccountsByCodigo(cod).subscribe(res2 => {
-  
-          
+
+
               this.asiento=[]
               let cuentas_filter
               console.log(res.asiento)
-            
+
                 res.asiento.detalle.forEach(e => {
                   if(res2['data'].length > 0 ){
                     cuentas_filter =res2['data'].filter(d => d.codigo == e.cuenta)
@@ -368,7 +368,7 @@ export class EmisionComponent implements OnInit {
                       name: cuentas_filter != undefined ? cuentas_filter[0].nombre : '' ,
                       detail: "",
                       credit: parseFloat(e.valor_cre),
-                      debit: parseFloat(e.valor_deb), 
+                      debit: parseFloat(e.valor_deb),
                       centro: 0,
                       tipo: '',
                       tipo_detalle: e.tipo_detalle,
@@ -376,7 +376,7 @@ export class EmisionComponent implements OnInit {
                       tipo_afectacion: e.tipo_afectacion,
                       devengado: e.devengado,
                       cobrado_pagado: e.cobrado_pagado,
-  
+
                     });
                     this.TotalizarAsiento();
                 })
@@ -385,10 +385,10 @@ export class EmisionComponent implements OnInit {
             this.asiento=[]
           }
         }
-        
+
 
         this.formValid = true;
-        
+
         this.totalCobro = res.total;
         this.totalPago = res.total;
         this.difCobroPago = res.saldo;
@@ -406,7 +406,7 @@ export class EmisionComponent implements OnInit {
         //   this.vmButtons[6].habilitar = false;
         // }
 
-       
+
         this.formReadOnly = true;
         this.titulosDisabled = false;
         this.busqueda = true
@@ -424,7 +424,7 @@ export class EmisionComponent implements OnInit {
           (e)=>{
             let valid = true
             this.valorCuentas.map(
-             
+
               (res) => {
                 console.log(res)
                 if (res.banco == e.cuenta) {
@@ -435,7 +435,7 @@ export class EmisionComponent implements OnInit {
             if (valid) {
               this.valorCuentas.push({ banco: e.cuenta, valor: 0 })
             }
-          
+
           }
         )
 
@@ -459,8 +459,8 @@ export class EmisionComponent implements OnInit {
           });
         }
         this.totalCobro = +cobroTotal / 100;
-    
-    
+
+
         this.valorCuentas.map(
           (data) => {
             let total = 0;
@@ -477,7 +477,7 @@ export class EmisionComponent implements OnInit {
               //console.log('valores Bancos',total)
               data.valor = total;
             }
-    
+
             if(this.ordenesNomina.length > 0){
               this.ordenesNomina.map(
                 (res) => {
@@ -492,18 +492,18 @@ export class EmisionComponent implements OnInit {
               data.valor = total;
             }
           })
-          
-    
+
+
         // this.calcSaldoRestanteTotal();
         //this.calcDifCobroPago();
-    
-        
+
+
         // this.restar;
       //  this.calcCobroTotal();
       }
 
     )
-    
+
   }
 
   ngOnInit(): void {
@@ -581,13 +581,13 @@ export class EmisionComponent implements OnInit {
         habilitar: true
       },
       { orig: "btnsRenLiqCobro",
-        paramAccion: "", 
-        boton: { icon: "fas fa-trash", texto: "ANULAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-danger boton btn-sm", 
+        paramAccion: "",
+        boton: { icon: "fas fa-trash", texto: "ANULAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-danger boton btn-sm",
         habilitar: true
       }
 
@@ -600,9 +600,9 @@ export class EmisionComponent implements OnInit {
      tipo_contrato: 0,
      tipo_pago: ''
 
-    
+
     };
-       
+
     this.filterAsiento = {
       estado: 3,
       num_cuenta: 3,
@@ -611,7 +611,7 @@ export class EmisionComponent implements OnInit {
       movimiento:undefined,
       id_asiento:undefined
     };
-    
+
 
     this.paginate = {
       length: 0,
@@ -753,8 +753,8 @@ export class EmisionComponent implements OnInit {
     let tipo_emision = 'Emision de pago factura'
 
     this.deudas.forEach(elem => {
-      
-      
+
+
       const {proveedor, num_documento, num_cuenta, tipo_cuenta, cobro, observacion} = elem
 
       let objeto = {
@@ -779,12 +779,12 @@ export class EmisionComponent implements OnInit {
     let excelData = []
     let tipo_emision = 'Emision de pago nómina'
     this.exportList = this.ordenesNomina
-    
+
     if (this.permissions.exportar == "0") {
       this.toastr.info("Usuario no tiene permiso para exportar");
     } else {
 
-    
+
       Object.keys(this.exportList).forEach(key => {
         let filter_values = {};
         filter_values['ID'] = key;
@@ -796,7 +796,7 @@ export class EmisionComponent implements OnInit {
         filter_values['Valor total'] = (this.exportList[key].total != undefined) ? this.exportList[key].total.trim() : "";
         filter_values['Saldo actual'] =  (this.exportList[key].saldo != undefined) ? this.exportList[key].saldo.trim() : "";
         filter_values['Valor a pagar'] = (this.exportList[key].cobro != undefined) ? this.exportList[key].cobro.trim() : "";
-        filter_values['Saldo restante'] = (this.exportList[key].nuevo_saldo != undefined) ? this.exportList[key].nuevo_saldo : ""; 
+        filter_values['Saldo restante'] = (this.exportList[key].nuevo_saldo != undefined) ? this.exportList[key].nuevo_saldo : "";
 
         excelData.push(filter_values);
       })
@@ -885,11 +885,11 @@ export class EmisionComponent implements OnInit {
   }
 
   cargarMovimientosBancariosAsiento() {
-    
+
     this.msgSpinner = "Cargando Asiento";
     this.lcargando.ctlSpinner(true);
-    
-   
+
+
     let data = {
       empresa: 1,
       params: {
@@ -897,7 +897,7 @@ export class EmisionComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    
+
     this.apiSrv.getMovimientoBancarioAsiento(data).subscribe(
       (res) => {
         console.log(res);
@@ -907,7 +907,7 @@ export class EmisionComponent implements OnInit {
         this.generaPreviewAsientoContable()
         //this.TotalizarAsiento()
         this.lcargando.ctlSpinner(false);
-       
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -959,7 +959,7 @@ export class EmisionComponent implements OnInit {
       }
       this.apiSrv.getOrdenesPagoNomina(data).subscribe((result: any) => {
         console.log(result);
-  
+
         if(result['data'].length > 0){
           this.lcargando.ctlSpinner(false);
           let descripcion_desembolso = this.listaDesembolso.filter(e => e.valor == this.tipo_desembolso)
@@ -968,19 +968,19 @@ export class EmisionComponent implements OnInit {
             Object.assign(e,{
               cobro: e.total,
               nuevo_saldo:0,
-              tipo_desembolso: this.tipo_desembolso,  
+              tipo_desembolso: this.tipo_desembolso,
               descripcion_desembolso: descripcion_desembolso[0].descripcion,
               cuenta: this.cuenta.name_banks,
               num_cuenta:this.cuenta.num_cuenta,
               cuenta_contable:this.cuenta.cuenta_contable,
               name_cuenta:this.cuenta.name_cuenta
               })
-  
+
              // totalCobro += + e.total
           });
-        
+
           //this.totalCobro = totalCobro
-         
+
           this.ordenesNomina=result['data'];
           this.formReadOnly = false
 
@@ -992,15 +992,15 @@ export class EmisionComponent implements OnInit {
               }
             }
           )
-      
+
           if (valid) {
             this.valorCuentas.push({ banco: this.cuenta.name_banks, valor: 0 })
           }
-          
+
           this.calcCobroTotal()
           // this.generaPreviewAsientoContable();
           // this.TotalizarAsiento();
-       
+
         }else {
           this.lcargando.ctlSpinner(false);
           this.ordenesNomina=[];
@@ -1012,7 +1012,7 @@ export class EmisionComponent implements OnInit {
         this.toastr.info(error.error.message);
       });
     }
-   
+
   }
 
   restar(deuda) {
@@ -1020,10 +1020,10 @@ export class EmisionComponent implements OnInit {
     //console.log(event)
     console.log(this.deudas)
     this.calcCobroTotal();
-    
+
     this.titulosDisabled = false
 
-  
+
   }
 
   calcCobroTotal() {
@@ -1080,7 +1080,7 @@ export class EmisionComponent implements OnInit {
           data.valor = total;
         }
       })
-      
+
 
     // this.calcSaldoRestanteTotal();
     this.calcDifCobroPago();
@@ -1119,7 +1119,7 @@ export class EmisionComponent implements OnInit {
       });
     }
     this.generaPreviewAsientoContable()
-    
+
   }
 
   removeTitulo(index) {
@@ -1135,7 +1135,7 @@ export class EmisionComponent implements OnInit {
 
   removeFormaPago(index) {
     this.pagos.splice(index, 1);
-   
+
     if (this.pagos.length == 0) {
       this.vmButtons[0].habilitar = true;
     }
@@ -1171,7 +1171,7 @@ export class EmisionComponent implements OnInit {
     if (this.permissions.guardar == "0") {
       this.toastr.info("Usuario no tiene permiso para guardar");
       return;
-    } 
+    }
       this.validateDataGlobal().then(respuesta => {
         if (respuesta) {
           this.confirmSave("Seguro desea generar la emisión de pago ?", "SAVE_EMISION");
@@ -1183,11 +1183,11 @@ export class EmisionComponent implements OnInit {
 
   }
   validateDataGlobal() {
-  
+
     let c = 0;
     let mensajes: string = '';
     return new Promise((resolve, reject) => {
-  
+
 
       this.asiento.forEach(e => {
         let tipoDesembolso
@@ -1197,32 +1197,32 @@ export class EmisionComponent implements OnInit {
           }
         });
         Object.assign(e , { tipo_desembolso: tipoDesembolso })
-  
+
       })
-  
-  
+
+
       if (this.documento.forma_pago == "" || this.documento.forma_pago == undefined) {
         mensajes += "* Debe seleccionar la forma de pago <br>"
-      
+
       }
       if (this.cuenta == "" || this.cuenta == undefined) {
         mensajes += "* Debe seleccionar una cuenta <br>"
       }
-      
+
       if (this.deudas.length == 0  && this.documento.tipo_pago == 'FACTURA') {
         mensajes += "* Debe agregar por lo menos una Orden de Pago<br>"
       }
-      
+
       if (this.documento.observacion == "" || this.documento.observacion == undefined) {
         mensajes += "* Debe ingresar una observación para realizar el pago<br>"
       }
-      
+
       if(this.documento.forma_pago == "NOTA DE DEBITO" && this.totalCobro != this.valorTotalMovimiento){
         mensajes += "* El valor a pagar es de $"
                           + this.commonService.formatNumberDos(this.totalCobro)
                           + " y el valor del Movimiento es de $"+ this.commonService.formatNumberDos(this.valorTotalMovimiento)
                           + " hay una diferencia de $" + (this.commonService.formatNumberDos(this.totalCobro - this.valorTotalMovimiento))+"<br>"
-        
+
       }
       if (this.totalCobro <= 0) {
         mensajes += "* El valor del pago debe ser mayor a 0 <br>"
@@ -1231,28 +1231,28 @@ export class EmisionComponent implements OnInit {
         let totalValorCobro= 0
         this.deudas.forEach(element => {
           totalValorCobro += +parseFloat(element.cobro)
-       
+
         });
-  
+
         if (totalValorCobro > this.valorTotalMovimiento) {
           mensajes += "* El valor total de las ordenes de pago no puede ser mayor a "+ this.commonService.formatNumberDos(this.valorTotalMovimiento)+"<br>"
         }
-       
+
       }
       if (this.documento.forma_pago == "TRANSFERENCIA"){
         this.deudas.map(
           (e)=>{
             if(parseFloat(e.cobro) > parseFloat(e.saldo)){
-              mensajes += "En la "+ e.documento +" el valor a pagar es de $ " 
+              mensajes += "En la "+ e.documento +" el valor a pagar es de $ "
                 + this.commonService.formatNumberDos(e.cobro) + " y el saldo actual es de $ "
-                + this.commonService.formatNumberDos(e.saldo) + " la diferencia es de $ " 
+                + this.commonService.formatNumberDos(e.saldo) + " la diferencia es de $ "
                 + (this.commonService.formatNumberDos(e.cobro - e.saldo))+"<br>"
             }
           }
         )
       }
-      
-      
+
+
       this.deudas.map(
         (e: any, idx: number)=>{
           if(!e.tipo_desembolso){
@@ -1262,16 +1262,16 @@ export class EmisionComponent implements OnInit {
       )
 
       return (mensajes.length) ? reject(mensajes) : resolve(true)
-     
+
     });
   }
 
   async confirmSave(message, action) {
- 
+
     Swal.fire({
       title: "Atención!!",
       text: message,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',
@@ -1282,18 +1282,18 @@ export class EmisionComponent implements OnInit {
       if (result.value) {
         if (action == "SAVE_EMISION") {
           this.createRecDocumento();
-        } 
+        }
       }
     })
   }
 
- 
+
 
   createRecDocumento() {
-  
-   
-      
-    
+
+
+
+
     Swal.fire({
       icon: "warning",
       title: "¡Atención!",
@@ -1307,7 +1307,7 @@ export class EmisionComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-      
+
         this.msgSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let data = {
@@ -1315,7 +1315,7 @@ export class EmisionComponent implements OnInit {
           "mes": Number(moment(this.documento.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-          
+
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
 
@@ -1333,16 +1333,16 @@ export class EmisionComponent implements OnInit {
             this.documento.saldo = this.difCobroPago;
 
             this.documento.estado = "E";
-            
+
             this.deudas.forEach(e => {
               this.documento.fk_orden_pago = e.id_orden_pago
             })
-          
+
             let detailAsiento = this.asiento;
             let dataAsientoSave = {
               id_company: this.dataUser.id_empresa,
               doc_id: 0,
-              // date: this.pipe.transform(this.documento.fecha, 'yyyy-MM-dd'), 
+              // date: this.pipe.transform(this.documento.fecha, 'yyyy-MM-dd'),
               date: moment(this.documento.fecha).format('YYYY-MM-DD'),
               details: detailAsiento,
               total: this.totalCobro,
@@ -1371,11 +1371,11 @@ export class EmisionComponent implements OnInit {
                     tipo_desembolso: e.tipo_desembolso,
                     cuenta: e.cuenta,
                     tipo: e.tipo
-                    
+
 
                   }
                   this.documento.detalles.push(doc_det);
-                
+
                 }
                 else {
                   let doc_det = {
@@ -1396,14 +1396,14 @@ export class EmisionComponent implements OnInit {
 
                   }
                   this.documento.detalles.push(doc_det);
-                
+
                 }
               }
             });
-          
-            
-          } 
-          
+
+
+          }
+
           if(this.ordenesNomina.length > 0){
             this.ordenesNomina.forEach(e => {
               if (e.cobro > 0) {
@@ -1427,16 +1427,16 @@ export class EmisionComponent implements OnInit {
                     tipo_afectacion: e.tipo_afectacion,
                     devengado: e.devengado,
                     cobrado_pagado: e.cobrado_pagado,
-                    
+
 
                   }
                   this.documento.detalles.push(doc_det);
                 }
-              
+
               }
             })
           }
-          
+
             console.log(this.documento)
             // this.pagos.forEach(e => {
             //   if(e.valor > 0){
@@ -1485,12 +1485,12 @@ export class EmisionComponent implements OnInit {
                 });
               }
             );
-      
+
           } else {
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
           }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
@@ -1499,7 +1499,7 @@ export class EmisionComponent implements OnInit {
 
 
 
-        
+
       }else{
         this.lcargando.ctlSpinner(true);
       }
@@ -1648,8 +1648,8 @@ export class EmisionComponent implements OnInit {
       modalInvoice.componentInstance.totalCobro = this.totalCobro;
       modalInvoice.componentInstance.cuenta = this.cuenta
       modalInvoice.componentInstance.formaPago =this.documento.forma_pago
-     
-  
+
+
       let valid = true
       this.valorCuentas.forEach(
         (res: any) => {
@@ -1658,11 +1658,11 @@ export class EmisionComponent implements OnInit {
           }
         }
       )
-  
+
       if (valid) {
         this.valorCuentas.push({ banco: this.cuenta.name_banks, valor: 0 ,cuenta_contable: '', name_cuenta:''})
       }
-    
+
 
 
 
@@ -1735,7 +1735,7 @@ export class EmisionComponent implements OnInit {
   //       account: event.cuenta_contable,
   //       name: event.name_cuenta,
   //       detail: "",
-  //       credit:event.cobro, 
+  //       credit:event.cobro,
   //       debit:parseFloat('0.00').toFixed(2),
   //       centro: 0,
   //       tipo: 'A',
@@ -1748,17 +1748,17 @@ export class EmisionComponent implements OnInit {
   generaPreviewAsientoContable(){
     try {
       console.log(this.deudas)
-     
+
       let DetailCount = 0;
       if(this.documento.forma_pago == 'TRANSFERENCIA'){
-        
+
         if(this.deudas.length > 0){
           let cuentas=[]
           this.asiento = []
           console.log(this.valorCuentas)
-         
+
           if(this.valorCuentas.length > 0){
-           
+
             this.valorCuentas.map((element) => {
               this.asiento.push({
                 LoadOpcionCatalogoPresupuesto: false,
@@ -1768,7 +1768,7 @@ export class EmisionComponent implements OnInit {
                 account: element.cuenta_contable,
                 name: element.name_cuenta,
                 detail: "",
-                debit:parseFloat('0.00'), 
+                debit:parseFloat('0.00'),
                 credit:parseFloat(element.valor),
                 centro: 0,
                 tipo: 'A',
@@ -1777,12 +1777,12 @@ export class EmisionComponent implements OnInit {
                 tipo_afectacion: '',
                 devengado: parseFloat('0.00'),
                 cobrado_pagado:parseFloat('0.00'),
-    
+
               });
             });
           }
-        
-       
+
+
           this.deudas.forEach((element) => {
             if (element.detalles_cuentas.length > 0) {
               console.log(element.detalles_cuentas)
@@ -1793,10 +1793,10 @@ export class EmisionComponent implements OnInit {
                   codpresupuesto: detalle.codigo_partida,
                   valor_presupuesto:parseFloat(detalle.total) ,
                   account: detalle.cuenta_cxp,
-                  name: detalle.nombre_cuenta_cxp, 
+                  name: detalle.nombre_cuenta_cxp,
                   detail: "",
                   debit:parseFloat(detalle.total) ,
-                  credit:parseFloat('0.00'),  //elementDetail.valor, 
+                  credit:parseFloat('0.00'),  //elementDetail.valor,
                   centro: 0,
                   tipo: 'A',
                   tipo_detalle: 'Pago',
@@ -1820,10 +1820,10 @@ export class EmisionComponent implements OnInit {
                       codpresupuesto: 0,
                       valor_presupuesto:0,
                       account: elementDetail.cuentas?.codigo,
-                      name: elementDetail.cuentas?.nombre, 
+                      name: elementDetail.cuentas?.nombre,
                       detail: "",
                       debit:parseFloat(element.cobro) ,
-                      credit:parseFloat('0.00'),  //elementDetail.valor, 
+                      credit:parseFloat('0.00'),  //elementDetail.valor,
                       centro: 0,
                       tipo: 'A',
                       tipo_detalle: 'Pago',
@@ -1834,14 +1834,14 @@ export class EmisionComponent implements OnInit {
                       devengado: '',
                       cobrado_pagado: '',
                       fecha: element.fecha
-  
+
                     });
                     }
-  
+
                   });
                   console.log(this.asiento)
             }
-  
+
           DetailCount++
         });
         this.TotalizarAsiento();
@@ -1857,7 +1857,7 @@ export class EmisionComponent implements OnInit {
             account: this.cuenta.cuenta_contable,
             name: this.cuenta.name_cuenta,
             detail: "",
-            credit:this.totalCobro, 
+            credit:this.totalCobro,
             debit:parseFloat('0.00'),
             centro: 0,
             tipo: 'A',
@@ -1868,7 +1868,7 @@ export class EmisionComponent implements OnInit {
             cobrado_pagado: '',
 
           });
-  
+
           console.log(this.ordenesNomina)
           let cuentas_contables=[]
           let codigos_presupuesto=[]
@@ -1878,7 +1878,7 @@ export class EmisionComponent implements OnInit {
           })
           let cod ={ codigos:cuentas_contables}
           let codPre = {codigos_pre:codigos_presupuesto}
-                
+
           let cuentas_filter
           let presupuestos_filter
             this.apiSrv.getAccountsByCodigo(cod).subscribe(res2 => {
@@ -1886,7 +1886,7 @@ export class EmisionComponent implements OnInit {
               this.apiSrv.getPresupuestoByCodigo(codPre).subscribe(res3 => {
 
                 this.ordenesNomina.map((element) => {
-                console.log(res2['data']) 
+                console.log(res2['data'])
                   if(res2['data'].length > 0 ){
                     cuentas_filter =res2['data'].filter(d => d.codigo == element.fk_cuenta_contable)
                   }else{
@@ -1898,7 +1898,7 @@ export class EmisionComponent implements OnInit {
                     presupuestos_filter = undefined
                   }
                   console.log(cuentas_filter)
-  
+
                   this.asiento.push({
                     LoadOpcionCatalogoPresupuesto: false,
                     presupuesto: presupuestos_filter != undefined ? presupuestos_filter[0].nombre : '',
@@ -1918,14 +1918,14 @@ export class EmisionComponent implements OnInit {
                     cobrado_pagado: element.codigo_presupuesto != undefined ? parseFloat(element.cobro) : '',
                     });
                   DetailCount++
-    
+
               });
               this.TotalizarAsiento();
             })
           })
-         
+
         }
-  
+
       }
       //   if(this.documento.forma_pago =='NOTA DE DEBITO'){
       //     console.log(this.movimientoFilter)
@@ -1939,7 +1939,7 @@ export class EmisionComponent implements OnInit {
       //         account: e.cuenta,
       //         name: e.name_cuenta,
       //         detail: "",
-      //         credit:parseFloat('0.00').toFixed(2), 
+      //         credit:parseFloat('0.00').toFixed(2),
       //         debit:parseFloat(e.valor_deb),
       //         centro: 0,
       //         tipo: 'A',
@@ -1948,9 +1948,9 @@ export class EmisionComponent implements OnInit {
       //         tipo_afectacion: '',
       //         devengado: '',
       //         cobrado_pagado: '',
-  
+
       //       });
-         
+
       //     //  this.totalCobro = e.valor;
       //     })
 
@@ -1964,10 +1964,10 @@ export class EmisionComponent implements OnInit {
       //                   codpresupuesto: 0,
       //                   valor_presupuesto:0,
       //                   account: elementDetail.cuentas?.codigo,
-      //                   name: elementDetail.cuentas?.nombre, 
+      //                   name: elementDetail.cuentas?.nombre,
       //                   detail: "",
       //                   credit:parseFloat(element.cobro) ,
-      //                   debit:parseFloat('0.00').toFixed(2),  //elementDetail.valor, 
+      //                   debit:parseFloat('0.00').toFixed(2),  //elementDetail.valor,
       //                   centro: 0,
       //                   tipo: 'A',
       //                   tipo_detalle: 'Pago',
@@ -1977,21 +1977,21 @@ export class EmisionComponent implements OnInit {
       //                   tipo_afectacion: '',
       //                   devengado: '',
       //                   cobrado_pagado: '',
-    
+
       //                 });
-    
+
       //               });
       //               console.log(this.asiento)
       //         }
-    
+
       //       DetailCount++
-    
+
       //     }));
       //     }
       //     this.TotalizarAsiento();
       // }
-      
-     
+
+
     } catch (err) {
       console.log(err)
       //alert('Something went wrong, try again later!')
@@ -2026,19 +2026,19 @@ export class EmisionComponent implements OnInit {
           const element =this.asiento[index];
           arrayDebit.push(element.debit)
           arrayCredit.push(element.credit)
-          TotalDebito +=  element.debit 
-          TotalCredito +=  element.credit 
-          TotalPresupuesto +=  element.valor_presupuesto 
-         
+          TotalDebito +=  element.debit
+          TotalCredito +=  element.credit
+          TotalPresupuesto +=  element.valor_presupuesto
+
         }
-    
+
         // // await Promise.all();
         // TotalDebito = this.asiento.reduce((acc: number, curr) => {
         //   console.log(curr.debit)
         //   return acc + parseFloat(curr.debit)
         // }, 0)
         // TotalCredito = this.asiento.reduce((acc: number, curr) => {
-        //  return acc + parseFloat(curr.credit) 
+        //  return acc + parseFloat(curr.credit)
         // }, 0)
         // TotalPresupuesto = this.asiento.reduce((acc: number, curr) => {
         //   return acc + parseFloat(curr.valor_presupuesto)
@@ -2074,7 +2074,7 @@ export class EmisionComponent implements OnInit {
       "mes": Number(moment(this.documento.fecha).format('MM')),
     }
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
         this.msgSpinner = "Editando Emisión de Pago";
@@ -2082,7 +2082,7 @@ export class EmisionComponent implements OnInit {
 
         this.disabledComprobante = false
         let data2 = {
-    
+
           comprobante_egreso: this.documento.comprobante_egreso
         }
         console.log(data2)
@@ -2103,7 +2103,7 @@ export class EmisionComponent implements OnInit {
                 if (result.isConfirmed) {
                   console.log("hola")
                   this.disabledComprobante = true
-    
+
                 }
               });
             }
@@ -2118,7 +2118,7 @@ export class EmisionComponent implements OnInit {
                 confirmButtonColor: '#20A8D8',
               });
             }
-    
+
           },
           (error) => {
             console.log(error)
@@ -2126,13 +2126,13 @@ export class EmisionComponent implements OnInit {
             this.toastr.info(error.error.message);
           }
         )
-        
-  
+
+
       } else {
         this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
         this.lcargando.ctlSpinner(false);
       }
-  
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
@@ -2151,17 +2151,17 @@ export class EmisionComponent implements OnInit {
       const modal = this.modalService.open(MovimientosBancariosComponent, { size: "xl", backdrop: 'static', windowClass: 'viewer-content-general' })
       modal.componentInstance.cuenta = this.cuenta
     }
-   
+
   }
   removeActivosFinancieros(index){
     this.movimiento.splice(index,1);
   }
- 
+
   anularPago() {
 
     let msgInvalid = ''
 
-   
+
     if (this.documento.motivo_anulacion == "" || this.documento.motivo_anulacion == undefined) msgInvalid += 'Debe seleccionar un motivo de anulación.<br>';
 
     if (msgInvalid.length > 0) {
@@ -2190,7 +2190,7 @@ export class EmisionComponent implements OnInit {
           "mes": Number(moment(this.documento.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-          
+
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
 
@@ -2204,7 +2204,7 @@ export class EmisionComponent implements OnInit {
               (res) => {
                 this.lcargando.ctlSpinner(false);
                 console.log(res);
-                
+
                 this.documento = res['data'];
                 // this.documento.fecha = res['data'].fecha.split(' ')[0];
                 this.formReadOnly = true;
@@ -2214,7 +2214,7 @@ export class EmisionComponent implements OnInit {
                 this.vmButtons[6].habilitar = true;
                 console.log(this.documento);
                 // this.guardarDeuda(res['data'].id_liquidacion);
-                
+
                 Swal.fire({
                   icon: "success",
                   title: "Pago anulado exitosamente",
@@ -2236,23 +2236,23 @@ export class EmisionComponent implements OnInit {
                 });
               }
             );
-            
-      
+
+
           } else {
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
           }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
           })
-        
+
       }else {
         this.lcargando.ctlSpinner(false);
       }
-    });   
-    
+    });
+
   }
 
   anulacionSelected(event){
@@ -2264,11 +2264,11 @@ export class EmisionComponent implements OnInit {
       }else{
         this.vmButtons[6].habilitar = false;
       }
-     
+
     }else{
       this.vmButtons[6].habilitar = true;
     }
-  
+
   }
 
 

@@ -65,7 +65,7 @@ export class BodegaComprasComponent implements OnInit {
     private commonVarSrvice: CommonVarService,
     private confirmationDialogService: ConfirmationDialogService) {
     this.commonVarSrvice.refreshPurchases.asObservable().subscribe(res => {
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getDataTableCompraIngreso();
       });

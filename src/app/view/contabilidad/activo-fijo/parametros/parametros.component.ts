@@ -304,7 +304,7 @@ export class ParametrosComponent implements OnInit {
     this.ocultarBoton(2, false);
     this.ocultarMostrar("show", "hide");
     this.parametros = {cuentaActivo: "", cuentaDepreciacion: ""};
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.obtenerListado();
     });

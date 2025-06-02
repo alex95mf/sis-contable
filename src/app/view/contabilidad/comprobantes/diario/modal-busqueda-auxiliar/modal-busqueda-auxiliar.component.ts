@@ -1,5 +1,6 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { LazyLoadEvent, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CustonService } from 'src/app/config/custom/app-custom.service';
 

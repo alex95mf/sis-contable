@@ -1,6 +1,6 @@
 <!-- [rows]="2" -->
 <p-table [value]="dataPrestamosResponseI" [lazy]="true" (onLazyLoad)="getPrestamos($event)" selectionMode="single"
-    [(selection)]="selectedProduct2" (onRowSelect)="onRowSelectPrestamo($event)" responsiveLayout="scroll"
+     (onRowSelect)="onRowSelectPrestamo($event)" responsiveLayout="scroll"
     [paginator]="true" [rows]="rows" [totalRecords]="totalRecords" [loading]="loading" [showCurrentPageReport]="true"
     currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
     [rowsPerPageOptions]="[10 , 25, 50]">

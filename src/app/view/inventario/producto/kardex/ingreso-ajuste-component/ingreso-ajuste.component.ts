@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 import * as moment from "moment";
 import * as myVarGlobals from "../../../../../global";
 import "sweetalert2/src/sweetalert2.scss";
-const Swal = require("sweetalert2");
+import Swal from 'sweetalert2';
 
 @Component({
 standalone: false,
@@ -59,7 +59,7 @@ export class IngresoAjusteComponent implements OnInit {
     private kardexSrv: KardexService,
     private commonVarSrvice: CommonVarService) { }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {
     		this.vmButtons = [
       { orig: "btnsAjusteK", paramAccion: "", boton: { icon: "fa fa-plus-square-o", texto: "NUEVO" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-warning boton btn-sm", habilitar: false, imprimir: false},
       { orig: "btnsAjusteK", paramAccion: "", boton: { icon: "fas fa-file", texto: "MODIFICAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary boton btn-sm", habilitar: false, imprimir: false},
@@ -70,7 +70,7 @@ export class IngresoAjusteComponent implements OnInit {
           }
 
     /* validation  */
-  
+
     validatePermission() {
       this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
       let params = {
@@ -83,7 +83,7 @@ export class IngresoAjusteComponent implements OnInit {
           if (this.permissions.ver == "0") {
             this.toastr.info(
               "Usuario no tiene Permiso para ver el formulario de Ajuste - Kardex"
-            );  
+            );
             this.vmButtons = [];
           this.closeModal();
           } else {
@@ -138,7 +138,7 @@ export class IngresoAjusteComponent implements OnInit {
   grupoProduct(){
     this.kardexSrv.getGrupo().subscribe(res => {
       this.arrayGrupo = res["data"];
-     
+
     },);
   }
 
@@ -151,7 +151,7 @@ export class IngresoAjusteComponent implements OnInit {
     this.ajuste.producto = productInf.nombre;
     this.id_producto = productInf.id_producto;
     this.id_empresa = productInf.fk_empresa;
-    this.stock = productInf.stock; 
+    this.stock = productInf.stock;
      this.ajuste.detalle = "Ajuste Kardex del Producto" + " " + this.ajuste.producto;
   }
 
@@ -160,11 +160,11 @@ export class IngresoAjusteComponent implements OnInit {
     this.ajuste.tipo = e;
   }
 
-  
+
   getFilterMotivo(e) {
     this.ajuste.motivo = e;
     this.ajuste.detalle = "Ajuste Kardex del Producto" + " " + this.ajuste.producto + " " + "con motivo : " + this.ajuste.motivo;
-    
+
 
   }
 
@@ -177,7 +177,7 @@ export class IngresoAjusteComponent implements OnInit {
   }
 
 
-  cleanAjuste() { 
+  cleanAjuste() {
     this.ajuste.detalle = "Ajuste Kardex del Producto";
     this.ajuste.tipo= "";
     this.ajuste.motivo= "";
@@ -200,17 +200,17 @@ export class IngresoAjusteComponent implements OnInit {
       this.toastr.info("Usuario no tiene permiso realizar el ajuste");
     } else {
       if (
-        this.ajuste.producto == undefined 
+        this.ajuste.producto == undefined
       ) {
         this.toastr.info("Ingrese Producto!!");
         let autFocus = document.getElementById("IdProdcuto").focus();
       } else if (
-        this.ajuste.tipo == undefined 
+        this.ajuste.tipo == undefined
       ) {
         this.toastr.info("Ingrese Tipo de Ajuste !!");
         let autFocus = document.getElementById("IdTipo").focus();
       } else if (
-        this.ajuste.motivo == undefined 
+        this.ajuste.motivo == undefined
       ) {
         this.toastr.info("Ingrese Motivo de Ajuste !!");
         let autFocus = document.getElementById("IdMotivo").focus();
@@ -220,17 +220,17 @@ export class IngresoAjusteComponent implements OnInit {
         this.toastr.info("Valor debe ser diferente de cero!!");
         let autFocus = document.getElementById("IdCantidad").focus();
       } else if (
-        this.ajuste.costoActual  == 0 
+        this.ajuste.costoActual  == 0
       ) {
         this.toastr.info("Valor debe ser diferente de cero !!");
         let autFocus = document.getElementById("IdCosto").focus();
       } else if (
-        this.ajuste.total  == 0 
+        this.ajuste.total  == 0
       ) {
         this.toastr.info("Valor debe ser diferente de cero !!");
         let autFocus = document.getElementById("IdTotal").focus();
       } else if (
-        this.ajuste.detalle == undefined 
+        this.ajuste.detalle == undefined
       ) {
         this.toastr.info("Ingrese detalle de Ajuste - Kardex !!");
         let autFocus = document.getElementById("IdDetalle").focus();
@@ -243,7 +243,7 @@ export class IngresoAjusteComponent implements OnInit {
     }
   }
 
-  
+
   modAjuste() {
     let data = {
       fk_empresa: this.id_empresa,
@@ -251,7 +251,7 @@ export class IngresoAjusteComponent implements OnInit {
       fk_typ_doc:  this.ajuste.tipo == "Ingresos"  ? 14  : 15,
       tipo: this.ajuste.tipo,
       movimiento: this.ajuste.tipo == "Ingresos"  ? "Compras"  : "Ventas",
-      detalle: this.ajuste.detalle, 
+      detalle: this.ajuste.detalle,
       cantidad: parseFloat(this.ajuste.cantidad),
       costoUnitario: parseFloat(this.ajuste.total).toFixed(2),
       costoTotal: parseFloat(this.ajuste.total).toFixed(2),
@@ -281,7 +281,7 @@ export class IngresoAjusteComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: message,
-      type: "warning",
+      icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -295,4 +295,4 @@ export class IngresoAjusteComponent implements OnInit {
     });
   }
 
-} 
+}

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { CommonService } from '../../../services/commonServices';
 import { ProGeneracionDeRetencionService } from './pro-generacion-de-retencion.service';
-import { CierreMesService } from '../ciclos-contables/cierre-de-mes/cierre-mes.service'; 
+import { CierreMesService } from '../ciclos-contables/cierre-de-mes/cierre-mes.service';
 import * as myVarGlobals from '../../../global';
 import { ToastrService } from 'ngx-toastr';
 
@@ -142,7 +142,7 @@ export class GeneracionDeRetencionComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
     this.fecha_desde= moment(this.firstday).format('YYYY-MM-DD')
     this.fecha_hasta= moment(this.today).format('YYYY-MM-DD')
 
@@ -228,7 +228,7 @@ export class GeneracionDeRetencionComponent implements OnInit {
     }
     // let proveedor
     // if(this.proveedor!= '' || this.proveedor!= undefined){
-    //    proveedor = this.proveedor 
+    //    proveedor = this.proveedor
     // }else{
     //   proveedor = ''
     // }
@@ -265,7 +265,7 @@ export class GeneracionDeRetencionComponent implements OnInit {
       Swal.fire({
         title: "Atención",
         text: "Al ejecutar el proceso se anulara los registro, los mismos no podran ser reversados. \n ¿Desea continuar?",
-        //type: "warning",
+        //icon: "warning",
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',
@@ -451,9 +451,9 @@ export class GeneracionDeRetencionComponent implements OnInit {
     });
     /*
           this.ref.onClose.subscribe((cuentas: any) => {
-    
-            
-    
+
+
+
           });*/
   }
 
@@ -516,7 +516,7 @@ export class GeneracionDeRetencionComponent implements OnInit {
             "mes": Number(moment(this.mes_actual).format('MM'))
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
 
@@ -543,7 +543,7 @@ export class GeneracionDeRetencionComponent implements OnInit {
                       };
 
                       this.progeneracionderetencionService.GeneraRetencionesCompraProv(datosRetencion).subscribe(res => {
-                  
+
                         this.selectedRetencionesElement = [];
                         this.RetencionesPendientes();
                         this.lcargando.ctlSpinner(true);
@@ -565,19 +565,19 @@ export class GeneracionDeRetencionComponent implements OnInit {
                 } else {
                   this.toastr.info("Es necesario seleccionar las compras a las que se desea aplicar retención");
                 }
-            
-        
+
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
             })
 
- 
+
 
 
   }
@@ -602,7 +602,7 @@ export class GeneracionDeRetencionComponent implements OnInit {
       fecha_hasta:this.fecha_hasta,
       proveedor: this.proveedor
     }
-    
+
    // this.progeneracionderetencionService.getRetencionesGeneradas(year, this.mes_actual).subscribe(res => {
     this.progeneracionderetencionService.getRetencionesGeneradas(data).subscribe(res => {
       console.log(res);
@@ -643,7 +643,7 @@ export class GeneracionDeRetencionComponent implements OnInit {
     let fecha_desde = this.fecha_desde
     let fecha_hasta = this.fecha_hasta
     let proveedor = this.proveedor
-   
+
     window.open(environment.ReportingUrl + "rpt_retenciones_generadas.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&fecha_desde=" + fecha_desde + "&fecha_hasta=" + fecha_hasta + "&anio=" + anio + "&mes=" + mes+ "&proveedor=" + proveedor,'_blank')
     console.log(environment.ReportingUrl + "rpt_retenciones_generadas.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&fecha_desde=" + fecha_desde + "&fecha_hasta=" + fecha_hasta + "&anio=" + anio + "&mes=" + mes + "&proveedor=" + proveedor)
   }
@@ -654,7 +654,7 @@ export class GeneracionDeRetencionComponent implements OnInit {
     let fecha_desde = this.fecha_desde
     let fecha_hasta = this.fecha_hasta
     let proveedor = this.proveedor
-   
+
     window.open(environment.ReportingUrl + "rpt_retenciones_pendientes.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&fecha_desde=" + fecha_desde + "&fecha_hasta=" + fecha_hasta + "&anio=" + anio + "&mes=" + mes+ "&proveedor=" + proveedor,'_blank')
     console.log(environment.ReportingUrl + "rpt_retenciones_pendientes.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&fecha_desde=" + fecha_desde + "&fecha_hasta=" + fecha_hasta + "&anio=" + anio + "&mes=" + mes + "&proveedor=" + proveedor)
   }

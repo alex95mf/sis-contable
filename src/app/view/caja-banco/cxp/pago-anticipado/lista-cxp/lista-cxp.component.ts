@@ -46,7 +46,7 @@ export class ListaCxpComponent implements OnInit {
     if (valor=="I"){
       return "ANULADO";
     }
-  } 
+  }
 
   /**LISTADO */
   dataSourceCxP:any = [];
@@ -82,23 +82,23 @@ export class ListaCxpComponent implements OnInit {
       setTimeout(() => {
         this.dtTriggerCxP.next(null);
       }, 50);
-      
+
     }, (error) => {
 
     });
   }
-  
+
   recargarCxP(lIdProveedor, lfecha, lEstado){
     if(this.dtElementCxP.dtInstance){
-      this.dtElementCxP.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElementCxP.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.listadoGeneralCxP(lIdProveedor, lfecha, lEstado);
       });
     }else{
       this.listadoGeneralCxP(lIdProveedor, lfecha, lEstado);
     }
-  }  
-  
+  }
+
   /**LISTADO */
 
 }

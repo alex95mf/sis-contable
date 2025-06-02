@@ -227,7 +227,7 @@ export class ConsultaSupplierComponent implements OnInit {
     this.consulSrv.getTreeProducts({ inactive: this.checkAuth, flag: "I" }).subscribe(res => {
       this.varAux = " Seleccione un grupo";
       this.fields = { dataSource: res['data'], value: 'id_grupo', text: 'name', child: 'subChild', expanded: 'expanded' };
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.tableAux(JSON.parse(localStorage.getItem('providers')));
       });
@@ -278,7 +278,7 @@ export class ConsultaSupplierComponent implements OnInit {
     } else if (this.id_grupo_select != "" && this.proveedorSelect != 0) {
       this.arrayProveedor = this.arrayProveedor.filter(e => e.id_proveedor == this.proveedorSelect && e.linea == this.id_grupo_select && e.clase == this.supplierTipo);
     }
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.tableAux(this.arrayProveedor);
     });

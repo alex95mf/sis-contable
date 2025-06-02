@@ -15,7 +15,7 @@ standalone: false,
 })
 export class ComisariaCertificadoComponent implements OnInit {
 
-  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
+  @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = "Certificación de no adeudar";
   msgSpinner: string;
 
@@ -58,7 +58,7 @@ export class ComisariaCertificadoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
+
     this.vmButtons = [
       {
         orig: "btnsComiCerti",
@@ -71,15 +71,15 @@ export class ComisariaCertificadoComponent implements OnInit {
         clase: "btn btn-danger boton btn-sm",
         habilitar: false,
       },
-      // { 
-      //   orig: "btnsRenConsultaReporte", 
-      //   paramAccion: "", 
-      //   boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, 
-      //   permiso: true, 
-      //   showtxt: true, 
-      //   showimg: true, 
-      //   showbadge: false, 
-      //   clase: "btn btn-success boton btn-sm", 
+      // {
+      //   orig: "btnsRenConsultaReporte",
+      //   paramAccion: "",
+      //   boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" },
+      //   permiso: true,
+      //   showtxt: true,
+      //   showimg: true,
+      //   showbadge: false,
+      //   clase: "btn btn-success boton btn-sm",
       //   habilitar: false
       // },
     ];
@@ -93,7 +93,7 @@ export class ComisariaCertificadoComponent implements OnInit {
     setTimeout(() => {
       this.fillCatalog()
     }, 75)
-    
+
   }
   periodoSelected(evt: any, year:any){
     console.log(evt.getFullYear())
@@ -122,7 +122,7 @@ export class ComisariaCertificadoComponent implements OnInit {
       (res) => {
          console.log(res);
         this.tipo_doc = res["data"]["DOCUMENTO"];
-       
+
 
         // console.log(this.catalog);
         this.lcargando.ctlSpinner(false);
@@ -159,7 +159,7 @@ export class ComisariaCertificadoComponent implements OnInit {
       this.filter['num_documento'] = this.NoDocumento
 
     }
-   
+
       if (this.tipoDocumento == 'Cedula') {
           this.contribuyente['cedula'] = this.NoDocumento
           this.contribuyente['ruc'] = null
@@ -180,7 +180,7 @@ export class ComisariaCertificadoComponent implements OnInit {
             this.buscarContribuyente()
           }
       } else if (this.tipoDocumento == 'Ruc') {
-        
+
           this.contribuyente['ruc'] = this.NoDocumento
           this.contribuyente['cedula'] = null
           this.contribuyente['num_documento'] = this.NoDocumento
@@ -199,7 +199,7 @@ export class ComisariaCertificadoComponent implements OnInit {
           } else {
             this.buscarContribuyente()
           }
-        
+
 
       } else if (this.tipoDocumento == 'Pasaporte') {
         this.contribuyente['ruc'] = null
@@ -224,7 +224,7 @@ export class ComisariaCertificadoComponent implements OnInit {
 
         //this.NOCedula = 18
       }
-    
+
     }
   }
 
@@ -249,15 +249,15 @@ export class ComisariaCertificadoComponent implements OnInit {
               confirmButtonColor: "#d33",
               confirmButtonText: "Ok",
             }).then((result) => {
-      
+
             });
             this.validacionBusquedaContri = true
-          
+
           } else {
             this.nombreContribuyente= res['data'][0].razon_social
             this.fechaNacimiento= res['data'][0].fecha_nacimiento
             this.id_contribuyente= res['data'][0].id_cliente
-            
+
           }
         },
         (error) => {
@@ -266,7 +266,7 @@ export class ComisariaCertificadoComponent implements OnInit {
           this.toastr.info('El contribuyente no se encuentra registrado');
         }
       );
-    
+
   }
 
   selectedTipoCert(event){
@@ -346,11 +346,11 @@ export class ComisariaCertificadoComponent implements OnInit {
   }
 
   generarCertificado(){
-   
+
     Swal.fire({
       title: "Atención",
       text: "¿Desea generar el certificado?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',
@@ -377,11 +377,11 @@ export class ComisariaCertificadoComponent implements OnInit {
             window.open(environment.ReportingUrl + "rep_rentas_comisaria_certificado_sin_deuda_predio.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_contribuyente=" + this.id_contribuyente, '_blank')
           }
         }
-       
-        
+
+
       }
     });
-    
+
   }
 
   // btnExportar() {
@@ -413,10 +413,10 @@ export class ComisariaCertificadoComponent implements OnInit {
   //         };
   //         //this.reportes.push({ ...o });
   //         if (element.descripcion == this.selectedReporte){
-  //           window.open(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting 
+  //           window.open(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting
   //           + "&j_password=" + environment.PasswordReporting+"&p_anio=" + this.filter.periodo.getFullYear()+"&p_mes=" + this.mes_actual, '_blank')
 
-  //           console.log(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting 
+  //           console.log(environment.ReportingUrl +`${element.reporte}`+".xlsx?&j_username=" + environment.UserReporting
   //           + "&j_password=" + environment.PasswordReporting+"&p_anio=" + this.filter.periodo.getFullYear()+"&p_mes=" + this.mes_actual);
 
   //         }
@@ -428,7 +428,7 @@ export class ComisariaCertificadoComponent implements OnInit {
   //       this.lcargando.ctlSpinner(false);
   //     }
   //   )
-    
+
   // }
 
   limpiarFiltros() {
@@ -442,7 +442,7 @@ export class ComisariaCertificadoComponent implements OnInit {
     this.mostrarBtnVerificar  = true;
     this.mostrarBtnCertificado = false;
     this.disabledBuscarContri= false;
-   
+
 
 }
 

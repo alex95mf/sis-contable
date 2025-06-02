@@ -606,37 +606,37 @@ export class ProveedoresComponent implements OnInit {
     this.processingPayment = false;
     if (evt == 4) {
       let filter = this.paymentsAux;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.refreshFilter(filter);
       });
     } else if (evt == 1) {
       let filter = this.paymentsAux.filter(el => this.current_date <= el.fecha_venc && el.valor_saldo > 0);
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.refreshFilter(filter);
       });
     } else if (evt == 2) {
       let filter = this.paymentsAux.filter(el => this.current_date > el.fecha_venc && el.valor_saldo > 0);
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.refreshFilter(filter);
       });
     } else if (evt == 3) {
       let filter = this.paymentsAux.filter(el => el.valor_saldo === 0);
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.refreshFilter(filter);
       });
     } else if (evt == 5) {
       let filter = this.paymentsAux.filter(el => this.current_date <= el.fecha_venc && el.valor_saldo > 0 || this.current_date > el.fecha_venc && el.valor_saldo > 0);
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.refreshFilter(filter);
       });
     } else {
       let filter = this.paymentsAux;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.refreshFilter(filter);
       });
@@ -662,7 +662,7 @@ export class ProveedoresComponent implements OnInit {
 
   rerender(): void {
     this.processingPayment = false;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.AvailableCxPAux();
     });

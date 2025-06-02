@@ -204,7 +204,7 @@ export class ValeComponent implements OnInit {
     this.dataDT = [];
     this.arrayMov = [];
     if (this.smallBox.fk_caja_chica != 0) {
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getDataTableMovRerender();
       });
@@ -284,7 +284,7 @@ export class ValeComponent implements OnInit {
     this.btnUpdated = false;
     this.vmButtons[0].habilitar = false;
     this.vmButtons[2].habilitar = true;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       /* this.getDataTableGlobals(); */
       this.getAccountSmallBox();

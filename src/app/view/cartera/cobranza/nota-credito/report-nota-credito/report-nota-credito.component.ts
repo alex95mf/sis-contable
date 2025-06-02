@@ -73,8 +73,8 @@ export class ReportNotaCreditoComponent implements OnInit {
       this.getTableReport();
       this.getClientes();
     }
-  
- /*    getPermisions() {   
+
+ /*    getPermisions() {
       this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
       let id_rol = this.dataUser.id_rol;
       let data = {
@@ -108,11 +108,11 @@ export class ReportNotaCreditoComponent implements OnInit {
           $('#tablaReporNotCredcus').DataTable().button( '.buttons-excel' ).trigger();
         break;
         case "IMPRIMIR":
-          $('#tablaReporNotCredcus').DataTable().button( '.buttons-print' ).trigger();       
+          $('#tablaReporNotCredcus').DataTable().button( '.buttons-print' ).trigger();
         break;
         case "PDF":
           $('#tablaReporNotCredcus').DataTable().button( '.buttons-pdf' ).trigger();
-        break; 
+        break;
       }
     }
 
@@ -132,7 +132,7 @@ export class ReportNotaCreditoComponent implements OnInit {
       this.reportesSrv.getCatalogs(data).subscribe(res => {
         this.arrayMotivos = res["data"]["NOTA CLIENTE"];
         this.getsucursales();
-        
+
       }, (error) => {
         this.toastr.info(error.error.message);
       });
@@ -157,7 +157,7 @@ export class ReportNotaCreditoComponent implements OnInit {
         this.toastr.info(error.error.message);
       })
     }
-  
+
     getTableReport() {
       let data = {
         dateFrom: moment(this.fromDatePicker).format('YYYY-MM-DD'),
@@ -211,7 +211,7 @@ export class ReportNotaCreditoComponent implements OnInit {
       this.vmButtons[0].habilitar = true;
       this.vmButtons[1].habilitar = true;
       this.vmButtons[2].habilitar = true;
-  } 
+  }
     setTimeout(() => {
       this.dtTrigger.next(null);
     }, 50);
@@ -223,16 +223,16 @@ export class ReportNotaCreditoComponent implements OnInit {
     this.toastr.info(error.error.message);
   });
   }
-  
+
   rerender(): void {
   this.validaDt = false;
-  this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  this.dtElement.dtInstance.then((dtInstance: any) => {
     dtInstance.destroy();
     this.getTableReport();
   });
   }
 
-  filterTagente(data){ 
+  filterTagente(data){
     if (this.Tagente != 0) {
       this.Tagente = data;
       this.rerender();
@@ -241,7 +241,7 @@ export class ReportNotaCreditoComponent implements OnInit {
     }
   }
 
-  filterAgente(data){ 
+  filterAgente(data){
   if (this.agente != 0) {
     this.agente = data;
     this.rerender();
@@ -250,7 +250,7 @@ export class ReportNotaCreditoComponent implements OnInit {
   }
 }
 
-filterMotivo(data){ 
+filterMotivo(data){
   if (this.motivo != 0) {
     this.motivo = data;
     this.rerender();
@@ -259,7 +259,7 @@ filterMotivo(data){
   }
 }
 
-filterSucursal(data){ 
+filterSucursal(data){
   if (this.sucursal != 0) {
     this.sucursal = data;
     this.rerender();
@@ -268,7 +268,7 @@ filterSucursal(data){
   }
 }
 
-filterEstado(data){ 
+filterEstado(data){
   if (this.statusFilter != 0) {
     this.statusFilter = data;
     this.rerender();
@@ -286,7 +286,7 @@ informaciondtlimpiar(){
   this.rerender();
  }
 
-  
+
  informaDocumento(dt,i) {
 /*   this.processingtwo = true; */
   $('#modalReportnotaCredito').appendTo("body").modal('show');
@@ -312,7 +312,7 @@ informaciondtlimpiar(){
   this.dtInformacion.name_user_aprobated  =  (dt.filter_doc != null) ? 'Ninguno' : dt.name_user_aprobated;
 
 
-} 
+}
 
 closeModal() {
   ($("#modalReportnotaCredito") as any).modal("hide");
@@ -324,5 +324,5 @@ closeModal() {
 closedataModal(){
   ($("#modalNCreditoReport") as any).modal("hide");
 }
- 
+
 }

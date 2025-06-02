@@ -729,7 +729,7 @@ console.log(moment(this.selected_anio).format('YYYY'))
     } else {
       this.validaDt = false;
       this.infoDt = [];
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.validaDt = true;
         this.infoDt = JSON.parse(localStorage.getItem('conciliation'));
@@ -848,7 +848,7 @@ compararMesConFecha(mes: number, fecha: any): boolean {
       Swal.fire({
         title: "Confirmar!!",
         text: "Desea Guardar  un borrador de la conciliación?",
-        type: "warning",
+        icon: "warning",
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',
@@ -1214,7 +1214,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
       Swal.fire({
         title: "Atención!!",
         text: "¿Seguro desea habilitar la opción de editar una conciliación ya generada?",
-        //type: "warning",
+        //icon: "warning",
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',
@@ -1308,7 +1308,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
         Swal.fire({
           title: "Atención!!",
           text: "Seguro desea realizar la conciliación?",
-          //type: "warning",
+          //icon: "warning",
           showCancelButton: true,
           cancelButtonColor: '#DC3545',
           confirmButtonColor: '#13A1EA',

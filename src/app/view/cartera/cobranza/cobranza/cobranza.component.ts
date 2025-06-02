@@ -875,37 +875,37 @@ export class CobranzaComponent implements OnInit {
     this.processingBilling = false;
     if (evt == 4) {
       let filter = this.billingAux;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.refreshFilter(filter);
       });
     } else if (evt == 1) {
       let filter = this.billingAux.filter(el => this.current_date <= el.fecha_venc && el.valor_saldo > 0);
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.refreshFilter(filter);
       });
     } else if (evt == 2) {
       let filter = this.billingAux.filter(el => this.current_date > el.fecha_venc && el.valor_saldo > 0);
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.refreshFilter(filter);
       });
     } else if (evt == 3) {
       let filter = this.billingAux.filter(el => el.valor_saldo === 0);
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.refreshFilter(filter);
       });
     } else if (evt == 5) {
       let filter = this.billingAux.filter(el => this.current_date <= el.fecha_venc && el.valor_saldo > 0 || this.current_date > el.fecha_venc && el.valor_saldo > 0);
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
       this.refreshFilter(filter, 1);
       });
     } else {
       let filter = this.billingAux;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.refreshFilter(filter);
       });
@@ -1129,7 +1129,7 @@ export class CobranzaComponent implements OnInit {
   rerender(): void {
     this.lcargando.ctlSpinner(true);
     this.processingBilling = false;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getBillingAux();
     });
@@ -1254,7 +1254,7 @@ export class CobranzaComponent implements OnInit {
     });
     this.processingBilling = false;
 
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       if (evt == 0) {
         let inf = JSON.parse(localStorage.getItem('cxc'))

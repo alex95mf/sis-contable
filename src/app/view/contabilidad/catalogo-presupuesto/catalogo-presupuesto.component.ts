@@ -413,14 +413,14 @@ export class CatalogoPresupuestoComponent implements OnInit {
 
     if (result.isConfirmed) {
       this.isCreando = true
-  
+
       this.numCatalogoCodigo = null
       this.nameCatalogoPresupuesto = null
       this.descripCatalogoPresupuesto = null
       this.estadoCatalogoPresupuesto = 'A'
       this.codigoRelacionado = '0'
       this.tipoCatalogoPresupuesto == 'GRUPO'
-  
+
       this.vmButtons[2].habilitar = false
       this.vmButtons[3].habilitar = true
     }
@@ -444,9 +444,9 @@ export class CatalogoPresupuestoComponent implements OnInit {
       } else if (response.isDenied) {  // DETALLE
         this.tipoCatalogoPresupuesto = 'DETALLE'
       }
-    } 
-    this.codigoRelacionado = (this.tipoCatalogoPresupuesto == 'DETALLE') 
-      ? this.codigoRelacionado 
+    }
+    this.codigoRelacionado = (this.tipoCatalogoPresupuesto == 'DETALLE')
+      ? this.codigoRelacionado
       : this.numCatalogoCodigo
     this.estadoCatalogoPresupuesto = 'A'
     this.descripCatalogoPresupuesto = null
@@ -486,19 +486,19 @@ export class CatalogoPresupuestoComponent implements OnInit {
     try {
       // this.mensajeSppiner = 'Validando datos'
       await this.validateData()
-      
+
       try {
         let response = await Swal.fire({
-          
+
           title: "Atención!!",
           text: "Seguro/a desea guardar la Partida?",
-          //type: "warning",
+          //icon: "warning",
           showCancelButton: true,
           cancelButtonColor: '#DC3545',
           confirmButtonColor: '#13A1EA',
           confirmButtonText: "Aceptar"
         })
-        
+
         if (response.isConfirmed) {
           // Almacenar la cuenta
           this.lcargando.ctlSpinner(true)
@@ -624,7 +624,7 @@ export class CatalogoPresupuestoComponent implements OnInit {
           // const grid = Fancy.getWidget('GridPlanCuenta');
           // console.log(grid);
           // grid.setTitle('New Title');
-         
+
 
         }, error => {
           this.lcargando.ctlSpinner(false);
@@ -641,7 +641,7 @@ export class CatalogoPresupuestoComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: "Seguro desea modificar la Partida?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',
@@ -690,7 +690,7 @@ export class CatalogoPresupuestoComponent implements OnInit {
           this.mensajeSppiner = 'Actualizando Catalogo Presupuestario'
           let response = await this.pCuentasService.updateCuenta({catalogo: data})
           console.log(response)
-  
+
           // const grid = Fancy.getWidget('GridPlanCuenta');
           // grid.showLoadMask('Actualizando...');
           this.CargarPlanCuentaArbol(this.grid);
@@ -702,7 +702,7 @@ export class CatalogoPresupuestoComponent implements OnInit {
           this.lcargando.ctlSpinner(false)
           this.toastr.error(err.error?.message, 'Error actualizando Catalogo Presupuestario')
         }
-        
+
         /* this.pCuentasService.updateCuenta(data).subscribe(res => {
 
           this.disabledNew = false;

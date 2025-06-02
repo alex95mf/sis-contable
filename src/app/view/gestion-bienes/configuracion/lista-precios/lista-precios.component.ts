@@ -350,7 +350,7 @@ export class ListaPreciosComponent implements OnInit {
 
 			this.infoData = response;
 			setTimeout(() => {
-				this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+				this.dtElement.dtInstance.then((dtInstance: any) => {
 					dtInstance.destroy()
 					this.dtTrigger.next(null);
 				})

@@ -1,6 +1,7 @@
 import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { LazyLoadEvent, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PrestamosService } from '../prestamos.service';
 

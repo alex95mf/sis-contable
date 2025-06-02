@@ -4466,7 +4466,7 @@ this.lastRecord = null
     // Swal.fire({
     //   title: "Atención!!",
     //   text: message,
-    //   //type: "warning",
+    //   //icon: "warning",
     //   showCancelButton: true,
     //   cancelButtonColor: '#DC3545',
     //   confirmButtonColor: '#13A1EA',
@@ -4483,7 +4483,7 @@ this.lastRecord = null
     Swal.fire({
       title: "Atención!!",
       text: message,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',
@@ -7142,7 +7142,7 @@ sumRegistroTodo(){
       Swal.fire({
         title: "Atención!!",
         text: "¿Seguro desea generar la retención de esta compra?",
-        //type: "warning",
+        //icon: "warning",
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',

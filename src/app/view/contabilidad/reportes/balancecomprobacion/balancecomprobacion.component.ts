@@ -192,7 +192,7 @@ export class BalancecomprobacionComponent implements OnInit {
     if (this.permisions[0].consultar == "0") {
       this.toastr.info("Usuario no tiene permiso para consultar");
     } else {
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.getDataAccountFilter();
       });

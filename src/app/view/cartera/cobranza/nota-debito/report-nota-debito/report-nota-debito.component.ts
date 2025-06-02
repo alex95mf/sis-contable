@@ -85,11 +85,11 @@ export class ReportNotaDebitoComponent implements OnInit {
         $('#tablaReporNotDebito').DataTable().button( '.buttons-excel' ).trigger();
       break;
       case "IMPRIMIR":
-        $('#tablaReporNotDebito').DataTable().button( '.buttons-print' ).trigger();       
+        $('#tablaReporNotDebito').DataTable().button( '.buttons-print' ).trigger();
       break;
       case "PDF":
         $('#tablaReporNotDebito').DataTable().button( '.buttons-pdf' ).trigger();
-      break; 
+      break;
     }
   }
 
@@ -109,7 +109,7 @@ export class ReportNotaDebitoComponent implements OnInit {
     this.reportesSrv.getCatalogs(data).subscribe(res => {
       this.arrayMotivos = res["data"]["NOTA CLIENTE"];
       this.getsucursales();
-      
+
     }, (error) => {
       this.toastr.info(error.error.message);
     });
@@ -189,7 +189,7 @@ this.reportesSrv.getReportNotaCredito(data).subscribe(res => {
     this.vmButtons[0].habilitar = true;
     this.vmButtons[1].habilitar = true;
     this.vmButtons[2].habilitar = true;
-} 
+}
   setTimeout(() => {
     this.dtTrigger.next(null);
   }, 50);
@@ -205,13 +205,13 @@ this.reportesSrv.getReportNotaCredito(data).subscribe(res => {
 
 rerender(): void {
 this.validaDt = false;
-this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+this.dtElement.dtInstance.then((dtInstance: any) => {
   dtInstance.destroy();
   this.getTableReport();
 });
 }
 
-filterTagente(data){ 
+filterTagente(data){
   if (this.Tagente != 0) {
     this.Tagente = data;
     this.rerender();
@@ -220,7 +220,7 @@ filterTagente(data){
   }
 }
 
-filterAgente(data){ 
+filterAgente(data){
 if (this.agente != 0) {
   this.agente = data;
   this.rerender();
@@ -229,7 +229,7 @@ if (this.agente != 0) {
 }
 }
 
-filterMotivo(data){ 
+filterMotivo(data){
 if (this.motivo != 0) {
   this.motivo = data;
   this.rerender();
@@ -238,7 +238,7 @@ if (this.motivo != 0) {
 }
 }
 
-filterSucursal(data){ 
+filterSucursal(data){
 if (this.sucursal != 0) {
   this.sucursal = data;
   this.rerender();
@@ -247,7 +247,7 @@ if (this.sucursal != 0) {
 }
 }
 
-filterEstado(data){ 
+filterEstado(data){
 if (this.statusFilter != 0) {
   this.statusFilter = data;
   this.rerender();
@@ -291,7 +291,7 @@ this.dtInformacion.estado  = (dt.filter_doc != '4') ? 'En proceso' : 'Aprobada';
 this.dtInformacion.name_user_aprobated  =  (dt.filter_doc != null) ? 'Ninguno' : dt.name_user_aprobated;
 
 
-} 
+}
 
 closeModal() {
 ($("#modalReportnotaCredito") as any).modal("hide");

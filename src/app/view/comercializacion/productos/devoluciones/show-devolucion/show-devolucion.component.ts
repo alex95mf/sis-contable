@@ -100,7 +100,7 @@ export class ShowDevolucionComponent implements OnInit {
     this.commonVarService.updPerm.next(true);
     this.validaDt = false;
     this.dataDT = [];
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getDevolucionesTable();
     });

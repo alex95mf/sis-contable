@@ -9,7 +9,7 @@ import * as moment from "moment";
 import * as myVarGlobals from "../../../../../global";
 import "sweetalert2/src/sweetalert2.scss";
 import { CcSpinerProcesarComponent } from '../../../../../config/custom/cc-spiner-procesar.component';
-const Swal = require("sweetalert2");
+import Swal from 'sweetalert2';
 import { MatDialogRef } from '@angular/material/dialog';
 @Component({
 standalone: false,
@@ -67,7 +67,7 @@ export class ViewFacCompraComponent implements OnInit {
           if (this.permissions.ver == "0") {
             this.toastr.info(
               "Usuario no tiene Permiso para ver la Factura de Compra"
-            );  
+            );
             this.vmButtons = [];
             this.dialogRef.close(false);
           } else {
@@ -94,10 +94,10 @@ export class ViewFacCompraComponent implements OnInit {
 	metodoGlobal(evento: any) {
 		switch (evento.items.boton.texto) {
 			case "IMPRIMIR":
-       
+
        if(this.permissions[0].imprimir == "0"){
          this.vmButtons[0].habilitar = true;
-         this.toastr.info("Usuario no Puede Imprimir"); 
+         this.toastr.info("Usuario no Puede Imprimir");
        }else{
           this.savePrint();
        }
@@ -107,7 +107,7 @@ export class ViewFacCompraComponent implements OnInit {
           break;
 		}
 	}
-  
+
   getDtCompras() {
   		this.bodegaRecepcSrv.getDtCompra().subscribe(res => {
         this.validaDtUser = true;
@@ -120,7 +120,7 @@ export class ViewFacCompraComponent implements OnInit {
         this.toastr.info(error.error.message);
       })
   	}
-  
+
 	formatNumber(params) {
 		this.locality = 'en-EN';
 		params = parseFloat(params).toLocaleString(this.locality, {

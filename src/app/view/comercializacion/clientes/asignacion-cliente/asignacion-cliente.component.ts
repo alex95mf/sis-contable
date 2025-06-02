@@ -11,7 +11,7 @@ import { DataTableDirective } from "angular-datatables";
 import { CommonService } from "../../../../services/commonServices";
 import { CommonVarService } from "../../../../services/common-var.services";
 import "sweetalert2/src/sweetalert2.scss";
-const Swal = require("sweetalert2");
+import Swal from 'sweetalert2';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 @Component({
 standalone: false,
@@ -192,7 +192,7 @@ export class AsignacionClienteComponent implements OnInit {
 					this.lcargando.ctlSpinner(false);
 				} else {
 					this.lcargando.ctlSpinner(false);
-			
+
 					for (let i = 0; i < this.search.length; i++) {
 						this.idAsesor = this.search[i]["fk_asesor"];
 						this.totalRegistro = this.search.length;
@@ -254,7 +254,7 @@ export class AsignacionClienteComponent implements OnInit {
 
  	cleanAsignacion() {
 		this.vendedor = 0;
-		this.cliente = 0; 
+		this.cliente = 0;
 		/* this.validaDt = undefined; */
 	 	this.search = [];
 		this.totalRegistro = 0;
@@ -294,7 +294,7 @@ export class AsignacionClienteComponent implements OnInit {
 		Swal.fire({
 			title: "Atención!!",
 			text: message,
-			type: "warning",
+			icon: "warning",
 			showCancelButton: true,
 			cancelButtonColor: "#DC3545",
 			confirmButtonColor: "#13A1EA",
@@ -324,7 +324,7 @@ export class AsignacionClienteComponent implements OnInit {
 				this.toastr.success(res["message"]);
 				setTimeout(() => {
 					this.cleanAsignacion();
-					 location.reload(); 
+					 location.reload();
 				}, 50);
 			},
 			(error) => {
@@ -363,5 +363,5 @@ export class AsignacionClienteComponent implements OnInit {
 		}
 	);
 	}
-	
+
 }

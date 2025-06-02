@@ -166,7 +166,7 @@ export class AnexosDocComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: "¿Esta seguro de realizar esta accion?",
-      type: "warning",
+      icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",

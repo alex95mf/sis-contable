@@ -32,7 +32,7 @@ export class TablePremisosDocComponent implements OnInit {
     private commonServices: CommonService
   ) {
     this.commonServices.refreshDataDoc.asObservable().subscribe(res => {
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.validaDt = false;
         this.dataHeader = [];
@@ -56,7 +56,7 @@ export class TablePremisosDocComponent implements OnInit {
     }
     setTimeout(() => {
       this.getDataTable(data);
-    }, 10);    
+    }, 10);
   }
 
   getDataTable(data) {
@@ -70,10 +70,10 @@ export class TablePremisosDocComponent implements OnInit {
       }
     };
     this.mensajeSppiner = "Cargando...";
-    this.lcargando.ctlSpinner(true); 
+    this.lcargando.ctlSpinner(true);
     this.seguridadServices.getFilterDocPerm(data)
       .subscribe(res => {
-        this.lcargando.ctlSpinner(false); 
+        this.lcargando.ctlSpinner(false);
         if (res['data']['body'].length > 0) {
           this.commonServices.activateSaveBtn.next(null);
         }
@@ -88,7 +88,7 @@ export class TablePremisosDocComponent implements OnInit {
         this.validaDt = true;
         this.dataHeader = [];
         this.dataBody = [];
-        this.lcargando.ctlSpinner(false); 
+        this.lcargando.ctlSpinner(false);
         setTimeout(() => {
           this.dtTrigger.next(null);
         }, 50);

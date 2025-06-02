@@ -794,7 +794,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: message,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -1015,7 +1015,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         Swal.fire({
           title: "Atención!!",
           text: 'No se ha generado los dias trabajados para el periodo seleccionado, Desea Generarlos?',
-          //type: "warning",
+          //icon: "warning",
           showCancelButton: true,
           cancelButtonColor: '#DC3545',
           confirmButtonColor: '#13A1EA',
@@ -1323,7 +1323,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: "Esta seguro de subir la información de la plantilla cargada?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -2065,7 +2065,7 @@ isOutOfStock(data) {
     Swal.fire({
       title: "Atención!!",
       text: "Esta seguro de subir la información de la plantilla cargada?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -2149,7 +2149,7 @@ isOutOfStock(data) {
     Swal.fire({
       title: "Atención!!",
       text: "Esta seguro de borrar el registro?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -2202,7 +2202,7 @@ console.log(this.filter.mes)
     Swal.fire({
       title: "Atención!!",
       text: "Esta seguro de guardar este mes?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -2502,7 +2502,7 @@ console.log(this.filter.mes)
     Swal.fire({
       title: "Atención!!",
       text: message,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",

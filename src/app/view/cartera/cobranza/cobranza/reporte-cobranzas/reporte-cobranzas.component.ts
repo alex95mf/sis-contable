@@ -140,7 +140,7 @@ export class ReporteCobranzasComponent implements OnInit {
             filename: "reportes",
             text:
               '<button class="btn btn-success" style="width: 150px; height: 43px; font-weight: bold; color:white; box-shadow: 2px 2px 0.5px #666; font-size: 13px;">EXCEL <i class="fa fa-file-excel-o" aria-hidden="true" style="font-size: 19px;margin-right: 10px; margin-top: 4px; margin:6px;"> </i></button>',
-          }, 
+          },
           {
             extend: "print",
             footer: true,
@@ -161,9 +161,9 @@ export class ReporteCobranzasComponent implements OnInit {
           url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
         }
       };
-      this.reportesSrv.getCuentasXCobrar().subscribe(res => {    
-        this.validaDt = true;  
-        this.processing = true; 
+      this.reportesSrv.getCuentasXCobrar().subscribe(res => {
+        this.validaDt = true;
+        this.processing = true;
         this.flag += 1;
         this.dataReport = res['data'];
           setTimeout(() => {
@@ -176,12 +176,12 @@ export class ReporteCobranzasComponent implements OnInit {
           }, 50);
         });
     }
-  
+
     ngOnDestroy(): void {
       this.dtTrigger.unsubscribe();
     }
-  
-    
+
+
     filterRetencionSi(data){
       if(data == true){
         this.retencion = "SI";
@@ -190,7 +190,7 @@ export class ReporteCobranzasComponent implements OnInit {
       }else{
        this.disabledDataNo = false;
        this.rerender();
-  
+
       }
     }
 
@@ -199,7 +199,7 @@ export class ReporteCobranzasComponent implements OnInit {
         this.retencion = "No";
        this.disabledDataSi = true;
        this.rerender();
-       
+
       }else{
        this.disabledDataSi = false;
        this.rerender();
@@ -219,7 +219,7 @@ export class ReporteCobranzasComponent implements OnInit {
       }
 
      this.dataReport = [];
-      this.dtOptions = { 
+      this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 20,
       search: true,
@@ -254,10 +254,10 @@ export class ReporteCobranzasComponent implements OnInit {
           url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
         }
       };
-       this.reportesSrv.tablaReportdos(data).subscribe(res => { 
+       this.reportesSrv.tablaReportdos(data).subscribe(res => {
           this.validaDt = true;
-          this.processing = true;    
-          this.flag += 1; 
+          this.processing = true;
+          this.flag += 1;
           this.dataReport = res['data'];
           setTimeout(() => {
             this.dtTrigger.next(null);
@@ -273,18 +273,18 @@ export class ReporteCobranzasComponent implements OnInit {
 
   rerender(): void {
     if (this.flag >= 1) {
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.dataReport = [];
         this.getDataTabledos();
       });
     } else {
       this.getDataTable();
-      this.dataReport = [];  
+      this.dataReport = [];
     }
   }
 
-  filterCliente(data){ 
+  filterCliente(data){
     if (this.cliente != undefined) {
       this.cliente = data
       this.rerender();
@@ -292,8 +292,8 @@ export class ReporteCobranzasComponent implements OnInit {
       this.getDataTable();
     }
   }
-  
-  filterFactura(data){ 
+
+  filterFactura(data){
     if (this.factura != undefined) {
       this.factura = data
       this.rerender();
@@ -310,9 +310,9 @@ export class ReporteCobranzasComponent implements OnInit {
     this.fromDatePicker = undefined;
     this.toDatePicker = new Date();
       this.rerender();
-  
+
   }
-  
+
   closeModal() {
     ($("#modalReportcXcobrar") as any).modal("hide");
     this.processingtwo = false;
@@ -323,7 +323,7 @@ export class ReporteCobranzasComponent implements OnInit {
 
   informaDocumento(dt,i) {
     $('#modalReportcXcobrar').appendTo("body").modal('show');
-    
+
     this.processingtwo = true;
     let filt = this.arrayDtCxCobrar.filter((e) => e.doc_ref_num == dt.doc_num);
     this.dtCxCobrar = filt;
@@ -366,7 +366,7 @@ export class ReporteCobranzasComponent implements OnInit {
       this.dtInformacion.retencion = "NO"
     }
   }
-  
+
   closeModal2() {
     ($("#modalReportCliente") as any).modal("hide");
     this.processingtwo = false;

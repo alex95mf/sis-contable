@@ -13,7 +13,7 @@ import { CommonService } from "../../../../services/commonServices";
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import "sweetalert2/src/sweetalert2.scss";
 import { ConsultaCentroModule } from "src/app/view/contabilidad/centro-costo/consulta/consulta.module";
-const Swal = require("sweetalert2");
+import Swal from 'sweetalert2';
 declare const $: any;
 @Component({
 standalone: false,
@@ -460,7 +460,7 @@ standalone: false,
                 this.toastr.success(res["message"]);
                 this.cleanOfert();
                 this.dataProducto = { id: 1 };
-                this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+                this.dtElement.dtInstance.then((dtInstance: any) => {
                     dtInstance.destroy();
                     this.getPrecio();
                 });
@@ -475,7 +475,7 @@ standalone: false,
         Swal.fire({
             title: "Atención!!",
             text: message,
-            type: "warning",
+            icon: "warning",
             showCancelButton: true,
             cancelButtonColor: "#DC3545",
             confirmButtonColor: "#13A1EA",

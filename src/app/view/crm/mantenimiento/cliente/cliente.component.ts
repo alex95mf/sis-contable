@@ -417,7 +417,7 @@ lista_generos:any = [
     const result = await Swal.fire({
       title: "Atención!!",
       text: "Esta seguro de borrar el Documento?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",

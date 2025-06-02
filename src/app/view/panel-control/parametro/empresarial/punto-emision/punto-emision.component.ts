@@ -31,7 +31,7 @@ export class PuntoEmisionComponent implements OnInit {
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
-  // dtInstance: Promise<DataTables.Api>;
+  // dtInstance: Promise<any>;
   validaDtUser: any = false;
   guardaT: any = [];
   fechaAutorizacion: any = new Date();
@@ -207,7 +207,7 @@ export class PuntoEmisionComponent implements OnInit {
   }
 
   rerender(): void {
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getDataTablePtoEmision();
     });

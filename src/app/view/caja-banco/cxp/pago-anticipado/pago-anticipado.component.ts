@@ -318,7 +318,7 @@ export class PagoAnticipadoComponent implements OnInit {
   recargarPa(){
     this.mensajeSppiner = "Cargando...";
     if(this.dtElement.dtInstance){
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.listadoGeneral();
       });

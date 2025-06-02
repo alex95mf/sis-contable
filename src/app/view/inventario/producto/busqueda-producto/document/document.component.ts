@@ -24,15 +24,15 @@ export class DocumentComponent implements OnInit {
   dtElement: DataTableDirective;
   dtOptions: any = {};
   dtTrigger = new Subject();
-  dtInstance: Promise<DataTables.Api>;
+  dtInstance: Promise<any>;
   processing: any = false;
   validaDtUser: any = false;
   id_producto: any;
   documentT:any;
   @Input() data_documento: any;
 
-  constructor(private toastr: ToastrService, private productSearchSrv: BusquedaProductoService, private commonServices: CommonService, 
-  
+  constructor(private toastr: ToastrService, private productSearchSrv: BusquedaProductoService, private commonServices: CommonService,
+
   private CommonVarService: CommonVarService) { this.CommonVarService.sendAnexos.asObservable().subscribe(res => {
 this.id_producto = res;
     }) }

@@ -63,7 +63,7 @@ export class TipoRetencionComponent implements OnInit {
 
 
     if(this.validaciones.verSiEsNull(this.parametros.fechaDesde) != undefined || this.validaciones.verSiEsNull(this.parametros.fechaHasta) != undefined){
-      
+
       if(this.validaciones.verSiEsNull(this.parametros.fechaDesde) == undefined){
         this.validaciones.mensajeAdvertencia("Advertencia","Por favor seleccione una Fecha Desde");
         return;
@@ -89,7 +89,7 @@ export class TipoRetencionComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
     };
-    
+
     this.parametros.tipoDocumento = 6;
     this.lcargando.ctlSpinner(true);
     this.facElectronicaService.obtenerDocumento(this.parametros).subscribe((datos:any)=>{
@@ -101,7 +101,7 @@ export class TipoRetencionComponent implements OnInit {
       setTimeout(() => {
         this.dtTrigger.next(null);
       }, 50);
-      
+
     }, error=>{
       this.lcargando.ctlSpinner(false);
     })
@@ -109,7 +109,7 @@ export class TipoRetencionComponent implements OnInit {
 
   recargar(){
     if(this.dtElement.dtInstance){
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.obtenerDocumentos();
       });
@@ -195,7 +195,7 @@ export class TipoRetencionComponent implements OnInit {
         this.facElectronicaService.generacionXMLRetencion({parametros: datosEnviar}).subscribe((datos1:any)=>{
           if(datos1.data.jar[(datos1.data.jar.length-1)] == "true"){
 
-            this.facElectronicaService.recepcionAlSri({clave_acceso: datos1.data.claveAcceso}).subscribe((dato2:any)=>{   
+            this.facElectronicaService.recepcionAlSri({clave_acceso: datos1.data.claveAcceso}).subscribe((dato2:any)=>{
 
               if(dato2.data.faultstring==undefined){
                 if(dato2.data.RespuestaRecepcionComprobante.estado == "RECIBIDA" || (dato2.data.RespuestaRecepcionComprobante.comprobantes.comprobante.mensajes.mensaje.identificador) == "43"){
@@ -223,8 +223,8 @@ export class TipoRetencionComponent implements OnInit {
                 this.lcargando.ctlSpinner(false);
                 this.validaciones.mensajeError("Error", dato2.data.faultstring);
               }
-              
-              
+
+
             }, error=>{
               this.lcargando.ctlSpinner(false);
               this.validaciones.mensajeError("Error", error.error.message);
@@ -274,7 +274,7 @@ export class TipoRetencionComponent implements OnInit {
       this.validaciones.mensajeError("Error", "El documento no se encuentra en recepcion del SRI. " + valor.observacion);
     }
   }
-  
+
 
   descargarDocumentoXML(item:any){
 
@@ -307,18 +307,18 @@ export class TipoRetencionComponent implements OnInit {
     const dialogRef = this.confirmationDialogService.openDialogMat(MasDetalleComponent, {
       width: '1500px', height: 'auto',
       data: { titulo: "Detalle del Documento", itemSeleccionado: item}
-      
+
     } );
-  } 
+  }
 
   visualizarPdf(item:any){
     console.log("item: ", item)
     const dialogRef = this.confirmationDialogService.openDialogMat(FacPdfComponent, {
       width: '1500px', height: 'auto',
       data: { titulo: "Pre-Visualizacion del comprobante", dataUser: this.dataUser, item: item}
-      
+
     } );
- 
+
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado!=false && resultado!=undefined){
       }
@@ -326,22 +326,22 @@ export class TipoRetencionComponent implements OnInit {
 
   }
 
-  abrirModalClientes(){   
+  abrirModalClientes(){
     const dialogRef = this.confirmationDialogService.openDialogMat(VistaClientesComponent, {
       width: 'auto', height: 'auto',
       data: { titulo: "Listado de Clientes", tipoDocumento: 2}
-      
+
     } );
- 
+
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado!=false && resultado!=undefined){
-        
+
         this.parametros.identificacion = resultado.num_documento;
         this.parametros.proveedor = resultado.razon_social;
         this.parametros.idCliente = resultado.id_proveedor;
-        
+
       }
-    }); 
+    });
   }
 
   dataPdf:any;
@@ -376,7 +376,7 @@ export class TipoRetencionComponent implements OnInit {
     item.lRuc = item._retencion_cab._compras.company.ruc;
     item.lNombreComercial = item._retencion_cab._compras.company.nombre_comercial;
     item.lImagenLogo = item._retencion_cab._compras.company.logo_empresa;
-    
+
     item.lSubtotal = item._retencion_cab._compras.subtotal;
     item.lIvaValor = item._retencion_cab._compras.iva_valor;
     item.lTotal = item._retencion_cab.total;

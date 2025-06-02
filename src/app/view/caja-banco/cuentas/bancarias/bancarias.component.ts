@@ -45,7 +45,7 @@ export class BancariasComponent implements OnInit {
 
   mensajeSppiner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  
+
   constructor(
     private accSrv: BancariasService,
     private toastr: ToastrService,
@@ -74,7 +74,7 @@ export class BancariasComponent implements OnInit {
 
     setTimeout(() => {
       this.lcargando.ctlSpinner(true);
-    }, 10);    
+    }, 10);
     this.getPermisions();
   }
 
@@ -99,7 +99,7 @@ export class BancariasComponent implements OnInit {
       codigo: myVarGlobals.fCuentaBancos,
       id_rol: id_rol
     }
-    
+
     this.commonServices.getPermisionsGlobas(data).subscribe(res => {
       this.permisions = res['data'][0];
       if (this.permisions.ver == "0") {
@@ -169,20 +169,20 @@ export class BancariasComponent implements OnInit {
   }
 
   getDatabitacora() {
-   
+
     this.mensajeSppiner = "Cargando";
-    this.lcargando.ctlSpinner(true);    
+    this.lcargando.ctlSpinner(true);
     this.accSrv.getBanks().subscribe(res => {
 
       this.lcargando.ctlSpinner(false);
         this.processing = true;
         this.validaDt = true;
         this.dataAccBanks = res['data'];
-        
+
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.processing = true;
-        
+
       });
   }
 
@@ -229,7 +229,7 @@ export class BancariasComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: message,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',
@@ -254,15 +254,15 @@ export class BancariasComponent implements OnInit {
       ip: this.commonServices.getIpAddress(),
       accion: "Creación de nueva cuenta bancaria",
       id_controlador: myVarGlobals.fCuentaBancos
-    }    
+    }
     this.mensajeSppiner = "Guardando...";
-    this.lcargando.ctlSpinner(true);  
+    this.lcargando.ctlSpinner(true);
     this.accSrv.saveAccount(data).subscribe(res => {
       this.toastr.success(res['message']);
       this.getDatabitacora();
       this.cancel();
     }, error => {
-      this.lcargando.ctlSpinner(false);  
+      this.lcargando.ctlSpinner(false);
       this.processing = true;
       this.toastr.info(error.error.message);
     })
@@ -330,9 +330,9 @@ export class BancariasComponent implements OnInit {
       ip: this.commonServices.getIpAddress(),
       accion: "Actualización de nueva cuenta bancaria",
       id_controlador: myVarGlobals.fCuentaBancos
-    }   
+    }
     this.mensajeSppiner = "Actualizando...";
-    this.lcargando.ctlSpinner(true);  
+    this.lcargando.ctlSpinner(true);
     this.accSrv.updatedAccount(data).subscribe(res => {
       this.toastr.success(res['message']);
       this.getDatabitacora();
@@ -364,7 +364,7 @@ export class BancariasComponent implements OnInit {
   // }
 
   // rerender(): void {
-  //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  //   this.dtElement.dtInstance.then((dtInstance: any) => {
   //     dtInstance.destroy();
   //     this.getDatabitacora();
   //   });

@@ -186,7 +186,7 @@ export class DetalleContratacionComponent implements OnInit {
   lastday: any;
   adminActive: any = {
     nombre:"",
-    
+
   };
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
@@ -273,7 +273,7 @@ export class DetalleContratacionComponent implements OnInit {
     )
     this.commonVrs.selectContrato.asObservable().subscribe(
       (res) => {
-       
+
         this.crearContrato()
         this.cargarCondiciones()
         this.listaSolicitudes = this.item
@@ -395,7 +395,7 @@ export class DetalleContratacionComponent implements OnInit {
       else{
         this.fk_proveedor = this.item.proveedor.id_proveedor
       }
-     
+
       if (this.item['administrador_cont']==null || this.item['administrador_cont']=="" ||this.item['administrador_cont']==undefined){
         this.adminActive.nombre = "No tiene administrador de compra"
       }
@@ -403,14 +403,14 @@ export class DetalleContratacionComponent implements OnInit {
         this.adminActive.nombre = this.item['administrador_cont']['emp_full_nombre']
         this.listaSolicitudes.con_admin_contrato = this.item['administrador_cont']['id_empleado']
       }
-      
+
       let valorTotalCotizado = 0;
       let valorTotalAprobado = 0;
-     
-    
+
+
       this.item['detalles'].forEach(element => {
-        valorTotalCotizado += +element.precio_cotizado; 
-        valorTotalAprobado += +element.precio_aprobado; 
+        valorTotalCotizado += +element.precio_cotizado;
+        valorTotalAprobado += +element.precio_aprobado;
       });
       this.totalCotizado= valorTotalCotizado
       this.totalAprobado= valorTotalAprobado
@@ -466,13 +466,13 @@ export class DetalleContratacionComponent implements OnInit {
   }
   validateValor(event){
     console.log(event)
-   
+
     let totalPrecioCotizado= 0
     let totalPrecioAprobado= 0
     this.listaDetSolicitudes.forEach(element => {
       totalPrecioCotizado += +parseFloat(element.precio_cotizado)
       totalPrecioAprobado += +parseFloat(element.precio_aprobado)
-     
+
     });
 
     if(event > totalPrecioAprobado){
@@ -493,15 +493,15 @@ export class DetalleContratacionComponent implements OnInit {
   }
 
   async validaDetallesContratacion() {
-  
+
     this.listaDetSolicitudes.forEach(element => {
       if (element.precio_aprobado > element.precio_cotizado){
         this.toastr.info("El valor aprobado: "+element.precio_aprobado+
-        " super al precio cotizado: "+element.precio_cotizado) 
+        " super al precio cotizado: "+element.precio_cotizado)
         return
       }
-     
-     
+
+
     });
     this.validaDetallesCon().then(respuesta => {
       if (respuesta) {
@@ -529,23 +529,23 @@ validaDetallesCon() {
   let c = 0;
   let mensajes: string = '';
   return new Promise((resolve, reject) => {
-     
+
     if(parseFloat(this.totalAprobado) > parseFloat(this.totalCotizado)){
-      mensajes += "El valor total aprobado de $"+ this.commonService.formatNumberDos(this.totalAprobado.toFixed(2)) +" no puede ser mayor al valor total cotizado $" 
-        + this.commonService.formatNumberDos(this.totalCotizado.toFixed(2)) + " la diferencia es de $ " 
+      mensajes += "El valor total aprobado de $"+ this.commonService.formatNumberDos(this.totalAprobado.toFixed(2)) +" no puede ser mayor al valor total cotizado $"
+        + this.commonService.formatNumberDos(this.totalCotizado.toFixed(2)) + " la diferencia es de $ "
         + (this.commonService.formatNumberDos(this.totalAprobado.toFixed(2) - this.totalCotizado.toFixed(2) )) +"<br>"
     }
     return (mensajes.length) ? reject(mensajes) : resolve(true)
-   
+
   });
 }
 
 async confirmSave(message, action) {
- 
+
   Swal.fire({
     title: "Atención!!",
     text: message,
-    //type: "warning",
+    //icon: "warning",
     showCancelButton: true,
     cancelButtonColor: '#DC3545',
     confirmButtonColor: '#13A1EA',
@@ -556,7 +556,7 @@ async confirmSave(message, action) {
     if (result.value) {
       if (action == "SAVE_DETALLES") {
         this.guardarContratacionDetalles();
-      } 
+      }
     }
   })
 }
@@ -568,10 +568,10 @@ guardarContratacionDetalles(){
     "mes": Number(moment().format('MM')),
   }
     this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-     
+
     /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
-       
+
         let data = {
           detalles: this.listaDetSolicitudes,
           valor_adjudicado: this.listaSolicitudes.con_valor
@@ -594,17 +594,17 @@ guardarContratacionDetalles(){
               let valorTotalCotizado = 0;
               let valorTotalAprobado = 0;
               res['data'].forEach(element => {
-                valorTotalCotizado += +parseFloat(element.precio_cotizado); 
-                valorTotalAprobado += +parseFloat(element.precio_aprobado); 
-                
+                valorTotalCotizado += +parseFloat(element.precio_cotizado);
+                valorTotalAprobado += +parseFloat(element.precio_aprobado);
+
               });
               this.totalCotizado= valorTotalCotizado
               this.totalAprobado= valorTotalAprobado
-            
-              
+
+
               this.listaDetSolicitudes= res['data']
               this.lcargando.ctlSpinner(false);
-      
+
               } else {
               this.lcargando.ctlSpinner(false);
               Swal.fire({
@@ -1046,7 +1046,7 @@ guardarContratacionDetalles(){
     let valorTotalAprobado = 0;
     this.listaDetSolicitudes.forEach(element => {
        Object.assign(element,{ precio_aprobado:parseFloat(element.cantidad_aprobada) * parseFloat(element.precio_unitario_aprobado)})
-      valorTotalAprobado += +element.precio_aprobado; 
+      valorTotalAprobado += +element.precio_aprobado;
     });
     this.totalAprobado= valorTotalAprobado
   }
@@ -1063,7 +1063,7 @@ guardarContratacionDetalles(){
   }
 
   crearContrato() {
-    
+
     if (this.listaSolicitudes.con_valor  != this.totalAprobado.toFixed(2) ){
       this.toastr.info("Valor Adjudicado no cuadra con la suma de los detalles")
         return;
@@ -1154,12 +1154,12 @@ guardarContratacionDetalles(){
         }
         console.log(datos)
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
               this.mensajeSpinner = "Guardando ...";
               this.lcargando.ctlSpinner(true);
-            
+
               let data = {
                 id: this.item.id_solicitud,
                 con_adjudicado: this.listaSolicitudes.con_adjudicado,
@@ -1184,21 +1184,21 @@ guardarContratacionDetalles(){
                 con_anticipo_porcentaje: this.listaSolicitudes.con_anticipo_porcentaje,
                 con_plazo: this.listaSolicitudes.con_plazo,
                 con_forma_pago: this.listaSolicitudes.con_forma_pago
-      
+
               }
               console.log(data)
               this.contratoService.guardarContrato(data.id, data).subscribe(
                 (res) => {
                   console.log(res)
                   if (res["status"] == 1) {
-      
+
                     this.lcargando.ctlSpinner(false);
-              
+
                     if (!!this.fileList2) {
                       this.uploadFile2(res['data']['id_solicitud']);
                     }
-      
-      
+
+
                     console.log(res);
                     Swal.fire({
                       icon: "success",
@@ -1207,12 +1207,12 @@ guardarContratacionDetalles(){
                       showCloseButton: true,
                       confirmButtonText: "Aceptar",
                       confirmButtonColor: '#20A8D8',
-      
+
                     }).then((result) => {
                       if (result.isConfirmed) {
                         this.crearBitacora()
                         this.model = true
-      
+
                       }
                     });
                   }
@@ -1227,20 +1227,20 @@ guardarContratacionDetalles(){
                       confirmButtonColor: '#20A8D8',
                     });
                   }
-      
+
                 },
                 (error) => {
                   console.log(error)
                   this.lcargando.ctlSpinner(false);
                   this.toastr.info(error.error.message);
                 }
-              ) 
-              
+              )
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
@@ -1250,7 +1250,7 @@ guardarContratacionDetalles(){
 
   }
 
-  
+
     calculartotaladjudicado(){
       console.log("calculando");
       this.totalAdjudicado = 0;
@@ -1262,8 +1262,8 @@ guardarContratacionDetalles(){
       })
       this.listaSolicitudes.con_valor = this.totalAdjudicado
     }
-  
-  
+
+
 
   cargarCondiciones() {
     // this.lcargando.ctlSpinner(true);
@@ -1272,12 +1272,12 @@ guardarContratacionDetalles(){
     this.contratoService.listarCondiciones(data, this.item['id_solicitud']).subscribe(
       (res) => {
         console.log(res)
-        
+
         let valorTotalCondiciones = 0;
-        
+
         this.listarCondiciones = res;
         this.listarCondiciones.forEach(element => {
-          valorTotalCondiciones += +parseFloat(element.valor); 
+          valorTotalCondiciones += +parseFloat(element.valor);
         });
         this.totalCondiciones= valorTotalCondiciones
         console.log(this.listarCondiciones);
@@ -1341,10 +1341,10 @@ guardarContratacionDetalles(){
           "mes": Number(moment().format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-                
+
               this.mensajeSpinner = "Cargando...";
               this.lcargando.ctlSpinner(true);
 
@@ -1398,12 +1398,12 @@ guardarContratacionDetalles(){
                   this.toastr.info(error.error.message);
                 }
               )
-              
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
@@ -1583,7 +1583,7 @@ guardarContratacionDetalles(){
   }
 
   cargarBitacora() {
-  
+
     let data = {
     }
     this.contratoService.listarBitacora(data, this.item['id_solicitud']).subscribe(
@@ -1625,7 +1625,7 @@ guardarContratacionDetalles(){
   }
 
    expandListAdminCompra() {
-   
+
       const modalInvoice = this.modalDet.open(EncargadoComponent,{
         size:"xl",
         backdrop: "static",
@@ -1633,7 +1633,7 @@ guardarContratacionDetalles(){
       });
       modalInvoice.componentInstance.module_comp = myVarGlobals.fRenPredUrbanoEmision;
      // modalInvoice.componentInstance.permissions = this.permissions;
- 
+
     }
     onlyNumber(event): boolean {
       let key = (event.which) ? event.which : event.keyCode;

@@ -101,11 +101,11 @@ standalone: false,
             $('#tablaReporCompIg').DataTable().button( '.buttons-excel' ).trigger();
           break;
           case "IMPRIMIR1":
-            $('#tablaReporCompIg').DataTable().button( '.buttons-print' ).trigger();       
+            $('#tablaReporCompIg').DataTable().button( '.buttons-print' ).trigger();
           break;
           case "PDF1":
             $('#tablaReporCompIg').DataTable().button( '.buttons-pdf' ).trigger();
-          break; 
+          break;
         }
       }
 
@@ -213,7 +213,7 @@ standalone: false,
 
     rerender(): void {
         this.validaDt = false;
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        this.dtElement.dtInstance.then((dtInstance: any) => {
             dtInstance.destroy();
             this.getTableReport();
         });
@@ -311,12 +311,12 @@ standalone: false,
         const dialogRef = this.confirmationDialogService.openDialogMat(ListadoComIgComponent, {
             width: '1500px', height: 'auto',
             data: { titulo: "Información Cotización", dtInformacion: this.dtInformacion, dtcomprobanteIngreso: this.dtcomprobanteIngreso}
-            
+
           } );
-        
+
           dialogRef.afterClosed().subscribe(resultado => {
             if(resultado!=false && resultado!=undefined){
-        
+
             }else{
               this.closeModal();
             }

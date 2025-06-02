@@ -989,7 +989,7 @@ this.tieneFondo = false
     Swal.fire({
       title: "Atención!!",
       text: message,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -2538,7 +2538,7 @@ this.objGetDocumentByEmployee = []
     Swal.fire({
       title: "Atención!!",
       text: "Esta seguro de borrar el registro?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -2572,7 +2572,7 @@ this.objGetDocumentByEmployee = []
     Swal.fire({
       title: "Atención!!",
       text: "Esta seguro de borrar la carga familiar?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -2606,7 +2606,7 @@ this.objGetDocumentByEmployee = []
     Swal.fire({
       title: "Atención!!",
       text: "Esta seguro de borrar este archivo?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -2782,7 +2782,7 @@ this.objGetDocumentByEmployee = []
     Swal.fire({
       title: "Atención!!",
       text: mensaje+" Referencia empleado.",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -2888,7 +2888,7 @@ this.objGetDocumentByEmployee = []
     Swal.fire({
       title: "Atención!!",
       text: "Esta seguro de borrar el registro?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -2966,7 +2966,7 @@ this.objGetDocumentByEmployee = []
     Swal.fire({
       title: "Atención!!",
       text: mensaje+" Educación empleado.",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -2985,7 +2985,7 @@ this.objGetDocumentByEmployee = []
   //   Swal.fire({
   //     title: "Atención!!",
   //     text: "Seguro desea actualizar esta carga familiar.",
-  //     //type: "warning",
+  //     //icon: "warning",
   //     showCancelButton: true,
   //     cancelButtonColor: "#DC3545",
   //     confirmButtonColor: "#13A1EA",
@@ -3369,7 +3369,7 @@ if ( superaAnios >= 12 ){
     Swal.fire({
       title: "Atención!!",
       text: message,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",

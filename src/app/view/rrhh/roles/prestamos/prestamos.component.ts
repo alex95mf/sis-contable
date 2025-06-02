@@ -439,7 +439,7 @@ export class PrestamosComponent implements OnInit {
 			this.lcargando.ctlSpinner(false);
 			this.toastr.success(res["message"]);
 			this.cleanPrestamos();
-			this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+			this.dtElement.dtInstance.then((dtInstance: any) => {
 				dtInstance.destroy();
 				this.getDataTable();
 				this.imprimirAsiento(res["data"]);
@@ -540,7 +540,7 @@ export class PrestamosComponent implements OnInit {
 			this.lcargando.ctlSpinner(false);
 			this.toastr.success(res["message"]);
 			this.cleanPrestamos();
-			this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+			this.dtElement.dtInstance.then((dtInstance: any) => {
 				dtInstance.destroy();
 				this.getDataTable();
 			});
@@ -562,7 +562,7 @@ export class PrestamosComponent implements OnInit {
 		Swal.fire({
 			title: "Atención!!",
 			text: message,
-			type: "warning",
+			icon: "warning",
 			showCancelButton: true,
 			cancelButtonColor: "#DC3545",
 			confirmButtonColor: "#13A1EA",
@@ -709,7 +709,7 @@ export class PrestamosComponent implements OnInit {
 			this.lcargando.ctlSpinner(false);
 			this.toastr.success(res["message"]);
 			this.cleanPrestamos();
-			this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+			this.dtElement.dtInstance.then((dtInstance: any) => {
 				dtInstance.destroy();
 				this.getDataTable();
 			});

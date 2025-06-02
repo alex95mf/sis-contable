@@ -640,7 +640,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
       Swal.fire({
         title: "Atención!!",
         text: "Esta seguro de guardar este mes?",
-        //type: "warning",
+        //icon: "warning",
         showCancelButton: true,
         cancelButtonColor: "#DC3545",
         confirmButtonColor: "#13A1EA",
@@ -718,7 +718,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: message,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -1173,7 +1173,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: "Esta seguro de borrar el registro?",
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",

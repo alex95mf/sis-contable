@@ -505,7 +505,7 @@ export class KardexComponent implements OnInit {
   rerender(): void {
     this.validaDtUser = true;
     this.lcargando.ctlSpinner(true);
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getTableReport();
     });

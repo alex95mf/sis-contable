@@ -28,12 +28,12 @@ export class TabsEstructuraComponent implements OnInit {
              )
            {
              this.commonServices.refreshDataTableStruct.asObservable().subscribe(res =>{
-               if(!this.validaDtBodega){                
+               if(!this.validaDtBodega){
                  this.getDataTable();
                }else{
                 this.rerender();
                }
-             }) 
+             })
            }
 
   ngOnInit(): void {
@@ -72,8 +72,8 @@ export class TabsEstructuraComponent implements OnInit {
   }
 
   rerender(): void {
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-        dtInstance.destroy();    
+      this.dtElement.dtInstance.then((dtInstance: any) => {
+        dtInstance.destroy();
         this.getDataTable();
       });
   }

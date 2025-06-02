@@ -58,7 +58,7 @@ export class TipoFacturaComponent implements OnInit {
 
 
     if(this.validaciones.verSiEsNull(this.parametros.fechaDesde) != undefined || this.validaciones.verSiEsNull(this.parametros.fechaHasta) != undefined){
-      
+
       if(this.validaciones.verSiEsNull(this.parametros.fechaDesde) == undefined){
         this.validaciones.mensajeAdvertencia("Advertencia","Por favor seleccione una Fecha Desde");
         return;
@@ -84,7 +84,7 @@ export class TipoFacturaComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
     };
-    
+
     this.parametros.tipoDocumento = 1;
     this.lcargando.ctlSpinner(true);
     this.facElectronicaService.obtenerDocumento(this.parametros).subscribe((datos:any)=>{
@@ -97,7 +97,7 @@ export class TipoFacturaComponent implements OnInit {
       setTimeout(() => {
         this.dtTrigger.next(null);
       }, 50);
-      
+
     }, error=>{
       this.listado = [];
       this.validateDt = true;
@@ -165,7 +165,7 @@ export class TipoFacturaComponent implements OnInit {
         this.facElectronicaService.generacionXML({parametros: datosEnviar}).subscribe((datos1:any)=>{
           if(datos1.data.jar[(datos1.data.jar.length-1)] == "true"){
 
-            this.facElectronicaService.recepcionAlSri({clave_acceso: datos1.data.claveAcceso}).subscribe((dato2:any)=>{   
+            this.facElectronicaService.recepcionAlSri({clave_acceso: datos1.data.claveAcceso}).subscribe((dato2:any)=>{
 
               if(dato2.data.faultstring==undefined){
                 if(dato2.data.RespuestaRecepcionComprobante.estado == "RECIBIDA" || (dato2.data.RespuestaRecepcionComprobante.comprobantes.comprobante.mensajes.mensaje.identificador) == "43"){
@@ -193,8 +193,8 @@ export class TipoFacturaComponent implements OnInit {
                 this.lcargando.ctlSpinner(false);
                 this.validaciones.mensajeError("Error", dato2.data.faultstring);
               }
-              
-              
+
+
             }, error=>{
               this.lcargando.ctlSpinner(false);
               this.validaciones.mensajeError("Error", error.error.message);
@@ -247,9 +247,9 @@ export class TipoFacturaComponent implements OnInit {
     const dialogRef = this.confirmationDialogService.openDialogMat(FacPdfComponent, {
       width: '1500px', height: 'auto',
       data: { titulo: "Pre-Visualizacion del comprobante", dataUser: this.dataUser, item: item}
-      
+
     } );
- 
+
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado!=false && resultado!=undefined){
       }
@@ -280,16 +280,16 @@ export class TipoFacturaComponent implements OnInit {
       if(res.valor){
         this.mensajeSppiner = "Reprocesando Documento...";
         this.lcargando.ctlSpinner(true);
-    
+
         if(valor.estado_sri == "RECIBIDA"|| valor.estado_sri == "DEVUELTA"){
-    
+
           try {
             this.procesoDual(valor);
           } catch (error) {
             this.lcargando.ctlSpinner(false);
             this.validaciones.mensajeError("Error","Por favor intentelo nuevamente");
           }
-    
+
         }else{
           this.lcargando.ctlSpinner(false);
           this.validaciones.mensajeError("Error", "El documento no se encuentra en recepcion del SRI. " + valor.observacion);
@@ -314,12 +314,12 @@ export class TipoFacturaComponent implements OnInit {
       const dialogRef = this.confirmationDialogService.openDialogMat(EditarXmlComponent, {
         width: '1500px', height: 'auto',
         data: { titulo: "Editar XML", dataUser: this.dataUser, item: item, textoXML: datos.data}
-        
+
       } );
-   
+
       dialogRef.afterClosed().subscribe(resultado => {
         if(resultado!=false && resultado!=undefined){
-  
+
         }
       });
 
@@ -328,7 +328,7 @@ export class TipoFacturaComponent implements OnInit {
       this.validaciones.mensajeError("Error", error.error.message);
     })
 
-    
+
   }
 
   descargarDocumentoXML(item:any){
@@ -357,26 +357,26 @@ export class TipoFacturaComponent implements OnInit {
     })
 
   }
- 
+
   isCollapsed:boolean = true;
 
 
-  abrirModalClientes(){   
+  abrirModalClientes(){
     const dialogRef = this.confirmationDialogService.openDialogMat(VistaClientesComponent, {
       width: 'auto', height: 'auto',
       data: { titulo: "Listado de Clientes", tipoDocumento: 1}
-      
+
     } );
- 
+
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado!=false && resultado!=undefined){
-        
+
         this.parametros.identificacion = resultado.num_documento;
         this.parametros.proveedor = resultado.razon_social;
         this.parametros.idCliente = resultado.id_cliente;
-        
+
       }
-    }); 
+    });
   }
 
 
@@ -385,7 +385,7 @@ export class TipoFacturaComponent implements OnInit {
     this.validateDt = false;
     this.mensajeSppiner = "Cargando...";
     if(this.dtElement.dtInstance){
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.obtenerDocumentos();
       });
@@ -398,9 +398,9 @@ export class TipoFacturaComponent implements OnInit {
     const dialogRef = this.confirmationDialogService.openDialogMat(MasDetalleComponent, {
       width: '1500px', height: 'auto',
       data: { titulo: "Detalle del Documento", itemSeleccionado: item}
-      
+
     } );
-  } 
+  }
 
   timer: any;
   anularDocumento(item:any){
@@ -423,7 +423,7 @@ export class TipoFacturaComponent implements OnInit {
       this.validaciones.mensajeAdvertencia("Advertencia","El documento ya se encuentra anulado.");
       return;
     }
-    
+
 
     if(item.estado_sri == "AUTORIZADO"){
       let datoEnviar:any = {
@@ -434,7 +434,7 @@ export class TipoFacturaComponent implements OnInit {
         identificacion_receptor: item._venta.client.num_documento,
         correo_receptor: ""
       };
-  
+
       let dataPresentar = {
         mensaje: "¿Esta seguro de anular el documento de tipo " + item._tipo_documento.nombre + ", con el codigo de acceso: " + item.codigo_acceso + ", de " + item._venta.client.nombre_comercial_cli + " - " + item._venta.client.num_documento + "?",
         titulo: "Pregunta",
@@ -443,7 +443,7 @@ export class TipoFacturaComponent implements OnInit {
         phObservacion: "Ingresar motivo de anulacion de documento"
       };
       this.anularAutorizados(datoEnviar, dataPresentar, item);
-      
+
     }else{
 
       let dataPresentar = {
@@ -454,7 +454,7 @@ export class TipoFacturaComponent implements OnInit {
 
       const dialogRef1 = this.confirmationDialogService.openDialogBD(MspreguntaComponent, { config: {}, }, dataPresentar );
       dialogRef1.result.then((res) => {
-        
+
         if (res.valor) {
           let datosAnular:any = item;
           datosAnular.observacionAnulacion = res.observacion;
@@ -471,7 +471,7 @@ export class TipoFacturaComponent implements OnInit {
         }
       });
 
-      
+
     }
   }
 
@@ -480,7 +480,7 @@ export class TipoFacturaComponent implements OnInit {
       dialogRef1.result.then((res) => {
         if (res.valor) {
           datoEnviar.correo_receptor = res.lCorreo;
-  
+
           this.mensajeSppiner = "Anulando documento, por favor espere...";
           this.lcargando.ctlSpinner(true);
           this.facElectronicaService.anularDocumento(datoEnviar).subscribe((datos1:any)=>{
@@ -488,10 +488,10 @@ export class TipoFacturaComponent implements OnInit {
             this.timer = setInterval(() => {
 
               this.facElectronicaService.obtenerRobot({idRobot: datos1.data}).subscribe((datos2:any)=>{
-              
+
                 this.mensajeSppiner = ("Anulando documento, por favor espere... " + datos2.data.observacion);
 
-                if (datos2.data.estado == "F") {                
+                if (datos2.data.estado == "F") {
                   clearInterval(this.timer);
                   let datosAnular:any = item;
                   datosAnular.observacionAnulacion = res.observacion;
@@ -505,34 +505,34 @@ export class TipoFacturaComponent implements OnInit {
                   }, error=>{
                     this.validaciones.mensajeError("Error", error.error.message);
                   });
-                } 
+                }
 
-                if (datos2.data.estado == "E") {                
+                if (datos2.data.estado == "E") {
                   clearInterval(this.timer);
                   this.lcargando.ctlSpinner(false);
                   this.recargar();
                   this.validaciones.mensajeError("Error", datos2.data.observacion);
-                } 
+                }
 
               }, error=>{
                 clearInterval(this.timer);
                 this.lcargando.ctlSpinner(false);
                 this.validaciones.mensajeError("Error", error.error.message);
-              });  
+              });
             }, 3000);
 
           }, error=>{
             this.lcargando.ctlSpinner(false);
             this.validaciones.mensajeError("Error", error.error.message);
           })
-  
+
         }
       });
   }
 
   enviarEmail(item:any){
     console.log("enviarEmail: ", item)
-    
+
     if(item.estado_sri != "AUTORIZADO"){
       this.validaciones.mensajeAdvertencia("Advertencia","No puede enviar el mail por que el documento no se encuentra autorizado");
       return;
@@ -562,7 +562,7 @@ export class TipoFacturaComponent implements OnInit {
     item.lRuc = item._venta._empresa.ruc;
     item.lNombreComercial = item._venta._empresa.nombre_comercial;
     item.lImagenLogo = item._venta._empresa.logo_empresa;
-    
+
     item.lSubtotal = item._venta.subtotal;
     item.lIvaValor = item._venta.iva_valor;
     item.lTotal = item._venta.total;

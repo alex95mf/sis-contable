@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
 import * as moment from "moment";
 import * as myVarGlobals from "../../../../../global";
 import "sweetalert2/src/sweetalert2.scss";
-const Swal = require("sweetalert2");
+import Swal from 'sweetalert2';
 @Component({
 standalone: false,
   selector: 'app-view-document-dt',
@@ -34,14 +34,14 @@ export class ViewDocumentDtComponent implements OnInit {
   constructor(   public activeModal: NgbActiveModal,
     private router: Router,
     private toastr: ToastrService,
-    private commonServices: CommonService, 	
+    private commonServices: CommonService,
     private diarioSrv: DiarioService,
     private commonVarSrvice: CommonVarService) {}
 
   ngOnInit(): void {
     console.log(this.dt)
     setTimeout(() => {
-      this.commonVarSrvice.updPerm.next(true);    
+      this.commonVarSrvice.updPerm.next(true);
     }, 50);
 
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
@@ -56,7 +56,7 @@ export class ViewDocumentDtComponent implements OnInit {
   }
 
 
-  getPermisions() {   
+  getPermisions() {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
     this.empresLogo = this.dataUser.logoEmpresa;
     let id_rol = this.dataUser.id_rol;

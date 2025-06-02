@@ -179,7 +179,7 @@ export class ConciliacionComponent implements OnInit {
 
   rerender(): void {
     this.validaDt = false;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getTableConciliation();
     });
@@ -200,7 +200,7 @@ export class ConciliacionComponent implements OnInit {
     } else {
       this.validaDt = false;
       this.infoDt = [];
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
         this.validaDt = true;
         this.infoDt = JSON.parse(localStorage.getItem('conciliation'));

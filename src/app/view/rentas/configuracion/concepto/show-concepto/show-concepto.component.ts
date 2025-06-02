@@ -22,7 +22,7 @@ export class ShowConceptoComponent implements OnInit {
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtInstance: Promise<DataTables.Api>;
+  dtInstance: Promise<any>;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   dataDT: any = [];
@@ -149,7 +149,7 @@ export class ShowConceptoComponent implements OnInit {
               Swal.fire({
                 title: "¡Error!",
                 text: error.error.message,
-                type: "warning",
+                icon: "warning",
               })
             }
           );
@@ -163,7 +163,7 @@ export class ShowConceptoComponent implements OnInit {
   }
 
   rerender(): void {
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       // Destroy the table first
       dtInstance.destroy();
       // Call the dtTrigger to rerender again

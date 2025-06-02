@@ -82,22 +82,22 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
 
   constructor(
     private commonService: CommonService,
-    private rhfolderdigitalService: RhfolderDigitalEmpleadoService, 
-    private toastr: ToastrService, 
+    private rhfolderdigitalService: RhfolderDigitalEmpleadoService,
+    private toastr: ToastrService,
     public dialogService: DialogService,
     private formBuilder: FormBuilder,
-    ) { 
+    ) {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
     this.totalRecords = 0;
     this.rows = 5;
-    
+
   }
 
 
 
   ngOnInit(): void {
 
- 
+
     this.vmButtons = [
       {
         orig: "btnsFolderDigital",
@@ -145,7 +145,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
         clase: "btn btn-danger boton btn-sm",
         habilitar: false,
       },
-    ]; 
+    ];
 
     this.registerForm = this.formBuilder.group({
       full_nombre_empleado: [{ value: ''/* ,disabled: true */}, [Validators.required, Validators.minLength(1)]],
@@ -161,19 +161,19 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
         codigo: myVarGlobals.fJornadas,
         id_rol: id_rol
       }
-  
+
       this.commonService.getPermisionsGlobas(data).subscribe(res => {
-       
+
         this.permisions = res['data'];
-  
+
         this.permiso_ver = this.permisions[0].ver;
-  
+
         if (this.permiso_ver == "0") {
-  
+
           this.toastr.info("Usuario no tiene Permiso para ver el formulario de Jornada");
           this.vmButtons = [];
           this.lcargando.ctlSpinner(false);
-  
+
         } else {
           /*
           if (this.permisions[0].imprimir == "0") {
@@ -184,7 +184,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
             this.vmButtons[2].habilitar = false;
           }
           */
-  
+
           /* this.getParametersFilter(); */
         }
       }, error => {
@@ -202,7 +202,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
       this.dataLength = res['data'];
       if(this.dataLength[0]){
         for (let index = 0; index < this.dataLength[0].niveles; index++) {
-          this.lstNiveles.push(index+1);          
+          this.lstNiveles.push(index+1);
         }
       }
 
@@ -220,7 +220,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
           break;
         break;
         case "MODIFICAR":
-          this.validaUpdateFolderDigital();   
+          this.validaUpdateFolderDigital();
         break;
         case "ELIMINAR":
           this.validaDeleteFolderDigital();
@@ -228,7 +228,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
         case "CANCELAR":
           this.cancel("not");
         break;
-		}  	 
+		}
 	}
 
   toLocal(date) {
@@ -236,7 +236,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
     local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
     return local.toJSON();
   }
-  
+
 
   async validaSaveFolderDigital() {
     this.submitted = true;
@@ -252,7 +252,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
     if (this.registerForm.invalid) { return; }
     this.confirmSave("Seguro desea actualizar el documento?", "UPDATED_FOLDER_DIGITAL");
   }
-  
+
   async validaDeleteFolderDigital() {
     this.confirmSave(
       "Seguro desea eliminar el documento?",
@@ -274,7 +274,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: message,
-      //type: "warning",
+      //icon: "warning",
       showCancelButton: true,
       cancelButtonColor: "#DC3545",
       confirmButtonColor: "#13A1EA",
@@ -365,7 +365,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
         this.getDocumentoByEmpleadoUno(this.folderDigitalForm.id_empleado);
         this.lcargando.ctlSpinner(false);
         this.toastr.success("Borrado" /* res['message'] */);
-        
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -375,7 +375,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
           this.toastr.error(element.toString());
         });
         this.messageError = [];
-       
+
       }
     );
   }
@@ -462,9 +462,9 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
     });
     this.ref.onClose.subscribe((empleadoData: EmployeesResponseI) => {
       this.getDocumentoByEmpleadoUno(empleadoData.id_empleado );
-      
+
       // this.getDocumentoByEmpleado(event );
-  
+
       this.inputNameEmpFullNombre.nativeElement.value = empleadoData.emp_full_nombre;
       // console.log("hola");
       this.folderDigitalForm.full_nombre_empleado = empleadoData.emp_full_nombre;
@@ -472,7 +472,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
       // this.registerForm = this.formBuilder.group({
       //   full_nombre_empleado: empleadoData.emp_full_nombre,
       // });
-     
+
       // console.log(empleadoData);
     });
   }
@@ -483,12 +483,12 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
   // }
 
   /**
-   * 
-   * @param ptr_id_empleado 
+   *
+   * @param ptr_id_empleado
    */
   getDocumentoByEmpleadoUno(/* parameterUrl */ ptr_id_empleado)
   {
-    
+
   //  console.log(parameterUrl);
     // console.log(this.nextPage(event: LazyLoadEvent));
     this.loading = true;
@@ -496,8 +496,8 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
       id_empleado: ptr_id_empleado,
       page:  this.pageIndex ,
       size: this.rows,//event.rows,
-      sort: 'id_doc_ficha', 
-      type_sort: 'asc' 
+      sort: 'id_doc_ficha',
+      type_sort: 'asc'
     };
     console.log(parameterUrl);
     this.rhfolderdigitalService.getDocumentByEmployee(parameterUrl).subscribe({
@@ -522,7 +522,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
       this.getDocumentoByEmpleadoUno(this.folderDigitalForm.id_empleado);
     }
     return ;
-    
+
     // this.pageSize = (event.first/this.rows)+1;
     // this.loading = true;
     // const p_page = (event.first/this.rows)+1;
@@ -530,7 +530,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
     //   id_empleado: 1,
     //   page:  p_page,
     //   size:  (event.first/this.rows)+1,
-    //   sort: (event.sortField == undefined) ? 'id_doc_ficha' : event.sortField, 
+    //   sort: (event.sortField == undefined) ? 'id_doc_ficha' : event.sortField,
     //   type_sort: (event.sortOrder == -1) ? 'desc' : 'asc',
     // };
     // this.getDocumentoByEmpleado(parameterUrl);
@@ -590,7 +590,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
       Swal.fire({
         title: "Atención",
         text: "Seguro desea eliminar la siguiente información?",
-        //type: "warning",
+        //icon: "warning",
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',
@@ -645,15 +645,15 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
   /**
    * fecha de modificacion
    * @param $fModif
-   * @returns 
+   * @returns
    */
   defaultFechaModificacion($fModif)
   {
     if($fModif) return $fModif;
-    
+
     return '-';
   }
-  
+
   descargarDocumentoDigital($data)
   {
     // console.log($data.archivo_base_64);
@@ -675,7 +675,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
 
   cancel($notDeleteParameter) {
 
-    this.submitted = false; 
+    this.submitted = false;
     if($notDeleteParameter == 'yes'){
       this.folderDigitalForm.id_empleado = 0;
       this.folderDigitalForm.full_nombre_empleado = '';

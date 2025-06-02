@@ -40,7 +40,7 @@ export class RolesComponent implements OnInit {
   selected_anio: any;
   mes_actual: any = 0;
   LoadOpcionDepartamento: any = false;
-  
+
   vmButtons:any = [];
   tipoPago: any
 
@@ -49,10 +49,10 @@ export class RolesComponent implements OnInit {
     {value: "M",label: "Fin de mes"},
   ]
 
-  constructor(    
+  constructor(
     private commonService: CommonService,
-    private toastr: ToastrService, 
-    private benefrolesService: BenefRolesService,) { 
+    private toastr: ToastrService,
+    private benefrolesService: BenefRolesService,) {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
     // this.isRowSelectable = this.isRowSelectable.bind(this);
   }
@@ -64,7 +64,7 @@ export class RolesComponent implements OnInit {
     this.ngDepartamentSelect = 0;
 
     this.vmButtons = [
-			
+
 			{ orig: "btnsConsultRoles", paramAccion: "", boton: { icon: "fa fa-search", texto: "CONSULTAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-info boton btn-sm", habilitar: false },
       { orig: "btnsConsultRoles", paramAccion: "", boton: { icon: "fa fa-floppy-o", texto: "ENVIAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btns-modificar boton btn-sm", habilitar: true}
 		  ];
@@ -77,19 +77,19 @@ export class RolesComponent implements OnInit {
         codigo: myVarGlobals.fRoles,
         id_rol: id_rol
       }
-  
+
       this.commonService.getPermisionsGlobas(data).subscribe(res => {
-       
+
         this.permisions = res['data'];
-  
+
         this.permiso_ver = this.permisions[0].ver;
-  
+
         if (this.permiso_ver == "0") {
-  
+
           this.toastr.info("Usuario no tiene Permiso para ver el formulario de Balance comprobación");
           this.vmButtons = [];
           this.lcargando.ctlSpinner(false);
-  
+
         } else {
           /*
           if (this.permisions[0].imprimir == "0") {
@@ -100,7 +100,7 @@ export class RolesComponent implements OnInit {
             this.vmButtons[2].habilitar = false;
           }
           */
-  
+
           /* this.getParametersFilter(); */
         }
       }, error => {
@@ -114,7 +114,7 @@ export class RolesComponent implements OnInit {
       this.dataLength = res['data'];
       if(this.dataLength[0]){
         for (let index = 0; index < this.dataLength[0].niveles; index++) {
-          this.lstNiveles.push(index+1);          
+          this.lstNiveles.push(index+1);
         }
       }
 
@@ -131,9 +131,9 @@ export class RolesComponent implements OnInit {
           this.ConsultarRoldesIndivMes();
         break;
         case "ENVIAR":
-          this.EnviarRoles();       
+          this.EnviarRoles();
         break;
-		}  	 
+		}
 	}
 
   ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
@@ -206,7 +206,7 @@ export class RolesComponent implements OnInit {
       Swal.fire({
         title: "Atención",
         text: "Desea enviar por correo electronico los roles de pago. \n ¿Desea continuar?",
-        //type: "warning",
+        //icon: "warning",
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',
@@ -219,14 +219,14 @@ export class RolesComponent implements OnInit {
         if (result.value) {
           let mes = this.mes_actual;
           let year;
-      
+
           if(typeof this.selected_anio !== "string"){
             year = this.selected_anio.getFullYear();
           }else{
             year = this.selected_anio;
           }
           let id_empresa =this.dataUser.id_empresa;
-          
+
           const  $url_reporting_serve = environment.ReportingUrl + "rpt_rol_individual.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_empresa="+id_empresa+"&usuario=1&anio="+year+"&mes="+mes+"&tipo_nomina="+this.tipoPago+"&id_persona=@ptrIdPersona";
           this.sendEmailRolesPagos(this.selectRolesInv, $url_reporting_serve);
           // this.selectRolesInv.forEach(element => {
@@ -254,19 +254,19 @@ export class RolesComponent implements OnInit {
 
       let mes = this.mes_actual;
       let year;
-  
+
       if(typeof this.selected_anio !== "string"){
         year = this.selected_anio.getFullYear();
       }else{
         year = this.selected_anio;
       }
-  
-  
+
+
       this.benefrolesService.getRolesIndividuales(1,year,mes, this.ngDepartamentSelect,this.tipoPago).subscribe(res => {
-  
+
         console.log(res);
         this.lcargando.ctlSpinner(false);
-        this.rolesempleado =  <RolesIndividuales[]>res;      
+        this.rolesempleado =  <RolesIndividuales[]>res;
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -331,7 +331,7 @@ export class RolesComponent implements OnInit {
   }
 
 
-  
+
   mensajeSppiner: string = "Cargando...";
   /* async */ sendEmailRolesPagos($dataEmp, $url_reporting_serve) {
 

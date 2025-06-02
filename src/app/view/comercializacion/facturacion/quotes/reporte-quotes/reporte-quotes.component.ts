@@ -79,7 +79,7 @@ export class ReporteQuotesComponent implements OnInit {
     ];
 
 
-    setTimeout(() => {  
+    setTimeout(() => {
       this.processing = true;
       this.empresLogo = this.dataUser.logoEmpresa;
       this.getClientes();
@@ -199,7 +199,7 @@ export class ReporteQuotesComponent implements OnInit {
   rerender(): void {
     this.validaDt = false;
     this.lcargando.ctlSpinner(true);
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
       dtInstance.destroy();
       this.getTableReport();
     });
