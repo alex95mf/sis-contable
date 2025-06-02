@@ -29,7 +29,7 @@ import { ExcelService } from 'src/app/services/excel.service';
     AppCustomModule,
     CalendarModule,
     ContratacionRoutingModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
 
   ]
 })

@@ -1,6 +1,6 @@
 <div class="">
     <app-button-radio-active titulo="Seleccionar Documento de pago" filtroBoton="btnListRecDocumento" cstyle="bg-gradient-primary test-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="far fa-hand-pointer">
-        
+
         <div class="row my-2">
 
             <div class="col-12">
@@ -71,7 +71,7 @@
                             <td class="text-right">$ {{ dt.total }}</td>
                             <td [ngClass]="{'text-right':(dt.superavit && dt.superavit>0),'text-center':!dt.superavit}">{{ (dt.superavit && dt.superavit>0) ? ('$ '+dt.superavit) : '-' }}</td>
                             <td [ngClass]="{'text-right':(dt.superavit && dt.superavit>0),'text-center':!dt.saldo}">{{ (dt.superavit && dt.superavit>0) ? ('$ '+dt.saldo) : '-' }}</td>
-                            
+
                             <td *ngIf="dt.estado == 'E'" class="text-center">
                                 <i class="fas fa-circle text-warning"></i> Emitido
                             </td>
@@ -93,11 +93,11 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>                    
+                </table>
             </div>
-                
+
             <div class="col-12">
-                <mat-paginator 
+                <mat-paginator
                     showFirstLastButtons
                     [length]="paginate.length"
                     [pageSize]="paginate.perPage"
@@ -107,7 +107,7 @@
                     aria-label="Select page">
                 </mat-paginator>
             </div>
-            
+
         </div>
     </app-button-radio-active>
 </div>

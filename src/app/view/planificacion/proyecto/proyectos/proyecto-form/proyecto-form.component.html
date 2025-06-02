@@ -2,7 +2,7 @@
 
 
 
-<app-button-radio-active-new  [titulo]="isNew ? 'Registro de Proyecto' : 'Edición de Proyecto'"  
+<app-button-radio-active-new  [titulo]="isNew ? 'Registro de Proyecto' : 'Edición de Proyecto'"
 cstyle="bg-gradient-primary text-white"
 filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
 [icono]="isNew ? 'far fa-plus-square' : 'far fa-edit'">
@@ -18,7 +18,7 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
                     <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
                         <ng-select class="form-control" appendTo="body" [clearable]="true" [(ngModel)]="proyecto.anio"
                             [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo"
-                           
+
                             >
                         </ng-select>
                     </app-cc-input-group-prepend>
@@ -26,47 +26,47 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
 
                 </div>
                 <div class="col-12 col-md-4 pt-0 pb-0">
-                
+
                     <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
-                        <ng-select 
-                    
-                       
-                            class="form-control" 
-                       
+                        <ng-select
+
+
+                            class="form-control"
+
                             bindLabel="name"
                             placeholder="-Todos-"
                             appendTo="body"
                             [clearable]="true"
                             [searchable]="true"
-                            [disabled]=disabled
+                            disabled
                             [(ngModel)]="proyecto.fk_programa">
-                            
+
                             <ng-option [value]="item.id_catalogo" [disabled]="item.disabled" *ngFor="let item of programas">
                                 {{item.descripcion}}. {{item.valor}}
                             </ng-option>
                         </ng-select>
-                    </app-cc-input-group-prepend> 
+                    </app-cc-input-group-prepend>
                 </div>
-                
+
                 <div class="col-12 col-md-4 pt-0 pb-0">
-                
+
                     <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
-                        <ng-select 
-                           class="form-control" 
-    
+                        <ng-select
+                           class="form-control"
+
                             bindLabel="estado"
                             placeholder="-Todos-"
                             appendTo="body"
                             [clearable]="true"
                             [searchable]="true"
-                            [disabled]=disabled
+                            disabled
                             [(ngModel)]="proyecto.estado">
-                            
+
                             <ng-option [value]="item.estado" [disabled]="item.disabled" *ngFor="let item of lista_estados">
                                 {{item.descripcion}}
                             </ng-option>
                         </ng-select>
-                    </app-cc-input-group-prepend> 
+                    </app-cc-input-group-prepend>
                 </div>
 
 
@@ -75,12 +75,12 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
 
 
 
-             
+
             </div>
             <div class="row m-0">
-          
+
                 <div class="col-12 col-md-4 pt-0 pb-0">
-                 
+
                         <app-cc-input-group-prepend label="Código de Proyecto"
                         styleSpan="input-group-text size-span-campo">
                         <input type="text" class="form-control form-control-sm"
@@ -88,20 +88,20 @@ filtroBoton="btnMovForm" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGloba
                             [(ngModel)]="proyecto.secuencia"
                             [disabled]="true">
                     </app-cc-input-group-prepend>
-             
+
                 </div>
 
-                
+
             </div>
             <div class="row m-0">
 
-          
+
 
                 <div class="col-12 col-md-8 pt-0 pb-0">
                     <app-cc-input-group-prepend label="Descripción"
                         styleSpan="size-span-campo">
                         <textarea class="form-control form-control-sm" type="text"
-                            [(ngModel)]="proyecto.descripcion" 
+                            [(ngModel)]="proyecto.descripcion"
                             placeholder="Ingrese una descripción" rows="3"
                              maxlength="255"></textarea>
                     </app-cc-input-group-prepend>

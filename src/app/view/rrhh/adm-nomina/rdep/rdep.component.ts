@@ -8,8 +8,8 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
-import e from 'cors';
-import { RdepService } from './rdep.service'; 
+//import e from 'cors';
+import { RdepService } from './rdep.service';
 import { ExcelService } from 'src/app/services/excel.service';
 
 
@@ -25,7 +25,7 @@ export class RdepComponent implements OnInit {
   mensajeSpiner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  
+
   fTitle: string = "RDEP";
   vmButtons: any
   arrayRdep: any = []
@@ -47,7 +47,7 @@ export class RdepComponent implements OnInit {
 
   cmb_periodo: any[] = []
 
- 
+
   constructor(private commonSrv: CommonService,
     private toastr: ToastrService,
     private apiSrv: RdepService,
@@ -64,7 +64,7 @@ export class RdepComponent implements OnInit {
       { orig: "btnsRdep", paramAccion: "", boton: { icon: "far fa-file-excel", texto: " XML" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: true, imprimir: true},
 
     ]
-    
+
     setTimeout(async () => {
      // this.getCatalogos();
      await this.cargaInicial()
@@ -105,7 +105,7 @@ export class RdepComponent implements OnInit {
   async validaConsultaRdep() {
     let resp = await this.validaDataGlobal().then((respuesta) => {
       if(respuesta) {
-          this.consultarRdep(); 
+          this.consultarRdep();
       }
     });
 }
@@ -122,9 +122,9 @@ validaDataGlobal() {
   })
 }
 setProcesoCedulaPresupuestaria(){
-  
+
   console.log(this.filter);
-    
+
   if(this.filter?.periodo ==undefined){
     this.toastr.info('Debe ingresar un Período');
   }
@@ -139,7 +139,7 @@ setProcesoCedulaPresupuestaria(){
       anio:this.filter?.periodo,
     }
     console.log(data);
-  
+
     this.mensajeSppiner = "Procesando...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.procesarSp(data).subscribe(res => {
@@ -156,8 +156,8 @@ setProcesoCedulaPresupuestaria(){
           this.validaConsultaRdep();
       }
     })
-   
-  
+
+
     },error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.mesagge);
@@ -182,11 +182,11 @@ GeneraXmlRdep() {
   // }else{
   //   year = this.filter.periodo;
   // }
-  
+
   this.lcargando.ctlSpinner(true);
 
   this.apiSrv.ObtenerRdepXml(this.filter.periodo).subscribe(resRdep => {
-  
+
     const jsonObj = {
       rdep:  JSON.parse(resRdep[0]['data'].replaceAll('datretreldep','datRetRelDep'))
     };
@@ -201,8 +201,8 @@ GeneraXmlRdep() {
     this.lcargando.ctlSpinner(false);
     this.toastr.info(error.error.message);
   })
-  
-  
+
+
 }
 JSONtoXML(obj) {
   let xml = '';
@@ -223,8 +223,8 @@ JSONtoXML(obj) {
       }else{
         xml += obj[prop];
       }
-      
-      
+
+
     }
     xml += obj[prop] instanceof Array ? '' : '</' + prop + '>\n';
   }
@@ -245,7 +245,7 @@ consultarRdep(){
   this.lcargando.ctlSpinner(true);
   this.apiSrv.consultarRdep(data).subscribe(res => {
     console.log(res["data"]);
-   
+
     if(res["data"].length > 0){
       this.arrayRdep = res["data"]
       this.vmButtons[3].habilitar = false;
@@ -254,7 +254,7 @@ consultarRdep(){
       this.toastr.info('No hay datos para este Período');
     }
     this.lcargando.ctlSpinner(false);
-    
+
   }, error => {
     this.lcargando.ctlSpinner(false);
     this.toastr.info(error.error.mesagge);
@@ -263,12 +263,12 @@ consultarRdep(){
 
 btnExportarExcel() {
   this.mensajeSpiner = "Generando Archivo Excel...";
- this.lcargando.ctlSpinner(true); 
-     
-    
+ this.lcargando.ctlSpinner(true);
+
+
       this.excelData = [];
       console.log(this.arrayRdep);
-    
+
         Object.keys(this.arrayRdep).forEach(key => {
           let filter_values = {};
           filter_values['ID'] = this.arrayRdep[key].id_rdep_detalle;
@@ -313,16 +313,16 @@ btnExportarExcel() {
           filter_values['I. Renta retenido y asumido por otros empleadores'] = (this.arrayRdep[key].valretasuotrosempls != null) ? parseFloat(this.arrayRdep[key].valretasuotrosempls) : "";
           filter_values['I. Renta asumido por este empleador'] = (this.arrayRdep[key].valimpasuesteempl != null) ? parseFloat(this.arrayRdep[key].valimpasuesteempl) : "";
           filter_values['I. Renta retenido al trabajador'] = (this.arrayRdep[key].valret != null) ? parseFloat(this.arrayRdep[key].valret) : "";
-     
+
           // filter_values['Estado'] = (this.arrayRdep[key].estado != undefined) ? (this.arrayRdep[key].estado == 'P' ? 'Pendiente' : this.arrayRdep[key].estado == 'G' ? 'Gestión' : this.arrayRdep[key].estado == 'C' ? 'Cerrado' : this.arrayRdep[key].estado == 'GA' && 'Garantía' ) : "";
-          
+
           this.excelData.push(filter_values);
           this.lcargando.ctlSpinner(false);
         })
         this.exportAsXLSX();
-      
+
 }
-  
+
 exportAsXLSX() {
   this.excelService.exportAsExcelFile(this.excelData, 'Reporte RDEP');
 }

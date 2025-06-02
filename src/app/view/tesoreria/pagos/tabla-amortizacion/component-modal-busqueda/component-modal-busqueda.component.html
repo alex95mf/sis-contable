@@ -11,14 +11,14 @@
                                 <div class="col-sm-4">
                                     <app-cc-input-group-prepend label="Tipo Amortización" styleSpan="size-span-campo font-weight-bold">
                                         <!--<input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.periodo" (keypress)="validaciones.numberOnly($event)">-->
-                                        <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="filter.tipo" [disabled]="constDisabled">
+                                        <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="filter.tipo">
                                             <ng-option  [value]= "0" disabled>Chosee.. </ng-option>
                                             <ng-option value="A">Amortización Alemana</ng-option>
                                             <ng-option value="F">Amortización Francesa</ng-option>
                                           </ng-select>
                                     </app-cc-input-group-prepend>
                                 </div>
-                                
+
                                 <div class="col-sm-4">
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend"><span class="input-group-text">Num. Documento</span></div>
@@ -26,12 +26,12 @@
                                     </div>
                                 </div>
 
-                                
+
                                 <div class="col-sm-4">
                                     <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
                                         <!--<input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.periodo" (keypress)="validaciones.numberOnly($event)">-->
-                                        <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="filter.estado" [disabled]="constDisabled">
-                                            <ng-option  [value]= "0">TODOS</ng-option> 
+                                        <ng-select class="form-control custom" appendTo="body" [searchable]="true" [(ngModel)]="filter.estado">
+                                            <ng-option  [value]= "0">TODOS</ng-option>
                                             <ng-option value="P">PENDIENTE</ng-option>
                                             <ng-option value="C">CERRADO</ng-option>
                                             <ng-option value="A">APROBADO</ng-option>
@@ -44,14 +44,14 @@
                                 <div class="col-sm-6">
                                     <app-cc-input-group-prepend label="Fecha desde" styleSpan="size-span-campo font-weight-bold">
                                         <!--<input id="filter_razon_social" type="text" class="form-control" [(ngModel)]="filter.fecha_desde">-->
-                                        <input id="filter_razon_social" type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_desde" [disabled]="constDisabled">
+                                        <input id="filter_razon_social" type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_desde">
                                     </app-cc-input-group-prepend>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <app-cc-input-group-prepend label="Fecha hasta" styleSpan="size-span-campo font-weight-bold">
                                         <!--<input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.fecha_hasta" >-->
-                                        <input id="filter_num_documento" type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_hasta" [disabled]="constDisabled">
+                                        <input id="filter_num_documento" type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_hasta">
                                     </app-cc-input-group-prepend>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                     </div>
                 </fieldset>
             </div>
-            
+
         </div>
         <div class="row my-2">
             <div class="col">
@@ -107,7 +107,7 @@
                                 <td class="text-center"> {{ dt.interes}} %</td>
                                 <td class="text-center"> {{ dt.no_cuotas}}</td>
                                 <td class="text-center"> {{ dt.observacion}}</td>
-                                
+
 
                                 <td>
                                     <div class="text-center mx-auto">
@@ -122,9 +122,9 @@
                 </table>
 
                 </div>
-                
+
                 <div class="col-12">
-                <mat-paginator 
+                <mat-paginator
                     showFirstLastButtons
                     [length]="paginate.length"
                     [pageSize]="paginate.perPage"

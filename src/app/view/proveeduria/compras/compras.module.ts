@@ -26,7 +26,7 @@ import { ModalCuentaRetIvaComponent } from './modal-cuenta-ret-iva/modal-cuenta-
     CheckboxModule,
     CalendarModule,
     MatTableModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
 
   ],
   entryComponents: [

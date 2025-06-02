@@ -8,7 +8,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { ModalGruposComponent } from './modal-grupos/modal-grupos.component';
 import { ToastrService } from 'ngx-toastr';
 import { event } from 'jquery';
-import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
+//import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
 @Component({
 standalone: false,
   selector: 'app-subgrupo-producto',

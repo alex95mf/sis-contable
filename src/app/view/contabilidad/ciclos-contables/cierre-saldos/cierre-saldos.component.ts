@@ -1,24 +1,24 @@
 import { Component, OnInit, NgZone, ViewChild, TemplateRef } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { DiarioService } from 'src/app/view/contabilidad/comprobantes/diario/diario.service';
-import { PlanCuentasService } from 'src/app/view/contabilidad/plan-cuentas/plan-cuentas.service'; 
+import { PlanCuentasService } from 'src/app/view/contabilidad/plan-cuentas/plan-cuentas.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import * as myVarGlobals from '../../../../global';
 import { Router } from '@angular/router';
-import { CommonService } from 'src/app/services/commonServices'; 
-import { CommonVarService } from 'src/app/services/common-var.services'; 
+import { CommonService } from 'src/app/services/commonServices';
+import { CommonVarService } from 'src/app/services/common-var.services';
 import * as moment from 'moment';
 import flatpickr from 'flatpickr';
-import { element } from 'angular';
+//import { element } from 'angular';
 import { forEach } from 'jszip';
 import { timingSafeEqual } from 'crypto';
 import { ExcelService } from '../../../../services/excel.service';
 import 'sweetalert2/src/sweetalert2.scss';
 import Swal from "sweetalert2";;
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
-import { ViewDocumentDtComponent } from 'src/app/view/contabilidad/comprobantes/diario/view-document-dt/view-document-dt.component'; 
+import { ViewDocumentDtComponent } from 'src/app/view/contabilidad/comprobantes/diario/view-document-dt/view-document-dt.component';
 import { environment } from 'src/environments/environment';
 
 import { CcModalTablaCuentaComponent } from 'src/app/config/custom/cc-modal-tabla-cuenta/cc-modal-tabla-cuenta.component';
@@ -26,8 +26,8 @@ import { CcModalTablaCuentaComponent } from 'src/app/config/custom/cc-modal-tabl
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
-import { DiarioObjeto } from 'src/app/view/contabilidad/comprobantes/diario/diario'; 
-import { CicloscontablesService } from '../cicloscontables.service'; 
+import { DiarioObjeto } from 'src/app/view/contabilidad/comprobantes/diario/diario';
+import { CicloscontablesService } from '../cicloscontables.service';
 
 
 @Component({

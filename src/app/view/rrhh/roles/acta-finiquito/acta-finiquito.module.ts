@@ -4,7 +4,7 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
 import { ActaFiniquitoRoutingModule } from './acta-finiquito-routing.module';
 import { ActaFiniquitoComponent } from './acta-finiquito.component';
 import { ListRecDocumentosComponent } from './list-rec-documentos/list-rec-documentos.component';
-import { NgxCurrencyModule } from "ngx-currency";
+import { NgxCurrencyDirective } from "ngx-currency";
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { NgxCurrencyModule } from "ngx-currency";
     CommonModule,
     ActaFiniquitoRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class ActaFiniquitoModule { }

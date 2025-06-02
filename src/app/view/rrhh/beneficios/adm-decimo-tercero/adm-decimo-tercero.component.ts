@@ -23,7 +23,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import * as FileSaver from 'file-saver';
 import { XlsExportService } from 'src/app/services/xls-export.service';
-import e from 'cors';
+//import e from 'cors';
 
 
 
@@ -35,14 +35,14 @@ standalone: false,
   styleUrls: ['./adm-decimo-tercero.component.scss']
 })
 export class AdmDecimoTerceroComponent implements OnInit {
- 
+
   constructor(
     private empleadoService: EmpleadoService,
     private admDecimoTerceroService: AdmDecimoTerceroService,
     private commonServices: CommonService,
     private confirmationDialogService: ConfirmationDialogService,
     private router: Router,
-    private toastr: ToastrService, 
+    private toastr: ToastrService,
     private xlsService: XlsExportService,
     private modalService: NgbModal,
     private commonVarSrv: CommonVarService
@@ -96,8 +96,8 @@ export class AdmDecimoTerceroComponent implements OnInit {
   selectMovimiento="administracion/adm-decimo-tercero";
 
   selectAcumula = [
-    {value: 0, label: 'TODOS'}, 
-    {value: 6, label: 'SI'},  
+    {value: 0, label: 'TODOS'},
+    {value: 6, label: 'SI'},
     {value: 5, label: 'NO'},
   ]
 
@@ -113,7 +113,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   totalDecimos : any =  0
   totalRetencionDecimo: any = 0
 
-  num_control: any 
+  num_control: any
 
   fecha_desde: any =  moment(this.toDatePicker).format("YYYY-MM-DD");
   fecha_hasta:any =  moment(this.toDatePicker).format("YYYY-MM-DD");
@@ -121,7 +121,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   por_fecha : boolean = false
 
   labelPeriodo: any
-  
+
   cambioMovimiento(){
     this.router.navigateByUrl(this.selectMovimiento);
   }
@@ -138,7 +138,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
       { orig: "btnsAdmDec3", paramAccion: "", boton: { icon: "fa fa-file-excel", texto: "EXCEL" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success boton btn-sm", habilitar: true,imprimir: false},
       { orig: "btnsAdmDec3", paramAccion: "", boton: { icon: "fa fa-file", texto: "TXT" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-outline-success boton btn-sm", habilitar: true,imprimir: false},
     ];
-    
+
     let fechaActual:any = moment(new Date()).format("YYYY-MM-DD");
     let fechaAntiore:any = moment(this.validaciones.sumarDias(new Date(), -365)).format("YYYY-MM-DD");
     this.periodoInicio = new Date(+fechaAntiore.split("-")[0], 12 - 1, +"01");
@@ -201,18 +201,18 @@ export class AdmDecimoTerceroComponent implements OnInit {
                         let anioActual:any = new Date();
                         let fechaIngreso:any = element?.fechaIngreso.split("-");
                         let fechaSalida:any = this.validaciones.verSiEsNull(element.fechaSalida)==undefined? moment(new Date()).format("YYYY-MM-DD"): element.fechaSalida;
-  
+
                         let diasValida:any = this.restar2Fechas((fechaIngreso[0]+"-"+fechaIngreso[1]+"-"+fechaIngreso[2]), fechaSalida);
                         if(diasValida>=360){
-                          element.diasLaborados = 360;   
+                          element.diasLaborados = 360;
                         }else{
                           let dias:any = this.restar2Fechas((anioActual.getFullYear()+"-"+fechaIngreso[1]+"-"+fechaIngreso[2]), fechaSalida);
-                          dias = (dias < 0) ? dias * -1 : dias; 
+                          dias = (dias < 0) ? dias * -1 : dias;
                           element.diasLaborados = dias;
-                        }                     
+                        }
                         datosPer.push(element);
                       }
-                      
+
                     }
                   });
                   this.arrayPersonal = datosPer;
@@ -244,7 +244,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
           if (res.valor) {
             this.guardar();
           }
-        });        
+        });
         break;
 
       case "ANULAR DECIMO TERCERO":
@@ -253,7 +253,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
           if (res.valor) {
             this.anularPeriodoRol();
           }
-        }); 
+        });
         break;
 
       case "IMPRIMIR":
@@ -265,7 +265,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
         }else{
           this.btnExportExcel();
         }
-       
+
         //this.geenerarReporteDecimoExcel();
         break;
       case "TXT":
@@ -338,7 +338,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
           let diasValida:any = this.restar2Fechas((fechaIngreso[0]+"-"+fechaIngreso[1]+"-"+fechaIngreso[2]), fechaSalida);
           if(diasValida>=360){
-            element.diasLaborados = 360;   
+            element.diasLaborados = 360;
           }else{
             let dias:any = this.restar2Fechas((anioActual.getFullYear()+"-"+fechaIngreso[1]+"-"+fechaIngreso[2]), fechaSalida);
             dias = (dias < 0) ? dias * -1 : dias;
@@ -347,7 +347,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
           this.lstTablaEmpleados.push(element);
         }
       });
-      
+
       if (this.lstTablaEmpleados.length == 0) {
         this.vmButtons[1].habilitar = true;
         this.vmButtons[5].habilitar = true;
@@ -436,11 +436,11 @@ export class AdmDecimoTerceroComponent implements OnInit {
   }
 
   btnExportExcel(){
-    
- 
 
-    this.mensajeSppiner = "Generando Archivo Excel..."; 
-		this.lcargando.ctlSpinner(true); 
+
+
+    this.mensajeSppiner = "Generando Archivo Excel...";
+		this.lcargando.ctlSpinner(true);
 
     let year;
     let mes = 12;
@@ -451,7 +451,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     this.admDecimoTerceroService.getDecimoTercero(1,year, mes, Desde, Hasta, this.fk_programa,this.area,this.ngDepartamentSelect, this.decimo_acumula_mensualiza).subscribe(res => {
       this.decimoterceroExcel = res;
       console.log(this.decimoterceroExcel)
-    
+
       this.decimoterceroExcel.forEach(e => {
         Object.assign(e, {apellidos:e.primer_apellido +' '+ e?.segundo_apellido ,
                           nombres: e.primer_nombre+' '+ e?.segundo_nombre ,
@@ -466,7 +466,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
       let totalRetencionDecimo = this.decimoterceroExcel.reduce((suma: number, x: any) => suma + parseFloat(x.valor_retencion_decimo), 0)
 
       let lineaTotales = {}
-      
+
       lineaTotales['dias_trabajados'] =totalDiasTrab;
       lineaTotales['cedula'] = 'TOTAL';
       lineaTotales['total_ganado'] =totalGanado;
@@ -489,9 +489,9 @@ export class AdmDecimoTerceroComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       }else{
 				this.toastr.info("No hay datos para exportar")
-				this.lcargando.ctlSpinner(false); 
+				this.lcargando.ctlSpinner(false);
 			}
-      
+
     }, error => {
 			this.toastr.info(error.error.mesagge);
 			this.lcargando.ctlSpinner(false);
@@ -499,10 +499,10 @@ export class AdmDecimoTerceroComponent implements OnInit {
   }
 
   btnExportExcelPorFecha(){
-    
-    this.mensajeSppiner = "Generando Archivo Excel..."; 
-		this.lcargando.ctlSpinner(true); 
-  
+
+    this.mensajeSppiner = "Generando Archivo Excel...";
+		this.lcargando.ctlSpinner(true);
+
 
     let year;
     let mes = Number(moment(this.fecha_desde).format("MM"));
@@ -515,10 +515,10 @@ export class AdmDecimoTerceroComponent implements OnInit {
     let Hasta = String(yearHasta) + String(mesHasta)
 
     this.admDecimoTerceroService.getDecimoTerceroPorFecha(1,year, mes, Desde, Hasta,this.fk_programa,this.area, this.departamento,this.decimo_acumula_mensualiza).subscribe(res => {
-    
+
       this.decimoterceroExcelPorFecha = res;
       console.log(this.decimoterceroExcelPorFecha)
-    
+
       this.decimoterceroExcelPorFecha.forEach(e => {
         Object.assign(e, {apellidos:e.primer_apellido +' '+ e?.segundo_apellido ,
                           nombres: e.primer_nombre+' '+ e?.segundo_nombre ,
@@ -533,7 +533,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
       let totalRetencionDecimo = this.decimoterceroExcelPorFecha.reduce((suma: number, x: any) => suma + parseFloat(x.valor_retencion_decimo), 0)
 
       let lineaTotales = {}
-      
+
       lineaTotales['dias_trabajados'] =totalDiasTrab;
       lineaTotales['cedula'] = 'TOTAL';
       lineaTotales['total_ganado'] =totalGanado;
@@ -556,33 +556,33 @@ export class AdmDecimoTerceroComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       }else{
 				this.toastr.info("No hay datos para exportar")
-				this.lcargando.ctlSpinner(false); 
+				this.lcargando.ctlSpinner(false);
 			}
-      
+
     }, error => {
 			this.toastr.info(error.error.mesagge);
 			this.lcargando.ctlSpinner(false);
 		});
   }
- 
+
 
   generarTxt() {
     // armar array con cabeceras
     // this.downloadFile(
-    //   this.decimotercero, 
-    //   'DecimoTercero', 
+    //   this.decimotercero,
+    //   'DecimoTercero',
     //   ['nombres', 'porpagar', 'pagado', 'valor_pagar', 'nromesesprovision', 'periodoinicial', 'periodofinal']
     // )
-    
+
     this.decimotercero.forEach(e => {
       Object.assign(e, {apellidos:e.primer_apellido +' '+ e?.segundo_apellido ,
-                        nombres: e.primer_nombre+' '+ e?.segundo_nombre  
+                        nombres: e.primer_nombre+' '+ e?.segundo_nombre
       });
-    }) 
+    })
 
     // this.exportToCsv(
-    //   this.decimotercero, 
-    //   'DecimoTercero', 
+    //   this.decimotercero,
+    //   'DecimoTercero',
     //   ['cedula',
     //    'apellidos',
     //    'nombres',
@@ -596,8 +596,8 @@ export class AdmDecimoTerceroComponent implements OnInit {
     //   ]
     // )
     this.downloadFileCsv(
-      this.decimotercero, 
-      'DecimoTercero', 
+      this.decimotercero,
+      'DecimoTercero',
       ['cedula',
        'nombres',
        'apellidos',
@@ -621,8 +621,8 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
 
 
-    
-    
+
+
   }
 
 
@@ -634,7 +634,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     const separator = ';';
     const keys = Object.keys(rows[0]).filter(k => {
       if (columns?.length) {
-        
+
         return columns.includes(k);
       } else {
         return true;
@@ -663,15 +663,15 @@ export class AdmDecimoTerceroComponent implements OnInit {
   }
 
 
-  
+
 
   downloadFileCsv(data: any, filename:string,cabecera) {
     const replacer = (key, value) => value === null ? '' : value;
-    
+
     //const header = Object.keys(data[0]);
     const header = cabecera;
     console.log(header)
-   
+
     let csv = data.map(row => header.map(fieldName => JSON.stringify(row[fieldName],replacer)).join(';'));
     if(header[0]=='cedula'){header[0]="Cédula (Ejm.:0502366503)"}
     if(header[1]=='nombres'){header[1]='Nombres'}
@@ -760,7 +760,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   calcularValorNetoRecibir() {
     this.resultadoReciTotal = 0;
     this.resultadoReciTotal = this.validaciones.calcularValorNetoRecibir(this.lstTablaEmpleados);
-  }  
+  }
 
   calcularRubros() {
     this.lstTablaEmpleados.forEach((element, index) => {
@@ -779,12 +779,12 @@ export class AdmDecimoTerceroComponent implements OnInit {
           let dias:any = 0;
           let diasValida:any = this.restar2Fechas((fechaIngreso[0]+"-"+fechaIngreso[1]+"-"+fechaIngreso[2]), fechaSalida);
           if(diasValida>=360){
-            dias = 360;   
+            dias = 360;
           }else{
             dias = this.restar2Fechas((anioActual.getFullYear()+"-"+fechaIngreso[1]+"-"+fechaIngreso[2]), fechaSalida);
             dias = (dias < 0) ? dias * -1 : dias;
           }
-          
+
           if (valores.tipo_calculo == "S") {
             valores.valor_cantidad = eval(valores.formula);
             element.datoRubro.push(valores);
@@ -862,9 +862,9 @@ export class AdmDecimoTerceroComponent implements OnInit {
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
 
     let dataPost:any = {
-      tipoGrupo: nombreGrupo, 
-      idPersonal: lIdPersonal.id_personal, 
-      tipoModulo: myVarGlobals.fNomDecTercero, 
+      tipoGrupo: nombreGrupo,
+      idPersonal: lIdPersonal.id_personal,
+      tipoModulo: myVarGlobals.fNomDecTercero,
       periodoInicio: periodoInicio,
       periodoFin: periodoFin
     };
@@ -897,7 +897,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
                 nombre_cuenta: bancoSeleccionado.name_cuenta,
                 cod_cuenta_banck: bancoSeleccionado.cuenta_contable,
                 id_banks: bancoSeleccionado.id_banks,
-                tipo_modulo: myVarGlobals.fNomDecTercero,                
+                tipo_modulo: myVarGlobals.fNomDecTercero,
                 periodo_inicio: periodoInicio,
                 periodo_fin: periodoFin,
                 ip: this.commonServices.getIpAddress(),
@@ -939,7 +939,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
                     datosPostDetEgreso.push(datosDet);
                   }
                 });
-              }              
+              }
 
               let datosDetBanco: any = {
                 id_ro_detalle: null,
@@ -1003,12 +1003,12 @@ export class AdmDecimoTerceroComponent implements OnInit {
 	}
 
   procesarDecimoTercero() {
-    
+
     if(this.decimo_acumula_mensualiza == null){this.decimo_acumula_mensualiza = 0 }
     if(this.programa==undefined || this.programa=='') { this.fk_programa=0 }
     if(this.area==null) { this.area=0 }
     if(this.departamento==null) { this.departamento=0 }
-   
+
     let year;
     let mes = 12;
 
@@ -1022,24 +1022,24 @@ export class AdmDecimoTerceroComponent implements OnInit {
       console.log(res)
      // this.decimotercero = res;
      this.obtenerRolDetalle()
-     
+
 
       this.vmButtons[6].habilitar = false
       this.vmButtons[7].habilitar = false
     });
-   
+
   }
 
   aprobarDecimoTercero(){
-   
-  
+
+
     let empleadosCheck= this.decimotercero.filter(e => e.aprobar==true)
     console.log(empleadosCheck)
     let data = {
       anio: this.select_anio,
       mes: 12,
       tipo_decimo: 'DECIT',
-      empleados: empleadosCheck 
+      empleados: empleadosCheck
     }
 
     console.log("datadecimoterce",data)
@@ -1057,12 +1057,12 @@ export class AdmDecimoTerceroComponent implements OnInit {
         confirmButtonColor: '#20A8D8',
     })
     this.obtenerRolDetalle()
-   
+
     },error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.mesagge);
     });
-  
+
 }
 
 
@@ -1072,7 +1072,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     if(this.programa==undefined || this.programa=='') { this.fk_programa=0 }
     if(this.area==null) { this.area=0 }
     if(this.departamento==null) { this.departamento=0 }
-  
+
 
     this.mensajeSppiner = "Cargando Decimo Tercero...";
     this.lcargando.ctlSpinner(true);
@@ -1088,11 +1088,11 @@ export class AdmDecimoTerceroComponent implements OnInit {
         console.log(res)
       this.decimotercero = res;
       this.decimotercero.forEach((e,index) => {
-    
+
         if(e.num_control !=''){
           Object.assign(e,{ aprobar:true, tiene_control:true})
         }
-        
+
       });
 
       let totalDiasTrab = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.dias_trabajados), 0)
@@ -1100,16 +1100,16 @@ export class AdmDecimoTerceroComponent implements OnInit {
       let totalDevengado = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.total_devengado), 0)
       let totalRetencionDecimo = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.valor_retencion_decimo), 0)
       let totalDecimos = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.valor_decimo), 0)
-      
+
 
       this.totalDiasTrab =totalDiasTrab
       this.totalGanado =totalGanado
       this.totalDevengado =totalDevengado
-      this.totalDecimos =  totalDecimos 
-      this.totalRetencionDecimo =  totalRetencionDecimo 
+      this.totalDecimos =  totalDecimos
+      this.totalRetencionDecimo =  totalRetencionDecimo
       this.lcargando.ctlSpinner(false);
-      
-     
+
+
       //si trae datos de empleados con decimo habilito el boton aprobar
       let sinAprobar = this.decimotercero.filter(e => e.aprobar == true && e.num_control =='')
       if(sinAprobar.length > 0){
@@ -1130,9 +1130,9 @@ export class AdmDecimoTerceroComponent implements OnInit {
     });
 
 
-  
-  
-  
+
+
+
     /*
 
     this.getInfoBank();
@@ -1158,14 +1158,14 @@ export class AdmDecimoTerceroComponent implements OnInit {
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
 
     let dataPost:any = {
-      tipoGrupo: nombreGrupo, 
-      idPersonal: lIdPersonal.id_personal, 
-      tipoModulo: myVarGlobals.fNomDecTercero, 
+      tipoGrupo: nombreGrupo,
+      idPersonal: lIdPersonal.id_personal,
+      tipoModulo: myVarGlobals.fNomDecTercero,
       periodoInicio: periodoInicio,
       periodoFin: periodoFin
     };
-    
-    this.admDecimoTerceroService.getNomRolCab(dataPost).subscribe((datosCab: any) => {          
+
+    this.admDecimoTerceroService.getNomRolCab(dataPost).subscribe((datosCab: any) => {
           let existePeriodo: any = datosCab.data.find((datos) => moment(datos.periodo_inicio).format("YYYY-MM-DD") == periodoInicio && moment(datos.periodo_fin).format("YYYY-MM-DD") == periodoFin);
           if (existePeriodo != undefined) {
             this.listadoGeneral[0].datos_empleado = [
@@ -1173,7 +1173,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
               { nombre: "NOMBRE", sise: "8%" },
               { nombre: "DEPARTAMENTO", sise: "8%" },
               { nombre: "AFILIADO", sise: "4%" },
-              { nombre: "DIAS LABORADOS", sise: "4%" },              
+              { nombre: "DIAS LABORADOS", sise: "4%" },
               { nombre: "CONCEPTO", sise: "4%" },
               { nombre: "BANCO", sise: "10%" },
               { nombre: "SUELDO", sise: "4%" },
@@ -1218,26 +1218,26 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
               let diasValida:any = this.restar2Fechas((fechaIngreso[0]+"-"+fechaIngreso[1]+"-"+fechaIngreso[2]), fechaSalida);
               if(diasValida>=360){
-                element.diasLaborados = 360;   
+                element.diasLaborados = 360;
               }else{
                 let dias:any = this.restar2Fechas((anioActual.getFullYear()+"-"+fechaIngreso[1]+"-"+fechaIngreso[2]), fechaSalida);
                 dias = (dias < 0) ? dias * -1 : dias;
-                element.diasLaborados = dias;  
-              }                
+                element.diasLaborados = dias;
+              }
             });
             this.calcularIngresos();
             this.calcularEgresos();
             this.calcularValorNetoRecibir();
             this.calcularTotalesIngresos();
-            this.calcularTotalesEgresos();  
-            
+            this.calcularTotalesEgresos();
+
             if (!this.vmButtons[0].habilitar && this.lstTablaEmpleados.length > 0) {
               this.vmButtons[2].habilitar = true;
             }
             this.setearValoresPrint();
           } else {
             this.obtenerEmpleados();
-          } 
+          }
         },
         (error) => {
           this.lcargando.ctlSpinner(false);
@@ -1249,14 +1249,14 @@ export class AdmDecimoTerceroComponent implements OnInit {
       */
   }
   async getPrevRecord() {
-    
+
     this.lastRecord = Number(this.lastRecord)- 1;
      this.getNumControl()
   //  await this.handleEnter({key: 'Enter'})
   }
 
   async getNextRecord() {
-    
+
     this.lastRecord = Number(this.lastRecord)+ 1;
      this.getNumControl()
    // await this.handleEnter({key: 'Enter'})
@@ -1270,7 +1270,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
        this.getNumControl()
       }
 
-    
+
     }
   }
   getLatest() {
@@ -1283,7 +1283,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     let respuesta;
     this.admDecimoTerceroService.getLatest(data).subscribe(
       res => {
-       
+
         respuesta = res;
         this.lastRecord = respuesta?.data?.id;
         if (respuesta.data.num_documento) {
@@ -1291,9 +1291,9 @@ export class AdmDecimoTerceroComponent implements OnInit {
           // this.getRolNoControl()
 
           this.getPorNoControl();
-        
+
         } else {
-       
+
           this.lcargando.ctlSpinner(false)
           Swal.fire('Registro Inexistente', 'El registro solicitado no existe. Intente otro identificador.', 'warning')
         }
@@ -1329,7 +1329,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
       });
   }
 
-    
+
 
 
 
@@ -1341,7 +1341,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     if(this.programa==undefined || this.programa=='') { this.fk_programa=0 }
     if(this.area==null) { this.area=0 }
     if(this.departamento==null) { this.departamento=0 }
-  
+
 
     this.mensajeSppiner = "consultando por rango de fechas...";
     this.lcargando.ctlSpinner(true);
@@ -1353,7 +1353,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     let yearHasta;
     let mesHasta = Number(moment(this.fecha_hasta).format("MM"));
     yearHasta = Number(moment(this.fecha_hasta).format("YYYY"));
-    
+
     let Desde = String(year*100+mes)
     let Hasta = String(yearHasta*100+mesHasta)
 
@@ -1362,11 +1362,11 @@ export class AdmDecimoTerceroComponent implements OnInit {
         console.log(res)
       this.decimotercero = res;
       this.decimotercero.forEach((e,index) => {
-    
+
         if(e.num_control !=''){
           Object.assign(e,{ aprobar:true, tiene_control:true})
         }
-        
+
       });
 
       let totalDiasTrab = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.dias_trabajados), 0)
@@ -1374,16 +1374,16 @@ export class AdmDecimoTerceroComponent implements OnInit {
       let totalDevengado = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.total_devengado), 0)
       let totalRetencionDecimo = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.valor_retencion_decimo), 0)
       let totalDecimos = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.valor_decimo), 0)
-      
+
 
       this.totalDiasTrab =totalDiasTrab
       this.totalGanado =totalGanado
       this.totalDevengado =totalDevengado
-      this.totalDecimos =  totalDecimos 
-      this.totalRetencionDecimo =  totalRetencionDecimo 
+      this.totalDecimos =  totalDecimos
+      this.totalRetencionDecimo =  totalRetencionDecimo
       this.lcargando.ctlSpinner(false);
-      
-     
+
+
       //si trae datos de empleados con decimo habilito el boton aprobar
       let sinAprobar = this.decimotercero.filter(e => e.aprobar == true && e.num_control =='')
       if(sinAprobar.length > 0){
@@ -1414,9 +1414,9 @@ export class AdmDecimoTerceroComponent implements OnInit {
       anio: this.select_anio,
       mes: 12,
       tipo_decimo: 'DECIT',
-      empleados: empleadosCheck 
+      empleados: empleadosCheck
     }
-    this.mensajeSppiner = "Generando Ordenes de Pago"; 
+    this.mensajeSppiner = "Generando Ordenes de Pago";
     this.lcargando.ctlSpinner(true);
     this.admDecimoTerceroService.generarOrdenesPago(data).subscribe(res => {
       console.log(res)
@@ -1430,7 +1430,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
         confirmButtonColor: '#20A8D8',
     })
     this.obtenerRolDetalle()
-   
+
     },error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.mesagge);
@@ -1438,12 +1438,12 @@ export class AdmDecimoTerceroComponent implements OnInit {
   }
 
   anularPeriodoRol() {
-    if (this.vmButtons[1].habilitar && this.lstTablaEmpleados.length > 0) { 
+    if (this.vmButtons[1].habilitar && this.lstTablaEmpleados.length > 0) {
       let periodoInicio:any = moment(this.periodoInicio).format("YYYY-MM-DD");
       let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");
       let anioActual:any = moment(new Date()).format("YYYY-MM-DD");
       let anioAnterior:any = null;
-      anioAnterior =  moment(this.validaciones.sumarDias(new Date(), -365)).format("YYYY-MM-DD");      
+      anioAnterior =  moment(this.validaciones.sumarDias(new Date(), -365)).format("YYYY-MM-DD");
       let validafInicio:any = new Date(+anioAnterior.split("-")[0], 12 - 1, +"01");
       let validafFin:any = new Date(+anioActual.split("-")[0], 11 - 1, +"30");
       validafInicio = moment(validafInicio).format("YYYY-MM-DD");
@@ -1477,7 +1477,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
           this.lcargando.ctlSpinner(false);
         }
       );
-      
+
     } else {
       this.validaciones.mensajeAdvertencia("Advertencia", "No puede anular este periodo de decimo tercero porque no existe o el departamento no existe ningun empleado");
     }
@@ -1507,10 +1507,10 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
           let diasValida:any = this.restar2Fechas((fechaIngreso[0]+"-"+fechaIngreso[1]+"-"+fechaIngreso[2]), fechaSalida);
           if(diasValida>=360){
-            element.diasLaborados = 360;   
+            element.diasLaborados = 360;
           }else{
             let dias:any = this.restar2Fechas((anioActual.getFullYear()+"-"+fechaIngreso[1]+"-"+fechaIngreso[2]), fechaSalida);
-            dias = (dias < 0) ? dias * -1 : dias;            
+            dias = (dias < 0) ? dias * -1 : dias;
             element.diasLaborados = dias;
           }
           datosPer.push(element);
@@ -1542,7 +1542,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     let lfechaFin:any = String(fechaFin).split("-");
     let fechauno = new Date(+lfechaInicio[0], lfechaInicio[1] - 1, +lfechaInicio[2]).getTime();
     let fechados = new Date(+lfechaFin[0], lfechaFin[1] - 1, +lfechaFin[2]).getTime();
-    let diff = fechados - fechauno;    
+    let diff = fechados - fechauno;
     return diff/(1000*60*60*24);
   }
 
@@ -1560,12 +1560,12 @@ export class AdmDecimoTerceroComponent implements OnInit {
   validaPeriodoFechas(){
     let resultado:boolean = false;
     let periodoInicio:any = moment(this.periodoInicio).format("YYYY-MM-DD");
-    let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");    
+    let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");
     let validafInicio = new Date(+periodoInicio.split("-")[0], 12 - 1, +"01");
     let validafFin = new Date(+periodoFin.split("-")[0], 11 - 1, +"30");
     if(periodoInicio != moment(validafInicio).format("YYYY-MM-DD") || periodoFin != moment(validafFin).format("YYYY-MM-DD")){
       resultado = true;
-    }    
+    }
     return resultado;
   }
 
@@ -1575,7 +1575,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   //   let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");
   //   let valida:boolean = false;
   //   let enviarData:any = [];
-    
+
   //   this.lstTablaEmpleados.forEach((element) => {
   //     if(element.estadoRol == "P"){
   //       valida = true;
@@ -1593,7 +1593,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   //       };
   //       enviarData.push(dataPost);
   //     }
-  //   }); 
+  //   });
 
   //   if(!valida){
   //     this.validaciones.mensajeInfo("Informativo","No existe informacion a aprobar");
@@ -1611,7 +1611,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   // }
 
 
-  
+
 
   modalPrograma(){
     let modal = this.modalService.open(ModalProgramaComponent,{
@@ -1620,7 +1620,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
       windowClass: "viewer-content-general",
     })
   }
-  
+
   cargarAreas() {
     this.mensajeSppiner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
@@ -1668,7 +1668,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     console.log(event.target.checked)
     console.log(data)
     this.decimotercero.forEach(e => {
-      
+
       if(event.target.checked ){
         Object.assign(e, {aprobar: event.target.checked})
       }else{
@@ -1703,9 +1703,9 @@ export class AdmDecimoTerceroComponent implements OnInit {
     }
 
    console.log(this.decimotercero)
-  } 
+  }
   getPorNoControl() {
-      
+
 
     this.mensajeSppiner = "Buscando";
     this.lcargando.ctlSpinner(true);
@@ -1719,27 +1719,27 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
         this.decimotercero = result;
         this.decimotercero.forEach(e => {
-      
+
           if(e.num_control !=''){
             Object.assign(e,{ aprobar:true, tiene_control:true})
           }
         });
-  
+
         let totalDiasTrab = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.dias_trabajados), 0)
         let totalGanado = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.total_ganado), 0)
         let totalDevengado = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.total_devengado), 0)
         let totalDecimos = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.valor_decimo), 0)
         let totalRetencionDecimo = this.decimotercero.reduce((suma: number, x: any) => suma + parseFloat(x.valor_retencion_decimo), 0)
 
-  
+
         this.totalDiasTrab =totalDiasTrab
         this.totalGanado =totalGanado
         this.totalDevengado =totalDevengado
-        this.totalDecimos =  totalDecimos 
-        this.totalRetencionDecimo =  totalRetencionDecimo 
-  
+        this.totalDecimos =  totalDecimos
+        this.totalRetencionDecimo =  totalRetencionDecimo
+
         this.lcargando.ctlSpinner(false);
-       
+
         //si trae datos de empleados con decimo habilito el boton aprobar
         let sinAprobar = this.decimotercero.filter(e => e.aprobar == true && e.num_control =='')
         if(sinAprobar.length > 0){
@@ -1747,13 +1747,13 @@ export class AdmDecimoTerceroComponent implements OnInit {
         }else{
           this.vmButtons[2].habilitar = true;
         }
-  
+
         //si hay aprobados sin orden de pago habilito el boton generar orden de pago
         let aprobados = this.decimotercero.filter(e => e.tiene_control == true && e.num_orden_pago =='')
         if(aprobados.length > 0){
           this.vmButtons[3].habilitar = false;
         }
-  
+
         this.vmButtons[6].habilitar = false
         this.vmButtons[7].habilitar = false
 
@@ -1767,9 +1767,9 @@ export class AdmDecimoTerceroComponent implements OnInit {
       this.vmButtons[0].habilitar = true;
       this.vmButtons[2].habilitar = true;
       this.vmButtons[3].habilitar = true;
-     
+
     }
-   
+
   }
 
 

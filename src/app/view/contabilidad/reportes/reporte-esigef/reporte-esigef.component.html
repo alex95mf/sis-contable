@@ -4,7 +4,7 @@
 
 
 <div class="my-2">
-    <app-button-radio-active-new titulo="ESIGEF" filtroBoton="btnSalSum" 
+    <app-button-radio-active-new titulo="ESIGEF" filtroBoton="btnSalSum"
     cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fa fa-money">
 
 
@@ -18,8 +18,8 @@
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Tipo" styleSpan="size-span-campo font-weight-bold">
                             <ng-select  class="form-control form-control-sm"
-                                (change)="ObtnerArchivoDescarga($event)" 
-                                [searchable]="true" [(ngModel)]="nivelSeleccionado" [clearable]="false" 
+                                (change)="ObtnerArchivoDescarga($event)"
+                                [searchable]="true" [(ngModel)]="nivelSeleccionado" [clearable]="false"
                                 [items]="FilreportEsigef" bindLabel="descripcion" bindValue="id">
                             </ng-select>
                         </app-cc-input-group-prepend>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select class="form-control" appendTo="body" [clearable]="true" 
+                            <ng-select class="form-control" appendTo="body" [clearable]="true"
                                [(ngModel)]="selected_anio"
                                 [items]="cmb_periodo" bindValue="periodo" bindLabel="periodo"
                                 >
@@ -36,23 +36,23 @@
                     </div>
                     <div class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo ">
-                            <ng-select 
-                                
-                                class="form-control" 
+                            <ng-select
+
+                                class="form-control"
                                 id="elemento_pruebas"
                                 bindLabel="name"
                                 placeholder="-Todos-"
                                 appendTo="body"
                                 [clearable]="false"
                                 [searchable]="true"
-                                [disabled]=disabled
+                                disabled
                                 [(ngModel)]="selected_mes">
-                                
+
                                 <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
                                     {{item.name}}
                                 </ng-option>
                             </ng-select>
-                          </app-cc-input-group-prepend> 
+                          </app-cc-input-group-prepend>
 
                     </div>
                 </div>
@@ -67,11 +67,11 @@
             <div class="col-12">
 
             <p-tabView [(activeIndex)]="index" (onChange)="handleChange($event)" styleClass="tab_content_compras" class="overflow">
-                
+
                 <p-tabPanel class="p-0" header="ASIENTO INICIAL" [headerStyle]="{'font-size': '0.7rem'}">
-                    <p-table 
+                    <p-table
                     [value]="DataAsientoInicial"
-                    [(selection)]="selectedRetencionesElement" 
+                    [(selection)]="selectedRetencionesElement"
                     [scrollable]="true" scrollHeight="400px">
                        <ng-template pTemplate="header">
                            <tr style="font-size: 11px;">
@@ -146,9 +146,9 @@
                 </p-tabPanel>
 
                 <!-- <p-tabPanel class="p-0" header="TRANSFERENCIAS" [headerStyle]="{'font-size': '0.7rem'}">
-                    <p-table 
+                    <p-table
                     [value]="asiento_inicial"
-                    [(selection)]="selectedRetencionesElement" 
+                    [(selection)]="selectedRetencionesElement"
                     [scrollable]="true" scrollHeight="400px">
                        <ng-template pTemplate="header">
                            <tr style="font-size: 11px;">
@@ -251,9 +251,9 @@
                 </p-tabPanel>
 
                 <!-- <p-tabPanel class="p-0" header="RECÍPROCAS INICIAL" [headerStyle]="{'font-size': '0.7rem'}">
-                    <p-table 
+                    <p-table
                     [value]="recipIniDataSource"
-                    [(selection)]="selectedRetencionesElement" 
+                    [(selection)]="selectedRetencionesElement"
                     [scrollable]="true" scrollHeight="400px" >
                        <ng-template pTemplate="header">
                            <tr style="font-size: 11px;">
@@ -267,7 +267,7 @@
                                <th>NOMBRE RECEPTOR</th>
                                <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO DEUDOR</th>
                                <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO ACREDOR</th>
-                               
+
                            </tr>
                        </ng-template>
                        <ng-template pTemplate="body" let-item>
@@ -296,13 +296,13 @@
                 </p-tabPanel> -->
 
                  <p-tabPanel class="p-0" header="TRANSACCIONES RECÍPROCAS" [headerStyle]="{'font-size': '0.7rem'}">
-                    <p-table 
+                    <p-table
                     [value]="tranReciDataSource"
-                    [(selection)]="selectedRetencionesElement" 
+                    [(selection)]="selectedRetencionesElement"
                     [scrollable]="true" scrollHeight="400px">
                        <ng-template pTemplate="header">
                            <tr style="font-size: 11px;">
-                            
+
                                 <th style="min-width: 100px;">MES</th>
                                 <th style="min-width: 100px;">RUC</th>
                                 <th style="min-width: 100px;">CÓDIGO OFICIAL</th>
@@ -329,7 +329,7 @@
                        </ng-template>
                        <ng-template pTemplate="body" let-item>
                             <tr style="font-size: 11px;">
-                               
+
                                 <td style="min-width: 100px;">{{item.mes}}</td>
                                 <td style="min-width: 100px;">{{item.ruc}}</td>
                                 <td style="min-width: 100px;">{{item.codigo_oficial}}</td>
@@ -364,9 +364,9 @@
                    </p-table>
                 </p-tabPanel>
                 <p-tabPanel class="p-0" header="DETALLE DE ASIENTO INICIAL" [headerStyle]="{'font-size': '0.7rem'}">
-                    <p-table 
+                    <p-table
                     [value]="detAsientoIniDataSource"
-                    [(selection)]="selectedRetencionesElement" 
+                    [(selection)]="selectedRetencionesElement"
                     [scrollable]="true" scrollHeight="400px">
                     <ng-template pTemplate="header">
                         <tr style="font-size: 11px;">
@@ -380,7 +380,7 @@
                             <th>NOMBRE RECEPTOR</th>
                             <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO DEUDOR</th>
                             <th style="min-width: 100px;" class="d-flex justify-content-end">FLUJO ACREDOR</th>
-                            
+
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-item>

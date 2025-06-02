@@ -26,7 +26,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     AsientoCierreRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ],
   providers: [
     DialogService,

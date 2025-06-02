@@ -26,8 +26,8 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
 
 
-    
-    
+
+
     <!-- <div class="col-4">
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">Concepto</span></div>
@@ -40,7 +40,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 </div>
 
 <div class="row mt-2 mb-3">
-    
+
     <div class="col-sm-6">
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">Solicitante</span></div>
@@ -51,7 +51,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         </div>
     </div>
 
-   
+
 </div>
 
 <div class="row mt-2 mb-3">
@@ -83,12 +83,12 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
                 <i
                     placement="bottom"
-                    [ngbTooltip]="(documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado')" 
+                    [ngbTooltip]="(documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado')"
                     [class]="(documento.estado == 'P') ? 'fas fa-circle text-muted' : (documento.estado == 'E') ? 'fas fa-circle text-warning' : ((documento.estado == 'A') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
                 </i>
                 {{ (documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado') }}
             </div>
-            <!--<input type="text" class="form-control form-control-sm font-weight-bold" [class]="liquidacion.estado == 'E' ? 'text-warning' : (liquidacion.estado == 'A' ? 'text-success' : (liquidacion.estado == 'X' ? 'text-danger' : ''))" readonly 
+            <!--<input type="text" class="form-control form-control-sm font-weight-bold" [class]="liquidacion.estado == 'E' ? 'text-warning' : (liquidacion.estado == 'A' ? 'text-success' : (liquidacion.estado == 'X' ? 'text-danger' : ''))" readonly
             value="{{ liquidacion.estado == 'E' ? 'Emitido' : (liquidacion.estado == 'A' ? 'Aprobado' : (liquidacion.estado == 'X' ? 'Anulado' : '')) }}">-->
         </div>
     </div>
@@ -101,7 +101,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             <textarea cols="30" rows="3" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="documento.observacion"></textarea>
         </div>
 
-        
+
     </div>
 
     <div class="col-sm-4" *ngIf="aprobacionValidacion">
@@ -114,7 +114,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         </app-cc-input-group-prepend>
 
     </div>
-    
+
     <!-- <div class="col-4">
         <div class="input-group input-group-sm mb-2">
             <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 120px;">No. Resolución</span></div>
@@ -150,7 +150,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
     </div>
 
-    
+
 
 </div>
 
@@ -158,7 +158,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
 <div class="row">
 
-   
+
     <div class="col-sm-4">
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px; ">Observaciones de deudas</span></div>
@@ -166,9 +166,9 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         </div>
     </div>
 
-    
 
-    
+
+
 
     <div class="col-sm-4 mt-2">
         <div class="input-group input-group-sm mb-2">
@@ -187,14 +187,14 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
     </div> -->
 
     <div class="col-sm-4 mt-2">
-        <app-anexos-list-dis [dataUser]="dataUser" [permissions]="permissions" [identifier]="documento.id_documento" [archivo2]="false"></app-anexos-list-dis>
+        <app-anexos-list-dis [dataUser]="dataUser" [permissions]="permissions" [identifier]="documento.id_documento"></app-anexos-list-dis>
 
     </div>
-    
+
 
 </div>
 
-    
+
 
 
 
@@ -208,7 +208,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" [disabled]="titulosDisabled || formReadOnly">
             <i class="fas fa-plus"></i>
         </button>
-        
+
     </div> -->
 </div>
 
@@ -266,19 +266,19 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <small class="text-muted"> 
-                                            <b class="cursor-pointer" 
+                                        <small class="text-muted">
+                                            <b class="cursor-pointer"
                                             style="text-decoration: underline;  color: #2b94e2;"
                                             (click)="expandDetalleLiq(d)">{{ d.numero_documento }}
                                             </b>
                                         </small>
                                     </div>
-                                 
+
                                 </div>
                               </td>
                             <!-- <td class="text-center">
                                 <div class="input-group input-group-sm">
-                                    
+
                                     <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
                                 </div>
                             </td> -->
@@ -308,12 +308,12 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                 </div>
                             </td>
                             <!-- <td class="text-left"></td> -->
-                    
+
                             <!-- <td class="text-center">
                                 <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
                             </td> -->
                         </tr>
-      
+
                     </ng-container>
 
                 </tbody>
@@ -349,49 +349,49 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
     <div class="col-10">
         <div class="row my-2">
-            <div class="col-sm-4 ">       
+            <div class="col-sm-4 ">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Monto total</span></div>
-                    <input id="monto_total" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" value="$ {{ totalCobro | number: '1.2-2' }}">          
+                    <input id="monto_total" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" value="$ {{ totalCobro | number: '1.2-2' }}">
                 </div>
             </div>
-            <div class="col-sm-4 ">       
+            <div class="col-sm-4 ">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">{{'Cuota inicial'+(amortizacion.cuota_inicial>0?' ('+((amortizacion.cuota_inicial/totalCobro*100) | number: '1.2-2')+'%)':'')}}</span></div>
-                    <input currencyMask [disabled]="formReadOnly || titulosDisabled" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">          
+                    <input currencyMask [disabled]="formReadOnly || titulosDisabled" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">
                 </div>
             </div>
-            <div class="col-sm-4 ">       
+            <div class="col-sm-4 ">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Cuota inicial</span></div>
-                    <input id="cuota_inicial" readonly type="text" maxlength="8" class="form-control form-control-lg text-right"  [value]="total20 | number:'1.2-2'">          
+                    <input id="cuota_inicial" readonly type="text" maxlength="8" class="form-control form-control-lg text-right"  [value]="total20 | number:'1.2-2'">
                 </div>
             </div>
-            
-              
+
+
         </div>
         <div class="row my-2">
-            <div class="col-sm-4 ">       
+            <div class="col-sm-4 ">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Monto a amortizar</span></div>
-                    <input id="monto_amortizar" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [value]="amortizacion.monto_amortizar | number:'1.2-2'">          
+                    <input id="monto_amortizar" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [value]="amortizacion.monto_amortizar | number:'1.2-2'">
                 </div>
             </div>
-            <div class="col-sm-4 ">        
-                <div class="input-group input-group-sm">         
+            <div class="col-sm-4 ">
+                <div class="input-group input-group-sm">
                     <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">No. cuotas</span></div>
-                    <input id="num_cuotas" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">     
+                    <input id="num_cuotas" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">
                 </div>
             </div>
-            <div class="col-sm-4 ">        
-                <div class="input-group input-group-sm">            
+            <div class="col-sm-4 ">
+                <div class="input-group input-group-sm">
                     <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Interés</span></div>
-                    <input id="interes" readonly [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">         
+                    <input id="interes" readonly [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">
                 </div>
-            </div>      
+            </div>
         </div>
 
-        
+
 
     </div>
     <div class="col">
@@ -411,7 +411,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                 <textarea cols="30" rows="3" class="form-control form-control-sm" [disabled]="cuotasDisabled || formReadOnly" [(ngModel)]="documento.observacion_pdf_2"></textarea>
             </div>
         </div>
-    
+
         <div class="col-sm-4 mt-2">
             <div class="input-group input-group-sm mb-2">
             <div class="input-group-prepend">
@@ -422,16 +422,16 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                 <label class="custom-file-label" for="inputGroupFile01">{{ fileList2 !== undefined ? fileList2[0].name : "Seleccione un archivo" }}</label>
             </div>
         </div>
-    
+
         </div>
 
         <div class="col-sm-4 mt-2">
             <app-anexos-lista-dis [dataUser]="dataUser" [permissions]="permissions" [identifier]="documento.id_documento" [archivo]="'archivo2'"></app-anexos-lista-dis>
-    
+
         </div>
-    
+
     </div>
- 
+
 
 </div>
 
@@ -440,17 +440,17 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
     <div class="col">
         <div class="table-responsive">
             <table class="table table-bordered no-footer table-hover mb-0">
-                
+
                 <thead class="thead-dark">
                     <tr class="text-center">
-                        <th style="width: 5%;">Mes</th>     
-                        <th style="width: 10%;">Estado</th>               
+                        <th style="width: 5%;">Mes</th>
+                        <th style="width: 10%;">Estado</th>
                         <th style="width: 10%;">Saldo inicial</th>
                         <th style="width: 10%;">Interés</th>
                         <th style="width: 15%;">Pago mensual</th>
                         <th style="width: 15%;">Pago total</th>
                         <th style="width: 10%;">Valor pagado</th>
-                        <th style="width: 10%;">Saldo final</th>                        
+                        <th style="width: 10%;">Saldo final</th>
                         <th style="width: 15%;">Plazo máximo</th>
                     </tr>
                 </thead>
@@ -460,7 +460,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                     </tr>
                     <ng-container *ngFor="let d of amortizaciones, let i = index">
                         <tr >
-                            
+
                             <td class="text-center">{{ d.num  }}</td>
                             <td *ngIf="d.estado == 'P'" class="text-center">
                                 <i class="fas fa-circle text-warning"></i> Pendiente
@@ -477,14 +477,14 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <td class="text-right">$ {{ d.saldo_inicial | number: '1.2-2'}}</td>
                             <td class="text-right">$ {{ d.interes | number: '1.2-2'}}</td>
                             <td class="text-right">$ {{ d.pago_mensual | number: '1.2-2'}}</td>
-                            <td class="text-right">$ {{ d.pago_total | number: '1.2-2'}}</td> 
+                            <td class="text-right">$ {{ d.pago_total | number: '1.2-2'}}</td>
                             <td *ngIf="d.estado == 'A'" class="text-right">0.00</td>
                             <td *ngIf="d.estado == 'X'" class="text-right">0.00</td>
                             <td *ngIf="d.estado == 'P'" class="text-right">0.00</td>
-                            <td *ngIf="d.estado == 'C'" class="text-right">$ {{ d.pago_mensual | number: '1.2-2'}}</td>                            
-                            <td class="text-right">$ {{ d.saldo_final | number: '1.2-2'}}</td>                            
-                            <td class="text-center">{{ d.plazo_maximo | date:'yyyy-MM-dd' }}</td>                           
-                        </tr>                        
+                            <td *ngIf="d.estado == 'C'" class="text-right">$ {{ d.pago_mensual | number: '1.2-2'}}</td>
+                            <td class="text-right">$ {{ d.saldo_final | number: '1.2-2'}}</td>
+                            <td class="text-center">{{ d.plazo_maximo | date:'yyyy-MM-dd' }}</td>
+                        </tr>
                     </ng-container>
                     <tr *ngIf="amortizaciones.length > 0">
                         <td colspan="2" class="text-center"><h6 class="my-1">Total</h6></td>
@@ -541,12 +541,12 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             </div>
         </div>
     </div>
-        
+
     <div class="row justify-content-center prt-comprobante">
 
         <div class="col-11 pl-2 pr-2">
-             
-                        
+
+
             <div class="row mt-2 mb-1 align-items-center">
                 <div class="col">
                     <h5 class="mb-0 text-dark">Detalles de liquidaciones</h5>
@@ -594,7 +594,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                         </td>
                                         <!-- <td class="text-center">
                                             <div class="input-group input-group-sm">
-                                                
+
                                                 <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
                                             </div>
                                         </td> -->
@@ -612,13 +612,13 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                                 <input type="text" class="form-control form-control-sm text-right" [(ngModel)]="d.nuevo_saldo" readonly>
                                             </div>
                                         </td>
-                                
+
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover Título" [disabled]="titulosDisabled || formReadOnly" (click)="removeTitulo(i)"><i class="far fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
-                
-                                </ng-container> 
+
+                                </ng-container>
 
                             </tbody>
                         </table>
@@ -640,44 +640,44 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                     <h5 class="mb-0 text-dark">Tabla de amortización</h5>
                 </div>
             </div>
-            
+
             <div class="row mb-2">
-            
+
                 <div class="col-10">
                     <div class="row my-2">
-                        <div class="col-4 ">       
+                        <div class="col-4 ">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Monto total</span></div>
-                                <input id="monto_total" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="totalCobro">          
+                                <input id="monto_total" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="totalCobro">
                             </div>
                         </div>
-                        <div class="col-4 ">       
+                        <div class="col-4 ">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">{{'Cuota inicial'+(amortizacion.cuota_inicial>0?' ('+((amortizacion.cuota_inicial/totalCobro*100) | number: '1.2-2')+'%)':'')}}</span></div>
-                                <input id="cuota_inicial" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">          
+                                <input id="cuota_inicial" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.cuota_inicial">
                             </div>
                         </div>
-                        <div class="col-4 ">       
+                        <div class="col-4 ">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Monto a amortizar</span></div>
-                                <input id="monto_amortizar" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.monto_amortizar">          
+                                <input id="monto_amortizar" readonly type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.monto_amortizar">
                             </div>
                         </div>
-                          
+
                     </div>
                     <div class="row my-2">
-                        <div class="col-4 ">        
-                            <div class="input-group input-group-sm">         
+                        <div class="col-4 ">
+                            <div class="input-group input-group-sm">
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">No. cuotas</span></div>
-                                <input id="num_cuotas" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">     
+                                <input id="num_cuotas" [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatIntegerVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.num_cuotas">
                             </div>
                         </div>
-                        <div class="col-4 ">        
-                            <div class="input-group input-group-sm">            
+                        <div class="col-4 ">
+                            <div class="input-group input-group-sm">
                                 <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:155px;">Interés</span></div>
-                                <input id="interes" readonly [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">         
+                                <input id="interes" readonly [disabled]="formReadOnly || titulosDisabled" type="text" maxlength="8" (keypress)="commonService.FormatDecimalVal($event)" class="form-control form-control-lg text-right" [(ngModel)]="amortizacion.interes">
                             </div>
-                        </div>      
+                        </div>
                     </div>
                 </div>
                 <div class="col">
@@ -690,24 +690,24 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                         </div>
                     </div>
                 </div>
-             
-            
+
+
             </div>
-            
-            
+
+
             <div class="row mb-2">
                 <div class="col">
                     <div class="table-responsive">
                         <table class="table table-bordered no-footer table-hover mb-0">
-                            
+
                             <thead class="thead-dark">
                                 <tr class="text-center">
-                                    <th style="width: 5%;">Mes</th>                    
+                                    <th style="width: 5%;">Mes</th>
                                     <th style="width: 17.5%;">Saldo inicial</th>
                                     <th style="width: 15%;">Interés</th>
                                     <th style="width: 15%;">Pago mensual</th>
                                     <th style="width: 15%;">Pago total</th>
-                                    <th style="width: 17.5%;">Saldo final</th>                        
+                                    <th style="width: 17.5%;">Saldo final</th>
                                     <th style="width: 15%;">Plazo máximo</th>
                                 </tr>
                             </thead>
@@ -717,15 +717,15 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                 </tr>
                                 <ng-container *ngFor="let d of amortizaciones, let i = index">
                                     <tr >
-                                        
+
                                         <td class="text-center">{{ i + 1 }}</td>
                                         <td class="text-right">$ {{ d.saldo_inicial | number: '1.2-2'}}</td>
                                         <td class="text-right">$ {{ d.interes | number: '1.2-2'}}</td>
                                         <td class="text-right">$ {{ d.pago_mensual | number: '1.2-2'}}</td>
-                                        <td class="text-right">$ {{ d.pago_total | number: '1.2-2'}}</td>                            
-                                        <td class="text-right">$ {{ d.saldo_final | number: '1.2-2'}}</td>                            
-                                        <td class="text-center">{{ d.plazo_maximo }}</td>                           
-                                    </tr>                        
+                                        <td class="text-right">$ {{ d.pago_total | number: '1.2-2'}}</td>
+                                        <td class="text-right">$ {{ d.saldo_final | number: '1.2-2'}}</td>
+                                        <td class="text-center">{{ d.plazo_maximo }}</td>
+                                    </tr>
                                 </ng-container>
                                 <tr *ngIf="amortizaciones.length > 0">
                                     <td colspan="1" class="text-center"><h6 class="my-1">Total</h6></td>
@@ -743,7 +743,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             </div>
 
         </div>
-        
+
     </div>
 
     <div class="row justify-content-center" style="font-family: 'Poppins1';">

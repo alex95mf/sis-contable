@@ -26,7 +26,7 @@ import { Subject } from 'rxjs';
 import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 
-import e from 'cors';
+//import e from 'cors';
 
 @Component({
 standalone: false,

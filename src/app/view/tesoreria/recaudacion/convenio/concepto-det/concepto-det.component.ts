@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
-import { ConvenioService } from '../convenio.service'; 
+import { ConvenioService } from '../convenio.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -18,7 +18,7 @@ export class ConceptoDetComponent implements OnInit {
   @Input() concepto: any;
 
   detalles: any = [];
-  
+
   fTitle: any = 'Detalle de la Liquidación';
   vmButtons: any = [];
   dataUser: any;
@@ -27,12 +27,12 @@ export class ConceptoDetComponent implements OnInit {
     private modal: NgbActiveModal,
     private apiSrv: ConvenioService,
     private toastr: ToastrService
-  ) { 
+  ) {
 
   }
 
   ngOnInit(): void {
- 
+
     this.vmButtons = [
       {
         orig: "btnDetConcepto",
@@ -51,7 +51,7 @@ export class ConceptoDetComponent implements OnInit {
       console.log(this.concepto)
       this.getDetalles();
     },50)
-    
+
   }
 
   getDetalles() {
@@ -81,7 +81,7 @@ export class ConceptoDetComponent implements OnInit {
                class: ''
               })
           }
-        });  
+        });
         this.detalles = res['data'];
         this.detalles.push({
           concepto: {
@@ -99,7 +99,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total:  this.concepto.liquidacion ? this.concepto.liquidacion.exoneraciones : this.concepto.exoneraciones,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -153,7 +153,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total:  this.concepto.liquidacion ? this.concepto.liquidacion.interes :  this.concepto.interes,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -162,7 +162,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total: this.concepto.liquidacion ? this.concepto.liquidacion.descuento : this.concepto.descuento,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -196,7 +196,7 @@ export class ConceptoDetComponent implements OnInit {
                class: ''
               })
           }
-        });  
+        });
         this.detalles = res['data'];
         this.detalles.push({
           concepto: {
@@ -214,7 +214,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total: this.concepto.liquidacion ? this.concepto.liquidacion.exoneraciones : this.concepto.exoneraciones,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -268,7 +268,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total: this.concepto.liquidacion ? this.concepto.liquidacion.interes : this.concepto.interes,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -277,7 +277,7 @@ export class ConceptoDetComponent implements OnInit {
           },
           total: this.concepto.liquidacion ? this.concepto.liquidacion.descuento : this.concepto.descuento,
           comentario:'',
-          class: '' 
+          class: ''
         })
         this.detalles.push({
           concepto: {
@@ -296,10 +296,10 @@ export class ConceptoDetComponent implements OnInit {
         }
       )
     }else if(
-     
-            this.concepto.concepto?.codigo == 'EP' 
-            || this.concepto.concepto?.codigo == 'ML' 
-            || this.concepto.concepto?.codigo == 'AM' 
+
+            this.concepto.concepto?.codigo == 'EP'
+            || this.concepto.concepto?.codigo == 'ML'
+            || this.concepto.concepto?.codigo == 'AM'
             || this.concepto.concepto?.codigo == 'CAC'
             || this.concepto.concepto?.codigo == 'CV'
             || this.concepto.concepto?.codigo == 'VP'){
@@ -324,7 +324,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total:  this.concepto.liquidacion ? this.concepto.liquidacion.exoneraciones :  this.concepto.exoneraciones,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -378,7 +378,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total: this.concepto.liquidacion ? this.concepto.liquidacion.interes :  this.concepto.interes,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -387,7 +387,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total: this.concepto.liquidacion ? this.concepto.liquidacion.descuento :  this.concepto.descuento,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -427,7 +427,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total: this.concepto.exoneraciones,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -481,7 +481,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total: this.concepto.interes,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -490,7 +490,7 @@ export class ConceptoDetComponent implements OnInit {
             },
             total: this.concepto.descuento,
             comentario:'',
-            class: '' 
+            class: ''
           })
           this.detalles.push({
             concepto: {
@@ -510,8 +510,8 @@ export class ConceptoDetComponent implements OnInit {
       );
     }
   }
- 
-  
+
+
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
       case " REGRESAR":
@@ -519,7 +519,7 @@ export class ConceptoDetComponent implements OnInit {
         break;
     }
   }
-  
+
   closeModal() {
     this.modal.dismiss();
   }

@@ -7,7 +7,7 @@ import { TarifaRoutingModule } from './tarifa-routing.module';
 import { TarifaComponent } from './tarifa.component';
 import { ListTarifaComponent } from './list-tarifa/list-tarifa.component';
 import { ModalTarifasComponent } from './modal-tarifas/modal-tarifas.component';
-import { NgxCurrencyModule } from "ngx-currency";
+import { NgxCurrencyDirective } from "ngx-currency";
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { NgxCurrencyModule } from "ngx-currency";
     CommonModule,
     AppCustomModule,
     TarifaRoutingModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class TarifaModule { }

@@ -17,7 +17,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     CargoRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class CargoModule { }

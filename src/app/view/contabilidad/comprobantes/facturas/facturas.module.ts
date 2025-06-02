@@ -36,7 +36,7 @@ import { ModalBusquedaFacturaComponent } from './modal-busqueda-factura/modal-bu
     CalendarModule,
     MessagesModule,
     MessageModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
     // NgSelect2Module
   ]
 })

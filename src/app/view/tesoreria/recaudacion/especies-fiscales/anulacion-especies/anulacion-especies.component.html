@@ -11,45 +11,45 @@ filtroBoton="btnsConfiguracionContable" [groupButton]="vmButtons" (onMetodoGloba
                 </ng-select>
             </app-cc-input-group-prepend>
         </div>
-        
+
         <div class="col-6">
             <app-cc-input-group-prepend label="No. Talonario" styleSpan="size-span-campo font-weight-bold">
                 <input class="form-control" [(ngModel)]="dat.nro_talonario" type="number" placeholder="No. Talonario" />
-    
+
             </app-cc-input-group-prepend>
         </div>
         <div class="col-6">
             <app-cc-input-group-prepend label="Cantidad Actual" styleSpan="size-span-campo font-weight-bold">
                 <input class="form-control" [(ngModel)]="dat.nro_actual" type="number" placeholder="Cantidad Actual" />
-    
+
             </app-cc-input-group-prepend>
         </div>
-    
-    
+
+
         <div class="col-6">
             <app-cc-input-group-prepend label="Desde" styleSpan="size-span-campo font-weight-bold">
                 <input type="number" class="form-control" [(ngModel)]="dat.desde" maxlength="120" placeholder="Desde" readonly>
             </app-cc-input-group-prepend>
         </div>
-    
+
         <div class="col-6">
             <app-cc-input-group-prepend label="Hasta" styleSpan="size-span-campo font-weight-bold">
-                <input list="lst_ctas_deudoras" type="number" class="form-control custom-select"  [(ngModel)]="dat.hasta" (ngModelChange)="mostrarCantidad($event)" placeholder="Hasta" maxlength="50" readonly>
-    
+                <input list="lst_ctas_deudoras" type="number" class="form-control custom-select"  [(ngModel)]="dat.hasta" placeholder="Hasta" maxlength="50" readonly>
+
             </app-cc-input-group-prepend>
         </div>
 
         <div class="col-6">
             <app-cc-input-group-prepend label="Cantidad anuladas" styleSpan="size-span-campo font-weight-bold">
                 <input class="form-control" [(ngModel)]="dat.cantidad_anuladas" type="number" placeholder="Cantidad" />
-    
+
             </app-cc-input-group-prepend>
         </div>
-    
-        
+
+
 
     </div>
-    
+
 
 
 </app-button-radio-active>

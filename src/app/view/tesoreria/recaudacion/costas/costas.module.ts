@@ -18,7 +18,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     CostasRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class CostasModule { }

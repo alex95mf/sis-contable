@@ -11,27 +11,27 @@
       </div>
       <div class="col-sm-4">
         <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo ">
-          <ng-select 
+          <ng-select
               (ngModelChange)="ChangeMesCierrePeriodos($event)"
-              class="form-control" 
+              class="form-control"
               id="elemento_pruebas"
               bindLabel="name"
               placeholder="-Todos-"
               appendTo="body"
               [clearable]="false"
               [searchable]="true"
-              [disabled]=disabled
+              disabled
               [(ngModel)]="filter.mes_actual">
-              
+
               <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
                   {{item.name}}
               </ng-option>
           </ng-select>
-        </app-cc-input-group-prepend> 
+        </app-cc-input-group-prepend>
       </div>
       <div class="col-sm-4">
         <app-cc-input-group-prepend label="Tipo de Presupuesto" styleSpan="size-span-campo">
-          <ng-select id="estado" class="form-control" [(ngModel)]="filter.tipo" 
+          <ng-select id="estado" class="form-control" [(ngModel)]="filter.tipo"
           [clearable]="true" >
             <ng-option disabled [value]="0" disabled>Seleccione un Tipo</ng-option>
             <ng-option *ngFor="let op of tipoList" [value]="op.value">{{ op.label }}</ng-option>
@@ -86,7 +86,7 @@
     </div>
     </div>
     <div class="row mb-2 mt-2">
-          <div class="table-responsive" style="max-height: 600px; overflow-y: auto;"> 
+          <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
               <table class="table table-striped table-k table-hover">
                   <thead class="sticky-header">
                       <tr class="text-center">
@@ -94,7 +94,7 @@
                           <th style="min-width:100px;">Fecha</th>
                           <th style="min-width:150px;">N° de documento</th>
                           <th style="min-width:200px;">Concepto</th>
-                         
+
                           <th style="min-width:100px;">Partida</th>
                           <th style="min-width:250px;">Nombre Partida</th>
                           <th style="min-width:100px;">Código Partida</th>
@@ -117,14 +117,14 @@
                         </td>
                     </tr>
                     </ng-container>
-                    
+
                       <ng-container *ngFor="let decimo of resultadoConsulta, let i = index" class="mt-1">
                           <tr>
                             <td>{{(i+1)}} </td>
                             <td style="min-width:100px;">{{ decimo.fecha.slice(0, 10) }}</td>
                             <td style="min-width:150px;">{{decimo.num_doc}}</td>
                             <td style="min-width:200px;">{{decimo.concepto}}</td>
-                            
+
                             <td style="min-width:100px;">{{decimo.codigo_partida}} </td>
                             <td style="min-width:250px;">{{decimo.nombre_partida}}</td>
                             <td style="min-width:100px;">{{decimo.codigopartida}}</td>
@@ -136,7 +136,7 @@
                             <td style="min-width:100px;" class="text-right">$ {{decimo.devengado | number:'1.2-2'}}</td>
                             <td style="min-width:100px;" class="text-right">$ {{decimo.cobrado_pagado | number:'1.2-2'}}</td>
                             <td style="min-width:100px;">{{decimo.cod_programa}} </td>
-                            <td style="min-width:200px;">{{decimo.nombre_programa}}</td> 
+                            <td style="min-width:200px;">{{decimo.nombre_programa}}</td>
                           </tr>
                       </ng-container>
                       <ng-container *ngIf="resultadoConsulta.length > 0">
@@ -150,11 +150,11 @@
                           <td colspan="2"></td>
                         </tr>
                       </ng-container>
-                      
+
                   </tbody>
               </table>
           </div>
-      
+
   </div>
 
 

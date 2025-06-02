@@ -17,7 +17,7 @@ import { ModalReporteCajaComponent } from './modal-reporte-caja/modal-reporte-ca
     CommonModule,
     AppCustomModule,
     CierreGeneralRoutingModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class CierreGeneralModule { }

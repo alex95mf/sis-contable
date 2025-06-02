@@ -20,7 +20,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     AppCustomModule,
     InfimasRoutingModule,
     CalendarModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class InfimasModule { }

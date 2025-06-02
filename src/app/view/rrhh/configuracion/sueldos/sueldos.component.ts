@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import * as myVarGlobals from 'src/app/global';
 import * as moment from 'moment';
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 import * as XLSX from 'xlsx';
 import { CommonService } from 'src/app/services/commonServices';
 import { ToastrService } from 'ngx-toastr';
@@ -36,7 +36,7 @@ export class SueldosComponent implements OnInit {
     private commonVrs: CommonVarService,
     private apiSrv: SueldosService,
     private toastr: ToastrService,
-  ) { 
+  ) {
 
     this.apiSrv.listaSueldos$.subscribe(
       (res) => {
@@ -67,8 +67,8 @@ export class SueldosComponent implements OnInit {
 
   @ViewChild(ButtonRadioActiveComponent, { static: false }) buttonRadioActiveComponent: ButtonRadioActiveComponent;
 
-  vmButtons: any[] = []; 
- 
+  vmButtons: any[] = [];
+
 
   ngOnInit(): void {
 
@@ -85,9 +85,9 @@ export class SueldosComponent implements OnInit {
     setTimeout(() => {
       this.LoadTableSueldo();
     }, 250)
-    
+
   }
-  
+
   sueldos: any = [];
   dataUser: any;
   permissions: any;
@@ -115,12 +115,12 @@ export class SueldosComponent implements OnInit {
     switch (evento.items.boton.texto) {
 
       case "NUEVO":
-        this.ingresoSueldo(true, {}); 
+        this.ingresoSueldo(true, {});
       break;
-      case "MODIFICAR": 
+      case "MODIFICAR":
       //this.actualizarData();
       break;
-      case "CANCELAR": 
+      case "CANCELAR":
       //this.cerrar();
       break;
 
@@ -173,7 +173,7 @@ export class SueldosComponent implements OnInit {
         const { id_grb_ocupacional, grb_grupo_ocupacional, grb_nivel_grado, grb_rbu_valor } = element
         this.grado = [...this.grado, { id_grb_ocupacional: id_grb_ocupacional, grb_grupo_ocupacional: grb_grupo_ocupacional, grb_nivel_grado: grb_nivel_grado,grb_rbu_valor:grb_rbu_valor }]
       })
-  
+
       // Lista de Cargos
       //this.mensajeSpiner = 'Cargando Cargos'
       this.cargo = await this.apiSrv.getCargos();
@@ -182,7 +182,7 @@ export class SueldosComponent implements OnInit {
         this.cargo = [...this.cargo, { id_cargo: id_cargo, car_nombre: car_nombre, car_descripcion:car_descripcion }]
       })
 
-      
+
       //this.programas.map((programa: any) => Object.assign(programa, { presupuesto: 0 }))*/
       // Lista de Cargos
       //this.mensajeSpiner = 'Cargando Tipo de Contratos'
@@ -204,14 +204,14 @@ export class SueldosComponent implements OnInit {
   }
 
 
-  
+
   changePaginate(event) {
     let newPaginate = {
       perPage: event.pageSize,
       page: event.pageIndex + 1,
     }
     Object.assign(this.paginate, newPaginate);
-    
+
     this.lcargando.ctlSpinner(true)
     this.LoadTableSueldo();
   }
@@ -219,7 +219,7 @@ export class SueldosComponent implements OnInit {
 
 
   LoadTableSueldo(flag: boolean = false) {
-    
+
     if (flag) this.paginate.page = 1
     let data = {
       params: {
@@ -239,7 +239,7 @@ export class SueldosComponent implements OnInit {
           this.paginate.length = res['data']['total'];
           this.sueldos = res['data']['data'];
         //   if (res['data']['current_page'] == 1) {
-            
+
         //  } else {
         //    this.sueldos = Object.values(res['data']['data']);
         //   }
@@ -255,15 +255,15 @@ export class SueldosComponent implements OnInit {
   }
 
   // ingresoSueldo () {
-  //   const modal = this.modal.open(SueldoNuevoComponent, { 
-  //     size: 'xl', 
-  //     backdrop: 'static', 
-  //     windowClass: 'viewer-content-general' 
+  //   const modal = this.modal.open(SueldoNuevoComponent, {
+  //     size: 'xl',
+  //     backdrop: 'static',
+  //     windowClass: 'viewer-content-general'
   //   })
   // }
 
   ingresoSueldo(isNew:boolean, data?:any) {
- 
+
        const modalInvoice = this.modal.open(SueldoNuevoComponent, {
          size: "xl",
          backdrop: "static",
@@ -276,7 +276,7 @@ export class SueldosComponent implements OnInit {
 
   limpiarFiltros() {
     this.cargaInicial();
-    
+
     this.filter = {
       grupo_ocupacional: 0,
       codigo_sectorial:'',
@@ -286,7 +286,7 @@ export class SueldosComponent implements OnInit {
       estado:0,
       filterControl: ""
     }
-  
+
 
   }
 

@@ -12,7 +12,7 @@ import { ModalContribuyentesComponent } from '../pred-urbano/generacion/modal-co
 import { ModalContribuyentesCompradorComponent } from './liquidacion/modal-contribuyentes-comprador/modal-contribuyentes-comprador.component';
 import { ModalExoneracionesAlComponent } from './liquidacion/modal-exoneraciones-al/modal-exoneraciones-al.component';
 
-import { NgxCurrencyModule } from "ngx-currency";
+import { NgxCurrencyDirective } from "ngx-currency";
 
 @NgModule({
   declarations: [

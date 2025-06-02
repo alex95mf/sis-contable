@@ -52,7 +52,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     MovimientosRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class MovimientosModule { }

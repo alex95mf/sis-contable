@@ -29,12 +29,12 @@ export class ComponentModalBusquedaComponent implements OnInit {
   @Input() verificaContribuyente: any
 
 
-  constructor(    
+  constructor(
     public activeModal: NgbActiveModal,
     private toastr: ToastrService,
     private commonServices: CommonService,
     private commonVrs: CommonVarService,
-    private mdlSrv: AmortizacionService,) 
+    private mdlSrv: AmortizacionService,)
     { }
 
 
@@ -95,19 +95,19 @@ export class ComponentModalBusquedaComponent implements OnInit {
     Object.assign(this.paginate, newPaginate);
     this.cargarAmortizaciones();
   }
-  
+
   aplicarFiltros() {
     this.paginate.page = 1;
     this.cargarAmortizaciones();
   }
-  
+
   limpiarFiltros() {
     this.filter.tipo = undefined;
     this.filter.fecha_desde = undefined;
     this.filter.fecha_hasta = undefined;
     // this.cargarContribuyentes();
   }
-  
+
 
   closeModal(data?: any) {
     if (data) {

@@ -15,62 +15,62 @@
                                 (ngModelChange)="periodoSelected($event,periodo)">
                             </ng-select>
                         </app-cc-input-group-prepend>
-    
- 
+
+
                     </div>
                     <div class="col-12 col-md-4 pt-0 pb-0">
-                    
+
                         <app-cc-input-group-prepend label="Programa" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select 
-                        
-                           
-                                class="form-control" 
-                           
+                            <ng-select
+
+
+                                class="form-control"
+
                                 bindLabel="name"
                                 placeholder="-Todos-"
                                 appendTo="body"
                                 [clearable]="true"
                                 [searchable]="true"
-                                [disabled]=disabled
+                                disabled
                                 [(ngModel)]="filter.fk_programa">
-                                
+
                                 <ng-option [value]="item.id_catalogo" [disabled]="item.disabled" *ngFor="let item of programas">
                                     {{item.descripcion}}. {{item.valor}}
                                 </ng-option>
                             </ng-select>
-                        </app-cc-input-group-prepend> 
+                        </app-cc-input-group-prepend>
                     </div>
-                    
+
                     <div class="col-12 col-md-4 pt-0 pb-0">
-                    
+
                         <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select 
-                        
-                           
-                                class="form-control" 
-                              
+                            <ng-select
+
+
+                                class="form-control"
+
                                 bindLabel="estado"
                                 placeholder="-Todos-"
                                 appendTo="body"
                                 [clearable]="true"
                                 [searchable]="true"
-                                [disabled]=disabled
+                                disabled
                                 [(ngModel)]="filter.estado">
-                                
+
                                 <ng-option [value]="item.estado" [disabled]="item.disabled" *ngFor="let item of lista_estados">
                                     {{item.descripcion}}
                                 </ng-option>
                             </ng-select>
-                        </app-cc-input-group-prepend> 
+                        </app-cc-input-group-prepend>
                     </div>
 
-    
-    
-    
-    
-    
-    
-                 
+
+
+
+
+
+
+
                 </div>
             </fieldset>
         </div>
@@ -84,7 +84,7 @@
                             <th >#</th>
                             <th style="width:10%">Periodo</th>
                             <th style="width:30%">Programa</th>
-                        
+
                             <th >Proyecto</th>
                             <th >Estado</th>
                             <th> Usuario de Creacion</th>
@@ -105,11 +105,11 @@
                             <td class="text-center">
                                 <span *ngIf="d.estado == 'A'" class="text-center"><i class="fas fa-circle text-success"></i> Activo</span>
                                 <span *ngIf="d.estado == 'I'" class="text-center"><i class="fas fa-circle text-danger"></i> Inactivo</span>
-                                
+
                             </td>
-                            <td class="text-left">{{ d.usuario?.nombre }}</td>  
+                            <td class="text-left">{{ d.usuario?.nombre }}</td>
                             <td class="text-center">
-                                <button class="btn btn-primary mr-1" 
+                                <button class="btn btn-primary mr-1"
                                 ngbTooltip="Editar"
                                 (click)="editarProyecto(d)">
                                     <i class="fas fa-edit"></i>
@@ -117,23 +117,23 @@
 
                                 <button class="btn btn-danger"
                                  (click)="inactivarProyecto(d)"
-                                  
+
                                   ngbTooltip="Inactivar">
                                     <i class="fas fa-times"></i>
                                 </button>
-            
+
                             </td>
                         </tr>
 
 
-                        
+
                     </tbody>
 
                 </table>
-                <mat-paginator [length]="paginate.length" [pageIndex]="paginate.pageIndex" 
-                (page)="changePage($event)" [pageSize]="paginate.perPage" 
+                <mat-paginator [length]="paginate.length" [pageIndex]="paginate.pageIndex"
+                (page)="changePage($event)" [pageSize]="paginate.perPage"
                 [pageSizeOptions]="paginate.pageSizeOptions">
-        
+
             </mat-paginator>
             </div>
         </div>

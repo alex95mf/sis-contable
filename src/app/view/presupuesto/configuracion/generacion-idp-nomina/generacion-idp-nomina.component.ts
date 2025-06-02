@@ -7,7 +7,7 @@ import { CommonService } from 'src/app/services/commonServices';
 import { ToastrService } from 'ngx-toastr';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { GeneracionIdpNominaService } from './generacion-idp-nomina.service'; 
+import { GeneracionIdpNominaService } from './generacion-idp-nomina.service';
 import { AnticipoPrecobradoService } from 'src/app/view/tesoreria/recaudacion/anticipo-precobrado/anticipo-precobrado.service';
 import { ContratoService } from 'src/app/view/rentas/mercados/contrato/contrato.service';
 import { ListRecDocumentosComponent } from './list-rec-documentos/list-rec-documentos.component';
@@ -16,7 +16,7 @@ import { ModalIngresoAsignacionComponent } from './modal-ingreso-asignacion/moda
 import { ModalIcpNominaComponent } from './modal-icp-nomina/modal-icp-nomina.component';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 
-import e from 'cors';
+//import e from 'cors';
 import { SweetAlertResult } from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 
@@ -270,7 +270,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
         //           e["ajuste"] = parseFloat("0.00");
         //         }
         //         //e["ajuste"] = detalleDoc.ajuste == null ? parseFloat("0.00")  : detalleDoc.ajuste;
-               
+
         //         e["saldo_anterior"] = detalleDoc.saldo_anterior;
         //         e["saldo_actual"] = detalleDoc.saldo_actual;
         //       }
@@ -284,7 +284,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
         // )
 
         //this.solicitud = [res.solicitud];
-        
+
         this.totalCobro = res.total;
         //this.totalCobro = res.saldo_actual;
         this.totalPago = +res.total + +res.superavit;
@@ -337,7 +337,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
         this.documento.documento_icp = res.documento
         this.documento.fk_programa = res.fk_programa
 
-       
+
         // this.documento.fecha = res.fecha.split(" ")[0];
         // this.documento.mercado =  this.mercados.find(m => m.id == res.fk_mercado);
         // this.documento.proyecto = res.proyecto?.secuencia+'-'+res.proyecto?.descripcion
@@ -361,9 +361,9 @@ export class GeneracionIdpNominaComponent implements OnInit {
               this.solicitudDetalle.push(data)
           })
         }
-      
 
-        
+
+
         // this.solicitud = [];
         // this.solicitudDetalle = [];
         // if (res.id_solicitud != null || res.id_solicitud != undefined) {
@@ -550,7 +550,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
   totalSolicitudAjuste() {
     this.totalCobro = this.solicitudDetalle.reduce((acc: number, curr: any) => acc + curr.ajuste, 0)
     this.totalCotizado = this.solicitudDetalle.reduce((acc: number, curr: any) => acc + curr.valor_idp, 0)
-    
+
     if(this.ajustar){
       this.solicitudDetalle.forEach(e => {
         Object.assign(e,{ saldo_actual_idp: e.saldo - e.ajuste})
@@ -560,7 +560,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
         Object.assign(e,{ saldo_actual_idp: e.precio_aprobado - e.ajuste})
       });
     }
-    
+
 
   }
 
@@ -690,14 +690,14 @@ export class GeneracionIdpNominaComponent implements OnInit {
         //     let m = {
         //       denominacion: e.descripcion,
         //       cantidad: 0,
-        //       total_denominacion: 0,   
+        //       total_denominacion: 0,
         //     }
         //     this.monedasCat.push(m);
         //   }else if(e.grupo=="B"){
         //     let b = {
         //       denominacion: e.descripcion,
         //       cantidad: 0,
-        //       total_denominacion: 0,   
+        //       total_denominacion: 0,
         //     }
         //     this.billetesCat.push(b);
         //   }
@@ -769,7 +769,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
           "mes": Number(moment(this.documento.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
                   this.msgSpinner = 'Generando IDP de Nomina...';
@@ -838,12 +838,12 @@ export class GeneracionIdpNominaComponent implements OnInit {
                       });
                     }
                   );
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
@@ -859,7 +859,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
 
 
 
-      
+
       }
     });
   }
@@ -993,7 +993,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
      this.solicitudDetalle.forEach(e => {
       Object.assign(e,{ajuste: 0})
      });
-    
+
     }else{
      this.vmButtons[4].habilitar = true
     }
@@ -1109,7 +1109,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
           try {
             let response = await this.genIdpSvr.ajustarIdpNomina(this.documento.id_documento, this.documento);
             console.log(response)
-    
+
             this.lcargando.ctlSpinner(false)
             Swal.fire('IDP N°:  '+this.documento.documento+' ajustado', '', 'success').then(() => this.restoreForm())
           } catch (err) {
@@ -1118,7 +1118,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
             this.toastr.error(err.error?.message, 'Error ajustando IDP')
           }
         } else {
-            
+
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
         }

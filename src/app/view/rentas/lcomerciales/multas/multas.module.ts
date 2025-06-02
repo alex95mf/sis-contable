@@ -12,7 +12,7 @@ import { ModalContribuyentesComponent } from './modal-contribuyentes/modal-contr
 import { ModalConceptosComponent } from './modal-conceptos/modal-conceptos.component';
 import { ModalLocalesComponent } from './modal-locales/modal-locales.component';
 import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component';
-import { NgxCurrencyModule } from "ngx-currency";
+import { NgxCurrencyDirective } from "ngx-currency";
 
 @NgModule({
   declarations: [

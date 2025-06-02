@@ -29,6 +29,7 @@ export class CierreGeneralComponent implements OnInit {
   permissions: any;
   empresLogo: any;
   formReadOnly: boolean = false;
+  fromGeneral: boolean = false;
   depositoDisabled: boolean = false;
   fecha = moment(new Date()).format('YYYY-MM-DD  HH:mm');
   today = moment(new Date()).format('YYYY-MM-DD');
@@ -53,7 +54,7 @@ export class CierreGeneralComponent implements OnInit {
     depositos: [],
   }
 
- 
+
   depositoDetallesIds: any = []
 
   totalConceptos = 0;
@@ -96,7 +97,7 @@ export class CierreGeneralComponent implements OnInit {
   conceptosReportes: any = [];
   concepto: any = 0;
 
-  cuentaDepositar = 0;  
+  cuentaDepositar = 0;
 
   cuentasBancarias: any = [
     {
@@ -107,7 +108,7 @@ export class CierreGeneralComponent implements OnInit {
     },
     {
       cuenta_banco: "CUENTA 3"
-    },    
+    },
   ]
 
   depositos: any = [];
@@ -186,7 +187,7 @@ export class CierreGeneralComponent implements OnInit {
       this.validaPermisos();
       this.cargarCuentas();
     }, 0);
-   
+
 
 
   }
@@ -217,7 +218,7 @@ export class CierreGeneralComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fTesCierreGeneral,
       id_rol: this.dataUser.id_rol,
@@ -234,7 +235,7 @@ export class CierreGeneralComponent implements OnInit {
           this.lcargando.ctlSpinner(false);
           // this.getCajasData();
           // this.getRecibosDia();
-          // this.verificarCaja();          
+          // this.verificarCaja();
           // this.getCajasDia();
           this.getConceptos();
         }
@@ -245,12 +246,12 @@ export class CierreGeneralComponent implements OnInit {
       }
     )
   }
-  
+
   async validaCaja() {
     if(this.permissions.guardar=="0") {
       this.toastr.warning("No tiene permisos para realizar el cierre general");
       return;
-    } 
+    }
 
     try {
       let response = await this.validaDataGlobal();
@@ -273,26 +274,26 @@ export class CierreGeneralComponent implements OnInit {
             "mes": Number(moment(this.fecha_consulta).format('MM')),
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-        
+
               this.cerrarCajaDia();
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
             })
-          
+
         }
       }
 
-      
+
     } catch (err) {
       console.log(err)
       this.toastr.warning(err, 'Validacion de Datos', {enableHtml: true})
@@ -302,7 +303,7 @@ export class CierreGeneralComponent implements OnInit {
   validaDataGlobal() {
 
     let message = ''
-    
+
     return new Promise((resolve, reject) => {
 
       this.cajasDia.forEach((caja: any) => {
@@ -318,28 +319,28 @@ export class CierreGeneralComponent implements OnInit {
       this.totalDeposito = Number(this.totalDeposito.toFixed(2))
       this.totalDepositar = Number(this.totalDepositar.toFixed(2))
       this.difDepositos = Number(this.difDepositos.toFixed(2))
-    
+
       console.log(this.totalDepositar , this.totalDeposito, this.difDepositos)
 
 
       if(this.difDepositos != 0 || this.totalDepositar != this.totalDeposito) {
         message += "* El valor a depositar debe ser igual al valor depositado.<br>"
         // flag = true;
-       } 
+       }
       // if(
       //   this.caja_dia.total_efectivo_fisico < 0 ||
       //   this.caja_dia.total_efectivo_fisico == undefined
       // ) {
       //   this.toastr.info("Debe ingresar el efectivo con el que cierra la caja");
       //   flag = true;
-      //  } 
+      //  }
       //else if(
-      //   this.caja_dia.total_efectivo_fisico < this.caja_dia.total_efectivo_inicio 
+      //   this.caja_dia.total_efectivo_fisico < this.caja_dia.total_efectivo_inicio
       // ) {
       //   this.toastr.info("El efectivo con el que cierra la caja no puede ser menor al valor que se ingresó al inicio "+this.caja_dia.total_efectivo_inicio);
       //   flag = true;
       // } else if(
-      //   this.caja_dia.total_faltante > 0 
+      //   this.caja_dia.total_faltante > 0
       // ) {
       //   this.toastr.info("No puede cerrar la caja con dinero faltante");
       //   flag = true;
@@ -350,7 +351,7 @@ export class CierreGeneralComponent implements OnInit {
       //   this.toastr.info("El campo Fecha no puede ser vacío");
       //   flag = true;
       // } else if(
-      //   this.caja_dia.estado == undefined  
+      //   this.caja_dia.estado == undefined
       // ) {
       //   this.toastr.info("Debe seleccionar un Estado");
       //   flag = true;
@@ -375,7 +376,7 @@ export class CierreGeneralComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
 
     console.log(this.caja_dia);
-    
+
     this.caja_dia.total_recaudacion = this.total;
     this.caja_dia.total_recaudacion_efectivo = this.totalEF;
 
@@ -393,7 +394,7 @@ export class CierreGeneralComponent implements OnInit {
       (res) => {
         console.log(res);
         if (res["status"] == 1) {
-        this.lcargando.ctlSpinner(false);        
+        this.lcargando.ctlSpinner(false);
         this.caja_dia.estado = "C"; // Estado C de caja cerrada
         this.vmButtons[0].habilitar = true; // YA ESTA CERRADA NO SE PUEDE CERRAR
         this.vmButtons[1].habilitar = false;
@@ -480,7 +481,7 @@ export class CierreGeneralComponent implements OnInit {
 
     this.apiSrv.listarCuentasBancos({}).subscribe((res: any) => {
       //console.log(res);
-     
+
       res.map((data) => {
         let item={
           name_banks:data.name_banks,
@@ -488,7 +489,7 @@ export class CierreGeneralComponent implements OnInit {
           cuenta_contable:data.cuenta_contable
         }
         this.listaCuentas.push(item)
-        
+
       })
       console.log(this.listaCuentas)
     })
@@ -510,7 +511,7 @@ export class CierreGeneralComponent implements OnInit {
         if(res['data'].length>0){
           this.vmButtons[0].habilitar = false;
           this.vmButtons[1].habilitar = false;
-         
+
           this.apiSrv.getDepositos(data).subscribe(
             (res2) => {
               console.log(res2)
@@ -531,7 +532,7 @@ export class CierreGeneralComponent implements OnInit {
                     estado: e.estado,
                     comentario: e.comentario,
                   }
-                  totalDepositado += +e.total; 
+                  totalDepositado += +e.total;
                   this.depositos.push(dep);
                 });
                 this.totalDeposito = totalDepositado;
@@ -547,7 +548,7 @@ export class CierreGeneralComponent implements OnInit {
         this.iniciarData();
         this.cajasDia = res['data'];
         this.calcCajasDia();
-        // this.getRecibosCadaCaja();     
+        // this.getRecibosCadaCaja();
         this.lcargando.ctlSpinner(false);
       },
       (err) => {
@@ -555,7 +556,7 @@ export class CierreGeneralComponent implements OnInit {
         this.toastr.error(err.error.message, 'Error cargando los reportes')
       }
     )
-    
+
   }
 
   iniciarData() {
@@ -581,7 +582,7 @@ export class CierreGeneralComponent implements OnInit {
       detalles: [],
       depositos: [],
     }
-  
+
     this.total = 0;
     this.totalEF = 0;
     this.totalCH = 0;
@@ -644,8 +645,8 @@ export class CierreGeneralComponent implements OnInit {
     this.apiSrv.reabrirCaja(data).subscribe(
       (res) => {
         console.log(res);
-        
-        this.lcargando.ctlSpinner(false);    
+
+        this.lcargando.ctlSpinner(false);
         Swal.fire({
           icon: "success",
           title: "¡Éxito!",
@@ -709,7 +710,7 @@ export class CierreGeneralComponent implements OnInit {
               totalOtro: r.total
             })
           }
-        })  
+        })
       } else {
         Object.assign(c,{
           totalCH: 0,
@@ -723,7 +724,7 @@ export class CierreGeneralComponent implements OnInit {
           totalOtro: 0,
         })
       }
-          
+
 
       this.total += +c.total_recaudacion;
       this.totalEF += +c.total_recaudacion_efectivo;
@@ -736,7 +737,7 @@ export class CierreGeneralComponent implements OnInit {
       this.totalND += +c.totalND;
       this.totalDE += +c.totalDE;
       this.totalOtro += +c.totalOtro;
-       
+
 
       this.caja_dia.total_sobrante += +c.total_sobrante;
       this.caja_dia.total_faltante += +c.total_faltante;
@@ -759,11 +760,11 @@ export class CierreGeneralComponent implements OnInit {
 
    getRecibosCadaCaja() {
     let i = 0;
-   
+
 
     this.allDetalles = [];
     this.allFormasPago = [];
-    this.cajasDia.forEach((c) => {            
+    this.cajasDia.forEach((c) => {
 
       let data = {
         id_caja: c.fk_caja,
@@ -774,7 +775,7 @@ export class CierreGeneralComponent implements OnInit {
       this.apiSrv.getRecibosByDia(data).subscribe(
         (res) => {
           console.log(res);
-         
+
           res['data'].forEach(e => {
             if (e.tipo_documento == 'EF') {
               this.allDetalles.push(
@@ -799,22 +800,22 @@ export class CierreGeneralComponent implements OnInit {
               e.detalles.forEach(d => {
                 this.allDetalles.push(d);
               })
-            
-            
+
+
               console.log(e.formas_pago);
               console.log(e.detalles);
-              
+
                 //Object.assign(e, { valor: e.liquidacion.codigo_catastro.split('-')[1], codigo_concepto: e.liquidacion.codigo_catastro.split('-')[3] })
-              
+
               //this.allDetalles.push();
-            
+
             e.formas_pago.forEach(f => {
               this.allFormasPago.push(f);
               //if(e.detalles ==0){
                 //this.allDetalles.push(f);
                 //Object.assign(f, { total: f.valor, codigo:'EF', nombre:'ESPECIES FISCALES'})
               //}
-              
+
             })
           })
           this.lcargando.ctlSpinner(false);
@@ -828,10 +829,10 @@ export class CierreGeneralComponent implements OnInit {
           this.lcargando.ctlSpinner(false);
           this.toastr.error(err.error.message, 'Error cargando uno de los recibos');
         }
-      )  
-      
+      )
+
     })
-    
+
   }
 
   agregaDepositos() {
@@ -857,10 +858,10 @@ export class CierreGeneralComponent implements OnInit {
         estado: "A",
         comentario: "",
       }
-  
+
       this.depositos.push(nuevo);
     }
-    
+
     // if(!this.fromGeneral){
     //   this.vmButtons[0].habilitar = false;
     //   this.vmButtons[1].habilitar = true;
@@ -870,7 +871,7 @@ export class CierreGeneralComponent implements OnInit {
     if (d.id_caja_general_deposito !== null ||d.id_caja_general_deposito !== 0  ) this.depositoDetallesIds.push(d.id_caja_general_deposito)
     //this.depositos.splice(index,1);
     this.depositos.splice(this.depositos.indexOf(d), 1)
-    
+
     this.calcDepositoFinal();
   }
 
@@ -878,7 +879,7 @@ export class CierreGeneralComponent implements OnInit {
   //   if (d.id_regla_det !== null ||d.id_regla_det !== 0  ) this.reglasDetallesIds.push(d.id_regla_det)
   //   console.log(this.reglasDetallesIds)
   //   this.codigoDetalles.splice(this.codigoDetalles.indexOf(d), 1)
-    
+
   // }
 
   calcDepositoFinal() {
@@ -916,14 +917,14 @@ export class CierreGeneralComponent implements OnInit {
     console.log(this.allDetalles);
     conceptosCopy.forEach(c => {
       let total100: number = 0;
-      
+
       this.allDetalles.forEach(d => {
         if(c.codigo == d.codigo_concepto){
           total100 += +d.abono * 100;
             Object.assign(c,{
               total: total100 / 100
             })
-          
+
         }
          /* else if(c.codigo == 'EF'){
           Object.assign(c, { total: 5 })
@@ -931,14 +932,14 @@ export class CierreGeneralComponent implements OnInit {
             Object.assign(c,{
               total: total100 / 100
             })
-          
+
         } */
       })
 
     })
 
     console.log(conceptosCopy);
-    
+
     this.conceptosReportes = conceptosCopy.filter(c => c.total>0);
     // this.conceptosReportes.push({codigo: 'SUPERAVIT', nombre: 'SUPERAVIT',total:this.superavit })
     console.log(this.conceptosReportes);
@@ -957,7 +958,7 @@ export class CierreGeneralComponent implements OnInit {
     this.lcargando.ctlSpinner(false);
   }
 
-  /* verReportePorCaja(caja) {    
+  /* verReportePorCaja(caja) {
       const modalInvoice = this.modalSrv.open(CierreCajaComponent, {
         size: "xl",
         backdrop: "static",
@@ -969,7 +970,7 @@ export class CierreGeneralComponent implements OnInit {
       modalInvoice.componentInstance.permissions = this.permissions;
       modalInvoice.componentInstance.caja = caja;
       modalInvoice.componentInstance.fromGeneral = true;
-    
+
   } */
 
   verReportePorCaja(caja) {
@@ -979,9 +980,9 @@ export class CierreGeneralComponent implements OnInit {
   }
 
 
-  mostrarReporte(){  
-  
-    window.open(environment.ReportingUrl +"rpt_cierreCajaGeneral"+".pdf?&j_username=" + environment.UserReporting 
+  mostrarReporte(){
+
+    window.open(environment.ReportingUrl +"rpt_cierreCajaGeneral"+".pdf?&j_username=" + environment.UserReporting
     + "&j_password=" + environment.PasswordReporting+"&fecha=" + this.fecha_consulta+"&p_total="+this.totalConceptos * 100,'_blank')
       console.log( this.fecha_consulta);
       console.log(this.totalConceptos);
@@ -1037,7 +1038,7 @@ export class CierreGeneralComponent implements OnInit {
         const response = await this.apiSrv.eliminarDeposito({fecha: this.fecha_consulta})
         console.log(response)
         this.depositoDisabled = false
-    
+
         // Recargar dia
         this.getCajasDia()
         this.lcargando.ctlSpinner(false)
@@ -1048,5 +1049,5 @@ export class CierreGeneralComponent implements OnInit {
     }
 
   }
-  
+
 }

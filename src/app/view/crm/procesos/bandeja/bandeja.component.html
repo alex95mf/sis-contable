@@ -19,9 +19,9 @@
                                 <input type="text" class="form-control form-control-sm" [maxlength]="20"
                                     [(ngModel)]="filter.observacion">
                             </app-cc-input-group-prepend>
-        
+
                         </div>
-        
+
                     </div>
                     <div class="row m-0">
                         <div class="col-12 col-md-6 pt-0 pb-0">
@@ -34,47 +34,47 @@
                               <input type="date" class="form-control form-control-sm" [(ngModel)]="filter.fecha_hasta">
                             </app-cc-input-group-prepend>
                           </div>
-    
+
                     </div>
                     <div class="row m-0">
-    
-    
-    
-                        
+
+
+
+
                         <div class="col-12 col-md-6 pt-0 pb-0">
-                        
+
                             <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
-                                <ng-select 
-                            
-                               
-                                    class="form-control" 
-                                  
+                                <ng-select
+
+
+                                    class="form-control"
+
                                     bindLabel="estado"
                                     placeholder="-Todos-"
                                     appendTo="body"
                                     [clearable]="true"
                                     [searchable]="true"
-                                    [disabled]=disabled
+                                    disabled
                                     [(ngModel)]="filter.estado">
-                                    
+
                                     <ng-option [value]="item.estado" [disabled]="item.disabled" *ngFor="let item of lista_estados">
                                         {{item.descripcion}}
                                     </ng-option>
                                 </ng-select>
-                            </app-cc-input-group-prepend> 
+                            </app-cc-input-group-prepend>
                         </div>
-    
-        
-        
-        
-        
-        
-        
-                     
+
+
+
+
+
+
+
+
                     </div>
                 </fieldset>
             </div>
-        </div> 
+        </div>
         <div class="row m-0">
             <div class="col-12">
                 <div class="table-responsive">
@@ -88,11 +88,11 @@
                                 <th >Cliente/Lead</th>
                                 <th >Fecha</th>
                                 <th >Observación</th>
-                                <th style="width:15%">Tarea </th>                           
+                                <th style="width:15%">Tarea </th>
                                 <th> Usuario de Creacion</th>
                                 <th> Observacion Revision</th>
                                 <th style="width:10%"> Tarea Siguiente</th>
-                                <th> Fecha de Revision</th>  
+                                <th> Fecha de Revision</th>
                                 <th> Usuario de Revisión</th>
                                 <th> Acciones</th>
                             </tr>
@@ -105,7 +105,7 @@
                             </tr>
                             <tr *ngFor="let d of lista_tareas, let i = index" [ngClass]="d.class" [style]="d.size">
                                 <td class="text-left">{{ (i+1)+(paginate.page-1)*paginate.perPage}}</td>
-                                
+
                                 <td class="text-left">{{ d.id_tarea}}</td>
                                 <td class="text-left">{{ d.fk_tarea_principal}}</td>
                                 <td class="text-left">{{ d.documento?.documento}}</td>
@@ -115,62 +115,62 @@
                                 <td class="text-left">
                                     <strong>Tarea :</strong>{{d.nombre_tarea}}<br>
                                     <strong>Responsable :</strong>{{d.perfil_responsable}}<br>
-                             
+
                                     <strong>Estado :</strong>
                                     <span *ngIf="d.estado == 'APROBADO'" class="text-center"><i class="fas fa-circle text-success"></i> {{d.estado}}</span>
                                     <span *ngIf="d.estado == 'PENDIENTE'" class="text-center"><i class="fas fa-circle text-warning"></i> {{d.estado}}</span>
                                     <span *ngIf="d.estado == 'GESTION'" class="text-center"><i class="fas fa-circle text-primary"></i> {{d.estado}}</span>
                                     <span *ngIf="d.estado == 'NEGADO'" class="text-center"><i class="fas fa-circle text-danger"></i> {{d.estado}}</span>
-                                    
-                               
+
+
                                     <br><strong>Status :</strong>{{ d.estado_revision }}
                                 </td>
 
-                                <td class="text-left">{{ d.usuario?.usuario }}</td>  
+                                <td class="text-left">{{ d.usuario?.usuario }}</td>
 
-                                <td class="text-left">{{ d?.observacion_revision }}</td>  
+                                <td class="text-left">{{ d?.observacion_revision }}</td>
                                 <td class="text-left">
                                     <strong>Tarea :</strong>{{d?.nombre_tarea_siguiente_paso}}<br>
                                     <strong>Responsable :</strong>{{d?.perfil_siguiente_paso}}<br>
 
                                 </td>
                                 <td class="text-left">{{d?.fecha_atencion | date:'dd/MM/yyyy' }}</td>
-                               
-                              
+
+
 
                                 <td class="text-left">{{ d.usuarioatencion?.usuario }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-primary mr-1" 
+                                    <button class="btn btn-primary mr-1"
                                     ngbTooltip="Editar"
                                     (click)="editarTarea(d)">
                                         <i class="fas fa-edit"></i>
                                     </button>
-    
+
                                     <button class="btn btn-danger"
                                      (click)="inactivarTarea(d)"
-                                      
+
                                       ngbTooltip="Inactivar">
                                         <i class="fas fa-times"></i>
                                     </button>
-                
+
                                 </td>
                             </tr>
-    
-    
-                            
+
+
+
                         </tbody>
-    
+
                     </table>
-                    <mat-paginator [length]="paginate.length" [pageIndex]="paginate.pageIndex" 
-                    (page)="changePage($event)" [pageSize]="paginate.perPage" 
+                    <mat-paginator [length]="paginate.length" [pageIndex]="paginate.pageIndex"
+                    (page)="changePage($event)" [pageSize]="paginate.perPage"
                     [pageSizeOptions]="paginate.pageSizeOptions">
-            
+
                 </mat-paginator>
                 </div>
             </div>
         </div>
     </app-button-radio-active-new>
-    
+
     </div>
     <cc-spiner-procesar ltexto="Cargando Tareas......"></cc-spiner-procesar>
 </div>

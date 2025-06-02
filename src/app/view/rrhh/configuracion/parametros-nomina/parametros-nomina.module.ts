@@ -17,7 +17,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     ParametrosNominaRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class ParametrosNominaModule { }

@@ -11,28 +11,28 @@
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo ">
-                    <ng-select 
+                    <ng-select
                         (ngModelChange)="ChangeMesCierrePeriodosMov($event)"
-                        class="form-control" 
+                        class="form-control"
                         id="elemento_pruebas"
                         bindLabel="name"
                         placeholder="-seleccione-"
                         appendTo="body"
                         [clearable]="false"
                         [searchable]="true"
-                        [disabled]=disabled
+                        disabled
                         [(ngModel)]="movimiento.mes">
                         <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
                             {{item.name}}
                         </ng-option>
                     </ng-select>
-                </app-cc-input-group-prepend> 
+                </app-cc-input-group-prepend>
             </div>
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Fecha" styleSpan="font-weight-bold size-span-campo">
                     <input id="filter_fecha_desde" type="date" class="form-control" [(ngModel)]="movimiento.fecha" max="2050-01-01" >
                 </app-cc-input-group-prepend>
-                
+
             </div>
         </div>
         <div class="row">
@@ -64,7 +64,7 @@
                 </app-cc-input-group-prepend>
             </div>
         </div>
-        <div class="row"> 
+        <div class="row">
             <div class="col-sm-4">
                 <app-cc-input-group-prepend label="Valor" styleSpan="size-span-campo">
                     <input currencyMask [disabled]="false" [(ngModel)]="movimiento.valor"

@@ -35,7 +35,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     CrucePagosRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class CrucePagosModule { }

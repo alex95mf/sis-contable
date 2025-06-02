@@ -11,7 +11,7 @@
                             <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Períodos</span>
                         </div>
                         <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Periodo" [(ngModel)]="selected_anio"  (keypress)="onlyNumber($event)">
-                       
+
                     </div>
                 </div>
                 <div class="col-3">
@@ -19,25 +19,25 @@
                         <div class="input-group-prepend">
                             <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Mes</span>
                         </div>
-                        <ng-select 
+                        <ng-select
                             (ngModelChange)="ChangeMesCierrePeriodos($event)"
-                            class="form-control" 
+                            class="form-control"
                             id="elemento_pruebas"
                             bindLabel="name"
                             placeholder="-Todos-"
                             appendTo="body"
                             [clearable]="false"
                             [searchable]="true"
-                            [disabled]=disabled
+                            disabled
                             [(ngModel)]="mes_actual">
-                            
+
                             <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
                                 {{item.name}}
                             </ng-option>
                         </ng-select>
                     </div>
                 </div>
-               
+
                 <div class="col-4">
                     <!-- <app-cc-input-group-prepend label="Proveedor" styleSpan="size-span-campo font-weight-bold"> -->
                     <div class="input-group input-group-sm ">
@@ -48,7 +48,7 @@
                     </div>
                     <!-- </app-cc-input-group-prepend> -->
                 </div>
-                
+
             </div>
             <div class="row">
                 <div class="col-5">
@@ -68,9 +68,9 @@
                         <p-tabView (onChange)="handleChange($event)" styleClass="tab_content_compras" class="overflow-hidden">
                             <p-tabPanel class="p-0" header="GENERAR" [headerStyle]="{'font-size': '0.7rem'}">
 
-                                <p-table 
+                                <p-table
                                  [value]="generacion_pendientes"
-                                 [(selection)]="selectedRetencionesElement" 
+                                 [(selection)]="selectedRetencionesElement"
                                  [scrollable]="true" scrollHeight="400px">
                                     <ng-template pTemplate="header">
                                         <tr style="font-size: 12px;">
@@ -124,9 +124,9 @@
                             </p-tabPanel>
                             <p-tabPanel class="p-0" header="CONSULTAR" [headerStyle]="{'font-size': '0.7rem'}">
 
-                                <p-table [value]="detalleReteGeneradas" 
-                                [(selection)]="selectedRetencionesElGenerement" 
-                                (onRowSelect)="onRowSelect($event)" 
+                                <p-table [value]="detalleReteGeneradas"
+                                [(selection)]="selectedRetencionesElGenerement"
+                                (onRowSelect)="onRowSelect($event)"
                                 (onRowUnselect)="onRowUnselect($event)"
                                 [rowSelectable]="isRowSelectable" [scrollable]="true" scrollHeight="400px">
                                     <ng-template pTemplate="header">
@@ -167,7 +167,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-    
+
                                                     </div>
                                                 </div>
                                             </td>
@@ -179,7 +179,7 @@
                                             <td>$ {{ item.total | number: '1.2-2'}}</td>
                                             <td>{{ item.num_autorizacion }}</td>
                                             <td>{{ item.fecha_autoriazcion }}</td>
-                                            
+
                                         </tr>
                                     </ng-template>
                                     <ng-template pTemplate="emptymessage">

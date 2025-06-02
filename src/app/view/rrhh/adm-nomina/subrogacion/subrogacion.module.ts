@@ -32,7 +32,7 @@ import { MessageService } from 'primeng/api';
     ToastModule,
     ButtonModule,
     DividerModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ],
   providers: [
     MessageService

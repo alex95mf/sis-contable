@@ -8,57 +8,57 @@
                         <legend class="w-auto card-legend">Informacion Producto</legend>
                         <div class="row m-0">
                             <div class="col-12 col-md-6 pt-0 pb-0">
-            
+
                                 <app-cc-input-group-prepend label="Código de Producto" styleSpan="input-group-text size-span-campo">
                                     <input type="text" class="form-control form-control-sm" [maxlength]="20"
                                         [(ngModel)]="producto.codigo">
                                 </app-cc-input-group-prepend>
-            
+
                             </div>
                             <div class="col-12 col-md-6 pt-0 pb-0">
-            
+
                                 <app-cc-input-group-prepend label="Nombre" styleSpan="input-group-text size-span-campo">
                                     <input type="text" class="form-control form-control-sm" [maxlength]="20"
                                         [(ngModel)]="producto.nombre">
                                 </app-cc-input-group-prepend>
-            
+
                             </div>
-            
+
                         </div>
                         <div class="row m-0">
                             <div class="col-12 col-md-6 pt-0 pb-0">
-            
+
                                 <app-cc-input-group-prepend label="Nombre Corto" styleSpan="input-group-text size-span-campo">
                                     <input type="text" class="form-control form-control-sm" [maxlength]="20"
                                         [(ngModel)]="producto.nombrecorto">
                                 </app-cc-input-group-prepend>
-            
+
                             </div>
                             <div class="col-12 col-md-6 pt-0 pb-0">
                                 <app-cc-input-group-prepend label="Descripción"
                                     styleSpan="size-span-campo">
                                     <textarea class="form-control form-control-sm" type="text"
-                                        [(ngModel)]="producto.descripcion" 
+                                        [(ngModel)]="producto.descripcion"
                                         placeholder="Ingrese una descripción" rows="3"
                                          maxlength="255"></textarea>
                                 </app-cc-input-group-prepend>
                               </div>
-            
+
                         </div>
                         <div class="row m-0">
-            
+
                             <div class="col-12 col-md-6 pt-0 pb-0">
-            
-            
+
+
                                 <app-cc-input-group-prepend label="Tipo de Impuesto" styleSpan="size-span-campo font-weight-bold">
-                                    <ng-select class="form-control" bindLabel="estado" 
+                                    <ng-select class="form-control" bindLabel="estado"
                                         placeholder="-Seleccione-" appendTo="body"
-                                        [clearable]="true" [searchable]="true" 
-                                        [disabled]=disabled [(ngModel)]="producto.codigo_impuesto_iva"
-                                     
+                                        [clearable]="true" [searchable]="true"
+                                        disabled [(ngModel)]="producto.codigo_impuesto_iva"
+
                                         >
                                         <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
-                 
+
                                         <ng-option [value]="item.valor" [disabled]="item.disabled"
                                             *ngFor="let item of lista_impuestos">
                                             {{item.descripcion}}
@@ -67,22 +67,22 @@
                                 </app-cc-input-group-prepend>
                             </div>
 
-            
+
                         </div>
                         <div class="row m-0">
-            
+
                             <div class="col-12 col-md-6 pt-0 pb-0">
-            
-            
+
+
                                 <app-cc-input-group-prepend label="Clase" styleSpan="size-span-campo font-weight-bold">
-                                    <ng-select class="form-control" bindLabel="estado" 
+                                    <ng-select class="form-control" bindLabel="estado"
                                         placeholder="-Seleccione-" appendTo="body"
-                                        [clearable]="true" [searchable]="true" 
-                                        [disabled]=disabled [(ngModel)]="producto.clase"
+                                        [clearable]="true" [searchable]="true"
+                                        disabled [(ngModel)]="producto.clase"
                                         (ngModelChange)="onClaseProductoChange($event)"
                                         >
                                         <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
-                 
+
                                         <ng-option [value]="item.codigo" [disabled]="item.disabled"
                                             *ngFor="let item of lista_clase_productos">
                                             {{item.nombre}}
@@ -91,12 +91,12 @@
                                 </app-cc-input-group-prepend>
                             </div>
                             <div class="col-12 col-md-6 pt-0 pb-0">
-            
-            
+
+
                                 <app-cc-input-group-prepend label="Grupo Producto" styleSpan="size-span-campo font-weight-bold">
-                                    <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-" 
+                                    <ng-select class="form-control" bindLabel="estado" placeholder="-Seleccione-"
                                     appendTo="body"
-                                        [clearable]="true" [searchable]="true" [disabled]=disabled
+                                        [clearable]="true" [searchable]="true" disabled
                                          [(ngModel)]="producto.fk_grupo">
                                          <ng-option [value]="0" [disabled]="true">Seleccione</ng-option>
                                         <ng-option [value]="item.id_grupo" [disabled]="item.disabled"
@@ -106,44 +106,44 @@
                                     </ng-select>
                                 </app-cc-input-group-prepend>
                             </div>
-            
+
                         </div>
                         <div class="row m-0">
                             <div class="col-12 col-md-6 pt-0 pb-0">
-            
+
                                 <app-cc-input-group-prepend label="Precio" styleSpan="input-group-text size-span-campo">
                                     <input type="text" class="form-control form-control-sm" [maxlength]="20"
                                         [(ngModel)]="producto.precio1">
                                 </app-cc-input-group-prepend>
-            
+
                             </div>
                             <div class="col-12 col-md-6 pt-0 pb-0">
-            
+
                                 <app-cc-input-group-prepend label="Costo Promedio" styleSpan="input-group-text size-span-campo">
                                     <input type="text" class="form-control form-control-sm" [maxlength]="20"
                                         [(ngModel)]="producto.costopromedio">
                                 </app-cc-input-group-prepend>
-            
+
                             </div>
-                
-            
+
+
                         </div>
                         <div class="row m-0">
                             <div class="col-12 col-md-6 pt-0 pb-0">
-            
+
                                 <app-cc-input-group-prepend label="Stock" styleSpan="input-group-text size-span-campo">
                                     <input type="text" class="form-control form-control-sm" [maxlength]="20"
                                         [(ngModel)]="producto.stock">
                                 </app-cc-input-group-prepend>
-            
+
                             </div>
                             <div class="col-12 col-md-6 pt-0 pb-0">
-            
-            
+
+
                                 <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
                                     <ng-select class="form-control" bindLabel="estado" placeholder="-Todos-" appendTo="body"
-                                        [clearable]="true" [searchable]="true" [disabled]=disabled [(ngModel)]="producto.estado">
-            
+                                        [clearable]="true" [searchable]="true" disabled [(ngModel)]="producto.estado">
+
                                         <ng-option [value]="item.estado" [disabled]="item.disabled"
                                             *ngFor="let item of lista_estados">
                                             {{item.descripcion}}
@@ -151,62 +151,62 @@
                                     </ng-select>
                                 </app-cc-input-group-prepend>
                             </div>
-            
+
                         </div>
                         <!-- <div class="row m-0">
-                            
-            
+
+
                             <div class="col-12 col-md-3 pt-0 pb-0 mt-3">
                                 <div class="card h-100">
                                     <label for="fileInput" class="btn btn-primary">Seleccionar Foto...</label>
-                        
-                                  <input type="file" id="fileInput" name="fileInput" (change)="onFileSelected($event)" 
+
+                                  <input type="file" id="fileInput" name="fileInput" (change)="onFileSelected($event)"
                                   style="display:none ;"/>
-            
+
                                   <div style="display: flex; justify-content: center;">
-                                      <img 
+                                      <img
                                     [src]="'data:image/jpeg;base64,' + imageBase64"
-                                      class="card-img-top mt-3" 
-                                      
+                                      class="card-img-top mt-3"
+
                                       style="height: 250px; width: 80%; object-fit: cover;"
                                     >
                                   </div>
                                 </div>
                             </div>
-            
-                                  
-            
-                
-                            
+
+
+
+
+
                         </div> -->
-            
-                     
-            
-            
-            
+
+
+
+
+
                     </fieldset>
-            
+
                 </div>
             </div>
             <div class="row m-0">
                 <div class="col-6">
                     <fieldset class="border px-3 pb-2 mt-3">
                         <legend class="w-auto h6">Stock por Bodega</legend>
-    
+
                         <div class="row m-0">
-            
+
                             <div class="col-12 col-md-9 pt-0 pb-0">
-            
-            
+
+
                                 <app-cc-input-group-prepend label="Bodega" styleSpan="size-span-campo font-weight-bold">
-                                    <ng-select class="form-control" bindLabel="estado" 
+                                    <ng-select class="form-control" bindLabel="estado"
                                         placeholder="-Seleccione-" appendTo="body"
-                                        [clearable]="true" [searchable]="true" 
-                                        [disabled]=disabled 
+                                        [clearable]="true" [searchable]="true"
+                                        disabled
                                         [(ngModel)]="bodega"
                                         >
                                         <ng-option [value]="" [disabled]="true">Seleccione</ng-option>
-                 
+
                                         <ng-option [value]="item" [disabled]="item.disabled"
                                             *ngFor="let item of lista_bodegas">
                                             {{item.nombre}}
@@ -217,9 +217,9 @@
                             <div class="col-12 col-md-3 pt-0 pb-0">
                                 <button class="btn btn-primary" (click)="addBodega()">Agregar</button>
                             </div>
-                       
-    
-            
+
+
+
                         </div>
                         <div class="row m-0">
                             <div class="col-12">
@@ -230,9 +230,9 @@
                                                 <th >#</th>
                                                 <th style="width:40%">Bodega</th>
                                                 <th style="width:20%">Stock</th>
-                                                
+
                                                 <th >Estado</th>
-                        
+
                                                 <th style="width:20%"> Acciones</th>
                                             </tr>
                                         </thead>
@@ -245,35 +245,35 @@
                                             <tr *ngFor="let d of producto?.bodegas, let i = index" [ngClass]="d.class" [style]="d.size">
                                                 <td class="text-left">{{ i+1}}</td>
                                                 <td class="text-left">{{d.bodega?.nombre}}</td>
-                                                
-    
+
+
                                                 <td><input class="form-control form-control-sm text-right" currencyMask [(ngModel)]="d.stock"></td>
-                                               
+
                                                 <td class="text-center">
                                                     <span *ngIf="d.estado == 'A'" class="text-center"><i class="fas fa-circle text-success"></i> Activo</span>
                                                     <span *ngIf="d.estado == 'I'" class="text-center"><i class="fas fa-circle text-danger"></i> Inactivo</span>
-                                                    
+
                                                 </td>
-                         
+
                                                 <td class="text-center">
-                                                    <button class="btn btn-danger mr-1" 
+                                                    <button class="btn btn-danger mr-1"
                                                     ngbTooltip="Eliminar"
                                                     (click)="removeBodega(i)" [disabled]="d.id_bodega_stock!=0"
                                                   >
                                                         <i class="fas fa-trash"></i>
                                                     </button>
-                        
-                        
-                                
+
+
+
                                                 </td>
                                             </tr>
-                        
-                        
-                                            
+
+
+
                                         </tbody>
-                        
+
                                     </table>
-                        
+
                                 </div>
                             </div>
                         </div>
@@ -287,8 +287,8 @@
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend"><span style="width: 155px;" class="input-group-text font-weight-bold">Fotos</span></div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile01" 
-                                        accept="image/*" multiple [disabled]=" 
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                        accept="image/*" multiple [disabled]="
                                         !disabledProduct" (change)="cargaFoto($event.target.files)">
                                         <label class="custom-file-label" for="inputGroupFile01">{{ fotos.length > 0 ? "Ha seleccionado " + fotos.length + " Fotos" : "Seleccione fotos a subir" }}</label>
                                     </div>
@@ -302,14 +302,14 @@
                             </div>
                         </div>
                     </fieldset>
-            
+
                 </div>
-    
+
             </div>
-    
-    
-            
-    
+
+
+
+
         </app-button-radio-active-new>
     </div>
 </div>

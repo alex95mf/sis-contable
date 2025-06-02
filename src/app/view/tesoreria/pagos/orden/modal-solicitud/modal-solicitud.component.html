@@ -14,7 +14,7 @@
                                 </div>
                                 <div class="col">
                                     <app-cc-input-group-prepend label="No. Documento" styleSpan="size-span-campo font-weight-bold">
-                                        <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.num_documento" (keypress)="validaciones.numberOnly($event)">
+                                        <input id="filter_num_documento" type="text" class="form-control" [(ngModel)]="filter.num_documento">
                                     </app-cc-input-group-prepend>
                                 </div>
                             </div>
@@ -23,14 +23,14 @@
                             <button class="btn btn-primary btn-sm ml-1 text-light" placement="bottom" ngbTooltip="Buscar" (click)="cargarSolicitudes()">
                                 <i class="fas fa-search"></i> Consultar
                             </button>
-                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros" (click)="limpiarFiltros()">
+                            <button class="btn btn-danger btn-sm ml-1" placement="bottom" ngbTooltip="Limpiar filtros">
                                 <i class="fas fa-eraser"></i>
                             </button>
                         </div>
                     </div>
                 </fieldset>
             </div>
-            
+
         </div>
         <div class="row my-2">
             <div class="col">
@@ -46,13 +46,13 @@
                             <th class="text-center">Vigencia P&oacute;liza</th>
                             <th class="text-center">IDP</th>
                             <th class="text-center">Valor</th>
-                            <th class="text-center">Estado</th>                            
+                            <th class="text-center">Estado</th>
                             <th style="width: 10%;">Acciones</th>
 
                             <!-- <th class="text-center"># Solicitud</th>
                             <th class="text-center">Fecha</th>
                             <th class="text-center">Valor</th>
-                            <th class="text-center">Estado</th>                            
+                            <th class="text-center">Estado</th>
                             <th style="width: 10%;">Acciones</th> -->
                         </tr>
                     </thead>
@@ -87,7 +87,7 @@
                                 </td>
                                 <td *ngIf="item.estado == 'D'" class="text-center">
                                     <i class="fas fa-circle text-danger"></i> Denegado
-                                  </td>                     
+                                  </td>
                                 <td>
                                     <div class="text-center mx-auto">
                                         <button class="btn btn-primary btn-sm mr-1" (click)="selectOption(item)" placement="left" ngbTooltip="Seleccionar contribuyente">
@@ -104,11 +104,11 @@
                             </tr>
                         </ng-container>
                     </tbody>
-                </table>                    
+                </table>
                 </div>
-                
+
                 <div class="col-12">
-                <mat-paginator 
+                <mat-paginator
                     showFirstLastButtons
                     [length]="paginate.length"
                     [pageSize]="paginate.perPage"

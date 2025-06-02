@@ -1,5 +1,5 @@
 <div class="my-2">
-    
+
 
     <app-button-radio-active [titulo]="fTitle" cstyle="bg-light text-dark" icono="fas fa-hand-pointer"
     filtroBoton="btnsRenConsultaReporte" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
@@ -16,7 +16,7 @@
                 <button class="btn btn-sm btn-danger" matTooltip="Limpiar Filtros" (click)="limpiarFiltros()"><i class="fas fa-eraser"></i></button>
             </div>
         </div> -->
-        
+
         <div class="row justify-content-md-center ml-1 mr-1">
             <div class="col-4">
                 <app-cc-input-group-prepend label="Tipo de Reporte" styleSpan="size-span-campo font-weight-bold">
@@ -38,18 +38,18 @@
                     </div>
                     <p-calendar
                         (ngModelChange)="periodoSelected($event,periodo)"
-                        [readonlyInput]="true" 
-                        view="year" 
-                        dateFormat="yy" 
-                        [(ngModel)]="filter.periodo" 
-                        [showIcon]="true" 
+                        [readonlyInput]="true"
+                        view="year"
+                        dateFormat="yy"
+                        [(ngModel)]="filter.periodo"
+                        [showIcon]="true"
                         class="ui-calendar ui-calendar-button"
-                        inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                        inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}"
                         [inputStyle]="{'height':'30px', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
                     </p-calendar>
                 </div> -->
                 <!-- <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo font-weight-bold">
-                    <input id="periodo" type="text" class="form-control" [(ngModel)]="filter.periodo"> 
+                    <input id="periodo" type="text" class="form-control" [(ngModel)]="filter.periodo">
                 </app-cc-input-group-prepend> -->
             </div>
             <div class="col-3">
@@ -57,18 +57,18 @@
                     <div class="input-group-prepend">
                         <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Mes</span>
                     </div>
-                    <ng-select 
+                    <ng-select
                         (ngModelChange)="ChangeMesCierrePeriodos($event)"
-                        class="form-control" 
+                        class="form-control"
                         id="elemento_pruebas"
                         bindLabel="name"
                         placeholder="-Todos-"
                         appendTo="body"
                         [clearable]="false"
                         [searchable]="true"
-                        [disabled]=disabled
+                        disabled
                         [(ngModel)]="mes_actual">
-                        
+
                         <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
                             {{item.name}}
                         </ng-option>
@@ -81,7 +81,7 @@
                 </button>
                 <!-- <button class="btn btn-sm btn-danger" matTooltip="Limpiar Filtros" (click)="limpiarFiltros()"><i class="fas fa-eraser"></i></button> -->
             </div>
-            
+
             <!--<div class="col-lg-4">
                 <app-cc-input-group-prepend label="Concepto" styleSpan="size-span-otro font-weight-bold">
                     <ng-select [disabled]="formReadOnly || conceptosDisabled" [(ngModel)]="filter.selectedConcepto" bindValue="id" bindLabel="name" class="form-control" [clearable]="false">
@@ -100,9 +100,9 @@
             <div class="col-1 text-right">
                 <button class="btn btn-sm btn-danger" matTooltip="Limpiar Filtros" (click)="limpiarFiltros()"><i class="fas fa-eraser"></i></button>
             </div> -->
-            
+
         </div>
-        <!--<div class="row justify-content-md-center"> 
+        <!--<div class="row justify-content-md-center">
             <div class="col-lg-4" >
                 <app-cc-input-group-prepend label="Fecha Desde" styleSpan="size-span-otro font-weight-bold">
                     <input type="date" class="form-control" [(ngModel)]="filter.fecha_desde" [disabled]="formReadOnly || fechaDesdeDisabled">
@@ -117,10 +117,10 @@
 
     </fieldset>
     <div *ngIf="selectedReporte=='rpt_rrhh_distributivo'" class="row justify-content-center">
-        <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;"> 
-            <p-table 
+        <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;">
+            <p-table
                 #tblRrhhDistributivo
-                [value]="dataReportes" 
+                [value]="dataReportes"
                 [paginator]="true"
                 [rows]="rows"
                 [lazy]="true"
@@ -137,7 +137,7 @@
                             <th style="width: 150px;">Unidad a la que pertenece</th>
                             <th style="width: 200px;">Apellidos y nombres de los servidores y servidoras</th>
                             <th style="width: 200px;">Puesto Institucional</th>
-                            
+
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
@@ -148,15 +148,15 @@
                                 <td style="width: 200px;">{{d.nombre_cargo}}</td>
                         </tr>
                     </ng-template>
-                    
+
                 </p-table>
         </div>
     </div>
     <div *ngIf="selectedReporte=='rpt_rrhh_directorio'" class="row justify-content-center">
-        <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;"> 
-            <p-table 
+        <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;">
+            <p-table
                 #tblRrhhDirectorio
-                [value]="dataReportes" 
+                [value]="dataReportes"
                 [paginator]="true"
                 [rows]="rows"
                 [lazy]="true"
@@ -178,7 +178,7 @@
                             <th style="width: 150px;">Teléfono institucional</th>
                             <th style="width: 150px;">Extensión</th>
                             <th style="width: 150px;">Correo Electrónico institucional</th>
-                            
+
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">
@@ -198,10 +198,10 @@
         </div>
     </div>
     <div *ngIf="selectedReporte=='rpt_rrhh_remuneracion'" class="row justify-content-center">
-        <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;"> 
-            <p-table 
+        <div class="col-12  pl-3 pr-3 mt-2" style="overflow-x:auto;">
+            <p-table
                 #tblRrhhRemuneracion
-                [value]="dataReportes" 
+                [value]="dataReportes"
                 [paginator]="true"
                 [rows]="rows"
                 [lazy]="true"
@@ -227,7 +227,7 @@
                             <th style="min-width: 100px;">Horas suplementarias y extraordinarias</th>
                             <th style="min-width: 150px;">Encargos y subrogaciones</th>
                             <th style="min-width: 150px;">Total ingresos adicionales</th>
-                          
+
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-d let-rowIndex="rowIndex">

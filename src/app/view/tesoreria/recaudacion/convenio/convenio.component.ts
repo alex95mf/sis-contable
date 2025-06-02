@@ -47,6 +47,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
   contribuyenteActive: any = {
     razon_social: ""
   };
+  id = id;
 
   contribuyenteCActive: any = {
     razon_social: ""
@@ -170,7 +171,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
 
 
   constructor(
-    private commonService: CommonService,
+    public commonService: CommonService,
     private toastr: ToastrService,
     private commonVrs: CommonVarService,
     private modalService: NgbModal,

@@ -14,7 +14,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     TablaAmortizacionRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
 
   ]
 })

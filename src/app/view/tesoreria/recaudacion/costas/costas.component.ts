@@ -17,10 +17,10 @@ import { ListVafavorComponent } from '../recibo-cobro/list-vafavor/list-vafavor.
 import { ListCruceConvenioComponent } from '../recibo-cobro/list-cruce-convenio/list-cruce-convenio.component';
 import { ListNotaCreditoComponent } from '../recibo-cobro/list-nota-credito/list-nota-credito.component';
 import { ListAnticipoPrecobradoComponent } from '../recibo-cobro/list-anticipo-precobrado/list-anticipo-precobrado.component';
-import jsPDF from 'jspdf';
+// import jsPDF from 'jspdf';
 import { environment } from 'src/environments/environment';
 //import { ConceptoDetComponent } from './concepto-det/concepto-det.component';
-import { id } from '@swimlane/ngx-charts';
+// import { id } from '@swimlane/ngx-charts';
 
 @Component({
 standalone: false,

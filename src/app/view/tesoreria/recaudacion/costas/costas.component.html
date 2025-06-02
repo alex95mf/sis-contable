@@ -2,14 +2,14 @@
 filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
 
 <div class="row mt-3 mb-3">
-    <div class="col-2"></div> 
+    <div class="col-2"></div>
     <div class="col-sm-3">
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Caja Registradora</span></div>
             <input type="text" class="form-control form-control-sm" disabled [value]="cajaActiva?cajaActiva.nombre:'Ninguna'">
             <button [disabled]="formReadOnly" class="btn btn-sm btn-info" ngbTooltip="Recargar caja" (click)="validacionCaja()">
                 <i class="fas fa-redo"></i>
-            </button>   
+            </button>
         </div>
     </div>
     <div class="col-sm-5">
@@ -21,7 +21,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             </button>
         </div>
     </div>
-    <div class="col-sm-2"></div> 
+    <div class="col-sm-2"></div>
 </div>
 
 <div class="row mt-2 mb-3">
@@ -52,7 +52,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             <div class="form-control form-control-sm" style="background-color: #E4E6EA;">
                 <i
                     placement="bottom"
-                    [ngbTooltip]="(documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado')" 
+                    [ngbTooltip]="(documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado')"
                     [class]="(documento.estado == 'P') ? 'fas fa-circle text-muted' : (documento.estado == 'E') ? 'fas fa-circle text-warning' : ((documento.estado == 'A') ? 'fas fa-circle text-success' : 'fas fa-circle text-danger')">
                 </i>
                 {{ (documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' : ((documento.estado == 'A') ? 'Aprobado' : 'Anulado') }}
@@ -66,7 +66,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Juicios</span>
             </div>
             <ng-select class="form-control" [(ngModel)]="documento.juicio" (change)="selectJuicioHandler($event)"
-                [disabled]="readOnlyMode || disabledJuicio"  [readonly]="titulosDisabled || formReadOnly" [clearable]="false">
+                [disabled]="disabledJuicio"  [readonly]="titulosDisabled || formReadOnly" [clearable]="false">
                 <ng-option [value]="0" disabled>Seleccione un Juicio</ng-option>
                 <ng-option *ngFor="let j of juicios" [value]="j.id_cob_juicio">{{ j.num_proceso }}</ng-option>
             </ng-select>
@@ -77,14 +77,14 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Costas</span>
             </div>
             <ng-select class="form-control" [(ngModel)]="documento.costa" (change)="selectCostaHandler($event)"
-                [disabled]="readOnlyMode"  [readonly]="titulosDisabled || formReadOnly" [clearable]="false">
+                 [readonly]="titulosDisabled || formReadOnly" [clearable]="false">
                 <ng-option [value]="0" disabled>Seleccione una Costa</ng-option>
                 <ng-option *ngFor="let c of costas" [value]="c">{{ getEstado(c.estado) +'-'+c.tipo }} | <span class="font-weight-bold">Saldo: </span>$ {{ c.saldo | number:'1.2-2' }} </ng-option>
             </ng-select>
         </div>
     </div>
 </div>
-<!-- 
+<!--
 <div class="row mt-2 mb-3">
     <div class="col-8">
         <div class="input-group input-group-sm">
@@ -102,7 +102,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
         <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar título"  (click)="expandModalTitulos()" [disabled]="titulosDisabled || formReadOnly">
             <i class="fas fa-plus"></i> Agregar título
         </button>
-        
+
     </div>
 </div> -->
 <div class="row justify-content-end mb-2 pt-2">
@@ -138,13 +138,13 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <td class="text-center">{{ d.saldo }}</td>
                             <td class="text-center">
                                 <div class="input-group input-group-sm">
-                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>   
+                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
                                     <input maxlength="100" class="form-control form-control-sm"
                                     [disabled]="true"  [(ngModel)]="d.cobro" >
                                 </div>
                                 <!-- $ {{ d.cobro }} -->
                             </td>
-                                                  
+
                             <td class="text-center">
                                 <button class="btn btn-sm btn-danger" placement="left" ngbTooltip="Remover costa" [disabled]="titulosDisabled || formReadOnly" (click)="removeCosta(i)"><i class="far fa-trash-alt"></i></button>
                                 <!-- <button class="btn btn-warning btn-sm mr-1" (click)="expandDetalleMulta(d)" placement="left" ngbTooltip="Ver detalle">
@@ -154,7 +154,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                 <button *ngIf="formReadOnly" class="btn btn-sm btn-info" placement="left" ngbTooltip="Imprimir" (click)="printTitulo(d)"><i class="far fa-print"></i></button> -->
                             </td>
                         </tr>
-      
+
                     </ng-container>
 
                 </tbody>
@@ -179,9 +179,9 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 </div>
 
 <div class="row mt-2 mb-3 align-items-center">
-    <div class="col-3">   
+    <div class="col-3">
 
-        <div class="input-group input-group-sm">            
+        <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo" >Formas de pago</span></div>
             <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="formaPago" [clearable]="false" (change)="handlePago($event)">
                 <ng-option [value]="0" disabled>Seleccione forma de pago</ng-option>
@@ -193,36 +193,36 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
     <div *ngIf="expandPago" class="col">
         <button [disabled]="titulosDisabled || formReadOnly" class="btn btn-sm btn-primary" ngbTooltip="Seleccionar documento" (click)="selectDocPago()">
             <i class="fas fa-expand-alt"></i>
-        </button>      
+        </button>
     </div>
     <div *ngIf="!expandPago" class="col-4">
-        
+
         <div *ngIf="hayEntidad" class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Entidad</span></div>
             <ng-select [disabled]="formReadOnly || entidadDisabled" class="form-control" [(ngModel)]="entidad" [clearable]="false" (change)="handleEntidad($event)">
                 <ng-option [value]="0" disabled>Seleccione entidad financiera</ng-option>
                 <ng-option *ngFor="let op of entidadesFiltrada" [value]="op">{{ op.nombre }}</ng-option>
-            </ng-select>       
+            </ng-select>
         </div>
 
     </div>
     <div *ngIf="!expandPago" class="col-3">
-        
+
         <div *ngIf="hayEmisor" class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Emisor</span></div>
             <ng-select [disabled]="formReadOnly || emisorDisabled" class="form-control" [(ngModel)]="emisor" [clearable]="false" >
                 <ng-option [value]="0" disabled>Seleccione banco emisor</ng-option>
                 <ng-option *ngFor="let op of emisoresFiltrada" [value]="op">{{ op.nombre }}</ng-option>
-            </ng-select>             
+            </ng-select>
         </div>
- 
+
     </div>
     <div class="col-2 text-right">
         <button [disabled]="titulosDisabled || formReadOnly || deshabilitarFormaPag" class="btn btn-sm btn-success" ngbTooltip="Agregar método de pago" (click)="agregaPagos()">
             <i class="fas fa-plus"></i> Agregar forma de pago
-        </button>      
+        </button>
     </div>
-        
+
 </div>
 
 <div class="row mb-2">
@@ -231,13 +231,13 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             <table class="table table-bordered no-footer table-hover mb-0">
                 <thead class="thead-dark">
                     <tr class="text-center">
-                        <th style="width: 10%;">Forma de pago</th> 
+                        <th style="width: 10%;">Forma de pago</th>
                         <th style="width: 10%;">Banco</th>
                         <th style="width: 15%;">Documento 1</th>
                         <th style="width: 15%;">Documento 2</th>
                         <th style="width: 10%;">Valor</th>
                         <th style="width: 10%;">Valor recibido</th>
-                        <th style="width: 10%;">Cambio</th>                    
+                        <th style="width: 10%;">Cambio</th>
                         <th style="width: 20%;">Observaciones</th>
                         <th style="width: 10%;">Acciones</th>
                     </tr>
@@ -251,14 +251,14 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <td class="text-center">{{ d.tipo_pago_lbl }}</td>
                             <td class="text-center">{{ d.banco==''?'-':d.banco  }}</td>
                             <!-- <td class="text-center">
-                                <div class="input-group input-group-sm">                                    
+                                <div class="input-group input-group-sm">
                                     <input type="text" maxlength="50" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
                                 </div>
                             </td> -->
 
                             <!-- el documento 1 cambia para cheque, tarjetas o transferencia, los demas NA -->
                             <td *ngIf="d.tipo_pago=='CHEQUE' || d.tipo_pago=='TARJETA' || d.tipo_pago=='DEBITO' || d.tipo_pago=='TRANSFERENCIA'" class="text-center">
-                                <div class="input-group input-group-sm">                                    
+                                <div class="input-group input-group-sm">
                                     <input type="text" maxlength="50" class="form-control form-control-sm" [placeholder]="doc1PlaceHolder(d)" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
                                 </div>
                             </td>
@@ -268,48 +268,48 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                             <td *ngIf="d.tipo_pago!='CHEQUE' && d.tipo_pago!='TARJETA' && d.tipo_pago!='DEBITO' && d.tipo_pago!='TRANSFERENCIA' && d.tipo_pago!='GARANTIA' && d.tipo_pago!='FAVOR' && d.tipo_pago!=='CRUCE CONVENIO' && d.tipo_pago!=='NOTA CREDITO' && d.tipo_pago!=='ANTICIPO PRECOBRADO'" class="text-center">-</td>
 
                             <!-- solo tipo de pago cheque cuenta con segundo documento, los demas NA                         -->
-                            <td *ngIf="d.tipo_pago=='CHEQUE'">                                
-                                <div class="input-group input-group-sm">                                 
+                            <td *ngIf="d.tipo_pago=='CHEQUE'">
+                                <div class="input-group input-group-sm">
                                     <input type="text" maxlength="50" class="form-control form-control-sm" placeholder="No. de serie" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento2">
                                 </div>
                             </td>
-                            <td *ngIf="d.tipo_pago=='TARJETA' || d.tipo_pago=='DEBITO'">                                
-                                <div class="input-group input-group-sm">                                 
+                            <td *ngIf="d.tipo_pago=='TARJETA' || d.tipo_pago=='DEBITO'">
+                                <div class="input-group input-group-sm">
                                     <input type="text" maxlength="50" class="form-control form-control-sm" placeholder="No. de voucher" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento2">
                                 </div>
                             </td>
-                            
+
                             <td *ngIf="d.tipo_pago=='GARANTIA' || d.tipo_pago=='FAVOR' || d.tipo_pago=='CRUCE CONVENIO' || d.tipo_pago== 'NOTA CREDITO' || d.tipo_pago== 'ANTICIPO PRECOBRADO'" class="text-center">
                                 {{ d.numero_documento2 }}
                             </td>
                             <td *ngIf="d.tipo_pago!='CHEQUE' && d.tipo_pago!='GARANTIA' && d.tipo_pago!='FAVOR' && d.tipo_pago!='TARJETA' && d.tipo_pago!='DEBITO' && d.tipo_pago!=='CRUCE CONVENIO' && d.tipo_pago!=='NOTA CREDITO' && d.tipo_pago!=='ANTICIPO PRECOBRADO'" class="text-center">-</td>
 
                             <!-- todos poseen valor -->
-                            <td class="text-right">                                
-                                <div class="input-group input-group-sm">             
-                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>                       
+                            <td class="text-right">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
                                     <input currencyMask maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.valor" (keypress)="onlyNumberDot($event)" (keyup)="sumar(d)">
                                 </div>
                             </td>
 
                             <!-- solo efectivo cuenta con campos valor recibido y cambio -->
-                            <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">                                
-                                <div class="input-group input-group-sm">             
-                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>                       
+                            <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
                                     <input currencyMask maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.valor_recibido" (keypress)="onlyNumberDot($event)" (keyup)="getCambio(d)">
                                 </div>
                             </td>
                             <td *ngIf="d.tipo_pago!='EFECTIVO'" class="text-center">-</td>
-                            <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">                                
-                                <div class="input-group input-group-sm">             
-                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>                       
+                            <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
                                     <input currencyMask maxlength="8" class="form-control form-control-sm text-right" readonly [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.cambio" (keypress)="onlyNumberDot($event)" >
                                 </div>
                             </td>
                             <td *ngIf="d.tipo_pago!='EFECTIVO'" class="text-center">-</td>
                             <td class="text-center">
                                 <div class="input-group input-group-sm">
-                                    
+
                                     <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
                                 </div>
                             </td>
@@ -386,20 +386,20 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
             </div>
         </div>
     </div>
-        
+
     <div class="row justify-content-center prt-comprobante">
 
         <div class="col-11 pl-2 pr-2">
-             
+
             <div class="row mt-2 mb-1 align-items-center">
                 <div class="col">
                     <h5 class="mb-0 text-dark">Detalles de las Costas</h5>
                 </div>
             </div>
-            
+
             <div class="row mb-2">
                 <div class="col">
-                    <div class="table-responsive">                        
+                    <div class="table-responsive">
                         <table class="table table-bordered no-footer table-hover mb-0">
                             <thead class="thead-dark">
                                 <tr class="text-center">
@@ -427,12 +427,12 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                                 <div class="col text-muted"><small>{{ d.numero_documento }}</small></div>
                                             </div>
                                         </td>
-                                        <td class="text-center">{{ d.fecha | date: 'dd/MM/yyyy' }}</td>               
+                                        <td class="text-center">{{ d.fecha | date: 'dd/MM/yyyy' }}</td>
                                         <!-- <td class="text-right">$ {{ d.monto_total | number: '1.2-2' }}</td> -->
                                         <td class="text-right">$ {{ d.total }}</td>
                                         <td class="text-right">
                                             <div class="input-group input-group-sm">
-                                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>   
+                                                <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
                                                 <input maxlength="100" class="form-control form-control-sm"
                                                 [disabled]="titulosDisabled || formReadOnly"  [(ngModel)]="d.cobro" (ngModelChange)="calcCobroTotal($event)" (keyup)="restar(d)">
                                             </div>
@@ -442,15 +442,15 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                         <td class="text-center">
                                         </td>
                                     </tr>
-                  
+
                                 </ng-container>
-            
+
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            
+
             <div class="row my-2 justify-content-end">
                 <div class="col-6">
                     <div class="input-group input-group-lg input-group-subtotal">
@@ -458,8 +458,8 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                         <input id="cobroTotal" type="text" class="form-control form-control-lg font-weight-bold text-right" readonly value="$ {{ totalCobro | number: '1.2-2' }}">
                     </div>
                 </div>
-            </div>           
-            
+            </div>
+
 
             <div class="row mt-3 mb-1 align-items-center">
                 <div class="col">
@@ -473,13 +473,13 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                         <table class="table table-bordered no-footer table-hover mb-0">
                             <thead class="thead-dark">
                                 <tr class="text-center">
-                                    <th style="width: 10%;">Forma de pago</th> 
+                                    <th style="width: 10%;">Forma de pago</th>
                                     <th style="width: 10%;">Banco</th>
                                     <th style="width: 15%;">Documento 1</th>
                                     <th style="width: 15%;">Documento 2</th>
                                     <th style="width: 10%;">Valor</th>
                                     <th style="width: 10%;">Valor recibido</th>
-                                    <th style="width: 10%;">Cambio</th>                    
+                                    <th style="width: 10%;">Cambio</th>
                                     <th style="width: 20%;">Observaciones</th>
                                 </tr>
                             </thead>
@@ -492,34 +492,34 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                                         <td class="text-center">{{ d.tipo_pago_lbl }}</td>
                                         <td class="text-center">{{ d.banco==''?'-':d.banco  }}</td>
                                         <!-- <td class="text-center">
-                                            <div class="input-group input-group-sm">                                    
+                                            <div class="input-group input-group-sm">
                                                 <input type="text" maxlength="50" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.numero_documento" >
                                             </div>
                                         </td> -->
-            
+
                                         <!-- el documento 1 cambia para cheque, tarjetas o transferencia, los demas NA -->
                                         <td *ngIf="d.tipo_pago=='CHEQUE' || d.tipo_pago=='TARJETA' || d.tipo_pago=='DEBITO' || d.tipo_pago=='TRANSFERENCIA'" class="text-center">
                                             {{ d.numero_documento }}
                                         </td>
                                         <td *ngIf="d.tipo_pago!='CHEQUE' && d.tipo_pago!='TARJETA' && d.tipo_pago!='DEBITO' && d.tipo_pago!='TRANSFERENCIA'" class="text-center">-</td>
-            
+
                                         <!-- solo tipo de pago cheque cuenta con segundo documento, los demas NA                         -->
-                                        <td *ngIf="d.tipo_pago=='CHEQUE'">                                
+                                        <td *ngIf="d.tipo_pago=='CHEQUE'">
                                             {{ d.numero_documento2 }}
                                         </td>
                                         <td *ngIf="d.tipo_pago!='CHEQUE'" class="text-center">-</td>
-            
+
                                         <!-- todos poseen valor -->
-                                        <td class="text-right">                                
+                                        <td class="text-right">
                                             $ {{ d.valor }}
                                         </td>
-            
+
                                         <!-- solo efectivo cuenta con campos valor recibido y cambio -->
-                                        <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">                                
+                                        <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">
                                             $ {{ d.valor_recibido }}
                                         </td>
                                         <td *ngIf="d.tipo_pago!='EFECTIVO'" class="text-center">-</td>
-                                        <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">                                
+                                        <td *ngIf="d.tipo_pago=='EFECTIVO'" class="text-right">
                                             $ {{ d.cambio }}
                                         </td>
                                         <td *ngIf="d.tipo_pago!='EFECTIVO'" class="text-center">-</td>
@@ -533,7 +533,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                     </div>
                 </div>
             </div>
-            
+
             <div class="row my-2 justify-content-end">
                 <div class="col-6">
                     <div class="input-group input-group-lg input-group-total">
@@ -542,7 +542,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
                     </div>
                 </div>
             </div>
-            
+
             <!-- <div class="row my-2 justify-content-end">
                 <div class="col-6">
                     <div class="input-group input-group-lg input-group-descuentos">
@@ -554,7 +554,7 @@ filtroBoton="btnsRenLiqCobro" [groupButton]="vmButtons" (onMetodoGlobal)="metodo
 
 
         </div>
-        
+
     </div>
 
     <div class="row justify-content-center" style="font-family: 'Poppins1';">

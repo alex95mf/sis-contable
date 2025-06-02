@@ -18,23 +18,23 @@
                         </div>
                         <div class="col-12 col-md-4 pt-0 pb-0">
                             <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo ">
-                                <ng-select 
+                                <ng-select
                                     (ngModelChange)="ChangeMesCierrePeriodos($event)"
-                                    class="form-control" 
+                                    class="form-control"
                                     id="elemento_pruebas"
                                     bindLabel="name"
                                     placeholder="-Todos-"
                                     appendTo="body"
                                     [clearable]="false"
                                     [searchable]="true"
-                                    [disabled]=disabled
+                                    disabled
                                     [(ngModel)]="filter.mes_actual">
-                                    
+
                                     <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
                                         {{item.name}}
                                     </ng-option>
                                 </ng-select>
-                              </app-cc-input-group-prepend> 
+                              </app-cc-input-group-prepend>
 
                         </div>
                         <div class="col-12 col-md-4 pt-0 pb-0">
@@ -103,8 +103,8 @@
                                             <th *ngIf="tipoSelected=='G'" >Compromisos</th>
                                             <th >Devengado</th>
                                             <th >
-                                               <span *ngIf="tipoSelected=='I'">Recaudado</span> 
-                                               <span *ngIf="tipoSelected=='G'">Pagado</span> 
+                                               <span *ngIf="tipoSelected=='I'">Recaudado</span>
+                                               <span *ngIf="tipoSelected=='G'">Pagado</span>
                                             </th>
                                             <th *ngIf="tipoSelected=='G'" >Saldo a Comprometer</th>
                                             <th>Saldo por Devengar</th>
@@ -117,11 +117,11 @@
                                             </td>
                                         </tr>
                                         <tr *ngFor="let d of arrayCedula, let i = index" [ngClass]="d.class" [style]="d.size">
-                                           
+
                                             <td class="text-left">{{ d.partida}}</td>
                                             <td class="text-left">{{ d.catalogo_presupuesto?.nombre}}</td>
                                             <td class="text-right">{{ d.asignacion_original | number: '1.2-2' }}</td>
-            
+
                                             <td class="text-right">
                                                 <span *ngIf="d.partida?.length ==6 && d.reformas != 0" style="text-decoration: underline;  color: #2b94e2; " class="cursor-pointer font-bold" (click)="consultaDetalleReforma(d)">
                                                     {{ d.reformas | number: '1.2-2' }}
@@ -143,12 +143,12 @@
                                                 TOTAL
                                             </td>
                                             <td class="col-rec fixed-header">
-                                                <div class="row">                                    
+                                                <div class="row">
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalIngresos | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                         </tr>
                                         <tr *ngIf="tipoSelected=='G'">
@@ -156,16 +156,16 @@
                                                 TOTAL
                                             </td>
                                             <td class="col-rec fixed-header">
-                                                <div class="row">                                    
+                                                <div class="row">
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalEgresos | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
+                                                </div>
                                              </td>
                                         </tr>
-                                        
+
                                     </tbody>
-                
+
                                 </table>
                             </div>
                             <div *ngIf="checkPrograma" class="table-responsive"   style="overflow-x:auto;max-height: 500px; overflow-y: auto;">
@@ -183,8 +183,8 @@
                                             <th *ngIf="tipoSelected=='G'" >Compromisos</th>
                                             <th >Devengado</th>
                                             <th >
-                                                <span *ngIf="tipoSelected=='I'">Recaudado</span> 
-                                                <span *ngIf="tipoSelected=='G'">Pagado</span> 
+                                                <span *ngIf="tipoSelected=='I'">Recaudado</span>
+                                                <span *ngIf="tipoSelected=='G'">Pagado</span>
                                              </th>
                                             <th *ngIf="tipoSelected=='G'" >Saldo a Comprometer</th>
                                             <th >Saldo por Devengar</th>
@@ -229,12 +229,12 @@
                                                 TOTAL
                                             </td>
                                             <td class="col-rec fixed-header">
-                                                <div class="row">                                    
+                                                <div class="row">
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalIngresos | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                         </tr>
                                         <tr *ngIf="tipoSelected=='G'">
@@ -242,15 +242,15 @@
                                                 TOTAL
                                             </td>
                                             <td class="col-rec fixed-header">
-                                                <div class="row">                                    
+                                                <div class="row">
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalEgresos | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
+                                                </div>
                                              </td>
                                         </tr>
                                     </tbody>
-                
+
                                 </table>
                             </div>
                             <div *ngIf="resumen"  class="table-responsive"  style="overflow-x:auto;max-height: 500px; overflow-y: auto;">
@@ -274,7 +274,7 @@
                                             </td>
                                         </tr>
                                         <tr *ngFor="let d of arrayCedulaResumen, let i = index" >
-                                           
+
                                             <td *ngIf="d.tipo == 'I'" class="text-left" [ngClass]="text ">{{ d.partida}}</td>
                                             <td *ngIf="d.tipo == 'I'" class="text-left">{{ d.catalogo_presupuesto?.nombre}}</td>
                                             <td *ngIf="d.tipo == 'I'" class="text-right">{{ d.asignacion_original | number: '1.2-2' }}</td>
@@ -284,12 +284,12 @@
                                                 TOTAL
                                             </td>
                                             <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalIngresos | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                         </tr>
                                         <!-- <tr>
@@ -300,7 +300,7 @@
                                     </tbody>
                                     <tbody>
                                         <tr *ngFor="let d of arrayCedulaResumen, let i = index">
-                                           
+
                                             <td *ngIf="d.tipo == 'G'" class="text-left" [ngClass]="text ">{{ d.partida}}</td>
                                             <td *ngIf="d.tipo == 'G'" class="text-left">{{ d.catalogo_presupuesto?.nombre}}</td>
                                             <td *ngIf="d.tipo == 'G'" class="text-right">{{ d.asignacion_original | number: '1.2-2' }}</td>
@@ -310,12 +310,12 @@
                                                 TOTAL
                                             </td>
                                             <td class="col-rec fixed-header">
-                                                <div class="row">                                    
+                                                <div class="row">
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalEgresos | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                         </tr>
                                     </tbody>
@@ -325,16 +325,16 @@
                                                 DIFERENCIA
                                             </td>
                                             <td class="col-rec fixed-header">
-                                                <div class="row">                                    
+                                                <div class="row">
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalDiferencia | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                         </tr>
                                     </tbody>
-                
+
                                 </table>
                             </div>
                             <div *ngIf="ejecucion"  class="table-responsive"  style="overflow-x:auto;max-height: 500px; overflow-y: auto;">
@@ -359,7 +359,7 @@
                                             </td>
                                         </tr>
                                         <tr *ngFor="let d of arrayCedulaEjecucion, let i = index" >
-                                           
+
                                             <td *ngIf="d.naturaleza == 'CORRIENTE'" class="text-left" [ngClass]="text ">{{ d.partida}}</td>
                                             <td *ngIf="d.naturaleza == 'CORRIENTE'" class="text-left">{{ d.nombre_partida}}</td>
                                             <td *ngIf="d.naturaleza == 'CORRIENTE'" class="text-right">{{ d.asignacion_codificada | number: '1.2-2' }}</td>
@@ -372,28 +372,28 @@
                                                 SUPERAVIT/DEFICIT CORRIENTE
                                             </td>
                                             <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalCodificadoCorr | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                              <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalDevengadoCorr | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                              <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalPorDevengarCorr | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                         </tr>
                                         <!-- <tr>
@@ -404,7 +404,7 @@
                                     </tbody>
                                     <tbody>
                                         <tr *ngFor="let d of arrayCedulaEjecucion, let i = index">
-                                           
+
                                             <td *ngIf="d.naturaleza == 'INVERSION'" class="text-left" [ngClass]="text ">{{ d.partida}}</td>
                                             <td *ngIf="d.naturaleza == 'INVERSION'" class="text-left">{{ d.nombre_partida}}</td>
                                             <td *ngIf="d.naturaleza == 'INVERSION'" class="text-right">{{ d.asignacion_codificada | number: '1.2-2' }}</td>
@@ -413,37 +413,37 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" class="text-left font-weight-bold col-num fixed-header" style="font-size:14px;">
-                                                SUPERAVIT/DEFICIT INVERSION 
+                                                SUPERAVIT/DEFICIT INVERSION
                                             </td>
                                             <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalCodificadoInv | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                              <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalDevengadoInv | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                              <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalPorDevengarInv | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                         </tr>
                                     </tbody>
                                     <tbody>
                                         <tr *ngFor="let d of arrayCedulaEjecucion, let i = index">
-                                           
+
                                             <td *ngIf="d.naturaleza == 'FINANCIAMIENTO'" class="text-left" [ngClass]="text ">{{ d.partida}}</td>
                                             <td *ngIf="d.naturaleza == 'FINANCIAMIENTO'" class="text-left">{{ d.nombre_partida}}</td>
                                             <td *ngIf="d.naturaleza == 'FINANCIAMIENTO'" class="text-right">{{ d.asignacion_codificada | number: '1.2-2' }}</td>
@@ -452,31 +452,31 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" class="text-left font-weight-bold col-num fixed-header" style="font-size:14px;">
-                                                SUPERAVIT/DEFICIT FINANCIAMIENTO 
+                                                SUPERAVIT/DEFICIT FINANCIAMIENTO
                                             </td>
                                             <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalCodificadoFin | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                              <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalDevengadoFin | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                              <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalPorDevengarFin | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                         </tr>
                                     </tbody>
@@ -486,32 +486,32 @@
                                                 SUPERAVIT/DEFICIT PRESUPUESTARIO
                                             </td>
                                             <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalCodificadoGeneral | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                              <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalDevengadoGeneral | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                              <td class="col-rec fixed-header">
-                                                <div class="row" >                                    
+                                                <div class="row" >
                                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                                         $ {{ totalPorDevengarGeneral | number: '1.2-2'}}
                                                      </div>
-                                                </div>                                
-                                               
+                                                </div>
+
                                              </td>
                                         </tr>
                                     </tbody>
-                
+
                                 </table>
                             </div>
                         </div>

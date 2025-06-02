@@ -9,7 +9,7 @@ import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exonera
 import { ModalInspeccionesComponent } from './modal-inspecciones/modal-inspecciones.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ModalTasasComponent } from './modal-tasas/modal-tasas.component';
-import { NgxCurrencyModule } from "ngx-currency";
+import { NgxCurrencyDirective } from "ngx-currency";
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { NgxCurrencyModule } from "ngx-currency";
     CommonModule,
     LiquidacionRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class LiquidacionModule { }

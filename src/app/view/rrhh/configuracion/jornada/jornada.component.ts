@@ -4,7 +4,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import * as myVarGlobals from 'src/app/global';
 import * as moment from 'moment';
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 import * as XLSX from 'xlsx';
 import { CommonService } from 'src/app/services/commonServices';
 import { ToastrService } from 'ngx-toastr';
@@ -34,7 +34,7 @@ export class JornadaComponent implements OnInit {
     private apiSrv: JornadaService,
     private toastr: ToastrService,
 
-  ) { 
+  ) {
 
     this.commonVrs.modalJornada.asObservable().subscribe(
       (res) => {
@@ -54,7 +54,7 @@ export class JornadaComponent implements OnInit {
   }
   @ViewChild(ButtonRadioActiveComponent, { static: false }) buttonRadioActiveComponent: ButtonRadioActiveComponent;
   permissions: any
-  vmButtons: any[] = []; 
+  vmButtons: any[] = [];
   ngOnInit(): void {
     this.vmButtons = [
       { orig: "btnsTabla", boton: { icon: "fa fa-plus-square-o", texto: "GUARDAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-success btn-sm", habilitar: false, imprimir: false},
@@ -63,7 +63,7 @@ export class JornadaComponent implements OnInit {
 
     ];
 
-    
+
     setTimeout(() => {
       this.getTiposEstados()
     }, 75)
@@ -159,12 +159,12 @@ export class JornadaComponent implements OnInit {
     switch (evento.items.boton.texto) {
 
       case "GUARDAR":
-        this.validarGuardar(); 
+        this.validarGuardar();
       break;
-      case "MODIFICAR": 
+      case "MODIFICAR":
         this.validarActualizar();
       break;
-      case "LIMPIAR": 
+      case "LIMPIAR":
         this.limpiarData();
       break;
 
@@ -217,19 +217,19 @@ export class JornadaComponent implements OnInit {
       }
     });
 
-    
-    
+
+
     return;
 
   }
-  
+
 
   calcularTotalHoras(evento) {
     console.log(evento)
     this.totalSemanal = 0
       if(evento =='lunes'){
         console.log(this.ingresolunes,this.salidalunes)
-       
+
         this.totallunes= this.calcularTotalHorasTrabajadas(this.ingresolunes,this.salidalunes).toFixed(2)
       }
       if(evento =='martes'){
@@ -251,7 +251,7 @@ export class JornadaComponent implements OnInit {
         this.totaldomingo= this.calcularTotalHorasTrabajadas(this.ingresodomingo,this.salidadomingo).toFixed(2)
       }
 
-      this.totalSemanal = parseFloat(this.totallunes) + parseFloat(this.totalmartes)+ parseFloat(this.totalmiercoles) + parseFloat(this.totaljueves) + parseFloat(this.totalviernes) + parseFloat(this.totalsabado) + parseFloat(this.totaldomingo) 
+      this.totalSemanal = parseFloat(this.totallunes) + parseFloat(this.totalmartes)+ parseFloat(this.totalmiercoles) + parseFloat(this.totaljueves) + parseFloat(this.totalviernes) + parseFloat(this.totalsabado) + parseFloat(this.totaldomingo)
 
   }
 
@@ -259,10 +259,10 @@ export class JornadaComponent implements OnInit {
 
     const horaInicio = new Date(`2024-01-08T${inicio}`);
     const horaFin = new Date(`2024-01-08T${fin}`);
-  
+
     // Calcular la diferencia en milisegundos
     const diferenciaMilisegundos = horaFin.getTime() - horaInicio.getTime();
-  
+
     // Convertir la diferencia a horas
     const totalHoras = diferenciaMilisegundos / (1000 * 60 * 60);
 
@@ -271,7 +271,7 @@ export class JornadaComponent implements OnInit {
     }
     return totalHoras -1 ;
     console.log(totalHoras)
-    
+
   }
 
   // calculoTotalHorasSemanal(){
@@ -282,8 +282,8 @@ export class JornadaComponent implements OnInit {
   //    return totalHorasSemana;
   // }
 
- 
-  
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -351,7 +351,7 @@ export class JornadaComponent implements OnInit {
 
       }
     });
-    
+
     return;
 
   }else if (parseInt(this.ingresolunes) < parseInt(this.salidalunes) || (parseInt(this.ingresomartes) < parseInt(this.salidamartes)) ||
@@ -380,12 +380,12 @@ export class JornadaComponent implements OnInit {
   });
    return;
 
- }  
+ }
 
- 
-    
-    
-  
+
+
+
+
   }
   selectedEstado(event){
     console.log(event)
@@ -443,7 +443,7 @@ export class JornadaComponent implements OnInit {
     this.totaljueves = 0;
     this.totalviernes = 0;
     this.totalsabado = 0;
-    this.totaldomingo = 0;  
+    this.totaldomingo = 0;
     this.totalSemanal = 0;
   }
 
@@ -453,7 +453,7 @@ export class JornadaComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.jornadas = [];
     let totalHorasSemana= 0
-   
+
     console.log(res['jordana_detalles']);
           res['jordana_detalles'].forEach(e => {
             let tablaBusqueda = {
@@ -461,11 +461,11 @@ export class JornadaComponent implements OnInit {
               jnd_hora_ingreso:e.jnd_hora_ingreso,
               jnd_hora_salida: e.jnd_hora_salida,
               total_horas: e.total_horas,
-            } 
+            }
             totalHorasSemana += parseFloat(e.total_horas)
 
         this.jornadas.push(tablaBusqueda);
-        console.log(tablaBusqueda) 
+        console.log(tablaBusqueda)
           })
         this.totalSemanal= totalHorasSemana
         this.lcargando.ctlSpinner(false);
@@ -480,7 +480,7 @@ export class JornadaComponent implements OnInit {
   guardarJornadas(){
     this.mensajeSpiner = 'Guardando Jornadas...';
       this.lcargando.ctlSpinner(true);
-      
+
       this.lunes.push(12)
       this.lunes.push(this.ingresolunes)
       this.lunes.push(this.salidalunes)
@@ -532,7 +532,7 @@ export class JornadaComponent implements OnInit {
       this.apiSrv.guardarJornadas(data).subscribe(
         res => {
           console.log(res);
-  
+
           Swal.fire({
             icon: "success",
             title: "Exito",
@@ -546,20 +546,20 @@ export class JornadaComponent implements OnInit {
           this.vmButtons[2].habilitar = false;
           this.lcargando.ctlSpinner(false);
           //this.numero_documento= res['documento'];
-  
+
         },
         err => {
           this.lcargando.ctlSpinner(false)
           this.toastr.error(err.error.message, 'Error al guardar la Jornada')
         }
       )
-  
+
       //this.vmButtons[4].habilitar = false;
       //this.constDisabled = true;
       //this.calculoDisabled = true;
       //this.calcAmortizaciones();
       //this.limpiarData()
-      
+
   }
   updateTotalHoras(d){
     console.log(d.jnd_hora_ingreso,d.jnd_hora_salida)
@@ -606,14 +606,14 @@ export class JornadaComponent implements OnInit {
             this.vmButtons[2].habilitar = false;
             this.lcargando.ctlSpinner(false);
             //this.numero_documento= res['documento'];
-    
+
           },
           err => {
             this.lcargando.ctlSpinner(false)
             this.toastr.error(err.error.message, 'Error al actualizar la Jornada')
           }
-          
-        
+
+
       )
       this.limpiarData();
       //this.vmButtons[3].habilitar = false;

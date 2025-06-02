@@ -23,7 +23,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     ActivosFinancierosRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class ActivosFinancierosModule { }

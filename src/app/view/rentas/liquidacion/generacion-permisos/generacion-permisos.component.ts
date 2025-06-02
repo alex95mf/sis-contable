@@ -14,7 +14,7 @@ import { ModalConceptosComponent } from 'src/app/config/custom/modal-conceptos/m
 import { ListLiquidacionesComponent } from './list-liquidaciones/list-liquidaciones.component';
 import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component';
 import { ModalSupervivenciaComponent } from 'src/app/config/custom/modal-supervivencia/modal-supervivencia.component';
-import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
+//import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 

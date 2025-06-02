@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxCurrencyModule } from "ngx-currency";
+import { NgxCurrencyDirective } from "ngx-currency";
 
 import { PrestamosNewRoutingModule } from './prestamos-new.routing';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';

@@ -7,15 +7,15 @@ import { CommonService } from 'src/app/services/commonServices';
 import { ToastrService } from 'ngx-toastr';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { GeneracionIcpNominaService } from './generacion-icp-nomina.service'; 
-import { AnticipoPrecobradoService } from 'src/app/view/tesoreria/recaudacion/anticipo-precobrado/anticipo-precobrado.service'; 
+import { GeneracionIcpNominaService } from './generacion-icp-nomina.service';
+import { AnticipoPrecobradoService } from 'src/app/view/tesoreria/recaudacion/anticipo-precobrado/anticipo-precobrado.service';
 import { ContratoService } from 'src/app/view/rentas/mercados/contrato/contrato.service';
 import { ListRecDocumentosComponent } from './list-rec-documentos/list-rec-documentos.component';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 import { ModalIngresoAsignacionComponent } from './modal-ingreso-asignacion/modal-ingreso-asignacion.component';
 import { ModalCedulaPresupuestariaComponent } from './modal-cedula-presupuestaria/modal-cedula-presupuestaria.component';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
-import e from 'cors';
+//import e from 'cors';
 import { SweetAlertResult } from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 
@@ -105,7 +105,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
 
   formaPago: any = {
     nombre: '',
-    valor: '',    
+    valor: '',
   };
 
   entidadesFiltrada: any = [];
@@ -113,8 +113,8 @@ export class GeneracionIcpNominaComponent implements OnInit {
   hayEntidad: boolean = false;
   entidad: any = {
     nombre: '',
-    valor: '',  
-    grupo: '',  
+    valor: '',
+    grupo: '',
   };
 
   emisoresFiltrada: any = [];
@@ -122,8 +122,8 @@ export class GeneracionIcpNominaComponent implements OnInit {
   hayEmisor: boolean = false;
   emisor: any = {
     nombre: '',
-    valor: '',  
-    grupo: '',  
+    valor: '',
+    grupo: '',
   };
 
   documento: any = {
@@ -182,7 +182,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
     private contSvr:ContratoService,
     private genIdpSvr: GeneracionIcpNominaService,
     private cierremesService: CierreMesService,
-    ) { 
+    ) {
       this.commonVrs.selectContribuyenteCustom.asObservable().subscribe(
         (res) => {
           console.log('Aqui '+res);
@@ -195,22 +195,22 @@ export class GeneracionIcpNominaComponent implements OnInit {
         }
       );
 
-      this.commonVrs.selectRecDocumento.asObservable().subscribe( 
+      this.commonVrs.selectRecDocumento.asObservable().subscribe(
         (res) => {
 
           // this.formReadOnly = true;
           this.restoreForm();
-          
-          
+
+
           console.log("BUSCAR",res);
-          
+
           // this.concepto = res.concepto; // ya no se maneja eligiendo concepto se puede eliminar
           this.habilitar=true;
           this.habilitarAjuste= true;
           if(res.contribuyente){
             this.contribuyenteActive = res.contribuyente;
             this.deshabilitarCont = true;
-            
+
           }
           this.documento = res;
           this.documento.fecha = res.fecha.split(" ")[0];
@@ -233,11 +233,11 @@ export class GeneracionIcpNominaComponent implements OnInit {
                 this.cedulaDetalle.push(data)
             })
           }
-          
-          
+
+
           // this.msgSpinner = 'Cargando...'
           // this.puestos_filter = this.puestos.filter(e => e.fk_mercado == res.fk_mercado)
-          
+
           //this.documento.puesto = res.fk_mercado_puesto;
 
           // if (res.fk_documento_2 && res.fk_documento_2 != 0) {
@@ -285,8 +285,8 @@ export class GeneracionIcpNominaComponent implements OnInit {
           //         this.cargarProyectos()
           //       }
           //       console.log(this.solicitudDetalle)
- 
-                
+
+
           //     }
           //     else {
           //       this.idpIngresos.push(e);
@@ -305,23 +305,23 @@ export class GeneracionIcpNominaComponent implements OnInit {
             programa.push(dat)
           }
           this.programa = programa
-           
-          
+
+
           this.totalCobro = res.total;
           this.totalPago = +res.total + +res.superavit;
           this.difCobroPago = 0 - +res.superavit;
 
           this.formReadOnly = true;
           this.vmButtons[0].habilitar = true;
-          this.vmButtons[2].habilitar = false;        
+          this.vmButtons[2].habilitar = false;
           //this.vmButtons[3].habilitar = false;
           this.vmButtons[4].habilitar = !(this.documento.estado == 'E');
-       
+
         }
       )
       this.commonVrs.modalAsignacionIngreso.asObservable().subscribe(
         (res)=>{
-          
+
           //res['fk_documento'] =  this.documento.id_documento
           console.log(res);
           if(this.idpIngresos.length > 0){
@@ -336,10 +336,10 @@ export class GeneracionIcpNominaComponent implements OnInit {
                   }
                   this.idpIngresos.push(data);
                 }
-              
+
             })
           }else{
-            
+
             let data= {
               partida: res.partida,
               denominacion: res.denominacion,
@@ -348,10 +348,10 @@ export class GeneracionIcpNominaComponent implements OnInit {
               disponible: res.disponible
             }
             this.idpIngresos.push(data);
-            
+
           }
-        
-          
+
+
         }
       )
 
@@ -373,7 +373,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
         //    this.genIdpSvr.getIdpSolicitudGenerados(data).subscribe(
         //      (res2) => {
         //        console.log(res2);
-              
+
         //        //this.idps= res2
         //        if(res2['data'].length == 0){
         //          this.lcargando.ctlSpinner(false);
@@ -385,7 +385,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
         //            this.fk_programa = this.solicitudDetalle[0]?.fk_programa
         //            this.cargarProyectos()
         //          }
-                 
+
         //          this.armarcodigos();
         //          this.totalSolicitud()
         //        }else{
@@ -400,26 +400,26 @@ export class GeneracionIcpNominaComponent implements OnInit {
         //          })
         //          //this.toastr.info('Existe un IDP generado para esta solicitud')
         //        }
-               
-               
+
+
         //      }
         //    );
         //  }
-          
+
         }
       )
 
       this.commonVrs.seleciconSolicitud.asObservable().subscribe(
         (res)=>{
-          
-          
+
+
         }
       )
 
       this.formaPago = 0;
       this.entidad = 0;
       this.emisor = 0;
-      
+
       this.vmButtons = [
         {
           orig: "btnsGenIdp",
@@ -511,7 +511,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
         break;
       case "Pdf":
         this.descargarPdf();
-        
+
         break;
       case "Limpiar":
         this.confirmRestore();
@@ -525,7 +525,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
       case "Ajustar":
        this.ajustarIcpNomina();
         break;
-        
+
       default:
         break;
     }
@@ -550,7 +550,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
     this.genIdpSvr.searchProgramaPeriodo(data).subscribe((res: any) => {
       console.log(res);
       this.lcargando.ctlSpinner(false);
-     
+
       let programa = []
       res.map((data) => {
 
@@ -571,7 +571,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
     this.totalCobro = this.cedulaDetalle.reduce((acc: number, curr: any) => acc + curr.precio_solicitado, 0)
   }
   totalSolicitudAjuste() {
-   
+
     this.cedulaDetalle.forEach(e => {
       //let detalleDoc = this.documento?.detalles.find(detalle => detalle.fk_solicitud_detalle === e.id_solicitud_det);
       //Object.assign(e,{saldo_anterior: detalleDoc.saldo_anterior, saldo_actual: detalleDoc.saldo_actual - e.ajuste})
@@ -579,7 +579,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
 
     });
     this.totalCobro = this.cedulaDetalle.reduce((acc: number, curr: any) => acc + curr.ajuste, 0)
-    
+
   }
 
   armarcodigos() {
@@ -607,7 +607,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
 
       item['geografico'] = '0926';
       item['codigopartida'] = codigopartidaParts.filter(Boolean).join('.');
-/* 
+/*
       this.documento.geografico = "0926";
       item["geografico"] = "0926";
       item["codigopartida"] = ""
@@ -629,16 +629,16 @@ export class GeneracionIcpNominaComponent implements OnInit {
       if (this.documento.orientacion != null && this.documento.orientacion != "" && this.documento.orientacion != undefined) {
         item["codigopartida"] += "." + this.documento.orientacion
       }
-      item["codigopartida"] += ".0926" 
+      item["codigopartida"] += ".0926"
 
       if (this.documento.funcion != null && this.documento.funcion != "" && this.documento.funcion != undefined) {
         item["codigopartida"] += "." + this.documento.funcion
       } */
 
-      
+
     })
   }
-   
+
   async cargarProyectos(){
 
     this.lcargando.ctlSpinner(true);
@@ -654,7 +654,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
               descripcion: elem.descripcion,
               label: `${elem.secuencia}-${elem.descripcion}`})
           })
-        
+
         }
       // this.msgSpinner = 'Cargando Catalogos';
       this.lcargando.ctlSpinner(false)
@@ -674,7 +674,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
      this.documento.fecha_anulacion= moment(new Date()).format('YYYY-MM-DD')
      this.vmButtons[4].habilitar = false
      this.totalCobro = 0
-    
+
     }else{
      this.vmButtons[4].habilitar = true
     }
@@ -686,7 +686,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
 
 
 
-  triggerPrint(): void {   
+  triggerPrint(): void {
     this.print.nativeElement.click();
   }
 
@@ -695,7 +695,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
-    
+
     let params = {
       codigo: myVarGlobals.fRenPredUrbanoEmision,
       id_rol: this.dataUser.id_rol,
@@ -866,10 +866,10 @@ export class GeneracionIcpNominaComponent implements OnInit {
       disponible: cedula.disponible,
       valor_solicitado: 0
     }
-    
+
     this.cedulaDetalle.push(nuevo);
     this.totalCobro = this.cedulaDetalle.reduce((acc: number, curr) => {return acc + parseFloat(curr.valor_solicitado)}, 0)
-     
+
     this.vmButtons[0].habilitar = false;
   }
 
@@ -884,7 +884,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
     this.totalCobro = this.cedulaDetalle.reduce((acc: number, curr) => {return acc + parseFloat(curr.valor_solicitado)}, 0)
   }
 
-  
+
 
   createRecDocumento() {
     if (this.permissions.guardar == "0") {
@@ -915,7 +915,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
       console.log(superavit);
       this.documento.superavit = +superavit.toFixed(2);
       this.superavit = true;
-    } else {        
+    } else {
       this.documento.superavit = 0;
       this.superavit = false;
     }
@@ -933,14 +933,14 @@ export class GeneracionIcpNominaComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        
+
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(this.documento.periodo),
           "mes": Number(moment(this.documento.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
               this.msgSpinner = 'Generando ICP de Nómina...';
@@ -980,12 +980,12 @@ export class GeneracionIcpNominaComponent implements OnInit {
               // tambien cambia el saldo de la tabla deudas y el campo estado pasa a C en liquidacion y deudas si el nuevo saldo es 0
               this.genIdpSvr.setGeneracionIdpNomina(data).subscribe(
                 (res) => {
-              
+
                   this.documento = res['data'];
                   this.formReadOnly = true;
                   this.vmButtons[0].habilitar = true;
                   this.vmButtons[2].habilitar = false;
-                
+
                   this.lcargando.ctlSpinner(false);
                   Swal.fire({
                     icon: "success",
@@ -996,7 +996,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
                     confirmButtonColor: '#20A8D8',
                   }).then((res)=> {
                     if(res.isConfirmed){
-                    //  this.triggerPrint(); imprimir documentos 
+                    //  this.triggerPrint(); imprimir documentos
                     }
                   })
                 },
@@ -1012,17 +1012,17 @@ export class GeneracionIcpNominaComponent implements OnInit {
                   });
                 }
               );
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
           })
-        
+
       }
     });
   }
@@ -1139,7 +1139,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     input.value = input.value.replace(/[^0-9]/g, '');
   }
-  
+
   onlyNumber(event): boolean {
     let key = event.which ? event.which : event.keyCode;
     if (key > 31 && (key < 48 || key > 57)) {
@@ -1190,13 +1190,13 @@ export class GeneracionIcpNominaComponent implements OnInit {
         backdrop: "static",
         windowClass: "viewer-content-general",
       })
-  
+
       modal.componentInstance.periodo = this.documento.periodo;
-   
+
 
     }
 
-    
+
   }
 
   modalCedulaPresupuestaria(){
@@ -1241,8 +1241,8 @@ export class GeneracionIcpNominaComponent implements OnInit {
   descargarPdf(){
     console.log(this.documento.id_documento)
     window.open(environment.ReportingUrl + "rpt_presupuesto_icp.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_documento=" + this.documento.id_documento, '_blank')
-    
-    
+
+
   }
 
   async ajustarIcpNomina(){
@@ -1284,7 +1284,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
           try {
             let response = await this.genIdpSvr.ajustarIcpNomina(this.documento.id_documento, this.documento);
             console.log(response)
-    
+
             this.lcargando.ctlSpinner(false)
             Swal.fire('ICP N°:  '+this.documento.documento+' ajustado', '', 'success').then(() => this.restoreForm())
           } catch (err) {
@@ -1293,7 +1293,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
             this.toastr.error(err.error?.message, 'Error ajustando ICP')
           }
         } else {
-            
+
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
         }

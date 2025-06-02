@@ -8,7 +8,7 @@
             <div class="row p-2 mb-3">
 
                 <div class="col-sm-12">
-                    <!-- <div class="input-group input-group-sm">                    
+                    <!-- <div class="input-group input-group-sm">
                         <div class="input-group-prepend "><span class="size-span-campo input-group-text font-weight-bold">Periodo</span></div>
                         <input type="text" minlength="4" maxlength="4" class="form-control" (change)="ObtenerPeriodo($event)" placeholder="Periodo" [(ngModel)]="selected_anio" [disabled]="yearDisabled" (keypress)="onlyNumber($event)">
                     </div> -->
@@ -27,7 +27,7 @@
                             </button>
                         </div>
                     </div>
-                  
+
                     <!-- <app-cc-input-group-prepend label="Periodo" styleSpan="size-span-campo">
                         <p-calendar view="year" dateFormat="yy"
                             [readonlyInput]="true"  (onSelect)="ObtenerPeriodo($event)"  [(ngModel)]="selected_anio" [showIcon]="false" inputId="icon">
@@ -37,30 +37,30 @@
                 <div class="col-sm-12 d-none">
                     <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
                         <!-- <app-cc-select-meses  (ChangeMes)="ChangeMesCierrePeriodos($event)" presentar="{{disabled}}" mes_actual={{mes_actual}}></app-cc-select-meses> -->
-                        <ng-select 
+                        <ng-select
                             (ngModelChange)="ChangeMesCierrePeriodos($event)"
-                            class="form-control" 
+                            class="form-control"
                             id="elemento_pruebas"
                             bindLabel="name"
                             placeholder="-Todos-"
                             appendTo="body"
                             [clearable]="false"
                             [searchable]="true"
-                            [disabled]=disabled
+                            disabled
                             [(ngModel)]="mes_actual">
-                            
+
                             <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
                                 {{item.name}}
                             </ng-option>
                         </ng-select>
-                    </app-cc-input-group-prepend> 
+                    </app-cc-input-group-prepend>
                 </div>
                 <div class="col-sm-12 d-none">
                     <mat-checkbox [(ngModel)]="check_todos_meses" class="example-margin"  (change)="EventAllMes($event)">
                     Todos los periodos
                     </mat-checkbox>
 
-                </div>            
+                </div>
             </div>
         </div>
         <div  class="col-8">
@@ -93,10 +93,10 @@
                 </table>
             </div>
 
-                    
-        
+
+
         </div>
-    </div>     
+    </div>
     <!-- </div>
 
     <ng-template #PermisoVerDenegado>
@@ -111,5 +111,5 @@
 
 
 
- 
+
 

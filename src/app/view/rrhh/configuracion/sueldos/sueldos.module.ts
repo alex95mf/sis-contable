@@ -16,7 +16,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     SueldosRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
 
 
   ]

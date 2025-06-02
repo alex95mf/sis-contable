@@ -14,23 +14,23 @@
                     <span class="size-span-campo input-group-text font-weight-bold" id="inputGroup-sizing-sm">Períodos</span>
                 </div>
                 <input type="text" minlength="4" maxlength="4" class="form-control" placeholder="Periodo" [(ngModel)]="anioActual"  (keypress)="onlyNumber($event)">
-               
+
             </div> -->
-          
+
                 <app-cc-input-group-prepend label="Período" styleSpan="size-span-campo font-weight-bold">
                     <p-calendar
                         (ngModelChange)="periodoSelected($event,periodo)"
-                        [readonlyInput]="true" 
-                        view="year" 
-                        dateFormat="yy" 
-                        [(ngModel)]="periodo" 
-                        [showIcon]="true" 
+                        [readonlyInput]="true"
+                        view="year"
+                        dateFormat="yy"
+                        [(ngModel)]="periodo"
+                        [showIcon]="true"
                         class="ui-calendar ui-calendar-button"
-                        inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                        inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}"
                         [inputStyle]="{'height':'30px','width':'13rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
                     </p-calendar>
-                </app-cc-input-group-prepend> 
-         
+                </app-cc-input-group-prepend>
+
         </div>
         <div class="col-sm-4">
             <!-- <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo">
@@ -39,23 +39,23 @@
             </app-cc-input-group-prepend> -->
             <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
                 <!-- <app-cc-select-meses  (ChangeMes)="ChangeMesCierrePeriodos($event)" presentar="{{disabled}}" mes_actual={{mes_actual}}></app-cc-select-meses> -->
-                <ng-select 
-                   
-                    class="form-control" 
+                <ng-select
+
+                    class="form-control"
                     id="elemento_pruebas"
                     bindLabel="name"
                     placeholder="-Todos-"
                     appendTo="body"
                     [clearable]="false"
                     [searchable]="true"
-                    [disabled]=disabled
+                    disabled
                     [(ngModel)]="mes_actual">
-                    
+
                     <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
                         {{item.name}}
                     </ng-option>
                 </ng-select>
-            </app-cc-input-group-prepend> 
+            </app-cc-input-group-prepend>
         </div>
         <!--div class="col-sm-4">
                     <app-cc-input-group-prepend label="Comparar con:" styleSpan="size-span-campo">
@@ -151,7 +151,7 @@
                         </thead>
                         <tbody *ngIf="infomovData.length > 0 else TablaVacia" style="width: 100%;" class="body-half-screen">
                             <tr *ngFor="let dt of infomovData; let i = index" [ngClass]="dt.class" [style]="dt.size">
-            
+
                                 <td class="text-left td_gerenarl" style="width: 80px;">
                                     <span [ngClass]="{'font-normal': dt.tiene_detalle !=  'GRUPO'  }" (click)=" dt.tiene_detalle !=  'GRUPO' ? verDetalle(dt.cuenta) : undefined"
                                     [ngStyle]="{'width':'80px','text-decoration': dt.tiene_detalle !=  'GRUPO'  ? 'underline' : '','color': dt.tiene_detalle !=  'GRUPO'  ? '#2b94e2' : '', 'cursor': dt.tiene_detalle !=  'GRUPO'  ? 'pointer' : '','font-weight': dt.tiene_detalle !=  'GRUPO' ? 'bold' : ''}">
@@ -181,7 +181,7 @@
                                 </td>
                             </tr>
                         </tbody>
-            
+
                         <ng-template #TablaVacia>
                             <tbody>
                                 <tr class="body-empty">
@@ -189,7 +189,7 @@
                                 </tr>
                             </tbody>
                         </ng-template>
-            
+
                     </table>
                 </div>
         </div>
@@ -228,7 +228,7 @@
                         </thead>
                         <tbody *ngIf="infomovDataMensual.length > 0 else TablaVacia" style="width: 100%;" class="body-half-screen">
                             <tr *ngFor="let dt of infomovDataMensual; let i = index" [ngClass]="dt.class" [style]="dt.size">
-            
+
                                 <td class="text-left td_gerenarl" style="width: 80px;" class="col-codigo">
                                     <!-- <span [ngClass]="{'font-normal': dt.tiene_detalle !=  'GRUPO'  }">{{dt.codigo}}</span> -->
                                     <span >{{dt.codigo}}</span>
@@ -284,7 +284,7 @@
                                 </td>
                             </tr>
                         </tbody>
-            
+
                         <ng-template #TablaVacia>
                             <tbody>
                                 <tr class="body-empty">
@@ -292,12 +292,12 @@
                                 </tr>
                             </tbody>
                         </ng-template>
-            
+
                     </table>
                 </div>
         </div>
     </div>
-   
+
 
 
     <!--div class="row justify-content-center mt-3 mb-1" *ngIf="arrayInfo != undefined ">
@@ -331,9 +331,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let dt of arrayInfo">
-                            <td *ngIf="dt.flag == 0" [ngClass]="{'codigoone' : dt.codigo == 1 || 
-                                                                                   dt.codigo == 2 || 
-                                                                                   dt.codigo == 3,'sizeLether' : 
+                            <td *ngIf="dt.flag == 0" [ngClass]="{'codigoone' : dt.codigo == 1 ||
+                                                                                   dt.codigo == 2 ||
+                                                                                   dt.codigo == 3,'sizeLether' :
                                                                                    dt.nivel > 1 && dt.nivel < 5,
                                                                                    'formatLether':dt.nivel >= 5,
                                                                                    'levelTwo': dt.nivel == 2 }">
@@ -391,7 +391,7 @@
                             <td *ngIf="dt.flag == 1" class="codigototal text-right pr-3" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0
                                     ,'levelTwo': dt.nivel == 2 }">
                                 $ {{ commonServices.formatNumber(dt.current_total) }}</td>
-                            <td *ngIf="dt.flag == 2" class="codigototal2 text-right pr-3" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0 
+                            <td *ngIf="dt.flag == 2" class="codigototal2 text-right pr-3" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0
                                     ,'levelTwo': dt.nivel == 2 }">
                                 $ {{ commonServices.formatNumber(dt.current_total) }}</td>
                         </tr>
@@ -493,7 +493,7 @@
                                     </td>
                                     <td class="infovalue-after codigototalprint text-right pr-3"
                                         *ngIf="peridoSelecionado != 0 && dt.flag == 2"
-                                        style="border-right: unset;border-left: unset;" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0 
+                                        style="border-right: unset;border-left: unset;" [ngClass]="{ 'infovaluebefore' : peridoSelecionado == 0,'infovalueafter' : peridoSelecionado != 0,'codigototal3':dt.current_total < 0
                                         ,'levelTwo': dt.nivel == 2 }">
                                         {{ commonServices.formatNumber(dt.current_old) }}
                                     </td>

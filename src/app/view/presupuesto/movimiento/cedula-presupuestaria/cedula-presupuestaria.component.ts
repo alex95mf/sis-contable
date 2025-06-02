@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CedulaPresupuestariaService } from './cedula-presupuestaria.service';
 import { environment } from 'src/environments/environment';
 import { DetalleReformaComponent } from './detalle-reforma/detalle-reforma.component';
-import e from 'cors';
+//import e from 'cors';
 
 @Component({
 standalone: false,
@@ -23,7 +23,7 @@ export class CedulaPresupuestariaComponent implements OnInit {
   mensajeSpiner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  
+
   fTitle: string = "Cédula Presupuestaria";
 
   vmButtons: any
@@ -34,7 +34,7 @@ export class CedulaPresupuestariaComponent implements OnInit {
   arrayCedulaEjecucion: any = []
   procesos: any = [];
   cmb_periodo: any[] = []
- 
+
   tipoSelected: any
   procesoSelected: any
   programa: any = 'N' ;
@@ -69,7 +69,7 @@ export class CedulaPresupuestariaComponent implements OnInit {
     mes_actual:Number(moment(new Date()).format('MM')),
     fecha_desde: new Date(Number(moment(new Date()).format('YYYY')), Number(moment(new Date()).format('MM')) - 1, 1).toISOString().substring(0, 10),
     fecha_hasta: new Date(Number(moment(new Date()).format('YYYY')), Number(moment(new Date()).format('MM')), 0).toISOString().substring(0, 10),
-   
+
     nivel: 0,
     tipo: ['I','G']
   }
@@ -104,7 +104,7 @@ export class CedulaPresupuestariaComponent implements OnInit {
       { orig: "btnsCedulaP", paramAccion: "", boton: { icon: "far fa-eraser", texto: " LIMPIAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-warning boton btn-sm", habilitar: false, imprimir: false},
       { orig: "btnsCedulaP", paramAccion: "", boton: { icon: "far fa-file-pdf", texto: " IMPRIMIR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-info boton btn-sm", habilitar: true, imprimir: true},
     ]
-    
+
     setTimeout(()=> {
       this.cargaInicial()
       this.getCatalogos();
@@ -112,7 +112,7 @@ export class CedulaPresupuestariaComponent implements OnInit {
 
   }
 
-  
+
   metodoGlobal(event){
     switch(event.items.boton.texto){
       case " PROCESAR":
@@ -135,9 +135,9 @@ export class CedulaPresupuestariaComponent implements OnInit {
    // this.vmButtons[0].habilitar = false; //.
    // this.vmButtons[2].habilitar = false;
   }
-  ChangeMesCierrePeriodos(evento: any) { 
+  ChangeMesCierrePeriodos(evento: any) {
     const year = this.filter.periodo;
-    this.mes_actual = evento; 
+    this.mes_actual = evento;
     this.filter.mes_actual = evento ;
     if(evento == 0){
       const primerDia = new Date(year, 1 - 1, 1).toISOString().substring(0, 10);
@@ -154,7 +154,7 @@ export class CedulaPresupuestariaComponent implements OnInit {
   async validaConsultaCedula() {
     let resp = await this.validaDataGlobal().then((respuesta) => {
       if(respuesta) {
-          this.consultarCedula(); 
+          this.consultarCedula();
       }
     });
 }
@@ -166,7 +166,7 @@ validaDataGlobal() {
     {
       this.toastr.info('Debe ingresar un Período');
       flag = true;
-    }else if( this.tipoSelected == 0 || this.tipoSelected == '' || this.tipoSelected == undefined) 
+    }else if( this.tipoSelected == 0 || this.tipoSelected == '' || this.tipoSelected == undefined)
     {
       this.toastr.info('Debe seleccionar un tipo');
       flag = true;
@@ -186,7 +186,7 @@ asignarTipo(evt) {
     this.arrayCedulaEjecucion= []
     this.totalIngresos=0
     this.totalEgresos= 0
-  
+
     console.log(evt)
     if(evt=='I'){
       this.resumen= false
@@ -231,9 +231,9 @@ console.log(this.checkPrograma)
     let data = {
       params: "'PRE_PROCESOS'",
     };
-   
+
     this.apiSrv.getCatalogos(data).subscribe(
-     
+
       (res) => {
         this.procesos = res["data"]['PRE_PROCESOS'];
       },
@@ -259,10 +259,10 @@ console.log(this.checkPrograma)
       this.toastr.error(err.error.message, 'Error en Carga Inicial')
     }
   }
- 
+
 
   consultarCedula(){
-    
+
     if(this.checkPrograma){
       this.consultarCedulaPorPrograma();
     }else if(this.resumen){
@@ -284,7 +284,7 @@ console.log(this.checkPrograma)
       filter: this.filter,
       paginate: this.paginate
     }
- 
+
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getCedulaPorPrograma(data).subscribe(res => {
       console.log(res["data"]);
@@ -302,7 +302,7 @@ console.log(this.checkPrograma)
             Object.assign(e, {saldo_devengar: parseFloat(e.asignacion_codificada) - parseFloat(e.devengado), saldo_comprometer:parseFloat(e.asignacion_codificada) - parseFloat(e.comprometido), class:'text-bold' , size:"font-size:12px;"});
           }
         })
-  
+
         this.arrayCedulaPrograma = res["data"]
         let totalIngresos = 0
         let totalEgresos = 0
@@ -316,9 +316,9 @@ console.log(this.checkPrograma)
               let valor100 = +e.asignacion_codificada * 100;
               totalEgresos += +valor100
             }
-            
+
           }
-        }) 
+        })
         this.totalIngresos= totalIngresos/100
         this.totalEgresos= totalEgresos/100
         this.vmButtons[3].habilitar = false;
@@ -326,7 +326,7 @@ console.log(this.checkPrograma)
         this.toastr.info('No hay datos para este Período');
       }
       this.lcargando.ctlSpinner(false);
-      
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.mesagge);
@@ -378,7 +378,7 @@ console.log(this.checkPrograma)
             }
 
           })
-    
+
           this.arrayCedula = res["data"]
 
         let totalIngresos = 0
@@ -397,7 +397,7 @@ console.log(this.checkPrograma)
             }
           }
 
-        }) 
+        })
         this.totalIngresos= totalIngresos/100
         this.totalEgresos= totalEgresos/100
           this.vmButtons[3].habilitar = false;
@@ -405,7 +405,7 @@ console.log(this.checkPrograma)
           this.toastr.info('No hay datos para este Período');
         }
         this.lcargando.ctlSpinner(false);
-        
+
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.mesagge);
@@ -418,11 +418,11 @@ console.log(this.checkPrograma)
       filter: this.filter,
       paginate: this.paginate
     }
- 
+
     this.lcargando.ctlSpinner(true);
     this.apiSrv.consultarCedulaResumen(data).subscribe(res => {
       console.log(res["data"]);
-     
+
       if(res["data"].length > 0){
         res["data"].forEach(e => {
           console.log(e.partida.length)
@@ -433,7 +433,7 @@ console.log(this.checkPrograma)
             Object.assign(e, {saldo_devengar: parseFloat(e.asignacion_codificada) - parseFloat(e.devengado), saldo_comprometer: parseFloat(e.asignacion_codificada) - parseFloat(e.comprometido)});
           }
         })
-  
+
         this.arrayCedulaResumen = res["data"]
         let totalIngresos = 0
         let totalEgresos = 0
@@ -447,9 +447,9 @@ console.log(this.checkPrograma)
               let valor100 = +e.asignacion_codificada * 100;
               totalEgresos += +valor100
             }
-            
+
           }
-        }) 
+        })
         this.totalIngresos= totalIngresos/100
         this.totalEgresos= totalEgresos/100
 
@@ -462,7 +462,7 @@ console.log(this.checkPrograma)
         this.toastr.info('No hay datos para este Período');
       }
       this.lcargando.ctlSpinner(false);
-      
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.mesagge);
@@ -480,9 +480,9 @@ console.log(data);
   this.lcargando.ctlSpinner(true);
   this.apiSrv.consultarCedulaEjecucion(data).subscribe(res => {
     console.log(res["data"]);
-   
+
     if(res["data"].length > 0){
-      
+
 
       this.arrayCedulaEjecucion = res["data"]
       let totalCodInv = 0
@@ -500,7 +500,7 @@ console.log(data);
       let totalCodGeneral = 0
       let totalDevGeneral = 0
       let totalPorDevGeneral = 0
-      
+
       this.arrayCedulaEjecucion.forEach(e => {
         if(e.partida.length ==1){
           if(e.naturaleza=='CORRIENTE'){
@@ -523,9 +523,9 @@ console.log(data);
           totalCodGeneral += +e.total_3
           totalDevGeneral += +e.total_6
           totalPorDevGeneral += +e.total_9
-          
+
         }
-      }) 
+      })
       this.totalCodificadoInv= totalCodInv
       this.totalDevengadoInv= totalDevInv
       this.totalPorDevengarInv= totalPorDevInv
@@ -551,7 +551,7 @@ console.log(data);
       this.toastr.info('No hay datos para este Período');
     }
     this.lcargando.ctlSpinner(false);
-    
+
   }, error => {
     this.lcargando.ctlSpinner(false);
     this.toastr.info(error.error.mesagge);
@@ -562,10 +562,10 @@ totalCodInv(){
 
 }
 totalesCorriente(){
-  
+
 }
 totalesFinanciamiento(){
-  
+
 }
 
 
@@ -585,7 +585,7 @@ setProcesoCedulaPresupuestaria() {
       mes: this.filter.mes_actual
 
     }
-  
+
     this.lcargando.ctlSpinner(true);
     this.apiSrv.setProcesoCedulaPresupuestaria(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -600,7 +600,7 @@ setProcesoCedulaPresupuestaria() {
 }
 
 consultaDetalleReforma(data?:any) {
- 
+
   const modalInvoice = this.modal.open(DetalleReformaComponent, {
     size: "lg",
     backdrop: "static",
@@ -626,7 +626,7 @@ consultaDetalleReforma(data?:any) {
       nivel: 0,
       tipo: undefined
     }
- 
+
     this.totalIngresos=0.00
     this.totalEgresos=0.00
     this.totalDiferencia=0.00
@@ -651,9 +651,9 @@ consultaDetalleReforma(data?:any) {
     else {
       nivel = this.filter.nivel
     }
-   
 
-    
+
+
     if(this.checkPrograma){
       if(this.filter.mes_actual == undefined){
         this.toastr.info('Por favor seleccione un mes')
@@ -666,7 +666,7 @@ consultaDetalleReforma(data?:any) {
           console.log(environment.ReportingUrl + "rpt_pre_cedula_gastos_programa.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&periodo="+ this.filter.periodo+"&tipo="+ this.tipoSelected+"&mes="+ this.filter.mes_actual+"&nivel="+nivel)
         }
       }
-      
+
     }else{
       if(this.tipoSelected=='I'){
         window.open(environment.ReportingUrl + "rpt_pre_cedula_ingresos.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&periodo="+ this.filter.periodo+"&tipo="+ this.tipoSelected+"&nivel="+nivel, '_blank');
@@ -679,17 +679,17 @@ consultaDetalleReforma(data?:any) {
         console.log(environment.ReportingUrl + "rpt_pre_ejecucion_presupuestaria.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&periodo="+ this.filter.periodo+"&tipo="+ this.tipoSelected+"&nivel="+nivel)
       }
     }
-    
+
 
   }
 
   seleccionado(event){
-   
+
     if (event.checked.length > 0) {
-     
+
       this.programa= 'S';
     } else {
-      
+
       this.programa= 'N';
     }
     console.log(this.programa)

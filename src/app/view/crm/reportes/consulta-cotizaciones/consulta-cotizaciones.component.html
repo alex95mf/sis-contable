@@ -18,9 +18,9 @@
                             <input type="text" class="form-control form-control-sm" [maxlength]="20"
                                 [(ngModel)]="filter.nombre_usuario">
                         </app-cc-input-group-prepend>
-    
+
                     </div>
-    
+
                 </div>
                 <div class="row m-0">
                     <div class="col-12 col-md-6 pt-0 pb-0">
@@ -39,37 +39,37 @@
 
 
 
-                    
+
                     <div class="col-12 col-md-6 pt-0 pb-0">
-                    
+
                         <app-cc-input-group-prepend label="Estado" styleSpan="size-span-campo font-weight-bold">
-                            <ng-select 
-                        
-                           
-                                class="form-control" 
-                              
+                            <ng-select
+
+
+                                class="form-control"
+
                                 bindLabel="estado"
                                 placeholder="-Todos-"
                                 appendTo="body"
                                 [clearable]="true"
                                 [searchable]="true"
-                                [disabled]=disabled
+                                disabled
                                 [(ngModel)]="filter.estado">
-                                
+
                                 <ng-option [value]="item.estado" [disabled]="item.disabled" *ngFor="let item of lista_estados">
                                     {{item.descripcion}}
                                 </ng-option>
                             </ng-select>
-                        </app-cc-input-group-prepend> 
+                        </app-cc-input-group-prepend>
                     </div>
 
-    
-    
-    
-    
-    
-    
-                 
+
+
+
+
+
+
+
                 </div>
             </fieldset>
         </div>
@@ -98,20 +98,20 @@
                         </tr>
                         <tr *ngFor="let d of lista_cotizaciones, let i = index" [ngClass]="d.class" [style]="d.size">
                             <td class="text-left">{{ (i+1)+(paginate.page-1)*paginate.perPage}}</td>
-                            
+
                             <td class="text-left">{{ d.id_documento}}</td>
                             <td class="text-left">{{d.fecha}}</td>
                             <td class="text-left">{{d.cliente_nombre}}</td>
                             <td class="text-left">{{d.total}}</td>
-                         
+
                             <td class="text-center">
                                 <span *ngIf="d.estado == 'APROBADO'" class="text-center"><i class="fas fa-circle text-success"></i> {{d.estado}}</span>
                                 <span *ngIf="d.estado == 'PENDIENTE'" class="text-center"><i class="fas fa-circle text-danger"></i> {{d.estado}}</span>
-                                
+
                             </td>
-                            <td class="text-left">{{ d.usuario?.nombre }}</td>  
+                            <td class="text-left">{{ d.usuario?.nombre }}</td>
                             <td class="text-center">
-                                <button class="btn btn-primary mr-1" 
+                                <button class="btn btn-primary mr-1"
                                 ngbTooltip="Editar"
                                 (click)="editarProyecto(d)">
                                     <i class="fas fa-edit"></i>
@@ -119,23 +119,23 @@
 
                                 <button class="btn btn-danger"
                                  (click)="inactivarProyecto(d)"
-                                  
+
                                   ngbTooltip="Inactivar">
                                     <i class="fas fa-times"></i>
                                 </button>
-            
+
                             </td>
                         </tr>
 
 
-                        
+
                     </tbody>
 
                 </table>
-                <mat-paginator [length]="paginate.length" [pageIndex]="paginate.pageIndex" 
-                (page)="changePage($event)" [pageSize]="paginate.perPage" 
+                <mat-paginator [length]="paginate.length" [pageIndex]="paginate.pageIndex"
+                (page)="changePage($event)" [pageSize]="paginate.perPage"
                 [pageSizeOptions]="paginate.pageSizeOptions">
-        
+
             </mat-paginator>
             </div>
         </div>

@@ -16,7 +16,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { environment } from 'src/environments/environment';
 import { ModalConsultaPrestamosComponent } from './modal-consulta-prestamos/modal-consulta-prestamos.component';
 import { CierreMesService } from 'src/app/view/presupuesto/configuracion/cierre-de-mes/cierre-mes.service';
-import e from 'cors';
+//import e from 'cors';
 
 @Component({
 standalone: false,
@@ -30,7 +30,7 @@ export class PrestamosNewComponent implements OnInit {
   msgSpinner: string;
 
   activeTab: number = 0;
-  
+
   formReadOnly: boolean = false;
   cmb_tipo_pago: Array<any> = [];
   prestamo: any = {
@@ -81,82 +81,82 @@ export class PrestamosNewComponent implements OnInit {
     private cierremesService: CierreMesService
   ) {
     this.vmButtons = [
-      { 
-        orig: "btnsPrestamosNew", 
-        paramAccion: "0", 
-        boton: { icon: "fa fa-floppy-o", texto: "GUARDAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
-        habilitar: true 
-      },
-      { 
-        orig: "btnsPrestamosNew", 
-        paramAccion: "0", 
-        boton: { icon: "fa fa-search", texto: "BUSCAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-primary boton btn-sm", 
-        habilitar: false 
-      },
-      { 
-        orig: "btnsPrestamosNew", 
-        paramAccion: "0", 
-        boton: { icon: "fa fa-eraser", texto: "LIMPIAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-warning boton btn-sm", 
-        habilitar: false 
-      },
-      { 
-        orig: "btnsPrestamosNew", 
-        paramAccion: "1", 
-        boton: { icon: "fa fa-search", texto: "CONSULTAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-primary boton btn-sm", 
-        habilitar: false 
-      },
-      { 
-        orig: "btnsPrestamosNew", 
-        paramAccion: "1", 
-        boton: { icon: "fa fa-file-excel", texto: "EXCEL" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
-        habilitar: true 
-      },
-      { 
+      {
         orig: "btnsPrestamosNew",
-        paramAccion: "0", 
-        boton: { icon: "fa fa-trash-o", texto: "ANULAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-danger boton btn-sm", 
-        habilitar: true 
+        paramAccion: "0",
+        boton: { icon: "fa fa-floppy-o", texto: "GUARDAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
+        habilitar: true
       },
-      { 
-        orig: "btnsPrestamosNew", 
-        paramAccion: "0", 
-        boton: { icon: "fa fa-file-pdf-o", texto: "PDF" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-danger boton btn-sm", 
-        habilitar: true 
+      {
+        orig: "btnsPrestamosNew",
+        paramAccion: "0",
+        boton: { icon: "fa fa-search", texto: "BUSCAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-primary boton btn-sm",
+        habilitar: false
+      },
+      {
+        orig: "btnsPrestamosNew",
+        paramAccion: "0",
+        boton: { icon: "fa fa-eraser", texto: "LIMPIAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-warning boton btn-sm",
+        habilitar: false
+      },
+      {
+        orig: "btnsPrestamosNew",
+        paramAccion: "1",
+        boton: { icon: "fa fa-search", texto: "CONSULTAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-primary boton btn-sm",
+        habilitar: false
+      },
+      {
+        orig: "btnsPrestamosNew",
+        paramAccion: "1",
+        boton: { icon: "fa fa-file-excel", texto: "EXCEL" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
+        habilitar: true
+      },
+      {
+        orig: "btnsPrestamosNew",
+        paramAccion: "0",
+        boton: { icon: "fa fa-trash-o", texto: "ANULAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-danger boton btn-sm",
+        habilitar: true
+      },
+      {
+        orig: "btnsPrestamosNew",
+        paramAccion: "0",
+        boton: { icon: "fa fa-file-pdf-o", texto: "PDF" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-danger boton btn-sm",
+        habilitar: true
       },
 
     ];
@@ -193,7 +193,7 @@ export class PrestamosNewComponent implements OnInit {
             this.vmButtons[5].habilitar = true
             this.vmButtons[6].habilitar = true
           }
-          
+
           this.lcargando.ctlSpinner(false)
           //
         } catch (err) {
@@ -208,7 +208,7 @@ export class PrestamosNewComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() =>{
       this.cargaInicial();
-     
+
     } , 50)
 
     this.handleTabChange({index: 0, tab: null })
@@ -250,7 +250,7 @@ export class PrestamosNewComponent implements OnInit {
       case "1EXCEL":
         this.exportarPrestamos()
         break;
-    
+
       default:
         break;
     }
@@ -286,7 +286,7 @@ export class PrestamosNewComponent implements OnInit {
       let cuota = {
         num_cuota: mes,
         fecha_vencimiento: fecha_inicio.add(1, 'months').endOf('month').format('YYYY-MM-DD'),
-        monto: this.prestamo.monto / meses, 
+        monto: this.prestamo.monto / meses,
         estado: 'Pendiente'
       }
       // console.log(cuota)
@@ -294,7 +294,7 @@ export class PrestamosNewComponent implements OnInit {
     }
 
     this.vmButtons[0].habilitar = false;
-    
+
   }
 
   async setPrestamo() {
@@ -305,19 +305,19 @@ export class PrestamosNewComponent implements OnInit {
       "anio": Number(moment(this.prestamo.fecha).format('YYYY')),
       "mes": Number(moment(this.prestamo.fecha).format('MM')),
       }
-      
+
     this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(async (res) => {
         try {
           if (res["data"][0].estado !=='C') {
-              
+
             let message: string = '';
             if (
               (this.prestamo.garante.nombre == null || !this.prestamo.garante.nombre.trim().length) ||
-              (this.prestamo.garante.identificacion == null || !this.prestamo.garante.identificacion.trim().length) || 
+              (this.prestamo.garante.identificacion == null || !this.prestamo.garante.identificacion.trim().length) ||
               (this.prestamo.garante.telefono == null || !this.prestamo.garante.telefono.trim().length)
             ) message += '* No ha ingresado datos completos del Garante<br>';
 
-            if(this.prestamo.codigo_rubro == null || this.prestamo.codigo_rubro == undefined) 
+            if(this.prestamo.codigo_rubro == null || this.prestamo.codigo_rubro == undefined)
               message += '* No ha seleccionado un Código de Rubro<br>';
 
             if (message.length > 0) {
@@ -334,7 +334,7 @@ export class PrestamosNewComponent implements OnInit {
               Swal.fire('Prestamo almacenado correctamente', '', 'success').then(() => {
                 Object.assign(this.prestamo, {
                   id_prestamo: response['id_prestamo'],
-                  num_doc: response['num_doc'], 
+                  num_doc: response['num_doc'],
                   saldo: response['saldo'],
                   estado: response['estado'],
                 })
@@ -348,7 +348,7 @@ export class PrestamosNewComponent implements OnInit {
               this.toastr.error(err.error.message, 'Error almacenando Prestamo');
             }
           } else {
-              
+
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
           }
@@ -403,7 +403,7 @@ export class PrestamosNewComponent implements OnInit {
       Object.assign(this.paginate, { length: response.total })
       this.prestamos = response.data
       this.vmButtons[4].habilitar = false
-      
+
       this.lcargando.ctlSpinner(false)
     } catch (err) {
       console.log(err)
@@ -432,7 +432,7 @@ export class PrestamosNewComponent implements OnInit {
       "anio": Number(moment(this.prestamo.fecha).format('YYYY')),
       "mes": Number(moment(this.prestamo.fecha).format('MM')),
       }
-      
+
       this.cierremesService.obtenerCierresPeriodoPorMes(dat).subscribe(async (res) => {
           try {
             if (res["data"][0].estado !=='C') {
@@ -454,9 +454,9 @@ export class PrestamosNewComponent implements OnInit {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.error(err.error.message, 'Error anulando Prestamo');
               }
-            
+
             } else {
-                
+
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
             }
@@ -465,7 +465,7 @@ export class PrestamosNewComponent implements OnInit {
           }
       });
     }
-    
+
   }
 
   exportarPrestamos() {
@@ -508,7 +508,7 @@ export class PrestamosNewComponent implements OnInit {
   }
 
 
- 
+
 
 
   expandEmpleados() {
@@ -518,7 +518,7 @@ export class PrestamosNewComponent implements OnInit {
         relation: "not",
         relation_selected : '',
       },
-     
+
       header: "Empleados",
       width: "70%",
       contentStyle: { "max-height": "500px", overflow: "auto" },
@@ -581,7 +581,7 @@ export class PrestamosNewComponent implements OnInit {
         this.vmButtons[5].habilitar = true
         this.vmButtons[6].habilitar = true
       }
-      
+
       this.lcargando.ctlSpinner(false)
       //
     } catch (err) {
@@ -589,7 +589,7 @@ export class PrestamosNewComponent implements OnInit {
       this.lcargando.ctlSpinner(false)
       this.toastr.error(err.error.message, 'Error cargando Prestamo')
     }
-    
+
   }
 
 }

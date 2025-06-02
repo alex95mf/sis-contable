@@ -18,7 +18,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     TabMenuModule,
     TabViewModule,
     TableModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class TrasnferenciaDepositosModule { }

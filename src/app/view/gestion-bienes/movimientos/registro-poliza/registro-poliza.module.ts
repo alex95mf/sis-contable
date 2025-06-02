@@ -19,7 +19,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     RegistroPolizaRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class RegistroPolizaModule { }

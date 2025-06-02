@@ -17,11 +17,11 @@ import { ModalSolicitudComponent } from './modal-solicitud/modal-solicitud.compo
 import { ModalCuentPreComponent } from 'src/app/view/gestion-bienes/configuracion/categoria-producto/modal-cuent-pre/modal-cuent-pre.component';
 import { any } from '@amcharts/amcharts4/.internal/core/utils/Array';
 import { ModalCajaComponent } from './modal-caja/modal-caja.component';
-import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
+//import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
 import { ModalSolicitudCatComponent } from './modal-solicitud-cat/modal-solicitud-cat.component';
 import { ModalComprasComponent } from './modal-compras/modal-compras.component';
 import { environment } from 'src/environments/environment';
-import e from 'cors';
+//import e from 'cors';
 import { Socket } from '../../../../services/socket.service';
 
 
@@ -141,8 +141,8 @@ export class OrdenComponent implements OnInit {
     id_banco:0,
     tiene_beneficiario: false,
     fk_beneficiario: null
-  
-    
+
+
   }
   grupo = {
     id_cuenta_contable: null,
@@ -190,7 +190,7 @@ export class OrdenComponent implements OnInit {
   cuenta:  any = [];
 
   asientoCabId: number
- 
+
   tabActiva: any =''
   cuentasBanco : any =[]
 
@@ -201,7 +201,7 @@ export class OrdenComponent implements OnInit {
     private modalService: NgbModal,
     private apiSrv: OrdenService,
     private cierremesService: CierreMesService,
-    private socket: Socket 
+    private socket: Socket
   ) {
     this.commonVrs.selectProveedorCustom.asObservable().subscribe(
       (res) => {
@@ -226,21 +226,21 @@ export class OrdenComponent implements OnInit {
         if(this.documento.tipo =='VF'){
           this.getProvCompras(this.proveedorActive.id_proveedor)
         }
-       
+
       //  this.getCatalogoConceptos();
         //console.log(new Date(this.documento.vigencia_poliza)).format('YYYY-MM-DD') < this.documento.fecha)(this.formaPago);
         }
 
 
 
-        
+
       }
     );
 
     this.apiSrv.listaCompras$.subscribe(
       (res) => {
         console.log(res)
-       
+
         this.agregaCompra(res)
       }
     )
@@ -259,7 +259,7 @@ export class OrdenComponent implements OnInit {
         this.asientoCabname = res.asiento?.asiento
         this.proveedorActive = res?.proveedor;
         this.documento.tiene_beneficiario = res.tiene_beneficiario == "SI" ? true : false
-        
+
         if(this.documento.tiene_beneficiario ){
           this.beneficiarioActive = res?.proveedor_beneficiario;
           this.documento.fk_proveedor = res?.proveedor_beneficiario?.id_proveedor
@@ -268,7 +268,7 @@ export class OrdenComponent implements OnInit {
         this.documento = res;
         this.documento.tiene_divisas = res.tiene_divisas == 'S' ? true : false
         this.documento.fecha = res.fecha.split(" ")[0];
-        
+
 
         // this.documento.fecha_gestion = res.fecha_gestion.split(" ")[0];
         // this.pagos = res.detalles;
@@ -310,7 +310,7 @@ export class OrdenComponent implements OnInit {
                     name: e.cuentas?.nombre,
                     detail: "",
                     credit: parseFloat(e.valor_cre),
-                    debit: parseFloat(e.valor_deb), 
+                    debit: parseFloat(e.valor_deb),
                     centro: 0,
                     tipo: '',
                     tipo_detalle: e.tipo_detalle,
@@ -354,7 +354,7 @@ export class OrdenComponent implements OnInit {
           this.procesoUnaFactura = false;
           this.procesoInf = true
         //this.pagosCondicion = res.detalles;
-         
+
           console.log(res.detalles)
           res.detalles.forEach((p) => {
             Object.assign(p, {
@@ -368,10 +368,10 @@ export class OrdenComponent implements OnInit {
               saldo_orden_pago:parseFloat(p.fact_total),
             });
             if(p.cuentas!=null){
-              this.grupo.codigo_cuenta_contable=p.cuentas.codigo; 
+              this.grupo.codigo_cuenta_contable=p.cuentas.codigo;
               this.grupo.descripcion_cuenta=p.cuentas.nombre;
             }
-          
+
           })
 
           this.pagosUnaFactura = JSON.parse(JSON.stringify(res.detalles));
@@ -390,7 +390,7 @@ export class OrdenComponent implements OnInit {
                     name: e.cuentas?.nombre,
                     detail: "",
                     credit: parseFloat(e.valor_cre),
-                    debit: parseFloat(e.valor_deb), 
+                    debit: parseFloat(e.valor_deb),
                     centro: 0,
                     tipo: '',
                     tipo_detalle: e.tipo_detalle,
@@ -482,7 +482,7 @@ export class OrdenComponent implements OnInit {
     this.commonVrs.seleciconSolicitud.asObservable().subscribe(
       (res) => {
         console.log(res)
-     
+
         console.log(res['fk_idp']);
         // Proceso de Compra/Contratacion
         if(this.procesoCompra == false){
@@ -494,17 +494,17 @@ export class OrdenComponent implements OnInit {
           this.documento.vigencia_poliza = res.poliza?.fecha_finalizacion;
           this.documento.idp = res.idp;
           this.documento.fk_solicitud_compra = res.id_solicitud;
-          
+
           if(res.fk_idp!= null){
             this.documento.fk_idp = res.fk_idp;
           }else{
             this.documento.fk_idp = null;
           }
           this.id_solicitud = res.id_solicitud;
-  
+
           this.getCondiciones(res.id_solicitud);
 
-          
+
         }else if(this.procesoCat == false || this.procesoInf == false){
 
           if(this.documento.tipo=='CAT'){
@@ -536,14 +536,14 @@ export class OrdenComponent implements OnInit {
             }
             this.id_solicitud = res['id_solicitud'];
             this.documento.fk_solicitud_compra = res['id_solicitud'];
-    
+
             //this.getCondiciones(res['id_solicitud']);
           }
-       
-  
+
+
           //this.getCondiciones(res['id_solicitud']);
         }
-       
+
 
       }
     )
@@ -626,14 +626,14 @@ export class OrdenComponent implements OnInit {
         habilitar: false,
       },
       { orig: "btnsRenLiqCobro",
-        paramAccion: "", 
-        boton: { icon: "fa fa-trash-o", texto: "ANULAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-danger btn-sm", 
-        habilitar: true 
+        paramAccion: "",
+        boton: { icon: "fa fa-trash-o", texto: "ANULAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-danger btn-sm",
+        habilitar: true
       }
 
     ]
@@ -678,7 +678,7 @@ export class OrdenComponent implements OnInit {
   changeTab(tab){
     this.tabActiva = tab;
     console.log(this.tabActiva)
-    
+
   }
 
   validaPermisos = () => {
@@ -778,8 +778,8 @@ export class OrdenComponent implements OnInit {
       this.tipo_compras_pub ="PC"
       this.procesoUnaFactura = true;
       this.tabActiva= 'nav-condiciones';
-      
-      
+
+
 
     } else if (event == 'VF') {
       //this.getProvCompras(this.proveedorActive.id_proveedor)
@@ -923,7 +923,7 @@ export class OrdenComponent implements OnInit {
             descripcion: element.descripcion
 
           }
-          
+
           this.tipoOrden.push(data)
           console.log(this.tipoOrden)
         });
@@ -1044,7 +1044,7 @@ export class OrdenComponent implements OnInit {
 
   calcDifCobroPago() {
     this.difCobroPago = +this.totalCobro - +this.totalPago;
-    
+
   }
 
   removeTitulo(index) {
@@ -1110,7 +1110,7 @@ export class OrdenComponent implements OnInit {
       this.toastr.info('Debe seleccionar primero un proveedor')
 
     } else {
-      
+
       if(this.tipo_compras_pub =="CAT"){
         let modal = this.modalService.open(ModalSolicitudCatComponent, {
           size: "xl",
@@ -1129,15 +1129,15 @@ export class OrdenComponent implements OnInit {
         modal.componentInstance.proveedor = this.proveedorActive
         modal.componentInstance.tipo_proceso = this.tipo_proceso
       }
-     
 
-    
+
+
     }
 
   }
   agregaCompra(compra : any) {
     this.pagosUnaFactura= [];
-   
+
 
     let nuevo = {
       id: compra.id,
@@ -1165,7 +1165,7 @@ export class OrdenComponent implements OnInit {
       console.log(parseFloat(element.total_riva) )
       console.log(parseFloat(element.valor_anticipo) )
       console.log(parseFloat(element.valor_multa) )
-      
+
       if(element.totalitems == null)element.totalitems=0
       if(element.iva_detalle_item == null)element.iva_detalle_item=0
       if(element.total_rft == null)element.total_rft=0
@@ -1173,7 +1173,7 @@ export class OrdenComponent implements OnInit {
       if(element.valor_anticipo == null)element.valor_anticipo=0
       if(element.valor_multa == null)element.valor_multa=0
 
-      
+
       let totalConIva = parseFloat(element.totalitems) +  parseFloat(element.iva_detalle_item)
       let totalConDescuentos = totalConIva - parseFloat(element.total_rft) - parseFloat(element.total_riva) - parseFloat(element.valor_anticipo) -  parseFloat(element.valor_multa)
       console.log(totalConDescuentos)
@@ -1210,13 +1210,13 @@ export class OrdenComponent implements OnInit {
         })
       }
 
-      
+
     })
-   
-    
+
+
 
     this.calcPagoTotal();
-    
+
     this.vmButtons[0].habilitar = false;
     // console.log(this.deudas)
   }
@@ -1303,9 +1303,9 @@ export class OrdenComponent implements OnInit {
     // this.pagosCondicion.forEach(e => {
     //   let condicion = this.condiciones.filter(c => c.id_condicion == e.id_condicion)
     //   console.log(condicion)
-     
+
     // })
-    
+
     console.log(new Date(this.documento.vigencia_poliza) < new Date(this.documento.fecha));
     console.log(this.documento.valor_dolares, this.totalPago);
     let flag = false;
@@ -1386,7 +1386,7 @@ export class OrdenComponent implements OnInit {
         if (this.totalPago == 0 || this.totalPago == undefined) {
           this.toastr.info("El valor a pagar debe ser mayor a 0")
           flag = true;
-        } 
+        }
         else if (this.cuenta == undefined || this.cuenta == null || this.cuenta == "") {
           this.toastr.info("Debe seleccionar una cuenta")
           flag = true;
@@ -1412,8 +1412,8 @@ export class OrdenComponent implements OnInit {
                 this.toastr.info("El total a pagar no puede ser mayor al saldo");
                 flag = true;
               }
-            
-               
+
+
             }
           )
         }
@@ -1444,7 +1444,7 @@ export class OrdenComponent implements OnInit {
       // else if(this.documento.tipo_desembolso==0 || this.documento.tipo_desembolso==undefined) {
       //   this.toastr.info("Debe iseleccionar un Tipo Desembolso para el pago")
       //   flag = true;
-      // }     
+      // }
 
 
 
@@ -1453,14 +1453,14 @@ export class OrdenComponent implements OnInit {
     })
   }
 
-  
+
   generaPreviewAsientoContable(){
     try {
-      
-     
+
+
       // let DetailCount = 0;
       // if(this.documento.forma_pago == 'TRANSFERENCIA'){
-        
+
       //   if(this.deudas.length > 0){
       //     let cuentas=[]
       //     this.asiento = []
@@ -1475,7 +1475,7 @@ export class OrdenComponent implements OnInit {
           });
           console.log(this.cuenta)
           if(this.cuenta?.cuenta_contable){
-           
+
               this.asiento.push({
                 LoadOpcionCatalogoPresupuesto: false,
                 presupuesto: '',
@@ -1484,7 +1484,7 @@ export class OrdenComponent implements OnInit {
                 account: this.cuenta.cuenta_contable,
                 name: this.cuenta.name_cuenta,
                 detail: "",
-                debit:parseFloat('0.00'), 
+                debit:parseFloat('0.00'),
                 credit:pagoTotal,
                 centro: 0,
                 tipo: 'A',
@@ -1495,9 +1495,9 @@ export class OrdenComponent implements OnInit {
                 cobrado_pagado:parseFloat('0.00'),
                 fk_compra_cab: this.fk_compra_cab,
                 fk_proveedor: this.fk_proveedor
-    
+
               });
-            
+
           }
 
           console.log(this.detallesUnaFactura)
@@ -1510,10 +1510,10 @@ export class OrdenComponent implements OnInit {
                 codigopartida: e.codigo_partida != undefined ? e.codigopartida : '', //codigo partida ICP
                 valor_presupuesto:e.total ,
                 account: e.cuenta_cxp,
-                name: e.nombre_cuenta_cxp, 
+                name: e.nombre_cuenta_cxp,
                 detail: "",
                 debit:e.total ,
-                credit:parseFloat('0.00'),  //elementDetail.valor, 
+                credit:parseFloat('0.00'),  //elementDetail.valor,
                 centro: 0,
                 tipo: 'A',
                 tipo_detalle: 'Pago',
@@ -1540,7 +1540,7 @@ export class OrdenComponent implements OnInit {
             pagoTotal += +e.valor; // en este caso es total porque sale de valor unitario * cantidad
             // }
           });
-       
+
           if(this.cuenta?.cuenta_contable){
             this.asiento.push({
               LoadOpcionCatalogoPresupuesto: false,
@@ -1550,7 +1550,7 @@ export class OrdenComponent implements OnInit {
               account: this.cuenta.cuenta_contable,
               name: this.cuenta.name_cuenta,
               detail: "",
-              debit:parseFloat('0.00'), 
+              debit:parseFloat('0.00'),
               credit:pagoTotal,
               centro: 0,
               tipo: 'A',
@@ -1562,12 +1562,12 @@ export class OrdenComponent implements OnInit {
               fk_compra_cab: null,
               fk_proveedor: this.fk_proveedor,
               fecha: this.documento.fecha
-  
+
             });
           }
-         
 
-       
+
+
           if(this.pagosCondicion.length > 0){
             this.pagosCondicion.forEach(e => {
               if(e.codigo_cuenta){
@@ -1579,7 +1579,7 @@ export class OrdenComponent implements OnInit {
                   account: e.codigo_cuenta,
                   name: e.descripcion_cuenta,
                   detail: "",
-                  debit:e.valor , 
+                  debit:e.valor ,
                   credit:parseFloat('0.00'),
                   centro: 0,
                   tipo: 'A',
@@ -1594,14 +1594,14 @@ export class OrdenComponent implements OnInit {
                 });
               }
             })
-            
+
             this.TotalizarAsiento();
           }
         }
-          
 
 
-     
+
+
     } catch (err) {
       console.log(err)
       //alert('Something went wrong, try again later!')
@@ -1614,7 +1614,7 @@ export class OrdenComponent implements OnInit {
 
    // if(this.asiento.length > 0){
         this.totalAsiento=[]
-     
+
         let TotalDebito = 0;
         let TotalCredito = 0;
         let TotalPresupuesto = 0;
@@ -1624,10 +1624,10 @@ export class OrdenComponent implements OnInit {
           const element =this.asiento[index];
           arrayDebit.push(element.debit)
           arrayCredit.push(element.credit)
-          TotalDebito +=  element.debit 
-          TotalCredito +=  element.credit 
-          TotalPresupuesto +=  element.valor_presupuesto 
-         
+          TotalDebito +=  element.debit
+          TotalCredito +=  element.credit
+          TotalPresupuesto +=  element.valor_presupuesto
+
         }
 
         this.totalAsiento.push({
@@ -1695,7 +1695,7 @@ export class OrdenComponent implements OnInit {
           "mes": Number(moment(this.documento.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-          
+
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
             this.msgSpinner = 'Generando Orden de pago...';
@@ -1720,7 +1720,7 @@ export class OrdenComponent implements OnInit {
             }
             this.deudas.forEach(e => {
               if (e.aplica && e.cobro > 0) {
-    
+
                 let doc_det = {
                   id_documento_detalle: 0,
                   fk_documento: 0,
@@ -1735,23 +1735,23 @@ export class OrdenComponent implements OnInit {
                 this.documento.detalles.push(doc_det);
               }
             });
-    
-    
+
+
             if (this.documento.tipo == 'PC') {
               this.pagosCondicion.forEach(e => {
-    
+
                 if (e.valor > 0) {
                   this.documento.formas_pago.push(e);
                 }
               })
             } else if (this.documento.tipo == 'VF') {
-    
+
               this.documento.formas_pago = this.facturas
-    
+
               console.log(this.documento.formas_pago)
               //this.documento.formas_pago.push(this.facturas);
               // this.facturas.forEach(e => {
-    
+
               //   if(e.check){
               //     this.documento.formas_pago.push(e);
               //   }
@@ -1763,7 +1763,7 @@ export class OrdenComponent implements OnInit {
             }
              else {
               this.pagos.forEach(e => {
-    
+
                 if (e.valor > 0) {
                   this.documento.formas_pago.push(e);
                 }
@@ -1781,10 +1781,10 @@ export class OrdenComponent implements OnInit {
             }
             this.documento.asiento= dataAsientoSave
             this.documento.detalles_asiento = detailAsiento
-    
+
             const usersFilter = this.commonService.filterUserNotification(1, 40)
-       
-          
+
+
             let data2 = {
               documento: this.documento,
               detalle_cuenta: this.detallesUnaFactura,
@@ -1825,7 +1825,7 @@ export class OrdenComponent implements OnInit {
                     confirmButtonColor: '#20A8D8',
                   }).then((res) => {
                     if (res.isConfirmed) {
-                     
+
                     }
                   })
                 } else {
@@ -1845,13 +1845,13 @@ export class OrdenComponent implements OnInit {
                 this.toastr.info(error.error.message);
               }
             );
-            
-      
+
+
           } else {
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
           }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
@@ -1884,7 +1884,7 @@ export class OrdenComponent implements OnInit {
           "mes": Number(moment(this.documento.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-          
+
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
 
@@ -1898,7 +1898,7 @@ export class OrdenComponent implements OnInit {
               (res) => {
                 this.lcargando.ctlSpinner(false);
                 console.log(res);
-                
+
                 //this.documento = res['data'];
                 this.documento.estado = res['data'].estado;
                 // this.documento.fecha = res['data'].fecha.split(' ')[0];
@@ -1906,7 +1906,7 @@ export class OrdenComponent implements OnInit {
                 this.vmButtons[0].habilitar = true;
                 console.log(this.documento);
                 // this.guardarDeuda(res['data'].id_liquidacion);
-                
+
                 Swal.fire({
                   icon: "success",
                   title: "Orden de Pago anulado exitosamente",
@@ -1928,22 +1928,22 @@ export class OrdenComponent implements OnInit {
                 });
               }
             );
-            
-      
+
+
           } else {
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
           }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
           })
-        
+
       }else {
         this.lcargando.ctlSpinner(false);
       }
-    });   
+    });
   }
 
   confirmRestore() {
@@ -2007,7 +2007,7 @@ export class OrdenComponent implements OnInit {
     this.pagos = [];
     this.pagosCondicion = [];
     this.pagosFacturas = [];
-    this.pagosUnaFactura= []; 
+    this.pagosUnaFactura= [];
     this.totalAsiento=[]
     this.asiento = []
 
@@ -2118,7 +2118,7 @@ export class OrdenComponent implements OnInit {
       modalInvoice.componentInstance.validacion = 'beneficiario';
     }
   }
-  
+
 
 
   fillCatalog() {
@@ -2245,7 +2245,7 @@ export class OrdenComponent implements OnInit {
   expandModalCompras() {
 console.log(this.cuenta.length)
 
-  
+
     if(this.grupo.codigo_cuenta_contable != undefined || (this.documento.tipo=='PF' && this.cuenta.length != 0)){
         // abre modal de forma de pago distinto para cada titulo que se vaya a pagar
         const modal = this.modalService.open(ModalComprasComponent, { size: "xl", backdrop: 'static', windowClass: 'viewer-content-general' })
@@ -2257,9 +2257,9 @@ console.log(this.cuenta.length)
       }else{
         this.toastr.warning('Debe seleccionar una cuenta contable')
       }
-         
+
     }
-   
+
   }
 
   imprimirOrdenPago(){

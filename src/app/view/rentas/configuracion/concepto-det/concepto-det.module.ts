@@ -6,7 +6,7 @@ import { ConceptoDetComponent } from './concepto-det.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ConceptoDetFormComponent } from './concepto-det-form/concepto-det-form.component';
 import { ModalCuentPreComponent } from './modal-cuent-pre/modal-cuent-pre.component';
-import { NgxCurrencyModule } from "ngx-currency";
+import { NgxCurrencyDirective } from "ngx-currency";
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { NgxCurrencyModule } from "ngx-currency";
     CommonModule,
     AppCustomModule,
     ConceptoDetRoutingModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class ConceptoDetModule { }

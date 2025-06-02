@@ -13,7 +13,7 @@ import * as moment from 'moment';
 import { LiquidacionService } from './liquidacion.service';
 import { ListLiquidacionesComponent } from './list-liquidaciones/list-liquidaciones.component';
 import { ModalContribuyentesCompradorComponent } from './modal-contribuyentes-comprador/modal-contribuyentes-comprador.component';
-import e from 'cors';
+//import e from 'cors';
 import { ModalSupervivenciaComponent } from 'src/app/config/custom/modal-supervivencia/modal-supervivencia.component';
 import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component';
 import { ModalExoneracionesAlComponent } from './modal-exoneraciones-al/modal-exoneraciones-al.component';
@@ -45,8 +45,8 @@ export class LiquidacionComponent implements OnInit {
   mostrarPro = false;
   impProvAl: any = 0
 
-  conceptoStaPlus:boolean = true; 
-  conceptoStaAlca:boolean = true; 
+  conceptoStaPlus:boolean = true;
+  conceptoStaAlca:boolean = true;
 
   sumaTotalSolares = 0;
 
@@ -187,7 +187,7 @@ export class LiquidacionComponent implements OnInit {
     {value: "S",label: "SI"},
     {value: "N",label: "NO"},
   ]
- 
+
 
 
   constructor(
@@ -212,7 +212,7 @@ export class LiquidacionComponent implements OnInit {
         res.alcaba = this.liquidacion_2
 
         this.mostrarPro = true;
-      
+
         if (res.estado == "P") {
           this.vmButtons[0].habilitar = true;
           this.vmButtons[1].habilitar = false;
@@ -229,7 +229,7 @@ export class LiquidacionComponent implements OnInit {
           //this.calcExonerALTotal()
           //this.calcExonerTotal()
           this.cargarActivos()
-        
+
 
         }
         else {
@@ -248,7 +248,7 @@ export class LiquidacionComponent implements OnInit {
         this.id_alcabala = res.alcabala.id_liquidacion
         this.liquidacion = res;
         this.liquidacion_2.detalles = res.alcabala.detalles
-        
+
         this.contribuyenteCActive = res.contribuyente_2;
         this.contribuyenteActive = res.contribuyente;
 
@@ -369,7 +369,7 @@ export class LiquidacionComponent implements OnInit {
             this.detallesPl.push(fila);
 
           }
-          
+
           if(e.concepto.codigo_detalle == "AVALUO"){
             this.avaluo_alcabala = e.valor
           }
@@ -388,7 +388,7 @@ export class LiquidacionComponent implements OnInit {
             this.detallesAl.push(fila_2)
           }
         });
-   
+
         res.detalles.forEach(e => {
           if (e.fk_con_det_aplicado) {
             let exon = {
@@ -429,8 +429,8 @@ export class LiquidacionComponent implements OnInit {
         // this.liquidacion.pl_descuento = 0.00
         // this.liquidacion.al_descuento2 = 0.00
 
-        // this.liquidacion.pl_subtotal_1 = parseFloat(res.pl_subtotal) - parseFloat(res.pl_exoneraciones) + parseFloat(res.pl_sta) 
-        // this.liquidacion.al_subtotal_1 = parseFloat(res.al_subtotal) - parseFloat(res.al_exoneraciones) + parseFloat(res.alcabala.al_sta) 
+        // this.liquidacion.pl_subtotal_1 = parseFloat(res.pl_subtotal) - parseFloat(res.pl_exoneraciones) + parseFloat(res.pl_sta)
+        // this.liquidacion.al_subtotal_1 = parseFloat(res.al_subtotal) - parseFloat(res.al_exoneraciones) + parseFloat(res.alcabala.al_sta)
         // console.log(this.liquidacion.pl_subtotal_1)
         // console.log(this.liquidacion.al_subtotal_1)
         // this.liquidacion.al_sta = res.alcabala.al_sta
@@ -446,7 +446,7 @@ export class LiquidacionComponent implements OnInit {
         this.liquidacion.pl_coactiva = res['coactiva']
         this.liquidacion.pl_interes = res['interes']
         this.liquidacion.pl_descuento = res['descuento']
-       
+
         this.liquidacion.pl_total = res['total']
 
         this.liquidacion.al_subtotal = res['alcabala']['subtotal']
@@ -650,8 +650,8 @@ export class LiquidacionComponent implements OnInit {
 
   validaMinMax(event, item) {
     console.log(event, item);
-    if (event.value > this.max_inputnumber) { 
-      event.value = this.max_inputnumber; 
+    if (event.value > this.max_inputnumber) {
+      event.value = this.max_inputnumber;
     }
     item.valor = event.value;
     console.log(item);
@@ -896,7 +896,7 @@ export class LiquidacionComponent implements OnInit {
       fk_concepto: 53,
       observacion: "",
       subtotal: 0,
-      
+
       exoneraciones: 0,
       total: 0,
       pl_exoneraciones: 0,
@@ -929,23 +929,23 @@ export class LiquidacionComponent implements OnInit {
   validarStaPlusALca(){
     this.msgSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
- 
+
     this.apiService.getStaPlusAlca().subscribe(
       (res) => {
         this.lcargando.ctlSpinner(false);
-        
+
         const datosPL = res['data'].filter(e => e.codigo == 'PL')[0]
         const datosAL = res['data'].filter(e => e.codigo == 'AL')[0]
 
         if(datosPL.tiene_sta == 'S') {
-          this.conceptoStaPlus= false; 
+          this.conceptoStaPlus= false;
         }else{
-          this.conceptoStaPlus= true; 
+          this.conceptoStaPlus= true;
         }
         if(datosAL.tiene_sta == 'S'){
-          this.conceptoStaAlca = false; 
+          this.conceptoStaAlca = false;
         }else{
-          this.conceptoStaAlca = true; 
+          this.conceptoStaAlca = true;
         }
         console.log(datosPL)
         console.log(datosAL)
@@ -1179,24 +1179,24 @@ export class LiquidacionComponent implements OnInit {
         this.toastr.info("El valor de total cobro en alcabala no puede ser negativo ")
         return;
       }
-      
-      
+
+
 
       // for(let i = 0; i < this.detallesPl.length; i++) {
       //   if (this.detallesPl[i].valor <= 0 || this.detallesPl[i].price == null) {
       //     this.toastr.info("Debe ingresar los datos completos")
       //      return;
       //   }
-  
-       
+
+
       // }
       // for(let i = 0; i < this.detallesAl.length; i++) {
       //   if (this.detallesAl[i].valor <= 0 || this.detallesAl[i].price == null) {
       //     this.toastr.info("Debe ingresar los datos completos")
       //      return;
       //   }
-  
-       
+
+
       // }
     }
     Swal.fire({
@@ -1222,21 +1222,21 @@ export class LiquidacionComponent implements OnInit {
           "mes": Number(moment(this.liquidacion.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
               this.msgSpinner = 'Generando Liquidación...';
               this.lcargando.ctlSpinner(true);
               this.liquidacion.detalles = [];
               this.liquidacion_2.detalles = [];
-      
+
               this.detallesPl.forEach(e => {
                 // if (e.valor > 0) {
                 //   this.liquidacion.detalles.push(e);
                 // }
                 this.liquidacion.detalles.push(e);
               });
-      
+
               this.detallesAl.forEach(e => {
                 // if (e.valor > 0) {
                 //   this.liquidacion_2.detalles.push(e);
@@ -1253,14 +1253,14 @@ export class LiquidacionComponent implements OnInit {
                 this.liquidacion_2.detalles.push(e);
               });
               console.log(this.liquidacion.detalles)
-      
+
               let data = {
                 liquidacion: this.liquidacion,
                 liquidacion_2: this.liquidacion_2
-      
+
               }
               console.log(data);
-              
+
               this.apiService.setLiquidaciones(data).subscribe(
                 (res) => {
                   Swal.fire({
@@ -1277,17 +1277,17 @@ export class LiquidacionComponent implements OnInit {
                   // this.liquidacion = res['data']
                   // this.calcSubtotal()
                   // this.calcSubtotal_2()
-      
+
                   this.formReadOnly = true;
                   this.mostrarPro = false;
-                  
+
                   this.vmButtons[2].habilitar = false;
                   this.vmButtons[3].habilitar = false;
                   this.vmButtons[5].habilitar = true;
                   this.lcargando.ctlSpinner(false);
                   this.conceptosDisabled = false;
                   // this.guardarDeuda(res['data'].id_liquidacion);
-      
+
                   // this.calcSubtotal
                   // this.calcSubtotal_2
                   // this.calcExonerALTotal()
@@ -1305,18 +1305,18 @@ export class LiquidacionComponent implements OnInit {
                   });
                 }
               );
-               
-        
+
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
           })
-      
+
       }
     });
 
@@ -1453,7 +1453,7 @@ export class LiquidacionComponent implements OnInit {
           Object.assign(e, { valor: util, fk_concepto_detalle: e.concepto.id_concepto_detalle })
         }
         if (e.concepto.codigo_detalle == "UTCE") {
-          // utce = util - this.valor_solares_contrib 
+          // utce = util - this.valor_solares_contrib
           utce = util - cme
           Object.assign(e, { valor: utce, fk_concepto_detalle: e.concepto.id_concepto_detalle })
         }
@@ -1561,7 +1561,7 @@ export class LiquidacionComponent implements OnInit {
 
   getPorcentaje(event, d) {
     console.log(d.porcentaje)
-    
+
     const descuento = Math.round(this.detallesAl[0].valor * this.detallesAl[1].porcentaje) / 100
     this.detallesAl[1].valor = descuento
 
@@ -1598,7 +1598,7 @@ export class LiquidacionComponent implements OnInit {
     let avaluo_final = 0
     let porcImps = 0.001
 
- 
+
 
     acomercial = this.propiedadActive.avaluo
     this.detallesAl.forEach(e => {
@@ -1612,7 +1612,7 @@ export class LiquidacionComponent implements OnInit {
         Object.assign(e, { valor: desc, fk_concepto_detalle: e.concepto.id_concepto_detalle })
       }
       // if (e.concepto.codigo_detalle == "IMPS") {
-      //   imp = +e.valor 
+      //   imp = +e.valor
       //   Object.assign(e, { valor: imp, porcentaje: porcImps, fk_concepto_detalle: e.concepto.id_concepto_detalle })
       // }
     })
@@ -1650,7 +1650,7 @@ export class LiquidacionComponent implements OnInit {
         calculo = this.liquidacion.pl_subtotal / 100
         exo = calculo * porcentaje
         totalExo +=  +Math.floor(exo *100) /100
-       
+
 
       });
       this.liquidacion.exoneraciones =  totalExo
@@ -1676,7 +1676,7 @@ export class LiquidacionComponent implements OnInit {
   calcSubtotal_1_1() {
     let pl_subtotal_1 = this.liquidacion.pl_subtotal - this.liquidacion.exoneraciones;
     this.liquidacion.pl_subtotal_1 = pl_subtotal_1;
-  
+
     this.calcSubtotal_2_1();
   }
   calcSubtotal_2_1() {
@@ -1703,7 +1703,7 @@ export class LiquidacionComponent implements OnInit {
         exo = calculo * porcentaje
         this.al_porcentaje = e.porcentaje
         totalExo += +Math.floor(exo * 100) / 100
-       
+
       });
       this.liquidacion.al_exoneraciones = totalExo
       this.liquidacion_2.al_exoneraciones = totalExo
@@ -1751,7 +1751,7 @@ export class LiquidacionComponent implements OnInit {
   calcSubtotal_1_2() {
     let al_subtotal_1 = this.liquidacion.al_subtotal - this.liquidacion.al_exoneraciones;
     this.liquidacion.al_subtotal_1 = al_subtotal_1;
-  
+
     this.calcSubtotal_2_2();
   }
   calcSubtotal_2_2() {
@@ -1760,7 +1760,7 @@ export class LiquidacionComponent implements OnInit {
       this.calcTotal();
   }
   calcTotal() {
-    
+
     let sumasValoresAl =  (this.liquidacion.al_subtotal_2 + this.liquidacion.al_recargo  + this.liquidacion.al_coactiva + this.liquidacion.al_interes)
     this.liquidacion.al_total = sumasValoresAl - this.liquidacion.al_descuento2;
     let sumasValoresPl =  (this.liquidacion.pl_subtotal_2 + this.liquidacion.pl_recargo + this.liquidacion.pl_coactiva + this.liquidacion.pl_interes)
@@ -1786,9 +1786,9 @@ export class LiquidacionComponent implements OnInit {
   //   let al_preTotal = this.liquidacion.al_subtotal_1;
   //   this.liquidacion.pl_total = pl_preTotal;
   //   this.liquidacion.al_total = al_preTotal;
-   
+
   //   this.vmButtons[0].habilitar = false;
-    
+
   // }
 
   expandListLiquidaciones() {
@@ -1827,7 +1827,7 @@ export class LiquidacionComponent implements OnInit {
     modalInvoice.componentInstance.module_comp = myVarGlobals.fRenPredUrbanoEmision;
     modalInvoice.componentInstance.permissions = this.permissions;
     modalInvoice.componentInstance.verifyRestore = this.verifyRestore;
-   
+
   }
 
   expandExoneracion() {
@@ -1907,7 +1907,7 @@ export class LiquidacionComponent implements OnInit {
     //  modalInvoice.componentInstance.module_comp = myVarGlobals.fRenPredUrbanoEmision;
     modalInvoice.componentInstance.permissions = this.permissions;
     modalInvoice.componentInstance.exoneracionesSelect = this.exoneraciones;
-    modalInvoice.componentInstance.contribuyente = this.contribuyenteCActive;  
+    modalInvoice.componentInstance.contribuyente = this.contribuyenteCActive;
   }
 
   removeExoneracion(index) {
@@ -2078,21 +2078,21 @@ export class LiquidacionComponent implements OnInit {
           "mes": Number(moment(this.liquidacion.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-                  
+
               this.msgSpinner = 'Guardando...';
               this.lcargando.ctlSpinner(true);
               let alcabala = {
                 id_liquidacion: this.id_alcabala
-      
+
               }
-      
+
               let data = {
                 id: this.id,
                 alcabala
-      
+
               }
               console.log(data)
               this.apiService.aprobarLiquidacion(data).subscribe(
@@ -2128,24 +2128,24 @@ export class LiquidacionComponent implements OnInit {
                       confirmButtonColor: '#20A8D8'
                     });
                   }
-      
+
                 },
                 (error) => {
                   this.lcargando.ctlSpinner(false);
                   this.toastr.info(error.error.message);
                 }
               )
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
           })
-       
+
       }
     })
 
@@ -2184,10 +2184,10 @@ export class LiquidacionComponent implements OnInit {
           "mes": Number(moment(this.liquidacion.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-                  
+
               this.msgSpinner = 'Guardando...';
               this.lcargando.ctlSpinner(true);
               // this.calcSubtotal()
@@ -2196,11 +2196,11 @@ export class LiquidacionComponent implements OnInit {
               // this.calcExonerTotal()
               // this.cargarActivos()
               console.log(this.detallesPl);
-      
+
               this.liquidacion.detalles = []
               this.liquidacion_2.detalles = []
-      
-      
+
+
               this.detallesPl.forEach(e => {
                 // if (e.valor > 0) {
                 //   this.liquidacion.detalles.push(e);
@@ -2208,7 +2208,7 @@ export class LiquidacionComponent implements OnInit {
                 e['total'] = e.valor
                 this.liquidacion.detalles.push(e);
               });
-      
+
               this.detallesAl.forEach(e => {
                 // if (e.valor > 0) {
                 //   this.liquidacion_2.detalles.push(e);
@@ -2225,31 +2225,31 @@ export class LiquidacionComponent implements OnInit {
                 e['fk_concepto_detalle'] = e['fk_concepto_det'];
                 this.liquidacion_2.detalles.push(e);
               });
-      
+
               // this.liquidacion.detalles = this.edit_detalles_plusvalia
               // this.liquidacion_2.detalles = this.edit_detalles_alcabala
-      
+
               let data = {
                 liquidacion: this.liquidacion,
                 liquidacion_2: this.liquidacion_2
-      
+
               }
               // let alcabala = {
               //   id_liquidacion: this.id_alcabala,
               //   liquidacion_2: this.liquidacion_2,
               //   detalles: this.liquidacion_2.detalles,
               //   liquidacion : this.liquidacion
-      
+
               //  }
-      
+
               // let data = {
               //   id:this.id,
               //   liquidacion:this.liquidacion,
-              //   detalles:this.liquidacion.detalles, 
+              //   detalles:this.liquidacion.detalles,
               //   alcabala
               // }
               console.log(data)
-           
+
               this.apiService.editarLiquidacion(data).subscribe(
                 (res) => {
                   console.log(res)
@@ -2281,24 +2281,24 @@ export class LiquidacionComponent implements OnInit {
                       confirmButtonColor: '#20A8D8'
                     });
                   }
-      
+
                 },
                 (error) => {
                   this.lcargando.ctlSpinner(false);
                   this.toastr.info(error.error.message);
                 }
               )
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
           })
-       
+
       }
     })
 

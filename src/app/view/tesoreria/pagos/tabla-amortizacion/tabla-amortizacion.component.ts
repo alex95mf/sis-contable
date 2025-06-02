@@ -3,7 +3,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import * as myVarGlobals from 'src/app/global';
 import * as moment from 'moment';
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 import * as XLSX from 'xlsx';
 import { CommonService } from 'src/app/services/commonServices';
 import { ToastrService } from 'ngx-toastr';

@@ -159,7 +159,7 @@ export class EspeciesFiscalesComponent implements OnInit {
   }
 
 
-  cargarEspeciesFiscales(event){
+  cargarEspeciesFiscales(event?: any){
     this.mensajeSppiner = "Cargando listado de Configuracion Contable...";
     this.lcargando.ctlSpinner(true);
     let data = {

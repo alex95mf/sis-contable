@@ -8,9 +8,9 @@ import { CommonService } from 'src/app/services/commonServices';
 import { ToastrService } from 'ngx-toastr';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ActaFiniquitoService } from './acta-finiquito.service'; 
+import { ActaFiniquitoService } from './acta-finiquito.service';
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
-import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
+//import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
 import { DialogService } from "primeng/dynamicdialog";
 import { CcModalTableEmpleadoComponent } from "src/app/config/custom/modal-component/cc-modal-table-empleado/cc-modal-table-empleado.component";
 import { EmployeesResponseI } from "src/app/models/responseEmployee.interface";
@@ -34,17 +34,17 @@ export class ActaFiniquitoComponent implements OnInit {
   // ref: DynamicDialogRef;
   @ViewChild("print") print!: ElementRef;
 
-  @ViewChild("nameInputSearchEmpleado") inputNameSearchEmpleado; 
+  @ViewChild("nameInputSearchEmpleado") inputNameSearchEmpleado;
   @ViewChild("nameTipo") inputTipo; // accessing the reference element
   @ViewChild("nameEmpuFullNombre") inputNameEmpFullNombre; // accessing the reference element
   @ViewChild("nameSalarioMinimo") inputNameSalarioMinimo;
-  
+
   @ViewChild("nameDepartamento") inputNamenameDepartamento; // accessing the reference element
   @ViewChild("nameDepartamentoDos") inputNamenameDepartamentoDos; // accessing the reference element
   @ViewChild("nameCargo") inputNamenameCargo; // accessing the reference element
 
 
-  
+
   fTitle = "Acta de Finiquito";
   msgSpinner: string;
   vmButtons: any = [];
@@ -158,7 +158,7 @@ export class ActaFiniquitoComponent implements OnInit {
     // name_cities: "",
     // direccion_domicilio_emp: ""
   };
- 
+
   validaciones: ValidacionesFactory = new ValidacionesFactory()
   options = {
     max: 1000000,
@@ -194,7 +194,7 @@ export class ActaFiniquitoComponent implements OnInit {
         this.readonlyInputSearchEmpleado = true
         this.disableBtnConsultaEmpleados = true
 
-       
+
         this.acta= res;
         this.acta.num_documento= res['documento'];
         this.inputNameEmpFullNombre.nativeElement.value = res['empleado']['emp_full_nombre'];
@@ -205,7 +205,7 @@ export class ActaFiniquitoComponent implements OnInit {
         //   res => {
         //     console.log(res['ingresos'])
         //     this.rubros= res
-        //     let rubro_nombre= 
+        //     let rubro_nombre=
         //     res['ingresos'].forEach(e => {
         //     rubro_nombre = e.cat_nombre
         //     });
@@ -214,7 +214,7 @@ export class ActaFiniquitoComponent implements OnInit {
         //       this.rubros.push(rubro_nombre)
         //     });
 
-           
+
         //   },
         //   err => {
         //     this.lcargando.ctlSpinner(false)
@@ -246,7 +246,7 @@ export class ActaFiniquitoComponent implements OnInit {
               total: e.total,
             }
             this.rubrosIngresos.push(ingresos)
-            
+
           }
           if(e.tipo_rubro=='EGRESOS'){
             let nombre_rubro=''
@@ -272,15 +272,15 @@ export class ActaFiniquitoComponent implements OnInit {
         let totalIngresos = 0;
         let totalEgresos = 0;
         this.rubrosIngresos.forEach(e => {
-          totalIngresos += +e.total; 
+          totalIngresos += +e.total;
         });
         this.rubrosEgresos.forEach(e => {
-          totalEgresos += +e.total; 
+          totalEgresos += +e.total;
         });
         this.totalIngresos = totalIngresos;
         this.totalEgresos = totalEgresos;
         this.totalDiferencia =  this.totalIngresos - this.totalEgresos;
-        
+
         this.vmButtons[0].habilitar = true;
         this.vmButtons[2].habilitar = false;
         this.vmButtons[3].habilitar = false;
@@ -344,20 +344,20 @@ export class ActaFiniquitoComponent implements OnInit {
       this.cargarRubrosActa();
       this.validaPermisos();
     }, 0);
-   
+
   }
-  
+
   obtenerIndice(nombre) {
-    
+
     return this.ordenDeseado.indexOf(nombre);
 }
 obtenerIndiceEgreso(nombre) {
-    
+
   return this.ordenDeseadoEgreso.indexOf(nombre);
 }
 
 
-  
+
   metodoGlobal = (event) => {
     switch (event.items.boton.texto) {
       case " GUARDAR":
@@ -402,7 +402,7 @@ obtenerIndiceEgreso(nombre) {
           this.toastr.warning("No tiene permisos para usar este recurso.", this.fTitle);
         } else {
           this.lcargando.ctlSpinner(false)
-          
+
         }
       },
       err => {
@@ -412,7 +412,7 @@ obtenerIndiceEgreso(nombre) {
     )
   }
 
-  
+
   confirmRestore() {
     Swal.fire({
       icon: "warning",
@@ -431,7 +431,7 @@ obtenerIndiceEgreso(nombre) {
       }
     });
   }
-  
+
   onClicConsultaEmpleados(content) {
 
     const ref = this.dialogService.open(CcModalTableEmpleadoComponent, {
@@ -503,9 +503,9 @@ obtenerIndiceEgreso(nombre) {
           const indiceB = this.obtenerIndiceEgreso(b.cat_keyword);
           return indiceA - indiceB;
         });
-        
+
         res['ingresos'].forEach(e => {
-        
+
             let data = Object.assign(e, {
               tipo_rubro: 'INGRESOS',
               codigo_rubro: e.cat_keyword,
@@ -516,12 +516,12 @@ obtenerIndiceEgreso(nombre) {
               valor_calculado: 0,
               total: 0,
             });
-  
+
             this.rubrosIngresos.push(data)
-          
+
         });
         res['egresos'].forEach(f => {
-        
+
           let data = Object.assign(f, {
             tipo_rubro: 'EGRESOS',
             codigo_rubro: f.cat_keyword,
@@ -534,11 +534,11 @@ obtenerIndiceEgreso(nombre) {
           });
 
           this.rubrosEgresos.push(data)
-        
+
       });
         //this.rubrosIngresos = res['ingresos']
         //this.rubrosEgresos = res['egresos']
-       
+
       },
       err => {
         this.lcargando.ctlSpinner(false)
@@ -549,19 +549,19 @@ obtenerIndiceEgreso(nombre) {
 
 
   calculoTotales(event){
-   
+
     let totalIngresos = 0;
     let totalEgresos = 0;
 
     this.rubrosIngresos.forEach(e => {
-        
+
       Object.assign(e, {
         valor_calculado: (e.valor * e.porcentaje) + e.valor ,
         total: e.total,// e.cantidad * ((e.valor * e.porcentaje) + e.valor),
       });
     });
     this.rubrosEgresos.forEach(e => {
-        
+
       Object.assign(e, {
         valor_calculado: (e.valor * e.porcentaje) + e.valor ,
         total: e.cantidad * ((e.valor * e.porcentaje) + e.valor),
@@ -569,10 +569,10 @@ obtenerIndiceEgreso(nombre) {
     });
 
     this.rubrosIngresos.forEach(e => {
-      totalIngresos += +e.total; 
+      totalIngresos += +e.total;
     });
     this.rubrosEgresos.forEach(e => {
-      totalEgresos += +e.total; 
+      totalEgresos += +e.total;
     });
     this.totalIngresos = totalIngresos;
     this.totalEgresos = totalEgresos;
@@ -581,19 +581,19 @@ obtenerIndiceEgreso(nombre) {
 
 
   sumaTotales(event){
- 
+
     let totalIngresos = 0;
     let totalEgresos = 0;
 
     this.rubrosIngresos.forEach(e => {
-        
+
       Object.assign(e, {
         valor_calculado: (e.valor * e.porcentaje) + e.valor ,
         total: e.total,// e.cantidad * ((e.valor * e.porcentaje) + e.valor),
       });
     });
     this.rubrosEgresos.forEach(e => {
-        
+
       Object.assign(e, {
         valor_calculado: (e.valor * e.porcentaje) + e.valor ,
         total: e.total,
@@ -601,10 +601,10 @@ obtenerIndiceEgreso(nombre) {
     });
 
     this.rubrosIngresos.forEach(e => {
-      totalIngresos += +e.total; 
+      totalIngresos += +e.total;
     });
     this.rubrosEgresos.forEach(e => {
-      totalEgresos += +e.total; 
+      totalEgresos += +e.total;
     });
     this.totalIngresos = totalIngresos;
     this.totalEgresos = totalEgresos;
@@ -628,12 +628,12 @@ obtenerIndiceEgreso(nombre) {
   }
 
   validaDataGlobal() {
-    // console.log(this.acta.id_empleado) 
+    // console.log(this.acta.id_empleado)
     // let flag = false;
     let message = ''
     return new Promise<void>((resolve, reject) => {
 
-      
+
         if (
           this.acta.id_empleado == 0 || this.acta.id_empleado == undefined
         ) {
@@ -661,7 +661,7 @@ obtenerIndiceEgreso(nombre) {
     })
   }
   createActaFiniquito() {
-  
+
     Swal.fire({
       icon: "warning",
       title: "¡Atención!",
@@ -708,7 +708,7 @@ obtenerIndiceEgreso(nombre) {
         let data = {
           acta: this.acta
         }
-       
+
         this.apiSrv.setActaFiniquito(data).subscribe(
           (res) => {
             console.log(res)
@@ -793,7 +793,7 @@ obtenerIndiceEgreso(nombre) {
       this.toastr.warning(msgValidacion, 'Validacion de Datos', {enableHtml: true})
       return
     }
-    
+
     this.lcargando.ctlSpinner(true)
     this.msgSpinner = 'Calculando valores'
     try {
@@ -802,7 +802,7 @@ obtenerIndiceEgreso(nombre) {
 
       response['data']['ingresos'].forEach((element: any, idx: number) => {
         Object.assign(this.rubrosIngresos[idx], {
-          cantidad: 1, 
+          cantidad: 1,
           valor: element,
           valor_calculado: element,
           total: element,
@@ -812,7 +812,7 @@ obtenerIndiceEgreso(nombre) {
 
       response['data']['egresos'].forEach((element: any, idx: number) => {
         Object.assign(this.rubrosEgresos[idx], {
-          cantidad: 1, 
+          cantidad: 1,
           valor: element,
           valor_calculado: element,
           total: element,
@@ -829,5 +829,5 @@ obtenerIndiceEgreso(nombre) {
       this.toastr.error(err.error?.message, 'Error calculando Valores')
     }
   }
-  
+
 }

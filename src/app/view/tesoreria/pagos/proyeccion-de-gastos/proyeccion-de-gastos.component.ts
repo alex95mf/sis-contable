@@ -10,7 +10,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 import * as moment from 'moment';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import { element } from 'angular';
+//import { element } from 'angular';
 @Component({
 standalone: false,
   selector: 'app-proyeccion-de-gastos',
@@ -21,7 +21,7 @@ export class ProyeccionDeGastosComponent implements OnInit {
   mensajeSpiner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  
+
   fTitle: string = "Proyeccion de Gastos";
 
   vmButtons: any = [];
@@ -33,7 +33,7 @@ export class ProyeccionDeGastosComponent implements OnInit {
   dataExcel: any = [];
 
   file: any;
-  
+
   //periodo: any;
   yearDisabled = false;
   fileDisabled = true;
@@ -131,7 +131,7 @@ export class ProyeccionDeGastosComponent implements OnInit {
       { orig: "btnAsignacionIngresos", boton: { icon: "fa fa-eraser", texto: "LIMPIAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-warning btn-sm", habilitar: false, imprimir: false},
 
     ];
-  
+
 
   this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
   this.mes_actual = (Number(moment(new Date()).format('MM'))).toString();
@@ -145,18 +145,18 @@ metodoGlobal(evento: any) {
   switch (evento.items.boton.texto) {
 
     case "GUARDAR":
-      this.guardarValores(); 
+      this.guardarValores();
     break;
-    case "CONSULTAR": 
+    case "CONSULTAR":
       this.showDataProyeccionGastos(true);
     break;
-    case "PROCESAR": 
+    case "PROCESAR":
       this.ejecutarSP();
     break;
-    case "LIMPIAR": 
+    case "LIMPIAR":
       this.limpiarData();
     break;
-    case "EXCEL": 
+    case "EXCEL":
       this.getDataExportar();
     break;
 
@@ -200,7 +200,7 @@ periodoSelected(evt: any, year:any){
         if(valor){
           this.toastr.info('Consulta realizada con éxito')
         }
-        
+
         this.lcargando.ctlSpinner(false);
     })
     this.vmButtons[0].habilitar = false;
@@ -315,7 +315,7 @@ ejecutarSP(){
       periodo:Number( this.periodo),
       mes: Number(this.mes_actual)
     }
-  
+
     this.lcargando.ctlSpinner(true);
     this.apiSrv.setEjecutarProyeccionGastosSp(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);

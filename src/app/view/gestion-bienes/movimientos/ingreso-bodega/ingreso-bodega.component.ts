@@ -27,7 +27,7 @@ import { ModalSolicitudCatComponent } from './modal-solicitud-cat/modal-solicitu
 import { ModalGruposComponent } from './modal-grupos/modal-grupos.component';
 import { ModalCodigoBienesComponent } from './modal-codigo-bienes/modal-codigo-bienes.component';
 import { ModalProveedoresComponent } from 'src/app/config/custom/modal-proveedores/modal-proveedores.component';
-import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
+//import { ThisReceiver } from '@angular/compiler/src/expression_parser/ast';
 import { data } from 'jquery';
 import { takeUntil } from 'rxjs/operators';
 import { ModalProductoDetallesComponent } from './modal-producto-detalles/modal-producto-detalles.component';

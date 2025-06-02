@@ -1,8 +1,8 @@
 <div class="my-2">
-    
+
     <app-button-radio-active [titulo]="fTitle" filtroBoton="btnsEspeciesFiscales" cstyle="bg-gradient-primary text-white" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" icono="fas fa-ballot-check">
-        
-        
+
+
         <fieldset class="border pb-2 px-3">
             <legend class="w-auto mb-1 bg-dark">Filtros</legend>
             <div class="row">
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </fieldset>
-        
+
         <div class="row my-2">
             <div class="col">
                 <table class="table table-bordered no-footer table-hover mb-0"> <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
@@ -103,7 +103,7 @@
                     </tbody>
                 </table>
 
-                <mat-paginator 
+                <mat-paginator
                         showFirstLastButtons
                         [length]="paginate.length"
                         [pageSize]="paginate.perPage"

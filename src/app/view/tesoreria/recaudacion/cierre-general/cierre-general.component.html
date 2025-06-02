@@ -2,19 +2,19 @@
 filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)">
 
 <div class="row mt-2 mb-3">
-    <div class="col-3"></div> 
+    <div class="col-3"></div>
     <div class="col-4">
         <div class="input-group input-group-sm">
             <div class="input-group-prepend"><span class="input-group-text size-span-campo">Fecha de consulta</span></div>
             <input type="date" class="form-control form-control-sm" [(ngModel)]="fecha_consulta">
-            
-        </div>        
+
+        </div>
     </div>
     <div class="col-2">
-        <button [disabled]="formReadOnly || titulosDisabled" class="btn btn-sm btn-primary" ngbTooltip="Consultar reporte" (click)="getCajasDia()"><i class="fas fa-search"></i> Consultar reporte</button>
-    </div>    
-    
-    <div class="col-3"></div> 
+        <button [disabled]="formReadOnly" class="btn btn-sm btn-primary" ngbTooltip="Consultar reporte" (click)="getCajasDia()"><i class="fas fa-search"></i> Consultar reporte</button>
+    </div>
+
+    <div class="col-3"></div>
 </div>
 
 <fieldset class="border py-1 px-3 my-3">
@@ -120,112 +120,112 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
 
                             </td> -->
                             <td class="col-rec fixed-header">
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ total | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ caja_dia.total_faltante | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ caja_dia.total_sobrante | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ totalEF | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ totalCH | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ totalTC | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ totalTR | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ totalTD | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
-                             </td> 
+                                </div>
+
+                             </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ totalGA | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
-                             </td> 
+                                </div>
+
+                             </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ totalVF | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
-                             </td> 
+                                </div>
+
+                             </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ totalND | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
-                             </td> 
+                                </div>
+
+                             </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ totalDE | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
-                             </td> 
+                                </div>
+
+                             </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      $ {{ totalOtro | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
-                             </td> 
+                                </div>
+
+                             </td>
                              <td colspan="1" class="text-center font-weight-bold ">
 
-                            </td>                            
+                            </td>
                         </tr>
                         <tr style="font-size: 16px;" class="font-weight-bold">
                             <td colspan="3" class="text-center font-weight-bold col-num fixed-header">
@@ -238,112 +238,112 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
 
                             </td> -->
                             <td class="col-rec fixed-header">
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      {{ porcTotal | number: '1.2-2' }} %
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      N/A
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      N/A
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      {{ porcEF | number: '1.2-2' }} %
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      {{ porcCH | number: '1.2-2' }} %
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      {{ porcTC | number: '1.2-2' }} %
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      {{ porcTR | number: '1.2-2' }} %
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      {{ porcTD | number: '1.2-2' }} %
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      {{ porcGA | number: '1.2-2' }} %
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      {{ porcVF | number: '1.2-2' }} %
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      {{ porcND | number: '1.2-2' }} %
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      {{ porcDE | number: '1.2-2' }} %
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td>
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right">
                                      {{ porcOtro | number: '1.2-2' }} %
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                              <td colspan="1" class="text-center font-weight-bold ">
 
-                             </td>                                
+                             </td>
                         </tr>
                     </tbody>
 
@@ -385,9 +385,9 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                         <tr class="text-center">
                             <th style="width: 10%;">No.</th>
                             <th style="width: 20%;">Código</th>
-                            <th style="width: 30%;">Descripción</th>                       
+                            <th style="width: 30%;">Descripción</th>
                             <th style="width: 20%;">Porcentaje</th>
-                            <th style="width: 20%;">Total</th>     
+                            <th style="width: 20%;">Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -405,22 +405,22 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                             </td>
                             <td class="text-center">
                                 {{ c.nombre }}
-                            </td>  
+                            </td>
                             <td class="text-center">
                                 {{ ((c.total / totalConceptos)*100) | number: '1.2-2' }} %
-                            </td>     
+                            </td>
                             <td class="text-right">
                                 $ {{ c.total | number: '1.2-2' }}
-                            </td>      
-                        </tr> 
+                            </td>
+                        </tr>
                         <tr style="font-size: 20px;">
                             <td colspan="4" class="text-right font-weight-bold" >
                                 &Sigma; Total Títulos &nbsp;
                             </td>
-                            <td class="text-right"> 
+                            <td class="text-right">
                                 $ {{ totalConceptos | number: '1.2-2' }}
                             </td>
-                        </tr>                     
+                        </tr>
                     </tbody>
 
                 </table>
@@ -442,12 +442,12 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
             <h5 class="mb-0 text-dark">Formas de pago</h5>
         </div>
     </div> -->
-    
+
     <div class="row my-2">
         <div class="col-6 ml-1">
-            
+
             <div class="input-group input-group-sm">
-                
+
                 <!-- <div class="input-group-prepend ml-2"><span class="input-group-text font-weight-bold" style="width:120px;">Cuentas bancarias</span></div>
                 <ng-select [disabled]="formReadOnly || titulosDisabled" class="form-control" [(ngModel)]="cuentaDepositar" [clearable]="false" >
                     <ng-option [value]="0" disabled>Seleccione una cuenta de banco</ng-option>
@@ -462,9 +462,9 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                 <button [disabled]="formReadOnly || titulosDisabled || depositoDisabled" class="btn btn-sm btn-success" ngbTooltip="Agregar depósitos" (click)="agregaDepositos()"><i class="fas fa-plus"></i></button>
             </div>
         </div>
-    
+
     </div>
-    
+
     <div class="row mb-2">
         <div class="col">
             <div class="table-responsive">
@@ -472,7 +472,7 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                     <thead class="thead-dark">
                         <tr class="text-center">
                             <th style="width: 5%;">No.</th>
-                            <th style="width: 15;">Cuenta de banco</th>                    
+                            <th style="width: 15;">Cuenta de banco</th>
                             <th style="width: 10%;">Número de cuenta</th>
                             <th style="width: 10%;">Cuenta Contable</th>
                             <th style="width: 30%;">Comentario</th>
@@ -492,13 +492,13 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                                 <td >{{ d.cuenta_contable }}</td>
                                 <td class="text-left">
                                     <div class="input-group input-group-sm">
-                                        
+
                                         <input type="text" maxlength="100" class="form-control form-control-sm"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario" >
                                     </div>
                                 </td>
-                                <td class="text-right">                                
-                                    <div class="input-group input-group-sm">             
-                                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>                       
+                                <td class="text-right">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend"><span class="input-group-text font-weight-bold">$</span></div>
                                         <input currencyMask type="text" maxlength="8" class="form-control form-control-sm text-right"  [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.total"  (keyup)="calcDepositoFinal()">
                                     </div>
                                 </td>
@@ -539,7 +539,7 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
             </div>
         </div>
     </div>
-    
+
 </fieldset>
 
 </app-button-radio-active>
@@ -580,7 +580,7 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
 
             <fieldset class="border py-1 px-3 my-3">
                 <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold">Reporte general de cajas</legend>
-            
+
                 <div class="row mt-2 mb-3">
                     <div class="col-1"></div>
                     <div class="col-12">
@@ -674,244 +674,244 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                                             &Sigma; TOTALES
                                         </td>
                                         <!-- <td colspan="0" class="text-center font-weight-bold fix">
-            
+
                                         </td>
                                         <td colspan="0" class="text-center font-weight-bold fix">
-            
+
                                         </td> -->
                                         <td class="col-rec fixed-header">
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ total | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ caja_dia.total_faltante | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ caja_dia.total_sobrante | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ totalEF | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ totalCH | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ totalTC | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ totalTR | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ totalTD | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
-                                         </td> 
+                                            </div>
+
+                                         </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ totalGA | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
-                                         </td> 
+                                            </div>
+
+                                         </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ totalVF | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
-                                         </td> 
+                                            </div>
+
+                                         </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ totalND | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
-                                         </td> 
+                                            </div>
+
+                                         </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ totalDE | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
-                                         </td> 
+                                            </div>
+
+                                         </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  $ {{ totalOtro | number: '1.2-2' }}
                                                  </div>
-                                            </div>                                
-                                           
-                                         </td> 
+                                            </div>
+
+                                         </td>
                                          <td colspan="1" class="text-center font-weight-bold ">
-            
-                                        </td>                            
+
+                                        </td>
                                     </tr>
                                     <tr style="font-size: 16px;" class="font-weight-bold">
                                         <td colspan="3" class="text-center font-weight-bold col-num fixed-header">
                                             Porcentajes
                                         </td>
                                         <!-- <td colspan="0" class="text-center font-weight-bold fix">
-            
+
                                         </td>
                                         <td colspan="0" class="text-center font-weight-bold fix">
-            
+
                                         </td> -->
                                         <td class="col-rec fixed-header">
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  {{ porcTotal | number: '1.2-2' }} %
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  N/A
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  N/A
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  {{ porcEF | number: '1.2-2' }} %
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  {{ porcCH | number: '1.2-2' }} %
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  {{ porcTC | number: '1.2-2' }} %
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  {{ porcTR | number: '1.2-2' }} %
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  {{ porcTD | number: '1.2-2' }} %
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  {{ porcGA | number: '1.2-2' }} %
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  {{ porcVF | number: '1.2-2' }} %
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  {{ porcND | number: '1.2-2' }} %
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  {{ porcDE | number: '1.2-2' }} %
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td>
-                                            <div class="row">                                    
+                                            <div class="row">
                                                  <div class="col text-right">
                                                  {{ porcOtro | number: '1.2-2' }} %
                                                  </div>
-                                            </div>                                
-                                           
+                                            </div>
+
                                          </td>
                                          <td colspan="1" class="text-center font-weight-bold ">
-            
-                                         </td>                                
+
+                                         </td>
                                     </tr>
                                 </tbody>
-            
+
                             </table>
                         </div>
                     </div>
                 </div>
-            
+
                 <!-- <div class="row mt-2 mb-4 justify-content-end">
                     <div class="col-4">
                         <div class="input-group input-group-lg input-group-subtotal">
@@ -920,7 +920,7 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                         </div>
                     </div>
                 </div>
-            
+
                 <div class="row mt-2 mb-4 justify-content-end">
                     <div class="col-4">
                         <div class="input-group input-group-lg input-group-descuentos">
@@ -929,13 +929,13 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                         </div>
                     </div>
                 </div> -->
-            
-            
+
+
             </fieldset>
-            
+
             <fieldset class="border py-1 px-3 my-3">
                 <legend style="margin: -0.5rem;" class="mb-0 w-auto font-weight-bold">Totales por conceptos</legend>
-            
+
                 <div class="row mt-2 mb-3">
                     <div class="col-1"></div>
                     <div class="col-12">
@@ -945,9 +945,9 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                                     <tr class="text-center">
                                         <th style="width: 10%;">No.</th>
                                         <th style="width: 20%;">Código</th>
-                                        <th style="width: 30%;">Descripción</th>                       
+                                        <th style="width: 30%;">Descripción</th>
                                         <th style="width: 20%;">Porcentaje</th>
-                                        <th style="width: 20%;">Total</th>     
+                                        <th style="width: 20%;">Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -965,29 +965,29 @@ filtroBoton="btnsRecCierreGeneral" [groupButton]="vmButtons" (onMetodoGlobal)="m
                                         </td>
                                         <td class="text-center">
                                             {{ c.nombre }}
-                                        </td>  
+                                        </td>
                                         <td class="text-center">
                                             {{ ((c.total / totalConceptos)*100) | number: '1.2-2' }} %
-                                        </td>     
+                                        </td>
                                         <td class="text-right">
                                             $ {{ c.total | number: '1.2-2' }}
-                                        </td>      
-                                    </tr> 
+                                        </td>
+                                    </tr>
                                     <tr style="font-size: 20px;">
                                         <td colspan="4" class="text-right font-weight-bold" >
                                             &Sigma; Total Títulos &nbsp;
                                         </td>
-                                        <td class="text-right"> 
+                                        <td class="text-right">
                                             $ {{ totalConceptos | number: '1.2-2' }}
                                         </td>
-                                    </tr>                     
+                                    </tr>
                                 </tbody>
-            
+
                             </table>
                         </div>
                     </div>
                 </div>
-            
+
             </fieldset>
 
         </div>

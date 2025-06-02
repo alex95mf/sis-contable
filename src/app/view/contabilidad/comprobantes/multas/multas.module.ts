@@ -20,7 +20,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     MultasRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class MultasModule { }

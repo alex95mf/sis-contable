@@ -6,7 +6,7 @@ import { GeneracionValorComponent } from './generacion-valor.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ModalExoneracionesComponent } from './modal-exoneraciones/modal-exoneraciones.component';
 import { ListLiquidacionesComponent } from './list-liquidaciones/list-liquidaciones.component';
-import { NgxCurrencyModule } from "ngx-currency";
+import { NgxCurrencyDirective } from "ngx-currency";
 
 
 @NgModule({

@@ -16,7 +16,7 @@ import { ModalIngresoAsignacionComponent } from './modal-ingreso-asignacion/moda
 import { ModalSolicitudComponent } from './modal-solicitud/modal-solicitud.component';
 import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cierre-de-mes/cierre-mes.service';
 
-import e from 'cors';
+//import e from 'cors';
 import { SweetAlertResult } from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 
@@ -240,7 +240,7 @@ export class GeneracionIdpComponent implements OnInit {
                   e["ajuste"] = parseFloat("0.00");
                 }
                 //e["ajuste"] = detalleDoc.ajuste == null ? parseFloat("0.00")  : detalleDoc.ajuste;
-               
+
                 e["saldo_anterior"] = detalleDoc.saldo_anterior;
                 e["saldo_actual"] = detalleDoc.saldo_actual;
               }
@@ -254,7 +254,7 @@ export class GeneracionIdpComponent implements OnInit {
         )
 
         this.solicitud = [res.solicitud];
-        
+
         this.totalCobro = res.total;
         //this.totalCobro = res.saldo_actual;
         this.totalPago = +res.total + +res.superavit;
@@ -616,14 +616,14 @@ export class GeneracionIdpComponent implements OnInit {
         //     let m = {
         //       denominacion: e.descripcion,
         //       cantidad: 0,
-        //       total_denominacion: 0,   
+        //       total_denominacion: 0,
         //     }
         //     this.monedasCat.push(m);
         //   }else if(e.grupo=="B"){
         //     let b = {
         //       denominacion: e.descripcion,
         //       cantidad: 0,
-        //       total_denominacion: 0,   
+        //       total_denominacion: 0,
         //     }
         //     this.billetesCat.push(b);
         //   }
@@ -695,7 +695,7 @@ export class GeneracionIdpComponent implements OnInit {
           "mes": Number(moment(this.documento.fecha).format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
                   this.msgSpinner = 'Generando IDP...';
@@ -764,12 +764,12 @@ export class GeneracionIdpComponent implements OnInit {
                       });
                     }
                   );
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
@@ -785,7 +785,7 @@ export class GeneracionIdpComponent implements OnInit {
 
 
 
-      
+
       }
     });
   }
@@ -912,7 +912,7 @@ export class GeneracionIdpComponent implements OnInit {
     if(this.ajustar){
      this.documento.fecha_anulacion= moment(new Date()).format('YYYY-MM-DD')
      this.vmButtons[4].habilitar = false
-    
+
     }else{
      this.vmButtons[4].habilitar = true
     }
@@ -1027,7 +1027,7 @@ export class GeneracionIdpComponent implements OnInit {
           try {
             let response = await this.genIdpSvr.ajustarIdp(this.documento.id_documento, this.documento);
             console.log(response)
-    
+
             this.lcargando.ctlSpinner(false)
             Swal.fire('IDP N°:  '+this.documento.documento+' ajustado', '', 'success').then(() => this.restoreForm())
           } catch (err) {
@@ -1036,7 +1036,7 @@ export class GeneracionIdpComponent implements OnInit {
             this.toastr.error(err.error?.message, 'Error ajustando IDP')
           }
         } else {
-            
+
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
         }

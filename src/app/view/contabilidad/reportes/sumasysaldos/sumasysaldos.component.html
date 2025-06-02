@@ -1,7 +1,7 @@
 <div class="mt-4 mb-5">
-    <app-button-radio-active-new titulo="Balance de Comprobación de Sumas y Saldos" 
-    filtroBoton="btnSalSum" cstyle="bg-gradient-primary text-white" 
-    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)" 
+    <app-button-radio-active-new titulo="Balance de Comprobación de Sumas y Saldos"
+    filtroBoton="btnSalSum" cstyle="bg-gradient-primary text-white"
+    [groupButton]="vmButtons" (onMetodoGlobal)="metodoGlobal($event)"
     icono="fa fa-money">
         <div class="row m-0">
             <div class="col-12">
@@ -28,39 +28,39 @@
                         <p-calendar
                         appendTo="body"
                             (ngModelChange)="periodoSelected($event,periodo)"
-                            [readonlyInput]="true" 
-                            view="year" 
-                            dateFormat="yy" 
-                            [(ngModel)]="periodo" 
-                            [showIcon]="true" 
+                            [readonlyInput]="true"
+                            view="year"
+                            dateFormat="yy"
+                            [(ngModel)]="periodo"
+                            [showIcon]="true"
                             class="ui-calendar ui-calendar-button"
-                            inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}" 
+                            inputId="icon"  [style]="{'height':'30px','display': 'inline-flex'}"
                             [inputStyle]="{'height':'30px','width':'5rem', 'border-top-left-radius':'0', 'font-size':'11px','border-bottom-left-radius':'0'}">
                         </p-calendar>
                     </app-cc-input-group-prepend>  -->
                 </div>
                 <div class="col-12 col-md-4 pt-0 pb-0">
-                
+
                     <app-cc-input-group-prepend label="Mes" styleSpan="size-span-campo font-weight-bold">
-                        <ng-select 
+                        <ng-select
                         (ngModelChange)="ChangeMesCierrePeriodos($event)"
-                            class="form-control" 
+                            class="form-control"
                             id="elemento_pruebas"
                             bindLabel="name"
                             placeholder="-Todos-"
                             appendTo="body"
                             [clearable]="false"
                             [searchable]="true"
-                            [disabled]=disabled
+                            disabled
                             [(ngModel)]="mes_actual">
-                            
+
                             <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of arrayMes">
                                 {{item.name}}
                             </ng-option>
                         </ng-select>
-                    </app-cc-input-group-prepend> 
+                    </app-cc-input-group-prepend>
                 </div>
-                
+
                 <!--<div class="col-sm-4">
                     <app-cc-input-group-prepend label="Desde" styleSpan="size-span-campo font-weight-bold">
                         <p-calendar (change)="FromOrToChange()"  dateFormat="dd/mm/yy"
@@ -78,9 +78,9 @@
                 <div class="col-12 col-md-4 pt-0 pb-0">
                     <app-cc-input-group-prepend label="Niveles" styleSpan="size-span-campo font-weight-bold">
                         <ng-select  class="form-control form-control-sm custom-select"
-                        appendTo="body" [searchable]="true" 
-                        [(ngModel)]="nivelSeleccionado" 
-                        [clearable]="true" 
+                        appendTo="body" [searchable]="true"
+                        [(ngModel)]="nivelSeleccionado"
+                        [clearable]="true"
                         [disabled]="permisions[0].editar == '0'">
                         <!-- (ngModelChange)="rerender($event)"  -->
                             <!--<ng-option value="">Seleccione Nivel</ng-option>-->
@@ -102,7 +102,7 @@
                     </app-cc-input-group-prepend>
                 </div>
 
-                
+
                 <div class="col-sm-3">
                     <app-cc-input-group-prepend label="Clase" styleSpan="size-span-otro">
                         <ng-select  class="form-control form-control-sm custom-select" appendTo="body" [searchable]="true" [(ngModel)]="claseSeleccionado" (ngModelChange)="rerender($event)" [clearable]="false" [disabled]="permisions[0].editar == '0'">
@@ -126,7 +126,7 @@
 
                 <div class="col-12 col-md-4 pt-0 pb-0">
                     <app-cc-input-group-prepend label="Gubernamental" styleSpan="size-span-campo font-weight-bold">
-                        <ng-select class="form-control form-control-sm custom-select" appendTo="body" 
+                        <ng-select class="form-control form-control-sm custom-select" appendTo="body"
                         [clearable]="true" [(ngModel)]="gubernamental"
                         (ngModelChange)="filterTipo($event)"
                             >
@@ -149,7 +149,7 @@
 
 
 
-                
+
             </div>
             <!-- <div class="row">
                 <div class="col-sm-3">
@@ -168,7 +168,7 @@
                 <div class="col">
                     <div class="table-responsive" style="height:550px;overflow-y:auto;">
                         <table class="table table-striped table-bordered table-k table-hover">
-                            
+
                             <thead style="position: sticky; top: -2px; z-index: 1;">
                                 <tr>
                                     <th  rowspan="3"  style="width: 130px;">Código</th>
@@ -195,12 +195,12 @@
                                 </tr>
                                 <ng-container *ngFor="let data of dataAccount, let i = index">
                                     <tr>
-                                        <td class="vertical-align-middle m-2 h-2rem" 
+                                        <td class="vertical-align-middle m-2 h-2rem"
                                         [ngStyle]="{'text-decoration': data.tipo ==  'DETALLE'  ? 'underline' : '','color': data.tipo ==  'DETALLE'  ? '#2b94e2' : '', 'cursor': data.tipo ==  'DETALLE'  ? 'pointer' : '','font-weight': data.tipo ==  'DETALLE' ? 'bold' : ''}"
                                         (click)=" data.tipo ==  'DETALLE' ? verDetalle(data.cuenta) : undefined">
                                             <span>{{data.cuenta.replaceAll('.','')}}</span>
                                         </td>
-                                        
+
                                         <td class="vertical-align-middle m-2 h-2rem">{{data.descripcion_cuenta}}</td>
                                         <td class="vertical-align-middle m-2 h-2rem text-right">$ {{data.saldo_inicial_deudor | number:'1.2-2'}}</td>
                                         <td class="vertical-align-middle m-2 h-2rem text-right">$ {{data.saldo_inicial_acreedor | number:'1.2-2'}}</td>
@@ -210,7 +210,7 @@
                                         <td class="vertical-align-middle m-2 h-2rem text-right">$ {{data.flujo_acreedor | number:'1.2-2'}}</td>
                                         <td class="vertical-align-middle m-2 h-2rem text-right" [ngClass]="data.saldo_deudor != 0 && (data.clase == 'ACREEDORA' || data.clase == 'ACREDORAS') ? 'text-danger' : '' ">$ {{data.saldo_deudor | number:'1.2-2'}}</td>
                                         <td class="vertical-align-middle m-2 h-2rem text-right" [ngClass]="data.saldo_acreedor != 0 && data.clase == 'DEUDORA' ? 'text-danger' : '' ">$ {{data.saldo_acreedor | number:'1.2-2'}}</td>
-                                    </tr>                      
+                                    </tr>
                                 </ng-container>
                                 <tr *ngIf="dataAccount.length > 0" style="font-size: 13px;">
                                         <td colspan="2" class="text-center font-weight-bold" >TOTALES</td>
@@ -227,12 +227,12 @@
                         </table>
                     </div>
                 </div>
-            </div> 
+            </div>
             <!-- <div class="mt-5">
-                <p-table 
+                <p-table
                     [value]="dataAccount"
                     [scrollable]="true"
-                    scrollHeight="600px" 
+                    scrollHeight="600px"
                     styleClass="p-datatable-gridlines"
                     [tableStyle]="{'min-width': '50rem'}">
                     <ng-template pTemplate="header">
@@ -271,7 +271,7 @@
                     </ng-template>
                     <ng-template pTemplate="footer">
                         <tr>
-                            
+
                             <td colspan="2" class="text-right">Totales</td>
                             <td  class="text-right">$ {{formatNumber(TotalSumaDebe())}}</td>
                             <td  class="text-right">$ {{formatNumber(TotalSumaHaber())}}</td>
@@ -284,7 +284,7 @@
                         </tr>
                     </ng-template>
                 </p-table>
-                
+
             </div> -->
 
 
@@ -296,10 +296,10 @@
 
 
                 <!--<div class="mt-5">
-                    <p-table 
+                    <p-table
                         [value]="dataAccount"
                         [scrollable]="true"
-                        scrollHeight="600px" 
+                        scrollHeight="600px"
                         styleClass="p-datatable-gridlines"
                         [tableStyle]="{'min-width': '50rem'}">
                         <ng-template pTemplate="header">
@@ -338,7 +338,7 @@
                         </ng-template>
                         <ng-template pTemplate="footer">
                             <tr>
-                                
+
                                 <td colspan="2" class="text-right">Totales</td>
                                 <td  class="text-right">$ {{formatNumber(TotalSumaDebe())}}</td>
                                 <td  class="text-right">$ {{formatNumber(TotalSumaHaber())}}</td>
@@ -351,7 +351,7 @@
                             </tr>
                         </ng-template>
                     </p-table>
-                    
+
                 </div>-->
                 </fieldset>
             </div>

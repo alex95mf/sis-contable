@@ -26,7 +26,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     AppCustomModule,
     ConvenioRoutingModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class ConvenioModule { }

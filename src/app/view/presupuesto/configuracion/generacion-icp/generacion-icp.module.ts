@@ -21,7 +21,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     CommonModule,
     GeneracionIcpRoutingModule,
     AppCustomModule,
-    NgxCurrencyModule
+    NgxCurrencyDirective
   ]
 })
 export class GeneracionIcpModule { }

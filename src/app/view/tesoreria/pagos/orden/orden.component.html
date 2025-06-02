@@ -12,13 +12,13 @@
                                 <ng-option disabled [value]="0">Seleccione un tipo</ng-option>
                                 <ng-option *ngFor="let op of tipoOrden" [value]="op.valor">
                                     {{ op.descripcion }}</ng-option>
-                            </ng-select>            
+                            </ng-select>
                         </app-cc-input-group-prepend>
                     </div>
                     <div *ngIf="cajaVL" class="col-12 col-md-4 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Caja Chica/Viáticos" styleSpan="size-span-campo font-weight-bold">
                             <input class="form-control " [(ngModel)]="documento.cajaChicaName" readonly/>
-                            <button class="btn btn-success btn-sm" (click)="searchCaja()">Buscar</button>           
+                            <button class="btn btn-success btn-sm" (click)="searchCaja()">Buscar</button>
                         </app-cc-input-group-prepend>
                     </div>
                     <div *ngIf="!cajaVL" class="col-12 col-md-4 pt-0 pb-0">
@@ -26,7 +26,7 @@
                             <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Proveedor" (click)="expandListProveedores()" [value]="proveedorActive.razon_social">
                             <button [disabled]="formReadOnly" class="btn btn-action btn-sm" (click)="expandListProveedores()" placement="bottom" ngbTooltip="Buscar Proveedor">
                                 <i class="fas fa-search"></i>
-                            </button>        
+                            </button>
                         </app-cc-input-group-prepend>
                     </div>
                     <div class="col-12 col-md-4 pt-0 pb-0">
@@ -36,7 +36,7 @@
                                 </i>
                                 {{ (documento.estado == 'P') ? 'Pendiente' : (documento.estado == 'E') ? 'Emitido' :
                                 (documento.estado == 'A') ? 'Aprobado' : (documento.estado == 'X') ? 'Anulado': ((documento.estado == 'N') ? 'Negado' : 'Cerrado') }}
-                            </div>       
+                            </div>
                         </app-cc-input-group-prepend>
                     </div>
                 </div>
@@ -159,14 +159,14 @@
                     <div class="col-12 col-md-6 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Codigo cuenta contable" styleSpan="size-span-campo font-weight-bold">
                             <input class="form-control" [(ngModel)]="grupo.codigo_cuenta_contable" type="text" readonly/>
-                            <button class="btn btn-action btn-sm" (click)="modalCuentaContable()" [disabled]="validacion || formReadOnly || cuentaDisabled" > Consultar</button>
+                            <button class="btn btn-action btn-sm" (click)="modalCuentaContable()" [disabled]="formReadOnly || cuentaDisabled" > Consultar</button>
                         </app-cc-input-group-prepend>
                     </div>
 
                     <div class="col-12 col-md-6 pt-0 pb-0">
                         <app-cc-input-group-prepend label="Nombre cuenta contable" styleSpan="size-span-campo font-weight-bold">
                             <input class="form-control" [(ngModel)]="grupo.descripcion_cuenta" type="text" readonly/>
-                            
+
                         </app-cc-input-group-prepend>
                     </div>
                 </div>
@@ -186,11 +186,11 @@
                             <input type="text" class="form-control form-control-sm" disabled placeholder="Seleccione un Beneficiario" (click)="expandListProveedores()" [value]="beneficiarioActive.razon_social">
                             <button [disabled]="formReadOnly" class="btn btn-action btn-sm" (click)="expandListBeneficiarios()" placement="bottom" ngbTooltip="Buscar Beneficiario">
                                 <i class="fas fa-search"></i>
-                            </button>        
+                            </button>
                         </app-cc-input-group-prepend>
                     </div>
                 </div>
-               
+
                 <div class="row m-0">
                     <div class="col-12 col-md-2 pt-0 pb-0">
                         <!-- <app-cc-input-group-prepend label="Tiene divisas" styleSpan="size-span-campo">
@@ -220,9 +220,9 @@
                             </label>
                         </div>
                     </div>
-                    
+
                 </div>
-                
+
                 <div *ngIf="changeDivisas">
 
                     <fieldset class="border card-fieldset">
@@ -307,7 +307,7 @@
                                                 <td class="text-center">{{ d.descripcion }}</td>
                                                 <td class="text-center">
                                                     <div class="input-group input-group-sm">
-                
+
                                                         <textarea  type="text" maxlength="200" class="form-control form-control-sm" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">{{ d.comentario }}</textarea>
                                                     </div>
                                                 </td>
@@ -331,7 +331,7 @@
                     </div>
                 </section>
                 <!-- <section [hidden]="procesoCompra">
-                    
+
 
                     <nav class="card-k p-2 mb-2 mt-1">
                         <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
@@ -386,7 +386,7 @@
                                                         <td class="text-center text-justify text-break">{{ d.descripcion }}</td>
                                                         <td class="text-center">
                                                             <div class="input-group input-group-sm">
-                        
+
                                                                 <textarea  type="text" maxlength="200" class="form-control form-control-sm" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">{{ d.comentario }}</textarea>
                                                             </div>
                                                         </td>
@@ -408,11 +408,11 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
-                
+
                         <div class="tab-pane fade" id="nav-asiento" role="tabpanel" aria-labelledby="nav-asiento-tab">
-                    
+
                             <div class="row" >
                                 <h4 class="ml-2"> {{asientoCabname}}</h4>
                                 <div class="col">
@@ -500,7 +500,7 @@
                                             <th style="width: 10%;">Valor IVA</th>
                                             <th style="width: 10%;">Subtotal</th>
                                             <th class="width: 10%;">Total</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -635,7 +635,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="tab-pane fade" [hidden]="procesoCompra" [ngClass]="{'show active': tabActiva === 'nav-condiciones'}" id="nav-condiciones" role="tabpanel" aria-labelledby="nav-condiciones-tab">
                             <div class="row m-0 mt-3 mb-2 align-items-center">
@@ -681,7 +681,7 @@
                                                        <td class="text-center text-justify text-break">{{ d.descripcion }}</td>
                                                        <td class="text-center">
                                                            <div class="input-group input-group-sm">
-                       
+
                                                                <textarea  type="text" maxlength="200" class="form-control form-control-sm" [disabled]="titulosDisabled || formReadOnly" [(ngModel)]="d.comentario">{{ d.comentario }}</textarea>
                                                            </div>
                                                        </td>
@@ -703,10 +703,10 @@
                                    </div>
                                </div>
                            </div>
-                           
+
                        </div>
                         <div class="tab-pane fade" [ngClass]="{'show active': tabActiva === 'nav-asiento'}" id="nav-asiento" role="tabpanel" aria-labelledby="nav-asiento-tab">
-                    
+
                             <div class="row" >
                                 <h4 class="ml-2"> {{asientoCabname}}</h4>
                                 <div class="col">
@@ -776,7 +776,7 @@
                         </div>
                     </div>
                 </section>
-            
+
                 <div class="row m-0 my-2 justify-content-end">
                     <div class="col-12 col-md-5 py-0">
                         <div class="input-group input-group-lg input-group-total">
@@ -791,9 +791,9 @@
             </fieldset>
         </div>
 </div>
-    
 
-    
+
+
 
 
 </app-button-radio-active-new>
@@ -865,7 +865,7 @@
                                 Documento</span></div>
                         <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="documento.documento">
                     </div>
-                </div> 
+                </div>
 
                 <div class="col-4">
                     <div class="input-group input-group-sm">
@@ -887,7 +887,7 @@
                         <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo">No. Proceso</span></div>
                         <input type="text" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="documento.nro_proceso" maxlength="20" placeholder="No. Proceso">
                     </div>
-                </div> 
+                </div>
 
                 <div class="col-4">
                     <div class="input-group input-group-sm">
@@ -917,7 +917,7 @@
                         <input type="date" class="form-control form-control-sm" [readonly]="titulosDisabled || formReadOnly" [(ngModel)]="documento.vigencia_poliza" placeholder="Vigencia P&oacute;liza">
                     </div>
                 </div>
-                
+
             </div>
             <div class="row mt-2 mb-3">
 
@@ -964,7 +964,7 @@
                                         <td class="text-center">{{ d.descripcion }}</td>
                                         <td class="text-center">
                                             <div class="input-group input-group-sm">
-        
+
                                                 <textarea  type="text" maxlength="200" class="form-control form-control-sm"  [(ngModel)]="d.comentario">{{ d.comentario }}</textarea>
                                             </div>
                                         </td>
