@@ -20,7 +20,7 @@ import { CalendarModule, DatePickerModule } from "@syncfusion/ej2-angular-calend
 import { TreeViewModule } from "@syncfusion/ej2-angular-navigations";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { NgxPrintModule } from "ngx-print";
-// import { DataTablesModule } from "angular-datatables"; // TEMPORAL: Comentar
+import { DataTablesModule } from "angular-datatables";
 import { FlatpickrModule } from "angularx-flatpickr";
 import { FilterByOriginPipe } from "./pipe/filter-by-origin.pipe";
 import { AppMaterialModule } from "../app-material/app-material.module";
@@ -172,7 +172,7 @@ import { TreeTableModule } from 'primeng/treetable';
         BaseChartDirective,
         BsDropdownModule,
         ButtonsModule.forRoot(),
-        // DataTablesModule, // COMENTADO: Problemas con Angular 19
+        DataTablesModule,
         FlatpickrModule.forRoot(),
         NgxPrintModule,
         InfiniteScrollModule,
@@ -233,7 +233,7 @@ import { TreeTableModule } from 'primeng/treetable';
         BusqProveedorComponent,
         GeneraPagoComponent,
         ImprimirComponent,
-        // DataTablesModule, // COMENTADO
+        DataTablesModule,s
         ButtonModule,
         VistaArchivoComponent,
         CcClientesComponent,
