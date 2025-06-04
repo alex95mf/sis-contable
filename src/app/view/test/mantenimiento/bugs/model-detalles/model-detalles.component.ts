@@ -11,11 +11,7 @@ import { CommonModule } from '@angular/common';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 
 @Component({
-standalone: true,
-  imports: [
-    CommonModule,
-    AppCustomModule
-  ],
+standalone: false,
   selector: 'app-model-detalles',
   templateUrl: './model-detalles.component.html',
   styleUrls: ['./model-detalles.component.scss']

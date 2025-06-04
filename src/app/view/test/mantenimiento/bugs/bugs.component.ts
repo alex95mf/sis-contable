@@ -5,14 +5,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModelDetallesComponent } from './model-detalles/model-detalles.component';
 import { ModalHistoryComponent } from './modal-history/modal-history.component';
-import { CommonModule } from '@angular/common';
-import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 
 @Component({
-  imports: [
-    CommonModule,
-    AppCustomModule
-  ],
+  standalone: false,
   selector: 'app-bugs',
   templateUrl: './bugs.component.html',
   styleUrls: ['./bugs.component.scss']

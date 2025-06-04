@@ -233,7 +233,7 @@ import { TreeTableModule } from 'primeng/treetable';
         BusqProveedorComponent,
         GeneraPagoComponent,
         ImprimirComponent,
-        DataTablesModule,s
+        DataTablesModule,
         ButtonModule,
         VistaArchivoComponent,
         CcClientesComponent,

@@ -5,15 +5,9 @@ import { BugsServiceService } from '../bugs-service.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
-import { CommonModule } from '@angular/common';
-import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 
 @Component({
-standalone: true,
-  imports: [
-    CommonModule,
-    AppCustomModule
-  ],
+  standalone: false,
   selector: 'app-modal-history',
   templateUrl: './modal-history.component.html',
   styleUrls: ['./modal-history.component.scss']
