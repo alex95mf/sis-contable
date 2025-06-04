@@ -16,7 +16,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { ModalJornadaComponent } from './modal-jornada/modal-jornada.component';
 import { JornadaService } from './jornada.service';
 import { IngresoAjusteComponent } from 'src/app/view/inventario/producto/kardex/ingreso-ajuste-component/ingreso-ajuste.component';
-import { EventEmitter } from 'protractor';
+// import { EventEmitter } from 'protractor';
 
 @Component({
 standalone: false,
