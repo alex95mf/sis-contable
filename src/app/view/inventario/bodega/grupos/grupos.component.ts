@@ -21,7 +21,7 @@ standalone: false,
 })
 export class GruposComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   gridConfig: object
   grid: any
   vmButtons: any[] = []
@@ -278,7 +278,7 @@ export class GruposComponent implements OnInit {
 
   validaPermisos() {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     this.commonService.getPermisionsGlobas({
@@ -357,7 +357,7 @@ export class GruposComponent implements OnInit {
       if (result.isConfirmed && !result.isDenied) {
         // Grupo
         // console.log('Nuevo Grupo')
-        this.msgSpinner = 'Generando codigo'
+        this.mensajeSpinner = 'Generando codigo'
         this.lcargando.ctlSpinner(true)
         let response = await this.apiService.getLastChild({parent: this.grupo.codigo_padre});
         this.lcargando.ctlSpinner(false)
@@ -387,7 +387,7 @@ export class GruposComponent implements OnInit {
       } else if (!result.isConfirmed && result.isDenied) {
         // Subgrupo
         // console.log('Nuevo Subgrupo')
-        this.msgSpinner = 'Generando codigo'
+        this.mensajeSpinner = 'Generando codigo'
         this.lcargando.ctlSpinner(true)
         let response = await this.apiService.getLastChild({parent: this.grupo.codigo_grupo_producto});
         this.lcargando.ctlSpinner(false)
@@ -422,7 +422,7 @@ export class GruposComponent implements OnInit {
   }
 
   saveGrupo() {
-    this.msgSpinner = 'Almacenando Grupo'
+    this.mensajeSpinner = 'Almacenando Grupo'
     this.lcargando.ctlSpinner(true)
     this.apiService.setGrupo({ grupo: this.newGrupo }).subscribe(
       (res: any) => {
@@ -459,7 +459,7 @@ export class GruposComponent implements OnInit {
   }
 
   updateGrupo() {
-    this.msgSpinner = 'Actualizando Grupo'
+    this.mensajeSpinner = 'Actualizando Grupo'
     this.lcargando.ctlSpinner(true)
     this.apiService.updateGrupo(
       this.grupo.id_grupo_productos,

@@ -16,7 +16,7 @@ export class SueldoNuevoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   botonera: any = [];
   fTitle = "Nuevo Sueldo";
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   sueldos: any = [];
   dataUser: any;
   permissions: any;
@@ -162,7 +162,7 @@ export class SueldoNuevoComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpiner = "Guardando Nuevo Sueldo...";
+        this.mensajeSpinner = "Guardando Nuevo Sueldo...";
         this.lcargando.ctlSpinner(true);
 
         let data = {
@@ -230,7 +230,7 @@ export class SueldoNuevoComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpiner = "Editando Sueldo...";
+        this.mensajeSpinner = "Editando Sueldo...";
         this.lcargando.ctlSpinner(true);
         let data = {
           id_grb_ocupacional: this.id_grb_ocupacional,

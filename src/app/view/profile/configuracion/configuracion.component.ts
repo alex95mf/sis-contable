@@ -437,7 +437,7 @@ standalone: false,
 // export class ConfiguracionComponent implements OnInit {
 //   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 //   @ViewChild('firmaUpload') firmaUpload: ElementRef;
-//   msgSpinner: string;
+//   mensajeSpinner: string;
 //   permissions: any;
 
 //   userData: any = {
@@ -477,7 +477,7 @@ standalone: false,
 //   }
 
 //   async validaPermisos() {
-//     this.msgSpinner = 'Cargando Permisos de Usuario'
+//     this.mensajeSpinner = 'Cargando Permisos de Usuario'
 
 //     this.lcargando.ctlSpinner(true)
 //     try {
@@ -508,7 +508,7 @@ standalone: false,
 
 //   async getCatalogos() {
 //     try {
-//       this.msgSpinner = 'Cargando Catalogos'
+//       this.mensajeSpinner = 'Cargando Catalogos'
 //       let catalogos = await this.apiService.getCatalogos({ params: "''" })
 //       console.log(catalogos)
 //       //
@@ -520,7 +520,7 @@ standalone: false,
 
 //   async getRoles() {
 //     try {
-//       this.msgSpinner = 'Cargando Roles'
+//       this.mensajeSpinner = 'Cargando Roles'
 //       let roles = await this.apiService.getRoles()
 //       console.log(roles)
 //       //
@@ -533,7 +533,7 @@ standalone: false,
 
 //   async getUsuario() {
 //     try {
-//       this.msgSpinner = 'Cargando Datos adicionales de Usuario'
+//       this.mensajeSpinner = 'Cargando Datos adicionales de Usuario'
 //       let response = await this.apiService.getUsuario({ id_user: this.userData.id_usuario })
 //       console.log(response)
 //       Object.assign(this.userData, {

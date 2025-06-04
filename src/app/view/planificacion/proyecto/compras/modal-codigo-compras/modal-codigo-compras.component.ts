@@ -18,7 +18,7 @@ export class ModalCodigoComprasComponent implements OnInit {
   @Input() bien
   @Input() query
   fTitle = 'Busqueda de Codigo de Compras Publicas'
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: any[] = []
 
   filter: any = {
@@ -110,7 +110,7 @@ export class ModalCodigoComprasComponent implements OnInit {
    */
   async getCodigoCompras() {
     this.resultados = []
-    this.msgSpinner = 'Obteniendo Codigos'
+    this.mensajeSpinner = 'Obteniendo Codigos'
     this.lcargando.ctlSpinner(true)
 
     let response: any = await this.apiService.getCodigosCompras({params: {filter: this.filter, paginate: this.paginate}});

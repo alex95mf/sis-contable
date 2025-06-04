@@ -38,7 +38,7 @@ standalone: false,
 })
 export class MovContableComponent implements OnInit {
 
-	mensajeSppiner: string = "Cargando...";
+	mensajeSpinner: string = "Cargando...";
 
 	@ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 	@ViewChild(DataTableDirective)
@@ -353,7 +353,7 @@ export class MovContableComponent implements OnInit {
 
 	GenerarReporteExcel(){
 
-		this.mensajeSppiner = "Generando Archivo Excel..."; 
+		this.mensajeSpinner = "Generando Archivo Excel..."; 
 		this.lcargando.ctlSpinner(true); 
 		let data = {
 			dateFrom: moment(this.fromDatePicker).format('YYYY-MM-DD'),

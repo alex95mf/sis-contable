@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./flujo-de-caja.component.scss']
 })
 export class FlujoDeCajaComponent implements OnInit {
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   
@@ -182,7 +182,7 @@ ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
 
   async cargaInicial() {
     try {
-      this.mensajeSpiner = "Carga Inicial"
+      this.mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.apiSrv.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -208,7 +208,7 @@ ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
       //periodo: this.periodo.getFullYear(),
       periodo: this.periodo,
     };
-    this.mensajeSpiner ='Generando...';
+    this.mensajeSpinner ='Generando...';
     this.lcargando.ctlSpinner(true);
      console.log(datos);
     this.apiSrv.getFlujos(datos).subscribe(
@@ -239,7 +239,7 @@ guardarValores(){
     reporte: this.reporte
   };
   console.log(this.reporte);
-  this.mensajeSpiner ='Guardando...';
+  this.mensajeSpinner ='Guardando...';
   this.lcargando.ctlSpinner(true);
     this.apiSrv.saveFlujoCaja(datos).subscribe(
       res => {

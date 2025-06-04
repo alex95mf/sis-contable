@@ -29,7 +29,7 @@ export class BandejaGeneralComponent implements OnInit {
   mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Bandeja General (Trámites)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;

@@ -27,7 +27,7 @@ export class ReportesIceComponent implements OnInit {
   mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Reportes ICE";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;

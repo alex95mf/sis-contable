@@ -17,7 +17,7 @@ standalone: false,
 export class ViewMasivoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  msgSpinner: string
+  mensajeSpinner: string
 
   filter: any = {
     periodo: moment().format('YYYY'),
@@ -54,13 +54,13 @@ export class ViewMasivoComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
       // Cargar Periodos
-      this.msgSpinner = 'Cargando Periodos'
+      this.mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiService.getPeriodos()
       console.log(periodos)
       this.lst_periodo = periodos;
 
       // Cargar Tabla
-      this.msgSpinner = 'Cargando Tabla de Datos'
+      this.mensajeSpinner = 'Cargando Tabla de Datos'
       let response = await this.apiService.getTablaMasiva({params: { filter: this.filter }})
       console.log(response)
       this.dsEmpleados = new MatTableDataSource(response)
@@ -78,7 +78,7 @@ export class ViewMasivoComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
       // Cargar Tabla
-      this.msgSpinner = 'Cargando Tabla de Datos'
+      this.mensajeSpinner = 'Cargando Tabla de Datos'
       let response = await this.apiService.getTablaMasiva({params: { filter: this.filter }})
       console.log(response)
       this.dsEmpleados = new MatTableDataSource(response)

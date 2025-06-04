@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./ats.component.scss']
 })
 export class AtsComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(DataTableDirective)
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
@@ -111,7 +111,7 @@ export class AtsComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSppiner = "Carga Inicial"
+      this.mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.rprtatsService.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos

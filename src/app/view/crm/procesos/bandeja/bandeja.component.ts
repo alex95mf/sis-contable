@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./bandeja.component.scss']
 })
 export class BandejaComponent implements OnInit {
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator : MatPaginator
@@ -297,7 +297,7 @@ titulo :string="";
    }
 
   async cargarTareas(){
-    this.mensajeSpiner = 'Cargando Proyectos';
+    this.mensajeSpinner = 'Cargando Proyectos';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -321,7 +321,7 @@ titulo :string="";
     try {
 
 
-      this.mensajeSpiner = 'Cargando Tareas'
+      this.mensajeSpinner = 'Cargando Tareas'
       let tareas =await this.apiSrv.getTareas({filter: this.filter, paginate : this.paginate});
 this.lista_tareas= tareas.data;
 this.paginate.length = tareas.total;

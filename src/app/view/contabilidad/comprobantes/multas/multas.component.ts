@@ -25,7 +25,7 @@ export class MultasComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild("print") print!: ElementRef;
   fTitle = "Registro de Multas";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   dataUser: any;
   proveedorActive: any = {
@@ -295,7 +295,7 @@ export class MultasComponent implements OnInit {
         /* Validamos si el periodo se encuentra aperturado */
         if (res["data"][0].estado !== 'C') {
 
-          this.msgSpinner = 'Guardando...';
+          this.mensajeSpinner = 'Guardando...';
           this.lcargando.ctlSpinner(true);
           let data2 = {
             documento :this.documento
@@ -409,7 +409,7 @@ anular(){
 
         /* Validamos si el periodo se encuentra aperturado */
         if (res["data"][0].estado !== 'C') {
-          this.msgSpinner = 'Anulando Multa...';
+          this.mensajeSpinner = 'Anulando Multa...';
           this.lcargando.ctlSpinner(true);
           this.estado = 'A'
           let data2 = {
@@ -475,7 +475,7 @@ anular(){
 
 async getLatest() {
   this.lcargando.ctlSpinner(true)
-  this.msgSpinner = 'Cargando Registro'
+  this.mensajeSpinner = 'Cargando Registro'
   try {
     const response = await this.apiSrv.getUltimaMulta()
     console.log(response)
@@ -505,7 +505,7 @@ async handleEnter({key}) {
     }
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Registro'
+    this.mensajeSpinner = 'Cargando Registro'
     try {
       const response = await this.apiSrv.getMultas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}) as any
       console.log(response)

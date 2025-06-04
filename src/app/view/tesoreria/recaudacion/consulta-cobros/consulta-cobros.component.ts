@@ -26,7 +26,7 @@ export class ConsultaCobrosComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
   fTitle: string = "Consulta de Cobros";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any[] = [];
   dataUser: any;
   permissions: any;
@@ -192,7 +192,7 @@ export class ConsultaCobrosComponent implements OnInit {
 
 
   getConceptos() {
-    this.msgSpinner = 'Cargando Conceptos';
+    this.mensajeSpinner = 'Cargando Conceptos';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptosFiltro().subscribe(
       (res: any) => {
@@ -219,7 +219,7 @@ export class ConsultaCobrosComponent implements OnInit {
   }
 
   getMercados = () => {
-    this.msgSpinner = 'Obteniendo Mercados'
+    this.mensajeSpinner = 'Obteniendo Mercados'
     this.lcargando.ctlSpinner(true);
 
     this.apiService.getMercados().subscribe(
@@ -283,7 +283,7 @@ export class ConsultaCobrosComponent implements OnInit {
 
   cargarConsulta(){
 
-    this.msgSpinner = 'Cargando...';
+    this.mensajeSpinner = 'Cargando...';
     this.lcargando.ctlSpinner(true);
     if(this.filter.estado==null){
       this.filter.estado = ''
@@ -457,7 +457,7 @@ export class ConsultaCobrosComponent implements OnInit {
     tipo = 'GENERAL';
   }
 
-  this.msgSpinner = 'Cargando...';
+  this.mensajeSpinner = 'Cargando...';
     this.lcargando.ctlSpinner(true);
     if(this.filter.estado==null){
       this.filter.estado = ''

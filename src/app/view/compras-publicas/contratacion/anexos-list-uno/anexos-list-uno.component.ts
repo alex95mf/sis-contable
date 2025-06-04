@@ -24,7 +24,7 @@ standalone: false,
 })
 export class AnexosListUnoComponentDis implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   fTitle = 'Listado de Anexos'
   @Input() dataUser: any
   @Input() permissions: any
@@ -84,7 +84,7 @@ export class AnexosListUnoComponentDis implements OnInit {
     this.anexos = []
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -214,7 +214,7 @@ UploadService(file, payload?: any, custom1?: any): void {
       ip: this.commonService.getIpAddress()
     }
 
-    // this.msgSpinner = 'Eliminando anexo'
+    // this.mensajeSpinner = 'Eliminando anexo'
     // this.lcargando.ctlSpinner(true)
 
     this.apiService.deleteAnexo(data).subscribe(
@@ -264,7 +264,7 @@ UploadService(file, payload?: any, custom1?: any): void {
             ip: this.commonService.getIpAddress()
           }
           console.log(data)
-          this.msgSpinner = 'Eliminando anexo'
+          this.mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true)
       
           this.apiService.deleteAnexo(data).subscribe(

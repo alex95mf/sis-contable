@@ -22,9 +22,9 @@ standalone: false,
 export class CatalogoElectronicoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
    lcargando: CcSpinerProcesarComponent;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   fTitle: string = "Infimas";
-  msgSpinner: string
+  mensajeSpinner: string
   dataUser: any
   permissions: any
   viewSolicitudes: boolean = true
@@ -91,15 +91,15 @@ export class CatalogoElectronicoComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.vmButtons = [
-      { orig: "btnsCatElec", 
-      paramAccion: "1", 
-      boton: { icon: "fas fa-save", texto: "Guardar" }, 
-      permiso: true, 
+      { orig: "btnsCatElec",
+      paramAccion: "1",
+      boton: { icon: "fas fa-save", texto: "Guardar" },
+      permiso: true,
       showtxt: true,
-      showimg: true, 
-      showbadge: false, 
-      clase: "btn btn-warning btn-sm", 
-      habilitar: false, 
+      showimg: true,
+      showbadge: false,
+      clase: "btn btn-warning btn-sm",
+      habilitar: false,
       imprimir: false
     }
       ,
@@ -115,14 +115,14 @@ export class CatalogoElectronicoComponent implements OnInit {
         habilitar: false,
       },
       { orig: "btnsCatElec",
-       paramAccion: "1", 
-       boton: { icon: "fas fa-eraser", texto: "EXCEL" }, 
-       permiso: true, 
-       showtxt: true, 
-       showimg: true, 
-       showbadge: false, 
-       clase: "btn btn-success btn-sm", 
-       habilitar: false, 
+       paramAccion: "1",
+       boton: { icon: "fas fa-eraser", texto: "EXCEL" },
+       permiso: true,
+       showtxt: true,
+       showimg: true,
+       showbadge: false,
+       clase: "btn btn-success btn-sm",
+       habilitar: false,
        imprimir: true
       }
     ]
@@ -131,7 +131,7 @@ export class CatalogoElectronicoComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.vmButtons[0].showimg=false
     this.vmButtons[1].showimg=false
@@ -149,7 +149,7 @@ export class CatalogoElectronicoComponent implements OnInit {
       allowSearchFilter: true
     };
 
-    setTimeout(async () => 
+    setTimeout(async () =>
    {
       this.validaPermisos()
       await this.cargaInicial()
@@ -160,7 +160,7 @@ export class CatalogoElectronicoComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.msgSpinner = "Carga Inicial"
+      this.mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.service.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -172,7 +172,7 @@ export class CatalogoElectronicoComponent implements OnInit {
 
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
@@ -199,7 +199,7 @@ export class CatalogoElectronicoComponent implements OnInit {
       }
     )
   }
-  
+
   toggleView() {
     this.viewSolicitudes = !this.viewSolicitudes
   }
@@ -225,9 +225,9 @@ export class CatalogoElectronicoComponent implements OnInit {
 
 
   metodoGlobal(event: any) {
-   
+
     switch (event.items.boton.texto) {
-    
+
       case "REGRESAR":
         this.consultaSolicitudes = true;
         this.detalleSolicitud = false
@@ -241,7 +241,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   }
 
   // cargarPrograma(){
-  //   this.mensajeSppiner = "Cargando Programa...";    
+  //   this.mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
 
   //   this.service.searchPrograma({}).subscribe((res: any)=>{
@@ -253,14 +253,14 @@ export class CatalogoElectronicoComponent implements OnInit {
   //   })
   // }
   // cargarPrograma(){
-  //   this.mensajeSppiner = "Cargando Programa...";    
+  //   this.mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
 
   //   this.service.searchPrograma({}).subscribe((res: any)=>{
   //     // console.log(res);
   //     let program = []
   //     res.map((data)=>{
-        
+
   //       let dat = {
   //         ...data.catalogo,
   //         value: data.catalogo['descripcion'] + '-'+ data.catalogo['valor']
@@ -273,7 +273,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   //   })
   // }
   cargarPrograma(){
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data ={
       periodo: Number(this.periodo),
@@ -282,7 +282,7 @@ export class CatalogoElectronicoComponent implements OnInit {
       // console.log(res);
       let program = []
       res.map((data)=>{
-        
+
         let dat = {
           ...data.catalogo,
           value: data.catalogo['descripcion'] + '-'+ data.catalogo['valor']
@@ -298,7 +298,7 @@ export class CatalogoElectronicoComponent implements OnInit {
 
   // departamentoSearch(event){
   //   //console.log('Programa '+event);
-  //   this.mensajeSppiner = "Cargando Programa...";    
+  //   this.mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
 
   //   let data = {
@@ -313,9 +313,9 @@ export class CatalogoElectronicoComponent implements OnInit {
   // }
   // departamentoSearch(event){
   //   // console.log(event);
-  //   this.mensajeSppiner = "Cargando Programa...";    
+  //   this.mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
-  
+
   //   let data = {
   //     programa: this.dato_Programa //event.valor
   //   }
@@ -327,7 +327,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   //       let d = {
   //         ...res,
   //         value: res['descripcion'] + '-'+ res['valor'],
-  
+
   //       }
   //       depa.push(d)
   //     })
@@ -338,9 +338,9 @@ export class CatalogoElectronicoComponent implements OnInit {
   //   }
   departamentoSearch(event){
     // console.log(event);
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
-  
+
     let data = {
       programa: this.dato_Programa //event.valor
     }
@@ -352,7 +352,7 @@ export class CatalogoElectronicoComponent implements OnInit {
         let d = {
           ...res,
           value: res['descripcion'] + '-'+ res['valor'],
-  
+
         }
         depa.push(d)
       })
@@ -364,7 +364,7 @@ export class CatalogoElectronicoComponent implements OnInit {
 
   AtribucionSearch(event){
     //console.log(event);
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event
@@ -378,15 +378,15 @@ export class CatalogoElectronicoComponent implements OnInit {
 
   selectAll() {
     this.listaSolicitudesAtribucion.map((e: any) => e.check = this.masterSelected)
-    
+
   }
   // SearchList(){
   //   // console.log(event);
   //   this.listaSolicitudes = []
-  //   this.mensajeSppiner = "Cargando...";    
+  //   this.mensajeSpinner = "Cargando...";
   //   this.lcargando.ctlSpinner(true);
-    
-    
+
+
   //   let data = {
   //     id: this.datoDepartamento,
   //     params:{
@@ -394,7 +394,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   //       filter: this.filter
   //     }
 
-      
+
   //   }
   //   console.log(data);
   //   this.service.searchSolicitud(data).subscribe((dat)=>{
@@ -414,12 +414,12 @@ export class CatalogoElectronicoComponent implements OnInit {
     let invalid = ''
     //alert(this.periodo);
     // Validar que la fecha periodo y las del filtro coincidan
-    if (this.periodo !== moment(this.filter.fecha_desde, 'YYYY-MM-DD').year().toString() || 
+    if (this.periodo !== moment(this.filter.fecha_desde, 'YYYY-MM-DD').year().toString() ||
     this.periodo !== moment(this.filter.fecha_hasta, 'YYYY-MM-DD').year().toString()) {
   invalid += '* Rango de fechas inválido.<br>';
 }
 
-    
+
     if (moment(this.filter.fecha_hasta).isBefore(this.filter.fecha_desde)) {
       invalid += '* Rango de fechas invalida.<br>'
     }
@@ -431,9 +431,9 @@ export class CatalogoElectronicoComponent implements OnInit {
 
     // console.log(event);
     this.listaSolicitudes = []
-    this.mensajeSppiner = "Cargando...";    
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
-    
+
     if (flag) Object.assign(this.paginate, {page: 1, pageIndex: 0})
     let data = {
       id_programa :this.dato_Programa,
@@ -443,7 +443,7 @@ export class CatalogoElectronicoComponent implements OnInit {
         filter: this.filter
       }
 
-      
+
     }
     console.log(data);
     this.service.searchSolicitud(data).subscribe((dat)=>{
@@ -459,7 +459,7 @@ export class CatalogoElectronicoComponent implements OnInit {
           this.listaSolicitudes = Object.values(dat['data']['data']);
         }
       }
-      
+
 
       this.lcargando.ctlSpinner(false);
     },
@@ -475,12 +475,12 @@ export class CatalogoElectronicoComponent implements OnInit {
       this.toastr.info("Usuario no tiene permiso para exportar");
     } else {
       let data ={
-        params: { 
-          filter: this.filter 
+        params: {
+          filter: this.filter
         }
       }
       let excelData = []
-      this.mensajeSppiner = "Generando Archivo Excel..."
+      this.mensajeSpinner = "Generando Archivo Excel..."
       this.lcargando.ctlSpinner(true)
       this.service.getCataElectronico({ params: { filter: this.filter } }).subscribe(
         (res: any) => {
@@ -500,20 +500,20 @@ export class CatalogoElectronicoComponent implements OnInit {
             //     ord=  ordenes.o
             //     Object.assign(element,{ordenes: ord})
             //   });
-              
-             
+
+
             // });
             let data = {
               title: 'Catalogo Eletrónico',
               rows:  res.data
             }
             console.log(data)
-        
+
           this.xlsService.exportConsultaCataElectronico(data, 'Catalogo Eletrónico')
           this.lcargando.ctlSpinner(false)
           }
-         
-          
+
+
         },
         (err: any) => {
           console.log(err)
@@ -522,7 +522,7 @@ export class CatalogoElectronicoComponent implements OnInit {
         }
       )
     }
-    
+
   }
 
   //     this.lcargando.ctlSpinner(false);
@@ -536,7 +536,7 @@ export class CatalogoElectronicoComponent implements OnInit {
 
   // SearchList(event){
   //   console.log("Atribucion "+event);
-  //   this.mensajeSppiner = "Cargando Programa...";    
+  //   this.mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
   //   // let data = {
   //   //   id: event,
@@ -545,7 +545,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   //   //     filter: this.filter
   //   //   }
 
-      
+
   //   // }
   //   let data = {
   //     atribucion:{
@@ -584,6 +584,6 @@ export class CatalogoElectronicoComponent implements OnInit {
     this.vmButtons[1].showimg=true;
     this.item =  item;
   }
-  
+
 
 }

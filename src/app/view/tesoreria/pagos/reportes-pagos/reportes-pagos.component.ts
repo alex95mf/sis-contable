@@ -20,7 +20,7 @@ export class ReportesPagosComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
   fTitle: string = "Consulta de Reportes";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any[] = [];
   dataUser: any;
   permissions: any;
@@ -92,7 +92,7 @@ export class ReportesPagosComponent implements OnInit {
   }
 
   getTipoReportes() {
-    this.msgSpinner = 'Cargando Tipo de Reportes';
+    this.mensajeSpinner = 'Cargando Tipo de Reportes';
     this.lcargando.ctlSpinner(true);
     let data = {
         modulo: 16,
@@ -121,7 +121,7 @@ export class ReportesPagosComponent implements OnInit {
   }
 
   getConceptos() {
-    this.msgSpinner = 'Cargando Conceptos';
+    this.mensajeSpinner = 'Cargando Conceptos';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptos().subscribe(
       (res: any) => {

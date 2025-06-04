@@ -18,7 +18,7 @@ standalone: false,
 })
 export class BusquedaTrasladoComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -122,7 +122,7 @@ export class BusquedaTrasladoComponent implements OnInit {
 	}
 
   cargarDocumentos(flag: boolean = false){
-    this.mensajeSppiner = "Cargando lista de Traslados de Bienes...";
+    this.mensajeSpinner = "Cargando lista de Traslados de Bienes...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1

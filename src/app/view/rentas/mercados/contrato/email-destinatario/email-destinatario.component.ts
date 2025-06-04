@@ -16,7 +16,7 @@ standalone: false,
 export class EmailDestinatarioComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   @Input() contrato
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons = []
   fTitle: string = "Envio de Correo"
 
@@ -81,7 +81,7 @@ export class EmailDestinatarioComponent implements OnInit {
       component: myVarGlobals.fRenContrato
     }
 
-    this.msgSpinner = 'Enviando correo...'
+    this.mensajeSpinner = 'Enviando correo...'
     this.lcargando.ctlSpinner(true)
     this.apiService.enviarCorreo(data).subscribe(
       res => {

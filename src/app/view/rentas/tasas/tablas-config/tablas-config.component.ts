@@ -23,7 +23,7 @@ export class TablasConfigComponent implements OnInit {
   mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Tablas Configuración";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;

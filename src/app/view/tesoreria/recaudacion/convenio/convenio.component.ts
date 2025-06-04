@@ -30,7 +30,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild("print") print!: ElementRef;
   fTitle = "Gestión de convenios";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -615,7 +615,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -644,7 +644,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
   }
 
   getConceptos() {
-    this.msgSpinner = 'Obteniendo Conceptos...';
+    this.mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -682,7 +682,7 @@ export class ConvenioComponent implements OnInit, OnDestroy  {
   }
 
   getLiquidaciones() {
-    this.msgSpinner = "Cargando lista de Liquidaciones...";
+    this.mensajeSpinner = "Cargando lista de Liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1212,7 +1212,7 @@ console.log(this.amortizaciones)
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.msgSpinner = 'Generando convenio...';
+          this.mensajeSpinner = 'Generando convenio...';
           this.lcargando.ctlSpinner(true);
           this.documento.estado = "E";
           this.documento.tipo_documento = "CO";
@@ -1386,7 +1386,7 @@ console.log(this.amortizaciones)
        confirmButtonColor: '#4DBD74',
      }).then((result) => {
        if (result.isConfirmed) {
-         this.msgSpinner = 'Generando convenio...';
+         this.mensajeSpinner = 'Generando convenio...';
          this.lcargando.ctlSpinner(true);
         //  this.documento.estado = "E";
         //  this.documento.tipo_documento = "CO";

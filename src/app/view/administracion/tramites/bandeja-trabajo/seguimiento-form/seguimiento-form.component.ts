@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./seguimiento-form.component.scss']
 })
 export class SeguimientoFormComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -219,7 +219,7 @@ export class SeguimientoFormComponent implements OnInit {
  }
 
   cargarSeguimiento(){
-    this.mensajeSppiner = "Cargando Seguimiento...";
+    this.mensajeSpinner = "Cargando Seguimiento...";
     this.lcargando.ctlSpinner(true);
     this.bandejaTraSrv.seguimientoTicket(this.data, this.data['id_ticket']).subscribe(
       (res) => {

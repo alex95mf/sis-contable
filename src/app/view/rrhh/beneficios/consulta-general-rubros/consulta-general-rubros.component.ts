@@ -15,7 +15,7 @@ standalone: false,
 export class ConsultaGeneralRubrosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = 'Consulta General de Rubros';
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Array<Botonera> = [];
   filter: any = {
     periodo: null,
@@ -86,14 +86,14 @@ export class ConsultaGeneralRubrosComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
 
-      this.msgSpinner = "Cargando Períodos"
+      this.mensajeSpinner = "Cargando Períodos"
       const resPeriodos = await this.apiService.getPeriodos()
       this.cmb_periodo = resPeriodos
 
-      this.msgSpinner = 'Cargando Listado de Meses'
+      this.mensajeSpinner = 'Cargando Listado de Meses'
       this.lst_mes = await this.apiService.getMeses('MES')
 
-      this.msgSpinner = 'Cargando Listado de Rubros'
+      this.mensajeSpinner = 'Cargando Listado de Rubros'
       this.lst_rubro = await this.apiService.getRubros()
 
       this.lcargando.ctlSpinner(false)
@@ -111,7 +111,7 @@ export class ConsultaGeneralRubrosComponent implements OnInit {
     //Object.assign(this.filter, { periodo: moment(this.periodo_selected).format('YYYY') })
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Empleados y Rubros'
+      this.mensajeSpinner = 'Cargando Empleados y Rubros'
       this.registros = await this.apiService.getRubrosEmpleados({params: { filter: this.filter }})
 
       this.lcargando.ctlSpinner(false)

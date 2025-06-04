@@ -23,7 +23,7 @@ export class ModalEditionComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -60,7 +60,7 @@ export class ModalEditionComponent implements OnInit {
 
 
   guardarEdition(){
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     console.log(this.catalogo);
     this.service.updateCatalogoBienes(this.catalogo).subscribe(

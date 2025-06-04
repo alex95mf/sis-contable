@@ -18,7 +18,7 @@ standalone: false,
     styleUrls: ["./arancel-form.component.scss"],
 })
 export class ArancelFormComponent implements OnInit {
-    mensajeSppiner: string = "Cargando...";
+    mensajeSpinner: string = "Cargando...";
     @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
     dataUser: any;
@@ -114,7 +114,7 @@ export class ArancelFormComponent implements OnInit {
     }
 
     fillCatalog() {
-        this.mensajeSppiner = "Cargando datos...";
+        this.mensajeSpinner = "Cargando datos...";
         this.lcargando.ctlSpinner(true);
 		let data = {
 			params: "'ARAN_CALCULO', 'ARAN_TIPO', 'ARAN_CERT_INS'",
@@ -196,7 +196,7 @@ export class ArancelFormComponent implements OnInit {
    
 
     getArancel(id) {
-        this.mensajeSppiner = "Obteniendo arancel..."
+        this.mensajeSpinner = "Obteniendo arancel..."
         this.lcargando.ctlSpinner(true);
         this.arancelesSrv.getArancel(id).subscribe(
             (res) => {
@@ -253,7 +253,7 @@ export class ArancelFormComponent implements OnInit {
             confirmButtonColor: '#4DBD74',
         }).then((result) => {
             if (result.isConfirmed) {
-                this.mensajeSppiner = "Guardando arancel..."
+                this.mensajeSpinner = "Guardando arancel..."
                 this.lcargando.ctlSpinner(true);
                 this.arancel.fk_calculo = this.calculo_base.filter(e => e.descripcion == this.arancel.desc_calculo)[0]['id_catalogo'];
                 this.arancel.fk_tipo = this.tipo_base.filter(e => e.descripcion == this.arancel.desc_tipo)[0]['id_catalogo'];
@@ -310,7 +310,7 @@ export class ArancelFormComponent implements OnInit {
             confirmButtonColor: '#4DBD74',
         }).then((result) => {
             if (result.isConfirmed) {
-                this.mensajeSppiner = "Guardando arancel..."
+                this.mensajeSpinner = "Guardando arancel..."
                 this.lcargando.ctlSpinner(true);
                 this.arancel.fk_calculo = this.calculo_base.filter(e => e.descripcion == this.arancel.desc_calculo)[0]['id_catalogo'];
                 this.arancel.fk_tipo = this.tipo_base.filter(e => e.descripcion == this.arancel.desc_tipo)[0]['id_catalogo'];

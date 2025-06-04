@@ -21,7 +21,7 @@ standalone: false,
 	styleUrls: ['./lista-precios.component.scss']
 })
 export class ListaPreciosComponent implements OnInit {
-	mensajeSppiner: string = "Cargando...";
+	mensajeSpinner: string = "Cargando...";
 	@ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 	@ViewChild(DataTableDirective) dtElement: DataTableDirective;
 	//dtOptions: any = {};
@@ -61,7 +61,7 @@ export class ListaPreciosComponent implements OnInit {
 	marcaSelect: any = 0;
 	grupoSelect: any = 0;
 	excelData: any = [];
-	mensajeSpiner: string = "Guardando Precios...";
+	mensajeSpinner: string = "Guardando Precios...";
 	constructor(private toastr: ToastrService,
 		private router: Router,
 		private reportesSrv: ListaPreciosService,
@@ -171,7 +171,7 @@ export class ListaPreciosComponent implements OnInit {
 		};
 		// console.log(data);
 		this.lcargando.ctlSpinner(true)
-		this.mensajeSpiner = 'Actualizando'
+		this.mensajeSpinner = 'Actualizando'
 		this.reportesSrv.getProducts(data).subscribe(
 			(res: any) => {
 				console.log(res)
@@ -257,7 +257,7 @@ export class ListaPreciosComponent implements OnInit {
 
 
 	actualizarPrecios() {
-		this.mensajeSpiner = 'Guardando Precios...';
+		this.mensajeSpinner = 'Guardando Precios...';
 		this.lcargando.ctlSpinner(true);
 
 		let productosActualizados = { infodata: this.infoData.filter((item: any) => item.actualizacion == true) }

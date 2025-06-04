@@ -16,7 +16,7 @@ export class ReporteComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
   fTitle: string = "Consulta de Reportes";
-  msgSpinner: string;
+  mensajeSpinner: string;
   conceptosDisabled = false;
   cajasDisabled = false;
   fechaHastaDisabled = false;
@@ -153,7 +153,7 @@ export class ReporteComponent implements OnInit {
 
 
   getTiposReporte() {
-    this.msgSpinner = 'Cargando Tipos de Reporte';
+    this.mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.apiService.getTiposReporte().subscribe(
       (res: any) => {

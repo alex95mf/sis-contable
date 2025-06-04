@@ -43,7 +43,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
 
   vmButtons: any
   constructor(
@@ -120,7 +120,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
       this.toastr.info('El campo Observaciones no debe estar vacio')
     } else {
 
-      this.mensajeSppiner = "Verificando período contable";
+      this.mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
 
       let data = {
@@ -149,7 +149,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
 
   asignarIcp(){
     console.log(this.item.id_solicitud)
-    this.mensajeSppiner = "Asignando ICP ...";
+    this.mensajeSpinner = "Asignando ICP ...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id_solicitud: this.item.id_solicitud
@@ -187,7 +187,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
 
   guardarContratacion(){
     console.log('Guardado');
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
 
     console.log(this.aprobacion);
@@ -249,7 +249,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
 
   cargarCatalogos(){
 
-    this.mensajeSppiner = 'Cargando Catalogos'
+    this.mensajeSpinner = 'Cargando Catalogos'
     this.lcargando.ctlSpinner(true);
     let data = {
       params: "'PLA_TIPO_REGIMEN', 'PLA_PROC_SUGE'"

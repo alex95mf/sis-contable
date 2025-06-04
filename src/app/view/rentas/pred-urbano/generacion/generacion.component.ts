@@ -29,7 +29,7 @@ standalone: false,
 export class GeneracionComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de Liquidación (Predio Urbano)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -122,7 +122,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   ) {
     this.apiService.liquidacionSelected$.subscribe(
       (res: any) => {
-        this.msgSpinner = 'Cargando datos de la Liquidación...';
+        this.mensajeSpinner = 'Cargando datos de la Liquidación...';
 
         this.lcargando.ctlSpinner(true)
         this.restoreForm(false, false);
@@ -345,7 +345,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Permisos de Usuario'
+      this.mensajeSpinner = 'Cargando Permisos de Usuario'
       this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
       this.empresLogo = this.dataUser.logoEmpresa
       const response = await this.commonService.getPermisionsGlobas({codigo: myVarGlobals.fRenPredUrbanoEmision, id_rol: this.dataUser.id_rol}) as any
@@ -356,13 +356,13 @@ export class GeneracionComponent implements OnInit, OnDestroy {
         throw new Error('No tiene permisos para usar este recurso.');
       }
 
-      this.msgSpinner = 'Cargando Periodos'
+      this.mensajeSpinner = 'Cargando Periodos'
       const periodoResponse = await this.apiService.getPeriodos() as any;
       console.log(periodoResponse)
       this.cmb_periodo = periodoResponse.data
 
       // Cargar configuracion del Concepto PU
-      this.msgSpinner = 'Cargando Conceptos'
+      this.mensajeSpinner = 'Cargando Conceptos'
       const conceptoConfig = await this.apiService.getConceptoConfig({params: {filter: { codigo: 'PU'}}})
       console.log(conceptoConfig)
       this.conceptoConfig = conceptoConfig.data[0]
@@ -386,7 +386,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   }
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario...'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
@@ -536,7 +536,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   }
 
   getConceptos() {
-    this.msgSpinner = 'Obteniendo Conceptos...';
+    this.mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
 
     // Obtener los ConceptoDet de Predio Urbano (PU)
@@ -567,7 +567,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     this.liquidacion.fk_contribuyente = contr.id_cliente;
     this.observacionesDisabled = false;
     this.vmButtons[3].habilitar = false;
-    this.msgSpinner = 'Obteniendo Propiedades...'
+    this.mensajeSpinner = 'Obteniendo Propiedades...'
         this.lcargando.ctlSpinner(true)
         this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
           (res: any) => {
@@ -671,7 +671,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
   async calculateConceptos() {
     // Obtener los valores desde el backend
-    this.msgSpinner = 'Obteniendo valores';
+    this.mensajeSpinner = 'Obteniendo valores';
     this.lcargando.ctlSpinner(true);
 
     const response = await this.apiService.getValoresPropiedad({lote: this.propiedadActive.id}) as any
@@ -858,7 +858,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.msgSpinner = "Verificando período contable";
+          this.mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(this.liquidacion.periodoLiq),
@@ -868,7 +868,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.msgSpinner = 'Generando Liquidación...';
+              this.mensajeSpinner = 'Generando Liquidación...';
               this.lcargando.ctlSpinner(true);
               this.liquidacion.detalles = [];
               this.liquidacion.fk_lote = this.propiedadActive.id;
@@ -950,7 +950,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          this.msgSpinner = "Verificando período contable";
+          this.mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(this.liquidacion.periodoLiq),
@@ -961,7 +961,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
 
-              this.msgSpinner = 'Actualizando Liquidación...';
+              this.mensajeSpinner = 'Actualizando Liquidación...';
               this.lcargando.ctlSpinner(true);
               this.liquidacion.detalles = [];
               this.conceptosAplicados.forEach(e => {
@@ -1168,7 +1168,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
   async getUltimoRegistro(skip: number = 0) {
     this.skip = skip
-    this.msgSpinner = 'Cargado Registro'
+    this.mensajeSpinner = 'Cargado Registro'
     this.lcargando.ctlSpinner(true)
     try {
       const conceptos = [this.conceptoConfig.id_concepto]

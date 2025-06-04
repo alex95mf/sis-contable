@@ -24,7 +24,7 @@ standalone: false,
 export class AnexoBodegaComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   fTitle = 'Listado de Anexos'
   @Input() dataUser: any
   @Input() permissions: any
@@ -51,7 +51,7 @@ export class AnexoBodegaComponent implements OnInit {
     this.commonVarService.contribAnexoLoad.asObservable().subscribe(
       (res: any) => {
         this.lcargando.ctlSpinner(true)
-        this.msgSpinner = 'Cargando Anexos ...'
+        this.mensajeSpinner = 'Cargando Anexos ...'
         // console.log('anexos',res, this.permissions, this.dataUser);
         console.log(myVarGlobals.fOrdenesCompra);
         let data = {
@@ -123,7 +123,7 @@ export class AnexoBodegaComponent implements OnInit {
   cargarArchivo(){
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       //module: this.permissions.id_modulo,
@@ -174,7 +174,7 @@ export class AnexoBodegaComponent implements OnInit {
       ip: this.commonService.getIpAddress()
     }
 
-    // this.msgSpinner = 'Eliminando anexo'
+    // this.mensajeSpinner = 'Eliminando anexo'
     // this.lcargando.ctlSpinner(true)
 
     this.apiService.deleteAnexo(data).subscribe(
@@ -227,7 +227,7 @@ export class AnexoBodegaComponent implements OnInit {
             ip: this.commonService.getIpAddress()
           }
 
-          this.msgSpinner = 'Eliminando anexo'
+          this.mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true)
           console.log()
           this.apiService.deleteAnexo(data).subscribe(

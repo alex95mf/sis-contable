@@ -35,7 +35,7 @@ standalone: false,
 `]
 })
 export class ConsultaAlertasComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)
@@ -168,7 +168,7 @@ export class ConsultaAlertasComponent implements OnInit {
     let data = {
       params: "'TIPO_NOTIFICACION_ALERTA'",
     };
-    /*this.mensajeSppiner = "Cargando Catalogos...";
+    /*this.mensajeSpinner = "Cargando Catalogos...";
     this.lcargando.ctlSpinner(true);*/
     this.apiService.getCatalogos(data).subscribe(
 
@@ -186,7 +186,7 @@ export class ConsultaAlertasComponent implements OnInit {
 
   async getModulos() {
     try {
-      this.mensajeSppiner = 'Cargando Modulos'
+      this.mensajeSpinner = 'Cargando Modulos'
       const response = await this.apiService.getModulos();
       console.log(response)
       this.modulos = response.data
@@ -200,7 +200,7 @@ export class ConsultaAlertasComponent implements OnInit {
   //getModulos
 
   cargarAlertas(){
-    this.mensajeSppiner = 'Cargando...';
+    this.mensajeSpinner = 'Cargando...';
     this.lcargando.ctlSpinner(true);
 
     let data= {
@@ -273,7 +273,7 @@ export class ConsultaAlertasComponent implements OnInit {
   btnExportarExcel() {
 
 
-    this.mensajeSppiner = "Generando Archivo Excel...";
+    this.mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
 
 

@@ -23,7 +23,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
   fTitle: string = 'Nueva Orden de Inspección'
   edit: boolean = false
   departamento: string = 'RENTAS'
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: any[] = []
 
   inspectores: any[] = []
@@ -92,7 +92,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
   }
 
   getInspeccion(inspeccion: any) {
-    this.msgSpinner = 'Obteniendo Datos de Inspección'
+    this.mensajeSpinner = 'Obteniendo Datos de Inspección'
     this.lcargando.ctlSpinner(true)
     this.apiService.getInspeccion({ inspeccion: inspeccion }).subscribe(
       (res: any) => {
@@ -156,7 +156,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
   }
 
   getInspectores() {
-    this.msgSpinner = 'Cargando Inspectores'
+    this.mensajeSpinner = 'Cargando Inspectores'
     // this.lcargando.ctlSpinner(true)
     this.apiService.getInspectores({ tipo: 'RENTAS' }).subscribe(
       (res: any) => {
@@ -176,7 +176,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
   }
 
   almacenarInspeccion() {
-    this.msgSpinner = 'Guardando Orden de Inspección'
+    this.mensajeSpinner = 'Guardando Orden de Inspección'
     this.lcargando.ctlSpinner(true)
     this.apiService.setInspeccion({ 
       orden: this.inspeccion, 
@@ -211,7 +211,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
   }
 
   actualizarInspeccion() {
-    this.msgSpinner = 'Actualizando Orden de Inspección'
+    this.mensajeSpinner = 'Actualizando Orden de Inspección'
     this.lcargando.ctlSpinner(true)
     this.apiService.actualizaInspeccion(this.inspeccion).subscribe(
       (res: any) => {
@@ -244,7 +244,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
         fk_inspector: this.inspector.id
       }
     }
-    this.msgSpinner = 'Asignando Inspector...'
+    this.mensajeSpinner = 'Asignando Inspector...'
     this.lcargando.ctlSpinner(true)
     this.apiService.asignaInspector(data).subscribe(
       (res: any) => {

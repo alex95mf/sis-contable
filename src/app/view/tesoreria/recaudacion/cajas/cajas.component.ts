@@ -16,7 +16,7 @@ standalone: false,
   styleUrls: ['./cajas.component.scss']
 })
 export class CajasComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -101,7 +101,7 @@ export class CajasComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSppiner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -130,7 +130,7 @@ export class CajasComponent implements OnInit {
   }
 
   cargarCajas() {
-    this.mensajeSppiner = "Cargando Cajas del sistema...";
+    this.mensajeSpinner = "Cargando Cajas del sistema...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -161,7 +161,7 @@ export class CajasComponent implements OnInit {
   }
 
   cargarUsuarios() {
-    this.mensajeSppiner = "Cargando Usuarios del sistema...";
+    this.mensajeSpinner = "Cargando Usuarios del sistema...";
     this.lcargando.ctlSpinner(true);
 
     this.apiSrv.getUsuarios().subscribe(
@@ -185,7 +185,7 @@ export class CajasComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.mensajeSppiner = 'Cargando Catalogos...';
+    this.mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -241,7 +241,7 @@ export class CajasComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSppiner = "Eliminando caja..."
+          this.mensajeSpinner = "Eliminando caja..."
           this.lcargando.ctlSpinner(true);
           this.apiSrv.deleteCaja(id).subscribe(
             (res) => {

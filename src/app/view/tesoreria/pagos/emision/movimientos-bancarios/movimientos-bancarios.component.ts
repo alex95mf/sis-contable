@@ -29,7 +29,7 @@ export class MovimientosBancariosComponent implements OnInit {
 
   @Input() cuenta:any;
   fTitle = "Gestión (Ordenenes de Pago)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   vmButtonsI:any = [];
   dataUser: any;
@@ -179,7 +179,7 @@ export class MovimientosBancariosComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.msgSpinner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -221,7 +221,7 @@ export class MovimientosBancariosComponent implements OnInit {
     let data = {
       params: "'OP_CONCEPTOS','PAG_TIPO_DESEMBOLSO'",
     };
-    this.msgSpinner = "Buscando concepto...";
+    this.mensajeSpinner = "Buscando concepto...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogoConcepto(data).subscribe(
      
@@ -239,7 +239,7 @@ export class MovimientosBancariosComponent implements OnInit {
   }
   cargarMovimientosBancarios(flag: boolean = false) {
     
-    this.msgSpinner = "Cargando Movimientos Bancarios...";
+    this.mensajeSpinner = "Cargando Movimientos Bancarios...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1;

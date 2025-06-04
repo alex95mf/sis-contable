@@ -23,7 +23,7 @@ export class ModalCondicionesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   mensajeSpinner: string = "Cargando...";
-  msgSpinner: string
+  mensajeSpinner: string
 
   listacondiciones: any = {
     fk_solicitud:0,
@@ -264,7 +264,7 @@ validaCond() {
 
 
 
-            this.msgSpinner = "Verificando período contable";
+            this.mensajeSpinner = "Verificando período contable";
   this.lcargando.ctlSpinner(true);
   let datos = {
     "anio": Number(moment().format('YYYY')),

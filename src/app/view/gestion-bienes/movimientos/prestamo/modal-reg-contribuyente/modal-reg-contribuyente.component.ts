@@ -16,7 +16,7 @@ standalone: false,
   styleUrls: ['./modal-reg-contribuyente.component.scss']
 })
 export class ModalRegContribuyenteComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   vmButtons: any = [];
@@ -339,7 +339,7 @@ export class ModalRegContribuyenteComponent implements OnInit {
     if(this.NoDocumento==undefined || this.NoDocumento==""){
       this.toastr.info('Debe ingresar un No Documento');
     }else{
-      this.mensajeSppiner = "Cargando lista de Contribuyentes...";
+      this.mensajeSpinner = "Cargando lista de Contribuyentes...";
     this.lcargando.ctlSpinner(true);
     if (!this.NoDocumento) {
       this.filter['num_documento'] = 'x'
@@ -532,7 +532,7 @@ export class ModalRegContribuyenteComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSppiner = "Cargando Catalogs";
+    this.mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'DOCUMENTO', 'PAIS', 'CIUDAD', 'PROVINCIA', 'GENERO','ESTADO CIVIL', 'REN_DISCAPACIDAD', 'REN_INSTITUCION_CREDITO', 'REN_TIPO_PERSONA_JURIDICA', 'REN_ESTADO_CONTRIBUYENTE', 'REN_ACTIVIDAD_AGROPECUARIA', 'CAT_ZONA','CAT_SECTOR'",
     };
@@ -1078,7 +1078,7 @@ export class ModalRegContribuyenteComponent implements OnInit {
     // this.contribuyente["ta_pertenece_cooperativa"] = this.perteneceTax;
     console.log('Guardando');
     console.log(this.contribuyente);
-    this.mensajeSppiner = "Guardando Contribuyente";
+    this.mensajeSpinner = "Guardando Contribuyente";
     this.lcargando.ctlSpinner(true);
     this.prestamoSrv.saveContribuyente(this.contribuyente).subscribe(
       (res: any) => {

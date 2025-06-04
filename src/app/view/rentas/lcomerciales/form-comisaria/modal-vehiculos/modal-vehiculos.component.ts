@@ -17,7 +17,7 @@ export class ModalVehiculosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
   fTitle: string = "Registro de vehículos";
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @Input() inspeccion: any;
   @Input() permisos: any;
   @Input() formDisabled: boolean = false;
@@ -86,7 +86,7 @@ export class ModalVehiculosComponent implements OnInit {
 
     // console.log(data);
 
-    this.msgSpinner = "Cargando vehiculos por inspeccion...";
+    this.mensajeSpinner = "Cargando vehiculos por inspeccion...";
     // this.lcargando.ctlSpinner(true);
     this.apiSrv.getVehiculosByInspeccion(data).subscribe(
       (res) => {
@@ -104,7 +104,7 @@ export class ModalVehiculosComponent implements OnInit {
   }
 
   cargarTiposTonelaje() {
-    this.msgSpinner = "Cargando catalogos...";
+    this.mensajeSpinner = "Cargando catalogos...";
     this.lcargando.ctlSpinner(true);
 
     let datos = {
@@ -263,7 +263,7 @@ export class ModalVehiculosComponent implements OnInit {
     }).then((result)=>{
 
       if(result.isConfirmed){
-        this.msgSpinner = "Guardando tonelajes de vehiculos...";
+        this.mensajeSpinner = "Guardando tonelajes de vehiculos...";
         this.lcargando.ctlSpinner(true);
 
         let data = {
@@ -319,7 +319,7 @@ export class ModalVehiculosComponent implements OnInit {
           this.listaVehiculos.splice(i,1);
         } else if (item.id_local_vehiculo!=0){
           // borrar de ade veras
-          this.msgSpinner = "Eliminando registro de activos...";
+          this.mensajeSpinner = "Eliminando registro de activos...";
           this.lcargando.ctlSpinner(true);
 
           let data = {

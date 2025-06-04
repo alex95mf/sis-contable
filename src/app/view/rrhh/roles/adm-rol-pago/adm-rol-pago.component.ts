@@ -29,7 +29,7 @@ export class AdmRolPagoComponent implements OnInit {
 
   vmButtons: any = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(ImprimirRolComponent, { static: false })
@@ -180,7 +180,7 @@ export class AdmRolPagoComponent implements OnInit {
   obtenerEmpleados() {
     this.lConcepto = "";
     this.fecha_actual = moment(this.toDatePicker).format("YYYY-MM-DD");
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let idGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).id_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -436,7 +436,7 @@ export class AdmRolPagoComponent implements OnInit {
     let periodoInicio:any = moment(this.periodoInicio).format("YYYY-MM-DD");
     let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");
     let validaTermina: boolean = false;
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     let nombreGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).nombre_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -574,7 +574,7 @@ export class AdmRolPagoComponent implements OnInit {
       { nombre: "DEPARTAMENTO", sise: "8%" },
       { nombre: "AFILIADO", sise: "4%" },
     ];
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let nombreGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).nombre_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -687,7 +687,7 @@ export class AdmRolPagoComponent implements OnInit {
         enviarData.push(dataPost);
       });
 
-      this.mensajeSppiner = "Anulando Roles...";
+      this.mensajeSpinner = "Anulando Roles...";
       this.lcargando.ctlSpinner(true);
       this.admRolPagoService.deleteRolPago({datosPost: enviarData}).subscribe((res: any) => {
         this.validaciones.mensajeExito("Exito", "Los roles se anularon correctamente");
@@ -803,7 +803,7 @@ export class AdmRolPagoComponent implements OnInit {
       return;
     }
 
-    this.mensajeSppiner = "Apobando rol de pago por favor espere...";
+    this.mensajeSpinner = "Apobando rol de pago por favor espere...";
     this.lcargando.ctlSpinner(true);        
     this.admRolPagoService.aprobarRolPago({datosPost: enviarData}).subscribe((res: any) => {
       this.validaciones.mensajeExito("Exito", "Los roles de pago se aprobaron correctamente");

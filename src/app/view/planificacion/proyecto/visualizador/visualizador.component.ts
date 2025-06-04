@@ -20,7 +20,7 @@ standalone: false,
 export class VisualizadorComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando : CcSpinerProcesarComponent
   fTitle : string = "Reporte de Plan Anual de Compras por Departamento"
-  msgSpinner : string
+  mensajeSpinner : string
   vmButtons : any
   dataUser : any
   permissions: any
@@ -96,7 +96,7 @@ export class VisualizadorComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     let params = {
@@ -127,18 +127,18 @@ export class VisualizadorComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.msgSpinner = 'Cargando Periodos'
+      this.mensajeSpinner = 'Cargando Periodos'
       this.periodos = await this.apiService.getPeriodos();
 
-      this.msgSpinner = 'Cargando Programas'
+      this.mensajeSpinner = 'Cargando Programas'
       this.programas = await this.apiService.getProgramas();
       this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
 
-      this.msgSpinner = 'Cargando Departamentos'
+      this.mensajeSpinner = 'Cargando Departamentos'
       this.departamentos = await this.apiService.getDepartamentos();
       this.departamentos.map((departamento: any) => Object.assign(departamento, { label: `${departamento.descripcion}. ${departamento.valor}`}))
 
-      this.msgSpinner = 'Cargando Datos Adicionales'
+      this.mensajeSpinner = 'Cargando Datos Adicionales'
       let response: any = await this.apiService.getCatalogo({params: "'PLA_TIPO_COMPRA','PLA_U_MED','PLA_TIPO_PRODUCTO','PLA_PROC_SUGE','PLA_TIPO_REGIMEN','PLA_TIPO_PRESUPUESTO'"})
       this.lst_tipo_compra = response.PLA_TIPO_COMPRA
       this.lst_unidades_medida = response.PLA_U_MED
@@ -179,7 +179,7 @@ export class VisualizadorComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Bienes'
+      this.mensajeSpinner = 'Cargando Bienes'
       this.bienes = await this.apiService.getBienes({periodo: this.periodoSelected, departamento: this.departamentoObjectSelected.id_catalogo});
       console.log(this.bienes)
       this.bienes.map((bien: any) => Object.assign(bien, {
@@ -254,7 +254,7 @@ export class VisualizadorComponent implements OnInit {
   }
 
   /* cargaCatalogo() {
-    this.msgSpinner = 'Cargando Catalogos'
+    this.mensajeSpinner = 'Cargando Catalogos'
     let data = {
       params: "'PLA_PROGRAMA','PLA_DEPARTAMENTO',\
       'PLA_COD_PRESUP','PLA_COD_CPC','PLA_TIPO_COMPRA','PLA_U_MED','PLA_TIPO_PRODUCTO',\
@@ -329,7 +329,7 @@ export class VisualizadorComponent implements OnInit {
   } */
 
   /* selectDept(event) {
-    this.msgSpinner = 'Cargando Bienes por Departamento'
+    this.mensajeSpinner = 'Cargando Bienes por Departamento'
     this.bienesAttr = []
     this.total = 0
     this.vmButtons[0].habilitar = false

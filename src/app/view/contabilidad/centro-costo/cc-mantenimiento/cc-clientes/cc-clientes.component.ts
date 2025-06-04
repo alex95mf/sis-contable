@@ -19,7 +19,7 @@ export class CcClientesComponent implements OnInit {
   ) { }
 
   vmButtons:any = [];
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class CcClientesComponent implements OnInit {
       },
     };
 
-    this.mensajeSppiner = "Cargando listado de clientes...";
+    this.mensajeSpinner = "Cargando listado de clientes...";
     this.lcargando.ctlSpinner(true);
     this.centroCostoSrv.obetenerClientes().subscribe((datos:any)=>{
       this.lstClientes = datos.data;

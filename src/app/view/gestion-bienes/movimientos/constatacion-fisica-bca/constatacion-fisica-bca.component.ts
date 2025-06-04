@@ -23,7 +23,7 @@ standalone: false,
   styleUrls: ['./constatacion-fisica-bca.component.scss']
 })
 export class ConstatacionFisicaBCAComponent implements OnInit {
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -374,7 +374,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
 
   checkPeriodo() {
 
-    this.mensajeSpiner = 'Obteniendo constatación física...';
+    this.mensajeSpinner = 'Obteniendo constatación física...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -416,7 +416,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
 
   guardarIngresos() {
 
-    this.mensajeSpiner = 'Guardando constatación física...';
+    this.mensajeSpinner = 'Guardando constatación física...';
     this.lcargando.ctlSpinner(true);
     console.log(this.dataExcel);
     let data = {
@@ -460,7 +460,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
   }
 
   inspeccionarPeriodo() {
-    this.mensajeSpiner = 'Obteniendo constatación física...';
+    this.mensajeSpinner = 'Obteniendo constatación física...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -486,7 +486,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
   }
 
   eliminarIngresos() {
-    this.mensajeSpiner = 'Eliminando asignacion de ingresos...';
+    this.mensajeSpinner = 'Eliminando asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -539,7 +539,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpiner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {

@@ -17,7 +17,7 @@ export class ModalTramiteDetallesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   @Input() nuevo: boolean
   @Input() data: any
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: any[]
 
   departamentos: any[] = []
@@ -134,7 +134,7 @@ export class ModalTramiteDetallesComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.msgSpinner = 'Cargando Catalogos'
+    this.mensajeSpinner = 'Cargando Catalogos'
     this.lcargando.ctlSpinner(true)
     this.apiService.getCatalogos({ params: "'PLA_DEPARTAMENTO'" }).subscribe(
       (res: any) => {
@@ -159,7 +159,7 @@ export class ModalTramiteDetallesComponent implements OnInit {
   }
 
   getTramite() {
-    this.msgSpinner = 'Cargando Tramite'
+    this.mensajeSpinner = 'Cargando Tramite'
     this.lcargando.ctlSpinner(true)
     this.apiService.getTramite(this.data.id_tramite).subscribe(
       (res: any) => {
@@ -176,7 +176,7 @@ export class ModalTramiteDetallesComponent implements OnInit {
   }
 
   setTramite() {
-    this.msgSpinner = 'Almacenando Tramite'
+    this.mensajeSpinner = 'Almacenando Tramite'
     this.lcargando.ctlSpinner(true)
     this.apiService.setTramite({ tramite: this.tramite }).subscribe(
       (res: any) => {
@@ -194,7 +194,7 @@ export class ModalTramiteDetallesComponent implements OnInit {
   }
 
   updateTramite() {
-    this.msgSpinner = 'Actualizando Tramite'
+    this.mensajeSpinner = 'Actualizando Tramite'
     this.lcargando.ctlSpinner(true)
     delete this.tramite.departamento
     this.apiService.updateTramite(this.tramite.id_tramite, { tramite: this.tramite }).subscribe(

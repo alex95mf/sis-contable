@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ModalCierresComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -119,7 +119,7 @@ export class ModalCierresComponent implements OnInit {
   }
 
   cargarCierres(flag: boolean = false){
-    this.mensajeSppiner = "Cargando lista de Asiento Cierre...";
+    this.mensajeSpinner = "Cargando lista de Asiento Cierre...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1

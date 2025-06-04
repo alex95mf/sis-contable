@@ -20,7 +20,7 @@ standalone: false,
 })
 export class ExoneracionesComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
 
   @ViewChild(CcSpinerProcesarComponent, {static: false})
   lcargando: CcSpinerProcesarComponent;
@@ -129,7 +129,7 @@ export class ExoneracionesComponent implements OnInit {
 
   validaPermisos() {
     
-    this.mensajeSppiner = "Verificando permisos del usuario..."
+    this.mensajeSpinner = "Verificando permisos del usuario..."
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -183,7 +183,7 @@ export class ExoneracionesComponent implements OnInit {
   
   }
   cargarConceptos() {
-    this.mensajeSppiner = 'Cargando Conceptos'
+    this.mensajeSpinner = 'Cargando Conceptos'
     this.exoneracionesSrv.getConceptos().subscribe(
       (res: any) => {
         res.data.forEach(e => {
@@ -201,7 +201,7 @@ export class ExoneracionesComponent implements OnInit {
   }
 
   cargarExoneraciones() {
-    this.mensajeSppiner = "Cargando lista de Exoneraciones...";
+    this.mensajeSpinner = "Cargando lista de Exoneraciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -304,7 +304,7 @@ export class ExoneracionesComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSppiner = "Eliminando exoneracion..."
+          this.mensajeSpinner = "Eliminando exoneracion..."
           this.lcargando.ctlSpinner(true);
           this.exoneracionesSrv.borrarExoneracion(id).subscribe(
             (res) => {

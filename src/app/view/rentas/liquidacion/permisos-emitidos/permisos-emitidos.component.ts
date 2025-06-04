@@ -21,7 +21,7 @@ export class PermisosEmitidosComponent implements OnInit {
   mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Aprobación de Permisos de construcción";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -98,7 +98,7 @@ export class PermisosEmitidosComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
 
     this.empresLogo = this.dataUser.logoEmpresa;
 
@@ -218,7 +218,7 @@ aprobar(id) {
     confirmButtonColor: '#4DBD74',
   }).then((result)=>{
     if(result.isConfirmed) {
-      this.msgSpinner = 'Verificando período contable...';
+      this.mensajeSpinner = 'Verificando período contable...';
       this.lcargando.ctlSpinner(true);
       let datos = {
         "anio": Number(moment().format('YYYY')),
@@ -302,7 +302,7 @@ anular(id) {
 
 
 
-      this.msgSpinner = 'Verificando período contable...';
+      this.mensajeSpinner = 'Verificando período contable...';
       this.lcargando.ctlSpinner(true);
       let datos = {
         "anio": Number(moment().format('YYYY')),

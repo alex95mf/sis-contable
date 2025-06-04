@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./cedula-gastos.component.scss']
 })
 export class AsignacionIngresosComponent implements OnInit {
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   
@@ -447,7 +447,7 @@ console.log("copu",copy);
 
   checkPeriodo() {
 
-    this.mensajeSpiner = 'Obteniendo Cedula de Gastos...';
+    this.mensajeSpinner = 'Obteniendo Cedula de Gastos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -491,7 +491,7 @@ console.log("copu",copy);
 
   guardarIngresos() {
 
-    this.mensajeSpiner = 'Guardando Cedula de Gastos...';
+    this.mensajeSpinner = 'Guardando Cedula de Gastos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -523,7 +523,7 @@ console.log("copu",copy);
   }
 
   inspeccionarPeriodo() {
-    this.mensajeSpiner = 'Obteniendo Cedula de Gastos...';
+    this.mensajeSpinner = 'Obteniendo Cedula de Gastos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -549,7 +549,7 @@ console.log("copu",copy);
   }
 
   eliminarIngresos() {
-    this.mensajeSpiner = 'Eliminando Cedula de Gastos...';
+    this.mensajeSpinner = 'Eliminando Cedula de Gastos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -601,7 +601,7 @@ console.log("copu",copy);
   }
   
   validaPermisos() {
-    this.mensajeSpiner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {
@@ -634,7 +634,7 @@ console.log("copu",copy);
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpiner = 'Cargando Periodos'
+      this.mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiSrv.cargarPeriodos();
       console.log(periodos)
       this.cmb_periodo = periodos
@@ -660,7 +660,7 @@ console.log("copu",copy);
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpiner = 'Generando Periodo'
+        this.mensajeSpinner = 'Generando Periodo'
         let periodo = await this.apiSrv.generarPeriodoPresupuesto()
         console.log(periodo)
         

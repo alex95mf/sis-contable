@@ -16,7 +16,7 @@ standalone: false,
 export class ReclamosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
 
   filter: any = {
@@ -120,7 +120,7 @@ export class ReclamosComponent implements OnInit {
   async cargarReportes() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Reclamos'
+      this.mensajeSpinner = 'Cargando Reclamos'
       let reportes = await this.apiService.getReportes({params: {filter: this.filter, paginate: this.paginate}});
       console.log(reportes)
       this.lst_reclamos = reportes.data;
@@ -155,7 +155,7 @@ export class ReclamosComponent implements OnInit {
   async exportExcel() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Exportando Reclamos'
+      this.mensajeSpinner = 'Exportando Reclamos'
       let excelData = [];
       let reclamos = await this.apiService.getReportes({params: {filter: this.filter}})
 

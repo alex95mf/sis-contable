@@ -36,7 +36,7 @@ export class ModalCampaignDetailsComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<any>;
   @Input() campaign_id: number;
   vmButtons: Botonera[];
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   concepto: any = {
     id_concepto: null,
@@ -116,7 +116,7 @@ export class ModalCampaignDetailsComponent implements OnInit {
 
   async cargarConceptos() {
     try {
-      this.msgSpinner = 'Cargando Conceptos'
+      this.mensajeSpinner = 'Cargando Conceptos'
       let conceptos = await this.apiService.getConceptos();
       this.cmb_concepto = conceptos
     } catch (err) {
@@ -144,7 +144,7 @@ export class ModalCampaignDetailsComponent implements OnInit {
 
   async getCampaign(id: number) {
     try {
-      this.msgSpinner = 'Cargando Campaña'
+      this.mensajeSpinner = 'Cargando Campaña'
       let descuento = await this.apiService.getCampaign(id)
       Object.assign(descuento, {
         fecha_desde: descuento.fecha_inicio,
@@ -244,7 +244,7 @@ export class ModalCampaignDetailsComponent implements OnInit {
       this.lcargando.ctlSpinner(true)
       try {
         Object.assign(this.campaign, { conceptos: this.lst_concepto })
-        this.msgSpinner = 'Almacenando Campaña'
+        this.mensajeSpinner = 'Almacenando Campaña'
         let campaign = await this.apiService.setCampaign({ campaign: this.campaign })
         console.log(campaign)
         //
@@ -278,7 +278,7 @@ export class ModalCampaignDetailsComponent implements OnInit {
           conceptos_del: this.lst_concepto_del
         })
   
-        this.msgSpinner = 'Actualizando Campaña'
+        this.mensajeSpinner = 'Actualizando Campaña'
         let response = await this.apiService.putCampaign(this.campaign.id, {campaign: this.campaign})
         console.log(response)
         //

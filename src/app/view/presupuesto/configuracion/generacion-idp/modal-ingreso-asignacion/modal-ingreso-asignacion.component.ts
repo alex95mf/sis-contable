@@ -13,7 +13,7 @@ standalone: false,
   styleUrls: ['./modal-ingreso-asignacion.component.scss']
 })
 export class ModalIngresoAsignacionComponent implements OnInit {
-  mensajeSppiner: string = "Cargnado...";
+  mensajeSpinner: string = "Cargnado...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   paginate: any;
   filter: any;
@@ -109,7 +109,7 @@ export class ModalIngresoAsignacionComponent implements OnInit {
 
   cargarIngresos(flag: boolean = false){
 
-    this.mensajeSppiner = "Cargando lista de asignacion ingreso...";
+    this.mensajeSpinner = "Cargando lista de asignacion ingreso...";
     this.lcargando.ctlSpinner(true);
     if (flag) this.paginate.page = 1
     let data = {

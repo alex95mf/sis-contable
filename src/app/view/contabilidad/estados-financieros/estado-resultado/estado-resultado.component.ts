@@ -67,7 +67,7 @@ export class EstadoResultadoComponent implements OnInit {
   today: any;
   tomorrow: any;
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 
@@ -469,7 +469,7 @@ export class EstadoResultadoComponent implements OnInit {
       if (this.permisions[0].exportar == "0") {
         this.toastr.info("Usuario no tiene permiso para exportar");
       } else {
-        // this.mensajeSppiner = "Generando Archivo Excel..."; 
+        // this.mensajeSpinner = "Generando Archivo Excel..."; 
         // this.lcargando.ctlSpinner(true); 
 
         // let data = {
@@ -522,7 +522,7 @@ export class EstadoResultadoComponent implements OnInit {
     }
     if(this.periodoVisualizacion=='ANUAL'){
    
-      this.mensajeSppiner = "Generando Archivo Excel..."; 
+      this.mensajeSpinner = "Generando Archivo Excel..."; 
       this.lcargando.ctlSpinner(true); 
       let data = {
         "fecha_desde":moment(this.fromDatePicker).format('YYYY-MM-DD'),

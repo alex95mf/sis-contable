@@ -179,7 +179,7 @@ export class DiscapacidadComponent implements OnInit {
   fillCatalog() {
     // console.log('Catalogo');
     // this.lcargando.ctlSpinner(true);
-    // this.mensajeSppiner = "Cargando Catalogs";
+    // this.mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'REN_DISCAPACIDAD'",
     };

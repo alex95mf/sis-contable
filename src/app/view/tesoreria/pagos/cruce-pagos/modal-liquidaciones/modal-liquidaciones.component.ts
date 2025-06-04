@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./modal-liquidaciones.component.scss']
 })
 export class ModalLiquidacionesComponent implements OnInit {
-  mensajeSppiner: string = "Cargnado...";
+  mensajeSpinner: string = "Cargnado...";
   @ViewChild(CcSpinerProcesarComponent, { static: false}) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -175,7 +175,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   }
 
   cargarLiquidaciones(firstload: boolean){
-    this.mensajeSppiner = "Cargando títulos pendientes...";
+    this.mensajeSpinner = "Cargando títulos pendientes...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -306,7 +306,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   }
 
   cargarConvenios(firstload: boolean) {
-    this.mensajeSppiner = "Cargando deudas de convenios...";
+    this.mensajeSpinner = "Cargando deudas de convenios...";
     this.lcargando.ctlSpinner(true);
 
     let dataCO = {
@@ -434,7 +434,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   }
 
   cargarConveniosAT(firstload: boolean) {
-    this.mensajeSppiner = "Cargando deudas de convenios de arriendo de terreno...";
+    this.mensajeSpinner = "Cargando deudas de convenios de arriendo de terreno...";
     this.lcargando.ctlSpinner(true);
 
     let dataCOTE = {

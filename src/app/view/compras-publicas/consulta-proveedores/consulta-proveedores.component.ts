@@ -20,7 +20,7 @@ standalone: false,
 })
 export class ConsultaProveedoresComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -125,7 +125,7 @@ export class ConsultaProveedoresComponent implements OnInit {
 
   exportarExcel = () => {
     let excelData = []
-    this.mensajeSppiner = "Descargando Listado de Proveedores"
+    this.mensajeSpinner = "Descargando Listado de Proveedores"
     this.lcargando.ctlSpinner(true)
     this.mdlSrv.getProveedores({ params: { filter: this.filter } }).subscribe(
       (res: any) => {
@@ -186,7 +186,7 @@ export class ConsultaProveedoresComponent implements OnInit {
   }
 
   cargarProveedores(inicial: boolean) {
-    this.mensajeSppiner = "Cargando lista de Proveedores...";
+    this.mensajeSpinner = "Cargando lista de Proveedores...";
     this.lcargando.ctlSpinner(true);
 
     // if( this.filter.tipo_documento == undefined) {

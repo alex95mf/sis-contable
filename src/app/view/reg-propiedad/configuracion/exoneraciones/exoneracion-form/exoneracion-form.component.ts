@@ -15,7 +15,7 @@ standalone: false,
   styleUrls: ['./exoneracion-form.component.scss']
 })
 export class ExoneracionFormComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static:false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -137,7 +137,7 @@ export class ExoneracionFormComponent implements OnInit {
   }
 
   cargarConceptos() {
-    this.mensajeSppiner = 'Cargando Conceptos'
+    this.mensajeSpinner = 'Cargando Conceptos'
     this.exoneracionesSrv.getConceptos().subscribe(
       (res: any) => {
         res.data.forEach(e => {
@@ -156,7 +156,7 @@ export class ExoneracionFormComponent implements OnInit {
 
   getExoneracion(data) {
     console.log(this.exoneracionList);
-    this.mensajeSppiner = "Obteniendo exoneracion...";
+    this.mensajeSpinner = "Obteniendo exoneracion...";
     this.lcargando.ctlSpinner(true);
     this.exoneracionesSrv.getExoneracion(data).subscribe(
       (res: any) => {
@@ -273,7 +273,7 @@ export class ExoneracionFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
         if (result.isConfirmed) {
-            this.mensajeSppiner = "Guardando exoneracion...";
+            this.mensajeSpinner = "Guardando exoneracion...";
             this.lcargando.ctlSpinner(true);
 
             let data = {
@@ -343,7 +343,7 @@ export class ExoneracionFormComponent implements OnInit {
             confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-          this.mensajeSppiner = "Guardando arancel..."
+          this.mensajeSpinner = "Guardando arancel..."
           this.lcargando.ctlSpinner(true);
           let data = {
             exoneracion: {
@@ -409,7 +409,7 @@ export class ExoneracionFormComponent implements OnInit {
     }
    
    
-    this.mensajeSppiner = "Buscando detalles..."
+    this.mensajeSpinner = "Buscando detalles..."
     this.lcargando.ctlSpinner(true);
 
     this.exoneracionesSrv.getConceptoDetalles(data).subscribe(

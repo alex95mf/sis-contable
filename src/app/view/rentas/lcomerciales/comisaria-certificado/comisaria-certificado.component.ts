@@ -17,7 +17,7 @@ export class ComisariaCertificadoComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = "Certificación de no adeudar";
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   vmButtons: any[] = [];
   dataUser: any;
@@ -114,7 +114,7 @@ export class ComisariaCertificadoComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.msgSpinner = "Cargando Catalogs";
+    this.mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'DOCUMENTO'",
     };
@@ -151,7 +151,7 @@ export class ComisariaCertificadoComponent implements OnInit {
     if(this.NoDocumento==undefined || this.NoDocumento==""){
       this.toastr.info('Debe ingresar un No Documento');
     }else{
-      this.msgSpinner = "Buscando contribuyente...";
+      this.mensajeSpinner = "Buscando contribuyente...";
     this.lcargando.ctlSpinner(true);
     if (!this.NoDocumento) {
       this.filter['num_documento'] = 'x'
@@ -291,7 +291,7 @@ export class ComisariaCertificadoComponent implements OnInit {
   verificarDeudaMunicipio(){
     this.disabledBuscarContri= true;
     this.lcargando.ctlSpinner(true);
-    this.msgSpinner = "Verificando deuda...";
+    this.mensajeSpinner = "Verificando deuda...";
     let data = {
       id_contribuyente: this.id_contribuyente,
     }
@@ -319,7 +319,7 @@ export class ComisariaCertificadoComponent implements OnInit {
   verificarDeudaPredio(){
     this.disabledBuscarContri= true;
     this.lcargando.ctlSpinner(true);
-    this.msgSpinner = "Verificando deuda...";
+    this.mensajeSpinner = "Verificando deuda...";
     let data = {
       id_contribuyente: this.id_contribuyente,
     }

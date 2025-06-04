@@ -40,7 +40,7 @@ standalone: false,
   styleUrls: ['./ingreso-bodega.component.scss']
 })
 export class IngresoBodegaComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)
@@ -1501,7 +1501,7 @@ export class IngresoBodegaComponent implements OnInit {
 
   saveOrder() {
 
-    this.mensajeSppiner = "Verificando período contable";
+    this.mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let dat = {
       "anio": Number(moment(this.fechaDocumento).format('YYYY')),
@@ -1511,7 +1511,7 @@ export class IngresoBodegaComponent implements OnInit {
 
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
-        this.mensajeSppiner = "Guardando ingreso...";
+        this.mensajeSpinner = "Guardando ingreso...";
         this.lcargando.ctlSpinner(true);
         let prefict = this.dataUser.permisos_doc.filter(e => e.fk_documento == 5);
         let filter = prefict[0]['filtros'].split(',');
@@ -2029,7 +2029,7 @@ export class IngresoBodegaComponent implements OnInit {
 
   async aprobacion() {
 
-    this.mensajeSppiner = "Verificando período contable";
+    this.mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let data = {
       "anio": Number(moment(this.fechaDocumento).format('YYYY')),
@@ -2040,7 +2040,7 @@ export class IngresoBodegaComponent implements OnInit {
           try {
             if (res["data"][0].estado !=='C') {
               this.lcargando.ctlSpinner(true)
-              this.mensajeSppiner = 'Validando datos'
+              this.mensajeSpinner = 'Validando datos'
               let message = ''
               let id_productos = []
               this.dataProducto.forEach((producto: any) => {
@@ -2126,7 +2126,7 @@ export class IngresoBodegaComponent implements OnInit {
   editar() {
 
 
-  this.mensajeSppiner = "Verificando período contable";
+  this.mensajeSpinner = "Verificando período contable";
   this.lcargando.ctlSpinner(true);
   let dat = {
     "anio": Number(moment(this.fechaDocumento).format('YYYY')),
@@ -2137,7 +2137,7 @@ export class IngresoBodegaComponent implements OnInit {
     /* Validamos si el periodo se encuentra aperturado */
     if (res["data"][0].estado !== 'C') {
 
-      this.mensajeSppiner = "Editando ingreso";
+      this.mensajeSpinner = "Editando ingreso";
       this.lcargando.ctlSpinner(true);
 
       let prefict = this.dataUser.permisos_doc.filter(e => e.fk_documento == 5);

@@ -26,7 +26,7 @@ standalone: false,
 export class GeneracionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de Liquidación (Locales Comerciales)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -118,7 +118,7 @@ export class GeneracionComponent implements OnInit {
   ) {
     this.commonVarService.selectListLiqPURen.asObservable().subscribe(
       (res) => {
-        //this.msgSpinner = 'Cargando datos de la Liquidación...';
+        //this.mensajeSpinner = 'Cargando datos de la Liquidación...';
         //this.lcargando.ctlSpinner(true)
         this.restoreForm();
         this.formReadOnly = true;
@@ -142,7 +142,7 @@ export class GeneracionComponent implements OnInit {
           }
         });
         if (this.liquidacion.fk_orden_inspeccion && this.liquidacion.fk_orden_inspeccion != 0) {
-          this.msgSpinner = 'Cargando datos de la Liquidación...';
+          this.mensajeSpinner = 'Cargando datos de la Liquidación...';
           this.lcargando.ctlSpinner(true);
           let data = {
             inspeccion: this.liquidacion.fk_orden_inspeccion
@@ -279,7 +279,7 @@ export class GeneracionComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
@@ -418,7 +418,7 @@ export class GeneracionComponent implements OnInit {
   }
 
   getConceptos() {
-    this.msgSpinner = 'Obteniendo Conceptos...';
+    this.mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     let data = {
       id_concepto: 48
@@ -522,7 +522,7 @@ export class GeneracionComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.msgSpinner = 'Generando Liquidación...';
+          this.mensajeSpinner = 'Generando Liquidación...';
           this.lcargando.ctlSpinner(true);
           this.liquidacion.fk_contribuyente = this.contribuyenteActive.id_cliente;
           this.liquidacion.fk_orden_inspeccion = this.ordenActive.id_inspeccion_orden;

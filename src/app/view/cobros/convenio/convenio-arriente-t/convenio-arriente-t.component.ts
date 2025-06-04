@@ -116,8 +116,8 @@ export class ConvenioArrienteTComponent implements OnInit {
 
   exoneraciones: any = [];
 
-  msgSpinner: string;
-  mensajeSppiner: string
+  mensajeSpinner: string;
+  mensajeSpinner: string
   dataUser: any;
   permissions: any;
   vmButtons = [];
@@ -188,7 +188,7 @@ export class ConvenioArrienteTComponent implements OnInit {
 
         if(res['valid'] == 120){
           console.log(res);
-          this.msgSpinner = 'Cargando Propiedades...';
+          this.mensajeSpinner = 'Cargando Propiedades...';
           this.lcargando.ctlSpinner(true);
           this.selectContibuyente(res);
           this.conceptos.fk_contribuyente = res;
@@ -218,7 +218,7 @@ export class ConvenioArrienteTComponent implements OnInit {
     this.commonVarService.selectRecDocumento.asObservable().subscribe(
       (res) => {
 
-        this.msgSpinner = 'Cargando convenio...';
+        this.mensajeSpinner = 'Cargando convenio...';
         this.lcargando.ctlSpinner(true);
 
         this.formReadOnly = true;
@@ -532,7 +532,7 @@ export class ConvenioArrienteTComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.msgSpinner = 'Generando convenio...';
+        this.mensajeSpinner = 'Generando convenio...';
         this.lcargando.ctlSpinner(true);
         this.arriendoTerreno.fk_contribuyente = this.contribuyenteActive.id_cliente;
         this.arriendoTerreno['cant_convenios'] = this.contribuyenteActive.cant_convenios
@@ -1105,7 +1105,7 @@ export class ConvenioArrienteTComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
 

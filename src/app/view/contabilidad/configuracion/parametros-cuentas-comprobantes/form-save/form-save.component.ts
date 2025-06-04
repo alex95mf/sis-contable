@@ -15,7 +15,7 @@ standalone: false,
 })
 export class FormSaveComponent implements OnInit {
 
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @Input() isNew: any;
@@ -236,7 +236,7 @@ export class FormSaveComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
       }).then((result) => {
           if (result.isConfirmed) {
-              this.msgSpinner = "Guardando parametros...";
+              this.mensajeSpinner = "Guardando parametros...";
               this.lcargando.ctlSpinner(true);
 
               this.service.setParametros(this.parametro).subscribe(
@@ -284,7 +284,7 @@ export class FormSaveComponent implements OnInit {
 
 
   actualizarParametros(){
-    this.msgSpinner = "Actualizando parametros...";
+    this.mensajeSpinner = "Actualizando parametros...";
     this.lcargando.ctlSpinner(true);
     this.service.updateParametros(this.parametro).subscribe(
       (res)=>{
@@ -333,7 +333,7 @@ export class FormSaveComponent implements OnInit {
     modal.componentInstance.validar = valor;
   }
   getEventosContables(){
-    this.msgSpinner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.service.getEventosContables().subscribe((result: any) => {
       console.log(result);

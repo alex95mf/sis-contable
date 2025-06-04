@@ -15,7 +15,7 @@ standalone: false,
 })
 export class DecrementoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
   listaSolicitudesAtribucion: Array<any> = [];
   masterSelected: boolean = false;
 
@@ -127,7 +127,7 @@ export class DecrementoComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Bienes'
+      this.mensajeSpinner = 'Cargando Bienes'
       let response = await this.apiService.getBienes({programa: this.programa, periodo: this.periodo, codigo_presupuesto: this.cod_presupuesto});
       response.map((item: any) => Object.assign(item, { 
         check: (item.estado !== 'I') ? this.masterSelected : false,
@@ -158,7 +158,7 @@ export class DecrementoComponent implements OnInit {
  
       this.lcargando.ctlSpinner(true)
       try {
-        this.msgSpinner = 'Duplicando Bien'
+        this.mensajeSpinner = 'Duplicando Bien'
         let response: Array<any> = await this.apiService.duplicarBien({
           bien: bien,
           codigo_presupuesto: this.cod_presupuesto,

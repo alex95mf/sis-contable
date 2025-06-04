@@ -26,7 +26,7 @@ export class AprobacionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
  
   fTitle = "Gestión (Ordenenes de Pago)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   vmButtonsI:any = [];
   dataUser: any;
@@ -220,7 +220,7 @@ export class AprobacionComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.msgSpinner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -281,7 +281,7 @@ export class AprobacionComponent implements OnInit {
       
       }
     }
-    this.msgSpinner = "Generando reporte Excel...";
+    this.mensajeSpinner = "Generando reporte Excel...";
     this.lcargando.ctlSpinner(true);
     //this.apiSrv.getRecDocumentosExport(data).subscribe(
       this.apiSrv.getRecDocumentosAprobar(data).subscribe( 
@@ -338,7 +338,7 @@ export class AprobacionComponent implements OnInit {
     let data = {
       params: "'OP_CONCEPTOS','PAG_TIPO_DESEMBOLSO','REC_TIPO_ORDENP'",
     };
-    this.msgSpinner = "Buscando concepto...";
+    this.mensajeSpinner = "Buscando concepto...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogoConcepto(data).subscribe(
       
@@ -366,7 +366,7 @@ export class AprobacionComponent implements OnInit {
   }
   cargarOrdenesPago(flag: boolean = false) {
     
-    this.msgSpinner = "Cargando Ordenes de Pago...";
+    this.mensajeSpinner = "Cargando Ordenes de Pago...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1

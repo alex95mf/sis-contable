@@ -24,7 +24,7 @@ export class FormComisariaComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   fTitle = "Ingreso de formulario de Inspección (Comisaría)";
-  msgSpinner: string = "";
+  mensajeSpinner: string = "";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -152,7 +152,7 @@ export class FormComisariaComponent implements OnInit {
 
         // get vehiculos para saber si se puede desactivar introductor
 
-        this.msgSpinner = "Cargando vehiculos por inspeccion...";
+        this.mensajeSpinner = "Cargando vehiculos por inspeccion...";
         // this.lcargando.ctlSpinner(true);
         this.apiService.getVehiculosByInspeccion({id_inspeccion_res_cab: this.inspeccion.id_inspeccion_res}).subscribe(
           (res) => {
@@ -234,7 +234,7 @@ export class FormComisariaComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
@@ -300,7 +300,7 @@ export class FormComisariaComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.msgSpinner = 'Obteniendo Recursos...';
+    this.mensajeSpinner = 'Obteniendo Recursos...';
     this.lcargando.ctlSpinner(true);
     let data = {
       params: "'FORM_INSPEC_COMISARIA', 'CAT_SECTOR', 'REN_TIPO_NEG', 'REN_GRUPO_NEG'"
@@ -472,7 +472,7 @@ export class FormComisariaComponent implements OnInit {
           confirmButtonColor: '#4DBD74',
         }).then((result) => {
           if (result.isConfirmed) {
-            this.msgSpinner = 'Guardando datos de la Inspección...';
+            this.mensajeSpinner = 'Guardando datos de la Inspección...';
             this.lcargando.ctlSpinner(true);
             this.inspeccion.aprueba = this.aprueba ? "A" : "F";
             let data = {
@@ -571,7 +571,7 @@ export class FormComisariaComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.msgSpinner = 'Habilitando formulario...';
+        this.mensajeSpinner = 'Habilitando formulario...';
         this.lcargando.ctlSpinner(true);
         this.apiService.habilitar(id).subscribe(
           (res)=>{
@@ -628,7 +628,7 @@ export class FormComisariaComponent implements OnInit {
   }
 
   cargaFoto(archivos) {
-    this.msgSpinner = 'Cargando fotos...';
+    this.mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 5) {
       for (let i = 0; i < archivos.length; i++) {

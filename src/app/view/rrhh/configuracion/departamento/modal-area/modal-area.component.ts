@@ -16,7 +16,7 @@ standalone: false,
 })
 export class ModalAreaComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
@@ -103,7 +103,7 @@ export class ModalAreaComponent implements OnInit {
 
 
   cargarAreas() {
-    this.mensajeSppiner = "Cargando listado de Áreas...";
+    this.mensajeSpinner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

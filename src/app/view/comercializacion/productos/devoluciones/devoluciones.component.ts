@@ -21,7 +21,7 @@ standalone: false,
 })
 export class DevolucionesComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataBuy: any = { motivo_dev: 0, tipo_pago: "Tipo", forma_pago: "Forma", estado_dev: "En proceso", asesor: { nombre: "Nombre acesor" }, client: { cupo_credito: "0.00", saldo_credito: "0.00", razon_social: "Nombre cliente" }, name_doc: "Tipo documento" };

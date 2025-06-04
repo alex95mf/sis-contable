@@ -27,7 +27,7 @@ standalone: false,
 export class InspeccionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = 'Gestión de Locales Comerciales'
-  msgSpinner: string;
+  mensajeSpinner: string;
   dataUser: any;
   permissions: any;
   vmButtons: any[] = []
@@ -237,7 +237,7 @@ export class InspeccionComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {
@@ -266,7 +266,7 @@ export class InspeccionComponent implements OnInit {
   }
 
   async cargarCatalogo() {
-    this.msgSpinner = 'Cargando Catalogos'
+    this.mensajeSpinner = 'Cargando Catalogos'
     // this.lcargando.ctlSpinner(true)
 
     try {
@@ -343,7 +343,7 @@ export class InspeccionComponent implements OnInit {
   }
 
   async getLocales() {
-    this.msgSpinner = 'Cargando Locales'
+    this.mensajeSpinner = 'Cargando Locales'
     try {
       let res = await this.apiService.getLocales({ params: { filter: this.filter, paginate: this.paginate } })
       this.paginate.length = res.total
@@ -360,7 +360,7 @@ export class InspeccionComponent implements OnInit {
   async exportarExcel() {
     let excelData = []
 
-    this.msgSpinner = 'Exportando Locales Comerciales'
+    this.mensajeSpinner = 'Exportando Locales Comerciales'
     this.lcargando.ctlSpinner(true)
     try {
       //
@@ -432,7 +432,7 @@ export class InspeccionComponent implements OnInit {
    * @param local 
    */
   viewLocal(local: any) {
-    this.msgSpinner = 'Obteniendo datos de Local'
+    this.mensajeSpinner = 'Obteniendo datos de Local'
     this.lcargando.ctlSpinner(true)
     this.apiService.getLocal({ local: local.id_local }).subscribe(
       (res: any) => {
@@ -471,7 +471,7 @@ export class InspeccionComponent implements OnInit {
     Object.assign(this.local, local)
     this.local.inspecciones = []
 
-    this.msgSpinner = 'Cargando Inspecciones...';
+    this.mensajeSpinner = 'Cargando Inspecciones...';
     this.lcargando.ctlSpinner(true);
     
     try {

@@ -22,7 +22,7 @@ standalone: false,
 })
 export class CarteraProveedoresComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   vmButtons: any;
@@ -223,7 +223,7 @@ export class CarteraProveedoresComponent implements OnInit {
     let dateFrom = moment(this.fromDatePicker).format('YYYYMMDD');
     let dateTo = moment(this.toDatePicker).format('YYYYMMDD');
 
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.estProv.ObtenerCarteraProveedor(dateFrom, dateTo, this.id_proveedor).subscribe(response => {
 

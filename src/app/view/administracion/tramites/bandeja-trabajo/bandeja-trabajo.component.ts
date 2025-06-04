@@ -28,7 +28,7 @@ export class BandejaTrabajoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild('retornarModal') retornarModal!: TemplateRef<any>; // Referencia al modal
   fTitle = "Bandeja Trabajo (Trámites)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;

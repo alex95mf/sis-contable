@@ -14,7 +14,7 @@ standalone: false,
   styleUrls: ['./global-table.component.scss']
 })
 export class GlobalTableComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

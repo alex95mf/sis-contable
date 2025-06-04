@@ -15,7 +15,7 @@ standalone: false,
   styleUrls: ['./modal-grupos.component.scss']
 })
 export class ModalGruposComponent implements OnInit {
-  mensajeSppiner: string = "Cargando";
+  mensajeSpinner: string = "Cargando";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -128,7 +128,7 @@ export class ModalGruposComponent implements OnInit {
    }
 
   cargarSubgrupos(){
-    this.mensajeSppiner = "Cargando";
+    this.mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true);
     console.log(this.claseSelect)
    // let id = this.claseSelect.id_grupo_productos

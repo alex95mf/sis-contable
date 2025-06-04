@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./rubros.component.scss']
 })
 export class RubrosComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -116,7 +116,7 @@ export class RubrosComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSppiner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -151,7 +151,7 @@ export class RubrosComponent implements OnInit {
   }
 
   cargarConceptos() {
-    this.mensajeSppiner = "Cargando Rubros...";
+    this.mensajeSpinner = "Cargando Rubros...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -230,7 +230,7 @@ export class RubrosComponent implements OnInit {
   //       confirmButtonColor: '#4DBD74',
   //     }).then((result) => {
   //       if (result.isConfirmed) {
-  //         this.mensajeSppiner = "Eliminando concepto..."
+  //         this.mensajeSpinner = "Eliminando concepto..."
   //         this.lcargando.ctlSpinner(true);
   //         this.conceptosSrv.deleteConcepto(id).subscribe(
   //           (res) => {

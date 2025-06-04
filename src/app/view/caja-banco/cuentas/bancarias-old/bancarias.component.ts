@@ -37,7 +37,7 @@ export class BancariasComponent implements OnInit {
   dataAccBanks: any;
   vmButtons: any;
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   constructor(
@@ -171,7 +171,7 @@ export class BancariasComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
     };
-    this.mensajeSppiner = "Cargando";
+    this.mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true);
     this.accSrv.getBanks().subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -255,7 +255,7 @@ export class BancariasComponent implements OnInit {
       accion: "Creación de nueva cuenta bancaria",
       id_controlador: myVarGlobals.fCuentaBancos
     }
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.accSrv.saveAccount(data).subscribe(res => {
       this.toastr.success(res['message']);
@@ -295,7 +295,7 @@ export class BancariasComponent implements OnInit {
       accion: "Actualización de nueva cuenta bancaria",
       id_controlador: myVarGlobals.fCuentaBancos
     }
-    this.mensajeSppiner = "Actualizando...";
+    this.mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.accSrv.updatedAccount(data).subscribe(res => {
       this.toastr.success(res['message']);

@@ -17,7 +17,7 @@ standalone: false,
 export class ModalProductoDetallesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = 'Detalles de Producto';
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Array<any>;
   formReadonly: boolean = false
 
@@ -90,7 +90,7 @@ export class ModalProductoDetallesComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Recuperando Detalles de Producto'
+      this.mensajeSpinner = 'Recuperando Detalles de Producto'
       let response: any = await this.apiService.getProducto(this.doc_detalle_producto.fk_product, { documento: this.documento });
       // console.log(response)
       this.producto = response
@@ -126,7 +126,7 @@ export class ModalProductoDetallesComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Almacenando Detalles'
+      this.mensajeSpinner = 'Almacenando Detalles'
 
       let response = await this.apiService.setDetalles({documento: this.documento, producto: this.producto, detalles: this.detalles});
       this.detalles = response

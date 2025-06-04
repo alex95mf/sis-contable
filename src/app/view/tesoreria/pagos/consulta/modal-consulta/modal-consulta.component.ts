@@ -15,7 +15,7 @@ standalone: false,
   styleUrls: ['./modal-consulta.component.scss']
 })
 export class ModalConsultaComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -279,7 +279,7 @@ export class ModalConsultaComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
       }).then((result) => {
           if (result.isConfirmed) {
-              this.mensajeSppiner = "Gestionando Orden de Pago...";
+              this.mensajeSpinner = "Gestionando Orden de Pago...";
               this.lcargando.ctlSpinner(true);
   
               let data = {

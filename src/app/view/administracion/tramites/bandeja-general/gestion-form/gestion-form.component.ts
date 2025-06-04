@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./gestion-form.component.scss']
 })
 export class GestionFormComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -290,7 +290,7 @@ export class GestionFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
       }).then((result) => {
           if (result.isConfirmed) {
-              this.mensajeSppiner = "Gestionando Trámite...";
+              this.mensajeSpinner = "Gestionando Trámite...";
               this.lcargando.ctlSpinner(true);
 
               let data = {
@@ -370,7 +370,7 @@ export class GestionFormComponent implements OnInit {
   }
   uploadFile() {
     console.log('sube archivo')
-    this.mensajeSppiner = "Guardando Archivo...";
+    this.mensajeSpinner = "Guardando Archivo...";
     this.lcargando.ctlSpinner(true);
     let data = {
       module: this.permissions.id_modulo,

@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ["./show-concepto.component.scss"],
 })
 export class ShowConceptoComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)

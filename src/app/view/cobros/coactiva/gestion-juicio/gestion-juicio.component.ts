@@ -24,7 +24,7 @@ export class GestionJuicioComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   fTitle: string = "Emisión de Juicios";
-  msgSpinner: string;
+  mensajeSpinner: string;
   dataUser: any;
   permissions: any;
   vmButtons: Botonera[] = []
@@ -90,7 +90,7 @@ export class GestionJuicioComponent implements OnInit {
           return
         }
 
-        this.msgSpinner = "Procesando expedientes"
+        this.mensajeSpinner = "Procesando expedientes"
         this.lcargando.ctlSpinner(true)
         console.log({ expedientes: procesados })
         this.apiService.setJuicios({ expedientes: procesados, fecha_emision: this.fecha_emision }).subscribe(
@@ -111,7 +111,7 @@ export class GestionJuicioComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
 
@@ -146,7 +146,7 @@ export class GestionJuicioComponent implements OnInit {
   }
 
   getExpedientes() {
-    this.msgSpinner = 'Cargando Expedientes'
+    this.mensajeSpinner = 'Cargando Expedientes'
     this.lcargando.ctlSpinner(true)
     this.apiService.getExpedientes({ params: {filter: this.filter, paginate: this.paginate} }).subscribe(
       (res: any) => {

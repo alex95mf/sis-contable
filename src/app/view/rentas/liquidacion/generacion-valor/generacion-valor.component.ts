@@ -27,7 +27,7 @@ standalone: false,
 export class GeneracionValorComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de Liquidación (Espectáculos Públicos)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -118,7 +118,7 @@ export class GeneracionValorComponent implements OnInit {
     this.commonVarService.selectListLiqPURen.asObservable().subscribe(
     (res) => {
       console.log(res)
-      //this.msgSpinner = 'Cargando datos de la Liquidación...';
+      //this.mensajeSpinner = 'Cargando datos de la Liquidación...';
       //this.lcargando.ctlSpinner(true)
       this.restoreForm();
       this.formReadOnly = true;
@@ -286,7 +286,7 @@ export class GeneracionValorComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -384,7 +384,7 @@ export class GeneracionValorComponent implements OnInit {
   }
 
   getConceptos() {
-    this.msgSpinner = 'Obteniendo Conceptos...';
+    this.mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptos().subscribe(
       res => {
@@ -469,7 +469,7 @@ export class GeneracionValorComponent implements OnInit {
         if (result.isConfirmed) {
 
 
-          this.msgSpinner = 'Verificando período contable...';
+          this.mensajeSpinner = 'Verificando período contable...';
           this.lcargando.ctlSpinner(true);
           let datos = {
             "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -480,7 +480,7 @@ export class GeneracionValorComponent implements OnInit {
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
 
-                  this.msgSpinner = 'Generando Liquidación...';
+                  this.mensajeSpinner = 'Generando Liquidación...';
                   this.lcargando.ctlSpinner(true);
                   this.liquidacion.fk_contribuyente = this.contribuyenteActive.id_cliente;
                   // this.liquidacion.fk_concepto = this.concepto.id;
@@ -675,7 +675,7 @@ export class GeneracionValorComponent implements OnInit {
     let data = {
       concepto: 'EP'
     }
-    this.msgSpinner = 'Validadando Sta...';
+    this.mensajeSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
 
     this.apiService.getStaConcepto(data).subscribe(

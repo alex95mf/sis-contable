@@ -19,7 +19,7 @@ standalone: false,
 export class AperturaCajaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   fTitle = "Apertura de caja";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -164,7 +164,7 @@ export class AperturaCajaComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -196,7 +196,7 @@ export class AperturaCajaComponent implements OnInit {
   
   getCatalogos() {
 
-    this.msgSpinner = 'Cargando Catalogos...';
+    this.mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -235,7 +235,7 @@ export class AperturaCajaComponent implements OnInit {
   }
 
   getCajasData() {
-    this.msgSpinner = 'Cargando Cajas del sistema...';
+    this.mensajeSpinner = 'Cargando Cajas del sistema...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -259,7 +259,7 @@ export class AperturaCajaComponent implements OnInit {
   verificarCaja() {
     // funcion para revisar si la caja seleccionada ya ha sido abierta ese dia
 
-    this.msgSpinner = 'Verificando si la caja ya ha sido abierta...';
+    this.mensajeSpinner = 'Verificando si la caja ya ha sido abierta...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -348,7 +348,7 @@ export class AperturaCajaComponent implements OnInit {
   }
 
   setCajaActiva(id) {
-    this.msgSpinner = 'Obteniendo Caja Activa...';
+    this.mensajeSpinner = 'Obteniendo Caja Activa...';
 
     // funcion necesario solo porque en la sesion se maneja solo el id no toda la info de la caja activa
 
@@ -432,7 +432,7 @@ export class AperturaCajaComponent implements OnInit {
         confirmButtonColor: '#20A8D8',
       }).then( (res) => {
         if (res.isConfirmed){
-          this.msgSpinner = "Verificando período contable";
+          this.mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let dat = {
             "anio": Number(moment(this.caja_dia.fecha).format('YYYY')),
@@ -467,7 +467,7 @@ export class AperturaCajaComponent implements OnInit {
         confirmButtonColor: '#20A8D8',
       }).then((result)=> {
         if (result.isConfirmed) {
-          this.msgSpinner = "Verificando período contable";
+          this.mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let dat = {
             "anio": Number(moment(this.caja_dia.fecha).format('YYYY')),
@@ -508,7 +508,7 @@ export class AperturaCajaComponent implements OnInit {
 
 
 
-    this.msgSpinner = 'Iniciando caja...';
+    this.mensajeSpinner = 'Iniciando caja...';
     this.lcargando.ctlSpinner(true);
     
     // LLENA ARRAY MONEDAS DE CAJA_DIA

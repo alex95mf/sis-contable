@@ -16,7 +16,7 @@ export class ModalExoneracionesComponent implements OnInit {
   @Input() codigo_concepto: any;
   @Input() exoneracionesSelect: any = [];
   @Input() configuracion: any;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[];
 
   exoneraciones: any = [];
@@ -75,7 +75,7 @@ export class ModalExoneracionesComponent implements OnInit {
   }
 
   cargarExoneraciones() {
-    this.msgSpinner = "Cargando lista de Exoneraciones..."
+    this.mensajeSpinner = "Cargando lista de Exoneraciones..."
     this.lcargando.ctlSpinner(true);
 
     let data = {concepto: {codigo: 'PR'}, params: { filter: this.configuracion}}

@@ -24,7 +24,7 @@ export class CargaComponent implements OnInit {
   dtElement: DataTableDirective;
   dtOptions: any = {};
   dtTrigger = new Subject();
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   arrayPersonal: Array<any> = [];
   arrayData:any;
   empleado: any = 0;

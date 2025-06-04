@@ -15,7 +15,7 @@ export class FolderDigitalComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Input() contribuyente: number;
   @Input() archivos: Array<any> = [];
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   cmb_tipo_archivo: Array<any> = [];
   tipoArchivoSelected: any;
@@ -51,7 +51,7 @@ export class FolderDigitalComponent implements OnInit {
     if (!this.cmb_tipo_archivo.length) {
       this.tipoArchivoLoading = true
       try {
-        this.msgSpinner = 'Cargando Catalogos'
+        this.mensajeSpinner = 'Cargando Catalogos'
         let catalogos = await this.apiService.getCatalogoAsync();
         console.log(catalogos)
         this.cmb_tipo_archivo = catalogos;
@@ -90,7 +90,7 @@ export class FolderDigitalComponent implements OnInit {
   async uploadArchivo() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Archivo'
+      this.mensajeSpinner = 'Cargando Archivo'
       this.folderDigitalForm.fk_contribuyente = this.contribuyente
       this.folderDigitalForm.tipo_archivo = this.tipoArchivoSelected
 
@@ -162,7 +162,7 @@ export class FolderDigitalComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.msgSpinner = 'Eliminando documento anexo...'
+        this.mensajeSpinner = 'Eliminando documento anexo...'
         let response = await this.apiService.eliminarArchivo({ documento })
         console.log(response)
         //

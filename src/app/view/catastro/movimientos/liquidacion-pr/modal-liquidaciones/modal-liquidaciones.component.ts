@@ -14,7 +14,7 @@ standalone: false,
 })
 export class ModalLiquidacionesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[];
 
   filter: any = {
@@ -95,7 +95,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   async getLiquidaciones() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Liquidaciones'
+      this.mensajeSpinner = 'Cargando Liquidaciones'
       let liquidaciones = await this.apiService.getLiquidaciones({params: { filter: this.filter, paginate: this.paginate }})
       console.log(liquidaciones)
       this.paginate.length = liquidaciones.total

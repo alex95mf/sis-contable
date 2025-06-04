@@ -28,7 +28,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild("print") print!: ElementRef;
   fTitle = "Anticipo Precobrado, depósito bancario";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -217,13 +217,13 @@ export class AnticipoPrecobradoComponent implements OnInit {
             mercado: this.mercados.find(m => m.id == res.fk_mercado)
           } */
           
-          this.msgSpinner = 'Cargando Puestos de Mercado'
+          this.mensajeSpinner = 'Cargando Puestos de Mercado'
           this.puestos_filter = this.puestos.filter(e => e.fk_mercado == res.fk_mercado)
        
           this.documento.puesto = res.fk_mercado_puesto;
 
           if (res.fk_documento_2 && res.fk_documento_2 != 0) {
-            this.msgSpinner = 'Cargando datos de la Garantía...';
+            this.mensajeSpinner = 'Cargando datos de la Garantía...';
             this.lcargando.ctlSpinner(true);
             let data = {
               inspeccion: res.fk_documento_2
@@ -399,7 +399,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -436,7 +436,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
     let data = {
       params: "'REN_MERCADO'"
     }
-    this.msgSpinner = 'Cargando datos de Mercados'
+    this.mensajeSpinner = 'Cargando datos de Mercados'
     this.lcargando.ctlSpinner(true)
     this.contSvr.getMercados(data).subscribe(
       res => {
@@ -475,7 +475,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
       mercado: this.documento.mercado
     }
     this.documento.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto
-    this.msgSpinner = 'Cargando Puestos de Mercado'
+    this.mensajeSpinner = 'Cargando Puestos de Mercado'
     this.lcargando.ctlSpinner(true)
     this.puestos = []
     this.apiSrv.getPuestos().subscribe(
@@ -529,7 +529,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.msgSpinner = 'Cargando Catalogos...';
+    this.mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -600,7 +600,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
 
   // no se usa ya que la sesion ahora maneja toda la caja activa, no solo el id
   getCajaActiva() {
-    this.msgSpinner = 'Obteniendo Caja Activa...';
+    this.mensajeSpinner = 'Obteniendo Caja Activa...';
     let id = this.cajaActiva.id_caja;
 
     // funcion necesario solo porque en la sesion se maneja solo el id no toda la info de la caja activa
@@ -621,7 +621,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
   }
 
   getConceptos() {
-    this.msgSpinner = 'Obteniendo Conceptos...';
+    this.mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -663,7 +663,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
   verificarCaja() {
     // funcion para revisar si la caja seleccionada ya ha sido abierta ese dia
 
-    this.msgSpinner = 'Verificando si la caja está activa...';
+    this.mensajeSpinner = 'Verificando si la caja está activa...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -690,7 +690,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
   }
 
   getLiquidaciones() {
-    this.msgSpinner = "Cargando lista de Liquidaciones...";
+    this.mensajeSpinner = "Cargando lista de Liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1003,7 +1003,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.msgSpinner = "Verificando período contable";
+          this.mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -1013,7 +1013,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
             
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-                this.msgSpinner = 'Generando Anticipo Precobrado...';
+                this.mensajeSpinner = 'Generando Anticipo Precobrado...';
                 this.lcargando.ctlSpinner(true);
                 this.documento.estado = "E";
                 this.documento.tipo_documento = this.concepto.codigo;
@@ -1130,7 +1130,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.msgSpinner = "Verificando período contable";
+          this.mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -1141,7 +1141,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
 
-              this.msgSpinner = 'Modificando Anticipo Precobrado...';
+              this.mensajeSpinner = 'Modificando Anticipo Precobrado...';
               this.lcargando.ctlSpinner(true);
               this.documento.estado = "E";
               this.documento.tipo_documento = this.concepto.codigo;

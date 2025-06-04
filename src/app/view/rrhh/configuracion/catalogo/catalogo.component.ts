@@ -26,7 +26,7 @@ standalone: false,
 export class CatalogoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild('txtTipo') txtTipo: HTMLInputElement;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
 
   formReadonly: boolean = true;
@@ -106,7 +106,7 @@ export class CatalogoComponent implements OnInit {
 
   async getListas() {
     try {
-      this.msgSpinner = 'Cargando Arbol'
+      this.mensajeSpinner = 'Cargando Arbol'
       const response = await this.apiService.getArbolNomina()
       console.log(response.data)
       // const estructura = response.data.replaceAll('child0','child').replaceAll('child2','child').replaceAll('child3','child').replaceAll('child4','child').replaceAll('child5','child').replaceAll('child','children')
@@ -150,7 +150,7 @@ export class CatalogoComponent implements OnInit {
 
   async getItemCatalogo(catalogo: CatalogoNom) {
     try {
-      this.msgSpinner = 'Cargando Data'
+      this.mensajeSpinner = 'Cargando Data'
       const response = await this.apiService.getItemCatalogo(catalogo.id_catalogo, {item: catalogo})
       console.log(response)
       // this.nuevoItemVista = false
@@ -163,7 +163,7 @@ export class CatalogoComponent implements OnInit {
 
   async setCatalogo() {
     try {
-      this.msgSpinner = 'Almacenando Catalogo'
+      this.mensajeSpinner = 'Almacenando Catalogo'
       const response = await this.apiService.setItemCatalogo({item: this.itemCatalogo})
       console.log(response)
       Swal.fire('Item Almacenado', '', 'success').then(() => this.limpiar())
@@ -175,7 +175,7 @@ export class CatalogoComponent implements OnInit {
 
   async updateCatalogo() {
     try {
-      this.msgSpinner = 'Actualizando Item'
+      this.mensajeSpinner = 'Actualizando Item'
       const response = await this.apiService.updateItemCatalogo(this.itemCatalogo.id_catalogo, {item: this.itemCatalogo})
       console.log(response)
       Swal.fire('Item Actualizado', '', 'success').then(() => this.limpiar())

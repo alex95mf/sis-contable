@@ -112,7 +112,7 @@ export class AdquisicionesComponent implements OnInit {
     })
   }
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 
@@ -643,7 +643,7 @@ export class AdquisicionesComponent implements OnInit {
     this.activof['id_controlador'] = myVarGlobals.fAdquisicion
     this.activof['accion'] = `Compra de activo fijo con número de documento ${this.activof['num_doc']}`;
 
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
    /*  console.log(this.activof); */
     this.adqSrv.saveActivo(this.activof).subscribe(res => {
@@ -684,7 +684,7 @@ export class AdquisicionesComponent implements OnInit {
     this.activof['id_controlador'] = myVarGlobals.fAdquisicion;
     this.activof['accion'] = `Actialización de activo fijo con número de documento ${this.activof['num_doc']}`;
 
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.adqSrv.updatedActivo(this.activof).subscribe(res => {
       localStorage.removeItem('Mod');

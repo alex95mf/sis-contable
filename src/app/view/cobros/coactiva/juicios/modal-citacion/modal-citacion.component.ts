@@ -17,7 +17,7 @@ standalone: false,
 export class ModalCitacionComponent implements OnInit {
   @Input() juicio: any
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   fTitle: string = 'Registrar Citación'
   vmButtons: any[] = []
 
@@ -89,7 +89,7 @@ export class ModalCitacionComponent implements OnInit {
   }
 
   cargarCatalogos() {
-    this.msgSpinner = 'Cargando datos'
+    this.mensajeSpinner = 'Cargando datos'
     this.lcargando.ctlSpinner(true)
     this.apiService.getCatalogs({ params: "'TIPO_NOTIFICADOR'"}).subscribe(
       (res: any) => {
@@ -126,7 +126,7 @@ export class ModalCitacionComponent implements OnInit {
       { observaciones: `${this.actuacion.observacion} | ${this.estados.find(e => e.id == this.actuacion.estado_c).label} | ${this.actuacion.fecha} | ${this.notificadores.find(e => e.value == this.actuacion.notificador).label}` }
     )
 
-    this.msgSpinner = 'Registrando Citacion'
+    this.mensajeSpinner = 'Registrando Citacion'
     this.lcargando.ctlSpinner(true)
     this.apiService.saveCitacion({juicio: this.juicio, citacion: this.actuacion}).subscribe(
       (res: any) => {

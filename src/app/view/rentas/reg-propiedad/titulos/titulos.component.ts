@@ -20,7 +20,7 @@ standalone: false,
 export class TitulosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Aprobación de títulos (Rentas)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -111,7 +111,7 @@ export class TitulosComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
 
     this.empresLogo = this.dataUser.logoEmpresa;
 
@@ -138,7 +138,7 @@ export class TitulosComponent implements OnInit {
 
   cargarLiquidaciones() {
 
-    this.msgSpinner = "Cargando lista de liquidaciones...";
+    this.mensajeSpinner = "Cargando lista de liquidaciones...";
       this.lcargando.ctlSpinner(true);
 
       let data = {
@@ -215,7 +215,7 @@ export class TitulosComponent implements OnInit {
       if(result.isConfirmed) {
 
 
-        this.msgSpinner = 'Verificando período contable...';
+        this.mensajeSpinner = 'Verificando período contable...';
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment().format('YYYY')),
@@ -226,7 +226,7 @@ export class TitulosComponent implements OnInit {
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
               
-              this.msgSpinner = "Aprobando liquidacion...";
+              this.mensajeSpinner = "Aprobando liquidacion...";
               this.lcargando.ctlSpinner(true);
               this.tituloSrv.aprobarLiquidacion(id).subscribe(
                 (res) => {

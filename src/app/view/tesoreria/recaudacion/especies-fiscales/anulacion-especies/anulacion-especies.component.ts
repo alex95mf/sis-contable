@@ -16,7 +16,7 @@ export class AnulacionEspeciesComponent implements OnInit {
 
   vmButtons: any;
   catalog: any;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
 
   fTitle = "Anulacion Especie Fiscal"
 

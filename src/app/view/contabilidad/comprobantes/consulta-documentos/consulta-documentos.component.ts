@@ -26,7 +26,7 @@ export class ConsultaDocumentosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
  
   fTitle = "Consulta de Documentos";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   estadoList = [
     {value: 'E',label: "EMITIDOO"},
@@ -169,7 +169,7 @@ export class ConsultaDocumentosComponent implements OnInit {
 
   cargarDocumentos(flag: boolean = false) {
     
-    this.msgSpinner = "Cargando Ordenes de Pago...";
+    this.mensajeSpinner = "Cargando Ordenes de Pago...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1;
@@ -241,7 +241,7 @@ export class ConsultaDocumentosComponent implements OnInit {
   {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Exportando Documentos';
+      this.mensajeSpinner = 'Exportando Documentos';
 
 
   

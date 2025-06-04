@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./area.component.scss']
 })
 export class AreaComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -105,7 +105,7 @@ export class AreaComponent implements OnInit {
   }
 
   cargarAreas() {
-    this.mensajeSppiner = "Cargando listado de Áreas...";
+    this.mensajeSpinner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -176,7 +176,7 @@ export class AreaComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSppiner = "Eliminando área..."
+          this.mensajeSpinner = "Eliminando área..."
           this.lcargando.ctlSpinner(true);
           let data = {
             id:this.areas.id_area

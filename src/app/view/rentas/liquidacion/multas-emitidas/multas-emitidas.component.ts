@@ -24,7 +24,7 @@ export class MultasEmitidasComponent implements OnInit {
   mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Aprobación de Multas";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -131,7 +131,7 @@ export class MultasEmitidasComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
 
     this.empresLogo = this.dataUser.logoEmpresa;
 
@@ -286,7 +286,7 @@ export class MultasEmitidasComponent implements OnInit {
       if(result.isConfirmed) {
 
 
-        this.msgSpinner = 'Verificando período contable...';
+        this.mensajeSpinner = 'Verificando período contable...';
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment().format('YYYY')),
@@ -370,7 +370,7 @@ export class MultasEmitidasComponent implements OnInit {
       if(result.isConfirmed) {
 
 
-        this.msgSpinner = 'Verificando período contable...';
+        this.mensajeSpinner = 'Verificando período contable...';
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment().format('YYYY')),

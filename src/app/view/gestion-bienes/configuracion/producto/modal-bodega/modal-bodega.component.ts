@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./modal-bodega.component.scss']
 })
 export class ModalBodegaComponent implements OnInit {
-  mensajeSppiner: string = "Cargnado...";
+  mensajeSpinner: string = "Cargnado...";
   @ViewChild(CcSpinerProcesarComponent, { static: false}) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -137,7 +137,7 @@ limpiarFiltros() {
 }
 
   cargarBodegas(){
-    this.mensajeSppiner = "Cargando lista de Bodegas...";
+    this.mensajeSpinner = "Cargando lista de Bodegas...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {

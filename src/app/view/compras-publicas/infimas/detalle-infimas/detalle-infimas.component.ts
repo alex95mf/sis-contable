@@ -28,7 +28,7 @@ export class DetalleInfimasComponent implements OnInit {
   validaciones: ValidacionesFactory = new ValidacionesFactory()
 
   fTitle = "Orden de Pago";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   listaSolicitudes: any = []
   programa: any = []
@@ -278,7 +278,7 @@ export class DetalleInfimasComponent implements OnInit {
     }
   }
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -554,7 +554,7 @@ async confirmSave(message, action) {
       }).then((result) => {
           if (result.isConfirmed) {
 
-            this.msgSpinner = "Verificando período contable";
+            this.mensajeSpinner = "Verificando período contable";
             this.lcargando.ctlSpinner(true);
             let datos = {
               "anio": Number(moment().format('YYYY')),
@@ -565,7 +565,7 @@ async confirmSave(message, action) {
               /* Validamos si el periodo se encuentra aperturado */
                 if (res["data"][0].estado !== 'C') {
 
-                    this.msgSpinner = "Guardando datos...";
+                    this.mensajeSpinner = "Guardando datos...";
                     this.lcargando.ctlSpinner(true);
 
                     let data = {
@@ -636,7 +636,7 @@ async confirmSave(message, action) {
 
   guardarInfimaDetalles(){
 
-    this.msgSpinner = "Verificando período contable";
+    this.mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let datos = {
       "anio": Number(moment().format('YYYY')),
@@ -766,7 +766,7 @@ async confirmSave(message, action) {
         }).then((result) => {
             if (result.isConfirmed) {
 
-              this.msgSpinner = "Verificando período contable";
+              this.mensajeSpinner = "Verificando período contable";
               this.lcargando.ctlSpinner(true);
               let datos = {
                 "anio": Number(moment().format('YYYY')),
@@ -777,7 +777,7 @@ async confirmSave(message, action) {
                 /* Validamos si el periodo se encuentra aperturado */
                   if (res["data"][0].estado !== 'C') {
 
-                    this.msgSpinner = "Guardando datos de Proveedor...";
+                    this.mensajeSpinner = "Guardando datos de Proveedor...";
                     this.lcargando.ctlSpinner(true);
 
                     let data = {
@@ -870,7 +870,7 @@ async confirmSave(message, action) {
       }).then((result) => {
           if (result.isConfirmed) {
 
-            this.msgSpinner = "Verificando período contable";
+            this.mensajeSpinner = "Verificando período contable";
             this.lcargando.ctlSpinner(true);
             let datos = {
               "anio": Number(moment().format('YYYY')),
@@ -880,7 +880,7 @@ async confirmSave(message, action) {
 
               /* Validamos si el periodo se encuentra aperturado */
                 if (res["data"][0].estado !== 'C') {
-                  this.msgSpinner = "Guardando datos de Documentación Final...";
+                  this.mensajeSpinner = "Guardando datos de Documentación Final...";
                   this.lcargando.ctlSpinner(true);
 
                   let data = {

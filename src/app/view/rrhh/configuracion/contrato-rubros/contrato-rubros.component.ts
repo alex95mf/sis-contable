@@ -18,7 +18,7 @@ standalone: false,
 export class ContratoRubrosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = 'Configuracion de Rubros por Tipo de Contrato';
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Array<Botonera> = [];
 
   lst_rubro: Array<Rubro> = [];
@@ -61,11 +61,11 @@ export class ContratoRubrosComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Tipos de Contrato'
+      this.mensajeSpinner = 'Cargando Tipos de Contrato'
       this.lst_tipo_contrato = await this.apiService.getTipoContrato('TCC');
       // this.lst_tipo_contrato.map((item: TipoContrato) => Object.assign(item, { check: false }))
   
-      this.msgSpinner = 'Cargando Rubros'
+      this.mensajeSpinner = 'Cargando Rubros'
       this.lst_rubro = await this.apiService.getRubros({ params: { filter: { estado: 2 } } });
 
       this.lst_rubro.map((item: Rubro) => {
@@ -109,7 +109,7 @@ export class ContratoRubrosComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.msgSpinner = 'Almacenando Configuración (Puede demorar unos segundos)';
+        this.mensajeSpinner = 'Almacenando Configuración (Puede demorar unos segundos)';
         await this.apiService.setTipoContratoRubro({rubros: this.lst_rubro, lst_tipo_contrato: this.lst_tipo_contrato})
 
         this.lcargando.ctlSpinner(false)

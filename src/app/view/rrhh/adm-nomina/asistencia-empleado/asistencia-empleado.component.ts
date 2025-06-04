@@ -116,7 +116,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
 
   //
   btnSubirArchivo: boolean;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   //tabla
   @Input() objGetDiasTrabajados: DiaTrabajadoAditionalResponseI | any;//DocFicha[];
   loading: boolean;
@@ -540,7 +540,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSppiner = "Carga Inicial"
+      this.mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.asistenciadiasempleService.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -840,7 +840,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       listGenerar : insertData,
 
     };
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.asistenciadiasempleService.saveListDiasTrabajados(data).subscribe(
       (res: GeneralResponseI) => {
@@ -882,7 +882,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         periodo: Number(this.filter.periodo),
         mes: Number(this.filter.mes)
       }
-      this.mensajeSppiner = "Actualizando Faltas y Permisos"
+      this.mensajeSpinner = "Actualizando Faltas y Permisos"
       this.lcargando.ctlSpinner(true);
       this.asistenciadiasempleService.procesarSpActualizaFaltasPermisos(data).subscribe(res => {
         this.lcargando.ctlSpinner(false);
@@ -916,7 +916,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
         periodo: Number(this.filter.periodo),
         mes: this.convertirMes()
       }
-      this.mensajeSppiner = "Actualizando Horas Extra"
+      this.mensajeSpinner = "Actualizando Horas Extra"
       this.lcargando.ctlSpinner(true);
       this.asistenciadiasempleService.procesarSpActualizaHorasExtra(data).subscribe(res => {
         this.lcargando.ctlSpinner(false);
@@ -1139,7 +1139,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
     };
    console.log(data)
   this.lcargando.ctlSpinner(true);
-  this.mensajeSppiner = 'Consultando Datos'
+  this.mensajeSpinner = 'Consultando Datos'
   this.asistenciadiasempleService.getOnlyDaysWorkeEmployees(data)
     .subscribe({
       next: (rpt: DiaTrabajadoAditionalResponseI) => {
@@ -1231,7 +1231,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       if (res["data"][0].estado !== 'C') {
         console.log("Mes Aperturado")
         this.lcargando.ctlSpinner(true);
-        this.mensajeSppiner = 'Generando Datos'
+        this.mensajeSpinner = 'Generando Datos'
 
         this.asistenciadiasempleService.getDaysWorkedCalculateEmployees(data)
         .subscribe({
@@ -1374,7 +1374,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
 
 
     };
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.asistenciadiasempleService.saveTemplateDayWorked(data).subscribe(
       (res: GeneralResponseI) => {
@@ -1726,7 +1726,7 @@ isOutOfStock(data) {
       // id_empresa : 1,
 
     };
-    this.mensajeSppiner = "Consultando...";
+    this.mensajeSpinner = "Consultando...";
     this.lcargando.ctlSpinner(true);
     this.asistenciadiasempleService.getFaltasPermisosEmployees(data)
       .subscribe({
@@ -1878,7 +1878,7 @@ isOutOfStock(data) {
   }
 
   cargarAreas() {
-    this.mensajeSppiner = "Cargando listado de Áreas...";
+    this.mensajeSpinner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1900,7 +1900,7 @@ isOutOfStock(data) {
   }
 
   cargarDepartamentos(event) {
-    this.mensajeSppiner = "Cargando listado de Departamentos...";
+    this.mensajeSpinner = "Cargando listado de Departamentos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -2107,7 +2107,7 @@ isOutOfStock(data) {
 
 
     };
-    this.mensajeSppiner = "Verificando empleados...";
+    this.mensajeSpinner = "Verificando empleados...";
     this.lcargando.ctlSpinner(true);
     this.asistenciadiasempleService.verificarHorasExtra(data).subscribe(
 
@@ -2269,7 +2269,7 @@ console.log(this.filter.mes)
 
       default:
     }
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
 
     this.empHorasExtraEncontrados.forEach(e => {
@@ -2353,7 +2353,7 @@ console.log(this.filter.mes)
       return;
     }
 
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
 
 
@@ -2573,7 +2573,7 @@ console.log(this.filter.mes)
 
     };
     // this.validaDt = false;
-    this.mensajeSppiner = "Eliminando registros de Horas Extra...";
+    this.mensajeSpinner = "Eliminando registros de Horas Extra...";
     this.lcargando.ctlSpinner(true);
     this.asistenciadiasempleService.deleteList(data).subscribe(
       (res) => {

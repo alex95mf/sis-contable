@@ -19,7 +19,7 @@ standalone: false,
 })
 export class ModalUsuariosComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
 
@@ -125,7 +125,7 @@ export class ModalUsuariosComponent implements OnInit {
   }
 
   cargarUsuarios() {
-    this.mensajeSppiner = "Cargando lista de Usuarios...";
+    this.mensajeSpinner = "Cargando lista de Usuarios...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

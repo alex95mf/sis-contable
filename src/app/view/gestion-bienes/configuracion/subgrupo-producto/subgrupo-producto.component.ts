@@ -19,7 +19,7 @@ export class SubgrupoProductoComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   estadoList = [
     { value: "A", label: "ACTIVO" },
     { value: "I", label: "INACTIVO" },
@@ -164,7 +164,7 @@ export class SubgrupoProductoComponent implements OnInit {
   }
 
   cargarSubgrupos(){
-    this.mensajeSppiner = "Cargando";
+    this.mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {
@@ -337,7 +337,7 @@ export class SubgrupoProductoComponent implements OnInit {
   }
 
   guardarEdition(){
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     console.log(this.subgrupo);
     let data = {

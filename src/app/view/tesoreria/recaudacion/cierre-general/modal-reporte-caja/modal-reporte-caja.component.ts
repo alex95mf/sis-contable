@@ -16,7 +16,7 @@ export class ModalReporteCajaComponent implements OnInit {
   @Input() caja: any;
   @Input() fecha: string;
   vmButtons: Botonera[] = []
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   tbl_data: any[] = []
   totales: any = {
@@ -64,7 +64,7 @@ export class ModalReporteCajaComponent implements OnInit {
 
   async getRecibosCajaDia() {
     try {
-      this.msgSpinner = 'Cargando datos de Caja'
+      this.mensajeSpinner = 'Cargando datos de Caja'
       const response = await this.apiService.getRecibosByDia({id_caja: this.caja.id_caja, fecha: this.fecha}) as any
       console.log(response)
       this.tbl_data = response.data

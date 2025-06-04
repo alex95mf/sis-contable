@@ -22,7 +22,7 @@ export class ReclasificacionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = 'Reclasificacion de Inventario';
   vmButtons: Array<any> = []
-  msgSpinner: string;
+  mensajeSpinner: string;
   permissions: any;
   dataUser: any;
 
@@ -111,7 +111,7 @@ export class ReclasificacionComponent implements OnInit {
 
   validaPermisos() {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     this.commonService.getPermisionsGlobas({

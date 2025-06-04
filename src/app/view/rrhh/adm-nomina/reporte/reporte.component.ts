@@ -23,7 +23,7 @@ export class ReporteComponent implements OnInit {
   dtOptions: any = {};
   dtTrigger = new Subject();
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   dataUser: any;
   permisions: any;
@@ -37,7 +37,7 @@ export class ReporteComponent implements OnInit {
 
     this.reportService.loadingSpinner$.subscribe(
       ({state, message}) => {
-        if (message) this.mensajeSppiner = message
+        if (message) this.mensajeSpinner = message
         this.lcargando.ctlSpinner(state)
       }
     )

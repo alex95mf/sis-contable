@@ -27,7 +27,7 @@ export class TareasComponent implements OnInit {
   @Input() lst_metas: Array<any>
   vmButtons: any[] = []
   fTitle: string = 'Actividades a Realizar'
-  msgSpinner: string
+  mensajeSpinner: string
   validaciones: ValidacionesFactory = new ValidacionesFactory();
   ref: DynamicDialogRef;
 
@@ -116,10 +116,10 @@ export class TareasComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      // this.msgSpinner = 'Cargando listado de Responsables'
+      // this.mensajeSpinner = 'Cargando listado de Responsables'
       // this.responsables = await this.apiService.getResponsables()
 
-      this.msgSpinner = 'Cargando Tareas de Atribución'
+      this.mensajeSpinner = 'Cargando Tareas de Atribución'
       this.tareas = await this.apiService.getTareas({periodo: this.periodo, programa: this.programa, departamento: this.departamento, atribucion: this.atribucion})
       this.realizacion = this.tareas.reduce((acc, curr) => acc + parseInt(curr.realizacion), 0) / this.tareas.length
 
@@ -135,7 +135,7 @@ export class TareasComponent implements OnInit {
     return this.lst_metas.find((meta: any) => meta.descripcion == meta_cod).valor
   }
   /* getResponsables() {
-    this.msgSpinner = 'Cargando Responsables'
+    this.mensajeSpinner = 'Cargando Responsables'
     this.lcargando.ctlSpinner(true)
     this.apiService.getResponsables().subscribe(
       (res: any) => {
@@ -229,11 +229,11 @@ export class TareasComponent implements OnInit {
   async guardaTareas() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Validando Datos'
+      this.mensajeSpinner = 'Validando Datos'
       await this.validateData()
 
       try {
-        this.msgSpinner = 'Almacenando Tareas'
+        this.mensajeSpinner = 'Almacenando Tareas'
         let response = await this.apiService.setTareas({
           periodo: this.periodo,
           programa: this.programa,
@@ -301,7 +301,7 @@ export class TareasComponent implements OnInit {
 
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
-      this.msgSpinner = 'Eliminando Tarea'
+      this.mensajeSpinner = 'Eliminando Tarea'
       if (tarea.id != null) {
         try {
           let response = await this.apiService.deleteTarea({tarea})

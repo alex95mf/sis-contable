@@ -22,7 +22,7 @@ standalone: false,
 })
 export class AnexosListComponentDis implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   fTitle = 'Listado de Anexos'
   @Input() dataUser: any
   @Input() permissions: any
@@ -63,7 +63,7 @@ export class AnexosListComponentDis implements OnInit {
     this.commonVarService.contribAnexoLoad.asObservable().subscribe(
       (res: any) => {
         this.lcargando.ctlSpinner(true)
-        this.msgSpinner = 'Cargando Anexos ...'
+        this.mensajeSpinner = 'Cargando Anexos ...'
         if(this.tipo == 'EM'){
           this.cargarArchivoEM()
         }else if(this.tipo == 'TR'){
@@ -194,7 +194,7 @@ export class AnexosListComponentDis implements OnInit {
     this.anexosCE = [];
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -254,7 +254,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -318,7 +318,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -380,7 +380,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -441,7 +441,7 @@ export class AnexosListComponentDis implements OnInit {
     this.anexosCE = [];
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -502,7 +502,7 @@ export class AnexosListComponentDis implements OnInit {
     this.anexosCE = [];
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -564,7 +564,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -626,7 +626,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -689,7 +689,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -751,7 +751,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -813,7 +813,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -871,7 +871,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -929,7 +929,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -991,7 +991,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -1055,7 +1055,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -1118,7 +1118,7 @@ export class AnexosListComponentDis implements OnInit {
 
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -1181,7 +1181,7 @@ export class AnexosListComponentDis implements OnInit {
     this.anexosCE = [];
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -1244,7 +1244,7 @@ export class AnexosListComponentDis implements OnInit {
     this.anexosCE = [];
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Anexos ...'
+    this.mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -1311,7 +1311,7 @@ export class AnexosListComponentDis implements OnInit {
       ip: this.commonService.getIpAddress()
     }
 
-    // this.msgSpinner = 'Eliminando anexo'
+    // this.mensajeSpinner = 'Eliminando anexo'
     // this.lcargando.ctlSpinner(true)
 
     this.apiService.deleteAnexo(data).subscribe(
@@ -1361,7 +1361,7 @@ export class AnexosListComponentDis implements OnInit {
             ip: this.commonService.getIpAddress()
           }
           console.log(data)
-          this.msgSpinner = 'Eliminando anexo'
+          this.mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true)
       
           this.apiService.deleteAnexo(data).subscribe(

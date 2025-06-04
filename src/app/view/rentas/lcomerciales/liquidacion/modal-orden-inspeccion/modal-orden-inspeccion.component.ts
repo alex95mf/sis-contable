@@ -15,7 +15,7 @@ standalone: false,
 export class ModalOrdenInspeccionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Input() contribuyente: any;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any;
 
   ordenes: Array<any>;
@@ -82,7 +82,7 @@ export class ModalOrdenInspeccionComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     
     try {
-      this.msgSpinner = 'Cargando Ordenes de Inspeccion'
+      this.mensajeSpinner = 'Cargando Ordenes de Inspeccion'
       let response = await this.apiService.getOrdenes({
         contribuyente: this.contribuyente,
         params: {

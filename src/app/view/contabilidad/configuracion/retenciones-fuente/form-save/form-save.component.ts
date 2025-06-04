@@ -14,7 +14,7 @@ standalone: false,
 })
 export class FormSaveComponent implements OnInit {
 
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @Input() isNew: any;

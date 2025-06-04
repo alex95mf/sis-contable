@@ -17,7 +17,7 @@ export class ModalBusqContratoComponent implements OnInit {
   @Input() contribuyente: any
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
   fTitle = 'Busqueda de Contratos'
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: any[] = []
   contratos: any[] = []
 
@@ -60,7 +60,7 @@ export class ModalBusqContratoComponent implements OnInit {
   }
 
   getContratosContribuyente() {
-    this.msgSpinner = 'Cargando Contratos'
+    this.mensajeSpinner = 'Cargando Contratos'
     this.lcargando.ctlSpinner(true)
     this.apiService.getContratos({contribuyente: this.contribuyente}).subscribe(
       res => {

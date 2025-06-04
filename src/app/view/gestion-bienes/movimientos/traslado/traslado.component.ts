@@ -29,7 +29,7 @@ standalone: false,
   styleUrls: ['./traslado.component.scss']
 })
 export class TrasladoComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   permissions: any;
@@ -516,7 +516,7 @@ codigoActa:any;
   }
 
   buscarBienesCustodiados(){
-    this.mensajeSppiner = "Cargando bienes...";
+    this.mensajeSpinner = "Cargando bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id_custodio: this.traslado.id_custodio
@@ -594,7 +594,7 @@ codigoActa:any;
   }
   buscarFotoProducto(id_producto){
     console.log(id_producto)
-    this.mensajeSppiner = "Cargando foto...";
+    this.mensajeSpinner = "Cargando foto...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id_producto: id_producto
@@ -739,7 +739,7 @@ codigoActa:any;
 
   buscarGrupoProducto(event){
 
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
    
     let data = {
@@ -1202,7 +1202,7 @@ codigoActa:any;
     console.log(productSend)
 
     
-    this.mensajeSppiner = "Guardando traslado de bienes...";
+    this.mensajeSpinner = "Guardando traslado de bienes...";
     this.lcargando.ctlSpinner(true);
     let res = await this.validatePrice(productSend).then(res => {
       localStorage.removeItem('dataProductsInvoice');
@@ -1376,7 +1376,7 @@ codigoActa:any;
   }
 
   cargaFoto(archivos) {
-    this.mensajeSppiner = 'Cargando fotos...';
+    this.mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 3) {
       for (let i = 0; i < archivos.length; i++) {

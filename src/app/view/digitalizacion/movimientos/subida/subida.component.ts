@@ -28,7 +28,7 @@ standalone: false,
 export class SubidaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
 
   @ViewChild("inputFile") fileUpload: ElementRef;
   vmButtons: Botonera[] = [];

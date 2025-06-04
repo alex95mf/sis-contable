@@ -24,7 +24,7 @@ export class ConfiguracionComponent implements OnInit {
   users = [];
   heightTr = 0;
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
  
   usuarios: any = [];
@@ -107,7 +107,7 @@ export class ConfiguracionComponent implements OnInit {
     this.commonVrs.selectTramites.asObservable().subscribe(
       (res)=>{
 
-        this.mensajeSppiner = "Cargando Tarea...";
+        this.mensajeSpinner = "Cargando Tarea...";
         this.lcargando.ctlSpinner(true);
         this.tarea = res.tarea;
        console.log(res.tarea);
@@ -511,7 +511,7 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   actualizarTarea(){
-    this.mensajeSppiner = "Actualizando Tarea...";
+    this.mensajeSpinner = "Actualizando Tarea...";
     this.lcargando.ctlSpinner(true);
     if(this.listaPasos.length > this.lengthPasos){
       //console.log('Ingreso actualizar pasos');
@@ -565,7 +565,7 @@ export class ConfiguracionComponent implements OnInit {
 
   cargarUsuarios(){
     //console.log('ejecuto');
-    this.mensajeSppiner = "Cargando lista de Usuarios...";
+    this.mensajeSpinner = "Cargando lista de Usuarios...";
     this.lcargando.ctlSpinner(true);
     this.serviceAdmin.getUsuarios({}).subscribe(
       (res)=>{
@@ -583,7 +583,7 @@ export class ConfiguracionComponent implements OnInit {
 
 
   cargarRoles(){
-    this.mensajeSppiner = "Cargando Lista de Roles...";
+    this.mensajeSpinner = "Cargando Lista de Roles...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -630,7 +630,7 @@ export class ConfiguracionComponent implements OnInit {
 
   guardarTarea(){
   
-    this.mensajeSppiner = "guardando Tarea...";
+    this.mensajeSpinner = "guardando Tarea...";
     this.lcargando.ctlSpinner(true);
     //console.log(this.dataUser);
     //console.log(this.tarea);
@@ -804,7 +804,7 @@ export class ConfiguracionComponent implements OnInit {
           this.pasosL = this.pasosL.filter((p)=>pasos['nro_paso'] != p);
         }
         // else if(pasos['id_flujo_pasos'] != 0){
-        //   this.mensajeSppiner = "Eliminando...";
+        //   this.mensajeSpinner = "Eliminando...";
         //   this.lcargando.ctlSpinner(true);
         //   this.serviceAdmin.deletePasos(pasos).subscribe(
         //     (res)=>{

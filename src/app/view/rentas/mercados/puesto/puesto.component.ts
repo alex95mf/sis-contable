@@ -22,7 +22,7 @@ standalone: false,
 export class PuestoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
   fTitle = "Puesto de Mercado"
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons = []
   dataUser: any
   permissions: any
@@ -135,7 +135,7 @@ export class PuestoComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
 
@@ -192,7 +192,7 @@ export class PuestoComponent implements OnInit {
       }
     }
 
-    this.msgSpinner = 'Cargando Puestos de Mercados'
+    this.mensajeSpinner = 'Cargando Puestos de Mercados'
     this.lcargando.ctlSpinner(true)
 
     this.apiService.getPuestos(data).subscribe(
@@ -214,7 +214,7 @@ export class PuestoComponent implements OnInit {
   }
 
   getMercados = () => {
-    this.msgSpinner = 'Obteniendo Mercados'
+    this.mensajeSpinner = 'Obteniendo Mercados'
     this.lcargando.ctlSpinner(true);
 
     this.apiService.getMercados().subscribe(
@@ -267,7 +267,7 @@ export class PuestoComponent implements OnInit {
           cancelButtonText: "Cancelar"
         }).then((result) => {
           if (result.value) {
-            this.msgSpinner = 'Guardando cambios'
+            this.mensajeSpinner = 'Guardando cambios'
             this.lcargando.ctlSpinner(true)
             this.apiService.savePuesto({puesto: this.puesto}).subscribe(
               res => {
@@ -313,7 +313,7 @@ export class PuestoComponent implements OnInit {
       cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.value) {
-        this.msgSpinner = 'Editando información'
+        this.mensajeSpinner = 'Editando información'
         this.lcargando.ctlSpinner(true)
         this.apiService.updatePuesto({puesto: this.puesto}).subscribe(
           res => {

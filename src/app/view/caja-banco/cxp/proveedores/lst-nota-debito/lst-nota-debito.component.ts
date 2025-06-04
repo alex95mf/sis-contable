@@ -14,7 +14,7 @@ standalone: false,
 })
 export class LstNotaDebitoComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
@@ -64,7 +64,7 @@ export class LstNotaDebitoComponent implements OnInit {
       }
     }
 
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.provSrv.getNotasDebito(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);

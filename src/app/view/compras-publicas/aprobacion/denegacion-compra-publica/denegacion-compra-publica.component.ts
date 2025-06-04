@@ -20,7 +20,7 @@ export class DenegacionCompraPublicaComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
 
   @Input() item: any;
 
@@ -62,7 +62,7 @@ export class DenegacionCompraPublicaComponent implements OnInit {
       this.toastr.info('Debe ingresar la observacion')
     }else{
 
-      this.mensajeSppiner = "Verificando período contable";
+      this.mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
 
       let data = {
@@ -92,7 +92,7 @@ export class DenegacionCompraPublicaComponent implements OnInit {
   guardarDenegacion(){
     console.log('Guardado');
 
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
 
     let data = {id: this.item['id_solicitud'],observacion: this.Observaciones, estado: 'D', Detalles: this.item['detalles']}

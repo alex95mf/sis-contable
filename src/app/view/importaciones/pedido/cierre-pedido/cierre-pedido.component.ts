@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./cierre-pedido.component.scss']
 })
 export class CierrePedidoComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   importPed: any = {
     Total_peso: parseFloat('0.00').toFixed(2), total_volumen: parseFloat('0.00').toFixed(2), num_doc: "?",

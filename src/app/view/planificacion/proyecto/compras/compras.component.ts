@@ -23,7 +23,7 @@ export class ComprasComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChildren(NgSelectComponent) selectables: QueryList<NgSelectComponent>;
   fTitle : string = 'Asignacion de Codigo de Compras Publicas'
-  msgSpinner : string
+  mensajeSpinner : string
   vmButtons : any
   dataUser: any
   permissions: any
@@ -119,7 +119,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
   }
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     let params = {
@@ -150,18 +150,18 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
   }
 
   async cargaInicial() {
-    this.msgSpinner = 'Cargando Periodos'
+    this.mensajeSpinner = 'Cargando Periodos'
     this.periodos = await this.apiSrv.getPeriodos();
 
-    this.msgSpinner = 'Cargando Programas'
+    this.mensajeSpinner = 'Cargando Programas'
     this.programas = await this.apiSrv.getProgramas();
     this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
 
-    this.msgSpinner = 'Cargando Departamentos'
+    this.mensajeSpinner = 'Cargando Departamentos'
     this.departamentos = await this.apiSrv.getDepartamentos();
     this.departamentos.map((departamento: any) => Object.assign(departamento, { label: `${departamento.descripcion}. ${departamento.valor}`}))
 
-    this.msgSpinner = 'Cargando Catalogos'
+    this.mensajeSpinner = 'Cargando Catalogos'
     let response: any = await this.apiSrv.getCatalogo({params: "'PLA_TIPO_COMPRA','PLA_TIPO_REGIMEN','PLA_PROC_SUGE','PLA_TIPO_PRODUCTO'"})
     console.log(response)
     this.cmb_tipo_compra = response.PLA_TIPO_COMPRA
@@ -175,7 +175,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
   async handleClickBuscar() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Bienes'
+      this.mensajeSpinner = 'Cargando Bienes'
       this.bienes = await this.apiSrv.getBienes({periodo: this.periodoSelected, departamento: this.departamentoObjectSelected.id_catalogo});
       this.bienes.map((bien: any) => Object.assign(bien, { 
         procSugeridos: (bien.tipo_regimen != 0) ? this.cmb_procedimiento_sugerido.filter((tipo: any) => tipo.grupo == this.cmb_tipo_regimen.find((tipo: any) => tipo.id_catalogo == bien.tipo_regimen).valor) : [],
@@ -235,7 +235,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
   }
 
   /* cargaCatalogos() {
-    this.msgSpinner = 'Cargando Catalogos'
+    this.mensajeSpinner = 'Cargando Catalogos'
     let data = {
       params: "'PLA_PROGRAMA','PLA_DEPARTAMENTO','PLA_COD_PRESUP','PLA_TIPO_COMPRA','PLA_TIPO_REGIMEN','PLA_PROC_SUGE','PLA_TIPO_PRODUCTO','PLA_AFIRMACION','PLA_COD_CPC'"
     }
@@ -329,7 +329,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
 
   /* async selectDept(event) {
     this.bienesAttr = []
-    this.msgSpinner = 'Cargando Bienes y Servicios'
+    this.mensajeSpinner = 'Cargando Bienes y Servicios'
     this.lcargando.ctlSpinner(true)
 
     try {
@@ -380,7 +380,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
       return
     }
 
-    this.msgSpinner = 'Guardando datos...'
+    this.mensajeSpinner = 'Guardando datos...'
     this.lcargando.ctlSpinner(true)
 
     try {

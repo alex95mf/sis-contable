@@ -32,7 +32,7 @@ export class ReporteUnoComponent implements OnInit {
   @ViewChildren(NgSelectComponent) selects: Array<NgSelectComponent>;
   fTitle: string = 'Administrar máximos y mínimos';
   vmButtons: Array<Botonera> = [];
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   dtOptions: any = {};
   dtTrigger = new Subject();
@@ -185,7 +185,7 @@ export class ReporteUnoComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando...'
+      this.mensajeSpinner = 'Cargando...'
       let response: Array<any> = await this.apiService.getGruposBienes();
       let bodegas: Array<any> = await this.apiService.getBodegas();
       this.cmb_grupo = response
@@ -285,7 +285,7 @@ export class ReporteUnoComponent implements OnInit {
     // console.log(this.selectedGrupo)
    //if (event != undefined && this.selectedReporte == 'PSG') {
      this.lcargando.ctlSpinner(true)
-     this.msgSpinner = 'Filtrando Productos por Grupo de Bien'
+     this.mensajeSpinner = 'Filtrando Productos por Grupo de Bien'
      let data={
       id_grupo: event.id_grupo_productos
      }

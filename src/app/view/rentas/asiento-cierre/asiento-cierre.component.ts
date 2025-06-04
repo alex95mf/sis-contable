@@ -30,10 +30,10 @@ standalone: false,
   styleUrls: ['./asiento-cierre.component.scss']
 })
 export class AsientoCierreComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Asiento Cierre";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
 
   dataUser: any;
@@ -375,7 +375,7 @@ export class AsientoCierreComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -592,7 +592,7 @@ export class AsientoCierreComponent implements OnInit {
     }else{
 
       this.getCuentaContableTipoPago()
-      this.mensajeSppiner = "Cargando Números de Control...";
+      this.mensajeSpinner = "Cargando Números de Control...";
       this.lcargando.ctlSpinner(true);
       this.numeros_control = []
       let data = {
@@ -721,7 +721,7 @@ export class AsientoCierreComponent implements OnInit {
   }
 
   cargarConceptos() {
-    this.msgSpinner = 'Cargando Conceptos'
+    this.mensajeSpinner = 'Cargando Conceptos'
     this.lcargando.ctlSpinner(true)
     this.apiSrv.getConceptos().subscribe(
       (res: any) => {
@@ -775,7 +775,7 @@ export class AsientoCierreComponent implements OnInit {
     }
 
     this.asientoCierre.fecha = this.filter.fecha_desde
-    this.msgSpinner = 'Consultando Asientos...';
+    this.mensajeSpinner = 'Consultando Asientos...';
     this.lcargando.ctlSpinner(true);
     this.asientoGuard.estado="";
     let params = {
@@ -876,7 +876,7 @@ export class AsientoCierreComponent implements OnInit {
   }
 
   consultaServicio(){
-    this.msgSpinner = 'Cargando Asientos';
+    this.mensajeSpinner = 'Cargando Asientos';
     this.lcargando.ctlSpinner(true);
 
     // let datos={
@@ -1535,7 +1535,7 @@ export class AsientoCierreComponent implements OnInit {
   }
 
   guardarAsientoCierre(){
-    this.msgSpinner = 'Verificando periodo contable.';
+    this.mensajeSpinner = 'Verificando periodo contable.';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1615,7 +1615,7 @@ export class AsientoCierreComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.msgSpinner = 'Generando Asiento Cierre. Esto puede tomar unos momentos.';
+        this.mensajeSpinner = 'Generando Asiento Cierre. Esto puede tomar unos momentos.';
         this.lcargando.ctlSpinner(true);
         let data = {
           tipo: this.filter.tipo_cierre,
@@ -1639,7 +1639,7 @@ export class AsientoCierreComponent implements OnInit {
               confirmButtonColor: '#20A8D8',
             }).then((result2) => {
               if (result2.isConfirmed) {
-                this.msgSpinner = 'Cargando Asiento Cierre...';
+                this.mensajeSpinner = 'Cargando Asiento Cierre...';
                 //this.cierres = [];
                 this.vmButtons[0].habilitar = true;
                 this.vmButtons[1].habilitar = false;
@@ -1699,7 +1699,7 @@ export class AsientoCierreComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.msgSpinner = 'Eliminando Cierre'
+        this.mensajeSpinner = 'Eliminando Cierre'
         await this.apiSrv.eliminarAsiento({id: this.asientoGuard.id_con_cierre})
         this.restoreForm();
         this.lcargando.ctlSpinner(false)
@@ -1827,7 +1827,7 @@ export class AsientoCierreComponent implements OnInit {
 
   GenerarReporteExcel(){
 
-		this.mensajeSppiner = "Generando Archivo Excel...";
+		this.mensajeSpinner = "Generando Archivo Excel...";
 		this.lcargando.ctlSpinner(true);
 
 
@@ -1871,7 +1871,7 @@ export class AsientoCierreComponent implements OnInit {
   getRolNoControl() {
 
     this.lcargando.ctlSpinner(true)
-    this.mensajeSppiner = 'Buscando'
+    this.mensajeSpinner = 'Buscando'
     this.RolGeneral = []
     this.cols = []
     let Data = []
@@ -2290,7 +2290,7 @@ console.log(this.RolGeneral)
   }
 
   getCuentaContableTipoPago(){
-    this.mensajeSppiner = "Cargando cuenta contable...";
+    this.mensajeSpinner = "Cargando cuenta contable...";
     this.lcargando.ctlSpinner(true);
 
     let cuenta
@@ -2349,7 +2349,7 @@ console.log(this.RolGeneral)
 
    if(event == 'PAGADO_TERCEROS'){
       this.verBanco= true
-      this.mensajeSppiner = "Cargando Rubros...";
+      this.mensajeSpinner = "Cargando Rubros...";
       this.lcargando.ctlSpinner(true);
       this.apiSrv.getRubrosPagoTerceros().subscribe(
         (res: any) => {

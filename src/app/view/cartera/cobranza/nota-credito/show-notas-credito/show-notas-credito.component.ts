@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./show-notas-credito.component.scss']
 })
 export class ShowNotasCreditoComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

@@ -18,7 +18,7 @@ export class ModalCuentasContablesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = "Cuentas Contables";
   vmButtons: Array<Botonera> = [];
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   filter: any
   paginate: any;

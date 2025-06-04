@@ -20,7 +20,7 @@ export class InformacionGestionComponent implements OnInit {
   @ViewChildren(NgSelectComponent) selects: Array<NgSelectComponent>;
   fTitle: string = 'Informe de Gestion de Bienes';
   vmButtons: Array<Botonera> = [];
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   selectedReporte: any;  // Tipo Reporte
   selectedTipo: any;  // Tipo Bien
@@ -116,7 +116,7 @@ export class InformacionGestionComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Grupos'
+      this.mensajeSpinner = 'Cargando Grupos'
       let response: Array<any> = await this.apiService.getGruposBienes();
       this.cmb_grupo = response
       this.lcargando.ctlSpinner(false)
@@ -246,7 +246,7 @@ export class InformacionGestionComponent implements OnInit {
     // console.log(event)
     if (event != undefined && this.selectedReporte == 'PSG') {
       this.lcargando.ctlSpinner(true)
-      this.msgSpinner = 'Filtrando Grupos por Tipo de Bien'
+      this.mensajeSpinner = 'Filtrando Grupos por Tipo de Bien'
       this.cmb_grupo_filter = this.cmb_grupo.filter((item: any) => item.tipo_bien == event.value)
       setTimeout(() => this.lcargando.ctlSpinner(false), 750)
     }

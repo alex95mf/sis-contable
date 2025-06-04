@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./view-fac-compra.component.scss']
 })
 export class ViewFacCompraComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
    @Input() dts: any = {};
     data:any;

@@ -15,7 +15,7 @@ standalone: false,
 export class ModalExonContribuyenteComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @Input() contribuyente: number
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   vmButtons: Botonera[] = [];
   lst_exoneraciones: any = [];
@@ -49,7 +49,7 @@ export class ModalExonContribuyenteComponent implements OnInit {
   async getExoneraciones() {
     try {
       this.lcargando.ctlSpinner(true)
-      this.msgSpinner = 'Cargando Exoneraciones'
+      this.mensajeSpinner = 'Cargando Exoneraciones'
       const response = await this.apiService.getExoneraciones({contribuyente: this.contribuyente, concepto: {codigo: 'RP'}}) as any
       console.log(response)
       this.lst_exoneraciones = response.data

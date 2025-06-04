@@ -32,7 +32,7 @@ standalone: false,
   styleUrls: ['./egresos-bodega.component.scss']
 })
 export class EgresosBodegaComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('TipoBienes') cmb_tipoBienes: NgSelectComponent
 
@@ -910,7 +910,7 @@ export class EgresosBodegaComponent implements OnInit {
     if (event == undefined) return;
     this.claseSelect = []
     if (this.subgrupo) this.subgrupo.descripcion = undefined
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let data = {
       tipo_bien: event
@@ -1222,7 +1222,7 @@ export class EgresosBodegaComponent implements OnInit {
       this.validateDataGlobal().then(respuesta => {
         if (respuesta) {
 
-          this.mensajeSppiner = "Verificando período contable";
+          this.mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(moment(this.fecha_doc).format('YYYY')),
@@ -1387,7 +1387,7 @@ export class EgresosBodegaComponent implements OnInit {
 
   async save(productSend, notify, filter, prefict, info, resultado) {
     console.log(productSend)
-    this.mensajeSppiner = "Guardando egreso de bodega...";
+    this.mensajeSpinner = "Guardando egreso de bodega...";
     this.lcargando.ctlSpinner(true);
     this.validatePrice(productSend).then(res => {
       localStorage.removeItem('dataProductsInvoice');
@@ -1596,7 +1596,7 @@ export class EgresosBodegaComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSppiner = "Cargando Catalogs";
+    this.mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'INV_TIPO_EGRESO', 'INV_MOTIVO_EGRESO', 'INV_TIPO_BIEN'",
     };

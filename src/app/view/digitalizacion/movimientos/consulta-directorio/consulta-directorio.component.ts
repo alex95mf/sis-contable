@@ -52,7 +52,7 @@ export class ConsultaDirectorioComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
   dataUser: any;
   permissions: any;
@@ -209,7 +209,7 @@ rutacompletadeldirectorioactuali:any;
   selectTipoDocumento(event){
 this.tipobusqueda = 'indices';
    // this.limpiarFilter()
-    this.msgSpinner = 'Cargando Directorio...'
+    this.mensajeSpinner = 'Cargando Directorio...'
     this.lcargando.ctlSpinner(true);
 
     this.dataForms = [];
@@ -326,7 +326,7 @@ let newDataForms= [];
   }
 
   consultarDirectorio(flag: any){
-    this.msgSpinner = 'Consultando Directorio...'
+    this.mensajeSpinner = 'Consultando Directorio...'
     this.lcargando.ctlSpinner(true);
 
 
@@ -411,7 +411,7 @@ let newDataForms= [];
 
 
   this.lcargando.ctlSpinner(true);
-    this.msgSpinner = 'Cargando Arbol'
+    this.mensajeSpinner = 'Cargando Arbol'
 
     this.apiService.getSearchFilesByFile({origen:this.tipoDoCNombre,rutacompleta:this.rutacompletadeldirectorioactuali,paginate:this.paginate}).subscribe((res: any) => {
 
@@ -480,7 +480,7 @@ let newDataForms= [];
 
   async getItemCatalogo(catalogo: Catalogo) {
     try {
-      this.msgSpinner = 'Cargando Data'
+      this.mensajeSpinner = 'Cargando Data'
       const response = await this.apiServicecat.getItemCatalogo({item: catalogo})
       console.log(response)
       this.nuevoItemVista = false
@@ -494,7 +494,7 @@ let newDataForms= [];
   async getReadFiles() { //catalogo: Catalogo
       this.lcargando.ctlSpinner(true);
       console.log("ejecutando");
-      this.msgSpinner = 'Cargando Data' //item: catalogo this.filter.tipo_documento
+      this.mensajeSpinner = 'Cargando Data' //item: catalogo this.filter.tipo_documento
       this.apiService.getReadFiles({tipocontrato:this.tipoDoCNombre}).subscribe((res: any) => {
 
           //arboldosarboldos
@@ -569,7 +569,7 @@ let newDataForms= [];
     }
     Object.assign(this.paginate, {page: 1, pageIndex: 0}) */
     this.lcargando.ctlSpinner(true);
-    this.msgSpinner = 'Cargando Arbol'
+    this.mensajeSpinner = 'Cargando Arbol'
 
     console.log(event); this.rutacompletadeldirectorioactuali = event.rutacompleta;
     this.apiService.getSearchFilesByFile({origen:this.tipoDoCNombre,rutacompleta:event.rutacompleta,paginate:this.paginate}).subscribe((res: any) => {

@@ -14,7 +14,7 @@ standalone: false,
 })
 export class ModalBusquedaFacturaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
 
   filter: any = {
@@ -110,7 +110,7 @@ export class ModalBusquedaFacturaComponent implements OnInit {
   async getFacturas() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Facturas'
+      this.mensajeSpinner = 'Cargando Facturas'
       let facturas = await this.apiService.getFacturasGeneradas({params: { filter: this.filter, paginate: this.paginate }}) as any
       this.paginate.length = facturas.data.total
       this.tbl_facturas = facturas.data.data

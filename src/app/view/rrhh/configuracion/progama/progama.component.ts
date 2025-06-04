@@ -14,7 +14,7 @@ standalone: false,
   styleUrls: ['./progama.component.scss']
 })
 export class ProgamaComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
   programas: any = [];
@@ -89,7 +89,7 @@ export class ProgamaComponent implements OnInit {
 
 
   getPrograma(){
-    this.mensajeSppiner = "Cargando Programas...";
+    this.mensajeSpinner = "Cargando Programas...";
     this.lcargando.ctlSpinner(true);
     let data ={
       params: {

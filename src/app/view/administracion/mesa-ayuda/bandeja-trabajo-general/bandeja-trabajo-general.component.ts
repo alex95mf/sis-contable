@@ -9,7 +9,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
-import { SeguimientoFormComponent } from '../bandeja-trabajo/seguimiento-form/seguimiento-form.component'; 
+import { SeguimientoFormComponent } from '../bandeja-trabajo/seguimiento-form/seguimiento-form.component';
 import { ReasignarUsuarioComponent } from './reasignar-usuario/reasignar-usuario.component';
 import { ModalDepartamentosComponent } from 'src/app/config/custom/modal-departamentos/modal-departamentos.component';
 
@@ -26,19 +26,19 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
   mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Mesa de Ayuda (Bandeja de Trabajo General)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;
   categorias: any = {};
   subCategorias: any = {};
   ticket: any = {};
-  
+
 
   ticketsDt: any = [];
   usuariospre: any = [];
   estadoList:any = [];
-  
+
   paginate: any;
   filter: any;
 
@@ -66,7 +66,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
     {value: "A",label: "ALTA"},
     {value: "M",label: "MEDIA"},
     {value: "B",label: "BAJA"},
-    
+
   ]
 
   reasignacion_ticket: any
@@ -99,48 +99,48 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
         (res)=>{
           this.departamentoSelect = res;
           this.filter.dep_nombre = res['dep_nombre'];
-  
+
           //console.log(this.departamentoSelect)
         }
       )
-     
+
      }
 
   ngOnInit(): void {
     this.vmButtons = [
-      { 
-        orig: "btnsBandejaTrabajo", 
-        paramAccion: "2", 
-        boton: { icon: "fa fa-search", texto: "CONSULTAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-primary boton btn-sm", 
+      {
+        orig: "btnsBandejaTrabajo",
+        paramAccion: "2",
+        boton: { icon: "fa fa-search", texto: "CONSULTAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-primary boton btn-sm",
         habilitar: false
       },
-      { 
-        orig: "btnsBandejaTrabajo", 
-        paramAccion: "2", 
-        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
+      {
+        orig: "btnsBandejaTrabajo",
+        paramAccion: "2",
+        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
         habilitar: false
       },
 
 
-      { 
-        orig: "btnsBandejaTrabajo", 
-        paramAccion: "2", 
-        boton: { icon: "fa fa-eraser", texto: "LIMPIAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-danger boton btn-sm", 
+      {
+        orig: "btnsBandejaTrabajo",
+        paramAccion: "2",
+        boton: { icon: "fa fa-eraser", texto: "LIMPIAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-danger boton btn-sm",
         habilitar: false
       },
       /* {
@@ -167,7 +167,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
        }*/
      ];
 
-   
+
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     this.today = new Date();
@@ -175,7 +175,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     //this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
       id_ticket: undefined,
@@ -188,7 +188,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
       prioridad: ['A','M','B'],
       nombre:"",
       dep_nombre:""
-    
+
     };
 
     this.paginate = {
@@ -198,7 +198,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
       pageSizeOptions: [20, 50,100,200]
     };
 
-   
+
 
     setTimeout(()=> {
       this.validaPermisos();
@@ -258,10 +258,10 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
     let data = {
       params: "'MDA_CATEGORIA','MDA_SUBCATEGORIA','MDA_ESTADOS'",
     };
-    /*this.mensajeSppiner = "Buscando categoría...";
+    /*this.mensajeSpinner = "Buscando categoría...";
     this.lcargando.ctlSpinner(true);*/
     this.ticketSrv.getCatalogoCategoria(data).subscribe(
-     
+
       (res) => {
         console.log(res)
         this.categorias = res["data"]['MDA_CATEGORIA'];
@@ -283,7 +283,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
        grupo:evento
      };
      this.ticketSrv.getCatalogoSubCategoria(data).subscribe(
-       
+
        (res) => {
          //console.log('AQQQQQQQQQ'+res["data"])
          this.subCategorias = res["data"];
@@ -305,7 +305,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
         this.filter.estado = [evt];
     }
   }
-  
+
    asignarPrioridad(evt) {
     this.filter.prioridad = [evt]
    }
@@ -344,7 +344,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
           })
           this.exportAsXLSX();
         }
-         
+
         } else {
           this.lcargando.ctlSpinner(false);
         }
@@ -355,7 +355,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
       }
 
     )
-    
+
   }
 
   exportAsXLSX() {
@@ -372,7 +372,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
         res['data'].map((data)=>{
           data['id_flujo_usuarios'] =  0
         })
-        
+
         this.usuariospre = res['data']
         // console.log('Usuarios '+this.usuariospre);
         this.lcargando.ctlSpinner(false);
@@ -384,15 +384,15 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
     this.mensajeSpinner = "Cargando listado de Tickets...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1 
-    
+    if (flag) this.paginate.page = 1
+
     let data = {
       params: {
         filter: this.filter,
         paginate: this.paginate
       }
     }
-    
+
     this.ticketSrv.getTicketsGlobalGeneral(data).subscribe(
       (res) => {
        // console.log(res);
@@ -404,7 +404,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
           this.ticketsDt = Object.values(res['data']['data']);
         }
         this.lcargando.ctlSpinner(false);
-       
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -456,15 +456,15 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
   evaluateTicket(documento: any): string {
     const statusMessages: string[] = [];
     const today = new Date();
-    const fechaDocumento = new Date(documento.fecha); 
+    const fechaDocumento = new Date(documento.fecha);
     // Si el estado es pendiente (P)
     if (documento.estado !== 'C') {
        // Suponiendo que documento.fecha es un string o Date válido
       const diffTime = Math.abs(today.getTime() - fechaDocumento.getTime());
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Diferencia en días
-  
+
       let status = 'Pendiente';
-  
+
       if (diffDays <= 2) {
         // Hasta 2 días: verde
         statusMessages.push(`<span class="text-success">en ${diffDays} día(s)</span><br>`);
@@ -476,16 +476,16 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
         statusMessages.push(`<span class="text-danger">en ${diffDays} día(s)</span><br>`);
       }
     }
-  
+
     // Si el estado es cerrado (C)
     if (documento.estado === 'C') {
-      
+
       const fechaCierre = new Date(documento.fecha_cierre); // Suponiendo que documento.fecha_cierre es un string o Date válido
       const diffTime = Math.abs(fechaDocumento.getTime() - fechaCierre.getTime());
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Diferencia en días
-  
+
       let status = 'Cerrado';
-  
+
       if (diffDays <= 2) {
         // Hasta 2 días: verde
         statusMessages.push(`<span class="text-success">Atendido en ${diffDays} día(s)</span><br>`);
@@ -497,21 +497,21 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
         statusMessages.push(`<span class="text-danger">Atendido en ${diffDays} día(s)</span><br>`);
       }
     }
-  
+
     // Unir todos los elementos del array en una única cadena
     return statusMessages.join('');
   }
 
-  
+
   showSeguiTicketForm(isNew:boolean, data?:any) {
-    
+
     //console.log('DATOOSSSS TICKET '+data['usuario']['nombre']);
     if (!isNew && this.permissions.consultar == "0") {
       this.toastr.warning("No tiene permisos para consultar Tickets.", this.fTitle);
     } else if (isNew && this.permissions.guardar == "0") {
       this.toastr.warning("No tiene permisos para crear Tickets.", this.fTitle);
     } else {
-       
+
       const modalInvoice = this.modalSrv.open(SeguimientoFormComponent, {
         size: "xl",
         backdrop: "static",
@@ -524,9 +524,9 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
       modalInvoice.componentInstance.permissions = this.permissions;
       modalInvoice.componentInstance.ticket = this.ticket;
       modalInvoice.componentInstance.mostrarEliminar = false;
-    
-  
-      
+
+
+
     }
   }
   reasignarTicket(data){
@@ -638,14 +638,14 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
   }
 
   showReasignarUsusario(isNew:boolean, data?:any) {
-    
+
     //console.log('DATOOSSSS TICKET '+data['usuario']['nombre']);
     if (!isNew && this.permissions.consultar == "0") {
       this.toastr.warning("No tiene permisos para reasignar Usuario para la gestión de Tickets.", this.fTitle);
     } else if (isNew && this.permissions.guardar == "0") {
       this.toastr.warning("No tiene permisos para reasignar Usuario para la gestión de Tickets.", this.fTitle);
     } else {
-       
+
       const modalInvoice = this.modalSrv.open(ReasignarUsuarioComponent, {
         size: "md",
         backdrop: "static",
@@ -657,7 +657,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
       modalInvoice.componentInstance.ticket = this.ticket;
-      
+
     }
   }
 
@@ -668,7 +668,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
       windowClass: "viewer-content-general",
     })
   }
-  
+
   limpiarFiltros() {
     this.filter = {
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
@@ -685,7 +685,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
     this.prioridadSelected = 0
 
   }
-  
+
   changePaginate(event) {
     let newPaginate = {
       perPage: event.pageSize,
@@ -697,7 +697,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
 
   deshabilitarBotonReasignacion(ticket: any): boolean {
     let tienePermiso = this.perfiles_reasignacion.some(perfil => perfil.perfil === this.dataUser.rol.nombre_rol);
-    
+
     if(ticket.estado !== 'C' && ticket.estado !== 'PA' && this.reasignacion_ticket === 'S'){
       return !tienePermiso
     }else{
@@ -708,7 +708,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
   deshabilitarBotonAprobacion(ticket: any): boolean {
     let rolUsuarioActual = this.dataUser.id_rol;
 
-    const aprobacionesConMiRol = ticket.aprobaciones.filter(aprob => 
+    const aprobacionesConMiRol = ticket.aprobaciones.filter(aprob =>
       aprob.id_rol === rolUsuarioActual && aprob.estado_aprobacion === 'PENDIENTE'
     );
 
@@ -723,7 +723,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
       }
 
       // Para órdenes mayores, verificar aprobación anterior
-      const aprobacionAnterior = ticket.aprobaciones.find(a => 
+      const aprobacionAnterior = ticket.aprobaciones.find(a =>
         a.orden_aprobacion === aprobacion.orden_aprobacion - 1
       );
 
@@ -766,8 +766,8 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
 
   // Lógica final para retornar el trámite
   private confirmarAprobacion() {
-    const aprobacionActiva = this.ticketSeleccionado.aprobaciones.find(ap => 
-      ap.id_rol == this.dataUser.id_rol && 
+    const aprobacionActiva = this.ticketSeleccionado.aprobaciones.find(ap =>
+      ap.id_rol == this.dataUser.id_rol &&
       ap.estado_aprobacion === 'PENDIENTE' // Asegurar que esté pendiente
     );
 
@@ -798,7 +798,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
         if(this.estadoAprobacion == 'NEGADO'){
           this.toastr.success('Ticket negado.', 'Éxito');
         }
-        
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -806,10 +806,10 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
        // console.log(error)
       }
     );
-    
+
   }
 
-  
+
 
 
 }

@@ -17,8 +17,8 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Chart } from 'chart.js';
 import { XlsExportService } from 'src/app/services/xls-export.service';
-import { ModalGruposComponent } from '../reporte-productos/modal-grupos/modal-grupos.component'; 
-import { ListBusquedaComponent } from '../reporte-productos/list-busqueda/list-busqueda.component'; 
+import { ModalGruposComponent } from '../reporte-productos/modal-grupos/modal-grupos.component';
+import { ListBusquedaComponent } from '../reporte-productos/list-busqueda/list-busqueda.component';
 
 @Component({
 standalone: false,
@@ -27,12 +27,12 @@ standalone: false,
   styleUrls: ['./reporte-dos.component.scss']
 })
 export class ReporteDosComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChildren(NgSelectComponent) selects: Array<NgSelectComponent>;
   fTitle: string = 'Análisis de Existencia';
   vmButtons: Array<Botonera> = [];
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   processing: any;
   selectedReporte: any;  // Tipo Reporte
@@ -110,34 +110,34 @@ export class ReporteDosComponent implements OnInit {
   ];
   mes_actual: any = 0;
   arrayDetalles: any = []
-//  arrayDetalles: any = 
-//  [{"chart":"grafico1","codigo_grupo_producto":"02","nombre_grupo":"MATERIALES DE ASEO","clases":[{"clase":"A","antiguedad":"30 dias","costo_total":0.00}, 
-//  {"clase":"B","antiguedad":"60 dias","costo_total":0.00}, 
-//  {"clase":"C","antiguedad":"90 dias","costo_total":0.00}, 
-//  {"clase":"D","antiguedad":"120 dias","costo_total":0.00}, 
-//  {"clase":"E","antiguedad":"> 120 dias","costo_total":37500.00}]}, 
-//  {"chart":"grafico2","codigo_grupo_producto":"530801","nombre_grupo":"ALIMENTOS Y BEBIDAS","clases":[{"clase":"A","antiguedad":"30 dias","costo_total":1226.38}, 
-//  {"clase":"B","antiguedad":"60 dias","costo_total":0.00}, 
-//  {"clase":"C","antiguedad":"90 dias","costo_total":0.00}, 
-//  {"clase":"D","antiguedad":"120 dias","costo_total":0.00}, 
-//  {"clase":"E","antiguedad":"> 120 dias","costo_total":0.00}]}, 
-//  {"chart":"grafico3","codigo_grupo_producto":"530802","nombre_grupo":"VESTUARIO, LENCERÍA, PRENDAS DE PROTECCION Y ACCESORIOS PARA UNIFORMES DEL PERSONAL DE PROTECCIÓN, VIGILANCIA Y SEGURIDAD","clases":[{"clase":"A","antiguedad":"30 dias","costo_total":410.00}, 
-//  {"clase":"B","antiguedad":"60 dias","costo_total":0.00}, 
-//  {"clase":"C","antiguedad":"90 dias","costo_total":0.00}, 
-//  {"clase":"D","antiguedad":"120 dias","costo_total":0.00}, 
-//  {"clase":"E","antiguedad":"> 120 dias","costo_total":0.00}]}, 
-//  {"chart":"grafico4","codigo_grupo_producto":"530804","nombre_grupo":"MATERIALES DE OFICINA","clases":[{"clase":"A","antiguedad":"30 dias","costo_total":0.00}, 
-//  {"clase":"B","antiguedad":"60 dias","costo_total":4409.60}, 
-//  {"clase":"C","antiguedad":"90 dias","costo_total":560.00}, 
-//  {"clase":"D","antiguedad":"120 dias","costo_total":64682.99}, 
-//  {"clase":"E","antiguedad":"> 120 dias","costo_total":882294.76}]}, 
-//  {"chart":"grafico5","codigo_grupo_producto":"730802","nombre_grupo":"VESTUARIO, LENCERÍA, PRENDAS DE PROTECCION Y ACCESORIOS PARA UNIFORMES DEL PERSONAL DE PROTECCIÓN, VIGILANCIA Y SEGURIDAD","clases":[{"clase":"A","antiguedad":"30 dias","costo_total":10799.61}, 
-//  {"clase":"B","antiguedad":"60 dias","costo_total":0.00}, 
-//  {"clase":"C","antiguedad":"90 dias","costo_total":0.00}, 
-//  {"clase":"D","antiguedad":"120 dias","costo_total":0.00}, 
+//  arrayDetalles: any =
+//  [{"chart":"grafico1","codigo_grupo_producto":"02","nombre_grupo":"MATERIALES DE ASEO","clases":[{"clase":"A","antiguedad":"30 dias","costo_total":0.00},
+//  {"clase":"B","antiguedad":"60 dias","costo_total":0.00},
+//  {"clase":"C","antiguedad":"90 dias","costo_total":0.00},
+//  {"clase":"D","antiguedad":"120 dias","costo_total":0.00},
+//  {"clase":"E","antiguedad":"> 120 dias","costo_total":37500.00}]},
+//  {"chart":"grafico2","codigo_grupo_producto":"530801","nombre_grupo":"ALIMENTOS Y BEBIDAS","clases":[{"clase":"A","antiguedad":"30 dias","costo_total":1226.38},
+//  {"clase":"B","antiguedad":"60 dias","costo_total":0.00},
+//  {"clase":"C","antiguedad":"90 dias","costo_total":0.00},
+//  {"clase":"D","antiguedad":"120 dias","costo_total":0.00},
+//  {"clase":"E","antiguedad":"> 120 dias","costo_total":0.00}]},
+//  {"chart":"grafico3","codigo_grupo_producto":"530802","nombre_grupo":"VESTUARIO, LENCERÍA, PRENDAS DE PROTECCION Y ACCESORIOS PARA UNIFORMES DEL PERSONAL DE PROTECCIÓN, VIGILANCIA Y SEGURIDAD","clases":[{"clase":"A","antiguedad":"30 dias","costo_total":410.00},
+//  {"clase":"B","antiguedad":"60 dias","costo_total":0.00},
+//  {"clase":"C","antiguedad":"90 dias","costo_total":0.00},
+//  {"clase":"D","antiguedad":"120 dias","costo_total":0.00},
+//  {"clase":"E","antiguedad":"> 120 dias","costo_total":0.00}]},
+//  {"chart":"grafico4","codigo_grupo_producto":"530804","nombre_grupo":"MATERIALES DE OFICINA","clases":[{"clase":"A","antiguedad":"30 dias","costo_total":0.00},
+//  {"clase":"B","antiguedad":"60 dias","costo_total":4409.60},
+//  {"clase":"C","antiguedad":"90 dias","costo_total":560.00},
+//  {"clase":"D","antiguedad":"120 dias","costo_total":64682.99},
+//  {"clase":"E","antiguedad":"> 120 dias","costo_total":882294.76}]},
+//  {"chart":"grafico5","codigo_grupo_producto":"730802","nombre_grupo":"VESTUARIO, LENCERÍA, PRENDAS DE PROTECCION Y ACCESORIOS PARA UNIFORMES DEL PERSONAL DE PROTECCIÓN, VIGILANCIA Y SEGURIDAD","clases":[{"clase":"A","antiguedad":"30 dias","costo_total":10799.61},
+//  {"clase":"B","antiguedad":"60 dias","costo_total":0.00},
+//  {"clase":"C","antiguedad":"90 dias","costo_total":0.00},
+//  {"clase":"D","antiguedad":"120 dias","costo_total":0.00},
 //  {"clase":"E","antiguedad":"> 120 dias","costo_total":0.00}]}]
 
- 
+
   cmb_grupo: any[] = [];
   cmb_subgrupo: any[] = [];
   cmb_productos: [];
@@ -150,7 +150,7 @@ export class ReporteDosComponent implements OnInit {
   arrayBodega: Array<any> = [];
 
   clases: any[] = [];
- 
+
    stockList = [
     {value: "1",label: "CON STOCK"},
     {value: "2",label: "SIN STOCK"},
@@ -184,7 +184,7 @@ export class ReporteDosComponent implements OnInit {
       (res) => {
         this.lcargando.ctlSpinner(false);
         this.claseSelect = res
-        
+
         this.grupo_descripcion = this.claseSelect['codigo_grupo_producto'] + "-" + this.claseSelect['descripcion'] + "-" + this.claseSelect['tipo_bien']
         this.selectedGrupo = this.claseSelect['id_grupo_productos']
         console.log(this.claseSelect)
@@ -198,11 +198,11 @@ export class ReporteDosComponent implements OnInit {
         this.selectedProductos = res['id_producto']
         this.nombreProducto = res['nombre']
 
-     
+
       }
     )
-  
-  
+
+
     this.vmButtons = [
       {
         orig: "btnsRenConsultaReporte",
@@ -282,7 +282,7 @@ export class ReporteDosComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Grupos'
+      this.mensajeSpinner = 'Cargando Grupos'
       let response: Array<any> = await this.apiService.getGruposBienes();
       let bodegas: Array<any> = await this.apiService.getBodegas();
       this.cmb_grupo = response
@@ -299,7 +299,7 @@ export class ReporteDosComponent implements OnInit {
   //   this.filter.estado = [evt]
   //  }
 
- 
+
 
   async consultarReporte() {
    // Validar opciones seleccionadas
@@ -312,7 +312,7 @@ export class ReporteDosComponent implements OnInit {
     //   return;
     // }
 
-    
+
     this.lcargando.ctlSpinner(true)
     try {
       let data={
@@ -359,7 +359,7 @@ export class ReporteDosComponent implements OnInit {
       grupo: this.grupo_descripcion,
       bodega:bodega[0]?.nombre,
       ubicacion:this.ubicacion,
-      fecha_corte:moment(this.fechaCorte).format('YYYY-MM-DD'), 
+      fecha_corte:moment(this.fechaCorte).format('YYYY-MM-DD'),
       stock: stock[0]?.label ? stock[0]?.label : '',
       rows: this.dataProducto
     }
@@ -373,21 +373,21 @@ export class ReporteDosComponent implements OnInit {
     // console.log(this.selectedGrupo)
    //if (event != undefined && this.selectedReporte == 'PSG') {
      this.lcargando.ctlSpinner(true)
-     this.msgSpinner = 'Filtrando Productos por Grupo de Bien'
+     this.mensajeSpinner = 'Filtrando Productos por Grupo de Bien'
      let data={
       id_grupo: event.id_grupo_productos
      }
      this.apiService.getProductos(data).subscribe(res => {
       console.log(res['data'])
       this.cmb_productos= res['data']
-      
+
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message)
     })
-    
+
      this.cmb_subgrupo_filter = this.cmb_subgrupo.filter((item: any) => item.parent_id == event.id_grupo_productos)
-     
+
      setTimeout(() => this.lcargando.ctlSpinner(false), 750)
   // }
  }
@@ -404,7 +404,7 @@ export class ReporteDosComponent implements OnInit {
       periodo: Number(this.periodo.getFullYear()),
       mes: Number(this.mes_actual)
     }
-  
+
     this.lcargando.ctlSpinner(true);
     this.apiService.setProcesoAnalisisExi(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -439,13 +439,13 @@ uArrayGrupos(array) {
 }
 
  consultarReportGrafi() {
-  
+
    let parameterUrl: any = {
       periodo: this.periodo.getFullYear(),
       mes: Number(this.mes_actual)
    };
-  
-   this.mensajeSppiner = 'Cargando...'
+
+   this.mensajeSpinner = 'Cargando...'
    this.lcargando.ctlSpinner(true)
    this.apiService.getReporteAnalisisExistenciaGrupos(parameterUrl).subscribe((res: any) => {
    this.lcargando.ctlSpinner(false)
@@ -460,13 +460,13 @@ uArrayGrupos(array) {
 
       this.arrayDetalles = []
       this.arrayDetalles = jsonObj.datos
-      
+
       this.arrayDetalles.forEach((element, index) => {
         Object.assign(element,{ chart:'grafico'+ index})
         element.clases.forEach(c => {
           clasesArray.push(c.clase)
         })
-        
+
       });
       console.log(clasesArray)
 
@@ -500,7 +500,7 @@ uArrayGrupos(array) {
       //       clase: e.clase,
       //       costo_total: e.costo_total
       //     }
-      //     clases.push(clase) 
+      //     clases.push(clase)
       //   }
       //   if(e.clase == f.clase && e.nombre_grupo != f.nombre_grupo){
       //     let grupo={
@@ -509,7 +509,7 @@ uArrayGrupos(array) {
       //     }
       //     grupos.push(grupo)
       //   }
-        
+
       //  })
       // })
       // console.log(grupoClases)
@@ -525,7 +525,7 @@ uArrayGrupos(array) {
       //     borderWidth: 1
       //   }]
       // };
-  
+
       // const data2 = {
       //   labels: ["E", "F", "G", "H"],
       //   datasets: [{
@@ -544,7 +544,7 @@ uArrayGrupos(array) {
       //     }
       //   }
       // };
-  
+
       // // Array de objetos que contienen la configuración de los gráficos
       // const charts = [
       //   {
@@ -580,19 +580,19 @@ uArrayGrupos(array) {
       //           ticks: {
       //             beginAtZero: true
       //           },
-    
+
       //         }],
       //         yAxes: [{
       //           ticks: {
       //             beginAtZero: true
       //           },
-    
+
       //         }]
       //       }
       //     }
       //   });
       // });
-      
+
 
        let labelInfoBar = [];
        let DataSetGrafit = [];
@@ -608,14 +608,14 @@ uArrayGrupos(array) {
        }
 
        /*Recorremos el elemento principal que son los  motivos */
-       
+
        for (let i = 0; i < res['data'].length; i++) {
 
 
          if (DataSetGrafit.length > 0) {
 
            let labelGraf = DataSetGrafit.filter(co => co.nombre_grupo == res['data'][i].nombre_grupo);
-          
+
 
            if (labelGraf.length > 0) {
              labelGraf[0]['data'].push(res['data'][i].total_costo);
@@ -644,9 +644,9 @@ uArrayGrupos(array) {
              data: dataPointGrafit
            })
          }
-       
+
          //labelInfoBar.push(res[i].mes);
-     
+
        this.ReportGrafiFPBarras = {
          labels: labelInfoBar,
          datasets: DataSetGrafit
@@ -657,17 +657,17 @@ uArrayGrupos(array) {
        // let label = labelInfoBar === : labelInfoBar
        setTimeout(() => {
         console.log(this.arrayDetalles)
-       
+
         // this.chart1 = this.chart(this.arrayDetalles, "bar", this.clases, data);
          this.chart(this.arrayDetalles, "bar", this.clases, data);
          console.log(this.chart1);
-       
+
        }, 50);
 
 
 
      }
-     
+
    },
    (error) => {
      this.lcargando.ctlSpinner(false);
@@ -736,15 +736,15 @@ uArrayGrupos(array) {
           ],
           borderWidth: 1
         },
-       
-       
+
+
       ]
       },
       options: {
         legend: {
           display: false
         },
-        
+
       }
       // options: {
       //   // plugins: {
@@ -756,12 +756,12 @@ uArrayGrupos(array) {
       //   // },
       //   plugins: {
       //     legend: {
-           
+
       //       display: false,
       //     },
       //     title: {
       //       display: false,
-           
+
       //     },
       //   },
       //   scales: {
@@ -782,15 +782,15 @@ uArrayGrupos(array) {
     });
   })
 
-  
+
   console.log(data)
 
-     
 
 
- 
 
-  
+
+
+
     }
 
   limpiarFiltros() {
@@ -808,7 +808,7 @@ uArrayGrupos(array) {
     this.ubicacion = ''
     this.fechaCorte = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
     this.grupo_descripcion = ''
- 
+
     this.producto_exi = []
     this.selectedProductos = ''
     this.nombreProducto = ''
@@ -825,13 +825,13 @@ uArrayGrupos(array) {
     modal.componentInstance.validacionModal = true;
     modal.componentInstance.validar = true
     modal.componentInstance.verifyRestore = this.verifyRestore;
- 
+
   }
   expandProductos() {
 
     // abre modal de forma de pago distinto para cada titulo que se vaya a pagar
     const modal = this.modalService.open(ListBusquedaComponent, { size: "xl", backdrop: 'static', windowClass: 'viewer-content-general' })
-    
+
     modal.componentInstance.claseSelect = this.claseSelect
     modal.componentInstance.verifyRestore = this.verifyRestore;
   }

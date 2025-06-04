@@ -28,7 +28,7 @@ export class CargaFamiliarComponent implements OnInit {
     private paginadorServicio: PaginatorService
   ) {}
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones: ValidacionesFactory = new ValidacionesFactory();
@@ -144,7 +144,7 @@ export class CargaFamiliarComponent implements OnInit {
   paginatorComponent: PaginatorComponent;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   listadoGeneral(): any {
-    this.mensajeSppiner = "Cangando...";
+    this.mensajeSpinner = "Cangando...";
     this.lcargando.ctlSpinner(true);
     this.cargaFamiliarService.tablaFamiliar().subscribe((res) => {
       this.lcargando.ctlSpinner(false);
@@ -312,7 +312,7 @@ export class CargaFamiliarComponent implements OnInit {
     };
 
     if (this.id_carga == undefined) {
-      this.mensajeSppiner = "Guardando...";
+      this.mensajeSpinner = "Guardando...";
       this.lcargando.ctlSpinner(true);
       this.cargaFamiliarService.guardaCarga(data).subscribe((res) => {
         this.lcargando.ctlSpinner(false);
@@ -326,7 +326,7 @@ export class CargaFamiliarComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       });
     } else if (this.id_carga != undefined) {
-      this.mensajeSppiner = "Modificando...";
+      this.mensajeSpinner = "Modificando...";
       this.lcargando.ctlSpinner(true);
       this.cargaFamiliarService.updateCarga(data).subscribe((res) => {
         this.lcargando.ctlSpinner(false);
@@ -379,7 +379,7 @@ export class CargaFamiliarComponent implements OnInit {
       accion: "Eliminación de carga ",
       id_controlador: myVarGlobals.fPlanCuentas,
     };
-    this.mensajeSppiner = "Eliminando...";
+    this.mensajeSpinner = "Eliminando...";
     this.lcargando.ctlSpinner(true);
     this.cargaFamiliarService.deleteCarga(data).subscribe((res) => {
         this.lcargando.ctlSpinner(false);

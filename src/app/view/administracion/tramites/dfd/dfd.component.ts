@@ -28,7 +28,7 @@ export class DfdComponent implements OnInit {
   users = [];
   heightTr = 0;
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
  
   usuarios: any = [];
@@ -161,7 +161,7 @@ export class DfdComponent implements OnInit {
     );
 
     this.commonVrs.selectTramites.asObservable().subscribe((res) => {
-      this.mensajeSppiner = "Cargando lista de Usuarios...";
+      this.mensajeSpinner = "Cargando lista de Usuarios...";
       this.lcargando.ctlSpinner(true);
       this.tarea = res.tarea;
 
@@ -981,7 +981,7 @@ let idInicioDelFlujo = 0;
   }
 
   actualizarTarea(){
-    this.mensajeSppiner = "Actualizando Tarea...";
+    this.mensajeSpinner = "Actualizando Tarea...";
     this.lcargando.ctlSpinner(true);
     if(this.listaPasos.length > this.lengthPasos){
       //console.log('Ingreso actualizar pasos');
@@ -1039,7 +1039,7 @@ let idInicioDelFlujo = 0;
 
   cargarUsuarios(){
     //console.log('ejecuto');
-    this.mensajeSppiner = "Cargando lista de Usuarios...";
+    this.mensajeSpinner = "Cargando lista de Usuarios...";
     this.lcargando.ctlSpinner(true);
     this.serviceAdmin.getUsuarios({}).subscribe(
       (res)=>{
@@ -1087,7 +1087,7 @@ let idInicioDelFlujo = 0;
 
   guardarTarea(){
   
-    this.mensajeSppiner = "guardando Tarea...";
+    this.mensajeSpinner = "guardando Tarea...";
     this.lcargando.ctlSpinner(true);
     //console.log(this.dataUser);
     //console.log(this.tarea);
@@ -2706,7 +2706,7 @@ if (context) {
 }
 
 guardarDatos() {
-  this.mensajeSppiner = "guardando Tarea...";
+  this.mensajeSpinner = "guardando Tarea...";
     this.lcargando.ctlSpinner(true);
 const tieneFin = this.validarPasoFin();
   const validacionPolygons = this.validarPolygons();
@@ -2770,7 +2770,7 @@ this.ticketSrv.createFlujo(data).subscribe(
 
 
 ActualizarDatos() {
-  this.mensajeSppiner = "Actualizando Tarea...";
+  this.mensajeSpinner = "Actualizando Tarea...";
     this.lcargando.ctlSpinner(true);
   const tieneFin = this.validarPasoFin();
     const validacionPolygons = this.validarPolygons();

@@ -25,7 +25,7 @@ export class EmisionExpedienteComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
   fTitle: string = "Emisión de expedientes"
-  msgSpinner: string = "Cargnado...";
+  mensajeSpinner: string = "Cargnado...";
   dataUser: any;
   permissions: any;
   vmButtons: any;
@@ -196,7 +196,7 @@ export class EmisionExpedienteComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.msgSpinner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       (res) => {
@@ -219,7 +219,7 @@ export class EmisionExpedienteComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.msgSpinner = "Cargando Catalogs";
+    this.mensajeSpinner = "Cargando Catalogs";
     this.apiSrv.getCatalogs({params: "'COB_TIPO_GESTION','CAT_SECTOR','REN_MERCADO'"}).subscribe(
       (res: any) => {
         // console.log(res.data);
@@ -247,7 +247,7 @@ export class EmisionExpedienteComponent implements OnInit {
   }
 
   cargarConceptos() {
-    this.msgSpinner = 'Cargando Conceptos'
+    this.mensajeSpinner = 'Cargando Conceptos'
     this.apiSrv.getConceptos().subscribe(
       (res: any) => {
         res.data.forEach(e => {
@@ -267,7 +267,7 @@ export class EmisionExpedienteComponent implements OnInit {
   }
 
   cargarLiquidaciones(){
-    this.msgSpinner = "Cargando listado de expedientes...";
+    this.mensajeSpinner = "Cargando listado de expedientes...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getNotificacionCobro({params: {tipo:"GESTION", filter: this.filter, paginate: this.paginate } }).subscribe(
       (res: any) => {
@@ -323,7 +323,7 @@ export class EmisionExpedienteComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this.msgSpinner = 'Generando Expedientes'
+        this.mensajeSpinner = 'Generando Expedientes'
         this.lcargando.ctlSpinner(true)
         this.apiSrv.generarExpedientes({ titulos: process, fecha_emision: this.fecha_emision }).subscribe(
           (res: any) => {

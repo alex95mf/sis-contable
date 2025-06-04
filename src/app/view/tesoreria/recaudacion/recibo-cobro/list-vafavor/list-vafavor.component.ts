@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ListVafavorComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -111,7 +111,7 @@ export class ListVafavorComponent implements OnInit {
   }
 
   cargarDocumentos(){
-    this.mensajeSppiner = "Cargando listado de valores a favor...";
+    this.mensajeSpinner = "Cargando listado de valores a favor...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

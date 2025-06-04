@@ -25,7 +25,7 @@ standalone: false,
 export class GeneracionValorComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de Liquidación (Canchas)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
   dataUser: any;
   permissions: any;
@@ -98,7 +98,7 @@ export class GeneracionValorComponent implements OnInit {
     //al seleccionar una liquidacion desde el modal BUSCAR
     this.commonVarService.selectListLiqPURen.asObservable().subscribe(
     (res) => {
-      //this.msgSpinner = 'Cargando datos de la Liquidación...';
+      //this.mensajeSpinner = 'Cargando datos de la Liquidación...';
       //this.lcargando.ctlSpinner(true)
       this.restoreForm(false);
       this.formReadOnly = true;
@@ -145,7 +145,7 @@ export class GeneracionValorComponent implements OnInit {
         }
       });
       // if (this.liquidacion.fk_orden_inspeccion && this.liquidacion.fk_orden_inspeccion != 0) {
-      //   this.msgSpinner = 'Cargando datos de la Liquidación...';
+      //   this.mensajeSpinner = 'Cargando datos de la Liquidación...';
       //   this.lcargando.ctlSpinner(true);
       //   let data = {
       //     inspeccion: this.liquidacion.fk_orden_inspeccion
@@ -302,7 +302,7 @@ export class GeneracionValorComponent implements OnInit {
   }
   
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -402,7 +402,7 @@ export class GeneracionValorComponent implements OnInit {
   }
 
   getConceptos() {
-    this.msgSpinner = 'Obteniendo Conceptos...';
+    this.mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptos().subscribe(
       res => {
@@ -483,7 +483,7 @@ export class GeneracionValorComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.msgSpinner = 'Generando Liquidación...';
+          this.mensajeSpinner = 'Generando Liquidación...';
           this.lcargando.ctlSpinner(true);
           this.liquidacion.fk_contribuyente = this.contribuyenteActive.id_cliente;
           this.liquidacion.fk_concepto = this.concepto.id;

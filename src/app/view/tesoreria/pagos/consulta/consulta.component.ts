@@ -22,7 +22,7 @@ export class ConsultaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
  
   fTitle = "Consulta (Ordenenes de Pago)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -188,7 +188,7 @@ export class ConsultaComponent implements OnInit {
   
 
   validaPermisos() {
-    this.msgSpinner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -284,7 +284,7 @@ export class ConsultaComponent implements OnInit {
     let data = {
       params: "'OP_CONCEPTOS'",
     };
-    this.msgSpinner = "Buscando concepto...";
+    this.mensajeSpinner = "Buscando concepto...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogoConcepto(data).subscribe(
      
@@ -301,7 +301,7 @@ export class ConsultaComponent implements OnInit {
   }
   cargarOrdenesPago(flag: boolean = false) {
     
-    this.msgSpinner = "Cargando Ordenes de Pago...";
+    this.mensajeSpinner = "Cargando Ordenes de Pago...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1

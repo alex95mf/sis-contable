@@ -22,7 +22,7 @@ export class DetalleInteresesComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   botonera: any = [];
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   fTitle = "Detalle Intereses";
   dataUser: any;
   permissions: any;
@@ -93,7 +93,7 @@ export class DetalleInteresesComponent implements OnInit {
 
   cargarDetalles() {
 
-    this.mensajeSpiner = "Cargando detalles...";
+    this.mensajeSpinner = "Cargando detalles...";
     this.lcargando.ctlSpinner(true);
 
     // if(this.id_liquidacion){

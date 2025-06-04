@@ -18,7 +18,7 @@ export class EditviapublicaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
 
   //barra_carga: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
   necesita_refrescar: any;
  
   botoneras:any[];
@@ -142,7 +142,7 @@ export class EditviapublicaComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.msgSpinner = 'Guardando...';
+        this.mensajeSpinner = 'Guardando...';
         this.lcargando.ctlSpinner(true);
         this.servVia.CrearViapublica(data).subscribe(
           (res: any) => {

@@ -18,7 +18,7 @@ standalone: false,
 })
 export class DashboardComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   periodos: Array<any>;
   fTitle: any = "Dashboard Planificación";
   dataUser: any;
@@ -611,7 +611,7 @@ export class DashboardComponent implements OnInit {
   }
 
   validatePermission = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
@@ -680,10 +680,10 @@ export class DashboardComponent implements OnInit {
   async cargaProgramas() {
 
 
-    //this.msgSpinner = 'Cargando Periodos'
+    //this.mensajeSpinner = 'Cargando Periodos'
     
 
-    this.msgSpinner = 'Cargado Programas...'
+    this.mensajeSpinner = 'Cargado Programas...'
 
 
     this.periodos = await this.apiService.getPeriodos();
@@ -720,7 +720,7 @@ export class DashboardComponent implements OnInit {
 
   cargaDepartamentos(event) {
     /** Carga los departamentos asociados al programa seleccionado */
-    this.msgSpinner = 'Cargando Departamentos...'
+    this.mensajeSpinner = 'Cargando Departamentos...'
     this.lcargando.ctlSpinner(true)
     let data = {
       programa: event.nombre
@@ -765,7 +765,7 @@ export class DashboardComponent implements OnInit {
   }
 
   cargaDashboardDepartamento(event) {
-    this.msgSpinner = 'Cargando datos del Departamento...';
+    this.mensajeSpinner = 'Cargando datos del Departamento...';
     this.lcargando.ctlSpinner(true);
 
     /** Al seleccionar un departamento, cargo los datos de los avances de cada tarea */

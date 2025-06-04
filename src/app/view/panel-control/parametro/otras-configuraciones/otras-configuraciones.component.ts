@@ -16,7 +16,7 @@ standalone: false,
 export class OtrasConfiguracionesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = []
 
   filter: any = {
@@ -105,7 +105,7 @@ export class OtrasConfiguracionesComponent implements OnInit {
 
   async getPeriodos() {
     try {
-      this.msgSpinner = 'Cargando Periodos'
+      this.mensajeSpinner = 'Cargando Periodos'
       const response = await this.apiService.getPeriodos()
       console.log(response)
       this.cmb_periodo = response.data
@@ -117,7 +117,7 @@ export class OtrasConfiguracionesComponent implements OnInit {
 
   async getCatalogos() {
     try {
-      this.msgSpinner = 'Cargando Catalogos'
+      this.mensajeSpinner = 'Cargando Catalogos'
       const response = await this.apiService.getCatalogos({params: "'CONFIGURACION_MODULO'"})
       console.log(response)
       this.cmb_modulo = response.data['CONFIGURACION_MODULO']
@@ -130,7 +130,7 @@ export class OtrasConfiguracionesComponent implements OnInit {
 
   async getConfiguraciones() {
     try {
-      this.msgSpinner = 'Cargando Configuraciones'
+      this.mensajeSpinner = 'Cargando Configuraciones'
       const response = await this.apiService.getConfiguraciones({params: {filter: this.filter, paginate: this.paginate}})
       console.log(response)
       this.paginate.length = response.data.total

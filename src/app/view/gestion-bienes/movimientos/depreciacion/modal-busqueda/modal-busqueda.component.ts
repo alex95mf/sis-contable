@@ -15,7 +15,7 @@ standalone: false,
 })
 export class ModalBusquedaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   fTitle: string = "Busqueda de Documentos de Depreciación"
   vmButtons: any[] = [];
 
@@ -102,7 +102,7 @@ export class ModalBusquedaComponent implements OnInit {
   }
 
   getDepreciaciones() {
-    this.msgSpinner = 'Cargando Depreciaciones'
+    this.mensajeSpinner = 'Cargando Depreciaciones'
     this.lcargando.ctlSpinner(true)
 
     this.apiService.getDepreciaciones({filter: this.filter, paginate: this.paginate}).subscribe(

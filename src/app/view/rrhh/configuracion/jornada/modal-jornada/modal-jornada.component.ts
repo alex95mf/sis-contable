@@ -14,7 +14,7 @@ standalone: false,
   styleUrls: ['./modal-jornada.component.scss']
 })
 export class ModalJornadaComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   paginate: any;
   filter: any;
@@ -70,7 +70,7 @@ export class ModalJornadaComponent implements OnInit {
   }
 
   cargarJornadas() {
-    this.mensajeSppiner = "Cargando lista de Jornadas...";
+    this.mensajeSpinner = "Cargando lista de Jornadas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

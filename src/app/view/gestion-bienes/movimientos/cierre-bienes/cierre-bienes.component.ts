@@ -19,7 +19,7 @@ standalone: false,
 export class CierreBienesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = 'Cierre de Bienes';
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
 
   cmb_tipo_bien: Array<any> = [];
@@ -153,7 +153,7 @@ export class CierreBienesComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Catalogos'
+      this.mensajeSpinner = 'Cargando Catalogos'
       let catalogos = await this.apiService.getCatalogos({params: "'INV_TIPO_BIEN'"})
       catalogos['INV_TIPO_BIEN'] = catalogos['INV_TIPO_BIEN'].filter((item: any) => ['EXI', 'BCA'].includes(item.valor))
       this.cmb_tipo_bien = catalogos['INV_TIPO_BIEN']
@@ -177,7 +177,7 @@ export class CierreBienesComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Consultando Bienes'
+      this.mensajeSpinner = 'Consultando Bienes'
       let bienes = await this.apiService.getBienes({ filter: {...this.documento} })
       // console.log(bienes)
       this.columnas = (this.documento.tipo == 'BCA') ? [{name: 'costo', label: 'Costo'}] : [{name: 'stock', label: 'Stock'}, {name: 'costo', label: 'Costo'}, {name: 'costo_total', label: 'Costo Total'}]
@@ -194,7 +194,7 @@ export class CierreBienesComponent implements OnInit {
 
   async guardar() {
 
-    this.msgSpinner = "Verificando período contable";
+    this.mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let data = {
       "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -215,7 +215,7 @@ export class CierreBienesComponent implements OnInit {
 
               this.lcargando.ctlSpinner(true)
               try {
-                this.msgSpinner = 'Almacenando Documento'
+                this.mensajeSpinner = 'Almacenando Documento'
                 let response = await this.apiService.setDocumento({documento: this.documento})
                 console.log(response)
                 const { num_documento, id } = response
@@ -255,7 +255,7 @@ export class CierreBienesComponent implements OnInit {
 
   async getCierre(id: number) {
     try {
-      this.msgSpinner = 'Leyendo Documento'
+      this.mensajeSpinner = 'Leyendo Documento'
       let response = await this.apiService.getCierre(id)
       return response;
     } catch (err) {
@@ -275,7 +275,7 @@ export class CierreBienesComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.msgSpinner = "Verificando período contable";
+      this.mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
       let data = {
         "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -288,7 +288,7 @@ export class CierreBienesComponent implements OnInit {
             if (res["data"][0]?.estado !=='C') {
               this.lcargando.ctlSpinner(true)
               try {
-                this.msgSpinner = 'Eliminando Cierre'
+                this.mensajeSpinner = 'Eliminando Cierre'
                 await this.apiService.deleteCierre(this.documento.id)
 
                 this.lcargando.ctlSpinner(false)

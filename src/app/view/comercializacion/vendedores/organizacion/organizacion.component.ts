@@ -13,7 +13,7 @@ standalone: false,
   styleUrls: ["./organizacion.component.scss"],
 })
 export class OrganizacionComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   dataUser: any;

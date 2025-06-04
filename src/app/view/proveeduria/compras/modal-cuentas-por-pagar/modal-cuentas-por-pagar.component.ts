@@ -23,7 +23,7 @@ export class ModalCuentasPorPagarComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
   @ViewChild(MatPaginator) paginator: MatPaginator
   @Input() partida: any;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
 
   tbl_cuentas: CuentaContable[] = [];

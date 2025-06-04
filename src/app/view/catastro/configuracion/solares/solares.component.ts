@@ -23,7 +23,7 @@ standalone: false,
 })
 export class SolaresComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
 
   dataUser: any;
@@ -177,7 +177,7 @@ export class SolaresComponent implements OnInit {
   }
 
   async cargaCatalogos() {
-    this.msgSpinner = 'Cargando Catalogos'
+    this.mensajeSpinner = 'Cargando Catalogos'
     this.lcargando.ctlSpinner(true)
     
     try {
@@ -282,7 +282,7 @@ export class SolaresComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.msgSpinner = 'Almacenando Solar'
+        this.mensajeSpinner = 'Almacenando Solar'
         let response = await this.apiService.setSolar({solar: this.solar})
         console.log(response)
         Swal.fire({
@@ -331,7 +331,7 @@ export class SolaresComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.msgSpinner = 'Modificando Solar'
+        this.mensajeSpinner = 'Modificando Solar'
         //let response = await this.apiService.putCatalogo(this.itemCatalogo.id_catalogo, {catalogo: this.itemCatalogo})
        // console.log(response)
         //

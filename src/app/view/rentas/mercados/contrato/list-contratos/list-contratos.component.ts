@@ -18,7 +18,7 @@ standalone: false,
 export class ListContratosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   fTitle = 'Listado de Contratos'
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: any
   dtOptions: DataTables.Settings = {}
   dtTrigger = new Subject()
@@ -73,7 +73,7 @@ export class ListContratosComponent implements OnInit {
       },
     };
 
-    this.msgSpinner = 'Cargando Contratos'
+    this.mensajeSpinner = 'Cargando Contratos'
     this.lcargando.ctlSpinner(true)
     this.apiService.getContratosList().subscribe(
       res => {
@@ -116,7 +116,7 @@ export class ListContratosComponent implements OnInit {
   }
 
   showContrato(contrato) {
-    this.msgSpinner = 'Obteniento Contrato'
+    this.mensajeSpinner = 'Obteniento Contrato'
     this.lcargando.ctlSpinner(true)
     this.apiService.getContratoCompleto(contrato.id).subscribe(
       res => {
@@ -153,7 +153,7 @@ standalone: false,
 })
 export class ListContratosComponent implements OnInit {
 
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -247,7 +247,7 @@ export class ListContratosComponent implements OnInit {
   }
 
   cargarLiquidaciones(){
-    this.msgSpinner = "Cargando lista de Contratos...";
+    this.mensajeSpinner = "Cargando lista de Contratos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -278,7 +278,7 @@ export class ListContratosComponent implements OnInit {
   }
 
   showContrato(id): void {
-    this.msgSpinner = 'Obteniento Contrato'
+    this.mensajeSpinner = 'Obteniento Contrato'
     this.lcargando.ctlSpinner(true)
     this.contratoSrv.getContratoCompleto(id).subscribe(
       res => {

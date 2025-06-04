@@ -18,7 +18,7 @@ export class ModalBuscaCodigoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   @Input() bien
   @Input() query
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: Botonera[] = []
 
   filter: any = {
@@ -102,7 +102,7 @@ export class ModalBuscaCodigoComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
 
     try {
-      this.msgSpinner = 'Obteniendo Codigos'
+      this.mensajeSpinner = 'Obteniendo Codigos'
       const response = await this.apiService.getCodigos(data)
       this.paginate.length = response.total
       this.resultados = response.data

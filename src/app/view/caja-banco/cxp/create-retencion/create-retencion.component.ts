@@ -22,7 +22,7 @@ standalone: false,
   styleUrls: ['./create-retencion.component.scss']
 })
 export class CreateRetencionComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('printCDE') printCDE: ElementRef;
   @ViewChild('printRTECXP') printRTECXP: ElementRef;
@@ -177,7 +177,7 @@ export class CreateRetencionComponent implements OnInit {
       }
     }
 
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     if (this.filterRet == "RTC") {
       this.createRetSrv.getAvailableCxP(payload).subscribe(response => {
@@ -396,7 +396,7 @@ export class CreateRetencionComponent implements OnInit {
       punto_emision:this.current_box.punto_emision
     }
 
-    this.mensajeSppiner = "Guardando retencion...";
+    this.mensajeSpinner = "Guardando retencion...";
     this.lcargando.ctlSpinner(true);
     this.createRetSrv.addCxPRetencion(data).subscribe(response => {
       this.print_rt_cxp = response['data'];

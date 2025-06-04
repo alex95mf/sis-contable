@@ -23,7 +23,7 @@ standalone: false,
 export class CierreGeneralComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   fTitle = "Cierre general";
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = [];
   dataUser: any;
   permissions: any;
@@ -214,7 +214,7 @@ export class CierreGeneralComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -267,7 +267,7 @@ export class CierreGeneralComponent implements OnInit {
 
         if (result.isConfirmed) {
 
-          this.msgSpinner = "Verificando período contable";
+          this.mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(moment(this.fecha_consulta).format('YYYY')),
@@ -372,7 +372,7 @@ export class CierreGeneralComponent implements OnInit {
 
   cerrarCajaDia() {
 
-    this.msgSpinner = 'Realizando cierre general...';
+    this.mensajeSpinner = 'Realizando cierre general...';
     this.lcargando.ctlSpinner(true);
 
     console.log(this.caja_dia);
@@ -437,7 +437,7 @@ export class CierreGeneralComponent implements OnInit {
 
 
   getConceptos() {
-    this.msgSpinner = 'Obteniendo Conceptos...';
+    this.mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -497,7 +497,7 @@ export class CierreGeneralComponent implements OnInit {
 
   getCajasDia() {
     // obtiene todas las cajas dia de ese dia para hacer el reporte general
-    this.msgSpinner = 'Cargando reportes de todas las cajas...';
+    this.mensajeSpinner = 'Cargando reportes de todas las cajas...';
     this.lcargando.ctlSpinner(true);
     console.log(this.today);
     console.log(this.fecha_consulta);
@@ -635,7 +635,7 @@ export class CierreGeneralComponent implements OnInit {
     //   return ;
     // }
 
-    this.msgSpinner = 'Reabriendo caja...';
+    this.mensajeSpinner = 'Reabriendo caja...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1033,7 +1033,7 @@ export class CierreGeneralComponent implements OnInit {
     if (result.isConfirmed) {
       // Eliminar depositos del dia
       this.lcargando.ctlSpinner(true)
-      this.msgSpinner = 'Eliminando deposito'
+      this.mensajeSpinner = 'Eliminando deposito'
       try {
         const response = await this.apiSrv.eliminarDeposito({fecha: this.fecha_consulta})
         console.log(response)

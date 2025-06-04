@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./concepto-form.component.scss']
 })
 export class ConceptoFormComponent implements OnInit {
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   dataUser: any;
 
@@ -99,7 +99,7 @@ export class ConceptoFormComponent implements OnInit {
           // Obtener Regla que aplica
           /* this.lcargando.ctlSpinner(true)
           try {
-            this.msgSpinner = 'Cargando Regla ESIGEF'
+            this.mensajeSpinner = 'Cargando Regla ESIGEF'
             let restricciones = await this.conceptosSrv.getRegla({cuenta: res.data})
             this.lcargando.ctlSpinner(false)
 
@@ -193,17 +193,17 @@ export class ConceptoFormComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Catalogos'
+      this.mensajeSpinner = 'Cargando Catalogos'
       let catalogos = await this.conceptosSrv.getCatalog({ params: "'REN_CONCEPTO_TIPO_CALCULO'" });
       this.tipoCalculosList = catalogos['REN_CONCEPTO_TIPO_CALCULO'];
 
       if (!this.isNew) {
-        this.msgSpinner = 'Cargando Tarifas'
+        this.mensajeSpinner = 'Cargando Tarifas'
         let tarifas = await this.conceptosSrv.getTarifasConcepto({ id_concepto: this.data.id_concepto });
         this.tarifasList = tarifas;
         this.hayTarifas = this.tarifasList.length > 0;
 
-        this.msgSpinner = 'Cargando Anexos'
+        this.mensajeSpinner = 'Cargando Anexos'
         let anexo = await this.conceptosSrv.getAnexo({ concepto: this.data.id_concepto, component: this.module_comp })
         console.log(anexo)
         this.anexo = anexo
@@ -235,7 +235,7 @@ export class ConceptoFormComponent implements OnInit {
   }
 
   /* fillTarifas() {
-    this.msgSpinner = "Cargando tarifas...";
+    this.mensajeSpinner = "Cargando tarifas...";
     this.lcargando.ctlSpinner(true);
     console.log(this.data)
     let concepto = {
@@ -281,7 +281,7 @@ export class ConceptoFormComponent implements OnInit {
   } */
 
   /* getCatalogs() {
-    this.msgSpinner = "Cargando conceptos...";
+    this.mensajeSpinner = "Cargando conceptos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -308,7 +308,7 @@ export class ConceptoFormComponent implements OnInit {
   } */
 
   /* getConceptoBy(id) {
-    this.msgSpinner = "Obteniendo conceptos...";
+    this.mensajeSpinner = "Obteniendo conceptos...";
     this.lcargando.ctlSpinner(true);
     this.conceptosSrv.getConceptoBy(id).subscribe(
       (res) => {
@@ -358,7 +358,7 @@ export class ConceptoFormComponent implements OnInit {
     
     // })
     // try {
-    //   this.msgSpinner = 'Validacion ESIGEF'
+    //   this.mensajeSpinner = 'Validacion ESIGEF'
     //   const response = await this.conceptosSrv.validarEsigef({concepto: this.concepto});
     //   console.log(response)
     //   this.lcargando.ctlSpinner(false)
@@ -500,7 +500,7 @@ export class ConceptoFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.msgSpinner = "Guardando concepto...";
+        this.mensajeSpinner = "Guardando concepto...";
         this.lcargando.ctlSpinner(true);
 
         const usersFilter = this.commonSrv.filterUserNotification(1, 40)
@@ -585,7 +585,7 @@ export class ConceptoFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.msgSpinner = "Guardando concepto..."
+        this.mensajeSpinner = "Guardando concepto..."
         this.lcargando.ctlSpinner(true);
 
         let data = {
@@ -610,7 +610,7 @@ export class ConceptoFormComponent implements OnInit {
             console.log(res)
             if (this.fileList?.length > 0) {
               try {
-                this.msgSpinner = 'Almacenando Resolucion'
+                this.mensajeSpinner = 'Almacenando Resolucion'
                 let dataAnexo = {
                   // Informacion para almacenamiento de anexo y bitacora
                   module: this.permissions.id_modulo,
@@ -771,7 +771,7 @@ export class ConceptoFormComponent implements OnInit {
         ip: this.commonSrv.getIpAddress()
       }
 
-      this.msgSpinner = 'Eliminando Resolucion'
+      this.mensajeSpinner = 'Eliminando Resolucion'
       this.lcargando.ctlSpinner(true)
       this.conceptosSrv.deleteAnexo(data).subscribe(
         res => {

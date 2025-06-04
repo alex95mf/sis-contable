@@ -16,7 +16,7 @@ standalone: false,
   styleUrls: ['./modal-buscar-producto.component.scss']
 })
 export class ModalBuscarProductoComponent implements OnInit {
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator : MatPaginator
@@ -99,7 +99,7 @@ export class ModalBuscarProductoComponent implements OnInit {
 
 
 
-      this.mensajeSpiner = 'Cargando Productos'
+      this.mensajeSpinner = 'Cargando Productos'
       let productos =await this.productoSrv.getProductos({filter: this.filter, paginate : this.paginate});
 this.lista_productos= productos.data;
 this.paginate.length = productos.total;
@@ -158,7 +158,7 @@ this.paginate.length = productos.total;
     this.CargarProductos();
   }
   async CargarProductos(){
-    this.mensajeSpiner = 'Cargando Productos';
+    this.mensajeSpinner = 'Cargando Productos';
     this.lcargando.ctlSpinner(true)
     try {
 

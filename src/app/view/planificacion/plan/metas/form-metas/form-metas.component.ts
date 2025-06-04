@@ -24,7 +24,7 @@ export class FormMetasComponent implements OnInit {
   lcargando: CcSpinerProcesarComponent;
 
   fTitle = `Actualizando meta para programa ` ;
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any;
 
   dataUser: any;
@@ -172,7 +172,7 @@ export class FormMetasComponent implements OnInit {
       "politica": elem.ppg
     };
     this.cuerpoMetas.meta_zonal = [];
-    this.msgSpinner = 'Cargando Metas para la Zona...';
+    this.mensajeSpinner = 'Cargando Metas para la Zona...';
     this.lcargando.ctlSpinner(true);
     this.metaSrv.getMetaZona(ppg).subscribe(
       (res) => {
@@ -193,7 +193,7 @@ export class FormMetasComponent implements OnInit {
 
     // precarga ppg
     this.cuerpoMetas.ppg = [];
-    this.msgSpinner = 'Cargando Politicas...';
+    this.mensajeSpinner = 'Cargando Politicas...';
     let opg = {
       "opg": elem.opg
     };
@@ -221,7 +221,7 @@ export class FormMetasComponent implements OnInit {
     let eje = {
       'eje': elem.eje
     };
-    this.msgSpinner = 'Cargado OPG...';
+    this.mensajeSpinner = 'Cargado OPG...';
     this.lcargando.ctlSpinner(true);
     this.metaSrv.getOPG(eje).subscribe(
       res => {
@@ -246,7 +246,7 @@ export class FormMetasComponent implements OnInit {
     let ods = {
       "ods": elem.ods
     };
-    this.msgSpinner = 'Cargando Ejes...';
+    this.mensajeSpinner = 'Cargando Ejes...';
     this.lcargando.ctlSpinner(true);
     this.metaSrv.getEje(ods).subscribe(
       (res) => {
@@ -268,7 +268,7 @@ export class FormMetasComponent implements OnInit {
 
 
     // precarga de metas ods
-    this.msgSpinner = 'Cargando Metas ODS...';
+    this.mensajeSpinner = 'Cargando Metas ODS...';
     this.lcargando.ctlSpinner(true);
     this.cuerpoMetas.meta_ods = [];
     this.metaSrv.getMetasODS(ods).subscribe(
@@ -309,7 +309,7 @@ export class FormMetasComponent implements OnInit {
   }
 
   // cargaProgramas() {
-  //   this.msgSpinner = "Cargando Programas...";
+  //   this.mensajeSpinner = "Cargando Programas...";
   //   this.lcargando.ctlSpinner(true);
 
   //   this.metaSrv.getProgramas().subscribe(
@@ -349,7 +349,7 @@ export class FormMetasComponent implements OnInit {
   // }
 
   // cargaODS() {
-  //   this.msgSpinner = 'Cargando ODS...';
+  //   this.mensajeSpinner = 'Cargando ODS...';
   //   this.metaSrv.getODS().subscribe(
   //     (res) => {
   //       res['data'].forEach(ods => {
@@ -370,7 +370,7 @@ export class FormMetasComponent implements OnInit {
   // }
 
   // cargarCatalogos() {
-  //   this.msgSpinner = 'Cargando Catalogos...';
+  //   this.mensajeSpinner = 'Cargando Catalogos...';
   //   let data = {
   //     params: "'PLA_DEPARTAMENTO','PLA_COMPETENCIA','PLA_OE','PLA_META_RESULTADO',\
   //     'PLA_INDICADOR','PLA_TENDENCIA','PLA_TIPO_INTERVENCION'"
@@ -444,7 +444,7 @@ export class FormMetasComponent implements OnInit {
 
   // obtenerMetas() {
 
-  //   this.msgSpinner = 'Obteniendo Metas...';
+  //   this.mensajeSpinner = 'Obteniendo Metas...';
   //   let data = {
   //     params: this.programas
   //   };
@@ -500,7 +500,7 @@ export class FormMetasComponent implements OnInit {
       let data = {
         "ods": event
       };
-      this.msgSpinner = 'Cargado Metas para ODS...';
+      this.mensajeSpinner = 'Cargado Metas para ODS...';
       
       this.lcargando.ctlSpinner(true);
       this.metaSrv.getMetasODS(data).subscribe(
@@ -528,7 +528,7 @@ export class FormMetasComponent implements OnInit {
     //   let data = {
     //     "ods": this.seleccion.ods
     //   };
-    //   this.msgSpinner = 'Cargado Metas para ODS...';
+    //   this.mensajeSpinner = 'Cargado Metas para ODS...';
       
     //   this.lcargando.ctlSpinner(true);
     //   this.metaSrv.getMetasODS(data).subscribe(
@@ -561,7 +561,7 @@ export class FormMetasComponent implements OnInit {
       let data = {
         "ods": event
       };
-      this.msgSpinner = 'Cargando Ejes...';
+      this.mensajeSpinner = 'Cargando Ejes...';
 
       this.lcargando.ctlSpinner(true);
       this.metaSrv.getEje(data).subscribe(
@@ -608,7 +608,7 @@ export class FormMetasComponent implements OnInit {
       let data = {
         'eje': event
       };
-      this.msgSpinner = 'Cargado OPG...';
+      this.mensajeSpinner = 'Cargado OPG...';
       
       this.lcargando.ctlSpinner(true)
       this.metaSrv.getOPG(data).subscribe(
@@ -644,7 +644,7 @@ export class FormMetasComponent implements OnInit {
       this.cuerpoMetas.ppg = [];
       this.seleccion.ppg = 0;
       this.step = 5;
-      this.msgSpinner = 'Cargando Politicas...';
+      this.mensajeSpinner = 'Cargando Politicas...';
       let data = {
         "opg": event
       };
@@ -683,7 +683,7 @@ export class FormMetasComponent implements OnInit {
       this.cuerpoMetas.meta_zonal = [];
       this.seleccion.meta_zonal = 0;
       this.step = 6;
-      this.msgSpinner = 'Cargando Metas para la Zona...';
+      this.mensajeSpinner = 'Cargando Metas para la Zona...';
       let data = {
         "politica": event
       };
@@ -812,7 +812,7 @@ export class FormMetasComponent implements OnInit {
       cambio: this.selected
     };
     // console.log(data);
-    this.msgSpinner = 'Guardando Metas por Programa...';
+    this.mensajeSpinner = 'Guardando Metas por Programa...';
     this.lcargando.ctlSpinner(true);
     this.metaSrv.editarMeta(data).subscribe(
       res => {

@@ -36,7 +36,7 @@ export class PagoAnticipadoComponent implements OnInit {
 
   vmButtons: any = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(ButtonRadioActiveComponent, { static: false }) buttonRadioActiveComponent: ButtonRadioActiveComponent;
 
@@ -139,7 +139,7 @@ export class PagoAnticipadoComponent implements OnInit {
           this.validaciones.mensajeAdvertencia("Adertencia","Por favor selecione un proveedor");
           return;
         }
-        this.mensajeSppiner = "Seteando valores...";
+        this.mensajeSpinner = "Seteando valores...";
         this.lcargando.ctlSpinner(true);
         this.pagoAnticipadoService.getAccountsByDetails({ company_id: this.dataUser.id_empresa }).subscribe((res) => {
           this.arrayBanks = res["data"];
@@ -316,7 +316,7 @@ export class PagoAnticipadoComponent implements OnInit {
   }
 
   recargarPa(){
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     if(this.dtElement.dtInstance){
       this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
@@ -514,7 +514,7 @@ export class PagoAnticipadoComponent implements OnInit {
 
         console.log("this.selectPagoAnticipo: ", this.selectPagoAnticipo)
 
-        this.mensajeSppiner = "Aplicando Pago Anticipado";
+        this.mensajeSpinner = "Aplicando Pago Anticipado";
         this.lcargando.ctlSpinner(true);
         this.pagoAnticipadoService.modificarPagoAnticipado(this.selectPagoAnticipo).subscribe((datos:any)=>{
           this.lcargando.ctlSpinner(false);
@@ -741,7 +741,7 @@ export class PagoAnticipadoComponent implements OnInit {
 
         }
 
-        this.mensajeSppiner = "Amulando Pago Anticipado";
+        this.mensajeSpinner = "Amulando Pago Anticipado";
         this.lcargando.ctlSpinner(true);
         this.pagoAnticipadoService.anularPagoAnticipado(valor).subscribe(datos=>{
           this.lcargando.ctlSpinner(false);

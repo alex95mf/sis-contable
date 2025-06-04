@@ -45,7 +45,7 @@ export class PagosServiciosComponent implements OnInit {
   current_date: Date = new Date();
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 
@@ -166,7 +166,7 @@ export class PagosServiciosComponent implements OnInit {
     this.values.accion = `Registro de pago de servicio`;
     this.values.id_controlador = myVarGlobals.fPagoServicios;
 
-    this.mensajeSppiner = "Añadiendo...";
+    this.mensajeSpinner = "Añadiendo...";
     this.lcargando.ctlSpinner(true);
     this.pSrv.addPaymentAndServ(this.values).subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -186,7 +186,7 @@ export class PagosServiciosComponent implements OnInit {
     this.values.accion = `Actualización de pago del servicio ${this.values.id}`;
     this.values.id_controlador = myVarGlobals.fPagoServicios;
 
-    this.mensajeSppiner = "Actualizando...";
+    this.mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.pSrv.setPaymentAndServ(this.values).subscribe(res => {
       this.lcargando.ctlSpinner(false);

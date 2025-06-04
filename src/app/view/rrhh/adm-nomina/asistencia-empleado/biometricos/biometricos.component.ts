@@ -14,7 +14,7 @@ standalone: false,
 })
 export class BiometricosComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string;
+  mensajeSpinner: string;
   @ViewChild('inputFile') fileUpload: ElementRef;
   fileName: string|null = null;
 
@@ -66,7 +66,7 @@ export class BiometricosComponent implements OnInit, OnDestroy {
 
   async getPeriodos() {
     try {
-      this.msgSpinner = 'Cargando Periodos'
+      this.mensajeSpinner = 'Cargando Periodos'
       const response = await this.apiService.getPeriodos()
       console.log(response)
       this.lst_periodos = response
@@ -89,7 +89,7 @@ export class BiometricosComponent implements OnInit, OnDestroy {
 
   async getBiometricos() {
     try {
-      this.msgSpinner = 'Cargando Biometricos'
+      this.mensajeSpinner = 'Cargando Biometricos'
       const response = await this.apiService.getCatalogo({params: "'RRHH_BIOMETRICO'"})
       console.log(response)
       this.lst_biometrico = response.data['RRHH_BIOMETRICO']
@@ -151,7 +151,7 @@ export class BiometricosComponent implements OnInit, OnDestroy {
 
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
-      this.msgSpinner = 'Procesando archivo de Marcaciones'
+      this.mensajeSpinner = 'Procesando archivo de Marcaciones'
       try {
         const response = await this.apiService.setMarcaciones(this.file, {periodo: this.periodoSelected, mes: this.mesSelected, dispositivo: this.biometricoSelected})
         console.log(response)

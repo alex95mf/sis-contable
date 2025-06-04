@@ -14,7 +14,7 @@ standalone: false,
 })
 export class ModalConfiguracionDetallesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: Botonera[] = []
   fTitle: string = 'Nuevo Parametro'
 
@@ -108,7 +108,7 @@ export class ModalConfiguracionDetallesComponent implements OnInit {
 
   async setConfiguracion() {
     try {
-      this.msgSpinner = 'Almacenando Configuracion'
+      this.mensajeSpinner = 'Almacenando Configuracion'
       const response = await this.apiService.setConfiguracion({configuracion: this.registro})
       console.log(response)
       //
@@ -120,7 +120,7 @@ export class ModalConfiguracionDetallesComponent implements OnInit {
 
   async updateConfiguracion() {
     try {
-      this.msgSpinner = 'Actualizando Configuracion'
+      this.mensajeSpinner = 'Actualizando Configuracion'
       const response = await this.apiService.updateConfiguracion(this.registro.id, {configuracion: this.registro})
       console.log(response)
       //

@@ -19,7 +19,7 @@ standalone: false,
 })
 export class AnexosListComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   fTitle = 'Listado de Anexos'
   dataUser: any
   permissions: any
@@ -56,7 +56,7 @@ export class AnexosListComponent implements OnInit {
     )
     this.commonService.saveContrato.asObservable().subscribe(
       res => {
-        this.msgSpinner = 'Actualizando lista de anexos'
+        this.mensajeSpinner = 'Actualizando lista de anexos'
         this.lcargando.ctlSpinner(true)
         setTimeout(() => {
           this.apiService.getAnexosContrato({id_contrato: res.id_contrato, component: myVarGlobals.fRenContrato}).subscribe(
@@ -110,7 +110,7 @@ export class AnexosListComponent implements OnInit {
             anexo: anexo
           }
       
-          this.msgSpinner = 'Eliminando anexo'
+          this.mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true)
       
           this.apiService.deleteAnexo(data).subscribe(

@@ -20,7 +20,7 @@ standalone: false,
 })
 export class FormularioConceptosComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargnado...";
+  mensajeSpinner: string = "Cargnado...";
   @ViewChild(CcSpinerProcesarComponent, { static: false}) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -113,7 +113,7 @@ export class FormularioConceptosComponent implements OnInit {
 
   // Cargar conceptos
   getConceptos() {
-    this.mensajeSppiner = 'Obteniendo Conceptos...';
+    this.mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -204,7 +204,7 @@ export class FormularioConceptosComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSppiner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -244,7 +244,7 @@ export class FormularioConceptosComponent implements OnInit {
   }
 
   cargarLiquidaciones(){
-    this.mensajeSppiner = "Cargando lista de Liquidaciones...";
+    this.mensajeSpinner = "Cargando lista de Liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

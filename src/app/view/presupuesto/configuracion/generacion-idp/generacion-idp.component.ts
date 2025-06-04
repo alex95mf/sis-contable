@@ -33,7 +33,7 @@ export class GeneracionIdpComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild("print") print!: ElementRef;
   fTitle = "Generación de IDP";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -201,12 +201,12 @@ export class GeneracionIdpComponent implements OnInit {
         this.documento = res;
         this.documento.fecha = res.fecha.split(" ")[0];
         this.documento.mercado = this.mercados.find(m => m.id == res.fk_mercado);
-        this.msgSpinner = 'Cargando...'
+        this.mensajeSpinner = 'Cargando...'
         this.puestos_filter = this.puestos.filter(e => e.fk_mercado == res.fk_mercado)
         this.documento.puesto = res.fk_mercado_puesto;
 
         if (res.fk_documento_2 && res.fk_documento_2 != 0) {
-          this.msgSpinner = 'Cargando datos de la Garantía...';
+          this.mensajeSpinner = 'Cargando datos de la Garantía...';
           this.lcargando.ctlSpinner(true);
           let data = {
             inspeccion: res.fk_documento_2
@@ -300,7 +300,7 @@ export class GeneracionIdpComponent implements OnInit {
         this.solicitud = [];
         this.solicitudDetalle = [];
         if (res.id_solicitud != null || res.id_solicitud != undefined) {
-          this.msgSpinner = 'Cargando ...';
+          this.mensajeSpinner = 'Cargando ...';
           this.lcargando.ctlSpinner(true);
           let data = {
             id_solicitud: res.id_solicitud
@@ -495,7 +495,7 @@ export class GeneracionIdpComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -527,11 +527,11 @@ export class GeneracionIdpComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true);
     try {
-      this.msgSpinner = 'Cargando Periodos';
+      this.mensajeSpinner = 'Cargando Periodos';
       let periodos = await this.genIdpSvr.getPeriodos();
       this.cmb_periodo = periodos;
 
-      // this.msgSpinner = 'Cargando Catalogos';
+      // this.mensajeSpinner = 'Cargando Catalogos';
       // let catalogos = await this.genIdpSvr.getCatalogo({params: "'REC_FORMA_PAGO','REC_FORMA_PAGO_ENTIDAD','REC_FORMA_PAGO_EMISOR'"})
 
       this.lcargando.ctlSpinner(false)
@@ -570,7 +570,7 @@ export class GeneracionIdpComponent implements OnInit {
 
 
   getCatalogos() {
-    this.msgSpinner = 'Cargando Catalogos...';
+    this.mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -698,7 +698,7 @@ export class GeneracionIdpComponent implements OnInit {
 
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-                  this.msgSpinner = 'Generando IDP...';
+                  this.mensajeSpinner = 'Generando IDP...';
                   this.lcargando.ctlSpinner(true);
                   this.documento.estado = "E";
                   this.documento.tipo_documento = this.concepto.codigo;

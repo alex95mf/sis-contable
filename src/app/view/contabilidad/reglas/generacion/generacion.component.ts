@@ -26,7 +26,7 @@ export class GeneracionComponent implements OnInit {
   mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Reglas";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -367,7 +367,7 @@ export class GeneracionComponent implements OnInit {
   }
 
   // validaPermisos = () => {
-  //   this.msgSpinner = 'Cargando Permisos de Usuario...';
+  //   this.mensajeSpinner = 'Cargando Permisos de Usuario...';
   //   this.lcargando.ctlSpinner(true);
   //   this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     
@@ -485,7 +485,7 @@ export class GeneracionComponent implements OnInit {
       params: "'CON_TIPO_REGLA'",
       //params: "'OP_CONCEPTOS','PAG_TIPO_DESEMBOLSO'",
     };
-    this.msgSpinner = "Buscando tipo de regla...";
+    this.mensajeSpinner = "Buscando tipo de regla...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogo(data).subscribe(
 
@@ -563,7 +563,7 @@ export class GeneracionComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.msgSpinner = 'Guardando Regla...';
+        this.mensajeSpinner = 'Guardando Regla...';
         this.lcargando.ctlSpinner(true);
         this.documento.estado= 'A'
         let data = {
@@ -629,7 +629,7 @@ export class GeneracionComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.msgSpinner = 'Modificando Regla...';
+        this.mensajeSpinner = 'Modificando Regla...';
         this.lcargando.ctlSpinner(true);
         this.documento.estado= 'A'
         let data = {
@@ -691,7 +691,7 @@ export class GeneracionComponent implements OnInit {
         filter: this.filter,
         paginate: this.paginate
       };
-      this.msgSpinner = "Cargando reporte...";
+      this.mensajeSpinner = "Cargando reporte...";
       this.lcargando.ctlSpinner(true);
       this.apiSrv.consultaReporte(data).subscribe(
   

@@ -101,7 +101,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
   tipo_permiso_id_cc: BigInteger | String | number;
   afecta_rol_id_cc: BigInteger | String | number;
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   //
   actions: any = { btnGuardar: true, btnMod: false };
 
@@ -1043,7 +1043,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
       flpr_estado_id: 'EFPA',
       // formatDate(this.inputFechaIngreso.value,'yyyy-MM-dd',"en-US"),
     }
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.saveFaultAndPermission(data).subscribe(
       (res: GeneralResponseI) => {
@@ -1102,7 +1102,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
       flpr_observacion: this.formGroupFaltaAndPermiso.get('fnc_flpr_observacion').value,
       // formatDate(this.inputFechaIngreso.value,'yyyy-MM-dd',"en-US"),
     }
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.updatedFaultAndPermission(data).subscribe(
       (res: GeneralResponseI) => {
@@ -1142,7 +1142,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
 
     };
     // this.validaDt = false;
-    this.mensajeSppiner = "Borrando...";
+    this.mensajeSpinner = "Borrando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.deleteFaultAndPermission(data).subscribe(
       (res) => {
@@ -1550,7 +1550,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
       flpr_observacion:  dataFP.flpr_observacion,
       flpr_estado_id : $keywordVacDet
     }
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.statusFaultAndPermission(data).subscribe(
       (res: GeneralResponseI) => {

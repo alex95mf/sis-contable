@@ -23,7 +23,7 @@ export class ModalLocalDetComponent implements OnInit {
   validaciones = new ValidacionesFactory();
 
   fTitle: string = "Detalles de Local"
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: any[]
 
   cmb_activ_comer: any[] = []
@@ -150,7 +150,7 @@ export class ModalLocalDetComponent implements OnInit {
             // this.local['fk_contribuyente'] = { id_cliente: this.contribuyente.id_cliente }
             this.local.lt_categoria = this.local.local_turistico ? this.cmb_turistico_categoria.find(e => e.descripcion == this.local.lt_categoria.descripcion) : { descripcion: 0 }
             this.local.lt_categoria_2 = this.local.local_turistico ? this.cmb_turistico_subcategoria.find(e => e.descripcion == this.local.lt_categoria_2.descripcion) : { descripcion: 0 }
-            this.msgSpinner = 'Actualizando Local'
+            this.mensajeSpinner = 'Actualizando Local'
             this.lcargando.ctlSpinner(true);
 
             // console.log({ local: this.local });
@@ -191,7 +191,7 @@ export class ModalLocalDetComponent implements OnInit {
   }
 
   async getCatalogos() {
-    this.msgSpinner = 'Cargando Catalogos'
+    this.mensajeSpinner = 'Cargando Catalogos'
     this.lcargando.ctlSpinner(true)
     try {
       //
@@ -294,7 +294,7 @@ export class ModalLocalDetComponent implements OnInit {
   }
 
   getLocal() {
-    this.msgSpinner = 'Cargando datos de Local'
+    this.mensajeSpinner = 'Cargando datos de Local'
     this.lcargando.ctlSpinner(true)
     this.apiService.getLocal({ local: this.local_id }).subscribe(
       (res: any) => {

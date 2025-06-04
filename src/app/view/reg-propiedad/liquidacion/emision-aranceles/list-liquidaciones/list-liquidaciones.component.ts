@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ListLiquidacionesComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -107,7 +107,7 @@ export class ListLiquidacionesComponent implements OnInit {
   }
 
   cargarLiquidaciones(){
-    this.mensajeSppiner = "Cargando lista de Liquidaciones...";
+    this.mensajeSpinner = "Cargando lista de Liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

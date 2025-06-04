@@ -26,7 +26,7 @@ standalone: false,
 })
 export class CatalogoPresupuestoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
 
   //@Output() CloseModalTable = new EventEmitter();
 
@@ -484,7 +484,7 @@ export class CatalogoPresupuestoComponent implements OnInit {
   async confirmSave() {
 
     try {
-      // this.mensajeSppiner = 'Validando datos'
+      // this.mensajeSpinner = 'Validando datos'
       await this.validateData()
 
       try {
@@ -502,7 +502,7 @@ export class CatalogoPresupuestoComponent implements OnInit {
         if (response.isConfirmed) {
           // Almacenar la cuenta
           this.lcargando.ctlSpinner(true)
-          this.mensajeSppiner = 'Almacenando Partida'
+          this.mensajeSpinner = 'Almacenando Partida'
 
           this.cuenta = {
             codigo: this.numCatalogoCodigo,
@@ -687,7 +687,7 @@ export class CatalogoPresupuestoComponent implements OnInit {
 
         this.lcargando.ctlSpinner(true);
         try {
-          this.mensajeSppiner = 'Actualizando Catalogo Presupuestario'
+          this.mensajeSpinner = 'Actualizando Catalogo Presupuestario'
           let response = await this.pCuentasService.updateCuenta({catalogo: data})
           console.log(response)
 

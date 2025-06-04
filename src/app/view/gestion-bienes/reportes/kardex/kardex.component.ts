@@ -42,7 +42,7 @@ export class KardexComponent implements OnInit {
   @ViewChildren(NgSelectComponent) selects: Array<NgSelectComponent>;
   fTitle: string = 'Kardex - Movimientos';
   vmButtons: Array<Botonera> = [];
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   selectedReporte: any;  // Tipo Reporte
   selectedTipo: any;  // Tipo Bien
@@ -194,7 +194,7 @@ export class KardexComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Grupos'
+      this.mensajeSpinner = 'Cargando Grupos'
       let response: Array<any> = await this.apiService.getGruposBienes();
       let bodegas: Array<any> = await this.apiService.getBodegas();
       this.cmb_grupo = response
@@ -308,7 +308,7 @@ export class KardexComponent implements OnInit {
     // console.log(this.selectedGrupo)
    //if (event != undefined && this.selectedReporte == 'PSG') {
      this.lcargando.ctlSpinner(true)
-     this.msgSpinner = 'Filtrando Productos por Grupo de Bien'
+     this.mensajeSpinner = 'Filtrando Productos por Grupo de Bien'
      let data={
       id_grupo: event.id_grupo_productos
      }

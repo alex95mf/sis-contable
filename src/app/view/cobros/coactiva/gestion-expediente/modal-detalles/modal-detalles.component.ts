@@ -17,7 +17,7 @@ standalone: false,
 })
 export class ModalDetallesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
   ftitulo: any = "Detalles de Notificacion"
   vmButtons: any;
 
@@ -96,7 +96,7 @@ export class ModalDetallesComponent implements OnInit {
   }
 
   getExpedienteDetalles() {
-    this.msgSpinner = "Cargando detalles de Expediente"
+    this.mensajeSpinner = "Cargando detalles de Expediente"
     this.lcargando.ctlSpinner(true)
     this.apiService.getDetallesExpediente({expediente: this.expediente}).subscribe(
       (res: any) => {

@@ -24,7 +24,7 @@ export class ProveedoresComponent implements OnInit {
 
   @ViewChild("vaSelect") myInputVariable: ElementRef;
   public ddTree: DropDownTreeComponent;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('certificadoUpload') certificadoUpload: ElementRef;
 
@@ -515,7 +515,7 @@ export class ProveedoresComponent implements OnInit {
       if (result.isConfirmed) {
         this.lcargando.ctlSpinner(true)
         try {
-          this.mensajeSppiner = 'Eliminando Cuenta Bancaria'
+          this.mensajeSpinner = 'Eliminando Cuenta Bancaria'
           let response = await this.provSrv.deleteCuentaBancaria({cuenta})
           console.log(response)
           this.cuentas.splice(index, 1)[0].id_cuenta
@@ -1343,7 +1343,7 @@ export class ProveedoresComponent implements OnInit {
 
       if(this.cuentas[index].id_cuenta && this.cuentas[index].id_cuenta != 0){
         this.lcargando.ctlSpinner(true)
-        this.mensajeSppiner = 'Almacenando Certificado'
+        this.mensajeSpinner = 'Almacenando Certificado'
         try {
           let response = await this.provSrv.saveCertificado({
             id: this.cuentas[index].id_cuenta,
@@ -1388,7 +1388,7 @@ export class ProveedoresComponent implements OnInit {
       if( data.id_cuenta!= 0 && data.id_cuenta != undefined ){
         this.lcargando.ctlSpinner(true)
         try {
-          this.mensajeSppiner = 'Eliminando Certificado'
+          this.mensajeSpinner = 'Eliminando Certificado'
           let response = await this.provSrv.deleteCertificado({id: data.id_cuenta})
           console.log(response)
           this.cuentas[index].nombre_archivo = null;

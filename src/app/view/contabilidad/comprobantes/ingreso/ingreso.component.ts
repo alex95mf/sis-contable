@@ -22,7 +22,7 @@ standalone: false,
   styleUrls: ['./ingreso.component.scss']
 })
 export class IngresoComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   /* processing: any = false; */

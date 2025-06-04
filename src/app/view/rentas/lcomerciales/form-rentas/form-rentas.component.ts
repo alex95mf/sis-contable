@@ -24,7 +24,7 @@ standalone: false,
   styleUrls: ['./form-rentas.component.scss']
 })
 export class FormRentasComponent implements OnInit {
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -553,7 +553,7 @@ export class FormRentasComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpiner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {
@@ -597,7 +597,7 @@ export class FormRentasComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.mensajeSpiner = 'Obteniendo Recursos...';
+    this.mensajeSpinner = 'Obteniendo Recursos...';
     this.lcargando.ctlSpinner(true);
     let data = {
       params: "'REN_LOCAL_TURISTICO_CATEGORIA','REN_LOCAL_TURISTICO_CATEGORIA_2','FORM_INSPEC_COMISARIA', 'REN_TIPO_NEG', 'REN_GRUPO_NEG','TIPO_LETRERO','USO_VIA_PUBLICA','TIPO_USO_VIA_PUBLICA', 'CAT_SECTOR'"
@@ -815,7 +815,7 @@ export class FormRentasComponent implements OnInit {
             confirmButtonColor: '#4DBD74',
           }).then(async (result) => {
             if (result.isConfirmed) {
-              this.mensajeSpiner = "Guardando datos del formulario...";
+              this.mensajeSpinner = "Guardando datos del formulario...";
               this.lcargando.ctlSpinner(true);
 
               let data = {
@@ -1153,7 +1153,7 @@ export class FormRentasComponent implements OnInit {
   }
 
   cargaFoto(archivos) {
-    this.mensajeSpiner = 'Cargando fotos...';
+    this.mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 5) {
       for (let i = 0; i < archivos.length; i++) {

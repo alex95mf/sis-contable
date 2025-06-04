@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ["./estado-cuenta.component.scss"],
 })
 export class EstadoCuentaComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   vmButtons: any = [];
@@ -88,7 +88,7 @@ export class EstadoCuentaComponent implements OnInit {
     public validaciones: ValidacionesFactory,
   ) {
     /*this.commonVrs.editContribuyente.asObservable().subscribe((res) => {
-      this.mensajeSppiner = 'Cargando deudas del contribuyente...'
+      this.mensajeSpinner = 'Cargando deudas del contribuyente...'
       this.lcargando.ctlSpinner(true);
       this.CancelForm();
       this.vmButtons[1].habilitar = false;
@@ -224,7 +224,7 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   validatePermission() {
-    this.mensajeSppiner = 'Cargando Permisos de Usuario...'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa
 
@@ -287,7 +287,7 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   getConceptos() {
-    this.mensajeSppiner = 'Cargando Tipos de Reporte';
+    this.mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.contribuyenteSrv.getConceptos().subscribe(
       (res: any) => {
@@ -333,7 +333,7 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   calcularTotal() {
-    this.mensajeSppiner = 'Calculando total de las deudas...';
+    this.mensajeSpinner = 'Calculando total de las deudas...';
     this.lcargando.ctlSpinner(true);
     let total = 0;
     this.deudas.forEach(d => {
@@ -353,7 +353,7 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   handleFilter = () => {
-    this.mensajeSppiner = 'Filtrando Deudas'
+    this.mensajeSpinner = 'Filtrando Deudas'
     this.lcargando.ctlSpinner(true)
     this.contribuyenteSrv.getDeudas({ id_contribuyente: this.contribuyente_activo.id_cliente, filter: this.filter }).subscribe(
       (res: any) => {
@@ -394,7 +394,7 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   cargarDatosModal(dato?: any) {
-    this.mensajeSppiner = 'Cargando deudas del contribuyente...'
+    this.mensajeSpinner = 'Cargando deudas del contribuyente...'
     this.lcargando.ctlSpinner(true);
     if(dato) {
       this.contribuyente_activo = dato;

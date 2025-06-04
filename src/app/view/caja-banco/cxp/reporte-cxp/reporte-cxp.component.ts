@@ -49,7 +49,7 @@ export class ReporteCxpComponent implements OnInit {
   dtInformacion: any = {};
   locality: any;
   vmButtons: any;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   retencionSi:any;
   retencionNo:any;
   valorData:any;
@@ -180,7 +180,7 @@ export class ReporteCxpComponent implements OnInit {
          url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
        },
      };
-     this.mensajeSppiner = "Cargando...";
+     this.mensajeSpinner = "Cargando...";
      this.lcargando.ctlSpinner(true);
      this.reportesSrv.getReportCXP(data).subscribe(res => {
        this.lcargando.ctlSpinner(false);

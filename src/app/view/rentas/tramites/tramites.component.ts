@@ -20,7 +20,7 @@ standalone: false,
 })
 export class TramitesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string
+  mensajeSpinner: string
   fTitle: string = 'Registro de Trámites'
   vmButtons: any[] = []
   dataUser: any
@@ -124,7 +124,7 @@ export class TramitesComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true)
 
     let params = {
@@ -154,7 +154,7 @@ export class TramitesComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.msgSpinner = 'Cargando Catalogos'
+    this.mensajeSpinner = 'Cargando Catalogos'
     this.lcargando.ctlSpinner(true)
     this.apiService.getCatalogos({ params: "'PLA_DEPARTAMENTO'" }).subscribe(
       (res: any) => {
@@ -180,7 +180,7 @@ export class TramitesComponent implements OnInit {
   }
 
   getTramites() {
-    this.msgSpinner = 'Cargando Tramites'
+    this.mensajeSpinner = 'Cargando Tramites'
     this.lcargando.ctlSpinner(true)
     this.apiService.getTramites({ params: { filter: this.filter, paginate: this.paginate } }).subscribe(
       (res: any) => {
@@ -227,7 +227,7 @@ export class TramitesComponent implements OnInit {
   exportExcel() {
     let excelData = []
 
-    this.msgSpinner = 'Exportando Trámites'
+    this.mensajeSpinner = 'Exportando Trámites'
     this.lcargando.ctlSpinner(true)
     this.apiService.getTramites({ params: { filter: this.filter } }).subscribe(
       (res: any) => {

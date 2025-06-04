@@ -20,7 +20,7 @@ export class ListaMercadoComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, {static: false})
   lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   fTitle = 'Lista de mercado'
 
@@ -116,7 +116,7 @@ export class ListaMercadoComponent implements OnInit {
 
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     // this.empresLogo = this.dataUser.logoEmpresa
 
@@ -179,7 +179,7 @@ export class ListaMercadoComponent implements OnInit {
 
 
   cargarListMerc(){
-    this.msgSpinner = 'Cargando Lista Mercados'
+    this.mensajeSpinner = 'Cargando Lista Mercados'
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {
@@ -227,7 +227,7 @@ export class ListaMercadoComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.msgSpinner = "Cargando Catalogs";
+    this.mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'REN_MERCADO'",
     };

@@ -19,7 +19,7 @@ standalone: false,
 })
 export class AnexosListEnfermedadComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   fTitle = 'Listado de Anexos'
   @Input() dataUser: any
   @Input() permissions: any
@@ -43,7 +43,7 @@ export class AnexosListEnfermedadComponent implements OnInit {
     this.commonVarService.contribAnexoLoad.asObservable().subscribe(
       (res: any) => {
         this.lcargando.ctlSpinner(true)
-        this.msgSpinner = 'Cargando Anexos ...'
+        this.mensajeSpinner = 'Cargando Anexos ...'
         // console.log('anexos',res, this.permissions, this.dataUser);
         let data = {
           module: this.permissions.id_modulo,
@@ -125,7 +125,7 @@ export class AnexosListEnfermedadComponent implements OnInit {
       ip: this.commonService.getIpAddress()
     }
 
-    // this.msgSpinner = 'Eliminando anexo'
+    // this.mensajeSpinner = 'Eliminando anexo'
     // this.lcargando.ctlSpinner(true)
 
     this.apiService.deleteAnexo(data).subscribe(
@@ -174,7 +174,7 @@ export class AnexosListEnfermedadComponent implements OnInit {
             ip: this.commonService.getIpAddress()
           }
       
-          this.msgSpinner = 'Eliminando anexo'
+          this.mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true)
       
           this.apiService.deleteAnexo(data).subscribe(

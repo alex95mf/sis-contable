@@ -22,7 +22,7 @@ standalone: false,
 export class ParametrosComponent implements OnInit {
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
   dataUser: any;
@@ -133,7 +133,7 @@ export class ParametrosComponent implements OnInit {
       },
     };
 
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.parametrosService.obtenerActFijParametros(null).subscribe((datos:any)=>{
       this.lcargando.ctlSpinner(false);
@@ -248,7 +248,7 @@ export class ParametrosComponent implements OnInit {
     if(this.validaciones.verSiEsNull(this.parametros.idParametro) == undefined){
       this.parametros.accion = "Creación de parametro de adquisicion";
       this.parametros.isactive = 1;
-      this.mensajeSppiner = "Creando parametro...";
+      this.mensajeSpinner = "Creando parametro...";
       this.lcargando.ctlSpinner(true);
       this.parametrosService.crearDepreciaciones(this.parametros).subscribe((datos:any)=>{
         this.lcargando.ctlSpinner(false);
@@ -261,9 +261,9 @@ export class ParametrosComponent implements OnInit {
     }else{
       if(opcion == 3){
         this.parametros.accion = ("Eliminación de parametro de adquisicion del id " + this.parametros.idParametro);
-        this.mensajeSppiner = "Eliminando parametro...";
+        this.mensajeSpinner = "Eliminando parametro...";
       }else if(opcion == 2){
-        this.mensajeSppiner = "Modificando parametro...";
+        this.mensajeSpinner = "Modificando parametro...";
         this.parametros.accion = ("Modificación de parametro de adquisicion del id " + this.parametros.idParametro);
       }
       this.lcargando.ctlSpinner(true);

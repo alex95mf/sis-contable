@@ -53,7 +53,7 @@ standalone: false,
 })
 export class FacturasComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   detalleImpuesto: any = [];
@@ -4219,7 +4219,7 @@ export class FacturasComponent implements OnInit {
 
   async getLatest() {
     this.lcargando.ctlSpinner(true)
-    this.mensajeSppiner = 'Cargando Registro'
+    this.mensajeSpinner = 'Cargando Registro'
     try {
       const response = await this.comSrv.getUltimaFactura()
       console.log(response)
@@ -4249,7 +4249,7 @@ export class FacturasComponent implements OnInit {
       }
 
       this.lcargando.ctlSpinner(true)
-      this.mensajeSppiner = 'Cargando Registro'
+      this.mensajeSpinner = 'Cargando Registro'
       try {
         const response = await this.comSrv.getFacturasGeneradas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}) as any
         console.log(response)

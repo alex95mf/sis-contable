@@ -21,7 +21,7 @@ export class SueldoNuevoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   botonera: any = [];
   fTitle = "Nuevo Sueldo";
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   sueldos: any = [];
   dataUser: any;
   permissions: any;
@@ -232,7 +232,7 @@ export class SueldoNuevoComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpiner = "Guardando Nuevo Sueldo...";
+        this.mensajeSpinner = "Guardando Nuevo Sueldo...";
         this.lcargando.ctlSpinner(true);
 
         let data = {
@@ -304,7 +304,7 @@ export class SueldoNuevoComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpiner = "Editando Sueldo...";
+        this.mensajeSpinner = "Editando Sueldo...";
         this.lcargando.ctlSpinner(true);
 
         let data = {
@@ -360,24 +360,24 @@ export class SueldoNuevoComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.mensajeSpiner = 'Cargando Catalogos...'
+    this.mensajeSpinner = 'Cargando Catalogos...'
     this.lcargando.ctlSpinner(true)
     try {
       console.log("daniel")
       // Carga Listado de Grados
-      //this.mensajeSpiner = 'Cargando Grados'
+      //this.mensajeSpinner = 'Cargando Grados'
       this.grado = await this.apiSrv.getGrupoOcupacional();
 
       // Lista de Cargos
-      //this.mensajeSpiner = 'Cargando Cargos'
+      //this.mensajeSpinner = 'Cargando Cargos'
       this.cargo = await this.apiSrv.getCargos();
       console.log(this.cargo)
       //this.programas.map((programa: any) => Object.assign(programa, { presupuesto: 0 }))*/
       // Lista de Cargos
-     // this.mensajeSpiner = 'Cargando Tipo de Contratos'
+     // this.mensajeSpinner = 'Cargando Tipo de Contratos'
       this.contrato = await this.apiSrv.getTipos('TCC');
 
-      //this.mensajeSpiner = 'Cargando Tipo de Contratos'
+      //this.mensajeSpinner = 'Cargando Tipo de Contratos'
       this.estado = await this.apiSrv.getTipos('EST');
 
 

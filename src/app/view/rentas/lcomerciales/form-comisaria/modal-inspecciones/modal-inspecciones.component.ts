@@ -19,7 +19,7 @@ standalone: false,
   encapsulation: ViewEncapsulation.None
 })
 export class ModalInspeccionesComponent implements OnInit {
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent,{ static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
@@ -142,7 +142,7 @@ export class ModalInspeccionesComponent implements OnInit {
 
     //   },
     // ]
-    this.mensajeSpiner = "Cargando inspecciones...";
+    this.mensajeSpinner = "Cargando inspecciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -222,7 +222,7 @@ export class ModalInspeccionesComponent implements OnInit {
   closeModal(data?: any) {
     if(data){
       let id = data.id_inspeccion_res;
-      this.mensajeSpiner = "Cargando data de la inspeccion...";
+      this.mensajeSpinner = "Cargando data de la inspeccion...";
       this.lcargando.ctlSpinner(true);
       this.formSrv.getInspeccionBy(id).subscribe(
         (res)=>{

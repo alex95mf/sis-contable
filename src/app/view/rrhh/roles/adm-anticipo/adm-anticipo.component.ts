@@ -29,7 +29,7 @@ export class AdmAnticipoComponent implements OnInit {
   vmButtons: any = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(ImprimirRolComponent, { static: false })
@@ -183,7 +183,7 @@ export class AdmAnticipoComponent implements OnInit {
   obtenerEmpleados() {
     this.lConcepto = "";
     this.fecha_actual = moment(this.toDatePicker).format("YYYY-MM-DD");
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let idGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).id_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -403,7 +403,7 @@ export class AdmAnticipoComponent implements OnInit {
     let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");
 
     let validaTermina: boolean = false;
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     let nombreGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).nombre_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -549,7 +549,7 @@ export class AdmAnticipoComponent implements OnInit {
     let periodoInicio:any = moment(this.periodoInicio).format("YYYY-MM-DD");
     let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");
 
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let nombreGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).nombre_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -676,7 +676,7 @@ export class AdmAnticipoComponent implements OnInit {
         enviarData.push(dataPost);
       });
 
-      this.mensajeSppiner = "Anulando Anticipos...";
+      this.mensajeSpinner = "Anulando Anticipos...";
       this.lcargando.ctlSpinner(true);
       this.admAnticipoService.deleteRolPago({datosPost: enviarData}).subscribe((res: any) => {
           this.validaciones.mensajeExito("Exito","Los anticipos se anularon correctamente");
@@ -796,7 +796,7 @@ export class AdmAnticipoComponent implements OnInit {
       return;
     }
 
-    this.mensajeSppiner = "Apobando anticipo por favor espere...";
+    this.mensajeSpinner = "Apobando anticipo por favor espere...";
     this.lcargando.ctlSpinner(true);
     this.admAnticipoService.aprobarRolPago({datosPost: enviarData}).subscribe((res: any) => {
       this.validaciones.mensajeExito("Exito", "Los anticipos se aprobaron correctamente");

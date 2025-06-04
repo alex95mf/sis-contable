@@ -14,7 +14,7 @@ standalone: false,
 })
 export class ModalContribuyenteComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = [];
 
   paginate: any = {
@@ -104,7 +104,7 @@ export class ModalContribuyenteComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     
     try {
-      this.msgSpinner = "Cargando lista de Contribuyentes...";
+      this.mensajeSpinner = "Cargando lista de Contribuyentes...";
       let res = await this.apiService.getContribuyentes({params: { filter: this.filter, paginate: this.paginate }})
       this.paginate.length = res.total
       this.lst_contribuyente = res.data

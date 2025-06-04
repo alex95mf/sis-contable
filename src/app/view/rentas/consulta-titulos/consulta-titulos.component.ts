@@ -26,7 +26,7 @@ export class ConsultaTitulosComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
   fTitle: string = "Consulta de Títulos";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any[] = [];
   dataUser: any;
   permissions: any;
@@ -170,7 +170,7 @@ export class ConsultaTitulosComponent implements OnInit {
 
 
   getConceptos() {
-    this.msgSpinner = 'Cargando Conceptos';
+    this.mensajeSpinner = 'Cargando Conceptos';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptos().subscribe(
       (res: any) => {
@@ -215,7 +215,7 @@ export class ConsultaTitulosComponent implements OnInit {
 
   cargarConsulta(){
 
-    this.msgSpinner = 'Cargando...';
+    this.mensajeSpinner = 'Cargando...';
     this.lcargando.ctlSpinner(true);
     if(this.filter.estado==null){
       this.filter.estado = ''
@@ -354,7 +354,7 @@ btnExportarPdf() {
  btnExportarExcel() {
 
 
-  this.msgSpinner = 'Cargando...';
+  this.mensajeSpinner = 'Cargando...';
   this.lcargando.ctlSpinner(true);
   if(this.filter.estado==null){
     this.filter.estado = ''

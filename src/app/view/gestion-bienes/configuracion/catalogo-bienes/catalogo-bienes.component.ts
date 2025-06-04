@@ -33,7 +33,7 @@ export class CatalogoBienesComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
 
   constructor(
     private service: CatalogoBienesService,
@@ -141,7 +141,7 @@ export class CatalogoBienesComponent implements OnInit {
   }
 
   ObtenerCatalogoBienes(){
-    this.mensajeSppiner = "Cargando Catalogos bienes...";
+    this.mensajeSpinner = "Cargando Catalogos bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {

@@ -35,7 +35,7 @@ standalone: false,
 export class CatalogoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild('txtTipo') txtTipo: HTMLInputElement;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
 
   formReadonly: boolean = false;
@@ -163,7 +163,7 @@ export class CatalogoComponent implements OnInit {
 
   async getListas() {
     try {
-      this.msgSpinner = 'Cargando Arbol'
+      this.mensajeSpinner = 'Cargando Arbol'
       // const arbol = await this.apiService.getListas({root: 'CATASTRO'})
       const response = await this.apiService.getArbol()
       console.log(response)
@@ -205,7 +205,7 @@ export class CatalogoComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.msgSpinner = 'Almacenando Catalogo'
+        this.mensajeSpinner = 'Almacenando Catalogo'
         let response = await this.apiService.setCatalogo({catalogo: this.nuevoItemCatalogo})
         console.log(response)
 
@@ -277,7 +277,7 @@ export class CatalogoComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.msgSpinner = 'Modificando Catalogo'
+        this.mensajeSpinner = 'Modificando Catalogo'
         let response = await this.apiService.putCatalogo(this.itemCatalogo.id_catalogo, {catalogo: this.itemCatalogo})
         console.log(response)
         //
@@ -363,7 +363,7 @@ export class CatalogoComponent implements OnInit {
 
   async getItemCatalogo(catalogo: Catalogo) {
     try {
-      this.msgSpinner = 'Cargando Data'
+      this.mensajeSpinner = 'Cargando Data'
       const response = await this.apiService.getItemCatalogo({item: catalogo})
       console.log(response)
       this.nuevoItemVista = false

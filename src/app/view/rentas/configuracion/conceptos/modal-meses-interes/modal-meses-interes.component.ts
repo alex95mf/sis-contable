@@ -16,7 +16,7 @@ standalone: false,
 export class ModalMesesInteresComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Input() concepto: any;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Array<Botonera>;
 
   lst_tipo_persona: Array<string> = [];
@@ -81,7 +81,7 @@ export class ModalMesesInteresComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Tipo de Persona'
+      this.mensajeSpinner = 'Cargando Tipo de Persona'
       let tipoPersona = await this.apiService.getAgentRetencion()
       let datos = await this.apiService.getMesesIntereses({concepto: this.concepto})
       console.log(tipoPersona)
@@ -122,7 +122,7 @@ export class ModalMesesInteresComponent implements OnInit {
     }
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Guardando Configuracion'
+      this.mensajeSpinner = 'Guardando Configuracion'
       let response = await this.apiService.setMesesIntereses({concepto: this.concepto, configuracion: this.lst_tipo_persona})
       console.log(response)
       //

@@ -22,7 +22,7 @@ standalone: false,
 export class ModalFacturasComponent implements OnInit {
 
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
 
@@ -138,7 +138,7 @@ export class ModalFacturasComponent implements OnInit {
    }
 
    cargarFacturasGeneradas(){
-    this.mensajeSppiner = "Cargando lista de facturas...";
+    this.mensajeSpinner = "Cargando lista de facturas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

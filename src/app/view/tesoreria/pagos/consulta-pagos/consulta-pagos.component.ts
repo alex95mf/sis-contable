@@ -25,7 +25,7 @@ export class ConsultaPagosComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
   fTitle: string = "Consulta de Pagos";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any[] = [];
   dataUser: any;
   permissions: any;
@@ -163,7 +163,7 @@ export class ConsultaPagosComponent implements OnInit {
 
 
   getConceptos() {
-    this.msgSpinner = 'Cargando Conceptos';
+    this.mensajeSpinner = 'Cargando Conceptos';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptos().subscribe(
       (res: any) => {
@@ -217,7 +217,7 @@ export class ConsultaPagosComponent implements OnInit {
   }
   cargarConsulta(){
 
-    this.msgSpinner = 'Cargando...';
+    this.mensajeSpinner = 'Cargando...';
     this.lcargando.ctlSpinner(true);
     if(this.filter.estado==null){
       this.filter.estado = ''

@@ -18,7 +18,7 @@ standalone: false,
 export class ListTarifaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   fTitle = 'Listado de Tarifas por Concepto'
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: any
   dtOptions: DataTables.Settings = {}
   dtTrigger = new Subject();
@@ -65,7 +65,7 @@ export class ListTarifaComponent implements OnInit {
       },
     };
 
-    this.msgSpinner = 'Cargando Tarifas'
+    this.mensajeSpinner = 'Cargando Tarifas'
     this.lcargando.ctlSpinner(true)
     this.apiService.getTarifas().subscribe(
       res => {
@@ -117,7 +117,7 @@ export class ListTarifaComponent implements OnInit {
 
   editTarifa(tarifa) {
     /** param: ID de Tarifa */
-    this.msgSpinner = 'Obteniendo Tarifa'
+    this.mensajeSpinner = 'Obteniendo Tarifa'
     this.lcargando.ctlSpinner(true)
     this.apiService.getTarifaConceptoDetalle(tarifa).subscribe(
       res => {

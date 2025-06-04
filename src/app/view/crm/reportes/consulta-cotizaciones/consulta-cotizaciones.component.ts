@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./consulta-cotizaciones.component.scss']
 })
 export class ConsultaCotizacionesComponent implements OnInit {
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator : MatPaginator
@@ -174,7 +174,7 @@ pageSizeOptions:[5,10,20,50]
   }
 
   async CargarCotizaciones(){
-    this.mensajeSpiner = 'Cargando Proyectos';
+    this.mensajeSpinner = 'Cargando Proyectos';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -198,7 +198,7 @@ pageSizeOptions:[5,10,20,50]
     try {
 
 
-      this.mensajeSpiner = 'Cargando Cotizaciones'
+      this.mensajeSpinner = 'Cargando Cotizaciones'
       let cotizaciones =await this.apiSrv.getCotizaciones({filter: this.filter, paginate : this.paginate});
 this.lista_cotizaciones= cotizaciones.data;
 this.paginate.length = cotizaciones.total;

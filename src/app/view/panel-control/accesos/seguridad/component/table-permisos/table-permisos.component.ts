@@ -16,7 +16,7 @@ standalone: false,
   styleUrls: ['./table-permisos.component.scss']
 })
 export class TablePermisosComponent implements OnDestroy, OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)
@@ -103,7 +103,7 @@ export class TablePermisosComponent implements OnDestroy, OnInit {
     }
 
     console.log(data);
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.seguridadServices.getPermisosComponentes(data).subscribe(
       (res: any) => {

@@ -28,7 +28,7 @@ export class DetalleCatalogoElectronicoComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   fTitle = "Catalogo Electrónico";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   listaSolicitudes: any = []
   programa: any = []
@@ -207,7 +207,7 @@ export class DetalleCatalogoElectronicoComponent implements OnInit, OnDestroy {
     }
   }
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -291,7 +291,7 @@ export class DetalleCatalogoElectronicoComponent implements OnInit, OnDestroy {
 
   cargarOrdenes() {
     //getOrdenesCompraCatElec
-    this.msgSpinner = 'Cargando Ordenes...';
+    this.mensajeSpinner = 'Cargando Ordenes...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -394,7 +394,7 @@ async confirmSave(message, action) {
 }
 
 guardarCatElecDetalles(){
-  this.msgSpinner = "Verificando período contable";
+  this.mensajeSpinner = "Verificando período contable";
   this.lcargando.ctlSpinner(true);
   let datos = {
     "anio": Number(moment().format('YYYY')),
@@ -484,7 +484,7 @@ guardarCatElecDetalles(){
       }).then((result) => {
           if (result.isConfirmed) {
 
-            this.msgSpinner = "Verificando período contable";
+            this.mensajeSpinner = "Verificando período contable";
             this.lcargando.ctlSpinner(true);
             let datos = {
               "anio": Number(moment().format('YYYY')),
@@ -496,7 +496,7 @@ guardarCatElecDetalles(){
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
 
-                this.msgSpinner = "Guardando datos...";
+                this.mensajeSpinner = "Guardando datos...";
                 this.lcargando.ctlSpinner(true);
 
                 let data = {
@@ -634,7 +634,7 @@ guardarCatElecDetalles(){
     if (result.isConfirmed) {
 
 
-      this.msgSpinner = "Verificando período contable";
+      this.mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
       let datos = {
         "anio": Number(moment().format('YYYY')),
@@ -645,7 +645,7 @@ guardarCatElecDetalles(){
 
       /* Validamos si el periodo se encuentra aperturado */
         if (res["data"][0].estado !== 'C') {
-          this.msgSpinner = "Guardando datos...";
+          this.mensajeSpinner = "Guardando datos...";
           this.lcargando.ctlSpinner(true);
 
           let data = {

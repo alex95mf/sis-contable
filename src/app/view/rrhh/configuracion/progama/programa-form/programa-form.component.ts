@@ -14,7 +14,7 @@ standalone: false,
 })
 export class ProgramaFormComponent implements OnInit {
 
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   dataUser: any;
 
@@ -127,7 +127,7 @@ export class ProgramaFormComponent implements OnInit {
 
   validar(valor){
     this.lcargando.ctlSpinner(true);
-    this.msgSpinner = "Cargando Catalogs";
+    this.mensajeSpinner = "Cargando Catalogs";
     if(this.programa.nombre == null){
       this.lcargando.ctlSpinner(false);
       return this.toastr.info('Ingrese los nombres');
@@ -158,7 +158,7 @@ export class ProgramaFormComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.msgSpinner = "Cargando Catalogs";
+    this.mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'NOM_CLASIFICACION_PROGRAMA', 'NOM_TIPO_PROGRAMA'",
     };

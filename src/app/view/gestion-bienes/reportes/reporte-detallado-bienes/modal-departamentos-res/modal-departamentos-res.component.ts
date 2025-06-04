@@ -14,7 +14,7 @@ export class ModalDepartamentosResComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSppiner: string
+  mensajeSpinner: string
 
   departamentos: any = []
 

@@ -16,7 +16,7 @@ standalone: false,
 })
 export class ModalEspeciesFiscalesComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -147,7 +147,7 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
 
   saveEspeciesFiscal(){
 
-    this.mensajeSppiner = "Verificando período contable";
+    this.mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     // let data = {
     //   "anio": Number(moment(this.dat.fecha).format('YYYY')),
@@ -158,7 +158,7 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
       /* Validamos si el periodo se encuentra aperturado */
       // if (res["data"][0].estado !== 'C') {
         this.lcargando.ctlSpinner(true)
-        this.mensajeSppiner = 'Almacenando Talonario'
+        this.mensajeSpinner = 'Almacenando Talonario'
         this.service.saveEspeciesfiscales(this.dat).subscribe(
           (res)=>{
             console.log(res);
@@ -208,7 +208,7 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSppiner = "Cargando Catalogs";
+    this.mensajeSpinner = "Cargando Catalogs";
 
     let data = {
       params: "'REC_ESPECIE_FISCAL'",

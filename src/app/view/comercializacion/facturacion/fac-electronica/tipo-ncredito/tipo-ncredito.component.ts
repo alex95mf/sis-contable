@@ -30,7 +30,7 @@ export class TipoNcreditoComponent implements OnInit {
   dtTrigger = new Subject();
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   parametros:any = {fechaDesde: "", fechaHasta: "", estadoSri: "PENDIENTE", idCliente: ""}
@@ -153,7 +153,7 @@ export class TipoNcreditoComponent implements OnInit {
       return;
     }
 
-    this.mensajeSppiner = "Generando XML por favor espere...";
+    this.mensajeSpinner = "Generando XML por favor espere...";
     this.lcargando.ctlSpinner(true);
 
 
@@ -261,7 +261,7 @@ export class TipoNcreditoComponent implements OnInit {
       return;
     }
 
-    this.mensajeSppiner = "Reprocesando Documento...";
+    this.mensajeSpinner = "Reprocesando Documento...";
     this.lcargando.ctlSpinner(true);
 
     if(valor.estado_sri == "RECIBIDA"|| valor.estado_sri == "DEVUELTA"){
@@ -287,7 +287,7 @@ export class TipoNcreditoComponent implements OnInit {
       return;
     }
 
-    this.mensajeSppiner = "Extrayendo datos del XML...";
+    this.mensajeSpinner = "Extrayendo datos del XML...";
     this.lcargando.ctlSpinner(true);
     this.facElectronicaService.descargarXML({clave_acceso: item.codigo_acceso}).subscribe((datos:any)=>{
       const url = URL.createObjectURL(datos);
@@ -399,7 +399,7 @@ export class TipoNcreditoComponent implements OnInit {
       if(res.valor){
         console.log("respuesta: ", res)
         item.correoElectronico = res.lCorreo;
-        this.mensajeSppiner = "Enviando correo, por favor espere...";
+        this.mensajeSpinner = "Enviando correo, por favor espere...";
         this.lcargando.ctlSpinner(true);
         this.facElectronicaService.enviarCorreoDocumentos(item).subscribe((datos:any)=>{
           this.lcargando.ctlSpinner(false);

@@ -15,7 +15,7 @@ standalone: false,
 export class EstadisticasComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild('grafica') grafica: ElementRef
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
 
   dataChart: any = [];
@@ -52,7 +52,7 @@ export class EstadisticasComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.msgSpinner = 'Cargando Datos Iniciales'
+      this.mensajeSpinner = 'Cargando Datos Iniciales'
       const responseMes = await this.generalService.getCatalogoKeyWork('MES') as any
       console.log(responseMes)
       responseMes.data.forEach((element: any) => {
@@ -98,7 +98,7 @@ export class EstadisticasComponent implements OnInit {
     // this.chartPie('pieChart', 'pie');
     //      this.lcargando.ctlSpinner(true)
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Cargando Gráfico...'
+    this.mensajeSpinner = 'Cargando Gráfico...'
     // // this.chartPie('pieChart', 'pie')
     Object.assign(this.filter, {fp_anio: new Date(this.filter.periodo).getFullYear()})
     const response = await this.apiService.getFaltasPermisosEmployeesReportGrafi({filter: this.filter}) as any

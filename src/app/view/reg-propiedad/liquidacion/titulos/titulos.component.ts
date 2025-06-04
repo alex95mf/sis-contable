@@ -21,7 +21,7 @@ export class TitulosComponent implements OnInit {
   mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Consulta de liquidaciones (Registro de la propiedad)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Array<Botonera> = [];
   dataUser: any;
   permissions: any;
@@ -128,11 +128,11 @@ export class TitulosComponent implements OnInit {
   async exportLiquidaciones() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando documentos...'
+      this.mensajeSpinner = 'Cargando documentos...'
       let documentos = await this.generacionSrv.getLiquidacionesAsync({concepto: { codigo: 'RP' }, params: { filter: this.filter }})
       console.log(documentos)
       //
-      this.msgSpinner = 'Exportando'
+      this.mensajeSpinner = 'Exportando'
       let excelData = []
       documentos.forEach((element: any) => {
         const { documento, contribuyente, total, arancel, avaluo, fecha, estado, usuario } = element
@@ -180,7 +180,7 @@ export class TitulosComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
 
     this.empresLogo = this.dataUser.logoEmpresa;
 

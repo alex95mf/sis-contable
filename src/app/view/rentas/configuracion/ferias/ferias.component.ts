@@ -18,7 +18,7 @@ standalone: false,
 export class FeriasComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatTable) table: MatTable<any>;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[];
 
   filter: any = {
@@ -138,7 +138,7 @@ export class FeriasComponent implements OnInit {
 
   async getFerias() {
     try {
-      this.msgSpinner = 'Cargando Ferias'
+      this.mensajeSpinner = 'Cargando Ferias'
       let ferias = await this.apiService.getFerias({params: {filter: this.filter, paginate: this.paginate}})
       console.log(ferias)
       this.paginate.total = ferias.total

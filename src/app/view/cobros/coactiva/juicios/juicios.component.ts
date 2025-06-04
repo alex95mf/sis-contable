@@ -32,7 +32,7 @@ export class JuiciosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
   fTitle: string = "Juicios/Auto de Pago";
-  msgSpinner: string;
+  mensajeSpinner: string;
   dataUser: any;
   user: any;
   permissions: any;
@@ -182,7 +182,7 @@ export class JuiciosComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
 
@@ -212,7 +212,7 @@ export class JuiciosComponent implements OnInit {
   }
 
   getAbogados() {
-    this.msgSpinner = 'Cargando Abogados'
+    this.mensajeSpinner = 'Cargando Abogados'
     // this.lcargando.ctlSpinner(true)
     this.apiService.getAbogados().subscribe(
       (res: any) => {
@@ -233,7 +233,7 @@ export class JuiciosComponent implements OnInit {
   }
 
   getJuicios() {
-    this.msgSpinner = 'Cargando Juicios'
+    this.mensajeSpinner = 'Cargando Juicios'
     // this.lcargando.ctlSpinner(true)
     this.apiService.getJuicios({ params: { filter: this.filter, paginate: this.paginate } }).subscribe(
       (res: any) => {
@@ -308,7 +308,7 @@ export class JuiciosComponent implements OnInit {
   }
 
   getJuicioDetalles(juicio: any) {
-    this.msgSpinner = 'Recuperando detalles de Juicio'
+    this.mensajeSpinner = 'Recuperando detalles de Juicio'
     this.lcargando.ctlSpinner(true)
     this.apiService.getJuicio(juicio).subscribe(
       (res: any) => {
@@ -376,7 +376,7 @@ export class JuiciosComponent implements OnInit {
 
 
   descargarNotificacion(juicio: any) {
-    this.msgSpinner = 'Recuperando detalles de Juicio'
+    this.mensajeSpinner = 'Recuperando detalles de Juicio'
     this.lcargando.ctlSpinner(true)
     
     this.apiService.getJuicio(juicio).subscribe(
@@ -424,7 +424,7 @@ export class JuiciosComponent implements OnInit {
 
   exportarExcel() {
     let excelData = []
-    this.msgSpinner = 'Exportando'
+    this.mensajeSpinner = 'Exportando'
     this.lcargando.ctlSpinner(true)
 
     this.apiService.getJuicios({ params: { filter: this.filter } }).subscribe(

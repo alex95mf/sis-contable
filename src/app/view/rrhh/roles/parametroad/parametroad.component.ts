@@ -79,7 +79,7 @@ export class ParametroadComponent implements OnInit {
   }
 
   vmButtons: any = [];
-	mensajeSppiner: string = "Cargando...";
+	mensajeSpinner: string = "Cargando...";
 	@ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   validaciones: ValidacionesFactory = new ValidacionesFactory();
 
@@ -168,7 +168,7 @@ export class ParametroadComponent implements OnInit {
         url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
       },
     };
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.parametroAdminidtracionSrv.presentaTablaParametros().subscribe((res) => {
       console.log(res)
@@ -275,7 +275,7 @@ export class ParametroadComponent implements OnInit {
       tipo_calculo: this.parameters.tipoFormula,
       formula: this.parameters.formula
     };
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.parametroAdminidtracionSrv.Saveparameters(data).subscribe((res) => {
       this.toastr.success(res["message"]);
@@ -415,7 +415,7 @@ export class ParametroadComponent implements OnInit {
       accion: `Actualización del parametro ${this.parameters.IngresoNombre} con el id: ${this.id_parametro} `,
       id_controlador: myVarGlobals.fAdmiParametros,
     };
-    this.mensajeSppiner = "Modificando...";
+    this.mensajeSpinner = "Modificando...";
     this.lcargando.ctlSpinner(true);
     this.parametroAdminidtracionSrv.modParameters(data).subscribe((res) => {
       this.toastr.success(res["message"]);
@@ -450,7 +450,7 @@ export class ParametroadComponent implements OnInit {
       accion: `Eliminación del parametro ${this.parameters.IngresoNombre} con el id: ${this.id_parametro} `,
       id_controlador: myVarGlobals.fAdmiParametros,
     };
-    this.mensajeSppiner = "Eliminando...";
+    this.mensajeSpinner = "Eliminando...";
     this.lcargando.ctlSpinner(true);
     this.parametroAdminidtracionSrv.deleteParametersad(data).subscribe((res) => {
       this.toastr.success(res["message"]);

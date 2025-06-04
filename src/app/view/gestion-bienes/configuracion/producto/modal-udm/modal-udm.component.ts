@@ -15,7 +15,7 @@ standalone: false,
 })
 export class ModalUdmComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Array<Botonera> = [];
 
   unidad_medida: any = {

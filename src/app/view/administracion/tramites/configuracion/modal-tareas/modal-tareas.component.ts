@@ -27,7 +27,7 @@ export class ModalTareasComponent implements OnInit {
     
   ]
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   constructor(
@@ -146,7 +146,7 @@ export class ModalTareasComponent implements OnInit {
   }
 
   cargartarea(){
-    this.mensajeSppiner = "Cargando lista de Tareas...";
+    this.mensajeSpinner = "Cargando lista de Tareas...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {

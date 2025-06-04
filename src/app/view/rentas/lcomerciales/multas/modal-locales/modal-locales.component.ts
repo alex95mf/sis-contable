@@ -13,7 +13,7 @@ standalone: false,
   styleUrls: ['./modal-locales.component.scss']
 })
 export class ModalLocalesComponent implements OnInit {
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent,{ static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -73,7 +73,7 @@ export class ModalLocalesComponent implements OnInit {
   }
 
   cargarLocales() {
-    this.mensajeSpiner = "Cargando locales...";
+    this.mensajeSpinner = "Cargando locales...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

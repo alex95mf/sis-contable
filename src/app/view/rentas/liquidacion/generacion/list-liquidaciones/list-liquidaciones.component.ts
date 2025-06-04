@@ -18,7 +18,7 @@ standalone: false,
 export class ListLiquidacionesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   fTitle = 'Listado de Tarifas por Concepto'
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: any
   dtOptions: DataTables.Settings = {}
   dtTrigger = new Subject();
@@ -73,7 +73,7 @@ export class ListLiquidacionesComponent implements OnInit {
       },
     };
 
-    this.msgSpinner = 'Cargando Liquidaciones'
+    this.mensajeSpinner = 'Cargando Liquidaciones'
     this.lcargando.ctlSpinner(true)
     this.apiService.getLiquidaciones().subscribe(
       res => {
@@ -110,7 +110,7 @@ export class ListLiquidacionesComponent implements OnInit {
   }
 
   editLiquidacion = (liquidacion) => {
-    this.msgSpinner = 'Obteniendo Liquidacion'
+    this.mensajeSpinner = 'Obteniendo Liquidacion'
     this.lcargando.ctlSpinner(true)
     this.apiService.getLiquidacionCompleta(liquidacion).subscribe(
       res => {

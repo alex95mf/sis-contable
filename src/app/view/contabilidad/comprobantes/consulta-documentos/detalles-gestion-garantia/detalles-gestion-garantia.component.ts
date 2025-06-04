@@ -26,7 +26,7 @@ export class DetallesGestionGarantiaComponent implements OnInit {
   ]
 
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   constructor(
     private ngModal: NgbActiveModal,
@@ -82,7 +82,7 @@ export class DetallesGestionGarantiaComponent implements OnInit {
   }
 
   guardarDetalles(){
-    this.msgSpinner = "Guardando detalles...";
+    this.mensajeSpinner = "Guardando detalles...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id: this.detalles.id_documento,

@@ -18,7 +18,7 @@ export class CampaignsComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
 
   filter: any = {
@@ -116,7 +116,7 @@ export class CampaignsComponent implements OnInit {
 
   async getCampaigns() {
     try {
-      this.msgSpinner = 'Cargando Campañas'
+      this.mensajeSpinner = 'Cargando Campañas'
       let descuentos = await this.apiService.getCampaigns({params: { filter: this.filter }})
       console.log(descuentos)
       this.lst_campaigns = descuentos
@@ -128,7 +128,7 @@ export class CampaignsComponent implements OnInit {
 
   async getConceptos() {
     try {
-      this.msgSpinner = 'Cargando Conceptos'
+      this.mensajeSpinner = 'Cargando Conceptos'
       let conceptos = await this.apiService.getConceptos();
       console.log(conceptos)
       this.cmb_concepto = conceptos

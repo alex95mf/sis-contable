@@ -33,7 +33,7 @@ export class DocumentosComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones: ValidacionesFactory = new ValidacionesFactory();
@@ -152,7 +152,7 @@ export class DocumentosComponent implements OnInit {
       module: this.permisions[0].id_modulo,
       component: myVarGlobals.fNomDocumentos,
     };
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.documentosService.presentarDocumento(data).subscribe((res) => {
     this.lcargando.ctlSpinner(false);
@@ -265,7 +265,7 @@ export class DocumentosComponent implements OnInit {
       id_controlador: myVarGlobals.fNomDocumentos,
     };
     if (this.id_archivo == undefined) {
-      this.mensajeSppiner = "Guardando...";
+      this.mensajeSpinner = "Guardando...";
       this.lcargando.ctlSpinner(true);
       this.documentosService.fileService(this.filesSelect, params).subscribe((res) => {
           this.lcargando.ctlSpinner(false);
@@ -285,7 +285,7 @@ export class DocumentosComponent implements OnInit {
         }
       );
     } else if (this.id_archivo != undefined) {
-      this.mensajeSppiner = "Modificando...";
+      this.mensajeSpinner = "Modificando...";
       this.lcargando.ctlSpinner(true);
       this.documentosService.patchFile(this.filesSelect, params).subscribe((res) => {
           this.lcargando.ctlSpinner(false);
@@ -336,7 +336,7 @@ export class DocumentosComponent implements OnInit {
     if (valores == undefined) {
       return;
     }
-    this.mensajeSppiner = "Seteando valores...";
+    this.mensajeSpinner = "Seteando valores...";
     this.lcargando.ctlSpinner(true);
     this.id_archivo = valores.id_anexos;
     this.storage = valores.storage;
@@ -389,7 +389,7 @@ export class DocumentosComponent implements OnInit {
       component: myVarGlobals.fNomDocumentos,
       identifier: this.empleSeleccionadodoc,
     };
-    this.mensajeSppiner = "Eliminando...";
+    this.mensajeSpinner = "Eliminando...";
     this.lcargando.ctlSpinner(true);
     this.documentosService.deleteFile(data).subscribe((res) => {
         this.id_archivo = undefined;
@@ -421,7 +421,7 @@ export class DocumentosComponent implements OnInit {
     if (valores == undefined) {
       return;
     }
-    this.mensajeSppiner = "Seteando valores...";
+    this.mensajeSpinner = "Seteando valores...";
     this.lcargando.ctlSpinner(true);
     let datos: any = {
       storage: valores.storage,

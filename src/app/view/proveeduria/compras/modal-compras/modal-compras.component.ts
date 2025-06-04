@@ -21,7 +21,7 @@ standalone: false,
 export class ModalComprasComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -138,7 +138,7 @@ export class ModalComprasComponent implements OnInit {
    }
 
    cargarComprasGeneradas(){
-    this.mensajeSppiner = "Cargando lista de compras...";
+    this.mensajeSpinner = "Cargando lista de compras...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

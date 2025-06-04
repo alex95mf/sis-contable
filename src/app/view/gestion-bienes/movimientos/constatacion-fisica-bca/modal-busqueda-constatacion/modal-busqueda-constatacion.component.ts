@@ -20,7 +20,7 @@ standalone: false,
 })
 export class ModalBusquedaConstatacionComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -139,7 +139,7 @@ export class ModalBusquedaConstatacionComponent implements OnInit {
   }
 
   cargarConstatacion() {
-    this.mensajeSppiner = "Cargando lista de Constatación física...";
+    this.mensajeSpinner = "Cargando lista de Constatación física...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

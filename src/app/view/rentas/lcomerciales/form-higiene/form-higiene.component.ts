@@ -22,7 +22,7 @@ standalone: false,
   styleUrls: ['./form-higiene.component.scss']
 })
 export class FormHigieneComponent implements OnInit {
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -252,7 +252,7 @@ export class FormHigieneComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpiner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true)
 
     let params = {
@@ -353,7 +353,7 @@ export class FormHigieneComponent implements OnInit {
   }
 
   cargaFoto(archivos) {
-    this.mensajeSpiner = 'Cargando fotos...';
+    this.mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 5) {
       for (let i = 0; i < archivos.length; i++) {
@@ -412,7 +412,7 @@ export class FormHigieneComponent implements OnInit {
             })/* .then(
               (result: any) => { */
                 if (result.isConfirmed) {
-                  this.mensajeSpiner = "Guardando datos del formulario...";
+                  this.mensajeSpinner = "Guardando datos del formulario...";
                   this.lcargando.ctlSpinner(true);
 
                   let data = {

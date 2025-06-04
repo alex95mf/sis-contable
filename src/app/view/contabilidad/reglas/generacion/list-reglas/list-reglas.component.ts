@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ListReglasComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -129,7 +129,7 @@ export class ListReglasComponent implements OnInit {
       params: "'CON_TIPO_REGLA'",
       //params: "'OP_CONCEPTOS','PAG_TIPO_DESEMBOLSO'",
     };
-    this.mensajeSppiner = "Buscando tipo de regla...";
+    this.mensajeSpinner = "Buscando tipo de regla...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogo(data).subscribe(
 
@@ -146,7 +146,7 @@ export class ListReglasComponent implements OnInit {
 
 
    cargarReglas(flag: boolean = false){
-    this.mensajeSppiner = "Cargando lista de reglas...";
+    this.mensajeSpinner = "Cargando lista de reglas...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1

@@ -37,7 +37,7 @@ standalone: false,
 export class GeneracionComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   fTitle = "Generación de Liquidación"
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons = []
   dataUser: any
   permissions: any
@@ -528,7 +528,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   }
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
 
@@ -582,7 +582,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   }
 
   // getContribuyentes = () => {
-  //   this.msgSpinner = 'Obteniendo Contribuyentes'
+  //   this.mensajeSpinner = 'Obteniendo Contribuyentes'
   //   this.lcargando.ctlSpinner(true)
   //   this.apiService.getContribuyentes().subscribe(
   //     res => {
@@ -619,7 +619,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   // }
 
   getConceptos() {
-    this.msgSpinner = 'Obteniendo Conceptos'
+    this.mensajeSpinner = 'Obteniendo Conceptos'
     this.lcargando.ctlSpinner(true)
     this.apiService.getConceptos().subscribe(
       res => {
@@ -784,7 +784,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
               const documento = { ...this.liquidacion, detalles: [...this.liquidacion.detalles, ...this.exoneraciones] }
 
-              this.msgSpinner = 'Almacenando Liquidacion'
+              this.mensajeSpinner = 'Almacenando Liquidacion'
               this.lcargando.ctlSpinner(true)
               // console.log(data)
               this.apiService.setLiquidacion({liquidacion: documento}).subscribe(
@@ -1090,7 +1090,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
   async getUltimoRegistro(skip: number = 0) {
     this.skip = skip
-    this.msgSpinner = 'Cargado Registro'
+    this.mensajeSpinner = 'Cargado Registro'
     this.lcargando.ctlSpinner(true)
     try {
       const conceptos = this.conceptos.map((elem: any) => elem.id)

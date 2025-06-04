@@ -36,7 +36,7 @@ export class EgresosComponent implements OnInit {
   infoProduct: any = [];
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
   dateNow: any;
@@ -284,7 +284,7 @@ export class EgresosComponent implements OnInit {
     this.solicitud.ip = this.commonServices.getIpAddress();
     this.solicitud.accion = `Egresos de productos por el usuario ${this.dataUser.nombre}`;
     this.solicitud.id_controlador = myVarGlobals.fProveeduriaEgresos;
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.egrSrv.saveEgresProv(this.solicitud).subscribe(res => {
       this.lcargando.ctlSpinner(false);

@@ -18,7 +18,7 @@ standalone: false,
 export class LiquidacionCemComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatTable) table: MatTable<any>;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
 
   lst_base: any[] = [];
@@ -161,7 +161,7 @@ export class LiquidacionCemComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando'
+      this.mensajeSpinner = 'Cargando'
       let catalogos = await this.apiService.getCatalogos({params: "'CEM_BASE_CALCULO','CEM_MOTIVO_CALCULO','CAT_ZONA'"})
       // console.log(catalogos)
 
@@ -222,7 +222,7 @@ export class LiquidacionCemComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.msgSpinner = 'Limpiando Formulario'
+        this.mensajeSpinner = 'Limpiando Formulario'
 
         Object.assign(this.liquidacion_cem, {
           id: null,
@@ -270,7 +270,7 @@ export class LiquidacionCemComponent implements OnInit {
   async getSolares() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Obteniendo total de Solares'
+      this.mensajeSpinner = 'Obteniendo total de Solares'
       let solares = await this.apiService.getSolares({zonas: this.zonasSelected});
       // console.log(solares)
       this.liquidacion_cem.sum_solares = solares
@@ -288,7 +288,7 @@ export class LiquidacionCemComponent implements OnInit {
   async setLiquidacion() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Almacenando Liquidacion'
+      this.mensajeSpinner = 'Almacenando Liquidacion'
       let liquidacion = await this.apiService.setLiquidacion({liquidacion: this.liquidacion_cem, detalles: this.lst_base})
       console.log(liquidacion)
       Object.assign(this.liquidacion_cem, { id: liquidacion.id, num_documento: liquidacion.num_documento, txt_zonas: liquidacion.txt_zonas })
@@ -319,7 +319,7 @@ export class LiquidacionCemComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.msgSpinner = 'Actualizando Liquidacion'
+        this.mensajeSpinner = 'Actualizando Liquidacion'
         let response = await this.apiService.updateLiquidacion(this.liquidacion_cem.id, {liquidacion: this.liquidacion_cem})
         console.log(response)
         //

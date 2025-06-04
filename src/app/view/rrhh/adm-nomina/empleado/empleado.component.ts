@@ -480,7 +480,7 @@ totalSemanal: any = 0
 
     this.empleadoService.updateTipoArchivo$.subscribe(async () => {
       this.lcargando.ctlSpinner(true)
-      this.mensajeSppiner = 'Actualizando Tipos de Archivo'
+      this.mensajeSpinner = 'Actualizando Tipos de Archivo'
       const resTipoArchivos: any = await this.generalService.getCatalogoKeyWork('DCFD').toPromise()
       console.log(resTipoArchivos)
       this.lst_tipo_archivo = resTipoArchivos.data
@@ -624,7 +624,7 @@ totalSemanal: any = 0
   //   this.translateService.get('primeng').subscribe((res) => this.primengConfig.setTranslation(res))
   // }
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
 
   /* public getInitialDateFrom(): Date {
     return new Date();
@@ -850,7 +850,7 @@ this.tieneFondo = false
   } */
 
   onClicFichaDeEmpleado() {
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.empleadoService.presentaTablaEmpleado().subscribe(
       (res) => {
@@ -1119,7 +1119,7 @@ this.tieneFondo = false
       // sld_salario_minimo: this.inputNameSalarioMinimo.nativeElement.value,
       // estado_id: this.estado_id_cc,
     };
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.empleadoService.saveFichaEmpleado(data).subscribe(
       (res: any) => {
@@ -1297,7 +1297,7 @@ this.tieneFondo = false
     console.log(data)
     console.log('aun no modifica')
     // this.validaDt = false;
-    this.mensajeSppiner = "Actualizando...";
+    this.mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.empleadoService.updatedServiceFichaEmpleado(data).subscribe(
       (res: GeneralResponseI) => {
@@ -1897,7 +1897,7 @@ this.tieneFondo = false
         this.inputNamePrograma.nativeElement.value = selectDepatamentOption.area?.programa?.nombre;
 
         console.log(selectDepatamentOption);
-        this.mensajeSppiner = "Cargando...";
+        this.mensajeSpinner = "Cargando...";
         this.lcargando.ctlSpinner(true);
 
         this.getCargos(selectDepatamentOption.id_departamento);
@@ -3414,7 +3414,7 @@ if ( superaAnios >= 12 ){
 
     };
 
-    this.mensajeSppiner = "Guardando...";
+    this.mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.empleadoService.saveFolderDigital(data).subscribe(
       (res) => {
@@ -3461,7 +3461,7 @@ if ( superaAnios >= 12 ){
       fecha_modificacion: this.toLocal(date),
 
     };
-    this.mensajeSppiner = "Actualizando...";
+    this.mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.empleadoService.updatedFolderDigital(data).subscribe(
       (res) => {
@@ -3497,7 +3497,7 @@ if ( superaAnios >= 12 ){
       id_doc_ficha: this.folderDigitalForm.id_doc_ficha,
     };
     // this.validaDt = false;
-    this.mensajeSppiner = "Borrando...";
+    this.mensajeSpinner = "Borrando...";
     this.lcargando.ctlSpinner(true);
     this.empleadoService.deleteFolderDigital(data).subscribe(
       (res) => {
@@ -3533,7 +3533,7 @@ if ( superaAnios >= 12 ){
     this.lcargando.ctlSpinner(true);
 
     try {
-      this.mensajeSppiner = "Cargando Catalogos";
+      this.mensajeSpinner = "Cargando Catalogos";
       const response = await this.empleadoService.getCatalogs({params: "'PAIS','BANCO','TIPO CUENTA','NOM_LOCALIDAD','NOM_REGION'"}) as any
       console.log(response)
       this.cmb_nacionalidad = response.data["PAIS"];
@@ -3700,7 +3700,7 @@ if ( superaAnios >= 12 ){
       observacion: "Generación de contrato de empleado RRHH"
     };
 
-    this.mensajeSppiner = "Generando Contrato...";
+    this.mensajeSpinner = "Generando Contrato...";
     this.lcargando.ctlSpinner(true);
     this.empleadoService.generarContratoEmpleado(data).subscribe(
       (res: any) => {

@@ -106,7 +106,7 @@ export class SueldosComponent implements OnInit {
 
   //contrato: any;
   estado: any;
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   mensajeSppiner2: string = "Cargando...";
   constDisabled = false;
 
@@ -129,7 +129,7 @@ export class SueldosComponent implements OnInit {
 
   validaPermisos() {
     /** Obtiene los permisos del usuario y valida si puede trabajar sobre el formulario */
-    this.mensajeSpiner = 'Cargando Permisos de Usuario'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     let params = {
@@ -166,7 +166,7 @@ export class SueldosComponent implements OnInit {
   async cargaInicial() {
     try {
       // Carga Listado de Grados
-      //this.mensajeSpiner = 'Cargando Grados'
+      //this.mensajeSpinner = 'Cargando Grados'
       this.grado = await this.apiSrv.getGrupoOcupacional();
       console.log(this.grado);
       this.grado.forEach((element: any) => {
@@ -175,7 +175,7 @@ export class SueldosComponent implements OnInit {
       })
 
       // Lista de Cargos
-      //this.mensajeSpiner = 'Cargando Cargos'
+      //this.mensajeSpinner = 'Cargando Cargos'
       this.cargo = await this.apiSrv.getCargos();
       this.cargo.forEach((element: any) => {
         const { id_cargo,car_nombre, car_descripcion } = element
@@ -185,13 +185,13 @@ export class SueldosComponent implements OnInit {
 
       //this.programas.map((programa: any) => Object.assign(programa, { presupuesto: 0 }))*/
       // Lista de Cargos
-      //this.mensajeSpiner = 'Cargando Tipo de Contratos'
+      //this.mensajeSpinner = 'Cargando Tipo de Contratos'
       this.contrato = await this.apiSrv.getTipos('TCC');
       this.contrato.forEach((element: any) => {
         const { id_catalogo,cat_nombre, cat_descripcion } = element
         this.contrato = [...this.contrato, { id_catalogo: id_catalogo, cat_nombre: cat_nombre, cat_descripcion:cat_descripcion }]
       })
-      //this.mensajeSpiner = 'Cargando Estados'
+      //this.mensajeSpinner = 'Cargando Estados'
       this.estado = await this.apiSrv.getTipos('EST');
 
 
@@ -227,7 +227,7 @@ export class SueldosComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    this.mensajeSpiner = "Cargando";
+    this.mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true)
     this.apiSrv.getSueldos(data).subscribe(
       res => {

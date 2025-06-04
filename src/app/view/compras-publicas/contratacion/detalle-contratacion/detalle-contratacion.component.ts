@@ -27,7 +27,7 @@ export class DetalleContratacionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   mensajeSpinner: string = "Cargando...";
-  msgSpinner: string
+  mensajeSpinner: string
 
   programa: any = []
 
@@ -561,7 +561,7 @@ async confirmSave(message, action) {
   })
 }
 guardarContratacionDetalles(){
-  this.msgSpinner = "Verificando período contable";
+  this.mensajeSpinner = "Verificando período contable";
   this.lcargando.ctlSpinner(true);
   let datos = {
     "anio": Number(moment().format('YYYY')),
@@ -1146,7 +1146,7 @@ guardarContratacionDetalles(){
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.msgSpinner = "Verificando período contable";
+        this.mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment().format('YYYY')),
@@ -1334,7 +1334,7 @@ guardarContratacionDetalles(){
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.msgSpinner = "Verificando período contable";
+        this.mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment().format('YYYY')),

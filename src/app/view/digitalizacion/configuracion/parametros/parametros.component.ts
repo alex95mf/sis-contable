@@ -17,7 +17,7 @@ standalone: false,
 })
 export class ParametrosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = [];
   dataUser: any;
   permissions: any;
@@ -380,7 +380,7 @@ export class ParametrosComponent implements OnInit {
 
   setParametros(){
 
-      this.msgSpinner = 'Guardando Configuración...';
+      this.mensajeSpinner = 'Guardando Configuración...';
       this.lcargando.ctlSpinner(true);
       let data = {
         tipo_documento: this.tipoDocumento,
@@ -437,7 +437,7 @@ export class ParametrosComponent implements OnInit {
 
   updateParametros(){
 
-    this.msgSpinner = 'Modificando Configuración...';
+    this.mensajeSpinner = 'Modificando Configuración...';
     this.lcargando.ctlSpinner(true);
     let data = {
       tipo_documento: this.tipoDocumento,
@@ -486,7 +486,7 @@ export class ParametrosComponent implements OnInit {
 }
 
   getParametros(){
-    this.msgSpinner = 'Buscando Configuración...';
+    this.mensajeSpinner = 'Buscando Configuración...';
     this.lcargando.ctlSpinner(true);
     let data = {
       tipo_documento: this.tipoDocumento,

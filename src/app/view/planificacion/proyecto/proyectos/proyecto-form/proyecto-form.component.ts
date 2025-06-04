@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./proyecto-form.component.scss']
 })
 export class ProyectoFormComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
   dataUser: any = {};
@@ -157,7 +157,7 @@ export class ProyectoFormComponent implements OnInit {
   } 
 
   validaPermisos = () => {
-    this.mensajeSppiner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
@@ -298,7 +298,7 @@ export class ProyectoFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSppiner = "Guardando Proyecto...";
+        this.mensajeSpinner = "Guardando Proyecto...";
         this.lcargando.ctlSpinner(true);
   
         this.proyectoSrv.guardarProyecto({proyecto:this.proyecto}).subscribe(
@@ -356,7 +356,7 @@ export class ProyectoFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSppiner = "Editando Proyecto...";
+        this.mensajeSpinner = "Editando Proyecto...";
         this.lcargando.ctlSpinner(true);
    
         this.proyecto.id_usuario= this.dataUser['id_usuario'];

@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./modalExpedienteContribuyente.component.scss']
 })
 export class ModalExpedienteContribuyenteComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   paginate: any;
   vmButtons: any = [];
@@ -89,7 +89,7 @@ export class ModalExpedienteContribuyenteComponent implements OnInit {
     this.cargarLotes();
   }
   cargarLotes() {
-    this.mensajeSppiner = "Cargando lista de Contribuyentes...";
+    this.mensajeSpinner = "Cargando lista de Contribuyentes...";
     this.lcargando.ctlSpinner(true);
     this.emexsrv.getLoteNotificacion().subscribe(res => {
 

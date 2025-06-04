@@ -24,9 +24,9 @@ standalone: false,
 export class ContratacionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
    lcargando: CcSpinerProcesarComponent;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   fTitle: string = "Contratación";
-  msgSpinner: string
+  mensajeSpinner: string
   dataUser: any
   permissions: any
   viewSolicitudes: boolean = true
@@ -231,7 +231,7 @@ export class ContratacionComponent implements OnInit {
 
   }
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
@@ -316,7 +316,7 @@ export class ContratacionComponent implements OnInit {
     }
   }
   cargarPrograma(){
-    this.mensajeSppiner = "Cargando Programa...";
+    this.mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data ={
@@ -344,7 +344,7 @@ export class ContratacionComponent implements OnInit {
 
   departamentoSearch(event){
   // console.log(event);
-  this.mensajeSppiner = "Cargando Programa...";
+  this.mensajeSpinner = "Cargando Programa...";
   this.lcargando.ctlSpinner(true);
 
   let data = {
@@ -371,7 +371,7 @@ export class ContratacionComponent implements OnInit {
 
   AtribucionSearch(event){
     console.log(event);
-    this.mensajeSppiner = "Cargando Programa...";
+    this.mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event.valor
@@ -412,7 +412,7 @@ export class ContratacionComponent implements OnInit {
   }
 
   btnExportar() {
-    this.mensajeSppiner = "Generando Archivo Excel...";
+    this.mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {
@@ -457,7 +457,7 @@ export class ContratacionComponent implements OnInit {
         }
       }
       let excelData = []
-      this.mensajeSppiner = "Generando Archivo Excel..."
+      this.mensajeSpinner = "Generando Archivo Excel..."
       this.lcargando.ctlSpinner(true)
       this.service.getContrataciones({ params: { filter: this.filter } }).subscribe(
         (res: any) => {
@@ -516,7 +516,7 @@ export class ContratacionComponent implements OnInit {
 
     // console.log(event);
     this.listaSolicitudes = []
-    this.mensajeSppiner = "Cargando Programa...";
+    this.mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1

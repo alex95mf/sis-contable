@@ -15,7 +15,7 @@ standalone: false,
 export class ModalConceptosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Input() conceptosArr: any[];
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = [];
 
   paginate: any = {
@@ -123,7 +123,7 @@ export class ModalConceptosComponent implements OnInit {
   async getConceptos() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = "Cargando Conceptos";
+      this.mensajeSpinner = "Cargando Conceptos";
       let conceptos = await this.apiService.getConceptos({codigo: 'PR', params: { filter: this.filter, paginate: this.paginate}})
       conceptos.data.map((item: any) => Object.assign(item, { aplica: false }))
       this.conceptosArr.forEach((c: any) => conceptos.data.find((f: any) => f.id_concepto_detalle == c.id_concepto_detalle).aplica = true)

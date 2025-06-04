@@ -46,7 +46,7 @@ export class ActaFiniquitoComponent implements OnInit {
 
 
   fTitle = "Acta de Finiquito";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -181,7 +181,7 @@ export class ActaFiniquitoComponent implements OnInit {
     this.apiSrv.listaActas$.subscribe(
       async (res) => {
         this.lcargando.ctlSpinner(true)
-        this.msgSpinner = 'Recuperando datos'
+        this.mensajeSpinner = 'Recuperando datos'
         // Mostrar el empleado
         const empleado: any = await this.apiSrv.getEmpleado(res.fk_empleado)
         console.log(empleado)
@@ -379,7 +379,7 @@ obtenerIndiceEgreso(nombre) {
 
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
 
@@ -480,7 +480,7 @@ obtenerIndiceEgreso(nombre) {
 
 
   cargarRubrosActa(){
-    this.msgSpinner = 'Cargando Rubros...';
+    this.mensajeSpinner = 'Cargando Rubros...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -675,7 +675,7 @@ obtenerIndiceEgreso(nombre) {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.msgSpinner = 'Generando Acta de Finiquito..';
+        this.mensajeSpinner = 'Generando Acta de Finiquito..';
         this.lcargando.ctlSpinner(true);
         this.acta.total =  this.totalDiferencia;
         this.rubrosIngresos.forEach(e => {
@@ -795,7 +795,7 @@ obtenerIndiceEgreso(nombre) {
     }
 
     this.lcargando.ctlSpinner(true)
-    this.msgSpinner = 'Calculando valores'
+    this.mensajeSpinner = 'Calculando valores'
     try {
       const response = await this.apiSrv.calcularValores({empleado: this.empleadoForm});
       console.log(response)

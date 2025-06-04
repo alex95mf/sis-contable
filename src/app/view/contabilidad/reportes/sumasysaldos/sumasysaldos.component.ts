@@ -68,7 +68,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
 
 
   URL_API = environment.apiUrl
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   today: any;
   tomorrow: any;
   firstday: any;
@@ -130,7 +130,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
       },
     ];
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 
@@ -218,7 +218,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
     this.lcargando.ctlSpinner(true)
     try {
 
-      this.mensajeSpiner = "Cargando Períodos"
+      this.mensajeSpinner = "Cargando Períodos"
       const resPeriodos = await this.balanceService.getPeriodos()
       this.cmb_periodo = resPeriodos
 
@@ -302,7 +302,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
 
 
 
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     console.log(fecha_desde)
     console.log(fecha_hasta)
@@ -353,7 +353,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
       grupo: (this.grupoSeleccionado == undefined) ? null : this.grupoSeleccionado,
       id_empresa: this.dataUser.id_empresa
     }
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.balanceService.getAccountsFilters(data).subscribe(res => {
       this.validaDtAccount = true;
@@ -560,7 +560,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
         nivel:this.nivelSeleccionado
       }
 
-      this.mensajeSppiner = "Procesando...";
+      this.mensajeSpinner = "Procesando...";
       this.lcargando.ctlSpinner(true);
       this.balanceService.procesarSp(data).subscribe(res => {
         this.lcargando.ctlSpinner(false);

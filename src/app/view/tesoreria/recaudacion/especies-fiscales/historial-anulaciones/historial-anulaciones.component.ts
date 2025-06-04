@@ -14,7 +14,7 @@ standalone: false,
 })
 export class HistorialAnulacionesComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -90,7 +90,7 @@ export class HistorialAnulacionesComponent implements OnInit {
 
 
   getHistorialAnulaciones(){
-    this.mensajeSppiner = "Cargando listado de Configuracion Contable...";
+    this.mensajeSpinner = "Cargando listado de Configuracion Contable...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id: this.data.id_especie_fiscal,

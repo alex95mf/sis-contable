@@ -23,7 +23,7 @@ standalone: false,
   styleUrls: ['./cobranza.component.scss']
 })
 export class CobranzaComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild('printCDI') printCDI: ElementRef;
@@ -266,7 +266,7 @@ export class CobranzaComponent implements OnInit {
     }
 
     this.filter = 5;
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.billingSrv.getWalletBilling(payload).subscribe(response => {
       this.lcargando.ctlSpinner(false);

@@ -31,7 +31,7 @@ standalone: false,
   styleUrls: ["./contribuyente.component.scss"],
 })
 export class ContribuyenteComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   vmButtons: any = [];
@@ -344,7 +344,7 @@ export class ContribuyenteComponent implements OnInit {
           this.contribuyente['fecha_actualizacion'] = res.updated_at?.split('T')[0];
 
           this.lcargando.ctlSpinner(true)
-          this.mensajeSppiner = 'Cargando Datos...'
+          this.mensajeSpinner = 'Cargando Datos...'
           let historial = await this.contribuyenteSrv.getHistorial(res);
           console.log(historial)
           this.historial = historial;
@@ -452,7 +452,7 @@ export class ContribuyenteComponent implements OnInit {
       async () => {
         this.lcargando.ctlSpinner(true)
         try {
-          this.mensajeSppiner = 'Cargando Resolucion'
+          this.mensajeSpinner = 'Cargando Resolucion'
           let resolucion: any = await this.contribuyenteSrv.getResolucion({
             id_component: myVarGlobals.fContribuyente,
             identifier: this.contribuyente.id_cliente
@@ -765,7 +765,7 @@ export class ContribuyenteComponent implements OnInit {
 
   //Codigo para detalles pagos
   cargarDocumentos() {
-    this.mensajeSppiner = "Cargando lista de documentos de pago...";
+    this.mensajeSpinner = "Cargando lista de documentos de pago...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -792,7 +792,7 @@ export class ContribuyenteComponent implements OnInit {
   }
 
   getConceptos() {
-    this.mensajeSppiner = 'Cargando Tipos de Reporte';
+    this.mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.contribuyenteSrv.getConceptos().subscribe(
       (res: any) => {
@@ -899,7 +899,7 @@ export class ContribuyenteComponent implements OnInit {
     }
     this.locales = [];
     // this.inspecciones = [];
-    this.mensajeSppiner = 'Cargando Locales...';
+    this.mensajeSpinner = 'Cargando Locales...';
     this.lcargando.ctlSpinner(true);
     this.contribuyenteSrv.getLocalesComerciales(data).subscribe(
       res => {
@@ -995,7 +995,7 @@ export class ContribuyenteComponent implements OnInit {
     }
     this.locales = [];
     // this.inspecciones = [];
-    this.mensajeSppiner = 'Cargando Locales...';
+    this.mensajeSpinner = 'Cargando Locales...';
     this.lcargando.ctlSpinner(true);
     this.contribuyenteSrv.getLocalesComerciales(data).subscribe(
       res => {
@@ -1088,7 +1088,7 @@ export class ContribuyenteComponent implements OnInit {
       id_contribuyente: this.contribuyente.id_cliente,
       filter: this.filter_estado_cuenta
      }
-     this.mensajeSppiner = 'Cargando Deudas';
+     this.mensajeSpinner = 'Cargando Deudas';
     this.lcargando.ctlSpinner(true);
      this.contribuyenteSrv.getDeudas(data).subscribe(
       res2 => {
@@ -1107,7 +1107,7 @@ export class ContribuyenteComponent implements OnInit {
 
   // Obtener convenios
   cargarDocumentosConvenio() {
-    this.mensajeSppiner = "Cargando lista de documentos de pago...";
+    this.mensajeSpinner = "Cargando lista de documentos de pago...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1186,7 +1186,7 @@ export class ContribuyenteComponent implements OnInit {
 
   validacionContribu() {
 
-    this.mensajeSppiner = "Cargando lista de Contribuyentes...";
+    this.mensajeSpinner = "Cargando lista de Contribuyentes...";
     this.lcargando.ctlSpinner(true);
     if (!this.NoDocumento) {
       this.filter['num_documento'] = 'x'
@@ -1490,7 +1490,7 @@ export class ContribuyenteComponent implements OnInit {
 
   subirResolucionTercera(archivo: File) {
     this.lcargando.ctlSpinner(true)
-    this.mensajeSppiner = 'Almacenando Resolucion'
+    this.mensajeSpinner = 'Almacenando Resolucion'
     let data = {
       // Informacion para almacenamiento de anexo
       module: this.permissions.id_modulo,
@@ -1582,7 +1582,7 @@ export class ContribuyenteComponent implements OnInit {
         ip: this.commonServices.getIpAddress()
       }
 
-      this.mensajeSppiner = 'Eliminando Resolucion'
+      this.mensajeSpinner = 'Eliminando Resolucion'
       this.lcargando.ctlSpinner(true)
       this.contribuyenteSrv.deleteAnexo(data).subscribe(
         res => {
@@ -1673,7 +1673,7 @@ export class ContribuyenteComponent implements OnInit {
   }
 
   calcularTotal() {
-    this.mensajeSppiner = 'Calculando total de las deudas...';
+    this.mensajeSpinner = 'Calculando total de las deudas...';
     this.lcargando.ctlSpinner(true);
     let total = 0;
     this.deudas.forEach(d => {
@@ -1686,7 +1686,7 @@ export class ContribuyenteComponent implements OnInit {
   }
 
   calcularTotalAnuladas() {
-    this.mensajeSppiner = 'Calculando total de las deudas Anuladas...';
+    this.mensajeSpinner = 'Calculando total de las deudas Anuladas...';
     this.lcargando.ctlSpinner(true);
     let total = 0;
     this.deudasAnuladas.forEach(d => {
@@ -1701,7 +1701,7 @@ export class ContribuyenteComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSppiner = "Cargando Catalogs";
+    this.mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'DOCUMENTO', 'PAIS', 'CIUDAD', 'PROVINCIA', 'GENERO','ESTADO CIVIL', 'REN_DISCAPACIDAD', 'REN_INSTITUCION_CREDITO', 'REN_TIPO_PERSONA_JURIDICA', 'REN_ESTADO_CONTRIBUYENTE', 'REN_ACTIVIDAD_AGROPECUARIA', 'CAT_ZONA','CAT_SECTOR','CON_RELACION'",
     };
@@ -2895,7 +2895,7 @@ export class ContribuyenteComponent implements OnInit {
       }
       else{
         this.lcargando.ctlSpinner(true)
-        this.mensajeSppiner = 'Guaradando Relaciones...'
+        this.mensajeSpinner = 'Guaradando Relaciones...'
 
         let data ={
           relaciones: this.dataRelacion,
@@ -3105,7 +3105,7 @@ export class ContribuyenteComponent implements OnInit {
           }).then((result) => {
                if (result.isConfirmed) {
                 this.lcargando.ctlSpinner(true)
-                this.mensajeSppiner = 'Guaradando Lote...'
+                this.mensajeSpinner = 'Guaradando Lote...'
 
                 let data ={
                   id_contribuyente: this.contribuyente['id_cliente'],
@@ -3191,7 +3191,7 @@ export class ContribuyenteComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSppiner = "Activando Lote..."
+          this.mensajeSpinner = "Activando Lote..."
           this.lcargando.ctlSpinner(true);
           this.contribuyenteSrv.activarLote(data.propietario.pivot.id).subscribe(
             (res) => {
@@ -3244,7 +3244,7 @@ export class ContribuyenteComponent implements OnInit {
           confirmButtonColor: '#4DBD74',
         }).then((result) => {
           if (result.isConfirmed) {
-            this.mensajeSppiner = "Inactivando Lote..."
+            this.mensajeSpinner = "Inactivando Lote..."
             this.lcargando.ctlSpinner(true);
             this.contribuyenteSrv.inactivarLote(data.propietario.pivot.id).subscribe(
               (res) => {

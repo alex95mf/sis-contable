@@ -14,7 +14,7 @@ standalone: false,
 })
 export class ModalBusquedaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[];
 
   filter: any = {
@@ -107,7 +107,7 @@ export class ModalBusquedaComponent implements OnInit {
   async getCierres() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Cierres'
+      this.mensajeSpinner = 'Cargando Cierres'
       let documentos = await this.apiService.getCierres({params: {filter: this.filter, paginate: this.paginate}})
       console.log(documentos)
       this.paginate.length = documentos.total

@@ -45,7 +45,7 @@ export class BalanceGeneralComponent implements OnInit {
   infoAccount: any;
   infoAccountDet: any = [];
   dataLength: any = [];
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 
@@ -482,7 +482,7 @@ export class BalanceGeneralComponent implements OnInit {
     }
     if(this.periodoVisualizacion=='ANUAL'){
 
-      this.mensajeSppiner = "Generando Archivo Excel..."; 
+      this.mensajeSpinner = "Generando Archivo Excel..."; 
       this.lcargando.ctlSpinner(true); 
      
       this.blcSrv.obtenerBalanceGeneralMensual(Number(this.periodo.getFullYear()), this.mes_actual, this.centrocosto,1,this.nivelSeleccionado,this.gubernamental).subscribe(res => {

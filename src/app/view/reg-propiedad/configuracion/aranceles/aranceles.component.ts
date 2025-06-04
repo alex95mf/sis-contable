@@ -20,7 +20,7 @@ standalone: false,
 })
 
 export class ArancelesComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -100,7 +100,7 @@ export class ArancelesComponent implements OnInit {
   }
 
   validatePermission() {
-    this.mensajeSppiner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -161,7 +161,7 @@ export class ArancelesComponent implements OnInit {
   }
 
   cargarAranceles() {
-    this.mensajeSppiner = "Cargando lista de Aranceles..."
+    this.mensajeSpinner = "Cargando lista de Aranceles..."
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -219,7 +219,7 @@ export class ArancelesComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSppiner = "Eliminando arancel..."
+          this.mensajeSpinner = "Eliminando arancel..."
           this.lcargando.ctlSpinner(true);
           this.arancelesSrv.deteleArancel(id).subscribe(
             (res) => {
@@ -273,7 +273,7 @@ export class ArancelesComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSppiner = "Restaurando arancel..."
+          this.mensajeSpinner = "Restaurando arancel..."
           this.lcargando.ctlSpinner(true);
           this.arancelesSrv.restoreArancel(id).subscribe(
             (res) => {

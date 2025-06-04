@@ -14,7 +14,7 @@ standalone: false,
   styleUrls: ['./cajas-form.component.scss']
 })
 export class CajasFormComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -210,7 +210,7 @@ export class CajasFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
       }).then((result) => {
           if (result.isConfirmed) {
-              this.mensajeSppiner = "Guardando Caja...";
+              this.mensajeSpinner = "Guardando Caja...";
               this.lcargando.ctlSpinner(true);
   
               let data = {
@@ -270,7 +270,7 @@ export class CajasFormComponent implements OnInit {
             confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-          this.mensajeSppiner = "Guardando Caja..."
+          this.mensajeSpinner = "Guardando Caja..."
           this.lcargando.ctlSpinner(true);
   
           let data = {

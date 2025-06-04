@@ -38,7 +38,7 @@ export class ConsultaCajachComponent implements OnInit {
   tipo: any = 0;
   documento: any = 0;
   vmButtons:any = [];
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
 
@@ -171,7 +171,7 @@ export class ConsultaCajachComponent implements OnInit {
       tipo: this.tipo == 0 ? null : this.tipo,
       documento: this.documento == 0 ? null : this.documento,
     }
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.reportesSrv.getMovimiento(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);

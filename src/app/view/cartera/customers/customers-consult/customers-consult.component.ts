@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./customers-consult.component.scss']
 })
 export class CustomersConsultComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
@@ -292,7 +292,7 @@ export class CustomersConsultComponent implements OnInit {
         url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
       },
     };
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.reportesSrv.getReportCliente(data).subscribe(res => {
 

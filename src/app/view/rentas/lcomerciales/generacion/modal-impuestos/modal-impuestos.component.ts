@@ -12,7 +12,7 @@ standalone: false,
   styleUrls: ['./modal-impuestos.component.scss']
 })
 export class ModalImpuestosComponent implements OnInit {
-  msgSpinner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -75,7 +75,7 @@ export class ModalImpuestosComponent implements OnInit {
       impuestos: ['PESAYMEDIDA', 'INTRODUCTOR', 'LOCALES TURISTICOS', 'PATENTE', 'VIA PUBLICA', '1,5', 'LETREROS']
     }
 
-    this.msgSpinner = "Obteniendo valores"
+    this.mensajeSpinner = "Obteniendo valores"
     this.lcargando.ctlSpinner(true)
     this.apiService.getValoresPorCobrar(data).subscribe(
       (res: any) => {

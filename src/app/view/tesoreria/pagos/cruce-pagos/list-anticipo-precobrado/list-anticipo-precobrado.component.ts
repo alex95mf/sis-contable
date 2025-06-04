@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./list-anticipo-precobrado.component.scss']
 })
 export class ListAnticipoPrecobradoComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -111,7 +111,7 @@ export class ListAnticipoPrecobradoComponent implements OnInit {
   }
 
   cargarDocumentos(){
-    this.mensajeSppiner = "Cargando listado de anticipos precobrados...";
+    this.mensajeSpinner = "Cargando listado de anticipos precobrados...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

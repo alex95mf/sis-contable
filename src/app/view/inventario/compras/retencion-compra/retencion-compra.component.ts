@@ -23,7 +23,7 @@ standalone: false,
   styleUrls: ['./retencion-compra.component.scss']
 })
 export class RetencionCompraComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

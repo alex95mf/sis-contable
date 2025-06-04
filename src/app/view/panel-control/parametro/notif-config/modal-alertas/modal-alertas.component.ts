@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ModalAlertasComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: Botonera[] = []
 
   @Input() lst_modulo: any;
@@ -98,7 +98,7 @@ export class ModalAlertasComponent implements OnInit, OnDestroy {
 
   async setAlerta() {
     try {
-      this.msgSpinner = 'Almacenando Notificacion'
+      this.mensajeSpinner = 'Almacenando Notificacion'
       const response = await this.apiService.setAlerta({alerta: this.registro})
       console.log(response)
       this.apiService.setAlerta$.emit()
@@ -110,7 +110,7 @@ export class ModalAlertasComponent implements OnInit, OnDestroy {
 
   async updateAlerta() {
     try {
-      this.msgSpinner = 'Almacenando Notificacion'
+      this.mensajeSpinner = 'Almacenando Notificacion'
       const response = await this.apiService.updateAlerta(this.registro.id, {alerta: this.registro})
       console.log(response)
       this.apiService.setAlerta$.emit()

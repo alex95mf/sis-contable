@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ['./gastos.component.scss']
 })
 export class GastosComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   actions: any = { btnSave: false, btnmod: false, btnfac: false, btncancel: false };

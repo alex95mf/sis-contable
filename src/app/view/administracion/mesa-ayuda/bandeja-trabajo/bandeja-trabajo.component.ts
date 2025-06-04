@@ -24,8 +24,8 @@ export class BandejaTrabajoComponent implements OnInit {
   mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Mesa de Ayuda (Bandeja Trabajo)";
-  msgSpinner: string;
-  
+  mensajeSpinner: string;
+
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -33,10 +33,10 @@ export class BandejaTrabajoComponent implements OnInit {
   subCategorias: any = [];
   ticket: any = {};
   estadoList:any = [];
-  
+
 
   ticketsDt: any = [];
-  
+
   paginate: any;
   filter: any;
 
@@ -53,20 +53,20 @@ export class BandejaTrabajoComponent implements OnInit {
   //   {value: "C",label: "CERRADO"},
   //   {value: "GA",label: "GARANTIA"}
   // ]
- 
+
   prioridadList = [
     {value: "A",label: "ALTA"},
     {value: "M",label: "MEDIA"},
     {value: "B",label: "BAJA"},
-    
+
   ]
 
   ticketSeleccionado: any
   motivoAprobacion: any
   estadoAprobacion: any
   @ViewChild('aprobarModal') aprobarModal!: TemplateRef<any>; // Referencia al modal
- 
- 
+
+
 
   constructor(private ticketSrv: BandejaTrabajoService,
     private commonSrv: CommonService,
@@ -90,7 +90,7 @@ export class BandejaTrabajoComponent implements OnInit {
           }
         }
       )
-     
+
      }
 
   ngOnInit(): void {
@@ -125,7 +125,7 @@ export class BandejaTrabajoComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
       id_ticket: undefined,
@@ -136,7 +136,7 @@ export class BandejaTrabajoComponent implements OnInit {
       subcategoria: 0,
       estado: ['P','G','C','GA','PA','N'],
       prioridad: ['A','M','B']
-    
+
     };
 
     this.paginate = {
@@ -146,7 +146,7 @@ export class BandejaTrabajoComponent implements OnInit {
       pageSizeOptions: [20, 50,100,200]
     };
 
-   
+
 
     setTimeout(()=> {
       this.validaPermisos();
@@ -160,15 +160,15 @@ export class BandejaTrabajoComponent implements OnInit {
   evaluateTicket(documento: any): string {
     const statusMessages: string[] = [];
     const today = new Date();
-    const fechaDocumento = new Date(documento.fecha); 
+    const fechaDocumento = new Date(documento.fecha);
     // Si el estado es pendiente (P)
     if (documento.estado !== 'C') {
        // Suponiendo que documento.fecha es un string o Date válido
       const diffTime = Math.abs(today.getTime() - fechaDocumento.getTime());
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Diferencia en días
-  
+
       let status = 'Pendiente';
-  
+
       if (diffDays <= 2) {
         // Hasta 2 días: verde
         statusMessages.push(`<span class="text-success">en ${diffDays} día(s)</span><br>`);
@@ -180,16 +180,16 @@ export class BandejaTrabajoComponent implements OnInit {
         statusMessages.push(`<span class="text-danger">en ${diffDays} día(s)</span><br>`);
       }
     }
-  
+
     // Si el estado es cerrado (C)
     if (documento.estado === 'C') {
-      
+
       const fechaCierre = new Date(documento.fecha_cierre); // Suponiendo que documento.fecha_cierre es un string o Date válido
       const diffTime = Math.abs(fechaDocumento.getTime() - fechaCierre.getTime());
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Diferencia en días
-  
+
       let status = 'Cerrado';
-  
+
       if (diffDays <= 2) {
         // Hasta 2 días: verde
         statusMessages.push(`<span class="text-success">Atendido en ${diffDays} día(s)</span><br>`);
@@ -201,7 +201,7 @@ export class BandejaTrabajoComponent implements OnInit {
         statusMessages.push(`<span class="text-danger">Atendido en ${diffDays} día(s)</span><br>`);
       }
     }
-  
+
     // Unir todos los elementos del array en una única cadena
     return statusMessages.join('');
   }
@@ -210,7 +210,7 @@ export class BandejaTrabajoComponent implements OnInit {
       case " CONSULTAR":
        this.cargarTicketsGlobal(true)
        break;
- 
+
       case " LIMPIAR":
         this.limpiarFiltros();
       //  this.changeShowInactive(this.showInactive);
@@ -251,10 +251,10 @@ export class BandejaTrabajoComponent implements OnInit {
     let data = {
       params: "'MDA_CATEGORIA','MDA_SUBCATEGORIA','MDA_ESTADOS'",
     };
-    /*this.mensajeSppiner = "Buscando categoría...";
+    /*this.mensajeSpinner = "Buscando categoría...";
     this.lcargando.ctlSpinner(true);*/
     this.ticketSrv.getCatalogoCategoria(data).subscribe(
-     
+
       (res) => {
         this.categorias = res["data"]['MDA_CATEGORIA'];
         this.subCategorias = res["data"]['MDA_SUBCATEGORIA'];
@@ -275,7 +275,7 @@ export class BandejaTrabajoComponent implements OnInit {
        grupo:evento
      };
      this.ticketSrv.getCatalogoSubCategoria(data).subscribe(
-       
+
        (res) => {
          //console.log('AQQQQQQQQQ'+res["data"])
          this.subCategorias = res["data"];
@@ -316,7 +316,7 @@ export class BandejaTrabajoComponent implements OnInit {
     }
 
     console.log(data)
-    
+
     this.ticketSrv.getTicketsGlobal(data).subscribe(
       (res) => {
         //console.log(res);
@@ -328,7 +328,7 @@ export class BandejaTrabajoComponent implements OnInit {
           this.ticketsDt = Object.values(res['data']['data']);
         }
         this.lcargando.ctlSpinner(false);
-       
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -338,7 +338,7 @@ export class BandejaTrabajoComponent implements OnInit {
   }
 
   showGestionTicketForm(isNew:boolean, data?:any) {
-    
+
    // console.log('DATOOSSSS TICKET '+data['usuario']['nombre']);
     if (!isNew && this.permissions.consultar == "0") {
       this.toastr.warning("No tiene permisos para consultar Tickets.", this.fTitle);
@@ -358,19 +358,19 @@ export class BandejaTrabajoComponent implements OnInit {
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
       modalInvoice.componentInstance.ticket = this.ticket;
-    
+
     }
   }
 
   showSeguiTicketForm(isNew:boolean, data?:any) {
-    
+
     //console.log('DATOOSSSS TICKET '+data['usuario']['nombre']);
     if (!isNew && this.permissions.consultar == "0") {
       this.toastr.warning("No tiene permisos para consultar Tickets.", this.fTitle);
     } else if (isNew && this.permissions.guardar == "0") {
       this.toastr.warning("No tiene permisos para crear Tickets.", this.fTitle);
     } else {
-       
+
       const modalInvoice = this.modalSrv.open(SeguimientoFormComponent, {
         size: "xl",
         backdrop: "static",
@@ -382,10 +382,10 @@ export class BandejaTrabajoComponent implements OnInit {
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
       modalInvoice.componentInstance.ticket = this.ticket;
-      
+
     }
   }
-  
+
   limpiarFiltros() {
     this.filter = {
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
@@ -412,7 +412,7 @@ export class BandejaTrabajoComponent implements OnInit {
   deshabilitarBotonAprobacion(ticket: any): boolean {
     let rolUsuarioActual = this.dataUser.id_rol;
 
-    const aprobacionesConMiRol = ticket.aprobaciones.filter(aprob => 
+    const aprobacionesConMiRol = ticket.aprobaciones.filter(aprob =>
       aprob.id_rol === rolUsuarioActual && aprob.estado_aprobacion === 'PENDIENTE'
     );
 
@@ -427,7 +427,7 @@ export class BandejaTrabajoComponent implements OnInit {
       }
 
       // Para órdenes mayores, verificar aprobación anterior
-      const aprobacionAnterior = ticket.aprobaciones.find(a => 
+      const aprobacionAnterior = ticket.aprobaciones.find(a =>
         a.orden_aprobacion === aprobacion.orden_aprobacion - 1
       );
 
@@ -470,8 +470,8 @@ export class BandejaTrabajoComponent implements OnInit {
 
   // Lógica final para retornar el trámite
   private confirmarAprobacion() {
-    const aprobacionActiva = this.ticketSeleccionado.aprobaciones.find(ap => 
-      ap.id_rol == this.dataUser.id_rol && 
+    const aprobacionActiva = this.ticketSeleccionado.aprobaciones.find(ap =>
+      ap.id_rol == this.dataUser.id_rol &&
       ap.estado_aprobacion === 'PENDIENTE' // Asegurar que esté pendiente
     );
 
@@ -504,7 +504,7 @@ export class BandejaTrabajoComponent implements OnInit {
         }
 
         this.estadoAprobacion = '0'
-        
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -512,7 +512,7 @@ export class BandejaTrabajoComponent implements OnInit {
        // console.log(error)
       }
     );
-    
+
   }
 
   puedeGestionarTicket(ticket: any): boolean {
@@ -530,5 +530,5 @@ export class BandejaTrabajoComponent implements OnInit {
     return this.dataUser?.mesa_ayuda === 'SI';
   }
 
- 
+
 }

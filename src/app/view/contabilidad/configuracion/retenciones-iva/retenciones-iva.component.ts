@@ -16,7 +16,7 @@ standalone: false,
 })
 export class RetencionesIvaComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
   
@@ -83,7 +83,7 @@ export class RetencionesIvaComponent implements OnInit {
   }
   
   validaPermisos() {
-    this.mensajeSppiner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -114,7 +114,7 @@ export class RetencionesIvaComponent implements OnInit {
   }
 
   cargarData() {
-    this.mensajeSppiner = "Cargando Retenciones...";
+    this.mensajeSpinner = "Cargando Retenciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

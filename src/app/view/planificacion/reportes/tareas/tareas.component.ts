@@ -15,7 +15,7 @@ standalone: false,
 })
 export class TareasComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   fTitle: string = 'Resumen General de Tareas por Meta (Cartera de Proyectos)'
   vmButtons: Array<Botonera> = []
 
@@ -95,7 +95,7 @@ export class TareasComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Periodos'
+      this.mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiService.getPeriodos();
       console.log(periodos)
       this.cmb_periodo = periodos;
@@ -113,7 +113,7 @@ export class TareasComponent implements OnInit {
     try {
       this.metas = [];
       this.totales = [];
-      this.msgSpinner = 'Obteniendo Tareas por Meta'
+      this.mensajeSpinner = 'Obteniendo Tareas por Meta'
       let metas = await this.apiService.getMetasTareas({periodo: this.periodoSelected});
       console.log(metas)
       this.metas = Object.keys(metas)
@@ -148,7 +148,7 @@ export class TareasComponent implements OnInit {
 
   exportarExcel = () => {
     let excelData = []
-    this.msgSpinner = "Descargando Listado"
+    this.mensajeSpinner = "Descargando Listado"
     this.lcargando.ctlSpinner(true)
     try {
       this.metas.forEach((meta: string) => {

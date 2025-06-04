@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./asignacion-ingresos.component.scss']
 })
 export class AsignacionIngresosComponent implements OnInit {
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   
@@ -325,7 +325,7 @@ export class AsignacionIngresosComponent implements OnInit {
 
   checkPeriodo() {
 
-    this.mensajeSpiner = 'Obteniendo asignacion de ingresos...';
+    this.mensajeSpinner = 'Obteniendo asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -367,7 +367,7 @@ export class AsignacionIngresosComponent implements OnInit {
 
   guardarIngresos() {
 
-    this.mensajeSpiner = 'Guardando asignacion de ingresos...';
+    this.mensajeSpinner = 'Guardando asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -399,7 +399,7 @@ export class AsignacionIngresosComponent implements OnInit {
   }
 
   inspeccionarPeriodo() {
-    this.mensajeSpiner = 'Obteniendo asignacion de ingresos...';
+    this.mensajeSpinner = 'Obteniendo asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -425,7 +425,7 @@ export class AsignacionIngresosComponent implements OnInit {
   }
 
   eliminarIngresos() {
-    this.mensajeSpiner = 'Eliminando asignacion de ingresos...';
+    this.mensajeSpinner = 'Eliminando asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -473,7 +473,7 @@ export class AsignacionIngresosComponent implements OnInit {
   }
   
   validaPermisos() {
-    this.mensajeSpiner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {
@@ -506,7 +506,7 @@ export class AsignacionIngresosComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpiner = 'Cargando Periodos'
+      this.mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiSrv.cargarPeriodos();
       console.log(periodos)
       this.cmb_periodo = periodos
@@ -532,7 +532,7 @@ export class AsignacionIngresosComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpiner = 'Generando Periodo'
+        this.mensajeSpinner = 'Generando Periodo'
         let periodo = await this.apiSrv.generarPeriodoPresupuesto()
         console.log(periodo)
         

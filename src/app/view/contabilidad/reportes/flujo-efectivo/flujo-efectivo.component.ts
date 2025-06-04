@@ -24,7 +24,7 @@ export class FlujoEfectivoComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
   fTitle: string = "Flujo de Efectivo";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: any[] = [];
   dataUser: any;
   permissions: any;
@@ -231,7 +231,7 @@ export class FlujoEfectivoComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.msgSpinner = "Carga Inicial"
+      this.mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.apiService.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -255,7 +255,7 @@ export class FlujoEfectivoComponent implements OnInit {
   }
   // cargarConsulta(){
 
-  //   this.msgSpinner = 'Cargando...';
+  //   this.mensajeSpinner = 'Cargando...';
   //   this.lcargando.ctlSpinner(true);
   //   let data= {
   //     params: {
@@ -305,7 +305,7 @@ export class FlujoEfectivoComponent implements OnInit {
       //periodo: this.periodo.getFullYear(),
       periodo: this.periodo,
     };
-    this.msgSpinner ='Generando...';
+    this.mensajeSpinner ='Generando...';
     this.lcargando.ctlSpinner(true);
      console.log(datos);
     this.apiService.getFlujoEfectivo(datos).subscribe(

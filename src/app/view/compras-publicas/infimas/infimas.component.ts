@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'node_modules/sweetalert2/dist/sweetalert2';
 import * as moment from 'moment';
-import { InfimasService } from './infimas.service'; 
+import { InfimasService } from './infimas.service';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { CommonService } from 'src/app/services/commonServices';
@@ -26,15 +26,15 @@ standalone: false,
 export class InfimasComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
    lcargando: CcSpinerProcesarComponent;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   fTitle: string = "Infimas";
-  msgSpinner: string
+  mensajeSpinner: string
   dataUser: any
   permissions: any
   viewSolicitudes: boolean = true
   consultaSolicitudes: boolean = true;
   detalleSolicitud: boolean = false;
-  
+
   programa: any = [];
   departamento: any = [];
   atribucion: any = [];
@@ -97,10 +97,10 @@ export class InfimasComponent implements OnInit {
     private toastr: ToastrService,
     private commonService: CommonService,
     private xlsService: XlsExportService,
-  ) { 
+  ) {
     this.commonVrs.selectProveedorCustom.asObservable().subscribe(
       (res) => {
-      
+
         this.proveedorActive = res;
         this.filter.proveedor = res.razon_social
         console.log(this.proveedorActive);
@@ -109,16 +109,16 @@ export class InfimasComponent implements OnInit {
   }
   ngOnInit(): void {
     this.vmButtons = [
-      { 
-        orig: "btnsComprasPI", 
-        paramAccion: "1", 
-        boton: { icon: "fas fa-save", texto: "Guardar" }, 
-        permiso: true, 
+      {
+        orig: "btnsComprasPI",
+        paramAccion: "1",
+        boton: { icon: "fas fa-save", texto: "Guardar" },
+        permiso: true,
         showtxt: true,
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-warning btn-sm", 
-        habilitar: false, 
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-warning btn-sm",
+        habilitar: false,
         imprimir: false
       }
       ,
@@ -134,48 +134,48 @@ export class InfimasComponent implements OnInit {
         habilitar: false,
       },
      { orig: "btnsComprasPI",
-        paramAccion: "1", 
-        boton: { icon: "fas fa-search", texto: "CONSULTAR" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-primary btn-sm", 
-        habilitar: false, 
+        paramAccion: "1",
+        boton: { icon: "fas fa-search", texto: "CONSULTAR" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-primary btn-sm",
+        habilitar: false,
         imprimir: false
       },
         { orig: "btnsComprasPI",
-          paramAccion: "1", 
-          boton: { icon: "fas fa-eraser", texto: "LIMPIAR" }, 
-          permiso: true, 
-          showtxt: true, 
-          showimg: true, 
-          showbadge: false, 
-          clase: "btn btn-danger btn-sm", 
-          habilitar: false, 
+          paramAccion: "1",
+          boton: { icon: "fas fa-eraser", texto: "LIMPIAR" },
+          permiso: true,
+          showtxt: true,
+          showimg: true,
+          showbadge: false,
+          clase: "btn btn-danger btn-sm",
+          habilitar: false,
           imprimir: false
         },
- 
+
       { orig: "btnsComprasPI",
-       paramAccion: "1", 
-       boton: { icon: "fas fa-eraser", texto: "EXCEL" }, 
-       permiso: true, 
-       showtxt: true, 
-       showimg: true, 
-       showbadge: false, 
-       clase: "btn btn-success btn-sm", 
-       habilitar: false, 
+       paramAccion: "1",
+       boton: { icon: "fas fa-eraser", texto: "EXCEL" },
+       permiso: true,
+       showtxt: true,
+       showimg: true,
+       showbadge: false,
+       clase: "btn btn-success btn-sm",
+       habilitar: false,
        imprimir: false}
     ]
     this.today = new Date();
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
-   
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
+
     this.periodo =  moment().format('YYYY');
 
-    
+
     this.filter = {
       num_solicitud:"",
       //estado:['A','P','D'],
@@ -183,7 +183,7 @@ export class InfimasComponent implements OnInit {
       proveedor: undefined,
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
-      filterControl: ""  
+      filterControl: ""
     };
 
     this.paginate = {
@@ -216,7 +216,7 @@ export class InfimasComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.msgSpinner = "Carga Inicial"
+      this.mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.service.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -227,7 +227,7 @@ export class InfimasComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
@@ -254,7 +254,7 @@ export class InfimasComponent implements OnInit {
       }
     )
   }
-  
+
   toggleView() {
     this.viewSolicitudes = !this.viewSolicitudes
   }
@@ -305,25 +305,25 @@ export class InfimasComponent implements OnInit {
         case"LIMPIAR":
         this.limpiarFiltro();
       break;
-        
+
     }
   }
 
   // cargarPrograma(){
-  //   this.mensajeSppiner = "Cargando Programa...";    
+  //   this.mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
 
   //   this.service.searchPrograma({}).subscribe((res: any)=>{
   //     console.log(res);
   //     res.map((data)=>{
-       
+
   //       this.programaPrin.push(data.catalogo)
   //       this.lcargando.ctlSpinner(false);
   //     })
   //   })
   // }
   cargarPrograma(){
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data ={
       //periodo: this.periodo.getFullYear(),
@@ -333,7 +333,7 @@ export class InfimasComponent implements OnInit {
       // console.log(res);
       let program = []
       res.map((data)=>{
-        
+
         let dat = {
           ...data.catalogo,
           value: data.catalogo['descripcion'] + '-'+ data.catalogo['valor']
@@ -349,7 +349,7 @@ export class InfimasComponent implements OnInit {
 
   // departamentoSearch(event){
   //   //console.log('Programa '+event);
-  //   this.mensajeSppiner = "Cargando Programa...";    
+  //   this.mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
 
   //   let data = {
@@ -358,16 +358,16 @@ export class InfimasComponent implements OnInit {
   //   console.log('Programa '+data.programa);
   //   this.service.searchDepartamento(data).subscribe((data)=>{
   //     //console.log(data);
-     
+
   //     this.departamentoPrin = data
   //     this.lcargando.ctlSpinner(false);
   //   })
   // }
   departamentoSearch(event){
     // console.log(event);
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
-  
+
     let data = {
       programa: this.dato_Programa //event.valor
     }
@@ -379,7 +379,7 @@ export class InfimasComponent implements OnInit {
         let d = {
           ...res,
           value: res['descripcion'] + '-'+ res['valor'],
-  
+
         }
         depa.push(d)
       })
@@ -391,34 +391,34 @@ export class InfimasComponent implements OnInit {
 
   selectAll() {
     this.listaSolicitudesAtribucion.map((e: any) => e.check = this.masterSelected)
-    
+
   }
 
   AtribucionSearch(event){
     //console.log(event);
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event
     }
     this.service.searchAtribucion(data).subscribe((dat)=>{
       console.log('atribucion '+dat);
-    
+
       this.atribucionPrin = dat['data']
       this.lcargando.ctlSpinner(false);
     })
   }
   // SearchList(event){
   //   console.log("Atribucion "+event);
-  //   this.mensajeSppiner = "Cargando Programa...";    
+  //   this.mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
   //   // let data = {
   //   //   id: event,
   //   //   paramns:{
   //   //     paginate: this.paginate,
   //   //     filter: this.filter
-  //   //   } 
-      
+  //   //   }
+
   //   // }
   //   let data = {
   //     atribucion:{
@@ -455,9 +455,9 @@ export class InfimasComponent implements OnInit {
   SearchList(event,flag: boolean = false){
     // console.log(event);
     this.listaSolicitudes = []
-    this.mensajeSppiner = "Cargando Programa...";    
+    this.mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
-    
+
     if (flag) this.paginate.page = 1
     let data = {
       id_programa :this.dato_Programa,
@@ -467,7 +467,7 @@ export class InfimasComponent implements OnInit {
         filter: this.filter
       }
 
-      
+
     }
     console.log(data);
     this.service.searchSolicitud(data).subscribe((dat)=>{
@@ -483,7 +483,7 @@ export class InfimasComponent implements OnInit {
           this.listaSolicitudes = Object.values(dat['data']['data']);
         }
       }
-      
+
 
       this.lcargando.ctlSpinner(false);
     },
@@ -511,7 +511,7 @@ export class InfimasComponent implements OnInit {
       proveedor: undefined,
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
-      filterControl: ""  
+      filterControl: ""
     };
     this.estadoSelected= 0
 
@@ -528,12 +528,12 @@ export class InfimasComponent implements OnInit {
       this.toastr.info("Usuario no tiene permiso para exportar");
     } else {
       let data ={
-        params: { 
-          filter: this.filter 
+        params: {
+          filter: this.filter
         }
       }
       let excelData = []
-      this.mensajeSppiner = "Generando Archivo Excel..."
+      this.mensajeSpinner = "Generando Archivo Excel..."
       this.lcargando.ctlSpinner(true)
       this.service.getInfimas({ params: { filter: this.filter } }).subscribe(
         (res: any) => {
@@ -550,8 +550,8 @@ export class InfimasComponent implements OnInit {
           this.xlsService.exportConsultaInfimas(data, 'Infimas')
           this.lcargando.ctlSpinner(false)
           }
-         
-          
+
+
         },
         (err: any) => {
           console.log(err)
@@ -560,7 +560,7 @@ export class InfimasComponent implements OnInit {
         }
       )
     }
-    
+
   }
   expandListProveedores() {
     if (this.permissions.consultar == "0") {

@@ -17,7 +17,7 @@ export class ModalBusquedaPartidaComponent implements OnInit {
   fTitle: string = 'Busqueda de Partidas Presupuestarias'
   filter: any;
   paginate: any;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Array<any>;
 
   partidas: Array<any> = [];
@@ -81,7 +81,7 @@ export class ModalBusquedaPartidaComponent implements OnInit {
   async getPartidas() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Partidas'
+      this.mensajeSpinner = 'Cargando Partidas'
       let response: any = await this.apiService.getPartidas({params: { filter: this.filter, paginate: this.paginate }});
       console.log(response); 
       this.paginate.length = response.total

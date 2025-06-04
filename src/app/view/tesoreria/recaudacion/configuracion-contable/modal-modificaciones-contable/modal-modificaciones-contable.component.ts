@@ -18,7 +18,7 @@ export class ModalModificacionesContableComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static:false}) lcargando: CcSpinerProcesarComponent;
   @Input() new: any;
   @Input() dato: any;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   fTitle: any;
 
   vmButtons: any;
@@ -236,7 +236,7 @@ export class ModalModificacionesContableComponent implements OnInit {
 
 
   getCatalogos() {
-    this.mensajeSppiner = 'Cargando Catalogos...';
+    this.mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -289,7 +289,7 @@ export class ModalModificacionesContableComponent implements OnInit {
 
   guardarNuevo(){
     this.lcargando.ctlSpinner(true)
-    this.mensajeSppiner = 'Almacenando Configuracion Contable'
+    this.mensajeSpinner = 'Almacenando Configuracion Contable'
     this.service.postConfiguracionContable(this.data).subscribe(
       (res)=>{
         console.log(res);
@@ -303,7 +303,7 @@ export class ModalModificacionesContableComponent implements OnInit {
 
   updateContable(){
     this.lcargando.ctlSpinner(true)
-    this.mensajeSppiner = 'Actualizando Configuracion Contable'
+    this.mensajeSpinner = 'Actualizando Configuracion Contable'
     this.service.updateConfiguracionContable(this.data).subscribe(
       (res)=>{
         console.log(res);

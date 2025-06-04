@@ -28,7 +28,7 @@ standalone: false,
 export class EmisionArancelesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emision de Aranceles";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -125,7 +125,7 @@ export class EmisionArancelesComponent implements OnInit {
     this.commonVarService.selectListLiqRP.asObservable().subscribe(
       (res) => {
         console.log(res);
-        this.msgSpinner = 'Cargando datos de la Liquidación...';
+        this.mensajeSpinner = 'Cargando datos de la Liquidación...';
         this.lcargando.ctlSpinner(true)
         this.restoreForm(false, false);
         this.formReadOnly = true;
@@ -484,7 +484,7 @@ export class EmisionArancelesComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.msgSpinner = 'Cargando Permisos de Usuario...'
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
@@ -711,7 +711,7 @@ export class EmisionArancelesComponent implements OnInit {
     }
     if (arancel.id) {
       if (arancel.avaluo) {
-        this.msgSpinner = 'Obteniendo Propiedades...'
+        this.mensajeSpinner = 'Obteniendo Propiedades...'
         this.lcargando.ctlSpinner(true)
         this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
           (res) => {
@@ -779,7 +779,7 @@ export class EmisionArancelesComponent implements OnInit {
   }
 
   calcSubtotal() {
-    this.msgSpinner = 'Calculando Subtotal...';
+    this.mensajeSpinner = 'Calculando Subtotal...';
     this.lcargando.ctlSpinner(true);
     let payload = {
       avaluo: this.liquidacion.avaluo,
@@ -875,7 +875,7 @@ export class EmisionArancelesComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.msgSpinner = "Verificando período contable";
+          this.mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -885,7 +885,7 @@ export class EmisionArancelesComponent implements OnInit {
             
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.msgSpinner = 'Generando Liquidación...';
+              this.mensajeSpinner = 'Generando Liquidación...';
               this.lcargando.ctlSpinner(true);
               this.liquidacion.fk_arancel = this.arancelActive.id;
               this.aranceles.forEach((e: any)=>{
@@ -1073,7 +1073,7 @@ export class EmisionArancelesComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.msgSpinner = "Verificando período contable";
+        this.mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let data = {
           "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -1084,7 +1084,7 @@ export class EmisionArancelesComponent implements OnInit {
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
       
-              this.msgSpinner = 'Aprobando aranceles...';
+              this.mensajeSpinner = 'Aprobando aranceles...';
               this.lcargando.ctlSpinner(true);
               console.log(this.aranceles);
               let data2 = {

@@ -51,7 +51,7 @@ export class ReportesComponent implements OnInit {
   presentaStock: any = false;
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
   pStockActual:any;
@@ -213,7 +213,7 @@ export class ReportesComponent implements OnInit {
                 url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
             },
         };
-        this.mensajeSppiner = "Cargando...";
+        this.mensajeSpinner = "Cargando...";
         this.lcargando.ctlSpinner(true);
         this.reportesSrv.tablaReportdos(data).subscribe(res => {
             this.validaDtUser = true;

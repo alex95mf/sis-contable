@@ -13,7 +13,7 @@ standalone: false,
   styleUrls: ['./cargo.component.scss']
 })
 export class CargoComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -136,7 +136,7 @@ export class CargoComponent implements OnInit {
 
 
   cargarCargos() {
-    this.mensajeSppiner = "Cargando Cargos...";
+    this.mensajeSpinner = "Cargando Cargos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

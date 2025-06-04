@@ -43,7 +43,7 @@ standalone: false,
   adataData: any;
 
   vmButtons: any;
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   constructor(private toastr: ToastrService,
@@ -171,7 +171,7 @@ standalone: false,
               url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
           }
       };
-      this.mensajeSppiner = "Cargando...";
+      this.mensajeSpinner = "Cargando...";
       this.lcargando.ctlSpinner(true);
       this.reportesSrv.getAllTrnsaferencia(data).subscribe(res => {
         this.lcargando.ctlSpinner(false);

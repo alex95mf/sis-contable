@@ -17,7 +17,7 @@ standalone: false,
 export class RegistroComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent 
   fTitle = 'Registro de Compras'
-  msgSpinner: string = ''
+  mensajeSpinner: string = ''
 
   periodos: Array<any> = []
   programas: any = []
@@ -49,11 +49,11 @@ export class RegistroComponent implements OnInit {
     // Cargar Periodos
     this.lcargando.ctlSpinner(true)
     try {
-      this.msgSpinner = 'Cargando Periodos'
+      this.mensajeSpinner = 'Cargando Periodos'
       response = await this.api.getPeriodos();
       this.periodos = response;
       
-      this.msgSpinner = 'Cargando Programas'
+      this.mensajeSpinner = 'Cargando Programas'
       response = await this.api.getProgramas();
       response.map((item: any) => Object.assign(item, { label: `${item.descripcion} - ${item.valor}`}))
       this.lcargando.ctlSpinner(false)
@@ -66,7 +66,7 @@ export class RegistroComponent implements OnInit {
   }
 
   /* cargaProgramas() {
-    this.msgSpinner = 'Cargando Programas'
+    this.mensajeSpinner = 'Cargando Programas'
     this.lcargando.ctlSpinner(true)
     this.api.getProgramas().subscribe(
       res => {
@@ -93,7 +93,7 @@ export class RegistroComponent implements OnInit {
     this.atribuciones = []
     this.bienes = []
     
-    this.msgSpinner = 'Cargando Departamentos'
+    this.mensajeSpinner = 'Cargando Departamentos'
     this.lcargando.ctlSpinner(true)
     this.api.getDepartamentos({ programa: e.valor }).subscribe(
       (res: any) => {
@@ -124,7 +124,7 @@ export class RegistroComponent implements OnInit {
     let data = {
       departamento: e.nombre
     }
-    this.msgSpinner = 'Cargando Atribuciones'
+    this.mensajeSpinner = 'Cargando Atribuciones'
     this.lcargando.ctlSpinner(true)
     this.api.getAtribuciones({ departamento: e.nombre }).subscribe(
       (res: any) => {
@@ -153,7 +153,7 @@ export class RegistroComponent implements OnInit {
       periodo: this.seleccion.periodo,
       atribucion: e
     }
-    this.msgSpinner = 'Cargando Bienes y Servicios'
+    this.mensajeSpinner = 'Cargando Bienes y Servicios'
     this.lcargando.ctlSpinner(true)
     this.api.getBienes(data).subscribe(
       (res: any) => {

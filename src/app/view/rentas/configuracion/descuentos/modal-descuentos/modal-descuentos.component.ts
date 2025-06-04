@@ -15,7 +15,7 @@ standalone: false,
 })
 export class ModalDescuentosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
-  msgSpinner: string
+  mensajeSpinner: string
   vmButtons: Botonera[] = []
   fTitle: string = 'Nuevo Descuento'
 
@@ -105,7 +105,7 @@ export class ModalDescuentosComponent implements OnInit {
 
   async setConfiguracion() {
     try {
-      this.msgSpinner = 'Almacenando Configuracion'
+      this.mensajeSpinner = 'Almacenando Configuracion'
       const response = await this.apiService.setDescuento({descuento: this.registro})
       console.log(response)
       //
@@ -117,7 +117,7 @@ export class ModalDescuentosComponent implements OnInit {
 
   async updateConfiguracion() {
     try {
-      this.msgSpinner = 'Actualizando Configuracion'
+      this.mensajeSpinner = 'Actualizando Configuracion'
       const response = await this.apiService.updateDescuento(this.registro.id_porcentajes_descuentos, {descuento: this.registro})
       console.log(response)
       //

@@ -15,7 +15,7 @@ standalone: false,
 })
 export class ModalRetencionJudicialComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Botonera[] = []
 
   @Input() empleado: EmployeesResponseI
@@ -97,7 +97,7 @@ export class ModalRetencionJudicialComponent implements OnInit {
 
   cargarBancos = async () => {
     try {
-      this.msgSpinner = 'Cargando Bancos'
+      this.mensajeSpinner = 'Cargando Bancos'
       const response = await this.empleadoService.getCatalogs({params: "'BANCO'"}).toPromise()
       this.lst_bancos = response['data']['BANCO']
     } catch (err) {
@@ -113,7 +113,7 @@ export class ModalRetencionJudicialComponent implements OnInit {
         break;
       case "Guardar":
         this.lcargando.ctlSpinner(true)
-        this.msgSpinner = 'Almacenando Retencion Judicial'
+        this.mensajeSpinner = 'Almacenando Retencion Judicial'
         await this.setRetencionJudicial()
         this.lcargando.ctlSpinner(false)
         break;

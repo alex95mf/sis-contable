@@ -34,7 +34,7 @@ standalone: false,
   styleUrls: ['./prestamo.component.scss']
 })
 export class PrestamoComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle = "Préstamo de bienes";
   permissions: any;
@@ -800,7 +800,7 @@ sectorNombre: any;
   }
 
   buscarGrupoProducto(event){
-    this.mensajeSppiner = "Cargando...";
+    this.mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1295,7 +1295,7 @@ sectorNombre: any;
 
   async save(productSend, notify, filter, prefict, info, resultado) {
     console.log(productSend)
-    this.mensajeSppiner = "Guardando prestamo de bienes...";
+    this.mensajeSpinner = "Guardando prestamo de bienes...";
     this.lcargando.ctlSpinner(true);
     let res = await this.validatePrice(productSend).then(res => {
       localStorage.removeItem('dataProductsInvoice');
@@ -1464,7 +1464,7 @@ sectorNombre: any;
   }
 
   cargaFoto(archivos) {
-    this.mensajeSppiner = 'Cargando fotos...';
+    this.mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 3) {
       for (let i = 0; i < archivos.length; i++) {

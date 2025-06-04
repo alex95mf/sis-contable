@@ -38,7 +38,7 @@ export class TipoContratosComponent implements OnInit {
   fTitle: string = "Tipo Contratos";
   vmButtons: any = [];
   dtOptions: any = {};
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   dataTipoContrato: any;
 
   //tabla tipo contratos
@@ -383,7 +383,7 @@ export class TipoContratosComponent implements OnInit {
       search : '',
       relation_selected : 'catalogoDetalle.tiempo' //catalogoDetalle.tiempo@
     };
-    this.mensajeSppiner = "Cargando";
+    this.mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true);
     this.tiposContratosService.getTypeContracTimer(parameterUrl)
       .subscribe({
@@ -537,7 +537,7 @@ export class TipoContratosComponent implements OnInit {
       id_tiempo: this.unidad_tiempo_id_cc,
 
     }
-    this.mensajeSppiner = "Actualizando...";
+    this.mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.tiposContratosService.createOrUpdateCatalogDetailWorkTime(data).subscribe(
       (res: GeneralResponseI) => {
@@ -807,7 +807,7 @@ export class TipoContratosComponent implements OnInit {
       hora: this.formGroupConfigurarRemitenteAlertas.value.fcn_hora,
 
     }
-    this.mensajeSppiner = "Actualizando...";
+    this.mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.tiposContratosService.createOrUpdateTiempoContratoCorreo(data).subscribe(
       (res: GeneralResponseI) => {
@@ -893,7 +893,7 @@ export class TipoContratosComponent implements OnInit {
       mailDestination     : this.formGroupTestEmail.value.fcn_mail_destinationt,
 
     }
-    this.mensajeSppiner = "Enviando Correo Test...";
+    this.mensajeSpinner = "Enviando Correo Test...";
     this.lcargando.ctlSpinner(true);
     this.tiposContratosService.testEmailSend(data).subscribe(
       (res: GeneralResponseI) => {
@@ -1062,7 +1062,7 @@ export class TipoContratosComponent implements OnInit {
       address             : this.formGroupEmailConfig.value.fcn_usuario_smtp,
       name: null
     }
-    this.mensajeSppiner = "Actualizando...";
+    this.mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.tiposContratosService.createOrUpdateSmtpEmail(data).subscribe(
       (res: GeneralResponseI) => {
@@ -1220,7 +1220,7 @@ export class TipoContratosComponent implements OnInit {
       id_controlador: myVarGlobals.fCuentaBancos,
       id_empresa          : this.dataUser.id_empresa,
     }
-    this.mensajeSppiner = "Enviando correos...";
+    this.mensajeSpinner = "Enviando correos...";
     this.lcargando.ctlSpinner(true);
     this.tiposContratosService.sendEmailServer(data).subscribe(
       (res: GeneralResponseI) => {

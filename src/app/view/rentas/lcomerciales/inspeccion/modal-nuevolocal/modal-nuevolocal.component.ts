@@ -26,7 +26,7 @@ export class ModalNuevolocalComponent implements OnInit {
   @Input() permissions: any;
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   fTitle: string = 'Nuevo Local'
-  msgSpinner: string
+  mensajeSpinner: string
   // contribuyente: any;
   vmButtons: any[] = []
   validaciones = new ValidacionesFactory()
@@ -193,7 +193,7 @@ export class ModalNuevolocalComponent implements OnInit {
   }
 
   async cargaCatalogos() {
-    this.msgSpinner = 'Cargando Catalogos'
+    this.mensajeSpinner = 'Cargando Catalogos'
     this.lcargando.ctlSpinner(true)
 
     try {
@@ -469,7 +469,7 @@ export class ModalNuevolocalComponent implements OnInit {
 
     if (result.isConfirmed) {
       // this.local['fk_contribuyente'] = { id_cliente: this.contribuyente.id_cliente }
-      this.msgSpinner = 'Almacenando Nuevo Local'
+      this.mensajeSpinner = 'Almacenando Nuevo Local'
       this.lcargando.ctlSpinner(true)
 
       // console.log({local: this.local});

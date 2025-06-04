@@ -28,7 +28,7 @@ export class IngChqProtestadoComponent implements OnInit {
   vmButtons:any = [];
   lInputs:any = {};
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   ngOnInit(): void {
@@ -108,7 +108,7 @@ export class IngChqProtestadoComponent implements OnInit {
       ip: this.commonServices.getIpAddress()
     }
     console.log("datosEnviar: ", datosEnviar)
-    this.mensajeSppiner = "Guardando por favor espere...";
+    this.mensajeSpinner = "Guardando por favor espere...";
     this.lcargando.ctlSpinner(true);
     this.chequeProtestadoService.protestarCheque(datosEnviar).subscribe((datos:any)=>{
 

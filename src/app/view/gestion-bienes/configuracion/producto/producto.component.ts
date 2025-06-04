@@ -44,7 +44,7 @@ standalone: false,
 })
 export class ProductoComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   dataGrupo: any = [];
   dataTipo: any = [{ id: "Producto", nombre: "Producto" }, { id: "Materia Prima", nombre: "Materia Prima" }];
@@ -318,7 +318,7 @@ export class ProductoComponent implements OnInit {
       async () => {
         this.lcargando.ctlSpinner(true)
         try {
-          this.mensajeSppiner = 'Actualizando Unidades de Medida'
+          this.mensajeSpinner = 'Actualizando Unidades de Medida'
           let response = await this.ingresoService.getCatalogo({params: "'UNIDAD DE MEDIDA'"})
           console.log(response)
           this.dataUDM = response['UNIDAD DE MEDIDA'];
@@ -728,12 +728,12 @@ async cargaInicial() {
   this.lcargando.ctlSpinner(true)
   try {
     let responseArr: Array<any>;
-    this.mensajeSppiner = 'Cargando Conceptos'
+    this.mensajeSpinner = 'Cargando Conceptos'
     responseArr = await this.ingresoService.getConceptos();
     // console.log(responseArr)
     this.conceptos = responseArr;
 
-    this.mensajeSppiner = 'Cargando Presentaciones'
+    this.mensajeSpinner = 'Cargando Presentaciones'
     let response: any = await this.ingresoService.getCatalogo({ params: "'PRESENTACION','INV_METODO_DEPRECIACION'"})
     console.log(response);
     this.cmb_presentacion_a = response.PRESENTACION;
@@ -821,7 +821,7 @@ async cargaInicial() {
 
   generarCodigoEx() {
     this.lcargando.ctlSpinner(true)
-    this.mensajeSppiner = 'Generando codigo de Producto...'
+    this.mensajeSpinner = 'Generando codigo de Producto...'
     if (this.claseSelect.tipo_bien == "EXI") {
 
 
@@ -1446,7 +1446,7 @@ async cargaInicial() {
   }
 
   async saveProduct() {
-    this.mensajeSppiner = 'Almacenando Producto'
+    this.mensajeSpinner = 'Almacenando Producto'
     this.lcargando.ctlSpinner(true);
     let codigo;
     // let c = await this.generateCidgoFatherChildren().then(res => {
@@ -1962,7 +1962,7 @@ async cargaInicial() {
     })
   }
   cargaFoto(archivos) {
-    this.mensajeSppiner = 'Cargando fotos...';
+    this.mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 5) {
       for (let i = 0; i < archivos.length; i++) {
@@ -2222,7 +2222,7 @@ async cargaInicial() {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSppiner = "Guardando datos...";
+        this.mensajeSpinner = "Guardando datos...";
         this.lcargando.ctlSpinner(true);
         let datagroup = this.dataGrupo.filter(d => d.id_grupo == this.grupoSelect)
         let data = {
@@ -2337,7 +2337,7 @@ console.log(response)
 
   /* cargarHistorialTraslado() {
 
-    this.mensajeSppiner = "Cargando 1";
+    this.mensajeSpinner = "Cargando 1";
     this.lcargando.ctlSpinner(true);
     // console.log(this.claseSelect)
     // let id = this.claseSelect.id_grupo_productos
@@ -2370,7 +2370,7 @@ console.log(response)
   }
 
   cargarMantenimiento() {
-    this.mensajeSppiner = "Cargando 1";
+    this.mensajeSpinner = "Cargando 1";
     this.lcargando.ctlSpinner(true);
     // console.log(this.claseSelect)
     // let id = this.claseSelect.id_grupo_productos
@@ -2403,7 +2403,7 @@ console.log(response)
   }
 
     cargarPoliza() {
-    this.mensajeSppiner = "Cargando 1";
+    this.mensajeSpinner = "Cargando 1";
     this.lcargando.ctlSpinner(true);
     // console.log(this.claseSelect)
     // let id = this.claseSelect.id_grupo_productos
@@ -2485,7 +2485,7 @@ console.log(response)
 
 
   guardarProductoBodega(){
-    this.mensajeSppiner = 'Guardando Detalles...';
+    this.mensajeSpinner = 'Guardando Detalles...';
       this.lcargando.ctlSpinner(true);
       console.log(this.bodegas);
       let data = {
@@ -2565,7 +2565,7 @@ console.log(response)
   async almacenarCostos() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSppiner = 'Almacenando Costos Adicionales'
+      this.mensajeSpinner = 'Almacenando Costos Adicionales'
       let response = await this.ingresoService.setCostos(this.produto.id_producto, {costos: this.costos})
       console.log(response)
 
@@ -2591,7 +2591,7 @@ console.log(response)
       if (result.isConfirmed) {
         this.lcargando.ctlSpinner(true)
         try {
-          this.mensajeSppiner = 'Eliminando Costo Adicional'
+          this.mensajeSpinner = 'Eliminando Costo Adicional'
           let response = await this.ingresoService.delCosto(costo.id)
           console.log(response)
 
@@ -2631,7 +2631,7 @@ console.log(response)
        // motivo_permiso: motivo
      };
 
-     this.mensajeSppiner = 'Cargando...'
+     this.mensajeSpinner = 'Cargando...'
      this.lcargando.ctlSpinner(true)
      this.ingresoService.getReporteGraficoTendencia(parameterUrl,id).subscribe((res: any) => {
       this.lcargando.ctlSpinner(false)

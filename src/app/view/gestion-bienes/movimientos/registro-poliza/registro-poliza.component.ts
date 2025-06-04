@@ -20,7 +20,7 @@ standalone: false,
 })
 export class RegistroPolizaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  msgSpinner: string;
+  mensajeSpinner: string;
   dataProducto: any = []
   vmButtons: any =[]
   codigoGrupo: any;
@@ -253,7 +253,7 @@ export class RegistroPolizaComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result)=>{
       if(result.isConfirmed){
-        this.msgSpinner = 'Guardando...';
+        this.mensajeSpinner = 'Guardando...';
         this.lcargando.ctlSpinner(true);
         let data = {
           documento :this.documento
@@ -374,7 +374,7 @@ export class RegistroPolizaComponent implements OnInit {
       confirmButtonColor: '#4DBD74'
     }).then((result)=>{
       if (result.isConfirmed) {
-        this.msgSpinner = 'Guardando...';
+        this.mensajeSpinner = 'Guardando...';
         this.lcargando.ctlSpinner(true);
         let data = {
           id:this.id,
@@ -473,7 +473,7 @@ export class RegistroPolizaComponent implements OnInit {
       confirmButtonColor: '#4DBD74'
     }).then((result)=>{
       if(result.isConfirmed){
-        this.msgSpinner = 'Guardando...';
+        this.mensajeSpinner = 'Guardando...';
         this.lcargando.ctlSpinner(true);
         this.estado = 'C'
         let data = {

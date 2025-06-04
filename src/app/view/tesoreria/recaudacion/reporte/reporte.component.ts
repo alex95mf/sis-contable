@@ -42,7 +42,7 @@ export class ReporteComponent implements OnInit {
   @ViewChild('tblRecGarantias') tblRecGarantias: Table
 
   fTitle: string = "Reportes de Tesorería";
-  msgSpinner: string;
+  mensajeSpinner: string;
   conceptosDisabled = false;
   cajasDisabled = false;
   fechaHastaDisabled = false;
@@ -260,7 +260,7 @@ export class ReporteComponent implements OnInit {
 
     this.loading = true;
     console.log(this.filter)
-        this.msgSpinner = 'Cargando...';
+        this.mensajeSpinner = 'Cargando...';
         // this.lcargando.ctlSpinner(true);
         this.filter.reporte = this.selectedReporte
         let data= {
@@ -349,7 +349,7 @@ export class ReporteComponent implements OnInit {
 
       cargarDetallesEspecialCanjes(){
         this.loading = true;
-        this.msgSpinner = 'Cargando...';
+        this.mensajeSpinner = 'Cargando...';
         // this.lcargando.ctlSpinner(true);
         this.filter.reporte = this.selectedReporte
 
@@ -885,7 +885,7 @@ export class ReporteComponent implements OnInit {
   }
 
   getConceptosReporte(){
-    this.msgSpinner = 'Cargando Tipos de Reporte';
+    this.mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptosReporte().subscribe(
       (res: any) => {
@@ -909,7 +909,7 @@ export class ReporteComponent implements OnInit {
 
 
   getCajasReporte(){
-    this.msgSpinner = 'Cargando Cajas';
+    this.mensajeSpinner = 'Cargando Cajas';
     this.lcargando.ctlSpinner(true);
     this.apiService.getCajasReporte().subscribe(
       (res: any) => {
@@ -933,7 +933,7 @@ export class ReporteComponent implements OnInit {
 
 
   getTiposReporte() {
-    this.msgSpinner = 'Cargando Tipos de Reporte';
+    this.mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.apiService.getTiposReporte().subscribe(
       (res: any) => {

@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./parametros-nomina.component.scss']
 })
 export class ParametrosNominaComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -117,7 +117,7 @@ export class ParametrosNominaComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSppiner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -152,7 +152,7 @@ export class ParametrosNominaComponent implements OnInit {
   }
 
   cargarParametrosNomina() {
-    this.mensajeSppiner = "Cargando Parametros...";
+    this.mensajeSpinner = "Cargando Parametros...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -182,7 +182,7 @@ export class ParametrosNominaComponent implements OnInit {
 
 
   if(parametro.codigo == 'PORCANTICIPO'){
-    this.mensajeSppiner = "Actualizando Parametros en ficha de empleados...";
+    this.mensajeSpinner = "Actualizando Parametros en ficha de empleados...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -283,7 +283,7 @@ export class ParametrosNominaComponent implements OnInit {
   //       confirmButtonColor: '#4DBD74',
   //     }).then((result) => {
   //       if (result.isConfirmed) {
-  //         this.mensajeSppiner = "Eliminando concepto..."
+  //         this.mensajeSpinner = "Eliminando concepto..."
   //         this.lcargando.ctlSpinner(true);
   //         this.conceptosSrv.deleteConcepto(id).subscribe(
   //           (res) => {

@@ -149,7 +149,7 @@ export class JornadaComponent implements OnInit {
   jornada: any = ' ';
   almuerza: any = ' ';
   tiempo: any = ' ';
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   mensajeSppiner2: string = "Cargando...";
   constDisabled = false;
   totalIntereses = 0;
@@ -478,7 +478,7 @@ export class JornadaComponent implements OnInit {
   }
 
   guardarJornadas(){
-    this.mensajeSpiner = 'Guardando Jornadas...';
+    this.mensajeSpinner = 'Guardando Jornadas...';
       this.lcargando.ctlSpinner(true);
 
       this.lunes.push(12)
@@ -588,7 +588,7 @@ export class JornadaComponent implements OnInit {
       total_horas: this.totalSemanal
     };
     console.log(datos);
-    this.mensajeSpiner ='Actualizando...';
+    this.mensajeSpinner ='Actualizando...';
     this.lcargando.ctlSpinner(true);
       this.apiSrv.updateJornada(datos).subscribe(
         res => {
@@ -621,7 +621,7 @@ export class JornadaComponent implements OnInit {
   }
 
   getTiposEstados() {
-    this.mensajeSpiner = 'Cargando Tipos de Estados';
+    this.mensajeSpinner = 'Cargando Tipos de Estados';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getTiposEstado().subscribe(
       (res: any) => {
@@ -644,7 +644,7 @@ export class JornadaComponent implements OnInit {
   }
 
 getTiposAlmuerza(){
-  this.mensajeSpiner = 'Cargando opciones de Almuerzo';
+  this.mensajeSpinner = 'Cargando opciones de Almuerzo';
   this.lcargando.ctlSpinner(true);
   this.apiSrv.getAlmuerza().subscribe(
     (res: any) => {
@@ -666,7 +666,7 @@ getTiposAlmuerza(){
   )
 }
 getTiempoAlmuerzo(){
-  this.mensajeSpiner = 'Cargando Tiempos de Almuerzo';
+  this.mensajeSpinner = 'Cargando Tiempos de Almuerzo';
   this.lcargando.ctlSpinner(true);
   this.apiSrv.getTiposTiempoAlmuerzo().subscribe(
     (res: any) => {

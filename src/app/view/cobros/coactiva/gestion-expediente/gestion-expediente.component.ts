@@ -26,7 +26,7 @@ standalone: false,
 export class GestionExpedienteComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
-  msgSpinner: string;
+  mensajeSpinner: string;
   fTitle: string = "Gestión de Expedientes"
   dataUser: any;
   permissions: any
@@ -120,7 +120,7 @@ export class GestionExpedienteComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.msgSpinner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       (res) => {
@@ -142,7 +142,7 @@ export class GestionExpedienteComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.msgSpinner = 'Cargando Catalogos'
+    this.mensajeSpinner = 'Cargando Catalogos'
     // this.lcargando.ctlSpinner(true)
     this.apiSrv.getCatalogs({ params: "'CAT_SECTOR'" }).subscribe(
       (res: any) => {
@@ -168,7 +168,7 @@ export class GestionExpedienteComponent implements OnInit {
   }
 
   getExpedientes(){
-    this.msgSpinner = "Cargando Expedientes...";
+    this.mensajeSpinner = "Cargando Expedientes...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getExpedientes({ params: { filter: this.filter, paginate: this.paginate }}).subscribe(
       (res: any) => {
@@ -229,7 +229,7 @@ export class GestionExpedienteComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this.msgSpinner = "Procesando expedientes"
+        this.mensajeSpinner = "Procesando expedientes"
         this.lcargando.ctlSpinner(true)
         console.log({ expedientes: procesados })
         this.apiSrv.setJuicios({ expedientes: procesados }).subscribe(
@@ -322,7 +322,7 @@ export class GestionExpedienteComponent implements OnInit {
 
   exportarExcel() {
     let excelData = []
-    this.msgSpinner = 'Exportando'
+    this.mensajeSpinner = 'Exportando'
     this.lcargando.ctlSpinner(true)
 
     this.apiSrv.getExpedientes({ params: { filter: this.filter }}).subscribe(

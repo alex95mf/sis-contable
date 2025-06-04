@@ -20,7 +20,7 @@ standalone: false,
 export class ImportarComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('fileUpload') fileUpload: ElementRef;
-  msgSpinner: string;
+  mensajeSpinner: string;
   cmb_periodo: any[] = []
   fileName: string | null = null;
   tbl_registros: any[] = []
@@ -64,7 +64,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
 
         this.lcargando.ctlSpinner(true)
         try {
-          this.msgSpinner = 'Cargando Marcaciones'
+          this.mensajeSpinner = 'Cargando Marcaciones'
           this.tbl_registros = [];
           if(this.filter.programa==undefined || this.filter.programa=='') { this.filter.fk_programa=0 }
           if(this.filter.departamento==null) { this.filter.departamento=0 }
@@ -112,7 +112,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
         if (result.isConfirmed) {
           this.lcargando.ctlSpinner(true)
           try {
-            this.msgSpinner = 'Actualizando Registros'
+            this.mensajeSpinner = 'Actualizando Registros'
             let response = await this.apiService.updateMarcarciones({ marcaciones: this.lst_update })
             console.log(response)
             //
@@ -141,7 +141,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
         if (result.isConfirmed) {
           this.lcargando.ctlSpinner(true)
           try {
-            this.msgSpinner = 'Eliminando Marcaciones'
+            this.mensajeSpinner = 'Eliminando Marcaciones'
             let response = await this.apiService.deleteMarcaciones({periodo: this.periodoSelected, mes: this.mes_id_cc})
             console.log(response)
             //
@@ -172,7 +172,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
         if (result.isConfirmed) {
           this.lcargando.ctlSpinner(true)
           try {
-            this.msgSpinner = 'Aprobando Marcaciones'
+            this.mensajeSpinner = 'Aprobando Marcaciones'
             let response = await this.apiService.aprobarMarcaciones({periodo: this.periodoSelected, mes: this.mes_id_cc, aprobados: empleadosAprobados})
             console.log(response)
             //
@@ -229,7 +229,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
     if (file) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.msgSpinner = 'Procesando Archivo de Marcas'
+        this.mensajeSpinner = 'Procesando Archivo de Marcas'
         let response = await this.apiService.procesarMarcas(file, { periodo: this.periodoSelected, mes: this.mes_id_cc })
         console.log(response)
 
@@ -442,7 +442,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
 
   async getJornada(empleado_id: number, fecha: any) {
     try {
-      this.msgSpinner = 'Obteniendo Jornada'
+      this.mensajeSpinner = 'Obteniendo Jornada'
       let jornada = await this.apiService.getJornada({empleado_id, fecha})
       //
       return jornada;
@@ -498,7 +498,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
   }
 
   cargarAreas() {
-    this.msgSpinner = "Cargando listado de Áreas...";
+    this.mensajeSpinner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -520,7 +520,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
   }
 
   cargarDepartamentos(event) {
-    this.msgSpinner = "Cargando listado de Departamentos...";
+    this.mensajeSpinner = "Cargando listado de Departamentos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

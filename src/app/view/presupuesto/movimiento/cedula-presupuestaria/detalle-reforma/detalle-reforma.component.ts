@@ -22,7 +22,7 @@ export class DetalleReformaComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   botonera: any = [];
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   fTitle = "Detalle Reformas";
   dataUser: any;
   permissions: any;
@@ -72,7 +72,7 @@ export class DetalleReformaComponent implements OnInit {
 
   cargarDetalles() {
 
-    this.mensajeSpiner = "Cargando detalles...";
+    this.mensajeSpinner = "Cargando detalles...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

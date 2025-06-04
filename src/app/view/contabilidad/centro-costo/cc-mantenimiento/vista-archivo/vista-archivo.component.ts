@@ -20,7 +20,7 @@ export class VistaArchivoComponent implements OnInit {
   vmButtons:any = [];
   generalDocument: any = "assets/img/vista.png"; 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   ngOnInit(): void {

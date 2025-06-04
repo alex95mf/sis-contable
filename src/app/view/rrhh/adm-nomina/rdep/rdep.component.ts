@@ -22,7 +22,7 @@ standalone: false,
 })
 export class RdepComponent implements OnInit {
 
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -30,7 +30,7 @@ export class RdepComponent implements OnInit {
   vmButtons: any
   arrayRdep: any = []
   excelData: any = []
-  mensajeSppiner:any;
+  mensajeSpinner:any;
   filter: any = {
     periodo:  new Date(),
     fecha_desde: moment().format('YYYY-MM-DD'),
@@ -93,7 +93,7 @@ export class RdepComponent implements OnInit {
   }
   async cargaInicial() {
     try {
-      this.mensajeSpiner = "Cargando..."
+      this.mensajeSpinner = "Cargando..."
       const resPeriodos = await this.apiSrv.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -140,7 +140,7 @@ setProcesoCedulaPresupuestaria(){
     }
     console.log(data);
 
-    this.mensajeSppiner = "Procesando...";
+    this.mensajeSpinner = "Procesando...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.procesarSp(data).subscribe(res => {
       console.log(res);
@@ -262,7 +262,7 @@ consultarRdep(){
 }
 
 btnExportarExcel() {
-  this.mensajeSpiner = "Generando Archivo Excel...";
+  this.mensajeSpinner = "Generando Archivo Excel...";
  this.lcargando.ctlSpinner(true);
 
 

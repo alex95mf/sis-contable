@@ -18,7 +18,7 @@ standalone: false,
 })
 export class MercadoComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -108,7 +108,7 @@ export class MercadoComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSppiner = "Verificando permisos del usuario...";
+    this.mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -138,7 +138,7 @@ export class MercadoComponent implements OnInit {
   }
 
   cargarConceptos() {
-    this.mensajeSppiner = "Cargando listado de Conceptos...";
+    this.mensajeSpinner = "Cargando listado de Conceptos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -216,7 +216,7 @@ export class MercadoComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSppiner = "Eliminando concepto..."
+          this.mensajeSpinner = "Eliminando concepto..."
           this.lcargando.ctlSpinner(true);
           this.conceptosSrv.deleteConcepto({id}).subscribe(
             (res) => {

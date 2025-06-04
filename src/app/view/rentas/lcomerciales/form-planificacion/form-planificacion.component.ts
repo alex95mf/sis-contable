@@ -23,7 +23,7 @@ export class FormPlanificacionComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
   fTitle = "Ingreso de formulario de Inspección (Planificación)";
-  msgSpinner: string = "";
+  mensajeSpinner: string = "";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -235,7 +235,7 @@ export class FormPlanificacionComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
@@ -298,7 +298,7 @@ export class FormPlanificacionComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.msgSpinner = 'Obteniendo Recursos...';
+    this.mensajeSpinner = 'Obteniendo Recursos...';
     this.lcargando.ctlSpinner(true);
     let data = {
       params: "'TIPO_LETRERO','USO_VIA_PUBLICA','TIPO_USO_VIA_PUBLICA', 'CAT_SECTOR', 'REN_TIPO_NEG', 'REN_GRUPO_NEG'"
@@ -358,7 +358,7 @@ export class FormPlanificacionComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.msgSpinner = 'Habilitando formulario...';
+        this.mensajeSpinner = 'Habilitando formulario...';
         this.lcargando.ctlSpinner(true);
         this.apiService.habilitar(id).subscribe(
           (res)=>{
@@ -487,7 +487,7 @@ export class FormPlanificacionComponent implements OnInit {
           confirmButtonColor: '#4DBD74',
         }).then((result) => {
           if (result.isConfirmed) {
-            this.msgSpinner = 'Guardando datos de la Inspección...';
+            this.mensajeSpinner = 'Guardando datos de la Inspección...';
             this.lcargando.ctlSpinner(true);
             this.inspeccion.aprueba = this.aprueba ? "A" : "F";
             let data = {
@@ -591,7 +591,7 @@ export class FormPlanificacionComponent implements OnInit {
   }
 
   cargaFoto(archivos) {
-    this.msgSpinner = 'Cargando fotos...';
+    this.mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 5) {
       for (let i = 0; i < archivos.length; i++) {

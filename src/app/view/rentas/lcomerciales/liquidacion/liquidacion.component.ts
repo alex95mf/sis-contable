@@ -27,7 +27,7 @@ standalone: false,
 export class LiquidacionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de Liquidación (Locales Comerciales)";
-  msgSpinner: string;
+  mensajeSpinner: string;
   vmButtons: Array<Botonera> = [];
   dataUser: any;
   permissions: any;
@@ -124,7 +124,7 @@ export class LiquidacionComponent implements OnInit {
         // Conseguir el documento completo
         this.lcargando.ctlSpinner(true);
         try {
-          this.msgSpinner = 'Cargando Documento';
+          this.mensajeSpinner = 'Cargando Documento';
           // Datos Relacionados
           let doc = await this.apiService.getDocumento(res);
           const { id_cliente, razon_social } = doc.contribuyente;
@@ -232,7 +232,7 @@ export class LiquidacionComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.msgSpinner = 'Cargando Permisos de Usuario...';
+    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
@@ -288,7 +288,7 @@ export class LiquidacionComponent implements OnInit {
 
     if (result.isConfirmed) {
 
-      this.msgSpinner = "Verificando período contable";
+      this.mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
       let data = {
         "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -299,7 +299,7 @@ export class LiquidacionComponent implements OnInit {
             try {
               if (res["data"][0].estado !=='C') {
                 try {
-                  this.msgSpinner = 'Almacenando Documento'
+                  this.mensajeSpinner = 'Almacenando Documento'
                   let response = await this.apiService.almacenarDocumento({ 
                     contribuyente: this.contribuyente, 
                     orden_inspeccion: this.orden_inspeccion,
@@ -344,7 +344,7 @@ export class LiquidacionComponent implements OnInit {
     });
 
     if (result.isConfirmed) {
-      this.msgSpinner = "Verificando período contable";
+      this.mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
       let data = {
         "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -357,7 +357,7 @@ export class LiquidacionComponent implements OnInit {
               
                 this.lcargando.ctlSpinner(true)
                 try {
-                  this.msgSpinner = 'Aprobando Documento'
+                  this.mensajeSpinner = 'Aprobando Documento'
                   let response = await this.apiService.aprobarDocumento(this.liquidacion);
                   console.log(response)
                   Object.assign(this.liquidacion, { estado: response.estado })

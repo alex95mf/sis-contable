@@ -15,7 +15,7 @@ standalone: false,
 })
 export class ModalIcpNominaComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @Input() proveedor: any;
@@ -88,7 +88,7 @@ export class ModalIcpNominaComponent implements OnInit {
 
 
   cargarIcpNomina(flag: boolean = false){
-    this.mensajeSppiner = "Cargando Icp de Nómina...";
+    this.mensajeSpinner = "Cargando Icp de Nómina...";
     this.lcargando.ctlSpinner(true);
     
     if (flag) this.paginate.page = 1

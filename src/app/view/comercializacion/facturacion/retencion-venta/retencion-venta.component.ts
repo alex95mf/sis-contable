@@ -24,7 +24,7 @@ standalone: false,
   styleUrls: ['./retencion-venta.component.scss']
 })
 export class RetencionVentaComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;

@@ -16,7 +16,7 @@ standalone: false,
   styleUrls: ['./modal-liquidaciones.component.scss']
 })
 export class ModalLiquidacionesComponent implements OnInit {
-  mensajeSppiner: string = "Cargnado...";
+  mensajeSpinner: string = "Cargnado...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -132,7 +132,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   }
 
   cargarLiquidaciones() {
-    this.mensajeSppiner = "Cargando lista de Ordenes de pago...";
+    this.mensajeSpinner = "Cargando lista de Ordenes de pago...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {

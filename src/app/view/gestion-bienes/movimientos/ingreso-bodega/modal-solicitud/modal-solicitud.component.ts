@@ -14,7 +14,7 @@ standalone: false,
 })
 export class ModalSolicitudComponent implements OnInit {
 
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @Input() proveedor: any;
@@ -123,7 +123,7 @@ export class ModalSolicitudComponent implements OnInit {
 
 
   cargarSolicitudes(){
-    this.mensajeSppiner = "Cargando lista de Solicitud...";
+    this.mensajeSpinner = "Cargando lista de Solicitud...";
     this.lcargando.ctlSpinner(true);
     let data={
       id: this.proveedor.id_proveedor,

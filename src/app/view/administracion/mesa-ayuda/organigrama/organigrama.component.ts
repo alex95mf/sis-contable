@@ -26,7 +26,7 @@ standalone: false,
 
 })
 export class OrganigramaComponent implements OnInit {
-  mensajeSppiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Output() onNodeSelect = new EventEmitter<any>();
   gridConfig: object;
@@ -564,7 +564,7 @@ export class OrganigramaComponent implements OnInit {
         if (result.isConfirmed && !result.isDenied) {
           // Grupo
           // console.log('Nuevo Grupo')
-          this.mensajeSppiner = 'Generando codigo'
+          this.mensajeSpinner = 'Generando codigo'
           this.lcargando.ctlSpinner(true)
           let response: any = await this.organigramaService.getLastChild({parent: this.nivel.codigo_padre});
           console.log(response)
@@ -585,7 +585,7 @@ export class OrganigramaComponent implements OnInit {
         } else if (!result.isConfirmed && result.isDenied) {
           // Subgrupo
           // console.log('Nuevo Subgrupo')
-          this.mensajeSppiner = 'Generando codigo'
+          this.mensajeSpinner = 'Generando codigo'
           this.lcargando.ctlSpinner(true)
           let response: any = await this.organigramaService.getLastChild({parent: this.nivel.codigo});
           console.log(response)
@@ -612,7 +612,7 @@ export class OrganigramaComponent implements OnInit {
 
 
   saveNivelOrganigrama() {
-    this.mensajeSppiner = 'Almacenando Nivel'
+    this.mensajeSpinner = 'Almacenando Nivel'
     this.lcargando.ctlSpinner(true)
     this.organigramaService.guardarNivelOrganigrama({ organigrama: this.nuevoNivel }).subscribe(
       (res: any) => {

@@ -23,7 +23,7 @@ export class ReportesComponent implements OnInit {
   @ViewChild('tblRrhhRemuneracion') tblRrhhRemuneracion: Table
 
   fTitle: string = "Reportes de LOTAIP";
-  msgSpinner: string;
+  mensajeSpinner: string;
 
   vmButtons: any[] = [];
   dataUser: any;
@@ -176,7 +176,7 @@ export class ReportesComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.msgSpinner = "Cargando..."
+      this.mensajeSpinner = "Cargando..."
       const resPeriodos = await this.apiService.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -241,7 +241,7 @@ export class ReportesComponent implements OnInit {
       return;
     }
 
-      this.msgSpinner = 'Cargando...';
+      this.mensajeSpinner = 'Cargando...';
       //this.lcargando.ctlSpinner(true);
       this.filter.reporte = this.selectedReporte
       this.filter.mes = this.mes_actual
@@ -333,7 +333,7 @@ export class ReportesComponent implements OnInit {
 
 
   getTiposReporte() {
-    this.msgSpinner = 'Cargando Tipos de Reporte';
+    this.mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.apiService.getTiposReporteNomina().subscribe(
       (res: any) => {

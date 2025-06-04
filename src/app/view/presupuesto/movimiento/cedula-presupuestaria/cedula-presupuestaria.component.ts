@@ -20,7 +20,7 @@ standalone: false,
 })
 export class CedulaPresupuestariaComponent implements OnInit {
 
-  mensajeSpiner: string = "Cargando...";
+  mensajeSpinner: string = "Cargando...";
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -248,7 +248,7 @@ console.log(this.checkPrograma)
     this.lcargando.ctlSpinner(true)
     try {
 
-      this.mensajeSpiner = "Cargando Períodos"
+      this.mensajeSpinner = "Cargando Períodos"
       const resPeriodos = await this.apiSrv.getPeriodos()
       this.cmb_periodo = resPeriodos
 
