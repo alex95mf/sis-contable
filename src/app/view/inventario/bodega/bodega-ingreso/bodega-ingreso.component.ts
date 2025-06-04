@@ -27,7 +27,7 @@ export class BodegaIngresoComponent implements OnInit {
 	}) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  //dtOptions: DataTables.Settings = {};
+  // dtOptions: any = {};
   dtOptions: any = {};
   dtTrigger = new Subject();
   processing: any = false;

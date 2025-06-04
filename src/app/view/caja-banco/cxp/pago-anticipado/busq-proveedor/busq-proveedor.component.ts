@@ -38,17 +38,17 @@ export class BusqProveedorComponent implements OnInit {
       case "CERRAR":
         this.dialogRef.close(false);
         break;
-    }   
+    }
   }
 
   /**LISTADO */
   dataSource: any = [];
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   listadoGeneral(): any {
 
-    
-        
+
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 8,
@@ -73,7 +73,7 @@ export class BusqProveedorComponent implements OnInit {
   seleccionarProveedor(valor:any){
     this.dialogRef.close(valor);
   }
-  
+
 
   mapearEstados(valor:any){
     if (valor=="A"){
@@ -82,6 +82,6 @@ export class BusqProveedorComponent implements OnInit {
     if (valor=="I"){
       return "INACTIVO";
     }
-  } 
+  }
 
 }

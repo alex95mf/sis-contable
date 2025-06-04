@@ -5,7 +5,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { TablaCuantiaService } from '../tabla-cuantia.service';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import moment from "moment";
+import * as moment from "moment";
 
 @Component({
 standalone: false,
@@ -31,7 +31,7 @@ export class TablaCuantiaFormComponent implements OnInit {
   botonesPermisos: any;
 
   cuantia: any;
-  
+
   necesitaRefrescar: boolean = false;
 
   listaCuantias: any;
@@ -110,7 +110,7 @@ export class TablaCuantiaFormComponent implements OnInit {
       periodo: moment(new Date()).format('YYYY')
     }
 
-   
+
 
     if (!this.esNuevo) {
 
@@ -132,7 +132,7 @@ export class TablaCuantiaFormComponent implements OnInit {
     this.cuantia = data
     console.log(this.cuantia)
   }
-  
+
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
       case "REGRESAR":
@@ -160,7 +160,7 @@ export class TablaCuantiaFormComponent implements OnInit {
             this.editarCuantia();
           }
         }
-      }); 
+      });
     }
   }
 
@@ -173,7 +173,7 @@ export class TablaCuantiaFormComponent implements OnInit {
           bandera = true;
         } else if (this.cuantia.valor == 0 && this.cuantia.porcentaje == 0) {
           this.st.info("Valor y cuantia no deben ser ambos cero");
-          bandera = true; 
+          bandera = true;
         } else if (this.cuantia.desde < 0 || this.cuantia.hasta < 0 || this.cuantia.valor < 0 || this.cuantia.porcentaje < 0) {
           this.st.info("Los datos no deben ser negativos");
           bandera = true;
@@ -201,9 +201,9 @@ export class TablaCuantiaFormComponent implements OnInit {
 
         let datos = {
           concepto: {
-            codigo:  this.cuantia.tipo 
+            codigo:  this.cuantia.tipo
           },
-          rangos: [{ 
+          rangos: [{
             secuencial: 0,
             desde: this.cuantia.desde,
             hasta: this.cuantia.hasta,

@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { IngresoBodegaService } from '../ingreso-bodega.service';
-import { CurrencyMaskInputMode } from 'ngx-currency';
+import { NgxCurrencyInputMode  } from 'ngx-currency';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
@@ -32,7 +32,7 @@ export class ModalProductoDetallesComponent implements OnInit {
     nullable: true,
     min: 1,
     precision: 0,
-    inputMode: CurrencyMaskInputMode.NATURAL
+    inputMode: NgxCurrencyInputMode .Natural
   }
 
   constructor(

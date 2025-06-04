@@ -32,7 +32,7 @@ export class ConsultaComponent implements OnInit {
   vmButtons: any;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   dataDT: any = [];
   validaDt: any = false;

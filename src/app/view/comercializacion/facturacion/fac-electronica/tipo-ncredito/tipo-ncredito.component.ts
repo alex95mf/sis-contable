@@ -26,7 +26,7 @@ export class TipoNcreditoComponent implements OnInit {
 
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();

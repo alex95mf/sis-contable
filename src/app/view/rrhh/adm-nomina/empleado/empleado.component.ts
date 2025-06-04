@@ -56,7 +56,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ModelFamiliarComponent } from "./model-familiar/model-familiar.component";
 import { CommonVarService } from "src/app/services/common-var.services";
 import { ValidacionesFactory } from "src/app/config/custom/utils/ValidacionesFactory";
-import moment from "moment";
+import * as moment from "moment";
 import { ModalTipoArchivoComponent } from "./modal-tipo-archivo/modal-tipo-archivo.component";
 import { ModalRetencionJudicialComponent } from "./modal-retencion-judicial/modal-retencion-judicial.component";
 @Component({

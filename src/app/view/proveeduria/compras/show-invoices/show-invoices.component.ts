@@ -19,7 +19,7 @@ export class ShowInvoicesComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   @Input() title: any;
   @Input() module: any;

@@ -25,7 +25,7 @@ export class ShowDetComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   @Input() arrayAcc: any;
   dataDT: any = [];

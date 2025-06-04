@@ -25,7 +25,7 @@ export class ListaPreciosComponent implements OnInit {
 	@ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 	@ViewChild(DataTableDirective) dtElement: DataTableDirective;
 	//dtOptions: any = {};
-	dtOptions: DataTables.Settings = {};
+	 dtOptions: any = {};
 	dtTrigger = new Subject();
 	validaDt: any = false;
 	infoData: any;

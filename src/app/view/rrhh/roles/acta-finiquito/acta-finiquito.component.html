@@ -14,12 +14,12 @@
                             formControlName="formNombreEmpleado"
                             #nameInputSearchEmpleado>
                         <div class="input-group-append">
-                            <button (click)="onClicConsultaEmpleados(content)"
+                            <button (click)="onClicConsultaEmpleados()"
                             [disabled]="disableBtnConsultaEmpleados"
                                 class="btn btn-primary" type="button">
                                 <i class="fa fa-search"></i>
                             </button>
-    
+
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                 </div>
 
             </div>
-            
+
         </form>
 
     <div class="row">
@@ -78,7 +78,7 @@
             </app-cc-input-group-prepend>
         </div>
     </div>
-   
+
     <div class="row">
         <div class="col-4">
             <div class="input-group input-group-sm">
@@ -108,7 +108,7 @@
                 <textarea cols="30" rows="3" class="form-control form-control-sm" [readonly]="formReadOnly" [(ngModel)]="acta.motivo" placeholder="Motivo"></textarea>
             </div>
         </div>
-       
+
     </div> -->
     <!-- <div class="row">
         <div  class="col">
@@ -147,47 +147,47 @@
                             <td class="text-left" colspan="5">{{ dt.nombre_rubro }}</td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{  prefix:'',suffix:'' }" [(ngModel)]="dt.cantidad" (ngModelChange)="calculoTotales($event)"  [readonly]="formReadOnly" 
-                                    [disabled]="false"> 
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{  prefix:'',suffix:'' }" [(ngModel)]="dt.cantidad" (ngModelChange)="calculoTotales($event)"  [readonly]="formReadOnly"
+                                    [disabled]="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
-                                    [disabled]="false"> 
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
+                                    [disabled]="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }" [(ngModel)]="dt.porcentaje" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
-                                    [disabled]="false"> 
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }" [(ngModel)]="dt.porcentaje" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
+                                    [disabled]="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor_calculado" (ngModelChange)="calculoTotales($event)"  [readonly]="formReadOnly" 
-                                    [disabled]="true"> 
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor_calculado" (ngModelChange)="calculoTotales($event)"  [readonly]="formReadOnly"
+                                    [disabled]="true">
                                 </div>
                             </td>
                             <td class="text-right">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.total" (ngModelChange)="sumaTotales($event)"  [readonly]="formReadOnly" 
-                                    [disabled]="false"> 
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.total" (ngModelChange)="sumaTotales($event)"  [readonly]="formReadOnly"
+                                    [disabled]="false">
                                 </div>
                             </td>
-                            
+
                         </tr>
                         <tr>
                             <td colspan="6" class="text-left font-weight-bold col-num fixed-header" style="font-size:14px;">
                                 TOTAL
                             </td>
                             <td class="col-rec fixed-header">
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                         $ {{ totalIngresos | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                         </tr>
                     </tbody>
@@ -213,46 +213,46 @@
                             <td class="text-left" colspan="5">{{ dt.nombre_rubro }}</td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{  prefix:'',suffix:'' }"  [(ngModel)]="dt.cantidad" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
-                                    [disabled]="false"> 
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{  prefix:'',suffix:'' }"  [(ngModel)]="dt.cantidad" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
+                                    [disabled]="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
-                                    [disabled]="false"> 
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
+                                    [disabled]="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }"  [(ngModel)]="dt.porcentaje" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
-                                    [disabled]="false"> 
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="{ min: 0, max: 100, prefix:'',suffix:'%' }"  [(ngModel)]="dt.porcentaje" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
+                                    [disabled]="false">
                                 </div>
                             </td>
                             <td class="text-right hidden">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor_calculado" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly" 
-                                    [disabled]="true"> 
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.valor_calculado" (ngModelChange)="calculoTotales($event)" [readonly]="formReadOnly"
+                                    [disabled]="true">
                                 </div>
                             </td>
                             <td class="text-right ">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.total"  (ngModelChange)="sumaTotales($event)" [readonly]="formReadOnly" 
-                                    [disabled]="false"> 
+                                    <input type="text" class="form-control form-control-sm" currencyMask [options]="options" [(ngModel)]="dt.total"  (ngModelChange)="sumaTotales($event)" [readonly]="formReadOnly"
+                                    [disabled]="false">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="6" class="text-left font-weight-bold col-num fixed-header" style="font-size:14px;">
-                                TOTAL 
+                                TOTAL
                             </td>
                             <td class="col-rec fixed-header">
-                                <div class="row">                                    
+                                <div class="row">
                                      <div class="col text-right font-weight-bold" style="font-size:14px;">
                                        $ {{ totalEgresos | number: '1.2-2' }}
                                      </div>
-                                </div>                                
-                               
+                                </div>
+
                              </td>
                         </tr>
                     </tbody>

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import { CurrencyMaskInputMode } from 'ngx-currency';
+import { NgxCurrencyInputMode  } from 'ngx-currency';
 import * as moment from 'moment';
 import * as myVarGlobals from "../../../../global";
 import { CommonService } from 'src/app/services/commonServices';
@@ -163,7 +163,7 @@ export class ActaFiniquitoComponent implements OnInit {
   options = {
     max: 1000000,
     min: 0,
-    inputMode: CurrencyMaskInputMode.NATURAL,
+    inputMode: NgxCurrencyInputMode .Natural,
   }
   constructor(
     private commonService: CommonService,
@@ -432,7 +432,7 @@ obtenerIndiceEgreso(nombre) {
     });
   }
 
-  onClicConsultaEmpleados(content) {
+  onClicConsultaEmpleados() {
 
     const ref = this.dialogService.open(CcModalTableEmpleadoComponent, {
       data: {

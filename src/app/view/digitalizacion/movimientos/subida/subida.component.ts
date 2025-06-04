@@ -10,7 +10,7 @@ import { ToastrService } from "ngx-toastr";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CcSpinerProcesarComponent } from "src/app/config/custom/cc-spiner-procesar.component";
 import Botonera from "src/app/models/IBotonera";
-import moment from "moment";
+import * as moment from "moment";
 import Swal from "sweetalert2";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 
@@ -504,7 +504,7 @@ export class SubidaComponent implements OnInit {
         this.toastr.info("El campo '" + campoVacio + "' está vacío en la línea " + (indice + 1) + ".");
         this.lcargando.ctlSpinner(false);
         return;
-    }/* 
+    }/*
 
 
     let campoVacio = this.validarCamposVacios();
@@ -723,7 +723,7 @@ export class SubidaComponent implements OnInit {
             if (res.body.code == 200) {
               this.tablaGuardadoConExito.push(payload.datosparallenar);
               this.arrayToUpload = this.arrayToUpload.filter(item => !this.sonObjetosIguales(item, payload.datosparallenar));
-              
+
               this.toastr.info(res.body.message);
             } else {
               this.toastr.info(res.body.message);
@@ -749,7 +749,7 @@ export class SubidaComponent implements OnInit {
   }
   validarCamposVacios() {
     console.log("validadndo")
-    let datosObligatorios = this.dataForms.filter((array) => array.es_obligatorio == "SI"); 
+    let datosObligatorios = this.dataForms.filter((array) => array.es_obligatorio == "SI");
     let datosObligatoriosOnlyCampo = datosObligatorios.map((item) => item.campo_indice);
     let rutaFinalArray = this.rutaFinal.map((item) => item.campo_indice);
 
@@ -768,7 +768,7 @@ export class SubidaComponent implements OnInit {
 }
   /* validarCamposVacios() {
     console.log("validadndo")
-    let datosObligatorios = this.dataForms.filter((array) => array.es_obligatorio == "SI"); 
+    let datosObligatorios = this.dataForms.filter((array) => array.es_obligatorio == "SI");
     let datosObligatoriosOnlyCampo = datosObligatorios.map((item) => item.campo_indice);
     let rutaFinalArray = this.rutaFinal.map((item) => item.campo_indice);
 

@@ -24,7 +24,7 @@ export class VendedorComponent implements OnInit {
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   vmButtons: any = [];
   dataUser: any;
@@ -338,7 +338,7 @@ export class VendedorComponent implements OnInit {
       } else if (this.vendedor.inicio_actividades == undefined) {
         this.toastr.info("Ingrese la fecha de inicio de actividades");
         flag = true;
-      } 
+      }
       !flag ? resolve(true) : resolve(false);
     });
   }
@@ -451,5 +451,5 @@ export class VendedorComponent implements OnInit {
       this.valueLethers = this.commonVarServices.NumeroALetras(this.dataTotales.totalPagado, false);*/
     }
   }
-  
+
 }

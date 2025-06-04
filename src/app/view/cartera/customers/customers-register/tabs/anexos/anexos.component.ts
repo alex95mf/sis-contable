@@ -27,7 +27,7 @@ export class AnexosComponent implements OnInit {
   input: ElementRef;
   dtElement: DataTableDirective;
   @Input() ext: any;
-  //dtOptions: DataTables.Settings = {};
+  // dtOptions: any = {};
   dtOptions: any = {};
   dtTrigger = new Subject();
   validaDtUser: any = false;
@@ -66,7 +66,7 @@ export class AnexosComponent implements OnInit {
       if (res['anexos'] == "" || res['anexos'] == undefined) {
         //this.toastr.info("Anexo no existe");
       } else if (res['anexos']) {
-        this.showDataTableClientes(res['anexos']);   
+        this.showDataTableClientes(res['anexos']);
       }
 
     });
@@ -115,7 +115,7 @@ export class AnexosComponent implements OnInit {
       this.filesSelect = files;
       setTimeout(() => {
         this.toastr.success("Ha seleccionado " +files.length+ " archivos" );
-      }, 10); 
+      }, 10);
     }
   }
 
@@ -141,7 +141,7 @@ export class AnexosComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.customerServicio.descargar(datos).subscribe((resultado) => {
         this.lcargando.ctlSpinner(false);
-        
+
         const url = URL.createObjectURL(resultado);
         const link = document.createElement("a");
         link.href = url;
@@ -156,7 +156,7 @@ export class AnexosComponent implements OnInit {
       }
     );
 
-    
+
   }
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
@@ -214,7 +214,7 @@ export class AnexosComponent implements OnInit {
     this.generalDocument = "";
     this.nombre  = "";
   }
-  
+
   AnexoDelete(item, pos) {
     this.viewDelete.push(item);
     this.guardaT.splice(pos, 1);

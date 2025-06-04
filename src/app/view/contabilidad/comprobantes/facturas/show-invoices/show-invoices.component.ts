@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { CommonService } from 'src/app/services/commonServices'; 
+import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { FacturasService } from '../facturas.service'
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
@@ -19,7 +19,7 @@ export class ShowInvoicesComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   @Input() title: any;
   @Input() module: any;

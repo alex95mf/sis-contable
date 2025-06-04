@@ -27,7 +27,7 @@ export class AnexosComponent implements OnInit {
   input: ElementRef;
   dtElement: DataTableDirective;
   @Input() ext: any;
-  //dtOptions: DataTables.Settings = {};
+  // dtOptions: any = {};
   dtOptions: any = {};
   dtTrigger = new Subject();
   validaDtUser: any = false;

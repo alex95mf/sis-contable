@@ -24,7 +24,7 @@ standalone: false,
 export class AdquisicionesComponent implements OnInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   processing: any = false;
   dataUser: any;
@@ -605,7 +605,7 @@ export class AdquisicionesComponent implements OnInit {
         this.c = 0;
         this.dataProducto.forEach(element => {
           if (element['precio'] == 0 || element['precio'] == "" || element['codigo'] == null || element['estado'] == 0
-            || element['nombre'] == null || element['fk_grupo'] == 0 || element['marca'] == 0 || element['modelo'] == 0) {          
+            || element['nombre'] == null || element['fk_grupo'] == 0 || element['marca'] == 0 || element['modelo'] == 0) {
             this.c += 1;
             if (this.c == 1) {this.toastr.info("Revise la información en los items, la información no está completa")}
             flag = true; return;

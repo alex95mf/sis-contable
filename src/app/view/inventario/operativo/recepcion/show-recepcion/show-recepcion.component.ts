@@ -25,7 +25,7 @@ export class ShowRecepcionComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   dataDT: any = [];
   validaDt: any = false;

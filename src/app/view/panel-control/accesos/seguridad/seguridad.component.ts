@@ -27,7 +27,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   contador: any = 0;
   contadorDoc: any = 0;

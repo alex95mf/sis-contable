@@ -25,7 +25,7 @@ export class AnexosComponent implements OnInit {
   input: ElementRef;
   dtElement: DataTableDirective;
   @Input() ext: any;
-  //dtOptions: DataTables.Settings = {};
+  // dtOptions: any = {};
   dtOptions: any = {};
   dtTrigger = new Subject();
   validaDtUser: any = false;
@@ -65,7 +65,7 @@ export class AnexosComponent implements OnInit {
         this.guardaT = [];
       }else if (res.search) {
         this.validateSearch = true;
-        
+
         this.limpiar();
         this.dAction = false;
         this.guardaT = [];
@@ -178,7 +178,7 @@ export class AnexosComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.requestService.descargar(datos).subscribe((resultado) => {
         this.lcargando.ctlSpinner(false);
-        
+
         const url = URL.createObjectURL(resultado);
         const link = document.createElement("a");
         link.href = url;

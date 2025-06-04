@@ -18,7 +18,7 @@ export class ModalDetallesComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   @Input() module: any;
   @Input() component: any;

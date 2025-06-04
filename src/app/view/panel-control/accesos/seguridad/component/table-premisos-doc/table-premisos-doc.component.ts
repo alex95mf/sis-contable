@@ -16,7 +16,7 @@ standalone: false,
 export class TablePremisosDocComponent implements OnInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   dataHeader: any = [];
   dataBody: any = [];

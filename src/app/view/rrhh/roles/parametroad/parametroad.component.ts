@@ -24,7 +24,7 @@ export class ParametroadComponent implements OnInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dtOptions: any = {};
-  //dtOptions: DataTables.Settings = {};
+  // dtOptions: any = {};
   dtTrigger = new Subject();
 
   processing: boolean = false;

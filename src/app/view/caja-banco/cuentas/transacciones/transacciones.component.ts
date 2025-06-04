@@ -22,7 +22,7 @@ standalone: false,
 export class TransaccionesComponent implements OnInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   tranf: any = { fecha_movimiento: new Date(), bankone: 0, banktwo: 0 };
   processing: any;

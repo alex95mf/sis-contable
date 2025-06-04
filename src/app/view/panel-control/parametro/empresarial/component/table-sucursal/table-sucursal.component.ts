@@ -15,7 +15,7 @@ export class TableSucursalComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   dataT: any = [];
   @Input() data_consultar_sucursal: any;

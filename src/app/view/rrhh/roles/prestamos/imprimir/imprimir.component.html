@@ -18,7 +18,7 @@
                     <div class="sect-two pt-3 pb-2">
                         <div class="row justify-content-center">
                             <div class="col-12 mt-3" style="font-size: 25px;font-weight: 600"> {{lImprimir.type | uppercase}} </div>
-                            <div class="col-12 mt-2" style="font-size: 20px;" > 
+                            <div class="col-12 mt-2" style="font-size: 20px;" >
                                 No. {{ dataUser.id_empresa.toString().padStart(3, 0) }}-
                                 {{ dataUser.id_sucursal.toString().padStart(3, 0) }}-
                                 <span>{{ lImprimir.num_doc.padStart(10, 0) }}</span>
@@ -49,7 +49,7 @@
                         </div>
                         <input type="text" class="form-control form-control-sm" style="height: 32px;" [value]="lImprimir.fecha">
                     </div>
-                </div> 
+                </div>
                 <div class="col-sm-12">
                     <div class="input-group input-group-sm mt-1">
                         <div class="input-group-prepend ">
@@ -58,7 +58,7 @@
                         <input type="text" class="form-control form-control-sm" style="height: 32px;" [value]="lImprimir.concepto | uppercase">
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
         <div class="col-11 mt-2 pl-2 pr-2">
             <div class="row">
@@ -84,13 +84,13 @@
                             <tr *ngFor="let itemValor of lImprimir.detalle">
                                 <td style="vertical-align: middle;" align="center">{{itemValor.cuenta}}</td>
 
-                                <td *ngIf="validaValor(itemValor.valor_deb)" style="vertical-align: middle;" align="left">{{itemValor.detalle | uppercase}}</td>                                
+                                <td *ngIf="validaValor(itemValor.valor_deb)" style="vertical-align: middle;" align="left">{{itemValor.detalle | uppercase}}</td>
                                 <td style="vertical-align: middle;" align="right" class="color-datos-ingresos2 negrita-label" *ngIf="validaValor(itemValor.valor_deb)">
                                     {{validaciones.roundNumber(itemValor.valor_deb, 2) }}
                                 </td>
                                 <td *ngIf="validaValor(itemValor.valor_deb)"></td>
 
-                                <td *ngIf="validaValor(itemValor.valor_cre)" style="vertical-align: middle;;text-indent: 35px" align="left">{{itemValor.detalle | uppercase}}</td>    
+                                <td *ngIf="validaValor(itemValor.valor_cre)" style="vertical-align: middle;;text-indent: 35px" align="left">{{itemValor.detalle | uppercase}}</td>
                                 <td *ngIf="validaValor(itemValor.valor_cre)"></td>
                                 <td *ngIf="validaValor(itemValor.valor_cre)" style="vertical-align: middle" align="right" class="color-datos-egresos2 negrita-label">
                                     {{validaciones.roundNumber(itemValor.valor_cre, 2) }}
@@ -104,7 +104,7 @@
                                 <td style="vertical-align: middle;" align="right" class="negrita-label">{{validaciones.roundNumber(lImprimir.detalle[0].valor_deb, 2) }}</td>
                                 <td style="vertical-align: middle;" align="right" class="negrita-label">{{validaciones.roundNumber(lImprimir.detalle[0].valor_deb, 2) }}</td>
                             </tr>
-                        </tbody> 
+                        </tbody>
 
                     </table>
                 </div>

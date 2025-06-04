@@ -27,7 +27,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TrasnferenciaDepositosService } from './trasnferencia-depositos.service';
 
 import { MovimientosBancos } from './movimientoBancarios';
-import {CurrencyMaskInputMode} from 'ngx-currency'
+import {NgxCurrencyInputMode } from 'ngx-currency'
 
 
 
@@ -46,7 +46,7 @@ export class TrasnferenciaDepositosComponent {
   /* Datatable */
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  /* dtOptions: DataTables.Settings = {}; */
+  /*  dtOptions: any = {}; */
   dtOptions: any = {};
   dtTrigger = new Subject();
 
@@ -79,7 +79,7 @@ export class TrasnferenciaDepositosComponent {
     prefix: '',
     min: 0,
     nullable: true,
-    inputMode: CurrencyMaskInputMode.NATURAL
+    inputMode: NgxCurrencyInputMode .Natural
   }
 
 

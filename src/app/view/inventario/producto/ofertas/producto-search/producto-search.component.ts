@@ -16,7 +16,7 @@ standalone: false,
 export class ProductoSearchComponent implements OnInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   dataT: any = [];
   @Input() data_carga_product: any;

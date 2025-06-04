@@ -15,7 +15,7 @@ standalone: false,
 export class TableDocumentosComponent implements OnInit, OnDestroy {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
 
   @Input() payload_document: any;

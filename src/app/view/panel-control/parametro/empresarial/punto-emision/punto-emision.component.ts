@@ -29,7 +29,7 @@ export class PuntoEmisionComponent implements OnInit {
   /* Datatable options */
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   // dtInstance: Promise<any>;
   validaDtUser: any = false;

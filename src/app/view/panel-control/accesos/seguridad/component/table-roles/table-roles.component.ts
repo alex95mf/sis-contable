@@ -18,7 +18,7 @@ export class TableRolesComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   dataT: any = [];
   @Input() data_consultar_rol: any;
@@ -29,7 +29,7 @@ export class TableRolesComponent implements OnInit {
   paginate: any;
   estadoSelected = 0
   estadoList = [
-    
+
     {value: "A",label: "Activo"},
     {value: "I",label: "Inactivo"},
   ]
@@ -62,17 +62,17 @@ export class TableRolesComponent implements OnInit {
     setTimeout(() => {
       this.getDataTable();
     }, 500);
-    
+
   }
-  
+
   asignarEstado(evt) {
     if(evt!=null){
       this.filter.estado = [evt]
     }else{
       this.filter.estado = ['A','I']
     }
-   
-   } 
+
+   }
   getDataTable(flag: boolean = false) {
     this.lcargando.ctlSpinner(true);
     this.dtOptions = {
@@ -92,7 +92,7 @@ export class TableRolesComponent implements OnInit {
 
       },
 
-      
+
     }
 
     this.seguridadServices.getRol(data)
@@ -104,7 +104,7 @@ export class TableRolesComponent implements OnInit {
         this.paginate.length = res['data']['total'];
         if (res['data']['current_page'] == 1) {
           this.guardarolT = res['data']['data'];
-          
+
         } else {
           this.guardarolT = Object.values(res['data']['data']);
         }

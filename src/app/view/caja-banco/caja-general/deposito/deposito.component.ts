@@ -24,7 +24,7 @@ export class DepositoComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   vmButtons: any;
   dataUser: any;

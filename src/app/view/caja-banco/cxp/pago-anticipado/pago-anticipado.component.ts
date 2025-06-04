@@ -255,7 +255,7 @@ export class PagoAnticipadoComponent implements OnInit {
   dataSource: any;
   dataAnteriorPA:any = [];
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   listadoGeneral(): any {
 

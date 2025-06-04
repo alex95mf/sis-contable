@@ -23,7 +23,7 @@ export class ShowConceptoComponent implements OnInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dtInstance: Promise<any>;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   dataDT: any = [];
   validaDt: any = false;

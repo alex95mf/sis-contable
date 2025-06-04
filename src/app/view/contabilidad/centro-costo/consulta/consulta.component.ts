@@ -35,7 +35,7 @@ export class ConsultaComponent implements OnInit {
   toDatePicker: any = formatDate(new Date(), 'yyyy-MM-dd', 'en');
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   processing: any = false;
   dataUser: any;

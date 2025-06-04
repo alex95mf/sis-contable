@@ -19,7 +19,7 @@ export class TableCatalogosComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   dataT: any = [];
   @Input() data_consultar_catalogo: any;
@@ -35,7 +35,7 @@ export class TableCatalogosComponent implements OnInit {
     private commonVarServices: CommonVarService) { }
 
   ngOnInit(): void {
-    
+
     this.filter ={
       tipoCatalogo: undefined,
       subTipo: undefined,
@@ -55,7 +55,7 @@ export class TableCatalogosComponent implements OnInit {
   }
 
   getDataTable(data) {
-    
+
     this.lcargando.ctlSpinner(true);
     this.mensajeSpinner = "Cargando informacion... "
 
@@ -65,7 +65,7 @@ export class TableCatalogosComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -90,13 +90,13 @@ export class TableCatalogosComponent implements OnInit {
         }
         this.parametroServices.getDistinctCatalog().subscribe(res => {
           this.lcargando.ctlSpinner(false);
-         
+
           this.groups = res['data'];
-          
+
         }, error => {
           this.toastr.info(error.error.message);
         })
-        
+
         this.commonVarServices.updPerm.next(false);
         this.validaDtUser = true;;
         setTimeout(() => {
@@ -112,7 +112,7 @@ export class TableCatalogosComponent implements OnInit {
         setTimeout(() => {
           this.dtTrigger.next(null);
         }, 50);
-        
+
       });
   }
 
@@ -147,18 +147,18 @@ export class TableCatalogosComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
       console.log(res);
       if(res['data'][0]['grupo'] == null || res['data'].length == 0){
-        
+
       }else {
         console.log(res['data']);
         this.subgroups = res['data'];
       }
-      
+
     }, error => {
-      this.lcargando.ctlSpinner(false);      
+      this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     });
 
-    
+
 
     // /* Add new params */
     // if (event == 'MODELOS' || event == 'PROVINCIA' || event == 'CIUDAD') {

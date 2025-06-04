@@ -17,6 +17,8 @@ export class ModalCuentPreComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
+  mensajeSppiner: string = "Cargando...";
+
   fTitle: string;
 
   encargados: any = []
@@ -27,12 +29,12 @@ export class ModalCuentPreComponent implements OnInit {
 
   filter: any
   paginate: any
-  
+
 
   @Input() tieneReglas: any
   @Input() validacionModal: any
   @Input() validar: any
-  
+
   @Input() filtrar: any
 
   constructor(
@@ -80,7 +82,7 @@ export class ModalCuentPreComponent implements OnInit {
       } else{
         this.cargarCuentasReglas()
       }
-      
+
     }, 50)
 
   }
@@ -130,7 +132,7 @@ export class ModalCuentPreComponent implements OnInit {
         console.log(res);
         this.paginate.length = res.data.total
         this.encargados = res.data.data
-        
+
         this.lcargando.ctlSpinner(false);
       },
       (err: any) => {
@@ -157,7 +159,7 @@ export class ModalCuentPreComponent implements OnInit {
         console.log(res);
         this.paginate.length = res.data.total
         this.encargados = res.data.data
-        
+
         this.lcargando.ctlSpinner(false);
       },
       (err: any) => {
@@ -170,7 +172,7 @@ export class ModalCuentPreComponent implements OnInit {
   }
 
 
-  
+
 
   cargarPresupuesto(){
     this.lcargando.ctlSpinner(true);
@@ -186,7 +188,7 @@ export class ModalCuentPreComponent implements OnInit {
         // console.log(res);
         this.paginate.length = res.data.total
         this.encargados = res.data.data
-        
+
         this.lcargando.ctlSpinner(false);
       },
       (err: any) => {
@@ -208,7 +210,7 @@ export class ModalCuentPreComponent implements OnInit {
     }else{
       this.cargarCuentasReglas()
     }
-  
+
   }
 
   changePaginatePresupuesto(event) {

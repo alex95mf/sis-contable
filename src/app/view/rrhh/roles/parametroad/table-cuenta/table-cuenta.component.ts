@@ -16,7 +16,7 @@ export class TableCuentaComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   dataT: any = [];
   @Input() data_carga_cuenta: any;

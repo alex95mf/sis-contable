@@ -18,7 +18,7 @@ standalone: false,
 export class ShowDenominationCierreComponent implements OnInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   @Input() info: any;
   dataDT: any = [];
@@ -74,7 +74,7 @@ export class ShowDenominationCierreComponent implements OnInit {
   }
 
   calculatedOthers(i) {
-    this.dataDT[i].denominacion = parseInt(this.dataDT[i].denominacion) + 1 ;  
+    this.dataDT[i].denominacion = parseInt(this.dataDT[i].denominacion) + 1 ;
     this.total = 0;
     this.dataDT[i].total_denom = (parseFloat(this.dataDT[i].total_denom) + parseFloat(this.dataDT[i].cantidad)).toFixed(2);
     this.dataDT.forEach(element => {

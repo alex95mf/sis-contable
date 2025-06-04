@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CurrencyMaskInputMode } from 'ngx-currency';
+import { NgxCurrencyInputMode  } from 'ngx-currency';
 import { ModalContribuyentesComponent } from 'src/app/config/custom/modal-contribuyentes/modal-contribuyentes.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
@@ -174,13 +174,13 @@ export class LiquidacionComponent implements OnInit {
   options = {
     //max: 1000000,
     min: 0,
-    inputMode: CurrencyMaskInputMode.NATURAL,
+    inputMode: NgxCurrencyInputMode .Natural,
   }
   options2 = {
     //max: 1000000,
     precision: 3,
     min: 0,
-    inputMode: CurrencyMaskInputMode.NATURAL,
+    inputMode: NgxCurrencyInputMode .Natural,
   }
 
   certList = [

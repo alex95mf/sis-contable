@@ -9,7 +9,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import { TablaCuantiaFormComponent } from './tabla-cuantia-form/tabla-cuantia-form.component';
 import { TablaCuantiaService } from './tabla-cuantia.service';
 import { CommonVarService } from 'src/app/services/common-var.services';
-import moment from "moment";
+import * as moment from "moment";
 
 @Component({
 standalone: false,
@@ -23,7 +23,7 @@ export class TablaCuantiaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false})
   etiquetaCargando: CcSpinerProcesarComponent;
   tituloF: string = "Tabla de cuantia";
-  
+
   botonesPermisos: any = [];
   datosUsuario: any;
   permisos: any;
@@ -69,7 +69,7 @@ export class TablaCuantiaComponent implements OnInit {
     private svc: CommonVarService,
     private stc: TablaCuantiaService,
     private mod: NgbModal,
-  ) { 
+  ) {
     this.svc.editCuantia.asObservable().subscribe(
       (res) => {
         if (res) {
@@ -131,7 +131,7 @@ export class TablaCuantiaComponent implements OnInit {
     //   opcionesTamPagina: [2, 5, 10, 20, 50]
     // };
 
-   
+
     setTimeout(async () => {
       this.validarPermisos();
       await this.cargaInicial()

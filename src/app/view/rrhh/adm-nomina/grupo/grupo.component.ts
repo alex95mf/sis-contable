@@ -21,7 +21,7 @@ standalone: false,
 export class GrupoComponent implements OnDestroy, OnInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   validaDtUser: any = false;
   guardaT: any = [];

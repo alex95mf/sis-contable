@@ -15,7 +15,7 @@ export class TabsBodegaComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  //dtOptions: DataTables.Settings = {};
+  // dtOptions: any = {};
   dtOptions: any = {};
   dtTrigger = new Subject();
   dataT: any = [];

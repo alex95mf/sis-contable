@@ -25,7 +25,7 @@ export class AnexosComponent implements OnInit {
   input: ElementRef;
   dtElement: DataTableDirective;
   @Input() ext: any;
-  //dtOptions: DataTables.Settings = {};
+  // dtOptions: any = {};
   dtOptions: any = {};
   dtTrigger = new Subject();
   validaDtUser: any = false;
@@ -43,7 +43,7 @@ export class AnexosComponent implements OnInit {
   extension: any = "";
   dtAnexoxShow: boolean = false; //view table anexos
 
-  constructor(private proveedoresServicio: SuppliersService, private toastr: ToastrService, private router: Router, private zone: NgZone, private commonServices: CommonService, 
+  constructor(private proveedoresServicio: SuppliersService, private toastr: ToastrService, private router: Router, private zone: NgZone, private commonServices: CommonService,
     private IngresoSrv: IngresoService, private ingresoSrv: IngresoService) {
     this.commonServices.actionsSuppliers.asObservable().subscribe(res => {
       if (res.new) {
@@ -57,11 +57,11 @@ export class AnexosComponent implements OnInit {
     });
 
     this.commonServices.actionsSearchProviders.asObservable().subscribe(res => {
-      //this.showDataTableProveedores(res['anexos']);   
+      //this.showDataTableProveedores(res['anexos']);
       if (res['anexos'] == "" || res['anexos'] == undefined) {
         //this.toastr.info("Anexo no existe");
       } else if (res['anexos']) {
-        this.showDataTableProveedores(res['anexos']);   
+        this.showDataTableProveedores(res['anexos']);
       }
     });
 
@@ -111,7 +111,7 @@ export class AnexosComponent implements OnInit {
       this.filesSelect = files;
       setTimeout(() => {
       this.toastr.success("Ha seleccionado " +files.length+ " archivos" );
-    }, 10); 
+    }, 10);
     }
   }
 
@@ -125,7 +125,7 @@ export class AnexosComponent implements OnInit {
     this.ingresoSrv.fileService(file, payload).subscribe(res => {
     }, error => {
       this.toastr.info(error.error.message);
-    }) 
+    })
   }
 
   AnexoDownload(item) {
@@ -136,7 +136,7 @@ export class AnexosComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.proveedoresServicio.descargar(datos).subscribe((resultado) => {
         this.lcargando.ctlSpinner(false);
-        
+
         const url = URL.createObjectURL(resultado);
         const link = document.createElement("a");
         link.href = url;

@@ -18,7 +18,7 @@ export class ShowActivosComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   @Input() title: any;
   @Input() module: any;
@@ -77,7 +77,7 @@ export class ShowActivosComponent implements OnInit {
       }
     };
 
-    
+
     this.adqSrv.searchActivos().subscribe(res => {
       this.lcargando.ctlSpinner(false);
       this.validaDt = true;

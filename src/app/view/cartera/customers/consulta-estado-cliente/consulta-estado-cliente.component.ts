@@ -30,7 +30,7 @@ export class ConsultaEstadoClienteComponent implements  OnInit {
 /* 	  dtOptions: any = {}; */
 	@ViewChild(DataTableDirective)
 	dtElement: DataTableDirective;
-	dtOptions: DataTables.Settings = {};
+	 dtOptions: any = {};
 	dtTrigger = new Subject();
 	presentDt: any = false;
 	infomestadoData: Array<any> = [];
@@ -61,7 +61,7 @@ export class ConsultaEstadoClienteComponent implements  OnInit {
 		private modalService: NgbModal,
 		private commonServices: CommonService,
 		private commonVarSrvice: CommonVarService,
-		private socket: Socket,		
+		private socket: Socket,
 		private confirmationDialogService: ConfirmationDialogService) {}
 
 	/*inicio*/
@@ -69,7 +69,7 @@ export class ConsultaEstadoClienteComponent implements  OnInit {
 		this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
 		this.vmButtons = [
 			{ orig: "btnEstadoCliente", paramAccion: "", boton: { icon: "fa fa-search", texto: "CONSULTAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-info boton btn-sm", habilitar: false, imprimir: false},
-			{ orig: "btnEstadoCliente", paramAccion: "", boton: { icon: "fas fa-times", texto: "CANCELAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: false, imprimir: false},	
+			{ orig: "btnEstadoCliente", paramAccion: "", boton: { icon: "fas fa-times", texto: "CANCELAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: false, imprimir: false},
 		];
 
 		setTimeout(() => {
@@ -94,7 +94,7 @@ export class ConsultaEstadoClienteComponent implements  OnInit {
 				this.datConsulta = [];
 				this.lcargando.ctlSpinner(false);
 			} else {
-				
+
 				this.processing = true;
 				this.getClientes();
 			}
@@ -129,12 +129,12 @@ export class ConsultaEstadoClienteComponent implements  OnInit {
 		switch (evento.items.boton.texto) {
 			case "REGRESAR CONSULTA":
 				this.limpiar();
-				break;	
+				break;
 				case "IMPRIMIR":
 				this.savePrint();
 				break;
 		}
-	} 
+	}
 
 	consultarData() {
 		if (this.permisions.consultar == "0") {
@@ -159,7 +159,7 @@ export class ConsultaEstadoClienteComponent implements  OnInit {
 			dateFrom: moment(this.fromDatePicker).format('YYYY-MM-DD'),
 			dateTo: moment(this.toDatePicker).format('YYYY-MM-DD'),
 			cliente: this.cliente == 0 ? null : this.cliente,
-		} 
+		}
 		this.reportesSrv.getAllConsulta(data).subscribe(res => {
 			if (res['data'].length > 0) {
 				this.lcargando.ctlSpinner(false);
@@ -175,11 +175,11 @@ export class ConsultaEstadoClienteComponent implements  OnInit {
 				this.CalculoTotal();
 				this.dataInformacionConsult();
 				this.getultimaCompra();
-					} else {			
+					} else {
 						this.lcargando.ctlSpinner(false);
 						this.processing = true;
 						this.processingtwo = false;
-						this.datConsulta = res['data']; 
+						this.datConsulta = res['data'];
 						this.toastr.info("Facturas no existente para este Cliente");
 					}
 		  }, error => {
@@ -221,7 +221,7 @@ export class ConsultaEstadoClienteComponent implements  OnInit {
 				}
 				this.reportesSrv.existProveedors(datas).subscribe(res => {
 					this.arrayProveedor = res['data'];
-					if(this.arrayProveedor.length > 0){   
+					if(this.arrayProveedor.length > 0){
 							this.dataInformacion.existProveedor = 'SI';
 							document.getElementById("iddataProveedor").style.backgroundColor = "#46B21A ";
 							this.dataInformacion.IDProveedor = this.arrayProveedor[0].id_proveedor.toString().padStart(10, '0');
@@ -283,7 +283,7 @@ export class ConsultaEstadoClienteComponent implements  OnInit {
 		this.cliente = evet;
     }
 
-	  
+
 	showCxcCi(dt) {
 		const dialogRef = this.confirmationDialogService.openDialogMat(ModalConsultaClienteComponent, {
 		  width: '1000px',
@@ -291,5 +291,5 @@ export class ConsultaEstadoClienteComponent implements  OnInit {
 		});
 		dialogRef.componentInstance.dt = dt;
 	  }
-	
+
 }

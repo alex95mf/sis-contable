@@ -43,7 +43,7 @@ export class DiarioComponent implements OnInit {
   /* Datatable */
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  /* dtOptions: DataTables.Settings = {}; */
+  /*  dtOptions: any = {}; */
   dtOptions: any = {};
   dtTrigger = new Subject();
 

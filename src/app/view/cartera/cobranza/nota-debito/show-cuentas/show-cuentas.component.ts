@@ -17,7 +17,7 @@ export class ShowCuentasComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   dataDT: any = [];
   validaDt: any = false;
@@ -36,7 +36,7 @@ export class ShowCuentasComponent implements OnInit {
     setTimeout(() => {
       this.commonVarSrvice.updPerm.next(true);
     }, 50);
-    
+
     this.vmButtons = [
       { orig: "btnAccNDc", paramAccion: "", boton: { icon: "fas fa-chevron-left", texto: "REGRESAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger boton btn-sm", habilitar: false }
     ];

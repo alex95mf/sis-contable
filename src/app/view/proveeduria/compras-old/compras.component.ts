@@ -27,7 +27,7 @@ export class ComprasComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   fecha: Date = new Date();
   fecha_compra: any;

@@ -21,7 +21,7 @@ standalone: false,
 export class ProductosComponent implements OnInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   processing: any;
   dataUser: any;

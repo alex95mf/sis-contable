@@ -27,7 +27,7 @@ export class ChequesPostComponent implements OnInit {
   toDatePicker: Date = new Date();
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
+   dtOptions: any = {};
   dtTrigger = new Subject();
   processing: any = false;
   dataUser: any;
