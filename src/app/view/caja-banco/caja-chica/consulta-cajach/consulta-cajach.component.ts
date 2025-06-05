@@ -170,7 +170,7 @@ export class ConsultaCajachComponent implements OnInit {
       cajaChica: this.cajaChica == 0 ? null : this.cajaChica,
       tipo: this.tipo == 0 ? null : this.tipo,
       documento: this.documento == 0 ? null : this.documento,
-    }
+    };
     (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.reportesSrv.getMovimiento(data).subscribe(res => {

@@ -251,7 +251,7 @@ export class BienesComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Validando datos'
-      await this.validaData()
+      await this.validaData();
 
       (this as any).mensajeSpinner = 'Almacenando Bienes'
       let response = await this.apiService.almacenaBienes({

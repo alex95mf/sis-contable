@@ -881,7 +881,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       let data = {
         periodo: Number(this.filter.periodo),
         mes: Number(this.filter.mes)
-      }
+      };
       (this as any).mensajeSpinner = "Actualizando Faltas y Permisos"
       this.lcargando.ctlSpinner(true);
       this.asistenciadiasempleService.procesarSpActualizaFaltasPermisos(data).subscribe(res => {
@@ -915,7 +915,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       let data = {
         periodo: Number(this.filter.periodo),
         mes: this.convertirMes()
-      }
+      };
       (this as any).mensajeSpinner = "Actualizando Horas Extra"
       this.lcargando.ctlSpinner(true);
       this.asistenciadiasempleService.procesarSpActualizaHorasExtra(data).subscribe(res => {
@@ -2268,7 +2268,7 @@ console.log(this.filter.mes)
 
 
       default:
-    }
+    };
     (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
 
@@ -2351,7 +2351,7 @@ console.log(this.filter.mes)
     if(this.filter.mes == 0 || this.filter.mes  ==null){
       this.messageService.add({ key: 'bc', severity: 'warn', summary: 'Mes', detail: ' Debe seleccionar un Mes.' });
       return;
-    }
+    };
 
     (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);

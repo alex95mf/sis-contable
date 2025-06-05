@@ -161,7 +161,7 @@ export class ProductosComponent implements OnInit {
     this.randomGenerate = code;
     let data = {
       codigo: this.randomGenerate
-    }
+    };
     (this as any).mensajeSpinner = "Cargando datos...";
     this.lcargando.ctlSpinner(true);
     this.prvSrv.validateSecuencial(data).subscribe(res => {

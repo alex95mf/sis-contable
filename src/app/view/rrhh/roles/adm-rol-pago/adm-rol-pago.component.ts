@@ -801,7 +801,7 @@ export class AdmRolPagoComponent implements OnInit {
     if(!valida){
       this.validaciones.mensajeInfo("Informativo","No existe informacion a aprobar");
       return;
-    }
+    };
 
     (this as any).mensajeSpinner = "Apobando rol de pago por favor espere...";
     this.lcargando.ctlSpinner(true);

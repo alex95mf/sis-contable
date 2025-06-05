@@ -1014,7 +1014,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
     year = this.select_anio;
     let Desde = (year - 1 ) + "12"
-    let Hasta = year + "11"
+    let Hasta = year + "11";
     (this as any).mensajeSpinner = "Procesando Decimo Tercero...";
     this.lcargando.ctlSpinner(true);
     this.admDecimoTerceroService.procesarDecimoTercero(1,year, mes, Desde, Hasta,this.fk_programa,this.area, this.departamento,this.decimo_acumula_mensualiza,this.dataUser.id_usuario).subscribe(res => {
@@ -1042,7 +1042,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
       empleados: empleadosCheck
     }
 
-    console.log("datadecimoterce",data)
+    console.log("datadecimoterce",data);
     (this as any).mensajeSpinner = "Aprobando Decimo Tercero...";
     this.lcargando.ctlSpinner(true);
     this.admDecimoTerceroService.aprobarDecimoTercero(data).subscribe(res => {
@@ -1071,7 +1071,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     if(this.decimo_acumula_mensualiza == null){this.decimo_acumula_mensualiza = 0 }
     if(this.programa==undefined || this.programa=='') { this.fk_programa=0 }
     if(this.area==null) { this.area=0 }
-    if(this.departamento==null) { this.departamento=0 }
+    if(this.departamento==null) { this.departamento=0 };
 
 
     (this as any).mensajeSpinner = "Cargando Decimo Tercero...";
@@ -1340,7 +1340,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     if(this.decimo_acumula_mensualiza == null){this.decimo_acumula_mensualiza = 0 }
     if(this.programa==undefined || this.programa=='') { this.fk_programa=0 }
     if(this.area==null) { this.area=0 }
-    if(this.departamento==null) { this.departamento=0 }
+    if(this.departamento==null) { this.departamento=0 };
 
 
     (this as any).mensajeSpinner = "consultando por rango de fechas...";
@@ -1415,7 +1415,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
       mes: 12,
       tipo_decimo: 'DECIT',
       empleados: empleadosCheck
-    }
+    };
     (this as any).mensajeSpinner = "Generando Ordenes de Pago";
     this.lcargando.ctlSpinner(true);
     this.admDecimoTerceroService.generarOrdenesPago(data).subscribe(res => {

@@ -370,7 +370,7 @@ export class GestionFormComponent implements OnInit {
     }
   }
   uploadFile() {
-    console.log('sube archivo')
+    console.log('sube archivo');
     (this as any).mensajeSpinner = "Guardando Archivo...";
     this.lcargando.ctlSpinner(true);
     let data = {

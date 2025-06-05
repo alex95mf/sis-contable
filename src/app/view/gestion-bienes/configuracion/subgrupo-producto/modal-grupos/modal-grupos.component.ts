@@ -101,7 +101,7 @@ export class ModalGruposComponent implements OnInit {
         paginate: this.paginate
       }
      
-    }
+    };
 
     (this as any).mensajeSpinner = "Cargando lista ..."
     this.lcargando.ctlSpinner(true);

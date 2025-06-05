@@ -220,7 +220,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
             id_controlador: myVarGlobals.fCompPubInfi,  // TODO: Actualizar cuando formulario ya tenga un ID
             accion: `Borrado de Anexo ${anexo.id_anexo}`,
             ip: this.commonService.getIpAddress()
-          }
+          };
 
           (this as any).mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true);

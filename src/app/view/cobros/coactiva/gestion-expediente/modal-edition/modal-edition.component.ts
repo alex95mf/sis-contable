@@ -145,7 +145,7 @@ export class ModalEditionComponent implements OnInit {
       return;
     }
 
-    Object.assign(this.expediente, this.data, {foto: this.fotos[0]?.recurso})
+    Object.assign(this.expediente, this.data, {foto: this.fotos[0]?.recurso});
     (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     // console.log({ expediente: this.expediente })

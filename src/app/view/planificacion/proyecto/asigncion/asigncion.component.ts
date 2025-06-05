@@ -348,7 +348,7 @@ export class AsigncionComponent implements OnInit {
     delete this.atribuciones
     this.lcargando.ctlSpinner(true);
     try {
-      await this.loadPresupuesto()
+      await this.loadPresupuesto();
 
       (this as any).mensajeSpinner = 'Cargando Atribuciones';
       this.atribuciones = await this.apiService.getAtribuciones({periodo: this.periodoSelected, programa: this.programaSelected, departamento: this.departamentoSelected});
@@ -479,7 +479,7 @@ export class AsigncionComponent implements OnInit {
       estado: "A",
       id_empresa: this.commonServices.getDataUserLogued().id_empresa
     }
-    console.log(data)
+    console.log(data);
     (this as any).mensajeSpinner = 'Almacenando Atribucion'
     this.lcargando.ctlSpinner(true);
     this.apiService.saveRowCatalogo(data).subscribe(res => {
@@ -518,7 +518,7 @@ export class AsigncionComponent implements OnInit {
 
   /* cargaDepartamentos(event) {
     console.log(event);
-    // Carga los departamentos asociados al programa seleccionado
+    // Carga los departamentos asociados al programa seleccionado;
     (this as any).mensajeSpinner = 'Cargando Departamentos'
     this.lcargando.ctlSpinner(true);
     let data = {
@@ -568,7 +568,7 @@ export class AsigncionComponent implements OnInit {
     let data = {
       departamento: event,
       presupuesto: this.presupuesto
-    }
+    };
 
     (this as any).mensajeSpinner = 'Cargando Presupuesto del Departamento'
     this.lcargando.ctlSpinner(true);
@@ -616,7 +616,7 @@ export class AsigncionComponent implements OnInit {
     // Carga las atribuciones asociadas al departamento seleccionado
     let data = {
       departamento: arg.departamento.nombre
-    }
+    };
     (this as any).mensajeSpinner = 'Cargando Atribuciones del Departamento'
     this.apiService.getAtribuciones(data).subscribe(
       res => {
@@ -735,7 +735,7 @@ export class AsigncionComponent implements OnInit {
     let data = {
       params: this.attrDept.map(a => a.id_catalogo)
     }
-    // this.lcargando.ctlSpinner(true);  // Ya viene activado
+    // this.lcargando.ctlSpinner(true);  // Ya viene activado;
     (this as any).mensajeSpinner = 'Cargando Tareas'
     this.apiService.getTareas(data).subscribe(
       (res: any) => {
@@ -823,7 +823,7 @@ export class AsigncionComponent implements OnInit {
     if (this.permissions.guardar == '0') {
       this.toastr.warning('No tiene permisos para usar este recurso', this.fTitle)
       return
-    }
+    };
 
     (this as any).mensajeSpinner = 'Almacenando Atribuciones y Bienes y Servicios'
     let data = {
@@ -931,7 +931,7 @@ export class AsigncionComponent implements OnInit {
     let data = {
       programa: this.programaObjectSelected,
       departamento: this.departamentoObjectSelected,
-    }
+    };
     (this as any).mensajeSpinner = 'Enviando correos...'
     this.lcargando.ctlSpinner(true);
     this.apiService.enviarCorreos(data).subscribe(

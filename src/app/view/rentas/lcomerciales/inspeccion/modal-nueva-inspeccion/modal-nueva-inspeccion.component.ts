@@ -243,7 +243,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
         fecha_asignacion: moment(this.fecha_asignacion).format('YYYY-MM-DD'),
         fk_inspector: this.inspector.id
       }
-    }
+    };
     (this as any).mensajeSpinner = 'Asignando Inspector...'
     this.lcargando.ctlSpinner(true);
     this.apiService.asignaInspector(data).subscribe(

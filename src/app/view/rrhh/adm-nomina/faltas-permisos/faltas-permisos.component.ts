@@ -1286,7 +1286,7 @@ console.log(data)
           flpr_observacion: this.formGroupFaltaAndPermiso.get('fnc_flpr_observacion').value,
           flpr_estado_id: 'EFPP',
           // formatDate(this.inputFechaIngreso.value,'yyyy-MM-dd',"en-US"),
-        }
+        };
         (this as any).mensajeSpinner = "Guardando...";
         this.lcargando.ctlSpinner(true);
         console.log(data);
@@ -1370,7 +1370,7 @@ console.log(data)
           flpr_num_horas: this.formGroupFaltaAndPermiso.value.fnc_flpr_num_horas,
           flpr_observacion: this.formGroupFaltaAndPermiso.get('fnc_flpr_observacion').value,
           // formatDate(this.inputFechaIngreso.value,'yyyy-MM-dd',"en-US"),
-        }
+        };
         (this as any).mensajeSpinner = "Guardando...";
         this.lcargando.ctlSpinner(true);
         this.PerFaltasYPermisosService.updatedFaultAndPermission(data).subscribe(
@@ -1853,7 +1853,7 @@ console.log(data)
       flpr_num_horas: dataFP.flpr_num_horas,
       flpr_observacion: dataFP.flpr_observacion,
       flpr_estado_id: $keywordVacDet
-    }
+    };
 
 
     (this as any).mensajeSpinner = "Guardando...";

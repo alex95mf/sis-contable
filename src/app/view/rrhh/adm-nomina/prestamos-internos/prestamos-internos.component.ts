@@ -671,7 +671,7 @@ export class PrestamosInternosComponent implements OnInit {
       vdt_fecha_fin: this.formGroupVacaciones.value.fcn_fecha_fin,
       vdt_num_horas: this.formGroupVacaciones.value.fcn_vac_total_horas,
       vdt_observacion: this.formGroupVacaciones.value.fnc_vdt_observacion,
-    }
+    };
     (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.vacaServ.updateVacationdetails(data).subscribe(
@@ -782,7 +782,7 @@ export class PrestamosInternosComponent implements OnInit {
       vdt_num_horas: this.formGroupVacaciones.value.fcn_vac_total_horas,
       vdt_observacion: this.formGroupVacaciones.value.fnc_vdt_observacion,
       vac_detalle_estado_id: 'PAPR'
-    }
+    };
     // console.log(data)
     // return;
 
@@ -1895,7 +1895,7 @@ export class PrestamosInternosComponent implements OnInit {
       flpr_observacion: this.formGroupFaltaAndPermiso.get('fnc_flpr_observacion_permiso').value,
       flpr_estado_id: 'EFPP',
       // formatDate(this.inputFechaIngreso.value,'yyyy-MM-dd',"en-US"),
-    }
+    };
     (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.saveFaultAndPermission(data).subscribe(
@@ -2203,7 +2203,7 @@ export class PrestamosInternosComponent implements OnInit {
       flpr_fecha_fin: this.formGroupFaltaAndPermiso.value.fnc_fnc_flpr_fecha_fin_permiso,
       flpr_num_horas: this.formGroupFaltaAndPermiso.value.fnc_flpr_num_horas_permiso,
       flpr_observacion: this.formGroupFaltaAndPermiso.get('fnc_flpr_observacion_permiso').value,
-    }
+    };
     (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.updatedFaultAndPermission(data).subscribe(

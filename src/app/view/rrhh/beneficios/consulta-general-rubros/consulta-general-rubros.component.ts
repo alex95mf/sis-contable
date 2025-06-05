@@ -88,10 +88,10 @@ export class ConsultaGeneralRubrosComponent implements OnInit {
 
       (this as any).mensajeSpinner = "Cargando Períodos"
       const resPeriodos = await this.apiService.getPeriodos()
-      this.cmb_periodo = resPeriodos
+      this.cmb_periodo = resPeriodos;
 
       (this as any).mensajeSpinner = 'Cargando Listado de Meses'
-      this.lst_mes = await this.apiService.getMeses('MES')
+      this.lst_mes = await this.apiService.getMeses('MES');
 
       (this as any).mensajeSpinner = 'Cargando Listado de Rubros'
       this.lst_rubro = await this.apiService.getRubros()

@@ -259,7 +259,7 @@ export class BitacoraComponent implements OnDestroy, OnInit {
 
   btnExportarExcel() {
 
-    console.log(this.dataBitacoraAux)
+    console.log(this.dataBitacoraAux);
     (this as any).mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
 

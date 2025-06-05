@@ -123,7 +123,7 @@ export class RegistroComponent implements OnInit {
     this.bienes = []
     let data = {
       departamento: e.nombre
-    }
+    };
     (this as any).mensajeSpinner = 'Cargando Atribuciones'
     this.lcargando.ctlSpinner(true);
     this.api.getAtribuciones({ departamento: e.nombre }).subscribe(
@@ -152,7 +152,7 @@ export class RegistroComponent implements OnInit {
     let data = {
       periodo: this.seleccion.periodo,
       atribucion: e
-    }
+    };
     (this as any).mensajeSpinner = 'Cargando Bienes y Servicios'
     this.lcargando.ctlSpinner(true);
     this.api.getBienes(data).subscribe(

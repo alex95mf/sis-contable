@@ -190,7 +190,7 @@ export class PuestoComponent implements OnInit {
       params: {
         paginate: this.paginate,
       }
-    }
+    };
 
     (this as any).mensajeSpinner = 'Cargando Puestos de Mercados'
     this.lcargando.ctlSpinner(true);

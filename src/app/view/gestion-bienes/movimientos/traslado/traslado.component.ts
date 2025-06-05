@@ -593,7 +593,7 @@ codigoActa:any;
     }
   }
   buscarFotoProducto(id_producto){
-    console.log(id_producto)
+    console.log(id_producto);
     (this as any).mensajeSpinner = "Cargando foto...";
     this.lcargando.ctlSpinner(true);
     let data = {

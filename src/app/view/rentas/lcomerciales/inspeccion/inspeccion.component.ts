@@ -358,7 +358,7 @@ export class InspeccionComponent implements OnInit {
   }
 
   async exportarExcel() {
-    let excelData = []
+    let excelData = [];
 
     (this as any).mensajeSpinner = 'Exportando Locales Comerciales'
     this.lcargando.ctlSpinner(true);
@@ -469,7 +469,7 @@ export class InspeccionComponent implements OnInit {
   async cargaInspecciones(local: any) {
     // Llevar registro del local seleccionado
     Object.assign(this.local, local)
-    this.local.inspecciones = []
+    this.local.inspecciones = [];
 
     (this as any).mensajeSpinner = 'Cargando Inspecciones...';
     this.lcargando.ctlSpinner(true);

@@ -953,7 +953,7 @@ export class MultasComponent implements OnInit {
   validarSta(){
     let data = {
       concepto: 'ML'
-    }
+    };
     (this as any).mensajeSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
    

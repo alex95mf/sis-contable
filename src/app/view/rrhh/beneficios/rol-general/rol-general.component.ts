@@ -59,6 +59,8 @@ export class RolGeneralComponent implements OnInit {
   cmb_periodo: any[] = []
   cmb_meses: any[] = []
 
+  mensajeSpinner: string;
+
   dataGeneral: any = []
 
   mes_actual: any = 0;
@@ -564,7 +566,7 @@ setAprobarRol(){
             console.log(arrayTipo);
           }
           //this.cols.splice(1, 0, { field: 'total_ingreso', header: 'TOTAL INGRESOS', order: 4, class: "one" });
-          //console.log(this.RolGeneral)
+          //console.log(this.RolGeneral);
          // console.log(Data)
           let linea = 0
 
@@ -641,7 +643,7 @@ setAprobarRol(){
 
               // objetoRol = {};
             }
-           //  console.log(this.RolGeneral)
+           //  console.log(this.RolGeneral);
 
           }
           console.log(this.cols)
@@ -762,10 +764,10 @@ setAprobarRol(){
               if(totalDiferenciaNegativo.length > 0 ){
                 this.toastr.error('Hay valores negativos, por favor revisar')
               }
-              console.log(this.RolGeneral)
+              console.log(this.RolGeneral);
 
           // return
-          //console.log(this.RolGeneral)
+          //console.log(this.RolGeneral);
           this.vmButtons[3].habilitar = false;
           this.vmButtons[5].habilitar = false;
           this.vmButtons[4].habilitar = false;
@@ -812,20 +814,20 @@ setAprobarRol(){
         }
       }
      });
-     console.log(this.RolGeneral)
+     console.log(this.RolGeneral);
   }
 
   handleRowCheck(event, data: any) {
     console.log(event.target.checked)
     console.log(data)
-    console.log(this.RolGeneral)
+    console.log(this.RolGeneral);
    this.RolGeneral.forEach(e => {
     if(e.linea == data.linea){
       Object.assign(e, {aprobar: event.target.checked})
     }
    });
 
-   console.log(this.RolGeneral)
+   console.log(this.RolGeneral);
 
 
   }
@@ -921,7 +923,7 @@ setAprobarRol(){
 
   btnExportarExcel() {
 
-    console.log(this.RolGeneral)
+    console.log(this.RolGeneral);
     (this as any).mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
 
@@ -1510,7 +1512,7 @@ setAprobarRol(){
      if(this.tipoPago == undefined || this.tipoContrato == 0){
       this.toastr.warning("Debe seleccionar un Tipo de Pago. Por favor revise")
       return;
-     }
+     };
 
 
     (this as any).mensajeSpinner = "Cargando cuenta contable...";
@@ -1880,9 +1882,9 @@ setAprobarRol(){
             console.log(lineaTotales)
 
             this.RolGeneral.push(lineaTotales);
-            console.log(this.RolGeneral)
+            console.log(this.RolGeneral);
         // return
-        //console.log(this.RolGeneral)
+        //console.log(this.RolGeneral);
        // this.vmButtons[3].habilitar = false;
         this.vmButtons[3].habilitar = false;
         this.vmButtons[5].habilitar = false;
@@ -1988,7 +1990,7 @@ setAprobarRol(){
 
   async getLatest() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner= 'Cargando Registro'
+    this.mensajeSpinner= 'Cargando Registro';
     try {
       const response = await this.rolgeneralemplService.getUltimoNumero()
       console.log(response)

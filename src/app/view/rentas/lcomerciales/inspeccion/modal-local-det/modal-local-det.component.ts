@@ -149,7 +149,7 @@ export class ModalLocalDetComponent implements OnInit {
           if (result.isConfirmed) {
             // this.local['fk_contribuyente'] = { id_cliente: this.contribuyente.id_cliente }
             this.local.lt_categoria = this.local.local_turistico ? this.cmb_turistico_categoria.find(e => e.descripcion == this.local.lt_categoria.descripcion) : { descripcion: 0 }
-            this.local.lt_categoria_2 = this.local.local_turistico ? this.cmb_turistico_subcategoria.find(e => e.descripcion == this.local.lt_categoria_2.descripcion) : { descripcion: 0 }
+            this.local.lt_categoria_2 = this.local.local_turistico ? this.cmb_turistico_subcategoria.find(e => e.descripcion == this.local.lt_categoria_2.descripcion) : { descripcion: 0 };
             (this as any).mensajeSpinner = 'Actualizando Local'
             this.lcargando.ctlSpinner(true);
 

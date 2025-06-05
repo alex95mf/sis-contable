@@ -358,7 +358,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
         const max_dias_vacaciones = empleadoData.codigo_trabajo.cat_keyword == 'LOSEP' ? 30 : 15;
         const vac_a_partir_meses = (empleadoData.codigo_trabajo.cat_keyword == 'LOSEP') ? 11  : 12 ;
         const vac_tiempo_trabajando = moment().diff(moment(empleadoData.emp_fecha_ingreso), 'months')
-        Object.assign(this.empleado, {...empleadoData, max_dias_vacaciones, vac_a_partir_meses, vac_tiempo_trabajando})
+        Object.assign(this.empleado, {...empleadoData, max_dias_vacaciones, vac_a_partir_meses, vac_tiempo_trabajando});
         (this as any).mensajeSpinner = "Cargando...";
         // this.lcargando.ctlSpinner(true);
 
@@ -550,7 +550,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
         vdt_fecha_fin: this.vacDetalleFORM.vdt_fecha_fin,
         vdt_num_horas: 8,
         vdt_observacion: "454"
-      }
+      };
       (this as any).mensajeSpinner = "Guardando...";
       this.lcargando.ctlSpinner(true);
       this.vacaServ.saveVacationDetail(data).subscribe(

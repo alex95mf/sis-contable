@@ -153,7 +153,7 @@ export class SeguimientoFormComponent implements OnInit {
   }
 
   cargarSeguimiento(){
-    console.log('cargando segui')
+    console.log('cargando segui');
     (this as any).mensajeSpinner = "Cargando Seguimiento...";
     this.lcargando.ctlSpinner(true);
     this.bandejaTraSrv.seguimientoTicket(this.data,this.data['id_ticket']).subscribe(

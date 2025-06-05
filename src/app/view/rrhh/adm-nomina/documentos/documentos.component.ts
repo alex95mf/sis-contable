@@ -335,7 +335,7 @@ export class DocumentosComponent implements OnInit {
     this.limpiarFormulario();
     if (valores == undefined) {
       return;
-    }
+    };
     (this as any).mensajeSpinner = "Seteando valores...";
     this.lcargando.ctlSpinner(true);
     this.id_archivo = valores.id_anexos;
@@ -420,7 +420,7 @@ export class DocumentosComponent implements OnInit {
     this.limpiarFormulario();
     if (valores == undefined) {
       return;
-    }
+    };
     (this as any).mensajeSpinner = "Seteando valores...";
     this.lcargando.ctlSpinner(true);
     let datos: any = {

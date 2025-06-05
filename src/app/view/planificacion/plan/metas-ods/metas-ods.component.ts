@@ -185,7 +185,7 @@ export class MetasOdsComponent implements OnInit {
     this.seleccion.eje = 0
     let data = {
       "ods": event
-    }
+    };
     (this as any).mensajeSpinner = 'Cargando Ejes'
 
     this.lcargando.ctlSpinner(true);
@@ -216,7 +216,7 @@ export class MetasOdsComponent implements OnInit {
     this.seleccion.meta_ods = 0
     let data = {
       "ods": event
-    }
+    };
     (this as any).mensajeSpinner = 'Cargado Metas para ODS'
     
     this.lcargando.ctlSpinner(true);
@@ -244,7 +244,7 @@ export class MetasOdsComponent implements OnInit {
     this.seleccion.opg = 0
     let data = {
       'eje': event
-    }
+    };
     (this as any).mensajeSpinner = 'Cargado OPG'
     
     this.lcargando.ctlSpinner(true);

@@ -77,7 +77,7 @@ export class ModalExoneracionesComponent implements OnInit {
       concepto: {
         codigo: "PL"
       }
-    }
+    };
 
     (this as any).mensajeSpinner = "Cargando lista de Exoneraciones..."
     this.lcargando.ctlSpinner(true);

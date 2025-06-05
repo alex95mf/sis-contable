@@ -474,7 +474,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
     let data = {
       mercado: this.documento.mercado
     }
-    this.documento.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto
+    this.documento.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto;
     (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
     this.lcargando.ctlSpinner(true);
     this.puestos = []

@@ -117,7 +117,7 @@ export class TareasComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     try {
       // (this as any).mensajeSpinner = 'Cargando listado de Responsables'
-      // this.responsables = await this.apiService.getResponsables()
+      // this.responsables = await this.apiService.getResponsables();
 
       (this as any).mensajeSpinner = 'Cargando Tareas de Atribución'
       this.tareas = await this.apiService.getTareas({periodo: this.periodo, programa: this.programa, departamento: this.departamento, atribucion: this.atribucion})

@@ -250,7 +250,7 @@ export class FormularioNotificacionesComponent implements OnInit {
   cargarLiquidaciones(){
     if (this.filter.razon_social != null) {
       this.filter.razon_social = this.filter.razon_social.trim().length > 0 ? this.filter.razon_social.trim() : null
-    }
+    };
 
     (this as any).mensajeSpinner = "Cargando Notificaciones...";
     this.lcargando.ctlSpinner(true);

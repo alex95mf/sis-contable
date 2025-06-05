@@ -109,7 +109,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
 
     this.commonVarService.selectListLiqPermisos.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
       (res) => {
-        console.log(res)
+        console.log(res);
         (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
         this.lcargando.ctlSpinner(true);
         this.restoreForm(false, false);

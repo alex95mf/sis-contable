@@ -794,7 +794,7 @@ export class AdmAnticipoComponent implements OnInit {
     if(!valida){
       this.validaciones.mensajeInfo("Informativo","No existe informacion a aprobar");
       return;
-    }
+    };
 
     (this as any).mensajeSpinner = "Apobando anticipo por favor espere...";
     this.lcargando.ctlSpinner(true);

@@ -255,7 +255,7 @@ export class DepreciacionComponent implements OnInit {
       return
     }
 
-    this.paginator.disabled = false
+    this.paginator.disabled = false;
     (this as any).mensajeSpinner = "Cargando Bienes"
     // this.lcargando.ctlSpinner(true);
 

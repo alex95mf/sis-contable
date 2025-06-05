@@ -82,7 +82,7 @@ export class ModalExoneracionesComponent implements OnInit {
           conceptos: this.conceptos.map(e => e.codigo_detalle)
         }
       }
-    }
+    };
 
     (this as any).mensajeSpinner = "Cargando lista de Exoneraciones..."
     this.lcargando.ctlSpinner(true);

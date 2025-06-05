@@ -835,7 +835,7 @@ iddetallecabecerareformageneral: any;
 
 
   departamentoSearchSelect(numero) {
-    console.log(this.atribucionParamsNew.programa)
+    console.log(this.atribucionParamsNew.programa);
     (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
@@ -859,7 +859,7 @@ iddetallecabecerareformageneral: any;
   }
 
   departamentoSearchSelect2() {
-    console.log(this.atribucionParamsNew.programa_dos)
+    console.log(this.atribucionParamsNew.programa_dos);
     (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {

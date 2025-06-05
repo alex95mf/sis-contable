@@ -107,7 +107,7 @@ export class IngChqProtestadoComponent implements OnInit {
       accion: ("Se protestó cheque de " + this.data.datos.descripcion),
       ip: this.commonServices.getIpAddress()
     }
-    console.log("datosEnviar: ", datosEnviar)
+    console.log("datosEnviar: ", datosEnviar);
     (this as any).mensajeSpinner = "Guardando por favor espere...";
     this.lcargando.ctlSpinner(true);
     this.chequeProtestadoService.protestarCheque(datosEnviar).subscribe((datos:any)=>{

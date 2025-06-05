@@ -516,7 +516,7 @@ export class ContratoComponent implements OnInit {
     // }
 
     try {
-      await this.validarDatos()
+      await this.validarDatos();
 
       (this as any).mensajeSpinner = 'Almacenando Contrato'
       this.lcargando.ctlSpinner(true);

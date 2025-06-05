@@ -79,7 +79,7 @@ export class EmailDestinatarioComponent implements OnInit {
       email: this.email,
       contrato: this.contrato.id,
       component: myVarGlobals.fRenContrato
-    }
+    };
 
     (this as any).mensajeSpinner = 'Enviando correo...'
     this.lcargando.ctlSpinner(true);

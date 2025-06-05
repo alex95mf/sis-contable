@@ -89,6 +89,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   readonlyInpuRubro: boolean;
   verNoEncontrados : boolean;
   consulta : boolean;
+  mensajeSpinner:  string;
 
   processing: any = false;
 
@@ -1615,7 +1616,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
           empleados: empleadosCheck
         }
 
-        console.log("datadecimoterce",data)
+        console.log("datadecimoterce",data);
         (this as any).mensajeSpinner = "Aprobando Ingresos y Descuentos...";
         this.lcargando.ctlSpinner(true);
         this.ingresosydescuentosService.aprobarIngresoDescuento(data).subscribe(res => {
@@ -1761,7 +1762,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
   async getLatest() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner= 'Cargando Registro'
+    this.mensajeSpinner= 'Cargando Registro';
     try {
       const response = await this.ingresosydescuentosService.getUltimoNumero()
       console.log(response)

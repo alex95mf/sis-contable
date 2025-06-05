@@ -300,7 +300,7 @@ export class ConsultaMovimientosComponent implements OnInit {
 	}
 
   exportExcel() {
-    let excelData = []
+    let excelData = [];
 
     (this as any).mensajeSpinner = 'Exportando Movimientos'
     this.lcargando.ctlSpinner(true);

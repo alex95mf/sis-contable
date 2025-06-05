@@ -1294,7 +1294,7 @@ sectorNombre: any;
   }
 
   async save(productSend, notify, filter, prefict, info, resultado) {
-    console.log(productSend)
+    console.log(productSend);
     (this as any).mensajeSpinner = "Guardando prestamo de bienes...";
     this.lcargando.ctlSpinner(true);
     let res = await this.validatePrice(productSend).then(res => {

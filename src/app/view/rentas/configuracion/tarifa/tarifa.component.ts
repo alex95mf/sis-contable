@@ -340,7 +340,7 @@ export class TarifaComponent implements OnInit {
     if (this.permissions.guardar === 0) {
       this.toastr.warning('No tiene permisos para guardar', this.fTitle)
       return
-    }
+    };
 
     (this as any).mensajeSpinner = 'Almacenando Tarifa'
     this.tarifa.estado = this.tarifa.estado ? 'A' : 'I'  // Altera el valor del estado de la tarifa para guardar en la base

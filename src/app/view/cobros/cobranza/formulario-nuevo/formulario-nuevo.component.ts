@@ -209,7 +209,7 @@ export class FormularioNuevoComponent implements OnInit {
       this.lcargando.ctlSpinner(false)
       this.toastr.warning(msgInvalid, 'Validacion de Datos', {enableHtml: true})
       return;
-    }
+    };
 
     (this as any).mensajeSpinner = "Cargando Liquidaciones...";
     // this.lcargando.ctlSpinner(true);

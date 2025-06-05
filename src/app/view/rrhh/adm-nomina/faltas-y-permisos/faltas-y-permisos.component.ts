@@ -1042,7 +1042,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
       flpr_observacion: this.formGroupFaltaAndPermiso.get('fnc_flpr_observacion').value,
       flpr_estado_id: 'EFPA',
       // formatDate(this.inputFechaIngreso.value,'yyyy-MM-dd',"en-US"),
-    }
+    };
     (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.saveFaultAndPermission(data).subscribe(
@@ -1101,7 +1101,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
       flpr_num_horas: this.formGroupFaltaAndPermiso.value.fnc_flpr_num_horas,
       flpr_observacion: this.formGroupFaltaAndPermiso.get('fnc_flpr_observacion').value,
       // formatDate(this.inputFechaIngreso.value,'yyyy-MM-dd',"en-US"),
-    }
+    };
     (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.updatedFaultAndPermission(data).subscribe(
@@ -1549,7 +1549,7 @@ export class FaltasYPermisosComponent implements OnInit, AfterViewInit {
       flpr_num_horas:  dataFP.flpr_num_horas,
       flpr_observacion:  dataFP.flpr_observacion,
       flpr_estado_id : $keywordVacDet
-    }
+    };
     (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.statusFaultAndPermission(data).subscribe(

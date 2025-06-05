@@ -254,7 +254,7 @@ export class BancariasComponent implements OnInit {
       ip: this.commonServices.getIpAddress(),
       accion: "Creación de nueva cuenta bancaria",
       id_controlador: myVarGlobals.fCuentaBancos
-    }
+    };
     (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.accSrv.saveAccount(data).subscribe(res => {
@@ -294,7 +294,7 @@ export class BancariasComponent implements OnInit {
       ip: this.commonServices.getIpAddress(),
       accion: "Actualización de nueva cuenta bancaria",
       id_controlador: myVarGlobals.fCuentaBancos
-    }
+    };
     (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.accSrv.updatedAccount(data).subscribe(res => {

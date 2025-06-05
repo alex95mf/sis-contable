@@ -774,7 +774,7 @@ export class AsientoCierreComponent implements OnInit {
       return;
     }
 
-    this.asientoCierre.fecha = this.filter.fecha_desde
+    this.asientoCierre.fecha = this.filter.fecha_desde;
     (this as any).mensajeSpinner = 'Consultando Asientos...';
     this.lcargando.ctlSpinner(true);
     this.asientoGuard.estado="";
@@ -2135,9 +2135,9 @@ export class AsientoCierreComponent implements OnInit {
          //   console.log(lineaTotales)
 
             this.RolGeneral.push(lineaTotales);
-          //  console.log(this.RolGeneral)
+          //  console.log(this.RolGeneral);
         // return
-        //console.log(this.RolGeneral)
+        //console.log(this.RolGeneral);
         this.vmButtons[5].habilitar = false;
 
         // let sinAprobar = this.RolGeneral.filter(e => e.tiene_control == false)
@@ -2212,7 +2212,7 @@ export class AsientoCierreComponent implements OnInit {
 
   btnExportarExcelNuevo(){
 
-console.log(this.RolGeneral)
+console.log(this.RolGeneral);
 
     this.RolGeneral.forEach(e => {
       Object.assign(e, {

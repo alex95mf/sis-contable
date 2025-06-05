@@ -266,7 +266,7 @@ export class CreacionComponent implements OnInit {
       ip: this.commonServices.getIpAddress(),
       accion: `Actualización de caja chica por el usuario ${this.dataUser.nombre}`,
       id_controlador: myVarGlobals.fCreaCajaChica
-    }
+    };
     (this as any).mensajeSpinner = "Modificando caja...";
     this.lcargando.ctlSpinner(true);
     this.crtSrv.updatedBoxSmall(data).subscribe(res => {
@@ -288,7 +288,7 @@ export class CreacionComponent implements OnInit {
       ip: this.commonServices.getIpAddress(),
       accion: `Creación de nueva caja chica por el usuario ${this.dataUser.nombre}`,
       id_controlador: myVarGlobals.fCreaCajaChica
-    }
+    };
     (this as any).mensajeSpinner = "Creando caja...";
     this.lcargando.ctlSpinner(true);
     this.crtSrv.saveBoxSmall(data).subscribe(res => {

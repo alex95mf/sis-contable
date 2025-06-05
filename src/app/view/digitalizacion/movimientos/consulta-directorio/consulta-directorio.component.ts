@@ -208,7 +208,7 @@ rutacompletadeldirectorioactuali:any;
 
   selectTipoDocumento(event){
 this.tipobusqueda = 'indices';
-   // this.limpiarFilter()
+   // this.limpiarFilter();
     (this as any).mensajeSpinner = 'Cargando Directorio...'
     this.lcargando.ctlSpinner(true);
 

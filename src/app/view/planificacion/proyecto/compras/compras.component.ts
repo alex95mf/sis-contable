@@ -378,7 +378,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
     if (this.permissions.guardar == 0) {
       this.toastr.warning('No tiene permisos para usar este recurso', this.fTitle)
       return
-    }
+    };
 
     (this as any).mensajeSpinner = 'Guardando datos...'
     this.lcargando.ctlSpinner(true);

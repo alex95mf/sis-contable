@@ -633,7 +633,7 @@ export class CierreGeneralComponent implements OnInit {
     // if(this.today!=this.fecha_consulta){
     //   this.toastr.info('No puede reabrir cajas de días pasados');
     //   return ;
-    // }
+    // };
 
     (this as any).mensajeSpinner = 'Reabriendo caja...';
     this.lcargando.ctlSpinner(true);

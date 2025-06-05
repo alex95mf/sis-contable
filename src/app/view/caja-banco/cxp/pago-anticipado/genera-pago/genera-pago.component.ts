@@ -166,7 +166,7 @@ export class GeneraPagoComponent implements OnInit {
       accion: "Generar pago anticipado del proveedor " + lgIdProveedor + " " + lgDescProveedor,
       id_controlador: this.data.myVarGlobals.fPagoAnticipado,
       datosComPago: compbt
-    }
+    };
 
     (this as any).mensajeSpinner = "Generando Pago Anticipado";
     this.lcargando.ctlSpinner(true);

@@ -259,7 +259,7 @@ export class PacComponent implements OnInit {
     }
     this.departamentos = []
     this.compras = []
-    this.vmButtons[0].habilitar = true
+    this.vmButtons[0].habilitar = true;
     (this as any).mensajeSpinner = 'Cargando Departamentos'
     this.lcargando.ctlSpinner(true);
     this.api.getDepartamentos(data).subscribe(
@@ -288,7 +288,7 @@ export class PacComponent implements OnInit {
   /* cargaMision(evt) {
     let data = {
       departamento: evt.nombre
-    }
+    };
     (this as any).mensajeSpinner = 'Cargando Mision'
     this.lcargando.ctlSpinner(true);
     this.api.getMision(data).subscribe(
@@ -315,7 +315,7 @@ export class PacComponent implements OnInit {
       departamento: evt
     }
     this.compras = []
-    this.vmButtons[0].habilitar = false
+    this.vmButtons[0].habilitar = false;
     (this as any).mensajeSpinner = 'Cargando detalles'
     // this.lcargando.ctlSpinner(true);
     this.api.getBienesPlus(data).subscribe(

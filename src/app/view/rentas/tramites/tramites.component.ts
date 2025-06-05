@@ -225,7 +225,7 @@ export class TramitesComponent implements OnInit {
   }
 
   exportExcel() {
-    let excelData = []
+    let excelData = [];
 
     (this as any).mensajeSpinner = 'Exportando Trámites'
     this.lcargando.ctlSpinner(true);

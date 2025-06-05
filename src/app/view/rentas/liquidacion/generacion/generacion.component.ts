@@ -1089,7 +1089,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   }
 
   async getUltimoRegistro(skip: number = 0) {
-    this.skip = skip
+    this.skip = skip;
     (this as any).mensajeSpinner = 'Cargado Registro'
     this.lcargando.ctlSpinner(true);
     try {

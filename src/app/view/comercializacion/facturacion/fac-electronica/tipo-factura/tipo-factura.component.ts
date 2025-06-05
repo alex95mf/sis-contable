@@ -303,7 +303,7 @@ export class TipoFacturaComponent implements OnInit {
 
     if(this.validaciones.verSiEsNull(item.codigo_acceso) == undefined){
       this.validaciones.mensajeAdvertencia("Advertencia","El documento XML no se encuentra generado.");
-    }
+    };
 
     (this as any).mensajeSpinner = "Extrayendo datos del XML...";
     this.lcargando.ctlSpinner(true);
@@ -336,7 +336,7 @@ export class TipoFacturaComponent implements OnInit {
     if(this.validaciones.verSiEsNull(item.codigo_acceso) == undefined){
       this.validaciones.mensajeAdvertencia("Advertencia","El documento XML no se encuentra generado.");
       return;
-    }
+    };
 
     (this as any).mensajeSpinner = "Extrayendo datos del XML...";
     this.lcargando.ctlSpinner(true);

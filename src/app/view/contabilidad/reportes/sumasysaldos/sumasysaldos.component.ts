@@ -352,7 +352,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
       clase: (this.claseSeleccionado == undefined) ? null : this.claseSeleccionado,
       grupo: (this.grupoSeleccionado == undefined) ? null : this.grupoSeleccionado,
       id_empresa: this.dataUser.id_empresa
-    }
+    };
     (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.balanceService.getAccountsFilters(data).subscribe(res => {

@@ -226,7 +226,7 @@ export class SueldosComponent implements OnInit {
         filter: this.filter,
         paginate: this.paginate
       }
-    }
+    };
     (this as any).mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getSueldos(data).subscribe(

@@ -1180,7 +1180,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
         if (res.value) {
           let data = {
             idToDelete: item
-          }
+          };
 
           (this as any).mensajeSpinner = 'Eliminando registro'
           this.lcargando.ctlSpinner(true);

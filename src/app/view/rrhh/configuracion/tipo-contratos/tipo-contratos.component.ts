@@ -536,7 +536,7 @@ export class TipoContratosComponent implements OnInit {
       cantidad_tiempo: this.formGroupTiposContratos.value.fcn_cat_det_cantidad_tiempo,
       id_tiempo: this.unidad_tiempo_id_cc,
 
-    }
+    };
     (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.tiposContratosService.createOrUpdateCatalogDetailWorkTime(data).subscribe(
@@ -806,7 +806,7 @@ export class TipoContratosComponent implements OnInit {
       cantidad_dias_vencer: this.formGroupConfigurarRemitenteAlertas.value.fcn_cantidad_dias_vencer,
       hora: this.formGroupConfigurarRemitenteAlertas.value.fcn_hora,
 
-    }
+    };
     (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.tiposContratosService.createOrUpdateTiempoContratoCorreo(data).subscribe(
@@ -892,7 +892,7 @@ export class TipoContratosComponent implements OnInit {
       subject             : this.formGroupTestEmail.value.fcn_subject_test,
       mailDestination     : this.formGroupTestEmail.value.fcn_mail_destinationt,
 
-    }
+    };
     (this as any).mensajeSpinner = "Enviando Correo Test...";
     this.lcargando.ctlSpinner(true);
     this.tiposContratosService.testEmailSend(data).subscribe(
@@ -1061,7 +1061,7 @@ export class TipoContratosComponent implements OnInit {
       smtp_password       : this.formGroupEmailConfig.value.fcn_clave_smpt,
       address             : this.formGroupEmailConfig.value.fcn_usuario_smtp,
       name: null
-    }
+    };
     (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.tiposContratosService.createOrUpdateSmtpEmail(data).subscribe(
@@ -1219,7 +1219,7 @@ export class TipoContratosComponent implements OnInit {
       accion: "enviar correo  rrhh",
       id_controlador: myVarGlobals.fCuentaBancos,
       id_empresa          : this.dataUser.id_empresa,
-    }
+    };
     (this as any).mensajeSpinner = "Enviando correos...";
     this.lcargando.ctlSpinner(true);
     this.tiposContratosService.sendEmailServer(data).subscribe(

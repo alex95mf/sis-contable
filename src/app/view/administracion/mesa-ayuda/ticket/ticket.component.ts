@@ -403,7 +403,7 @@ export class TicketComponent implements OnInit {
   getOrganigrama() {
     let data = {
       id_empresa: this.dataUser.id_empresa
-    }
+    };
 
     (this as any).mensajeSpinner = "Buscando organigrama...";
     this.lcargando.ctlSpinner(true);

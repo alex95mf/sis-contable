@@ -354,7 +354,7 @@ export class RolesComponent implements OnInit {
       url_reporting_serve : $url_reporting_serve,
       mes: mes,
       anio : year,
-    }
+    };
     (this as any).mensajeSpinner = "Enviando correos...";
     this.lcargando.ctlSpinner(true);
     this.benefrolesService.sendEmailRolesPagos(data).subscribe(

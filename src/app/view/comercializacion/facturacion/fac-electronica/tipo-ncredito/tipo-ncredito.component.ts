@@ -151,7 +151,7 @@ export class TipoNcreditoComponent implements OnInit {
     if(valor.estado_sri == "T"){
       this.validaciones.mensajeAdvertencia("Advertencia","El documento ya se encuentra autorizado por el SRI.");
       return;
-    }
+    };
 
     (this as any).mensajeSpinner = "Generando XML por favor espere...";
     this.lcargando.ctlSpinner(true);
@@ -259,7 +259,7 @@ export class TipoNcreditoComponent implements OnInit {
     if(valor.estado_sri == "AUTORIZADO"){
       this.validaciones.mensajeAdvertencia("Advertencia","El documento ya se encuentra autorizado");
       return;
-    }
+    };
 
     (this as any).mensajeSpinner = "Reprocesando Documento...";
     this.lcargando.ctlSpinner(true);
@@ -285,7 +285,7 @@ export class TipoNcreditoComponent implements OnInit {
     if(this.validaciones.verSiEsNull(item.codigo_acceso) == undefined){
       this.validaciones.mensajeAdvertencia("Advertencia","El documento XML no se encuentra generado.");
       return;
-    }
+    };
 
     (this as any).mensajeSpinner = "Extrayendo datos del XML...";
     this.lcargando.ctlSpinner(true);

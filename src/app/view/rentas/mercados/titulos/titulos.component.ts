@@ -213,7 +213,7 @@ export class TitulosComponent implements OnInit {
   getContratoDetalles() {
     if (this.chk_simulacion) {
       Object.assign(this.filter, { estado: null })
-    }
+    };
 
     (this as any).mensajeSpinner = 'Cargando Titulos por Cobrar...'
     this.lcargando.ctlSpinner(true);

@@ -229,7 +229,7 @@ export class PuestoMercadoComponent implements OnInit {
         filter: this.filter,
         paginate: this.paginate,
       }
-    }
+    };
 
     (this as any).mensajeSpinner = 'Cargando Puestos...';
     // this.lcargando.ctlSpinner(true);

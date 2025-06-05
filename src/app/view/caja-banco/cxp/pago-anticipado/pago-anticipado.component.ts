@@ -138,7 +138,7 @@ export class PagoAnticipadoComponent implements OnInit {
         if(this.validaciones.verSiEsNull(lIdentificacion) == undefined){
           this.validaciones.mensajeAdvertencia("Adertencia","Por favor selecione un proveedor");
           return;
-        }
+        };
         (this as any).mensajeSpinner = "Seteando valores...";
         this.lcargando.ctlSpinner(true);
         this.pagoAnticipadoService.getAccountsByDetails({ company_id: this.dataUser.id_empresa }).subscribe((res) => {

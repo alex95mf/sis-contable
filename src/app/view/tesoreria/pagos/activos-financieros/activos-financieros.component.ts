@@ -204,7 +204,7 @@ export class ActivosFinancierosComponent implements OnInit {
           
           let data = {
             mercado: this.mercados.find(m => m.id == res.fk_mercado)
-          }
+          };
           
           (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
           this.puestos_filter = this.puestos.filter(e => e.fk_mercado == res.fk_mercado)
@@ -518,7 +518,7 @@ export class ActivosFinancierosComponent implements OnInit {
     let data = {
       mercado: this.documento.mercado
     }
-    this.documento.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto
+    this.documento.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto;
     (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
     this.lcargando.ctlSpinner(true);
     this.puestos = []

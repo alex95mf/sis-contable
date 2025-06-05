@@ -155,7 +155,7 @@ export class ArriendoterrenosComponent implements OnInit {
 
     this.commonVarService.selectListLiqArriendo.asObservable().subscribe(
       (res) => {
-        console.log(res)
+        console.log(res);
         (this as any).mensajeSpinner = 'Cargando datos de la liquidación...';
         this.lcargando.ctlSpinner(true);
         this.restoreForm(false, false);
@@ -993,7 +993,7 @@ calcTotal() {
   validarSta(){
     let data = {
       concepto: 'AR'
-    }
+    };
     (this as any).mensajeSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
 

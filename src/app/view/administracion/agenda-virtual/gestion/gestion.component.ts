@@ -357,7 +357,7 @@ export class GestionComponent implements OnInit {
           fecha_hasta: moment(next_fecha).format('YYYY-MM-DD')
         }
       }
-    }
+    };
 
     (this as any).mensajeSpinner = "Cargando eventos del calendario...";
     this.lcargando.ctlSpinner(true);

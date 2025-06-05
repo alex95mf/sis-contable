@@ -674,7 +674,7 @@ export class GeneracionValorComponent implements OnInit {
   validarSta(){
     let data = {
       concepto: 'EP'
-    }
+    };
     (this as any).mensajeSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
 

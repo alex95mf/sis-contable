@@ -297,7 +297,7 @@ export class PresupuestoComponent implements OnInit {
   } */
 
   /* selectDept(event) {
-    // this.attrDept = this.atribuciones.filter(a => a.departamento == event)
+    // this.attrDept = this.atribuciones.filter(a => a.departamento == event);
     (this as any).mensajeSpinner = 'Cargando Bienes y Servicios'
     this.bienesAttr = []
 
@@ -351,7 +351,7 @@ export class PresupuestoComponent implements OnInit {
     if (this.permissions.guardar == '0') {
       this.toastr.warning('No tiene los permisos para usar este recurso', this.fTitle)
       return
-    }
+    };
 
     (this as any).mensajeSpinner = 'Almacenando cambios'
     let data = {

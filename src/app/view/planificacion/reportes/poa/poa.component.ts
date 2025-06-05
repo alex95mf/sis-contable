@@ -254,7 +254,7 @@ export class PoaComponent implements OnInit {
       this.toastr.warning("No tiene permitido consultar", this.fTitle);
       this.lcargando.ctlSpinner(false)
       return
-    }
+    };
 
     (this as any).mensajeSpinner = 'Cargando Programas'
     this.lcargando.ctlSpinner(true);
@@ -318,7 +318,7 @@ export class PoaComponent implements OnInit {
     this.obj_componentes = {}
     let data = {
       programa: evt
-    }
+    };
     (this as any).mensajeSpinner = 'Cargando Objetivos y Componentes'
 
     this.api.getObjetivosComponentes(data).subscribe(
@@ -338,7 +338,7 @@ export class PoaComponent implements OnInit {
   /* cargaMision(evt) {
     let data = {
       departamento: evt.nombre
-    }
+    };
     (this as any).mensajeSpinner = 'Cargando Mision'
 
     this.lcargando.ctlSpinner(true);
@@ -376,7 +376,7 @@ export class PoaComponent implements OnInit {
   /* cargaAtribuciones(evt) {
     let data = {
       departamento: evt
-    }
+    };
     (this as any).mensajeSpinner = 'Cargando Atribuciones'
     this.atribuciones = []
 

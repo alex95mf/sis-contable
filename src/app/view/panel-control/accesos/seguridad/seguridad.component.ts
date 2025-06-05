@@ -983,7 +983,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
     this.dborrar = false;
     let data = {
       id_user: dt.id_usuario
-    }
+    };
 
     (this as any).mensajeSpinner = "Seteando valores...";
     this.lcargando.ctlSpinner(true);

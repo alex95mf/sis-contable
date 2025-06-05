@@ -1296,7 +1296,7 @@ this.tieneFondo = false
       id_empresa:this.dataUser.id_empresa
     };
     console.log(data)
-    console.log('aun no modifica')
+    console.log('aun no modifica');
     // this.validaDt = false;
     (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);

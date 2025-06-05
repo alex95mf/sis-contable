@@ -261,7 +261,7 @@ export class BovedasComponent implements OnInit {
       ip: this.commonServices.getIpAddress(),
       accion: `Creación de nueva cuenta boveda en la sucursal ${this.boveda.name_jefe_cuenta}`,
       id_controlador: myVarGlobals.fBovedas
-    }
+    };
     (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.accSrv.saveAccount(data).subscribe(res => {

@@ -243,7 +243,7 @@ export class ModalCampaignDetailsComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true);
       try {
-        Object.assign(this.campaign, { conceptos: this.lst_concepto })
+        Object.assign(this.campaign, { conceptos: this.lst_concepto });
         (this as any).mensajeSpinner = 'Almacenando Campaña'
         let campaign = await this.apiService.setCampaign({ campaign: this.campaign })
         console.log(campaign)

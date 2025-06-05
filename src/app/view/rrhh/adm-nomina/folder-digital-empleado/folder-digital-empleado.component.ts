@@ -602,7 +602,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
             accion: `Información eliminada de grupo con identificación ${this.id_grupo}  a nombre ${this.noms}`,
             id_controlador: myVarGlobals.fGrupo,
             id_grupo: this.id_grupo,
-          }
+          };
           (this as any).mensajeSpinner = "Eliminando...";
           this.lcargando.ctlSpinner(true);
           this.grupoServices.deleteGrupo(data).subscribe(res => {

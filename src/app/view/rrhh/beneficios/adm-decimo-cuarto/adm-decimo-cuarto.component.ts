@@ -1164,7 +1164,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
     if (!valida) {
       this.validaciones.mensajeInfo("Informativo", "No existe informacion a aprobar");
       return;
-    }
+    };
 
     (this as any).mensajeSpinner = "Apobando decimo cuarto por favor espere...";
     this.lcargando.ctlSpinner(true);
@@ -1638,7 +1638,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
 
   btnExportExcel() {
 
-    if (this.cmb_region == null) { this.cmb_region_temp = "0" } else { this.cmb_region_temp = this.cmb_region }
+    if (this.cmb_region == null) { this.cmb_region_temp = "0" } else { this.cmb_region_temp = this.cmb_region };
 
     (this as any).mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
@@ -1702,7 +1702,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
   }
 
   btnExportExcelPorFecha(){
-    if (this.cmb_region == null) { this.cmb_region_temp = "0" } else { this.cmb_region_temp = this.cmb_region }
+    if (this.cmb_region == null) { this.cmb_region_temp = "0" } else { this.cmb_region_temp = this.cmb_region };
 
     (this as any).mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);

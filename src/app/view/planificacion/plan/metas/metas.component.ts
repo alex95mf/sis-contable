@@ -713,7 +713,7 @@ export class MetasComponent implements OnInit {
 
       nuevo: this.seleccion
     };
-    // console.log(data)
+    // console.log(data);
     (this as any).mensajeSpinner = 'Guardando Metas por Programa...';
 
     this.lcargando.ctlSpinner(true);

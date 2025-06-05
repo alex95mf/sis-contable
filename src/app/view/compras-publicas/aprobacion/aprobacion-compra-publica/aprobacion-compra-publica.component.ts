@@ -148,7 +148,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
   }
 
   asignarIcp(){
-    console.log(this.item.id_solicitud)
+    console.log(this.item.id_solicitud);
     (this as any).mensajeSpinner = "Asignando ICP ...";
     this.lcargando.ctlSpinner(true);
     let data = {

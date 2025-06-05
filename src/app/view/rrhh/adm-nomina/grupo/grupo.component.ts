@@ -202,7 +202,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
               id_controlador: myVarGlobals.fGrupo,
               nombre_grupo: this.noms,
               comision: (this.checkAuth) ? "1" : "0",
-            }
+            };
             (this as any).mensajeSpinner = "Guardando...";
             this.lcargando.ctlSpinner(true);
             this.grupoServices.saveGrupo(data).subscribe(res => {
@@ -302,7 +302,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
             id_grupo: this.id_grupo,
             nombre_grupo: this.noms,
             comision: (this.checkAuth) ? "1" : "0",
-          }
+          };
           (this as any).mensajeSpinner = "Modificando...";
           this.lcargando.ctlSpinner(true);
           this.grupoServices.updateGrupo(data).subscribe(res => {
@@ -337,7 +337,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
             accion: `Información eliminada de grupo con identificación ${this.id_grupo}  a nombre ${this.noms}`,
             id_controlador: myVarGlobals.fGrupo,
             id_grupo: this.id_grupo,
-          }
+          };
           (this as any).mensajeSpinner = "Eliminando...";
           this.lcargando.ctlSpinner(true);
           this.grupoServices.deleteGrupo(data).subscribe(res => {

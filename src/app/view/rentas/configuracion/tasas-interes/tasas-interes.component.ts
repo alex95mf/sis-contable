@@ -198,7 +198,7 @@ export class TasasInteresComponent implements OnInit {
       let data = {
         periodo: Number(this.periodoSelected),
         //mes:
-      }
+      };
       (this as any).mensajeSpinner = 'Inicializando Intereses'
       this.lcargando.ctlSpinner(true);
       this.apiService.inicializarSp(data).subscribe(res => {
@@ -233,7 +233,7 @@ export class TasasInteresComponent implements OnInit {
         periodo: Number(item.periodo),
         mes: Number(item.mes),
         cuenta: ''
-      }
+      };
       (this as any).mensajeSpinner = 'Calculando Intereses'
       this.lcargando.ctlSpinner(true);
       this.apiService.calcularInteresSp(data).subscribe(res => {

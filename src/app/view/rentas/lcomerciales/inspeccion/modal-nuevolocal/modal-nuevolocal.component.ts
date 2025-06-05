@@ -468,7 +468,7 @@ export class ModalNuevolocalComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      // this.local['fk_contribuyente'] = { id_cliente: this.contribuyente.id_cliente }
+      // this.local['fk_contribuyente'] = { id_cliente: this.contribuyente.id_cliente };
       (this as any).mensajeSpinner = 'Almacenando Nuevo Local'
       this.lcargando.ctlSpinner(true);
 

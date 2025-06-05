@@ -159,7 +159,7 @@ export class ModalComponent implements OnInit {
       precio_total: this.precio_total,
       fecha: this.fecha,
       factura: this.factura,
-    }
+    };
 
     (this as any).mensajeSpinner = 'Almacenando Compras'
     this.lcargando.ctlSpinner(true);

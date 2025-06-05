@@ -847,7 +847,7 @@ export class LiquidacionComponent implements OnInit {
   validarSta(){
     let data = {
       concepto: 'TA'
-    }
+    };
     (this as any).mensajeSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
 
@@ -1035,7 +1035,7 @@ export class LiquidacionComponent implements OnInit {
   }
 
   async getUltimoRegistro(skip: number = 0) {
-    this.skip = skip
+    this.skip = skip;
     (this as any).mensajeSpinner = 'Cargado Registro'
     this.lcargando.ctlSpinner(true);
     try {

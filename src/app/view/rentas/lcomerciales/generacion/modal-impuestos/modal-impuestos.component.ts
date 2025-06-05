@@ -73,7 +73,7 @@ export class ModalImpuestosComponent implements OnInit {
       // Listado de Impuestos
       orden_inspeccion: { numero: this.ordenActive.numero_orden },
       impuestos: ['PESAYMEDIDA', 'INTRODUCTOR', 'LOCALES TURISTICOS', 'PATENTE', 'VIA PUBLICA', '1,5', 'LETREROS']
-    }
+    };
 
     (this as any).mensajeSpinner = "Obteniendo valores"
     this.lcargando.ctlSpinner(true);

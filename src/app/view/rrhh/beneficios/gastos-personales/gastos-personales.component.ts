@@ -705,7 +705,7 @@ export class GastosPersonalesComponent implements OnInit {
       let data = {
         cargas: cargas,
         periodo: periodo
-      }
+      };
       (this as any).mensajeSpinner = 'Obteniendo Tope de Gastos Personales'
       let response = await this.gastospersonalesService.getMaxGastosPersonales({data})
       console.log(response)
@@ -724,7 +724,7 @@ export class GastosPersonalesComponent implements OnInit {
       let data = {
         porcentaje: porcentaje,
         periodo: periodo
-      }
+      };
       (this as any).mensajeSpinner = 'Obteniendo Rebaja por Discapacidad'
       let response = await this.gastospersonalesService.getRebajaDiscapacidad({data})
       if(response.valor == undefined){
@@ -744,7 +744,7 @@ export class GastosPersonalesComponent implements OnInit {
     try {
       let data= {
         periodo: periodo
-      }
+      };
       (this as any).mensajeSpinner = 'Obteniendo Rebaja por Tercera Edad'
       let response = await this.gastospersonalesService.getRebajaTerceraEdad({data})
       console.log(response)

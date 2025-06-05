@@ -274,13 +274,12 @@ export class AprobacionComponent implements OnInit {
 
   btnExportar() {
   
-    // @ts-ignore
     let data = {
       params: {
         filter: this.filter,
       
       }
-    }
+    };
     (this as any).mensajeSpinner = "Generando reporte Excel...";
     this.lcargando.ctlSpinner(true);
     //this.apiSrv.getRecDocumentosExport(data).subscribe(

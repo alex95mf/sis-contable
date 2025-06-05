@@ -251,7 +251,7 @@ export class ProveedoresComponent implements OnInit {
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
-    }
+    };
 
     (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
@@ -347,7 +347,7 @@ export class ProveedoresComponent implements OnInit {
       accion: `Registro de pago de retención tipo ${this.contacts.cxp_cab['type']} (${this.contacts.purchase['num_doc']})`,
       id_controlador: myVarGlobals.fPagoProveedores,
       punto_emision: this.current_box.punto_emision
-    }
+    };
 
     (this as any).mensajeSpinner = "Guardando retencion...";
     this.lcargando.ctlSpinner(true);

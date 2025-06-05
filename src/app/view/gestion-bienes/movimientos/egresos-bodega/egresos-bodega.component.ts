@@ -1386,7 +1386,7 @@ export class EgresosBodegaComponent implements OnInit {
   }
 
   async save(productSend, notify, filter, prefict, info, resultado) {
-    console.log(productSend)
+    console.log(productSend);
     (this as any).mensajeSpinner = "Guardando egreso de bodega...";
     this.lcargando.ctlSpinner(true);
     this.validatePrice(productSend).then(res => {

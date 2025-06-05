@@ -356,7 +356,7 @@ export class GruposComponent implements OnInit {
     }).then(async (result: any) => {
       if (result.isConfirmed && !result.isDenied) {
         // Grupo
-        // console.log('Nuevo Grupo')
+        // console.log('Nuevo Grupo');
         (this as any).mensajeSpinner = 'Generando codigo'
         this.lcargando.ctlSpinner(true);
         let response = await this.apiService.getLastChild({parent: this.grupo.codigo_padre});
@@ -386,7 +386,7 @@ export class GruposComponent implements OnInit {
         this.vmButtons[2].habilitar = true
       } else if (!result.isConfirmed && result.isDenied) {
         // Subgrupo
-        // console.log('Nuevo Subgrupo')
+        // console.log('Nuevo Subgrupo');
         (this as any).mensajeSpinner = 'Generando codigo'
         this.lcargando.ctlSpinner(true);
         let response = await this.apiService.getLastChild({parent: this.grupo.codigo_grupo_producto});

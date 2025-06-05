@@ -432,7 +432,7 @@ export class PrestamosComponent implements OnInit {
 			nombreEmpleado: this.prestamos.nombre,
 			datos: this.prestamos
 		};
-		console.log("data: ", data)
+		console.log("data: ", data);
 		(this as any).mensajeSpinner = "Guardando...";
 		this.lcargando.ctlSpinner(true);
 		this.prestamosSrvc.savePrestamos(data).subscribe((res) => {

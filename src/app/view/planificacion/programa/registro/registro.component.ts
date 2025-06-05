@@ -343,7 +343,7 @@ export class RegistroComponent implements OnInit {
     )
   } */
 
-  /* getPresupuestoDepartamentos() { // WIP
+  /* getPresupuestoDepartamentos() { // WIp;
     (this as any).mensajeSpinner = 'Cargando Presupuestos por Departamento'
     let data = {
       presupuesto_id: this.programa.presupuesto.id,
@@ -450,7 +450,7 @@ export class RegistroComponent implements OnInit {
       programa_id: this.programa.id,
       presupuesto_id: this.programa.presupuesto.id,
       departamentos: this.departamentos
-    }
+    };
 
     (this as any).mensajeSpinner = 'Almacenando Presupuesto de Departamentos'
     this.lcargando.ctlSpinner(true);
