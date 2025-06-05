@@ -114,7 +114,7 @@ export class NuevoTipoContratoComponent implements OnInit {
      
     }
 
-    console.log(this.data)
+    console.log(this.data);
     console.log(this.isNew)
     if (!this.isNew) {
       this.documento = JSON.parse(JSON.stringify(this.data));

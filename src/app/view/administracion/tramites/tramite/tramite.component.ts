@@ -522,7 +522,7 @@ UploadService(file, payload?: any): void {
 
 
   selectedHito(event){
-    console.log(event)
+    console.log(event);
     //if (event.checked.length > 0) {
       if (event) {
       this.filter.tiene_hito= 'S';

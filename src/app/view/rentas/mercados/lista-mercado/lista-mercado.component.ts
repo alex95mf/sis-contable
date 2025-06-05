@@ -150,7 +150,7 @@ export class ListaMercadoComponent implements OnInit {
 
 
   metodoGlobal(event) {
-    // console.log(event)
+    // console.log(event);
     switch (event.items.boton.texto) {
       case "EXCEL":
         this.exportarExcel()

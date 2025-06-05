@@ -243,7 +243,7 @@ export class InformacionGestionComponent implements OnInit {
   }
 
   filterByTipoBien(event: any) {
-    // console.log(event)
+    // console.log(event);
     if (event != undefined && this.selectedReporte == 'PSG') {
       this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Filtrando Grupos por Tipo de Bien'

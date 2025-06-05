@@ -462,7 +462,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
   }
 
   selectMercadoHandler(event: any) {
-    console.log(event)
+    console.log(event);
     this.puestos_filter = this.puestos.filter(e => e.fk_mercado == event.id)
     console.log(this.puestos_filter)
   }

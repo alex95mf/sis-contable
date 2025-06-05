@@ -13,7 +13,7 @@ standalone: false,
   styleUrls: ["./organizacion.component.scss"],
 })
 export class OrganizacionComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   dataUser: any;
@@ -23,7 +23,7 @@ export class OrganizacionComponent implements OnInit {
   dataPie: any[];
   colorScheme = {
     domain: ['#2F3E9E', '#D22E2E', '#378D3B', '#0096A6', '#F47B00', '#606060']
-  }; 
+  };
 
   colorSchemeCharts = [
     {domain: ['#000099', '#E5E5F4']},
@@ -518,7 +518,7 @@ export class OrganizacionComponent implements OnInit {
   metodoGlobal = (event) => {
     switch (event.items.boton.texto) {
       case " IMPRIMIR":
-        
+
         break;
     }
   }

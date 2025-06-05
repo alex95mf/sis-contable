@@ -128,7 +128,7 @@ export class ModalDescuentosComponent implements OnInit {
   }
 
   handleSelectMes({value}) {
-    // console.log(event)
+    // console.log(event);
     this.fecha.month(value - 1)
     Object.assign(this.registro, {
       desde: this.fecha.startOf('month').format('D'),

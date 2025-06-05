@@ -193,7 +193,7 @@ export class ConsultaTitulosComponent implements OnInit {
   }
 
   handlerSelectedConcepto(event){
-    console.log(event)
+    console.log(event);
     if(event!=undefined){
       this.filter.concepto = event.id;
       this.filter.codigo = event.codigo;

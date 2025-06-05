@@ -718,7 +718,7 @@ export class EmisionComponent implements OnInit {
   }
 
   formaPagoSelected(event){
-    console.log(event)
+    console.log(event);
     if(event == 'TRANSFERENCIA'){
       this.mostrarCuentas = true;
       this.mostrarMovimientos = false;
@@ -1017,7 +1017,7 @@ export class EmisionComponent implements OnInit {
 
   restar(deuda) {
     deuda.nuevo_saldo = +deuda.saldo - +deuda.cobro;
-    //console.log(event)
+    //console.log(event);
     console.log(this.deudas)
     this.calcCobroTotal();
 
@@ -1726,7 +1726,7 @@ export class EmisionComponent implements OnInit {
   // }
 
   // generarAsientoCuenta(event){
-  //     console.log(event)
+  //     console.log(event);
   //     this.asiento.push({
   //       LoadOpcionCatalogoPresupuesto: false,
   //       presupuesto: '',

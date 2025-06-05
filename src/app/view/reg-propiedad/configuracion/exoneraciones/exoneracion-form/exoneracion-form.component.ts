@@ -109,7 +109,7 @@ export class ExoneracionFormComponent implements OnInit {
       
       if(!this.isNuevo) {
         
-        console.log(this.data)
+        console.log(this.data);
         let data = {
           concepto: {
             id: this.data.id

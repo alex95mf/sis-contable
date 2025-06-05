@@ -336,7 +336,7 @@ export class ContratoComponent implements OnInit {
   }
 
   metodoGlobal(event) {
-    // console.log(event)
+    // console.log(event);
     switch (event.items.boton.texto) {
       case "GUARDAR":
         this.setContrato()

@@ -239,7 +239,7 @@ export class ConsultaCobrosComponent implements OnInit {
   }
 
   handlerSelectedConcepto(event){
-    console.log(event)
+    console.log(event);
     if(event!=undefined){
       this.filter.concepto = event.id;
       this.filter.codigo = event.codigo;
@@ -250,7 +250,7 @@ export class ConsultaCobrosComponent implements OnInit {
     
   }
   asignarTipoCobro(event){
-    console.log(event)
+    console.log(event);
     this.dataCobros=[]
     if(event == 'TITULO'){
       this.porTitulo=true

@@ -388,13 +388,13 @@ export class JornadaComponent implements OnInit {
 
   }
   selectedEstado(event){
-    console.log(event)
+    console.log(event);
     this.estado= event
     this.id_estado = event
   }
 
   selectedAlmuerza(event){
-    console.log(event)
+    console.log(event);
     this.almuerza= event
     this.id_estado_almuerza = event
   }

@@ -2085,7 +2085,7 @@ async cargaInicial() {
   }
 
   verificar(event) {
-    console.log(event)
+    console.log(event);
     if (event.tipo_bien == "BLD") {
       this.vidautilDisabled = false
       this.serieDisabled = false

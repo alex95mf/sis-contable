@@ -522,7 +522,7 @@ export class ParametrosComponent implements OnInit {
 
 
   directorioSelected(event,index) {
-    console.log(event)
+    console.log(event);
     for (let i=0; i<this.listaParametros.length;i++){
       if(i==index) {
         this.listaParametros[i].es_directorio = event;

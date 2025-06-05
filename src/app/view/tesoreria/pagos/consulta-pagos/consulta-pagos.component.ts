@@ -186,7 +186,7 @@ export class ConsultaPagosComponent implements OnInit {
   }
 
   handlerSelectedConcepto(event){
-    console.log(event)
+    console.log(event);
     if(event!=undefined){
       this.filter.concepto = event.id;
       this.filter.codigo = event.codigo;
@@ -199,7 +199,7 @@ export class ConsultaPagosComponent implements OnInit {
 
 
   selectedTipoDoc(event){
-    console.log(event)
+    console.log(event);
     if(event == 'PAGO'){
       if(this.dataPagos.length > 0){
         this.vmButtons[1].habilitar = false

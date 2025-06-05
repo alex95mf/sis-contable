@@ -217,7 +217,7 @@ export class MovimientoBancarioFormComponent implements OnInit {
     if(event){
       this.movimiento.id_banco = event
       console.log(this.arrayBanks)
-      console.log(event)
+      console.log(event);
       let bancoFilter = this.arrayBanks.filter(e => e.id_banks == event)
       console.log(bancoFilter)
       this.movimiento.cuenta_banco = bancoFilter[0].cuenta_contable

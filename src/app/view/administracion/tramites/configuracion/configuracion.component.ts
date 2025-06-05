@@ -1019,7 +1019,7 @@ reordenarPasos() {
   }
 
   rolSelected(event){
-    console.log(event)
+    console.log(event);
     if(event.id_rol){
       this.disabled= false;
     }  else {

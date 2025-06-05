@@ -162,7 +162,7 @@ export class ModalModSetComponent implements OnInit {
 
     setTimeout(() => {
 
-      console.log(this.data)
+      console.log(this.data);
       this.getCatalogo();
       if(!this.isNew){
         this.rubro.id_rubro = this.data.id_rubro

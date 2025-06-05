@@ -141,7 +141,7 @@ export class RegistroComponent implements OnInit {
   }
 
   async cargaPresupuesto(event) {
-    console.log(event)
+    console.log(event);
     // Se ha presionado Cancelar
     if (event == undefined) return;
 

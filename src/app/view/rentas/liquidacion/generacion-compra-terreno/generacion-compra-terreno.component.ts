@@ -501,7 +501,7 @@ validaDataGlobal() {
   }
 
   verificarTipoCompra(event){
-  console.log(event)
+  console.log(event);
   }
 
   sumaMtsLinderos(){

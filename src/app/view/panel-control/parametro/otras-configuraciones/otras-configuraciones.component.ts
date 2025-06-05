@@ -168,7 +168,7 @@ export class OtrasConfiguracionesComponent implements OnInit {
   }
 
   handleSelectModulo({id_catalogo, tipo, valor, descripcion}) {
-    // console.log(event)
+    // console.log(event);
     Object.assign(this.filter, { codigo: null, tipo: null })
     // this.cmb_tipo_filtered = this.cmb_tipo.filter((element: any) => element.grupo == valor)
   }

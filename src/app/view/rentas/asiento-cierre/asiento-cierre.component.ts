@@ -2344,7 +2344,7 @@ console.log(this.RolGeneral)
   consultaTipoAsiento(event){
    // [ngClass]="{'d-none': filter.tipo_asiento == 'ASIENTO_PROVISIONES' || filter.tipo_asiento == 'DEVENGADO_NOMINA'  || filter.tipo_asiento == 'CRUCE_ANTICIPO' }"
 
- //  console.log(event)
+ //  console.log(event);
 
 
    if(event == 'PAGADO_TERCEROS'){

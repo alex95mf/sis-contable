@@ -506,7 +506,7 @@ codigoActa:any;
   }
 
   custodioCheck(event){
-    //console.log(event)
+    //console.log(event);
     console.log(this.tieneCustodio)
     if(!this.tieneCustodio){
       console.log('tiene custodio')
@@ -660,7 +660,7 @@ codigoActa:any;
     })
   }
   mostrarCampos(event){
-    console.log(event)
+    console.log(event);
     this.disabledBienes = false;
     this.aplicarConfig = []
     // if(event=='1'){

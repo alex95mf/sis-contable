@@ -160,7 +160,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   dataUser: any;
 
   cambiarPeriodoLabel(event){
-    console.log(event)
+    console.log(event);
     this.labelPeriodo = event.periodo - 1 +'-'+ event.periodo +' (Dic a Nov)'
   }
   permisos() {

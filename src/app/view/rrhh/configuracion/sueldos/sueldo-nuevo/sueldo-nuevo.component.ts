@@ -64,7 +64,7 @@ export class SueldoNuevoComponent implements OnInit {
       { orig: "btnSueldo", paramAccion: "", boton: { icon: "fa fa-times", texto: "REGRESAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-danger btn-sm", habilitar: false, imprimir: false}
   ]
  
-    console.log(this.data)
+    console.log(this.data);
     this.id_sueldo=this.data['id_sueldo'];
     //this.sueldo = JSON.parse(JSON.stringify(this.data));
     this.sueldo.grupo_ocupacional=this.data['id_ocupacion'];

@@ -123,7 +123,7 @@ export class ConceptoFormComponent implements OnInit {
     }
 
     setTimeout(() => {
-      console.log(this.data)
+      console.log(this.data);
       
       // this.getCatalogs();
       if (!this.isNew) {

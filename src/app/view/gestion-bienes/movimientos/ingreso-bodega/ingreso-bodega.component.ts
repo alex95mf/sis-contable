@@ -2013,9 +2013,9 @@ export class IngresoBodegaComponent implements OnInit {
 
   verificar(event) {
 
-    console.log(event)
+    console.log(event);
     if (event.tipo_bien == "EXI" || event.tipo_bien == "EX") {
-      console.log(event)
+      console.log(event);
       this.catalogoDisabled = true
       // this.expandProductos()
     }

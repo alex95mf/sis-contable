@@ -190,7 +190,7 @@ export class NotifConfigComponent implements OnInit, OnDestroy {
   }
 
   filterTipoNotificacion({nombre}) {
-    // console.log(event)
+    // console.log(event);
  //   this.lst_tipo_filter = this.lst_tipo_notificacion.filter((element: any) => element.grupo == nombre)
 
     this.lst_tipo_filter = this.lst_tipo_notificacion;

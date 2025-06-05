@@ -118,7 +118,7 @@ export class ModalCreateComponent implements OnInit {
   }
 
   handleSelectTipo(event) {
-    console.log(event)
+    console.log(event);
     Object.assign(this.auxiliar, { tip_aux: event.valor, nom_tip_aux: event.descripcion })
   }
 

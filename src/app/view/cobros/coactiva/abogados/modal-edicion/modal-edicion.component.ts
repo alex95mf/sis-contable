@@ -78,7 +78,7 @@ export class ModalEdicionComponent implements OnInit {
     fillAbogado() {
       (this as any).mensajeSpinner = "Cargando datos...";
       this.lcargando.ctlSpinner(true);
-      console.log(this.data)
+      console.log(this.data);
       let abogado = {
         id: this.data.id,
       }

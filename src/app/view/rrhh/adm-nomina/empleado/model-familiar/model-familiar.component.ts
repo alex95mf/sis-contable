@@ -102,7 +102,7 @@ export class ModelFamiliarComponent implements OnInit {
       this.vmButtons[1].showimg = true;
       this.vmButtons[1].habilitar = false;
 
-      console.log(this.data)
+      console.log(this.data);
       this.familiares['id_empleado'] =this.empleado;
       this.familiares.id_carga =this.data.id_carga;
       this.familiares.tipo_documento =this.data.tipo_identificacion;

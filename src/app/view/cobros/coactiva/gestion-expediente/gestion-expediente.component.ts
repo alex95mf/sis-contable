@@ -159,7 +159,7 @@ export class GestionExpedienteComponent implements OnInit {
   }
 
   handleSelectJuicioFilter(event) {
-    console.log(event)
+    console.log(event);
   }
 
   changePaginate({pageIndex, pageSize}) {

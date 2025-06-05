@@ -352,7 +352,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
   }
 
   handleSelectPeriodo(event) {
-    // console.log(event)
+    // console.log(event);
     // this.service.periodoSelected$.emit(event)
     Object.assign(this.periodoObjectSelected, event)
     Object.assign(this.atribucionParamsNew, { periodo: event.periodo })
@@ -360,7 +360,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
   }
 
   handleSelectPrograma(event) {
-    // console.log(event)
+    // console.log(event);
     // this.service.programaSelected$.emit(event)
     Object.assign(this.programaObjectSelected, event)
     Object.assign(this.atribucionParamsNew, { programa: { id_catalogo: event.id_catalogo,fk_programa: event.id_catalogo, label: event.label } })

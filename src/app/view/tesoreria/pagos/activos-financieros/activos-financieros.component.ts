@@ -509,7 +509,7 @@ export class ActivosFinancierosComponent implements OnInit {
   }
 
   selectMercadoHandler(event: any) {
-    console.log(event)
+    console.log(event);
     this.puestos_filter = this.puestos.filter(e => e.fk_mercado == event.id)
     this.vmButtons[0].habilitar=false;
   }

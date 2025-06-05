@@ -126,7 +126,7 @@ export class FormSaveComponent implements OnInit {
 
       this.getEventosContables()
       if(!this.isNew){
-        console.log(this.data)
+        console.log(this.data);
         this.parametro.id_paranetro_cuenta = this.data.paranetros_id;
         this.parametro.codigo_comprobante = this.data.codigo_comprobante;
         this.parametro.descripcion_comprobante = this.data.descripcion_comprobante;
@@ -353,7 +353,7 @@ export class FormSaveComponent implements OnInit {
   }
 
   handleEventoSelected(event) {
-    console.log(event)
+    console.log(event);
    // if (event == undefined) return;
    this.parametro.evento = event.id_evento
    this.parametro.descripcion_evento = event.descripcion_evento

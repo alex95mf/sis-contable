@@ -144,7 +144,7 @@ export class GestionFormComponent implements OnInit {
     this.ticketEdit = JSON.parse(JSON.stringify(this.data));
 
     console.log(this.ticketEdit)
-   // console.log(this.data)
+   // console.log(this.data);
     //console.log(' aquiiii sub categoria '+this.ticketEdit.categoria);
     this.deshabilitar=true;
     if(this.ticketEdit.estado=='G'){
@@ -381,7 +381,7 @@ export class GestionFormComponent implements OnInit {
                   fotos: this.fotos.filter(e => e.id_ticket_fotos === 0),
                 }
               }
-              console.log(this.data)
+              console.log(this.data);
               this.bandejaTraSrv.gestionTicket(this.data.id_ticket,data).subscribe(
                   (res) => {
                      // console.log(res);

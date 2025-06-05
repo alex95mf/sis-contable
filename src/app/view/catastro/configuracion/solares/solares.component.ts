@@ -225,7 +225,7 @@ export class SolaresComponent implements OnInit {
   }
 
   filterSector(event) {
-    console.log(event)
+    console.log(event);
     this.solar.zona = event.codigo
     this.solar.sector_id = 0
     this.sectores_filter = this.sectores.filter(e => e.grupo == event.codigo);

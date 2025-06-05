@@ -47,7 +47,7 @@ export class DetalleReformaComponent implements OnInit {
   ]
 
   this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
-  console.log(this.data)
+  console.log(this.data);
   this.partida = this.data['partida'];
   this.periodo = this.periodo;
   this.asignacionOriginal = this.data['asignacion_original'];

@@ -63,7 +63,7 @@ export class DetalleInteresesComponent implements OnInit {
   ]
 
   this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
-  console.log(this.data)
+  console.log(this.data);
   if(this.data['liquidacion']!= null){
     this.id_liquidacion = this.data['liquidacion']['id_liquidacion'];
   }else{

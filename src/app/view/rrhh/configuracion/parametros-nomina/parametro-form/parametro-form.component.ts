@@ -100,7 +100,7 @@ export class ParametroFormComponent implements OnInit {
 
     setTimeout(() => {
 
-      console.log(this.data)
+      console.log(this.data);
 
       if(!this.isNew){
         this.parametro = this.data

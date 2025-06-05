@@ -15,7 +15,7 @@ standalone: false,
   styleUrls: ["./distribuidor.component.scss"],
 })
 export class DistribuidorComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   vmButtons: any = [];
@@ -338,7 +338,7 @@ export class DistribuidorComponent implements OnInit {
       } else if (this.distribuidor.inicio_actividades == undefined) {
         this.toastr.info("Ingrese la fecha de inicio de actividades");
         flag = true;
-      } 
+      }
       !flag ? resolve(true) : resolve(false);
     });
   }
@@ -413,5 +413,5 @@ export class DistribuidorComponent implements OnInit {
     modalInvoice.componentInstance.eliminar = this.permissions.eliminar;
     this.ClearForm();
   }
-  
+
 }

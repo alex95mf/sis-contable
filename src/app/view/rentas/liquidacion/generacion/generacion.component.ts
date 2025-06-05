@@ -843,7 +843,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     //   document.getElementById("button-add-detalle").setAttribute("disabled", "");
     // }
     this.concDisabled = false;
-    console.log(event)
+    console.log(event);
     this.nombre_concepto = event.nombre
     this.codigo_concepto = event.codigo
     this.tieneExoneracion = event.tiene_exoneracion

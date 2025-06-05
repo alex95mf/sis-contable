@@ -270,7 +270,7 @@ export class ComisariaCertificadoComponent implements OnInit {
   }
 
   selectedTipoCert(event){
-    console.log(event)
+    console.log(event);
     if(event){
     this.adeuda = '';
     this.mostrarDeuda = false;

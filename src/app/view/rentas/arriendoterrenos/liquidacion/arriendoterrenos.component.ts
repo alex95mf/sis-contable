@@ -555,7 +555,7 @@ export class ArriendoterrenosComponent implements OnInit {
   }
 
   changePeriodo(event) {
-    // console.log(event)
+    // console.log(event);
     Object.assign(this.liquidacion, {periodo: moment(event.target.value).format('YYYY')})
   }
 

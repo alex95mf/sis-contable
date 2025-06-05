@@ -308,7 +308,7 @@ export class ReporteDetalladoBienesComponent implements OnInit {
   }
 
   filterByTipoBien(event: any) {
-     console.log(event)
+     console.log(event);
     if (event != undefined ) {
       this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Filtrando Grupos por Tipo de Bien'

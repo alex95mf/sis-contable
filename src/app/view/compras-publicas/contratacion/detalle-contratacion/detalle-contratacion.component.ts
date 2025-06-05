@@ -465,7 +465,7 @@ export class DetalleContratacionComponent implements OnInit {
     }
   }
   validateValor(event){
-    console.log(event)
+    console.log(event);
 
     let totalPrecioCotizado= 0
     let totalPrecioAprobado= 0

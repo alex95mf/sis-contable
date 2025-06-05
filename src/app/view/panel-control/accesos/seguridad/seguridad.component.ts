@@ -781,7 +781,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
   }
 
   handleCategorias(event) {
-    console.log(event)
+    console.log(event);
     if (event.value == 'SI')
       this.ng_categorias.setDisabledState(false)
     else {

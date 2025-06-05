@@ -125,7 +125,7 @@ export class ModalDepartamenteComponent implements OnInit {
   }
 
   changePaginate({pageIndex}) {
-    // console.log(event)
+    // console.log(event);
     Object.assign(this.paginate, { page: pageIndex + 1 })
     this.cargarDepartamento()
   }

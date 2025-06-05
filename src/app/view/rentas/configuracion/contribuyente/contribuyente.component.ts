@@ -2884,7 +2884,7 @@ export class ContribuyenteComponent implements OnInit {
   }
 
     handleChild(event){
-      console.log(event)
+      console.log(event);
     }
 
     guardarRelaciones(){

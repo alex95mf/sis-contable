@@ -281,7 +281,7 @@ export class ReporteSaldosComponent implements OnInit {
   }
 
   filterProductos(event: any) {
-    console.log(event)
+    console.log(event);
     // console.log(this.selectedGrupo)
    //if (event != undefined && this.selectedReporte == 'PSG') {
      this.lcargando.ctlSpinner(true);

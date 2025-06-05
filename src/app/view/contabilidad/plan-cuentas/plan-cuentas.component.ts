@@ -294,7 +294,7 @@ export class PlanCuentasComponent implements OnInit {
   }
 
   // nodeSelect(event) {
-  //   console.log(event)
+  //   console.log(event);
   //   // this.messageService.add({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
   // }
   nodeSelect(event: any): void {
@@ -305,7 +305,7 @@ export class PlanCuentasComponent implements OnInit {
 }
 
   nodeUnselect(event) {
-    console.log(event)
+    console.log(event);
       this.messageService.add({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
   }
   CargarPlanCuentaArbolNew(grid, estado?: []) {

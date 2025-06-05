@@ -98,7 +98,7 @@ export class HistorialComprobanteComponent implements OnInit {
   }
 
   cargarComprobantesPago() {
-    console.log(this.data)
+    console.log(this.data);
     (this as any).mensajeSpinner = "Cargando lista de comprobantes de pago...";
     this.lcargando.ctlSpinner(true);
     let data = {

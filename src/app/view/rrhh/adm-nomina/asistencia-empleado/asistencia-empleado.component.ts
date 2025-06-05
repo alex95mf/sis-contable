@@ -1100,7 +1100,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
 
 
   getDiasTrabajados(event?: LazyLoadEvent){
-    // console.log(event)
+    // console.log(event);
     if (this.filter.mes == null) return;
     this.cargaExcel = false;
     this.submitted = true;

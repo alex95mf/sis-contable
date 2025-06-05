@@ -418,7 +418,7 @@ export class TrasnferenciaDepositosComponent {
     this.getDocuments();
   }
   changeTipoMovimiento(event){
-    //console.log(event)
+    //console.log(event);
     this.restartFields();
     if(event === 'TRANSFERENCIAS_PROPIAS'){
       this.transPropias = true;

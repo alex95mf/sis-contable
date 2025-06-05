@@ -801,7 +801,7 @@ export class FacturasComponent implements OnInit {
     //}
   }
   ChangeTipoDocumento(event){
-    console.log(event)
+    console.log(event);
     if (typeof event !== undefined && event !== '' && event !== null) {
       this.buyProv.id_tipo_documento = event.id;
       this.buyProv.codigo_tipo_documento = event.codigo;
@@ -823,7 +823,7 @@ export class FacturasComponent implements OnInit {
     }
   }
   ChangePuntoEmision(event){
-    console.log(event)
+    console.log(event);
     if (typeof event !== undefined && event !== '' && event !== null) {
 
       this.buyProv.establecimiento = event.num_establecimiento;
@@ -833,7 +833,7 @@ export class FacturasComponent implements OnInit {
   }
 
   seleccionado(event){
-    console.log(event)
+    console.log(event);
 
     //if (event.checked.length > 0) {
     if (event) {
@@ -2241,8 +2241,8 @@ export class FacturasComponent implements OnInit {
     }
 
   sumaTotales(event: any,tipo,index){
-    console.log(event)
-    console.log(event)
+    console.log(event);
+    console.log(event);
     let pagoTotalRet = 0;
     let pagoTotalAnt = 0;
     let pagoTotalMul = 0;
@@ -2355,7 +2355,7 @@ export class FacturasComponent implements OnInit {
   }
 
   ChangeIceSri(event: any, dataelement, index) {
-    console.log(event)
+    console.log(event);
     console.log(dataelement[index].precio)
     console.log(event.porcentaje)
     console.log(event.precio * event.porcentaje)
@@ -3576,7 +3576,7 @@ export class FacturasComponent implements OnInit {
   }
 
   cargarEgresosBodega(event){
-    console.log(event)
+    console.log(event);
     if (typeof event !== undefined && event !== '' && event !== 0) {
       this.ExistenItems = false;
     }

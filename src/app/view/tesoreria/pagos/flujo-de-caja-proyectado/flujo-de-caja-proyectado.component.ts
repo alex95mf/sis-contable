@@ -355,7 +355,7 @@ onlyNumber(event): boolean {
 }
 
 handleRowCheck(event, reporte, index,monto) {
-  console.log(event)
+  console.log(event);
   console.log(index)
   if(event.target.checked){
     reporte[index].abonos = monto

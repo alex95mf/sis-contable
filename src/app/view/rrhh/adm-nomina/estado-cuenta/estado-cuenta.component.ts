@@ -81,7 +81,7 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   async getEstadoCuenta(event?: any) {
-    console.log(event)
+    console.log(event);
     try {
       this.loading = true
       //const response: any[] = await this.apiService.getMovimientos({params: { filter: this.filter }})

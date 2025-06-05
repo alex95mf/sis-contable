@@ -237,7 +237,7 @@ export class ConceptoFormComponent implements OnInit {
   /* fillTarifas() {
     (this as any).mensajeSpinner = "Cargando tarifas...";
     this.lcargando.ctlSpinner(true);
-    console.log(this.data)
+    console.log(this.data);
     let concepto = {
       id_concepto: this.data.id_concepto,
     }

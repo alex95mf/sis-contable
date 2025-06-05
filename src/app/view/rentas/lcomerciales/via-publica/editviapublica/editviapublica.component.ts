@@ -92,7 +92,7 @@ export class EditviapublicaComponent implements OnInit {
 
   cargaData() {
     if(!this.esNuevaCatEspPub){
-      console.log(this.data)
+      console.log(this.data);
       this.viaPublica = this.data;
       this.viaPublica.tipo.descripcion = this.data.tipo.descripcion
       console.log(this.viaPublica);

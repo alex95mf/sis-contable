@@ -130,12 +130,12 @@ export class ModalUdmComponent implements OnInit {
   }
 
   handleSelectPrimaria({id_catalogo, valor}) {
-    // console.log(event)
+    // console.log(event);
     Object.assign(this.unidad_medida, { id_unidad_primaria: id_catalogo, unidad_primaria: valor })
   }
 
   handleSelectSecundaria({id_catalogo, valor}) {
-    // console.log(event)
+    // console.log(event);
     Object.assign(this.unidad_medida, { id_unidad_secundaria: id_catalogo, unidad_secundaria: valor })
   }
 

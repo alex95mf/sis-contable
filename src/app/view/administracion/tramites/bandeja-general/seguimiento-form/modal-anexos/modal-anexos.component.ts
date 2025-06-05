@@ -140,7 +140,7 @@ export class ModalAnexosComponent implements OnInit {
       terminaFlujo: 0,
     }
     this.gesTicket.respuesta_flujo='N';
-    console.log(this.data)
+    console.log(this.data);
 
     if(!this.isNew){
     this.ticketEdit = JSON.parse(JSON.stringify(this.data));

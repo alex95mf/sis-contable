@@ -521,7 +521,7 @@ export class CostasComponent implements OnInit {
   }
 
   selectJuicioHandler(event: any) {
-    console.log(event)
+    console.log(event);
     (this as any).mensajeSpinner = 'Cargando Costas...';
     this.lcargando.ctlSpinner(true);
 

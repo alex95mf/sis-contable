@@ -506,7 +506,7 @@ export class SolicitudComponent implements OnInit {
   }
 
   onProgramaSelect(event: Array<any>) {
-    console.log(event)
+    console.log(event);
     this.departamento = []
     this.datoDepartamento = []
     this.listaSolicitudesAtribucion = []

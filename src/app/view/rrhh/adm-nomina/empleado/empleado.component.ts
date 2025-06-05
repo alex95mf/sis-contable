@@ -3743,7 +3743,7 @@ if ( superaAnios >= 12 ){
   }
 
   getRetenciones = async () => {
-    // console.log(event)
+    // console.log(event);
     this.loading = true
     try {
       const response: any = await this.empleadoService.getRetencionesJudiciales(this.empleadoForm.id_empleado)

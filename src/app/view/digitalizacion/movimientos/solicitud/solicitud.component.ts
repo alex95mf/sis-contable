@@ -581,7 +581,7 @@ this.lastday = new Date( this.lastday - 1);
   }
 
   onProgramaSelect(event: Array<any>) {
-    console.log(event)
+    console.log(event);
     this.departamento = []
     this.datoDepartamento = []
     this.listaSolicitudesAtribucion = []

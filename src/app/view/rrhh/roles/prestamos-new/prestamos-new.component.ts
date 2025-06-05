@@ -490,11 +490,11 @@ export class PrestamosNewComponent implements OnInit {
   }
 
   changePaginate(event) {
-    console.log(event)
+    console.log(event);
   }
 
   handleTabChange(event: MatTabChangeEvent) {
-    console.log(event)
+    console.log(event);
     this.activeTab = event.index
     setTimeout(() => {
       this.vmButtons.forEach((element: Botonera) => {

@@ -336,7 +336,7 @@ export class ModalNuevolocalComponent implements OnInit {
   }
 
   filterSector(event) {
-    // console.log(event)
+    // console.log(event);
     this.local.fk_sector = 0
     this.sectores_filter = this.sectores.filter(e => e.grupo == event.codigo);
   }
@@ -526,7 +526,7 @@ export class ModalNuevolocalComponent implements OnInit {
   }
 
   handleLabelCantidad(event: any) {
-    // console.log(event)
+    // console.log(event);
     switch (event.grupo) {
       case "AGENCIA":
         this.lblCantidad = "No. Establecimientos"

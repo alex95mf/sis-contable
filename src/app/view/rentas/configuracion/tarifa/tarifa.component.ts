@@ -245,7 +245,7 @@ export class TarifaComponent implements OnInit {
   }
 
   asignaConcepto(event) {
-    console.log(event)
+    console.log(event);
     if (event === 0) {
       this.tarifa.fk_concepto = 0
       this.vmButtons[0].habilitar = true

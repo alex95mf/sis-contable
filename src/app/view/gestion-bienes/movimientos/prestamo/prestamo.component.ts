@@ -791,7 +791,7 @@ sectorNombre: any;
     })
   }
   mostrarTipo(event){
-    console.log(event)
+    console.log(event);
     if(event=='D'){
       this.expandListDocumentosSalidasRec()
     }

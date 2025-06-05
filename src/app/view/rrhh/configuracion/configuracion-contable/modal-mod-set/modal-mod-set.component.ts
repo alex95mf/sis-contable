@@ -160,7 +160,7 @@ export class ModalModSetComponent implements OnInit {
       this.rubro.numcInvDeb= this.cuentas.numcInvDeb
       this.rubro.numpcInvDeb= this.cuentas.numpcInvDeb
       this.rubro.numcInvHab= this.cuentas.numcInvHab
-      console.log(this.data)
+      console.log(this.data);
       this.getCatalogo();
     /*   if(!this.isNew){
         this.rubro.id_rubro = this.data.id_rubro
@@ -328,7 +328,7 @@ export class ModalModSetComponent implements OnInit {
  async guardarRubro(){
 
 
-    console.log(this.data)
+    console.log(this.data);
     console.log(this.rubro);
 
   /*

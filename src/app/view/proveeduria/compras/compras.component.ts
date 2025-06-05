@@ -982,7 +982,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
   }
 
   seleccionado(event){
-    console.log(event)
+    console.log(event);
 
     //if (event.checked.length > 0) {
     if (event) {
@@ -3814,7 +3814,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
     }
 
   sumaTotales(event: any,tipo,index){
-    console.log(event)
+    console.log(event);
     let pagoTotalRet = 0;
     let pagoTotalAnt = 0;
     let pagoTotalMul = 0;
@@ -4019,7 +4019,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
   async ChangeImpuestoIva(event: any, dataelement, index) {
     this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Calculando'
-    console.log(event)
+    console.log(event);
     dataelement[index].porce_iva = event.porcentaje_rte_iva;
     dataelement[index].cod_iva = event.codigo_sri_iva;
     dataelement[index].cod_anexo_iva = event.codigo_sri_iva;
@@ -4032,7 +4032,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
 
   }
   ChangeIceSri(event: any, dataelement, index) {
-   console.log(event)
+   console.log(event);
    console.log(dataelement[index].precio)
    console.log(event.porcentaje)
    console.log(event.precio * event.porcentaje)
@@ -5573,7 +5573,7 @@ this.lastRecord = null
   }
 
   CargarCondicionesProveedor(event: any) {
-    // console.log(event)
+    // console.log(event);
 
     if (typeof event !== undefined && event !== '' && event !== null) {
 
@@ -6158,7 +6158,7 @@ sumRegistroTodo(){
 
 
   cargaAnticipo(event,imp,i) {
-    console.log(event)
+    console.log(event);
     console.log(imp)
     console.log('i',i);
     if(imp.aplica == false){
@@ -6218,7 +6218,7 @@ sumRegistroTodo(){
   }
 
   selectMulta(imp,i) {
-    //console.log(event)
+    //console.log(event);
     console.log(imp)
    let aplica = false
 
@@ -6248,7 +6248,7 @@ sumRegistroTodo(){
   }
 
   cargaMulta(event,imp,i) {
-    console.log(event)
+    console.log(event);
 
    // let aplica = event.aplica;
    this.dataMultas = []

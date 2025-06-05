@@ -334,14 +334,14 @@ export class ModalLocalDetComponent implements OnInit {
   }
 
   filter_cat_2(event) {
-    // console.log(event)
+    // console.log(event);
     this.local.lt_categoria_2 = { descripcion: 0 }
     this.cmb_turistico_subcategoria_filter = this.cmb_turistico_subcategoria.filter(e => e.grupo == event)
     this.handleLabelCantidad(event)
   }
 
   filter_sector(event) {
-    // console.log(event)
+    // console.log(event);
     this.local.fk_sector = { valor: 0 }
     this.cmb_sector_filter = this.cmb_sector.filter(e => e.grupo == event)
   }

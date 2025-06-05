@@ -1816,7 +1816,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   cargarDepartamentos(event) {
-    console.log(event)
+    console.log(event);
     (this as any).mensajeSpinner = "Cargando listado de Departamentos...";
     this.lcargando.ctlSpinner(true);
     this.area = event;
@@ -1839,7 +1839,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   selectedDepartamento(event){
-    console.log(event)
+    console.log(event);
     this.departamento = event
   }
 

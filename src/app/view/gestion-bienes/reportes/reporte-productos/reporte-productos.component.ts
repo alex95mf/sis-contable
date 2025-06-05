@@ -226,7 +226,7 @@ export class ReporteProductosComponent implements OnInit {
   //  }
 
   selectedPerecible(event){
-    console.log(event)
+    console.log(event);
     //if (event.checked.length > 0) {
       if (event) {
       this.mostrarLote = true;
@@ -335,7 +335,7 @@ export class ReporteProductosComponent implements OnInit {
   }
  
   filterProductos(event: any) {
-    console.log(event)
+    console.log(event);
      this.lcargando.ctlSpinner(true);
      (this as any).mensajeSpinner = 'Filtrando Productos por Grupo de Bien'
      let data={

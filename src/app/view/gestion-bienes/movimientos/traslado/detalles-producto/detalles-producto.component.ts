@@ -112,7 +112,7 @@ export class DetallesProductoComponent implements OnInit {
 
 
 
-    console.log(this.data)
+    console.log(this.data);
     console.log(this.isNew)
     if(!this.isNew){
       this.id_producto = this.data['producto'][0]['id_producto'];

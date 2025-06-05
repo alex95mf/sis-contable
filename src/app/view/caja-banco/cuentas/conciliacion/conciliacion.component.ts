@@ -1001,7 +1001,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
   }
 
   onRowUnselect(event) {
-    console.log(event)
+    console.log(event);
     console.log(this.selectedDataConcilia)
     event.data.conciliada = 'No';
     let SaldoECuenta = ((typeof this.EstadoCuenta === 'number') ? this.EstadoCuenta : parseFloat(this.EstadoCuenta));
@@ -1105,7 +1105,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
 
 
   isRowSeleCkeckConcilia(event) {
-    //console.log(event)
+    //console.log(event);
     if (event.data !== 'undefined') {
       //console.log('click');
     }

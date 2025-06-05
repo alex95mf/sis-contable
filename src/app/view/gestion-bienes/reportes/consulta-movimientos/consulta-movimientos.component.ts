@@ -147,7 +147,7 @@ export class ConsultaMovimientosComponent implements OnInit {
   }
 
   tipoReporteSelected(event){
-    console.log(event)
+    console.log(event);
     if(event == 'ING'){
       this.tipoEgreso = 0
       this.motivo = 0

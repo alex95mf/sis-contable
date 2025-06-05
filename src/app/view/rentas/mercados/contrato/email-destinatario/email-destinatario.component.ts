@@ -57,7 +57,7 @@ export class EmailDestinatarioComponent implements OnInit {
   }
 
   metodoGlobal(event) {
-    // console.log(event)
+    // console.log(event);
     switch (event.items.boton.texto) {
       case "ENVIAR":
         this.enviarCorreo()

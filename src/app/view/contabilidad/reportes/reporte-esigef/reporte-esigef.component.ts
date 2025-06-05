@@ -140,7 +140,7 @@ export class ReporteEsigefComponent implements OnInit {
   }
 
   handleChange({index}) {
-    // console.log(event)
+    // console.log(event);
     let item = this.FilreportEsigef.find((option: any) => option.index == index)
     // console.log(item)
     this.ObtnerArchivoDescarga(item)

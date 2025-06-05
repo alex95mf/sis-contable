@@ -435,7 +435,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
   getMercados() {
     let data = {
       params: "'REN_MERCADO'"
-    }
+    };
     (this as any).mensajeSpinner = 'Cargando datos de Mercados'
     this.lcargando.ctlSpinner(true);
     this.contSvr.getMercados(data).subscribe(
@@ -467,7 +467,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
   }
 
   tipoSelected(event: any) {
-    console.log(event)
+    console.log(event);
   }
 
   getPuestos() {

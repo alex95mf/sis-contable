@@ -274,7 +274,7 @@ export class AprobacionComponent implements OnInit {
 
   btnExportar() {
   
-
+    // @ts-ignore
     let data = {
       params: {
         filter: this.filter,

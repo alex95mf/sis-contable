@@ -295,7 +295,7 @@ export class AsigncionComponent implements OnInit {
   }
 
   handleSelectDepartamento(event) {
-    console.log(event)
+    console.log(event);
     if (event == undefined) return;
     // Alguna otra accion
     this.departamentoObjectSelected = event
@@ -754,7 +754,7 @@ export class AsigncionComponent implements OnInit {
   } */
 
   /* totalRalizacion(event){
-    console.log(event)
+    console.log(event);
   } */
 
   /* actualizaPresupuesto() {

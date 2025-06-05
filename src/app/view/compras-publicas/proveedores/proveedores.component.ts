@@ -467,7 +467,7 @@ export class ProveedoresComponent implements OnInit {
   }
 
   checkPrincipal(index, event) {
-    console.log(event)
+    console.log(event);
     // verifica si el checkbox esta true o false, si esta true es que se marco como principal, todo lo demas pasa a false (solo puede haber un principal)
     for (let i=0; i<this.cuentas.length;i++){
       if(i==index && event.target.checked) {
