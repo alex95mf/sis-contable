@@ -129,7 +129,7 @@ export class RegistroComponent implements OnInit {
       // Carga los Programas
       (this as any).mensajeSpinner = 'Cargando Listado de Programas'
       this.programas = await this.programaRegistroService.getProgramas();
-      this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
+      this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }));
 
       this.lcargando.ctlSpinner(false)
     } catch (err) {

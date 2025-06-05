@@ -360,7 +360,7 @@ export class RegistroComponent implements OnInit {
       asignado,
       disponible
     })
-    console.log(this.presupuesto)
+    console.log(this.presupuesto);
     
   }
 

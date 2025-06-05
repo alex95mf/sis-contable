@@ -92,7 +92,7 @@ export class BienesComponent implements OnInit {
       console.log("console principarl", this.itemBienes)
       this.showTooltips = new Array(this.itemBienes.length);
       this.itemBienesTotal = this.itemBienes.reduce((acc: number, bien: any) => acc + parseFloat(bien.costo_total), 0)
-      console.log(this.presupuesto)
+      console.log(this.presupuesto);
 
       (this as any).mensajeSpinner = 'Cargando Proyectos'
       this.proyectos = await this.apiService.getProyectos({periodo: this.valor_periodo, programa: this.programa});

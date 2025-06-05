@@ -204,7 +204,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
 
           let data = {
             mercado: this.mercados.find(m => m.id == res.fk_mercado)
-          }
+          };
 
           (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
           this.puestos_filter = this.puestos.filter(e => e.fk_mercado == res.fk_mercado)
@@ -429,7 +429,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
   getMercados() {
     let data = {
       params: "'REN_MERCADO'"
-    }
+    };
     (this as any).mensajeSpinner = 'Cargando datos de Mercados'
     // this.lcargando.ctlSpinner(true)
     this.contSvr.getMercados(data).subscribe(

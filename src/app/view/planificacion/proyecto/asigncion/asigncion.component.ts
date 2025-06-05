@@ -270,7 +270,7 @@ export class AsigncionComponent implements OnInit {
 
       (this as any).mensajeSpinner = 'Cargando Programas'
       this.programas = await this.apiService.getProgramas();
-      this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
+      this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }));
 
       (this as any).mensajeSpinner = 'Cargando Departamentos'
       this.departamentos = await this.apiService.getDepartamentos();

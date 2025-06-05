@@ -155,11 +155,11 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
 
     (this as any).mensajeSpinner = 'Cargando Programas'
     this.programas = await this.apiSrv.getProgramas();
-    this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
+    this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }));
 
     (this as any).mensajeSpinner = 'Cargando Departamentos'
     this.departamentos = await this.apiSrv.getDepartamentos();
-    this.departamentos.map((departamento: any) => Object.assign(departamento, { label: `${departamento.descripcion}. ${departamento.valor}`}))
+    this.departamentos.map((departamento: any) => Object.assign(departamento, { label: `${departamento.descripcion}. ${departamento.valor}`}));
 
     (this as any).mensajeSpinner = 'Cargando Catalogos'
     let response: any = await this.apiSrv.getCatalogo({params: "'PLA_TIPO_COMPRA','PLA_TIPO_REGIMEN','PLA_PROC_SUGE','PLA_TIPO_PRODUCTO'"})

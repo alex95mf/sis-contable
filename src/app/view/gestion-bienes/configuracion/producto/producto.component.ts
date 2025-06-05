@@ -25,7 +25,7 @@ import { IReclamo } from './modal-reclamos/IReclamos';
 import { ModalUdmComponent } from './modal-udm/modal-udm.component';
 import { Chart } from 'chart.js';
 //import { ConsoleReporter } from 'jasmine';
-import { CurrencyMaskDirective } from "ngx-currency";
+import { NgxCurrencyDirective } from "ngx-currency";
 declare const $: any;
 
 interface Costo {

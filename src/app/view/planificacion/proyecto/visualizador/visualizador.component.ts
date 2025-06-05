@@ -132,11 +132,11 @@ export class VisualizadorComponent implements OnInit {
 
       (this as any).mensajeSpinner = 'Cargando Programas'
       this.programas = await this.apiService.getProgramas();
-      this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
+      this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }));
 
       (this as any).mensajeSpinner = 'Cargando Departamentos'
       this.departamentos = await this.apiService.getDepartamentos();
-      this.departamentos.map((departamento: any) => Object.assign(departamento, { label: `${departamento.descripcion}. ${departamento.valor}`}))
+      this.departamentos.map((departamento: any) => Object.assign(departamento, { label: `${departamento.descripcion}. ${departamento.valor}`}));
 
       (this as any).mensajeSpinner = 'Cargando Datos Adicionales'
       let response: any = await this.apiService.getCatalogo({params: "'PLA_TIPO_COMPRA','PLA_U_MED','PLA_TIPO_PRODUCTO','PLA_PROC_SUGE','PLA_TIPO_REGIMEN','PLA_TIPO_PRESUPUESTO'"})
