@@ -5,7 +5,7 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": false,
-    "noImplicitOverride": true,
+    "noImplicitOverride": false,
     "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": false,
@@ -14,6 +14,8 @@
     "strictNullChecks": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "exactOptionalPropertyTypes": false,
+    "useUnknownInCatchVariables": false,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -23,6 +25,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
+    "skipLibCheck": true,
     "lib": [
       "ES2022",
       "dom"
@@ -42,6 +45,9 @@
     "strictDomEventTypes": false,
     "strictContextGenerics": false,
     "strictLiteralTypes": false,
-    "fullTemplateTypeCheck": false
+    "fullTemplateTypeCheck": false,
+    "enableIvy": false,
+    "strictPropertyInitialization": false,
+    "enableResourceInlining": false
   }
 }
