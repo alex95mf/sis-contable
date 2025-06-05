@@ -1,12 +1,12 @@
-.size-span-jornada{ 
-  width: 300px; 
+.size-span-jornada{
+  width: 300px;
 }
 // [type="file"] {
 //     height: 0;
 //     overflow: hidden;
 //     width: 0;
 //   }
-  
+
 //   [type="file"] + label {
 //     text-align: center;
 //     background: #f15d22;
@@ -24,27 +24,27 @@
 //     position: relative;
 //     transition: all 0.3s;
 //     vertical-align: middle;
-    
+
 //     &:hover {
 //       background-color: darken(#f15d22, 10%);
 //     }
-    
+
 //     &.btn-1 {
 //       background-color: #f79159;
 //       box-shadow: 0 6px darken(#f79159, 10%);
 //       transition: none;
-  
+
 //       &:hover {
 //         box-shadow: 0 4px darken(#f79159, 10%);
 //         top: 2px;
 //       }
 //     }
-    
+
 //     &.btn-2 {
 //       background-color: #99c793;
 //       border-radius: 50px;
 //       overflow: hidden;
-      
+
 //       &::before {
 //         color: #fff;
 //         content: "\f382";
@@ -57,28 +57,28 @@
 //         top: 0px;
 //         transition: all 0.3s;
 //       }
-  
+
 //       &:hover {
 //         background-color: darken(#99c793, 30%);
-          
+
 //         &::before {
 //           right: 75%;
 //         }
 //       }
 //     }
-    
+
 //     &.btn-3 {
 //       background-color: #ee6d9e;
 //       border-radius: 0;
 //       overflow: hidden;
-      
+
 //       span {
 //         display: inline-block;
 //         height: 100%;
 //         transition: all 0.3s;
 //         width: 100%;
 //       }
-      
+
 //       &::before {
 //         color: #fff;
 //         content: "\f382";
@@ -92,21 +92,21 @@
 //         transition: all 0.3s;
 //         width: 100%;
 //       }
-  
+
 //       &:hover {
 //         background-color: darken(#ee6d9e, 30%);
-        
+
 //         span {
 //           transform: translateY(300%);
 //         }
-          
+
 //         &::before {
 //           top: 0;
 //         }
 //       }
 //     }
 //   }
-  
+
 
 :host ::ng-deep .custom-toast .p-toast-top-right {
   top: 70px;
@@ -154,7 +154,7 @@
   color: var(--clr-white);
 }
 
-@media screen and(max-width: 700px) {
+@media screen and (max-width: 700px) {
   .table-empleado{
     padding: 0.5rem 1rem;
   }

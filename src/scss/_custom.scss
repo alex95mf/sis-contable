@@ -1,12 +1,12 @@
 // Here you can add other styles
-app-header.app-header.navbar 
+app-header.app-header.navbar
 {
     font-family: "Poppins2" !important;
     color: black !important;
     background-color: #F9FBE7 !important;
 }
 
-app-sidebar 
+app-sidebar
 {
     font-family: "Poppinsbold" !important;
     color: black !important;
@@ -20,7 +20,7 @@ app-sidebar
 } */
 
 
-.sidebar .nav-link 
+.sidebar .nav-link
 {
     color: black;
 }
@@ -30,61 +30,61 @@ app-sidebar
     font-size: 11px !important;
 }
 
-.sidebar .nav-link .nav-icon 
+.sidebar .nav-link .nav-icon
 {
     color: #0a0a0a9d ;
     font-size: 11px
 }
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600");
-@font-face 
+@font-face
 {
     font-family: "Poppins1" !important;
     src: url("../assets/fonts/Montserrat-Medium.ttf") format("truetype");
 }
 
-@font-face 
+@font-face
 {
     font-family: "Poppinsbold";
     src: url("../assets/fonts/Montserrat-ExtraBold.ttf") format("truetype");
 }
 
-app-header button:nth-last-of-type(2) 
+app-header button:nth-last-of-type(2)
 {
     display: none !important;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) 
+@media (min-width: 768px) and (max-width: 1024px)
 {
-    app-header button:nth-last-of-type(1) 
+    app-header button:nth-last-of-type(1)
     {
         display: none !important;
     }
-    app-header .navbar-brand 
+    app-header .navbar-brand
     {
         display: none !important;
     }
 }
 
-@media (min-width: 481px) and (max-width: 767px) 
+@media (min-width: 481px) and (max-width: 767px)
 {
-    app-header button:nth-last-of-type(1) 
+    app-header button:nth-last-of-type(1)
     {
         display: none !important;
     }
-    app-header .navbar-brand 
+    app-header .navbar-brand
     {
         display: none !important;
     }
 }
 
-@media (min-width: 320px) and (max-width: 480px) and (orientation: portrait) 
+@media (min-width: 320px) and (max-width: 480px) and (orientation: portrait)
 {
-    app-header button:nth-last-of-type(1) 
+    app-header button:nth-last-of-type(1)
     {
         display: none !important;
     }
-    app-header .navbar-brand 
+    app-header .navbar-brand
     {
         display: none !important;
     }
@@ -94,11 +94,11 @@ app-header button:nth-last-of-type(2)
     display: none !important;
 } */
 
-app-header.app-header.navbar 
+app-header.app-header.navbar
 {
     background-color: var(--navbar-color);
     padding: 0px;
-    .link-action 
+    .link-action
     {
         position: relative;
         top: -9px;
@@ -106,13 +106,13 @@ app-header.app-header.navbar
 }
 
 select,
-input 
+input
 {
     outline: unset !important;
     box-shadow: unset !important;
 }
 
-app-sidebar-nav-link 
+app-sidebar-nav-link
 {
     color: black;
 }
@@ -122,14 +122,14 @@ background-color: white !important;
 color: black !important;
 } */
 
-.sidebar .nav-dropdown.open 
+.sidebar .nav-dropdown.open
 {
     font-family: "Poppins1" !important;
     background: #000000c2 !important;
     color: white !important;
     font-weight: none !important;
     font-size: 10px;
-    i 
+    i
     {
         color: white !important;
         /* margin-left: 10px; */
@@ -137,14 +137,14 @@ color: black !important;
     }
 }
 
-.badge-pill 
+.badge-pill
 {
     border-radius: 10rem;
     position: absolute;
     margin-left: -10px !important;
 }
 
-.mat-select-arrow 
+.mat-select-arrow
 {
     color: transparent !important;
 }
@@ -153,7 +153,7 @@ color: black !important;
     margin-left: 10px !important;
 } */
 
-.sidebar .sidebar-minimizer 
+.sidebar .sidebar-minimizer
 {
     position: relative;
     flex: 0 0 50px;
@@ -161,7 +161,7 @@ color: black !important;
     background-color: white;
 }
 
-.bg-left 
+.bg-left
 {
     height: 55px;
     width: 100%;
@@ -170,7 +170,7 @@ color: black !important;
     background-size: 100% 100%;
     position: relative;
     overflow: hidden;
-    .logo 
+    .logo
     {
         height: 40px;
         width: 140px;
@@ -185,7 +185,7 @@ color: black !important;
     }
 }
 
-.dt-button 
+.dt-button
 {
     padding: 0;
     border: none;
@@ -193,78 +193,78 @@ color: black !important;
     outline: unset;
 }
 
-.withdraw-coin-modal 
+.withdraw-coin-modal
 {
-    div[role="document"] 
+    div[role="document"]
     {
         position: relative;
         top: 50%;
         transform: translateY(-50%) !important;
     }
-    .modal-header 
+    .modal-header
     {
         border-bottom: 1px solid transparent !important;
     }
-    .modal-content 
+    .modal-content
     {
         border: none;
     }
-    .modal-dialog 
+    .modal-dialog
     {
         max-width: 500px;
         margin: auto;
     }
 }
 
-.viewer-content 
+.viewer-content
 {
-    div[role="document"] 
+    div[role="document"]
     {
         position: relative;
         top: 50%;
         transform: translateY(-50%) !important;
     }
-    .modal-header 
+    .modal-header
     {
         border-bottom: 1px solid transparent !important;
     }
-    .modal-content 
+    .modal-content
     {
         border: none;
     }
 }
 
-.viewer-content-general 
+.viewer-content-general
 {
-    // div[role="document"] 
+    // div[role="document"]
     // {
     //     position: relative;
     //     top: 50%;
     //     transform: translateY(-50%) !important;
     // }
-    .modal-header 
+    .modal-header
     {
         border-bottom: 1px solid transparent !important;
     }
-    .modal-content 
+    .modal-content
     {
         border: none;
     }
 }
 
-.e-treeview .e-list-text 
+.e-treeview .e-list-text
 {
     font-size: 15px;
     color: #0548f5;
 }
 
-.es 
+.es
 {
-    &.sidebar-nav 
+    &.sidebar-nav
     {
-        .nav-item:nth-child(4) 
+        .nav-item:nth-child(4)
         {
-            .nav-link 
+            .nav-link
             {
                 text-align-last: center;
                 margin-inline-end: 47px;
@@ -273,7 +273,7 @@ color: black !important;
     }
 }
 
-.e-treeview .e-list-item.e-level-1 > .e-fullrow 
+.e-treeview .e-list-item.e-level-1 > .e-fullrow
 {
     background-color: white;
 }
@@ -294,7 +294,7 @@ ejs-dropdowntree
     height: 26px !important;
     background-color: #E4E5E6 !important;
     font-size: 10px !important;
-    .e-ddt.e-popup 
+    .e-ddt.e-popup
     {
        background-color: #E4E5E6 !important;
     }
@@ -310,11 +310,11 @@ ejs-dropdowntree
 } */
 
 
-.container-new-loader 
+.container-new-loader
 {
     height: 500px;
     text-align: center;
-    i 
+    i
     {
         position: relative;
         top: 50%;
@@ -324,11 +324,11 @@ ejs-dropdowntree
     }
 }
 
-#viewerloader.container-new-loader 
+#viewerloader.container-new-loader
 {
     height: 380px;
     text-align: center;
-    i 
+    i
     {
         position: relative;
         top: 50%;
@@ -359,19 +359,19 @@ ejs-dropdowntree
 } */
 
 //background para hover
-.e-treeview .e-list-item.e-hover > .e-fullrow 
+.e-treeview .e-list-item.e-hover > .e-fullrow
 {
     //border-color: #eee;
     background-color: rgba(136, 175, 233, 0.781);
 }
 
-.e-treeview .e-list-item.e-active > .e-fullrow 
+.e-treeview .e-list-item.e-active > .e-fullrow
 {
     border-color: #eee;
     background-color: rgb(170, 188, 245);
 }
 
-select 
+select
 {
     background-color: #e4e5e6 !important;
 }
@@ -380,17 +380,17 @@ select
 
 ng-select#detAccountSelect,
 ng-select#detSearchAccSelected,
-ng-select#accSelect 
+ng-select#accSelect
 {
-    .ng-dropdown-panel 
+    .ng-dropdown-panel
     {
         position: relative !important;
-        .ng-dropdown-panel-items 
+        .ng-dropdown-panel-items
         {
             max-height: 80px !important;
         }
     }
-    .ng-dropdown-panel .scroll-host 
+    .ng-dropdown-panel .scroll-host
     {
         z-index: 1;
         background-color: rgba(46, 43, 43, 0.932);
@@ -398,80 +398,80 @@ ng-select#accSelect
     }
 }
 
-legend 
+legend
 {
     background-color: #404a63 !important;
     //font-family: "Poppins1";
     font-weight: unset !important;
 }
 
-.ng-select.ng-select-single .ng-select-container 
+.ng-select.ng-select-single .ng-select-container
 {
     height: 27px !important;
     font-size: 11px !important;
     align-items: center;
 }
-.ng-select .ng-select-container 
+.ng-select .ng-select-container
 {
     min-height: 25px !important;
-    border-radius: 0px ; 
+    border-radius: 0px ;
      border:  none;
      box-shadow: unset !important;
      outline: unset !important;
      font-size: 11px !important;
 }
 
-.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected .ng-option-label, .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked .ng-option-label 
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected .ng-option-label, .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked .ng-option-label
 {
     font-weight: 600;
     font-size: 11px !important;
 }
 
-.ng-dropdown-panel .ng-dropdown-panel-items .ng-option 
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option
 {
     font-size: 11px;
 }
 
 
-::-webkit-scrollbar 
+::-webkit-scrollbar
 {
     width: 5px;
     overflow-y: scroll;
 }
 
-::-webkit-scrollbar-thumb 
+::-webkit-scrollbar-thumb
 {
     background: #13b1e9;
     border-radius: 4px;
     cursor: pointer;
 }
-::-webkit-scrollbar-thumb:active 
+::-webkit-scrollbar-thumb:active
 {
     background-color: #999999;
 }
-::-webkit-scrollbar-track 
+::-webkit-scrollbar-track
 {
     background: #cecac9;
     border-radius: 4px;
 }
 
-@media (min-width: 320px) and (max-width: 480px) and (orientation: portrait) 
+@media (min-width: 320px) and (max-width: 480px) and (orientation: portrait)
 {
-    app-header button:nth-last-of-type(2) 
+    app-header button:nth-last-of-type(2)
     {
         display: none !important;
     }
 }
 
-@media (min-width: 481px) and (max-width: 767px) 
+@media (min-width: 481px) and (max-width: 767px)
 {
-    app-header button:nth-last-of-type(2) 
+    app-header button:nth-last-of-type(2)
     {
         display: none !important;
     }
 }
 
-legend 
+legend
 {
     background-color: gray;
     color: white;
@@ -479,48 +479,48 @@ legend
     //font-size: 11px !important;
 }
 
-ejs-datepicker.customdatepicker 
+ejs-datepicker.customdatepicker
 {
-    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input 
+    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input
     {
         color: white;
-        &:disabled 
+        &:disabled
         {
             color: white !important;
         }
-        .e-input-group-icon.e-date-icon.e-icons 
+        .e-input-group-icon.e-date-icon.e-icons
         {
             color: white;
         }
     }
 }
 
-ejs-datepicker.modaldatepicker 
+ejs-datepicker.modaldatepicker
 {
-    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input 
+    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input
     {
         color: black;
-        &:disabled 
+        &:disabled
         {
             color: black !important;
         }
-        .e-input-group-icon.e-date-icon.e-icons 
+        .e-input-group-icon.e-date-icon.e-icons
         {
             color: black;
         }
     }
 }
 
-ejs-datepicker.modaldatepicker2 
+ejs-datepicker.modaldatepicker2
 {
-    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input 
+    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input
     {
         color: white;
-        &:disabled 
+        &:disabled
         {
             color: white !important;
         }
-        .e-input-group-icon.e-date-icon.e-icons 
+        .e-input-group-icon.e-date-icon.e-icons
         {
             color: white;
         }
@@ -528,11 +528,11 @@ ejs-datepicker.modaldatepicker2
 }
 
 ejs-datepicker#idGlobaldate2,
-ejs-datepicker#idGlobaldate 
+ejs-datepicker#idGlobaldate
 {
     .e-input-group.e-control-wrapper.e-date-wrapper,
     .e-input-group.e-control-wrapper.e-date-wrapper.e-input-focus,
-    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input 
+    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input
     {
         border-radius: 4px;
         background-color: #505459;
@@ -540,7 +540,7 @@ ejs-datepicker#idGlobaldate
         padding-left: 17px;
         font-size: 16px;
         font-family: "Poppins1";
-        .e-input-group-icon.e-date-icon.e-icons 
+        .e-input-group-icon.e-date-icon.e-icons
         {
             color: white;
             font-size: 22px;
@@ -550,13 +550,13 @@ ejs-datepicker#idGlobaldate
     }
 }
 
-ejs-datepicker#idDatePicker 
+ejs-datepicker#idDatePicker
 {
-    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input 
+    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input
     {
         border: none !important;
         color: white;
-        .e-input-group-icon.e-date-icon.e-icons 
+        .e-input-group-icon.e-date-icon.e-icons
         {
             color: white;
         }
@@ -565,9 +565,9 @@ ejs-datepicker#idDatePicker
 
 ejs-datepicker#idNominaDate,
 ejs-datepicker#idParametro,
-ejs-datepicker#idParametros 
+ejs-datepicker#idParametros
 {
-    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input 
+    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input
     {
         height: 28px;
         border-radius: 4px;
@@ -575,12 +575,12 @@ ejs-datepicker#idParametros
         color: white;
         padding-left: 17px;
         font-size: 16px;
-        &:disabled 
+        &:disabled
         {
             background-color: red !important;
             color: white !important;
         }
-        .e-input-group-icon.e-date-icon.e-icons 
+        .e-input-group-icon.e-date-icon.e-icons
         {
             color: white;
             font-size: 18px;
@@ -591,9 +591,9 @@ ejs-datepicker#idParametros
 }
 
 ejs-datepicker#idptoemisionAutorizacion,
-ejs-datepicker#idptoemisionCaducidad 
+ejs-datepicker#idptoemisionCaducidad
 {
-    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input 
+    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input
     {
         height: 37px;
         border-radius: 4px;
@@ -602,7 +602,7 @@ ejs-datepicker#idptoemisionCaducidad
         color: white;
         padding-left: 17px;
         font-size: 16px;
-        .e-input-group-icon.e-date-icon.e-icons 
+        .e-input-group-icon.e-date-icon.e-icons
         {
             color: white;
             font-size: 18px;
@@ -612,9 +612,9 @@ ejs-datepicker#idptoemisionCaducidad
     }
 }
 
-ejs-datepicker#idquotes 
+ejs-datepicker#idquotes
 {
-    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input 
+    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input
     {
         width: 100%;
         border: 1px solid;
@@ -623,7 +623,7 @@ ejs-datepicker#idquotes
         padding-left: 5px;
         height: 30px;
         color: white;
-        .e-input-group-icon.e-date-icon.e-icons 
+        .e-input-group-icon.e-date-icon.e-icons
         {
             color: white;
         }
@@ -631,9 +631,9 @@ ejs-datepicker#idquotes
 }
 
 ejs-datepicker#idFechaInicio,
-ejs-datepicker#idFechaFin 
+ejs-datepicker#idFechaFin
 {
-    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input 
+    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input
     {
         height: 37px;
         border-radius: 4px;
@@ -642,7 +642,7 @@ ejs-datepicker#idFechaFin
         color: white;
         padding-left: 17px;
         font-size: 16px;
-        .e-input-group-icon.e-date-icon.e-icons 
+        .e-input-group-icon.e-date-icon.e-icons
         {
             color: white;
             font-size: 18px;
@@ -655,9 +655,9 @@ ejs-datepicker#idFechaFin
 ejs-datepicker#idInicio,
 ejs-datepicker#idFin,
 ejs-datepicker#idFechaVencimiento,
-ejs-datepicker#idalertaMonto 
+ejs-datepicker#idalertaMonto
 {
-    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input 
+    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input
     {
         height: 37px;
         border-radius: 4px;
@@ -666,7 +666,7 @@ ejs-datepicker#idalertaMonto
         color: black;
         padding-left: 17px;
         font-size: 16px;
-        .e-input-group-icon.e-date-icon.e-icons 
+        .e-input-group-icon.e-date-icon.e-icons
         {
             color: black;
             font-size: 18px;
@@ -676,19 +676,19 @@ ejs-datepicker#idalertaMonto
     }
 }
 
-ejs-datepicker#idColorWhite 
+ejs-datepicker#idColorWhite
 {
-    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input 
+    .e-input-group.e-control-wrapper.e-date-wrapper.e-valid-input
     {
         color: white;
-        .e-input-group-icon.e-date-icon.e-icons 
+        .e-input-group-icon.e-date-icon.e-icons
         {
             color: white;
         }
     }
 }
 
-.e-input-group:not(.e-float-icon-left), .e-input-group.e-control-wrapper:not(.e-float-icon-left) 
+.e-input-group:not(.e-float-icon-left), .e-input-group.e-control-wrapper:not(.e-float-icon-left)
 {
     border-bottom: none !important;
 }
@@ -812,7 +812,7 @@ app-button-radio-active-new.no-borders {
     color: #e24242;
 }
 
-@media screen and(max-width: 700px) {
+@media screen and (max-width: 700px) {
     .viewer-content-general div[role=document]{
         transform: translateY(-26%) !important;
     }

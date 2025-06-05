@@ -39,7 +39,8 @@ import { FotoEmpleadoResponseI } from "src/app/models/responseFotoEmpleado.inter
 import { EducacionEmpleadoResponseI } from "src/app/models/responseEducacionEmp.interface";
 import { ReferenciaEmpleadoResponseI } from "src/app/models/responseReferenciaEmp.interface";
 
-import {MessageService, PrimeNGConfig, SelectItem} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import {PrimeNG} from 'primeng/config';
 import { CatalogoResponseI } from "src/app/models/responseCatalogo.interface";
 
 

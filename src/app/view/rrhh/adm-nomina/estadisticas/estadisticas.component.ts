@@ -136,7 +136,7 @@ export class EstadisticasComponent implements OnInit {
     })
   }
 
-   chartPie(ctx:string, tipo:string, lbls: any,dataValues: any){
+   chartPie(ctx:string, tipo:any, lbls: any,dataValues: any){
 
     this.lcargando.ctlSpinner(false)
     return new Chart(ctx, {
