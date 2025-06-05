@@ -42,7 +42,7 @@ export class AnexosListaComponentDis implements OnInit {
     
     this.commonVarService.contribAnexoLoad2.asObservable().subscribe(
       (res: any) => {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Cargando Anexos ...'
         
         // console.log('anexos', res);
@@ -116,7 +116,7 @@ export class AnexosListaComponentDis implements OnInit {
 
   cargarArchivo(){
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
@@ -167,7 +167,7 @@ export class AnexosListaComponentDis implements OnInit {
     }
 
     // (this as any).mensajeSpinner = 'Eliminando anexo'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
 
     this.apiService.deleteAnexo(data).subscribe(
       res => {
@@ -217,7 +217,7 @@ export class AnexosListaComponentDis implements OnInit {
           }
       
           (this as any).mensajeSpinner = 'Eliminando anexo'
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
       
           this.apiService.deleteAnexo(data).subscribe(
             res => {

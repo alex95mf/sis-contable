@@ -239,7 +239,7 @@ export class ConsultaDocumentosComponent implements OnInit {
   
   async btnExportar() 
   {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Exportando Documentos';
 

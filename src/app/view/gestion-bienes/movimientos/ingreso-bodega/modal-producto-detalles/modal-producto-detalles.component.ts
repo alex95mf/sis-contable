@@ -88,7 +88,7 @@ export class ModalProductoDetallesComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Recuperando Detalles de Producto'
       let response: any = await this.apiService.getProducto(this.doc_detalle_producto.fk_product, { documento: this.documento });
@@ -124,7 +124,7 @@ export class ModalProductoDetallesComponent implements OnInit {
       return;
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Almacenando Detalles'
 

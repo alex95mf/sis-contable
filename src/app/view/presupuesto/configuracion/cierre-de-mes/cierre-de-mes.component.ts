@@ -171,7 +171,7 @@ export class CierreDeMesComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Periodos'
       let response = await this.cierremesService.getPeriodos();
@@ -351,7 +351,7 @@ export class CierreDeMesComponent implements OnInit {
         break;
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cambiando Estado'
       let response = await this.cierremesService.updateEstadoMesPresupuesto({ anio: data.anio, mes: data.mes, estado });
@@ -368,7 +368,7 @@ export class CierreDeMesComponent implements OnInit {
 
   async generarPeriodo() {
     // Obtener el siguiente periodo a ser creado
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Obteniendo ultimo Periodo'
     const nuevoPeriodo = await this.cierremesService.getNuevoPeriodo()
     this.lcargando.ctlSpinner(false)
@@ -389,7 +389,7 @@ export class CierreDeMesComponent implements OnInit {
     })
 
     if (periodo) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Generando Periodo de Presupuesto'
         const response = await this.cierremesService.generarPeriodoPresupuesto({periodo})
@@ -397,7 +397,7 @@ export class CierreDeMesComponent implements OnInit {
         //
         this.lcargando.ctlSpinner(false)
         Swal.fire('Periodo creado correctamente', '', 'success').then(async () => {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           try {
             (this as any).mensajeSpinner = 'Cargando Periodos'
             const response = await this.cierremesService.getPeriodos();
@@ -430,7 +430,7 @@ export class CierreDeMesComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Generando Periodo'
         let periodo = await this.cierremesService.generarPeriodoPresupuesto()
@@ -493,7 +493,7 @@ export class CierreDeMesComponent implements OnInit {
 
     const estado = (event.target.checked) ? 'A' : 'C'
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cambiando Estado'
       let response = await this.cierremesService.updateEstadoMesPresupuesto({ anio: item.anio, mes: item.mes, estado });

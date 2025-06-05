@@ -1093,7 +1093,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
   /* async  */consultarFiltro() {
 
 
-     this.lcargando.ctlSpinner(true)
+     this.lcargando.ctlSpinner(true);
      try {
 
       // let parameterUrl: any = {
@@ -1183,7 +1183,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
           }
 
           (this as any).mensajeSpinner = 'Eliminando registro'
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
               this.empleadoService.deleteAccionPersonal(data).subscribe(
                 res => {
                   console.log(res)

@@ -126,7 +126,7 @@ export class ConsultaProveedoresComponent implements OnInit {
   exportarExcel = () => {
     let excelData = []
     (this as any).mensajeSpinner = "Descargando Listado de Proveedores"
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.mdlSrv.getProveedores({ params: { filter: this.filter } }).subscribe(
       (res: any) => {
         console.log(res)

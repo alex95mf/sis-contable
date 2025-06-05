@@ -1726,7 +1726,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   async  getNumControl(){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando Registro'
 
     this.cancel()
@@ -1760,7 +1760,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   async getLatest() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.mensajeSpinner= 'Cargando Registro'
     try {
       const response = await this.ingresosydescuentosService.getUltimoNumero()

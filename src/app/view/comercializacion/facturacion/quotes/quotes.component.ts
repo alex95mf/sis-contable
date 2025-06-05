@@ -21,7 +21,7 @@ standalone: false,
 })
 export class QuotesComponent implements OnInit {
 
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('printCDI') printCDI: ElementRef;
 
@@ -73,7 +73,7 @@ export class QuotesComponent implements OnInit {
     private socket: Socket
   ) {
     this.commonVarServices.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarServices.setListProduct.asObservable().subscribe(res => {

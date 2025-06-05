@@ -76,7 +76,7 @@ export class ModalDetallesComponent implements OnInit {
 
   cargarDetalles() {
     (this as any).mensajeSpinner = 'Cargando Detalles de Notificacion'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.apiService.getNotificacionDetalles({params: { id: this.notificacion.id_cob_notificacion }, component: myVarGlobals.fCobNotificacion}).subscribe(
           (res: any) => {
             this.ListaDetalle = res.data.detalles;
@@ -100,7 +100,7 @@ export class ModalDetallesComponent implements OnInit {
     }
     Object.assign(this.paginate, newPaginate);
     
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     setTimeout(() => {
       this.ListaMostrar = this.ListaDetalle.slice(this.paginate.perPage * (this.paginate.page - 1), this.paginate.perPage * this.paginate.page)
       this.lcargando.ctlSpinner(false)

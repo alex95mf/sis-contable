@@ -91,7 +91,7 @@ export class GeneracionPermisosComponent implements OnInit {
       (res) => {
         console.log(res)
         // (this as any).mensajeSpinner = 'Cargando datos de la iquidación...';
-        // this.lcargando.ctlSpinner(true)
+        // this.lcargando.ctlSpinner(true);
         this.restoreForm(false, false);
         console.log(res);
         this.formReadOnly = true;
@@ -256,7 +256,7 @@ export class GeneracionPermisosComponent implements OnInit {
 
   validaPermisos = () => {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
 
@@ -466,7 +466,7 @@ export class GeneracionPermisosComponent implements OnInit {
     this.observacionesDisabled = false;
     this.vmButtons[3].habilitar = false;
     (this as any).mensajeSpinner = 'Obteniendo Propiedades...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
       (res) => {
         if (res['data'].length > 0) {

@@ -129,7 +129,7 @@ export class ModalReasignacionComponent implements OnInit {
     });
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Reasignando Codigo de Producto'
         // Llamar a API enviando producto anterior y nuevo.

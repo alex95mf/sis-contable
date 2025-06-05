@@ -24,7 +24,7 @@ standalone: false,
   styleUrls: ['./retencion-venta.component.scss']
 })
 export class RetencionVentaComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;

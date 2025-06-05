@@ -109,7 +109,7 @@ export class ModalFeriasComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       if (this.feria_id) {
         //Cargar Feria
         await this.getFeria(this.feria_id)
@@ -123,12 +123,12 @@ export class ModalFeriasComponent implements OnInit {
   async metodoGlobal(event: any) {
     switch (event.items.boton.texto) {
       case "GUARDAR":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.setFeria()
         this.lcargando.ctlSpinner(false)
         break;
       case "MODIFICAR":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.updateFeria()
         this.lcargando.ctlSpinner(false)
         break;

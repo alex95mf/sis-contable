@@ -74,7 +74,7 @@ export class ListLiquidacionesComponent implements OnInit {
     };
 
     (this as any).mensajeSpinner = 'Cargando Liquidaciones'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getLiquidaciones().subscribe(
       res => {
         if (Array.isArray(res['data']) && res['data'].length === 0) {
@@ -111,7 +111,7 @@ export class ListLiquidacionesComponent implements OnInit {
 
   editLiquidacion = (liquidacion) => {
     (this as any).mensajeSpinner = 'Obteniendo Liquidacion'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getLiquidacionCompleta(liquidacion).subscribe(
       res => {
         this.lcargando.ctlSpinner(false)

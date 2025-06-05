@@ -612,7 +612,7 @@ export class DashboardComponent implements OnInit {
 
   validatePermission = () => {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
 
@@ -689,7 +689,7 @@ export class DashboardComponent implements OnInit {
     this.periodos = await this.apiService.getPeriodos();
 
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getProgramas().subscribe(
       res => {
         res['data'].forEach(p => {
@@ -721,7 +721,7 @@ export class DashboardComponent implements OnInit {
   cargaDepartamentos(event) {
     /** Carga los departamentos asociados al programa seleccionado */
     (this as any).mensajeSpinner = 'Cargando Departamentos...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     let data = {
       programa: event.nombre
     }

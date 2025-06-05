@@ -104,7 +104,7 @@ export class VisualizadorComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -177,7 +177,7 @@ export class VisualizadorComponent implements OnInit {
   async handleClickBuscar() {
     this.total = 0;
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Bienes'
       this.bienes = await this.apiService.getBienes({periodo: this.periodoSelected, departamento: this.departamentoObjectSelected.id_catalogo});
@@ -261,7 +261,7 @@ export class VisualizadorComponent implements OnInit {
       'PLA_AFIRMACION','PLA_PROC_SUGE','PLA_TIPO_REGIMEN','PLA_TIPO_PRESUPUESTO'"
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogos(data).subscribe(
       res => {
         // console.log(res['data'])
@@ -338,7 +338,7 @@ export class VisualizadorComponent implements OnInit {
       departamento: event.id
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiSrv.getBienes(data).subscribe(
       res => {
         this.lcargando.ctlSpinner(false)

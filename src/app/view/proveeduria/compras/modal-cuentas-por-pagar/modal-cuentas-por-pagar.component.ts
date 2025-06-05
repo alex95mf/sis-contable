@@ -53,7 +53,7 @@ export class ModalCuentasPorPagarComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.getCuentas()
       this.lcargando.ctlSpinner(false)
     })
@@ -79,14 +79,14 @@ export class ModalCuentasPorPagarComponent implements OnInit {
   async consultar() {
     Object.assign(this.paginate, {page: 1, pageIndex: 0})
     this.paginator.firstPage()
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getCuentas()
     this.lcargando.ctlSpinner(false)
   }
 
   async changePage({pageIndex}) {
     Object.assign(this.paginate, {page: pageIndex + 1})
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getCuentas()
     this.lcargando.ctlSpinner(false)
   }

@@ -24,7 +24,7 @@ standalone: false,
   styleUrls: ['./consulta-estado-cliente.component.scss']
 })
 export class ConsultaEstadoClienteComponent implements  OnInit {
-	
+
 	@ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 	  /* datatable */
 /* 	  dtOptions: any = {}; */

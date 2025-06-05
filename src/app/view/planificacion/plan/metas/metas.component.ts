@@ -168,7 +168,7 @@ export class MetasComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonSrv.getPermisionsGlobas(params).subscribe(
       res => {
         this.permisos = res["data"][0];
@@ -212,7 +212,7 @@ export class MetasComponent implements OnInit {
   }
 
   async getPeriodos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       const periodos = await this.metaSrv.getPeriodos()
       console.log(periodos.data)
@@ -537,7 +537,7 @@ export class MetasComponent implements OnInit {
     };
     (this as any).mensajeSpinner = 'Cargado OPG...';
     
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.metaSrv.getOPG(data).subscribe(
       res => {
         res['data'].forEach(o => {

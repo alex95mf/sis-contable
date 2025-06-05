@@ -358,7 +358,7 @@ export class GruposComponent implements OnInit {
         // Grupo
         // console.log('Nuevo Grupo')
         (this as any).mensajeSpinner = 'Generando codigo'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         let response = await this.apiService.getLastChild({parent: this.grupo.codigo_padre});
         this.lcargando.ctlSpinner(false)
         this.newGrupo = {
@@ -388,7 +388,7 @@ export class GruposComponent implements OnInit {
         // Subgrupo
         // console.log('Nuevo Subgrupo')
         (this as any).mensajeSpinner = 'Generando codigo'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         let response = await this.apiService.getLastChild({parent: this.grupo.codigo_grupo_producto});
         this.lcargando.ctlSpinner(false)
         this.newGrupo = {
@@ -423,7 +423,7 @@ export class GruposComponent implements OnInit {
 
   saveGrupo() {
     (this as any).mensajeSpinner = 'Almacenando Grupo'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.setGrupo({ grupo: this.newGrupo }).subscribe(
       (res: any) => {
         console.log(res)
@@ -460,7 +460,7 @@ export class GruposComponent implements OnInit {
 
   updateGrupo() {
     (this as any).mensajeSpinner = 'Actualizando Grupo'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.updateGrupo(
       this.grupo.id_grupo_productos,
       {

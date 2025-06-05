@@ -192,7 +192,7 @@ export class KardexComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Grupos'
       let response: Array<any> = await this.apiService.getGruposBienes();
@@ -227,7 +227,7 @@ export class KardexComponent implements OnInit {
     if(this.selectedBodega == undefined || this.selectedBodega == 0){
       this.toastr.info('Debe seleccionar una bodega')
     }else{
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
     try {
       let data={
         grupo: this.selectedGrupo,
@@ -307,7 +307,7 @@ export class KardexComponent implements OnInit {
     console.log(event)
     // console.log(this.selectedGrupo)
    //if (event != undefined && this.selectedReporte == 'PSG') {
-     this.lcargando.ctlSpinner(true)
+     this.lcargando.ctlSpinner(true);
      (this as any).mensajeSpinner = 'Filtrando Productos por Grupo de Bien'
      let data={
       id_grupo: event.id_grupo_productos

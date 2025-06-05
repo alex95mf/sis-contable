@@ -112,7 +112,7 @@ export class ModalAbogadosComponent implements OnInit {
 
   getJuicio() {
     (this as any).mensajeSpinner = "Cargando Juicio"
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getJuicio(this.juicio).subscribe(
       (res: any) => {
         // console.log(res.data)
@@ -130,7 +130,7 @@ export class ModalAbogadosComponent implements OnInit {
 
   getAbogados() {
     (this as any).mensajeSpinner = "Cargando Abogados"
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     this.apiService.getAbogados().subscribe(
       (res: any) => {
         // console.log(res.data)
@@ -147,7 +147,7 @@ export class ModalAbogadosComponent implements OnInit {
 
   asignarAbogado() {
     (this as any).mensajeSpinner = 'Asignando Abogado'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.asignaAbogado({juicio: this.juicio, abogado: this.abogadoSelected }).subscribe(
       (res: any) => {
         console.log(res.data)

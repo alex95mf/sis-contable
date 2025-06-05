@@ -380,7 +380,7 @@ export class ModalGestionComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Anulando Aprobación'
       try {
         const response = await this.aprobacionSrv.anularAprobacion({orden: this.data})

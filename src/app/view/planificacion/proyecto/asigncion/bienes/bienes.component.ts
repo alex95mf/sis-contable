@@ -80,7 +80,7 @@ export class BienesComponent implements OnInit {
     // NEcesito Periodo, Programa, Departamento, Atribucion
     // Buscar los bienes que tienen esos 4 datos.
     // Respuesta puede venir vacia (no hay bienes para el PDA-Periodo)
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       //
       (this as any).mensajeSpinner = 'Cargando Bienes y Servicios'
@@ -248,7 +248,7 @@ export class BienesComponent implements OnInit {
   }
 
   async saveInformation() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Validando datos'
       await this.validaData()
@@ -293,7 +293,7 @@ export class BienesComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Eliminando Bien'
 
       try {
@@ -341,7 +341,7 @@ toggleTooltip(index: number) {
 
 
 /* (this as any).mensajeSpinner = 'Validando...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.validaData()
       .then(() => {
         (this as any).mensajeSpinner = 'Almacenando Bienes'

@@ -110,7 +110,7 @@ export class DescuentosComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.cargaPeriodos()
     await this.cargaConceptos()
     await this.getDescuentos()
@@ -120,14 +120,14 @@ export class DescuentosComponent implements OnInit {
   async consultar() {
     Object.assign(this.paginate, {page: 1, pageIndex: 0})
     this.paginator.firstPage()
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getDescuentos()
     this.lcargando.ctlSpinner(false)
   }
 
   async changePage({pageIndex}) {
     Object.assign(this.paginate, {page: pageIndex + 1})
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getDescuentos()
     this.lcargando.ctlSpinner(false)
   }

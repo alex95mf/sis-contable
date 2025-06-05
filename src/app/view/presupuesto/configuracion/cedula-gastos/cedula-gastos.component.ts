@@ -632,7 +632,7 @@ console.log("copu",copy);
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiSrv.cargarPeriodos();
@@ -658,7 +658,7 @@ console.log("copu",copy);
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Generando Periodo'
         let periodo = await this.apiSrv.generarPeriodoPresupuesto()

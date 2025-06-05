@@ -114,7 +114,7 @@ export class TareasComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       // (this as any).mensajeSpinner = 'Cargando listado de Responsables'
       // this.responsables = await this.apiService.getResponsables()
@@ -136,7 +136,7 @@ export class TareasComponent implements OnInit {
   }
   /* getResponsables() {
     (this as any).mensajeSpinner = 'Cargando Responsables'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getResponsables().subscribe(
       (res: any) => {
         // console.log(res)
@@ -227,7 +227,7 @@ export class TareasComponent implements OnInit {
   }
 
   async guardaTareas() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Validando Datos'
       await this.validateData()
@@ -300,7 +300,7 @@ export class TareasComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Eliminando Tarea'
       if (tarea.id != null) {
         try {

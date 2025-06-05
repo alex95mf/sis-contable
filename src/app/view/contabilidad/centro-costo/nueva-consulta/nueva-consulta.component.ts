@@ -62,7 +62,7 @@ export class NuevaConsultaComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.validaPermisos()
       this.lcargando.ctlSpinner(false)
     }, 0)

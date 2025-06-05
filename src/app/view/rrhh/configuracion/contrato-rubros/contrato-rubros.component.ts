@@ -59,7 +59,7 @@ export class ContratoRubrosComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Tipos de Contrato'
       this.lst_tipo_contrato = await this.apiService.getTipoContrato('TCC');
@@ -107,7 +107,7 @@ export class ContratoRubrosComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Almacenando Configuración (Puede demorar unos segundos)';
         await this.apiService.setTipoContratoRubro({rubros: this.lst_rubro, lst_tipo_contrato: this.lst_tipo_contrato})

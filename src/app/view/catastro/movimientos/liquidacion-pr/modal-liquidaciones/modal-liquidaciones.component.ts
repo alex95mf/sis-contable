@@ -93,7 +93,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   }
 
   async getLiquidaciones() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Liquidaciones'
       let liquidaciones = await this.apiService.getLiquidaciones({params: { filter: this.filter, paginate: this.paginate }})

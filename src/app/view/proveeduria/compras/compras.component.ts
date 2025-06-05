@@ -279,7 +279,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
 
     this.comSrv.listaCompras$.subscribe(
       async (res: any) => {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Cargando Datos'
          console.log(res)
 
@@ -931,7 +931,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
   }
 
   async cargarListas() {
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando Listas'
     await this.getImpuestosDetalle()
     await this.getIceSri()
@@ -4005,7 +4005,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
 
 
   ChangeFuenteCuenta(datosCuenta:any, infoDetails:any, index){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Calculando'
     console.log(datosCuenta);
     infoDetails[index]['cod_cuenta_impuesto_rtefte'] = datosCuenta.cuenta;
@@ -4017,7 +4017,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
   }
 
   async ChangeImpuestoIva(event: any, dataelement, index) {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Calculando'
     console.log(event)
     dataelement[index].porce_iva = event.porcentaje_rte_iva;
@@ -5419,7 +5419,7 @@ this.lastRecord = null
 
   async handleSelectProceso(id_proceso: number) {
     if (id_proceso !== null) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Cargando Condiciones'
         this.id_solicitud = id_proceso
@@ -5485,7 +5485,7 @@ this.lastRecord = null
     this.tbl_partidas = []
     this.ingresoSelected = id
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     // Obtener detalles
     const detalles = await this.comSrv.getIngresoDetalles({ingreso: {id}})
     console.log(detalles)
@@ -7302,7 +7302,7 @@ filterWithAccount(list: any[]) {
   }
 
   async getLatest() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando Registro'
     try {
       const response = await this.comSrv.getUltimaCompra()
@@ -7430,7 +7430,7 @@ this.tbl_partidas = [];
         return
       }
 
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Cargando Registro'
       try {
         const response = await this.comSrv.getComprasGeneradas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}) as any
@@ -7456,7 +7456,7 @@ this.tbl_partidas = [];
 
   async consultaRegGuardado(id_compra) {
 
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Cargando Registro'
       try {
         const response = await this.comSrv.getComprasGeneradas({params: {filter: {id: id_compra}, paginate: {page: 1, perPage: 1}}}) as any
@@ -7525,7 +7525,7 @@ this.tbl_partidas = [];
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
         try {
         if (res["data"][0].estado !=='C') {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           (this as any).mensajeSpinner = 'Anulando Compra'
           try {
             const response = await this.comSrv.anularCompra({compra: this.id_compra, motivo: result.value})

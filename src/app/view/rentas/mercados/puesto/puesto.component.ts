@@ -144,7 +144,7 @@ export class PuestoComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonService.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -193,7 +193,7 @@ export class PuestoComponent implements OnInit {
     }
 
     (this as any).mensajeSpinner = 'Cargando Puestos de Mercados'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     this.apiService.getPuestos(data).subscribe(
       (res: any) => {
@@ -268,7 +268,7 @@ export class PuestoComponent implements OnInit {
         }).then((result) => {
           if (result.value) {
             (this as any).mensajeSpinner = 'Guardando cambios'
-            this.lcargando.ctlSpinner(true)
+            this.lcargando.ctlSpinner(true);
             this.apiService.savePuesto({puesto: this.puesto}).subscribe(
               res => {
                 this.puesto = res["data"];
@@ -314,7 +314,7 @@ export class PuestoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         (this as any).mensajeSpinner = 'Editando información'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.apiService.updatePuesto({puesto: this.puesto}).subscribe(
           res => {
             this.lcargando.ctlSpinner(false);

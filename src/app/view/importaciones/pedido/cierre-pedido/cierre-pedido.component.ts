@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./cierre-pedido.component.scss']
 })
 export class CierrePedidoComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   importPed: any = {
     Total_peso: parseFloat('0.00').toFixed(2), total_volumen: parseFloat('0.00').toFixed(2), num_doc: "?",
@@ -70,7 +70,7 @@ export class CierrePedidoComponent implements OnInit {
     })
 
     this.commonVarSrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarSrv.listenCierrePedidosImp.asObservable().subscribe(res => {

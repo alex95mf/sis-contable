@@ -145,7 +145,7 @@ export class DocElecComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Catalogos'
       let res_tipo_documento = await this.apiService.getTipoDocumentos();
@@ -176,7 +176,7 @@ export class DocElecComponent implements OnInit {
   }
 
   async getDocumentos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Documentos'
       let documentos = await this.apiService.getDocumentos({ filter: this.filter })
@@ -218,7 +218,7 @@ export class DocElecComponent implements OnInit {
   }
 
   async enviarCorreo(documento: any) {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Enviando Correo'
       let response =  await this.apiService.enviarCorreo({ documento: documento })
@@ -243,7 +243,7 @@ export class DocElecComponent implements OnInit {
   }
 
   async reiniciar(documento: any) {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Restaurando estados del Documento'
       let comprobante = await this.apiService.reiniciar({documento: documento})
@@ -330,7 +330,7 @@ let registros = this.lst_documentos.data.filter((item: any) =>  item.check === t
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Reprocesando'
         let response = await this.apiService.reiniciarLote({ registros })
@@ -367,7 +367,7 @@ let registros = this.lst_documentos.data.filter((item: any) =>  item.check === t
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Enviando'
         let response = await this.apiService.enviarCorreoLote({ registros })

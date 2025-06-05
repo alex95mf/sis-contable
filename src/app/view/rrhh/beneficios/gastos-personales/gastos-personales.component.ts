@@ -234,7 +234,7 @@ export class GastosPersonalesComponent implements OnInit {
           num_cargas_familiares: res.familiares_count,
         })
 
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         try {
           // Consultar IRbase_imponibl
           (this as any).mensajeSpinner = 'Cargando datos de Impuesto a la Renta'
@@ -685,7 +685,7 @@ export class GastosPersonalesComponent implements OnInit {
   }
 
   async handleInputCargas() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Consultando Valor por Cargas Familiares'
     await this.getMaxGastoPersonal(this.impuestoRenta.num_cargas_familiares, this.cc_value_anio)
     this.lcargando.ctlSpinner(false)
@@ -693,7 +693,7 @@ export class GastosPersonalesComponent implements OnInit {
   }
 
   async consultarTablaDiscapacidad() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Consultando Valor por Discapacidad'
     await this.getRebajaDiscapacidad(this.empleado.porcentaje_discapacidad, this.cc_value_anio)
     this.lcargando.ctlSpinner(false)
@@ -799,7 +799,7 @@ export class GastosPersonalesComponent implements OnInit {
     let impuesto_causado: number = 0;
     let impuesto_renta_anual: number = 0;
     let impuesto_renta_mensual: number = 0;
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Obteniendo Impuesto Causado'
       console.log(base_imponible)
@@ -826,7 +826,7 @@ export class GastosPersonalesComponent implements OnInit {
 
      if (value) {
       // Obtener Valor por Discapacidad
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.getRebajaDiscapacidad(this.empleado.porcentaje_discapacidad,this.filter.periodo)
       this.lcargando.ctlSpinner(false)
     }
@@ -841,7 +841,7 @@ export class GastosPersonalesComponent implements OnInit {
 
     if (value) {
       // Obtener Valor por Tercera Edad
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.getRebajaTerceraEdad(this.cc_value_anio)
       this.lcargando.ctlSpinner(false)
     } else {

@@ -152,7 +152,7 @@ export class PuestoMercadoComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonService.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -186,7 +186,7 @@ export class PuestoMercadoComponent implements OnInit {
 
     let excelData = []
     (this as any).mensajeSpinner = 'Exportando Puestos de Mercado'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getPuestos({params: { filter: this.filter }}).subscribe(
       (res: any) => {
         console.log(res)
@@ -218,7 +218,7 @@ export class PuestoMercadoComponent implements OnInit {
   consultarPuestos() {
     Object.assign(this.paginate, { page: 1 })
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.cargaPuestos()
   }
 
@@ -348,7 +348,7 @@ export class PuestoMercadoComponent implements OnInit {
     }
     Object.assign(this.paginate, newPaginate);
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.cargaPuestos();
   }
 

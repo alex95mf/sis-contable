@@ -70,7 +70,7 @@ export class ModalComponent implements OnInit {
     )
 
     (this as any).mensajeSpinner = 'Cargando Compras'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getCompras({bien: this.bien}).subscribe(
       (res: any) => {
         // console.log(res['data'])
@@ -162,7 +162,7 @@ export class ModalComponent implements OnInit {
     }
 
     (this as any).mensajeSpinner = 'Almacenando Compras'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.setCompras({compras: compra}).subscribe(
       (res: any) => {
         // console.log(res)
@@ -207,7 +207,7 @@ export class ModalComponent implements OnInit {
       async (result: any) => {
         if (result.isConfirmed) {
           (this as any).mensajeSpinner = 'Marcando como Pagado'
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           try {
             let res: any = await this.api.setPagado(compra.id, compra)
             console.log(res)

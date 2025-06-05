@@ -21,7 +21,7 @@ standalone: false,
 })
 export class DevolucionesComponent implements OnInit {
 
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataBuy: any = { motivo_dev: 0, tipo_pago: "Tipo", forma_pago: "Forma", estado_dev: "En proceso", asesor: { nombre: "Nombre acesor" }, client: { cupo_credito: "0.00", saldo_credito: "0.00", razon_social: "Nombre cliente" }, name_doc: "Tipo documento" };
@@ -67,7 +67,7 @@ export class DevolucionesComponent implements OnInit {
   ) {
 
     this.commonVarServices.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarServices.showDevolutionsListen.asObservable().subscribe(res => {

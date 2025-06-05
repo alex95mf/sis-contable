@@ -164,7 +164,7 @@ export class LiquidacionPrComponent implements OnInit {
         }
 
         // Consultar Propiedades
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.getPropiedades(contribuyente.id_cliente)
         this.roContribuyenteSelected = false
         this.lcargando.ctlSpinner(false)
@@ -188,7 +188,7 @@ export class LiquidacionPrComponent implements OnInit {
     this.apiService.liquidacionSelected$.subscribe(
       async (liquidacion: any) => {
         // console.log(liquidacion)
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         let documento = await this.getLiquidacion(liquidacion.id_liquidacion)
         // console.log(documento)
         this.contribuyente = documento.contribuyente
@@ -340,7 +340,7 @@ export class LiquidacionPrComponent implements OnInit {
   }
 
   async setLiquidacion() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let response = await this.apiService.setLiquidacion({
         contribuyente: this.contribuyente,

@@ -115,7 +115,7 @@ export class ConContribuyenteComponent implements OnInit {
   exportarExcel = () => {
     let excelData = []
     (this as any).mensajeSpinner = "Descargando Listado"
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.mdlSrv.getContribuyentes({ params: { filter: this.filter } }).subscribe(
       (res: any) => {
         console.log(res)

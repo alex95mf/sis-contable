@@ -189,7 +189,7 @@ export class TarifaComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonService.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -214,7 +214,7 @@ export class TarifaComponent implements OnInit {
   cargaConceptos() {
     /** Llama a la API para cargar la lista desplegable con los conceptos */
     (this as any).mensajeSpinner = 'Cargando Conceptos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getConceptos().subscribe(
       res => {
         if (Array.isArray(res['data']) && res['data'].length === 0) {
@@ -268,7 +268,7 @@ export class TarifaComponent implements OnInit {
     /** Llama a la API para cargar la lista de detalles del concepto seleccionado */
     (this as any).mensajeSpinner = 'Obteniendo Detalles del Concepto'
     this.tarifa.detalles = []
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getDetallesConcepto({id_concepto: concepto}).subscribe(
       res => {
         // console.log(res['data'])
@@ -346,7 +346,7 @@ export class TarifaComponent implements OnInit {
     this.tarifa.estado = this.tarifa.estado ? 'A' : 'I'  // Altera el valor del estado de la tarifa para guardar en la base
     this.tarifa.detalles.map(d => d.estado = d.estado ? 'A' : 'I')
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
 
         if (this.editMode) {
@@ -468,7 +468,7 @@ export class TarifaComponent implements OnInit {
   cargaTarifaDetalles(tarifa) {
     
     (this as any).mensajeSpinner = 'Cargando Detalles de Tarifa'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getTarifa(tarifa.id).subscribe(
       res => {
         if (Array.isArray(res['data']) && res['data'].length === 0) {

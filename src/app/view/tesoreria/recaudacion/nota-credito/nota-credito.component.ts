@@ -411,7 +411,7 @@ export class NotaCreditoComponent implements OnInit {
       params: "'REN_MERCADO'"
     };
     (this as any).mensajeSpinner = 'Cargando datos de Mercados'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.contSvr.getMercados(data).subscribe(
       res => {
         if (Array.isArray(res['data']) && res['data'].length === 0) {
@@ -497,7 +497,7 @@ export class NotaCreditoComponent implements OnInit {
     }
     this.documento.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto
     (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.puestos = []
     this.apiSrv.getPuestos().subscribe(
       (res: any) => {

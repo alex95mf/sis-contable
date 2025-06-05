@@ -156,7 +156,7 @@ export class FormSaveComponent implements OnInit {
   }
 
   validacion(valor){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     if(this.retencion.descripcion == undefined || this.retencion.descripcion == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese una descripción');
@@ -239,7 +239,7 @@ export class FormSaveComponent implements OnInit {
   }
 
   // getCatalogo(){
-  //   this.lcargando.ctlSpinner(true)
+  //   this.lcargando.ctlSpinner(true);
   //   let paretnId = [7, 4, 1]
   //   this.service.getNomCatalogo(paretnId).subscribe(
   //     (res) =>{

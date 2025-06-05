@@ -474,7 +474,7 @@ anular(){
 }
 
 async getLatest() {
-  this.lcargando.ctlSpinner(true)
+  this.lcargando.ctlSpinner(true);
   (this as any).mensajeSpinner = 'Cargando Registro'
   try {
     const response = await this.apiSrv.getUltimaMulta()
@@ -504,7 +504,7 @@ async handleEnter({key}) {
       return
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando Registro'
     try {
       const response = await this.apiSrv.getMultas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}) as any

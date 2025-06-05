@@ -20,7 +20,7 @@ standalone: false,
 	styleUrls: ['./consulta-importacion.component.scss']
 })
 export class ConsultaImportacionComponent implements OnInit {
-	
+
 	@ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 	@ViewChild(DataTableDirective)
 	dtElement: DataTableDirective;

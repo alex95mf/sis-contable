@@ -68,14 +68,14 @@ export class ModalDetallesComponent implements OnInit {
         this.activeModal.close()
         break;
       case "GUARDAR":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.setNotificacion()
         this.lcargando.ctlSpinner(false)
         this.activeModal.close()
         Swal.fire('Configuracion de Notificacion almacenado', '', 'success')
         break;
       case "MODIFICAR":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.updateNotificacion()
         this.lcargando.ctlSpinner(false)
         this.activeModal.close()

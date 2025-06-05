@@ -65,7 +65,7 @@ export class CatalogoComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.getListas()
       this.lcargando.ctlSpinner(false)
     }, 0)
@@ -81,13 +81,13 @@ export class CatalogoComponent implements OnInit {
         // this.nuevoModulo()
         break;
       case "GUARDAR":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.setCatalogo()
         await this.getListas()
         this.lcargando.ctlSpinner(false)
         break;
       case "MODIFICAR":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.updateCatalogo()
         await this.getListas()
         this.lcargando.ctlSpinner(false)
@@ -143,7 +143,7 @@ export class CatalogoComponent implements OnInit {
     this.vmButtons[1].habilitar = true
     this.vmButtons[2].habilitar = false
     this.formReadonly = false
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getItemCatalogo(catalogo)
     this.lcargando.ctlSpinner(false)
   }

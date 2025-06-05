@@ -48,7 +48,7 @@ export class AnexosListBogComponent implements OnInit, OnDestroy {
 
     this.commonVarService.contribAnexoLoad.asObservable().subscribe(
       (res: any) => {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Cargando Anexos ...'
         // console.log('anexos',res, this.permissions, this.dataUser);
         console.log(myVarGlobals.fOrdenesCompra);
@@ -120,7 +120,7 @@ export class AnexosListBogComponent implements OnInit, OnDestroy {
 
   cargarArchivo(){
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
@@ -173,7 +173,7 @@ export class AnexosListBogComponent implements OnInit, OnDestroy {
     }
 
     // (this as any).mensajeSpinner = 'Eliminando anexo'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
 
     this.apiService.deleteAnexo(data).subscribe(
       res => {
@@ -226,7 +226,7 @@ export class AnexosListBogComponent implements OnInit, OnDestroy {
           }
 
           (this as any).mensajeSpinner = 'Eliminando anexo'
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           console.log()
           this.apiService.deleteAnexo(data).subscribe(
             res => {

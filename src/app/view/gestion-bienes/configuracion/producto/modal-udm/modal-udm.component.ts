@@ -81,7 +81,7 @@ export class ModalUdmComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let response = await this.apiService.getUdmSimple()
       this.cmb_unidad_primaria = [...response]
@@ -111,7 +111,7 @@ export class ModalUdmComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         let response = await this.apiService.createUdm({udm: this.unidad_medida});
         console.log(response)

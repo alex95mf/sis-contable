@@ -456,7 +456,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.setVacacionesCab()
       this.lcargando.ctlSpinner(false)
     }
@@ -693,7 +693,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
       return;
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let response = await this.vacaServ.setEstadoVacacion(det_vacaciones_nom.id_vac_detalle, { vac_detalle_estado_id: estado })
       console.log(response)

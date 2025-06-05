@@ -119,7 +119,7 @@ export class SolaresComponent implements OnInit {
   
     }
     setTimeout(async () => {
-      // this.lcargando.ctlSpinner(true)
+      // this.lcargando.ctlSpinner(true);
       this.validatePermission()
       await this.cargaCatalogos()
       // this.lcargando.ctlSpinner(false)
@@ -178,7 +178,7 @@ export class SolaresComponent implements OnInit {
 
   async cargaCatalogos() {
     (this as any).mensajeSpinner = 'Cargando Catalogos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     
     try {
       let catalogos: any = await this.apiService.getCatalogos({ params: "'CAT_ZONA','CAT_SECTOR','CAT_ESTADO_PREDIO'" })
@@ -280,7 +280,7 @@ export class SolaresComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Almacenando Solar'
         let response = await this.apiService.setSolar({solar: this.solar})
@@ -329,7 +329,7 @@ export class SolaresComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Modificando Solar'
         //let response = await this.apiService.putCatalogo(this.itemCatalogo.id_catalogo, {catalogo: this.itemCatalogo})
@@ -345,7 +345,7 @@ export class SolaresComponent implements OnInit {
   }
 
   async actualizar() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     this.lcargando.ctlSpinner(false)
   }

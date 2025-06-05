@@ -22,7 +22,7 @@ standalone: false,
 })
 
 export class CierreComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
@@ -483,7 +483,7 @@ standalone: false,
 })
 
 export class CierreComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

@@ -101,7 +101,7 @@ export class ModalCondicionesComponent implements OnInit {
   }
 
   async cargarFormasPago() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Formas de Pago'
       let catalogo = await this.contratoService.getCatalogo({params: "'CMP_COND_FORMA_PAGO'"}) as any

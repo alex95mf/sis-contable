@@ -175,7 +175,7 @@ pageSizeOptions:[5,10,20,50]
 
   async CargarCotizaciones(){
     (this as any).mensajeSpinner = 'Cargando Proyectos';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -194,7 +194,7 @@ pageSizeOptions:[5,10,20,50]
 
   }
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 

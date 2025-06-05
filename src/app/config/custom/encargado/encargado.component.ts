@@ -14,7 +14,7 @@ export class EncargadoComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  
+
   encargados: any = []
 
   vmButtons: any
@@ -29,7 +29,7 @@ export class EncargadoComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private commonVrs: CommonVarService,
     private servicio: EncargadoService
-  ) { 
+  ) {
 
   }
 

@@ -220,7 +220,7 @@ export class FormularioNotificacionesComponent implements OnInit {
 
   cargarConceptos() {
     // (this as any).mensajeSpinner = 'Cargando Conceptos'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       (res: any) => {
         res.data.forEach(e => {
@@ -325,7 +325,7 @@ export class FormularioNotificacionesComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         (this as any).mensajeSpinner = 'Generando Expedientes'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.apiSrv.generarNotificaciones({titulos: procesados}).subscribe(
           (res: any) => {
             console.log(res)
@@ -367,7 +367,7 @@ export class FormularioNotificacionesComponent implements OnInit {
     }).then((result: any) => {
       if (result.isConfirmed) {
         (this as any).mensajeSpinner = 'Generando Expedientes'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.apiSrv.generarExpediente({ titulos: process }).subscribe(
           (res: any) => {
             console.log(res.data)
@@ -428,7 +428,7 @@ export class FormularioNotificacionesComponent implements OnInit {
   exportarExcel() {
     let excelData = []
     (this as any).mensajeSpinner = 'Exportando'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     this.apiSrv.getNotificacionCobro({params: {tipo:"GESTION", filter: this.filter}}).subscribe(
       (res: any) => {

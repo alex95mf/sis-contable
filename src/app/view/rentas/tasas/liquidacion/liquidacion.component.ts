@@ -119,7 +119,7 @@ export class LiquidacionComponent implements OnInit {
     this.commonVarService.selectListLiqPURen.asObservable().subscribe(
       (res) => {
         //(this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
-        //this.lcargando.ctlSpinner(true)
+        //this.lcargando.ctlSpinner(true);
         this.restoreForm();
         this.formReadOnly = true;
         this.totalCalculo = false;
@@ -364,7 +364,7 @@ export class LiquidacionComponent implements OnInit {
 
   validaPermisos = () => {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
 
@@ -1037,7 +1037,7 @@ export class LiquidacionComponent implements OnInit {
   async getUltimoRegistro(skip: number = 0) {
     this.skip = skip
     (this as any).mensajeSpinner = 'Cargado Registro'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       const conceptos = [this.conceptosList[0].id]
       const response = await this.apiService.getUltimoRegistro({conceptos, skip})

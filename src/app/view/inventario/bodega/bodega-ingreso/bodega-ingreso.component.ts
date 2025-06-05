@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ['./bodega-ingreso.component.scss']
 })
 export class BodegaIngresoComponent implements OnInit {
-  
+
 	@ViewChild(CcSpinerProcesarComponent, {
 		static: false
 	}) lcargando: CcSpinerProcesarComponent;

@@ -103,7 +103,7 @@ export class ModalBusquedaComponent implements OnInit {
 
   getDepreciaciones() {
     (this as any).mensajeSpinner = 'Cargando Depreciaciones'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     this.apiService.getDepreciaciones({filter: this.filter, paginate: this.paginate}).subscribe(
       (res: any) => {

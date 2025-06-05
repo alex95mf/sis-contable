@@ -125,7 +125,7 @@ export class DecrementoComponent implements OnInit {
       return;
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Bienes'
       let response = await this.apiService.getBienes({programa: this.programa, periodo: this.periodo, codigo_presupuesto: this.cod_presupuesto});
@@ -156,7 +156,7 @@ export class DecrementoComponent implements OnInit {
     if (result.isConfirmed) {
       this.por_actualizar = true;
  
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Duplicando Bien'
         let response: Array<any> = await this.apiService.duplicarBien({

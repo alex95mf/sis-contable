@@ -82,7 +82,7 @@ export class EmailDestinatarioComponent implements OnInit {
     }
 
     (this as any).mensajeSpinner = 'Enviando correo...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.enviarCorreo(data).subscribe(
       res => {
         this.lcargando.ctlSpinner(false)

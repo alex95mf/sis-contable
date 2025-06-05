@@ -389,7 +389,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
   }
 
   async cambiarEstadoOrden(orden: any) {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cambiando Estado de Orden'
     try {
       const response = await this.service.setEstadoOrden({orden})

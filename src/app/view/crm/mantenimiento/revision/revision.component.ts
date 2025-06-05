@@ -395,7 +395,7 @@ lista_estados:any = [
 
   async CargarProductos(){
     (this as any).mensajeSpinner = 'Cargando Productos';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -441,7 +441,7 @@ lista_estados:any = [
 
   async consultarProducto(){
     (this as any).mensajeSpinner = 'Cargando Producto';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 

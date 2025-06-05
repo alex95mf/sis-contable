@@ -126,7 +126,7 @@ export class EmisionArancelesComponent implements OnInit {
       (res) => {
         console.log(res);
         (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.restoreForm(false, false);
         this.formReadOnly = true;
         this.liquidacion = {
@@ -485,7 +485,7 @@ export class EmisionArancelesComponent implements OnInit {
 
   validaPermisos = () => {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
 
@@ -712,7 +712,7 @@ export class EmisionArancelesComponent implements OnInit {
     if (arancel.id) {
       if (arancel.avaluo) {
         (this as any).mensajeSpinner = 'Obteniendo Propiedades...'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
           (res) => {
             console.log(res['data']);

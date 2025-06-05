@@ -225,7 +225,7 @@ export class ModalModSetComponent implements OnInit {
   }
 
   getCatalogo(){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     let paretnId = [7, 4, 1]
     this.service.getNomCatalogo(paretnId).subscribe(
       (res) =>{
@@ -248,7 +248,7 @@ export class ModalModSetComponent implements OnInit {
   }
 
   validacion(valor){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     if(this.rubro.cuentaInvDeb == null){
       Swal.fire({
         title: 'Pregunta',

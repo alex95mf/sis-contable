@@ -69,7 +69,7 @@ export class ModalConfiguracionDetallesComponent implements OnInit {
         break;
       case "GUARDAR":
         try {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           await this.setConfiguracion()
           this.lcargando.ctlSpinner(false)
           Swal.fire('Configuracion almacenada', '', 'success').then(() => {
@@ -86,7 +86,7 @@ export class ModalConfiguracionDetallesComponent implements OnInit {
         break;
       case "MODIFICAR":
         try {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           await this.updateConfiguracion()
           this.lcargando.ctlSpinner(false)
           Swal.fire('Configuracion de Notificacion actualizado', '', 'success').then(() => {

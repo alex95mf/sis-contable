@@ -52,7 +52,7 @@ export class NotificacionesComponent implements OnInit {
 
     this.apiService.setNotificacion$.subscribe(
       async () => {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.getNotificaciones()
         this.lcargando.ctlSpinner(false)
       }
@@ -81,7 +81,7 @@ export class NotificacionesComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getCatalogos()
     await this.getModulos()
     await this.getNotificaciones()
@@ -119,14 +119,14 @@ export class NotificacionesComponent implements OnInit {
   async consultar() {
     Object.assign(this.paginate, {page: 1, pageIndex: 0})
     this.paginator.firstPage()
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getNotificaciones()
     this.lcargando.ctlSpinner(false)
   }
 
   async changePage({pageIndex}) {
     Object.assign(this.paginate, {page: pageIndex + 1})
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getNotificaciones()
     this.lcargando.ctlSpinner(false)
   }
@@ -185,7 +185,7 @@ export class NotificacionesComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.eliminarNotificacion(notificacion)
       this.lcargando.ctlSpinner(false)
     }

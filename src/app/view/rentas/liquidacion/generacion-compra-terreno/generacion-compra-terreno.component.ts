@@ -111,7 +111,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
       (res) => {
         console.log(res)
         (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.restoreForm(false, false);
         this.formReadOnly = true;
         this.liquidacion = res;
@@ -279,7 +279,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
 
   validaPermisos = () => {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
     let params = {
@@ -595,7 +595,7 @@ validaDataGlobal() {
     this.observacionesDisabled = false;
     this.vmButtons[3].habilitar = false;
     (this as any).mensajeSpinner = 'Obteniendo Propiedades...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
       (res) => {
         if (res['data'].length > 0) {

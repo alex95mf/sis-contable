@@ -47,7 +47,7 @@ export class RegistroComponent implements OnInit {
   async cargaInicial() {
     let response;
     // Cargar Periodos
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Periodos'
       response = await this.api.getPeriodos();
@@ -67,7 +67,7 @@ export class RegistroComponent implements OnInit {
 
   /* cargaProgramas() {
     (this as any).mensajeSpinner = 'Cargando Programas'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getProgramas().subscribe(
       res => {
         // console.log(res['data']);
@@ -94,7 +94,7 @@ export class RegistroComponent implements OnInit {
     this.bienes = []
     
     (this as any).mensajeSpinner = 'Cargando Departamentos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getDepartamentos({ programa: e.valor }).subscribe(
       (res: any) => {
         // console.log(res['data']);
@@ -125,7 +125,7 @@ export class RegistroComponent implements OnInit {
       departamento: e.nombre
     }
     (this as any).mensajeSpinner = 'Cargando Atribuciones'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getAtribuciones({ departamento: e.nombre }).subscribe(
       (res: any) => {
         // console.log(res['data']);
@@ -154,7 +154,7 @@ export class RegistroComponent implements OnInit {
       atribucion: e
     }
     (this as any).mensajeSpinner = 'Cargando Bienes y Servicios'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getBienes(data).subscribe(
       (res: any) => {
         // console.log(res['data']);

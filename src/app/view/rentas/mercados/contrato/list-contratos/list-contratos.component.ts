@@ -74,7 +74,7 @@ export class ListContratosComponent implements OnInit {
     };
 
     (this as any).mensajeSpinner = 'Cargando Contratos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getContratosList().subscribe(
       res => {
         if (Array.isArray(res['data']) && res['data'].length === 0) {
@@ -117,7 +117,7 @@ export class ListContratosComponent implements OnInit {
 
   showContrato(contrato) {
     (this as any).mensajeSpinner = 'Obteniento Contrato'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getContratoCompleto(contrato.id).subscribe(
       res => {
         this.commonVarService.editContrato.next(res['data'])
@@ -279,7 +279,7 @@ export class ListContratosComponent implements OnInit {
 
   showContrato(id): void {
     (this as any).mensajeSpinner = 'Obteniento Contrato'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.contratoSrv.getContratoCompleto(id).subscribe(
       res => {
         this.commonVrs.editContrato.next(res['data'])

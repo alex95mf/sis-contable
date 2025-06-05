@@ -83,7 +83,7 @@ export class IncrementoComponent implements OnInit {
       return;
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Bienes'
       let response = await this.apiService.getBienes({programa: this.programa, periodo: this.periodo, codigo_presupuesto: this.cod_presupuesto});

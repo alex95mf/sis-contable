@@ -98,7 +98,7 @@ export class FacturasSaldoComponent implements OnInit {
     this.apiService.cierreSelected$.subscribe(
       async (documento: any) => {
         console.log("se cerro el modal")
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         try {
           (this as any).mensajeSpinner = 'Cargando Documento...'
           let response = await this.apiService.getCierre({ documento })
@@ -161,7 +161,7 @@ export class FacturasSaldoComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Facturas'
       let facturas = await this.apiService.getFacturas({params: { filter: this.filter }})
@@ -213,7 +213,7 @@ export class FacturasSaldoComponent implements OnInit {
         this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
             try {
             if (res["data"][0].estado !=='C') {
-              this.lcargando.ctlSpinner(true)
+              this.lcargando.ctlSpinner(true);
               try {
                 (this as any).mensajeSpinner = 'Almacenando Cierre'
                 let response: any = await this.apiService.setCierre({documento: this.documento})
@@ -323,7 +323,7 @@ calcularTotal(detalle: any) {
 
             if (res["data"][0]?.estado !=='C') {
 
-            this.lcargando.ctlSpinner(true)
+            this.lcargando.ctlSpinner(true);
             try {
               (this as any).mensajeSpinner = 'Eliminando Cierre'
               await this.apiService.deleteCierre(this.documento.id)

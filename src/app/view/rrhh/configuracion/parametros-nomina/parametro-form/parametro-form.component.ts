@@ -138,7 +138,7 @@ export class ParametroFormComponent implements OnInit {
 
 
   validacion(valor){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     if(this.parametro.codigo == undefined || this.parametro.codigo == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Debe ingresar un Código');

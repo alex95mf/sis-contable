@@ -20,7 +20,7 @@ standalone: false,
 	styleUrls: ["./asignacion-cliente.component.scss"],
 })
 export class AsignacionClienteComponent implements OnInit {
-	
+
 	@ViewChild(CcSpinerProcesarComponent, {
 		static: false
 	}) lcargando: CcSpinerProcesarComponent;

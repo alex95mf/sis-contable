@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./solicitud.component.scss']
 })
 export class SolicitudComponent implements OnInit {
-  
+
 	@ViewChild(CcSpinerProcesarComponent, {
 		static: false
 	}) lcargando: CcSpinerProcesarComponent;

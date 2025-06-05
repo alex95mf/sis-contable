@@ -458,7 +458,7 @@ export class ContratacionComponent implements OnInit {
       }
       let excelData = []
       (this as any).mensajeSpinner = "Generando Archivo Excel..."
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       this.service.getContrataciones({ params: { filter: this.filter } }).subscribe(
         (res: any) => {
           console.log(res)

@@ -143,7 +143,7 @@ export class GestionExpedienteComponent implements OnInit {
 
   getCatalogos() {
     (this as any).mensajeSpinner = 'Cargando Catalogos'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogs({ params: "'CAT_SECTOR'" }).subscribe(
       (res: any) => {
         // this.lcargando.ctlSpinner(false)
@@ -230,7 +230,7 @@ export class GestionExpedienteComponent implements OnInit {
     }).then((result: any) => {
       if (result.isConfirmed) {
         (this as any).mensajeSpinner = "Procesando expedientes"
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         console.log({ expedientes: procesados })
         this.apiSrv.setJuicios({ expedientes: procesados }).subscribe(
           (res: any) => {
@@ -323,7 +323,7 @@ export class GestionExpedienteComponent implements OnInit {
   exportarExcel() {
     let excelData = []
     (this as any).mensajeSpinner = 'Exportando'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     this.apiSrv.getExpedientes({ params: { filter: this.filter }}).subscribe(
       (res: any) => {

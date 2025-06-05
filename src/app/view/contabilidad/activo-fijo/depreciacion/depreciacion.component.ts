@@ -45,7 +45,7 @@ export class DepreciacionComponent implements OnInit {
   dtOptions: any = {};
   dtTrigger = new Subject();
 
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   constructor(private toastr: ToastrService, private router: Router, private depreciationSrv: DepreciacionService,

@@ -92,7 +92,7 @@ export class FeriasComponent implements OnInit {
 
     this.apiService.updateTable$.subscribe(
       async () => {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.getFerias()
         this.lcargando.ctlSpinner(false)
       }
@@ -101,7 +101,7 @@ export class FeriasComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.getFerias()
       this.lcargando.ctlSpinner(false)
     }, 0)
@@ -113,7 +113,7 @@ export class FeriasComponent implements OnInit {
         this.modalService.open(ModalFeriasComponent, {size: 'xl', backdrop: 'static'})
         break;
       case "CONSULTAR":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.getFerias()
         this.lcargando.ctlSpinner(false)
         break;

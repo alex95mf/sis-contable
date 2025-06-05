@@ -22,7 +22,7 @@ standalone: false,
 export class ReportQuotesComponent implements OnInit {
 
   @ViewChild('printCDI') printCDI: ElementRef;
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;

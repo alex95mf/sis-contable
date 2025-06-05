@@ -206,7 +206,7 @@ export class ReporteProductosComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Grupos'
       let response: Array<any> = await this.apiService.getGruposBienes();
@@ -254,7 +254,7 @@ export class ReporteProductosComponent implements OnInit {
     // }
     
     
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
         let fecha_desde = ''
         let fecha_hasta = ''
@@ -336,7 +336,7 @@ export class ReporteProductosComponent implements OnInit {
  
   filterProductos(event: any) {
     console.log(event)
-     this.lcargando.ctlSpinner(true)
+     this.lcargando.ctlSpinner(true);
      (this as any).mensajeSpinner = 'Filtrando Productos por Grupo de Bien'
      let data={
       id_grupo: event.id_grupo_productos

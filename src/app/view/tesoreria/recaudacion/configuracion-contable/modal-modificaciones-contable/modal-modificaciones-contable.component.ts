@@ -288,7 +288,7 @@ export class ModalModificacionesContableComponent implements OnInit {
   }
 
   guardarNuevo(){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Almacenando Configuracion Contable'
     this.service.postConfiguracionContable(this.data).subscribe(
       (res)=>{
@@ -302,7 +302,7 @@ export class ModalModificacionesContableComponent implements OnInit {
   }
 
   updateContable(){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Actualizando Configuracion Contable'
     this.service.updateConfiguracionContable(this.data).subscribe(
       (res)=>{

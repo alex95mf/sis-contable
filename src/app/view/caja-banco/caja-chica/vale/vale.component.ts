@@ -67,7 +67,7 @@ export class ValeComponent implements OnInit {
     })
 
     this.commVarServ.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
   }
 

@@ -488,7 +488,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
 
     setTimeout(async () => {
       // this.cmb_periodo = await this.asistenciadiasempleService.getPeriodos()
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.cargaInicial()
       this.getTipoContratos()
       this.lcargando.ctlSpinner(false)
@@ -1830,7 +1830,7 @@ isOutOfStock(data) {
 
             if (result.isConfirmed) {
               try {
-                this.lcargando.ctlSpinner(true)
+                this.lcargando.ctlSpinner(true);
                 const response = await this.asistenciadiasempleService.deleteDiasTrabajados(this.filter.periodo, this.filter.mes,this.filter.fk_programa,this.filter.area,this.filter.departamento) as any;
                 console.log(response)
                 this.lcargando.ctlSpinner(false)

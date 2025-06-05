@@ -57,7 +57,7 @@ export class AnexosListComponent implements OnInit {
     this.commonService.saveContrato.asObservable().subscribe(
       res => {
         (this as any).mensajeSpinner = 'Actualizando lista de anexos'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         setTimeout(() => {
           this.apiService.getAnexosContrato({id_contrato: res.id_contrato, component: myVarGlobals.fRenContrato}).subscribe(
             res => {
@@ -111,7 +111,7 @@ export class AnexosListComponent implements OnInit {
           }
       
           (this as any).mensajeSpinner = 'Eliminando anexo'
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
       
           this.apiService.deleteAnexo(data).subscribe(
             res => {

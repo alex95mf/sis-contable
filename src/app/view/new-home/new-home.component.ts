@@ -12,7 +12,7 @@ standalone: false,
   styleUrls: ['./new-home.component.scss']
 })
 export class NewHomeComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   usuarios: any;
   password: any;
@@ -33,7 +33,7 @@ export class NewHomeComponent implements OnInit {
     private homeservices: HomeServices,
     private toastr: ToastrService,
     private comSrv: ApiServices,
-  ) { 
+  ) {
     this.homeservices.getIpAddress().subscribe(res => {
       this.ipSend = res;
       this.ipSend = this.ipSend.ip;
@@ -53,7 +53,7 @@ export class NewHomeComponent implements OnInit {
     if(this.img_index > 2) this.img_index = 0;
     this.img_src = this.imgs_url[this.img_index];
   }
-  
+
   login() {
     this.lcargando.ctlSpinner(true);
     let data = {
@@ -62,7 +62,7 @@ export class NewHomeComponent implements OnInit {
       ip: this.ipSend ?? '127.0.0.1',
       id_controlador:100
     }
-    
+
     this.homeservices.getLogin(data).subscribe(res => {
       localStorage.setItem('Datauser', JSON.stringify(res['data']));
       this.homeservices.setToken(res['data']['token']);
@@ -73,7 +73,7 @@ export class NewHomeComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
     })
   }
-    
+
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
       case "ENVIAR":
@@ -89,7 +89,7 @@ export class NewHomeComponent implements OnInit {
     ($("#exampleModal") as any).modal("hide");
     this.correos = undefined;
     }
-    
+
   recoveredPassword() {
     if (this.correos == undefined || this.correos == "") {
       this.toastr.info("Debe Ingresar correo registrado!!");

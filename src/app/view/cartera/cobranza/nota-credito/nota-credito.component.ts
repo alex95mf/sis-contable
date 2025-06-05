@@ -22,7 +22,7 @@ standalone: false,
   styleUrls: ['./nota-credito.component.scss']
 })
 export class NotaCreditoComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   processing: any = false;
@@ -84,7 +84,7 @@ export class NotaCreditoComponent implements OnInit {
     private socket: Socket) {
 
     this.commonVarSrvice.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarSrvice.setAccountNCV.asObservable().subscribe(res => {

@@ -23,7 +23,7 @@ standalone: false,
   styleUrls: ['./factura-compra.component.scss']
 })
 export class FacturaCompraComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

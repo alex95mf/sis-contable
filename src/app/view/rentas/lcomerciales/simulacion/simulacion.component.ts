@@ -75,7 +75,7 @@ export class SimulacionComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Impuestos'
       let impuestos = await this.apiService.getImpuestos({params: {paginate: this.paginate}})
@@ -98,7 +98,7 @@ export class SimulacionComponent implements OnInit {
   }
 
   async getImpuestos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Impuestos'
       let impuestos = await this.apiService.getImpuestos({ params: { filter: this.filter, paginate: this.paginate }})
@@ -127,7 +127,7 @@ export class SimulacionComponent implements OnInit {
   }
 
   async exportExcel() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let excelData = [];
       let impuestos = await this.apiService.getImpuestos({params: { filter: this.filter }})

@@ -537,7 +537,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonService.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -583,7 +583,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
   // getContribuyentes = () => {
   //   (this as any).mensajeSpinner = 'Obteniendo Contribuyentes'
-  //   this.lcargando.ctlSpinner(true)
+  //   this.lcargando.ctlSpinner(true);
   //   this.apiService.getContribuyentes().subscribe(
   //     res => {
   //       if (Array.isArray(res['data']) && res['data'].length === 0) {
@@ -620,7 +620,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
   getConceptos() {
     (this as any).mensajeSpinner = 'Obteniendo Conceptos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getConceptos().subscribe(
       res => {
         console.log(res)
@@ -785,7 +785,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
               const documento = { ...this.liquidacion, detalles: [...this.liquidacion.detalles, ...this.exoneraciones] }
 
               (this as any).mensajeSpinner = 'Almacenando Liquidacion'
-              this.lcargando.ctlSpinner(true)
+              this.lcargando.ctlSpinner(true);
               // console.log(data)
               this.apiService.setLiquidacion({liquidacion: documento}).subscribe(
                 res => {
@@ -1091,7 +1091,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   async getUltimoRegistro(skip: number = 0) {
     this.skip = skip
     (this as any).mensajeSpinner = 'Cargado Registro'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       const conceptos = this.conceptos.map((elem: any) => elem.id)
       const response = await this.apiService.getUltimoRegistro({conceptos, skip})

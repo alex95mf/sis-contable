@@ -98,7 +98,7 @@ export class MetasOdsComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -123,7 +123,7 @@ export class MetasOdsComponent implements OnInit {
   cargaProgramas() {
     (this as any).mensajeSpinner = 'Cargando Programas'
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.metasService.getProgramas().subscribe(
       res => {
         res['data'].forEach(r => {
@@ -188,7 +188,7 @@ export class MetasOdsComponent implements OnInit {
     }
     (this as any).mensajeSpinner = 'Cargando Ejes'
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.metasService.getEje(data).subscribe(
       res => {
         res['data'][0]['ejes'].forEach(eje => {
@@ -219,7 +219,7 @@ export class MetasOdsComponent implements OnInit {
     }
     (this as any).mensajeSpinner = 'Cargado Metas para ODS'
     
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.metasService.getMetasODS(data).subscribe(
       res => {
         res['data'].forEach(m => {
@@ -247,7 +247,7 @@ export class MetasOdsComponent implements OnInit {
     }
     (this as any).mensajeSpinner = 'Cargado OPG'
     
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.metasService.getOPG(data).subscribe(
       res => {
         res['data'].forEach(o => {
@@ -275,7 +275,7 @@ export class MetasOdsComponent implements OnInit {
       "opg": event
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.metasService.getPoliticas(data).subscribe(
       res => {
         // console.log(res)
@@ -304,7 +304,7 @@ export class MetasOdsComponent implements OnInit {
       "politica": event
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.metasService.getMetaZona(data).subscribe(
       res => {
         // console.log(res)
@@ -333,7 +333,7 @@ export class MetasOdsComponent implements OnInit {
       params: "'PLA_COMPETENCIA','PLA_OE','PLA_META_RESULTADO',\
       'PLA_INDICADOR','PLA_TENDENCIA','PLA_TIPO_INTERVENCION'"
     };
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     this.metasService.getCatalogs(data).subscribe(
       res => {
         // Cargar CMBs
@@ -482,7 +482,7 @@ export class MetasOdsComponent implements OnInit {
       // console.log(data)
       (this as any).mensajeSpinner = 'Guardando Metas por Programa'
 
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       this.metasService.guardaMetas(data).subscribe(
         res => {
           // console.log(data)
@@ -561,7 +561,7 @@ export class MetasOdsComponent implements OnInit {
               id_controlador: myVarGlobals.fProgMetas,
               params: [elem]
             }
-            this.lcargando.ctlSpinner(true)
+            this.lcargando.ctlSpinner(true);
             this.metasService.guardaMetas(data).subscribe(
               res => {
                 // console.log(res['data'])

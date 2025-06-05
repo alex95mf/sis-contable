@@ -22,7 +22,7 @@ standalone: false,
   styleUrls: ['./egreso.component.scss']
 })
 export class EgresoComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   /*  processing: any = false; */
   dataUser: any;
@@ -77,7 +77,7 @@ export class EgresoComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService) {
 
     this.commonVarSrvice.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarSrvice.setAccountComprobantes.asObservable().subscribe(res => {

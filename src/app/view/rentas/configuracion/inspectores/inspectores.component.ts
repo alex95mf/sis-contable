@@ -159,7 +159,7 @@ export class InspectoresComponent implements OnInit {
   }
 
   async getInspectores() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Inspectores'
       let inspectores = await this.apiService.getInspectores({params: { filter: this.filter, paginate: this.paginate }})
@@ -210,7 +210,7 @@ export class InspectoresComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Almacenando Inspector'
         let inspector = await this.apiService.setInspector({ inspector: this.newInspector })
@@ -243,7 +243,7 @@ export class InspectoresComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Eliminando Inspector'
         await this.apiService.deleteInspector(inspector.id_inspector);

@@ -44,7 +44,7 @@ export class EstadisticasComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.cargaInicial()
       this.lcargando.ctlSpinner(false)
     }, 0)
@@ -96,8 +96,8 @@ export class EstadisticasComponent implements OnInit {
     // this.grafica.nativeElement.value = null
     //     // Resto del código
     // this.chartPie('pieChart', 'pie');
-    //      this.lcargando.ctlSpinner(true)
-    this.lcargando.ctlSpinner(true)
+    //      this.lcargando.ctlSpinner(true);
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando Gráfico...'
     // // this.chartPie('pieChart', 'pie')
     Object.assign(this.filter, {fp_anio: new Date(this.filter.periodo).getFullYear()})

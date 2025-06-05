@@ -180,7 +180,7 @@ export class ReporteDetalladoBienesComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando...'
       let response: Array<any> = await this.apiService.getGruposBienes();
@@ -227,7 +227,7 @@ export class ReporteDetalladoBienesComponent implements OnInit {
     // }
 
     
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let data={
        // tipo_reporte: this.selectedReporte,
@@ -310,7 +310,7 @@ export class ReporteDetalladoBienesComponent implements OnInit {
   filterByTipoBien(event: any) {
      console.log(event)
     if (event != undefined ) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Filtrando Grupos por Tipo de Bien'
       this.cmb_grupo_filter = this.cmb_grupo.filter((item: any) => item.tipo_bien == event.value)
       setTimeout(() => this.lcargando.ctlSpinner(false), 750)
@@ -319,7 +319,7 @@ export class ReporteDetalladoBienesComponent implements OnInit {
   filterByGrupo(event: any) {
     console.log(this.cmb_subgrupo)
    //if (event != undefined && this.selectedReporte == 'PSG') {
-     this.lcargando.ctlSpinner(true)
+     this.lcargando.ctlSpinner(true);
      (this as any).mensajeSpinner = 'Filtrando Sub Grupos por Grupo de Bien'
      this.cmb_subgrupo_filter = this.cmb_subgrupo.filter((item: any) => item.parent_id == event.id_grupo_productos)
      

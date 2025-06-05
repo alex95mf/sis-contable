@@ -320,7 +320,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let response: Array<any>;
       // Cargar Periodos
@@ -425,7 +425,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
         }
       })
 console.log("this.atribucionParamsNew",this.atribucionParamsNew);
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Validando datos'
         await this.validaDataGlobal()
@@ -505,7 +505,7 @@ console.log("departamento",departamento);
     if (result.isConfirmed) {
       this.por_actualizar = true;
 
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Duplicando Bien'
         let response: Array<any> = await this.service.duplicarBien({

@@ -99,7 +99,7 @@ export class CierreCxcComponent implements OnInit {
     this.apiService.cierreSelected$.subscribe(
       async (documento: any) => {
         // console.log(documento)
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         try {
           let response = await this.apiService.getCierre(documento.id)
           console.log(response)
@@ -151,7 +151,7 @@ export class CierreCxcComponent implements OnInit {
 
   async getDocumentos() {
     this.documento.deudas = []
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Cuentas por Cobrar'
       let documentos: Array<any> = await this.apiService.getDocumentos({ params: { filter: this.filter } })
@@ -201,7 +201,7 @@ export class CierreCxcComponent implements OnInit {
         this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
             try {
               if (res["data"][0].estado !=='C') {
-                this.lcargando.ctlSpinner(true)
+                this.lcargando.ctlSpinner(true);
                 try {
                   (this as any).mensajeSpinner = 'Almacenando Cierre'
                   let response: any = await this.apiService.setDocumento({ documento: this.documento })
@@ -271,7 +271,7 @@ export class CierreCxcComponent implements OnInit {
 
             if (res["data"][0]?.estado !=='C') {
 
-              this.lcargando.ctlSpinner(true)
+              this.lcargando.ctlSpinner(true);
               try {
                 (this as any).mensajeSpinner = 'Eliminando Cierre'
                 await this.apiService.deleteCierre(this.documento.id)

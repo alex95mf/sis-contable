@@ -44,7 +44,7 @@ export class EtiquetaAcfijoComponent implements OnInit {
   dataSucursal:any;
   arrayEstado: any = [{ id: "Nuevo", nombre: "Nuevo" }, { id: "Usado", nombre: "Usado" }];
 
-  
+
   hoy: Date = new Date;
   fecha = this.hoy.getDate() + '-' + (this.hoy.getMonth() + 1) + '-' + this.hoy.getFullYear();
   hora = this.hoy.getHours() + ':' + this.hoy.getMinutes() + ':' + this.hoy.getSeconds();

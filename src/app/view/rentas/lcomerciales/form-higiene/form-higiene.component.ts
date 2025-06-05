@@ -253,7 +253,7 @@ export class FormHigieneComponent implements OnInit {
 
   validaPermisos() {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     let params = {
       // cambiar despues con variable propia

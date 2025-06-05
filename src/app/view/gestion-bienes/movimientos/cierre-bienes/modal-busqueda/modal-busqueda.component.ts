@@ -113,7 +113,7 @@ export class ModalBusquedaComponent implements OnInit {
       return;
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Cierres'
       let documentos = await this.apiService.getCierres({tipo: this.tipoBienSelected, params: {filter: this.filter, paginate: this.paginate}})

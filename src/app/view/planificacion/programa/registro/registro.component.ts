@@ -72,7 +72,7 @@ export class RegistroComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -268,7 +268,7 @@ export class RegistroComponent implements OnInit {
     this.vmButtons[0].habilitar = false
 
     (this as any).mensajeSpinner = 'Cargando Presupuesto de Programa'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     let data = {
       programa: this.programa.id,
       periodo: this.programa.presupuesto.periodo
@@ -453,7 +453,7 @@ export class RegistroComponent implements OnInit {
     }
 
     (this as any).mensajeSpinner = 'Almacenando Presupuesto de Departamentos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.programaRegistroService.setPresupuestoDepartamentos(data).subscribe(
       res => {
         // console.log(res['data'])

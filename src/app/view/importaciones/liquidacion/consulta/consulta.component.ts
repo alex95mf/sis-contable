@@ -26,7 +26,7 @@ standalone: false,
   styleUrls: ['./consulta.component.scss']
 })
 export class ConsultaComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   vmButtons: any;
@@ -110,7 +110,7 @@ export class ConsultaComponent implements OnInit {
     })
 
     this.commonVarSrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
   }

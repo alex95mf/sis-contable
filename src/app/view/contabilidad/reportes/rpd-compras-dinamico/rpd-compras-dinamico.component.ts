@@ -25,7 +25,7 @@ standalone: false,
 })
 export class RpdComprasDinamicoComponent implements OnInit {
 
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   vmButtons: any = [];
@@ -44,7 +44,7 @@ export class RpdComprasDinamicoComponent implements OnInit {
 
 
   availableReport:RptDinamicComprasI[] = [];
-  selectCampoReport:RptDinamicComprasI[] = [];  
+  selectCampoReport:RptDinamicComprasI[] = [];
   draggedProduct:RptDinamicComprasI;
 
 
@@ -54,7 +54,7 @@ export class RpdComprasDinamicoComponent implements OnInit {
 
   constructor
   (
-    private commonServices: CommonService, 
+    private commonServices: CommonService,
     private toastr: ToastrService,
     private rpdDinamic: RpdComprasDinamicoService,
     public dialogService: DialogService,
@@ -104,8 +104,8 @@ export class RpdComprasDinamicoComponent implements OnInit {
     }, 10);
 
 
-    
-  
+
+
   }
 
 
@@ -187,10 +187,10 @@ export class RpdComprasDinamicoComponent implements OnInit {
           ws["!cols"] = [ { wch: max_width } ];
 
 
-         
-          
 
-          
+
+
+
           ws['A1'].s = {
             fill:{
               fgColor:{rgb:"E9E9E9"}
@@ -251,7 +251,7 @@ export class RpdComprasDinamicoComponent implements OnInit {
             },
           }
 
-          
+
           let endCell = nombreCamposReport.length - 1;
 
           const merge = [
@@ -312,7 +312,7 @@ export class RpdComprasDinamicoComponent implements OnInit {
 
 
   deleteCampoAsignado(dataCampo:any){
-    dataCampo.estado_assignacion = 0;    
+    dataCampo.estado_assignacion = 0;
     this.asignarCampoReport(dataCampo);
   }
 
@@ -327,12 +327,12 @@ export class RpdComprasDinamicoComponent implements OnInit {
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
 
 }
-  
+
   obtnerConfiguracionReportDinamic(){
 
 
-    this.rpdDinamic.getConfiguracionReport(1).subscribe(res => {   
-      
+    this.rpdDinamic.getConfiguracionReport(1).subscribe(res => {
+
       this.selectCampoReport = res[0]['detalle'].filter(e => e.estado_asignacion === 1);
       this.availableReport = <RptDinamicComprasI[]>res[0]['detalle'];
 
@@ -345,7 +345,7 @@ export class RpdComprasDinamicoComponent implements OnInit {
   }
 
 
-  
+
   onClickConsultaProveedores() {
 
     let busqueda = (typeof this.proveedor_name === 'undefined') ? "" : this.proveedor_name;
@@ -380,7 +380,7 @@ export class RpdComprasDinamicoComponent implements OnInit {
     this.draggedProduct = campo;
   }
 
- 
+
   drop(event) {
     if (this.draggedProduct) {
       let draggedProductIndex = this.findIndex(this.draggedProduct);
@@ -393,14 +393,14 @@ export class RpdComprasDinamicoComponent implements OnInit {
         this.selectCampoReport = [...this.selectCampoReport, this.draggedProduct];
         this.draggedProduct = null;
 
-        
+
 
       }
 
-      
+
     }
   }
- 
+
   dragEnd(event) {
     this.draggedProduct = null;
   }
@@ -425,7 +425,7 @@ export class RpdComprasDinamicoComponent implements OnInit {
       estado_assignacion:campo.estado_assignacion
     }
 
-    this.rpdDinamic.updateAsignaCampo(dataUpdate).subscribe(res => {  
+    this.rpdDinamic.updateAsignaCampo(dataUpdate).subscribe(res => {
       this.obtnerConfiguracionReportDinamic();
     }, error => {
       this.lcargando.ctlSpinner(false);

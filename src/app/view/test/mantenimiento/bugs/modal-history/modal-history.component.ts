@@ -89,7 +89,7 @@ export class ModalHistoryComponent implements OnInit {
 
   async cargarBugsHistory() {
     this.lcargando.ctlMensaje("Actualizando History de Bugs....!!!");
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
 
 
@@ -154,7 +154,7 @@ export class ModalHistoryComponent implements OnInit {
     if (result.isConfirmed){
 
       this.lcargando.ctlMensaje("Guardando....!!!");
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
 
 
       let respuesta;

@@ -125,7 +125,7 @@ export class TramitesComponent implements OnInit {
 
   validaPermisos() {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     let params = {
       codigo: myVarGlobals.fRenTramites,
@@ -155,7 +155,7 @@ export class TramitesComponent implements OnInit {
 
   getCatalogos() {
     (this as any).mensajeSpinner = 'Cargando Catalogos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getCatalogos({ params: "'PLA_DEPARTAMENTO'" }).subscribe(
       (res: any) => {
         // console.log(res)
@@ -181,7 +181,7 @@ export class TramitesComponent implements OnInit {
 
   getTramites() {
     (this as any).mensajeSpinner = 'Cargando Tramites'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getTramites({ params: { filter: this.filter, paginate: this.paginate } }).subscribe(
       (res: any) => {
         // console.log(res)
@@ -209,7 +209,7 @@ export class TramitesComponent implements OnInit {
   changePaginate(event) {
     Object.assign(this.paginate, { perPage: event.pageSize, page: event.pageIndex + 1 })
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.getTramites()
   }
 
@@ -228,7 +228,7 @@ export class TramitesComponent implements OnInit {
     let excelData = []
 
     (this as any).mensajeSpinner = 'Exportando Trámites'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getTramites({ params: { filter: this.filter } }).subscribe(
       (res: any) => {
         try {

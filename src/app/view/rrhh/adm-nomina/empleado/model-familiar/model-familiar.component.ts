@@ -134,7 +134,7 @@ export class ModelFamiliarComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Relaciones'
       let response: Array<any> = await this.services.getRelaciones('CARF');

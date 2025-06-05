@@ -33,7 +33,7 @@ export class EstadoResultadoComponent implements OnInit {
   processing:any = false;
   empresLogo: any;
 
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 
@@ -76,7 +76,7 @@ export class EstadoResultadoComponent implements OnInit {
           }else{
             this.btnPrint = true
             this.vmButtons[2].habilitar = false;
-          } 
+          }
           this.getBalanceInit();
         }
     }, error=>{
@@ -184,7 +184,7 @@ export class EstadoResultadoComponent implements OnInit {
       this.exportAsXLSX();
     }
   }
-  
+
   exportAsXLSX() {
     this.excelService.exportAsExcelFile(this.excelData, 'Estado_resultado');
   }

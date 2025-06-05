@@ -102,7 +102,7 @@ export class ModalCargaxmlComponent implements OnInit {
     })
 
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       let empresa = await this.apiService.getEmpresa()
       this.lcargando.ctlSpinner(false)
       if (this.comprobante.factura.infoFactura[0].identificacionComprador[0] != empresa.ruc) {
@@ -137,7 +137,7 @@ export class ModalCargaxmlComponent implements OnInit {
   }
 
   async confirmar(ruc: string) {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Confirmando Proveedor...'
       // Confirmar si proveedor existe en la base de datos
@@ -166,7 +166,7 @@ export class ModalCargaxmlComponent implements OnInit {
             direccion: this.comprobante.factura.infoTributaria[0].dirMatriz[0],
           }
 
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           (this as any).mensajeSpinner = 'Registrando Proveedor...'
           response = await this.apiService.registrarProveedor({ proveedor });
           console.log(response)

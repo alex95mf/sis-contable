@@ -160,7 +160,7 @@ paginate: any= {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
       (this as any).mensajeSpinner = "Cargando Períodos"
@@ -260,7 +260,7 @@ this.paginate.length = proyectos.total;
 
   async CargarProyectos(){
     (this as any).mensajeSpinner = 'Cargando Proyectos';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 

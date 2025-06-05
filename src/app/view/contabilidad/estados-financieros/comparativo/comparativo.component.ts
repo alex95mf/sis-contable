@@ -102,7 +102,7 @@ export class ComparativoComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Centro de Costos'
       let response = await this.apiService.getCentroCostos();
@@ -151,7 +151,7 @@ export class ComparativoComponent implements OnInit {
       }
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Cuentas'
       this.columnas = [];

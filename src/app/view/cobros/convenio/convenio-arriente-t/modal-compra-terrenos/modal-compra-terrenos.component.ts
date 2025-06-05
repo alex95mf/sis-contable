@@ -81,7 +81,7 @@ export class ModalCompraTerrenosComponent implements OnInit {
   }
 
   async getCompraTerreno() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando documentos de Arriendo'
       const response = await this.apiService.getCompraTerreno({concepto: {codigo: 'CT'}, params: {filter: this.filter, paginate: this.paginate}})

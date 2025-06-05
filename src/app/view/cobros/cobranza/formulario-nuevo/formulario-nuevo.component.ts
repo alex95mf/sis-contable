@@ -149,7 +149,7 @@ export class FormularioNuevoComponent implements OnInit {
     Object.assign(this.paginate, { page: 1, pageIndex: 0})
     this.paginator.firstPage()
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.cargarLiquidaciones()
   }
 
@@ -256,7 +256,7 @@ export class FormularioNuevoComponent implements OnInit {
     }).then((result: any) => {
       if (result.isConfirmed) {
         (this as any).mensajeSpinner = 'Emitiendo Notificaciones'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
 
         this.apiSrv.generarNotificaciones({liquidaciones: procesados, fecha_emision: this.fecha_emision}).subscribe(
           (res: any) => {
@@ -287,7 +287,7 @@ export class FormularioNuevoComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         (this as any).mensajeSpinner = 'Emitiendo Notificaciones'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.apiSrv.generarNotificacionesMasivo({filter: this.filter, fecha_emision: this.fecha_emision}).subscribe(
           (res: any) => {
             console.log(res)

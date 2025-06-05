@@ -59,7 +59,7 @@ export class ModalBusquedaComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando...'
       let documentos = await this.apiService.getCierres({ tipo: 'CCP' })

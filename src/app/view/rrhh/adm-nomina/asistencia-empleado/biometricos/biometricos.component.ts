@@ -57,7 +57,7 @@ export class BiometricosComponent implements OnInit, OnDestroy {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     if (this.lst_periodos.length == 0) await this.getPeriodos()
     if (this.lst_meses.length == 0) await this.getMeses()
     if (this.lst_biometrico.length == 0) await this.getBiometricos()
@@ -150,7 +150,7 @@ export class BiometricosComponent implements OnInit, OnDestroy {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Procesando archivo de Marcaciones'
       try {
         const response = await this.apiService.setMarcaciones(this.file, {periodo: this.periodoSelected, mes: this.mesSelected, dispositivo: this.biometricoSelected})

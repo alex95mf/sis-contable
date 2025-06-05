@@ -455,7 +455,7 @@ standalone: false,
 
 //   ngOnInit(): void {
 //     setTimeout(async () => {
-//       this.lcargando.ctlSpinner(true)
+//       this.lcargando.ctlSpinner(true);
 //       await this.validaPermisos();
 
 //       this.lcargando.ctlSpinner(false)
@@ -479,7 +479,7 @@ standalone: false,
 //   async validaPermisos() {
 //     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
 
-//     this.lcargando.ctlSpinner(true)
+//     this.lcargando.ctlSpinner(true);
 //     try {
 //       let response = await this.commonServices.getPermisionsGlobas({
 //         codigo: myVarGlobals.fUserProfile,

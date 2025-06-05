@@ -27,7 +27,7 @@ standalone: false,
 
 })
 export class PlanCuentasComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Output() onNodeSelect = new EventEmitter<any>();
   gridConfig: object;
@@ -811,7 +811,7 @@ public expandOrContraerAll() {
     this.vmButtons[1].habilitar = false;
     this.vmButtons[2].habilitar = true;
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let niveles: number[] = [1, 1, 1, 2, 2, 2, 2, 2, 2, 2]
       let codigo_padre: string[] = this.codigoGlobalMayor.split(this.lengthCaracter.caracter)
@@ -1464,7 +1464,7 @@ public expandOrContraerAll() {
   }
 
   loadReglas(flag: boolean = false){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
       if (flag) this.paginate.page = 1
     let data = {
       params: {

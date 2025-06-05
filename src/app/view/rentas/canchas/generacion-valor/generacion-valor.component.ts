@@ -99,7 +99,7 @@ export class GeneracionValorComponent implements OnInit {
     this.commonVarService.selectListLiqPURen.asObservable().subscribe(
     (res) => {
       //(this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
-      //this.lcargando.ctlSpinner(true)
+      //this.lcargando.ctlSpinner(true);
       this.restoreForm(false);
       this.formReadOnly = true;
       console.log(res);

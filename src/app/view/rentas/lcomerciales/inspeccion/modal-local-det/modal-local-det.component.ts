@@ -192,7 +192,7 @@ export class ModalLocalDetComponent implements OnInit {
 
   async getCatalogos() {
     (this as any).mensajeSpinner = 'Cargando Catalogos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       //
       let data = {
@@ -295,7 +295,7 @@ export class ModalLocalDetComponent implements OnInit {
 
   getLocal() {
     (this as any).mensajeSpinner = 'Cargando datos de Local'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getLocal({ local: this.local_id }).subscribe(
       (res: any) => {
         console.log(res.data)

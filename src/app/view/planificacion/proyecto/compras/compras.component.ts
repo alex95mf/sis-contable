@@ -127,7 +127,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -173,7 +173,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
   }
 
   async handleClickBuscar() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Bienes'
       this.bienes = await this.apiSrv.getBienes({periodo: this.periodoSelected, departamento: this.departamentoObjectSelected.id_catalogo});
@@ -239,7 +239,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
     let data = {
       params: "'PLA_PROGRAMA','PLA_DEPARTAMENTO','PLA_COD_PRESUP','PLA_TIPO_COMPRA','PLA_TIPO_REGIMEN','PLA_PROC_SUGE','PLA_TIPO_PRODUCTO','PLA_AFIRMACION','PLA_COD_CPC'"
     }
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogos(data).subscribe(
       (res: any) => {
         res['data']['PLA_PROGRAMA'].forEach(p => {
@@ -330,7 +330,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
   /* async selectDept(event) {
     this.bienesAttr = []
     (this as any).mensajeSpinner = 'Cargando Bienes y Servicios'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     try {
       this.bienesAttr = await this.apiSrv.getBienes({departamento: this.departamento.id})
@@ -381,7 +381,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
     }
 
     (this as any).mensajeSpinner = 'Guardando datos...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     try {
       let response = await this.apiSrv.asignaCPC({bienes: this.bienes})

@@ -363,7 +363,7 @@ async aprobarAmortizacion() {
   })
 
   if (result.isConfirmed) {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Aprobando Amortizacion'
       let response = await this.apiSrv.aprobarAmortizacion({amortizacion: this.numero_documento})
@@ -436,7 +436,7 @@ changeDetail(data) {
       confirmButtonText: "Aceptar",
     }).then((result) => {
       if (result.isConfirmed) {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Marcando como Pagado'
         this.apiSrv.getIdCabecera({numero_documento: this.numero_documento}).subscribe(
           (res: any) => {

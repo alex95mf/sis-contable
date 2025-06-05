@@ -309,7 +309,7 @@ export class CierreCajaComponent implements OnInit {
 
   async validacionCaja() {
     (this as any).mensajeSpinner = 'Validando Estado de Caja'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.cajaActiva = JSON.parse(localStorage.getItem('activeCaja'))
 
     try {

@@ -93,7 +93,7 @@ export class TareasComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiService.getPeriodos();
@@ -109,7 +109,7 @@ export class TareasComponent implements OnInit {
   }
 
   async cargarData() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       this.metas = [];
       this.totales = [];
@@ -149,7 +149,7 @@ export class TareasComponent implements OnInit {
   exportarExcel = () => {
     let excelData = []
     (this as any).mensajeSpinner = "Descargando Listado"
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       this.metas.forEach((meta: string) => {
         let obj = {

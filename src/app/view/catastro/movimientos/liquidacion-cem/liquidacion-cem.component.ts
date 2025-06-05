@@ -106,7 +106,7 @@ export class LiquidacionCemComponent implements OnInit {
 
     this.apiService.liquidacionSelected$.subscribe(async (liquidacion: any) => {
       // console.log(liquidacion)
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         let response = await this.apiService.getLiquidacion(liquidacion.id);
         console.log(response)
@@ -159,7 +159,7 @@ export class LiquidacionCemComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando'
       let catalogos = await this.apiService.getCatalogos({params: "'CEM_BASE_CALCULO','CEM_MOTIVO_CALCULO','CAT_ZONA'"})
@@ -220,7 +220,7 @@ export class LiquidacionCemComponent implements OnInit {
     });
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Limpiando Formulario'
 
@@ -268,7 +268,7 @@ export class LiquidacionCemComponent implements OnInit {
   }
 
   async getSolares() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Obteniendo total de Solares'
       let solares = await this.apiService.getSolares({zonas: this.zonasSelected});
@@ -286,7 +286,7 @@ export class LiquidacionCemComponent implements OnInit {
   }
 
   async setLiquidacion() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Almacenando Liquidacion'
       let liquidacion = await this.apiService.setLiquidacion({liquidacion: this.liquidacion_cem, detalles: this.lst_base})
@@ -317,7 +317,7 @@ export class LiquidacionCemComponent implements OnInit {
     });
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Actualizando Liquidacion'
         let response = await this.apiService.updateLiquidacion(this.liquidacion_cem.id, {liquidacion: this.liquidacion_cem})

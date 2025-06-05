@@ -15,7 +15,7 @@ standalone: false,
   styleUrls: ["./contribuyente.component.scss"],
 })
 export class ContribuyenteComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   vmButtons: any = [];
@@ -415,5 +415,5 @@ export class ContribuyenteComponent implements OnInit {
     modalInvoice.componentInstance.eliminar = this.permissions.eliminar;
     this.ClearForm();
   }
-  
+
 }

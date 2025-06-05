@@ -41,7 +41,7 @@ export class PlanCuentasTreeComponent implements OnInit {
   }
 
   async refresh() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getCuentas()
     this.lcargando.ctlSpinner(false)
   }

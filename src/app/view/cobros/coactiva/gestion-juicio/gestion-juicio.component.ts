@@ -91,7 +91,7 @@ export class GestionJuicioComponent implements OnInit {
         }
 
         (this as any).mensajeSpinner = "Procesando expedientes"
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         console.log({ expedientes: procesados })
         this.apiService.setJuicios({ expedientes: procesados, fecha_emision: this.fecha_emision }).subscribe(
           (res: any) => {
@@ -112,7 +112,7 @@ export class GestionJuicioComponent implements OnInit {
 
   validaPermisos = () => {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
 
     let params = {
@@ -147,7 +147,7 @@ export class GestionJuicioComponent implements OnInit {
 
   getExpedientes() {
     (this as any).mensajeSpinner = 'Cargando Expedientes'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getExpedientes({ params: {filter: this.filter, paginate: this.paginate} }).subscribe(
       (res: any) => {
         // console.log(res.data)

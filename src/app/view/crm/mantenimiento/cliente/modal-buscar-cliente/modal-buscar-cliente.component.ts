@@ -94,7 +94,7 @@ export class ModalBuscarClienteComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -160,7 +160,7 @@ this.paginate.length = clientes.total;
   }
   async CargarClientes(){
     (this as any).mensajeSpinner = 'Cargando Productos';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 

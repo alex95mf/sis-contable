@@ -208,7 +208,7 @@ export class ModalEdicionComponent implements OnInit {
 
   saveDetalles() {
     (this as any).mensajeSpinner = "Guardando"
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     Object.assign(this.notificacion, this.data)
 
     // console.log({notificacion: this.notificacion})

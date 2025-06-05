@@ -42,7 +42,7 @@ export class ModalFeriasComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.getFerias()
       this.lcargando.ctlSpinner(false)
     }, 50)

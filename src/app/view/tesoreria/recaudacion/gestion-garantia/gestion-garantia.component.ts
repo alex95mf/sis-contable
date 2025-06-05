@@ -257,7 +257,7 @@ export class GestionGarantiaComponent implements OnInit {
         filter: this.filter,
       }
     }
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let resposne = await this.apiSrv.getGestionGarantia(data) as any
       // console.log(resposne)

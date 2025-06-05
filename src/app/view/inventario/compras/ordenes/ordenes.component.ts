@@ -26,7 +26,7 @@ standalone: false,
   styleUrls: ['./ordenes.component.scss']
 })
 export class OrdenesComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)
@@ -117,7 +117,7 @@ export class OrdenesComponent implements OnInit {
     })
 
     this.commonVarSrvice.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonServices.onHandleNotification.asObservable().subscribe(res => {

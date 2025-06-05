@@ -368,7 +368,7 @@ lista_generos:any = [
       this.cliente.documentos[index].archivo_base_64 = event.target.result;
 
       if(this.cliente.documentos[index].id_cliente_documento && this.cliente.documentos[index].id_cliente_documento != 0){
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Almacenando Certificado'
         try {
 
@@ -427,7 +427,7 @@ lista_generos:any = [
 
     if (result.isConfirmed) {
       if( data.id_cliente_documento!= 0 && data.id_cliente_documento != undefined ){
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         try {
           (this as any).mensajeSpinner = 'Eliminando Documento'
           let response = await this.clienteSrv.deleteCertificado({id_cliente_documento: data.id_cliente_documento})
@@ -694,7 +694,7 @@ lista_generos:any = [
   {
     let provincia = event;
     (this as any).mensajeSpinner = 'Cargando Ciudad';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -726,7 +726,7 @@ lista_generos:any = [
   {
     let provincia = event;
     (this as any).mensajeSpinner = 'Cargando Ciudad';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -757,7 +757,7 @@ lista_generos:any = [
   {
     let provincia = event;
     (this as any).mensajeSpinner = 'Cargando Ciudad';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -786,7 +786,7 @@ lista_generos:any = [
   async cargarProvincias()
   {
     (this as any).mensajeSpinner = 'Cargando Grupo de Productos';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -813,7 +813,7 @@ this.lista_provincias = response;
   async cargaCatalogos()
   {
     (this as any).mensajeSpinner = 'Cargando Grupo de Productos';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
     let response=await this.clienteSrv.getCatalogos
@@ -880,7 +880,7 @@ this.lista_oficial_credito = this.lista_usuarios.filter(usuario => usuario.role.
 
   async CargarGrupoProductos(){
     (this as any).mensajeSpinner = 'Cargando Grupo de Productos';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -918,7 +918,7 @@ this.lista_oficial_credito = this.lista_usuarios.filter(usuario => usuario.role.
 
   async CargarBodegas(){
     (this as any).mensajeSpinner = 'Cargando Bodegas';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -1371,7 +1371,7 @@ removeContacto(index)
 
   async consultarCliente(){
     (this as any).mensajeSpinner = 'Cargando Producto';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -1438,7 +1438,7 @@ removeContacto(index)
 
   async consultarClienteRelacionado(){
     (this as any).mensajeSpinner = 'Cargando Producto';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 

@@ -77,14 +77,14 @@ export class ModalAlertasComponent implements OnInit, OnDestroy {
         this.activeModal.close()
         break;
       case "GUARDAR":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.setAlerta()
         this.lcargando.ctlSpinner(false)
         this.activeModal.close()
         Swal.fire('Configuracion de Alerta almacenado', '', 'success')
         break;
       case "MODIFICAR":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.updateAlerta()
         this.lcargando.ctlSpinner(false)
         this.activeModal.close()

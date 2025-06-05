@@ -170,7 +170,7 @@ export class ListaPreciosComponent implements OnInit {
 			}
 		};
 		// console.log(data);
-		this.lcargando.ctlSpinner(true)
+		this.lcargando.ctlSpinner(true);
 		(this as any).mensajeSpinner = 'Actualizando'
 		this.reportesSrv.getProducts(data).subscribe(
 			(res: any) => {

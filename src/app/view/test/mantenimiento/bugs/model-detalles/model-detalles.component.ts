@@ -143,7 +143,7 @@ const result=await Swal.fire({
 if (result.isConfirmed){
 
   this.lcargando.ctlMensaje("Guardando....!!!");
-  this.lcargando.ctlSpinner(true)
+  this.lcargando.ctlSpinner(true);
 
 
   let respuesta;

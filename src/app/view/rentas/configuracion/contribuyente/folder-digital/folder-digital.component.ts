@@ -47,7 +47,7 @@ export class FolderDigitalComponent implements OnInit {
   }
 
   async cargaInicial() {
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     if (!this.cmb_tipo_archivo.length) {
       this.tipoArchivoLoading = true
       try {
@@ -88,7 +88,7 @@ export class FolderDigitalComponent implements OnInit {
   }
 
   async uploadArchivo() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Archivo'
       this.folderDigitalForm.fk_contribuyente = this.contribuyente
@@ -160,7 +160,7 @@ export class FolderDigitalComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Eliminando documento anexo...'
         let response = await this.apiService.eliminarArchivo({ documento })

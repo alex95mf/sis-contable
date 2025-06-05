@@ -324,7 +324,7 @@ export class EmisionExpedienteComponent implements OnInit {
     }).then((result: any) => {
       if (result.isConfirmed) {
         (this as any).mensajeSpinner = 'Generando Expedientes'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.apiSrv.generarExpedientes({ titulos: process, fecha_emision: this.fecha_emision }).subscribe(
           (res: any) => {
             console.log(res.data)

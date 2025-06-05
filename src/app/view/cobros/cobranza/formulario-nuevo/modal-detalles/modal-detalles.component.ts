@@ -63,7 +63,7 @@ export class ModalDetallesComponent implements OnInit {
 
   getDetallesLiquidacion(id_liquidacion: number) {
     (this as any).mensajeSpinner = 'Cargando Detalles de Liquidacion'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getLiquidacionDetalles({id_liquidacion: id_liquidacion}).subscribe(
       (res: any) => {
         console.log(res.data)

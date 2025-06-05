@@ -114,7 +114,7 @@ export class AuxiliaresComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Catalogos'
       let response = await this.apiService.getCatalogos({params: "'CON_TIPO_AUXILIARES','CON_CATALOGO_AUXILIARES'"});
@@ -136,7 +136,7 @@ export class AuxiliaresComponent implements OnInit {
   }
 
   async getAuxiliares() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Auxiliares'
       let response: any = await this.apiService.getAuxiliares({params: { filter: this.filter, paginate: this.paginate }})

@@ -80,7 +80,7 @@ export class ModalConsultaPrestamosComponent implements OnInit {
   }
 
   getPrestamos = async () => {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       const response: any = await this.apiService.consultarPrestamos({params: {filter: this.filter, paginate: this.paginate}})
       console.log(response)

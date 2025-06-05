@@ -102,7 +102,7 @@ export class CierreSuperavitComponent implements OnInit {
   }
 
   async getDocumentos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Documentos'
       let documentos: Array<any> = await this.apiService.getDocumentos({params: {filter: this.filter}})
@@ -163,7 +163,7 @@ export class CierreSuperavitComponent implements OnInit {
           try {
             if (res["data"][0].estado !=='C') {
               Object.assign(this.documento, { saldos: this.dataSource.filteredData })
-              this.lcargando.ctlSpinner(true)
+              this.lcargando.ctlSpinner(true);
               try {
                 (this as any).mensajeSpinner = 'Almacenando Cierre'
                 let response = await this.apiService.setDocumento({ documento: this.documento })

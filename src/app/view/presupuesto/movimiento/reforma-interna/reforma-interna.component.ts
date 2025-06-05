@@ -1276,7 +1276,7 @@ iddetallecabecerareformageneral: any;
     if (result.isConfirmed) {
       this.por_actualizar = true;
 
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Duplicando Bien'
         let response: Array<any> = await this.service.duplicarBien({

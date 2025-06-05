@@ -121,7 +121,7 @@ export class ModalConceptosComponent implements OnInit {
   }
 
   async getConceptos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = "Cargando Conceptos";
       let conceptos = await this.apiService.getConceptos({codigo: 'PR', params: { filter: this.filter, paginate: this.paginate}})

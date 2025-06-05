@@ -62,7 +62,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         try {
           (this as any).mensajeSpinner = 'Cargando Marcaciones'
           this.tbl_registros = [];
@@ -110,7 +110,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
         })
 
         if (result.isConfirmed) {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           try {
             (this as any).mensajeSpinner = 'Actualizando Registros'
             let response = await this.apiService.updateMarcarciones({ marcaciones: this.lst_update })
@@ -139,7 +139,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
         })
 
         if (result.isConfirmed) {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           try {
             (this as any).mensajeSpinner = 'Eliminando Marcaciones'
             let response = await this.apiService.deleteMarcaciones({periodo: this.periodoSelected, mes: this.mes_id_cc})
@@ -170,7 +170,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
         console.log(empleadosAprobados)
 
         if (result.isConfirmed) {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           try {
             (this as any).mensajeSpinner = 'Aprobando Marcaciones'
             let response = await this.apiService.aprobarMarcaciones({periodo: this.periodoSelected, mes: this.mes_id_cc, aprobados: empleadosAprobados})
@@ -227,7 +227,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
     this.fileName = file.name
 
     if (file) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Procesando Archivo de Marcas'
         let response = await this.apiService.procesarMarcas(file, { periodo: this.periodoSelected, mes: this.mes_id_cc })
@@ -255,7 +255,7 @@ export class ImportarComponent implements OnInit, OnDestroy {
     // console.log(registro)
     if (registro.entrada && registro.salida) {
       // Obtener jornada del Empleado
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       const jornada = await this.getJornada(registro.empleado.id_empleado, registro.fecha)
       const tabla = jornada[1]
 

@@ -119,7 +119,7 @@ export class GeneracionValorComponent implements OnInit {
     (res) => {
       console.log(res)
       //(this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
-      //this.lcargando.ctlSpinner(true)
+      //this.lcargando.ctlSpinner(true);
       this.restoreForm();
       this.formReadOnly = true;
       //console.log(res);

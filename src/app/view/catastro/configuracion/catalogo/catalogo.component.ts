@@ -129,7 +129,7 @@ export class CatalogoComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.getListas()
       this.lcargando.ctlSpinner(false)
     }, 0)
@@ -203,7 +203,7 @@ export class CatalogoComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Almacenando Catalogo'
         let response = await this.apiService.setCatalogo({catalogo: this.nuevoItemCatalogo})
@@ -275,7 +275,7 @@ export class CatalogoComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Modificando Catalogo'
         let response = await this.apiService.putCatalogo(this.itemCatalogo.id_catalogo, {catalogo: this.itemCatalogo})
@@ -295,7 +295,7 @@ export class CatalogoComponent implements OnInit {
   }
 
   async actualizar() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getListas()
     this.lcargando.ctlSpinner(false)
   }
@@ -356,7 +356,7 @@ export class CatalogoComponent implements OnInit {
     } */
     this.vmButtons[1].habilitar = true
     this.vmButtons[2].habilitar = false
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getItemCatalogo(catalogo)
     this.lcargando.ctlSpinner(false)
   }

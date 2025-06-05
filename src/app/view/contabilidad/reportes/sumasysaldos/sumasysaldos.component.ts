@@ -215,7 +215,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
     }
   }
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
       (this as any).mensajeSpinner = "Cargando Períodos"

@@ -119,7 +119,7 @@ export class GeneracionComponent implements OnInit {
     this.commonVarService.selectListLiqPURen.asObservable().subscribe(
       (res) => {
         //(this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
-        //this.lcargando.ctlSpinner(true)
+        //this.lcargando.ctlSpinner(true);
         this.restoreForm();
         this.formReadOnly = true;
         //console.log(res);
@@ -280,7 +280,7 @@ export class GeneracionComponent implements OnInit {
 
   validaPermisos = () => {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
 

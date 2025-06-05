@@ -45,7 +45,7 @@ export class ModalReporteCajaComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.getRecibosCajaDia()
       this.lcargando.ctlSpinner(false)
     }, 0)

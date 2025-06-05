@@ -1032,7 +1032,7 @@ export class CierreGeneralComponent implements OnInit {
 
     if (result.isConfirmed) {
       // Eliminar depositos del dia
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Eliminando deposito'
       try {
         const response = await this.apiSrv.eliminarDeposito({fecha: this.fecha_consulta})

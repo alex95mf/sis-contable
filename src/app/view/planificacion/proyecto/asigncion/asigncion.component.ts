@@ -104,7 +104,7 @@ export class AsigncionComponent implements OnInit {
           // Guardar en la base
           res.atribucion['id_programa'] = this.programaSeleccionado.id
           (this as any).mensajeSpinner = 'Almacenando Tareas de Atribucion'
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           this.apiService.setTareas(res).subscribe(
             (response: any) => {
               this.attrDept.find(a => a.id === res.atribucion.id)['tareas'] = response.data
@@ -137,7 +137,7 @@ export class AsigncionComponent implements OnInit {
 
       this.apiService.nuevaAtribucion$.subscribe(
         async (res: any) => {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           try {
             (this as any).mensajeSpinner = 'Almacenando Atribucion'
             let atribucion = {
@@ -203,7 +203,7 @@ export class AsigncionComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -255,7 +255,7 @@ export class AsigncionComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Catalogos'
       let response: any = await this.apiService.getCatalogo({params: "'PLA_FRECUENCIA_MEDICIO','PLA_MESES_META','PLA_U_MED','PLA_META_POA'"});
@@ -346,7 +346,7 @@ export class AsigncionComponent implements OnInit {
 
   async handleClickBuscar() {
     delete this.atribuciones
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       await this.loadPresupuesto()
 
@@ -383,7 +383,7 @@ export class AsigncionComponent implements OnInit {
   }
 
   async handleClickGuardar() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       await this.validateData()
 
@@ -520,7 +520,7 @@ export class AsigncionComponent implements OnInit {
     console.log(event);
     // Carga los departamentos asociados al programa seleccionado
     (this as any).mensajeSpinner = 'Cargando Departamentos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     let data = {
       programa: event.nombre
     }
@@ -571,7 +571,7 @@ export class AsigncionComponent implements OnInit {
     }
 
     (this as any).mensajeSpinner = 'Cargando Presupuesto del Departamento'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.attrDept = []
     this.apiService.getPresupuestoDepartamento(data).subscribe(
       res => {
@@ -735,7 +735,7 @@ export class AsigncionComponent implements OnInit {
     let data = {
       params: this.attrDept.map(a => a.id_catalogo)
     }
-    // this.lcargando.ctlSpinner(true)  // Ya viene activado
+    // this.lcargando.ctlSpinner(true);  // Ya viene activado
     (this as any).mensajeSpinner = 'Cargando Tareas'
     this.apiService.getTareas(data).subscribe(
       (res: any) => {
@@ -801,7 +801,7 @@ export class AsigncionComponent implements OnInit {
       params: this.departamentoSeleccionado
     }
     // console.log(data.params)
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.actualizaPresupuesto(data).subscribe(
       res => {
         // console.log(res['data'])
@@ -831,7 +831,7 @@ export class AsigncionComponent implements OnInit {
       atribuciones: this.attrDept
     }
     // console.log(data)
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.almacenaAttrs(data).subscribe(
       res => {
         // console.log(res['data'])
@@ -933,7 +933,7 @@ export class AsigncionComponent implements OnInit {
       departamento: this.departamentoObjectSelected,
     }
     (this as any).mensajeSpinner = 'Enviando correos...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.enviarCorreos(data).subscribe(
       res => {
         this.lcargando.ctlSpinner(false)

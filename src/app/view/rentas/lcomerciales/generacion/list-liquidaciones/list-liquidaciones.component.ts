@@ -101,7 +101,7 @@ export class ListLiquidacionesComponent implements OnInit {
 
   cargarConceptos() {
     (this as any).mensajeSpinner = 'Cargando Conceptos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.generacionSrv.getConceptoBy({id_concepto: 47}).subscribe(
       (res: any) => {
         // console.log(res)

@@ -51,7 +51,7 @@ export class ViewMasivoComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       // Cargar Periodos
       (this as any).mensajeSpinner = 'Cargando Periodos'
@@ -75,7 +75,7 @@ export class ViewMasivoComponent implements OnInit {
   }
 
   async getTablaMasiva() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       // Cargar Tabla
       (this as any).mensajeSpinner = 'Cargando Tabla de Datos'

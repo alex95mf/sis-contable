@@ -194,7 +194,7 @@ export class ModalNuevolocalComponent implements OnInit {
 
   async cargaCatalogos() {
     (this as any).mensajeSpinner = 'Cargando Catalogos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     try {
       let catalogos: any = await this.apiService.getCatalogos({ params: "'REN_TIPO_NEG', 'CAT_ZONA','CAT_SECTOR', 'REN_MERCADO','REN_GRUPO_NEG','REN_ESTADO_NEG','REN_LOCAL_TIPO_NEGOCIO','REN_LOCAL_TURISTICO_CATEGORIA','REN_LOCAL_TURISTICO_CATEGORIA_2'" })
@@ -470,7 +470,7 @@ export class ModalNuevolocalComponent implements OnInit {
     if (result.isConfirmed) {
       // this.local['fk_contribuyente'] = { id_cliente: this.contribuyente.id_cliente }
       (this as any).mensajeSpinner = 'Almacenando Nuevo Local'
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
 
       // console.log({local: this.local});
       // return;

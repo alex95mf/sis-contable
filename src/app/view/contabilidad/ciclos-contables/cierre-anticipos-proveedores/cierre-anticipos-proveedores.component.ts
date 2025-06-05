@@ -93,7 +93,7 @@ export class CierreAnticiposProveedoresComponent implements OnInit {
   }
 
   async getDocumentos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Anticipos'
       let documentos: Array<any> = await this.apiService.getDocumentos({params: {filter: this.filter}})
@@ -140,7 +140,7 @@ export class CierreAnticiposProveedoresComponent implements OnInit {
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
           try {
             if (res["data"][0].estado !=='C') {
-              this.lcargando.ctlSpinner(true)
+              this.lcargando.ctlSpinner(true);
               try {
                 (this as any).mensajeSpinner = 'Almacenando Cierre'
                 let response: any = await this.apiService.setDocumento({documento: this.documento})

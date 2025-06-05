@@ -124,7 +124,7 @@ export class GeneracionComponent implements OnInit {
     this.commonVarService.selectListLiqPURen.asObservable().subscribe(
       (res) => {
         //(this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
-        //this.lcargando.ctlSpinner(true)
+        //this.lcargando.ctlSpinner(true);
         this.restoreForm();
         this.formReadOnly = true;
         console.log(res);
@@ -304,7 +304,7 @@ export class GeneracionComponent implements OnInit {
 
         // Al venir solo uno, se toma su codigo_detalle, de busca el concepto y se actualiza el concepto de la liquidacion
         (this as any).mensajeSpinner = 'Leyendo datos adicionales...'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.apiService.getConceptoByNombre({nombre_detalle: res[0].nombre_detalle}).subscribe(
           (response: any) => {
             console.log(response.data)

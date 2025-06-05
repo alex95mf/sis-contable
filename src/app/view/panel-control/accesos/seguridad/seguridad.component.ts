@@ -148,7 +148,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
     })
 
     this.comVsrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
     this.comVsrv.departamentoSelect.asObservable().subscribe(
       (res)=>{
@@ -1295,7 +1295,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
       }
 
       (this as any).mensajeSpinner = 'Eliminando Resolucion'
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       this.seguridadServices.deleteAnexo(data).subscribe(
         res => {
           this.lcargando.ctlSpinner(false)

@@ -64,7 +64,7 @@ export class ModalDescuentosComponent implements OnInit {
         break;
       case "GUARDAR":
         try {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           const response = await this.setConfiguracion()
           console.log(response)
           this.lcargando.ctlSpinner(false)
@@ -82,7 +82,7 @@ export class ModalDescuentosComponent implements OnInit {
         break;
       case "MODIFICAR":
         try {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           const response = await this.updateConfiguracion()
           console.log(response)
           this.lcargando.ctlSpinner(false)

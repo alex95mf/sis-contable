@@ -51,7 +51,7 @@ export class ModalExonContribuyenteComponent implements OnInit {
 
   async getExoneraciones() {
     try {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Cargando Exoneraciones'
       const response = await this.apiService.getExoneraciones({contribuyente: this.contribuyente, lote: this.lote, concepto: {codigo: 'PU'}}) as any
       console.log(response.data)

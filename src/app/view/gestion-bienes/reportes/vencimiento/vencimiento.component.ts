@@ -156,7 +156,7 @@ export class VencimientoComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       // Cargar Catalogos
       (this as any).mensajeSpinner = 'Cargando Catalogos'
@@ -195,7 +195,7 @@ console.log(respuesta);
   }
 
   async cargarDocumentos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Documentos'
 

@@ -316,7 +316,7 @@ export class ProductoComponent implements OnInit {
 
     this.ingresoService.updateUdm$.subscribe(
       async () => {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         try {
           (this as any).mensajeSpinner = 'Actualizando Unidades de Medida'
           let response = await this.ingresoService.getCatalogo({params: "'UNIDAD DE MEDIDA'"})
@@ -725,7 +725,7 @@ export class ProductoComponent implements OnInit {
   }
 
 async cargaInicial() {
-  this.lcargando.ctlSpinner(true)
+  this.lcargando.ctlSpinner(true);
   try {
     let responseArr: Array<any>;
     (this as any).mensajeSpinner = 'Cargando Conceptos'
@@ -820,7 +820,7 @@ async cargaInicial() {
   }
 
   generarCodigoEx() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Generando codigo de Producto...'
     if (this.claseSelect.tipo_bien == "EXI") {
 
@@ -2306,7 +2306,7 @@ async cargaInicial() {
   }
 
 async cargarProductoAdicional() {
-  this.lcargando.ctlSpinner(true)
+  this.lcargando.ctlSpinner(true);
   try {
     let response: any = await this.ingresoService.getInfoProducto(this.id_producto, { params: { filter: this.filter, paginate: this.paginate}})
 
@@ -2563,7 +2563,7 @@ console.log(response)
   }
 
   async almacenarCostos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Almacenando Costos Adicionales'
       let response = await this.ingresoService.setCostos(this.produto.id_producto, {costos: this.costos})
@@ -2589,7 +2589,7 @@ console.log(response)
       });
 
       if (result.isConfirmed) {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         try {
           (this as any).mensajeSpinner = 'Eliminando Costo Adicional'
           let response = await this.ingresoService.delCosto(costo.id)
@@ -2632,7 +2632,7 @@ console.log(response)
      };
 
      (this as any).mensajeSpinner = 'Cargando...'
-     this.lcargando.ctlSpinner(true)
+     this.lcargando.ctlSpinner(true);
      this.ingresoService.getReporteGraficoTendencia(parameterUrl,id).subscribe((res: any) => {
       this.lcargando.ctlSpinner(false)
          let labelInfoBar = [];

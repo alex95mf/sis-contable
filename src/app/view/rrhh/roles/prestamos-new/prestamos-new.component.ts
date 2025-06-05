@@ -171,7 +171,7 @@ export class PrestamosNewComponent implements OnInit {
 
     this.apiService.prestamoSelected$.subscribe(
       async ({id_prestamo}) => {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         try {
           (this as any).mensajeSpinner = 'Cargando Prestamo';
           let response: any = await this.apiService.getPrestamo(id_prestamo)
@@ -395,7 +395,7 @@ export class PrestamosNewComponent implements OnInit {
   }
 
   async consultarPrestamos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Prestamos'
       let response: any = await this.apiService.consultarPrestamos({params: { filter: this.filter, paginate: this.paginate }})

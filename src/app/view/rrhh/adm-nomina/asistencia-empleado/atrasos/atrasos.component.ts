@@ -54,7 +54,7 @@ export class AtrasosComponent implements OnInit, OnDestroy {
           this.toastr.warning(message, 'Validacion de Datos', { enableHtml: true })
           return
         }
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         try {
           (this as any).mensajeSpinner = 'Cargando Atrasos'
           let response = await this.apiService.getAtrasos({ params: { filter: this.filter, periodo: this.periodoSelected, mes: this.mes_id_cc } })
@@ -99,7 +99,7 @@ export class AtrasosComponent implements OnInit, OnDestroy {
         })
 
         if (result.isConfirmed) {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           try {
             (this as any).mensajeSpinner = 'Actualizando Registros'
             let response = await this.apiService.updateAtrasos({ atrasos: this.lst_update })
@@ -127,7 +127,7 @@ export class AtrasosComponent implements OnInit, OnDestroy {
         })
 
         if (result.isConfirmed) {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           try {
             (this as any).mensajeSpinner = 'Eliminando Atrasos'
             let response = await this.apiService.deleteAtrasos({periodo: this.periodoSelected, mes: this.mes_id_cc})
@@ -155,7 +155,7 @@ export class AtrasosComponent implements OnInit, OnDestroy {
         })
 
         if (result.isConfirmed) {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           try {
             (this as any).mensajeSpinner = 'Aprobando Atrasos'
             let response = await this.apiService.aprobarAtrasos({ periodo: this.periodoSelected, mes: this.mes_id_cc })
@@ -207,7 +207,7 @@ export class AtrasosComponent implements OnInit, OnDestroy {
     this.fileName = file.name
 
     if (file) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Procesando Archivo de Marcas'
         let response = await this.apiService.procesarAtrasos(file, { periodo: this.periodoSelected, mes: this.mes_id_cc })

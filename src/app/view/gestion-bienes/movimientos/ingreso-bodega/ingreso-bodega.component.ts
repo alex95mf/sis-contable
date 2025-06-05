@@ -497,7 +497,7 @@ export class IngresoBodegaComponent implements OnInit {
     })
 
     this.commonVarSrvice.updPerm.asObservable().subscribe(res => {
-      // (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      // (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonServices.onHandleNotification.pipe(takeUntil(this.onDestroy$)).subscribe(res => {
@@ -2039,7 +2039,7 @@ export class IngresoBodegaComponent implements OnInit {
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(async (res) => {
           try {
             if (res["data"][0].estado !=='C') {
-              this.lcargando.ctlSpinner(true)
+              this.lcargando.ctlSpinner(true);
               (this as any).mensajeSpinner = 'Validando datos'
               let message = ''
               let id_productos = []
@@ -2095,7 +2095,7 @@ export class IngresoBodegaComponent implements OnInit {
               }
 
               this.estado = 'C';
-              this.lcargando.ctlSpinner(true)
+              this.lcargando.ctlSpinner(true);
               this.crearProducto()
               this.vmButtons[4].habilitar = true;
               this.vmButtons[5].habilitar = true;
@@ -2489,7 +2489,7 @@ export class IngresoBodegaComponent implements OnInit {
     })
 
     if (email) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         let response = await this.ordenesServices.enviarCorreo({ destinatario: email, ingreso: this.id })
         console.log(response)

@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ['./pedidos.component.scss']
 })
 export class PedidosComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   actions: any = { btnSave: false, btnmod: false, btnfac: false, btncancel: false };
   dataProducto: any = [{
@@ -71,7 +71,7 @@ export class PedidosComponent implements OnInit {
     })
 
     this.commonVarSrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarSrv.listenPedidosImp.asObservable().subscribe(res => {

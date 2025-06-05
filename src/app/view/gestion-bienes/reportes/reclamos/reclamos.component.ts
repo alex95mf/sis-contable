@@ -118,7 +118,7 @@ export class ReclamosComponent implements OnInit {
 
 
   async cargarReportes() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Reclamos'
       let reportes = await this.apiService.getReportes({params: {filter: this.filter, paginate: this.paginate}});
@@ -153,7 +153,7 @@ export class ReclamosComponent implements OnInit {
   }
 
   async exportExcel() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Exportando Reclamos'
       let excelData = [];

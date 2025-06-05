@@ -80,7 +80,7 @@ export class NotifConfigComponent implements OnInit, OnDestroy {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getModulos()
     await this.getCatalogos()
     await this.getAlertas()
@@ -118,14 +118,14 @@ export class NotifConfigComponent implements OnInit, OnDestroy {
   async consultar() {
     Object.assign(this.paginate, {page: 1, pageIndex: 0})
     this.paginator.firstPage()
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getAlertas()
     this.lcargando.ctlSpinner(false)
   }
 
   async changePage({pageIndex}) {
     Object.assign(this.paginate, {page: pageIndex + 1})
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getAlertas()
     this.lcargando.ctlSpinner(false)
   }
@@ -169,7 +169,7 @@ export class NotifConfigComponent implements OnInit, OnDestroy {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.eliminarAlerta(notificacion)
       this.lcargando.ctlSpinner(false)
     }

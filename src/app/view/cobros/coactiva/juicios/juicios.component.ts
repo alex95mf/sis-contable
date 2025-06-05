@@ -183,7 +183,7 @@ export class JuiciosComponent implements OnInit {
 
   validaPermisos = () => {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
 
     let params = {
@@ -213,7 +213,7 @@ export class JuiciosComponent implements OnInit {
 
   getAbogados() {
     (this as any).mensajeSpinner = 'Cargando Abogados'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     this.apiService.getAbogados().subscribe(
       (res: any) => {
         // console.log(res)
@@ -234,7 +234,7 @@ export class JuiciosComponent implements OnInit {
 
   getJuicios() {
     (this as any).mensajeSpinner = 'Cargando Juicios'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     this.apiService.getJuicios({ params: { filter: this.filter, paginate: this.paginate } }).subscribe(
       (res: any) => {
 
@@ -261,7 +261,7 @@ export class JuiciosComponent implements OnInit {
   changePaginate({pageSize, pageIndex}) {
     Object.assign(this.paginate, {page: pageIndex + 1, perPage: pageSize});
     
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.getJuicios();
   }
 
@@ -275,7 +275,7 @@ export class JuiciosComponent implements OnInit {
     }
     this.filter.contribuyente = (typeof this.filter.contribuyente?.trim() === 'string' && this.filter.contribuyente?.trim().length > 0) ? this.filter.contribuyente.trim() : null
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.getJuicios()
   }
 
@@ -309,7 +309,7 @@ export class JuiciosComponent implements OnInit {
 
   getJuicioDetalles(juicio: any) {
     (this as any).mensajeSpinner = 'Recuperando detalles de Juicio'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getJuicio(juicio).subscribe(
       (res: any) => {
         this.changeView()
@@ -377,7 +377,7 @@ export class JuiciosComponent implements OnInit {
 
   descargarNotificacion(juicio: any) {
     (this as any).mensajeSpinner = 'Recuperando detalles de Juicio'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     
     this.apiService.getJuicio(juicio).subscribe(
       (res: any) => {
@@ -425,7 +425,7 @@ export class JuiciosComponent implements OnInit {
   exportarExcel() {
     let excelData = []
     (this as any).mensajeSpinner = 'Exportando'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     this.apiService.getJuicios({ params: { filter: this.filter } }).subscribe(
       (res: any) => {

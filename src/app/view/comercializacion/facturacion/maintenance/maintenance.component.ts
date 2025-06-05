@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./maintenance.component.scss']
 })
 export class MaintenanceComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;

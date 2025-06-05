@@ -22,7 +22,7 @@ standalone: false,
   styleUrls: ['./compras.component.scss']
 })
 export class ComprasComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)
@@ -62,7 +62,7 @@ export class ComprasComponent implements OnInit {
     })
 
     this.commonVarSrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarSrv.listenSetBuyProv.asObservable().subscribe(res => {

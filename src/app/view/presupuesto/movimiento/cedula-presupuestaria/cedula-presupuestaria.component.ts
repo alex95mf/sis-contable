@@ -245,7 +245,7 @@ console.log(this.checkPrograma)
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
       (this as any).mensajeSpinner = "Cargando Períodos"

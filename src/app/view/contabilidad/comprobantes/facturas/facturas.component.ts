@@ -4218,7 +4218,7 @@ export class FacturasComponent implements OnInit {
   }
 
   async getLatest() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando Registro'
     try {
       const response = await this.comSrv.getUltimaFactura()
@@ -4248,7 +4248,7 @@ export class FacturasComponent implements OnInit {
         return
       }
 
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Cargando Registro'
       try {
         const response = await this.comSrv.getFacturasGeneradas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}) as any

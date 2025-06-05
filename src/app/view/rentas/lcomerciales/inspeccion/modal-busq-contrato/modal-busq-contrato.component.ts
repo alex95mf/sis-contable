@@ -61,7 +61,7 @@ export class ModalBusqContratoComponent implements OnInit {
 
   getContratosContribuyente() {
     (this as any).mensajeSpinner = 'Cargando Contratos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getContratos({contribuyente: this.contribuyente}).subscribe(
       res => {
         // console.log(res)

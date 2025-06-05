@@ -449,7 +449,7 @@ lista_estados:any = [
   async cargaInicial()
   {
     (this as any).mensajeSpinner = 'Cargando Grupo de Productos';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
     let response=await this.productoSrv.getCatalogos ({params:"'IMPUESTOS'"});
@@ -479,7 +479,7 @@ lista_estados:any = [
 
   async CargarGrupoProductos(){
     (this as any).mensajeSpinner = 'Cargando Grupo de Productos';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -517,7 +517,7 @@ lista_estados:any = [
 
   async CargarBodegas(){
     (this as any).mensajeSpinner = 'Cargando Bodegas';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -589,7 +589,7 @@ removeBodega(index)
 
   async consultarProducto(){
     (this as any).mensajeSpinner = 'Cargando Producto';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 

@@ -75,7 +75,7 @@ export class ModalDetallesComponent implements OnInit {
     };
 
     if (this.detalles == undefined || this.detalles.length == 0) {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getTarifaById(this.concepto["id_tarifa"]).subscribe(
         (res) => {
           //console.log(res["data"]["detalles"]);

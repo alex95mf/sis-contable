@@ -139,19 +139,19 @@ export class ReclasificacionComponent implements OnInit {
   consultar() {
     Object.assign(this.paginate, { page: 1, pageIndex: 0 })
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.getProductos()
   }
 
   changePaginate(event) {
     Object.assign(this.paginate, { page: event.pageIndex + 1 })
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.getProductos()
   }
 
   async getProductos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let response = await this.apiService.getProductos({params: {filter: this.filter, paginate: this.paginate}});
       this.paginate.length = response.total

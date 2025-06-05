@@ -104,7 +104,7 @@ export class CierreBienesComponent implements OnInit {
         // Consultar detalles del documento y mostrar en pantalla
         console.log(documento)
         this.columnas = (documento.tipo == 'BCA') ? [{name: 'costo', label: 'Costo'}] : [{name: 'stock', label: 'Stock'}, {name: 'costo', label: 'Costo'}, {name: 'costo_total', label: 'Costo Total'}]
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         let response = await this.getCierre(documento.id)
         Object.assign(response, { bienes: [], txt_tipo: this.cmb_tipo_bien.find((item: any) => item.valor == documento.tipo).descripcion })
         response.detalles.forEach((item: any) => {
@@ -151,7 +151,7 @@ export class CierreBienesComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Catalogos'
       let catalogos = await this.apiService.getCatalogos({params: "'INV_TIPO_BIEN'"})
@@ -175,7 +175,7 @@ export class CierreBienesComponent implements OnInit {
       return;
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Consultando Bienes'
       let bienes = await this.apiService.getBienes({ filter: {...this.documento} })
@@ -213,7 +213,7 @@ export class CierreBienesComponent implements OnInit {
                 return;
               }
 
-              this.lcargando.ctlSpinner(true)
+              this.lcargando.ctlSpinner(true);
               try {
                 (this as any).mensajeSpinner = 'Almacenando Documento'
                 let response = await this.apiService.setDocumento({documento: this.documento})
@@ -286,7 +286,7 @@ export class CierreBienesComponent implements OnInit {
           try {
 
             if (res["data"][0]?.estado !=='C') {
-              this.lcargando.ctlSpinner(true)
+              this.lcargando.ctlSpinner(true);
               try {
                 (this as any).mensajeSpinner = 'Eliminando Cierre'
                 await this.apiService.deleteCierre(this.documento.id)

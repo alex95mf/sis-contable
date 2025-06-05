@@ -164,7 +164,7 @@ export class FormSaveComponent implements OnInit {
   }
 
   validacion(valor){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     if(this.parametro.codigo_comprobante == undefined || this.parametro.codigo_comprobante == ''){
       this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese una código');
@@ -302,7 +302,7 @@ export class FormSaveComponent implements OnInit {
   }
 
   // getCatalogo(){
-  //   this.lcargando.ctlSpinner(true)
+  //   this.lcargando.ctlSpinner(true);
   //   let paretnId = [7, 4, 1]
   //   this.service.getNomCatalogo(paretnId).subscribe(
   //     (res) =>{

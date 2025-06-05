@@ -108,7 +108,7 @@ export class ReporteEsigefComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
       (this as any).mensajeSpinner = "Cargando Períodos"
@@ -233,7 +233,7 @@ export class ReporteEsigefComponent implements OnInit {
   }
 
   async consultarPresupuestoInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let response: Array<any> = await this.serv.obtenerPresupuestoInicial({ periodo: this.selected_anio, mes: this.selected_mes });
       response.map((item: any) => Object.assign(item, { codigo: `${item.tipo}|${item.codigo_p1}|${item.codigo_p2}|${item.codigo_p3}`, periodo: `${this.selected_mes}`.padStart(2, '0') }))
@@ -250,7 +250,7 @@ export class ReporteEsigefComponent implements OnInit {
   }
 
   async consultarBalanceComprobacion() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let response = await this.serv.obtenerBalanceComprobacion({ periodo: this.selected_anio, mes: this.selected_mes });
       response.map((item: any) => Object.assign(item, { codigo: `${item.codigo_p1}|${item.codigo_p2}|${item.codigo_p3}`, periodo: `${this.selected_mes}`.padStart(2, '0') }))
@@ -267,7 +267,7 @@ export class ReporteEsigefComponent implements OnInit {
   }
 
   async consultarPresupuesto() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let response = await this.serv.obtenerPresupuesto({periodo: this.selected_anio});
       response.map((item: any) => Object.assign(item, { codigo: `${item.codigo_p1}|${item.codigo_p2}|${item.codigo_p3}`, periodo: `${this.selected_mes}`.padStart(2, '0') }))
@@ -283,7 +283,7 @@ export class ReporteEsigefComponent implements OnInit {
     }
   }
   consultarRecipInicial(){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.serv.obtenerReciprocaInicial(this.selected_anio,this.selected_mes).subscribe(
       (res: any) => {
         console.log(res);
@@ -302,7 +302,7 @@ export class ReporteEsigefComponent implements OnInit {
 
   }
   consultarTranReciprocas(){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.serv.obtenerTranReciprocas(Number(this.selected_anio),Number(this.selected_mes),Number(this.dataUser.id_usuario)).subscribe(
       (res: any) => {
         console.log(res);
@@ -321,7 +321,7 @@ export class ReporteEsigefComponent implements OnInit {
 
   }
   consultarDetAsientoInicial(){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     //console.log(this.selected_anio);
     //console.log(this.selected_mes);

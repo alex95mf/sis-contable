@@ -22,7 +22,7 @@ standalone: false,
 })
 export class BodegaComprasComponent implements OnInit {
   /* Datatable options */
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;

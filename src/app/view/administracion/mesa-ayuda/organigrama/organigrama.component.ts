@@ -565,7 +565,7 @@ export class OrganigramaComponent implements OnInit {
           // Grupo
           // console.log('Nuevo Grupo')
           (this as any).mensajeSpinner = 'Generando codigo'
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           let response: any = await this.organigramaService.getLastChild({parent: this.nivel.codigo_padre});
           console.log(response)
           this.lcargando.ctlSpinner(false)
@@ -586,7 +586,7 @@ export class OrganigramaComponent implements OnInit {
           // Subgrupo
           // console.log('Nuevo Subgrupo')
           (this as any).mensajeSpinner = 'Generando codigo'
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           let response: any = await this.organigramaService.getLastChild({parent: this.nivel.codigo});
           console.log(response)
           this.lcargando.ctlSpinner(false)
@@ -613,7 +613,7 @@ export class OrganigramaComponent implements OnInit {
 
   saveNivelOrganigrama() {
     (this as any).mensajeSpinner = 'Almacenando Nivel'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.organigramaService.guardarNivelOrganigrama({ organigrama: this.nuevoNivel }).subscribe(
       (res: any) => {
         this.lcargando.ctlSpinner(false)

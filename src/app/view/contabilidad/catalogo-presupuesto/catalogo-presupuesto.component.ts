@@ -501,7 +501,7 @@ export class CatalogoPresupuestoComponent implements OnInit {
 
         if (response.isConfirmed) {
           // Almacenar la cuenta
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           (this as any).mensajeSpinner = 'Almacenando Partida'
 
           this.cuenta = {

@@ -124,7 +124,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       (res: any) => {
         (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
 
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.restoreForm(false, false);
         this.totalCalculo= false;
         this.formReadOnly = true;
@@ -343,7 +343,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
       this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
@@ -387,7 +387,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
   validaPermisos() {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
 
@@ -568,7 +568,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     this.observacionesDisabled = false;
     this.vmButtons[3].habilitar = false;
     (this as any).mensajeSpinner = 'Obteniendo Propiedades...'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
           (res: any) => {
             console.log(res)
@@ -1169,7 +1169,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
   async getUltimoRegistro(skip: number = 0) {
     this.skip = skip
     (this as any).mensajeSpinner = 'Cargado Registro'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       const conceptos = [this.conceptoConfig.id_concepto]
       const response = await this.apiService.getUltimoRegistro({conceptos, skip})

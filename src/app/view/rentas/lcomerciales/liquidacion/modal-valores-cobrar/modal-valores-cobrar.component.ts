@@ -50,7 +50,7 @@ export class ModalValoresCobrarComponent implements OnInit {
   }
 
   async getImpuestos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Impuestos'
       let response = await this.apiService.getValoresPorCobrar({

@@ -157,7 +157,7 @@ export class ArriendoterrenosComponent implements OnInit {
       (res) => {
         console.log(res)
         (this as any).mensajeSpinner = 'Cargando datos de la liquidación...';
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.restoreForm(false, false);
         this.formReadOnly = true;
         //console.log('liquidacion '+ res)

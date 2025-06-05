@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ReportRetencionGeneradasService } from './retenciones-generadas.service';
 
 import { environment } from 'src/environments/environment';
- 
+
 @Component({
 standalone: false,
   selector: 'app-retenciones-generadas',
@@ -19,7 +19,7 @@ standalone: false,
 })
 export class RetencionesGeneradasComponent implements OnInit {
 
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   vmButtons: any = [];
@@ -42,7 +42,7 @@ export class RetencionesGeneradasComponent implements OnInit {
   fromDatePicker: any ;
   toDatePicker: any;
 
-  constructor(private commonServices: CommonService, 
+  constructor(private commonServices: CommonService,
     private toastr: ToastrService,
     private progeneracionderetencionService: ReportRetencionGeneradasService,) {}
 
@@ -63,13 +63,13 @@ export class RetencionesGeneradasComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
 
     this.fromDatePicker= moment(this.firstday).format('YYYY-MM-DD'),
     this.toDatePicker= moment(this.today).format('YYYY-MM-DD'),
 
-    
+
 
     setTimeout(() => {
 

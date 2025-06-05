@@ -78,7 +78,7 @@ export class RegistroComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -157,7 +157,7 @@ export class RegistroComponent implements OnInit {
     this.vmButtons[1].habilitar = false  // Habilitar Modificar
 
     try {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Cargando Presupuesto del Periodo'
       // Revisar si hay Asignacion Inicial
       let asignacionInicialPeriodo = await this.planRegistroService.getAsignacionInicial(event)
@@ -366,7 +366,7 @@ export class RegistroComponent implements OnInit {
 
   enviarCorreo() {
     (this as any).mensajeSpinner = 'Enviando correos...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.planRegistroService.enviarCorreos().subscribe(
       res => {
         console.log(res)

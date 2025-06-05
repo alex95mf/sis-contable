@@ -74,7 +74,7 @@ export class RecepcionComponent implements OnInit {
     })
 
     this.commonVarSrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarSrv.listenRecetionPedidosImp.asObservable().subscribe(res => {

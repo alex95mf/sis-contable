@@ -610,7 +610,7 @@ export class FormMetasComponent implements OnInit {
       };
       (this as any).mensajeSpinner = 'Cargado OPG...';
       
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       this.metaSrv.getOPG(data).subscribe(
         res => {
           res['data'].forEach(o => {

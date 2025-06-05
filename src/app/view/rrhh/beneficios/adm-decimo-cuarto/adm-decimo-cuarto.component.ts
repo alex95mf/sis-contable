@@ -1397,7 +1397,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
    // await this.handleEnter({key: 'Enter'})
   }
   getLatest() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     let data = {
 
       tipo_decimo: 'DECIC',
@@ -1426,7 +1426,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
 
 
   getNumControl() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     let data = {
 

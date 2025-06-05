@@ -114,7 +114,7 @@ export class InformacionGestionComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Grupos'
       let response: Array<any> = await this.apiService.getGruposBienes();
@@ -146,7 +146,7 @@ export class InformacionGestionComponent implements OnInit {
     }
 
     
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       this.filas = []
       this.columnas = [];
@@ -245,7 +245,7 @@ export class InformacionGestionComponent implements OnInit {
   filterByTipoBien(event: any) {
     // console.log(event)
     if (event != undefined && this.selectedReporte == 'PSG') {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Filtrando Grupos por Tipo de Bien'
       this.cmb_grupo_filter = this.cmb_grupo.filter((item: any) => item.tipo_bien == event.value)
       setTimeout(() => this.lcargando.ctlSpinner(false), 750)

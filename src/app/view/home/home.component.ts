@@ -12,7 +12,7 @@ standalone: false,
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   usuarios: any;
   password: any;
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   ipSend:any ;
 
   constructor(private router: Router, private elementRef: ElementRef, private homeservices: HomeServices,
-    private toastr: ToastrService, private comSrv: ApiServices) 
+    private toastr: ToastrService, private comSrv: ApiServices)
      {
       this.homeservices.getIpAddress().subscribe(res => {
         this.ipSend = res;
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  
+
 	metodoGlobal(evento: any) {
 		switch (evento.items.boton.texto) {
 			case "ENVIAR":
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
     ($("#exampleModal") as any).modal("hide");
     this.correos = undefined;
     }
-    
+
   recoveredPassword() {
     if (this.correos == undefined || this.correos == "") {
       this.toastr.info("Debe Ingresar correo registrado!!");

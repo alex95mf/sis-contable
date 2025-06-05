@@ -135,7 +135,7 @@ export class ModalTramiteDetallesComponent implements OnInit {
 
   getCatalogos() {
     (this as any).mensajeSpinner = 'Cargando Catalogos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getCatalogos({ params: "'PLA_DEPARTAMENTO'" }).subscribe(
       (res: any) => {
         console.log(res)
@@ -160,7 +160,7 @@ export class ModalTramiteDetallesComponent implements OnInit {
 
   getTramite() {
     (this as any).mensajeSpinner = 'Cargando Tramite'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getTramite(this.data.id_tramite).subscribe(
       (res: any) => {
         console.log(res)
@@ -177,7 +177,7 @@ export class ModalTramiteDetallesComponent implements OnInit {
 
   setTramite() {
     (this as any).mensajeSpinner = 'Almacenando Tramite'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.setTramite({ tramite: this.tramite }).subscribe(
       (res: any) => {
         console.log(res)
@@ -195,7 +195,7 @@ export class ModalTramiteDetallesComponent implements OnInit {
 
   updateTramite() {
     (this as any).mensajeSpinner = 'Actualizando Tramite'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     delete this.tramite.departamento
     this.apiService.updateTramite(this.tramite.id_tramite, { tramite: this.tramite }).subscribe(
       (res: any) => {

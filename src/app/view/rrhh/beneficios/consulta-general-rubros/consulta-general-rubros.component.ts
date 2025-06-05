@@ -83,7 +83,7 @@ export class ConsultaGeneralRubrosComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
       (this as any).mensajeSpinner = "Cargando Períodos"
@@ -109,7 +109,7 @@ export class ConsultaGeneralRubrosComponent implements OnInit {
   async consultar() {
     Object.assign(this.filter, { periodo: this.periodo_selected })
     //Object.assign(this.filter, { periodo: moment(this.periodo_selected).format('YYYY') })
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Empleados y Rubros'
       this.registros = await this.apiService.getRubrosEmpleados({params: { filter: this.filter }})

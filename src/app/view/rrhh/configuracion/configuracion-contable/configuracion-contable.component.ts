@@ -110,7 +110,7 @@ export class ConfiguracionContableComponent implements OnInit {
 
   async cargaInicial() {
     if (this.tipoContrato == undefined) { return; }
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       
       this.rubroTipoContraro = await this.apiService.getRubrosTipoContrato({params:{tipo:this.tipoContrato,codigo:this.codigo,descripcion:this.descripcion}});
@@ -133,7 +133,7 @@ export class ConfiguracionContableComponent implements OnInit {
               let dat = [item.cuenta_deudora, item.cuenta_acreedora]
 
               this.getDetailbyCodigo(dat, (result) => {
-                this.lcargando.ctlSpinner(true)
+                this.lcargando.ctlSpinner(true);
                 console.log("resultado", result);
 
                 const deudoraDetail = result.find(detail => detail.codigo === item.cuenta_deudora);
@@ -156,7 +156,7 @@ export class ConfiguracionContableComponent implements OnInit {
 this.lcargando.ctlSpinner(false);
                 // Resto del código para procesar los resultados aquí
               });
-              this.getPresupuesto(item.codigo_presupuesto, (result) => { this.lcargando.ctlSpinner(true)
+              this.getPresupuesto(item.codigo_presupuesto, (result) => { this.lcargando.ctlSpinner(true);
                 const presupuestoDetail = result.find(detail => detail.codigo === item.codigo_presupuesto);
                 if (presupuestoDetail) {
                   item.nombre_presupuesto = presupuestoDetail.nombre;

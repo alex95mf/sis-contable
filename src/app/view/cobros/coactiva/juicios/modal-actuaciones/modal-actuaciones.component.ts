@@ -121,7 +121,7 @@ export class ModalActuacionesComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Catalogos'
       let catalogos = await this.apiService.getCatalogsAsync({params: "'COB_JUICIO_ESTADO','COB_TIPO_ACTUACION'"})
@@ -141,7 +141,7 @@ export class ModalActuacionesComponent implements OnInit {
 
   getJuicio() {
     (this as any).mensajeSpinner = "Cargando Juicio"
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getJuicio(this.juicio).subscribe(
       (res: any) => {
         console.log(res.data)
@@ -188,7 +188,7 @@ export class ModalActuacionesComponent implements OnInit {
 
       Object.assign(this.juicio, { valor: this.valor })
       (this as any).mensajeSpinner = 'Almancenando Actuacion'
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
 
       console.log(data)
 

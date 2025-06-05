@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ['./nota-debito.component.scss']
 })
 export class NotaDebitoComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
 
@@ -86,7 +86,7 @@ export class NotaDebitoComponent implements OnInit {
     private socket: Socket) {
 
       this.commonVarSrvice.updPerm.asObservable().subscribe(res => {
-        (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+        (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
       })
 
     this.commonVarSrvice.setAccountNDV.asObservable().subscribe(res => {

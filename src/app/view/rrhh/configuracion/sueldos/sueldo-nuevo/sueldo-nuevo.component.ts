@@ -361,7 +361,7 @@ export class SueldoNuevoComponent implements OnInit {
 
   async cargaInicial() {
     (this as any).mensajeSpinner = 'Cargando Catalogos...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       console.log("daniel")
       // Carga Listado de Grados

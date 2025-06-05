@@ -200,7 +200,7 @@ export class TablePermisosComponent implements OnDestroy, OnInit {
     this.validaDt = false;
     this.dataT = [];
     // this.coVasrv.updPerm.next(true);
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.seguridadServices.updatePermisions(data).subscribe(res => {
       this.toastr.success('Datos actualizados correctamente');
       this.lcargando.ctlSpinner(false)

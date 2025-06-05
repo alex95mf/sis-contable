@@ -43,7 +43,7 @@ export class AnexosListArtesaComponent implements OnInit {
     this.commonVarService.contribAnexoLoad.asObservable().subscribe(
       (res: any) => {
         // console.log('anexos',res, this.permissions, this.dataUser);
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Cargando Anexos ...'
         let data = {
           module: this.permissions.id_modulo,
@@ -124,7 +124,7 @@ export class AnexosListArtesaComponent implements OnInit {
     }
 
     // (this as any).mensajeSpinner = 'Eliminando anexo'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
 
     this.apiService.deleteAnexo(data).subscribe(
       res => {
@@ -173,7 +173,7 @@ export class AnexosListArtesaComponent implements OnInit {
           }
       
           (this as any).mensajeSpinner = 'Eliminando anexo'
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
       
           this.apiService.deleteAnexo(data).subscribe(
             res => {

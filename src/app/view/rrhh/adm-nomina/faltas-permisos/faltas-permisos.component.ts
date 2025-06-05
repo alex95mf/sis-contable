@@ -528,7 +528,7 @@ export class FaltasPermisosComponent implements OnInit {
 
     setTimeout(async () => {
       // this.cmb_periodo = await this.asistenciadiasempleService.getPeriodos()
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.cargaPeriodos()
       this.lcargando.ctlSpinner(false)
     }, 0)
@@ -690,7 +690,7 @@ export class FaltasPermisosComponent implements OnInit {
       motivo_permiso: motivo
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando...'
     this.PerFaltasYPermisosService.getFaltasPermisosEmployeesReportGrafi(parameterUrl).subscribe((res: any) => {
 

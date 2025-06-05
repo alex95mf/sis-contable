@@ -23,7 +23,7 @@ standalone: false,
 export class SuppliersComponent implements OnInit {
   @ViewChild("vaSelect") myInputVariable: ElementRef;
   public ddTree: DropDownTreeComponent;
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   newOrigin: any;
@@ -100,7 +100,7 @@ export class SuppliersComponent implements OnInit {
     })
 
     this.commonVarServices.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonServices.actionsSearchProviders.asObservable().subscribe(res => {

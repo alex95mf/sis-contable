@@ -99,7 +99,7 @@ export class ModalBuscaCodigoComponent implements OnInit {
       }
     }
     this.resultados = []
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     try {
       (this as any).mensajeSpinner = 'Obteniendo Codigos'

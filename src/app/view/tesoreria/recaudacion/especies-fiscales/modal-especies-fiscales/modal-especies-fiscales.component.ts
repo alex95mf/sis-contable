@@ -157,7 +157,7 @@ export class ModalEspeciesFiscalesComponent implements OnInit {
 
       /* Validamos si el periodo se encuentra aperturado */
       // if (res["data"][0].estado !== 'C') {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Almacenando Talonario'
         this.service.saveEspeciesfiscales(this.dat).subscribe(
           (res)=>{

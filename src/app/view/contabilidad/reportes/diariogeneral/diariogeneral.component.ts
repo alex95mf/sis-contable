@@ -26,7 +26,7 @@ standalone: false,
 export class DiariogeneralComponent implements OnInit {
 
 
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('content') templateRef: TemplateRef<any>;
 
@@ -122,14 +122,14 @@ export class DiariogeneralComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
-     
+
       let response = await this.dGeneralService.getCatalogos({params: "'CON_TIPO_AUXILIARES','CON_CATALOGO_AUXILIARES'"});
       this.cmb_auxiliar_referencia = response['CON_CATALOGO_AUXILIARES'].map((item: any) => Object.assign(item, { label: `${item.valor}. ${item.descripcion}`}))
 
       this.lcargando.ctlSpinner(false)
-      
+
     } catch (err) {
       console.log(err)
       this.lcargando.ctlSpinner(false)
@@ -257,31 +257,31 @@ export class DiariogeneralComponent implements OnInit {
   // }
 
   calcularTotalDebe(descripcion_cuenta){
-   
+
     let debe = 0
     this.dtConsultaAsientoAuxiliar.forEach(e => {
       if(e.descripcion_cuenta == descripcion_cuenta){
         let valorDebe100 = +e.debito * 100;
-        debe += +valorDebe100; 
+        debe += +valorDebe100;
       }
     });
     this.totalDebe = +debe / 100;
     return this.totalDebe;
   }
-  
+
   calcularTotalHaber(descripcion_cuenta){
 
     let haber = 0
     this.dtConsultaAsientoAuxiliar.forEach(e => {
       if(e.descripcion_cuenta == descripcion_cuenta){
         let valorHaber100 = +e.credito * 100;
-        haber += +valorHaber100; 
+        haber += +valorHaber100;
       }
     });
-  
+
     this.totalHaber = +haber / 100;
     return this.totalHaber;
-   
+
   }
   calcularTotalPartida(descripcion_cuenta){
 
@@ -289,13 +289,13 @@ export class DiariogeneralComponent implements OnInit {
     this.dtConsultaAsientoAuxiliar.forEach(e => {
       if(e.descripcion_cuenta == descripcion_cuenta){
         let valorPartida100 = +e.valor_partida * 100;
-        partida += +valorPartida100; 
+        partida += +valorPartida100;
       }
     });
-  
+
     this.totalPartida = +partida / 100;
     return this.totalPartida;
-   
+
   }
 
 
@@ -360,7 +360,7 @@ export class DiariogeneralComponent implements OnInit {
     }else{
       auxiliar = this.auxiliar;
     }
-    
+
 
     this.lcargando.ctlSpinner(true);
 
@@ -370,7 +370,7 @@ export class DiariogeneralComponent implements OnInit {
           console.log(res);
           this.lcargando.ctlSpinner(false);
           this.dtConsultaAsientoAuxiliar = res.data;
-         
+
         },
         (error: any) => {
           console.log(error)
@@ -384,7 +384,7 @@ export class DiariogeneralComponent implements OnInit {
           console.log(res);
           this.lcargando.ctlSpinner(false);
           this.dtConsultaAsientoAuxiliar = res.data;
-         
+
         },
         (error: any) => {
           console.log(error)
@@ -422,7 +422,7 @@ export class DiariogeneralComponent implements OnInit {
       console.log('excel auxiliares')
       this. exportExcelAuxiliares()
     }
-    
+
   }
 
   exportExcelAuxiliares() {
@@ -451,7 +451,7 @@ export class DiariogeneralComponent implements OnInit {
       case "2CONSULTAR AUXILIAR":
         this.CargarLibroDiarioAuxiliar();
         break;
-        
+
     }
   }
 

@@ -126,7 +126,7 @@ export class PresupuestoComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -189,7 +189,7 @@ export class PresupuestoComponent implements OnInit {
   }
 
   async handleClickBuscar() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Bienes'
       this.bienes = await this.apiSrv.getBienes({periodo: this.periodoSelected, departamento: this.departamentoObjectSelected.id_catalogo});
@@ -228,7 +228,7 @@ export class PresupuestoComponent implements OnInit {
   }
 
   async handleClickGuardar() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Asignando Partidas Presupuestarias'
       let response = await this.apiSrv.setPartidas({bienes: this.bienes})
@@ -249,7 +249,7 @@ export class PresupuestoComponent implements OnInit {
       params: "'PLA_PROGRAMA','PLA_DEPARTAMENTO','PLA_COD_PRESUP','PLA_TIPO_PRESUPUESTO','PLA_AFIRMACION','PLA_FUENTE_FI'"
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogos(data).subscribe(
       (res: any) => {
         res['data']['PLA_PROGRAMA'].forEach(p => {
@@ -289,7 +289,7 @@ export class PresupuestoComponent implements OnInit {
 
   /* selectProg(event) {
     (this as any).mensajeSpinner = 'Filtrando Departamentos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.deptProg = this.departamentos.filter(d => d.programa == event)
     this.departamento = 0
     this.bienesAttr = []
@@ -304,7 +304,7 @@ export class PresupuestoComponent implements OnInit {
     let data = {
       departamento: event.id
     }
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiSrv.getBienesDepartamento(data).subscribe(
       (res: any) => {
         console.log(res['data'])
@@ -358,7 +358,7 @@ export class PresupuestoComponent implements OnInit {
       bienes: this.bienesAttr
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiSrv.asignaPartida(data).subscribe(
       (res: any) => {
         this.lcargando.ctlSpinner(false)

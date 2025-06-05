@@ -125,7 +125,7 @@ export class TitulosComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             (this as any).mensajeSpinner = 'Procesando Títulos'
-            this.lcargando.ctlSpinner(true)
+            this.lcargando.ctlSpinner(true);
             this.apiService.processCuota({ cuotas: procesar }).subscribe(
               (res: any) => {
                 res.data.forEach((element: any) => {
@@ -168,7 +168,7 @@ export class TitulosComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonService.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -191,7 +191,7 @@ export class TitulosComponent implements OnInit {
 
   getCatalogos() {
     (this as any).mensajeSpinner = 'Cargando Catalogos'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     this.apiService.getCatalogos({ params: "'REN_MERCADO'" }).subscribe(
       (res: any) => {
         // console.log(res)
@@ -216,7 +216,7 @@ export class TitulosComponent implements OnInit {
     }
 
     (this as any).mensajeSpinner = 'Cargando Titulos por Cobrar...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getContratoDetalles({params: { filter: this.filter, paginate: this.paginate }}).subscribe(
       (res: any) => {
         // console.log(res)
@@ -263,7 +263,7 @@ export class TitulosComponent implements OnInit {
   exportExcel() {
     let excelData = [];
     (this as any).mensajeSpinner = 'Exportando Titulos...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getContratoDetalles({params: { filter: this.filter }}).subscribe(
       (res: any) => {
         let registros = res.data

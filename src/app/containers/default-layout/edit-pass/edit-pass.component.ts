@@ -19,7 +19,7 @@ standalone: false,
 	styleUrls: ['./edit-pass.component.scss']
 })
 export class EditPassComponent implements OnInit {
-	
+
     @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 	@ViewChild('codeInput') codeInput: ElementRef;
 	passwordActuals: any;

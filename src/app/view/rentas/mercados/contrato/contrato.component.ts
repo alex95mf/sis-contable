@@ -113,7 +113,7 @@ export class ContratoComponent implements OnInit {
         this.newcontrato = res.id_mercado_contrato
 
         (this as any).mensajeSpinner = 'Cargando Contrato'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         try {
           console.log(res)
           this.puestos = await this.getPuestos(this.mercados.find(m => m.id == res.fk_mercado))
@@ -274,7 +274,7 @@ export class ContratoComponent implements OnInit {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       this.permissions = await this.getPermisos()
       if (this.permissions.abrir == 0) {
@@ -295,7 +295,7 @@ export class ContratoComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonService.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -401,7 +401,7 @@ export class ContratoComponent implements OnInit {
   cargarPuestos = async (event) => {
     (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
     this.contrato.puesto = 0
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       this.puestos = await this.getPuestos(event, 'D')
       this.lcargando.ctlSpinner(false)
@@ -437,7 +437,7 @@ export class ContratoComponent implements OnInit {
     /* this.contrato.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto
 
     (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.puestos = []
     this.apiService.getPuestos({ mercado: event, estado: 'D' }).subscribe(
       (res: any) => {
@@ -519,7 +519,7 @@ export class ContratoComponent implements OnInit {
       await this.validarDatos()
 
       (this as any).mensajeSpinner = 'Almacenando Contrato'
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
 
       const data = {
         contrato: this.contrato,
@@ -569,7 +569,7 @@ export class ContratoComponent implements OnInit {
         }
 
         (this as any).mensajeSpinner = 'Almacenando Contrato'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.apiService.setContrato({contrato: this.contrato}).subscribe(
           (res: any) => {
             // console.log(res['data'])
@@ -600,7 +600,7 @@ export class ContratoComponent implements OnInit {
 
   actualizaContrato = async () => {
     (this as any).mensajeSpinner = 'Espere...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       // Si hay anexos, almacenarlos
       (this as any).mensajeSpinner = 'Almacenando Anexos'

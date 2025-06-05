@@ -1274,7 +1274,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     }
   }
   getLatest() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     let data = {
 
       tipo_decimo: 'DECIT',
@@ -1303,7 +1303,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
 
   getNumControl() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     let data = {
 

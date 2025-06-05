@@ -72,7 +72,7 @@ export class NotaDebitoComponent implements OnInit {
   ccc = 0;
 
 
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 

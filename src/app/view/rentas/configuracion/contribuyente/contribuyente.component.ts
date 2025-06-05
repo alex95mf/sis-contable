@@ -343,7 +343,7 @@ export class ContribuyenteComponent implements OnInit {
           this.contribuyente['fecha_creacion'] = res.created_at?.split('T')[0];
           this.contribuyente['fecha_actualizacion'] = res.updated_at?.split('T')[0];
 
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           (this as any).mensajeSpinner = 'Cargando Datos...'
           let historial = await this.contribuyenteSrv.getHistorial(res);
           console.log(historial)
@@ -450,7 +450,7 @@ export class ContribuyenteComponent implements OnInit {
 
     this.contribuyenteSrv.uploadResolucion$.pipe(takeUntil(this.onDestroy$)).subscribe(
       async () => {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         try {
           (this as any).mensajeSpinner = 'Cargando Resolucion'
           let resolucion: any = await this.contribuyenteSrv.getResolucion({
@@ -1489,7 +1489,7 @@ export class ContribuyenteComponent implements OnInit {
   }
 
   subirResolucionTercera(archivo: File) {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Almacenando Resolucion'
     let data = {
       // Informacion para almacenamiento de anexo
@@ -1583,7 +1583,7 @@ export class ContribuyenteComponent implements OnInit {
       }
 
       (this as any).mensajeSpinner = 'Eliminando Resolucion'
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       this.contribuyenteSrv.deleteAnexo(data).subscribe(
         res => {
           this.lcargando.ctlSpinner(false)
@@ -2894,7 +2894,7 @@ export class ContribuyenteComponent implements OnInit {
         this.toastr.info("Debe agregar al menos una relación")
       }
       else{
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Guaradando Relaciones...'
 
         let data ={
@@ -3104,7 +3104,7 @@ export class ContribuyenteComponent implements OnInit {
             confirmButtonColor: '#4DBD74',
           }).then((result) => {
                if (result.isConfirmed) {
-                this.lcargando.ctlSpinner(true)
+                this.lcargando.ctlSpinner(true);
                 (this as any).mensajeSpinner = 'Guaradando Lote...'
 
                 let data ={

@@ -236,7 +236,7 @@ export class DetalleCatalogoElectronicoComponent implements OnInit, OnDestroy {
   }
 
   async getCatalogos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let estados = await this.service.getCatalogos({params: "'CMP_CE_ESTADO'"}) as any
       console.log(estados)
@@ -245,7 +245,7 @@ export class DetalleCatalogoElectronicoComponent implements OnInit, OnDestroy {
       this.lcargando.ctlSpinner(false)
     } catch (err) {
       console.log(err)
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       this.toastr.error(err.error?.message, 'Error cargando Catalogo')
     }
   }

@@ -180,7 +180,7 @@ export class ActaFiniquitoComponent implements OnInit {
 
     this.apiSrv.listaActas$.subscribe(
       async (res) => {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Recuperando datos'
         // Mostrar el empleado
         const empleado: any = await this.apiSrv.getEmpleado(res.fk_empleado)
@@ -794,7 +794,7 @@ obtenerIndiceEgreso(nombre) {
       return
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Calculando valores'
     try {
       const response = await this.apiSrv.calcularValores({empleado: this.empleadoForm});

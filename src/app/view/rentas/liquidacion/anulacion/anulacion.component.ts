@@ -437,7 +437,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
 
   getCatalogos() {
     (this as any).mensajeSpinner = 'Cargando Catalogos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getCatalogos({ params: "'LIQ MOTIVO'" }).subscribe(
       (res: any) => {
         // console.log()
@@ -445,7 +445,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
           const { id_catalogo, valor, descripcion } = m
           this.motivos = [...this.motivos, { id_catalogo: id_catalogo, valor: valor, descripcion: descripcion }]
         })
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.getConceptos()
       },
       (err: any) => {

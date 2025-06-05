@@ -79,7 +79,7 @@ export class ModalMesesInteresComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Tipo de Persona'
       let tipoPersona = await this.apiService.getAgentRetencion()
@@ -120,7 +120,7 @@ export class ModalMesesInteresComponent implements OnInit {
       this.toastr.warning(msgInvalid, 'Validacion de Datos', {enableHtml: true})
       return;
     }
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Guardando Configuracion'
       let response = await this.apiService.setMesesIntereses({concepto: this.concepto, configuracion: this.lst_tipo_persona})

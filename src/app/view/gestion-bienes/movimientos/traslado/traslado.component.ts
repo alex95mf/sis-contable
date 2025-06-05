@@ -237,7 +237,7 @@ codigoActa:any;
     private socket: Socket
   ) {
     this.commonVarServices.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
     this.commonVarServices.selectSubGrupo.asObservable().subscribe(
       (res) => {

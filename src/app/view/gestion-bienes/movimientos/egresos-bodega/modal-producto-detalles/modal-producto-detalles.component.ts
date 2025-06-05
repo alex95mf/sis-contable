@@ -92,7 +92,7 @@ export class ModalProductoDetallesComponent implements OnInit {
     if (producto.desglose != undefined || producto.desglose != null) {
       this.lotes =  producto.desglose;
     } else {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Obteniendo Lotes del Producto'
         let response: any = await this.apiService.getDetalles({producto: this.producto.id_producto, bodega: this.bodega});

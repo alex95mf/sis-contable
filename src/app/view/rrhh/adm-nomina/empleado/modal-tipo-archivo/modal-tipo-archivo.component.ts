@@ -62,7 +62,7 @@ export class ModalTipoArchivoComponent implements OnInit {
         this.activeModal.close();
         break;
       case "GUARDAR":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Almacenando Tipo de Archivo'
         await this.createTipoArchivo()
         this.lcargando.ctlSpinner(false)

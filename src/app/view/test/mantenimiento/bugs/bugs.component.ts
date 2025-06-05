@@ -206,7 +206,7 @@ this.vmButtons=[
   }
   async cargaInicial()
   {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     let response=await this.apiBugsService.cargaCatalogo({params:"'DOCUMENTO','ESTADO CIVIL'"});
     console.log(response);
 
@@ -281,7 +281,7 @@ this.vmButtons=[
   }
   async cargarBugs() {
     this.lcargando.ctlMensaje("Actualizando Lista de Bugs....!!!");
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
 
 

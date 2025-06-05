@@ -110,7 +110,7 @@ export class PacComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonService.getPermisionsGlobas(params).subscribe(
       (res: any) => {
         this.permissions = res["data"][0];
@@ -177,7 +177,7 @@ export class PacComponent implements OnInit {
   }
 
   async handleClickBuscar() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       // Obtener la Mision ?
       (this as any).mensajeSpinner = 'Obteniendo Mision'
@@ -230,7 +230,7 @@ export class PacComponent implements OnInit {
 
   /* getProgramas() {
     (this as any).mensajeSpinner = 'Cargando Programas'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getProgramas().subscribe(
       res => {
         // console.log(res['data'])
@@ -261,7 +261,7 @@ export class PacComponent implements OnInit {
     this.compras = []
     this.vmButtons[0].habilitar = true
     (this as any).mensajeSpinner = 'Cargando Departamentos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getDepartamentos(data).subscribe(
       res => {
         // console.log(res)
@@ -290,7 +290,7 @@ export class PacComponent implements OnInit {
       departamento: evt.nombre
     }
     (this as any).mensajeSpinner = 'Cargando Mision'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getMision(data).subscribe(
       res => {
         this.seleccion.departamento['mision'] = res['data']['valor']
@@ -317,7 +317,7 @@ export class PacComponent implements OnInit {
     this.compras = []
     this.vmButtons[0].habilitar = false
     (this as any).mensajeSpinner = 'Cargando detalles'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     this.api.getBienesPlus(data).subscribe(
       res => {
         // console.log(res['data'])

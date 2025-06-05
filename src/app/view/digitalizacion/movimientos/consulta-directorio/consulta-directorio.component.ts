@@ -472,7 +472,7 @@ let newDataForms= [];
     } *//*
     this.vmButtons[1].habilitar = true
     this.vmButtons[2].habilitar = false */
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getItemCatalogo(catalogo)
     this.lcargando.ctlSpinner(false)
   }

@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ['./gastos.component.scss']
 })
 export class GastosComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   actions: any = { btnSave: false, btnmod: false, btnfac: false, btncancel: false };
@@ -71,7 +71,7 @@ export class GastosComponent implements OnInit {
     })
 
     this.commonVarSrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarSrv.listenGastosImp.asObservable().subscribe(res => {

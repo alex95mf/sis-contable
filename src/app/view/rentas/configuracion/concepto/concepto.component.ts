@@ -16,7 +16,7 @@ standalone: false,
   styleUrls: ["./concepto.component.scss"],
 })
 export class ConceptoComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   vmButtons: any = [];
@@ -26,7 +26,7 @@ export class ConceptoComponent implements OnInit {
   concepto: any = { estado: 0, tiene_tarifa: false, id_tarifa: 0 };
   tarifas: any = {};
   actions: any = {
-    //new: false, 
+    //new: false,
     //search: false,
     add: true,
     edit: true,
@@ -325,7 +325,7 @@ export class ConceptoComponent implements OnInit {
       ) {
         this.toastr.info("Ingrese un Código de Presupuesto");
         flag = true;
-      } 
+      }
       this.detalle.forEach(element => {
         if (element.codigo_detalle == "" || element.codigo_detalle == undefined) {
           this.toastr.info("Ingrese el Código del detalle");
@@ -462,5 +462,5 @@ export class ConceptoComponent implements OnInit {
     modalInvoice.componentInstance.editar = this.permissions.editar;
     modalInvoice.componentInstance.eliminar = this.permissions.eliminar;
   }
-  
+
 }

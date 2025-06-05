@@ -298,7 +298,7 @@ titulo :string="";
 
   async cargarTareas(){
     (this as any).mensajeSpinner = 'Cargando Proyectos';
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 
@@ -317,7 +317,7 @@ titulo :string="";
 
   }
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
 
 

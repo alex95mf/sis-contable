@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./customers-register.component.scss']
 })
 export class CustomersRegisterComponent implements OnInit {
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   newOrigin: any;
@@ -93,7 +93,7 @@ export class CustomersRegisterComponent implements OnInit {
     })
 
     this.commonVarServices.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonServices.actionsSearchClient.asObservable().subscribe(res => {

@@ -77,7 +77,7 @@ export class ListPuestosComponent implements OnInit {
     };
 
     (this as any).mensajeSpinner = 'Cargando Puestos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getPuestos().subscribe(
       res => {
         if (Array.isArray(res['data']) && res['data'].length === 0) {

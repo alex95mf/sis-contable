@@ -204,7 +204,7 @@ export class LiquidacionComponent implements OnInit {
         this.detallesAl = []
         this.detallesPl = []
         (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         this.restoreForm(false, false);
         //this.restoreForm2(false, false)
         //res.certificado_pv = this.liquidacion.certificado_pv
@@ -594,7 +594,7 @@ export class LiquidacionComponent implements OnInit {
 
   validaPermisos = () => {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
     let params = {
@@ -1040,7 +1040,7 @@ export class LiquidacionComponent implements OnInit {
     this.observacionesDisabled = false;
     this.vmButtons[3].habilitar = false;
     (this as any).mensajeSpinner = 'Obteniendo Propiedades...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
       (res) => {
         if (res['data'].length > 0) {
@@ -1078,7 +1078,7 @@ export class LiquidacionComponent implements OnInit {
     this.observacionesDisabled = false;
     this.vmButtons[3].habilitar = false;
     (this as any).mensajeSpinner = 'Obteniendo Propiedades...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
       (res) => {

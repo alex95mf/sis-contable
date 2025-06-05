@@ -722,7 +722,7 @@ export class AsientoCierreComponent implements OnInit {
 
   cargarConceptos() {
     (this as any).mensajeSpinner = 'Cargando Conceptos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       (res: any) => {
         // console.log(res.data)
@@ -1697,7 +1697,7 @@ export class AsientoCierreComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Eliminando Cierre'
         await this.apiSrv.eliminarAsiento({id: this.asientoGuard.id_con_cierre})
@@ -1870,7 +1870,7 @@ export class AsientoCierreComponent implements OnInit {
 
   getRolNoControl() {
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Buscando'
     this.RolGeneral = []
     this.cols = []

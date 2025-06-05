@@ -103,7 +103,7 @@ export class ModalCampaignDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.cargarConceptos()
       if (this.campaign_id) {
         await this.getCampaign(this.campaign_id)
@@ -241,7 +241,7 @@ export class ModalCampaignDetailsComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         Object.assign(this.campaign, { conceptos: this.lst_concepto })
         (this as any).mensajeSpinner = 'Almacenando Campaña'
@@ -271,7 +271,7 @@ export class ModalCampaignDetailsComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         Object.assign(this.campaign, {
           conceptos: this.lst_concepto,

@@ -24,7 +24,7 @@ export class FacElectronicaComponent implements OnInit {
   ) { }
 
   vmButtons: any = [];
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   validaciones: ValidacionesFactory = new ValidacionesFactory();
   listadoTabDinamic:any = [];
@@ -55,10 +55,10 @@ export class FacElectronicaComponent implements OnInit {
 
   metodoGlobal(evento: any) {
     switch (evento.items.boton.texto) {
-      case "NUEVO": 
-      
+      case "NUEVO":
+
       break;
-      case "BUSCAR": 
+      case "BUSCAR":
         let valor = {item: {tipo: this.tipoPestana} };
         this.buscarDocumentos(valor);
       break;
@@ -84,9 +84,9 @@ export class FacElectronicaComponent implements OnInit {
 
   obtenerListadoSri(){
     this.facElectronicaService.listadoEstadosSRI().then((datos:any)=>{
-      
+
       this.dataEnviar.estadosSri = datos.data;
-      
+
       setTimeout(() => {
         this.lcargando.ctlSpinner(false);
         this.enviarDatosComponentes();
@@ -114,7 +114,7 @@ export class FacElectronicaComponent implements OnInit {
     }else if(valor.item.tipo == '07'){
       this.tipoRetencionComponent.recargar();
     }
-    
+
   }
 
 }

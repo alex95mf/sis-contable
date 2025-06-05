@@ -97,7 +97,7 @@ export class ModalDetallesComponent implements OnInit {
 
   getExpedienteDetalles() {
     (this as any).mensajeSpinner = "Cargando detalles de Expediente"
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getDetallesExpediente({expediente: this.expediente}).subscribe(
       (res: any) => {
         console.log(res.data)

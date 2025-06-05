@@ -79,7 +79,7 @@ export class ModalBusquedaPartidaComponent implements OnInit {
   }
 
   async getPartidas() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Partidas'
       let response: any = await this.apiService.getPartidas({params: { filter: this.filter, paginate: this.paginate }});

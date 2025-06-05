@@ -232,7 +232,7 @@ export class InspeccionComponent implements OnInit {
 
   changePaginate(event: PageEvent) {
     Object.assign(this.paginate, {pageIndex: event.pageIndex, page: event.pageIndex + 1});
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.getLocales()
   }
 
@@ -267,7 +267,7 @@ export class InspeccionComponent implements OnInit {
 
   async cargarCatalogo() {
     (this as any).mensajeSpinner = 'Cargando Catalogos'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
 
     try {
       let catalogos: any = await this.apiService.getCatalogos({ params: "'REN_TIPO_NEG','REN_LOCAL_TIPO_NEGOCIO','CAT_ZONA','CAT_SECTOR','REN_MERCADO','REN_ESTADO_NEG'" })
@@ -338,7 +338,7 @@ export class InspeccionComponent implements OnInit {
     this.filter.contribuyente = (!this.filter.contribuyente?.trim().length) ? null : this.filter.contribuyente
     this.filter.razon_social = (!this.filter.razon_social?.trim().length) ? null : this.filter.razon_social
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.getLocales()
   }
 
@@ -361,7 +361,7 @@ export class InspeccionComponent implements OnInit {
     let excelData = []
 
     (this as any).mensajeSpinner = 'Exportando Locales Comerciales'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       //
       let locales = await this.apiService.getLocales({ params: { filter: this.filter } })
@@ -433,7 +433,7 @@ export class InspeccionComponent implements OnInit {
    */
   viewLocal(local: any) {
     (this as any).mensajeSpinner = 'Obteniendo datos de Local'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getLocal({ local: local.id_local }).subscribe(
       (res: any) => {
         // console.log(res.data)

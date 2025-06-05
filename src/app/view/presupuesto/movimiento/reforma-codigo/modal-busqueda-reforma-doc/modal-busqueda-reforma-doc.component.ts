@@ -85,7 +85,7 @@ export class ModalBusquedaReformaDocComponent implements OnInit {
       programa: this.programa.id_catalogo,
     })
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.cargaInicial()
       await this.getReformas()
       this.lcargando.ctlSpinner(false)
@@ -108,14 +108,14 @@ export class ModalBusquedaReformaDocComponent implements OnInit {
 
   async changePage({pageIndex}) {
     Object.assign(this.paginate, { page: pageIndex + 1})
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getReformas()
     this.lcargando.ctlSpinner(false)
   }
 
   async consultar() {
     Object.assign(this.paginate, { page: 1, pageIndex: 0})
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getReformas()
     this.lcargando.ctlSpinner(false)
   }
@@ -133,7 +133,7 @@ export class ModalBusquedaReformaDocComponent implements OnInit {
   }
 
   async getReformas() {
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Reformas'
       const response = await this.apiService.getReformas({params: {filter: this.filter, paginate: this.paginate}})

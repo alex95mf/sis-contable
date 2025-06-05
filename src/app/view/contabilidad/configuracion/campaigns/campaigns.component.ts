@@ -88,7 +88,7 @@ export class CampaignsComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.getConceptos()
       await this.getCampaigns()
       this.lcargando.ctlSpinner(false)
@@ -101,7 +101,7 @@ export class CampaignsComponent implements OnInit {
         this.nuevaCampana();
         break;
       case "CONSULTAR":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         await this.getCampaigns()
         this.lcargando.ctlSpinner(false)
         break;

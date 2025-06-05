@@ -45,7 +45,7 @@ export class AnexosListComponentDis implements OnInit {
         if(this.tipo =="1"){
           
         }
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Cargando Anexos ...'
         
         // console.log('anexos',res, this.permissions, this.dataUser);
@@ -117,7 +117,7 @@ export class AnexosListComponentDis implements OnInit {
 
   cargarArchivo(){
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
@@ -168,7 +168,7 @@ export class AnexosListComponentDis implements OnInit {
     }
 
     // (this as any).mensajeSpinner = 'Eliminando anexo'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
 
     this.apiService.deleteAnexo(data).subscribe(
       res => {
@@ -218,7 +218,7 @@ export class AnexosListComponentDis implements OnInit {
           }
       
           (this as any).mensajeSpinner = 'Eliminando anexo'
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
       
           this.apiService.deleteAnexo(data).subscribe(
             res => {

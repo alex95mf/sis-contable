@@ -97,7 +97,7 @@ export class ConceptoFormComponent implements OnInit {
           this.descripcion_deudora = res.data.descripcion_original
        
           // Obtener Regla que aplica
-          /* this.lcargando.ctlSpinner(true)
+          /* this.lcargando.ctlSpinner(true);
           try {
             (this as any).mensajeSpinner = 'Cargando Regla ESIGEF'
             let restricciones = await this.conceptosSrv.getRegla({cuenta: res.data})
@@ -191,7 +191,7 @@ export class ConceptoFormComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Catalogos'
       let catalogos = await this.conceptosSrv.getCatalog({ params: "'REN_CONCEPTO_TIPO_CALCULO'" });
@@ -349,7 +349,7 @@ export class ConceptoFormComponent implements OnInit {
       this.toastr.warning(msgInvalid, 'Validacion de Datos', {enableHtml: true})
       return;
     }
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     Swal.fire('Validacion ESIGEF','Regla Aplicada')
     this.vmButtons[1].habilitar = false
@@ -772,7 +772,7 @@ export class ConceptoFormComponent implements OnInit {
       }
 
       (this as any).mensajeSpinner = 'Eliminando Resolucion'
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       this.conceptosSrv.deleteAnexo(data).subscribe(
         res => {
           this.lcargando.ctlSpinner(false)

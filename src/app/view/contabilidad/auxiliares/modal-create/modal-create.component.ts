@@ -102,7 +102,7 @@ export class ModalCreateComponent implements OnInit {
   }
 
   async setAuxiliar() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let response = await this.apiService.setAuxiliar({auxiliar: this.auxiliar})
       console.log(response)

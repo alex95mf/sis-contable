@@ -162,7 +162,7 @@ export class ConsultaMovimientosComponent implements OnInit {
     }
   }
   async cargaBodegas() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Bodegas'
       let bodegas: Array<any> = await this.apiService.getBodegas();
@@ -218,7 +218,7 @@ export class ConsultaMovimientosComponent implements OnInit {
   
  async mostrarReporte(){
     console.log(this.selectedReporte);
-   this.lcargando.ctlSpinner(true)
+   this.lcargando.ctlSpinner(true);
     try {
       let data = {
         tipo_reporte : this.selectedReporte,
@@ -303,7 +303,7 @@ export class ConsultaMovimientosComponent implements OnInit {
     let excelData = []
 
     (this as any).mensajeSpinner = 'Exportando Movimientos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
         
     this.dataReporte .forEach((e: any) => {
       const data = {

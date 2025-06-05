@@ -81,7 +81,7 @@ export class OtrasConfiguracionesComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getPeriodos()
     await this.getCatalogos()
     await this.getConfiguraciones()
@@ -91,14 +91,14 @@ export class OtrasConfiguracionesComponent implements OnInit {
   async consultar() {
     Object.assign(this.paginate, {page: 1, pageIndex: 0})
     this.paginator.firstPage()
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getConfiguraciones()
     this.lcargando.ctlSpinner(false)
   }
 
   async changePage({pageIndex}) {
     Object.assign(this.paginate, {page: pageIndex + 1})
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     await this.getConfiguraciones()
     this.lcargando.ctlSpinner(false)
   }

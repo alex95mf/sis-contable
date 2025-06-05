@@ -93,7 +93,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
 
   getInspeccion(inspeccion: any) {
     (this as any).mensajeSpinner = 'Obteniendo Datos de Inspección'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getInspeccion({ inspeccion: inspeccion }).subscribe(
       (res: any) => {
         // console.log(res['data'])
@@ -157,7 +157,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
 
   getInspectores() {
     (this as any).mensajeSpinner = 'Cargando Inspectores'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
     this.apiService.getInspectores({ tipo: 'RENTAS' }).subscribe(
       (res: any) => {
         // console.log(res['data'])
@@ -177,7 +177,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
 
   almacenarInspeccion() {
     (this as any).mensajeSpinner = 'Guardando Orden de Inspección'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.setInspeccion({ 
       orden: this.inspeccion, 
       fk_local: this.local, 
@@ -212,7 +212,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
 
   actualizarInspeccion() {
     (this as any).mensajeSpinner = 'Actualizando Orden de Inspección'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.actualizaInspeccion(this.inspeccion).subscribe(
       (res: any) => {
         console.log(res.data)
@@ -245,7 +245,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
       }
     }
     (this as any).mensajeSpinner = 'Asignando Inspector...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.asignaInspector(data).subscribe(
       (res: any) => {
         console.log(res.data)

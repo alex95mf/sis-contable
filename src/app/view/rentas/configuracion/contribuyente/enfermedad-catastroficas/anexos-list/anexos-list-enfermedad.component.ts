@@ -42,7 +42,7 @@ export class AnexosListEnfermedadComponent implements OnInit {
     )
     this.commonVarService.contribAnexoLoad.asObservable().subscribe(
       (res: any) => {
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Cargando Anexos ...'
         // console.log('anexos',res, this.permissions, this.dataUser);
         let data = {
@@ -126,7 +126,7 @@ export class AnexosListEnfermedadComponent implements OnInit {
     }
 
     // (this as any).mensajeSpinner = 'Eliminando anexo'
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
 
     this.apiService.deleteAnexo(data).subscribe(
       res => {
@@ -175,7 +175,7 @@ export class AnexosListEnfermedadComponent implements OnInit {
           }
       
           (this as any).mensajeSpinner = 'Eliminando anexo'
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
       
           this.apiService.deleteAnexo(data).subscribe(
             res => {

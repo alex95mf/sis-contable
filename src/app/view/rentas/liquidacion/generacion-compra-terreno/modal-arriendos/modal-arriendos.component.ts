@@ -81,7 +81,7 @@ export class ModalArriendosComponent implements OnInit {
   }
 
   async getArriendos() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando documentos de Arriendo'
       const response = await this.apiService.getArriendos({concepto: {codigo: 'AR'}, params: {filter: this.filter, paginate: this.paginate}})

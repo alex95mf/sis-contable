@@ -90,7 +90,7 @@ export class RevisionCierreComponent implements OnInit {
     }
 
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let response: Array<any> = await this.apiService.getCierreControl({params: { filter: this.filter }})
       console.log(response)

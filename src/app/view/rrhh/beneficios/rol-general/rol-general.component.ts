@@ -1608,7 +1608,7 @@ setAprobarRol(){
 
     getRolNoControl() {
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Buscando'
     this.RolGeneral = []
     this.cols = []
@@ -1961,7 +1961,7 @@ setAprobarRol(){
        this.getNumControl()
       }
 
-      // this.lcargando.ctlSpinner(true)
+      // this.lcargando.ctlSpinner(true);
       // (this as any).mensajeSpinner = 'Cargando Registro'
 
 
@@ -1987,7 +1987,7 @@ setAprobarRol(){
   }
 
   async getLatest() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.mensajeSpinner= 'Cargando Registro'
     try {
       const response = await this.rolgeneralemplService.getUltimoNumero()
@@ -2013,7 +2013,7 @@ setAprobarRol(){
   }
 
   async  getNumControl(){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando Registro'
 
     this.limpiarForm()

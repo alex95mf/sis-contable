@@ -137,7 +137,7 @@ export class SueldosComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     setTimeout(() => {
       this.cargaInicial();
     }, 250)
@@ -212,7 +212,7 @@ export class SueldosComponent implements OnInit {
     }
     Object.assign(this.paginate, newPaginate);
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.LoadTableSueldo();
   }
 
@@ -228,7 +228,7 @@ export class SueldosComponent implements OnInit {
       }
     }
     (this as any).mensajeSpinner = "Cargando";
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiSrv.getSueldos(data).subscribe(
       res => {
         console.log(res)

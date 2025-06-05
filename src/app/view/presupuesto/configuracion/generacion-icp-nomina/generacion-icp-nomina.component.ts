@@ -1224,7 +1224,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
     });
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         let response = await this.genIdpSvr.anularDocumento(original_id);
         console.log(response)
@@ -1272,7 +1272,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
     this.documento.detalle = this.cedulaDetalle
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
 
       let datos = {
         "anio": Number(this.documento.periodo),

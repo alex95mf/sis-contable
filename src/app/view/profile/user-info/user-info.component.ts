@@ -33,7 +33,7 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.validaPermisos();
 
       this.lcargando.ctlSpinner(false)
@@ -57,7 +57,7 @@ export class UserInfoComponent implements OnInit {
   async validaPermisos() {
     (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let response = await this.commonServices.getPermisionsGlobas({
         codigo: myVarGlobals.fUserProfile,
@@ -182,7 +182,7 @@ export class UserInfoComponent implements OnInit {
       }
       // console.log(dataAnexo)
 
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Almacenando Firma Digital'
         let response = await this.apiService.fileService(file, dataAnexo);
@@ -236,7 +236,7 @@ export class UserInfoComponent implements OnInit {
       }
 
       (this as any).mensajeSpinner = 'Eliminando Firma Digital'
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       this.apiService.deleteAnexo(data).subscribe(
         () => {
           this.lcargando.ctlSpinner(false)
@@ -286,7 +286,7 @@ export class UserInfoComponent implements OnInit {
         })
 
         if (result.isConfirmed) {
-          this.lcargando.ctlSpinner(true)
+          this.lcargando.ctlSpinner(true);
           try {
             (this as any).mensajeSpinner = 'Estableciendo Imagen de Perfil'
             let response = await this.apiService.setAvatar({ avatar: base64String })
@@ -320,7 +320,7 @@ export class UserInfoComponent implements OnInit {
 
     if (result.isConfirmed) {
       const newAvatar = 'assets/img/avatars/prueba1.png';
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Eliminando Imagen de Perfil'
         let response = await this.apiService.setAvatar({ avatar: newAvatar })

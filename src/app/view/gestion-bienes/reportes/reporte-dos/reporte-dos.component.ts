@@ -280,7 +280,7 @@ export class ReporteDosComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Grupos'
       let response: Array<any> = await this.apiService.getGruposBienes();
@@ -313,7 +313,7 @@ export class ReporteDosComponent implements OnInit {
     // }
 
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       let data={
         grupo: this.selectedGrupo,
@@ -372,7 +372,7 @@ export class ReporteDosComponent implements OnInit {
     console.log(event)
     // console.log(this.selectedGrupo)
    //if (event != undefined && this.selectedReporte == 'PSG') {
-     this.lcargando.ctlSpinner(true)
+     this.lcargando.ctlSpinner(true);
      (this as any).mensajeSpinner = 'Filtrando Productos por Grupo de Bien'
      let data={
       id_grupo: event.id_grupo_productos
@@ -446,7 +446,7 @@ uArrayGrupos(array) {
    };
 
    (this as any).mensajeSpinner = 'Cargando...'
-   this.lcargando.ctlSpinner(true)
+   this.lcargando.ctlSpinner(true);
    this.apiService.getReporteAnalisisExistenciaGrupos(parameterUrl).subscribe((res: any) => {
    this.lcargando.ctlSpinner(false)
 

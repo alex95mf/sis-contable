@@ -90,7 +90,7 @@ export class ModalCitacionComponent implements OnInit {
 
   cargarCatalogos() {
     (this as any).mensajeSpinner = 'Cargando datos'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getCatalogs({ params: "'TIPO_NOTIFICADOR'"}).subscribe(
       (res: any) => {
         // console.log(res)
@@ -127,7 +127,7 @@ export class ModalCitacionComponent implements OnInit {
     )
 
     (this as any).mensajeSpinner = 'Registrando Citacion'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.saveCitacion({juicio: this.juicio, citacion: this.actuacion}).subscribe(
       (res: any) => {
         console.log(res)

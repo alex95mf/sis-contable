@@ -69,7 +69,7 @@ export class DepreciacionComponent implements OnInit {
         this.vmButtons[4].habilitar = false
         this.paginator.disabled = true;
         (this as any).mensajeSpinner = 'Obteniendo detalles...'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
 
         this.apiService.getDepreciacionDetalles(res.id_depreciacion).subscribe(
           (response: any) => {
@@ -203,7 +203,7 @@ export class DepreciacionComponent implements OnInit {
 
   getCatalogos() {
     (this as any).mensajeSpinner = 'Obteniendo Catalogos...'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
 
     this.apiService.getTipoBienes().subscribe(
       (res: any) => {
@@ -228,7 +228,7 @@ export class DepreciacionComponent implements OnInit {
     Object.assign(this.depreciacion, { num_documento: null, observacion: null })
 
     // Revisar si hay depreciacion para año y mes de la fecha
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Revisando documentos anteriores'
     let response = await this.apiService.searchDocumento({ fecha: this.depreciacion.fecha })
     console.log(response)
@@ -257,7 +257,7 @@ export class DepreciacionComponent implements OnInit {
 
     this.paginator.disabled = false
     (this as any).mensajeSpinner = "Cargando Bienes"
-    // this.lcargando.ctlSpinner(true)
+    // this.lcargando.ctlSpinner(true);
 
     this.apiService.getBienes({ filter: this.filter, paginate: this.paginate }).subscribe(
       (res: any) => {
@@ -311,7 +311,7 @@ export class DepreciacionComponent implements OnInit {
     }).then((result: any) => {
       if (result.isConfirmed) {
         (this as any).mensajeSpinner = 'Almacenando Depreciación'
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
 
         this.apiService.setDepreciacion({ depreciacion: this.depreciacion }).subscribe(
           (res: any) => {
@@ -366,7 +366,7 @@ export class DepreciacionComponent implements OnInit {
   changePaginate(event) {
     Object.assign(this.paginate, { perPage: event.pageSize, page: event.pageIndex + 1 })
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.getBienes()
   }
 
@@ -408,7 +408,7 @@ export class DepreciacionComponent implements OnInit {
     }
     let exceData = [];
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Exportando Reporte'
 
@@ -445,7 +445,7 @@ export class DepreciacionComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Eliminando Documento'
         await this.apiService.deleteDocumento(this.depreciacion.id_depreciacion)

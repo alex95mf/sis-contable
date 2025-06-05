@@ -355,7 +355,7 @@ export class LiquidacionComponent implements OnInit {
             try {
               if (res["data"][0].estado !=='C') {
               
-                this.lcargando.ctlSpinner(true)
+                this.lcargando.ctlSpinner(true);
                 try {
                   (this as any).mensajeSpinner = 'Aprobando Documento'
                   let response = await this.apiService.aprobarDocumento(this.liquidacion);

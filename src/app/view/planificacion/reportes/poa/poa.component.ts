@@ -126,7 +126,7 @@ export class PoaComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonService.getPermisionsGlobas(params).subscribe(
       res => {
         this.permissions = res["data"][0];
@@ -194,7 +194,7 @@ export class PoaComponent implements OnInit {
   }
 
   async handleClickBuscar() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       // Obtener los Objetivos y Componentes del Programa
       (this as any).mensajeSpinner = 'Cargando Objetivos y Componentes'
@@ -257,7 +257,7 @@ export class PoaComponent implements OnInit {
     }
 
     (this as any).mensajeSpinner = 'Cargando Programas'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getProgramas().subscribe(
       res => {
         // console.log(res)
@@ -294,7 +294,7 @@ export class PoaComponent implements OnInit {
       programa: evt.nombre
     }
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getDepartamentos(data).subscribe(
       res => {
         res['data'].forEach(element => {
@@ -341,7 +341,7 @@ export class PoaComponent implements OnInit {
     }
     (this as any).mensajeSpinner = 'Cargando Mision'
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getMision(data).subscribe(
       res => {
         this.obj_componentes['mision'] = res['data']['valor']
@@ -380,7 +380,7 @@ export class PoaComponent implements OnInit {
     (this as any).mensajeSpinner = 'Cargando Atribuciones'
     this.atribuciones = []
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.api.getAtribuciones(data).subscribe(
       res => {
         console.log(res['data'])

@@ -233,7 +233,7 @@ export class EstadoCuentaComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       (res) => {
         this.permissions = res["data"][0];
@@ -354,7 +354,7 @@ export class EstadoCuentaComponent implements OnInit {
 
   handleFilter = () => {
     (this as any).mensajeSpinner = 'Filtrando Deudas'
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.contribuyenteSrv.getDeudas({ id_contribuyente: this.contribuyente_activo.id_cliente, filter: this.filter }).subscribe(
       (res: any) => {
         console.log(res)

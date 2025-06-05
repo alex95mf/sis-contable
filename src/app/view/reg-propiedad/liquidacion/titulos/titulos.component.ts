@@ -126,7 +126,7 @@ export class TitulosComponent implements OnInit {
   }
 
   async exportLiquidaciones() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando documentos...'
       let documentos = await this.generacionSrv.getLiquidacionesAsync({concepto: { codigo: 'RP' }, params: { filter: this.filter }})

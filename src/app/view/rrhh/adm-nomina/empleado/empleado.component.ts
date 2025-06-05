@@ -480,7 +480,7 @@ totalSemanal: any = 0
     )
 
     this.empleadoService.updateTipoArchivo$.subscribe(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       (this as any).mensajeSpinner = 'Actualizando Tipos de Archivo'
       const resTipoArchivos: any = await this.generalService.getCatalogoKeyWork('DCFD').toPromise()
       console.log(resTipoArchivos)

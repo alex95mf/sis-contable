@@ -18,7 +18,7 @@ standalone: false,
 	styleUrls: ['./consulta.component.scss']
 })
 export class ConsultaComponent implements OnInit {
-	
+
 	@ViewChild(CcSpinerProcesarComponent, {
 		static: false
 	}) lcargando: CcSpinerProcesarComponent;

@@ -76,7 +76,7 @@ export class ModalImpuestosComponent implements OnInit {
     }
 
     (this as any).mensajeSpinner = "Obteniendo valores"
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     this.apiService.getValoresPorCobrar(data).subscribe(
       (res: any) => {
         // console.log(res.data)

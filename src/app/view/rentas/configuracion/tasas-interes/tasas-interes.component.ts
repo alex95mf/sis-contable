@@ -80,7 +80,7 @@ export class TasasInteresComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiService.getPeriodos()
@@ -96,7 +96,7 @@ export class TasasInteresComponent implements OnInit {
   }
 
   async ObtenerPeriodo() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Tasas de Interes'
       let tasas = await this.apiService.getTasasInteres({periodo: this.periodoSelected});
@@ -145,7 +145,7 @@ export class TasasInteresComponent implements OnInit {
   }
 
   async generarPeriodo() {
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Generando Periodo'
       await this.apiService.generarPeriodoTasas({periodo: this.periodoSelected})
@@ -170,7 +170,7 @@ export class TasasInteresComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       try {
         (this as any).mensajeSpinner = 'Almacenando Tasas de Interes'
         let tasas = await this.apiService.setTasasInteres({ tasas: this.lst_periodo })

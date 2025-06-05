@@ -89,7 +89,7 @@ export class ModalRetencionJudicialComponent implements OnInit {
     }
     Object.assign(this.retencion, {fk_empleado: this.empleado.id_empleado})
     setTimeout(async () => {
-      this.lcargando.ctlSpinner(true)
+      this.lcargando.ctlSpinner(true);
       await this.cargarBancos()
       this.lcargando.ctlSpinner(false)
     })
@@ -112,7 +112,7 @@ export class ModalRetencionJudicialComponent implements OnInit {
         this.activeModal.close();
         break;
       case "Guardar":
-        this.lcargando.ctlSpinner(true)
+        this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Almacenando Retencion Judicial'
         await this.setRetencionJudicial()
         this.lcargando.ctlSpinner(false)

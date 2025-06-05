@@ -183,7 +183,7 @@ export class CargoComponent implements OnInit {
   }
 
   validacion(dato){
-    this.lcargando.ctlSpinner(true)
+    this.lcargando.ctlSpinner(true);
     if(this.cargo.nombre == null){
           this.lcargando.ctlSpinner(false)
       return this.toastr.info('Ingrese el nombre');

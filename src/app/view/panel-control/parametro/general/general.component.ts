@@ -165,7 +165,7 @@ export class GeneralComponent implements OnInit {
     })
 
     this.comVarSrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
     })
 
     this.commonServices.setDataCatalogo.asObservable().subscribe(res => {
