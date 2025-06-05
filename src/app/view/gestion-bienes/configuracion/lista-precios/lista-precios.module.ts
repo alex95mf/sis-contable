@@ -9,7 +9,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import {CommonModalModule} from '../../../commons/modals/modal.module'
 import { NgxBarcode6Module } from 'ngx-barcode6';
@@ -34,7 +34,7 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     NgSelectModule,
     CommonModalModule,
     ButtonsModule,
-    ChartsModule,
+    BaseChartDirective,
     NgxBarcode6Module,
     NgxPrintModule,
     FlatpickrModule,

@@ -31,11 +31,11 @@
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="font-size: 11px;">Contribuyente</span></div>
                     <input type="text" class="form-control" disabled placeholder="Seleccione un Contribuyente" [(ngModel)]="liquidacion.contribuyente.razonSocial">
                     <div class="input-group-append">
-                        <button [disabled]="formDisabled" class="btn btn-info btn-sm" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
+                        <button [disabled]="$any(this).formDisabled" class="btn btn-info btn-sm" (click)="expandContribuyentes()" placement="bottom" ngbTooltip="Buscar Contribuyente">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="col-3">
@@ -76,12 +76,12 @@
                     </div>
                 </app-cc-input-group-prepend>
             </div>
-            
+
         </div>
         <div class="row my-2">
             <div class="col-6">
                 <app-cc-input-group-prepend label="Observaciones" styleSpan="font-weight-bold bg-dark size-span-campo">
-                    <textarea [disabled]="formDisabled" cols="30" rows="3" class="form-control" [(ngModel)]="liquidacion.observaciones"></textarea>
+                    <textarea [disabled]="$any(this).formDisabled" cols="30" rows="3" class="form-control" [(ngModel)]="liquidacion.observaciones"></textarea>
                 </app-cc-input-group-prepend>
             </div>
         </div>
@@ -141,7 +141,7 @@
                 <h5 class="mb-0 text-dark">Exoneraciones</h5>
             </div>
             <div class="col text-right">
-              
+
                 <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración"  (click)="expandExoneracion()" [disabled]="concDisabled || formDisabled">
                     <i class="fas fa-plus"></i>
                 </button>
@@ -172,7 +172,7 @@
                                 <td>{{ d.descripcion }}</td>
                                 <td class="text-right">
                                     <div class="input-group input-group-sm">
-                                        <input maxlength="50" type="text" class="form-control form-control-sm" [(ngModel)]="d.comentario" [readonly]="formReadOnly || exoneracionDisabled" > 
+                                        <input maxlength="50" type="text" class="form-control form-control-sm" [(ngModel)]="d.comentario" [readonly]="formReadOnly || exoneracionDisabled" >
                                     </div>
                                 </td>
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
@@ -191,7 +191,7 @@
                 <h5 class="mb-0 text-dark">Exoneraciones</h5>
             </div>
             <div class="col text-right">
-              
+
                 <button class="btn btn-success btn-sm ml-1" placement="left" ngbTooltip="Agregar Exoneración"  (click)="expandExoneracion()"  [disabled]="concDisabled || formDisabled">
                     <i class="fas fa-plus"></i>
                 </button>
@@ -222,7 +222,7 @@
                                 <td>{{ d.descripcion }}</td>
                                 <td class="text-right">
                                     <div class="input-group input-group-sm">
-                                        <input maxlength="50" type="text" class="form-control form-control-sm" [(ngModel)]="d.comentario" [readonly]="formReadOnly || exoneracionDisabled" > 
+                                        <input maxlength="50" type="text" class="form-control form-control-sm" [(ngModel)]="d.comentario" [readonly]="formReadOnly || exoneracionDisabled" >
                                     </div>
                                 </td>
                                 <td class="text-center">{{ d.porcentaje * 100 | number:'1.0-0' }} %</td>
@@ -238,7 +238,7 @@
         </div>
 
 
-       
+
         <!-- <div [hidden]="conceptoCentroMedico" class="row mt-2 mb-4 justify-content-end">
             <div class="col-4">
                 <div class="input-group input-group-lg input-group-total">
@@ -269,7 +269,7 @@
             <div class="col-4">
                 <div class="input-group input-group-lg input-group-total">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">STA</span></div>
-                    <input type="number" class="form-control form-control-lg font-weight-bold text-right" [(ngModel)]="liquidacion.sta" (keyup)="calcular()" [disabled]="formDisabled">
+                    <input type="number" class="form-control form-control-lg font-weight-bold text-right" [(ngModel)]="liquidacion.sta" (keyup)="calcular()" [disabled]="$any(this).formDisabled">
                 </div>
             </div>
         </div> -->
@@ -277,7 +277,7 @@
             <div class="col-5">
                 <div class="input-group input-group-sm input-group-total">
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold" style="width: 155px;">STA</span></div>
-                    <input currencyMask class="form-control form-control-lg font-weight-bold" [readonly]="conceptoSta" [(ngModel)]="liquidacion.sta" (keyup)="calcular()" [disabled]="formDisabled">
+                    <input currencyMask class="form-control form-control-lg font-weight-bold" [readonly]="conceptoSta" [(ngModel)]="liquidacion.sta" (keyup)="calcular()" [disabled]="$any(this).formDisabled">
                 </div>
             </div>
         </div>
@@ -342,7 +342,7 @@
             </div>
         </div>
     </app-button-radio-active>
-    
+
 </div>
 
 <cc-spiner-procesar [ltexto]="mensajeSpinner" lfulScren=true lTipo="renLiqGen"></cc-spiner-procesar>
@@ -413,12 +413,12 @@
                                     <td class="text-right">$ {{ d.total }}</td>
                                 </tr>
                             </tbody>
-                            
+
                         </table>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
     <div class="row justify-content-center" style="font-family: 'Poppins1';">
@@ -431,6 +431,6 @@
                 Usuario: {{ dataUser.nombre }}</span>
         </div>
     </div>
-    
+
 </div>
 

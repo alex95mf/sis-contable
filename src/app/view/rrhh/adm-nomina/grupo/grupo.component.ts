@@ -189,7 +189,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
         Swal.fire({
           title: "Atención",
           text: "Seguro desea guardar la siguiente información?",
-          type: 'warning',
+          icon: 'warning',
           showCancelButton: true,
           cancelButtonColor: '#DC3545',
           confirmButtonColor: '#13A1EA',
@@ -288,7 +288,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
       Swal.fire({
         title: "Atención",
         text: "Seguro desea actualizar la siguiente información?",
-        type: 'warning',
+         icon: 'warning',
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',
@@ -325,7 +325,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
       Swal.fire({
         title: "Atención",
         text: "Seguro desea eliminar la siguiente información?",
-        type: 'warning',
+         icon: 'warning',
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',

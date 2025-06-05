@@ -229,7 +229,7 @@ export class ConciliacionComponent implements OnInit {
       Swal.fire({
         title: "Atención!!",
         text: "Seguro desea realizar la conciliación?",
-        type: 'warning',
+         icon: 'warning',
         showCancelButton: true,
         cancelButtonColor: '#DC3545',
         confirmButtonColor: '#13A1EA',

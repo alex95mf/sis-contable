@@ -366,7 +366,7 @@ export class DevolucionesComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: message,
-      type: 'warning',
+       icon: 'warning',
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { UsuariosOnlineComponent } from './usuarios-online.component';
@@ -18,7 +18,7 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
   imports: [
     FormsModule,
     UserOnlineRoutingModule,
-    ChartsModule,
+    BaseChartDirective,
     BsDropdownModule,
     CommonModule,
     ButtonsModule.forRoot(),
@@ -27,7 +27,7 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     NgSelectModule,
     FlatpickrModule,
     NgxPrintModule,
-    AppCustomModule  
+    AppCustomModule
   ],
   declarations: [UsuariosOnlineComponent]
 })

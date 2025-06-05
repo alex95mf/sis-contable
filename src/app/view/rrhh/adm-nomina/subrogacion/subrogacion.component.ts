@@ -26,11 +26,11 @@ import { CcModalTableEmpleadoComponent } from "src/app/config/custom/modal-compo
 import { EmployeesResponseI } from "src/app/models/responseEmployee.interface";
 
 
-import {MessageService, PrimeNGConfig, SelectItem} from 'primeng/api';
+import {PrimeNG} from 'primeng/config';
 import { CatalogoResponseI } from "src/app/models/responseCatalogo.interface";
 // import { TranslateService } from "@ngx-translate/core";
 
-import { LazyLoadEvent, Message } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
 
 import { RhfolderDigitalEmpleadoService } from "../folder-digital-empleado/rhfolder-digital-empleado.service";
 import { AccionPErsonalResponseI } from "src/app/models/responseAccionPersonal.interface";
@@ -208,7 +208,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
   fecha_hasta: any
 
 
-  @ViewChild(DataTableDirective)
+  @ViewChild(DataTableDirective) dataTable: any;
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -217,7 +217,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
   paginatorComponent: PaginatorComponent;
 
   submitted = false;
-  messageError: Message[] = [];
+  messageError: MessageService[] = [];
 
   totalRecords: number;
   rows: number = 50;

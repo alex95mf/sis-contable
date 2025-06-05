@@ -8,7 +8,7 @@ import { ReportsInvoiceRoutingModule } from './reports-invoice.routing'
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FlatpickrModule } from 'angularx-flatpickr';
@@ -47,7 +47,7 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     InfiniteScrollModule,
     ReactiveFormsModule,
     FlatpickrModule.forRoot(),
-    ChartsModule,
+    BaseChartDirective,
     AppCustomModule
 
   ],

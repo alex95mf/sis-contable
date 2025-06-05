@@ -183,7 +183,7 @@ export class TablePermisosComponent implements OnDestroy, OnInit {
     Swal.fire({
       title: "Atención!!",
       text: "Seguro desea actualizar el permiso?",
-      type: 'warning',
+       icon: 'warning',
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',

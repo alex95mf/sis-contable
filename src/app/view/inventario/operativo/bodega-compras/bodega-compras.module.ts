@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BodegaComprasComponent } from './bodega-compras.component'
 import { BodegaComprasRoutingModule } from './bodega-compras.routing'
 import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -21,7 +21,7 @@ import { ViewFacCompraComponent } from './view-fac-compra/view-fac-compra.compon
     CommonModule,
     BodegaComprasRoutingModule,
     FormsModule,
-    ChartsModule,
+    BaseChartDirective,
     BsDropdownModule,
     ButtonsModule,
     NgSelectModule,

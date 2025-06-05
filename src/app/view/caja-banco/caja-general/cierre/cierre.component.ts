@@ -796,7 +796,7 @@ export class CierreComponent implements OnInit {
         Swal.fire({
           title: "Atención!!",
           text: "Seguro desea cerrar la caja?",
-          type: 'warning',
+           icon: 'warning',
           showCancelButton: true,
           cancelButtonColor: '#DC3545',
           confirmButtonColor: '#13A1EA',

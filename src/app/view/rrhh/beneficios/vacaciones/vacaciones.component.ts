@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { DataTableDirective } from 'angular-datatables';
 import { CommonService } from '../../../../services/commonServices';
 import * as myVarGlobals from '../../../../global';
 import { ToastrService } from 'ngx-toastr';
@@ -14,10 +13,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
 // import { TranslateService } from '@ngx-translate/core';
-import { PrimeNGConfig } from 'primeng/api';
-import { Console } from 'console';
-import { formatDate } from '@angular/common';
-import { Empleado, EmployeesAditionalI } from 'src/app/models/responseEmployeesAditional.interface';
+import { PrimeNG } from 'primeng/config';
+import { Empleado } from 'src/app/models/responseEmployeesAditional.interface';
 import { VacacionAditionalResponseI, Vacaciones } from 'src/app/models/responseVacationAditional.interfase';
 import * as moment from 'moment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -44,7 +41,7 @@ standalone: false,
 })
 export class VacacionesComponent implements OnInit,AfterViewInit {
 
-  @ViewChild(DataTableDirective)
+  // @ViewChild(DataTableDirective)
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 

@@ -6,7 +6,7 @@ import { ComparativoService } from './comparativo.service';
 import Botonera from 'src/app/models/IBotonera';
 import * as moment from 'moment';
 import { XlsExportService } from 'src/app/services/xls-export.service';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 
 @Component({
 standalone: false,

@@ -87,7 +87,7 @@ export class PagoLetraComponent implements OnInit {
         /* Swal.fire({
           title: "Atención!",
           text: "Seguro desea realizar esta acción?",
-          type: 'warning',
+           icon: 'warning',
           showCancelButton: true,
           cancelButtonColor: '#DC3545',
           confirmButtonColor: '#13A1EA',

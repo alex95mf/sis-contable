@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "start-f": "ng serve --disable-host-check",
+    "start-force": "ng serve --disable-host-check --poll=2000"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +46,7 @@
     "datatables.net-dt": "^2.1.8",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.13",
+    "file-saver": "^2.0.5",
     "flatpickr": "^4.6.13",
     "jquery": "^3.7.1",
     "jspdf": "^3.0.1",
@@ -75,6 +78,7 @@
     "@angular/cli": "^19.2.13",
     "@angular/compiler-cli": "^19.2.13",
     "@types/datatables.net": "^1.12.3",
+    "@types/file-saver": "^2.0.7",
     "@types/jasmine": "~5.1.0",
     "@types/jquery": "^3.5.30",
     "@types/jspdf": "^2.0.0",

@@ -1,7 +1,7 @@
 import { ViewChild, EventEmitter, Component, AfterViewChecked, Output } from '@angular/core';
 
 import { LazyLoadEvent } from 'primeng/api';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { CustonService } from '../app-custom.service';

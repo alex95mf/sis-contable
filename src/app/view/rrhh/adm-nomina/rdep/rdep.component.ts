@@ -30,7 +30,6 @@ export class RdepComponent implements OnInit {
   vmButtons: any
   arrayRdep: any = []
   excelData: any = []
-  mensajeSpinner:any;
   filter: any = {
     periodo:  new Date(),
     fecha_desde: moment().format('YYYY-MM-DD'),

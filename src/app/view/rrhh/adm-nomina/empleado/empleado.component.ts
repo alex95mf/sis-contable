@@ -43,7 +43,7 @@ import {MessageService, PrimeNGConfig, SelectItem} from 'primeng/api';
 import { CatalogoResponseI } from "src/app/models/responseCatalogo.interface";
 
 
-import { LazyLoadEvent, Message } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
 
 import { DocFicha, DocFichaAditionalResponseI } from 'src/app/models/responseDocFichaAditional.interfase';
 // import { RhfolderDigitalEmpleadoService } from "../folder-digital-empleado/rhfolder-digital-empleado.service";
@@ -365,7 +365,7 @@ export class EmpleadoComponent implements OnInit {
    nameFile: any;
 
    submitted = false;
-   messageError: Message[] = [];
+   messageError: MessageService[] = [];
 
    tipo_archivo_id_cc: BigInteger | String | number;
    registerForm: FormGroup;

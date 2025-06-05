@@ -28,7 +28,7 @@ import { ModalComprasComponent } from './modal-compras/modal-compras.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Message } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 import { MenuItem } from 'primeng/api';
 
@@ -70,7 +70,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
   ListaCuentasPagarAnticipos: any = [];
   ListaCuentasPagarMultas: any = [];
   total_anticipos:any;
-  msgs2: Message[];
+  msgs2: MessageService[];
   isPouchesShared: boolean = false;
   busqueda: boolean = false;
   asientoAnticiposId:any;

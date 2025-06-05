@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ConsultaComponent } from './consulta.component';
 import {ConsultaRoutingModule} from './consulta.routing';
 import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,7 +23,7 @@ import { ViewConsultaGastoComponent } from './view-consulta-gasto/view-consulta-
     CommonModule,
     ConsultaRoutingModule,
     FormsModule,
-    ChartsModule,
+    BaseChartDirective,
     BsDropdownModule,
     ButtonsModule,
     NgbModule,

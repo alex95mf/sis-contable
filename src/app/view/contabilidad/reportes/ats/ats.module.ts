@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { AtsRoutingModule } from './ats.routing'; 
+import { AtsRoutingModule } from './ats.routing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AtsComponent } from './ats.component';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
@@ -20,7 +20,7 @@ import { VentasComponent } from './ventas/ventas.component';
     FormsModule,
     CommonModule,
     AtsRoutingModule,
-    ChartsModule,
+    BaseChartDirective,
     BsDropdownModule,
     NgbModule,
     AppCustomModule,

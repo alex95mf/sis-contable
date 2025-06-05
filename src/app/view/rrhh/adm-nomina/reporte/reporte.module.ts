@@ -9,7 +9,7 @@ import { CargaComponent } from './carga/carga.component';
 import { CumpleanioComponent } from './cumpleanio/cumpleanio.component'
 
 
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +29,7 @@ import { ExcelService } from 'src/app/services/excel.service';
     ReporteRoutingModule,
     CommonModule,
     DataTablesModule,
-    ChartsModule,
+    BaseChartDirective,
     BsDropdownModule,
     ButtonsModule,
     FormsModule,

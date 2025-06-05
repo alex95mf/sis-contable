@@ -9,7 +9,7 @@
                     <div class="input-group-prepend"><span class="input-group-text font-weight-bold size-span-campo" style="font-size: 11px;">Jornada</span></div>
                     <input type="text" class="form-control" [disabled]="constDisabled" placeholder="Seleccione una Jornada" [(ngModel)]="jornada">
                     <div class="input-group-append">
-                        <button [disabled]="formDisabled" class="btn btn-info btn-sm" (click)="expandJornadas()" placement="bottom" ngbTooltip="Buscar Jornada">
+                        <button [disabled]="$any(this).formDisabled" class="btn btn-info btn-sm" (click)="expandJornadas()" placement="bottom" ngbTooltip="Buscar Jornada">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>

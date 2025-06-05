@@ -2745,7 +2745,7 @@ console.log(response)
    }
 
 
-  chart(name: string, tipo: string, label: string[], data: number[], tendencia: number[]) {
+  chart(name: string, tipo: any, label: string[], data: number[], tendencia: number[]) {
 
     let htmlRef = this.elementRef.nativeElement.querySelector(`#chart1`);
 

@@ -11,7 +11,7 @@ import { EmployeesResponseI } from 'src/app/models/responseEmployee.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { DocFicha, DocFichaAditionalResponseI } from 'src/app/models/responseDocFichaAditional.interfase';
-import { LazyLoadEvent, Message } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
 import { event } from 'jquery';
 import * as moment from 'moment';
 import { GeneralResponseI } from 'src/app/models/responseGeneral.interface';
@@ -48,7 +48,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
   @Input() objGetDocumentByEmployee: DocFicha[];
   actions: any = { btnGuardar: true, btnMod: false };
 
-  messageError: Message[] = [];
+  messageError: MessageService[] = [];
 
   dataUser: any;
   permiso_ver:any = "0";

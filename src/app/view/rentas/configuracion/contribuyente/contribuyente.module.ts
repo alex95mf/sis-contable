@@ -4,7 +4,7 @@ import { ContribuyenteRoutingModule } from './contribuyente.routing';
 import { DataTablesModule } from 'angular-datatables';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -81,7 +81,7 @@ import { DetalleInteresesComponent } from './detalle-intereses/detalle-intereses
     DataTablesModule,
     NgSelectModule,
     FormsModule,
-    ChartsModule,
+    BaseChartDirective,
     BsDropdownModule,
     ButtonsModule,
     NgbModule,

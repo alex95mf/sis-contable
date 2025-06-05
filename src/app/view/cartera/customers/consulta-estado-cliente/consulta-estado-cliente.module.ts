@@ -8,7 +8,7 @@ import { ConsultaEstadoClienteComponent } from './consulta-estado-cliente.compon
 import { ConsultaEstadoClienteRoutingModule } from './consulta-estado-cliente.rountig';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FlatpickrModule } from 'angularx-flatpickr';
@@ -30,7 +30,7 @@ import { ModalConsultaClienteComponent } from './modal-consulta-cliente/modal-co
     DatePickerModule,
     DataTablesModule,
     ConsultaEstadoClienteRoutingModule,
-    ChartsModule,
+    BaseChartDirective,
     ButtonsModule,
     NgSelectModule,
     FlatpickrModule,

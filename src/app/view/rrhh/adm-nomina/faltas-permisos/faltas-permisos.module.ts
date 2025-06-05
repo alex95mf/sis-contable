@@ -16,7 +16,7 @@ registerLocaleData(localeEs, "es");
 
 import {TabMenuModule} from 'primeng/tabmenu';
 import {TabViewModule} from 'primeng/tabview';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 //import {ChartModule} from 'primeng/chart';
 //import { AppConfigService } from './AppConfig.services';
@@ -37,13 +37,13 @@ import { FormsModule } from '@angular/forms';
     ToastModule,
     TabMenuModule,
     TabViewModule,
-    ChartsModule,
+    BaseChartDirective,
     //ChartModule,
     FormsModule,
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: "es" } /*, AppConfigService*/],
 
- 
+
 })
 export class FaltasYPermisosModule { }

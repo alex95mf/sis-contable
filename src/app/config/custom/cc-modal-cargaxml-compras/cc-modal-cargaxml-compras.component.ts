@@ -11,8 +11,8 @@ import { CcModalTablaProductosComponent } from 'src/app/config/custom/cc-modal-t
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ConfirmationService,Message,MessageService } from 'primeng/api';
-import { PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService,MessageService,MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 
 import { CustonService } from '../app-custom.service';
 import { contableConfService } from 'src/app/view/panel-control/parametro/contable/contable.service';
@@ -57,8 +57,8 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
   proveedor: any
   permissions: any;
 
-  msgs1: Message[];
-  msgs2: Message[];
+  msgs1: MessageService[];
+  msgs2: MessageService[];
 
   buyProv: any = { tipo_documento: '7', sustento: '01', proveedor_name: '', anio: 2022, mes: 9, identificacion_proveedor: '', tipo_identificacion: '01', fk_id_proveedor: 0, subtotal: (0.00).toFixed(2), subcero: (0.00).toFixed(2), objeto: (0.00).toFixed(2), exento: (0.00).toFixed(2), descuento: (0.00).toFixed(2), propina: (0.00).toFixed(2), otro_impuesto: (0.00).toFixed(2), servicio: (0.00).toFixed(2), valor_iva: (0.00).toFixed(2), total: (0.00).toFixed(2), tipo_pago: 0, forma_pago: 0, fk_usuario_receive: 0, isActive: 1 };
   compra: any = {fecha_emision:'',identificacion_proveedor: '',direccion_proveedor: '', numero_comprobante: '', autorizacion: '',  tipo_identificacion: '01', fk_id_proveedor: 0,  proveedor_name:''};

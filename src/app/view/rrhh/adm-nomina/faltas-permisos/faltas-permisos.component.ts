@@ -39,7 +39,7 @@ standalone: false,
 })
 export class FaltasPermisosComponent implements OnInit {
 
-  @ViewChild(DataTableDirective)
+  @ViewChild(DataTableDirective) dataTableDirective: DataTableDirective;
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
@@ -899,7 +899,7 @@ export class FaltasPermisosComponent implements OnInit {
   }
 
 
-  chart(name: string, tipo: string, label: string[], data: number[]) {
+  chart(name: string, tipo: any, label: string[], data: number[]) {
 console.log(data)
     return new Chart(name, {
       type: tipo,
@@ -984,7 +984,7 @@ console.log(data)
     });
   }
 
-  chartPie(name: string, tipo: string, label: string[], data: number[]) {
+  chartPie(name: string, tipo: any, label: string[], data: number[]) {
 
     return new Chart(name, {
       type: tipo,

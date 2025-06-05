@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AdmNominaRoutingModule } from './adm-nomina.routing';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { AppCustomModule } from '../../../config/custom/app-custom.module';
@@ -20,7 +20,7 @@ import { ExcelService } from 'src/app/services/excel.service';
   imports: [
     AppCustomModule,
     AdmNominaRoutingModule,
-    ChartsModule,
+    BaseChartDirective,
     BsDropdownModule,
     ButtonsModule.forRoot()
   ]

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TomaFisicaComponent } from './toma-fisica.component';
@@ -33,7 +33,7 @@ import { CuentaViewsComponent } from './cuenta-views/cuenta-views.component';
     FormsModule,
     CommonModule,
     TomaFisicaRoutingModule,
-    ChartsModule,
+    BaseChartDirective,
     BsDropdownModule,
     NgbModule,
     NgSelectModule,

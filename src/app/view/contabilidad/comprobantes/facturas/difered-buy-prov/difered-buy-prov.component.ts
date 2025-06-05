@@ -12,8 +12,8 @@ import { ChangeDetectorRef } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ConfirmationService, Message, MessageService } from 'primeng/api';
-import { PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, MessageService, MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 
 @Component({
 standalone: false,
@@ -28,9 +28,9 @@ standalone: false,
               <button class="p-button-sm p-button-info"  (click)="ConfirmarRegistro($event)"  pButton type="button" label="Guardar" ></button>
             </div>
           </div>
-        </div>   
+        </div>
 
-    
+
         <div class="p-3  pr-3 pl-3">
           <div class="row">
             <div class="col-sm-6">
@@ -50,12 +50,12 @@ standalone: false,
                     </div>
                     <input placeholder="cuotas" type="text" class="form-control form-control-sm text-right pr-2"
                         id="idNumCoutas" [(ngModel)]="dataDiferido.cuotas" (keyup)="generateDues()"
-                        type="number" maxlength="2" oninput="if(this.value.length > this.maxLength) 
+                        type="number" maxlength="2" oninput="if(this.value.length > this.maxLength)
                         this.value = this.value.slice(0, this.maxLength);">
                 </div>
             </div>
           </div>
-          
+
         </div>
 
         <div class="pr-3 pl-3">
@@ -75,11 +75,11 @@ standalone: false,
                     <table class="table">
                       <thead>
                           <tr>
-                             
+
                               <th class="text-center"># Cuota</th>
                               <th class="text-center">Fecha Pago</th>
                               <th class="text-center">Valor Cuota</th>
-    
+
                           </tr>
                       </thead>
                       <tbody class="w-full">
@@ -99,19 +99,19 @@ standalone: false,
                                     (keypress)="commonServices.FormatDecimalVal($event)"
                                     [(ngModel)]="d.monto_cuota" (keyup)="calculatedQuotes(i)">
                             </td>
-    
+
                           </tr>
                       </tbody>
                     </table>
                   </div>
-                </div>          
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-      
-    
+
+
     `,
   providers: [DialogService, MessageService]
 })
@@ -133,7 +133,7 @@ export class DiferedBuyProvComponent implements AfterViewChecked {
 
   constructor(
     private commonServices: CommonService,
-    public ref: DynamicDialogRef, 
+    public ref: DynamicDialogRef,
     public activeModal: NgbActiveModal,
     private toastr: ToastrService,
     private commonVarServices: CommonVarService,
@@ -159,7 +159,7 @@ export class DiferedBuyProvComponent implements AfterViewChecked {
         console.log(element);
 
         this.arrCoutas.push({
-          
+
           Num_cuota: element.Num_cuota,
           fecha_vencimiento:new Date(element.fecha_vencimiento),
           monto_cuota:element.monto_cuota

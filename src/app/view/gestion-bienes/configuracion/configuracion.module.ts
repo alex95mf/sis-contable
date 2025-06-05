@@ -4,7 +4,7 @@ import { ConfiguracionRoutingModule } from './configuracion-routing.module';
 import { ProductoComponent } from './producto/producto.component';
 import { CategoriaProductoComponent } from './categoria-producto/categoria-producto.component';
 import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
@@ -13,12 +13,12 @@ import { ListDocumentosComponent } from './producto/list-documentos/list-documen
 import { ListBusquedaComponent } from './producto/list-busqueda/list-busqueda.component';
 import { ModalGruposComponent } from './producto/modal-grupos/modal-grupos.component';
 import { ModalNuevoComponent } from './producto/modal-nuevo/modal-nuevo.component';
-import { ModalBodegaComponent } from './producto/modal-bodega/modal-bodega.component'; 
+import { ModalBodegaComponent } from './producto/modal-bodega/modal-bodega.component';
 import { CalendarModule } from 'primeng/calendar';
 //import { ListaPreciosComponent } from './lista-precios/lista-precios.component';
 @NgModule({
   declarations: [
-    
+
     // CategoriaProductoComponent,
     ProductoComponent,
     TabsIngresoComponent,
@@ -28,15 +28,15 @@ import { CalendarModule } from 'primeng/calendar';
     ModalNuevoComponent,
     ModalBodegaComponent,
     //ListaPreciosComponent
-   
-    
+
+
   ],
   imports: [
     CommonModule,
     ConfiguracionRoutingModule,
     FormsModule,
     CommonModule,
-    ChartsModule,
+    BaseChartDirective,
     BsDropdownModule,
     ButtonsModule.forRoot(),
     AppCustomModule,
@@ -44,6 +44,6 @@ import { CalendarModule } from 'primeng/calendar';
 
   ],
 
-  
+
 })
 export class ConfiguracionModule { }

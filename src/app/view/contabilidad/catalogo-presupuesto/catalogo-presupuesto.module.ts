@@ -26,7 +26,7 @@ import { ExcelService } from 'src/app/services/excel.service';
     FormsModule,
     FancyGridModule,
     CatalogoPresupuestoRoutingModule,
-    //ChartsModule,
+    //BaseChartDirective,
     BsDropdownModule,
     ButtonsModule.forRoot(),
     DataTablesModule,

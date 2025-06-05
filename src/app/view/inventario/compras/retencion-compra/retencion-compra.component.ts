@@ -318,7 +318,7 @@ export class RetencionCompraComponent implements OnInit {
         Swal.fire({
           title: "Atención!",
           text: 'Seguro desea eliminar la retención?',
-          type: 'warning',
+           icon: 'warning',
           showCancelButton: true,
           cancelButtonColor: '#DC3545',
           confirmButtonColor: '#13A1EA',

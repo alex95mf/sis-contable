@@ -33,7 +33,7 @@ import { DiarioService } from '../diario/diario.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
-import { Message } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 import { MenuItem } from 'primeng/api';
 
@@ -72,7 +72,7 @@ export class FacturasComponent implements OnInit {
     {value:'VB', label:'Venta de Bienes'}
   ];
 
-  msgs2: Message[];
+  msgs2: MessageService[];
   isPouchesShared: boolean = false;
   busqueda: boolean = false;
 

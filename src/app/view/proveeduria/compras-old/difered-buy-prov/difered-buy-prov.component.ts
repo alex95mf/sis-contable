@@ -127,7 +127,7 @@ export class DiferedBuyProvComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: "Al actualizar los montos o el valor de las cuotas las fechas de pago se modifican,es necesario que revise las fechas antes de guardarlo. Esta seguro de guardar la información ?",
-      type: 'warning',
+       icon: 'warning',
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',

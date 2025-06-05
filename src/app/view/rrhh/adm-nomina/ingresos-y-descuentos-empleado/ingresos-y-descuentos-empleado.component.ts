@@ -11,7 +11,8 @@ import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as XLSX from 'xlsx';
 import { RubrosResponseI } from 'src/app/models/responseRubro.interface';
-import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CcModalTableEmpleadoComponent } from 'src/app/config/custom/modal-component/cc-modal-table-empleado/cc-modal-table-empleado.component';
@@ -23,7 +24,6 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import { ExcelService } from 'src/app/services/excel.service';
 import { CcModalTablaCuentaComponent } from 'src/app/config/custom/cc-modal-tabla-cuenta/cc-modal-tabla-cuenta.component';
 import { environment } from 'src/environments/environment';
-import { isNull } from '@angular/compiler/src/output/output_ast';
 import { ModalProgramaComponent } from './modal-programa/modal-programa.component';
 import { CierreMesService } from 'src/app/view/presupuesto/configuracion/cierre-de-mes/cierre-mes.service';
 
@@ -37,7 +37,7 @@ standalone: false,
 })
 export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
-  @ViewChild(DataTableDirective)
+  @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective;
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 

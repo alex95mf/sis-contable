@@ -7,7 +7,6 @@ import * as myVarGlobals from '../../../../global';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import { rolinterface } from './rolinterface ';
 import { ExcelService } from 'src/app/services/excel.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
@@ -22,8 +21,6 @@ import { CierreMesService } from 'src/app/view/contabilidad/ciclos-contables/cie
 
 
 import * as moment from 'moment'
-import { AnyForUntypedForms } from '@angular/forms';
-import { OneDimension } from '@syncfusion/ej2-angular-barcode-generator';
 
 
 @Component({

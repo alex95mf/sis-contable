@@ -5,7 +5,7 @@ import { NotaDebitoRoutingModule } from './nota-debito.routing';
 import { ShowCuentasComponent } from './show-cuentas/show-cuentas.component';
 import { ShowNotasDebitoComponent } from './show-notas-debito/show-notas-debito.component';
 import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective  } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { DataTablesModule } from 'angular-datatables';
@@ -24,7 +24,7 @@ import { AppCustomModule } from '../../../../config/custom/app-custom.module';
     CommonModule,
     NotaDebitoRoutingModule,
     FormsModule,
-    ChartsModule,
+    BaseChartDirective,
     BsDropdownModule,
     ButtonsModule,
     DataTablesModule,
