@@ -132,7 +132,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   }
 
   cargarLiquidaciones() {
-    this.mensajeSpinner = "Cargando lista de Ordenes de pago...";
+    (this as any).mensajeSpinner = "Cargando lista de Ordenes de pago...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {

@@ -26,7 +26,7 @@ standalone: false,
   styleUrls: ['./ordenes.component.scss']
 })
 export class OrdenesComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

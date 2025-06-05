@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./cuenta-cliente.component.scss']
 })
 export class CuentaClienteComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @Input() customer: any;

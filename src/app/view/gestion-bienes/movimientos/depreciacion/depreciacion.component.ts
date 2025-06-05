@@ -68,7 +68,7 @@ export class DepreciacionComponent implements OnInit {
         this.vmButtons[2].habilitar = false
         this.vmButtons[4].habilitar = false
         this.paginator.disabled = true;
-        this.mensajeSpinner = 'Obteniendo detalles...'
+        (this as any).mensajeSpinner = 'Obteniendo detalles...'
         this.lcargando.ctlSpinner(true)
 
         this.apiService.getDepreciacionDetalles(res.id_depreciacion).subscribe(
@@ -176,7 +176,7 @@ export class DepreciacionComponent implements OnInit {
 
   validaPermisos() {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     this.commonService.getPermisionsGlobas({
@@ -202,7 +202,7 @@ export class DepreciacionComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.mensajeSpinner = 'Obteniendo Catalogos...'
+    (this as any).mensajeSpinner = 'Obteniendo Catalogos...'
     this.lcargando.ctlSpinner(true)
 
     this.apiService.getTipoBienes().subscribe(
@@ -229,7 +229,7 @@ export class DepreciacionComponent implements OnInit {
 
     // Revisar si hay depreciacion para año y mes de la fecha
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Revisando documentos anteriores'
+    (this as any).mensajeSpinner = 'Revisando documentos anteriores'
     let response = await this.apiService.searchDocumento({ fecha: this.depreciacion.fecha })
     console.log(response)
     // Si existe documento, cargar documento
@@ -256,7 +256,7 @@ export class DepreciacionComponent implements OnInit {
     }
 
     this.paginator.disabled = false
-    this.mensajeSpinner = "Cargando Bienes"
+    (this as any).mensajeSpinner = "Cargando Bienes"
     // this.lcargando.ctlSpinner(true)
 
     this.apiService.getBienes({ filter: this.filter, paginate: this.paginate }).subscribe(
@@ -310,7 +310,7 @@ export class DepreciacionComponent implements OnInit {
       confirmButtonText: 'Confirmar',
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = 'Almacenando Depreciación'
+        (this as any).mensajeSpinner = 'Almacenando Depreciación'
         this.lcargando.ctlSpinner(true)
 
         this.apiService.setDepreciacion({ depreciacion: this.depreciacion }).subscribe(
@@ -410,7 +410,7 @@ export class DepreciacionComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Exportando Reporte'
+      (this as any).mensajeSpinner = 'Exportando Reporte'
 
       this.depreciacion.detalles.forEach((item: any) => {
         let o = {
@@ -447,7 +447,7 @@ export class DepreciacionComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Eliminando Documento'
+        (this as any).mensajeSpinner = 'Eliminando Documento'
         await this.apiService.deleteDocumento(this.depreciacion.id_depreciacion)
 
         this.lcargando.ctlSpinner(false)

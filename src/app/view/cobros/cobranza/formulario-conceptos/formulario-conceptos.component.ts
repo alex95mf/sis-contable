@@ -113,7 +113,7 @@ export class FormularioConceptosComponent implements OnInit {
 
   // Cargar conceptos
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -204,7 +204,7 @@ export class FormularioConceptosComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -244,7 +244,7 @@ export class FormularioConceptosComponent implements OnInit {
   }
 
   cargarLiquidaciones(){
-    this.mensajeSpinner = "Cargando lista de Liquidaciones...";
+    (this as any).mensajeSpinner = "Cargando lista de Liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

@@ -26,7 +26,7 @@ export class CierreCajaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
   @ViewChild("print") print!: ElementRef;
 
-  mensajeSpinner: string = "Cargando...";
+
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -213,7 +213,7 @@ export class CierreCajaComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -243,7 +243,7 @@ export class CierreCajaComponent implements OnInit {
 
   getCatalogos() {
 
-    this.mensajeSpinner = 'Cargando Catalogos...';
+    (this as any).mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -283,7 +283,7 @@ export class CierreCajaComponent implements OnInit {
 
   // prob no se use aqui
   getCajasData() {
-    this.mensajeSpinner = 'Cargando Cajas del sistema...';
+    (this as any).mensajeSpinner = 'Cargando Cajas del sistema...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -308,7 +308,7 @@ export class CierreCajaComponent implements OnInit {
   }
 
   async validacionCaja() {
-    this.mensajeSpinner = 'Validando Estado de Caja'
+    (this as any).mensajeSpinner = 'Validando Estado de Caja'
     this.lcargando.ctlSpinner(true)
     this.cajaActiva = JSON.parse(localStorage.getItem('activeCaja'))
 
@@ -392,7 +392,7 @@ export class CierreCajaComponent implements OnInit {
   verificarCaja() {
     // funcion para revisar si la caja seleccionada ya ha sido abierta ese dia
 
-    this.mensajeSpinner = 'Verificando si la caja está activa...';
+    (this as any).mensajeSpinner = 'Verificando si la caja está activa...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -498,7 +498,7 @@ export class CierreCajaComponent implements OnInit {
   }
 
   getRecibosDia() {
-    this.mensajeSpinner = 'Cargando Reporte diario...';
+    (this as any).mensajeSpinner = 'Cargando Reporte diario...';
     this.lcargando.ctlSpinner(true);
 
 
@@ -794,7 +794,7 @@ export class CierreCajaComponent implements OnInit {
 
   reabrirCaja() {
     console.log(this.caja_dia);
-    this.mensajeSpinner = 'Reabriendo caja...';
+    (this as any).mensajeSpinner = 'Reabriendo caja...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -839,7 +839,7 @@ export class CierreCajaComponent implements OnInit {
             }).then((result)=> {
               if (result.isConfirmed) {
 
-                this.mensajeSpinner = "Verificando período contable";
+                (this as any).mensajeSpinner = "Verificando período contable";
                 this.lcargando.ctlSpinner(true);
                 let data = {
                   "anio": Number(moment(this.caja_dia.fecha).format('YYYY')),
@@ -917,7 +917,7 @@ export class CierreCajaComponent implements OnInit {
 
   cerrarCajaDia() {
 
-    this.mensajeSpinner = 'Cerrando caja...';
+    (this as any).mensajeSpinner = 'Cerrando caja...';
     this.lcargando.ctlSpinner(true);
 
     console.log(this.caja_dia);

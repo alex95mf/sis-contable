@@ -35,7 +35,7 @@ export class OrdenComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild("print") print!: ElementRef;
   fTitle = "Orden de Pago";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -682,7 +682,7 @@ export class OrdenComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -853,7 +853,7 @@ export class OrdenComponent implements OnInit {
     let data = {
       params: id_solicitud,
     };
-    this.mensajeSpinner = "Buscando condiciones...";
+    (this as any).mensajeSpinner = "Buscando condiciones...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getCondiciones(data).subscribe(
 
@@ -873,7 +873,7 @@ export class OrdenComponent implements OnInit {
     let data = {
       params: id_proveedor,
     };
-    this.mensajeSpinner = "Buscando facturas...";
+    (this as any).mensajeSpinner = "Buscando facturas...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getProvCompras(data).subscribe(
 
@@ -910,7 +910,7 @@ export class OrdenComponent implements OnInit {
       params: "'OP_CONCEPTOS', 'REC_TIPO_ORDENP'",
       //params: "'OP_CONCEPTOS','PAG_TIPO_DESEMBOLSO'",
     };
-    this.mensajeSpinner = "Buscando concepto...";
+    (this as any).mensajeSpinner = "Buscando concepto...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogoConcepto(data).subscribe(
 
@@ -941,7 +941,7 @@ export class OrdenComponent implements OnInit {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -1688,7 +1688,7 @@ export class OrdenComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Verificando período contable";
+        (this as any).mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let data = {
           "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -1698,7 +1698,7 @@ export class OrdenComponent implements OnInit {
 
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
-            this.mensajeSpinner = 'Generando Orden de pago...';
+            (this as any).mensajeSpinner = 'Generando Orden de pago...';
             this.lcargando.ctlSpinner(true);
             this.documento.estado = "E";
             this.documento.cuenta = this.cuenta.name_banks;
@@ -1877,7 +1877,7 @@ export class OrdenComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = "Verificando período contable";
+        (this as any).mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let data = {
           "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -1888,7 +1888,7 @@ export class OrdenComponent implements OnInit {
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
 
-            this.mensajeSpinner = 'Anulando orden de pago...';
+            (this as any).mensajeSpinner = 'Anulando orden de pago...';
             this.lcargando.ctlSpinner(true);
             let data2 = {
               documento: this.documento
@@ -2123,7 +2123,7 @@ export class OrdenComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando Catalogos";
+    (this as any).mensajeSpinner = "Cargando Catalogos";
     let data = {
       params: "'DIVISAS'",
     };

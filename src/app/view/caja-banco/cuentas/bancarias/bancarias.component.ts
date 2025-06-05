@@ -43,7 +43,7 @@ export class BancariasComponent implements OnInit {
   dataAccBanks: any;
   vmButtons: any;
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   constructor(
@@ -170,7 +170,7 @@ export class BancariasComponent implements OnInit {
 
   getDatabitacora() {
 
-    this.mensajeSpinner = "Cargando";
+    (this as any).mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true);
     this.accSrv.getBanks().subscribe(res => {
 
@@ -255,7 +255,7 @@ export class BancariasComponent implements OnInit {
       accion: "Creación de nueva cuenta bancaria",
       id_controlador: myVarGlobals.fCuentaBancos
     }
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.accSrv.saveAccount(data).subscribe(res => {
       this.toastr.success(res['message']);
@@ -331,7 +331,7 @@ export class BancariasComponent implements OnInit {
       accion: "Actualización de nueva cuenta bancaria",
       id_controlador: myVarGlobals.fCuentaBancos
     }
-    this.mensajeSpinner = "Actualizando...";
+    (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.accSrv.updatedAccount(data).subscribe(res => {
       this.toastr.success(res['message']);

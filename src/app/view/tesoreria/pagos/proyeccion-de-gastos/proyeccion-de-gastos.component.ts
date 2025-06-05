@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./proyeccion-de-gastos.component.scss']
 })
 export class ProyeccionDeGastosComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -165,7 +165,7 @@ metodoGlobal(evento: any) {
 
 async cargaInicial() {
   try {
-    this.mensajeSpinner = "Carga Inicial"
+    (this as any).mensajeSpinner = "Carga Inicial"
     const resPeriodos = await this.apiSrv.getPeriodos()
     console.log(resPeriodos)
     this.cmb_periodo = resPeriodos
@@ -187,7 +187,7 @@ periodoSelected(evt: any, year:any){
       //periodo: this.periodo.getFullYear(),
       periodo: Number(this.periodo),
     };
-    this.mensajeSpinner ='Generando...';
+    (this as any).mensajeSpinner ='Generando...';
     this.lcargando.ctlSpinner(true);
      console.log(datos);
     this.apiSrv.getGastosProyectados(datos).subscribe(
@@ -225,7 +225,7 @@ guardarValores(){
     mes: Number(this.mes_actual)
   };
   console.log(this.reporte);
-  this.mensajeSpinner ='Guardando...';
+  (this as any).mensajeSpinner ='Guardando...';
   this.lcargando.ctlSpinner(true);
     this.apiSrv.saveProyeccionGastos(datos).subscribe(
       res => {

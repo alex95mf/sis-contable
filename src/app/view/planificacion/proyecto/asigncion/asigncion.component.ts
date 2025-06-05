@@ -103,7 +103,7 @@ export class AsigncionComponent implements OnInit {
           
           // Guardar en la base
           res.atribucion['id_programa'] = this.programaSeleccionado.id
-          this.mensajeSpinner = 'Almacenando Tareas de Atribucion'
+          (this as any).mensajeSpinner = 'Almacenando Tareas de Atribucion'
           this.lcargando.ctlSpinner(true)
           this.apiService.setTareas(res).subscribe(
             (response: any) => {
@@ -139,7 +139,7 @@ export class AsigncionComponent implements OnInit {
         async (res: any) => {
           this.lcargando.ctlSpinner(true)
           try {
-            this.mensajeSpinner = 'Almacenando Atribucion'
+            (this as any).mensajeSpinner = 'Almacenando Atribucion'
             let atribucion = {
               tipo: res.tipo,
               group: this.departamentoSelected,
@@ -195,7 +195,7 @@ export class AsigncionComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     let params = {
@@ -257,7 +257,7 @@ export class AsigncionComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Catalogos'
+      (this as any).mensajeSpinner = 'Cargando Catalogos'
       let response: any = await this.apiService.getCatalogo({params: "'PLA_FRECUENCIA_MEDICIO','PLA_MESES_META','PLA_U_MED','PLA_META_POA'"});
       this.frecMedicion = response.PLA_FRECUENCIA_MEDICIO
       this.tiempoPrevision = response.PLA_MESES_META
@@ -265,14 +265,14 @@ export class AsigncionComponent implements OnInit {
       this.lista_metas = response.PLA_META_POA
 
 
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       this.periodos = await this.apiService.getPeriodos();
 
-      this.mensajeSpinner = 'Cargando Programas'
+      (this as any).mensajeSpinner = 'Cargando Programas'
       this.programas = await this.apiService.getProgramas();
       this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
 
-      this.mensajeSpinner = 'Cargando Departamentos'
+      (this as any).mensajeSpinner = 'Cargando Departamentos'
       this.departamentos = await this.apiService.getDepartamentos();
       this.departamentos.map((departamento: any) => Object.assign(departamento, { label: `${departamento.descripcion}. ${departamento.valor}` }))
 
@@ -324,7 +324,7 @@ export class AsigncionComponent implements OnInit {
     })
 
     try {
-      this.mensajeSpinner = 'Cargando Presupuesto de Departamento';
+      (this as any).mensajeSpinner = 'Cargando Presupuesto de Departamento';
       let response = await this.apiService.getPresupuestoDepartamento({periodo: this.periodoSelected, programa: this.programaObjectSelected, departamento: this.departamentoObjectSelected});
       console.log(response)
       if (Array.isArray(response) && !response.length) {
@@ -350,7 +350,7 @@ export class AsigncionComponent implements OnInit {
     try {
       await this.loadPresupuesto()
 
-      this.mensajeSpinner = 'Cargando Atribuciones';
+      (this as any).mensajeSpinner = 'Cargando Atribuciones';
       this.atribuciones = await this.apiService.getAtribuciones({periodo: this.periodoSelected, programa: this.programaSelected, departamento: this.departamentoSelected});
       this.atribuciones.map((atribucion: any) => {
         if (atribucion.atribucion_data == null) {
@@ -388,7 +388,7 @@ export class AsigncionComponent implements OnInit {
       await this.validateData()
 
       try {
-        this.mensajeSpinner = 'Almacenando Atribuciones'
+        (this as any).mensajeSpinner = 'Almacenando Atribuciones'
         let response = await this.apiService.setAtribuciones({
           periodo: this.periodoSelected, 
           programa: this.programaObjectSelected, 
@@ -480,7 +480,7 @@ export class AsigncionComponent implements OnInit {
       id_empresa: this.commonServices.getDataUserLogued().id_empresa
     }
     console.log(data)
-    this.mensajeSpinner = 'Almacenando Atribucion'
+    (this as any).mensajeSpinner = 'Almacenando Atribucion'
     this.lcargando.ctlSpinner(true);
     this.apiService.saveRowCatalogo(data).subscribe(res => {
       this.cancelcatalogo();
@@ -519,7 +519,7 @@ export class AsigncionComponent implements OnInit {
   /* cargaDepartamentos(event) {
     console.log(event);
     // Carga los departamentos asociados al programa seleccionado
-    this.mensajeSpinner = 'Cargando Departamentos'
+    (this as any).mensajeSpinner = 'Cargando Departamentos'
     this.lcargando.ctlSpinner(true)
     let data = {
       programa: event.nombre
@@ -570,7 +570,7 @@ export class AsigncionComponent implements OnInit {
       presupuesto: this.presupuesto
     }
 
-    this.mensajeSpinner = 'Cargando Presupuesto del Departamento'
+    (this as any).mensajeSpinner = 'Cargando Presupuesto del Departamento'
     this.lcargando.ctlSpinner(true)
     this.attrDept = []
     this.apiService.getPresupuestoDepartamento(data).subscribe(
@@ -617,7 +617,7 @@ export class AsigncionComponent implements OnInit {
     let data = {
       departamento: arg.departamento.nombre
     }
-    this.mensajeSpinner = 'Cargando Atribuciones del Departamento'
+    (this as any).mensajeSpinner = 'Cargando Atribuciones del Departamento'
     this.apiService.getAtribuciones(data).subscribe(
       res => {
         // console.log(res['data'])
@@ -653,7 +653,7 @@ export class AsigncionComponent implements OnInit {
   // cargando
   /* cargaDatosRelacionados() {
     // Carga desde la tabla pla_atribucion
-    this.mensajeSpinner = 'Cargando data de Atribuciones'
+    (this as any).mensajeSpinner = 'Cargando data de Atribuciones'
     let data = {
       params: this.attrDept.map(a => a.id_catalogo)
     }
@@ -736,7 +736,7 @@ export class AsigncionComponent implements OnInit {
       params: this.attrDept.map(a => a.id_catalogo)
     }
     // this.lcargando.ctlSpinner(true)  // Ya viene activado
-    this.mensajeSpinner = 'Cargando Tareas'
+    (this as any).mensajeSpinner = 'Cargando Tareas'
     this.apiService.getTareas(data).subscribe(
       (res: any) => {
         // console.log(res)
@@ -796,7 +796,7 @@ export class AsigncionComponent implements OnInit {
 
     // TODO: Validar que todos los campos esten llenos de las atribuciones
 
-    this.mensajeSpinner = 'Actualizando Estado de Presupuesto'
+    (this as any).mensajeSpinner = 'Actualizando Estado de Presupuesto'
     let data = {
       params: this.departamentoSeleccionado
     }
@@ -825,7 +825,7 @@ export class AsigncionComponent implements OnInit {
       return
     }
 
-    this.mensajeSpinner = 'Almacenando Atribuciones y Bienes y Servicios'
+    (this as any).mensajeSpinner = 'Almacenando Atribuciones y Bienes y Servicios'
     let data = {
       ids: this.attrDept.map(a => a.id),
       atribuciones: this.attrDept
@@ -932,7 +932,7 @@ export class AsigncionComponent implements OnInit {
       programa: this.programaObjectSelected,
       departamento: this.departamentoObjectSelected,
     }
-    this.mensajeSpinner = 'Enviando correos...'
+    (this as any).mensajeSpinner = 'Enviando correos...'
     this.lcargando.ctlSpinner(true)
     this.apiService.enviarCorreos(data).subscribe(
       res => {

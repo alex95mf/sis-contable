@@ -20,7 +20,7 @@ export class MetasComponent implements OnInit {
   lcargando: CcSpinerProcesarComponent;
 
   fTitle = "Asignación de objetivos y componentes";
-  mensajeSpinner: string = "Cargando...";
+  
   vmButtons: any;
 
   dataUser: any;
@@ -160,7 +160,7 @@ export class MetasComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     let params = {
@@ -227,7 +227,7 @@ export class MetasComponent implements OnInit {
   }
 
   cargaProgramas() {
-    this.mensajeSpinner = "Cargando Programas...";
+    (this as any).mensajeSpinner = "Cargando Programas...";
     this.lcargando.ctlSpinner(true);
 
     this.metaSrv.getProgramas().subscribe(
@@ -271,7 +271,7 @@ export class MetasComponent implements OnInit {
   }
 
   cargaODS() {
-    this.mensajeSpinner = 'Cargando ODS...';
+    (this as any).mensajeSpinner = 'Cargando ODS...';
     this.metaSrv.getODS().subscribe(
       (res) => {
         res['data'].forEach(ods => {
@@ -292,7 +292,7 @@ export class MetasComponent implements OnInit {
   }
 
   cargarCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos...';
+    (this as any).mensajeSpinner = 'Cargando Catalogos...';
     let data = {
       params: "'PLA_DEPARTAMENTO','PLA_COMPETENCIA','PLA_OE','PLA_META_RESULTADO',\
       'PLA_INDICADOR','PLA_TENDENCIA','PLA_TIPO_INTERVENCION'"
@@ -377,7 +377,7 @@ export class MetasComponent implements OnInit {
     }
 
     this.programas = []
-    this.mensajeSpinner = "Cargando lista de metas...";
+    (this as any).mensajeSpinner = "Cargando lista de metas...";
     this.lcargando.ctlSpinner(true);
     this.metaSrv.getGoals({periodo: this.seleccion.periodo}).subscribe(
       res => {
@@ -422,7 +422,7 @@ export class MetasComponent implements OnInit {
 
   obtenerMetas() {
 
-    this.mensajeSpinner = 'Obteniendo Metas...';
+    (this as any).mensajeSpinner = 'Obteniendo Metas...';
     let data = {
       params: this.programas,
       periodo: this.seleccion.periodo,
@@ -474,7 +474,7 @@ export class MetasComponent implements OnInit {
       "ods": event
     };
     console.log(event);
-    this.mensajeSpinner = 'Cargado Metas para ODS...';
+    (this as any).mensajeSpinner = 'Cargado Metas para ODS...';
     
     this.lcargando.ctlSpinner(true);
     this.metaSrv.getMetasODS(data).subscribe(
@@ -503,7 +503,7 @@ export class MetasComponent implements OnInit {
     let data = {
       "ods": event
     };
-    this.mensajeSpinner = 'Cargando Ejes...';
+    (this as any).mensajeSpinner = 'Cargando Ejes...';
     console.log(event);
     this.lcargando.ctlSpinner(true);
     this.metaSrv.getEje(data).subscribe(
@@ -535,7 +535,7 @@ export class MetasComponent implements OnInit {
     let data = {
       'eje': event
     };
-    this.mensajeSpinner = 'Cargado OPG...';
+    (this as any).mensajeSpinner = 'Cargado OPG...';
     
     this.lcargando.ctlSpinner(true)
     this.metaSrv.getOPG(data).subscribe(
@@ -561,7 +561,7 @@ export class MetasComponent implements OnInit {
     this.cuerpoMetas.ppg = [];
     this.seleccion.ppg = 0;
     this.step = 5;
-    this.mensajeSpinner = 'Cargando Politicas...';
+    (this as any).mensajeSpinner = 'Cargando Politicas...';
     let data = {
       "opg": event
     };
@@ -595,7 +595,7 @@ export class MetasComponent implements OnInit {
     this.cuerpoMetas.meta_zonal = [];
     this.seleccion.meta_zonal = 0;
     this.step = 6;
-    this.mensajeSpinner = 'Cargando Metas para la Zona...';
+    (this as any).mensajeSpinner = 'Cargando Metas para la Zona...';
     
 
     this.lcargando.ctlSpinner(true);
@@ -714,7 +714,7 @@ export class MetasComponent implements OnInit {
       nuevo: this.seleccion
     };
     // console.log(data)
-    this.mensajeSpinner = 'Guardando Metas por Programa...';
+    (this as any).mensajeSpinner = 'Guardando Metas por Programa...';
 
     this.lcargando.ctlSpinner(true);
     this.metaSrv.crearMeta(data).subscribe(
@@ -842,7 +842,7 @@ export class MetasComponent implements OnInit {
   //       "politica": elem.ppg
   //     };
   //     this.cuerpoMetas.meta_zonal = [];
-  //     this.mensajeSpinner = 'Cargando Metas para la Zona...';
+  //     (this as any).mensajeSpinner = 'Cargando Metas para la Zona...';
   //     this.lcargando.ctlSpinner(true);
   //     this.metaSrv.getMetaZona(ppg).subscribe(
   //       (res) => {
@@ -863,7 +863,7 @@ export class MetasComponent implements OnInit {
   
   //     // precarga ppg
   //     this.cuerpoMetas.ppg = [];
-  //     this.mensajeSpinner = 'Cargando Politicas...';
+  //     (this as any).mensajeSpinner = 'Cargando Politicas...';
   //     let opg = {
   //       "opg": elem.opg
   //     };
@@ -891,7 +891,7 @@ export class MetasComponent implements OnInit {
   //     let eje = {
   //       'eje': elem.eje
   //     };
-  //     this.mensajeSpinner = 'Cargado OPG...';
+  //     (this as any).mensajeSpinner = 'Cargado OPG...';
   //     this.lcargando.ctlSpinner(true);
   //     this.metaSrv.getOPG(eje).subscribe(
   //       res => {
@@ -916,7 +916,7 @@ export class MetasComponent implements OnInit {
   //     let ods = {
   //       "ods": elem.ods
   //     };
-  //     this.mensajeSpinner = 'Cargando Ejes...';
+  //     (this as any).mensajeSpinner = 'Cargando Ejes...';
   //     this.lcargando.ctlSpinner(true);
   //     this.metaSrv.getEje(ods).subscribe(
   //       (res) => {
@@ -938,7 +938,7 @@ export class MetasComponent implements OnInit {
   
   
   //     // precarga de metas ods
-  //     this.mensajeSpinner = 'Cargando Metas ODS...';
+  //     (this as any).mensajeSpinner = 'Cargando Metas ODS...';
   //     this.lcargando.ctlSpinner(true);
   //     this.cuerpoMetas.meta_ods = [];
   //     this.metaSrv.getMetasODS(ods).subscribe(
@@ -990,7 +990,7 @@ export class MetasComponent implements OnInit {
       confirmButtonColor: '#4DBD74'
     }).then((result)=>{
       if(result.isConfirmed) {
-        this.mensajeSpinner = "Eliminado meta del sistema...";
+        (this as any).mensajeSpinner = "Eliminado meta del sistema...";
         this.lcargando.ctlSpinner(true);
 
         this.metaSrv.borrarMeta(data).subscribe(

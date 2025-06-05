@@ -53,7 +53,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
   vmButtons: Array<Botonera> = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(ImprimirRolComponent, { static: false })
@@ -252,7 +252,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
 
     try {
-      this.mensajeSpinner = "Cargando Catalogos";
+      (this as any).mensajeSpinner = "Cargando Catalogos";
       const response = await this.empleadoService.getCatalogs({ params: "'NOM_REGION'" }) as any
 
       this.selectRegion = response.data["NOM_REGION"];
@@ -410,7 +410,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = "Cargando..."
+      (this as any).mensajeSpinner = "Cargando..."
       const resPeriodos = await this.admDecimoCuartoService.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -429,7 +429,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
     this.vmButtons[3].habilitar = true;
     this.lConcepto = "";
     this.fecha_actual = moment(this.toDatePicker).format("YYYY-MM-DD");
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let idGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).id_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -696,7 +696,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
     let periodoFin: any = moment(this.periodoFin).format("YYYY-MM-DD");
 
     let validaTermina: boolean = false;
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     let nombreGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).nombre_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -847,7 +847,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
     let periodoInicio: any = moment(this.periodoInicio).format("YYYY-MM-DD");
     let periodoFin: any = moment(this.periodoFin).format("YYYY-MM-DD");
 
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let nombreGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).nombre_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -988,7 +988,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
         enviarData.push(dataPost);
       });
 
-      this.mensajeSpinner = "Anulando decimo cuarto...";
+      (this as any).mensajeSpinner = "Anulando decimo cuarto...";
       this.lcargando.ctlSpinner(true);
       this.admDecimoCuartoService.deleteRolPago({ datosPost: enviarData }).subscribe((res: any) => {
         this.validaciones.mensajeExito("Exito", "Los decimo cuarto se anularon correctamente");
@@ -1166,7 +1166,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
       return;
     }
 
-    this.mensajeSpinner = "Apobando decimo cuarto por favor espere...";
+    (this as any).mensajeSpinner = "Apobando decimo cuarto por favor espere...";
     this.lcargando.ctlSpinner(true);
     this.admDecimoCuartoService.aprobarRolPago({ datosPost: enviarData }).subscribe((res: any) => {
       this.validaciones.mensajeExito("Exito", "Los decimo cuarto se aprobaron correctamente");
@@ -1640,7 +1640,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
 
     if (this.cmb_region == null) { this.cmb_region_temp = "0" } else { this.cmb_region_temp = this.cmb_region }
 
-    this.mensajeSpinner = "Generando Archivo Excel...";
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
 
     let year;
@@ -1704,7 +1704,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
   btnExportExcelPorFecha(){
     if (this.cmb_region == null) { this.cmb_region_temp = "0" } else { this.cmb_region_temp = this.cmb_region }
 
-    this.mensajeSpinner = "Generando Archivo Excel...";
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
 
     // let year;
@@ -1785,7 +1785,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
   }
 
   cargarAreas() {
-    this.mensajeSpinner = "Cargando listado de Áreas...";
+    (this as any).mensajeSpinner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1806,7 +1806,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
 
   }
   cargarDepartamentos(event) {
-    this.mensajeSpinner = "Cargando listado de Departamentos...";
+    (this as any).mensajeSpinner = "Cargando listado de Departamentos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1860,7 +1860,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
   getPorNoControl() {
 
 
-    this.mensajeSpinner = "Buscando";
+    (this as any).mensajeSpinner = "Buscando";
     this.lcargando.ctlSpinner(true);
 
     let data = {

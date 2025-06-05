@@ -113,7 +113,7 @@ export class PrestamosComponent implements OnInit {
 	isCollapsed4: boolean = false;
 	vmButtons: any = [];
 	validaciones: ValidacionesFactory = new ValidacionesFactory();
-	mensajeSpinner: string = "Cargando...";
+
 	@ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
 	ngOnInit(): void {
@@ -433,7 +433,7 @@ export class PrestamosComponent implements OnInit {
 			datos: this.prestamos
 		};
 		console.log("data: ", data)
-		this.mensajeSpinner = "Guardando...";
+		(this as any).mensajeSpinner = "Guardando...";
 		this.lcargando.ctlSpinner(true);
 		this.prestamosSrvc.savePrestamos(data).subscribe((res) => {
 			this.lcargando.ctlSpinner(false);
@@ -475,7 +475,7 @@ export class PrestamosComponent implements OnInit {
 				url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
 			},
 		};
-		this.mensajeSpinner = "Cargando...";
+		(this as any).mensajeSpinner = "Cargando...";
 		this.lcargando.ctlSpinner(true);
 		this.prestamosSrvc.tablaPrestamo().subscribe((res) => {
 			this.processing = true;
@@ -534,7 +534,7 @@ export class PrestamosComponent implements OnInit {
 			accion: `Borrado el prestamo del empleado ${this.prestamoDato.nombres + this.prestamoDato.apellidos}`,
 			ip: this.commonServices.getIpAddress(),
 		};
-		this.mensajeSpinner = "Guardando...";
+		(this as any).mensajeSpinner = "Guardando...";
 		this.lcargando.ctlSpinner(true);
 		this.prestamosSrvc.deletePrestamo(data).subscribe(res => {
 			this.lcargando.ctlSpinner(false);
@@ -703,7 +703,7 @@ export class PrestamosComponent implements OnInit {
 			accion: `Modificación del prestamo #${this.id_prestamo} del empleado ${this.prestamos.nombre}  `,
 			id_controlador: myVarGlobals.fPrestamos,
 		};
-		this.mensajeSpinner = "Modificando...";
+		(this as any).mensajeSpinner = "Modificando...";
 		this.lcargando.ctlSpinner(true);
 		this.prestamosSrvc.editarPrestamo(data).subscribe((res) => {
 			this.lcargando.ctlSpinner(false);

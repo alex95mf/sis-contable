@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ['./bitacora.component.scss']
 })
 export class BitacoraComponent implements OnDestroy, OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)
@@ -115,7 +115,7 @@ export class BitacoraComponent implements OnDestroy, OnInit {
     })
   }
   getDatabitacora(flag: boolean = false) {
-    this.mensajeSpinner = "Cargando Auditoría...";
+    (this as any).mensajeSpinner = "Cargando Auditoría...";
     this.lcargando.ctlSpinner(true);
     if (flag) this.paginate.page = 1
 
@@ -260,7 +260,7 @@ export class BitacoraComponent implements OnDestroy, OnInit {
   btnExportarExcel() {
 
     console.log(this.dataBitacoraAux)
-    this.mensajeSpinner = "Generando Archivo Excel...";
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
 
 

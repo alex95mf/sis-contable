@@ -88,7 +88,7 @@ export class ProveedoresComponent implements OnInit {
 
   vmButtons: any = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   flag:any = false;
 
@@ -253,7 +253,7 @@ export class ProveedoresComponent implements OnInit {
       }
     }
 
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.filterInput = 5;
     this.provSrv.getAvailableCxP(payload).subscribe(response => {
@@ -297,7 +297,7 @@ export class ProveedoresComponent implements OnInit {
     }
 
     this.filterInput = 5;
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.provSrv.getAvailableCxP(payload).subscribe(response => {
       this.processing = true;
@@ -349,7 +349,7 @@ export class ProveedoresComponent implements OnInit {
       punto_emision: this.current_box.punto_emision
     }
 
-    this.mensajeSpinner = "Guardando retencion...";
+    (this as any).mensajeSpinner = "Guardando retencion...";
     this.lcargando.ctlSpinner(true);
     /* console.log(data); */
     this.provSrv.addCxPRetencion(data).subscribe(response => {
@@ -403,7 +403,7 @@ export class ProveedoresComponent implements OnInit {
     this.values.accion = `Registro de Cuenta por Pagar No. ${this.contacts.purchase['num_doc']} (${this.contacts.cxp_cab['type']})`;
     this.values.id_controlador = myVarGlobals.fPagoProveedores;
 
-    this.mensajeSpinner = "Pagando...";
+    (this as any).mensajeSpinner = "Pagando...";
     this.lcargando.ctlSpinner(true);
     this.provSrv.addPaymentCxP(this.values).subscribe(response => {
       this.print_cde = response['data'];

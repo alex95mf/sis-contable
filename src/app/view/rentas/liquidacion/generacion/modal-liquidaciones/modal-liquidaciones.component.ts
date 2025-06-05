@@ -15,7 +15,7 @@ standalone: false,
 })
 export class ModalLiquidacionesComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, {static:false}) 
   lcargando: CcSpinerProcesarComponent;
 
@@ -94,7 +94,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   }
 
   cargarLiquidaciones() {
-    this.mensajeSpinner = "Cargando lista de Liquidaciones...";
+    (this as any).mensajeSpinner = "Cargando lista de Liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -146,7 +146,7 @@ export class ModalLiquidacionesComponent implements OnInit {
 
   closeModal(liq?: any) {
     if(liq){
-      this.mensajeSpinner = 'Obteniendo Liquidacion...';
+      (this as any).mensajeSpinner = 'Obteniendo Liquidacion...';
       this.lcargando.ctlSpinner(true);
       
       this.generacionSrv.getLiquidacionCompleta(liq.id_liquidacion).subscribe(

@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./consulta-lotes.component.scss']
 })
 export class ConsultaLotesComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
 
@@ -100,7 +100,7 @@ export class ConsultaLotesComponent implements OnInit {
 
 
   cargarLotes(){
-    this.mensajeSpinner = "Cargando lista de lotes...";
+    (this as any).mensajeSpinner = "Cargando lista de lotes...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

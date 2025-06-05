@@ -28,7 +28,7 @@ standalone: false,
 export class MultasComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de Multas (Locales Comerciales)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -178,7 +178,7 @@ export class MultasComponent implements OnInit {
   ) {
     this.commonVarService.selectListLiqPURen.asObservable().subscribe(
       (res) => {
-        //this.mensajeSpinner = 'Cargando datos de la Liquidación...';
+        //(this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
         //this.lcargando.ctlSpinner(true)
         this.restoreForm();
         this.formReadOnly = true;
@@ -225,7 +225,7 @@ export class MultasComponent implements OnInit {
         if (this.liquidacion.fk_orden_inspeccion && this.liquidacion.fk_orden_inspeccion != 0) {
           this.tipo = 1;
           this.showInspecciones = true;
-          this.mensajeSpinner = 'Cargando datos de la Liquidación...';
+          (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
           this.lcargando.ctlSpinner(true);
           let data = {
             inspeccion: this.liquidacion.fk_orden_inspeccion
@@ -404,7 +404,7 @@ export class MultasComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
@@ -692,7 +692,7 @@ export class MultasComponent implements OnInit {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     let data = {
       id_concepto: 48
@@ -834,7 +834,7 @@ export class MultasComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          this.mensajeSpinner = 'Verificando período contable...';
+          (this as any).mensajeSpinner = 'Verificando período contable...';
           this.lcargando.ctlSpinner(true);
           let datos = {
             "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -845,7 +845,7 @@ export class MultasComponent implements OnInit {
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
                     
-                this.mensajeSpinner = 'Generando Liquidación...';
+                (this as any).mensajeSpinner = 'Generando Liquidación...';
                 this.lcargando.ctlSpinner(true);
                 this.liquidacion.fk_contribuyente = this.contribuyenteActive.id_cliente;
                 if(this.showInspecciones){
@@ -954,7 +954,7 @@ export class MultasComponent implements OnInit {
     let data = {
       concepto: 'ML'
     }
-    this.mensajeSpinner = 'Validadando Sta...';
+    (this as any).mensajeSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
    
     this.apiService.getStaConcepto(data).subscribe(

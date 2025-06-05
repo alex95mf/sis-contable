@@ -19,7 +19,7 @@ standalone: false,
 })
 export class ProyectosComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator : MatPaginator
@@ -163,13 +163,13 @@ paginate: any= {
     this.lcargando.ctlSpinner(true)
     try {
 
-      this.mensajeSpinner = "Cargando Períodos"
+      (this as any).mensajeSpinner = "Cargando Períodos"
       const resPeriodos = await this.apiSrv.getPeriodos()
       this.cmb_periodo = resPeriodos
 
-      this.mensajeSpinner = 'Cargando Programas'
+      (this as any).mensajeSpinner = 'Cargando Programas'
       this.programas = await this.apiSrv.getProgramas();
-      this.mensajeSpinner = 'Cargando Proyectos'
+      (this as any).mensajeSpinner = 'Cargando Proyectos'
       let proyectos =await this.apiSrv.getProyectos({filter: this.filter, paginate : this.paginate});
 this.lista_proyectos= proyectos.data;
 this.paginate.length = proyectos.total;
@@ -259,7 +259,7 @@ this.paginate.length = proyectos.total;
   }
 
   async CargarProyectos(){
-    this.mensajeSpinner = 'Cargando Proyectos';
+    (this as any).mensajeSpinner = 'Cargando Proyectos';
     this.lcargando.ctlSpinner(true)
     try {
 

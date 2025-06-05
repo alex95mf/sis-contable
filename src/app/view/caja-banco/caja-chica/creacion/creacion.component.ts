@@ -67,7 +67,7 @@ export class CreacionComponent implements OnInit {
   }
 
   vmButtons: any = [];
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   ngOnInit(): void {
@@ -267,7 +267,7 @@ export class CreacionComponent implements OnInit {
       accion: `Actualización de caja chica por el usuario ${this.dataUser.nombre}`,
       id_controlador: myVarGlobals.fCreaCajaChica
     }
-    this.mensajeSpinner = "Modificando caja...";
+    (this as any).mensajeSpinner = "Modificando caja...";
     this.lcargando.ctlSpinner(true);
     this.crtSrv.updatedBoxSmall(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -289,7 +289,7 @@ export class CreacionComponent implements OnInit {
       accion: `Creación de nueva caja chica por el usuario ${this.dataUser.nombre}`,
       id_controlador: myVarGlobals.fCreaCajaChica
     }
-    this.mensajeSpinner = "Creando caja...";
+    (this as any).mensajeSpinner = "Creando caja...";
     this.lcargando.ctlSpinner(true);
     this.crtSrv.saveBoxSmall(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);

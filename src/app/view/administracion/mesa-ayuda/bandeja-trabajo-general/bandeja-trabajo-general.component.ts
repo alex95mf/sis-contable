@@ -23,10 +23,10 @@ standalone: false,
   styleUrls: ['./bandeja-trabajo-general.component.scss']
 })
 export class BandejaTrabajoGeneralComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Mesa de Ayuda (Bandeja de Trabajo General)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -226,7 +226,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -258,7 +258,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
     let data = {
       params: "'MDA_CATEGORIA','MDA_SUBCATEGORIA','MDA_ESTADOS'",
     };
-    /*this.mensajeSpinner = "Buscando categoría...";
+    /*(this as any).mensajeSpinner = "Buscando categoría...";
     this.lcargando.ctlSpinner(true);*/
     this.ticketSrv.getCatalogoCategoria(data).subscribe(
 
@@ -311,7 +311,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
    }
 
    btnExportar() {
-    this.mensajeSpinner = "Generando Archivo Excel...";
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {
@@ -364,7 +364,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
 
    cargarUsuarios(){
    // console.log('ejecuto');
-    this.mensajeSpinner = "Cargando lista de Usuarios...";
+    (this as any).mensajeSpinner = "Cargando lista de Usuarios...";
     this.lcargando.ctlSpinner(true);
     this.tramiteSer.getUsuarios({}).subscribe(
       (res)=>{
@@ -381,7 +381,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
   }
 
   cargarTicketsGlobal(flag: boolean = false) {
-    this.mensajeSpinner = "Cargando listado de Tickets...";
+    (this as any).mensajeSpinner = "Cargando listado de Tickets...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1
@@ -546,7 +546,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = "Reasignando Ticket..."
+          (this as any).mensajeSpinner = "Reasignando Ticket..."
           this.lcargando.ctlSpinner(true);
           this.ticketSrv.reasignarTicket(data).subscribe(
             (res) => {
@@ -600,7 +600,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = "Anulando Ticket..."
+          (this as any).mensajeSpinner = "Anulando Ticket..."
           this.lcargando.ctlSpinner(true);
           this.ticketSrv.anularTicket(id).subscribe(
             (res) => {

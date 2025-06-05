@@ -7,7 +7,7 @@ import { TicketService } from './ticket.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';
-import { TicketFormComponent } from './ticket-form/ticket-form.component'; 
+import { TicketFormComponent } from './ticket-form/ticket-form.component';
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 import * as myVarGlobals from 'src/app/global';
 import { CategoriaFormComponent } from './categoria-form/categoria-form.component';
@@ -21,10 +21,10 @@ standalone: false,
   styleUrls: ['./ticket.component.scss']
 })
 export class TicketComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Mesa de Ayuda (Tickets)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -48,7 +48,7 @@ export class TicketComponent implements OnInit {
     {value: "G",label: "GESTION"},
     {value: "C",label: "CERRADO"},
     {value: "GA",label: "GARANTIA"}
-    
+
   ]
   prioridadList = [
     {value: "A",label: "ALTA"},
@@ -68,7 +68,7 @@ export class TicketComponent implements OnInit {
   numero_max_reincidencia_ticket: any
   reapertura_ticket: any
 
-   
+
 
   constructor(private ticketSrv: TicketService,
     private commonSrv: CommonService,
@@ -146,8 +146,8 @@ export class TicketComponent implements OnInit {
         habilitar: false,
       }*/
     ];
-    
-   
+
+
 
     this.paginate = {
       length: 0,
@@ -157,12 +157,12 @@ export class TicketComponent implements OnInit {
     };
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
-    
+
     this.today = new Date();
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
       id_ticket: undefined,
@@ -173,9 +173,9 @@ export class TicketComponent implements OnInit {
       subcategoria: 0,
       estado: ['P','PA','N','G','C','GA'],
       prioridad: ['A','M','B']
-    
+
     };
- 
+
 
     setTimeout(()=> {
       this.validaPermisos();
@@ -189,7 +189,7 @@ export class TicketComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -221,10 +221,10 @@ export class TicketComponent implements OnInit {
     let data = {
       params: "'MDA_CATEGORIA','MDA_SUBCATEGORIA'",
     };
-    this.mensajeSpinner = "Buscando categoría...";
+    (this as any).mensajeSpinner = "Buscando categoría...";
     this.lcargando.ctlSpinner(true);
     this.ticketSrv.getCatalogoCategoria(data).subscribe(
-     
+
       (res) => {
         this.categorias = res["data"]['MDA_CATEGORIA'];
         this.subCategorias = res["data"]['MDA_SUBCATEGORIA'];
@@ -243,7 +243,7 @@ export class TicketComponent implements OnInit {
        grupo:evento
      };
      this.ticketSrv.getCatalogoSubCategoria(data).subscribe(
-       
+
        (res) => {
          this.subCategorias = res["data"];
        },
@@ -274,7 +274,7 @@ export class TicketComponent implements OnInit {
   }
 
 
-  
+
   asignarEstado(evt: any) {
     if (!evt) {
         // Si el evento es undefined (se borró el select), asignar todos los valores de estadoList
@@ -290,18 +290,18 @@ export class TicketComponent implements OnInit {
    }
 
   cargarTickets(flag: boolean = false) {
-    this.mensajeSpinner = "Cargando listado de Tickets...";
+    (this as any).mensajeSpinner = "Cargando listado de Tickets...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1
-    
+
     let data = {
       params: {
         filter: this.filter,
         paginate: this.paginate
       }
     }
-    
+
     this.ticketSrv.getTicketsByUsuario(data).subscribe(
       (res) => {
         console.log(res['data']['data'])
@@ -313,7 +313,7 @@ export class TicketComponent implements OnInit {
           this.ticketsDt = Object.values(res['data']['data']);
         }
         this.lcargando.ctlSpinner(false);
-       
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -324,7 +324,7 @@ export class TicketComponent implements OnInit {
   metodoGlobal(event){
     switch (event.items.boton.texto) {
       case " NUEVO":
-       this.showTicketForm(true, {}); 
+       this.showTicketForm(true, {});
        break;
       case " CONSULTAR":
         this.cargarTickets(true);
@@ -338,7 +338,7 @@ export class TicketComponent implements OnInit {
   }
 
   showTicketForm(isNew:boolean, data?:any) {
-    
+
     if (!isNew && this.permissions.consultar == "0") {
       this.toastr.warning("No tiene permisos para consultar Tickets.", this.fTitle);
     } else if (isNew && this.permissions.guardar == "0") {
@@ -357,7 +357,7 @@ export class TicketComponent implements OnInit {
       modalInvoice.componentInstance.ticket = this.ticket;
       modalInvoice.componentInstance.numero_max_reincidencia_ticket = this.numero_max_reincidencia_ticket;
       modalInvoice.componentInstance.reapertura_ticket = this.reapertura_ticket;
-      
+
     }
   }
  /* expandListProveedores() {
@@ -405,10 +405,10 @@ export class TicketComponent implements OnInit {
       id_empresa: this.dataUser.id_empresa
     }
 
-    this.mensajeSpinner = "Buscando organigrama...";
+    (this as any).mensajeSpinner = "Buscando organigrama...";
     this.lcargando.ctlSpinner(true);
     this.ticketSrv.obtenerOrganigrama(data).subscribe(
-     
+
       (res) => {
         console.log(res)
         this.organigrama=res['data']['organigrama']

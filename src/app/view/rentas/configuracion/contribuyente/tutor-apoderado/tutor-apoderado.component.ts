@@ -14,7 +14,7 @@ standalone: false,
   styleUrls: ['./tutor-apoderado.component.scss']
 })
 export class TutorApoderadoComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -158,7 +158,7 @@ export class TutorApoderadoComponent implements OnInit {
   fillCatalog() {
     // console.log('Catalogo');
     // this.lcargando.ctlSpinner(true);
-    // this.mensajeSpinner = "Cargando Catalogs";
+    // (this as any).mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'REN_DISCAPACIDAD', 'REN_PARENTEZCO'",
     };
@@ -191,7 +191,7 @@ export class TutorApoderadoComponent implements OnInit {
   }
 
   cargarContribuyentes() {
-    this.mensajeSpinner = "Cargando lista de Contribuyentes...";
+    (this as any).mensajeSpinner = "Cargando lista de Contribuyentes...";
     this.lcargando.ctlSpinner(true);
     this.filter['num_documento'] = this.contribuyenteTutor.ap_cedula
 

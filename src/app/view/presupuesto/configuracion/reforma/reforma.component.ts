@@ -23,10 +23,10 @@ standalone: false,
 })
 export class ReformaComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  
+
   fTitle: string = "Reforma";
 
   vmButtons: any = [];
@@ -38,7 +38,7 @@ export class ReformaComponent implements OnInit {
   dataExcel: any = [];
 
   file: any;
-  
+
   periodo: any;
   estado: any;
   yearDisabled = false;
@@ -191,7 +191,7 @@ export class ReformaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
@@ -230,11 +230,11 @@ export class ReformaComponent implements OnInit {
     let tc_incremento = 'TC_INCREMENTO';
     let tc_reduccion = 'TC_REDUCCION';
     let final = 'FINAL';
-   
+
 
     this.plantillaExcel = [];
     for(let i=0; i<2; i++){
-      
+
       let data = {};
       data[partida] = i+1;
       data[concepto] = 'Esto es un concepto para reforma '+(i+1);
@@ -247,7 +247,7 @@ export class ReformaComponent implements OnInit {
       data[tc_incremento] = 0;
       data[tc_reduccion] = 0;
       data[final] = 0;
-      
+
 
       this.plantillaExcel.push(data);
 
@@ -256,20 +256,20 @@ export class ReformaComponent implements OnInit {
     this.titles =  [partida, concepto, programa, anual, sp_ingresos, sp_egresos, rc_ingresos, rc_egresos, tc_incremento, tc_reduccion, final ];
 
     this.exportAsXLSX(this.plantillaExcel ,'Reforma '+this.periodo, {header: this.titles});
-    
+
   }
 
-  
+
 
   getDataExportar() {
 console.log(this.dataExcel)
-   
+
         let excelData = [];
-    
+
         if (this.permisos.exportar == "0") {
           this.toastr.info("Usuario no tiene permiso para exportar");
         } else {
-          this.mensajeSpinner = "Generando Archivo Excel...";
+          (this as any).mensajeSpinner = "Generando Archivo Excel...";
           this.lcargando.ctlSpinner(true);
 
           Object.keys(this.dataExcel).forEach(key => {
@@ -292,7 +292,7 @@ console.log(this.dataExcel)
           this.exportarAsXLSX(excelData);
           this.lcargando.ctlSpinner(false);
         }
-    // this.mensajeSpinner = 'Generando reporte Excel...';
+    // (this as any).mensajeSpinner = 'Generando reporte Excel...';
     // this.lcargando.ctlSpinner(true);
     // console.log(this.dataExcel);
     // let year = this.periodo;
@@ -334,7 +334,7 @@ console.log(this.dataExcel)
     //   delete e.definitivo;
     //   delete e.observaciones;
     // })
-    
+
     // this.titles =  [partida, concepto, programa, anual, sp_ingresos, sp_egresos, rc_ingresos, rc_egresos, tc_incremento, tc_reduccion, final];
     // console.log(copy);
 
@@ -349,7 +349,7 @@ console.log(this.dataExcel)
     this.excelSrv.exportAsExcelFile(excelData, 'Asignacion inicial periodo '+this.periodo);
   }
 
-  
+
   metodoGlobal(event) {
     switch (event.items.boton.texto) {
       case " GUARDAR":
@@ -376,8 +376,8 @@ console.log(this.dataExcel)
           cancelButtonColor: '#F86C6B',
           confirmButtonColor: '#4DBD74',
         }).then((result) => {
-          if (result.isConfirmed) {            
-            this.anularIngresos(); 
+          if (result.isConfirmed) {
+            this.anularIngresos();
           }
         });
         break;
@@ -428,10 +428,10 @@ console.log(this.dataExcel)
         console.log(totalIngresos,totalEgresos )
         if((totalIngresos == 0 &&  totalEgresos == 0)){
           mensaje += '* El total de SC_INGRESOS y SC_EGRESOS no puede ser 0<br>'
-        
+
         }else if((totalIngresos != totalEgresos) ){
           mensaje += '* El total de SC_INGRESOS debe ser igual al total de SC_EGRESOS<br>'
-        
+
         }
       }else if(this.tipoReforma == 'REDUCCION'){
           let totalIngresos = 0
@@ -442,11 +442,11 @@ console.log(this.dataExcel)
           });
           if((totalIngresos == 0 &&  totalEgresos == 0)){
             mensaje += '* El total de RC_INGRESOS y RC_EGRESOS no puede ser 0<br>'
-         
+
           }else if((totalIngresos != totalEgresos) ){
             mensaje += '* El total de RC_INGRESOS debe ser igual al total de RC_EGRESOS<br>'
-        
-          } 
+
+          }
       }else if (this.tipoReforma == 'TRASPASO'){
             let totalIngresos = 0
             let totalEgresos = 0
@@ -461,9 +461,9 @@ console.log(this.dataExcel)
             }else if((totalIngresos != totalEgresos) ){
               mensaje += '* El total de TC_INCREMENTO debe ser igual al total de TC_REDUCCION<br>'
             }
-          
+
       }
-     
+
     }
       if (mensaje.length > 0) {
           Swal.fire({
@@ -492,30 +492,30 @@ console.log(this.dataExcel)
           cancelButtonColor: '#F86C6B',
           confirmButtonColor: '#4DBD74',
         }).then((result) => {
-          if (result.isConfirmed) {  
-            this.mensajeSpinner = "Verificando período contable";
+          if (result.isConfirmed) {
+            (this as any).mensajeSpinner = "Verificando período contable";
             this.lcargando.ctlSpinner(true);
             let data = {
               "anio": Number(this.periodo),
               "mes": Number(moment(this.fecha_ingreso).format('MM'))
             }
               this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-              
+
               /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
-               
-                this.guardarIngresos(); 
-          
+
+                this.guardarIngresos();
+
               } else {
                 this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
                 this.lcargando.ctlSpinner(false);
               }
-          
+
               }, error => {
                   this.lcargando.ctlSpinner(false);
                   this.toastr.info(error.error.mesagge);
               })
-          
+
           }
         });
       }
@@ -524,11 +524,11 @@ console.log(this.dataExcel)
 
   checkPeriodo() {
 
-    this.mensajeSpinner = 'Obteniendo asignacion de ingresos...';
+    (this as any).mensajeSpinner = 'Obteniendo asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -550,8 +550,8 @@ console.log(this.dataExcel)
             cancelButtonColor: '#F86C6B',
             confirmButtonColor: '#4DBD74',
           }).then((result) => {
-            if (result.isConfirmed) {            
-              this.restoreForm(); 
+            if (result.isConfirmed) {
+              this.restoreForm();
             }
           });
         }
@@ -568,15 +568,15 @@ console.log(this.dataExcel)
     this.lcargando.ctlSpinner(true);
     try {
       //
-      this.mensajeSpinner = 'Cargando catalogos';
+      (this as any).mensajeSpinner = 'Cargando catalogos';
       let catalogos = await this.apiSrv.getCatalogo({params: "'PRE_REFORMAS'"});
       this.catalog = catalogos['PRE_REFORMAS'];
 
-      this.mensajeSpinner = 'Cargando Periodos';
+      (this as any).mensajeSpinner = 'Cargando Periodos';
       let periodos = await this.apiSrv.getPeriodos();
       this.cmb_periodo = periodos;
 
-      this.mensajeSpinner = 'Cargando Programas';
+      (this as any).mensajeSpinner = 'Cargando Programas';
       let programas = await this.apiSrv.getProgramas();
       programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
       this.cmb_programas = programas;
@@ -588,7 +588,7 @@ console.log(this.dataExcel)
       this.toastr.error(err.error?.message, 'Error en Carga Inicial')
     }
 
-    /* this.mensajeSpinner = "Cargando Catalogs";
+    /* (this as any).mensajeSpinner = "Cargando Catalogs";
 
     let data = {
       params: "'PRE_REFORMAS'",
@@ -598,7 +598,7 @@ console.log(this.dataExcel)
       (res) => {
         console.log(res);
         this.catalog = res["data"]["PRE_REFORMAS"];
-        
+
 
         // console.log(this.catalog);
         this.lcargando.ctlSpinner(false);
@@ -616,7 +616,7 @@ console.log(this.dataExcel)
 
   guardarIngresos() {
 
-    this.mensajeSpinner = 'Guardando Reformas...';
+    (this as any).mensajeSpinner = 'Guardando Reformas...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -624,14 +624,14 @@ console.log(this.dataExcel)
       periodo: this.periodo,
       fecha: moment(this.fecha_ingreso).format('YYYY-MM-DD'),
       tipoReforma: this.tipoReforma,
-      programa: this.programaSelected  
+      programa: this.programaSelected
     };
 
     console.log(data);
     this.apiSrv.guardarIngresosPorPeriodo(data).subscribe(
       (res:any) => {
         console.log(res);
-        
+
         console.log(this.fecha_ingreso);
         Swal.fire({
           icon: "success",
@@ -655,11 +655,11 @@ console.log(this.dataExcel)
   }
 
   inspeccionarPeriodo() {
-    this.mensajeSpinner = 'Obteniendo reformas...';
+    (this as any).mensajeSpinner = 'Obteniendo reformas...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -681,11 +681,11 @@ console.log(this.dataExcel)
   }
 
   eliminarIngresos() {
-    this.mensajeSpinner = 'Eliminando asignacion de ingresos...';
+    (this as any).mensajeSpinner = 'Eliminando asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -712,23 +712,23 @@ console.log(this.dataExcel)
   anularIngresos() {
 
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let data = {
       "anio": Number(this.periodo),
       "mes": Number(moment(this.fecha_ingreso).format('MM'))
     }
       this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-      
+
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
-       
-        this.mensajeSpinner = 'Anulando asignacion de ingresos...';
+
+        (this as any).mensajeSpinner = 'Anulando asignacion de ingresos...';
         this.lcargando.ctlSpinner(true);
 
         let data2 = {
-          periodo: this.periodo, 
-          id_reforma : this.id   
+          periodo: this.periodo,
+          id_reforma : this.id
         };
 
         console.log(data2);
@@ -751,12 +751,12 @@ console.log(this.dataExcel)
             this.toastr.error(err.error.message, 'Error al anular la asignacion de ingresos')
           }
         )
-  
+
       } else {
         this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
         this.lcargando.ctlSpinner(false);
-      }   
-  
+      }
+
       }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.mesagge);
@@ -786,9 +786,9 @@ console.log(this.dataExcel)
     this.fileValid = false;
     this.fecha_ingreso = moment(new Date()).format('YYYY-MM-DD');
   }
-  
+
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {
@@ -828,7 +828,7 @@ console.log(this.dataExcel)
       const data = reader.result;
       workBook = XLSX.read(data, { type: 'binary' });
       jsonData = workBook.SheetNames.reduce((initial, name) => {
-        
+
         const sheet = workBook.Sheets[name];
         initial[name] = XLSX.utils.sheet_to_json(sheet);
         // console.log('two',initial);
@@ -840,7 +840,7 @@ console.log(this.dataExcel)
       console.log(jsonData);
       this.btnDisabled = false;
        //this.fillTable(jsonData);
-      
+
     }
     reader.readAsBinaryString(this.file);
   }
@@ -855,7 +855,7 @@ console.log(this.dataExcel)
   // }
 
   fillTable(dataJson) {
- 
+
     // console.log(dataJson);
     let year = this.periodo;
     let partida = 'PARTIDA';
@@ -871,16 +871,16 @@ console.log(this.dataExcel)
     let final = 'FINAL';
 
     let mensaje: string = '';
-    
+
     if(dataJson['data']){
-     
+
       let arr = dataJson['data'];
       let totalSCingresos = 0
       let totalSCegresos = 0
-    
+
       let totalRCingresos = 0
       let totalRCegresos = 0
-    
+
       let totalTCincremento = 0
       let totalTCreduccion = 0
 
@@ -889,10 +889,10 @@ console.log(this.dataExcel)
       this.dataExcel = [];
       this.totalSCingresos = 0
       this.totalSCegresos = 0
-    
+
       this.totalRCingresos = 0
       this.totalRCegresos = 0
-    
+
        this.totalTCincremento = 0
        this.totalTCreduccion = 0
        this.totalFinal = 0
@@ -911,8 +911,8 @@ console.log(this.dataExcel)
           tc_reduccion: e[tc_reduccion]??this.notData(e[anual]),
           final: e[final]??this.notData(e[anual]),
 
-         
-          
+
+
         }
 
         totalSCingresos += +parseFloat(e[sp_ingresos])
@@ -928,20 +928,20 @@ console.log(this.dataExcel)
 
       this.totalSCingresos = totalSCingresos
       this.totalSCegresos = totalSCegresos
-    
+
       this.totalRCingresos = totalRCingresos
       this.totalRCegresos = totalRCegresos
-    
+
       this.totalTCincremento = totalTCincremento
       this.totalTCreduccion = totalTCreduccion
       this.totalFinal = totalFinal
       console.log(this.dataExcel);
- 
+
 
       this.titles =  [partida, concepto, programa,  anual, sp_ingresos, sp_egresos, rc_ingresos, rc_egresos, tc_incremento, tc_reduccion, final ];
       // for(let i=0; i<this.dataExcel.length; i++){
       //   console.log(this.dataExcel[i]['igual_custodio'])
-       
+
       //   if (this.dataExcel[i]['partida'] == undefined && this.dataExcel[i]['partida'] == '') mensaje += '* Debe ingresar un número de partida en la fila '+ [i+2] +' en el archivo excel. La partida  no puede estar vacio.<br>'
       //   if (this.dataExcel[i]['programa'] == undefined && this.dataExcel[i]['programa'] == '') mensaje += '* Debe ingresar un programa en la fila '+ [i+2] + ' en el archivo excel. El programa no puede estar  vacios.<br>'
       // }
@@ -968,7 +968,7 @@ console.log(this.dataExcel)
       //   return;
       // }
 
-      
+
       if(this.break){
         this.dataExcel = [];
         this.toastr.info('El archivo seleccionado no contiene el formato adecuado');
@@ -994,20 +994,20 @@ console.log(this.dataExcel)
 
     let totalSCingresos = 0
     let totalSCegresos = 0
-  
+
     let totalRCingresos = 0
     let totalRCegresos = 0
-  
+
     let totalTCincremento = 0
     let totalTCreduccion = 0
     let totalFinal= 0
 
     this.totalSCingresos = 0
     this.totalSCegresos = 0
-  
+
     this.totalRCingresos = 0
     this.totalRCegresos = 0
-  
+
      this.totalTCincremento = 0
      this.totalTCreduccion = 0
      this.totalFinal = 0
@@ -1035,7 +1035,7 @@ console.log(this.dataExcel)
     console.log( this.dataExcel)
 
     this.dataExcel.forEach(e => {
-      
+
       totalSCingresos += +parseFloat(e.sp_ingresos)
       totalSCegresos += +parseFloat(e.sp_egresos)
       totalRCingresos += +parseFloat(e.rc_ingresos)
@@ -1047,14 +1047,14 @@ console.log(this.dataExcel)
 
     this.totalSCingresos = totalSCingresos
     this.totalSCegresos = totalSCegresos
-  
+
     this.totalRCingresos = totalRCingresos
     this.totalRCegresos = totalRCegresos
-  
+
     this.totalTCincremento = totalTCincremento
     this.totalTCreduccion = totalTCreduccion
     this.totalFinal = totalFinal
-    
+
     let year = this.periodo;
     let partida = 'PARTIDA';
     let concepto = 'CONCEPTO';
@@ -1079,7 +1079,7 @@ console.log(this.dataExcel)
   }
 
   agregaPeriodo() {
- 
+
     if(this.periodo == undefined){
       this.toastr.info('Debe seleccionar un periodo');
       // this.periodo = undefined;
@@ -1093,11 +1093,11 @@ console.log(this.dataExcel)
     }
     // this.break = false;
     // console.log(this.jsonData);
-   
+
   }
 
   validaPartidas(excel) {
-    this.mensajeSpinner = 'Cargando archivo';
+    (this as any).mensajeSpinner = 'Cargando archivo';
     this.lcargando.ctlSpinner(true);
 
       let partida = 'PARTIDA';
@@ -1105,7 +1105,7 @@ console.log(this.dataExcel)
       this.dataExcel = [];
       let datos = [];
       if(excel['data']){
-       
+
         let arr = excel['data'];
         arr.forEach(e => {
           let data = {
@@ -1115,11 +1115,11 @@ console.log(this.dataExcel)
           datos.push(data)
         })
       }
-  
+
       let params = {
         partida_programa: datos,
       };
-  
+
       this.apiSrv.validarPartidas(params).subscribe(
         res => {
          console.log(res)
@@ -1127,9 +1127,9 @@ console.log(this.dataExcel)
          let progNoEncontrados = res['data'][0].prognoencontrados
          console.log(partNoEncontradas)
          console.log(progNoEncontrados)
-  
+
          this.lcargando.ctlSpinner(false)
-  
+
          let mensaje: string = '';
          if(partNoEncontradas != undefined ){
           for(let i=0; i<partNoEncontradas.length; i++){
@@ -1141,8 +1141,8 @@ console.log(this.dataExcel)
             mensaje += '* Debe corregir el valor de la columna PROGRAMA en el archivo excel. El valor del programa no puede ser '+ progNoEncontrados[i]['programa'] +' en la fila '+ (progNoEncontrados[i]['linea'] + 2 )+'<br>'
            }
          }
-         
-   
+
+
          if (mensaje.length > 0) {
              Swal.fire({
                icon: "warning",
@@ -1165,7 +1165,7 @@ console.log(this.dataExcel)
            //this.toastr.warning(mensaje, 'Validacion de Datos', { enableHtml: true })
            return;
          }else{
-          
+
           this.fillTable(excel);
          }
         },
@@ -1174,9 +1174,9 @@ console.log(this.dataExcel)
           this.toastr.error(err.error.message, 'Error validando datos de partidas y programas')
         }
       )
-    
 
-  
+
+
   }
 
 
@@ -1191,7 +1191,7 @@ console.log(this.dataExcel)
   }
 
   getDataPDF(){
-    window.open(environment.ReportingUrl +"rpt_pre_reforma.pdf?&j_username=" + environment.UserReporting 
+    window.open(environment.ReportingUrl +"rpt_pre_reforma.pdf?&j_username=" + environment.UserReporting
     + "&j_password=" + environment.PasswordReporting+"&id=" + this.id,'_blank')
   }
 

@@ -40,7 +40,7 @@ export class GeneracionDeRetencionComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -509,7 +509,7 @@ export class GeneracionDeRetencionComponent implements OnInit {
 
 
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(this.selected_anio),

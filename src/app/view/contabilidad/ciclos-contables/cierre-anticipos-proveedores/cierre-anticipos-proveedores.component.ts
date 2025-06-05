@@ -16,7 +16,7 @@ standalone: false,
 export class CierreAnticiposProveedoresComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: Array<Botonera> = [];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   filter: any = {
     fecha_hasta: moment(new Date()).format('YYYY-MM-DD'),
@@ -95,7 +95,7 @@ export class CierreAnticiposProveedoresComponent implements OnInit {
   async getDocumentos() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Anticipos'
+      (this as any).mensajeSpinner = 'Cargando Anticipos'
       let documentos: Array<any> = await this.apiService.getDocumentos({params: {filter: this.filter}})
       console.log(documentos)
       this.documento.anticipos = documentos
@@ -129,7 +129,7 @@ export class CierreAnticiposProveedoresComponent implements OnInit {
 
     if (result.isConfirmed) {
 
-      this.mensajeSpinner = "Verificando período contable";
+      (this as any).mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
 
       let data = {
@@ -142,7 +142,7 @@ export class CierreAnticiposProveedoresComponent implements OnInit {
             if (res["data"][0].estado !=='C') {
               this.lcargando.ctlSpinner(true)
               try {
-                this.mensajeSpinner = 'Almacenando Cierre'
+                (this as any).mensajeSpinner = 'Almacenando Cierre'
                 let response: any = await this.apiService.setDocumento({documento: this.documento})
                 console.log(response);
                 this.documento.num_documento = response.num_documento

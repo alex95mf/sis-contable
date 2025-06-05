@@ -18,7 +18,7 @@ export class ModalActivosCiudadComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
   fTitle: string = "Registro de valores de activos";
-  mensajeSpinner: string = "Cargando...";
+  
   @Input() contr: any;
   @Input() permisos: any;
 
@@ -145,7 +145,7 @@ export class ModalActivosCiudadComponent implements OnInit {
       periodo: this.periodo
     }
     // console.log(data);
-    this.mensajeSpinner = "Cargando activos por contribuyente...";
+    (this as any).mensajeSpinner = "Cargando activos por contribuyente...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getActivosByCiudad(data).subscribe(
       (res) => {
@@ -218,7 +218,7 @@ export class ModalActivosCiudadComponent implements OnInit {
           this.CalculoPatrimonio()
         } else if (item.id_registro_ciudad!=0){
           // borrar de ade veras
-          this.mensajeSpinner = "Eliminando registro de activos...";
+          (this as any).mensajeSpinner = "Eliminando registro de activos...";
           this.lcargando.ctlSpinner(true);
           
           let data = {
@@ -326,7 +326,7 @@ export class ModalActivosCiudadComponent implements OnInit {
   fillCatalog() {
     // console.log('Catalogo');
     // this.lcargando.ctlSpinner(true);
-    // this.mensajeSpinner = "Cargando Catalogs";
+    // (this as any).mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'CIUDAD', 'PROVINCIA'",
     };
@@ -575,7 +575,7 @@ export class ModalActivosCiudadComponent implements OnInit {
     }).then((result)=>{
 
       if(result.isConfirmed){
-        this.mensajeSpinner = "Guardando registros de activos...";
+        (this as any).mensajeSpinner = "Guardando registros de activos...";
         this.lcargando.ctlSpinner(true);
         console.log(this.listaActivos);
         let data = {

@@ -17,7 +17,7 @@ standalone: false,
 })
 export class ModalProgramaComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator 
@@ -103,7 +103,7 @@ export class ModalProgramaComponent implements OnInit {
   }
 
   getPrograma(){
-    this.mensajeSpinner = "Cargando Programas...";
+    (this as any).mensajeSpinner = "Cargando Programas...";
     this.lcargando.ctlSpinner(true);
     let data ={
       params: {

@@ -102,7 +102,7 @@ export class ModalBuscaCodigoComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
 
     try {
-      this.mensajeSpinner = 'Obteniendo Codigos'
+      (this as any).mensajeSpinner = 'Obteniendo Codigos'
       const response = await this.apiService.getCodigos(data)
       this.paginate.length = response.total
       this.resultados = response.data

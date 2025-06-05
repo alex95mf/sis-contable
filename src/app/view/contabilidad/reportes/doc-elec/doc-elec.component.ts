@@ -19,7 +19,7 @@ standalone: false,
 export class DocElecComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Array<Botonera> = [];
   masterSelected: boolean = false
   masterIndeterminate: boolean = false
@@ -147,7 +147,7 @@ export class DocElecComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Catalogos'
+      (this as any).mensajeSpinner = 'Cargando Catalogos'
       let res_tipo_documento = await this.apiService.getTipoDocumentos();
       // console.log(res_tipo_documento)
       this.cmb_tipo_documento = res_tipo_documento
@@ -156,7 +156,7 @@ export class DocElecComponent implements OnInit {
       // console.log(res_estado_documento)
       this.cmb_estado_documento = [...this.cmb_estado_documento, ...res_estado_documento['ESTADO DOCUMENTO SRI']]
 
-      this.mensajeSpinner = 'Cargando Documentos'
+      (this as any).mensajeSpinner = 'Cargando Documentos'
       let documentos = await this.apiService.getDocumentos({ filter: this.filter })
       // console.log(documentos)
       documentos.map((item: any) => Object.assign(item, {
@@ -178,7 +178,7 @@ export class DocElecComponent implements OnInit {
   async getDocumentos() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Documentos'
+      (this as any).mensajeSpinner = 'Cargando Documentos'
       let documentos = await this.apiService.getDocumentos({ filter: this.filter })
       // console.log(documentos)
       documentos.map((item: any) => Object.assign(item, {
@@ -220,7 +220,7 @@ export class DocElecComponent implements OnInit {
   async enviarCorreo(documento: any) {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Enviando Correo'
+      (this as any).mensajeSpinner = 'Enviando Correo'
       let response =  await this.apiService.enviarCorreo({ documento: documento })
       console.log(response)
       this.lcargando.ctlSpinner(false)
@@ -245,7 +245,7 @@ export class DocElecComponent implements OnInit {
   async reiniciar(documento: any) {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Restaurando estados del Documento'
+      (this as any).mensajeSpinner = 'Restaurando estados del Documento'
       let comprobante = await this.apiService.reiniciar({documento: documento})
       Object.assign(comprobante, {
         check: false,
@@ -332,7 +332,7 @@ let registros = this.lst_documentos.data.filter((item: any) =>  item.check === t
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Reprocesando'
+        (this as any).mensajeSpinner = 'Reprocesando'
         let response = await this.apiService.reiniciarLote({ registros })
         console.log(response)
         //
@@ -369,7 +369,7 @@ let registros = this.lst_documentos.data.filter((item: any) =>  item.check === t
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Enviando'
+        (this as any).mensajeSpinner = 'Enviando'
         let response = await this.apiService.enviarCorreoLote({ registros })
         console.log(response)
         //

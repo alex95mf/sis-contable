@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./detalle-conciliacion.component.scss']
 })
 export class DetalleConciliacionComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
   dataUser: any = {};
@@ -86,7 +86,7 @@ export class DetalleConciliacionComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
@@ -128,7 +128,7 @@ export class DetalleConciliacionComponent implements OnInit {
 
   cargarDetallesConciliacion(){
 
-    this.mensajeSpinner = "Cargando Conciliación Bancaria...";
+    (this as any).mensajeSpinner = "Cargando Conciliación Bancaria...";
     this.lcargando.ctlSpinner(true);
     let data = {
       cuenta: this.datos.cuenta_contable,

@@ -26,7 +26,7 @@ export class ProductoComponent implements OnInit {
 
 
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -116,7 +116,7 @@ lista_estados:any = [
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
@@ -199,7 +199,7 @@ lista_estados:any = [
 
 
   cargaFoto(archivos) {
-    this.mensajeSpinner = 'Cargando fotos...';
+    (this as any).mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos?.length) <= 5) {
       for (let i = 0; i < archivos.length; i++) {
@@ -276,7 +276,7 @@ lista_estados:any = [
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando Producto...";
+        (this as any).mensajeSpinner = "Guardando Producto...";
         this.lcargando.ctlSpinner(true);
 
         this.producto.fotos = this.fotos.filter(e => e.id_producto_fotos === 0);
@@ -345,7 +345,7 @@ lista_estados:any = [
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Editando Producto...";
+        (this as any).mensajeSpinner = "Editando Producto...";
         this.lcargando.ctlSpinner(true);
 
         this.producto.id_usuario= this.dataUser['id_usuario'];
@@ -448,7 +448,7 @@ lista_estados:any = [
 
   async cargaInicial()
   {
-    this.mensajeSpinner = 'Cargando Grupo de Productos';
+    (this as any).mensajeSpinner = 'Cargando Grupo de Productos';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -478,7 +478,7 @@ lista_estados:any = [
 
 
   async CargarGrupoProductos(){
-    this.mensajeSpinner = 'Cargando Grupo de Productos';
+    (this as any).mensajeSpinner = 'Cargando Grupo de Productos';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -516,7 +516,7 @@ lista_estados:any = [
   }
 
   async CargarBodegas(){
-    this.mensajeSpinner = 'Cargando Bodegas';
+    (this as any).mensajeSpinner = 'Cargando Bodegas';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -588,7 +588,7 @@ removeBodega(index)
 
 
   async consultarProducto(){
-    this.mensajeSpinner = 'Cargando Producto';
+    (this as any).mensajeSpinner = 'Cargando Producto';
     this.lcargando.ctlSpinner(true)
     try {
 

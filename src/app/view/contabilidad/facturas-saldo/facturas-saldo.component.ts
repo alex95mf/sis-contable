@@ -17,7 +17,7 @@ standalone: false,
 })
 export class FacturasSaldoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = [];
 
   documento: any = {
@@ -100,7 +100,7 @@ export class FacturasSaldoComponent implements OnInit {
         console.log("se cerro el modal")
         this.lcargando.ctlSpinner(true)
         try {
-          this.mensajeSpinner = 'Cargando Documento...'
+          (this as any).mensajeSpinner = 'Cargando Documento...'
           let response = await this.apiService.getCierre({ documento })
           console.log("responseresponse",response)
           this.documento = { ...response }
@@ -163,7 +163,7 @@ export class FacturasSaldoComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Facturas'
+      (this as any).mensajeSpinner = 'Cargando Facturas'
       let facturas = await this.apiService.getFacturas({params: { filter: this.filter }})
       console.log(facturas)
       console.log("facturas",facturas);
@@ -202,7 +202,7 @@ export class FacturasSaldoComponent implements OnInit {
 
     if (result.isConfirmed) {
 
-      this.mensajeSpinner = "Verificando período contable";
+      (this as any).mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
 
       let data = {
@@ -215,7 +215,7 @@ export class FacturasSaldoComponent implements OnInit {
             if (res["data"][0].estado !=='C') {
               this.lcargando.ctlSpinner(true)
               try {
-                this.mensajeSpinner = 'Almacenando Cierre'
+                (this as any).mensajeSpinner = 'Almacenando Cierre'
                 let response: any = await this.apiService.setCierre({documento: this.documento})
                 console.log(response)
                 this.documento.num_documento = response.num_documento
@@ -311,7 +311,7 @@ calcularTotal(detalle: any) {
 
     if (result.isConfirmed) {
 
-      this.mensajeSpinner = "Verificando período contable";
+      (this as any).mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
       let data = {
         "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -325,7 +325,7 @@ calcularTotal(detalle: any) {
 
             this.lcargando.ctlSpinner(true)
             try {
-              this.mensajeSpinner = 'Eliminando Cierre'
+              (this as any).mensajeSpinner = 'Eliminando Cierre'
               await this.apiService.deleteCierre(this.documento.id)
 
               this.lcargando.ctlSpinner(false)

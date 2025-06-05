@@ -16,7 +16,7 @@ standalone: false,
 })
 export class ShowComprobantesComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

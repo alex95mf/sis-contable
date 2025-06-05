@@ -173,7 +173,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   }
 
   cargarLiquidaciones(firstload: boolean){
-    this.mensajeSpinner = "Cargando títulos pendientes...";
+    (this as any).mensajeSpinner = "Cargando títulos pendientes...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -304,7 +304,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   }
 
   cargarConvenios(firstload: boolean) {
-    this.mensajeSpinner = "Cargando deudas de convenios...";
+    (this as any).mensajeSpinner = "Cargando deudas de convenios...";
     this.lcargando.ctlSpinner(true);
 
     let dataCO = {
@@ -432,7 +432,7 @@ export class ModalLiquidacionesComponent implements OnInit {
   }
 
   cargarConveniosAT(firstload: boolean) {
-    this.mensajeSpinner = "Cargando deudas de convenios de arriendo de terreno...";
+    (this as any).mensajeSpinner = "Cargando deudas de convenios de arriendo de terreno...";
     this.lcargando.ctlSpinner(true);
 
     let dataCOTE = {

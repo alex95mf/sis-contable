@@ -44,7 +44,7 @@ export class TablaAmortizacionComponent implements OnInit, OnDestroy {
   id: any = 0;
   observacion: any = ' ';
   estado: string = '';
-  mensajeSpinner: string = "Cargando...";
+
   mensajeSppiner2: string = "Cargando...";
   constDisabled = false;
   totalIntereses = 0;
@@ -365,7 +365,7 @@ async aprobarAmortizacion() {
   if (result.isConfirmed) {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Aprobando Amortizacion'
+      (this as any).mensajeSpinner = 'Aprobando Amortizacion'
       let response = await this.apiSrv.aprobarAmortizacion({amortizacion: this.numero_documento})
       console.log(response)
 
@@ -437,7 +437,7 @@ changeDetail(data) {
     }).then((result) => {
       if (result.isConfirmed) {
         this.lcargando.ctlSpinner(true)
-        this.mensajeSpinner = 'Marcando como Pagado'
+        (this as any).mensajeSpinner = 'Marcando como Pagado'
         this.apiSrv.getIdCabecera({numero_documento: this.numero_documento}).subscribe(
           (res: any) => {
             console.log(res['data'][0]['id']);
@@ -576,7 +576,7 @@ actualizarData(){
       tipo: this.selectTipo,
       //id: this.id
     };
-    this.mensajeSpinner = 'Actualizando...';
+    (this as any).mensajeSpinner = 'Actualizando...';
      this.lcargando.ctlSpinner(true);
     //console.log(this.id);
     //console.log(datos);
@@ -596,7 +596,7 @@ actualizarData(){
           res => {
             const id_cabecera = res['data'][0]['id']
             console.log(res['data'][0]['id']);
-            this.mensajeSpinner = 'Eliminando detalles anteriores'
+            (this as any).mensajeSpinner = 'Eliminando detalles anteriores'
               this.apiSrv.eliminarDetalleAmortizacion({id: res['data'][0]['id']}).subscribe(
                  res => {
                   let data = {
@@ -613,7 +613,7 @@ actualizarData(){
                   };
                   console.log(res);
                   console.log(data);
-                  this.mensajeSpinner = 'Almacenando detalles actualizados'
+                  (this as any).mensajeSpinner = 'Almacenando detalles actualizados'
                   this.apiSrv.generarDetalleAmortizacion(data).subscribe(
                     res => {
                       console.log(res);
@@ -736,7 +736,7 @@ async cerrarAmortizacion(){
   })
 
   if (result.isConfirmed) {
-    this.mensajeSpinner = 'Actualizando Estado...';
+    (this as any).mensajeSpinner = 'Actualizando Estado...';
     this.lcargando.ctlSpinner(true);
 
     this.apiSrv.actualizarEstadoCerrado({numero_documento: this.numero_documento}).subscribe(
@@ -762,7 +762,7 @@ async cerrarAmortizacion(){
 
 
 guardarAmortizacion(){
-  this.mensajeSpinner = 'Guardando Amortización...';
+  (this as any).mensajeSpinner = 'Guardando Amortización...';
     this.lcargando.ctlSpinner(true);
     console.log(this.amortizaciones);
     let data = {

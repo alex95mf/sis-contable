@@ -83,7 +83,7 @@ export class BienesComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
       //
-      this.mensajeSpinner = 'Cargando Bienes y Servicios'
+      (this as any).mensajeSpinner = 'Cargando Bienes y Servicios'
       this.itemBienes = await this.apiService.getBienes({periodo: this.periodo, programa: this.programa, departamento: this.departamento, atribucion: this.atribucion});
       this.itemBienes.forEach(item => {
         item.cantidad = 1;
@@ -94,7 +94,7 @@ export class BienesComponent implements OnInit {
       this.itemBienesTotal = this.itemBienes.reduce((acc: number, bien: any) => acc + parseFloat(bien.costo_total), 0)
       console.log(this.presupuesto)
 
-      this.mensajeSpinner = 'Cargando Proyectos'
+      (this as any).mensajeSpinner = 'Cargando Proyectos'
       this.proyectos = await this.apiService.getProyectos({periodo: this.valor_periodo, programa: this.programa});
 
       this.proyectos.forEach((elem: any) => {
@@ -250,10 +250,10 @@ export class BienesComponent implements OnInit {
   async saveInformation() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Validando datos'
+      (this as any).mensajeSpinner = 'Validando datos'
       await this.validaData()
 
-      this.mensajeSpinner = 'Almacenando Bienes'
+      (this as any).mensajeSpinner = 'Almacenando Bienes'
       let response = await this.apiService.almacenaBienes({
         periodo: this.periodo,
         programa: this.programa,
@@ -294,7 +294,7 @@ export class BienesComponent implements OnInit {
 
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
-      this.mensajeSpinner = 'Eliminando Bien'
+      (this as any).mensajeSpinner = 'Eliminando Bien'
 
       try {
         const response = await this.apiService.deleteBienes({bien: item})
@@ -340,11 +340,11 @@ toggleTooltip(index: number) {
 }
 
 
-/* this.mensajeSpinner = 'Validando...'
+/* (this as any).mensajeSpinner = 'Validando...'
     this.lcargando.ctlSpinner(true)
     this.validaData()
       .then(() => {
-        this.mensajeSpinner = 'Almacenando Bienes'
+        (this as any).mensajeSpinner = 'Almacenando Bienes'
         this.apiService.almacenaBienes({
           departamento: { id: this.atribucion.id_departamento },
           atribucion: { id: this.atribucion.id },

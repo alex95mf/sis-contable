@@ -18,7 +18,7 @@ standalone: false,
 export class DescuentosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = []
 
   tbl_porcentajes: any[] = []
@@ -134,7 +134,7 @@ export class DescuentosComponent implements OnInit {
 
   async getDescuentos() {
     try {
-      this.mensajeSpinner = 'Cargando Descuentos'
+      (this as any).mensajeSpinner = 'Cargando Descuentos'
       const response = await this.apiService.getDescuentos({params: {filter: this.filter, paginate: this.paginate}})
       console.log(response)
       response.data.data.forEach((element: any) => {
@@ -152,7 +152,7 @@ export class DescuentosComponent implements OnInit {
 
   async cargaPeriodos() {
     try {
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       const response = await this.apiService.getPeriodos()
       console.log(response)
       this.cmb_periodo = response.data
@@ -164,7 +164,7 @@ export class DescuentosComponent implements OnInit {
 
   async cargaConceptos() {
     try {
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       const response = await this.apiService.getConceptos()
       console.log(response)
       this.cmb_concepto = response.data
@@ -215,7 +215,7 @@ export class DescuentosComponent implements OnInit {
         
       }
       console.log(data)
-      this.mensajeSpinner = 'Inicializando Descuentos'
+      (this as any).mensajeSpinner = 'Inicializando Descuentos'
       this.lcargando.ctlSpinner(true);
       this.apiService.inicializarDescuentoSp(data).subscribe(res => {
         console.log(res)
@@ -254,7 +254,7 @@ export class DescuentosComponent implements OnInit {
         
       }
       console.log(data)
-      this.mensajeSpinner = 'Calculando Descuentos'
+      (this as any).mensajeSpinner = 'Calculando Descuentos'
       this.lcargando.ctlSpinner(true);
       this.apiService.calcularDescuentoSp(data).subscribe(res => {
         console.log(res)

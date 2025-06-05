@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ['./seguridad.component.scss']
 })
 export class SeguridadComponent implements OnDestroy, OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('mdaCategorias') ng_categorias: NgSelectComponent;
 
@@ -222,7 +222,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
     }, 10);
 
     setTimeout(() => {
-      this.mensajeSpinner = 'Cargando datos Iniciales'
+      (this as any).mensajeSpinner = 'Cargando datos Iniciales'
       this.lcargando.ctlSpinner(true);
       this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
       let id_rol = this.dataUser.id_rol;
@@ -985,7 +985,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
       id_user: dt.id_usuario
     }
 
-    this.mensajeSpinner = "Seteando valores...";
+    (this as any).mensajeSpinner = "Seteando valores...";
     this.lcargando.ctlSpinner(true);
     this.seguridadServices.updateUser(data).subscribe(
       async (res: any) => {
@@ -1294,7 +1294,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
         ip: this.commonServices.getIpAddress()
       }
 
-      this.mensajeSpinner = 'Eliminando Resolucion'
+      (this as any).mensajeSpinner = 'Eliminando Resolucion'
       this.lcargando.ctlSpinner(true)
       this.seguridadServices.deleteAnexo(data).subscribe(
         res => {

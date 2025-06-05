@@ -19,7 +19,7 @@ export class CierreSuperavitComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   vmButtons: Array<Botonera> = [];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   documentos: Array<any> = [];
 
@@ -104,7 +104,7 @@ export class CierreSuperavitComponent implements OnInit {
   async getDocumentos() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Documentos'
+      (this as any).mensajeSpinner = 'Cargando Documentos'
       let documentos: Array<any> = await this.apiService.getDocumentos({params: {filter: this.filter}})
       documentos.map((item: any) => {
         Object.assign(item, {
@@ -151,7 +151,7 @@ export class CierreSuperavitComponent implements OnInit {
 
     if (result.isConfirmed) {
 
-      this.mensajeSpinner = "Verificando período contable";
+      (this as any).mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
 
       let data = {
@@ -165,7 +165,7 @@ export class CierreSuperavitComponent implements OnInit {
               Object.assign(this.documento, { saldos: this.dataSource.filteredData })
               this.lcargando.ctlSpinner(true)
               try {
-                this.mensajeSpinner = 'Almacenando Cierre'
+                (this as any).mensajeSpinner = 'Almacenando Cierre'
                 let response = await this.apiService.setDocumento({ documento: this.documento })
                 console.log(response)
                 //

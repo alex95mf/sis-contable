@@ -19,7 +19,7 @@ standalone: false,
 })
 export class ModalBusquedaReformaGeneralComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+  
 
 
   dataUser: any;
@@ -121,7 +121,7 @@ export class ModalBusquedaReformaGeneralComponent implements OnInit {
   }
 
   cargcarReformas() {
-    this.mensajeSpinner = "Cargando lista de Reformas...";
+    (this as any).mensajeSpinner = "Cargando lista de Reformas...";
     this.lcargando.ctlSpinner(true);
     if(this.tipoReforma == 'RI'){
       this.filter.estado_notificacion = 'A'

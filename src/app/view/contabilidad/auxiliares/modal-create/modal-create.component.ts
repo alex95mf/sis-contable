@@ -19,7 +19,7 @@ export class ModalCreateComponent implements OnInit {
   @Input() cmb_referencia: Array<any>;
   @Input() cmb_naturaleza: Array<any>;
   fTitle: string = 'Creacion de Auxiliar';
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Array<Botonera> = [];
 
   constructor(

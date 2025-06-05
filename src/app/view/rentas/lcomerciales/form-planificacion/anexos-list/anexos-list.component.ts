@@ -89,7 +89,7 @@ export class AnexosListComponent implements OnInit {
             ip: this.commonService.getIpAddress()
           }
       
-          this.mensajeSpinner = 'Eliminando anexo'
+          (this as any).mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true)
       
           this.apiService.deleteAnexo(data).subscribe(

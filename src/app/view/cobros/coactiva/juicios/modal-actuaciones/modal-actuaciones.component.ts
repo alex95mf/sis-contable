@@ -21,7 +21,7 @@ export class ModalActuacionesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Input() juicio: any;
   @Input() permissions: any;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   fTitle: string = "Agregar Actuaciones";
   vmButtons: any[] = [];
   dataUser: any;
@@ -123,7 +123,7 @@ export class ModalActuacionesComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Catalogos'
+      (this as any).mensajeSpinner = 'Cargando Catalogos'
       let catalogos = await this.apiService.getCatalogsAsync({params: "'COB_JUICIO_ESTADO','COB_TIPO_ACTUACION'"})
       // console.log(catalogos)
       this.estados = catalogos['COB_JUICIO_ESTADO']
@@ -140,7 +140,7 @@ export class ModalActuacionesComponent implements OnInit {
   }
 
   getJuicio() {
-    this.mensajeSpinner = "Cargando Juicio"
+    (this as any).mensajeSpinner = "Cargando Juicio"
     this.lcargando.ctlSpinner(true)
     this.apiService.getJuicio(this.juicio).subscribe(
       (res: any) => {
@@ -187,7 +187,7 @@ export class ModalActuacionesComponent implements OnInit {
       }
 
       Object.assign(this.juicio, { valor: this.valor })
-      this.mensajeSpinner = 'Almancenando Actuacion'
+      (this as any).mensajeSpinner = 'Almancenando Actuacion'
       this.lcargando.ctlSpinner(true)
 
       console.log(data)

@@ -28,7 +28,7 @@ export class ArriendoterrenosComponent implements OnInit {
   validaciones = new ValidacionesFactory
 
   fTitle = "Generación de Arriendo de Terreno"
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   dataUser: any;
   permissions: any;
   empresLogo: any;
@@ -156,7 +156,7 @@ export class ArriendoterrenosComponent implements OnInit {
     this.commonVarService.selectListLiqArriendo.asObservable().subscribe(
       (res) => {
         console.log(res)
-        this.mensajeSpinner = 'Cargando datos de la liquidación...';
+        (this as any).mensajeSpinner = 'Cargando datos de la liquidación...';
         this.lcargando.ctlSpinner(true)
         this.restoreForm(false, false);
         this.formReadOnly = true;
@@ -305,7 +305,7 @@ export class ArriendoterrenosComponent implements OnInit {
 
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
 
@@ -899,7 +899,7 @@ calcTotal() {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          this.mensajeSpinner = 'Verificando período contable...';
+          (this as any).mensajeSpinner = 'Verificando período contable...';
           this.lcargando.ctlSpinner(true);
           let datos = {
             "anio": Number(moment(this.fecha).format('YYYY')),
@@ -910,7 +910,7 @@ calcTotal() {
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
 
-                  this.mensajeSpinner = 'Generando liquidación...';
+                  (this as any).mensajeSpinner = 'Generando liquidación...';
                   this.lcargando.ctlSpinner(true);
                   this.liquidacion.detalles = [];
                   this.liquidacion.fk_lote = this.propiedadActive.id;
@@ -994,7 +994,7 @@ calcTotal() {
     let data = {
       concepto: 'AR'
     }
-    this.mensajeSpinner = 'Validadando Sta...';
+    (this as any).mensajeSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
 
     this.serArrt.getStaConcepto(data).subscribe(

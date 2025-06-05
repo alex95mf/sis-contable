@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./departamento.component.scss']
 })
 export class DepartamentoComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -112,7 +112,7 @@ export class DepartamentoComponent implements OnInit {
 
 
   cargarDepartamento() {
-    this.mensajeSpinner = 'Cargar Departamento... '
+    (this as any).mensajeSpinner = 'Cargar Departamento... '
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {
@@ -184,7 +184,7 @@ export class DepartamentoComponent implements OnInit {
 
   deleteConcepto(id){
     console.log(id);
-    this.mensajeSpinner = 'eliminar Departamento... '
+    (this as any).mensajeSpinner = 'eliminar Departamento... '
     this.lcargando.ctlSpinner(true);
     Swal.fire({
       title: "Atención",

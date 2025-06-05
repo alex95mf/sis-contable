@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ModalCodigoBienesComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -127,7 +127,7 @@ export class ModalCodigoBienesComponent implements OnInit {
   }
 
   cargarDocumentos() {
-    this.mensajeSpinner = "Cargando listado de los codigos de bienes...";
+    (this as any).mensajeSpinner = "Cargando listado de los codigos de bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {

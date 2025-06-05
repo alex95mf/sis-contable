@@ -24,7 +24,7 @@ standalone: false,
 export class ListadoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
-  mensajeSpinner: string = "Cargando...";
+  
   estadosList: any[] = [
     { value: 'A', label: 'Activo' },
     { value: 'I', label: 'Inactivo' },
@@ -157,7 +157,7 @@ export class ListadoComponent implements OnInit {
 
 
   cargarAreas() {
-   // this.mensajeSpinner = "Cargando listado de Áreas...";
+   // (this as any).mensajeSpinner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -207,7 +207,7 @@ export class ListadoComponent implements OnInit {
         empleado: null,
         departamento: this.grupo == 0 ? null : this.grupo,
       }
-/*       this.mensajeSpinner = "Cargando...";
+/*       (this as any).mensajeSpinner = "Cargando...";
       this.lcargando.ctlSpinner(true); */
       this.reportService.getPersonalDe(data).subscribe(res => {
         /* this.lcargando.ctlSpinner(false); */
@@ -245,7 +245,7 @@ export class ListadoComponent implements OnInit {
     }
 
   cargarDepartamentos(event) {
-  //  this.mensajeSpinner = "Cargando listado de Departamentos...";
+  //  (this as any).mensajeSpinner = "Cargando listado de Departamentos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

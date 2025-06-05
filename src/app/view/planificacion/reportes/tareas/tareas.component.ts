@@ -95,7 +95,7 @@ export class TareasComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiService.getPeriodos();
       console.log(periodos)
       this.cmb_periodo = periodos;
@@ -113,7 +113,7 @@ export class TareasComponent implements OnInit {
     try {
       this.metas = [];
       this.totales = [];
-      this.mensajeSpinner = 'Obteniendo Tareas por Meta'
+      (this as any).mensajeSpinner = 'Obteniendo Tareas por Meta'
       let metas = await this.apiService.getMetasTareas({periodo: this.periodoSelected});
       console.log(metas)
       this.metas = Object.keys(metas)
@@ -148,7 +148,7 @@ export class TareasComponent implements OnInit {
 
   exportarExcel = () => {
     let excelData = []
-    this.mensajeSpinner = "Descargando Listado"
+    (this as any).mensajeSpinner = "Descargando Listado"
     this.lcargando.ctlSpinner(true)
     try {
       this.metas.forEach((meta: string) => {

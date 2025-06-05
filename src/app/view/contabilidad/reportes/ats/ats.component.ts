@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./ats.component.scss']
 })
 export class AtsComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(DataTableDirective)
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
@@ -40,7 +40,7 @@ export class AtsComponent implements OnInit {
 
   constructor(
     private commonService: CommonService,
-    private toastr: ToastrService, 
+    private toastr: ToastrService,
     private rprtatsService: RprtAtsService,
     private excelService: ExcelService,
   ) { }
@@ -72,7 +72,7 @@ export class AtsComponent implements OnInit {
     }
 
     this.commonService.getPermisionsGlobas(data).subscribe(res => {
-     
+
       this.permisions = res['data'];
 
       this.permiso_ver = this.permisions[0].abrir;
@@ -83,7 +83,7 @@ export class AtsComponent implements OnInit {
         //this.vmButtons = [];
         this.lcargando.ctlSpinner(false);
 
-      } 
+      }
 
     }, error => {
       this.lcargando.ctlSpinner(false);
@@ -98,7 +98,7 @@ export class AtsComponent implements OnInit {
           this.EventoCargaInfoAts();
         break;
         case "EXCEL":
-          this.ExportarExcelAts();       
+          this.ExportarExcelAts();
         break;
         case "XML":
           this.GeneraXMlAts()
@@ -106,12 +106,12 @@ export class AtsComponent implements OnInit {
         case "LIMPIAR":
         //this.informaciondtlimpiar();
         break;
-		}  	 
+		}
 	}
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = "Carga Inicial"
+      (this as any).mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.rprtatsService.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -133,11 +133,11 @@ export class AtsComponent implements OnInit {
     //   year = this.selected_anio;
     // }
     year = this.selected_anio;
-    
+
     this.lcargando.ctlSpinner(true);
 
     this.rprtatsService.ObtenerAtsXml(year,this.mes_actual,this.dataUser.id_usuario).subscribe(resAts => {
-    
+
       const jsonObj = {
         iva:  JSON.parse(resAts[0]['data'].replaceAll('detalleair','detalleAir').replaceAll('detallecompras','detalleCompras').replaceAll('detalleanulados','detalleAnulados'))
       };
@@ -152,8 +152,8 @@ export class AtsComponent implements OnInit {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message);
     })
-    
-    
+
+
   }
 
 
@@ -176,16 +176,16 @@ export class AtsComponent implements OnInit {
         }else{
           xml += obj[prop];
         }
-        
-        
+
+
       }
       xml += obj[prop] instanceof Array ? '' : '</' + prop + '>\n';
     }
     xml = xml.replace(/<\/?[0-9]{1,}>/g, '');
     return xml;
   }
-  
-  
+
+
 
 
 
@@ -220,38 +220,38 @@ groupChildren(obj) {
     console.log(this.dataUser.id_usuario)
     this.rprtatsService.registerAtsGeneral(year,this.mes_actual,this.dataUser.id_usuario).subscribe(res => {
 
-     
+
       this.rprtatsService.getReporteAtsCompras(year,this.mes_actual,this.dataUser.id_usuario).subscribe(res => {
 
         this.ELementAtsCompras = res;
-  
+
         this.rprtatsService.getReporteAtsRetenciones(year,this.mes_actual,this.dataUser.id_usuario).subscribe(resAtsRete => {
-    
+
           this.ELementAtsRetenciones = resAtsRete;
 
           this.rprtatsService.getReporteAtsVentas(year,this.mes_actual,this.dataUser.id_usuario).subscribe(resAtsVent => {
-    
+
             this.ELementAtsVentas = resAtsVent;
 
             this.rprtatsService.registerAtsAnulados(year,this.mes_actual,this.dataUser.id_usuario).subscribe(resAtsAnula => {
-      
+
               this.ElementAtsAnulados = resAtsAnula;
               this.lcargando.ctlSpinner(false);
 
             this.vmButtons[1].habilitar = false;
             this.vmButtons[2].habilitar = false;
-      
+
           }, error => {
             this.lcargando.ctlSpinner(false);
             this.toastr.info(error.error.message);
           })
-    
+
         }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.message);
         })
-  
-  
+
+
       }, error => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -301,10 +301,10 @@ groupChildren(obj) {
   }
 
   ObtenerPeriodo(anio: any) {
-    this.selected_anio = anio;  
+    this.selected_anio = anio;
   }
 
-  
+
 
   ChangeMesCierrePeriodos(evento: any){ this.mes_actual = evento;}
 

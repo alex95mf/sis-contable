@@ -20,7 +20,7 @@ standalone: false,
 })
 export class SaldosEmpleadoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = [];
 
   filter: any = {
@@ -79,7 +79,7 @@ export class SaldosEmpleadoComponent implements OnInit {
 
   consultar = async () => {
     try {
-      this.mensajeSpinner = 'Cargando Saldos'
+      (this as any).mensajeSpinner = 'Cargando Saldos'
       const response: any = await this.apiService.getSaldos({params: { filter: this.filter }})
       console.log(response)
       response.forEach((element: any) => {
@@ -154,7 +154,7 @@ export class SaldosEmpleadoComponent implements OnInit {
 
   GenerarReporteExcel = async () => {
 
-		this.mensajeSpinner = "Generando Archivo Excel...";
+		(this as any).mensajeSpinner = "Generando Archivo Excel...";
 		this.lcargando.ctlSpinner(true);
 		// let data = {
 		// 	dateFrom: moment(this.filter.fecha_inicio).format('YYYY-MM-DD'),

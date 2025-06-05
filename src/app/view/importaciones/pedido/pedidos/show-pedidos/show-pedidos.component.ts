@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./show-pedidos.component.scss']
 })
 export class ShowPedidosComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

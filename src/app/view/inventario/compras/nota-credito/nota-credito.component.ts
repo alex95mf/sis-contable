@@ -66,7 +66,7 @@ export class NotaCreditoComponent implements OnInit {
   customer: any;
   processingtwo: boolean = false;
   ctr: any = 0;
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
   flag = false;

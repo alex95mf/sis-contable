@@ -19,11 +19,11 @@ standalone: false,
   styleUrls: ['./tablas-config.component.scss']
 })
 export class TablasConfigComponent implements OnInit {
- 
-  mensajeSpinner: string = "Cargando...";
+
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Tablas Configuración";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -39,7 +39,7 @@ export class TablasConfigComponent implements OnInit {
 
   validaciones = new ValidacionesFactory;
 
-  constructor( 
+  constructor(
     private tablasConfigSrv: TablasConfigService,
     private commonSrv: CommonService,
     private toastr: ToastrService,
@@ -104,7 +104,7 @@ export class TablasConfigComponent implements OnInit {
     setTimeout(()=> {
       this.validaPermisos();
       this.cargarTablasConfig();
-      
+
     }, 0);
   }
 
@@ -113,12 +113,12 @@ export class TablasConfigComponent implements OnInit {
       params: "'REN_TIPO_TABLA_TASA'",
     };
     this.tablasConfigSrv.getCatalogo(data).subscribe(
-      
+
       (res) => {
         this.mensajeSpinner= "Cargando...";
         this.lcargando.ctlSpinner(false);
        //console.log(res);
-     
+
         this.tablas =  res["data"]["REN_TIPO_TABLA_TASA"];
         //console.log(this.tablas);
       },
@@ -128,10 +128,10 @@ export class TablasConfigComponent implements OnInit {
       }
     );
   }
- 
+
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -158,10 +158,10 @@ export class TablasConfigComponent implements OnInit {
         this.toastr.info(error.error.message);
       }
     );
-  } 
-  
+  }
+
   cargarTablasConfig(flag: boolean = false) {
-    this.mensajeSpinner = "Cargando listado de tablas...";
+    (this as any).mensajeSpinner = "Cargando listado de tablas...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1
@@ -172,7 +172,7 @@ export class TablasConfigComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    
+
     this.tablasConfigSrv.getTablasConfig(data).subscribe(
       (res) => {
         //console.log(res);
@@ -194,7 +194,7 @@ export class TablasConfigComponent implements OnInit {
   }
 
   showTablasConfigForm(isNew:boolean, data?:any) {
-    
+
     if (!isNew && this.permissions.consultar == "0") {
       this.toastr.warning("No tiene permisos para consultar Tablas.", this.fTitle);
     } else if (isNew && this.permissions.guardar == "0") {
@@ -217,7 +217,7 @@ export class TablasConfigComponent implements OnInit {
   metodoGlobal(event){
     switch (event.items.boton.texto) {
       case " NUEVO":
-        this.showTablasConfigForm(true, {}); 
+        this.showTablasConfigForm(true, {});
        break;
       case " MOSTRAR INACTIVOS":
         //this.changeShowInactive(this.showInactive);
@@ -244,6 +244,6 @@ export class TablasConfigComponent implements OnInit {
     //this.cargarTablasConfig();
   }
 
- 
+
 
 }

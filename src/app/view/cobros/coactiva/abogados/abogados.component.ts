@@ -16,7 +16,7 @@ standalone: false,
   styleUrls: ['./abogados.component.scss']
 })
 export class AbogadosComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
   dataUser: any;
@@ -40,9 +40,9 @@ export class AbogadosComponent implements OnInit {
     private modalService: NgbModal,
     private commonVrs:CommonVarService,
     private commonSrv: CommonService,
-  ) 
-  
-  { 
+  )
+
+  {
     this.commonVrs.updateAbogados.asObservable().subscribe(
       (res)=>{
         if (res) {
@@ -78,7 +78,7 @@ export class AbogadosComponent implements OnInit {
         clase: "btn btn-success boton btn-sm",
         habilitar: false,
       },
-      
+
     ];
 
     this.filter = {
@@ -104,7 +104,7 @@ export class AbogadosComponent implements OnInit {
 
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -135,7 +135,7 @@ export class AbogadosComponent implements OnInit {
 
 
   cargarAbogados() {
-    this.mensajeSpinner = "Cargando listado de Abogados...";
+    (this as any).mensajeSpinner = "Cargando listado de Abogados...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -157,9 +157,9 @@ export class AbogadosComponent implements OnInit {
         this.paginate.length = res['data']['total'];
         if (res['data']['current_page'] == 1) {
           this.abogados = res['data']['data'];
-        } 
+        }
         else {
-          this.abogados = Object.values(res['data']['data']);  
+          this.abogados = Object.values(res['data']['data']);
         }
         this.lcargando.ctlSpinner(false);
       },
@@ -206,7 +206,7 @@ export class AbogadosComponent implements OnInit {
 
 
   }
-  
+
 
   editarAbogado(isNew:boolean, data?:any) {
     if (!isNew && this.permissions.consultar == "0") {

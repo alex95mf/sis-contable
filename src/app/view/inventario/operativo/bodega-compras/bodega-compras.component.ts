@@ -22,7 +22,7 @@ standalone: false,
 })
 export class BodegaComprasComponent implements OnInit {
   /* Datatable options */
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;

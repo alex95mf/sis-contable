@@ -63,7 +63,7 @@ export class ConciliacionComponent implements OnInit {
 
   vmButtons: any = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   selectAllChecked: boolean = true;
@@ -366,7 +366,7 @@ export class ConciliacionComponent implements OnInit {
     }
 
   getTableConciliation() {
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
 //console.log('aqui 1')
 console.log(moment(this.selected_anio).format('YYYY'))
@@ -561,7 +561,7 @@ console.log(moment(this.selected_anio).format('YYYY'))
     this.lcargando.ctlSpinner(true);
 
 
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.cslSrv.getConciliaciones(data).subscribe(res => {
       console.log(res)
@@ -857,7 +857,7 @@ compararMesConFecha(mes: number, fecha: any): boolean {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          this.mensajeSpinner = "Verificando período contable";
+          (this as any).mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(moment(this.selected_anio).format('YYYY'),),
@@ -1223,7 +1223,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
       }).then((result) => {
         if (result.isConfirmed) {
 
-          this.mensajeSpinner = "Verificando período contable";
+          (this as any).mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(moment(this.selected_anio).format('YYYY'),),
@@ -1317,7 +1317,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
         }).then((result) => {
           if (result.isConfirmed) {
 
-            this.mensajeSpinner = "Verificando período contable";
+            (this as any).mensajeSpinner = "Verificando período contable";
             this.lcargando.ctlSpinner(true);
             let data = {
               "anio": Number(moment(this.selected_anio).format('YYYY'),),
@@ -1572,7 +1572,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
   }
 
   conultaMovimientoBancarios() {
-    this.mensajeSpinner = "Cargando Movimientos Bancarios...";
+    (this as any).mensajeSpinner = "Cargando Movimientos Bancarios...";
     this.lcargando.ctlSpinner(true);
     //this.filter.mes_actual_movimiento = Number( this.filter.mes_actual_movimiento)
     let data = {
@@ -1600,7 +1600,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
 
   actualizarConciliacion() {
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let data = {
       "anio": Number(moment(this.selected_anio).format('YYYY'),),
@@ -1611,7 +1611,7 @@ event.data.fecha_conciliacion = this.filter.fecha_conciliacion;
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
 
-        this.mensajeSpinner = "Actualizando Conciliación...";
+        (this as any).mensajeSpinner = "Actualizando Conciliación...";
         this.lcargando.ctlSpinner(true);
         //this.filter.mes_actual_movimiento = Number( this.filter.mes_actual_movimiento)
         let data2 = {

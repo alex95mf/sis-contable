@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ModalEditionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   fTitle: any = "Recepción de Notificación de Expediente";
 
   @Input() expediente: any;
@@ -108,7 +108,7 @@ export class ModalEditionComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     let data = {
       params: "'TIPO_NOTIFICADOR'",
     };
@@ -146,7 +146,7 @@ export class ModalEditionComponent implements OnInit {
     }
 
     Object.assign(this.expediente, this.data, {foto: this.fotos[0]?.recurso})
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     // console.log({ expediente: this.expediente })
     // return
@@ -169,7 +169,7 @@ export class ModalEditionComponent implements OnInit {
   }
 
   cargaFoto(archivos) {
-    this.mensajeSpinner = 'Cargando fotos...';
+    (this as any).mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 5) {
       for (let i = 0; i < archivos.length; i++) {

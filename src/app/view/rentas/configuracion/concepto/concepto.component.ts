@@ -16,7 +16,7 @@ standalone: false,
   styleUrls: ["./concepto.component.scss"],
 })
 export class ConceptoComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   vmButtons: any = [];

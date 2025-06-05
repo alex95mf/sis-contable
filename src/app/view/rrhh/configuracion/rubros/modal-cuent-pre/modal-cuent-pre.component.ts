@@ -17,7 +17,7 @@ export class ModalCuentPreComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
-  mensajeSpinner: string = "Cargando...";
+  
 
   fTitle: string;
 

@@ -18,10 +18,10 @@ standalone: false,
 })
 export class PermisosEmitidosComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Aprobación de Permisos de construcción";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -67,7 +67,7 @@ export class PermisosEmitidosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     this.today = new Date();
@@ -98,7 +98,7 @@ export class PermisosEmitidosComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
 
     this.empresLogo = this.dataUser.logoEmpresa;
 
@@ -121,7 +121,7 @@ export class PermisosEmitidosComponent implements OnInit {
       }
     )
   }
-  
+
   estadoToPrint(estado) {
     if(estado === 'E'){
       return "Emitido"
@@ -133,10 +133,10 @@ export class PermisosEmitidosComponent implements OnInit {
       return "Todos"
     }
   }
-  
+
   cargarLiquidaciones() {
 
-    this.mensajeSpinner = "Cargando lista de liquidaciones...";
+    (this as any).mensajeSpinner = "Cargando lista de liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -204,7 +204,7 @@ change(event) {
 }
 
 aprobar(id) {
-    
+
   Swal.fire({
     icon: "warning",
     title: "¡Atención!",
@@ -218,17 +218,17 @@ aprobar(id) {
     confirmButtonColor: '#4DBD74',
   }).then((result)=>{
     if(result.isConfirmed) {
-      this.mensajeSpinner = 'Verificando período contable...';
+      (this as any).mensajeSpinner = 'Verificando período contable...';
       this.lcargando.ctlSpinner(true);
       let datos = {
         "anio": Number(moment().format('YYYY')),
         "mes": Number(moment().format('MM')),
       }
         this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-         
+
         /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
-            this.mensajeSpinner = "Aprobando liquidacion...";
+            (this as any).mensajeSpinner = "Aprobando liquidacion...";
             this.lcargando.ctlSpinner(true);
             this.apiSrv.aprobarLiquidacion(id).subscribe(
               (res) => {
@@ -246,7 +246,7 @@ aprobar(id) {
                     //cancelButtonColor: '#F86C6B',
                     confirmButtonColor: '#20A8D8',
                   });
-      
+
                 } else {
                   this.lcargando.ctlSpinner(false);
                   Swal.fire({
@@ -273,12 +273,12 @@ aprobar(id) {
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
           }
-    
+
         }, error => {
             this.lcargando.ctlSpinner(false);
             this.toastr.info(error.error.mesagge);
         })
-      
+
     }
   });
 
@@ -302,18 +302,18 @@ anular(id) {
 
 
 
-      this.mensajeSpinner = 'Verificando período contable...';
+      (this as any).mensajeSpinner = 'Verificando período contable...';
       this.lcargando.ctlSpinner(true);
       let datos = {
         "anio": Number(moment().format('YYYY')),
         "mes": Number(moment().format('MM')),
       }
         this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-         
+
         /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
-          
-            this.mensajeSpinner = "Anulando liquidacion...";
+
+            (this as any).mensajeSpinner = "Anulando liquidacion...";
             this.lcargando.ctlSpinner(true);
             this.apiSrv.anularLiquidacion(id).subscribe(
               (res) => {
@@ -331,7 +331,7 @@ anular(id) {
                     //cancelButtonColor: '#F86C6B',
                     confirmButtonColor: '#20A8D8',
                   });
-      
+
                 } else {
                   this.lcargando.ctlSpinner(false);
                   Swal.fire({
@@ -357,17 +357,17 @@ anular(id) {
             this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
             this.lcargando.ctlSpinner(false);
           }
-    
+
         }, error => {
             this.lcargando.ctlSpinner(false);
             this.toastr.info(error.error.mesagge);
         })
-     
+
     }
   });
-  
+
 }
-  
+
 expandDetallePermiso(c) {
   const modalInvoice = this.modalService.open(PermisoDetComponent,{
     size:"md",

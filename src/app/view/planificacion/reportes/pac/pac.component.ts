@@ -102,7 +102,7 @@ export class PacComponent implements OnInit {
 
   validaPermisos() {
     /** Obtiene los permisos del usuario y valida si puede trabajar sobre el formulario */
-    this.mensajeSpinner = 'Cargando Permisos de Usuario'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     let params = {
@@ -133,18 +133,18 @@ export class PacComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       this.periodos = await this.api.getPeriodos();
 
-      this.mensajeSpinner = 'Cargando Programas'
+      (this as any).mensajeSpinner = 'Cargando Programas'
       this.programas = await this.api.getProgramas();
       this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
 
-      this.mensajeSpinner = 'Cargando Departamentos'
+      (this as any).mensajeSpinner = 'Cargando Departamentos'
       this.departamentos = await this.api.getDepartamentos();
       this.departamentos.map((departamento: any) => Object.assign(departamento, { label: `${departamento.descripcion}. ${departamento.valor}`}))
 
-      // this.mensajeSpinner = 'Cargando Datos Adicionales'
+      // (this as any).mensajeSpinner = 'Cargando Datos Adicionales'
       // let response: any = await this.api.getCatalogo({params: ""})
       
       
@@ -180,11 +180,11 @@ export class PacComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
       // Obtener la Mision ?
-      this.mensajeSpinner = 'Obteniendo Mision'
+      (this as any).mensajeSpinner = 'Obteniendo Mision'
       this.mision = await this.api.getMision({departamento: this.departamentoObjectSelected})
 
       // Obtener las Compras
-      this.mensajeSpinner = 'Cargando Datos'
+      (this as any).mensajeSpinner = 'Cargando Datos'
       const bienesResponse = await this.api.getBienesPlus({periodo: this.periodoSelected, departamento: this.departamentoObjectSelected})
       console.log(bienesResponse)
       bienesResponse.forEach((element: any) => Object.assign(element, { 
@@ -229,7 +229,7 @@ export class PacComponent implements OnInit {
   }
 
   /* getProgramas() {
-    this.mensajeSpinner = 'Cargando Programas'
+    (this as any).mensajeSpinner = 'Cargando Programas'
     this.lcargando.ctlSpinner(true)
     this.api.getProgramas().subscribe(
       res => {
@@ -260,7 +260,7 @@ export class PacComponent implements OnInit {
     this.departamentos = []
     this.compras = []
     this.vmButtons[0].habilitar = true
-    this.mensajeSpinner = 'Cargando Departamentos'
+    (this as any).mensajeSpinner = 'Cargando Departamentos'
     this.lcargando.ctlSpinner(true)
     this.api.getDepartamentos(data).subscribe(
       res => {
@@ -289,7 +289,7 @@ export class PacComponent implements OnInit {
     let data = {
       departamento: evt.nombre
     }
-    this.mensajeSpinner = 'Cargando Mision'
+    (this as any).mensajeSpinner = 'Cargando Mision'
     this.lcargando.ctlSpinner(true)
     this.api.getMision(data).subscribe(
       res => {
@@ -316,7 +316,7 @@ export class PacComponent implements OnInit {
     }
     this.compras = []
     this.vmButtons[0].habilitar = false
-    this.mensajeSpinner = 'Cargando detalles'
+    (this as any).mensajeSpinner = 'Cargando detalles'
     // this.lcargando.ctlSpinner(true)
     this.api.getBienesPlus(data).subscribe(
       res => {

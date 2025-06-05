@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./show-comprobantes.component.scss']
 })
 export class ShowComprobantesComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
 

@@ -9,7 +9,7 @@ standalone: false,
   styleUrls: ['./multa-det.component.scss']
 })
 export class MultaDetComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent,{ static: false })
   lcargando: CcSpinerProcesarComponent;
 

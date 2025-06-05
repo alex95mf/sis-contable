@@ -33,7 +33,7 @@ export class TipoFacturaComponent implements OnInit {
   dtTrigger = new Subject();
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   parametros:any = {fechaDesde: "", fechaHasta: "", estadoSri: "PENDIENTE", idCliente: ""}
@@ -134,7 +134,7 @@ export class TipoFacturaComponent implements OnInit {
     dialogRef1.result.then((res) => {
 
       if(res.valor){
-        this.mensajeSpinner = "Generando XML por favor espere...";
+        (this as any).mensajeSpinner = "Generando XML por favor espere...";
         this.lcargando.ctlSpinner(true);
         try {
           this.procesoDual(valor);
@@ -278,7 +278,7 @@ export class TipoFacturaComponent implements OnInit {
     const dialogRef1 = this.confirmationDialogService.openDialogBD(MspreguntaComponent, { config: {}, }, dataPresentar );
     dialogRef1.result.then((res) => {
       if(res.valor){
-        this.mensajeSpinner = "Reprocesando Documento...";
+        (this as any).mensajeSpinner = "Reprocesando Documento...";
         this.lcargando.ctlSpinner(true);
 
         if(valor.estado_sri == "RECIBIDA"|| valor.estado_sri == "DEVUELTA"){
@@ -305,7 +305,7 @@ export class TipoFacturaComponent implements OnInit {
       this.validaciones.mensajeAdvertencia("Advertencia","El documento XML no se encuentra generado.");
     }
 
-    this.mensajeSpinner = "Extrayendo datos del XML...";
+    (this as any).mensajeSpinner = "Extrayendo datos del XML...";
     this.lcargando.ctlSpinner(true);
 
     this.facElectronicaService.editarXML({clave_acceso: item.codigo_acceso}).subscribe((datos:any)=>{
@@ -338,7 +338,7 @@ export class TipoFacturaComponent implements OnInit {
       return;
     }
 
-    this.mensajeSpinner = "Extrayendo datos del XML...";
+    (this as any).mensajeSpinner = "Extrayendo datos del XML...";
     this.lcargando.ctlSpinner(true);
     this.facElectronicaService.descargarXML({clave_acceso: item.codigo_acceso}).subscribe((datos:any)=>{
       const url = URL.createObjectURL(datos);
@@ -383,7 +383,7 @@ export class TipoFacturaComponent implements OnInit {
   recargar(){
     this.listado = [];
     this.validateDt = false;
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     if(this.dtElement.dtInstance){
       this.dtElement.dtInstance.then((dtInstance: any) => {
         dtInstance.destroy();
@@ -481,7 +481,7 @@ export class TipoFacturaComponent implements OnInit {
         if (res.valor) {
           datoEnviar.correo_receptor = res.lCorreo;
 
-          this.mensajeSpinner = "Anulando documento, por favor espere...";
+          (this as any).mensajeSpinner = "Anulando documento, por favor espere...";
           this.lcargando.ctlSpinner(true);
           this.facElectronicaService.anularDocumento(datoEnviar).subscribe((datos1:any)=>{
 
@@ -489,7 +489,7 @@ export class TipoFacturaComponent implements OnInit {
 
               this.facElectronicaService.obtenerRobot({idRobot: datos1.data}).subscribe((datos2:any)=>{
 
-                this.mensajeSpinner = ("Anulando documento, por favor espere... " + datos2.data.observacion);
+                (this as any).mensajeSpinner = ("Anulando documento, por favor espere... " + datos2.data.observacion);
 
                 if (datos2.data.estado == "F") {
                   clearInterval(this.timer);
@@ -579,7 +579,7 @@ export class TipoFacturaComponent implements OnInit {
       if(res.valor){
         console.log("respuesta: ", res)
         item.correoElectronico = res.lCorreo;
-        this.mensajeSpinner = "Enviando correo, por favor espere...";
+        (this as any).mensajeSpinner = "Enviando correo, por favor espere...";
         this.lcargando.ctlSpinner(true);
         this.facElectronicaService.enviarCorreoDocumentos(item).subscribe((datos:any)=>{
           this.lcargando.ctlSpinner(false);

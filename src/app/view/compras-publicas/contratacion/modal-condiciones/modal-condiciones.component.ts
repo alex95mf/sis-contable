@@ -22,7 +22,7 @@ export class ModalCondicionesComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+
   mensajeSpinner: string
 
   listacondiciones: any = {
@@ -103,7 +103,7 @@ export class ModalCondicionesComponent implements OnInit {
   async cargarFormasPago() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Formas de Pago'
+      (this as any).mensajeSpinner = 'Cargando Formas de Pago'
       let catalogo = await this.contratoService.getCatalogo({params: "'CMP_COND_FORMA_PAGO'"}) as any
       console.log(catalogo.data)
       //
@@ -264,7 +264,7 @@ validaCond() {
 
 
 
-            this.mensajeSpinner = "Verificando período contable";
+            (this as any).mensajeSpinner = "Verificando período contable";
   this.lcargando.ctlSpinner(true);
   let datos = {
     "anio": Number(moment().format('YYYY')),
@@ -275,7 +275,7 @@ validaCond() {
     /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
 
-        this.mensajeSpinner = "Cargando...";
+        (this as any).mensajeSpinner = "Cargando...";
         this.lcargando.ctlSpinner(true);
         let data = {
           listacondiciones: {

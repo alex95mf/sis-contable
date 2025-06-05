@@ -20,7 +20,7 @@ standalone: false,
 })
 export class ListBusquedaComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -120,7 +120,7 @@ export class ListBusquedaComponent implements OnInit {
   }
 
   cargarDocumentos() {
-    this.mensajeSpinner = "Cargando listado de productos...";
+    (this as any).mensajeSpinner = "Cargando listado de productos...";
     this.lcargando.ctlSpinner(true);
    // console.log(this.subgrupo)
 

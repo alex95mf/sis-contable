@@ -28,7 +28,7 @@ standalone: false,
 export class LiquidacionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de Liquidación (Tasas Varias)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -118,7 +118,7 @@ export class LiquidacionComponent implements OnInit {
   ) {
     this.commonVarService.selectListLiqPURen.asObservable().subscribe(
       (res) => {
-        //this.mensajeSpinner = 'Cargando datos de la Liquidación...';
+        //(this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
         //this.lcargando.ctlSpinner(true)
         this.restoreForm();
         this.formReadOnly = true;
@@ -157,7 +157,7 @@ export class LiquidacionComponent implements OnInit {
           }
         });
       //   if (this.liquidacion.fk_orden_inspeccion && this.liquidacion.fk_orden_inspeccion != 0) {
-      //     this.mensajeSpinner = 'Cargando datos de la Liquidación...';
+      //     (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
       //     this.lcargando.ctlSpinner(true);
       //     let data = {
       //       inspeccion: this.liquidacion.fk_orden_inspeccion
@@ -363,7 +363,7 @@ export class LiquidacionComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
@@ -430,7 +430,7 @@ export class LiquidacionComponent implements OnInit {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptos().subscribe(
       res => {
@@ -511,7 +511,7 @@ export class LiquidacionComponent implements OnInit {
   }
 
   cargarTablasConfig() {
-    this.mensajeSpinner = "Cargando listado de tablas...";
+    (this as any).mensajeSpinner = "Cargando listado de tablas...";
     // this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -594,7 +594,7 @@ export class LiquidacionComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          this.mensajeSpinner = 'Verificando período contable...';
+          (this as any).mensajeSpinner = 'Verificando período contable...';
           this.lcargando.ctlSpinner(true);
           let datos = {
             "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -605,7 +605,7 @@ export class LiquidacionComponent implements OnInit {
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
 
-                this.mensajeSpinner = 'Generando Liquidación...';
+                (this as any).mensajeSpinner = 'Generando Liquidación...';
                 this.lcargando.ctlSpinner(true);
                 this.liquidacion.fk_contribuyente = this.contribuyenteActive.id_cliente;
                 // this.liquidacion.fk_concepto = this.concepto.id;
@@ -848,7 +848,7 @@ export class LiquidacionComponent implements OnInit {
     let data = {
       concepto: 'TA'
     }
-    this.mensajeSpinner = 'Validadando Sta...';
+    (this as any).mensajeSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
 
     this.apiService.getStaConcepto(data).subscribe(
@@ -1036,7 +1036,7 @@ export class LiquidacionComponent implements OnInit {
 
   async getUltimoRegistro(skip: number = 0) {
     this.skip = skip
-    this.mensajeSpinner = 'Cargado Registro'
+    (this as any).mensajeSpinner = 'Cargado Registro'
     this.lcargando.ctlSpinner(true)
     try {
       const conceptos = [this.conceptosList[0].id]

@@ -24,9 +24,9 @@ export class ConfiguracionComponent implements OnInit {
   users = [];
   heightTr = 0;
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
- 
+
   usuarios: any = [];
   usuariosMultiselect: any = [];
   almacenUsuarios: any = []
@@ -93,21 +93,21 @@ export class ConfiguracionComponent implements OnInit {
     private commonVrs: CommonVarService,
     private serviceAdmin: TramitesService,
     private toastr: ToastrService,
-   
-    
+
+
   ) {
-    
+
     this.commonVrs.usuarioTramite.asObservable().subscribe(
       (res)=>{
         this.usuarios = [res['data'], ...this.usuarios]
-       
+
       }
     );
 
     this.commonVrs.selectTramites.asObservable().subscribe(
       (res)=>{
 
-        this.mensajeSpinner = "Cargando Tarea...";
+        (this as any).mensajeSpinner = "Cargando Tarea...";
         this.lcargando.ctlSpinner(true);
         this.tarea = res.tarea;
        console.log(res.tarea);
@@ -124,12 +124,12 @@ export class ConfiguracionComponent implements OnInit {
               data['rol']['id_flujo_roles'] = data['id_flujo_roles']
               this.rolesTramite = [data['rol'], ...this.rolesTramite];
 
-                 
+
             })
            // console.log(this.usuarios);
             this.serviceAdmin.getUsuariosPasos(res.tarea).subscribe(
               (res2)=>{
-                
+
 
                 this.listaPasos = res2['data']
                 this.lengthPasos = this.listaPasos.length
@@ -138,13 +138,13 @@ export class ConfiguracionComponent implements OnInit {
                 this.vmButtons[1]['habilitar'] = true;
                 this.vmButtons[2]['habilitar'] = false;
                 this.lcargando.ctlSpinner(false);
-                
+
 
               }
             )
           }
         )
-        
+
       }
     );
 
@@ -204,7 +204,7 @@ export class ConfiguracionComponent implements OnInit {
 
     this.validatePermission()
     // setTimeout(()=>{
-      
+
   //   // },50)
 
     setTimeout(() => {
@@ -218,7 +218,7 @@ export class ConfiguracionComponent implements OnInit {
     event.forEach((element,index)=>{
       console.log('escribir preguntas ' + element.id_usuario +' '+element.nombre)
     });
-    
+
   }
 
   getData() {
@@ -229,7 +229,7 @@ export class ConfiguracionComponent implements OnInit {
       { id: 4, name: 'BadkaG' },
       { id: 5, name: 'Baave' },
     ]);
-   
+
   }
 
   selectAllForDropdownItems(items: any[]) {
@@ -241,7 +241,7 @@ export class ConfiguracionComponent implements OnInit {
     };
 
     allSelect(items);
-   
+
   }
 
   applyStyles() {
@@ -266,7 +266,7 @@ export class ConfiguracionComponent implements OnInit {
         break;
       case "ACTUALIZAR":
         this.validateSaveContribuyente('update')
-        
+
         break;
       case "LIMPIAR":
         this.cancelar()
@@ -307,7 +307,7 @@ export class ConfiguracionComponent implements OnInit {
           pasos.nro_paso_no = null;
         }, 50);
         //console.log(pasos);
-      }else if(val == 'SP'){     
+      }else if(val == 'SP'){
         setTimeout(() => {
           pasos.siguiente_paso = null;
         }, 50);
@@ -358,7 +358,7 @@ export class ConfiguracionComponent implements OnInit {
 
 
   async validateSaveContribuyente(validacion) {
- 
+
     if (this.permissions.guardar == "0") {
       this.toastr.info("Usuario no tiene permiso para guardar");
     } else {
@@ -374,9 +374,9 @@ export class ConfiguracionComponent implements OnInit {
               "Seguro desea editar la Tarea?",
               "UPDATE_VENDEDOR"
             );
-            
+
           }
-          
+
         }
       });
     }
@@ -441,7 +441,7 @@ export class ConfiguracionComponent implements OnInit {
         let ultimoPaso= 0;
         this.listaPasos.map(
           (pasos, index)=>{
-          
+
           //  const duplicados = array =>
           //   new Set(array).size < array.length
           //   arrayP.push(duplicados([pasos['nro_paso'], pasos['siguiente_paso']]))
@@ -477,7 +477,7 @@ export class ConfiguracionComponent implements OnInit {
                 this.toastr.info("El nro de paso no puede ser igual al siguiente paso en el paso" + (index + 1));
                 flag = true;
              }
-             if(pasos['nro_paso']!= ultimoPaso['nro_paso'] && pasos['siguiente_paso']==0){ 
+             if(pasos['nro_paso']!= ultimoPaso['nro_paso'] && pasos['siguiente_paso']==0){
               this.toastr.info("No puede terminar el flujo en un paso anterior al paso " + ultimoPaso['nro_paso'] );
                 flag = true;
              }
@@ -505,13 +505,13 @@ export class ConfiguracionComponent implements OnInit {
         } else if(action == "UPDATE_VENDEDOR"){
           this.actualizarTarea()
         }
-        
+
       }
     });
   }
 
   actualizarTarea(){
-    this.mensajeSpinner = "Actualizando Tarea...";
+    (this as any).mensajeSpinner = "Actualizando Tarea...";
     this.lcargando.ctlSpinner(true);
     if(this.listaPasos.length > this.lengthPasos){
       //console.log('Ingreso actualizar pasos');
@@ -532,7 +532,7 @@ export class ConfiguracionComponent implements OnInit {
       }
       this.rolActualizar = [valor, ...this.rolActualizar]
     })
-    
+
     let data ={
       tarea: this.tarea,
       roles: this.rolActualizar,
@@ -565,7 +565,7 @@ export class ConfiguracionComponent implements OnInit {
 
   cargarUsuarios(){
     //console.log('ejecuto');
-    this.mensajeSpinner = "Cargando lista de Usuarios...";
+    (this as any).mensajeSpinner = "Cargando lista de Usuarios...";
     this.lcargando.ctlSpinner(true);
     this.serviceAdmin.getUsuarios({}).subscribe(
       (res)=>{
@@ -573,7 +573,7 @@ export class ConfiguracionComponent implements OnInit {
         res['data'].map((data)=>{
           data['id_flujo_usuarios'] =  0
         })
-        
+
         this.usuariospre = res['data']
         // console.log(this.usuariospre);
         this.lcargando.ctlSpinner(false);
@@ -583,7 +583,7 @@ export class ConfiguracionComponent implements OnInit {
 
 
   cargarRoles(){
-    this.mensajeSpinner = "Cargando Lista de Roles...";
+    (this as any).mensajeSpinner = "Cargando Lista de Roles...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -629,8 +629,8 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   guardarTarea(){
-  
-    this.mensajeSpinner = "guardando Tarea...";
+
+    (this as any).mensajeSpinner = "guardando Tarea...";
     this.lcargando.ctlSpinner(true);
     //console.log(this.dataUser);
     //console.log(this.tarea);
@@ -638,7 +638,7 @@ export class ConfiguracionComponent implements OnInit {
     this.tarea['id_usuario'] = this.dataUser.id_usuario;
     this.serviceAdmin.crearFlujo(this.tarea).subscribe(
       (res)=>{
-        
+
         this.agregarFlujoRol(res['data']['id_flujo']);
         this.preguntaDisabled = false;
         this.formReadOnly = false;
@@ -648,8 +648,8 @@ export class ConfiguracionComponent implements OnInit {
         console.log(error);
       }
     )
-    
-   
+
+
 
   }
 
@@ -716,7 +716,7 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   agregarPasos(){
-    
+
     if(this.rolesTramite.length != 0){
       let pasos = {
         id_flujo_pasos: 0,
@@ -739,7 +739,7 @@ export class ConfiguracionComponent implements OnInit {
         dias: null,
         grupo_usuarios: null
       }
-      
+
       pasos['nro_paso'] = this.listaPasos.length +1;
 
       this.listaPasos.push(pasos);
@@ -751,12 +751,12 @@ export class ConfiguracionComponent implements OnInit {
     } else {
       this.toastr.info('Ingrese los roles')
     }
-    
+
 
 
   }
 
-  
+
 
   limpiarCampos(pasos){
     console.log(this.pasosL);
@@ -776,10 +776,10 @@ export class ConfiguracionComponent implements OnInit {
     //     }
     //   })
     // }
-    
-    
-    
-    
+
+
+
+
 
   }
 
@@ -804,7 +804,7 @@ export class ConfiguracionComponent implements OnInit {
           this.pasosL = this.pasosL.filter((p)=>pasos['nro_paso'] != p);
         }
         // else if(pasos['id_flujo_pasos'] != 0){
-        //   this.mensajeSpinner = "Eliminando...";
+        //   (this as any).mensajeSpinner = "Eliminando...";
         //   this.lcargando.ctlSpinner(true);
         //   this.serviceAdmin.deletePasos(pasos).subscribe(
         //     (res)=>{
@@ -832,10 +832,10 @@ export class ConfiguracionComponent implements OnInit {
     })
   }
 
-  
+
 reordenarPasos() {
   this.listaPasos.forEach((paso, idx) => {
-    paso.nro_paso = idx + 1; 
+    paso.nro_paso = idx + 1;
   });
 }
 
@@ -872,7 +872,7 @@ reordenarPasos() {
           }else if(user['id_flujo_usuarios'] != 0){
             this.serviceAdmin.deleteUsuario(user).subscribe(
               (res)=>{
-  
+
                 Swal.fire({
                   icon: "success",
                   title: "Éxito!",
@@ -891,12 +891,12 @@ reordenarPasos() {
             )
           }
         }
-  
+
       })
-      
+
     }else{
       console.log(flag)
-      this.toastr.info( "No puede eliminar este usuario porque se encuentra configurado en el paso "+paso_configurado); 
+      this.toastr.info( "No puede eliminar este usuario porque se encuentra configurado en el paso "+paso_configurado);
     }
   }
 
@@ -933,7 +933,7 @@ reordenarPasos() {
           }else if(rol['id_flujo_roles'] != 0){
             this.serviceAdmin.deleteRol(rol).subscribe(
               (res)=>{
-  
+
                 Swal.fire({
                   icon: "success",
                   title: "Éxito!",
@@ -952,12 +952,12 @@ reordenarPasos() {
             )
           }
         }
-  
+
       })
-      
+
     }else{
       console.log(flag)
-      this.toastr.info( "No puede eliminar este rol porque se encuentra configurado en el paso "+paso_configurado); 
+      this.toastr.info( "No puede eliminar este rol porque se encuentra configurado en el paso "+paso_configurado);
     }
   }
   guardarPasos(flujo){
@@ -999,7 +999,7 @@ reordenarPasos() {
           id_usuario: null,
           prioridad:  null
         }
-        
+
         console.log(res);
       },
       (error)=>{
@@ -1009,13 +1009,13 @@ reordenarPasos() {
     )
   }
   userSelected(event){
-    
+
     if(event.id_usuario){
       this.disabled= false;
     }  else {
       this.disabled= true;
-    }  
-  
+    }
+
   }
 
   rolSelected(event){
@@ -1024,8 +1024,8 @@ reordenarPasos() {
       this.disabled= false;
     }  else {
       this.disabled= true;
-    }  
-  
+    }
+
   }
 
   modalAgregarUsuarios(){
@@ -1043,7 +1043,7 @@ reordenarPasos() {
         console.log(flag)
       }else{
         console.log(flag)
-        this.toastr.info( "No puede seleccionar el mismo usuario dos veces"); 
+        this.toastr.info( "No puede seleccionar el mismo usuario dos veces");
       }
 
   }
@@ -1066,7 +1066,7 @@ reordenarPasos() {
       this.rolesTramite.push(nuevoRol);
     }else{
       console.log(flag)
-      this.toastr.info( "No puede seleccionar el mismo rol dos veces"); 
+      this.toastr.info( "No puede seleccionar el mismo rol dos veces");
     }
 
   }

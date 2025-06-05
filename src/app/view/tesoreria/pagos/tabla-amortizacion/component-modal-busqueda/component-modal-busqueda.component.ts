@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./component-modal-busqueda.component.scss']
 })
 export class ComponentModalBusquedaComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   paginate: any;
   filter: any;
@@ -145,7 +145,7 @@ export class ComponentModalBusquedaComponent implements OnInit {
   }
 
   cargarAmortizaciones() {
-    this.mensajeSpinner = "Cargando lista de Amortizaciones...";
+    (this as any).mensajeSpinner = "Cargando lista de Amortizaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

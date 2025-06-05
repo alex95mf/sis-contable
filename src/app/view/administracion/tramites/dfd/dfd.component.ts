@@ -28,9 +28,9 @@ export class DfdComponent implements OnInit {
   users = [];
   heightTr = 0;
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
- 
+
   usuarios: any = [];
   usuariosMultiselect: any = [];
   almacenUsuarios: any = []
@@ -99,7 +99,7 @@ export class DfdComponent implements OnInit {
   @ViewChild('canvasNameInput') canvasNameInput!: ElementRef<HTMLInputElement>;
   title = 'frontEndAngular';
   private lineCount = 0;
- 
+
 
 
   private paper!: joint.dia.Paper;
@@ -136,7 +136,7 @@ export class DfdComponent implements OnInit {
       },
     ],
   };
-  
+
 
 
 
@@ -149,19 +149,19 @@ export class DfdComponent implements OnInit {
     private commonVrs: CommonVarService,
     private serviceAdmin: TramitesService,
     private toastr: ToastrService,
-   
-    
+
+
   ) {
-    
+
     this.commonVrs.usuarioTramite.asObservable().subscribe(
       (res)=>{
         this.usuarios = [res['data'], ...this.usuarios]
-       
+
       }
     );
 
     this.commonVrs.selectTramites.asObservable().subscribe((res) => {
-      this.mensajeSpinner = "Cargando lista de Usuarios...";
+      (this as any).mensajeSpinner = "Cargando lista de Usuarios...";
       this.lcargando.ctlSpinner(true);
       this.tarea = res.tarea;
 
@@ -189,13 +189,13 @@ export class DfdComponent implements OnInit {
 
         })
         this.cargar();
-        
+
         this.vmButtons[0]["habilitar"] = true;
         this.vmButtons[1]["habilitar"] = true;
         this.vmButtons[2]["habilitar"] = false;
         this.lcargando.ctlSpinner(false);
       } else {
-       
+
 
       console.log("antes de sale del cargar");
 
@@ -251,14 +251,14 @@ let idInicioDelFlujo = 0;
 
           this.listaPasos.forEach((element) => {
             let nombreUsuario;
-            let usuarionombreUsuario = this.usuarios.find(usuario => usuario.id_usuario == element.fk_usuario_atiende)  
-               
+            let usuarionombreUsuario = this.usuarios.find(usuario => usuario.id_usuario == element.fk_usuario_atiende)
+
             if (usuarionombreUsuario) {
               // Obtener el nombre del usuario
               nombreUsuario = usuarionombreUsuario.nombre;
-              
+
               // Usar el nombre del usuario como desees, por ejemplo:
-             
+
           }
 
 
@@ -313,11 +313,11 @@ let idInicioDelFlujo = 0;
                   },
                 },
               };
-               
-              
-            
-             
-        
+
+
+
+
+
               arrayfiguras.push(figura);
 
               let linksi = {
@@ -330,15 +330,15 @@ let idInicioDelFlujo = 0;
                 },
                 id: element.nro_paso + "to" + element.nro_paso_si,
                 z: 2,
-                
+
                 attrs: {
                   text: {
                       text: "si", // El valor de "respuesta"
-                    
+
                   },
                   respuesta: {
                     text: "si", // El valor de "respuesta"
-                   
+
                 }
               },
               position: {
@@ -367,7 +367,7 @@ let idInicioDelFlujo = 0;
                 },
                 id: element.nro_paso + "to" + element.nro_paso_no,
                 z: 2,
-                
+
                 attrs: {
                   text: {
                       text: "no", // El valor de "respuesta"
@@ -376,7 +376,7 @@ let idInicioDelFlujo = 0;
                       fontFamily: 'Arial, sans-serif',
                   }, respuesta: {
                     text: "no", // El valor de "respuesta"
-                   
+
                 }
               },
               position: {
@@ -396,15 +396,15 @@ let idInicioDelFlujo = 0;
           }}]
               };
 
- 
+
               if (
                 element.nro_paso_no != null &&
                 element.nro_paso_no != "" &&
                 element.nro_paso_no != undefined
               ) {
-                
+
                 arraylinks.push(linkno)
-             
+
               }
               if (
                 element.nro_paso_si != null &&
@@ -412,12 +412,12 @@ let idInicioDelFlujo = 0;
                 element.nro_paso_si != undefined
               ) {
                 arraylinks.push(linksi)
-             
-              }
-            
 
-             
-           
+              }
+
+
+
+
             } else {
               let figura = {
                 type: "standard.Rectangle",
@@ -453,7 +453,7 @@ let idInicioDelFlujo = 0;
                   usuario: {
                     text: ""+nombreUsuario,
                     value: element.fk_usuario_atiende
-                  }, 
+                  },
                   id_flujo_pasos:{
                     text: element.id_flujo_pasos,
                   },
@@ -536,7 +536,7 @@ let idInicioDelFlujo = 0;
 
                 arraylinks.push(link);
               }
-            
+
                 if (
                   element.siguiente_paso != null &&
                   element.siguiente_paso != "" &&
@@ -554,10 +554,10 @@ let idInicioDelFlujo = 0;
                     z: 2,
                     attrs: {},
                   };
-  
+
                   arraylinks.push(link);
                 }
-              
+
                   if (
                     element.siguiente_paso_tres != null &&
                     element.siguiente_paso_tres != "" &&
@@ -575,7 +575,7 @@ let idInicioDelFlujo = 0;
                       z: 2,
                       attrs: {},
                     };
-    
+
                     arraylinks.push(link);
                   }
 
@@ -597,7 +597,7 @@ let idInicioDelFlujo = 0;
             };
 
             arraylinks.push(linkinicio);
-            
+
 
           });
 
@@ -625,13 +625,13 @@ let idInicioDelFlujo = 0;
     diagramContainer!: ElementRef;
   ngOnInit(): void {
 
-  
+
     if (isPlatformBrowser(this.platformId)) {
       setTimeout(() => {
         this.cargar();
       }, 500);
     }
-   
+
     this.getData();
     this.selectAllForDropdownItems(this.getData());
     this.vmButtons = [
@@ -683,7 +683,7 @@ let idInicioDelFlujo = 0;
 
     this.validatePermission()
     // setTimeout(()=>{
-      
+
   //   // },50)
 
     setTimeout(() => {this.cargarUsuarios()}, 50)
@@ -694,7 +694,7 @@ let idInicioDelFlujo = 0;
     event.forEach((element,index)=>{
       console.log('escribir preguntas ' + element.id_usuario +' '+element.nombre)
     });
-    
+
   }
 
   getData() {
@@ -705,7 +705,7 @@ let idInicioDelFlujo = 0;
       { id: 4, name: 'BadkaG' },
       { id: 5, name: 'Baave' },
     ]);
-   
+
   }
 
   selectAllForDropdownItems(items: any[]) {
@@ -717,7 +717,7 @@ let idInicioDelFlujo = 0;
     };
 
     allSelect(items);
-   
+
   }
 
   applyStyles() {
@@ -742,7 +742,7 @@ let idInicioDelFlujo = 0;
         break;
       case "ACTUALIZAR":
         this.validateSaveContribuyente('update')
-        
+
         break;
       case "LIMPIAR":
         this.cancelar()
@@ -783,7 +783,7 @@ let idInicioDelFlujo = 0;
           pasos.nro_paso_no = null;
         }, 50);
         //console.log(pasos);
-      }else if(val == 'SP'){     
+      }else if(val == 'SP'){
         setTimeout(() => {
           pasos.siguiente_paso = null;
         }, 50);
@@ -831,7 +831,7 @@ let idInicioDelFlujo = 0;
 
 
   async validateSaveContribuyente(validacion) {
- 
+
     if (this.permissions.guardar == "0") {
       this.toastr.info("Usuario no tiene permiso para guardar");
     } else {
@@ -847,9 +847,9 @@ let idInicioDelFlujo = 0;
               "Seguro desea editar la Tarea?",
               "UPDATE_VENDEDOR"
             );
-            
+
           }
-          
+
         }
       });
     }
@@ -892,13 +892,13 @@ let idInicioDelFlujo = 0;
       ){
         this.toastr.info("Ingrese los días totales");
         flag = true;
-      } 
+      }
       // else if (
       //   this.usuarios.length == 0
       // ){
       //   this.toastr.info("Ingrese los Usuario");
       //   flag = true;
-      // } 
+      // }
       // else if (
       //   this.listaPasos.length == 0
       // ){
@@ -909,7 +909,7 @@ let idInicioDelFlujo = 0;
         let ultimoPaso= 0;
         this.listaPasos.map(
           (pasos, index)=>{
-          
+
           //  const duplicados = array =>
           //   new Set(array).size < array.length
           //   arrayP.push(duplicados([pasos['nro_paso'], pasos['siguiente_paso']]))
@@ -945,7 +945,7 @@ let idInicioDelFlujo = 0;
                 this.toastr.info("El nro de paso no puede ser igual al siguiente paso en el paso" + (index + 1));
                 flag = true;
              }
-             if(pasos['nro_paso']!= ultimoPaso['nro_paso'] && pasos['siguiente_paso']==0){ 
+             if(pasos['nro_paso']!= ultimoPaso['nro_paso'] && pasos['siguiente_paso']==0){
               this.toastr.info("No puede terminar el flujo en un paso anterior al paso " + ultimoPaso['nro_paso'] );
                 flag = true;
              }
@@ -975,13 +975,13 @@ let idInicioDelFlujo = 0;
           //this.actualizarTarea()
           this.ActualizarDatos()
         }
-        
+
       }
     });
   }
 
   actualizarTarea(){
-    this.mensajeSpinner = "Actualizando Tarea...";
+    (this as any).mensajeSpinner = "Actualizando Tarea...";
     this.lcargando.ctlSpinner(true);
     if(this.listaPasos.length > this.lengthPasos){
       //console.log('Ingreso actualizar pasos');
@@ -1006,7 +1006,7 @@ let idInicioDelFlujo = 0;
         this.usuarioActualizar = [valor, ...this.usuarioActualizar]
       })
     }
-    
+
     let data ={
       tarea: this.tarea,
       usuarios: this.usuarioActualizar,
@@ -1039,7 +1039,7 @@ let idInicioDelFlujo = 0;
 
   cargarUsuarios(){
     //console.log('ejecuto');
-    this.mensajeSpinner = "Cargando lista de Usuarios...";
+    (this as any).mensajeSpinner = "Cargando lista de Usuarios...";
     this.lcargando.ctlSpinner(true);
     this.serviceAdmin.getUsuarios({}).subscribe(
       (res)=>{
@@ -1047,7 +1047,7 @@ let idInicioDelFlujo = 0;
         res['data'].map((data)=>{
           data['id_flujo_usuarios'] =  0
         })
-        
+
         this.usuariospre = res['data']
         // console.log(this.usuariospre);
         this.lcargando.ctlSpinner(false);
@@ -1086,8 +1086,8 @@ let idInicioDelFlujo = 0;
   }
 
   guardarTarea(){
-  
-    this.mensajeSpinner = "guardando Tarea...";
+
+    (this as any).mensajeSpinner = "guardando Tarea...";
     this.lcargando.ctlSpinner(true);
     //console.log(this.dataUser);
     //console.log(this.tarea);
@@ -1095,7 +1095,7 @@ let idInicioDelFlujo = 0;
     this.tarea['id_usuario'] = this.dataUser.id_usuario;
     this.serviceAdmin.crearFlujo(this.tarea).subscribe(
       (res)=>{
-        
+
 
         //console.log(res);
         // this.flujo = res['data']
@@ -1109,8 +1109,8 @@ let idInicioDelFlujo = 0;
         console.log(error);
       }
     )
-    
-   
+
+
 
   }
 
@@ -1132,10 +1132,10 @@ let idInicioDelFlujo = 0;
     }
 
     console.log(data);
-    
-   
 
-    
+
+
+
     this.serviceAdmin.crearFlujoUsuario(data).subscribe(
        (res)=>{
         console.log(res);
@@ -1144,7 +1144,7 @@ let idInicioDelFlujo = 0;
       (error)=>{
         this.lcargando.ctlSpinner(true);
         console.log(error);
-        
+
      }
     )
 
@@ -1173,7 +1173,7 @@ let idInicioDelFlujo = 0;
     }
 
     console.log(data);
-    
+
     if( this.usuarios.length > this.usuarioActualizar.length ){
       //console.log('ingreso a actualizar usuarios');
       //console.log(this.usuarios.length);
@@ -1188,7 +1188,7 @@ let idInicioDelFlujo = 0;
         this.usuarioActualizar = [valor, ...this.usuarioActualizar]
       })
     }
-  
+
 
     let datasend = {
       user_token_id: this.tarea.user_token_id,
@@ -1210,7 +1210,7 @@ let idInicioDelFlujo = 0;
 
 
   agregarPasos(){
-    
+
     if(this.usuarios.length != 0){
       let pasos = {
         id_flujo_pasos: 0,
@@ -1232,7 +1232,7 @@ let idInicioDelFlujo = 0;
         dias: null,
         grupo_usuarios: null
       }
-      
+
       pasos['nro_paso'] = this.listaPasos.length +1;
 
       this.listaPasos.push(pasos);
@@ -1244,12 +1244,12 @@ let idInicioDelFlujo = 0;
     } else {
       this.toastr.info('Ingrese los usuarios')
     }
-    
+
 
 
   }
 
-  
+
 
   limpiarCampos(pasos){
     console.log(this.pasosL);
@@ -1269,10 +1269,10 @@ let idInicioDelFlujo = 0;
     //     }
     //   })
     // }
-    
-    
-    
-    
+
+
+
+
 
   }
 
@@ -1351,7 +1351,7 @@ let idInicioDelFlujo = 0;
           }else if(user['id_flujo_usuarios'] != 0){
             this.serviceAdmin.deleteUsuario(user).subscribe(
               (res)=>{
-  
+
                 Swal.fire({
                   icon: "success",
                   title: "Éxito!",
@@ -1370,18 +1370,18 @@ let idInicioDelFlujo = 0;
             )
           }
         }
-  
+
       })
-      
+
     }else{
       console.log(flag)
-      this.toastr.info( "No puede eliminar este usuario porque se encuentra configurado en el paso "+paso_configurado); 
+      this.toastr.info( "No puede eliminar este usuario porque se encuentra configurado en el paso "+paso_configurado);
     }
   }
   guardarPasos(flujo){
     try {
     const graphData = this.graph.toJSON();
- 
+
     const simplifiedGraphData = simplifyGraphData(graphData);
     let jsona = simplifiedGraphData.cells;
     console.log(jsona);
@@ -1392,19 +1392,19 @@ let idInicioDelFlujo = 0;
         const pasoB = b.paso;
         return pasoA - pasoB;
     });
-   
+
    // Recorrer los pasos filtrados
    filteredSteps.forEach(step => {
     // Verificar si el paso es de tipo "standard.Polygon"
     if (step.type === "standard.Polygon") {
         // Buscar los enlaces cuyo origen sea el mismo que el ID del paso actual
         const relatedLinks = jsona.filter(link => link.source && link.source.id === step.id && link.type === "standard.Link");
-   
+
         // Iterar sobre los enlaces relacionados
         relatedLinks.forEach(link => {
             // Obtener la etiqueta del enlace
             const label = link.labels && link.labels[0] && link.labels[0].attrs && link.labels[0].attrs.text.text;
-   
+
             // Verificar si la etiqueta es "sí" o "no" y asignar el número de paso correspondiente
             if (label === "sí") {
                 step.nro_paso_si = link.target.id;
@@ -1414,18 +1414,18 @@ let idInicioDelFlujo = 0;
         });
     }
    });
-   
+
    // Obtener los IDs de los círculos con paso "Fin"
    const finCircleIds = jsona.filter(obj => obj.type === "standard.Circle" && obj.paso === "Fin").map(circle => circle.id);
-   
+
    // Filtrar solo los enlaces que coinciden con los círculos de "Fin"
    const finCircleLinkIds = jsona
        .filter(obj => obj.type === "standard.Link") // Filtrar solo los elementos de tipo "standard.Link"
        .filter(link => finCircleIds.includes(link.target.id)) // Filtrar los enlaces que coinciden con los círculos de "Fin"
        .map(link => link.source.id); // Obtener los IDs de los enlaces
-   
+
        const relacionesGenerales = {};
-   
+
    // Filtrar los elementos de tipo "standard.Link" y construir el objeto de relaciones
    jsona.filter(obj => obj.type === "standard.Link").forEach(link => {
        // Verificar si el source del link existe en el objeto relacionesGenerales
@@ -1437,12 +1437,12 @@ let idInicioDelFlujo = 0;
            relacionesGenerales[link.source.id] = [link.target.id];
        }
    });
-   
-   
+
+
    // Construir el nuevo array
    let newArray = filteredSteps.map(step => {
 
-    
+
     const siguientePasoUnoElement = filteredSteps.find(element => element.id === relacionesGenerales[step.id][0]);
     const siguientePasoDosElement = filteredSteps.find(element => element.id === relacionesGenerales[step.id][1]);
     const siguientePasoTresElement = filteredSteps.find(element => element.id === relacionesGenerales[step.id][2]);
@@ -1485,12 +1485,12 @@ let idInicioDelFlujo = 0;
     };
 });
 
-   
+
    console.log(newArray);
-   
-   
-   
-   
+
+
+
+
 
     this.listaPasos.map((data)=>{
       data['id_usuario'] = this.dataUser.id_usuario;
@@ -1513,7 +1513,7 @@ let idInicioDelFlujo = 0;
           return;
         } //El trámite fue creado con éxito
         Swal.fire({
-          icon: "success", 
+          icon: "success",
           title: "Éxito!",
           text: "Registro exitoso",
           showCloseButton: true,
@@ -1575,13 +1575,13 @@ let idInicioDelFlujo = 0;
 }
   }
   userSelected(event){
-    
+
     if(event.id_usuario){
       this.disabled= false;
     }  else {
       this.disabled= true;
-    }  
-  
+    }
+
   }
 
   modalAgregarUsuarios(){
@@ -1599,7 +1599,7 @@ let idInicioDelFlujo = 0;
         console.log(flag)
       }else{
         console.log(flag)
-        this.toastr.info( "No puede seleccionar el mismo usuario dos veces"); 
+        this.toastr.info( "No puede seleccionar el mismo usuario dos veces");
       }
 
   }
@@ -1629,10 +1629,10 @@ let idInicioDelFlujo = 0;
 
 
 /******
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
 
 cargar() {
@@ -1647,9 +1647,9 @@ cargar() {
       width: 800,
       height: 1700,
       gridSize: 10,
-      restrictTranslate: true, 
+      restrictTranslate: true,
     });
-   
+
     if (this.paper.options.width !== undefined && this.paper.options.height !== undefined) {
       const canvasWidth = this.paper.options.width;
       const canvasHeight = this.paper.options.height;
@@ -1657,15 +1657,15 @@ cargar() {
       this.graph.fromJSON(this.graphData);
     }
 
-    this.graph.fromJSON(this.graphData); 
+    this.graph.fromJSON(this.graphData);
     this.paper.on('cell:pointerclick', (cellView, evt, x, y) => {
-      
+
       const cell = cellView.model;
       if (cell.isElement()) {
         // Realiza la acción deseada cuando se hace clic en la figura
       }
     });
-    
+
     const graphData = this.graph.toJSON();
     this.graph.getElements().forEach((element) => {
       this.agregarBotonesAFigura(element);
@@ -1676,21 +1676,21 @@ cargar() {
       }
     });
     const simplifiedGraphData = simplifyGraphData(graphData);
-   
+
     console.log('datos del gráfico :', simplifiedGraphData);
-   
+
     this.paper.el.addEventListener('click', (e) => {
       // Verificar si el clic fue dentro del menú desplegable
       if (e.target === select) {
         return;
       }
-  
+
       // Verificar si el clic fue dentro del enlace
       const linkClicked = (e.target as HTMLElement).closest('.joint-link');
       if (linkClicked) {
         return;
       }
-  
+
       // Si el clic no fue dentro del menú desplegable o el enlace, ocultar el select
       if (select !== null) {
         select.remove();
@@ -1699,10 +1699,10 @@ cargar() {
         select = null;
       }
     });
-  
 
 
-    
+
+
 this.paper.on('link:pointerclick', (cellView, evt, x, y) => {
 
 
@@ -1739,8 +1739,8 @@ deleteButton.style.padding = '5px 10px';
       deleteButton = null;
     });
 
-  
-  
+
+
 
     // Crea un menú desplegable (select) para cambiar el valor del vínculo.
     select = document.createElement('select');
@@ -1764,7 +1764,7 @@ deleteButton.style.padding = '5px 10px';
         // Elimina el menú desplegable después de la selección.
         select.remove();
         deleteButton.remove()
-       
+
         deleteButton = null;
         // Restablece la variable select a null después de eliminarla
         select = null;
@@ -1776,7 +1776,7 @@ deleteButton.style.padding = '5px 10px';
     select.style.position = 'absolute';
     select.style.zIndex = '10';
     select.style.top = `${evt.clientY + window.scrollY}px`; // Utiliza las coordenadas del evento de clic
-    select.style.left = `${evt.clientX + window.scrollX}px`; 
+    select.style.left = `${evt.clientX + window.scrollX}px`;
 
     // Añade el menú desplegable a la página.
     document.body.appendChild(deleteButton);
@@ -1801,7 +1801,7 @@ agregarBotonesAFigura(figure: joint.dia.Element) {
 
 
     const graphData = this.graph.toJSON();
- 
+
     const simplifiedGraphData = simplifyGraphData(graphData);
     let jsona = simplifiedGraphData.cells;
     const filteredSteps = jsona.filter(obj => obj.type === "standard.Rectangle" || obj.type === "standard.Polygon")
@@ -1831,12 +1831,12 @@ this.paso= maxPasoNumber;
   containerDiv.style.alignItems = 'center';
   containerDiv.style.gap = '5px';
   containerDiv.style.padding = '2px';
-  containerDiv.style.backgroundColor = 'rgba(255, 255, 255, 0.35)'; 
+  containerDiv.style.backgroundColor = 'rgba(255, 255, 255, 0.35)';
   containerDiv.style.borderRadius = '3px';
   containerDiv.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.2)';
   containerDiv.style.fontSize = '10px';
   containerDiv.style.cursor = 'pointer';
-  
+
   const btnContaint = document.createElement('div');
   btnContaint.style.zIndex = '10';
   btnContaint.style.display = 'flex';
@@ -1844,10 +1844,10 @@ this.paso= maxPasoNumber;
   btnContaint.style.alignItems = 'center';
   btnContaint.style.gap = '5px';
   btnContaint.style.padding = '2px';
-  btnContaint.style.backgroundColor = 'rgba(255, 255, 255, 0.35)'; 
+  btnContaint.style.backgroundColor = 'rgba(255, 255, 255, 0.35)';
   btnContaint.style.borderRadius = '3px';
   btnContaint.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.2)';
-  btnContaint.style.fontSize = '10px'; 
+  btnContaint.style.fontSize = '10px';
   btnContaint.style.cursor = 'pointer';
 
   // Función para actualizar la posición de los botones
@@ -1862,7 +1862,7 @@ this.paso= maxPasoNumber;
 
   this.paper.on('cell:pointerclick', (cellView) => {
     const cell = cellView.model;
-    
+
     if (cellView.model === figure) {
       if (containerDiv.style.display == 'flex') {
         containerDiv.style.display = 'none';
@@ -1889,16 +1889,16 @@ this.paso= maxPasoNumber;
     }
   });
   // Crear un `select` para elegir entre las opciones "sí" y "no"
-  
-let enlaceContador=0 
+
+let enlaceContador=0
   // Función para crear un enlace entre la figura de origen y la nueva figura
   const crearEnlace = (nuevaFigura: joint.dia.Element) => {
     const link = new joint.shapes.standard.Link({
       source: { id: figure.id },
       target: { id: nuevaFigura.id },
     });
-    
- 
+
+
 // Si la figura de origen es de tipo "Polygon", alternar el valor del atributo "respuesta"
 if (figure.get('type') === 'standard.Polygon') {
   // Alternar entre "sí" y "no" basándose en el contador de enlaces
@@ -1937,7 +1937,7 @@ if (figure.get('type') === 'standard.Polygon') {
   titleInput.style.width = '100%';
   titleInput.value= figure.attr('label/text')
   titleInput.addEventListener('input', (e) => {
-  
+
 
 
     const newText = (e.target as HTMLTextAreaElement).value;
@@ -1945,9 +1945,9 @@ if (figure.get('type') === 'standard.Polygon') {
   });
   titleInput.addEventListener('click', () => {
     titleInput.focus();
-  
+
   });
-  
+
   const questionInput = document.createElement('input');
   questionInput.type = 'text';
   questionInput.placeholder = 'Pregunta';
@@ -1957,7 +1957,7 @@ if (figure.get('type') === 'standard.Polygon') {
     questionInput.focus();
     // Eliminar el contenedor de botones asociado a la figura
   });
- 
+
  // figure.attr('label/pregunta', questionInput.value);
   questionInput.addEventListener('input', (e) => {
     // Actualizar el atributo de la figura
@@ -1992,10 +1992,10 @@ if (figure.get('type') === 'standard.Polygon') {
   // userInput.placeholder = 'Usuario';
   // userInput.style.width = '100%';
   // userInput.value=  figure.attr('usuario/text');
-  
+
   // userInput.addEventListener('click', () => {
   //   userInput.focus();
-    
+
   // });
   // userInput.addEventListener('input', (e) => {
   //   const newText = (e.target as HTMLTextAreaElement).value;
@@ -2037,7 +2037,7 @@ userList.style.margin = '0';
 userList.style.display = 'none'; // Ocultar la lista inicialmente
  userInput.addEventListener('click', () => {
     userInput.focus();
-    
+
 
 
 // Limpiar la lista existente
@@ -2085,7 +2085,7 @@ userInput.addEventListener('input', (e) => {
 
   // Filtrar los usuarios que coincidan con el texto ingresadothis.usuariospre
   const filteredUsers = this.usuarios.filter(usuario => usuario.nombre.toLowerCase().includes(searchText));
-  
+
   // Mostrar la lista si hay coincidencias
   if (filteredUsers.length > 0) {
     userList.style.display = 'block';
@@ -2115,7 +2115,7 @@ userInput.addEventListener('input', (e) => {
   });
 });
 divList.appendChild(userList);
- 
+
 
   const form = document.createElement('form');
   form.style.display = 'flex';
@@ -2124,9 +2124,9 @@ divList.appendChild(userList);
   form.style.width = '120px';
   form.style.marginTop ='24px';
 
- 
+
   // Agregar los campos al formulario
-  
+
 const TitleLabel = document.createElement('label');
 TitleLabel.textContent = "Descripcion"
 TitleLabel.style.margin = "0px"
@@ -2146,7 +2146,7 @@ ageInputLabel.style.margin = "0px"
 const userInputLabel = document.createElement('label');
 userInputLabel.textContent = "Usuario"
 userInputLabel.style.margin = "0px"
-    
+
 
 form.appendChild(ageInputLabel);
   form.appendChild(ageInput);
@@ -2189,7 +2189,7 @@ form.appendChild(ageInputLabel);
   selectElement.style.marginBottom = '10px';
 
   // Rellenar el menú desplegable con los IDs de las figuras existentes
-  
+
 
   // Crear el botón de confirmación
   const confirmButton = document.createElement('button');
@@ -2241,9 +2241,9 @@ form.appendChild(ageInputLabel);
 
 
  containerDiv.style.display = 'none';
-   
+
     modal.style.display = 'flex';
-   
+
   });
 
   // Manejar el evento de clic del botón de confirmación
@@ -2295,11 +2295,11 @@ link.appendLabel({
 
   // Añadir el botón de crear enlace al contenedor de botones
   if (figure.attributes['paso'] !== 'Fin') {
-  
+
   btnContaint.appendChild(buttonLink);
 }
   // Agregar el formulario al contenedor
- 
+
   if (figure.id !== 'circle2' && figure.attributes['paso'] !== 'Fin') {
     containerDiv.appendChild(form);
 }
@@ -2318,7 +2318,7 @@ link.appendLabel({
 
   buttonCircle.style.fontSize = '5px';
   buttonCircle.addEventListener('click', () => {
-    
+
     const typeFigure = figure.get('type')
     const polygonId =figure.id.toString();
     const numEnlaces = this.contarEnlaces(polygonId);
@@ -2326,15 +2326,15 @@ link.appendLabel({
    if(typeFigure=='standard.Rectangle') {maxhijos=3}
    if(typeFigure=='standard.Circle') {maxhijos=3}
    if(typeFigure=='standard.Polygon') {maxhijos=2}
-    
+
    if (numEnlaces >= maxhijos) {
     // Mostrar un mensaje de error
     alert('No se puede crear más de dos figuras hijas desde este Polygon.');
     return; // Detener la función para no crear la nueva figura hija
 }
 
-      
- 
+
+
     const bbox = figure.getBBox();
     const nuevaFigura = new joint.shapes.standard.Circle({
       position: { x: bbox.x + bbox.width + 60, y: bbox.y },
@@ -2356,7 +2356,7 @@ link.appendLabel({
         usuario: {
           text: 'Inicio',
         },
-        
+
       }, paso: 'Fin'
     });
     this.graph.addCell(nuevaFigura);
@@ -2385,7 +2385,7 @@ link.appendLabel({
    if(typeFigure=='standard.Rectangle') {maxhijos=3}
    if(typeFigure=='standard.Circle') {maxhijos=3}
    if(typeFigure=='standard.Polygon') {maxhijos=2}
-    
+
    if (numEnlaces >= maxhijos) {
     // Mostrar un mensaje de error
     alert('No se puede crear más de dos figuras hijas desde este Polygon.');
@@ -2396,7 +2396,7 @@ link.appendLabel({
     const idFigura = `Paso${this.paso}`;  // G
     const bbox = figure.getBBox();
     const nuevaFigura = new joint.shapes.standard.Rectangle({
-     
+
       position: { x: bbox.x + bbox.width + 60, y: bbox.y },
       size: { width: 100, height: 40 },
       attrs: {
@@ -2446,21 +2446,21 @@ link.appendLabel({
    if(typeFigure=='standard.Rectangle') {maxhijos=3}
    if(typeFigure=='standard.Circle') {maxhijos=3}
    if(typeFigure=='standard.Polygon') {maxhijos=2}
-    
+
    if (numEnlaces >= maxhijos) {
     // Mostrar un mensaje de error
     alert('No se puede crear más de dos figuras hijas desde este Polygon.');
     return; // Detener la función para no crear la nueva figura hija
 }
-   
-   
-  
+
+
+
 
     contadorFiguras++;
     this.paso++;// Incrementa el contador de figuras
     const idFigura = `Paso${this.paso}`;
     const bbox = figure.getBBox();
-   
+
     const nuevaFigura = new joint.shapes.standard.Polygon({
 
       position: { x: bbox.x + bbox.width + 60, y: bbox.y },
@@ -2489,7 +2489,7 @@ link.appendLabel({
           text: '',
           value:''
         },
-        
+
       },
       paso: idFigura,
       points: '30,0 60,30 30,60 0,30',
@@ -2517,17 +2517,17 @@ link.appendLabel({
 
   // Añadir botones al contenedor
   if (figure.attributes['paso'] !== 'Fin') {
-  
+
     btnContaint.appendChild(buttonCircle);
     btnContaint.appendChild(buttonRectangle);
     btnContaint.appendChild(buttonDiamond);
-} 
- 
+}
+
   if (figure.id !== 'circle2' ) {
     btnContaint.appendChild(buttonEliminar);
 }
-  
- 
+
+
   //containerDiv buttonRectangle
   containerDiv.appendChild(btnContaint);
  // containerDiv.appendChild(buttonDiamond);
@@ -2587,7 +2587,7 @@ link.appendLabel({
   if (figure.id !== 'circle2' && figure.attributes['paso'] !== 'Fin') {
     labelInfo.appendChild(numTextElement);
 }
- 
+
 
   // Añadir `labelInfo` al contenedor principal
   containerDiv.appendChild(labelInfo);
@@ -2597,11 +2597,11 @@ link.appendLabel({
   this.diagramContainer.nativeElement.appendChild(containerDiv);
 
   // Actualizar la posición de los botones cuando la figura se mueva
- 
+
   figure.on('change:position', () => {
     updateButtonPosition();
     const figureBBox = figure.getBBox();
-    textarea.style.left = `${figureBBox.x - 50 - 35}px`; 
+    textarea.style.left = `${figureBBox.x - 50 - 35}px`;
     textarea.style.top = `${figureBBox.y + figureBBox.height / 2 - 25}px`;
   });
   // Maneja la eliminación de la figura
@@ -2700,13 +2700,13 @@ if (context) {
         context.stroke();
 
         // Añadir un input para el nombre de cada canvas
-        
+
     }
 }
 }
 
 guardarDatos() {
-  this.mensajeSpinner = "guardando Tarea...";
+  (this as any).mensajeSpinner = "guardando Tarea...";
     this.lcargando.ctlSpinner(true);
 const tieneFin = this.validarPasoFin();
   const validacionPolygons = this.validarPolygons();
@@ -2715,7 +2715,7 @@ const tieneFin = this.validarPasoFin();
   if (tieneFin && validacionPolygons) {
 
     const graphData = this.graph.toJSON();
- 
+
     const simplifiedGraphData = simplifyGraphData(graphData);
 
 let data = { jsonFiguras: JSON.stringify(simplifiedGraphData),
@@ -2744,10 +2744,10 @@ this.ticketSrv.createFlujo(data).subscribe(
 
 
 
-  
-  
-  
-  
+
+
+
+
   },
   (error)=>{
     console.log(error);
@@ -2758,10 +2758,10 @@ this.ticketSrv.createFlujo(data).subscribe(
 
 )
 
- 
+
 } else {
 
- 
+
   this.toastr.info('El diagrama debe contener al menos una figura con paso "Fin".');
 }
 
@@ -2770,18 +2770,18 @@ this.ticketSrv.createFlujo(data).subscribe(
 
 
 ActualizarDatos() {
-  this.mensajeSpinner = "Actualizando Tarea...";
+  (this as any).mensajeSpinner = "Actualizando Tarea...";
     this.lcargando.ctlSpinner(true);
   const tieneFin = this.validarPasoFin();
     const validacionPolygons = this.validarPolygons();
     if (!tieneFin){ this.toastr.info('El diagrama debe contener al menos una figura con paso "Fin".');}
     if (!validacionPolygons){this.toastr.info('Alguna pregunta no tiene sus dos respuestas.');}
     if (tieneFin && validacionPolygons) {
-  
+
    const graphData = this.graph.toJSON();
-   
+
   const simplifiedGraphData = simplifyGraphData(graphData);
-  
+
   let data = { jsonFiguras: JSON.stringify(simplifiedGraphData),
     nombre:this.tarea.nombre,
     descripcion:this.tarea.descripcion,
@@ -2792,46 +2792,46 @@ ActualizarDatos() {
     dias_totales:this.tarea.dias_totales,
     user_token_id: this.tarea.user_token_id
    };
-  
-  
+
+
   this.ticketSrv.actualizarFlujo(data).subscribe(
     (res) => {
       this.actualizarFlujoUsuario(res['data']['id_flujo']);
 
-  
+
 
     } ,(error)=>{
-      
+
       this.lcargando.ctlSpinner(false);
       console.log(error);
     }
-  
+
   )
-  
-   
+
+
   } else {
-  
-   
+
+
     this.toastr.info('El diagrama debe contener al menos una figura con paso "Fin".');
   }
-  
-  
+
+
   }
 
 validarPasoFin(): boolean {
   let tieneFin = false;
- 
+
   this.graph.getCells().forEach((cell: any) => {
       if (cell.isElement()) {
-        
+
           const etiqueta = cell.get('attrs')?.label?.text;
           if (etiqueta === 'Fin') {
               tieneFin = true;
-              return false; 
+              return false;
           }
       }
   });
-  
+
   return tieneFin;
 }
 centrarFigura(graphData: any, width: any, height: any) {
@@ -2874,7 +2874,7 @@ this.graph.getCells().forEach((cell: any) => {
     if (cell.isElement() && cell.get('type') === 'standard.Polygon') {
         const polygonId = cell.id;
         const numEnlaces = this.contarEnlaces(polygonId);
-        
+
         // Verificar si el `Polygon` tiene al menos dos enlaces
         if (numEnlaces < 2) {
             validacionExitosa = false;

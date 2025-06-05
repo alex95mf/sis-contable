@@ -15,7 +15,7 @@ standalone: false,
   styleUrls: ['./gestion-form.component.scss']
 })
 export class GestionFormComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   dataUser: any;
 
@@ -100,7 +100,7 @@ export class GestionFormComponent implements OnInit {
   }
 
   getCalEvento() {
-    this.mensajeSpinner = "Obteniendo Evento...";
+    (this as any).mensajeSpinner = "Obteniendo Evento...";
     // this.lcargando.ctlSpinner(true);
 
     let id = this.data.id_origin;
@@ -174,7 +174,7 @@ export class GestionFormComponent implements OnInit {
   }
 
   saveEvento() {
-    this.mensajeSpinner = "Creando Evento...";
+    (this as any).mensajeSpinner = "Creando Evento...";
     // this.lcargando.ctlSpinner(true);
 
     console.log(this.evento);

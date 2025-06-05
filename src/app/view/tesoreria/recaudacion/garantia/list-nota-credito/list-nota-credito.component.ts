@@ -20,7 +20,7 @@ standalone: false,
 export class ListNotaCreditoComponent implements OnInit {
 
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -113,7 +113,7 @@ export class ListNotaCreditoComponent implements OnInit {
   }
 
   cargarDocumentos(){
-    this.mensajeSpinner = "Cargando listado de notas de crédito...";
+    (this as any).mensajeSpinner = "Cargando listado de notas de crédito...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

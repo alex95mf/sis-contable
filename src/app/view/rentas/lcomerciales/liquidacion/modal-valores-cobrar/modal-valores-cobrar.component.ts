@@ -52,7 +52,7 @@ export class ModalValoresCobrarComponent implements OnInit {
   async getImpuestos() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Impuestos'
+      (this as any).mensajeSpinner = 'Cargando Impuestos'
       let response = await this.apiService.getValoresPorCobrar({
         orden_inspeccion: { numero: this.orden_inspeccion.numero_orden },
         impuestos: ['PESAYMEDIDA', 'INTRODUCTOR', 'LOCALES TURISTICOS', 'PATENTE', 'VIA PUBLICA', '1,5', 'LETREROS']

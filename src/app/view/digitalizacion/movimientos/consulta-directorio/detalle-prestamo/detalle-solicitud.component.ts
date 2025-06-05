@@ -16,7 +16,7 @@ standalone: false,
 export class DetallePrestamoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+  
   listaSolicitudes: any = []
 
 

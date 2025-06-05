@@ -25,7 +25,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
 
   fTitle = "Orden de Pago";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   listaSolicitudes: any = []
   programa: any = []
@@ -213,7 +213,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
     }
   }
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -268,7 +268,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
 
     if (result.isConfirmed) {
 
-      this.mensajeSpinner = "Verificando período contable";
+      (this as any).mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
       let datos = {
         "anio": Number(moment().format('YYYY')),
@@ -279,7 +279,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
 
       /* Validamos si el periodo se encuentra aperturado */
         if (res["data"][0].estado !== 'C') {
-          this.mensajeSpinner = "Guardando datos...";
+          (this as any).mensajeSpinner = "Guardando datos...";
           this.lcargando.ctlSpinner(true);
 
           let data = {
@@ -390,7 +390,7 @@ export class ModalOrdenCompraComponent implements OnInit, OnDestroy {
 
   async cambiarEstadoOrden(orden: any) {
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Cambiando Estado de Orden'
+    (this as any).mensajeSpinner = 'Cambiando Estado de Orden'
     try {
       const response = await this.service.setEstadoOrden({orden})
       console.log(response)

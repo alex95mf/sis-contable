@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ModalComprasComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -129,7 +129,7 @@ export class ModalComprasComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    this.mensajeSpinner = "Buscando facturas...";
+    (this as any).mensajeSpinner = "Buscando facturas...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getProvCompras(data).subscribe(
 

@@ -90,7 +90,7 @@ export class MetasOdsComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     let params = {
@@ -121,7 +121,7 @@ export class MetasOdsComponent implements OnInit {
   }
 
   cargaProgramas() {
-    this.mensajeSpinner = 'Cargando Programas'
+    (this as any).mensajeSpinner = 'Cargando Programas'
 
     this.lcargando.ctlSpinner(true)
     this.metasService.getProgramas().subscribe(
@@ -160,7 +160,7 @@ export class MetasOdsComponent implements OnInit {
     /**
      * Carga la lista de ODS
      */
-    this.mensajeSpinner = 'Cargando ODS'
+    (this as any).mensajeSpinner = 'Cargando ODS'
     this.metasService.getODS().subscribe(
       res => {
         res['data'].forEach(ods => {
@@ -186,7 +186,7 @@ export class MetasOdsComponent implements OnInit {
     let data = {
       "ods": event
     }
-    this.mensajeSpinner = 'Cargando Ejes'
+    (this as any).mensajeSpinner = 'Cargando Ejes'
 
     this.lcargando.ctlSpinner(true)
     this.metasService.getEje(data).subscribe(
@@ -217,7 +217,7 @@ export class MetasOdsComponent implements OnInit {
     let data = {
       "ods": event
     }
-    this.mensajeSpinner = 'Cargado Metas para ODS'
+    (this as any).mensajeSpinner = 'Cargado Metas para ODS'
     
     this.lcargando.ctlSpinner(true)
     this.metasService.getMetasODS(data).subscribe(
@@ -245,7 +245,7 @@ export class MetasOdsComponent implements OnInit {
     let data = {
       'eje': event
     }
-    this.mensajeSpinner = 'Cargado OPG'
+    (this as any).mensajeSpinner = 'Cargado OPG'
     
     this.lcargando.ctlSpinner(true)
     this.metasService.getOPG(data).subscribe(
@@ -270,7 +270,7 @@ export class MetasOdsComponent implements OnInit {
   cargaPPG(event) {
     this.cmb.ppg = []
     this.seleccion.ppg = 0
-    this.mensajeSpinner = 'Cargando Politicas'
+    (this as any).mensajeSpinner = 'Cargando Politicas'
     let data = {
       "opg": event
     }
@@ -299,7 +299,7 @@ export class MetasOdsComponent implements OnInit {
   cargaMetaZonal(event) {
     this.cmb.meta = []
     this.seleccion.metaZonal = 0
-    this.mensajeSpinner = 'Cargando Metas para la Zona'
+    (this as any).mensajeSpinner = 'Cargando Metas para la Zona'
     let data = {
       "politica": event
     }
@@ -328,7 +328,7 @@ export class MetasOdsComponent implements OnInit {
     /**
      * Carga los dropdown con los items respectivos
      */
-    this.mensajeSpinner = 'Cargando Catalogos'
+    (this as any).mensajeSpinner = 'Cargando Catalogos'
     let data = {
       params: "'PLA_COMPETENCIA','PLA_OE','PLA_META_RESULTADO',\
       'PLA_INDICADOR','PLA_TENDENCIA','PLA_TIPO_INTERVENCION'"
@@ -394,7 +394,7 @@ export class MetasOdsComponent implements OnInit {
     /**
      * Si hay metas existentes en la tabla, cargarlas.
      */
-    this.mensajeSpinner = 'Obteniendo Metas'
+    (this as any).mensajeSpinner = 'Obteniendo Metas'
     let data = {
       params: this.programas
     }
@@ -480,7 +480,7 @@ export class MetasOdsComponent implements OnInit {
         params: this.programas
       }
       // console.log(data)
-      this.mensajeSpinner = 'Guardando Metas por Programa'
+      (this as any).mensajeSpinner = 'Guardando Metas por Programa'
 
       this.lcargando.ctlSpinner(true)
       this.metasService.guardaMetas(data).subscribe(
@@ -535,7 +535,7 @@ export class MetasOdsComponent implements OnInit {
     }).then(
       res => {
         if (res.value) {
-          this.mensajeSpinner = 'Borrando datos'
+          (this as any).mensajeSpinner = 'Borrando datos'
           // Borra los datos cargados
           let empty = {
             ods: { id: null, nombre: '' },

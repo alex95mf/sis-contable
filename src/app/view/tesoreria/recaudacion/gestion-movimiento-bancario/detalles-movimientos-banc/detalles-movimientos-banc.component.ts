@@ -14,7 +14,7 @@ standalone: false,
 export class DetallesMovimientosBancComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
 
   @Input() detalles :any;
@@ -84,7 +84,7 @@ export class DetallesMovimientosBancComponent implements OnInit {
 
 
   guardarDetalles(){
-    this.mensajeSpinner = "Guardando detalles...";
+    (this as any).mensajeSpinner = "Guardando detalles...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id: this.dataTransaccion.id,

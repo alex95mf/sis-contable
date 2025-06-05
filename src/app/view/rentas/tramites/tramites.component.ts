@@ -124,7 +124,7 @@ export class TramitesComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true)
 
     let params = {
@@ -154,7 +154,7 @@ export class TramitesComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos'
+    (this as any).mensajeSpinner = 'Cargando Catalogos'
     this.lcargando.ctlSpinner(true)
     this.apiService.getCatalogos({ params: "'PLA_DEPARTAMENTO'" }).subscribe(
       (res: any) => {
@@ -180,7 +180,7 @@ export class TramitesComponent implements OnInit {
   }
 
   getTramites() {
-    this.mensajeSpinner = 'Cargando Tramites'
+    (this as any).mensajeSpinner = 'Cargando Tramites'
     this.lcargando.ctlSpinner(true)
     this.apiService.getTramites({ params: { filter: this.filter, paginate: this.paginate } }).subscribe(
       (res: any) => {
@@ -227,7 +227,7 @@ export class TramitesComponent implements OnInit {
   exportExcel() {
     let excelData = []
 
-    this.mensajeSpinner = 'Exportando Trámites'
+    (this as any).mensajeSpinner = 'Exportando Trámites'
     this.lcargando.ctlSpinner(true)
     this.apiService.getTramites({ params: { filter: this.filter } }).subscribe(
       (res: any) => {

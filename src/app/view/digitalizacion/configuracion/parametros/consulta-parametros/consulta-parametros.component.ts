@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./consulta-parametros.component.scss']
 })
 export class ConsultaParametrosComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -109,7 +109,7 @@ export class ConsultaParametrosComponent implements OnInit {
    }
 
    cargarParametros(flag: boolean = false){
-    this.mensajeSpinner = "Cargando Configuraciones de Parametros...";
+    (this as any).mensajeSpinner = "Cargando Configuraciones de Parametros...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1

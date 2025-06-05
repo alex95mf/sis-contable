@@ -18,7 +18,7 @@ export class ModalExonContribuyenteComponent implements OnInit {
   @Input() codigo_detalle: string;
   @Input() lote: any;
   @Input() exonSelected: any[];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   vmButtons: Botonera[] = [];
   lst_exoneraciones: any = [];
@@ -52,7 +52,7 @@ export class ModalExonContribuyenteComponent implements OnInit {
   async getExoneraciones() {
     try {
       this.lcargando.ctlSpinner(true)
-      this.mensajeSpinner = 'Cargando Exoneraciones'
+      (this as any).mensajeSpinner = 'Cargando Exoneraciones'
       const response = await this.apiService.getExoneraciones({contribuyente: this.contribuyente, lote: this.lote, concepto: {codigo: 'PU'}}) as any
       console.log(response.data)
 

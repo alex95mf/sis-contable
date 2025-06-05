@@ -20,7 +20,7 @@ standalone: false,
 export class NuevaConsultaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('canvas') chartElementRef: ElementRef
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = [];
 
   dataUser: any;
@@ -76,7 +76,7 @@ export class NuevaConsultaComponent implements OnInit {
     }
 
     try {
-      this.mensajeSpinner = 'Cargando Permisos'
+      (this as any).mensajeSpinner = 'Cargando Permisos'
       let response = await this.commonServices.getPermisionsGlobas(data) as any;
       console.log(response.data)
       this.permisions = response.data[0]
@@ -119,7 +119,7 @@ export class NuevaConsultaComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = 'Cargando Catalogos'
+      (this as any).mensajeSpinner = 'Cargando Catalogos'
       let catalogos = await this.apiService.getCentroCostos() as any;
       console.log(catalogos)
       this.cmb_centro = catalogos.data
@@ -189,7 +189,7 @@ export class NuevaConsultaComponent implements OnInit {
     let centro = (this.centrocosto) ? this.centrocosto : 0;
 
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = 'Consultado'
+    (this as any).mensajeSpinner = 'Consultado'
     if (cuenta !== '') {
       this.apiService.getLibroDiario(desde, hasta, cuenta, cuenta_hasta, centro).subscribe(
         (res: any) => {

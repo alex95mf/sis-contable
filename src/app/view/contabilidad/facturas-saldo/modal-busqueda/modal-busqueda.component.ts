@@ -17,7 +17,7 @@ export class ModalBusquedaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   vmButtons: Array<Botonera> = [];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   displayedColumns: Array<string> = ['num_documento', 'fecha', 'observaciones', 'actions'];
   documentos: Array<any> = []
@@ -61,7 +61,7 @@ export class ModalBusquedaComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando...'
+      (this as any).mensajeSpinner = 'Cargando...'
       let documentos = await this.apiService.getCierres({ tipo: 'CCP' })
       console.log(documentos)
 

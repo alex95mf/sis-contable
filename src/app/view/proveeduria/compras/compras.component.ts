@@ -55,7 +55,7 @@ standalone: false,
 })
 export class ComprasComponent implements OnInit, OnDestroy {
   onDestroy$ = new Subject<void>();
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   anticipoNoValido:boolean = true
@@ -280,7 +280,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
     this.comSrv.listaCompras$.subscribe(
       async (res: any) => {
         this.lcargando.ctlSpinner(true)
-        this.mensajeSpinner = 'Cargando Datos'
+        (this as any).mensajeSpinner = 'Cargando Datos'
          console.log(res)
 
         // let retFuente = res.ret_fuente;
@@ -932,7 +932,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
 
   async cargarListas() {
     // this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Cargando Listas'
+    (this as any).mensajeSpinner = 'Cargando Listas'
     await this.getImpuestosDetalle()
     await this.getIceSri()
     await this.getRetencionFuente()
@@ -944,7 +944,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
   getPermisions() {
 
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = 'Cargando Permisos'
+    (this as any).mensajeSpinner = 'Cargando Permisos'
 
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
 
@@ -2831,7 +2831,7 @@ console.log('aqui se totaliza');
 
 
   getCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos'
+    (this as any).mensajeSpinner = 'Cargando Catalogos'
     let data = {
       params: "'TIPO PAGO','FORMA PAGO','REC_METODO_PAGO'"
      // params: "REC_METODO_PAGO"
@@ -2852,7 +2852,7 @@ console.log('aqui se totaliza');
 
   getimpuestos() {
 
-    this.mensajeSpinner = 'Cargando Impuestos'
+    (this as any).mensajeSpinner = 'Cargando Impuestos'
     this.comSrv.getImpuestosIva().subscribe(res => {
       console.log(res['data'])
       console.log(res['data'][0])
@@ -4006,7 +4006,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
 
   ChangeFuenteCuenta(datosCuenta:any, infoDetails:any, index){
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Calculando'
+    (this as any).mensajeSpinner = 'Calculando'
     console.log(datosCuenta);
     infoDetails[index]['cod_cuenta_impuesto_rtefte'] = datosCuenta.cuenta;
     infoDetails[index]['cuenta_impuesto_rtefte'] = datosCuenta.descripcion;
@@ -4018,7 +4018,7 @@ console.log('sumTotalizados: Iterando dataCuenta, calculando los impuestos')
 
   async ChangeImpuestoIva(event: any, dataelement, index) {
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Calculando'
+    (this as any).mensajeSpinner = 'Calculando'
     console.log(event)
     dataelement[index].porce_iva = event.porcentaje_rte_iva;
     dataelement[index].cod_iva = event.codigo_sri_iva;
@@ -4540,7 +4540,7 @@ this.lastRecord = null
 
   saveButProv() {
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let data = {
       "anio": Number(moment(this.fecha_compra).format('YYYY')),
@@ -4551,7 +4551,7 @@ this.lastRecord = null
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
 
-        this.mensajeSpinner = "Cargando..";
+        (this as any).mensajeSpinner = "Cargando..";
         this.lcargando.ctlSpinner(true);
 
         let info;
@@ -5421,7 +5421,7 @@ this.lastRecord = null
     if (id_proceso !== null) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Cargando Condiciones'
+        (this as any).mensajeSpinner = 'Cargando Condiciones'
         this.id_solicitud = id_proceso
         console.log(this.contratos.filter(e => e.id_solicitud == this.id_solicitud))
 
@@ -5459,7 +5459,7 @@ this.lastRecord = null
 
         this.ExistenItems= false;
 
-        this.mensajeSpinner = 'Cargando Ingresos de Bodega asociados'
+        (this as any).mensajeSpinner = 'Cargando Ingresos de Bodega asociados'
         this.cmb_ingreso = []
         const ingresoResponse = await this.comSrv.cargarIngresoBodega(id_proceso) as any
         console.log(ingresoResponse)
@@ -7047,7 +7047,7 @@ sumRegistroTodo(){
 
   exportExcelCuentas(){
     if(this.dataCuenta.length > 0){
-      this.mensajeSpinner = "Generando Archivo Excel...";
+      (this as any).mensajeSpinner = "Generando Archivo Excel...";
       this.lcargando.ctlSpinner(true);
       let data = {
         title: 'Cuentas',
@@ -7068,7 +7068,7 @@ sumRegistroTodo(){
   exportExcelAsiento(){
     if(this.fieldsDaily.length > 0){
 
-      this.mensajeSpinner = "Generando Archivo Excel...";
+      (this as any).mensajeSpinner = "Generando Archivo Excel...";
       this.lcargando.ctlSpinner(true);
       let data = {
         title: 'Asiento',
@@ -7089,7 +7089,7 @@ sumRegistroTodo(){
 //this.fieldsDaily
     if(this.fieldsDaily.length > 0){
       const filteredRows = this.fieldsDaily.filter(f => f.tipo_detalle === 'ANTICIPO' || f.tipo_detalle === 'ANTCXP');
-      this.mensajeSpinner = "Generando Archivo Excel...";
+      (this as any).mensajeSpinner = "Generando Archivo Excel...";
       this.lcargando.ctlSpinner(true);
       let data = {
         title: 'Asiento Anticipos',
@@ -7110,7 +7110,7 @@ sumRegistroTodo(){
     //this.fieldsDaily
         if(this.fieldsDaily.length > 0){
           const filteredRows = this.fieldsDaily.filter(f => f.tipo_detalle === 'MULTA' || f.tipo_detalle === 'MUCXP');
-          this.mensajeSpinner = "Generando Archivo Excel...";
+          (this as any).mensajeSpinner = "Generando Archivo Excel...";
           this.lcargando.ctlSpinner(true);
           let data = {
             title: 'Asiento Multas',
@@ -7150,7 +7150,7 @@ sumRegistroTodo(){
         cancelButtonText: "Cancelar"
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = "Verificando período contable";
+          (this as any).mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(moment(this.fecha_compra).format('YYYY')),
@@ -7161,7 +7161,7 @@ sumRegistroTodo(){
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
 
-              this.mensajeSpinner = "Generando retención...";
+              (this as any).mensajeSpinner = "Generando retención...";
               this.lcargando.ctlSpinner(true);
               let datosRetencion = {
 
@@ -7303,7 +7303,7 @@ filterWithAccount(list: any[]) {
 
   async getLatest() {
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Cargando Registro'
+    (this as any).mensajeSpinner = 'Cargando Registro'
     try {
       const response = await this.comSrv.getUltimaCompra()
       console.log(response)
@@ -7431,7 +7431,7 @@ this.tbl_partidas = [];
       }
 
       this.lcargando.ctlSpinner(true)
-      this.mensajeSpinner = 'Cargando Registro'
+      (this as any).mensajeSpinner = 'Cargando Registro'
       try {
         const response = await this.comSrv.getComprasGeneradas({params: {filter: {id: this.lastRecord}, paginate: {page: 1, perPage: 1}}}) as any
         console.log(response)
@@ -7457,7 +7457,7 @@ this.tbl_partidas = [];
   async consultaRegGuardado(id_compra) {
 
       this.lcargando.ctlSpinner(true)
-      this.mensajeSpinner = 'Cargando Registro'
+      (this as any).mensajeSpinner = 'Cargando Registro'
       try {
         const response = await this.comSrv.getComprasGeneradas({params: {filter: {id: id_compra}, paginate: {page: 1, perPage: 1}}}) as any
         console.log(response)
@@ -7516,7 +7516,7 @@ this.tbl_partidas = [];
     // return;
 
     if (result.isConfirmed) {
-      this.mensajeSpinner = "Verificando período contable";
+      (this as any).mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
       let data = {
         "anio": Number(moment(this.fecha_compra).format('YYYY')),
@@ -7526,7 +7526,7 @@ this.tbl_partidas = [];
         try {
         if (res["data"][0].estado !=='C') {
           this.lcargando.ctlSpinner(true)
-          this.mensajeSpinner = 'Anulando Compra'
+          (this as any).mensajeSpinner = 'Anulando Compra'
           try {
             const response = await this.comSrv.anularCompra({compra: this.id_compra, motivo: result.value})
             console.log(response)

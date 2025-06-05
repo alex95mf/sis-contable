@@ -15,7 +15,7 @@ standalone: false,
 export class ModalBuscaVehiculoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[];
 
   paginate: any;
@@ -97,7 +97,7 @@ vehiculos:any=[];
 
   async getVehiculos() {
 
-    this.mensajeSpinner = "Cargando Vehiculos...";
+    (this as any).mensajeSpinner = "Cargando Vehiculos...";
     this.lcargando.ctlSpinner(true);
 
      

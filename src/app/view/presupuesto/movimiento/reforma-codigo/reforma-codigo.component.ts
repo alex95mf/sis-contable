@@ -30,8 +30,8 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
-  mensajeSpinner: string;
   mensajeSpinner: string = "Cargando...";
+
 
   periodos: Array<any> = [];
   periodoObjectSelected: any = {};
@@ -289,7 +289,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -324,14 +324,14 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
     try {
       let response: Array<any>;
       // Cargar Periodos
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       response = await this.service.getPeriodos();
       // console.log(response)
       this.periodos = response;
 
 
       // Cargar Programas
-      this.mensajeSpinner = 'Cargando Programas'
+      (this as any).mensajeSpinner = 'Cargando Programas'
       response = await this.service.getProgramas();
       // console.log(response)
       response.map((item: any) => {
@@ -427,7 +427,7 @@ export class ReformaCodigoComponent implements OnInit, OnDestroy {
 console.log("this.atribucionParamsNew",this.atribucionParamsNew);
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Validando datos'
+        (this as any).mensajeSpinner = 'Validando datos'
         await this.validaDataGlobal()
         const response = await this.service.setReformaInterna({documento: this.atribucionParamsNew})
         console.log(response)
@@ -507,7 +507,7 @@ console.log("departamento",departamento);
 
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Duplicando Bien'
+        (this as any).mensajeSpinner = 'Duplicando Bien'
         let response: Array<any> = await this.service.duplicarBien({
           bien: bien,
           codigo_presupuesto: this.cod_presupuesto,
@@ -786,7 +786,7 @@ console.log("ejecutando recalculo",data);
     }).then((result) => {
 
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Creando Reforma interna...";
+        (this as any).mensajeSpinner = "Creando Reforma interna...";
         this.lcargando.ctlSpinner(true);
         console.log(this.atribucionParamsNew);
         // let detalles = []
@@ -854,7 +854,7 @@ console.log("ejecutando recalculo",data);
   }
 
   cargarPrograma(){
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     this.service.searchPrograma({}).subscribe((res: any)=>{
@@ -876,7 +876,7 @@ console.log("ejecutando recalculo",data);
 
   departamentoSearch(){
     // console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -903,7 +903,7 @@ console.log("ejecutando recalculo",data);
 
   departamentoSearchSelect(){
     // console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -931,7 +931,7 @@ console.log("ejecutando recalculo",data);
 
   AtribucionSearch(event){
     // console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event.valor
@@ -946,7 +946,7 @@ console.log("ejecutando recalculo",data);
   /* SearchList(){
     // console.log(event);
     this.listaSolicitudes = []
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
 
@@ -994,7 +994,7 @@ console.log("ejecutando recalculo",data);
       return
     }else{
       this.listaSolicitudesAtribucion = []
-      this.mensajeSpinner = "Cargando Bienes...";
+      (this as any).mensajeSpinner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
         id: this.datoDepartamento,
@@ -1052,7 +1052,7 @@ console.log("ejecutando recalculo",data);
       return
     }else{
       this.listaSolicitudesAtribucion = []
-      this.mensajeSpinner = "Cargando Bienes...";
+      (this as any).mensajeSpinner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
         id: this.atribucionParamsNew.departamento,
@@ -1112,7 +1112,7 @@ console.log("ejecutando recalculo",data);
     //   this.toastr.info('Debe ingresar el codigo presupuesto')
     // }else{
       this.listaSolicitudesAtribucion2 = []
-      this.mensajeSpinner = "Cargando Bienes...";
+      (this as any).mensajeSpinner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
         id: this.atribucionParamsNew.departamento,

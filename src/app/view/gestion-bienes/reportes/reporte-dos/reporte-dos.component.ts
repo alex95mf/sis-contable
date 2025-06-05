@@ -27,12 +27,12 @@ standalone: false,
   styleUrls: ['./reporte-dos.component.scss']
 })
 export class ReporteDosComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChildren(NgSelectComponent) selects: Array<NgSelectComponent>;
   fTitle: string = 'Análisis de Existencia';
   vmButtons: Array<Botonera> = [];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   processing: any;
   selectedReporte: any;  // Tipo Reporte
@@ -282,7 +282,7 @@ export class ReporteDosComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Grupos'
+      (this as any).mensajeSpinner = 'Cargando Grupos'
       let response: Array<any> = await this.apiService.getGruposBienes();
       let bodegas: Array<any> = await this.apiService.getBodegas();
       this.cmb_grupo = response
@@ -373,7 +373,7 @@ export class ReporteDosComponent implements OnInit {
     // console.log(this.selectedGrupo)
    //if (event != undefined && this.selectedReporte == 'PSG') {
      this.lcargando.ctlSpinner(true)
-     this.mensajeSpinner = 'Filtrando Productos por Grupo de Bien'
+     (this as any).mensajeSpinner = 'Filtrando Productos por Grupo de Bien'
      let data={
       id_grupo: event.id_grupo_productos
      }
@@ -445,7 +445,7 @@ uArrayGrupos(array) {
       mes: Number(this.mes_actual)
    };
 
-   this.mensajeSpinner = 'Cargando...'
+   (this as any).mensajeSpinner = 'Cargando...'
    this.lcargando.ctlSpinner(true)
    this.apiService.getReporteAnalisisExistenciaGrupos(parameterUrl).subscribe((res: any) => {
    this.lcargando.ctlSpinner(false)

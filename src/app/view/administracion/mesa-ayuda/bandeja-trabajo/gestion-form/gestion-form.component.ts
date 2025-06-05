@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./gestion-form.component.scss']
 })
 export class GestionFormComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -165,7 +165,7 @@ export class GestionFormComponent implements OnInit {
     this.closeModal();
   }
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
@@ -243,7 +243,7 @@ export class GestionFormComponent implements OnInit {
     let data = {
       params: "'MDA_CATEGORIA','MDA_SUBCATEGORIA','MDA_ESTADOS'",
     };
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.bandejaTraSrv.getCatalogoCategoria(data).subscribe(
      
@@ -267,7 +267,7 @@ export class GestionFormComponent implements OnInit {
      let data = {
        grupo:evento
      };
-     this.mensajeSpinner = "Buscando sub categoría...";
+     (this as any).mensajeSpinner = "Buscando sub categoría...";
      this.lcargando.ctlSpinner(true);
      this.bandejaTraSrv.getCatalogoSubCategoria(data).subscribe(
        
@@ -329,7 +329,7 @@ export class GestionFormComponent implements OnInit {
 
 
   cargaFoto(archivos) {
-    this.mensajeSpinner = 'Cargando fotos...';
+    (this as any).mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 1) {
       for (let i = 0; i < archivos.length; i++) {
@@ -371,7 +371,7 @@ export class GestionFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
       }).then((result) => {
           if (result.isConfirmed) {
-              this.mensajeSpinner = "Gestionando Ticket...";
+              (this as any).mensajeSpinner = "Gestionando Ticket...";
               this.lcargando.ctlSpinner(true);
   
               let data = {
@@ -430,7 +430,7 @@ export class GestionFormComponent implements OnInit {
   }
 
   cargarSeguimiento(){
-    this.mensajeSpinner = "Cargando Seguimiento...";
+    (this as any).mensajeSpinner = "Cargando Seguimiento...";
     this.lcargando.ctlSpinner(true);
     this.bandejaTraSrv.seguimientoTicket(this.data,this.data['id_ticket']).subscribe(
 

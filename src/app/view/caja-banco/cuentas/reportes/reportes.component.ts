@@ -75,7 +75,7 @@ export class ReportesComponent implements OnInit {
   fechaValida: any;
   vmButtons: any = [];
   vmButtonsT: any = [];
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   constructor(

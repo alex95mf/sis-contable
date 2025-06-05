@@ -33,7 +33,7 @@ export class ShowActivosComponent implements OnInit {
   latestStatus: any;
   vmButtons: any = [];
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   constructor(

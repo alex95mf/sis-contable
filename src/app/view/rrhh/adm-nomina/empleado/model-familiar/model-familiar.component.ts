@@ -16,7 +16,7 @@ export class ModelFamiliarComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Input() empleado: any;
   @Input() data: any;
-  mensajeSpinner: string = "Cargando...";
+  
 
   vmButtons: Array<any> = []
 
@@ -136,7 +136,7 @@ export class ModelFamiliarComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Relaciones'
+      (this as any).mensajeSpinner = 'Cargando Relaciones'
       let response: Array<any> = await this.services.getRelaciones('CARF');
       this.cmb_relaciones = response;
 
@@ -168,7 +168,7 @@ export class ModelFamiliarComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true);
     try {
-      this.mensajeSpinner = 'Guardando...'
+      (this as any).mensajeSpinner = 'Guardando...'
       let response = await this.services.guardarFamiliar(this.empleado, { familiar: this.familiares })
       // console.log(response)
       this.services.setFamiliar$.emit(response);
@@ -202,7 +202,7 @@ export class ModelFamiliarComponent implements OnInit {
 
       this.lcargando.ctlSpinner(true);
       try {
-        this.mensajeSpinner = 'Guardando...'
+        (this as any).mensajeSpinner = 'Guardando...'
         let response = await this.services.modificarFamiliar(this.empleado, this.familiares )
         // console.log(response)
         this.services.updateFamiliar$.emit(response);

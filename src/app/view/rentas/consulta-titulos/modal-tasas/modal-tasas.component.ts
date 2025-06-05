@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
-import { ConsultaTitulosService } from '../consulta-titulos.service'; 
+import { ConsultaTitulosService } from '../consulta-titulos.service';
 
 @Component({
 standalone: false,
@@ -13,7 +13,7 @@ standalone: false,
 })
 export class ModalTasasComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -27,7 +27,7 @@ export class ModalTasasComponent implements OnInit {
   @Input() fTitle: string = "";
   @Input() valor_unitario: boolean = false;
   resdata: any = [];
-  
+
   vmButtons: any;
 
   filter: any;
@@ -77,7 +77,7 @@ export class ModalTasasComponent implements OnInit {
   }
 
   cargarTasasVarias(inicial?: boolean) {
-    this.mensajeSpinner = "Cargando listado de tasas...";
+    (this as any).mensajeSpinner = "Cargando listado de tasas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -86,7 +86,7 @@ export class ModalTasasComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    
+
     this.apiService.getTasasVarias(data).subscribe(
       (res) => {
         console.log(res);
@@ -124,9 +124,9 @@ export class ModalTasasComponent implements OnInit {
           })
           this.resdata = array;
         }
-        
+
         this.lcargando.ctlSpinner(false);
-       
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -157,10 +157,10 @@ export class ModalTasasComponent implements OnInit {
   }
 
   fillBorradoManual() {
-   
+
     if( this.filter.codigo == "") {
       this.filter.codigo = undefined;
-     
+
     }else if(this.filter.descripcion == ""){
       this.filter.descripcion = undefined;
     }else if (this.filter.motivacion_legal == ""){
@@ -200,9 +200,9 @@ export class ModalTasasComponent implements OnInit {
     }
   }
   selectOption(data) {
-   
+
       this.closeModal(data);
-    
+
   }
 
   closeModal(data?:any) {
@@ -214,6 +214,6 @@ export class ModalTasasComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
-  
+
 
 }

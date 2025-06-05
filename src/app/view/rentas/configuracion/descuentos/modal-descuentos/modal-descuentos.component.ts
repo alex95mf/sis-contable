@@ -105,7 +105,7 @@ export class ModalDescuentosComponent implements OnInit {
 
   async setConfiguracion() {
     try {
-      this.mensajeSpinner = 'Almacenando Configuracion'
+      (this as any).mensajeSpinner = 'Almacenando Configuracion'
       const response = await this.apiService.setDescuento({descuento: this.registro})
       console.log(response)
       //
@@ -117,7 +117,7 @@ export class ModalDescuentosComponent implements OnInit {
 
   async updateConfiguracion() {
     try {
-      this.mensajeSpinner = 'Actualizando Configuracion'
+      (this as any).mensajeSpinner = 'Actualizando Configuracion'
       const response = await this.apiService.updateDescuento(this.registro.id_porcentajes_descuentos, {descuento: this.registro})
       console.log(response)
       //

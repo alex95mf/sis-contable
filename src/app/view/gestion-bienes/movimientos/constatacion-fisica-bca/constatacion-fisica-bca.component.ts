@@ -23,7 +23,7 @@ standalone: false,
   styleUrls: ['./constatacion-fisica-bca.component.scss']
 })
 export class ConstatacionFisicaBCAComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -220,9 +220,9 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
             'OBSERVACION': e.observacion,
           }
           plantilla.push(data)
-          
+
         })
-        
+
         this.titles = ['FECHA ADQUISICION','CODIGO','DESCRIPCION','CANTIDAD','CARACTERISTICA','COLOR','CUSTODIO','IGUAL CUSTODIO: (S / N)','VALOR INICIAL','ESTADO: REGULAR= R  BUENO= B  PERDIDO= P  MALO= M','EXISTENCIA REAL: EN USO= U SIN USAR= SU','NO INGRESO','COD INT BODEGA','OBSERVACION'];
         this.exportAsXLSX(plantilla, 'Constatacion fisica BCA ' + this.periodo,{header: this.titles});
       })
@@ -374,7 +374,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
 
   checkPeriodo() {
 
-    this.mensajeSpinner = 'Obteniendo constatación física...';
+    (this as any).mensajeSpinner = 'Obteniendo constatación física...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -416,7 +416,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
 
   guardarIngresos() {
 
-    this.mensajeSpinner = 'Guardando constatación física...';
+    (this as any).mensajeSpinner = 'Guardando constatación física...';
     this.lcargando.ctlSpinner(true);
     console.log(this.dataExcel);
     let data = {
@@ -460,7 +460,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
   }
 
   inspeccionarPeriodo() {
-    this.mensajeSpinner = 'Obteniendo constatación física...';
+    (this as any).mensajeSpinner = 'Obteniendo constatación física...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -486,7 +486,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
   }
 
   eliminarIngresos() {
-    this.mensajeSpinner = 'Eliminando asignacion de ingresos...';
+    (this as any).mensajeSpinner = 'Eliminando asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -539,7 +539,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {
@@ -633,7 +633,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
       })
       console.log(this.dataExcel)
 
-     
+
       let mensaje: string = '';
       this.titles = ['FECHA ADQUISICIÓN','CÓDIGO','DESCRIPCIÓN','CANTIDAD','CARACTERÍSTICA','COLOR','CUSTODIO','IGUAL CUSTODIO: (S / N)','VALOR INICIAL','ESTADO: REGULAR= R  BUENO= B  PERDIDO= P  MALO= M','EXISTENCIA REAL: EN USO= U SIN USAR= SU','NO. INGRESO','COD. INT. BODEGA','OBSERVACIÓN'];
       for(let i=0; i<this.dataExcel.length; i++){
@@ -641,7 +641,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
         // if((this.dataExcel[i]['estado'] != 'R' && this.dataExcel[i]['estado'] != 'B' && this.dataExcel[i]['estado'] != 'M' && this.dataExcel[i]['estado'] != 'P')
         // || (this.dataExcel[i]['existencia_real'] != 'SU' && this.dataExcel[i]['existencia_real'] != 'U')
         // || (this.dataExcel[i]['igual_custodio'] != 'N' && this.dataExcel[i]['igual_custodio'] != 'S')){
-            
+
         //   //this.toastr.info('El archivo no tiene formato adecuado, no se le permitirà GUARDAR');
         //   Swal.fire({
         //     icon: "warning",
@@ -659,7 +659,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
         //       this.vmButtons[0].habilitar = true;
         //     }
         //   });
-          
+
         // };
         if (this.dataExcel[i]['igual_custodio'] != 'N' && this.dataExcel[i]['igual_custodio'] != 'S') mensaje += '* Debe corregir el valor de la columna IGUAL CUSTODIO: (S / N) en la fila '+ [i+2] +' en el archivo excel el valor no puede ser '+this.dataExcel[i]['igual_custodio'] +'<br>'
         if (this.dataExcel[i]['estado'] != 'R' && this.dataExcel[i]['estado'] != 'B' && this.dataExcel[i]['estado'] != 'M' && this.dataExcel[i]['estado'] != 'P') mensaje += '* Debe corregir el valor de la columna ESTADO: REGULAR= R  BUENO= B  PERDIDO= P  MALO= M en la fila '+ [i+2] + ' en el archivo excel el valor no puede ser '+ this.dataExcel[i]['estado'] +'<br>'
@@ -741,7 +741,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
 
       this.apiSrv.listarDescripcionProducto({ codigo: e.codigo }).subscribe(
         res => {
-          
+
           console.log(res['data']);
           let data = {
             fecha_adquisicion: fecha ?? '',
@@ -768,8 +768,8 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
             valor_inicial: e[valor_inicial] ?? '',
             no_ingreso: e[no_ingreso] ?? '',
             cod_int_bodega: e[cod_int_bodega] ?? '',*/
-    
-    
+
+
           }
           console.log(data)
           this.dataExcel.push(data);

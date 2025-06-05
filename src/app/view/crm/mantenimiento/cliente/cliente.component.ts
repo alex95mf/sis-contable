@@ -76,7 +76,7 @@ export class ClienteComponent implements OnInit {
  // }
 
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -213,7 +213,7 @@ lista_generos:any = [
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
@@ -296,7 +296,7 @@ lista_generos:any = [
 
 
   cargaFoto(archivos) {
-    this.mensajeSpinner = 'Cargando fotos...';
+    (this as any).mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos?.length) <= 5) {
       for (let i = 0; i < archivos.length; i++) {
@@ -369,7 +369,7 @@ lista_generos:any = [
 
       if(this.cliente.documentos[index].id_cliente_documento && this.cliente.documentos[index].id_cliente_documento != 0){
         this.lcargando.ctlSpinner(true)
-        this.mensajeSpinner = 'Almacenando Certificado'
+        (this as any).mensajeSpinner = 'Almacenando Certificado'
         try {
 
           let data={
@@ -429,7 +429,7 @@ lista_generos:any = [
       if( data.id_cliente_documento!= 0 && data.id_cliente_documento != undefined ){
         this.lcargando.ctlSpinner(true)
         try {
-          this.mensajeSpinner = 'Eliminando Documento'
+          (this as any).mensajeSpinner = 'Eliminando Documento'
           let response = await this.clienteSrv.deleteCertificado({id_cliente_documento: data.id_cliente_documento})
           console.log(response)
           this.cliente.documentos[index].nombre_archivo = null;
@@ -492,7 +492,7 @@ lista_generos:any = [
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando Cliente...";
+        (this as any).mensajeSpinner = "Guardando Cliente...";
         this.lcargando.ctlSpinner(true);
 
    //     this.producto.fotos = this.fotos.filter(e => e.id_producto_fotos === 0);
@@ -574,7 +574,7 @@ lista_generos:any = [
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Editando Cliente...";
+        (this as any).mensajeSpinner = "Editando Cliente...";
         this.lcargando.ctlSpinner(true);
 
         this.cliente.id_usuario= this.dataUser['id_usuario'];
@@ -693,7 +693,7 @@ lista_generos:any = [
   async cargarCiudad(event,index)
   {
     let provincia = event;
-    this.mensajeSpinner = 'Cargando Ciudad';
+    (this as any).mensajeSpinner = 'Cargando Ciudad';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -725,7 +725,7 @@ lista_generos:any = [
   async cargarCiudad2(event,index)
   {
     let provincia = event;
-    this.mensajeSpinner = 'Cargando Ciudad';
+    (this as any).mensajeSpinner = 'Cargando Ciudad';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -756,7 +756,7 @@ lista_generos:any = [
   async cargarCiudad3(event,index)
   {
     let provincia = event;
-    this.mensajeSpinner = 'Cargando Ciudad';
+    (this as any).mensajeSpinner = 'Cargando Ciudad';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -785,7 +785,7 @@ lista_generos:any = [
   }
   async cargarProvincias()
   {
-    this.mensajeSpinner = 'Cargando Grupo de Productos';
+    (this as any).mensajeSpinner = 'Cargando Grupo de Productos';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -812,7 +812,7 @@ this.lista_provincias = response;
 
   async cargaCatalogos()
   {
-    this.mensajeSpinner = 'Cargando Grupo de Productos';
+    (this as any).mensajeSpinner = 'Cargando Grupo de Productos';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -879,7 +879,7 @@ this.lista_oficial_credito = this.lista_usuarios.filter(usuario => usuario.role.
 
 
   async CargarGrupoProductos(){
-    this.mensajeSpinner = 'Cargando Grupo de Productos';
+    (this as any).mensajeSpinner = 'Cargando Grupo de Productos';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -917,7 +917,7 @@ this.lista_oficial_credito = this.lista_usuarios.filter(usuario => usuario.role.
   }
 
   async CargarBodegas(){
-    this.mensajeSpinner = 'Cargando Bodegas';
+    (this as any).mensajeSpinner = 'Cargando Bodegas';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -1370,7 +1370,7 @@ removeContacto(index)
    };
 
   async consultarCliente(){
-    this.mensajeSpinner = 'Cargando Producto';
+    (this as any).mensajeSpinner = 'Cargando Producto';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -1437,7 +1437,7 @@ removeContacto(index)
   }
 
   async consultarClienteRelacionado(){
-    this.mensajeSpinner = 'Cargando Producto';
+    (this as any).mensajeSpinner = 'Cargando Producto';
     this.lcargando.ctlSpinner(true)
     try {
 

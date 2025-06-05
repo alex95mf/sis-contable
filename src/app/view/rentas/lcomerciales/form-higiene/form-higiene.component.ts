@@ -22,7 +22,7 @@ standalone: false,
   styleUrls: ['./form-higiene.component.scss']
 })
 export class FormHigieneComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -252,7 +252,7 @@ export class FormHigieneComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true)
 
     let params = {
@@ -353,7 +353,7 @@ export class FormHigieneComponent implements OnInit {
   }
 
   cargaFoto(archivos) {
-    this.mensajeSpinner = 'Cargando fotos...';
+    (this as any).mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 5) {
       for (let i = 0; i < archivos.length; i++) {
@@ -412,7 +412,7 @@ export class FormHigieneComponent implements OnInit {
             })/* .then(
               (result: any) => { */
                 if (result.isConfirmed) {
-                  this.mensajeSpinner = "Guardando datos del formulario...";
+                  (this as any).mensajeSpinner = "Guardando datos del formulario...";
                   this.lcargando.ctlSpinner(true);
 
                   let data = {
@@ -494,7 +494,7 @@ export class FormHigieneComponent implements OnInit {
     let local = JSON.parse(JSON.stringify(this.inspeccion.local_comercial));
     let fotos = JSON.parse(JSON.stringify(this.fotos));
     // this.limpiarForm();
-    // this.inspeccion = data;    
+    // this.inspeccion = data;
     this.inspeccion["orden_inspeccion"] = orden;
     this.inspeccion["local_comercial"] = local;
     // this.inspeccion_label = data.orden_inspeccion.numero_orden;

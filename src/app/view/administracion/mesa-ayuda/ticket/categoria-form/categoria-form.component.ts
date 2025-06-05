@@ -13,7 +13,7 @@ standalone: false,
   styleUrls: ['./categoria-form.component.scss']
 })
 export class CategoriaFormComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
 
   @Input() isCategory: any;
@@ -105,7 +105,7 @@ export class CategoriaFormComponent implements OnInit {
     let data = {
       params: "'MDA_CATEGORIA','MDA_SUBCATEGORIA'",
     };
-    this.mensajeSpinner = "Buscando categoría...";
+    (this as any).mensajeSpinner = "Buscando categoría...";
     this.lcargando.ctlSpinner(true);
     this.ticketSrv.getCatalogoCategoria(data).subscribe(
      
@@ -169,7 +169,7 @@ export class CategoriaFormComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
   
-          this.mensajeSpinner = "Guardando Categoría...";
+          (this as any).mensajeSpinner = "Guardando Categoría...";
           this.lcargando.ctlSpinner(true);
   
           let params =  {
@@ -233,7 +233,7 @@ export class CategoriaFormComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = "Guardando Sub Categoría...";
+        (this as any).mensajeSpinner = "Guardando Sub Categoría...";
         this.lcargando.ctlSpinner(true);
 
         let params =  {

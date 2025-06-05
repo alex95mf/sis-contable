@@ -21,7 +21,7 @@ standalone: false,
     templateUrl: "./ofertas.component.html",
     styleUrls: ["./ofertas.component.scss"],
 }) export class OfertasComponent implements OnInit {
-    mensajeSpinner: string = "Cargando...";
+    
     @ViewChild(CcSpinerProcesarComponent, {
         static: false
     }) lcargando: CcSpinerProcesarComponent;

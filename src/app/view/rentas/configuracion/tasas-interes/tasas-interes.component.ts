@@ -16,7 +16,7 @@ export class TasasInteresComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = 'Tasas de Interes';
   vmButtons: Array<Botonera> = [];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   cmb_periodo: Array<any> = [];
   lst_periodo: Array<any> = [];
@@ -82,7 +82,7 @@ export class TasasInteresComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiService.getPeriodos()
       this.cmb_periodo = periodos
 
@@ -98,7 +98,7 @@ export class TasasInteresComponent implements OnInit {
   async ObtenerPeriodo() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Tasas de Interes'
+      (this as any).mensajeSpinner = 'Cargando Tasas de Interes'
       let tasas = await this.apiService.getTasasInteres({periodo: this.periodoSelected});
       tasas.forEach((item: any) => {
         let meses = [
@@ -147,7 +147,7 @@ export class TasasInteresComponent implements OnInit {
   async generarPeriodo() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Generando Periodo'
+      (this as any).mensajeSpinner = 'Generando Periodo'
       await this.apiService.generarPeriodoTasas({periodo: this.periodoSelected})
 
       this.lcargando.ctlSpinner(false)
@@ -172,7 +172,7 @@ export class TasasInteresComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Almacenando Tasas de Interes'
+        (this as any).mensajeSpinner = 'Almacenando Tasas de Interes'
         let tasas = await this.apiService.setTasasInteres({ tasas: this.lst_periodo })
         console.log(tasas)
 
@@ -199,7 +199,7 @@ export class TasasInteresComponent implements OnInit {
         periodo: Number(this.periodoSelected),
         //mes:
       }
-      this.mensajeSpinner = 'Inicializando Intereses'
+      (this as any).mensajeSpinner = 'Inicializando Intereses'
       this.lcargando.ctlSpinner(true);
       this.apiService.inicializarSp(data).subscribe(res => {
         console.log(res)
@@ -234,7 +234,7 @@ export class TasasInteresComponent implements OnInit {
         mes: Number(item.mes),
         cuenta: ''
       }
-      this.mensajeSpinner = 'Calculando Intereses'
+      (this as any).mensajeSpinner = 'Calculando Intereses'
       this.lcargando.ctlSpinner(true);
       this.apiService.calcularInteresSp(data).subscribe(res => {
         console.log(res)

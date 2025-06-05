@@ -22,7 +22,7 @@ standalone: false,
   styleUrls: ["./kardex.component.scss"],
 })
 export class KardexComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, {
     static: false,
   })

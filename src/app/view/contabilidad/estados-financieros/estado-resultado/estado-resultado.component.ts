@@ -20,9 +20,9 @@ standalone: false,
   styleUrls: ['./estado-resultado.component.scss']
 })
 export class EstadoResultadoComponent implements OnInit {
- 
- 
-  
+
+
+
   peridoSelecionado: any = 0;
   nivelSeleccionado: any = 0;
   dataLength: any;
@@ -51,7 +51,7 @@ export class EstadoResultadoComponent implements OnInit {
   fromDatePicker: any ;
   toDatePicker: any;
 
-  hoy: Date = new Date;  
+  hoy: Date = new Date;
   fecha = this.hoy.getDate() + '-' + (this.hoy.getMonth() + 1) + '-' + this.hoy.getFullYear();
   hora = this.hoy.getHours() + ':' + this.hoy.getMinutes() + ':' + this.hoy.getSeconds();
   fechaYHora = this.fecha + '  ' + this.hora;
@@ -67,7 +67,7 @@ export class EstadoResultadoComponent implements OnInit {
   today: any;
   tomorrow: any;
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 
@@ -87,7 +87,7 @@ export class EstadoResultadoComponent implements OnInit {
     private router: Router, private excelService: ExcelService, private xlsService: XlsExportService, private http: HttpClient) {
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
 
-    
+
 
   }
 
@@ -114,7 +114,7 @@ export class EstadoResultadoComponent implements OnInit {
 
     this.empresLogo = this.dataUser.logoEmpresa;
     let id_rol = this.dataUser.id_rol;
-    
+
     let data = {
       id: 2,
       codigo: myVarGlobals.festadoResultado,
@@ -195,7 +195,7 @@ export class EstadoResultadoComponent implements OnInit {
     let fechaActualUno = moment(this.fromDatePicker).format("YYYY-MM-DD")
     let fechaActualCambio = moment(this.toDatePicker).format("YYYY-MM-DD")
     let fechaActual = moment(this.viewDate).add(1, 'd').format("YYYY-MM-DD")
-  
+
       if(fechaActualCambio > fechaActual ){
       this.toastr.info("Fecha No puede ser Mayor" +  " " + fechaActual);
       this.toDatePicker = new Date();
@@ -233,7 +233,7 @@ export class EstadoResultadoComponent implements OnInit {
       this.balanceInit = res['data'];
       this.processing = true;
       this.getParametersFilter();
-      
+
     }, error =>{
       this.lcargando.ctlSpinner(false);
       this.processing = true;
@@ -281,12 +281,12 @@ export class EstadoResultadoComponent implements OnInit {
         }else{
           this.vmButtons[2].habilitar = true;
           this.vmButtons[2].showimg = true;
-          
+
         }
 
       }, error => {
 
-        this.toastr.info(error.error.message);      
+        this.toastr.info(error.error.message);
         this.ActulizaEstadoREsultado = false;
 
       })
@@ -350,10 +350,10 @@ export class EstadoResultadoComponent implements OnInit {
             else{
               Object.assign(e, {total_fila: false, class:'text-bold' , size:"font-size:12px;"});
             }
-            
+
           })
         }
-      
+
         let data = {
           class:'font-weight-bold' ,
           size:"font-size:14px;",
@@ -374,7 +374,7 @@ export class EstadoResultadoComponent implements OnInit {
           dic: dic,
           total: total
         }
-       
+
         this.balanceInitMensual.push(data)
         console.log(this.balanceInitMensual)
         this.ActulizaEstadoREsultado = false;
@@ -388,12 +388,12 @@ export class EstadoResultadoComponent implements OnInit {
           this.vmButtons[1].habilitar = false;
           this.vmButtons[2].habilitar = true;
           this.vmButtons[2].showimg = false;
-          
+
         }
 
       }, error => {
 
-        this.toastr.info(error.error.message);      
+        this.toastr.info(error.error.message);
         this.ActulizaEstadoREsultado = false;
 
       })
@@ -428,7 +428,7 @@ export class EstadoResultadoComponent implements OnInit {
         this.ActulizaEstadoREsultado = false;
         this.MostrarndoData = true;
         this.MostrarndoDataMensual = false;
-       
+
       }
       if(this.periodoVisualizacion=='ANUAL'){
         this.consultFilterMensual(data);
@@ -436,19 +436,19 @@ export class EstadoResultadoComponent implements OnInit {
         this.MostrarndoDataMensual = true;
         this.MostrarndoData = false;
       }
-        
-      
+
+
 
     // }, error => {
 
-    //   this.toastr.info(error.error.message);      
+    //   this.toastr.info(error.error.message);
     //   this.ActulizaEstadoREsultado = false;
 
     // })
     }
 
 
-    
+
 
   }
 
@@ -456,7 +456,7 @@ export class EstadoResultadoComponent implements OnInit {
     let total = 0
     this.balanceInit.forEach(e => {
       if(e.nivel ==2){
-        total += parseFloat(e.valor); 
+        total += parseFloat(e.valor);
       }
     })
     return total;
@@ -465,12 +465,12 @@ export class EstadoResultadoComponent implements OnInit {
   btnExportar() {
 
     if(this.periodoVisualizacion=='MENSUAL'){
-      
+
       if (this.permisions[0].exportar == "0") {
         this.toastr.info("Usuario no tiene permiso para exportar");
       } else {
-        // this.mensajeSpinner = "Generando Archivo Excel..."; 
-        // this.lcargando.ctlSpinner(true); 
+        // (this as any).mensajeSpinner = "Generando Archivo Excel...";
+        // this.lcargando.ctlSpinner(true);
 
         // let data = {
         //   "fecha_desde":moment(this.fromDatePicker).format('YYYY-MM-DD'),
@@ -499,31 +499,31 @@ export class EstadoResultadoComponent implements OnInit {
         //     })
         //   }
         //   this.balanceInit = res['data'];
-         
+
         // }, error => {
-  
-        //   this.toastr.info(error.error.message);      
-          
-  
+
+        //   this.toastr.info(error.error.message);
+
+
         // })
         //http://154.12.249.218:8080/jasperserver/rest_v2/reports/reports/rpt_estado_resultado.html?fecha_desde=2022-09-01&centro_costo=0&cod_empresa=1&fecha_hasta=2022-09-30
-  
+
         let desde = moment(this.fromDatePicker).format('YYYY-MM-DD');
         let hasta = moment(this.toDatePicker).format('YYYY-MM-DD');
-  
+
           http://vmi1057060.contaboserver.net:9090/jasperserver/rest_v2/reports/reports/rpt_estado_resultado.html?fecha_desde=~NULL~&centro_costo=&fecha_inicio=01/11/2022&id_usuario=14&fecha_fin=02/12/2022&id_empresa=1&cod_empresa=&fecha_hasta=~NULL~
         //http://vmi1057060.contaboserver.net:9090/jasperserver/rest_v2/reports/reports/rpt_estado_resultado.html?fecha_desde=~NULL~&centro_costo=&fecha_inicio=01/11/2022&id_usuario=14&fecha_fin=02/12/2022&id_empresa=1&cod_empresa=&fecha_hasta=~NULL~
-  
+
         //http://vmi1057060.contaboserver.net:9090/jasperserver/rest_v2/reports/reports/rpt_estado_resultado.html?fecha_inicio=01/11/2022&id_usuario=14&fecha_fin=02/12/2022&id_empresa=1
-       
+
         window.open(environment.ReportingUrl + "rpt_estado_resultado.xlsx?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&desde="+desde+"&id_usuario="+this.dataUser.id_usuario+"&fecha_fin="+hasta+"&id_empresa=1", '_blank');
-      
+
       }
     }
     if(this.periodoVisualizacion=='ANUAL'){
-   
-      this.mensajeSpinner = "Generando Archivo Excel..."; 
-      this.lcargando.ctlSpinner(true); 
+
+      (this as any).mensajeSpinner = "Generando Archivo Excel...";
+      this.lcargando.ctlSpinner(true);
       let data = {
         "fecha_desde":moment(this.fromDatePicker).format('YYYY-MM-DD'),
         "fecha_hasta":moment(this.toDatePicker).format('YYYY-MM-DD'),
@@ -554,8 +554,8 @@ export class EstadoResultadoComponent implements OnInit {
       //   this.balanceInitMensualExcel = res['data'];
       //   if(this.balanceInitMensualExcel.length > 0){
       //     this.balanceInitMensualExcel.forEach(e => {
-            
-      //       Object.assign(e, { 
+
+      //       Object.assign(e, {
       //         ene: Number(parseFloat(e.ene).toFixed(2)),
       //         feb: Number(parseFloat(e.feb).toFixed(2)),
       //         mar: Number(parseFloat(e.mar).toFixed(2)),
@@ -583,7 +583,7 @@ export class EstadoResultadoComponent implements OnInit {
       //         nov += parseFloat(e.nov),
       //         dic += parseFloat(e.dic),
       //         total += parseFloat(e.total)
-      //       } 
+      //       }
       //     })
 
       //     let datos = {
@@ -603,9 +603,9 @@ export class EstadoResultadoComponent implements OnInit {
       //       dic: dic,
       //       total: total
       //     }
-         
+
       //     this.balanceInitMensualExcel.push(datos)
-          
+
       //     let data = {
       //       title: 'Estados de Resultados Anual',
       //       fecha_desde: this.fromDatePicker,
@@ -615,10 +615,10 @@ export class EstadoResultadoComponent implements OnInit {
       //     this.xlsService.exportExcelEstadoResultMensual(data, 'Estados de Resultados Anual')
       //     }else{
       //     this.toastr.info("No hay datos para exportar")
-      //     this.lcargando.ctlSpinner(false); 
+      //     this.lcargando.ctlSpinner(false);
       //     }
       // }, error => {
-      //   this.toastr.info(error.error.message);      
+      //   this.toastr.info(error.error.message);
       //   this.lcargando.ctlSpinner(false);
       // })
 
@@ -670,13 +670,13 @@ export class EstadoResultadoComponent implements OnInit {
             else{
               Object.assign(e, {total_fila: false, class:'text-bold' , size:"font-size:12px;"});
             }
-            
+
           })
         }else{
           this.toastr.info("No hay datos para exportar")
-          this.lcargando.ctlSpinner(false); 
+          this.lcargando.ctlSpinner(false);
         }
-      
+
         let data = {
           class:'font-weight-bold' ,
           size:"font-size:14px;",
@@ -698,12 +698,12 @@ export class EstadoResultadoComponent implements OnInit {
           total: total,
           clase: clase
         }
-       
+
         this.balanceInitMensualExcel.push(data)
 
         this.balanceInitMensualExcel.forEach(e => {
-    
-          Object.assign(e, { 
+
+          Object.assign(e, {
             ene: Number(this.cambiarSigno(e.ene,e.clase)),
             feb: Number(this.cambiarSigno(e.feb,e.clase)),
             mar: Number(this.cambiarSigno(e.mar,e.clase)),
@@ -717,7 +717,7 @@ export class EstadoResultadoComponent implements OnInit {
             nov: Number(this.cambiarSigno(e.nov,e.clase)),
             dic: Number(this.cambiarSigno(e.dic,e.clase)),
             total: Number(this.cambiarSigno(e.total,e.clase)) });
-          }) 
+          })
         let data2 = {
           title: 'Estados de Resultados Anual',
           fecha_desde: this.fromDatePicker,
@@ -727,12 +727,12 @@ export class EstadoResultadoComponent implements OnInit {
         this.xlsService.exportExcelEstadoResultMensual(data2, 'Estados de Resultados Anual')
       }, error => {
 
-        this.toastr.info(error.error.message);      
+        this.toastr.info(error.error.message);
         this.ActulizaEstadoREsultado = false;
 
       })
     }
-   
+
   }
 
   cambiarSigno(valor: number,clase: string): number{
@@ -744,7 +744,7 @@ export class EstadoResultadoComponent implements OnInit {
       return Math.abs(valor);
     }
   }
-  
+
   exportAsXLSX() {
     this.excelService.exportAsExcelFile(this.excelData, 'Estado_resultado');
   }
@@ -754,20 +754,20 @@ export class EstadoResultadoComponent implements OnInit {
 
       let desde = moment(this.fromDatePicker).format('YYYY-MM-DD');
       let hasta = moment(this.toDatePicker).format('YYYY-MM-DD');
-  
+
       window.open(environment.ReportingUrl + "rpt_estado_resultado.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&desde="+desde+"&id_usuario="+this.dataUser.id_usuario+"&fecha_fin="+hasta+"&id_empresa=1", '_blank');
       console.log(environment.ReportingUrl + "rpt_estado_resultado.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"&desde="+desde+"&id_usuario="+this.dataUser.id_usuario+"&fecha_fin="+hasta+"&id_empresa=1")
      // window.open(environment.ReportingUrl + "rpt_estado_resultado.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"fecha_desde="+desde+"&centro_costo=0&fecha_inicio="+desde+"&id_usuario="+this.dataUser.id_usuario+"&fecha_fin="+hasta+"&id_empresa=1&cod_empresa=1&fecha_hasta="+hasta, '_blank');
-  
+
       // window.open(environment.ReportingUrl + "rpt_estado_resultado.pdf?&j_username="+environment.UserReporting+"&j_password="+environment.PasswordReporting+"fecha_desde="+desde+"&centro_costo=0&cod_empresa=1&fecha_hasta="+hasta+"&id_usuario="+this.dataUser.user_token_id, '_blank')
-  
+
       /*let data = {
         ip: this.commonService.getIpAddress(),
         accion: "Registro de impresion de Estado de resultados",
         id_controlador: myVarGlobals.festadoResultado
       }
       this.estadoServices.printData(data).subscribe(res => {
-  
+
       }, error => {
         this.toastr.info(error.error.mesagge);
       })*/
@@ -793,7 +793,7 @@ export class EstadoResultadoComponent implements OnInit {
   let  fecha_desde = fromDatePicker.replace(/-/g, '');
   let  fecha_hasta = toDatePicker.replace(/-/g, '');
   //let codigo_cuenta = codigoCuenta.replace(/\./g, '');
-   
+
     const rutaMayor = `/todotek/sis-contable/dist/#/contabilidad/reportes/movimientos/${fecha_desde}/${fecha_hasta}/${codigo_cuenta}`
     //const rutaRelativa = `/tu-ruta-interna/${anio}/${mes}`;
     const nuevaVentana = window.open('','_blank')

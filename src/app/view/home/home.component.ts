@@ -12,7 +12,7 @@ standalone: false,
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   usuarios: any;
   password: any;

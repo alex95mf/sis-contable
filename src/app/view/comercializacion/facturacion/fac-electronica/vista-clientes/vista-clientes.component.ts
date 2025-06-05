@@ -24,7 +24,7 @@ export class VistaClientesComponent implements OnInit {
 
   vmButtons: any = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;

@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./deposito.component.scss']
 })
 export class DepositoComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

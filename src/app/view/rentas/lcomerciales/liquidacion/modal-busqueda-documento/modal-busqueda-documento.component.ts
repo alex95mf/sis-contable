@@ -16,7 +16,7 @@ standalone: false,
 export class ModalBusquedaDocumentoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any;
 
   documentos: Array<any> = [];
@@ -89,7 +89,7 @@ export class ModalBusquedaDocumentoComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
 
     try {
-      this.mensajeSpinner = 'Cargando Documentos'
+      (this as any).mensajeSpinner = 'Cargando Documentos'
       let response = await this.apiService.getDocumentos({
         params: {
           filter: this.filter,

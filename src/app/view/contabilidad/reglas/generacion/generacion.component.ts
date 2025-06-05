@@ -23,15 +23,15 @@ standalone: false,
 })
 export class GeneracionComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Reglas";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
 
-  cierres: Array<any> = []; 
+  cierres: Array<any> = [];
   tipoRegla: any = [];
   codigoDetalles: any = [];
   dataReporte: any = [];
@@ -77,12 +77,12 @@ export class GeneracionComponent implements OnInit {
   tipoCodigoList = [
     {value: "CON",label: "Contable"},
     {value: "PRE",label: "Presupuesto"}
-  ] 
+  ]
 
   tipoMovimientoList= [
     {value: "D",label: "Debe"},
     {value: "H",label: "Haber"}
-  ] 
+  ]
   periodo: Date = new Date();
   mes_actual: any = 0;
   arrayMes: any =
@@ -141,7 +141,7 @@ export class GeneracionComponent implements OnInit {
     },
   ];
 
-  tabActiva: string = 'nav-configuracion'; 
+  tabActiva: string = 'nav-configuracion';
 
 
   constructor(
@@ -157,15 +157,15 @@ export class GeneracionComponent implements OnInit {
         console.log(res);
         if(res['validacion']){
           console.log('true')
-          this.grupo.codigo_cuenta_contable = res['data']['codigo'];        
+          this.grupo.codigo_cuenta_contable = res['data']['codigo'];
           this.grupo.descripcion_cuenta = res['data']['nombre'];
           this.grupo.codigo_oficial = res['data']['codigo_oficial'];
           this.grupo.codigo_presupuesto = "";
           this.grupo.descripcion_presupuesto = "";
-         
+
         }else{
           console.log('false')
-          this.grupo.codigo_cuenta_contable ="";        
+          this.grupo.codigo_cuenta_contable ="";
           this.grupo.descripcion_cuenta = "";
           this.grupo.codigo_oficial = "";
           this.grupo.codigo_presupuesto = res['data']['codigo'];
@@ -196,8 +196,8 @@ export class GeneracionComponent implements OnInit {
               descripcion: e.presupuesto == null ?  e.cuentas?.nombre : e.presupuesto?.nombre ,
               tipo_codigo:e.tipo_codigo
           })
-          
-          
+
+
          });
 
         this.codigoDetalles = res.detalles;
@@ -206,14 +206,14 @@ export class GeneracionComponent implements OnInit {
 
       }
     )
-    
+
    }
 
   ngOnInit(): void {
     this.mes_actual = (Number(moment(new Date()).format('MM'))).toString();
-   
 
-  
+
+
     this.vmButtons = [
       {
         orig: "btnReglas",
@@ -260,15 +260,15 @@ export class GeneracionComponent implements OnInit {
         habilitar: true,
         //printSection: "PrintSection", imprimir: true
       },
-      { 
-        orig: "btnReglas", 
-        paramAccion: "", 
-        boton: { icon: "fa fa-file-excel-o", texto: " Excel" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: false, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
+      {
+        orig: "btnReglas",
+        paramAccion: "",
+        boton: { icon: "fa fa-file-excel-o", texto: " Excel" },
+        permiso: true,
+        showtxt: true,
+        showimg: false,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
         habilitar: true
       },
       {
@@ -293,15 +293,15 @@ export class GeneracionComponent implements OnInit {
     };
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
-    
+
     this.today = new Date();
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
-     
+
       fecha_desde: moment().startOf('month').format('YYYY-MM-DD'),
       fecha_hasta: moment().endOf('month').format('YYYY-MM-DD'),
       numero_regla: ""
@@ -317,9 +317,9 @@ export class GeneracionComponent implements OnInit {
     setTimeout(() => {
       //this.validaPermisos();
       this.getCatalogos();
-    
+
     }, 50);
-    
+
   }
 
   ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
@@ -360,17 +360,17 @@ export class GeneracionComponent implements OnInit {
         this.confirmRestore();
         break;
 
-        
+
       default:
         break;
     }
   }
 
   // validaPermisos = () => {
-  //   this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+  //   (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
   //   this.lcargando.ctlSpinner(true);
   //   this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
-    
+
   //   let params = {
   //     codigo: myVarGlobals.fRenPredUrbanoEmision,
   //     id_rol: this.dataUser.id_rol,
@@ -424,19 +424,19 @@ export class GeneracionComponent implements OnInit {
               "Seguro desea modificar la Regla?",
               "UPDATE_REGLA"
             );
-            
+
           }
-          
+
         }
       });
     //}
   }
 
   validaDataGlobal() {
-   
+
     let flag = false;
     return new Promise((resolve, reject) => {
-      
+
         if (this.documento.tipo_regla == "" || this.documento.tipo_regla == undefined) {
           this.toastr.info("Debe seleccionar un Tipo de Regla")
           flag = true;
@@ -454,7 +454,7 @@ export class GeneracionComponent implements OnInit {
           this.toastr.info("Debe ingresar al menos un detalle par la regla")
           flag = true;
         }
-     
+
       !flag ? resolve(true) : resolve(false);
     })
   }
@@ -475,7 +475,7 @@ export class GeneracionComponent implements OnInit {
         } else if(action == "UPDATE_REGLA"){
           this.modificarRegla()
         }
-        
+
       }
     });
   }
@@ -485,7 +485,7 @@ export class GeneracionComponent implements OnInit {
       params: "'CON_TIPO_REGLA'",
       //params: "'OP_CONCEPTOS','PAG_TIPO_DESEMBOLSO'",
     };
-    this.mensajeSpinner = "Buscando tipo de regla...";
+    (this as any).mensajeSpinner = "Buscando tipo de regla...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogo(data).subscribe(
 
@@ -504,7 +504,7 @@ export class GeneracionComponent implements OnInit {
     if(this.tipoCodigo!= undefined){
       this.addDetalle = false;
     }else{
-     
+
       this.addDetalle = true;
     }
   }
@@ -532,7 +532,7 @@ export class GeneracionComponent implements OnInit {
       nuevo = {
         id_regla_det: 0,
         numero_regla: this.documento.numero_regla,
-        tipo_codigo: this.tipoCodigo, 
+        tipo_codigo: this.tipoCodigo,
         tipo_movimiento: this.tipoMovimiento,
         codigo_oficial: this.grupo.codigo_oficial != "" ? this.grupo.codigo_oficial  : undefined,
         codigo: this.grupo.codigo_cuenta_contable == "" ? this.grupo.codigo_presupuesto  : this.grupo.codigo_cuenta_contable,
@@ -547,7 +547,7 @@ export class GeneracionComponent implements OnInit {
 
   }
 
- 
+
   guardarRegla() {
 
     Swal.fire({
@@ -563,14 +563,14 @@ export class GeneracionComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = 'Guardando Regla...';
+        (this as any).mensajeSpinner = 'Guardando Regla...';
         this.lcargando.ctlSpinner(true);
         this.documento.estado= 'A'
         let data = {
           documento: this.documento,
           detalles: this.codigoDetalles
         }
-       
+
         this.apiSrv.setRegla(data).subscribe(
           (res) => {
             if (res["status"] == 1) {
@@ -629,7 +629,7 @@ export class GeneracionComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = 'Modificando Regla...';
+        (this as any).mensajeSpinner = 'Modificando Regla...';
         this.lcargando.ctlSpinner(true);
         this.documento.estado= 'A'
         let data = {
@@ -638,7 +638,7 @@ export class GeneracionComponent implements OnInit {
           detalles: this.codigoDetalles,
           detallesEliminar: this.reglasDetallesIds
         }
-       
+
         this.apiSrv.updateRegla(data).subscribe(
           (res) => {
             if (res["status"] == 1) {
@@ -691,14 +691,14 @@ export class GeneracionComponent implements OnInit {
         filter: this.filter,
         paginate: this.paginate
       };
-      this.mensajeSpinner = "Cargando reporte...";
+      (this as any).mensajeSpinner = "Cargando reporte...";
       this.lcargando.ctlSpinner(true);
       this.apiSrv.consultaReporte(data).subscribe(
-  
+
         (res) => {
-         
+
           res["data"].forEach(e => {
-           
+
             this.totalDebe += +e.valor_debe_regla;
             this.totalHaber += +e.valor_haber_regla;
 
@@ -719,7 +719,7 @@ export class GeneracionComponent implements OnInit {
       );
     }
 
-   
+
   }
 
   btnExportarExcel() {
@@ -729,7 +729,7 @@ export class GeneracionComponent implements OnInit {
       rows:  this.dataReporte
     }
     console.log(data)
-  
+
     this.xlsService.exportReglasEsigef(data, 'Reporte reglas ESIGEF')
   }
 
@@ -742,7 +742,7 @@ export class GeneracionComponent implements OnInit {
 
     modal.componentInstance.validacionModal = data;
     modal.componentInstance.validar = true
-  
+
 
   }
 
@@ -752,13 +752,13 @@ export class GeneracionComponent implements OnInit {
     // modal.componentInstance.contr = this.contribuyenteActive;
     modal.componentInstance.permissions = this.permissions;
     modal.componentInstance.tipoRgla = this.tipoRegla;
-    
+
   }
   removeDetalleReglas(d) {
     if (d.id_regla_det !== null ||d.id_regla_det !== 0  ) this.reglasDetallesIds.push(d.id_regla_det)
     console.log(this.reglasDetallesIds)
     this.codigoDetalles.splice(this.codigoDetalles.indexOf(d), 1)
-    
+
   }
 
   exportarPdf(){

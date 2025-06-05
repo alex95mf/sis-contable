@@ -18,7 +18,7 @@ export class RegistroComponent implements OnInit {
   fTitle: string = 'Asignacion de Presupuesto a Programas'
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(NgSelectComponent) ngSelectComponent: NgSelectComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any;
 
   // Permisos del usuario
@@ -70,7 +70,7 @@ export class RegistroComponent implements OnInit {
 
   validaPermisos() {
     /** Obtiene los permisos del usuario y valida si puede trabajar sobre el formulario */
-    this.mensajeSpinner = 'Cargando Permisos de Usuario'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     let params = {
@@ -124,11 +124,11 @@ export class RegistroComponent implements OnInit {
   async cargaInicial() {
     try {
       // Carga Listado de Periodos de la Base
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       this.periodos = await this.planRegistroService.getPeriodos();
 
       // Carga los Programas
-      this.mensajeSpinner = 'Cargando Programas'
+      (this as any).mensajeSpinner = 'Cargando Programas'
       this.programas = await this.planRegistroService.getProgramas();
       this.programas.map((programa: any) => Object.assign(programa, { presupuesto: 0 }))
 
@@ -158,7 +158,7 @@ export class RegistroComponent implements OnInit {
 
     try {
       this.lcargando.ctlSpinner(true)
-      this.mensajeSpinner = 'Cargando Presupuesto del Periodo'
+      (this as any).mensajeSpinner = 'Cargando Presupuesto del Periodo'
       // Revisar si hay Asignacion Inicial
       let asignacionInicialPeriodo = await this.planRegistroService.getAsignacionInicial(event)
       console.log(asignacionInicialPeriodo)
@@ -204,7 +204,7 @@ export class RegistroComponent implements OnInit {
       }
       
       // Cargar Presupuestos de Programas
-      this.mensajeSpinner = 'Cargando Presupuesto por Programa'
+      (this as any).mensajeSpinner = 'Cargando Presupuesto por Programa'
       let response = await this.planRegistroService.getPresupuestoProgramas(event);
       response.forEach((elem: any) => {
         this.programas.find((programa: any) => programa.id_catalogo == elem.fk_programa).presupuesto = elem.presupuesto ?? 0
@@ -237,13 +237,13 @@ export class RegistroComponent implements OnInit {
           this.lcargando.ctlSpinner(true);
 
           // Crear nuevo Periodo
-          this.mensajeSpinner = 'Creando nuevo Periodo';
+          (this as any).mensajeSpinner = 'Creando nuevo Periodo';
           let general = await this.planRegistroService.setPresupuesto({presupuesto: this.presupuesto});
           // Almacenar Presupuesto de cada Programa
-          this.mensajeSpinner = 'Almacenando Presupuesto de Programas';
+          (this as any).mensajeSpinner = 'Almacenando Presupuesto de Programas';
           await this.planRegistroService.setPresupuestoProgramas({presupuesto: general, programas: this.programas});
           // Cargar nuevo periodo
-          this.mensajeSpinner = 'Cargando Periodos';
+          (this as any).mensajeSpinner = 'Cargando Periodos';
           this.periodos = await this.planRegistroService.getPeriodos();
 
           this.lcargando.ctlSpinner(false);
@@ -306,7 +306,7 @@ export class RegistroComponent implements OnInit {
           this.lcargando.ctlSpinner(true);
           // Actualizar periodo seleccionado
           // Actualizar por Programa
-          this.mensajeSpinner = 'Actualizando Presupuesto seleccionado'
+          (this as any).mensajeSpinner = 'Actualizando Presupuesto seleccionado'
           await this.planRegistroService.updatePresupuesto({presupuesto: this.presupuesto, programas: this.programas})
           this.lcargando.ctlSpinner(false);
           Swal.fire('Presupuesto actualizado correctamente', '', 'success');
@@ -365,7 +365,7 @@ export class RegistroComponent implements OnInit {
   }
 
   enviarCorreo() {
-    this.mensajeSpinner = 'Enviando correos...'
+    (this as any).mensajeSpinner = 'Enviando correos...'
     this.lcargando.ctlSpinner(true)
     this.planRegistroService.enviarCorreos().subscribe(
       res => {

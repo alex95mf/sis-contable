@@ -27,7 +27,7 @@ standalone: false,
 export class GeneracionPermisosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de liquidación (Permiso de construccion)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -90,7 +90,7 @@ export class GeneracionPermisosComponent implements OnInit {
 
       (res) => {
         console.log(res)
-        // this.mensajeSpinner = 'Cargando datos de la iquidación...';
+        // (this as any).mensajeSpinner = 'Cargando datos de la iquidación...';
         // this.lcargando.ctlSpinner(true)
         this.restoreForm(false, false);
         console.log(res);
@@ -255,7 +255,7 @@ export class GeneracionPermisosComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
@@ -423,7 +423,7 @@ export class GeneracionPermisosComponent implements OnInit {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     let data = {
       id_concepto: 58
@@ -465,7 +465,7 @@ export class GeneracionPermisosComponent implements OnInit {
     this.liquidacion.fk_contribuyente = contr.id_cliente;
     this.observacionesDisabled = false;
     this.vmButtons[3].habilitar = false;
-    this.mensajeSpinner = 'Obteniendo Propiedades...'
+    (this as any).mensajeSpinner = 'Obteniendo Propiedades...'
     this.lcargando.ctlSpinner(true)
     this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
       (res) => {
@@ -519,7 +519,7 @@ export class GeneracionPermisosComponent implements OnInit {
         console.log(result)
         if (result.isConfirmed) {
 
-          this.mensajeSpinner = 'Verificando período contable...';
+          (this as any).mensajeSpinner = 'Verificando período contable...';
           this.lcargando.ctlSpinner(true);
           let datos = {
             "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -530,7 +530,7 @@ export class GeneracionPermisosComponent implements OnInit {
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
 
-                this.mensajeSpinner = 'Generando Liquidación...';
+                (this as any).mensajeSpinner = 'Generando Liquidación...';
                 this.lcargando.ctlSpinner(true);
                 this.liquidacion.fk_lote = this.propiedadActive.id;
                 this.liquidacion.estado = 'A';

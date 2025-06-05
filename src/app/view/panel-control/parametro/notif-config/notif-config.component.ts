@@ -17,7 +17,7 @@ standalone: false,
 export class NotifConfigComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = []
   tbl_notificaciones: any[] = []
 
@@ -89,7 +89,7 @@ export class NotifConfigComponent implements OnInit, OnDestroy {
 
   async getModulos() {
     try {
-      this.mensajeSpinner = 'Cargando Modulos'
+      (this as any).mensajeSpinner = 'Cargando Modulos'
       const response = await this.apiService.getModulos();
       console.log(response)
       //
@@ -102,7 +102,7 @@ export class NotifConfigComponent implements OnInit, OnDestroy {
 
   async getCatalogos() {
     try {
-      this.mensajeSpinner = 'Cargando Catalogos'
+      (this as any).mensajeSpinner = 'Cargando Catalogos'
       const response = await this.apiService.getCatalogo({params: "'TIPO_NOTIFICACION_ALERTA'"})
       console.log(response)
       //
@@ -132,7 +132,7 @@ export class NotifConfigComponent implements OnInit, OnDestroy {
 
   async getAlertas() {
     try {
-      this.mensajeSpinner = 'Cargando Alertas'
+      (this as any).mensajeSpinner = 'Cargando Alertas'
       const response = await this.apiService.getAlertas({filter: this.filter, paginate: this.paginate})
       console.log(response)
 
@@ -177,7 +177,7 @@ export class NotifConfigComponent implements OnInit, OnDestroy {
 
   async eliminarAlerta(notificacion: any) {
     try {
-      this.mensajeSpinner = 'Eliminando Registro'
+      (this as any).mensajeSpinner = 'Eliminando Registro'
       const response = await this.apiService.deleteAlerta(notificacion.id, {notificacion})
       console.log(response)
       const idx = this.tbl_notificaciones.findIndex((element: any) => element.id == notificacion.id)

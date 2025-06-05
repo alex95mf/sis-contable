@@ -60,7 +60,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   processing: any = false;
-  mensajeSpinner: string = "Cargando...";
+
 
 
   folderDigitalForm: DocFicha = {
@@ -318,7 +318,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
       fecha_modificacion: this.toLocal(date),
 
     };
-    this.mensajeSpinner = "Actualizando...";
+    (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.rhfolderdigitalService.updatedFolderDigital(data).subscribe(
       (res) => {
@@ -354,7 +354,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
       id_doc_ficha: this.folderDigitalForm.id_doc_ficha,
     };
     // this.validaDt = false;
-    this.mensajeSpinner = "Borrando...";
+    (this as any).mensajeSpinner = "Borrando...";
     this.lcargando.ctlSpinner(true);
     this.rhfolderdigitalService.deleteFolderDigital(data).subscribe(
       (res) => {
@@ -404,7 +404,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
 
     };
 
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.rhfolderdigitalService.saveFolderDigital(data).subscribe(
       (res) => {
@@ -603,7 +603,7 @@ export class FolderDigitalEmpleadoComponent implements OnInit {
             id_controlador: myVarGlobals.fGrupo,
             id_grupo: this.id_grupo,
           }
-          this.mensajeSpinner = "Eliminando...";
+          (this as any).mensajeSpinner = "Eliminando...";
           this.lcargando.ctlSpinner(true);
           this.grupoServices.deleteGrupo(data).subscribe(res => {
             this.lcargando.ctlSpinner(false);

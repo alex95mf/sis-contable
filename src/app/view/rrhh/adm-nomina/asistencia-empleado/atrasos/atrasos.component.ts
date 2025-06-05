@@ -17,7 +17,7 @@ standalone: false,
 export class AtrasosComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild('fileUpload') fileUpload: ElementRef;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   cmb_periodo: any[] = []
   fileName: string|null = null;
   tbl_registros: any[] = []
@@ -56,7 +56,7 @@ export class AtrasosComponent implements OnInit, OnDestroy {
         }
         this.lcargando.ctlSpinner(true)
         try {
-          this.mensajeSpinner = 'Cargando Atrasos'
+          (this as any).mensajeSpinner = 'Cargando Atrasos'
           let response = await this.apiService.getAtrasos({ params: { filter: this.filter, periodo: this.periodoSelected, mes: this.mes_id_cc } })
           console.log(response)
           if (!response.length) {
@@ -101,7 +101,7 @@ export class AtrasosComponent implements OnInit, OnDestroy {
         if (result.isConfirmed) {
           this.lcargando.ctlSpinner(true)
           try {
-            this.mensajeSpinner = 'Actualizando Registros'
+            (this as any).mensajeSpinner = 'Actualizando Registros'
             let response = await this.apiService.updateAtrasos({ atrasos: this.lst_update })
             console.log(response)
             //
@@ -129,7 +129,7 @@ export class AtrasosComponent implements OnInit, OnDestroy {
         if (result.isConfirmed) {
           this.lcargando.ctlSpinner(true)
           try {
-            this.mensajeSpinner = 'Eliminando Atrasos'
+            (this as any).mensajeSpinner = 'Eliminando Atrasos'
             let response = await this.apiService.deleteAtrasos({periodo: this.periodoSelected, mes: this.mes_id_cc})
             console.log(response)
             //
@@ -157,7 +157,7 @@ export class AtrasosComponent implements OnInit, OnDestroy {
         if (result.isConfirmed) {
           this.lcargando.ctlSpinner(true)
           try {
-            this.mensajeSpinner = 'Aprobando Atrasos'
+            (this as any).mensajeSpinner = 'Aprobando Atrasos'
             let response = await this.apiService.aprobarAtrasos({ periodo: this.periodoSelected, mes: this.mes_id_cc })
             console.log(response)
             //
@@ -209,7 +209,7 @@ export class AtrasosComponent implements OnInit, OnDestroy {
     if (file) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Procesando Archivo de Marcas'
+        (this as any).mensajeSpinner = 'Procesando Archivo de Marcas'
         let response = await this.apiService.procesarAtrasos(file, { periodo: this.periodoSelected, mes: this.mes_id_cc })
         console.log(response)
 

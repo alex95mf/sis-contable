@@ -24,10 +24,10 @@ standalone: false,
 })
 export class ConstatacionFisicaComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  
+
   fTitle: string = "Constatacion fisica";
 
   vmButtons: any = [];
@@ -39,7 +39,7 @@ export class ConstatacionFisicaComponent implements OnInit {
   dataExcel: any = [];
 
   file: any;
-  
+
   periodo: any;
   yearDisabled = false;
   fileDisabled = true;
@@ -66,7 +66,7 @@ export class ConstatacionFisicaComponent implements OnInit {
     private excelSrv: ExcelService,
     private modal: NgbModal,
     private commonVrs: CommonVarService,
-  ) { 
+  ) {
     this.commonVrs.modalConstFisica.asObservable().subscribe(
       (res)=>{
         console.log(res)
@@ -184,7 +184,7 @@ export class ConstatacionFisicaComponent implements OnInit {
 
     this.plantillaExcel = [];
     for(let i=0; i<this.listaProductos.length; i++){
-      
+
       let data = {};
       data[codigo] = this.listaProductos[i].codigoProducto;
       data[producto] = this.listaProductos[i].nombre;
@@ -208,7 +208,7 @@ export class ConstatacionFisicaComponent implements OnInit {
     this.titles =  [codigo, producto, stock,stock_fisico,diferencia,observacion];
 
     this.exportAsXLSX(this.plantillaExcel ,'Constatacion fisica '+this.periodo, {header: this.titles});
-    
+
   }
 
   exportAsXLSX(body, title, header) {
@@ -223,7 +223,7 @@ export class ConstatacionFisicaComponent implements OnInit {
     let stock_fisico = 'STOCK FÍSICO';
     let diferencia = 'DIFERENCIA';
     let observacion = 'OBSERVACIÓN';
-    
+
 
     let copy = JSON.parse(JSON.stringify(this.dataExcel));
 
@@ -234,31 +234,31 @@ export class ConstatacionFisicaComponent implements OnInit {
       e[stock_fisico] = e.stock_fisico;
       e[diferencia] = e.diferencia;
       e[observacion] = e.observacion;
-      
+
       delete e.codigo;
       delete e.producto;
       delete e.stock;
       delete e.stock_fisico;
       delete e.diferencia;
       delete e.observacion;
-      
+
     })
-    
+
     this.titles =  [codigo, producto, stock, stock_fisico, diferencia,observacion];
     console.log(copy);
 
     this.exportAsXLSX(copy, 'Constatación fisica '+this.periodo, {header: this.titles});
   }
 
-  
+
   metodoGlobal(event) {
     switch (event.items.boton.texto) {
       case " GUARDAR":
       this.validaGuardar();
         break;
-      case "BUSCAR": 
+      case "BUSCAR":
           this.modalReformas();
-        
+
         break;
       case " ELIMINAR":
         Swal.fire({
@@ -273,8 +273,8 @@ export class ConstatacionFisicaComponent implements OnInit {
           cancelButtonColor: '#F86C6B',
           confirmButtonColor: '#4DBD74',
         }).then((result) => {
-          if (result.isConfirmed) {            
-            this.eliminarIngresos(); 
+          if (result.isConfirmed) {
+            this.eliminarIngresos();
           }
         });
         break;
@@ -316,7 +316,7 @@ export class ConstatacionFisicaComponent implements OnInit {
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-      if (result.isConfirmed) {            
+      if (result.isConfirmed) {
        this.guardarIngresos()
       }
     });
@@ -326,11 +326,11 @@ export class ConstatacionFisicaComponent implements OnInit {
 
   checkPeriodo() {
 
-    this.mensajeSpinner = 'Obteniendo constatación física...';
+    (this as any).mensajeSpinner = 'Obteniendo constatación física...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -352,8 +352,8 @@ export class ConstatacionFisicaComponent implements OnInit {
             cancelButtonColor: '#F86C6B',
             confirmButtonColor: '#4DBD74',
           }).then((result) => {
-            if (result.isConfirmed) {            
-              this.restoreForm(); 
+            if (result.isConfirmed) {
+              this.restoreForm();
             }
           });
         }
@@ -368,12 +368,12 @@ export class ConstatacionFisicaComponent implements OnInit {
 
   guardarIngresos() {
 
-    this.mensajeSpinner = 'Guardando constatación física...';
+    (this as any).mensajeSpinner = 'Guardando constatación física...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
       data_excel: this.dataExcel,
-      periodo: this.periodo,      
+      periodo: this.periodo,
       fecha:this.fecha,
       observacion: this.observacion
     };
@@ -403,11 +403,11 @@ export class ConstatacionFisicaComponent implements OnInit {
   }
 
   inspeccionarPeriodo() {
-    this.mensajeSpinner = 'Obteniendo constatación física...';
+    (this as any).mensajeSpinner = 'Obteniendo constatación física...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -429,11 +429,11 @@ export class ConstatacionFisicaComponent implements OnInit {
   }
 
   eliminarIngresos() {
-    this.mensajeSpinner = 'Eliminando asignacion de ingresos...';
+    (this as any).mensajeSpinner = 'Eliminando asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -464,7 +464,7 @@ export class ConstatacionFisicaComponent implements OnInit {
     this.vmButtons[1].habilitar = false;
     this.vmButtons[2].habilitar = true;
     this.vmButtons[3].habilitar = false;
-   
+
 
     this.dataExcel = [];
     this.file = undefined;
@@ -479,9 +479,9 @@ export class ConstatacionFisicaComponent implements OnInit {
     this.headersEnable = false;
     this.break = false;
   }
-  
+
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {
@@ -520,7 +520,7 @@ export class ConstatacionFisicaComponent implements OnInit {
       const data = reader.result;
       workBook = XLSX.read(data, { type: 'binary' });
       jsonData = workBook.SheetNames.reduce((initial, name) => {
-        
+
         const sheet = workBook.Sheets[name];
         initial[name] = XLSX.utils.sheet_to_json(sheet);
         // console.log('two',initial);
@@ -564,7 +564,7 @@ export class ConstatacionFisicaComponent implements OnInit {
           stock_fisico: e[stock_fisico]??this.notData(),
           diferencia: e[diferencia]?? '0',
           observacion: e[observacion]?? '',
-          
+
           // periodo2: e[periodo2]??this.notData(),
           // periodo3: e[periodo3]??this.notData(),
           // semestre1: e[semestre1]??this.notData(),
@@ -614,19 +614,19 @@ export class ConstatacionFisicaComponent implements OnInit {
         stock_fisico: e['stock_fisico']??0,
         diferencia: e['diferencia']??0,
         observacion: e['observacion']??'',
-        
-        
+
+
       }
       this.dataExcel.push(data);
     });
-    
+
     let codigo = 'CÓDIGO';
     let producto = 'PRODUCTO';
     let stock = 'STOCK SISTEMA';
     let stock_fisico = 'STOCK FÍSICO';
     let diferencia = 'DIFERENCIA';
     let observacion = 'OBSERVACIÓN';
-   
+
 
     this.headersEnable = true;
     this.titles =  [codigo, producto, stock, stock_fisico, diferencia,observacion];
@@ -665,7 +665,7 @@ export class ConstatacionFisicaComponent implements OnInit {
     this.apiSrv.listarProducto({}).subscribe((res: any) => {
       res.map((data) => {
         this.listaProductos.push(data)
-        
+
       })
       console.log(this.listaProductos)
     })

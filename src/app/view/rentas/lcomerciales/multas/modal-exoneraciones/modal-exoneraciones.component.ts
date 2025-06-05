@@ -14,7 +14,7 @@ standalone: false,
   styleUrls: ['./modal-exoneraciones.component.scss']
 })
 export class ModalExoneracionesComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -73,7 +73,7 @@ export class ModalExoneracionesComponent implements OnInit {
   }
 
   cargarExoneraciones() {
-    this.mensajeSpinner = "Cargando lista de Exoneraciones..."
+    (this as any).mensajeSpinner = "Cargando lista de Exoneraciones..."
     this.lcargando.ctlSpinner(true);
 
     let data = {

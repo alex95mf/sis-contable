@@ -16,7 +16,7 @@ standalone: false,
 })
 export class TablasConfigFormComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -104,7 +104,7 @@ export class TablasConfigFormComponent implements OnInit {
 }
 
 getTablasConfigBy(id) {
-  this.mensajeSpinner = "Obteniendo tablas...";
+  (this as any).mensajeSpinner = "Obteniendo tablas...";
   this.lcargando.ctlSpinner(true);
   this.tablasConfigSrv.getTablasConfigBy(id).subscribe(
     (res) => {
@@ -224,7 +224,7 @@ crearTablasConfig() {
     confirmButtonColor: '#4DBD74',
     }).then((result) => {
         if (result.isConfirmed) {
-            this.mensajeSpinner = "Guardando tabla...";
+            (this as any).mensajeSpinner = "Guardando tabla...";
             this.lcargando.ctlSpinner(true);
 
             let data = {
@@ -292,7 +292,7 @@ editTablasConfig() {
           confirmButtonColor: '#4DBD74',
   }).then((result) => {
     if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando tabla..."
+        (this as any).mensajeSpinner = "Guardando tabla..."
         this.lcargando.ctlSpinner(true);
 
         let data = {

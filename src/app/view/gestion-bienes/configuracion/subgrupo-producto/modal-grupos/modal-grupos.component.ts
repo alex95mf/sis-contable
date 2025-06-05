@@ -14,7 +14,7 @@ standalone: false,
   styleUrls: ['./modal-grupos.component.scss']
 })
 export class ModalGruposComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -103,7 +103,7 @@ export class ModalGruposComponent implements OnInit {
      
     }
 
-    this.mensajeSpinner = "Cargando lista ..."
+    (this as any).mensajeSpinner = "Cargando lista ..."
     this.lcargando.ctlSpinner(true);
     this.apiService.getProductos(data).subscribe(
       (res) => {

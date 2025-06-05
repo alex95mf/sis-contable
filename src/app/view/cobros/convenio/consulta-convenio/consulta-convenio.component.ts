@@ -14,7 +14,7 @@ standalone: false,
 })
 export class ConsultaConvenioComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   filter: any;
@@ -101,7 +101,7 @@ export class ConsultaConvenioComponent implements OnInit {
 
 
   cargarDocumentos(){
-    this.mensajeSpinner = "Cargando lista de documentos de pago...";
+    (this as any).mensajeSpinner = "Cargando lista de documentos de pago...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

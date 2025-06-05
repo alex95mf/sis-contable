@@ -155,7 +155,7 @@ export class GastosPersonalesComponent implements OnInit {
 
   actions: any = { btnGuardar: true, btnMod: false };
   processing: any = false;
-  mensajeSpinner: string = "Cargando...";
+
 
   // Tabla de Impuesto a la Renta
   displayedColumns: string[] = ['anual', 'mensual', 'acumulado', 'pendiente', 'motivo'];
@@ -237,7 +237,7 @@ export class GastosPersonalesComponent implements OnInit {
         this.lcargando.ctlSpinner(true)
         try {
           // Consultar IRbase_imponibl
-          this.mensajeSpinner = 'Cargando datos de Impuesto a la Renta'
+          (this as any).mensajeSpinner = 'Cargando datos de Impuesto a la Renta'
           let response = await this.gastospersonalesService.getImpuestoRenta({empleado: res.emp_identificacion})
           console.log(response)
 
@@ -344,7 +344,7 @@ export class GastosPersonalesComponent implements OnInit {
       //   url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
       // },
     };
-    this.mensajeSpinner = "Cargando";
+    (this as any).mensajeSpinner = "Cargando";
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.today = new Date().toISOString().split("T")[0];
@@ -495,7 +495,7 @@ export class GastosPersonalesComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = "Carga Inicial"
+      (this as any).mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.gastospersonalesService.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -686,7 +686,7 @@ export class GastosPersonalesComponent implements OnInit {
 
   async handleInputCargas() {
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Consultando Valor por Cargas Familiares'
+    (this as any).mensajeSpinner = 'Consultando Valor por Cargas Familiares'
     await this.getMaxGastoPersonal(this.impuestoRenta.num_cargas_familiares, this.cc_value_anio)
     this.lcargando.ctlSpinner(false)
     this.calcularBase()
@@ -694,7 +694,7 @@ export class GastosPersonalesComponent implements OnInit {
 
   async consultarTablaDiscapacidad() {
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Consultando Valor por Discapacidad'
+    (this as any).mensajeSpinner = 'Consultando Valor por Discapacidad'
     await this.getRebajaDiscapacidad(this.empleado.porcentaje_discapacidad, this.cc_value_anio)
     this.lcargando.ctlSpinner(false)
     this.calcularBase()
@@ -706,7 +706,7 @@ export class GastosPersonalesComponent implements OnInit {
         cargas: cargas,
         periodo: periodo
       }
-      this.mensajeSpinner = 'Obteniendo Tope de Gastos Personales'
+      (this as any).mensajeSpinner = 'Obteniendo Tope de Gastos Personales'
       let response = await this.gastospersonalesService.getMaxGastosPersonales({data})
       console.log(response)
       let maxGastoPersonal =response.valor == undefined ? 0 :  response.valor;
@@ -725,7 +725,7 @@ export class GastosPersonalesComponent implements OnInit {
         porcentaje: porcentaje,
         periodo: periodo
       }
-      this.mensajeSpinner = 'Obteniendo Rebaja por Discapacidad'
+      (this as any).mensajeSpinner = 'Obteniendo Rebaja por Discapacidad'
       let response = await this.gastospersonalesService.getRebajaDiscapacidad({data})
       if(response.valor == undefined){
         this.toastr.info("No existe un valor configurado para ese porcentaje de discapacidad.")
@@ -745,7 +745,7 @@ export class GastosPersonalesComponent implements OnInit {
       let data= {
         periodo: periodo
       }
-      this.mensajeSpinner = 'Obteniendo Rebaja por Tercera Edad'
+      (this as any).mensajeSpinner = 'Obteniendo Rebaja por Tercera Edad'
       let response = await this.gastospersonalesService.getRebajaTerceraEdad({data})
       console.log(response)
       let rebaja_tercera_edad = response
@@ -801,7 +801,7 @@ export class GastosPersonalesComponent implements OnInit {
     let impuesto_renta_mensual: number = 0;
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Obteniendo Impuesto Causado'
+      (this as any).mensajeSpinner = 'Obteniendo Impuesto Causado'
       console.log(base_imponible)
       let response = await this.gastospersonalesService.getImpuestoCausado({ base_imponible })
       console.log(response)
@@ -887,7 +887,7 @@ export class GastosPersonalesComponent implements OnInit {
       impuestoRenta: this.impuestoRenta,
     };
 
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.gastospersonalesService.saveListGastosPersonales(data).subscribe(
       async (res) => {
@@ -900,7 +900,7 @@ export class GastosPersonalesComponent implements OnInit {
         // this.lcargando.ctlSpinner(false);
         // this.cancel();
         try {
-          this.mensajeSpinner = 'Actualizando datos'
+          (this as any).mensajeSpinner = 'Actualizando datos'
           let response = await this.gastospersonalesService.getImpuestoRenta({empleado: this.empleado.emp_identificacion})
           this.dataImpuestoRenta = response
 
@@ -1021,7 +1021,7 @@ export class GastosPersonalesComponent implements OnInit {
       impuestoRenta: this.impuestoRenta,
     };
     // this.validaDt = false;
-    this.mensajeSpinner = "Actualizando...";
+    (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.gastospersonalesService.updateListGastosPersonales(data).subscribe(
       async (res) => {
@@ -1032,7 +1032,7 @@ export class GastosPersonalesComponent implements OnInit {
         // this.lcargando.ctlSpinner(false);
         // this.toastr.success(res['message']);
         try {
-          this.mensajeSpinner = 'Actualizando datos'
+          (this as any).mensajeSpinner = 'Actualizando datos'
           let response = await this.gastospersonalesService.getImpuestoRenta({empleado: this.empleado.emp_identificacion})
           this.dataImpuestoRenta = response
 
@@ -1130,7 +1130,7 @@ export class GastosPersonalesComponent implements OnInit {
       dataGP: arraySendDeleteId,
     };
     // this.validaDt = false;
-    this.mensajeSpinner = "Borrando...";
+    (this as any).mensajeSpinner = "Borrando...";
     this.lcargando.ctlSpinner(true);
     this.gastospersonalesService.deleteListGastosPersonales(data).subscribe(
       (res) => {

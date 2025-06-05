@@ -31,7 +31,7 @@ export class ReformaInternaComponent implements OnInit, OnDestroy {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+
 iddetallecabecerareformageneral: any;
   programa: Array<any> = [];
   programa2: Array<any> = [];
@@ -372,7 +372,7 @@ iddetallecabecerareformageneral: any;
 
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -489,7 +489,7 @@ iddetallecabecerareformageneral: any;
   }
 
   cargarPrograma() {
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -718,7 +718,7 @@ iddetallecabecerareformageneral: any;
 
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.mensajeSpinner = "Creando Reforma interna...";
+              (this as any).mensajeSpinner = "Creando Reforma interna...";
               this.lcargando.ctlSpinner(true);
               console.log(this.atribucionParamsNew);
               this.atribucionParamsNew.bienes = []
@@ -792,11 +792,11 @@ iddetallecabecerareformageneral: any;
   async cargaInicial() {
     this.lcargando.ctlSpinner(true);
     try {
-      this.mensajeSpinner = 'Cargando Periodos';
+      (this as any).mensajeSpinner = 'Cargando Periodos';
       let periodos = await this.service.getPeriodos();
       this.cmb_periodo = periodos;
 
-      this.mensajeSpinner = 'Cargando Programas'
+      (this as any).mensajeSpinner = 'Cargando Programas'
       let programasRes: Array<any> = await this.service.searchPrograma();
       console.log(programasRes)
       programasRes.map((item: any) => Object.assign(item, { label: `${item.catalogo.descripcion} - ${item.catalogo.valor}` }))
@@ -811,7 +811,7 @@ iddetallecabecerareformageneral: any;
   }
 
   departamentoSearch() {
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       programa: this.dato_Programa
@@ -836,7 +836,7 @@ iddetallecabecerareformageneral: any;
 
   departamentoSearchSelect(numero) {
     console.log(this.atribucionParamsNew.programa)
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       programa: this.atribucionParamsNew.programa?.valor
@@ -860,7 +860,7 @@ iddetallecabecerareformageneral: any;
 
   departamentoSearchSelect2() {
     console.log(this.atribucionParamsNew.programa_dos)
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       programa: this.atribucionParamsNew.programa_dos?.valor
@@ -883,7 +883,7 @@ iddetallecabecerareformageneral: any;
   }
 
   AtribucionSearch(event) {
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event.valor
@@ -896,7 +896,7 @@ iddetallecabecerareformageneral: any;
 
   SearchList() {
     this.listaSolicitudes = []
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id: this.datoDepartamento,
@@ -935,7 +935,7 @@ iddetallecabecerareformageneral: any;
       return
     } else {
       this.listaSolicitudesAtribucion = []
-      this.mensajeSpinner = "Cargando Bienes...";
+      (this as any).mensajeSpinner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
         id: this.datoDepartamento,
@@ -996,7 +996,7 @@ iddetallecabecerareformageneral: any;
       return
     } else {
       this.listaSolicitudesAtribucion = []
-      this.mensajeSpinner = "Cargando Bienes...";
+      (this as any).mensajeSpinner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
         id: this.atribucionParamsNew.departamento.id_catalogo,
@@ -1053,7 +1053,7 @@ iddetallecabecerareformageneral: any;
 
   SearchBienes2() {
     this.listaSolicitudesAtribucion2 = []
-    this.mensajeSpinner = "Cargando Bienes...";
+    (this as any).mensajeSpinner = "Cargando Bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id: this.atribucionParamsNew.departamento_dos.id_catalogo,
@@ -1278,7 +1278,7 @@ iddetallecabecerareformageneral: any;
 
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Duplicando Bien'
+        (this as any).mensajeSpinner = 'Duplicando Bien'
         let response: Array<any> = await this.service.duplicarBien({
           bien: bien,
           codigo_presupuesto: this.cod_presupuesto,

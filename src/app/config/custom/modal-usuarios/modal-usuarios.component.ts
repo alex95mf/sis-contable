@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
-import { ModalUsuariosService } from './modal-usuarios.service'; 
+import { ModalUsuariosService } from './modal-usuarios.service';
 import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { ToastrService } from 'ngx-toastr';
@@ -19,7 +19,7 @@ standalone: false,
 })
 export class ModalUsuariosComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
 
@@ -125,7 +125,7 @@ export class ModalUsuariosComponent implements OnInit {
   }
 
   cargarUsuarios() {
-    this.mensajeSpinner = "Cargando lista de Usuarios...";
+    (this as any).mensajeSpinner = "Cargando lista de Usuarios...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -137,7 +137,7 @@ export class ModalUsuariosComponent implements OnInit {
 
     this.mdlSrv.getUsuarios(data).subscribe(
       (res: any) => {
-     
+
         this.usuariosDt = res.data.data
         this.paginate.length = res.data.total
         this.lcargando.ctlSpinner(false);

@@ -27,7 +27,7 @@ standalone: false,
 export class GeneracionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de Liquidación (Locales Comerciales)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -123,7 +123,7 @@ export class GeneracionComponent implements OnInit {
   ) {
     this.commonVarService.selectListLiqPURen.asObservable().subscribe(
       (res) => {
-        //this.mensajeSpinner = 'Cargando datos de la Liquidación...';
+        //(this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
         //this.lcargando.ctlSpinner(true)
         this.restoreForm();
         this.formReadOnly = true;
@@ -192,7 +192,7 @@ export class GeneracionComponent implements OnInit {
           
         });
         if (this.liquidacion.fk_orden_inspeccion && this.liquidacion.fk_orden_inspeccion != 0) {
-          this.mensajeSpinner = 'Cargando datos de la Liquidación...';
+          (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
           this.lcargando.ctlSpinner(true);
           let data = {
             inspeccion: this.liquidacion.fk_orden_inspeccion
@@ -303,7 +303,7 @@ export class GeneracionComponent implements OnInit {
         });
 
         // Al venir solo uno, se toma su codigo_detalle, de busca el concepto y se actualiza el concepto de la liquidacion
-        this.mensajeSpinner = 'Leyendo datos adicionales...'
+        (this as any).mensajeSpinner = 'Leyendo datos adicionales...'
         this.lcargando.ctlSpinner(true)
         this.apiService.getConceptoByNombre({nombre_detalle: res[0].nombre_detalle}).subscribe(
           (response: any) => {
@@ -382,7 +382,7 @@ export class GeneracionComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -557,7 +557,7 @@ export class GeneracionComponent implements OnInit {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     // let data = {
     //   id_concepto: 47
@@ -664,7 +664,7 @@ export class GeneracionComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = 'Generando Liquidación...';
+          (this as any).mensajeSpinner = 'Generando Liquidación...';
           this.lcargando.ctlSpinner(true);
           this.liquidacion.fk_contribuyente = this.contribuyenteActive.id_cliente;
           this.liquidacion.fk_orden_inspeccion = this.ordenActive.id_inspeccion_orden;
@@ -739,7 +739,7 @@ export class GeneracionComponent implements OnInit {
   }
 
   /* generarValores() {
-    this.mensajeSpinner = 'Cargando Valores...';
+    (this as any).mensajeSpinner = 'Cargando Valores...';
     this.lcargando.ctlSpinner(true);
     let data = {
       concepto: "LC",

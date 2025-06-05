@@ -14,7 +14,7 @@ standalone: false,
   styleUrls: ['./conyugue.component.scss']
 })
 export class ConyugueComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -184,7 +184,7 @@ export class ConyugueComponent implements OnInit {
 
 
   cargarContribuyentes() {
-    // this.mensajeSpinner = "Cargando lista de Contribuyentes...";
+    // (this as any).mensajeSpinner = "Cargando lista de Contribuyentes...";
     this.lcargando.ctlSpinner(true);
     this.filter['num_documento'] = this.contribuyenteCon.co_cedula
 

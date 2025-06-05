@@ -32,7 +32,7 @@ standalone: false,
   styleUrls: ['./egresos-bodega.component.scss']
 })
 export class EgresosBodegaComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('TipoBienes') cmb_tipoBienes: NgSelectComponent
 
@@ -40,7 +40,7 @@ export class EgresosBodegaComponent implements OnInit {
   processing: boolean = false;
   verifyRestore = false;
   toDatePicker: Date = new Date();
-  
+
   dataUser: any;
   flagBtnDired: any = false;
   arrayCustomer: any = [];
@@ -68,7 +68,7 @@ export class EgresosBodegaComponent implements OnInit {
   fecha_doc: string = moment().format('YYYY-MM-DD');
 
 
-  
+
   filtClient: any;
   moduloUser: any = "";
 
@@ -78,14 +78,14 @@ export class EgresosBodegaComponent implements OnInit {
   disabled: any = false;
   datoAsig = false;
   motivoBol = true;
-  
-  
+
+
   datoGene = false;
   tipo = [];
   motivoC = [];
   motivosCR = []
   catalog_filter:any = []
-  
+
   responsable1 = true
   prooved = true
   instintic = true
@@ -135,7 +135,7 @@ export class EgresosBodegaComponent implements OnInit {
   }
 
 
-  
+
   /*actions*/
   // actions: any = { dComponet: false };
 
@@ -174,7 +174,7 @@ export class EgresosBodegaComponent implements OnInit {
   textNotification: any = "";
   textNotificationSend = "Notificación: ";
 
-  
+
   catalog: any = []
 
 
@@ -188,7 +188,7 @@ export class EgresosBodegaComponent implements OnInit {
     descripcion_presupuesto: null,
     tipo_bien: null
   }
-  
+
   claseSelect: any = 0;
   listaProductos: any = []
 
@@ -204,7 +204,7 @@ export class EgresosBodegaComponent implements OnInit {
     costo: 0
   }
   id_egreso_bodega: any;
-  
+
   genera_nota_credito: boolean = false;
   cmb_bodegas: any[] = [];
   bodegaOrigen: number|null = null;
@@ -263,7 +263,7 @@ export class EgresosBodegaComponent implements OnInit {
     this.commonVarServices.encargadoSelect.asObservable().subscribe(
       (res)=>{
         console.log(res);
-       
+
         if(res['tipo']==4){
           this.id_responsable= res['responsable']['id_empleado'];
           this.responsable = res['responsable']['emp_full_nombre'];
@@ -287,20 +287,20 @@ export class EgresosBodegaComponent implements OnInit {
           this.entrega.recibido = res['dt']['emp_full_nombre'];
           this.entrega.nombre_departamento_recibido = res['dt']['departamento']['dep_nombre'];
           this.entrega.nombre_cargo_recibido = res['dt']['cargos']['car_nombre'];
-          
+
         } else{
           this.UserSelect = res['dt']['emp_full_nombre'];
           this.id_solicitado_por = res['dt']['id_empleado'];
         }
 
-        
+
         this.filtClient = {
           id_personal: res['dt']['id_empleado'],
           nombres: res['dt']['emp_full_nombre']
 
         }
         //this.moduloUser = res['cargos']['car_nombre']
-        
+
       }
     )
     // this.commonVarServices.encargadoSelect.asObservable().subscribe(
@@ -425,14 +425,14 @@ export class EgresosBodegaComponent implements OnInit {
         // this.dataProducto = [];
         // console.log(res.detalles[0].cantidad);
 
-        
+
         this.grupo.tipo_bien = res.tipo_bien
-        
+
         if(res.proveedor){
           this.proveedorActive = res.proveedor
           this.proveedorActive['razon_social'] = res.proveedor?.razon_social
         }
-        
+
         this.institucion = res.institucion
 
         this.recibido = res.recibido === null ? {} : res.recibido
@@ -511,7 +511,7 @@ export class EgresosBodegaComponent implements OnInit {
               desglose: desglose,
             });
         });
-        
+
         this.dataProducto = JSON.parse(JSON.stringify(res.detalles));
       }
     )
@@ -525,7 +525,7 @@ export class EgresosBodegaComponent implements OnInit {
     // }
     // )
 
-    
+
 
     this.commonVarServices.departamentoSelect.asObservable().subscribe(
       (res) => {
@@ -556,7 +556,7 @@ export class EgresosBodegaComponent implements OnInit {
 
   mostrarCampos(campos){
     console.log(campos);
-    
+
     if(campos === undefined){
       this.motivo = undefined
       this.motivosCR = []
@@ -574,7 +574,7 @@ export class EgresosBodegaComponent implements OnInit {
       this.datoRecepVal1 = true
     } else {
       let valor = this.motivoC.filter(e => e.grupo === campos.valor);
-  
+
       this.datGen = false
       this.motivoBol = false
       this.motivosCR = valor
@@ -619,7 +619,7 @@ export class EgresosBodegaComponent implements OnInit {
 
         this.datoAsig = false
       }
-      
+
     }else if(evento === "SM" ){
       this.datoGene = true
       this.datoAsig = true
@@ -647,14 +647,14 @@ export class EgresosBodegaComponent implements OnInit {
       this.datoRecepVal1 = false
 
       this.instintic = true
-      
+
     }else{
       this.datoGene = true
       this.datGen = false
-      
+
     }
 
-    
+
   }
 
   detectBodega() {
@@ -910,7 +910,7 @@ export class EgresosBodegaComponent implements OnInit {
     if (event == undefined) return;
     this.claseSelect = []
     if (this.subgrupo) this.subgrupo.descripcion = undefined
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let data = {
       tipo_bien: event
@@ -933,7 +933,7 @@ export class EgresosBodegaComponent implements OnInit {
     this.agregaProduct = false;
     if (event) {
       this.disabledSubGrupo = false;
-      
+
     }
   }
 
@@ -1029,7 +1029,7 @@ export class EgresosBodegaComponent implements OnInit {
       this.toastr.warning(message, 'Validacion de Datos', {enableHtml: true})
       return
     }
-    
+
     // abre modal de forma de pago distinto para cada titulo que se vaya a pagar
     const modal = this.modalService.open(ListBusquedaComponent, { size: "xl", backdrop: 'static', windowClass: 'viewer-content-general' })
     // modal.componentInstance.contr = this.contribuyenteActive;
@@ -1222,29 +1222,29 @@ export class EgresosBodegaComponent implements OnInit {
       this.validateDataGlobal().then(respuesta => {
         if (respuesta) {
 
-          this.mensajeSpinner = "Verificando período contable";
+          (this as any).mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(moment(this.fecha_doc).format('YYYY')),
             "mes": Number(moment(this.fecha_doc).format('MM'))
           }
             this.cierremesService.obtenerCierresPeriodoPorMes(data).subscribe(res => {
-            
+
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-             
+
               this.saveSales();
-        
+
             } else {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-        
+
             }, error => {
                 this.lcargando.ctlSpinner(false);
                 this.toastr.info(error.error.mesagge);
             })
-        
+
         }
       })
     }
@@ -1265,7 +1265,7 @@ export class EgresosBodegaComponent implements OnInit {
       //       if (this.dataProducto[index].codigoProducto == null) {
       //         this.toastr.info("No se pueden agregar productos sin código");
       //         flag = true; break;
-      //       } 
+      //       }
       //     }
       // }
       if (this.datoAsig && this.departamentoSelect.dep_nombre == "" || this.departamentoSelect.dep_nombre == undefined) {
@@ -1305,7 +1305,7 @@ export class EgresosBodegaComponent implements OnInit {
       }
       else if (this.grupo.tipo_bien === 'BCA' || this.grupo.tipo_bien === 'BLD' ) {
         if (this.dataProducto.length != 0) {
-          
+
           for (let index = 0; index < this.dataProducto.length; index++) {
             console.log(this.dataProducto[index]);
             console.log(this.dataProducto[index].codigoproducto);
@@ -1377,7 +1377,7 @@ export class EgresosBodegaComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             this.save(productSend, notify, filter, prefict, info, resultado);
-          } 
+          }
         })
       } else {
         this.save(productSend, notify, filter, prefict, info, resultado);
@@ -1387,7 +1387,7 @@ export class EgresosBodegaComponent implements OnInit {
 
   async save(productSend, notify, filter, prefict, info, resultado) {
     console.log(productSend)
-    this.mensajeSpinner = "Guardando egreso de bodega...";
+    (this as any).mensajeSpinner = "Guardando egreso de bodega...";
     this.lcargando.ctlSpinner(true);
     this.validatePrice(productSend).then(res => {
       localStorage.removeItem('dataProductsInvoice');
@@ -1431,25 +1431,25 @@ export class EgresosBodegaComponent implements OnInit {
         fk_vehiculo: this.vehiculo?.id_producto,
 
         // id_quotes: (this.quote != undefined) ? this.quote.id : null,
-        
+
         // observation_sales: this.customer.observationSales,
-        
+
         // customer: this.customer,
         // date: moment(this.toDatePicker).format('YYYY-MM-DD'),
-        
+
         // totals: this.dataTotales,
         // payment_type: this.dataBuy.tipoPagoSelect,
         // payment_method: this.dataBuy.formaPagoSelect,
-        
+
         // status: (res) ? "En proceso" : "Aprobado",
-        
+
         // ip: this.commonServices.getIpAddress(),
         // accion: `Registro de Egreso de Bodega ${this.customer['asesor']['nombre']}`,
         // id_controlador: myVarGlobals.fGBEgreBodega,
         // notifycation: (!res && !resultado && !this.validate_cupo && !((this.maxInvoicesPend >= this.maxInvoicesXCliente) && this.customer.credito == 1)) ? notify : `${notify}, esta factura necesita ser aprobada`,
         // abbr_doc: prefict[0].codigo,
         // id_document: prefict[0].fk_documento,
-        
+
         // usersFilter: this.commonServices.filterUserNotification(filter, 2),
         // id_us_aprob: null,
         // name_us_aprob: null,
@@ -1596,7 +1596,7 @@ export class EgresosBodegaComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando Catalogs";
+    (this as any).mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'INV_TIPO_EGRESO', 'INV_MOTIVO_EGRESO', 'INV_TIPO_BIEN'",
     };
@@ -1607,7 +1607,7 @@ export class EgresosBodegaComponent implements OnInit {
         this.motivoC = res["data"]["INV_MOTIVO_EGRESO"];
         this.catalog = res["data"]["INV_TIPO_BIEN"];
          //this.catalog = res["data"]["INV_TIPO_BIEN"].filter(c => {c.valor != 'EXI'});
-        this.catalog_filter = this.catalog.filter(e => e.valor != 'EXI') 
+        this.catalog_filter = this.catalog.filter(e => e.valor != 'EXI')
 
         // console.log(this.catalog);
         this.lcargando.ctlSpinner(false);

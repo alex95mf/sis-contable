@@ -50,7 +50,7 @@ export class BalancecomprobacionComponent implements OnInit {
 
   URL_API = environment.apiUrl
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 
@@ -159,7 +159,7 @@ export class BalancecomprobacionComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
     };
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.balanceService.getAccounts({ id_empresa: this.dataUser.id_empresa }).subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -218,7 +218,7 @@ export class BalancecomprobacionComponent implements OnInit {
       grupo: (this.grupoSeleccionado == undefined) ? null : this.grupoSeleccionado,
       id_empresa: this.dataUser.id_empresa
     }
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.balanceService.getAccountsFilters(data).subscribe(res => {
       this.validaDtAccount = true;

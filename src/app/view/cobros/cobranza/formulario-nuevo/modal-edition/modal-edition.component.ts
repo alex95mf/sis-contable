@@ -15,7 +15,7 @@ standalone: false,
 })
 export class ModalEditionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+  
   fTitulo: string = "Recepción de Notificación";
   vmButtons: any;
 
@@ -87,7 +87,7 @@ export class ModalEditionComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando Catalogs";
+    (this as any).mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'TIPO_NOTIFICADOR'",
     };
@@ -163,7 +163,7 @@ export class ModalEditionComponent implements OnInit {
   }
 
   saveDetalles() {
-    this.mensajeSpinner = "Guardando"
+    (this as any).mensajeSpinner = "Guardando"
     this.lcargando.ctlSpinner(true)
     // console.log({notificacion: this.notificacion})
     // return
@@ -187,7 +187,7 @@ export class ModalEditionComponent implements OnInit {
   }
 
   /* saveDetalles(){
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.objRegistro['id_cob_notificacion'] = this.idNotificacion;
     this.objRegistro['fk_usuario_registro'] = this.dataUser['id_usuario'];

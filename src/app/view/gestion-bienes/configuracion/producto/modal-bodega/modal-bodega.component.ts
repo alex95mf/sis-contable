@@ -137,7 +137,7 @@ limpiarFiltros() {
 }
 
   cargarBodegas(){
-    this.mensajeSpinner = "Cargando lista de Bodegas...";
+    (this as any).mensajeSpinner = "Cargando lista de Bodegas...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {

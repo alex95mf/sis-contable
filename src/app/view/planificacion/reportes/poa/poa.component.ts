@@ -118,7 +118,7 @@ export class PoaComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     let params = {
@@ -150,18 +150,18 @@ export class PoaComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       this.periodos = await this.api.getPeriodos();
 
-      this.mensajeSpinner = 'Cargando Programas'
+      (this as any).mensajeSpinner = 'Cargando Programas'
       this.programas = await this.api.getProgramas();
       this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
 
-      this.mensajeSpinner = 'Cargando Departamentos'
+      (this as any).mensajeSpinner = 'Cargando Departamentos'
       this.departamentos = await this.api.getDepartamentos();
       this.departamentos.map((departamento: any) => Object.assign(departamento, { label: `${departamento.descripcion}. ${departamento.valor}`}))
 
-      this.mensajeSpinner = 'Cargando Datos Adicionales'
+      (this as any).mensajeSpinner = 'Cargando Datos Adicionales'
       let response: any = await this.api.getCatalogo({params: "'PLA_OE'"})
       this.lst_objetivo_estrategico = response.PLA_OE
       
@@ -197,16 +197,16 @@ export class PoaComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
       // Obtener los Objetivos y Componentes del Programa
-      this.mensajeSpinner = 'Cargando Objetivos y Componentes'
+      (this as any).mensajeSpinner = 'Cargando Objetivos y Componentes'
       this.obj_componentes = await this.api.getObjetivosComponentes({periodo: this.periodoObjectSelected, programa: this.programaObjectSelected, departamento: this.departamentoObjectSelected})
 
       // Obtener la Mision
-      this.mensajeSpinner = 'Obteniendo la Mision'
+      (this as any).mensajeSpinner = 'Obteniendo la Mision'
       let mision: any = await this.api.getMision({/* periodo: this.periodoObjectSelected, */ departamento: this.departamentoObjectSelected})
       Object.assign(this.obj_componentes, { mision: mision.valor })
 
       // Obtener las Atribuciones
-      this.mensajeSpinner = 'Cargando las Atribuciones'
+      (this as any).mensajeSpinner = 'Cargando las Atribuciones'
       this.atribuciones = await this.api.getAtribuciones({periodo: this.periodoObjectSelected, departamento: this.departamentoObjectSelected})
       this.atribuciones.map((atribucion: any) => {
         let fuente_finaciemiento = [];
@@ -256,7 +256,7 @@ export class PoaComponent implements OnInit {
       return
     }
 
-    this.mensajeSpinner = 'Cargando Programas'
+    (this as any).mensajeSpinner = 'Cargando Programas'
     this.lcargando.ctlSpinner(true)
     this.api.getProgramas().subscribe(
       res => {
@@ -289,7 +289,7 @@ export class PoaComponent implements OnInit {
     this.vmButtons[0].habilitar = true
     // this.vmButtons[1].habilitar = true
 
-    this.mensajeSpinner = 'Cargando Departamentos'
+    (this as any).mensajeSpinner = 'Cargando Departamentos'
     let data = {
       programa: evt.nombre
     }
@@ -319,7 +319,7 @@ export class PoaComponent implements OnInit {
     let data = {
       programa: evt
     }
-    this.mensajeSpinner = 'Cargando Objetivos y Componentes'
+    (this as any).mensajeSpinner = 'Cargando Objetivos y Componentes'
 
     this.api.getObjetivosComponentes(data).subscribe(
       res => {
@@ -339,7 +339,7 @@ export class PoaComponent implements OnInit {
     let data = {
       departamento: evt.nombre
     }
-    this.mensajeSpinner = 'Cargando Mision'
+    (this as any).mensajeSpinner = 'Cargando Mision'
 
     this.lcargando.ctlSpinner(true)
     this.api.getMision(data).subscribe(
@@ -355,7 +355,7 @@ export class PoaComponent implements OnInit {
   } */
 
   /* cargaObjetivosEstrategicos() {
-    this.mensajeSpinner = 'Cargando Objetivos Estrategicos'
+    (this as any).mensajeSpinner = 'Cargando Objetivos Estrategicos'
     let data = {
       params: "'PLA_OE'"
     }
@@ -377,7 +377,7 @@ export class PoaComponent implements OnInit {
     let data = {
       departamento: evt
     }
-    this.mensajeSpinner = 'Cargando Atribuciones'
+    (this as any).mensajeSpinner = 'Cargando Atribuciones'
     this.atribuciones = []
 
     this.lcargando.ctlSpinner(true)

@@ -43,7 +43,7 @@ standalone: false,
 export class RolGeneralComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -437,7 +437,7 @@ setAprobarRol(){
     else if(this.tipoPago == 0 || this.tipoPago == undefined ){
       this.toastr.info("Debe seleccionar un Tipo de pago");
     }else{
-      this.mensajeSpinner = "Consultando ...";
+      (this as any).mensajeSpinner = "Consultando ...";
       this.lcargando.ctlSpinner(true);
       this.RolGeneral = []
       this.cols = []
@@ -922,7 +922,7 @@ setAprobarRol(){
   btnExportarExcel() {
 
     console.log(this.RolGeneral)
-    this.mensajeSpinner = "Generando Archivo Excel...";
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
 
 
@@ -1323,7 +1323,7 @@ setAprobarRol(){
       }).then((result) => {
         if (result.isConfirmed) {
           this.lcargando.ctlSpinner(true);
-          this.mensajeSpinner = 'Generando Datos'
+          (this as any).mensajeSpinner = 'Generando Datos'
 
           let data = {
             "anio": this.AnioAsistencia,
@@ -1457,7 +1457,7 @@ setAprobarRol(){
   }
 
   cargarAreas() {
-    this.mensajeSpinner = "Cargando listado de Áreas...";
+    (this as any).mensajeSpinner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1479,7 +1479,7 @@ setAprobarRol(){
   }
 
   cargarDepartamentos(event) {
-    this.mensajeSpinner = "Cargando listado de Departamentos...";
+    (this as any).mensajeSpinner = "Cargando listado de Departamentos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1513,7 +1513,7 @@ setAprobarRol(){
      }
 
 
-    this.mensajeSpinner = "Cargando cuenta contable...";
+    (this as any).mensajeSpinner = "Cargando cuenta contable...";
     this.lcargando.ctlSpinner(true);
     let cuenta
     if(this.tipoPago == 'Q'){ cuenta = 'QUIA' }
@@ -1609,7 +1609,7 @@ setAprobarRol(){
     getRolNoControl() {
 
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Buscando'
+    (this as any).mensajeSpinner = 'Buscando'
     this.RolGeneral = []
     this.cols = []
     let Data = []
@@ -1962,7 +1962,7 @@ setAprobarRol(){
       }
 
       // this.lcargando.ctlSpinner(true)
-      // this.mensajeSpinner = 'Cargando Registro'
+      // (this as any).mensajeSpinner = 'Cargando Registro'
 
 
       // try {
@@ -2014,7 +2014,7 @@ setAprobarRol(){
 
   async  getNumControl(){
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Cargando Registro'
+    (this as any).mensajeSpinner = 'Cargando Registro'
 
     this.limpiarForm()
     try {

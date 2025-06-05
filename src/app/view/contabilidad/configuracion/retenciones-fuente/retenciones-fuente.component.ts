@@ -16,10 +16,10 @@ standalone: false,
 })
 export class RetencionesFuenteComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
-    
+
   fTitle: string = "Retenciones Fuente";
 
   vmButtons: any = [];
@@ -28,7 +28,7 @@ export class RetencionesFuenteComponent implements OnInit {
 
   dataDt: any = [];
   showInactive = false;
-  
+
   paginate: any;
   filter: any;
 
@@ -38,8 +38,8 @@ export class RetencionesFuenteComponent implements OnInit {
     private toastr: ToastrService,
     private commonVarSrv: CommonVarService,
     private modalSrv: NgbModal,
-  ) { 
-    
+  ) {
+
     this.commonVarSrv.modalCargarRetIVA.asObservable().subscribe(
       (res)=>{
         this.cargarData()
@@ -82,7 +82,7 @@ export class RetencionesFuenteComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -113,7 +113,7 @@ export class RetencionesFuenteComponent implements OnInit {
   }
 
   cargarData() {
-    this.mensajeSpinner = "Cargando Retenciones...";
+    (this as any).mensajeSpinner = "Cargando Retenciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -140,7 +140,7 @@ export class RetencionesFuenteComponent implements OnInit {
       }
     )
   }
-  
+
   metodoGlobal(event) {
     switch (event.items.boton.texto) {
       case " NUEVO":
@@ -170,7 +170,7 @@ export class RetencionesFuenteComponent implements OnInit {
       modalInvoice.componentInstance.isNew = isNew;
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
-      
+
     }
   }
 
@@ -196,7 +196,7 @@ export class RetencionesFuenteComponent implements OnInit {
   }
 
   limpiarFiltros() {
-    
+
     this.filter.descripcion = undefined;
     this.filter.codigo = undefined;
     // this.filter.estado = undefined;
@@ -204,6 +204,6 @@ export class RetencionesFuenteComponent implements OnInit {
     // this.cargarConceptos();
   }
 
-  
+
 
 }

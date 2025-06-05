@@ -17,7 +17,7 @@ export class ModalBusquedaReformaDocComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Input() periodo: any
   @Input() programa: any
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   fTitle: string = 'Busqueda de Reformas'
   vmButtons: Botonera[] = []
 
@@ -122,7 +122,7 @@ export class ModalBusquedaReformaDocComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       const periodos = await this.apiService.getPeriodos()
       console.log(periodos)
       this.cmb_periodo = periodos
@@ -135,7 +135,7 @@ export class ModalBusquedaReformaDocComponent implements OnInit {
   async getReformas() {
     // this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Reformas'
+      (this as any).mensajeSpinner = 'Cargando Reformas'
       const response = await this.apiService.getReformas({params: {filter: this.filter, paginate: this.paginate}})
       // console.log(response)
       this.paginate.length = response.total

@@ -40,7 +40,7 @@ export class TipoRetencionComponent implements OnInit {
   dtTrigger = new Subject();
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   parametros:any = {fechaDesde: "", fechaHasta: "", estadoSri: "PENDIENTE", idCliente: ""}
@@ -163,7 +163,7 @@ export class TipoRetencionComponent implements OnInit {
       return;
     }
 
-    this.mensajeSpinner = "Generando XML por favor espere...";
+    (this as any).mensajeSpinner = "Generando XML por favor espere...";
     this.lcargando.ctlSpinner(true);
 
     try {
@@ -257,7 +257,7 @@ export class TipoRetencionComponent implements OnInit {
       return;
     }
 
-    this.mensajeSpinner = "Reprocesando Documento...";
+    (this as any).mensajeSpinner = "Reprocesando Documento...";
     this.lcargando.ctlSpinner(true);
 
     if(valor.estado_sri == "RECIBIDA" || valor.estado_sri == "DEVUELTA" || valor.estado_sri == "NO AUTORIZADO"){
@@ -283,7 +283,7 @@ export class TipoRetencionComponent implements OnInit {
       return;
     }
 
-    this.mensajeSpinner = "Extrayendo datos del XML...";
+    (this as any).mensajeSpinner = "Extrayendo datos del XML...";
     this.lcargando.ctlSpinner(true);
     this.facElectronicaService.descargarXML({clave_acceso: item.codigo_acceso}).subscribe((datos:any)=>{
       const url = URL.createObjectURL(datos);
@@ -394,7 +394,7 @@ export class TipoRetencionComponent implements OnInit {
       if(res.valor){
         console.log("respuesta: ", res)
         item.correoElectronico = res.lCorreo;
-        this.mensajeSpinner = "Enviando correo, por favor espere...";
+        (this as any).mensajeSpinner = "Enviando correo, por favor espere...";
         this.lcargando.ctlSpinner(true);
         this.facElectronicaService.enviarCorreoDocumentos(item).subscribe((datos:any)=>{
           this.lcargando.ctlSpinner(false);

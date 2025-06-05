@@ -19,7 +19,7 @@ standalone: false,
 })
 export class ConContribuyenteComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -114,7 +114,7 @@ export class ConContribuyenteComponent implements OnInit {
 
   exportarExcel = () => {
     let excelData = []
-    this.mensajeSpinner = "Descargando Listado"
+    (this as any).mensajeSpinner = "Descargando Listado"
     this.lcargando.ctlSpinner(true)
     this.mdlSrv.getContribuyentes({ params: { filter: this.filter } }).subscribe(
       (res: any) => {
@@ -167,7 +167,7 @@ export class ConContribuyenteComponent implements OnInit {
   }
 
   cargarContribuyentes(inicial: boolean) {
-    this.mensajeSpinner = "Cargando lista de Contribuyentes...";
+    (this as any).mensajeSpinner = "Cargando lista de Contribuyentes...";
     this.lcargando.ctlSpinner(true);
 
     // if( this.filter.tipo_documento == undefined) {

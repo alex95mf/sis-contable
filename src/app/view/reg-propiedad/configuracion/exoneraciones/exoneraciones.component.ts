@@ -20,7 +20,7 @@ standalone: false,
 })
 export class ExoneracionesComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
 
   @ViewChild(CcSpinerProcesarComponent, {static: false})
   lcargando: CcSpinerProcesarComponent;
@@ -33,7 +33,7 @@ export class ExoneracionesComponent implements OnInit {
 
   exoneracionesDt: any = []
   cmb_conceptos: any[] = []
-  
+
   paginate: any;
   filter: any;
 
@@ -52,7 +52,7 @@ export class ExoneracionesComponent implements OnInit {
       value: 'I',
       label: "Inactivo",
     },
-   
+
   ];
 
 
@@ -64,7 +64,7 @@ export class ExoneracionesComponent implements OnInit {
     private commonVarSrv: CommonVarService,
     private exoneracionesSrv: ExoneracionesService,
     private modalSrv: NgbModal,
-  ) { 
+  ) {
 
     this.commonVarSrv.editExoneracion.asObservable().subscribe(
       (res) => {
@@ -73,7 +73,7 @@ export class ExoneracionesComponent implements OnInit {
         }
       }
     )
-    
+
   }
 
   ngOnInit(): void {
@@ -110,7 +110,7 @@ export class ExoneracionesComponent implements OnInit {
     //   page: 1,
     //   pageSizeOptions: [2, 5, 10, 20, 50]
     // }
-    
+
      this.cargarExoneracionesDet();
 
     setTimeout(() => {
@@ -128,8 +128,8 @@ export class ExoneracionesComponent implements OnInit {
   }
 
   validaPermisos() {
-    
-    this.mensajeSpinner = "Verificando permisos del usuario..."
+
+    (this as any).mensajeSpinner = "Verificando permisos del usuario..."
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -147,7 +147,7 @@ export class ExoneracionesComponent implements OnInit {
           this.toastr.warning("No tiene permisos para ver este formulario.", this.fTitle);
           this.vmButtons = [];
         } else {
-          this.cargarConceptos() 
+          this.cargarConceptos()
           this.cargarExoneraciones();
         }
       },
@@ -180,17 +180,17 @@ export class ExoneracionesComponent implements OnInit {
       this.filter.descripcion = undefined;
       this.filter.estado = undefined;
     }
-  
+
   }
   cargarConceptos() {
-    this.mensajeSpinner = 'Cargando Conceptos'
+    (this as any).mensajeSpinner = 'Cargando Conceptos'
     this.exoneracionesSrv.getConceptos().subscribe(
       (res: any) => {
         res.data.forEach(e => {
           const { id_concepto,codigo,  nombre } = e
           this.cmb_conceptos = [...this.cmb_conceptos, { id_concepto: id_concepto,codigo: codigo, nombre: nombre }]
         })
-        
+
       },
       (err: any) => {
         console.log(err)
@@ -201,7 +201,7 @@ export class ExoneracionesComponent implements OnInit {
   }
 
   cargarExoneraciones() {
-    this.mensajeSpinner = "Cargando lista de Exoneraciones...";
+    (this as any).mensajeSpinner = "Cargando lista de Exoneraciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -211,10 +211,10 @@ export class ExoneracionesComponent implements OnInit {
       params: {
         filter: this.filter,
         paginate: this.paginate
-      }      
-    } 
+      }
+    }
 
-  
+
     this.exoneracionesSrv.getExoneracionesTodas(data).subscribe(
       (res) => {
         console.log(res);
@@ -225,14 +225,14 @@ export class ExoneracionesComponent implements OnInit {
           this.exoneracionesDt = res['data']['data'];
         } else {
            this.exoneracionesDt = Object.values(res['data']['data']);
-         
+
         }
         if(this.exoneracionesDt.length > 0){
           this.exoneracionesDt.forEach(e => {
             Object.assign(e , {porcentaje: Math.floor(e.porcentaje * 100) })
           });
         }
-        
+
         this.lcargando.ctlSpinner(false);
       },
       (error) => {
@@ -259,7 +259,7 @@ export class ExoneracionesComponent implements OnInit {
         this.toastr.info(error.error.message);
       }
     )
-  } 
+  }
 
   showExoneracionForm(isNuevo: any, data?: any) {
 
@@ -269,7 +269,7 @@ export class ExoneracionesComponent implements OnInit {
       this.toastr.warning("No tiene permisos para crear Exoneraciones.", this.fTitle);
     } else {
 
-      
+
 
       const modalInvoice = this.modalSrv.open(ExoneracionFormComponent, {
         size: "lg",
@@ -304,7 +304,7 @@ export class ExoneracionesComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = "Eliminando exoneracion..."
+          (this as any).mensajeSpinner = "Eliminando exoneracion..."
           this.lcargando.ctlSpinner(true);
           this.exoneracionesSrv.borrarExoneracion(id).subscribe(
             (res) => {
@@ -359,6 +359,6 @@ export class ExoneracionesComponent implements OnInit {
     this.cargarExoneraciones();
   }
 
-  
+
 
 }

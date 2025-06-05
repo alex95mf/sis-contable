@@ -19,7 +19,7 @@ standalone: false,
 export class HistorialComprobanteComponent implements OnInit {
 
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -99,7 +99,7 @@ export class HistorialComprobanteComponent implements OnInit {
 
   cargarComprobantesPago() {
     console.log(this.data)
-    this.mensajeSpinner = "Cargando lista de comprobantes de pago...";
+    (this as any).mensajeSpinner = "Cargando lista de comprobantes de pago...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {

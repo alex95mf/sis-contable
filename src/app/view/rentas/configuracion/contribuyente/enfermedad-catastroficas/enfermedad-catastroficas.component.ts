@@ -178,7 +178,7 @@ export class EnfermedadCatastroficasComponent implements OnInit {
   fillCatalog() {
     // console.log('Catalogo');
     // this.lcargando.ctlSpinner(true);
-    // this.mensajeSpinner = "Cargando Catalogs";
+    // (this as any).mensajeSpinner = "Cargando Catalogs";
     let data = {
       params: "'REN_DISCAPACIDAD'",
     };

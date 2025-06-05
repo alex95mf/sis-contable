@@ -17,10 +17,10 @@ standalone: false,
   styleUrls: ['./flujo-de-caja.component.scss']
 })
 export class FlujoDeCajaComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  
+
   fTitle: string = "Flujo de Caja";
   reporte: any = [];
   vmButtons: any = [];
@@ -33,7 +33,7 @@ export class FlujoDeCajaComponent implements OnInit {
   cmb_periodo: any[] = []
 
   file: any;
-  
+
  // periodo: any;
   yearDisabled = false;
   fileDisabled = true;
@@ -162,18 +162,18 @@ ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
     switch (evento.items.boton.texto) {
 
       case "GUARDAR":
-        this.guardarValores(); 
+        this.guardarValores();
       break;
-      case "CONSULTAR": 
+      case "CONSULTAR":
         this.showDataFlujoCaja();
       break;
-      case "PROCESAR": 
+      case "PROCESAR":
         this.ejecutarSP();
       break;
-      case "LIMPIAR": 
+      case "LIMPIAR":
         this.limpiarData();
       break;
-      case "EXCEL": 
+      case "EXCEL":
         this.getDataExportar();
       break;
 
@@ -182,7 +182,7 @@ ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = "Carga Inicial"
+      (this as any).mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.apiSrv.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -198,7 +198,7 @@ ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
   }
 
 
-  
+
   showDataFlujoCaja(){
     if ( this.periodo == undefined) {
       this.toastr.info('Debe ingresar un Período');
@@ -208,7 +208,7 @@ ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
       //periodo: this.periodo.getFullYear(),
       periodo: this.periodo,
     };
-    this.mensajeSpinner ='Generando...';
+    (this as any).mensajeSpinner ='Generando...';
     this.lcargando.ctlSpinner(true);
      console.log(datos);
     this.apiSrv.getFlujos(datos).subscribe(
@@ -217,7 +217,7 @@ ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
           this.reporte.forEach(e => {
              console.log(e.ene);
           })
-        
+
         this.lcargando.ctlSpinner(false);
     })
     this.vmButtons[0].habilitar = false;
@@ -239,13 +239,13 @@ guardarValores(){
     reporte: this.reporte
   };
   console.log(this.reporte);
-  this.mensajeSpinner ='Guardando...';
+  (this as any).mensajeSpinner ='Guardando...';
   this.lcargando.ctlSpinner(true);
     this.apiSrv.saveFlujoCaja(datos).subscribe(
       res => {
           console.log(res);
 
-        
+
         this.lcargando.ctlSpinner(false);
     })
 
@@ -321,10 +321,10 @@ ejecutarSP(){
       periodo: Number(this.periodo),
       mes: Number(this.mes_actual)
     }
-  
+
     this.lcargando.ctlSpinner(true);
     this.apiSrv.setEjecutarFlujoCajaSp(data).subscribe(res => {
-      
+
       if(res['status'] == 1){
         this.lcargando.ctlSpinner(false);
         Swal.fire({
@@ -346,7 +346,7 @@ ejecutarSP(){
             confirmButtonColor: '#20A8D8',
         });
       }
-      
+
       //this.toastr.info('El proceso fue ejecutado con éxito');
     },error => {
       this.lcargando.ctlSpinner(false);

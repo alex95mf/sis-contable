@@ -173,7 +173,7 @@ export class CierreDeMesComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       let response = await this.cierremesService.getPeriodos();
       this.cmb_periodos = response;
       this.lcargando.ctlSpinner(false)
@@ -267,7 +267,7 @@ export class CierreDeMesComponent implements OnInit {
     }
 
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = 'Cargando Periodo'
+    (this as any).mensajeSpinner = 'Cargando Periodo'
 
     this.cierremesService.obtenerCierresPeriodo(data).subscribe(res => {
       console.log(res["data"]);
@@ -694,7 +694,7 @@ export class CierreDeMesComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cambiando Estado'
+      (this as any).mensajeSpinner = 'Cambiando Estado'
       let response = await this.cierremesService.updateEstadoMes({ anio: item.anio, mes: item.mes_numero, estado });
       console.log(response)
 
@@ -754,7 +754,7 @@ export class CierreDeMesComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cambiando Estado'
+      (this as any).mensajeSpinner = 'Cambiando Estado'
       let response = await this.cierremesService.updateEstadoMes({ anio: data.anio, mes: data.mes, estado });
       console.log(response)
 

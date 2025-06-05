@@ -14,7 +14,7 @@ standalone: false,
 export class ModalFeriasComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @Input() id_cliente: number;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = []
 
   lst_ferias: any[] = []
@@ -61,7 +61,7 @@ export class ModalFeriasComponent implements OnInit {
 
   async getFerias() {
     try {
-      this.mensajeSpinner = 'Cargando Ferias de Contribuyente'
+      (this as any).mensajeSpinner = 'Cargando Ferias de Contribuyente'
       let ferias = await this.apiService.getFerias({ params: { filter: { id_cliente: this.id_cliente }}})
       console.log(ferias)
       this.lst_ferias = ferias

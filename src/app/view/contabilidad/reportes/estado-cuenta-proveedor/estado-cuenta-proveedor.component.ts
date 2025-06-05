@@ -23,7 +23,7 @@ standalone: false,
 })
 export class EstadoCuentaProveedorComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   vmButtons: any;
@@ -273,7 +273,7 @@ export class EstadoCuentaProveedorComponent implements OnInit {
     if(this.id_proveedor==0 || this.id_proveedor==undefined  || this.id_proveedor=='' || this.id_proveedor==null){
       this.toastr.info('Debe seleccionar un proveedor')
     }else{
-      this.mensajeSpinner = "Cargando...";
+      (this as any).mensajeSpinner = "Cargando...";
       this.lcargando.ctlSpinner(true);
       //this.filterInput = 5;
       this.estProv.ObtenerCarteraProveedor(dateFrom, dateTo, this.id_proveedor).subscribe(response => {

@@ -64,7 +64,7 @@ export class RegistroComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     let params = {
@@ -123,11 +123,11 @@ export class RegistroComponent implements OnInit {
   async cargaInicial() {
     try {
       // Carga Listado de Periodos de la Base
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       this.periodos = await this.programaRegistroService.getPeriodos();
 
       // Carga los Programas
-      this.mensajeSpinner = 'Cargando Listado de Programas'
+      (this as any).mensajeSpinner = 'Cargando Listado de Programas'
       this.programas = await this.programaRegistroService.getProgramas();
       this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
 
@@ -144,7 +144,7 @@ export class RegistroComponent implements OnInit {
     console.log(this.programaSelected)
     this.lcargando.ctlSpinner(true);
     try {
-      this.mensajeSpinner = 'Cargando Presupuesto de Programa';
+      (this as any).mensajeSpinner = 'Cargando Presupuesto de Programa';
       // Cargar Presupuesto de Programa seleccionado
       let response: any = await this.programaRegistroService.getProgramaPresupuesto({ periodo: this.periodoSelected, programa: this.programaSelected })
       this.presupuesto = {
@@ -153,7 +153,7 @@ export class RegistroComponent implements OnInit {
         asignado: 0,
       }
       
-      this.mensajeSpinner = 'Cargando Presupuesto de Departamentos';
+      (this as any).mensajeSpinner = 'Cargando Presupuesto de Departamentos';
       this.departamentos = await this.programaRegistroService.getDepartamentosPresupuesto({ periodo: this.periodoSelected, programa: this.programaSelected })
       this.departamentos.forEach((departamento: any) => {
         // Se ha creado un nuevo departamento y no tiene presupuesto
@@ -237,7 +237,7 @@ export class RegistroComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true);
       try {
-        this.mensajeSpinner = 'Almacenando Presupuesto de Departamentos';
+        (this as any).mensajeSpinner = 'Almacenando Presupuesto de Departamentos';
         let response = await this.programaRegistroService.setPresupuestoDepartamentos({
           periodo: this.periodoObjectSelected,
           programa: this.programaObjectSelected,
@@ -267,7 +267,7 @@ export class RegistroComponent implements OnInit {
     Object.assign(this.programa, this.progSelect)
     this.vmButtons[0].habilitar = false
 
-    this.mensajeSpinner = 'Cargando Presupuesto de Programa'
+    (this as any).mensajeSpinner = 'Cargando Presupuesto de Programa'
     this.lcargando.ctlSpinner(true)
     let data = {
       programa: this.programa.id,
@@ -304,7 +304,7 @@ export class RegistroComponent implements OnInit {
 
   /* getDepartamentosPrograma() {
     this.departamentos = []
-    this.mensajeSpinner = 'Cargando Departamentos de Programa'
+    (this as any).mensajeSpinner = 'Cargando Departamentos de Programa'
     // Cargar Departamentos
     let data = {
       programa: this.programa.nombre
@@ -344,7 +344,7 @@ export class RegistroComponent implements OnInit {
   } */
 
   /* getPresupuestoDepartamentos() { // WIP
-    this.mensajeSpinner = 'Cargando Presupuestos por Departamento'
+    (this as any).mensajeSpinner = 'Cargando Presupuestos por Departamento'
     let data = {
       presupuesto_id: this.programa.presupuesto.id,
       programa_id: this.programa.id,
@@ -452,7 +452,7 @@ export class RegistroComponent implements OnInit {
       departamentos: this.departamentos
     }
 
-    this.mensajeSpinner = 'Almacenando Presupuesto de Departamentos'
+    (this as any).mensajeSpinner = 'Almacenando Presupuesto de Departamentos'
     this.lcargando.ctlSpinner(true)
     this.programaRegistroService.setPresupuestoDepartamentos(data).subscribe(
       res => {

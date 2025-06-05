@@ -18,7 +18,7 @@ standalone: false,
 })
 export class EstadoCuentaComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
 
 	@ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: Botonera[] = [];
@@ -157,7 +157,7 @@ export class EstadoCuentaComponent implements OnInit {
 
   GenerarReporteExcel(){
 
-		//this.mensajeSpinner = "Generando Archivo Excel...";
+		//(this as any).mensajeSpinner = "Generando Archivo Excel...";
 		//this.lcargando.ctlSpinner(true);
 
      this.infomovDataExcel = this.tbl_movimientos;

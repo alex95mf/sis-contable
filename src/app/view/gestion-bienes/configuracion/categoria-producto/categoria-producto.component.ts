@@ -21,7 +21,7 @@ export class CategoriaProductoComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+
 
   grupo = {
     codigo_grupo_producto: null,
@@ -206,7 +206,7 @@ export class CategoriaProductoComponent implements OnInit {
 
 
   agregarCatalogo(){
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
 
     console.log(this.grupo);
@@ -234,7 +234,7 @@ export class CategoriaProductoComponent implements OnInit {
   }
 
   guardarEdition(){
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     console.log(this.grupo);
     this.service.updateCatalogoBienes(this.grupo).subscribe(
@@ -271,7 +271,7 @@ export class CategoriaProductoComponent implements OnInit {
   }
 
   ObtenerCatalogoBienes(){
-    this.mensajeSpinner = "Cargando Catalogos bienes...";
+    (this as any).mensajeSpinner = "Cargando Catalogos bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {

@@ -25,7 +25,7 @@ standalone: false,
 export class EmisionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de pago";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -661,7 +661,7 @@ export class EmisionComponent implements OnInit {
   ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -691,7 +691,7 @@ export class EmisionComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos...';
+    (this as any).mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -810,7 +810,7 @@ export class EmisionComponent implements OnInit {
 
   // no se usa ya que la sesion ahora maneja toda la caja activa, no solo el id
   //  getCajaActiva() {
-  //   this.mensajeSpinner = 'Obteniendo Caja Activa...';
+  //   (this as any).mensajeSpinner = 'Obteniendo Caja Activa...';
   //   let id = this.cajaActiva.id_caja;
 
   //   // funcion necesario solo porque en la sesion se maneja solo el id no toda la info de la caja activa
@@ -850,7 +850,7 @@ export class EmisionComponent implements OnInit {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -886,7 +886,7 @@ export class EmisionComponent implements OnInit {
 
   cargarMovimientosBancariosAsiento() {
 
-    this.mensajeSpinner = "Cargando Asiento";
+    (this as any).mensajeSpinner = "Cargando Asiento";
     this.lcargando.ctlSpinner(true);
 
 
@@ -947,7 +947,7 @@ export class EmisionComponent implements OnInit {
       this.toastr.info('Debe seleccionar un tipo de contrato');
     }
     else{
-      this.mensajeSpinner = 'Obteniendo Ordenes...';
+      (this as any).mensajeSpinner = 'Obteniendo Ordenes...';
       this.lcargando.ctlSpinner(true);
       this.filter.mes = this.mes_actual
       this.filter.periodo = this.periodo.getFullYear()
@@ -1308,7 +1308,7 @@ export class EmisionComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = "Verificando período contable";
+        (this as any).mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let data = {
           "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -1319,7 +1319,7 @@ export class EmisionComponent implements OnInit {
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
 
-            this.mensajeSpinner = 'Generando Documento de pago...';
+            (this as any).mensajeSpinner = 'Generando Documento de pago...';
             this.lcargando.ctlSpinner(true);
             // this.documento.estado = "E";
             // this.documento.cuenta = "";
@@ -2067,7 +2067,7 @@ export class EmisionComponent implements OnInit {
 
   editarComprobante() {
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let data = {
       "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -2077,7 +2077,7 @@ export class EmisionComponent implements OnInit {
 
       /* Validamos si el periodo se encuentra aperturado */
       if (res["data"][0].estado !== 'C') {
-        this.mensajeSpinner = "Editando Emisión de Pago";
+        (this as any).mensajeSpinner = "Editando Emisión de Pago";
         this.lcargando.ctlSpinner(true);
 
         this.disabledComprobante = false
@@ -2183,7 +2183,7 @@ export class EmisionComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = "Verificando período contable";
+        (this as any).mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let data = {
           "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -2194,7 +2194,7 @@ export class EmisionComponent implements OnInit {
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
 
-            this.mensajeSpinner = 'Anulando pago...';
+            (this as any).mensajeSpinner = 'Anulando pago...';
             this.lcargando.ctlSpinner(true);
             let data2 = {
               documento: this.documento

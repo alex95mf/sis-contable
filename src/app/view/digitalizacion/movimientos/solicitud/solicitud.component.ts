@@ -32,7 +32,7 @@ export class SolicitudComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+
   newReserva:any;
   programa: any = [];
   departamento: any = [];
@@ -266,7 +266,7 @@ this.lastday = new Date( this.lastday - 1);
 
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -517,7 +517,7 @@ this.lastday = new Date( this.lastday - 1);
     }).then((result) => {
 
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Creando Solicitud...";
+        (this as any).mensajeSpinner = "Creando Solicitud...";
         this.lcargando.ctlSpinner(true);
         console.log(this.atribucionParamsNew);
         let detalles = []
@@ -596,7 +596,7 @@ this.lastday = new Date( this.lastday - 1);
   }
 
   cargarPrograma() {
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     this.service.searchPrograma({ periodo: this.periodo.getFullYear() }).subscribe((res: any) => {
@@ -618,7 +618,7 @@ this.lastday = new Date( this.lastday - 1);
 
   departamentoSearch() {
     // console.log(event);
-    this.mensajeSpinner = "Cargando Departamentos...";
+    (this as any).mensajeSpinner = "Cargando Departamentos...";
     this.lcargando.ctlSpinner(true);
 
     this.service.searchDepartamento({ programa: this.dato_Programa }).subscribe(
@@ -637,7 +637,7 @@ this.lastday = new Date( this.lastday - 1);
 
   AtribucionSearch(event) {
     // console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event.valor
@@ -654,7 +654,7 @@ this.lastday = new Date( this.lastday - 1);
 
     this.lcargando.ctlSpinner(true);
     this.listaSolicitudes = []
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id_programa: this.dato_Programa,
@@ -744,7 +744,7 @@ this.lastday = new Date( this.lastday - 1);
   SearchBienes() {
     // console.log(event);
     this.listaSolicitudesAtribucion = []
-    this.mensajeSpinner = "Cargando Bienes...";
+    (this as any).mensajeSpinner = "Cargando Bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
       //valor_programa: this.dato_Programa,
@@ -1559,7 +1559,7 @@ if (!this.newReserva.usuario || !this.newReserva.codigo || !this.newReserva.obse
   exportExcel(){
 
 
-    this.mensajeSpinner = "Generando Archivo Excel...";
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

@@ -54,13 +54,13 @@ export class ViewMasivoComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
       // Cargar Periodos
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiService.getPeriodos()
       console.log(periodos)
       this.lst_periodo = periodos;
 
       // Cargar Tabla
-      this.mensajeSpinner = 'Cargando Tabla de Datos'
+      (this as any).mensajeSpinner = 'Cargando Tabla de Datos'
       let response = await this.apiService.getTablaMasiva({params: { filter: this.filter }})
       console.log(response)
       this.dsEmpleados = new MatTableDataSource(response)
@@ -78,7 +78,7 @@ export class ViewMasivoComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
       // Cargar Tabla
-      this.mensajeSpinner = 'Cargando Tabla de Datos'
+      (this as any).mensajeSpinner = 'Cargando Tabla de Datos'
       let response = await this.apiService.getTablaMasiva({params: { filter: this.filter }})
       console.log(response)
       this.dsEmpleados = new MatTableDataSource(response)

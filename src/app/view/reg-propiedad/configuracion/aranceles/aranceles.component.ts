@@ -20,7 +20,7 @@ standalone: false,
 })
 
 export class ArancelesComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -31,13 +31,13 @@ export class ArancelesComponent implements OnInit {
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
-  
+
   arancelesDt: any = [];
   showInactive = false;
 
   paginate: any;
   filter: any;
-  
+
   //pageEvent: PageEvent;
 
   constructor(
@@ -100,7 +100,7 @@ export class ArancelesComponent implements OnInit {
   }
 
   validatePermission() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -161,7 +161,7 @@ export class ArancelesComponent implements OnInit {
   }
 
   cargarAranceles() {
-    this.mensajeSpinner = "Cargando lista de Aranceles..."
+    (this as any).mensajeSpinner = "Cargando lista de Aranceles..."
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -170,7 +170,7 @@ export class ArancelesComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    
+
     this.arancelesSrv.getAranceles(data).subscribe(
       (res) => {
         this.paginate.length = res['data']['total'];
@@ -219,7 +219,7 @@ export class ArancelesComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = "Eliminando arancel..."
+          (this as any).mensajeSpinner = "Eliminando arancel..."
           this.lcargando.ctlSpinner(true);
           this.arancelesSrv.deteleArancel(id).subscribe(
             (res) => {
@@ -273,7 +273,7 @@ export class ArancelesComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = "Restaurando arancel..."
+          (this as any).mensajeSpinner = "Restaurando arancel..."
           this.lcargando.ctlSpinner(true);
           this.arancelesSrv.restoreArancel(id).subscribe(
             (res) => {
@@ -328,5 +328,5 @@ export class ArancelesComponent implements OnInit {
       modalInvoice.componentInstance.permissions = this.permissions;
     }
   }
-  
+
 }

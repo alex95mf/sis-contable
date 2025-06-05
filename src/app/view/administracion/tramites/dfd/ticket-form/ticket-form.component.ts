@@ -19,7 +19,7 @@ standalone: false,
 })
 export class TicketFormComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -232,7 +232,7 @@ export class TicketFormComponent implements OnInit {
   }
 
   cargarSeguimiento(){
-    this.mensajeSpinner = "Cargando Seguimiento...";
+    (this as any).mensajeSpinner = "Cargando Seguimiento...";
     // console.log("hola")
     
     this.lcargando.ctlSpinner(true);
@@ -386,7 +386,7 @@ export class TicketFormComponent implements OnInit {
   }
 
   getTareas() {
-    this.mensajeSpinner = "Cargando lista de Tareas...";
+    (this as any).mensajeSpinner = "Cargando lista de Tareas...";
     this.lcargando.ctlSpinner(true);
 
     this.ticketSrv.getTareasALl({}).subscribe(
@@ -408,7 +408,7 @@ export class TicketFormComponent implements OnInit {
   // getUsuarios() {
   //   // console.log('Aquiiii '+evento);
   //   this.subCategorias = 0;
-  //   this.mensajeSpinner = "Cargando lista de Usuarios...";
+  //   (this as any).mensajeSpinner = "Cargando lista de Usuarios...";
   //   this.lcargando.ctlSpinner(true);
   //   this.ticketSrv.getUsuarios({}).subscribe(
   //     (res) => {
@@ -482,7 +482,7 @@ export class TicketFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando Ticket...";
+        (this as any).mensajeSpinner = "Guardando Ticket...";
         this.lcargando.ctlSpinner(true);
         console.log(this.dataUser);
         this.ticketNew['id_usuario'] = this.dataUser['id_usuario'];

@@ -21,7 +21,7 @@ standalone: false,
 })
 export class ShowDetComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;

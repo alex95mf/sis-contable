@@ -20,7 +20,7 @@ standalone: false,
 	styleUrls: ['./toma-fisica.component.scss']
 })
 export class TomaFisicaComponent implements OnInit {
-	mensajeSpinner: string = "Cargando...";
+	
 	@ViewChild(CcSpinerProcesarComponent, {
 		static: false
 	}) lcargando: CcSpinerProcesarComponent;

@@ -16,7 +16,7 @@ export class ModalProductoDetallesComponent implements OnInit {
   @Input() bodega: any
   @Input() disabled: boolean;
   vmButtons: Array<any> = [];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   lotes: Array<any> = [];
 
@@ -94,7 +94,7 @@ export class ModalProductoDetallesComponent implements OnInit {
     } else {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Obteniendo Lotes del Producto'
+        (this as any).mensajeSpinner = 'Obteniendo Lotes del Producto'
         let response: any = await this.apiService.getDetalles({producto: this.producto.id_producto, bodega: this.bodega});
         response.data.map((item: any) => Object.assign(item, { cantidad_egreso: 0, fk_producto_det: item.id }))
         console.log(response)

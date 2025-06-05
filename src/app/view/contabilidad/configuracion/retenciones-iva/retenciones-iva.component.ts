@@ -16,10 +16,10 @@ standalone: false,
 })
 export class RetencionesIvaComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
-  
+
   fTitle: string = "Retenciones por IVA";
 
   vmButtons: any = [];
@@ -28,7 +28,7 @@ export class RetencionesIvaComponent implements OnInit {
 
   dataDt: any = [];
   showInactive = false;
-  
+
   paginate: any;
   filter: any;
 
@@ -81,9 +81,9 @@ export class RetencionesIvaComponent implements OnInit {
     }, 0);
 
   }
-  
+
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -114,7 +114,7 @@ export class RetencionesIvaComponent implements OnInit {
   }
 
   cargarData() {
-    this.mensajeSpinner = "Cargando Retenciones...";
+    (this as any).mensajeSpinner = "Cargando Retenciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -141,7 +141,7 @@ export class RetencionesIvaComponent implements OnInit {
       }
     )
   }
-  
+
   metodoGlobal(event) {
     switch (event.items.boton.texto) {
       case " NUEVO":
@@ -171,7 +171,7 @@ export class RetencionesIvaComponent implements OnInit {
       modalInvoice.componentInstance.isNew = isNew;
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
-      
+
     }
   }
 
@@ -197,7 +197,7 @@ export class RetencionesIvaComponent implements OnInit {
   }
 
   limpiarFiltros() {
-    
+
     this.filter.descripcion = undefined;
     this.filter.codigo = undefined;
     // this.filter.estado = undefined;

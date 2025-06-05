@@ -18,7 +18,7 @@ export class ModalPuestosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false})
   lcargando: CcSpinerProcesarComponent;
   fTitle = "Listado de Puestos de Mercado";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   
   puestos: any =[];
@@ -84,7 +84,7 @@ export class ModalPuestosComponent implements OnInit {
       }
     }
 
-    this.mensajeSpinner = 'Cargando Puestos...';
+    (this as any).mensajeSpinner = 'Cargando Puestos...';
     this.lcargando.ctlSpinner(true);
 
     this.apiService.getPuestosFiltro(data).subscribe(
@@ -118,7 +118,7 @@ export class ModalPuestosComponent implements OnInit {
       cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.value) {
-        this.mensajeSpinner = 'Eliminando elemento';
+        (this as any).mensajeSpinner = 'Eliminando elemento';
         this.lcargando.ctlSpinner(true);
         this.apiService.deletePuesto({id_mercado_puesto: id}).subscribe(
           res => {

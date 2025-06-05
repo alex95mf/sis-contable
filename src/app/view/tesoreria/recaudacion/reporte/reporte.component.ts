@@ -42,7 +42,7 @@ export class ReporteComponent implements OnInit {
   @ViewChild('tblRecGarantias') tblRecGarantias: Table
 
   fTitle: string = "Reportes de Tesorería";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   conceptosDisabled = false;
   cajasDisabled = false;
   fechaHastaDisabled = false;
@@ -259,8 +259,8 @@ export class ReporteComponent implements OnInit {
   cargarConsultaReportes(){
 
     this.loading = true;
-    console.log(this.filter)
-        this.mensajeSpinner = 'Cargando...';
+    console.log(this.filter);
+        (this as any).mensajeSpinner = 'Cargando...';
         // this.lcargando.ctlSpinner(true);
         this.filter.reporte = this.selectedReporte
         let data= {
@@ -349,7 +349,7 @@ export class ReporteComponent implements OnInit {
 
       cargarDetallesEspecialCanjes(){
         this.loading = true;
-        this.mensajeSpinner = 'Cargando...';
+        (this as any).mensajeSpinner = 'Cargando...';
         // this.lcargando.ctlSpinner(true);
         this.filter.reporte = this.selectedReporte
 
@@ -885,7 +885,7 @@ export class ReporteComponent implements OnInit {
   }
 
   getConceptosReporte(){
-    this.mensajeSpinner = 'Cargando Tipos de Reporte';
+    (this as any).mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptosReporte().subscribe(
       (res: any) => {
@@ -909,7 +909,7 @@ export class ReporteComponent implements OnInit {
 
 
   getCajasReporte(){
-    this.mensajeSpinner = 'Cargando Cajas';
+    (this as any).mensajeSpinner = 'Cargando Cajas';
     this.lcargando.ctlSpinner(true);
     this.apiService.getCajasReporte().subscribe(
       (res: any) => {
@@ -933,7 +933,7 @@ export class ReporteComponent implements OnInit {
 
 
   getTiposReporte() {
-    this.mensajeSpinner = 'Cargando Tipos de Reporte';
+    (this as any).mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.apiService.getTiposReporte().subscribe(
       (res: any) => {

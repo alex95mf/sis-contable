@@ -16,7 +16,7 @@ export class RevisionCierreComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: Array<Botonera> = [];
   fTitle: string = 'Cierres Contables por Generar'
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   lst_tipo_cierre: any[] = [
     { value: 'CCON', label: 'Cierres Contables' },

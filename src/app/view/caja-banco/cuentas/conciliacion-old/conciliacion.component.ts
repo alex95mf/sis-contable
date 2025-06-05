@@ -42,7 +42,7 @@ export class ConciliacionComponent implements OnInit {
 
   vmButtons: any = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   constructor(
@@ -143,7 +143,7 @@ export class ConciliacionComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json',
       }
     };
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.cslSrv.getConciliation(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);

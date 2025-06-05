@@ -14,7 +14,7 @@ import { GlobalTableComponent } from '../../../commons/modals/global-table/globa
 import { Socket } from '../../../../services/socket.service';
 import { CcSpinerProcesarComponent } from '../../../../config/custom/cc-spiner-procesar.component';
 import { BusquedaTrasladoComponent } from './busqueda-traslado/busqueda-traslado.component';
-import { ListBusquedaTrasladoComponent } from './list-busqueda/list-busqueda-traslado.component'; 
+import { ListBusquedaTrasladoComponent } from './list-busqueda/list-busqueda-traslado.component';
 import { ModalDepartamentosComponent } from 'src/app/config/custom/modal-departamentos/modal-departamentos.component';
 import { EncargadoTrasladoComponent } from './encargado-traslado/encargado-traslado.component';
 import { ModalGruposComponent } from '../../configuracion/producto/modal-grupos/modal-grupos.component';
@@ -29,7 +29,7 @@ standalone: false,
   styleUrls: ['./traslado.component.scss']
 })
 export class TrasladoComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   permissions: any;
@@ -82,7 +82,7 @@ export class TrasladoComponent implements OnInit {
   productoFotos = [];
 
   descripcionTraslado: any = "";
-  
+
 
   arrayTrasladoConfig: any = [];
   aplicarConfig: any = [];
@@ -90,11 +90,11 @@ export class TrasladoComponent implements OnInit {
   /*actions*/
   // actions: any = { dComponet: false };
 
-  actions: any = { btnNuevo: false, 
-    btnGuardar: false, 
-    btnEnviar: false, 
-    btncancelar: false, 
-    btnDescargar: false, 
+  actions: any = { btnNuevo: false,
+    btnGuardar: false,
+    btnEnviar: false,
+    btncancelar: false,
+    btnDescargar: false,
     dComponet: false,
     view: false };
 
@@ -106,7 +106,7 @@ export class TrasladoComponent implements OnInit {
 
 
     traslado = {
-     
+
       tipo_traslado:null,
       fecha:moment(this.toDatePicker).format('YYYY-MM-DD'),
       num_doc:null,
@@ -154,19 +154,19 @@ export class TrasladoComponent implements OnInit {
     }
 
     estadoList = [
-  
+
       {value: "B",label: "Bueno"},
       {value: "R",label: "Regular"},
       {value: "M",label: "Mal estado"}
-  
-    ] 
+
+    ]
     estadosTraslado = [
-  
+
       {value: "E",label: "Emitido"},
       {value: "A",label: "Aprobado"},
       {value: "N",label: "Negado"}
-  
-    ] 
+
+    ]
 
   /*data totales*/
   dataTotales = { subTotalPagado: 0.00, ivaPagado: 0.00, totalPagado: 0.00, ivaBase: 0.00, iva0: 0.00 };
@@ -195,7 +195,7 @@ export class TrasladoComponent implements OnInit {
   catalog_filter:any = []
   tipoTraslado: any = []
 
-  
+
   grupo = {
     codigo_grupo_producto: null,
     descripcion: null,
@@ -255,7 +255,7 @@ codigoActa:any;
         this.UserSelect = res['dt']['emp_full_nombre'];
         if(res['tipo']==1){
           Object.assign(
-            this.traslado, 
+            this.traslado,
             {
               id_recibido: res['recibido']['id_empleado'],
               recibido: res['recibido']['emp_full_nombre'],
@@ -308,7 +308,7 @@ codigoActa:any;
           this.buscarBienesCustodiados();
         }
         //this.moduloUser = res['cargos']['car_nombre']
-        
+
       }
     )
 
@@ -399,7 +399,7 @@ codigoActa:any;
         this.traslado.elabora = res['nombre_persona_elabora'];
         this.traslado.verifica = res['nombre_persona_verifica'];
         this.traslado.custodio_origen = res['nombre_custodio_origen'];
-     
+
         this.vmButtons[3].habilitar = false;
         if(res.departamento!=null){
           this.departamentoSelect.dep_nombre = res.departamento.dep_nombre;
@@ -409,21 +409,21 @@ codigoActa:any;
           this.fotos = res.fotos;
         }
 
-        
-   
+
+
        console.log(res.detalles);
        res.detalles.forEach((p) => {
-              Object.assign(p, 
-                { 
+              Object.assign(p,
+                {
                   action: true,
                   nombre: p.producto[0].nombre,
-                  codigoProducto : p.code_product, 
+                  codigoProducto : p.code_product,
                   precio_normal:p.costo_unitario,
                   stock: p.stock_actual,
                   quantity: p.cantidad,
                   price: p.costo,
                   totalAux:  p.costo_total,
-                 
+
                 });
         });
         this.dataProducto = JSON.parse(JSON.stringify(res.detalles));
@@ -443,7 +443,7 @@ codigoActa:any;
         //this.dataProducto = res['data'];
         this.addItems(res)
         this.vmButtons[0].habilitar = false;
-         
+
     }
     )
 
@@ -465,8 +465,8 @@ codigoActa:any;
     if(this.traslado.tipo_traslado==5){
       this.traslado.fecha_devolucion= moment(this.toDatePicker).format('YYYY-MM-DD');
     }
-      
-    
+
+
     this.validatePermission();
     setTimeout(() => {
       this.getTrasladoConfig();
@@ -516,21 +516,21 @@ codigoActa:any;
   }
 
   buscarBienesCustodiados(){
-    this.mensajeSpinner = "Cargando bienes...";
+    (this as any).mensajeSpinner = "Cargando bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id_custodio: this.traslado.id_custodio
     }
     this.invService.getBienesCustodiados(data).subscribe(res => {
       console.log(res["data"])
-     
+
       //this.fotosAux = res["data"]
       res["data"].forEach(e => {
         let items =
-        { 
+        {
           action: true,
           nombre: e.nombre,
-          codigoProducto : e.codigoproducto, 
+          codigoProducto : e.codigoproducto,
           precio_normal:e.PVP,
           stock: e.stock,
           quantity: 1,
@@ -542,11 +542,11 @@ codigoActa:any;
           id_subgrupo_producto:0,
           tipo_bien:e.detalle_traslado?.tipo_bien,
           estado: e.detalle_traslado?.estado
-  
+
         };
         this.dataProducto.push(items);
       })
-     
+
       this.lcargando.ctlSpinner(false);
     }, error => {
       this.lcargando.ctlSpinner(false);
@@ -567,10 +567,10 @@ codigoActa:any;
       }
       else{
         let items =
-        { 
+        {
           action: true,
           nombre: data.nombre,
-          codigoProducto : data.codigoproducto, 
+          codigoProducto : data.codigoproducto,
           precio_normal:data.PVP,
           stock: data.stock,
           quantity: 1,
@@ -582,19 +582,19 @@ codigoActa:any;
           id_subgrupo_producto:this.subgrupo.id_subgrupo_producto,
           tipo_bien:this.grupo.tipo_bien,
           estado: this.estado_producto
-  
+
         };
         this.dataProducto.push(items);
         console.log(this.dataProducto)
         this.disabledCantidad=true;
         this.buscarFotoProducto(data.id_producto)
       }
-        
+
     }
   }
   buscarFotoProducto(id_producto){
     console.log(id_producto)
-    this.mensajeSpinner = "Cargando foto...";
+    (this as any).mensajeSpinner = "Cargando foto...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id_producto: id_producto
@@ -632,7 +632,7 @@ codigoActa:any;
 
   getTrasladoConfig() {
 		this.invService.getTrasladoConfig().subscribe(res => {
-      
+
       this.arrayTrasladoConfig = res['data']
       console.log(res)
 
@@ -651,7 +651,7 @@ codigoActa:any;
       // this.dataBuy.forma_pago = res['data']['FORMA PAGO'];
       this.catalog = res["data"]["INV_TIPO_BIEN"];
       //this.catalog = res["data"]["INV_TIPO_BIEN"].filter(c => {c.valor != 'EXI'});
-     this.catalog_filter = this.catalog.filter(e => e.valor != 'EXI') 
+     this.catalog_filter = this.catalog.filter(e => e.valor != 'EXI')
       this.tipoTraslado = res["data"]["INV_TIPO_TRASLADO"];
       this.getCustomers();
     }, error => {
@@ -724,7 +724,7 @@ codigoActa:any;
     //   // this.aplicarConfig = this.arrayTrasladoConfig[11]
     //   // console.log(this.aplicarConfig)
     // }
-    
+
     this.arrayTrasladoConfig.forEach(e => {
       if(event==e.tipo_traslado_codigo){
         this.aplicarConfig = e
@@ -734,14 +734,14 @@ codigoActa:any;
     console.log(this.aplicarConfig)
     console.log(this.codigoActa)
 
-  
+
   }
 
   buscarGrupoProducto(event){
 
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
-   
+
     let data = {
        tipo_bien: event
     }
@@ -996,7 +996,7 @@ codigoActa:any;
 
     this.productoFotos = [];
     this.aplicarConfig = [];
-  
+
     this.actions.dComponet = false;
     this.disabledBienes = false;
     this.dataProducto = [];
@@ -1033,7 +1033,7 @@ codigoActa:any;
 
   validateDataGlobal() {
 
-  
+
     let flag = false;
     return new Promise((resolve, reject) => {
       // if (this.customerSelect == 0) {
@@ -1042,80 +1042,80 @@ codigoActa:any;
       // }
       if (this.departamentoSelect.dep_nombre == "" || this.departamentoSelect.dep_nombre == undefined) {
         this.toastr.info("Debe seleccionar un departamento");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_custodio_origen == true && this.traslado.custodio_origen == undefined) {
         this.toastr.info("Debe seleccionar un Custodio de Origen");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_entregado_por == true && this.traslado.entregado == undefined) {
         this.toastr.info("El campo Entregado por no puede ser vacio");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_funcionario_responsable == true && this.traslado.responsable == undefined) {
         this.toastr.info("Debe seleccionar un Funcionario Responsable");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_verificacion_usuario == true && this.traslado.verifica == undefined) {
         this.toastr.info("El campo Verificado por no puede ser vacio");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_elaborado_por == true && this.traslado.elabora== undefined) {
         this.toastr.info("El campo Elaborado Por no puede ser vacio");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_fecha_devolucion == true && this.traslado.fecha_devolucion== undefined) {
         this.toastr.info("Debe seleccionar una Fecha devolución");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_documento_referencia == true && (this.traslado.doc_ref_informe_tecnico== undefined || this.traslado.doc_ref_informe_tecnico== '')) {
         this.toastr.info("Debe seleccionar una Fecha devolución");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_doc_devolucion == true && (this.traslado.doc_devolucion_sistemas== undefined || this.traslado.doc_devolucion_sistemas== '')) {
         this.toastr.info("El campo Doc. devolución sistemas no puede ser vacio");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_destino_final == true && (this.traslado.ubicacion_final== undefined || this.traslado.ubicacion_final== '')) {
         this.toastr.info("El campo Doc. devolución sistemas no puede ser vacio");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_estado == true && (this.traslado.estado== undefined || this.traslado.estado== '')) {
         this.toastr.info("Debe seleccionar un estado");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_informe_tecnico == true && (this.traslado.informe_tecnico== undefined || this.traslado.informe_tecnico== '')) {
         this.toastr.info("El campo Informe técnico no puede ser vacio");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_desarrollo == true && (this.traslado.desarrollo== undefined || this.traslado.desarrollo== '')) {
         this.toastr.info("El campo Desarrollo no puede ser vacio");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_nota == true && (this.traslado.nota== undefined || this.traslado.nota== '')) {
         this.toastr.info("El campo Nota no puede ser vacio");
-        flag = true;  
+        flag = true;
       }
       else if (this.aplicarConfig.fld_observacion == true && (this.traslado.observaciones == undefined || this.traslado.observaciones== '')) {
         this.toastr.info("El campo Observación no puede ser vacio");
-        flag = true;  
+        flag = true;
       }
       else if(this.dataProducto[0]==undefined){
         this.toastr.info("Debe seleccionar productos");
-        flag = true;  
+        flag = true;
       }else if (this.dataProducto[0].codigoProducto == null && this.dataProducto.length == 1) {
         this.toastr.info("Ingrese al menos un producto");
-        flag = true;  
+        flag = true;
       }
 
-      
+
       // else if (this.UserSelect == undefined) {
       //   this.toastr.info("Debe seleccionar un responsable");
-      //   flag = true;  
+      //   flag = true;
       // }
       else if(this.grupo.tipo_bien === 'EXI'){
        if(this.dataProducto.length != 0 ) {
-       
+
             for (let index = 0; index < this.dataProducto.length; index++) {
               if (this.dataProducto[index].quantity <= 0 && this.dataProducto[index].action &&  this.grupo.tipo_bien === 'EXI') {
                 this.toastr.info("Revise la cantidad de los productos, no puede estar vacio o ser 0");
@@ -1143,7 +1143,7 @@ codigoActa:any;
 
 
   async saveSales() {
-   
+
     let notify = `Se ha generado una nuevo Egreso de Bodega por el usuario ${this.dataUser.nombre}`;
     let productSend = [];
     let prefict = this.dataUser.permisos_doc.filter(e => e.fk_documento == 2);
@@ -1201,8 +1201,8 @@ codigoActa:any;
   async save(productSend, notify, filter, prefict, info, resultado) {
     console.log(productSend)
 
-    
-    this.mensajeSpinner = "Guardando traslado de bienes...";
+
+    (this as any).mensajeSpinner = "Guardando traslado de bienes...";
     this.lcargando.ctlSpinner(true);
     let res = await this.validatePrice(productSend).then(res => {
       localStorage.removeItem('dataProductsInvoice');
@@ -1211,7 +1211,7 @@ codigoActa:any;
       this.textNotificationSend = (res) ? this.textNotificationSend + " Existen inconcistencia en los precios. " : this.textNotificationSend + "";
       this.textNotificationSend = (this.validate_cupo) ? this.textNotificationSend + ` Cliente ${this.customer.razon_social} no tiene suficiente cupo para el crédito ` : this.textNotificationSend + "";
 
-      this.tipoTraslado.map(e =>{ 
+      this.tipoTraslado.map(e =>{
         if(e.valor == this.traslado.tipo_traslado){
           this.descripcionTraslado = e.descripcion
         }
@@ -1274,7 +1274,7 @@ codigoActa:any;
         codigo_secuencial_acta: this.codigoActa
 
       }
-       console.log(data); 
+       console.log(data);
       this.invService.saveTrasladoBienes(data).subscribe(
         res => {
         if (res["status"] == 1) {
@@ -1310,7 +1310,7 @@ codigoActa:any;
           this.vmButtons[2].habilitar = true;
           this.vmButtons[3].habilitar = false;
           this.imprimirComprobante()
-         
+
         } else {
           this.lcargando.ctlSpinner(false);
           this.cancelSales();
@@ -1372,11 +1372,11 @@ codigoActa:any;
     this.vmButtons[0].habilitar = true;
     this.vmButtons[1].habilitar = false;
     this.vmButtons[2].habilitar = false;
-    
+
   }
 
   cargaFoto(archivos) {
-    this.mensajeSpinner = 'Cargando fotos...';
+    (this as any).mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 3) {
       for (let i = 0; i < archivos.length; i++) {
@@ -1409,43 +1409,43 @@ codigoActa:any;
     console.log(this.id_traslado)
     if(this.traslado.tipo_traslado==1 || this.traslado.tipo_traslado=="1"){
       window.open(environment.ReportingUrl + "rep_bienes_traslado_01.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&p_id=" + this.id_traslado , '_blank')
-    
+
     }else if(this.traslado.tipo_traslado==2 || this.traslado.tipo_traslado=="2"){
       window.open(environment.ReportingUrl + "rep_bienes_traslado_02.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&p_id=" + this.id_traslado , '_blank')
-    
+
     }else if(this.traslado.tipo_traslado==3 || this.traslado.tipo_traslado=="3"){
       window.open(environment.ReportingUrl + "rep_bienes_traslado_03.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&p_id=" + this.id_traslado , '_blank')
-    
+
     }else if(this.traslado.tipo_traslado==4 || this.traslado.tipo_traslado=="4"){
       window.open(environment.ReportingUrl + "rep_bienes_traslado_04.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&p_id=" + this.id_traslado , '_blank')
-    
+
     }else if(this.traslado.tipo_traslado==5 || this.traslado.tipo_traslado=="5"){
       window.open(environment.ReportingUrl + "rep_bienes_traslado_05.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&p_id=" + this.id_traslado , '_blank')
-    
+
     }else if(this.traslado.tipo_traslado==6 || this.traslado.tipo_traslado=="6"){
       window.open(environment.ReportingUrl + "rep_bienes_traslado_06.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&p_id=" + this.id_traslado , '_blank')
-    
+
     }else if(this.traslado.tipo_traslado==7 || this.traslado.tipo_traslado=="7"){
       window.open(environment.ReportingUrl + "rep_bienes_traslado_07.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&p_id=" + this.id_traslado , '_blank')
-    
+
     }else if(this.traslado.tipo_traslado==8 || this.traslado.tipo_traslado=="8"){
       window.open(environment.ReportingUrl + "rep_bienes_traslado_08.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&p_id=" + this.id_traslado , '_blank')
-    
+
     }else if(this.traslado.tipo_traslado==9 || this.traslado.tipo_traslado=="9"){
       window.open(environment.ReportingUrl + "rep_bienes_traslado_09.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&p_id=" + this.id_traslado , '_blank')
-    
+
     }else if(this.traslado.tipo_traslado==10 || this.traslado.tipo_traslado=="10"){
       window.open(environment.ReportingUrl + "rep_bienes_traslado_10.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&p_id=" + this.id_traslado , '_blank')
-    
+
     }else if(this.traslado.tipo_traslado==11 || this.traslado.tipo_traslado=="11") {
       window.open(environment.ReportingUrl + "rep_bienes_traslado_11.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&p_id=" + this.id_traslado , '_blank')
     }
-    
+
       //window.open(environment.ReportingUrl + "rep_comprobante_egreso_bodega.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_egreso_bodega=" + this.id_egreso_bodega , '_blank')
   }
 
   expandListDocumentosRec() {
-   
+
     const modal = this.modalService.open(BusquedaTrasladoComponent, { size: "xl", backdrop: 'static', windowClass: 'viewer-content-general' })
     // modal.componentInstance.contr = this.contribuyenteActive;
     modal.componentInstance.permissions = this.permissions;
@@ -1479,7 +1479,7 @@ codigoActa:any;
     modal.componentInstance.validar = true
     modal.componentInstance.verifyRestore = this.verifyRestore;
     modal.componentInstance.claseSelect = this.claseSelect;
-    
+
     //this.generaActionRawMaterial()
   }
   expandirVistaFotos(index) {
@@ -1492,7 +1492,7 @@ codigoActa:any;
     modalInvoice.componentInstance.indexActive = index;
   }
   showDetalleProducto(data) {
-    
+
     const modalInvoice = this.modalService.open(DetallesProductoComponent,{
       size:"xl",
       backdrop: "static",
@@ -1500,10 +1500,10 @@ codigoActa:any;
     });
     modalInvoice.componentInstance.data = data;
     modalInvoice.componentInstance.isNew = this.isNew;
-    
+
   }
 
-  
+
 
 
 }

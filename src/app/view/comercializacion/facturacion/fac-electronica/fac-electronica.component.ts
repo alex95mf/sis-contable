@@ -24,7 +24,7 @@ export class FacElectronicaComponent implements OnInit {
   ) { }
 
   vmButtons: any = [];
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   validaciones: ValidacionesFactory = new ValidacionesFactory();
   listadoTabDinamic:any = [];

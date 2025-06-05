@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ListRecDocumentosComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -122,7 +122,7 @@ export class ListRecDocumentosComponent implements OnInit {
    }
 
   cargarDocumentos(flag: boolean = false){
-    this.mensajeSpinner = "Cargando lista de actas de finiquito...";
+    (this as any).mensajeSpinner = "Cargando lista de actas de finiquito...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1

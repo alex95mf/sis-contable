@@ -18,7 +18,7 @@ standalone: false,
 })
 export class MinmaxComponent implements OnInit {
   @ViewChild("vaSelect") myInputVariable: ElementRef;
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;

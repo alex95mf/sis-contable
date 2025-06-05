@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./parametros-nomina.component.scss']
 })
 export class ParametrosNominaComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -27,7 +27,7 @@ export class ParametrosNominaComponent implements OnInit {
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
-  
+
   parametrosDt: any = [];
   showInactive = false;
   tarifas: any;
@@ -40,7 +40,7 @@ export class ParametrosNominaComponent implements OnInit {
     {valor: 'I', descripcion: 'Inactivo'}
 
   ]
- 
+
 
   constructor(
     private parametroSrv: ParametrosNominaService,
@@ -63,7 +63,7 @@ export class ParametrosNominaComponent implements OnInit {
         this.cargarParametrosNomina()
       }
     )
-    
+
 
    }
 
@@ -117,7 +117,7 @@ export class ParametrosNominaComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -152,7 +152,7 @@ export class ParametrosNominaComponent implements OnInit {
   }
 
   cargarParametrosNomina() {
-    this.mensajeSpinner = "Cargando Parametros...";
+    (this as any).mensajeSpinner = "Cargando Parametros...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -167,7 +167,7 @@ export class ParametrosNominaComponent implements OnInit {
         console.log(res);
         this.paginate.length = res['data']['total'];
         this.parametrosDt = res['data']['data'];
-      
+
         this.lcargando.ctlSpinner(false);
       },
       (error) => {
@@ -182,7 +182,7 @@ export class ParametrosNominaComponent implements OnInit {
 
 
   if(parametro.codigo == 'PORCANTICIPO'){
-    this.mensajeSpinner = "Actualizando Parametros en ficha de empleados...";
+    (this as any).mensajeSpinner = "Actualizando Parametros en ficha de empleados...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -194,7 +194,7 @@ export class ParametrosNominaComponent implements OnInit {
       (res) => {
         console.log(res);
         if (res["status"] == 1) {
-         
+
           this.lcargando.ctlSpinner(false);
           Swal.fire({
             icon: "success",
@@ -205,10 +205,10 @@ export class ParametrosNominaComponent implements OnInit {
             confirmButtonColor: '#20A8D8',
           }).then((res) => {
             if (res.isConfirmed) {
-             
+
             }
           })
-          
+
           } else {
             this.lcargando.ctlSpinner(false);
             Swal.fire({
@@ -230,7 +230,7 @@ export class ParametrosNominaComponent implements OnInit {
   }else{
     this.toastr.info("Este parámetro no se puede actualizar la ficha de los empleados masivamente")
   }
-   
+
   }
 
   metodoGlobal(event) {
@@ -262,7 +262,7 @@ export class ParametrosNominaComponent implements OnInit {
       modalInvoice.componentInstance.isNew = isNew;
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
-      
+
     }
   }
 
@@ -283,7 +283,7 @@ export class ParametrosNominaComponent implements OnInit {
   //       confirmButtonColor: '#4DBD74',
   //     }).then((result) => {
   //       if (result.isConfirmed) {
-  //         this.mensajeSpinner = "Eliminando concepto..."
+  //         (this as any).mensajeSpinner = "Eliminando concepto..."
   //         this.lcargando.ctlSpinner(true);
   //         this.conceptosSrv.deleteConcepto(id).subscribe(
   //           (res) => {
@@ -346,7 +346,7 @@ export class ParametrosNominaComponent implements OnInit {
   }
 
   limpiarFiltros() {
-    
+
     this.filter.nombre = undefined;
     this.filter.codigo = undefined;
     this.filter.estado = undefined;

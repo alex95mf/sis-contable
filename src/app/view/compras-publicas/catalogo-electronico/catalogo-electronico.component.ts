@@ -22,7 +22,7 @@ standalone: false,
 export class CatalogoElectronicoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
    lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+
   fTitle: string = "Infimas";
   mensajeSpinner: string
   dataUser: any
@@ -160,7 +160,7 @@ export class CatalogoElectronicoComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = "Carga Inicial"
+      (this as any).mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.service.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -172,7 +172,7 @@ export class CatalogoElectronicoComponent implements OnInit {
 
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
@@ -241,7 +241,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   }
 
   // cargarPrograma(){
-  //   this.mensajeSpinner = "Cargando Programa...";
+  //   (this as any).mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
 
   //   this.service.searchPrograma({}).subscribe((res: any)=>{
@@ -253,7 +253,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   //   })
   // }
   // cargarPrograma(){
-  //   this.mensajeSpinner = "Cargando Programa...";
+  //   (this as any).mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
 
   //   this.service.searchPrograma({}).subscribe((res: any)=>{
@@ -273,7 +273,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   //   })
   // }
   cargarPrograma(){
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data ={
       periodo: Number(this.periodo),
@@ -298,7 +298,7 @@ export class CatalogoElectronicoComponent implements OnInit {
 
   // departamentoSearch(event){
   //   //console.log('Programa '+event);
-  //   this.mensajeSpinner = "Cargando Programa...";
+  //   (this as any).mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
 
   //   let data = {
@@ -313,7 +313,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   // }
   // departamentoSearch(event){
   //   // console.log(event);
-  //   this.mensajeSpinner = "Cargando Programa...";
+  //   (this as any).mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
 
   //   let data = {
@@ -338,7 +338,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   //   }
   departamentoSearch(event){
     // console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -364,7 +364,7 @@ export class CatalogoElectronicoComponent implements OnInit {
 
   AtribucionSearch(event){
     //console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event
@@ -383,7 +383,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   // SearchList(){
   //   // console.log(event);
   //   this.listaSolicitudes = []
-  //   this.mensajeSpinner = "Cargando...";
+  //   (this as any).mensajeSpinner = "Cargando...";
   //   this.lcargando.ctlSpinner(true);
 
 
@@ -431,7 +431,7 @@ export class CatalogoElectronicoComponent implements OnInit {
 
     // console.log(event);
     this.listaSolicitudes = []
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) Object.assign(this.paginate, {page: 1, pageIndex: 0})
@@ -480,7 +480,7 @@ export class CatalogoElectronicoComponent implements OnInit {
         }
       }
       let excelData = []
-      this.mensajeSpinner = "Generando Archivo Excel..."
+      (this as any).mensajeSpinner = "Generando Archivo Excel..."
       this.lcargando.ctlSpinner(true)
       this.service.getCataElectronico({ params: { filter: this.filter } }).subscribe(
         (res: any) => {
@@ -536,7 +536,7 @@ export class CatalogoElectronicoComponent implements OnInit {
 
   // SearchList(event){
   //   console.log("Atribucion "+event);
-  //   this.mensajeSpinner = "Cargando Programa...";
+  //   (this as any).mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
   //   // let data = {
   //   //   id: event,

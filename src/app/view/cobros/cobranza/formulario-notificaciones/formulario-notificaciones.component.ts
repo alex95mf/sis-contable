@@ -168,7 +168,7 @@ export class FormularioNotificacionesComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       (res) => {
@@ -191,7 +191,7 @@ export class FormularioNotificacionesComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando Catalogs";
+    (this as any).mensajeSpinner = "Cargando Catalogs";
     this.apiSrv.getCatalogs({params: "'COB_TIPO_GESTION','CAT_SECTOR','REN_MERCADO'"}).subscribe(
       (res: any) => {
         // console.log(res.data);
@@ -219,7 +219,7 @@ export class FormularioNotificacionesComponent implements OnInit {
   }
 
   cargarConceptos() {
-    // this.mensajeSpinner = 'Cargando Conceptos'
+    // (this as any).mensajeSpinner = 'Cargando Conceptos'
     // this.lcargando.ctlSpinner(true)
     this.apiSrv.getConceptos().subscribe(
       (res: any) => {
@@ -252,7 +252,7 @@ export class FormularioNotificacionesComponent implements OnInit {
       this.filter.razon_social = this.filter.razon_social.trim().length > 0 ? this.filter.razon_social.trim() : null
     }
 
-    this.mensajeSpinner = "Cargando Notificaciones...";
+    (this as any).mensajeSpinner = "Cargando Notificaciones...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getNotificacionCobro({params: {tipo:"GESTION", filter: this.filter, paginate: this.paginate } }).subscribe(
       (res: any) => {
@@ -324,7 +324,7 @@ export class FormularioNotificacionesComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = 'Generando Expedientes'
+        (this as any).mensajeSpinner = 'Generando Expedientes'
         this.lcargando.ctlSpinner(true)
         this.apiSrv.generarNotificaciones({titulos: procesados}).subscribe(
           (res: any) => {
@@ -366,7 +366,7 @@ export class FormularioNotificacionesComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = 'Generando Expedientes'
+        (this as any).mensajeSpinner = 'Generando Expedientes'
         this.lcargando.ctlSpinner(true)
         this.apiSrv.generarExpediente({ titulos: process }).subscribe(
           (res: any) => {
@@ -427,7 +427,7 @@ export class FormularioNotificacionesComponent implements OnInit {
 
   exportarExcel() {
     let excelData = []
-    this.mensajeSpinner = 'Exportando'
+    (this as any).mensajeSpinner = 'Exportando'
     this.lcargando.ctlSpinner(true)
 
     this.apiSrv.getNotificacionCobro({params: {tipo:"GESTION", filter: this.filter}}).subscribe(

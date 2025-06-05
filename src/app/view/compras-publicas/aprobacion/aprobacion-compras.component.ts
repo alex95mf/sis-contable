@@ -27,7 +27,7 @@ export class AprobacionComprasComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+
 
   paginate: any;
   filter: any;
@@ -67,7 +67,7 @@ export class AprobacionComprasComponent implements OnInit {
     private cierremesService: CierreMesService,
   ) {
     this.commonVrs.guardarAprobacion.subscribe((res)=>{
-      this.mensajeSpinner = "Cargando solicitudes...";
+      (this as any).mensajeSpinner = "Cargando solicitudes...";
       this.lcargando.ctlSpinner(true);
       this.SearchList(this.atribucionParams['atribucion'])
     })
@@ -119,7 +119,7 @@ export class AprobacionComprasComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = "Carga Inicial"
+      (this as any).mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.service.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -193,7 +193,7 @@ export class AprobacionComprasComponent implements OnInit {
 
 
   cargarPrograma(){
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data ={
@@ -221,7 +221,7 @@ export class AprobacionComprasComponent implements OnInit {
 
   departamentoSearch(event){
     console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -247,7 +247,7 @@ export class AprobacionComprasComponent implements OnInit {
 
   AtribucionSearch(event){
     console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event.valor
@@ -263,7 +263,7 @@ export class AprobacionComprasComponent implements OnInit {
 
 
     console.log(event);
-    this.mensajeSpinner = "Cargando Solicitudes...";
+    (this as any).mensajeSpinner = "Cargando Solicitudes...";
     this.lcargando.ctlSpinner(true);
     if (flag) this.paginate.page = 1
     let data = {
@@ -347,7 +347,7 @@ export class AprobacionComprasComponent implements OnInit {
       if (result.isConfirmed) {
 
 
-          this.mensajeSpinner = "Verificando período contable";
+          (this as any).mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
 
           let dat = {
@@ -358,7 +358,7 @@ export class AprobacionComprasComponent implements OnInit {
 
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.mensajeSpinner = "Cargando...";
+              (this as any).mensajeSpinner = "Cargando...";
               this.lcargando.ctlSpinner(true);
 
               let data ={

@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./rubros.component.scss']
 })
 export class RubrosComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -27,7 +27,7 @@ export class RubrosComponent implements OnInit {
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
-  
+
   conceptosDt: any = [];
   showInactive = false;
   tarifas: any;
@@ -62,7 +62,7 @@ export class RubrosComponent implements OnInit {
         this.cargarConceptos()
       }
     )
-    
+
 
    }
 
@@ -116,7 +116,7 @@ export class RubrosComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -151,7 +151,7 @@ export class RubrosComponent implements OnInit {
   }
 
   cargarConceptos() {
-    this.mensajeSpinner = "Cargando Rubros...";
+    (this as any).mensajeSpinner = "Cargando Rubros...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -209,7 +209,7 @@ export class RubrosComponent implements OnInit {
       modalInvoice.componentInstance.isNew = isNew;
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
-      
+
     }
   }
 
@@ -230,7 +230,7 @@ export class RubrosComponent implements OnInit {
   //       confirmButtonColor: '#4DBD74',
   //     }).then((result) => {
   //       if (result.isConfirmed) {
-  //         this.mensajeSpinner = "Eliminando concepto..."
+  //         (this as any).mensajeSpinner = "Eliminando concepto..."
   //         this.lcargando.ctlSpinner(true);
   //         this.conceptosSrv.deleteConcepto(id).subscribe(
   //           (res) => {
@@ -293,7 +293,7 @@ export class RubrosComponent implements OnInit {
   }
 
   limpiarFiltros() {
-    
+
     this.filter.descripcion = undefined;
     this.filter.codigo = undefined;
     this.filter.estado = undefined;

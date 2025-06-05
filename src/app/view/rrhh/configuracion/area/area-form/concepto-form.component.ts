@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ['./concepto-form.component.scss']
 })
 export class ConceptoFormComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   dataUser: any;
 
@@ -207,7 +207,7 @@ export class ConceptoFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando área...";
+        (this as any).mensajeSpinner = "Guardando área...";
         this.lcargando.ctlSpinner(true);
 
         let data = {
@@ -274,7 +274,7 @@ export class ConceptoFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando área..."
+        (this as any).mensajeSpinner = "Guardando área..."
         this.lcargando.ctlSpinner(true);
 
         let data = {

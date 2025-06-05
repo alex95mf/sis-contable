@@ -1,9 +1,9 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { EasigefService } from './reporte-esigef.service'; 
+import { EasigefService } from './reporte-esigef.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment'
 
-import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component'; 
+import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CustomersConsultModule } from 'src/app/view/cartera/customers/customers-consult/customers-consult.module';
 @Component({
 standalone: false,
@@ -13,7 +13,7 @@ standalone: false,
 })
 export class ReporteEsigefComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
   FilreportEsigef:any;
@@ -28,11 +28,11 @@ export class ReporteEsigefComponent implements OnInit {
   selected_mes: number;
   cmb_periodo: any[] = []
 
- 
- 
+
+
   constructor(
     private serv: EasigefService,
-    private toastr: ToastrService, 
+    private toastr: ToastrService,
   ) {
     this.FilreportEsigef = [
       {
@@ -89,11 +89,11 @@ export class ReporteEsigefComponent implements OnInit {
   detAsientoIniDataSource: Array<any> = [];
 
   ngOnInit(): void {
-    
+
     this.dataUser = JSON.parse(localStorage.getItem('Datauser'));
     ;
     this.selected_anio = moment(new Date()).format('YYYY');
-  
+
 
     this.vmButtons = [
       { orig: "btnSalSum", paramAccion: "1", boton: { icon: "fa fa-search", texto: "CONSULTAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary btn-sm", habilitar: true, imprimir: false},
@@ -104,14 +104,14 @@ export class ReporteEsigefComponent implements OnInit {
       //this.getCatalogos();
     }, 50);
 
-    
+
   }
 
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
 
-      this.mensajeSpinner = "Cargando Períodos"
+      (this as any).mensajeSpinner = "Cargando Períodos"
       const resPeriodos = await this.serv.getPeriodos()
       this.cmb_periodo = resPeriodos
 
@@ -207,7 +207,7 @@ export class ReporteEsigefComponent implements OnInit {
       case 5:
         this.exportDetAsientoInicial()
         break;
-    
+
       default:
         break;
     }
@@ -224,7 +224,7 @@ export class ReporteEsigefComponent implements OnInit {
         this.DataAsientoInicial = res;
         //this.serv.downloadFile(this.DataAsientoInicial, this.nameFile ,cabeversaldo);
         this.vmButtons[1].habilitar = false;
-      }, 
+      },
       (error: any) => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -239,7 +239,7 @@ export class ReporteEsigefComponent implements OnInit {
       response.map((item: any) => Object.assign(item, { codigo: `${item.tipo}|${item.codigo_p1}|${item.codigo_p2}|${item.codigo_p3}`, periodo: `${this.selected_mes}`.padStart(2, '0') }))
       console.log(response)
       this.priDataSource = response
-  
+
       this.vmButtons[1].habilitar = false;
       this.lcargando.ctlSpinner(false)
     } catch (err) {
@@ -294,7 +294,7 @@ export class ReporteEsigefComponent implements OnInit {
         //this.serv.downloadFile(this.DataAsientoInicial, this.nameFile ,cabeversaldo);
         this.vmButtons[1].habilitar = false;
         this.lcargando.ctlSpinner(false)
-      }, 
+      },
       (error: any) => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -313,7 +313,7 @@ export class ReporteEsigefComponent implements OnInit {
         //this.serv.downloadFile(this.DataAsientoInicial, this.nameFile ,cabeversaldo);
         this.vmButtons[1].habilitar = false;
         this.lcargando.ctlSpinner(false)
-      }, 
+      },
       (error: any) => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -343,7 +343,7 @@ export class ReporteEsigefComponent implements OnInit {
         //this.serv.downloadFile(this.DataAsientoInicial, this.nameFile ,cabeversaldo);
         this.vmButtons[1].habilitar = false;
         this.lcargando.ctlSpinner(false)
-      }, 
+      },
       (error: any) => {
         this.lcargando.ctlSpinner(false);
         this.toastr.info(error.error.message);
@@ -411,7 +411,7 @@ export class ReporteEsigefComponent implements OnInit {
       case 'DASI':
         this.nameFile = 'DetalleAsientoInicial';
         break;
-        
+
 
       default:
         this.vmButtons[0].habilitar = true;

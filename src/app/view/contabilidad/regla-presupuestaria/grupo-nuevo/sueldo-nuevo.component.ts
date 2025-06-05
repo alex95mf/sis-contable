@@ -23,7 +23,7 @@ export class SueldoNuevoComponent implements OnInit {
   lcargando: CcSpinerProcesarComponent;
   botonera: any = [];
   fTitle = "Nuevo Sueldo";
-  mensajeSpinner: string = "Cargando...";
+
   sueldos: any = [];
   dataUser: any;
   permissions: any;
@@ -244,7 +244,7 @@ console.log("fn")
       confirmButtonColor: "#4DBD74",
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando Nuevo Sueldo...";
+        (this as any).mensajeSpinner = "Guardando Nuevo Sueldo...";
         this.lcargando.ctlSpinner(true);
 
         let data = {
@@ -311,7 +311,7 @@ console.log("fn")
       confirmButtonColor: "#4DBD74",
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Editando Regla...";
+        (this as any).mensajeSpinner = "Editando Regla...";
         this.lcargando.ctlSpinner(true);
         let data = {
           id_regla_relacion: this.id_regla_relacion,

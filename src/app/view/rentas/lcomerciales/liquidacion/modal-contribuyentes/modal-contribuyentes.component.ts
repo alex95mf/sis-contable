@@ -13,7 +13,7 @@ standalone: false,
 })
 export class ModalContribuyentesComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any;
 
   contribuyentes: Array<any>;
@@ -76,7 +76,7 @@ export class ModalContribuyentesComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     
     try {
-      this.mensajeSpinner = 'Cargando Contribuyentes'
+      (this as any).mensajeSpinner = 'Cargando Contribuyentes'
       let response = await this.apiService.getContribuyentes({
         params: {
           filter: this.filter,

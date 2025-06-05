@@ -36,7 +36,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild("print") print!: ElementRef;
   fTitle = "Recaudacion de especies fiscales";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -230,7 +230,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
             mercado: this.mercados.find(m => m.id == res.fk_mercado)
           }
 
-          this.mensajeSpinner = 'Cargando Puestos de Mercado'
+          (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
           this.puestos_filter = this.puestos.filter(e => e.fk_mercado == res.fk_mercado)
           // this.lcargando.ctlSpinner(true)
           // this.puestos = []
@@ -266,7 +266,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
           this.documento.puesto = res.fk_mercado_puesto;
 
           if (res.fk_documento_2 && res.fk_documento_2 != 0) {
-            this.mensajeSpinner = 'Cargando datos de la Especie Fiscal...';
+            (this as any).mensajeSpinner = 'Cargando datos de la Especie Fiscal...';
             this.lcargando.ctlSpinner(true);
             let data = {
               inspeccion: res.fk_documento_2
@@ -430,7 +430,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -468,7 +468,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     let data = {
       params: "'REN_MERCADO'"
     }
-    this.mensajeSpinner = 'Cargando datos de Mercados'
+    (this as any).mensajeSpinner = 'Cargando datos de Mercados'
     // this.lcargando.ctlSpinner(true)
     this.contSvr.getMercados(data).subscribe(
       res => {
@@ -500,7 +500,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
   }
 
   selectMercadoHandler(event: any) {
-    this.mensajeSpinner = "Cargando listado de Configuracion Contable...";
+    (this as any).mensajeSpinner = "Cargando listado de Configuracion Contable...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id: event,
@@ -522,7 +522,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
 
   /* fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando Catalogs";
+    (this as any).mensajeSpinner = "Cargando Catalogs";
 
     let data = {
       params: "'REC_ESPECIE_FISCAL'",
@@ -553,7 +553,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
       mercado: this.documento.mercado
     }
     this.documento.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto
-    this.mensajeSpinner = 'Cargando Puestos de Mercado'
+    (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
     // this.lcargando.ctlSpinner(true)
     this.puestos = []
     this.apiSrv.getPuestos().subscribe(
@@ -607,7 +607,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
   }
 
   getCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos...';
+    (this as any).mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -682,7 +682,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
 
   // no se usa ya que la sesion ahora maneja toda la caja activa, no solo el id
   /* getCajaActiva() {
-    this.mensajeSpinner = 'Obteniendo Caja Activa...';
+    (this as any).mensajeSpinner = 'Obteniendo Caja Activa...';
     let id = this.cajaActiva.id_caja;
 
     // funcion necesario solo porque en la sesion se maneja solo el id no toda la info de la caja activa
@@ -703,7 +703,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
   } */
 
   /* getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -745,7 +745,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
   /* verificarCaja() {
     // funcion para revisar si la caja seleccionada ya ha sido abierta ese dia
 
-    this.mensajeSpinner = 'Verificando si la caja está activa...';
+    (this as any).mensajeSpinner = 'Verificando si la caja está activa...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -772,7 +772,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
   } */
 
   getLiquidaciones() {
-    this.mensajeSpinner = "Cargando lista de Liquidaciones...";
+    (this as any).mensajeSpinner = "Cargando lista de Liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1133,7 +1133,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = "Verificando período contable";
+          (this as any).mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let dat = {
             "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -1143,7 +1143,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
 
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.mensajeSpinner = 'Generando Especie Fiscal...';
+              (this as any).mensajeSpinner = 'Generando Especie Fiscal...';
               this.lcargando.ctlSpinner(true);
               this.documento.estado = "E";
               this.documento.tipo_documento = this.concepto.codigo;
@@ -1319,7 +1319,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
   }
 
   async validacionCaja() {
-    this.mensajeSpinner = 'Validando Estado de Caja'
+    (this as any).mensajeSpinner = 'Validando Estado de Caja'
     this.lcargando.ctlSpinner(true)
     this.cajaActiva = JSON.parse(localStorage.getItem('activeCaja'))
 

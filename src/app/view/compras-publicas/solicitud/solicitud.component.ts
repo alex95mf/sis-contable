@@ -23,7 +23,7 @@ export class SolicitudComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+
 
   programa: any = [];
   departamento: any = [];
@@ -187,7 +187,7 @@ export class SolicitudComponent implements OnInit {
 
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -419,7 +419,7 @@ export class SolicitudComponent implements OnInit {
     }).then((result) => {
 
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Verificando período contable";
+        (this as any).mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(this.periodoSelectedV),
@@ -430,7 +430,7 @@ export class SolicitudComponent implements OnInit {
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
 
-              this.mensajeSpinner = "Creando Solicitud...";
+              (this as any).mensajeSpinner = "Creando Solicitud...";
               this.lcargando.ctlSpinner(true);
               console.log(this.atribucionParamsNew);
               let detalles = []
@@ -522,7 +522,7 @@ export class SolicitudComponent implements OnInit {
   }
 
   cargarPrograma() {
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     this.service.searchPrograma({ periodo: this.periodo.getFullYear() }).subscribe((res: any) => {
@@ -544,7 +544,7 @@ export class SolicitudComponent implements OnInit {
 
   departamentoSearch() {
     // console.log(event);
-    this.mensajeSpinner = "Cargando Departamentos...";
+    (this as any).mensajeSpinner = "Cargando Departamentos...";
     this.lcargando.ctlSpinner(true);
 
     this.service.searchDepartamento({ programa: this.dato_Programa }).subscribe(
@@ -563,7 +563,7 @@ export class SolicitudComponent implements OnInit {
 
   AtribucionSearch(event) {
     // console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event.valor
@@ -578,7 +578,7 @@ export class SolicitudComponent implements OnInit {
   SearchList() {
     // console.log(event);
     this.listaSolicitudes = []
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
 
@@ -620,7 +620,7 @@ export class SolicitudComponent implements OnInit {
   SearchBienes() {
     // console.log(event);
     this.listaSolicitudesAtribucion = []
-    this.mensajeSpinner = "Cargando Bienes...";
+    (this as any).mensajeSpinner = "Cargando Bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
       //valor_programa: this.dato_Programa,

@@ -63,7 +63,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
   checkAuth: any = false;
   processing:any = false;
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
@@ -203,7 +203,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
               nombre_grupo: this.noms,
               comision: (this.checkAuth) ? "1" : "0",
             }
-            this.mensajeSpinner = "Guardando...";
+            (this as any).mensajeSpinner = "Guardando...";
             this.lcargando.ctlSpinner(true);
             this.grupoServices.saveGrupo(data).subscribe(res => {
               this.lcargando.ctlSpinner(false);
@@ -234,7 +234,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
     };
-    this.mensajeSpinner = "Cangando...";
+    (this as any).mensajeSpinner = "Cangando...";
     this.lcargando.ctlSpinner(true);
     this.grupoServices.presentaTablaGrupo().subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -303,7 +303,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
             nombre_grupo: this.noms,
             comision: (this.checkAuth) ? "1" : "0",
           }
-          this.mensajeSpinner = "Modificando...";
+          (this as any).mensajeSpinner = "Modificando...";
           this.lcargando.ctlSpinner(true);
           this.grupoServices.updateGrupo(data).subscribe(res => {
             this.lcargando.ctlSpinner(false);
@@ -338,7 +338,7 @@ export class GrupoComponent implements OnDestroy, OnInit {
             id_controlador: myVarGlobals.fGrupo,
             id_grupo: this.id_grupo,
           }
-          this.mensajeSpinner = "Eliminando...";
+          (this as any).mensajeSpinner = "Eliminando...";
           this.lcargando.ctlSpinner(true);
           this.grupoServices.deleteGrupo(data).subscribe(res => {
             this.lcargando.ctlSpinner(false);

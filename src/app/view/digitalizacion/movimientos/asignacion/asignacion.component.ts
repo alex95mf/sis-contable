@@ -31,7 +31,7 @@ export class AsignacionComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+
   newReserva: any;
   numeros_medios: any = [];
   bodega: any;
@@ -269,7 +269,7 @@ export class AsignacionComponent implements OnInit {
 
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -526,7 +526,7 @@ export class AsignacionComponent implements OnInit {
     }).then((result) => {
 
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Creando Solicitud...";
+        (this as any).mensajeSpinner = "Creando Solicitud...";
         this.lcargando.ctlSpinner(true);
         console.log(this.atribucionParamsNew);
         let detalles = []
@@ -601,7 +601,7 @@ export class AsignacionComponent implements OnInit {
   }
 
   cargarPrograma() {
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     this.service.searchPrograma({ periodo: this.periodo.getFullYear() }).subscribe((res: any) => {
@@ -623,7 +623,7 @@ export class AsignacionComponent implements OnInit {
 
   departamentoSearch() {
     // console.log(event);
-    this.mensajeSpinner = "Cargando Departamentos...";
+    (this as any).mensajeSpinner = "Cargando Departamentos...";
     this.lcargando.ctlSpinner(true);
 
     this.service.searchDepartamento({ programa: this.dato_Programa }).subscribe(
@@ -642,7 +642,7 @@ export class AsignacionComponent implements OnInit {
 
  /*  AtribucionSearch(event) {
     // console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event.valor
@@ -659,7 +659,7 @@ export class AsignacionComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true);
     this.listaSolicitudes = []
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id_programa: this.dato_Programa,
@@ -703,7 +703,7 @@ export class AsignacionComponent implements OnInit {
   SearchBienes() {
     // console.log(event);
     this.listaSolicitudesAtribucion = []
-    this.mensajeSpinner = "Cargando Bienes...";
+    (this as any).mensajeSpinner = "Cargando Bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
       //valor_programa: this.dato_Programa,
@@ -1064,7 +1064,7 @@ export class AsignacionComponent implements OnInit {
   }
 
   getBodegas() {
-    this.mensajeSpinner = "Cargando bodegas";
+    (this as any).mensajeSpinner = "Cargando bodegas";
     this.lcargando.ctlSpinner(true);
     let filter = {
       nombre_bodega: null,
@@ -1088,11 +1088,11 @@ export class AsignacionComponent implements OnInit {
       (res) => {
         this.dataBodega = res["data"]["data"];
         this.lcargando.ctlSpinner(false);
-        this.mensajeSpinner = "";
+        (this as any).mensajeSpinner = "";
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
-        this.mensajeSpinner = "";
+        (this as any).mensajeSpinner = "";
       }
     );
   }

@@ -13,7 +13,7 @@ standalone: false,
   styleUrls: ['./table-roles.component.scss']
 })
 export class TableRolesComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

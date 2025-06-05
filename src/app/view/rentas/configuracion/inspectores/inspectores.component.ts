@@ -27,7 +27,7 @@ standalone: false,
 })
 export class InspectoresComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = [];
 
   cmb_tipo_inspeccion: any[] = [
@@ -161,7 +161,7 @@ export class InspectoresComponent implements OnInit {
   async getInspectores() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Inspectores'
+      (this as any).mensajeSpinner = 'Cargando Inspectores'
       let inspectores = await this.apiService.getInspectores({params: { filter: this.filter, paginate: this.paginate }})
       this.paginate.length = inspectores.total;
       this.tbl_inspectores = inspectores.data;
@@ -212,7 +212,7 @@ export class InspectoresComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Almacenando Inspector'
+        (this as any).mensajeSpinner = 'Almacenando Inspector'
         let inspector = await this.apiService.setInspector({ inspector: this.newInspector })
         console.log(inspector)
 
@@ -245,7 +245,7 @@ export class InspectoresComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Eliminando Inspector'
+        (this as any).mensajeSpinner = 'Eliminando Inspector'
         await this.apiService.deleteInspector(inspector.id_inspector);
         await this.getInspectores()
       } catch (err) {

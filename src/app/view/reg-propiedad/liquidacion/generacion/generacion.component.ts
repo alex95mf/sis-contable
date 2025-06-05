@@ -24,7 +24,7 @@ standalone: false,
 export class GeneracionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de Liquidación (Registro de la Propiedad)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -91,7 +91,7 @@ export class GeneracionComponent implements OnInit {
   ) {
     this.commonVarService.selectListLiqRP.asObservable().subscribe(
       (res) => {
-        this.mensajeSpinner = 'Cargando datos de la Liquidación...';
+        (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
         this.lcargando.ctlSpinner(true)
         this.restoreForm(false, false);
         this.formReadOnly = true;
@@ -213,7 +213,7 @@ export class GeneracionComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
@@ -362,7 +362,7 @@ export class GeneracionComponent implements OnInit {
     }
     if (arancel.id) {
       if (arancel.avaluo) {
-        this.mensajeSpinner = 'Obteniendo Propiedades...'
+        (this as any).mensajeSpinner = 'Obteniendo Propiedades...'
         this.lcargando.ctlSpinner(true)
         this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
           (res) => {
@@ -422,7 +422,7 @@ export class GeneracionComponent implements OnInit {
   }
 
   calcSubtotal() {
-    this.mensajeSpinner = 'Calculando Subtotal...';
+    (this as any).mensajeSpinner = 'Calculando Subtotal...';
     this.lcargando.ctlSpinner(true);
     let payload = {
       avaluo: this.liquidacion.avaluo,
@@ -478,7 +478,7 @@ export class GeneracionComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = 'Generando Liquidación...';
+          (this as any).mensajeSpinner = 'Generando Liquidación...';
           this.lcargando.ctlSpinner(true);
           this.liquidacion.fk_arancel = this.arancelActive.id;
           this.liquidacion.detalles.push(

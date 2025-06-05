@@ -156,7 +156,7 @@ export class TareaFormComponent implements OnInit {
 
 
   
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
   dataUser: any = {};
@@ -311,7 +311,7 @@ export class TareaFormComponent implements OnInit {
   } 
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
@@ -652,7 +652,7 @@ export class TareaFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando Tarea...";
+        (this as any).mensajeSpinner = "Guardando Tarea...";
         this.lcargando.ctlSpinner(true);
   
         this.apiSrv.guardarTarea({tarea:this.tarea}).subscribe(
@@ -710,7 +710,7 @@ export class TareaFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Editando Tarea...";
+        (this as any).mensajeSpinner = "Editando Tarea...";
         this.lcargando.ctlSpinner(true);
    
         this.tarea.id_usuario= this.dataUser['id_usuario'];

@@ -19,7 +19,7 @@ export class AuxiliaresComponent implements OnInit {
   @ViewChildren(NgSelectComponent) selects: Array<NgSelectComponent>;
   fTitle: string = 'Mantenimiento de Auxiliares';
   vmButtons: Array<Botonera> = [];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   filter: any;
   paginate: IPaginate;
@@ -116,7 +116,7 @@ export class AuxiliaresComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Catalogos'
+      (this as any).mensajeSpinner = 'Cargando Catalogos'
       let response = await this.apiService.getCatalogos({params: "'CON_TIPO_AUXILIARES','CON_CATALOGO_AUXILIARES'"});
       this.cmb_auxiliar_tipo = response['CON_TIPO_AUXILIARES'].map((item: any) => Object.assign(item, { label: `${item.valor}. ${item.descripcion}`}))
       this.cmb_auxiliar_referencia = response['CON_CATALOGO_AUXILIARES'].map((item: any) => Object.assign(item, { label: `${item.valor}. ${item.descripcion}`}))
@@ -138,7 +138,7 @@ export class AuxiliaresComponent implements OnInit {
   async getAuxiliares() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Auxiliares'
+      (this as any).mensajeSpinner = 'Cargando Auxiliares'
       let response: any = await this.apiService.getAuxiliares({params: { filter: this.filter, paginate: this.paginate }})
       this.lst_auxiliares = response.data
       this.paginate.length = response.total

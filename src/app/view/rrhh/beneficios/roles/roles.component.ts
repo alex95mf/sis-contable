@@ -213,7 +213,7 @@ export class RolesComponent implements OnInit {
         confirmButtonText: "Aceptar"
       }).then((result) => {
 
-        // this.mensajeSpinner = "Enviando correos...";
+        // (this as any).mensajeSpinner = "Enviando correos...";
         // this.lcargando.ctlSpinner(true);
 
         if (result.value) {
@@ -332,7 +332,7 @@ export class RolesComponent implements OnInit {
 
 
 
-  mensajeSpinner: string = "Cargando...";
+
   /* async */ sendEmailRolesPagos($dataEmp, $url_reporting_serve) {
 
     let mes = this.mes_actual;
@@ -355,7 +355,7 @@ export class RolesComponent implements OnInit {
       mes: mes,
       anio : year,
     }
-    this.mensajeSpinner = "Enviando correos...";
+    (this as any).mensajeSpinner = "Enviando correos...";
     this.lcargando.ctlSpinner(true);
     this.benefrolesService.sendEmailRolesPagos(data).subscribe(
       (res: GeneralResponseI) => {

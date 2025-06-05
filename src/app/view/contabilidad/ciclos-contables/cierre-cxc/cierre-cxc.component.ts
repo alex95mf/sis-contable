@@ -18,7 +18,7 @@ standalone: false,
 export class CierreCxcComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: Botonera[] = [];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   filter: any = {
     fecha_hasta: moment(new Date()).format('YYYY-MM-DD'),
@@ -153,7 +153,7 @@ export class CierreCxcComponent implements OnInit {
     this.documento.deudas = []
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Cuentas por Cobrar'
+      (this as any).mensajeSpinner = 'Cargando Cuentas por Cobrar'
       let documentos: Array<any> = await this.apiService.getDocumentos({ params: { filter: this.filter } })
       console.log(documentos)
       this.documento.deudas = documentos
@@ -190,7 +190,7 @@ export class CierreCxcComponent implements OnInit {
 
     if (result.isConfirmed) {
 
-      this.mensajeSpinner = "Verificando período contable";
+      (this as any).mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
 
       let data = {
@@ -203,7 +203,7 @@ export class CierreCxcComponent implements OnInit {
               if (res["data"][0].estado !=='C') {
                 this.lcargando.ctlSpinner(true)
                 try {
-                  this.mensajeSpinner = 'Almacenando Cierre'
+                  (this as any).mensajeSpinner = 'Almacenando Cierre'
                   let response: any = await this.apiService.setDocumento({ documento: this.documento })
                   console.log(response);
                   const { num_documento, id } = response
@@ -259,7 +259,7 @@ export class CierreCxcComponent implements OnInit {
 
     if (result.isConfirmed) {
 
-      this.mensajeSpinner = "Verificando período contable";
+      (this as any).mensajeSpinner = "Verificando período contable";
       this.lcargando.ctlSpinner(true);
       let data = {
         "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -273,7 +273,7 @@ export class CierreCxcComponent implements OnInit {
 
               this.lcargando.ctlSpinner(true)
               try {
-                this.mensajeSpinner = 'Eliminando Cierre'
+                (this as any).mensajeSpinner = 'Eliminando Cierre'
                 await this.apiService.deleteCierre(this.documento.id)
 
                 this.lcargando.ctlSpinner(false)

@@ -49,7 +49,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
     this.commonVarService.contribAnexoLoad.asObservable().subscribe(
       (res: any) => {
         this.lcargando.ctlSpinner(true)
-        this.mensajeSpinner = 'Cargando Anexos ...'
+        (this as any).mensajeSpinner = 'Cargando Anexos ...'
         // console.log('anexos',res, this.permissions, this.dataUser);
         let data = {
           //module: this.permissions.id_modulo,
@@ -120,7 +120,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
   cargarArchivo(){
 
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Cargando Anexos ...'
+    (this as any).mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       //module: this.permissions.id_modulo,
@@ -171,7 +171,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
       ip: this.commonService.getIpAddress()
     }
 
-    // this.mensajeSpinner = 'Eliminando anexo'
+    // (this as any).mensajeSpinner = 'Eliminando anexo'
     // this.lcargando.ctlSpinner(true)
 
     this.apiService.deleteAnexo(data).subscribe(
@@ -224,7 +224,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
             ip: this.commonService.getIpAddress()
           }
       
-          this.mensajeSpinner = 'Eliminando anexo'
+          (this as any).mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true)
           console.log()
           this.apiService.deleteAnexo(data).subscribe(

@@ -25,7 +25,7 @@ standalone: false,
 })
 export class PlanCuentasTreeComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: cbtn[] = [];
 
   // treeControl = new NestedTreeControl<any>(node => node.children);
@@ -48,7 +48,7 @@ export class PlanCuentasTreeComponent implements OnInit {
 
   async getCuentas() {
     try {
-      this.mensajeSpinner = 'Cargando Cuentas'
+      (this as any).mensajeSpinner = 'Cargando Cuentas'
       const response = await this.apiService.getCuentasArbol()
       let arreglo_tree = ((response['data'])[0].json_agg).replaceAll("child3", "child").replaceAll("child4", "child").replaceAll("child5", "child").replaceAll("child6", "child").replaceAll("child7", "child").replaceAll("child", "children");
       const arbol = JSON.parse(arreglo_tree);

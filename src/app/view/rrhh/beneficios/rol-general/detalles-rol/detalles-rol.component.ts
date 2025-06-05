@@ -11,7 +11,7 @@ standalone: false,
   styleUrls: ['./detalles-rol.component.scss']
 })
 export class DetallesRolComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent,{ static: false })
   lcargando: CcSpinerProcesarComponent;
 

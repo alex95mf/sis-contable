@@ -21,15 +21,15 @@ standalone: false,
 })
 export class TasasVariasComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Tasas Varias";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
   catalog: any = {};
-  
+
   tasas: any = { valor: 0 };
   tasasVariasDt: any = [];
   showInactive = false;
@@ -53,7 +53,7 @@ export class TasasVariasComponent implements OnInit {
     private commonSrv: CommonService,
     private toastr: ToastrService,
     private commonVarSrv: CommonVarService,
-    private modalSrv: NgbModal) { 
+    private modalSrv: NgbModal) {
 
       this.commonVarSrv.editarTasasVarias.asObservable().subscribe(
         (res) => {
@@ -103,7 +103,7 @@ export class TasasVariasComponent implements OnInit {
       // }
     ];
 
-  
+
     this.filter = {
       codigo: undefined,
       descripcion: undefined,
@@ -128,7 +128,7 @@ export class TasasVariasComponent implements OnInit {
       this.validaPermisos();
       this.cargarTasasVarias(true);
       this.getCatalogos()
-      
+
     }, 0);
   }
 
@@ -139,7 +139,7 @@ export class TasasVariasComponent implements OnInit {
 
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -173,7 +173,7 @@ export class TasasVariasComponent implements OnInit {
       params: "'REN_TIPO_TABLA_TASA'",
     };
     this.tasasVariasSrv.getCatalogo(data).subscribe(
-      
+
       (res) => {
         //console.log('tasaaaaas'+res);
         this.tasas = res["data"]['REN_TIPO_TABLA_TASA'];
@@ -186,10 +186,10 @@ export class TasasVariasComponent implements OnInit {
   }
 
   fillBorradoManual() {
-   
+
     if( this.filter.codigo == "") {
       this.filter.codigo = undefined;
-     
+
     }else if(this.filter.descripcion == ""){
       this.filter.descripcion = undefined;
     }else if (this.filter.motivacion_legal == ""){
@@ -202,11 +202,11 @@ export class TasasVariasComponent implements OnInit {
     this.paginate.page = 1
 
     this.cargarTasasVarias(false)
-   
+
 }
 
   cargarTasasVarias(inicial: boolean) {
-    this.mensajeSpinner = "Cargando listado de tasas...";
+    (this as any).mensajeSpinner = "Cargando listado de tasas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -215,7 +215,7 @@ export class TasasVariasComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    
+
     this.tasasVariasSrv.getTasasVarias(data).subscribe(
       (res) => {
         //console.log(res);
@@ -227,7 +227,7 @@ export class TasasVariasComponent implements OnInit {
           this.tasasVariasDt = Object.values(res['data']['data']);
         }
         this.lcargando.ctlSpinner(false);
-       
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -239,7 +239,7 @@ export class TasasVariasComponent implements OnInit {
   metodoGlobal(event){
     switch (event.items.boton.texto) {
       case " NUEVO":
-        this.showTasasVariasForm(true, {}); 
+        this.showTasasVariasForm(true, {});
        break;
       case " MOSTRAR INACTIVOS":
         this.changeShowInactive(this.showInactive);
@@ -250,7 +250,7 @@ export class TasasVariasComponent implements OnInit {
   }
 
   showTasasVariasForm(isNew:boolean, data?:any) {
-    
+
     if (!isNew && this.permissions.consultar == "0") {
       this.toastr.warning("No tiene permisos para consultar Tasas.", this.fTitle);
     } else if (isNew && this.permissions.guardar == "0") {
@@ -267,7 +267,7 @@ export class TasasVariasComponent implements OnInit {
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
       modalInvoice.componentInstance.tasas = this.tasas;
-      
+
     }
   }
 
@@ -295,7 +295,7 @@ export class TasasVariasComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = "Eliminando tasa..."
+          (this as any).mensajeSpinner = "Eliminando tasa..."
           this.lcargando.ctlSpinner(true);
           this.tasasVariasSrv.deleteTasasVarias(id).subscribe(
             (res) => {
@@ -344,7 +344,7 @@ export class TasasVariasComponent implements OnInit {
     this.showInactive = !this.showInactive;
     this.cargarTasasVarias(false);
   }
-  
+
   changePaginate(event) {
     let newPaginate = {
       perPage: event.pageSize,

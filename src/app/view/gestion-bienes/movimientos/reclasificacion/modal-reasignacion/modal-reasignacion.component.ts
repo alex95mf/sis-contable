@@ -16,7 +16,7 @@ export class ModalReasignacionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Input() producto: IProducto;
   vmButtons: Array<any> = [];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   filter: IFilter = {
     codigo: null,
@@ -131,7 +131,7 @@ export class ModalReasignacionComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Reasignando Codigo de Producto'
+        (this as any).mensajeSpinner = 'Reasignando Codigo de Producto'
         // Llamar a API enviando producto anterior y nuevo.
         let response = await this.apiService.reasignar({producto: this.producto, reasignacion: reasignacion})
         console.log(response)

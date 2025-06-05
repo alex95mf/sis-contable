@@ -39,7 +39,7 @@ export class ConsultaComponent implements OnInit {
   @ViewChild('tblResumenAnulacion') tblResumenAnulacion: Table
 
   fTitle: string = "Reporte de Rentas";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any[] = [];
   dataUser: any;
   permissions: any;
@@ -190,7 +190,7 @@ export class ConsultaComponent implements OnInit {
 
 
   getTipoReportes() {
-    this.mensajeSpinner = 'Cargando Tipo de Reportes';
+    (this as any).mensajeSpinner = 'Cargando Tipo de Reportes';
     this.lcargando.ctlSpinner(true);
     let data = {
         modulo: 16,
@@ -219,7 +219,7 @@ export class ConsultaComponent implements OnInit {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Cargando Conceptos';
+    (this as any).mensajeSpinner = 'Cargando Conceptos';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptosDet().subscribe(
       (res: any) => {
@@ -243,7 +243,7 @@ export class ConsultaComponent implements OnInit {
 
 
   getTiposReporte() {
-    this.mensajeSpinner = 'Cargando Tipos de Reporte';
+    (this as any).mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.apiService.getTiposReporte().subscribe(
       (res: any) => {
@@ -267,8 +267,8 @@ export class ConsultaComponent implements OnInit {
 
   cargarConsultaReportes(){
     this.loading = true;
-    console.log(this.filter)
-        this.mensajeSpinner = 'Cargando...';
+    console.log(this.filter);
+        (this as any).mensajeSpinner = 'Cargando...';
         // this.lcargando.ctlSpinner(true);
         this.filter.reporte = this.selectedReporte
 

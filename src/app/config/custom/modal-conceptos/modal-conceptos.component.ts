@@ -16,11 +16,11 @@ standalone: false,
   styleUrls: ['./modal-conceptos.component.scss']
 })
 export class ModalConceptosComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
-  
+
   @Input() module_comp: any;
   @Input() permissions: any;
   @Input() id_concepto: number;
@@ -29,7 +29,7 @@ export class ModalConceptosComponent implements OnInit {
   @Input() fTitle: string = "";
   @Input() valor_unitario: boolean = false;
   resdata: any = [];
-  
+
   vmButtons: any;
 
   filter: any;
@@ -67,9 +67,9 @@ export class ModalConceptosComponent implements OnInit {
 
     // this.paginate.length = this.conceptos.length;
     // this.switch = false;
-    
+
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
-    
+
   }
 
   aplicarFiltros() {
@@ -85,7 +85,7 @@ export class ModalConceptosComponent implements OnInit {
   }
 
   cargarConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     // let data = {
     //   id_concepto: this.id_concepto,
@@ -127,7 +127,7 @@ export class ModalConceptosComponent implements OnInit {
           let array = Object.values(res['data']['data']);
           array.forEach((e:any) => {
             this.conceptos.forEach(c => {
-              
+
               if (e.id_concepto_detalle==c.id_concepto_detalle){
                 Object.assign(e , {
                   aplica: true,
@@ -182,7 +182,7 @@ export class ModalConceptosComponent implements OnInit {
         break;
     }
   }
-  
+
   changePaginate(event) {
     let newPaginate = {
       perPage: event.pageSize,

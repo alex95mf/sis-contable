@@ -108,7 +108,7 @@ export class ModalConfiguracionDetallesComponent implements OnInit {
 
   async setConfiguracion() {
     try {
-      this.mensajeSpinner = 'Almacenando Configuracion'
+      (this as any).mensajeSpinner = 'Almacenando Configuracion'
       const response = await this.apiService.setConfiguracion({configuracion: this.registro})
       console.log(response)
       //
@@ -120,7 +120,7 @@ export class ModalConfiguracionDetallesComponent implements OnInit {
 
   async updateConfiguracion() {
     try {
-      this.mensajeSpinner = 'Actualizando Configuracion'
+      (this as any).mensajeSpinner = 'Actualizando Configuracion'
       const response = await this.apiService.updateConfiguracion(this.registro.id, {configuracion: this.registro})
       console.log(response)
       //

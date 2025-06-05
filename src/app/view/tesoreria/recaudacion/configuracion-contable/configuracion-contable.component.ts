@@ -17,7 +17,7 @@ standalone: false,
 })
 export class ConfiguracionContableComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -40,7 +40,7 @@ export class ConfiguracionContableComponent implements OnInit {
     private toastr: ToastrService,
     private commonSrv: CommonService,
     private commonVarSrv: CommonVarService
-  ) { 
+  ) {
     this.commonVarSrv.modalConfiguracionContable.asObservable().subscribe(
       (res)=>{
         this.getConfiguracionContable()
@@ -114,7 +114,7 @@ export class ConfiguracionContableComponent implements OnInit {
 
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -175,7 +175,7 @@ export class ConfiguracionContableComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos...';
+    (this as any).mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
     this.service.getCatalogos({params: "'REC_TIPO_PAGO'"}).subscribe(
       (res) => {
@@ -188,7 +188,7 @@ export class ConfiguracionContableComponent implements OnInit {
           }
           this.tipoPagos.push(f_pago);
         });
-        // this.lcargando.ctlSpinner(false);               
+        // this.lcargando.ctlSpinner(false);
         this.getConfiguracionContable()
       },
       (err) => {
@@ -218,7 +218,7 @@ export class ConfiguracionContableComponent implements OnInit {
   }
 
   getConfiguracionContable(){
-    this.mensajeSpinner = "Cargando listado de Configuracion Contable...";
+    (this as any).mensajeSpinner = "Cargando listado de Configuracion Contable...";
     this.lcargando.ctlSpinner(true);
     this.service.getConfiguracionContable({params: { filter: this.filter, paginate: this.paginate }}).subscribe(
       (res: any)=>{

@@ -39,7 +39,7 @@ export class ReporteAcfijoTwoComponent implements OnInit {
   arrayGrupo: Array<any> = [];
   arrayCountrys: Array<any> = [];
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   constructor(private toastr: ToastrService,
@@ -188,7 +188,7 @@ getTableReport() {
     estado: this.estado == 3 ? null : this.estado,
     origen: this.origen == 0 ? null : this.origen,
   }
-  this.mensajeSpinner = "Cargando...";
+  (this as any).mensajeSpinner = "Cargando...";
   this.lcargando.ctlSpinner(true);
   this.reportesSrv.dataActFijoDt(data).subscribe(res => {
     this.lcargando.ctlSpinner(false);

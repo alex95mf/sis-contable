@@ -24,7 +24,7 @@ standalone: false,
 export class ReciboCobroComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Recibo de cobro";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -225,7 +225,7 @@ export class ReciboCobroComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -255,7 +255,7 @@ export class ReciboCobroComponent implements OnInit {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -422,7 +422,7 @@ export class ReciboCobroComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = 'Generando Documento de pago...';
+          (this as any).mensajeSpinner = 'Generando Documento de pago...';
           this.lcargando.ctlSpinner(true);
           this.documento.estado = "E";
           this.documento.tipo_documento = this.concepto.codigo;

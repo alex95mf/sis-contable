@@ -69,7 +69,7 @@ export class ModalComponent implements OnInit {
       }
     )
 
-    this.mensajeSpinner = 'Cargando Compras'
+    (this as any).mensajeSpinner = 'Cargando Compras'
     this.lcargando.ctlSpinner(true)
     this.api.getCompras({bien: this.bien}).subscribe(
       (res: any) => {
@@ -161,7 +161,7 @@ export class ModalComponent implements OnInit {
       factura: this.factura,
     }
 
-    this.mensajeSpinner = 'Almacenando Compras'
+    (this as any).mensajeSpinner = 'Almacenando Compras'
     this.lcargando.ctlSpinner(true)
     this.api.setCompras({compras: compra}).subscribe(
       (res: any) => {
@@ -206,7 +206,7 @@ export class ModalComponent implements OnInit {
     }).then(
       async (result: any) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = 'Marcando como Pagado'
+          (this as any).mensajeSpinner = 'Marcando como Pagado'
           this.lcargando.ctlSpinner(true)
           try {
             let res: any = await this.api.setPagado(compra.id, compra)

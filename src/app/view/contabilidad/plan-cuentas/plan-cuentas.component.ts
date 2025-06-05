@@ -27,7 +27,7 @@ standalone: false,
 
 })
 export class PlanCuentasComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Output() onNodeSelect = new EventEmitter<any>();
   gridConfig: object;

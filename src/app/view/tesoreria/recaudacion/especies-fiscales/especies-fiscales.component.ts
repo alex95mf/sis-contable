@@ -20,7 +20,7 @@ standalone: false,
 })
 export class EspeciesFiscalesComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -160,7 +160,7 @@ export class EspeciesFiscalesComponent implements OnInit {
 
 
   cargarEspeciesFiscales(event?: any){
-    this.mensajeSpinner = "Cargando listado de Configuracion Contable...";
+    (this as any).mensajeSpinner = "Cargando listado de Configuracion Contable...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id: this.tipo_especie,
@@ -187,7 +187,7 @@ export class EspeciesFiscalesComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando Catalogs";
+    (this as any).mensajeSpinner = "Cargando Catalogs";
 
     let data = {
       params: "'REC_ESPECIE_FISCAL'",
@@ -278,7 +278,7 @@ export class EspeciesFiscalesComponent implements OnInit {
 
   exportarExcel(){
 
-    this.mensajeSpinner = "Generando Reporte Excel...";
+    (this as any).mensajeSpinner = "Generando Reporte Excel...";
     this.lcargando.ctlSpinner(true);
     let data = {
       id: this.tipo_especie,

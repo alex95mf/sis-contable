@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./reporte-quotes.component.scss']
 })
 export class ReporteQuotesComponent implements OnInit {
-    mensajeSpinner: string = "Cargando...";
+    
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;

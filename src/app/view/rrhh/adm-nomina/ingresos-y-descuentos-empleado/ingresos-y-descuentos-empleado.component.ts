@@ -91,7 +91,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   consulta : boolean;
 
   processing: any = false;
-  mensajeSpinner: string = "Cargando...";
+
   submitted = false;
 
   programa: any = ''
@@ -408,7 +408,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = "Carga Inicial"
+      (this as any).mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.ingresosydescuentosService.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -741,7 +741,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
   async updateIngresoDescuentoEmpleado() {
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
 
     let dat = {
@@ -773,7 +773,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
                 ing_desc: insertData,
 
               };
-              this.mensajeSpinner = "Actualizando...";
+              (this as any).mensajeSpinner = "Actualizando...";
               this.lcargando.ctlSpinner(true);
               this.ingresosydescuentosService.saveListIngresoDescuento(data).subscribe(
                 (res: GeneralResponseI) => {
@@ -813,7 +813,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   ///
   async saveIngresoDescuentoEmpleado() {
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
 
     let dat = {
@@ -855,7 +855,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
               tipo_contrato: this.tipoContrato
 
             };
-            this.mensajeSpinner = "Guardando...";
+            (this as any).mensajeSpinner = "Guardando...";
             this.lcargando.ctlSpinner(true);
             this.ingresosydescuentosService.saveListIngresoDescuento(data).subscribe(
               (res: GeneralResponseI) => {
@@ -918,7 +918,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   deleteIngresoDescuentoEmpleado() {
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
 
     let dat = {
@@ -948,7 +948,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
               delete_list: idDeleteIngDEscData,
             };
             // this.validaDt = false;
-            this.mensajeSpinner = "Borrando...";
+            (this as any).mensajeSpinner = "Borrando...";
             this.lcargando.ctlSpinner(true);
             this.ingresosydescuentosService.deleteList(data).subscribe(
               (res) => {
@@ -1491,7 +1491,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   btnExportExcel(){
-    this.mensajeSpinner = "Generando Archivo Excel...";
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
     this.lcargando.ctlSpinner(true);
    // this.ingresosydescuentosService.getRecDocumentosExport(data).subscribe(
     //  (res)=>{
@@ -1598,7 +1598,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
   aprobarIngresoDescuento(){
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let dat = {
       "anio": Number(this.sld_anio),
@@ -1616,7 +1616,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
         }
 
         console.log("datadecimoterce",data)
-        this.mensajeSpinner = "Aprobando Ingresos y Descuentos...";
+        (this as any).mensajeSpinner = "Aprobando Ingresos y Descuentos...";
         this.lcargando.ctlSpinner(true);
         this.ingresosydescuentosService.aprobarIngresoDescuento(data).subscribe(res => {
           console.log(res)
@@ -1654,7 +1654,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
     if(this.num_control == '' || this.num_control == undefined){
       this.toastr.info('Debe ingresar un No. de control para realizar la busqueda')
     }else{
-      this.mensajeSpinner = "Buscando";
+      (this as any).mensajeSpinner = "Buscando";
       this.lcargando.ctlSpinner(true);
 
       let data = {
@@ -1727,7 +1727,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
   async  getNumControl(){
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Cargando Registro'
+    (this as any).mensajeSpinner = 'Cargando Registro'
 
     this.cancel()
     try {
@@ -1794,7 +1794,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
   }
 
   cargarAreas() {
-    this.mensajeSpinner = "Cargando listado de Áreas...";
+    (this as any).mensajeSpinner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1817,7 +1817,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
   cargarDepartamentos(event) {
     console.log(event)
-    this.mensajeSpinner = "Cargando listado de Departamentos...";
+    (this as any).mensajeSpinner = "Cargando listado de Departamentos...";
     this.lcargando.ctlSpinner(true);
     this.area = event;
     let data = {

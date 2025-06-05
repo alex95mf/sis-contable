@@ -128,7 +128,7 @@ export class ModalGruposComponent implements OnInit {
    }
 
   cargarSubgrupos(){
-    this.mensajeSpinner = "Cargando";
+    (this as any).mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true);
     console.log(this.claseSelect)
    // let id = this.claseSelect.id_grupo_productos

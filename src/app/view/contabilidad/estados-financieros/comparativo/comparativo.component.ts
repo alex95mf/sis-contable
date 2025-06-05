@@ -18,7 +18,7 @@ export class ComparativoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: Array<Botonera> = [];
   fTitle: string = 'Reporte Comparativo';
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   filter: any = {
     tipo_reporte: null,
@@ -104,7 +104,7 @@ export class ComparativoComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Centro de Costos'
+      (this as any).mensajeSpinner = 'Cargando Centro de Costos'
       let response = await this.apiService.getCentroCostos();
       response.unshift({ id: 0, nombre: 'Todos' })
       this.cmb_centro_costo = response
@@ -153,7 +153,7 @@ export class ComparativoComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Cuentas'
+      (this as any).mensajeSpinner = 'Cargando Cuentas'
       this.columnas = [];
       this.registros = [];
 

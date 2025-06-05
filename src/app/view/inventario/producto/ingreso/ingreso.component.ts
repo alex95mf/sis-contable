@@ -22,7 +22,7 @@ standalone: false,
 })
 export class IngresoComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   dataGrupo: any = [];
   dataTipo: any = [{ id: "Producto", nombre: "Producto" }, { id: "Materia Prima", nombre: "Materia Prima" }];

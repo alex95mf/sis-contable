@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ["./show-contribuyente.component.scss"],
 })
 export class ShowContribuyenteComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)
@@ -102,7 +102,7 @@ export class ShowContribuyenteComponent implements OnInit {
   }
 /*
   getTableContribuyentes() {
-    this.mensajeSpinner = 'Cargando lista de contribuynetes...';
+    (this as any).mensajeSpinner = 'Cargando lista de contribuynetes...';
     //this.lcargando.ctlSpinner(true);
     this.dtOptions = {
       pagingType: "full_numbers",
@@ -146,7 +146,7 @@ export class ShowContribuyenteComponent implements OnInit {
   }
 
   cargarContribuyentes(){
-    this.mensajeSpinner = "Cargando lista de Contribuyentes...";
+    (this as any).mensajeSpinner = "Cargando lista de Contribuyentes...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

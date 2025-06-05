@@ -45,7 +45,7 @@ export class BalanceGeneralComponent implements OnInit {
   infoAccount: any;
   infoAccountDet: any = [];
   dataLength: any = [];
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 
@@ -136,8 +136,8 @@ export class BalanceGeneralComponent implements OnInit {
       {value:'MENSUAL', label:'MENSUAL'}
     ]
     periodoVisualizacion: any
-  
-  
+
+
 
   constructor(
     private blcSrv: BalanceGeneralService,
@@ -155,7 +155,7 @@ export class BalanceGeneralComponent implements OnInit {
     //this.mes_actual = Number(moment(new Date()).format('MM'));
     this.mes_actual = (Number(moment(new Date()).format('MM'))).toString();
 
-     
+
     setTimeout(() => {
       this.lcargando.ctlSpinner(true);
     }, 10);
@@ -170,9 +170,9 @@ export class BalanceGeneralComponent implements OnInit {
     this.getPermisions();
   }
   mesString(mes){
- 
+
   const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-  
+
   var numeroMes = parseInt(mes);
   if(! isNaN(numeroMes) && numeroMes >= 1  && numeroMes <= 12 ) {
     return meses[numeroMes - 1];
@@ -244,26 +244,26 @@ export class BalanceGeneralComponent implements OnInit {
             if(this.infomovData.length > 0){
               this.vmButtons[1].habilitar = false;
               this.vmButtons[2].showimg = true;
-              this.vmButtons[3].showimg = true;  
+              this.vmButtons[3].showimg = true;
               this.vmButtons[2].habilitar = false;
               this.vmButtons[3].habilitar = false;
             }else{
               this.vmButtons[1].habilitar = true;
               this.vmButtons[2].showimg = true;
-              this.vmButtons[3].showimg = true;  
+              this.vmButtons[3].showimg = true;
               this.vmButtons[2].habilitar = true;
               this.vmButtons[3].habilitar = true;
             }
-    
-         
-    
+
+
+
         }, error => {
           this.lcargando.ctlSpinner(false);
           this.toastr.info(error.error.message);
         })
         }
-       
-      
+
+
 
       }
       if(this.periodoVisualizacion=='ANUAL'){
@@ -271,7 +271,7 @@ export class BalanceGeneralComponent implements OnInit {
         this.MostrarndoDataMensual = true;
 
         this.lcargando.ctlSpinner(true);
-    
+
         this.blcSrv.obtenerBalanceGeneralMensual(Number(this.periodo.getFullYear()), this.mes_actual, this.centrocosto,1,this.nivelSeleccionado,this.gubernamental).subscribe(res => {
           console.log(res)
             this.lcargando.ctlSpinner(false);
@@ -320,10 +320,10 @@ export class BalanceGeneralComponent implements OnInit {
                 else{
                   Object.assign(e, { class:'text-bold' , size:"font-size:12px;"});
                 }
-                
+
               })
             }
-          
+
             let data = {
               class:'font-weight-bold' ,
               size:"font-size:15px;",
@@ -344,23 +344,23 @@ export class BalanceGeneralComponent implements OnInit {
               dic: dic,
               total: total
             }
-           
+
             this.infomovDataMensual.push(data)
             this.vmButtons[1].habilitar = false;
             this.vmButtons[2].habilitar = true;
             this.vmButtons[3].habilitar = true;
             this.vmButtons[2].showimg = false;
-            this.vmButtons[3].showimg = false;      
-            
-    
+            this.vmButtons[3].showimg = false;
+
+
           }, error => {
-            this.toastr.info(error.error.message);      
+            this.toastr.info(error.error.message);
             this.lcargando.ctlSpinner(true);
           })
       }
-    
+
     }
-   
+
 
   }
 
@@ -482,9 +482,9 @@ export class BalanceGeneralComponent implements OnInit {
     }
     if(this.periodoVisualizacion=='ANUAL'){
 
-      this.mensajeSpinner = "Generando Archivo Excel..."; 
-      this.lcargando.ctlSpinner(true); 
-     
+      (this as any).mensajeSpinner = "Generando Archivo Excel...";
+      this.lcargando.ctlSpinner(true);
+
       this.blcSrv.obtenerBalanceGeneralMensual(Number(this.periodo.getFullYear()), this.mes_actual, this.centrocosto,1,this.nivelSeleccionado,this.gubernamental).subscribe(res => {
         this.lcargando.ctlSpinner(false);
         let codigo= ''
@@ -506,7 +506,7 @@ export class BalanceGeneralComponent implements OnInit {
         this.infomovDataMensualExcel = res;
         if(this.infomovDataMensualExcel.length > 0){
           this.infomovDataMensualExcel.forEach(e => {
-            Object.assign(e, { 
+            Object.assign(e, {
               ene: Number(parseFloat(e.ene).toFixed(2)),
               feb: Number(parseFloat(e.feb).toFixed(2)),
               mar: Number(parseFloat(e.mar).toFixed(2)),
@@ -534,7 +534,7 @@ export class BalanceGeneralComponent implements OnInit {
               nov += parseFloat(e.nov),
               dic += parseFloat(e.dic),
               total += parseFloat(e.total)
-            } 
+            }
           })
           let datos = {
             codigo: '',
@@ -553,9 +553,9 @@ export class BalanceGeneralComponent implements OnInit {
             dic: dic,
             total: total
           }
-         
+
           this.infomovDataMensualExcel.push(datos)
-          
+
           let data = {
             title: 'Balance General Mensual',
             periodo: this.periodo.getFullYear(),
@@ -564,21 +564,21 @@ export class BalanceGeneralComponent implements OnInit {
           this.xlsService.exportExcelBalanceGralMensual(data, 'Balance General Mensual')
           }else{
           this.toastr.info("No hay datos para exportar")
-          this.lcargando.ctlSpinner(false); 
+          this.lcargando.ctlSpinner(false);
           }
       }, error => {
-        this.toastr.info(error.error.message);      
+        this.toastr.info(error.error.message);
         this.lcargando.ctlSpinner(false);
       })
     }
-    
-   
+
+
   }
- 
+
 
 
   btnExportarPdf() {
-    
+
     let centroCosto = this.centrocosto == null || this.centrocosto == undefined ? 0 : this.centrocosto
     console.log(centroCosto)
     if(this.periodoVisualizacion=='MENSUAL'){
@@ -679,7 +679,7 @@ export class BalanceGeneralComponent implements OnInit {
 
 
   MayorizarEstadosFinancieros() {
-    
+
     if(this.periodo.getFullYear()==undefined ){
       this.toastr.info('Debe ingresar un período')
     }else{
@@ -700,7 +700,7 @@ export class BalanceGeneralComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
       })
     }
-   
+
 
   }
   onlyNumber(event): boolean {
@@ -719,7 +719,7 @@ export class BalanceGeneralComponent implements OnInit {
     let total = 0
     this.infomovData.forEach(e => {
       if(e.nivel ==2){
-        total += parseFloat(e.valor); 
+        total += parseFloat(e.valor);
       }
     })
     //console.log(total)
@@ -733,33 +733,33 @@ export class BalanceGeneralComponent implements OnInit {
 
   verDetalle(cuenta){
     // alert('cuenta:' + cuenta +'fecha_desde:'+ this.fromDatePicker +' fecha_hasta:'+ this.toDatePicker)
-    
+
     let periodo= Number(this.periodo.getFullYear())
     console.log(periodo )
     let mes = this.mes_actual - 1
     let codigo_cuenta = cuenta
-   
+
     // FECHA DESDE
     let fecha_primer_dia = new Date(periodo, mes, 1);
     console.log(fecha_primer_dia )
     let primerDiaAnio = fecha_primer_dia.getFullYear();
-    let primerDiaMes = fecha_primer_dia.getMonth() + 1; 
+    let primerDiaMes = fecha_primer_dia.getMonth() + 1;
     let primerDiaDia = fecha_primer_dia.getDate();
 
     let fechaDesde = primerDiaAnio + '-' + (primerDiaMes < 10 ? '0' + primerDiaMes : primerDiaMes) + '-' + (primerDiaDia < 10 ? '0' + primerDiaDia : primerDiaDia);
-   
+
     let fecha_ultimo_dia = new Date(periodo, mes + 1, 1);
 
     // Restar un día para obtener el último día del mes actual
     fecha_ultimo_dia.setDate(fecha_ultimo_dia.getDate() - 1);
-    
+
     // Obtener el año, mes y día del último día del mes
     let ultimoDiaAnio = fecha_ultimo_dia.getFullYear();
     let ultimoDiaMes = fecha_ultimo_dia.getMonth() + 1; // Los meses se indexan desde 0, por lo que sumamos 1 para obtener el mes real
     let ultimoDiaDia = fecha_ultimo_dia.getDate();
-    
+
     let fechaHasta = ultimoDiaAnio + '-' + (ultimoDiaMes < 10 ? '0' + ultimoDiaMes : ultimoDiaMes) + '-' + (ultimoDiaDia < 10 ? '0' + ultimoDiaDia : ultimoDiaDia);
-   
+
     let  fecha_desde = fechaDesde.replace(/-/g, '');
     let  fecha_hasta = fechaHasta.replace(/-/g, '');
     console.log(fecha_desde)
@@ -770,10 +770,10 @@ export class BalanceGeneralComponent implements OnInit {
      const nuevaVentana = window.open('','_blank')
       if(nuevaVentana){
        nuevaVentana.location.href = rutaMayor
- 
+
       }
    }
- 
+
 
 
 

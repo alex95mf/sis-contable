@@ -116,10 +116,10 @@ export class TareasComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      // this.mensajeSpinner = 'Cargando listado de Responsables'
+      // (this as any).mensajeSpinner = 'Cargando listado de Responsables'
       // this.responsables = await this.apiService.getResponsables()
 
-      this.mensajeSpinner = 'Cargando Tareas de Atribución'
+      (this as any).mensajeSpinner = 'Cargando Tareas de Atribución'
       this.tareas = await this.apiService.getTareas({periodo: this.periodo, programa: this.programa, departamento: this.departamento, atribucion: this.atribucion})
       this.realizacion = this.tareas.reduce((acc, curr) => acc + parseInt(curr.realizacion), 0) / this.tareas.length
 
@@ -135,7 +135,7 @@ export class TareasComponent implements OnInit {
     return this.lst_metas.find((meta: any) => meta.descripcion == meta_cod).valor
   }
   /* getResponsables() {
-    this.mensajeSpinner = 'Cargando Responsables'
+    (this as any).mensajeSpinner = 'Cargando Responsables'
     this.lcargando.ctlSpinner(true)
     this.apiService.getResponsables().subscribe(
       (res: any) => {
@@ -229,11 +229,11 @@ export class TareasComponent implements OnInit {
   async guardaTareas() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Validando Datos'
+      (this as any).mensajeSpinner = 'Validando Datos'
       await this.validateData()
 
       try {
-        this.mensajeSpinner = 'Almacenando Tareas'
+        (this as any).mensajeSpinner = 'Almacenando Tareas'
         let response = await this.apiService.setTareas({
           periodo: this.periodo,
           programa: this.programa,
@@ -301,7 +301,7 @@ export class TareasComponent implements OnInit {
 
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
-      this.mensajeSpinner = 'Eliminando Tarea'
+      (this as any).mensajeSpinner = 'Eliminando Tarea'
       if (tarea.id != null) {
         try {
           let response = await this.apiService.deleteTarea({tarea})

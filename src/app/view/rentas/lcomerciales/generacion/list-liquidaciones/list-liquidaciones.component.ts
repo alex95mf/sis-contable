@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ListLiquidacionesComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -100,7 +100,7 @@ export class ListLiquidacionesComponent implements OnInit {
   }
 
   cargarConceptos() {
-    this.mensajeSpinner = 'Cargando Conceptos'
+    (this as any).mensajeSpinner = 'Cargando Conceptos'
     this.lcargando.ctlSpinner(true)
     this.generacionSrv.getConceptoBy({id_concepto: 47}).subscribe(
       (res: any) => {
@@ -131,7 +131,7 @@ export class ListLiquidacionesComponent implements OnInit {
     if(this.filter.concepto==undefined || this.filter.concepto==null){
       this.toastr.warning("Debe seleccionar un concepto");
     }else{
-      this.mensajeSpinner = "Cargando lista de Liquidaciones...";
+      (this as any).mensajeSpinner = "Cargando lista de Liquidaciones...";
       this.lcargando.ctlSpinner(true);
 
       let data = {

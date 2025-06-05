@@ -44,7 +44,7 @@ standalone: false,
 })
 export class LiquidacionPrComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[];
 
   contribuyente: Contribuyente;
@@ -244,7 +244,7 @@ export class LiquidacionPrComponent implements OnInit {
 
   async getPropiedades(id_cliente: number) {
     try {
-      this.mensajeSpinner = 'Cargando Propiedades'
+      (this as any).mensajeSpinner = 'Cargando Propiedades'
       let propiedades = await this.apiService.getPropiedades({ id_cliente })
       console.log(propiedades)
       this.cmb_propiedad$ = propiedades.map((apiObj: any) => {
@@ -364,7 +364,7 @@ export class LiquidacionPrComponent implements OnInit {
 
   async getLiquidacion(id: number): Promise<any> {
     try {
-      this.mensajeSpinner = 'Leyendo Liquidacion'
+      (this as any).mensajeSpinner = 'Leyendo Liquidacion'
       let liquidacion = await this.apiService.getLiquidacion(id)
       // Ajustar para el formulario
       Object.assign(liquidacion, {

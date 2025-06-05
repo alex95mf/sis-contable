@@ -33,7 +33,7 @@ export class EstadoResultadoComponent implements OnInit {
   processing:any = false;
   empresLogo: any;
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 

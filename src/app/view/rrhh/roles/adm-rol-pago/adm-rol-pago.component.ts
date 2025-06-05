@@ -29,7 +29,7 @@ export class AdmRolPagoComponent implements OnInit {
 
   vmButtons: any = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(ImprimirRolComponent, { static: false })
@@ -58,11 +58,11 @@ export class AdmRolPagoComponent implements OnInit {
       { orig: "btnsAdmRol", paramAccion: "", boton: { icon: "fa fa-check", texto: "APROBAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary boton btn-sm", habilitar: false, imprimir: false},
       { orig: "btnsAdmRol", paramAccion: "", boton: { icon: "fa fa-search", texto: "BUSCAR" }, permiso: true, showtxt: true, showimg: true, showbadge: false, clase: "btn btn-primary boton btn-sm", habilitar: false, imprimir: false}
     ];
-    
+
     let fechaActual:any = moment(new Date).format("YYYY-MM-DD");
     let lastDayOfMonth = new Date((new Date).getFullYear(), (new Date).getMonth()+1, 0);
     this.periodoInicio = new Date(+fechaActual.split("-")[0], fechaActual.split("-")[1] - 1, +"01");
-    this.periodoFin = lastDayOfMonth;  
+    this.periodoFin = lastDayOfMonth;
 
     this.obtenerRubros();
     this.getSucursal();
@@ -84,7 +84,7 @@ export class AdmRolPagoComponent implements OnInit {
     this.getInfoBank();
     this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(data).subscribe((res) => {
-        
+
         this.permisions = res["data"];
         if(this.permisions[0].aprobar == 1){
           this.vmButtons[3].permiso = true;
@@ -99,7 +99,7 @@ export class AdmRolPagoComponent implements OnInit {
               this.lstInicial = datos.data;
               this.lstInicial[1].splice(this.lstInicial[1].length + 1, 0, { id_grupo: 0, nombre_grupo: "TODOS"});
               this.grupoSeleccionado = this.lstInicial[1].find((datos) => datos.id_grupo == 0).id_grupo;
-              this.admRolPagoService.getPersonalInfo({ idDepartamento: this.grupoSeleccionado }).subscribe((res) => {                  
+              this.admRolPagoService.getPersonalInfo({ idDepartamento: this.grupoSeleccionado }).subscribe((res) => {
                   this.arrayPersonal = [];
                   let datosPer:any = [];
                   res["data"].forEach(element => {
@@ -119,7 +119,7 @@ export class AdmRolPagoComponent implements OnInit {
                     nombres: "TODOS",
                     apellidos: "",
                   });
-                  this.selectPersonal = 0;                  
+                  this.selectPersonal = 0;
                   this.obtenerRolDetalle();
                 });
             }, (error) => {
@@ -144,7 +144,7 @@ export class AdmRolPagoComponent implements OnInit {
         const dialogRef1 = this.confirmationDialogService.openDialogBD(MspreguntaComponent,{ config: {}, }, dataPresentar);
         dialogRef1.result.then((res) => {
           if (res.valor) {
-            this.guardar(); 
+            this.guardar();
           }
         });
         break;
@@ -152,7 +152,7 @@ export class AdmRolPagoComponent implements OnInit {
         const dialogRef2 = this.confirmationDialogService.openDialogBD(MspreguntaComponent,{ config: {}, }, dataPresentar);
         dialogRef2.result.then((res) => {
           if (res.valor) {
-            this.anularPeriodoRol(); 
+            this.anularPeriodoRol();
           }
         });
         break;
@@ -169,7 +169,7 @@ export class AdmRolPagoComponent implements OnInit {
           }
         });
         break;
-    }    
+    }
   }
 
   listaDeRubros: any = [];
@@ -180,7 +180,7 @@ export class AdmRolPagoComponent implements OnInit {
   obtenerEmpleados() {
     this.lConcepto = "";
     this.fecha_actual = moment(this.toDatePicker).format("YYYY-MM-DD");
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let idGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).id_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -215,7 +215,7 @@ export class AdmRolPagoComponent implements OnInit {
                   element.valorPrestamo = valorPrestamo;
                   element.idDetPrestamo.push(elementPrest.id_dt);
                 }
-              }    
+              }
             });
           }
           /* PRESTAMO FIN */
@@ -354,7 +354,7 @@ export class AdmRolPagoComponent implements OnInit {
           }
         }
       });
-      this.lstRubroEgreso.forEach((element2) => {       
+      this.lstRubroEgreso.forEach((element2) => {
 
         if (element.datoRubroEgr == undefined) {
           element.datoRubroEgr = [];
@@ -426,7 +426,7 @@ export class AdmRolPagoComponent implements OnInit {
     if (this.validaciones.verSiEsNull(this.lConcepto) == undefined) {
       this.validaciones.mensajeAdvertencia("Advertencia", "Por favor ingrese un concepto");
       return;
-    }    
+    }
 
     if (this.bankSelect == 0) {
       this.validaciones.mensajeAdvertencia("Advertencia", "Por favor sleccione un banco");
@@ -436,14 +436,14 @@ export class AdmRolPagoComponent implements OnInit {
     let periodoInicio:any = moment(this.periodoInicio).format("YYYY-MM-DD");
     let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");
     let validaTermina: boolean = false;
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     let nombreGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).nombre_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
     let dataPost:any = {
-      tipoGrupo: nombreGrupo, 
-      idPersonal: lIdPersonal.id_personal, 
-      tipoModulo: myVarGlobals.fNomRoldePagos, 
+      tipoGrupo: nombreGrupo,
+      idPersonal: lIdPersonal.id_personal,
+      tipoModulo: myVarGlobals.fNomRoldePagos,
       periodoInicio: periodoInicio,
       periodoFin: periodoFin
     };
@@ -574,15 +574,15 @@ export class AdmRolPagoComponent implements OnInit {
       { nombre: "DEPARTAMENTO", sise: "8%" },
       { nombre: "AFILIADO", sise: "4%" },
     ];
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let nombreGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).nombre_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
 
     let dataPost:any = {
-      tipoGrupo: nombreGrupo, 
-      idPersonal: lIdPersonal.id_personal, 
-      tipoModulo: myVarGlobals.fNomRoldePagos, 
+      tipoGrupo: nombreGrupo,
+      idPersonal: lIdPersonal.id_personal,
+      tipoModulo: myVarGlobals.fNomRoldePagos,
       periodoInicio: periodoInicio,
       periodoFin: periodoFin
     };
@@ -625,7 +625,7 @@ export class AdmRolPagoComponent implements OnInit {
               datosPresentar.push(cabecera);
             }
           });
-          
+
           this.lstTablaEmpleados = [];
           this.lstTablaEmpleados = datosPresentar;
           this.lstTablaEmpleados.forEach(element => {
@@ -634,8 +634,8 @@ export class AdmRolPagoComponent implements OnInit {
             let fechaSalida:any = this.validaciones.verSiEsNull(element.fechaSalida)==undefined? moment(new Date()).format("YYYY-MM-DD"): element.fechaSalida;
             let dias:any = this.restar2Fechas((anioActual.getFullYear()+"-"+fechaIngreso[1]+"-"+fechaIngreso[2]), fechaSalida);
             dias = (dias < 0) ? dias * -1 : dias;
-            element.diasLaborados = dias;                  
-          });                
+            element.diasLaborados = dias;
+          });
           this.calcularIngresos();
           this.calcularEgresos();
           this.calcularValorNetoRecibir();
@@ -687,7 +687,7 @@ export class AdmRolPagoComponent implements OnInit {
         enviarData.push(dataPost);
       });
 
-      this.mensajeSpinner = "Anulando Roles...";
+      (this as any).mensajeSpinner = "Anulando Roles...";
       this.lcargando.ctlSpinner(true);
       this.admRolPagoService.deleteRolPago({datosPost: enviarData}).subscribe((res: any) => {
         this.validaciones.mensajeExito("Exito", "Los roles se anularon correctamente");
@@ -704,7 +704,7 @@ export class AdmRolPagoComponent implements OnInit {
   getInfoBank() {
     this.admRolPagoService.getAccountsByDetails({ company_id: this.dataUser.id_empresa }).subscribe((res) => {
       this.arrayBanks = res["data"];
-    }, (error) => {      
+    }, (error) => {
     });
   }
 
@@ -749,7 +749,7 @@ export class AdmRolPagoComponent implements OnInit {
   validaPeriodoFechas(){
     let resultado:boolean = false;
     let periodoInicio:any = moment(this.periodoInicio).format("YYYY-MM-DD");
-    let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");    
+    let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");
     let validafInicio = null;
     let validafFin = null;
     let lastDayOfMonth = new Date((new Date).getFullYear(), (new Date).getMonth()+1, 0);
@@ -768,7 +768,7 @@ export class AdmRolPagoComponent implements OnInit {
     let lfechaFin:any = String(fechaFin).split("-");
     let fechauno = new Date(+lfechaInicio[0], lfechaInicio[1] - 1, +lfechaInicio[2]).getTime();
     let fechados = new Date(+lfechaFin[0], lfechaFin[1] - 1, +lfechaFin[2]).getTime();
-    let diff = fechados - fechauno;    
+    let diff = fechados - fechauno;
     return diff/(1000*60*60*24);
   }
 
@@ -794,7 +794,7 @@ export class AdmRolPagoComponent implements OnInit {
           id_prestamo_dets: element.id_prestamo_dets != null ? element.id_prestamo_dets.split(','): null,
           allItem: element
         };
-        enviarData.push(dataPost);      
+        enviarData.push(dataPost);
       }
     });
 
@@ -803,14 +803,14 @@ export class AdmRolPagoComponent implements OnInit {
       return;
     }
 
-    this.mensajeSpinner = "Apobando rol de pago por favor espere...";
-    this.lcargando.ctlSpinner(true);        
+    (this as any).mensajeSpinner = "Apobando rol de pago por favor espere...";
+    this.lcargando.ctlSpinner(true);
     this.admRolPagoService.aprobarRolPago({datosPost: enviarData}).subscribe((res: any) => {
       this.validaciones.mensajeExito("Exito", "Los roles de pago se aprobaron correctamente");
       this.obtenerRolDetalle();
     }, (error) => {
       this.lcargando.ctlSpinner(false);
-    });  
+    });
 
   }
 

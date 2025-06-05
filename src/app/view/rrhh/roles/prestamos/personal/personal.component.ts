@@ -39,7 +39,7 @@ export class PersonalComponent implements OnInit {
     private commonVarSrvice: CommonVarService,public activeModal: NgbActiveModal, private router: Router, private zone: NgZone) { }
 
     vmButtons: any = [];
-    mensajeSpinner: string = "Cargando...";
+    
     @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   ngOnInit(): void {
@@ -89,7 +89,7 @@ export class PersonalComponent implements OnInit {
         url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
       },
     };
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.prestamoSrvc.tablaPersonal().subscribe((res) => {
       this.lcargando.ctlSpinner(false);
@@ -124,7 +124,7 @@ export class PersonalComponent implements OnInit {
         url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
       },
     };
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.prestamoSrvc.showpersonalDos(data).subscribe((res) => {
       this.lcargando.ctlSpinner(false);

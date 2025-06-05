@@ -15,7 +15,7 @@ standalone: false,
 })
 export class SimulacionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[];
 
   filter: any = {
@@ -77,7 +77,7 @@ export class SimulacionComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Impuestos'
+      (this as any).mensajeSpinner = 'Cargando Impuestos'
       let impuestos = await this.apiService.getImpuestos({params: {paginate: this.paginate}})
       console.log(impuestos)
       this.paginate.length = impuestos.total
@@ -100,7 +100,7 @@ export class SimulacionComponent implements OnInit {
   async getImpuestos() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Impuestos'
+      (this as any).mensajeSpinner = 'Cargando Impuestos'
       let impuestos = await this.apiService.getImpuestos({ params: { filter: this.filter, paginate: this.paginate }})
       this.paginate.length = impuestos.total
       this.lst_impuestos = impuestos.data

@@ -16,7 +16,7 @@ standalone: false,
 export class ModalArriendosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = [];
   @Input() contribuyente: any;
 
@@ -83,7 +83,7 @@ export class ModalArriendosComponent implements OnInit {
   async getArriendos() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando documentos de Arriendo'
+      (this as any).mensajeSpinner = 'Cargando documentos de Arriendo'
       const response = await this.apiService.getArriendos({concepto: {codigo: 'AR'}, params: {filter: this.filter, paginate: this.paginate}})
       console.log(response.data)
       this.paginate.length = response.data.total

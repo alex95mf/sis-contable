@@ -19,7 +19,7 @@ standalone: false,
 export class CanjearRegularizarComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Canjear/Regularizar";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   dataUser: any;
   permissions: any;

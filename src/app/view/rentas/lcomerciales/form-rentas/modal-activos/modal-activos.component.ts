@@ -18,7 +18,7 @@ export class ModalActivosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
   fTitle: string = "Registro de valores de activos";
-  mensajeSpinner: string = "Cargando...";
+  
   @Input() contr: any;
   @Input() permisos: any;
 
@@ -92,7 +92,7 @@ export class ModalActivosComponent implements OnInit {
       id_contribuyente: id
     }
     // console.log(data);
-    this.mensajeSpinner = "Cargando activos por contribuyente...";
+    (this as any).mensajeSpinner = "Cargando activos por contribuyente...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getActivosByContribuyente(data).subscribe(
       (res) => {
@@ -145,7 +145,7 @@ export class ModalActivosComponent implements OnInit {
           this.listaActivos.splice(i,1);
         } else if (item.id_registro_activo!=0){
           // borrar de ade veras
-          this.mensajeSpinner = "Eliminando registro de activos...";
+          (this as any).mensajeSpinner = "Eliminando registro de activos...";
           this.lcargando.ctlSpinner(true);
 
           let data = {
@@ -317,7 +317,7 @@ export class ModalActivosComponent implements OnInit {
     }).then((result)=>{
 
       if(result.isConfirmed){
-        this.mensajeSpinner = "Guardando registros de activos...";
+        (this as any).mensajeSpinner = "Guardando registros de activos...";
         this.lcargando.ctlSpinner(true);
 
         let data = {

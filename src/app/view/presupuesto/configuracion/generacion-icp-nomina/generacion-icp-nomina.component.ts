@@ -32,7 +32,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild("print") print!: ElementRef;
   fTitle = "Generación de ICP Nómina";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -235,13 +235,13 @@ export class GeneracionIcpNominaComponent implements OnInit {
           }
 
 
-          // this.mensajeSpinner = 'Cargando...'
+          // (this as any).mensajeSpinner = 'Cargando...'
           // this.puestos_filter = this.puestos.filter(e => e.fk_mercado == res.fk_mercado)
 
           //this.documento.puesto = res.fk_mercado_puesto;
 
           // if (res.fk_documento_2 && res.fk_documento_2 != 0) {
-          //   this.mensajeSpinner = 'Cargando datos de la Garantía...';
+          //   (this as any).mensajeSpinner = 'Cargando datos de la Garantía...';
           //   this.lcargando.ctlSpinner(true);
           //   let data = {
           //     inspeccion: res.fk_documento_2
@@ -365,7 +365,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
         //   this.solicitud = [];
         //   this.solicitudDetalle = [];
         //   if (res.id_solicitud != null || res.id_solicitud!=undefined) {
-        //    this.mensajeSpinner = 'Cargando ...';
+        //    (this as any).mensajeSpinner = 'Cargando ...';
         //    this.lcargando.ctlSpinner(true);
         //    let data = {
         //      id_solicitud: res.id_solicitud
@@ -540,7 +540,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
   }
 
   cargarPrograma() {
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -644,7 +644,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     try {
 
-        this.mensajeSpinner = 'Cargando Proyectos'
+        (this as any).mensajeSpinner = 'Cargando Proyectos'
         this.proyectos = await this.genIdpSvr.getProyectos({periodo: this.documento.periodo, programa: this.documento.fk_programa});
         if(this.proyectos.length > 0){
           this.proyectos.forEach((elem: any) => {
@@ -656,7 +656,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
           })
 
         }
-      // this.mensajeSpinner = 'Cargando Catalogos';
+      // (this as any).mensajeSpinner = 'Cargando Catalogos';
       this.lcargando.ctlSpinner(false)
     } catch (err) {
       console.log(err)
@@ -691,7 +691,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -723,11 +723,11 @@ export class GeneracionIcpNominaComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true);
     try {
-      this.mensajeSpinner = 'Cargando Periodos';
+      (this as any).mensajeSpinner = 'Cargando Periodos';
       let periodos = await this.genIdpSvr.getPeriodos();
       this.cmb_periodo = periodos;
 
-      //this.mensajeSpinner = 'Cargando Proyectos'
+      //(this as any).mensajeSpinner = 'Cargando Proyectos'
       //this.proyectos = await this.genIdpSvr.getProyectos({periodo: this.documento.periodo, programa: this.programa});
 
       // this.proyectos.forEach((elem: any) => {
@@ -738,7 +738,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
       //     label: `${elem.secuencia}-${elem.descripcion}`})
       // })
 
-      // this.mensajeSpinner = 'Cargando Catalogos';
+      // (this as any).mensajeSpinner = 'Cargando Catalogos';
       this.lcargando.ctlSpinner(false)
     } catch (err) {
       console.log(err)
@@ -785,7 +785,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
 
 
   getCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos...';
+    (this as any).mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
     let data = {
       params: "'REC_FORMA_PAGO','REC_FORMA_PAGO_ENTIDAD','REC_FORMA_PAGO_EMISOR','PRE_CATALOGO_FUNCIONAL','PRE_ORIENTACION_GASTO',''",
@@ -943,7 +943,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
 
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.mensajeSpinner = 'Generando ICP de Nómina...';
+              (this as any).mensajeSpinner = 'Generando ICP de Nómina...';
               this.lcargando.ctlSpinner(true);
               this.documento.estado = "E";
               this.documento.tipo_documento = this.concepto.codigo;

@@ -13,7 +13,7 @@ standalone: false,
 })
 export class ModalEstadoComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   estado: any = [

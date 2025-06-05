@@ -22,7 +22,7 @@ standalone: false,
   styleUrls: ['./invoice-sales.component.scss']
 })
 export class InvoiceSalesComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   permissions: any;

@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./bodega-distribuir.component.scss']
 })
 export class BodegaDistribuirComponent implements OnInit{
-	mensajeSpinner: string = "Cargando...";
+	
 	@ViewChild(CcSpinerProcesarComponent, {
 		static: false
 	}) lcargando: CcSpinerProcesarComponent;

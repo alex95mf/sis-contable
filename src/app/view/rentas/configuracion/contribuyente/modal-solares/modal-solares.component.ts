@@ -18,7 +18,7 @@ export class ModalSolaresComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
   @Input() fTitle: string ;
-  mensajeSpinner: string = "Cargando...";
+  
   @Input() contr: any;
   @Input() permisos: any;
 
@@ -149,7 +149,7 @@ export class ModalSolaresComponent implements OnInit {
       tipo_contribucion: this.tipoCont
     }
     // console.log(data);
-    this.mensajeSpinner = "Cargando activos por contribuyente...";
+    (this as any).mensajeSpinner = "Cargando activos por contribuyente...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getLoteContribucion(data).subscribe(
       (res) => {
@@ -195,7 +195,7 @@ export class ModalSolaresComponent implements OnInit {
           // this.CalculoPatrimonio()
         } else if (item.id_lote_contribucion!=0){
           // borrar de ade veras
-          this.mensajeSpinner = "Eliminando registro de activos...";
+          (this as any).mensajeSpinner = "Eliminando registro de activos...";
           this.lcargando.ctlSpinner(true);
           
           let data = {
@@ -294,7 +294,7 @@ export class ModalSolaresComponent implements OnInit {
   // fillCatalog() {
   //   // console.log('Catalogo');
   //   // this.lcargando.ctlSpinner(true);
-  //   // this.mensajeSpinner = "Cargando Catalogs";
+  //   // (this as any).mensajeSpinner = "Cargando Catalogs";
   //   let data = {
   //     params: "'CIUDAD', 'PROVINCIA'",
   //   };
@@ -509,7 +509,7 @@ export class ModalSolaresComponent implements OnInit {
     }).then((result)=>{
 
       if(result.isConfirmed){
-        this.mensajeSpinner = "Guardando registros de activos...";
+        (this as any).mensajeSpinner = "Guardando registros de activos...";
         this.lcargando.ctlSpinner(true);
         console.log(this.listaActivos);
         let data = {

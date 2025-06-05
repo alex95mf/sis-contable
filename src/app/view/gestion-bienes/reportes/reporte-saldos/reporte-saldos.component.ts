@@ -30,7 +30,7 @@ export class ReporteSaldosComponent implements OnInit {
   @ViewChildren(NgSelectComponent) selects: Array<NgSelectComponent>;
   fTitle: string = 'Saldos de Inventario';
   vmButtons: Array<Botonera> = [];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   selectedReporte: any;  // Tipo Reporte
   selectedTipo: any;  // Tipo Bien
@@ -171,7 +171,7 @@ export class ReporteSaldosComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Reporte'
+      (this as any).mensajeSpinner = 'Cargando Reporte'
       let response: Array<any> = await this.apiService.getGruposBienes();
       let bodegas: Array<any> = await this.apiService.getBodegas();
       this.cmb_grupo = response
@@ -194,7 +194,7 @@ export class ReporteSaldosComponent implements OnInit {
       bodega: this.selectedBodega,
     }
     try{
-      this.mensajeSpinner = 'Cargando Ubicación'
+      (this as any).mensajeSpinner = 'Cargando Ubicación'
       let response = await this.apiService.getUbicacion(data);
         console.log(response)
         if(response.length > 0){
@@ -285,7 +285,7 @@ export class ReporteSaldosComponent implements OnInit {
     // console.log(this.selectedGrupo)
    //if (event != undefined && this.selectedReporte == 'PSG') {
      this.lcargando.ctlSpinner(true)
-     this.mensajeSpinner = 'Filtrando Productos por Grupo de Bien'
+     (this as any).mensajeSpinner = 'Filtrando Productos por Grupo de Bien'
      let data={
       id_grupo: event.id_grupo_productos
      }

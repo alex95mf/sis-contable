@@ -17,7 +17,7 @@ standalone: false,
 export class VencimientoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = [];
   vSelector: boolean = true;
 
@@ -159,12 +159,12 @@ export class VencimientoComponent implements OnInit {
     this.lcargando.ctlSpinner(true)
     try {
       // Cargar Catalogos
-      this.mensajeSpinner = 'Cargando Catalogos'
+      (this as any).mensajeSpinner = 'Cargando Catalogos'
       let catalogos = await this.apiService.getCatalogos({params: "'INV_REGISTRO_POLIZA'"});
       this.cmb_tipo = catalogos['INV_REGISTRO_POLIZA']
   
       // Cargar Documentos
-      this.mensajeSpinner = 'Cargando Documentos'
+      (this as any).mensajeSpinner = 'Cargando Documentos'
 
     let params=
     {filter: this.filter, paginate : this.paginate};
@@ -197,7 +197,7 @@ console.log(respuesta);
   async cargarDocumentos() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Documentos'
+      (this as any).mensajeSpinner = 'Cargando Documentos'
 
       let params=
     {filter: this.filter, paginate : this.paginate};

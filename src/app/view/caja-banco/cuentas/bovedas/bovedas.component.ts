@@ -38,7 +38,7 @@ export class BovedasComponent implements OnInit {
   sucursales: any;
 
   vmButtons: any;
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   constructor(
@@ -186,7 +186,7 @@ export class BovedasComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
     };
-    this.mensajeSpinner = "Cargando";
+    (this as any).mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true);
     this.accSrv.getBovedas().subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -262,7 +262,7 @@ export class BovedasComponent implements OnInit {
       accion: `Creación de nueva cuenta boveda en la sucursal ${this.boveda.name_jefe_cuenta}`,
       id_controlador: myVarGlobals.fBovedas
     }
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.accSrv.saveAccount(data).subscribe(res => {
       this.toastr.success(res['message']);
@@ -309,7 +309,7 @@ export class BovedasComponent implements OnInit {
       id_controlador: myVarGlobals.fBovedas
     }
     this.validaDt = false;
-    this.mensajeSpinner = "Actualizando...";
+    (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.accSrv.updatedAccount(data).subscribe(res => {
       this.toastr.success(res['message']);

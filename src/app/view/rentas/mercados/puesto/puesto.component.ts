@@ -135,7 +135,7 @@ export class PuestoComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
 
@@ -192,7 +192,7 @@ export class PuestoComponent implements OnInit {
       }
     }
 
-    this.mensajeSpinner = 'Cargando Puestos de Mercados'
+    (this as any).mensajeSpinner = 'Cargando Puestos de Mercados'
     this.lcargando.ctlSpinner(true)
 
     this.apiService.getPuestos(data).subscribe(
@@ -214,7 +214,7 @@ export class PuestoComponent implements OnInit {
   }
 
   getMercados = () => {
-    this.mensajeSpinner = 'Obteniendo Mercados'
+    (this as any).mensajeSpinner = 'Obteniendo Mercados'
     this.lcargando.ctlSpinner(true);
 
     this.apiService.getMercados().subscribe(
@@ -267,7 +267,7 @@ export class PuestoComponent implements OnInit {
           cancelButtonText: "Cancelar"
         }).then((result) => {
           if (result.value) {
-            this.mensajeSpinner = 'Guardando cambios'
+            (this as any).mensajeSpinner = 'Guardando cambios'
             this.lcargando.ctlSpinner(true)
             this.apiService.savePuesto({puesto: this.puesto}).subscribe(
               res => {
@@ -313,7 +313,7 @@ export class PuestoComponent implements OnInit {
       cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.value) {
-        this.mensajeSpinner = 'Editando información'
+        (this as any).mensajeSpinner = 'Editando información'
         this.lcargando.ctlSpinner(true)
         this.apiService.updatePuesto({puesto: this.puesto}).subscribe(
           res => {

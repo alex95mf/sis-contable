@@ -19,7 +19,7 @@ standalone: false,
 })
 export class ModalBusquedaReformaComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -119,7 +119,7 @@ export class ModalBusquedaReformaComponent implements OnInit {
   }
 
   cargcarReformas() {
-    this.mensajeSpinner = "Cargando lista de Reformas...";
+    (this as any).mensajeSpinner = "Cargando lista de Reformas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

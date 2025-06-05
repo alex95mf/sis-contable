@@ -21,7 +21,7 @@ standalone: false,
 export class ModalCuentaRetFuenteComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent
   @ViewChild(MatPaginator) paginator: MatPaginator
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = [];
 
   tbl_cuentas: CuentaContable[] = [];

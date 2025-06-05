@@ -21,7 +21,7 @@ standalone: false,
 })
 export class ConsultaIdpComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -166,7 +166,7 @@ export class ConsultaIdpComponent implements OnInit {
   }
 
   cargarDocumentos(){
-    this.mensajeSpinner = "Cargando documentos";
+    (this as any).mensajeSpinner = "Cargando documentos";
     this.lcargando.ctlSpinner(true);
     // if (flag) this.paginate.page = 1
     const data = {
@@ -264,7 +264,7 @@ export class ConsultaIdpComponent implements OnInit {
         fecha_hasta: moment(this.filter.fecha_hasta).format('YYYYMMDD'),
       }
 
-      this.mensajeSpinner = "Procesando...";
+      (this as any).mensajeSpinner = "Procesando...";
       this.lcargando.ctlSpinner(true);
       this.apiSrv.procesarSp(data).subscribe(res => {
         this.lcargando.ctlSpinner(false);

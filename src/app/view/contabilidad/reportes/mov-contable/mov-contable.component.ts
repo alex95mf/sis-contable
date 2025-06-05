@@ -38,7 +38,7 @@ standalone: false,
 })
 export class MovContableComponent implements OnInit {
 
-	mensajeSpinner: string = "Cargando...";
+
 
 	@ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 	@ViewChild(DataTableDirective)
@@ -118,7 +118,7 @@ export class MovContableComponent implements OnInit {
 			public dialogService: DialogService,
 			private excelService: ExcelService,
     		private xlsService: XlsExportService,
-			private route: ActivatedRoute 
+			private route: ActivatedRoute
 		) { }
 
 
@@ -126,7 +126,7 @@ export class MovContableComponent implements OnInit {
 	ref: DynamicDialogRef;
 
 	ngOnInit(): void {
-	  
+
 		this.route.params.subscribe(params => {
 			console.log(params)
 			if (Object.keys(params).length === 0) {
@@ -137,17 +137,17 @@ export class MovContableComponent implements OnInit {
 				this.fecha_hasta = +params['fecha_hasta']
 				this.codigo_cuenta = params['codigo_cuenta']
 				console.log(params['codigo_cuenta'])
-	
+
 				let fechaDesde = String(this.fecha_desde);
 				let fechaHasta = String(this.fecha_hasta);
-	
+
 				// Insertar guiones en las posiciones 5 y 8
 				let nuevaFechaDesde = fechaDesde.slice(0, 4) + '-' + fechaDesde.slice(4, 6) + '-' + fechaDesde.slice(6,8);
 				this.fromDatePicker =nuevaFechaDesde
-	
+
 				this.codigo = this.codigo_cuenta
 				this.codigo_hasta  = this.codigo_cuenta
-	
+
 				let nuevaFechaHasta = fechaHasta.slice(0, 4) + '-' + fechaHasta.slice(4, 6) + '-' + fechaHasta.slice(6,8);
 				this.toDatePicker =nuevaFechaHasta
 				if(this.codigo_cuenta!= ''){
@@ -165,21 +165,21 @@ export class MovContableComponent implements OnInit {
 						codigo_oficial: this.codigo_cuenta
 					}
 					this.reportesSrv.getMovimientoContable(data).subscribe(res => {
-			
+
 						console.log(res['data']);
 						this.lcargando.ctlSpinner(false);
 						this.presentDt = true;
-						
-							
+
+
 							let control_cuenta = ''
 							let saldo_anterior = 0
-							
+
 							res['data'].forEach(element => {
 							if(control_cuenta!=element.codigo){
 								saldo_anterior= parseFloat(element.saldo_inicial)
 								control_cuenta = element.codigo
 								Object.assign(element, {saldo: saldo_anterior })
-								
+
 							}
 								saldo_anterior += parseFloat(element.valor_deb) - parseFloat(element.valor_cre)
 								Object.assign(element, {
@@ -192,29 +192,29 @@ export class MovContableComponent implements OnInit {
 											valor_deb:	parseFloat(element.valor_deb),
 											valor_cre:	parseFloat(element.valor_cre),
 											saldo: saldo_anterior })
-							
+
 							});
 							this.infomovData = res['data'];
-					
+
 					}, error => {
 						this.toastr.info(error.error.mesagge);
 						this.lcargando.ctlSpinner(false);
 					});
 				}
 			}
-			
-			
+
+
 		  });
 		  this.today = new Date();
 		  this.tomorrow = new Date(this.today);
 		  this.tomorrow.setDate(this.tomorrow.getDate() + 1);
 		  this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-		  this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+		  this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
 		  this.fromDatePicker=moment(this.firstday).format('YYYY-MM-DD');
 		  this.toDatePicker= moment(this.today).format('YYYY-MM-DD');
-		  
-		
+
+
 		this.vmButtons = [
 
 			{
@@ -353,8 +353,8 @@ export class MovContableComponent implements OnInit {
 
 	GenerarReporteExcel(){
 
-		this.mensajeSpinner = "Generando Archivo Excel..."; 
-		this.lcargando.ctlSpinner(true); 
+		(this as any).mensajeSpinner = "Generando Archivo Excel...";
+		this.lcargando.ctlSpinner(true);
 		let data = {
 			dateFrom: moment(this.fromDatePicker).format('YYYY-MM-DD'),
 			dateTo: moment(this.toDatePicker).format('YYYY-MM-DD'),
@@ -371,7 +371,7 @@ export class MovContableComponent implements OnInit {
 			console.log(res['data'])
 			this.infomovDataExcel = res['data'];
 			if(this.infomovDataExcel.length > 0){
-			  
+
 				let data = {
 				  title: 'Mayor de Cuentas',
 				  razon_social: 'Gobierno Autonomo Descentralizado',
@@ -387,19 +387,19 @@ export class MovContableComponent implements OnInit {
 			  this.xlsService.exportExcelMayorCuentas(data, 'Mayor de Cuentas')
 				// let tipo = 'Asiento'
 				// this.exportAsXLSX(this.fieldsDaily,tipo);
-				this.lcargando.ctlSpinner(false); 
+				this.lcargando.ctlSpinner(false);
 			  }else{
 				this.toastr.info("No hay datos para exportar")
-				this.lcargando.ctlSpinner(false); 
+				this.lcargando.ctlSpinner(false);
 			  }
 		}, error => {
 			this.toastr.info(error.error.mesagge);
 			this.lcargando.ctlSpinner(false);
 		});
-			
-		
+
+
 	  }
-	
+
 	  exportAsXLSX(excelData,titpo) {
 		this.excelService.exportAsExcelFile(excelData, titpo);
 	  }
@@ -582,17 +582,17 @@ export class MovContableComponent implements OnInit {
 			console.log(res['data']);
 			this.lcargando.ctlSpinner(false);
 			this.presentDt = true;
-			
-				
+
+
 				let control_cuenta = ''
 				let saldo_anterior = 0
-				
+
 				res['data'].forEach(element => {
 				if(control_cuenta!=element.codigo){
 					saldo_anterior= parseFloat(element.saldo_inicial)
 					control_cuenta = element.codigo
 					Object.assign(element, {saldo: saldo_anterior })
-					
+
 				}
 					saldo_anterior += parseFloat(element.valor_deb) - parseFloat(element.valor_cre)
 					Object.assign(element, {
@@ -605,7 +605,7 @@ export class MovContableComponent implements OnInit {
 								valor_deb:	parseFloat(element.valor_deb),
 								valor_cre:	parseFloat(element.valor_cre),
 								saldo: saldo_anterior })
-				
+
 				});
 				this.infomovData = res['data'];
 			// this.infomovData = res['data'];
@@ -727,7 +727,7 @@ export class MovContableComponent implements OnInit {
 		let Dianterior = moment(this.fromDatePicker).subtract(1, 'days').format('YYYY-MM-DD');
 		let PrimerDiaMes = moment(new Date(Dianterior)).startOf('month').format('YYYY-MM-DD');
 
-		
+
 		let data = {
 			cuenta: this.codigo,
 			desde: moment(this.fromDatePicker).format('YYYY-MM-DD'),
@@ -739,7 +739,7 @@ export class MovContableComponent implements OnInit {
 
 			return res['data'];
 			//this.dataAnterior = res['data'][0].saldoanterior;
-			
+
 		}, error => {
 			this.toastr.info(error.error.mesagge);
 		});
@@ -748,11 +748,11 @@ export class MovContableComponent implements OnInit {
 
 	getSaldoAnterior() {
 
-	
+
 		let Dianterior = moment(this.fromDatePicker).subtract(1, 'days').format('YYYY-MM-DD');
 		let PrimerDiaMes = moment(new Date(Dianterior)).startOf('month').format('YYYY-MM-DD');
 
-		
+
 		let data = {
 			cuenta: this.codigo,
 			desde: moment(this.fromDatePicker).format('YYYY-MM-DD'),
@@ -785,12 +785,12 @@ export class MovContableComponent implements OnInit {
 
 	async CalculoTotal() {
 
-		
+
 		var TotalDebe = 0;
 		var TotalHaber = 0;
 		var total = 0;
 
-		
+
 
 	    let hash = {};
 		let array = this.infomovData.filter(o => hash[o.codigo] ? false : hash[o.codigo] = true);
@@ -807,11 +807,11 @@ export class MovContableComponent implements OnInit {
 			this.totalValor = 0;
 			total = 0;
 
-			
+
 
 			await this.ObtenerSaldoAnteriorCodigo(codigoCuentaBus).then(respSaldoAnte => {
 
-				
+
 
 				this.dataSanterior = (respSaldoAnte === null) ? 0 : respSaldoAnte;
 				//this.dataAnterior = respSaldoAnte[0].saldoanterior;
@@ -842,38 +842,38 @@ export class MovContableComponent implements OnInit {
 
 					if (ArrayByCuenta[a]["clase"] == 'DEUDORA') {
 						this.dataTotal.countRegistros = ArrayByCuenta.length;
-		
+
 						TotalDebe += parseFloat(ArrayByCuenta[a]["valor_deb"]);
 						TotalHaber += parseFloat(ArrayByCuenta[a]["valor_cre"]);
 						this.totalValor = parseFloat(ArrayByCuenta[a]["valor_deb"]) - parseFloat(ArrayByCuenta[a]["valor_cre"]);
 						total += parseFloat(this.totalValor);
 						ArrayByCuenta[a]["saldo"] = total;
-		
+
 					} else {
-		
+
 						this.dataTotal.countRegistros = ArrayByCuenta.length;
 						TotalDebe += parseFloat(ArrayByCuenta[a]["valor_deb"]);
 						TotalHaber += parseFloat(ArrayByCuenta[a]["valor_cre"]);
 						this.totalValor = parseFloat(ArrayByCuenta[a]["valor_cre"]) - parseFloat(ArrayByCuenta[a]["valor_deb"]);
 						total += parseFloat(this.totalValor);
 						ArrayByCuenta[a]["saldo"] = total;
-						
+
 					}
 
 					ArrayByCuenta[a]["saldo_fin"] = total;
 
-	
+
 				}
 
-				
+
 
 			});
 
-			
 
-			
 
-			
+
+
+
 		}/*
 		this.dataTotal.Saldo = total;
 		this.dataTotal.Debe = TotalDebe;
@@ -914,7 +914,7 @@ export class MovContableComponent implements OnInit {
 			contentStyle: { "max-height": "500px", "overflow": "auto" },
 			baseZIndex: 10000
 		});
-		
+
 		this.ref.onClose.subscribe((cuentas: any) => {
 			localStorage.removeItem('detalle_consulta')
 			if (cuentas) {
@@ -953,7 +953,7 @@ export class MovContableComponent implements OnInit {
 				contentStyle: { "max-height": "500px", "overflow": "auto" },
 				baseZIndex: 10000
 			});
-			
+
 			this.ref.onClose.subscribe((cuentas: any) => {
 				localStorage.removeItem('detalle_consulta')
 				if (cuentas) {
@@ -1001,7 +1001,7 @@ export class MovContableComponent implements OnInit {
 	}
 
 	limpiarFiltros() {
-			
+
 		this.codigo= '';
 		this.nombre= '';
 		this.codigo_hasta='';

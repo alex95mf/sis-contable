@@ -16,7 +16,7 @@ export class ModalCuentasEmiComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Input() regla: number;
   @Input() tipo: string;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Array<Botonera> = [];
   filter: any;
   paginate: IPaginate;

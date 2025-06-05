@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./area.component.scss']
 })
 export class AreaComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,7 +32,7 @@ export class AreaComponent implements OnInit {
   filter: any;
   areas: any = [];
   showInactive = false;
-  
+
   constructor(
     private conceptosSrv: AreaService,
     private commonSrv: CommonService,
@@ -48,7 +48,7 @@ export class AreaComponent implements OnInit {
       }
     )
 
-    
+
   }
 
   ngOnInit(): void {
@@ -105,7 +105,7 @@ export class AreaComponent implements OnInit {
   }
 
   cargarAreas() {
-    this.mensajeSpinner = "Cargando listado de Áreas...";
+    (this as any).mensajeSpinner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -148,7 +148,7 @@ export class AreaComponent implements OnInit {
       });
       modalInvoice.componentInstance.fTitle = this.fTitle;
       modalInvoice.componentInstance.isNew = isNew;
-      modalInvoice.componentInstance.data = data;    
+      modalInvoice.componentInstance.data = data;
   }
 
   metodoGlobal(event) {
@@ -176,7 +176,7 @@ export class AreaComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = "Eliminando área..."
+          (this as any).mensajeSpinner = "Eliminando área..."
           this.lcargando.ctlSpinner(true);
           let data = {
             id:this.areas.id_area
@@ -220,7 +220,7 @@ export class AreaComponent implements OnInit {
       console.log("hola")
       this.vmButtons[1].boton.icon = 'far fa-square';
       this.filter.estado = ['A'];
-    } 
+    }
     else {
       console.log("aqui")
       this.vmButtons[1].boton.icon = 'far fa-check-square';
@@ -229,6 +229,6 @@ export class AreaComponent implements OnInit {
     this.showInactive = !this.showInactive;
     this.cargarAreas();
   }
- 
+
 
 }

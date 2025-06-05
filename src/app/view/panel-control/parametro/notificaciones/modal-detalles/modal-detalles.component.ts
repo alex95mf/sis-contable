@@ -89,7 +89,7 @@ export class ModalDetallesComponent implements OnInit {
 
   async setNotificacion() {
     try {
-      this.mensajeSpinner = 'Almacenando Notificacion'
+      (this as any).mensajeSpinner = 'Almacenando Notificacion'
       const response = await this.apiService.setNotificacion({notificacion: this.registro})
       console.log(response)
       this.apiService.setNotificacion$.emit()
@@ -101,7 +101,7 @@ export class ModalDetallesComponent implements OnInit {
 
   async updateNotificacion() {
     try {
-      this.mensajeSpinner = 'Almacenando Notificacion'
+      (this as any).mensajeSpinner = 'Almacenando Notificacion'
       const response = await this.apiService.updateNotificacion(this.registro.id, {notificacion: this.registro})
       console.log(response)
       this.apiService.setNotificacion$.emit()

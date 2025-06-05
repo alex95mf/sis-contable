@@ -35,7 +35,7 @@ standalone: false,
 export class ModalFeriasComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @Input() feria_id: number;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[];
 
   feria: Feria = {
@@ -147,7 +147,7 @@ export class ModalFeriasComponent implements OnInit {
 
   async getFeria(id: number) {
     try {
-      this.mensajeSpinner = 'Cargando Feria'
+      (this as any).mensajeSpinner = 'Cargando Feria'
       let feria = await this.apiService.getFeria(id)
       console.log(feria)
       this.feria = feria
@@ -170,7 +170,7 @@ export class ModalFeriasComponent implements OnInit {
     }
 
     try {
-      this.mensajeSpinner = 'Almacenando Feria'
+      (this as any).mensajeSpinner = 'Almacenando Feria'
       let feria = await this.apiService.setFeria({feria: this.feria})
       console.log(feria)
       Swal.fire('Feria almacenada correctamente', '', 'success').then(() => {
@@ -185,7 +185,7 @@ export class ModalFeriasComponent implements OnInit {
 
   async updateFeria() {
     try {
-      this.mensajeSpinner = 'Actualizando Feria'
+      (this as any).mensajeSpinner = 'Actualizando Feria'
       let feria = await this.apiService.updateFeria(this.feria.id, {feria: this.feria})
       console.log(feria)
       Swal.fire('Feria actualizada correctamente', '', 'success').then(() => {

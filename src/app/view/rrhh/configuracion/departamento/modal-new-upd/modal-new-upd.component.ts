@@ -16,7 +16,7 @@ standalone: false,
 })
 export class ModalNewUpdComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -127,7 +127,7 @@ export class ModalNewUpdComponent implements OnInit {
 
 
   guardar(){
-    this.mensajeSpinner = 'Cargar Departamento... '
+    (this as any).mensajeSpinner = 'Cargar Departamento... '
     this.lcargando.ctlSpinner(true);
     this.service.setDepartamento(this.departamento).subscribe(
       (res)=>{
@@ -147,7 +147,7 @@ export class ModalNewUpdComponent implements OnInit {
   }
 
   editar(){
-    this.mensajeSpinner = 'Cargar Departamento... '
+    (this as any).mensajeSpinner = 'Cargar Departamento... '
     this.lcargando.ctlSpinner(true);
     this.service.updatetDepartamento(this.departamento).subscribe(
       (res)=>{

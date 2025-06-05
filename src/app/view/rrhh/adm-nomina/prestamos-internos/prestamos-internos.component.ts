@@ -61,7 +61,7 @@ export class PrestamosInternosComponent implements OnInit {
   prestamodelempleado: any = [];
   vmButtons: any = [];
 
-  mensajeSpinner: string = "Cargando...";
+
   /**
    * vaciones tab inicio
   */
@@ -546,7 +546,7 @@ export class PrestamosInternosComponent implements OnInit {
 
     };
     // this.validaDt = false;
-    this.mensajeSpinner = "Borrando...";
+    (this as any).mensajeSpinner = "Borrando...";
     this.lcargando.ctlSpinner(true);
     this.vacaServ.deleteVacationdetails(data).subscribe(
       (res) => {
@@ -672,7 +672,7 @@ export class PrestamosInternosComponent implements OnInit {
       vdt_num_horas: this.formGroupVacaciones.value.fcn_vac_total_horas,
       vdt_observacion: this.formGroupVacaciones.value.fnc_vdt_observacion,
     }
-    this.mensajeSpinner = "Actualizando...";
+    (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.vacaServ.updateVacationdetails(data).subscribe(
       (res: GeneralResponseI) => {
@@ -786,7 +786,7 @@ export class PrestamosInternosComponent implements OnInit {
     // console.log(data)
     // return;
 
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.vacaServ.saveVacationDetail(data).subscribe(
       (res: GeneralResponseI) => {
@@ -843,7 +843,7 @@ export class PrestamosInternosComponent implements OnInit {
       relation: ''
     };
 
-    this.mensajeSpinner = "Consultando...";
+    (this as any).mensajeSpinner = "Consultando...";
     this.lcargando.ctlSpinner(true);
     this.generalService.getEmpleadosOnlyIdentificacion(parameterUrl)
       .subscribe({
@@ -899,7 +899,7 @@ export class PrestamosInternosComponent implements OnInit {
 
     this.getVacacionesEmpleado(empleadoData)
 
-    /* this.mensajeSpinner = "Cargando datos de Empleado...";
+    /* (this as any).mensajeSpinner = "Cargando datos de Empleado...";
 
 
     this.loading = true;
@@ -1094,7 +1094,7 @@ export class PrestamosInternosComponent implements OnInit {
       keyword_afecta_rol: 'VACS'
     };
 
-    this.mensajeSpinner = "Consultando vacaciones...";
+    (this as any).mensajeSpinner = "Consultando vacaciones...";
     this.lcargando.ctlSpinner(true);
     this.serviceFaltasYPermisosService.getFaltasPermisosAfectaRolParameter(parameterUrl)
       .subscribe({
@@ -1329,7 +1329,7 @@ export class PrestamosInternosComponent implements OnInit {
       relation: 'all'
     };
 
-    this.mensajeSpinner = "Consultando...";
+    (this as any).mensajeSpinner = "Consultando...";
     this.lcargando.ctlSpinner(true);
     this.generalService.getEmpleadosOnlyIdentificacion(parameterUrl)
       .subscribe({
@@ -1452,7 +1452,7 @@ export class PrestamosInternosComponent implements OnInit {
 
     };
     // this.validaDt = false;
-    this.mensajeSpinner = "PDF...";
+    (this as any).mensajeSpinner = "PDF...";
     this.lcargando.ctlSpinner(true);
     this.prestamosinternosService.geDownloadCertificado(data).subscribe(
       (res: any) => {
@@ -1494,7 +1494,7 @@ export class PrestamosInternosComponent implements OnInit {
 
     };
     // this.validaDt = false;
-    this.mensajeSpinner = "PDF...";
+    (this as any).mensajeSpinner = "PDF...";
     this.lcargando.ctlSpinner(true);
     this.prestamosinternosService.geDownloadCertificado(data).subscribe(
       (res: any) => {
@@ -1640,7 +1640,7 @@ export class PrestamosInternosComponent implements OnInit {
       relation: ''
     };
 
-    this.mensajeSpinner = "Consultando...";
+    (this as any).mensajeSpinner = "Consultando...";
     this.lcargando.ctlSpinner(true);
     this.generalService.getEmpleadosOnlyIdentificacion(parameterUrl)
       .subscribe({
@@ -1752,7 +1752,7 @@ export class PrestamosInternosComponent implements OnInit {
       this.formGroupVacaciones.get("fcn_vac_tiempo_trabajando").setValue(this.getFormatedStringFromDays(totalDias));
 
 
-      this.mensajeSpinner = "Guardando...";
+      (this as any).mensajeSpinner = "Guardando...";
       this.lcargando.ctlSpinner(true);
 
       this.loading = true;
@@ -1896,7 +1896,7 @@ export class PrestamosInternosComponent implements OnInit {
       flpr_estado_id: 'EFPP',
       // formatDate(this.inputFechaIngreso.value,'yyyy-MM-dd',"en-US"),
     }
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.saveFaultAndPermission(data).subscribe(
       (res: GeneralResponseI) => {
@@ -2204,7 +2204,7 @@ export class PrestamosInternosComponent implements OnInit {
       flpr_num_horas: this.formGroupFaltaAndPermiso.value.fnc_flpr_num_horas_permiso,
       flpr_observacion: this.formGroupFaltaAndPermiso.get('fnc_flpr_observacion_permiso').value,
     }
-    this.mensajeSpinner = "Actualizando...";
+    (this as any).mensajeSpinner = "Actualizando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.updatedFaultAndPermission(data).subscribe(
       (res: GeneralResponseI) => {
@@ -2262,7 +2262,7 @@ export class PrestamosInternosComponent implements OnInit {
 
     };
     // this.validaDt = false;
-    this.mensajeSpinner = "Borrando...";
+    (this as any).mensajeSpinner = "Borrando...";
     this.lcargando.ctlSpinner(true);
     this.perfaltasypermisosService.deleteFaultAndPermission(data).subscribe(
       (res) => {

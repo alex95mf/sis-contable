@@ -6,7 +6,7 @@ import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-proce
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { CommonService } from 'src/app/services/commonServices';
 import { CommonVarService } from 'src/app/services/common-var.services';
-import { TicketFormComponent } from './ticket-form/ticket-form.component'; 
+import { TicketFormComponent } from './ticket-form/ticket-form.component';
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
 import * as myVarGlobals from 'src/app/global';
 import { TramitesService } from '../tramites.service';
@@ -23,10 +23,10 @@ standalone: false,
 })
 export class TramiteComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Trámites";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -67,7 +67,7 @@ export class TramiteComponent implements OnInit {
   excelData: any = []
 
   documentos: any = []
- 
+
   constructor(
     private ticketSrv: TramitesService,
     private commonSrv: CommonService,
@@ -88,13 +88,13 @@ export class TramiteComponent implements OnInit {
 
       this.commonVarSrv.selectContribuyenteCustom.asObservable().subscribe(
         (res)=>{
-          
+
           if(res.valid == 7){
             console.log(res);
             this.ticketNew.fk_contribuyente = res['razon_social']
             this.contribuyente = res;
           }
-          
+
         }
       )
 
@@ -148,7 +148,7 @@ export class TramiteComponent implements OnInit {
         clase: "btn btn-success boton btn-sm",
         habilitar: false,
       }
-     
+
     ];
     this.today = new Date();
     this.tomorrow = new Date(this.today);
@@ -200,10 +200,10 @@ export class TramiteComponent implements OnInit {
   metodoGlobal(event){
     switch (event.items.boton.texto) {
       case " NUEVO":
-       this.showTicketForm(true, {}); 
+       this.showTicketForm(true, {});
        break;
       case "GUARDAR":
-       this.validaTicket(); 
+       this.validaTicket();
        break;
       case " MOSTRAR INACTIVOS":
       //  this.changeShowInactive(this.showInactive);
@@ -218,7 +218,7 @@ export class TramiteComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -237,7 +237,7 @@ export class TramiteComponent implements OnInit {
           this.toastr.warning("No tiene permisos para ver este formulario.", this.fTitle);
           this.vmButtons = [];
         } else {
-          
+
           this.cargarTickets();
         }
       },
@@ -248,7 +248,7 @@ export class TramiteComponent implements OnInit {
     );
   }
 
- 
+
 
 
   /**
@@ -308,9 +308,9 @@ UploadService(file, payload?: any): void {
   })
 }
 
-  
+
   getCatalogoCategoria() {
-    this.mensajeSpinner = "Cargando Tramites...";
+    (this as any).mensajeSpinner = "Cargando Tramites...";
     this.lcargando.ctlSpinner(true);
     this.ticketSrv.getTareasALl().subscribe(
       (res) => {
@@ -332,7 +332,7 @@ UploadService(file, payload?: any): void {
   //      grupo:evento
   //    };
   //    this.ticketSrv.getCatalogoSubCategoria(data).subscribe(
-       
+
   //      (res) => {
   //        //console.log('AQQQQQQQQQ'+res["data"])
   //        this.subCategorias = res["data"];
@@ -351,7 +351,7 @@ UploadService(file, payload?: any): void {
     this.ticketNew.tipo = event.tipo
     this.tramiteSelect = event.id_flujo
     this.ticketNew.prioridad = event.prioridad
-    
+
   }
 
 
@@ -360,7 +360,7 @@ UploadService(file, payload?: any): void {
    }
 
   cargarTickets() {
-    this.mensajeSpinner = "Cargando listado de Tickets...";
+    (this as any).mensajeSpinner = "Cargando listado de Tickets...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -370,7 +370,7 @@ UploadService(file, payload?: any): void {
       }
     }
 
-    console.log(data); 
+    console.log(data);
     if(this.filter.tiene_hito == 'N'){
       this.ticketSrv.getTickets(data).subscribe(
         (res: any) => {
@@ -378,7 +378,7 @@ UploadService(file, payload?: any): void {
           this.paginate.length = res.data.total;
           this.ticketsDt = (res.data.current_page == 1) ? res.data.data : Object.values(res.data.data)
           this.lcargando.ctlSpinner(false);
-         
+
         },
         (error) => {
           this.lcargando.ctlSpinner(false);
@@ -401,7 +401,7 @@ UploadService(file, payload?: any): void {
               tipo_documento:e.contribuyente[0]?.tipo_documento,
               num_documento:e.contribuyente[0]?.num_documento,
               nombre_tramite:e.flujo?.nombre,
-              tipo:e.tipo, 
+              tipo:e.tipo,
               observacion:e.observacion,
               fecha_tramite:e.fecha,
               estado_tramite:e.estado,
@@ -413,16 +413,16 @@ UploadService(file, payload?: any): void {
               hito:f.hito,
               usuario_atiende:f.responsable?.nombre,
               departamento: f.responsable?.departamento?.dep_nombre,
-             
+
 
             }
             this.ticketsDtPasos.push(data);
-           
+
             })
-           
+
           })
           this.lcargando.ctlSpinner(false);
-         
+
         },
         (error) => {
           this.lcargando.ctlSpinner(false);
@@ -431,7 +431,7 @@ UploadService(file, payload?: any): void {
         }
       )
     }
-   
+
   }
 
 
@@ -447,7 +447,7 @@ UploadService(file, payload?: any): void {
 
         if (respuesta) {
           this.crearTicket();
-          
+
         }
       });
     }
@@ -500,12 +500,12 @@ UploadService(file, payload?: any): void {
         flag = true;
       }
       // else if (
-      //   this.fileList == undefined 
+      //   this.fileList == undefined
       // ) {
       //   this.toastr.info("El campo File no puede ser vacío");
       //   flag = true;
       // }
-      
+
       !flag ? resolve(true) : resolve(false);
     })
   }
@@ -520,7 +520,7 @@ UploadService(file, payload?: any): void {
     this.cargarTickets();
   }
 
- 
+
   selectedHito(event){
     console.log(event)
     //if (event.checked.length > 0) {
@@ -528,7 +528,7 @@ UploadService(file, payload?: any): void {
       this.filter.tiene_hito= 'S';
     } else {
       this.filter.tiene_hito= 'N';
-   
+
     }
     console.log(this.filter.tiene_hito)
   }
@@ -549,7 +549,7 @@ UploadService(file, payload?: any): void {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando Ticket...";
+        (this as any).mensajeSpinner = "Guardando Ticket...";
         this.lcargando.ctlSpinner(true);
         console.log(this.dataUser);
         this.ticketNew['id_usuario'] = this.dataUser['id_usuario'];
@@ -575,8 +575,8 @@ UploadService(file, payload?: any): void {
                 confirmButtonText: "Aceptar",
                 confirmButtonColor: '#20A8D8',
               }).then((result) => {
-                if (result.isConfirmed) {         
-                  console.log(res); 
+                if (result.isConfirmed) {
+                  console.log(res);
                   this.disabledCampos = true;
                   //this.ticketNew = res['data'];
                   this.ticketSrv.getTareasALl({}).subscribe(
@@ -597,12 +597,12 @@ UploadService(file, payload?: any): void {
                       console.log(error)
                     }
                   );
-                
+
                   console.log(this.tareas[0].nombre)
                   this.ticketNew.fk_tipo_flujo = this.tareas[0].nombre;
                   this.ticketNew.nro_tramite = res['data']["nro_tramite"];
-                  this.ticketNew.observacion = res['data']["observacion"];  
-                  this.ticketNew.fk_contribuyente =this.contribuyente.razon_social     
+                  this.ticketNew.observacion = res['data']["observacion"];
+                  this.ticketNew.fk_contribuyente =this.contribuyente.razon_social
                   this.commonVarSrv.mesaAyuTicket.next(res['data']);
 
                   this.ticketSrv.getTramiteById(res['data']).subscribe(
@@ -641,8 +641,8 @@ UploadService(file, payload?: any): void {
                           console.log(erro);
                         }
                       )
-                      
-                      
+
+
                     }
                   )
                 }
@@ -669,11 +669,11 @@ UploadService(file, payload?: any): void {
     });
   }
 
-  
+
   exportarExcel() {
-    
-    this.mensajeSpinner = "Generando Archivo Excel...";
-    this.lcargando.ctlSpinner(true); 
+
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
+    this.lcargando.ctlSpinner(true);
     this.excelData = [];
     if(this.isHito){
       Object.keys(this.ticketsDtPasos).forEach(key => {
@@ -711,14 +711,14 @@ UploadService(file, payload?: any): void {
         filter_values['Tipo de Trámite'] = (this.ticketsDt[key].tipo != undefined) ? (this.ticketsDt[key].tipo == 'I' ? 'Interno' : 'Externo') : '';
         filter_values['Estado'] = (this.ticketsDt[key].estado != undefined) ? (this.ticketsDt[key].estado == 'P' ? 'Pendiente' : 'Cerrado') : '';
         filter_values['Prioridad'] = (this.ticketsDt[key].prioridad != undefined) ? (this.ticketsDt[key].prioridad == 'M' ? 'Media' : this.ticketsDt[key].prioridad == 'A' ? 'Alta' :'Baja' ) : "";
-        
+
 
         this.excelData.push(filter_values);
       })
     }
-          
+
     this.exportAsXLSX();
-    this.lcargando.ctlSpinner(false); 
+    this.lcargando.ctlSpinner(false);
   }
   exportAsXLSX() {
     this.excelService.exportAsExcelFile(this.excelData, 'Excel Trámites');
@@ -785,7 +785,7 @@ UploadService(file, payload?: any): void {
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
       modalInvoice.componentInstance.ticket = this.ticket;
-      
+
     }
   }
 
@@ -807,7 +807,7 @@ UploadService(file, payload?: any): void {
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
       modalInvoice.componentInstance.ticket = this.ticket;
-      
+
     }
   }
 
@@ -844,7 +844,7 @@ UploadService(file, payload?: any): void {
       prioridad: 0,
     }
     this.disabledCampos = false;
-   
+
   }
 
 }

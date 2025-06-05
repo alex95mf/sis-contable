@@ -26,7 +26,7 @@ export class ReportesGraficosComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = "Reportes Gráficos de Reacaudación ";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any[] = [];
   dataUser: any;
   permissions: any;

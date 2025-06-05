@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ['./nota-debito.component.scss']
 })
 export class NotaDebitoComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
 

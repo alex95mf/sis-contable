@@ -21,7 +21,7 @@ export class CumpleanioComponent implements OnInit {
   dtElement: DataTableDirective;
   dtOptions: any = {};
   dtTrigger = new Subject();
-  mensajeSpinner: string = "Cargando...";
+  
   arrayGrupo: Array<any> = [];
   arrayCumple:any;
   mes: any = 0;

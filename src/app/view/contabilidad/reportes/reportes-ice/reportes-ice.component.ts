@@ -24,10 +24,10 @@ standalone: false,
   styleUrls: ['./reportes-ice.component.scss']
 })
 export class ReportesIceComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Reportes ICE";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -37,7 +37,7 @@ export class ReportesIceComponent implements OnInit {
   tareas: any = {};
 
   ticketsDt: any = [];
-  
+
   paginate: any;
   filter: any;
 
@@ -55,13 +55,13 @@ export class ReportesIceComponent implements OnInit {
     {value: "A",label: "ALTA"},
     {value: "M",label: "MEDIA"},
     {value: "B",label: "BAJA"},
-    
+
   ]
 
   tipoTraList = [
     {value: "I",label: "INTERNO"},
     {value: "E",label: "EXTERNO"},
-    
+
   ]
   excelData: any = []
   departamentoSelect: any = {
@@ -74,13 +74,13 @@ export class ReportesIceComponent implements OnInit {
     private commonVarSrv: CommonVarService,
     private modalSrv: NgbModal,
     private xlsService: XlsExportService,
-    private excelService: ExcelService ) { 
-      
-    
-  
+    private excelService: ExcelService ) {
 
 
-      
+
+
+
+
     }
 
   ngOnInit(): void {
@@ -149,11 +149,11 @@ export class ReportesIceComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
-    
+
     this.filter = {
-      
+
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
       estado: ['P','C'],
@@ -161,7 +161,7 @@ export class ReportesIceComponent implements OnInit {
       tipo_tramite:0,
       dep_nombre:"",
       id_departamento:0
-    
+
     };
 
     this.paginate = {
@@ -171,12 +171,12 @@ export class ReportesIceComponent implements OnInit {
       pageSizeOptions: [20, 50,100,200]
     };
 
-   
+
     setTimeout(()=> {
       this.validaPermisos();
       this.cargarTicketsGlobal();
  //     this.getCatalogoCategoria();
-     
+
     }, 0);
 
   }
@@ -190,8 +190,8 @@ export class ReportesIceComponent implements OnInit {
       Object.assign(this.paginate, { page: 1 });
 
 
-  
-      
+
+
         this.cargarTicketsGlobal();
     break;
     case " LIMPIAR":
@@ -204,7 +204,7 @@ export class ReportesIceComponent implements OnInit {
 
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -233,7 +233,7 @@ export class ReportesIceComponent implements OnInit {
     );
   }
 
- 
+
 
    asignarEstado(evt) {
     this.filter.estado = [evt]
@@ -243,7 +243,7 @@ export class ReportesIceComponent implements OnInit {
    }
 
   cargarTicketsGlobal() {
-    this.mensajeSpinner = "Cargando listado de Tramites...";
+    (this as any).mensajeSpinner = "Cargando listado de Tramites...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -253,8 +253,8 @@ export class ReportesIceComponent implements OnInit {
       }
     }
     console.log(data);
-    
-    
+
+
     this.reporteIceSrv.getReportesIce(data).subscribe(
       (res) => {
         console.log(res);
@@ -289,7 +289,7 @@ export class ReportesIceComponent implements OnInit {
 
           // CALCULO DE EL TIEMPO TRASCURRIDO DESDE EL INICIO DEL TRAMITE
           if(e.tareas != null && e.tareas.dias_totales != null){
-            
+
             let fecha_vencida = moment(fechaM).add( 1, 'days')
             if(fecha_vencida<=today){
               Object.assign(e, {vencimientoT: 'día(s) transcurrido(s)', diasT: Math.abs(dias_vencidos),dias_trans:dias_trascurridos, classT: 'text-danger'})
@@ -323,7 +323,7 @@ export class ReportesIceComponent implements OnInit {
                 Object.assign(e, { fecha_v:fecha_vencida,vencimiento: 'Tiene '+dias_disponibles+' días(s) para gestionar', dias:'',dias_config: dias_disponibles, class: 'text-success' })
               }
 
-              
+
             }
           }else{
             console.log('diferente de Pendiente')
@@ -339,7 +339,7 @@ export class ReportesIceComponent implements OnInit {
                 Object.assign(e, {fecha_v:fecha_vencida, vencimiento: 'día(s) para gestionar', dias: Math.abs(today.diff(fecha_vencida, 'days')),dias_config: dias_disponibles, class: 'text-warning' })
               }else if(fecha_vencida > today && today.diff(fecha_vencida, 'days') != 0){
                 Object.assign(e, { fecha_v:fecha_vencida,vencimiento: 'Se gestionó en '+Math.abs(today.diff(fecha_vencida, 'days'))+' día(s)', dias: '',dias_config: dias_disponibles, class: 'text-success' })
-                
+
                 // if (e.id_tramite_seguimiento==89){
                 //   console.log('fecha en que vence '+moment(fecha_vencida).format('YYYY/MM/DD'))
                 //   console.log('fecha en que se creo '+moment(moment(e.updated_at)).format('YYYY/MM/DD'))
@@ -350,15 +350,15 @@ export class ReportesIceComponent implements OnInit {
 
               }else if(fecha_vencida > today && today.diff(fecha_vencida, 'days') == 0){
                 Object.assign(e, { fecha_v:fecha_vencida,vencimiento: 'Se gestionó en '+dias_disponibles+' días(s)', dias:'',dias_config: dias_disponibles, class: 'text-success' })
-               
+
               }
             }
           }
         }
-          
+
         })
         this.lcargando.ctlSpinner(false);
-       
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -367,9 +367,9 @@ export class ReportesIceComponent implements OnInit {
     )
   }
   exportarExcel() {
-    
-    this.mensajeSpinner = "Generando Archivo Excel...";
-    this.lcargando.ctlSpinner(true); 
+
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
+    this.lcargando.ctlSpinner(true);
 
 
     this.ticketsDt.forEach(item => {
@@ -385,7 +385,7 @@ export class ReportesIceComponent implements OnInit {
       rows: this.ticketsDt
     }
     this.xlsService.exportExcelReporteIce(data, 'ice')
-    this.lcargando.ctlSpinner(false); 
+    this.lcargando.ctlSpinner(false);
     return;
     this.excelData = [];
           Object.keys(this.ticketsDt).forEach(key => {
@@ -401,20 +401,20 @@ export class ReportesIceComponent implements OnInit {
             filter_values['Estado Seguimiento'] = (this.ticketsDt[key].estado != undefined) ? (this.ticketsDt[key].estado == 'P' ? 'Pendiente' : 'Cerrado') : '';
             filter_values['Observación Seguimiento'] = (this.ticketsDt[key].observacion != undefined) ? this.ticketsDt[key].observacion : "";
             filter_values['Respuesta'] = (this.ticketsDt[key].respuesta != undefined) ? (this.ticketsDt[key].respuesta == 'S' ? 'Si' : 'N') : '';
-            
+
 
             this.excelData.push(filter_values);
           })
 
-        
+
           this.exportAsXLSX();
-          this.lcargando.ctlSpinner(false); 
+          this.lcargando.ctlSpinner(false);
   }
   exportAsXLSX() {
     this.excelService.exportAsExcelFile(this.excelData, 'Excel Trámites');
   }
 
-  
+
   descargarPdf(tramite){
     console.log(tramite.tramite.id_tramite)
     window.open(environment.ReportingUrl + "rep_administracion_tramites_cierre.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_tramite=" + tramite.id_tramite , '_blank')
@@ -455,5 +455,5 @@ export class ReportesIceComponent implements OnInit {
     this.cargarTicketsGlobal();
   }
 
- 
+
 }

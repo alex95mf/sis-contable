@@ -33,7 +33,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild("print") print!: ElementRef;
   fTitle = "Garantías";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -206,7 +206,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
             mercado: this.mercados.find(m => m.id == res.fk_mercado)
           }
 
-          this.mensajeSpinner = 'Cargando Puestos de Mercado'
+          (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
           this.puestos_filter = this.puestos.filter(e => e.fk_mercado == res.fk_mercado)
           // this.lcargando.ctlSpinner(true)
           // this.puestos = []
@@ -242,7 +242,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
           this.documento.puesto = res.fk_mercado_puesto;
 
           if (res.fk_documento_2 && res.fk_documento_2 != 0) {
-            this.mensajeSpinner = 'Cargando datos de la Garantía...';
+            (this as any).mensajeSpinner = 'Cargando datos de la Garantía...';
             this.lcargando.ctlSpinner(true);
             let data = {
               inspeccion: res.fk_documento_2
@@ -381,7 +381,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -430,7 +430,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
     let data = {
       params: "'REN_MERCADO'"
     }
-    this.mensajeSpinner = 'Cargando datos de Mercados'
+    (this as any).mensajeSpinner = 'Cargando datos de Mercados'
     // this.lcargando.ctlSpinner(true)
     this.contSvr.getMercados(data).subscribe(
       res => {
@@ -472,7 +472,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
       mercado: this.documento.mercado
     }
     this.documento.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto
-    this.mensajeSpinner = 'Cargando Puestos de Mercado'
+    (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
     // this.lcargando.ctlSpinner(true)
     this.puestos = []
     this.apiSrv.getPuestos().subscribe(
@@ -526,7 +526,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
   }
 
   getCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos...';
+    (this as any).mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -600,7 +600,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
 
   // no se usa ya que la sesion ahora maneja toda la caja activa, no solo el id
   /* getCajaActiva() {
-    this.mensajeSpinner = 'Obteniendo Caja Activa...';
+    (this as any).mensajeSpinner = 'Obteniendo Caja Activa...';
     let id = this.cajaActiva.id_caja;
 
     // funcion necesario solo porque en la sesion se maneja solo el id no toda la info de la caja activa
@@ -621,7 +621,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
   } */
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -663,7 +663,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
   /* verificarCaja() {
     // funcion para revisar si la caja seleccionada ya ha sido abierta ese dia
 
-    this.mensajeSpinner = 'Verificando si la caja está activa...';
+    (this as any).mensajeSpinner = 'Verificando si la caja está activa...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -691,7 +691,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
   } */
 
   getLiquidaciones() {
-    this.mensajeSpinner = "Cargando lista de Liquidaciones...";
+    (this as any).mensajeSpinner = "Cargando lista de Liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1061,7 +1061,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          this.mensajeSpinner = "Verificando período contable";
+          (this as any).mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -1072,7 +1072,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
 
-              this.mensajeSpinner = 'Generando Garantía...';
+              (this as any).mensajeSpinner = 'Generando Garantía...';
               this.lcargando.ctlSpinner(true);
               this.documento.estado = "E";
               this.documento.tipo_documento = this.concepto.codigo;
@@ -1262,7 +1262,7 @@ export class GarantiaComponent implements OnInit, OnDestroy {
   }
 
   async validacionCaja() {
-    this.mensajeSpinner = 'Validando Estado de Caja'
+    (this as any).mensajeSpinner = 'Validando Estado de Caja'
     this.lcargando.ctlSpinner(true)
     this.cajaActiva = JSON.parse(localStorage.getItem('activeCaja'))
 

@@ -27,7 +27,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
 
   fTitle = "Anulación de liquidaciones";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -158,7 +158,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
         this.formReadOnly = true;
 
         if(res.fk_documento_2){
-          this.mensajeSpinner = "Obteniendo datos...";
+          (this as any).mensajeSpinner = "Obteniendo datos...";
           this.lcargando.ctlSpinner(true);
           this.apiService.getLiqById(res.fk_documento_2).subscribe(
             (res: any) => {
@@ -405,7 +405,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -436,7 +436,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
   }
 
   getCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos'
+    (this as any).mensajeSpinner = 'Cargando Catalogos'
     this.lcargando.ctlSpinner(true)
     this.apiService.getCatalogos({ params: "'LIQ MOTIVO'" }).subscribe(
       (res: any) => {
@@ -457,7 +457,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptos().subscribe(
       res => {
@@ -525,7 +525,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          this.mensajeSpinner = 'Verificando período contable...';
+          (this as any).mensajeSpinner = 'Verificando período contable...';
           this.lcargando.ctlSpinner(true);
           let datos = {
             "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -536,7 +536,7 @@ export class AnulacionComponent implements OnInit, OnDestroy {
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
 
-                this.mensajeSpinner = 'Generando Liquidación...';
+                (this as any).mensajeSpinner = 'Generando Liquidación...';
                 this.lcargando.ctlSpinner(true);
                 this.liquidacion.fk_contribuyente = this.contribuyenteActive.id_cliente;
                 this.liquidacion.fk_concepto = this.conceptosBackup.find((c: any) => c.codigo == "AN").id;

@@ -100,7 +100,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
     vdt_observacion:''
   }
 
-  mensajeSpinner: string = "Cargando...";
+
   //
   actions: any = { btnGuardar: true,btnMod: false };
 
@@ -359,7 +359,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
         const vac_a_partir_meses = (empleadoData.codigo_trabajo.cat_keyword == 'LOSEP') ? 11  : 12 ;
         const vac_tiempo_trabajando = moment().diff(moment(empleadoData.emp_fecha_ingreso), 'months')
         Object.assign(this.empleado, {...empleadoData, max_dias_vacaciones, vac_a_partir_meses, vac_tiempo_trabajando})
-        this.mensajeSpinner = "Cargando...";
+        (this as any).mensajeSpinner = "Cargando...";
         // this.lcargando.ctlSpinner(true);
 
         this.loading = true;
@@ -551,7 +551,7 @@ export class VacacionesComponent implements OnInit,AfterViewInit {
         vdt_num_horas: 8,
         vdt_observacion: "454"
       }
-      this.mensajeSpinner = "Guardando...";
+      (this as any).mensajeSpinner = "Guardando...";
       this.lcargando.ctlSpinner(true);
       this.vacaServ.saveVacationDetail(data).subscribe(
         (res: GeneralResponseI) => {

@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ListBusquedaPrestamoComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -101,7 +101,7 @@ export class ListBusquedaPrestamoComponent implements OnInit {
   }
 
   cargarDocumentos() {
-    this.mensajeSpinner = "Cargando listado de productos...";
+    (this as any).mensajeSpinner = "Cargando listado de productos...";
     this.lcargando.ctlSpinner(true);
     console.log(this.subgrupo)
     let id = this.subgrupo.id_grupo_productos

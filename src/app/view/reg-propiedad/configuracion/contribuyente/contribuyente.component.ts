@@ -15,7 +15,7 @@ standalone: false,
   styleUrls: ["./contribuyente.component.scss"],
 })
 export class ContribuyenteComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   vmButtons: any = [];

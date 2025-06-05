@@ -18,10 +18,10 @@ standalone: false,
 })
 export class TitulosComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Consulta de liquidaciones (Registro de la propiedad)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Array<Botonera> = [];
   dataUser: any;
   permissions: any;
@@ -119,7 +119,7 @@ export class TitulosComponent implements OnInit {
       case "EXCEL":
         this.exportLiquidaciones()
         break;
-    
+
       default:
         break;
     }
@@ -128,11 +128,11 @@ export class TitulosComponent implements OnInit {
   async exportLiquidaciones() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando documentos...'
+      (this as any).mensajeSpinner = 'Cargando documentos...'
       let documentos = await this.generacionSrv.getLiquidacionesAsync({concepto: { codigo: 'RP' }, params: { filter: this.filter }})
       console.log(documentos)
       //
-      this.mensajeSpinner = 'Exportando'
+      (this as any).mensajeSpinner = 'Exportando'
       let excelData = []
       documentos.forEach((element: any) => {
         const { documento, contribuyente, total, arancel, avaluo, fecha, estado, usuario } = element
@@ -180,7 +180,7 @@ export class TitulosComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
 
     this.empresLogo = this.dataUser.logoEmpresa;
 
@@ -207,7 +207,7 @@ export class TitulosComponent implements OnInit {
 
   cargarLiquidaciones() {
 
-      this.mensajeSpinner = "Cargando lista de liquidaciones...";
+      (this as any).mensajeSpinner = "Cargando lista de liquidaciones...";
       this.lcargando.ctlSpinner(true);
 
       let data = {
@@ -269,7 +269,7 @@ export class TitulosComponent implements OnInit {
     } else {
       this.filter.estado = undefined;
     }
-  
+
   }
 
   anular(id) {
@@ -287,13 +287,13 @@ export class TitulosComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result)=>{
       if(result.isConfirmed) {
-        this.mensajeSpinner = "Anulando liquidacion...";
+        (this as any).mensajeSpinner = "Anulando liquidacion...";
         this.lcargando.ctlSpinner(true);
         this.generacionSrv.anularLiquidacion(id).subscribe(
           (res) => {
             if (res["status"] == 1) {
               this.lcargando.ctlSpinner(false);
-              
+
               Swal.fire({
                 title: "Registro Eliminado",
                 text: res['message'],
@@ -333,8 +333,8 @@ export class TitulosComponent implements OnInit {
         )
       }
     });
-    
+
   }
-  
+
 
 }

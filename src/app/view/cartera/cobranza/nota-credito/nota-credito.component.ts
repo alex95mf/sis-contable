@@ -22,7 +22,7 @@ standalone: false,
   styleUrls: ['./nota-credito.component.scss']
 })
 export class NotaCreditoComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   processing: any = false;

@@ -73,7 +73,7 @@ export class ListLiquidacionesComponent implements OnInit {
       },
     };
 
-    this.mensajeSpinner = 'Cargando Liquidaciones'
+    (this as any).mensajeSpinner = 'Cargando Liquidaciones'
     this.lcargando.ctlSpinner(true)
     this.apiService.getLiquidaciones().subscribe(
       res => {
@@ -110,7 +110,7 @@ export class ListLiquidacionesComponent implements OnInit {
   }
 
   editLiquidacion = (liquidacion) => {
-    this.mensajeSpinner = 'Obteniendo Liquidacion'
+    (this as any).mensajeSpinner = 'Obteniendo Liquidacion'
     this.lcargando.ctlSpinner(true)
     this.apiService.getLiquidacionCompleta(liquidacion).subscribe(
       res => {

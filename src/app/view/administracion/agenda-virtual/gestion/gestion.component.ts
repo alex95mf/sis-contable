@@ -9,7 +9,7 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { MatDialog } from '@angular/material/dialog';
-import { AppSettings } from 'src/app/app.settings'; 
+import { AppSettings } from 'src/app/app.settings';
 import { Settings } from 'src/app/app.settings.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
@@ -39,10 +39,10 @@ standalone: false,
   styleUrls: ['./gestion.component.scss']
 })
 export class GestionComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Gestión de agenda virtual";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -67,7 +67,7 @@ export class GestionComponent implements OnInit {
           // });
           this.deleteEvent(event);
       }
-      
+
   }];
   events: CalendarEvent[] = [
   //   {
@@ -112,7 +112,7 @@ export class GestionComponent implements OnInit {
     private appSettings: AppSettings,
     private snackBar: MatSnackBar
   ) {
-    this.settings = this.appSettings.settings; 
+    this.settings = this.appSettings.settings;
 
     this.commonVarSrv.needRefresh.asObservable().subscribe(
       (res)=>{
@@ -220,9 +220,9 @@ export class GestionComponent implements OnInit {
 
   }
 
-  
+
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -254,7 +254,7 @@ export class GestionComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.mensajeSpinner = "Cargando catalogos...";
+    (this as any).mensajeSpinner = "Cargando catalogos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -282,7 +282,7 @@ export class GestionComponent implements OnInit {
   }
 
   getEvents() {
-    this.mensajeSpinner = "Cargando eventos del calendario...";
+    (this as any).mensajeSpinner = "Cargando eventos del calendario...";
     this.lcargando.ctlSpinner(true);
 
     this.apiSrv.getCalEvents().subscribe(
@@ -326,12 +326,12 @@ export class GestionComponent implements OnInit {
       prev_anio = +anio - 1;
       next_mes = +mes + 1;
       next_anio = +anio;
-    } else if (mes==11){ // caso diciembre      
+    } else if (mes==11){ // caso diciembre
       next_mes=0;
       next_anio = +anio + 1;
       prev_mes = +mes - 1;
       prev_anio = +anio;
-    } else { // cualquier otro mes normal      
+    } else { // cualquier otro mes normal
       next_mes = +mes + 1;
       next_anio = +anio;
       prev_mes = +mes - 1;
@@ -342,14 +342,14 @@ export class GestionComponent implements OnInit {
 
     prev_fecha.setMonth(prev_mes);
     prev_fecha.setFullYear(prev_anio);
-    prev_fecha.setDate(1); 
+    prev_fecha.setDate(1);
     next_fecha.setMonth(next_mes);
     next_fecha.setFullYear(next_anio);
     next_fecha.setDate(last_day_date.getDate());
-    
+
     console.log(prev_fecha);
     console.log(next_fecha);
-    
+
     let data = {
       params: {
         filter: {
@@ -359,7 +359,7 @@ export class GestionComponent implements OnInit {
       }
     }
 
-    this.mensajeSpinner = "Cargando eventos del calendario...";
+    (this as any).mensajeSpinner = "Cargando eventos del calendario...";
     this.lcargando.ctlSpinner(true);
 
     this.apiSrv.getLRCalEvents(data).subscribe(
@@ -402,8 +402,8 @@ export class GestionComponent implements OnInit {
       break;
     }
   }
-  
-  dayClicked({date, events}: {date: Date, events: CalendarEvent[]}): void {    
+
+  dayClicked({date, events}: {date: Date, events: CalendarEvent[]}): void {
     if (isSameMonth(date, this.viewDate)) {
       if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
         this.activeDayIsOpen = false;
@@ -432,7 +432,7 @@ export class GestionComponent implements OnInit {
         confirmButtonColor: '#4DBD74',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.mensajeSpinner = "Eliminando Evento..."
+          (this as any).mensajeSpinner = "Eliminando Evento..."
           this.lcargando.ctlSpinner(true);
 
           let id = event.id_origin;
@@ -502,7 +502,7 @@ export class GestionComponent implements OnInit {
     //   }
     // });
   }
-  
+
   expandGestionForm(isNew:boolean, data?:any) {
     // console.log(data);
     if (!isNew && this.permissions.consultar == "0") {

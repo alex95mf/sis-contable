@@ -13,7 +13,7 @@ standalone: false,
   styleUrls: ['./modal-exoneraciones-al.component.scss']
 })
 export class ModalExoneracionesAlComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -78,7 +78,7 @@ export class ModalExoneracionesAlComponent implements OnInit {
      
     }
 
-    this.mensajeSpinner = "Cargando lista de Exoneraciones..."
+    (this as any).mensajeSpinner = "Cargando lista de Exoneraciones..."
     this.lcargando.ctlSpinner(true);
     //this.apiService.getExoneracionesAL(data).subscribe(
       this.apiService.getExoneracionesCodigo(data).subscribe(

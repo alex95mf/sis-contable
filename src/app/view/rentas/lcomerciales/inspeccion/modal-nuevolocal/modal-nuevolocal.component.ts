@@ -193,7 +193,7 @@ export class ModalNuevolocalComponent implements OnInit {
   }
 
   async cargaCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos'
+    (this as any).mensajeSpinner = 'Cargando Catalogos'
     this.lcargando.ctlSpinner(true)
 
     try {
@@ -469,7 +469,7 @@ export class ModalNuevolocalComponent implements OnInit {
 
     if (result.isConfirmed) {
       // this.local['fk_contribuyente'] = { id_cliente: this.contribuyente.id_cliente }
-      this.mensajeSpinner = 'Almacenando Nuevo Local'
+      (this as any).mensajeSpinner = 'Almacenando Nuevo Local'
       this.lcargando.ctlSpinner(true)
 
       // console.log({local: this.local});

@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ModalProveedoresComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -110,7 +110,7 @@ export class ModalProveedoresComponent implements OnInit {
         case " LIMPIAR":
           this.limpiarFiltros();
           break;
-    
+
       case " REGRESAR":
         this.closeModal();
         break;
@@ -127,7 +127,7 @@ export class ModalProveedoresComponent implements OnInit {
   }
 
   cargarProveedores() {
-    this.mensajeSpinner = "Cargando lista de Proveedores...";
+    (this as any).mensajeSpinner = "Cargando lista de Proveedores...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

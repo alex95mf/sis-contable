@@ -27,7 +27,7 @@ standalone: false,
 export class LiquidacionComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle = "Emisión de Plusvalía y Alcabala";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -203,7 +203,7 @@ export class LiquidacionComponent implements OnInit {
         console.log(res)
         this.detallesAl = []
         this.detallesPl = []
-        this.mensajeSpinner = 'Cargando datos de la Liquidación...';
+        (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
         this.lcargando.ctlSpinner(true)
         this.restoreForm(false, false);
         //this.restoreForm2(false, false)
@@ -593,7 +593,7 @@ export class LiquidacionComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
@@ -927,7 +927,7 @@ export class LiquidacionComponent implements OnInit {
   }
 
   validarStaPlusALca(){
-    this.mensajeSpinner = 'Validadando Sta...';
+    (this as any).mensajeSpinner = 'Validadando Sta...';
     this.lcargando.ctlSpinner(true);
 
     this.apiService.getStaPlusAlca().subscribe(
@@ -984,7 +984,7 @@ export class LiquidacionComponent implements OnInit {
     )
   }
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     let data = {
       id_concepto: 52
@@ -1009,7 +1009,7 @@ export class LiquidacionComponent implements OnInit {
   }
 
   getConceptos_2() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     let data = {
       id_concepto: 53
@@ -1039,7 +1039,7 @@ export class LiquidacionComponent implements OnInit {
     this.liquidacion_2.fk_contribuyente_2 = contr.id_cliente
     this.observacionesDisabled = false;
     this.vmButtons[3].habilitar = false;
-    this.mensajeSpinner = 'Obteniendo Propiedades...'
+    (this as any).mensajeSpinner = 'Obteniendo Propiedades...'
     this.lcargando.ctlSpinner(true)
     this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
       (res) => {
@@ -1077,7 +1077,7 @@ export class LiquidacionComponent implements OnInit {
     this.alcabalaDisabled = false
     this.observacionesDisabled = false;
     this.vmButtons[3].habilitar = false;
-    this.mensajeSpinner = 'Obteniendo Propiedades...'
+    (this as any).mensajeSpinner = 'Obteniendo Propiedades...'
     this.lcargando.ctlSpinner(true)
 
     this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
@@ -1215,7 +1215,7 @@ export class LiquidacionComponent implements OnInit {
       if (result.isConfirmed) {
 
 
-        this.mensajeSpinner = 'Verificando período contable...';
+        (this as any).mensajeSpinner = 'Verificando período contable...';
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -1225,7 +1225,7 @@ export class LiquidacionComponent implements OnInit {
 
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.mensajeSpinner = 'Generando Liquidación...';
+              (this as any).mensajeSpinner = 'Generando Liquidación...';
               this.lcargando.ctlSpinner(true);
               this.liquidacion.detalles = [];
               this.liquidacion_2.detalles = [];
@@ -2071,7 +2071,7 @@ export class LiquidacionComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = 'Verificando período contable...';
+        (this as any).mensajeSpinner = 'Verificando período contable...';
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -2082,7 +2082,7 @@ export class LiquidacionComponent implements OnInit {
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
 
-              this.mensajeSpinner = 'Guardando...';
+              (this as any).mensajeSpinner = 'Guardando...';
               this.lcargando.ctlSpinner(true);
               let alcabala = {
                 id_liquidacion: this.id_alcabala
@@ -2177,7 +2177,7 @@ export class LiquidacionComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = 'Verificando período contable...';
+        (this as any).mensajeSpinner = 'Verificando período contable...';
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -2188,7 +2188,7 @@ export class LiquidacionComponent implements OnInit {
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
 
-              this.mensajeSpinner = 'Guardando...';
+              (this as any).mensajeSpinner = 'Guardando...';
               this.lcargando.ctlSpinner(true);
               // this.calcSubtotal()
               // this.calcSubtotal_2()

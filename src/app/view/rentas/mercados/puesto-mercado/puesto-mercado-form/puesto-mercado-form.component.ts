@@ -15,7 +15,7 @@ standalone: false,
 })
 export class PuestoMercadoFormComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })  lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+  
 
   dataUser: any;
 
@@ -95,7 +95,7 @@ export class PuestoMercadoFormComponent implements OnInit {
   setTimeout(() => {
     
     if(!this.isNew) {
-      this.mensajeSpinner = "Cargando data";
+      (this as any).mensajeSpinner = "Cargando data";
       this.lcargando.ctlSpinner(true);
 
       this.puesto = this.data;
@@ -185,7 +185,7 @@ export class PuestoMercadoFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
       }).then((result) => {
           if (result.isConfirmed) {
-              this.mensajeSpinner = "Guardando Puesto de mercado...";
+              (this as any).mensajeSpinner = "Guardando Puesto de mercado...";
               this.lcargando.ctlSpinner(true);
   
               let data = {
@@ -246,7 +246,7 @@ export class PuestoMercadoFormComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
       }).then((result) => {
           if (result.isConfirmed) {
-              this.mensajeSpinner = "Guardando Puesto de mercado...";
+              (this as any).mensajeSpinner = "Guardando Puesto de mercado...";
               this.lcargando.ctlSpinner(true);
   
               let data = {

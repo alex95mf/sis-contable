@@ -180,7 +180,7 @@ export class TarifaComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa;
 
@@ -213,7 +213,7 @@ export class TarifaComponent implements OnInit {
 
   cargaConceptos() {
     /** Llama a la API para cargar la lista desplegable con los conceptos */
-    this.mensajeSpinner = 'Cargando Conceptos'
+    (this as any).mensajeSpinner = 'Cargando Conceptos'
     this.lcargando.ctlSpinner(true)
     this.apiService.getConceptos().subscribe(
       res => {
@@ -266,7 +266,7 @@ export class TarifaComponent implements OnInit {
 
   cargaConceptoDetalles(concepto) {
     /** Llama a la API para cargar la lista de detalles del concepto seleccionado */
-    this.mensajeSpinner = 'Obteniendo Detalles del Concepto'
+    (this as any).mensajeSpinner = 'Obteniendo Detalles del Concepto'
     this.tarifa.detalles = []
     this.lcargando.ctlSpinner(true)
     this.apiService.getDetallesConcepto({id_concepto: concepto}).subscribe(
@@ -342,7 +342,7 @@ export class TarifaComponent implements OnInit {
       return
     }
 
-    this.mensajeSpinner = 'Almacenando Tarifa'
+    (this as any).mensajeSpinner = 'Almacenando Tarifa'
     this.tarifa.estado = this.tarifa.estado ? 'A' : 'I'  // Altera el valor del estado de la tarifa para guardar en la base
     this.tarifa.detalles.map(d => d.estado = d.estado ? 'A' : 'I')
 
@@ -467,7 +467,7 @@ export class TarifaComponent implements OnInit {
 
   cargaTarifaDetalles(tarifa) {
     
-    this.mensajeSpinner = 'Cargando Detalles de Tarifa'
+    (this as any).mensajeSpinner = 'Cargando Detalles de Tarifa'
     this.lcargando.ctlSpinner(true)
     this.apiService.getTarifa(tarifa.id).subscribe(
       res => {

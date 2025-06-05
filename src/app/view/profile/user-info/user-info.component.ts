@@ -15,7 +15,7 @@ standalone: false,
 export class UserInfoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('firmaUpload') firmaUpload: ElementRef;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   permissions: any;
 
   userData: any = {
@@ -55,7 +55,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   async validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
 
     this.lcargando.ctlSpinner(true)
     try {
@@ -87,7 +87,7 @@ export class UserInfoComponent implements OnInit {
 
   async getCatalogos() {
     try {
-      this.mensajeSpinner = 'Cargando Catalogos'
+      (this as any).mensajeSpinner = 'Cargando Catalogos'
       let catalogos = await this.apiService.getCatalogos({ params: "''" })
       console.log(catalogos)
       //
@@ -99,7 +99,7 @@ export class UserInfoComponent implements OnInit {
 
   async getRoles() {
     try {
-      this.mensajeSpinner = 'Cargando Roles'
+      (this as any).mensajeSpinner = 'Cargando Roles'
       let roles = await this.apiService.getRoles()
       console.log(roles)
       //
@@ -112,7 +112,7 @@ export class UserInfoComponent implements OnInit {
 
   async getUsuario() {
     try {
-      this.mensajeSpinner = 'Cargando Datos adicionales de Usuario'
+      (this as any).mensajeSpinner = 'Cargando Datos adicionales de Usuario'
       let response = await this.apiService.getUsuario({ id_user: this.userData.id_usuario })
       console.log(response)
       Object.assign(this.userData, {
@@ -129,7 +129,7 @@ export class UserInfoComponent implements OnInit {
 
   async getAnexo() {
     try {
-      this.mensajeSpinner = 'Cargando Firma Digital'
+      (this as any).mensajeSpinner = 'Cargando Firma Digital'
       let response = await this.apiService.getAnexos({
         module: this.permissions.id_modulo,
         component: myVarGlobals.fSeguridades,
@@ -184,7 +184,7 @@ export class UserInfoComponent implements OnInit {
 
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Almacenando Firma Digital'
+        (this as any).mensajeSpinner = 'Almacenando Firma Digital'
         let response = await this.apiService.fileService(file, dataAnexo);
         console.log(response)
 
@@ -235,7 +235,7 @@ export class UserInfoComponent implements OnInit {
         ip: this.commonServices.getIpAddress()
       }
 
-      this.mensajeSpinner = 'Eliminando Firma Digital'
+      (this as any).mensajeSpinner = 'Eliminando Firma Digital'
       this.lcargando.ctlSpinner(true)
       this.apiService.deleteAnexo(data).subscribe(
         () => {
@@ -288,7 +288,7 @@ export class UserInfoComponent implements OnInit {
         if (result.isConfirmed) {
           this.lcargando.ctlSpinner(true)
           try {
-            this.mensajeSpinner = 'Estableciendo Imagen de Perfil'
+            (this as any).mensajeSpinner = 'Estableciendo Imagen de Perfil'
             let response = await this.apiService.setAvatar({ avatar: base64String })
             console.log(response)
             Object.assign(this.userData, {
@@ -322,7 +322,7 @@ export class UserInfoComponent implements OnInit {
       const newAvatar = 'assets/img/avatars/prueba1.png';
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Eliminando Imagen de Perfil'
+        (this as any).mensajeSpinner = 'Eliminando Imagen de Perfil'
         let response = await this.apiService.setAvatar({ avatar: newAvatar })
         console.log(response)
         Object.assign(this.userData, {

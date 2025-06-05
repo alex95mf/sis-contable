@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./modal-conceptos.component.scss']
 })
 export class ModalConceptosComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -86,7 +86,7 @@ export class ModalConceptosComponent implements OnInit {
   }
 
   cargarConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     // let data = {
     //   id_concepto: this.id_concepto,

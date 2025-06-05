@@ -16,7 +16,7 @@ standalone: false,
 })
 export class TasasVariasFormComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -313,7 +313,7 @@ crearTasasVarias() {
     confirmButtonColor: '#4DBD74',
     }).then((result) => {
         if (result.isConfirmed) {
-            this.mensajeSpinner = "Guardando tasa...";
+            (this as any).mensajeSpinner = "Guardando tasa...";
             this.lcargando.ctlSpinner(true);
 
             let data = {
@@ -386,7 +386,7 @@ editTasasVarias() {
           confirmButtonColor: '#4DBD74',
   }).then((result) => {
     if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando tasa..."
+        (this as any).mensajeSpinner = "Guardando tasa..."
         this.lcargando.ctlSpinner(true);
 
         let data = {

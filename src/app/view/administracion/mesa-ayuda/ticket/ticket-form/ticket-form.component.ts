@@ -18,7 +18,7 @@ standalone: false,
 })
 export class TicketFormComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
   categorias: any = [];
@@ -158,7 +158,7 @@ export class TicketFormComponent implements OnInit {
 
   cargarSeguimiento() {
     if (!this.isNew) {
-      this.mensajeSpinner = "Cargando Seguimiento...";
+      (this as any).mensajeSpinner = "Cargando Seguimiento...";
       this.lcargando.ctlSpinner(true);
     } else {
 
@@ -227,7 +227,7 @@ export class TicketFormComponent implements OnInit {
 
   getCatalogoCategoria() {
 
-    this.mensajeSpinner = "Cargando Categorías...";
+    (this as any).mensajeSpinner = "Cargando Categorías...";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: "'MDA_CATEGORIA','MDA_SUBCATEGORIA', 'TIPO_NOTIFICACION_ALERTA'",
@@ -252,7 +252,7 @@ export class TicketFormComponent implements OnInit {
   getCatalogoSubCategoria(evento: any) {
     //console.log('Aquiiii '+evento);
     //this.subCategorias=0;
-    this.mensajeSpinner = "Cargando Sub Categorías...";
+    (this as any).mensajeSpinner = "Cargando Sub Categorías...";
     this.lcargando.ctlSpinner(true);
     this.ticketNew.subcategoria = 0;
     let data = {
@@ -274,7 +274,7 @@ export class TicketFormComponent implements OnInit {
   }
 
   cargarHistoriaTicket() {
-    this.mensajeSpinner = "Cargando Historia Ticket...";
+    (this as any).mensajeSpinner = "Cargando Historia Ticket...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -417,7 +417,7 @@ export class TicketFormComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = "Guardando Ticket...";
+        (this as any).mensajeSpinner = "Guardando Ticket...";
         this.lcargando.ctlSpinner(true);
 
         let data = {
@@ -503,7 +503,7 @@ export class TicketFormComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = "Re-Aperturando Ticket...";
+        (this as any).mensajeSpinner = "Re-Aperturando Ticket...";
         this.lcargando.ctlSpinner(true);
 
         this.data.observacionReapertura = this.observacionReapertura

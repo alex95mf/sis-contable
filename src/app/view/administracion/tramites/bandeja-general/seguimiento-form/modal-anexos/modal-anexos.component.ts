@@ -17,7 +17,7 @@ standalone: false,
   styleUrls: ['./modal-anexos.component.scss']
 })
 export class ModalAnexosComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -274,7 +274,7 @@ export class ModalAnexosComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
       }).then((result) => {
           if (result.isConfirmed) {
-              this.mensajeSpinner = "Gestionando Trámite...";
+              (this as any).mensajeSpinner = "Gestionando Trámite...";
               this.lcargando.ctlSpinner(true);
 
               let data = {

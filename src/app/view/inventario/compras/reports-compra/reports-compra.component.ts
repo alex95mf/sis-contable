@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./reports-compra.component.scss']
 })
 export class ReportsCompraComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
 	@ViewChild(CcSpinerProcesarComponent, {
 		static: false
 	}) lcargando: CcSpinerProcesarComponent;

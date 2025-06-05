@@ -33,7 +33,7 @@ export class DocumentosComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones: ValidacionesFactory = new ValidacionesFactory();
@@ -152,7 +152,7 @@ export class DocumentosComponent implements OnInit {
       module: this.permisions[0].id_modulo,
       component: myVarGlobals.fNomDocumentos,
     };
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.documentosService.presentarDocumento(data).subscribe((res) => {
     this.lcargando.ctlSpinner(false);
@@ -265,7 +265,7 @@ export class DocumentosComponent implements OnInit {
       id_controlador: myVarGlobals.fNomDocumentos,
     };
     if (this.id_archivo == undefined) {
-      this.mensajeSpinner = "Guardando...";
+      (this as any).mensajeSpinner = "Guardando...";
       this.lcargando.ctlSpinner(true);
       this.documentosService.fileService(this.filesSelect, params).subscribe((res) => {
           this.lcargando.ctlSpinner(false);
@@ -285,7 +285,7 @@ export class DocumentosComponent implements OnInit {
         }
       );
     } else if (this.id_archivo != undefined) {
-      this.mensajeSpinner = "Modificando...";
+      (this as any).mensajeSpinner = "Modificando...";
       this.lcargando.ctlSpinner(true);
       this.documentosService.patchFile(this.filesSelect, params).subscribe((res) => {
           this.lcargando.ctlSpinner(false);
@@ -336,7 +336,7 @@ export class DocumentosComponent implements OnInit {
     if (valores == undefined) {
       return;
     }
-    this.mensajeSpinner = "Seteando valores...";
+    (this as any).mensajeSpinner = "Seteando valores...";
     this.lcargando.ctlSpinner(true);
     this.id_archivo = valores.id_anexos;
     this.storage = valores.storage;
@@ -389,7 +389,7 @@ export class DocumentosComponent implements OnInit {
       component: myVarGlobals.fNomDocumentos,
       identifier: this.empleSeleccionadodoc,
     };
-    this.mensajeSpinner = "Eliminando...";
+    (this as any).mensajeSpinner = "Eliminando...";
     this.lcargando.ctlSpinner(true);
     this.documentosService.deleteFile(data).subscribe((res) => {
         this.id_archivo = undefined;
@@ -421,7 +421,7 @@ export class DocumentosComponent implements OnInit {
     if (valores == undefined) {
       return;
     }
-    this.mensajeSpinner = "Seteando valores...";
+    (this as any).mensajeSpinner = "Seteando valores...";
     this.lcargando.ctlSpinner(true);
     let datos: any = {
       storage: valores.storage,
@@ -437,14 +437,14 @@ export class DocumentosComponent implements OnInit {
 
         const dialogRef = this.confirmationDialogService.openDialogMat(VistaArchivoComponent, {
           width: '1000px', height: 'auto',
-          data: { titulo: "Vista de Archivo", dataUser: this.dataUser, objectUrl: URL.createObjectURL(resultado), tipoArchivo: valores.original_type}          
+          data: { titulo: "Vista de Archivo", dataUser: this.dataUser, objectUrl: URL.createObjectURL(resultado), tipoArchivo: valores.original_type}
         } );
-     
+
         dialogRef.afterClosed().subscribe(resultado => {
           if(resultado!=false && resultado!=undefined){
-    
+
           }
-        }); 
+        });
 
       }, (error) => {
         this.toastr.info(error.message);

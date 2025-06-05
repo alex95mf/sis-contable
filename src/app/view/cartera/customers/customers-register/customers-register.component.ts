@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./customers-register.component.scss']
 })
 export class CustomersRegisterComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   newOrigin: any;

@@ -23,7 +23,7 @@ standalone: false,
   styleUrls: ['./reports.component.scss']
 })
 export class ReportsComponent implements OnDestroy, OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

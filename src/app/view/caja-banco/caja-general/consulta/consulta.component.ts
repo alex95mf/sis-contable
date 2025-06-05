@@ -18,7 +18,7 @@ standalone: false,
 	styleUrls: ['./consulta.component.scss']
 })
 export class ConsultaComponent implements OnInit {
-	mensajeSpinner: string = "Cargando...";
+	
 	@ViewChild(CcSpinerProcesarComponent, {
 		static: false
 	}) lcargando: CcSpinerProcesarComponent;

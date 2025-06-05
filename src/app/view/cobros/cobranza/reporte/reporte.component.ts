@@ -45,8 +45,8 @@ export class ReporteComponent implements OnInit {
   @ViewChild('tblRecaudoMercados') tblRecaudoMercados: Table
 
   fTitle: string = "Reportes de Cobranzas";
+
   mensajeSpinner: string = "Cargando...";
-  mensajeSpinner: string;
   vmButtons: any[] = [];
   dataUser: any;
   catalog: any = {};
@@ -284,9 +284,9 @@ export class ReporteComponent implements OnInit {
   }
 
   cargarConsultaReportes(){
-  console.log(this.filter)
+  console.log(this.filter);
   this.loading = true;
-    this.mensajeSpinner = 'Cargando...';
+    (this as any).mensajeSpinner = 'Cargando...';
     //this.lcargando.ctlSpinner(true);
     this.filter.reporte = this.variableFiltro
 
@@ -520,7 +520,7 @@ export class ReporteComponent implements OnInit {
     console.log(this.selectedReporte)
     console.log(this.reportes)
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
 
     // this.apiService.getTiposReporte().subscribe(
     //   (res: any) => {
@@ -567,7 +567,7 @@ export class ReporteComponent implements OnInit {
   }
 
   getConceptosReporte(){
-    this.mensajeSpinner = 'Cargando Tipos de Reporte';
+    (this as any).mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.apiService.getConceptosReporte().subscribe(
       (res: any) => {
@@ -590,7 +590,7 @@ export class ReporteComponent implements OnInit {
   }
 
   getTiposReporte() {
-    this.mensajeSpinner = 'Cargando Tipos de Reporte';
+    (this as any).mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.apiService.getTiposReporte().subscribe(
       (res: any) => {
@@ -613,7 +613,7 @@ export class ReporteComponent implements OnInit {
   }
 
   getMercados() {
-    this.mensajeSpinner = 'Cargando Mercados';
+    (this as any).mensajeSpinner = 'Cargando Mercados';
     this.lcargando.ctlSpinner(true);
     this.apiService.getMercados().subscribe(
       (res: any) => {
@@ -747,7 +747,7 @@ export class ReporteComponent implements OnInit {
 
   getSector() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando Sector";
+    (this as any).mensajeSpinner = "Cargando Sector";
 
     this.apiService.getCatalogs().subscribe(
       (res: any) => {
@@ -828,7 +828,7 @@ export class ReporteComponent implements OnInit {
 
   /*getEstado() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando Estado";
+    (this as any).mensajeSpinner = "Cargando Estado";
 
     this.apiService.getEstado().subscribe(
       (res: any) => {

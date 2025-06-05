@@ -27,7 +27,7 @@ export class GestionGarantiaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
 
   fTitle = "Gestión (Ordenenes de Pago)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   vmButtonsI:any = [];
   dataUser: any;
@@ -203,7 +203,7 @@ export class GestionGarantiaComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -300,7 +300,7 @@ export class GestionGarantiaComponent implements OnInit {
     let data = {
       params: "'OP_CONCEPTOS','PAG_TIPO_DESEMBOLSO'",
     };
-    this.mensajeSpinner = "Buscando concepto...";
+    (this as any).mensajeSpinner = "Buscando concepto...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogoConcepto(data).subscribe(
 
@@ -318,7 +318,7 @@ export class GestionGarantiaComponent implements OnInit {
   }
   cargarOrdenesPago(flag: boolean = false) {
 
-    this.mensajeSpinner = "Cargando Ordenes de Pago...";
+    (this as any).mensajeSpinner = "Cargando Ordenes de Pago...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1;

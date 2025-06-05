@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./solicitud.component.scss']
 })
 export class SolicitudComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
 	@ViewChild(CcSpinerProcesarComponent, {
 		static: false
 	}) lcargando: CcSpinerProcesarComponent;

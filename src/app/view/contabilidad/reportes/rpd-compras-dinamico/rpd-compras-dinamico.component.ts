@@ -25,7 +25,7 @@ standalone: false,
 })
 export class RpdComprasDinamicoComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   vmButtons: any = [];

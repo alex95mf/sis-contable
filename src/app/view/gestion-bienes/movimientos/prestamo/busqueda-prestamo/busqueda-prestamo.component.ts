@@ -18,7 +18,7 @@ standalone: false,
 })
 export class BusquedaPrestamoComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -122,7 +122,7 @@ export class BusquedaPrestamoComponent implements OnInit {
 	}
 
   cargarDocumentos(flag: boolean = false){
-    this.mensajeSpinner = "Cargando lista de Prestamo de Bienes...";
+    (this as any).mensajeSpinner = "Cargando lista de Prestamo de Bienes...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1

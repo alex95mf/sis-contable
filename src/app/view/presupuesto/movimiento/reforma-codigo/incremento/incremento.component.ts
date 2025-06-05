@@ -14,7 +14,7 @@ standalone: false,
 })
 export class IncrementoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   listaSolicitudesAtribucion: Array<any> = [];
   masterSelected: boolean = false;
 
@@ -85,7 +85,7 @@ export class IncrementoComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Bienes'
+      (this as any).mensajeSpinner = 'Cargando Bienes'
       let response = await this.apiService.getBienes({programa: this.programa, periodo: this.periodo, codigo_presupuesto: this.cod_presupuesto});
       response.map((item: any) => Object.assign(item, { 
         check: false,

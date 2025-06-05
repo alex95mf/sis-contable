@@ -21,10 +21,10 @@ standalone: false,
   styleUrls: ['./bandeja-trabajo.component.scss']
 })
 export class BandejaTrabajoComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Mesa de Ayuda (Bandeja Trabajo)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   vmButtons = [];
   dataUser: any;
@@ -219,7 +219,7 @@ export class BandejaTrabajoComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -251,7 +251,7 @@ export class BandejaTrabajoComponent implements OnInit {
     let data = {
       params: "'MDA_CATEGORIA','MDA_SUBCATEGORIA','MDA_ESTADOS'",
     };
-    /*this.mensajeSpinner = "Buscando categoría...";
+    /*(this as any).mensajeSpinner = "Buscando categoría...";
     this.lcargando.ctlSpinner(true);*/
     this.ticketSrv.getCatalogoCategoria(data).subscribe(
 
@@ -303,7 +303,7 @@ export class BandejaTrabajoComponent implements OnInit {
    }
 
   cargarTicketsGlobal(flag: boolean = false) {
-    this.mensajeSpinner = "Cargando listado de Tickets...";
+    (this as any).mensajeSpinner = "Cargando listado de Tickets...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1

@@ -89,7 +89,7 @@ export class ModalCitacionComponent implements OnInit {
   }
 
   cargarCatalogos() {
-    this.mensajeSpinner = 'Cargando datos'
+    (this as any).mensajeSpinner = 'Cargando datos'
     this.lcargando.ctlSpinner(true)
     this.apiService.getCatalogs({ params: "'TIPO_NOTIFICADOR'"}).subscribe(
       (res: any) => {
@@ -126,7 +126,7 @@ export class ModalCitacionComponent implements OnInit {
       { observaciones: `${this.actuacion.observacion} | ${this.estados.find(e => e.id == this.actuacion.estado_c).label} | ${this.actuacion.fecha} | ${this.notificadores.find(e => e.value == this.actuacion.notificador).label}` }
     )
 
-    this.mensajeSpinner = 'Registrando Citacion'
+    (this as any).mensajeSpinner = 'Registrando Citacion'
     this.lcargando.ctlSpinner(true)
     this.apiService.saveCitacion({juicio: this.juicio, citacion: this.actuacion}).subscribe(
       (res: any) => {

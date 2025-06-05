@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./general.component.scss']
 })
 export class GeneralComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)

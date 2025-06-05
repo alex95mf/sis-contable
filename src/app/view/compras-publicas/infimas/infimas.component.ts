@@ -26,7 +26,7 @@ standalone: false,
 export class InfimasComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
    lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+
   fTitle: string = "Infimas";
   mensajeSpinner: string
   dataUser: any
@@ -216,7 +216,7 @@ export class InfimasComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = "Carga Inicial"
+      (this as any).mensajeSpinner = "Carga Inicial"
       const resPeriodos = await this.service.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -227,7 +227,7 @@ export class InfimasComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
@@ -310,7 +310,7 @@ export class InfimasComponent implements OnInit {
   }
 
   // cargarPrograma(){
-  //   this.mensajeSpinner = "Cargando Programa...";
+  //   (this as any).mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
 
   //   this.service.searchPrograma({}).subscribe((res: any)=>{
@@ -323,7 +323,7 @@ export class InfimasComponent implements OnInit {
   //   })
   // }
   cargarPrograma(){
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data ={
       //periodo: this.periodo.getFullYear(),
@@ -349,7 +349,7 @@ export class InfimasComponent implements OnInit {
 
   // departamentoSearch(event){
   //   //console.log('Programa '+event);
-  //   this.mensajeSpinner = "Cargando Programa...";
+  //   (this as any).mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
 
   //   let data = {
@@ -365,7 +365,7 @@ export class InfimasComponent implements OnInit {
   // }
   departamentoSearch(event){
     // console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -396,7 +396,7 @@ export class InfimasComponent implements OnInit {
 
   AtribucionSearch(event){
     //console.log(event);
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
       departamento: event
@@ -410,7 +410,7 @@ export class InfimasComponent implements OnInit {
   }
   // SearchList(event){
   //   console.log("Atribucion "+event);
-  //   this.mensajeSpinner = "Cargando Programa...";
+  //   (this as any).mensajeSpinner = "Cargando Programa...";
   //   this.lcargando.ctlSpinner(true);
   //   // let data = {
   //   //   id: event,
@@ -455,7 +455,7 @@ export class InfimasComponent implements OnInit {
   SearchList(event,flag: boolean = false){
     // console.log(event);
     this.listaSolicitudes = []
-    this.mensajeSpinner = "Cargando Programa...";
+    (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
     if (flag) this.paginate.page = 1
@@ -533,7 +533,7 @@ export class InfimasComponent implements OnInit {
         }
       }
       let excelData = []
-      this.mensajeSpinner = "Generando Archivo Excel..."
+      (this as any).mensajeSpinner = "Generando Archivo Excel..."
       this.lcargando.ctlSpinner(true)
       this.service.getInfimas({ params: { filter: this.filter } }).subscribe(
         (res: any) => {

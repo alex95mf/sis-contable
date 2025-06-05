@@ -112,7 +112,7 @@ export class FaltasPermisosComponent implements OnInit {
   tipo_permiso_id_cc: BigInteger | String | number;
   afecta_rol_id_cc: BigInteger | String | number;
 
-  mensajeSpinner: string = "Cargando...";
+
   //
   actions: any = { btnGuardar: true, btnMod: false };
 
@@ -537,7 +537,7 @@ export class FaltasPermisosComponent implements OnInit {
 
   async cargaPeriodos() {
     try {
-      this.mensajeSpinner = "Cargando Años"
+      (this as any).mensajeSpinner = "Cargando Años"
       const resPeriodos = await this.PerFaltasYPermisosService.getPeriodos()
       console.log(resPeriodos)
       this.cmb_periodo = resPeriodos
@@ -691,7 +691,7 @@ export class FaltasPermisosComponent implements OnInit {
     };
 
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Cargando...'
+    (this as any).mensajeSpinner = 'Cargando...'
     this.PerFaltasYPermisosService.getFaltasPermisosEmployeesReportGrafi(parameterUrl).subscribe((res: any) => {
 
       if (motivo !== "") {
@@ -1257,7 +1257,7 @@ console.log(data)
    */
   saveFaltaAndPermisoEmpleado() {
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let dat = {
       "anio": moment(this.formGroupFaltaAndPermiso.value.fcn_flpr_anio).year(),
@@ -1287,7 +1287,7 @@ console.log(data)
           flpr_estado_id: 'EFPP',
           // formatDate(this.inputFechaIngreso.value,'yyyy-MM-dd',"en-US"),
         }
-        this.mensajeSpinner = "Guardando...";
+        (this as any).mensajeSpinner = "Guardando...";
         this.lcargando.ctlSpinner(true);
         console.log(data);
         this.PerFaltasYPermisosService.saveFaultAndPermission(data).subscribe(
@@ -1342,7 +1342,7 @@ console.log(data)
    */
   async updateFaltaAndPermisoEmpleado() {
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let dat = {
       "anio": moment(this.formGroupFaltaAndPermiso.value.fcn_flpr_anio).year(),
@@ -1371,7 +1371,7 @@ console.log(data)
           flpr_observacion: this.formGroupFaltaAndPermiso.get('fnc_flpr_observacion').value,
           // formatDate(this.inputFechaIngreso.value,'yyyy-MM-dd',"en-US"),
         }
-        this.mensajeSpinner = "Guardando...";
+        (this as any).mensajeSpinner = "Guardando...";
         this.lcargando.ctlSpinner(true);
         this.PerFaltasYPermisosService.updatedFaultAndPermission(data).subscribe(
           (res: GeneralResponseI) => {
@@ -1412,7 +1412,7 @@ console.log(data)
     */
   deleteFaltaAndPermisoEmpleado() {
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
     let dat = {
       "anio": moment(this.formGroupFaltaAndPermiso.value.fcn_flpr_anio).year(),
@@ -1433,7 +1433,7 @@ console.log(data)
 
         };
         // this.validaDt = false;
-        this.mensajeSpinner = "Borrando...";
+        (this as any).mensajeSpinner = "Borrando...";
         this.lcargando.ctlSpinner(true);
         this.PerFaltasYPermisosService.deleteFaultAndPermission(data).subscribe(
           (res) => {
@@ -1856,7 +1856,7 @@ console.log(data)
     }
 
 
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.PerFaltasYPermisosService.statusFaultAndPermission(data).subscribe(
       (res: GeneralResponseI) => {

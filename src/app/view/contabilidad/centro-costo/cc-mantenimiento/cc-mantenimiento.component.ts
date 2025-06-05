@@ -78,7 +78,7 @@ export class CcMantenimientoComponent implements OnInit {
   idCCosto: any;
   nameOriginal: any;
   vmButtons: any = [];
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   validaciones: ValidacionesFactory = new ValidacionesFactory();
   constructor(
@@ -260,7 +260,7 @@ export class CcMantenimientoComponent implements OnInit {
       fk_modulo: this.permisions[0].id_modulo,
       fk_component: myVarGlobals.fCentroCosto,
     };
-    this.mensajeSpinner = "Cargando";
+    (this as any).mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true);
     this.centroCostoSrv.showAnexos(data).subscribe((res) => {
       this.lcargando.ctlSpinner(false);
@@ -424,7 +424,7 @@ export class CcMantenimientoComponent implements OnInit {
       doc_anexos: Number(this.uploader.queue.length)
     };
 
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.centroCostoSrv.saveCentroCosto(data).subscribe(res => {
 
@@ -469,7 +469,7 @@ export class CcMantenimientoComponent implements OnInit {
       id_controlador: myVarGlobals.fCentroCosto,
     };
 
-    this.mensajeSpinner = "Modificando...";
+    (this as any).mensajeSpinner = "Modificando...";
     this.lcargando.ctlSpinner(true);
     this.centroCostoSrv.editCentroCosto(data).subscribe(res => {
       // this.lcargando.ctlSpinner(false);
@@ -492,7 +492,7 @@ export class CcMantenimientoComponent implements OnInit {
       accion: `Eliminación del centro del costo  ${this.costo.nombre} `,
       id_controlador: myVarGlobals.fCentroCosto,
     };
-    this.mensajeSpinner = "Eliminando...";
+    (this as any).mensajeSpinner = "Eliminando...";
     this.lcargando.ctlSpinner(true);
     this.centroCostoSrv.deleteCcosto(data).subscribe((res) => {
       this.lcargando.ctlSpinner(false);
@@ -905,7 +905,7 @@ export class CcMantenimientoComponent implements OnInit {
   }
 
   archivoExistente(valores:any){
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let datos: any = {
       storage: valores.storage,
@@ -950,7 +950,7 @@ export class CcMantenimientoComponent implements OnInit {
       confirmButtonText: "Aceptar",
     }).then((result) => {
       if (result.value) {
-        this.mensajeSpinner = "Cargando...";
+        (this as any).mensajeSpinner = "Cargando...";
         this.lcargando.ctlSpinner(true);
         valor.ip = this.commonServices.getIpAddress();
         valor.accion = `Eliminacion del archivo adjunto ${valor.original_name}, del documento con id ${valor.identifier} del centro de costo`;

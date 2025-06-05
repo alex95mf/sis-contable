@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./movimiento-bancario-form.component.scss']
 })
 export class MovimientoBancarioFormComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
   dataUser: any = {};
@@ -144,7 +144,7 @@ export class MovimientoBancarioFormComponent implements OnInit {
   } 
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
@@ -315,7 +315,7 @@ export class MovimientoBancarioFormComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = "Verificando período contable";
+        (this as any).mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let data = {
           "anio": Number(this.movimiento.anio),
@@ -326,7 +326,7 @@ export class MovimientoBancarioFormComponent implements OnInit {
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
            
-            this.mensajeSpinner = "Guardando Movimiento Bancario...";
+            (this as any).mensajeSpinner = "Guardando Movimiento Bancario...";
             this.lcargando.ctlSpinner(true);
             console.log(this.dataUser);
             this.movimiento.id_usuario= this.dataUser['id_usuario'];
@@ -402,7 +402,7 @@ export class MovimientoBancarioFormComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = "Verificando período contable";
+        (this as any).mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(this.movimiento.anio),
@@ -413,7 +413,7 @@ export class MovimientoBancarioFormComponent implements OnInit {
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
              
-              this.mensajeSpinner = "Editando Movimiento Bancario...";
+              (this as any).mensajeSpinner = "Editando Movimiento Bancario...";
               this.lcargando.ctlSpinner(true);
               console.log(this.dataUser);
               this.movimiento.id_usuario= this.dataUser['id_usuario'];

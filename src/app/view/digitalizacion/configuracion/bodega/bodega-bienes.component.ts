@@ -30,7 +30,7 @@ export class BodegaBienesComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+  
 
   dataBodega: any = []
 

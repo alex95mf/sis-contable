@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./liquidaciones.component.scss']
 })
 export class LiquidacionesComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   importPed: any = {

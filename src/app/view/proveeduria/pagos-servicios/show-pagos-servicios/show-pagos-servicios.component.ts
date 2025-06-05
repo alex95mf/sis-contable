@@ -41,7 +41,7 @@ export class ShowPagosServiciosComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private pSrv: PagosServiciosService, private toastr: ToastrService,
     private commonVarSrv: CommonVarService, private commonServices: CommonService, private router: Router) { }
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 
@@ -100,7 +100,7 @@ export class ShowPagosServiciosComponent implements OnInit {
   }
 
   setPaymentAndService(data) {
-    this.mensajeSpinner = "Eliminando...";
+    (this as any).mensajeSpinner = "Eliminando...";
     this.lcargando.ctlSpinner(true);
     this.pSrv.deletePaymentAndServ(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);

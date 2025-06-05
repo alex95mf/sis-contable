@@ -14,7 +14,7 @@ export class EncargadoComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+  
   encargados: any = []
 
   vmButtons: any

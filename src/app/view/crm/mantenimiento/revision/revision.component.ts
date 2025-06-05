@@ -68,7 +68,7 @@ export class RevisionComponent implements OnInit {
     console.log(this.tabs[tabIndex]);
   }
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -127,7 +127,7 @@ lista_estados:any = [
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
@@ -234,7 +234,7 @@ lista_estados:any = [
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando Producto...";
+        (this as any).mensajeSpinner = "Guardando Producto...";
         this.lcargando.ctlSpinner(true);
 
         this.RevisionSrv.guardarProducto({producto:this.producto}).subscribe(
@@ -292,7 +292,7 @@ lista_estados:any = [
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Editando Proyecto...";
+        (this as any).mensajeSpinner = "Editando Proyecto...";
         this.lcargando.ctlSpinner(true);
 
         this.producto.id_usuario= this.dataUser['id_usuario'];
@@ -394,7 +394,7 @@ lista_estados:any = [
   }
 
   async CargarProductos(){
-    this.mensajeSpinner = 'Cargando Productos';
+    (this as any).mensajeSpinner = 'Cargando Productos';
     this.lcargando.ctlSpinner(true)
     try {
 
@@ -440,7 +440,7 @@ lista_estados:any = [
   }
 
   async consultarProducto(){
-    this.mensajeSpinner = 'Cargando Producto';
+    (this as any).mensajeSpinner = 'Cargando Producto';
     this.lcargando.ctlSpinner(true)
     try {
 

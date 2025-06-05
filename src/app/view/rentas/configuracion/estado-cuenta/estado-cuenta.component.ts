@@ -21,7 +21,7 @@ standalone: false,
   styleUrls: ["./estado-cuenta.component.scss"],
 })
 export class EstadoCuentaComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   vmButtons: any = [];
@@ -41,7 +41,7 @@ export class EstadoCuentaComponent implements OnInit {
   solar: any;
   //tamDoc: any = 0;
   /*actions: any = {
-    //new: false, 
+    //new: false,
     search: false,
     add: true,
     edit: true,
@@ -88,7 +88,7 @@ export class EstadoCuentaComponent implements OnInit {
     public validaciones: ValidacionesFactory,
   ) {
     /*this.commonVrs.editContribuyente.asObservable().subscribe((res) => {
-      this.mensajeSpinner = 'Cargando deudas del contribuyente...'
+      (this as any).mensajeSpinner = 'Cargando deudas del contribuyente...'
       this.lcargando.ctlSpinner(true);
       this.CancelForm();
       this.vmButtons[1].habilitar = false;
@@ -208,7 +208,7 @@ export class EstadoCuentaComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
@@ -224,7 +224,7 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   validatePermission() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa
 
@@ -287,7 +287,7 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Cargando Tipos de Reporte';
+    (this as any).mensajeSpinner = 'Cargando Tipos de Reporte';
     this.lcargando.ctlSpinner(true);
     this.contribuyenteSrv.getConceptos().subscribe(
       (res: any) => {
@@ -333,11 +333,11 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   calcularTotal() {
-    this.mensajeSpinner = 'Calculando total de las deudas...';
+    (this as any).mensajeSpinner = 'Calculando total de las deudas...';
     this.lcargando.ctlSpinner(true);
     let total = 0;
     this.deudas.forEach(d => {
-      // Se agregan estados: 
+      // Se agregan estados:
       //   X => Anulados, porque se toma en cuenta las Anulaciones
       if (d.estado == "A" || d.estado == 'X') {
         if(d.tipo_documento=='AN' || d.tipo_documento=='BA'){
@@ -353,7 +353,7 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   handleFilter = () => {
-    this.mensajeSpinner = 'Filtrando Deudas'
+    (this as any).mensajeSpinner = 'Filtrando Deudas'
     this.lcargando.ctlSpinner(true)
     this.contribuyenteSrv.getDeudas({ id_contribuyente: this.contribuyente_activo.id_cliente, filter: this.filter }).subscribe(
       (res: any) => {
@@ -381,7 +381,7 @@ export class EstadoCuentaComponent implements OnInit {
         this.toastr.error(err.error.message, 'Error filtrando Deudas')
       }
     )
-    
+
   }
 
   resetFilter = () => {
@@ -394,11 +394,11 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   cargarDatosModal(dato?: any) {
-    this.mensajeSpinner = 'Cargando deudas del contribuyente...'
+    (this as any).mensajeSpinner = 'Cargando deudas del contribuyente...'
     this.lcargando.ctlSpinner(true);
     if(dato) {
       this.contribuyente_activo = dato;
-    }  
+    }
     this.hayContribuyente = true;
     // this.CancelForm();
     this.vmButtons[0].habilitar = false;
@@ -410,7 +410,7 @@ export class EstadoCuentaComponent implements OnInit {
         this.saldo_convenio = res2['data']['convenio'];
         this.deudas = res2['data']['deudas'];
         res2['data']['deudas'].forEach(e => {
-          
+
           //this.tipoEventosList.push(e);
           if(e.liquidacion != null){
             if(e.liquidacion.codigo_catastro != null){
@@ -419,15 +419,15 @@ export class EstadoCuentaComponent implements OnInit {
               //this.solar=e.liquidacion.codigo_catastro.split('-')[1];
 
               Object.assign(e, { sector: e.liquidacion.codigo_catastro.split('-')[1], solar: e.liquidacion.codigo_catastro.split('-')[3] })
-              
+
                 // this.sector =e.liquidacion.codigo_catastro.split('-')[3],
                 // this.solar =e.liquidacion.codigo_catastro.split('-')[1]
-                
-              
+
+
               //e.liquidacion.push({ "sector": e.liquidacion.codigo_catastro.split('-')[3]});
 
             }
-           
+
           }
           //console.log('solar',this.solar);
           //console.log('sector',this.sector);
@@ -489,8 +489,8 @@ export class EstadoCuentaComponent implements OnInit {
     else{
       window.open(environment.ReportingUrl + "rep_rentas_generico.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_liquidacion=" + dt.fk_documento + "&forma_pago=N/A" , '_blank')
     }
-    
-    
+
+
   }
   expandDetalleConcepto(c) {
     const modalInvoice = this.modalService.open(ConceptoDetComponent,{
@@ -502,7 +502,7 @@ export class EstadoCuentaComponent implements OnInit {
   }
 
   consultaDetalleIntereses(data?:any) {
- 
+
     const modalInvoice = this.modalService.open(DetalleInteresesComponent, {
       size: "lg",
       backdrop: "static",
@@ -510,5 +510,5 @@ export class EstadoCuentaComponent implements OnInit {
     });
     modalInvoice.componentInstance.data = data;
   }
-  
+
 }

@@ -102,7 +102,7 @@ export class ModalNuevolocalComponent implements OnInit {
         (res: any) => {
           if (res && !this.nuevo) {
             this.fTitle = 'Actualizar Local'
-            this.mensajeSpinner = 'Cargando datos de Local'
+            (this as any).mensajeSpinner = 'Cargando datos de Local'
             this.lcargando.ctlSpinner(true)
             this.apiService.getLocal({ local: this.id_local }).subscribe(
               (res: any) => {
@@ -144,7 +144,7 @@ export class ModalNuevolocalComponent implements OnInit {
   handleLoad() {
     // Nos aseguramos que se carguen los catalogos antes de realizar cualquier cosa
     return new Promise((resolve, reject) => {
-      // this.mensajeSpinner = 'Cargando Catalogos'
+      // (this as any).mensajeSpinner = 'Cargando Catalogos'
       // this.lcargando.ctlSpinner(true)
       this.apiService.getCatalogos({ params: "'REN_TIPO_NEG','CAT_SECTOR', 'REN_MERCADO','REN_GRUPO_NEG','REN_ESTADO_NEG','REN_LOCAL_TIPO_NEGOCIO'" }).subscribe(
         (res: any) => {
@@ -310,7 +310,7 @@ export class ModalNuevolocalComponent implements OnInit {
   //   if (this.local.id_local == null) {
   //     // Almanenar el local en la base de datos
   //     this.local['fk_contribuyente'] = { id_cliente: this.contribuyente.id_cliente }
-  //     this.mensajeSpinner = 'Almacenando Nuevo Local'
+  //     (this as any).mensajeSpinner = 'Almacenando Nuevo Local'
   //     this.lcargando.ctlSpinner(true)
   //     this.apiService.setLocal({ local: this.local }).subscribe(
   //       res => {
@@ -327,7 +327,7 @@ export class ModalNuevolocalComponent implements OnInit {
   //     )
   //   } else {
   //     this.local['fk_contribuyente'] = { id_cliente: this.contribuyente.id_cliente }
-  //     this.mensajeSpinner = 'Actualizando Local'
+  //     (this as any).mensajeSpinner = 'Actualizando Local'
   //     this.lcargando.ctlSpinner(true)
   //     this.apiService.actualizarLocal({ local: this.local }, this.local.id_local).subscribe(
   //       res => {

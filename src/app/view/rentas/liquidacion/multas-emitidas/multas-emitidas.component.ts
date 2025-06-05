@@ -21,10 +21,10 @@ standalone: false,
 })
 export class MultasEmitidasComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Aprobación de Multas";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -41,7 +41,7 @@ export class MultasEmitidasComponent implements OnInit {
   select_estado = 0;
 
   liquidacionesDt: any = [];
-  
+
   estadosList = [
     {
       value: 'E',
@@ -72,7 +72,7 @@ export class MultasEmitidasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     this.today = new Date();
@@ -82,7 +82,7 @@ export class MultasEmitidasComponent implements OnInit {
     this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.vmButtons = [
-       
+
       {
         orig: "btnsMult",
         paramAccion: "",
@@ -96,15 +96,15 @@ export class MultasEmitidasComponent implements OnInit {
         printSection: "PrintSection",
         imprimir: true
       },
-      { 
-        orig: "btnsMult", 
-        paramAccion: "2", 
-        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" }, 
-        permiso: true, 
-        showtxt: true, 
-        showimg: true, 
-        showbadge: false, 
-        clase: "btn btn-success boton btn-sm", 
+      {
+        orig: "btnsMult",
+        paramAccion: "2",
+        boton: { icon: "fa fa-file-excel-o", texto: "EXCEL" },
+        permiso: true,
+        showtxt: true,
+        showimg: true,
+        showbadge: false,
+        clase: "btn btn-success boton btn-sm",
         habilitar: false
       }
     ];
@@ -131,7 +131,7 @@ export class MultasEmitidasComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
 
     this.empresLogo = this.dataUser.logoEmpresa;
 
@@ -155,7 +155,7 @@ export class MultasEmitidasComponent implements OnInit {
     )
   }
   metodoGlobal = (event) => {
-    switch (event.items.boton.texto) 
+    switch (event.items.boton.texto)
     {
       case " IMPRIMIR":
         this.btnImprimir();
@@ -187,7 +187,7 @@ export class MultasEmitidasComponent implements OnInit {
 
   }
 
-  
+
   estadoToPrint(estado) {
     if(estado === 'E'){
       return "Emitido"
@@ -199,10 +199,10 @@ export class MultasEmitidasComponent implements OnInit {
       return "Todos"
     }
   }
-  
+
   cargarLiquidaciones() {
 
-    this.mensajeSpinner = "Cargando lista de liquidaciones...";
+    (this as any).mensajeSpinner = "Cargando lista de liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -270,7 +270,7 @@ export class MultasEmitidasComponent implements OnInit {
   }
 
   aprobar(id) {
-      
+
     Swal.fire({
       icon: "warning",
       title: "¡Atención!",
@@ -286,17 +286,17 @@ export class MultasEmitidasComponent implements OnInit {
       if(result.isConfirmed) {
 
 
-        this.mensajeSpinner = 'Verificando período contable...';
+        (this as any).mensajeSpinner = 'Verificando período contable...';
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment().format('YYYY')),
           "mes": Number(moment().format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.mensajeSpinner = "Aprobando liquidacion...";
+              (this as any).mensajeSpinner = "Aprobando liquidacion...";
               this.lcargando.ctlSpinner(true);
               this.apiSrv.aprobarLiquidacion(id).subscribe(
                 (res) => {
@@ -314,7 +314,7 @@ export class MultasEmitidasComponent implements OnInit {
                       //cancelButtonColor: '#F86C6B',
                       confirmButtonColor: '#20A8D8',
                     });
-      
+
                   } else {
                     this.lcargando.ctlSpinner(false);
                     Swal.fire({
@@ -341,13 +341,13 @@ export class MultasEmitidasComponent implements OnInit {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
           })
 
-       
+
       }
     });
 
@@ -370,17 +370,17 @@ export class MultasEmitidasComponent implements OnInit {
       if(result.isConfirmed) {
 
 
-        this.mensajeSpinner = 'Verificando período contable...';
+        (this as any).mensajeSpinner = 'Verificando período contable...';
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment().format('YYYY')),
           "mes": Number(moment().format('MM')),
         }
           this.cierremesService.obtenerCierresPeriodoPorMes(datos).subscribe(res => {
-           
+
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.mensajeSpinner = "Anulando liquidacion...";
+              (this as any).mensajeSpinner = "Anulando liquidacion...";
               this.lcargando.ctlSpinner(true);
               this.apiSrv.anularLiquidacion(id).subscribe(
                 (res) => {
@@ -398,7 +398,7 @@ export class MultasEmitidasComponent implements OnInit {
                       //cancelButtonColor: '#F86C6B',
                       confirmButtonColor: '#20A8D8',
                     });
-      
+
                   } else {
                     this.lcargando.ctlSpinner(false);
                     Swal.fire({
@@ -425,17 +425,17 @@ export class MultasEmitidasComponent implements OnInit {
               this.toastr.info("El periodo contable se encuentra cerrado, por favor verificar");
               this.lcargando.ctlSpinner(false);
             }
-      
+
           }, error => {
               this.lcargando.ctlSpinner(false);
               this.toastr.info(error.error.mesagge);
           })
       }
     });
-    
+
   }
 
-  
+
   expandDetalleMulta(c) {
     const modalInvoice = this.modalService.open(MultaDetComponent,{
       size:"md",

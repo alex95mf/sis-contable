@@ -15,7 +15,7 @@ standalone: false,
   styleUrls: ['./modal-edicion.component.scss']
 })
 export class ModalEdicionComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   botonera: any = [];
   abogado: any;
@@ -76,7 +76,7 @@ export class ModalEdicionComponent implements OnInit {
     }
 
     fillAbogado() {
-      this.mensajeSpinner = "Cargando datos...";
+      (this as any).mensajeSpinner = "Cargando datos...";
       this.lcargando.ctlSpinner(true);
       console.log(this.data)
       let abogado = {

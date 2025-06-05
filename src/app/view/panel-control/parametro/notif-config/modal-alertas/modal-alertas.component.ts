@@ -98,7 +98,7 @@ export class ModalAlertasComponent implements OnInit, OnDestroy {
 
   async setAlerta() {
     try {
-      this.mensajeSpinner = 'Almacenando Notificacion'
+      (this as any).mensajeSpinner = 'Almacenando Notificacion'
       const response = await this.apiService.setAlerta({alerta: this.registro})
       console.log(response)
       this.apiService.setAlerta$.emit()
@@ -110,7 +110,7 @@ export class ModalAlertasComponent implements OnInit, OnDestroy {
 
   async updateAlerta() {
     try {
-      this.mensajeSpinner = 'Almacenando Notificacion'
+      (this as any).mensajeSpinner = 'Almacenando Notificacion'
       const response = await this.apiService.updateAlerta(this.registro.id, {alerta: this.registro})
       console.log(response)
       this.apiService.setAlerta$.emit()

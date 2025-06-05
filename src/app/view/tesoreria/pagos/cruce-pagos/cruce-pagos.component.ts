@@ -38,7 +38,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
   @ViewChild("print") print!: ElementRef;
 
   fTitle = "Cruce de Pagos";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -502,7 +502,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -589,7 +589,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
  }
 
   getCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos...';
+    (this as any).mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -668,7 +668,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
 
   // no se usa ya que la sesion ahora maneja toda la caja activa, no solo el id
   getCajaActiva() {
-    this.mensajeSpinner = 'Obteniendo Caja Activa...';
+    (this as any).mensajeSpinner = 'Obteniendo Caja Activa...';
     let id = this.cajaActiva.id_caja;
 
     // funcion necesario solo porque en la sesion se maneja solo el id no toda la info de la caja activa
@@ -689,7 +689,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -732,7 +732,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
   verificarCaja() {
     // funcion para revisar si la caja seleccionada ya ha sido abierta ese dia
 
-    this.mensajeSpinner = 'Verificando si la caja está activa...';
+    (this as any).mensajeSpinner = 'Verificando si la caja está activa...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -759,7 +759,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
   }
 
   getLiquidaciones() {
-    this.mensajeSpinner = "Cargando lista de Liquidaciones...";
+    (this as any).mensajeSpinner = "Cargando lista de Liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1287,7 +1287,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = "Verificando período contable";
+        (this as any).mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let data = {
           "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -1297,7 +1297,7 @@ export class CrucePagosComponent implements OnInit, OnDestroy {
 
           /* Validamos si el periodo se encuentra aperturado */
           if (res["data"][0].estado !== 'C') {
-            this.mensajeSpinner = 'Guardando Cruce de pagos...';
+            (this as any).mensajeSpinner = 'Guardando Cruce de pagos...';
             this.lcargando.ctlSpinner(true);
             // documento: any = {
             //   id_documento: null,

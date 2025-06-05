@@ -334,7 +334,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
     // this.translateService.get('primeng').subscribe((res) => this.primengConfig.setTranslation(res))
   }
 
-  mensajeSpinner: string = "Cargando...";
+
 
 
   public getInitialDateFrom(): Date {
@@ -687,7 +687,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
 
   async saveAccionPersonal() {
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
 
     let dat = {
@@ -717,7 +717,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
               //estado: this.estado
 
             };
-            this.mensajeSpinner = "Guardando...";
+            (this as any).mensajeSpinner = "Guardando...";
             this.lcargando.ctlSpinner(true);
             this.empleadoService.saveAccionPersonal(data).subscribe(
               (res: GeneralResponseI) => {
@@ -755,7 +755,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
 
   async updateAccionPersonal() {
 
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
 
     let dat = {
@@ -784,7 +784,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
               //estado: this.estado
 
             };
-            this.mensajeSpinner = "Modificando...";
+            (this as any).mensajeSpinner = "Modificando...";
             this.lcargando.ctlSpinner(true);
             this.empleadoService.updateAccionPersonal(data).subscribe(
               (res: GeneralResponseI) => {
@@ -1182,7 +1182,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
             idToDelete: item
           }
 
-          this.mensajeSpinner = 'Eliminando registro'
+          (this as any).mensajeSpinner = 'Eliminando registro'
           this.lcargando.ctlSpinner(true)
               this.empleadoService.deleteAccionPersonal(data).subscribe(
                 res => {

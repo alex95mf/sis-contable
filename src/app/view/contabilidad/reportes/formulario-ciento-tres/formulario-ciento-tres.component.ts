@@ -24,7 +24,7 @@ export class FormularioCientoTresComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
   fTitle: string = "Formulario 103-104";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any[] = [];
   dataUser: any;
   permissions: any;
@@ -199,7 +199,7 @@ export class FormularioCientoTresComponent implements OnInit {
 
   cargarConsultaFormTres(){
 
-    this.mensajeSpinner = 'Cargando...';
+    (this as any).mensajeSpinner = 'Cargando...';
     this.lcargando.ctlSpinner(true);
     let data= {
       params: {
@@ -244,7 +244,7 @@ export class FormularioCientoTresComponent implements OnInit {
   }
   cargarConsultaFormCuatro(){
 
-    this.mensajeSpinner = 'Cargando...';
+    (this as any).mensajeSpinner = 'Cargando...';
     this.lcargando.ctlSpinner(true);
     let data= {
       params: {
@@ -392,7 +392,7 @@ limpiarForm(){
 
   if(this.selectedForm == 'nav-form-tres-tab'){
 
-    this.mensajeSpinner = "Generando Archivo Excel..."; 
+    (this as any).mensajeSpinner = "Generando Archivo Excel..."; 
 		this.lcargando.ctlSpinner(true); 
 
     let data= {
@@ -439,7 +439,7 @@ limpiarForm(){
   }
   if(this.selectedForm == 'nav-form-cuatro-tab'){
 
-    this.mensajeSpinner = "Generando Archivo Excel..."; 
+    (this as any).mensajeSpinner = "Generando Archivo Excel..."; 
 		this.lcargando.ctlSpinner(true); 
 
     let data= {

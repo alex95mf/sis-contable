@@ -14,7 +14,7 @@ standalone: false,
 })
 export class ModalTasasComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dataUser: any;
@@ -78,7 +78,7 @@ export class ModalTasasComponent implements OnInit {
   }
 
   cargarTasasVarias(inicial?: boolean) {
-    this.mensajeSpinner = "Cargando listado de tasas...";
+    (this as any).mensajeSpinner = "Cargando listado de tasas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

@@ -23,7 +23,7 @@ standalone: false,
 export class SuppliersComponent implements OnInit {
   @ViewChild("vaSelect") myInputVariable: ElementRef;
   public ddTree: DropDownTreeComponent;
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   newOrigin: any;

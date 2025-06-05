@@ -22,7 +22,7 @@ standalone: false,
 })
 export class BandejaComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   
@@ -271,7 +271,7 @@ console.log(this.dataExcel)
         if (this.permisos.exportar == "0") {
           this.toastr.info("Usuario no tiene permiso para exportar");
         } else {
-          this.mensajeSpinner = "Generando Archivo Excel...";
+          (this as any).mensajeSpinner = "Generando Archivo Excel...";
           this.lcargando.ctlSpinner(true);
 
           Object.keys(this.dataExcel).forEach(key => {
@@ -294,7 +294,7 @@ console.log(this.dataExcel)
           this.exportarAsXLSX(excelData);
           this.lcargando.ctlSpinner(false);
         }
-    // this.mensajeSpinner = 'Generando reporte Excel...';
+    // (this as any).mensajeSpinner = 'Generando reporte Excel...';
     // this.lcargando.ctlSpinner(true);
     // console.log(this.dataExcel);
     // let year = this.periodo;
@@ -506,7 +506,7 @@ console.log(this.dataExcel)
 
   checkPeriodo() {
 
-    this.mensajeSpinner = 'Obteniendo asignacion de ingresos...';
+    (this as any).mensajeSpinner = 'Obteniendo asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -550,15 +550,15 @@ console.log(this.dataExcel)
     this.lcargando.ctlSpinner(true);
     try {
       //
-      this.mensajeSpinner = 'Cargando catalogos';
+      (this as any).mensajeSpinner = 'Cargando catalogos';
       let catalogos = await this.apiSrv.getCatalogo({params: "'PRE_REFORMAS'"});
       this.catalog = catalogos['PRE_REFORMAS'];
 
-      this.mensajeSpinner = 'Cargando Periodos';
+      (this as any).mensajeSpinner = 'Cargando Periodos';
       let periodos = await this.apiSrv.getPeriodos();
       this.cmb_periodo = periodos;
 
-      this.mensajeSpinner = 'Cargando Programas';
+      (this as any).mensajeSpinner = 'Cargando Programas';
       let programas = await this.apiSrv.getProgramas();
       programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
       this.cmb_programas = programas;
@@ -570,7 +570,7 @@ console.log(this.dataExcel)
       this.toastr.error(err.error?.message, 'Error en Carga Inicial')
     }
 
-    /* this.mensajeSpinner = "Cargando Catalogs";
+    /* (this as any).mensajeSpinner = "Cargando Catalogs";
 
     let data = {
       params: "'PRE_REFORMAS'",
@@ -598,7 +598,7 @@ console.log(this.dataExcel)
 
   guardarIngresos() {
 
-    this.mensajeSpinner = 'Guardando Reformas...';
+    (this as any).mensajeSpinner = 'Guardando Reformas...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -636,7 +636,7 @@ console.log(this.dataExcel)
   }
 
   inspeccionarPeriodo() {
-    this.mensajeSpinner = 'Obteniendo reformas...';
+    (this as any).mensajeSpinner = 'Obteniendo reformas...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -662,7 +662,7 @@ console.log(this.dataExcel)
   }
 
   eliminarIngresos() {
-    this.mensajeSpinner = 'Eliminando asignacion de ingresos...';
+    (this as any).mensajeSpinner = 'Eliminando asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -691,7 +691,7 @@ console.log(this.dataExcel)
     )
   }
   anularIngresos() {
-    this.mensajeSpinner = 'Anulando asignacion de ingresos...';
+    (this as any).mensajeSpinner = 'Anulando asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -746,7 +746,7 @@ console.log(this.dataExcel)
   }
   
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {
@@ -1055,7 +1055,7 @@ console.log(this.dataExcel)
   }
 
   validaPartidas(excel) {
-    this.mensajeSpinner = 'Cargando archivo';
+    (this as any).mensajeSpinner = 'Cargando archivo';
     this.lcargando.ctlSpinner(true);
 
       let partida = 'PARTIDA';

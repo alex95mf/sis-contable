@@ -118,7 +118,7 @@ export class PresupuestoComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
 
     let params = {
@@ -150,18 +150,18 @@ export class PresupuestoComponent implements OnInit {
   }
 
   async cargaInicial() {
-    this.mensajeSpinner = 'Cargando Periodos'
+    (this as any).mensajeSpinner = 'Cargando Periodos'
     this.periodos = await this.apiSrv.getPeriodos();
     
-    this.mensajeSpinner = 'Cargando Programas'
+    (this as any).mensajeSpinner = 'Cargando Programas'
     this.programas = await this.apiSrv.getProgramas();
     this.programas.map((programa: any) => Object.assign(programa, { label: `${programa.descripcion}. ${programa.valor}` }))
     
-    this.mensajeSpinner = 'Cargando Departamentos'
+    (this as any).mensajeSpinner = 'Cargando Departamentos'
     this.departamentos = await this.apiSrv.getDepartamentos();
     this.departamentos.map((departamento: any) => Object.assign(departamento, { label: `${departamento.descripcion}. ${departamento.valor}`}))
     
-    this.mensajeSpinner = 'Cargando Catalogos'
+    (this as any).mensajeSpinner = 'Cargando Catalogos'
     let response: any = await this.apiSrv.getCatalogo({params: "'PLA_TIPO_PRESUPUESTO','PLA_FUENTE_FI'"})
     this.cmb_tipo_presupuesto = response.PLA_TIPO_PRESUPUESTO
     this.cmb_fuente_financiamiento = response.PLA_FUENTE_FI
@@ -191,7 +191,7 @@ export class PresupuestoComponent implements OnInit {
   async handleClickBuscar() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Bienes'
+      (this as any).mensajeSpinner = 'Cargando Bienes'
       this.bienes = await this.apiSrv.getBienes({periodo: this.periodoSelected, departamento: this.departamentoObjectSelected.id_catalogo});
       this.bienes.map((bien: any) => Object.assign(bien, { 
         fondosBidDisabled: bien.fondos_bid == 0,
@@ -230,7 +230,7 @@ export class PresupuestoComponent implements OnInit {
   async handleClickGuardar() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Asignando Partidas Presupuestarias'
+      (this as any).mensajeSpinner = 'Asignando Partidas Presupuestarias'
       let response = await this.apiSrv.setPartidas({bienes: this.bienes})
       console.log(response)
 
@@ -244,7 +244,7 @@ export class PresupuestoComponent implements OnInit {
   }
 
   /* cargaCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos'
+    (this as any).mensajeSpinner = 'Cargando Catalogos'
     let data = {
       params: "'PLA_PROGRAMA','PLA_DEPARTAMENTO','PLA_COD_PRESUP','PLA_TIPO_PRESUPUESTO','PLA_AFIRMACION','PLA_FUENTE_FI'"
     }
@@ -288,7 +288,7 @@ export class PresupuestoComponent implements OnInit {
   } */
 
   /* selectProg(event) {
-    this.mensajeSpinner = 'Filtrando Departamentos'
+    (this as any).mensajeSpinner = 'Filtrando Departamentos'
     this.lcargando.ctlSpinner(true)
     this.deptProg = this.departamentos.filter(d => d.programa == event)
     this.departamento = 0
@@ -298,7 +298,7 @@ export class PresupuestoComponent implements OnInit {
 
   /* selectDept(event) {
     // this.attrDept = this.atribuciones.filter(a => a.departamento == event)
-    this.mensajeSpinner = 'Cargando Bienes y Servicios'
+    (this as any).mensajeSpinner = 'Cargando Bienes y Servicios'
     this.bienesAttr = []
 
     let data = {
@@ -353,7 +353,7 @@ export class PresupuestoComponent implements OnInit {
       return
     }
 
-    this.mensajeSpinner = 'Almacenando cambios'
+    (this as any).mensajeSpinner = 'Almacenando cambios'
     let data = {
       bienes: this.bienesAttr
     }

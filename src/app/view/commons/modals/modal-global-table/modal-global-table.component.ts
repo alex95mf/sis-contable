@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ["./modal-global-table.component.scss"],
 })
 export class ModalGlobalTableComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 

@@ -21,7 +21,7 @@ standalone: false,
 })
 export class QuotesComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('printCDI') printCDI: ElementRef;
 

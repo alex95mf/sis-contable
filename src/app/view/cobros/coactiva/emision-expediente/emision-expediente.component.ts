@@ -196,7 +196,7 @@ export class EmisionExpedienteComponent implements OnInit {
       id_rol: this.dataUser.id_rol,
     };
 
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
     this.commonServices.getPermisionsGlobas(params).subscribe(
       (res) => {
@@ -219,7 +219,7 @@ export class EmisionExpedienteComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando Catalogs";
+    (this as any).mensajeSpinner = "Cargando Catalogs";
     this.apiSrv.getCatalogs({params: "'COB_TIPO_GESTION','CAT_SECTOR','REN_MERCADO'"}).subscribe(
       (res: any) => {
         // console.log(res.data);
@@ -247,7 +247,7 @@ export class EmisionExpedienteComponent implements OnInit {
   }
 
   cargarConceptos() {
-    this.mensajeSpinner = 'Cargando Conceptos'
+    (this as any).mensajeSpinner = 'Cargando Conceptos'
     this.apiSrv.getConceptos().subscribe(
       (res: any) => {
         res.data.forEach(e => {
@@ -267,7 +267,7 @@ export class EmisionExpedienteComponent implements OnInit {
   }
 
   cargarLiquidaciones(){
-    this.mensajeSpinner = "Cargando listado de expedientes...";
+    (this as any).mensajeSpinner = "Cargando listado de expedientes...";
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getNotificacionCobro({params: {tipo:"GESTION", filter: this.filter, paginate: this.paginate } }).subscribe(
       (res: any) => {
@@ -323,7 +323,7 @@ export class EmisionExpedienteComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = 'Generando Expedientes'
+        (this as any).mensajeSpinner = 'Generando Expedientes'
         this.lcargando.ctlSpinner(true)
         this.apiSrv.generarExpedientes({ titulos: process, fecha_emision: this.fecha_emision }).subscribe(
           (res: any) => {

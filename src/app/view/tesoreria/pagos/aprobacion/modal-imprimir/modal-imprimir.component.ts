@@ -16,7 +16,7 @@ standalone: false,
   styleUrls: ['./modal-imprimir.component.scss']
 })
 export class ModalImprimirComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -367,7 +367,7 @@ export class ModalImprimirComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
       }).then((result) => {
           if (result.isConfirmed) {
-              this.mensajeSpinner = "Gestionando Orden de Pago...";
+              (this as any).mensajeSpinner = "Gestionando Orden de Pago...";
               this.lcargando.ctlSpinner(true);
   
               let data = {

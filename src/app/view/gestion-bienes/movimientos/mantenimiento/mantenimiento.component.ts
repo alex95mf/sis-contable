@@ -19,7 +19,7 @@ standalone: false,
 })
 export class MantenimientoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   dataProducto: any = []
   vmButtons: any =[]
   codigoGrupo: any;
@@ -231,7 +231,7 @@ export class MantenimientoComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result)=>{
       if(result.isConfirmed){
-        this.mensajeSpinner = 'Guardando...';
+        (this as any).mensajeSpinner = 'Guardando...';
         this.lcargando.ctlSpinner(true);
         let data = {
           documento :this.documento
@@ -339,7 +339,7 @@ export class MantenimientoComponent implements OnInit {
       confirmButtonColor: '#4DBD74'
     }).then((result)=>{
       if(result.isConfirmed){
-        this.mensajeSpinner = 'Guardando...';
+        (this as any).mensajeSpinner = 'Guardando...';
         this.lcargando.ctlSpinner(true);
         let data = {
           id:this.id,
@@ -425,7 +425,7 @@ export class MantenimientoComponent implements OnInit {
       confirmButtonColor: '#4DBD74'
     }).then((result)=>{
       if(result.isConfirmed){
-        this.mensajeSpinner = 'Guardando...';
+        (this as any).mensajeSpinner = 'Guardando...';
         this.lcargando.ctlSpinner(true);
         this.estado = 'C'
         let data = {

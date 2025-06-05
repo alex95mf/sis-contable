@@ -16,7 +16,7 @@ standalone: false,
 })
 export class ModalCedulaPresupuestariaComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @Input() proveedor: any;
@@ -90,7 +90,7 @@ export class ModalCedulaPresupuestariaComponent implements OnInit {
 
 
   cargarCedulaPreGastos(flag: boolean = false){
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     
     if (flag) this.paginate.page = 1

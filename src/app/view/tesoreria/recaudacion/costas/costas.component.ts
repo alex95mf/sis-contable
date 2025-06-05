@@ -34,7 +34,7 @@ export class CostasComponent implements OnInit {
   @ViewChild("print") print!: ElementRef;
 
   fTitle = "Costas";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -449,7 +449,7 @@ export class CostasComponent implements OnInit {
   } */
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -499,7 +499,7 @@ export class CostasComponent implements OnInit {
 
   buscarJuicios(){
 
-    this.mensajeSpinner = 'Cargando Juicios...';
+    (this as any).mensajeSpinner = 'Cargando Juicios...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -522,7 +522,7 @@ export class CostasComponent implements OnInit {
 
   selectJuicioHandler(event: any) {
     console.log(event)
-    this.mensajeSpinner = 'Cargando Costas...';
+    (this as any).mensajeSpinner = 'Cargando Costas...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -581,7 +581,7 @@ export class CostasComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos...';
+    (this as any).mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -644,7 +644,7 @@ export class CostasComponent implements OnInit {
 
   // no se usa ya que la sesion ahora maneja toda la caja activa, no solo el id
   /* getCajaActiva() {
-    this.mensajeSpinner = 'Obteniendo Caja Activa...';
+    (this as any).mensajeSpinner = 'Obteniendo Caja Activa...';
     let id = this.cajaActiva.id_caja;
 
     // funcion necesario solo porque en la sesion se maneja solo el id no toda la info de la caja activa
@@ -669,7 +669,7 @@ export class CostasComponent implements OnInit {
   /* verificarCaja() {
     // funcion para revisar si la caja seleccionada ya ha sido abierta ese dia
 
-    this.mensajeSpinner = 'Verificando si la caja está activa...';
+    (this as any).mensajeSpinner = 'Verificando si la caja está activa...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1113,7 +1113,7 @@ export class CostasComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          this.mensajeSpinner = "Verificando período contable";
+          (this as any).mensajeSpinner = "Verificando período contable";
           this.lcargando.ctlSpinner(true);
           let data = {
             "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -1123,7 +1123,7 @@ export class CostasComponent implements OnInit {
 
             /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.mensajeSpinner = 'Generando Documento de cobro...';
+              (this as any).mensajeSpinner = 'Generando Documento de cobro...';
               this.lcargando.ctlSpinner(true);
 
               if(this.quitarDeudas){
@@ -1262,7 +1262,7 @@ export class CostasComponent implements OnInit {
       if (result.isConfirmed) {
 
 
-        this.mensajeSpinner = "Verificando período contable";
+        (this as any).mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let data = {
           "anio": Number(moment(this.documento.fecha).format('YYYY')),
@@ -1277,7 +1277,7 @@ export class CostasComponent implements OnInit {
             }
             console.log(this.documento);
 
-            this.mensajeSpinner = "Anulando Documento...";
+            (this as any).mensajeSpinner = "Anulando Documento...";
             this.lcargando.ctlSpinner(true);
             this.apiSrv.anularCosta(data2).subscribe(
               (res) => {
@@ -1409,7 +1409,7 @@ export class CostasComponent implements OnInit {
   }
 
   async validacionCaja() {
-    this.mensajeSpinner = 'Validando Estado de Caja'
+    (this as any).mensajeSpinner = 'Validando Estado de Caja'
     this.lcargando.ctlSpinner(true)
     this.cajaActiva = JSON.parse(localStorage.getItem('activeCaja'))
 

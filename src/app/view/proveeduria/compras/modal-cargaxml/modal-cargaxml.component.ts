@@ -17,7 +17,7 @@ export class ModalCargaxmlComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Input() comprobante: any;
   vmButtons: Array<Botonera> = [];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   proveedor: any = {};
   factura: any = {};
@@ -139,7 +139,7 @@ export class ModalCargaxmlComponent implements OnInit {
   async confirmar(ruc: string) {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Confirmando Proveedor...'
+      (this as any).mensajeSpinner = 'Confirmando Proveedor...'
       // Confirmar si proveedor existe en la base de datos
       let response = await this.apiService.consultarProveedor({ ruc });
       console.log(response)
@@ -167,7 +167,7 @@ export class ModalCargaxmlComponent implements OnInit {
           }
 
           this.lcargando.ctlSpinner(true)
-          this.mensajeSpinner = 'Registrando Proveedor...'
+          (this as any).mensajeSpinner = 'Registrando Proveedor...'
           response = await this.apiService.registrarProveedor({ proveedor });
           console.log(response)
 

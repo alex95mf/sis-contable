@@ -23,7 +23,7 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
   lcargando: CcSpinerProcesarComponent;
   botonera: any = [];
   fTitle = "Nuevo Sueldo";
-  mensajeSpinner: string = "Cargando...";
+
   sueldos: any = [];
   dataUser: any;
   permissions: any;
@@ -247,7 +247,7 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
 
   findReglaPresupuestaria(){
 
-    this.mensajeSpinner = "Buscando regla presupuestaria...";
+    (this as any).mensajeSpinner = "Buscando regla presupuestaria...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -315,7 +315,7 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
       confirmButtonColor: "#4DBD74",
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando cuentas complementarias...";
+        (this as any).mensajeSpinner = "Guardando cuentas complementarias...";
         this.lcargando.ctlSpinner(true);
 
         let data = {
@@ -383,7 +383,7 @@ export class ModalReglaPresupuestariaComponent implements OnInit {
       confirmButtonColor: "#4DBD74",
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando cuentas complementarias...";
+        (this as any).mensajeSpinner = "Guardando cuentas complementarias...";
         this.lcargando.ctlSpinner(true);
         let data = {
           id_regla_relacion: this.id_regla_relacion,

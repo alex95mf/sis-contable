@@ -35,7 +35,7 @@ export class ProductosComponent implements OnInit {
   actions:any = {btnSave:true, btnUpdated:false};
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
 
@@ -127,7 +127,7 @@ export class ProductosComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
     };
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     this.prvSrv.getProductProve().subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -162,7 +162,7 @@ export class ProductosComponent implements OnInit {
     let data = {
       codigo: this.randomGenerate
     }
-    this.mensajeSpinner = "Cargando datos...";
+    (this as any).mensajeSpinner = "Cargando datos...";
     this.lcargando.ctlSpinner(true);
     this.prvSrv.validateSecuencial(data).subscribe(res => {
       this.producto.codigo = this.producto.claseSelect.substring(0, 3) + "-" + code;
@@ -237,7 +237,7 @@ export class ProductosComponent implements OnInit {
     dt['ip'] = this.commonServices.getIpAddress(),
     dt['id_controlador'] = myVarGlobals.fProveeduriaProductos
     dt['accion'] = `Eliminación de producto ${this.producto.nombre}`;
-    this.mensajeSpinner = "Eliminando...";
+    (this as any).mensajeSpinner = "Eliminando...";
     this.lcargando.ctlSpinner(true);
     this.prvSrv.deleteProduct(dt).subscribe(res =>{
       this.lcargando.ctlSpinner(false);
@@ -263,7 +263,7 @@ export class ProductosComponent implements OnInit {
     this.producto['ip'] = this.commonServices.getIpAddress(),
     this.producto['id_controlador'] = myVarGlobals.fProveeduriaProductos
     this.producto['accion'] = `Creación de nuevo suministro de proveeeduria ${this.producto.nombre}`;
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     this.prvSrv.saveProduct(this.producto).subscribe(res =>{
       this.lcargando.ctlSpinner(false);
@@ -280,7 +280,7 @@ export class ProductosComponent implements OnInit {
     this.producto['ip'] = this.commonServices.getIpAddress(),
     this.producto['id_controlador'] = myVarGlobals.fProveeduriaProductos
     this.producto['accion'] = `Actualización de suministro de proveeeduria ${this.producto.nombre}`;
-    this.mensajeSpinner = "Modificando...";
+    (this as any).mensajeSpinner = "Modificando...";
     this.lcargando.ctlSpinner(true);
     this.prvSrv.updateProduct(this.producto).subscribe(res =>{
       this.lcargando.ctlSpinner(false);

@@ -16,7 +16,7 @@ standalone: false,
   styleUrls: ['./modal-gestion.component.scss']
 })
 export class ModalGestionComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -314,7 +314,7 @@ export class ModalGestionComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
       }).then((result) => {
           if (result.isConfirmed) {
-              this.mensajeSpinner = "Gestionando Orden de Pago...";
+              (this as any).mensajeSpinner = "Gestionando Orden de Pago...";
               this.lcargando.ctlSpinner(true);
   
               let data = {
@@ -381,7 +381,7 @@ export class ModalGestionComponent implements OnInit {
 
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
-      this.mensajeSpinner = 'Anulando Aprobación'
+      (this as any).mensajeSpinner = 'Anulando Aprobación'
       try {
         const response = await this.aprobacionSrv.anularAprobacion({orden: this.data})
         console.log(response)

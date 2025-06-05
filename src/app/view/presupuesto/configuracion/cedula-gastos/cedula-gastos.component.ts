@@ -17,10 +17,10 @@ standalone: false,
   styleUrls: ['./cedula-gastos.component.scss']
 })
 export class AsignacionIngresosComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  
+
   fTitle: string = "Cedula de Gastos";
   errorcodigos: any;
   vmButtons: Botonera[] = [];
@@ -147,7 +147,7 @@ this.errorcodigos = false;
     return true;
   }
 
-  onlyNumberExcel(number): boolean {/* 
+  onlyNumberExcel(number): boolean {/*
     return number !== '' && !isNaN(number); */
     return number !== null && number !== undefined && number !== '' && !isNaN(number);
   }
@@ -188,7 +188,7 @@ this.errorcodigos = false;
     let periodo4 = 'PARTIDA PRESUPUESTARIA';
     let provisional = 'CANTIDAD';
    let codigoPrograma = "CODIGO PROGRAMA";
-   let codigoTipo = "CODIGO DEPARTAMENTO"; 
+   let codigoTipo = "CODIGO DEPARTAMENTO";
    //let codigoPP ="CODIGO PP";
     let unidaddemedida = 'UNIDAD DE MEDIDA';
     let preciounitario = 'PRECIO UNITARIO';
@@ -199,16 +199,16 @@ this.errorcodigos = false;
 
     this.plantillaExcel = [];
     for(let i=0; i<2; i++){
-      
+
       let data = {};
       data[numeracion]= i+1;
       data[partida] = '(C0-C0-C0)';
       data[denominacion] = 'DEPARTAMENTO';
       data[codigoPrograma] = "0000"
-    
+
       data[periodo1] = 'PROGRAMA';
       data[codigoTipo] ="00"
-     
+
 
 
       data[periodo2] = 'TIPO NOMINA';
@@ -220,7 +220,7 @@ this.errorcodigos = false;
     //  data[codigoPP] = 0;
       data[periodo4] = 0;
       data[provisional] = 0;
-    
+
       data[unidaddemedida]='UNIDAD';
       data[preciounitario]=0;
       data[cuentasporpagar]=0;
@@ -242,7 +242,7 @@ this.errorcodigos = false;
       totalpresupuesto];
 
     this.exportAsXLSX(this.plantillaExcel ,'Cedula de gastos '+this.periodo, {header: this.titlesPLANTILLA});
-    
+
   }
 
   exportAsXLSX(body, title, header) {
@@ -262,7 +262,7 @@ this.errorcodigos = false;
     let semestre2 = 'SUBGRUPO';
     let codigoPrograma = 'CODIGO PROGRAMA';
     let codigoTipo = 'CODIGO DEPARTAMENTO';
-    
+
 //   let codigoPP ="CODIGO PP";
     let periodo4 = 'PARTIDA PRESUPUESTARIA';
     let provisional = 'CANTIDAD';
@@ -272,7 +272,7 @@ this.errorcodigos = false;
     let preciounitario = 'PRECIO UNITARIO';
     let cuentasporpagar = 'CUENTAS POR PAGAR';
     let nominayhonorarios = 'NOMINA Y HONORARIOS';
-    let totalpresupuesto = 'TOTAL PRESUPUESTO';/* 
+    let totalpresupuesto = 'TOTAL PRESUPUESTO';/*
     let partida = 'PARTIDA';
     let denominacion = 'DENOMINACIÓN';
     let periodo1 = ''+(+this.periodo - 4);
@@ -296,11 +296,11 @@ this.errorcodigos = false;
     let copy = JSON.parse(JSON.stringify(this.dataExcel));
 console.log("copu",copy);
     copy.forEach(e => {
-     
+
       e[partida] = e.partida;
       e[codigoPrograma] = e.codigoprograma;
       e[denominacion] = e.denominacion;
-     
+
       e[codigoTipo] = e.codigotipo;
       e[periodo1] = e.periodo1;
       e[periodo2] = e.periodo2;
@@ -309,24 +309,24 @@ console.log("copu",copy);
       e[act_periodo] = e.act_periodo;
       /* e[codigoPrograma] = e.codigoPrograma;
       e[codigoTipo] = e.codigoTipo; */
-     
-      
+
+
       e[semestre1] = e.semestre1;
       e[semestre2] = e.semestre2;
    //   e[codigoPP] = e.codigoPP;
       e[periodo4] = e.periodo4;
       e[provisional] = e.provisional;
-    
+
       e[unidaddemedida] = e.unidaddemedida;
       e[preciounitario] = e.preciounitario;
       e[cuentasporpagar] = e.cuentasporpagar;
       e[nominayhonorarios] = e.nominayhonorarios;
       e[totalpresupuesto] = e.totalpresupuesto;
-      
-      
-      
-      
-      
+
+
+
+
+
       delete e.partida;
       delete e.denominacion;
       delete e.periodo2;
@@ -340,14 +340,14 @@ console.log("copu",copy);
       delete e.semestre2;
       delete e.periodo4;
       delete e.provisional;
-     
+
       delete e.unidaddemedida;
       delete e.preciounitario;
       delete e.cuentasporpagar;
       delete e.nominayhonorarios;
       delete e.totalpresupuesto;
     })
-    
+
     /*  e[definitivo] = e.definitivo;
       e[observaciones] = e.observaciones; delete e.definitivo;definitivo, observaciones,
       delete e.observaciones;*/
@@ -359,7 +359,7 @@ console.log("copu",copy);
     this.exportAsXLSX(copy, 'Cedula de Gastos '+this.periodo, {header: this.titles});
   }
 
-  
+
   metodoGlobal(event) {
     switch (event.items.boton.texto) {
       case "GUARDAR":
@@ -386,8 +386,8 @@ console.log("copu",copy);
           cancelButtonColor: '#F86C6B',
           confirmButtonColor: '#4DBD74',
         }).then((result) => {
-          if (result.isConfirmed) {            
-            this.eliminarIngresos(); 
+          if (result.isConfirmed) {
+            this.eliminarIngresos();
           }
         });
         break;
@@ -437,8 +437,8 @@ console.log("copu",copy);
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-      if (result.isConfirmed) {            
-        this.checkPeriodo(); 
+      if (result.isConfirmed) {
+        this.checkPeriodo();
       }
     });
 
@@ -447,11 +447,11 @@ console.log("copu",copy);
 
   checkPeriodo() {
 
-    this.mensajeSpinner = 'Obteniendo Cedula de Gastos...';
+    (this as any).mensajeSpinner = 'Obteniendo Cedula de Gastos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -473,14 +473,14 @@ console.log("copu",copy);
             cancelButtonColor: '#F86C6B',
             confirmButtonColor: '#4DBD74',
           }).then((result) => {
-            if (result.isConfirmed) {            
-              this.restoreForm(); 
+            if (result.isConfirmed) {
+              this.restoreForm();
 
             }
             this.lcargando.ctlSpinner(false);
           });
         }
-     
+
       },
       err => {
         this.lcargando.ctlSpinner(false)
@@ -491,12 +491,12 @@ console.log("copu",copy);
 
   guardarIngresos() {
 
-    this.mensajeSpinner = 'Guardando Cedula de Gastos...';
+    (this as any).mensajeSpinner = 'Guardando Cedula de Gastos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
       data_excel: this.dataExcel,
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -523,11 +523,11 @@ console.log("copu",copy);
   }
 
   inspeccionarPeriodo() {
-    this.mensajeSpinner = 'Obteniendo Cedula de Gastos...';
+    (this as any).mensajeSpinner = 'Obteniendo Cedula de Gastos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -549,11 +549,11 @@ console.log("copu",copy);
   }
 
   eliminarIngresos() {
-    this.mensajeSpinner = 'Eliminando Cedula de Gastos...';
+    (this as any).mensajeSpinner = 'Eliminando Cedula de Gastos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -599,9 +599,9 @@ console.log("copu",copy);
     this.headersEnable = false;
     this.break = false;
   }
-  
+
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {
@@ -634,7 +634,7 @@ console.log("copu",copy);
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiSrv.cargarPeriodos();
       console.log(periodos)
       this.cmb_periodo = periodos
@@ -660,10 +660,10 @@ console.log("copu",copy);
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Generando Periodo'
+        (this as any).mensajeSpinner = 'Generando Periodo'
         let periodo = await this.apiSrv.generarPeriodoPresupuesto()
         console.log(periodo)
-        
+
         this.lcargando.ctlSpinner(false)
         Swal.fire(`Periodo ${periodo} generado`, '', 'success').then(() => this.cargaInicial())
       } catch (err) {
@@ -684,7 +684,7 @@ console.log("copu",copy);
       const data = reader.result;
       workBook = XLSX.read(data, { type: 'binary' });
       jsonData = workBook.SheetNames.reduce((initial, name) => {
-        
+
         const sheet = workBook.Sheets[name];
         initial[name] = XLSX.utils.sheet_to_json(sheet);
         // console.log('two',initial);
@@ -728,7 +728,7 @@ console.log("copu",copy);
     let codigoTipo = 'CODIGO DEPARTAMENTO';
    // let codigoPP ="CODIGO PP";
     let periodo4 = 'PARTIDA PRESUPUESTARIA';
-    let provisional = 'CANTIDAD';/* 
+    let provisional = 'CANTIDAD';/*
     let definitivo = 'UNIDAD DE MEDIDA';
     let observaciones = 'PRECIO UNITARIO';
      */let unidaddemedida = 'UNIDAD DE MEDIDA';
@@ -738,10 +738,10 @@ console.log("copu",copy);
     let totalpresupuesto = 'TOTAL PRESUPUESTO';
     let existecodigoprograma = 'existecodigoprograma';
     let existecodigotipo = 'existecodigotipo';
-    
-    
-    
-    
+
+
+
+
     console.log(dataJson);
     if(dataJson['data']){
       let arr = dataJson['data'];
@@ -765,7 +765,7 @@ console.log("copu",copy);
           existecodigoprograma:this.existeEnAr(2,e[codigoPrograma]),// !!this.programas.find(p => p.descripcion == e[codigoPrograma]),
           codigotipo: this.toStringin(e[codigoTipo])/* ??this.notData() */,
           existecodigotipo:this.existeEnAr(3,e[codigoTipo]),// !!this.tiposNominas.find(p => p.descripcion == e[denominacion]),
-          
+
           unidaddemedida: e[unidaddemedida]??this.notData(),
           preciounitario: this.onlyNumberExcel(e[preciounitario]) ? e[preciounitario] : this.notData(),
           cuentasporpagar: e[cuentasporpagar]??this.notData(),
@@ -776,7 +776,7 @@ console.log("copu",copy);
     /*   if(data.tienecodigoPP || data.existecodigoprograma || data.preciounitario)  {
         this.vmButtons[0].habilitar = false;} */
       })
-      this.titles =  [partida, codigoTipo,denominacion, 
+      this.titles =  [partida, codigoTipo,denominacion,
         codigoPrograma, periodo1, periodo2, periodo3,ant_periodo,act_periodo, semestre1, semestre2, periodo4, provisional,unidaddemedida,preciounitario,cuentasporpagar,nominayhonorarios,totalpresupuesto];
       if(this.break){
         this.dataExcel = [];
@@ -818,9 +818,9 @@ existeEnAr(op,e){
       this.errorcodigos = true;
       this.erCodPar= true;
       return false;
-     
-     
-     
+
+
+
   }
   return true;
   return this.tiposCatalogos.some(p => p.codigo == e)
@@ -831,7 +831,7 @@ existeEnAr(op,e){
       this.erCodPro= true;
       return false;
   }return true;
-  
+
     return this.programas.some(p => p.descripcion == e)
   }
   if(op== 3){
@@ -840,7 +840,7 @@ existeEnAr(op,e){
       this.erCodPre= true;
       return false;
   }  return true;
-    
+
     return this.tiposNominas.some(p => p.descripcion == e)
   }
 }
@@ -861,9 +861,9 @@ validarPrograma(codeIn,tipoConsulta){
         } else{
           return new String(codeIn);
         }
-        
+
         // Código existe, iterar programas...
-        
+
       }
     );
 }
@@ -887,7 +887,7 @@ obtenerPrograma(){
         this.programas = res;
        console.log("this.programas",this.programas);
        this.lcargando.ctlSpinner(false);
-        
+
       }
     );
 }
@@ -915,7 +915,7 @@ searchgetCatalogosPresupuestoJ(){
       res => {
         console.log("tiposCatalogos", this.tiposCatalogos);
         this.tiposCatalogos = res;
-      
+
        this.lcargando.ctlSpinner(false);
       }
     );
@@ -934,9 +934,9 @@ validarTipoNomina(codeIn){
         }else{
           return new String(codeIn);
         }
-        
+
         // Código existe, iterar programas...
-        
+
       }
     );
 }
@@ -954,7 +954,7 @@ validarTipoNomina(codeIn){
     let periodo4 = 'partidapresupuestaria';
     let codigoPrograma = "codigoprograma";
     let codigoTipo = "codigotipo";
-   
+
     //let codigoPP ="codigopresupuesto";
     let provisional = 'cantidad';
     let definitivo = 'unidadmedida';
@@ -964,8 +964,8 @@ validarTipoNomina(codeIn){
     let cuentasporpagar = 'cuentasporpagar';
     let nominayhonorarios = 'nominahonorarios';
     let totalpresupuesto = 'totalpresupuesto';
-    
-    
+
+
     let teLpartida = 'CUATRIMESTRES';
     let teLdenominacion = 'DEPARTAMENTO';
     let teLperiodo1 = 'PROGRAMA';
@@ -977,7 +977,7 @@ validarTipoNomina(codeIn){
     let teLcodigoTipo = "CODIGO DEPARTAMENTO";
     let teLsemestre1 = 'GRUPO';
     let teLsemestre2 = 'SUBGRUPO';
-    
+
    //let teLcodigoPP ="CODIGO PP";
     let teLperiodo4 = 'PARTIDA PRESUPUESTARIA';
     let teLprovisional = 'CANTIDAD';
@@ -988,8 +988,8 @@ validarTipoNomina(codeIn){
     let teLcuentasporpagar = 'CUENTAS POR PAGAR';
     let teLnominayhonorarios = 'NOMINA Y HONORARIOS';
     let teLtotalpresupuesto = 'TOTAL PRESUPUESTO';
-    
-    /* 
+
+    /*
     let partida = 'CUATRIMESTRES';
     let denominacion = 'DEPARTAMENTO';
     let periodo1 = 'PROGRAMA';
@@ -1037,7 +1037,7 @@ validarTipoNomina(codeIn){
     });
   /*     definitivo: e[definitivo]??this.notData(),
           observaciones: e[observaciones]??'', */
-/* 
+/*
     partida: e['partida']??'',
     denominacion: e['denominacion']??'',
     periodo1: e['periodo1']??0,
@@ -1049,8 +1049,8 @@ validarTipoNomina(codeIn){
     provisional: e['provisional']??0,
     definitivo: e['definitivo']??0,
     observaciones: e['observaciones']??'', */
-    
-    /*  
+
+    /*
     let partida = 'PARTIDA';
     let denominacion = 'DENOMINACIÓN';
     let periodo1 = ''+(+this.periodo - 4);
@@ -1077,7 +1077,7 @@ validarTipoNomina(codeIn){
   }
 
   agregaPeriodo() {
-   
+
     if(this.periodo<2000 || this.periodo>2050){
       this.toastr.warning('Ingrese un periodo valido ');
       this.periodo = undefined;
@@ -1089,7 +1089,7 @@ validarTipoNomina(codeIn){
   }
 
   getDataPDF(){
-    window.open(environment.ReportingUrl +"rpt_pre_asignacion_ingreso.pdf?&j_username="  + environment.UserReporting 
+    window.open(environment.ReportingUrl +"rpt_pre_asignacion_ingreso.pdf?&j_username="  + environment.UserReporting
     + "&j_password=" + environment.PasswordReporting+"&periodo=" + this.periodo,'_blank')
 
   }

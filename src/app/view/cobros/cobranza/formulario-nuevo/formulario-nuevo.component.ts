@@ -24,7 +24,7 @@ export class FormularioNuevoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false}) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
   fTitle: string = "Gestión de Cobranzas"
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   dataUser: any;
   permissions: any;
   vmButtons: any;
@@ -155,7 +155,7 @@ export class FormularioNuevoComponent implements OnInit {
 
   fillCatalog() {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando Catalogs";
+    (this as any).mensajeSpinner = "Cargando Catalogs";
     this.apiSrv.getCatalogs({params: "'COB_TIPO_GESTION','CAT_SECTOR','REN_MERCADO'"}).subscribe(
       (res: any) => {
         // console.log(res.data);
@@ -182,7 +182,7 @@ export class FormularioNuevoComponent implements OnInit {
   }
 
   cargarConceptos() {
-    this.mensajeSpinner = 'Cargando Conceptos'
+    (this as any).mensajeSpinner = 'Cargando Conceptos'
     this.apiSrv.getConceptos().subscribe(
       (res: any) => {
         res.data.forEach(e => {
@@ -211,7 +211,7 @@ export class FormularioNuevoComponent implements OnInit {
       return;
     }
 
-    this.mensajeSpinner = "Cargando Liquidaciones...";
+    (this as any).mensajeSpinner = "Cargando Liquidaciones...";
     // this.lcargando.ctlSpinner(true);
     this.apiSrv.getLiqByContribuyente({params: { filter: this.filter, paginate: this.paginate } }).subscribe(
       (res: any) => {
@@ -255,7 +255,7 @@ export class FormularioNuevoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = 'Emitiendo Notificaciones'
+        (this as any).mensajeSpinner = 'Emitiendo Notificaciones'
         this.lcargando.ctlSpinner(true)
 
         this.apiSrv.generarNotificaciones({liquidaciones: procesados, fecha_emision: this.fecha_emision}).subscribe(
@@ -286,7 +286,7 @@ export class FormularioNuevoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = 'Emitiendo Notificaciones'
+        (this as any).mensajeSpinner = 'Emitiendo Notificaciones'
         this.lcargando.ctlSpinner(true)
         this.apiSrv.generarNotificacionesMasivo({filter: this.filter, fecha_emision: this.fecha_emision}).subscribe(
           (res: any) => {

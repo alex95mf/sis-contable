@@ -17,7 +17,7 @@ standalone: false,
 })
 export class ReasignarUsuarioComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   validaciones = new ValidacionesFactory;
@@ -111,7 +111,7 @@ export class ReasignarUsuarioComponent implements OnInit {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
    // this.empresLogo = this.dataUser.logoEmpresa;
@@ -154,7 +154,7 @@ export class ReasignarUsuarioComponent implements OnInit {
   }
   cargarUsuarios(){
     // console.log('ejecuto');
-     this.mensajeSpinner = "Cargando lista de Usuarios...";
+     (this as any).mensajeSpinner = "Cargando lista de Usuarios...";
      this.lcargando.ctlSpinner(true);
      this.bandejaTraSrv.getUsuariosReasignar({}).subscribe(
        (res)=>{
@@ -186,7 +186,7 @@ export class ReasignarUsuarioComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
       }).then((result) => {
           if (result.isConfirmed) {
-              this.mensajeSpinner = "Reasignando Ticket...";
+              (this as any).mensajeSpinner = "Reasignando Ticket...";
               this.lcargando.ctlSpinner(true);
   
               let data = {

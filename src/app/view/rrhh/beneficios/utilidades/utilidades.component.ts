@@ -13,7 +13,7 @@ standalone: false,
 export class UtilidadesComponent implements OnInit {
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any;
   dataUser: any;

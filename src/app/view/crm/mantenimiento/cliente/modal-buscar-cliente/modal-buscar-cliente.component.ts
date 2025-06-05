@@ -16,7 +16,7 @@ standalone: false,
   styleUrls: ['./modal-buscar-cliente.component.scss']
 })
 export class ModalBuscarClienteComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator : MatPaginator
@@ -100,7 +100,7 @@ export class ModalBuscarClienteComponent implements OnInit {
 
 
 
-      this.mensajeSpinner = 'Cargando Productos'
+      (this as any).mensajeSpinner = 'Cargando Productos'
       let clientes =await this.clienteSrv.getClientes({filter: this.filter, paginate : this.paginate});
 this.lista_clientes= clientes.data;
 this.paginate.length = clientes.total;
@@ -159,7 +159,7 @@ this.paginate.length = clientes.total;
     this.CargarClientes();
   }
   async CargarClientes(){
-    this.mensajeSpinner = 'Cargando Productos';
+    (this as any).mensajeSpinner = 'Cargando Productos';
     this.lcargando.ctlSpinner(true)
     try {
 

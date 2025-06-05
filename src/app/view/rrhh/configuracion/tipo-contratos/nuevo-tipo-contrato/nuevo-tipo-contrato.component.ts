@@ -20,7 +20,7 @@ standalone: false,
 })
 export class NuevoTipoContratoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+  
   dataUser: any;
   searchText: Subject<any> = new Subject<any>()
   searching: any = {
@@ -145,7 +145,7 @@ export class NuevoTipoContratoComponent implements OnInit {
   
   let cat_keyword= 'TCTP';
 
-  this.mensajeSpinner = "Cargando";
+  (this as any).mensajeSpinner = "Cargando";
   this.lcargando.ctlSpinner(true);
     this.apiSrv.getCatalogoTipoContrato(cat_keyword).subscribe(
      
@@ -216,7 +216,7 @@ export class NuevoTipoContratoComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Guardando Tipo Contrato...";
+        (this as any).mensajeSpinner = "Guardando Tipo Contrato...";
         this.lcargando.ctlSpinner(true);
 
         let data = {
@@ -284,7 +284,7 @@ export class NuevoTipoContratoComponent implements OnInit {
   //     confirmButtonColor: '#4DBD74',
   //   }).then((result) => {
   //     if (result.isConfirmed) {
-  //       this.mensajeSpinner = "Guardando área..."
+  //       (this as any).mensajeSpinner = "Guardando área..."
   //       this.lcargando.ctlSpinner(true);
 
   //       let data = {

@@ -110,7 +110,7 @@ export class ModalCodigoComprasComponent implements OnInit {
    */
   async getCodigoCompras() {
     this.resultados = []
-    this.mensajeSpinner = 'Obteniendo Codigos'
+    (this as any).mensajeSpinner = 'Obteniendo Codigos'
     this.lcargando.ctlSpinner(true)
 
     let response: any = await this.apiService.getCodigosCompras({params: {filter: this.filter, paginate: this.paginate}});

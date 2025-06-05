@@ -81,7 +81,7 @@ export class EmailDestinatarioComponent implements OnInit {
       component: myVarGlobals.fRenContrato
     }
 
-    this.mensajeSpinner = 'Enviando correo...'
+    (this as any).mensajeSpinner = 'Enviando correo...'
     this.lcargando.ctlSpinner(true)
     this.apiService.enviarCorreo(data).subscribe(
       res => {

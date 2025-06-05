@@ -17,10 +17,10 @@ standalone: false,
   styleUrls: ['./asignacion-ingresos.component.scss']
 })
 export class AsignacionIngresosComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  
+
   fTitle: string = "Asignación inicial de ingresos";
 
   vmButtons: Botonera[] = [];
@@ -32,7 +32,7 @@ export class AsignacionIngresosComponent implements OnInit {
   dataExcel: any = [];
 
   file: any;
-  
+
   periodo: any;
   yearDisabled = false;
   fileDisabled = true;
@@ -165,7 +165,7 @@ export class AsignacionIngresosComponent implements OnInit {
 
     this.plantillaExcel = [];
     for(let i=0; i<2; i++){
-      
+
       let data = {};
       data[partida] = i+1;
       data[denominacion] = 'Esto es una denominacion para partida '+(i+1);
@@ -186,7 +186,7 @@ export class AsignacionIngresosComponent implements OnInit {
     this.titles =  [partida, denominacion, periodo1, periodo2, periodo3, semestre1, semestre2, periodo4, provisional, definitivo, observaciones];
 
     this.exportAsXLSX(this.plantillaExcel ,'Asignacion inicial periodo '+this.periodo, {header: this.titles});
-    
+
   }
 
   exportAsXLSX(body, title, header) {
@@ -235,14 +235,14 @@ export class AsignacionIngresosComponent implements OnInit {
       delete e.definitivo;
       delete e.observaciones;
     })
-    
+
     this.titles =  [partida, denominacion, periodo1, periodo2, periodo3, semestre1, semestre2, periodo4, provisional, definitivo, observaciones];
     console.log(copy);
 
     this.exportAsXLSX(copy, 'Asignacion inicial periodo '+this.periodo, {header: this.titles});
   }
 
-  
+
   metodoGlobal(event) {
     switch (event.items.boton.texto) {
       case "GUARDAR":
@@ -269,8 +269,8 @@ export class AsignacionIngresosComponent implements OnInit {
           cancelButtonColor: '#F86C6B',
           confirmButtonColor: '#4DBD74',
         }).then((result) => {
-          if (result.isConfirmed) {            
-            this.eliminarIngresos(); 
+          if (result.isConfirmed) {
+            this.eliminarIngresos();
           }
         });
         break;
@@ -315,8 +315,8 @@ export class AsignacionIngresosComponent implements OnInit {
       cancelButtonColor: '#F86C6B',
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
-      if (result.isConfirmed) {            
-        this.checkPeriodo(); 
+      if (result.isConfirmed) {
+        this.checkPeriodo();
       }
     });
 
@@ -325,11 +325,11 @@ export class AsignacionIngresosComponent implements OnInit {
 
   checkPeriodo() {
 
-    this.mensajeSpinner = 'Obteniendo asignacion de ingresos...';
+    (this as any).mensajeSpinner = 'Obteniendo asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -351,8 +351,8 @@ export class AsignacionIngresosComponent implements OnInit {
             cancelButtonColor: '#F86C6B',
             confirmButtonColor: '#4DBD74',
           }).then((result) => {
-            if (result.isConfirmed) {            
-              this.restoreForm(); 
+            if (result.isConfirmed) {
+              this.restoreForm();
             }
           });
         }
@@ -367,12 +367,12 @@ export class AsignacionIngresosComponent implements OnInit {
 
   guardarIngresos() {
 
-    this.mensajeSpinner = 'Guardando asignacion de ingresos...';
+    (this as any).mensajeSpinner = 'Guardando asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
       data_excel: this.dataExcel,
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -399,11 +399,11 @@ export class AsignacionIngresosComponent implements OnInit {
   }
 
   inspeccionarPeriodo() {
-    this.mensajeSpinner = 'Obteniendo asignacion de ingresos...';
+    (this as any).mensajeSpinner = 'Obteniendo asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -425,11 +425,11 @@ export class AsignacionIngresosComponent implements OnInit {
   }
 
   eliminarIngresos() {
-    this.mensajeSpinner = 'Eliminando asignacion de ingresos...';
+    (this as any).mensajeSpinner = 'Eliminando asignacion de ingresos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
-      periodo: this.periodo      
+      periodo: this.periodo
     };
 
     console.log(data);
@@ -471,9 +471,9 @@ export class AsignacionIngresosComponent implements OnInit {
     this.headersEnable = false;
     this.break = false;
   }
-  
+
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {
@@ -506,7 +506,7 @@ export class AsignacionIngresosComponent implements OnInit {
   async cargaInicial() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Periodos'
+      (this as any).mensajeSpinner = 'Cargando Periodos'
       let periodos = await this.apiSrv.cargarPeriodos();
       console.log(periodos)
       this.cmb_periodo = periodos
@@ -532,10 +532,10 @@ export class AsignacionIngresosComponent implements OnInit {
     if (result.isConfirmed) {
       this.lcargando.ctlSpinner(true)
       try {
-        this.mensajeSpinner = 'Generando Periodo'
+        (this as any).mensajeSpinner = 'Generando Periodo'
         let periodo = await this.apiSrv.generarPeriodoPresupuesto()
         console.log(periodo)
-        
+
         this.lcargando.ctlSpinner(false)
         Swal.fire(`Periodo ${periodo} generado`, '', 'success').then(() => this.cargaInicial())
       } catch (err) {
@@ -556,7 +556,7 @@ export class AsignacionIngresosComponent implements OnInit {
       const data = reader.result;
       workBook = XLSX.read(data, { type: 'binary' });
       jsonData = workBook.SheetNames.reduce((initial, name) => {
-        
+
         const sheet = workBook.Sheets[name];
         initial[name] = XLSX.utils.sheet_to_json(sheet);
         // console.log('two',initial);
@@ -652,7 +652,7 @@ export class AsignacionIngresosComponent implements OnInit {
       }
       this.dataExcel.push(data);
     });
-    
+
     let partida = 'PARTIDA';
     let denominacion = 'DENOMINACIÓN';
     let periodo1 = ''+(+this.periodo - 4);
@@ -691,7 +691,7 @@ export class AsignacionIngresosComponent implements OnInit {
   }
 
   getDataPDF(){
-    window.open(environment.ReportingUrl +"rpt_pre_asignacion_ingreso.pdf?&j_username="  + environment.UserReporting 
+    window.open(environment.ReportingUrl +"rpt_pre_asignacion_ingreso.pdf?&j_username="  + environment.UserReporting
     + "&j_password=" + environment.PasswordReporting+"&periodo=" + this.periodo,'_blank')
 
   }

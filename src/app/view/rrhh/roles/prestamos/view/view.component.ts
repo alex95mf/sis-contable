@@ -43,7 +43,7 @@ export class ViewComponent implements OnInit {
  empresLogo: any;
 
  vmButtons:any = [];
- mensajeSpinner: string = "Cargando...";
+ 
 @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
    /*date*/

@@ -18,7 +18,7 @@ standalone: false,
 export class ConsultaMovimientosComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent; 
   fTitle: string = "Consulta de Movimientos";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   vmButtons: any[] = [];
   dataUser: any;
@@ -164,7 +164,7 @@ export class ConsultaMovimientosComponent implements OnInit {
   async cargaBodegas() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Bodegas'
+      (this as any).mensajeSpinner = 'Cargando Bodegas'
       let bodegas: Array<any> = await this.apiService.getBodegas();
       this.arrayBodega = bodegas
     
@@ -302,7 +302,7 @@ export class ConsultaMovimientosComponent implements OnInit {
   exportExcel() {
     let excelData = []
 
-    this.mensajeSpinner = 'Exportando Movimientos'
+    (this as any).mensajeSpinner = 'Exportando Movimientos'
     this.lcargando.ctlSpinner(true)
         
     this.dataReporte .forEach((e: any) => {

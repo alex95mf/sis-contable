@@ -17,7 +17,7 @@ export class ModalTarifasComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, {static: false})
   lcargando: CcSpinerProcesarComponent;
   fTitle = 'Listado de Tarifas por Concepto';
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   tarifas: any = [];
 
@@ -77,7 +77,7 @@ export class ModalTarifasComponent implements OnInit {
   }
 
   cargaTarifas() {
-    this.mensajeSpinner = 'Cargando Tarifas...';
+    (this as any).mensajeSpinner = 'Cargando Tarifas...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -135,7 +135,7 @@ export class ModalTarifasComponent implements OnInit {
 
   editTarifa(tarifa) {
     /** param: ID de Tarifa */
-    this.mensajeSpinner = 'Obteniendo Tarifa...'
+    (this as any).mensajeSpinner = 'Obteniendo Tarifa...'
     this.lcargando.ctlSpinner(true);
     this.apiService.getTarifaConceptoDetalle(tarifa).subscribe(
       res => {

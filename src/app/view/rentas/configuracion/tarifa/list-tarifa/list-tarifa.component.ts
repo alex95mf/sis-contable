@@ -65,7 +65,7 @@ export class ListTarifaComponent implements OnInit {
       },
     };
 
-    this.mensajeSpinner = 'Cargando Tarifas'
+    (this as any).mensajeSpinner = 'Cargando Tarifas'
     this.lcargando.ctlSpinner(true)
     this.apiService.getTarifas().subscribe(
       res => {
@@ -117,7 +117,7 @@ export class ListTarifaComponent implements OnInit {
 
   editTarifa(tarifa) {
     /** param: ID de Tarifa */
-    this.mensajeSpinner = 'Obteniendo Tarifa'
+    (this as any).mensajeSpinner = 'Obteniendo Tarifa'
     this.lcargando.ctlSpinner(true)
     this.apiService.getTarifaConceptoDetalle(tarifa).subscribe(
       res => {

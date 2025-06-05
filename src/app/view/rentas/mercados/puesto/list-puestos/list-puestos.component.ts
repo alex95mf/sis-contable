@@ -76,7 +76,7 @@ export class ListPuestosComponent implements OnInit {
       },
     };
 
-    this.mensajeSpinner = 'Cargando Puestos'
+    (this as any).mensajeSpinner = 'Cargando Puestos'
     this.lcargando.ctlSpinner(true)
     this.apiService.getPuestos().subscribe(
       res => {
@@ -115,7 +115,7 @@ export class ListPuestosComponent implements OnInit {
       cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.value) {
-        this.mensajeSpinner = 'Eliminando elemento';
+        (this as any).mensajeSpinner = 'Eliminando elemento';
         this.lcargando.ctlSpinner(true);
         this.apiService.deletePuesto({id_mercado_puesto: id}).subscribe(
           res => {

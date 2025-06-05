@@ -24,7 +24,7 @@ standalone: false,
 	styleUrls: ['./contable.component.scss']
 })
 export class ContableComponent implements OnInit {
-	mensajeSpinner: string = "Cargando...";
+	
 	@ViewChild(CcSpinerProcesarComponent, {
 		static: false
 	}) lcargando: CcSpinerProcesarComponent;

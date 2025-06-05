@@ -84,7 +84,7 @@ export class AnexosListUnoComponentDis implements OnInit {
     this.anexos = []
 
     this.lcargando.ctlSpinner(true)
-    this.mensajeSpinner = 'Cargando Anexos ...'
+    (this as any).mensajeSpinner = 'Cargando Anexos ...'
 
     let data = {
       module: 20,
@@ -214,7 +214,7 @@ UploadService(file, payload?: any, custom1?: any): void {
       ip: this.commonService.getIpAddress()
     }
 
-    // this.mensajeSpinner = 'Eliminando anexo'
+    // (this as any).mensajeSpinner = 'Eliminando anexo'
     // this.lcargando.ctlSpinner(true)
 
     this.apiService.deleteAnexo(data).subscribe(
@@ -264,7 +264,7 @@ UploadService(file, payload?: any, custom1?: any): void {
             ip: this.commonService.getIpAddress()
           }
           console.log(data)
-          this.mensajeSpinner = 'Eliminando anexo'
+          (this as any).mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true)
       
           this.apiService.deleteAnexo(data).subscribe(

@@ -14,7 +14,7 @@ standalone: false,
 })
 export class ModalTipoArchivoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: Botonera[] = []
 
   txt_tipo_archivo_nombre: string|null = null
@@ -63,7 +63,7 @@ export class ModalTipoArchivoComponent implements OnInit {
         break;
       case "GUARDAR":
         this.lcargando.ctlSpinner(true)
-        this.mensajeSpinner = 'Almacenando Tipo de Archivo'
+        (this as any).mensajeSpinner = 'Almacenando Tipo de Archivo'
         await this.createTipoArchivo()
         this.lcargando.ctlSpinner(false)
         break;

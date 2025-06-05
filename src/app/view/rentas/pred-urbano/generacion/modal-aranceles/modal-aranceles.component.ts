@@ -16,7 +16,7 @@ standalone: false,
   encapsulation: ViewEncapsulation.None
 })
 export class ModalArancelesComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -91,7 +91,7 @@ export class ModalArancelesComponent implements OnInit {
   }
 
   cargarAranceles() {
-    /*this.mensajeSpinner = "Cargando lista de Aranceles..."
+    /*(this as any).mensajeSpinner = "Cargando lista de Aranceles..."
     this.lcargando.ctlSpinner(true);
 
     let data = {

@@ -11,7 +11,7 @@ standalone: false,
   styleUrls: ['./concepto-det.component.scss']
 })
 export class ConceptoDetComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent,{ static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -59,7 +59,7 @@ export class ConceptoDetComponent implements OnInit {
      console.log(this.concepto);
     // this.detalles = this.concepto.detalles;
     // console.log(this.detalles);
-    this.mensajeSpinner = "Cargando detalles...";
+    (this as any).mensajeSpinner = "Cargando detalles...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

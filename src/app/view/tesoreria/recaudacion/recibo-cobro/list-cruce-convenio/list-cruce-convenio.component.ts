@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ListCruceConvenioComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -111,7 +111,7 @@ export class ListCruceConvenioComponent implements OnInit {
   }
 
   cargarDocumentos(){
-    this.mensajeSpinner = "Cargando listado de cruce convenios...";
+    (this as any).mensajeSpinner = "Cargando listado de cruce convenios...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

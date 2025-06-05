@@ -19,7 +19,7 @@ export class SubgrupoProductoComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+
   estadoList = [
     { value: "A", label: "ACTIVO" },
     { value: "I", label: "INACTIVO" },
@@ -164,7 +164,7 @@ export class SubgrupoProductoComponent implements OnInit {
   }
 
   cargarSubgrupos(){
-    this.mensajeSpinner = "Cargando";
+    (this as any).mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true);
     let data = {
       params: {
@@ -241,7 +241,7 @@ export class SubgrupoProductoComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        //this.mensajeSpinner = "Cargando...";
+        //(this as any).mensajeSpinner = "Cargando...";
         this.lcargando.ctlSpinner(true);
 
 
@@ -337,7 +337,7 @@ export class SubgrupoProductoComponent implements OnInit {
   }
 
   guardarEdition(){
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     console.log(this.subgrupo);
     let data = {

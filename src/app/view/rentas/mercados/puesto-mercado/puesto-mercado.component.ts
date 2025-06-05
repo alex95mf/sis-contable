@@ -23,7 +23,7 @@ export class PuestoMercadoComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   fTitle: string = "Puestos de Mercado";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   dataUser: any
   permissions: any;
   vmButtons: any[] = [];
@@ -144,7 +144,7 @@ export class PuestoMercadoComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario'
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
 
     let params = {
@@ -185,7 +185,7 @@ export class PuestoMercadoComponent implements OnInit {
     }
 
     let excelData = []
-    this.mensajeSpinner = 'Exportando Puestos de Mercado'
+    (this as any).mensajeSpinner = 'Exportando Puestos de Mercado'
     this.lcargando.ctlSpinner(true)
     this.apiService.getPuestos({params: { filter: this.filter }}).subscribe(
       (res: any) => {
@@ -231,7 +231,7 @@ export class PuestoMercadoComponent implements OnInit {
       }
     }
 
-    this.mensajeSpinner = 'Cargando Puestos...';
+    (this as any).mensajeSpinner = 'Cargando Puestos...';
     // this.lcargando.ctlSpinner(true);
 
     this.apiService.getPuestos(data).subscribe(
@@ -252,7 +252,7 @@ export class PuestoMercadoComponent implements OnInit {
   }
 
   getMercados = () => {
-    this.mensajeSpinner = 'Obteniendo Mercados'
+    (this as any).mensajeSpinner = 'Obteniendo Mercados'
     this.lcargando.ctlSpinner(true);
 
     this.apiService.getMercados().subscribe(
@@ -297,7 +297,7 @@ export class PuestoMercadoComponent implements OnInit {
       cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.value) {
-        this.mensajeSpinner = 'Eliminando elemento';
+        (this as any).mensajeSpinner = 'Eliminando elemento';
         this.lcargando.ctlSpinner(true);
         this.apiService.deletePuesto({ id_mercado_puesto: id }).subscribe(
           res => {

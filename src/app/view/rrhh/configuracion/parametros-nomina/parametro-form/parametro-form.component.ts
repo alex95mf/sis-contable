@@ -15,7 +15,7 @@ standalone: false,
 })
 export class ParametroFormComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @Input() isNew: any;

@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ["./confirm-purchase-winery.component.scss"],
 })
 export class ConfirmPurchaseWineryComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @Input() dt: any;
   products: any;

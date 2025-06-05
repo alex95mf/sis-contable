@@ -26,10 +26,10 @@ standalone: false,
   styleUrls: ['./bandeja-general.component.scss']
 })
 export class BandejaGeneralComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
   fTitle = "Bandeja General (Trámites)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -39,7 +39,7 @@ export class BandejaGeneralComponent implements OnInit {
   tareas: any = {};
 
   ticketsDt: any = [];
-  
+
   paginate: any;
   filter: any;
 
@@ -58,7 +58,7 @@ export class BandejaGeneralComponent implements OnInit {
     {value: "A",label: "ALTA"},
     {value: "M",label: "MEDIA"},
     {value: "B",label: "BAJA"},
-    
+
   ]
 
 
@@ -72,7 +72,7 @@ export class BandejaGeneralComponent implements OnInit {
   tipoTraList = [
     {value: "I",label: "INTERNO"},
     {value: "E",label: "EXTERNO"},
-    
+
   ]
   excelData: any = []
   departamentoSelect: any = {
@@ -86,8 +86,8 @@ export class BandejaGeneralComponent implements OnInit {
     private modalSrv: NgbModal,
     private xlsService: XlsExportService,
 
-    private excelService: ExcelService ) { 
-      
+    private excelService: ExcelService ) {
+
       this.commonVarSrv.seguiTicket.asObservable().subscribe(
         (res) => {
           //console.log(res);
@@ -109,7 +109,7 @@ export class BandejaGeneralComponent implements OnInit {
           this.departamentoSelect = res;
           this.filter.dep_nombre = res['dep_nombre'];
           this.filter.id_departamento = res['id_departamento']
-  
+
           //console.log(this.departamentoSelect)
         }
       )
@@ -126,14 +126,14 @@ export class BandejaGeneralComponent implements OnInit {
           //this.departamentoSelect = res;
           //this.filter.dep_nombre = res['dep_nombre'];
           //this.filter.id_departamento = res['id_departamento']
-  
+
           //console.log(this.departamentoSelect)
         }
       )
 
 
 
-      
+
     }
 
   ngOnInit(): void {
@@ -202,10 +202,10 @@ export class BandejaGeneralComponent implements OnInit {
     this.tomorrow = new Date(this.today);
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     this.firstday = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
-    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0); 
+    this.lastday = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
     this.filter = {
-      
+
       fecha_desde: moment(this.firstday).format('YYYY-MM-DD'),
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
       estado: ['P','C','R'],
@@ -219,7 +219,7 @@ export class BandejaGeneralComponent implements OnInit {
       ,dias_desde:null
       ,dias_hasta:null
 
-    
+
     };
 
     this.paginate = {
@@ -229,12 +229,12 @@ export class BandejaGeneralComponent implements OnInit {
       pageSizeOptions: [20, 50,100]
     };
 
-   
+
     setTimeout(()=> {
       this.validaPermisos();
       this.cargarTicketsGlobal();
       this.getCatalogoCategoria();
-     
+
     }, 0);
 
   }
@@ -253,7 +253,7 @@ export class BandejaGeneralComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -282,7 +282,7 @@ export class BandejaGeneralComponent implements OnInit {
     );
   }
 
- 
+
 
    asignarEstado(evt) {
     this.filter.estado = [evt]
@@ -300,7 +300,7 @@ export class BandejaGeneralComponent implements OnInit {
    }
 
   cargarTicketsGlobal() {
-    this.mensajeSpinner = "Cargando listado de Tramites...";
+    (this as any).mensajeSpinner = "Cargando listado de Tramites...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -309,7 +309,7 @@ export class BandejaGeneralComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    
+
     this.ticketSrv.getTramitesGeneral(data).subscribe(
       (res) => {
         console.log(res);
@@ -337,7 +337,7 @@ export class BandejaGeneralComponent implements OnInit {
 
           // CALCULO DE EL TIEMPO TRASCURRIDO DESDE EL INICIO DEL TRAMITE
           if(e.tareas != null && e.tareas.dias_totales != null){
-            
+
             let fecha_vencida = moment(fechaM).add( 1, 'days')
             if(fecha_vencida<=today){
               Object.assign(e, {vencimientoT: 'día(s) transcurrido(s)', diasT: Math.abs(dias_vencidos),dias_trans:dias_trascurridos, classT: 'text-danger'})
@@ -371,7 +371,7 @@ export class BandejaGeneralComponent implements OnInit {
                 Object.assign(e, { fecha_v:fecha_vencida,vencimiento: 'Tiene '+dias_disponibles+' días(s) para gestionar', dias:'',dias_config: dias_disponibles, class: 'text-success' })
               }
 
-              
+
             }
           }else{
             console.log('diferente de Pendiente')
@@ -387,7 +387,7 @@ export class BandejaGeneralComponent implements OnInit {
                 Object.assign(e, {fecha_v:fecha_vencida, vencimiento: 'día(s) para gestionar', dias: Math.abs(today.diff(fecha_vencida, 'days')),dias_config: dias_disponibles, class: 'text-warning' })
               }else if(fecha_vencida > today && today.diff(fecha_vencida, 'days') != 0){
                 Object.assign(e, { fecha_v:fecha_vencida,vencimiento: 'Se gestionó en '+Math.abs(today.diff(fecha_vencida, 'days'))+' día(s)', dias: '',dias_config: dias_disponibles, class: 'text-success' })
-                
+
                 // if (e.id_tramite_seguimiento==89){
                 //   console.log('fecha en que vence '+moment(fecha_vencida).format('YYYY/MM/DD'))
                 //   console.log('fecha en que se creo '+moment(moment(e.updated_at)).format('YYYY/MM/DD'))
@@ -398,15 +398,15 @@ export class BandejaGeneralComponent implements OnInit {
 
               }else if(fecha_vencida > today && today.diff(fecha_vencida, 'days') == 0){
                 Object.assign(e, { fecha_v:fecha_vencida,vencimiento: 'Se gestionó en '+dias_disponibles+' días(s)', dias:'',dias_config: dias_disponibles, class: 'text-success' })
-               
+
               }
             }
           }
         }
-          
+
         })
         this.lcargando.ctlSpinner(false);
-       
+
       },
       (error) => {
         this.lcargando.ctlSpinner(false);
@@ -417,17 +417,17 @@ export class BandejaGeneralComponent implements OnInit {
   exportarExcel() {
 
 
-    this.mensajeSpinner = "Generando Archivo Excel...";
-    this.lcargando.ctlSpinner(true); 
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
+    this.lcargando.ctlSpinner(true);
 
-    
-    this.mensajeSpinner = "Generando Archivo Excel...";
-    this.lcargando.ctlSpinner(true); 
+
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
+    this.lcargando.ctlSpinner(true);
     this.excelData = [];
           Object.keys(this.ticketsDt).forEach(key => {
             let filter_values = {};
             filter_values['id'] = parseInt(key)+1;
-            filter_values['nro_tramite'] = (this.ticketsDt[key]?.tramites?.nro_tramite );     
+            filter_values['nro_tramite'] = (this.ticketsDt[key]?.tramites?.nro_tramite );
             filter_values['fecha_tramite'] = (this.ticketsDt[key].tramites?.fecha.split(" ")[0] != undefined) ? this.ticketsDt[key].tramites?.fecha.split(" ")[0] : "";
             filter_values['nombre_tramite'] = (this.ticketsDt[key].tareas?.nombre != null) ? this.ticketsDt[key].tareas?.nombre.trim() : "";
             filter_values['estado_tramite'] = (this.ticketsDt[key]?.tramites?.estado != undefined) ? (this.ticketsDt[key]?.tramites?.estado == 'P' ? 'Pendiente' : 'Cerrado') : '';
@@ -446,19 +446,19 @@ export class BandejaGeneralComponent implements OnInit {
             rows: this.excelData
           }
           this.xlsService.exportExcelTramitesGeneral(data, 'TramitesGeneral')
-          this.lcargando.ctlSpinner(false); 
+          this.lcargando.ctlSpinner(false);
 
 
 
-        
+
           // this.exportAsXLSX();
-          // this.lcargando.ctlSpinner(false); 
+          // this.lcargando.ctlSpinner(false);
   }
   exportAsXLSX() {
     this.excelService.exportAsExcelFile(this.excelData, 'Excel Trámites');
   }
 
-  
+
   descargarPdf(tramite){
     console.log(tramite.tramite.id_tramite)
     window.open(environment.ReportingUrl + "rep_administracion_tramites_cierre.pdf?&j_username=" + environment.UserReporting + "&j_password=" + environment.PasswordReporting + "&id_tramite=" + tramite.id_tramite , '_blank')
@@ -493,7 +493,7 @@ export class BandejaGeneralComponent implements OnInit {
     } else if (isNew && this.permissions.guardar == "0") {
       this.toastr.warning("No tiene permisos para crear Tickets.", this.fTitle);
     } else {
-       
+
       const modalInvoice = this.modalSrv.open(SeguimientoFormComponent, {
         size: "xl",
         backdrop: "static",
@@ -524,7 +524,7 @@ export class BandejaGeneralComponent implements OnInit {
   }
 
   getCatalogoCategoria() {
-    this.mensajeSpinner = "Cargando Tramites...";
+    (this as any).mensajeSpinner = "Cargando Tramites...";
     this.lcargando.ctlSpinner(true);
     this.ticketSrv.getTareasALl({}).subscribe(
 
@@ -563,5 +563,5 @@ export class BandejaGeneralComponent implements OnInit {
     this.cargarTicketsGlobal();
   }
 
- 
+
 }

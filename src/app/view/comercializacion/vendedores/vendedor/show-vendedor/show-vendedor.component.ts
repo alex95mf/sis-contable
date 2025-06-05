@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ["./show-vendedor.component.scss"],
 })
 export class ShowVendedorComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(DataTableDirective)

@@ -20,7 +20,7 @@ standalone: false,
   styleUrls: ['./show-liquidaciones.component.scss']
 })
 export class ShowLiquidacionesComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
 

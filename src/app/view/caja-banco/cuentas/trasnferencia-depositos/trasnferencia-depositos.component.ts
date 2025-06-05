@@ -39,7 +39,7 @@ standalone: false,
   providers: [DialogService]
 })
 export class TrasnferenciaDepositosComponent {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild('content') templateRef: TemplateRef<any>;
 

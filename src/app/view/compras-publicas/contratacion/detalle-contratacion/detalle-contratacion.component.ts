@@ -26,7 +26,7 @@ export class DetalleContratacionComponent implements OnInit {
   @ViewChildren(AnexosListComponentDis) componentes: AnexosListComponentDis
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+
   mensajeSpinner: string
 
   programa: any = []
@@ -561,7 +561,7 @@ async confirmSave(message, action) {
   })
 }
 guardarContratacionDetalles(){
-  this.mensajeSpinner = "Verificando período contable";
+  (this as any).mensajeSpinner = "Verificando período contable";
   this.lcargando.ctlSpinner(true);
   let datos = {
     "anio": Number(moment().format('YYYY')),
@@ -1146,7 +1146,7 @@ guardarContratacionDetalles(){
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = "Verificando período contable";
+        (this as any).mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment().format('YYYY')),
@@ -1157,7 +1157,7 @@ guardarContratacionDetalles(){
 
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.mensajeSpinner = "Guardando ...";
+              (this as any).mensajeSpinner = "Guardando ...";
               this.lcargando.ctlSpinner(true);
 
               let data = {
@@ -1334,7 +1334,7 @@ guardarContratacionDetalles(){
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.mensajeSpinner = "Verificando período contable";
+        (this as any).mensajeSpinner = "Verificando período contable";
         this.lcargando.ctlSpinner(true);
         let datos = {
           "anio": Number(moment().format('YYYY')),
@@ -1345,7 +1345,7 @@ guardarContratacionDetalles(){
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
 
-              this.mensajeSpinner = "Cargando...";
+              (this as any).mensajeSpinner = "Cargando...";
               this.lcargando.ctlSpinner(true);
 
               let data = {
@@ -1456,7 +1456,7 @@ guardarContratacionDetalles(){
       confirmButtonColor: '#4DBD74'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Eliminando...";
+        (this as any).mensajeSpinner = "Eliminando...";
         this.lcargando.ctlSpinner(true);
         this.contratoService.eliminarCondiciones(id).subscribe(
           (res) => {
@@ -1509,7 +1509,7 @@ guardarContratacionDetalles(){
       confirmButtonColor: '#4DBD74'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.mensajeSpinner = "Eliminando...";
+        (this as any).mensajeSpinner = "Eliminando...";
         this.lcargando.ctlSpinner(true);
         this.contratoService.eliminarPoliza(id).subscribe(
           (res) => {
@@ -1550,7 +1550,7 @@ guardarContratacionDetalles(){
   crearBitacora() {
     this.today = new Date();
     this.fecha_hasta = moment(this.today).format('YYYY-MM-DD');
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let data = {
       listaBitacora: {

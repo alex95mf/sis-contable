@@ -13,7 +13,7 @@ standalone: false,
   styleUrls: ['./cargo.component.scss']
 })
 export class CargoComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
 
@@ -136,7 +136,7 @@ export class CargoComponent implements OnInit {
 
 
   cargarCargos() {
-    this.mensajeSpinner = "Cargando Cargos...";
+    (this as any).mensajeSpinner = "Cargando Cargos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -174,7 +174,7 @@ export class CargoComponent implements OnInit {
         this.validacion("UPDATE");
         break;
       case " ELIMINAR":
-        
+
         break;
       case " CANCELAR":
         this.cancelar();
@@ -219,7 +219,7 @@ export class CargoComponent implements OnInit {
         this.toastr.success('Se Guardo con éxito')
         this.cancelar()
         this.cargarCargos();
-        
+
       },
       (error)=>{
         this.lcargando.ctlSpinner(false)

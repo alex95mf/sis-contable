@@ -75,7 +75,7 @@ export class ModalDetallesComponent implements OnInit {
   }
 
   cargarDetalles() {
-    this.mensajeSpinner = 'Cargando Detalles de Notificacion'
+    (this as any).mensajeSpinner = 'Cargando Detalles de Notificacion'
         this.lcargando.ctlSpinner(true)
         this.apiService.getNotificacionDetalles({params: { id: this.notificacion.id_cob_notificacion }, component: myVarGlobals.fCobNotificacion}).subscribe(
           (res: any) => {

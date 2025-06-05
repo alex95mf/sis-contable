@@ -29,7 +29,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   fTitle = "Emisión de liquidación (Compra de terreno)";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons = [];
   dataUser: any;
   permissions: any;
@@ -110,7 +110,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
     this.commonVarService.selectListLiqPermisos.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
       (res) => {
         console.log(res)
-        this.mensajeSpinner = 'Cargando datos de la Liquidación...';
+        (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
         this.lcargando.ctlSpinner(true)
         this.restoreForm(false, false);
         this.formReadOnly = true;
@@ -278,7 +278,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
   }
 
   validaPermisos = () => {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...'
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...'
     this.lcargando.ctlSpinner(true)
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"))
     this.empresLogo = this.dataUser.logoEmpresa
@@ -485,7 +485,7 @@ validaDataGlobal() {
     let data = {
       params: "'CT_TIPO_COMPRA'",
     };
-    /*this.mensajeSpinner = "Buscando categoría...";
+    /*(this as any).mensajeSpinner = "Buscando categoría...";
     this.lcargando.ctlSpinner(true);*/
     this.apiService.getCatalogos(data).subscribe(
 
@@ -515,7 +515,7 @@ validaDataGlobal() {
   }
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     let limiteArea = 250.00
     let excedente = this.propiedadActive.area - limiteArea;
@@ -594,7 +594,7 @@ validaDataGlobal() {
     this.liquidacion.fk_contribuyente = contr.id_cliente;
     this.observacionesDisabled = false;
     this.vmButtons[3].habilitar = false;
-    this.mensajeSpinner = 'Obteniendo Propiedades...'
+    (this as any).mensajeSpinner = 'Obteniendo Propiedades...'
     this.lcargando.ctlSpinner(true)
     this.apiService.getPropiedades(this.liquidacion.fk_contribuyente).subscribe(
       (res) => {
@@ -680,7 +680,7 @@ validaDataGlobal() {
         console.log(result)
         if (result.isConfirmed) {
 
-          this.mensajeSpinner = 'Verificando período contable...';
+          (this as any).mensajeSpinner = 'Verificando período contable...';
           this.lcargando.ctlSpinner(true);
           let datos = {
             "anio": Number(moment(this.liquidacion.fecha).format('YYYY')),
@@ -691,7 +691,7 @@ validaDataGlobal() {
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
 
-                this.mensajeSpinner = 'Generando Liquidación...';
+                (this as any).mensajeSpinner = 'Generando Liquidación...';
                 this.lcargando.ctlSpinner(true);
                 this.liquidacion.fk_lote = this.propiedadActive.id;
 

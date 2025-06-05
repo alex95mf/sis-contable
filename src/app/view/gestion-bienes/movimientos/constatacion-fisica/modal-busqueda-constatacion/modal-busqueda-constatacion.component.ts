@@ -19,7 +19,7 @@ standalone: false,
 })
 export class ModalBusquedaConstatacionComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -137,7 +137,7 @@ export class ModalBusquedaConstatacionComponent implements OnInit {
   }
 
   cargarContribuyentes() {
-    this.mensajeSpinner = "Cargando lista de Contribuyentes...";
+    (this as any).mensajeSpinner = "Cargando lista de Contribuyentes...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

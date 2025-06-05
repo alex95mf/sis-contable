@@ -16,10 +16,10 @@ standalone: false,
 })
 export class ParametrosCuentasComprobantesComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, {static:false})
   lcargando: CcSpinerProcesarComponent;
-  
+
   fTitle: string = "Parámetros cuentas comprobantes";
 
   vmButtons: any = [];
@@ -29,10 +29,10 @@ export class ParametrosCuentasComprobantesComponent implements OnInit {
   dataDt: any = [];
 
   showInactive = false;
-  
+
   paginate: any;
   filter: any;
- 
+
   constructor(
     private apiSrv: ParametrosCuentasComprobantesService,
     private commonSrv: CommonService,
@@ -47,7 +47,7 @@ export class ParametrosCuentasComprobantesComponent implements OnInit {
         this.cargarData()
       }
     )
-   
+
 
   }
 
@@ -84,9 +84,9 @@ export class ParametrosCuentasComprobantesComponent implements OnInit {
     }, 0);
 
   }
-  
+
   validaPermisos() {
-    this.mensajeSpinner = "Verificando permisos del usuario...";
+    (this as any).mensajeSpinner = "Verificando permisos del usuario...";
     this.lcargando.ctlSpinner(true);
 
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
@@ -107,7 +107,7 @@ export class ParametrosCuentasComprobantesComponent implements OnInit {
           this.vmButtons = [];
         } else {
           this.cargarData();
-       
+
         }
       },
       (error) => {
@@ -118,7 +118,7 @@ export class ParametrosCuentasComprobantesComponent implements OnInit {
   }
 
   cargarData() {
-    this.mensajeSpinner = "Cargando Parámetros Contables...";
+    (this as any).mensajeSpinner = "Cargando Parámetros Contables...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -145,7 +145,7 @@ export class ParametrosCuentasComprobantesComponent implements OnInit {
       }
     )
   }
-  
+
   metodoGlobal(event) {
     switch (event.items.boton.texto) {
       case " NUEVO":
@@ -163,7 +163,7 @@ export class ParametrosCuentasComprobantesComponent implements OnInit {
     } else if (isNew && this.permissions.guardar == "0") {
       this.toastr.warning("No tiene permisos para crear retenciones.", this.fTitle);
     } else {
-      
+
       // console.log(data);
       const modalInvoice = this.modalSrv.open(FormSaveComponent, {
         size: "xl",
@@ -176,11 +176,11 @@ export class ParametrosCuentasComprobantesComponent implements OnInit {
       modalInvoice.componentInstance.isNew = isNew;
       modalInvoice.componentInstance.data = data;
       modalInvoice.componentInstance.permissions = this.permissions;
-      
+
     }
   }
 
- 
+
 
   changeShowInactive(showInactive) {
     if (showInactive) {
@@ -204,7 +204,7 @@ export class ParametrosCuentasComprobantesComponent implements OnInit {
   }
 
   limpiarFiltros() {
-    
+
     this.filter.descripcion = undefined;
     this.filter.codigo = undefined;
     // this.filter.estado = undefined;

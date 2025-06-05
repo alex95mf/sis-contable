@@ -19,7 +19,7 @@ standalone: false,
 })
 export class ModalContribuyentesComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChild(MatPaginator) paginator: MatPaginator
 
@@ -131,7 +131,7 @@ export class ModalContribuyentesComponent implements OnInit {
   }
 
   cargarContribuyentes() {
-    this.mensajeSpinner = "Cargando lista de Contribuyentes...";
+    (this as any).mensajeSpinner = "Cargando lista de Contribuyentes...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -172,7 +172,7 @@ export class ModalContribuyentesComponent implements OnInit {
     this.filter.razon_social = undefined;
     this.filter.num_documento = undefined;
 
-    
+
     // this.cargarContribuyentes();
   }
 

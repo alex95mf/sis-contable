@@ -18,7 +18,7 @@ standalone: false,
 })
 export class DetallesProductoComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;
@@ -166,7 +166,7 @@ export class DetallesProductoComponent implements OnInit {
 		})
 	}
   buscarProducto(){
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let data = {
        id_producto: this.id_producto
@@ -186,7 +186,7 @@ export class DetallesProductoComponent implements OnInit {
   }
 
   // buscarGrupoProducto(){
-  //   this.mensajeSpinner = "Cargando...";
+  //   (this as any).mensajeSpinner = "Cargando...";
   //   this.lcargando.ctlSpinner(true);
   //   let data = {
   //      tipo_bien: this.data.tipo_bien
@@ -221,7 +221,7 @@ export class DetallesProductoComponent implements OnInit {
   }
 
   // cargarDocumentos(flag: boolean = false){
-  //   this.mensajeSpinner = "Cargando lista de Traslados de Bienes...";
+  //   (this as any).mensajeSpinner = "Cargando lista de Traslados de Bienes...";
   //   this.lcargando.ctlSpinner(true);
 
   //   if (flag) this.paginate.page = 1

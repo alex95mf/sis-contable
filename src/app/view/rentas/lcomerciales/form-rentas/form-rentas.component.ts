@@ -24,7 +24,7 @@ standalone: false,
   styleUrls: ['./form-rentas.component.scss']
 })
 export class FormRentasComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -114,7 +114,7 @@ export class FormRentasComponent implements OnInit {
     impuestos: []
   }
 
-  
+
   listaEstados = [
     {
       value: "B",
@@ -137,8 +137,8 @@ export class FormRentasComponent implements OnInit {
     private toastr: ToastrService,
     private formSrv: FormRentasService,
     private apiService: FormComisariaService,
-  ) { 
-  
+  ) {
+
     this.commonVarSrv.getInspeccionCompleta.asObservable().subscribe(
       (res) => {
 
@@ -154,8 +154,8 @@ export class FormRentasComponent implements OnInit {
         Object.assign(this.cxc, { orden_inspeccion: res.numero_orden, local: res.fk_local.id_local })
 
         if (this.local_comercial.local_turistico) {
-          this.cxc.impuestos.push({"LOCALES TURISTICOS": { 
-            categoria: this.local_comercial.lt_categoria.descripcion, 
+          this.cxc.impuestos.push({"LOCALES TURISTICOS": {
+            categoria: this.local_comercial.lt_categoria.descripcion,
             categoria_2: this.local_comercial.lt_categoria_2.descripcion,
             cantidad: this.local_comercial.lt_cantidad
           }})
@@ -179,7 +179,7 @@ export class FormRentasComponent implements OnInit {
         }
 
         this.cat_step = rentas.r_categoria?2:1;
-        
+
         if (comisaria) this.disableVehiculos = comisaria.c_esintroductor !="SI";
 
         this.inspeccion = rentas;
@@ -208,7 +208,7 @@ export class FormRentasComponent implements OnInit {
           this.vmButtons[0].habilitar = false;
           this.vmButtons[1].habilitar = false;
           this.vmButtons[2].habilitar = true;
-          
+
         }
 
         if (rentas.estado == 'C' || rentas.estado == 'A') {
@@ -228,7 +228,7 @@ export class FormRentasComponent implements OnInit {
             estado: rentas.estado,
             contabilidad: false,
           }
-          
+
           // if (rentas.r_esturistico == "SI") this.cxc.impuestos.push({"LOCALES TURISTICOS": { categoria: rentas.r_categoria, subcategoria: rentas.r_categoria_2 }})
           console.log(rentas.fotos);
           this.fotos = rentas.fotos;
@@ -270,16 +270,16 @@ export class FormRentasComponent implements OnInit {
                 h_cantidad: 0,
               }
             }
-            if(detalles){          
-  
+            if(detalles){
+
               this.higiene_res.det.h_respuesta = detalles.h_respuesta;
               this.higiene_res.det.h_estado = detalles.h_estado;
               this.higiene_res.det.h_cantidad = detalles.h_cantidad;
-  
+
               if (detalles.h_respuesta == "SI") this.cxc.impuestos.push({"PESAYMEDIDA": { tipo: this.local_comercial.tipo_negocio, cantidad: detalles.h_cantidad }})
-                          
-            }        
-  
+
+            }
+
             this.fotosHigiene = higiene.fotos;
           } else {
             this.higiene_res.cab.estado = 'P';
@@ -290,7 +290,7 @@ export class FormRentasComponent implements OnInit {
         if (comisaria) {
           if (comisaria.estado == 'C' || comisaria.estado == 'A') {
             let detalles: any = comisaria.detalles;
-  
+
             if(detalles.length>0){
               this.comisaria_res.det.formulario.forEach(e => {
                 e.c_respuesta = detalles.find(p => e.c_num == p.c_pregunta).c_respuesta;
@@ -299,18 +299,18 @@ export class FormRentasComponent implements OnInit {
                 e.c_observacion = detalles.find(p => e.c_num == p.c_pregunta).c_observacion;
               });
             }
-            
+
             this.comisaria_res.cab.tipo_inspeccion = "COMISARIA";
             this.comisaria_res.cab.fecha = moment(comisaria.fecha).format('YYYY-MM-DD');
             this.comisaria_res.cab.observacion= comisaria.observacion;
             this.comisaria_res.cab.aprueba= (comisaria.aprueba=="A" || comisaria.aprueba==1) ? true : false;
             this.comisaria_res.cab.fecha_proxima_visita= (comisaria.aprueba=="A" || comisaria.aprueba==1) ? moment(new Date()) : moment(comisaria.fecha_proxima_visita).format('YYYY-MM-DD');
             this.comisaria_res.cab.estado= comisaria.estado;
-  
+
             if (comisaria.c_esintroductor == "SI") this.cxc.impuestos.push({"INTRODUCTOR": { cantidad: 0 }})
-  
+
             this.fotosComisaria = comisaria.fotos;
-  
+
           } else {
             this.comisaria_res.cab.estado = 'P';
             this.fotosComisaria = [];
@@ -320,35 +320,35 @@ export class FormRentasComponent implements OnInit {
         if (planificacion) {
           if (planificacion.estado == 'C' || planificacion.estado == 'A') {
             let detalles: any = planificacion.detalles;
-            
+
             let datos_vp: any[] = []
             if (detalles.length>0){
-              
+
               this.planificacion_res.det.viaPublica.forEach(e => {
               e.p_vp_aplica = detalles.find(p => e.p_vp_codigo == p.p_vp_codigo).p_vp_aplica == 0 ? false : true,
               e.p_vp_dimension_1 = detalles.find(p => e.p_vp_codigo == p.p_vp_codigo).p_vp_dimension_1,
               e.p_vp_dimension_2 = detalles.find(p => e.p_vp_codigo == p.p_vp_codigo).p_vp_dimension_2,
               e.p_vp_dimension = detalles.find(p => e.p_vp_codigo == p.p_vp_codigo).p_vp_dimension,
               e.p_vp_ubicacion = detalles.find(p => e.p_vp_codigo == p.p_vp_codigo).p_vp_ubicacion
-  
-              
+
+
               if (e.p_vp_aplica) {
                 let data = {codigo: e.p_vp_codigo, dimension: e.p_vp_dimension}
-  
+
                 if (e.p_vp_codigo == 'PAR') {
                   // TODO: Obtener los dias, rango?
                   Object.assign(data, { dias: 365 })
                 } else if (e.p_vp_codigo == 'LET') {
                   Object.assign(data, { meses: 12 })
                 }
-  
+
                 datos_vp.push(data)
               }
               });
-  
+
               let datos_rot: any[] = []
               detalles.forEach(e => {
-  
+
                 if (e.p_rot_codigo != null) {
                   let rot = {
                     p_rot_codigo: e.p_rot_tipo,
@@ -365,26 +365,26 @@ export class FormRentasComponent implements OnInit {
                   datos_rot.push({tipo: this.catalogos.tipo_letrero.find(l => l.descripcion == e.p_rot_tipo).valor, dimension: e.p_rot_area})
                 }
               });
-  
+
               if (datos_vp.length > 0) this.cxc.impuestos.push({"VIA PUBLICA": datos_vp})
               if (datos_rot.length > 0) this.cxc.impuestos.push({"LETREROS": datos_rot})
             }
-            
+
             this.planificacion_res.cab.tipo_inspeccion = "PLANIFICACION";
             this.planificacion_res.cab.fecha = moment(planificacion.fecha).format('YYYY-MM-DD');
             this.planificacion_res.cab.observacion= planificacion.observacion;
             this.planificacion_res.cab.aprueba= (planificacion.aprueba=="A" || planificacion.aprueba==1) ? true : false;
             this.planificacion_res.cab.fecha_proxima_visita= (planificacion.aprueba=="A" || planificacion.aprueba==1) ? moment(new Date()) : moment(planificacion.fecha_proxima_visita).format('YYYY-MM-DD');
             this.planificacion_res.cab.estado= planificacion.estado;
-  
+
             this.fotosPlanificacion = planificacion.fotos;
-            
+
           } else {
             this.planificacion_res.cab.estado = 'P';
             this.fotosPlanificacion = [];
           }
         }
-        
+
         // Para que el back calcule la patente
         this.cxc.impuestos.push({'PATENTE': { valor: 0 }})
         // Para que el back consulte y calcule el 1,5 (si aplica)
@@ -478,7 +478,7 @@ export class FormRentasComponent implements OnInit {
         h_respuesta: 0,
         h_estado: 0,
         h_cantidad: 0,
-      } 
+      }
     }
 
     this.comisaria_res = {
@@ -553,7 +553,7 @@ export class FormRentasComponent implements OnInit {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
 
     let params = {
@@ -597,7 +597,7 @@ export class FormRentasComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.mensajeSpinner = 'Obteniendo Recursos...';
+    (this as any).mensajeSpinner = 'Obteniendo Recursos...';
     this.lcargando.ctlSpinner(true);
     let data = {
       params: "'REN_LOCAL_TURISTICO_CATEGORIA','REN_LOCAL_TURISTICO_CATEGORIA_2','FORM_INSPEC_COMISARIA', 'REN_TIPO_NEG', 'REN_GRUPO_NEG','TIPO_LETRERO','USO_VIA_PUBLICA','TIPO_USO_VIA_PUBLICA', 'CAT_SECTOR'"
@@ -621,7 +621,7 @@ export class FormRentasComponent implements OnInit {
           }
           this.formularioBackup.push(preg);
         });
-        
+
         this.catalogos.tipo_letrero = res['data']['TIPO_LETRERO'];
         this.catalogos.via_publica = res['data']['USO_VIA_PUBLICA'];
         this.catalogos.tipo_via_publica = res['data']['TIPO_USO_VIA_PUBLICA'];
@@ -670,7 +670,7 @@ export class FormRentasComponent implements OnInit {
       }
     );
 
-    
+
   }
 
   cargarSubCategorias(evento) {
@@ -718,7 +718,7 @@ export class FormRentasComponent implements OnInit {
         this.rentas_res.local_cantidad = 0;
         this.cantidad_disabled = false;
         break;
-                 
+
     }
   }
 
@@ -730,7 +730,7 @@ export class FormRentasComponent implements OnInit {
       this.rentas_res.categoria = 0;
       this.rentas_res.local_cantidad = 0;
     }
-    
+
   }
 
   validaDataGlobal() {
@@ -815,7 +815,7 @@ export class FormRentasComponent implements OnInit {
             confirmButtonColor: '#4DBD74',
           }).then(async (result) => {
             if (result.isConfirmed) {
-              this.mensajeSpinner = "Guardando datos del formulario...";
+              (this as any).mensajeSpinner = "Guardando datos del formulario...";
               this.lcargando.ctlSpinner(true);
 
               let data = {
@@ -843,24 +843,24 @@ export class FormRentasComponent implements OnInit {
               }
 
               // if (this.rentas_res.es_turistico == 'SI') this.cxc.impuestos.push({
-              //   "LOCALES TURISTICOS": { 
-              //     categoria: this.rentas_res.categoria, 
-              //     subcategoria: this.rentas_res.subcategoria, 
-              //     cantidad: this.rentas_res.local_cantidad 
+              //   "LOCALES TURISTICOS": {
+              //     categoria: this.rentas_res.categoria,
+              //     subcategoria: this.rentas_res.subcategoria,
+              //     cantidad: this.rentas_res.local_cantidad
               //   }
               // })
               // console.log(this.cxc); // return;
-              
+
               try {
                 if (this.rentas_res.aprobado) await this.generarImpuestos();
-                
+
                 this.formSrv.saveResultado(data).subscribe(
                   (res) => {
                     // console.log(res);
                     if (this.fileList) {
                       this.uploadFile();
                     }
-                    
+
                     this.commonVarSrv.updateFormularioCabRen.next(res['data']);
                     Swal.fire({
                       icon: "success",
@@ -936,7 +936,7 @@ export class FormRentasComponent implements OnInit {
       confirmButtonColor: '#4DBD74',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.restoreForm();        
+        this.restoreForm();
       }
     });
 
@@ -1008,7 +1008,7 @@ export class FormRentasComponent implements OnInit {
             h_respuesta: 0,
             h_estado: 0,
             h_cantidad: 0,
-          } 
+          }
         }
 
         this.comisaria_res = {
@@ -1024,7 +1024,7 @@ export class FormRentasComponent implements OnInit {
             formulario: [],
           }
         }
-    
+
         this.planificacion_res = {
           cab:{
             tipo_inspeccion: "PLANIFICACION",
@@ -1153,7 +1153,7 @@ export class FormRentasComponent implements OnInit {
   }
 
   cargaFoto(archivos) {
-    this.mensajeSpinner = 'Cargando fotos...';
+    (this as any).mensajeSpinner = 'Cargando fotos...';
     this.lcargando.ctlSpinner(true);
     if (archivos.length > 0 && (archivos.length + this.fotos.length) <= 5) {
       for (let i = 0; i < archivos.length; i++) {

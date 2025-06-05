@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./empresarial.component.scss']
 })
 export class EmpresarialComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)
@@ -376,7 +376,7 @@ export class EmpresarialComponent implements OnInit {
   }
 
   obtenerCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos...';
+    (this as any).mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
     let data = {
       params: "'PRE_CATALOGO_FUNCIONAL','PRE_ORIENTACION_GASTO',''",

@@ -60,7 +60,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   vmButtons: Array<Botonera> = [];
   validaciones: ValidacionesFactory = new ValidacionesFactory();
 
-  mensajeSpinner: string = "Cargando...";
+
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   @ViewChild(ImprimirRolComponent, { static: false })
@@ -303,7 +303,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
   async cargaInicial() {
     try {
-      this.mensajeSpinner = "Cargando...";
+      (this as any).mensajeSpinner = "Cargando...";
       this.lcargando.ctlSpinner(true);
       const resPeriodos = await this.admDecimoTerceroService.getPeriodos()
       this.lcargando.ctlSpinner(false);
@@ -323,7 +323,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   obtenerEmpleados() {
     this.lConcepto = "";
     this.fecha_actual = moment(this.toDatePicker).format("YYYY-MM-DD");
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let idGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).id_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -439,7 +439,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
 
 
-    this.mensajeSpinner = "Generando Archivo Excel...";
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
 		this.lcargando.ctlSpinner(true);
 
     let year;
@@ -500,7 +500,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
   btnExportExcelPorFecha(){
 
-    this.mensajeSpinner = "Generando Archivo Excel...";
+    (this as any).mensajeSpinner = "Generando Archivo Excel...";
 		this.lcargando.ctlSpinner(true);
 
 
@@ -856,7 +856,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     let periodoInicio:any = moment(this.periodoInicio).format("YYYY-MM-DD");
     let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");
     let validaTermina: boolean = false;
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
     let nombreGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).nombre_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -1015,7 +1015,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     year = this.select_anio;
     let Desde = (year - 1 ) + "12"
     let Hasta = year + "11"
-    this.mensajeSpinner = "Procesando Decimo Tercero...";
+    (this as any).mensajeSpinner = "Procesando Decimo Tercero...";
     this.lcargando.ctlSpinner(true);
     this.admDecimoTerceroService.procesarDecimoTercero(1,year, mes, Desde, Hasta,this.fk_programa,this.area, this.departamento,this.decimo_acumula_mensualiza,this.dataUser.id_usuario).subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -1043,7 +1043,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     }
 
     console.log("datadecimoterce",data)
-    this.mensajeSpinner = "Aprobando Decimo Tercero...";
+    (this as any).mensajeSpinner = "Aprobando Decimo Tercero...";
     this.lcargando.ctlSpinner(true);
     this.admDecimoTerceroService.aprobarDecimoTercero(data).subscribe(res => {
       console.log(res)
@@ -1074,7 +1074,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     if(this.departamento==null) { this.departamento=0 }
 
 
-    this.mensajeSpinner = "Cargando Decimo Tercero...";
+    (this as any).mensajeSpinner = "Cargando Decimo Tercero...";
     this.lcargando.ctlSpinner(true);
 
     let year;
@@ -1152,7 +1152,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
     let periodoInicio:any = moment(this.periodoInicio).format("YYYY-MM-DD");
     let periodoFin:any = moment(this.periodoFin).format("YYYY-MM-DD");
-    this.mensajeSpinner = "Cargando...";
+    (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let nombreGrupo: any = this.lstInicial[1].find((datos) => datos.id_grupo == this.grupoSeleccionado).nombre_grupo;
     let lIdPersonal: any = this.arrayPersonal.find((datos) => datos.id_personal == this.selectPersonal);
@@ -1343,7 +1343,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
     if(this.departamento==null) { this.departamento=0 }
 
 
-    this.mensajeSpinner = "consultando por rango de fechas...";
+    (this as any).mensajeSpinner = "consultando por rango de fechas...";
     this.lcargando.ctlSpinner(true);
 
     let year;
@@ -1416,7 +1416,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
       tipo_decimo: 'DECIT',
       empleados: empleadosCheck
     }
-    this.mensajeSpinner = "Generando Ordenes de Pago";
+    (this as any).mensajeSpinner = "Generando Ordenes de Pago";
     this.lcargando.ctlSpinner(true);
     this.admDecimoTerceroService.generarOrdenesPago(data).subscribe(res => {
       console.log(res)
@@ -1468,7 +1468,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
         enviarData.push(dataPost);
       });
 
-      this.mensajeSpinner = "Anulando decimo tercero...";
+      (this as any).mensajeSpinner = "Anulando decimo tercero...";
       this.lcargando.ctlSpinner(true);
       this.admDecimoTerceroService.deleteRolPago({datosPost: enviarData}).subscribe((res: any) => {
           this.validaciones.mensajeExito("Exito", "Los decimo tercero se anularon correctamente");
@@ -1600,7 +1600,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   //     return;
   //   }
 
-  //   this.mensajeSpinner = "Apobando decimo tercero por favor espere...";
+  //   (this as any).mensajeSpinner = "Apobando decimo tercero por favor espere...";
   //   this.lcargando.ctlSpinner(true);
   //   this.admDecimoTerceroService.aprobarRolPago({datosPost: enviarData}).subscribe((res: any) => {
   //     this.validaciones.mensajeExito("Exito", "Los decimo tercero se aprobaron correctamente");
@@ -1622,7 +1622,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   }
 
   cargarAreas() {
-    this.mensajeSpinner = "Cargando listado de Áreas...";
+    (this as any).mensajeSpinner = "Cargando listado de Áreas...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1643,7 +1643,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
 
   }
   cargarDepartamentos(event) {
-    this.mensajeSpinner = "Cargando listado de Departamentos...";
+    (this as any).mensajeSpinner = "Cargando listado de Departamentos...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1707,7 +1707,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   getPorNoControl() {
 
 
-    this.mensajeSpinner = "Buscando";
+    (this as any).mensajeSpinner = "Buscando";
     this.lcargando.ctlSpinner(true);
 
     let data = {

@@ -19,7 +19,7 @@ standalone: false,
   styleUrls: ['./maintenance.component.scss']
 })
 export class MaintenanceComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   dataUser: any;

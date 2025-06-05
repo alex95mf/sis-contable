@@ -50,7 +50,7 @@ export class ModalExoneracionesComponent implements OnInit {
   async cargarExoneraciones() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Exoneraciones'
+      (this as any).mensajeSpinner = 'Cargando Exoneraciones'
       const response = await this.apiService.getExoneraciones({contribuyente: this.contribuyente.id_cliente, concepto: {codigo: 'LC'}})
       let exon_response = response.filter((element: any) => element.cod_concepto_det_aplicable == this.impuesto.codigo_detalle)
       exon_response.forEach((element: any) => Object.assign(element, {aplica: false}))

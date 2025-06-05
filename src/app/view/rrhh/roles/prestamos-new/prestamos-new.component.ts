@@ -27,7 +27,7 @@ standalone: false,
 export class PrestamosNewComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   vmButtons: any[];
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
 
   activeTab: number = 0;
 
@@ -173,7 +173,7 @@ export class PrestamosNewComponent implements OnInit {
       async ({id_prestamo}) => {
         this.lcargando.ctlSpinner(true)
         try {
-          this.mensajeSpinner = 'Cargando Prestamo';
+          (this as any).mensajeSpinner = 'Cargando Prestamo';
           let response: any = await this.apiService.getPrestamo(id_prestamo)
           Object.assign(response, {
             garante: {
@@ -298,7 +298,7 @@ export class PrestamosNewComponent implements OnInit {
   }
 
   async setPrestamo() {
-    this.mensajeSpinner = "Verificando período contable";
+    (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
 
     let dat = {
@@ -327,7 +327,7 @@ export class PrestamosNewComponent implements OnInit {
 
             this.lcargando.ctlSpinner(true);
             try {
-              this.mensajeSpinner = 'Almacenando Prestamo';
+              (this as any).mensajeSpinner = 'Almacenando Prestamo';
               let response = await this.apiService.setPrestamo({prestamo: this.prestamo, cuotas: this.cuotas});
               console.log(response);
               this.lcargando.ctlSpinner(false);
@@ -397,7 +397,7 @@ export class PrestamosNewComponent implements OnInit {
   async consultarPrestamos() {
     this.lcargando.ctlSpinner(true)
     try {
-      this.mensajeSpinner = 'Cargando Prestamos'
+      (this as any).mensajeSpinner = 'Cargando Prestamos'
       let response: any = await this.apiService.consultarPrestamos({params: { filter: this.filter, paginate: this.paginate }})
       console.log(response)
       Object.assign(this.paginate, { length: response.total })
@@ -425,7 +425,7 @@ export class PrestamosNewComponent implements OnInit {
       return;
     }
     if (result.isConfirmed) {
-      this.mensajeSpinner = "Verificando período contable";
+      (this as any).mensajeSpinner = "Verificando período contable";
     this.lcargando.ctlSpinner(true);
 
     let dat = {
@@ -438,7 +438,7 @@ export class PrestamosNewComponent implements OnInit {
             if (res["data"][0].estado !=='C') {
               this.lcargando.ctlSpinner(true);
               try {
-                this.mensajeSpinner = 'Anulando Prestamo';
+                (this as any).mensajeSpinner = 'Anulando Prestamo';
                 let response = await this.apiService.setAnularPrestamo({prestamo: this.prestamo, cuotas: this.cuotas});
                 console.log(response["id_prestamo"]);
                 this.prestamo.id_prestamo= response["id_prestamo"]
@@ -561,7 +561,7 @@ export class PrestamosNewComponent implements OnInit {
 
  async consultarPrestamoById(){
     try {
-      this.mensajeSpinner = 'Cargando Prestamo';
+      (this as any).mensajeSpinner = 'Cargando Prestamo';
       let response: any = await this.apiService.getPrestamo(this.prestamo.id_prestamo)
       Object.assign(response, {
         garante: {

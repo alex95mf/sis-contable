@@ -16,7 +16,7 @@ standalone: false,
 	styleUrls: ['./modal-consulta-cliente.component.scss']
 })
 export class ModalConsultaClienteComponent implements OnInit {
-	mensajeSpinner: string = "Cargando...";
+	
 	@ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent
 	arrayView: Array < any > = [];
 	datConsulta: any;

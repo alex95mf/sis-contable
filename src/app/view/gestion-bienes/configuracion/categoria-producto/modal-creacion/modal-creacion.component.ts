@@ -15,7 +15,7 @@ export class ModalCreacionComponent implements OnInit {
 
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
-  mensajeSpinner: string = "Cargando...";
+  
 
   catalogo = {
     codigo: null,
@@ -52,7 +52,7 @@ export class ModalCreacionComponent implements OnInit {
   }
 
   agregarCatalogo(){
-    this.mensajeSpinner = "Guardando...";
+    (this as any).mensajeSpinner = "Guardando...";
     this.lcargando.ctlSpinner(true);
 
     console.log(this.catalogo);

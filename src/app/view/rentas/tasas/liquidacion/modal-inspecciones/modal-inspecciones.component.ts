@@ -18,7 +18,7 @@ standalone: false,
   styleUrls: ['./modal-inspecciones.component.scss']
 })
 export class ModalInspeccionesComponent implements OnInit {
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent,{ static: false })
   lcargando: CcSpinerProcesarComponent;
 
@@ -109,7 +109,7 @@ export class ModalInspeccionesComponent implements OnInit {
   }
 
   cargarInspecciones() {
-    this.mensajeSpinner = "Cargando inspecciones...";
+    (this as any).mensajeSpinner = "Cargando inspecciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {

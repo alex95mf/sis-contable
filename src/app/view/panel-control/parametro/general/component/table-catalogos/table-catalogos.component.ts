@@ -14,7 +14,7 @@ standalone: false,
 })
 export class TableCatalogosComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, {static: false}) lcargando: CcSpinerProcesarComponent;
 
   @ViewChild(DataTableDirective)
@@ -57,7 +57,7 @@ export class TableCatalogosComponent implements OnInit {
   getDataTable(data) {
 
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando informacion... "
+    (this as any).mensajeSpinner = "Cargando informacion... "
 
     let data1 = {
       params: {
@@ -134,7 +134,7 @@ export class TableCatalogosComponent implements OnInit {
 
   validateSubgroup(event) {
     this.lcargando.ctlSpinner(true);
-    this.mensajeSpinner = "Cargando informacion... "
+    (this as any).mensajeSpinner = "Cargando informacion... "
     console.log(event);
     /* Clear params */
 

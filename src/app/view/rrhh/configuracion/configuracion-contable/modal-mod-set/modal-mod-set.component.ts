@@ -18,7 +18,7 @@ standalone: false,
 })
 export class ModalModSetComponent implements OnInit {
 
-  mensajeSpinner: string = "Cargando...";
+  
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   @Input() isNew: any;

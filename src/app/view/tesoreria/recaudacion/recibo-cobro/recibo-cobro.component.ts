@@ -35,7 +35,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   @ViewChild("print") print!: ElementRef;
 
   fTitle = "Recibo de caja";
-  mensajeSpinner: string;
+  mensajeSpinner: string = "Cargando...";
   vmButtons: any = [];
   dataUser: any;
   permissions: any;
@@ -469,7 +469,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   /* verificarCaja() {
     // funcion para revisar si la caja seleccionada ya ha sido abierta ese dia
 
-    this.mensajeSpinner = 'Verificando si la caja está activa...';
+    (this as any).mensajeSpinner = 'Verificando si la caja está activa...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -498,7 +498,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   } */
 
   async validacionCaja() {
-    this.mensajeSpinner = 'Validando Estado de Caja'
+    (this as any).mensajeSpinner = 'Validando Estado de Caja'
     this.lcargando.ctlSpinner(true)
     this.cajaActiva = JSON.parse(localStorage.getItem('activeCaja'))
 
@@ -549,7 +549,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   }
 
   validaPermisos() {
-    this.mensajeSpinner = 'Cargando Permisos de Usuario...';
+    (this as any).mensajeSpinner = 'Cargando Permisos de Usuario...';
     this.lcargando.ctlSpinner(true);
     this.dataUser = JSON.parse(localStorage.getItem("Datauser"));
     this.empresLogo = this.dataUser.logoEmpresa;
@@ -629,7 +629,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   }
 
   getCatalogos() {
-    this.mensajeSpinner = 'Cargando Catalogos...';
+    (this as any).mensajeSpinner = 'Cargando Catalogos...';
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -703,7 +703,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
     )
   }
   getCampaigns() {
-    this.mensajeSpinner = 'Obteniendo campañas de descuento...';
+    (this as any).mensajeSpinner = 'Obteniendo campañas de descuento...';
     //let id = this.cajaActiva.id_caja;
 
     // busaca campañas activas y que se puedan aplicar a los conceptos segun la fecha
@@ -728,7 +728,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
 
   // no se usa ya que la sesion ahora maneja toda la caja activa, no solo el id
   /* getCajaActiva() {
-    this.mensajeSpinner = 'Obteniendo Caja Activa...';
+    (this as any).mensajeSpinner = 'Obteniendo Caja Activa...';
     let id = this.cajaActiva.id_caja;
 
     // funcion necesario solo porque en la sesion se maneja solo el id no toda la info de la caja activa
@@ -749,7 +749,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   } */
 
   getConceptos() {
-    this.mensajeSpinner = 'Obteniendo Conceptos...';
+    (this as any).mensajeSpinner = 'Obteniendo Conceptos...';
     this.lcargando.ctlSpinner(true);
     this.apiSrv.getConceptos().subscribe(
       res => {
@@ -791,7 +791,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
   }
 
   getLiquidaciones() {
-    this.mensajeSpinner = "Cargando lista de Liquidaciones...";
+    (this as any).mensajeSpinner = "Cargando lista de Liquidaciones...";
     this.lcargando.ctlSpinner(true);
 
     let data = {
@@ -1435,7 +1435,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
             /* Validamos si el periodo se encuentra aperturado */
               if (res["data"][0].estado !== 'C') {
 
-                this.mensajeSpinner = 'Generando Documento de cobro...';
+                (this as any).mensajeSpinner = 'Generando Documento de cobro...';
                 this.lcargando.ctlSpinner(true);
 
                 if(this.quitarDeudas){
@@ -1642,7 +1642,7 @@ export class ReciboCobroComponent implements OnInit, OnDestroy {
 
           /* Validamos si el periodo se encuentra aperturado */
             if (res["data"][0].estado !== 'C') {
-              this.mensajeSpinner = 'Anulando documento...';
+              (this as any).mensajeSpinner = 'Anulando documento...';
               this.lcargando.ctlSpinner(true);
               let data = {
                 documento: this.documento
