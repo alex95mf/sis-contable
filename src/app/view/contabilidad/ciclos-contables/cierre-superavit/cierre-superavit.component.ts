@@ -117,7 +117,7 @@ export class CierreSuperavitComponent implements OnInit {
           })
         }
       })
-      console.log(documentos)
+      console.log(documentos);
 
       this.dataSource = new MatTableDataSource(documentos)
       this.dataSource.paginator = this.paginator

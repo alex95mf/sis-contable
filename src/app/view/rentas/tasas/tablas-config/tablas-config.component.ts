@@ -164,7 +164,7 @@ export class TablasConfigComponent implements OnInit {
     (this as any).mensajeSpinner = "Cargando listado de tablas...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
 
     let data = {
       params: {

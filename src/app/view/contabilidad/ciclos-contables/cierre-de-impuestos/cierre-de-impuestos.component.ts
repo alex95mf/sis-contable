@@ -151,7 +151,7 @@ export class CierreDeImpuestosComponent {
 
    /* this.isRowSelectable = this.isRowSelectable.bind(this);
     this.commonVarSrvice.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })*/
   }
   vmButtons: any = [];

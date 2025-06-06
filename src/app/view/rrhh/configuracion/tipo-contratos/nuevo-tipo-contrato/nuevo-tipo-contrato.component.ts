@@ -229,7 +229,7 @@ export class NuevoTipoContratoComponent implements OnInit {
             cat_tiempo: this.documento.cat_tiempo
           }
         }
-        console.log(data)
+        console.log(data);
 
         this.apiSrv.saveTipoContrato(data).subscribe(
           (res) => {

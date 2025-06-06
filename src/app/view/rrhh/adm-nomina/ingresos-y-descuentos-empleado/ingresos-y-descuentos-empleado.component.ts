@@ -1557,7 +1557,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
   handleColumnCheck(event: any, data: any) {
     console.log(event.target.checked)
-    console.log(data)
+    console.log(data);
     this.objGetIngresosDescuento.forEach(e => {
 
       if(event.target.checked ){
@@ -1579,7 +1579,7 @@ export class IngresosYDescuentosEmpleadoComponent implements OnInit {
 
   handleRowCheck(event, data: any) {
     console.log(event.target.checked)
-    console.log(data)
+    console.log(data);
     console.log(this.objGetIngresosDescuento)
    this.objGetIngresosDescuento.forEach(e => {
 

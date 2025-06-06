@@ -3,6 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "allowUnreachableCode": true,
+    "allowUnusedLabels": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "noImplicitOverride": false,

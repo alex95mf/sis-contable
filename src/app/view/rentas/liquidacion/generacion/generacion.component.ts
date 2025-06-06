@@ -782,16 +782,16 @@ export class GeneracionComponent implements OnInit, OnDestroy {
             if (res["data"][0].estado !== 'C') {
               this.liquidacion.estado = 'A'
 
-              const documento = { ...this.liquidacion, detalles: [...this.liquidacion.detalles, ...this.exoneraciones] }
+              const documento = { ...this.liquidacion, detalles: [...this.liquidacion.detalles, ...this.exoneraciones] };
 
               (this as any).mensajeSpinner = 'Almacenando Liquidacion'
               this.lcargando.ctlSpinner(true);
-              // console.log(data)
+              // console.log(data);
               this.apiService.setLiquidacion({liquidacion: documento}).subscribe(
                 res => {
                   Swal.fire({
                     title: this.fTitle,
-                    text: res['message'],
+                  text: res['message'],
                     icon: 'success'
                   })
                   this.liquidacion.id = res['data'].id_liquidacion

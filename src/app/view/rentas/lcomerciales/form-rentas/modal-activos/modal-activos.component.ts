@@ -90,7 +90,7 @@ export class ModalActivosComponent implements OnInit {
     let id = this.contr.id_cliente;
     let data = {
       id_contribuyente: id
-    }
+    };
     // console.log(data);
     (this as any).mensajeSpinner = "Cargando activos por contribuyente...";
     this.lcargando.ctlSpinner(true);

@@ -111,7 +111,7 @@ export class ModalIngresoAsignacionComponent implements OnInit {
 
     (this as any).mensajeSpinner = "Cargando lista de asignacion ingreso...";
     this.lcargando.ctlSpinner(true);
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
     let data = {
       periodo: this.periodo,
       params: {

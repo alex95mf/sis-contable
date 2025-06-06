@@ -382,7 +382,7 @@ export class CatalogoElectronicoComponent implements OnInit {
   }
   // SearchList(){
   //   // console.log(event);
-  //   this.listaSolicitudes = []
+  //   this.listaSolicitudes = [];
   //   (this as any).mensajeSpinner = "Cargando...";
   //   this.lcargando.ctlSpinner(true);
 
@@ -430,7 +430,7 @@ export class CatalogoElectronicoComponent implements OnInit {
     }
 
     // console.log(event);
-    this.listaSolicitudes = []
+    this.listaSolicitudes = [];
     (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
 
@@ -479,7 +479,7 @@ export class CatalogoElectronicoComponent implements OnInit {
           filter: this.filter
         }
       }
-      let excelData = []
+      let excelData = [];
       (this as any).mensajeSpinner = "Generando Archivo Excel..."
       this.lcargando.ctlSpinner(true);
       this.service.getCataElectronico({ params: { filter: this.filter } }).subscribe(
@@ -507,7 +507,7 @@ export class CatalogoElectronicoComponent implements OnInit {
               title: 'Catalogo Eletrónico',
               rows:  res.data
             }
-            console.log(data)
+            console.log(data);
 
           this.xlsService.exportConsultaCataElectronico(data, 'Catalogo Eletrónico')
           this.lcargando.ctlSpinner(false)

@@ -20,7 +20,7 @@ export class ListTarifaComponent implements OnInit {
   fTitle = 'Listado de Tarifas por Concepto'
   mensajeSpinner: string
   vmButtons: any
-  dtOptions: DataTables.Settings = {}
+  dtOptions: any = {}
   dtTrigger = new Subject();
 
   tarifas = []
@@ -85,11 +85,12 @@ export class ListTarifaComponent implements OnInit {
             id: t.id_tarifa,
             descripcion: t.descripcion,
             estado: t.estado == 'A',
-            concepto: {
-              id: t.concepto.id_concepto,
-              codigo: t.concepto.codigo,
-              nombre: t.concepto.nombre
-            } || null
+            concepto: t.concepto ? {
+                id: t.concepto.id_concepto,
+                codigo: t.concepto.codigo,
+                nombre: t.concepto.nombre
+              } : null
+            
           }
           this.tarifas.push({ ...tarifa })
 

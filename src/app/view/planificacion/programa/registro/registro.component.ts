@@ -151,7 +151,7 @@ export class RegistroComponent implements OnInit {
         presupuesto: response.presupuesto,
         disponible: 0,
         asignado: 0,
-      }
+      };
       
       (this as any).mensajeSpinner = 'Cargando Presupuesto de Departamentos';
       this.departamentos = await this.programaRegistroService.getDepartamentosPresupuesto({ periodo: this.periodoSelected, programa: this.programaSelected })
@@ -350,7 +350,7 @@ export class RegistroComponent implements OnInit {
       programa_id: this.programa.id,
       departamentos: this.departamentos.map(d => d.id)
     }
-    // console.log(data)
+    // console.log(data);
 
     this.programaRegistroService.getPresupuestoDepartamentos(data).subscribe(
       res => {

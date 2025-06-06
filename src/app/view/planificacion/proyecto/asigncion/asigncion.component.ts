@@ -262,7 +262,7 @@ export class AsigncionComponent implements OnInit {
       this.frecMedicion = response.PLA_FRECUENCIA_MEDICIO
       this.tiempoPrevision = response.PLA_MESES_META
       this.unidadesMedida = response.PLA_U_MED
-      this.lista_metas = response.PLA_META_POA
+      this.lista_metas = response.PLA_META_POA as any;
 
 
       (this as any).mensajeSpinner = 'Cargando Periodos'
@@ -830,7 +830,7 @@ export class AsigncionComponent implements OnInit {
       ids: this.attrDept.map(a => a.id),
       atribuciones: this.attrDept
     }
-    // console.log(data)
+    // console.log(data);
     this.lcargando.ctlSpinner(true);
     this.apiService.almacenaAttrs(data).subscribe(
       res => {

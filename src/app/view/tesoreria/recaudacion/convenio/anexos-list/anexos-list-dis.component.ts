@@ -57,7 +57,7 @@ export class AnexosListComponentDis implements OnInit {
 
         }
 
-        // console.log(data)
+        // console.log(data);
         if(res.condi == 'dis'||res.condi == 'all'){
           console.log('Anexo Discapa', res.condi, data);
           this.apiService.getAnexos(data).subscribe(

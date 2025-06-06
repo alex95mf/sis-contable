@@ -431,7 +431,7 @@ export class DiariogeneralComponent implements OnInit {
       title: 'Anexo al estado de Situación Financiera',
       rows:  this.dtConsultaAsientoAuxiliar
     }
-    console.log(data)
+    console.log(data);
 
     this.xlsService.exportDiarioGeneralAuxiliares(data, 'Reporte Auxiliares')
   }

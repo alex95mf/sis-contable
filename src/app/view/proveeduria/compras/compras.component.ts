@@ -28,7 +28,6 @@ import { ModalComprasComponent } from './modal-compras/modal-compras.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { MessageService } from 'primeng/api';
 
 import { MenuItem } from 'primeng/api';
 
@@ -45,6 +44,7 @@ import { ModalCuentasPorPagarComponent } from './modal-cuentas-por-pagar/modal-c
 import { ModalCuentaRetFuenteComponent } from './modal-cuenta-ret-fuente/modal-cuenta-ret-fuente.component';
 import { ModalCuentaRetIvaComponent } from './modal-cuenta-ret-iva/modal-cuenta-ret-iva.component';
 import Botonera from 'src/app/models/IBotonera';
+import * as xml2js from 'xml2js';
 
 @Component({
 standalone: false,
@@ -70,7 +70,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
   ListaCuentasPagarAnticipos: any = [];
   ListaCuentasPagarMultas: any = [];
   total_anticipos:any;
-  msgs2: MessageService[];
+  msgs2: any[];
   isPouchesShared: boolean = false;
   busqueda: boolean = false;
   asientoAnticiposId:any;
@@ -538,7 +538,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
           //this.calculaImpuestoIva(); //04-10-2023
 
           // Caraga tabla resumen de impuestos
-          this.detalleImpuesto=[]
+          this.detalleImpuesto=[];
           res.detalle_impuestos.forEach((element,index) => {
 
             let obj = {
@@ -591,7 +591,7 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
 
 
         // Llena Asientos /
-        this.fieldsDaily=[]
+        this.fieldsDaily=[];
          // antiormente jalaba del campo detalles en lugar del campo detallestot
         res.asiento_cab?.detallestot.forEach((element: any) => {
           // let tipo=''
@@ -635,8 +635,8 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
         this.totalPagar = res.total_pagar
 
         // Carga Anticipos y Multas
-        this.ListaAnticipos=[]
-        this.ListaMultas=[]
+        this.ListaAnticipos=[];
+        this.ListaMultas=[];
         if(res.anticipos.length > 0){
 
           this.ExistenAnticipos = false;
@@ -686,8 +686,11 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
           this.ExisteHistorial = true
           this.dataHistorial = res.movimientos
           this.dataHistorial.forEach((element: any) => {
-            if (element.tipo == 'Compras') this.totalMovimientos += +element.valor ?? 0
-            else this.totalMovimientos -= +element.valor ?? 0
+            if (element.tipo == 'Compras') {
+              this.totalMovimientos += +(element.valor ?? 0)
+            } else {
+              this.totalMovimientos -= +(element.valor ?? 0)
+            }
           })
         }
 
@@ -2046,7 +2049,7 @@ console.log(this.dataCuenta)
         DetailCount++
 
       }));
-      let codigo_cuentas=[]
+      let codigo_cuentas=[];
       this.fieldsDaily.forEach(d => {
         codigo_cuentas.push(d.account);
       });
@@ -5480,9 +5483,9 @@ this.lastRecord = null
 
   async handleSelectIngreso({id}) {
     // Limpiar arrays
-    this.ListaItems = []
-    this.dataCuenta=[]
-    this.tbl_partidas = []
+    this.ListaItems = [];
+    this.dataCuenta=[];
+    this.tbl_partidas = [];
     this.ingresoSelected = id
 
     this.lcargando.ctlSpinner(true);
@@ -5604,9 +5607,9 @@ this.lastRecord = null
       this.lcargando.ctlSpinner(true);
       this.comSrv.cargarIngresoBodega(this.id_solicitud).subscribe(res => {
         console.log(res)
-        this.dataCuenta=[]
-        this.ListaItems=[]
-       // let codigo_cuentas=[]
+        this.dataCuenta=[];
+        this.ListaItems=[];
+       // let codigo_cuentas=[];
         if(res['data'].length > 0){
           res['data'].forEach(element => {
             if(element.detalles.length > 0){
@@ -6656,7 +6659,7 @@ sumRegistroTodo(){
     });
 
 
-    filetext.then(async (value) => {
+    filetext.then(async (value: any) => {
       // console.log(value)
       const jsonValue = await this.xmlToJson(value);
       this.ProcesaCargaXml(jsonValue);
@@ -7024,8 +7027,7 @@ sumRegistroTodo(){
 
 
 
-  async xmlToJson(string) {
-    var xml2js = require('xml2js');
+  async xmlToJson(string: string) {
     try {
       const json = await xml2js.parseStringPromise(string);
       return json;
@@ -7053,7 +7055,7 @@ sumRegistroTodo(){
         title: 'Cuentas',
         rows:  this.dataCuenta
       }
-      console.log(data)
+      console.log(data);
       this.xlsService.exportExcelCuentasCompras(data, 'Cuentas')
       // let tipo = 'Cuentas'
       // this.exportAsXLSX(this.dataCuenta,tipo);
@@ -7074,7 +7076,7 @@ sumRegistroTodo(){
         title: 'Asiento',
         rows:  this.fieldsDaily
       }
-      console.log(data)
+      console.log(data);
     this.xlsService.exportExcelAsientoCompras(data, 'Asiento')
       // let tipo = 'Asiento'
       // this.exportAsXLSX(this.fieldsDaily,tipo);
@@ -7095,7 +7097,7 @@ sumRegistroTodo(){
         title: 'Asiento Anticipos',
         rows:  filteredRows
       }
-      console.log(data)
+      console.log(data);
     this.xlsService.exportExcelAsientoCompras(data, 'Asiento Anticipos')
 
       this.lcargando.ctlSpinner(false);
@@ -7116,7 +7118,7 @@ sumRegistroTodo(){
             title: 'Asiento Multas',
             rows:  filteredRows
           }
-          console.log(data)
+          console.log(data);
         this.xlsService.exportExcelAsientoCompras(data, 'Asiento Multas')
 
           this.lcargando.ctlSpinner(false);

@@ -124,7 +124,7 @@ export class ConsultaProveedoresComponent implements OnInit {
   }
 
   exportarExcel = () => {
-    let excelData = []
+    let excelData = [];
     (this as any).mensajeSpinner = "Descargando Listado de Proveedores"
     this.lcargando.ctlSpinner(true);
     this.mdlSrv.getProveedores({ params: { filter: this.filter } }).subscribe(
@@ -134,7 +134,7 @@ export class ConsultaProveedoresComponent implements OnInit {
           title: 'Proveedores',
           rows:  res.data
         }
-        console.log(data)
+        console.log(data);
 
         this.xlsService.exportConsultaProveedores(data, 'Proveedores')
         this.lcargando.ctlSpinner(false)

@@ -131,7 +131,7 @@ export class XlsExportService {
     let ws = wb.addWorksheet('rep')
     console.log(rep);
     
-    //let reverse = []
+    //let reverse = [];
     //reverse = rep.reverse();
     const STYLE_HEADER_AMARILLO : Style = {
       alignment: {
@@ -268,7 +268,7 @@ export class XlsExportService {
     let ws = wb.addWorksheet('rep')
     console.log(rep);
     
-    //let reverse = []
+    //let reverse = [];
     //reverse = rep.reverse();
     const STYLE_HEADER_AMARILLO : Style = {
       alignment: {
@@ -394,7 +394,7 @@ export class XlsExportService {
     let ws = wb.addWorksheet('rep')
     console.log(rep);
     
-    //let reverse = []
+    //let reverse = [];
     //reverse = rep.reverse();
     const STYLE_HEADER_AMARILLO : Style = {
       alignment: {
@@ -646,7 +646,7 @@ export class XlsExportService {
     ws.insertRow(1, [''])
     let len = data.oe.length / 2
     for(let i = len - 1; i >= 0; i--) {
-      let rowValues = []
+      let rowValues = [];
       rowValues[1] = data.oe[i].valor
       rowValues[12] = data.oe[i + len].valor
       ws.insertRow(1, rowValues)
@@ -1761,7 +1761,7 @@ export class XlsExportService {
       { header: 'Código Partida', key: 'codigo_presupuesto', width: 15 },
       { header: 'Nombre Partida', key: 'nombre_presupuesto', width: 20 },
     ]
-        // console.log(data)   
+        // console.log(data);   
         data.rows.forEach(element => {
           if(element.estado == 'A'){ Object.assign(element, { estado:'Aprobado'})}
           else if(element.estado == 'X'){ Object.assign(element, { estado:'Anulado'})}
@@ -1860,7 +1860,7 @@ export class XlsExportService {
       { header: 'Tipo de Pago', key: 'tipo_pago', width: 15 },
       { header: 'Estado', key: 'estado', width: 10 },
     ]
-        // console.log(data)   
+        // console.log(data);   
       data.rows.forEach(element => {
         Object.assign(element, { total:parseFloat(element.total), saldo:parseFloat(element.saldo)})
         
@@ -1948,7 +1948,7 @@ export class XlsExportService {
       // { header: 'Observación', key: 'observacion', width: 10 },
       // { header: 'Tasa', key: 'tasa_nombre', width: 10 },
     ]
-      // console.log(data)   
+      // console.log(data);   
       data.rows.forEach(element => {
         Object.assign(element, { total:parseFloat(element.total), saldo:parseFloat(element.saldo)})
         if(element.estado == 'A'){ Object.assign(element, { estado:'Aprobado'})}
@@ -2086,7 +2086,7 @@ export class XlsExportService {
       else if(element.estado == 'V'){ Object.assign(element, { estado:'Convenio'})}
 
     }); 
-        // console.log(data)   
+        // console.log(data);   
                    
     ws.insertRows(2, data.rows)
    
@@ -2155,7 +2155,7 @@ export class XlsExportService {
       { header: 'Haber', key: 'valor_haber_regla', width: 8 },
     
     ]
-        // console.log(data)   
+        // console.log(data);   
                    
     ws.insertRows(2, data.rows)
    
@@ -2313,7 +2313,7 @@ export class XlsExportService {
     let ws = wb.addWorksheet('rep')
     console.log(rep);
     
-    //let reverse = []
+    //let reverse = [];
     //reverse = rep.reverse();
     const STYLE_HEADER_AMARILLO : Style = {
       alignment: {
@@ -2758,7 +2758,7 @@ export class XlsExportService {
     // Agregar los values de los demas objetos como rows
     json.forEach(elem => {
       let keys = Object.keys(elem)
-      let row = []
+      let row = [];
       keys.forEach((key: string) => row.push(elem[key] ?? 0))
       ws.addRow(row)
     })
@@ -4039,7 +4039,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
 
    
    
-    let columns= []
+    let columns= [];
     data.cols.forEach(elem => {
       let data  = {
         header: elem.header,

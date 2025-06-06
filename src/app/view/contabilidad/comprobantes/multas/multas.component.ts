@@ -300,7 +300,7 @@ export class MultasComponent implements OnInit {
           let data2 = {
             documento :this.documento
           }
-          console.log(data)
+          console.log(data);
           this.apiSrv.setRecDocumento(data2).subscribe(
             (res)=>{
               console.log(res)

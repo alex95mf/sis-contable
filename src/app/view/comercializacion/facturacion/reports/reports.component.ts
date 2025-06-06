@@ -61,7 +61,7 @@ export class ReportsComponent implements OnDestroy, OnInit {
     private commonServices: CommonService, private commonVarSrv: CommonVarService, private modalService: NgbModal) {
 
     this.commonVarSrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })
 
   }

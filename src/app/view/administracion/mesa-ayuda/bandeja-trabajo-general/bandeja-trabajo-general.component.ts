@@ -384,7 +384,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
     (this as any).mensajeSpinner = "Cargando listado de Tickets...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
 
     let data = {
       params: {
@@ -783,7 +783,7 @@ export class BandejaTrabajoGeneralComponent implements OnInit {
       id_aprobacion_ticket: aprobacionActiva.id_aprobacion_ticket
     }
 
-    console.log(data)
+    console.log(data);
     console.log(aprobacionActiva)
     this.lcargando.ctlSpinner(true);
     this.ticketSrv.aprobarTicket({data}).subscribe(

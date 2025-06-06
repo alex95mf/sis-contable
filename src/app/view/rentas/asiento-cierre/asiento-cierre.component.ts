@@ -591,7 +591,7 @@ export class AsientoCierreComponent implements OnInit {
      return;
     }else{
 
-      this.getCuentaContableTipoPago()
+      this.getCuentaContableTipoPago();
       (this as any).mensajeSpinner = "Cargando Números de Control...";
       this.lcargando.ctlSpinner(true);
       this.numeros_control = []
@@ -1849,7 +1849,7 @@ export class AsientoCierreComponent implements OnInit {
 				  title: 'Asiento de Cierre',
 				  rows:  this.cierreExcel
 				}
-				//console.log(data)
+				//console.log(data);
 			  this.xlsServ.exportExcelAsientoCierre(data,  `Cierre-${this.filter.tipo_cierre}-${moment().format('YYYY-MM-DD')}`)
 				this.lcargando.ctlSpinner(false);
 			  }else{
@@ -2348,7 +2348,7 @@ console.log(this.RolGeneral);
 
 
    if(event == 'PAGADO_TERCEROS'){
-      this.verBanco= true
+      this.verBanco= true;
       (this as any).mensajeSpinner = "Cargando Rubros...";
       this.lcargando.ctlSpinner(true);
       this.apiSrv.getRubrosPagoTerceros().subscribe(

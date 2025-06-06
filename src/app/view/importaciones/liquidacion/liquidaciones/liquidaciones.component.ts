@@ -89,7 +89,7 @@ export class LiquidacionesComponent implements OnInit {
     })
 
     this.commonVarSrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarSrv.listenLiquidacionImp.asObservable().subscribe(res => {

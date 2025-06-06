@@ -376,7 +376,7 @@ export class MetasComponent implements OnInit {
       return;
     }
 
-    this.programas = []
+    this.programas = [];
     (this as any).mensajeSpinner = "Cargando lista de metas...";
     this.lcargando.ctlSpinner(true);
     this.metaSrv.getGoals({periodo: this.seleccion.periodo}).subscribe(

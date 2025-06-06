@@ -168,7 +168,7 @@ export class EstadoCuentaComponent implements OnInit {
 				  empleado: this.empleadoActive.emp_full_nombre,
 				  rows:  this.infomovDataExcel
 				}
-				console.log(data)
+				console.log(data);
 			  this.xlsService.exportExcelEstadoCuentaEmpleado(data, 'Estado de Cuenta de Empleado')
 				//this.lcargando.ctlSpinner(false);
 			  }else{

@@ -31,7 +31,7 @@ export class AnexosListComponentDis implements OnInit {
 
   
   anexos = [];
-  anexosCP = []
+  anexosCP = [];
   //anexos
 
   constructor(
@@ -56,7 +56,7 @@ export class AnexosListComponentDis implements OnInit {
           
         }
 
-        console.log(data)
+        console.log(data);
         if(res.condi == 'ticket'){
           //console.log('Anexo Discapa', res.condi, data);
           this.apiService.getAnexos(data).subscribe(
@@ -91,7 +91,7 @@ export class AnexosListComponentDis implements OnInit {
 
     this.commonVarService.clearAnexos.asObservable().subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
       }
     )
 

@@ -131,7 +131,7 @@ export class ListBusquedaTrasladoComponent implements OnInit {
   cargarDocumentos(flag: boolean = false) {
     (this as any).mensajeSpinner = "Cargando listado de productos...";
     this.lcargando.ctlSpinner(true);
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
     console.log(this.claseSelect)
     let fk_grupo = this.claseSelect.id_grupo_productos
 

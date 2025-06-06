@@ -125,7 +125,7 @@ export class BusquedaTrasladoComponent implements OnInit {
     (this as any).mensajeSpinner = "Cargando lista de Traslados de Bienes...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
 
     let data = {
       params: {

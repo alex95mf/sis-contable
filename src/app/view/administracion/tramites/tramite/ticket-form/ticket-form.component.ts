@@ -41,11 +41,11 @@ export class TicketFormComponent implements OnInit {
   ticketNew: any = { fk_tipo_flujo: 0, tipo: 0 };
   needRefresh: boolean = false;
   deshabilitar: boolean = false;
-  usuariospre: any = []
+  usuariospre: any = [];
   width: any;
 
   titulo: any = ''
-  contribuyente: any = []
+  contribuyente: any = [];
 
   claseDemorado= false
   claseUsuDemorado = false
@@ -197,8 +197,8 @@ export class TicketFormComponent implements OnInit {
      console.log(this.flujoPasos.length)
      let nroPasos = this.flujoPasos.length
      let porcentaje = 100 / nroPasos
-     let pasosCerrados = []
-     let ultimoCerrado = []
+     let pasosCerrados = [];
+     let ultimoCerrado = [];
      let clase="";
      
      this.width=porcentaje;

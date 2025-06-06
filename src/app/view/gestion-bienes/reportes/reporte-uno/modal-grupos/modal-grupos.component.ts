@@ -108,7 +108,7 @@ export class ModalGruposComponent implements OnInit {
 
   cargarSubgrupos(flag: boolean = false){
     
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
 
     (this as any).mensajeSpinner = "Cargando";
     this.lcargando.ctlSpinner(true);

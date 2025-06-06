@@ -20,8 +20,8 @@ standalone: false,
 export class MantenimientoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   mensajeSpinner: string = "Cargando...";
-  dataProducto: any = []
-  vmButtons: any =[]
+  dataProducto: any = [];
+  vmButtons: any =[];
   codigoGrupo: any;
   proveedorActive: any = {
     razon_social: ""
@@ -34,7 +34,7 @@ export class MantenimientoComponent implements OnInit {
     detalles:[]
 
 }
-  producto:any = []
+  producto:any = [];
 
   mantenimientoDisabled =false
   anexoDisabled =true
@@ -236,7 +236,7 @@ export class MantenimientoComponent implements OnInit {
         let data = {
           documento :this.documento
         }
-        console.log(data)
+        console.log(data);
         this.invService.saveMantenimiento(data).subscribe(
           (res)=>{
             console.log(res)

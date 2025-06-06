@@ -64,9 +64,9 @@ export class TramiteComponent implements OnInit {
   filter: any;
 
   contribuyente: any;
-  excelData: any = []
+  excelData: any = [];
 
-  documentos: any = []
+  documentos: any = [];
 
   constructor(
     private ticketSrv: TramitesService,
@@ -392,7 +392,7 @@ UploadService(file, payload?: any): void {
           console.log(res);
           this.paginate.length = res.data.total;
           this.ticketsDt = (res.data.current_page == 1) ? res.data.data : Object.values(res.data.data)
-          this.ticketsDtPasos = []
+          this.ticketsDtPasos = [];
           this.ticketsDt.forEach(e => {
             e.flujo_pasos.forEach(f => {
             let data = {

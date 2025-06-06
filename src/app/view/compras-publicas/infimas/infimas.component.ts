@@ -454,11 +454,11 @@ export class InfimasComponent implements OnInit {
   // }
   SearchList(event,flag: boolean = false){
     // console.log(event);
-    this.listaSolicitudes = []
+    this.listaSolicitudes = [];
     (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
     let data = {
       id_programa :this.dato_Programa,
       id: this.datoDepartamento,
@@ -532,7 +532,7 @@ export class InfimasComponent implements OnInit {
           filter: this.filter
         }
       }
-      let excelData = []
+      let excelData = [];
       (this as any).mensajeSpinner = "Generando Archivo Excel..."
       this.lcargando.ctlSpinner(true);
       this.service.getInfimas({ params: { filter: this.filter } }).subscribe(
@@ -546,7 +546,7 @@ export class InfimasComponent implements OnInit {
               title: 'Infimas',
               rows:  res.data
             }
-            console.log(data)
+            console.log(data);
           this.xlsService.exportConsultaInfimas(data, 'Infimas')
           this.lcargando.ctlSpinner(false)
           }

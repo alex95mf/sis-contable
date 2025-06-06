@@ -154,7 +154,7 @@ paginate: any= {
   ngOnInit(): void {
 
     setTimeout(()=> {
-      this.cargaInicial()
+      this.cargaInicial();
       //this.getCatalogos();
     }, 50);
   }
@@ -163,21 +163,21 @@ paginate: any= {
     this.lcargando.ctlSpinner(true);
     try {
 
-      (this as any).mensajeSpinner = "Cargando Períodos"
-      const resPeriodos = await this.apiSrv.getPeriodos()
-      this.cmb_periodo = resPeriodos
+      (this as any).mensajeSpinner = "Cargando Períodos";
+      const resPeriodos = await this.apiSrv.getPeriodos();
+      this.cmb_periodo = resPeriodos;
 
-      (this as any).mensajeSpinner = 'Cargando Programas'
+      (this as any).mensajeSpinner = 'Cargando Programas';
       this.programas = await this.apiSrv.getProgramas();
-      (this as any).mensajeSpinner = 'Cargando Proyectos'
+      (this as any).mensajeSpinner = 'Cargando Proyectos';
       let proyectos =await this.apiSrv.getProyectos({filter: this.filter, paginate : this.paginate});
 this.lista_proyectos= proyectos.data;
 this.paginate.length = proyectos.total;
-      this.lcargando.ctlSpinner(false)
+      this.lcargando.ctlSpinner(false);
     } catch (err) {
       console.log(err)
-      this.lcargando.ctlSpinner(false)
-      this.toastr.error(err.error.message, 'Error en Carga Inicial')
+      this.lcargando.ctlSpinner(false);
+      this.toastr.error(err.error.message, 'Error en Carga Inicial');
     }
   }
 

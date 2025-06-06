@@ -220,7 +220,7 @@ export class SueldosComponent implements OnInit {
 
   LoadTableSueldo(flag: boolean = false) {
 
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
     let data = {
       params: {
         filter: this.filter,

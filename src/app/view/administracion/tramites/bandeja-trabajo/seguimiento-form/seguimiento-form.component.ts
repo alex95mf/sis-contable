@@ -198,7 +198,7 @@ export class SeguimientoFormComponent implements OnInit {
     console.log(this.flujoPasosDos.length)
     let nroPasos = this.flujoPasosDos.length
     let porcentaje = 100 / nroPasos
-    let pasosCerrados = []
+    let pasosCerrados = [];
     const strPOrcentaje = String(porcentaje);
     this.width='width:'+strPOrcentaje+';'
    

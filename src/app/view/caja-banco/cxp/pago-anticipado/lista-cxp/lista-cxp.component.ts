@@ -52,7 +52,7 @@ export class ListaCxpComponent implements OnInit {
   dataSourceCxP:any = [];
   dataAnteriorCxP:any = [];
   @ViewChild(DataTableDirective) dtElementCxP: DataTableDirective;
-  dtOptionsCxP: DataTables.Settings = {};
+  dtOptionsCxP: any = {};
   dtTriggerCxP = new Subject();
   presentarRadio:boolean = false;
   listadoGeneralCxP(lIdProveedor, lfecha, lEstado): any {

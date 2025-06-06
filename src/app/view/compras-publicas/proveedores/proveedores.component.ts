@@ -207,7 +207,7 @@ export class ProveedoresComponent implements OnInit {
     })
 
     this.commonVarServices.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })
     this.commonVarServices.regProveedores.asObservable().subscribe(
       (res) => {
@@ -840,7 +840,7 @@ export class ProveedoresComponent implements OnInit {
 
     this.cuentas = [];
     this.cuentasEliminar = [];
-    this.historicoCuentas =[]
+    this.historicoCuentas =[];
     this.fileList=undefined;
     this.commonServices.clearAnexos.next({});
     this.disabledCampo = false;
@@ -1479,7 +1479,7 @@ export class ProveedoresComponent implements OnInit {
       ip: this.commonServices.getIpAddress(),
       custom1:'PROVEEDOR-CERTIFICADO-BANCARIO'
     }
-    console.log(data)
+    console.log(data);
     this.UploadService(this.fileList[0], data);
     // if(this.fileList.length!=0){
     //   for (let i = 0; i < this.fileList.length; i++) {

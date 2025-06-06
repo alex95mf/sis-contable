@@ -71,7 +71,7 @@ export class GastosComponent implements OnInit {
     })
 
     this.commonVarSrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarSrv.listenGastosImp.asObservable().subscribe(res => {

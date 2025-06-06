@@ -383,7 +383,7 @@ export class MovContableComponent implements OnInit {
 				//   cuenta_hasta: this.toDatePicker,
 				  rows:  this.infomovDataExcel
 				}
-				console.log(data)
+				console.log(data);
 			  this.xlsService.exportExcelMayorCuentas(data, 'Mayor de Cuentas')
 				// let tipo = 'Asiento'
 				// this.exportAsXLSX(this.fieldsDaily,tipo);

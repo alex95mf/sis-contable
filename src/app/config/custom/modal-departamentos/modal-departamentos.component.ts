@@ -16,7 +16,7 @@ export class ModalDepartamentosComponent implements OnInit {
   lcargando: CcSpinerProcesarComponent;
   mensajeSpinner: string
 
-  departamentos: any = []
+  departamentos: any = [];
 
   vmButtons: any
 
@@ -116,7 +116,7 @@ export class ModalDepartamentosComponent implements OnInit {
 
   cargarDepartamentos(flag: boolean = false){
     this.lcargando.ctlSpinner(true);
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
     let data = {
       params: {
         filter: this.filter,

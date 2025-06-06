@@ -184,7 +184,7 @@ export class PuestoMercadoComponent implements OnInit {
       return
     }
 
-    let excelData = []
+    let excelData = [];
     (this as any).mensajeSpinner = 'Exportando Puestos de Mercado'
     this.lcargando.ctlSpinner(true);
     this.apiService.getPuestos({params: { filter: this.filter }}).subscribe(

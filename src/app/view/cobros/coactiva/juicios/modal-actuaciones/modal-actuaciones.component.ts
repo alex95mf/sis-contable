@@ -190,7 +190,7 @@ export class ModalActuacionesComponent implements OnInit {
       (this as any).mensajeSpinner = 'Almancenando Actuacion'
       this.lcargando.ctlSpinner(true);
 
-      console.log(data)
+      console.log(data);
 
       const response = await this.apiService.almacenaActuacion({ juicio: this.juicio, actuacion: data }) as any
       console.log(response)

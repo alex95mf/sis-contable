@@ -103,7 +103,7 @@ export class ViewMasivoComponent implements OnInit {
     })
 
     if (result.isConfirmed) {
-      let excelData = []
+      let excelData = [];
       this.dsEmpleados.data.forEach((element: any) => {
         let o = {
           Identificacion: element.emp_identificacion,

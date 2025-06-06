@@ -167,21 +167,21 @@ export class PacComponent implements OnInit {
     this.programaObjectSelected = event
     this.departamentosFilter = this.departamentos.filter((departamento: any) => departamento.grupo == event.valor)
     this.departamentoSelected = null
-    // this.bienes = []
+    // this.bienes = [];
   }
 
   handleSelectDepartamento(event) {
     if (event == undefined) return;
     this.departamentoObjectSelected = event
-    // this.bienes = []
+    // this.bienes = [];
   }
 
   async handleClickBuscar() {
     this.lcargando.ctlSpinner(true);
     try {
       // Obtener la Mision ?
-      (this as any).mensajeSpinner = 'Obteniendo Mision'
-      this.mision = await this.api.getMision({departamento: this.departamentoObjectSelected})
+      (this as any).mensajeSpinner = 'Obteniendo Mision';
+      this.mision = await this.api.getMision({departamento: this.departamentoObjectSelected});
 
       // Obtener las Compras
       (this as any).mensajeSpinner = 'Cargando Datos'

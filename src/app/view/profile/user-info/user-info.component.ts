@@ -233,7 +233,7 @@ export class UserInfoComponent implements OnInit {
         id_controlador: myVarGlobals.fSeguridades,
         accion: `Borrado de Anexo ${id_anexos}`,
         ip: this.commonServices.getIpAddress()
-      }
+      };
 
       (this as any).mensajeSpinner = 'Eliminando Firma Digital'
       this.lcargando.ctlSpinner(true);

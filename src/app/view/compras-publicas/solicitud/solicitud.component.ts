@@ -474,7 +474,7 @@ export class SolicitudComponent implements OnInit {
                     this.vmButtons[1].showimg = false
                     this.vmButtons[2].showimg = true
                     this.vmButtons[3].showimg = true
-                    this.listaSolicitudesAtribucion = []
+                    this.listaSolicitudesAtribucion = [];
                     this.atribucionParamsNew = {
                       programa: null,
                       departamento: null,
@@ -509,11 +509,11 @@ export class SolicitudComponent implements OnInit {
     console.log(event);
     this.departamento = []
     this.datoDepartamento = []
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudesAtribucion = [];
   }
 
   onDepartamentoSelect(event: Array<any>) {
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudesAtribucion = [];
   }
 
 
@@ -577,7 +577,7 @@ export class SolicitudComponent implements OnInit {
 
   SearchList() {
     // console.log(event);
-    this.listaSolicitudes = []
+    this.listaSolicitudes = [];
     (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
@@ -619,7 +619,7 @@ export class SolicitudComponent implements OnInit {
 
   SearchBienes() {
     // console.log(event);
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudesAtribucion = [];
     (this as any).mensajeSpinner = "Cargando Bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
@@ -633,7 +633,7 @@ export class SolicitudComponent implements OnInit {
       console.log(dat);
       if (dat['data'].length == 0) {
         this.toastr.info('No existe bienes para el Departamento seleccionado.')
-        this.listaSolicitudesAtribucion = []
+        this.listaSolicitudesAtribucion = [];
       } else {
 
         // if (dat['data']['current_page'] == 1) {
@@ -711,7 +711,7 @@ export class SolicitudComponent implements OnInit {
     //     console.log(dat);
     //     if(dat['data'].length == 0){
     //       this.toastr.info('No existe bienes para esa atribución')
-    //       this.listaSolicitudesAtribucion = []
+    //       this.listaSolicitudesAtribucion = [];
     //     }else {
 
     //       // if (dat['data']['current_page'] == 1) {
@@ -788,7 +788,7 @@ export class SolicitudComponent implements OnInit {
     let periodos = await this.service.getPeriodos() as any
     console.log(periodos.data)
     this.cmb_periodo = periodos.data
-    // this.listaSolicitudes = []
+    // this.listaSolicitudes = [];
     // console.log(this.vmButtons[0]);
 
   }
@@ -816,7 +816,7 @@ export class SolicitudComponent implements OnInit {
       fecha_creacion: moment(this.today).format('YYYY-MM-DD')
     }
 
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudesAtribucion = [];
 
   }
 
@@ -869,7 +869,7 @@ export class SolicitudComponent implements OnInit {
           fecha_creacion: moment(this.today).format('YYYY-MM-DD')
         }
 
-        this.listaSolicitudes = []
+        this.listaSolicitudes = [];
       }
     })
 
@@ -891,9 +891,9 @@ export class SolicitudComponent implements OnInit {
       fecha_creacion: moment(this.today).format('YYYY-MM-DD')
     }
 
-    this.listaSolicitudes = []
+    this.listaSolicitudes = [];
 
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudesAtribucion = [];
   }
 
   eliminarSolicitud(item) {

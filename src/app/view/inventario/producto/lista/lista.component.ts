@@ -143,7 +143,7 @@ export class ListaComponent implements OnInit {
 		let data = {
 			producto: this.productoSelect == 0 ? null : this.productoSelect,
 		}
-		console.log(data)
+		console.log(data);
 		this.reportesSrv.getProducts(data).subscribe(res => {
 			this.lcargando.ctlSpinner(false);
 			this.validaDt = true;

@@ -164,7 +164,7 @@ export class ModalCuentPreComponent implements OnInit {
       }
     }
 
-    console.log(data)
+    console.log(data);
 
     this.servicio.getCatalogoPresupuesto(data).subscribe(
       (res)=>{

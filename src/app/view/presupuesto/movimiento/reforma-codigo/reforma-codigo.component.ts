@@ -945,7 +945,7 @@ console.log("ejecutando recalculo",data);
 
   /* SearchList(){
     // console.log(event);
-    this.listaSolicitudes = []
+    this.listaSolicitudes = [];
     (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
@@ -993,7 +993,7 @@ console.log("ejecutando recalculo",data);
       this.toastr.info('Ingrese el periodo')
       return
     }else{
-      this.listaSolicitudesAtribucion = []
+      this.listaSolicitudesAtribucion = [];
       (this as any).mensajeSpinner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
@@ -1006,7 +1006,7 @@ console.log("ejecutando recalculo",data);
         console.log(dat);
         if(dat['data'].length == 0){
           this.toastr.info('No existe bienes para esa atribución')
-          this.listaSolicitudesAtribucion = []
+          this.listaSolicitudesAtribucion = [];
         }else {
 
           dat['data'].map((res)=>{
@@ -1051,7 +1051,7 @@ console.log("ejecutando recalculo",data);
       this.toastr.info('Ingrese el periodo')
       return
     }else{
-      this.listaSolicitudesAtribucion = []
+      this.listaSolicitudesAtribucion = [];
       (this as any).mensajeSpinner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
@@ -1064,7 +1064,7 @@ console.log("ejecutando recalculo",data);
         console.log(dat);
         if(dat['data'].length == 0){
           this.toastr.info('No existe bienes para esa atribución')
-          this.listaSolicitudesAtribucion = []
+          this.listaSolicitudesAtribucion = [];
         }else {
 
           dat['data'].map((res)=>{
@@ -1111,7 +1111,7 @@ console.log("ejecutando recalculo",data);
     // if(this.atribucionParamsNew.reforma_presupuesto2 == null){
     //   this.toastr.info('Debe ingresar el codigo presupuesto')
     // }else{
-      this.listaSolicitudesAtribucion2 = []
+      this.listaSolicitudesAtribucion2 = [];
       (this as any).mensajeSpinner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
@@ -1125,7 +1125,7 @@ console.log("ejecutando recalculo",data);
         console.log(dat);
         if(dat['data'].length == 0){
           this.toastr.info('No existe bienes para esa atribución')
-          this.listaSolicitudesAtribucion2 = []
+          this.listaSolicitudesAtribucion2 = [];
         }else {
 
           dat['data'].map((res)=>{
@@ -1181,7 +1181,7 @@ console.log("ejecutando recalculo",data);
   //     this.SearchBienes();
   //   }
 
-  //   // this.listaSolicitudes = []
+  //   // this.listaSolicitudes = [];
   //   // console.log(this.vmButtons[0]);
 
   // }
@@ -1249,8 +1249,8 @@ console.log("ejecutando recalculo",data);
           fecha: moment(this.today).format('YYYY-MM-DD')
         }
 
-        this.listaSolicitudesAtribucion = []
-        this.listaSolicitudesAtribucion2 = []
+        this.listaSolicitudesAtribucion = [];
+        this.listaSolicitudesAtribucion2 = [];
         this.total2 = 0;
         this.total = 0;
         this.totalOriginal = 0;
@@ -1263,10 +1263,10 @@ console.log("ejecutando recalculo",data);
 
         this.search = false
 
-        this.listaSolicitudes = []
+        this.listaSolicitudes = [];
 
-        this.dato_Programa =[]
-        this.datoDepartamento = []
+        this.dato_Programa =[];
+        this.datoDepartamento = [];
       }
     })
 
@@ -1286,9 +1286,9 @@ console.log("ejecutando recalculo",data);
       atribucion: null
     }
 
-    this.listaSolicitudes = []
+    this.listaSolicitudes = [];
 
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudesAtribucion = [];
   } */
 
   /* eliminarSolicitud(item){

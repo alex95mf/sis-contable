@@ -483,7 +483,7 @@ export class EmpresarialComponent implements OnInit {
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: `Grupo`,
-      cancelmButtonText: `Cancelar`,
+      cancelButtonText: `Cancelar`,
       denyButtonText: `Valor`,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#E0A800',

@@ -783,7 +783,7 @@ export class PrestamosInternosComponent implements OnInit {
       vdt_observacion: this.formGroupVacaciones.value.fnc_vdt_observacion,
       vac_detalle_estado_id: 'PAPR'
     };
-    // console.log(data)
+    // console.log(data);
     // return;
 
     (this as any).mensajeSpinner = "Guardando...";

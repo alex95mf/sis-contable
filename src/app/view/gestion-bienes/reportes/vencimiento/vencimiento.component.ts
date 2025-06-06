@@ -159,9 +159,9 @@ export class VencimientoComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     try {
       // Cargar Catalogos
-      (this as any).mensajeSpinner = 'Cargando Catalogos'
+      (this as any).mensajeSpinner = 'Cargando Catalogos';
       let catalogos = await this.apiService.getCatalogos({params: "'INV_REGISTRO_POLIZA'"});
-      this.cmb_tipo = catalogos['INV_REGISTRO_POLIZA']
+      this.cmb_tipo = catalogos['INV_REGISTRO_POLIZA'];
   
       // Cargar Documentos
       (this as any).mensajeSpinner = 'Cargando Documentos'
@@ -243,7 +243,7 @@ console.log(respuesta);
   }
 
   exportExcel() {
-    let excelData = []
+    let excelData = [];
     this.documentos.forEach((documento: any) => {
       let o = {
         NumDocumento: documento.num_documento,

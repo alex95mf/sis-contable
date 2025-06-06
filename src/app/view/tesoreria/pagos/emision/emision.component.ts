@@ -337,7 +337,7 @@ export class EmisionComponent implements OnInit {
 
         if(res.asiento!=null){
           if(res.asiento.detalle.length > 0){
-            let cuentas=[]
+            let cuentas=[];
             res.asiento.detalle.forEach(e => {
               cuentas.push(e.cuenta);
             })
@@ -348,7 +348,7 @@ export class EmisionComponent implements OnInit {
             this.apiSrv.getAccountsByCodigo(cod).subscribe(res2 => {
 
 
-              this.asiento=[]
+              this.asiento=[];
               let cuentas_filter
               console.log(res.asiento)
 
@@ -382,7 +382,7 @@ export class EmisionComponent implements OnInit {
                 })
             })
           }else{
-            this.asiento=[]
+            this.asiento=[];
           }
         }
 
@@ -749,7 +749,7 @@ export class EmisionComponent implements OnInit {
     }
   }
   exportarExcelFactura(){
-    let excelData = []
+    let excelData = [];
     let tipo_emision = 'Emision de pago factura'
 
     this.deudas.forEach(elem => {
@@ -776,7 +776,7 @@ export class EmisionComponent implements OnInit {
     this.exportAsXLSX(excelData,tipo_emision);
   }
   exportarExcelNomina(){
-    let excelData = []
+    let excelData = [];
     let tipo_emision = 'Emision de pago nómina'
     this.exportList = this.ordenesNomina
 
@@ -1753,8 +1753,8 @@ export class EmisionComponent implements OnInit {
       if(this.documento.forma_pago == 'TRANSFERENCIA'){
 
         if(this.deudas.length > 0){
-          let cuentas=[]
-          this.asiento = []
+          let cuentas=[];
+          this.asiento = [];
           console.log(this.valorCuentas)
 
           if(this.valorCuentas.length > 0){
@@ -1870,8 +1870,8 @@ export class EmisionComponent implements OnInit {
           });
 
           console.log(this.ordenesNomina)
-          let cuentas_contables=[]
-          let codigos_presupuesto=[]
+          let cuentas_contables=[];
+          let codigos_presupuesto=[];
           this.ordenesNomina.forEach(e => {
             cuentas_contables.push(e.fk_cuenta_contable);
             codigos_presupuesto.push(e.codigo_presupuesto);
@@ -2003,7 +2003,7 @@ export class EmisionComponent implements OnInit {
     console.log(this.asiento)
 
    // if(this.asiento.length > 0){
-        this.totalAsiento=[]
+        this.totalAsiento=[];
         // let TotalDebito = 0;
         // let TotalCredito = 0;
         // let TotalPresupuesto = 0;
@@ -2060,7 +2060,7 @@ export class EmisionComponent implements OnInit {
         });
         console.log(this.totalAsiento)
     // }else{
-    //   this.totalAsiento=[]
+    //   this.totalAsiento=[];
     // }
 
   }

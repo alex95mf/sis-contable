@@ -269,7 +269,7 @@ export class MetasOdsComponent implements OnInit {
 
   cargaPPG(event) {
     this.cmb.ppg = []
-    this.seleccion.ppg = 0
+    this.seleccion.ppg = 0;
     (this as any).mensajeSpinner = 'Cargando Politicas'
     let data = {
       "opg": event
@@ -298,7 +298,7 @@ export class MetasOdsComponent implements OnInit {
 
   cargaMetaZonal(event) {
     this.cmb.meta = []
-    this.seleccion.metaZonal = 0
+    this.seleccion.metaZonal = 0;
     (this as any).mensajeSpinner = 'Cargando Metas para la Zona'
     let data = {
       "politica": event
@@ -478,14 +478,14 @@ export class MetasOdsComponent implements OnInit {
         id_controlador: myVarGlobals.fProgMetas,
 
         params: this.programas
-      }
-      // console.log(data)
+      };
+      // console.log(data);
       (this as any).mensajeSpinner = 'Guardando Metas por Programa'
 
       this.lcargando.ctlSpinner(true);
       this.metasService.guardaMetas(data).subscribe(
         res => {
-          // console.log(data)
+          // console.log(data);
           this.lcargando.ctlSpinner(false)
           Swal.fire({
             title: this.fTitle,

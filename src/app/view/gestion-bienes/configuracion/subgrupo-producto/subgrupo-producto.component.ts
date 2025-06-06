@@ -344,7 +344,7 @@ export class SubgrupoProductoComponent implements OnInit {
 
       subgrupo: this.subgrupo
     }
-    console.log(data)
+    console.log(data);
     this.service.updateSubgrupo(data).subscribe(
       (res)=>{
         // res =this.subgrupo

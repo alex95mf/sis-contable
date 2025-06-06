@@ -49,7 +49,7 @@ export class AprobacionComprasComponent implements OnInit {
 
   vmButtons: any;
 
-  dato_Programa:any =[]
+  dato_Programa:any =[];
   datoDepartamento: any = []
   fecha: Date = new Date();
 
@@ -185,7 +185,7 @@ export class AprobacionComprasComponent implements OnInit {
           atribucion: null
         }
 
-        this.listaSolicitudes = []
+        this.listaSolicitudes = [];
       }
     })
 
@@ -200,7 +200,7 @@ export class AprobacionComprasComponent implements OnInit {
 
       periodo: Number(this.periodo),
     }
-    console.log(data)
+    console.log(data);
     this.service.searchPrograma(data).subscribe((res: any)=>{
        console.log(res);
        this.lcargando.ctlSpinner(false);
@@ -265,7 +265,7 @@ export class AprobacionComprasComponent implements OnInit {
     console.log(event);
     (this as any).mensajeSpinner = "Cargando Solicitudes...";
     this.lcargando.ctlSpinner(true);
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
     let data = {
       id: this.datoDepartamento,
       params:{

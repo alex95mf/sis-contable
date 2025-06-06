@@ -1186,7 +1186,7 @@ guardarContratacionDetalles(){
                 con_forma_pago: this.listaSolicitudes.con_forma_pago
 
               }
-              console.log(data)
+              console.log(data);
               this.contratoService.guardarContrato(data.id, data).subscribe(
                 (res) => {
                   console.log(res)

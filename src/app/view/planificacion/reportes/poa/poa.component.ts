@@ -184,21 +184,21 @@ export class PoaComponent implements OnInit {
     this.programaObjectSelected = event
     this.departamentosFilter = this.departamentos.filter((departamento: any) => departamento.grupo == event.valor)
     this.departamentoSelected = null
-    // this.bienes = []
+    // this.bienes = [];
   }
 
   handleSelectDepartamento(event) {
     if (event == undefined) return;
     this.departamentoObjectSelected = event
-    // this.bienes = []
+    // this.bienes = [];
   }
 
   async handleClickBuscar() {
     this.lcargando.ctlSpinner(true);
     try {
       // Obtener los Objetivos y Componentes del Programa
-      (this as any).mensajeSpinner = 'Cargando Objetivos y Componentes'
-      this.obj_componentes = await this.api.getObjetivosComponentes({periodo: this.periodoObjectSelected, programa: this.programaObjectSelected, departamento: this.departamentoObjectSelected})
+      (this as any).mensajeSpinner = 'Cargando Objetivos y Componentes';
+      this.obj_componentes = await this.api.getObjetivosComponentes({periodo: this.periodoObjectSelected, programa: this.programaObjectSelected, departamento: this.departamentoObjectSelected});
 
       // Obtener la Mision
       (this as any).mensajeSpinner = 'Obteniendo la Mision'

@@ -368,7 +368,7 @@ export class FacturasComponent implements OnInit {
           this.CentrosPresupuesto()
 
           factura.detalle_cuentas.forEach((element,index) => {
-            this.fieldsDaily=[]
+            this.fieldsDaily=[];
             let obj = {
               cuenta_detalle: '(' + element.codigo_cuenta + ') ' + element.nombre_cuenta,
               cod_anexo_iva: element.cod_riva_anexo,
@@ -506,7 +506,7 @@ export class FacturasComponent implements OnInit {
 
           console.log(this.catalogo_presupuesto)
           res.detalle_cuentas.forEach((element,index) => {
-            this.fieldsDaily=[]
+            this.fieldsDaily=[];
             let obj = {
               cuenta_detalle: '(' + element.codigo_cuenta + ') ' + element.nombre_cuenta,
               cod_anexo_iva: element.cod_riva_anexo,

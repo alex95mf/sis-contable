@@ -328,7 +328,7 @@ exportAsXLSX() {
 
 
 restoreForm(){
-  this.arrayRdep=[]
+  this.arrayRdep=[];
   this.vmButtons[3].habilitar = true;
   this.vmButtons[4].habilitar = true;
 }

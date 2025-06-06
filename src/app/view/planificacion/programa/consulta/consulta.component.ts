@@ -20,7 +20,7 @@ export class ConsultaComponent implements OnInit {
     { id: 7, id_plan: 3, nombre: "Duis eget mauris", presupuesto: Math.round(Math.random()*10000000) / 100 },
   ];
 
-  dtOptions : DataTables.Settings = {}
+  dtOptions : any = {}
 
   constructor(private modal : NgbModal) { }
 

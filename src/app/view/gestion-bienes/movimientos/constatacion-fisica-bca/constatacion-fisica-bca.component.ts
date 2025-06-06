@@ -771,7 +771,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
 
 
           }
-          console.log(data)
+          console.log(data);
           this.dataExcel.push(data);
         })
 

@@ -180,10 +180,10 @@ asignarTipo(evt) {
   if(evt!=undefined){
     //this.procesoDisabled= true
     //this.vmButtons[0].habilitar = true;
-    this.arrayCedula=[]
-    this.arrayCedulaPrograma=[]
-    this.arrayCedulaResumen= []
-    this.arrayCedulaEjecucion= []
+    this.arrayCedula=[];
+    this.arrayCedulaPrograma=[];
+    this.arrayCedulaResumen= [];
+    this.arrayCedulaEjecucion= [];
     this.totalIngresos=0
     this.totalEgresos= 0
 

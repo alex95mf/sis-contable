@@ -33,17 +33,17 @@ export class DfdComponent implements OnInit {
 
   usuarios: any = [];
   usuariosMultiselect: any = [];
-  almacenUsuarios: any = []
-  pasosL: any = []
-  pasosD: any = []
-  pasosT: any = []
-  pasosS: any = []
+  almacenUsuarios: any = [];
+  pasosL: any = [];
+  pasosD: any = [];
+  pasosT: any = [];
+  pasosS: any = [];
 
   dataUser: any;
 
   permissions: any;
 
-  listaPasos: any = []
+  listaPasos: any = [];
 
   pregunta = ['SI', 'NO'];
 
@@ -52,7 +52,7 @@ export class DfdComponent implements OnInit {
   usuariospre: any = [];
 
   selectUser: any = null;
-  selectedUsers: any = []
+  selectedUsers: any = [];
 
   flujo: any = null;
   preguntaDisabled = false;
@@ -812,7 +812,7 @@ let idInicioDelFlujo = 0;
   }
 
   cancelar(){
-    this.usuarios = []
+    this.usuarios = [];
     this.tarea = {
       nombre: null,
       descripcion: null,
@@ -995,7 +995,7 @@ let idInicioDelFlujo = 0;
     if( this.usuarios.length > this.usuarioActualizar.length ){
       //console.log('ingreso a actualizar usuarios');
       //console.log(this.usuarios.length);
-      this.usuarioActualizar = []
+      this.usuarioActualizar = [];
       this.usuarios.map((data)=>{
         let valor = {
           id_flujo_usuarios: data['id_flujo_usuarios'],
@@ -1115,7 +1115,7 @@ let idInicioDelFlujo = 0;
   }
 
   agregarFlujoUsuario(flujo){
-    let usuariosRequest: any = []
+    let usuariosRequest: any = [];
 
     this.usuarios.map((data)=>{
       let valor = {
@@ -1156,7 +1156,7 @@ let idInicioDelFlujo = 0;
 
 
 
-    let usuariosRequest: any = []
+    let usuariosRequest: any = [];
 
     this.usuarios.map((data)=>{
       let valor = {
@@ -1177,7 +1177,7 @@ let idInicioDelFlujo = 0;
     if( this.usuarios.length > this.usuarioActualizar.length ){
       //console.log('ingreso a actualizar usuarios');
       //console.log(this.usuarios.length);
-      this.usuarioActualizar = []
+      this.usuarioActualizar = [];
       this.usuarios.map((data)=>{
         let valor = {
           id_flujo_usuarios: data['id_flujo_usuarios'],
@@ -1526,7 +1526,7 @@ let idInicioDelFlujo = 0;
         })
         this.usuarios = [];
         this.preguntaDisabled = true;
-        this.listaPasos = []
+        this.listaPasos = [];
         this.tarea = {
           nombre: null,
           descripcion: null,

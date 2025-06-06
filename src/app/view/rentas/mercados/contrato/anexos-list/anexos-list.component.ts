@@ -108,7 +108,7 @@ export class AnexosListComponent implements OnInit {
         if (res.value) {
           let data = {
             anexo: anexo
-          }
+          };
       
           (this as any).mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true);

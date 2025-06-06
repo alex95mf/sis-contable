@@ -497,7 +497,7 @@ export class IngresoBodegaComponent implements OnInit {
     })
 
     this.commonVarSrvice.updPerm.asObservable().subscribe(res => {
-      // (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      // (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })
 
     this.commonServices.onHandleNotification.pipe(takeUntil(this.onDestroy$)).subscribe(res => {
@@ -1023,7 +1023,7 @@ export class IngresoBodegaComponent implements OnInit {
   }
 
   addItems(data) {
-    console.log(data)
+    console.log(data);
 
     if (this.bodega == null) {
       this.toastr.warning('No ha seleccionado Bodega de Origen')
@@ -1919,7 +1919,7 @@ export class IngresoBodegaComponent implements OnInit {
 
 
     }
-    console.log(data)
+    console.log(data);
     this.ordenesServices.saveProducto(data).subscribe(res => {
       console.log(res);
       this.toastr.success(res['message']);
@@ -2323,7 +2323,7 @@ export class IngresoBodegaComponent implements OnInit {
     //       fk_ingreso_bodega: ingreso_bodega,
     //     }
 
-    //     console.log(data)
+    //     console.log(data);
     //     this.ordenesServices.saveProductoBien(data).subscribe(
     //       (res) => {
     //         console.log(res);
@@ -2372,7 +2372,7 @@ export class IngresoBodegaComponent implements OnInit {
     }
 
     // console.log(this.dataProducto)
-    console.log(data)
+    console.log(data);
 
     this.ordenesServices.updateExi(data, data.id).subscribe(
       (res) => {

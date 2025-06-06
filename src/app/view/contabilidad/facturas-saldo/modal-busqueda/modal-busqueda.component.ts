@@ -63,7 +63,7 @@ export class ModalBusquedaComponent implements OnInit {
     try {
       (this as any).mensajeSpinner = 'Cargando...'
       let documentos = await this.apiService.getCierres({ tipo: 'CCP' })
-      console.log(documentos)
+      console.log(documentos);
 
       this.dataSource = new MatTableDataSource(documentos)
       this.dataSource.paginator = this.paginator

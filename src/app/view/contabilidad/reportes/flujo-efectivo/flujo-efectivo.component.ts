@@ -29,7 +29,7 @@ export class FlujoEfectivoComponent implements OnInit {
   dataUser: any;
   permissions: any;
 
-  reporte: any =[]
+  reporte: any =[];
   selectedReporte: any = undefined;
 
 
@@ -283,7 +283,7 @@ export class FlujoEfectivoComponent implements OnInit {
   //        this.lcargando.ctlSpinner(false);
   //       }
   //       else{
-  //        this.dataFlujoEfectivo =[]
+  //        this.dataFlujoEfectivo =[];
   //        this.lcargando.ctlSpinner(false);
   //       }
        
@@ -379,7 +379,7 @@ export class FlujoEfectivoComponent implements OnInit {
     }
     this.vmButtons[2].habilitar = true;
 
-    this.reporte =[]
+    this.reporte =[];
     this.periodo = moment().format('YYYY');
 }
 
@@ -391,7 +391,7 @@ export class FlujoEfectivoComponent implements OnInit {
 //     title: 'Flujo Efectivo',
 //     rows:  this.reporte
 //   }
-//   console.log(data)
+//   console.log(data);
 
 //   this.xlsService.exportFlujoEfectivo(data, 'Flujo Efectivo')
 // }

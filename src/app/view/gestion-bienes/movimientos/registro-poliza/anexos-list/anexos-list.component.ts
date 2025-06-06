@@ -70,7 +70,7 @@ export class AnexosListComponent implements OnInit, OnDestroy {
           
         }
 
-        console.log(data)
+        console.log(data);
         if(res.condi == 'infimas'){
           //console.log('Anexo Discapa', res.condi, data);
           this.apiService.getAnexos(data).subscribe(

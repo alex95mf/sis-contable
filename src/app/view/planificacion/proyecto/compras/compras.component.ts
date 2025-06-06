@@ -203,7 +203,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
       cancelButtonText: 'Cancelar',
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this.bienes = []
+        this.bienes = [];
         this.vmButtons[0].habilitar = true
         this.selectables.map((select: NgSelectComponent) => select.handleClearClick())
       }
@@ -220,17 +220,17 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
     this.programaObjectSelected = event
     this.departamentosFilter = this.departamentos.filter((departamento: any) => departamento.grupo == event.valor)
     this.departamentoSelected = null
-    this.bienes = []
+    this.bienes = [];
   }
 
   handleSelectDepartamento(event) {
     if (event == undefined) return;
     this.departamentoObjectSelected = event
-    this.bienes = []
+    this.bienes = [];
   }
 
   handleClickCancelar() {
-    this.bienes = []
+    this.bienes = [];
     this.selectables.map((select: NgSelectComponent) => select.handleClearClick())
   }
 

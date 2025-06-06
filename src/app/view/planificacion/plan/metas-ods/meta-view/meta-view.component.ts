@@ -84,7 +84,7 @@ export class MetaViewComponent implements OnInit {
 
           params: [this.metaOpciones]
         }
-        // console.log(data)
+        // console.log(data);
         this.metasService.guardaMetas(data).subscribe(
           res => {
             this.is_updated.emit(res)

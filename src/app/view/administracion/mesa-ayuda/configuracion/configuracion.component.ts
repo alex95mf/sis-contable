@@ -23,9 +23,9 @@ export class ConfiguracionComponent implements OnInit {
 
   vmButtons: any = [];
 
-  lista_roles: any[] = []
+  lista_roles: any[] = [];
 
-  categorias: any[] = []
+  categorias: any[] = [];
 
   organigrama: any
   filteredOrganigrama: any[] = [];
@@ -109,7 +109,7 @@ export class ConfiguracionComponent implements OnInit {
       if(resrol['data'].length > 0){
         this.lista_roles = resrol['data'].filter(rol => rol.estado === 'A');
       }else{
-        this.lista_roles = []
+        this.lista_roles = [];
       }
     }, error => {
       this.lcargando.ctlSpinner(false);
@@ -253,7 +253,7 @@ export class ConfiguracionComponent implements OnInit {
           categorias: this.categorias
         }
 
-        console.log(data)
+        console.log(data);
 
         this.configSrv.guardarParametrosGenerales(data).subscribe(
           async (res: any) => {

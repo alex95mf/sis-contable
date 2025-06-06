@@ -149,7 +149,7 @@ export class ListReglasComponent implements OnInit {
     (this as any).mensajeSpinner = "Cargando lista de reglas...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
 
     let data = {
       params: {

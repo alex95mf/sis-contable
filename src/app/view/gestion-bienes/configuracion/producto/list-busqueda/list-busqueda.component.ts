@@ -104,7 +104,7 @@ export class ListBusquedaComponent implements OnInit {
     (this as any).mensajeSpinner = "Cargando listado de productos...";
     this.lcargando.ctlSpinner(true);
    // console.log(this.subgrupo)
-   if (flag) this.paginate.page = 1
+   if (flag) this.paginate.page = 1;
     let data = {
       params: {
         filter: this.filter,

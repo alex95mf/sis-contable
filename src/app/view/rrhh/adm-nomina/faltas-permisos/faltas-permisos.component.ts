@@ -900,7 +900,7 @@ export class FaltasPermisosComponent implements OnInit {
 
 
   chart(name: string, tipo: any, label: string[], data: number[]) {
-console.log(data)
+console.log(data);
     return new Chart(name, {
       type: tipo,
       data: {

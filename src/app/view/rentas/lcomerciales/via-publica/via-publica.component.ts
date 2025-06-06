@@ -8,8 +8,6 @@ import * as variablesGlobales from "../../../../global";
 import { CcSpinerProcesarComponent } from 'src/app/config/custom/cc-spiner-procesar.component';
 import { CommonVarService } from 'src/app/services/common-var.services';
 import { ToastrService } from 'ngx-toastr';
-import { title } from 'process';
-
 
 @Component({
 standalone: false,

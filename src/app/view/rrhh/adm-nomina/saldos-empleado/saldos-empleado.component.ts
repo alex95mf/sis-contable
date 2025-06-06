@@ -32,7 +32,7 @@ export class SaldosEmpleadoComponent implements OnInit {
   tbl_registros: any[] = []
   loading: boolean = false
 
-  infomovDataExcel: any =[]
+  infomovDataExcel: any =[];
 
   constructor(
     private apiService: SaldosEmpleadoService,
@@ -190,7 +190,7 @@ export class SaldosEmpleadoComponent implements OnInit {
 				//   cuenta_hasta: this.toDatePicker,
 				  rows:  this.infomovDataExcel
 				}
-				console.log(data)
+				console.log(data);
 			  this.xlsService.exportExcelSaldosEmpleados(data, 'Saldo de Empleados')
 				// let tipo = 'Asiento'
 				// this.exportAsXLSX(this.fieldsDaily,tipo);

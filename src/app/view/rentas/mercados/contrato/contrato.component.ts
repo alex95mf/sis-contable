@@ -16,7 +16,6 @@ import * as myVarGlobals from 'src/app/global';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { ValidacionesFactory } from 'src/app/config/custom/utils/ValidacionesFactory';
-import { resolve } from 'path';
 import { Socket } from 'src/app/services/socket.service';
 
 @Component({
@@ -110,7 +109,7 @@ export class ContratoComponent implements OnInit {
       async (res: any) => {
         this.valorGarantia = this.commonVarService.NumeroALetras(Math.trunc(res['valor_garantia']), 0)
         this.valorMensualidad = this.commonVarService.NumeroALetras(Math.trunc(res['valor_arriendo']), 0)
-        this.newcontrato = res.id_mercado_contrato
+        this.newcontrato = res.id_mercado_contrato as any;
 
         (this as any).mensajeSpinner = 'Cargando Contrato'
         this.lcargando.ctlSpinner(true);

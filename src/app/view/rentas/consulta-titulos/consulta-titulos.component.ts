@@ -34,8 +34,8 @@ export class ConsultaTitulosComponent implements OnInit {
   conceptos: any[] = [];
   reportes: any[] = [];
 
-  dataTitulos : any =[]
-  dataTitulosExcel : any =[]
+  dataTitulos : any =[];
+  dataTitulosExcel : any =[];
   tasaSelected : any
   
   listEstados = [
@@ -249,7 +249,7 @@ export class ConsultaTitulosComponent implements OnInit {
          this.lcargando.ctlSpinner(false);
         }
         else{
-         this.dataTitulos =[]
+         this.dataTitulos =[];
          this.lcargando.ctlSpinner(false);
         }
        
@@ -324,7 +324,7 @@ export class ConsultaTitulosComponent implements OnInit {
       cuenta_contable: ''
     }
 
-    this.dataTitulos =[]
+    this.dataTitulos =[];
   //   Object.assign(this.filter, {
   //     selectedConcepto: ' ',
   //     fecha_desde: moment().subtract(1, 'month').startOf('month').format('YYYY-MM-DD'),
@@ -390,7 +390,7 @@ btnExportarPdf() {
           title: 'Consulta de Títulos',
           rows:  this.dataTitulosExcel
         }
-        console.log(data)
+        console.log(data);
       
         this.xlsService.exportConsultaTitulos(dataExcel, 'Reporte Consulta de Títulos')
        }
@@ -398,7 +398,7 @@ btnExportarPdf() {
        this.lcargando.ctlSpinner(false);
       }
       else{
-       this.dataTitulosExcel =[]
+       this.dataTitulosExcel =[];
        this.lcargando.ctlSpinner(false);
       }
      
@@ -439,7 +439,7 @@ descargarAnexo(anexo){
       name: anexo.name
     }
 
-    console.log(data)
+    console.log(data);
 
     this.apiService.downloadAnexo(data).subscribe(
       (resultado) => {

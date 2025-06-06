@@ -52,7 +52,7 @@ export class ContableComponent implements OnInit {
 		private confirmationDialogService: ConfirmationDialogService) {
 
     this.commonVarSrvice.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })
 
 		this.commonVarSrvice.paramsAccount.asObservable().subscribe(res => {

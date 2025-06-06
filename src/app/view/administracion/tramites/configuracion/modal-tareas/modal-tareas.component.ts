@@ -18,7 +18,7 @@ export class ModalTareasComponent implements OnInit {
 
   vmButtons: any;
 
-  tareasTable: any = []
+  tareasTable: any = [];
   prioridadSelected = 0
   prioridadList = [
     {value: "A",label: "ALTA"},
@@ -159,7 +159,7 @@ export class ModalTareasComponent implements OnInit {
       (res) =>{
         this.tareasTable = res['data'];
         if (Array.isArray(res['data']) && res['data'].length == 0) {
-          this.tareasTable = []
+          this.tareasTable = [];
         } else {
           this.paginate.length = res['data']['total'];
           if (res['data']['current_page'] == 1) {

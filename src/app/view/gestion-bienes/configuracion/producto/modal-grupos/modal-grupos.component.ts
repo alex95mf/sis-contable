@@ -101,14 +101,14 @@ export class ModalGruposComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
    // console.log(this.claseSelect)
    // let id = this.claseSelect.id_grupo_productos
-   if (flag) this.paginate.page = 1
+   if (flag) this.paginate.page = 1;
     let data = {
       params: {
         filter: this.filter,
         paginate: this.paginate
       }
     }
-    console.log(data)
+    console.log(data);
     this.apiService.getSubproductos(data).subscribe(
       (res) => {
         console.log(res)

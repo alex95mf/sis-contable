@@ -48,7 +48,7 @@ export class GestionComponent implements OnInit {
   permissions: any;
   tipoEventosList: any = [];
   locale: string = "es";
-  eventCopi: any = []
+  eventCopi: any = [];
 
   view: string = 'month';
   viewDate: Date = new Date();

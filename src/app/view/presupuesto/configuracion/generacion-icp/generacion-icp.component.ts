@@ -165,7 +165,7 @@ export class GeneracionIcpComponent implements OnInit {
   changeAjuste: boolean = false
   habilitarAjuste: boolean = false
 
-  proyectosTodos: any[]=[]
+  proyectosTodos: any[]=[];
 
   constructor(
     private commonService: CommonService,
@@ -209,9 +209,9 @@ export class GeneracionIcpComponent implements OnInit {
           this.documento = res;
           this.documento.fecha = res.fecha.split(" ")[0];
           this.documento.mercado =  this.mercados.find(m => m.id == res.fk_mercado);
-          this.documento.proyecto = res.proyecto?.secuencia+'-'+res.proyecto?.descripcion
+          this.documento.proyecto = res.proyecto?.secuencia+'-'+res.proyecto?.descripcion;
 
-          (this as any).mensajeSpinner = 'Cargando...'
+          (this as any).mensajeSpinner = 'Cargando...';
           this.puestos_filter = this.puestos.filter(e => e.fk_mercado == res.fk_mercado)
 
           this.documento.puesto = res.fk_mercado_puesto;

@@ -51,7 +51,7 @@ export class AnexosListComponentDis implements OnInit {
           identifier: res.id_cliente
         }
 
-        // console.log(data)
+        // console.log(data);
         // if(res.condi == 'dis'||res.condi == 'all'){
         //   console.log('Anexo Trámites', res.condi, data);
         //   this.apiService.getAnexos(data).subscribe(
@@ -81,14 +81,14 @@ export class AnexosListComponentDis implements OnInit {
         //   )
         // }
 
-         // console.log(data)
+         // console.log(data);
          if(res.condi == 'dis'||res.condi == 'all'){
           //console.log('Anexo Discapa', res.condi, data);
           this.apiService.getAnexos(data).subscribe(
             (res: any) => {
               //console.log('Anexo Contribuyente',res)
               //this.anexos = res.data
-              this.anexos = []
+              this.anexos = [];
               res.data.forEach(e => {
                     let o = {
                       id_anexo: e.id_anexos,
@@ -124,7 +124,7 @@ export class AnexosListComponentDis implements OnInit {
 
     this.commonVarService.clearAnexos.asObservable().subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
       }
     )
 

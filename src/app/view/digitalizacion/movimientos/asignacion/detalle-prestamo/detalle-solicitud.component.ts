@@ -17,13 +17,13 @@ export class DetallePrestamoComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false })
   lcargando: CcSpinerProcesarComponent;
   
-  listaSolicitudes: any = []
+  listaSolicitudes: any = [];
 
 
   resultadoConsulta:any;
-  asigna: any =[]
+  asigna: any =[];
 infprestamo:any;
-  proceso: any = []
+  proceso: any = [];
 
   vmButtons: any;
 

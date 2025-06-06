@@ -114,7 +114,7 @@ export class EncargadoTrasladoComponent implements OnInit {
   
   cargarEncargado( flag: boolean = false){
     this.lcargando.ctlSpinner(true);
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
     let data = {
       params: {
         filter: this.filter,

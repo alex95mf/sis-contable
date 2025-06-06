@@ -43,7 +43,7 @@ export class ModalCondicionesComponent implements OnInit {
 
   atribucion: any = []
 
-  asigna: any =[]
+  asigna: any =[];
 
   proceso: any = []
 

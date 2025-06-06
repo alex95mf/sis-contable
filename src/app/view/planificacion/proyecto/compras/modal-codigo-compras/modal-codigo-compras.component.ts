@@ -109,7 +109,7 @@ export class ModalCodigoComprasComponent implements OnInit {
    * @param query Parametro de busqueda para Codigos CPC
    */
   async getCodigoCompras() {
-    this.resultados = []
+    this.resultados = [];
     (this as any).mensajeSpinner = 'Obteniendo Codigos'
     this.lcargando.ctlSpinner(true);
 

@@ -20,7 +20,7 @@ export class ListContratosComponent implements OnInit {
   fTitle = 'Listado de Contratos'
   mensajeSpinner: string
   vmButtons: any
-  dtOptions: DataTables.Settings = {}
+  dtOptions: any = {}
   dtTrigger = new Subject()
 
   contratos = []

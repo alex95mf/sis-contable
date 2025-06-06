@@ -264,7 +264,7 @@ export class FormMetasComponent implements OnInit {
         this.lcargando.ctlSpinner(false);
         this.toastr.error(err.error.message, 'Error cargando Ejes');
       }
-    )
+    );
 
 
     // precarga de metas ods

@@ -117,7 +117,7 @@ export class ModalBusquedaComponent implements OnInit {
     try {
       (this as any).mensajeSpinner = 'Cargando Cierres'
       let documentos = await this.apiService.getCierres({tipo: this.tipoBienSelected, params: {filter: this.filter, paginate: this.paginate}})
-      console.log(documentos)
+      console.log(documentos);
       this.paginate.length = documentos.total
       this.lst_cierres = documentos.data
       //

@@ -214,7 +214,7 @@ export class DescuentosComponent implements OnInit {
         cuenta:''
         
       }
-      console.log(data)
+      console.log(data);
       (this as any).mensajeSpinner = 'Inicializando Descuentos'
       this.lcargando.ctlSpinner(true);
       this.apiService.inicializarDescuentoSp(data).subscribe(res => {
@@ -253,7 +253,7 @@ export class DescuentosComponent implements OnInit {
         cuenta:''
         
       }
-      console.log(data)
+      console.log(data);
       (this as any).mensajeSpinner = 'Calculando Descuentos'
       this.lcargando.ctlSpinner(true);
       this.apiService.calcularDescuentoSp(data).subscribe(res => {

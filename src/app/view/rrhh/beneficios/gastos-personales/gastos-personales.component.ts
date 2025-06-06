@@ -243,7 +243,7 @@ export class GastosPersonalesComponent implements OnInit {
 
           if (response.length > 0) {
             let data = response.find((element: any) => element.estado == 'A')
-            console.log(data)
+            console.log(data);
             // Convetir null en 0
             Object.assign(data, {
               acumulado: data.acumulado ?? 0,
@@ -663,7 +663,7 @@ export class GastosPersonalesComponent implements OnInit {
       })
 
       if (result.isConfirmed) {
-        let excelData = []
+        let excelData = [];
         this.dataImpuestoRenta.forEach((item: any) => {
           let o = {
             Fecha: item.fecha_registro,

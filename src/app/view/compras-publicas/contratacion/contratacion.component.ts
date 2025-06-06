@@ -322,7 +322,7 @@ export class ContratacionComponent implements OnInit {
     let data ={
       periodo: this.periodo.getFullYear(),
     }
-    console.log(data)
+    console.log(data);
     this.service.searchPrograma(data).subscribe((res: any)=>{
        console.log(res);
        this.lcargando.ctlSpinner(false);
@@ -456,7 +456,7 @@ export class ContratacionComponent implements OnInit {
           filter: this.filter
         }
       }
-      let excelData = []
+      let excelData = [];
       (this as any).mensajeSpinner = "Generando Archivo Excel..."
       this.lcargando.ctlSpinner(true);
       this.service.getContrataciones({ params: { filter: this.filter } }).subscribe(
@@ -470,7 +470,7 @@ export class ContratacionComponent implements OnInit {
               title: 'Contrataciones',
               rows:  res.data
             }
-            console.log(data)
+            console.log(data);
 
           this.xlsService.exportConsultaContrataciones(data, 'Contrataciones')
           this.lcargando.ctlSpinner(false)
@@ -515,11 +515,11 @@ export class ContratacionComponent implements OnInit {
 
 
     // console.log(event);
-    this.listaSolicitudes = []
+    this.listaSolicitudes = [];
     (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
     let data = {
       id_programa :this.dato_Programa,
       id: this.datoDepartamento,
@@ -582,7 +582,7 @@ export class ContratacionComponent implements OnInit {
           atribucion: null
         }
 
-        this.listaSolicitudes = []
+        this.listaSolicitudes = [];
       }
     })
 

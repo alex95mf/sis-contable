@@ -352,7 +352,7 @@ export class OtrosgruposComponent implements OnInit {
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: `Grupo`,
-            cancelmButtonText: `Cancelar`,
+            cancelButtonText:  `Cancelar`,
             denyButtonText: `Subgrupo`,
             cancelButtonColor: '#DC3545',
             confirmButtonColor: '#E0A800',

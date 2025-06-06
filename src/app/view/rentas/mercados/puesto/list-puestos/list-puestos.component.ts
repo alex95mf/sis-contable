@@ -23,7 +23,7 @@ export class ListPuestosComponent implements OnInit {
   vmButtons: any
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {}
+  dtOptions: any = {}
   dtTrigger = new Subject();
 
   puestos = []

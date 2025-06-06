@@ -57,8 +57,8 @@ export class ReporteComponent implements OnInit {
     tipo_documento: "", // concepto.codigo
 
   }
-  dataReportes : any[] = []
-  dataDetallesReportes : any[] = []
+  dataReportes : any[] = [];
+  dataDetallesReportes : any[] = [];
   reportes: any[] = [];
   conceptos: any[] = [];
   cajas: any[] = [];
@@ -333,7 +333,7 @@ export class ReporteComponent implements OnInit {
               // this.lcargando.ctlSpinner(false);
              }
              else{
-              this.dataReportes =[]
+              this.dataReportes =[];
               this.loading = false;
               // this.lcargando.ctlSpinner(false);
              }

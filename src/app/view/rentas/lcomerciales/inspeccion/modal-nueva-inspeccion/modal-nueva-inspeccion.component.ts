@@ -110,7 +110,7 @@ export class ModalNuevaInspeccionComponent implements OnInit {
         }
         Object.assign(this.inspeccion, obj)
 
-        this.resultados = []
+        this.resultados = [];
         res['data']['resultados'].forEach(e => {
           let obj = {
             id: e.id_inspeccion_res,

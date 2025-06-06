@@ -106,11 +106,11 @@ export class ModalTarifasComponent implements OnInit {
               id: t.id_tarifa,
               descripcion: t.descripcion,
               estado: t.estado,
-              concepto: {
-                id: t.concepto? t.concepto.id_concepto : null,
-                codigo: t.concepto? t.concepto.codigo : null,
-                nombre: t.concepto? t.concepto.nombre : null
-              } || null
+              concepto: t.concepto ? {
+                id: t.concepto.id_concepto,
+                codigo: t.concepto.codigo,
+                nombre: t.concepto.nombre
+              } : null
             }
             // if(tarifa.concepto.id){
               this.tarifas.push({ ...tarifa });

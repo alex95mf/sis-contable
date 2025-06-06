@@ -168,7 +168,7 @@ export class ConsultaIdpComponent implements OnInit {
   cargarDocumentos(){
     (this as any).mensajeSpinner = "Cargando documentos";
     this.lcargando.ctlSpinner(true);
-    // if (flag) this.paginate.page = 1
+    // if (flag) this.paginate.page = 1;
     const data = {
       params: {
         filter: this.filter,
@@ -262,7 +262,7 @@ export class ConsultaIdpComponent implements OnInit {
       const data = {
         fecha_desde: moment(this.filter.fecha_desde).format('YYYYMMDD'),
         fecha_hasta: moment(this.filter.fecha_hasta).format('YYYYMMDD'),
-      }
+      };  
 
       (this as any).mensajeSpinner = "Procesando...";
       this.lcargando.ctlSpinner(true);

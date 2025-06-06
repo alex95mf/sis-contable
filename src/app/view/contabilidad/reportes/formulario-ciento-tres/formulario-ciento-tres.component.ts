@@ -29,11 +29,11 @@ export class FormularioCientoTresComponent implements OnInit {
   dataUser: any;
   permissions: any;
 
-  dataFormularioTres : any =[]
-  dataFormularioCuatro : any =[]
+  dataFormularioTres : any =[];
+  dataFormularioCuatro : any =[];
 
-  dataFormularioTresExcel : any =[]
-  dataFormularioCuatroExcel : any =[]
+  dataFormularioTresExcel : any =[];
+  dataFormularioCuatroExcel : any =[];
   selectedReporte: any = undefined;
 
   selectedForm: any = 'nav-form-tres-tab';
@@ -230,7 +230,7 @@ export class FormularioCientoTresComponent implements OnInit {
          this.lcargando.ctlSpinner(false);
         }
         else{
-         this.dataFormularioTres =[]
+         this.dataFormularioTres =[];
          this.lcargando.ctlSpinner(false);
         }
        
@@ -276,7 +276,7 @@ export class FormularioCientoTresComponent implements OnInit {
          this.lcargando.ctlSpinner(false);
         }
         else{
-         this.dataFormularioCuatro =[]
+         this.dataFormularioCuatro =[];
          this.lcargando.ctlSpinner(false);
         }
        
@@ -376,15 +376,15 @@ export class FormularioCientoTresComponent implements OnInit {
       // cuenta_contable: ''
     }
     this.vmButtons[1].habilitar = true;
-    this.dataFormularioTres =[]
-    this.dataFormularioCuatro =[]
+    this.dataFormularioTres =[];
+    this.dataFormularioCuatro =[];
 }
 
 limpiarForm(){
   this.periodo = moment().format('YYYY');
   this.mes_actual = Number(moment(new Date()).format('MM'));
-  this.dataFormularioTres =[]
-  this.dataFormularioCuatro =[]
+  this.dataFormularioTres =[];
+  this.dataFormularioCuatro =[];
   this.vmButtons[2].habilitar=true
 }
 
@@ -433,7 +433,7 @@ limpiarForm(){
     //   title: 'Formulario 103',
     //   rows:  this.dataFormularioTres
     // }
-    // console.log(data)
+    // console.log(data);
   
     // this.xlsService.exportFormularioCientoTres(data, 'Formulario 103')
   }
@@ -479,7 +479,7 @@ limpiarForm(){
     //   title: 'Formulario 104',
     //   rows:  this.dataFormularioCuatro
     // }
-    // console.log(data)
+    // console.log(data);
   
     // this.xlsService.exportFormularioCientoCuatro(data, 'Formulario 104')
   }

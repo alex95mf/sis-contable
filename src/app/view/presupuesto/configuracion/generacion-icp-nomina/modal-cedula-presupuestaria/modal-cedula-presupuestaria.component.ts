@@ -93,7 +93,7 @@ export class ModalCedulaPresupuestariaComponent implements OnInit {
     (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
     let data={
     
       periodo: this.periodo,
@@ -191,7 +191,7 @@ export class ModalCedulaPresupuestariaComponent implements OnInit {
   }
 
   validarSelected(data){
-    console.log(data)
+    console.log(data);
     console.log(this.cedulaDetalle)
    let detallesCedula = false
    

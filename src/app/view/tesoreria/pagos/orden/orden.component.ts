@@ -95,7 +95,7 @@ export class OrdenComponent implements OnInit {
   formaPago = 0;
   condicionesPago = 0;
 
-  catalog: any = []
+  catalog: any = [];
   tipo_proceso: any;
   fk_compra_cab: any;
   fk_proveedor: any;
@@ -169,7 +169,7 @@ export class OrdenComponent implements OnInit {
   //   {valor: "VF",descripcion: "POR VARIAS FACTURAS"},
   //   {valor: "OT",descripcion: "OTROS"},
   // ]
-  tipoOrden = []
+  tipoOrden = [];
 
   id_solicitud: any;
   asientoCabname: any;
@@ -186,13 +186,13 @@ export class OrdenComponent implements OnInit {
 
   tipo_compras_pub = ""
 
-  listaCuentas: any = []
+  listaCuentas: any = [];
   cuenta:  any = [];
 
   asientoCabId: number
 
   tabActiva: any =''
-  cuentasBanco : any =[]
+  cuentasBanco : any =[];
 
   constructor(
     private commonService: CommonService,
@@ -297,7 +297,7 @@ export class OrdenComponent implements OnInit {
           this.pagosCondicion = JSON.parse(JSON.stringify(res.detalles));
           if(res.asiento!=null){
             if(res.asiento.detalle.length > 0){
-              this.asiento=[]
+              this.asiento=[];
                 res.asiento.detalle.forEach(e => {
                   this.asiento.push({
                     fecha: res.asiento?.fecha,
@@ -377,7 +377,7 @@ export class OrdenComponent implements OnInit {
           this.pagosUnaFactura = JSON.parse(JSON.stringify(res.detalles));
           if(res.asiento!=null){
             if(res.asiento.detalle.length > 0){
-              this.asiento=[]
+              this.asiento=[];
                 res.asiento.detalle.forEach(e => {
                   this.asiento.push({
                     fecha: res.asiento?.fecha,
@@ -1463,10 +1463,10 @@ export class OrdenComponent implements OnInit {
 
       //   if(this.deudas.length > 0){
       //     let cuentas=[]
-      //     this.asiento = []
+      //     this.asiento = [];
       //     console.log(this.valorCuentas)
         if(this.documento.tipo == 'PF'){
-          this.asiento = []
+          this.asiento = [];
           let pagoTotal = 0
           this.pagosUnaFactura.forEach(e => {
             // if (e.aplica) {
@@ -1613,13 +1613,13 @@ export class OrdenComponent implements OnInit {
     console.log(this.asiento)
 
    // if(this.asiento.length > 0){
-        this.totalAsiento=[]
+        this.totalAsiento=[];
 
         let TotalDebito = 0;
         let TotalCredito = 0;
         let TotalPresupuesto = 0;
-        let arrayDebit = []
-        let arrayCredit = []
+        let arrayDebit = [];
+        let arrayCredit = [];
         for (let index = 0; index < this.asiento.length; index++) {
           const element =this.asiento[index];
           arrayDebit.push(element.debit)
@@ -1646,7 +1646,7 @@ export class OrdenComponent implements OnInit {
         });
         console.log(this.totalAsiento)
     // }else{
-    //   this.totalAsiento=[]
+    //   this.totalAsiento=[];
     // }
 
   }
@@ -2008,8 +2008,8 @@ export class OrdenComponent implements OnInit {
     this.pagosCondicion = [];
     this.pagosFacturas = [];
     this.pagosUnaFactura= [];
-    this.totalAsiento=[]
-    this.asiento = []
+    this.totalAsiento=[];
+    this.asiento = [];
 
     this.formaPago = 0;
 

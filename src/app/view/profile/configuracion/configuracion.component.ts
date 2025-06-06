@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, HostListener, ViewChildren, QueryList, ViewEncapsulation } from '@angular/core';
-import { element } from 'protractor';
 import { navItems } from 'src/app/_nav';
 import { DefaultServices } from 'src/app/containers/default-layout/default-layout.services';
 import { Router, NavigationEnd } from '@angular/router';
@@ -429,7 +428,6 @@ export class ConfiguracionComponent implements OnInit {
 // import { Settings } from 'src/app/app.settings.model';
 
 // @Component({
-standalone: false,
 //   selector: 'app-configuracion',
 //   templateUrl: './configuracion.component.html',
 //   styleUrls: ['./configuracion.component.scss']

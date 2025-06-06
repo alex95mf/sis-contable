@@ -514,7 +514,7 @@ export class TicketFormComponent implements OnInit {
           ticketNew: this.data
         }
 
-        console.log(data)
+        console.log(data);
         
         this.ticketSrv.reaperturarTicket(this.data.id_ticket, data).subscribe(
           (res) => {

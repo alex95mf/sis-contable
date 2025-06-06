@@ -1360,7 +1360,7 @@ export class AnexosListComponentDis implements OnInit {
             accion: `Borrado de Anexo ${anexo.id_anexo}`,
             ip: this.commonService.getIpAddress()
           }
-          console.log(data)
+          console.log(data);
           (this as any).mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true);
       

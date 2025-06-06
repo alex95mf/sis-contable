@@ -201,8 +201,8 @@ export class LiquidacionComponent implements OnInit {
     this.commonVarService.selectListLiq.asObservable().subscribe(
       (res) => {
         console.log(res)
-        this.detallesAl = []
-        this.detallesPl = []
+        this.detallesAl = [];
+        this.detallesPl = [];
         (this as any).mensajeSpinner = 'Cargando datos de la Liquidación...';
         this.lcargando.ctlSpinner(true);
         this.restoreForm(false, false);
@@ -2094,7 +2094,7 @@ export class LiquidacionComponent implements OnInit {
                 alcabala
 
               }
-              console.log(data)
+              console.log(data);
               this.apiService.aprobarLiquidacion(data).subscribe(
                 (res) => {
                   console.log(res)
@@ -2248,7 +2248,7 @@ export class LiquidacionComponent implements OnInit {
               //   detalles:this.liquidacion.detalles,
               //   alcabala
               // }
-              console.log(data)
+              console.log(data);
 
               this.apiService.editarLiquidacion(data).subscribe(
                 (res) => {

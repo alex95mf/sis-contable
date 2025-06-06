@@ -29,17 +29,17 @@ export class ConfiguracionComponent implements OnInit {
 
   usuarios: any = [];
   usuariosMultiselect: any = [];
-  almacenUsuarios: any = []
-  pasosL: any = []
-  pasosD: any = []
-  pasosT: any = []
-  pasosS: any = []
+  almacenUsuarios: any = [];
+  pasosL: any = [];
+  pasosD: any = [];
+  pasosT: any = [];
+  pasosS: any = [];
 
   dataUser: any;
 
   permissions: any;
 
-  listaPasos: any = []
+  listaPasos: any = [];
 
   pregunta = ['SI', 'NO'];
 
@@ -48,7 +48,7 @@ export class ConfiguracionComponent implements OnInit {
   usuariospre: any = [];
 
   selectUser: any = null;
-  selectedUsers: any = []
+  selectedUsers: any = [];
 
   flujo: any = null;
   preguntaDisabled = false;
@@ -336,8 +336,8 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   cancelar(){
-    this.usuarios = []
-    this.rolesTramite = []
+    this.usuarios = [];
+    this.rolesTramite = [];
     this.tarea = {
       nombre: null,
       descripcion: null,
@@ -522,7 +522,7 @@ export class ConfiguracionComponent implements OnInit {
     }
     //console.log(this.usuarios.length);
     //console.log(this.usuarioActualizar.length);
-    this.rolActualizar = []
+    this.rolActualizar = [];
     this.rolesTramite.map((data)=>{
       let valor = {
         id_flujo_roles: data['id_flujo_roles'],
@@ -654,7 +654,7 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   agregarFlujoUsuario(flujo){
-    let usuariosRequest: any = []
+    let usuariosRequest: any = [];
 
     this.usuarios.map((data)=>{
       let valor = {
@@ -685,7 +685,7 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   agregarFlujoRol(flujo){
-    let rolesRequest: any = []
+    let rolesRequest: any = [];
 
     this.rolesTramite.map((data)=>{
       let valor = {
@@ -991,7 +991,7 @@ reordenarPasos() {
         this.rolesTramite = [];
         this.selectRol = {};
         this.preguntaDisabled = true;
-        this.listaPasos = []
+        this.listaPasos = [];
         this.tarea = {
           nombre: null,
           descripcion: null,

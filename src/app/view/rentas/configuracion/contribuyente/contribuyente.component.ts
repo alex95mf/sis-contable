@@ -296,7 +296,7 @@ export class ContribuyenteComponent implements OnInit {
   ) {
     this.commonVrs.saveContribu.asObservable().subscribe(
       ({data}) => {
-        console.log(data)
+        console.log(data);
         this.contribuyente.id_cliente = data.id_cliente
         if (this.fileList?.length > 0) {
           this.uploadFile()
@@ -354,7 +354,7 @@ export class ContribuyenteComponent implements OnInit {
               filter: { fk_contribuyente: this.contribuyente.id_cliente },
             }
           })
-          console.log(documentos)
+          console.log(documentos);
           this.documentos = documentos;
 
           let resolucion: any = await this.contribuyenteSrv.getResolucion({
@@ -1087,7 +1087,7 @@ export class ContribuyenteComponent implements OnInit {
      let data = {
       id_contribuyente: this.contribuyente.id_cliente,
       filter: this.filter_estado_cuenta
-     }
+     };
      (this as any).mensajeSpinner = 'Cargando Deudas';
     this.lcargando.ctlSpinner(true);
      this.contribuyenteSrv.getDeudas(data).subscribe(
@@ -1580,7 +1580,7 @@ export class ContribuyenteComponent implements OnInit {
         id_controlador: myVarGlobals.fContribuyente,  // TODO: Actualizar cuando formulario ya tenga un ID
         accion: `Borrado de Anexo ${this.contribuyente.resolucion.id_anexos}`,
         ip: this.commonServices.getIpAddress()
-      }
+      };
 
       (this as any).mensajeSpinner = 'Eliminando Resolucion'
       this.lcargando.ctlSpinner(true);
@@ -2980,7 +2980,7 @@ export class ContribuyenteComponent implements OnInit {
         }
     }
     agregarRelacion(data){
-      console.log(data)
+      console.log(data);
       if(this.dataRelacion.length > 0 ){
        let filter_relacion =  this.dataRelacion.filter(e => e.fk_contribuyente_relacion == data.fk_contribuyente_relacion)
        if(filter_relacion.length > 0){
@@ -3177,7 +3177,7 @@ export class ContribuyenteComponent implements OnInit {
 
     }
     activarLote(data){
-      console.log(data)
+      console.log(data);
       Swal.fire({
         icon: "warning",
         title: "¡Atención!",
@@ -3230,7 +3230,7 @@ export class ContribuyenteComponent implements OnInit {
     }
 
     inactivarLote(data){
-    console.log(data)
+    console.log(data);
         Swal.fire({
           icon: "warning",
           title: "¡Atención!",

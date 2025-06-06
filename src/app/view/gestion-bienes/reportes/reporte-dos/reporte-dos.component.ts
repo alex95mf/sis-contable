@@ -363,7 +363,7 @@ export class ReporteDosComponent implements OnInit {
       stock: stock[0]?.label ? stock[0]?.label : '',
       rows: this.dataProducto
     }
-    console.log(data)
+    console.log(data);
 
     this.xlsService.exportReporteSaldosInventario(data, 'Reporte Saldos de Inventario')
   }
@@ -456,9 +456,9 @@ uArrayGrupos(array) {
       let jsonObj = {
         datos:  JSON.parse(res['data'][0].json_agg)
       };
-      let clasesArray=[]
+      let clasesArray=[];
 
-      this.arrayDetalles = []
+      this.arrayDetalles = [];
       this.arrayDetalles = jsonObj.datos
 
       this.arrayDetalles.forEach((element, index) => {
@@ -677,7 +677,7 @@ uArrayGrupos(array) {
  }
  chart(name: any[], tipo: string, label: string[], data: number[]) {
   name.forEach(e =>{
-    let totales =[]
+    let totales =[];
     e.clases.forEach(d =>{
     totales.push(d.costo_total)
 
@@ -783,7 +783,7 @@ uArrayGrupos(array) {
   })
 
 
-  console.log(data)
+  console.log(data);
 
 
 

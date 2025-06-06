@@ -976,7 +976,7 @@ console.log(this.dataExcel)
         partida: e['partida']??'',
         //concepto: e['concepto']??'',
         concepto: e['presupuesto']['nombre']??'',
-        programa: e['programa']['descripcion']+'-'+e['programa']['valor']??0,
+        programa: (e['programa']?.['descripcion'] ?? '') + '-' + (e['programa']?.['valor'] ?? 0),
         anual: e['anual']??0,
         sp_ingresos: e['sp_ingresos']??0,
         sp_egresos: e['sp_egresos']??0,

@@ -603,7 +603,7 @@ export class ConceptoFormComponent implements OnInit {
             tiene_sta:this.concepto.tiene_sta
           }
         }
-        console.log(data)
+        console.log(data);
 
         this.conceptosSrv.editConcepto(this.data.id_concepto, data).subscribe(
           async (res) => {
@@ -769,7 +769,7 @@ export class ConceptoFormComponent implements OnInit {
         id_controlador: myVarGlobals.fConcepto,  // TODO: Actualizar cuando formulario ya tenga un ID
         accion: `Borrado de Anexo ${anexo.id_anexos}`,
         ip: this.commonSrv.getIpAddress()
-      }
+      };
 
       (this as any).mensajeSpinner = 'Eliminando Resolucion'
       this.lcargando.ctlSpinner(true);

@@ -75,17 +75,17 @@ export class OrganigramaComponent implements OnInit {
     estado: ''
   }
 
-  organigrama: any = []
+  organigrama: any = [];
   organigramaLoading: boolean = false
   nivel: any = {}
 
   nivelSelected: boolean = false
 
-  lista_roles:any[] = []
+  lista_roles:any[] = [];
 
   isReadOnly: boolean = true;
 
-  filteredGrupos: any[] = []
+  filteredGrupos: any[] = [];
 
   constructor
     (
@@ -148,7 +148,7 @@ export class OrganigramaComponent implements OnInit {
       if(resrol['data'].length > 0){
         this.lista_roles = resrol['data'].filter(rol => rol.estado === 'A');
       }else{
-        this.lista_roles = []
+        this.lista_roles = [];
       }
 
     }, error => {
@@ -283,7 +283,7 @@ export class OrganigramaComponent implements OnInit {
     //this.vmButtons[1].habilitar = true; //guardar
     //this.vmButtons[2].habilitar = true; //editar
 
-    console.log(data)
+    console.log(data);
 
   }
 

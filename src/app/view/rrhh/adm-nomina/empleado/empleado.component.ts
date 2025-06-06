@@ -1295,7 +1295,7 @@ this.tieneFondo = false
       emp_valor_reeten_judicial:this.formFichaEmpleado.controls.lgValorReetenJudiacial.value,
       id_empresa:this.dataUser.id_empresa
     };
-    console.log(data)
+    console.log(data);
     console.log('aun no modifica');
     // this.validaDt = false;
     (this as any).mensajeSpinner = "Actualizando...";

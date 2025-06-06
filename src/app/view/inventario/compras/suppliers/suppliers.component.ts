@@ -100,7 +100,7 @@ export class SuppliersComponent implements OnInit {
     })
 
     this.commonVarServices.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })
 
     this.commonServices.actionsSearchProviders.asObservable().subscribe(res => {

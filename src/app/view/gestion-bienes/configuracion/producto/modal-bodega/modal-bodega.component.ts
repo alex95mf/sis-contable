@@ -145,7 +145,7 @@ limpiarFiltros() {
         paginate: this.paginate,
       }
     }
-    console.log(data)
+    console.log(data);
     this.apiSrv.getBodegas(data).subscribe(
       (res) => {
         console.log(res);

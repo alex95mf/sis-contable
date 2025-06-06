@@ -1543,7 +1543,7 @@ async cargaInicial() {
     //   data['complements_formula'] = this.formulaData.complements;
     //   data['header_formula'] = this.formulaData.header;
     // }
-    console.log(data)
+    console.log(data);
     this.ingresoService.saveProducto(data).subscribe(res => {
       console.log(res);
       this.toastr.success(res['message']);
@@ -2749,7 +2749,7 @@ console.log(response)
 
     let htmlRef = this.elementRef.nativeElement.querySelector(`#chart1`);
 
-    console.log(data)
+    console.log(data);
     console.log(tendencia)
         return new Chart(htmlRef, {
           type: tipo,

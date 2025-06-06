@@ -368,7 +368,7 @@ export class AprobacionComponent implements OnInit {
     (this as any).mensajeSpinner = "Cargando Ordenes de Pago...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
 
     console.log(this.paginate.page + ' nro Pagina');
 

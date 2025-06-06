@@ -101,7 +101,7 @@ export class ModalNuevolocalComponent implements OnInit {
       this.handleLoad().then(
         (res: any) => {
           if (res && !this.nuevo) {
-            this.fTitle = 'Actualizar Local'
+            this.fTitle = 'Actualizar Local';
             (this as any).mensajeSpinner = 'Cargando datos de Local'
             this.lcargando.ctlSpinner(true);
             this.apiService.getLocal({ local: this.id_local }).subscribe(

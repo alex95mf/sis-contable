@@ -420,7 +420,7 @@ export class EmisionExpedienteComponent implements OnInit {
 
   exportarExcel() {
     console.log(this.liquidacionesDt);
-    let excelData = []
+    let excelData = [];
     this.liquidacionesDt.forEach((liquidacion: any) => {
       const { id_cob_notificacion,tipo_gestion, total, fecha, estado, notificador, ...items } = liquidacion;
       const { razon_social, num_documento, codigo_sector, ...contribuyente  } = liquidacion.contribuyente;

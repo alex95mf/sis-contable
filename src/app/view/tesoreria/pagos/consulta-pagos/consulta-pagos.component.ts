@@ -33,8 +33,8 @@ export class ConsultaPagosComponent implements OnInit {
   conceptos: any[] = [];
   reportes: any[] = [];
 
-  dataPagos : any =[]
-  dataPagosFactura : any =[]
+  dataPagos : any =[];
+  dataPagosFactura : any =[];
   tasaSelected : any
   
   listEstados = [
@@ -238,7 +238,7 @@ export class ConsultaPagosComponent implements OnInit {
            
            }
            else{
-            this.dataPagosFactura =[]
+            this.dataPagosFactura =[];
             this.vmButtons[1].habilitar = true
            
            }
@@ -258,7 +258,7 @@ export class ConsultaPagosComponent implements OnInit {
             this.vmButtons[1].habilitar = false
            }
            else{
-            this.dataPagos =[]
+            this.dataPagos =[];
             this.vmButtons[1].habilitar = true
            }
         },
@@ -392,7 +392,7 @@ descargarAnexo(anexo){
       name: anexo.name
     }
 
-    console.log(data)
+    console.log(data);
 
     this.apiService.downloadAnexo(data).subscribe(
       (resultado) => {

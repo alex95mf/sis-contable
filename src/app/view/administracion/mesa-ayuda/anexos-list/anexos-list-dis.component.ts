@@ -50,7 +50,7 @@ export class AnexosListComponentDis implements OnInit {
           identifier: res.id_cliente
         }
 
-        // console.log(data)
+        // console.log(data);
         if(res.condi == 'dis'||res.condi == 'all'){
           console.log('Anexo Discapa', res.condi, data);
           this.apiService.getAnexos(data).subscribe(
@@ -91,7 +91,7 @@ export class AnexosListComponentDis implements OnInit {
 
     this.commonVarService.clearAnexos.asObservable().subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
       }
     )
 

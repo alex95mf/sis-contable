@@ -65,7 +65,7 @@ export class BandejaTrabajoComponent implements OnInit {
     {value: "E",label: "EXTERNO"},
 
   ]
-  excelData: any = []
+  excelData: any = [];
   departamentoSelect: any = {
     dep_nombre:""
   };
@@ -530,7 +530,7 @@ export class BandejaTrabajoComponent implements OnInit {
       motivo_retorno: this.motivoRetorno
     }
 
-    console.log(data)
+    console.log(data);
     this.lcargando.ctlSpinner(true);
     this.ticketSrv.retornarTramiteSeguimiento({data}).subscribe(
 

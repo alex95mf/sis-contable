@@ -74,7 +74,7 @@ export class BandejaGeneralComponent implements OnInit {
     {value: "E",label: "EXTERNO"},
 
   ]
-  excelData: any = []
+  excelData: any = [];
   departamentoSelect: any = {
     dep_nombre:""
   };

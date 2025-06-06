@@ -495,7 +495,7 @@ iddetallecabecerareformageneral: any;
     let data = {
       periodo: this.atribucionParamsNew.periodo,
     }
-    console.log(data)
+    console.log(data);
     this.service.searchProgramaPeriodo(data).subscribe((res: any) => {
       console.log(res);
       this.lcargando.ctlSpinner(false);
@@ -895,7 +895,7 @@ iddetallecabecerareformageneral: any;
   }
 
   SearchList() {
-    this.listaSolicitudes = []
+    this.listaSolicitudes = [];
     (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
@@ -934,7 +934,7 @@ iddetallecabecerareformageneral: any;
       this.toastr.info('Ingrese el periodo')
       return
     } else {
-      this.listaSolicitudesAtribucion = []
+      this.listaSolicitudesAtribucion = [];
       (this as any).mensajeSpinner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
@@ -945,7 +945,7 @@ iddetallecabecerareformageneral: any;
         console.log(dat);
         if (dat['data'].length == 0) {
           this.toastr.info('No existe bienes para esa atribución')
-          this.listaSolicitudesAtribucion = []
+          this.listaSolicitudesAtribucion = [];
         } else {
 
           dat['data'].map((res) => {
@@ -995,7 +995,7 @@ iddetallecabecerareformageneral: any;
       this.toastr.info('Ingrese el periodo')
       return
     } else {
-      this.listaSolicitudesAtribucion = []
+      this.listaSolicitudesAtribucion = [];
       (this as any).mensajeSpinner = "Cargando Bienes...";
       this.lcargando.ctlSpinner(true);
       let data = {
@@ -1007,7 +1007,7 @@ iddetallecabecerareformageneral: any;
         console.log(dat);
         if (dat['data'].length == 0) {
           this.toastr.info('No existe bienes para esa atribución')
-          this.listaSolicitudesAtribucion = []
+          this.listaSolicitudesAtribucion = [];
         } else {
           this.totalPartida = dat.data.reduce((acc: number, curr: any) => acc + (curr.cantidad * curr.costo_unitario), 0)
           dat['data'].map((res) => {
@@ -1052,7 +1052,7 @@ iddetallecabecerareformageneral: any;
   }
 
   SearchBienes2() {
-    this.listaSolicitudesAtribucion2 = []
+    this.listaSolicitudesAtribucion2 = [];
     (this as any).mensajeSpinner = "Cargando Bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
@@ -1063,7 +1063,7 @@ iddetallecabecerareformageneral: any;
       console.log(dat);
       if (dat['data'].length == 0) {
         this.toastr.info('No existe bienes para esa atribución')
-        this.listaSolicitudesAtribucion2 = []
+        this.listaSolicitudesAtribucion2 = [];
       } else {
         dat['data'].map((res) => {
           let bienes = {
@@ -1152,8 +1152,8 @@ iddetallecabecerareformageneral: any;
           fecha: moment(this.today).format('YYYY-MM-DD')
         }
 
-        this.listaSolicitudesAtribucion = []
-        this.listaSolicitudesAtribucion2 = []
+        this.listaSolicitudesAtribucion = [];
+        this.listaSolicitudesAtribucion2 = [];
         this.total2 = 0;
         this.total = 0;
         this.totalOriginal = 0;
@@ -1167,7 +1167,7 @@ iddetallecabecerareformageneral: any;
         this.search = false
         this.vmButtons[0].habilitar = false
 
-        this.listaSolicitudes = []
+        this.listaSolicitudes = [];
 
         this.dato_Programa = []
         this.datoDepartamento = []
@@ -1190,8 +1190,8 @@ iddetallecabecerareformageneral: any;
       atribucion: null
     }
 
-    this.listaSolicitudes = []
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudes = [];
+    this.listaSolicitudesAtribucion = [];
   }
 
   eliminarSolicitud(item) {

@@ -169,7 +169,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
   changeAjuste: boolean = false
   habilitarAjuste: boolean = false
 
-  proyectosTodos: any[]=[]
+  proyectosTodos: any[]=[];
 
   totalPartidas : any = 0
 
@@ -546,7 +546,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
     let data = {
       periodo: this.documento.periodo,
     }
-    console.log(data)
+    console.log(data);
     this.genIdpSvr.searchProgramaPeriodo(data).subscribe((res: any) => {
       console.log(res);
       this.lcargando.ctlSpinner(false);

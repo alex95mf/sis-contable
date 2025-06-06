@@ -83,7 +83,7 @@ export class InvoiceSalesComponent implements OnInit {
     private socket: Socket
   ) {
     this.commonVarServices.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })
 
     this.commonVarServices.setListProductInvoice.asObservable().subscribe(res => {

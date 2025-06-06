@@ -302,7 +302,7 @@ export class ReporteDetalladoBienesComponent implements OnInit {
 
 
     }
-    console.log(data)
+    console.log(data);
 
     this.xlsService.exportReporteDetalladoBienes(data, 'Reporte Detallado Bienes')
   }

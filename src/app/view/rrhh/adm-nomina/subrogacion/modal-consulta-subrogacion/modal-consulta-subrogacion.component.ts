@@ -106,7 +106,7 @@ export class ModalConsultaSubrogacionComponent implements OnInit {
 
     }
   }
-  console.log(data)
+  console.log(data);
   this.apiSrv.consultaAccionPersonal(data).subscribe(
     (res: any) => {
        console.log(res);

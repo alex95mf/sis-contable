@@ -423,7 +423,7 @@ export class JuiciosComponent implements OnInit {
   }
 
   exportarExcel() {
-    let excelData = []
+    let excelData = [];
     (this as any).mensajeSpinner = 'Exportando'
     this.lcargando.ctlSpinner(true);
 

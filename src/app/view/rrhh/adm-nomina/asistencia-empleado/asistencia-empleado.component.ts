@@ -946,7 +946,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       id_controlador: myVarGlobals.fBovedas,
       name_file : 'PlantillaHorasTrabajadas.xlsx'
     };
-    console.log(data)
+    console.log(data);
 
     this.asistenciadiasempleService.getDonwloadFiles(data)
     .subscribe({
@@ -1137,7 +1137,7 @@ export class AsistenciaEmpleadoComponent implements OnInit {
       id_empresa : 1,
 
     };
-   console.log(data)
+   console.log(data);
   this.lcargando.ctlSpinner(true);
   (this as any).mensajeSpinner = 'Consultando Datos'
   this.asistenciadiasempleService.getOnlyDaysWorkeEmployees(data)

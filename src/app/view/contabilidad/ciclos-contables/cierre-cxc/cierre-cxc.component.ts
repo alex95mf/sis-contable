@@ -155,7 +155,7 @@ export class CierreCxcComponent implements OnInit {
     try {
       (this as any).mensajeSpinner = 'Cargando Cuentas por Cobrar'
       let documentos: Array<any> = await this.apiService.getDocumentos({ params: { filter: this.filter } })
-      console.log(documentos)
+      console.log(documentos);
       this.documento.deudas = documentos
       // cambiar estado de Botones
       this.vmButtons[1].habilitar = false

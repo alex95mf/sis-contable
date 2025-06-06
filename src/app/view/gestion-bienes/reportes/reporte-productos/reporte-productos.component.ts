@@ -329,7 +329,7 @@ export class ReporteProductosComponent implements OnInit {
       estado: estado[0]?.label ? estado[0]?.label : '',
       rows: this.dataProducto
     }
-    console.log(data)
+    console.log(data);
 
     this.xlsService.exportReporteListaProductos(data, 'Reporte Listado de Prodctos')
   }

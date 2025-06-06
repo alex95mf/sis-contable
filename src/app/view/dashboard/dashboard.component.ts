@@ -619,7 +619,7 @@ export class DashboardComponent implements OnInit {
   }
 
   chartPie(name:string, tipo:string, label: string[], data: number[],nombres: string, currency: string){
-    console.log(data)
+    console.log(data);
     console.log(nombres)
     return  new Chart(name, {
       type: tipo,

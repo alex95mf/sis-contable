@@ -875,7 +875,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
 
     }
   }
-  console.log(data)
+  console.log(data);
   this.empleadoService.getAccionPersonalPaginate(data).subscribe(
     (res: any) => {
        console.log(res);
@@ -888,7 +888,7 @@ export class SubrogacionComponent implements OnInit,AfterViewInit {
         //this.lcargando.ctlSpinner(false);
        }
        else{
-        //this.objGetAccionPersonal =[]
+        //this.objGetAccionPersonal =[];
         this.loading = false;
         //this.lcargando.ctlSpinner(false);
        }

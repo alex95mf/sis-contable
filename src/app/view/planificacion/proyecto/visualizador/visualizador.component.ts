@@ -165,13 +165,13 @@ export class VisualizadorComponent implements OnInit {
     this.programaObjectSelected = event
     this.departamentosFilter = this.departamentos.filter((departamento: any) => departamento.grupo == event.valor)
     this.departamentoSelected = null
-    this.bienes = []
+    this.bienes = [];
   }
 
   handleSelectDepartamento(event) {
     if (event == undefined) return;
     this.departamentoObjectSelected = event
-    this.bienes = []
+    this.bienes = [];
   }
 
   async handleClickBuscar() {
@@ -409,7 +409,7 @@ export class VisualizadorComponent implements OnInit {
       rows.push(row)
     })
 
-    let excelData = []
+    let excelData = [];
     for (let i = 0; i < rows.length; i++) {
       let row = {}
       Object.assign(row, this.bienesAttr[i], rows[i])

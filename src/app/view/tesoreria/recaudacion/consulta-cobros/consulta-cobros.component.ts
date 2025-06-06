@@ -35,10 +35,10 @@ export class ConsultaCobrosComponent implements OnInit {
   conceptosMercado: any[] = [];
   mercados: any[] = [];
   reportes: any[] = [];
-  cmb_conceptos: any[] = []
+  cmb_conceptos: any[] = [];
 
-  dataCobros : any =[]
-  dataCobrosExcel : any =[]
+  dataCobros : any =[];
+  dataCobrosExcel : any =[];
   tasaSelected : any
   general: boolean=true
   porTitulo: boolean=false
@@ -251,7 +251,7 @@ export class ConsultaCobrosComponent implements OnInit {
   }
   asignarTipoCobro(event){
     console.log(event);
-    this.dataCobros=[]
+    this.dataCobros=[];
     if(event == 'TITULO'){
       this.porTitulo=true
       this.general=false
@@ -317,7 +317,7 @@ export class ConsultaCobrosComponent implements OnInit {
           this.lcargando.ctlSpinner(false);
          }
          else{
-          this.dataCobros =[]
+          this.dataCobros =[];
           this.lcargando.ctlSpinner(false);
          }
       },
@@ -486,13 +486,13 @@ export class ConsultaCobrosComponent implements OnInit {
           tipo: tipo,
           rows:  this.dataCobrosExcel
         }
-        console.log(data)
+        console.log(data);
 
         this.xlsService.exportConsultaCobros(dataExcel, 'Reporte Consulta de Cobros')
         this.lcargando.ctlSpinner(false);
        }
        else{
-        this.dataCobrosExcel =[]
+        this.dataCobrosExcel =[];
         this.lcargando.ctlSpinner(false);
        }
     },
@@ -532,7 +532,7 @@ descargarAnexo(anexo){
       name: anexo.name
     }
 
-    console.log(data)
+    console.log(data);
 
     this.apiService.downloadAnexo(data).subscribe(
       (resultado) => {

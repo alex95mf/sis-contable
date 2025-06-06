@@ -143,7 +143,7 @@ export class ModalActivosCiudadComponent implements OnInit {
     let data = {
       id_contribuyente: id,
       periodo: this.periodo
-    }
+    };
     // console.log(data);
     (this as any).mensajeSpinner = "Cargando activos por contribuyente...";
     this.lcargando.ctlSpinner(true);

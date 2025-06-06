@@ -91,7 +91,7 @@ export class ModalSolicitudComponent implements OnInit {
     (this as any).mensajeSpinner = "Cargando Procesos de Compras...";
     this.lcargando.ctlSpinner(true);
     
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
     let data={
       // id: this.proveedor.id_proveedor,
       params:{

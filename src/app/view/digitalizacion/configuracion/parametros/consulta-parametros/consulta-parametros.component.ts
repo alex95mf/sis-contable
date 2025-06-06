@@ -112,7 +112,7 @@ export class ConsultaParametrosComponent implements OnInit {
     (this as any).mensajeSpinner = "Cargando Configuraciones de Parametros...";
     this.lcargando.ctlSpinner(true);
 
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
 
     let data = {
       params: {

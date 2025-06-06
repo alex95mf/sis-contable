@@ -97,7 +97,7 @@ export class CierreAnticiposProveedoresComponent implements OnInit {
     try {
       (this as any).mensajeSpinner = 'Cargando Anticipos'
       let documentos: Array<any> = await this.apiService.getDocumentos({params: {filter: this.filter}})
-      console.log(documentos)
+      console.log(documentos);
       this.documento.anticipos = documentos
       //
       this.lcargando.ctlSpinner(false)

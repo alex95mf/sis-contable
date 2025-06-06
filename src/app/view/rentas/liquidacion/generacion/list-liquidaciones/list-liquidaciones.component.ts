@@ -20,7 +20,7 @@ export class ListLiquidacionesComponent implements OnInit {
   fTitle = 'Listado de Tarifas por Concepto'
   mensajeSpinner: string
   vmButtons: any
-  dtOptions: DataTables.Settings = {}
+  dtOptions: any = {}
   dtTrigger = new Subject();
 
   liquidaciones = []

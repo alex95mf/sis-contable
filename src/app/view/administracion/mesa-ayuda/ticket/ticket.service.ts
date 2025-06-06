@@ -49,7 +49,7 @@ export class TicketService {
   }
 
   createCatalogo(data:any) {
-    console.log(data)
+    console.log(data);
     return this.apiSrv.apiCall("administracion/mesaAyudaTicket/guardarCatalogo","POST",data);
   }
  

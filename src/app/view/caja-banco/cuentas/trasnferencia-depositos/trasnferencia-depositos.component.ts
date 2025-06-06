@@ -181,7 +181,7 @@ export class TrasnferenciaDepositosComponent {
 
     this.isRowSelectable = this.isRowSelectable.bind(this);
     this.commonVarSrvice.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })
   }
 
@@ -878,7 +878,7 @@ export class TrasnferenciaDepositosComponent {
                 tipo_registro : this.select_mivimiento === 'E' ? 'Egreso banco' : 'Ingreso Banco',
                 total: (this.totalVoucher.debit === this.totalVoucher.credit) ? this.totalVoucher.debit : 0,
               }
-              console.log(data)
+              console.log(data);
               this.addVoucherDaily(data);
 
             }

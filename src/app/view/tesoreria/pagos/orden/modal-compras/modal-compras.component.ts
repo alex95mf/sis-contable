@@ -117,7 +117,7 @@ export class ModalComprasComponent implements OnInit {
 
   cargarDocumentos(flag: boolean = false){
 
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
     // let data = {
     //   params: this.proveedor.id_proveedor,
     // };

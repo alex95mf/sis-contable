@@ -13,7 +13,7 @@ standalone: false,
 export class ConsultaComponent implements OnInit {
   proyectos : Proyecto[] = []
 
-  dtOptions : DataTables.Settings = {}
+  dtOptions : any = {}
   vmButtons : any;
 
   constructor(private modal : NgbModal, private proyectoService : ConsultaService) { }

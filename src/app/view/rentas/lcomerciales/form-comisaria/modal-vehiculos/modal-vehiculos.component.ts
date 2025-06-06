@@ -82,7 +82,7 @@ export class ModalVehiculosComponent implements OnInit {
     let id = this.inspeccion.id_inspeccion_res;
     let data = {
       id_inspeccion_res_cab: id
-    }
+    };
 
     // console.log(data);
 

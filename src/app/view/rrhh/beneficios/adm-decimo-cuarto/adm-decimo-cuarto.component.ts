@@ -389,7 +389,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
 
   handleRowCheck(event, data: any) {
     console.log(event.target.checked)
-    console.log(data)
+    console.log(data);
     console.log(this.decimocuarto)
     this.decimocuarto.forEach(e => {
       if (e.cedula == data.cedula) {
@@ -579,7 +579,7 @@ export class AdmDecimoCuartoComponent implements OnInit {
 
   handleColumnCheck(event: any, data: any) {
     console.log(event.target.checked)
-    console.log(data)
+    console.log(data);
     this.decimocuarto.forEach(e => {
 
       if (event.target.checked) {

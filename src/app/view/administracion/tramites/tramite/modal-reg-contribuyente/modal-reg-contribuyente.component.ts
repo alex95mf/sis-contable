@@ -51,11 +51,11 @@ export class ModalRegContribuyenteComponent implements OnInit {
   //Total de deudas
   totalDeudas = 0;
   //Valor comercial
-  valComercial: any[] = []
+  valComercial: any[] = [];
   //Contratos
-  contratos: any = []
+  contratos: any = [];
   //Novedades
-  novedades: any = []
+  novedades: any = [];
   //Detalles pagos
   documentosDt: any = [];
 
@@ -98,10 +98,10 @@ export class ModalRegContribuyenteComponent implements OnInit {
   // logo
   empresLogo: any
   //Anexos para Arriendo
-  anexos = []
-  selectAnexos = []
+  anexos = [];
+  selectAnexos = [];
   // Convenios contribuyente
-  convenios: any = []
+  convenios: any = [];
 
   filterConvenio: any;
   paginateConvenio: any;
@@ -664,7 +664,7 @@ export class ModalRegContribuyenteComponent implements OnInit {
         this.totalDeudas = 0;
         this.solares = [];
         this.deudas = [];
-        this.contratos = []
+        this.contratos = [];
         this.actions.new = false
         this.commonVrs.clearContribu.next({})
         this.validadorNt = false;
@@ -675,7 +675,7 @@ export class ModalRegContribuyenteComponent implements OnInit {
         this.NoDocumento = undefined
         this.edadContribuyente = undefined
         this.tipoPersona = undefined;
-        this.novedades = []
+        this.novedades = [];
       }
 
     });
@@ -692,7 +692,7 @@ export class ModalRegContribuyenteComponent implements OnInit {
     this.totalDeudas = 0;
     this.solares = [];
     this.deudas = [];
-    this.contratos = []
+    this.contratos = [];
     this.actions.new = false
     this.commonVrs.clearContribu.next({})
     this.validadorNt = false;
@@ -703,7 +703,7 @@ export class ModalRegContribuyenteComponent implements OnInit {
     this.NoDocumento = undefined
     this.edadContribuyente = undefined
     this.tipoPersona = undefined;
-    this.novedades = []
+    this.novedades = [];
   }
 
   ClearForm() {

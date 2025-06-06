@@ -249,7 +249,7 @@ export class GestionGarantiaComponent implements OnInit {
 
   async btnExportar() {
 
-    let excelData = []
+    let excelData = [];
 
     let data = {
       empresa: 1,

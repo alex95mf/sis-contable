@@ -179,13 +179,13 @@ export class PresupuestoComponent implements OnInit {
     this.programaObjectSelected = event
     this.departamentosFilter = this.departamentos.filter((departamento: any) => departamento.grupo == event.valor)
     this.departamentoSelected = null
-    this.bienes = []
+    this.bienes = [];
   }
 
   handleSelectDepartamento(event) {
     if (event == undefined) return;
     this.departamentoObjectSelected = event
-    this.bienes = []
+    this.bienes = [];
   }
 
   async handleClickBuscar() {
@@ -220,7 +220,7 @@ export class PresupuestoComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this.bienes = []
+        this.bienes = [];
         this.vmButtons[1].habilitar = true
         this.selectables.map((select: NgSelectComponent) => select.handleClearClick())
       }

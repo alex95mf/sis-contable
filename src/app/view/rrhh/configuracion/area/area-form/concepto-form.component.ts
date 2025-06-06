@@ -219,7 +219,7 @@ export class ConceptoFormComponent implements OnInit {
             fk_programa: this.documento.fk_programa
           }
         }
-        console.log(data)
+        console.log(data);
 
         this.conceptosSrv.createArea(data).subscribe(
           (res) => {

@@ -147,7 +147,7 @@ export class ModalSolaresComponent implements OnInit {
     let data = {
       fk_solar: this.objSolar.id,
       tipo_contribucion: this.tipoCont
-    }
+    };
     // console.log(data);
     (this as any).mensajeSpinner = "Cargando activos por contribuyente...";
     this.lcargando.ctlSpinner(true);

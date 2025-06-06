@@ -263,7 +263,7 @@ UploadService(file, payload?: any, custom1?: any): void {
             accion: `Borrado de Anexo ${anexo.id_anexo}`,
             ip: this.commonService.getIpAddress()
           }
-          console.log(data)
+          console.log(data);
           (this as any).mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true);
       

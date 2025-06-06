@@ -565,7 +565,7 @@ export class AsignacionComponent implements OnInit {
               this.vmButtons[0].showimg = false
               this.vmButtons[1].showimg = false
               /*   this.vmButtons[2].showimg = true */
-              this.listaSolicitudesAtribucion = []
+              this.listaSolicitudesAtribucion = [];
               this.atribucionParamsNew = {
                 programa: null,
                 departamento: null,
@@ -589,11 +589,11 @@ export class AsignacionComponent implements OnInit {
     console.log(event);
     this.departamento = []
     this.datoDepartamento = []
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudesAtribucion = [];
   }
 
   onDepartamentoSelect(event: Array<any>) {
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudesAtribucion = [];
   }
 
   onMaterialGroupChange(event) {
@@ -658,7 +658,7 @@ export class AsignacionComponent implements OnInit {
     // console.log(event);
 
     this.lcargando.ctlSpinner(true);
-    this.listaSolicitudes = []
+    this.listaSolicitudes = [];
     (this as any).mensajeSpinner = "Cargando Programa...";
     this.lcargando.ctlSpinner(true);
     let data = {
@@ -702,7 +702,7 @@ export class AsignacionComponent implements OnInit {
 
   SearchBienes() {
     // console.log(event);
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudesAtribucion = [];
     (this as any).mensajeSpinner = "Cargando Bienes...";
     this.lcargando.ctlSpinner(true);
     let data = {
@@ -716,7 +716,7 @@ export class AsignacionComponent implements OnInit {
       console.log(dat);
       if (dat['data'].length == 0) {
         this.toastr.info('No existe bienes para el Departamento seleccionado.')
-        this.listaSolicitudesAtribucion = []
+        this.listaSolicitudesAtribucion = [];
       } else {
 
 
@@ -797,7 +797,7 @@ export class AsignacionComponent implements OnInit {
       fecha_creacion: moment(this.today).format('YYYY-MM-DD')
     }
 
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudesAtribucion = [];
     this.newReserva = {
       codigo: '',
       observacion: '',
@@ -864,7 +864,7 @@ export class AsignacionComponent implements OnInit {
       fecha_creacion: moment(this.today).format('YYYY-MM-DD')
     }
 
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudesAtribucion = [];
     this.newReserva = {
       codigo: '',
       observacion: '',
@@ -913,8 +913,8 @@ export class AsignacionComponent implements OnInit {
       fecha_creacion: moment(this.today).format('YYYY-MM-DD')
     }
 
-    this.listaSolicitudes = []
-    this.listaSolicitudesAtribucion = []
+    this.listaSolicitudes = [];
+    this.listaSolicitudesAtribucion = [];
   }
 
   eliminarSolicitud(item) {

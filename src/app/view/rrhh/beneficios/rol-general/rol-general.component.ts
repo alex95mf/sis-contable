@@ -567,7 +567,7 @@ setAprobarRol(){
           }
           //this.cols.splice(1, 0, { field: 'total_ingreso', header: 'TOTAL INGRESOS', order: 4, class: "one" });
           //console.log(this.RolGeneral);
-         // console.log(Data)
+         // console.log(data);
           let linea = 0
 
           for (let i = 0; i < Data.length; i++) {
@@ -647,7 +647,7 @@ setAprobarRol(){
 
           }
           console.log(this.cols)
-          console.log(Data)
+          console.log(Data);
           this.RolGeneral.forEach(e => {
             let totalIngresos  = 0
             let totalEgresos = 0
@@ -803,7 +803,7 @@ setAprobarRol(){
 
   handleColumnCheck(event: any, data: any) {
     console.log(event.target.checked)
-    console.log(data)
+    console.log(data);
     this.RolGeneral.forEach(e => {
 
       if(event.target.checked ){
@@ -819,7 +819,7 @@ setAprobarRol(){
 
   handleRowCheck(event, data: any) {
     console.log(event.target.checked)
-    console.log(data)
+    console.log(data);
     console.log(this.RolGeneral);
    this.RolGeneral.forEach(e => {
     if(e.linea == data.linea){

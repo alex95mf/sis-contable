@@ -21,8 +21,8 @@ standalone: false,
 export class RegistroPolizaComponent implements OnInit {
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   mensajeSpinner: string = "Cargando...";
-  dataProducto: any = []
-  vmButtons: any =[]
+  dataProducto: any = [];
+  vmButtons: any =[];
   codigoGrupo: any;
   proveedorActive: any = {
     razon_social: ""
@@ -40,7 +40,7 @@ export class RegistroPolizaComponent implements OnInit {
     detalles:[]
 
 }
-  producto:any = []
+  producto:any = [];
 
   mantenimientoDisabled =false
   anexoDisabled =true
@@ -48,7 +48,7 @@ export class RegistroPolizaComponent implements OnInit {
   productoDisabled =false
 
   fileList: FileList;
-  listaCatalogo: any = []
+  listaCatalogo: any = [];
   estado = 'P'
   producto_delete:any
 
@@ -258,7 +258,7 @@ export class RegistroPolizaComponent implements OnInit {
         let data = {
           documento :this.documento
         }
-        console.log(data)
+        console.log(data);
         this.invService.saveRegistroPoliza(data).subscribe(
           (res)=>{
             console.log(res)

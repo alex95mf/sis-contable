@@ -15,7 +15,7 @@ export class ConsultaComponent implements OnInit {
   // Dummy data
   planes : Plan[] = []
 
-  dtOptions : DataTables.Settings = {}
+  dtOptions : any = {}
 
   constructor(private modal : NgbModal) { }
 

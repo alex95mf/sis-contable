@@ -298,7 +298,7 @@ export class KardexComponent implements OnInit {
       stock: stock[0]?.label ? stock[0]?.label : '',
       rows: this.dataProducto
     }
-    console.log(data)
+    console.log(data);
 
     this.xlsService.exportReporteKardex(data, 'Reporte Kardex')
   }

@@ -931,7 +931,7 @@ calcTotal() {
                   let data = {
                     liquidacion: this.liquidacion
                   }
-                console.log(data)
+                console.log(data);
                   this.validarLiquidacion(data);
 
               } else {

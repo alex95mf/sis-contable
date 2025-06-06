@@ -158,7 +158,7 @@ export class DocElecComponent implements OnInit {
 
       (this as any).mensajeSpinner = 'Cargando Documentos'
       let documentos = await this.apiService.getDocumentos({ filter: this.filter })
-      // console.log(documentos)
+      // console.log(documentos);
       documentos.map((item: any) => Object.assign(item, {
         check: false,
         estado_elec_texto: this.lst_estado_documento.find((e: any) => e.valor == item.estado_doc_elec)?.descripcion,
@@ -180,7 +180,7 @@ export class DocElecComponent implements OnInit {
     try {
       (this as any).mensajeSpinner = 'Cargando Documentos'
       let documentos = await this.apiService.getDocumentos({ filter: this.filter })
-      // console.log(documentos)
+      // console.log(documentos);
       documentos.map((item: any) => Object.assign(item, {
         check: false,
         estado_elec_texto: this.lst_estado_documento.find((e: any) => e.valor == item.estado_doc_elec)?.descripcion,

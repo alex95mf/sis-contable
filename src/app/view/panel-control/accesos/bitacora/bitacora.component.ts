@@ -117,7 +117,7 @@ export class BitacoraComponent implements OnDestroy, OnInit {
   getDatabitacora(flag: boolean = false) {
     (this as any).mensajeSpinner = "Cargando Auditoría...";
     this.lcargando.ctlSpinner(true);
-    if (flag) this.paginate.page = 1
+    if (flag) this.paginate.page = 1;
 
     let data = {
       params: {

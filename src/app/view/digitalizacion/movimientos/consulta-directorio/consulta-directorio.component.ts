@@ -228,9 +228,9 @@ this.tipobusqueda = 'indices';
         paginate: this.paginate,
       },
     };
-    this.directorioDt = []
-    this.filter.campos=[]
-    this.dataFormsAux=[]
+    this.directorioDt = [];
+    this.filter.campos=[];
+    this.dataFormsAux=[];
 
 
     const selectedTipoDocumento = this.lst_tipoDoC.find(tipo => tipo.id_tipo_documento === event);
@@ -345,7 +345,7 @@ let newDataForms= [];
 
       },
     }
-    console.log(data)
+    console.log(data);
     if(flag == 1){
       if(camposFiltrados.length > 0 || this.tipo_medio != '' || this.numero_medio != '' ){
         this.apiService.getDirectorio(data).subscribe(
@@ -621,16 +621,16 @@ let newDataForms= [];
     }
     this.tipo_documento = null;
 
-    this.resultadoConsulta = []
+    this.resultadoConsulta = [];
     this.dataForms = [];
     this.filter.campos = [];
     this.dataSource = new MatTreeNestedDataSource<any>();
     this.treeControl =  new NestedTreeControl<any>(node => node.children);
     this.tipoDoC = null;
     this.filter.tipo_documento= null
-    this.directorioDt = []
-    this.filter.campos=[]
-    this.dataFormsAux=[]
+    this.directorioDt = [];
+    this.filter.campos=[];
+    this.dataFormsAux=[];
   }
 
   moduloDetallePrestamo(event) {

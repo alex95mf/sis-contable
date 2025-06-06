@@ -54,7 +54,7 @@ export class BodegaDespachoComponent implements OnInit {
     })
 
     this.commonVarService.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })
   }
 

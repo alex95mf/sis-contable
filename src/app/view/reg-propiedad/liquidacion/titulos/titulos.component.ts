@@ -130,10 +130,10 @@ export class TitulosComponent implements OnInit {
     try {
       (this as any).mensajeSpinner = 'Cargando documentos...'
       let documentos = await this.generacionSrv.getLiquidacionesAsync({concepto: { codigo: 'RP' }, params: { filter: this.filter }})
-      console.log(documentos)
+      console.log(documentos);
       //
       (this as any).mensajeSpinner = 'Exportando'
-      let excelData = []
+      let excelData = [];
       documentos.forEach((element: any) => {
         const { documento, contribuyente, total, arancel, avaluo, fecha, estado, usuario } = element
         let estado_text = this.estadoToPrint(estado)

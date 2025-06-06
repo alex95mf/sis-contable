@@ -16,7 +16,7 @@ standalone: false,
 })
 export class CatalogoBienesComponent implements OnInit {
 
-  catalogoBienes: any = []
+  catalogoBienes: any = [];
   vmButtons:any=[];
   filter: any;
   paginate: any

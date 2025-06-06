@@ -11,13 +11,13 @@ standalone: false,
 })
 export class DetalleSolicitudComponent implements OnInit {
 
-  listaSolicitudes: any = []
+  listaSolicitudes: any = [];
 
 
 
-  asigna: any =[]
+  asigna: any =[];
 
-  proceso: any = []
+  proceso: any = [];
 
   vmButtons: any;
 

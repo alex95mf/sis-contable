@@ -354,7 +354,7 @@ export class ReporteComponent implements OnInit {
           //this.lcargando.ctlSpinner(false);
          }
          else{
-          this.dataReportes =[]
+          this.dataReportes =[];
           this.loading = false;
           //this.lcargando.ctlSpinner(false);
          }

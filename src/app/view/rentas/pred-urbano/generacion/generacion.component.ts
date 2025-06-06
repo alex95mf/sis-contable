@@ -359,7 +359,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
       (this as any).mensajeSpinner = 'Cargando Periodos'
       const periodoResponse = await this.apiService.getPeriodos() as any;
       console.log(periodoResponse)
-      this.cmb_periodo = periodoResponse.data
+      this.cmb_periodo = periodoResponse.data as any[];
 
       // Cargar configuracion del Concepto PU
       (this as any).mensajeSpinner = 'Cargando Conceptos'

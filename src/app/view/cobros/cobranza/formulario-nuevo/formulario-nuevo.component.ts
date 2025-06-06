@@ -344,7 +344,7 @@ export class FormularioNuevoComponent implements OnInit {
   }
 
   exportarExcel() {
-    let excelData = []
+    let excelData = [];
     this.liquidacionesDt.forEach((liquidacion: any) => {
       const { documento, fecha, total, ...items } = liquidacion;
       const { razon_social, num_documento, codigo_sector, ...contribuyente  } = liquidacion.contribuyente;

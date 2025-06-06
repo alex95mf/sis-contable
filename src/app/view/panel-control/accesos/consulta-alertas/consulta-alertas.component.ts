@@ -57,8 +57,8 @@ export class ConsultaAlertasComponent implements OnInit {
   userFilter:any = 0;
   dataBitacoraAux:any = [];
 
-  tipoAlertas: any =[]
-  modulos: any = []
+  tipoAlertas: any =[];
+  modulos: any = [];
 
   paginate: any;
   filter: any;
@@ -66,7 +66,7 @@ export class ConsultaAlertasComponent implements OnInit {
   tomorrow: any;
   firstday: any;
   lastday:any;
-  excelData: any = []
+  excelData: any = [];
   dataAlertas : any = [];
 
   estadoList = [

@@ -91,7 +91,7 @@ export class DetalleInfimasComponent implements OnInit {
     proceso: null,
     anexos: null,
   }
-  infimasDetalles: any =[]
+  infimasDetalles: any =[];
 
   adjudList: any = [
     {value: "P",label: "PENDIENTE"},

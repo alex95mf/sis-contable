@@ -148,7 +148,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
     })
 
     this.comVsrv.updPerm.asObservable().subscribe(res => {
-      (res) ? this.lcargando.ctlSpinner(true); : this.lcargando.ctlSpinner(false);
+      (res) ? this.lcargando.ctlSpinner(true) : this.lcargando.ctlSpinner(false);
     })
     this.comVsrv.departamentoSelect.asObservable().subscribe(
       (res)=>{
@@ -1292,7 +1292,7 @@ export class SeguridadComponent implements OnDestroy, OnInit {
         id_controlador: myVarGlobals.fSeguridades,  // TODO: Actualizar cuando formulario ya tenga un ID
         accion: `Borrado de Anexo ${anexo.id_anexos}`,
         ip: this.commonServices.getIpAddress()
-      }
+      };
 
       (this as any).mensajeSpinner = 'Eliminando Resolucion'
       this.lcargando.ctlSpinner(true);

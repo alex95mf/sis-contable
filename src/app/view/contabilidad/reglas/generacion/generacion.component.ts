@@ -728,7 +728,7 @@ export class GeneracionComponent implements OnInit {
       title: 'Reporte reglas ESIGEF',
       rows:  this.dataReporte
     }
-    console.log(data)
+    console.log(data);
 
     this.xlsService.exportReglasEsigef(data, 'Reporte reglas ESIGEF')
   }

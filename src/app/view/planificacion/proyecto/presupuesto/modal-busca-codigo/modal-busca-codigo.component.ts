@@ -98,7 +98,7 @@ export class ModalBuscaCodigoComponent implements OnInit {
         paginate: this.paginate
       }
     }
-    this.resultados = []
+    this.resultados = [];
     this.lcargando.ctlSpinner(true);
 
     try {
