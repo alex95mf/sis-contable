@@ -16,8 +16,8 @@ export class GoogleMapComponent implements OnInit, OnChanges {
 
   @Output() coordinatesChanged = new EventEmitter<{ lat: number, lng: number }>();
 
-  private map: google.maps.Map | undefined;
-  private marker: google.maps.Marker | undefined;
+  private map: any | undefined;
+  private marker: any | undefined;
 
   ngOnInit(): void {
     this.loadGoogleMapsScript();
@@ -47,7 +47,7 @@ export class GoogleMapComponent implements OnInit, OnChanges {
       return;
     }
 
-    const mapOptions: google.maps.MapOptions = {
+    const mapOptions: any = {
       center: { lat: this.initialLat, lng: this.initialLng },
       zoom: this.initialZoom
     };
@@ -101,8 +101,8 @@ export class GoogleMapComponent implements OnInit, OnChanges {
 
 //   @Output() coordinatesChanged = new EventEmitter<{ lat: number, lng: number }>();
 
-//   private map: google.maps.Map | undefined;
-//   private marker: google.maps.Marker | undefined;
+//   private map: any | undefined;
+//   private marker: any | undefined;
 
 //   ngOnInit(): void {
 //     this.loadGoogleMapsScript();
@@ -132,7 +132,7 @@ export class GoogleMapComponent implements OnInit, OnChanges {
 //       return;
 //     }
 
-//     const mapOptions: google.maps.MapOptions = {
+//     const mapOptions: any = {
 //       center: { lat: this.initialLat, lng: this.initialLng },
 //       zoom: 12
 //     };
@@ -191,8 +191,8 @@ export class GoogleMapComponent implements OnInit, OnChanges {
 //   selectedLng: number=0;
 
 //   @Output() coordinatesChanged = new EventEmitter<{ lat: number, lng: number }>();
-//   private map: google.maps.Map | undefined;
-//   private marker: google.maps.Marker | undefined;
+//   private map: any | undefined;
+//   private marker: any | undefined;
 
 
 //   ngOnInit(): void {
@@ -229,7 +229,7 @@ export class GoogleMapComponent implements OnInit, OnChanges {
 //       return;
 //     }
 
-//     const mapOptions: google.maps.MapOptions = {
+//     const mapOptions: any = {
 //       center: { lat: this.initialLat, lng: this.initialLng },
 //       zoom: 12
 //     };
