@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-
+declare var google: any;
 @Component({
 standalone: false,
   selector: 'app-google-map',
@@ -9,7 +9,7 @@ standalone: false,
 export class GoogleMapComponent implements OnInit, OnChanges {
   @Input() initialLat: number = -2.147866;
   @Input() initialLng: number = -79.922742;
-  @Input() initialZoom: number = 12; 
+  @Input() initialZoom: number = 12;
 
   selectedLat: number = 0;
   selectedLng: number = 0;
@@ -79,7 +79,7 @@ export class GoogleMapComponent implements OnInit, OnChanges {
       const newPosition = { lat: this.initialLat, lng: this.initialLng };
       this.marker.setPosition(newPosition);
       this.map.setCenter(newPosition);
-      this.map.setZoom(this.initialZoom); 
+      this.map.setZoom(this.initialZoom);
     }
   }
 }
@@ -88,7 +88,7 @@ export class GoogleMapComponent implements OnInit, OnChanges {
 // import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 // @Component({
-standalone: false,
+// standalone: false,
 //   selector: 'app-google-map',
 //   templateUrl: './google-map.component.html',
 //   styleUrls: ['./google-map.component.css']
@@ -174,7 +174,7 @@ standalone: false,
 // import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 // @Component({
-standalone: false,
+// standalone: false,
 //   selector: 'app-google-map',
 //   templateUrl: './google-map.component.html',
 //   styleUrls: ['./google-map.component.css']
@@ -246,7 +246,7 @@ standalone: false,
 //       this.selectedLat = event.latLng.lat();
 //       this.selectedLng = event.latLng.lng();
 //       this.coordinatesChanged.emit({ lat: this.selectedLat, lng: this.selectedLng });
-      
+
 //       console.log(`Coordenadas seleccionadas: ${this.selectedLat}, ${this.selectedLng}`);
 //     });
 //   }

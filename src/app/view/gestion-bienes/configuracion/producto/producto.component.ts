@@ -2752,7 +2752,7 @@ console.log(response)
     console.log(data);
     console.log(tendencia)
         return new Chart(htmlRef, {
-         icon: tipo,
+         type: tipo as any,
           data: {
             labels: label,
             datasets: [{

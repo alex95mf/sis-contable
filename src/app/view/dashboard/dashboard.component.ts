@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit {
   chart(name:string, tipo:string, label: string[], data: number[],nombres:string,currency: string){
 
     return  new Chart(name, {
-     icon: tipo,
+     type: tipo as any,
       data: {
         labels: label,
         datasets: [{
@@ -265,7 +265,7 @@ export class DashboardComponent implements OnInit {
   chartLine(name:string, tipo:string, label: string[], data: number[], nombres: string, currency: string){
 
     return  new Chart(name, {
-     icon: tipo,
+     type: tipo as any,
       data: {
         labels: label,
         datasets: [{
@@ -442,7 +442,7 @@ y:{
               fontColor: '#000000',
             }
 
-          }]
+          }
         }
       }
     });
@@ -450,7 +450,7 @@ y:{
   chartBar(name:string, tipo:string, label: string[], data: number[],nombres: string, currency:string){
 
     return  new Chart(name, {
-     icon: tipo,
+     type: tipo as any,
       data: {
         labels: label,
         datasets: [{
@@ -610,7 +610,7 @@ y:{
               fontColor: '#000000',
             }
 
-          }]
+          }
         }
       }
     });
@@ -620,7 +620,7 @@ y:{
     console.log(data);
     console.log(nombres)
     return  new Chart(name, {
-     icon: tipo,
+     type: tipo as any,
       data: {
         labels: label,
         datasets: [{
@@ -788,7 +788,7 @@ y:{
         scales: {
           x:{
             display: false,
-            gridLines:{
+            grid:{
               display: false
             },
             ticks:{
@@ -803,7 +803,7 @@ y:{
          },
 y:{
             display: false,
-            gridLines: {
+            grid: {
               display: false
             },
             ticks:{
@@ -815,7 +815,7 @@ y:{
 
 
             },
-          }],
+          },
 
         }
       }

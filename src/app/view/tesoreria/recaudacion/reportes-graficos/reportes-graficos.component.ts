@@ -706,7 +706,7 @@ export class ReportesGraficosComponent implements OnInit {
         scales: {
           x:{
             display: false,
-            gridLines:{
+            grid:{
               display: false
             },
             beginAtZero: true,
@@ -724,7 +724,7 @@ export class ReportesGraficosComponent implements OnInit {
           },
           y: {
             display: false,
-            gridLines: {
+            grid: {
               display: false
             },
             beginAtZero: true,
