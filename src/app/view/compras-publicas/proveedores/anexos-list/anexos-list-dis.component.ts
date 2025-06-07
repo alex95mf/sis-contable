@@ -29,19 +29,19 @@ export class AnexosListComponentDis implements OnInit {
   @Input() mostrarEliminar: any;
   @Input() custom1: any;
 
-  
+
   anexos = [];
   anexosCP = []
   //anexos
 
   constructor(
-    private commonService: CommonService, 
+    private commonService: CommonService,
     private commonVarService: CommonVarService,
     private toastr: ToastrService,
     private apiService: AnexoListService,
     private confirmationDialogService: ConfirmationDialogService
   ) {
-    
+
     this.commonVarService.regProveedores.asObservable().subscribe(
       (res: any) => {
         this.lcargando.ctlSpinner(true);
@@ -53,7 +53,7 @@ export class AnexosListComponentDis implements OnInit {
           component: myVarGlobals.fProveedores,
           identifier: res.identifier,
           custom1:this.custom1
-          
+
         }
 
         console.log(data);
@@ -63,14 +63,14 @@ export class AnexosListComponentDis implements OnInit {
             (res: any) => {
               console.log('Anexo ', this.custom1,res)
               this.anexos = res.data
-              
+
               console.log(res.data.length);
                if(res.data.length == 0){
                 // this.commonVarService.diableCargarDis.next({})
                 this.commonVarService.regProveedores.next({validacion: false, custom1: this.custom1})
               }else{
                 this.commonVarService.regProveedores.next({validacion: true, custom1: this.custom1})
-              } 
+              }
               this.lcargando.ctlSpinner(false)
             },
             (err: any) => {
@@ -79,7 +79,7 @@ export class AnexosListComponentDis implements OnInit {
             }
           )
         }
-        
+
       }
     )
 
@@ -92,14 +92,14 @@ export class AnexosListComponentDis implements OnInit {
     this.commonService.clearAnexos.asObservable().subscribe(
       (res)=>{
         this.anexos = [];
-        
+
       }
     )
   }
 
   ngOnInit(): void {
     // console.log(this.permissions);
-    
+
     setTimeout(() => {
       // this.cargarArchivo()
       console.log(this.identifier);
@@ -131,15 +131,15 @@ export class AnexosListComponentDis implements OnInit {
         }else if(this.custom1 == res.data.custom1){
 
         }
-        
+
         console.log(res.data.length);
         if(res.data.length ==0){
           //this.commonVarService.diableCargarDis.next({})
            this.commonVarService.regProveedores.next({validacion: false, custom1: this.custom1})
         } else{
           this.commonVarService.regProveedores.next({validacion: true, custom1: this.custom1})
-        } 
-        
+        }
+
         this.lcargando.ctlSpinner(false)
       },
       (err: any) => {
@@ -175,7 +175,7 @@ export class AnexosListComponentDis implements OnInit {
         this.commonVarService.diableCargarDis.next({})
         this.commonVarService.regProveedores.next(false)
 
-       
+
 
         // Swal.fire({
         //   title: this.fTitle,
@@ -215,8 +215,8 @@ export class AnexosListComponentDis implements OnInit {
             id_controlador: myVarGlobals.fProveedores,  // TODO: Actualizar cuando formulario ya tenga un ID
             accion: `Borrado de Anexo ${anexo.id_anexo}`,
             ip: this.commonService.getIpAddress()
-          }
-      
+          };
+
           (this as any).mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true);
           console.log()

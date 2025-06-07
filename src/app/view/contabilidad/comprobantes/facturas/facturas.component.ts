@@ -33,7 +33,6 @@ import { DiarioService } from '../diario/diario.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
-import { MessageService } from 'primeng/api';
 
 import { MenuItem } from 'primeng/api';
 
@@ -614,9 +613,10 @@ export class FacturasComponent implements OnInit {
 
     //new Date().toLocaleString("es-CO", { timeZone: "America/Bogota" })
 
-    this.msgs2 = [
-      { severity: 'info', summary: '', detail: 'Para realizar el registro de venta se requiere asignar la codigo contable de la cuenta por cobrar.' }
-    ];
+    // this.msgs2 = [
+    //   { severity: 'info', summary: '', detail: 'Para realizar el registro de venta se requiere asignar la codigo contable de la cuenta por cobrar.' }
+    // ];
+    this.messageService.add({ severity: 'info', summary: '', detail: 'Para realizar el registro de venta se requiere asignar la codigo contable de la cuenta por cobrar.' });
 
     this.serverSideSearch();
 

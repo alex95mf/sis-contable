@@ -8,7 +8,7 @@ import { NuevaConsultaService } from './nueva-consulta.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CcModalTablaCuentaComponent } from 'src/app/config/custom/cc-modal-tabla-cuenta/cc-modal-tabla-cuenta.component';
 import * as moment from 'moment';
-import Chart from 'chart.js';
+import { Chart } from 'chart.js';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
@@ -298,8 +298,10 @@ export class NuevaConsultaComponent implements OnInit {
       },
       options: {
         aspectRatio: 2.5,
-        legend: {
-          display: true
+        plugins: {
+          legend: {
+            display: true
+          }
         },
       }
     });

@@ -280,7 +280,7 @@ export class ContratoComponent implements OnInit {
         this.lcargando.ctlSpinner(false)
         this.toastr.warning("No tiene permisos para usar este recurso.", this.fTitle);
         return
-      }
+      };
 
       (this as any).mensajeSpinner = 'Cargando Mercados'
       this.mercados = await this.getMercados()
@@ -608,7 +608,7 @@ export class ContratoComponent implements OnInit {
       } else if (this.fileList && this.contrato.id === null) {
         // Como llegamos a esto?
         this.toastr.warning('No se puede almacenar anexos sin primero haber guardado el contrato.', this.fTitle)
-      }
+      };
 
       (this as any).mensajeSpinner = 'Actualizando Contrato'
       let res: any = await this.updateContrato()

@@ -9,7 +9,6 @@ import { ExcelService } from '../../../services/excel.service';
 import { CcSpinerProcesarComponent } from '../../../config/custom/cc-spiner-procesar.component';
 import { CcModalTablaCatalogoPresupuestoComponent } from 'src/app/config/custom/cc-modal-tabla-catalogo-presupuesto/cc-modal-tabla-catalogo-presupuesto.component';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import { Fancy } from 'fancygrid';
 
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';

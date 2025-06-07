@@ -558,7 +558,7 @@ fecha_hasta= new Date(Number(moment(new Date()).format('YYYY')), Number(moment(n
         anio: Number(this.periodo),
         mes: Number(this.mes_actual),
         nivel:this.nivelSeleccionado
-      }
+      };
 
       (this as any).mensajeSpinner = "Procesando...";
       this.lcargando.ctlSpinner(true);

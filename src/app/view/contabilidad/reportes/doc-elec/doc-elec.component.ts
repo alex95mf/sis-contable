@@ -154,7 +154,7 @@ export class DocElecComponent implements OnInit {
 
       let res_estado_documento = await this.apiService.getCatalogos({params: "'ESTADO DOCUMENTO SRI'"});
       // console.log(res_estado_documento)
-      this.cmb_estado_documento = [...this.cmb_estado_documento, ...res_estado_documento['ESTADO DOCUMENTO SRI']]
+      this.cmb_estado_documento = [...this.cmb_estado_documento, ...res_estado_documento['ESTADO DOCUMENTO SRI']];
 
       (this as any).mensajeSpinner = 'Cargando Documentos'
       let documentos = await this.apiService.getDocumentos({ filter: this.filter })

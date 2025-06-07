@@ -136,7 +136,7 @@ export class ModalCampaignDetailsComponent implements OnInit {
       case "CERRAR":
         this.activeModal.close()
         break;
-    
+
       default:
         break;
     }
@@ -276,8 +276,8 @@ export class ModalCampaignDetailsComponent implements OnInit {
         Object.assign(this.campaign, {
           conceptos: this.lst_concepto,
           conceptos_del: this.lst_concepto_del
-        })
-  
+        });
+
         (this as any).mensajeSpinner = 'Actualizando Campaña'
         let response = await this.apiService.putCampaign(this.campaign.id, {campaign: this.campaign})
         console.log(response)

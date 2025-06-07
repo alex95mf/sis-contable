@@ -29,22 +29,22 @@ export class AnexosListaComponentDis implements OnInit {
   @Input() tipo: any
   @Input() identifier: any
   @Input() archivo: any;
-  
+
   anexos = [];
 
   constructor(
-    private commonService: CommonService, 
+    private commonService: CommonService,
     private commonVarService: CommonVarService,
     private toastr: ToastrService,
     private apiService: AnexoListaService,
     private confirmationDialogService: ConfirmationDialogService
   ) {
-    
+
     this.commonVarService.contribAnexoLoad2.asObservable().subscribe(
       (res: any) => {
         this.lcargando.ctlSpinner(true);
         (this as any).mensajeSpinner = 'Cargando Anexos ...'
-        
+
         // console.log('anexos', res);
         let data = {
          // module: this.permissions.id_modulo,
@@ -84,7 +84,7 @@ export class AnexosListaComponentDis implements OnInit {
             }
           )
         }
-        
+
       }
     )
 
@@ -106,7 +106,7 @@ export class AnexosListaComponentDis implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.permissions);
-    
+
     setTimeout(() => {
       this.cargarArchivo()
       console.log(this.identifier);
@@ -213,11 +213,11 @@ export class AnexosListaComponentDis implements OnInit {
             id_controlador: myVarGlobals.fConvenio,  // TODO: Actualizar cuando formulario ya tenga un ID
             accion: `Borrado de Anexo ${anexo.id_anexo}`,
             ip: this.commonService.getIpAddress()
-          }
-      
+          };
+
           (this as any).mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true);
-      
+
           this.apiService.deleteAnexo(data).subscribe(
             res => {
               console.log(res);

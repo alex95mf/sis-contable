@@ -354,7 +354,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
         this.vmButtons = [];
         this.lcargando.ctlSpinner(false)
         throw new Error('No tiene permisos para usar este recurso.');
-      }
+      };
 
       (this as any).mensajeSpinner = 'Cargando Periodos'
       const periodoResponse = await this.apiService.getPeriodos() as any;

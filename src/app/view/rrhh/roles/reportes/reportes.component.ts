@@ -239,7 +239,7 @@ export class ReportesComponent implements OnInit {
     ) {
       this.toastr.info('Debe ingresar un Período');
       return;
-    }
+    };
 
       (this as any).mensajeSpinner = 'Cargando...';
       //this.lcargando.ctlSpinner(true);

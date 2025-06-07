@@ -11,7 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import {NgxPrintModule} from 'ngx-print';
-import { TreeviewModule } from 'ngx-treeview';
+
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 import { ExcelService } from '../../../../services/excel.service';

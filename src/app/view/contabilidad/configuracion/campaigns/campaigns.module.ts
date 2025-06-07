@@ -7,7 +7,7 @@ import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { NgxCurrencyDirective } from 'ngx-currency';
 import { ExcelService } from 'src/app/services/excel.service';
 import { ModalCampaignDetailsComponent } from './modal-campaign-details/modal-campaign-details.component';
-import { AppBreadcrumbModule } from '@coreui/angular';
+import { BreadcrumbModule } from '@coreui/angular';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { AppBreadcrumbModule } from '@coreui/angular';
   ],
   imports: [
     CommonModule,
-    AppBreadcrumbModule,
+    BreadcrumbModule,
     AppCustomModule,
     NgxCurrencyDirective,
     CampaignsRoutingModule

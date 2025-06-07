@@ -9,7 +9,7 @@ import * as myVarGlobals from 'src/app/global';
 import { ConfirmationDialogService } from 'src/app/config/custom/confirmation-dialog/confirmation-dialog.service';
 import { VistaArchivoComponent } from 'src/app/view/contabilidad/centro-costo/cc-mantenimiento/vista-archivo/vista-archivo.component';
 
-import { AsignacionService } from '../asignacion.service'; 
+import { AsignacionService } from '../asignacion.service';
 
 @Component({
 standalone: false,
@@ -24,11 +24,11 @@ export class AnexosListComponentDis implements OnInit {
   @Input() dataUser: any
   @Input() permissions: any
   @Input() tipo: any
-  
+
   anexos = [];
 
   constructor(
-    private commonService: CommonService, 
+    private commonService: CommonService,
     private commonVarService: CommonVarService,
     private toastr: ToastrService,
     private apiService: AsignacionService,
@@ -74,7 +74,7 @@ export class AnexosListComponentDis implements OnInit {
             }
           )
         }
-        
+
       }
     )
 
@@ -158,11 +158,11 @@ export class AnexosListComponentDis implements OnInit {
             id_controlador: myVarGlobals.fCPSolici,  // TODO: Actualizar cuando formulario ya tenga un ID
             accion: `Borrado de Anexo ${anexo.id_anexos}`,
             ip: this.commonService.getIpAddress()
-          }
-      
+          };
+
           (this as any).mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true);
-      
+
           this.apiService.deleteAnexo(data).subscribe(
             res => {
               // console.log(res);

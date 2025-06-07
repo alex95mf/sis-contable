@@ -28,17 +28,17 @@ export class AnexosListComponentDis implements OnInit {
   @Input() tipo: any
   @Input() identifier: any
   @Input() mostrarEliminar: any;
-  
+
   anexos = [];
 
   constructor(
-    private commonService: CommonService, 
+    private commonService: CommonService,
     private commonVarService: CommonVarService,
     private toastr: ToastrService,
     private apiService: AnexoListService,
     private confirmationDialogService: ConfirmationDialogService
   ) {
-    
+
     this.commonVarService.contribAnexoLoad.asObservable().subscribe(
       (res: any) => {
         this.lcargando.ctlSpinner(true);
@@ -112,7 +112,7 @@ export class AnexosListComponentDis implements OnInit {
             }
           )
         }
-        
+
       }
     )
 
@@ -134,7 +134,7 @@ export class AnexosListComponentDis implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.permissions);
-    
+
     setTimeout(() => {
       this.cargarArchivo()
       console.log(this.identifier);
@@ -244,11 +244,11 @@ export class AnexosListComponentDis implements OnInit {
             id_controlador: myVarGlobals.fRTTramitesTickets,  // TODO: Actualizar cuando formulario ya tenga un ID
             accion: `Borrado de Anexo ${anexo.id_anexo}`,
             ip: this.commonService.getIpAddress()
-          }
-      
+          };
+
           (this as any).mensajeSpinner = 'Eliminando anexo'
           this.lcargando.ctlSpinner(true);
-      
+
           this.apiService.deleteAnexo(data).subscribe(
             res => {
               console.log(res);

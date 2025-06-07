@@ -12,7 +12,7 @@ import { CommonVarService } from 'src/app/services/common-var.services';
 import * as moment from 'moment';
 import flatpickr from 'flatpickr';
 //import { element } from 'angular';
-import { forEach } from 'jszip';
+
 import { timingSafeEqual } from 'crypto';
 import { ExcelService } from '../../../../services/excel.service';
 import 'sweetalert2/src/sweetalert2.scss';

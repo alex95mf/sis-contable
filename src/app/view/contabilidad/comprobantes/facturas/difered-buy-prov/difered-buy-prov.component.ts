@@ -12,7 +12,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ConfirmationService, MessageService, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { PrimeNG } from 'primeng/config';
 
 @Component({
