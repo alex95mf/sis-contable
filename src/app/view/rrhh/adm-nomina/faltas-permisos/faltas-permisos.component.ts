@@ -902,7 +902,7 @@ export class FaltasPermisosComponent implements OnInit {
   chart(name: string, tipo: any, label: string[], data: number[]) {
 console.log(data);
     return new Chart(name, {
-      type: tipo,
+     icon: tipo,
       data: {
         labels: label,
         datasets: [{
@@ -972,8 +972,8 @@ console.log(data);
               beginAtZero: true
             },
 
-          }],
-          yAxes: [{
+         },
+y:{
             ticks: {
               beginAtZero: true
             },
@@ -987,7 +987,7 @@ console.log(data);
   chartPie(name: string, tipo: any, label: string[], data: number[]) {
 
     return new Chart(name, {
-      type: tipo,
+     icon: tipo,
       data: {
         labels: label,
         datasets: [{
@@ -1054,8 +1054,8 @@ console.log(data);
             gridLines: {
               display: false
             }
-          }],
-          yAxes: [{
+         },
+y:{
             display: false,
             gridLines: {
               display: false

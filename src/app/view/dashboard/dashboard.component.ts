@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit {
   chart(name:string, tipo:string, label: string[], data: number[],nombres:string,currency: string){
 
     return  new Chart(name, {
-      type: tipo,
+     icon: tipo,
       data: {
         labels: label,
         datasets: [{
@@ -211,7 +211,7 @@ export class DashboardComponent implements OnInit {
 
 
         scales: {
-          xAxes:[{
+          x:{
             ticks:{
               beginAtZero: true,
               fontSize: 10,
@@ -237,9 +237,7 @@ export class DashboardComponent implements OnInit {
             }
 
           },
-
-        ],
-          yAxes: [{
+          y: {
             ticks: {
               beginAtZero: true,
               fontSize: 11,
@@ -257,7 +255,7 @@ export class DashboardComponent implements OnInit {
               fontColor: '#000000',
             }
 
-          }]
+          }
         },
 
 
@@ -267,7 +265,7 @@ export class DashboardComponent implements OnInit {
   chartLine(name:string, tipo:string, label: string[], data: number[], nombres: string, currency: string){
 
     return  new Chart(name, {
-      type: tipo,
+     icon: tipo,
       data: {
         labels: label,
         datasets: [{
@@ -402,7 +400,7 @@ export class DashboardComponent implements OnInit {
 
 
         scales: {
-          xAxes:[{
+          x:{
             ticks:{
               beginAtZero: true,
               fontSize: 10,
@@ -420,8 +418,8 @@ export class DashboardComponent implements OnInit {
               fontColor: '#000000',
             }
 
-          }],
-          yAxes: [{
+         },
+y:{
             ticks: {
               beginAtZero: true,
               fontSize: 10,
@@ -452,7 +450,7 @@ export class DashboardComponent implements OnInit {
   chartBar(name:string, tipo:string, label: string[], data: number[],nombres: string, currency:string){
 
     return  new Chart(name, {
-      type: tipo,
+     icon: tipo,
       data: {
         labels: label,
         datasets: [{
@@ -570,7 +568,7 @@ export class DashboardComponent implements OnInit {
 
 
         scales: {
-          xAxes:[{
+          x:{
             ticks:{
               beginAtZero: true,
               fontSize: 10,
@@ -588,8 +586,8 @@ export class DashboardComponent implements OnInit {
               fontColor: '#000000',
             }
 
-          }],
-          yAxes: [{
+         },
+y:{
             ticks: {
               beginAtZero: true,
               fontSize: 10,
@@ -622,7 +620,7 @@ export class DashboardComponent implements OnInit {
     console.log(data);
     console.log(nombres)
     return  new Chart(name, {
-      type: tipo,
+     icon: tipo,
       data: {
         labels: label,
         datasets: [{
@@ -788,7 +786,7 @@ export class DashboardComponent implements OnInit {
           display: true
         },
         scales: {
-          xAxes:[{
+          x:{
             display: false,
             gridLines:{
               display: false
@@ -802,8 +800,8 @@ export class DashboardComponent implements OnInit {
               minRotation: 45
 
             },
-          }],
-          yAxes: [{
+         },
+y:{
             display: false,
             gridLines: {
               display: false

@@ -140,7 +140,7 @@ export class EstadisticasComponent implements OnInit {
 
     this.lcargando.ctlSpinner(false)
     return new Chart(ctx, {
-      type: tipo,
+     icon: tipo,
       data: {
         labels: lbls,
         datasets: [{
@@ -248,7 +248,7 @@ export class EstadisticasComponent implements OnInit {
           display: true
         },
         scales: {
-          xAxes:[{
+          x:{
             display: false,
             gridLines:{
               display: false
@@ -262,8 +262,8 @@ export class EstadisticasComponent implements OnInit {
               minRotation: 45
 
             },
-          }],
-          yAxes: [{
+         },
+y:{
             display: false,
             gridLines: {
               display: false
