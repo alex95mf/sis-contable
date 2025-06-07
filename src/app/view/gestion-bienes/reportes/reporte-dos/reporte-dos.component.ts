@@ -329,7 +329,7 @@ export class ReporteDosComponent implements OnInit {
         if(response.length > 0){
           this.dataProducto = response
         }else{
-          this.dataProducto = []
+          this.dataProducto = [];
         }
         this.vmButtons[3].habilitar = false
         this.lcargando.ctlSpinner(false)
@@ -798,10 +798,10 @@ uArrayGrupos(array) {
     this.anioIngreso= ''
     this.UserSelect=undefined
     this.vmButtons[3].habilitar = true
-    this.cmb_grupo = []
-    this.cmb_productos = []
-    this.cmb_grupo_filter = []
-    this.dataProducto = []
+    this.cmb_grupo = [];
+    this.cmb_productos = [];
+    this.cmb_grupo_filter = [];
+    this.dataProducto = [];
     this.stockSelected = 0
     this.selectedBodega = 0
     this.selectedGrupo = ''
@@ -809,7 +809,7 @@ uArrayGrupos(array) {
     this.fechaCorte = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
     this.grupo_descripcion = ''
 
-    this.producto_exi = []
+    this.producto_exi = [];
     this.selectedProductos = ''
     this.nombreProducto = ''
   }

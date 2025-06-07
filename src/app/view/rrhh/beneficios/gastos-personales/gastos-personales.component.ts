@@ -1326,7 +1326,7 @@ export class GastosPersonalesComponent implements OnInit {
     this.vmButtons[1].habilitar = true;
     this.vmButtons[2].habilitar = true;
     this.vmButtons[4].habilitar = true
-    this.dataImpuestoRenta = []
+    this.dataImpuestoRenta = [];
 
     // Limpiar nuevos campos
     Object.assign(this.impuestoRenta, {

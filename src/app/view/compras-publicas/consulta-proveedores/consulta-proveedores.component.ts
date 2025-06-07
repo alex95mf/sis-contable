@@ -210,7 +210,7 @@ export class ConsultaProveedoresComponent implements OnInit {
         // console.log(data);
 
         if (Array.isArray(res['data']) && res['data'].length == 0) {
-          this.proveedoresDt = []
+          this.proveedoresDt = [];
         } else {
           this.paginate.length = res['data']['total'];
           if (res['data']['current_page'] == 1) {

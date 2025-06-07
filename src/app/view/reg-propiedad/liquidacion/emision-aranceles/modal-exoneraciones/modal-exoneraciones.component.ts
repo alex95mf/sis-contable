@@ -76,7 +76,7 @@ export class ModalExoneracionesComponent implements OnInit {
   }
 
   aplicarExoneracion(){
-    this.exoneracionesSelect = []
+    this.exoneracionesSelect = [];
     let porcentaje = 0;
     this.exoneraciones.forEach(e => {
       if (e.action) {

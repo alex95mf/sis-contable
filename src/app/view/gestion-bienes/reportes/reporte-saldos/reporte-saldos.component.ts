@@ -201,7 +201,7 @@ export class ReporteSaldosComponent implements OnInit {
           this.cmb_bodega_ubicacion = response
           this.lcargando.ctlSpinner(false)
         }else{
-          this.cmb_bodega_ubicacion = []
+          this.cmb_bodega_ubicacion = [];
           this.lcargando.ctlSpinner(false)
         }
         this.vmButtons[2].habilitar = false
@@ -241,7 +241,7 @@ export class ReporteSaldosComponent implements OnInit {
         if(response.length > 0){
           this.dataProducto = response
         }else{
-          this.dataProducto = []
+          this.dataProducto = [];
         }
         this.vmButtons[2].habilitar = false
         this.lcargando.ctlSpinner(false)
@@ -309,10 +309,10 @@ export class ReporteSaldosComponent implements OnInit {
     this.anioIngreso= ''
     this.UserSelect=undefined
     this.vmButtons[2].habilitar = true
-    this.cmb_grupo = []
-    this.cmb_productos = []
-    this.cmb_grupo_filter = []
-    this.dataProducto = []
+    this.cmb_grupo = [];
+    this.cmb_productos = [];
+    this.cmb_grupo_filter = [];
+    this.dataProducto = [];
     this.stockSelected = 0
     this.selectedBodega = 0
     this.selectedGrupo = ''
@@ -320,7 +320,7 @@ export class ReporteSaldosComponent implements OnInit {
     this.fechaCorte = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
     this.grupo_descripcion = ''
  
-    this.producto_exi = []
+    this.producto_exi = [];
     this.selectedProductos = ''
     this.nombreProducto = ''
   }

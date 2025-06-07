@@ -153,7 +153,7 @@ export class GestionJuicioComponent implements OnInit {
         // console.log(res.data)
         if (Array.isArray(res.data) && !res.data.length) {
           this.paginate.length = 0
-          this.expedientes = []
+          this.expedientes = [];
           this.lcargando.ctlSpinner(false)
           return;
         }

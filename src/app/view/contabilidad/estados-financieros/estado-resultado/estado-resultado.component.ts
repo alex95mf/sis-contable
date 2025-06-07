@@ -776,12 +776,12 @@ export class EstadoResultadoComponent implements OnInit {
   }
 
   selectedGuber(event){
-    this.balanceInit = []
-    this.balanceInitMensual = []
+    this.balanceInit = [];
+    this.balanceInitMensual = [];
   }
   selectedPeriodoVisua(event){
-    this.balanceInit = []
-    this.balanceInitMensual = []
+    this.balanceInit = [];
+    this.balanceInitMensual = [];
   }
   verDetalle(cuenta){
    // alert('cuenta:' + cuenta +'fecha_desde:'+ this.fromDatePicker +' fecha_hasta:'+ this.toDatePicker)

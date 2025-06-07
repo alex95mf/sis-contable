@@ -441,8 +441,8 @@ setAprobarRol(){
     }else{
       (this as any).mensajeSpinner = "Consultando ...";
       this.lcargando.ctlSpinner(true);
-      this.RolGeneral = []
-      this.cols = []
+      this.RolGeneral = [];
+      this.cols = [];
       this.totalRecords = 0
       let tipo = ["INGRESO","EGRESO","PROVISIONES"]
       let Data = []
@@ -1584,7 +1584,7 @@ setAprobarRol(){
 
   limpiarForm(){
 
-  this.dataGeneral=  []
+  this.dataGeneral=  [];
   //this.mes_actual = Number(moment(new Date()).format('MM'));
   this.mes = null;
   //this.AnioAsistencia=  new Date();
@@ -1598,8 +1598,8 @@ setAprobarRol(){
   this.fk_programa = 0
   this.area= 0
 
-  this.RolGeneral = []
-  this.cols = []
+  this.RolGeneral = [];
+  this.cols = [];
   this.totalRecords = 0
   this.numero_empleados = 0
   this.num_control = ''
@@ -1612,8 +1612,8 @@ setAprobarRol(){
 
     this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Buscando'
-    this.RolGeneral = []
-    this.cols = []
+    this.RolGeneral = [];
+    this.cols = [];
     let Data = []
     let tipo = ["INGRESO","EGRESO","PROVISIONES"]
     let data = {

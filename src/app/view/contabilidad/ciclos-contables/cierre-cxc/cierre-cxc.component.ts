@@ -150,7 +150,7 @@ export class CierreCxcComponent implements OnInit {
   }
 
   async getDocumentos() {
-    this.documento.deudas = []
+    this.documento.deudas = [];
     this.lcargando.ctlSpinner(true);
     try {
       (this as any).mensajeSpinner = 'Cargando Cuentas por Cobrar'

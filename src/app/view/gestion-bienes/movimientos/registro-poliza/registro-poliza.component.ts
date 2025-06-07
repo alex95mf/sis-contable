@@ -179,7 +179,7 @@ export class RegistroPolizaComponent implements OnInit {
   }
 
   limpiar(){
-    this.producto = []
+    this.producto = [];
     this.documento = {
       fecha: moment(new Date()).format('YYYY-MM-DD'),
       observaciones: "",

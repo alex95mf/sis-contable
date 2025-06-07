@@ -800,7 +800,7 @@ export class ReporteComponent implements OnInit {
 
 
   selectOption1(evt) {
-    this.dataReportes = []
+    this.dataReportes = [];
     this.limpiarTotales()
     if (evt !== 0) {
       this.variableFiltro=evt;

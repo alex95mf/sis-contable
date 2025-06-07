@@ -311,7 +311,7 @@ export class SolicitudComponent implements OnInit {
 
   asignarEstado(evt) {
     if(evt == null || evt == undefined){
-      this.filter.estado = []
+      this.filter.estado = [];
     }else{
       this.filter.estado = [evt]
     }
@@ -507,8 +507,8 @@ export class SolicitudComponent implements OnInit {
 
   onProgramaSelect(event: Array<any>) {
     console.log(event);
-    this.departamento = []
-    this.datoDepartamento = []
+    this.departamento = [];
+    this.datoDepartamento = [];
     this.listaSolicitudesAtribucion = [];
   }
 

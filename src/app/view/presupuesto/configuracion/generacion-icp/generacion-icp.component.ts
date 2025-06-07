@@ -670,8 +670,8 @@ export class GeneracionIcpComponent implements OnInit {
 
   removeIdpIngresos(index){
     this.idpIngresos.splice(index,1)
-    this.solicitud = []
-    this.solicitudDetalle = []
+    this.solicitud = [];
+    this.solicitudDetalle = [];
     this.totalCobro = 0
   }
 
@@ -837,7 +837,7 @@ export class GeneracionIcpComponent implements OnInit {
                 }
               });
               this.documento.solicitud = this.solicitud[0];
-              this.documento.ingresos = []
+              this.documento.ingresos = [];
               this.idpIngresos.map(
                 (e)=>{
                   this.documento.ingresos.push(e);

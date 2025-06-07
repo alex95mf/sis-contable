@@ -234,7 +234,7 @@ export class SueldosComponent implements OnInit {
         console.log(res)
         this.lcargando.ctlSpinner(false)
         if (res['data'].length == 0) {
-          this.sueldos = []
+          this.sueldos = [];
         } else {
           this.paginate.length = res['data']['total'];
           this.sueldos = res['data']['data'];

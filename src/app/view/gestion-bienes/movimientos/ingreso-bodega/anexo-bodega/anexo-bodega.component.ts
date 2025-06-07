@@ -98,7 +98,7 @@ export class AnexoBodegaComponent implements OnInit {
 
     this.commonVarService.clearAnexos.pipe(takeUntil(this.onDestroy$)).subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
         console.log('Prestamos');
       }
     )

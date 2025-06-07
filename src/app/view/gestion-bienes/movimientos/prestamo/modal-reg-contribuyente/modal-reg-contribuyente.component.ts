@@ -664,7 +664,7 @@ export class ModalRegContribuyenteComponent implements OnInit {
         this.totalDeudas = 0;
         this.solares = [];
         this.deudas = [];
-        this.contratos = []
+        this.contratos = [];
         this.actions.new = false
         this.commonVrs.clearContribu.next({})
         this.validadorNt = false;
@@ -675,7 +675,7 @@ export class ModalRegContribuyenteComponent implements OnInit {
         this.NoDocumento = undefined
         this.edadContribuyente = undefined
         this.tipoPersona = undefined;
-        this.novedades = []
+        this.novedades = [];
       }
 
     });
@@ -692,7 +692,7 @@ export class ModalRegContribuyenteComponent implements OnInit {
     this.totalDeudas = 0;
     this.solares = [];
     this.deudas = [];
-    this.contratos = []
+    this.contratos = [];
     this.actions.new = false
     this.commonVrs.clearContribu.next({})
     this.validadorNt = false;
@@ -703,7 +703,7 @@ export class ModalRegContribuyenteComponent implements OnInit {
     this.NoDocumento = undefined
     this.edadContribuyente = undefined
     this.tipoPersona = undefined;
-    this.novedades = []
+    this.novedades = [];
   }
 
   ClearForm() {

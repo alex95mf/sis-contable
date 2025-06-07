@@ -174,7 +174,7 @@ export class ConsultaMovimientosComponent implements OnInit {
     this.filter.codigo_partida_compuesto = ''
     this.rubro.cuentaPresupuestoInvDeb=null 
     this.rubro.numpcInvDeb  =null 
-    this.resultadoConsulta = []
+    this.resultadoConsulta = [];
     this.totalPartida = 0
     this.totalComprometido = 0
     this.totalDevengado = 0

@@ -431,7 +431,7 @@ export class ContribuyenteComponent implements OnInit {
 
         if (res.valid == 14) {
           console.log(res)
-          this.relacion= []
+          this.relacion= [];
           this.relacion.porcentaje_discapacidad = 0
           this.contriRelacionActive = res
           this.relacion.fk_contribuyente_relacion= res.id_cliente
@@ -836,7 +836,7 @@ export class ContribuyenteComponent implements OnInit {
 
 
   cargaAnexosTabla(params: any[]) {
-    this.anexos = []
+    this.anexos = [];
     params.forEach(a => {
       if (a !== undefined) {
         let anexo = {
@@ -1608,7 +1608,7 @@ export class ContribuyenteComponent implements OnInit {
     }
     this.contribuyenteSrv.getContratosById(dataContrato).subscribe(res => {
       console.log('contribuyente', res)
-      this.contratos = []
+      this.contratos = [];
 
       this.paginate.length = res['data']['total'];
       if (res['data']['current_page'] == 1) {
@@ -1884,7 +1884,7 @@ export class ContribuyenteComponent implements OnInit {
         this.totalDeudas = 0;
         this.solares = [];
         this.deudas = [];
-        this.contratos = []
+        this.contratos = [];
         this.actions.new = false
         this.commonVrs.clearContribu.next({})
         this.validadorNt = false;
@@ -1898,7 +1898,7 @@ export class ContribuyenteComponent implements OnInit {
         this.edadContribuyente = undefined
         this.tipoPersona = undefined;
         this.superValid = true;
-        this.novedades = []
+        this.novedades = [];
         this.n_supervivencia = null
 
       }
@@ -1919,7 +1919,7 @@ export class ContribuyenteComponent implements OnInit {
     this.totalDeudas = 0;
     this.solares = [];
     this.deudas = [];
-    this.contratos = []
+    this.contratos = [];
     this.actions.new = false
     this.commonVrs.clearContribu.next({})
     this.validadorNt = false;
@@ -1932,7 +1932,7 @@ export class ContribuyenteComponent implements OnInit {
     this.NoDocumento = undefined
     this.edadContribuyente = undefined
     this.tipoPersona = undefined;
-    this.novedades = []
+    this.novedades = [];
   }
 
   ClearForm() {

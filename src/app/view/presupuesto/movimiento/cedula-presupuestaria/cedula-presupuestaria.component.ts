@@ -277,7 +277,7 @@ console.log(this.checkPrograma)
     }
   }
   consultarCedulaPorPrograma(){
-    this.arrayCedulaPrograma = []
+    this.arrayCedulaPrograma = [];
     if(this.filter.nivel == null) this.filter.nivel= 0
     let data = {
       //periodo: this.periodo,
@@ -336,7 +336,7 @@ console.log(this.checkPrograma)
   consultarCedulaIngresos(){
 
     //alert('ak');
-    this.arrayCedula = []
+    this.arrayCedula = [];
     if(this.filter.nivel == null) this.filter.nivel= 0
       let data = {
         //periodo: this.periodo,
@@ -412,7 +412,7 @@ console.log(this.checkPrograma)
       })
   }
   consultarCedulaResumen(){
-    this.arrayCedulaResumen = []
+    this.arrayCedulaResumen = [];
     let data = {
       //periodo: this.periodo,
       filter: this.filter,
@@ -469,7 +469,7 @@ console.log(this.checkPrograma)
     })
 }
 consultarCedulaEjecucion(){
-  this.arrayCedulaEjecucion = []
+  this.arrayCedulaEjecucion = [];
   let data = {
     //periodo: this.periodo,
     filter: this.filter,
@@ -613,9 +613,9 @@ consultaDetalleReforma(data?:any) {
 
 
   restoreForm() {
-    this.arrayCedula = []
-    this.arrayCedulaPrograma = []
-    this.arrayCedulaResumen = []
+    this.arrayCedula = [];
+    this.arrayCedulaPrograma = [];
+    this.arrayCedulaResumen = [];
     this.procesos = [];
     this.tipoSelected = undefined
     this.filter = {

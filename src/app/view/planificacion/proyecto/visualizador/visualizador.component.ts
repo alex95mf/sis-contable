@@ -323,14 +323,14 @@ export class VisualizadorComponent implements OnInit {
   /* selectProg(event) {
     this.departamento = 0
     this.total = 0
-    this.bienesAttr = []
+    this.bienesAttr = [];
     this.vmButtons[0].habilitar = true
     this.deptProg = this.departamentos.filter(d => d.programa == event.nombre)
   } */
 
   /* selectDept(event) {
     (this as any).mensajeSpinner = 'Cargando Bienes por Departamento'
-    this.bienesAttr = []
+    this.bienesAttr = [];
     this.total = 0
     this.vmButtons[0].habilitar = false
     // Cargar Bienes asociados con el Departamento

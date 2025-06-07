@@ -594,7 +594,7 @@ export class AsientoCierreComponent implements OnInit {
       this.getCuentaContableTipoPago();
       (this as any).mensajeSpinner = "Cargando Números de Control...";
       this.lcargando.ctlSpinner(true);
-      this.numeros_control = []
+      this.numeros_control = [];
       let data = {
         anio: moment(this.filter.fecha_desde).format('YYYY'),
         mes: moment(this.filter.fecha_desde).format('MM'),
@@ -913,7 +913,7 @@ export class AsientoCierreComponent implements OnInit {
 
         this.vmButtons[5].habilitar = true
         this.vmButtons[6].habilitar = false
-        this.cierres = []
+        this.cierres = [];
         let cierresAux: any[]
      //   console.log(res)
 
@@ -1732,7 +1732,7 @@ export class AsientoCierreComponent implements OnInit {
   }
 
   handleSelectTipo(event: any) {
-    this.cierres=[]
+    this.cierres=[];
     this.datosGuard = true
     this.totalDebe = 0
     this.totalHaber = 0
@@ -1872,8 +1872,8 @@ export class AsientoCierreComponent implements OnInit {
 
     this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Buscando'
-    this.RolGeneral = []
-    this.cols = []
+    this.RolGeneral = [];
+    this.cols = [];
     let Data = []
     let tipo = ["INGRESO","EGRESO","PROVISIONES"]
     let numControl = this.numeros_control.filter(e => e.id == this.filter.id_num_control)

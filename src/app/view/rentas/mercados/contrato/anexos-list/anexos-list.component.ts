@@ -35,7 +35,7 @@ export class AnexosListComponent implements OnInit {
   ) {
     this.commonVarService.clearContratoForm.asObservable().subscribe(
       (_) => {
-        this.anexos = []
+        this.anexos = [];
       }
     )
 
@@ -81,7 +81,7 @@ export class AnexosListComponent implements OnInit {
   }
 
   cargaAnexosTabla(params: any[]) {
-    this.anexos = []
+    this.anexos = [];
     params.forEach(a => {
       let anexo = {
         id: a.id_anexos,

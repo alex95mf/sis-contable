@@ -277,7 +277,7 @@ export class ReporteProductosComponent implements OnInit {
       if(response.length > 0){
         this.dataProducto = response
       }else{
-        this.dataProducto = []
+        this.dataProducto = [];
       }
       this.vmButtons[2].habilitar = false
       this.lcargando.ctlSpinner(false)
@@ -384,16 +384,16 @@ export class ReporteProductosComponent implements OnInit {
     this.departamentoSelect.dep_nombre= ''
     this.UserSelect=undefined
     this.vmButtons[2].habilitar = true
-    this.matriz = []
-    this.columnas = []
+    this.matriz = [];
+    this.columnas = [];
     this.estadoSelected = 0
-    this.claseSelect = []
-    this.dataProducto = []
+    this.claseSelect = [];
+    this.dataProducto = [];
         
     this.grupo_descripcion = ''
     this.selectedGrupo = ''
-    this.producto_exi = []
-    this.cmb_productos = []
+    this.producto_exi = [];
+    this.cmb_productos = [];
     this.selectedProductos = ''
     this.nombreProducto = ''
     this.isPerecible = false;

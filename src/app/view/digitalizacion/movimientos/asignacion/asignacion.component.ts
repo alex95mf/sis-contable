@@ -587,8 +587,8 @@ export class AsignacionComponent implements OnInit {
 
   onProgramaSelect(event: Array<any>) {
     console.log(event);
-    this.departamento = []
-    this.datoDepartamento = []
+    this.departamento = [];
+    this.datoDepartamento = [];
     this.listaSolicitudesAtribucion = [];
   }
 
@@ -892,7 +892,7 @@ export class AsignacionComponent implements OnInit {
     this.dataForms = [];
     this.rutaFinal = [];
     this.documento = [];
-    this.resultadoConsulta = []
+    this.resultadoConsulta = [];
     this.filter.tipo_documento = ''
 
   }
@@ -1053,7 +1053,7 @@ export class AsignacionComponent implements OnInit {
       this.paginateNew.length = res.total;
       this.lcargando.ctlSpinner(false);
     })
-    this.filter.campos = []
+    this.filter.campos = [];
     let data2 = {
       tipoDoc: this.tipoDoC,
       params: {
@@ -1099,7 +1099,7 @@ export class AsignacionComponent implements OnInit {
 
   consultarDirectorio() {
     this.lcargando.ctlSpinner(true);
-    this.resultadoConsulta = []
+    this.resultadoConsulta = [];
     this.filter.tipo_documento = this.tipoDoC
     const camposFiltrados = this.filter.campos.filter(camp => camp.campo_indice && camp.valor_indice);
 

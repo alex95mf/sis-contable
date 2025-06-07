@@ -213,7 +213,7 @@ export class DistribuidorComponent implements OnInit {
     console.log(this.catalog.zona);
     let zonaGrupo = this.catalog.zona.find( ({ id_catalogo }) => id_catalogo === +event ).valor;
     console.log(zonaGrupo);
-    this.catalogSector = []
+    this.catalogSector = [];
     this.catalog.sector.forEach(element => {
       if (element.grupo == zonaGrupo) this.catalogSector.push(element);
     });

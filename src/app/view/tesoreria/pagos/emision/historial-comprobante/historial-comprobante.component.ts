@@ -115,12 +115,12 @@ export class HistorialComprobanteComponent implements OnInit {
         this.paginate.length = res['data']['total'];
         if (res['data']['current_page'] == 1) {
           if(res['data']['data'].length < 0){
-            this.documentosDt = []
+            this.documentosDt = [];
           }else{
             if(res['data']['data'][0]!= undefined){
               this.documentosDt = res['data']['data'][0]['pago'];
             }else{
-              this.documentosDt = []
+              this.documentosDt = [];
             }
 
           }

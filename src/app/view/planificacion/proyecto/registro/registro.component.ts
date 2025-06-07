@@ -89,8 +89,8 @@ export class RegistroComponent implements OnInit {
   } */
 
   cargaDepartamentos(e) {
-    this.departamentos = []
-    this.atribuciones = []
+    this.departamentos = [];
+    this.atribuciones = [];
     this.bienes = [];
     
     (this as any).mensajeSpinner = 'Cargando Departamentos'
@@ -119,7 +119,7 @@ export class RegistroComponent implements OnInit {
   }
 
   cargaAtribuciones(e) {
-    this.atribuciones = []
+    this.atribuciones = [];
     this.bienes = [];
     let data = {
       departamento: e.nombre

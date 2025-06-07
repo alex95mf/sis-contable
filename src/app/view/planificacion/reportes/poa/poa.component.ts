@@ -281,9 +281,9 @@ export class PoaComponent implements OnInit {
 
   /* cargaDepartamentos(evt) {
     // Housekeeping
-    this.departamentos = []
-    this.atribuciones = []
-    this.obj_componentes = {}
+    this.departamentos = [];
+    this.atribuciones = [];
+    this.obj_componentes = {};
 
     // Deshabilita los botones de exportacion
     this.vmButtons[0].habilitar = true
@@ -315,7 +315,7 @@ export class PoaComponent implements OnInit {
   } */
 
   /* cargaObjetivosComponentes(evt) {
-    this.obj_componentes = {}
+    this.obj_componentes = {};
     let data = {
       programa: evt
     };
@@ -378,7 +378,7 @@ export class PoaComponent implements OnInit {
       departamento: evt
     };
     (this as any).mensajeSpinner = 'Cargando Atribuciones'
-    this.atribuciones = []
+    this.atribuciones = [];
 
     this.lcargando.ctlSpinner(true);
     this.api.getAtribuciones(data).subscribe(

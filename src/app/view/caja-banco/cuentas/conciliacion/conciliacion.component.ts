@@ -635,7 +635,7 @@ console.log(moment(this.selected_anio).format('YYYY'))
   rerender(): void {
     this.validaDt = false;
     this.status_conciliaton = 0;
-    this.infoConciliacion = []
+    this.infoConciliacion = [];
     this.getTableConciliation();
 
   }

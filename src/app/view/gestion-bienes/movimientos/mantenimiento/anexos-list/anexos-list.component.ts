@@ -102,7 +102,7 @@ export class AnexosListComponent implements OnInit, OnDestroy {
 
     this.commonVarService.clearAnexos.pipe(takeUntil(this.onDestroy$)).subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
         console.log('Prestamos');
       }
     )

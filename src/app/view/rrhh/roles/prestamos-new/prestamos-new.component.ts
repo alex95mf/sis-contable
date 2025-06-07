@@ -386,7 +386,7 @@ export class PrestamosNewComponent implements OnInit {
         num_doc: null,
         codigo_rubro: null
       })
-      this.cuotas = []
+      this.cuotas = [];
       this.formReadOnly = false
       this.vmButtons[0].habilitar = true
       this.vmButtons[5].habilitar = true

@@ -337,7 +337,7 @@ export class ConsultaAlertasComponent implements OnInit {
       id_usuario_recibe:0,
       modulo:0
     }
-    this.dataAlertas = []
+    this.dataAlertas = [];
   }
 
 }

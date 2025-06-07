@@ -180,7 +180,7 @@ export class AnexosListComponent implements OnInit {
     // console.log(data);
     this.apiService.getAnexos(data).subscribe(
       res => {
-        this.anexos = []
+        this.anexos = [];
         console.log(res);
         res['data'].forEach(anexo => {
           let obj = {

@@ -103,7 +103,7 @@ export class EstadisticasComponent implements OnInit {
     Object.assign(this.filter, {fp_anio: new Date(this.filter.periodo).getFullYear()})
     const response = await this.apiService.getFaltasPermisosEmployeesReportGrafi({filter: this.filter}) as any
     // console.log(response)
-    this.dataChart = []
+    this.dataChart = [];
     this.dataChart = response.data
     let lbls: string[] = [];
     let dataValues: number[] = [];

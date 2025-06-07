@@ -805,7 +805,7 @@ export class ProveedoresComponent implements OnInit {
     //this.vmButtons[4].habilitar = true;
     this.vmButtons[5].habilitar = true;
     this.varAux = " Seleccione un grupo";
-    this.historicoCuentas = []
+    this.historicoCuentas = [];
 
    // this.commonServices.actionsSuppliers.next(this.actions);
     this.ClearForm();

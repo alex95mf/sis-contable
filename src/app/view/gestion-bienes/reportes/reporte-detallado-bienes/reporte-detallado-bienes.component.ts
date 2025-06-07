@@ -210,9 +210,9 @@ export class ReporteDetalladoBienesComponent implements OnInit {
     this.UserSelect=undefined
     this.UserSelectResponsable=undefined
     this.vmButtons[2].habilitar = true
-    this.matriz = []
-    this.columnas = []
-    this.dataProducto = []
+    this.matriz = [];
+    this.columnas = [];
+    this.dataProducto = [];
   }
 
   async consultarReporte() {
@@ -254,7 +254,7 @@ export class ReporteDetalladoBienesComponent implements OnInit {
         this.dataProducto = response
 
       }else{
-        this.dataProducto = []
+        this.dataProducto = [];
       }
       this.vmButtons[2].habilitar = false
       this.lcargando.ctlSpinner(false)

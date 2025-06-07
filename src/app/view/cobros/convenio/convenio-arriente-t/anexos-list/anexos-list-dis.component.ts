@@ -65,7 +65,7 @@ export class AnexosListComponentDis implements OnInit {
 
     this.commonVarService.clearAnexos.asObservable().subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
       }
     )
 
@@ -89,8 +89,8 @@ export class AnexosListComponentDis implements OnInit {
 
   cargarArchivo(){
     console.log(this.tipo)
-    this.anexos = []
-    this.anexosEM = []
+    this.anexos = [];
+    this.anexosEM = [];
    
     this.lcargando.ctlSpinner(true);
     (this as any).mensajeSpinner = 'Cargando Anexos ...'
@@ -130,8 +130,8 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoEM(){
-    this.anexos = []
-    this.anexosEM = []
+    this.anexos = [];
+    this.anexosEM = [];
     
 
     this.lcargando.ctlSpinner(true);

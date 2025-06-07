@@ -394,7 +394,7 @@ export class SolaresComponent implements OnInit {
       fecha_adquisicion: moment(new Date()).format('YYYY-MM-DD'),
     })
 
-    this.propietarios = []
+    this.propietarios = [];
 
     this.vmButtons[0].habilitar = false;
     this.vmButtons[1].habilitar = false;

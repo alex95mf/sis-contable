@@ -555,7 +555,7 @@ export class RecaudacionesEspeciesFiscalesComponent implements OnInit, OnDestroy
     this.documento.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto;
     (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
     // this.lcargando.ctlSpinner(true);
-    this.puestos = []
+    this.puestos = [];
     this.apiSrv.getPuestos().subscribe(
       (res: any) => {
         if (Array.isArray(res['data']) && res['data'].length === 0) {

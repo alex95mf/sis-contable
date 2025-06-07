@@ -712,7 +712,7 @@ export class BalanceGeneralComponent implements OnInit {
   }
 
    selectedGuber(event){
-    this.infomovData = []
+    this.infomovData = [];
   }
 
   totalFinal(){
@@ -727,8 +727,8 @@ export class BalanceGeneralComponent implements OnInit {
   }
 
   selectedPeriodoVisua(event){
-    this.infomovData = []
-    this.infomovDataMensual = []
+    this.infomovData = [];
+    this.infomovDataMensual = [];
   }
 
   verDetalle(cuenta){

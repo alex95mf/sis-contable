@@ -292,14 +292,14 @@ export class PresupuestoComponent implements OnInit {
     this.lcargando.ctlSpinner(true);
     this.deptProg = this.departamentos.filter(d => d.programa == event)
     this.departamento = 0
-    this.bienesAttr = []
+    this.bienesAttr = [];
     setTimeout(() => this.lcargando.ctlSpinner(false), 750)
   } */
 
   /* selectDept(event) {
     // this.attrDept = this.atribuciones.filter(a => a.departamento == event);
     (this as any).mensajeSpinner = 'Cargando Bienes y Servicios'
-    this.bienesAttr = []
+    this.bienesAttr = [];
 
     let data = {
       departamento: event.id
@@ -375,9 +375,9 @@ export class PresupuestoComponent implements OnInit {
   } */
 
   /* clear() {
-    this.deptProg = []
-    this.attrDept = []
-    this.bienesAttr = []
+    this.deptProg = [];
+    this.attrDept = [];
+    this.bienesAttr = [];
     this.programa = 0
     this.departamento = 0
     this.atribucion = 0

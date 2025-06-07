@@ -415,7 +415,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
         if (res.detalle_cuentas.length > 0) {
 
           this.dataCuenta = [];
-          this.tbl_partidas = []
+          this.tbl_partidas = [];
 
           // this.contableService.getRetencionFuenteCompras().subscribe(res => {
           //   this.rete_fuente = res['data'];
@@ -2076,7 +2076,7 @@ console.log(this.dataCuenta)
     console.log('Generando asientos')
 
     this.lcargando.ctlSpinner(true);
-    this.fieldsDaily = []
+    this.fieldsDaily = [];
     // console.log(this.dataAnticipos)
     // console.log(this.dataMultas)
     if(this.dataAnticipos.length > 0){
@@ -4256,15 +4256,15 @@ this.lastRecord = null
     this.fieldsDaily = [];
     this.ListaAnticipos = [];
     this.ListaMultas = [];
-    this.ListaItems = []
-    this.tbl_partidas = []
+    this.ListaItems = [];
+    this.tbl_partidas = [];
     this.totalPartidas = 0
 
     this.arrayAnticipos = [];
     this.arrayMultas= [];
     this.fieldsDaily.push({ LoadOpcionCatalogoPresupuesto: false, presupuesto: '', codpresupuesto: '', valor_presupuesto: parseFloat('0.00').toFixed(2), account: '', name: '', detail: "", credit: parseFloat('0.00').toFixed(2), debit: parseFloat('0.00').toFixed(2) }, { LoadOpcionCatalogoPresupuesto: false, presupuesto: '', codpresupuesto: '', valor_presupuesto: parseFloat('0.00').toFixed(2), account: '', name: '', detail: "", credit: parseFloat('0.00').toFixed(2), debit: parseFloat('0.00').toFixed(2) });
 
-    this.dataHistorial = []
+    this.dataHistorial = [];
     this.ExisteHistorial = false
 
     this.isAsignaMulta = false;
@@ -5434,7 +5434,7 @@ this.lastRecord = null
             const condicionesResponse = await this.comSrv.CondicionesProveedores(id_proceso) as any
             this.ListaCondiciones = condicionesResponse.data;
           }else{
-            this.ListaCondiciones = []
+            this.ListaCondiciones = [];
           }
           console.log("filter_contrato",filter_contrato);
           this.buyProv.idp = filter_contrato[0]?.idp;
@@ -5463,7 +5463,7 @@ this.lastRecord = null
         this.ExistenItems= false;
 
         (this as any).mensajeSpinner = 'Cargando Ingresos de Bodega asociados'
-        this.cmb_ingreso = []
+        this.cmb_ingreso = [];
         const ingresoResponse = await this.comSrv.cargarIngresoBodega(id_proceso) as any
         console.log(ingresoResponse)
         ingresoResponse.data.forEach((element: any) => {
@@ -5835,7 +5835,7 @@ sumRegistroTodo(){
     let tipo_proceso=''
     let e = {}
     let tipo_procesoCat=''
-    this.contratos = []
+    this.contratos = [];
     if (typeof id_proveedor !== undefined && id_proveedor !== '' && id_proveedor !== 0) {
 
       this.LoadOpcionContratos = true;
@@ -6092,7 +6092,7 @@ sumRegistroTodo(){
     console.log('aqui')
 
       this.LoadOpcionCuentaPagarAnt = true;
-      this.ListaCuentasPagarAnticipos = []
+      this.ListaCuentasPagarAnticipos = [];
       let cuentas = []
        this.fieldsDaily.forEach(e => {
          if(e.tipo_detalle == 'CXP' && e.account != undefined){
@@ -6170,7 +6170,7 @@ sumRegistroTodo(){
       imp['deshabilitar'] =true
     }
    // let aplica = event.aplica;
-   this.dataAnticipos = []
+   this.dataAnticipos = [];
     if (event) {
      this.ListaAnticipos.forEach(e => {
       if(e.aplica){
@@ -6197,7 +6197,7 @@ sumRegistroTodo(){
     console.log('aqui')
 
       this.LoadOpcionCuentaPagarMulta = true;
-      this.ListaCuentasPagarMultas = []
+      this.ListaCuentasPagarMultas = [];
       let cuentas = []
        this.fieldsDaily.forEach(e => {
          if(e.tipo_detalle == 'CXP' && e.account != undefined){
@@ -6254,7 +6254,7 @@ sumRegistroTodo(){
     console.log(event);
 
    // let aplica = event.aplica;
-   this.dataMultas = []
+   this.dataMultas = [];
     if (event) {
      this.ListaMultas.forEach(e => {
       if(e.aplica){
@@ -6644,7 +6644,7 @@ sumRegistroTodo(){
    * @param files (Files List)
    */
   prepareFilesList(files: Array<any>) {
-    this.files = []
+    this.files = [];
 
     for (const item of files) {
       item.progress = 0;

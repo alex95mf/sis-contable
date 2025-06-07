@@ -202,7 +202,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
         let liq = res.liquidacion;
 
-        this.exoneraciones = []
+        this.exoneraciones = [];
         this.liquidacion = {
           id: liq.id_liquidacion,
           // contribuyente: this.contribuyentes.find(c => c.id === liq.contribuyente.id_cliente),
@@ -666,7 +666,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
   nuevaLiquidacion() {
 
-    this.exoneraciones = []
+    this.exoneraciones = [];
     // this.conceptoCementerio = true
     // this.conceptoCentroMedico = true
     // this.conceptoComplejoAcacias = true

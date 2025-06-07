@@ -217,7 +217,7 @@ export class GeneracionIcpNominaComponent implements OnInit {
           this.documento.mercado =  this.mercados.find(m => m.id == res.fk_mercado);
           this.documento.proyecto = res.proyecto?.secuencia+'-'+res.proyecto?.descripcion
 
-          this.cedulaDetalle = []
+          this.cedulaDetalle = [];
           if(res.detalles.length > 0){
             res.detalles.forEach(e =>{
                 let data = {
@@ -756,8 +756,8 @@ export class GeneracionIcpNominaComponent implements OnInit {
 
   removeIdpIngresos(index){
     this.idpIngresos.splice(index,1)
-    this.solicitud = []
-    this.solicitudDetalle = []
+    this.solicitud = [];
+    this.solicitudDetalle = [];
     this.totalCobro = 0
   }
 

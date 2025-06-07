@@ -96,7 +96,7 @@ export class AnexosListaComponentDis implements OnInit {
 
     this.commonVarService.clearAnexos.asObservable().subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
       }
     )
 

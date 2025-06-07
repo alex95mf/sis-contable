@@ -1391,7 +1391,7 @@ console.log(this.amortizaciones)
         //  this.documento.estado = "E";
         //  this.documento.tipo_documento = "CO";
         if(this.documento.id_documento_detalle == 0){
-          this.documento['ant_cuota'] = []
+          this.documento['ant_cuota'] = [];
           this.documento.detalles.forEach((e)=>{
 
             if(e.codigo_concepto=="CU"){ // si es cuota va a amortizacion

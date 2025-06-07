@@ -552,7 +552,7 @@ this.getListaCentrosCosto(1);
       (resTotal) => {
 console.log("centros cargados");
         this.centros = resTotal["data"];
-        this.centrosData= {}
+        this.centrosData= {};
 
         //const result = {};
 
@@ -1351,7 +1351,7 @@ console.log(tipo);
     }*/
 
   getDetailsMove() {
-    this.selectedDiarioElement = []
+    this.selectedDiarioElement = [];
 
     this.lcargando.ctlSpinner(true);
 

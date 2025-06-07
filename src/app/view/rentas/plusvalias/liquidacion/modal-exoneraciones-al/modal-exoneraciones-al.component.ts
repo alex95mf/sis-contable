@@ -58,7 +58,7 @@ export class ModalExoneracionesAlComponent implements OnInit {
         this.closeModal();
         break;
       case " APLICAR":
-        this.exoneracionesSelect = []
+        this.exoneracionesSelect = [];
         this.exoneraciones.forEach(e => {
           if (e.action) {
             this.exoneracionesSelect.push(e);

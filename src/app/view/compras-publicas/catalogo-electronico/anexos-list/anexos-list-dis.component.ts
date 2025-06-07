@@ -94,7 +94,7 @@ export class AnexosListComponentDis implements OnInit, OnDestroy {
     //this.commonVarService.clearAnexos.asObservable().subscribe(
   this.commonVarService.clearAnexos.pipe(takeUntil(this.onDestroy$)).subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
       }
     )
 

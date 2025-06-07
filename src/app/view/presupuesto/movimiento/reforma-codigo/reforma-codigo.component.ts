@@ -790,7 +790,7 @@ console.log("ejecutando recalculo",data);
         this.lcargando.ctlSpinner(true);
         console.log(this.atribucionParamsNew);
         // let detalles = []
-        this.atribucionParamsNew.bienes = []
+        this.atribucionParamsNew.bienes = [];
         this.listaSolicitudesAtribucion.map((res)=>{
           if(res.check){
             res['tipo_ajuste'] = 1;

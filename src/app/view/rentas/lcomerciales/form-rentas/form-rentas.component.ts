@@ -910,7 +910,7 @@ export class FormRentasComponent implements OnInit {
       this.formSrv.setImpuestos({data: this.cxc}).subscribe(
         (res: any) => {
           console.log(res)
-          this.cxc.impuestos = []
+          this.cxc.impuestos = [];
           resolve(res.data)
         },
         (err: any) => {
@@ -1043,7 +1043,7 @@ export class FormRentasComponent implements OnInit {
         this.comisaria_res.det.formulario = JSON.parse(JSON.stringify(this.formularioBackup));
         this.planificacion_res.det.viaPublica = JSON.parse(JSON.stringify(this.viaPublicaBackup));
 
-        this.cxc.impuestos = []
+        this.cxc.impuestos = [];
 
         this.fotos = [];
         this.fotosEliminar = [];

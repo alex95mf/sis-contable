@@ -225,7 +225,7 @@ export class AprobacionCompraPublicaComponent implements OnInit {
 
   selectRegimen(event) {
     this.aprobacion.procSugerido = null
-    this.procSugeridos = []
+    this.procSugeridos = [];
     this.procSugeridos = this.procsSugeridos.filter(p => p.grupo == event)
 
 

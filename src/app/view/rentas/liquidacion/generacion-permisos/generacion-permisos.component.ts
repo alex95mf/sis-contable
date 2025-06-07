@@ -183,7 +183,7 @@ export class GeneracionPermisosComponent implements OnInit {
 
     this.commonVarService.limpiarSupervivencia.asObservable().subscribe(
       (res)=>{
-        this.contribuyenteActive = {}
+        this.contribuyenteActive = {};
       }
     )
 

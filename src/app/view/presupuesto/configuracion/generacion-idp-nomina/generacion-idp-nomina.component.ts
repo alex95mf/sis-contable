@@ -206,11 +206,11 @@ export class GeneracionIdpNominaComponent implements OnInit {
 
         this.documento = res;
         this.documento.fecha = res.fecha.split(" ")[0];
-        this.solicitud = []
+        this.solicitud = [];
         this.solicitud.push(res.documento_icp)
         console.log(this.solicitud)
 
-        this.solicitudDetalle = []
+        this.solicitudDetalle = [];
         if(res.detalles.length > 0){
           res.detalles.forEach(e =>{
               let data = {
@@ -330,7 +330,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
 
         console.log(res)
         console.log(this.solicitud)
-        this.solicitud = []
+        this.solicitud = [];
         this.solicitud.push(res)
 
         this.documento.fk_documento_icp = res.id_documento
@@ -342,7 +342,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
         // this.documento.mercado =  this.mercados.find(m => m.id == res.fk_mercado);
         // this.documento.proyecto = res.proyecto?.secuencia+'-'+res.proyecto?.descripcion
 
-        this.solicitudDetalle = []
+        this.solicitudDetalle = [];
         if(res.detalles.length > 0){
           res.detalles.forEach(e =>{
               let data = {
@@ -618,8 +618,8 @@ export class GeneracionIdpNominaComponent implements OnInit {
 
   removeIcp(index) {
     this.solicitud.splice(index, 1)
-    this.solicitud = []
-    this.solicitudDetalle = []
+    this.solicitud = [];
+    this.solicitudDetalle = [];
     this.totalCobro = 0
   }
 
@@ -790,7 +790,7 @@ export class GeneracionIdpNominaComponent implements OnInit {
                     }
                   });
                   this.documento.solicitud = this.solicitud[0];
-                  this.documento.ingresos = []
+                  this.documento.ingresos = [];
                   this.idpIngresos.map(
                     (e) => {
                       this.documento.ingresos.push(e);

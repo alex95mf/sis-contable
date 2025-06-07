@@ -592,7 +592,7 @@ export class CostasComponent implements OnInit {
       (res) => {
         console.log(res);
 
-        this.estados = []
+        this.estados = [];
         res['data']['COB_JUICIO_ESTADO'].forEach(e => {
           const o = {
             id: e.valor,

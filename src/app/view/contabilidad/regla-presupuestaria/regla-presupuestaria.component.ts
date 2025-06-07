@@ -87,7 +87,7 @@ loadReglas(flag: boolean = false){
       console.log(res)
       if (res['data'].length == 0) {
         console.log("LENG0")
-        this.reglas = []
+        this.reglas = [];
       } else {
 
         this.reglas = res['data']['data'];

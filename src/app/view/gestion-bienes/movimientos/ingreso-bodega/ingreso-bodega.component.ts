@@ -1226,11 +1226,11 @@ export class IngresoBodegaComponent implements OnInit {
         this.condiciones = "";
         this.contador = 0;
         this.bodega = "";
-        this.dataOrder = []
-        this.listaProducto = []
-        this.claseSelect = []
-        this.subgrupo = []
-        this.codigoBienesDescripcion = []
+        this.dataOrder = [];
+        this.listaProducto = [];
+        this.claseSelect = [];
+        this.subgrupo = [];
+        this.codigoBienesDescripcion = [];
         this.numero_ingreso_bodega = "";
         this.estado = "";
         this.grupo_descripcion = "";
@@ -2217,7 +2217,7 @@ export class IngresoBodegaComponent implements OnInit {
             if (result.isConfirmed) {
               console.log(res['data'])
               console.log(res['data']['detalles'])
-              this.dataProducto = []
+              this.dataProducto = [];
               const det: any = []
 
               console.log(res['detalles'])
@@ -2354,7 +2354,7 @@ export class IngresoBodegaComponent implements OnInit {
 
 
   reiniciarProducto() {
-    this.listaProducto = []
+    this.listaProducto = [];
     this.grupo_descripcion = ""
     this.codigoBienesDescripcion = ""
     this.codigo_grupo = ""

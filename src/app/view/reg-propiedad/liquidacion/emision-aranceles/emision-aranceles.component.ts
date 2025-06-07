@@ -632,7 +632,7 @@ export class EmisionArancelesComponent implements OnInit {
     this.ArancelesValid = true;
     this.subtotalCalculado = 0;
     this.verifyRestore = false;
-    this.tbl_propietarios = []
+    this.tbl_propietarios = [];
     this.multiplesPropietarios = false
 
     this.liquidacion = {
@@ -1002,7 +1002,7 @@ export class EmisionArancelesComponent implements OnInit {
     // this.arancelActive = arancel;
     
     if(!!this.subtotal){
-      this.arancelActive['exoneraciones'] = []
+      this.arancelActive['exoneraciones'] = [];
       this.arancelActive['descuento'] = 0
       this.arancelActive['porcentaje_exoneracion'] = 0;
       this.arancelActive['sta'] = 2
@@ -1027,7 +1027,7 @@ export class EmisionArancelesComponent implements OnInit {
       this.arancelActive = {};
       this.liquidacion.cuantia = 0
       this.liquidacion.avaluo = 0
-      this.propiedades = []
+      this.propiedades = [];
       this.liquidacion.fk_lote = null
       this.calcularDisabled = true
       this.subtotal = undefined;

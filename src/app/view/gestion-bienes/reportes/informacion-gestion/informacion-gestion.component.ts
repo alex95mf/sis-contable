@@ -130,8 +130,8 @@ export class InformacionGestionComponent implements OnInit {
   limpiarFiltros() {
     this.selects.forEach((select: NgSelectComponent) => select.handleClearClick());
     this.vmButtons[2].habilitar = true
-    this.matriz = []
-    this.columnas = []
+    this.matriz = [];
+    this.columnas = [];
   }
 
   async consultarReporte() {
@@ -148,7 +148,7 @@ export class InformacionGestionComponent implements OnInit {
     
     this.lcargando.ctlSpinner(true);
     try {
-      this.filas = []
+      this.filas = [];
       this.columnas = [];
       this.matriz = [];
 

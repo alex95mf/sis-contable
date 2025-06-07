@@ -509,9 +509,9 @@ export class AsigncionComponent implements OnInit {
   /* seleccionaPrograma(event) {
     // Funcion intermedia para limpiar la pantalla y objetos
     this.vmButtons[0].habilitar = true
-    this.departamentos = []
+    this.departamentos = [];
     this.departamentoSeleccionado = 0
-    this.attrDept = []
+    this.attrDept = [];
 
     if (this.programaSeleccionado !== 0) this.cargaDepartamentos(event)
   } */
@@ -572,7 +572,7 @@ export class AsigncionComponent implements OnInit {
 
     (this as any).mensajeSpinner = 'Cargando Presupuesto del Departamento'
     this.lcargando.ctlSpinner(true);
-    this.attrDept = []
+    this.attrDept = [];
     this.apiService.getPresupuestoDepartamento(data).subscribe(
       res => {
         // console.log(res)

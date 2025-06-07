@@ -181,7 +181,7 @@ export class MetasOdsComponent implements OnInit {
   }
 
   cargaEje(event) {
-    this.cmb.eje = []
+    this.cmb.eje = [];
     this.seleccion.eje = 0
     let data = {
       "ods": event
@@ -212,7 +212,7 @@ export class MetasOdsComponent implements OnInit {
   }
 
   cargaMetaODS(event) {
-    this.cmb.metaods = []
+    this.cmb.metaods = [];
     this.seleccion.meta_ods = 0
     let data = {
       "ods": event
@@ -240,7 +240,7 @@ export class MetasOdsComponent implements OnInit {
   }
 
   cargaOPG(event) {
-    this.cmb.opg = []
+    this.cmb.opg = [];
     this.seleccion.opg = 0
     let data = {
       'eje': event
@@ -268,7 +268,7 @@ export class MetasOdsComponent implements OnInit {
   }
 
   cargaPPG(event) {
-    this.cmb.ppg = []
+    this.cmb.ppg = [];
     this.seleccion.ppg = 0;
     (this as any).mensajeSpinner = 'Cargando Politicas'
     let data = {
@@ -297,7 +297,7 @@ export class MetasOdsComponent implements OnInit {
   }
 
   cargaMetaZonal(event) {
-    this.cmb.meta = []
+    this.cmb.meta = [];
     this.seleccion.metaZonal = 0;
     (this as any).mensajeSpinner = 'Cargando Metas para la Zona'
     let data = {

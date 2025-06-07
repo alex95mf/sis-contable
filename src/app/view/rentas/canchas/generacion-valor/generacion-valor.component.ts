@@ -239,7 +239,7 @@ export class GeneracionValorComponent implements OnInit {
   );
   this.commonVarService.limpiarSupervivencia.asObservable().subscribe(
     (res)=>{
-      this.contribuyenteActive = {}
+      this.contribuyenteActive = {};
     }
   )
   }

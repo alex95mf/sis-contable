@@ -88,7 +88,7 @@ export class DetalleReformaComponent implements OnInit {
           this.reforma = res["data"]
           this.lcargando.ctlSpinner(false);
         } else {
-          this.reforma = []
+          this.reforma = [];
           this.lcargando.ctlSpinner(false);
         }
       },

@@ -83,7 +83,7 @@ export class ModalGruposComponent implements OnInit {
         this.closeModal();
         break;
       case " APLICAR":
-        this.exoneracionesSelect = []
+        this.exoneracionesSelect = [];
         // this.grupos.forEach(e => {
         //   if (e.action) {
         //     this.exoneracionesSelect.push(e);

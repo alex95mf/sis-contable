@@ -234,7 +234,7 @@ JSONtoXML(obj) {
 
 
 consultarRdep(){
-  this.arrayRdep = []
+  this.arrayRdep = [];
   let data = {
     //periodo: this.periodo,
     filter: this.filter,

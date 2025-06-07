@@ -237,7 +237,7 @@ export class ConceptoComponent implements OnInit {
     this.detalle_edit = [];
     this.detalle_delete = [];
     this.detalle_new = [];
-    this.detalle_orig = []
+    this.detalle_orig = [];
   }
 
   CancelFormLite() {

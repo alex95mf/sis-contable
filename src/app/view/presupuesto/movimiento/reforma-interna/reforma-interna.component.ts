@@ -721,7 +721,7 @@ iddetallecabecerareformageneral: any;
               (this as any).mensajeSpinner = "Creando Reforma interna...";
               this.lcargando.ctlSpinner(true);
               console.log(this.atribucionParamsNew);
-              this.atribucionParamsNew.bienes = []
+              this.atribucionParamsNew.bienes = [];
               this.listaSolicitudesAtribucion.map((res) => {
                 if (res.check) {
                   res['tipo_ajuste'] = 1;
@@ -1169,8 +1169,8 @@ iddetallecabecerareformageneral: any;
 
         this.listaSolicitudes = [];
 
-        this.dato_Programa = []
-        this.datoDepartamento = []
+        this.dato_Programa = [];
+        this.datoDepartamento = [];
       }
     })
 

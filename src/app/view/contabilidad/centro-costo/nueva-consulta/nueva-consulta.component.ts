@@ -181,7 +181,7 @@ export class NuevaConsultaComponent implements OnInit {
       return;
     } */
 
-    this.dtConsultaAsiento = []
+    this.dtConsultaAsiento = [];
     let desde = moment(this.filter.fecha_desde).format('YYYYMMDD');
     let hasta = moment(this.filter.fecha_hasta).format('YYYYMMDD');
     let cuenta = this.codigo ?? '';
@@ -260,7 +260,7 @@ export class NuevaConsultaComponent implements OnInit {
     this.nombre_hasta = null
     this.centrocosto = null
 
-    this.dtConsultaAsiento = []
+    this.dtConsultaAsiento = [];
 
     this.vmButtons[2].habilitar = true
   }

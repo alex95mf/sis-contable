@@ -611,7 +611,7 @@ export class ParametrosComponent implements OnInit {
       descripcion:'',
       codigo: ''
     }
-   this.listaParametros = []
+   this.listaParametros = [];
    this.vmButtons[0].habilitar =false;
    this.vmButtons[2].habilitar =true;
 

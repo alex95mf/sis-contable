@@ -61,7 +61,7 @@ export class AnexosListaComponentDis implements OnInit {
           this.apiService.getAnexos(data).subscribe(
             (res: any) => {
               console.log('Anexo Contribuyente',res)
-              this.anexos = []
+              this.anexos = [];
               res.data.forEach(e => {
                 let o = {
                   id_anexo: e.id_anexos,
@@ -97,7 +97,7 @@ export class AnexosListaComponentDis implements OnInit {
 
     this.commonVarService.clearAnexos.asObservable().subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
       }
     )
 

@@ -766,7 +766,7 @@ export class OrdenComponent implements OnInit {
     this.proveedorActive = {
       razon_social: ""
     };
-    this.condiciones = []
+    this.condiciones = [];
     if (event == 'PC') {
       this.procesoCompra = false;
       this.procesoConceptos = true;
@@ -1156,7 +1156,7 @@ export class OrdenComponent implements OnInit {
     }
     this.pagosUnaFactura.push(nuevo);
 
-    this.detallesUnaFactura = []
+    this.detallesUnaFactura = [];
     console.log(compra.detalle_cuentas)
     compra.detalle_cuentas.forEach((element: any) => {
       console.log(parseFloat(element.totalitems) )
@@ -1532,7 +1532,7 @@ export class OrdenComponent implements OnInit {
             this.TotalizarAsiento();
           }
         }else if(this.documento.tipo == 'PC'){
-          this.asiento = []
+          this.asiento = [];
           let pagoTotal = 0
 
           this.pagosCondicion.forEach(e => {

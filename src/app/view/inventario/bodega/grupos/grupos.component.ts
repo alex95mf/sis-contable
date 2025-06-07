@@ -289,7 +289,7 @@ export class GruposComponent implements OnInit {
         this.permissions = res.data[0]
         if (this.permissions.abrir == '0') {
           this.lcargando.ctlSpinner(false)
-          this.vmButtons = []
+          this.vmButtons = [];
           this.toastr.warning("No tiene permisos para usar este recurso.", this.fTitle)
         } else {
           this.lcargando.ctlSpinner(false)

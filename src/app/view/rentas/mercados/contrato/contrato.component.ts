@@ -437,7 +437,7 @@ export class ContratoComponent implements OnInit {
 
     (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
     this.lcargando.ctlSpinner(true);
-    this.puestos = []
+    this.puestos = [];
     this.apiService.getPuestos({ mercado: event, estado: 'D' }).subscribe(
       (res: any) => {
         if (Array.isArray(res.data) && res.data.length === 0) {
@@ -484,7 +484,7 @@ export class ContratoComponent implements OnInit {
       return
     }
 
-    this.contrato.detalles = []
+    this.contrato.detalles = [];
     let cuotas = this.monthDiff(this.contrato.fechaInicio, this.contrato.fechaVencimiento)
     console.log(cuotas)
     for (let mes = 0; mes <= cuotas; mes++) {

@@ -662,7 +662,7 @@ codigoActa:any;
   mostrarCampos(event){
     console.log(event);
     this.disabledBienes = false;
-    this.aplicarConfig = []
+    this.aplicarConfig = [];
     // if(event=='1'){
     //   this.codigoActa='ATBI-MDPL';
     //   // this.aplicarConfig = this.arrayTrasladoConfig[0]

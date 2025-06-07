@@ -303,7 +303,7 @@ export class BitacoraComponent implements OnDestroy, OnInit {
       fecha_hasta: moment(this.today).format('YYYY-MM-DD'),
       usuario: undefined
     }
-    this.dataBitacoraAux = []
+    this.dataBitacoraAux = [];
 
   }
 }

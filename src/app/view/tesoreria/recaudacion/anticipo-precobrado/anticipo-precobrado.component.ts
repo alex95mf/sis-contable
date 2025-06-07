@@ -263,7 +263,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
       this.commonVrs.modalMovimientosBancarisoAF.asObservable().subscribe(
         (res)=>{
           console.log(res)
-          this.movimiento = []
+          this.movimiento = [];
           res['id_documento_detalle'] = 0;
           res['num_cuenta'] =Number(res['num_cuenta']);
           this.totalCobro = res['valor']
@@ -477,7 +477,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
     this.documento.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto;
     (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
     this.lcargando.ctlSpinner(true);
-    this.puestos = []
+    this.puestos = [];
     this.apiSrv.getPuestos().subscribe(
       (res: any) => {
         if (Array.isArray(res['data']) && res['data'].length === 0) {
@@ -1283,7 +1283,7 @@ export class AnticipoPrecobradoComponent implements OnInit {
     this.verifyRestore = false;
 
     this.pagos = [];
-    this.movimiento = []
+    this.movimiento = [];
 
     this.formaPago = 0;
     this.entidad = 0;

@@ -347,7 +347,7 @@ export class ConfiguracionComponent implements OnInit {
       dias_totales: null,
       puede_retornar: 0
     };
-    this.selectRol={}
+    this.selectRol={};
     this.preguntaDisabled = false;
     this.formReadOnly = false;
     this.listaPasos = [];

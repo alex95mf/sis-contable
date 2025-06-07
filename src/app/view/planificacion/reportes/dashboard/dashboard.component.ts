@@ -674,7 +674,7 @@ export class DashboardComponent implements OnInit {
       }
     ]*/
 
-    this.dataBarChart = []
+    this.dataBarChart = [];
   }
 
   async cargaProgramas() {

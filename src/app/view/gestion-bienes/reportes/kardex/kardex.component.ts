@@ -245,7 +245,7 @@ export class KardexComponent implements OnInit {
         if(response.length > 0){
            this.dataProducto = response
         }else{
-          this.dataProducto = []
+          this.dataProducto = [];
         }
         this.vmButtons[2].habilitar = false
         this.lcargando.ctlSpinner(false)
@@ -332,9 +332,9 @@ export class KardexComponent implements OnInit {
     this.anioIngreso= ''
     this.UserSelect=undefined
     this.vmButtons[2].habilitar = true
-    this.cmb_grupo = []
-    this.cmb_productos = []
-    this.cmb_grupo_filter = []
+    this.cmb_grupo = [];
+    this.cmb_productos = [];
+    this.cmb_grupo_filter = [];
     this.stockSelected = 0
     this.selectedBodega = 0
     this.selectedGrupo = ''
@@ -343,9 +343,9 @@ export class KardexComponent implements OnInit {
     this.fechaDesde = new Date(this.today.getFullYear(),this.today.getMonth(), 1);
     this.fechaHasta = new Date(this.today.getFullYear(),this.today.getMonth() + 1, 0);
 
-    this.dataProducto = []
+    this.dataProducto = [];
     this.grupo_descripcion = ''
-    this.producto_exi = []
+    this.producto_exi = [];
     this.selectedProductos = ''
     this.nombreProducto = ''
   }

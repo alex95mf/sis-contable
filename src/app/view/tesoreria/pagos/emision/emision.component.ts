@@ -186,7 +186,7 @@ export class EmisionComponent implements OnInit {
     this.commonVrs.modalMovimientosBancarisoAF.asObservable().subscribe(
       (res)=>{
         console.log(res)
-        this.movimiento = []
+        this.movimiento = [];
         res['id_documento_detalle'] = 0;
         res['num_cuenta'] =Number(res['num_cuenta']);
         //this.totalCobro = res['valor'];
@@ -921,7 +921,7 @@ export class EmisionComponent implements OnInit {
     if (event) {
       this.changeNomina = true;
       this.documento.tipo_pago = 'NOMINA'
-      this.deudas= []
+      this.deudas= [];
       this.totalCobro = 0
       this.difCobroPago = 0
     } else {
@@ -1536,20 +1536,20 @@ export class EmisionComponent implements OnInit {
     };
     this.nominaCheck= undefined;
     // this.conceptosList = [];
-    this.cuenta = []
+    this.cuenta = [];
     this.concepto = 0;
     this.totalCobro = 0;
     this.totalPago = 0;
     this.difCobroPago = 0;
     this.deudas = [];
-    this.valorCuentas = []
+    this.valorCuentas = [];
     this.fecha = moment(new Date()).format('YYYY-MM-DD  HH:mm');
     this.verifyRestore = false;
     this.busqueda = false
     this.changeNomina = false;
-    this.asiento = []
-    this.movimiento = []
-    this.totalAsiento = []
+    this.asiento = [];
+    this.movimiento = [];
+    this.totalAsiento = [];
     this.pagos = [];
     this.formaPago = 0;
     this.documento = {

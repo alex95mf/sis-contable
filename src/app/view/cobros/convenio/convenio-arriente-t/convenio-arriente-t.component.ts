@@ -1050,7 +1050,7 @@ export class ConvenioArrienteTComponent implements OnInit {
       documento: null,
       cuotas: []
     } */
-    this.amortizaciones = []
+    this.amortizaciones = [];
     this.amortizacion = {
       cuota_inicial: 0,
       num_cuotas: 0,

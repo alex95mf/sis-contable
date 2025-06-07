@@ -521,7 +521,7 @@ export class ActivosFinancierosComponent implements OnInit {
     this.documento.puesto=0; // cada que se cambia el mercado debe reiniciarse el puesto;
     (this as any).mensajeSpinner = 'Cargando Puestos de Mercado'
     this.lcargando.ctlSpinner(true);
-    this.puestos = []
+    this.puestos = [];
     this.apiSrv.getPuestos().subscribe(
       (res: any) => {
         if (Array.isArray(res['data']) && res['data'].length === 0) {
@@ -1221,7 +1221,7 @@ export class ActivosFinancierosComponent implements OnInit {
     this.titulosDisabled = true;
     this.ordenDisabled = true;
     this.movimientoValid = false;
-    this.movimiento = []
+    this.movimiento = [];
 
     this.contribuyenteActive = {
       razon_social: ""

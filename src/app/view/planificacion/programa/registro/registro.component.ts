@@ -258,7 +258,7 @@ export class RegistroComponent implements OnInit {
   /* seleccionaPrograma() {
     // Cargar presupuesto del programa
     if (this.progSelect === 0) {
-      this.departamentos = []
+      this.departamentos = [];
       this.programa = { presupuesto: { periodo: new Date().getFullYear() + 1, monto: 0, asignado: 0, disponible: 0 } }
       this.vmButtons[0].habilitar = true
       return
@@ -303,7 +303,7 @@ export class RegistroComponent implements OnInit {
   } */
 
   /* getDepartamentosPrograma() {
-    this.departamentos = []
+    this.departamentos = [];
     (this as any).mensajeSpinner = 'Cargando Departamentos de Programa'
     // Cargar Departamentos
     let data = {
@@ -473,7 +473,7 @@ export class RegistroComponent implements OnInit {
   } */
 
   cancelaPrograma() {
-    this.departamentos = []
+    this.departamentos = [];
     delete this.presupuesto
     this.selectables.map((select: NgSelectComponent) => select.handleClearClick())
     this.vmButtons[0].habilitar = false;

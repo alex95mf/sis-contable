@@ -249,7 +249,7 @@ export class TarifaComponent implements OnInit {
     if (event === 0) {
       this.tarifa.fk_concepto = 0
       this.vmButtons[0].habilitar = true
-      this.tarifa.detalles = []
+      this.tarifa.detalles = [];
       this.procesoCM = true
       return
     }
@@ -267,7 +267,7 @@ export class TarifaComponent implements OnInit {
   cargaConceptoDetalles(concepto) {
     /** Llama a la API para cargar la lista de detalles del concepto seleccionado */
     (this as any).mensajeSpinner = 'Obteniendo Detalles del Concepto'
-    this.tarifa.detalles = []
+    this.tarifa.detalles = [];
     this.lcargando.ctlSpinner(true);
     this.apiService.getDetallesConcepto({id_concepto: concepto}).subscribe(
       res => {

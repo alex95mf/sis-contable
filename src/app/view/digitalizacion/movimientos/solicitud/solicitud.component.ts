@@ -582,8 +582,8 @@ this.lastday = new Date( this.lastday - 1);
 
   onProgramaSelect(event: Array<any>) {
     console.log(event);
-    this.departamento = []
-    this.datoDepartamento = []
+    this.departamento = [];
+    this.datoDepartamento = [];
     this.listaSolicitudesAtribucion = [];
   }
 
@@ -1090,7 +1090,7 @@ this.dataForms= [];
       this.rutaFinal= [];
       this.documento =  [];
 
-      this.resultadoConsulta= []
+      this.resultadoConsulta= [];
       this.filter.tipo_documento = ''
 
   }
@@ -1328,8 +1328,8 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
     this.filter.campos = [];
     this.filter.tipo_documento= event
     let data = {tipoDoc:this.tipoDoC};
-    this.DocGeneral = []
-    this.directorioDt = []
+    this.DocGeneral = [];
+    this.directorioDt = [];
     let Data = []
 
     this.apiService.getOrdenCampos(data).subscribe((res) => {
@@ -1403,7 +1403,7 @@ this.newReserva.fechamaxima =moment(this.daylimit).format('YYYY-MM-DD')
     // this.dataForms.forEach(campo => {
     //   this.filter['campos'][campo.campo_indice] = this.dataForms.find((e) => e.campo_indice == campo.campo_indice) ; // Asumiendo que campo_indice contiene los nombres de los campos dinámicos
     // });
-    this.resultadoConsulta = []
+    this.resultadoConsulta = [];
     this.filter.tipo_documento=  this.tipoDoC
     const camposFiltrados = this.filter.campos.filter(camp => camp.campo_indice && camp.valor_indice);
 

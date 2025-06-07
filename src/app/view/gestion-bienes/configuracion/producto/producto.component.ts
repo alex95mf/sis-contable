@@ -1671,7 +1671,7 @@ async cargaInicial() {
     this.stockActualData = false;
     this.traslado = [];
     this.mantenimiento = [];
-    this.poliza = []
+    this.poliza = [];
     if (this.searchDataUpdateDelete != undefined) { this.searchDataUpdateDelete = undefined }
     this.codigoBienes = undefined;
     this.grupo_producto = undefined;

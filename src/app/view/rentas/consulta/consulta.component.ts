@@ -579,7 +579,7 @@ export class ConsultaComponent implements OnInit {
   }
 
   selectOption1(evt) {
-    this.dataReportes = []
+    this.dataReportes = [];
     this.limpiarTotales()
   }
 

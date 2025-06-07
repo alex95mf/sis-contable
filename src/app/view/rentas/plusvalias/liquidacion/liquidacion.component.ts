@@ -846,9 +846,9 @@ export class LiquidacionComponent implements OnInit {
       concepto_2: { codigo: 'AL' },
     };
 
-    this.exoneracionesAL = []
-    this.detallesPl = []
-    this.detallesAl = []
+    this.exoneracionesAL = [];
+    this.detallesPl = [];
+    this.detallesAl = [];
     this.getConceptos();
     this.getConceptos_2();
     this.conceptosBackup = [];
@@ -2050,7 +2050,7 @@ export class LiquidacionComponent implements OnInit {
   }
 
   reiniciarActivos() {
-    this.listaActivos = []
+    this.listaActivos = [];
     this.valor_solares_contrib = 0
 
   }
@@ -2197,8 +2197,8 @@ export class LiquidacionComponent implements OnInit {
               // this.cargarActivos()
               console.log(this.detallesPl);
 
-              this.liquidacion.detalles = []
-              this.liquidacion_2.detalles = []
+              this.liquidacion.detalles = [];
+              this.liquidacion_2.detalles = [];
 
 
               this.detallesPl.forEach(e => {

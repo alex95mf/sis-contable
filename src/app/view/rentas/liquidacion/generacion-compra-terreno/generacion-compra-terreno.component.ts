@@ -200,7 +200,7 @@ export class GeneracionCompraTerrenoComponent implements OnInit, OnDestroy {
     );
     this.commonVarService.limpiarSupervivencia.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
       (res) => {
-        this.contribuyenteActive = {}
+        this.contribuyenteActive = {};
       }
     )
 
@@ -468,7 +468,7 @@ validaDataGlobal() {
       this.liquidacion.doc_arriendo = this.arriendoActive.documento
     } else {
       this.contribuyenteActive = {};
-      this.arriendoActive = {}
+      this.arriendoActive = {};
       this.codCastDisabled = true;
       this.observacionesDisabled = true;
       this.vmButtons[3].habilitar = true;
@@ -477,7 +477,7 @@ validaDataGlobal() {
       this.verifyRestore = false;
       this.propiedades = [];
       this.propiedadActive = {};
-      this.arriendoActive = {}
+      this.arriendoActive = {};
     }
   }
 

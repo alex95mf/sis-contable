@@ -199,7 +199,7 @@ export class ListaMercadoComponent implements OnInit {
           if(res['data'].length != 0){
             this.listMerc = Object.values(res['data']['data']);
           }else{
-            this.listMerc = []
+            this.listMerc = [];
           }
           
           

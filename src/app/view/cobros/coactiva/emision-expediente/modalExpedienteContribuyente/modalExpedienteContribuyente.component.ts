@@ -94,7 +94,7 @@ export class ModalExpedienteContribuyenteComponent implements OnInit {
     this.emexsrv.getLoteNotificacion().subscribe(res => {
 
         if (Array.isArray(res['data']) && res['data'].length == 0) {
-          this.lotes = []
+          this.lotes = [];
             } else {
             this.lotes = Object.values(res['data']);
             res['data'].forEach(e => {

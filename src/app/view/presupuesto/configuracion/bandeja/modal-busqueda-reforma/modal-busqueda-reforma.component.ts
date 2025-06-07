@@ -133,7 +133,7 @@ export class ModalBusquedaReformaComponent implements OnInit {
         // console.log(data);
         // console.log(res);
         if (Array.isArray(res['data']) && res['data'].length == 0) {
-          this.contribuyentesDt = []
+          this.contribuyentesDt = [];
         } else {
           this.paginate.length = res['data']['total'];
           this.contribuyentesDt = res['data']['data'];

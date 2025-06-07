@@ -168,7 +168,7 @@ export class ListReglasComponent implements OnInit {
           console.log(this.reglasDt[0]['detalles'])
           this.lcargando.ctlSpinner(false);
         }else{
-          this.reglasDt = []
+          this.reglasDt = [];
           this.lcargando.ctlSpinner(false);
         }
 

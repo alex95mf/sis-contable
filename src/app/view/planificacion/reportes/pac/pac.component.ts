@@ -257,8 +257,8 @@ export class PacComponent implements OnInit {
     let data = {
       programa: evt.nombre
     }
-    this.departamentos = []
-    this.compras = []
+    this.departamentos = [];
+    this.compras = [];
     this.vmButtons[0].habilitar = true;
     (this as any).mensajeSpinner = 'Cargando Departamentos'
     this.lcargando.ctlSpinner(true);
@@ -314,7 +314,7 @@ export class PacComponent implements OnInit {
     let data = {
       departamento: evt
     }
-    this.compras = []
+    this.compras = [];
     this.vmButtons[0].habilitar = false;
     (this as any).mensajeSpinner = 'Cargando detalles'
     // this.lcargando.ctlSpinner(true);

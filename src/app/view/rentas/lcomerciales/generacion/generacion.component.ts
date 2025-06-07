@@ -273,7 +273,7 @@ export class GeneracionComponent implements OnInit {
 
     this.commonVarService.limpiarSupervivencia.asObservable().subscribe(
       (res: any)=>{
-        this.contribuyenteActive = {}
+        this.contribuyenteActive = {};
       }
     );
   

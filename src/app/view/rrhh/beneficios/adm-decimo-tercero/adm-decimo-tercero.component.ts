@@ -1763,7 +1763,7 @@ export class AdmDecimoTerceroComponent implements OnInit {
   porFecha(event: any){
     console.log(event.target.checked)
     if(event.target.checked){
-      this.decimotercero = []
+      this.decimotercero = [];
       this.vmButtons[0].habilitar = true;
       this.vmButtons[2].habilitar = true;
       this.vmButtons[3].habilitar = true;

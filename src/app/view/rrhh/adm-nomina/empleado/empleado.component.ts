@@ -2342,7 +2342,7 @@ this.tieneFondo = false
     // this.namePhoto = "",
     // this.imageBase64 = "";
     // this.inputImage.nativeElement.value = "";
-this.objGetDocumentByEmployee = []
+this.objGetDocumentByEmployee = [];
 
 
 
@@ -3143,7 +3143,7 @@ this.objGetDocumentByEmployee = []
       type_sort: 'asc'
     };
     console.log(parameterUrl);
-    this.objGetDocumentByEmployee = []
+    this.objGetDocumentByEmployee = [];
     this.empleadoService.getDocumentByEmployee(parameterUrl).subscribe({
       next: (rpt: DocFichaAditionalResponseI) => {
         console.log(rpt.data);

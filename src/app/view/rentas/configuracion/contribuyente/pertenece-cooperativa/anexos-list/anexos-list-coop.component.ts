@@ -37,7 +37,7 @@ export class AnexosListComponentCoo implements OnInit {
   ) {
     this.commonVarService.clearContact.asObservable().subscribe(
       (res) => {
-        this.anexos = []
+        this.anexos = [];
       }
     )
     this.commonVarService.contribAnexoLoad.asObservable().subscribe(
@@ -100,13 +100,13 @@ export class AnexosListComponentCoo implements OnInit {
 
     this.commonVarService.clearAnexos.asObservable().subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
       }
     )
 
     this.commonVarService.clearAnexos.asObservable().subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
       }
     )
 

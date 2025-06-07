@@ -559,7 +559,7 @@ export class EgresosBodegaComponent implements OnInit {
 
     if(campos === undefined){
       this.motivo = undefined
-      this.motivosCR = []
+      this.motivosCR = [];
       this.datoGene = false
       this.datGen = true
 
@@ -908,7 +908,7 @@ export class EgresosBodegaComponent implements OnInit {
 
   buscarGrupoProducto(event) {
     if (event == undefined) return;
-    this.claseSelect = []
+    this.claseSelect = [];
     if (this.subgrupo) this.subgrupo.descripcion = undefined;
     (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
@@ -1181,7 +1181,7 @@ export class EgresosBodegaComponent implements OnInit {
 
 
     this.motivo = undefined
-    this.motivosCR = []
+    this.motivosCR = [];
     this.datoGene = false
     this.datGen = true
     this.datoEnt = false

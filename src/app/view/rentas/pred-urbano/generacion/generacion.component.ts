@@ -135,7 +135,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
         this.vmButtons[2].habilitar = false
         this.vmButtons[3].habilitar = false;
         this.vmButtons[4].habilitar = false;
-        this.conceptosAplicados = []
+        this.conceptosAplicados = [];
         console.log(res);
         this.liquidacion = res;
         this.liquidacion.periodoLiq = res.periodo
@@ -264,7 +264,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
     );
     this.commonVarService.limpiarSupervivencia.asObservable().pipe(takeUntil(this.onDestroy$)).subscribe(
       (res)=>{
-        this.contribuyenteActive = {}
+        this.contribuyenteActive = {};
       }
     )
   }
@@ -657,7 +657,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
         this.tbl_propietarios.forEach((element: any) => Object.assign(element, {proporcional: 0, descuento: 0, total: 0, exoneraciones: []}))
       } else {
         this.multiplesPropietarios = false
-        this.tbl_propietarios = []
+        this.tbl_propietarios = [];
       }
       this.verifyRestore = true;
       // this.restoreForm(true, true);
@@ -676,7 +676,7 @@ export class GeneracionComponent implements OnInit, OnDestroy {
 
     const response = await this.apiService.getValoresPropiedad({lote: this.propiedadActive.id}) as any
     console.log(response.data)
-    this.conceptosAplicados = []
+    this.conceptosAplicados = [];
     Object.keys(response.data).forEach((element: any) => {
       if (response.data[element] != 0) {
         let c = this.conceptos.find(c => c.codigo_detalle == element)

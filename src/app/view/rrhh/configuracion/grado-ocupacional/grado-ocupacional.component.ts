@@ -179,7 +179,7 @@ export class GradoOcupacionalComponent implements OnInit {
     this.apiSrv.getGrupoOcupacionalByFilter(data).subscribe(
       res => {
         if (res['data'].length == 0) {
-          this.grado = []
+          this.grado = [];
         } else {
           this.grado = res['data']['data'];
           this.paginate.length = res['data']['total'];

@@ -211,7 +211,7 @@ export class ConsultaMovimientosComponent implements OnInit {
     console.log(valor);
     if(campos === undefined){
       this.motivo = undefined
-      this.motivosCR = []
+      this.motivosCR = [];
     }
   }
 
@@ -240,7 +240,7 @@ export class ConsultaMovimientosComponent implements OnInit {
            this.dataReporte = response
            this.vmButtons[2].habilitar = false
         }else{
-          this.dataReporte = []
+          this.dataReporte = [];
           this.vmButtons[2].habilitar = true
         }
         this.lcargando.ctlSpinner(false)

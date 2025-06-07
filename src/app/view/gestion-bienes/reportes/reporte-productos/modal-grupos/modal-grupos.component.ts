@@ -96,7 +96,7 @@ export class ModalGruposComponent implements OnInit {
 
 
       case " APLICAR":
-        this.exoneracionesSelect = []
+        this.exoneracionesSelect = [];
         // this.grupos.forEach(e => {
         //   if (e.action) {
         //     this.exoneracionesSelect.push(e);

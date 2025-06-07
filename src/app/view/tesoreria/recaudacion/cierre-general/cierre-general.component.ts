@@ -517,7 +517,7 @@ export class CierreGeneralComponent implements OnInit {
               console.log(res2)
               this.vmButtons[0].habilitar = false
               if(res2['data'].length > 0){
-                this.depositos = []
+                this.depositos = [];
                 this.vmButtons[0].habilitar = true;
                 let totalDepositado = 0;
                 res2['data'].forEach(e => {
@@ -1015,7 +1015,7 @@ export class CierreGeneralComponent implements OnInit {
 
     this.iniciarData()
 
-    this.depositos = []
+    this.depositos = [];
     this.totalDepositar = 0
     this.totalDeposito = 0
     this.difDepositos = 0

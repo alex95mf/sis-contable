@@ -234,7 +234,7 @@ export class ReporteUnoComponent implements OnInit {
           this.dataProducto = response
           this.validaDt = true;
         }else{
-          this.dataProducto = []
+          this.dataProducto = [];
           this.validaDt = false;
         }
         this.vmButtons[2].habilitar = false
@@ -309,10 +309,10 @@ export class ReporteUnoComponent implements OnInit {
     this.anioIngreso= ''
     this.UserSelect=undefined
     this.vmButtons[2].habilitar = true
-    this.cmb_grupo = []
-    this.cmb_productos = []
-    this.cmb_grupo_filter = []
-    this.dataProducto = []
+    this.cmb_grupo = [];
+    this.cmb_productos = [];
+    this.cmb_grupo_filter = [];
+    this.dataProducto = [];
     this.stockSelected = 0
     this.selectedBodega = 0
     this.selectedGrupo = ''
@@ -320,7 +320,7 @@ export class ReporteUnoComponent implements OnInit {
     this.fechaCorte = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
     this.grupo_descripcion = ''
     this.validaDt= false
-    this.producto_exi = []
+    this.producto_exi = [];
     this.selectedProductos = ''
     this.nombreProducto = ''
   }

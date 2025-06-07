@@ -317,9 +317,9 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
 
   /* selectProg(event) {
     if (event === 0) {
-      this.deptProg = []
+      this.deptProg = [];
       this.departamento = 0
-      this.bienesAttr = []
+      this.bienesAttr = [];
       return
     }
 
@@ -328,7 +328,7 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
   } */
 
   /* async selectDept(event) {
-    this.bienesAttr = []
+    this.bienesAttr = [];
     (this as any).mensajeSpinner = 'Cargando Bienes y Servicios'
     this.lcargando.ctlSpinner(true);
 
@@ -367,8 +367,8 @@ if (this.periodoSelected == undefined || this.programaSelected == undefined || t
   }
 
   /* clear() {
-    this.deptProg = []
-    this.bienesAttr = []
+    this.deptProg = [];
+    this.bienesAttr = [];
     this.programa = 0
     this.departamento = 0
     this.vmButtons[0].habilitar = true

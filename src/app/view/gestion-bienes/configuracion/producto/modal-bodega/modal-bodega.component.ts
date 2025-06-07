@@ -150,7 +150,7 @@ limpiarFiltros() {
       (res) => {
         console.log(res);
         if (Array.isArray(res['data']) && res['data'].length == 0) {
-          this.bodegas = []
+          this.bodegas = [];
         } else {
           this.paginate.length = res['data']['total'];
           if (res['data']['current_page'] == 1) {

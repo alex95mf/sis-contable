@@ -303,7 +303,7 @@ export class DiariogeneralComponent implements OnInit {
 
   CargarLibroDiario() {
     this.auxSelected= true
-    this.dtConsultaAsiento= []
+    this.dtConsultaAsiento= [];
     let desde = moment(this.fromDatePicker).format('YYYYMMDD');
     let hasta = moment(this.toDatePicker).format('YYYYMMDD');
     let cuenta = this.codigo;
@@ -347,7 +347,7 @@ export class DiariogeneralComponent implements OnInit {
   CargarLibroDiarioAuxiliar() {
 
     this.auxSelected= false
-    this.dtConsultaAsientoAuxiliar= []
+    this.dtConsultaAsientoAuxiliar= [];
     let desde = moment(this.fromDatePicker).format('YYYYMMDD');
     let hasta = moment(this.toDatePicker).format('YYYYMMDD');
     let cuenta = this.codigo;

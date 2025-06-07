@@ -112,7 +112,7 @@ export class LiquidacionCemComponent implements OnInit {
         console.log(response)
         Object.assign(this.liquidacion_cem, response)
 
-        this.lst_base = []
+        this.lst_base = [];
         response.detalles.forEach((element: any) => {
           this.lst_base.push({ descripcion: element.base, valor: element.valor })
         });

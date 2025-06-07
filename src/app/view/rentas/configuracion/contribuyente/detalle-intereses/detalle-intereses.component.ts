@@ -117,7 +117,7 @@ export class DetalleInteresesComponent implements OnInit {
           this.intereses = res["data"]
           this.lcargando.ctlSpinner(false);
         } else {
-          this.intereses = []
+          this.intereses = [];
           this.lcargando.ctlSpinner(false);
         }
       },

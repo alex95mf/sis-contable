@@ -116,7 +116,7 @@ export class AnexosListComponentDis implements OnInit {
 
     this.commonVarService.clearAnexos.asObservable().subscribe(
       (res)=>{
-        this.anexos = []
+        this.anexos = [];
       }
     )
 
@@ -174,10 +174,10 @@ export class AnexosListComponentDis implements OnInit {
 
   cargarArchivo(){
     console.log(this.tipo)
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -233,10 +233,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoEM(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -297,10 +297,10 @@ export class AnexosListComponentDis implements OnInit {
   }
   cargarArchivoTR(){
     console.log('aqui', this.tipo)
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -359,10 +359,10 @@ export class AnexosListComponentDis implements OnInit {
 
 
   cargarArchivoPL(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -421,10 +421,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoPB(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -482,10 +482,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoPR(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -543,10 +543,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoRP(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -605,10 +605,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoPP(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -668,10 +668,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoAO(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -730,10 +730,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoNG(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -792,10 +792,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoAJ(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -850,10 +850,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoPO(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -908,10 +908,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoAC(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -970,10 +970,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoPV(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -1034,10 +1034,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoDE(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -1097,10 +1097,10 @@ export class AnexosListComponentDis implements OnInit {
     )
   }
   cargarArchivoEX(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -1161,10 +1161,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoCO(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];
@@ -1224,10 +1224,10 @@ export class AnexosListComponentDis implements OnInit {
   }
 
   cargarArchivoCE(){
-    this.anexos = []
-    this.anexosEM = []
-    this.anexosPL = []
-    this.anexosTR = []
+    this.anexos = [];
+    this.anexosEM = [];
+    this.anexosPL = [];
+    this.anexosTR = [];
     this.anexosPB = [];
     this.anexosPR = [];
     this.anexosRP = [];

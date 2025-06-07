@@ -425,7 +425,7 @@ export class LiquidacionComponent implements OnInit {
         total: 0,
       })
 
-      this.conceptos = []
+      this.conceptos = [];
       this.formReadonly = false
 
       this.vmButtons[0].habilitar = true

@@ -60,7 +60,7 @@ export class ModalComponent implements OnInit {
   }
 
   cargaCompras() {
-    this.compras = []
+    this.compras = [];
     Object.assign(
       this.totales,
       {
