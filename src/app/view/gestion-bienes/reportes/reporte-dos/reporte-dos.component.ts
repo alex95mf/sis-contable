@@ -684,7 +684,7 @@ uArrayGrupos(array) {
     })
     let htmlRef = this.elementRef.nativeElement.querySelector(`#`+e.chart);
     return new Chart(htmlRef, {
-      type: tipo,
+      type: tipo as any,
       data: {
         labels: label,
         datasets: [{

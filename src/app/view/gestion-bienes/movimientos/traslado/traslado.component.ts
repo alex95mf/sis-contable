@@ -1199,7 +1199,7 @@ codigoActa:any;
   }
 
   async save(productSend, notify, filter, prefict, info, resultado) {
-    console.log(productSend)
+    console.log(productSend);
 
 
     (this as any).mensajeSpinner = "Guardando traslado de bienes...";

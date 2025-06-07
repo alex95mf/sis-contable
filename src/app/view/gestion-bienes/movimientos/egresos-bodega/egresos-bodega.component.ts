@@ -909,7 +909,7 @@ export class EgresosBodegaComponent implements OnInit {
   buscarGrupoProducto(event) {
     if (event == undefined) return;
     this.claseSelect = []
-    if (this.subgrupo) this.subgrupo.descripcion = undefined
+    if (this.subgrupo) this.subgrupo.descripcion = undefined;
     (this as any).mensajeSpinner = "Cargando...";
     this.lcargando.ctlSpinner(true);
     let data = {

@@ -756,7 +756,7 @@ export class ConstatacionFisicaBCAComponent implements OnInit {
             valor_inicial:  res['data'][0]['costo'] ?? '',
             caracteristica: res['data'][0]['presentacion'] ?? '',
             observacion: e[observacion] ?? '',
-            cant: 1 ?? '',
+            cant: 1,
             no_ingreso: e[no_ingreso] ?? '',
 
             /*fecha_adquisicion: e[fecha_adquisicion] ?? '',
