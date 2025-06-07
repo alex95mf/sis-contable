@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CatalogoPresupuestoRoutingModule } from './catalogo-presupuesto-routing.module';
 import { CatalogoPresupuestoComponent } from './catalogo-presupuesto.component';
 import { FormsModule } from '@angular/forms';
-import { FancyGridModule } from 'fancy-grid-angular';
+import { TableModule } from 'primeng/table';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { DataTablesModule } from 'angular-datatables';
@@ -24,7 +24,7 @@ import { ExcelService } from 'src/app/services/excel.service';
   ],
   imports: [
     FormsModule,
-    FancyGridModule,
+    TableModule,
     CatalogoPresupuestoRoutingModule,
     //BaseChartDirective,
     BsDropdownModule,

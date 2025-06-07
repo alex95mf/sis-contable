@@ -14,7 +14,7 @@ import {NgxPrintModule} from 'ngx-print';
 import { TreeviewModule } from 'ngx-treeview';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
-import { FancyGridModule } from 'fancy-grid-angular';
+import { TableModule } from 'primeng/table';
 import { AppCustomModule } from 'src/app/config/custom/app-custom.module';
 import { ExcelService } from 'src/app/services/excel.service';
 
@@ -23,7 +23,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 @NgModule({
   imports: [
     FormsModule,
-    FancyGridModule,
+    TableModule,
     OrganigramaRoutingModule,
     //BaseChartDirective,
     BsDropdownModule,

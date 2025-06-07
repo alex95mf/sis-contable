@@ -16,7 +16,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 import { ExcelService } from '../../../services/excel.service';
 import { AppCustomModule } from '../../../config/custom/app-custom.module';
-import { FancyGridModule } from 'fancy-grid-angular';
+import { TableModule } from 'primeng/table';
 import { ModalReglaPresupuestariaComponent } from './modal-regla-presupuestaria/modal-regla-presupuestaria.component';
 import { ModalCuentPreComponent } from './modal-cuent-pre/modal-cuent-pre.component';
 
@@ -25,7 +25,7 @@ import { ModalCuentPreComponent } from './modal-cuent-pre/modal-cuent-pre.compon
 @NgModule({
   imports: [
     FormsModule,
-    FancyGridModule,
+    TableModule,
     PlanCuentasRoutingModule,
     //BaseChartDirective,
     BsDropdownModule,

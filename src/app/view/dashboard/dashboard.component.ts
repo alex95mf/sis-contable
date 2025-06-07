@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit {
   recaudacion: any;
   desembolsos: any;
 
- 
- 
+
+
   constructor(
     private socket: Socket,
     private service: DashboardService,
@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
       console.log('Elementos ViewChild no definidos');
     }
     setTimeout(() => {
-      
+
       this.getData()
     }, 100);
 
@@ -88,10 +88,10 @@ export class DashboardComponent implements OnInit {
       }
     )
   }
-  
+
 
   chart(name:string, tipo:string, label: string[], data: number[],nombres:string,currency: string){
-    
+
     return  new Chart(name, {
       type: tipo,
       data: {
@@ -137,7 +137,7 @@ export class DashboardComponent implements OnInit {
             // 'rgba(212, 132, 17, 0.52)',
             // 'rgba(212, 17, 68, 0.52)'
           ],
-          
+
           borderColor: [
             '#0F2FD0',//azul
             '#D00F19',//rojo
@@ -204,12 +204,12 @@ export class DashboardComponent implements OnInit {
         //     }
         //   }
         // },
-         
+
         legend: {
           display: false
         },
-        
-        
+
+
         scales: {
           xAxes:[{
             ticks:{
@@ -226,7 +226,7 @@ export class DashboardComponent implements OnInit {
                   return '$' + value;
                 }
               }
-              
+
             },
             scaleLabel: {
               display: true,
@@ -235,9 +235,9 @@ export class DashboardComponent implements OnInit {
               fontStyle: 'bold',
               fontColor: '#000000',
             }
-            
+
           },
-          
+
         ],
           yAxes: [{
             ticks: {
@@ -247,7 +247,7 @@ export class DashboardComponent implements OnInit {
               //fontColor: '#000',
               fontStyle: 'bold',
               fontColor: '#000000',
-            
+
             },
             scaleLabel: {
               display: true,
@@ -256,16 +256,16 @@ export class DashboardComponent implements OnInit {
               fontStyle: 'bold',
               fontColor: '#000000',
             }
-            
+
           }]
         },
-        
-        
+
+
       }
     });
   }
   chartLine(name:string, tipo:string, label: string[], data: number[], nombres: string, currency: string){
-    
+
     return  new Chart(name, {
       type: tipo,
       data: {
@@ -328,7 +328,7 @@ export class DashboardComponent implements OnInit {
           //   // 'rgba(212, 132, 17, 0.52)',
           //   // 'rgba(212, 17, 68, 0.52)'
           // ],
-          
+
           // borderColor: [
           //   '#0F2FD0',//azul
           //   '#D00F19',//rojo
@@ -395,12 +395,12 @@ export class DashboardComponent implements OnInit {
         //     }
         //   }
         // },
-         
+
         legend: {
           display: false
         },
-        
-        
+
+
         scales: {
           xAxes:[{
             ticks:{
@@ -410,7 +410,7 @@ export class DashboardComponent implements OnInit {
               fontColor: '#000000',
               fontStyle: 'bold',
               minRotation: 45
-              
+
             },
             scaleLabel: {
               display: true,
@@ -419,7 +419,7 @@ export class DashboardComponent implements OnInit {
               fontStyle: 'bold',
               fontColor: '#000000',
             }
-            
+
           }],
           yAxes: [{
             ticks: {
@@ -443,14 +443,14 @@ export class DashboardComponent implements OnInit {
               fontStyle: 'bold',
               fontColor: '#000000',
             }
-            
+
           }]
         }
       }
     });
   }
   chartBar(name:string, tipo:string, label: string[], data: number[],nombres: string, currency:string){
-    
+
     return  new Chart(name, {
       type: tipo,
       data: {
@@ -496,7 +496,7 @@ export class DashboardComponent implements OnInit {
             // 'rgba(212, 132, 17, 0.52)',
             // 'rgba(212, 17, 68, 0.52)'
           ],
-          
+
           borderColor: [
             '#0F2FD0',//azul
             '#D00F19',//rojo
@@ -563,12 +563,12 @@ export class DashboardComponent implements OnInit {
         //     }
         //   }
         // },
-         
+
         legend: {
           display: false
         },
-        
-        
+
+
         scales: {
           xAxes:[{
             ticks:{
@@ -578,7 +578,7 @@ export class DashboardComponent implements OnInit {
               fontColor: '#000000',
               fontStyle: 'bold',
               minRotation: 45
-              
+
             },
             scaleLabel: {
               display: true,
@@ -587,7 +587,7 @@ export class DashboardComponent implements OnInit {
               fontStyle: 'bold',
               fontColor: '#000000',
             }
-            
+
           }],
           yAxes: [{
             ticks: {
@@ -611,7 +611,7 @@ export class DashboardComponent implements OnInit {
               fontStyle: 'bold',
               fontColor: '#000000',
             }
-            
+
           }]
         }
       }
@@ -736,13 +736,13 @@ export class DashboardComponent implements OnInit {
                       label += ': ' + currency[tooltipItem.index];
                   }
                   // if (data.datasets && data.datasets.length > 0 && data.datasets[tooltipItem.datasetIndex].data) {
-                  //   let locality = 'en-EN'; 
+                  //   let locality = 'en-EN';
                   //   let valor:any = 0
                   //   valor = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].toLocaleString(locality, {
                   //     minimumFractionDigits: 2,
                   //     maximumFractionDigits: 2
                   //   })
-                   
+
                   //   label += ': ' + valor;
                   //     //label += ': ' +(this.commonService.formatNumberDos(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] * 100).toFixed(2))
                   // }
@@ -768,7 +768,7 @@ export class DashboardComponent implements OnInit {
         //     }
         //   }
         // },
-         
+
       //   plugins: {
       //     tooltip: {
       //         callbacks: {
@@ -800,7 +800,7 @@ export class DashboardComponent implements OnInit {
               fontColor: '#000',
               fontStyle: 'bold',
               minRotation: 45
-              
+
             },
           }],
           yAxes: [{
@@ -814,11 +814,11 @@ export class DashboardComponent implements OnInit {
               padding: 0,
               fontColor: '#000',
               fontStyle: 'bold',
-              
-              
+
+
             },
           }],
-          
+
         }
       }
     });
@@ -861,5 +861,5 @@ export class DashboardComponent implements OnInit {
     // params = params.replace(/[,.]/g, function (m) { return m === ',' ? '.' : ','; });
     return params;
   }
-  
+
 }
