@@ -16,7 +16,7 @@ import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ButtonsModule } from "ngx-bootstrap/buttons";
 import { CalendarModule, DatePickerModule } from "@syncfusion/ej2-angular-calendars";
 // import { NgxDocViewerModule } from "ngx-doc-viewer"; // TEMPORAL: Comentar
-// import { NgxExtendedPdfViewerModule } from "ngx-extended-pdf-viewer"; // TEMPORAL: Comentar
+import { NgxExtendedPdfViewerModule } from "ngx-extended-pdf-viewer";
 import { TreeViewModule } from "@syncfusion/ej2-angular-navigations";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { NgxPrintModule } from "ngx-print";
@@ -177,7 +177,7 @@ import { TreeTableModule } from 'primeng/treetable';
         NgxPrintModule,
         InfiniteScrollModule,
         TreeViewModule,
-        // NgxExtendedPdfViewerModule, // COMENTADO: Problemas con Angular 19
+        NgxExtendedPdfViewerModule,
         // NgxDocViewerModule, // COMENTADO: Problemas con Angular 19
         DatePickerModule,
         AppMaterialModule,
@@ -260,7 +260,7 @@ import { TreeTableModule } from 'primeng/treetable';
         FlatpickrModule,
         NgxPrintModule,
         ImprimirRolComponent,
-        // NgxExtendedPdfViewerModule, // COMENTADO
+        NgxExtendedPdfViewerModule,
         // NgxDocViewerModule, // COMENTADO
         BusqProveedorComponent,
         GeneraPagoComponent,
