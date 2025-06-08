@@ -58,7 +58,7 @@ import { ReportNotaDebitoComponent } from "src/app/view/cartera/cobranza/nota-de
 import { ReportNotaDebitoInvComponent } from "../../view/inventario/compras/nota-debito/report-nota-debito/report-nota-debito.component";
 import { ShowCuentasInvComponent } from "../../view/inventario/compras/nota-debito/show-cuentas/show-cuentas.component";
 import { ListadoRepComponent } from "../../view/inventario/compras/nota-debito/report-nota-debito/listado-rep/listado-rep.component";
-// import { NgxEditorModule } from "ngx-editor"; // TEMPORAL: Comentar
+//import { NgxEditorModule } from "ngx-editor"; // TEMPORAL: Comentar
 import { VistaClientesComponent } from "../../view/comercializacion/facturacion/fac-electronica/vista-clientes/vista-clientes.component";
 import { IngChqProtestadoComponent } from "src/app/view/caja-banco/cuentas/cheque-protestado/ing-chq-protestado/ing-chq-protestado.component";
 import { InfoClienteComponent } from "src/app/view/caja-banco/cuentas/cheque-protestado/info-cliente/info-cliente.component";
