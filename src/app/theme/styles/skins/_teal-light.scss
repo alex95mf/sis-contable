@@ -2,8 +2,8 @@
 
 $teal-light-theme: (
   color: (
-    primary: mat.$teal-palette,
-    secondary: mat.$deep-orange-palette, // antes era 'accent'
+    primary: mat.$cyan-palette,
+    //secondary: mat.$deep-orange-palette, // antes era 'accent'
     tertiary: mat.$red-palette,          // antes era 'warn'
     theme-type: light,
   ),

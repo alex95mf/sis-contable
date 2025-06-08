@@ -7,10 +7,18 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
-@import "../node_modules/dragula/dist/dragula.min.css";
-@import "../node_modules/@swimlane/ngx-datatable/themes/material.css";
+
+// @import "../node_modules/dragula/dist/dragula.min.css";
+// @import "../node_modules/@swimlane/ngx-datatable/themes/material.css";
+// @import "../node_modules/@swimlane/ngx-datatable/assets/icons.css";
+// @import "../node_modules/leaflet/dist/leaflet.css";
 @import "../node_modules/@swimlane/ngx-datatable/assets/icons.css";
-@import "../node_modules/leaflet/dist/leaflet.css";
+@import "../node_modules/@swimlane/ngx-datatable/themes/material.css";
+
+@import 'dragula/dist/dragula.min.css';
+// @import '@swimlane/ngx-datatable/themes/material.css';
+// @import '@swimlane/ngx-datatable/assets/icons.css';
+@import 'leaflet/dist/leaflet.css';
 
 @import "app/theme/styles/base";
 @import "app/theme/styles/spaces";
