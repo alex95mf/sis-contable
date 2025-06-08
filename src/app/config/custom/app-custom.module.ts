@@ -15,7 +15,7 @@ import { provideCharts, withDefaultRegisterables, BaseChartDirective } from 'ng2
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ButtonsModule } from "ngx-bootstrap/buttons";
 import { CalendarModule, DatePickerModule } from "@syncfusion/ej2-angular-calendars";
-// import { NgxDocViewerModule } from "ngx-doc-viewer"; // TEMPORAL: Comentar
+import { NgxDocViewerModule } from "ngx-doc-viewer";
 import { NgxExtendedPdfViewerModule } from "ngx-extended-pdf-viewer";
 import { TreeViewModule } from "@syncfusion/ej2-angular-navigations";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
@@ -178,7 +178,7 @@ import { TreeTableModule } from 'primeng/treetable';
         InfiniteScrollModule,
         TreeViewModule,
         NgxExtendedPdfViewerModule,
-        // NgxDocViewerModule, // COMENTADO: Problemas con Angular 19
+        NgxDocViewerModule,
         DatePickerModule,
         AppMaterialModule,
         NgxSpinnerModule,
@@ -261,7 +261,7 @@ import { TreeTableModule } from 'primeng/treetable';
         NgxPrintModule,
         ImprimirRolComponent,
         NgxExtendedPdfViewerModule,
-        // NgxDocViewerModule, // COMENTADO
+        NgxDocViewerModule,
         BusqProveedorComponent,
         GeneraPagoComponent,
         ImprimirComponent,
