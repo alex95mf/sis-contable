@@ -58,7 +58,7 @@ import { ReportNotaDebitoComponent } from "src/app/view/cartera/cobranza/nota-de
 import { ReportNotaDebitoInvComponent } from "../../view/inventario/compras/nota-debito/report-nota-debito/report-nota-debito.component";
 import { ShowCuentasInvComponent } from "../../view/inventario/compras/nota-debito/show-cuentas/show-cuentas.component";
 import { ListadoRepComponent } from "../../view/inventario/compras/nota-debito/report-nota-debito/listado-rep/listado-rep.component";
-//import { NgxEditorModule } from "ngx-editor"; // TEMPORAL: Comentar
+import { NgxEditorModule } from "ngx-editor";
 import { VistaClientesComponent } from "../../view/comercializacion/facturacion/fac-electronica/vista-clientes/vista-clientes.component";
 import { IngChqProtestadoComponent } from "src/app/view/caja-banco/cuentas/cheque-protestado/ing-chq-protestado/ing-chq-protestado.component";
 import { InfoClienteComponent } from "src/app/view/caja-banco/cuentas/cheque-protestado/info-cliente/info-cliente.component";
@@ -200,11 +200,43 @@ import { TreeTableModule } from 'primeng/treetable';
         ProgressSpinnerModule,
         TreeTableModule,
 
-        // NgxEditorModule.forRoot({ // COMENTADO: Problemas con Angular 19
-        //     locals: {
-        //         // ... configuración
-        //     },
-        // })
+        NgxEditorModule.forRoot({
+            locals: {
+                // menu
+                bold: 'Negrita',
+                italic: 'Cursiva',
+                code: 'Codigo',
+                underline: 'Subrayar',
+                strike: 'Rayado',
+                blockquote: 'Sangria',
+                bullet_list: 'Lista de viñetas',
+                ordered_list: 'Lista ordenada',
+                heading: 'Tamaño Texto',
+                h1: 'Encabezado 1',
+                h2: 'Encabezado 2',
+                h3: 'Encabezado 3',
+                h4: 'Encabezado 4',
+                h5: 'Encabezado 5',
+                h6: 'Encabezado 6',
+                align_left: 'Alinear Izquierda',
+                align_center: 'Alinear Centro',
+                align_right: 'Alinear Derecha',
+                align_justify: 'Justificar',
+                text_color: 'Color de texto',
+                background_color: 'Color de fondo',
+                insertLink: 'Insertar Link',
+                removeLink: 'Remover Link',
+                insertImage: 'Insertar Imagen',
+                // pupups, forms, others...
+                url: 'URL',
+                text: 'Texto',
+                openInNewTab: 'Abrir nueva pestaña',
+                insert: 'Insertar',
+                altText: 'Texto',
+                title: 'Titulo',
+                remove: 'Por defecto',
+            },
+        })
     ],
     exports: [
         CommonModule,
@@ -250,7 +282,7 @@ import { TreeTableModule } from 'primeng/treetable';
         ReportNotaDebitoInvComponent,
         ListadoRepComponent,
         NgxBarcode6Module,
-        // NgxEditorModule, // COMENTADO
+        NgxEditorModule,
         VistaClientesComponent,
         IngChqProtestadoComponent,
         InfoClienteComponent,
