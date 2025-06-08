@@ -9,7 +9,7 @@ import {
 } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ToastrModule } from "ngx-toastr";
-// import { FileUploadModule } from "ng2-file-upload"; // TEMPORAL: Comentar
+import { FileUploadModule } from "ng2-file-upload";
 import { DatePipe } from "@angular/common";
 import { provideCharts, withDefaultRegisterables, BaseChartDirective } from 'ng2-charts';
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
@@ -168,7 +168,7 @@ import { TreeTableModule } from 'primeng/treetable';
         FormsModule,
         ReactiveFormsModule,
         NgSelectModule,
-        // FileUploadModule, // COMENTADO: Problemas con Angular 19
+        FileUploadModule,
         BaseChartDirective,
         BsDropdownModule,
         ButtonsModule.forRoot(),
@@ -243,7 +243,7 @@ import { TreeTableModule } from 'primeng/treetable';
         CcInputGroupPrepend,
         NgbModule,
         NgSelectModule,
-        // FileUploadModule, // COMENTADO
+        FileUploadModule,
         FormsModule,
         ReactiveFormsModule,
         ButtonRadioActiveComponent,
