@@ -512,7 +512,7 @@ export class PagoAnticipadoComponent implements OnInit {
         this.selectCxP.paramCxP = this.lstParametrosCxP;
         this.selectPagoAnticipo.selectCxP = this.selectCxP;
 
-        console.log("this.selectPagoAnticipo: ", this.selectPagoAnticipo)
+        console.log("this.selectPagoAnticipo: ", this.selectPagoAnticipo);
 
         (this as any).mensajeSpinner = "Aplicando Pago Anticipado";
         this.lcargando.ctlSpinner(true);

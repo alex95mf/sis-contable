@@ -613,7 +613,7 @@ export class FacturasComponent implements OnInit {
 
     //new Date().toLocaleString("es-CO", { timeZone: "America/Bogota" })
 
-    // this.msgs2 = [
+    // (this.msgs2 as any) = [
     //   { severity: 'info', summary: '', detail: 'Para realizar el registro de venta se requiere asignar la codigo contable de la cuenta por cobrar.' }
     // ];
     this.messageService.add({ severity: 'info', summary: '', detail: 'Para realizar el registro de venta se requiere asignar la codigo contable de la cuenta por cobrar.' });

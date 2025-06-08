@@ -187,7 +187,7 @@ getTableReport() {
     codigo: this.codigo == 0 ? null : this.codigo,
     estado: this.estado == 3 ? null : this.estado,
     origen: this.origen == 0 ? null : this.origen,
-  }
+  };
   (this as any).mensajeSpinner = "Cargando...";
   this.lcargando.ctlSpinner(true);
   this.reportesSrv.dataActFijoDt(data).subscribe(res => {

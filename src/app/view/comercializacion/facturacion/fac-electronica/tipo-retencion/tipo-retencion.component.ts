@@ -17,7 +17,6 @@ import jsPDF from 'jspdf';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-import htmlToPdfmake from 'html-to-pdfmake';
 
 
 
@@ -40,7 +39,7 @@ export class TipoRetencionComponent implements OnInit {
   dtTrigger = new Subject();
 
   validaciones: ValidacionesFactory = new ValidacionesFactory();
-  
+
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
 
   parametros:any = {fechaDesde: "", fechaHasta: "", estadoSri: "PENDIENTE", idCliente: ""}

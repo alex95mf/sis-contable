@@ -498,7 +498,7 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
   ngOnInit(): void {
 
 
-    this.msgs1 = [
+    (this.msgs1 as any) = [
       {severity:'info', detail:'Al seleccionar un nuevo codigo de impuesto se vera afectuado solo cuando se de clic en actualizar.', closable:false}
     ];
 
@@ -958,7 +958,7 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
         }
       });
     }else{
-      this.msgs1 = [
+      (this.msgs1 as any) = [
         {severity:'error', detail:'No se a realizado cambio alguno, se debe aplicar algun cambio en los codigos de retención para continuar con la actualización', closable:false}
       ];
     }
@@ -968,7 +968,7 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
 
   ChangeFuente(event: any, dataelement, index) {
 
-    this.msgs1 = [
+    (this.msgs1 as any) = [
       {severity:'info', detail:'Al seleccionar un nuevo codigo de impuesto se vera afectuado solo cuando se de clic en actualizar.', closable:false}
     ];
 
@@ -982,7 +982,7 @@ export class CcModalEditarImpuestosComprasComponent  implements AfterViewChecked
 
   ChangeImpuestoIva(event: any, dataelement, index) {
 
-    this.msgs1 = [
+    (this.msgs1 as any) = [
       {severity:'info', detail:'Al seleccionar un nuevo codigo de impuesto se vera afectuado solo cuando se de clic en actualizar.', closable:false}
     ];
 

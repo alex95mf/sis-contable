@@ -4,7 +4,6 @@ import 'rxjs/add/operator/map';
 import * as moment from 'moment';
 //import * as io from 'socket.io-client';
 import io from 'socket.io-client';
-import * as SocketIOClient from 'socket.io-client';
 //import { io } from 'socket.io-client';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from './commonServices';

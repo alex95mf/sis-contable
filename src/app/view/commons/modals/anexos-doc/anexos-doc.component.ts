@@ -136,7 +136,7 @@ export class AnexosDocComponent implements OnInit {
     Swal.fire({
       title: "Atención!!",
       text: "Seguro no desea seleccionar un documento?",
-      type: 'error',
+      icon: 'error',
       showCancelButton: true,
       cancelButtonColor: '#DC3545',
       confirmButtonColor: '#13A1EA',

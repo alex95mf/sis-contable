@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules  } from '@angular/router'; 
-  
+import { Routes, RouterModule, PreloadAllModules  } from '@angular/router';
+
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
@@ -64,19 +64,19 @@ export const routes: Routes = [
         {
           path: 'plantillas',
           loadChildren: () => import('./view/plantillas/plantillas.module').then(m => m.PlantillasModule)
-        }, 
+        },
         {
           path: 'bancos',
           loadChildren: () => import('./view/caja-banco/caja-banco.module').then(m => m.CajaBancoModule)
-        }, 
+        },
         {
           path: 'contabilidad',
           loadChildren: () => import('./view/contabilidad/contabilidad.module').then(m => m.ContabilidadModule)
-        }, 
+        },
         {
           path: 'rrhh',
           loadChildren: () => import('./view/rrhh/rrhh.module').then(m => m.RrhhModule)
-        }, 
+        },
         {
           path: 'proveeduria',
           loadChildren: () => import('./view/proveeduria/proveeduria.module').then(m => m.ProveeduriaModule)
@@ -92,15 +92,15 @@ export const routes: Routes = [
         {
           path: 'comercializacion',
           loadChildren: () => import('./view/comercializacion/comercializacion.module').then(m => m.ComercializacionModule)
-        }, 
+        },
         {
           path: 'cartera',
           loadChildren: () => import('./view/cartera/cartera.module').then(m => m.CarteraModule)
-        }, 
+        },
         {
           path: 'panel',
           loadChildren: () => import('./view/panel-control/panel-control.module').then(m => m.PanelControlModule)
-        }, 
+        },
         {
           path: 'planificacion',
           loadChildren: () => import('./view/planificacion/planificacion.module').then(m => m.PlanificacionModule)
@@ -121,7 +121,7 @@ export const routes: Routes = [
           path: 'tesoreria',
           loadChildren: () => import('./view/tesoreria/tesoreria.module').then(m => m.TesoreriaModule)
         },
-        
+
         {
           path: 'cobros',
           loadChildren: () => import('./view/cobros/cobros.module').then(m => m.CobrosModule)
@@ -163,19 +163,19 @@ export const routes: Routes = [
       /* {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
-      }, 
+      },
       {
         path: 'sistemas',
         loadChildren: () => import('./views/sistemas/sistemas.module').then(m => m.SistemasModule)
-      }, 
+      },
       {
         path: 'contabilidad',
         loadChildren: () => import('./views/contabilidad/contabilidad.module').then(m => m.ContabilidadModule)
-      }, 
+      },
       {
         path: 'administracion',
         loadChildren: () => import('./views/administracion/administracion.module').then(m => m.AdministracionModule)
-      }, 
+      },
       {
         path: 'inventario',
         loadChildren: () => import('./views/inventario/inventario.module').then(m => m.InventarioModule)
@@ -191,19 +191,19 @@ export const routes: Routes = [
       {
         path: 'bancos',
         loadChildren: () => import('./views/banco/banco.module').then(m => m.BancoModule)
-      }, 
+      },
       {
         path: 'cartera',
         loadChildren: () => import('./views/cartera/cartera.module').then(m => m.CarteraModule)
-      }, 
+      },
       {
         path: 'cxp',
         loadChildren: () => import('./views/pagos/pagos.module').then(m => m.PagosModule)
-      }, 
+      },
       {
         path: 'proveeduria',
         loadChildren: () => import('./views/proveduria/proveduria.module').then(m => m.ProveduriaModule)
-      }, 
+      },
       {
         path: 'importacion',
         loadChildren: () => import('./views/importacion/importacion.module').then(m => m.ImportacionModule)
@@ -216,13 +216,12 @@ export const routes: Routes = [
     },
     { path: '**', component: P404Component }
   ];
- 
+
 
 @NgModule({
     imports: [
         RouterModule.forRoot(routes, {
             preloadingStrategy: PreloadAllModules, // <- comment this line for activate lazy load
-            relativeLinkResolution: 'legacy',
             // useHash: true
         })
     ],

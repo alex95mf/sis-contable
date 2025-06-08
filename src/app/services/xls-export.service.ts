@@ -130,7 +130,7 @@ export class XlsExportService {
     let wb = new Workbook()
     let ws = wb.addWorksheet('rep')
     console.log(rep);
-    
+
     //let reverse = [];
     //reverse = rep.reverse();
     const STYLE_HEADER_AMARILLO : Style = {
@@ -191,7 +191,7 @@ export class XlsExportService {
       }
       });
 
-    
+
     ws.columns = [
       { header: '', key: 'col1'},
       { header: 'MONTO', key: 'col2'},
@@ -210,7 +210,7 @@ export class XlsExportService {
       { header: 'DICIEMBRE', key: 'col15'},
       { header: 'TOTAL', key: 'col16'},
     ]
-    
+
     ws.columns.forEach(column => {
       column.width = column.header.length < 25 ? 25 : column.header.length
     })
@@ -232,22 +232,22 @@ export class XlsExportService {
     ws.getCell('O1').style = STYLE_HEADER_AMARILLO
     ws.getCell('P1').style = STYLE_HEADER_AMARILLO
 
-    ws.getColumn(2).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(3).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(4).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(5).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(11).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(12).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(13).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(14).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(15).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(16).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    
+    ws.getColumn(2).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(3).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(4).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(5).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(11).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(12).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(13).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(14).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(15).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(16).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+
 
 
 
@@ -260,14 +260,14 @@ export class XlsExportService {
         FileSaver.saveAs(blob, filename + new Date().valueOf() + EXCEL_EXTENSION)
       }
     )
-  
+
   }
 
   exportReporteFlujoCaja(filename: string, rep: any) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('rep')
     console.log(rep);
-    
+
     //let reverse = [];
     //reverse = rep.reverse();
     const STYLE_HEADER_AMARILLO : Style = {
@@ -328,7 +328,7 @@ export class XlsExportService {
       }
       });
 
-    
+
     ws.columns = [
       { header: '', key: 'col1'},
       { header: 'ENERO', key: 'col2'},
@@ -345,7 +345,7 @@ export class XlsExportService {
       { header: 'DICIEMBRE', key: 'col13'},
       { header: 'TOTAL', key: 'col14'},
     ]
-    
+
     ws.columns.forEach(column => {
       column.width = column.header.length < 25 ? 25 : column.header.length
     })
@@ -365,19 +365,19 @@ export class XlsExportService {
     ws.getCell('M1').style = STYLE_HEADER_AMARILLO
     ws.getCell('N1').style = STYLE_HEADER_AMARILLO
 
-    ws.getColumn(2).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(3).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(4).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(5).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+    ws.getColumn(2).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(3).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(4).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(5).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-    ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(11).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(12).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(13).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(14).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+    ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(11).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(12).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(13).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(14).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
 
 
     // Guarda el archivo
@@ -387,13 +387,13 @@ export class XlsExportService {
         FileSaver.saveAs(blob, filename + new Date().valueOf() + EXCEL_EXTENSION)
       }
     )
-  
+
   }
   exportPlantillaFlujoCaja(filename: string, rep: any) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('rep')
     console.log(rep);
-    
+
     //let reverse = [];
     //reverse = rep.reverse();
     const STYLE_HEADER_AMARILLO : Style = {
@@ -456,7 +456,7 @@ export class XlsExportService {
       // }
       });
 
-    
+
     ws.columns = [
       { header: 'DESCRIPCION', key: 'col1'},
       { header: 'ENERO', key: 'col2'},
@@ -473,7 +473,7 @@ export class XlsExportService {
       { header: 'DICIEMBRE', key: 'col13'},
       // { header: 'TOTAL', key: 'col14'},
     ]
-    
+
     ws.columns.forEach(column => {
       column.width = column.header.length < 25 ? 25 : column.header.length
     })
@@ -493,19 +493,19 @@ export class XlsExportService {
     ws.getCell('M1').style = STYLE_HEADER_AMARILLO
     // ws.getCell('N1').style = STYLE_HEADER_AMARILLO
 
-    ws.getColumn(2).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(3).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(4).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(5).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+    ws.getColumn(2).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(3).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(4).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(5).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-    ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(11).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(12).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(13).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    // ws.getColumn(14).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+    ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(11).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(12).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(13).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    // ws.getColumn(14).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
 
 
     // Guarda el archivo
@@ -515,7 +515,7 @@ export class XlsExportService {
         FileSaver.saveAs(blob, filename + new Date().valueOf() + EXCEL_EXTENSION)
       }
     )
-  
+
   }
 
   exportReportePOA(filename: string, data: any) {
@@ -928,7 +928,7 @@ export class XlsExportService {
       numFmt : null,
       protection: null,
     }
-    
+
 
 
     ws.columns = [
@@ -1035,8 +1035,8 @@ export class XlsExportService {
     ws.mergeCells('A3:B3'); ws.mergeCells('C3:U3')
     ws.mergeCells('A5:B5'); ws.mergeCells('C5:U5')
     ws.mergeCells('A7:B7'); ws.mergeCells('C7:U7')
-    
-  
+
+
 
     ws.getCell('A1').style = {
       alignment: {
@@ -1139,7 +1139,7 @@ export class XlsExportService {
       { header: 'Lote', key: 'lote', width: 8 },
       { header: 'Fecha Caducidad', key: 'fecha_caducidad', width: 8 },
       { header: 'Cantidad Disponible', key: 'disponible', width: 8 },
-  
+
     ]
 
     ws.insertRows(2, data.rows)
@@ -1153,10 +1153,10 @@ export class XlsExportService {
     ws.getCell('G1').style = STYLE_HEADER_AZUL
     ws.getCell('H1').style = STYLE_HEADER_AZUL
     ws.getCell('I1').style = STYLE_HEADER_AZUL
-   
+
 
     // Escribir Cabecera
-  
+
     ws.insertRow(1, [''])
     ws.insertRow(1, ['ESTADO:','',data.estado])
     ws.insertRow(1, [''])
@@ -1174,8 +1174,8 @@ export class XlsExportService {
     ws.mergeCells('B5:C5'); ws.mergeCells('D5:E5')
     ws.mergeCells('A6:I6')
     ws.mergeCells('B7:C7'); ws.mergeCells('D7:E7')
-    
-  
+
+
 
     ws.getCell('A1').style = {
       alignment: {
@@ -1277,8 +1277,8 @@ export class XlsExportService {
       { header: 'Total', key: 'cantidad', width: 8 },
       { header: 'Fecha última compra', key: 'fecha_ultima_compra', width: 15 },
       { header: 'Valor última compra', key: 'precio_ultima_compra', width: 15 },
-    
-  
+
+
     ]
 
     ws.insertRows(2, data.rows)
@@ -1294,7 +1294,7 @@ export class XlsExportService {
     ws.getCell('H1').style = STYLE_HEADER_AZUL
 
     // Escribir Cabecera
-  
+
     ws.insertRow(1, [''])
     ws.insertRow(1, ['STOCK:',data.stock])
     ws.insertRow(1, [''])
@@ -1317,8 +1317,8 @@ export class XlsExportService {
     ws.mergeCells('A8:B8'); ws.mergeCells('C8:U8')
     ws.mergeCells('A9:B9'); ws.mergeCells('C9:E9')
     ws.mergeCells('A10:B10'); ws.mergeCells('C10:U10')
-    
-  
+
+
 
     ws.getCell('A1').style = {
       alignment: {
@@ -1443,7 +1443,7 @@ export class XlsExportService {
     ws.getCell('M1').style = STYLE_HEADER_AZUL
 
     // Escribir Cabecera
-  
+
     ws.insertRow(1, [''])
     ws.insertRow(1, ['STOCK:',data.stock])
     ws.insertRow(1, [''])
@@ -1466,8 +1466,8 @@ export class XlsExportService {
     ws.mergeCells('A8:B8'); ws.mergeCells('C8:U8')
     ws.mergeCells('A9:B9'); ws.mergeCells('C9:E9')
     ws.mergeCells('A10:B10'); ws.mergeCells('C10:U10')
-    
-  
+
+
 
     ws.getCell('A1').style = {
       alignment: {
@@ -1559,7 +1559,7 @@ export class XlsExportService {
       numFmt : null,
       protection: null,
     }
-   
+
 
     ws.columns = [
       { header: 'Código Producto', key: 'codigoproducto', width: 20 },
@@ -1577,17 +1577,17 @@ export class XlsExportService {
       { header: 'Final', key: 'fin_stock', width: 20 },
       { header: 'Costo', key: 'fin_costo', width: 20 },
       { header: 'Total', key: 'fin_costo_total', width: 20 },
-    
-  
+
+
     ]
-    
+
     ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(11).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(12).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(14).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(15).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-   
+
 
     // data.rows.forEach(element => {
     //   Object.assign(element, { ini_costo:Number(element.ini_costo),
@@ -1597,7 +1597,7 @@ export class XlsExportService {
     //                            fin_costo:Number(element.fin_costo),
     //                            fin_costo_total:Number(element.fin_costo_total)
     //   })}
-    //  ); 
+    //  );
 
     ws.insertRows(2, data.rows)
 
@@ -1617,7 +1617,7 @@ export class XlsExportService {
     ws.getCell('N1').style = STYLE_HEADER_AZUL
     ws.getCell('O1').style = STYLE_HEADER_AZUL
     // Escribir Cabecera
-  
+
     ws.insertRow(1, [''])
     ws.insertRow(1, ['STOCK:',data.stock])
     ws.insertRow(1, [''])
@@ -1640,8 +1640,8 @@ export class XlsExportService {
     ws.mergeCells('A8:B8'); ws.mergeCells('C8:U8')
     ws.mergeCells('A9:B9'); ws.mergeCells('C9:E9')
     ws.mergeCells('A10:B10'); ws.mergeCells('C10:U10')
-    
-  
+
+
 
     ws.getCell('A1').style = {
       alignment: {
@@ -1685,8 +1685,8 @@ export class XlsExportService {
         bold: true
       }
     }
-  
-  
+
+
 
     wb.xlsx.writeBuffer().then(
       data => {
@@ -1761,7 +1761,7 @@ export class XlsExportService {
       { header: 'Código Partida', key: 'codigo_presupuesto', width: 15 },
       { header: 'Nombre Partida', key: 'nombre_presupuesto', width: 20 },
     ]
-        // console.log(data);   
+        // console.log(data);
         data.rows.forEach(element => {
           if(element.estado == 'A'){ Object.assign(element, { estado:'Aprobado'})}
           else if(element.estado == 'X'){ Object.assign(element, { estado:'Anulado'})}
@@ -1769,7 +1769,7 @@ export class XlsExportService {
           else if(element.estado == 'C'){ Object.assign(element, { estado:'Cancelado'})}
           else if(element.estado == 'V'){ Object.assign(element, { estado:'Convenio'})}
 
-        });              
+        });
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -1793,9 +1793,9 @@ export class XlsExportService {
     ws.getColumn(5).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-    
 
-   
+
+
 
     wb.xlsx.writeBuffer().then(
       data => {
@@ -1849,7 +1849,7 @@ export class XlsExportService {
       numFmt : null,
       protection: null,
     }
-   
+
     ws.columns = [
       { header: 'No.Documento', key: 'documento', width: 20 },
       { header: 'Razon Social', key: 'razon_social', width: 20 },
@@ -1860,23 +1860,23 @@ export class XlsExportService {
       { header: 'Tipo de Pago', key: 'tipo_pago', width: 15 },
       { header: 'Estado', key: 'estado', width: 10 },
     ]
-        // console.log(data);   
+        // console.log(data);
       data.rows.forEach(element => {
         Object.assign(element, { total:parseFloat(element.total), saldo:parseFloat(element.saldo)})
-        
+
         if(element.estado == 'A'){ Object.assign(element, { estado:'Aprobado'})}
         else if(element.estado == 'X'){ Object.assign(element, { estado:'Anulado'})}
         else if(element.estado == 'E'){ Object.assign(element, { estado:'Emitido'})}
         else if(element.estado == 'C'){ Object.assign(element, { estado:'Cancelado'})}
         else if(element.estado == 'V'){ Object.assign(element, { estado:'Convenio'})}
-  
-      });              
+
+      });
     ws.insertRows(2, data.rows)
 
     ws.getColumn(4).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
     ws.getColumn(5).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
-  
-   
+
+
 
     wb.xlsx.writeBuffer().then(
       data => {
@@ -1930,7 +1930,7 @@ export class XlsExportService {
       numFmt : null,
       protection: null,
     }
-   
+
     ws.columns = [
       { header: 'No.Documento', key: 'documento', width: 20 },
       { header: 'No.Orden Pago', key: 'orden_pago', width: 20 },
@@ -1948,7 +1948,7 @@ export class XlsExportService {
       // { header: 'Observación', key: 'observacion', width: 10 },
       // { header: 'Tasa', key: 'tasa_nombre', width: 10 },
     ]
-      // console.log(data);   
+      // console.log(data);
       data.rows.forEach(element => {
         Object.assign(element, { total:parseFloat(element.total), saldo:parseFloat(element.saldo)})
         if(element.estado == 'A'){ Object.assign(element, { estado:'Aprobado'})}
@@ -1956,10 +1956,10 @@ export class XlsExportService {
         else if(element.estado == 'E'){ Object.assign(element, { estado:'Emitido'})}
         else if(element.estado == 'C'){ Object.assign(element, { estado:'Cancelado'})}
         else if(element.estado == 'V'){ Object.assign(element, { estado:'Convenio'})}
-  
-      });        
+
+      });
     ws.insertRows(2, data.rows)
-   
+
     ws.getColumn(6).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
     ws.getColumn(7).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
 
@@ -2016,7 +2016,7 @@ export class XlsExportService {
       protection: null,
     }
    if(data.tipo== 'TITULO'){
-   
+
     ws.columns = [
       { header: 'No.Documento', key: 'cobro', width: 20 },
       { header: 'Razon Social', key: 'razon_social', width: 20 },
@@ -2033,11 +2033,11 @@ export class XlsExportService {
       { header: 'Nombre Cuenta', key: 'cuenta_nombre', width: 8 },
       { header: 'Código Partida', key: 'codigo_presupuesto', width: 15 },
       { header: 'Nombre Partida', key: 'nombre_presupuesto', width: 20 },
-      
+
     ]
    }
   if(data.tipo== 'FORMAPAGO'){
- 
+
     ws.columns = [
       { header: 'No.Documento', key: 'cobro', width: 20 },
       { header: 'Razon Social', key: 'razon_social', width: 20 },
@@ -2054,7 +2054,7 @@ export class XlsExportService {
       { header: 'Nombre Cuenta', key: 'cuenta_nombre', width: 20},
       { header: 'Código Partida', key: 'codigo_presupuesto', width: 15 },
       { header: 'Nombre Partida', key: 'nombre_presupuesto', width: 20 },
-      
+
     ]
    }
    if(data.tipo== 'GENERAL'){
@@ -2074,10 +2074,10 @@ export class XlsExportService {
       { header: 'Nombre Cuenta', key: 'cuenta_nombre', width: 20},
       { header: 'Código Partida', key: 'codigo_presupuesto', width: 15 },
       { header: 'Nombre Partida', key: 'nombre_presupuesto', width: 20 },
-      
+
     ]
    }
-    
+
     data.rows.forEach(element => {
       if(element.estado == 'A'){ Object.assign(element, { estado:'Aprobado'})}
       else if(element.estado == 'X'){ Object.assign(element, { estado:'Anulado'})}
@@ -2085,11 +2085,11 @@ export class XlsExportService {
       else if(element.estado == 'C'){ Object.assign(element, { estado:'Cancelado'})}
       else if(element.estado == 'V'){ Object.assign(element, { estado:'Convenio'})}
 
-    }); 
-        // console.log(data);   
-                   
+    });
+        // console.log(data);
+
     ws.insertRows(2, data.rows)
-   
+
 
     wb.xlsx.writeBuffer().then(
       data => {
@@ -2144,7 +2144,7 @@ export class XlsExportService {
       numFmt : null,
       protection: null,
     }
-    
+
     ws.columns = [
       { header: 'Número', key: 'numero_regla', width: 20 },
       { header: 'Fecha', key: 'fecha', width: 20 },
@@ -2153,12 +2153,12 @@ export class XlsExportService {
       { header: 'Tipo Movimiento', key: 'tipo_movimiento', width: 8 },
       { header: 'Debe', key: 'valor_debe_regla', width: 8 },
       { header: 'Haber', key: 'valor_haber_regla', width: 8 },
-    
+
     ]
-        // console.log(data);   
-                   
+        // console.log(data);
+
     ws.insertRows(2, data.rows)
-   
+
 
     wb.xlsx.writeBuffer().then(
       data => {
@@ -2225,8 +2225,8 @@ export class XlsExportService {
       { header: 'Código Partida', key: 'codigo_partida', width: 20 },
       { header: 'Partida', key: 'partida', width: 20 },
       { header: 'valor', key: 'valor_partida', width: 20 },
-    
-  
+
+
     ]
 
     ws.insertRows(2, data.rows)
@@ -2240,7 +2240,7 @@ export class XlsExportService {
     // ws.getCell('G1').style = STYLE_HEADER_AZUL
 
     // Escribir Cabecera
-  
+
     // ws.insertRow(1, [''])
     // ws.insertRow(1, ['ESTADO:','',data.estado])
     // ws.insertRow(1, [''])
@@ -2258,8 +2258,8 @@ export class XlsExportService {
     // ws.mergeCells('B5:C5'); ws.mergeCells('D5:E5')
     // ws.mergeCells('A6:G6')
     // ws.mergeCells('B7:C7'); ws.mergeCells('D7:E7')
-    
-  
+
+
 
     // ws.getCell('A1').style = {
     //   alignment: {
@@ -2307,12 +2307,12 @@ export class XlsExportService {
     )
 
   }
-  
+
   public exportFlujoEfectivo(filename: string, rep: any) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('rep')
     console.log(rep);
-    
+
     //let reverse = [];
     //reverse = rep.reverse();
     const STYLE_HEADER_AMARILLO : Style = {
@@ -2373,7 +2373,7 @@ export class XlsExportService {
       }
       });
 
-    
+
     ws.columns = [
       { header: 'CUENTA', key: 'col1'},
       { header: 'CONCEPTO', key: 'col2'},
@@ -2391,7 +2391,7 @@ export class XlsExportService {
       { header: 'DICIEMBRE', key: 'col14'},
       { header: 'TOTAL', key: 'col15'},
     ]
-    
+
     ws.columns.forEach(column => {
       column.width = column.header.length < 25 ? 25 : column.header.length
     })
@@ -2419,7 +2419,7 @@ export class XlsExportService {
         FileSaver.saveAs(blob, filename + new Date().valueOf() + EXCEL_EXTENSION)
       }
     )
-  
+
   }
   public exportFormularioCientoTres(data: any, filename: string) {
     let wb = new Workbook()
@@ -2458,9 +2458,9 @@ export class XlsExportService {
 
     ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(9).numFmt = '0.00%';
-    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-   
- 
+    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -2500,11 +2500,11 @@ export class XlsExportService {
     ws.getCell('J1').style = {font: {bold: true}}
     ws.getCell('K1').style = {font: {bold: true}}
     ws.getCell('L1').style = {font: {bold: true}}
-    ws.getCell('M1').style = {font: {bold: true}} 
+    ws.getCell('M1').style = {font: {bold: true}}
 
     ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(9).numFmt = '0.00%';
-    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
 
     wb.xlsx.writeBuffer().then(
       data => {
@@ -2534,8 +2534,8 @@ export class XlsExportService {
       { header: 'Banco', key: 'entidad', width: 10 },
       { header: 'Tipo Cuenta', key: 'tipo_cuenta', width: 10 },
       { header: 'Estado', key: 'estado', width: 10 },
-    
-     
+
+
     ]
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
@@ -2566,7 +2566,7 @@ export class XlsExportService {
   public exportConsultaContrataciones(data: any, filename: string) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('Contrataciones')
-    
+
     ws.columns = [
       { header: 'Código', key: 'codigo', width: 10 },
       { header: 'Tipo Regimen', key: 'tipo_regimen', width: 30 },
@@ -2635,7 +2635,7 @@ export class XlsExportService {
   public exportConsultaCataElectronico(data: any, filename: string) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('Catalogo Eletrónico')
-    
+
     ws.columns = [
       { header: 'Solicitud', key: 'id_solicitud', width: 10 },
       { header: 'Nombre Proceso', key: 'nombre_proceso', width: 30 },
@@ -2660,7 +2660,7 @@ export class XlsExportService {
     ws.getCell('H1').style = {font: {bold: true}}
     ws.getCell('I1').style = {font: {bold: true}}
     ws.getCell('J1').style = {font: {bold: true}}
-    
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -2673,7 +2673,7 @@ export class XlsExportService {
   public exportConsultaInfimas(data: any, filename: string) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('Infimas')
-    
+
     ws.columns = [
       { header: 'Requiriente', key: 'requiriente', width: 10 },
       { header: 'No. Oficio', key: 'nro_oficio', width: 30 },
@@ -2720,7 +2720,7 @@ export class XlsExportService {
     ws.getCell('S1').style = {font: {bold: true}}
     ws.getCell('T1').style = {font: {bold: true}}
     ws.getCell('U1').style = {font: {bold: true}}
-   
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -2729,12 +2729,12 @@ export class XlsExportService {
     )
 
   }
-  
+
   public exportAsExcelFile(json: any[], filename: string) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('data')
 
-    
+
 
     // Se recibe un array de objetos
 
@@ -2776,7 +2776,7 @@ export class XlsExportService {
   public exportExcelCuentasCompras(data: any, filename: string) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('Cuentas')
-    
+
     ws.columns = [
       { header: 'Cuenta', key: 'cuenta_detalle', width: 20 },
       { header: 'Código', key: 'codigo', width: 30 },
@@ -2805,7 +2805,7 @@ export class XlsExportService {
       { header: 'Valor Rte IVA', key: 'retencion_iva', width: 20 },
 
     ]
-                        
+
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -2832,7 +2832,7 @@ export class XlsExportService {
     ws.getCell('W1').style = {font: {bold: true}}
     ws.getCell('X1').style = {font: {bold: true}}
     ws.getCell('Y1').style = {font: {bold: true}}
-    
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -2844,7 +2844,7 @@ export class XlsExportService {
   public exportExcelAsientoCompras(data: any, filename: string) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('Asiento')
-    
+
     ws.columns = [
       { header: 'Cuenta', key: 'account', width: 20 },
       { header: 'Nombre', key: 'name', width: 30 },
@@ -2858,7 +2858,7 @@ export class XlsExportService {
       { header: 'Partida presupuestaria', key: 'presupuesto', width: 20 },
       { header: 'Valor', key: 'valor_presupuesto', width: 10 },
     ]
-                        
+
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -2869,7 +2869,7 @@ export class XlsExportService {
     ws.getCell('G1').style = {font: {bold: true}}
     ws.getCell('H1').style = {font: {bold: true}}
     ws.getCell('I1').style = {font: {bold: true}}
-  
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -2918,7 +2918,7 @@ export class XlsExportService {
       numFmt : null,
       protection: null,
     }
-    
+
     ws.columns = [
       { header: 'Fecha', key: 'fecha', width: 20 },
       { header: 'Cuenta', key: 'codigo', width: 30 },
@@ -2932,7 +2932,7 @@ export class XlsExportService {
       { header: 'Saldo', key: 'saldo', width:  15},
     ]
 
-                  
+
     //ws.insertRows(2, data.rows)
 
     let i=2;
@@ -2973,8 +2973,8 @@ export class XlsExportService {
     ws.getCell('J1').style = {font: {bold: true}}
 
      //    Escribir Cabecera
-  
- 
+
+
     // ws.insertRow(1, ['','','CUENTA DESDE:',data.fecha_desde,'CUENTA HASTA:',data.fecha_hasta])
     ws.insertRow(1, [''])
     ws.insertRow(1, ['','','FECHA DESDE:',data.fecha_desde,'FECHA HASTA:',data.fecha_hasta])
@@ -2997,13 +2997,13 @@ export class XlsExportService {
     ws.mergeCells('A1:J1')
     ws.mergeCells('A2:J2')
     ws.mergeCells('A3:J3')
-    
-   
+
+
     ws.getColumn(8).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
     ws.getColumn(9).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
     ws.getColumn(10).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
-  
-  
+
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -3051,7 +3051,7 @@ export class XlsExportService {
       numFmt : null,
       protection: null,
     }
-    
+
     ws.columns = [
       { header: 'Fecha', key: 'fecha', width: 15 },
       { header: 'Tipo Movimiento', key: 'tipo_movimineto', width: 40 },
@@ -3061,25 +3061,25 @@ export class XlsExportService {
       { header: 'Saldo', key: 'saldo', width:  15},
     ]
 
-                  
+
     //ws.insertRows(2, data.rows)
 
     let i=2;
     let control_empleado = ''
-   
+
     let totalValor = data.rows.reduce((suma: number, x: any) => suma + parseFloat(x.valor), 0)
     let totalSaldo = data.rows.reduce((suma: number, x: any) => suma + parseFloat(x.saldo), 0)
     //let saldo_anterior = 0
     data.rows.forEach(element => {
       if(control_empleado!=element.emp_full_nombre){
-        
+
       //  saldo_anterior= parseFloat(element.saldo_inicial)
       control_empleado = element.emp_full_nombre
         ws.insertRow(i,[  '',element.emp_full_nombre,'','','','',''])
         ws.getCell('B'+i).style = {font: {bold: true}}
         ws.getCell('C'+i).style = {font: {bold: true}}
         ws.getCell('H'+i).style = {font: {bold: true}}
-        
+
         i=i+1;
       }
         // let totalValorEmp = element.rows.reduce((suma: number, x: any) => suma + parseFloat(x.valor), 0)
@@ -3088,15 +3088,15 @@ export class XlsExportService {
         ws.insertRow(i,[  element.fecha,
                           element.tipo_movimiento,
                           element.documento,
-                          element.detalle, 
+                          element.detalle,
                           parseFloat(element.valor),
                           parseFloat(element.saldo)])
        // ws.insertRow(i+1,[  '','','','','',totalValorEmp,totalSaldoEmp])
         i=i+1;
-       
 
-        
-       
+
+
+
     });
     ws.insertRow(i,[  '','','','',totalValor,totalSaldo])
 
@@ -3108,8 +3108,8 @@ export class XlsExportService {
     ws.getCell('E1').style = {font: {bold: true}}
     ws.getCell('F1').style = {font: {bold: true}}
      //    Escribir Cabecera
-  
- 
+
+
     // ws.insertRow(1, ['','','CUENTA DESDE:',data.fecha_desde,'CUENTA HASTA:',data.fecha_hasta])
     ws.insertRow(1, [''])
     ws.insertRow(1, ['','','FECHA DESDE:',data.fecha_desde,'FECHA HASTA:',data.fecha_hasta])
@@ -3132,12 +3132,12 @@ export class XlsExportService {
     ws.mergeCells('A1:J1')
     ws.mergeCells('A2:J2')
     ws.mergeCells('A3:J3')
-    
-   
+
+
     ws.getColumn(5).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-  
-  
+
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -3147,7 +3147,7 @@ export class XlsExportService {
 
   }
 
-  
+
 
   public exportExcelEstadoResultMensual(data: any, filename: string) {
     let wb = new Workbook()
@@ -3188,7 +3188,7 @@ export class XlsExportService {
       numFmt : null,
       protection: null,
     }
-    
+
     ws.columns = [
       { header: 'Código', key: 'codigo', width: 15 },
       { header: 'Cuenta', key: 'nombre', width: 40 },
@@ -3209,11 +3209,11 @@ export class XlsExportService {
     ]
 
 
-  
+
 
     // data.rows.forEach(e => {
-            
-    //   Object.assign(e, { 
+
+    //   Object.assign(e, {
     //     ene: e.ene < 0 ? e.ene * -1 : e.ene,
     //     feb: e.feb < 0 ? e.feb * -1 : e.feb,
     //     mar: e.mar < 0 ? e.mar * -1 : e.mar,
@@ -3227,12 +3227,12 @@ export class XlsExportService {
     //     nov: e.nov < 0 ? e.nov * -1 : e.nov,
     //     dic: e.dic < 0 ? e.dic * -1 : e.dic,
     //     total: e.total < 0 ? e.total * -1 : e.total});
-    //   })             
+    //   })
     ws.insertRows(2, data.rows)
 
     // data.rows.forEach(element => {
     //   if(element.nivel==2){
-        
+
     //     ws.getCell('A'+i).style = {font: {bold: true}}
     //     ws.getCell('C'+i).style = {font: {bold: true}}
     //     ws.getCell('A1').style = {font: {bold: true}}
@@ -3251,7 +3251,7 @@ export class XlsExportService {
     //     ws.getCell('N1').style = {font: {bold: true}}
     //     i=i+1;
     //   }
-       
+
     //     ws.insertRow(i,[  element.fecha,
     //                       element.codigo,
     //                       element.nom_cuenta,
@@ -3301,14 +3301,14 @@ export class XlsExportService {
     ws.insertRow(1, [''])
 
     ws.getCell('A2:N2').style = STYLE_HEADER_AZUL
-    
+
    // ws.getCell('A4:C4').style = STYLE_HEADER_DESCRIPCION
 
     // // // Formato
     ws.mergeCells('A2:N2')
     // ws.mergeCells('A2:J2')
     // ws.mergeCells('A3:J3')
-  
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -3357,7 +3357,7 @@ export class XlsExportService {
       numFmt : null,
       protection: null,
     }
-    
+
     ws.columns = [
       { header: 'Código', key: 'codigo', width: 15 },
       { header: 'Cuenta', key: 'nombre', width: 40 },
@@ -3376,7 +3376,7 @@ export class XlsExportService {
       { header: 'Total', key: 'total', width:  20},
     ]
 
-                  
+
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -3404,7 +3404,7 @@ export class XlsExportService {
        // // // Formato
     ws.mergeCells('A2:N2')
     ws.mergeCells('F4:H4')
-   
+
 
     ws.getColumn(3).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
     ws.getColumn(4).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
@@ -3471,8 +3471,8 @@ export class XlsExportService {
       protection: null,
     }
 
-   
-    
+
+
     ws.columns = [
       { header: 'Cédula', key: 'cedula', width: 20 },
       { header: 'Apellidos', key: 'apellidos', width: 30 },
@@ -3486,7 +3486,7 @@ export class XlsExportService {
       { header: 'Período Desde', key: 'periodo_desde', width: 15 },
       { header: 'Período Hasta', key: 'periodo_hasta', width:  15},
     ]
-   
+
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -3501,8 +3501,8 @@ export class XlsExportService {
     ws.getCell('K1').style = {font: {bold: true}}
 
      //    Escribir Cabecera
-  
- 
+
+
     // ws.insertRow(1, ['','','CUENTA DESDE:',data.fecha_desde,'CUENTA HASTA:',data.fecha_hasta])
     ws.insertRow(1, [''])
     ws.insertRow(1, ['','','FECHA DESDE:',data.fecha_desde,'FECHA HASTA:',data.fecha_hasta])
@@ -3528,10 +3528,10 @@ export class XlsExportService {
     ws.getColumn(5).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-    ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    
-  
-  
+    ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+
+
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -3581,14 +3581,14 @@ export class XlsExportService {
       protection: null,
     }
 
-   
-    
+
+
     ws.columns = [
       { header: 'Cédula', key: 'cedula', width: 20 },
       { header: 'Apellidos', key: 'apellidos', width: 30 },
       { header: 'Nombres', key: 'nombres', width: 30 },
       { header: 'Dias Trabajados', key: 'dias_trabajados', width: 10 },
-      
+
       { header: 'Total Ganado', key: 'total_ganado', width: 15 },
       { header: 'Total Devengado', key: 'total_devengado', width: 15 },
       { header: 'Retencion', key: 'retencion', width: 15 },
@@ -3597,7 +3597,7 @@ export class XlsExportService {
       { header: 'Período Desde', key: 'periodo_desde', width: 15 },
       { header: 'Período Hasta', key: 'periodo_hasta', width:  15},
     ]
-   
+
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -3612,8 +3612,8 @@ export class XlsExportService {
     ws.getCell('K1').style = {font: {bold: true}}
 
      //    Escribir Cabecera
-  
- 
+
+
     // ws.insertRow(1, ['','','CUENTA DESDE:',data.fecha_desde,'CUENTA HASTA:',data.fecha_hasta])
     ws.insertRow(1, [''])
     ws.insertRow(1, ['','','FECHA DESDE:',data.fecha_desde,'FECHA HASTA:',data.fecha_hasta])
@@ -3640,12 +3640,12 @@ export class XlsExportService {
     ws.getColumn(5).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
    // ws.getColumn(6).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
     ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-    //ws.getColumn(7).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000'; 
-    ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+    //ws.getColumn(7).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
+    ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-    
-  
-  
+
+
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -3698,8 +3698,8 @@ export class XlsExportService {
       protection: null,
     }
 
-   
-    
+
+
     ws.columns = [
       { header: 'NUMERO DE DOCUMENTO', key: 'num_doc', width: 20 },
       { header: 'CONCEPTO', key: 'concepto', width: 30 },
@@ -3716,10 +3716,10 @@ export class XlsExportService {
       { header: 'COBRADO PAGADO', key: 'cobrado_pagado', width:  15},
       { header: 'CODIGO PROGRAMA', key: 'cod_programa', width:  15},
       { header: 'NOMBRE PROGRAMA ', key: 'nombre_programa', width:  15},
-      
+
 
     ]
-   
+
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -3736,8 +3736,8 @@ export class XlsExportService {
     ws.getCell('M1').style = {font: {bold: true}}
 
      //    Escribir Cabecera
-  
- 
+
+
     // ws.insertRow(1, ['','','CUENTA DESDE:',data.fecha_desde,'CUENTA HASTA:',data.fecha_hasta])
 /*     ws.insertRow(1, [''])
     ws.insertRow(1, ['','','FECHA DESDE:',data.fecha_desde,'FECHA HASTA:',data.fecha_hasta])
@@ -3764,13 +3764,13 @@ export class XlsExportService {
   //  ws.getColumn(4).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
    // ws.getColumn(6).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
     ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-    //ws.getColumn(7).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000'; 
-   // ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    // ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(11).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(12).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
-    ws.getColumn(13).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+    //ws.getColumn(7).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
+   // ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    // ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(10).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(11).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(12).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
+    ws.getColumn(13).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
   /*  ws.getColumn(4).numFmt = '0.00'; // Formato de número con 2 decimales para la columna 4
  ws.getColumn(6).numFmt = '0.00'; // Formato de número con 2 decimales para la columna 6
 ws.getColumn(9).numFmt = '0.00'; // Formato de número con 2 decimales para la columna 9
@@ -3780,7 +3780,7 @@ ws.getColumn(12).numFmt = '0.00'; //  */
 
 const lastRow = ws.lastRow;
 lastRow.eachCell(cell => {cell.font = { bold: true };});
-  
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -3832,7 +3832,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       numFmt : null,
       protection: null,
     }
-    
+
     ws.columns = [
       { header: 'Fecha', key: 'fecha', width: 20 },
       { header: 'Tipo', key: 'tipo_movimiento', width: 30 },
@@ -3842,10 +3842,10 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       { header: 'Debe', key: 'debe', width: 20 },
       { header: 'Haber', key: 'haber', width: 20 },
       { header: 'Saldo', key: 'saldo', width: 20 },
-      
+
     ]
 
-    let i=2;            
+    let i=2;
     let saldo_anterior = 0
 
     saldo_anterior= parseFloat(data.rows[0].saldo_inicial)
@@ -3862,7 +3862,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.getCell('F1').style = {font: {bold: true}}
     ws.getCell('G1').style = {font: {bold: true}}
     ws.getCell('H1').style = {font: {bold: true}}
-    
+
     //    Escribir Cabecera
     ws.insertRow(1, [''])
     ws.insertRow(1, ['','','Empleado:',data.empleado])
@@ -3879,15 +3879,15 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.mergeCells('A1:H1')
     ws.mergeCells('A2:J2')
     ws.mergeCells('A3:J3')
-    
-   
+
+
     ws.getColumn(5).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
     ws.getColumn(6).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
     ws.getColumn(7).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
     ws.getColumn(8).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
 
-  
-  
+
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -3896,7 +3896,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     )
 
   }
-  
+
   public exportExcelAsientoCierre(data: any, filename: string) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('Asiento de Cierre')
@@ -3936,7 +3936,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       numFmt : null,
       protection: null,
     }
-    
+
     ws.columns = [
       { header: 'Fecha', key: 'fecha', width: 20 },
       { header: 'Cuenta Contable', key: 'cuenta_contable', width: 20 },
@@ -3950,9 +3950,9 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       { header: 'Valor', key: 'partida_presupuestaria_valor', width: 15 },
     ]
 
-                  
+
     ws.insertRows(2, data.rows)
-   
+
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
     ws.getCell('C1').style = {font: {bold: true}}
@@ -3963,7 +3963,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.getCell('H1').style = {font: {bold: true}}
     ws.getCell('I1').style = {font: {bold: true}}
     ws.getCell('J1').style = {font: {bold: true}}
-  
+
     // ws.insertRow(1, ['','','CUENTA DESDE:',data.fecha_desde,'CUENTA HASTA:',data.fecha_hasta])
     ws.insertRow(1, [''])
     ws.insertRow(1, ['','','FECHA:',data.fecha,''])
@@ -3975,18 +3975,18 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.getCell('C4').style = {font: {bold: true}}
     ws.getCell('C5').style = {font: {bold: true}}
     ws.getCell('C6').style = {font: {bold: true}}
-    
+
    // ws.getCell('A4:C4').style = STYLE_HEADER_DESCRIPCION
 
     // // // Formato
     ws.mergeCells('A1:J1')
     ws.mergeCells('A2:J2')
     ws.mergeCells('A3:J3')
-    
-   
+
+
     ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-  
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -3999,7 +3999,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
   public exportExcelRolGeneral(data: any, filename: string) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('Rol General')
-   
+
     const STYLE_HEADER_AZUL : Style = {
       alignment: {
         horizontal: 'center',
@@ -4037,21 +4037,21 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       protection: null,
     }
 
-   
-   
+
+
     let columns= [];
     data.cols.forEach(elem => {
       let data  = {
         header: elem.header,
         key: elem.field,
-        width:20 
+        width:20
       }
       columns.push(data)
     })
     ws.columns = columns;
     console.log(ws.columns)
-    
-    
+
+
     ws.insertRow(3, ['','','Elaborado por:','','','','Revisado por:','','','','Aprobado por:'])
    ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
@@ -4096,7 +4096,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.insertRow(1, [''])
 
     ws.getCell('A5:M5').style = STYLE_HEADER_AZUL
-   
+
     ws.mergeCells('A1:P1')
     ws.mergeCells('A2:P2')
     ws.mergeCells('A3:P3')
@@ -4104,9 +4104,9 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.mergeCells('A5:P5')
     ws.mergeCells('A6:P6')
     ws.mergeCells('A7:P7')
-   
-     
-    ws.getColumn(12).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+
+
+    ws.getColumn(12).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(13).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(14).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
     ws.getColumn(15).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
@@ -4138,13 +4138,13 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     lastRow.eachCell(cell => {cell.font = { bold: true };});
 
     this.getBase64Image('assets/img/logo_municipio.png', (base64Image: string) => {
-     
+
       const imageId = wb.addImage({
         base64: base64Image,
-        extension: 'png', 
+        extension: 'png',
       });
       ws.addImage(imageId, 'B2:B6');
-     
+
       wb.xlsx.writeBuffer().then((buffer: ArrayBuffer) => {
         const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         FileSaver.saveAs(blob, filename + new Date().valueOf() + EXCEL_EXTENSION)
@@ -4207,8 +4207,8 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       protection: null,
     }
 
-   
-    
+
+
     ws.columns = [
       { header: 'Codigo', key: 'codigo', width: 20 },
       { header: 'Num. de prestamo', key: 'num_orden', width: 20 },
@@ -4220,7 +4220,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       { header: 'Usuario Asignado', key: 'usuario_nombre', width: 20 },
       { header: 'Estado', key: 'estado_prestamo', width: 20 },
     ]
-   
+
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -4235,8 +4235,8 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.getCell('K1').style = {font: {bold: true}}
 
      //    Escribir Cabecera
-  
- 
+
+
     // ws.insertRow(1, ['','','CUENTA DESDE:',data.fecha_desde,'CUENTA HASTA:',data.fecha_hasta])
     ws.insertRow(1, [''])
     ws.insertRow(1, ['','','FECHA DESDE:',data.fecha_desde,'FECHA HASTA:',data.fecha_hasta])
@@ -4260,12 +4260,12 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
   //   ws.getColumn(5).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
   //  // ws.getColumn(6).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
   //   ws.getColumn(6).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-  //   //ws.getColumn(7).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000'; 
-  //   ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+  //   //ws.getColumn(7).numFmt = '"$"#,##0.0000;\-"$"#,##0.0000';
+  //   ws.getColumn(7).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
   //   ws.getColumn(8).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
-    
-  
-  
+
+
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -4315,8 +4315,8 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       protection: null,
     }
 
-   
-    
+
+
     ws.columns = [
       { header: 'No.Tramite', key: 'id_tramite', width: 10 },
       { header: 'Fecha', key: 'fecha', width: 20 },
@@ -4329,7 +4329,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       { header: 'Dias Transcurridos', key: 'dias_transcurridos', width: 20 },
       { header: 'Fecha Cierre', key: 'fecha_cierre', width: 20 },
     ]
-   
+
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -4344,8 +4344,8 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.getCell('K1').style = {font: {bold: true}}
 
      //    Escribir Cabecera
-  
- 
+
+
 
      ws.insertRow(1, [''])
      ws.insertRow(1, ['','','FECHA DESDE:',data.fecha_desde,'FECHA HASTA:',data.fecha_hasta])
@@ -4364,14 +4364,14 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.mergeCells('A2:J2')
     ws.mergeCells('A3:J3')
 
-  //  ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+  //  ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
 
-    ws.getColumn(9).numFmt = '#,##0;\-#,##0'; 
+    ws.getColumn(9).numFmt = '#,##0;\-#,##0';
 
 
-    
-  
-  
+
+
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -4421,23 +4421,23 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       protection: null,
     }
 
-   
-    
+
+
     ws.columns = [
-      
+
       { header: 'Fecha', key: 'fecha', width: 20 },
       { header: 'Cantidad', key: 'cantidad', width: 10 },
       { header: 'Tramite', key: 'nombre', width: 20 },
-   
+
       { header: 'Estado', key: 'nom_estado', width: 20 },
-  
+
       { header: 'Prioridad', key: 'nom_prioridad', width: 20 },
       { header: 'Usuario', key: 'nom_usuario', width: 20 },
       { header: 'Departamento', key: 'departamento', width: 20 },
-  
+
 
     ]
-   
+
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -4446,11 +4446,11 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.getCell('E1').style = {font: {bold: true}}
     ws.getCell('F1').style = {font: {bold: true}}
     ws.getCell('G1').style = {font: {bold: true}}
-  
+
 
      //    Escribir Cabecera
-  
- 
+
+
 
      ws.insertRow(1, [''])
      ws.insertRow(1, ['','','FECHA DESDE:',data.fecha_desde,'FECHA HASTA:',data.fecha_hasta])
@@ -4469,14 +4469,14 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.mergeCells('A2:J2')
     ws.mergeCells('A3:J3')
 
-  //  ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+  //  ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
 
-  //  ws.getColumn(9).numFmt = '#,##0;\-#,##0'; 
+  //  ws.getColumn(9).numFmt = '#,##0;\-#,##0';
 
 
-    
-  
-  
+
+
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -4526,8 +4526,8 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       protection: null,
     }
 
-   
-    
+
+
     ws.columns = [
       { header: 'Id', key: 'id', width: 10 },
       { header: 'No.Tramite', key: 'nro_tramite', width: 10 },
@@ -4538,7 +4538,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       { header: 'Responsable', key: 'responsable', width: 20 },
       { header: 'Dias de atraso', key: 'dias_atraso', width: 20 },
     ]
-   
+
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -4548,11 +4548,11 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.getCell('F1').style = {font: {bold: true}}
     ws.getCell('G1').style = {font: {bold: true}}
     ws.getCell('H1').style = {font: {bold: true}}
-   
+
 
      //    Escribir Cabecera
-  
- 
+
+
 
      ws.insertRow(1, [''])
      ws.insertRow(1, ['','','FECHA DESDE:',data.fecha_desde,'FECHA HASTA:',data.fecha_hasta])
@@ -4571,14 +4571,14 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.mergeCells('A2:H2')
     ws.mergeCells('A3:H3')
 
-  //  ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+  //  ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
 
-   // ws.getColumn(9).numFmt = '#,##0;\-#,##0'; 
+   // ws.getColumn(9).numFmt = '#,##0;\-#,##0';
 
 
-    
-  
-  
+
+
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })
@@ -4587,7 +4587,7 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     )
 
   }
-  
+
   public exportExcelReporteIce(data: any, filename: string) {
     let wb = new Workbook()
     let ws = wb.addWorksheet('Ice')
@@ -4628,8 +4628,8 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       protection: null,
     }
 
-   
-    
+
+
     ws.columns = [
       { header: 'Proveedor', key: 'razon_social', width: 50 },
       { header: 'Ruc', key: 'num_documento', width: 20 },
@@ -4639,9 +4639,9 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
       { header: 'Porcentaje Ice', key: 'porcentaje_ice', width: 20 },
       { header: 'Total Ice', key: 'total_ice', width: 20 },
       { header: 'Descripcion Ice', key: 'descripcion', width: 20 },
- 
+
     ]
-   
+
     ws.insertRows(2, data.rows)
     ws.getCell('A1').style = {font: {bold: true}}
     ws.getCell('B1').style = {font: {bold: true}}
@@ -4651,11 +4651,11 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.getCell('F1').style = {font: {bold: true}}
     ws.getCell('G1').style = {font: {bold: true}}
     ws.getCell('H1').style = {font: {bold: true}}
-   
+
 
      //    Escribir Cabecera
-  
- 
+
+
 
      ws.insertRow(1, [''])
      ws.insertRow(1, ['','','FECHA DESDE:',data.fecha_desde,'FECHA HASTA:',data.fecha_hasta])
@@ -4674,16 +4674,16 @@ lastRow.eachCell(cell => {cell.font = { bold: true };});
     ws.mergeCells('A2:J2')
     ws.mergeCells('A3:J3')
 
-  //  ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00'; 
+  //  ws.getColumn(9).numFmt = '"$"#,##0.00;\-"$"#,##0.00';
 
-    ws.getColumn(4).numFmt = '#,##0;\-#,##0'; 
-    ws.getColumn(5).numFmt = '#,##0;\-#,##0'; 
-    ws.getColumn(6).numFmt = '#,##0;\-#,##0'; 
+    ws.getColumn(4).numFmt = '#,##0;\-#,##0';
+    ws.getColumn(5).numFmt = '#,##0;\-#,##0';
+    ws.getColumn(6).numFmt = '#,##0;\-#,##0';
 
 
-    
-  
-  
+
+
+
     wb.xlsx.writeBuffer().then(
       data => {
         let blob = new Blob([data], { type: EXCEL_TYPE })

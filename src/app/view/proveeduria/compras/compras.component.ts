@@ -721,9 +721,9 @@ this.asientoAnticiposId = res.asiento_cabrelacionados?.id type Factura Proveedor
 
   ngOnInit(): void {
     this.mostrarCuentas = true;
-    new Date().toLocaleString("es-CO", { timeZone: "America/Bogota" })
+    new Date().toLocaleString("es-CO", { timeZone: "America/Bogota" });
 
-    this.msgs2 = [
+    (this.msgs2 as any) = [
       { severity: 'info', summary: '', detail: 'Para realizar el registro de compra se requiere asignar la codigo contable de la cuenta por pagar.' }
     ];
 

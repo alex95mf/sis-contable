@@ -1660,7 +1660,7 @@ cargar() {
     this.graph.fromJSON(this.graphData);
     this.paper.on('cell:pointerclick', (cellView, evt, x, y) => {
 
-      const cell = cellView.model;
+      const cell = (cellView as any).model;
       if (cell.isElement()) {
         // Realiza la acción deseada cuando se hace clic en la figura
       }
@@ -1670,7 +1670,7 @@ cargar() {
     this.graph.getElements().forEach((element) => {
       this.agregarBotonesAFigura(element);
     });
-    this.graph.on('add', (cell) => {
+    (this.graph as any).on('add', (cell) => {
       if (cell.isElement()) {
         this.agregarBotonesAFigura(cell);
       }
@@ -1679,7 +1679,7 @@ cargar() {
 
     console.log('datos del gráfico :', simplifiedGraphData);
 
-    this.paper.el.addEventListener('click', (e) => {
+    (this.paper as any).el.addEventListener('click', (e) => {
       // Verificar si el clic fue dentro del menú desplegable
       if (e.target === select) {
         return;
@@ -1707,7 +1707,7 @@ this.paper.on('link:pointerclick', (cellView, evt, x, y) => {
 
 
 
-    const link = cellView.model;
+    const link = (cellView as any).model;
 
 
       // Si ya hay un select creado, elimínalo y restablece la variable select a null
@@ -1852,7 +1852,7 @@ this.paso= maxPasoNumber;
 
   // Función para actualizar la posición de los botones
   const updateButtonPosition = () => {
-    const bbox = figure.getBBox();
+    const bbox = (figure as any).getBBox();
     containerDiv.style.left = `${bbox.x + bbox.width + 5}px`; // Acercar los botones a la figura
     containerDiv.style.top = `${bbox.y + bbox.height / 2}px`;
     containerDiv.style.transform = 'translateY(-50%)';
@@ -1861,9 +1861,9 @@ this.paso= maxPasoNumber;
   updateButtonPosition(); // Llamar a la función para actualizar la posición inicial
 
   this.paper.on('cell:pointerclick', (cellView) => {
-    const cell = cellView.model;
+    const cell = (cellView as any).model;
 
-    if (cellView.model === figure) {
+    if ((cellView as any).model === figure) {
       if (containerDiv.style.display == 'flex') {
         containerDiv.style.display = 'none';
         textarea.style.display = 'none';
@@ -1900,7 +1900,7 @@ let enlaceContador=0
 
 
 // Si la figura de origen es de tipo "Polygon", alternar el valor del atributo "respuesta"
-if (figure.get('type') === 'standard.Polygon') {
+if ((figure as any).get('type') === 'standard.Polygon') {
   // Alternar entre "sí" y "no" basándose en el contador de enlaces
   const respuestaValor = (enlaceContador % 2 === 0) ? 'sí' : 'no';
   // Agregar el atributo "respuesta" al enlace
@@ -1974,7 +1974,7 @@ if (figure.get('type') === 'standard.Polygon') {
   ageInput.style.width = '100%';
   //figure.attr('dias/text', ageInput.value);
 
-  ageInput.value = figure.attr('dias/text')// figure.attributes['dias'].toString();
+  ageInput.value = figure.attr('dias/text')// (figure as any).attributes['dias'].toString();
   ageInput.addEventListener('click', () => {
     ageInput.focus();
     // Eliminar el contenedor de botones asociado a la figura
@@ -2132,7 +2132,7 @@ TitleLabel.textContent = "Descripcion"
 TitleLabel.style.margin = "0px"
     form.appendChild(TitleLabel);
   form.appendChild(titleInput);
-  if (figure.get('type') === 'standard.Polygon') {
+  if ((figure as any).get('type') === 'standard.Polygon') {
     const questionLabel = document.createElement('label');
     questionLabel.textContent = "Pregunta"
     questionLabel.style.margin = "0px"
@@ -2232,7 +2232,7 @@ form.appendChild(ageInputLabel);
     filteredElements.forEach((element) => {
       const option = document.createElement('option');
       option.value = element.id.toString();
-      option.textContent = element.attributes['paso'].toString();
+      option.textContent = (element as any).attributes['paso'].toString();
       selectElement.appendChild(option);
     });
 
@@ -2260,7 +2260,7 @@ form.appendChild(ageInputLabel);
       target: { id: targetId },
     });
 // Si la figura de origen es de tipo "Polygon"
-if (figure.get('type') === 'standard.Polygon') {
+if ((figure as any).get('type') === 'standard.Polygon') {
 // Alternar entre "sí" y "no" basándose en un contador
 const respuestaValor = 'sí';
 link.appendLabel({
@@ -2294,13 +2294,13 @@ link.appendLabel({
   });
 
   // Añadir el botón de crear enlace al contenedor de botones
-  if (figure.attributes['paso'] !== 'Fin') {
+  if ((figure as any).attributes['paso'] !== 'Fin') {
 
   btnContaint.appendChild(buttonLink);
 }
   // Agregar el formulario al contenedor
 
-  if (figure.id !== 'circle2' && figure.attributes['paso'] !== 'Fin') {
+  if (figure.id !== 'circle2' && (figure as any).attributes['paso'] !== 'Fin') {
     containerDiv.appendChild(form);
 }
 
@@ -2319,7 +2319,7 @@ link.appendLabel({
   buttonCircle.style.fontSize = '5px';
   buttonCircle.addEventListener('click', () => {
 
-    const typeFigure = figure.get('type')
+    const typeFigure = (figure as any).get('type')
     const polygonId =figure.id.toString();
     const numEnlaces = this.contarEnlaces(polygonId);
     let maxhijos = 0;
@@ -2335,7 +2335,7 @@ link.appendLabel({
 
 
 
-    const bbox = figure.getBBox();
+    const bbox = (figure as any).getBBox();
     const nuevaFigura = new joint.shapes.standard.Circle({
       position: { x: bbox.x + bbox.width + 60, y: bbox.y },
       size: { width: 40, height: 40 },
@@ -2378,7 +2378,7 @@ link.appendLabel({
   buttonRectangle.style.borderRadius = '3px';
 
   buttonRectangle.addEventListener('click', () => {
-    const typeFigure = figure.get('type')
+    const typeFigure = (figure as any).get('type')
     const polygonId =figure.id.toString();
     const numEnlaces = this.contarEnlaces(polygonId);
     let maxhijos = 0;
@@ -2394,7 +2394,7 @@ link.appendLabel({
     contadorFiguras++;
     this.paso++;// Incrementa el contador de figuras
     const idFigura = `Paso${this.paso}`;  // G
-    const bbox = figure.getBBox();
+    const bbox = (figure as any).getBBox();
     const nuevaFigura = new joint.shapes.standard.Rectangle({
 
       position: { x: bbox.x + bbox.width + 60, y: bbox.y },
@@ -2439,7 +2439,7 @@ link.appendLabel({
   buttonDiamond.style.borderRadius = '3px';
 
   buttonDiamond.addEventListener('click', () => {
-   const typeFigure = figure.get('type')
+   const typeFigure = (figure as any).get('type')
     const polygonId =figure.id.toString();
     const numEnlaces = this.contarEnlaces(polygonId);
     let maxhijos = 0;
@@ -2459,7 +2459,7 @@ link.appendLabel({
     contadorFiguras++;
     this.paso++;// Incrementa el contador de figuras
     const idFigura = `Paso${this.paso}`;
-    const bbox = figure.getBBox();
+    const bbox = (figure as any).getBBox();
 
     const nuevaFigura = new joint.shapes.standard.Polygon({
 
@@ -2516,7 +2516,7 @@ link.appendLabel({
   });
 
   // Añadir botones al contenedor
-  if (figure.attributes['paso'] !== 'Fin') {
+  if ((figure as any).attributes['paso'] !== 'Fin') {
 
     btnContaint.appendChild(buttonCircle);
     btnContaint.appendChild(buttonRectangle);
@@ -2545,7 +2545,7 @@ link.appendLabel({
   textarea.style.height = '100px';
 
   // Posicionar el área de texto a la izquierda de la figura
-  const figureBBox = figure.getBBox();
+  const figureBBox = (figure as any).getBBox();
   textarea.style.left = `${figureBBox.x - 50 - 35}px`; // Colocar 5 píxeles a la izquierda de la figura
   textarea.style.top = `${figureBBox.y + figureBBox.height / 2 - 25}px`; // Centrar verticalmente respecto a la figura
 
@@ -2584,7 +2584,7 @@ link.appendLabel({
   labelTextElement.textContent = `Texto: ${labelText}`;
 
   // Añadir elementos al contenedor de información
-  if (figure.id !== 'circle2' && figure.attributes['paso'] !== 'Fin') {
+  if (figure.id !== 'circle2' && (figure as any).attributes['paso'] !== 'Fin') {
     labelInfo.appendChild(numTextElement);
 }
 
@@ -2598,14 +2598,14 @@ link.appendLabel({
 
   // Actualizar la posición de los botones cuando la figura se mueva
 
-  figure.on('change:position', () => {
+  (figure as any).on('change:position', () => {
     updateButtonPosition();
-    const figureBBox = figure.getBBox();
+    const figureBBox = (figure as any).getBBox();
     textarea.style.left = `${figureBBox.x - 50 - 35}px`;
     textarea.style.top = `${figureBBox.y + figureBBox.height / 2 - 25}px`;
   });
   // Maneja la eliminación de la figura
-  figure.on('remove', () => {
+  (figure as any).on('remove', () => {
     // Elimina el contenedor de botones cuando la figura se elimine
     containerDiv.remove();
     textarea.remove();

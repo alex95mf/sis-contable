@@ -17,7 +17,6 @@ import { ConfirmationDialogService } from '../../../../config/custom/confirmatio
 import { LstNotaDebitoComponent } from './lst-nota-debito/lst-nota-debito.component';
 import { PagoLetraComponent } from './pago-letra/pago-letra.component';
 import { CommonVarService } from '../../../../services/common-var.services';
-import { resolveSanitizationFn } from '@angular/compiler/src/render3/view/template';
 declare const $: any;
 @Component({
 standalone: false,

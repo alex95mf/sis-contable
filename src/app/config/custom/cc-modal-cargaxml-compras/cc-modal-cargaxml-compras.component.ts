@@ -11,7 +11,7 @@ import { CcModalTablaProductosComponent } from 'src/app/config/custom/cc-modal-t
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ConfirmationService,MessageService,MessageService } from 'primeng/api';
+import { ConfirmationService,MessageService } from 'primeng/api';
 import { PrimeNG } from 'primeng/config';
 
 import { CustonService } from '../app-custom.service';
@@ -106,7 +106,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
 
 
 
-    this.primengConfig.ripple = true;
+    (this.primengConfig.ripple as any) = true;
     // this.validatePermission();
 
     let datos_xml = this.config.data;
@@ -200,7 +200,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
           this.exist_client = true;
       }else{
         this.botonConfirmar = true;
-        this.msgs1 = [
+        (this.msgs1 as any) = [
             {severity:'error', summary:'Verificar', detail:'El proveedor '+proveedor_name+' no se encuentra registrado, es necesario registrara proveedor para continuar'}
         ];
 
@@ -458,7 +458,7 @@ export class CcModalCargaxmlComprasComponent implements AfterViewChecked {
 
     if(validt){
       this.LoadModalCargaXml = true;
-      this.msgs2 = [
+      (this.msgs2 as any) = [
           {severity:'error', summary:'Verificar', detail:message}
       ];
     }else{

@@ -117,7 +117,6 @@ export class ConvenioArrienteTComponent implements OnInit {
   exoneraciones: any = [];
 
   mensajeSpinner: string = "Cargando...";
-  mensajeSpinner: string
   dataUser: any;
   permissions: any;
   vmButtons = [];
