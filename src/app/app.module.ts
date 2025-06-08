@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { providePrimeNG } from 'primeng/config';
+import Lara from '@primeng/themes/lara';
 
 // CDK
 import { OverlayContainer } from '@angular/cdk/overlay';
@@ -226,6 +228,11 @@ const APP_CONTAINERS = [
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     provideCharts(withDefaultRegisterables()),
+    providePrimeNG({
+      theme: {
+        preset: Lara
+      }
+    }),
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
