@@ -1,9 +1,41 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit  } from '@angular/core';
-import { Chart } from 'chart.js';
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  LineController,
+  BarController,
+  PieController
+} from 'chart.js';
 import { Socket } from '../../services/socket.service';
 import { DashboardService } from './dashboard.service';
 import { transition } from '@angular/animations';
 import { CommonService } from 'src/app/services/commonServices';
+
+// Registrar todos los componentes necesarios de Chart.js
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  LineController,
+  BarController,
+  PieController
+);
 
 @Component({
 standalone: false,
@@ -23,15 +55,11 @@ export class DashboardComponent implements OnInit {
   recaudacion: any;
   desembolsos: any;
 
-
-
   constructor(
     private socket: Socket,
     private service: DashboardService,
     private commonService: CommonService,
     ) {
-
-
   }
 
   ngOnInit() {
@@ -43,16 +71,11 @@ export class DashboardComponent implements OnInit {
       console.log('Elementos ViewChild no definidos');
     }
     setTimeout(() => {
-
       this.getData()
     }, 100);
-
-
-
   }
 
   getData(){
-
     let dat = {
       date: new Date().getFullYear()
     }
@@ -62,20 +85,17 @@ export class DashboardComponent implements OnInit {
         console.log(res);
         this.emisionTitulos = res['data']['emisionTitulo']['total'];
         let {meses, valores: emVal, nombres: nombre,currency: curr} = res['data']['emisionTitulo']['grafico1'];
-        // let valores1 = res['data']['grafico1']['valores'];
         let {conceptos,valores: pieVal,nombres,currency } = res['data']['emisionTitulo']['grafico2'];
-        // let valores2 = res['data']['grafico2']['valores'];
         let chartLine = this.chartLine("chartLine", "line",meses, emVal,nombre,curr );
         let chartPie = this.chartPie("chattPie","pie", conceptos, pieVal, nombres,currency);
 
         // Grafico de recaudacion
         this.recaudacion = res['data']['recaudacion']['total'];
         let {meses: recaMes, valores: recaVal,nombres: nombr,currency: curre} = res['data']['recaudacion']['grafico1'];
-        // let valores1 = res['data']['grafico1']['valores'];
         let {conceptos: recaConcep,valores: recaPieVal, nombres: nomb, currency: curren} = res['data']['recaudacion']['grafico2'];
-        let chartLine1 = this.chart("chartLine1", "horizontalBar", recaMes, recaVal,nombr,curre);
+        // Cambiar 'horizontalBar' por 'bar' con indexAxis: 'y'
+        let chartLine1 = this.chart("chartLine1", "bar", recaMes, recaVal,nombr,curre, true);
         let chartPie1 = this.chartPie("chattPie1","pie",recaConcep , recaPieVal, nomb,curren);
-
 
         // Grafico de Desembolso
         this.desembolsos = res['data']['desembolso']['total'];
@@ -83,201 +103,131 @@ export class DashboardComponent implements OnInit {
         let {conceptos: desemConcept, valores: desemConVal,nombres: nom,currency: currenc} = res['data']['desembolso']['grafico2'];
         let chartLine2 = this.chartBar("chartLine2", "bar", desmMes, desemVal,nombresM,currencyM);
         let chartPie2 = this.chartPie("chattPie2","pie", desemConcept, desemConVal,nom,currenc);
-
-
       }
     )
   }
 
-
-  chart(name:string, tipo:string, label: string[], data: number[],nombres:string,currency: string){
-
-    return  new Chart(name, {
-     type: tipo as any,
+  chart(name:string, tipo:string, label: string[], data: number[],nombres:string,currency: string, isHorizontal: boolean = false){
+    const config: any = {
+      type: tipo,
       data: {
         labels: label,
         datasets: [{
           label: '# Mensual',
           data: data,
           backgroundColor: [
-            '#0F2FD0',//azul
-            '#D00F19',//rojo
-            '#0DB415',//verde
-            '#0DA3B4',//azul claro
-            '#E97C10',//naranja
-            '#6A738A',//gris
-            '#5805D5',//violeta
-            '#D5057B',//fucsia
-            '#05D54E',//verde claro
-            '#05D2D5',//aqua
-            '#F7F704',//amarillo
-            '#02626D',//plomo
-            '#FC3E0F', //rojo
-            '#7BF70E',//verde
-            '#F9CA6B',//naranja claro
-            '#5973D1',//azul claro
-            // 'rgba(255, 99, 132, 0.2)',
-            // 'rgba(54, 162, 235, 0.2)',
-            // 'rgba(255, 206, 86, 0.2)',
-            // 'rgba(75, 192, 192, 0.2)',
-            // 'rgba(153, 102, 255, 0.2)',
-            // 'rgba(146, 79, 44, 0.8)',
-            // 'rgba(144, 169, 26, 0.8)',
-            // 'rgba(26, 169, 120, 0.8)',
-            // 'rgba(6, 117, 134, 0.8)',
-            // 'rgba(109, 47, 127, 0.8)',
-            // 'rgba(119, 37, 103, 0.8)',
-            // 'rgba(37, 77, 119, 0.8)',
-            // 'rgba(245, 39, 145, 0.17)',
-            // 'rgba(165, 39, 245, 0.17)',
-            // 'rgba(39, 245, 71, 0.17)',
-            // 'rgba(8, 104, 23, 0.52)',
-            // 'rgba(121, 183, 3, 0.52)',
-            // 'rgba(183, 143, 3, 0.52)',
-            // 'rgba(212, 132, 17, 0.52)',
-            // 'rgba(212, 17, 68, 0.52)'
+            '#0F2FD0','#D00F19','#0DB415','#0DA3B4','#E97C10','#6A738A',
+            '#5805D5','#D5057B','#05D54E','#05D2D5','#F7F704','#02626D',
+            '#FC3E0F','#7BF70E','#F9CA6B','#5973D1'
           ],
-
           borderColor: [
-            '#0F2FD0',//azul
-            '#D00F19',//rojo
-            '#0DB415',//verde
-            '#0DA3B4',//azul claro
-            '#E97C10',//naranja
-            '#6A738A',//gris
-            '#5805D5',//violeta
-            '#D5057B',//fucsia
-            '#05D54E',//verde claro
-            '#05D2D5',//aqua
-            '#F7F704',//amarillo
-            '#02626D',//plomo
-            '#FC3E0F', //rojo
-            '#7BF70E',//verde
-            '#F9CA6B',//naranja claro
-            '#5973D1',//azul claro
-            // 'rgba(255, 99, 132, 1)',
-            // 'rgba(54, 162, 235, 1)',
-            // 'rgba(255, 206, 86, 1)',
-            // 'rgba(75, 192, 192, 1)',
-            // 'rgba(153, 102, 255, 1)',
-            // 'rgba(255, 159, 64, 1)',
-            // 'rgba(144, 169, 26, 0.8)',
-            // 'rgba(26, 169, 120, 0.8)',
-            // 'rgba(6, 117, 134, 0.8)',
-            // 'rgba(109, 47, 127, 0.8)',
-            // 'rgba(119, 37, 103, 0.8)',
-            // 'rgba(37, 77, 119, 0.8)',
-            // 'rgba(245, 39, 145, 0.17)',
-            // 'rgba(165, 39, 245, 0.17)',
-            // 'rgba(39, 245, 71, 0.17)',
-            // 'rgba(8, 104, 23, 0.52)',
-            // 'rgba(121, 183, 3, 0.52)',
-            // 'rgba(183, 143, 3, 0.52)',
-            // 'rgba(212, 132, 17, 0.52)',
-            // 'rgba(212, 17, 68, 0.52)'
+            '#0F2FD0','#D00F19','#0DB415','#0DA3B4','#E97C10','#6A738A',
+            '#5805D5','#D5057B','#05D54E','#05D2D5','#F7F704','#02626D',
+            '#FC3E0F','#7BF70E','#F9CA6B','#5973D1'
           ],
           borderWidth: 1
         }]
       },
       options: {
-          tooltips: {
+        responsive: true,
+        plugins: {
+          tooltip: {
             callbacks: {
-                label: function(tooltipItem, data) {
-                    let label:any = '';
-                    // if (data.labels && data.labels.length > tooltipItem.index) {
-                    //     label = data.labels[tooltipItem.index];
-                    // }
-                    if (nombres && nombres.length > tooltipItem.index) {
-                        label += '' + nombres[tooltipItem.index];
-                    }
-                     if (currency && currency.length > tooltipItem.index) {
-                        label += ': ' + currency[tooltipItem.index];
-                    }
-                    return label;
+              label: function(context: any) {
+                let label: any = '';
+                if (nombres && nombres.length > context.dataIndex) {
+                  label += '' + nombres[context.dataIndex];
                 }
+                if (currency && currency.length > context.dataIndex) {
+                  label += ': ' + currency[context.dataIndex];
+                }
+                return label;
+              }
             }
+          },
+          legend: {
+            display: false
+          }
         },
-        // plugins: {
-        //   tooltip: {
-        //     callbacks: {
-        //       title: (ttItem) => (ttItem[0].dataset.label)
-        //     }
-        //   }
-        // },
-
-        legend: {
-          display: false
-        },
-
-
         scales: {
-          x:{
-            ticks:{
-              beginAtZero: true,
-              fontSize: 10,
-              padding: 0,
-              fontColor: '#505050',
-              fontStyle: 'bold',
-              minRotation: 45,
-              callback: function(value:any, index, values) {
+          x: {
+            type: 'category',
+            beginAtZero: true,
+            ticks: {
+              font: {
+                size: 10,
+                weight: 'bold'
+              },
+              color: '#505050',
+              maxRotation: 45,
+              callback: isHorizontal ? function(value: any, index, values) {
                 if(parseInt(value) >= 1000){
                   return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 } else {
                   return '$' + value;
                 }
-              }
-
+              } : undefined
             },
-            scaleLabel: {
+            title: {
               display: true,
-              labelString: 'Monto',
-              fontSize: 10,
-              fontStyle: 'bold',
-              fontColor: '#000000',
+              text: isHorizontal ? 'Monto' : 'Meses',
+              font: {
+                size: 10,
+                weight: 'bold'
+              },
+              color: '#000000'
             }
-
           },
           y: {
+            type: 'linear',
+            beginAtZero: true,
             ticks: {
-              beginAtZero: true,
-              fontSize: 11,
-              padding: 0,
-              //fontColor: '#000',
-              fontStyle: 'bold',
-              fontColor: '#000000',
-
+              font: {
+                size: 11,
+                weight: 'bold'
+              },
+              color: '#000000',
+              callback: !isHorizontal ? function(value: any, index, values) {
+                if(parseInt(value) >= 1000){
+                  return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                } else {
+                  return '$' + value;
+                }
+              } : undefined
             },
-            scaleLabel: {
+            title: {
               display: true,
-              labelString: 'Meses',
-              fontSize: 12,
-              fontStyle: 'bold',
-              fontColor: '#000000',
+              text: isHorizontal ? 'Meses' : 'Monto',
+              font: {
+                size: 12,
+                weight: 'bold'
+              },
+              color: '#000000'
             }
-
           }
-        },
-
-
+        }
       }
-    });
-  }
-  chartLine(name:string, tipo:string, label: string[], data: number[], nombres: string, currency: string){
+    };
 
-    return  new Chart(name, {
-     type: tipo as any,
+    // Si es barra horizontal, agregar indexAxis
+    if (isHorizontal) {
+      config.options.indexAxis = 'y';
+    }
+
+    return new Chart(name, config);
+  }
+
+  chartLine(name:string, tipo:string, label: string[], data: number[], nombres: string, currency: string){
+    return new Chart(name, {
+      type: tipo as any,
       data: {
         labels: label,
         datasets: [{
           label: '# Mensual',
           fill: false,
-          lineTension: 0.1,
+          tension: 0.1, // Cambio de lineTension a tension
           backgroundColor: "rgba(75,192,192,0.4)",
           borderColor: "rgba(75,192,192,1)",
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
           pointBorderColor: "rgba(75,192,192,1)",
           pointBackgroundColor: "#fff",
           pointBorderWidth: 1,
@@ -288,145 +238,61 @@ export class DashboardComponent implements OnInit {
           pointRadius: 1,
           pointHitRadius: 10,
           data: data,
-          // backgroundColor: [
-          //   '#0F2FD0',//azul
-          //   '#D00F19',//rojo
-          //   '#0DB415',//verde
-          //   '#0DA3B4',//azul claro
-          //   '#E97C10',//naranja
-          //   '#6A738A',//gris
-          //   '#5805D5',//violeta
-          //   '#D5057B',//fucsia
-          //   '#05D54E',//verde claro
-          //   '#05D2D5',//aqua
-          //   '#F7F704',//amarillo
-          //   '#02626D',//plomo
-          //   '#FC3E0F', //rojo
-          //   '#7BF70E',//verde
-          //   '#F9CA6B',//naranja claro
-          //   '#5973D1',//azul claro
-          //   // 'rgba(255, 99, 132, 0.2)',
-          //   // 'rgba(54, 162, 235, 0.2)',
-          //   // 'rgba(255, 206, 86, 0.2)',
-          //   // 'rgba(75, 192, 192, 0.2)',
-          //   // 'rgba(153, 102, 255, 0.2)',
-          //   // 'rgba(146, 79, 44, 0.8)',
-          //   // 'rgba(144, 169, 26, 0.8)',
-          //   // 'rgba(26, 169, 120, 0.8)',
-          //   // 'rgba(6, 117, 134, 0.8)',
-          //   // 'rgba(109, 47, 127, 0.8)',
-          //   // 'rgba(119, 37, 103, 0.8)',
-          //   // 'rgba(37, 77, 119, 0.8)',
-          //   // 'rgba(245, 39, 145, 0.17)',
-          //   // 'rgba(165, 39, 245, 0.17)',
-          //   // 'rgba(39, 245, 71, 0.17)',
-          //   // 'rgba(8, 104, 23, 0.52)',
-          //   // 'rgba(121, 183, 3, 0.52)',
-          //   // 'rgba(183, 143, 3, 0.52)',
-          //   // 'rgba(212, 132, 17, 0.52)',
-          //   // 'rgba(212, 17, 68, 0.52)'
-          // ],
-
-          // borderColor: [
-          //   '#0F2FD0',//azul
-          //   '#D00F19',//rojo
-          //   '#0DB415',//verde
-          //   '#0DA3B4',//azul claro
-          //   '#E97C10',//naranja
-          //   '#6A738A',//gris
-          //   '#5805D5',//violeta
-          //   '#D5057B',//fucsia
-          //   '#05D54E',//verde claro
-          //   '#05D2D5',//aqua
-          //   '#F7F704',//amarillo
-          //   '#02626D',//plomo
-          //   '#FC3E0F', //rojo
-          //   '#7BF70E',//verde
-          //   '#F9CA6B',//naranja claro
-          //   '#5973D1',//azul claro
-          //   // 'rgba(255, 99, 132, 1)',
-          //   // 'rgba(54, 162, 235, 1)',
-          //   // 'rgba(255, 206, 86, 1)',
-          //   // 'rgba(75, 192, 192, 1)',
-          //   // 'rgba(153, 102, 255, 1)',
-          //   // 'rgba(255, 159, 64, 1)',
-          //   // 'rgba(144, 169, 26, 0.8)',
-          //   // 'rgba(26, 169, 120, 0.8)',
-          //   // 'rgba(6, 117, 134, 0.8)',
-          //   // 'rgba(109, 47, 127, 0.8)',
-          //   // 'rgba(119, 37, 103, 0.8)',
-          //   // 'rgba(37, 77, 119, 0.8)',
-          //   // 'rgba(245, 39, 145, 0.17)',
-          //   // 'rgba(165, 39, 245, 0.17)',
-          //   // 'rgba(39, 245, 71, 0.17)',
-          //   // 'rgba(8, 104, 23, 0.52)',
-          //   // 'rgba(121, 183, 3, 0.52)',
-          //   // 'rgba(183, 143, 3, 0.52)',
-          //   // 'rgba(212, 132, 17, 0.52)',
-          //   // 'rgba(212, 17, 68, 0.52)'
-          // ],
           borderWidth: 1
         }]
       },
       options: {
-        tooltips: {
-          callbacks: {
-              label: function(tooltipItem, data) {
-                  let label:any = '';
-                  // if (data.labels && data.labels.length > tooltipItem.index) {
-                  //     label = data.labels[tooltipItem.index];
-                  // }
-                  if (nombres && nombres.length > tooltipItem.index) {
-                      label += '' + nombres[tooltipItem.index];
-                  }
-                   if (currency && currency.length > tooltipItem.index) {
-                      label += ': ' + currency[tooltipItem.index];
-                  }
-                  return label;
+        responsive: true,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context: any) {
+                let label: any = '';
+                if (nombres && nombres.length > context.dataIndex) {
+                  label += '' + nombres[context.dataIndex];
+                }
+                if (currency && currency.length > context.dataIndex) {
+                  label += ': ' + currency[context.dataIndex];
+                }
+                return label;
               }
-          }
-      },
-        // plugins: {
-        //   tooltip: {
-        //     callbacks: {
-        //       title: (ttItem) => (ttItem[0].dataset.label)
-        //     }
-        //   }
-        // },
-
-        legend: {
-          display: false
-        },
-
-
-        scales: {
-          x:{
-            ticks:{
-              beginAtZero: true,
-              fontSize: 10,
-              padding: 0,
-              fontColor: '#000000',
-              fontStyle: 'bold',
-              minRotation: 45
-
-            },
-            scaleLabel: {
-              display: true,
-              labelString: 'Meses',
-              fontSize: 12,
-              fontStyle: 'bold',
-              fontColor: '#000000',
             }
-
-         },
-y:{
+          },
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            type: 'category',
+            beginAtZero: true,
             ticks: {
-              beginAtZero: true,
-              fontSize: 10,
-              padding: 0,
-              //fontColor: '#000',
-              fontStyle: 'bold',
-              callback: function(value:any, index, values) {
+              font: {
+                size: 10,
+                weight: 'bold'
+              },
+              color: '#000000',
+              maxRotation: 45
+            },
+            title: {
+              display: true,
+              text: 'Meses',
+              font: {
+                size: 12,
+                weight: 'bold'
+              },
+              color: '#000000'
+            }
+          },
+          y: {
+            type: 'linear',
+            beginAtZero: true,
+            ticks: {
+              font: {
+                size: 10,
+                weight: 'bold'
+              },
+              callback: function(value: any, index, values) {
                 if(parseInt(value) >= 1000){
                   return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 } else {
@@ -434,167 +300,94 @@ y:{
                 }
               }
             },
-            scaleLabel: {
+            title: {
               display: true,
-              labelString: 'Monto',
-              fontSize: 12,
-              fontStyle: 'bold',
-              fontColor: '#000000',
+              text: 'Monto',
+              font: {
+                size: 12,
+                weight: 'bold'
+              },
+              color: '#000000'
             }
-
           }
         }
       }
     });
   }
-  chartBar(name:string, tipo:string, label: string[], data: number[],nombres: string, currency:string){
 
-    return  new Chart(name, {
-     type: tipo as any,
+  chartBar(name:string, tipo:string, label: string[], data: number[],nombres: string, currency:string){
+    return new Chart(name, {
+      type: tipo as any,
       data: {
         labels: label,
         datasets: [{
           label: '# Mensual',
           data: data,
           backgroundColor: [
-            '#0F2FD0',//azul
-            '#D00F19',//rojo
-            '#0DB415',//verde
-            '#0DA3B4',//azul claro
-            '#E97C10',//naranja
-            '#6A738A',//gris
-            '#5805D5',//violeta
-            '#D5057B',//fucsia
-            '#05D54E',//verde claro
-            '#05D2D5',//aqua
-            '#F7F704',//amarillo
-            '#02626D',//plomo
-            '#FC3E0F', //rojo
-            '#7BF70E',//verde
-            '#F9CA6B',//naranja claro
-            '#5973D1',//azul claro
-            // 'rgba(255, 99, 132, 0.2)',
-            // 'rgba(54, 162, 235, 0.2)',
-            // 'rgba(255, 206, 86, 0.2)',
-            // 'rgba(75, 192, 192, 0.2)',
-            // 'rgba(153, 102, 255, 0.2)',
-            // 'rgba(146, 79, 44, 0.8)',
-            // 'rgba(144, 169, 26, 0.8)',
-            // 'rgba(26, 169, 120, 0.8)',
-            // 'rgba(6, 117, 134, 0.8)',
-            // 'rgba(109, 47, 127, 0.8)',
-            // 'rgba(119, 37, 103, 0.8)',
-            // 'rgba(37, 77, 119, 0.8)',
-            // 'rgba(245, 39, 145, 0.17)',
-            // 'rgba(165, 39, 245, 0.17)',
-            // 'rgba(39, 245, 71, 0.17)',
-            // 'rgba(8, 104, 23, 0.52)',
-            // 'rgba(121, 183, 3, 0.52)',
-            // 'rgba(183, 143, 3, 0.52)',
-            // 'rgba(212, 132, 17, 0.52)',
-            // 'rgba(212, 17, 68, 0.52)'
+            '#0F2FD0','#D00F19','#0DB415','#0DA3B4','#E97C10','#6A738A',
+            '#5805D5','#D5057B','#05D54E','#05D2D5','#F7F704','#02626D',
+            '#FC3E0F','#7BF70E','#F9CA6B','#5973D1'
           ],
-
           borderColor: [
-            '#0F2FD0',//azul
-            '#D00F19',//rojo
-            '#0DB415',//verde
-            '#0DA3B4',//azul claro
-            '#E97C10',//naranja
-            '#6A738A',//gris
-            '#5805D5',//violeta
-            '#D5057B',//fucsia
-            '#05D54E',//verde claro
-            '#05D2D5',//aqua
-            '#F7F704',//amarillo
-            '#02626D',//plomo
-            '#FC3E0F', //rojo
-            '#7BF70E',//verde
-            '#F9CA6B',//naranja claro
-            '#5973D1',//azul claro
-            // 'rgba(255, 99, 132, 1)',
-            // 'rgba(54, 162, 235, 1)',
-            // 'rgba(255, 206, 86, 1)',
-            // 'rgba(75, 192, 192, 1)',
-            // 'rgba(153, 102, 255, 1)',
-            // 'rgba(255, 159, 64, 1)',
-            // 'rgba(144, 169, 26, 0.8)',
-            // 'rgba(26, 169, 120, 0.8)',
-            // 'rgba(6, 117, 134, 0.8)',
-            // 'rgba(109, 47, 127, 0.8)',
-            // 'rgba(119, 37, 103, 0.8)',
-            // 'rgba(37, 77, 119, 0.8)',
-            // 'rgba(245, 39, 145, 0.17)',
-            // 'rgba(165, 39, 245, 0.17)',
-            // 'rgba(39, 245, 71, 0.17)',
-            // 'rgba(8, 104, 23, 0.52)',
-            // 'rgba(121, 183, 3, 0.52)',
-            // 'rgba(183, 143, 3, 0.52)',
-            // 'rgba(212, 132, 17, 0.52)',
-            // 'rgba(212, 17, 68, 0.52)'
+            '#0F2FD0','#D00F19','#0DB415','#0DA3B4','#E97C10','#6A738A',
+            '#5805D5','#D5057B','#05D54E','#05D2D5','#F7F704','#02626D',
+            '#FC3E0F','#7BF70E','#F9CA6B','#5973D1'
           ],
           borderWidth: 1
         }]
       },
       options: {
-        tooltips: {
-          callbacks: {
-              label: function(tooltipItem, data) {
-                  let label:any = '';
-                  // if (data.labels && data.labels.length > tooltipItem.index) {
-                  //     label = data.labels[tooltipItem.index];
-                  // }
-                  if (nombres && nombres.length > tooltipItem.index) {
-                      label += '' + nombres[tooltipItem.index];
-                  }
-                   if (currency && currency.length > tooltipItem.index) {
-                      label += ': ' + currency[tooltipItem.index];
-                  }
-                  return label;
+        responsive: true,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context: any) {
+                let label: any = '';
+                if (nombres && nombres.length > context.dataIndex) {
+                  label += '' + nombres[context.dataIndex];
+                }
+                if (currency && currency.length > context.dataIndex) {
+                  label += ': ' + currency[context.dataIndex];
+                }
+                return label;
               }
-          }
-      },
-        // plugins: {
-        //   tooltip: {
-        //     callbacks: {
-        //       title: (ttItem) => (ttItem[0].dataset.label)
-        //     }
-        //   }
-        // },
-
-        legend: {
-          display: false
-        },
-
-
-        scales: {
-          x:{
-            ticks:{
-              beginAtZero: true,
-              fontSize: 10,
-              padding: 0,
-              fontColor: '#000000',
-              fontStyle: 'bold',
-              minRotation: 45
-
-            },
-            scaleLabel: {
-              display: true,
-              labelString: 'Meses',
-              fontSize: 12,
-              fontStyle: 'bold',
-              fontColor: '#000000',
             }
-
-         },
-y:{
+          },
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            type: 'category',
+            beginAtZero: true,
             ticks: {
-              beginAtZero: true,
-              fontSize: 10,
-              padding: 0,
-              //fontColor: '#000',
-              fontStyle: 'bold',
-              callback: function(value:any, index, values) {
+              font: {
+                size: 10,
+                weight: 'bold'
+              },
+              color: '#000000',
+              maxRotation: 45
+            },
+            title: {
+              display: true,
+              text: 'Meses',
+              font: {
+                size: 12,
+                weight: 'bold'
+              },
+              color: '#000000'
+            }
+          },
+          y: {
+            type: 'linear',
+            beginAtZero: true,
+            ticks: {
+              font: {
+                size: 10,
+                weight: 'bold'
+              },
+              callback: function(value: any, index, values) {
                 if(parseInt(value) >= 1000){
                   return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 } else {
@@ -602,14 +395,15 @@ y:{
                 }
               }
             },
-            scaleLabel: {
+            title: {
               display: true,
-              labelString: 'Monto',
-              fontSize: 12,
-              fontStyle: 'bold',
-              fontColor: '#000000',
+              text: 'Monto',
+              font: {
+                size: 12,
+                weight: 'bold'
+              },
+              color: '#000000'
             }
-
           }
         }
       }
@@ -618,212 +412,88 @@ y:{
 
   chartPie(name:string, tipo:string, label: string[], data: number[],nombres: string, currency: string){
     console.log(data);
-    console.log(nombres)
-    return  new Chart(name, {
-     type: tipo as any,
+    console.log(nombres);
+
+    return new Chart(name, {
+      type: tipo as any,
       data: {
         labels: label,
         datasets: [{
           label: '# Mensual',
           data: data,
           backgroundColor: [
-            '#0F2FD0',//azul
-            '#D00F19',//rojo
-            '#0DB415',//verde
-            '#0DA3B4',//azul claro
-            '#E97C10',//naranja
-            '#6A738A',//gris
-            '#5805D5',//violeta
-            '#D5057B',//fucsia
-            '#05D54E',//verde claro
-            '#05D2D5',//aqua
-            '#F7F704',//amarillo
-            '#02626D',//plomo
-            '#FC3E0F', //rojo
-            '#7BF70E',//verde
-            '#F9CA6B',//naranja claro
-            '#5973D1',//azul claro
-            '#6664FF',//azul
-            '#CF0060',//rojo
-            '#E7C500',//verde
-            '#FFFFFF',//azul claro
-            '#CF0060',//naranja
-            '#D0CCD1',//gris
-            '#6F3460',//violeta
-            '#FE0AB7',//fucsia
-            '#2EF8A0',//verde claro
-            '#067D6B',
-            '#067D6B'
-            // 'rgba(255, 99, 132, 0.2)',
-            // 'rgba(54, 162, 235, 0.2)',
-            // 'rgba(255, 206, 86, 0.2)',
-            // 'rgba(75, 192, 192, 0.2)',
-            // 'rgba(153, 102, 255, 0.2)',
-            // 'rgba(146, 79, 44, 0.8)',
-            // 'rgba(144, 169, 26, 0.8)',
-            // 'rgba(26, 169, 120, 0.8)',
-            // 'rgba(6, 117, 134, 0.8)',
-            // 'rgba(109, 47, 127, 0.8)',
-            // 'rgba(119, 37, 103, 0.8)',
-            // 'rgba(37, 77, 119, 0.8)',
-            // 'rgba(245, 39, 145, 0.17)',
-            // 'rgba(165, 39, 245, 0.17)',
-            // 'rgba(39, 245, 71, 0.17)',
-            // 'rgba(8, 104, 23, 0.52)',
-            // 'rgba(121, 183, 3, 0.52)',
-            // 'rgba(183, 143, 3, 0.52)',
-            // 'rgba(212, 132, 17, 0.52)',
-            // 'rgba(212, 17, 68, 0.52)'
+            '#0F2FD0','#D00F19','#0DB415','#0DA3B4','#E97C10','#6A738A',
+            '#5805D5','#D5057B','#05D54E','#05D2D5','#F7F704','#02626D',
+            '#FC3E0F','#7BF70E','#F9CA6B','#5973D1','#6664FF','#CF0060',
+            '#E7C500','#FFFFFF','#CF0060','#D0CCD1','#6F3460','#FE0AB7',
+            '#2EF8A0','#067D6B','#067D6B'
           ],
           borderColor: [
-            '#0F2FD0',//azul
-            '#D00F19',//rojo
-            '#0DB415',//verde
-            '#0DA3B4',//azul claro
-            '#E97C10',//naranja
-            '#6A738A',//gris
-            '#5805D5',//violeta
-            '#D5057B',//fucsia
-            '#05D54E',//verde claro
-            '#05D2D5',//aqua
-            '#F7F704',//amarillo
-            '#02626D',//plomo
-            '#FC3E0F', //rojo
-            '#7BF70E',//verde
-            '#F9CA6B',//naranja claro
-            '#5973D1',//azul claro
-            // 'rgba(255, 99, 132, 1)',
-            // 'rgba(54, 162, 235, 1)',
-            // 'rgba(255, 206, 86, 1)',
-            // 'rgba(75, 192, 192, 1)',
-            // 'rgba(153, 102, 255, 1)',
-            // 'rgba(255, 159, 64, 1)',
-            // 'rgba(144, 169, 26, 0.8)',
-            // 'rgba(26, 169, 120, 0.8)',
-            // 'rgba(6, 117, 134, 0.8)',
-            // 'rgba(109, 47, 127, 0.8)',
-            // 'rgba(119, 37, 103, 0.8)',
-            // 'rgba(37, 77, 119, 0.8)',
-            // 'rgba(245, 39, 145, 0.17)',
-            // 'rgba(165, 39, 245, 0.17)',
-            // 'rgba(39, 245, 71, 0.17)',
-            // 'rgba(8, 104, 23, 0.52)',
-            // 'rgba(121, 183, 3, 0.52)',
-            // 'rgba(183, 143, 3, 0.52)',
-            // 'rgba(212, 132, 17, 0.52)',
-            // 'rgba(212, 17, 68, 0.52)'
+            '#0F2FD0','#D00F19','#0DB415','#0DA3B4','#E97C10','#6A738A',
+            '#5805D5','#D5057B','#05D54E','#05D2D5','#F7F704','#02626D',
+            '#FC3E0F','#7BF70E','#F9CA6B','#5973D1'
           ],
           borderWidth: 1
         }]
       },
       options: {
-        // tooltips: {
-        //   enabled: false,
-        // },
-        tooltips: {
-          callbacks: {
-              label: function(tooltipItem, data) {
-                  let label:any = '';
-                  if (data.labels && data.labels.length > tooltipItem.index) {
-                      label = data.labels[tooltipItem.index];
-                  }
-                  if (nombres && nombres.length > tooltipItem.index) {
-                      label += '-' + nombres[tooltipItem.index];
-                  }
-                   if (currency && currency.length > tooltipItem.index) {
-                      label += ': ' + currency[tooltipItem.index];
-                  }
-                  // if (data.datasets && data.datasets.length > 0 && data.datasets[tooltipItem.datasetIndex].data) {
-                  //   let locality = 'en-EN';
-                  //   let valor:any = 0
-                  //   valor = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].toLocaleString(locality, {
-                  //     minimumFractionDigits: 2,
-                  //     maximumFractionDigits: 2
-                  //   })
-
-                  //   label += ': ' + valor;
-                  //     //label += ': ' +(this.commonService.formatNumberDos(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] * 100).toFixed(2))
-                  // }
-                  return label;
+        responsive: true,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context: any) {
+                let label: any = '';
+                if (context.label) {
+                  label = context.label;
+                }
+                if (nombres && nombres.length > context.dataIndex) {
+                  label += '-' + nombres[context.dataIndex];
+                }
+                if (currency && currency.length > context.dataIndex) {
+                  label += ': ' + currency[context.dataIndex];
+                }
+                return label;
               }
+            }
+          },
+          legend: {
+            display: true
           }
-      },
-        // tooltips: {
-        //   enabled: false,
-        //   callbacks: {
-        //     label: function(tooltipItem, data) {
-        //       let label:any = '';
-        //       if (data.labels && data.labels.length > tooltipItem.index) {
-        //           label = data.labels[tooltipItem.index];
-        //       }
-        //       if (nombres && nombres.length > tooltipItem.index) {
-        //           label += ': ' + nombres[tooltipItem.index];
-        //       }
-        //       // if (data.datasets && data.datasets.length > 0 && data.datasets[tooltipItem.datasetIndex].data) {
-        //       //     label += ': ' + (data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] * 100).toFixed(2) + '%';
-        //       // }
-        //       return label;
-        //     }
-        //   }
-        // },
-
-      //   plugins: {
-      //     tooltip: {
-      //         callbacks: {
-      //             label: function(context) {
-      //                 var label = context.label || '';
-
-      //                 if (label) {
-      //                     label += ': ';
-      //                 }
-      //                 label += nombres[context.dataIndex]; // Mostrar el nombre correspondiente al índice del dato
-      //                 return label;
-      //             }
-      //         }
-      //     }
-      // },
-        legend: {
-          display: true
         },
         scales: {
-          x:{
-            display: false,
-            grid:{
-              display: false
-            },
-            ticks:{
-              beginAtZero: true,
-              fontSize: 10,
-              padding: 0,
-              fontColor: '#000',
-              fontStyle: 'bold',
-              minRotation: 45
-
-            },
-         },
-y:{
+          x: {
             display: false,
             grid: {
               display: false
             },
-            ticks:{
-              beginAtZero: true,
-              fontSize: 10,
-              padding: 0,
-              fontColor: '#000',
-              fontStyle: 'bold',
-
-
-            },
+            ticks: {
+              font: {
+                size: 10,
+                weight: 'bold'
+              },
+              color: '#000',
+              maxRotation: 45
+            }
           },
-
+          y: {
+            display: false,
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 10,
+                weight: 'bold'
+              },
+              color: '#000'
+            }
+          }
         }
       }
     });
   }
 
   previewFile(event: any) {
-
     const file = event.target.files[0];
 
     if (file.type.startsWith('image/') || file.type === 'application/pdf') {
@@ -848,16 +518,13 @@ y:{
     }
 
     this.previewContainer.nativeElement.style.display = 'block';
-    //previewContainer.style.display = 'block';
   }
 
-  formatNumberDos(params) {
+  formatNumberDos(params: any) {
     let locality = 'en-EN';
     params = parseFloat(params).toLocaleString(locality, {
       minimumFractionDigits: 2
-    })
-    // params = params.replace(/[,.]/g, function (m) { return m === ',' ? '.' : ','; });
+    });
     return params;
   }
-
 }

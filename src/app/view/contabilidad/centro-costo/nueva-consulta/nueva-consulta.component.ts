@@ -8,8 +8,40 @@ import { NuevaConsultaService } from './nueva-consulta.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CcModalTablaCuentaComponent } from 'src/app/config/custom/cc-modal-tabla-cuenta/cc-modal-tabla-cuenta.component';
 import * as moment from 'moment';
-import { Chart } from 'chart.js';
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  LineController,
+  BarController,
+  PieController
+} from 'chart.js';
 import { ExcelService } from 'src/app/services/excel.service';
+
+// Registrar todos los componentes necesarios de Chart.js
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  LineController,
+  BarController,
+  PieController
+);
 
 @Component({
 standalone: false,
@@ -297,12 +329,24 @@ export class NuevaConsultaComponent implements OnInit {
         }]
       },
       options: {
+        responsive: true,
         aspectRatio: 2.5,
         plugins: {
           legend: {
             display: true
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context: any) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+                const percentage = ((value / total) * 100).toFixed(1);
+                return `${label}: ${value.toLocaleString()} (${percentage}%)`;
+              }
+            }
           }
-        },
+        }
       }
     });
   }

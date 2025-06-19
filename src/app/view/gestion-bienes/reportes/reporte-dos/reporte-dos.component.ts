@@ -15,10 +15,42 @@ import { EncargadoComponent } from 'src/app/config/custom/encargado/encargado.co
 import { CommonVarService } from '../../../../services/common-var.services';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { Chart } from 'chart.js';
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  LineController,
+  BarController,
+  PieController
+} from 'chart.js';
 import { XlsExportService } from 'src/app/services/xls-export.service';
 import { ModalGruposComponent } from '../reporte-productos/modal-grupos/modal-grupos.component';
 import { ListBusquedaComponent } from '../reporte-productos/list-busqueda/list-busqueda.component';
+
+// Registrar todos los componentes necesarios de Chart.js
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  LineController,
+  BarController,
+  PieController
+);
 
 @Component({
 standalone: false,
@@ -27,13 +59,11 @@ standalone: false,
   styleUrls: ['./reporte-dos.component.scss']
 })
 export class ReporteDosComponent implements OnInit {
-
   @ViewChild(CcSpinerProcesarComponent, { static: false }) lcargando: CcSpinerProcesarComponent;
   @ViewChildren(NgSelectComponent) selects: Array<NgSelectComponent>;
   fTitle: string = 'Análisis de Existencia';
   vmButtons: Array<Botonera> = [];
   mensajeSpinner: string = "Cargando...";
-
   processing: any;
   selectedReporte: any;  // Tipo Reporte
   selectedTipo: any;  // Tipo Bien
@@ -49,7 +79,6 @@ export class ReporteDosComponent implements OnInit {
   viewDate: Date = new Date();
   fechaCorte: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
   periodo: Date = new Date();
-
   verifyRestore = false;
   claseSelect: any = 0;
   codigo_grupo:any
@@ -90,7 +119,6 @@ export class ReporteDosComponent implements OnInit {
       id: "8",
       name: "Agosto"
     },
-
     {
       id: "9",
       name: "Septiembre"
@@ -136,21 +164,14 @@ export class ReporteDosComponent implements OnInit {
 //  {"clase":"C","antiguedad":"90 dias","costo_total":0.00},
 //  {"clase":"D","antiguedad":"120 dias","costo_total":0.00},
 //  {"clase":"E","antiguedad":"> 120 dias","costo_total":0.00}]}]
-
-
   cmb_grupo: any[] = [];
   cmb_subgrupo: any[] = [];
   cmb_productos: [];
   cmb_grupo_filter: any[] = [];
   cmb_subgrupo_filter: any[] = [];
   cmb_productos_filter: any[] = [];
-
-
-
   arrayBodega: Array<any> = [];
-
   clases: any[] = [];
-
    stockList = [
     {value: "1",label: "CON STOCK"},
     {value: "2",label: "SIN STOCK"},
@@ -158,12 +179,9 @@ export class ReporteDosComponent implements OnInit {
   ]
   grupo_descripcion: any;
   producto_exi: any = [];
-
   dataProducto:any[] = [];
-
   chart1: Chart;
   ReportGrafiFPBarras: any;
-
   estadoSelected = 0
   selectedBodega = 0
   stockSelected = 0
@@ -184,7 +202,6 @@ export class ReporteDosComponent implements OnInit {
       (res) => {
         this.lcargando.ctlSpinner(false);
         this.claseSelect = res
-
         this.grupo_descripcion = this.claseSelect['codigo_grupo_producto'] + "-" + this.claseSelect['descripcion'] + "-" + this.claseSelect['tipo_bien']
         this.selectedGrupo = this.claseSelect['id_grupo_productos']
         console.log(this.claseSelect)
@@ -197,12 +214,8 @@ export class ReporteDosComponent implements OnInit {
         this.cmb_productos = res
         this.selectedProductos = res['id_producto']
         this.nombreProducto = res['nombre']
-
-
       }
     )
-
-
     this.vmButtons = [
       {
         orig: "btnsRenConsultaReporte",
@@ -250,14 +263,11 @@ export class ReporteDosComponent implements OnInit {
       },
     ];
   }
-
   ngOnInit(): void {
     this.mes_actual = (Number(moment(new Date()).format('MM'))).toString();
     setTimeout(() => this.cargaInicial(), 50);
   }
-
   ChangeMesCierrePeriodos(evento: any) { this.mes_actual = evento; }
-
   metodoGlobal(event) {
     switch (event.items.boton.texto) {
       case "PROCESAR":
@@ -278,7 +288,6 @@ export class ReporteDosComponent implements OnInit {
         break;
     }
   }
-
   async cargaInicial() {
     this.lcargando.ctlSpinner(true);
     try {
@@ -298,9 +307,6 @@ export class ReporteDosComponent implements OnInit {
   // asignarEstado(evt) {
   //   this.filter.estado = [evt]
   //  }
-
-
-
   async consultarReporte() {
    // Validar opciones seleccionadas
     // let message: string = '';
@@ -311,8 +317,6 @@ export class ReporteDosComponent implements OnInit {
     //   this.toastr.warning(message, 'Advertencia', { enableHtml: true })
     //   return;
     // }
-
-
     this.lcargando.ctlSpinner(true);
     try {
       let data={
@@ -323,7 +327,6 @@ export class ReporteDosComponent implements OnInit {
         ubicacion: this.ubicacion,
         stock: this.stockSelected,
       }
-
       let response = await this.apiService.getData(data);
         console.log(response)
         if(response.length > 0){
@@ -339,7 +342,6 @@ export class ReporteDosComponent implements OnInit {
       this.toastr.error(err.error.message, 'Error consultando Reporte')
     }
   }
-
   export() {
     console.log(this.selectedSubGrupo)
     // if (this.permissions.exportar == 0) {
@@ -350,7 +352,6 @@ export class ReporteDosComponent implements OnInit {
     // let producto = this.cmb_productos?.filter((item: any) => item.id_producto == this.selectedProductos)
     let bodega = this.arrayBodega.filter((item: any) => item.id_bodega_cab == this.selectedBodega)
     let stock = this.stockList.filter((item: any) => item.value == this.stockSelected)
-
     let data = {
       title: 'SALDOS DE INVENTARIO',
       // producto: producto,
@@ -364,10 +365,8 @@ export class ReporteDosComponent implements OnInit {
       rows: this.dataProducto
     }
     console.log(data);
-
     this.xlsService.exportReporteSaldosInventario(data, 'Reporte Saldos de Inventario')
   }
-
   filterProductos(event: any) {
     console.log(event);
     // console.log(this.selectedGrupo)
@@ -380,14 +379,11 @@ export class ReporteDosComponent implements OnInit {
      this.apiService.getProductos(data).subscribe(res => {
       console.log(res['data'])
       this.cmb_productos= res['data']
-
     }, error => {
       this.lcargando.ctlSpinner(false);
       this.toastr.info(error.error.message)
     })
-
      this.cmb_subgrupo_filter = this.cmb_subgrupo.filter((item: any) => item.parent_id == event.id_grupo_productos)
-
      setTimeout(() => this.lcargando.ctlSpinner(false), 750)
   // }
  }
@@ -399,12 +395,10 @@ export class ReporteDosComponent implements OnInit {
     this.toastr.info('Debe seleccionar un Mes');
   }
   else{
-
     let data = {
       periodo: Number(this.periodo.getFullYear()),
       mes: Number(this.mes_actual)
     }
-
     this.lcargando.ctlSpinner(true);
     this.apiService.setProcesoAnalisisExi(data).subscribe(res => {
       this.lcargando.ctlSpinner(false);
@@ -437,163 +431,34 @@ uArrayGrupos(array) {
           out.push(array[i]['nombre_grupo']);
   return out;
 }
-
  consultarReportGrafi() {
-
    let parameterUrl: any = {
       periodo: this.periodo.getFullYear(),
       mes: Number(this.mes_actual)
    };
-
    (this as any).mensajeSpinner = 'Cargando...'
    this.lcargando.ctlSpinner(true);
    this.apiService.getReporteAnalisisExistenciaGrupos(parameterUrl).subscribe((res: any) => {
    this.lcargando.ctlSpinner(false)
-
       console.log(res)
       console.log(res['data'][0].json_agg)
-
       let jsonObj = {
         datos:  JSON.parse(res['data'][0].json_agg)
       };
       let clasesArray=[];
-
       this.arrayDetalles = [];
       this.arrayDetalles = jsonObj.datos
-
       this.arrayDetalles.forEach((element, index) => {
         Object.assign(element,{ chart:'grafico'+ index})
         element.clases.forEach(c => {
           clasesArray.push(c.clase)
         })
-
       });
       console.log(clasesArray)
-
-
       var arrayClases = this.uArrayClases(clasesArray);
-      //var arrayGrupos = this.uArrayGrupos(res['data']);
-
-      // arrayGrupos.forEach(e => {
-      //   let group = res['data'].filter(g => g.nombre_grupo == e.nombre_grupo)
-      //   let array = {
-      //     grupo: group
-      //   }
-      //   //this.clases.push(array)
-      // })
-
       console.log(this.clases)
       this.clases = arrayClases
-
-
        console.log(arrayClases)
-       //console.log(arrayGrupos)
-      // let grupos = []
-      // let clases = []
-      // let grupoClases = []
-      // res['data'].forEach(e => {
-      //  let nombresFilter = this.clases.filter(f => {e.clase != f.clase})
-      //  grupoClases.push(nombresFilter)
-      //  this.clases.map(f => {
-      //   if(e.clase == f.clase){
-      //     let clase ={
-      //       clase: e.clase,
-      //       costo_total: e.costo_total
-      //     }
-      //     clases.push(clase)
-      //   }
-      //   if(e.clase == f.clase && e.nombre_grupo != f.nombre_grupo){
-      //     let grupo={
-      //       nombre_grupo:e.nombre_grupo,
-      //       costo_total:e.costo_total
-      //     }
-      //     grupos.push(grupo)
-      //   }
-
-      //  })
-      // })
-      // console.log(grupoClases)
-      // console.log(clases)
-      // console.log(grupos)
-      // const data1 = {
-      //   labels: ["A", "B", "C", "D"],
-      //   datasets: [{
-      //     label: "Dataset 1",
-      //     data: [10, 20, 15, 25],
-      //     backgroundColor: "rgba(255, 99, 132, 0.2)",
-      //     borderColor: "rgba(255, 99, 132, 1)",
-      //     borderWidth: 1
-      //   }]
-      // };
-
-      // const data2 = {
-      //   labels: ["E", "F", "G", "H"],
-      //   datasets: [{
-      //     label: "Dataset 2",
-      //     data: [5, 15, 10, 30],
-      //     backgroundColor: "rgba(54, 162, 235, 0.2)",
-      //     borderColor: "rgba(54, 162, 235, 1)",
-      //     borderWidth: 1
-      //   }]
-      // };
-
-      // const options = {
-      //   scales: {
-      //     y: {
-      //       beginAtZero: true
-      //     }
-      //   }
-      // };
-
-      // // Array de objetos que contienen la configuración de los gráficos
-      // const charts = [
-      //   {
-      //     canvasId: 'grafico1',
-      //     type: 'bar', // Puedes cambiar el tipo de gráfico (bar, line, pie, etc.)
-      //     data: data1,
-      //     options: options
-      //   },
-      //   {
-      //     canvasId: 'grafico2',
-      //     type: 'bar',
-      //     data: data2,
-      //     options: options
-      //   }
-      //   // Puedes agregar más objetos para más gráficos
-      // ];
-
-      // charts.forEach(chart => {
-      //   let canvas = this.elementRef.nativeElement.querySelector('#'+chart.canvasId);
-      //   new Chart(canvas, {
-      //     type: chart.type,
-      //     data: chart.data,
-      //     options: {
-      //       // plugins: {
-      //       //   tooltip: {
-      //       //     callbacks: {
-      //       //       title: (ttItem) => (ttItem[0].dataset.label)
-      //       //     }
-      //       //   }
-      //       // },
-      //       scales: {
-      //         xAxes: [{
-      //           ticks: {
-      //             beginAtZero: true
-      //           },
-
-      //         }],
-      //         yAxes: [{
-      //           ticks: {
-      //             beginAtZero: true
-      //           },
-
-      //         }]
-      //       }
-      //     }
-      //   });
-      // });
-
-
        let labelInfoBar = [];
        let DataSetGrafit = [];
        console.log(res);
@@ -602,51 +467,34 @@ uArrayGrupos(array) {
          this.chart1.destroy()
          console.log('ejecuta1');
        }
-
        for (let i = 0; i < res['data'].length; i++) {
          labelInfoBar.push(res['data'][i].clase);
        }
-
        /*Recorremos el elemento principal que son los  motivos */
-
        for (let i = 0; i < res['data'].length; i++) {
-
-
          if (DataSetGrafit.length > 0) {
-
            let labelGraf = DataSetGrafit.filter(co => co.nombre_grupo == res['data'][i].nombre_grupo);
-
-
            if (labelGraf.length > 0) {
              labelGraf[0]['data'].push(res['data'][i].total_costo);
            } else {
-
              let dataPointGrafit = []
-
              dataPointGrafit.push(res['data'][i].total_costo);
-
              DataSetGrafit.push({
                label: res['data'][i].nombre_grupo,
                backgroundColor: '#42A5F5',
                data: dataPointGrafit
              })
            }
-
          } else {
-
            let dataPointGrafit = []
-
            dataPointGrafit.push(res['data'][i].total_costo);
-
            DataSetGrafit.push({
              label: res['data'][i].nombre_grupo,
              backgroundColor: '#42A5F5',
              data: dataPointGrafit
            })
          }
-
          //labelInfoBar.push(res[i].mes);
-
        this.ReportGrafiFPBarras = {
          labels: labelInfoBar,
          datasets: DataSetGrafit
@@ -657,17 +505,11 @@ uArrayGrupos(array) {
        // let label = labelInfoBar === : labelInfoBar
        setTimeout(() => {
         console.log(this.arrayDetalles)
-
         // this.chart1 = this.chart(this.arrayDetalles, "bar", this.clases, data);
          this.chart(this.arrayDetalles, "bar", this.clases, data);
          console.log(this.chart1);
-
        }, 50);
-
-
-
      }
-
    },
    (error) => {
      this.lcargando.ctlSpinner(false);
@@ -680,7 +522,6 @@ uArrayGrupos(array) {
     let totales =[];
     e.clases.forEach(d =>{
     totales.push(d.costo_total)
-
     })
     let htmlRef = this.elementRef.nativeElement.querySelector(`#`+e.chart);
     return new Chart(htmlRef, {
@@ -735,64 +576,53 @@ uArrayGrupos(array) {
             'rgba(212, 17, 68, 0.52)'
           ],
           borderWidth: 1
-        },
-
-
-      ]
+        }]
       },
       options: {
-        legend: {
-          display: false
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context: any) {
+                const label = context.dataset.label || '';
+                const value = context.raw || 0;
+                return `${label}: ${value.toLocaleString()}`;
+              }
+            }
+          }
         },
-
+        scales: {
+          x: {
+            type: 'category',
+            beginAtZero: true,
+            ticks: {
+              font: {
+                size: 10,
+                weight: 'normal'
+              },
+              color: '#000000'
+            }
+          },
+          y: {
+            type: 'linear',
+            beginAtZero: true,
+            ticks: {
+              font: {
+                size: 10,
+                weight: 'normal'
+              },
+              color: '#000000'
+            }
+          }
+        }
       }
-      // options: {
-      //   // plugins: {
-      //   //   tooltip: {
-      //   //     callbacks: {
-      //   //       title: (ttItem) => (ttItem[0].dataset.label)
-      //   //     }
-      //   //   }
-      //   // },
-      //   plugins: {
-      //     legend: {
-
-      //       display: false,
-      //     },
-      //     title: {
-      //       display: false,
-
-      //     },
-      //   },
-      //   scales: {
-      //     xAxes: [{
-      //       ticks: {
-      //         beginAtZero: true
-      //       },
-
-      //     }],
-      //     yAxes: [{
-      //       ticks: {
-      //         beginAtZero: true
-      //       },
-
-      //     }]
-      //   }
-      // }
     });
   })
-
-
   console.log(data);
-
-
-
-
-
-
-
     }
-
   limpiarFiltros() {
     this.selects.forEach((select: NgSelectComponent) => select.handleClearClick());
     this.anioIngreso= ''
@@ -808,32 +638,25 @@ uArrayGrupos(array) {
     this.ubicacion = ''
     this.fechaCorte = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
     this.grupo_descripcion = ''
-
     this.producto_exi = [];
     this.selectedProductos = ''
     this.nombreProducto = ''
   }
   modalGrupos() {
     this.lcargando.ctlSpinner(false)
-
     let modal = this.modalService.open(ModalGruposComponent, {
       size: "xl",
       backdrop: "static",
       windowClass: "viewer-content-general",
     })
-
     modal.componentInstance.validacionModal = true;
     modal.componentInstance.validar = true
     modal.componentInstance.verifyRestore = this.verifyRestore;
-
   }
   expandProductos() {
-
     // abre modal de forma de pago distinto para cada titulo que se vaya a pagar
     const modal = this.modalService.open(ListBusquedaComponent, { size: "xl", backdrop: 'static', windowClass: 'viewer-content-general' })
-
     modal.componentInstance.claseSelect = this.claseSelect
     modal.componentInstance.verifyRestore = this.verifyRestore;
   }
-
 }
